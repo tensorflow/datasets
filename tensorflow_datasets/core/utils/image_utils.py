@@ -18,6 +18,9 @@
 Note: these functions are not meant to be used inside of a TF graph.
 """
 
+import subprocess
+from typing import List, Optional
+
 import numpy as np
 
 import tensorflow.compat.v2 as tf
@@ -51,3 +54,32 @@ def jpeg_cmyk_to_rgb(image_bytes: bytes, quality: int = 100) -> np.ndarray:
   image = runner.run(tf.image.decode_jpeg, image_bytes)
   fn = lambda img: tf.image.encode_jpeg(img, format='rgb', quality=quality)
   return runner.run(fn, image)
+
+
+def ffmpeg_run(
+    args: List[str],
+    stdin: Optional[bytes] = None,
+) -> None:
+  """Executes the ffmpeg function."""
+  ffmpeg_path = 'ffmpeg'
+  try:
+    cmd_args = [ffmpeg_path] + args
+    subprocess.run(
+        cmd_args,
+        check=True,
+        input=stdin,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+  except subprocess.CalledProcessError as e:
+    raise ValueError(
+        f'Command {e.cmd} returned error code {e.returncode}:\n'
+        f'stdout={e.stdout.decode("utf-8")}\n'
+        f'stderr={e.stderr.decode("utf-8")}\n'
+    )
+  except FileNotFoundError as e:
+    raise FileNotFoundError(
+        'It seems that ffmpeg is not installed on the system. Please follow '
+        'the instrutions at https://ffmpeg.org/. '
+        f'Original exception: {e}'
+    )
