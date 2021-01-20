@@ -110,6 +110,9 @@ toc:
     title: cassava
   - path: /datasets/catalog/cats_vs_dogs
     title: cats_vs_dogs
+  - path: /datasets/catalog/chexpert
+    status: nightly
+    title: chexpert (manual)
   - path: /datasets/catalog/cifar10
     title: cifar10
   - path: /datasets/catalog/cifar100

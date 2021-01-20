@@ -84,6 +84,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cars196`](cars196.md)
 *   [`cassava`](cassava.md)
 *   [`cats_vs_dogs`](cats_vs_dogs.md)
+*   [`chexpert`](chexpert.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cifar10`](cifar10.md)
 *   [`cifar100`](cifar100.md)
 *   [`cifar10_1`](cifar10_1.md)
