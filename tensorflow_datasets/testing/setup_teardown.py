@@ -25,11 +25,4 @@ from unittest import mock
 
 import tensorflow as tf
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import load
 from tensorflow_datasets.testing import test_utils
-
-
-def disable_community_datasets():
-  """During tests, `tfds.list_builders` disable community datasets."""
-  with mock.patch.object(load, 'COMMUNITY_DATASET_DISABLED', True):
-    yield

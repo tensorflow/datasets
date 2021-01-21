@@ -16,9 +16,8 @@
 """Video feature."""
 
 import os
-import subprocess
 import tempfile
-from typing import Any, List, Optional, Sequence
+from typing import Sequence
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -28,12 +27,6 @@ from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
-PilImage = Any  # Require lazy deps.
-
-# Framerate for the `tfds.as_dataframe` visualization
-# Could add a framerate kwargs in __init__ to allow datasets to customize
-# the output.
-_VISU_FRAMERATE = 10
 
 
 class Video(sequence_feature.Sequence):
@@ -137,7 +130,7 @@ class Video(sequence_feature.Sequence):
     with tempfile.TemporaryDirectory() as ffmpeg_dir:
       out_pattern = os.path.join(ffmpeg_dir, f'%010d.{self._encoding_format}')
       ffmpeg_args.append(out_pattern)
-      _ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
+      utils.ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
       frames = [  # Load all encoded images
           p.read_bytes() for p in sorted(utils.as_path(ffmpeg_dir).iterdir())
       ]
@@ -184,101 +177,5 @@ class Video(sequence_feature.Sequence):
     }
 
   def repr_html(self, ex: np.ndarray) -> str:
-    """Video are displayed as GIFs."""
-    # Use GIF to generate a HTML5 compatible video if FFMPEG is not
-    # installed on the system.
-    images = [image_feature.create_thumbnail(frame) for frame in ex]
-
-    # Display the video HTML (either GIF of mp4 if ffmpeg is installed)
-    try:
-      _ffmpeg_run(['-version'])  # Check for ffmpeg installation.
-    except FileNotFoundError:
-      # print as `stderr` is displayed poorly on Colab
-      print('FFMPEG not detected. Falling back on GIF.')
-      return _get_repr_html_gif(images)
-    else:
-      return _get_repr_html_ffmpeg(images)
-
-
-def _ffmpeg_run(
-    args: List[str],
-    stdin: Optional[bytes] = None,
-) -> None:
-  """Executes the ffmpeg function."""
-  ffmpeg_path = 'ffmpeg'
-  try:
-    cmd_args = [ffmpeg_path] + args
-    subprocess.run(
-        cmd_args,
-        check=True,
-        input=stdin,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
-  except subprocess.CalledProcessError as e:
-    raise ValueError(
-        f'Command {e.cmd} returned error code {e.returncode}:\n'
-        f'stdout={e.stdout.decode("utf-8")}\n'
-        f'stderr={e.stderr.decode("utf-8")}\n'
-    )
-  except FileNotFoundError as e:
-    raise FileNotFoundError(
-        'It seems that ffmpeg is not installed on the system. Please follow '
-        'the instrutions at https://ffmpeg.org/. '
-        f'Original exception: {e}'
-    )
-
-
-def _get_repr_html_ffmpeg(images: List[PilImage]) -> str:
-  """Runs ffmpeg to get the mp4 encoded <video> str."""
-  # Find number of digits in len to give names.
-  num_digits = len(str(len(images))) + 1
-  with tempfile.TemporaryDirectory() as video_dir:
-    for i, img in enumerate(images):
-      f = os.path.join(video_dir, f'img{i:0{num_digits}d}.png')
-      img.save(f, format='png')
-
-    ffmpeg_args = [
-        '-framerate', str(_VISU_FRAMERATE),
-        '-i', os.path.join(video_dir, f'img%0{num_digits}d.png'),
-        # Using native h264 to encode video stream to H.264 codec
-        # Default encoding does not seems to be supported by chrome.
-        '-vcodec', 'h264',
-        # When outputting H.264, `-pix_fmt yuv420p` maximize compatibility
-        # with bad video players.
-        # Ref: https://trac.ffmpeg.org/wiki/Slideshow
-        '-pix_fmt', 'yuv420p',
-        # Native encoder cannot encode images of small scale
-        # or the the hardware encoder may be busy which raises
-        # Error: cannot create compression session
-        # so allow software encoding
-        # '-allow_sw', '1',
-    ]
-    video_path = utils.as_path(video_dir) / 'output.mp4'
-    ffmpeg_args.append(os.fspath(video_path))
-    _ffmpeg_run(ffmpeg_args)
-    video_str = utils.get_base64(video_path.read_bytes())
-  return (
-      f'<video height="{image_feature.THUMBNAIL_SIZE}" width="175" '
-      'controls loop autoplay muted playsinline>'
-      f'<source src="data:video/mp4;base64,{video_str}"  type="video/mp4" >'
-      '</video>'
-  )
-
-
-def _get_repr_html_gif(images: List[PilImage]) -> str:
-  """Get the <img/> str."""
-
-  def write_buff(buff):
-    images[0].save(
-        buff,
-        format='GIF',
-        save_all=True,
-        append_images=images[1:],
-        duration=1000 / _VISU_FRAMERATE,
-        loop=0,
-    )
-
-  # Convert to base64
-  gif_str = utils.get_base64(write_buff)
-  return f'<img src="data:image/png;base64,{gif_str}" alt="Gif" />'
+    """Video are displayed as `<video>`."""
+    return image_feature.make_video_repr_html(ex)

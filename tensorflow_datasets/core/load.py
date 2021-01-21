@@ -30,6 +30,7 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
@@ -52,16 +53,15 @@ _FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
 ))
 
 
-# Variable to globally disable community datasets (e.g. inside tests)
-COMMUNITY_DATASET_DISABLED = False
-
-
 def list_builders(
     *,
     with_community_datasets: bool = True,
 ) -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   datasets = registered.list_imported_builders()
+  if with_community_datasets:
+    if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
+      datasets += community.community_register.list_builders()
   return datasets
 
 
@@ -84,17 +84,21 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
         '`builder_cls` only accept the `dataset_name` without config, '
         f"version or arguments. Got: name='{name}', kwargs={kwargs}"
     )
-  if ds_name.namespace:
-    raise ValueError(
-        f'Namespaces not supported for `builder_cls`. Got: {ds_name}'
-    )
-  # Imported datasets
   try:
-    cls = registered.imported_builder_cls(ds_name.name)
-    cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
+    if ds_name.namespace:
+      # `namespace:dataset` are loaded from the community register
+      if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
+        return community.community_register.builder_cls(ds_name)
+      else:
+        raise ValueError(
+            f'Cannot load {ds_name} when community datasets are disabled'
+        )
+    else:
+      cls = registered.imported_builder_cls(str(ds_name))
+      cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
     return cls
   except registered.DatasetNotFoundError as e:
-    _reraise_with_list_builders(e, name=ds_name)
+    _reraise_with_list_builders(e, name=ds_name)  # pytype: disable=bad-return-type
 
 
 def builder(
@@ -146,11 +150,7 @@ def builder(
       )
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
 
-  # Community datasets
-  if name.namespace:
-    raise NotImplementedError
-
-  # First check whether code exists or not (imported datasets)
+  # First check whether code exists or not
   try:
     cls = builder_cls(str(name))
   except registered.DatasetNotFoundError as e:
@@ -381,16 +381,10 @@ def _iter_single_full_names(
       yield posixpath.join(builder_name, v)
 
 
-def _iter_full_names(
-    predicate_fn: Optional[PredicateFn],
-    current_version_only: bool,
-) -> Iterator[str]:
+def _iter_full_names(current_version_only: bool) -> Iterator[str]:
   """Yield all registered datasets full_names (see `list_full_names`)."""
   for builder_name in registered.list_imported_builders():
     builder_cls_ = builder_cls(builder_name)
-    # Only keep requested datasets
-    if predicate_fn is not None and not predicate_fn(builder_cls_):
-      continue
     for full_name in _iter_single_full_names(
         builder_name,
         builder_cls_,
@@ -399,27 +393,16 @@ def _iter_full_names(
       yield full_name
 
 
-_DEFAULT_PREDICATE_FN = None
-
-
-def list_full_names(
-    predicate_fn: Optional[PredicateFn] = _DEFAULT_PREDICATE_FN,
-    current_version_only: bool = False,
-) -> List[str]:
+def list_full_names(current_version_only: bool = False) -> List[str]:
   """Lists all registered datasets full_names.
 
   Args:
-    predicate_fn: `Callable[[Type[DatasetBuilder]], bool]`, if set, only
-      returns the dataset names which satisfy the predicate.
     current_version_only: If True, only returns the current version.
 
   Returns:
     The list of all registered dataset full names.
   """
-  return sorted(_iter_full_names(
-      predicate_fn=predicate_fn,
-      current_version_only=current_version_only,
-  ))
+  return sorted(_iter_full_names(current_version_only=current_version_only))
 
 
 def single_full_names(

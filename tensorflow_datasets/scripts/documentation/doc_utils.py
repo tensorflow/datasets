@@ -211,8 +211,7 @@ def _load_nightly_dict(version_path: tfds.core.PathLike) -> NightlyDict:
 
   # Build the `full_names_dict['dataset']['config']['version']` for both
   # nightly and stable version
-  registered_ds = _full_names_to_dict(
-      tfds.core.load.list_full_names())
+  registered_ds = _full_names_to_dict(tfds.core.load.list_full_names())
   stable_version_ds = _full_names_to_dict(stable_versions)
 
   # Nightly versions are `registered - stable`

@@ -13,13 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Community dataset API."""
+"""Baseball dataset from Efron-Morris (1975) dataset."""
 
-from tensorflow_datasets.core.community.load import builder_cls_from_module
-from tensorflow_datasets.core.community.register_package import community_register
-
-
-__all__ = [
-    'builder_cls_from_module',
-    'community_register',
-]
+from tensorflow_datasets.structured.efron_morris_75.efron_morris_75 import EfronMorris75

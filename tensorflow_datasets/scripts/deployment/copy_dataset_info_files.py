@@ -51,9 +51,7 @@ def _copy_metadata(from_dir, to_dir):
 
 def copy(from_dir: tfds.core.PathLike, to_dir: tfds.core.PathLike) -> None:
   """Copy the info files from within `from_dir` to `to_dir`."""
-  predicate_fn = lambda _: True  # All datasets
-
-  for full_name in tfds.core.load.list_full_names(predicate_fn):
+  for full_name in tfds.core.load.list_full_names():
     from_full_name_dir = os.path.join(from_dir, full_name)
     to_full_name_dir = os.path.join(to_dir, full_name)
 

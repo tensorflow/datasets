@@ -13,32 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Dump the list of all registered datasets/config/version in a `.txt` file.
-
-Instructions:
-
-```
-python tensorflow_datasets/scripts/freeze_dataset_version.py
-```
-
-
-"""
-
-from absl import app
+"""Tests for tensorflow_datasets.core.visibility."""
 
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core import visibility
+
+assert visibility._current_available == {
+    visibility.DatasetType.TFDS_PUBLIC,
+    visibility.DatasetType.COMMUNITY_PUBLIC,
+}
 
 
-def main(_):
-  tfds.core.visibility.set_availables([
-      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
-  ])
-
-  registered_names = tfds.core.load.list_full_names()
-  version_path = tfds.core.utils.tfds_write_path() / 'stable_versions.txt'
-  version_path.write_text('\n'.join(registered_names))
-  print(f'{len(registered_names)} datasets versions written.')
-
-
-if __name__ == '__main__':
-  app.run(main)
+def test_visibility():
+  # `absl.app` should detect the TFDS script and restrict the visibility
+  # to TFDS public by default.
+  assert visibility._current_available == {visibility.DatasetType.TFDS_PUBLIC}

@@ -13,32 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Dump the list of all registered datasets/config/version in a `.txt` file.
+"""efron_morris_75 dataset."""
 
-Instructions:
-
-```
-python tensorflow_datasets/scripts/freeze_dataset_version.py
-```
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.structured.efron_morris_75 import efron_morris_75
 
 
-"""
+class EfronMorris75Test(tfds.testing.DatasetBuilderTestCase):
+  """Tests for efron_morris_75 dataset."""
+  DATASET_CLASS = efron_morris_75.EfronMorris75
+  SPLITS = {'train': 4}
 
-from absl import app
-
-import tensorflow_datasets as tfds
-
-
-def main(_):
-  tfds.core.visibility.set_availables([
-      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
-  ])
-
-  registered_names = tfds.core.load.list_full_names()
-  version_path = tfds.core.utils.tfds_write_path() / 'stable_versions.txt'
-  version_path.write_text('\n'.join(registered_names))
-  print(f'{len(registered_names)} datasets versions written.')
+  DL_EXTRACT_RESULT = 'efron-morris-75-data.tsv'
 
 
 if __name__ == '__main__':
-  app.run(main)
+  tfds.testing.test_main()

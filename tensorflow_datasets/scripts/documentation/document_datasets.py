@@ -83,7 +83,7 @@ def _load_builder(
     builder: Main builder instance
     config_builders: Additional builders (one of each configs)
   """
-  if ':' in name:  # Community dataset
+  if tfds.core.utils.DatasetName(name).namespace:  # Community dataset
     return _load_builder_from_location(name)
   else:  # Code dataset
     return _load_builder_from_code(name)
@@ -93,7 +93,7 @@ def _load_builder_from_location(
     name: str,
 ) -> Optional[BuilderToDocument]:
   """Load the builder, config,... to document."""
-  namespace, _ = name.split(':')
+  namespace = tfds.core.utils.DatasetName(name).namespace
   try:
     builder = tfds.builder(name)
   except tfds.core.DatasetNotFoundError:

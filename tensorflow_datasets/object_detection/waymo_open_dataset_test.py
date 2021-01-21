@@ -33,7 +33,7 @@ class WaymoOpenDatasetTest(testing.DatasetBuilderTestCase):
     """Set up Waymo Open Dataset tests."""
     super(WaymoOpenDatasetTest, self).setUp()
     for config in waymo_open_dataset.WaymoOpenDataset.BUILDER_CONFIGS:
-      config.cloud_bucket = self.example_dir
+      config.cloud_bucket = self.dummy_data
 
 
 if __name__ == "__main__":

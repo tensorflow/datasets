@@ -16,12 +16,13 @@
 """Location-based register."""
 
 import difflib
-from typing import Any, Dict, Iterator, List, Type
+from typing import Any, Dict, FrozenSet, Iterator, List, Type
 
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
+from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
 import toml
@@ -72,6 +73,11 @@ class DataDirRegister(register_base.BaseRegister):
         for namespace, path in config['Namespaces'].items()
     }
 
+  @utils.memoized_property
+  def namespaces(self) -> FrozenSet[str]:
+    """Available namespaces."""
+    return frozenset(self._ns2data_dir)
+
   def list_builders(self) -> List[str]:
     """Returns the list of registered builders."""
     return sorted(_iter_builder_names(self._ns2data_dir))
@@ -80,6 +86,11 @@ class DataDirRegister(register_base.BaseRegister):
       self, name: utils.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the builder classes."""
+    if name.namespace not in self.namespaces:  # pylint: disable=unsupported-membership-test
+      raise registered.DatasetNotFoundError(
+          f'Namespace {name.namespace} not found. Should be one of: '
+          f'{sorted(self.namespaces)}'
+      )
     raise NotImplementedError(
         'builder_cls does not support data_dir-based community datasets. Got: '
         f'{name}'
@@ -96,7 +107,7 @@ class DataDirRegister(register_base.BaseRegister):
       )
     if name.namespace is None:
       raise AssertionError(f'No namespace found: {name}')
-    if name.namespace not in self._ns2data_dir:
+    if name.namespace not in self._ns2data_dir:  # pylint: disable=unsupported-membership-test
       close_matches = difflib.get_close_matches(
           name.namespace, self._ns2data_dir, n=1
       )

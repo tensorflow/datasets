@@ -49,6 +49,9 @@ def _parse_flags(_) -> argparse.Namespace:
 
 
 def main(args: argparse.Namespace):
+  # Note: The automated generation call `build_catalog.build_catalog()`
+  # directly, so no code should go in `main()`.
+
   catalog_dir = args.catalog_dir or os.path.join(
       tfds.core.utils.tfds_write_path(),
       'docs',
@@ -83,6 +86,7 @@ def build_catalog(
     toc_relative_path: str = '/datasets/catalog/',
     index_template: Optional[tfds.core.utils.PathLike] = None,
     index_filename: str = 'overview.md',
+    dataset_types: Optional[List[tfds.core.visibility.DatasetType]] = None,
 ) -> None:
   """Document all datasets, including the table of content.
 
@@ -94,7 +98,14 @@ def build_catalog(
       generate the table of content relative links.
     index_template: Default template for the index page.
     index_filename: Name of the catalog index file.
+    dataset_types: Restrict the generation to the given dataset types.
+      Default to all open source non-community datasets
   """
+  dataset_types = dataset_types or [
+      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+  ]
+  tfds.core.visibility.set_availables(dataset_types)
+
   catalog_dir = tfds.core.as_path(catalog_dir)
   index_template = index_template or tfds.core.tfds_path(
       'scripts/documentation/templates/catalog_overview.md'

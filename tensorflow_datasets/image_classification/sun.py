@@ -97,8 +97,10 @@ def _decode_image(fobj, session, filename):
     try:
       image = tf.image.decode_image(buf, channels=3)
       image = session.run(image)
-    except tf.errors.InvalidArgumentError:
-      logging.fatal("Image %s could not be decoded by Tensorflow", filename)
+    except tf.errors.InvalidArgumentError as e:
+      raise ValueError(
+          f"{e}. Image {filename} could not be decoded by Tensorflow."
+      )
 
   # The GIF images contain a single frame.
   if len(image.shape) == 4:  # rank=4 -> rank=3

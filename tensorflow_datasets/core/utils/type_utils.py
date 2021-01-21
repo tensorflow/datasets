@@ -231,3 +231,7 @@ class ReadWritePath(ReadOnlyPath, Protocol):
   @abc.abstractmethod
   def replace(self: T, target: PathLike) -> T:
     """Overwrites the destination path."""
+
+  @abc.abstractmethod
+  def copy(self: T, dst: PathLike, overwrite: bool = False) -> T:
+    """Copy the current file to the given destination."""

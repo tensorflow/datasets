@@ -229,7 +229,7 @@ def delete_old_versions(
   dirs_to_keep, dirs_to_delete = _get_extra_dirs(
       data_dir=data_dir,
       # Explicitly set predicate_fn to None to load all datasets
-      current_full_names=tfds.core.load.list_full_names(predicate_fn=None),
+      current_full_names=tfds.core.load.list_full_names(),
   )
 
   _display_dirs(
@@ -253,6 +253,9 @@ def delete_old_versions(
 
 
 def main(_):
+  tfds.core.visibility.set_availables([
+      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+  ])
   delete_old_versions(
       data_dir=pathlib.Path(FLAGS.data_dir),
       skip_confirmation=FLAGS.skip_confirmation,
