@@ -726,14 +726,11 @@ def get_inner_feature_repr(feature):
 
 def _repr_html_batch(ex) -> str:
   """Default HTML batch repr."""
-  batch_ex = ''
-  for value in ex:
-    batch_ex += _repr_html(value) + ', '
-  return ("<div style='overflow-x: scroll;"
-          "white-space: nowrap; width: 90px;"
-          "padding:2em 0em 2em 0em; float: right'>"
-          f"{type(ex).__qualname__}([{batch_ex[:-2]}])" # exclude last ,[space]
-          "</div>")
+  batch_ex = '<br/>'.join([_repr_html(x) for x in ex])
+  return ("<div style='overflow-y: scroll;"
+          "white-space: nowrap; height: 3em; line-height: 1.4;"
+          "padding:0em 2em 0em 2em; float: right; margin-top: 1.5em'>"
+          f"{batch_ex}</div>")
 
 def _repr_html(ex) -> str:
   """Default HTML repr."""
