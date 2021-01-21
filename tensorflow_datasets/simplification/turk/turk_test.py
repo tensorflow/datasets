@@ -15,11 +15,8 @@
 
 """turk dataset."""
 
-import sys
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.simplification.turk import turk
-
-sys.path.insert(0, ".")
 
 
 class TurkTest(tfds.testing.DatasetBuilderTestCase):
