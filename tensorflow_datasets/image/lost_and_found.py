@@ -134,7 +134,7 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
         'image_right':
             tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png'),
         'segmentation_label':
-            tfds.features.Image(shape=(1024, 2048, 1), encoding_format='png'),
+            tfds.features.Image(shape=(1024, 2048, 1), encoding_format='png', use_colormap=True),
         'instance_id':
             tfds.features.Image(shape=(1024, 2048, 1), encoding_format='png'),
         'disparity_map':
