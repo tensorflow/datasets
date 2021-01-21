@@ -42,6 +42,11 @@ ACCEPTABLE_DTYPES = {
     'jpeg': [tf.uint8],
 }
 
+ACCEPTABLE_COLORMAPS = {
+    'png': [True, False],
+    'jpeg': [True, False],
+}
+
 THUMBNAIL_SIZE = 128
 
 
@@ -83,7 +88,14 @@ class Image(feature.FeatureConnector):
     ```
   """
 
-  def __init__(self, *, shape=None, dtype=None, encoding_format=None):
+  def __init__(
+      self,
+      *,
+      shape=None,
+      dtype=None,
+      encoding_format=None,
+      use_colormap=False
+  ):
     """Construct the connector.
 
     Args:
@@ -99,16 +111,21 @@ class Image(feature.FeatureConnector):
         on disk. If None, encode images as PNG.
         If image is loaded from {bmg,gif,jpeg,png} file, this parameter is
         ignored, and file original encoding is used.
+      use_colormap: bool, indicates to the use of a colormap for the image.
+        If image is single channel use_colormap is True
+        else False.
 
     Raises:
       ValueError: If the shape is invalid
     """
     # Set and validate values
+    use_colormap = use_colormap or False
     shape = shape or (None, None, 3)
     dtype = dtype or tf.uint8
     self._encoding_format = _get_and_validate_encoding(encoding_format)
     self._shape = _get_and_validate_shape(shape, self._encoding_format)
     self._dtype = _get_and_validate_dtype(dtype, self._encoding_format)
+    self.use_colormap = _get_and_validate_colormap(use_colormap, self._encoding_format)
 
     self._runner = None
 
@@ -125,8 +142,10 @@ class Image(feature.FeatureConnector):
     if not self._runner:
       self._runner = utils.TFGraphRunner()
     if np_image.dtype != self._dtype.as_numpy_dtype:
-      raise ValueError('Image dtype should be %s. Detected: %s.' % (
-          self._dtype.as_numpy_dtype, np_image.dtype))
+      raise ValueError(
+          'Image dtype should be %s. Detected: %s.' %
+          (self._dtype.as_numpy_dtype, np_image.dtype)
+      )
     utils.assert_shape_match(np_image.shape, self._shape)
     # When encoding isn't defined, default to PNG.
     # Should we be more strict about explicitly define the encoding (raise
@@ -159,14 +178,15 @@ class Image(feature.FeatureConnector):
   def decode_example(self, example):
     """Reconstruct the image from the tf example."""
     img = tf.image.decode_image(
-        example, channels=self._shape[-1], dtype=self._dtype)
+        example, channels=self._shape[-1], dtype=self._dtype
+    )
     img.set_shape(self._shape)
     return img
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
     # Normalize image and resize
-    img = create_thumbnail(ex)
+    img = create_thumbnail(ex, self.use_colormap)
 
     # Convert to base64
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
@@ -189,14 +209,36 @@ class Image(feature.FeatureConnector):
     }
 
 
-def create_thumbnail(ex):
+def create_thumbnail(ex, use_colormap: bool):
   """Creates the image from the np.array input."""
   PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
 
   _, _, c = ex.shape
   postprocess = _postprocess_noop
   if c == 1:
-    ex = ex.squeeze(axis=-1)
+    if use_colormap:
+      matplotlib = lazy_imports_lib.lazy_imports.matplotlib  # pylint: disable=invalid-name
+      mcolors = matplotlib.colors
+
+      ex = ex.squeeze(axis=-1)
+      unique_pixels = np.unique(ex)
+      blank_image = np.ones(shape=(*ex.shape[:2], 3), dtype=np.uint8)
+
+      if len(unique_pixels) <= 7:
+        _colors = mcolors.BASE_COLORS
+      elif len(unique_pixels) <= 10:
+        _colors = mcolors.TABLEAU_COLORS
+      else:
+        _colors = mcolors.CSS4_COLORS
+
+      colors = [_colors.to_rgb(_colors[cname]) for cname in _colors]
+      for itr, value in unique_pixels:
+        indices = np.where(ex == value)
+        blank_image[indices] = colors[itr]
+
+      mode = None
+      ex = blank_image * 255
+
     mode = 'L'
   elif ex.dtype == np.uint16:
     mode = 'I;16'
@@ -247,3 +289,14 @@ def _get_and_validate_shape(shape, encoding_format):
         f'{acceptable_channels} (was {channels})'
     )
   return tuple(shape)
+
+
+def _get_and_validate_colormap(use_colormap, encoding_format):
+  """Update the shape."""
+  acceptable_colormaps = ACCEPTABLE_COLORMAPS.get(encoding_format)
+  if acceptable_colormaps and use_colormap not in acceptable_colormaps:
+    raise ValueError(
+        f'Acceptable `use_colormap` for {encoding_format}: '
+        f'{acceptable_colormaps} (was {use_colormap})'
+    )
+  return use_colormap
