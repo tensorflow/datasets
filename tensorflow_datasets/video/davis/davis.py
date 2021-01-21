@@ -15,7 +15,6 @@
 
 """DAVIS 2017 dataset for video object segmentation."""
 
-import os
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -51,8 +50,9 @@ _CITATION = """\
 
 def _get_remapping(annotation_path, remap=None):
   """Builds a list indicating how to remap the pixels."""
-  cv2 = tfds.core.lazy_imports.cv2
-  image = cv2.imread(os.fspath(annotation_path))
+  with tf.io.gfile.GFile(annotation_path, 'rb') as f:
+    image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
+    image = np.asarray(image)
   colors = np.unique(image.reshape(-1, image.shape[2]), axis=0)
   remap = remap or []
   for color in colors:
@@ -65,10 +65,11 @@ def _get_remapping(annotation_path, remap=None):
   return remap
 
 
-def _remap_annotation(annotations_path, remapping):
+def _remap_annotation(annotation_path, remapping):
   """Remap the image pixels of the annotation stored at annotations_path."""
-  cv2 = tfds.core.lazy_imports.cv2
-  image = cv2.imread(str(annotations_path))
+  with tf.io.gfile.GFile(annotation_path, 'rb') as f:
+    image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
+    image = np.asarray(image)
   image_int32 = image.astype(np.int32)
   remapped = np.zeros_like(image[:, :, :1])
   for k, v in remapping:
