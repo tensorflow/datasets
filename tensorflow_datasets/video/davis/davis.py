@@ -15,6 +15,8 @@
 
 """DAVIS 2017 dataset for video object segmentation."""
 
+import os
+import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -45,6 +47,36 @@ _CITATION = """\
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 """
+
+
+def _get_remapping(annotation_path, remap=None):
+  """Builds a list indicating how to remap the pixels."""
+  cv2 = tfds.core.lazy_imports.cv2
+  image = cv2.imread(os.fspath(annotation_path))
+  colors = np.unique(image.reshape(-1, image.shape[2]), axis=0)
+  remap = remap or []
+  for color in colors:
+    already_mapped = False
+    for existing_color, _ in remap:
+      if (existing_color == color).all():
+        already_mapped = True
+    if not already_mapped:
+      remap.append((color, len(remap)))
+  return remap
+
+
+def _remap_annotation(annotations_path, remapping):
+  """Remap the image pixels of the annotation stored at annotations_path."""
+  cv2 = tfds.core.lazy_imports.cv2
+  image = cv2.imread(str(annotations_path))
+  image_int32 = image.astype(np.int32)
+  remapped = np.zeros_like(image[:, :, :1])
+  for k, v in remapping:
+    remapped[(image == k).all(axis=2)] = v
+    image_int32[(image == k)] = -1
+  # Check that all pixels were remapped.
+  assert np.sum(image_int32) == -np.prod(image.shape)
+  return remapped
 
 
 class DavisConfig(tfds.core.BuilderConfig):
@@ -82,9 +114,10 @@ class Davis(tfds.core.GeneratorBasedBuilder):
       ),
   ]
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('2.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '2.0.0': 'Change instance ids to be 0, 1, 2, ...',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -143,11 +176,14 @@ class Davis(tfds.core.GeneratorBasedBuilder):
       seq_len = len(list(images_path.iterdir()))
       images = []
       annotations = []
+      remap = None
       for i in range(seq_len):
         image_path = images_path / f'{i:05d}.jpg'
         annotation_path = annotations_path / f'{i:05d}.png'
+        remap = _get_remapping(annotation_path, remap)
+        annotation = _remap_annotation(annotation_path, remap)
         images.append(image_path)
-        annotations.append(annotation_path)
+        annotations.append(annotation)
 
       video_dict = {'frames': images, 'segmentations': annotations}
       metadata = {'num_frames': seq_len, 'video_name': video}

@@ -110,6 +110,9 @@ toc:
     title: cassava
   - path: /datasets/catalog/cats_vs_dogs
     title: cats_vs_dogs
+  - path: /datasets/catalog/chexpert
+    status: nightly
+    title: chexpert (manual)
   - path: /datasets/catalog/cifar10
     title: cifar10
   - path: /datasets/catalog/cifar100
@@ -290,6 +293,9 @@ toc:
     title: dart
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
+  - path: /datasets/catalog/efron_morris75
+    status: nightly
+    title: efron_morris75
   - path: /datasets/catalog/forest_fires
     title: forest_fires
   - path: /datasets/catalog/genomics_ood

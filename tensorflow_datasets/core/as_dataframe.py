@@ -17,7 +17,7 @@
 """
 
 import typing
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import dataclasses
 import numpy as np
@@ -32,10 +32,14 @@ from tensorflow_datasets.core.utils import type_utils
 
 try:
   import pandas  # pylint: disable=g-import-not-at-top
-  import pandas.io.formats.style  # pylint: disable=g-import-not-at-top
   DataFrame = pandas.DataFrame
 except ImportError:
   DataFrame = object
+
+
+# Should be `pandas.io.formats.style.Styler`, but is a costly import
+Styler = Any
+
 
 TreeDict = type_utils.TreeDict
 
@@ -144,10 +148,10 @@ class StyledDataFrame(DataFrame):
     super().__init__(*args, **kwargs)
     # Use name-mangling for forward-compatibility in case pandas
     # adds a `_styler` attribute in the future.
-    self.__styler: Optional[pandas.io.formats.style.Styler] = None
+    self.__styler: Optional[Styler] = None
 
   @property
-  def current_style(self) -> 'pandas.io.formats.style.Styler':
+  def current_style(self) -> Styler:
     """Like `pandas.DataFrame.style`, but attach the style to the DataFrame."""
     if self.__styler is None:
       self.__styler = super().style

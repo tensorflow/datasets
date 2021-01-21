@@ -89,7 +89,7 @@ _LABELS = [
 
 _DATA_OPTIONS = ['rgb', 'all']
 
-_ZIP_FILE = 'http://bigearth.net/downloads/BigEarthNet-v1.0.tar.gz'
+_ZIP_FILE = 'http://bigearth.net/downloads/BigEarthNet-S2-v1.0.tar.gz'
 _ZIP_SUBIDR = 'BigEarthNet-v1.0'
 
 # To clip and rescale the RGB channels for the JPEG images visualizatoin.

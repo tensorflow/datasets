@@ -13,13 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Community dataset API."""
+"""efron_morris_75 dataset."""
 
-from tensorflow_datasets.core.community.load import builder_cls_from_module
-from tensorflow_datasets.core.community.register_package import community_register
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.structured.efron_morris_75 import efron_morris_75
 
 
-__all__ = [
-    'builder_cls_from_module',
-    'community_register',
-]
+class EfronMorris75Test(tfds.testing.DatasetBuilderTestCase):
+  """Tests for efron_morris_75 dataset."""
+  DATASET_CLASS = efron_morris_75.EfronMorris75
+  SPLITS = {'train': 4}
+
+  DL_EXTRACT_RESULT = 'efron-morris-75-data.tsv'
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()

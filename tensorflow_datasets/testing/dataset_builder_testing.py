@@ -110,8 +110,7 @@ class DatasetBuilderTestCase(
       If not specified: will use DL_EXTRACT_RESULT (this is due to backwards
       compatibility and will be removed in the future).
     * EXAMPLE_DIR: `str`, the base directory in in which fake examples are
-      contained. Optional; defaults to
-      tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
+      contained. Optional; defaults to `<dataset dir>/dummy_data/`.
     * OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
       splits (e.g. a "example" split containing pictures from other splits).
     * MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
@@ -155,7 +154,7 @@ class DatasetBuilderTestCase(
       raise AssertionError(
           "Assign your DatasetBuilder class to %s.DATASET_CLASS." % name)
 
-    cls._available_cm = visibility.set_availables([
+    cls._available_cm = visibility.set_availables_tmp([
         visibility.DatasetType.TFDS_PUBLIC,
     ])
     cls._available_cm.__enter__()
@@ -170,19 +169,6 @@ class DatasetBuilderTestCase(
     self.patchers = []
     self.builder = self._make_builder()
 
-    example_dir = self.DATASET_CLASS.code_path.parent / "dummy_data"
-    fake_example_dir = utils.as_path(test_utils.fake_examples_dir())
-    if self.EXAMPLE_DIR is not None:
-      self.example_dir = utils.as_path(self.EXAMPLE_DIR)
-      example_dir = self.example_dir  # Dir to display in the error
-    elif example_dir.exists():
-      self.example_dir = example_dir
-    else:
-      self.example_dir = fake_example_dir / self.builder.name
-
-    if not self.example_dir.exists():
-      err_msg = f"Dummy data not found in: {example_dir}"
-      raise ValueError(err_msg)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
       self._mock_out_forbidden_os_functions()
 
@@ -199,6 +185,29 @@ class DatasetBuilderTestCase(
     super(DatasetBuilderTestCase, self).tearDown()
     for patcher in self.patchers:
       patcher.stop()
+
+  @utils.classproperty
+  @classmethod
+  @utils.memoize()
+  def dummy_data(cls) -> utils.ReadOnlyPath:  # pylint: disable=no-self-argument
+    """Path to the `dummy_data/` directory."""
+    if cls.DATASET_CLASS is None:  # Required for build_api_docs
+      return None  # pytype: disable=bad-return-type
+
+    dummy_data_expected = cls.DATASET_CLASS.code_path.parent / "dummy_data"
+    fake_example_dir = utils.as_path(test_utils.fake_examples_dir())
+    if cls.EXAMPLE_DIR is not None:
+      dummy_data_found = utils.as_path(cls.EXAMPLE_DIR)
+      dummy_data_expected = dummy_data_found  # Dir to display in the error
+    elif dummy_data_expected.exists():
+      dummy_data_found = dummy_data_expected
+    else:
+      dummy_data_found = fake_example_dir / cls.DATASET_CLASS.name
+
+    if not dummy_data_found.exists():
+      err_msg = f"Dummy data not found in: {dummy_data_expected}"
+      raise ValueError(err_msg)
+    return dummy_data_found
 
   def _mock_out_forbidden_os_functions(self):
     """Raises error if forbidden os functions are called instead of gfile."""
@@ -262,9 +271,9 @@ class DatasetBuilderTestCase(
     tf.nest.map_structure(self._add_url, url)
     del url
     if self.DL_EXTRACT_RESULT is None:
-      return self.example_dir
+      return self.dummy_data
     return tf.nest.map_structure(
-        lambda fname: self.example_dir / fname,
+        lambda fname: self.dummy_data / fname,
         self.DL_EXTRACT_RESULT,
     )
 
@@ -272,10 +281,10 @@ class DatasetBuilderTestCase(
     tf.nest.map_structure(self._add_url, url)
     if self.DL_DOWNLOAD_RESULT is None:
       # This is only to be backwards compatible with old approach.
-      # In the future it will be replaced with using self.example_dir.
+      # In the future it will be replaced with using self.dummy_data.
       return self._get_dl_extract_result(url)
     return tf.nest.map_structure(
-        lambda fname: self.example_dir / fname,
+        lambda fname: self.dummy_data / fname,
         self.DL_DOWNLOAD_RESULT,
     )
 
@@ -358,7 +367,7 @@ class DatasetBuilderTestCase(
         side_effect=Exception("Missing MANUAL_DOWNLOAD_INSTRUCTIONS"))
 
     manual_dir = (
-        self.example_dir
+        self.dummy_data
         if builder.MANUAL_DOWNLOAD_INSTRUCTIONS else missing_dir_mock)
     with mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
@@ -366,7 +375,7 @@ class DatasetBuilderTestCase(
         download=self._get_dl_download_result,
         download_checksums=self._download_checksums,
         manual_dir=manual_dir,
-        download_dir=self.example_dir,
+        download_dir=self.dummy_data,
     ):
       # For Beam datasets, set-up the runner config
       beam_runner = None
@@ -429,7 +438,7 @@ class DatasetBuilderTestCase(
       yield
 
   def _assert_key_valid(self, key):
-    if isinstance(key, str) and os.fspath(self.example_dir) in key:
+    if isinstance(key, str) and os.fspath(self.dummy_data) in key:
       err_msg = (
           "Key yield in '_generate_examples' method "
           f"contain user directory path: {key}.\n"

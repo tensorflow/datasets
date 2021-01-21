@@ -16,6 +16,8 @@
 """Image feature."""
 
 import os
+import tempfile
+from typing import Any, List
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -26,18 +28,19 @@ from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
+PilImage = Any  # Require lazy deps.
 
-ENCODE_FN = {
+_ENCODE_FN = {
     'png': tf.image.encode_png,
     'jpeg': tf.image.encode_jpeg,
 }
 
-ACCEPTABLE_CHANNELS = {
+_ACCEPTABLE_CHANNELS = {
     'png': (0, 1, 2, 3, 4),
     'jpeg': (0, 1, 3),
 }
 
-ACCEPTABLE_DTYPES = {
+_ACCEPTABLE_DTYPES = {
     'png': [tf.uint8, tf.uint16],
     'jpeg': [tf.uint8],
 }
@@ -48,6 +51,11 @@ ACCEPTABLE_COLORMAPS = {
 }
 
 THUMBNAIL_SIZE = 128
+
+# Framerate for the `tfds.as_dataframe` visualization
+# Could add a framerate kwargs in __init__ to allow datasets to customize
+# the output.
+_VISU_FRAMERATE = 10
 
 
 class Image(feature.FeatureConnector):
@@ -153,7 +161,9 @@ class Image(feature.FeatureConnector):
     # It has created subtle issues for imagenet_corrupted: images are read as
     # JPEG images to apply some processing, but final image saved as PNG
     # (default) rather than JPEG.
-    return self._runner.run(ENCODE_FN[self._encoding_format or 'png'], np_image)
+    return self._runner.run(
+        _ENCODE_FN[self._encoding_format or 'png'], np_image
+    )
 
   def __getstate__(self):
     state = self.__dict__.copy()
@@ -186,13 +196,17 @@ class Image(feature.FeatureConnector):
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
     # Normalize image and resize
-    img = create_thumbnail(ex, self.use_colormap)
+    img = _create_thumbnail(ex)
 
     # Convert to base64
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
 
     # Display HTML
     return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
+
+  def repr_html_batch(self, ex: np.ndarray) -> str:
+    """`Sequence(Image())` are displayed as `<video>`."""
+    return make_video_repr_html(ex)
 
   @classmethod
   def from_json_content(cls, value: Json) -> 'Image':
@@ -209,7 +223,10 @@ class Image(feature.FeatureConnector):
     }
 
 
-def create_thumbnail(ex, use_colormap: bool):
+# Visualization single image
+
+
+def _create_thumbnail(ex: np.ndarray) -> PilImage:
   """Creates the image from the np.array input."""
   PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
 
@@ -251,17 +268,98 @@ def create_thumbnail(ex, use_colormap: bool):
   return img
 
 
-def _postprocess_noop(img):
+def _postprocess_noop(img: PilImage) -> PilImage:
   return img
 
 
-def _postprocess_convert_rgb(img):
+def _postprocess_convert_rgb(img: PilImage) -> PilImage:
   return img.convert('RGB')
+
+
+# Visualization Video
+
+
+def make_video_repr_html(ex):
+  """Returns the encoded `<video>` or GIF <img/> HTML."""
+  # Use GIF to generate a HTML5 compatible video if FFMPEG is not
+  # installed on the system.
+  images = [_create_thumbnail(frame) for frame in ex]
+
+  if not images:
+    return 'Video with 0 frames.'
+
+  # Display the video HTML (either GIF of mp4 if ffmpeg is installed)
+  try:
+    utils.ffmpeg_run(['-version'])  # Check for ffmpeg installation.
+  except FileNotFoundError:
+    # print as `stderr` is displayed poorly on Colab
+    print('FFMPEG not detected. Falling back on GIF.')
+    return _get_repr_html_gif(images)
+  else:
+    return _get_repr_html_ffmpeg(images)
+
+
+def _get_repr_html_ffmpeg(images: List[PilImage]) -> str:
+  """Runs ffmpeg to get the mp4 encoded <video> str."""
+  # Find number of digits in len to give names.
+  num_digits = len(str(len(images))) + 1
+  with tempfile.TemporaryDirectory() as video_dir:
+    for i, img in enumerate(images):
+      f = os.path.join(video_dir, f'img{i:0{num_digits}d}.png')
+      img.save(f, format='png')
+
+    ffmpeg_args = [
+        '-framerate', str(_VISU_FRAMERATE),
+        '-i', os.path.join(video_dir, f'img%0{num_digits}d.png'),
+        # Using native h264 to encode video stream to H.264 codec
+        # Default encoding does not seems to be supported by chrome.
+        '-vcodec', 'h264',
+        # When outputting H.264, `-pix_fmt yuv420p` maximize compatibility
+        # with bad video players.
+        # Ref: https://trac.ffmpeg.org/wiki/Slideshow
+        '-pix_fmt', 'yuv420p',
+        # Native encoder cannot encode images of small scale
+        # or the the hardware encoder may be busy which raises
+        # Error: cannot create compression session
+        # so allow software encoding
+        # '-allow_sw', '1',
+    ]
+    video_path = utils.as_path(video_dir) / 'output.mp4'
+    ffmpeg_args.append(os.fspath(video_path))
+    utils.ffmpeg_run(ffmpeg_args)
+    video_str = utils.get_base64(video_path.read_bytes())
+  return (
+      f'<video height="{THUMBNAIL_SIZE}" width="175" '
+      'controls loop autoplay muted playsinline>'
+      f'<source src="data:video/mp4;base64,{video_str}"  type="video/mp4" >'
+      '</video>'
+  )
+
+
+def _get_repr_html_gif(images: List[PilImage]) -> str:
+  """Get the <img/> str."""
+
+  def write_buff(buff):
+    images[0].save(
+        buff,
+        format='GIF',
+        save_all=True,
+        append_images=images[1:],
+        duration=1000 / _VISU_FRAMERATE,
+        loop=0,
+    )
+
+  # Convert to base64
+  gif_str = utils.get_base64(write_buff)
+  return f'<img src="data:image/png;base64,{gif_str}" alt="Gif" />'
+
+
+# Other image utils
 
 
 def _get_and_validate_encoding(encoding_format):
   """Update the encoding format."""
-  supported = ENCODE_FN.keys()
+  supported = _ENCODE_FN.keys()
   if encoding_format and encoding_format not in supported:
     raise ValueError(f'`encoding_format` must be one of {supported}.')
   return encoding_format
@@ -270,7 +368,7 @@ def _get_and_validate_encoding(encoding_format):
 def _get_and_validate_dtype(dtype, encoding_format):
   """Update the dtype."""
   dtype = tf.as_dtype(dtype)
-  acceptable_dtypes = ACCEPTABLE_DTYPES.get(encoding_format)
+  acceptable_dtypes = _ACCEPTABLE_DTYPES.get(encoding_format)
   if acceptable_dtypes and dtype not in acceptable_dtypes:
     raise ValueError(
         f'Acceptable `dtype` for {encoding_format}: '
@@ -282,7 +380,7 @@ def _get_and_validate_dtype(dtype, encoding_format):
 def _get_and_validate_shape(shape, encoding_format):
   """Update the shape."""
   channels = shape[-1]
-  acceptable_channels = ACCEPTABLE_CHANNELS.get(encoding_format)
+  acceptable_channels = _ACCEPTABLE_CHANNELS.get(encoding_format)
   if acceptable_channels and channels not in acceptable_channels:
     raise ValueError(
         f'Acceptable `channels` for {encoding_format}: '

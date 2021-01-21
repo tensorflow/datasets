@@ -59,6 +59,9 @@ def list_builders(
 ) -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   datasets = registered.list_imported_builders()
+  if with_community_datasets:
+    if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
+      datasets += community.community_register.list_builders()
   return datasets
 
 
@@ -81,17 +84,21 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
         '`builder_cls` only accept the `dataset_name` without config, '
         f"version or arguments. Got: name='{name}', kwargs={kwargs}"
     )
-  if ds_name.namespace:
-    raise ValueError(
-        f'Namespaces not supported for `builder_cls`. Got: {ds_name}'
-    )
-  # Imported datasets
   try:
-    cls = registered.imported_builder_cls(ds_name.name)
-    cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
+    if ds_name.namespace:
+      # `namespace:dataset` are loaded from the community register
+      if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
+        return community.community_register.builder_cls(ds_name)
+      else:
+        raise ValueError(
+            f'Cannot load {ds_name} when community datasets are disabled'
+        )
+    else:
+      cls = registered.imported_builder_cls(str(ds_name))
+      cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
     return cls
   except registered.DatasetNotFoundError as e:
-    _reraise_with_list_builders(e, name=ds_name)
+    _reraise_with_list_builders(e, name=ds_name)  # pytype: disable=bad-return-type
 
 
 def builder(
@@ -143,11 +150,7 @@ def builder(
       )
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
 
-  # Community datasets
-  if name.namespace:
-    raise NotImplementedError
-
-  # First check whether code exists or not (imported datasets)
+  # First check whether code exists or not
   try:
     cls = builder_cls(str(name))
   except registered.DatasetNotFoundError as e:
