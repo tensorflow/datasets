@@ -727,17 +727,17 @@ def get_inner_feature_repr(feature):
 def _repr_html_batch(ex) -> str:
   """Default HTML batch repr."""
   batch_ex = '<br/>'.join([_repr_html(x) for x in ex])
-  return ("<div style='overflow-y: scroll;"
-          "white-space: nowrap; height: 3em; line-height: 1.4;"
-          "padding:0em 2em 0em 2em; float: right; margin-top: 1.5em'>"
-          f"{batch_ex}</div>")
+  return ('<div style="overflow-y: scroll;'
+          'white-space: nowrap; height: 3em; line-height: 1.4;'
+          'padding:0em 2em 0em 2em; float: right; margin-top: 1.5em">'
+          f'{batch_ex}</div>')
 
 def _repr_html(ex) -> str:
   """Default HTML repr."""
   if isinstance(ex, np.ndarray) and ex.size > 1:
     # Do not print individual values for array as it is slow
     # TODO(tfds): We could display a snippet, like the first/last tree items
-    return f"{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})"
+    return f'{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})'
   return repr(ex)
 
 def _has_shape_ambiguity(in_shape: Shape, out_shape: Shape) -> bool:
