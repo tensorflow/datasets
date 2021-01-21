@@ -196,7 +196,7 @@ class Image(feature.FeatureConnector):
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
     # Normalize image and resize
-    img = _create_thumbnail(ex)
+    img = _create_thumbnail(ex, use_colormap=self.use_colormap)
 
     # Convert to base64
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
@@ -226,7 +226,7 @@ class Image(feature.FeatureConnector):
 # Visualization single image
 
 
-def _create_thumbnail(ex: np.ndarray) -> PilImage:
+def _create_thumbnail(ex: np.ndarray, use_colormap: bool) -> PilImage:
   """Creates the image from the np.array input."""
   PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
 
