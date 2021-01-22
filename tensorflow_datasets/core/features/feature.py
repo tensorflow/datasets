@@ -18,6 +18,7 @@
 import abc
 import collections
 import functools
+import html
 import json
 import os
 from typing import Dict, Type, TypeVar
@@ -731,7 +732,9 @@ def _repr_html(ex) -> str:
     # Do not print individual values for array as it is slow
     # TODO(tfds): We could display a snippet, like the first/last tree items
     return f'{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})'
-  return repr(ex)
+
+  # Escape symbols which might have special meaning in HTML like '<', '>'
+  return html.escape(repr(ex))
 
 
 def _has_shape_ambiguity(in_shape: Shape, out_shape: Shape) -> bool:
