@@ -35,8 +35,9 @@ _WORKER_COUNT_DATASETS = 50
 _WORKER_COUNT_CONFIGS = 20
 
 # WmtTranslate: The raw wmt can only be instantiated with the config kwargs
-# TODO(tfds): Document image_label_folder datasets in a separate section
-_BUILDER_BLACKLIST = ['wmt_translate']
+_BUILDER_BLACKLIST = [
+    'wmt_translate',
+]
 
 
 @dataclasses.dataclass(eq=False, frozen=True)
@@ -230,7 +231,7 @@ def _document_single_builder_inner(
 def _all_tfds_datasets() -> List[str]:
   """Returns all "official" TFDS dataset names."""
   return sorted([
-      name for name in tfds.list_builders(with_community_datasets=False)  # pylint: disable=g-complex-comprehension
+      name for name in tfds.list_builders(with_community_datasets=True)  # pylint: disable=g-complex-comprehension
       if name not in _BUILDER_BLACKLIST
   ])
 

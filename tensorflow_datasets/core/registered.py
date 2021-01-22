@@ -132,7 +132,8 @@ def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
 
   builder_cls = _DATASET_REGISTRY[name]
   if not _is_builder_available(builder_cls):
-    msg = f'Dataset {name} is not available.'
-    raise ValueError(msg)
+    available_types = visibility.get_availables()
+    msg = f'Dataset {name} is not available. Only: {available_types}'
+    raise PermissionError(msg)
   return builder_cls  # pytype: disable=bad-return-type
 

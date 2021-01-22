@@ -284,9 +284,12 @@ def _get_default_config_name(builder_dir: str, name: str) -> Optional[str]:
   """Returns the default config of the given dataset, None if not found."""
   # Search for the DatasetBuilder generation code
   try:
+    # Warning: The registered dataset may not match the files (e.g. if
+    # the imported datasets has the same name as the generated files while
+    # being 2 differents datasets)
     cls = registered.imported_builder_cls(name)
     cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
-  except registered.DatasetNotFoundError:
+  except (registered.DatasetNotFoundError, PermissionError):
     pass
   else:
     # If code found, return the default config

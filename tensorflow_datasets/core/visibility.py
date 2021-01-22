@@ -42,7 +42,7 @@ Updating the visibility affect the following functions:
 import contextlib
 import enum
 import pathlib
-from typing import Iterable, Iterator
+from typing import Iterable, Iterator, List
 
 from absl import app
 
@@ -75,6 +75,11 @@ def set_availables(new_ds_types: Iterable[DatasetType]) -> None:
   """
   _current_available.clear()
   _current_available.update(new_ds_types)
+
+
+def get_availables() -> List[DatasetType]:
+  """Returns availables dataset types."""
+  return sorted(_current_available, key=lambda ds_type: ds_type.name)
 
 
 @contextlib.contextmanager
