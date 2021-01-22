@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,16 +15,18 @@
 
 """Mozilla CommonVoice Dataset Builder UnitTest."""
 
-from tensorflow_datasets.audio import commonvoice
 import tensorflow_datasets.testing as tfds_test
-
+from tensorflow_datasets.audio import commonvoice
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.testing import test_utils
 
 class CommonVoiceTest(tfds_test.DatasetBuilderTestCase):
   """CommonVoice Tester Class."""
   # Don't test all configs to avoid timeout
-  BUILDER_CONFIG_NAMES_TO_TEST = ["en", "cv"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["en"]
   DATASET_CLASS = commonvoice.CommonVoice
   SPLITS = {"train": 2, "test": 1, "validation": 3}
+  EXAMPLE_DIR=utils.as_path(test_utils.fake_examples_dir())
 
 
 if __name__ == "__main__":

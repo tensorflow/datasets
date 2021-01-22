@@ -109,7 +109,7 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
 
     kwargs.setdefault("name", language)
     kwargs.setdefault("description", "Language Code: %s" % language)
-    kwargs.setdefault("version", tfds.core.Version("1.0.0"))
+    kwargs.setdefault("version", tfds.core.Version("6.1.0"))
     super(CommonVoiceConfig, self).__init__(**kwargs)
 
 
