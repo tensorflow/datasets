@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests for tensorflow_datasets.core.features.image_feature."""
 
 import os
@@ -25,7 +24,6 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
 
 tf.enable_v2_behavior()
-
 
 randint = np.random.randint
 
@@ -118,7 +116,9 @@ class ImageFeatureTest(
 
     self.assertFeature(
         # Image with statically defined shape
-        feature=features_lib.Image(shape=(32, 64, 3), encoding_format='png'),
+        feature=features_lib.Image(
+            shape=(32, 64, 3), encoding_format='png', use_colormap=False
+        ),
         shape=(32, 64, 3),
         dtype=tf.uint8,
         tests=[

@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Image feature."""
 
 import os
@@ -45,10 +44,12 @@ _ACCEPTABLE_DTYPES = {
     'jpeg': [tf.uint8],
 }
 
-ACCEPTABLE_COLORMAPS = {
-    'png': [True, False],
-    'jpeg': [True, False],
-}
+_COLORS = [
+    '#AA0DFE', '#3283FE', '#85660D', '#782AB6', '#565656', '#1C8356', '#16FF32',
+    '#F7E1A0', '#E2E2E2', '#1CBE4F', '#C4451C', '#DEA0FD', '#FE00FA', '#325A9B',
+    '#FEAF16', '#F8A19F', '#90AD1C', '#F6222E', '#1CFFCE', '#2ED9FF', '#B10DA1',
+    '#C075A6', '#FC1CBF', '#B00068', '#FBE426', '#FA0087'
+]
 
 THUMBNAIL_SIZE = 128
 
@@ -120,20 +121,21 @@ class Image(feature.FeatureConnector):
         If image is loaded from {bmg,gif,jpeg,png} file, this parameter is
         ignored, and file original encoding is used.
       use_colormap: bool, indicates to the use of a colormap for the image.
-        If image is single channel use_colormap is True
-        else False.
+        Available for tfds_as_dataframe. If image is
+        single channel `use_colormap` is True else False.
 
     Raises:
       ValueError: If the shape is invalid
     """
     # Set and validate values
-    use_colormap = use_colormap or False
     shape = shape or (None, None, 3)
     dtype = dtype or tf.uint8
     self._encoding_format = _get_and_validate_encoding(encoding_format)
     self._shape = _get_and_validate_shape(shape, self._encoding_format)
     self._dtype = _get_and_validate_dtype(dtype, self._encoding_format)
-    self.use_colormap = _get_and_validate_colormap(use_colormap, self._encoding_format)
+    self._use_colormap = _get_and_validate_colormap(
+        use_colormap, self._shape, self._encoding_format
+    )
 
     self._runner = None
 
@@ -196,7 +198,7 @@ class Image(feature.FeatureConnector):
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
     # Normalize image and resize
-    img = _create_thumbnail(ex, use_colormap=self.use_colormap)
+    img = _create_thumbnail(ex, use_colormap=self._use_colormap)
 
     # Convert to base64
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
@@ -206,20 +208,27 @@ class Image(feature.FeatureConnector):
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """`Sequence(Image())` are displayed as `<video>`."""
-    return make_video_repr_html(ex)
+    return make_video_repr_html(ex, self._use_colormap)
 
   @classmethod
   def from_json_content(cls, value: Json) -> 'Image':
     shape = tuple(value['shape'])
+    use_colormap = value['use_colormap']
     dtype = tf.dtypes.as_dtype(value['dtype'])
     encoding_format = value['encoding_format']
-    return cls(shape=shape, dtype=dtype, encoding_format=encoding_format)
+    return cls(
+        shape=shape,
+        dtype=dtype,
+        encoding_format=encoding_format,
+        use_colormap=use_colormap
+    )
 
   def to_json_content(self) -> Json:
     return {
         'shape': list(self._shape),
         'dtype': self._dtype.name,
-        'encoding_format': self._encoding_format
+        'encoding_format': self._encoding_format,
+        'use_colormap': self._use_colormap
     }
 
 
@@ -234,27 +243,9 @@ def _create_thumbnail(ex: np.ndarray, use_colormap: bool) -> PilImage:
   postprocess = _postprocess_noop
   if c == 1:
     if use_colormap:
-      matplotlib = lazy_imports_lib.lazy_imports.matplotlib  # pylint: disable=invalid-name
-      mcolors = matplotlib.colors
-
-      ex = ex.squeeze(axis=-1)
-      unique_pixels = np.unique(ex)
-      blank_image = np.ones(shape=(*ex.shape[:2], 3), dtype=np.uint8)
-
-      if len(unique_pixels) <= 7:
-        _colors = mcolors.BASE_COLORS
-      elif len(unique_pixels) <= 10:
-        _colors = mcolors.TABLEAU_COLORS
-      else:
-        _colors = mcolors.CSS4_COLORS
-
-      colors = [_colors.to_rgb(_colors[cname]) for cname in _colors]
-      for itr, value in unique_pixels:
-        indices = np.where(ex == value)
-        blank_image[indices] = colors[itr]
-
       mode = None
-      ex = blank_image * 255
+      image_with_colormap = _apply_colormap(ex)
+      ex = image_with_colormap * 255
 
     mode = 'L'
   elif ex.dtype == np.uint16:
@@ -279,11 +270,11 @@ def _postprocess_convert_rgb(img: PilImage) -> PilImage:
 # Visualization Video
 
 
-def make_video_repr_html(ex):
+def make_video_repr_html(ex, use_colormap):
   """Returns the encoded `<video>` or GIF <img/> HTML."""
   # Use GIF to generate a HTML5 compatible video if FFMPEG is not
   # installed on the system.
-  images = [_create_thumbnail(frame) for frame in ex]
+  images = [_create_thumbnail(frame, use_colormap) for frame in ex]
 
   if not images:
     return 'Video with 0 frames.'
@@ -389,12 +380,42 @@ def _get_and_validate_shape(shape, encoding_format):
   return tuple(shape)
 
 
-def _get_and_validate_colormap(use_colormap, encoding_format):
+def _get_and_validate_colormap(use_colormap, shape, encoding_format):
   """Update the shape."""
-  acceptable_colormaps = ACCEPTABLE_COLORMAPS.get(encoding_format)
-  if acceptable_colormaps and use_colormap not in acceptable_colormaps:
-    raise ValueError(
-        f'Acceptable `use_colormap` for {encoding_format}: '
-        f'{acceptable_colormaps} (was {use_colormap})'
+  acceptable_colormaps = [True, False]
+  if use_colormap not in acceptable_colormaps:
+    return ValueError(
+        'Invalid `use_colormap` choice.',
+        f'Available types: {acceptable_colormaps}. (was {use_colormap})'
     )
+  if encoding_format and encoding_format != 'png':
+    raise ValueError(
+        f'Colormap is only available for PNG images. Not {encoding_format}'
+    )
+  if shape[-1] != 1 and use_colormap:
+    raise ValueError('Colormap is only available for gray-scale images')
+
   return use_colormap
+
+
+def _apply_colormap(image: np.ndarray) -> np.ndarray:
+  """Apply colormap to 1D images"""
+  matplotlib = lazy_imports_lib.lazy_imports.matplotlib  # pylint: disable=invalid-name
+
+  colors = _COLORS
+  image = image.squeeze(axis=-1)
+  unique_pixels = np.unique(image)
+  blank_image = np.ones(shape=(*image.shape[:2], 3))
+
+  for value in unique_pixels:
+    indices = np.where(image == value)
+    if value < len(colors):
+      colr = matplotlib.colors.to_rgb(colors[value])
+    else:
+      factor = value // len(colors)
+      colr_idx = value - (int(factor) * len(colors))
+      colr = matplotlib.colors.to_rgb(colors[colr_idx])
+
+    blank_image[indices] = colr
+
+  return blank_image
