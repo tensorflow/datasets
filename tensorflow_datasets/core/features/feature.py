@@ -481,7 +481,18 @@ class FeatureConnector(object):
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Sequence)."""
-    return _repr_html(ex)
+    _MAX_SUB_ROWS = 7  # pylint: disable=invalid-name
+    # Truncate sequences which contains too many sub-examples
+    if len(ex) > _MAX_SUB_ROWS:
+      ex = ex[:_MAX_SUB_ROWS]
+      overflow = ['...']
+    else:
+      overflow = []
+    batch_ex = '<br/>'.join([self.repr_html(x) for x in ex] + overflow)
+    # TODO(tfds): How to limit the max-height to the neighboors cells ?
+    return (
+        f'<div style="overflow-y: scroll; max-height: 300px;" >{batch_ex}</div>'
+    )
 
   def repr_html_ragged(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Nested sequence)."""
