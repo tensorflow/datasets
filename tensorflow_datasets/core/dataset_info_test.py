@@ -165,7 +165,7 @@ class DatasetInfoTest(testing.TestCase):
         supervised_keys=("input", "output"),
         homepage="http://some-location",
         citation="some citation",
-        redistribution_info={"license": "some license"}
+        license="some license",
     )
     info.download_size = 456
     info.as_proto.splits.add(name="train", num_bytes=512)

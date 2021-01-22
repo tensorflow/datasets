@@ -105,7 +105,7 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
         supervised_keys=None,
         homepage=_URL,
         citation=_CITATION,
-        redistribution_info={"license": _LICENSE},
+        license=_LICENSE,
     )
 
   def _split_generators(self, dl_manager):

@@ -175,7 +175,7 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
         homepage='https://wordnet.princeton.edu/',
         citation=self.builder_config.citation,
         metadata=tfds.core.MetadataDict(),
-        redistribution_info=dict(license=_LICENSE),
+        license=_LICENSE,
     )
 
   def _split_generators(self, dl_manager):

@@ -35,6 +35,7 @@ import json
 import os
 import posixpath
 import tempfile
+from typing import Optional
 
 from absl import logging
 import six
@@ -81,6 +82,7 @@ class DatasetInfo(object):
                homepage=None,
                citation=None,
                metadata=None,
+               license: Optional[str] = None,  # pylint: disable=redefined-builtin
                redistribution_info=None):
     """Constructs DatasetInfo.
 
@@ -101,6 +103,7 @@ class DatasetInfo(object):
       metadata: `tfds.core.Metadata`, additonal object which will be
         stored/restored with the dataset. This allows for storing additional
         information with the dataset.
+      license: Optional license of the dataset
       redistribution_info: `dict`, optional, information needed for
         redistribution, as specified in `dataset_info_pb2.RedistributionInfo`.
         The content of the `license` subfield will automatically be written to a
@@ -124,7 +127,7 @@ class DatasetInfo(object):
         citation=utils.dedent(citation),
         module_name=str(builder.__module__),
         redistribution_info=dataset_info_pb2.RedistributionInfo(
-            license=utils.dedent(redistribution_info.pop("license")),
+            license=utils.dedent(license or redistribution_info.pop("license")),
             **redistribution_info) if redistribution_info else None)
 
     if homepage:

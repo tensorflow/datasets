@@ -147,7 +147,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
         supervised_keys=None,
         homepage="https://dumps.wikimedia.org",
         citation=_CITATION,
-        redistribution_info={"license": _LICENSE},
+        license=_LICENSE,
     )
 
   def _split_generators(self, dl_manager):
