@@ -82,9 +82,14 @@ class ColumnInfo:
     elif sequence_rank > 1:
       repr_fn = feature.repr_html_ragged
 
-    def repr_fn_with_debug(val):  # Wrap repr_fn to add debug info
+    def repr_fn_wrapper(val):  # Wrap repr_fn to add debug info & fix html tags
       try:
-        return repr_fn(val)
+        html_repr =  repr_fn(val)
+        # Replace '<' and '>' characters in the html with '&lt;' and '&gt;'
+        # so that they are not confused as html tags when rendering
+        # Inspired from pandas _repr_html_
+        html_repr = html_repr.replace('<', r'&lt;', 1).replace('>', r'&gt;', 1)
+        return html_repr
       except Exception as e:  # pylint: disable=broad-except
         err_msg = (
             f'HTML formatting of column {name} failed:\n'
@@ -95,7 +100,7 @@ class ColumnInfo:
 
     return ColumnInfo(
         name='/'.join(path),
-        format_fn=repr_fn_with_debug,
+        format_fn=repr_fn_wrapper,
     )
 
 
