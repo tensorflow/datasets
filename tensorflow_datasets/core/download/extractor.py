@@ -139,6 +139,18 @@ def _open_or_pass(path_or_fobj):
     yield path_or_fobj
 
 
+class _ArchiveFile:
+
+  def __init__(self, arch_f) -> None:
+    self.arch_f = arch_f
+
+  def get_num_files(self) -> int:
+    raise NotImplementedError()
+
+  def get_iter(self):
+    raise NotImplementedError()
+
+
 def iter_tar(arch_f, stream=False):
   """Iter over tar archive, yielding (path, object-like) tuples.
 
