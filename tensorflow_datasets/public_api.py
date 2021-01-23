@@ -41,6 +41,7 @@ from tensorflow_datasets.core.utils import type_utils as typing
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.read_config import ReadConfig
 from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
+from tensorflow_datasets.core.utils.tqdm_utils import enable_progress_bar
 from tensorflow_datasets.core.visualization import show_examples
 from tensorflow_datasets.core.visualization import show_statistics
 from tensorflow_datasets.version import __version__
@@ -63,6 +64,7 @@ __all__ = [
     "builder_cls",
     "decode",
     "disable_progress_bar",
+    "enable_progress_bar",
     "download",
     "even_splits",
     "features",

@@ -94,7 +94,7 @@ def async_tqdm(*args, **kwargs):
 
 
 def disable_progress_bar():
-  """Disabled Tqdm progress bar.
+  """Disables Tqdm progress bar.
 
   Usage:
 
@@ -104,6 +104,16 @@ def disable_progress_bar():
   global _active
   _active = False
 
+def enable_progress_bar():
+  """Enables Tqdm progress bar.
+
+  Usage:
+
+  tfds.enable_progress_bar()
+  """
+  # Replace tqdm
+  global _active
+  _active = True
 
 @contextlib.contextmanager
 def _async_tqdm(*args, **kwargs):
