@@ -158,6 +158,7 @@ class _TarFile(_ArchiveFile):
 
   def get_num_files(self) -> int:
     with _open_or_pass(self.arch_f) as fobj:
+      # Opened in stream mode since it is faster and we stream once
       tar = tarfile.open(fileobj=fobj, mode='r|*')
       num_files = sum(1 for member in tar if member.isfile())
       return num_files
@@ -241,14 +242,15 @@ class _ZipFile(_ArchiveFile):
 
 
 _EXTRACT_METHODS = {
-    resource_lib.ExtractMethod.BZIP2        : _Bzip2File,
-    resource_lib.ExtractMethod.GZIP         : _GzipFile,
-    resource_lib.ExtractMethod.TAR          : _TarFile,
-    resource_lib.ExtractMethod.TAR_GZ       : _TarFile,
+    resource_lib.ExtractMethod.BZIP2: _Bzip2File,
+    resource_lib.ExtractMethod.GZIP: _GzipFile,
+    resource_lib.ExtractMethod.TAR: _TarFile,
+    resource_lib.ExtractMethod.TAR_GZ: _TarFile,
     resource_lib.ExtractMethod.TAR_GZ_STREAM: _TarFile,
-    resource_lib.ExtractMethod.TAR_STREAM   : _TarFile,
-    resource_lib.ExtractMethod.ZIP          : _ZipFile,
+    resource_lib.ExtractMethod.TAR_STREAM: _TarFile,
+    resource_lib.ExtractMethod.ZIP: _ZipFile,
 }
+
 
 def _get_archive_file(
     path: utils.PathLike,
