@@ -192,52 +192,6 @@ class _TarFile(_ArchiveFile):
           yield (path, extract_file)
 
 
-def iter_tar(arch_f, stream=False):
-  """Iter over tar archive, yielding (path, object-like) tuples.
-
-  Args:
-    arch_f: File object of the archive to iterate.
-    stream: If True, open the archive in stream mode which allows for faster
-      processing and less temporary disk consumption, but random access to the
-      file is not allowed.
-
-  Yields:
-    (filepath, extracted_fobj) for each file in the archive.
-  """
-  read_type = 'r' + ('|' if stream else ':') + '*'
-
-  with _open_or_pass(arch_f) as fobj:
-    tar = tarfile.open(mode=read_type, fileobj=fobj)
-    for member in tar:
-      if stream and (member.islnk() or member.issym()):
-        # Links cannot be dereferenced in stream mode.
-        logging.warning('Skipping link during extraction: %s', member.name)
-        continue
-
-      try:
-        extract_file = tar.extractfile(member)
-      except KeyError:
-        if not (member.islnk() or member.issym()):
-          raise  # Forward exception non-link files which couldn't be extracted
-        # The link could not be extracted, which likely indicates a corrupted
-        # archive.
-        logging.warning(
-            'Skipping extraction of invalid link: %s -> %s',
-            member.name,
-            member.linkname,
-        )
-        continue
-
-      if extract_file:  # File with data (not directory):
-        path = _normpath(member.path)  # pytype: disable=attribute-error
-        if not path:
-          continue
-        yield (path, extract_file)
-
-
-def iter_tar_stream(arch_f):
-  return iter_tar(arch_f, stream=True)
-
 class _GzipFile(_ArchiveFile):
 
   def get_num_files(self) -> int:
@@ -247,11 +201,6 @@ class _GzipFile(_ArchiveFile):
     with _open_or_pass(self.arch_f) as fobj:
       gzip_ = gzip.GzipFile(fileobj=fobj)
       yield ('', gzip_)  # No inner file.
-
-def iter_gzip(arch_f):
-  with _open_or_pass(arch_f) as fobj:
-    gzip_ = gzip.GzipFile(fileobj=fobj)
-    yield ('', gzip_)  # No inner file.
 
 
 class _Bzip2File(_ArchiveFile):
@@ -263,11 +212,6 @@ class _Bzip2File(_ArchiveFile):
     with _open_or_pass(self.arch_f) as fobj:
       bz2_ = bz2.BZ2File(filename=fobj)
       yield ('', bz2_)  # No inner file.
-
-def iter_bzip2(arch_f):
-  with _open_or_pass(arch_f) as fobj:
-    bz2_ = bz2.BZ2File(filename=fobj)
-    yield ('', bz2_)  # No inner file.
 
 
 class _ZipFile(_ArchiveFile):
@@ -290,29 +234,6 @@ class _ZipFile(_ArchiveFile):
           continue
         yield (path, extract_file)
 
-def iter_zip(arch_f):
-  """Iterate over zip archive."""
-  with _open_or_pass(arch_f) as fobj:
-    z = zipfile.ZipFile(fobj)
-    for member in z.infolist():
-      extract_file = z.open(member)
-      if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
-        continue
-      path = _normpath(member.filename)
-      if not path:
-        continue
-      yield (path, extract_file)
-
-
-# _EXTRACT_METHODS = {
-#     resource_lib.ExtractMethod.BZIP2: iter_bzip2,
-#     resource_lib.ExtractMethod.GZIP: iter_gzip,
-#     resource_lib.ExtractMethod.TAR: iter_tar,
-#     resource_lib.ExtractMethod.TAR_GZ: iter_tar,
-#     resource_lib.ExtractMethod.TAR_GZ_STREAM: iter_tar_stream,
-#     resource_lib.ExtractMethod.TAR_STREAM: iter_tar_stream,
-#     resource_lib.ExtractMethod.ZIP: iter_zip,
-# }
 
 _EXTRACT_METHODS = {
     resource_lib.ExtractMethod.BZIP2        : _Bzip2File,
