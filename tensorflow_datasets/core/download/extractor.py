@@ -269,6 +269,26 @@ def iter_bzip2(arch_f):
     yield ('', bz2_)  # No inner file.
 
 
+class _ZipFile(_ArchiveFile):
+
+  def get_num_files(self) -> int:
+    with _open_or_pass(self.arch_f) as fobj:
+      z = zipfile.ZipFile(fobj)
+      num_files = sum(1 for member in z.infolist() if not member.is_dir())
+      return num_files
+
+  def get_iter(self):
+    with _open_or_pass(self.arch_f) as fobj:
+      z = zipfile.ZipFile(fobj)
+      for member in z.infolist():
+        extract_file = z.open(member)
+        if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
+          continue
+        path = _normpath(member.filename)
+        if not path:
+          continue
+        yield (path, extract_file)
+
 def iter_zip(arch_f):
   """Iterate over zip archive."""
   with _open_or_pass(arch_f) as fobj:
