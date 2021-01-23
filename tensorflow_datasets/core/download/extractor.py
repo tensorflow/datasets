@@ -151,6 +151,46 @@ class _ArchiveFile:
     raise NotImplementedError()
 
 
+class _TarFile(_ArchiveFile):
+
+  def get_num_files(self) -> int:
+    with _open_or_pass(self.arch_f) as fobj:
+      tar = tarfile.open(fileobj=fobj, mode='r|*')
+      num_files = sum(1 for member in tar if member.isfile())
+      return num_files
+
+  def get_iter(self, stream=False):
+    read_type = 'r' + ('|' if stream else ':') + '*'
+
+    with _open_or_pass(self.arch_f) as fobj:
+      tar = tarfile.open(mode=read_type, fileobj=fobj)
+      for member in tar:
+        if stream and (member.islnk() or member.issym()):
+          # Links cannot be dereferenced in stream mode.
+          logging.warning('Skipping link during extraction: %s', member.name)
+          continue
+
+        try:
+          extract_file = tar.extractfile(member)
+        except KeyError:
+          if not (member.islnk() or member.issym()):
+            raise  # Forward exception non-link files which couldn't be extracted
+          # The link could not be extracted, which likely indicates a corrupted
+          # archive.
+          logging.warning(
+              'Skipping extraction of invalid link: %s -> %s',
+              member.name,
+              member.linkname,
+          )
+          continue
+
+        if extract_file:  # File with data (not directory):
+          path = _normpath(member.path)  # pytype: disable=attribute-error
+          if not path:
+            continue
+          yield (path, extract_file)
+
+
 def iter_tar(arch_f, stream=False):
   """Iter over tar archive, yielding (path, object-like) tuples.
 
