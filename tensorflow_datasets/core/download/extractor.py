@@ -69,7 +69,6 @@ class _Extractor(object):
     """Returns `promise.Promise` => to_path."""
     path = os.fspath(path)
     to_path = os.fspath(to_path)
-    self._pbar_path.update_total(1)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
     future = self._executor.submit(
@@ -84,10 +83,13 @@ class _Extractor(object):
     path = None
     dst_path = None  # To avoid undefined variable if exception is raised
     try:
-      for path, handle in iter_archive(from_path, method):
+      archive_file = _get_archive_file(from_path, method)
+      self._pbar_path.update_total(archive_file.get_num_files())
+      for path, handle in archive_file.get_iter():
         path = tf.compat.as_text(path)
-        dst_path = path and os.path.join(to_path_tmp, path) or to_path_tmp
+        dst_path = os.path.join(to_path_tmp, path) if path else to_path_tmp
         _copy(handle, dst_path)
+        self._pbar_path.update(1)
     except BaseException as err:
       msg = 'Error while extracting {} to {} (file: {}) : {}'.format(
           from_path, to_path, path, err)
@@ -99,13 +101,12 @@ class _Extractor(object):
             'result in an error. See the doc to remove the limitation: '
             'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
         )
-      raise ExtractError(msg)
+      raise ExtractError(msg) from err
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
     if tf.io.gfile.exists(to_path):
       tf.io.gfile.rmtree(to_path)
     tf.io.gfile.rename(to_path_tmp, to_path)
-    self._pbar_path.update(1)
     return utils.as_path(to_path)
 
 
@@ -303,17 +304,17 @@ def iter_zip(arch_f):
       yield (path, extract_file)
 
 
-_EXTRACT_METHODS = {
-    resource_lib.ExtractMethod.BZIP2: iter_bzip2,
-    resource_lib.ExtractMethod.GZIP: iter_gzip,
-    resource_lib.ExtractMethod.TAR: iter_tar,
-    resource_lib.ExtractMethod.TAR_GZ: iter_tar,
-    resource_lib.ExtractMethod.TAR_GZ_STREAM: iter_tar_stream,
-    resource_lib.ExtractMethod.TAR_STREAM: iter_tar_stream,
-    resource_lib.ExtractMethod.ZIP: iter_zip,
-}
+# _EXTRACT_METHODS = {
+#     resource_lib.ExtractMethod.BZIP2: iter_bzip2,
+#     resource_lib.ExtractMethod.GZIP: iter_gzip,
+#     resource_lib.ExtractMethod.TAR: iter_tar,
+#     resource_lib.ExtractMethod.TAR_GZ: iter_tar,
+#     resource_lib.ExtractMethod.TAR_GZ_STREAM: iter_tar_stream,
+#     resource_lib.ExtractMethod.TAR_STREAM: iter_tar_stream,
+#     resource_lib.ExtractMethod.ZIP: iter_zip,
+# }
 
-_ARCHIVE_CLASS = {
+_EXTRACT_METHODS = {
     resource_lib.ExtractMethod.BZIP2        : _Bzip2File,
     resource_lib.ExtractMethod.GZIP         : _GzipFile,
     resource_lib.ExtractMethod.TAR          : _TarFile,
@@ -327,7 +328,7 @@ def _get_archive_file(
     path: utils.PathLike,
     method: resource_lib.ExtractMethod,
 ) -> _ArchiveFile:
-  return _ARCHIVE_CLASS[method](path)
+  return _EXTRACT_METHODS[method](path)
 
 
 def iter_archive(
