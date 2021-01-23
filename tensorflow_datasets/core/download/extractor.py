@@ -253,6 +253,16 @@ def iter_gzip(arch_f):
     yield ('', gzip_)  # No inner file.
 
 
+class _Bzip2File(_ArchiveFile):
+
+  def get_num_files(self) -> int:
+    return 1
+
+  def get_iter(self):
+    with _open_or_pass(self.arch_f) as fobj:
+      bz2_ = bz2.BZ2File(filename=fobj)
+      yield ('', bz2_)  # No inner file.
+
 def iter_bzip2(arch_f):
   with _open_or_pass(arch_f) as fobj:
     bz2_ = bz2.BZ2File(filename=fobj)
