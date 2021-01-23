@@ -237,6 +237,15 @@ def iter_tar(arch_f, stream=False):
 def iter_tar_stream(arch_f):
   return iter_tar(arch_f, stream=True)
 
+class _GzipFile(_ArchiveFile):
+
+  def get_num_files(self) -> int:
+    return 1
+
+  def get_iter(self):
+    with _open_or_pass(self.arch_f) as fobj:
+      gzip_ = gzip.GzipFile(fileobj=fobj)
+      yield ('', gzip_)  # No inner file.
 
 def iter_gzip(arch_f):
   with _open_or_pass(arch_f) as fobj:
