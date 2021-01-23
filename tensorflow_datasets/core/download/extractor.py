@@ -141,6 +141,7 @@ def _open_or_pass(path_or_fobj):
 
 
 class _ArchiveFile:
+  """Base class for common Archive file functionality"""
 
   def __init__(self, arch_f) -> None:
     self.arch_f = arch_f
@@ -153,6 +154,7 @@ class _ArchiveFile:
 
 
 class _TarFile(_ArchiveFile):
+  """ArchiveFile for tar files"""
 
   def get_num_files(self) -> int:
     with _open_or_pass(self.arch_f) as fobj:
@@ -193,6 +195,7 @@ class _TarFile(_ArchiveFile):
 
 
 class _GzipFile(_ArchiveFile):
+  """ArchiveFile for gzip(.gz) files"""
 
   def get_num_files(self) -> int:
     return 1
@@ -204,6 +207,7 @@ class _GzipFile(_ArchiveFile):
 
 
 class _Bzip2File(_ArchiveFile):
+  """ArchiveFile for bzip2(.bz2) files"""
 
   def get_num_files(self) -> int:
     return 1
@@ -215,6 +219,7 @@ class _Bzip2File(_ArchiveFile):
 
 
 class _ZipFile(_ArchiveFile):
+  """ArchiveFile for zip files"""
 
   def get_num_files(self) -> int:
     with _open_or_pass(self.arch_f) as fobj:
