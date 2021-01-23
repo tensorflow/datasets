@@ -347,4 +347,6 @@ def iter_archive(
     raise ValueError(
         f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.'
     )
-  return _EXTRACT_METHODS[method](path)  # pytype: disable=bad-return-type
+  archive_file  = _get_archive_file(path, method)
+  kwargs = {'stream': True} if method.name.endswith('STREAM') else {}
+  return archive_file.get_iter(**kwargs)
