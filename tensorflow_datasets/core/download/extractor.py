@@ -313,6 +313,22 @@ _EXTRACT_METHODS = {
     resource_lib.ExtractMethod.ZIP: iter_zip,
 }
 
+_ARCHIVE_CLASS = {
+    resource_lib.ExtractMethod.BZIP2        : _Bzip2File,
+    resource_lib.ExtractMethod.GZIP         : _GzipFile,
+    resource_lib.ExtractMethod.TAR          : _TarFile,
+    resource_lib.ExtractMethod.TAR_GZ       : _TarFile,
+    resource_lib.ExtractMethod.TAR_GZ_STREAM: _TarFile,
+    resource_lib.ExtractMethod.TAR_STREAM   : _TarFile,
+    resource_lib.ExtractMethod.ZIP          : _ZipFile,
+}
+
+def _get_archive_file(
+    path: utils.PathLike,
+    method: resource_lib.ExtractMethod,
+) -> _ArchiveFile:
+  return _ARCHIVE_CLASS[method](path)
+
 
 def iter_archive(
     path: utils.PathLike,
