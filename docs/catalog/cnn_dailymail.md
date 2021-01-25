@@ -27,14 +27,8 @@ each highlight, which is the target summary
 
 *   **Versions**:
 
-    *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
-    *   `2.0.0`: Separate target sentences with newline. (Having the model
-        predict newline separators makes it easier to evaluate using
-        summary-level ROUGE.)
-
-    *   `3.0.0`: Using cased version.
-
-    *   **`3.1.0`** (default): Removed BuilderConfig
+    *   **`3.1.0`** (default): Removed BuilderConfig from older versions which
+        are no longer supported.
 
 *   **Download size**: `558.32 MiB`
 
