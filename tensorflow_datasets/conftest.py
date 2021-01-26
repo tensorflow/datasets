@@ -54,6 +54,21 @@ def disable_community_datasets():
   ])
 
 
+# Register all fixtures defined in `setup_teardown` to be automatically
+# applied in all tests.
+global_dict = globals()
+for fixture_fn in setup_teardown.GLOBAL_FIXTURES:
+  fixture_name = fixture_fn.__name__
+  if fixture_name in global_dict:
+    raise ValueError(f'{fixture_name} already in module.')
+  fixture_fn = pytest.fixture(scope='session', autouse=True)(fixture_fn)
+  # In orders for fixtures to be registered, there need to be an explicit
+  # attribute
+  # https://stackoverflow.com/questions/27064004/splitting-a-conftest-py-file-into-several-smaller-conftest-like-parts/65035367#65035367
+  global_dict[fixture_name] = fixture_fn
+del global_dict  # Do not modifying global beyond this point
+
+
 # Fixtures globally available
 
 

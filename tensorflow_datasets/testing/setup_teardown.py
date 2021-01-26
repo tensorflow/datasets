@@ -26,3 +26,8 @@ from unittest import mock
 import tensorflow as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.testing import test_utils
+
+
+# Fixtures automatically applied for all tests (unittest and pytest)
+GLOBAL_FIXTURES = [
+]

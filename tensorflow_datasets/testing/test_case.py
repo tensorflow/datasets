@@ -42,19 +42,26 @@ class TestCase(tf.test.TestCase):
   `tmp_dir` attribute: path to temp directory reset before every test.
   """
 
+  # By default, tests globally applied fixture to disable GCS, Github API,...
+  # If set, do not apply the given global fixtures
+  DO_NOT_APPLY_FIXTURES = []
+
   @classmethod
   def setUpClass(cls):
     super(TestCase, cls).setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
+
+    # TODO(tfds): Should make this a fixture.
     # Test must not communicate with GCS.
     gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
     gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
 
-    # Apply the context managers
+    # Apply the global fixtures as context managers
     cls._setup_cls_cms = []
-    cms_to_apply = []
-    for cm in cms_to_apply:
-      cm = contextlib.contextmanager(cm)()
+    for fixture in setup_teardown.GLOBAL_FIXTURES:
+      if fixture in cls.DO_NOT_APPLY_FIXTURES:
+        continue
+      cm = contextlib.contextmanager(fixture)()
       cm.__enter__()
       cls._setup_cls_cms.append(cm)
 
