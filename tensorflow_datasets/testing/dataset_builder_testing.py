@@ -97,9 +97,9 @@ class DatasetBuilderTestCase(
 
     * VERSION: `str`. The version used to run the test. eg: '1.2.*'.
       Defaults to None (canonical version).
-    * BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs
-      that should be tested. If None, all the BUILDER_CONFIGS from the class
-      will be tested.
+    * BUILDER_CONFIG_NAMES_TO_TEST: `list[Union[str, tfds.BuilderConfig]]`,
+      the list of builder configs that should be tested. If None, all the
+      BUILDER_CONFIGS from the class will be tested.
     * DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
@@ -300,24 +300,23 @@ class DatasetBuilderTestCase(
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
     # If configs specified, ensure they are all valid
-    test_config_names = []  # extract names of all builder configs to test
-
+    configs_to_test = {}
     if self.BUILDER_CONFIG_NAMES_TO_TEST:
       for config in self.BUILDER_CONFIG_NAMES_TO_TEST:  # pylint: disable=not-an-iterable
         if isinstance(config, dataset_builder.BuilderConfig):
-          config = config.name
-        test_config_names.append(config)
-        assert config in self.builder.builder_configs, (
-            "Config %s specified in test does not exist. Available:\n%s" % (
-                config, list(self.builder.builder_configs)))
+          configs_to_test[config.name] = config
+        elif config in self.builder.builder_configs:
+          configs_to_test[config] = self.builder.builder_configs[config]
+        else:
+          raise AssertionError(f'Invalid config {config} specified in test.'
+                               f'Available: {list(self.builder.builder_configs)}')
 
     configs = self.builder.BUILDER_CONFIGS
     print("Total configs: %d" % len(configs))
     if configs:
       for config in configs:
         # Skip the configs that are not in the list.
-        if (len(test_config_names) > 0 and
-            (config.name not in test_config_names)):  # pylint: disable=unsupported-membership-test
+        if (len(configs_to_test) > 0 and config.name not in configs_to_test):  # pylint: disable=unsupported-membership-test
           print("Skipping config %s" % config.name)
           continue
         with self._subTest(config.name):
