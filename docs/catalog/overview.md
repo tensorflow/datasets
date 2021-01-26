@@ -285,6 +285,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`para_crawl`](para_crawl.md)
 *   [`ted_hrlr_translate`](ted_hrlr_translate.md)
 *   [`ted_multi_translate`](ted_multi_translate.md)
+*   [`wmt13_translate`](wmt13_translate.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wmt14_translate`](wmt14_translate.md)
 *   [`wmt15_translate`](wmt15_translate.md)
 *   [`wmt16_translate`](wmt16_translate.md)
