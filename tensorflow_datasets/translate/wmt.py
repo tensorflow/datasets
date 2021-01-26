@@ -234,6 +234,13 @@ _TRAIN_SUBSETS = [
         url="http://www.statmt.org/wmt13/training-parallel-un.tgz",
         path=("un/undoc.2000.{src}-en.{src}", "un/undoc.2000.{src}-en.en")),
     SubDataset(
+        name="newscommentary_v8",
+        target="en",
+        sources={"cs", "de", "fr", "es", "ru"},
+        url="http://www.statmt.org/wmt13/training-parallel-nc-v8.tgz",
+        path=("training/news-commentary-v8.{src}-en.{src}",
+              "training/news-commentary-v8.{src}-en.en")),
+    SubDataset(
         name="newscommentary_v9",
         target="en",
         sources={"cs", "de", "fr", "ru"},
@@ -356,7 +363,7 @@ _TRAIN_SUBSETS = [
         url="http://www.statmt.org/wmt14/wiki-titles.tgz",
         path="wiki/hi-en/wiki-titles.hi-en"),
     SubDataset(
-        # Verified that wmt14 and wmt15 files are identical.
+        # Verified that wmt13, wmt14 and wmt15 files are identical.
         name="wikiheadlines_ru",
         target="en",
         sources={"ru"},
