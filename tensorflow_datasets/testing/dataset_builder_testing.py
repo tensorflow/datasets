@@ -312,15 +312,15 @@ class DatasetBuilderTestCase(
                                f'Available: {list(self.builder.builder_configs)}')
 
     configs = self.builder.BUILDER_CONFIGS
-    print("Total configs: %d" % len(configs))
+    print(f"Total configs: {len(configs)}")
     if configs:
       for config in configs:
         # Skip the configs that are not in the list.
         if (len(configs_to_test) > 0 and config.name not in configs_to_test):  # pylint: disable=unsupported-membership-test
-          print("Skipping config %s" % config.name)
+          print(f"Skipping config {config.name}")
           continue
         with self._subTest(config.name):
-          print("Testing config %s" % config.name)
+          print(f"Testing config {config.name}")
           builder = self._make_builder(config=config)
           self._download_and_prepare_as_dataset(builder)
     else:
