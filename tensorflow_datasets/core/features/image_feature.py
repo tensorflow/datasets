@@ -385,31 +385,35 @@ def _get_and_validate_colormap(use_colormap, shape, encoding_format):
 
 
 @utils.memoize()
-def _get_colormap(cmap_size: int) -> np.ndarray:
+def _get_colormap(_: int) -> np.ndarray:
   """Generate cmap configuration"""
-  cmap_list = []
+  # cmap_list = []
   cmap_name = 'hsv'
   matplotlib = lazy_imports_lib.lazy_imports.matplotlib  # pylint: disable=invalid-name
 
-  # cmap returned in the rgba format
-  cmap = matplotlib.cm.get_cmap(cmap_name, cmap_size)
-  for itr in range(cmap_size):
-    cmap_list.append(cmap(itr))
+  # # cmap returned in the rgba format
+  # cmap = matplotlib.cm.get_cmap(cmap_name, cmap_size)
+  # for itr in range(cmap_size):
+  #   cmap_list.append(cmap(itr))
 
-  return cmap_list
-
+  # return cmap_list
+  return np.array(range(255*3)).reshape(255,3)
 
 def _apply_colormap(image: np.ndarray) -> np.ndarray:
   """Apply colormap to 1D images"""
   image = image.squeeze(axis=-1)
-  unique_pixels = np.unique(image)
-  colors = _get_colormap(len(unique_pixels))
-  blank_image = np.zeros(shape=(*image.shape[:2], 3), dtype=np.uint8)
+  cmap = _get_colormap(1)
+  return cmap[image]
 
-  for itr, value in enumerate(unique_pixels):
-    indices = np.where(image == value)
-    colr = colors[itr]
+  # image = image.squeeze(axis=-1)
+  # unique_pixels = np.unique(image)
+  # colors = _get_colormap(len(unique_pixels))
+  # blank_image = np.zeros(shape=(*image.shape[:2], 3), dtype=np.uint8)
 
-    blank_image[indices] = colr
+  # for itr, value in enumerate(unique_pixels):
+  #   indices = np.where(image == value)
+  #   colr = colors[itr]
 
-  return blank_image * 255
+  #   blank_image[indices] = colr
+
+  # return blank_image * 255

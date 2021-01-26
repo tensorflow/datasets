@@ -12,10 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 """Tests for tensorflow_datasets.core.features.image_feature."""
 
 import os
 import pathlib
+from tensorflow_datasets.core.features.image_feature import _apply_colormap
 
 from absl.testing import parameterized
 import numpy as np
@@ -24,6 +26,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
 
 tf.enable_v2_behavior()
+
 
 randint = np.random.randint
 
@@ -116,9 +119,7 @@ class ImageFeatureTest(
 
     self.assertFeature(
         # Image with statically defined shape
-        feature=features_lib.Image(
-            shape=(32, 64, 3), encoding_format='png', use_colormap=False
-        ),
+        feature=features_lib.Image(shape=(32, 64, 3), encoding_format='png'),
         shape=(32, 64, 3),
         dtype=tf.uint8,
         tests=[
@@ -136,6 +137,11 @@ class ImageFeatureTest(
         test_attributes=dict(_encoding_format='png')
     )
 
+  def test_apply_colormap(self):
+    img = randint(255, size=(32, 64, 1), dtype=np.uint8)
+    colored_img = _apply_colormap(img)
+    # will change to testing array_equal when colormap is patched
+    assert colored_img.shape[-1] == 3
 
 if __name__ == '__main__':
   testing.test_main()
