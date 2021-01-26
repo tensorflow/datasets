@@ -23,9 +23,11 @@ import itertools
 import numbers
 import os
 import textwrap
+import types
 from typing import Iterator
 from unittest import mock
 
+from absl import logging
 from absl.testing import parameterized
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -118,6 +120,7 @@ class DatasetBuilderTestCase(
       recommended `tf.io.gfile` API.
     * SKIP_CHECKSUMS: Checks that the urls called by `dl_manager.download`
       are registered.
+    * SKIP_TF1_GRAPH_MODE: Runs in eager mode only.
 
   This test case will check for the following:
 
@@ -143,6 +146,7 @@ class DatasetBuilderTestCase(
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
   SKIP_CHECKSUMS = False
+  SKIP_TF1_GRAPH_MODE = False
 
   @classmethod
   def setUpClass(cls):
@@ -299,6 +303,9 @@ class DatasetBuilderTestCase(
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
+    if not tf.executing_eagerly() and self.SKIP_TF1_GRAPH_MODE:
+      logging.warning("Skipping tests in non-eager mode")
+      return
     # If configs specified, ensure they are all valid
     if self.BUILDER_CONFIG_NAMES_TO_TEST:
       for config in self.BUILDER_CONFIG_NAMES_TO_TEST:  # pylint: disable=not-an-iterable
@@ -451,13 +458,14 @@ class DatasetBuilderTestCase(
     split_to_checksums = {}  # {"split": set(examples_checksums)}
     for split_name, expected_examples_number in self.SPLITS.items():
       ds = builder.as_dataset(split=split_name)
+      spec = tf.data.DatasetSpec.from_value(ds)
       compare_shapes_and_types(
           builder.info.features.get_tensor_info(),
-          tf.compat.v1.data.get_output_types(ds),
-          tf.compat.v1.data.get_output_shapes(ds),
+          # We use _element_spec because element_spec was added in TF2.5+.
+          element_spec=spec._element_spec,  # pylint: disable=protected-access
       )
-      examples = list(dataset_utils.as_numpy(
-          builder.as_dataset(split=split_name)))
+      examples = list(
+          dataset_utils.as_numpy(builder.as_dataset(split=split_name)))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
       self.assertLen(examples, expected_examples_number)
     for (split1, hashes1), (split2, hashes2) in itertools.combinations(
@@ -538,6 +546,9 @@ def checksum(example):
         flat_str.append(str(list(element.ravel())))
       else:
         flat_str.append(element.tobytes())
+    elif isinstance(element, types.GeneratorType):
+      for nested_e in element:
+        _bytes_flatten(flat_str, nested_e)
     else:
       flat_str.append(bytes(element))
     return flat_str
@@ -554,19 +565,20 @@ def checksum(example):
   return hash_.hexdigest()
 
 
-def compare_shapes_and_types(tensor_info, output_types, output_shapes):
+def compare_shapes_and_types(tensor_info, element_spec):
   """Compare shapes and types between TensorInfo and Dataset types/shapes."""
-  for feature_name, feature_info in tensor_info.items():
-    if isinstance(feature_info, dict):
-      compare_shapes_and_types(feature_info, output_types[feature_name],
-                               output_shapes[feature_name])
+  for feature_name, (feature_info,
+                     spec) in utils.zip_dict(tensor_info, element_spec):
+    if isinstance(spec, tf.data.DatasetSpec):
+      # We use _element_spec because element_spec was added in TF2.5+.
+      compare_shapes_and_types(feature_info, spec._element_spec)  # pylint: disable=protected-access
+    elif isinstance(feature_info, dict):
+      compare_shapes_and_types(feature_info, spec)
     else:
-      expected_type = feature_info.dtype
-      output_type = output_types[feature_name]
-      if expected_type != output_type:
-        raise TypeError("Feature %s has type %s but expected %s" %
-                        (feature_name, output_type, expected_type))
-
-      expected_shape = feature_info.shape
-      output_shape = output_shapes[feature_name]
-      utils.assert_shape_match(expected_shape, output_shape)
+      # Some earlier versions of TF don't expose dtype and shape for the
+      # RaggedTensorSpec, so we use the protected versions.
+      if feature_info.dtype != spec._dtype:  # pylint: disable=protected-access
+        raise TypeError(
+            f"Feature {feature_name} has type {feature_info} but expected {spec}"
+        )
+      utils.assert_shape_match(feature_info.shape, spec._shape)  # pylint: disable=protected-access

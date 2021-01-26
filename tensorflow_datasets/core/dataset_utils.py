@@ -64,12 +64,18 @@ class _IterableDataset(collections.abc.Iterable):
     return self._make_iterator_fn()
 
 
+def _eager_dataset_element_to_numpy(
+    t: Any) -> Union[NumpyElem, Iterator[NumpyElem]]:
+  if isinstance(t, tf.RaggedTensor):
+    return t
+  if isinstance(t, tf.data.Dataset):
+    return _eager_dataset_iterator(t)
+  return t.numpy()
+
+
 def _eager_dataset_iterator(ds: tf.data.Dataset) -> Iterator[NumpyElem]:
   for elem in ds:
-    yield tf.nest.map_structure(
-        lambda t: t if isinstance(t, tf.RaggedTensor) else t.numpy(),
-        elem
-    )
+    yield tf.nest.map_structure(_eager_dataset_element_to_numpy, elem)
 
 
 def _graph_dataset_iterator(ds_iter, graph: tf.Graph) -> Iterator[NumpyElem]:
