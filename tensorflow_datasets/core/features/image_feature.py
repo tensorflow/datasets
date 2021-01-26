@@ -44,13 +44,6 @@ _ACCEPTABLE_DTYPES = {
     'jpeg': [tf.uint8],
 }
 
-_COLORS = [
-    '#AA0DFE', '#3283FE', '#85660D', '#782AB6', '#565656', '#1C8356', '#16FF32',
-    '#F7E1A0', '#E2E2E2', '#1CBE4F', '#C4451C', '#DEA0FD', '#FE00FA', '#325A9B',
-    '#FEAF16', '#F8A19F', '#90AD1C', '#F6222E', '#1CFFCE', '#2ED9FF', '#B10DA1',
-    '#C075A6', '#FC1CBF', '#B00068', '#FBE426', '#FA0087'
-]
-
 THUMBNAIL_SIZE = 128
 
 # Framerate for the `tfds.as_dataframe` visualization
@@ -244,10 +237,9 @@ def _create_thumbnail(ex: np.ndarray, use_colormap: bool) -> PilImage:
   if c == 1:
     if use_colormap:
       mode = None
-      image_with_colormap = _apply_colormap(ex)
-      ex = image_with_colormap * 255
-
-    mode = 'L'
+      ex = _apply_colormap(ex)
+    else:
+      mode = 'L'
   elif ex.dtype == np.uint16:
     mode = 'I;16'
     postprocess = _postprocess_convert_rgb
@@ -382,13 +374,7 @@ def _get_and_validate_shape(shape, encoding_format):
 
 def _get_and_validate_colormap(use_colormap, shape, encoding_format):
   """Update the shape."""
-  acceptable_colormaps = [True, False]
-  if use_colormap not in acceptable_colormaps:
-    return ValueError(
-        'Invalid `use_colormap` choice.',
-        f'Available types: {acceptable_colormaps}. (was {use_colormap})'
-    )
-  if encoding_format and encoding_format != 'png':
+  if use_colormap and encoding_format and encoding_format != 'png':
     raise ValueError(
         f'Colormap is only available for PNG images. Not {encoding_format}'
     )
@@ -398,24 +384,32 @@ def _get_and_validate_colormap(use_colormap, shape, encoding_format):
   return use_colormap
 
 
-def _apply_colormap(image: np.ndarray) -> np.ndarray:
-  """Apply colormap to 1D images"""
+@utils.memoize()
+def _get_colormap(cmap_size: int) -> np.ndarray:
+  """Generate cmap configuration"""
+  cmap_list = []
+  cmap_name = 'hsv'
   matplotlib = lazy_imports_lib.lazy_imports.matplotlib  # pylint: disable=invalid-name
 
-  colors = _COLORS
+  # cmap returned in the rgba format
+  cmap = matplotlib.cm.get_cmap(cmap_name, cmap_size)
+  for itr in range(cmap_size):
+    cmap_list.append(cmap(itr))
+
+  return cmap_list
+
+
+def _apply_colormap(image: np.ndarray) -> np.ndarray:
+  """Apply colormap to 1D images"""
   image = image.squeeze(axis=-1)
   unique_pixels = np.unique(image)
-  blank_image = np.ones(shape=(*image.shape[:2], 3))
+  colors = _get_colormap(len(unique_pixels))
+  blank_image = np.zeros(shape=(*image.shape[:2], 3), dtype=np.uint8)
 
-  for value in unique_pixels:
+  for itr, value in enumerate(unique_pixels):
     indices = np.where(image == value)
-    if value < len(colors):
-      colr = matplotlib.colors.to_rgb(colors[value])
-    else:
-      factor = value // len(colors)
-      colr_idx = value - (int(factor) * len(colors))
-      colr = matplotlib.colors.to_rgb(colors[colr_idx])
+    colr = colors[itr]
 
     blank_image[indices] = colr
 
-  return blank_image
+  return blank_image * 255
