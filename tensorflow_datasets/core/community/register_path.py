@@ -100,10 +100,11 @@ class DataDirRegister(register_base.BaseRegister):
       self, name: utils.DatasetName, **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
-    if 'data_dir' in builder_kwargs:
+    data_dir = builder_kwargs.get('data_dir')
+    if data_dir:
       raise ValueError(
           '`data_dir` cannot be set for data_dir-based community datasets. '
-          'Dataset should already be generated.'
+          f'Dataset should already be generated. Got: {data_dir}'
       )
     if name.namespace is None:
       raise AssertionError(f'No namespace found: {name}')
