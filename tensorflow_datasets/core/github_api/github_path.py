@@ -325,6 +325,30 @@ class GithubPath(pathlib.PurePosixPath):
     """Returns the file content as string."""
     return self.read_bytes().decode(encoding=encoding or 'utf-8')
 
+  def copy(
+      self,
+      dst: utils.PathLike,
+      overwrite: bool = False,
+  ) -> utils.ReadWritePath:
+    """Copy the current file to the given destination.
+
+    Args:
+      dst: Target file. It can be any PathLike compatible path (e.g. `gs://...`)
+      overwrite: Whether the file should be overwritten or not
+
+    Returns:
+      The new created file.
+
+    Raises:
+      FileExistsError: If `overwrite` is false and destination exists.
+    """
+    dst = utils.as_path(dst)
+    if not overwrite and dst.exists():
+      raise FileExistsError(f'Cannot copy {self}. Destination {dst} exists.')
+    # Otherwise, copy src to dst
+    dst.write_bytes(self.read_bytes())
+    return dst
+
 
 def _parse_github_path(path: str) -> Tuple[str, str, str]:
   """Parse the absolute github path.
