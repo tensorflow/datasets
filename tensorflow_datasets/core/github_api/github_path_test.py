@@ -107,6 +107,13 @@ def test_github_path_purepath():
   assert p == github_path.GithubPath.from_repo('tensorflow/datasets')
 
 
+def test_github_path_as_url():
+  p = github_path.GithubPath.from_repo('tensorflow/datasets', 'v3.1.0')
+  p /= 'README.md'
+  expected = 'https://raw.githubusercontent.com/tensorflow/datasets/v3.1.0/README.md'
+  assert p.as_raw_url() == expected
+
+
 @non_hermetic_test
 def test_github_api_listdir():
   """Test query github API."""

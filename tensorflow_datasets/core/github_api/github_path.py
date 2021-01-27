@@ -279,6 +279,13 @@ class GithubPath(pathlib.PurePosixPath):
     """The branch (e.g. `master`, `v2`, `43bbad116df`,...)."""
     return self._metadata.branch
 
+  def as_raw_url(self) -> str:
+    """Returns the raw content url (https://raw.githubusercontent.com)."""
+    return (
+        'https://raw.githubusercontent.com/'
+        f'{self.repo}/{self.branch}/{self.subpath}'
+    )
+
   def iterdir(self) -> Iterator['GithubPath']:
     """Yields the sub-paths."""
     for filename in self._metadata.listdir():
