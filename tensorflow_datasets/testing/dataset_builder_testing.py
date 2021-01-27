@@ -24,7 +24,7 @@ import numbers
 import os
 import textwrap
 import types
-from typing import Iterator
+from typing import Iterator, List, Optional, Union
 from unittest import mock
 
 from absl import logging
@@ -99,6 +99,9 @@ class DatasetBuilderTestCase(
 
     * VERSION: `str`. The version used to run the test. eg: '1.2.*'.
       Defaults to None (canonical version).
+    * BUILDER_CONFIG_NAMES_TO_TEST: `list[str | tfds.core.BuilderConfig]`,
+      the list of builder configs that should be tested. If None, all the
+      BUILDER_CONFIGS from the class will be tested.
     * BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs
       that should be tested. If None, all the BUILDER_CONFIGS from the class
       will be tested.
@@ -139,7 +142,9 @@ class DatasetBuilderTestCase(
 
   DATASET_CLASS = None
   VERSION = None
-  BUILDER_CONFIG_NAMES_TO_TEST = None
+  BUILDER_CONFIG_NAMES_TO_TEST: Optional[List[
+      Union[str, dataset_builder.BuilderConfig]
+  ]] = None
   DL_EXTRACT_RESULT = None
   DL_DOWNLOAD_RESULT = None
   EXAMPLE_DIR = None
@@ -306,24 +311,28 @@ class DatasetBuilderTestCase(
     if not tf.executing_eagerly() and self.SKIP_TF1_GRAPH_MODE:
       logging.warning("Skipping tests in non-eager mode")
       return
-    # If configs specified, ensure they are all valid
+
+    # Extract configs to test
+    configs_to_test = []
     if self.BUILDER_CONFIG_NAMES_TO_TEST:
       for config in self.BUILDER_CONFIG_NAMES_TO_TEST:  # pylint: disable=not-an-iterable
-        assert config in self.builder.builder_configs, (
-            "Config %s specified in test does not exist. Available:\n%s" % (
-                config, list(self.builder.builder_configs)))
+        if isinstance(config, dataset_builder.BuilderConfig):
+          configs_to_test.append(config)
+        elif config in self.builder.builder_configs:
+          configs_to_test.append(self.builder.builder_configs[config])
+        else:
+          raise ValueError(
+              f"Invalid config {config} specified in test."
+              f"Available: {list(self.builder.builder_configs)}"
+          )
+    else:
+      configs_to_test.extend(self.builder.BUILDER_CONFIGS)
 
-    configs = self.builder.BUILDER_CONFIGS
-    print("Total configs: %d" % len(configs))
-    if configs:
-      for config in configs:
-        # Skip the configs that are not in the list.
-        if (self.BUILDER_CONFIG_NAMES_TO_TEST is not None and
-            (config.name not in self.BUILDER_CONFIG_NAMES_TO_TEST)):  # pylint: disable=unsupported-membership-test
-          print("Skipping config %s" % config.name)
-          continue
+    print(f"Total configs: {len(configs_to_test)}")
+    if configs_to_test:
+      for config in configs_to_test:
         with self._subTest(config.name):
-          print("Testing config %s" % config.name)
+          print(f"Testing config {config.name}")
           builder = self._make_builder(config=config)
           self._download_and_prepare_as_dataset(builder)
     else:
