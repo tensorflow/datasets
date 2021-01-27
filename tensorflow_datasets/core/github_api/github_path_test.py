@@ -17,6 +17,7 @@
 
 import contextlib
 import os
+import textwrap
 from unittest import mock
 
 import pytest
@@ -188,6 +189,39 @@ def test_github_api_exists():
   # Recreating a new Path reuse the cache
   assert (core.parent.parent / 'README.md').is_file()
   assert (core.parent.parent / 'README.md')._metadata is readme._metadata
+
+
+@non_hermetic_test
+def test_github_api_read_bytes_text():
+  """Test query github API file content."""
+  p = github_path.GithubPath.from_repo('tensorflow/datasets', 'v3.1.0')
+
+  expected_content = textwrap.dedent(
+      """\
+      # This is the list of TensorFlow Datasets authors for copyright purposes.
+      #
+      # This does not necessarily list everyone who has contributed code, since in
+      # some cases, their employer may be the copyright holder.  To see the full list
+      # of contributors, see the revision history in source control.
+
+      Google Inc.
+      """
+  )
+
+  # Note: This is not wrapped inside `enable_api_call` contextmanager as
+  # users need to download files without setting up an API token.
+
+  content = (p / 'AUTHORS').read_bytes()
+  assert isinstance(content, bytes)
+  assert content == expected_content.encode()
+
+  content = (p / 'AUTHORS').read_text()
+  assert isinstance(content, str)
+  assert content == expected_content
+
+  # Cannot read the content of a directory.
+  with pytest.raises(FileNotFoundError, match='Request failed'):
+    (p / 'tensorflow_datasets' / 'core').read_bytes()
 
 
 def test_assert_no_api_call():

@@ -303,6 +303,28 @@ class GithubPath(pathlib.PurePosixPath):
     """Returns True if the path exists."""
     return self._metadata.exists()
 
+  def read_bytes(self) -> bytes:
+    """Returns the file content as bytes."""
+    # As the content is fetched during the Github API calls, we could cache it
+    # and return it directly here, rather than using an additional query.
+    # However this might have significant memory impact if many `GithubPath`
+    # are used, so would require some additional cleanup (weakref ?).
+    # Using raw_url doesn't count in the API calls quota and should works with
+    # arbitrary sized files.
+    url = self.as_raw_url()
+    resp = requests.get(url)
+    if resp.status_code != 200:
+      raise FileNotFoundError(
+          f'Request failed for {url}\n'
+          f' Error: {resp.status_code}\n'
+          f' Reason: {resp.content}'
+      )
+    return resp.content
+
+  def read_text(self, encoding: Optional[str] = None) -> str:
+    """Returns the file content as string."""
+    return self.read_bytes().decode(encoding=encoding or 'utf-8')
+
 
 def _parse_github_path(path: str) -> Tuple[str, str, str]:
   """Parse the absolute github path.
