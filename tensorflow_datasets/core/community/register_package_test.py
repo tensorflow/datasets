@@ -17,6 +17,7 @@
 
 import contextlib
 import datetime
+import json
 import os
 import pathlib
 import sys
@@ -31,6 +32,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import cache
+from tensorflow_datasets.core.community import dataset_sources
 from tensorflow_datasets.core.community import register_package
 
 
@@ -56,14 +58,25 @@ def dummy_register():
   with tempfile.TemporaryDirectory() as tmp_path:
     tmp_path = pathlib.Path(tmp_path)
 
+    source_path = utils.tfds_path() / 'testing/dummy_dataset/dummy_dataset.py'
+
+    # Single-file dataset package (without checksums)
+    src_single = dataset_sources.DatasetSource.from_json(os.fspath(source_path))
+
+    # Multi-file dataset package (with checksums)
+    src_multi = dataset_sources.DatasetSource.from_json({
+        'root_path': os.fspath(source_path.parent),
+        'filenames': ['checksums.tsv', 'dummy_dataset.py'],
+    })
+    src_multi_json = json.dumps(src_multi.to_json())  # `dict` -> `str`
+
     # Create the remote index content
-    source_path = utils.tfds_path() / 'testing/dummy_dataset'
-    source_str = os.fspath(source_path)
+    # Note the absence of `"` for the `src_multi_json` as it is parsed as `dict`
     content = textwrap.dedent(
         f"""\
-        {{"name": "kaggle:ds0", "source": "{source_str}"}}
-        {{"name": "kaggle:ds1", "source": "{source_str}"}}
-        {{"name": "mlds:ds0", "source": "{source_str}"}}
+        {{"name": "kaggle:dummy_dataset", "source": "{src_single.to_json()}"}}
+        {{"name": "kaggle:ds1", "source": "{src_single.to_json()}"}}
+        {{"name": "mlds:dummy_dataset", "source": {src_multi_json}}}
         """
     )
     dummy_path = tmp_path / 'dummy-community-datasets.toml'
@@ -76,21 +89,23 @@ def dummy_register():
 def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
 
   # The dataset will be installed in the cache
-  installed_path = cache.cache_path() / 'modules/tfds_community/kaggle/ds0'
-
+  installed_path = cache.cache_path()
+  installed_path /= 'modules/tfds_community/kaggle/dummy_dataset'
   assert not installed_path.exists()
 
-  builder_cls = dummy_register.builder_cls(utils.DatasetName('kaggle:ds0'))
+  ds_name = utils.DatasetName('kaggle:dummy_dataset')
+  builder_cls = dummy_register.builder_cls(ds_name)
   assert builder_cls.name == 'dummy_dataset'
+
+  clshash = '1de59094bbe913e9a95aa0cff6f46bc06d813bd5c288eac34950b473e4ef199c'
+  assert installed_path / f'{clshash}/dummy_dataset.py' == builder_cls.code_path
   assert 'kaggle' in builder_cls.code_path.parts
   assert issubclass(builder_cls, dataset_builder.DatasetBuilder)
+  assert not builder_cls.url_infos  # No checksums installed with the package
 
   # Dataset installed in the cache
   # Filename should be deterministic
-  assert list(sorted(installed_path.iterdir())) == [
-      installed_path /
-      '1de59094bbe913e9a95aa0cff6f46bc06d813bd5c288eac34950b473e4ef199c',
-  ]
+  assert list(sorted(installed_path.iterdir())) == [installed_path / clshash]
 
   # Reusing the dataset should re-use the cache
   with mock.patch.object(
@@ -98,13 +113,17 @@ def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
       '_download_and_cache',
       side_effect=ValueError('Dataset should have been cached already')
   ):
-    builder_cls2 = dummy_register.builder_cls(utils.DatasetName('kaggle:ds0'))
+    ds_name = utils.DatasetName('kaggle:dummy_dataset')
+    builder_cls2 = dummy_register.builder_cls(ds_name)
   assert builder_cls is builder_cls2
 
   # Datasets from different namespace can have the same name
-  builder_cls = dummy_register.builder_cls(utils.DatasetName('mlds:ds0'))
+  ds_name = utils.DatasetName('mlds:dummy_dataset')
+  builder_cls = dummy_register.builder_cls(ds_name)
   assert 'mlds' in builder_cls.code_path.parts
   assert issubclass(builder_cls, dataset_builder.DatasetBuilder)
+  # Checksums have been correctly installed
+  assert 'http://dummy.org/data.txt' in builder_cls.url_infos
 
   with pytest.raises(registered.DatasetNotFoundError):
     dummy_register.builder(utils.DatasetName('other:ds0'))
@@ -112,9 +131,9 @@ def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
 
 def test_register_path_list_builders(dummy_register):  # pylint: disable=redefined-outer-name
   assert dummy_register.list_builders() == [
-      'kaggle:ds0',
       'kaggle:ds1',
-      'mlds:ds0',
+      'kaggle:dummy_dataset',
+      'mlds:dummy_dataset',
   ]
 
 
@@ -122,13 +141,14 @@ def test_dataset_package():
   """Exports/imports operation should be identity."""
   pkg = register_package._DatasetPackage(
       name=utils.DatasetName('ns:ds'),
-      source='github://...',
+      source=dataset_sources.DatasetSource.from_json(
+          'github://<owner>/<name>/tree/<branch>/my_ds/ds.py',
+      ),
   )
   assert register_package._DatasetPackage.from_json(pkg.to_json()) == pkg
 
   pkg2 = register_package._InstalledPackage(
       package=pkg,
-      filestem='dummy_dataset',
       instalation_date=datetime.datetime.now(),
       hash='asdajhdadsadsad',
   )

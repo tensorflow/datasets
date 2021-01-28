@@ -15,35 +15,67 @@
 
 """Utils to download locally dataset code source stored remotelly."""
 
+import os
+from typing import List
+import dataclasses
+
 from tensorflow_datasets.core import utils
 
 
-def download_from_uri(uri: str, dst: utils.ReadWritePath) -> str:
+@dataclasses.dataclass(frozen=True, eq=True)
+class DatasetSource:
+  """Structure containing information required to fetch a dataset.
+
+  Attributes:
+    root_path: Root directory of the dataset package (e.g.
+      `gs://.../my_dataset/`, `github://.../my_dataset/`)
+    filenames: Content of the dataset package
+  """
+  root_path: utils.ReadWritePath
+  filenames: List[str]
+
+  @classmethod
+  def from_json(cls, value: utils.JsonValue) -> 'DatasetSource':
+    """Imports from JSON."""
+    if isinstance(value, str):  # Single-file dataset ('.../my_dataset.py')
+      path = utils.as_path(value)
+      return cls(root_path=path.parent, filenames=[path.name])
+    elif isinstance(value, dict):  # Multi-file dataset
+      return cls(
+          root_path=utils.as_path(value['root_path']),
+          filenames=value['filenames'],
+      )
+    else:
+      raise ValueError(f'Invalid input: {value}')
+
+  def to_json(self) -> utils.JsonValue:
+    """Exports to JSON."""
+    if len(self.filenames) == 1:
+      return os.fspath(self.root_path / self.filenames[0])
+    else:
+      return {
+          'root_path': os.fspath(self.root_path),
+          'filenames': self.filenames
+      }
+
+
+def download_from_source(
+    source: DatasetSource,
+    dst: utils.ReadWritePath,
+) -> None:
   """Download the remote dataset code locally to the dst path.
 
   Args:
-    uri: Source of the dataset. Can be:
-        * A local/GCS path (e.g. `gs://bucket/datasets/my_dataset/`)
-        * A github source
+    source: Source of the dataset.
     dst: Empty directory on which copying the source
-
-  Returns:
-    The module mame of the package.
   """
-  if uri.startswith('github://'):
-    raise NotImplementedError('Github sources not supported yet')
-
-  path = utils.as_path(uri)
-  if not path.exists():
-    raise ValueError(f'Unsuported source: {uri}')
-
-  # Download the main file
-  python_module = path / f'{path.name}.py'
-  python_module.copy(dst / python_module.name)
-
-  # TODO(tfds): Should also support download on the extra files (e.g. label.txt,
-  # util module,...)
+  # Download the files
+  # Note: We do not check for file existance before copying/downloading it to
+  # not trigger unecessary queries when `source.root_path` is `GithubPath`.
+  # A `FileNotFoundError` is triggered if the file can't be downloaded.
+  for filename in source.filenames:
+    path = source.root_path / filename
+    path.copy(dst / path.name)
 
   # Add the `__init__` file
   (dst / '__init__.py').write_text('')
-  return python_module.stem

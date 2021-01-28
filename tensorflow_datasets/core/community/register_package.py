@@ -49,10 +49,10 @@ class _DatasetPackage:
 
   Attributes:
     name: Dataset name
-    source: Source URI to locate of the source code (e.g. `github://...`)
+    source: Source to locate of the source code (e.g. `github://...`)
   """
   name: utils.DatasetName
-  source: str
+  source: dataset_sources_lib.DatasetSource
   # Ideally, we should also save the version so `tfds.load('ns:ds/1.0.0')`
   # fetch a specific version (e.g. at an older commit).
 
@@ -61,14 +61,14 @@ class _DatasetPackage:
     """Factory which creates the cls from json."""
     return cls(
         name=utils.DatasetName(data['name']),
-        source=data['source'],
+        source=dataset_sources_lib.DatasetSource.from_json(data['source']),
     )
 
   def to_json(self) -> utils.Json:
     """Exports the cls as json."""
     return {
         'name': str(self.name),
-        'source': self.source,
+        'source': self.source.to_json(),
     }
 
 
@@ -81,12 +81,10 @@ class _InstalledPackage:
 
   Attributes:
     package: Source of the dataset package.
-    filestem: Python filename stem containing the dataset
     instalation_date: Date of installation of the package
     hash: base64 checksum of the installed files
   """
   package: _DatasetPackage
-  filestem: str
   instalation_date: datetime.datetime
   hash: str
 
@@ -94,7 +92,7 @@ class _InstalledPackage:
   def module_name(self) -> str:
     """Module name to import this dataset."""
     name = self.package.name
-    return f'{_IMPORT_MODULE_NAME}.{name.namespace}.{name.name}.{self.hash}.{self.filestem}'
+    return f'{_IMPORT_MODULE_NAME}.{name.namespace}.{name.name}.{self.hash}.{name.name}'
 
   @property
   def installation_path(self) -> utils.ReadWritePath:
@@ -107,8 +105,7 @@ class _InstalledPackage:
   def from_json(cls, data: utils.Json) -> '_InstalledPackage':
     """Factory which creates the cls from json."""
     return cls(
-        package=_DatasetPackage.from_json(data['source']),
-        filestem=data['filestem'],
+        package=_DatasetPackage.from_json(data['package']),
         # TODO(py3.7): Should use `datetime.fromisoformat`
         instalation_date=datetime.datetime.strptime(
             data['instalation_date'], '%Y-%m-%dT%H:%M:%S.%f'
@@ -119,8 +116,7 @@ class _InstalledPackage:
   def to_json(self) -> utils.Json:
     """Exports the cls as json."""
     return {
-        'source': self.package.to_json(),
-        'filestem': self.filestem,
+        'package': self.package.to_json(),
         'instalation_date': self.instalation_date.isoformat(),
         'hash': self.hash,
     }
@@ -305,7 +301,7 @@ def _download_or_reuse_cache(
         f'{len(package_index)} datasets of the community index.'
     )
 
-  # If source was found, download it.
+  # If package was found, download it.
   installed_package = _download_and_cache(package)
   return installed_package
 
@@ -353,7 +349,10 @@ def _download_and_cache(package: _DatasetPackage) -> _InstalledPackage:
   tmp_dir = utils.as_path(tempfile.mkdtemp())
   try:
     # Download the package in a tmp directory
-    module_name = dataset_sources_lib.download_from_uri(package.source, tmp_dir)
+    dataset_sources_lib.download_from_source(
+        package.source,
+        tmp_dir,
+    )
 
     # Compute the package hash (to install the dataset in a unique dir)
     package_hash = _compute_dir_hash(tmp_dir)
@@ -361,7 +360,6 @@ def _download_and_cache(package: _DatasetPackage) -> _InstalledPackage:
     # Add package metadata
     installed_package = _InstalledPackage(
         package=package,
-        filestem=module_name,
         instalation_date=datetime.datetime.now(),
         hash=package_hash,
     )
