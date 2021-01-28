@@ -188,6 +188,7 @@ setup(
     packages=find_packages(),
     package_data={
         'tensorflow_datasets': DATASET_FILES + [
+            'core/features/colormap.csv',
             'scripts/documentation/templates/*',
             'url_checksums/*',
             'checksums.tsv',

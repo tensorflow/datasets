@@ -133,7 +133,10 @@ class Davis(tfds.core.GeneratorBasedBuilder):
                     'frames':
                         tfds.features.Image(shape=(None, None, 3)),
                     'segmentations':
-                        tfds.features.Image(shape=(None, None, 1)),
+                        tfds.features.Image(
+                            shape=(None, None, 1),
+                            use_colormap=True,
+                        ),
                 }),
             'metadata': {
                 'num_frames': tf.int64,

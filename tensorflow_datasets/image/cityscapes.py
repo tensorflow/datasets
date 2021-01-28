@@ -178,7 +178,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
 
     if self.builder_config.segmentation_labels:
       features['segmentation_label'] = tfds.features.Image(
-          shape=(1024, 2048, 1), encoding_format='png')
+          shape=(1024, 2048, 1), encoding_format='png', use_colormap=True)
 
     if self.builder_config.disparity_maps:
       features['disparity_map'] = tfds.features.Image(

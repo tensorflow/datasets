@@ -92,6 +92,7 @@ class Video(sequence_feature.Sequence):
       shape: Sequence[int],
       encoding_format: str = 'png',
       ffmpeg_extra_args: Sequence[str] = (),
+      use_colormap: bool = False,
   ):
     """Initializes the connector.
 
@@ -105,6 +106,10 @@ class Video(sequence_feature.Sequence):
           ``
           ffmpeg -i <input_file> <ffmpeg_extra_args> %010d.<encoding_format>
           ``
+      use_colormap: Forwarded to `tfds.features.Image`. If `True`,
+        `tfds.as_dataframe` will display each value in the image with a
+        different color.
+
     Raises:
       ValueError: If the shape is invalid
     """
@@ -114,7 +119,11 @@ class Video(sequence_feature.Sequence):
     self._encoding_format = encoding_format
     self._extra_ffmpeg_args = list(ffmpeg_extra_args or [])
     super(Video, self).__init__(
-        image_feature.Image(shape=shape[1:], encoding_format=encoding_format),
+        image_feature.Image(
+            shape=shape[1:],
+            encoding_format=encoding_format,
+            use_colormap=use_colormap,
+        ),
         length=shape[0],
     )
 
@@ -178,4 +187,6 @@ class Video(sequence_feature.Sequence):
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Video are displayed as `<video>`."""
-    return image_feature.make_video_repr_html(ex)
+    return image_feature.make_video_repr_html(
+        ex, use_colormap=self.feature._use_colorma  # pylint: disable=protected-access
+    )

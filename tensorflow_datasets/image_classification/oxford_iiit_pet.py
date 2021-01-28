@@ -68,7 +68,9 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=_LABEL_CLASSES),
             "species": tfds.features.ClassLabel(names=_SPECIES_CLASSES),
             "file_name": tfds.features.Text(),
-            "segmentation_mask": tfds.features.Image(shape=(None, None, 1))
+            "segmentation_mask": tfds.features.Image(
+                shape=(None, None, 1), use_colormap=True
+            )
         }),
         supervised_keys=("image", "label"),
         homepage="http://www.robots.ox.ac.uk/~vgg/data/pets/",

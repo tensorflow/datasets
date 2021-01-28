@@ -23,6 +23,7 @@ import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core.features import image_feature
 
 tf.enable_v2_behavior()
 
@@ -109,17 +110,24 @@ class ImageFeatureTest(
                 raise_msg='are incompatible',
             ),
         ],
-        test_attributes=dict(_encoding_format=None)
+        test_attributes=dict(
+            _encoding_format=None,
+            _use_colormap=False,
+        )
     )
 
   def test_image_shaped(self):
 
-    img_shaped = randint(256, size=(32, 64, 3), dtype=np.uint8)
+    img_shaped = randint(256, size=(32, 64, 1), dtype=np.uint8)
 
     self.assertFeature(
         # Image with statically defined shape
-        feature=features_lib.Image(shape=(32, 64, 3), encoding_format='png'),
-        shape=(32, 64, 3),
+        feature=features_lib.Image(
+            shape=(32, 64, 1),
+            encoding_format='png',
+            use_colormap=True,
+        ),
+        shape=(32, 64, 1),
         dtype=tf.uint8,
         tests=[
             testing.FeatureExpectationItem(
@@ -128,13 +136,37 @@ class ImageFeatureTest(
             ),
             # 'img_shaped' shape should be static
             testing.FeatureExpectationItem(
-                value=randint(256, size=(31, 64, 3), dtype=np.uint8),
+                value=randint(256, size=(31, 64, 1), dtype=np.uint8),
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
             ),
         ],
-        test_attributes=dict(_encoding_format='png')
+        test_attributes=dict(
+            _encoding_format='png',
+            _use_colormap=True,
+        )
     )
+
+
+def test_apply_colormap():
+  assert image_feature._get_colormap().shape == (256, 3)
+
+  gray_img = np.array(
+      [
+          [[0], [2]],
+          [[1234], [2]],
+      ],
+      dtype=np.uint16,
+  )
+  assert gray_img.shape == (2, 2, 1)
+  colored_img = image_feature._apply_colormap(gray_img)
+  assert colored_img.shape == (2, 2, 3)
+  assert colored_img.dtype == np.uint8
+
+  np.testing.assert_array_equal(colored_img, [
+      [[0, 0, 0], [55, 126, 184]],
+      [[71, 84, 183], [55, 126, 184]],
+  ])
 
 
 if __name__ == '__main__':

@@ -15,6 +15,7 @@
 
 """Image feature."""
 
+import csv
 import os
 import tempfile
 from typing import Any, List
@@ -91,7 +92,14 @@ class Image(feature.FeatureConnector):
     ```
   """
 
-  def __init__(self, *, shape=None, dtype=None, encoding_format=None):
+  def __init__(
+      self,
+      *,
+      shape=None,
+      dtype=None,
+      encoding_format=None,
+      use_colormap=False
+  ):
     """Construct the connector.
 
     Args:
@@ -107,6 +115,9 @@ class Image(feature.FeatureConnector):
         on disk. If None, encode images as PNG.
         If image is loaded from {bmg,gif,jpeg,png} file, this parameter is
         ignored, and file original encoding is used.
+      use_colormap: Only used for gray-scale images. If `True`,
+        `tfds.as_dataframe` will display each value in the image with a
+        different color.
 
     Raises:
       ValueError: If the shape is invalid
@@ -117,6 +128,9 @@ class Image(feature.FeatureConnector):
     self._encoding_format = _get_and_validate_encoding(encoding_format)
     self._shape = _get_and_validate_shape(shape, self._encoding_format)
     self._dtype = _get_and_validate_dtype(dtype, self._encoding_format)
+    self._use_colormap = _get_and_validate_colormap(
+        use_colormap, self._shape, self._encoding_format
+    )
 
     self._runner = None
 
@@ -133,8 +147,10 @@ class Image(feature.FeatureConnector):
     if not self._runner:
       self._runner = utils.TFGraphRunner()
     if np_image.dtype != self._dtype.as_numpy_dtype:
-      raise ValueError('Image dtype should be %s. Detected: %s.' % (
-          self._dtype.as_numpy_dtype, np_image.dtype))
+      raise ValueError(
+          f'Image dtype should be {self._dtype.as_numpy_dtype}. '
+          f'Detected: {np_image.dtype}.'
+      )
     utils.assert_shape_match(np_image.shape, self._shape)
     # When encoding isn't defined, default to PNG.
     # Should we be more strict about explicitly define the encoding (raise
@@ -169,14 +185,15 @@ class Image(feature.FeatureConnector):
   def decode_example(self, example):
     """Reconstruct the image from the tf example."""
     img = tf.image.decode_image(
-        example, channels=self._shape[-1], dtype=self._dtype)
+        example, channels=self._shape[-1], dtype=self._dtype
+    )
     img.set_shape(self._shape)
     return img
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
     # Normalize image and resize
-    img = _create_thumbnail(ex)
+    img = _create_thumbnail(ex, use_colormap=self._use_colormap)
 
     # Convert to base64
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
@@ -186,29 +203,39 @@ class Image(feature.FeatureConnector):
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """`Sequence(Image())` are displayed as `<video>`."""
-    return make_video_repr_html(ex)
+    if ex.shape[0] == 1:
+      ex = ex.squeeze(axis=0)  # (1, h, w, c) -> (h, w, c)
+      return self.repr_html(ex)
+    else:
+      return make_video_repr_html(ex, use_colormap=self._use_colormap)
 
   @classmethod
   def from_json_content(cls, value: Json) -> 'Image':
-    shape = tuple(value['shape'])
-    dtype = tf.dtypes.as_dtype(value['dtype'])
-    encoding_format = value['encoding_format']
-    return cls(shape=shape, dtype=dtype, encoding_format=encoding_format)
+    return cls(
+        shape=tuple(value['shape']),
+        dtype=tf.dtypes.as_dtype(value['dtype']),
+        encoding_format=value['encoding_format'],
+        use_colormap=value.get('use_colormap'),
+    )
 
   def to_json_content(self) -> Json:
     return {
         'shape': list(self._shape),
         'dtype': self._dtype.name,
-        'encoding_format': self._encoding_format
+        'encoding_format': self._encoding_format,
+        'use_colormap': self._use_colormap
     }
 
 
 # Visualization single image
 
 
-def _create_thumbnail(ex: np.ndarray) -> PilImage:
+def _create_thumbnail(ex: np.ndarray, *, use_colormap: bool) -> PilImage:
   """Creates the image from the np.array input."""
   PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
+
+  if use_colormap:  # Apply the colormap first as it modify the shape/dtype
+    ex = _apply_colormap(ex)
 
   _, _, c = ex.shape
   postprocess = _postprocess_noop
@@ -237,11 +264,11 @@ def _postprocess_convert_rgb(img: PilImage) -> PilImage:
 # Visualization Video
 
 
-def make_video_repr_html(ex):
+def make_video_repr_html(ex, *, use_colormap: bool):
   """Returns the encoded `<video>` or GIF <img/> HTML."""
   # Use GIF to generate a HTML5 compatible video if FFMPEG is not
   # installed on the system.
-  images = [_create_thumbnail(frame) for frame in ex]
+  images = [_create_thumbnail(frame, use_colormap=use_colormap) for frame in ex]
 
   if not images:
     return 'Video with 0 frames.'
@@ -276,6 +303,9 @@ def _get_repr_html_ffmpeg(images: List[PilImage]) -> str:
         # with bad video players.
         # Ref: https://trac.ffmpeg.org/wiki/Slideshow
         '-pix_fmt', 'yuv420p',
+        # ffmpeg require height/width to be even, so we rescale it
+        # https://stackoverflow.com/questions/20847674/ffmpeg-libx264-height-not-divisible-by-2
+        '-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2',
         # Native encoder cannot encode images of small scale
         # or the the hardware encoder may be busy which raises
         # Error: cannot create compression session
@@ -345,3 +375,53 @@ def _get_and_validate_shape(shape, encoding_format):
         f'{acceptable_channels} (was {channels})'
     )
   return tuple(shape)
+
+
+def _get_and_validate_colormap(use_colormap, shape, encoding_format):
+  """Validate that the given colormap is valid."""
+  if use_colormap:
+    if encoding_format and encoding_format != 'png':
+      raise ValueError(
+          f'Colormap is only available for PNG images. Got: {encoding_format}'
+      )
+    if shape[-1] != 1:
+      raise ValueError(
+          f'Colormap is only available for gray-scale images. Got: {shape}'
+      )
+
+  return use_colormap
+
+
+@utils.memoize()
+def _get_colormap() -> np.ndarray:
+  """Loads the colormap.
+
+  The colormap was precomputed using Glasbey et al. algorythm (Colour Displays
+  for Categorical Images, 2017) to generate maximally distinct colors.
+
+  It was generated using https://github.com/taketwo/glasbey:
+
+  ```python
+  gb = glasbey.Glasbey(
+      base_palette=[(0, 0, 0), (228, 26, 28), (55, 126, 184), (77, 175, 74)],
+      no_black=True,
+  )
+  palette = gb.generate_palette(size=256)
+  gb.save_palette(palette, 'colormap.csv')
+  ```
+
+  Returns:
+    colormap: A `np.array(shape=(255, 3), dtype=np.uint8)` representing the
+      mapping id -> color.
+  """
+  colormap_path = utils.tfds_path() / 'core/features/colormap.csv'
+  with colormap_path.open() as f:
+    return np.array(list(csv.reader(f)), dtype=np.uint8)
+
+
+def _apply_colormap(image: np.ndarray) -> np.ndarray:
+  """Apply colormap from grayscale (h, w, 1) to colored (h, w, 3) image."""
+  image = image.squeeze(axis=-1)  # (h, w, 1) -> (h, w)
+  cmap = _get_colormap()  # Get the (256, 3) colormap
+  # Normalize uint16 and convert each value to a unique color
+  return cmap[image % len(cmap)]
