@@ -207,6 +207,7 @@ class _PathMetadata:
     return f'{type(self).__name__}({self._path})'
 
 
+@utils.register_pathlike_cls(_URI_PREFIX)
 class GithubPath(pathlib.PurePosixPath):
   """`pathlib.Path` like object for manipulating Github paths.
 

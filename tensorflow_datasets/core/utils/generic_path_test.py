@@ -48,3 +48,14 @@ def test_windows_encoding():
     path = generic_path.as_path(gpath.PosixGPath('some_dir/abc'))
     assert not isinstance(path, gpath.WindowsGPath)
     assert isinstance(path, gpath.PosixGPath)
+
+
+def test_as_path_registering():
+
+  @generic_path.register_pathlike_cls('my_path://')
+  class MyPath(gpath.PosixGPath):
+    pass
+
+  my_path = generic_path.as_path('my_path://abc')
+  assert isinstance(my_path, MyPath)
+  assert generic_path.as_path(my_path) is my_path

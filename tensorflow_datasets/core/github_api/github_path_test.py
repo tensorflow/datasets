@@ -22,6 +22,7 @@ from unittest import mock
 
 import pytest
 
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.github_api import github_path
 
 
@@ -73,6 +74,13 @@ def test_parse_github_path():
   assert repo == 'tensorflow/datasets'
   assert branch == 'master'
   assert path == ''  # pylint: disable=g-explicit-bool-comparison
+
+
+def test_github_path_registered_as_path():
+  uri = 'github://tensorflow/datasets/tree/master/docs/README.md'
+  path = utils.as_path(uri)
+  assert isinstance(path, github_path.GithubPath)
+  assert os.fspath(path) == uri
 
 
 def test_invalid_github_path():
