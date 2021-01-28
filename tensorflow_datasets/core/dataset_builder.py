@@ -205,8 +205,10 @@ class DatasetBuilder(registered.RegisteredDataset):
         pass
       else:
         # For dynamically added modules, `importlib.resources` returns
-        # `Path('.')` rather than the real path, so filter those
-        if path.parts:
+        # `pathlib.Path('.')` rather than the real path, so filter those by
+        # checking for `parts`.
+        # Check for `zipfile.Path` (`ResourcePath`) as it does not have `.parts`
+        if isinstance(path, utils.ResourcePath) or path.parts:
           modules[-1] += ".py"
           return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
