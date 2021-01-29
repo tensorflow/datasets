@@ -47,37 +47,13 @@ _CITATION = """\
 }
 """
 
-
-def _get_remapping(annotation_path, remap=None):
-  """Builds a list indicating how to remap the pixels."""
+def _read_annotation(annotation_path):
+  """Read the image pixels of the annotation stored at annotations_path."""
   with tf.io.gfile.GFile(annotation_path, 'rb') as f:
-    image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
+    # Annotations are stored as index PNG so PIL returns directly the indices.
+    image = tfds.core.lazy_imports.PIL_Image.open(f)
     image = np.asarray(image)
-  colors = np.unique(image.reshape(-1, image.shape[2]), axis=0)
-  remap = remap or []
-  for color in colors:
-    already_mapped = False
-    for existing_color, _ in remap:
-      if (existing_color == color).all():
-        already_mapped = True
-    if not already_mapped:
-      remap.append((color, len(remap)))
-  return remap
-
-
-def _remap_annotation(annotation_path, remapping):
-  """Remap the image pixels of the annotation stored at annotations_path."""
-  with tf.io.gfile.GFile(annotation_path, 'rb') as f:
-    image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
-    image = np.asarray(image)
-  image_int32 = image.astype(np.int32)
-  remapped = np.zeros_like(image[:, :, :1])
-  for k, v in remapping:
-    remapped[(image == k).all(axis=2)] = v
-    image_int32[(image == k)] = -1
-  # Check that all pixels were remapped.
-  assert np.sum(image_int32) == -np.prod(image.shape)
-  return remapped
+  return image[:, :, None]
 
 
 class DavisConfig(tfds.core.BuilderConfig):
@@ -115,10 +91,11 @@ class Davis(tfds.core.GeneratorBasedBuilder):
       ),
   ]
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('2.1.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
       '2.0.0': 'Change instance ids to be 0, 1, 2, ...',
+      '2.1.0': 'Fix instance ids order.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -180,12 +157,10 @@ class Davis(tfds.core.GeneratorBasedBuilder):
       seq_len = len(list(images_path.iterdir()))
       images = []
       annotations = []
-      remap = None
       for i in range(seq_len):
         image_path = images_path / f'{i:05d}.jpg'
         annotation_path = annotations_path / f'{i:05d}.png'
-        remap = _get_remapping(annotation_path, remap)
-        annotation = _remap_annotation(annotation_path, remap)
+        annotation = _read_annotation(annotation_path)
         images.append(image_path)
         annotations.append(annotation)
 

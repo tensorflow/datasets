@@ -41,8 +41,10 @@ class DavisTest(tfds.testing.DatasetBuilderTestCase):
       train_ex = list(splits[tfds.Split.TRAIN])[0]
       val_ex = list(splits[tfds.Split.VALIDATION])[0]
       # Check that the dataset examples contain the correct number of classes.
-      self.assertLen(np.unique(train_ex['video']['segmentations'].numpy()), 2)
-      self.assertLen(np.unique(val_ex['video']['segmentations'].numpy()), 3)
+      self.assertSetEqual(
+          set(np.unique(train_ex['video']['segmentations'].numpy())), {0, 1})
+      self.assertSetEqual(
+          set(np.unique(val_ex['video']['segmentations'].numpy())), {0, 1, 2})
 
     with self.subTest('dataset_shapes'):
       splits = builder.as_dataset()
@@ -63,6 +65,7 @@ class DavisTest(tfds.testing.DatasetBuilderTestCase):
                        (4, height, width, 3))
       self.assertEqual(val_ex['video']['segmentations'].numpy().shape,
                        (4, height, width, 1))
+
 
 if __name__ == '__main__':
   tfds.testing.test_main()
