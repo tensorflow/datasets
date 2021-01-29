@@ -16,11 +16,10 @@
 """Benchmark utils."""
 
 import time
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Iterable, Optional, Union
 
 from absl import logging
 import dataclasses
-import tensorflow as tf
 from tensorflow_datasets.core.utils import tqdm_utils
 
 try:
@@ -33,19 +32,23 @@ except ImportError:
 StatDict = Dict[str, Union[int, float]]
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(frozen=True)
 class BenchmarkResult:
   stats: 'pd.DataFrame'
   raw_stats: 'pd.DataFrame'
 
+  def _repr_html_(self) -> str:
+    """Colab/notebook representation."""
+    return '<strong>BenchmarkResult:</strong><br/>' + self.stats._repr_html_()  # pylint: disable=protected-access
+
 
 def benchmark(
-    ds: tf.data.Dataset,
+    ds: Iterable[Any],
     *,
     num_iter: Optional[int] = None,
     batch_size: int = 1,
 ) -> BenchmarkResult:
-  """Benchmarks a `tf.data.Dataset`.
+  """Benchmarks any iterable (e.g `tf.data.Dataset`).
 
   Usage:
 
@@ -61,25 +64,31 @@ def benchmark(
   - Number of examples/sec
 
   Args:
-    ds: Dataset to benchmark
+    ds: Dataset to benchmark. Can be any iterable. Note: The iterable will
+      be fully consumed.
     num_iter: Number of iteration to perform (iteration might be batched)
     batch_size: Batch size of the dataset, used to normalize iterations
 
   Returns:
     statistics: The recorded statistics, for eventual post-processing
   """
+  try:
+    total = len(ds)  # pytype: disable=wrong-arg-types
+  except TypeError:
+    total = None
+
   # Benchmark the first batch separatelly (setup overhead)
-  start_time = time.perf_counter()  # pytype: disable=module-attr
-  ds_iter = iter(ds)  # pytype: disable=wrong-arg-types
+  start_time = time.perf_counter()
+  ds_iter = iter(ds)
   next(ds_iter)  # First warmup batch
-  first_batch_time = time.perf_counter()  # pytype: disable=module-attr
+  first_batch_time = time.perf_counter()
 
   # Benchmark the following batches
   i = None
-  for i, _ in tqdm_utils.tqdm(enumerate(ds_iter)):
+  for i, _ in tqdm_utils.tqdm(enumerate(ds_iter), initial=1, total=total):
     if num_iter and i > num_iter:
       break
-  end_time = time.perf_counter()  # pytype: disable=module-attr
+  end_time = time.perf_counter()
 
   if num_iter and i < num_iter:
     logging.warning(
@@ -91,13 +100,13 @@ def benchmark(
   print('\n************ Summary ************\n')
   num_examples = (i + 1) * batch_size
   stats = {
-      'first+last': _log_stats(
+      'first+lasts': _log_stats(
           'First included', start_time, end_time, num_examples + batch_size
       ),
       'first': _log_stats(
           'First only', start_time, first_batch_time, batch_size
       ),
-      'last': _log_stats(
+      'lasts': _log_stats(
           'First excluded', first_batch_time, end_time, num_examples
       )
   }
@@ -108,8 +117,9 @@ def benchmark(
       'num_iter': i + 2,  # First batch and zero-shifted
   }
   stats = pd.DataFrame.from_dict(stats, orient='index')
-  raw_stats = pd.DataFrame.from_dict(raw_stats, orient='index',
-                                     columns=['duration'])
+  raw_stats = pd.DataFrame.from_dict(
+      raw_stats, orient='index', columns=['duration']
+  )
   return BenchmarkResult(stats=stats, raw_stats=raw_stats)
 
 

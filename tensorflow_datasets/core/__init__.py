@@ -56,6 +56,7 @@ from tensorflow_datasets.core.utils import gcs_path
 from tensorflow_datasets.core.utils import tfds_path
 from tensorflow_datasets.core.utils import Version
 from tensorflow_datasets.core.utils.benchmark import benchmark
+from tensorflow_datasets.core.utils.benchmark import BenchmarkResult
 from tensorflow_datasets.core.utils.generic_path import as_path
 from tensorflow_datasets.core.utils.type_utils import PathLike
 from tensorflow_datasets.core.utils.type_utils import ReadOnlyPath
@@ -66,6 +67,7 @@ __all__ = [
     "add_data_dir",
     "as_path",
     "benchmark",
+    "BenchmarkResult",
     "BeamBasedBuilder",
     "BeamMetadataDict",
     "BuilderConfig",
