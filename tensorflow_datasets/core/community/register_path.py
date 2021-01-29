@@ -100,7 +100,7 @@ class DataDirRegister(register_base.BaseRegister):
       self, name: utils.DatasetName, **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
-    data_dir = builder_kwargs.get('data_dir')
+    data_dir = builder_kwargs.pop('data_dir', None)
     if data_dir:
       raise ValueError(
           '`data_dir` cannot be set for data_dir-based community datasets. '

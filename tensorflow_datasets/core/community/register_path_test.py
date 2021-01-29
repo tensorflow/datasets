@@ -72,6 +72,13 @@ def test_register_builder(dummy_register):  # pylint: disable=redefined-outer-na
   builder = dummy_register.builder(utils.DatasetName('mlds:ds0'))
   assert 'mlds' in builder.data_path.parts
 
+  builder = dummy_register.builder(
+      utils.DatasetName('mlds:ds0'),
+      data_dir=None,  # data_dir can be passed only if None
+      version='1.0.0',
+  )
+  assert 'mlds' in builder.data_path.parts
+
   with pytest.raises(ValueError, match='`data_dir` cannot be set for'):
     dummy_register.builder(
         utils.DatasetName('mlds:ds0'), data_dir='/path/to/data_dir'
