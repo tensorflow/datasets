@@ -84,9 +84,9 @@ class _Extractor(object):
     path = None
     dst_path = None  # To avoid undefined variable if exception is raised
     try:
-      archive_file = _get_archive_file(from_path, method)
-      self._pbar_path.update_total(archive_file.get_num_files())
-      for path, handle in archive_file.get_iter():
+      arch_iter = iter_archive(from_path, method)
+      self._pbar_path.update_total(len(arch_iter))
+      for path, handle in arch_iter:
         path = tf.compat.as_text(path)
         dst_path = os.path.join(to_path_tmp, path) if path else to_path_tmp
         _copy(handle, dst_path)
@@ -175,112 +175,126 @@ class _ArchiveIterator(abc.ABC):
     """Return iterator which yields (path, extract_file_object) for all files"""
 
 
+class _TarIterator(_ArchiveIterator):
+  """ArchiveIterator for tar files"""
 
+  def __init__(self, arch_f, stream=False):
+    super().__init__(arch_f)
+    self.stream = stream
 
-class _TarFile(_ArchiveFile):
-  """ArchiveFile for tar files"""
+    read_type = 'r' + ('|' if self.stream else ':') + '*'
+    self.tar = tarfile.open(mode=read_type, fileobj=self.fobj)
 
-  def get_num_files(self) -> int:
-    with _open_or_pass(self.arch_f) as fobj:
-      # Opened in stream mode since it is faster and we stream once
-      tar = tarfile.open(fileobj=fobj, mode='r|*')
-      num_files = sum(1 for member in tar if member.isfile())
-      return num_files
+  def _get_num_files(self) -> int:
+    num_files = sum(1 for member in self.tar if member.isfile())
+    if self.stream:
+      # In stream mode, once we iterate over the file we can't go back
+      # So instead of opening the file again, we seek to 0,
+      # and reinstantiate the tar file
+      self.fobj.seek(0)
+      self.tar = tarfile.open(mode='r|*', fileobj=self.fobj)
+    return num_files
 
-  def get_iter(self, stream=False):
-    read_type = 'r' + ('|' if stream else ':') + '*'
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    for member in self.tar:
+      if self.stream and (member.islnk() or member.issym()):
+        # Links cannot be dereferenced in stream mode.
+        logging.warning('Skipping link during extraction: %s', member.name)
+        continue
 
-    with _open_or_pass(self.arch_f) as fobj:
-      tar = tarfile.open(mode=read_type, fileobj=fobj)
-      for member in tar:
-        if stream and (member.islnk() or member.issym()):
-          # Links cannot be dereferenced in stream mode.
-          logging.warning('Skipping link during extraction: %s', member.name)
-          continue
+      try:
+        extract_file = self.tar.extractfile(member)
+      except KeyError:
+        if not (member.islnk() or member.issym()):
+          raise  # Forward exception non-link files which couldn't be extracted
+        # The link could not be extracted, which likely indicates a corrupted
+        # archive.
+        logging.warning(
+            'Skipping extraction of invalid link: %s -> %s',
+            member.name,
+            member.linkname,
+        )
+        continue
 
-        try:
-          extract_file = tar.extractfile(member)
-        except KeyError:
-          if not (member.islnk() or member.issym()):
-            raise  # Forward exception non-link files which couldn't be extracted
-          # The link could not be extracted, which likely indicates a corrupted
-          # archive.
-          logging.warning(
-              'Skipping extraction of invalid link: %s -> %s',
-              member.name,
-              member.linkname,
-          )
-          continue
-
-        if extract_file:  # File with data (not directory):
-          path = _normpath(member.path)  # pytype: disable=attribute-error
-          if not path:
-            continue
-          yield (path, extract_file)
-
-
-class _GzipFile(_ArchiveFile):
-  """ArchiveFile for gzip(.gz) files"""
-
-  def get_num_files(self) -> int:
-    return 1
-
-  def get_iter(self):
-    with _open_or_pass(self.arch_f) as fobj:
-      gzip_ = gzip.GzipFile(fileobj=fobj)
-      yield ('', gzip_)  # No inner file.
-
-
-class _Bzip2File(_ArchiveFile):
-  """ArchiveFile for bzip2(.bz2) files"""
-
-  def get_num_files(self) -> int:
-    return 1
-
-  def get_iter(self):
-    with _open_or_pass(self.arch_f) as fobj:
-      bz2_ = bz2.BZ2File(filename=fobj)
-      yield ('', bz2_)  # No inner file.
-
-
-class _ZipFile(_ArchiveFile):
-  """ArchiveFile for zip files"""
-
-  def get_num_files(self) -> int:
-    with _open_or_pass(self.arch_f) as fobj:
-      z = zipfile.ZipFile(fobj)
-      num_files = sum(1 for member in z.infolist() if not member.is_dir())
-      return num_files
-
-  def get_iter(self):
-    with _open_or_pass(self.arch_f) as fobj:
-      z = zipfile.ZipFile(fobj)
-      for member in z.infolist():
-        extract_file = z.open(member)
-        if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
-          continue
-        path = _normpath(member.filename)
+      if extract_file:  # File with data (not directory):
+        path = _normpath(member.path)  # pytype: disable=attribute-error
         if not path:
           continue
         yield (path, extract_file)
 
+def iter_tar(arch_f, stream=False):
+  return _TarIterator(arch_f, stream)
+
+def iter_tar_stream(arch_f):
+  return _TarIterator(arch_f, stream=True)
+
+
+class _GzipIterator(_ArchiveIterator):
+  """ArchiveIterator for gzip(.gz) files"""
+
+  def _get_num_files(self) -> int:
+    return 1
+
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    gzip_ = gzip.GzipFile(fileobj=self.fobj)
+    yield ('', gzip_)  # No inner file.
+
+def iter_gzip(arch_f):
+  return _GzipIterator(arch_f)
+
+
+class _Bzip2Iterator(_ArchiveIterator):
+  """ArchiveIterator for bzip2(.bz2) files"""
+
+  def _get_num_files(self) -> int:
+    return 1
+
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    bz2_ = bz2.BZ2File(filename=self.fobj)
+    yield ('', bz2_)  # No inner file.
+
+def iter_bzip2(arch_f):
+  return _Bzip2Iterator(arch_f)
+
+
+class _ZipIterator(_ArchiveIterator):
+  """ArchiveIterator for zip files"""
+
+  def __init__(self, arch_f):
+    super().__init__(arch_f)
+    self.z = zipfile.ZipFile(self.fobj)
+
+  def _get_num_files(self) -> int:
+    z = self.z
+    num_files = sum(1 for member in z.infolist() if not member.is_dir())
+    return num_files
+
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    z = self.z
+    for member in z.infolist():
+      extract_file = z.open(member)
+      if member.is_dir():  # pytype: disable=attribute-error
+        # Filter directories
+        continue
+      path = _normpath(member.filename)
+      if not path:
+        continue
+      yield (path, extract_file)
+
+def iter_zip(arch_f):
+  """Iterate over zip archive."""
+  return _ZipIterator(arch_f)
+
 
 _EXTRACT_METHODS = {
-    resource_lib.ExtractMethod.BZIP2: _Bzip2File,
-    resource_lib.ExtractMethod.GZIP: _GzipFile,
-    resource_lib.ExtractMethod.TAR: _TarFile,
-    resource_lib.ExtractMethod.TAR_GZ: _TarFile,
-    resource_lib.ExtractMethod.TAR_GZ_STREAM: _TarFile,
-    resource_lib.ExtractMethod.TAR_STREAM: _TarFile,
-    resource_lib.ExtractMethod.ZIP: _ZipFile,
+    resource_lib.ExtractMethod.BZIP2: iter_bzip2,
+    resource_lib.ExtractMethod.GZIP: iter_gzip,
+    resource_lib.ExtractMethod.TAR: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ_STREAM: iter_tar_stream,
+    resource_lib.ExtractMethod.TAR_STREAM: iter_tar_stream,
+    resource_lib.ExtractMethod.ZIP: iter_zip,
 }
-
-
-def _get_archive_file(
-    path: utils.PathLike,
-    method: resource_lib.ExtractMethod,
-) -> _ArchiveFile:
-  return _EXTRACT_METHODS[method](path)
 
 
 def iter_archive(
@@ -300,6 +314,4 @@ def iter_archive(
     raise ValueError(
         f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.'
     )
-  archive_file  = _get_archive_file(path, method)
-  kwargs = {'stream': True} if method.name.endswith('STREAM') else {}
-  return archive_file.get_iter(**kwargs)
+  return _EXTRACT_METHODS[method](path)  # pytype: disable=bad-return-type
