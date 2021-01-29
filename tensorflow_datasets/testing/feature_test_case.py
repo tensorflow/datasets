@@ -299,6 +299,8 @@ class FeatureExpectationsTestCase(SubTestCase):
       # Features with multi-data not supported
       if isinstance(spec, dict):
         continue
+      # TODO(tfds): Should use `as_dataframe._get_feature` instead, to
+      # correctly compute for `sequence_rank` for subclasses like `Video`.
       elif spec.sequence_rank == 0:
         text = f.repr_html(ex)
       elif spec.sequence_rank == 1:
