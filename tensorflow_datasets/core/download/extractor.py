@@ -15,6 +15,7 @@
 
 """Module to use to extract archives. No business logic."""
 
+import abc
 import bz2
 import concurrent.futures
 import contextlib
@@ -140,17 +141,40 @@ def _open_or_pass(path_or_fobj):
     yield path_or_fobj
 
 
-class _ArchiveFile:
-  """Base class for common Archive file functionality"""
+class _ArchiveIterator(abc.ABC):
+  """
+  Base iterator class for Archive files
+  Also provides len() functionality
+  """
 
-  def __init__(self, arch_f) -> None:
-    self.arch_f = arch_f
+  def __init__(self, arch_f):
+    self._open_cm = _open_or_pass(arch_f)
+    self.fobj = self._open_cm.__enter__()
+    self._iter = self._iter_archive()
 
-  def get_num_files(self) -> int:
-    raise NotImplementedError()
+  def __iter__(self):
+    return self
 
-  def get_iter(self):
-    raise NotImplementedError()
+  def __next__(self):
+    for path, extract_file in self._iter:
+      return (path, extract_file)
+    self._open_cm.__exit__(None, None, None)
+    raise StopIteration
+
+  @utils.memoize()
+  def __len__(self) -> int:
+    """Return no of files in this archive"""
+    return self._get_num_files()
+
+  @abc.abstractmethod
+  def _get_num_files(self) -> int:
+    """Return no of files in this archive"""
+
+  @abc.abstractmethod
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    """Return iterator which yields (path, extract_file_object) for all files"""
+
+
 
 
 class _TarFile(_ArchiveFile):
