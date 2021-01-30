@@ -47,10 +47,6 @@ builder = tfds.builder("wmt_translate", config=config)
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -60,12 +56,7 @@ builder = tfds.builder("wmt_translate", config=config)
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Citation**:
 
@@ -87,13 +78,21 @@ Split | Examples
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 ## wmt13_translate/cs-en (default config)
 
 *   **Config description**: WMT 2013 cs-en translation task dataset.
+
+*   **Download size**: `1.59 GiB`
+
+*   **Dataset size**: `2.89 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 3,000
+`'train'`      | 15,780,759
+`'validation'` | 13,573
 
 *   **Features**:
 
@@ -108,9 +107,55 @@ Translation({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('cs', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wmt13_translate-cs-en-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## wmt13_translate/de-en
 
 *   **Config description**: WMT 2013 de-en translation task dataset.
+
+*   **Download size**: `1.59 GiB`
+
+*   **Dataset size**: `1.36 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'test'`       | 3,000
+`'train'`      | 4,485,758
+`'validation'` | 13,573
 
 *   **Features**:
 
@@ -125,9 +170,55 @@ Translation({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('de', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wmt13_translate-de-en-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## wmt13_translate/fr-en
 
 *   **Config description**: WMT 2013 fr-en translation task dataset.
+
+*   **Download size**: `6.21 GiB`
+
+*   **Dataset size**: `14.64 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 3,000
+`'train'`      | 40,810,860
+`'validation'` | 13,573
 
 *   **Features**:
 
@@ -142,9 +233,55 @@ Translation({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('fr', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wmt13_translate-fr-en-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## wmt13_translate/es-en
 
 *   **Config description**: WMT 2013 es-en translation task dataset.
+
+*   **Download size**: `3.79 GiB`
+
+*   **Dataset size**: `5.24 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 3,000
+`'train'`      | 15,176,790
+`'validation'` | 13,573
 
 *   **Features**:
 
@@ -159,9 +296,55 @@ Translation({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('es', 'en')`
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wmt13_translate-es-en-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## wmt13_translate/ru-en
 
 *   **Config description**: WMT 2013 ru-en translation task dataset.
+
+*   **Download size**: `1010.20 MiB`
+
+*   **Dataset size**: `833.67 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'test'`       | 3,000
+`'train'`      | 2,471,670
+`'validation'` | 3,003
 
 *   **Features**:
 
@@ -175,3 +358,37 @@ Translation({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('ru', 'en')`
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wmt13_translate-ru-en-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
