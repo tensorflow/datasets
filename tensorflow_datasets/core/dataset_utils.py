@@ -70,7 +70,7 @@ def _eager_dataset_element_to_numpy(
     return t
   if isinstance(t, tf.data.Dataset):
     return _eager_dataset_iterator(t)
-  return t.numpy()
+  return t._numpy()  # pylint: disable=protected-access
 
 
 def _eager_dataset_iterator(ds: tf.data.Dataset) -> Iterator[NumpyElem]:
@@ -109,7 +109,7 @@ def _assert_ds_types(nested_ds: Tree[TensorflowElem]) -> None:
 def _elem_to_numpy_eager(tf_el: TensorflowElem) -> NumpyElem:
   """Converts a single element from tf to numpy."""
   if isinstance(tf_el, tf.Tensor):
-    return tf_el.numpy()
+    return tf_el._numpy()  # pylint: disable=protected-access
   elif isinstance(tf_el, tf.RaggedTensor):
     return tf_el
   elif tf_compat.is_dataset(tf_el):
