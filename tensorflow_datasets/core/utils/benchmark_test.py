@@ -15,6 +15,8 @@
 
 """Tests for tensorflow_datasets.core.utils.benchmark."""
 
+import pytest
+
 import tensorflow as tf
 from tensorflow_datasets.core.utils import benchmark
 
@@ -27,4 +29,14 @@ def test_benchmark():
 
   # Works with other iterators
   result = benchmark.benchmark(range(10))
+  assert isinstance(result, benchmark.BenchmarkResult)
+
+
+def test_benchmark_empty():
+  # len() == 0
+  with pytest.raises(ValueError, match='Cannot benchmark dataset with 0 elem'):
+    benchmark.benchmark([])
+
+  # len() == 1
+  result = benchmark.benchmark([1])
   assert isinstance(result, benchmark.BenchmarkResult)

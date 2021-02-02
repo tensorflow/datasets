@@ -54,7 +54,7 @@ def benchmark(
 
   ```py
   ds = tfds.load('mnist', split='train').batch(32).prefetch()
-  tfds.core.benchmark(ds, batch_size=32)
+  tfds.benchmark(ds, batch_size=32)
   ```
 
   Reports:
@@ -80,11 +80,14 @@ def benchmark(
   # Benchmark the first batch separatelly (setup overhead)
   start_time = time.perf_counter()
   ds_iter = iter(ds)
-  next(ds_iter)  # First warmup batch
+  try:
+    next(ds_iter)  # First warmup batch
+  except StopIteration:
+    raise ValueError('Cannot benchmark dataset with 0 elements.')
   first_batch_time = time.perf_counter()
 
   # Benchmark the following batches
-  i = None
+  i = -1
   for i, _ in tqdm_utils.tqdm(enumerate(ds_iter), initial=1, total=total):
     if num_iter and i > num_iter:
       break
@@ -96,6 +99,8 @@ def benchmark(
             i, num_iter
         )
     )
+  if i == -1:  # No iteration besides the second batch
+    end_time = first_batch_time
 
   print('\n************ Summary ************\n')
   num_examples = (i + 1) * batch_size
@@ -127,12 +132,19 @@ def _log_stats(
     msg: str, start: float, end: float, num_examples: int
 ) -> StatDict:
   """Log and returns stats."""
-  total_time = end - start
-  stats = {
-      'duration': total_time,
-      'num_examples': num_examples,
-      'avg': num_examples / total_time,
-  }
+  if not num_examples:
+    stats = {
+        'duration': 0.,
+        'num_examples': 0,
+        'avg': 0.,
+    }
+  else:
+    total_time = end - start
+    stats = {
+        'duration': total_time,
+        'num_examples': num_examples,
+        'avg': num_examples / total_time,
+    }
   print(
       'Examples/sec ({}) {avg:.2f} ex/sec (total: {num_examples} ex, '
       '{duration:.2f} sec)'.format(msg, **stats)

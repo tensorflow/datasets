@@ -7,17 +7,18 @@ still applies.
 
 ## Benchmark datasets
 
-Use `tfds.core.benchmark(ds)` to benchmark any `tf.data.Dataset` object.
+Use `tfds.benchmark(ds)` to benchmark any `tf.data.Dataset` object.
 
 Make sure to indicate the `batch_size=` to normalize the results (e.g. 100
-iter/sec -> 3200 ex/sec).
+iter/sec -> 3200 ex/sec). This works with any iterable (e.g.
+`tfds.benchmark(tfds.as_numpy(ds))`).
 
 ```python
 ds = tfds.load('mnist', split='train').batch(32).prefetch()
 # Display some benchmark statistics
-tfds.core.benchmark(ds, batch_size=32)
+tfds.benchmark(ds, batch_size=32)
 # Second iteration is much faster, due to auto-caching
-tfds.core.benchmark(ds, batch_size=32)
+tfds.benchmark(ds, batch_size=32)
 ```
 
 ## Small datasets (< GB)
