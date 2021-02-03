@@ -52,7 +52,7 @@ class BBoxFeature(feature.Tensor):
 
     ```
     features=features.FeatureDict({
-        'bbox': features.BBox(shape=(None, 64, 64, 3)),
+        'bbox': tfds.features.BBox(),
     })
     ```
 
@@ -60,7 +60,7 @@ class BBoxFeature(feature.Tensor):
 
     ```
     yield {
-        'input': tfds.feature.BBox(ymin=0.3, xmin=0.8, ymax=0.5, xmax=1.0),
+        'input': tfds.features.BBox(ymin=0.3, xmin=0.8, ymax=0.5, xmax=1.0),
     }
     ```
   """

@@ -114,6 +114,7 @@ DATASET_FILES = [
     'object_detection/open_images_classes_all.txt',
     'object_detection/open_images_classes_boxable.txt',
     'object_detection/open_images_classes_trainable.txt',
+    'video/tao/labels.txt',
     'video/ucf101_labels.txt',
 ]
 
