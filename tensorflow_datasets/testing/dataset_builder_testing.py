@@ -313,26 +313,29 @@ class DatasetBuilderTestCase(
       return
 
     # Extract configs to test
-    configs_to_test = []
+    configs_to_test: List[Union[str, dataset_builder.BuilderConfig]] = []
     if self.BUILDER_CONFIG_NAMES_TO_TEST:
       for config in self.BUILDER_CONFIG_NAMES_TO_TEST:  # pylint: disable=not-an-iterable
         if isinstance(config, dataset_builder.BuilderConfig):
           configs_to_test.append(config)
         elif config in self.builder.builder_configs:
-          configs_to_test.append(self.builder.builder_configs[config])
+          # Append the `name` rather than the config due to
+          # https://github.com/tensorflow/datasets/issues/2348
+          configs_to_test.append(config)
         else:
           raise ValueError(
               f"Invalid config {config} specified in test."
               f"Available: {list(self.builder.builder_configs)}"
           )
     else:
-      configs_to_test.extend(self.builder.BUILDER_CONFIGS)
+      configs_to_test.extend(cfg.name for cfg in self.builder.BUILDER_CONFIGS)
 
     print(f"Total configs: {len(configs_to_test)}")
     if configs_to_test:
       for config in configs_to_test:
-        with self._subTest(config.name):
-          print(f"Testing config {config.name}")
+        config_name = config if isinstance(config, str) else config.name
+        with self._subTest(config_name):
+          print(f"Testing config {config_name}")
           builder = self._make_builder(config=config)
           self._download_and_prepare_as_dataset(builder)
     else:
