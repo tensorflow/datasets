@@ -749,8 +749,9 @@ def _validate_checksums(
       and expected_url_info != computed_url_info
   ):
     msg = (
-        f'Artifact {url}, downloaded to {path}, has wrong checksum. '
-        f'Expected: {expected_url_info}. Got: {computed_url_info}.'
+        f'Artifact {url}, downloaded to {path}, has wrong checksum:\n'
+        f'* Expected: {expected_url_info}\n'
+        f'* Got: {computed_url_info}\n'
         'To debug, see: '
         'https://www.tensorflow.org/datasets/overview#fixing_nonmatchingchecksumerror'
     )
