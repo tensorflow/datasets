@@ -515,6 +515,9 @@ toc:
     title: robonet
   - path: /datasets/catalog/starcraft_video
     title: starcraft_video
+  - path: /datasets/catalog/tao
+    status: nightly
+    title: tao (manual)
   - path: /datasets/catalog/ucf101
     title: ucf101
   title: Video

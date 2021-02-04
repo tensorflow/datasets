@@ -11,6 +11,11 @@
 
 # `lsun`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Large scale images showing different objects from given categories like bedroom,
@@ -583,3 +588,364 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+## lsun/airplane <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category airplane
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/bicycle <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category bicycle
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/bird <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category bird
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/boat <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category boat
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/bottle <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category bottle
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/bus <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category bus
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/car <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category car
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/cat <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category cat
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/chair <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category chair
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/cow <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category cow
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/dining_table <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category dining_table
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/dog <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category dog
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/horse <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category horse
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/motorbike <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category motorbike
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/potted_plant <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category potted_plant
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/sheep <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category sheep
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/sofa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category sofa
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/train <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category train
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/tv-monitor <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Images of category tv-monitor
+
+*   **Download size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
