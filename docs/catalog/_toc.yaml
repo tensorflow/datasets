@@ -446,6 +446,9 @@ toc:
     title: sentiment140
   - path: /datasets/catalog/snli
     title: snli
+  - path: /datasets/catalog/star_cfq
+    status: nightly
+    title: star_cfq
   - path: /datasets/catalog/story_cloze
     title: story_cloze (manual)
   - path: /datasets/catalog/super_glue

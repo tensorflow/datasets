@@ -263,6 +263,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`scicite`](scicite.md)
 *   [`sentiment140`](sentiment140.md)
 *   [`snli`](snli.md)
+*   [`star_cfq`](star_cfq.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`story_cloze`](story_cloze.md)
 *   [`super_glue`](super_glue.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
