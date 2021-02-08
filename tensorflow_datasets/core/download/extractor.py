@@ -103,7 +103,13 @@ class _Extractor(object):
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
     if tf.io.gfile.exists(to_path):
-      tf.io.gfile.rmtree(to_path)
+      # `rename` is atomic, but not `rmtree`.
+      # When 2 builder scripts (for each config) extract the same file, one can
+      # `rename` while the other is still running `rmtree`, leading to corrupted
+      # archive dir.
+      path_to_delete = to_path_tmp + '.todelete'
+      tf.io.gfile.rename(to_path, path_to_delete)
+      tf.io.gfile.rmtree(path_to_delete)
     tf.io.gfile.rename(to_path_tmp, to_path)
     self._pbar_path.update(1)
     return utils.as_path(to_path)
