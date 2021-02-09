@@ -190,11 +190,14 @@ def _create_per_track_annotation(track, track_to_anns: NestedDict,
   per_track_anno['scale_category'] = track_annos[0]['scale_category']
   per_track_anno['track_id'] = track['id']
   for ann in track_to_anns[track['id']]:
-    per_track_anno['bboxes'].append(tfds.features.BBox(
-                ymin=ann['bbox'][1] / height,
-                ymax=(ann['bbox'][1] + ann['bbox'][3]) / height,
-                xmin=ann['bbox'][0] / width,
-                xmax=(ann['bbox'][0] + ann['bbox'][2]) / width))
+    # NOTE: Some bbox annotations extend off the boundary of the image.
+    # Below we clip them to lie within the image boundaries.
+    ymin = max(0., ann['bbox'][1] / height)
+    ymax = min(1., (ann['bbox'][1] + ann['bbox'][3]) / height)
+    xmin = max(0., ann['bbox'][0] / width)
+    xmax = min(1., (ann['bbox'][0] + ann['bbox'][2]) / width)
+    per_track_anno['bboxes'].append(tfds.features.BBox(ymin=ymin, ymax=ymax,
+                                                       xmin=xmin, xmax=xmax))
     per_track_anno['frames'].append(anns_to_image[ann['id']]['frame_index'])
 
   # Frame indices should be sorted.
