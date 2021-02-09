@@ -58,6 +58,7 @@ with core.registered.skip_registration():
 __all__ = [
     "as_dataframe",
     "as_numpy",
+    "benchmark",
     "core",
     "deprecated",
     "folder_dataset",
