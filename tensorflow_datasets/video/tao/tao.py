@@ -46,7 +46,7 @@ _CITATION = """
    publisher={Springer International Publishing},
    author={Dave, Achal and Khurana, Tarasha and Tokmakov, Pavel and Schmid, Cordelia and Ramanan, Deva},
    year={2020},
-   pages={436–454}
+   pages={436-454}
 }
 """
 
