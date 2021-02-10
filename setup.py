@@ -116,6 +116,7 @@ DATASET_FILES = [
     'object_detection/open_images_classes_trainable.txt',
     'video/tao/labels.txt',
     'video/ucf101_labels.txt',
+    'video/youtube_vis/labels.txt',
 ]
 
 # Extra dependencies required by specific datasets
@@ -149,6 +150,7 @@ DATASET_EXTRAS = {
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
     'lsun': ['tensorflow-io'],
     'wsc273': ['bs4', 'lxml'],
+    'youtube_vis': ['pycocotools'],
 }
 
 

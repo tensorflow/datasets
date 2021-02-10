@@ -38,6 +38,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "os",
       "pandas",
       "pretty_midi",
+      "pycocotools",
       "pydub",
       "scipy",
       "skimage",

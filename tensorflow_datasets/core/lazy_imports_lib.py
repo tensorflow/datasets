@@ -127,6 +127,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def pycocotools(cls):
+    return _try_import("pycocotools.mask")
+
+  @utils.classproperty
+  @classmethod
   def pydub(cls):
     return _try_import("pydub")
 

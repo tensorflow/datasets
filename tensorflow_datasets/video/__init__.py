@@ -24,3 +24,4 @@ from tensorflow_datasets.video.starcraft import StarcraftVideoConfig
 from tensorflow_datasets.video.tao import Tao
 from tensorflow_datasets.video.ucf101 import Ucf101
 from tensorflow_datasets.video.ucf101 import Ucf101Config
+from tensorflow_datasets.video.youtube_vis import YoutubeVis
