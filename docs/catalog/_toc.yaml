@@ -523,6 +523,9 @@ toc:
     title: tao (manual)
   - path: /datasets/catalog/ucf101
     title: ucf101
+  - path: /datasets/catalog/youtube_vis
+    status: nightly
+    title: youtube_vis (manual)
   title: Video
 - section:
   - path: /datasets/catalog/gref

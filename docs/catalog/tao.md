@@ -6,7 +6,7 @@
   <meta itemprop="description" content="The TAO dataset is a large video object detection dataset consisting of&#10;2,907 high resolution videos and 833 object categories. Note that this dataset&#10;requires at least 300 GB of free space to store.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;tao&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/tao" />
   <meta itemprop="sameAs" content="https://taodataset.org/" />
-  <meta itemprop="citation" content="@article{Dave_2020,&#10;   title={TAO: A Large-Scale Benchmark for Tracking Any Object},&#10;   ISBN={9783030585587},&#10;   ISSN={1611-3349},&#10;   url={http://dx.doi.org/10.1007/978-3-030-58558-7_26},&#10;   DOI={10.1007/978-3-030-58558-7_26},&#10;   journal={Lecture Notes in Computer Science},&#10;   publisher={Springer International Publishing},&#10;   author={Dave, Achal and Khurana, Tarasha and Tokmakov, Pavel and Schmid, Cordelia and Ramanan, Deva},&#10;   year={2020},&#10;   pages={436–454}&#10;}" />
+  <meta itemprop="citation" content="@article{Dave_2020,&#10;   title={TAO: A Large-Scale Benchmark for Tracking Any Object},&#10;   ISBN={9783030585587},&#10;   ISSN={1611-3349},&#10;   url={http://dx.doi.org/10.1007/978-3-030-58558-7_26},&#10;   DOI={10.1007/978-3-030-58558-7_26},&#10;   journal={Lecture Notes in Computer Science},&#10;   publisher={Springer International Publishing},&#10;   author={Dave, Achal and Khurana, Tarasha and Tokmakov, Pavel and Schmid, Cordelia and Ramanan, Deva},&#10;   year={2020},&#10;   pages={436-454}&#10;}" />
 </div>
 
 # `tao`
@@ -75,7 +75,7 @@ Split | Examples
    publisher={Springer International Publishing},
    author={Dave, Achal and Khurana, Tarasha and Tokmakov, Pavel and Schmid, Cordelia and Ramanan, Deva},
    year={2020},
-   pages={436–454}
+   pages={436-454}
 }
 ```
 

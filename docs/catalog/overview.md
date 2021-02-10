@@ -307,6 +307,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`tao`](tao.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`ucf101`](ucf101.md)
+*   [`youtube_vis`](youtube_vis.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Vision language`
 
