@@ -67,10 +67,6 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 ## star_cfq/single_pool_0.1x_cfq (default config)
 
 *   **Download size**: `Unknown size`
@@ -85,6 +81,10 @@ FeaturesDict({
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.2x_cfq
 
@@ -101,6 +101,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.3x_cfq
 
 *   **Download size**: `Unknown size`
@@ -115,6 +119,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.5x_cfq
 
@@ -131,6 +139,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_1x_cfq
 
 *   **Download size**: `Unknown size`
@@ -145,6 +157,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_2x_cfq
 
@@ -161,6 +177,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.1x_o_cfq
 
 *   **Download size**: `Unknown size`
@@ -175,6 +195,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.2x_o_cfq
 
@@ -191,6 +215,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.3x_o_cfq
 
 *   **Download size**: `Unknown size`
@@ -205,6 +233,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.5x_o_cfq
 
@@ -221,6 +253,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_1x_o_cfq
 
 *   **Download size**: `Unknown size`
@@ -235,6 +271,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_2x_o_cfq
 
@@ -251,6 +291,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.1x_u_cfq
 
 *   **Download size**: `Unknown size`
@@ -265,6 +309,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.2x_u_cfq
 
@@ -281,6 +329,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.3x_u_cfq
 
 *   **Download size**: `Unknown size`
@@ -295,6 +347,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.5x_u_cfq
 
@@ -311,6 +367,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_1x_u_cfq
 
 *   **Download size**: `Unknown size`
@@ -325,6 +385,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_2x_u_cfq
 
@@ -341,6 +405,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_3x_u_cfq
 
 *   **Download size**: `Unknown size`
@@ -355,6 +423,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_6x_u_cfq
 
@@ -371,6 +443,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_10x_u_cfq
 
 *   **Download size**: `Unknown size`
@@ -385,6 +461,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_30x_u_cfq
 
@@ -401,6 +481,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_100x_u_cfq
 
 *   **Download size**: `Unknown size`
@@ -415,6 +499,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.1x_b_cfq
 
@@ -431,6 +519,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.2x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -445,6 +537,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.25x_b_cfq
 
@@ -461,6 +557,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.3x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -475,6 +575,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.4x_b_cfq
 
@@ -491,6 +595,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.5x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -505,6 +613,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.6x_b_cfq
 
@@ -521,6 +633,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.7x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -535,6 +651,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.75x_b_cfq
 
@@ -551,6 +671,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.8x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -565,6 +689,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_1x_b_cfq
 
@@ -581,6 +709,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_1.5x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -595,6 +727,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_2x_b_cfq
 
@@ -611,6 +747,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_3x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -625,6 +765,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_4x_b_cfq
 
@@ -641,6 +785,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_5x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -655,6 +803,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_6x_b_cfq
 
@@ -671,6 +823,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_8x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -685,6 +841,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_10x_b_cfq
 
@@ -701,6 +861,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_11x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -715,6 +879,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_12x_b_cfq
 
@@ -731,6 +899,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_13x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -745,6 +917,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_15x_b_cfq
 
@@ -761,6 +937,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_30x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -775,6 +955,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_35x_b_cfq
 
@@ -791,6 +975,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_80x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -805,6 +993,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_85x_b_cfq
 
@@ -821,6 +1013,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_100x_b_cfq
 
 *   **Download size**: `Unknown size`
@@ -835,6 +1031,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.25x_l_cfq
 
@@ -851,6 +1051,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.5x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -865,6 +1069,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.75x_l_cfq
 
@@ -881,6 +1089,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_1x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -895,6 +1107,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_3x_l_cfq
 
@@ -911,6 +1127,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_10x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -925,6 +1145,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_30x_l_cfq
 
@@ -941,6 +1165,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_80x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -955,6 +1183,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_100x_l_cfq
 
@@ -971,6 +1203,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.25x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -985,6 +1221,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.5x_half_l_cfq
 
@@ -1001,6 +1241,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.75x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -1015,6 +1259,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_1x_half_l_cfq
 
@@ -1031,6 +1279,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_3x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -1045,6 +1297,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_10x_half_l_cfq
 
@@ -1061,6 +1317,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_30x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -1075,6 +1335,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_80x_half_l_cfq
 
@@ -1091,6 +1355,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_100x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -1105,6 +1373,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.25x_n_cfq
 
@@ -1121,6 +1393,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.5x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -1135,6 +1411,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.75x_n_cfq
 
@@ -1151,6 +1431,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_1x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -1165,6 +1449,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_3x_n_cfq
 
@@ -1181,6 +1469,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_10x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -1195,6 +1487,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_30x_n_cfq
 
@@ -1211,6 +1507,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_80x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -1225,6 +1525,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_100x_n_cfq
 
@@ -1241,6 +1545,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.25x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -1255,6 +1563,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.5x_half_n_cfq
 
@@ -1271,6 +1583,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.75x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -1285,6 +1601,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_1x_half_n_cfq
 
@@ -1301,6 +1621,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -1315,6 +1639,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_10x_half_n_cfq
 
@@ -1331,6 +1659,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_30x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -1345,6 +1677,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_80x_half_n_cfq
 
@@ -1361,6 +1697,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_100x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -1375,6 +1715,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.25x_x_cfq
 
@@ -1391,6 +1735,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.5x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -1405,6 +1753,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.75x_x_cfq
 
@@ -1421,6 +1773,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -1435,6 +1791,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_3x_x_cfq
 
@@ -1451,6 +1811,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_10x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -1465,6 +1829,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_30x_x_cfq
 
@@ -1481,6 +1849,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_80x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -1495,6 +1867,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_100x_x_cfq
 
@@ -1511,6 +1887,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.25x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -1525,6 +1905,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_0.5x_half_x_cfq
 
@@ -1541,6 +1925,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_0.75x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -1555,6 +1943,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_1x_half_x_cfq
 
@@ -1571,6 +1963,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_3x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -1585,6 +1981,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_10x_half_x_cfq
 
@@ -1601,6 +2001,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_30x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -1615,6 +2019,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/single_pool_80x_half_x_cfq
 
@@ -1631,6 +2039,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/single_pool_100x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -1645,6 +2057,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_0.1x_l_cfq
 
@@ -1661,6 +2077,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_0.3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -1675,6 +2095,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_1x_l_cfq
 
@@ -1691,6 +2115,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_2x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -1705,6 +2133,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_3x_l_cfq
 
@@ -1721,6 +2153,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_10x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -1735,6 +2171,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_30x_l_cfq
 
@@ -1751,6 +2191,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_80x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -1766,6 +2210,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_100x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -1780,6 +2228,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.1x_l_cfq
 
@@ -1798,6 +2250,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 19,148
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.1x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.3x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -1814,6 +2300,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.3x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_1x_l_cfq
 
@@ -1832,6 +2352,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 105,316
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_1x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_2x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -1848,6 +2402,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 201,058
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_2x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_3x_l_cfq
 
@@ -1866,6 +2454,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 296,800
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_3x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_10x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -1882,6 +2504,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 966,994
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_10x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_30x_l_cfq
 
@@ -1900,6 +2556,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,881,834
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_30x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_80x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -1916,6 +2606,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 7,668,934
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_80x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_100x_l_cfq
 
@@ -1934,6 +2658,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 9,495,418
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_100x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.1x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -1950,6 +2708,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 28,722
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.1x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.3x_l_cfq
 
@@ -1968,6 +2760,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 47,870
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.3x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -1984,6 +2810,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 114,890
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_l_cfq
 
@@ -2002,6 +2862,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 210,632
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -2018,6 +2912,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 306,374
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_l_cfq
 
@@ -2036,6 +2964,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 976,568
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -2052,6 +3014,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 2,891,408
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_l_cfq
 
@@ -2070,6 +3066,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 9,504,958
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -2086,6 +3116,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_l_cfq
 
@@ -2104,6 +3168,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 57,444
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -2120,6 +3218,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 124,464
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_l_cfq
 
@@ -2138,6 +3270,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 220,206
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -2154,6 +3320,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 315,948
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_3x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_l_cfq
 
@@ -2172,6 +3372,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 986,142
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -2188,6 +3422,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 2,900,982
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_30x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_l_cfq
 
@@ -2206,6 +3474,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 9,514,495
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_l_cfq
 
 *   **Download size**: `859.54 MiB`
@@ -2223,6 +3525,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 57,445
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.5x_b_cfq_0.1x_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2237,6 +3573,10 @@ Split     | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_l_cfq
 
@@ -2253,6 +3593,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2267,6 +3611,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_3x_l_cfq
 
@@ -2283,6 +3631,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2297,6 +3649,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_30x_l_cfq
 
@@ -2313,6 +3669,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2327,6 +3687,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_0.1x_l_cfq
 
@@ -2343,6 +3707,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_0.3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2357,6 +3725,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_1x_l_cfq
 
@@ -2373,6 +3745,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_2x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2387,6 +3763,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_3x_l_cfq
 
@@ -2403,6 +3783,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_10x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2417,6 +3801,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_30x_l_cfq
 
@@ -2433,6 +3821,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_80x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2447,6 +3839,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_100x_l_cfq
 
@@ -2463,6 +3859,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_0.1x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2477,6 +3877,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_0.3x_l_cfq
 
@@ -2493,6 +3897,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_1x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2507,6 +3915,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_2x_l_cfq
 
@@ -2523,6 +3935,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2537,6 +3953,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_10x_l_cfq
 
@@ -2553,6 +3973,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_30x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2567,6 +3991,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_100x_l_cfq
 
@@ -2583,6 +4011,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_0.1x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2597,6 +4029,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_0.3x_l_cfq
 
@@ -2613,6 +4049,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_1x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2627,6 +4067,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_2x_l_cfq
 
@@ -2643,6 +4087,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2657,6 +4105,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_10x_l_cfq
 
@@ -2673,6 +4125,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_30x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2687,6 +4143,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_100x_l_cfq
 
@@ -2703,6 +4163,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_0.1x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2717,6 +4181,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_0.3x_l_cfq
 
@@ -2733,6 +4201,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_1x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2747,6 +4219,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_2x_l_cfq
 
@@ -2763,6 +4239,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2777,6 +4257,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_10x_l_cfq
 
@@ -2793,6 +4277,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_30x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2807,6 +4295,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_100x_l_cfq
 
@@ -2823,6 +4315,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_0.1x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2837,6 +4333,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_0.3x_half_l_cfq
 
@@ -2853,6 +4353,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_1x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2867,6 +4371,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_2x_half_l_cfq
 
@@ -2883,6 +4391,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_3x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2897,6 +4409,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_10x_half_l_cfq
 
@@ -2913,6 +4429,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_30x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2927,6 +4447,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_80x_half_l_cfq
 
@@ -2943,6 +4467,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_100x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -2957,6 +4485,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.1x_half_l_cfq
 
@@ -2975,6 +4507,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 19,148
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.1x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.3x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -2991,6 +4557,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.3x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_1x_half_l_cfq
 
@@ -3009,6 +4609,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 105,316
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_1x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_2x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3025,6 +4659,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 201,058
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_2x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_3x_half_l_cfq
 
@@ -3043,6 +4711,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 296,800
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_3x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_10x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3059,6 +4761,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 966,994
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_10x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_30x_half_l_cfq
 
@@ -3077,6 +4813,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,881,834
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_30x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_80x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3093,6 +4863,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 7,668,934
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_80x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_100x_half_l_cfq
 
@@ -3111,6 +4915,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 8,293,400
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_100x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.1x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3127,6 +4965,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 28,722
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.1x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.3x_half_l_cfq
 
@@ -3145,6 +5017,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 47,870
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.3x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3161,6 +5067,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 114,890
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_half_l_cfq
 
@@ -3179,6 +5119,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 210,632
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3195,6 +5169,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 306,374
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_half_l_cfq
 
@@ -3213,6 +5221,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 976,568
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3229,6 +5271,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 2,891,408
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_half_l_cfq
 
@@ -3247,6 +5323,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 8,302,961
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3263,6 +5373,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_half_l_cfq
 
@@ -3281,6 +5425,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 57,444
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3297,6 +5475,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 124,464
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_half_l_cfq
 
@@ -3315,6 +5527,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 220,206
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3331,6 +5577,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 315,948
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_3x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_half_l_cfq
 
@@ -3349,6 +5629,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 986,142
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3365,6 +5679,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 2,900,982
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_30x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_half_l_cfq
 
@@ -3383,6 +5731,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 8,312,521
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_half_l_cfq
 
 *   **Download size**: `781.70 MiB`
@@ -3399,6 +5781,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 57,445
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.5x_b_cfq_0.1x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_half_l_cfq
 
@@ -3417,6 +5833,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 76,593
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.5x_b_cfq_0.3x_half_l_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3431,6 +5881,10 @@ Split     | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_half_l_cfq
 
@@ -3447,6 +5901,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_3x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3461,6 +5919,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_half_l_cfq
 
@@ -3477,6 +5939,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_30x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3491,6 +5957,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_half_l_cfq
 
@@ -3507,6 +5977,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_0.1x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3521,6 +5995,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_0.3x_half_l_cfq
 
@@ -3537,6 +6015,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_1x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3551,6 +6033,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_2x_half_l_cfq
 
@@ -3567,6 +6053,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_3x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3581,6 +6071,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_10x_half_l_cfq
 
@@ -3597,6 +6091,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_30x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3611,6 +6109,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_80x_half_l_cfq
 
@@ -3627,6 +6129,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_100x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3641,6 +6147,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_0.1x_half_l_cfq
 
@@ -3657,6 +6167,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_0.3x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3671,6 +6185,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_1x_half_l_cfq
 
@@ -3687,6 +6205,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_2x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3701,6 +6223,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_3x_half_l_cfq
 
@@ -3717,6 +6243,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_10x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3731,6 +6261,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_30x_half_l_cfq
 
@@ -3747,6 +6281,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_100x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3761,6 +6299,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_0.1x_half_l_cfq
 
@@ -3777,6 +6319,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_0.3x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3791,6 +6337,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_1x_half_l_cfq
 
@@ -3807,6 +6357,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_2x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3821,6 +6375,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_3x_half_l_cfq
 
@@ -3837,6 +6395,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_10x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3851,6 +6413,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_30x_half_l_cfq
 
@@ -3867,6 +6433,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_100x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3881,6 +6451,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_0.1x_half_l_cfq
 
@@ -3897,6 +6471,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_0.3x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3911,6 +6489,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_1x_half_l_cfq
 
@@ -3927,6 +6509,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_2x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3941,6 +6527,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_3x_half_l_cfq
 
@@ -3957,6 +6547,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_10x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -3971,6 +6565,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_30x_half_l_cfq
 
@@ -3987,6 +6585,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_100x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -4001,6 +6603,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_0.1x_n_cfq
 
@@ -4017,6 +6623,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4031,6 +6641,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_1x_n_cfq
 
@@ -4047,6 +6661,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_2x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4061,6 +6679,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_3x_n_cfq
 
@@ -4077,6 +6699,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_10x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4091,6 +6717,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_30x_n_cfq
 
@@ -4107,6 +6737,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_100x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4121,6 +6755,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.1x_n_cfq
 
@@ -4139,6 +6777,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 19,148
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.1x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4155,6 +6827,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.3x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_1x_n_cfq
 
@@ -4173,6 +6879,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 105,316
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_1x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_2x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4189,6 +6929,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 201,058
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_2x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_3x_n_cfq
 
@@ -4207,6 +6981,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 296,800
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_3x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_10x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4223,6 +7031,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 966,994
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_10x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_30x_n_cfq
 
@@ -4241,6 +7083,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,881,834
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_30x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_100x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4257,6 +7133,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 6,715,160
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_100x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.1x_n_cfq
 
@@ -4275,6 +7185,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 28,722
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.1x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4291,6 +7235,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 47,870
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.3x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_n_cfq
 
@@ -4309,6 +7287,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 114,890
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4325,6 +7337,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 210,632
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_n_cfq
 
@@ -4343,6 +7389,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 306,374
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4359,6 +7439,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 976,568
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_n_cfq
 
@@ -4377,6 +7491,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,891,408
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4393,6 +7541,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 6,724,612
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_n_cfq
 
@@ -4411,6 +7593,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 38,296
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4427,6 +7643,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 57,444
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_n_cfq
 
@@ -4445,6 +7695,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 124,464
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4461,6 +7745,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 220,206
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_n_cfq
 
@@ -4479,6 +7797,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 315,948
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_3x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4495,6 +7847,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 986,142
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_n_cfq
 
@@ -4513,6 +7899,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,900,982
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_30x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_n_cfq
 
 *   **Download size**: `712.20 MiB`
@@ -4529,6 +7949,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 6,734,058
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_n_cfq
 
@@ -4547,6 +8001,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 57,445
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.5x_b_cfq_0.1x_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4561,6 +8049,10 @@ Split     | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_n_cfq
 
@@ -4577,6 +8069,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4591,6 +8087,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_3x_n_cfq
 
@@ -4607,6 +8107,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4621,6 +8125,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_30x_n_cfq
 
@@ -4637,6 +8145,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4651,6 +8163,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_0.1x_n_cfq
 
@@ -4667,6 +8183,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4681,6 +8201,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_1x_n_cfq
 
@@ -4697,6 +8221,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_2x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4711,6 +8239,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_3x_n_cfq
 
@@ -4727,6 +8259,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_10x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4741,6 +8277,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_30x_n_cfq
 
@@ -4757,6 +8297,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_100x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4771,6 +8315,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_0.1x_n_cfq
 
@@ -4787,6 +8335,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4801,6 +8353,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_1x_n_cfq
 
@@ -4817,6 +8373,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_2x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4831,6 +8391,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_3x_n_cfq
 
@@ -4847,6 +8411,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_10x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4861,6 +8429,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_30x_n_cfq
 
@@ -4877,6 +8449,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_100x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4891,6 +8467,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_0.1x_n_cfq
 
@@ -4907,6 +8487,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4921,6 +8505,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_1x_n_cfq
 
@@ -4937,6 +8525,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_2x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4951,6 +8543,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_3x_n_cfq
 
@@ -4967,6 +8563,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_10x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -4981,6 +8581,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_30x_n_cfq
 
@@ -4997,6 +8601,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_100x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5011,6 +8619,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_0.1x_n_cfq
 
@@ -5027,6 +8639,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5041,6 +8657,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_1x_n_cfq
 
@@ -5057,6 +8677,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_2x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5071,6 +8695,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_3x_n_cfq
 
@@ -5087,6 +8715,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_10x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5101,6 +8733,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_30x_n_cfq
 
@@ -5117,6 +8753,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_100x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5131,6 +8771,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_0.1x_half_n_cfq
 
@@ -5147,6 +8791,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_0.3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5161,6 +8809,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_1x_half_n_cfq
 
@@ -5177,6 +8829,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_2x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5191,6 +8847,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_3x_half_n_cfq
 
@@ -5207,6 +8867,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_10x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5221,6 +8885,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_30x_half_n_cfq
 
@@ -5237,6 +8905,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_100x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5251,6 +8923,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.1x_half_n_cfq
 
@@ -5269,6 +8945,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 19,148
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.1x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.3x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5285,6 +8995,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.3x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_1x_half_n_cfq
 
@@ -5303,6 +9047,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 105,316
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_1x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_2x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5319,6 +9097,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 201,058
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_2x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_3x_half_n_cfq
 
@@ -5337,6 +9149,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 296,800
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_3x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_10x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5353,6 +9199,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 966,994
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_10x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_30x_half_n_cfq
 
@@ -5371,6 +9251,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,881,834
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_30x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_100x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5387,6 +9301,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 3,376,429
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_100x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.1x_half_n_cfq
 
@@ -5405,6 +9353,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 28,722
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.1x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.3x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5421,6 +9403,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 47,870
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.3x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_half_n_cfq
 
@@ -5439,6 +9455,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 114,890
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5455,6 +9505,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 210,632
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_half_n_cfq
 
@@ -5473,6 +9557,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 306,374
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5489,6 +9607,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 976,568
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_half_n_cfq
 
@@ -5507,6 +9659,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,891,408
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5523,6 +9709,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 3,386,003
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_half_n_cfq
 
@@ -5541,6 +9761,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 38,296
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5557,6 +9811,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 57,444
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_half_n_cfq
 
@@ -5575,6 +9863,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 124,464
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5591,6 +9913,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 220,206
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_half_n_cfq
 
@@ -5609,6 +9965,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 315,948
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_3x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5625,6 +10015,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 986,142
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_half_n_cfq
 
@@ -5643,6 +10067,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,900,982
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_30x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5659,6 +10117,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 3,395,577
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_half_n_cfq
 
@@ -5677,6 +10169,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 57,445
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.5x_b_cfq_0.1x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_half_n_cfq
 
 *   **Download size**: `544.71 MiB`
@@ -5694,6 +10220,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 76,593
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.5x_b_cfq_0.3x_half_n_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5708,6 +10268,10 @@ Split     | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_half_n_cfq
 
@@ -5724,6 +10288,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5738,6 +10306,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_half_n_cfq
 
@@ -5754,6 +10326,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_30x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5768,6 +10344,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_half_n_cfq
 
@@ -5784,6 +10364,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_0.1x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5798,6 +10382,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_0.3x_half_n_cfq
 
@@ -5814,6 +10402,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_1x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5828,6 +10420,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_2x_half_n_cfq
 
@@ -5844,6 +10440,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5858,6 +10458,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_10x_half_n_cfq
 
@@ -5874,6 +10478,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_30x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5888,6 +10496,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_100x_half_n_cfq
 
@@ -5904,6 +10516,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_0.1x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5918,6 +10534,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_0.3x_half_n_cfq
 
@@ -5934,6 +10554,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_1x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5948,6 +10572,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_2x_half_n_cfq
 
@@ -5964,6 +10592,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -5978,6 +10610,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_10x_half_n_cfq
 
@@ -5994,6 +10630,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_30x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -6008,6 +10648,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_100x_half_n_cfq
 
@@ -6024,6 +10668,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_0.1x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -6038,6 +10686,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_0.3x_half_n_cfq
 
@@ -6054,6 +10706,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_1x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -6068,6 +10724,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_2x_half_n_cfq
 
@@ -6084,6 +10744,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -6098,6 +10762,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_10x_half_n_cfq
 
@@ -6114,6 +10782,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_30x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -6128,6 +10800,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_100x_half_n_cfq
 
@@ -6144,6 +10820,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_0.1x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -6158,6 +10838,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_0.3x_half_n_cfq
 
@@ -6174,6 +10858,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_1x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -6188,6 +10876,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_2x_half_n_cfq
 
@@ -6204,6 +10896,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -6218,6 +10914,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_10x_half_n_cfq
 
@@ -6234,6 +10934,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_30x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -6248,6 +10952,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_100x_half_n_cfq
 
@@ -6264,6 +10972,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_0.1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6278,6 +10990,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_0.3x_x_cfq
 
@@ -6294,6 +11010,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6308,6 +11028,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_2x_x_cfq
 
@@ -6324,6 +11048,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_3x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6338,6 +11066,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_10x_x_cfq
 
@@ -6354,6 +11086,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_30x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6368,6 +11104,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_80x_x_cfq
 
@@ -6384,6 +11124,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_100x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6398,6 +11142,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.1x_x_cfq
 
@@ -6416,6 +11164,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 19,148
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.1x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.3x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6432,6 +11214,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.3x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_1x_x_cfq
 
@@ -6450,6 +11266,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 105,316
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_1x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_2x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6466,6 +11316,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 201,058
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_2x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_3x_x_cfq
 
@@ -6484,6 +11368,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 296,800
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_3x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_10x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6500,6 +11418,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 966,994
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_10x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_30x_x_cfq
 
@@ -6518,6 +11470,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,881,834
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_30x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_80x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6534,6 +11520,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 7,668,934
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_80x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_100x_x_cfq
 
@@ -6552,6 +11572,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 9,577,771
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_100x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.1x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6568,6 +11622,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 28,722
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.1x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.3x_x_cfq
 
@@ -6586,6 +11674,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 47,870
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.3x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6602,6 +11724,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 114,890
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_x_cfq
 
@@ -6620,6 +11776,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 210,632
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6636,6 +11826,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 306,374
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_x_cfq
 
@@ -6654,6 +11878,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 976,568
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6670,6 +11928,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 2,891,408
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_x_cfq
 
@@ -6688,6 +11980,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 9,587,309
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6704,6 +12030,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_x_cfq
 
@@ -6722,6 +12082,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 57,444
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6738,6 +12132,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 124,464
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_x_cfq
 
@@ -6756,6 +12184,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 220,206
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6772,6 +12234,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 315,948
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_3x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_x_cfq
 
@@ -6790,6 +12286,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 986,142
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6806,6 +12336,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 2,900,982
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_30x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_x_cfq
 
@@ -6824,6 +12388,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 9,596,853
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_x_cfq
 
 *   **Download size**: `892.84 MiB`
@@ -6841,6 +12439,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 57,445
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.5x_b_cfq_0.1x_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6855,6 +12487,10 @@ Split     | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_x_cfq
 
@@ -6871,6 +12507,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6885,6 +12525,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_3x_x_cfq
 
@@ -6901,6 +12545,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6915,6 +12563,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_30x_x_cfq
 
@@ -6931,6 +12583,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6945,6 +12601,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_0.1x_x_cfq
 
@@ -6961,6 +12621,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_0.3x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -6975,6 +12639,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_1x_x_cfq
 
@@ -6991,6 +12659,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_2x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7005,6 +12677,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_3x_x_cfq
 
@@ -7021,6 +12697,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_10x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7035,6 +12715,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_30x_x_cfq
 
@@ -7051,6 +12735,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_80x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7065,6 +12753,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_100x_x_cfq
 
@@ -7081,6 +12773,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_0.1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7095,6 +12791,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_0.3x_x_cfq
 
@@ -7111,6 +12811,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7125,6 +12829,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_2x_x_cfq
 
@@ -7141,6 +12849,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_3x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7155,6 +12867,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_10x_x_cfq
 
@@ -7171,6 +12887,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_30x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7185,6 +12905,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_100x_x_cfq
 
@@ -7201,6 +12925,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_0.1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7215,6 +12943,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_0.3x_x_cfq
 
@@ -7231,6 +12963,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7245,6 +12981,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_2x_x_cfq
 
@@ -7261,6 +13001,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_3x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7275,6 +13019,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_10x_x_cfq
 
@@ -7291,6 +13039,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_30x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7305,6 +13057,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_100x_x_cfq
 
@@ -7321,6 +13077,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_0.1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7335,6 +13095,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_0.3x_x_cfq
 
@@ -7351,6 +13115,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7365,6 +13133,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_2x_x_cfq
 
@@ -7381,6 +13153,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_3x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7395,6 +13171,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_10x_x_cfq
 
@@ -7411,6 +13191,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_30x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7425,6 +13209,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_100x_x_cfq
 
@@ -7441,6 +13229,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_0.1x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7455,6 +13247,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_0.3x_half_x_cfq
 
@@ -7471,6 +13267,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_1x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7485,6 +13285,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_2x_half_x_cfq
 
@@ -7501,6 +13305,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_3x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7515,6 +13323,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_10x_half_x_cfq
 
@@ -7531,6 +13343,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_30x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7545,6 +13361,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0x_b_cfq_80x_half_x_cfq
 
@@ -7561,6 +13381,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0x_b_cfq_100x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -7575,6 +13399,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.1x_half_x_cfq
 
@@ -7593,6 +13421,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 19,148
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.1x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_0.3x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7609,6 +13471,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_0.3x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_1x_half_x_cfq
 
@@ -7627,6 +13523,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 105,316
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_1x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_2x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7643,6 +13573,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 201,058
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_2x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_3x_half_x_cfq
 
@@ -7661,6 +13625,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 296,800
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_3x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_10x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7677,6 +13675,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 966,994
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_10x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_30x_half_x_cfq
 
@@ -7695,6 +13727,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 2,881,834
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_30x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.1x_b_cfq_80x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7711,6 +13777,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 7,668,934
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_80x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.1x_b_cfq_100x_half_x_cfq
 
@@ -7729,6 +13829,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 8,383,193
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.1x_b_cfq_100x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.1x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7745,6 +13879,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 28,722
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.1x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_0.3x_half_x_cfq
 
@@ -7763,6 +13931,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 47,870
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_0.3x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7779,6 +13981,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 114,890
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_half_x_cfq
 
@@ -7797,6 +14033,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 210,632
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7813,6 +14083,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 306,374
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_half_x_cfq
 
@@ -7831,6 +14135,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 976,568
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7847,6 +14185,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 2,891,408
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_half_x_cfq
 
@@ -7865,6 +14237,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 8,392,755
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7881,6 +14287,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 38,296
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_half_x_cfq
 
@@ -7899,6 +14339,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 57,444
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7915,6 +14389,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 124,464
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_half_x_cfq
 
@@ -7933,6 +14441,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 220,206
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7949,6 +14491,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 315,948
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_3x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_half_x_cfq
 
@@ -7967,6 +14543,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 986,142
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -7983,6 +14593,40 @@ Split     | Examples
 :-------- | --------:
 `'test'`  | 95,742
 `'train'` | 2,900,982
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_30x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_half_x_cfq
 
@@ -8001,6 +14645,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 8,402,320
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_half_x_cfq
 
 *   **Download size**: `797.12 MiB`
@@ -8017,6 +14695,40 @@ Split     | Examples
 :-------- | -------:
 `'test'`  | 95,742
 `'train'` | 57,445
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.5x_b_cfq_0.1x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_half_x_cfq
 
@@ -8035,6 +14747,40 @@ Split     | Examples
 `'test'`  | 95,742
 `'train'` | 76,593
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.5x_b_cfq_0.3x_half_x_cfq-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8049,6 +14795,10 @@ Split     | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_half_x_cfq
 
@@ -8065,6 +14815,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_3x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8079,6 +14833,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_half_x_cfq
 
@@ -8095,6 +14853,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_0.5x_b_cfq_30x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8109,6 +14871,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_half_x_cfq
 
@@ -8125,6 +14891,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_0.1x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8139,6 +14909,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_0.3x_half_x_cfq
 
@@ -8155,6 +14929,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_1x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8169,6 +14947,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_2x_half_x_cfq
 
@@ -8185,6 +14967,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_3x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8199,6 +14985,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_10x_half_x_cfq
 
@@ -8215,6 +15005,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_30x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8229,6 +15023,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_1x_b_cfq_80x_half_x_cfq
 
@@ -8245,6 +15043,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_1x_b_cfq_100x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8259,6 +15061,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_0.1x_half_x_cfq
 
@@ -8275,6 +15081,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_0.3x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8289,6 +15099,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_1x_half_x_cfq
 
@@ -8305,6 +15119,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_2x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8319,6 +15137,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_3x_half_x_cfq
 
@@ -8335,6 +15157,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_10x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8349,6 +15175,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_2x_b_cfq_30x_half_x_cfq
 
@@ -8365,6 +15195,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_2x_b_cfq_100x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8379,6 +15213,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_0.1x_half_x_cfq
 
@@ -8395,6 +15233,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_0.3x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8409,6 +15251,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_1x_half_x_cfq
 
@@ -8425,6 +15271,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_2x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8439,6 +15289,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_3x_half_x_cfq
 
@@ -8455,6 +15309,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_10x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8469,6 +15327,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_3x_b_cfq_30x_half_x_cfq
 
@@ -8485,6 +15347,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_3x_b_cfq_100x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8499,6 +15365,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_0.1x_half_x_cfq
 
@@ -8515,6 +15385,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_0.3x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8529,6 +15403,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_1x_half_x_cfq
 
@@ -8545,6 +15423,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_2x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8559,6 +15441,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_3x_half_x_cfq
 
@@ -8575,6 +15461,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_10x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8589,6 +15479,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/equal_weighting_5x_b_cfq_30x_half_x_cfq
 
@@ -8605,6 +15499,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/equal_weighting_5x_b_cfq_100x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -8619,6 +15517,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_0.1x_b_cfq_0.1x_l_cfq
 
@@ -8635,6 +15537,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_0.3x_b_cfq_0.3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -8649,6 +15555,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_1x_b_cfq_1x_l_cfq
 
@@ -8665,6 +15575,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_3x_b_cfq_3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -8679,6 +15593,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_10x_b_cfq_10x_l_cfq
 
@@ -8695,6 +15613,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_30x_b_cfq_30x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -8709,6 +15631,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_80x_b_cfq_80x_l_cfq
 
@@ -8725,6 +15651,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_0.1x_b_cfq_0.1x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -8739,6 +15669,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_0.3x_b_cfq_0.3x_half_l_cfq
 
@@ -8755,6 +15689,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_1x_b_cfq_1x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -8769,6 +15707,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_3x_b_cfq_3x_half_l_cfq
 
@@ -8785,6 +15727,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_10x_b_cfq_10x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -8799,6 +15745,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_30x_b_cfq_30x_half_l_cfq
 
@@ -8815,6 +15765,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_80x_b_cfq_80x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -8829,6 +15783,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_0.1x_b_cfq_0.1x_n_cfq
 
@@ -8845,6 +15803,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_0.3x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -8859,6 +15821,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_1x_b_cfq_1x_n_cfq
 
@@ -8875,6 +15841,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_3x_b_cfq_3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -8889,6 +15859,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_10x_b_cfq_10x_n_cfq
 
@@ -8905,6 +15879,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_30x_b_cfq_30x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -8919,6 +15897,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_0.1x_b_cfq_0.1x_half_n_cfq
 
@@ -8935,6 +15917,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_0.3x_b_cfq_0.3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -8949,6 +15935,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_1x_b_cfq_1x_half_n_cfq
 
@@ -8965,6 +15955,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_3x_b_cfq_3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -8979,6 +15973,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_10x_b_cfq_10x_half_n_cfq
 
@@ -8995,6 +15993,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_30x_b_cfq_30x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -9009,6 +16011,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_0.1x_b_cfq_0.1x_x_cfq
 
@@ -9025,6 +16031,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_0.3x_b_cfq_0.3x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9039,6 +16049,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_1x_b_cfq_1x_x_cfq
 
@@ -9055,6 +16069,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_3x_b_cfq_3x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9069,6 +16087,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_10x_b_cfq_10x_x_cfq
 
@@ -9085,6 +16107,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_30x_b_cfq_30x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9099,6 +16125,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_80x_b_cfq_80x_x_cfq
 
@@ -9115,6 +16145,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_0.1x_b_cfq_0.1x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9129,6 +16163,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_0.3x_b_cfq_0.3x_half_x_cfq
 
@@ -9145,6 +16183,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_1x_b_cfq_1x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9159,6 +16201,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_3x_b_cfq_3x_half_x_cfq
 
@@ -9175,6 +16221,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_10x_b_cfq_10x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9189,6 +16239,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_0.1x_unique_30x_b_cfq_30x_half_x_cfq
 
@@ -9205,6 +16259,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_0.1x_unique_80x_b_cfq_80x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9219,6 +16277,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_0.1x_b_cfq_0.1x_l_cfq
 
@@ -9235,6 +16297,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_0.3x_b_cfq_0.3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -9249,6 +16315,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_1x_b_cfq_1x_l_cfq
 
@@ -9265,6 +16335,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_3x_b_cfq_3x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -9279,6 +16353,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_10x_b_cfq_10x_l_cfq
 
@@ -9295,6 +16373,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_30x_b_cfq_30x_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -9309,6 +16391,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_80x_b_cfq_80x_l_cfq
 
@@ -9325,6 +16411,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_0.1x_b_cfq_0.1x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -9339,6 +16429,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_0.3x_b_cfq_0.3x_half_l_cfq
 
@@ -9355,6 +16449,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_1x_b_cfq_1x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -9369,6 +16467,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_3x_b_cfq_3x_half_l_cfq
 
@@ -9385,6 +16487,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_10x_b_cfq_10x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -9399,6 +16505,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_30x_b_cfq_30x_half_l_cfq
 
@@ -9415,6 +16525,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_80x_b_cfq_80x_half_l_cfq
 
 *   **Download size**: `Unknown size`
@@ -9429,6 +16543,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_0.1x_b_cfq_0.1x_n_cfq
 
@@ -9445,6 +16563,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_0.3x_b_cfq_0.3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -9459,6 +16581,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_1x_b_cfq_1x_n_cfq
 
@@ -9475,6 +16601,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_3x_b_cfq_3x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -9489,6 +16619,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_10x_b_cfq_10x_n_cfq
 
@@ -9505,6 +16639,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_30x_b_cfq_30x_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -9519,6 +16657,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_0.1x_b_cfq_0.1x_half_n_cfq
 
@@ -9535,6 +16677,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_0.3x_b_cfq_0.3x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -9549,6 +16695,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_3x_b_cfq_3x_half_n_cfq
 
@@ -9565,6 +16715,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_10x_b_cfq_10x_half_n_cfq
 
 *   **Download size**: `Unknown size`
@@ -9579,6 +16733,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_30x_b_cfq_30x_half_n_cfq
 
@@ -9595,6 +16753,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_0.1x_b_cfq_0.1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9609,6 +16771,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_0.3x_b_cfq_0.3x_x_cfq
 
@@ -9625,6 +16791,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_1x_b_cfq_1x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9639,6 +16809,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_3x_b_cfq_3x_x_cfq
 
@@ -9655,6 +16829,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_10x_b_cfq_10x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9669,6 +16847,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_30x_b_cfq_30x_x_cfq
 
@@ -9685,6 +16867,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_80x_b_cfq_80x_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9699,6 +16885,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_0.1x_b_cfq_0.1x_half_x_cfq
 
@@ -9715,6 +16905,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_0.3x_b_cfq_0.3x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9729,6 +16923,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_1x_b_cfq_1x_half_x_cfq
 
@@ -9745,6 +16943,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_3x_b_cfq_3x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9759,6 +16961,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_10x_b_cfq_10x_half_x_cfq
 
@@ -9775,6 +16981,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/overweighting_1x_unique_30x_b_cfq_30x_half_x_cfq
 
 *   **Download size**: `Unknown size`
@@ -9789,6 +16999,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/overweighting_1x_unique_80x_b_cfq_80x_half_x_cfq
 
@@ -9805,6 +17019,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/ungrounded_on_grounded_0.1x
 
 *   **Download size**: `Unknown size`
@@ -9819,6 +17037,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/ungrounded_on_grounded_0.2x
 
@@ -9835,6 +17057,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/ungrounded_on_grounded_0.3x
 
 *   **Download size**: `Unknown size`
@@ -9849,6 +17075,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/ungrounded_on_grounded_0.5x
 
@@ -9865,6 +17095,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/ungrounded_on_grounded_1x
 
 *   **Download size**: `Unknown size`
@@ -9879,6 +17113,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/ungrounded_on_grounded_2x
 
@@ -9895,6 +17133,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/ungrounded_on_grounded_3x
 
 *   **Download size**: `Unknown size`
@@ -9909,6 +17151,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/ungrounded_on_grounded_10x
 
@@ -9925,6 +17171,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/ungrounded_on_grounded_30x
 
 *   **Download size**: `Unknown size`
@@ -9939,6 +17189,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/ungrounded_on_grounded_100x
 
@@ -9955,6 +17209,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r0
 
 *   **Download size**: `Unknown size`
@@ -9969,6 +17227,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r1
 
@@ -9985,6 +17247,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r2
 
 *   **Download size**: `Unknown size`
@@ -9999,6 +17265,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r3
 
@@ -10015,6 +17285,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r4
 
 *   **Download size**: `Unknown size`
@@ -10029,6 +17303,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r5
 
@@ -10045,6 +17323,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r6
 
 *   **Download size**: `Unknown size`
@@ -10059,6 +17341,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r7
 
@@ -10075,6 +17361,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r8
 
 *   **Download size**: `Unknown size`
@@ -10089,6 +17379,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r9
 
@@ -10105,6 +17399,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r10
 
 *   **Download size**: `Unknown size`
@@ -10119,6 +17417,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r11
 
@@ -10135,6 +17437,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r12
 
 *   **Download size**: `Unknown size`
@@ -10149,6 +17455,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r13
 
@@ -10165,6 +17475,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r14
 
 *   **Download size**: `Unknown size`
@@ -10179,6 +17493,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r15
 
@@ -10195,6 +17513,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r16
 
 *   **Download size**: `Unknown size`
@@ -10209,6 +17531,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r17
 
@@ -10225,6 +17551,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r18
 
 *   **Download size**: `Unknown size`
@@ -10239,6 +17569,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r19
 
@@ -10255,6 +17589,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r20
 
 *   **Download size**: `Unknown size`
@@ -10269,6 +17607,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r21
 
@@ -10285,6 +17627,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r22
 
 *   **Download size**: `Unknown size`
@@ -10299,6 +17645,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r23
 
@@ -10315,6 +17665,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r24
 
 *   **Download size**: `Unknown size`
@@ -10329,6 +17683,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r25
 
@@ -10345,6 +17703,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r26
 
 *   **Download size**: `Unknown size`
@@ -10359,6 +17721,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r27
 
@@ -10375,6 +17741,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r28
 
 *   **Download size**: `Unknown size`
@@ -10389,6 +17759,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r29
 
@@ -10405,6 +17779,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r30
 
 *   **Download size**: `Unknown size`
@@ -10419,6 +17797,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r31
 
@@ -10435,6 +17817,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r32
 
 *   **Download size**: `Unknown size`
@@ -10449,6 +17835,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r33
 
@@ -10465,6 +17855,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r34
 
 *   **Download size**: `Unknown size`
@@ -10479,6 +17873,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0_r35
 
@@ -10495,6 +17893,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r0
 
 *   **Download size**: `Unknown size`
@@ -10509,6 +17911,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r1
 
@@ -10525,6 +17931,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r2
 
 *   **Download size**: `Unknown size`
@@ -10539,6 +17949,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r3
 
@@ -10555,6 +17969,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r4
 
 *   **Download size**: `Unknown size`
@@ -10569,6 +17987,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r5
 
@@ -10585,6 +18007,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r6
 
 *   **Download size**: `Unknown size`
@@ -10599,6 +18025,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r7
 
@@ -10615,6 +18045,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r8
 
 *   **Download size**: `Unknown size`
@@ -10629,6 +18063,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r9
 
@@ -10645,6 +18083,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r10
 
 *   **Download size**: `Unknown size`
@@ -10659,6 +18101,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r11
 
@@ -10675,6 +18121,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r12
 
 *   **Download size**: `Unknown size`
@@ -10689,6 +18139,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r13
 
@@ -10705,6 +18159,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r14
 
 *   **Download size**: `Unknown size`
@@ -10719,6 +18177,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r15
 
@@ -10735,6 +18197,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r16
 
 *   **Download size**: `Unknown size`
@@ -10749,6 +18215,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r17
 
@@ -10765,6 +18235,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r18
 
 *   **Download size**: `Unknown size`
@@ -10779,6 +18253,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r19
 
@@ -10795,6 +18273,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r20
 
 *   **Download size**: `Unknown size`
@@ -10809,6 +18291,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r21
 
@@ -10825,6 +18311,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r22
 
 *   **Download size**: `Unknown size`
@@ -10839,6 +18329,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r23
 
@@ -10855,6 +18349,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r24
 
 *   **Download size**: `Unknown size`
@@ -10869,6 +18367,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r25
 
@@ -10885,6 +18387,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r26
 
 *   **Download size**: `Unknown size`
@@ -10899,6 +18405,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r27
 
@@ -10915,6 +18425,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r28
 
 *   **Download size**: `Unknown size`
@@ -10929,6 +18443,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r29
 
@@ -10945,6 +18463,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r30
 
 *   **Download size**: `Unknown size`
@@ -10959,6 +18481,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r31
 
@@ -10975,6 +18501,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r32
 
 *   **Download size**: `Unknown size`
@@ -10989,6 +18519,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r33
 
@@ -11005,6 +18539,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r34
 
 *   **Download size**: `Unknown size`
@@ -11019,6 +18557,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.1_r35
 
@@ -11035,6 +18577,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r0
 
 *   **Download size**: `Unknown size`
@@ -11049,6 +18595,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r1
 
@@ -11065,6 +18615,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r2
 
 *   **Download size**: `Unknown size`
@@ -11079,6 +18633,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r3
 
@@ -11095,6 +18653,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r4
 
 *   **Download size**: `Unknown size`
@@ -11109,6 +18671,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r5
 
@@ -11125,6 +18691,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r6
 
 *   **Download size**: `Unknown size`
@@ -11139,6 +18709,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r7
 
@@ -11155,6 +18729,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r8
 
 *   **Download size**: `Unknown size`
@@ -11169,6 +18747,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r9
 
@@ -11185,6 +18767,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r10
 
 *   **Download size**: `Unknown size`
@@ -11199,6 +18785,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r11
 
@@ -11215,6 +18805,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r12
 
 *   **Download size**: `Unknown size`
@@ -11229,6 +18823,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r13
 
@@ -11245,6 +18843,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r14
 
 *   **Download size**: `Unknown size`
@@ -11259,6 +18861,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r15
 
@@ -11275,6 +18881,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r16
 
 *   **Download size**: `Unknown size`
@@ -11289,6 +18899,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r17
 
@@ -11305,6 +18919,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r18
 
 *   **Download size**: `Unknown size`
@@ -11319,6 +18937,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r19
 
@@ -11335,6 +18957,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r20
 
 *   **Download size**: `Unknown size`
@@ -11349,6 +18975,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r21
 
@@ -11365,6 +18995,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r22
 
 *   **Download size**: `Unknown size`
@@ -11379,6 +19013,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r23
 
@@ -11395,6 +19033,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r24
 
 *   **Download size**: `Unknown size`
@@ -11409,6 +19051,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r25
 
@@ -11425,6 +19071,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r26
 
 *   **Download size**: `Unknown size`
@@ -11439,6 +19089,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r27
 
@@ -11455,6 +19109,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r28
 
 *   **Download size**: `Unknown size`
@@ -11469,6 +19127,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r29
 
@@ -11485,6 +19147,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r30
 
 *   **Download size**: `Unknown size`
@@ -11499,6 +19165,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r31
 
@@ -11515,6 +19185,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r32
 
 *   **Download size**: `Unknown size`
@@ -11529,6 +19203,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r33
 
@@ -11545,6 +19223,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r34
 
 *   **Download size**: `Unknown size`
@@ -11559,6 +19241,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.2_r35
 
@@ -11575,6 +19261,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r0
 
 *   **Download size**: `Unknown size`
@@ -11589,6 +19279,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r1
 
@@ -11605,6 +19299,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r2
 
 *   **Download size**: `Unknown size`
@@ -11619,6 +19317,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r3
 
@@ -11635,6 +19337,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r4
 
 *   **Download size**: `Unknown size`
@@ -11649,6 +19355,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r5
 
@@ -11665,6 +19375,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r6
 
 *   **Download size**: `Unknown size`
@@ -11679,6 +19393,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r7
 
@@ -11695,6 +19413,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r8
 
 *   **Download size**: `Unknown size`
@@ -11709,6 +19431,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r9
 
@@ -11725,6 +19451,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r10
 
 *   **Download size**: `Unknown size`
@@ -11739,6 +19469,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r11
 
@@ -11755,6 +19489,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r12
 
 *   **Download size**: `Unknown size`
@@ -11769,6 +19507,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r13
 
@@ -11785,6 +19527,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r14
 
 *   **Download size**: `Unknown size`
@@ -11799,6 +19545,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r15
 
@@ -11815,6 +19565,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r16
 
 *   **Download size**: `Unknown size`
@@ -11829,6 +19583,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r17
 
@@ -11845,6 +19603,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r18
 
 *   **Download size**: `Unknown size`
@@ -11859,6 +19621,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r19
 
@@ -11875,6 +19641,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r20
 
 *   **Download size**: `Unknown size`
@@ -11889,6 +19659,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r21
 
@@ -11905,6 +19679,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r22
 
 *   **Download size**: `Unknown size`
@@ -11919,6 +19697,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r23
 
@@ -11935,6 +19717,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r24
 
 *   **Download size**: `Unknown size`
@@ -11949,6 +19735,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r25
 
@@ -11965,6 +19755,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r26
 
 *   **Download size**: `Unknown size`
@@ -11979,6 +19773,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r27
 
@@ -11995,6 +19793,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r28
 
 *   **Download size**: `Unknown size`
@@ -12009,6 +19811,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r29
 
@@ -12025,6 +19831,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r30
 
 *   **Download size**: `Unknown size`
@@ -12039,6 +19849,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r31
 
@@ -12055,6 +19869,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r32
 
 *   **Download size**: `Unknown size`
@@ -12069,6 +19887,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r33
 
@@ -12085,6 +19907,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r34
 
 *   **Download size**: `Unknown size`
@@ -12099,6 +19925,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.3_r35
 
@@ -12115,6 +19945,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r0
 
 *   **Download size**: `Unknown size`
@@ -12129,6 +19963,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r1
 
@@ -12145,6 +19983,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r2
 
 *   **Download size**: `Unknown size`
@@ -12159,6 +20001,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r3
 
@@ -12175,6 +20021,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r4
 
 *   **Download size**: `Unknown size`
@@ -12189,6 +20039,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r5
 
@@ -12205,6 +20059,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r6
 
 *   **Download size**: `Unknown size`
@@ -12219,6 +20077,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r7
 
@@ -12235,6 +20097,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r8
 
 *   **Download size**: `Unknown size`
@@ -12249,6 +20115,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r9
 
@@ -12265,6 +20135,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r10
 
 *   **Download size**: `Unknown size`
@@ -12279,6 +20153,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r11
 
@@ -12295,6 +20173,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r12
 
 *   **Download size**: `Unknown size`
@@ -12309,6 +20191,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r13
 
@@ -12325,6 +20211,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r14
 
 *   **Download size**: `Unknown size`
@@ -12339,6 +20229,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r15
 
@@ -12355,6 +20249,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r16
 
 *   **Download size**: `Unknown size`
@@ -12369,6 +20267,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r17
 
@@ -12385,6 +20287,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r18
 
 *   **Download size**: `Unknown size`
@@ -12399,6 +20305,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r19
 
@@ -12415,6 +20325,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r20
 
 *   **Download size**: `Unknown size`
@@ -12429,6 +20343,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r21
 
@@ -12445,6 +20363,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r22
 
 *   **Download size**: `Unknown size`
@@ -12459,6 +20381,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r23
 
@@ -12475,6 +20401,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r24
 
 *   **Download size**: `Unknown size`
@@ -12489,6 +20419,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r25
 
@@ -12505,6 +20439,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r26
 
 *   **Download size**: `Unknown size`
@@ -12519,6 +20457,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r27
 
@@ -12535,6 +20477,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r28
 
 *   **Download size**: `Unknown size`
@@ -12549,6 +20495,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r29
 
@@ -12565,6 +20515,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r30
 
 *   **Download size**: `Unknown size`
@@ -12579,6 +20533,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r31
 
@@ -12595,6 +20553,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r32
 
 *   **Download size**: `Unknown size`
@@ -12609,6 +20571,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r33
 
@@ -12625,6 +20591,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r34
 
 *   **Download size**: `Unknown size`
@@ -12639,6 +20609,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.4_r35
 
@@ -12655,6 +20629,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r0
 
 *   **Download size**: `Unknown size`
@@ -12669,6 +20647,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r1
 
@@ -12685,6 +20667,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r2
 
 *   **Download size**: `Unknown size`
@@ -12699,6 +20685,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r3
 
@@ -12715,6 +20705,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r4
 
 *   **Download size**: `Unknown size`
@@ -12729,6 +20723,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r5
 
@@ -12745,6 +20743,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r6
 
 *   **Download size**: `Unknown size`
@@ -12759,6 +20761,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r7
 
@@ -12775,6 +20781,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r8
 
 *   **Download size**: `Unknown size`
@@ -12789,6 +20799,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r9
 
@@ -12805,6 +20819,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r10
 
 *   **Download size**: `Unknown size`
@@ -12819,6 +20837,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r11
 
@@ -12835,6 +20857,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r12
 
 *   **Download size**: `Unknown size`
@@ -12849,6 +20875,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r13
 
@@ -12865,6 +20895,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r14
 
 *   **Download size**: `Unknown size`
@@ -12879,6 +20913,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r15
 
@@ -12895,6 +20933,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r16
 
 *   **Download size**: `Unknown size`
@@ -12909,6 +20951,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r17
 
@@ -12925,6 +20971,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r18
 
 *   **Download size**: `Unknown size`
@@ -12939,6 +20989,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r19
 
@@ -12955,6 +21009,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r20
 
 *   **Download size**: `Unknown size`
@@ -12969,6 +21027,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r21
 
@@ -12985,6 +21047,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r22
 
 *   **Download size**: `Unknown size`
@@ -12999,6 +21065,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r23
 
@@ -13015,6 +21085,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r24
 
 *   **Download size**: `Unknown size`
@@ -13029,6 +21103,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r25
 
@@ -13045,6 +21123,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r26
 
 *   **Download size**: `Unknown size`
@@ -13059,6 +21141,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r27
 
@@ -13075,6 +21161,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r28
 
 *   **Download size**: `Unknown size`
@@ -13089,6 +21179,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r29
 
@@ -13105,6 +21199,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r30
 
 *   **Download size**: `Unknown size`
@@ -13119,6 +21217,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r31
 
@@ -13135,6 +21237,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r32
 
 *   **Download size**: `Unknown size`
@@ -13149,6 +21255,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r33
 
@@ -13165,6 +21275,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r34
 
 *   **Download size**: `Unknown size`
@@ -13179,6 +21293,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.5_r35
 
@@ -13195,6 +21313,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r0
 
 *   **Download size**: `Unknown size`
@@ -13209,6 +21331,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r1
 
@@ -13225,6 +21351,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r2
 
 *   **Download size**: `Unknown size`
@@ -13239,6 +21369,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r3
 
@@ -13255,6 +21389,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r4
 
 *   **Download size**: `Unknown size`
@@ -13269,6 +21407,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r5
 
@@ -13285,6 +21427,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r6
 
 *   **Download size**: `Unknown size`
@@ -13299,6 +21445,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r7
 
@@ -13315,6 +21465,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r8
 
 *   **Download size**: `Unknown size`
@@ -13329,6 +21483,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r9
 
@@ -13345,6 +21503,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r10
 
 *   **Download size**: `Unknown size`
@@ -13359,6 +21521,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r11
 
@@ -13375,6 +21541,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r12
 
 *   **Download size**: `Unknown size`
@@ -13389,6 +21559,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r13
 
@@ -13405,6 +21579,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r14
 
 *   **Download size**: `Unknown size`
@@ -13419,6 +21597,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r15
 
@@ -13435,6 +21617,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r16
 
 *   **Download size**: `Unknown size`
@@ -13449,6 +21635,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r17
 
@@ -13465,6 +21655,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r18
 
 *   **Download size**: `Unknown size`
@@ -13479,6 +21673,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r19
 
@@ -13495,6 +21693,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r20
 
 *   **Download size**: `Unknown size`
@@ -13509,6 +21711,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r21
 
@@ -13525,6 +21731,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r22
 
 *   **Download size**: `Unknown size`
@@ -13539,6 +21749,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r23
 
@@ -13555,6 +21769,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r24
 
 *   **Download size**: `Unknown size`
@@ -13569,6 +21787,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r25
 
@@ -13585,6 +21807,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r26
 
 *   **Download size**: `Unknown size`
@@ -13599,6 +21825,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r27
 
@@ -13615,6 +21845,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r28
 
 *   **Download size**: `Unknown size`
@@ -13629,6 +21863,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r29
 
@@ -13645,6 +21883,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r30
 
 *   **Download size**: `Unknown size`
@@ -13659,6 +21901,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r31
 
@@ -13675,6 +21921,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r32
 
 *   **Download size**: `Unknown size`
@@ -13689,6 +21939,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r33
 
@@ -13705,6 +21959,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r34
 
 *   **Download size**: `Unknown size`
@@ -13719,6 +21977,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00333333_0.6_r35
 
@@ -13735,6 +21997,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r0
 
 *   **Download size**: `Unknown size`
@@ -13749,6 +22015,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r1
 
@@ -13765,6 +22035,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r2
 
 *   **Download size**: `Unknown size`
@@ -13779,6 +22053,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r3
 
@@ -13795,6 +22073,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r4
 
 *   **Download size**: `Unknown size`
@@ -13809,6 +22091,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r5
 
@@ -13825,6 +22111,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r6
 
 *   **Download size**: `Unknown size`
@@ -13839,6 +22129,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r7
 
@@ -13855,6 +22149,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r8
 
 *   **Download size**: `Unknown size`
@@ -13869,6 +22167,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r9
 
@@ -13885,6 +22187,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r10
 
 *   **Download size**: `Unknown size`
@@ -13899,6 +22205,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r11
 
@@ -13915,6 +22225,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r12
 
 *   **Download size**: `Unknown size`
@@ -13929,6 +22243,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r13
 
@@ -13945,6 +22263,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r14
 
 *   **Download size**: `Unknown size`
@@ -13959,6 +22281,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r15
 
@@ -13975,6 +22301,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r16
 
 *   **Download size**: `Unknown size`
@@ -13989,6 +22319,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r17
 
@@ -14005,6 +22339,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r18
 
 *   **Download size**: `Unknown size`
@@ -14019,6 +22357,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r19
 
@@ -14035,6 +22377,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r20
 
 *   **Download size**: `Unknown size`
@@ -14049,6 +22395,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r21
 
@@ -14065,6 +22415,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r22
 
 *   **Download size**: `Unknown size`
@@ -14079,6 +22433,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r23
 
@@ -14095,6 +22453,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r24
 
 *   **Download size**: `Unknown size`
@@ -14109,6 +22471,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r25
 
@@ -14125,6 +22491,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r26
 
 *   **Download size**: `Unknown size`
@@ -14139,6 +22509,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r27
 
@@ -14155,6 +22529,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r28
 
 *   **Download size**: `Unknown size`
@@ -14169,6 +22547,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r29
 
@@ -14185,6 +22567,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r30
 
 *   **Download size**: `Unknown size`
@@ -14199,6 +22585,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r31
 
@@ -14215,6 +22605,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r32
 
 *   **Download size**: `Unknown size`
@@ -14229,6 +22623,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r33
 
@@ -14245,6 +22643,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r34
 
 *   **Download size**: `Unknown size`
@@ -14259,6 +22661,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0_r35
 
@@ -14275,6 +22681,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r0
 
 *   **Download size**: `Unknown size`
@@ -14289,6 +22699,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r1
 
@@ -14305,6 +22719,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r2
 
 *   **Download size**: `Unknown size`
@@ -14319,6 +22737,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r3
 
@@ -14335,6 +22757,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r4
 
 *   **Download size**: `Unknown size`
@@ -14349,6 +22775,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r5
 
@@ -14365,6 +22795,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r6
 
 *   **Download size**: `Unknown size`
@@ -14379,6 +22813,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r7
 
@@ -14395,6 +22833,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r8
 
 *   **Download size**: `Unknown size`
@@ -14409,6 +22851,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r9
 
@@ -14425,6 +22871,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r10
 
 *   **Download size**: `Unknown size`
@@ -14439,6 +22889,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r11
 
@@ -14455,6 +22909,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r12
 
 *   **Download size**: `Unknown size`
@@ -14469,6 +22927,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r13
 
@@ -14485,6 +22947,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r14
 
 *   **Download size**: `Unknown size`
@@ -14499,6 +22965,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r15
 
@@ -14515,6 +22985,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r16
 
 *   **Download size**: `Unknown size`
@@ -14529,6 +23003,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r17
 
@@ -14545,6 +23023,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r18
 
 *   **Download size**: `Unknown size`
@@ -14559,6 +23041,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r19
 
@@ -14575,6 +23061,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r20
 
 *   **Download size**: `Unknown size`
@@ -14589,6 +23079,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r21
 
@@ -14605,6 +23099,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r22
 
 *   **Download size**: `Unknown size`
@@ -14619,6 +23117,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r23
 
@@ -14635,6 +23137,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r24
 
 *   **Download size**: `Unknown size`
@@ -14649,6 +23155,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r25
 
@@ -14665,6 +23175,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r26
 
 *   **Download size**: `Unknown size`
@@ -14679,6 +23193,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r27
 
@@ -14695,6 +23213,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r28
 
 *   **Download size**: `Unknown size`
@@ -14709,6 +23231,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r29
 
@@ -14725,6 +23251,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r30
 
 *   **Download size**: `Unknown size`
@@ -14739,6 +23269,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r31
 
@@ -14755,6 +23289,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r32
 
 *   **Download size**: `Unknown size`
@@ -14769,6 +23307,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r33
 
@@ -14785,6 +23327,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r34
 
 *   **Download size**: `Unknown size`
@@ -14799,6 +23345,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.1_r35
 
@@ -14815,6 +23365,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r0
 
 *   **Download size**: `Unknown size`
@@ -14829,6 +23383,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r1
 
@@ -14845,6 +23403,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r2
 
 *   **Download size**: `Unknown size`
@@ -14859,6 +23421,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r3
 
@@ -14875,6 +23441,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r4
 
 *   **Download size**: `Unknown size`
@@ -14889,6 +23459,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r5
 
@@ -14905,6 +23479,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r6
 
 *   **Download size**: `Unknown size`
@@ -14919,6 +23497,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r7
 
@@ -14935,6 +23517,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r8
 
 *   **Download size**: `Unknown size`
@@ -14949,6 +23535,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r9
 
@@ -14965,6 +23555,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r10
 
 *   **Download size**: `Unknown size`
@@ -14979,6 +23573,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r11
 
@@ -14995,6 +23593,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r12
 
 *   **Download size**: `Unknown size`
@@ -15009,6 +23611,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r13
 
@@ -15025,6 +23631,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r14
 
 *   **Download size**: `Unknown size`
@@ -15039,6 +23649,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r15
 
@@ -15055,6 +23669,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r16
 
 *   **Download size**: `Unknown size`
@@ -15069,6 +23687,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r17
 
@@ -15085,6 +23707,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r18
 
 *   **Download size**: `Unknown size`
@@ -15099,6 +23725,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r19
 
@@ -15115,6 +23745,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r20
 
 *   **Download size**: `Unknown size`
@@ -15129,6 +23763,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r21
 
@@ -15145,6 +23783,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r22
 
 *   **Download size**: `Unknown size`
@@ -15159,6 +23801,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r23
 
@@ -15175,6 +23821,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r24
 
 *   **Download size**: `Unknown size`
@@ -15189,6 +23839,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r25
 
@@ -15205,6 +23859,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r26
 
 *   **Download size**: `Unknown size`
@@ -15219,6 +23877,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r27
 
@@ -15235,6 +23897,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r28
 
 *   **Download size**: `Unknown size`
@@ -15249,6 +23915,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r29
 
@@ -15265,6 +23935,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r30
 
 *   **Download size**: `Unknown size`
@@ -15279,6 +23953,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r31
 
@@ -15295,6 +23973,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r32
 
 *   **Download size**: `Unknown size`
@@ -15309,6 +23991,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r33
 
@@ -15325,6 +24011,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r34
 
 *   **Download size**: `Unknown size`
@@ -15339,6 +24029,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.2_r35
 
@@ -15355,6 +24049,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r0
 
 *   **Download size**: `Unknown size`
@@ -15369,6 +24067,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r1
 
@@ -15385,6 +24087,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r2
 
 *   **Download size**: `Unknown size`
@@ -15399,6 +24105,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r3
 
@@ -15415,6 +24125,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r4
 
 *   **Download size**: `Unknown size`
@@ -15429,6 +24143,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r5
 
@@ -15445,6 +24163,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r6
 
 *   **Download size**: `Unknown size`
@@ -15459,6 +24181,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r7
 
@@ -15475,6 +24201,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r8
 
 *   **Download size**: `Unknown size`
@@ -15489,6 +24219,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r9
 
@@ -15505,6 +24239,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r10
 
 *   **Download size**: `Unknown size`
@@ -15519,6 +24257,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r11
 
@@ -15535,6 +24277,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r12
 
 *   **Download size**: `Unknown size`
@@ -15549,6 +24295,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r13
 
@@ -15565,6 +24315,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r14
 
 *   **Download size**: `Unknown size`
@@ -15579,6 +24333,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r15
 
@@ -15595,6 +24353,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r16
 
 *   **Download size**: `Unknown size`
@@ -15609,6 +24371,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r17
 
@@ -15625,6 +24391,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r18
 
 *   **Download size**: `Unknown size`
@@ -15639,6 +24409,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r19
 
@@ -15655,6 +24429,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r20
 
 *   **Download size**: `Unknown size`
@@ -15669,6 +24447,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r21
 
@@ -15685,6 +24467,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r22
 
 *   **Download size**: `Unknown size`
@@ -15699,6 +24485,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r23
 
@@ -15715,6 +24505,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r24
 
 *   **Download size**: `Unknown size`
@@ -15729,6 +24523,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r25
 
@@ -15745,6 +24543,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r26
 
 *   **Download size**: `Unknown size`
@@ -15759,6 +24561,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r27
 
@@ -15775,6 +24581,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r28
 
 *   **Download size**: `Unknown size`
@@ -15789,6 +24599,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r29
 
@@ -15805,6 +24619,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r30
 
 *   **Download size**: `Unknown size`
@@ -15819,6 +24637,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r31
 
@@ -15835,6 +24657,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r32
 
 *   **Download size**: `Unknown size`
@@ -15849,6 +24675,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r33
 
@@ -15865,6 +24695,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r34
 
 *   **Download size**: `Unknown size`
@@ -15879,6 +24713,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.3_r35
 
@@ -15895,6 +24733,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r0
 
 *   **Download size**: `Unknown size`
@@ -15909,6 +24751,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r1
 
@@ -15925,6 +24771,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r2
 
 *   **Download size**: `Unknown size`
@@ -15939,6 +24789,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r3
 
@@ -15955,6 +24809,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r4
 
 *   **Download size**: `Unknown size`
@@ -15969,6 +24827,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r5
 
@@ -15985,6 +24847,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r6
 
 *   **Download size**: `Unknown size`
@@ -15999,6 +24865,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r7
 
@@ -16015,6 +24885,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r8
 
 *   **Download size**: `Unknown size`
@@ -16029,6 +24903,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r9
 
@@ -16045,6 +24923,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r10
 
 *   **Download size**: `Unknown size`
@@ -16059,6 +24941,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r11
 
@@ -16075,6 +24961,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r12
 
 *   **Download size**: `Unknown size`
@@ -16089,6 +24979,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r13
 
@@ -16105,6 +24999,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r14
 
 *   **Download size**: `Unknown size`
@@ -16119,6 +25017,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r15
 
@@ -16135,6 +25037,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r16
 
 *   **Download size**: `Unknown size`
@@ -16149,6 +25055,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r17
 
@@ -16165,6 +25075,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r18
 
 *   **Download size**: `Unknown size`
@@ -16179,6 +25093,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r19
 
@@ -16195,6 +25113,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r20
 
 *   **Download size**: `Unknown size`
@@ -16209,6 +25131,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r21
 
@@ -16225,6 +25151,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r22
 
 *   **Download size**: `Unknown size`
@@ -16239,6 +25169,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r23
 
@@ -16255,6 +25189,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r24
 
 *   **Download size**: `Unknown size`
@@ -16269,6 +25207,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r25
 
@@ -16285,6 +25227,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r26
 
 *   **Download size**: `Unknown size`
@@ -16299,6 +25245,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r27
 
@@ -16315,6 +25265,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r28
 
 *   **Download size**: `Unknown size`
@@ -16329,6 +25283,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r29
 
@@ -16345,6 +25303,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r30
 
 *   **Download size**: `Unknown size`
@@ -16359,6 +25321,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r31
 
@@ -16375,6 +25341,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r32
 
 *   **Download size**: `Unknown size`
@@ -16389,6 +25359,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r33
 
@@ -16405,6 +25379,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r34
 
 *   **Download size**: `Unknown size`
@@ -16419,6 +25397,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.4_r35
 
@@ -16435,6 +25417,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r0
 
 *   **Download size**: `Unknown size`
@@ -16449,6 +25435,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r1
 
@@ -16465,6 +25455,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r2
 
 *   **Download size**: `Unknown size`
@@ -16479,6 +25473,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r3
 
@@ -16495,6 +25493,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r4
 
 *   **Download size**: `Unknown size`
@@ -16509,6 +25511,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r5
 
@@ -16525,6 +25531,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r6
 
 *   **Download size**: `Unknown size`
@@ -16539,6 +25549,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r7
 
@@ -16555,6 +25569,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r8
 
 *   **Download size**: `Unknown size`
@@ -16569,6 +25587,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r9
 
@@ -16585,6 +25607,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r10
 
 *   **Download size**: `Unknown size`
@@ -16599,6 +25625,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r11
 
@@ -16615,6 +25645,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r12
 
 *   **Download size**: `Unknown size`
@@ -16629,6 +25663,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r13
 
@@ -16645,6 +25683,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r14
 
 *   **Download size**: `Unknown size`
@@ -16659,6 +25701,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r15
 
@@ -16675,6 +25721,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r16
 
 *   **Download size**: `Unknown size`
@@ -16689,6 +25739,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r17
 
@@ -16705,6 +25759,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r18
 
 *   **Download size**: `Unknown size`
@@ -16719,6 +25777,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r19
 
@@ -16735,6 +25797,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r20
 
 *   **Download size**: `Unknown size`
@@ -16749,6 +25815,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r21
 
@@ -16765,6 +25835,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r22
 
 *   **Download size**: `Unknown size`
@@ -16779,6 +25853,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r23
 
@@ -16795,6 +25873,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r24
 
 *   **Download size**: `Unknown size`
@@ -16809,6 +25891,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r25
 
@@ -16825,6 +25911,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r26
 
 *   **Download size**: `Unknown size`
@@ -16839,6 +25929,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r27
 
@@ -16855,6 +25949,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r28
 
 *   **Download size**: `Unknown size`
@@ -16869,6 +25967,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r29
 
@@ -16885,6 +25987,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r30
 
 *   **Download size**: `Unknown size`
@@ -16899,6 +26005,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r31
 
@@ -16915,6 +26025,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r32
 
 *   **Download size**: `Unknown size`
@@ -16929,6 +26043,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r33
 
@@ -16945,6 +26063,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r34
 
 *   **Download size**: `Unknown size`
@@ -16959,6 +26081,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.5_r35
 
@@ -16975,6 +26101,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r0
 
 *   **Download size**: `Unknown size`
@@ -16989,6 +26119,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r1
 
@@ -17005,6 +26139,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r2
 
 *   **Download size**: `Unknown size`
@@ -17019,6 +26157,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r3
 
@@ -17035,6 +26177,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r4
 
 *   **Download size**: `Unknown size`
@@ -17049,6 +26195,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r5
 
@@ -17065,6 +26215,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r6
 
 *   **Download size**: `Unknown size`
@@ -17079,6 +26233,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r7
 
@@ -17095,6 +26253,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r8
 
 *   **Download size**: `Unknown size`
@@ -17109,6 +26271,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r9
 
@@ -17125,6 +26291,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r10
 
 *   **Download size**: `Unknown size`
@@ -17139,6 +26309,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r11
 
@@ -17155,6 +26329,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r12
 
 *   **Download size**: `Unknown size`
@@ -17169,6 +26347,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r13
 
@@ -17185,6 +26367,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r14
 
 *   **Download size**: `Unknown size`
@@ -17199,6 +26385,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r15
 
@@ -17215,6 +26405,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r16
 
 *   **Download size**: `Unknown size`
@@ -17229,6 +26423,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r17
 
@@ -17245,6 +26443,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r18
 
 *   **Download size**: `Unknown size`
@@ -17259,6 +26461,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r19
 
@@ -17275,6 +26481,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r20
 
 *   **Download size**: `Unknown size`
@@ -17289,6 +26499,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r21
 
@@ -17305,6 +26519,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r22
 
 *   **Download size**: `Unknown size`
@@ -17319,6 +26537,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r23
 
@@ -17335,6 +26557,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r24
 
 *   **Download size**: `Unknown size`
@@ -17349,6 +26575,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r25
 
@@ -17365,6 +26595,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r26
 
 *   **Download size**: `Unknown size`
@@ -17379,6 +26613,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r27
 
@@ -17395,6 +26633,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r28
 
 *   **Download size**: `Unknown size`
@@ -17409,6 +26651,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r29
 
@@ -17425,6 +26671,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r30
 
 *   **Download size**: `Unknown size`
@@ -17439,6 +26689,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r31
 
@@ -17455,6 +26709,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r32
 
 *   **Download size**: `Unknown size`
@@ -17469,6 +26727,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r33
 
@@ -17485,6 +26747,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r34
 
 *   **Download size**: `Unknown size`
@@ -17499,6 +26765,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.00666667_0.6_r35
 
@@ -17515,6 +26785,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r0
 
 *   **Download size**: `Unknown size`
@@ -17529,6 +26803,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r1
 
@@ -17545,6 +26823,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r2
 
 *   **Download size**: `Unknown size`
@@ -17559,6 +26841,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r3
 
@@ -17575,6 +26861,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r4
 
 *   **Download size**: `Unknown size`
@@ -17589,6 +26879,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r5
 
@@ -17605,6 +26899,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r6
 
 *   **Download size**: `Unknown size`
@@ -17619,6 +26917,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r7
 
@@ -17635,6 +26937,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r8
 
 *   **Download size**: `Unknown size`
@@ -17649,6 +26955,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r9
 
@@ -17665,6 +26975,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r10
 
 *   **Download size**: `Unknown size`
@@ -17679,6 +26993,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r11
 
@@ -17695,6 +27013,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r12
 
 *   **Download size**: `Unknown size`
@@ -17709,6 +27031,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r13
 
@@ -17725,6 +27051,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r14
 
 *   **Download size**: `Unknown size`
@@ -17739,6 +27069,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r15
 
@@ -17755,6 +27089,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r16
 
 *   **Download size**: `Unknown size`
@@ -17769,6 +27107,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r17
 
@@ -17785,6 +27127,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r18
 
 *   **Download size**: `Unknown size`
@@ -17799,6 +27145,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r19
 
@@ -17815,6 +27165,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r20
 
 *   **Download size**: `Unknown size`
@@ -17829,6 +27183,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r21
 
@@ -17845,6 +27203,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r22
 
 *   **Download size**: `Unknown size`
@@ -17859,6 +27221,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r23
 
@@ -17875,6 +27241,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r24
 
 *   **Download size**: `Unknown size`
@@ -17889,6 +27259,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r25
 
@@ -17905,6 +27279,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r26
 
 *   **Download size**: `Unknown size`
@@ -17919,6 +27297,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r27
 
@@ -17935,6 +27317,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r28
 
 *   **Download size**: `Unknown size`
@@ -17949,6 +27335,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r29
 
@@ -17965,6 +27355,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r30
 
 *   **Download size**: `Unknown size`
@@ -17979,6 +27373,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r31
 
@@ -17995,6 +27393,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r32
 
 *   **Download size**: `Unknown size`
@@ -18009,6 +27411,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r33
 
@@ -18025,6 +27431,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r34
 
 *   **Download size**: `Unknown size`
@@ -18039,6 +27449,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0_r35
 
@@ -18055,6 +27469,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r0
 
 *   **Download size**: `Unknown size`
@@ -18069,6 +27487,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r1
 
@@ -18085,6 +27507,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r2
 
 *   **Download size**: `Unknown size`
@@ -18099,6 +27525,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r3
 
@@ -18115,6 +27545,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r4
 
 *   **Download size**: `Unknown size`
@@ -18129,6 +27563,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r5
 
@@ -18145,6 +27583,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r6
 
 *   **Download size**: `Unknown size`
@@ -18159,6 +27601,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r7
 
@@ -18175,6 +27621,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r8
 
 *   **Download size**: `Unknown size`
@@ -18189,6 +27639,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r9
 
@@ -18205,6 +27659,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r10
 
 *   **Download size**: `Unknown size`
@@ -18219,6 +27677,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r11
 
@@ -18235,6 +27697,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r12
 
 *   **Download size**: `Unknown size`
@@ -18249,6 +27715,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r13
 
@@ -18265,6 +27735,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r14
 
 *   **Download size**: `Unknown size`
@@ -18279,6 +27753,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r15
 
@@ -18295,6 +27773,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r16
 
 *   **Download size**: `Unknown size`
@@ -18309,6 +27791,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r17
 
@@ -18325,6 +27811,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r18
 
 *   **Download size**: `Unknown size`
@@ -18339,6 +27829,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r19
 
@@ -18355,6 +27849,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r20
 
 *   **Download size**: `Unknown size`
@@ -18369,6 +27867,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r21
 
@@ -18385,6 +27887,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r22
 
 *   **Download size**: `Unknown size`
@@ -18399,6 +27905,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r23
 
@@ -18415,6 +27925,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r24
 
 *   **Download size**: `Unknown size`
@@ -18429,6 +27943,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r25
 
@@ -18445,6 +27963,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r26
 
 *   **Download size**: `Unknown size`
@@ -18459,6 +27981,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r27
 
@@ -18475,6 +28001,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r28
 
 *   **Download size**: `Unknown size`
@@ -18489,6 +28019,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r29
 
@@ -18505,6 +28039,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r30
 
 *   **Download size**: `Unknown size`
@@ -18519,6 +28057,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r31
 
@@ -18535,6 +28077,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r32
 
 *   **Download size**: `Unknown size`
@@ -18549,6 +28095,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r33
 
@@ -18565,6 +28115,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r34
 
 *   **Download size**: `Unknown size`
@@ -18579,6 +28133,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.1_r35
 
@@ -18595,6 +28153,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r0
 
 *   **Download size**: `Unknown size`
@@ -18609,6 +28171,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r1
 
@@ -18625,6 +28191,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r2
 
 *   **Download size**: `Unknown size`
@@ -18639,6 +28209,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r3
 
@@ -18655,6 +28229,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r4
 
 *   **Download size**: `Unknown size`
@@ -18669,6 +28247,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r5
 
@@ -18685,6 +28267,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r6
 
 *   **Download size**: `Unknown size`
@@ -18699,6 +28285,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r7
 
@@ -18715,6 +28305,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r8
 
 *   **Download size**: `Unknown size`
@@ -18729,6 +28323,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r9
 
@@ -18745,6 +28343,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r10
 
 *   **Download size**: `Unknown size`
@@ -18759,6 +28361,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r11
 
@@ -18775,6 +28381,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r12
 
 *   **Download size**: `Unknown size`
@@ -18789,6 +28399,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r13
 
@@ -18805,6 +28419,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r14
 
 *   **Download size**: `Unknown size`
@@ -18819,6 +28437,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r15
 
@@ -18835,6 +28457,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r16
 
 *   **Download size**: `Unknown size`
@@ -18849,6 +28475,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r17
 
@@ -18865,6 +28495,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r18
 
 *   **Download size**: `Unknown size`
@@ -18879,6 +28513,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r19
 
@@ -18895,6 +28533,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r20
 
 *   **Download size**: `Unknown size`
@@ -18909,6 +28551,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r21
 
@@ -18925,6 +28571,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r22
 
 *   **Download size**: `Unknown size`
@@ -18939,6 +28589,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r23
 
@@ -18955,6 +28609,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r24
 
 *   **Download size**: `Unknown size`
@@ -18969,6 +28627,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r25
 
@@ -18985,6 +28647,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r26
 
 *   **Download size**: `Unknown size`
@@ -18999,6 +28665,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r27
 
@@ -19015,6 +28685,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r28
 
 *   **Download size**: `Unknown size`
@@ -19029,6 +28703,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r29
 
@@ -19045,6 +28723,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r30
 
 *   **Download size**: `Unknown size`
@@ -19059,6 +28741,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r31
 
@@ -19075,6 +28761,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r32
 
 *   **Download size**: `Unknown size`
@@ -19089,6 +28779,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r33
 
@@ -19105,6 +28799,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r34
 
 *   **Download size**: `Unknown size`
@@ -19119,6 +28817,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.2_r35
 
@@ -19135,6 +28837,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r0
 
 *   **Download size**: `Unknown size`
@@ -19149,6 +28855,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r1
 
@@ -19165,6 +28875,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r2
 
 *   **Download size**: `Unknown size`
@@ -19179,6 +28893,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r3
 
@@ -19195,6 +28913,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r4
 
 *   **Download size**: `Unknown size`
@@ -19209,6 +28931,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r5
 
@@ -19225,6 +28951,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r6
 
 *   **Download size**: `Unknown size`
@@ -19239,6 +28969,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r7
 
@@ -19255,6 +28989,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r8
 
 *   **Download size**: `Unknown size`
@@ -19269,6 +29007,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r9
 
@@ -19285,6 +29027,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r10
 
 *   **Download size**: `Unknown size`
@@ -19299,6 +29045,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r11
 
@@ -19315,6 +29065,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r12
 
 *   **Download size**: `Unknown size`
@@ -19329,6 +29083,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r13
 
@@ -19345,6 +29103,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r14
 
 *   **Download size**: `Unknown size`
@@ -19359,6 +29121,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r15
 
@@ -19375,6 +29141,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r16
 
 *   **Download size**: `Unknown size`
@@ -19389,6 +29159,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r17
 
@@ -19405,6 +29179,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r18
 
 *   **Download size**: `Unknown size`
@@ -19419,6 +29197,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r19
 
@@ -19435,6 +29217,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r20
 
 *   **Download size**: `Unknown size`
@@ -19449,6 +29235,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r21
 
@@ -19465,6 +29255,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r22
 
 *   **Download size**: `Unknown size`
@@ -19479,6 +29273,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r23
 
@@ -19495,6 +29293,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r24
 
 *   **Download size**: `Unknown size`
@@ -19509,6 +29311,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r25
 
@@ -19525,6 +29331,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r26
 
 *   **Download size**: `Unknown size`
@@ -19539,6 +29349,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r27
 
@@ -19555,6 +29369,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r28
 
 *   **Download size**: `Unknown size`
@@ -19569,6 +29387,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r29
 
@@ -19585,6 +29407,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r30
 
 *   **Download size**: `Unknown size`
@@ -19599,6 +29425,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r31
 
@@ -19615,6 +29445,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r32
 
 *   **Download size**: `Unknown size`
@@ -19629,6 +29463,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r33
 
@@ -19645,6 +29483,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r34
 
 *   **Download size**: `Unknown size`
@@ -19659,6 +29501,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.3_r35
 
@@ -19675,6 +29521,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r0
 
 *   **Download size**: `Unknown size`
@@ -19689,6 +29539,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r1
 
@@ -19705,6 +29559,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r2
 
 *   **Download size**: `Unknown size`
@@ -19719,6 +29577,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r3
 
@@ -19735,6 +29597,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r4
 
 *   **Download size**: `Unknown size`
@@ -19749,6 +29615,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r5
 
@@ -19765,6 +29635,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r6
 
 *   **Download size**: `Unknown size`
@@ -19779,6 +29653,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r7
 
@@ -19795,6 +29673,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r8
 
 *   **Download size**: `Unknown size`
@@ -19809,6 +29691,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r9
 
@@ -19825,6 +29711,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r10
 
 *   **Download size**: `Unknown size`
@@ -19839,6 +29729,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r11
 
@@ -19855,6 +29749,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r12
 
 *   **Download size**: `Unknown size`
@@ -19869,6 +29767,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r13
 
@@ -19885,6 +29787,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r14
 
 *   **Download size**: `Unknown size`
@@ -19899,6 +29805,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r15
 
@@ -19915,6 +29825,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r16
 
 *   **Download size**: `Unknown size`
@@ -19929,6 +29843,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r17
 
@@ -19945,6 +29863,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r18
 
 *   **Download size**: `Unknown size`
@@ -19959,6 +29881,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r19
 
@@ -19975,6 +29901,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r20
 
 *   **Download size**: `Unknown size`
@@ -19989,6 +29919,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r21
 
@@ -20005,6 +29939,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r22
 
 *   **Download size**: `Unknown size`
@@ -20019,6 +29957,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r23
 
@@ -20035,6 +29977,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r24
 
 *   **Download size**: `Unknown size`
@@ -20049,6 +29995,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r25
 
@@ -20065,6 +30015,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r26
 
 *   **Download size**: `Unknown size`
@@ -20079,6 +30033,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r27
 
@@ -20095,6 +30053,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r28
 
 *   **Download size**: `Unknown size`
@@ -20109,6 +30071,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r29
 
@@ -20125,6 +30091,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r30
 
 *   **Download size**: `Unknown size`
@@ -20139,6 +30109,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r31
 
@@ -20155,6 +30129,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r32
 
 *   **Download size**: `Unknown size`
@@ -20169,6 +30147,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r33
 
@@ -20185,6 +30167,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r34
 
 *   **Download size**: `Unknown size`
@@ -20199,6 +30185,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.4_r35
 
@@ -20215,6 +30205,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r0
 
 *   **Download size**: `Unknown size`
@@ -20229,6 +30223,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r1
 
@@ -20245,6 +30243,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r2
 
 *   **Download size**: `Unknown size`
@@ -20259,6 +30261,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r3
 
@@ -20275,6 +30281,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r4
 
 *   **Download size**: `Unknown size`
@@ -20289,6 +30299,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r5
 
@@ -20305,6 +30319,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r6
 
 *   **Download size**: `Unknown size`
@@ -20319,6 +30337,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r7
 
@@ -20335,6 +30357,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r8
 
 *   **Download size**: `Unknown size`
@@ -20349,6 +30375,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r9
 
@@ -20365,6 +30395,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r10
 
 *   **Download size**: `Unknown size`
@@ -20379,6 +30413,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r11
 
@@ -20395,6 +30433,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r12
 
 *   **Download size**: `Unknown size`
@@ -20409,6 +30451,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r13
 
@@ -20425,6 +30471,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r14
 
 *   **Download size**: `Unknown size`
@@ -20439,6 +30489,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r15
 
@@ -20455,6 +30509,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r16
 
 *   **Download size**: `Unknown size`
@@ -20469,6 +30527,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r17
 
@@ -20485,6 +30547,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r18
 
 *   **Download size**: `Unknown size`
@@ -20499,6 +30565,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r19
 
@@ -20515,6 +30585,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r20
 
 *   **Download size**: `Unknown size`
@@ -20529,6 +30603,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r21
 
@@ -20545,6 +30623,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r22
 
 *   **Download size**: `Unknown size`
@@ -20559,6 +30641,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r23
 
@@ -20575,6 +30661,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r24
 
 *   **Download size**: `Unknown size`
@@ -20589,6 +30679,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r25
 
@@ -20605,6 +30699,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r26
 
 *   **Download size**: `Unknown size`
@@ -20619,6 +30717,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r27
 
@@ -20635,6 +30737,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r28
 
 *   **Download size**: `Unknown size`
@@ -20649,6 +30755,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r29
 
@@ -20665,6 +30775,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r30
 
 *   **Download size**: `Unknown size`
@@ -20679,6 +30793,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r31
 
@@ -20695,6 +30813,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r32
 
 *   **Download size**: `Unknown size`
@@ -20709,6 +30831,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r33
 
@@ -20725,6 +30851,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r34
 
 *   **Download size**: `Unknown size`
@@ -20739,6 +30869,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.5_r35
 
@@ -20755,6 +30889,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r0
 
 *   **Download size**: `Unknown size`
@@ -20769,6 +30907,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r1
 
@@ -20785,6 +30927,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r2
 
 *   **Download size**: `Unknown size`
@@ -20799,6 +30945,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r3
 
@@ -20815,6 +30965,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r4
 
 *   **Download size**: `Unknown size`
@@ -20829,6 +30983,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r5
 
@@ -20845,6 +31003,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r6
 
 *   **Download size**: `Unknown size`
@@ -20859,6 +31021,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r7
 
@@ -20875,6 +31041,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r8
 
 *   **Download size**: `Unknown size`
@@ -20889,6 +31059,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r9
 
@@ -20905,6 +31079,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r10
 
 *   **Download size**: `Unknown size`
@@ -20919,6 +31097,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r11
 
@@ -20935,6 +31117,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r12
 
 *   **Download size**: `Unknown size`
@@ -20949,6 +31135,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r13
 
@@ -20965,6 +31155,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r14
 
 *   **Download size**: `Unknown size`
@@ -20979,6 +31173,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r15
 
@@ -20995,6 +31193,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r16
 
 *   **Download size**: `Unknown size`
@@ -21009,6 +31211,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r17
 
@@ -21025,6 +31231,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r18
 
 *   **Download size**: `Unknown size`
@@ -21039,6 +31249,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r19
 
@@ -21055,6 +31269,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r20
 
 *   **Download size**: `Unknown size`
@@ -21069,6 +31287,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r21
 
@@ -21085,6 +31307,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r22
 
 *   **Download size**: `Unknown size`
@@ -21099,6 +31325,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r23
 
@@ -21115,6 +31345,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r24
 
 *   **Download size**: `Unknown size`
@@ -21129,6 +31363,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r25
 
@@ -21145,6 +31383,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r26
 
 *   **Download size**: `Unknown size`
@@ -21159,6 +31401,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r27
 
@@ -21175,6 +31421,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r28
 
 *   **Download size**: `Unknown size`
@@ -21189,6 +31439,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r29
 
@@ -21205,6 +31459,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r30
 
 *   **Download size**: `Unknown size`
@@ -21219,6 +31477,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r31
 
@@ -21235,6 +31497,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r32
 
 *   **Download size**: `Unknown size`
@@ -21249,6 +31515,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r33
 
@@ -21265,6 +31535,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r34
 
 *   **Download size**: `Unknown size`
@@ -21279,6 +31553,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.01_0.6_r35
 
@@ -21295,6 +31573,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r0
 
 *   **Download size**: `Unknown size`
@@ -21309,6 +31591,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r1
 
@@ -21325,6 +31611,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r2
 
 *   **Download size**: `Unknown size`
@@ -21339,6 +31629,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r3
 
@@ -21355,6 +31649,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r4
 
 *   **Download size**: `Unknown size`
@@ -21369,6 +31667,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r5
 
@@ -21385,6 +31687,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r6
 
 *   **Download size**: `Unknown size`
@@ -21399,6 +31705,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r7
 
@@ -21415,6 +31725,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r8
 
 *   **Download size**: `Unknown size`
@@ -21429,6 +31743,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r9
 
@@ -21445,6 +31763,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r10
 
 *   **Download size**: `Unknown size`
@@ -21459,6 +31781,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r11
 
@@ -21475,6 +31801,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r12
 
 *   **Download size**: `Unknown size`
@@ -21489,6 +31819,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r13
 
@@ -21505,6 +31839,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r14
 
 *   **Download size**: `Unknown size`
@@ -21519,6 +31857,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r15
 
@@ -21535,6 +31877,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r16
 
 *   **Download size**: `Unknown size`
@@ -21549,6 +31895,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r17
 
@@ -21565,6 +31915,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r18
 
 *   **Download size**: `Unknown size`
@@ -21579,6 +31933,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r19
 
@@ -21595,6 +31953,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r20
 
 *   **Download size**: `Unknown size`
@@ -21609,6 +31971,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r21
 
@@ -21625,6 +31991,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r22
 
 *   **Download size**: `Unknown size`
@@ -21639,6 +32009,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r23
 
@@ -21655,6 +32029,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r24
 
 *   **Download size**: `Unknown size`
@@ -21669,6 +32047,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r25
 
@@ -21685,6 +32067,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r26
 
 *   **Download size**: `Unknown size`
@@ -21699,6 +32085,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r27
 
@@ -21715,6 +32105,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r28
 
 *   **Download size**: `Unknown size`
@@ -21729,6 +32123,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r29
 
@@ -21745,6 +32143,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r30
 
 *   **Download size**: `Unknown size`
@@ -21759,6 +32161,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r31
 
@@ -21775,6 +32181,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r32
 
 *   **Download size**: `Unknown size`
@@ -21789,6 +32199,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r33
 
@@ -21805,6 +32219,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r34
 
 *   **Download size**: `Unknown size`
@@ -21819,6 +32237,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0_r35
 
@@ -21835,6 +32257,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r0
 
 *   **Download size**: `Unknown size`
@@ -21849,6 +32275,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r1
 
@@ -21865,6 +32295,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r2
 
 *   **Download size**: `Unknown size`
@@ -21879,6 +32313,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r3
 
@@ -21895,6 +32333,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r4
 
 *   **Download size**: `Unknown size`
@@ -21909,6 +32351,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r5
 
@@ -21925,6 +32371,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r6
 
 *   **Download size**: `Unknown size`
@@ -21939,6 +32389,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r7
 
@@ -21955,6 +32409,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r8
 
 *   **Download size**: `Unknown size`
@@ -21969,6 +32427,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r9
 
@@ -21985,6 +32447,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r10
 
 *   **Download size**: `Unknown size`
@@ -21999,6 +32465,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r11
 
@@ -22015,6 +32485,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r12
 
 *   **Download size**: `Unknown size`
@@ -22029,6 +32503,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r13
 
@@ -22045,6 +32523,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r14
 
 *   **Download size**: `Unknown size`
@@ -22059,6 +32541,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r15
 
@@ -22075,6 +32561,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r16
 
 *   **Download size**: `Unknown size`
@@ -22089,6 +32579,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r17
 
@@ -22105,6 +32599,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r18
 
 *   **Download size**: `Unknown size`
@@ -22119,6 +32617,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r19
 
@@ -22135,6 +32637,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r20
 
 *   **Download size**: `Unknown size`
@@ -22149,6 +32655,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r21
 
@@ -22165,6 +32675,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r22
 
 *   **Download size**: `Unknown size`
@@ -22179,6 +32693,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r23
 
@@ -22195,6 +32713,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r24
 
 *   **Download size**: `Unknown size`
@@ -22209,6 +32731,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r25
 
@@ -22225,6 +32751,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r26
 
 *   **Download size**: `Unknown size`
@@ -22239,6 +32769,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r27
 
@@ -22255,6 +32789,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r28
 
 *   **Download size**: `Unknown size`
@@ -22269,6 +32807,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r29
 
@@ -22285,6 +32827,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r30
 
 *   **Download size**: `Unknown size`
@@ -22299,6 +32845,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r31
 
@@ -22315,6 +32865,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r32
 
 *   **Download size**: `Unknown size`
@@ -22329,6 +32883,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r33
 
@@ -22345,6 +32903,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r34
 
 *   **Download size**: `Unknown size`
@@ -22359,6 +32921,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.1_r35
 
@@ -22375,6 +32941,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r0
 
 *   **Download size**: `Unknown size`
@@ -22389,6 +32959,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r1
 
@@ -22405,6 +32979,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r2
 
 *   **Download size**: `Unknown size`
@@ -22419,6 +32997,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r3
 
@@ -22435,6 +33017,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r4
 
 *   **Download size**: `Unknown size`
@@ -22449,6 +33035,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r5
 
@@ -22465,6 +33055,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r6
 
 *   **Download size**: `Unknown size`
@@ -22479,6 +33073,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r7
 
@@ -22495,6 +33093,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r8
 
 *   **Download size**: `Unknown size`
@@ -22509,6 +33111,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r9
 
@@ -22525,6 +33131,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r10
 
 *   **Download size**: `Unknown size`
@@ -22539,6 +33149,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r11
 
@@ -22555,6 +33169,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r12
 
 *   **Download size**: `Unknown size`
@@ -22569,6 +33187,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r13
 
@@ -22585,6 +33207,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r14
 
 *   **Download size**: `Unknown size`
@@ -22599,6 +33225,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r15
 
@@ -22615,6 +33245,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r16
 
 *   **Download size**: `Unknown size`
@@ -22629,6 +33263,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r17
 
@@ -22645,6 +33283,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r18
 
 *   **Download size**: `Unknown size`
@@ -22659,6 +33301,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r19
 
@@ -22675,6 +33321,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r20
 
 *   **Download size**: `Unknown size`
@@ -22689,6 +33339,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r21
 
@@ -22705,6 +33359,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r22
 
 *   **Download size**: `Unknown size`
@@ -22719,6 +33377,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r23
 
@@ -22735,6 +33397,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r24
 
 *   **Download size**: `Unknown size`
@@ -22749,6 +33415,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r25
 
@@ -22765,6 +33435,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r26
 
 *   **Download size**: `Unknown size`
@@ -22779,6 +33453,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r27
 
@@ -22795,6 +33473,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r28
 
 *   **Download size**: `Unknown size`
@@ -22809,6 +33491,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r29
 
@@ -22825,6 +33511,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r30
 
 *   **Download size**: `Unknown size`
@@ -22839,6 +33529,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r31
 
@@ -22855,6 +33549,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r32
 
 *   **Download size**: `Unknown size`
@@ -22869,6 +33567,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r33
 
@@ -22885,6 +33587,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r34
 
 *   **Download size**: `Unknown size`
@@ -22899,6 +33605,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.2_r35
 
@@ -22915,6 +33625,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r0
 
 *   **Download size**: `Unknown size`
@@ -22929,6 +33643,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r1
 
@@ -22945,6 +33663,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r2
 
 *   **Download size**: `Unknown size`
@@ -22959,6 +33681,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r3
 
@@ -22975,6 +33701,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r4
 
 *   **Download size**: `Unknown size`
@@ -22989,6 +33719,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r5
 
@@ -23005,6 +33739,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r6
 
 *   **Download size**: `Unknown size`
@@ -23019,6 +33757,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r7
 
@@ -23035,6 +33777,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r8
 
 *   **Download size**: `Unknown size`
@@ -23049,6 +33795,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r9
 
@@ -23065,6 +33815,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r10
 
 *   **Download size**: `Unknown size`
@@ -23079,6 +33833,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r11
 
@@ -23095,6 +33853,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r12
 
 *   **Download size**: `Unknown size`
@@ -23109,6 +33871,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r13
 
@@ -23125,6 +33891,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r14
 
 *   **Download size**: `Unknown size`
@@ -23139,6 +33909,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r15
 
@@ -23155,6 +33929,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r16
 
 *   **Download size**: `Unknown size`
@@ -23169,6 +33947,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r17
 
@@ -23185,6 +33967,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r18
 
 *   **Download size**: `Unknown size`
@@ -23199,6 +33985,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r19
 
@@ -23215,6 +34005,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r20
 
 *   **Download size**: `Unknown size`
@@ -23229,6 +34023,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r21
 
@@ -23245,6 +34043,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r22
 
 *   **Download size**: `Unknown size`
@@ -23259,6 +34061,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r23
 
@@ -23275,6 +34081,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r24
 
 *   **Download size**: `Unknown size`
@@ -23289,6 +34099,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r25
 
@@ -23305,6 +34119,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r26
 
 *   **Download size**: `Unknown size`
@@ -23319,6 +34137,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r27
 
@@ -23335,6 +34157,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r28
 
 *   **Download size**: `Unknown size`
@@ -23349,6 +34175,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r29
 
@@ -23365,6 +34195,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r30
 
 *   **Download size**: `Unknown size`
@@ -23379,6 +34213,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r31
 
@@ -23395,6 +34233,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r32
 
 *   **Download size**: `Unknown size`
@@ -23409,6 +34251,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r33
 
@@ -23425,6 +34271,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r34
 
 *   **Download size**: `Unknown size`
@@ -23439,6 +34289,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.3_r35
 
@@ -23455,6 +34309,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r0
 
 *   **Download size**: `Unknown size`
@@ -23469,6 +34327,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r1
 
@@ -23485,6 +34347,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r2
 
 *   **Download size**: `Unknown size`
@@ -23499,6 +34365,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r3
 
@@ -23515,6 +34385,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r4
 
 *   **Download size**: `Unknown size`
@@ -23529,6 +34403,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r5
 
@@ -23545,6 +34423,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r6
 
 *   **Download size**: `Unknown size`
@@ -23559,6 +34441,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r7
 
@@ -23575,6 +34461,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r8
 
 *   **Download size**: `Unknown size`
@@ -23589,6 +34479,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r9
 
@@ -23605,6 +34499,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r10
 
 *   **Download size**: `Unknown size`
@@ -23619,6 +34517,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r11
 
@@ -23635,6 +34537,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r12
 
 *   **Download size**: `Unknown size`
@@ -23649,6 +34555,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r13
 
@@ -23665,6 +34575,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r14
 
 *   **Download size**: `Unknown size`
@@ -23679,6 +34593,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r15
 
@@ -23695,6 +34613,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r16
 
 *   **Download size**: `Unknown size`
@@ -23709,6 +34631,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r17
 
@@ -23725,6 +34651,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r18
 
 *   **Download size**: `Unknown size`
@@ -23739,6 +34669,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r19
 
@@ -23755,6 +34689,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r20
 
 *   **Download size**: `Unknown size`
@@ -23769,6 +34707,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r21
 
@@ -23785,6 +34727,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r22
 
 *   **Download size**: `Unknown size`
@@ -23799,6 +34745,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r23
 
@@ -23815,6 +34765,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r24
 
 *   **Download size**: `Unknown size`
@@ -23829,6 +34783,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r25
 
@@ -23845,6 +34803,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r26
 
 *   **Download size**: `Unknown size`
@@ -23859,6 +34821,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r27
 
@@ -23875,6 +34841,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r28
 
 *   **Download size**: `Unknown size`
@@ -23889,6 +34859,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r29
 
@@ -23905,6 +34879,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r30
 
 *   **Download size**: `Unknown size`
@@ -23919,6 +34897,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r31
 
@@ -23935,6 +34917,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r32
 
 *   **Download size**: `Unknown size`
@@ -23949,6 +34935,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r33
 
@@ -23965,6 +34955,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r34
 
 *   **Download size**: `Unknown size`
@@ -23979,6 +34973,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.4_r35
 
@@ -23995,6 +34993,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r0
 
 *   **Download size**: `Unknown size`
@@ -24009,6 +35011,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r1
 
@@ -24025,6 +35031,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r2
 
 *   **Download size**: `Unknown size`
@@ -24039,6 +35049,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r3
 
@@ -24055,6 +35069,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r4
 
 *   **Download size**: `Unknown size`
@@ -24069,6 +35087,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r5
 
@@ -24085,6 +35107,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r6
 
 *   **Download size**: `Unknown size`
@@ -24099,6 +35125,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r7
 
@@ -24115,6 +35145,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r8
 
 *   **Download size**: `Unknown size`
@@ -24129,6 +35163,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r9
 
@@ -24145,6 +35183,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r10
 
 *   **Download size**: `Unknown size`
@@ -24159,6 +35201,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r11
 
@@ -24175,6 +35221,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r12
 
 *   **Download size**: `Unknown size`
@@ -24189,6 +35239,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r13
 
@@ -24205,6 +35259,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r14
 
 *   **Download size**: `Unknown size`
@@ -24219,6 +35277,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r15
 
@@ -24235,6 +35297,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r16
 
 *   **Download size**: `Unknown size`
@@ -24249,6 +35315,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r17
 
@@ -24265,6 +35335,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r18
 
 *   **Download size**: `Unknown size`
@@ -24279,6 +35353,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r19
 
@@ -24295,6 +35373,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r20
 
 *   **Download size**: `Unknown size`
@@ -24309,6 +35391,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r21
 
@@ -24325,6 +35411,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r22
 
 *   **Download size**: `Unknown size`
@@ -24339,6 +35429,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r23
 
@@ -24355,6 +35449,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r24
 
 *   **Download size**: `Unknown size`
@@ -24369,6 +35467,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r25
 
@@ -24385,6 +35487,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r26
 
 *   **Download size**: `Unknown size`
@@ -24399,6 +35505,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r27
 
@@ -24415,6 +35525,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r28
 
 *   **Download size**: `Unknown size`
@@ -24429,6 +35543,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r29
 
@@ -24445,6 +35563,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r30
 
 *   **Download size**: `Unknown size`
@@ -24459,6 +35581,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r31
 
@@ -24475,6 +35601,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r32
 
 *   **Download size**: `Unknown size`
@@ -24489,6 +35619,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r33
 
@@ -24505,6 +35639,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r34
 
 *   **Download size**: `Unknown size`
@@ -24519,6 +35657,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.5_r35
 
@@ -24535,6 +35677,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r0
 
 *   **Download size**: `Unknown size`
@@ -24549,6 +35695,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r1
 
@@ -24565,6 +35715,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r2
 
 *   **Download size**: `Unknown size`
@@ -24579,6 +35733,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r3
 
@@ -24595,6 +35753,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r4
 
 *   **Download size**: `Unknown size`
@@ -24609,6 +35771,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r5
 
@@ -24625,6 +35791,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r6
 
 *   **Download size**: `Unknown size`
@@ -24639,6 +35809,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r7
 
@@ -24655,6 +35829,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r8
 
 *   **Download size**: `Unknown size`
@@ -24669,6 +35847,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r9
 
@@ -24685,6 +35867,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r10
 
 *   **Download size**: `Unknown size`
@@ -24699,6 +35885,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r11
 
@@ -24715,6 +35905,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r12
 
 *   **Download size**: `Unknown size`
@@ -24729,6 +35923,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r13
 
@@ -24745,6 +35943,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r14
 
 *   **Download size**: `Unknown size`
@@ -24759,6 +35961,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r15
 
@@ -24775,6 +35981,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r16
 
 *   **Download size**: `Unknown size`
@@ -24789,6 +35999,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r17
 
@@ -24805,6 +36019,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r18
 
 *   **Download size**: `Unknown size`
@@ -24819,6 +36037,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r19
 
@@ -24835,6 +36057,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r20
 
 *   **Download size**: `Unknown size`
@@ -24849,6 +36075,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r21
 
@@ -24865,6 +36095,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r22
 
 *   **Download size**: `Unknown size`
@@ -24879,6 +36113,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r23
 
@@ -24895,6 +36133,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r24
 
 *   **Download size**: `Unknown size`
@@ -24909,6 +36151,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r25
 
@@ -24925,6 +36171,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r26
 
 *   **Download size**: `Unknown size`
@@ -24939,6 +36189,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r27
 
@@ -24955,6 +36209,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r28
 
 *   **Download size**: `Unknown size`
@@ -24969,6 +36227,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r29
 
@@ -24985,6 +36247,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r30
 
 *   **Download size**: `Unknown size`
@@ -24999,6 +36265,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r31
 
@@ -25015,6 +36285,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r32
 
 *   **Download size**: `Unknown size`
@@ -25029,6 +36303,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r33
 
@@ -25045,6 +36323,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r34
 
 *   **Download size**: `Unknown size`
@@ -25059,6 +36341,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.02_0.6_r35
 
@@ -25075,6 +36361,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r0
 
 *   **Download size**: `Unknown size`
@@ -25089,6 +36379,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r1
 
@@ -25105,6 +36399,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r2
 
 *   **Download size**: `Unknown size`
@@ -25119,6 +36417,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r3
 
@@ -25135,6 +36437,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r4
 
 *   **Download size**: `Unknown size`
@@ -25149,6 +36455,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r5
 
@@ -25165,6 +36475,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r6
 
 *   **Download size**: `Unknown size`
@@ -25179,6 +36493,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r7
 
@@ -25195,6 +36513,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r8
 
 *   **Download size**: `Unknown size`
@@ -25209,6 +36531,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r9
 
@@ -25225,6 +36551,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r10
 
 *   **Download size**: `Unknown size`
@@ -25239,6 +36569,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r11
 
@@ -25255,6 +36589,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r12
 
 *   **Download size**: `Unknown size`
@@ -25269,6 +36607,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r13
 
@@ -25285,6 +36627,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r14
 
 *   **Download size**: `Unknown size`
@@ -25299,6 +36645,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r15
 
@@ -25315,6 +36665,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r16
 
 *   **Download size**: `Unknown size`
@@ -25329,6 +36683,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r17
 
@@ -25345,6 +36703,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r18
 
 *   **Download size**: `Unknown size`
@@ -25359,6 +36721,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r19
 
@@ -25375,6 +36741,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r20
 
 *   **Download size**: `Unknown size`
@@ -25389,6 +36759,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r21
 
@@ -25405,6 +36779,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r22
 
 *   **Download size**: `Unknown size`
@@ -25419,6 +36797,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r23
 
@@ -25435,6 +36817,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r24
 
 *   **Download size**: `Unknown size`
@@ -25449,6 +36835,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r25
 
@@ -25465,6 +36855,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r26
 
 *   **Download size**: `Unknown size`
@@ -25479,6 +36873,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r27
 
@@ -25495,6 +36893,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r28
 
 *   **Download size**: `Unknown size`
@@ -25509,6 +36911,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r29
 
@@ -25525,6 +36931,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r30
 
 *   **Download size**: `Unknown size`
@@ -25539,6 +36949,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r31
 
@@ -25555,6 +36969,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r32
 
 *   **Download size**: `Unknown size`
@@ -25569,6 +36987,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r33
 
@@ -25585,6 +37007,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r34
 
 *   **Download size**: `Unknown size`
@@ -25599,6 +37025,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0_r35
 
@@ -25615,6 +37045,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r0
 
 *   **Download size**: `Unknown size`
@@ -25629,6 +37063,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r1
 
@@ -25645,6 +37083,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r2
 
 *   **Download size**: `Unknown size`
@@ -25659,6 +37101,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r3
 
@@ -25675,6 +37121,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r4
 
 *   **Download size**: `Unknown size`
@@ -25689,6 +37139,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r5
 
@@ -25705,6 +37159,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r6
 
 *   **Download size**: `Unknown size`
@@ -25719,6 +37177,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r7
 
@@ -25735,6 +37197,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r8
 
 *   **Download size**: `Unknown size`
@@ -25749,6 +37215,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r9
 
@@ -25765,6 +37235,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r10
 
 *   **Download size**: `Unknown size`
@@ -25779,6 +37253,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r11
 
@@ -25795,6 +37273,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r12
 
 *   **Download size**: `Unknown size`
@@ -25809,6 +37291,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r13
 
@@ -25825,6 +37311,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r14
 
 *   **Download size**: `Unknown size`
@@ -25839,6 +37329,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r15
 
@@ -25855,6 +37349,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r16
 
 *   **Download size**: `Unknown size`
@@ -25869,6 +37367,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r17
 
@@ -25885,6 +37387,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r18
 
 *   **Download size**: `Unknown size`
@@ -25899,6 +37405,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r19
 
@@ -25915,6 +37425,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r20
 
 *   **Download size**: `Unknown size`
@@ -25929,6 +37443,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r21
 
@@ -25945,6 +37463,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r22
 
 *   **Download size**: `Unknown size`
@@ -25959,6 +37481,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r23
 
@@ -25975,6 +37501,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r24
 
 *   **Download size**: `Unknown size`
@@ -25989,6 +37519,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r25
 
@@ -26005,6 +37539,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r26
 
 *   **Download size**: `Unknown size`
@@ -26019,6 +37557,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r27
 
@@ -26035,6 +37577,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r28
 
 *   **Download size**: `Unknown size`
@@ -26049,6 +37595,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r29
 
@@ -26065,6 +37615,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r30
 
 *   **Download size**: `Unknown size`
@@ -26079,6 +37633,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r31
 
@@ -26095,6 +37653,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r32
 
 *   **Download size**: `Unknown size`
@@ -26109,6 +37671,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r33
 
@@ -26125,6 +37691,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r34
 
 *   **Download size**: `Unknown size`
@@ -26139,6 +37709,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.1_r35
 
@@ -26155,6 +37729,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r0
 
 *   **Download size**: `Unknown size`
@@ -26169,6 +37747,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r1
 
@@ -26185,6 +37767,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r2
 
 *   **Download size**: `Unknown size`
@@ -26199,6 +37785,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r3
 
@@ -26215,6 +37805,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r4
 
 *   **Download size**: `Unknown size`
@@ -26229,6 +37823,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r5
 
@@ -26245,6 +37843,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r6
 
 *   **Download size**: `Unknown size`
@@ -26259,6 +37861,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r7
 
@@ -26275,6 +37881,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r8
 
 *   **Download size**: `Unknown size`
@@ -26289,6 +37899,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r9
 
@@ -26305,6 +37919,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r10
 
 *   **Download size**: `Unknown size`
@@ -26319,6 +37937,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r11
 
@@ -26335,6 +37957,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r12
 
 *   **Download size**: `Unknown size`
@@ -26349,6 +37975,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r13
 
@@ -26365,6 +37995,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r14
 
 *   **Download size**: `Unknown size`
@@ -26379,6 +38013,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r15
 
@@ -26395,6 +38033,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r16
 
 *   **Download size**: `Unknown size`
@@ -26409,6 +38051,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r17
 
@@ -26425,6 +38071,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r18
 
 *   **Download size**: `Unknown size`
@@ -26439,6 +38089,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r19
 
@@ -26455,6 +38109,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r20
 
 *   **Download size**: `Unknown size`
@@ -26469,6 +38127,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r21
 
@@ -26485,6 +38147,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r22
 
 *   **Download size**: `Unknown size`
@@ -26499,6 +38165,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r23
 
@@ -26515,6 +38185,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r24
 
 *   **Download size**: `Unknown size`
@@ -26529,6 +38203,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r25
 
@@ -26545,6 +38223,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r26
 
 *   **Download size**: `Unknown size`
@@ -26559,6 +38241,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r27
 
@@ -26575,6 +38261,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r28
 
 *   **Download size**: `Unknown size`
@@ -26589,6 +38279,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r29
 
@@ -26605,6 +38299,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r30
 
 *   **Download size**: `Unknown size`
@@ -26619,6 +38317,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r31
 
@@ -26635,6 +38337,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r32
 
 *   **Download size**: `Unknown size`
@@ -26649,6 +38355,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r33
 
@@ -26665,6 +38375,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r34
 
 *   **Download size**: `Unknown size`
@@ -26679,6 +38393,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.2_r35
 
@@ -26695,6 +38413,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r0
 
 *   **Download size**: `Unknown size`
@@ -26709,6 +38431,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r1
 
@@ -26725,6 +38451,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r2
 
 *   **Download size**: `Unknown size`
@@ -26739,6 +38469,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r3
 
@@ -26755,6 +38489,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r4
 
 *   **Download size**: `Unknown size`
@@ -26769,6 +38507,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r5
 
@@ -26785,6 +38527,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r6
 
 *   **Download size**: `Unknown size`
@@ -26799,6 +38545,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r7
 
@@ -26815,6 +38565,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r8
 
 *   **Download size**: `Unknown size`
@@ -26829,6 +38583,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r9
 
@@ -26845,6 +38603,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r10
 
 *   **Download size**: `Unknown size`
@@ -26859,6 +38621,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r11
 
@@ -26875,6 +38641,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r12
 
 *   **Download size**: `Unknown size`
@@ -26889,6 +38659,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r13
 
@@ -26905,6 +38679,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r14
 
 *   **Download size**: `Unknown size`
@@ -26919,6 +38697,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r15
 
@@ -26935,6 +38717,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r16
 
 *   **Download size**: `Unknown size`
@@ -26949,6 +38735,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r17
 
@@ -26965,6 +38755,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r18
 
 *   **Download size**: `Unknown size`
@@ -26979,6 +38773,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r19
 
@@ -26995,6 +38793,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r20
 
 *   **Download size**: `Unknown size`
@@ -27009,6 +38811,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r21
 
@@ -27025,6 +38831,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r22
 
 *   **Download size**: `Unknown size`
@@ -27039,6 +38849,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r23
 
@@ -27055,6 +38869,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r24
 
 *   **Download size**: `Unknown size`
@@ -27069,6 +38887,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r25
 
@@ -27085,6 +38907,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r26
 
 *   **Download size**: `Unknown size`
@@ -27099,6 +38925,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r27
 
@@ -27115,6 +38945,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r28
 
 *   **Download size**: `Unknown size`
@@ -27129,6 +38963,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r29
 
@@ -27145,6 +38983,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r30
 
 *   **Download size**: `Unknown size`
@@ -27159,6 +39001,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r31
 
@@ -27175,6 +39021,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r32
 
 *   **Download size**: `Unknown size`
@@ -27189,6 +39039,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r33
 
@@ -27205,6 +39059,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r34
 
 *   **Download size**: `Unknown size`
@@ -27219,6 +39077,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.3_r35
 
@@ -27235,6 +39097,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r0
 
 *   **Download size**: `Unknown size`
@@ -27249,6 +39115,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r1
 
@@ -27265,6 +39135,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r2
 
 *   **Download size**: `Unknown size`
@@ -27279,6 +39153,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r3
 
@@ -27295,6 +39173,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r4
 
 *   **Download size**: `Unknown size`
@@ -27309,6 +39191,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r5
 
@@ -27325,6 +39211,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r6
 
 *   **Download size**: `Unknown size`
@@ -27339,6 +39229,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r7
 
@@ -27355,6 +39249,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r8
 
 *   **Download size**: `Unknown size`
@@ -27369,6 +39267,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r9
 
@@ -27385,6 +39287,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r10
 
 *   **Download size**: `Unknown size`
@@ -27399,6 +39305,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r11
 
@@ -27415,6 +39325,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r12
 
 *   **Download size**: `Unknown size`
@@ -27429,6 +39343,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r13
 
@@ -27445,6 +39363,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r14
 
 *   **Download size**: `Unknown size`
@@ -27459,6 +39381,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r15
 
@@ -27475,6 +39401,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r16
 
 *   **Download size**: `Unknown size`
@@ -27489,6 +39419,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r17
 
@@ -27505,6 +39439,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r18
 
 *   **Download size**: `Unknown size`
@@ -27519,6 +39457,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r19
 
@@ -27535,6 +39477,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r20
 
 *   **Download size**: `Unknown size`
@@ -27549,6 +39495,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r21
 
@@ -27565,6 +39515,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r22
 
 *   **Download size**: `Unknown size`
@@ -27579,6 +39533,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r23
 
@@ -27595,6 +39553,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r24
 
 *   **Download size**: `Unknown size`
@@ -27609,6 +39571,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r25
 
@@ -27625,6 +39591,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r26
 
 *   **Download size**: `Unknown size`
@@ -27639,6 +39609,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r27
 
@@ -27655,6 +39629,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r28
 
 *   **Download size**: `Unknown size`
@@ -27669,6 +39647,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r29
 
@@ -27685,6 +39667,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r30
 
 *   **Download size**: `Unknown size`
@@ -27699,6 +39685,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r31
 
@@ -27715,6 +39705,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r32
 
 *   **Download size**: `Unknown size`
@@ -27729,6 +39723,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r33
 
@@ -27745,6 +39743,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r34
 
 *   **Download size**: `Unknown size`
@@ -27759,6 +39761,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.4_r35
 
@@ -27775,6 +39781,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r0
 
 *   **Download size**: `Unknown size`
@@ -27789,6 +39799,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r1
 
@@ -27805,6 +39819,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r2
 
 *   **Download size**: `Unknown size`
@@ -27819,6 +39837,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r3
 
@@ -27835,6 +39857,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r4
 
 *   **Download size**: `Unknown size`
@@ -27849,6 +39875,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r5
 
@@ -27865,6 +39895,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r6
 
 *   **Download size**: `Unknown size`
@@ -27879,6 +39913,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r7
 
@@ -27895,6 +39933,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r8
 
 *   **Download size**: `Unknown size`
@@ -27909,6 +39951,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r9
 
@@ -27925,6 +39971,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r10
 
 *   **Download size**: `Unknown size`
@@ -27939,6 +39989,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r11
 
@@ -27955,6 +40009,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r12
 
 *   **Download size**: `Unknown size`
@@ -27969,6 +40027,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r13
 
@@ -27985,6 +40047,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r14
 
 *   **Download size**: `Unknown size`
@@ -27999,6 +40065,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r15
 
@@ -28015,6 +40085,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r16
 
 *   **Download size**: `Unknown size`
@@ -28029,6 +40103,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r17
 
@@ -28045,6 +40123,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r18
 
 *   **Download size**: `Unknown size`
@@ -28059,6 +40141,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r19
 
@@ -28075,6 +40161,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r20
 
 *   **Download size**: `Unknown size`
@@ -28089,6 +40179,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r21
 
@@ -28105,6 +40199,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r22
 
 *   **Download size**: `Unknown size`
@@ -28119,6 +40217,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r23
 
@@ -28135,6 +40237,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r24
 
 *   **Download size**: `Unknown size`
@@ -28149,6 +40255,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r25
 
@@ -28165,6 +40275,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r26
 
 *   **Download size**: `Unknown size`
@@ -28179,6 +40293,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r27
 
@@ -28195,6 +40313,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r28
 
 *   **Download size**: `Unknown size`
@@ -28209,6 +40331,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r29
 
@@ -28225,6 +40351,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r30
 
 *   **Download size**: `Unknown size`
@@ -28239,6 +40369,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r31
 
@@ -28255,6 +40389,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r32
 
 *   **Download size**: `Unknown size`
@@ -28269,6 +40407,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r33
 
@@ -28285,6 +40427,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r34
 
 *   **Download size**: `Unknown size`
@@ -28299,6 +40445,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.5_r35
 
@@ -28315,6 +40465,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r0
 
 *   **Download size**: `Unknown size`
@@ -28329,6 +40483,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r1
 
@@ -28345,6 +40503,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r2
 
 *   **Download size**: `Unknown size`
@@ -28359,6 +40521,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r3
 
@@ -28375,6 +40541,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r4
 
 *   **Download size**: `Unknown size`
@@ -28389,6 +40559,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r5
 
@@ -28405,6 +40579,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r6
 
 *   **Download size**: `Unknown size`
@@ -28419,6 +40597,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r7
 
@@ -28435,6 +40617,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r8
 
 *   **Download size**: `Unknown size`
@@ -28449,6 +40635,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r9
 
@@ -28465,6 +40655,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r10
 
 *   **Download size**: `Unknown size`
@@ -28479,6 +40673,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r11
 
@@ -28495,6 +40693,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r12
 
 *   **Download size**: `Unknown size`
@@ -28509,6 +40711,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r13
 
@@ -28525,6 +40731,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r14
 
 *   **Download size**: `Unknown size`
@@ -28539,6 +40749,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r15
 
@@ -28555,6 +40769,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r16
 
 *   **Download size**: `Unknown size`
@@ -28569,6 +40787,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r17
 
@@ -28585,6 +40807,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r18
 
 *   **Download size**: `Unknown size`
@@ -28599,6 +40825,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r19
 
@@ -28615,6 +40845,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r20
 
 *   **Download size**: `Unknown size`
@@ -28629,6 +40863,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r21
 
@@ -28645,6 +40883,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r22
 
 *   **Download size**: `Unknown size`
@@ -28659,6 +40901,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r23
 
@@ -28675,6 +40921,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r24
 
 *   **Download size**: `Unknown size`
@@ -28689,6 +40939,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r25
 
@@ -28705,6 +40959,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r26
 
 *   **Download size**: `Unknown size`
@@ -28719,6 +40977,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r27
 
@@ -28735,6 +40997,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r28
 
 *   **Download size**: `Unknown size`
@@ -28749,6 +41015,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r29
 
@@ -28765,6 +41035,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r30
 
 *   **Download size**: `Unknown size`
@@ -28779,6 +41053,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r31
 
@@ -28795,6 +41073,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r32
 
 *   **Download size**: `Unknown size`
@@ -28809,6 +41091,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r33
 
@@ -28825,6 +41111,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r34
 
 *   **Download size**: `Unknown size`
@@ -28839,6 +41129,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.0333333_0.6_r35
 
@@ -28855,6 +41149,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r0
 
 *   **Download size**: `Unknown size`
@@ -28869,6 +41167,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r1
 
@@ -28885,6 +41187,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r2
 
 *   **Download size**: `Unknown size`
@@ -28899,6 +41205,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r3
 
@@ -28915,6 +41225,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r4
 
 *   **Download size**: `Unknown size`
@@ -28929,6 +41243,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r5
 
@@ -28945,6 +41263,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r6
 
 *   **Download size**: `Unknown size`
@@ -28959,6 +41281,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r7
 
@@ -28975,6 +41301,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r8
 
 *   **Download size**: `Unknown size`
@@ -28989,6 +41319,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r9
 
@@ -29005,6 +41339,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r10
 
 *   **Download size**: `Unknown size`
@@ -29019,6 +41357,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r11
 
@@ -29035,6 +41377,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r12
 
 *   **Download size**: `Unknown size`
@@ -29049,6 +41395,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r13
 
@@ -29065,6 +41415,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r14
 
 *   **Download size**: `Unknown size`
@@ -29079,6 +41433,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r15
 
@@ -29095,6 +41453,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r16
 
 *   **Download size**: `Unknown size`
@@ -29109,6 +41471,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r17
 
@@ -29125,6 +41491,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r18
 
 *   **Download size**: `Unknown size`
@@ -29139,6 +41509,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r19
 
@@ -29155,6 +41529,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r20
 
 *   **Download size**: `Unknown size`
@@ -29169,6 +41547,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r21
 
@@ -29185,6 +41567,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r22
 
 *   **Download size**: `Unknown size`
@@ -29199,6 +41585,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r23
 
@@ -29215,6 +41605,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r24
 
 *   **Download size**: `Unknown size`
@@ -29229,6 +41623,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r25
 
@@ -29245,6 +41643,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r26
 
 *   **Download size**: `Unknown size`
@@ -29259,6 +41661,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r27
 
@@ -29275,6 +41681,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r28
 
 *   **Download size**: `Unknown size`
@@ -29289,6 +41699,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r29
 
@@ -29305,6 +41719,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r30
 
 *   **Download size**: `Unknown size`
@@ -29319,6 +41737,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r31
 
@@ -29335,6 +41757,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r32
 
 *   **Download size**: `Unknown size`
@@ -29349,6 +41775,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r33
 
@@ -29365,6 +41795,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r34
 
 *   **Download size**: `Unknown size`
@@ -29379,6 +41813,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0_r35
 
@@ -29395,6 +41833,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r0
 
 *   **Download size**: `Unknown size`
@@ -29409,6 +41851,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r1
 
@@ -29425,6 +41871,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r2
 
 *   **Download size**: `Unknown size`
@@ -29439,6 +41889,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r3
 
@@ -29455,6 +41909,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r4
 
 *   **Download size**: `Unknown size`
@@ -29469,6 +41927,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r5
 
@@ -29485,6 +41947,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r6
 
 *   **Download size**: `Unknown size`
@@ -29499,6 +41965,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r7
 
@@ -29515,6 +41985,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r8
 
 *   **Download size**: `Unknown size`
@@ -29529,6 +42003,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r9
 
@@ -29545,6 +42023,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r10
 
 *   **Download size**: `Unknown size`
@@ -29559,6 +42041,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r11
 
@@ -29575,6 +42061,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r12
 
 *   **Download size**: `Unknown size`
@@ -29589,6 +42079,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r13
 
@@ -29605,6 +42099,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r14
 
 *   **Download size**: `Unknown size`
@@ -29619,6 +42117,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r15
 
@@ -29635,6 +42137,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r16
 
 *   **Download size**: `Unknown size`
@@ -29649,6 +42155,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r17
 
@@ -29665,6 +42175,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r18
 
 *   **Download size**: `Unknown size`
@@ -29679,6 +42193,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r19
 
@@ -29695,6 +42213,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r20
 
 *   **Download size**: `Unknown size`
@@ -29709,6 +42231,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r21
 
@@ -29725,6 +42251,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r22
 
 *   **Download size**: `Unknown size`
@@ -29739,6 +42269,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r23
 
@@ -29755,6 +42289,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r24
 
 *   **Download size**: `Unknown size`
@@ -29769,6 +42307,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r25
 
@@ -29785,6 +42327,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r26
 
 *   **Download size**: `Unknown size`
@@ -29799,6 +42345,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r27
 
@@ -29815,6 +42365,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r28
 
 *   **Download size**: `Unknown size`
@@ -29829,6 +42383,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r29
 
@@ -29845,6 +42403,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r30
 
 *   **Download size**: `Unknown size`
@@ -29859,6 +42421,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r31
 
@@ -29875,6 +42441,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r32
 
 *   **Download size**: `Unknown size`
@@ -29889,6 +42459,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r33
 
@@ -29905,6 +42479,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r34
 
 *   **Download size**: `Unknown size`
@@ -29919,6 +42497,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.1_r35
 
@@ -29935,6 +42517,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r0
 
 *   **Download size**: `Unknown size`
@@ -29949,6 +42535,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r1
 
@@ -29965,6 +42555,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r2
 
 *   **Download size**: `Unknown size`
@@ -29979,6 +42573,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r3
 
@@ -29995,6 +42593,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r4
 
 *   **Download size**: `Unknown size`
@@ -30009,6 +42611,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r5
 
@@ -30025,6 +42631,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r6
 
 *   **Download size**: `Unknown size`
@@ -30039,6 +42649,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r7
 
@@ -30055,6 +42669,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r8
 
 *   **Download size**: `Unknown size`
@@ -30069,6 +42687,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r9
 
@@ -30085,6 +42707,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r10
 
 *   **Download size**: `Unknown size`
@@ -30099,6 +42725,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r11
 
@@ -30115,6 +42745,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r12
 
 *   **Download size**: `Unknown size`
@@ -30129,6 +42763,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r13
 
@@ -30145,6 +42783,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r14
 
 *   **Download size**: `Unknown size`
@@ -30159,6 +42801,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r15
 
@@ -30175,6 +42821,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r16
 
 *   **Download size**: `Unknown size`
@@ -30189,6 +42839,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r17
 
@@ -30205,6 +42859,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r18
 
 *   **Download size**: `Unknown size`
@@ -30219,6 +42877,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r19
 
@@ -30235,6 +42897,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r20
 
 *   **Download size**: `Unknown size`
@@ -30249,6 +42915,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r21
 
@@ -30265,6 +42935,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r22
 
 *   **Download size**: `Unknown size`
@@ -30279,6 +42953,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r23
 
@@ -30295,6 +42973,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r24
 
 *   **Download size**: `Unknown size`
@@ -30309,6 +42991,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r25
 
@@ -30325,6 +43011,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r26
 
 *   **Download size**: `Unknown size`
@@ -30339,6 +43029,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r27
 
@@ -30355,6 +43049,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r28
 
 *   **Download size**: `Unknown size`
@@ -30369,6 +43067,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r29
 
@@ -30385,6 +43087,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r30
 
 *   **Download size**: `Unknown size`
@@ -30399,6 +43105,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r31
 
@@ -30415,6 +43125,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r32
 
 *   **Download size**: `Unknown size`
@@ -30429,6 +43143,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r33
 
@@ -30445,6 +43163,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r34
 
 *   **Download size**: `Unknown size`
@@ -30459,6 +43181,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.2_r35
 
@@ -30475,6 +43201,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r0
 
 *   **Download size**: `Unknown size`
@@ -30489,6 +43219,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r1
 
@@ -30505,6 +43239,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r2
 
 *   **Download size**: `Unknown size`
@@ -30519,6 +43257,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r3
 
@@ -30535,6 +43277,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r4
 
 *   **Download size**: `Unknown size`
@@ -30549,6 +43295,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r5
 
@@ -30565,6 +43315,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r6
 
 *   **Download size**: `Unknown size`
@@ -30579,6 +43333,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r7
 
@@ -30595,6 +43353,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r8
 
 *   **Download size**: `Unknown size`
@@ -30609,6 +43371,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r9
 
@@ -30625,6 +43391,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r10
 
 *   **Download size**: `Unknown size`
@@ -30639,6 +43409,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r11
 
@@ -30655,6 +43429,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r12
 
 *   **Download size**: `Unknown size`
@@ -30669,6 +43447,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r13
 
@@ -30685,6 +43467,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r14
 
 *   **Download size**: `Unknown size`
@@ -30699,6 +43485,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r15
 
@@ -30715,6 +43505,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r16
 
 *   **Download size**: `Unknown size`
@@ -30729,6 +43523,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r17
 
@@ -30745,6 +43543,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r18
 
 *   **Download size**: `Unknown size`
@@ -30759,6 +43561,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r19
 
@@ -30775,6 +43581,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r20
 
 *   **Download size**: `Unknown size`
@@ -30789,6 +43599,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r21
 
@@ -30805,6 +43619,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r22
 
 *   **Download size**: `Unknown size`
@@ -30819,6 +43637,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r23
 
@@ -30835,6 +43657,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r24
 
 *   **Download size**: `Unknown size`
@@ -30849,6 +43675,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r25
 
@@ -30865,6 +43695,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r26
 
 *   **Download size**: `Unknown size`
@@ -30879,6 +43713,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r27
 
@@ -30895,6 +43733,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r28
 
 *   **Download size**: `Unknown size`
@@ -30909,6 +43751,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r29
 
@@ -30925,6 +43771,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r30
 
 *   **Download size**: `Unknown size`
@@ -30939,6 +43789,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r31
 
@@ -30955,6 +43809,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r32
 
 *   **Download size**: `Unknown size`
@@ -30969,6 +43827,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r33
 
@@ -30985,6 +43847,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r34
 
 *   **Download size**: `Unknown size`
@@ -30999,6 +43865,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.3_r35
 
@@ -31015,6 +43885,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r0
 
 *   **Download size**: `Unknown size`
@@ -31029,6 +43903,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r1
 
@@ -31045,6 +43923,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r2
 
 *   **Download size**: `Unknown size`
@@ -31059,6 +43941,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r3
 
@@ -31075,6 +43961,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r4
 
 *   **Download size**: `Unknown size`
@@ -31089,6 +43979,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r5
 
@@ -31105,6 +43999,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r6
 
 *   **Download size**: `Unknown size`
@@ -31119,6 +44017,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r7
 
@@ -31135,6 +44037,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r8
 
 *   **Download size**: `Unknown size`
@@ -31149,6 +44055,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r9
 
@@ -31165,6 +44075,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r10
 
 *   **Download size**: `Unknown size`
@@ -31179,6 +44093,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r11
 
@@ -31195,6 +44113,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r12
 
 *   **Download size**: `Unknown size`
@@ -31209,6 +44131,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r13
 
@@ -31225,6 +44151,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r14
 
 *   **Download size**: `Unknown size`
@@ -31239,6 +44169,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r15
 
@@ -31255,6 +44189,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r16
 
 *   **Download size**: `Unknown size`
@@ -31269,6 +44207,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r17
 
@@ -31285,6 +44227,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r18
 
 *   **Download size**: `Unknown size`
@@ -31299,6 +44245,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r19
 
@@ -31315,6 +44265,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r20
 
 *   **Download size**: `Unknown size`
@@ -31329,6 +44283,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r21
 
@@ -31345,6 +44303,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r22
 
 *   **Download size**: `Unknown size`
@@ -31359,6 +44321,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r23
 
@@ -31375,6 +44341,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r24
 
 *   **Download size**: `Unknown size`
@@ -31389,6 +44359,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r25
 
@@ -31405,6 +44379,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r26
 
 *   **Download size**: `Unknown size`
@@ -31419,6 +44397,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r27
 
@@ -31435,6 +44417,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r28
 
 *   **Download size**: `Unknown size`
@@ -31449,6 +44435,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r29
 
@@ -31465,6 +44455,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r30
 
 *   **Download size**: `Unknown size`
@@ -31479,6 +44473,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r31
 
@@ -31495,6 +44493,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r32
 
 *   **Download size**: `Unknown size`
@@ -31509,6 +44511,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r33
 
@@ -31525,6 +44531,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r34
 
 *   **Download size**: `Unknown size`
@@ -31539,6 +44549,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.4_r35
 
@@ -31555,6 +44569,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r0
 
 *   **Download size**: `Unknown size`
@@ -31569,6 +44587,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r1
 
@@ -31585,6 +44607,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r2
 
 *   **Download size**: `Unknown size`
@@ -31599,6 +44625,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r3
 
@@ -31615,6 +44645,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r4
 
 *   **Download size**: `Unknown size`
@@ -31629,6 +44663,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r5
 
@@ -31645,6 +44683,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r6
 
 *   **Download size**: `Unknown size`
@@ -31659,6 +44701,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r7
 
@@ -31675,6 +44721,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r8
 
 *   **Download size**: `Unknown size`
@@ -31689,6 +44739,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r9
 
@@ -31705,6 +44759,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r10
 
 *   **Download size**: `Unknown size`
@@ -31719,6 +44777,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r11
 
@@ -31735,6 +44797,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r12
 
 *   **Download size**: `Unknown size`
@@ -31749,6 +44815,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r13
 
@@ -31765,6 +44835,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r14
 
 *   **Download size**: `Unknown size`
@@ -31779,6 +44853,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r15
 
@@ -31795,6 +44873,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r16
 
 *   **Download size**: `Unknown size`
@@ -31809,6 +44891,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r17
 
@@ -31825,6 +44911,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r18
 
 *   **Download size**: `Unknown size`
@@ -31839,6 +44929,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r19
 
@@ -31855,6 +44949,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r20
 
 *   **Download size**: `Unknown size`
@@ -31869,6 +44967,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r21
 
@@ -31885,6 +44987,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r22
 
 *   **Download size**: `Unknown size`
@@ -31899,6 +45005,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r23
 
@@ -31915,6 +45025,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r24
 
 *   **Download size**: `Unknown size`
@@ -31929,6 +45043,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r25
 
@@ -31945,6 +45063,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r26
 
 *   **Download size**: `Unknown size`
@@ -31959,6 +45081,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r27
 
@@ -31975,6 +45101,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r28
 
 *   **Download size**: `Unknown size`
@@ -31989,6 +45119,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r29
 
@@ -32005,6 +45139,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r30
 
 *   **Download size**: `Unknown size`
@@ -32019,6 +45157,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r31
 
@@ -32035,6 +45177,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r32
 
 *   **Download size**: `Unknown size`
@@ -32049,6 +45195,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r33
 
@@ -32065,6 +45215,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r34
 
 *   **Download size**: `Unknown size`
@@ -32079,6 +45233,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.5_r35
 
@@ -32095,6 +45253,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r0
 
 *   **Download size**: `Unknown size`
@@ -32109,6 +45271,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r1
 
@@ -32125,6 +45291,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r2
 
 *   **Download size**: `Unknown size`
@@ -32139,6 +45309,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r3
 
@@ -32155,6 +45329,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r4
 
 *   **Download size**: `Unknown size`
@@ -32169,6 +45347,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r5
 
@@ -32185,6 +45367,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r6
 
 *   **Download size**: `Unknown size`
@@ -32199,6 +45385,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r7
 
@@ -32215,6 +45405,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r8
 
 *   **Download size**: `Unknown size`
@@ -32229,6 +45423,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r9
 
@@ -32245,6 +45443,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r10
 
 *   **Download size**: `Unknown size`
@@ -32259,6 +45461,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r11
 
@@ -32275,6 +45481,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r12
 
 *   **Download size**: `Unknown size`
@@ -32289,6 +45499,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r13
 
@@ -32305,6 +45519,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r14
 
 *   **Download size**: `Unknown size`
@@ -32319,6 +45537,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r15
 
@@ -32335,6 +45557,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r16
 
 *   **Download size**: `Unknown size`
@@ -32349,6 +45575,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r17
 
@@ -32365,6 +45595,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r18
 
 *   **Download size**: `Unknown size`
@@ -32379,6 +45613,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r19
 
@@ -32395,6 +45633,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r20
 
 *   **Download size**: `Unknown size`
@@ -32409,6 +45651,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r21
 
@@ -32425,6 +45671,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r22
 
 *   **Download size**: `Unknown size`
@@ -32439,6 +45689,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r23
 
@@ -32455,6 +45709,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r24
 
 *   **Download size**: `Unknown size`
@@ -32469,6 +45727,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r25
 
@@ -32485,6 +45747,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r26
 
 *   **Download size**: `Unknown size`
@@ -32499,6 +45765,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r27
 
@@ -32515,6 +45785,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r28
 
 *   **Download size**: `Unknown size`
@@ -32529,6 +45803,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r29
 
@@ -32545,6 +45823,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r30
 
 *   **Download size**: `Unknown size`
@@ -32559,6 +45841,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r31
 
@@ -32575,6 +45861,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r32
 
 *   **Download size**: `Unknown size`
@@ -32589,6 +45879,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r33
 
@@ -32605,6 +45899,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r34
 
 *   **Download size**: `Unknown size`
@@ -32619,6 +45917,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.1_0.6_r35
 
@@ -32635,6 +45937,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r0
 
 *   **Download size**: `Unknown size`
@@ -32649,6 +45955,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r1
 
@@ -32665,6 +45975,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r2
 
 *   **Download size**: `Unknown size`
@@ -32679,6 +45993,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r3
 
@@ -32695,6 +46013,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r4
 
 *   **Download size**: `Unknown size`
@@ -32709,6 +46031,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r5
 
@@ -32725,6 +46051,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r6
 
 *   **Download size**: `Unknown size`
@@ -32739,6 +46069,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r7
 
@@ -32755,6 +46089,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r8
 
 *   **Download size**: `Unknown size`
@@ -32769,6 +46107,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r9
 
@@ -32785,6 +46127,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r10
 
 *   **Download size**: `Unknown size`
@@ -32799,6 +46145,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r11
 
@@ -32815,6 +46165,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r12
 
 *   **Download size**: `Unknown size`
@@ -32829,6 +46183,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r13
 
@@ -32845,6 +46203,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r14
 
 *   **Download size**: `Unknown size`
@@ -32859,6 +46221,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r15
 
@@ -32875,6 +46241,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r16
 
 *   **Download size**: `Unknown size`
@@ -32889,6 +46259,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r17
 
@@ -32905,6 +46279,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r18
 
 *   **Download size**: `Unknown size`
@@ -32919,6 +46297,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r19
 
@@ -32935,6 +46317,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r20
 
 *   **Download size**: `Unknown size`
@@ -32949,6 +46335,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r21
 
@@ -32965,6 +46355,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r22
 
 *   **Download size**: `Unknown size`
@@ -32979,6 +46373,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r23
 
@@ -32995,6 +46393,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r24
 
 *   **Download size**: `Unknown size`
@@ -33009,6 +46411,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r25
 
@@ -33025,6 +46431,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r26
 
 *   **Download size**: `Unknown size`
@@ -33039,6 +46449,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r27
 
@@ -33055,6 +46469,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r28
 
 *   **Download size**: `Unknown size`
@@ -33069,6 +46487,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r29
 
@@ -33085,6 +46507,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r30
 
 *   **Download size**: `Unknown size`
@@ -33099,6 +46525,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r31
 
@@ -33115,6 +46545,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r32
 
 *   **Download size**: `Unknown size`
@@ -33129,6 +46563,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r33
 
@@ -33145,6 +46583,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r34
 
 *   **Download size**: `Unknown size`
@@ -33159,6 +46601,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0_r35
 
@@ -33175,6 +46621,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r0
 
 *   **Download size**: `Unknown size`
@@ -33189,6 +46639,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r1
 
@@ -33205,6 +46659,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r2
 
 *   **Download size**: `Unknown size`
@@ -33219,6 +46677,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r3
 
@@ -33235,6 +46697,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r4
 
 *   **Download size**: `Unknown size`
@@ -33249,6 +46715,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r5
 
@@ -33265,6 +46735,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r6
 
 *   **Download size**: `Unknown size`
@@ -33279,6 +46753,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r7
 
@@ -33295,6 +46773,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r8
 
 *   **Download size**: `Unknown size`
@@ -33309,6 +46791,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r9
 
@@ -33325,6 +46811,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r10
 
 *   **Download size**: `Unknown size`
@@ -33339,6 +46829,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r11
 
@@ -33355,6 +46849,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r12
 
 *   **Download size**: `Unknown size`
@@ -33369,6 +46867,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r13
 
@@ -33385,6 +46887,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r14
 
 *   **Download size**: `Unknown size`
@@ -33399,6 +46905,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r15
 
@@ -33415,6 +46925,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r16
 
 *   **Download size**: `Unknown size`
@@ -33429,6 +46943,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r17
 
@@ -33445,6 +46963,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r18
 
 *   **Download size**: `Unknown size`
@@ -33459,6 +46981,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r19
 
@@ -33475,6 +47001,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r20
 
 *   **Download size**: `Unknown size`
@@ -33489,6 +47019,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r21
 
@@ -33505,6 +47039,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r22
 
 *   **Download size**: `Unknown size`
@@ -33519,6 +47057,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r23
 
@@ -33535,6 +47077,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r24
 
 *   **Download size**: `Unknown size`
@@ -33549,6 +47095,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r25
 
@@ -33565,6 +47115,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r26
 
 *   **Download size**: `Unknown size`
@@ -33579,6 +47133,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r27
 
@@ -33595,6 +47153,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r28
 
 *   **Download size**: `Unknown size`
@@ -33609,6 +47171,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r29
 
@@ -33625,6 +47191,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r30
 
 *   **Download size**: `Unknown size`
@@ -33639,6 +47209,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r31
 
@@ -33655,6 +47229,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r32
 
 *   **Download size**: `Unknown size`
@@ -33669,6 +47247,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r33
 
@@ -33685,6 +47267,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r34
 
 *   **Download size**: `Unknown size`
@@ -33699,6 +47285,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.1_r35
 
@@ -33715,6 +47305,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r0
 
 *   **Download size**: `Unknown size`
@@ -33729,6 +47323,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r1
 
@@ -33745,6 +47343,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r2
 
 *   **Download size**: `Unknown size`
@@ -33759,6 +47361,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r3
 
@@ -33775,6 +47381,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r4
 
 *   **Download size**: `Unknown size`
@@ -33789,6 +47399,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r5
 
@@ -33805,6 +47419,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r6
 
 *   **Download size**: `Unknown size`
@@ -33819,6 +47437,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r7
 
@@ -33835,6 +47457,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r8
 
 *   **Download size**: `Unknown size`
@@ -33849,6 +47475,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r9
 
@@ -33865,6 +47495,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r10
 
 *   **Download size**: `Unknown size`
@@ -33879,6 +47513,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r11
 
@@ -33895,6 +47533,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r12
 
 *   **Download size**: `Unknown size`
@@ -33909,6 +47551,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r13
 
@@ -33925,6 +47571,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r14
 
 *   **Download size**: `Unknown size`
@@ -33939,6 +47589,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r15
 
@@ -33955,6 +47609,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r16
 
 *   **Download size**: `Unknown size`
@@ -33969,6 +47627,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r17
 
@@ -33985,6 +47647,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r18
 
 *   **Download size**: `Unknown size`
@@ -33999,6 +47665,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r19
 
@@ -34015,6 +47685,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r20
 
 *   **Download size**: `Unknown size`
@@ -34029,6 +47703,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r21
 
@@ -34045,6 +47723,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r22
 
 *   **Download size**: `Unknown size`
@@ -34059,6 +47741,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r23
 
@@ -34075,6 +47761,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r24
 
 *   **Download size**: `Unknown size`
@@ -34089,6 +47779,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r25
 
@@ -34105,6 +47799,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r26
 
 *   **Download size**: `Unknown size`
@@ -34119,6 +47817,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r27
 
@@ -34135,6 +47837,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r28
 
 *   **Download size**: `Unknown size`
@@ -34149,6 +47855,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r29
 
@@ -34165,6 +47875,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r30
 
 *   **Download size**: `Unknown size`
@@ -34179,6 +47893,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r31
 
@@ -34195,6 +47913,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r32
 
 *   **Download size**: `Unknown size`
@@ -34209,6 +47931,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r33
 
@@ -34225,6 +47951,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r34
 
 *   **Download size**: `Unknown size`
@@ -34239,6 +47969,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.2_r35
 
@@ -34255,6 +47989,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r0
 
 *   **Download size**: `Unknown size`
@@ -34269,6 +48007,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r1
 
@@ -34285,6 +48027,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r2
 
 *   **Download size**: `Unknown size`
@@ -34299,6 +48045,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r3
 
@@ -34315,6 +48065,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r4
 
 *   **Download size**: `Unknown size`
@@ -34329,6 +48083,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r5
 
@@ -34345,6 +48103,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r6
 
 *   **Download size**: `Unknown size`
@@ -34359,6 +48121,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r7
 
@@ -34375,6 +48141,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r8
 
 *   **Download size**: `Unknown size`
@@ -34389,6 +48159,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r9
 
@@ -34405,6 +48179,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r10
 
 *   **Download size**: `Unknown size`
@@ -34419,6 +48197,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r11
 
@@ -34435,6 +48217,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r12
 
 *   **Download size**: `Unknown size`
@@ -34449,6 +48235,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r13
 
@@ -34465,6 +48255,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r14
 
 *   **Download size**: `Unknown size`
@@ -34479,6 +48273,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r15
 
@@ -34495,6 +48293,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r16
 
 *   **Download size**: `Unknown size`
@@ -34509,6 +48311,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r17
 
@@ -34525,6 +48331,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r18
 
 *   **Download size**: `Unknown size`
@@ -34539,6 +48349,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r19
 
@@ -34555,6 +48369,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r20
 
 *   **Download size**: `Unknown size`
@@ -34569,6 +48387,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r21
 
@@ -34585,6 +48407,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r22
 
 *   **Download size**: `Unknown size`
@@ -34599,6 +48425,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r23
 
@@ -34615,6 +48445,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r24
 
 *   **Download size**: `Unknown size`
@@ -34629,6 +48463,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r25
 
@@ -34645,6 +48483,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r26
 
 *   **Download size**: `Unknown size`
@@ -34659,6 +48501,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r27
 
@@ -34675,6 +48521,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r28
 
 *   **Download size**: `Unknown size`
@@ -34689,6 +48539,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r29
 
@@ -34705,6 +48559,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r30
 
 *   **Download size**: `Unknown size`
@@ -34719,6 +48577,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r31
 
@@ -34735,6 +48597,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r32
 
 *   **Download size**: `Unknown size`
@@ -34749,6 +48615,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r33
 
@@ -34765,6 +48635,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r34
 
 *   **Download size**: `Unknown size`
@@ -34779,6 +48653,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.3_r35
 
@@ -34795,6 +48673,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r0
 
 *   **Download size**: `Unknown size`
@@ -34809,6 +48691,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r1
 
@@ -34825,6 +48711,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r2
 
 *   **Download size**: `Unknown size`
@@ -34839,6 +48729,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r3
 
@@ -34855,6 +48749,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r4
 
 *   **Download size**: `Unknown size`
@@ -34869,6 +48767,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r5
 
@@ -34885,6 +48787,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r6
 
 *   **Download size**: `Unknown size`
@@ -34899,6 +48805,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r7
 
@@ -34915,6 +48825,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r8
 
 *   **Download size**: `Unknown size`
@@ -34929,6 +48843,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r9
 
@@ -34945,6 +48863,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r10
 
 *   **Download size**: `Unknown size`
@@ -34959,6 +48881,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r11
 
@@ -34975,6 +48901,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r12
 
 *   **Download size**: `Unknown size`
@@ -34989,6 +48919,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r13
 
@@ -35005,6 +48939,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r14
 
 *   **Download size**: `Unknown size`
@@ -35019,6 +48957,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r15
 
@@ -35035,6 +48977,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r16
 
 *   **Download size**: `Unknown size`
@@ -35049,6 +48995,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r17
 
@@ -35065,6 +49015,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r18
 
 *   **Download size**: `Unknown size`
@@ -35079,6 +49033,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r19
 
@@ -35095,6 +49053,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r20
 
 *   **Download size**: `Unknown size`
@@ -35109,6 +49071,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r21
 
@@ -35125,6 +49091,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r22
 
 *   **Download size**: `Unknown size`
@@ -35139,6 +49109,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r23
 
@@ -35155,6 +49129,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r24
 
 *   **Download size**: `Unknown size`
@@ -35169,6 +49147,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r25
 
@@ -35185,6 +49167,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r26
 
 *   **Download size**: `Unknown size`
@@ -35199,6 +49185,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r27
 
@@ -35215,6 +49205,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r28
 
 *   **Download size**: `Unknown size`
@@ -35229,6 +49223,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r29
 
@@ -35245,6 +49243,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r30
 
 *   **Download size**: `Unknown size`
@@ -35259,6 +49261,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r31
 
@@ -35275,6 +49281,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r32
 
 *   **Download size**: `Unknown size`
@@ -35289,6 +49299,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r33
 
@@ -35305,6 +49319,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r34
 
 *   **Download size**: `Unknown size`
@@ -35319,6 +49337,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.4_r35
 
@@ -35335,6 +49357,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r0
 
 *   **Download size**: `Unknown size`
@@ -35349,6 +49375,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r1
 
@@ -35365,6 +49395,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r2
 
 *   **Download size**: `Unknown size`
@@ -35379,6 +49413,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r3
 
@@ -35395,6 +49433,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r4
 
 *   **Download size**: `Unknown size`
@@ -35409,6 +49451,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r5
 
@@ -35425,6 +49471,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r6
 
 *   **Download size**: `Unknown size`
@@ -35439,6 +49489,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r7
 
@@ -35455,6 +49509,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r8
 
 *   **Download size**: `Unknown size`
@@ -35469,6 +49527,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r9
 
@@ -35485,6 +49547,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r10
 
 *   **Download size**: `Unknown size`
@@ -35499,6 +49565,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r11
 
@@ -35515,6 +49585,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r12
 
 *   **Download size**: `Unknown size`
@@ -35529,6 +49603,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r13
 
@@ -35545,6 +49623,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r14
 
 *   **Download size**: `Unknown size`
@@ -35559,6 +49641,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r15
 
@@ -35575,6 +49661,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r16
 
 *   **Download size**: `Unknown size`
@@ -35589,6 +49679,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r17
 
@@ -35605,6 +49699,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r18
 
 *   **Download size**: `Unknown size`
@@ -35619,6 +49717,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r19
 
@@ -35635,6 +49737,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r20
 
 *   **Download size**: `Unknown size`
@@ -35649,6 +49755,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r21
 
@@ -35665,6 +49775,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r22
 
 *   **Download size**: `Unknown size`
@@ -35679,6 +49793,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r23
 
@@ -35695,6 +49813,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r24
 
 *   **Download size**: `Unknown size`
@@ -35709,6 +49831,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r25
 
@@ -35725,6 +49851,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r26
 
 *   **Download size**: `Unknown size`
@@ -35739,6 +49869,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r27
 
@@ -35755,6 +49889,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r28
 
 *   **Download size**: `Unknown size`
@@ -35769,6 +49907,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r29
 
@@ -35785,6 +49927,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r30
 
 *   **Download size**: `Unknown size`
@@ -35799,6 +49945,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r31
 
@@ -35815,6 +49965,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r32
 
 *   **Download size**: `Unknown size`
@@ -35829,6 +49983,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r33
 
@@ -35845,6 +50003,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r34
 
 *   **Download size**: `Unknown size`
@@ -35859,6 +50021,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.5_r35
 
@@ -35875,6 +50041,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r0
 
 *   **Download size**: `Unknown size`
@@ -35889,6 +50059,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r1
 
@@ -35905,6 +50079,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r2
 
 *   **Download size**: `Unknown size`
@@ -35919,6 +50097,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r3
 
@@ -35935,6 +50117,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r4
 
 *   **Download size**: `Unknown size`
@@ -35949,6 +50135,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r5
 
@@ -35965,6 +50155,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r6
 
 *   **Download size**: `Unknown size`
@@ -35979,6 +50173,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r7
 
@@ -35995,6 +50193,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r8
 
 *   **Download size**: `Unknown size`
@@ -36009,6 +50211,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r9
 
@@ -36025,6 +50231,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r10
 
 *   **Download size**: `Unknown size`
@@ -36039,6 +50249,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r11
 
@@ -36055,6 +50269,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r12
 
 *   **Download size**: `Unknown size`
@@ -36069,6 +50287,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r13
 
@@ -36085,6 +50307,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r14
 
 *   **Download size**: `Unknown size`
@@ -36099,6 +50325,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r15
 
@@ -36115,6 +50345,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r16
 
 *   **Download size**: `Unknown size`
@@ -36129,6 +50363,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r17
 
@@ -36145,6 +50383,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r18
 
 *   **Download size**: `Unknown size`
@@ -36159,6 +50401,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r19
 
@@ -36175,6 +50421,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r20
 
 *   **Download size**: `Unknown size`
@@ -36189,6 +50439,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r21
 
@@ -36205,6 +50459,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r22
 
 *   **Download size**: `Unknown size`
@@ -36219,6 +50477,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r23
 
@@ -36235,6 +50497,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r24
 
 *   **Download size**: `Unknown size`
@@ -36249,6 +50515,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r25
 
@@ -36265,6 +50535,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r26
 
 *   **Download size**: `Unknown size`
@@ -36279,6 +50553,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r27
 
@@ -36295,6 +50573,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r28
 
 *   **Download size**: `Unknown size`
@@ -36309,6 +50591,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r29
 
@@ -36325,6 +50611,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r30
 
 *   **Download size**: `Unknown size`
@@ -36339,6 +50629,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r31
 
@@ -36355,6 +50649,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r32
 
 *   **Download size**: `Unknown size`
@@ -36369,6 +50667,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r33
 
@@ -36385,6 +50687,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r34
 
 *   **Download size**: `Unknown size`
@@ -36399,6 +50705,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.2_0.6_r35
 
@@ -36415,6 +50725,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r0
 
 *   **Download size**: `Unknown size`
@@ -36429,6 +50743,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r1
 
@@ -36445,6 +50763,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r2
 
 *   **Download size**: `Unknown size`
@@ -36459,6 +50781,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r3
 
@@ -36475,6 +50801,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r4
 
 *   **Download size**: `Unknown size`
@@ -36489,6 +50819,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r5
 
@@ -36505,6 +50839,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r6
 
 *   **Download size**: `Unknown size`
@@ -36519,6 +50857,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r7
 
@@ -36535,6 +50877,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r8
 
 *   **Download size**: `Unknown size`
@@ -36549,6 +50895,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r9
 
@@ -36565,6 +50915,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r10
 
 *   **Download size**: `Unknown size`
@@ -36579,6 +50933,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r11
 
@@ -36595,6 +50953,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r12
 
 *   **Download size**: `Unknown size`
@@ -36609,6 +50971,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r13
 
@@ -36625,6 +50991,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r14
 
 *   **Download size**: `Unknown size`
@@ -36639,6 +51009,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r15
 
@@ -36655,6 +51029,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r16
 
 *   **Download size**: `Unknown size`
@@ -36669,6 +51047,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r17
 
@@ -36685,6 +51067,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r18
 
 *   **Download size**: `Unknown size`
@@ -36699,6 +51085,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r19
 
@@ -36715,6 +51105,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r20
 
 *   **Download size**: `Unknown size`
@@ -36729,6 +51123,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r21
 
@@ -36745,6 +51143,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r22
 
 *   **Download size**: `Unknown size`
@@ -36759,6 +51161,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r23
 
@@ -36775,6 +51181,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r24
 
 *   **Download size**: `Unknown size`
@@ -36789,6 +51199,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r25
 
@@ -36805,6 +51219,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r26
 
 *   **Download size**: `Unknown size`
@@ -36819,6 +51237,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r27
 
@@ -36835,6 +51257,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r28
 
 *   **Download size**: `Unknown size`
@@ -36849,6 +51275,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r29
 
@@ -36865,6 +51295,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r30
 
 *   **Download size**: `Unknown size`
@@ -36879,6 +51313,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r31
 
@@ -36895,6 +51333,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r32
 
 *   **Download size**: `Unknown size`
@@ -36909,6 +51351,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r33
 
@@ -36925,6 +51371,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r34
 
 *   **Download size**: `Unknown size`
@@ -36939,6 +51389,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0_r35
 
@@ -36955,6 +51409,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r0
 
 *   **Download size**: `Unknown size`
@@ -36969,6 +51427,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r1
 
@@ -36985,6 +51447,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r2
 
 *   **Download size**: `Unknown size`
@@ -36999,6 +51465,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r3
 
@@ -37015,6 +51485,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r4
 
 *   **Download size**: `Unknown size`
@@ -37029,6 +51503,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r5
 
@@ -37045,6 +51523,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r6
 
 *   **Download size**: `Unknown size`
@@ -37059,6 +51541,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r7
 
@@ -37075,6 +51561,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r8
 
 *   **Download size**: `Unknown size`
@@ -37089,6 +51579,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r9
 
@@ -37105,6 +51599,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r10
 
 *   **Download size**: `Unknown size`
@@ -37119,6 +51617,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r11
 
@@ -37135,6 +51637,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r12
 
 *   **Download size**: `Unknown size`
@@ -37149,6 +51655,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r13
 
@@ -37165,6 +51675,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r14
 
 *   **Download size**: `Unknown size`
@@ -37179,6 +51693,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r15
 
@@ -37195,6 +51713,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r16
 
 *   **Download size**: `Unknown size`
@@ -37209,6 +51731,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r17
 
@@ -37225,6 +51751,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r18
 
 *   **Download size**: `Unknown size`
@@ -37239,6 +51769,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r19
 
@@ -37255,6 +51789,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r20
 
 *   **Download size**: `Unknown size`
@@ -37269,6 +51807,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r21
 
@@ -37285,6 +51827,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r22
 
 *   **Download size**: `Unknown size`
@@ -37299,6 +51845,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r23
 
@@ -37315,6 +51865,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r24
 
 *   **Download size**: `Unknown size`
@@ -37329,6 +51883,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r25
 
@@ -37345,6 +51903,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r26
 
 *   **Download size**: `Unknown size`
@@ -37359,6 +51921,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r27
 
@@ -37375,6 +51941,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r28
 
 *   **Download size**: `Unknown size`
@@ -37389,6 +51959,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r29
 
@@ -37405,6 +51979,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r30
 
 *   **Download size**: `Unknown size`
@@ -37419,6 +51997,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r31
 
@@ -37435,6 +52017,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r32
 
 *   **Download size**: `Unknown size`
@@ -37449,6 +52035,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r33
 
@@ -37465,6 +52055,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r34
 
 *   **Download size**: `Unknown size`
@@ -37479,6 +52073,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.1_r35
 
@@ -37495,6 +52093,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r0
 
 *   **Download size**: `Unknown size`
@@ -37509,6 +52111,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r1
 
@@ -37525,6 +52131,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r2
 
 *   **Download size**: `Unknown size`
@@ -37539,6 +52149,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r3
 
@@ -37555,6 +52169,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r4
 
 *   **Download size**: `Unknown size`
@@ -37569,6 +52187,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r5
 
@@ -37585,6 +52207,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r6
 
 *   **Download size**: `Unknown size`
@@ -37599,6 +52225,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r7
 
@@ -37615,6 +52245,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r8
 
 *   **Download size**: `Unknown size`
@@ -37629,6 +52263,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r9
 
@@ -37645,6 +52283,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r10
 
 *   **Download size**: `Unknown size`
@@ -37659,6 +52301,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r11
 
@@ -37675,6 +52321,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r12
 
 *   **Download size**: `Unknown size`
@@ -37689,6 +52339,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r13
 
@@ -37705,6 +52359,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r14
 
 *   **Download size**: `Unknown size`
@@ -37719,6 +52377,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r15
 
@@ -37735,6 +52397,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r16
 
 *   **Download size**: `Unknown size`
@@ -37749,6 +52415,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r17
 
@@ -37765,6 +52435,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r18
 
 *   **Download size**: `Unknown size`
@@ -37779,6 +52453,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r19
 
@@ -37795,6 +52473,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r20
 
 *   **Download size**: `Unknown size`
@@ -37809,6 +52491,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r21
 
@@ -37825,6 +52511,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r22
 
 *   **Download size**: `Unknown size`
@@ -37839,6 +52529,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r23
 
@@ -37855,6 +52549,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r24
 
 *   **Download size**: `Unknown size`
@@ -37869,6 +52567,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r25
 
@@ -37885,6 +52587,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r26
 
 *   **Download size**: `Unknown size`
@@ -37899,6 +52605,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r27
 
@@ -37915,6 +52625,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r28
 
 *   **Download size**: `Unknown size`
@@ -37929,6 +52643,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r29
 
@@ -37945,6 +52663,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r30
 
 *   **Download size**: `Unknown size`
@@ -37959,6 +52681,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r31
 
@@ -37975,6 +52701,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r32
 
 *   **Download size**: `Unknown size`
@@ -37989,6 +52719,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r33
 
@@ -38005,6 +52739,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r34
 
 *   **Download size**: `Unknown size`
@@ -38019,6 +52757,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.2_r35
 
@@ -38035,6 +52777,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r0
 
 *   **Download size**: `Unknown size`
@@ -38049,6 +52795,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r1
 
@@ -38065,6 +52815,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r2
 
 *   **Download size**: `Unknown size`
@@ -38079,6 +52833,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r3
 
@@ -38095,6 +52853,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r4
 
 *   **Download size**: `Unknown size`
@@ -38109,6 +52871,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r5
 
@@ -38125,6 +52891,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r6
 
 *   **Download size**: `Unknown size`
@@ -38139,6 +52909,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r7
 
@@ -38155,6 +52929,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r8
 
 *   **Download size**: `Unknown size`
@@ -38169,6 +52947,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r9
 
@@ -38185,6 +52967,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r10
 
 *   **Download size**: `Unknown size`
@@ -38199,6 +52985,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r11
 
@@ -38215,6 +53005,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r12
 
 *   **Download size**: `Unknown size`
@@ -38229,6 +53023,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r13
 
@@ -38245,6 +53043,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r14
 
 *   **Download size**: `Unknown size`
@@ -38259,6 +53061,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r15
 
@@ -38275,6 +53081,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r16
 
 *   **Download size**: `Unknown size`
@@ -38289,6 +53099,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r17
 
@@ -38305,6 +53119,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r18
 
 *   **Download size**: `Unknown size`
@@ -38319,6 +53137,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r19
 
@@ -38335,6 +53157,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r20
 
 *   **Download size**: `Unknown size`
@@ -38349,6 +53175,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r21
 
@@ -38365,6 +53195,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r22
 
 *   **Download size**: `Unknown size`
@@ -38379,6 +53213,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r23
 
@@ -38395,6 +53233,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r24
 
 *   **Download size**: `Unknown size`
@@ -38409,6 +53251,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r25
 
@@ -38425,6 +53271,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r26
 
 *   **Download size**: `Unknown size`
@@ -38439,6 +53289,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r27
 
@@ -38455,6 +53309,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r28
 
 *   **Download size**: `Unknown size`
@@ -38469,6 +53327,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r29
 
@@ -38485,6 +53347,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r30
 
 *   **Download size**: `Unknown size`
@@ -38499,6 +53365,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r31
 
@@ -38515,6 +53385,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r32
 
 *   **Download size**: `Unknown size`
@@ -38529,6 +53403,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r33
 
@@ -38545,6 +53423,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r34
 
 *   **Download size**: `Unknown size`
@@ -38559,6 +53441,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.3_r35
 
@@ -38575,6 +53461,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r0
 
 *   **Download size**: `Unknown size`
@@ -38589,6 +53479,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r1
 
@@ -38605,6 +53499,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r2
 
 *   **Download size**: `Unknown size`
@@ -38619,6 +53517,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r3
 
@@ -38635,6 +53537,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r4
 
 *   **Download size**: `Unknown size`
@@ -38649,6 +53555,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r5
 
@@ -38665,6 +53575,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r6
 
 *   **Download size**: `Unknown size`
@@ -38679,6 +53593,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r7
 
@@ -38695,6 +53613,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r8
 
 *   **Download size**: `Unknown size`
@@ -38709,6 +53631,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r9
 
@@ -38725,6 +53651,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r10
 
 *   **Download size**: `Unknown size`
@@ -38739,6 +53669,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r11
 
@@ -38755,6 +53689,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r12
 
 *   **Download size**: `Unknown size`
@@ -38769,6 +53707,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r13
 
@@ -38785,6 +53727,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r14
 
 *   **Download size**: `Unknown size`
@@ -38799,6 +53745,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r15
 
@@ -38815,6 +53765,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r16
 
 *   **Download size**: `Unknown size`
@@ -38829,6 +53783,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r17
 
@@ -38845,6 +53803,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r18
 
 *   **Download size**: `Unknown size`
@@ -38859,6 +53821,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r19
 
@@ -38875,6 +53841,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r20
 
 *   **Download size**: `Unknown size`
@@ -38889,6 +53859,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r21
 
@@ -38905,6 +53879,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r22
 
 *   **Download size**: `Unknown size`
@@ -38919,6 +53897,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r23
 
@@ -38935,6 +53917,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r24
 
 *   **Download size**: `Unknown size`
@@ -38949,6 +53935,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r25
 
@@ -38965,6 +53955,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r26
 
 *   **Download size**: `Unknown size`
@@ -38979,6 +53973,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r27
 
@@ -38995,6 +53993,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r28
 
 *   **Download size**: `Unknown size`
@@ -39009,6 +54011,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r29
 
@@ -39025,6 +54031,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r30
 
 *   **Download size**: `Unknown size`
@@ -39039,6 +54049,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r31
 
@@ -39055,6 +54069,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r32
 
 *   **Download size**: `Unknown size`
@@ -39069,6 +54087,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r33
 
@@ -39085,6 +54107,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r34
 
 *   **Download size**: `Unknown size`
@@ -39099,6 +54125,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.4_r35
 
@@ -39115,6 +54145,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r0
 
 *   **Download size**: `Unknown size`
@@ -39129,6 +54163,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r1
 
@@ -39145,6 +54183,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r2
 
 *   **Download size**: `Unknown size`
@@ -39159,6 +54201,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r3
 
@@ -39175,6 +54221,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r4
 
 *   **Download size**: `Unknown size`
@@ -39189,6 +54239,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r5
 
@@ -39205,6 +54259,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r6
 
 *   **Download size**: `Unknown size`
@@ -39219,6 +54277,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r7
 
@@ -39235,6 +54297,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r8
 
 *   **Download size**: `Unknown size`
@@ -39249,6 +54315,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r9
 
@@ -39265,6 +54335,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r10
 
 *   **Download size**: `Unknown size`
@@ -39279,6 +54353,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r11
 
@@ -39295,6 +54373,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r12
 
 *   **Download size**: `Unknown size`
@@ -39309,6 +54391,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r13
 
@@ -39325,6 +54411,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r14
 
 *   **Download size**: `Unknown size`
@@ -39339,6 +54429,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r15
 
@@ -39355,6 +54449,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r16
 
 *   **Download size**: `Unknown size`
@@ -39369,6 +54467,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r17
 
@@ -39385,6 +54487,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r18
 
 *   **Download size**: `Unknown size`
@@ -39399,6 +54505,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r19
 
@@ -39415,6 +54525,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r20
 
 *   **Download size**: `Unknown size`
@@ -39429,6 +54543,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r21
 
@@ -39445,6 +54563,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r22
 
 *   **Download size**: `Unknown size`
@@ -39459,6 +54581,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r23
 
@@ -39475,6 +54601,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r24
 
 *   **Download size**: `Unknown size`
@@ -39489,6 +54619,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r25
 
@@ -39505,6 +54639,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r26
 
 *   **Download size**: `Unknown size`
@@ -39519,6 +54657,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r27
 
@@ -39535,6 +54677,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r28
 
 *   **Download size**: `Unknown size`
@@ -39549,6 +54695,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r29
 
@@ -39565,6 +54715,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r30
 
 *   **Download size**: `Unknown size`
@@ -39579,6 +54733,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r31
 
@@ -39595,6 +54753,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r32
 
 *   **Download size**: `Unknown size`
@@ -39609,6 +54771,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r33
 
@@ -39625,6 +54791,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r34
 
 *   **Download size**: `Unknown size`
@@ -39639,6 +54809,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.5_r35
 
@@ -39655,6 +54829,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r0
 
 *   **Download size**: `Unknown size`
@@ -39669,6 +54847,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r1
 
@@ -39685,6 +54867,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r2
 
 *   **Download size**: `Unknown size`
@@ -39699,6 +54885,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r3
 
@@ -39715,6 +54905,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r4
 
 *   **Download size**: `Unknown size`
@@ -39729,6 +54923,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r5
 
@@ -39745,6 +54943,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r6
 
 *   **Download size**: `Unknown size`
@@ -39759,6 +54961,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r7
 
@@ -39775,6 +54981,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r8
 
 *   **Download size**: `Unknown size`
@@ -39789,6 +54999,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r9
 
@@ -39805,6 +55019,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r10
 
 *   **Download size**: `Unknown size`
@@ -39819,6 +55037,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r11
 
@@ -39835,6 +55057,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r12
 
 *   **Download size**: `Unknown size`
@@ -39849,6 +55075,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r13
 
@@ -39865,6 +55095,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r14
 
 *   **Download size**: `Unknown size`
@@ -39879,6 +55113,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r15
 
@@ -39895,6 +55133,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r16
 
 *   **Download size**: `Unknown size`
@@ -39909,6 +55151,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r17
 
@@ -39925,6 +55171,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r18
 
 *   **Download size**: `Unknown size`
@@ -39939,6 +55189,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r19
 
@@ -39955,6 +55209,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r20
 
 *   **Download size**: `Unknown size`
@@ -39969,6 +55227,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r21
 
@@ -39985,6 +55247,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r22
 
 *   **Download size**: `Unknown size`
@@ -39999,6 +55265,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r23
 
@@ -40015,6 +55285,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r24
 
 *   **Download size**: `Unknown size`
@@ -40029,6 +55303,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r25
 
@@ -40045,6 +55323,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r26
 
 *   **Download size**: `Unknown size`
@@ -40059,6 +55341,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r27
 
@@ -40075,6 +55361,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r28
 
 *   **Download size**: `Unknown size`
@@ -40089,6 +55379,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r29
 
@@ -40105,6 +55399,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r30
 
 *   **Download size**: `Unknown size`
@@ -40119,6 +55417,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r31
 
@@ -40135,6 +55437,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r32
 
 *   **Download size**: `Unknown size`
@@ -40149,6 +55455,10 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r33
 
@@ -40165,6 +55475,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r34
 
 *   **Download size**: `Unknown size`
@@ -40180,6 +55494,10 @@ Split | Examples
 Split | Examples
 :---- | -------:
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## star_cfq/u_cfq_compound_divergence_0.333333_0.6_r35
 
 *   **Download size**: `Unknown size`
@@ -40194,3 +55512,7 @@ Split | Examples
 
 Split | Examples
 :---- | -------:
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.

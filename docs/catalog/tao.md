@@ -32,9 +32,7 @@ requires at least 300 GB of free space to store.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `113.96 GiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -51,12 +49,14 @@ and only the data not requiring manual download will be used.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'train'`      | 500
+`'validation'` | 988
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -91,6 +91,8 @@ Split | Examples
 
 *   **Config description**: All images are bilinearly resized to 480 X 640
 
+*   **Dataset size**: `482.30 GiB`
+
 *   **Features**:
 
 ```python
@@ -119,6 +121,8 @@ FeaturesDict({
 ## tao/full_resolution
 
 *   **Config description**: The full resolution version of the dataset.
+
+*   **Dataset size**: `171.24 GiB`
 
 *   **Features**:
 
