@@ -227,6 +227,17 @@ class ExampleSerializerTest(testing.SubTestCase):
     ):
       example_serializer._dict_to_tf_example(example_data, tensor_info)
 
+  def test_item_to_tf_feature_int16_check(self):
+    # Test int16 check in _item_to_tf_feature raises ValueError.
+    example_item = [1, 2, 3, 4, 5]
+    tensor_info = feature_lib.TensorInfo(shape=(5,), dtype=tf.int16)
+    example_serializer._item_to_tf_feature(example_item, tensor_info)
+    ex = np.array(example_item, dtype=tensor_info.dtype.as_numpy_dtype).flatten()
+    ex = [tf.compat.as_bytes(x) for x in str(ex)]
+    ex = tf.train.Feature(bytes_list=tf.train.BytesList(value=ex))
+    out = example_serializer._item_to_tf_feature(example_item, tensor_info)
+    self.assertEqual(out, ex)
+
 
 if __name__ == '__main__':
   testing.test_main()
