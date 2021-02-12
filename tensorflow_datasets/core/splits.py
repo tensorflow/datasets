@@ -158,6 +158,10 @@ class SubSplitInfo(object):
     return sum(f.num_examples for f in self._file_instructions)
 
   @property
+  def num_shards(self) -> int:
+    return len(self.file_instructions)
+
+  @property
   def file_instructions(self) -> List[shard_utils.FileInstruction]:
     """Returns the list of dict(filename, take, skip)."""
     return self._file_instructions

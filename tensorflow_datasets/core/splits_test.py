@@ -117,6 +117,9 @@ class SplitsTest(testing.TestCase):
         num_examples=5,
     )])
 
+  def test_sub_split_num_shards(self):
+    self.assertEqual(self._builder.info.splits["train[75%:]"].num_shards, 1)
+
   def test_split_file_instructions(self):
     fi = self._builder.info.splits["train"].file_instructions
     self.assertEqual(fi, [shard_utils.FileInstruction(
