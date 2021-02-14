@@ -56,6 +56,18 @@ dataset. You will need to make an account on codalab to download the data. Note
 that at the time of writing this, you will need to bypass a "Connection not
 secure" warning when accessing codalab.
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 343
+`'train'`      | 2,238
+`'validation'` | 302
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -95,18 +107,6 @@ secure" warning when accessing codalab.
 
 *   **Dataset size**: `33.31 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 343
-`'train'`      | 2,238
-`'validation'` | 302
-
 *   **Features**:
 
 ```python
@@ -134,16 +134,7 @@ FeaturesDict({
 *   **Config description**: All images are bilinearly resized to 480 X 640 with
     all frames included.
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+*   **Dataset size**: `130.02 GiB`
 
 *   **Features**:
 
@@ -174,18 +165,6 @@ FeaturesDict({
 
 *   **Dataset size**: `26.27 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 343
-`'train'`      | 2,238
-`'validation'` | 302
-
 *   **Features**:
 
 ```python
@@ -214,18 +193,6 @@ FeaturesDict({
     resolution.
 
 *   **Dataset size**: `6.91 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 343
-`'train'`      | 2,238
-`'validation'` | 302
 
 *   **Features**:
 
