@@ -271,8 +271,12 @@ def _find_builder_dir_single_dir(
   builder_dir = os.path.join(builder_dir, version_str)
 
   # Check for builder dir existance
-  if not tf.io.gfile.exists(builder_dir):
+  try:
+    if not tf.io.gfile.exists(builder_dir):
+      return None
+  except tf.errors.PermissionDeniedError:
     return None
+
   # Backward compatibility, in order to be a valid ReadOnlyBuilder, the folder
   # has to contain the feature configuration.
   if not tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):

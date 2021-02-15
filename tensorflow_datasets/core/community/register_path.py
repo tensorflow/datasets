@@ -137,7 +137,11 @@ def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:
   try:
     for f in path.iterdir():
       yield f
-  except (FileNotFoundError, tf.errors.NotFoundError):
+  except (
+      FileNotFoundError,
+      tf.errors.NotFoundError,
+      tf.errors.PermissionDeniedError,
+  ):
     pass
 
 
