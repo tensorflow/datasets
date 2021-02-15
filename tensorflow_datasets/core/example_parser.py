@@ -125,7 +125,10 @@ def _to_tf_example_spec(tensor_info):
   # to int64 which is space ineficient, no support for complexes or quantized
   # It seems quite space inefficient to convert bool to int64
   if tensor_info.dtype.is_integer or tensor_info.dtype.is_bool:
-    dtype = tensor_info.dtype
+    if tensor_info.dtype.is_bool:
+      dtype = tf.int64
+    else:
+      dtype = tensor_info.dtype
   elif tensor_info.dtype.is_floating:
     dtype = tf.float32
   elif tensor_info.dtype == tf.string:
