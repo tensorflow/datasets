@@ -482,6 +482,8 @@ class FeatureConnector(object):
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Sequence)."""
     _MAX_SUB_ROWS = 7  # pylint: disable=invalid-name
+    if isinstance(ex, tf.RaggedTensor):  # e.g. `Sequence(Video())`
+      return _repr_html(ex)
     # Truncate sequences which contains too many sub-examples
     if len(ex) > _MAX_SUB_ROWS:
       ex = ex[:_MAX_SUB_ROWS]
