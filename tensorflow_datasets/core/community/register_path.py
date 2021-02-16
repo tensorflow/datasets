@@ -15,6 +15,7 @@
 
 """Location-based register."""
 
+import concurrent.futures
 import difflib
 from typing import Any, Dict, FrozenSet, Iterator, List, Type
 
@@ -151,13 +152,21 @@ def _iter_builder_names(
   """Yields the `ns:name` dataset names."""
   FILTERED_DIRNAME = frozenset(('downloads',))  # pylint: disable=invalid-name
   # For better performances, could try to load all namespaces asynchonously
-  for ns_name, data_dir in ns2data_dir.items():
+  def _worker(ns_name, data_dir):
     # Note: `data_dir` might contain non-dataset folders, but checking
     # individual dataset would have significant performance drop, so
     # this is an acceptable trade-of.
-    for builder_dir in _maybe_iterdir(data_dir):
-      if builder_dir.name in FILTERED_DIRNAME:
-        continue
-      if not naming.is_valid_dataset_name(builder_dir.name):
-        continue
-      yield str(utils.DatasetName(namespace=ns_name, name=builder_dir.name))
+    return [
+      str(utils.DatasetName(namespace=ns_name, name=builder_dir.name))
+      for builder_dir in _maybe_iterdir(data_dir)
+      if builder_dir.name not in FILTERED_DIRNAME
+         and naming.is_valid_dataset_name(builder_dir.name)
+    ]
+
+  with concurrent.futures.ThreadPoolExecutor(max_workers=10) as ex:
+    futures = [
+      ex.submit(_worker, ns_name, data_dir)
+      for ns_name, data_dir in ns2data_dir.items()
+    ]
+    for future in concurrent.futures.as_completed(futures):
+      yield from future.result()
