@@ -211,3 +211,15 @@ def test_is_valid_dataset_name():
   assert naming.is_valid_dataset_name('dataset123_abc')
   assert not naming.is_valid_dataset_name('dataset-abc')
   assert not naming.is_valid_dataset_name('dataset.old')
+
+
+def test_naming_sorted():
+  assert sorted([
+      naming.DatasetName('zzz:aaa'),
+      naming.DatasetName('aaa:zzz'),
+      naming.DatasetName('aaa:aaa'),
+  ]) == [
+      naming.DatasetName('aaa:aaa'),
+      naming.DatasetName('aaa:zzz'),
+      naming.DatasetName('zzz:aaa'),
+  ]

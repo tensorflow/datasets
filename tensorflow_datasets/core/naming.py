@@ -40,7 +40,7 @@ _NAME_REG = re.compile(
 Value = Union[str, int, float, bool]
 
 
-@dataclasses.dataclass(eq=True, frozen=True)
+@dataclasses.dataclass(eq=True, order=True, frozen=True)
 class DatasetName:
   """Dataset namespace+name."""
   namespace: Optional[str]
