@@ -158,11 +158,11 @@ def _iter_builder_names(
     str(utils.DatasetName(namespace=ns_name, name=builder_dir.name))
     for builder_dir in _maybe_iterdir(data_dir)
     if not builder_dir.name in FILTERED_DIRNAME and
-    if naming.is_valid_dataset_name(builder_dir.name)
+    naming.is_valid_dataset_name(builder_dir.name)
     ]
   # Note: `data_dir` might contain non-dataset folders, but checking
   # individual dataset would have significant performance drop, so
   # this is an acceptable trade-of
   pool = ThreadPool(10)
-  for result in pool.map(_parallel, ns2data_dir.items()):
+  for result in pool.starmap(_parallel, ns2data_dir.items()):
     yield from result
