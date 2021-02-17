@@ -26,7 +26,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
 import toml
-
+from multiprocessing.dummy import Pool as ThreadPool
 
 class DataDirRegister(register_base.BaseRegister):
   """Dataset register based on generated `data_dir` paths.
@@ -149,15 +149,20 @@ def _iter_builder_names(
     ns2data_dir: Dict[str, utils.ReadOnlyPath],
 ) -> Iterator[str]:
   """Yields the `ns:name` dataset names."""
-  FILTERED_DIRNAME = frozenset(('downloads',))  # pylint: disable=invalid-name
+  FILTERED_DIRNAME = frozenset(('downloads',))
+  # pylint: disable=invalid-name
   # For better performances, could try to load all namespaces asynchonously
-  for ns_name, data_dir in ns2data_dir.items():
-    # Note: `data_dir` might contain non-dataset folders, but checking
-    # individual dataset would have significant performance drop, so
-    # this is an acceptable trade-of.
-    for builder_dir in _maybe_iterdir(data_dir):
-      if builder_dir.name in FILTERED_DIRNAME:
-        continue
-      if not naming.is_valid_dataset_name(builder_dir.name):
-        continue
-      yield str(utils.DatasetName(namespace=ns_name, name=builder_dir.name))
+
+  def _parallel(ns_name, data_dir):
+    return [
+    str(utils.DatasetName(namespace=ns_name, name=builder_dir.name))
+    for builder_dir in _maybe_iterdir(data_dir)
+    if not builder_dir.name in FILTERED_DIRNAME and
+    if naming.is_valid_dataset_name(builder_dir.name)
+    ]
+  # Note: `data_dir` might contain non-dataset folders, but checking
+  # individual dataset would have significant performance drop, so
+  # this is an acceptable trade-of
+  pool = ThreadPool(10)
+  for result in pool.map(_parallel, ns2data_dir.items()):
+    yield from result
