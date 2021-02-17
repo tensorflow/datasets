@@ -149,8 +149,7 @@ def _iter_builder_names(
     ns2data_dir: Dict[str, utils.ReadOnlyPath],
 ) -> Iterator[str]:
   """Yields the `ns:name` dataset names."""
-  FILTERED_DIRNAME = frozenset(('downloads',))
-  # pylint: disable=invalid-name
+  FILTERED_DIRNAME = frozenset(('downloads',))# pylint: disable=invalid-name
   # For better performances, could try to load all namespaces asynchonously
 
   def _parallel(ns_name, data_dir):
