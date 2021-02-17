@@ -30,6 +30,7 @@ from tensorflow_datasets.text.drop import Drop
 from tensorflow_datasets.text.eraser_multi_rc import EraserMultiRc
 from tensorflow_datasets.text.esnli import Esnli
 from tensorflow_datasets.text.gap import Gap
+from tensorflow_datasets.text.gem import Gem
 from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.goemotions import Goemotions
 from tensorflow_datasets.text.gpt3 import Gpt3

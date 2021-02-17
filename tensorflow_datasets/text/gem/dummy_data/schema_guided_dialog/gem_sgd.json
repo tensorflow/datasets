@@ -1,0 +1,98 @@
+{
+  "train": [
+    {
+      "target": "Do you have a specific which you want the eating place to be located at?",
+      "prompt": "I am feeling hungry so I would like to find a place to eat.",
+      "da": [
+        [
+          13,
+          "city",
+          []
+        ]
+      ],
+      "turn_ix": 1,
+      "dialog_id": "1_00000"
+    },
+    {
+      "target": "Is there a specific cuisine type you enjoy, such as Mexican, Italian or something else?",
+      "prompt": "I would like for it to be in San Jose.",
+      "da": [
+        [
+          13,
+          "cuisine",
+          [
+            "Mexican",
+            "Italian"
+          ]
+        ]
+      ],
+      "turn_ix": 3,
+      "dialog_id": "1_00000"
+    },
+    {
+      "target": "I see that at 71 Saint Peter there is a good restaurant which is in San Jose.",
+      "prompt": "I usually like eating the American type of food.",
+      "da": [
+        [
+          11,
+          "restaurant_name",
+          [
+            "71 Saint Peter"
+          ]
+        ],
+        [
+          11,
+          "city",
+          [
+            "San Jose"
+          ]
+        ]
+      ],
+      "turn_ix": 5,
+      "dialog_id": "1_00000"
+    }],
+  "validation": [
+    {
+      "target": "Please confirm the song Carnivore on tv.",
+      "prompt": "Yes, I would.",
+      "da": [
+        [
+          2,
+          "song_name",
+          [
+            "Carnivore"
+          ]
+        ],
+        [
+          2,
+          "playback_device",
+          [
+            "TV"
+          ]
+        ]
+      ],
+      "turn_ix": 15,
+      "dialog_id": "10_00054"
+    }],
+  "test": [
+    {
+      "target": "Your rental has been booked, and you will pay $36.00 per day.",
+      "prompt": "That works for me. How much is the car per day?",
+      "da": [
+        [
+          4,
+          "price_per_day",
+          [
+            "$36.00"
+          ]
+        ],
+        [
+          10,
+          "",
+          []
+        ]
+      ],
+      "turn_ix": 21,
+      "dialog_id": "28_00115"
+    }]
+  }
