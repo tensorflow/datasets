@@ -200,7 +200,7 @@ class DatasetBuilderTestCase(
   @utils.memoize()
   def dummy_data(cls) -> utils.ReadOnlyPath:  # pylint: disable=no-self-argument
     """Path to the `dummy_data/` directory."""
-    if cls.DATASET_CLASS is None:  # Required for build_api_docs
+    if cls is DatasetBuilderTestCase:  # Required for build_api_docs
       return None  # pytype: disable=bad-return-type
 
     dummy_data_expected = cls.DATASET_CLASS.code_path.parent / "dummy_data"
