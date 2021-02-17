@@ -162,6 +162,6 @@ def _iter_builder_names(
   # Note: `data_dir` might contain non-dataset folders, but checking
   # individual dataset would have significant performance drop, so
   # this is an acceptable trade-of
-  pool = ThreadPool(10)
-  for result in pool.starmap(_parallel, ns2data_dir.items()):
-    yield from result
+  with ThreadPool(4) as pool:
+    for result in pool.starmap(_parallel, ns2data_dir.items()):
+      yield from result
