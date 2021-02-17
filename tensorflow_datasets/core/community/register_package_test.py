@@ -139,13 +139,13 @@ def test_register_path_list_builders(dummy_register):  # pylint: disable=redefin
 
 def test_dataset_package():
   """Exports/imports operation should be identity."""
-  pkg = register_package._DatasetPackage(
+  pkg = register_package.DatasetPackage(
       name=utils.DatasetName('ns:ds'),
       source=dataset_sources.DatasetSource.from_json(
           'github://<owner>/<name>/tree/<branch>/my_ds/ds.py',
       ),
   )
-  assert register_package._DatasetPackage.from_json(pkg.to_json()) == pkg
+  assert register_package.DatasetPackage.from_json(pkg.to_json()) == pkg
 
   pkg2 = register_package._InstalledPackage(
       package=pkg,

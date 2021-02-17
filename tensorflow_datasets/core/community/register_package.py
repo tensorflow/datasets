@@ -42,7 +42,7 @@ _METADATA_FILENAME = 'installation.json'
 
 
 @dataclasses.dataclass(frozen=True, eq=True)
-class _DatasetPackage:
+class DatasetPackage:
   """Dataset metadata (before installation), of a single dataset package.
 
   Contains the information required to fetch the dataset package.
@@ -57,7 +57,7 @@ class _DatasetPackage:
   # fetch a specific version (e.g. at an older commit).
 
   @classmethod
-  def from_json(cls, data: utils.Json) -> '_DatasetPackage':
+  def from_json(cls, data: utils.Json) -> 'DatasetPackage':
     """Factory which creates the cls from json."""
     return cls(
         name=utils.DatasetName(data['name']),
@@ -84,7 +84,7 @@ class _InstalledPackage:
     instalation_date: Date of installation of the package
     hash: base64 checksum of the installed files
   """
-  package: _DatasetPackage
+  package: DatasetPackage
   instalation_date: datetime.datetime
   hash: str
 
@@ -105,7 +105,7 @@ class _InstalledPackage:
   def from_json(cls, data: utils.Json) -> '_InstalledPackage':
     """Factory which creates the cls from json."""
     return cls(
-        package=_DatasetPackage.from_json(data['package']),
+        package=DatasetPackage.from_json(data['package']),
         # TODO(py3.7): Should use `datetime.fromisoformat`
         instalation_date=datetime.datetime.strptime(
             data['instalation_date'], '%Y-%m-%dT%H:%M:%S.%f'
@@ -162,7 +162,7 @@ class _PackageIndex(collections.UserDict):
   def _refresh_from_content(self, content: str) -> None:
     """Update the index from the given `jsonl` content."""
     dataset_packages = [
-        _DatasetPackage.from_json(json.loads(line))
+        DatasetPackage.from_json(json.loads(line))
         for line in content.splitlines() if line.strip()
     ]
     self.clear()
@@ -334,7 +334,7 @@ def _get_last_installed_version(
     return all_installed_packages[-1]  # Most recently installed package
 
 
-def _download_and_cache(package: _DatasetPackage) -> _InstalledPackage:
+def _download_and_cache(package: DatasetPackage) -> _InstalledPackage:
   """Downloads and installs locally the dataset source.
 
   This function install the dataset package in:
