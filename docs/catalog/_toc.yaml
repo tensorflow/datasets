@@ -392,6 +392,9 @@ toc:
     title: esnli
   - path: /datasets/catalog/gap
     title: gap
+  - path: /datasets/catalog/gem
+    status: nightly
+    title: gem
   - path: /datasets/catalog/glue
     title: glue
   - path: /datasets/catalog/goemotions
