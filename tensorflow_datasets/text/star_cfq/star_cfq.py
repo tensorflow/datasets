@@ -107,9 +107,8 @@ _BLENDING_INITIAL_SIZES = [0, 0.1, 0.2, 0.3, 0.5, 1, 2, 3, 5]
 _BLENDING_SUPPLEMENTARY_SIZES = [0.1, 0.3, 1, 2, 3, 10, 30, 80, 100]
 _UNIQUE_INITIAL_SIZES = [0.1, 1]
 _OVERWEIGHTING_SIZES = [0.1, 0.3, 1, 3, 10, 30, 80]
-_DIVERGENCE_SPLIT_SIZES = [
-    0.00333333, 0.00666667, 0.01, 0.02, 0.0333333, 0.1, 0.2, 0.333333
-]
+# Smaller sizes are skipped to limit the number of generated builder configs.
+_DIVERGENCE_SPLIT_SIZES = [0.333333]
 
 _QUESTION = 'question'
 _QUERY = 'query'
@@ -138,7 +137,7 @@ class StarCFQConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(StarCFQConfig, self).__init__(
-        name=name, version=tfds.core.Version('1.0.0'), **kwargs)
+        name=name, version=tfds.core.Version('1.1.0'), **kwargs)
     self.split_archive_path = split_archive_path
     self.split_path = split_path
     self.compound_divergence = compound_divergence

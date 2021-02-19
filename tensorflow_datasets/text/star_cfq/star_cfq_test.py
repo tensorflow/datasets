@@ -32,7 +32,7 @@ class StarCFQRandomSplitTest(testing.DatasetBuilderTestCase):
 
 class StarCFQCompoundDivergenceSplitTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = star_cfq.StarCFQ
-  BUILDER_CONFIG_NAMES_TO_TEST = ["u_cfq_compound_divergence_0.1_0.3_r4"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["u_cfq_compound_divergence_0.333333_0.3_r4"]
   SPLITS = {
       "train": 2,
       "validation": 1,
