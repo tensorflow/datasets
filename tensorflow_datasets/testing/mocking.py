@@ -31,6 +31,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import load
+from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.testing import test_utils
 
 
@@ -173,7 +174,7 @@ def mock_data(
       fs.add_file(os.path.join(self.data_dir, 'tmp.txt'))
       return original_as_dataset_fn(self, **kwargs)
 
-  def mock_as_dataset(self, split, decoders=None, **kwargs):
+  def mock_as_dataset(self, split, decoders=None, read_config=None, **kwargs):
     """Function which overwrite `builder._as_dataset`."""
     del split
     del kwargs
@@ -198,6 +199,15 @@ def mock_data(
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
     )
     ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+
+    if read_config and read_config.add_tfds_id:
+      ds_id = tfrecords_reader._make_id_dataset(  # pylint: disable=protected-access
+          filename=f'{self.name}-split.tfrecord-00000-of-00001',
+          start_index=0,
+      )
+      ds = tf.data.Dataset.zip((ds, ds_id))
+      ds = ds.map(lambda ex, id: {'tfds_id': id, **ex})
+
     return ds
 
   if not as_dataset_fn:
