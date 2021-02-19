@@ -105,7 +105,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
     """Dataset metadata (homepage, citation,...)."""
     return tfds.core.DatasetInfo(
         builder=self,
-        features=tfds.features.FeatureDict({
+        features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(256, 256, 3)),
             'label': tfds.features.ClassLabel(names=['no', 'yes']),
         }),
@@ -421,7 +421,7 @@ Version can refer to two different meaning:
 
 *   The "external" original data version: e.g. COCO v2019, v2017,...
 *   The "internal" TFDS code version: e.g. rename a feature in
-    `tfds.features.FeatureDict`, fix a bug in `_generate_examples`
+    `tfds.features.FeaturesDict`, fix a bug in `_generate_examples`
 
 To update a dataset:
 
