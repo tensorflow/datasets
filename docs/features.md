@@ -89,10 +89,10 @@ To create your own feature connector, you need to inherit from
 `tfds.features.FeatureConnector` and implement the abstract methods.
 
 *   If your feature is a single tensor value, it's best to inherit from
-    `tfds.feature.Tensor` and use `super()` when needed. See
+    `tfds.features.Tensor` and use `super()` when needed. See
     `tfds.features.BBoxFeature` source code for an example.
 *   If your feature is a container of multiple tensors, it's best to inherit
-    from `tfds.feature.FeaturesDict` and use the `super()` to automatically
+    from `tfds.features.FeaturesDict` and use the `super()` to automatically
     encode sub-connectors.
 
 The `tfds.features.FeatureConnector` object abstracts away how the feature is

@@ -28,7 +28,7 @@ class Dataset(sequence_feature.Sequence):
   """A Dataset feature encodes a nested dataset.
 
   `Dataset` corresponds to a dataset of `tfds.features.FeatureConnector`. Using
-  `tfds.feature.Dataset` will return a nested `tf.data.Dataset` inside the
+  `tfds.features.Dataset` will return a nested `tf.data.Dataset` inside the
   top-level `tf.data.Dataset` returned by `tfds.load`. At generation time, an
   iterable over the dataset elements is given.
 

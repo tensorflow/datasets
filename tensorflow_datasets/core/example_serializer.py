@@ -58,7 +58,7 @@ def _dict_to_tf_example(example_dict, tensor_info_dict):
 
   Args:
     example_dict: `dict`, dict of values, tensor,...
-    tensor_info_dict: `dict` of `tfds.feature.TensorInfo`
+    tensor_info_dict: `dict` of `tfds.features.TensorInfo`
 
   Returns:
     example_proto: `tf.train.Example`, the encoded example proto.
