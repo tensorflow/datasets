@@ -44,6 +44,11 @@ toc:
     title: yes_no
   title: Audio
 - section:
+  - path: /datasets/catalog/ogbg_molpcba
+    status: nightly
+    title: ogbg_molpcba
+  title: Graphs
+- section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
   - path: /datasets/catalog/aflw2k3d

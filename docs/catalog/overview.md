@@ -47,6 +47,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`voxforge`](voxforge.md)
 *   [`yes_no`](yes_no.md)
 
+### `Graphs`
+
+*   [`ogbg_molpcba`](ogbg_molpcba.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Image`
 
 *   [`abstract_reasoning`](abstract_reasoning.md)
