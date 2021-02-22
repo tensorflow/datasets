@@ -45,6 +45,7 @@ tf_compat.ensure_tf_install()
 
 # Imports for registration
 from tensorflow_datasets import audio
+from tensorflow_datasets import graphs
 from tensorflow_datasets import image
 from tensorflow_datasets import image_classification
 from tensorflow_datasets import object_detection

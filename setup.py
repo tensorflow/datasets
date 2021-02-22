@@ -137,6 +137,7 @@ DATASET_EXTRAS = {
         'scipy'
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'ogbg_molpcba': ['pandas'],
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     # See https://github.com/librosa/librosa/issues/1160
