@@ -28,6 +28,7 @@ import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 IMG_ALIGNED_DATA = ("https://drive.google.com/u/0/uc?export=download&confirm=_OTb&id=0B7EVK8r0v71pZjFTYXZWM3FlRnM")
+
 EVAL_LIST = ("https://drive.google.com/uc?export=download&id=0B7EVK8r0v71pY0NSMzRuSXJEVkk")
 # Landmark coordinates: left_eye, right_eye etc.
 LANDMARKS_DATA = ("https://drive.google.com/uc?export=download&id=0B7EVK8r0v71pd0FJY3Blby1HUTQ")
