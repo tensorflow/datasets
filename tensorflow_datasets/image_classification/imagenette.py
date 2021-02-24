@@ -62,7 +62,6 @@ class ImagenetteConfig(tfds.core.BuilderConfig):
         # `320px-v2`,...
         name=size + ("-v2" if base == "imagenette2" else ""),
         description="{} variant.".format(size),
-        version=tfds.core.Version("0.1.0"),
         **kwargs)
     # e.g. `imagenette2-320.tgz`
     self.dirname = base + {
@@ -83,7 +82,7 @@ def _make_builder_configs():
 class Imagenette(tfds.core.GeneratorBasedBuilder):
   """A smaller subset of 10 easily classified classes from Imagenet."""
 
-  VERSION = tfds.core.Version("0.1.1")
+  VERSION = tfds.core.Version("1.0.0")
 
   BUILDER_CONFIGS = _make_builder_configs()
 
