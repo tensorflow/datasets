@@ -179,13 +179,14 @@ class DownloadManagerTest(testing.TestCase):
       url_infos=None,
       dl_dir='/dl_dir',
       extract_dir='/extract_dir',
+      manual_dir='/manual_dir',
       **kwargs
   ):
     manager = dm.DownloadManager(
         dataset_name='mnist',
         download_dir=dl_dir,
         extract_dir=extract_dir,
-        manual_dir='/manual_dir',
+        manual_dir=manual_dir,
         register_checksums=register_checksums,
         register_checksums_path='/checksums/checksums.tsv',
         **kwargs
@@ -300,6 +301,27 @@ class DownloadManagerTest(testing.TestCase):
         a.url: a.url_info,
         b.url: b.url_info,
     })
+    res = manager.download_and_extract({'a': a.url, 'b': b.url})
+    self.assertEqual(res, {
+        'a': _as_path('/extract_dir/ZIP.%s' % a.file_name),
+        'b': b.file_path,
+    })
+
+  def test_download_and_extract_no_manual_dir(self):
+    a, b = Artifact('a.zip'), Artifact('b')
+    self.dl_results[a.url] = a.url_info
+    self.dl_results[b.url] = b.url_info
+    self.extract_results[a.file_path] = f'/extract_dir/ZIP.{a.file_name}'
+    # url_b doesn't need any extraction.
+
+    # Result is the same after caching:
+    manager = self._get_manager(
+        manual_dir=None,
+        url_infos={
+            a.url: a.url_info,
+            b.url: b.url_info,
+        },
+    )
     res = manager.download_and_extract({'a': a.url, 'b': b.url})
     self.assertEqual(res, {
         'a': _as_path('/extract_dir/ZIP.%s' % a.file_name),
