@@ -445,8 +445,8 @@ class DownloadManager(object):
     # * (cached) checksum_path
     # * (cached) url_path
     # * `tmp_dir/file` (downloaded path)
-    if path.is_relative_to(self._manual_dir):  # Manually downloaded data
-      return path
+    if self._manual_dir and path.is_relative_to(self._manual_dir):
+      return path  # Manually downloaded data
     elif path == checksum_path:  # Path already at final destination
       assert computed_url_info == expected_url_info  # Sanity check
       return checksum_path  # pytype: disable=bad-return-type
