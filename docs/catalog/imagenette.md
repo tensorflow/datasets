@@ -46,19 +46,6 @@ Dec 6 2019).
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Features**:
 
 ```python
@@ -94,22 +81,112 @@ FeaturesDict({
 
 *   **Config description**: full-size variant.
 
+*   **Download size**: `1.45 GiB`
+
+*   **Dataset size**: `1.46 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,469
+`'validation'` | 3,925
+
 ## imagenette/320px-v2
 
 *   **Config description**: 320px variant.
+
+*   **Download size**: `325.84 MiB`
+
+*   **Dataset size**: `332.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,469
+`'validation'` | 3,925
 
 ## imagenette/160px-v2
 
 *   **Config description**: 160px variant.
 
+*   **Download size**: `94.42 MiB`
+
+*   **Dataset size**: `102.10 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,469
+`'validation'` | 3,925
+
 ## imagenette/full-size
 
 *   **Config description**: full-size variant.
+
+*   **Download size**: `1.45 GiB`
+
+*   **Dataset size**: `1.46 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 12,894
+`'validation'` | 500
 
 ## imagenette/320px
 
 *   **Config description**: 320px variant.
 
+*   **Download size**: `325.48 MiB`
+
+*   **Dataset size**: `332.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 12,894
+`'validation'` | 500
+
 ## imagenette/160px
 
 *   **Config description**: 160px variant.
+
+*   **Download size**: `94.18 MiB`
+
+*   **Dataset size**: `102.10 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 12,894
+`'validation'` | 500

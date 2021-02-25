@@ -2796,18 +2796,20 @@ $(document).ready(() => {
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `139.30 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 114,890
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2815,18 +2817,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `202.14 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 210,632
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2834,18 +2838,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `264.92 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 306,374
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2853,18 +2859,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `705.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 976,568
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2872,18 +2880,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.92 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,891,408
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2891,18 +2901,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.16 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 9,504,958
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2910,18 +2922,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `89.00 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 38,296
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2929,18 +2943,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `101.56 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,444
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3043,18 +3059,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.17 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 9,514,495
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4573,18 +4591,20 @@ $(document).ready(() => {
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `140.99 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 114,890
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4592,18 +4612,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `205.70 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 210,632
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4611,18 +4633,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `270.21 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 306,374
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4630,18 +4654,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `721.94 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 976,568
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4649,18 +4675,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.97 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,891,408
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4719,18 +4747,20 @@ $(document).ready(() => {
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `89.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 38,296
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4738,18 +4768,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `102.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,444
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4852,18 +4884,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.54 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 8,312,521
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6312,18 +6346,20 @@ $(document).ready(() => {
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `144.96 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 114,890
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6331,18 +6367,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `213.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 210,632
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6350,18 +6388,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `281.96 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 306,374
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6369,18 +6409,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `761.87 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 976,568
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6388,18 +6430,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.08 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,891,408
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6407,18 +6451,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.76 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 6,724,612
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6426,18 +6472,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `89.58 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 38,296
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6445,18 +6493,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `103.31 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,444
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6559,18 +6609,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.77 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 6,734,058
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8000,18 +8052,20 @@ $(document).ready(() => {
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `145.65 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 114,890
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8019,18 +8073,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `215.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 210,632
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8038,18 +8094,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `284.36 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 306,374
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8057,18 +8115,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `769.20 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 976,568
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8076,18 +8136,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.10 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,891,408
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8095,18 +8157,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.45 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 3,386,003
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8114,18 +8178,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `89.65 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 38,296
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8133,18 +8199,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `103.48 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,444
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8247,18 +8315,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.46 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 3,395,577
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -9758,18 +9828,20 @@ $(document).ready(() => {
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `144.10 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 114,890
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -9777,18 +9849,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `211.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 210,632
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -9796,18 +9870,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `279.13 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 306,374
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -9815,18 +9891,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `752.61 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 976,568
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -9834,18 +9912,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.06 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,891,408
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -9853,18 +9933,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.67 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 9,587,309
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -9872,18 +9954,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `89.49 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 38,296
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -9891,18 +9975,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `103.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,444
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11535,18 +11621,20 @@ $(document).ready(() => {
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_1x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `142.93 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 114,890
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11554,18 +11642,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `209.48 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 210,632
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11573,18 +11663,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `275.96 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 306,374
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11592,18 +11684,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `741.61 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 976,568
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11611,18 +11705,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.02 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,891,408
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11630,18 +11726,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.76 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 8,392,755
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11649,18 +11747,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `89.35 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 38,296
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11668,18 +11768,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `102.66 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,444
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11782,18 +11884,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.76 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 8,402,320
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
