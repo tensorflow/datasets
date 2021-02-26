@@ -39,7 +39,7 @@ each language expresses -- such that we expect models performing well on this \
 set to generalize across a large number of the languages in the world. It \
 contains language phenomena that would not be found in English-only corpora. \
 To provide a realistic information-seeking task and avoid priming effects, \
-questions are written by people who want to know the answer, but don’t know \
+questions are written by people who want to know the answer, but don't know \
 the answer yet, (unlike SQuAD and its descendents) and the data is collected \
 directly in each language without the use of translation (unlike MLQA and \
 XQuAD).
