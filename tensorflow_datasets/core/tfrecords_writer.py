@@ -147,7 +147,7 @@ def _get_number_shards(
   of two so it distributes better on smaller TPU configs (8, 16, 32, ... cores).
 
   Args:
-    total_size: the size of the data (serialized, not couting any overhead).
+    total_size: the size of the data (serialized, not counting any overhead).
     num_examples: the number of records in the data.
 
   Returns:
@@ -162,7 +162,7 @@ def _get_number_shards(
     i = 2
     while True:
       n = 1024 * i
-      if n >= min_shards_number and num_examples >= n:
+      if min_shards_number <= n <= num_examples:
         return n
       i += 1
   else:
@@ -382,16 +382,17 @@ class BeamWriter(object):
     for shardpath, from_, to in data["boundaries"]:
       yield (shardpath, (bucketid, examples[from_:to]))
 
-  def _write_final_shard(self, shardid_examples):
-    shard_path, examples_by_bucket = shardid_examples
-    examples = list(itertools.chain(*[
-        ex[1] for ex in sorted(examples_by_bucket)]))
+  def _write_final_shard(self, sharded_examples):
+    shard_path, examples_by_bucket = sharded_examples
+    examples_by_bucket = sorted(examples_by_bucket, key=lambda ex: ex[0])
+    examples = itertools.chain(*(
+        serialized_list for bucketid, serialized_list in examples_by_bucket))
     _write_examples(shard_path, examples, self._file_format)
 
   def write_from_pcollection(self, examples_pcollection):
     """Returns PTransform to write (key, example) PCollection to tfrecords."""
     beam = lazy_imports_lib.lazy_imports.apache_beam
-    # Here bucket designates a temporary shard, to help differenciate between
+    # Here bucket designates a temporary shard, to help differentiate between
     # temporary and final shards.
     buckets, buckets_len_size = (
         examples_pcollection
