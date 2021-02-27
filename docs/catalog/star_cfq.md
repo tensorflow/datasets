@@ -2813,7 +2813,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_l_cfq
 
@@ -2834,7 +2864,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_l_cfq
 
@@ -2855,7 +2915,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_l_cfq
 
@@ -2876,7 +2966,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_l_cfq
 
@@ -2897,7 +3017,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_l_cfq
 
@@ -2918,7 +3068,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_l_cfq
 
@@ -2939,7 +3119,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_l_cfq
 
@@ -2960,41 +3170,105 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `145.64 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 124,464
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `208.48 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 220,206
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3002,18 +3276,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `271.25 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 315,948
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3021,37 +3297,71 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `711.81 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 986,142
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.92 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,900,982
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3076,22 +3386,54 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `101.75 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,445
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3099,18 +3441,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `114.31 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 76,593
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3118,18 +3462,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `158.39 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 143,613
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3137,18 +3483,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `221.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 239,355
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3175,18 +3523,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `724.57 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 1,005,291
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3213,18 +3563,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `859.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.18 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 9,533,568
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4608,7 +4960,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_half_l_cfq
 
@@ -4629,7 +5011,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_half_l_cfq
 
@@ -4650,7 +5062,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_half_l_cfq
 
@@ -4671,7 +5113,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_half_l_cfq
 
@@ -4692,7 +5164,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_half_l_cfq
 
@@ -4764,7 +5266,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_half_l_cfq
 
@@ -4785,60 +5317,156 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `147.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 124,464
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `212.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 220,206
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `276.55 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 315,948
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4846,37 +5474,71 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `728.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 986,142
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.97 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,900,982
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4901,22 +5563,54 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_half_l_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `101.92 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,445
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4924,18 +5618,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `114.79 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 76,593
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4943,18 +5639,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `160.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 143,613
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4962,18 +5660,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `224.80 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 239,355
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5000,18 +5700,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `741.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 1,005,291
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5019,18 +5721,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_30x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.98 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,920,131
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5038,18 +5742,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_half_l_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `781.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.55 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 8,331,627
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6363,7 +7069,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_n_cfq
 
@@ -6384,7 +7120,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_n_cfq
 
@@ -6405,7 +7171,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_n_cfq
 
@@ -6426,7 +7222,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_n_cfq
 
@@ -6447,7 +7273,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_n_cfq
 
@@ -6468,7 +7324,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_n_cfq
 
@@ -6489,7 +7375,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_n_cfq
 
@@ -6510,41 +7426,105 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `151.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 124,464
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `219.83 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 220,206
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6552,18 +7532,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `288.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 315,948
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6571,37 +7553,71 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `768.22 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 986,142
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.09 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,900,982
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6626,22 +7642,54 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `102.33 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,445
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6649,18 +7697,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `116.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 76,593
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6668,18 +7718,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `164.08 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 143,613
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6687,18 +7739,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `232.60 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 239,355
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6725,18 +7779,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `780.99 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 1,005,291
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6763,18 +7819,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `712.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.78 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 6,752,988
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8069,7 +9127,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_half_n_cfq
 
@@ -8090,7 +9178,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_half_n_cfq
 
@@ -8111,7 +9229,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_half_n_cfq
 
@@ -8132,7 +9280,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_half_n_cfq
 
@@ -8153,7 +9331,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_half_n_cfq
 
@@ -8174,7 +9382,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_half_n_cfq
 
@@ -8195,7 +9433,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_half_n_cfq
 
@@ -8216,60 +9484,156 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `151.98 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 124,464
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `221.36 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 220,206
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `290.69 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 315,948
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8277,37 +9641,71 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `775.53 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 986,142
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.11 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,900,982
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8332,22 +9730,54 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_half_n_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `102.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,445
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8355,18 +9785,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `116.23 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 76,593
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8374,18 +9806,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `164.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 143,613
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8393,18 +9827,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `234.12 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 239,355
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8431,18 +9867,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `788.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 1,005,291
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8450,18 +9888,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_30x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.12 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,920,131
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -8469,18 +9909,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_half_n_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `544.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.47 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 3,414,726
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -9845,7 +11287,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_x_cfq
 
@@ -9866,7 +11338,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_x_cfq
 
@@ -9887,7 +11389,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_x_cfq
 
@@ -9908,7 +11440,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_x_cfq
 
@@ -9929,7 +11491,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_x_cfq
 
@@ -9950,7 +11542,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_x_cfq
 
@@ -9971,7 +11593,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_x_cfq
 
@@ -9992,60 +11644,156 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `150.44 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 124,464
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `218.08 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 220,206
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `285.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 315,948
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -10053,37 +11801,71 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `758.95 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 986,142
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.06 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,900,982
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -10091,37 +11873,71 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.68 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 9,596,853
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `102.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,445
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -10129,18 +11945,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `115.78 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 76,593
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -10148,18 +11966,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `163.19 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 143,613
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -10167,18 +11987,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `230.85 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 239,355
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -10205,18 +12027,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `771.71 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 1,005,291
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -10243,18 +12067,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `892.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.69 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 9,615,914
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11638,7 +13464,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_1x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_2x_half_x_cfq
 
@@ -11659,7 +13515,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_2x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_3x_half_x_cfq
 
@@ -11680,7 +13566,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_3x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_10x_half_x_cfq
 
@@ -11701,7 +13617,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_10x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_30x_half_x_cfq
 
@@ -11722,7 +13668,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_30x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.2x_b_cfq_100x_half_x_cfq
 
@@ -11743,7 +13719,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.2x_b_cfq_100x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.1x_half_x_cfq
 
@@ -11764,7 +13770,37 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.1x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_0.3x_half_x_cfq
 
@@ -11785,102 +13821,292 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_0.3x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_1x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `149.27 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 124,464
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_1x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_2x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `215.82 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 220,206
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_2x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_3x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `282.29 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 315,948
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_3x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_10x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `747.95 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 986,142
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_10x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_30x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.03 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 2,900,982
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_30x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.3x_b_cfq_100x_half_x_cfq
 
@@ -11901,22 +14127,54 @@ Split     | Examples
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/star_cfq-equal_weighting_0.3x_b_cfq_100x_half_x_cfq-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.1x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `102.10 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 57,445
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11924,18 +14182,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_0.3x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `115.41 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 76,593
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11943,18 +14203,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_1x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `162.02 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 143,613
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -11962,18 +14224,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_2x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `228.58 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 95,742
+`'train'` | 239,355
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -12000,18 +14264,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_10x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `760.71 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 1,005,291
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -12038,18 +14304,20 @@ Split | Examples
 
 ## star_cfq/equal_weighting_0.5x_b_cfq_100x_half_x_cfq
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `797.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.77 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'test'`  | 95,742
+`'train'` | 8,421,434
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
