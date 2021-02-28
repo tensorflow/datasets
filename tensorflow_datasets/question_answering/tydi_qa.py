@@ -90,7 +90,7 @@ class TydiQA(tfds.core.GeneratorBasedBuilder):
       TydiQAConfig(
           name="goldp",
           description="Gold passage (GoldP) task (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline).",
-          version=tfds.core.Version("2.0.0"),
+          version=tfds.core.Version("2.1.0"),
       ),
   ]
 
