@@ -11,6 +11,11 @@
 
 # `tydi_qa`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 TyDi QA is a question answering dataset covering 11 typologically diverse
@@ -53,11 +58,13 @@ both.
 
 *   **Versions**:
 
-    *   **`2.0.0`** (default): No release notes.
+    *   **`2.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
-*   **Download size**: `62.32 MiB`
+*   **Download size**: `121.30 MiB`
 
-*   **Dataset size**: `65.22 MiB`
+*   **Dataset size**: `98.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -65,19 +72,27 @@ both.
 
 *   **Splits**:
 
-Split             | Examples
-:---------------- | -------:
-`'train'`         | 49,881
-`'validation'`    | 5,077
-`'validation-ar'` | 921
-`'validation-bn'` | 113
-`'validation-en'` | 440
-`'validation-fi'` | 782
-`'validation-id'` | 565
-`'validation-ko'` | 276
-`'validation-ru'` | 812
-`'validation-sw'` | 499
-`'validation-te'` | 669
+Split                  | Examples
+:--------------------- | -------:
+`'train'`              | 49,881
+`'translate-train-ar'` | 3,661
+`'translate-train-bn'` | 3,585
+`'translate-train-fi'` | 3,670
+`'translate-train-id'` | 3,667
+`'translate-train-ko'` | 3,607
+`'translate-train-ru'` | 3,394
+`'translate-train-sw'` | 3,622
+`'translate-train-te'` | 3,658
+`'validation'`         | 5,077
+`'validation-ar'`      | 921
+`'validation-bn'`      | 113
+`'validation-en'`      | 440
+`'validation-fi'`      | 782
+`'validation-id'`      | 565
+`'validation-ko'`      | 276
+`'validation-ru'`      | 812
+`'validation-sw'`      | 499
+`'validation-te'`      | 669
 
 *   **Features**:
 
@@ -115,36 +130,6 @@ FeaturesDict({
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tydi_qa-goldp-2.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+    Missing.
 
 ## tydi_qa/goldp (default config)
