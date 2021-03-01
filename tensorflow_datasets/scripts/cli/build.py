@@ -360,7 +360,8 @@ def _download_and_prepare(
   # Dataset generated successfully
   logging.info('Dataset generation complete...')
   print()
-  print(repr(builder.info))
+  info_repr = repr(builder.info)
+  print(info_repr)
   print()
 
 
