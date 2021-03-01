@@ -93,6 +93,7 @@ class Video(sequence_feature.Sequence):
       encoding_format: str = 'png',
       ffmpeg_extra_args: Sequence[str] = (),
       use_colormap: bool = False,
+      dtype=tf.uint8,
   ):
     """Initializes the connector.
 
@@ -109,7 +110,8 @@ class Video(sequence_feature.Sequence):
       use_colormap: Forwarded to `tfds.features.Image`. If `True`,
         `tfds.as_dataframe` will display each value in the image with a
         different color.
-
+      dtype: tf.uint16 or tf.uint8 (default).
+        tf.uint16 can be used only with png encoding_format
     Raises:
       ValueError: If the shape is invalid
     """
@@ -121,6 +123,7 @@ class Video(sequence_feature.Sequence):
     super(Video, self).__init__(
         image_feature.Image(
             shape=shape[1:],
+            dtype=dtype,
             encoding_format=encoding_format,
             use_colormap=use_colormap,
         ),
