@@ -35,7 +35,8 @@ More information can be found at
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial version
+    *   `1.0.0`: Initial version
+    *   **`1.0.1`** (default): Update bad links filter for MLSum
 
 *   **Download size**: `Unknown size`
 
