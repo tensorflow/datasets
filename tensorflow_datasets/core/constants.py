@@ -55,6 +55,9 @@ def add_data_dir(data_dir):
   Args:
     data_dir: New data_dir to register.
   """
+  # Remove trailing / to avoid same directory being included twice in the set
+  # with and without a final slash.
+  data_dir = data_dir.rstrip('/')
   _registered_data_dir.add(data_dir)
 
 
