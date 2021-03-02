@@ -12,7 +12,7 @@ motivated community.
     [Follow our guide](https://www.tensorflow.org/datasets/add_dataset) for
     instructions.
 *   Issues, feature requests, bugs,... have a much bigger impact than adding new
-    datasets, as they benefit the entire TFDS communitry. See the
+    datasets, as they benefit the entire TFDS community. See the
     [potential contribution list](https://github.com/tensorflow/datasets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+-label%3A%22dataset+request%22+).
     Starts with the ones labeled with
     [contribution-welcome](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22contributions+welcome%22)
