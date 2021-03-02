@@ -167,9 +167,10 @@ class GemConfig(tfds.core.BuilderConfig):
 
 class Gem(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for GEM benchmark."""
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.1")
   RELEASE_NOTES = {
-      "1.0.0": "Initial version",
+      "1.0.1": "Update bad links filter for MLSum",
+      "1.0.0": "Initial version"
   }
   BUILDER_CONFIGS = [
       GemConfig(
@@ -337,7 +338,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "test":
                   "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/de_test.zip",
               "bad_ids":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_mlsum_bad_ids.json",
+                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_mlsum_bad_ids_fixed.json",
           },
           citation=textwrap.dedent("""\
             @inproceedings{scialom-etal-2020-mlsum,
@@ -371,7 +372,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               "test":
                   "https://gitlab.lip6.fr/scialom/mlsum_data/-/raw/master/MLSUM/es_test.zip",
               "bad_ids":
-                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_mlsum_bad_ids.json",
+                  "https://storage.googleapis.com/huggingface-nlp/datasets/gem/gem_mlsum_bad_ids_fixed.json",
           },
           citation=textwrap.dedent("""\
             @inproceedings{scialom-etal-2020-mlsum,
@@ -802,25 +803,21 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
               gen_kwargs={
-                  "filepath": files[
-                      "train"],
+                  "filepath": files["train"],
                   "set_name": "train",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,
               gen_kwargs={
-                  "filepath":
-                      files["validation"
-                           ],
+                  "filepath": files["validation"],
                   "set_name": "validation",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,
               gen_kwargs={
-                  "filepath": files[
-                      "test"],
+                  "filepath": files["test"],
                   "set_name": "test",
               },
           ),
