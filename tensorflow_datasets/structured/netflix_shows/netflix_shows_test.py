@@ -22,9 +22,9 @@ class NetflixShowsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for netflix_shows dataset."""
   DATASET_CLASS = netflix_shows.NetflixShows
   SPLITS = {
-      'train': 5,
+      'train': 7787,
   }
-  DL_EXTRACT_RESULT = 'netflix_shows.csv'
+  DL_EXTRACT_RESULT = 'netflix_titles.csv'
 
 
 if __name__ == '__main__':

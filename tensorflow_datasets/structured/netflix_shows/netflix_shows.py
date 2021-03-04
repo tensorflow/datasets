@@ -30,8 +30,6 @@ string missing values are replaced with 'Unknown'.
 _CITATION = """
 """
 
-_URL = "https://rushabh-v.github.io/datasets/netflix_shows.csv"
-
 RATING_CLASSES = [
     'Unknown', 'G', 'NC-17', 'NR', 'PG', 'PG-13', 'R', 'TV-14', 'TV-G', 'TV-MA',
     'TV-PG', 'TV-Y', 'TV-Y7', 'TV-Y7-FV', 'UR'
@@ -106,10 +104,11 @@ class NetflixShows(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    path = dl_manager.download(_URL)
+    path = dl_manager.download_kaggle_data("shivamb/netflix-shows")
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"path": path}
+            name=tfds.Split.TRAIN,
+            gen_kwargs={"path": path / "netflix_titles.csv"}
         ),
     ]
 
