@@ -21,7 +21,7 @@ landing_page:
         To get started see the
         <a href="./overview">guide</a>
         and our
-        <a href="./catalog">list of datasets</a>.
+        <a href="./catalog/overview#all_datasets">list of datasets</a>.
     - code_block: |
         <pre class = "prettyprint">
         import tensorflow.compat.v2 as tf
