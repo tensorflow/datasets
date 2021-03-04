@@ -31,24 +31,27 @@ future releases.
 
 The below description of the dataset is adapted from the OGB paper:
 
-## Input Format
+### Input Format
 All the molecules are pre-processed using RDKit ([1]).
-* Each graph represents a molecule, where nodes are atoms, and edges are
-  chemical bonds.
-* Input node features are 9-dimensional, containing atomic number and chirality,
-  as well as other additional atom features such as formal charge and
-  whether the atom is in the ring.
-* Input edge features are 3-dimensional, containing bond type,
-  bond stereochemistry, as well as an additional bond feature indicating
-  whether the bond is conjugated.
 
-## Prediction
+*  Each graph represents a molecule, where nodes are atoms, and edges are
+   chemical bonds.
+*  Input node features are 9-dimensional, containing atomic number and chirality,
+   as well as other additional atom features such as formal charge and
+   whether the atom is in the ring.
+*  Input edge features are 3-dimensional, containing bond type,
+   bond stereochemistry, as well as an additional bond feature indicating
+   whether the bond is conjugated.
+
+### Prediction
 The task is to predict 128 different biological activities (inactive/active).
 See [2] for more description about these targets.
 Not all targets apply to each molecule: missing targets are indicated by NaNs.
 
+### References
 [1]: Greg Landrum, et al. 'RDKit: Open-source cheminformatics'.
      URL: https://github.com/rdkit/rdkit
+
 [2]: Bharath Ramsundar, Steven Kearnes, Patrick Riley, Dale Webster,
      David Konerding and Vijay Pande. 'Massively Multitask Networks for
      Drug Discovery'.
@@ -66,7 +69,7 @@ _CITATION = """
                Michele Catasta and
                Jure Leskovec},
   editor    = {Hugo Larochelle and
-               Marc'Aurelio Ranzato and
+               Marc\'Aurelio Ranzato and
                Raia Hadsell and
                Maria{-}Florina Balcan and
                Hsuan{-}Tien Lin},
