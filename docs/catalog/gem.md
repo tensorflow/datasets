@@ -46,10 +46,6 @@ More information can be found at
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 ## gem/common_gen (default config)
 
 *   **Config description**: CommonGen is a constrained text generation task,
@@ -176,6 +172,40 @@ Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-common_gen-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## gem/cs_restaurants
 
 *   **Config description**: The task is generating responses in the context of a
@@ -297,6 +327,40 @@ Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-cs_restaurants-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## gem/dart
 
 *   **Config description**: DART is a large and open-domain structured DAta
@@ -414,6 +478,40 @@ Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-dart-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## gem/e2e_nlg
 
 *   **Config description**: The E2E dataset is designed for a limited-domain
@@ -528,6 +626,40 @@ FeaturesDict({
 Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-e2e_nlg-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## gem/mlsum_de
 
@@ -645,6 +777,40 @@ Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-mlsum_de-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## gem/mlsum_es
 
 *   **Config description**: MLSum is a large-scale multiLingual summarization
@@ -757,6 +923,10 @@ FeaturesDict({
 Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## gem/schema_guided_dialog
 
@@ -874,6 +1044,10 @@ FeaturesDict({
 Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## gem/totto
 
@@ -1005,6 +1179,10 @@ Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## gem/web_nlg_en
 
 *   **Config description**: WebNLG is a bi-lingual dataset (English, Russian) of
@@ -1126,6 +1304,10 @@ Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## gem/web_nlg_ru
 
 *   **Config description**: WebNLG is a bi-lingual dataset (English, Russian) of
@@ -1246,6 +1428,10 @@ FeaturesDict({
 Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## gem/wiki_auto_asset_turk
 
@@ -1369,6 +1555,10 @@ Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## gem/wiki_lingua_es_en
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
@@ -1476,6 +1666,10 @@ FeaturesDict({
 Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## gem/wiki_lingua_ru_en
 
@@ -1585,6 +1779,10 @@ Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## gem/wiki_lingua_tr_en
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
@@ -1693,6 +1891,10 @@ Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## gem/wiki_lingua_vi_en
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
@@ -1800,6 +2002,10 @@ FeaturesDict({
 Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## gem/xsum
 
@@ -1911,3 +2117,7 @@ FeaturesDict({
 Note that each GEM dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
