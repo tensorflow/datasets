@@ -45,10 +45,11 @@ All the molecules are pre-processed using RDKit ([1]).
 
 ### Prediction
 The task is to predict 128 different biological activities (inactive/active).
-See [2] for more description about these targets.
+See [2] and [3] for more description about these targets.
 Not all targets apply to each molecule: missing targets are indicated by NaNs.
 
 ### References
+
 [1]: Greg Landrum, et al. 'RDKit: Open-source cheminformatics'.
      URL: https://github.com/rdkit/rdkit
 
@@ -56,6 +57,11 @@ Not all targets apply to each molecule: missing targets are indicated by NaNs.
      David Konerding and Vijay Pande. 'Massively Multitask Networks for
      Drug Discovery'.
      URL: https://arxiv.org/pdf/1502.02072.pdf
+
+[3]: Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes,
+     Caleb Geniesse, Aneesh S. Pappu, Karl Leswing, and Vijay Pande.
+     MoleculeNet: a benchmark for molecular machine learning.
+     Chemical Science, 9(2):513–530, 2018.
 """
 
 _CITATION = """
