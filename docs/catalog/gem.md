@@ -38,19 +38,6 @@ More information can be found at
     *   `1.0.0`: Initial version
     *   **`1.0.1`** (default): Update bad links filter for MLSum
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -70,6 +57,22 @@ Split | Examples
     ability of generative commonsense reasoning. Given a set of common concepts;
     the task is to generate a coherent sentence describing an everyday scenario
     using these concepts.
+
+*   **Download size**: `1.76 MiB`
+
+*   **Dataset size**: `13.39 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,497
+`'train'`      | 67,389
+`'validation'` | 993
 
 *   **Features**:
 
@@ -180,6 +183,22 @@ the correct citation for each contained dataset."
     The input is a basic intent/dialogue act type and a list of slots
     (attributes) and their values. The output is a natural language sentence.
 
+*   **Download size**: `1.40 MiB`
+
+*   **Dataset size**: `1.80 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 842
+`'train'`      | 3,569
+`'validation'` | 781
+
 *   **Features**:
 
 ```python
@@ -285,6 +304,22 @@ the correct citation for each contained dataset."
     each input being a set of entity-relation triples following a
     tree-structured ontology.
 
+*   **Download size**: `28.01 MiB`
+
+*   **Dataset size**: `31.11 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,959
+`'train'`      | 62,659
+`'validation'` | 2,768
+
 *   **Features**:
 
 ```python
@@ -385,6 +420,22 @@ the correct citation for each contained dataset."
     data-to-text task -- generation of restaurant descriptions/recommendations
     based on up to 8 different attributes (name, area, price range etc.)
 
+*   **Download size**: `13.92 MiB`
+
+*   **Dataset size**: `14.51 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,693
+`'train'`      | 33,525
+`'validation'` | 4,299
+
 *   **Features**:
 
 ```python
@@ -483,6 +534,22 @@ the correct citation for each contained dataset."
 *   **Config description**: MLSum is a large-scale multiLingual summarization
     dataset. It is buillt from online news outlets, this split focusing on
     German.
+
+*   **Download size**: `331.26 MiB`
+
+*   **Dataset size**: `930.06 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,695
+`'train'`      | 220,748
+`'validation'` | 11,392
 
 *   **Features**:
 
@@ -584,6 +651,19 @@ the correct citation for each contained dataset."
     dataset. It is buillt from online news outlets, this split focusing on
     Spanish.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Features**:
 
 ```python
@@ -684,6 +764,19 @@ the correct citation for each contained dataset."
     18K multi-domain task-oriented dialogues between a human and a virtual
     assistant, which covers 17 domains ranging from banks and events to media,
     calendar, travel, and weather.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -788,6 +881,19 @@ the correct citation for each contained dataset."
     follows: Given a Wikipedia table with row names, column names and table
     cells, with a subset of cells highlighted, generate a natural language
     description for the highlighted part of the table.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -907,6 +1013,19 @@ the correct citation for each contained dataset."
     development of RDF verbalisers able to generate short text and to handle
     micro-planning.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Features**:
 
 ```python
@@ -1015,6 +1134,19 @@ the correct citation for each contained dataset."
     development of RDF verbalisers able to generate short text and to handle
     micro-planning.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Features**:
 
 ```python
@@ -1121,6 +1253,19 @@ the correct citation for each contained dataset."
     English Wikipedia and Simple English Wikipedia as a resource to train
     sentence simplification systems. ASSET and TURK are high-quality
     simplification datasets used for testing.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -1229,6 +1374,19 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Features**:
 
 ```python
@@ -1323,6 +1481,19 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -1419,6 +1590,19 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Features**:
 
 ```python
@@ -1513,6 +1697,19 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -1609,6 +1806,19 @@ the correct citation for each contained dataset."
 *   **Config description**: The dataset is for the task of abstractive
     summarization in its extreme form, its about summarizing a document in a
     single sentence.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
