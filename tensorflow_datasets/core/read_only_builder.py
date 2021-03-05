@@ -76,6 +76,11 @@ class ReadOnlyBuilder(
         config=builder_config,
         version=info_proto.version,
     )
+
+    # For pickling, should come after super.__init__ which is setting that same
+    # _original_state attribute.
+    self._original_state = dict(builder_dir=builder_dir)
+
     if self.info.features is None:
       raise ValueError(
           f'Cannot restore {self.info.full_name}. It likelly mean the dataset '

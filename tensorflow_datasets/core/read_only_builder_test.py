@@ -20,6 +20,7 @@ import os
 import pathlib
 from unittest import mock
 
+import dill
 import pytest
 
 from tensorflow_datasets import testing
@@ -169,6 +170,11 @@ def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
   assert [ex['id'] for ex in ds] == [ex['id'] for ex in origin_ds]
 
   builder.download_and_prepare()  # Should be a no-op
+
+  # Test pickling and un-pickling
+  builder2 = dill.loads(dill.dumps(builder))
+  assert builder.name == builder2.name
+  assert builder.version == builder2.version
 
 
 def test_not_exists(tmp_path: pathlib.Path):
