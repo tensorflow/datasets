@@ -69,6 +69,7 @@ class Accentdb(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    # pylint: disable=missing-param-doc, missing-type-doc
     """Returns SplitGenerators."""
 
     extract_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
@@ -81,6 +82,7 @@ class Accentdb(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, extract_path):
+    # pylint: disable=missing-param-doc, missing-type-doc
     """Yields examples."""
     data_path = os.path.join(extract_path, 'data')
     for accent in tf.io.gfile.listdir(data_path):
