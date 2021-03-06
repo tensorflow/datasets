@@ -817,18 +817,21 @@ $(document).ready(() => {
     dataset. It is buillt from online news outlets, this split focusing on
     Spanish.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `490.28 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.26 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 13,366
+`'train'`      | 259,888
+`'validation'` | 9,977
 
 *   **Features**:
 
@@ -926,7 +929,37 @@ the correct citation for each contained dataset."
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-mlsum_es-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## gem/schema_guided_dialog
 
@@ -935,18 +968,21 @@ the correct citation for each contained dataset."
     assistant, which covers 17 domains ranging from banks and events to media,
     calendar, travel, and weather.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `8.24 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `77.86 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,000
+`'train'`      | 164,982
+`'validation'` | 10,000
 
 *   **Features**:
 
@@ -1047,7 +1083,37 @@ the correct citation for each contained dataset."
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-schema_guided_dialog-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## gem/totto
 
@@ -1056,18 +1122,21 @@ the correct citation for each contained dataset."
     cells, with a subset of cells highlighted, generate a natural language
     description for the highlighted part of the table.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `179.03 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `633.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 7,700
+`'train'`      | 121,153
+`'validation'` | 7,700
 
 *   **Features**:
 
@@ -1181,7 +1250,37 @@ the correct citation for each contained dataset."
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-totto-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## gem/web_nlg_en
 
@@ -1191,18 +1290,21 @@ the correct citation for each contained dataset."
     development of RDF verbalisers able to generate short text and to handle
     micro-planning.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `12.35 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `16.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,779
+`'train'`      | 35,426
+`'validation'` | 1,667
 
 *   **Features**:
 
@@ -1306,7 +1408,37 @@ the correct citation for each contained dataset."
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-web_nlg_en-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## gem/web_nlg_ru
 
@@ -1316,18 +1448,21 @@ the correct citation for each contained dataset."
     development of RDF verbalisers able to generate short text and to handle
     micro-planning.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.28 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,102
+`'train'`      | 14,630
+`'validation'` | 790
 
 *   **Features**:
 
@@ -1431,7 +1566,37 @@ the correct citation for each contained dataset."
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-web_nlg_ru-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## gem/wiki_auto_asset_turk
 
@@ -1440,18 +1605,23 @@ the correct citation for each contained dataset."
     sentence simplification systems. ASSET and TURK are high-quality
     simplification datasets used for testing.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `121.37 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `182.31 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test_asset, test_turk, validation), Only when `shuffle_files=False`
+    (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test_asset'` | 359
+`'test_turk'`  | 359
+`'train'`      | 373,801
+`'validation'` | 73,249
 
 *   **Features**:
 
@@ -1557,25 +1727,58 @@ the correct citation for each contained dataset."
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-wiki_auto_asset_turk-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## gem/wiki_lingua_es_en
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `161.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `280.48 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 19,797
+`'train'`      | 79,515
+`'validation'` | 8,835
 
 *   **Features**:
 
@@ -1669,25 +1872,58 @@ the correct citation for each contained dataset."
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gem-wiki_lingua_es_en-1.0.1.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## gem/wiki_lingua_ru_en
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `161.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `204.29 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (test, validation), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,094
+`'train'`      | 36,898
+`'validation'` | 4,100
 
 *   **Features**:
 
@@ -1788,18 +2024,21 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `161.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.12 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 808
+`'train'`      | 3,193
+`'validation'` | 355
 
 *   **Features**:
 
@@ -1900,18 +2139,21 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `161.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `39.83 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,167
+`'train'`      | 9,206
+`'validation'` | 1,023
 
 *   **Features**:
 
@@ -2013,18 +2255,21 @@ the correct citation for each contained dataset."
     summarization in its extreme form, its about summarizing a document in a
     single sentence.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `243.08 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `69.20 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,166
+`'train'`      | 23,206
+`'validation'` | 1,117
 
 *   **Features**:
 
