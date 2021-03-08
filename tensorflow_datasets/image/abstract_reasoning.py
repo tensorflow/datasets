@@ -127,7 +127,7 @@ with $o$=line and $a$=type."""
 class AbstractReasoningConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AbstractReasoning."""
 
-  def __init__(self, *, split_type="neutral", **kwargs):
+  def __init__(self, *, split_type: str="neutral", **kwargs):
     """BuilderConfig for AbstractReasoning.
 
     Args:
@@ -136,7 +136,7 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
         "attrs.pairs", "attrs.shape.color", "attrs.line.type",].
       **kwargs: keyword arguments forwarded to super.
     """
-    super(AbstractReasoningConfig, self).__init__(
+    super().__init__(
         version=tfds.core.Version("1.0.0"),
         **kwargs,
     )
@@ -237,6 +237,7 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
     ]
 
   def _build_pcollection(self, pipeline, folder, split):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Generate examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
 
@@ -244,6 +245,7 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
     filename = os.path.join(folder, "{}.tar.gz".format(split_type))
 
     def _extract_data(inputs):
+      #pylint: disable=missing-type-doc, missing-param-doc
       """Extracts files from the tar archives."""
       filename, split = inputs
       for name, fobj in tfds.download.iter_archive(
