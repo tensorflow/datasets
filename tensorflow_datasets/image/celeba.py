@@ -125,6 +125,8 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """Downloads data and return SplitGenrators"""
     downloaded_dirs = dl_manager.download({
         "img_align_celeba": IMG_ALIGNED_DATA,
         "list_eval_partition": EVAL_LIST,
@@ -163,7 +165,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
             })
     ]
 
-  def _process_celeba_config_file(self, file_path):
+  def _process_celeba_config_file(self, file_path: str):
     """Unpack the celeba config file.
 
     The file starts with the number of lines, and a header.
@@ -191,6 +193,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     return keys, values
 
   def _generate_examples(self, file_id, downloaded_dirs, downloaded_images):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Yields examples."""
 
     img_list_path = downloaded_dirs["list_eval_partition"]
@@ -211,11 +214,11 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       record = {
           "image": downloaded_images[file_name],
           "landmarks": {
-              k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
+              k: v for k,v in zip(landmarks[0], landmarks[1][file_name])
           },
           "attributes": {
               # atributes value are either 1 or -1, so convert to bool
-              k: v > 0 for k, v in zip(attributes[0], attributes[1][file_name])
+              k: v > 0 for k,v in zip(attributes[0], attributes[1][file_name])
           },
       }
       yield file_name, record
