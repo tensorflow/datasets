@@ -57,6 +57,7 @@ class GrooveConfig(tfds.core.BuilderConfig):
 
   def __init__(self, split_bars=None, include_audio=True, audio_rate=16000,
                **kwargs):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Constructs a GrooveConfig.
 
     Args:
@@ -73,7 +74,7 @@ class GrooveConfig(tfds.core.BuilderConfig):
     else:
       name_parts.append("midionly")
 
-    super(GrooveConfig, self).__init__(
+    super().__init__(
         name="-".join(name_parts),
         version=tfds.core.Version("2.0.1"),
         **kwargs,
@@ -113,6 +114,8 @@ class Groove(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """dataset features info."""
     features_dict = {
         "id": tf.string,
         "drummer":
@@ -139,6 +142,7 @@ class Groove(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns splits."""
     # Download data.
     data_dir = os.path.join(
@@ -160,6 +164,8 @@ class Groove(tfds.core.GeneratorBasedBuilder):
         for split, split_rows in rows.items()]
 
   def _generate_examples(self, rows, data_dir):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """Generate examples."""
     split_bars = self._builder_config.split_bars
     for row in rows:
       split_genre = row["style"].split("/")
