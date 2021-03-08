@@ -55,7 +55,7 @@ WARNING: This dataset currently requires you to prepare images on your own.
 class CelebaHQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CelebaHQ."""
 
-  def __init__(self, *, resolution, **kwargs):
+  def __init__(self, *, resolution: int, **kwargs):
     """BuilderConfig for SQUAD.
 
     Args:
@@ -64,7 +64,7 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     v2 = tfds.core.Version("2.0.0")
-    super(CelebaHQConfig, self).__init__(
+    super().__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
@@ -119,6 +119,7 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns SplitGenerators."""
     image_tar_file = os.path.join(dl_manager.manual_dir,
                                   self.builder_config.file_name)

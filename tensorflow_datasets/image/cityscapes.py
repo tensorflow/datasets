@@ -66,11 +66,12 @@ class CityscapesConfig(tfds.core.BuilderConfig):
       disparity_maps (bool): Enables disparity maps.
       train_extra_split (bool): Enables train_extra split. This automatically
           enables coarse grain segmentations, if segmentation labels are used.
+      **kwargs: keyword arguments forwarded to super.
   """
 
   def __init__(self, *, right_images=False, segmentation_labels=True,
                disparity_maps=False, train_extra_split=False, **kwargs):
-    super(CityscapesConfig, self).__init__(version='1.0.0', **kwargs)
+    super().__init__(version='1.0.0', **kwargs)
 
     self.right_images = right_images
     self.segmentation_labels = segmentation_labels
@@ -166,6 +167,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Dataset info."""
     # Enable features as necessary
     features = {}
     features['image_id'] = tfds.features.Text()
@@ -193,6 +195,8 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """Return SplitGenerators."""
     paths = {}
     for split, (zip_file, _) in self.builder_config.zip_root.items():
       paths[split] = os.path.join(dl_manager.manual_dir, zip_file)
@@ -246,6 +250,8 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
     return splits
 
   def _generate_examples(self, **paths):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """Generate examples."""
     left_imgs_root = paths['images_left']
     for city_id in tf.io.gfile.listdir(left_imgs_root):
       paths_city_root = {feat_dir: os.path.join(path, city_id)
@@ -287,7 +293,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
 LEFT_IMAGE_FILE_RE = re.compile(r'([a-z\-]+)_(\d+)_(\d+)_leftImg8bit\.png')
 
 
-def _get_left_image_id(left_image):
+def _get_left_image_id(left_image: str):
   """Returns the id of an image file.
 
   Used to associate an image file with its corresponding label.
@@ -298,7 +304,7 @@ def _get_left_image_id(left_image):
     left_image: name of the image file.
 
   Returns:
-    Id of the image (see example above).
+    str: Id of the image (see example above).
   """
   match = LEFT_IMAGE_FILE_RE.match(left_image)
   return '{}_{}_{}'.format(*match.groups())
