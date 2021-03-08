@@ -86,6 +86,8 @@ class Librispeech(tfds.core.BeamBasedBuilder):
         ])
 
   def _read_metadata_file(self, path, field_names):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """Reads metadata from file"""
     metadata = {}
     with tf.io.gfile.GFile(path) as f:
       for line in f:
@@ -105,6 +107,7 @@ class Librispeech(tfds.core.BeamBasedBuilder):
     return splits
 
   def _build_pcollection(self, pipeline, directory):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
     return (pipeline
@@ -114,6 +117,7 @@ class Librispeech(tfds.core.BeamBasedBuilder):
 
 
 def _generate_librispeech_examples(directory):
+  #pylint: disable=missing-type-doc, missing-param-doc
   """Generate examples from a Librispeech directory."""
   transcripts_glob = os.path.join(directory, "LibriSpeech", "*/*/*/*.txt")
   for transcript_file in tf.io.gfile.glob(transcripts_glob):

@@ -57,7 +57,8 @@ validation and test set consists of samples from 1 speaker, respectively.
 """
 
 
-def _compute_split_boundaries(split_probs, n_items):
+def _compute_split_boundaries(split_probs: list, n_items: int):
+  #pylint:disable=missing-raises-doc
   """Computes boundary indices for each of the splits in split_probs.
 
   Args:
@@ -66,8 +67,8 @@ def _compute_split_boundaries(split_probs, n_items):
     n_items: Number of items we want to split.
 
   Returns:
-    The item indices of boundaries between different splits. For the above
-    example and n_items=100, these will be
+    split_boundaries: List of item indices of boundaries between different
+    splits. For the above example and n_items=100, these will be
     [('train', 0, 60), ('dev', 60, 80), ('test', 80, 100)].
   """
   if len(split_probs) > n_items:
@@ -91,7 +92,10 @@ def _compute_split_boundaries(split_probs, n_items):
   return split_boundaries
 
 
-def _get_inter_splits_by_group(items_and_groups, split_probs, split_number):
+def _get_inter_splits_by_group(
+  items_and_groups: sequence,
+  split_probs: list,
+  split_number: int):
   """Split items to train/dev/test, so all items in group go into same split.
 
   Each group contains all the samples from the same speaker ID. The samples are
@@ -104,7 +108,7 @@ def _get_inter_splits_by_group(items_and_groups, split_probs, split_number):
     split_number: Generated splits should change with split_number.
 
   Returns:
-    Dictionary that looks like {split name -> set(ids)}.
+    split_to-ids: Dictionary that looks like {split name -> set(ids)}.
   """
   groups = sorted(set(group_id for item_id, group_id in items_and_groups))
   rng = np.random.RandomState(split_number)
@@ -152,6 +156,7 @@ class Savee(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns SplitGenerators."""
     zip_path = os.path.join(dl_manager.manual_dir, 'AudioData.zip')
     if not tf.io.gfile.exists(zip_path):
@@ -187,6 +192,7 @@ class Savee(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, file_names):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Yields examples."""
     for fname in file_names:
       folder, wavname = os.path.split(fname)

@@ -20,6 +20,7 @@ from tensorflow_datasets.audio import libritts
 
 
 class LibriTTSTest(testing.DatasetBuilderTestCase):
+  """LibriTTS Test class"""
   DATASET_CLASS = libritts.Libritts
   SPLITS = {
       "train_clean100": 2,

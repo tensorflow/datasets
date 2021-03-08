@@ -88,6 +88,7 @@ class Libritts(tfds.core.BeamBasedBuilder):
     )
 
   def _populate_metadata(self, archive_paths):
+    #pylint: disable=missing-function-docstring
     # All archives contain the same metadata.
     archive_path = list(archive_paths.values())[0]
 
@@ -121,6 +122,7 @@ class Libritts(tfds.core.BeamBasedBuilder):
     return splits
 
   def _build_pcollection(self, pipeline, archive_path):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
     return (pipeline
@@ -131,6 +133,7 @@ class Libritts(tfds.core.BeamBasedBuilder):
 
 
 def _generate_transcripts(transcript_csv_file):
+  #pylint: disable=missing-type-doc, missing-param-doc
   """Generates partial examples from transcript CSV file."""
   for line in transcript_csv_file:
     key, text_original, text_normalized = line.decode("utf-8").split("\t")
@@ -146,6 +149,7 @@ def _generate_transcripts(transcript_csv_file):
 
 
 def _extract_libritts_data(archive_path):
+  #pylint: disable=missing-type-doc, missing-param-doc
   """Generate partial audio or transcript examples from a LibriTTS archive."""
   for path, contents in tfds.core.download.extractor.iter_tar(archive_path):
     if path.endswith(".trans.tsv"):

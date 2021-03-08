@@ -93,8 +93,8 @@ class NsynthConfig(tfds.core.BuilderConfig):
   """BuilderConfig for NSynth Dataset."""
 
   def __init__(self,
-               gansynth_subset=False,
-               estimate_f0_and_loudness=False,
+               gansynth_subset: bool=False,
+               estimate_f0_and_loudness: bool=False,
                **kwargs):
     """Constructs a NsynthConfig.
 
@@ -121,7 +121,7 @@ class NsynthConfig(tfds.core.BuilderConfig):
     v231 = tfds.core.Version("2.3.1")
     v232 = tfds.core.Version("2.3.2")
     v233 = tfds.core.Version("2.3.3")
-    super(NsynthConfig, self).__init__(
+    super().__init__(
         name=".".join(name_parts),
         version=v233,
         supported_versions=[v232, v231, v230],
@@ -150,6 +150,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
   ]
 
   def _info(self):
+    """Dataset features info"""
     features = {
         "id":
             tf.string,
@@ -194,6 +195,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns splits."""
 
     dl_urls = {}
@@ -233,6 +235,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
     ]
 
   def _build_pcollection(self, pipeline, tfrecord_dirs, ids, split):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Build PCollection of examples for split."""
     beam = tfds.core.lazy_imports.apache_beam
 
@@ -268,6 +271,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
       }
 
     def _in_split(id_ex, split_ids):
+      #pylint: disable=missing-type-doc, missing-param-doc
       unused_id, ex = id_ex
       if not split_ids or tf.compat.as_text(ex["id"]) in split_ids:
         beam.metrics.Metrics.counter(split, "in-split").inc()
@@ -275,6 +279,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
       return False
 
     def _estimate_f0(id_ex):
+      #pylint: disable=missing-type-doc, missing-param-doc
       """Estimate the fundamental frequency using CREPE and add to example."""
       id_, ex = id_ex
       beam.metrics.Metrics.counter(split, "estimate-f0").inc()
@@ -313,6 +318,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
       return id_, ex
 
     def _calc_loudness(id_ex):
+      #pylint: disable=missing-type-doc, missing-param-doc
       """Compute loudness, add to example (ref is white noise, amplitude=1)."""
       id_, ex = id_ex
       beam.metrics.Metrics.counter(split, "compute-loudness").inc()
