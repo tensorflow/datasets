@@ -25,11 +25,11 @@ import tensorflow_datasets.public_api as tfds
 
 
 class TedliumReleaseConfig(tfds.core.BuilderConfig):
+  #pylint: disable=missing-type-doc, missing-param-doc
   """BuilderConfig for a release of the TED-LIUM dataset."""
 
   def __init__(self, *, url, download_url, split_paths, citation, **kwargs):
-    super(TedliumReleaseConfig,
-          self).__init__(version=tfds.core.Version("1.0.1"), **kwargs)
+    super().__init__(version=tfds.core.Version("1.0.1"), **kwargs)
     self.url = url
     self.download_url = download_url
     # List of split, path pairs containing the relative path within the
@@ -190,6 +190,7 @@ class Tedlium(tfds.core.BeamBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     extracted_dir = dl_manager.download_and_extract(
         self.builder_config.download_url)
     splits = []
@@ -207,6 +208,7 @@ class Tedlium(tfds.core.BeamBasedBuilder):
 
 
 def _generate_examples_from_stm_file(stm_path):
+  #pylint: disable=missing-type-doc, missing-param-doc
   """Generate examples from a TED-LIUM stm file."""
   stm_dir = os.path.dirname(stm_path)
   sph_dir = os.path.join(os.path.dirname(stm_dir), "sph")
@@ -233,6 +235,8 @@ def _generate_examples_from_stm_file(stm_path):
 
 
 def _maybe_trim_suffix(transcript):
+  #pylint: disable=missing-type-doc, missing-param-doc
+  """Trim suffix from transcript."""
   # stm files for the TEDLIUM release 1 train split contain a key (enclosed in
   # parens) at the end.
   splits = transcript.rsplit(" ", 1)
@@ -245,6 +249,7 @@ def _maybe_trim_suffix(transcript):
 
 
 def _parse_gender(label_str):
+  #pylint: disable=missing-type-doc, missing-param-doc
   """Parse gender string from STM "<label>" field."""
   gender = re.split(",|_", label_str)[-1][:-1]
   # Fix inconsistencies in the data.
@@ -260,6 +265,7 @@ def _parse_gender(label_str):
 
 
 def _extract_audio_segment(sph_path, channel, start_sec, end_sec):
+  #pylint: disable=missing-type-doc, missing-param-doc
   """Extracts segment of audio samples (as an ndarray) from the given path."""
   with tf.io.gfile.GFile(sph_path, "rb") as f:
     segment = tfds.core.lazy_imports.pydub.AudioSegment.from_file(

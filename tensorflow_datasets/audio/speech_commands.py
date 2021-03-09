@@ -18,7 +18,7 @@
 import os
 import numpy as np
 
-from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import lazy_imports_lib as lazy_lib
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -84,6 +84,7 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns SplitGenerators."""
 
     dl_path, dl_test_path = dl_manager.download(
@@ -111,6 +112,7 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, archive, file_list):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Yields examples."""
     for path, file_obj in archive:
       if file_list is not None and path not in file_list:
@@ -120,7 +122,7 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
       example_id = '{}_{}'.format(word, wavname)
       if word in WORDS:
         label = word
-      elif word == SILENCE or word == BACKGROUND_NOISE:
+      elif word in [SILENCE, BACKGROUND_NOISE]:
         # The main tar file already contains all of the test files, except for
         # the silence ones. In fact it does not contain silence files at all.
         # So for the test set we take the silence files from the test tar file,
@@ -136,7 +138,7 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
         # Special handling of background noise. We need to cut these files to
         # many small files with 1 seconds length, and transform it to silence.
         audio_samples = np.array(
-            lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
+            lazy_lib.lazy_imports.pydub.AudioSegment.from_file(
                 file_obj, format='wav').get_array_of_samples())
 
         for start in range(0,
@@ -150,17 +152,19 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
           example = {
               'audio':
                   np.array(
-                      lazy_imports_lib.lazy_imports.pydub.AudioSegment
+                      lazy_lib.lazy_imports.pydub.AudioSegment
                       .from_file(file_obj,
                                  format='wav').get_array_of_samples()),
               'label':
                   label,
           }
           yield example_id, example
-        except lazy_imports_lib.lazy_imports.pydub.exceptions.CouldntDecodeError:
+        except lazy_lib.lazy_imports.pydub.exceptions.CouldntDecodeError:
           pass
 
   def _split_archive(self, train_archive):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """Return train and validation paths."""
     train_paths = []
     for path, file_obj in train_archive:
       if 'testing_list.txt' in path:

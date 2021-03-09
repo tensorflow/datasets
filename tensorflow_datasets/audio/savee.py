@@ -93,7 +93,7 @@ def _compute_split_boundaries(split_probs: list, n_items: int):
 
 
 def _get_inter_splits_by_group(
-  items_and_groups: sequence,
+  items_and_groups: list,
   split_probs: list,
   split_number: int):
   """Split items to train/dev/test, so all items in group go into same split.
@@ -108,7 +108,7 @@ def _get_inter_splits_by_group(
     split_number: Generated splits should change with split_number.
 
   Returns:
-    split_to-ids: Dictionary that looks like {split name -> set(ids)}.
+    split_to_ids: Dictionary that looks like {split name -> set(ids)}.
   """
   groups = sorted(set(group_id for item_id, group_id in items_and_groups))
   rng = np.random.RandomState(split_number)
