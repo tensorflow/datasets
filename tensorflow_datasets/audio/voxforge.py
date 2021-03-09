@@ -60,6 +60,7 @@ LABELS = ['de', 'en', 'es', 'fr', 'it', 'ru']
 
 
 def _compute_split_boundaries(split_probs, n_items):
+  #pylint: disable=missing-type-doc, missing-param-doc, missing-return-type-doc
   """Computes boundary indices for each of the splits in split_probs.
 
   Args:
@@ -68,8 +69,8 @@ def _compute_split_boundaries(split_probs, n_items):
     n_items: Number of items we want to split.
 
   Returns:
-    The item indices of boundaries between different splits. For the above
-    example and n_items=100, these will be
+    split_boundaries: List of item indices of boundaries between different
+    splits. For the above example and n_items=100, these will be
     [('train', 0, 60), ('dev', 60, 80), ('test', 80, 100)].
   """
   if len(split_probs) > n_items:
@@ -94,13 +95,17 @@ def _compute_split_boundaries(split_probs, n_items):
 
 
 def _wav_obj_to_samples(wav_obj):
+  #pylint: disable=missing-type-doc, missing-param-doc
   """Read a `tarfile.ExFileObject`."""
   sample_rate, samples = tfds.core.lazy_imports.scipy.io.wavfile.read(
       io.BytesIO(wav_obj.read()))
   return samples, sample_rate
 
 
-def _get_inter_splits_by_group(items_and_groups, split_probs, split_number):
+def _get_inter_splits_by_group(items_and_groups: list,
+                                split_probs: list,
+                                split_number: int):
+  #pylint: disable=missing-type-doc, missing-param-doc
   """Split items to train/dev/test, so all items in group go into same split.
 
   Each group contains all the samples from the same speaker ID. The samples are
@@ -114,7 +119,7 @@ def _get_inter_splits_by_group(items_and_groups, split_probs, split_number):
     split_number: Generated splits should change with split_number.
 
   Returns:
-    Dictionary that looks like {split name -> set(ids)}.
+    split_to_ids: Dictionary that looks like {split name -> set(ids)}.
   """
   groups = sorted(set(group_id for item_id, group_id in items_and_groups))
   rng = np.random.RandomState(split_number)
