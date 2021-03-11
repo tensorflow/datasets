@@ -115,6 +115,13 @@ class ReadOnlyPath(PurePath, Protocol):
   documentation.
   """
 
+  def __new__(cls: Type[T], *args: PathLike) -> T:
+    if cls in (ReadOnlyPath, ReadWritePath):
+      from tensorflow_datasets.core.utils import generic_path  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+      return generic_path.as_path(*args)
+    else:
+      return super().__new__(cls, *args)
+
   @abc.abstractmethod
   def exists(self) -> bool:
     """Returns True if self exists."""
