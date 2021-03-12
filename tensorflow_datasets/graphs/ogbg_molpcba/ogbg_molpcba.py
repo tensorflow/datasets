@@ -61,7 +61,7 @@ Not all targets apply to each molecule: missing targets are indicated by NaNs.
 [3]: Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes,
      Caleb Geniesse, Aneesh S. Pappu, Karl Leswing, and Vijay Pande.
      MoleculeNet: a benchmark for molecular machine learning.
-     Chemical Science, 9(2):513–530, 2018.
+     Chemical Science, 9(2):513-530, 2018.
 """
 
 _CITATION = """
@@ -75,7 +75,7 @@ _CITATION = """
                Michele Catasta and
                Jure Leskovec},
   editor    = {Hugo Larochelle and
-               Marc\'Aurelio Ranzato and
+               Marc{'}Aurelio Ranzato and
                Raia Hadsell and
                Maria{-}Florina Balcan and
                Hsuan{-}Tien Lin},
