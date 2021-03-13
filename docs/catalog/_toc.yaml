@@ -467,6 +467,9 @@ toc:
     title: trec
   - path: /datasets/catalog/wiki40b
     title: wiki40b
+  - path: /datasets/catalog/wikiann
+    status: nightly
+    title: wikiann
   - path: /datasets/catalog/wikipedia
     title: wikipedia
   - path: /datasets/catalog/wikipedia_toxicity_subtypes
