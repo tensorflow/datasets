@@ -31,12 +31,6 @@ tower etc.
     *   **`3.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
 *   **Features**:
 
 ```python
@@ -74,6 +68,12 @@ FeaturesDict({
 *   **Config description**: Images of category classroom
 
 *   **Download size**: `3.06 GiB`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -127,6 +127,12 @@ $(document).ready(() => {
 
 *   **Download size**: `42.77 GiB`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split          | Examples
@@ -178,6 +184,12 @@ $(document).ready(() => {
 *   **Config description**: Images of category bridge
 
 *   **Download size**: `15.35 GiB`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -231,6 +243,12 @@ $(document).ready(() => {
 
 *   **Download size**: `2.29 GiB`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split          | Examples
@@ -282,6 +300,12 @@ $(document).ready(() => {
 *   **Config description**: Images of category conference_room
 
 *   **Download size**: `3.78 GiB`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -335,6 +359,12 @@ $(document).ready(() => {
 
 *   **Download size**: `10.80 GiB`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split          | Examples
@@ -386,6 +416,12 @@ $(document).ready(() => {
 *   **Config description**: Images of category kitchen
 
 *   **Download size**: `33.34 GiB`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -439,6 +475,12 @@ $(document).ready(() => {
 
 *   **Download size**: `21.23 GiB`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split          | Examples
@@ -490,6 +532,12 @@ $(document).ready(() => {
 *   **Config description**: Images of category restaurant
 
 *   **Download size**: `12.57 GiB`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -543,6 +591,12 @@ $(document).ready(() => {
 
 *   **Download size**: `11.19 GiB`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split          | Examples
@@ -593,12 +647,19 @@ $(document).ready(() => {
 
 *   **Config description**: Images of category airplane
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `33.72 GiB`
+
+*   **Dataset size**: `29.88 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,530,696
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -613,6 +674,12 @@ Split | Examples
 *   **Config description**: Images of category bicycle
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -633,6 +700,12 @@ Split | Examples
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -651,6 +724,12 @@ Split | Examples
 *   **Config description**: Images of category boat
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -671,6 +750,12 @@ Split | Examples
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -689,6 +774,12 @@ Split | Examples
 *   **Config description**: Images of category bus
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -709,6 +800,12 @@ Split | Examples
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -727,6 +824,12 @@ Split | Examples
 *   **Config description**: Images of category cat
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -747,6 +850,12 @@ Split | Examples
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -765,6 +874,12 @@ Split | Examples
 *   **Config description**: Images of category cow
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -785,6 +900,12 @@ Split | Examples
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -803,6 +924,12 @@ Split | Examples
 *   **Config description**: Images of category dog
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -823,6 +950,12 @@ Split | Examples
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -841,6 +974,12 @@ Split | Examples
 *   **Config description**: Images of category motorbike
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -861,6 +1000,12 @@ Split | Examples
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -879,6 +1024,12 @@ Split | Examples
 *   **Config description**: Images of category sheep
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
@@ -899,6 +1050,12 @@ Split | Examples
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -918,6 +1075,12 @@ Split | Examples
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Splits**:
 
 Split | Examples
@@ -936,6 +1099,12 @@ Split | Examples
 *   **Config description**: Images of category tv-monitor
 
 *   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
