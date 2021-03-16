@@ -347,3 +347,9 @@ def test_copy():
   assert src_path.exists()
   assert src_path.parent.joinpath('bar.py').read_text() == 'abc'
   assert src_path.parent.joinpath('bar2.py').read_text() == 'abc'
+
+
+def test_format():
+  template_path = gpathlib.PosixGPath('/home/{user}/foo.py')
+  template_path = template_path.format(user='adibou')
+  assert template_path == gpathlib.PosixGPath('/home/adibou/foo.py')

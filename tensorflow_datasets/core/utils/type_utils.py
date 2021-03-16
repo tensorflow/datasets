@@ -177,6 +177,10 @@ class ReadOnlyPath(PurePath, Protocol):
     with self.open('r', encoding=encoding) as f:
       return f.read()
 
+  def format(self: T, *args: Any, **kwargs: Any) -> T:
+    """Apply `str.format()` to the path."""
+    return type(self)(os.fspath(self).format(*args, **kwargs))  # pytype: disable=not-instantiable
+
 
 class ReadWritePath(ReadOnlyPath, Protocol):
   """Protocol for pathlib.Path-like API.
