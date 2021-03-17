@@ -190,3 +190,13 @@ def test_mock_data_use_files(tmp_path):
   ):
     with pytest.raises(ValueError, match='copy the real metadata files'):
       tfds.load('mnist')
+
+
+def test_cardinality():
+  with tfds.testing.mock_data(num_examples=8):
+    ds = tfds.load('mnist', split='train')
+    assert ds.cardinality().numpy().item() == 8
+
+  with tfds.testing.mock_data(num_examples=15):
+    ds = tfds.load('mnist', split='train')
+    assert ds.cardinality().numpy().item() == 15

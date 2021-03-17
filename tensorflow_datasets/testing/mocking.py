@@ -198,6 +198,7 @@ def mock_data(
         output_types=tf.nest.map_structure(lambda t: t.dtype, specs),
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
     )
+    ds = ds.apply(tf.data.experimental.assert_cardinality(num_examples))
     ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
     if read_config and read_config.add_tfds_id:
