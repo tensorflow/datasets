@@ -29,10 +29,17 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
 
 def _list_datasets(args: argparse.Namespace) -> None:
   """Lists the datasets/namespaces. Executed by `tfds list <flags> <name>`."""
-  list_datasets()
-
+  if not args.namespace and not args.search_query:
+    list_datasets()
+  elif args.namespace:
+    list_namespace_datasets(namespace: args.namespace)
+  elif args.search_query:
+    search_datasets(search_query: args.search_query)
 
 def list_datasets():
   datasets = load.list_builders(with_community_datasets=True)
   for dataset in datasets:
     print(dataset)
+
+def list_namespace_datasets(namespace: str) -> None:
+  
