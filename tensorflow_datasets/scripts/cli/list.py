@@ -18,7 +18,11 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   )
 
   new_parser.add_argument(
-    ''
+    '--search',
+    type=str,
+    nargs='+',
+    dest='search_query',
+    help='Search flag to display all datasets containing the searched query'
   )
   new_parser.set_defaults(subparser_fn=_list_datasets)
 
