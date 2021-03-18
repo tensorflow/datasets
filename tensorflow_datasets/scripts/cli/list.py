@@ -13,11 +13,13 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   new_parser.add_argument(
     '--namespace',
     type=str,
-    nargs='*',
-    dest='namespace_keyword',
+    nargs='+',
     help='Namespace flag for displaying datasets from given namespace'
   )
 
+  new_parser.add_argument(
+    ''
+  )
   new_parser.set_defaults(subparser_fn=_list_datasets)
 
 
