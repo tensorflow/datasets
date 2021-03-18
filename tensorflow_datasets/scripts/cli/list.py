@@ -21,7 +21,7 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   new_parser.add_argument(
     '--search',
     type=str,
-    nargs='+',
+    nargs=1,
     dest='search_query',
     help='Search flag to display all datasets containing the searched query'
   )
@@ -49,7 +49,7 @@ def list_namespace_datasets(namespace: str) -> None:
   if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
     datasets = community.community_register.list_builders()
 
-  print(f"Datasets associated with `{namespace[0]}` namespace:")
+  print(f"Datasets associated with `{namespace[0]}` namespace:\n")
   #Getting all datasets for given namespace
   for dataset in datasets:
     if dataset.split(':')[0] == namespace[0]:
@@ -59,3 +59,17 @@ def list_namespace_datasets(namespace: str) -> None:
 
   if not dataset_found:
     print("No datasets match given namespace.")
+
+def search_datasets(search_query: str) -> None:
+  datasets = load.list_builders()
+  dataset_found = False
+  #Search for matching datasets
+  print(f"Datasets resembling `{search_query[0]}`:\n")
+  for dataset in datasets:
+    if search_query[0] in dataset:
+      print(dataset)
+      if not dataset_found:
+        dataset_found = True
+
+  if not dataset_found:
+    print("No datasets match given query.")
