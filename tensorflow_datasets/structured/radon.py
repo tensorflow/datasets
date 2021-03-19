@@ -20,13 +20,13 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import os
 
 import numpy as np
+import six.moves.urllib as urllib
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-BASE_URL = 'http://www.stat.columbia.edu/~gelman/arm/examples/radon'
+BASE_URL = 'http://www.stat.columbia.edu/~gelman/arm/examples/radon/'
 
 _CITATION = """\
 @book{GelmanHill:2007,
@@ -113,8 +113,8 @@ class Radon(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     paths = dl_manager.download({
-        'file_path_srrs2': os.path.join(BASE_URL, 'srrs2.dat'),
-        'file_path_cty': os.path.join(BASE_URL, 'cty.dat')
+        'file_path_srrs2': urllib.parse.urljoin(BASE_URL, 'srrs2.dat'),
+        'file_path_cty': urllib.parse.urljoin(BASE_URL, 'cty.dat')
     })
     return [
         tfds.core.SplitGenerator(
