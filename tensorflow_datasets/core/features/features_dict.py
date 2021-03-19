@@ -195,8 +195,9 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
       try:
         example[k] = feature.encode_example(example_value)
       except Exception as e:  # pylint: disable=broad-except
-        utils.reraise(e, prefix=f'In <{feature.__class__.__name__}>'
-                      + f' with name "{k}":\n')
+        utils.reraise(
+            e, prefix=f'In <{feature.__class__.__name__}> with name "{k}":\n'
+        )
     return example
 
   def _flatten(self, x):
