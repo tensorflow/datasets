@@ -187,10 +187,13 @@ class _PackageIndex(collections.UserDict):
 
       #Checking for unsuccessful fetch on windows os
       if 'win' in sys.platform:
+        logging.info(
+            'Using local cache for windows OS'
+        )
         local_cache = tfds_path().joinpath('community-datasets-list.jsonl')
         content = local_cache.read_text()
       else:
-      return
+        return
 
     # If read was sucessful, update the cache with the new dataset list
     self._cached_path.write_text(content)
