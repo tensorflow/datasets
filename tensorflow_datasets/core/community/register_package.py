@@ -25,6 +25,7 @@ from typing import Any, List, Optional, Type
 from absl import logging
 
 import dataclasses
+import sys
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import registered
@@ -35,6 +36,7 @@ from tensorflow_datasets.core.community import load
 from tensorflow_datasets.core.community import register_base
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils import tfds_path
 
 # Datasets are installed as `import tfds_community.<ns>.<ds>.<hash>`
 _IMPORT_MODULE_NAME = 'tfds_community'
