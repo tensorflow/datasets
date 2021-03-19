@@ -19,7 +19,7 @@ import abc
 import enum
 import os
 
-from typing import Any, ClassVar, Iterable
+from typing import Any, ClassVar, Iterable, Optional
 
 import tensorflow.compat.v2 as tf
 
@@ -54,15 +54,26 @@ class FileAdapter(abc.ABC):
   PATH_SUFFIX = ClassVar[str]
 
   @abc.abstractclassmethod
-  def make_tf_data(cls,
-                   filename: type_utils.PathLike,
-                   buffer_size: tf.int64) -> tf.data.Dataset:
+  def make_tf_data(
+      cls,
+      filename: type_utils.PathLike,
+      buffer_size: Optional[int] = None) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     raise NotImplementedError()
 
   @abc.abstractclassmethod
-  def write_examples(cls, path: type_utils.PathLike, iterator: Iterable[bytes]):
-    """Write examples from given iterator in given path."""
+  def write_examples(cls, path: type_utils.PathLike,
+                     iterator: Iterable[bytes]) -> Optional[Iterable[Any]]:
+    """Write examples from given iterator in given path.
+
+    Args:
+      path: Path where to write the examples.
+      iterator: Iterable of examples.
+
+    Returns:
+      List of record positions for each record in the given iterator. In case of
+      TFRecords, does not return anything.
+    """
     raise NotImplementedError()
 
 
@@ -72,15 +83,25 @@ class TfRecordFileAdapter(FileAdapter):
   FILE_SUFFIX = 'tfrecord'
 
   @classmethod
-  def make_tf_data(cls,
-                   filename: type_utils.PathLike,
-                   buffer_size: tf.int64) -> tf.data.Dataset:
+  def make_tf_data(
+      cls,
+      filename: type_utils.PathLike,
+      buffer_size: Optional[int] = None) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     return tf.data.TFRecordDataset(filename, buffer_size=buffer_size)
 
   @classmethod
-  def write_examples(cls, path: type_utils.PathLike, iterator: Iterable[bytes]):
-    """Write examples from given iterator in given path."""
+  def write_examples(cls, path: type_utils.PathLike,
+                     iterator: Iterable[bytes]) -> Optional[Iterable[Any]]:
+    """Write examples from given iterator in given path.
+
+    Args:
+      path: Path where to write the examples.
+      iterator: Iterable of examples.
+
+    Returns:
+      None
+    """
     with tf.io.TFRecordWriter(os.fspath(path)) as writer:
       for serialized_example in iterator:
         writer.write(serialized_example)
@@ -93,19 +114,29 @@ class RiegeliFileAdapter(FileAdapter):
   FILE_SUFFIX = 'riegeli'
 
   @classmethod
-  def make_tf_data(cls,
-                   filename: type_utils.PathLike,
-                   buffer_size: tf.int64) -> tf.data.Dataset:
+  def make_tf_data(
+      cls,
+      filename: type_utils.PathLike,
+      buffer_size: Optional[int] = None) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     return riegeli_tf.RiegeliDataset(filename, buffer_size=buffer_size)
 
   @classmethod
-  def write_examples(cls, path: type_utils.PathLike, iterator: Iterable[bytes]):
-    """Write examples from given iterator in given path."""
+  def write_examples(cls, path: type_utils.PathLike,
+                     iterator: Iterable[bytes]) -> Optional[Iterable[Any]]:
+    """Write examples from given iterator in given path.
+
+    Args:
+      path: Path where to write the examples.
+      iterator: Iterable of examples.
+
+    Returns:
+      List of record positions for each record in the given iterator.
+    """
     with riegeli.RecordWriter(
         tf.io.gfile.GFile(os.fspath(path), 'wb'),
         options='transpose') as writer:
-      writer.write_records(records=iterator)
+      return writer.write_records_with_keys(records=iterator)
 
 
 # Create a mapping from FileFormat -> FileAdapter.

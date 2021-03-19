@@ -15,6 +15,7 @@
 
 """Tests for tensorflow_datasets.core.tfrecords_writer."""
 
+import json
 import os
 from unittest import mock
 
@@ -23,8 +24,10 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import tfrecords_writer
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.tfrecords_writer import _ShardSpec
 from tensorflow_datasets.core.utils import shard_utils
 
@@ -40,33 +43,47 @@ class GetShardSpecsTest(testing.TestCase):
     specs = tfrecords_writer._get_shard_specs(
         num_examples=8, total_size=16, bucket_lengths=[8],
         path='/bar.tfrecord')
-    self.assertEqual(specs, [
-        # Shard#, path, from_bucket, examples_number, reading instructions.
-        _ShardSpec(0, '/bar.tfrecord-00000-of-00006', 1, [
-            shard_utils.FileInstruction(
-                filename='0', skip=0, take=1, num_examples=1),
-        ]),
-        _ShardSpec(1, '/bar.tfrecord-00001-of-00006', 2, [
-            shard_utils.FileInstruction(
-                filename='0', skip=1, take=2, num_examples=2),
-        ]),
-        _ShardSpec(2, '/bar.tfrecord-00002-of-00006', 1, [
-            shard_utils.FileInstruction(
-                filename='0', skip=3, take=1, num_examples=1),
-        ]),
-        _ShardSpec(3, '/bar.tfrecord-00003-of-00006', 1, [
-            shard_utils.FileInstruction(
-                filename='0', skip=4, take=1, num_examples=1),
-        ]),
-        _ShardSpec(4, '/bar.tfrecord-00004-of-00006', 2, [
-            shard_utils.FileInstruction(
-                filename='0', skip=5, take=2, num_examples=2),
-        ]),
-        _ShardSpec(5, '/bar.tfrecord-00005-of-00006', 1, [
-            shard_utils.FileInstruction(
-                filename='0', skip=7, take=-1, num_examples=1),
-        ]),
-    ])
+    self.assertEqual(
+        specs,
+        [
+            # Shard#, path, from_bucket, examples_number, reading instructions.
+            _ShardSpec(0, '/bar.tfrecord-00000-of-00006',
+                       '/bar.tfrecord-00000-of-00006_index.json',
+                       1, [
+                           shard_utils.FileInstruction(
+                               filename='0', skip=0, take=1, num_examples=1),
+                       ]),
+            _ShardSpec(1, '/bar.tfrecord-00001-of-00006',
+                       '/bar.tfrecord-00001-of-00006_index.json',
+                       2, [
+                           shard_utils.FileInstruction(
+                               filename='0', skip=1, take=2, num_examples=2),
+                       ]),
+            _ShardSpec(2, '/bar.tfrecord-00002-of-00006',
+                       '/bar.tfrecord-00002-of-00006_index.json',
+                       1, [
+                           shard_utils.FileInstruction(
+                               filename='0', skip=3, take=1, num_examples=1),
+                       ]),
+            _ShardSpec(3, '/bar.tfrecord-00003-of-00006',
+                       '/bar.tfrecord-00003-of-00006_index.json',
+                       1, [
+                           shard_utils.FileInstruction(
+                               filename='0', skip=4, take=1, num_examples=1),
+                       ]),
+            _ShardSpec(4, '/bar.tfrecord-00004-of-00006',
+                       '/bar.tfrecord-00004-of-00006_index.json',
+                       2, [
+                           shard_utils.FileInstruction(
+                               filename='0', skip=5, take=2, num_examples=2),
+                       ]),
+            _ShardSpec(5, '/bar.tfrecord-00005-of-00006',
+                       '/bar.tfrecord-00005-of-00006_index.json',
+                       1, [
+                           shard_utils.FileInstruction(
+                               filename='0', skip=7, take=-1, num_examples=1),
+                       ]),
+        ])
 
   @mock.patch.object(
       tfrecords_writer, '_get_number_shards', mock.Mock(return_value=2)
@@ -75,21 +92,27 @@ class GetShardSpecsTest(testing.TestCase):
     specs = tfrecords_writer._get_shard_specs(
         num_examples=8, total_size=16, bucket_lengths=[2, 3, 0, 3],
         path='/bar.tfrecord')
-    self.assertEqual(specs, [
-        # Shard#, path, examples_number, reading instructions.
-        _ShardSpec(0, '/bar.tfrecord-00000-of-00002', 4, [
-            shard_utils.FileInstruction(
-                filename='0', skip=0, take=-1, num_examples=2),
-            shard_utils.FileInstruction(
-                filename='1', skip=0, take=2, num_examples=2),
-        ]),
-        _ShardSpec(1, '/bar.tfrecord-00001-of-00002', 4, [
-            shard_utils.FileInstruction(
-                filename='1', skip=2, take=-1, num_examples=1),
-            shard_utils.FileInstruction(
-                filename='3', skip=0, take=-1, num_examples=3),
-        ]),
-    ])
+    self.assertEqual(
+        specs,
+        [
+            # Shard#, path, examples_number, reading instructions.
+            _ShardSpec(0, '/bar.tfrecord-00000-of-00002',
+                       '/bar.tfrecord-00000-of-00002_index.json',
+                       4, [
+                           shard_utils.FileInstruction(
+                               filename='0', skip=0, take=-1, num_examples=2),
+                           shard_utils.FileInstruction(
+                               filename='1', skip=0, take=2, num_examples=2),
+                       ]),
+            _ShardSpec(1, '/bar.tfrecord-00001-of-00002',
+                       '/bar.tfrecord-00001-of-00002_index.json',
+                       4, [
+                           shard_utils.FileInstruction(
+                               filename='1', skip=2, take=-1, num_examples=1),
+                           shard_utils.FileInstruction(
+                               filename='3', skip=0, take=-1, num_examples=3),
+                       ]),
+        ])
 
 
 class GetNumberShardsTest(testing.TestCase):
@@ -131,17 +154,42 @@ class GetNumberShardsTest(testing.TestCase):
     self.assertEqual(n, 4)
 
 
-def _read_records(path):
+def _read_records(path, file_format=file_adapters.DEFAULT_FILE_FORMAT):
   """Returns (files_names, list_of_records_in_each_file).
 
   Args:
     path: path to tfrecord, omitting suffix.
+    file_format: format of the record files.
   """
+  # Ignore _index.json files.
   paths = sorted(tf.io.gfile.glob('%s-*-of-*' % path))
-  fnames = [os.path.basename(p) for p in paths]
-  all_recs = [list(dataset_utils.as_numpy(tf.data.TFRecordDataset(fpath)))
-              for fpath in paths]
-  return fnames, all_recs
+  paths = [
+      p for p in paths if not p.endswith(tfrecords_writer._INDEX_PATH_SUFFIX)
+  ]
+  all_recs = []
+  for fpath in paths:
+    all_recs.append(
+        list(
+            dataset_utils.as_numpy(
+                file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
+                    fpath))))
+  return [os.path.basename(p) for p in paths], all_recs
+
+
+def _read_indices(path):
+  """Returns (files_name, list of index in each file).
+
+  Args:
+    path: path to index, omitting suffix.
+  """
+  paths = sorted(tf.io.gfile.glob('%s-*-of-*_index.json' % path))
+  all_indices = []
+  for path in paths:
+    json_str = utils.as_path(path).read_text()
+    # parse it back into a proto.
+    shard_index = json.loads(json_str)
+    all_indices.append(list(shard_index['index']))
+  return [os.path.basename(p) for p in paths], all_indices
 
 
 class WriterTest(testing.TestCase):
@@ -149,15 +197,20 @@ class WriterTest(testing.TestCase):
   EMPTY_SPLIT_ERROR = 'No examples were yielded.'
   TOO_SMALL_SPLIT_ERROR = 'num_examples (1) < number_of_shards (2)'
 
-  @mock.patch.object(
-      example_serializer, 'ExampleSerializer', testing.DummySerializer)
-  def _write(self, to_write, path, salt=''):
-    writer = tfrecords_writer.Writer('some spec', path, hash_salt=salt)
+  @mock.patch.object(example_serializer, 'ExampleSerializer',
+                     testing.DummySerializer)
+  def _write(self,
+             to_write,
+             path,
+             salt='',
+             file_format=file_adapters.DEFAULT_FILE_FORMAT):
+    writer = tfrecords_writer.Writer(
+        'some spec', path, hash_salt=salt, file_format=file_format)
     for key, record in to_write:
       writer.write(key, record)
     return writer.finalize()
 
-  def test_write(self):
+  def test_write_tfrecord(self):
     """Writes 8 records in 5 shards.
 
     Number of records is evenly distributed (2-1-2-1-2).
@@ -176,11 +229,14 @@ class WriterTest(testing.TestCase):
     self.assertEqual(shards_length, [2, 1, 2, 1, 2])
     self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
     self.assertEqual(written_files,
                      ['foo.tfrecord-0000%s-of-00005' % i for i in range(5)])
     self.assertEqual(all_recs, [
         [b'f', b'g'], [b'd'], [b'a', b'b'], [b'hi'], [b'e', b'c'],
     ])
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
 
   @mock.patch.object(
       example_parser, 'ExampleParser', testing.DummyParser)
@@ -218,9 +274,14 @@ class TfrecordsWriterBeamTest(WriterTest):
 
   @mock.patch.object(
       example_serializer, 'ExampleSerializer', testing.DummySerializer)
-  def _write(self, to_write, path, salt=''):
+  def _write(self,
+             to_write,
+             path,
+             salt='',
+             file_format=file_adapters.DEFAULT_FILE_FORMAT):
     beam = lazy_imports_lib.lazy_imports.apache_beam
-    writer = tfrecords_writer.BeamWriter('some spec', path, salt)
+    writer = tfrecords_writer.BeamWriter(
+        'some spec', path, salt, file_format=file_format)
     # Here we need to disable type check as `beam.Create` is not capable of
     # inferring the type of the PCollection elements.
     options = beam.options.pipeline_options.PipelineOptions(
