@@ -147,7 +147,6 @@ def _async_tqdm(*args, **kwargs):
     pbar = _TqdmPbarAsync(pbar)
     yield pbar
     pbar.clear()  # pop pbar from the active list of pbar
-    print()  # Avoid the next log to overlapp with the bar
 
 
 class _TqdmPbarAsync(object):
