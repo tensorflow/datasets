@@ -102,9 +102,6 @@ class DatasetBuilderTestCase(
     * BUILDER_CONFIG_NAMES_TO_TEST: `list[str | tfds.core.BuilderConfig]`,
       the list of builder configs that should be tested. If None, all the
       BUILDER_CONFIGS from the class will be tested.
-    * BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs
-      that should be tested. If None, all the BUILDER_CONFIGS from the class
-      will be tested.
     * DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
