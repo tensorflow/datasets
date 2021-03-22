@@ -32,6 +32,7 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
@@ -483,6 +484,7 @@ class DatasetBuilder(registered.RegisteredDataset):
           self.info.write_to_directory(self._data_dir)
     self._log_download_done()
 
+  @tfds_logging.as_dataset
   def as_dataset(
       self,
       split=None,
@@ -572,8 +574,6 @@ class DatasetBuilder(registered.RegisteredDataset):
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
     # pylint: enable=line-too-long
-    logging.info("Constructing tf.data.Dataset for split %s, from %s",
-                 split, self._data_dir)
     if not tf.io.gfile.exists(self._data_dir):
       raise AssertionError(
           ("Dataset %s: could not find data in %s. Please make sure to call "

@@ -15,12 +15,15 @@
 
 """Tests for tensorflow_datasets.core.dataset_builder_read."""
 
+from unittest import mock
+
 import pytest
 
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 
@@ -72,3 +75,37 @@ def test_add_tfds_id_as_supervised(
       tf.TensorSpec(shape=(), dtype=tf.int64),
       tf.TensorSpec(shape=(), dtype=tf.int64),
   )
+
+
+def test_registered_logger_is_called(
+    dummy_builder: dataset_builder.DatasetBuilder,  # pylint: disable=redefined-outer-name
+    ):
+  logger = mock.MagicMock()
+  tfds_logging.register(logger)
+
+  read_config = read_config_lib.ReadConfig(add_tfds_id=True)
+  read_config.try_autocache = False
+  read_config.num_parallel_calls_for_decode = 42
+  ds = dummy_builder.as_dataset(
+      split='train', read_config=read_config, as_supervised=True,
+  )
+  # Logging doesn't change the result:
+  assert ds.element_spec == (
+      tf.TensorSpec(shape=(), dtype=tf.int64),
+      tf.TensorSpec(shape=(), dtype=tf.int64),
+  )
+  # Logger was indeed called:
+  assert logger.as_dataset.call_args_list == [
+      mock.call(
+          dataset_name='dummy_dataset',
+          config_name='',
+          version='1.0.0',
+          data_path=mock.ANY,
+          split='train',
+          shuffle_files=False,
+          as_supervised=True,
+          batch_size=None,
+          decoders=None,
+          read_config=read_config,
+      )
+  ]
