@@ -389,6 +389,9 @@ toc:
     title: cos_e
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/dolphin_number_word
+    status: nightly
+    title: dolphin_number_word
   - path: /datasets/catalog/drop
     title: drop
   - path: /datasets/catalog/eraser_multi_rc
