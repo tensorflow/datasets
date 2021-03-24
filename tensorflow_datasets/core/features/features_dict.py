@@ -80,7 +80,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   For nested features, the FeaturesDict will internally flatten the keys for the
   features and the conversion to tf.train.Example. Indeed, the tf.train.Example
-  proto do not support nested feature, while tf.data.Dataset does.
+  proto do not support nested features while tf.data.Dataset does.
   But internal transformation should be invisible to the user.
 
   Example:
