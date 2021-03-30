@@ -289,7 +289,7 @@ def _split_generators(self, dl_manager):
 This method will typically read source dataset artifacts (e.g. a CSV file) and
 yield `(key, feature_dict)` tuples:
 
-*   `key`: Example identifier. Used to deterministically suffle the examples
+*   `key`: Example identifier. Used to deterministically shuffle the examples
     using `hash(key)`. Should be:
     *   **unique**: If two examples use the same key, an exception will be
         raised.
