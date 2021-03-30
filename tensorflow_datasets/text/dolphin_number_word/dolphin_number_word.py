@@ -59,7 +59,7 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
             'index': tf.int32,
             'text': tfds.features.Text(),
             'sources': tfds.features.Sequence(tfds.features.Text()),
-            'equations': tfds.features.Sequence(tfds.features.Text()),
+            'equations': tfds.features.Text(),
             'ans': tfds.features.Text(),
         }),
         supervised_keys=('text', 'ans'),  # Alternatively text, ans.
@@ -91,6 +91,9 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
             e['sources'] = [e['sources'],]
         else:
           e['sources'] = []
+        # 'equations' will be a RaggedTensor unless we flatten it into a single
+        # string.
+        e['equations'] = '  '.join(e['equations'])
         # Dataset appears to have duplicate entries, we add an internal
         # count to the provided entry's ID to bypass this error.
         e['id'] = e['id'] + str(self.__count__)
