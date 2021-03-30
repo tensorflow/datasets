@@ -100,7 +100,7 @@ class CivilCommentsConfig(tfds.core.BuilderConfig):
 
   def __init__(self, name, description, include_identity_labels):
     super(CivilCommentsConfig, self).__init__(
-        name=name, description=description, version=tfds.core.Version('1.0.0'))
+        name=name, description=description, version=tfds.core.Version('1.0.1'))
     self.include_identity_labels = include_identity_labels
 
 
@@ -134,7 +134,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     features = {'text': tfds.features.Text()}
     labels = [
-        'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',
+        'id', 'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',
         'identity_attack', 'sexual_explicit'
     ]
     if self.builder_config.include_identity_labels:
@@ -194,6 +194,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
 
   def _parse_row_as_example(self, row, toxicity_label, other_labels):
     example = {}
+    example['id'] = row['id']
     example['text'] = row['comment_text']
     example['toxicity'] = float(row[toxicity_label])
 
