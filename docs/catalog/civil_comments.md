@@ -11,6 +11,11 @@
 
 # `civil_comments`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This version of the CivilComments Dataset provides access to the primary seven
@@ -46,7 +51,9 @@ released under CC0, as is the underlying comment text.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): No release notes.
+    *   **`1.0.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `395.73 MiB`
 
@@ -91,7 +98,7 @@ released under CC0, as is the underlying comment text.
     but only the basic seven labels (toxicity, severe_toxicity, obscene, threat,
     insult, identity_attack, and sexual_explicit).
 
-*   **Dataset size**: `929.13 MiB`
+*   **Dataset size**: `959.64 MiB`
 
 *   **Splits**:
 
@@ -105,6 +112,7 @@ Split          | Examples
 
 ```python
 FeaturesDict({
+    'id': tf.float32,
     'identity_attack': tf.float32,
     'insult': tf.float32,
     'obscene': tf.float32,
@@ -127,7 +135,7 @@ FeaturesDict({
 <div id="dataframecontent" style="overflow-x:scroll"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilComments-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilComments-1.0.1.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -157,7 +165,7 @@ $(document).ready(() => {
     However, it only includes the subset (roughly a quarter) of the data with
     all these features.
 
-*   **Dataset size**: `503.34 MiB`
+*   **Dataset size**: `510.17 MiB`
 
 *   **Splits**:
 
@@ -181,6 +189,7 @@ FeaturesDict({
     'heterosexual': tf.float32,
     'hindu': tf.float32,
     'homosexual_gay_or_lesbian': tf.float32,
+    'id': tf.float32,
     'identity_attack': tf.float32,
     'insult': tf.float32,
     'intellectual_or_learning_disability': tf.float32,
@@ -217,7 +226,7 @@ FeaturesDict({
 <div id="dataframecontent" style="overflow-x:scroll"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsIdentities-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsIdentities-1.0.1.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).

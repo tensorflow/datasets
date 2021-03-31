@@ -50,7 +50,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'ans': Text(shape=(), dtype=tf.string),
-    'equations': Sequence(Text(shape=(), dtype=tf.string)),
+    'equations': Text(shape=(), dtype=tf.string),
     'id': Text(shape=(), dtype=tf.string),
     'index': tf.int32,
     'sources': Sequence(Text(shape=(), dtype=tf.string)),
