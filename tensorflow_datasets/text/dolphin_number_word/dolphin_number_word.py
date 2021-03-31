@@ -43,9 +43,11 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for dolphin_number_word problem dataset."""
   __count__ = 0
 
-  VERSION = tfds.core.Version('0.0.1')
+  VERSION = tfds.core.Version('0.0.2')
   RELEASE_NOTES = {
       '0.0.1': 'Initial release.',
+      '0.0.2': 'RaggedTensor fix. Equations and Sources represented as a single'
+               'string with components delimited by spaces',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -58,8 +60,8 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
             'id': tfds.features.Text(),
             'index': tf.int32,
             'text': tfds.features.Text(),
-            'sources': tfds.features.Sequence(tfds.features.Text()),
-            'equations': tfds.features.Text(),
+            'sources': tfds.features.Text(),  # Flattened list of str.
+            'equations': tfds.features.Text(),  # Flattened list of str.
             'ans': tfds.features.Text(),
         }),
         supervised_keys=('text', 'ans'),  # Alternatively text, ans.
@@ -84,15 +86,10 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
       for e in examples:
         # Per author's recommendation, we discard the ans_simple field.
         e.pop('ans_simple')
-        # For elements that are of type Union[str, List[str]], we must make them
-        # uniformly one or the other. In this case, we cast to type List[str].
-        if 'sources' in e:
-          if isinstance(e['sources'], str):
-            e['sources'] = [e['sources'],]
-        else:
-          e['sources'] = []
-        # 'equations' will be a RaggedTensor unless we flatten it into a single
-        # string.
+        # 'equations' and 'sources' will be a RaggedTensor unless we flatten
+        # them into a single string. RaggedTensors are not compatible with
+        # t5 tasks.
+        e['sources'] = '  '.join(e['sources'])
         e['equations'] = '  '.join(e['equations'])
         # Dataset appears to have duplicate entries, we add an internal
         # count to the provided entry's ID to bypass this error.
