@@ -45,9 +45,14 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('0.0.2')
   RELEASE_NOTES = {
-      '0.0.1': 'Initial release.',
-      '0.0.2': 'RaggedTensor fix. Equations and Sources represented as a single'
-               'string with components delimited by spaces',
+      '0.0.1':
+          'Initial release.',
+      '0.0.2':
+          'RaggedTensor fix. Equations and Sources represented as a single'
+          'string with components delimited by spaces',
+      '0.0.3':
+          'Reintroduced logic to handle edge-case involving examples without '
+          'sources.'
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -89,7 +94,10 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
         # 'equations' and 'sources' will be a RaggedTensor unless we flatten
         # them into a single string. RaggedTensors are not compatible with
         # t5 tasks.
-        e['sources'] = '  '.join(e['sources'])
+        if 'sources' in e:
+          e['sources'] = '  '.join(e['sources'])
+        else:
+          e['sources'] = ''
         e['equations'] = '  '.join(e['equations'])
         # Dataset appears to have duplicate entries, we add an internal
         # count to the provided entry's ID to bypass this error.
