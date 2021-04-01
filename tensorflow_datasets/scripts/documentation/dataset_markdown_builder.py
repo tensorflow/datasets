@@ -418,9 +418,12 @@ class DatasetDataframeSection(Section):
   EXTRA_DOC = (
       ' ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe))'
   )
+  # Artificially limit the amount of dataframe blocks to optimize page loading.
+  _MAX_DATAFRAME_BLOCKS = 100
 
   def __init__(self, dataframe_util):
     self._dataframe_util = dataframe_util
+    self._blocks_generated = 0
 
   def get_key(self, builder: tfds.core.DatasetBuilder):
     if self._dataframe_util.has_visualization(builder):
@@ -428,8 +431,11 @@ class DatasetDataframeSection(Section):
     return None  # Fuse the sections together if no configs are available
 
   def content(self, builder: tfds.core.DatasetBuilder):
+    if self._blocks_generated >= self._MAX_DATAFRAME_BLOCKS:
+      return f'Only shown for the first {self._MAX_DATAFRAME_BLOCKS} configs.'
     if not self._dataframe_util.has_visualization(builder):
       return 'Missing.'
+    self._blocks_generated += 1
     return Block(self._dataframe_util.get_html_tag(builder))
 
 
