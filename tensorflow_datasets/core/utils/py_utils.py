@@ -355,9 +355,10 @@ def reraise(
     # `type(type(e).__name__, (ReraisedError, type(e)), {})`, but should be
     # carefull when nesting `reraise` as well as compatibility with external
     # code.
-    # Special case ModuleNotFoundError, ImportError which can be re-raised
-    # with the same type.
-    if isinstance(e, ImportError):
+    # Some base exception class (ImportError, OSError) and subclasses (
+    # ModuleNotFoundError, FileNotFoundError) have custom `__str__` error
+    # message. We re-raise those with same type to allow except in caller code.
+    if isinstance(e, (ImportError, OSError)):
       exception = type(e)(msg)
     else:
       exception = RuntimeError(f'{type(e).__name__}: {msg}')
