@@ -187,6 +187,13 @@ def dataset_name():
             'version': '1.0.0',
             'config': 'conf',
         })),
+        (
+            'grand-vision:katr/128x128:1.0.0',
+            (naming.DatasetName('grand-vision:katr'), {
+                'version': '1.0.0',
+                'config': '128x128',
+            })
+        ),
     ],
 )
 def test_parse_builder_name_kwargs(name, result):

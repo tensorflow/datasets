@@ -30,7 +30,7 @@ _all_cap_re = re.compile('([a-z0-9])([A-Z])')
 # Regex matching 'dataset/config:1.*.*/arg=123'
 _NAME_REG = re.compile(
     r'^'
-    r'(?P<dataset_name>([\w]+:)?[\w]+)'
+    r'(?P<dataset_name>([\w\-]+:)?[\w]+)'
     r'(/(?P<config>[\w\-\.]+))?'
     r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
     r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
