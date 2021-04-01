@@ -28,11 +28,15 @@ https://www.microsoft.com/en-us/research/uploads/prod/2016/02//dolphin-sigmadolp
 
 *   **Versions**:
 
-    *   **`0.0.1`** (default): Initial release.
+    *   `0.0.1`: Initial release.
+    *   **`0.0.2`** (default): RaggedTensor fix. Equations and Sources
+        represented as a singlestring with components delimited by spaces
+    *   `0.0.3`: Reintroduced logic to handle edge-case involving examples
+        without sources.
 
 *   **Download size**: `280.42 KiB`
 
-*   **Dataset size**: `1.26 MiB`
+*   **Dataset size**: `1.49 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -53,7 +57,7 @@ FeaturesDict({
     'equations': Text(shape=(), dtype=tf.string),
     'id': Text(shape=(), dtype=tf.string),
     'index': tf.int32,
-    'sources': Sequence(Text(shape=(), dtype=tf.string)),
+    'sources': Text(shape=(), dtype=tf.string),
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
@@ -81,34 +85,4 @@ doi = {10.18653/v1/D15-1135}
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/dolphin_number_word-0.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+    Missing.
