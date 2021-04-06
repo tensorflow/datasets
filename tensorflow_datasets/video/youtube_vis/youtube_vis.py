@@ -56,6 +56,8 @@ _CITATION = """
 }
 """
 
+NUM_TRAIN_EXAMPLES = 2238
+
 NestedDict = Dict[str, Any]
 
 
@@ -168,7 +170,6 @@ def _create_per_track_annotation(
 def _create_metadata(video: NestedDict, height: int, width: int,
                      num_frames: int)->NestedDict:
   """Creates the metadata entry for a video."""
-
   metadata = {}
   metadata['height'] = height or video['height']
   metadata['width'] = width or video['width']
@@ -210,6 +211,9 @@ class YoutubeVisConfig(tfds.core.BuilderConfig):
                height: Optional[int] = None,
                width: Optional[int] = None,
                only_frames_with_labels: bool = False,
+               split_train_data_range: Optional[Tuple[int, int]] = None,
+               split_val_data_range: Optional[Tuple[int, int]] = None,
+               split_test_data_range: Optional[Tuple[int, int]] = None,
                **kwargs):
     """The parameters specifying how the dataset will be processed.
 
@@ -223,7 +227,25 @@ class YoutubeVisConfig(tfds.core.BuilderConfig):
       width: optional width to resize all images to
       only_frames_with_labels: whether or not to include the frames
         which don't have labels in the data export.
+      split_train_data_range: If not None, must be a tuple of two integers
+        indicating the slice (left-inclusive, right-exclusive) of the train
+        data to subsample into a manufactured training split. Because the
+        default validation and test splits contain no labels, this allows for
+        validation and testing without uploading to the youtube_vis
+        third party servers.
+      split_val_data_range: If not None, must be a tuple of integers indicating
+        the slice (left-inclusive, right-exclusive) of the train data to
+        subsample into a manufactured validation split. Because the default
+        validation and test splits contain no labels, this allows for validation
+        and testing without uploading to the youtube_vis third party servers.
+      split_test_data_range: If not None, must be a tuple of integers indicating
+        the slice (left-inclusive, right-exclusive) of the train data to
+        subsample into a manufactured test split. Because the default validation
+        and test splits contain no labels, this allows for validation and
+        testing without uploading to the youtube_vis third party servers.
       **kwargs: Passed on to the constructor of `BuilderConfig`.
+    Raises:
+      ValueError if split data ranges are outside of acceptable values.
     """
     super(YoutubeVisConfig, self).__init__(**kwargs)
     if height is not None or width is not None:
@@ -232,6 +254,31 @@ class YoutubeVisConfig(tfds.core.BuilderConfig):
     self.height = height
     self.width = width
     self.only_frames_with_labels = only_frames_with_labels
+    # Check that the requested data falls within the allowed ranges.
+    # NOTE(austinstone): We do not check that the split data is non-overlapping.
+    # The user should ensure that their splits are not-overlapping to prevent
+    # training on the test data.
+    if split_train_data_range is not None:
+      if split_train_data_range[0] < 0 or split_train_data_range[
+          1] > NUM_TRAIN_EXAMPLES:
+        raise ValueError('split_train_data_range must be within '
+                         f'[0, {NUM_TRAIN_EXAMPLES}] ',
+                         f'got instead: {split_train_data_range}.')
+    if split_val_data_range is not None:
+      if split_val_data_range[0] < 0 or split_val_data_range[
+          1] > NUM_TRAIN_EXAMPLES:
+        raise ValueError('split_val_data_range must be within '
+                         f'[0, {NUM_TRAIN_EXAMPLES}] ',
+                         f'got instead: {split_val_data_range}.')
+    if split_test_data_range is not None:
+      if split_test_data_range[0] < 0 or split_test_data_range[
+          1] > NUM_TRAIN_EXAMPLES:
+        raise ValueError('split_test_data_range must be within '
+                         f'[0, {NUM_TRAIN_EXAMPLES}] ',
+                         f'got instead: {split_test_data_range}.')
+    self.split_train_data_range = split_train_data_range
+    self.split_val_data_range = split_val_data_range
+    self.split_test_data_range = split_test_data_range
 
 
 class YoutubeVis(tfds.core.BeamBasedBuilder):
@@ -277,6 +324,64 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
                       'resolution.',
           only_frames_with_labels=True,
       ),
+      # BEGIN GOOGLE_INTERNAL
+      # These splits will be released to third party consumers after internal
+      # testing.
+      YoutubeVisConfig(
+          name='full_train_split',
+          description='The full resolution version of the dataset, with all '
+          'frames, including those without labels, included. The val and test '
+          'splits are manufactured from the training data.',
+          # Use the first 1838 train videos for training.
+          split_train_data_range=(0, 1838),
+          # Use training videos 1838-2038 for validation.
+          split_val_data_range=(1838, 2038),
+          # Use training videos 2038-2238 for testing.
+          split_test_data_range=(2038, 2238),
+      ),
+      YoutubeVisConfig(
+          name='480_640_full_train_split',
+          description='All images are bilinearly resized to 480 X 640 with all '
+                      'frames included. The val and test splits are '
+                      'manufactured from the training data.',
+          height=480,
+          width=640,
+          # Use the first 1838 train videos for training.
+          split_train_data_range=(0, 1838),
+          # Use training videos 1838-2038 for validation.
+          split_val_data_range=(1838, 2038),
+          # Use training videos 2038-2238 for testing.
+          split_test_data_range=(2038, 2238),
+      ),
+      YoutubeVisConfig(
+          name='480_640_only_frames_with_labels_train_split',
+          description='All images are bilinearly resized to 480 X 640 with only'
+                      ' frames with labels included. The val and test splits '
+                      'are manufactured from the training data.',
+          height=480,
+          width=640,
+          only_frames_with_labels=True,
+          # Use the first 1838 train videos for training.
+          split_train_data_range=(0, 1838),
+          # Use training videos 1838-2038 for validation.
+          split_val_data_range=(1838, 2038),
+          # Use training videos 2038-2238 for testing.
+          split_test_data_range=(2038, 2238),
+      ),
+      YoutubeVisConfig(
+          name='only_frames_with_labels_train_split',
+          description='Only images with labels included at their native '
+                      'resolution. The val and test splits are manufactured '
+                      'from the training data.',
+          only_frames_with_labels=True,
+          # Use the first 1838 train videos for training.
+          split_train_data_range=(0, 1838),
+          # Use training videos 1838-2038 for validation.
+          split_val_data_range=(1838, 2038),
+          # Use training videos 2038-2238 for testing.
+          split_test_data_range=(2038, 2238),
+      ),
+      # END GOOGLE_INTERNAL
   ]
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
@@ -328,15 +433,46 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     """Returns SplitGenerators."""
 
     manually_downloaded_files = {
-        'test_all_frames': dl_manager.manual_dir / 'test_all_frames.zip',
-        'test_annotations': dl_manager.manual_dir / 'test.json',
         'train_all_frames': dl_manager.manual_dir / 'train_all_frames.zip',
         'train_annotations': dl_manager.manual_dir / 'train.json',
-        'valid_all_frames': dl_manager.manual_dir / 'valid_all_frames.zip',
-        'valid_annotations': dl_manager.manual_dir / 'valid.json',
     }
+    if self.builder_config.split_train_data_range is not None:
+      # Create a custom training split by subsampling the training data.
+      train_data_range = self.builder_config.split_train_data_range
+    else:  # Use the provided training split.
+      train_data_range = None
+
+    if self.builder_config.split_val_data_range is not None:
+      # Create a custom validation split by subsampling the training data.
+      val_data_range = self.builder_config.split_val_data_range
+      manually_downloaded_files['valid_all_frames'] = manually_downloaded_files[
+          'train_all_frames']
+      manually_downloaded_files[
+          'valid_annotations'] = manually_downloaded_files['train_annotations']
+    else:  # Use the provided validation split.
+      val_data_range = None
+      manually_downloaded_files[
+          'valid_all_frames'] = dl_manager.manual_dir / 'valid_all_frames.zip'
+      manually_downloaded_files[
+          'valid_annotations'] = dl_manager.manual_dir / 'valid.json'
+
+    if self.builder_config.split_test_data_range is not None:
+      # Create a custom test split by subsampling the training data.
+      test_data_range = self.builder_config.split_test_data_range
+      manually_downloaded_files['test_all_frames'] = manually_downloaded_files[
+          'train_all_frames']
+      manually_downloaded_files['test_annotations'] = manually_downloaded_files[
+          'train_annotations']
+    else:  # Use the provided test split.
+      test_data_range = None
+      manually_downloaded_files[
+          'test_all_frames'] = dl_manager.manual_dir / 'test_all_frames.zip'
+      manually_downloaded_files[
+          'test_annotations'] = dl_manager.manual_dir / 'test.json'
 
     extracted_files = dl_manager.extract(manually_downloaded_files)
+    val_dir = 'train_all_frames' if val_data_range else 'valid_all_frames'
+    test_dir = 'train_all_frames' if test_data_range else 'test_all_frames'
 
     return {
         tfds.Split.TRAIN:
@@ -344,18 +480,21 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
                 annotations=extracted_files['train_annotations'],
                 all_frames=extracted_files['train_all_frames'] /
                 'train_all_frames' / 'JPEGImages',
+                video_range_to_use=train_data_range,
             ),
         tfds.Split.VALIDATION:
             self._generate_examples(
                 annotations=extracted_files['valid_annotations'],
                 all_frames=extracted_files['valid_all_frames'] /
-                'valid_all_frames' / 'JPEGImages',
+                val_dir / 'JPEGImages',
+                video_range_to_use=val_data_range,
             ),
         tfds.Split.TEST:
             self._generate_examples(
                 annotations=extracted_files['test_annotations'],
                 all_frames=extracted_files['test_all_frames'] /
-                'test_all_frames' / 'JPEGImages',
+                test_dir / 'JPEGImages',
+                video_range_to_use=test_data_range,
             ),
     }
 
@@ -374,7 +513,9 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
       resized_images.append(image)
     return resized_images
 
-  def _generate_examples(self, annotations, all_frames):
+  def _generate_examples(self, annotations: type_utils.ReadOnlyPath,
+                         all_frames: type_utils.ReadOnlyPath,
+                         video_range_to_use: Optional[Tuple[int, int]] = None):
     beam = tfds.core.lazy_imports.apache_beam
     annotations = json.loads(annotations.read_text())
     video_id_to_tracks, videos = _build_annotations_index(annotations)
@@ -409,4 +550,8 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
       data_example['video'] = self._maybe_resize_video(frames_list)
       return data_example['metadata']['video_name'], data_example
 
-    return beam.Create(list(videos.keys())) | beam.Map(_process_example)
+    video_keys = list(videos.keys())
+    if video_range_to_use is not None:
+      video_keys = video_keys[video_range_to_use[0]:video_range_to_use[1]]
+
+    return beam.Create(video_keys) | beam.Map(_process_example)
