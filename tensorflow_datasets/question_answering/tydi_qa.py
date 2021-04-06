@@ -62,7 +62,6 @@ must rely on labeled English data plus existing machine translation systems.
 Typically, you should use EITHER the train or translate-train split, but not both.
 """
 
-
 LANGUAGES = {
     "ar": "arabic",
     "bn": "bengali",
@@ -89,10 +88,17 @@ class TydiQA(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       TydiQAConfig(
           name="goldp",
-          description="Gold passage (GoldP) task (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline).",
-          version=tfds.core.Version("2.1.0"),
+          description="Gold passage (GoldP) task (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline)."
       ),
   ]
+
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0":
+          "Fixes issue with a number of examples where answer spans are "
+          "misaligned due to context white-space removal. This change impacts "
+          "roughly 25% of train and dev examples."
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(

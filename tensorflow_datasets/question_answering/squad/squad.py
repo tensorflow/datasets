@@ -75,9 +75,9 @@ def _generate_v2_examples(filepath):
   with tf.io.gfile.GFile(filepath) as f:
     squad = json.load(f)
     for article in squad["data"]:
-      title = article.get("title", "").strip()
+      title = article.get("title", "")
       for paragraph in article["paragraphs"]:
-        context = paragraph["context"].strip()
+        context = paragraph["context"]
         for qa in paragraph["qas"]:
           id_ = qa["id"]
 
@@ -85,7 +85,7 @@ def _generate_v2_examples(filepath):
           if "plausible_answers" not in qa:
             qa["plausible_answers"] = []
 
-          question = qa["question"].strip()
+          question = qa["question"]
           is_impossible = qa["is_impossible"]
 
           plausible_answer_starts = [
@@ -98,7 +98,7 @@ def _generate_v2_examples(filepath):
           ]
 
           answer_starts = [answer["answer_start"] for answer in qa["answers"]]
-          answers = [answer["text"].strip() for answer in qa["answers"]]
+          answers = [answer["text"] for answer in qa["answers"]]
 
           yield id_, {
               "title": title,
@@ -122,7 +122,7 @@ class SquadConfig(tfds.core.BuilderConfig):
 
   def __init__(self, *, train_file, dev_file, **kwargs):
 
-    super(SquadConfig, self).__init__(version="2.0.0", **kwargs)
+    super(SquadConfig, self).__init__(**kwargs)
     self.train_file = train_file
     self.dev_file = dev_file
 
@@ -137,7 +137,6 @@ class Squad(tfds.core.GeneratorBasedBuilder):
           train_file="train-v1.1.json",
           dev_file="dev-v1.1.json",
       ),
-
       SquadConfig(
           name="v2.0",
           description="Version 2.0.0 of SQUAD",
@@ -145,6 +144,13 @@ class Squad(tfds.core.GeneratorBasedBuilder):
           dev_file="dev-v2.0.json",
       ),
   ]
+
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0":
+          "Fixes issue with small number of examples (19) where answer spans "
+          "are misaligned due to context white-space removal.",
+  }
 
   def _info(self):
 

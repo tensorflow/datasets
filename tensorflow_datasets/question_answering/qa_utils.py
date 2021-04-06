@@ -20,7 +20,6 @@ from absl import logging
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-
 SQUADLIKE_FEATURES = tfds.features.FeaturesDict({
     "id":
         tf.string,
@@ -47,9 +46,9 @@ def generate_squadlike_examples(filepath):
   with tf.io.gfile.GFile(filepath) as f:
     squad = json.load(f)
     for article in squad["data"]:
-      title = article.get("title", "").strip()
+      title = article.get("title", "")
       for paragraph in article["paragraphs"]:
-        context = paragraph["context"].strip()
+        context = paragraph["context"]
         for qa in paragraph["qas"]:
           qa["title"] = title
           qa["context"] = context
@@ -61,11 +60,11 @@ def generate_squadlike_examples(filepath):
 
     for id_, qa in qas.items():
       answer_starts = [answer["answer_start"] for answer in qa["answers"]]
-      answers = [answer["text"].strip() for answer in qa["answers"]]
+      answers = [answer["text"] for answer in qa["answers"]]
       yield id_, {
           "title": qa["title"],
           "context": qa["context"],
-          "question": qa["question"].strip(),
+          "question": qa["question"],
           "id": id_,
           "answers": {
               "answer_start": answer_starts,
