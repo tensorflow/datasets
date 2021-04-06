@@ -149,6 +149,7 @@ DATASET_EXTRAS = {
     'duke_ultrasound': ['scipy'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
+    'deeplesion': ['pandas'],
     'lsun': ['tensorflow-io'],
     'wsc273': ['bs4', 'lxml'],
     'youtube_vis': ['pycocotools'],

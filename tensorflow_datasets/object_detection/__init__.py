@@ -16,6 +16,7 @@
 """Object detection datasets."""
 
 from tensorflow_datasets.object_detection.coco import Coco
+from tensorflow_datasets.object_detection.deeplesion import Deeplesion
 from tensorflow_datasets.object_detection.coco_captions import CocoCaptions
 from tensorflow_datasets.object_detection.kitti import Kitti
 from tensorflow_datasets.object_detection.lvis import Lvis
