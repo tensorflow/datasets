@@ -74,13 +74,16 @@ _INVALID_ANNOTATIONS = [
     10932
 ]
 
+_NUM_CLASSES = 1203
+
 
 class Lvis(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for lvis dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
-      '1.0.0': 'Initial release. Test split has dummy annotations.',
+      '1.1.0':
+          'Added fields `neg_category_ids` and `not_exhaustive_category_ids`.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -93,13 +96,21 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Image(encoding_format='jpeg'),
             'image/id':
                 tf.int64,
+            'neg_category_ids':
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
+                ),
+            'not_exhaustive_category_ids':
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
+                ),
             'objects':
                 tfds.features.Sequence({
                     # LVIS has unique id for each annotation.
                     'id': tf.int64,
                     'area': tf.int64,
                     'bbox': tfds.features.BBoxFeature(),
-                    'label': tfds.features.ClassLabel(num_classes=1203),
+                    'label': tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
                     'segmentation': tfds.features.Image(shape=(None, None, 1)),
                 }),
         }),
@@ -142,9 +153,15 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
       image = _find_image_in_dirs(image_dirs, filename)
       instances = lvis_annotation.get_annotations(img_id=image_info['id'])
       instances = [x for x in instances if x['id'] not in _INVALID_ANNOTATIONS]
+      neg_category_ids = image_info.get('neg_category_ids', [])
+      not_exhaustive_category_ids = image_info.get(
+          'not_exhaustive_category_ids', [])
       example = {
           'image': image,
           'image/id': image_info['id'],
+          'neg_category_ids': [i - 1 for i in neg_category_ids],
+          'not_exhaustive_category_ids':
+              [i - 1 for i in not_exhaustive_category_ids],
           'objects': [],
       }
       for inst in instances:
