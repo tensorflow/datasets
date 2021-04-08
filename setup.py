@@ -127,8 +127,10 @@ DATASET_EXTRAS = {
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
+    'duke_ultrasound': ['scipy'],
     'eurosat': ['scikit-image', 'tifffile', 'imagecodecs'],
     'groove': ['pretty_midi', 'pydub'],
+    'gtzan': ['pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
@@ -137,19 +139,18 @@ DATASET_EXTRAS = {
         'scipy'
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
-    'ogbg_molpcba': ['pandas'],
+    'lsun': ['tensorflow-io'],
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     # See https://github.com/librosa/librosa/issues/1160
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
+    'ogbg_molpcba': ['pandas'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
-    'duke_ultrasound': ['scipy'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
-    'lsun': ['tensorflow-io'],
     'wsc273': ['bs4', 'lxml'],
     'youtube_vis': ['pycocotools'],
 }
