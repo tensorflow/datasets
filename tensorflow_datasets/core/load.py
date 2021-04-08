@@ -98,6 +98,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     else:
       if dataset_common:
         print("\nCommon Dataset detected. Utilising TFDS variant...\n")
+        ds_name, kwargs = naming.parse_builder_name_kwargs(ds_name.name)
       cls = registered.imported_builder_cls(str(ds_name))
       cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
     return cls
