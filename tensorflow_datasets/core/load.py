@@ -79,13 +79,15 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     DatasetNotFoundError: if `name` is unrecognized.
   """
   ds_name, kwargs = naming.parse_builder_name_kwargs(name)
+  dataset_common = ds_name.name in list_builders(with_community_datasets = False)
+
   if kwargs:
     raise ValueError(
         '`builder_cls` only accept the `dataset_name` without config, '
         f"version or arguments. Got: name='{name}', kwargs={kwargs}"
     )
   try:
-    if ds_name.namespace:
+    if ds_name.namespace and not dataset_common:
       # `namespace:dataset` are loaded from the community register
       if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
         return community.community_register.builder_cls(ds_name)
@@ -94,6 +96,8 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
             f'Cannot load {ds_name} when community datasets are disabled'
         )
     else:
+      if dataset_common:
+        print("\nCommon Dataset detected. Utilising TFDS variant...\n")
       cls = registered.imported_builder_cls(str(ds_name))
       cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
     return cls
