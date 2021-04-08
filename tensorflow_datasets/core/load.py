@@ -79,6 +79,8 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     DatasetNotFoundError: if `name` is unrecognized.
   """
   ds_name, kwargs = naming.parse_builder_name_kwargs(name)
+
+  #Checking whether the same dataset already exists in TFDS
   dataset_common = ds_name.name in list_builders(with_community_datasets = False)
 
   if kwargs:
@@ -97,6 +99,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
         )
     else:
       if dataset_common:
+        #Priotitizing TFDS over community datasets
         print("\nCommon Dataset detected. Utilising TFDS variant...\n")
         ds_name, kwargs = naming.parse_builder_name_kwargs(ds_name.name)
       cls = registered.imported_builder_cls(str(ds_name))
