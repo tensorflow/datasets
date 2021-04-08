@@ -152,6 +152,7 @@ DATASET_EXTRAS = {
     'lsun': ['tensorflow-io'],
     'wsc273': ['bs4', 'lxml'],
     'youtube_vis': ['pycocotools'],
+    'gtzan': ['pydub'],
 }
 
 
