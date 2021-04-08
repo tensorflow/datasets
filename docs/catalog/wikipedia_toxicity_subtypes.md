@@ -77,27 +77,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
 
-*   **Citation**:
-
-```
-@inproceedings{10.1145/3038912.3052591,
-  author = {Wulczyn, Ellery and Thain, Nithum and Dixon, Lucas},
-  title = {Ex Machina: Personal Attacks Seen at Scale},
-  year = {2017},
-  isbn = {9781450349130},
-  publisher = {International World Wide Web Conferences Steering Committee},
-  address = {Republic and Canton of Geneva, CHE},
-  url = {https://doi.org/10.1145/3038912.3052591},
-  doi = {10.1145/3038912.3052591},
-  booktitle = {Proceedings of the 26th International Conference on World Wide Web},
-  pages = {1391-1399},
-  numpages = {9},
-  keywords = {online discussions, wikipedia, online harassment},
-  location = {Perth, Australia},
-  series = {WWW '17}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -135,3 +114,24 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{10.1145/3038912.3052591,
+  author = {Wulczyn, Ellery and Thain, Nithum and Dixon, Lucas},
+  title = {Ex Machina: Personal Attacks Seen at Scale},
+  year = {2017},
+  isbn = {9781450349130},
+  publisher = {International World Wide Web Conferences Steering Committee},
+  address = {Republic and Canton of Geneva, CHE},
+  url = {https://doi.org/10.1145/3038912.3052591},
+  doi = {10.1145/3038912.3052591},
+  booktitle = {Proceedings of the 26th International Conference on World Wide Web},
+  pages = {1391-1399},
+  numpages = {9},
+  keywords = {online discussions, wikipedia, online harassment},
+  location = {Perth, Australia},
+  series = {WWW '17}
+}
+```

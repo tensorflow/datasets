@@ -63,19 +63,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('sentence', 'label')`
 
-*   **Citation**:
-
-```
-@inproceedings{rahman2012resolving,
-  title={Resolving complex cases of definite pronouns: the winograd schema challenge},
-  author={Rahman, Altaf and Ng, Vincent},
-  booktitle={Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning},
-  pages={777--789},
-  year={2012},
-  organization={Association for Computational Linguistics}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -113,3 +100,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{rahman2012resolving,
+  title={Resolving complex cases of definite pronouns: the winograd schema challenge},
+  author={Rahman, Altaf and Ng, Vincent},
+  booktitle={Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning},
+  pages={777--789},
+  year={2012},
+  organization={Association for Computational Linguistics}
+}
+```

@@ -83,16 +83,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@misc{3dshapes18,
-  title={3D Shapes Dataset},
-  author={Burgess, Chris and Kim, Hyunjik},
-  howpublished={https://github.com/deepmind/3dshapes-dataset/},
-  year={2018}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -132,3 +122,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{3dshapes18,
+  title={3D Shapes Dataset},
+  author={Burgess, Chris and Kim, Hyunjik},
+  howpublished={https://github.com/deepmind/3dshapes-dataset/},
+  year={2018}
+}
+```

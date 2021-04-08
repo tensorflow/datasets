@@ -74,17 +74,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@ONLINE {
-    author = "Aono, Yasuyuki",
-    title  = "Historical Series of Phenological data for Cherry Tree Flowering at Kyoto City (and March Mean Temperature Reconstructions)",
-    year   = "2012",
-    url    = "http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -122,3 +111,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {
+    author = "Aono, Yasuyuki",
+    title  = "Historical Series of Phenological data for Cherry Tree Flowering at Kyoto City (and March Mean Temperature Reconstructions)",
+    year   = "2012",
+    url    = "http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/"
+}
+```

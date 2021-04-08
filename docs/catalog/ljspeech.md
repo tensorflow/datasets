@@ -61,17 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text_normalized', 'speech')`
 
-*   **Citation**:
-
-```
-@misc{ljspeech17,
-  author       = {Keith Ito},
-  title        = {The LJ Speech Dataset},
-  howpublished = {\url{https://keithito.com/LJ-Speech-Dataset/}},
-  year         = 2017
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -109,3 +98,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{ljspeech17,
+  author       = {Keith Ito},
+  title        = {The LJ Speech Dataset},
+  howpublished = {\url{https://keithito.com/LJ-Speech-Dataset/}},
+  year         = 2017
+}
+```

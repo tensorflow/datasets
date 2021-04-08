@@ -70,39 +70,6 @@ Split          | Examples
 `'train'`      | 141,442
 `'validation'` | 5,000
 
-*   **Citation**:
-
-```
-@article{10.1145/219717.219748,
-author = {Miller, George A.},
-title = {WordNet: A Lexical Database for English},
-year = {1995},
-issue_date = {Nov. 1995},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-volume = {38},
-number = {11},
-issn = {0001-0782},
-url = {https://doi.org/10.1145/219717.219748},
-doi = {10.1145/219717.219748},
-journal = {Commun. ACM},
-month = nov,
-pages = {39--41},
-numpages = {3}
-}
-
-@incollection{NIPS2013_5071,
-title = {Translating Embeddings for Modeling Multi-relational Data},
-author = {Bordes, Antoine and Usunier, Nicolas and Garcia-Duran, Alberto and Weston, Jason and Yakhnenko, Oksana},
-booktitle = {Advances in Neural Information Processing Systems 26},
-editor = {C. J. C. Burges and L. Bottou and M. Welling and Z. Ghahramani and K. Q. Weinberger},
-pages = {2787--2795},
-year = {2013},
-publisher = {Curran Associates, Inc.},
-url = {http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf}
-}
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -137,21 +104,6 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## wordnet/WN18RR
-
-*   **Config description**: Same as WN18 but fixes test leakage through inverse
-    relations. See https://github.com/TimDettmers/ConvE.
-
-*   **Dataset size**: `7.02 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 3,134
-`'train'`      | 86,835
-`'validation'` | 3,034
-
 *   **Citation**:
 
 ```
@@ -173,16 +125,32 @@ pages = {39--41},
 numpages = {3}
 }
 
-@inproceedings{dettmers2018conve,
-    Author = {Dettmers, Tim and Pasquale, Minervini and Pontus, Stenetorp and Riedel, Sebastian},
-    Booktitle = {Proceedings of the 32th AAAI Conference on Artificial Intelligence},
-    Title = {Convolutional 2D Knowledge Graph Embeddings},
-    Url = {https://arxiv.org/abs/1707.01476},
-    Year = {2018},
-        pages  = {1811--1818},
-    Month = {February}
+@incollection{NIPS2013_5071,
+title = {Translating Embeddings for Modeling Multi-relational Data},
+author = {Bordes, Antoine and Usunier, Nicolas and Garcia-Duran, Alberto and Weston, Jason and Yakhnenko, Oksana},
+booktitle = {Advances in Neural Information Processing Systems 26},
+editor = {C. J. C. Burges and L. Bottou and M. Welling and Z. Ghahramani and K. Q. Weinberger},
+pages = {2787--2795},
+year = {2013},
+publisher = {Curran Associates, Inc.},
+url = {http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf}
 }
 ```
+
+## wordnet/WN18RR
+
+*   **Config description**: Same as WN18 but fixes test leakage through inverse
+    relations. See https://github.com/TimDettmers/ConvE.
+
+*   **Dataset size**: `7.02 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,134
+`'train'`      | 86,835
+`'validation'` | 3,034
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -217,3 +185,35 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{10.1145/219717.219748,
+author = {Miller, George A.},
+title = {WordNet: A Lexical Database for English},
+year = {1995},
+issue_date = {Nov. 1995},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {38},
+number = {11},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/219717.219748},
+doi = {10.1145/219717.219748},
+journal = {Commun. ACM},
+month = nov,
+pages = {39--41},
+numpages = {3}
+}
+
+@inproceedings{dettmers2018conve,
+    Author = {Dettmers, Tim and Pasquale, Minervini and Pontus, Stenetorp and Riedel, Sebastian},
+    Booktitle = {Proceedings of the 32th AAAI Conference on Artificial Intelligence},
+    Title = {Convolutional 2D Knowledge Graph Embeddings},
+    Url = {https://arxiv.org/abs/1707.01476},
+    Year = {2018},
+        pages  = {1811--1818},
+    Month = {February}
+}
+```

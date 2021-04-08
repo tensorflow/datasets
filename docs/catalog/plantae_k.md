@@ -62,16 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@misc{,
-  author={Vippon Preet Kour, Sakshi Arora},
-  title={PlantaeK: A leaf database of native plants of Jammu and Kashmir},
-  howpublished={Mendeley Data},
-  year={2019}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -111,3 +101,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{,
+  author={Vippon Preet Kour, Sakshi Arora},
+  title={PlantaeK: A leaf database of native plants of Jammu and Kashmir},
+  howpublished={Mendeley Data},
+  year={2019}
+}
+```

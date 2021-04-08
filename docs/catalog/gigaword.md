@@ -59,30 +59,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('document', 'summary')`
 
-*   **Citation**:
-
-```
-@article{graff2003english,
-  title={English gigaword},
-  author={Graff, David and Kong, Junbo and Chen, Ke and Maeda, Kazuaki},
-  journal={Linguistic Data Consortium, Philadelphia},
-  volume={4},
-  number={1},
-  pages={34},
-  year={2003}
-}
-
-@article{Rush_2015,
-   title={A Neural Attention Model for Abstractive Sentence Summarization},
-   url={http://dx.doi.org/10.18653/v1/D15-1044},
-   DOI={10.18653/v1/d15-1044},
-   journal={Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing},
-   publisher={Association for Computational Linguistics},
-   author={Rush, Alexander M. and Chopra, Sumit and Weston, Jason},
-   year={2015}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -120,3 +96,27 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{graff2003english,
+  title={English gigaword},
+  author={Graff, David and Kong, Junbo and Chen, Ke and Maeda, Kazuaki},
+  journal={Linguistic Data Consortium, Philadelphia},
+  volume={4},
+  number={1},
+  pages={34},
+  year={2003}
+}
+
+@article{Rush_2015,
+   title={A Neural Attention Model for Abstractive Sentence Summarization},
+   url={http://dx.doi.org/10.18653/v1/D15-1044},
+   DOI={10.18653/v1/d15-1044},
+   journal={Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing},
+   publisher={Association for Computational Linguistics},
+   author={Rush, Alexander M. and Chopra, Sumit and Weston, Jason},
+   year={2015}
+}
+```

@@ -61,17 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@inproceedings{coates2011stl10,
-  title={{An Analysis of Single Layer Networks in Unsupervised Feature Learning}},
-  author={Coates, Adam and Ng, Andrew and Lee, Honglak},
-  booktitle={AISTATS},
-  year={2011},
-  note = {\url{https://cs.stanford.edu/~acoates/papers/coatesleeng_aistats_2011.pdf}},
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -111,3 +100,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{coates2011stl10,
+  title={{An Analysis of Single Layer Networks in Unsupervised Feature Learning}},
+  author={Coates, Adam and Ng, Andrew and Lee, Honglak},
+  booktitle={AISTATS},
+  year={2011},
+  note = {\url{https://cs.stanford.edu/~acoates/papers/coatesleeng_aistats_2011.pdf}},
+}
+```

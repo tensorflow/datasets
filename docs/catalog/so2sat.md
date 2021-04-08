@@ -51,8 +51,6 @@ http://creativecommons.org/licenses/by/4.0
 Split | Examples
 :---- | -------:
 
-*   **Citation**:
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -60,6 +58,8 @@ Split | Examples
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
+
+*   **Citation**:
 
 ## so2sat/rgb (default config)
 

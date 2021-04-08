@@ -66,19 +66,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'ans')`
 
-*   **Citation**:
-
-```
-@inproceedings{inproceedings,
-author = {Shi, Shuming and Wang, Yuehui and Lin, Chin-Yew and Liu, Xiaojiang and Rui, Yong},
-year = {2015},
-month = {09},
-pages = {},
-title = {Automatically Solving Number Word Problems by Semantic Parsing and Reasoning},
-doi = {10.18653/v1/D15-1135}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -116,3 +103,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{inproceedings,
+author = {Shi, Shuming and Wang, Yuehui and Lin, Chin-Yew and Liu, Xiaojiang and Rui, Yong},
+year = {2015},
+month = {09},
+pages = {},
+title = {Automatically Solving Number Word Problems by Semantic Parsing and Reasoning},
+doi = {10.18653/v1/D15-1135}
+}
+```

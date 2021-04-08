@@ -56,22 +56,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@unpublished{eraser2019,
-    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
-    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}
-}
-@InProceedings{zaidan-eisner-piatko-2008:nips,
-  author    =  {Omar F. Zaidan  and  Jason Eisner  and  Christine Piatko},
-  title     =  {Machine Learning with Annotator Rationales to Reduce Annotation Cost},
-  booktitle =  {Proceedings of the NIPS*2008 Workshop on Cost Sensitive Learning},
-  month     =  {December},
-  year      =  {2008}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -109,3 +93,19 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@unpublished{eraser2019,
+    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
+    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}
+}
+@InProceedings{zaidan-eisner-piatko-2008:nips,
+  author    =  {Omar F. Zaidan  and  Jason Eisner  and  Christine Piatko},
+  title     =  {Machine Learning with Annotator Rationales to Reduce Annotation Cost},
+  booktitle =  {Proceedings of the NIPS*2008 Workshop on Cost Sensitive Learning},
+  month     =  {December},
+  year      =  {2008}
+}
+```

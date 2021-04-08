@@ -59,16 +59,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{Nilsback08,
-   author = "Yang, Yi and Newsam, Shawn",
-   title = "Bag-Of-Visual-Words and Spatial Extensions for Land-Use Classification",
-   booktitle = "ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems (ACM GIS)",
-   year = "2010",
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -108,3 +98,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{Nilsback08,
+   author = "Yang, Yi and Newsam, Shawn",
+   title = "Bag-Of-Visual-Words and Spatial Extensions for Land-Use Classification",
+   booktitle = "ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems (ACM GIS)",
+   year = "2010",
+}
+```

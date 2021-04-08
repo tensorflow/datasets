@@ -60,17 +60,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@techreport{WelinderEtal2010,
-Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
-Institution = {California Institute of Technology},
-Number = {CNS-TR-2010-001},
-Title = {{Caltech-UCSD Birds 200}},
-Year = {2010}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -109,3 +98,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}
+```

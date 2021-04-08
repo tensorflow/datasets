@@ -52,6 +52,10 @@ FeaturesDict({
 })
 ```
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -64,10 +68,6 @@ FeaturesDict({
     primaryClass={cs.CL}
 }
 ```
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## reddit_tifu/short (default config)
 

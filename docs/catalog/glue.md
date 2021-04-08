@@ -70,26 +70,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@article{warstadt2018neural,
-  title={Neural Network Acceptability Judgments},
-  author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1805.12471},
-  year={2018}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -124,6 +104,26 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@article{warstadt2018neural,
+  title={Neural Network Acceptability Judgments},
+  author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1805.12471},
+  year={2018}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
 ## glue/sst2
 
 *   **Config description**: The Stanford Sentiment Treebank consists of
@@ -152,27 +152,6 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'sentence': Text(shape=(), dtype=tf.string),
 })
-```
-
-*   **Citation**:
-
-```
-@inproceedings{socher2013recursive,
-  title={Recursive deep models for semantic compositionality over a sentiment treebank},
-  author={Socher, Richard and Perelygin, Alex and Wu, Jean and Chuang, Jason and Manning, Christopher D and Ng, Andrew and Potts, Christopher},
-  booktitle={Proceedings of the 2013 conference on empirical methods in natural language processing},
-  pages={1631--1642},
-  year={2013}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
 ```
 
 *   **Examples**
@@ -209,6 +188,27 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@inproceedings{socher2013recursive,
+  title={Recursive deep models for semantic compositionality over a sentiment treebank},
+  author={Socher, Richard and Perelygin, Alex and Wu, Jean and Chuang, Jason and Manning, Christopher D and Ng, Andrew and Potts, Christopher},
+  booktitle={Proceedings of the 2013 conference on empirical methods in natural language processing},
+  pages={1631--1642},
+  year={2013}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
 ## glue/mrpc
 
 *   **Config description**: The Microsoft Research Paraphrase Corpus (Dolan &
@@ -238,26 +238,6 @@ FeaturesDict({
     'sentence1': Text(shape=(), dtype=tf.string),
     'sentence2': Text(shape=(), dtype=tf.string),
 })
-```
-
-*   **Citation**:
-
-```
-@inproceedings{dolan2005automatically,
-  title={Automatically constructing a corpus of sentential paraphrases},
-  author={Dolan, William B and Brockett, Chris},
-  booktitle={Proceedings of the Third International Workshop on Paraphrasing (IWP2005)},
-  year={2005}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
 ```
 
 *   **Examples**
@@ -294,6 +274,26 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@inproceedings{dolan2005automatically,
+  title={Automatically constructing a corpus of sentential paraphrases},
+  author={Dolan, William B and Brockett, Chris},
+  booktitle={Proceedings of the Third International Workshop on Paraphrasing (IWP2005)},
+  year={2005}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
 ## glue/qqp
 
 *   **Config description**: The Quora Question Pairs2 dataset is a collection of
@@ -322,27 +322,6 @@ FeaturesDict({
     'question1': Text(shape=(), dtype=tf.string),
     'question2': Text(shape=(), dtype=tf.string),
 })
-```
-
-*   **Citation**:
-
-```
-@online{WinNT,
-  author = {Iyer, Shankar and Dandekar, Nikhil and Csernai, Kornel},
-  title = {First Quora Dataset Release: Question Pairs},
-  year = 2017,
-  url = {https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs},
-  urldate = {2019-04-03}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
 ```
 
 *   **Examples**
@@ -379,6 +358,27 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@online{WinNT,
+  author = {Iyer, Shankar and Dandekar, Nikhil and Csernai, Kornel},
+  title = {First Quora Dataset Release: Question Pairs},
+  year = 2017,
+  url = {https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs},
+  urldate = {2019-04-03}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
 ## glue/stsb
 
 *   **Config description**: The Semantic Textual Similarity Benchmark (Cer et
@@ -408,26 +408,6 @@ FeaturesDict({
     'sentence1': Text(shape=(), dtype=tf.string),
     'sentence2': Text(shape=(), dtype=tf.string),
 })
-```
-
-*   **Citation**:
-
-```
-@article{cer2017semeval,
-  title={Semeval-2017 task 1: Semantic textual similarity-multilingual and cross-lingual focused evaluation},
-  author={Cer, Daniel and Diab, Mona and Agirre, Eneko and Lopez-Gazpio, Inigo and Specia, Lucia},
-  journal={arXiv preprint arXiv:1708.00055},
-  year={2017}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
 ```
 
 *   **Examples**
@@ -463,6 +443,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{cer2017semeval,
+  title={Semeval-2017 task 1: Semantic textual similarity-multilingual and cross-lingual focused evaluation},
+  author={Cer, Daniel and Diab, Mona and Agirre, Eneko and Lopez-Gazpio, Inigo and Specia, Lucia},
+  journal={arXiv preprint arXiv:1708.00055},
+  year={2017}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
 
 ## glue/mnli
 
@@ -504,43 +504,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@InProceedings{N18-1101,
-  author = "Williams, Adina
-            and Nangia, Nikita
-            and Bowman, Samuel",
-  title = "A Broad-Coverage Challenge Corpus for
-           Sentence Understanding through Inference",
-  booktitle = "Proceedings of the 2018 Conference of
-               the North American Chapter of the
-               Association for Computational Linguistics:
-               Human Language Technologies, Volume 1 (Long
-               Papers)",
-  year = "2018",
-  publisher = "Association for Computational Linguistics",
-  pages = "1112--1122",
-  location = "New Orleans, Louisiana",
-  url = "http://aclweb.org/anthology/N18-1101"
-}
-@article{bowman2015large,
-  title={A large annotated corpus for learning natural language inference},
-  author={Bowman, Samuel R and Angeli, Gabor and Potts, Christopher and Manning, Christopher D},
-  journal={arXiv preprint arXiv:1508.05326},
-  year={2015}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -575,34 +538,6 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## glue/mnli_mismatched
-
-*   **Config description**: The mismatched validation and test splits from MNLI.
-    See the "mnli" BuilderConfig for additional information.
-
-*   **Homepage**:
-    [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-
-*   **Download size**: `298.29 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 9,847
-`'validation'` | 9,832
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
-})
-```
-
 *   **Citation**:
 
 ```
@@ -638,6 +573,34 @@ FeaturesDict({
 
 Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
+```
+
+## glue/mnli_mismatched
+
+*   **Config description**: The mismatched validation and test splits from MNLI.
+    See the "mnli" BuilderConfig for additional information.
+
+*   **Homepage**:
+    [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
+
+*   **Download size**: `298.29 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,847
+`'validation'` | 9,832
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string),
+    'idx': tf.int32,
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Text(shape=(), dtype=tf.string),
+})
 ```
 
 *   **Examples**
@@ -674,34 +637,6 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## glue/mnli_matched
-
-*   **Config description**: The matched validation and test splits from MNLI.
-    See the "mnli" BuilderConfig for additional information.
-
-*   **Homepage**:
-    [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-
-*   **Download size**: `298.29 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 9,796
-`'validation'` | 9,815
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
-})
-```
-
 *   **Citation**:
 
 ```
@@ -739,6 +674,34 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
+## glue/mnli_matched
+
+*   **Config description**: The matched validation and test splits from MNLI.
+    See the "mnli" BuilderConfig for additional information.
+
+*   **Homepage**:
+    [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
+
+*   **Download size**: `298.29 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,796
+`'validation'` | 9,815
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string),
+    'idx': tf.int32,
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Text(shape=(), dtype=tf.string),
+})
+```
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -772,6 +735,43 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{N18-1101,
+  author = "Williams, Adina
+            and Nangia, Nikita
+            and Bowman, Samuel",
+  title = "A Broad-Coverage Challenge Corpus for
+           Sentence Understanding through Inference",
+  booktitle = "Proceedings of the 2018 Conference of
+               the North American Chapter of the
+               Association for Computational Linguistics:
+               Human Language Technologies, Volume 1 (Long
+               Papers)",
+  year = "2018",
+  publisher = "Association for Computational Linguistics",
+  pages = "1112--1122",
+  location = "New Orleans, Louisiana",
+  url = "http://aclweb.org/anthology/N18-1101"
+}
+@article{bowman2015large,
+  title={A large annotated corpus for learning natural language inference},
+  author={Bowman, Samuel R and Angeli, Gabor and Potts, Christopher and Manning, Christopher D},
+  journal={arXiv preprint arXiv:1508.05326},
+  year={2015}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
 
 ## glue/qnli
 
@@ -812,26 +812,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@article{rajpurkar2016squad,
-  title={Squad: 100,000+ questions for machine comprehension of text},
-  author={Rajpurkar, Pranav and Zhang, Jian and Lopyrev, Konstantin and Liang, Percy},
-  journal={arXiv preprint arXiv:1606.05250},
-  year={2016}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -866,6 +846,26 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@article{rajpurkar2016squad,
+  title={Squad: 100,000+ questions for machine comprehension of text},
+  author={Rajpurkar, Pranav and Zhang, Jian and Lopyrev, Konstantin and Liang, Percy},
+  journal={arXiv preprint arXiv:1606.05250},
+  year={2016}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
 ## glue/rte
 
 *   **Config description**: The Recognizing Textual Entailment (RTE) datasets
@@ -899,6 +899,40 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-rte-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -945,40 +979,6 @@ FeaturesDict({
 Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-rte-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## glue/wnli
 
@@ -1027,26 +1027,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@inproceedings{levesque2012winograd,
-  title={The winograd schema challenge},
-  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
-  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
-  year={2012}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1081,6 +1061,26 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@inproceedings{levesque2012winograd,
+  title={The winograd schema challenge},
+  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
+  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
+  year={2012}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
 ## glue/ax
 
 *   **Config description**: A manually-curated evaluation dataset for
@@ -1109,20 +1109,6 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'premise': Text(shape=(), dtype=tf.string),
 })
-```
-
-*   **Citation**:
-
-```
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
 ```
 
 *   **Examples**
@@ -1158,3 +1144,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```

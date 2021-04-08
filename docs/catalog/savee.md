@@ -72,19 +72,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@inproceedings{Vlasenko_combiningframe,
-author = {Vlasenko, Bogdan and Schuller, Bjorn and Wendemuth, Andreas and Rigoll, Gerhard},
-year = {2007},
-month = {01},
-pages = {2249-2252},
-title = {Combining frame and turn-level information for robust recognition of emotions within speech},
-journal = {Proceedings of Interspeech}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -122,3 +109,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{Vlasenko_combiningframe,
+author = {Vlasenko, Bogdan and Schuller, Bjorn and Wendemuth, Andreas and Rigoll, Gerhard},
+year = {2007},
+month = {01},
+pages = {2249-2252},
+title = {Combining frame and turn-level information for robust recognition of emotions within speech},
+journal = {Proceedings of Interspeech}
+}
+```

@@ -56,16 +56,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'annotation')`
 
-*   **Citation**:
-
-```
-@inproceedings{zhou2017scene,
-title={Scene Parsing through ADE20K Dataset},
-author={Zhou, Bolei and Zhao, Hang and Puig, Xavier and Fidler, Sanja and Barriuso, Adela and Torralba, Antonio},
-booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
-year={2017}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -104,3 +94,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{zhou2017scene,
+title={Scene Parsing through ADE20K Dataset},
+author={Zhou, Bolei and Zhao, Hang and Puig, Xavier and Fidler, Sanja and Barriuso, Adela and Torralba, Antonio},
+booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+year={2017}
+}
+```

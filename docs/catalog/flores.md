@@ -32,6 +32,10 @@ Sinhala-English.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -44,10 +48,6 @@ Sinhala-English.
     primaryClass={cs.CL}
 }
 ```
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## flores/neen (default config)
 

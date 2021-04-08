@@ -64,17 +64,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{Nagrani17,
-    author       = "Nagrani, A. and Chung, J.~S. and Zisserman, A.",
-    title        = "VoxCeleb: a large-scale speaker identification dataset",
-    booktitle    = "INTERSPEECH",
-    year         = "2017",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -112,3 +101,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{Nagrani17,
+    author       = "Nagrani, A. and Chung, J.~S. and Zisserman, A.",
+    title        = "VoxCeleb: a large-scale speaker identification dataset",
+    booktitle    = "INTERSPEECH",
+    year         = "2017",
+}
+```

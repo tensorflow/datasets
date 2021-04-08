@@ -57,16 +57,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{Netzer2011,
-author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},
-booktitle = {Advances in Neural Information Processing Systems ({NIPS})},
-title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
-year = {2011}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -106,3 +96,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{Netzer2011,
+author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},
+booktitle = {Advances in Neural Information Processing Systems ({NIPS})},
+title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
+year = {2011}
+}
+```

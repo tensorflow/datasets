@@ -58,17 +58,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@inproceedings{KrauseStarkDengFei-Fei_3DRR2013,
-title = {3D Object Representations for Fine-Grained Categorization},
-booktitle = {4th International IEEE Workshop on  3D Representation and Recognition (3dRR-13)},
-year = {2013},
-address = {Sydney, Australia},
-author = {Jonathan Krause and Michael Stark and Jia Deng and Li Fei-Fei}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -108,3 +97,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{KrauseStarkDengFei-Fei_3DRR2013,
+title = {3D Object Representations for Fine-Grained Categorization},
+booktitle = {4th International IEEE Workshop on  3D Representation and Recognition (3dRR-13)},
+year = {2013},
+address = {Sydney, Australia},
+author = {Jonathan Krause and Michael Stark and Jia Deng and Li Fei-Fei}
+}
+```

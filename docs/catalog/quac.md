@@ -72,17 +72,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('context', 'answers')`
 
-*   **Citation**:
-
-```
-@article{choi2018quac,
-  title={Quac: Question answering in context},
-  author={Choi, Eunsol and He, He and Iyyer, Mohit and Yatskar, Mark and Yih, Wen-tau and Choi, Yejin and Liang, Percy and Zettlemoyer, Luke},
-  journal={arXiv preprint arXiv:1808.07036},
-  year={2018}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -120,3 +109,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{choi2018quac,
+  title={Quac: Question answering in context},
+  author={Choi, Eunsol and He, He and Iyyer, Mohit and Yatskar, Mark and Yih, Wen-tau and Choi, Yejin and Liang, Percy and Zettlemoyer, Luke},
+  journal={arXiv preprint arXiv:1808.07036},
+  year={2018}
+}
+```

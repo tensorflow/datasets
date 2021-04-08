@@ -65,24 +65,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{Cheng_2017,
-   title={Remote Sensing Image Scene Classification: Benchmark and State of the Art},
-   volume={105},
-   ISSN={1558-2256},
-   url={http://dx.doi.org/10.1109/JPROC.2017.2675998},
-   DOI={10.1109/jproc.2017.2675998},
-   number={10},
-   journal={Proceedings of the IEEE},
-   publisher={Institute of Electrical and Electronics Engineers (IEEE)},
-   author={Cheng, Gong and Han, Junwei and Lu, Xiaoqiang},
-   year={2017},
-   month={Oct},
-   pages={1865-1883}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -122,3 +104,22 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{Cheng_2017,
+   title={Remote Sensing Image Scene Classification: Benchmark and State of the Art},
+   volume={105},
+   ISSN={1558-2256},
+   url={http://dx.doi.org/10.1109/JPROC.2017.2675998},
+   DOI={10.1109/jproc.2017.2675998},
+   number={10},
+   journal={Proceedings of the IEEE},
+   publisher={Institute of Electrical and Electronics Engineers (IEEE)},
+   author={Cheng, Gong and Han, Junwei and Lu, Xiaoqiang},
+   year={2017},
+   month={Oct},
+   pages={1865-1883}
+}
+```

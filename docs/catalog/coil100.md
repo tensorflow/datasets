@@ -61,16 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'angle_label')`
 
-*   **Citation**:
-
-```
-@article{nene1996columbia,
-  title={Columbia object image library (coil-20)},
-  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},
-  year={1996},
-  publisher={Technical report CUCS-005-96}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -110,3 +100,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{nene1996columbia,
+  title={Columbia object image library (coil-20)},
+  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},
+  year={1996},
+  publisher={Technical report CUCS-005-96}
+}
+```

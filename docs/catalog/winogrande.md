@@ -62,17 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{sakaguchi2019winogrande,
-    title={WinoGrande: An Adversarial Winograd Schema Challenge at Scale},
-    author={Sakaguchi, Keisuke and Bras, Ronan Le and Bhagavatula, Chandra and Choi, Yejin},
-    journal={arXiv preprint arXiv:1907.10641},
-    year={2019}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -110,3 +99,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{sakaguchi2019winogrande,
+    title={WinoGrande: An Adversarial Winograd Schema Challenge at Scale},
+    author={Sakaguchi, Keisuke and Bras, Ronan Le and Bhagavatula, Chandra and Choi, Yejin},
+    journal={arXiv preprint arXiv:1907.10641},
+    year={2019}
+}
+```

@@ -115,17 +115,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{tydiqa,
-   title = {TyDi QA: A Benchmark for Information-Seeking Question Answering in Typologically Diverse Languages},
-  author = {Jonathan H. Clark and Eunsol Choi and Michael Collins and Dan Garrette and Tom Kwiatkowski and Vitaly Nikolaev and Jennimaria Palomaki}
-    year = {2020},
- journal = {Transactions of the Association for Computational Linguistics}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -163,5 +152,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{tydiqa,
+   title = {TyDi QA: A Benchmark for Information-Seeking Question Answering in Typologically Diverse Languages},
+  author = {Jonathan H. Clark and Eunsol Choi and Michael Collins and Dan Garrette and Tom Kwiatkowski and Vitaly Nikolaev and Jennimaria Palomaki}
+    year = {2020},
+ journal = {Transactions of the Association for Computational Linguistics}
+}
+```
 
 ## tydi_qa/goldp (default config)

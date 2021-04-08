@@ -55,22 +55,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'depth')`
 
-*   **Citation**:
-
-```
-@inproceedings{Silberman:ECCV12,
-  author    = {Nathan Silberman, Derek Hoiem, Pushmeet Kohli and Rob Fergus},
-  title     = {Indoor Segmentation and Support Inference from RGBD Images},
-  booktitle = {ECCV},
-  year      = {2012}
-}
-@inproceedings{icra_2019_fastdepth,
-  author    = {Wofk, Diana and Ma, Fangchang and Yang, Tien-Ju and Karaman, Sertac and Sze, Vivienne},
-  title     = {FastDepth: Fast Monocular Depth Estimation on Embedded Systems},
-  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
-  year      = {2019}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -110,3 +94,20 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{Silberman:ECCV12,
+  author    = {Nathan Silberman, Derek Hoiem, Pushmeet Kohli and Rob Fergus},
+  title     = {Indoor Segmentation and Support Inference from RGBD Images},
+  booktitle = {ECCV},
+  year      = {2012}
+}
+@inproceedings{icra_2019_fastdepth,
+  author    = {Wofk, Diana and Ma, Fangchang and Yang, Tien-Ju and Karaman, Sertac and Sze, Vivienne},
+  title     = {FastDepth: Fast Monocular Depth Estimation on Embedded Systems},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2019}
+}
+```

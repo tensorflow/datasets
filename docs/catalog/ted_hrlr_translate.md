@@ -35,6 +35,10 @@ where one is high resource and the other is low resource.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -45,10 +49,6 @@ where one is high resource and the other is low resource.
   year    = {2018},
   }
 ```
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## ted_hrlr_translate/az_to_en (default config)
 

@@ -52,16 +52,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {tfflowers,
-author = "The TensorFlow Team",
-title = "Flowers",
-month = "jan",
-year = "2019",
-url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -101,3 +91,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {tfflowers,
+author = "The TensorFlow Team",
+title = "Flowers",
+month = "jan",
+year = "2019",
+url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
+```

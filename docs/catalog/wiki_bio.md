@@ -63,25 +63,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('input_text', 'target_text')`
 
-*   **Citation**:
-
-```
-@inproceedings{lebret-etal-2016-neural,
-    title = "Neural Text Generation from Structured Data with Application to the Biography Domain",
-    author = "Lebret, R{'e}mi  and
-      Grangier, David  and
-      Auli, Michael",
-    booktitle = "Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing",
-    month = nov,
-    year = "2016",
-    address = "Austin, Texas",
-    publisher = "Association for Computational Linguistics",
-    url = "https://www.aclweb.org/anthology/D16-1128",
-    doi = "10.18653/v1/D16-1128",
-    pages = "1203--1213",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -119,3 +100,22 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{lebret-etal-2016-neural,
+    title = "Neural Text Generation from Structured Data with Application to the Biography Domain",
+    author = "Lebret, R{'e}mi  and
+      Grangier, David  and
+      Auli, Michael",
+    booktitle = "Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2016",
+    address = "Austin, Texas",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D16-1128",
+    doi = "10.18653/v1/D16-1128",
+    pages = "1203--1213",
+}
+```

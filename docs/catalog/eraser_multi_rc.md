@@ -60,21 +60,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@unpublished{eraser2019,
-    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
-    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}
-}
-@inproceedings{MultiRC2018,
-    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},
-    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},
-    booktitle = {NAACL},
-    year = {2018}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -112,3 +97,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@unpublished{eraser2019,
+    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
+    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}
+}
+@inproceedings{MultiRC2018,
+    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},
+    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},
+    booktitle = {NAACL},
+    year = {2018}
+}
+```

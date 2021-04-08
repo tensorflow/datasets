@@ -82,29 +82,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('das/dB', 'dtce')`
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/abs-1908-05782,
-  author    = {Ouwen Huang and
-               Will Long and
-               Nick Bottenus and
-               Gregg E. Trahey and
-               Sina Farsiu and
-               Mark L. Palmeri},
-  title     = {MimickNet, Matching Clinical Post-Processing Under Realistic Black-Box
-               Constraints},
-  journal   = {CoRR},
-  volume    = {abs/1908.05782},
-  year      = {2019},
-  url       = {http://arxiv.org/abs/1908.05782},
-  archivePrefix = {arXiv},
-  eprint    = {1908.05782},
-  timestamp = {Mon, 19 Aug 2019 13:21:03 +0200},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1908-05782},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -143,3 +120,27 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{DBLP:journals/corr/abs-1908-05782,
+  author    = {Ouwen Huang and
+               Will Long and
+               Nick Bottenus and
+               Gregg E. Trahey and
+               Sina Farsiu and
+               Mark L. Palmeri},
+  title     = {MimickNet, Matching Clinical Post-Processing Under Realistic Black-Box
+               Constraints},
+  journal   = {CoRR},
+  volume    = {abs/1908.05782},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1908.05782},
+  archivePrefix = {arXiv},
+  eprint    = {1908.05782},
+  timestamp = {Mon, 19 Aug 2019 13:21:03 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1908-05782},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```

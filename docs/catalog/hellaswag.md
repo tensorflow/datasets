@@ -58,17 +58,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{zellers2019hellaswag,
-    title={HellaSwag: Can a Machine Really Finish Your Sentence?},
-    author={Zellers, Rowan and Holtzman, Ari and Bisk, Yonatan and Farhadi, Ali and Choi, Yejin},
-    booktitle ={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
-    year={2019}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -106,3 +95,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{zellers2019hellaswag,
+    title={HellaSwag: Can a Machine Really Finish Your Sentence?},
+    author={Zellers, Rowan and Holtzman, Ari and Bisk, Yonatan and Farhadi, Ali and Choi, Yejin},
+    booktitle ={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+    year={2019}
+}
+```

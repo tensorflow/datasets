@@ -60,18 +60,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@misc{CLIC2020,
-  title = {Workshop and Challenge on Learned Image Compression (CLIC2020)},
-  author = {George Toderici, Wenzhe Shi, Radu Timofte, Lucas Theis,
-            Johannes Balle, Eirikur Agustsson, Nick Johnston, Fabian Mentzer},
-  url = {http://www.compression.cc},
-  year={2020},
-  organization={CVPR}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -111,3 +99,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{CLIC2020,
+  title = {Workshop and Challenge on Learned Image Compression (CLIC2020)},
+  author = {George Toderici, Wenzhe Shi, Radu Timofte, Lucas Theis,
+            Johannes Balle, Eirikur Agustsson, Nick Johnston, Fabian Mentzer},
+  url = {http://www.compression.cc},
+  year={2020},
+  organization={CVPR}
+}
+```

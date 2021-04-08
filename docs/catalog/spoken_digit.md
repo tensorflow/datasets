@@ -62,17 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {Free Spoken Digit Dataset,
-    author = "Zohar Jackson",
-    title  = "Spoken_Digit",
-    year   = "2016",
-    url    = "https://github.com/Jakobovski/free-spoken-digit-dataset"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -110,3 +99,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {Free Spoken Digit Dataset,
+    author = "Zohar Jackson",
+    title  = "Spoken_Digit",
+    year   = "2016",
+    url    = "https://github.com/Jakobovski/free-spoken-digit-dataset"
+}
+```

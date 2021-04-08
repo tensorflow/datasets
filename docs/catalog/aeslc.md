@@ -57,19 +57,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('email_body', 'subject_line')`
 
-*   **Citation**:
-
-```
-@misc{zhang2019email,
-    title={This Email Could Save Your Life: Introducing the Task of Email Subject Line Generation},
-    author={Rui Zhang and Joel Tetreault},
-    year={2019},
-    eprint={1906.03497},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -107,3 +94,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{zhang2019email,
+    title={This Email Could Save Your Life: Introducing the Task of Email Subject Line Generation},
+    author={Rui Zhang and Joel Tetreault},
+    year={2019},
+    eprint={1906.03497},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```

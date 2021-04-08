@@ -70,18 +70,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('features', 'survived')`
 
-*   **Citation**:
-
-```
-@ONLINE {titanic,
-author = "Frank E. Harrell Jr., Thomas Cason",
-title  = "Titanic dataset",
-month  = "oct",
-year   = "2017",
-url    = "https://www.openml.org/d/40945"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -119,3 +107,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {titanic,
+author = "Frank E. Harrell Jr., Thomas Cason",
+title  = "Titanic dataset",
+month  = "oct",
+year   = "2017",
+url    = "https://www.openml.org/d/40945"
+}
+```

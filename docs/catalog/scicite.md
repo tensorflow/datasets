@@ -74,17 +74,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('string', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{Cohan2019Structural,
-  author={Arman Cohan and Waleed Ammar and Madeleine Van Zuylen and Field Cady},
-  title={Structural Scaffolds for Citation Intent Classification in Scientific Publications},
-  booktitle="NAACL",
-  year="2019"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -122,3 +111,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{Cohan2019Structural,
+  author={Arman Cohan and Waleed Ammar and Madeleine Van Zuylen and Field Cady},
+  title={Structural Scaffolds for Citation Intent Classification in Scientific Publications},
+  booktitle="NAACL",
+  year="2019"
+}
+```

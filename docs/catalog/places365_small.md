@@ -55,17 +55,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{zhou2017places,
-  title={Places: A 10 million Image Database for Scene Recognition},
-  author={Zhou, Bolei and Lapedriza, Agata and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  year={2017},
-  publisher={IEEE}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -105,3 +94,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{zhou2017places,
+  title={Places: A 10 million Image Database for Scene Recognition},
+  author={Zhou, Bolei and Lapedriza, Agata and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2017},
+  publisher={IEEE}
+}
+```

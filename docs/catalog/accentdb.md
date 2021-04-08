@@ -57,22 +57,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{ahamad-anand-bhargava:2020:LREC,
-  author    = {Ahamad, Afroz  and  Anand, Ankit  and  Bhargava, Pranesh},
-  title     = {AccentDB: A Database of Non-Native English Accents to Assist Neural Speech Recognition},
-  booktitle      = {Proceedings of The 12th Language Resources and Evaluation Conference},
-  month          = {May},
-  year           = {2020},
-  address        = {Marseille, France},
-  publisher      = {European Language Resources Association},
-  pages     = {5353--5360},
-  url       = {https://www.aclweb.org/anthology/2020.lrec-1.659}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -110,3 +94,19 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{ahamad-anand-bhargava:2020:LREC,
+  author    = {Ahamad, Afroz  and  Anand, Ankit  and  Bhargava, Pranesh},
+  title     = {AccentDB: A Database of Non-Native English Accents to Assist Neural Speech Recognition},
+  booktitle      = {Proceedings of The 12th Language Resources and Evaluation Conference},
+  month          = {May},
+  year           = {2020},
+  address        = {Marseille, France},
+  publisher      = {European Language Resources Association},
+  pages     = {5353--5360},
+  url       = {https://www.aclweb.org/anthology/2020.lrec-1.659}
+}
+```

@@ -69,33 +69,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'intent')`
 
-*   **Citation**:
-
-```
-@inproceedings{larson-etal-2019-evaluation,
-    title = "An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction",
-    author = "Larson, Stefan  and
-      Mahendran, Anish  and
-      Peper, Joseph J.  and
-      Clarke, Christopher  and
-      Lee, Andrew  and
-      Hill, Parker  and
-      Kummerfeld, Jonathan K.  and
-      Leach, Kevin  and
-      Laurenzano, Michael A.  and
-      Tang, Lingjia  and
-      Mars, Jason",
-    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
-    month = nov,
-    year = "2019",
-    address = "Hong Kong, China",
-    publisher = "Association for Computational Linguistics",
-    url = "https://www.aclweb.org/anthology/D19-1131",
-    doi = "10.18653/v1/D19-1131",
-    pages = "1311--1316",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -133,3 +106,30 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{larson-etal-2019-evaluation,
+    title = "An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction",
+    author = "Larson, Stefan  and
+      Mahendran, Anish  and
+      Peper, Joseph J.  and
+      Clarke, Christopher  and
+      Lee, Andrew  and
+      Hill, Parker  and
+      Kummerfeld, Jonathan K.  and
+      Leach, Kevin  and
+      Laurenzano, Michael A.  and
+      Tang, Lingjia  and
+      Mars, Jason",
+    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+    month = nov,
+    year = "2019",
+    address = "Hong Kong, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D19-1131",
+    doi = "10.18653/v1/D19-1131",
+    pages = "1311--1316",
+}
+```

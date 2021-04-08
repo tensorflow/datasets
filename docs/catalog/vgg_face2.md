@@ -71,15 +71,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{Cao18,
-author = "Cao, Q. and Shen, L. and Xie, W. and Parkhi, O. M. and Zisserman, A.",
-title  = "VGGFace2: A dataset for recognising faces across pose and age",
-booktitle = "International Conference on Automatic Face and Gesture Recognition",
-year  = "2018"}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -119,3 +110,13 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{Cao18,
+author = "Cao, Q. and Shen, L. and Xie, W. and Parkhi, O. M. and Zisserman, A.",
+title  = "VGGFace2: A dataset for recognising faces across pose and age",
+booktitle = "International Conference on Automatic Face and Gesture Recognition",
+year  = "2018"}
+```

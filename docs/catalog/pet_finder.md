@@ -76,17 +76,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('attributes', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {kaggle-petfinder-adoption-prediction,
-    author = "Kaggle and PetFinder.my",
-    title  = "PetFinder.my Adoption Prediction",
-    month  = "april",
-    year   = "2019",
-    url    = "https://www.kaggle.com/c/petfinder-adoption-prediction/data/"
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -126,3 +115,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {kaggle-petfinder-adoption-prediction,
+    author = "Kaggle and PetFinder.my",
+    title  = "PetFinder.my Adoption Prediction",
+    month  = "april",
+    year   = "2019",
+    url    = "https://www.kaggle.com/c/petfinder-adoption-prediction/data/"
+}
+```

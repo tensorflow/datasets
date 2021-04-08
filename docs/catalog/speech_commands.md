@@ -64,23 +64,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@article{speechcommandsv2,
-   author = {{Warden}, P.},
-    title = "{Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition}",
-  journal = {ArXiv e-prints},
-  archivePrefix = "arXiv",
-  eprint = {1804.03209},
-  primaryClass = "cs.CL",
-  keywords = {Computer Science - Computation and Language, Computer Science - Human-Computer Interaction},
-    year = 2018,
-    month = apr,
-    url = {https://arxiv.org/abs/1804.03209},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -118,3 +101,20 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{speechcommandsv2,
+   author = {{Warden}, P.},
+    title = "{Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition}",
+  journal = {ArXiv e-prints},
+  archivePrefix = "arXiv",
+  eprint = {1804.03209},
+  primaryClass = "cs.CL",
+  keywords = {Computer Science - Computation and Language, Computer Science - Human-Computer Interaction},
+    year = 2018,
+    month = apr,
+    url = {https://arxiv.org/abs/1804.03209},
+}
+```

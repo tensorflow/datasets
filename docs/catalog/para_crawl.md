@@ -25,6 +25,10 @@ Web-Scale Parallel Corpora for Official European Languages.
 
     *   **`1.2.0`** (default): No release notes.
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -34,10 +38,6 @@ Web-Scale Parallel Corpora for Official European Languages.
     url    = "http://paracrawl.eu/download.html."
 }
 ```
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## para_crawl/enbg (default config)
 

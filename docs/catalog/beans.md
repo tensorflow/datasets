@@ -58,17 +58,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {beansdata,
-    author="Makerere AI Lab",
-    title="Bean disease dataset",
-    month="January",
-    year="2020",
-    url="https://github.com/AI-Lab-Makerere/ibean/"
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -108,3 +97,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {beansdata,
+    author="Makerere AI Lab",
+    title="Bean disease dataset",
+    month="January",
+    year="2020",
+    url="https://github.com/AI-Lab-Makerere/ibean/"
+}
+```

@@ -90,6 +90,10 @@ Datasets with the "-movies" suffix contain only "movie_id", "movie_title", and
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -112,10 +116,6 @@ numpages = {19},
 keywords = {Datasets, recommendations, ratings, MovieLens}
 }
 ```
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## movie_lens/25m-ratings (default config)
 

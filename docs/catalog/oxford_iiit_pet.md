@@ -58,16 +58,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{parkhi12a,
-  author       = "Parkhi, O. M. and Vedaldi, A. and Zisserman, A. and Jawahar, C.~V.",
-  title        = "Cats and Dogs",
-  booktitle    = "IEEE Conference on Computer Vision and Pattern Recognition",
-  year         = "2012",
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -106,3 +96,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{parkhi12a,
+  author       = "Parkhi, O. M. and Vedaldi, A. and Zisserman, A. and Jawahar, C.~V.",
+  title        = "Cats and Dogs",
+  booktitle    = "IEEE Conference on Computer Vision and Pattern Recognition",
+  year         = "2012",
+}
+```

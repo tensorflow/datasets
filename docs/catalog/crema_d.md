@@ -61,21 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@article{cao2014crema,
-  title={{CREMA-D}: Crowd-sourced emotional multimodal actors dataset},
-  author={Cao, Houwei and Cooper, David G and Keutmann, Michael K and Gur, Ruben C and Nenkova, Ani and Verma, Ragini},
-  journal={IEEE transactions on affective computing},
-  volume={5},
-  number={4},
-  pages={377--390},
-  year={2014},
-  publisher={IEEE}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -113,3 +98,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{cao2014crema,
+  title={{CREMA-D}: Crowd-sourced emotional multimodal actors dataset},
+  author={Cao, Houwei and Cooper, David G and Keutmann, Michael K and Gur, Ruben C and Nenkova, Ani and Verma, Ragini},
+  journal={IEEE transactions on affective computing},
+  volume={5},
+  number={4},
+  pages={377--390},
+  year={2014},
+  publisher={IEEE}
+}
+```

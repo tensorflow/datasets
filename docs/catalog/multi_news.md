@@ -59,19 +59,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('document', 'summary')`
 
-*   **Citation**:
-
-```
-@misc{alex2019multinews,
-    title={Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model},
-    author={Alexander R. Fabbri and Irene Li and Tianwei She and Suyi Li and Dragomir R. Radev},
-    year={2019},
-    eprint={1906.01749},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -109,3 +96,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{alex2019multinews,
+    title={Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model},
+    author={Alexander R. Fabbri and Irene Li and Tianwei She and Suyi Li and Dragomir R. Radev},
+    year={2019},
+    eprint={1906.01749},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```

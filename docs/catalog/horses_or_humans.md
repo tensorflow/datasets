@@ -54,17 +54,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {horses_or_humans,
-author = "Laurence Moroney",
-title = "Horses or Humans Dataset",
-month = "feb",
-year = "2019",
-url = "http://laurencemoroney.com/horses-or-humans-dataset"
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -104,3 +93,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {horses_or_humans,
+author = "Laurence Moroney",
+title = "Horses or Humans Dataset",
+month = "feb",
+year = "2019",
+url = "http://laurencemoroney.com/horses-or-humans-dataset"
+}
+```

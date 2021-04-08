@@ -65,34 +65,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('article', 'highlights')`
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/SeeLM17,
-  author    = {Abigail See and
-               Peter J. Liu and
-               Christopher D. Manning},
-  title     = {Get To The Point: Summarization with Pointer-Generator Networks},
-  journal   = {CoRR},
-  volume    = {abs/1704.04368},
-  year      = {2017},
-  url       = {http://arxiv.org/abs/1704.04368},
-  archivePrefix = {arXiv},
-  eprint    = {1704.04368},
-  timestamp = {Mon, 13 Aug 2018 16:46:08 +0200},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/SeeLM17},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-
-@inproceedings{hermann2015teaching,
-  title={Teaching machines to read and comprehend},
-  author={Hermann, Karl Moritz and Kocisky, Tomas and Grefenstette, Edward and Espeholt, Lasse and Kay, Will and Suleyman, Mustafa and Blunsom, Phil},
-  booktitle={Advances in neural information processing systems},
-  pages={1693--1701},
-  year={2015}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -130,3 +102,31 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{DBLP:journals/corr/SeeLM17,
+  author    = {Abigail See and
+               Peter J. Liu and
+               Christopher D. Manning},
+  title     = {Get To The Point: Summarization with Pointer-Generator Networks},
+  journal   = {CoRR},
+  volume    = {abs/1704.04368},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1704.04368},
+  archivePrefix = {arXiv},
+  eprint    = {1704.04368},
+  timestamp = {Mon, 13 Aug 2018 16:46:08 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/SeeLM17},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{hermann2015teaching,
+  title={Teaching machines to read and comprehend},
+  author={Hermann, Karl Moritz and Kocisky, Tomas and Grefenstette, Edward and Espeholt, Lasse and Kay, Will and Suleyman, Mustafa and Blunsom, Phil},
+  booktitle={Advances in neural information processing systems},
+  pages={1693--1701},
+  year={2015}
+}
+```

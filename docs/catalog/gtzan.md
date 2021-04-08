@@ -68,18 +68,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@misc{tzanetakis_essl_cook_2001,
-author    = "Tzanetakis, George and Essl, Georg and Cook, Perry",
-title     = "Automatic Musical Genre Classification Of Audio Signals",
-url       = "http://ismir2001.ismir.net/pdf/tzanetakis.pdf",
-publisher = "The International Society for Music Information Retrieval",
-year      = "2001"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -117,3 +105,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{tzanetakis_essl_cook_2001,
+author    = "Tzanetakis, George and Essl, Georg and Cook, Perry",
+title     = "Automatic Musical Genre Classification Of Audio Signals",
+url       = "http://ismir2001.ismir.net/pdf/tzanetakis.pdf",
+publisher = "The International Society for Music Information Retrieval",
+year      = "2001"
+}
+```

@@ -59,20 +59,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{lake2015human,
-  title={Human-level concept learning through probabilistic program induction},
-  author={Lake, Brenden M and Salakhutdinov, Ruslan and Tenenbaum, Joshua B},
-  journal={Science},
-  volume={350},
-  number={6266},
-  pages={1332--1338},
-  year={2015},
-  publisher={American Association for the Advancement of Science}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -112,3 +98,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{lake2015human,
+  title={Human-level concept learning through probabilistic program induction},
+  author={Lake, Brenden M and Salakhutdinov, Ruslan and Tenenbaum, Joshua B},
+  journal={Science},
+  volume={350},
+  number={6266},
+  pages={1332--1338},
+  year={2015},
+  publisher={American Association for the Advancement of Science}
+}
+```

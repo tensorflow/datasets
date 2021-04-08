@@ -55,16 +55,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{song2016deep,
- author    = {Song, Hyun Oh and Xiang, Yu and Jegelka, Stefanie and Savarese, Silvio},
- title     = {Deep Metric Learning via Lifted Structured Feature Embedding},
- booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
- year      = {2016}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -104,3 +94,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{song2016deep,
+ author    = {Song, Hyun Oh and Xiang, Yu and Jegelka, Stefanie and Savarese, Silvio},
+ title     = {Deep Metric Learning via Lifted Structured Feature Embedding},
+ booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+ year      = {2016}
+}
+```

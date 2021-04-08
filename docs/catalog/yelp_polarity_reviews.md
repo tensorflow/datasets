@@ -77,23 +77,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'label')`
 
-*   **Citation**:
-
-```
-@article{zhangCharacterlevelConvolutionalNetworks2015,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1509.01626},
-  primaryClass = {cs},
-  title = {Character-Level {{Convolutional Networks}} for {{Text Classification}}},
-  abstract = {This article offers an empirical exploration on the use of character-level convolutional networks (ConvNets) for text classification. We constructed several large-scale datasets to show that character-level convolutional networks could achieve state-of-the-art or competitive results. Comparisons are offered against traditional models such as bag of words, n-grams and their TFIDF variants, and deep learning models such as word-based ConvNets and recurrent neural networks.},
-  journal = {arXiv:1509.01626 [cs]},
-  author = {Zhang, Xiang and Zhao, Junbo and LeCun, Yann},
-  month = sep,
-  year = {2015},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -131,3 +114,20 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{zhangCharacterlevelConvolutionalNetworks2015,
+  archivePrefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1509.01626},
+  primaryClass = {cs},
+  title = {Character-Level {{Convolutional Networks}} for {{Text Classification}}},
+  abstract = {This article offers an empirical exploration on the use of character-level convolutional networks (ConvNets) for text classification. We constructed several large-scale datasets to show that character-level convolutional networks could achieve state-of-the-art or competitive results. Comparisons are offered against traditional models such as bag of words, n-grams and their TFIDF variants, and deep learning models such as word-based ConvNets and recurrent neural networks.},
+  journal = {arXiv:1509.01626 [cs]},
+  author = {Zhang, Xiang and Zhao, Junbo and LeCun, Yann},
+  month = sep,
+  year = {2015},
+}
+```

@@ -55,20 +55,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@Inproceedings (Conference){asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization,
-author = {Elson, Jeremy and Douceur, John (JD) and Howell, Jon and Saul, Jared},
-title = {Asirra: A CAPTCHA that Exploits Interest-Aligned Manual Image Categorization},
-booktitle = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
-year = {2007},
-month = {October},
-publisher = {Association for Computing Machinery, Inc.},
-url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization/},
-edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -108,3 +94,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@Inproceedings (Conference){asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization,
+author = {Elson, Jeremy and Douceur, John (JD) and Howell, Jon and Saul, Jared},
+title = {Asirra: A CAPTCHA that Exploits Interest-Aligned Manual Image Categorization},
+booktitle = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
+year = {2007},
+month = {October},
+publisher = {Association for Computing Machinery, Inc.},
+url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization/},
+edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
+}
+```

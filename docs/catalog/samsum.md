@@ -70,17 +70,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('dialogue', 'summary')`
 
-*   **Citation**:
-
-```
-@article{gliwa2019samsum,
-  title={SAMSum Corpus: A Human-annotated Dialogue Dataset for Abstractive Summarization},
-  author={Gliwa, Bogdan and Mochol, Iwona and Biesek, Maciej and Wawer, Aleksander},
-  journal={arXiv preprint arXiv:1911.12237},
-  year={2019}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -118,3 +107,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{gliwa2019samsum,
+  title={SAMSum Corpus: A Human-annotated Dialogue Dataset for Abstractive Summarization},
+  author={Gliwa, Bogdan and Mochol, Iwona and Biesek, Maciej and Wawer, Aleksander},
+  journal={arXiv preprint arXiv:1911.12237},
+  year={2019}
+}
+```

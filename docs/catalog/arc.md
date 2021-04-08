@@ -65,19 +65,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@misc{chollet_francois_2019,
-  title     = {The Measure of Intelligence},
-  url       = {https://arxiv.org/abs/1911.01547},
-  journal   = {arXiv.org},
-  author    = {Francois Chollet},
-  year      = {2019},
-  month     = {Nov}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -115,5 +102,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{chollet_francois_2019,
+  title     = {The Measure of Intelligence},
+  url       = {https://arxiv.org/abs/1911.01547},
+  journal   = {arXiv.org},
+  author    = {Francois Chollet},
+  year      = {2019},
+  month     = {Nov}
+}
+```
 
 ## arc/2019-12-06 (default config)

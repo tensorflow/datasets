@@ -65,21 +65,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{Bisk2020,
-  author = {Yonatan Bisk and Rowan Zellers and
-            Ronan Le Bras and Jianfeng Gao
-            and Yejin Choi},
-  title = {PIQA: Reasoning about Physical Commonsense in
-           Natural Language},
-  booktitle = {Thirty-Fourth AAAI Conference on
-               Artificial Intelligence},
-  year = {2020},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -117,3 +102,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{Bisk2020,
+  author = {Yonatan Bisk and Rowan Zellers and
+            Ronan Le Bras and Jianfeng Gao
+            and Yejin Choi},
+  title = {PIQA: Reasoning about Physical Commonsense in
+           Natural Language},
+  booktitle = {Thirty-Fourth AAAI Conference on
+               Artificial Intelligence},
+  year = {2020},
+}
+```

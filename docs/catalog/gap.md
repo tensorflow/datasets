@@ -66,27 +66,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/abs-1810-05201,
-  author    = {Kellie Webster and
-               Marta Recasens and
-               Vera Axelrod and
-               Jason Baldridge},
-  title     = {Mind the {GAP:} {A} Balanced Corpus of Gendered Ambiguous Pronouns},
-  journal   = {CoRR},
-  volume    = {abs/1810.05201},
-  year      = {2018},
-  url       = {http://arxiv.org/abs/1810.05201},
-  archivePrefix = {arXiv},
-  eprint    = {1810.05201},
-  timestamp = {Tue, 30 Oct 2018 20:39:56 +0100},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1810-05201},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -124,3 +103,24 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{DBLP:journals/corr/abs-1810-05201,
+  author    = {Kellie Webster and
+               Marta Recasens and
+               Vera Axelrod and
+               Jason Baldridge},
+  title     = {Mind the {GAP:} {A} Balanced Corpus of Gendered Ambiguous Pronouns},
+  journal   = {CoRR},
+  volume    = {abs/1810.05201},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1810.05201},
+  archivePrefix = {arXiv},
+  eprint    = {1810.05201},
+  timestamp = {Tue, 30 Oct 2018 20:39:56 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1810-05201},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```

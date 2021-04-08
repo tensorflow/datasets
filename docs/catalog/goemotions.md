@@ -86,27 +86,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{demszky-2020-goemotions,
-    title = "{G}o{E}motions: A Dataset of Fine-Grained Emotions",
-    author = "Demszky, Dorottya  and
-      Movshovitz-Attias, Dana  and
-      Ko, Jeongwoo  and
-      Cowen, Alan  and
-      Nemade, Gaurav  and
-      Ravi, Sujith",
-    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
-    month = jul,
-    year = "2020",
-    address = "Online",
-    publisher = "Association for Computational Linguistics",
-    url = "https://www.aclweb.org/anthology/2020.acl-main.372",
-    pages = "4040--4054",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -144,3 +123,24 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{demszky-2020-goemotions,
+    title = "{G}o{E}motions: A Dataset of Fine-Grained Emotions",
+    author = "Demszky, Dorottya  and
+      Movshovitz-Attias, Dana  and
+      Ko, Jeongwoo  and
+      Cowen, Alan  and
+      Nemade, Gaurav  and
+      Ravi, Sujith",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.372",
+    pages = "4040--4054",
+}
+```

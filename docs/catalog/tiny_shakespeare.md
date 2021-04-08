@@ -70,17 +70,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@misc{
-  author={Karpathy, Andrej},
-  title={char-rnn},
-  year={2015},
-  howpublished={\url{https://github.com/karpathy/char-rnn}}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -118,3 +107,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{
+  author={Karpathy, Andrej},
+  title={char-rnn},
+  year={2015},
+  howpublished={\url{https://github.com/karpathy/char-rnn}}
+}
+```

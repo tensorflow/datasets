@@ -53,19 +53,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{kather2016multi,
-  title={Multi-class texture analysis in colorectal cancer histology},
-  author={Kather, Jakob Nikolas and Weis, Cleo-Aron and Bianconi, Francesco and Melchers, Susanne M and Schad, Lothar R and Gaiser, Timo and Marx, Alexander and Z{"o}llner, Frank Gerrit},
-  journal={Scientific reports},
-  volume={6},
-  pages={27988},
-  year={2016},
-  publisher={Nature Publishing Group}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -105,3 +92,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{kather2016multi,
+  title={Multi-class texture analysis in colorectal cancer histology},
+  author={Kather, Jakob Nikolas and Weis, Cleo-Aron and Bianconi, Francesco and Melchers, Susanne M and Schad, Lothar R and Gaiser, Timo and Marx, Alexander and Z{"o}llner, Frank Gerrit},
+  journal={Scientific reports},
+  volume={6},
+  pages={27988},
+  year={2016},
+  publisher={Nature Publishing Group}
+}
+```

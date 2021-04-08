@@ -72,19 +72,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text_normalized', 'speech')`
 
-*   **Citation**:
-
-```
-@inproceedings{zen2019libritts,
-  title = {LibriTTS: A Corpus Derived from LibriSpeech for Text-to-Speech},
-  author = {H. Zen and V. Dang and R. Clark and Y. Zhang and R. J. Weiss and Y. Jia and Z. Chen and Y. Wu},
-  booktitle = {Proc. Interspeech},
-  month = sep,
-  year = {2019},
-  doi = {10.21437/Interspeech.2019-2441},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -122,3 +109,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{zen2019libritts,
+  title = {LibriTTS: A Corpus Derived from LibriSpeech for Text-to-Speech},
+  author = {H. Zen and V. Dang and R. Clark and Y. Zhang and R. J. Weiss and Y. Jia and Z. Chen and Y. Wu},
+  booktitle = {Proc. Interspeech},
+  month = sep,
+  year = {2019},
+  doi = {10.21437/Interspeech.2019-2441},
+}
+```

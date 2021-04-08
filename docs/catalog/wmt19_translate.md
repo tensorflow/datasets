@@ -56,6 +56,10 @@ builder = tfds.builder("wmt_translate", config=config)
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -65,10 +69,6 @@ builder = tfds.builder("wmt_translate", config=config)
     url    = "http://www.statmt.org/wmt19/translation-task.html"
 }
 ```
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## wmt19_translate/cs-en (default config)
 

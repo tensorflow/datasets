@@ -49,6 +49,7 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
+
 *   **Citation**:
 
 ```

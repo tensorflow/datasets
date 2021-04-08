@@ -55,26 +55,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/abs-1708-07747,
-  author    = {Han Xiao and
-               Kashif Rasul and
-               Roland Vollgraf},
-  title     = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning
-               Algorithms},
-  journal   = {CoRR},
-  volume    = {abs/1708.07747},
-  year      = {2017},
-  url       = {http://arxiv.org/abs/1708.07747},
-  archivePrefix = {arXiv},
-  eprint    = {1708.07747},
-  timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -114,3 +94,24 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{DBLP:journals/corr/abs-1708-07747,
+  author    = {Han Xiao and
+               Kashif Rasul and
+               Roland Vollgraf},
+  title     = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning
+               Algorithms},
+  journal   = {CoRR},
+  volume    = {abs/1708.07747},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1708.07747},
+  archivePrefix = {arXiv},
+  eprint    = {1708.07747},
+  timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```

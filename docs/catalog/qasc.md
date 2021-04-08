@@ -64,17 +64,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{allenai:qasc,
-      author    = {Tushar Khot and Peter Clark and Michal Guerquin and Peter Jansen and Ashish Sabharwal},
-      title     = {QASC: A Dataset for Question Answering via Sentence Composition},
-      journal   = {arXiv:1910.11473v2},
-      year      = {2020},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -112,3 +101,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{allenai:qasc,
+      author    = {Tushar Khot and Peter Clark and Michal Guerquin and Peter Jansen and Ashish Sabharwal},
+      title     = {QASC: A Dataset for Question Answering via Sentence Composition},
+      journal   = {arXiv:1910.11473v2},
+      year      = {2020},
+}
+```

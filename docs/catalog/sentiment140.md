@@ -70,17 +70,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'polarity')`
 
-*   **Citation**:
-
-```
-@ONLINE {Sentiment140,
-    author = "Go, Alec and Bhayani, Richa and Huang, Lei",
-    title  = "Twitter Sentiment Classification using Distant Supervision",
-    year   = "2009",
-    url    = "http://help.sentiment140.com/home"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -118,3 +107,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {Sentiment140,
+    author = "Go, Alec and Bhayani, Richa and Huang, Lei",
+    title  = "Twitter Sentiment Classification using Distant Supervision",
+    year   = "2009",
+    url    = "http://help.sentiment140.com/home"
+}
+```

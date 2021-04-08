@@ -38,6 +38,10 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -55,10 +59,6 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
     pages = "47--57",
 }
 ```
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## opinion_abstracts/rotten_tomatoes (default config)
 

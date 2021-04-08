@@ -56,6 +56,7 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+
 ## voc/2007 (default config)
 
 *   **Config description**: This dataset contains the data from the PASCAL
@@ -77,15 +78,6 @@ Split          | Examples
 `'test'`       | 4,952
 `'train'`      | 2,501
 `'validation'` | 2,510
-
-*   **Citation**:
-
-```
-@misc{pascal-voc-2007,
-    author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
-    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2007 {(VOC2007)} {R}esults",
-    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -126,6 +118,15 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@misc{pascal-voc-2007,
+    author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
+    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2007 {(VOC2007)} {R}esults",
+    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
+```
+
 ## voc/2012
 
 *   **Config description**: This dataset contains the data from the PASCAL
@@ -147,15 +148,6 @@ Split          | Examples
 `'test'`       | 10,991
 `'train'`      | 5,717
 `'validation'` | 5,823
-
-*   **Citation**:
-
-```
-@misc{pascal-voc-2012,
-    author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
-    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2012 {(VOC2012)} {R}esults",
-    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html"}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -195,3 +187,12 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{pascal-voc-2012,
+    author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
+    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2012 {(VOC2012)} {R}esults",
+    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html"}
+```

@@ -123,28 +123,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{conf/iccv/LiuLWT15,
-  added-at = {2018-10-09T00:00:00.000+0200},
-  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},
-  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},
-  booktitle = {ICCV},
-  crossref = {conf/iccv/2015},
-  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},
-  interhash = {3f735aaa11957e73914bbe2ca9d5e702},
-  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},
-  isbn = {978-1-4673-8391-2},
-  keywords = {dblp},
-  pages = {3730-3738},
-  publisher = {IEEE Computer Society},
-  timestamp = {2018-10-11T11:43:28.000+0200},
-  title = {Deep Learning Face Attributes in the Wild.},
-  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},
-  year = 2015
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -184,3 +162,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{conf/iccv/LiuLWT15,
+  added-at = {2018-10-09T00:00:00.000+0200},
+  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},
+  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},
+  booktitle = {ICCV},
+  crossref = {conf/iccv/2015},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},
+  interhash = {3f735aaa11957e73914bbe2ca9d5e702},
+  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},
+  isbn = {978-1-4673-8391-2},
+  keywords = {dblp},
+  pages = {3730-3738},
+  publisher = {IEEE Computer Society},
+  timestamp = {2018-10-11T11:43:28.000+0200},
+  title = {Deep Learning Face Attributes in the Wild.},
+  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},
+  year = 2015
+}
+```

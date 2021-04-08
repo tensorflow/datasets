@@ -56,31 +56,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{paperno-etal-2016-lambada,
-    title = "The {LAMBADA} dataset: Word prediction requiring a broad discourse context",
-    author = "Paperno, Denis  and
-      Kruszewski, Germ{'a}n  and
-      Lazaridou, Angeliki  and
-      Pham, Ngoc Quan  and
-      Bernardi, Raffaella  and
-      Pezzelle, Sandro  and
-      Baroni, Marco  and
-      Boleda, Gemma  and
-      Fern{'a}ndez, Raquel",
-    booktitle = "Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
-    month = aug,
-    year = "2016",
-    address = "Berlin, Germany",
-    publisher = "Association for Computational Linguistics",
-    url = "https://www.aclweb.org/anthology/P16-1144",
-    doi = "10.18653/v1/P16-1144",
-    pages = "1525--1534",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -118,3 +93,28 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{paperno-etal-2016-lambada,
+    title = "The {LAMBADA} dataset: Word prediction requiring a broad discourse context",
+    author = "Paperno, Denis  and
+      Kruszewski, Germ{'a}n  and
+      Lazaridou, Angeliki  and
+      Pham, Ngoc Quan  and
+      Bernardi, Raffaella  and
+      Pezzelle, Sandro  and
+      Baroni, Marco  and
+      Boleda, Gemma  and
+      Fern{'a}ndez, Raquel",
+    booktitle = "Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = aug,
+    year = "2016",
+    address = "Berlin, Germany",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/P16-1144",
+    doi = "10.18653/v1/P16-1144",
+    pages = "1525--1534",
+}
+```

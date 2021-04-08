@@ -66,26 +66,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('input_text', 'target_text')`
 
-*   **Citation**:
-
-```
-@inproceedings{gardent2017creating,
-    title = ""Creating Training Corpora for {NLG} Micro-Planners"",
-    author = ""Gardent, Claire  and
-      Shimorina, Anastasia  and
-      Narayan, Shashi  and
-      Perez-Beltrachini, Laura"",
-    booktitle = ""Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"",
-    month = jul,
-    year = ""2017"",
-    address = ""Vancouver, Canada"",
-    publisher = ""Association for Computational Linguistics"",
-    doi = ""10.18653/v1/P17-1017"",
-    pages = ""179--188"",
-    url = ""https://www.aclweb.org/anthology/P17-1017.pdf""
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -123,3 +103,23 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{gardent2017creating,
+    title = ""Creating Training Corpora for {NLG} Micro-Planners"",
+    author = ""Gardent, Claire  and
+      Shimorina, Anastasia  and
+      Narayan, Shashi  and
+      Perez-Beltrachini, Laura"",
+    booktitle = ""Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"",
+    month = jul,
+    year = ""2017"",
+    address = ""Vancouver, Canada"",
+    publisher = ""Association for Computational Linguistics"",
+    doi = ""10.18653/v1/P17-1017"",
+    pages = ""179--188"",
+    url = ""https://www.aclweb.org/anthology/P17-1017.pdf""
+}
+```

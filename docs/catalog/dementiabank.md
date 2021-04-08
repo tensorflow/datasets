@@ -72,17 +72,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@article{boller2005dementiabank,
-  title={Dementiabank database guide},
-  author={Boller, Francois and Becker, James},
-  journal={University of Pittsburgh},
-  year={2005}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -120,3 +109,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{boller2005dementiabank,
+  title={Dementiabank database guide},
+  author={Boller, Francois and Becker, James},
+  journal={University of Pittsburgh},
+  year={2005}
+}
+```

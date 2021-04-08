@@ -55,18 +55,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{salakhutdinov2008quantitative,
-title={On the quantitative analysis of deep belief networks},
-author={Salakhutdinov, Ruslan and Murray, Iain},
-booktitle={Proceedings of the 25th international conference on Machine learning},
-pages={872--879},
-year={2008},
-organization={ACM}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -106,3 +94,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{salakhutdinov2008quantitative,
+title={On the quantitative analysis of deep belief networks},
+author={Salakhutdinov, Ruslan and Murray, Iain},
+booktitle={Proceedings of the 25th international conference on Machine learning},
+pages={872--879},
+year={2008},
+organization={ACM}
+}
+```

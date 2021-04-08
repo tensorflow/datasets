@@ -87,25 +87,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{Baldi:2014kfa,
-      author         = "Baldi, Pierre and Sadowski, Peter and Whiteson, Daniel",
-      title          = "{Searching for Exotic Particles in High-Energy Physics
-                        with Deep Learning}",
-      journal        = "Nature Commun.",
-      volume         = "5",
-      year           = "2014",
-      pages          = "4308",
-      doi            = "10.1038/ncomms5308",
-      eprint         = "1402.4735",
-      archivePrefix  = "arXiv",
-      primaryClass   = "hep-ph",
-      SLACcitation   = "%%CITATION = ARXIV:1402.4735;%%"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -143,3 +124,22 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{Baldi:2014kfa,
+      author         = "Baldi, Pierre and Sadowski, Peter and Whiteson, Daniel",
+      title          = "{Searching for Exotic Particles in High-Energy Physics
+                        with Deep Learning}",
+      journal        = "Nature Commun.",
+      volume         = "5",
+      year           = "2014",
+      pages          = "4308",
+      doi            = "10.1038/ncomms5308",
+      eprint         = "1402.4735",
+      archivePrefix  = "arXiv",
+      primaryClass   = "hep-ph",
+      SLACcitation   = "%%CITATION = ARXIV:1402.4735;%%"
+}
+```

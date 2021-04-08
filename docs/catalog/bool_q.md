@@ -61,17 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{clark2019boolq,
-  title =     {BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},
-  author =    {Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},
-  booktitle = {NAACL},
-  year =      {2019},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -109,3 +98,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{clark2019boolq,
+  title =     {BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},
+  author =    {Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},
+  booktitle = {NAACL},
+  year =      {2019},
+}
+```

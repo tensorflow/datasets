@@ -77,24 +77,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('input_text', 'target_text')`
 
-*   **Citation**:
-
-```
-@inproceedings{pasupat-liang-2015-compositional,
-    title = "Compositional Semantic Parsing on Semi-Structured Tables",
-    author = "Pasupat, Panupong  and
-      Liang, Percy",
-    booktitle = "Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 1: Long Papers)",
-    month = jul,
-    year = "2015",
-    address = "Beijing, China",
-    publisher = "Association for Computational Linguistics",
-    url = "https://www.aclweb.org/anthology/P15-1142",
-    doi = "10.3115/v1/P15-1142",
-    pages = "1470--1480",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -132,3 +114,21 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{pasupat-liang-2015-compositional,
+    title = "Compositional Semantic Parsing on Semi-Structured Tables",
+    author = "Pasupat, Panupong  and
+      Liang, Percy",
+    booktitle = "Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 1: Long Papers)",
+    month = jul,
+    year = "2015",
+    address = "Beijing, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/P15-1142",
+    doi = "10.3115/v1/P15-1142",
+    pages = "1470--1480",
+}
+```

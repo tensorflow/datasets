@@ -56,6 +56,10 @@ builder = tfds.builder("wmt_translate", config=config)
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -71,10 +75,6 @@ builder = tfds.builder("wmt_translate", config=config)
   url       = {http://www.aclweb.org/anthology/W17-4717}
 }
 ```
-
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## wmt17_translate/cs-en (default config)
 

@@ -67,16 +67,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{FeiFei2004LearningGV,
-  title={Learning Generative Visual Models from Few Training Examples: An Incremental Bayesian Approach Tested on 101 Object Categories},
-  author={Li Fei-Fei and Rob Fergus and Pietro Perona},
-  journal={Computer Vision and Pattern Recognition Workshop},
-  year={2004},
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -116,3 +106,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{FeiFei2004LearningGV,
+  title={Learning Generative Visual Models from Few Training Examples: An Incremental Bayesian Approach Tested on 101 Object Categories},
+  author={Li Fei-Fei and Rob Fergus and Pietro Perona},
+  journal={Computer Vision and Pattern Recognition Workshop},
+  year={2004},
+}
+```

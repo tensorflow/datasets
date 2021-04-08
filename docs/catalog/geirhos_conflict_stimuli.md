@@ -61,20 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'shape_label')`
 
-*   **Citation**:
-
-```
-@inproceedings{
-  geirhos2018imagenettrained,
-  title={ImageNet-trained {CNN}s are biased towards texture; increasing shape
-         bias improves accuracy and robustness.},
-  author={Robert Geirhos and Patricia Rubisch and Claudio Michaelis and
-          Matthias Bethge and Felix A. Wichmann and Wieland Brendel},
-  booktitle={International Conference on Learning Representations},
-  year={2019},
-  url={https://openreview.net/forum?id=Bygh9j09KX},
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -114,3 +100,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{
+  geirhos2018imagenettrained,
+  title={ImageNet-trained {CNN}s are biased towards texture; increasing shape
+         bias improves accuracy and robustness.},
+  author={Robert Geirhos and Patricia Rubisch and Claudio Michaelis and
+          Matthias Bethge and Felix A. Wichmann and Wieland Brendel},
+  booktitle={International Conference on Learning Representations},
+  year={2019},
+  url={https://openreview.net/forum?id=Bygh9j09KX},
+}
+```

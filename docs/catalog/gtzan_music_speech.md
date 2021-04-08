@@ -56,17 +56,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {Music Speech,
-    author = "Tzanetakis, George",
-    title  = "GTZAN Music/Speech Collection",
-    year   = "1999",
-    url    = "http://marsyas.info/index.html"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -104,3 +93,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {Music Speech,
+    author = "Tzanetakis, George",
+    title  = "GTZAN Music/Speech Collection",
+    year   = "1999",
+    url    = "http://marsyas.info/index.html"
+}
+```

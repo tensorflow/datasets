@@ -58,17 +58,6 @@ Sequence({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@misc{1710.05268,
-  Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
-  Title = {Self-Supervised Visual Planning with Temporal Skip Connections},
-  Year = {2017},
-  Eprint = {arXiv:1710.05268},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -106,3 +95,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{1710.05268,
+  Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
+  Title = {Self-Supervised Visual Planning with Temporal Skip Connections},
+  Year = {2017},
+  Eprint = {arXiv:1710.05268},
+}
+```

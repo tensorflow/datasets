@@ -83,22 +83,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'summary')`
 
-*   **Citation**:
-
-```
-@article{Grusky_2018,
-   title={Newsroom: A Dataset of 1.3 Million Summaries with Diverse Extractive Strategies},
-   url={http://dx.doi.org/10.18653/v1/n18-1065},
-   DOI={10.18653/v1/n18-1065},
-   journal={Proceedings of the 2018 Conference of the North American Chapter of
-          the Association for Computational Linguistics: Human Language
-          Technologies, Volume 1 (Long Papers)},
-   publisher={Association for Computational Linguistics},
-   author={Grusky, Max and Naaman, Mor and Artzi, Yoav},
-   year={2018}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -136,3 +120,19 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{Grusky_2018,
+   title={Newsroom: A Dataset of 1.3 Million Summaries with Diverse Extractive Strategies},
+   url={http://dx.doi.org/10.18653/v1/n18-1065},
+   DOI={10.18653/v1/n18-1065},
+   journal={Proceedings of the 2018 Conference of the North American Chapter of
+          the Association for Computational Linguistics: Human Language
+          Technologies, Volume 1 (Long Papers)},
+   publisher={Association for Computational Linguistics},
+   author={Grusky, Max and Naaman, Mor and Artzi, Yoav},
+   year={2018}
+}
+```

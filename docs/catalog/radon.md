@@ -87,18 +87,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('features', 'activity')`
 
-*   **Citation**:
-
-```
-@book{GelmanHill:2007,
-  author = {Gelman, Andrew and Hill, Jennifer},
-  title = {Data Analysis Using Regression and Multilevel/Hierarchical Models},
-  publisher = {Cambridge University Press},
-  series = {Analytical methods for social research},
-  year = 2007
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -136,3 +124,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@book{GelmanHill:2007,
+  author = {Gelman, Andrew and Hill, Jennifer},
+  title = {Data Analysis Using Regression and Multilevel/Hierarchical Models},
+  publisher = {Cambridge University Press},
+  series = {Analytical methods for social research},
+  year = 2007
+}
+```

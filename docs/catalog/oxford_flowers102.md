@@ -68,17 +68,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{Nilsback08,
-   author = "Nilsback, M-E. and Zisserman, A.",
-   title = "Automated Flower Classification over a Large Number of Classes",
-   booktitle = "Proceedings of the Indian Conference on Computer Vision, Graphics and Image Processing",
-   year = "2008",
-   month = "Dec"
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -118,3 +107,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{Nilsback08,
+   author = "Nilsback, M-E. and Zisserman, A.",
+   title = "Automated Flower Classification over a Large Number of Classes",
+   booktitle = "Proceedings of the Indian Conference on Computer Vision, Graphics and Image Processing",
+   year = "2008",
+   month = "Dec"
+}
+```

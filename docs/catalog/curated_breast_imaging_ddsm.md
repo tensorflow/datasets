@@ -65,6 +65,7 @@ Resulting images should be put in `manual_dir`, like:
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+
 *   **Citation**:
 
 ```

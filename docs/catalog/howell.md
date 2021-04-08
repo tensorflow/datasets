@@ -73,17 +73,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@ONLINE {
-    author = "Howell, Nancy",
-    title  = "Dobe !Kung Census of All Population.",
-    year   = "2009",
-    url    = "https://tspace.library.utoronto.ca/handle/1807/17973"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -121,3 +110,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {
+    author = "Howell, Nancy",
+    title  = "Dobe !Kung Census of All Population.",
+    year   = "2009",
+    url    = "https://tspace.library.utoronto.ca/handle/1807/17973"
+}
+```

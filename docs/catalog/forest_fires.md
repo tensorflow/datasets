@@ -102,24 +102,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('area', 'features')`
 
-*   **Citation**:
-
-```
-@misc{Dua:2019 ,
-author = "Dua, Dheeru and Graff, Casey",
-year = "2017",
-title = "{UCI} Machine Learning Repository",
-url = "http://archive.ics.uci.edu/ml",
-institution = "University of California, Irvine, School of Information and Computer Sciences" }
-
-@article{cortez2007data,
-  title={A data mining approach to predict forest fires using meteorological data},
-  author={Cortez, Paulo and Morais, Anibal de Jesus Raimundo},
-  year={2007},
-  publisher={Associa{\c{c}}{\~a}o Portuguesa para a Intelig{\^e}ncia Artificial (APPIA)}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -157,3 +139,21 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{Dua:2019 ,
+author = "Dua, Dheeru and Graff, Casey",
+year = "2017",
+title = "{UCI} Machine Learning Repository",
+url = "http://archive.ics.uci.edu/ml",
+institution = "University of California, Irvine, School of Information and Computer Sciences" }
+
+@article{cortez2007data,
+  title={A data mining approach to predict forest fires using meteorological data},
+  author={Cortez, Paulo and Morais, Anibal de Jesus Raimundo},
+  year={2007},
+  publisher={Associa{\c{c}}{\~a}o Portuguesa para a Intelig{\^e}ncia Artificial (APPIA)}
+}
+```

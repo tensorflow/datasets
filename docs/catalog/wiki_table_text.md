@@ -64,18 +64,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('input_text', 'target_text')`
 
-*   **Citation**:
-
-```
-@inproceedings{bao2018table,
-  title={Table-to-Text: Describing Table Region with Natural Language},
-  author={Junwei Bao and Duyu Tang and Nan Duan and Zhao Yan and Yuanhua Lv and Ming Zhou and Tiejun Zhao},
-  booktitle={AAAI},
-  url={https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/download/16138/16782},
-  year={2018}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -113,3 +101,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{bao2018table,
+  title={Table-to-Text: Describing Table Region with Natural Language},
+  author={Junwei Bao and Duyu Tang and Nan Duan and Zhao Yan and Yuanhua Lv and Ming Zhou and Tiejun Zhao},
+  booktitle={AAAI},
+  url={https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/download/16138/16782},
+  year={2018}
+}
+```

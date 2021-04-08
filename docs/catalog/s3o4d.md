@@ -82,17 +82,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{pfau2020disentangling,
-  title={Disentangling by Subspace Diffusion},
-  author={Pfau, David and Higgins, Irina and Botev, Aleksandar and Racani\`ere,
-  S{\'e}bastian},
-  journal={Advances in Neural Information Processing Systems (NeurIPS)},
-  year={2020}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -132,3 +121,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{pfau2020disentangling,
+  title={Disentangling by Subspace Diffusion},
+  author={Pfau, David and Higgins, Irina and Botev, Aleksandar and Racani\`ere,
+  S{\'e}bastian},
+  journal={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2020}
+}
+```

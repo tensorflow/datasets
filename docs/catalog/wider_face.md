@@ -71,15 +71,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{yang2016wider,
-    Author = {Yang, Shuo and Luo, Ping and Loy, Chen Change and Tang, Xiaoou},
-    Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-    Title = {WIDER FACE: A Face Detection Benchmark},
-    Year = {2016}}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -119,3 +110,13 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{yang2016wider,
+    Author = {Yang, Shuo and Luo, Ping and Loy, Chen Change and Tang, Xiaoou},
+    Booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+    Title = {WIDER FACE: A Face Detection Benchmark},
+    Year = {2016}}
+```

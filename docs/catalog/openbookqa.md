@@ -68,17 +68,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('question', 'answerKey')`
 
-*   **Citation**:
-
-```
-@article{mihaylov2018can,
-  title={Can a suit of armor conduct electricity? a new dataset for open book question answering},
-  author={Mihaylov, Todor and Clark, Peter and Khot, Tushar and Sabharwal, Ashish},
-  journal={arXiv preprint arXiv:1809.02789},
-  year={2018}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -116,3 +105,14 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{mihaylov2018can,
+  title={Can a suit of armor conduct electricity? a new dataset for open book question answering},
+  author={Mihaylov, Todor and Clark, Peter and Khot, Tushar and Sabharwal, Ashish},
+  journal={arXiv preprint arXiv:1809.02789},
+  year={2018}
+}
+```

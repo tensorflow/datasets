@@ -65,18 +65,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@misc{,
-  author={Siddharth Singh Chouhan, Ajay Kaul, Uday Pratap Singh, Sanjeev
-Jain},
-  title={A Database of Leaf Images: Practice towards Plant Conservation with
-Plant Pathology},
-  howpublished={Mendeley Data},
-  year={2019}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -116,3 +104,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{,
+  author={Siddharth Singh Chouhan, Ajay Kaul, Uday Pratap Singh, Sanjeev
+Jain},
+  title={A Database of Leaf Images: Practice towards Plant Conservation with
+Plant Pathology},
+  howpublished={Mendeley Data},
+  year={2019}
+}
+```

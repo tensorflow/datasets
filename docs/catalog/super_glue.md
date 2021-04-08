@@ -71,26 +71,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@inproceedings{clark2019boolq,
-  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},
-  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},
-  booktitle={NAACL},
-  year={2019}
-}
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -124,6 +104,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{clark2019boolq,
+  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},
+  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},
+  booktitle={NAACL},
+  year={2019}
+}
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
 
 ## super_glue/cb
 
@@ -164,26 +164,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@article{de marneff_simons_tonhauser_2019,
-  title={The CommitmentBank: Investigating projection in naturally occurring discourse},
-  journal={proceedings of Sinn und Bedeutung 23},
-  author={De Marneff, Marie-Catherine and Simons, Mandy and Tonhauser, Judith},
-  year={2019}
-}
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -217,6 +197,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{de marneff_simons_tonhauser_2019,
+  title={The CommitmentBank: Investigating projection in naturally occurring discourse},
+  journal={proceedings of Sinn und Bedeutung 23},
+  author={De Marneff, Marie-Catherine and Simons, Mandy and Tonhauser, Judith},
+  year={2019}
+}
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
 
 ## super_glue/copa
 
@@ -258,26 +258,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@inproceedings{roemmele2011choice,
-  title={Choice of plausible alternatives: An evaluation of commonsense causal reasoning},
-  author={Roemmele, Melissa and Bejan, Cosmin Adrian and Gordon, Andrew S},
-  booktitle={2011 AAAI Spring Symposium Series},
-  year={2011}
-}
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -311,6 +291,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{roemmele2011choice,
+  title={Choice of plausible alternatives: An evaluation of commonsense causal reasoning},
+  author={Roemmele, Melissa and Bejan, Cosmin Adrian and Gordon, Andrew S},
+  booktitle={2011 AAAI Spring Symposium Series},
+  year={2011}
+}
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
 
 ## super_glue/multirc
 
@@ -356,26 +356,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@inproceedings{MultiRC2018,
-    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},
-    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},
-    booktitle = {Proceedings of North American Chapter of the Association for Computational Linguistics (NAACL)},
-    year = {2018}
-}
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -409,6 +389,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{MultiRC2018,
+    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},
+    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},
+    booktitle = {Proceedings of North American Chapter of the Association for Computational Linguistics (NAACL)},
+    year = {2018}
+}
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
 
 ## super_glue/record
 
@@ -450,26 +450,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@article{zhang2018record,
-  title={Record: Bridging the gap between human and machine commonsense reading comprehension},
-  author={Zhang, Sheng and Liu, Xiaodong and Liu, Jingjing and Gao, Jianfeng and Duh, Kevin and Van Durme, Benjamin},
-  journal={arXiv preprint arXiv:1810.12885},
-  year={2018}
-}
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -503,6 +483,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{zhang2018record,
+  title={Record: Bridging the gap between human and machine commonsense reading comprehension},
+  author={Zhang, Sheng and Liu, Xiaodong and Liu, Jingjing and Gao, Jianfeng and Duh, Kevin and Van Durme, Benjamin},
+  journal={arXiv preprint arXiv:1810.12885},
+  year={2018}
+}
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
 
 ## super_glue/rte
 
@@ -544,6 +544,40 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-rte-1.0.2.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -591,40 +625,6 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-rte-1.0.2.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## super_glue/wic
 
 *   **Config description**: The Word-in-Context (WiC, Pilehvar and
@@ -665,33 +665,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/abs-1808-09121,
-  author={Mohammad Taher Pilehvar and os{'{e}} Camacho{-}Collados},
-  title={WiC: 10, 000 Example Pairs for Evaluating Context-Sensitive Representations},
-  journal={CoRR},
-  volume={abs/1808.09121},
-  year={2018},
-  url={http://arxiv.org/abs/1808.09121},
-  archivePrefix={arXiv},
-  eprint={1808.09121},
-  timestamp={Mon, 03 Sep 2018 13:36:40 +0200},
-  biburl={https://dblp.org/rec/bib/journals/corr/abs-1808-09121},
-  bibsource={dblp computer science bibliography, https://dblp.org}
-}
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -725,6 +698,33 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{DBLP:journals/corr/abs-1808-09121,
+  author={Mohammad Taher Pilehvar and os{'{e}} Camacho{-}Collados},
+  title={WiC: 10, 000 Example Pairs for Evaluating Context-Sensitive Representations},
+  journal={CoRR},
+  volume={abs/1808.09121},
+  year={2018},
+  url={http://arxiv.org/abs/1808.09121},
+  archivePrefix={arXiv},
+  eprint={1808.09121},
+  timestamp={Mon, 03 Sep 2018 13:36:40 +0200},
+  biburl={https://dblp.org/rec/bib/journals/corr/abs-1808-09121},
+  bibsource={dblp computer science bibliography, https://dblp.org}
+}
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
 
 ## super_glue/wsc
 
@@ -788,26 +788,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@inproceedings{levesque2012winograd,
-  title={The winograd schema challenge},
-  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
-  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
-  year={2012}
-}
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -841,6 +821,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{levesque2012winograd,
+  title={The winograd schema challenge},
+  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
+  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
+  year={2012}
+}
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
 
 ## super_glue/wsc.fixed
 
@@ -907,26 +907,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@inproceedings{levesque2012winograd,
-  title={The winograd schema challenge},
-  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
-  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
-  year={2012}
-}
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -960,6 +940,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{levesque2012winograd,
+  title={The winograd schema challenge},
+  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
+  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
+  year={2012}
+}
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
 
 ## super_glue/axb
 
@@ -1000,20 +1000,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1047,6 +1033,20 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
 
 ## super_glue/axg
 
@@ -1089,30 +1089,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@inproceedings{rudinger-EtAl:2018:N18,
-  author    = {Rudinger, Rachel  and  Naradowsky, Jason  and  Leonard, Brian  and  {Van Durme}, Benjamin},
-  title     = {Gender Bias in Coreference Resolution},
-  booktitle = {Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies},
-  month     = {June},
-  year      = {2018},
-  address   = {New Orleans, Louisiana},
-  publisher = {Association for Computational Linguistics}
-}
-
-@article{wang2019superglue,
-  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
-  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1905.00537},
-  year={2019}
-}
-
-Note that each SuperGLUE dataset has its own citation. Please see the source to
-get the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1146,3 +1122,27 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{rudinger-EtAl:2018:N18,
+  author    = {Rudinger, Rachel  and  Naradowsky, Jason  and  Leonard, Brian  and  {Van Durme}, Benjamin},
+  title     = {Gender Bias in Coreference Resolution},
+  booktitle = {Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies},
+  month     = {June},
+  year      = {2018},
+  address   = {New Orleans, Louisiana},
+  publisher = {Association for Computational Linguistics}
+}
+
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```

@@ -75,6 +75,7 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+
 *   **Citation**:
 
 ## open_images_challenge2019_detection/200k (default config)

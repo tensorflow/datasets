@@ -77,26 +77,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@InProceedings{conneau2018xnli,
-  author = "Conneau, Alexis
-                 and Rinott, Ruty
-                 and Lample, Guillaume
-                 and Williams, Adina
-                 and Bowman, Samuel R.
-                 and Schwenk, Holger
-                 and Stoyanov, Veselin",
-  title = "XNLI: Evaluating Cross-lingual Sentence Representations",
-  booktitle = "Proceedings of the 2018 Conference on Empirical Methods
-               in Natural Language Processing",
-  year = "2018",
-  publisher = "Association for Computational Linguistics",
-  location = "Brussels, Belgium",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -134,3 +114,23 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{conneau2018xnli,
+  author = "Conneau, Alexis
+                 and Rinott, Ruty
+                 and Lample, Guillaume
+                 and Williams, Adina
+                 and Bowman, Samuel R.
+                 and Schwenk, Holger
+                 and Stoyanov, Veselin",
+  title = "XNLI: Evaluating Cross-lingual Sentence Representations",
+  booktitle = "Proceedings of the 2018 Conference on Empirical Methods
+               in Natural Language Processing",
+  year = "2018",
+  publisher = "Association for Computational Linguistics",
+  location = "Brussels, Belgium",
+}
+```

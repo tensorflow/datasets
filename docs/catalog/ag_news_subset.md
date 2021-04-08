@@ -72,19 +72,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('description', 'label')`
 
-*   **Citation**:
-
-```
-@misc{zhang2015characterlevel,
-    title={Character-level Convolutional Networks for Text Classification},
-    author={Xiang Zhang and Junbo Zhao and Yann LeCun},
-    year={2015},
-    eprint={1509.01626},
-    archivePrefix={arXiv},
-    primaryClass={cs.LG}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -122,3 +109,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{zhang2015characterlevel,
+    title={Character-level Convolutional Networks for Text Classification},
+    author={Xiang Zhang and Junbo Zhao and Yann LeCun},
+    year={2015},
+    eprint={1509.01626},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG}
+}
+```

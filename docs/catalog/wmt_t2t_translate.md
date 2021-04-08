@@ -81,22 +81,6 @@ Translation({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('de', 'en')`
 
-*   **Citation**:
-
-```
-@InProceedings{bojar-EtAl:2014:W14-33,
-  author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},
-  title     = {Findings of the 2014 Workshop on Statistical Machine Translation},
-  booktitle = {Proceedings of the Ninth Workshop on Statistical Machine Translation},
-  month     = {June},
-  year      = {2014},
-  address   = {Baltimore, Maryland, USA},
-  publisher = {Association for Computational Linguistics},
-  pages     = {12--58},
-  url       = {http://www.aclweb.org/anthology/W/W14/W14-3302}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -134,5 +118,21 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{bojar-EtAl:2014:W14-33,
+  author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},
+  title     = {Findings of the 2014 Workshop on Statistical Machine Translation},
+  booktitle = {Proceedings of the Ninth Workshop on Statistical Machine Translation},
+  month     = {June},
+  year      = {2014},
+  address   = {Baltimore, Maryland, USA},
+  publisher = {Association for Computational Linguistics},
+  pages     = {12--58},
+  url       = {http://www.aclweb.org/anthology/W/W14/W14-3302}
+}
+```
 
 ## wmt_t2t_translate/de-en (default config)

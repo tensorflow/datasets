@@ -70,21 +70,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{efron1975data,
-  title={Data analysis using Stein's estimator and its generalizations},
-  author={Efron, Bradley and Morris, Carl},
-  journal={Journal of the American Statistical Association},
-  volume={70},
-  number={350},
-  pages={311--319},
-  year={1975},
-  publisher={Taylor \& Francis}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -122,3 +107,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{efron1975data,
+  title={Data analysis using Stein's estimator and its generalizations},
+  author={Efron, Bradley and Morris, Carl},
+  journal={Journal of the American Statistical Association},
+  volume={70},
+  number={350},
+  pages={311--319},
+  year={1975},
+  publisher={Taylor \& Francis}
+}
+```

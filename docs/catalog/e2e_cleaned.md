@@ -62,26 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('input_text', 'target_text')`
 
-*   **Citation**:
-
-```
-@inproceedings{dusek-etal-2019-semantic,
-    title = "Semantic Noise Matters for Neural Natural Language Generation",
-    author = "Du{\v{s}}ek, Ond{\v{r}}ej  and
-      Howcroft, David M.  and
-      Rieser, Verena",
-    booktitle = "Proceedings of the 12th International Conference on Natural Language Generation",
-    month = oct # "{--}" # nov,
-    year = "2019",
-    address = "Tokyo, Japan",
-    publisher = "Association for Computational Linguistics",
-    url = "https://www.aclweb.org/anthology/W19-8652",
-    doi = "10.18653/v1/W19-8652",
-    pages = "421--426",
-    abstract = "Neural natural language generation (NNLG) systems are known for their pathological outputs, i.e. generating text which is unrelated to the input specification. In this paper, we show the impact of semantic noise on state-of-the-art NNLG models which implement different semantic control mechanisms. We find that cleaned data can improve semantic correctness by up to 97{\%}, while maintaining fluency. We also find that the most common error is omitting information, rather than hallucination.",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -119,3 +99,23 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{dusek-etal-2019-semantic,
+    title = "Semantic Noise Matters for Neural Natural Language Generation",
+    author = "Du{\v{s}}ek, Ond{\v{r}}ej  and
+      Howcroft, David M.  and
+      Rieser, Verena",
+    booktitle = "Proceedings of the 12th International Conference on Natural Language Generation",
+    month = oct # "{--}" # nov,
+    year = "2019",
+    address = "Tokyo, Japan",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/W19-8652",
+    doi = "10.18653/v1/W19-8652",
+    pages = "421--426",
+    abstract = "Neural natural language generation (NNLG) systems are known for their pathological outputs, i.e. generating text which is unrelated to the input specification. In this paper, we show the impact of semantic noise on state-of-the-art NNLG models which implement different semantic control mechanisms. We find that cleaned data can improve semantic correctness by up to 97{\%}, while maintaining fluency. We also find that the most common error is omitting information, rather than hallucination.",
+}
+```

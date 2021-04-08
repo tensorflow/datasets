@@ -69,19 +69,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label_category')`
 
-*   **Citation**:
-
-```
-\
-@article{LeCun2004LearningMF,
-  title={Learning methods for generic object recognition with invariance to pose and lighting},
-  author={Yann LeCun and Fu Jie Huang and L{\'e}on Bottou},
-  journal={Proceedings of the 2004 IEEE Computer Society Conference on Computer Vision and Pattern Recognition},
-  year={2004},
-  volume={2},
-  pages={II-104 Vol.2}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -120,3 +107,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+\
+@article{LeCun2004LearningMF,
+  title={Learning methods for generic object recognition with invariance to pose and lighting},
+  author={Yann LeCun and Fu Jie Huang and L{\'e}on Bottou},
+  journal={Proceedings of the 2004 IEEE Computer Society Conference on Computer Vision and Pattern Recognition},
+  year={2004},
+  volume={2},
+  pages={II-104 Vol.2}
+}
+```

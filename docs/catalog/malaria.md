@@ -54,22 +54,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{rajaraman2018pre,
-  title={Pre-trained convolutional neural networks as feature extractors toward
-  improved malaria parasite detection in thin blood smear images},
-  author={Rajaraman, Sivaramakrishnan and Antani, Sameer K and Poostchi, Mahdieh
-  and Silamut, Kamolrat and Hossain, Md A and Maude, Richard J and Jaeger,
-  Stefan and Thoma, George R},
-  journal={PeerJ},
-  volume={6},
-  pages={e4568},
-  year={2018},
-  publisher={PeerJ Inc.}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -109,3 +93,20 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{rajaraman2018pre,
+  title={Pre-trained convolutional neural networks as feature extractors toward
+  improved malaria parasite detection in thin blood smear images},
+  author={Rajaraman, Sivaramakrishnan and Antani, Sameer K and Poostchi, Mahdieh
+  and Silamut, Kamolrat and Hossain, Md A and Maude, Richard J and Jaeger,
+  Stefan and Thoma, George R},
+  journal={PeerJ},
+  volume={6},
+  pages={e4568},
+  year={2018},
+  publisher={PeerJ Inc.}
+}
+```

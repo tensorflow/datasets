@@ -62,16 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {YesNo,
-    author = "Created for the Kaldi Project",
-    title  = "YesNo",
-    url    = "http://www.openslr.org/1/"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -109,3 +99,13 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {YesNo,
+    author = "Created for the Kaldi Project",
+    title  = "YesNo",
+    url    = "http://www.openslr.org/1/"
+}
+```

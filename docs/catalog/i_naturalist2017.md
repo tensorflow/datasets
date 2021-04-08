@@ -64,20 +64,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{Horn_2018_CVPR,
-author = {
-Van Horn, Grant and Mac Aodha, Oisin and Song, Yang and Cui, Yin and Sun, Chen
-and Shepard, Alex and Adam, Hartwig and Perona, Pietro and Belongie, Serge},
-title = {The INaturalist Species Classification and Detection Dataset},
-booktitle = {
-The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-month = {June},
-year = {2018}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -117,3 +103,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{Horn_2018_CVPR,
+author = {
+Van Horn, Grant and Mac Aodha, Oisin and Song, Yang and Cui, Yin and Sun, Chen
+and Shepard, Alex and Adam, Hartwig and Perona, Pietro and Belongie, Serge},
+title = {The INaturalist Species Classification and Detection Dataset},
+booktitle = {
+The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2018}
+}
+```
