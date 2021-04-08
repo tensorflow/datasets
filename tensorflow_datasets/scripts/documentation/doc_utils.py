@@ -22,7 +22,7 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 import collections
 import os
 import textwrap
-from typing import Dict, List, Optional, Tuple, Union, Set
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import dataclasses
 
@@ -31,7 +31,7 @@ import tensorflow_datasets as tfds
 
 
 # Dict of `full_names_dict['dataset']['config']['version']`
-FullNamesDict = Dict[str, Dict[str, Set[str]]]
+FullNamesDict = Dict[str, Dict[str, Dict[str, Any]]]
 # Same as `FullNamesDict`, but contains `True` for nightly datasets:
 # * New dataset: nightly_dict['dataset'] is True
 # * New config: nightly_dict['dataset']['config'] is True
@@ -166,10 +166,11 @@ def _split_full_name(full_name: str) -> Tuple[str, str, str]:
 def _full_names_to_dict(full_names: List[str]) -> FullNamesDict:
   """Creates the dict `d['dataset']['config']['version']`."""
   full_names_dict = collections.defaultdict(
-      lambda: collections.defaultdict(set))
+      lambda: collections.defaultdict(  # pylint: disable=g-long-lambda
+          lambda: collections.defaultdict(type(None))))
   for full_name in full_names:
     ds_name, config, version = _split_full_name(full_name)
-    full_names_dict[ds_name][config].add(version)
+    full_names_dict[ds_name][config][version]  # pylint: disable=pointless-statement
   return full_names_dict
 
 

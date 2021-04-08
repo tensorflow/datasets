@@ -55,11 +55,11 @@ class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
     ])
     self.assertEqual(full_names_dict, {
         'ds1': {
-            'c1': {'1.0.0', '2.0.0'},
-            'c2': {'2.0.0'},
+            'c1': {'1.0.0': None, '2.0.0': None},
+            'c2': {'2.0.0': None},
         },
         'ds2': {
-            '': {'1.0.0', '2.0.0'}
+            '': {'1.0.0': None, '2.0.0': None}
         }
     })
 

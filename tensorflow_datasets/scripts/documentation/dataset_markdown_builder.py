@@ -27,7 +27,6 @@ from typing import List, Optional, Union
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts.documentation import doc_utils
 
-
 Key = Union[int, str]
 
 
@@ -103,9 +102,10 @@ class Section(abc.ABC):
     if not isinstance(content, IntentedBlock):
       content = content.strip()  # Note: `strip()` cast `Block` -> `str`
     if is_block:
-      return f'{header}:\n\n{content}\n\n'
+      content = f'{header}:\n\n{content}\n\n'
     else:
-      return f'{header}: {content}\n\n'
+      content = f'{header}: {content}\n\n'
+    return content
 
 # --------------------------- Builder sections ---------------------------
 
@@ -391,6 +391,25 @@ class DatasetCitationSection(Section):
     )
 
 
+class KnowYourDataSection(Section):
+
+  NAME = 'Explore the dataset'
+
+  def __init__(self):
+    super().__init__()
+    self._catalog_urls = {}
+
+  def get_key(self, builder: tfds.core.DatasetBuilder):
+    return None  # Single url for all configs
+
+  def content(self, builder: tfds.core.DatasetBuilder):
+    url = self._catalog_urls.get(builder.name)
+    if url:
+      return f'[KnowYourData visualization]({url}){{.external}}'
+    else:
+      return _SKIP_SECTION
+
+
 class DatasetVisualizationSection(Section):
 
   NAME = 'Figure'
@@ -639,12 +658,13 @@ def get_markdown_string(
       SplitInfoSection(),
       FeatureInfoSection(),
       SupervisedKeySection(),
-      DatasetCitationSection(),
+      KnowYourDataSection(),
   ]
   if visu_doc_util:
     all_sections.append(DatasetVisualizationSection(visu_doc_util))
   if df_doc_util:
     all_sections.append(DatasetDataframeSection(df_doc_util))
+  all_sections.append(DatasetCitationSection())
 
   doc_str = [
       _display_schema_org(builder, visu_doc_util),
