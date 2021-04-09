@@ -363,6 +363,7 @@ def reraise(
     else:
       exception = RuntimeError(f'{type(e).__name__}: {msg}')
     raise exception from e
+  #Raise a custom error message for datasets using Array2D from huggingface
   elif isinstance(e, AttributeError) and 'Array2D' in e.args[0]:
     exception_msg = "Array2D not supported in TFDS"
     suffix = """\
