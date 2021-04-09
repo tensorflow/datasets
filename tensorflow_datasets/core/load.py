@@ -79,19 +79,13 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     DatasetNotFoundError: if `name` is unrecognized.
   """
   ds_name, kwargs = naming.parse_builder_name_kwargs(name)
-  #Checking whether the dataset is not implemented
-  dataset_not_imp = (
-    ds_name.namespace == 'huggingface' and
-    ds_name.name in ['mnist', 'fashion_mnist']
-    )
-
   if kwargs:
     raise ValueError(
         '`builder_cls` only accept the `dataset_name` without config, '
         f"version or arguments. Got: name='{name}', kwargs={kwargs}"
     )
   try:
-    if ds_name.namespace and not dataset_not_imp:
+    if ds_name.namespace:
       # `namespace:dataset` are loaded from the community register
       if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
         return community.community_register.builder_cls(ds_name)
@@ -100,10 +94,6 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
             f'Cannot load {ds_name} when community datasets are disabled'
         )
     else:
-      if dataset_not_imp:
-        #Priotitizing TFDS over community datasets
-        print("\nDataset not implemented.Utilising TFDS variant...\n")
-        ds_name, kwargs = naming.parse_builder_name_kwargs(ds_name.name)
       cls = registered.imported_builder_cls(str(ds_name))
       cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
     return cls
