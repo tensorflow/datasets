@@ -30,6 +30,7 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import registered
@@ -485,13 +486,13 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def as_dataset(
       self,
-      split=None,
+      split: Optional[Union[str, tfrecords_reader.ReadInstruction]] = None,
       *,
-      batch_size=None,
-      shuffle_files=False,
-      decoders=None,
-      read_config=None,
-      as_supervised=False,
+      batch_size: Optional[int] = None,
+      shuffle_files: bool = False,
+      decoders: Optional[Dict[str, decode.Decoder]] = None,
+      read_config: Optional[read_config_lib.ReadConfig] = None,
+      as_supervised: bool = False,
   ):
     # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
