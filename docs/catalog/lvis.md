@@ -31,18 +31,21 @@ LVIS: A dataset for large vocabulary instance segmentation.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Added fields `neg_category_ids` and `not_exhaustive_category_ids`.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `25.35 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `22.29 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 19,822
+`'train'`      | 100,170
+`'validation'` | 19,809
 
 *   **Features**:
 
