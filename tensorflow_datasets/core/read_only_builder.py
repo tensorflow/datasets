@@ -166,7 +166,8 @@ def builder_from_files(
     )
     raise registered.DatasetNotFoundError(
         f'Could not find dataset files for: {name}. Make sure the dataset '
-        f'has been generated in: {data_dirs}.'
+        f'has been generated in: {data_dirs}. If the dataset has configs, you '
+        'might have to specify the config name.'
     )
 
 
