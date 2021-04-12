@@ -132,7 +132,7 @@ class GeneratorBasedBuilder(
           """
           e.args = (f'{exception_msg}{suffix}',)
           raise
-      else:
+        else:
           raise
     # HF DatasetInfo do not have `builder` args, so we insert
     # here
