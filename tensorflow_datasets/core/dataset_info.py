@@ -386,7 +386,9 @@ class DatasetInfo(object):
           dataset_info_dir
       )
     # Restore the MetaDataDict from metadata.json if there is any
-    if self.metadata or tf.io.gfile.exists(self._metadata_path(dataset_info_dir)):
+    if self.metadata or tf.io.gfile.exists(
+      self._metadata_path(dataset_info_dir)
+    ):
       # If the dataset was loaded from file, self.metadata will be `None`, so
       # we create a MetadataDict first.
       if not self.metadata:
