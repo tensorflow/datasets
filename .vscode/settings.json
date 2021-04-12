@@ -15,11 +15,7 @@
             80
         ],
         "editor.tabSize": 2,
-        "editor.detectIndentation": false,
-        "editor.formatOnSave": false,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": false
-        }
+        "editor.detectIndentation": false
     },
     "python.formatting.provider": "yapf",
     "python.testing.pytestArgs": [
