@@ -57,6 +57,8 @@ from google.protobuf import json_format
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
 LICENSE_FILENAME = "LICENSE"
+METADATA_FILENAME = "metadata.json"
+
 
 
 # TODO(tfds): Do we require to warn the user about the peak memory used while
@@ -283,6 +285,9 @@ class DatasetInfo(object):
   def _license_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
+  def _metadata_path(self, dataset_info_dir):
+    return os.path.join(dataset_info_dir, METADATA_FILENAME)
+
   def compute_dynamic_properties(self):
     self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
@@ -340,7 +345,7 @@ class DatasetInfo(object):
       f.write(self.as_json)
 
   def read_from_directory(self, dataset_info_dir):
-    """Update DatasetInfo from the JSON file in `dataset_info_dir`.
+    """Update DatasetInfo from the JSON files in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
     hash, time of creation,...) of the DatasetInfo.
@@ -352,7 +357,7 @@ class DatasetInfo(object):
         should be the root directory of a specific dataset version.
 
     Raises:
-      FileNotFoundError: If the file can't be found.
+      FileNotFoundError: If the dataset_info.json can't be found.
     """
     logging.info("Load dataset info from %s", dataset_info_dir)
 
@@ -380,7 +385,12 @@ class DatasetInfo(object):
       self._features = feature_lib.FeatureConnector.from_config(
           dataset_info_dir
       )
-    if self.metadata is not None:
+    # Restore the MetaDataDict from metadata.json if there is any
+    if self.metadata or tf.io.gfile.exists(self._metadata_path(dataset_info_dir)):
+      # If the dataset was loaded from file, self.metadata will be `None`, so
+      # we create a MetadataDict first.
+      if not self.metadata:
+        self._metadata = MetadataDict()
       self.metadata.load_metadata(dataset_info_dir)
 
     # Update fields which are not defined in the code. This means that
@@ -592,7 +602,7 @@ class MetadataDict(Metadata, dict):
   """
 
   def _build_filepath(self, data_dir):
-    return os.path.join(data_dir, "metadata.json")
+    return os.path.join(data_dir, METADATA_FILENAME)
 
   def save_metadata(self, data_dir):
     """Save the metadata."""
