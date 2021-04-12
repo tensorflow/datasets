@@ -60,7 +60,6 @@ LICENSE_FILENAME = "LICENSE"
 METADATA_FILENAME = "metadata.json"
 
 
-
 # TODO(tfds): Do we require to warn the user about the peak memory used while
 # constructing the dataset?
 class DatasetInfo(object):
@@ -386,12 +385,12 @@ class DatasetInfo(object):
           dataset_info_dir
       )
     # Restore the MetaDataDict from metadata.json if there is any
-    if self.metadata or tf.io.gfile.exists(
+    if self.metadata is not None or tf.io.gfile.exists(
       self._metadata_path(dataset_info_dir)
     ):
       # If the dataset was loaded from file, self.metadata will be `None`, so
       # we create a MetadataDict first.
-      if not self.metadata:
+      if self.metadata is None:
         self._metadata = MetadataDict()
       self.metadata.load_metadata(dataset_info_dir)
 

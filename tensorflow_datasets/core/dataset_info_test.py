@@ -25,6 +25,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.image_classification import mnist
 
@@ -339,6 +340,14 @@ feature {
       # Metadata should have been restored
       builder2 = RandomShapedImageGenerator(data_dir=tmp_dir)
       self.assertEqual(builder2.info.metadata, {"some_key": 123})
+
+      # Metadata should have been restored even if the builder code was not
+      # available and we restored from files.
+      builder3 = read_only_builder.builder_from_files(
+        builder.name,
+        data_dir=tmp_dir
+      )
+      self.assertEqual(builder3.info.metadata, {"some_key": 123})
 
   def test_updates_on_bucket_info(self):
 
