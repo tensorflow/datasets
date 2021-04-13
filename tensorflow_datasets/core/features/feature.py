@@ -109,7 +109,7 @@ class FeatureConnector(object):
   """
 
   # Keep track of all sub-classes.
-  _registered_features: Dict[str, 'FeatureConnector'] = {}
+  _registered_features: Dict[str, Type['FeatureConnector']] = {}
 
   def __init_subclass__(cls):
     """Registers subclasses features."""
