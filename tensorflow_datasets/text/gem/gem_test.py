@@ -27,11 +27,12 @@ class GemCommonGenTest(tfds.testing.DatasetBuilderTestCase):
       'train': 3,  # Number of fake train examples.
       'validation': 1,  # Number of fake dev examples.
       'test': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_scramble': 1
   }
 
-  DL_EXTRACT_RESULT = {
-      'data': 'common_gen',
-  }
+  DL_EXTRACT_RESULT = {'data': 'common_gen', 'challenge_set': 'challenge_sets'}
 
 
 class GemCsRestaurantsTest(tfds.testing.DatasetBuilderTestCase):
@@ -42,12 +43,16 @@ class GemCsRestaurantsTest(tfds.testing.DatasetBuilderTestCase):
       'train': 3,  # Number of fake train examples.
       'validation': 1,  # Number of fake dev examples.
       'test': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_scramble': 1
   }
 
   DL_EXTRACT_RESULT = {
       'train': 'cs_restaurants/train.jsonl',
       'validation': 'cs_restaurants/devel.jsonl',
       'test': 'cs_restaurants/test.jsonl',
+      'challenge_set': 'challenge_sets'
   }
 
 
@@ -76,12 +81,16 @@ class GemE2ETest(tfds.testing.DatasetBuilderTestCase):
       'train': 3,  # Number of fake train examples.
       'validation': 1,  # Number of fake dev examples.
       'test': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_scramble': 1
   }
 
   DL_EXTRACT_RESULT = {
       'train': 'e2e_nlg/train-fixed.no-ol.csv',
       'validation': 'e2e_nlg/devel-fixed.no-ol.csv',
       'test': 'e2e_nlg/test-fixed.csv',
+      'challenge_set': 'challenge_sets'
   }
 
 
@@ -93,13 +102,17 @@ class GemMLSumTest(tfds.testing.DatasetBuilderTestCase):
       'train': 3,  # Number of fake train examples.
       'validation': 1,  # Number of fake dev examples.
       'test': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_covid': 1
   }
 
   DL_EXTRACT_RESULT = {
       'train': 'mlsum',
       'validation': 'mlsum',
       'test': 'mlsum',
-      'bad_ids': 'mlsum/gem_mlsum_bad_ids.json'
+      'bad_ids': 'mlsum/gem_mlsum_bad_ids.json',
+      'challenge_set': 'challenge_sets'
   }
 
 
@@ -111,10 +124,18 @@ class GemSchemaGuidedDialogTest(tfds.testing.DatasetBuilderTestCase):
       'train': 3,  # Number of fake train examples.
       'validation': 1,  # Number of fake dev examples.
       'test': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_backtranslation': 1,
+      'challenge_test_bfp02': 1,
+      'challenge_test_bfp05': 1,
+      'challenge_test_nopunc': 1,
+      'challenge_test_scramble': 1
   }
 
   DL_EXTRACT_RESULT = {
       'data': 'schema_guided_dialog',
+      'challenge_set': 'challenge_sets'
   }
 
 
@@ -126,27 +147,54 @@ class GemTottoTest(tfds.testing.DatasetBuilderTestCase):
       'train': 3,  # Number of fake train examples.
       'validation': 1,  # Number of fake dev examples.
       'test': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_scramble': 1,
   }
 
-  DL_EXTRACT_RESULT = {
-      'data': '',
-  }
+  DL_EXTRACT_RESULT = {'data': '', 'challenge_set': 'challenge_sets'}
 
 
-class GemWebNlgTest(tfds.testing.DatasetBuilderTestCase):
+class GemWebNlgEnTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for gem dataset."""
-  BUILDER_CONFIG_NAMES_TO_TEST = ['web_nlg_en', 'web_nlg_ru']
+  BUILDER_CONFIG_NAMES_TO_TEST = ['web_nlg_en']
   DATASET_CLASS = gem.Gem
   SPLITS = {
       'train': 3,  # Number of fake train examples.
       'validation': 1,  # Number of fake dev examples.
       'test': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_scramble': 1,
+      'challenge_test_numbers': 1
+  }
+
+  DL_EXTRACT_RESULT = {
+      'train': 'web_nlg/webnlg_en_train.json',
+      'validation': 'web_nlg/webnlg_en_val.json',
+      'test': 'web_nlg/webnlg_en_test.json',
+      'challenge_set': 'challenge_sets'
+  }
+
+
+class GemWebNlgRuTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for gem dataset."""
+  BUILDER_CONFIG_NAMES_TO_TEST = ['web_nlg_ru']
+  DATASET_CLASS = gem.Gem
+  SPLITS = {
+      'train': 3,  # Number of fake train examples.
+      'validation': 1,  # Number of fake dev examples.
+      'test': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_scramble': 1
   }
 
   DL_EXTRACT_RESULT = {
       'train': 'web_nlg/webnlg_ru_train.json',
       'validation': 'web_nlg/webnlg_ru_val.json',
       'test': 'web_nlg/webnlg_ru_test.json',
+      'challenge_set': 'challenge_sets'
   }
 
 
@@ -159,11 +207,21 @@ class GemWikiAutoTest(tfds.testing.DatasetBuilderTestCase):
       'validation': 1,  # Number of fake dev examples.
       'test_turk': 1,  # Number of fake test examples.
       'test_asset': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_asset_backtranslation': 1,
+      'challenge_test_asset_bfp02': 1,
+      'challenge_test_asset_bfp05': 1,
+      'challenge_test_asset_nopunc': 1,
+      'challenge_test_turk_backtranslation': 1,
+      'challenge_test_turk_bfp02': 1,
+      'challenge_test_turk_bfp05': 1,
+      'challenge_test_turk_nopunc': 1,
   }
 
   DL_EXTRACT_RESULT = {
       'train': 'wiki_auto_asset_turk/train.tsv',
-      'validation': 'wiki_auto_asset_turk/dev.tsv',
+      'validation': 'wiki_auto_asset_turk/valid.tsv',
       'test_asset_0': 'wiki_auto_asset_turk/asset.test.simp.0',
       'test_asset_1': 'wiki_auto_asset_turk/asset.test.simp.1',
       'test_asset_2': 'wiki_auto_asset_turk/asset.test.simp.2',
@@ -174,22 +232,22 @@ class GemWikiAutoTest(tfds.testing.DatasetBuilderTestCase):
       'test_asset_7': 'wiki_auto_asset_turk/asset.test.simp.7',
       'test_asset_8': 'wiki_auto_asset_turk/asset.test.simp.8',
       'test_asset_9': 'wiki_auto_asset_turk/asset.test.simp.9',
-      'test_turk_0': 'wiki_auto_asset_turk/test.8turkers.tok.turk.0',
-      'test_turk_1': 'wiki_auto_asset_turk/test.8turkers.tok.turk.1',
-      'test_turk_2': 'wiki_auto_asset_turk/test.8turkers.tok.turk.2',
-      'test_turk_3': 'wiki_auto_asset_turk/test.8turkers.tok.turk.3',
-      'test_turk_4': 'wiki_auto_asset_turk/test.8turkers.tok.turk.4',
-      'test_turk_5': 'wiki_auto_asset_turk/test.8turkers.tok.turk.5',
-      'test_turk_6': 'wiki_auto_asset_turk/test.8turkers.tok.turk.6',
-      'test_turk_7': 'wiki_auto_asset_turk/test.8turkers.tok.turk.7',
+      'test_turk': 'wiki_auto_asset_turk/gem_turk_detokenized.json',
+      'challenge_set': 'challenge_sets'
   }
 
 
 class GemWikiLinguaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for gem dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = [
-      'wiki_lingua_es_en', 'wiki_lingua_ru_en', 'wiki_lingua_tr_en',
-      'wiki_lingua_vi_en'
+      'wiki_lingua_arabic_ar', 'wiki_lingua_chinese_zh', 'wiki_lingua_czech_cs',
+      'wiki_lingua_dutch_nl', 'wiki_lingua_english_en', 'wiki_lingua_french_fr',
+      'wiki_lingua_german_de', 'wiki_lingua_hindi_hi',
+      'wiki_lingua_indonesian_id', 'wiki_lingua_italian_it',
+      'wiki_lingua_japanese_ja', 'wiki_lingua_korean_ko',
+      'wiki_lingua_portuguese_pt', 'wiki_lingua_russian_ru',
+      'wiki_lingua_spanish_es', 'wiki_lingua_thai_th', 'wiki_lingua_turkish_tr',
+      'wiki_lingua_vietnamese_vi'
   ]
   DATASET_CLASS = gem.Gem
   SPLITS = {
@@ -211,11 +269,19 @@ class GemXsumTest(tfds.testing.DatasetBuilderTestCase):
       'train': 3,  # Number of fake train examples.
       'validation': 1,  # Number of fake dev examples.
       'test': 1,  # Number of fake test examples.
+      'challenge_train_sample': 1,
+      'challenge_validation_sample': 1,
+      'challenge_test_backtranslation': 1,
+      'challenge_test_bfp_02': 1,
+      'challenge_test_bfp_05': 1,
+      'challenge_test_nopunc': 1,
+      'challenge_test_covid': 1,
   }
 
   DL_EXTRACT_RESULT = {
       'data': 'xsum',
-      'splits': 'xsum/gem_xsum_confidence_0.8.json'
+      'splits': 'xsum/gem_xsum_confidence_0.8.json',
+      'challenge_set': 'challenge_sets'
   }
 
 

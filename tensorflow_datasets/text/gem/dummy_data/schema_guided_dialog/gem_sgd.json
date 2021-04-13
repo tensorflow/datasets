@@ -3,6 +3,7 @@
     {
       "target": "Do you have a specific which you want the eating place to be located at?",
       "prompt": "I am feeling hungry so I would like to find a place to eat.",
+      "context": [],
       "da": [
         [
           13,
@@ -10,12 +11,17 @@
           []
         ]
       ],
+      "service": "Restaurants_1",
       "turn_ix": 1,
       "dialog_id": "1_00000"
     },
     {
       "target": "Is there a specific cuisine type you enjoy, such as Mexican, Italian or something else?",
       "prompt": "I would like for it to be in San Jose.",
+      "context": [
+        "I am feeling hungry so I would like to find a place to eat.",
+        "Do you have a specific which you want the eating place to be located at?"
+      ],
       "da": [
         [
           13,
@@ -26,12 +32,19 @@
           ]
         ]
       ],
+      "service": "Restaurants_1",
       "turn_ix": 3,
       "dialog_id": "1_00000"
     },
     {
       "target": "I see that at 71 Saint Peter there is a good restaurant which is in San Jose.",
       "prompt": "I usually like eating the American type of food.",
+      "context": [
+        "I am feeling hungry so I would like to find a place to eat.",
+        "Do you have a specific which you want the eating place to be located at?",
+        "I would like for it to be in San Jose.",
+        "Is there a specific cuisine type you enjoy, such as Mexican, Italian or something else?"
+      ],
       "da": [
         [
           11,
@@ -48,13 +61,31 @@
           ]
         ]
       ],
+      "service": "Restaurants_1",
       "turn_ix": 5,
       "dialog_id": "1_00000"
-    }],
+    }
+  ],
   "validation": [
     {
       "target": "Please confirm the song Carnivore on tv.",
       "prompt": "Yes, I would.",
+      "context": [
+        "I need a movie to watch.",
+        "I have 10 movies. What about Searching for Sugar Man rated 8.2.",
+        "What about a drama genre movie?",
+        "What about Dogman rated 7.3?",
+        "Sure, I'd like some songs searched for now.",
+        "I have 10 songs. What about Despacito by Karolina Protsenko from the album My Dream.",
+        "What type of music it that?",
+        "That's a pop song.",
+        "What year is it from?",
+        "The year is 2018.",
+        "What other items do you have?",
+        "What about your thoughts on Carnivore by Starset in the album Transmissions?",
+        "Yes, that is it.",
+        "Do you want to play this song?"
+      ],
       "da": [
         [
           2,
@@ -71,13 +102,37 @@
           ]
         ]
       ],
+      "service": "Music_1",
       "turn_ix": 15,
       "dialog_id": "10_00054"
-    }],
+    }
+  ],
   "test": [
     {
       "target": "Your rental has been booked, and you will pay $36.00 per day.",
       "prompt": "That works for me. How much is the car per day?",
+      "context": [
+        "I'm having a friend visit and we want some fun attractions to go to, maybe a museum. Can you find one for me?",
+        "In which city should I search in?",
+        "Please look for attractions in London, UK.",
+        "I suggest a museum called Apsley House.",
+        "Is there anything else? Preferably something child-friendly.",
+        "I suggest a museum called BODY WORLDS London.",
+        "Where can I contact them?",
+        "You can contact them at 330 223 3233.",
+        "Is there a cost to enter the museum?",
+        "No, it is free to enter.",
+        "That's great. Can you also find me a rental car? I'd like to pick it up by morning 11 and I need it next Thursday.",
+        "When do you want to return the car?",
+        "I will be needing the car until the 10th of March.",
+        "Are you planning to pick it up from London?",
+        "Yes, London is where I want to pick it up.",
+        "I suggest a Sedan Audi A8 at Heathrow International Airport.",
+        "That works for me, please reserve the rental.",
+        "Would you like any added insurance?",
+        "I won't be needing any, no.",
+        "So you'd like to pick up a Sedan from Heathrow International Airport at 11 am from March 7th to March 10th. Is this correct?"
+      ],
       "da": [
         [
           4,
@@ -92,7 +147,9 @@
           []
         ]
       ],
+      "service": "RentalCars_3",
       "turn_ix": 21,
       "dialog_id": "28_00115"
-    }]
-  }
+    }
+  ]
+}

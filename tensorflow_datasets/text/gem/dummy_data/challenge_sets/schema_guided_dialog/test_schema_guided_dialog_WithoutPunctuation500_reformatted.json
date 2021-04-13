@@ -1,0 +1,53 @@
+{
+  "test": [
+    {
+      "dialog_acts": [
+        {
+          "act": 11,
+          "slot": "stylist_name",
+          "values": [
+            "Ap Luxe Salon"
+          ]
+        },
+        {
+          "act": 11,
+          "slot": "appointment_date",
+          "values": [
+            "March 6th"
+          ]
+        },
+        {
+          "act": 11,
+          "slot": "appointment_time",
+          "values": [
+            "3 pm"
+          ]
+        },
+        {
+          "act": 9,
+          "slot": "",
+          "values": []
+        }
+      ],
+      "dialog_id": "31_00098",
+      "gem_id": "schema_guided_dialog-test-2795",
+      "prompt": "Yes, that is correct",
+      "references": [
+        "Unfortunately, I was unable to make the appointment. How about 3 pm on March 6th at the Ap Luxe Salon?"
+      ],
+      "target": "Unfortunately, I was unable to make the appointment. How about 3 pm on March 6th at the Ap Luxe Salon?",
+      "turn_id": 9,
+      "context": [
+        "I'm looking for a unisex salon.",
+        "What city do you want to search in?",
+        "I want a salon in Mill Valley.",
+        "I found 5 salons for you. How about Ap Luxe Salon in Mill Valley?",
+        "That one sounds good. I want to make an appointment there for the 6th of March.",
+        "What time do you want the appointment for?",
+        "I want the appointment for 3:15 in the afternoon.",
+        "Okay, you want an appointment at Ap Luxe Salon on March 6th at 3:15 pm, right?"
+      ],
+      "service": "Services_1"
+    }
+  ]
+}
