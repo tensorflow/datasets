@@ -113,7 +113,7 @@ class FeatureConnector(object):
 
   def __init_subclass__(cls):
     """Registers subclasses features."""
-    cls._registered_features[f'{cls.__module__}.{cls.__name__}'] = cls
+    cls._registered_features[f'{cls.__module__}.{cls.__name__}'] = cls  # pytype: disable=container-type-mismatch
 
   @abc.abstractmethod
   def get_tensor_info(self):
