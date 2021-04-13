@@ -16,6 +16,7 @@
 r"""Wrapper around `tfds build`."""
 
 import argparse
+import sacrebleu
 from typing import List
 
 from absl import app
