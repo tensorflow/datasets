@@ -57,6 +57,7 @@ from google.protobuf import json_format
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
 LICENSE_FILENAME = "LICENSE"
+METADATA_FILENAME = "metadata.json"
 
 
 # TODO(tfds): Do we require to warn the user about the peak memory used while
@@ -340,7 +341,7 @@ class DatasetInfo(object):
       f.write(self.as_json)
 
   def read_from_directory(self, dataset_info_dir):
-    """Update DatasetInfo from the JSON file in `dataset_info_dir`.
+    """Update DatasetInfo from the JSON files in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
     hash, time of creation,...) of the DatasetInfo.
@@ -352,7 +353,7 @@ class DatasetInfo(object):
         should be the root directory of a specific dataset version.
 
     Raises:
-      FileNotFoundError: If the file can't be found.
+      FileNotFoundError: If the dataset_info.json can't be found.
     """
     logging.info("Load dataset info from %s", dataset_info_dir)
 
@@ -380,7 +381,15 @@ class DatasetInfo(object):
       self._features = feature_lib.FeatureConnector.from_config(
           dataset_info_dir
       )
-    if self.metadata is not None:
+    # Restore the MetaDataDict from metadata.json if there is any
+    if (
+        self.metadata is not None
+        or tf.io.gfile.exists(_metadata_filepath(dataset_info_dir))
+    ):
+      # If the dataset was loaded from file, self.metadata will be `None`, so
+      # we create a MetadataDict first.
+      if self.metadata is None:
+        self._metadata = MetadataDict()
       self.metadata.load_metadata(dataset_info_dir)
 
     # Update fields which are not defined in the code. This means that
@@ -585,24 +594,25 @@ class Metadata(dict):
     raise NotImplementedError()
 
 
+def _metadata_filepath(data_dir):
+  return os.path.join(data_dir, METADATA_FILENAME)
+
+
 class MetadataDict(Metadata, dict):
   """A `tfds.core.Metadata` object that acts as a `dict`.
 
   By default, the metadata will be serialized as JSON.
   """
 
-  def _build_filepath(self, data_dir):
-    return os.path.join(data_dir, "metadata.json")
-
   def save_metadata(self, data_dir):
     """Save the metadata."""
-    with tf.io.gfile.GFile(self._build_filepath(data_dir), "w") as f:
+    with tf.io.gfile.GFile(_metadata_filepath(data_dir), "w") as f:
       json.dump(self, f)
 
   def load_metadata(self, data_dir):
     """Restore the metadata."""
     self.clear()
-    with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
+    with tf.io.gfile.GFile(_metadata_filepath(data_dir), "r") as f:
       self.update(json.load(f))
 
 
