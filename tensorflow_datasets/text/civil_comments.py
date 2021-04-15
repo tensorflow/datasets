@@ -158,13 +158,14 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
           include_covert_labels=True),
   ]
 
-  VERSION = tfds.core.Version('1.1.0')
+  VERSION = tfds.core.Version('1.1.1')
   SUPPORTED_VERSIONS = [
-      tfds.core.Version('1.1.0'),
+      tfds.core.Version('1.1.1'),
       tfds.core.Version('1.0.1'),
       tfds.core.Version('1.0.0'),
   ]
   RELEASE_NOTES = {
+      '1.1.1': 'Added CivilCommentsCovert config with correct checksum.',
       '1.1.0': 'Added CivilCommentsCovert config.',
       '1.0.1': 'Added a unique id for each comment.',
       '1.0.0': 'Initial full release.',
