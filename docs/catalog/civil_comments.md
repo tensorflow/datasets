@@ -56,22 +56,12 @@ comment text.
     *   `1.0.1`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Added a unique id for each comment.
-    *   **`1.1.0`** (default)
+    *   `1.1.0`: Added CivilCommentsCovert config.
+    *   **`1.1.1`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added CivilCommentsCovert config.
+        Added CivilCommentsCovert config with correct checksum.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+*   **Download size**: `397.83 MiB`
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -114,6 +104,20 @@ Split | Examples
     but only the basic seven labels (toxicity, severe_toxicity, obscene, threat,
     insult, identity_attack, and sexual_explicit).
 
+*   **Dataset size**: `959.64 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'test'`       | 97,320
+`'train'`      | 1,804,874
+`'validation'` | 97,320
+
 *   **Features**:
 
 ```python
@@ -136,6 +140,20 @@ FeaturesDict({
     extended set of identity labels in addition to the basic seven labels.
     However, it only includes the subset (roughly a quarter) of the data with
     all these features.
+
+*   **Dataset size**: `510.17 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 21,577
+`'train'`      | 405,130
+`'validation'` | 21,293
 
 *   **Features**:
 
@@ -187,6 +205,19 @@ FeaturesDict({
     different types of covert offensiveness. The full annotation procedure is
     detailed in a forthcoming paper at
     https://sites.google.com/corp/view/hciandnlp/accepted-papers.
+
+*   **Dataset size**: `79.61 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,455
+`'train'` | 48,074
 
 *   **Features**:
 
