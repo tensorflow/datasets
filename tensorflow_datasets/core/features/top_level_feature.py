@@ -77,23 +77,29 @@ class TopLevelFeature(feature_lib.FeatureConnector):
 
 def _decode_feature(feature, example, serialized_info, decoder):
   """Decode a single feature."""
-  # TODO(tfds): Support decoders for tfds.features.Dataset
-
-  # Eventually overwrite the default decoding
   if decoder is not None:
-    decoder.setup(feature=feature)
+    # If the decoder is still a dict, it means that the feature is a Dataset
+    # (it wasn't flattened).
+    if isinstance(decoder, dict):
+      decode_kwargs = dict(decoders=decoder)
+      decoder = feature
+    else:
+      # Eventually overwrite the default decoding
+      decode_kwargs = {}
+      decoder.setup(feature=feature)
   else:
+    decode_kwargs = {}
     decoder = feature
 
   sequence_rank = _get_sequence_rank(serialized_info)
   if sequence_rank == 0:
-    return decoder.decode_example(example)
+    return decoder.decode_example(example, **decode_kwargs)
   elif sequence_rank == 1:
     # Return a batch of examples from a sequence
-    return decoder.decode_batch_example(example)
+    return decoder.decode_batch_example(example, **decode_kwargs)
   elif sequence_rank > 1:
     # Use ragged tensor if the sequance rank is greater than one
-    return decoder.decode_ragged_example(example)
+    return decoder.decode_ragged_example(example, **decode_kwargs)
 
 
 def _get_sequence_rank(serialized_info):
