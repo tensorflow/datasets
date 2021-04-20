@@ -148,7 +148,8 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, image_dirs, annotation_file):
     """Yields examples."""
     lvis_annotation = LvisAnnotation(annotation_file)
-    for image_info in lvis_annotation.images:
+
+    def _process_example(image_info):
       # Search image dirs.
       filename = pathlib.Path(image_info['coco_url']).name
       image = _find_image_in_dirs(image_dirs, filename)
@@ -178,13 +179,16 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
             'segmentation':
                 _build_segmentation_mask(image_info, inst['segmentation'])
         })
-      yield image_info['id'], example
+      return image_info['id'], example
+
+    beam = tfds.core.lazy_imports.apache_beam
+    return beam.Create(lvis_annotation.images) | beam.Map(_process_example)
 
 
 def _find_image_in_dirs(image_dirs, filename):
   """Finds `filename` in one of the `image_dir` folders."""
   images = [d / filename for d in image_dirs if (d / filename).exists()]
-  assert len(images) == 1, filename
+  assert len(images) == 1, (images, image_dirs, filename)
   return images[0]
 
 
