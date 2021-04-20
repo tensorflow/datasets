@@ -15,7 +15,7 @@
 
 """Dataset feature for nested datasets."""
 import functools
-from typing import Any, Iterator
+from typing import Any, Dict, Iterator, Union
 
 import tensorflow.compat.v2 as tf
 
@@ -77,10 +77,16 @@ class Dataset(sequence_feature.Sequence):
     'episode': ({'observation': ..., 'reward': ...} for _ in range(10)),
   }
   ```
-  """
 
-  # TODO(tfds): Add support for inputs where the iterators are nested. For
-  # example {'value': [1, 2, 3]}
+  Or a dictionary of `Iterable`, like
+
+  ```python
+  yield _, {
+    'agent_id': agent_name
+    'episode': {'observation': np.ones(10), 'reward': np.ones(10)} ,
+  }
+  ```
+  """
 
   # TODO(tfds): Add support for TF1 graph mode.
 
@@ -95,10 +101,15 @@ class Dataset(sequence_feature.Sequence):
     tensor_info = super().get_serialized_info()
     return tf.nest.map_structure(_add_dataset_lvl, tensor_info)
 
-  def encode_example(self, example_ds: Iterator[type_utils.TreeDict[Any]]):
+  def encode_example(self, example_ds: Union[Iterator[type_utils.TreeDict[Any]],
+                                             Dict[str, Any]]):
+    if isinstance(example_ds, dict):
+      dict_list = sequence_feature.transpose_dict_list(example_ds)
+    else:
+      dict_list = example_ds
     # Encode each individual element
     ds_elements = [
-        self.feature.encode_example(example) for example in example_ds
+        self.feature.encode_example(example) for example in dict_list
     ]
 
     # Empty datasets return empty arrays
