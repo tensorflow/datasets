@@ -44,6 +44,11 @@ toc:
     title: yes_no
   title: Audio
 - section:
+  - path: /datasets/catalog/d4rl_mujoco_halfcheetah
+    status: nightly
+    title: d4rl_mujoco_halfcheetah
+  title: D4rl
+- section:
   - path: /datasets/catalog/ogbg_molpcba
     status: nightly
     title: ogbg_molpcba
