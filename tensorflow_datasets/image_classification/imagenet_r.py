@@ -53,7 +53,14 @@ _IMAGENET_R_URL = r'https://people.eecs.berkeley.edu/~hendrycks/imagenet-r.tar'
 class ImagenetR(tfds.core.GeneratorBasedBuilder):
   """ImageNet object renditions with ImageNet labels."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.2.0')
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('0.1.0'),
+  ]
+  RELEASE_NOTES = {
+      '0.2.0': ('Fix file_name, from absolute path to path relative to '
+                'imagenet-r directory, ie: "imagenet_synset_id/filename.jpg".')
+  }
 
   def _info(self):
     names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FILENAME)
@@ -99,6 +106,6 @@ class ImagenetR(tfds.core.GeneratorBasedBuilder):
         features = {
             'image': image_path,
             'label': class_synset,
-            'file_name': image_path,
+            'file_name': os.path.join(class_synset, image_filename),
         }
         yield f'{class_synset}_{image_filename}', features
