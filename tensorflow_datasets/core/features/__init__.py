@@ -19,6 +19,7 @@ See [the guide](https://www.tensorflow.org/datasets/features).
 
 """
 
+from tensorflow_datasets.core.features.array_2d import Array2D
 from tensorflow_datasets.core.features.audio_feature import Audio
 from tensorflow_datasets.core.features.bounding_boxes import BBox
 from tensorflow_datasets.core.features.bounding_boxes import BBoxFeature

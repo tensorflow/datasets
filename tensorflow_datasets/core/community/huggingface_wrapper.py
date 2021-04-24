@@ -272,6 +272,7 @@ class _MockedHFDatasets(types.ModuleType):
     ClassLabel = features.ClassLabel
     Value = Value
     Translation = features.Translation
+    Array2D = features.Array2D
 
   class info(types.ModuleType):
     """`datasets.info` module."""
