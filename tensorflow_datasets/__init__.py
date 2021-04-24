@@ -50,7 +50,6 @@ from tensorflow_datasets import image
 from tensorflow_datasets import image_classification
 from tensorflow_datasets import object_detection
 from tensorflow_datasets import question_answering
-from tensorflow_datasets import d4rl
 from tensorflow_datasets import structured
 from tensorflow_datasets import summarization
 from tensorflow_datasets import text

@@ -120,7 +120,7 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   def encode_example(self, example_dict):
     # Convert nested dict[list] into list[nested dict]
-    sequence_elements = transpose_dict_list(example_dict)
+    sequence_elements = _transpose_dict_list(example_dict)
 
     # If length is static, ensure that the given length match
     if self._length is not None and len(sequence_elements) != self._length:
@@ -239,7 +239,7 @@ def _np_to_list(elem):
         'python list or tuple. Got {}'.format(type(elem)))
 
 
-def transpose_dict_list(dict_list):
+def _transpose_dict_list(dict_list):
   """Transpose a nested dict[list] into a list[nested dict]."""
   # 1. Unstack numpy arrays into list
   dict_list = utils.map_nested(_np_to_list, dict_list, dict_only=True)

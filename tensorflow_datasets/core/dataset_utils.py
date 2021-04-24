@@ -84,7 +84,6 @@ def _graph_dataset_iterator(ds_iter, graph: tf.Graph) -> Iterator[NumpyElem]:
     init = ds_iter.initializer
     ds_item = ds_iter.get_next()
     with utils.nogpu_session() as sess:
-      sess.run(tf.compat.v1.tables_initializer())
       sess.run(init)
       while True:
         try:
