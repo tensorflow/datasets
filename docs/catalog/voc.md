@@ -56,7 +56,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-
 ## voc/2007 (default config)
 
 *   **Config description**: This dataset contains the data from the PASCAL
