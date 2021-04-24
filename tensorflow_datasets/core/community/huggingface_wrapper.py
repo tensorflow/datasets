@@ -121,19 +121,7 @@ class GeneratorBasedBuilder(
   def info(self) -> dataset_info.DatasetInfo:
     # HF supports Sequences defined as list: {'video': [{'image': Image()}]}
     with _mock_list_as_sequence():
-      try:
-        info = self._info()
-      except AttributeError as e:
-        #Raise a custom error message for datasets using Array2D from huggingface
-        if 'Array2D' in e.args[0]:
-          exception_msg = "Array2D not supported in TFDS\n"
-          suffix = """\
-          \nYou can have a look at TFDS datasets if the dataset is available locally.
-          """
-          e.args = (f'{exception_msg}{suffix}',)
-          raise
-        else:
-          raise
+      info = self._info()
     # HF DatasetInfo do not have `builder` args, so we insert
     # here
     return dataset_info.DatasetInfo(builder=self, **info.kwargs)
