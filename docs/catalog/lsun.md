@@ -673,18 +673,19 @@ Split     | Examples
 
 *   **Config description**: Images of category bicycle
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `129.24 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `119.55 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,347,211
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -698,18 +699,19 @@ Split | Examples
 
 *   **Config description**: Images of category bird
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `65.10 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `59.66 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,310,362
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -723,18 +725,19 @@ Split | Examples
 
 *   **Config description**: Images of category boat
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `85.66 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `79.48 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,651,165
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -748,18 +751,19 @@ Split | Examples
 
 *   **Config description**: Images of category bottle
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `63.66 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `56.64 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,202,760
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -773,18 +777,19 @@ Split | Examples
 
 *   **Config description**: Images of category bus
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `24.33 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `21.89 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 695,891
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -798,18 +803,19 @@ Split | Examples
 
 *   **Config description**: Images of category car
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `173.03 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `159.36 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,520,756
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -823,18 +829,19 @@ Split | Examples
 
 *   **Config description**: Images of category cat
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `41.69 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `36.30 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,657,266
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -848,18 +855,19 @@ Split | Examples
 
 *   **Config description**: Images of category chair
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `115.79 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `104.80 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,037,807
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -873,18 +881,19 @@ Split | Examples
 
 *   **Config description**: Images of category cow
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.94 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `13.20 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 377,379
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -898,18 +907,19 @@ Split | Examples
 
 *   **Config description**: Images of category dining_table
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `48.27 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `44.12 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,537,123
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -923,18 +933,19 @@ Split | Examples
 
 *   **Config description**: Images of category dog
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `144.92 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `133.09 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,054,817
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -948,18 +959,19 @@ Split | Examples
 
 *   **Config description**: Images of category horse
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `68.79 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `63.89 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,000,340
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -973,18 +985,19 @@ Split | Examples
 
 *   **Config description**: Images of category motorbike
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `41.86 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `38.59 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,194,101
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -998,18 +1011,19 @@ Split | Examples
 
 *   **Config description**: Images of category potted_plant
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `42.70 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `39.66 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,104,859
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1023,18 +1037,19 @@ Split | Examples
 
 *   **Config description**: Images of category sheep
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `17.75 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `15.86 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 418,983
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1048,18 +1063,19 @@ Split | Examples
 
 *   **Config description**: Images of category sofa
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `56.33 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `50.22 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,365,870
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1073,18 +1089,19 @@ Split | Examples
 
 *   **Config description**: Images of category train
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `42.72 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `39.35 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,148,020
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -1098,18 +1115,19 @@ Split | Examples
 
 *   **Config description**: Images of category tv-monitor
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `45.70 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `39.35 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,463,284
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
