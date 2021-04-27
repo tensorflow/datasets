@@ -93,10 +93,15 @@ def _create_builder_configs():
 class ImagenetV2(tfds.core.GeneratorBasedBuilder):
   """An ImageNet test set recollected by following the original protocol."""
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('3.0.0')
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('2.0.0'),
+  ]
   RELEASE_NOTES = {
       '1.0.0': 'Initial version.',
       '2.0.0': 'Files updated.',
+      '3.0.0': ('Fix file_name, from absolute path to path relative to '
+                'data directory, ie: "class_id/filename.jpg".'),
   }
   BUILDER_CONFIGS = list(_create_builder_configs())
 
@@ -145,6 +150,6 @@ class ImagenetV2(tfds.core.GeneratorBasedBuilder):
         features = {
             'image': image_path,
             'label': int(class_id),
-            'file_name': image_path,
+            'file_name': os.path.join(class_id, image_filename),
         }
         yield f'{class_id}_{image_filename}', features
