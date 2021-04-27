@@ -261,15 +261,11 @@ class DatasetBuilderTest(testing.TestCase):
     read_config = read_config_lib.ReadConfig(
         experimental_interleave_sort_fn=interleave_sort,
     )
-    read_config.options.experimental_stats.prefix = "tfds_prefix"
     ds = self.builder.as_dataset(
         split="train",
         read_config=read_config,
         shuffle_files=True,
     )
-
-    # Check that the ReadConfig options are properly set
-    self.assertEqual(ds.options().experimental_stats.prefix, "tfds_prefix")
 
     # The instruction function should have been called
     self.assertEqual(is_called, [True])
