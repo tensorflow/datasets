@@ -21,6 +21,7 @@ import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
+# General (main) citation for CivilComments and CivilCommentsIdentities.
 _CITATION = """
 @article{DBLP:journals/corr/abs-1903-04561,
   author    = {Daniel Borkan and
@@ -39,6 +40,25 @@ _CITATION = """
   timestamp = {Sun, 31 Mar 2019 19:01:24 +0200},
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1903-04561},
   bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+"""
+
+# Citation for CivilCommentsCovert.
+_COVERT_CITATION = """
+@inproceedings{lees-etal-2021-capturing,
+    title = "Capturing Covertly Toxic Speech via Crowdsourcing",
+    author = "Lees, Alyssa  and
+      Borkan, Daniel  and
+      Kivlichan, Ian  and
+      Nario, Jorge  and
+      Goyal, Tesh",
+    booktitle = "Proceedings of the First Workshop on Bridging Human{--}Computer Interaction and Natural Language Processing",
+    month = apr,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2021.hcinlp-1.3",
+    pages = "14--20"
 }
 """
 
@@ -158,13 +178,15 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
           include_covert_labels=True),
   ]
 
-  VERSION = tfds.core.Version('1.1.1')
+  VERSION = tfds.core.Version('1.1.2')
   SUPPORTED_VERSIONS = [
+      tfds.core.Version('1.1.2'),
       tfds.core.Version('1.1.1'),
       tfds.core.Version('1.0.1'),
       tfds.core.Version('1.0.0'),
   ]
   RELEASE_NOTES = {
+      '1.1.2': 'Added separate citation for CivilCommentsCovert dataset.',
       '1.1.1': 'Added CivilCommentsCovert config with correct checksum.',
       '1.1.0': 'Added CivilCommentsCovert config.',
       '1.0.1': 'Added a unique id for each comment.',
@@ -172,6 +194,8 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
   }
 
   def _info(self):
+    citation = (_CITATION if not self.builder_config.include_covert_labels
+                else _COVERT_CITATION)
     features = {'text': tfds.features.Text()}
     labels = [
         'id', 'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',
@@ -192,7 +216,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
         # The supervised_keys version is very impoverished.
         supervised_keys=('text', 'toxicity'),
         homepage='https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data',
-        citation=_CITATION,
+        citation=citation,
     )
 
   def _split_generators(self, dl_manager):
