@@ -26,6 +26,7 @@ from typing import Any, Dict, Iterator, List, Optional, Type
 
 import dataclasses
 
+import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
 from tensorflow_datasets.scripts.documentation import doc_utils
@@ -103,6 +104,9 @@ def _load_builder_from_location(
     builder = _maybe_load_config(name)
     if not builder:
       return builder
+  except tf.errors.PermissionDeniedError:
+    tqdm.tqdm.write(f'Warning: Skip dataset {name} due to permission error')
+    return None
   if builder.builder_config:
     config_builders = _load_all_configs(name, builder)
   else:
