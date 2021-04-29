@@ -57,9 +57,12 @@ comment text.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Added a unique id for each comment.
     *   `1.1.0`: Added CivilCommentsCovert config.
-    *   **`1.1.1`** (default)
+    *   `1.1.1`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Added CivilCommentsCovert config with correct checksum.
+    *   **`1.1.2`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Added separate citation for CivilCommentsCovert dataset.
 
 *   **Download size**: `397.83 MiB`
 
@@ -71,28 +74,9 @@ comment text.
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/abs-1903-04561,
-  author    = {Daniel Borkan and
-               Lucas Dixon and
-               Jeffrey Sorensen and
-               Nithum Thain and
-               Lucy Vasserman},
-  title     = {Nuanced Metrics for Measuring Unintended Bias with Real Data for Text
-               Classification},
-  journal   = {CoRR},
-  volume    = {abs/1903.04561},
-  year      = {2019},
-  url       = {http://arxiv.org/abs/1903.04561},
-  archivePrefix = {arXiv},
-  eprint    = {1903.04561},
-  timestamp = {Sun, 31 Mar 2019 19:01:24 +0200},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1903-04561},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-```
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## civil_comments/CivilComments (default config)
 
@@ -130,39 +114,28 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Citation**:
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilComments-1.1.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+```
+@article{DBLP:journals/corr/abs-1903-04561,
+  author    = {Daniel Borkan and
+               Lucas Dixon and
+               Jeffrey Sorensen and
+               Nithum Thain and
+               Lucy Vasserman},
+  title     = {Nuanced Metrics for Measuring Unintended Bias with Real Data for Text
+               Classification},
+  journal   = {CoRR},
+  volume    = {abs/1903.04561},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1903.04561},
+  archivePrefix = {arXiv},
+  eprint    = {1903.04561},
+  timestamp = {Sun, 31 Mar 2019 19:01:24 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1903-04561},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
 
 ## civil_comments/CivilCommentsIdentities
 
@@ -225,39 +198,28 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Citation**:
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsIdentities-1.1.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+```
+@article{DBLP:journals/corr/abs-1903-04561,
+  author    = {Daniel Borkan and
+               Lucas Dixon and
+               Jeffrey Sorensen and
+               Nithum Thain and
+               Lucy Vasserman},
+  title     = {Nuanced Metrics for Measuring Unintended Bias with Real Data for Text
+               Classification},
+  journal   = {CoRR},
+  volume    = {abs/1903.04561},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1903.04561},
+  archivePrefix = {arXiv},
+  eprint    = {1903.04561},
+  timestamp = {Sun, 31 Mar 2019 19:01:24 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1903-04561},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
 
 ## civil_comments/CivilCommentsCovert <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
@@ -334,36 +296,22 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Citation**:
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsCovert-1.1.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+```
+@inproceedings{lees-etal-2021-capturing,
+    title = "Capturing Covertly Toxic Speech via Crowdsourcing",
+    author = "Lees, Alyssa  and
+      Borkan, Daniel  and
+      Kivlichan, Ian  and
+      Nario, Jorge  and
+      Goyal, Tesh",
+    booktitle = "Proceedings of the First Workshop on Bridging Human{--}Computer Interaction and Natural Language Processing",
+    month = apr,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2021.hcinlp-1.3",
+    pages = "14--20"
+}
+```
