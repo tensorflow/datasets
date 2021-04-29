@@ -15,9 +15,9 @@
 
 """web_nlg dataset."""
 
+from unittest import mock
 import xml.etree.ElementTree as etree
 
-import mock
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured.web_nlg import web_nlg
