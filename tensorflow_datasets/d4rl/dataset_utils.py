@@ -23,16 +23,7 @@ from tensorflow.io import gfile
 
 def generate_examples(file_path: str):
   """Provides a common generate_examples method for D4RL datasets."""
-  with gfile.GFile(file_path, 'rb') as f:
-    dataset_file = h5py.File(f, 'r')
-    dataset_dict = {}
-    for k in _get_dataset_keys(dataset_file):
-      try:
-        # first try loading as an array
-        dataset_dict[k] = dataset_file[k][:]
-      except ValueError as e:  # try loading as a scalar
-        dataset_dict[k] = dataset_file[k][()]
-    dataset_file.close()
+  dataset_dict = read_d4rl_dataset(file_path)
   if 'timeouts' not in dataset_dict:
     raise ValueError('Only datasets with explicit timeouts are supported.')
 
@@ -164,3 +155,18 @@ def _get_dataset_keys(h5file):
 
   h5file.visititems(visitor)
   return keys
+
+
+def read_d4rl_dataset(file_path: str):
+  """Reads a D4RL dataset and returns the dataset as a dictionary."""
+  with gfile.GFile(file_path, 'rb') as f:
+    dataset_file = h5py.File(f, 'r')
+    dataset_dict = {}
+    for k in _get_dataset_keys(dataset_file):
+      try:
+        # first try loading as an array
+        dataset_dict[k] = dataset_file[k][:]
+      except ValueError:  # try loading as a scalar
+        dataset_dict[k] = dataset_file[k][()]
+    dataset_file.close()
+    return dataset_dict
