@@ -39,8 +39,8 @@ from tensorflow_datasets.core.utils import type_utils
 # TODO(tfds): Should be `TreeDict[FeatureValue]`
 Example = Any
 
-MIN_SHARD_SIZE = 64<<20  # 64 MiB
-MAX_SHARD_SIZE = 1024<<20  # 2 GiB
+MIN_SHARD_SIZE = 64 << 20  # 64 MiB
+MAX_SHARD_SIZE = 1024 << 20  # 2 GiB
 
 # TFRECORD overheads.
 # https://github.com/tensorflow/tensorflow/blob/27325fabed898880fa1b33a04d4b125a6ef4bbc8/tensorflow/core/lib/io/record_writer.h#L104
@@ -64,8 +64,8 @@ class _ShardSpec:
     path: The path where to write the shard.
     index_path: The path where to write index of the records in the
       corresponding shard. NOTE: Value for this attribute is always set, but
-      usage depends on whether `write_examples` returned a list of
-      record positions for each example.
+        usage depends on whether `write_examples` returned a list of record
+        positions for each example.
     examples_number: Number of examples in shard.
     file_instructions: Reading instructions.
   """
@@ -151,8 +151,8 @@ def _get_shard_boundaries(
     raise AssertionError("num_examples ({}) < number_of_shards ({})".format(
         num_examples, number_of_shards))
   return [
-      int(round(num_examples * (float(i)/number_of_shards)))
-      for i in range(1, number_of_shards+1)
+      int(round(num_examples * (float(i) / number_of_shards)))
+      for i in range(1, number_of_shards + 1)
   ]
 
 
@@ -244,8 +244,8 @@ class Writer(object):
       example_specs: spec to build ExampleSerializer.
       path (str): path where records should be written in.
       hash_salt (str or bytes): salt to hash keys.
-      file_format (FileFormat): format of the record files in which the
-        dataset should be written in.
+      file_format (FileFormat): format of the record files in which the dataset
+        should be written in.
     """
     self._example_specs = example_specs
     self._serializer = example_serializer.ExampleSerializer(example_specs)
@@ -277,17 +277,18 @@ class Writer(object):
     # Here we just loop over the examples, and don't use the instructions, just
     # the final number of examples in every shard. Instructions could be used to
     # parallelize, but one would need to be careful not to sort buckets twice.
-    examples_generator = iter(utils.tqdm(
-        self._shuffler,
-        desc=f"Shuffling {filename}...",
-        total=self._num_examples,
-        unit=" examples",
-        leave=False,
-    ))
+    examples_generator = iter(
+        utils.tqdm(
+            self._shuffler,
+            desc=f"Shuffling {filename}...",
+            total=self._num_examples,
+            unit=" examples",
+            leave=False,
+        ))
     try:
       for shard_spec in shard_specs:
-        iterator = itertools.islice(
-            examples_generator, 0, shard_spec.examples_number)
+        iterator = itertools.islice(examples_generator, 0,
+                                    shard_spec.examples_number)
         record_keys = _write_examples(shard_spec.path, iterator,
                                       self._file_format)
 
@@ -305,9 +306,8 @@ class Writer(object):
         _write_index_file(shard_spec.index_path, record_keys)
 
     except shuffle.DuplicatedKeysError as err:
-      _raise_error_for_duplicated_keys(
-          err.item1, err.item2, self._example_specs
-      )
+      _raise_error_for_duplicated_keys(err.item1, err.item2,
+                                       self._example_specs)
 
     # Finalize the iterator to clear-up TQDM
     try:
@@ -316,14 +316,11 @@ class Writer(object):
       pass
     else:
       raise ValueError(
-          f"Shuffling more elements than expected. Additional element: {val}"
-      )
+          f"Shuffling more elements than expected. Additional element: {val}")
 
     shard_lengths = [int(spec.examples_number) for spec in shard_specs]
-    logging.info(
-        "Done writing %s. Number of examples: %s (shards: %s)",
-        filename, sum(shard_lengths), shard_lengths
-    )
+    logging.info("Done writing %s. Number of examples: %s (shards: %s)",
+                 filename, sum(shard_lengths), shard_lengths)
     return shard_lengths, self._shuffler.size
 
 
@@ -358,11 +355,14 @@ class BeamWriter(object):
           a list with the number of examples in each final shard. Eg:
             "[10,11,10,11]".
       hash_salt: string, the salt to use for hashing of keys.
-      file_format: file_adapters.FileFormat, format of the record files in
-        which the dataset will be read/written from.
+      file_format: file_adapters.FileFormat, format of the record files in which
+        the dataset will be read/written from.
     """
-    self._original_state = dict(example_specs=example_specs, path=path,
-                                hash_salt=hash_salt, file_format=file_format)
+    self._original_state = dict(
+        example_specs=example_specs,
+        path=path,
+        hash_salt=hash_salt,
+        file_format=file_format)
     self._path = os.fspath(path)
     self._split_info_path = "%s.split_info.json" % path
     self._serializer = example_serializer.ExampleSerializer(example_specs)
@@ -395,9 +395,9 @@ class BeamWriter(object):
     beam = lazy_imports_lib.lazy_imports.apache_beam
     bucketid, examples = bucketid_examples
     examples = sorted(examples)  # We know by design it fits in memory.
-    for i in range(len(examples)-1):
-      if examples[i][0] == examples[i+1][0]:
-        _raise_error_for_duplicated_keys(examples[i][1], examples[i+1][1],
+    for i in range(len(examples) - 1):
+      if examples[i][0] == examples[i + 1][0]:
+        _raise_error_for_duplicated_keys(examples[i][1], examples[i + 1][1],
                                          self._example_specs)
     examples = [ex[1] for ex in examples]
     total_size = sum(len(ex) for ex in examples)
@@ -425,16 +425,19 @@ class BeamWriter(object):
       total_num_examples += length
       total_size += size
       bucket2length[bucket_index] = length
-    bucket_lengths = [bucket2length.get(i, 0)
-                      for i in range(max(bucket2length.keys()) + 1)]
-    shard_specs = _get_shard_specs(
-        total_num_examples, total_size, bucket_lengths, self._path)
+    bucket_lengths = [
+        bucket2length.get(i, 0) for i in range(max(bucket2length.keys()) + 1)
+    ]
+    shard_specs = _get_shard_specs(total_num_examples, total_size,
+                                   bucket_lengths, self._path)
     with tf.io.gfile.GFile(self._split_info_path, "w") as json_f:
-      json_f.write(json.dumps(
-          {
-              "total_size": total_size,
+      json_f.write(
+          json.dumps({
+              "total_size":
+                  total_size,
               "shard_lengths": [
-                  int(shard.examples_number) for shard in shard_specs]
+                  int(shard.examples_number) for shard in shard_specs
+              ]
           }))
     for shard_spec in shard_specs:
       for instruction in shard_spec.file_instructions:
@@ -453,8 +456,8 @@ class BeamWriter(object):
 
   def _write_final_shard(self, shardid_examples):
     shard_path, examples_by_bucket = shardid_examples
-    examples = list(itertools.chain(*[
-        ex[1] for ex in sorted(examples_by_bucket)]))
+    examples = list(
+        itertools.chain(*[ex[1] for ex in sorted(examples_by_bucket)]))
     record_keys = _write_examples(shard_path, examples, self._file_format)
     # If there are no record_keys, skip creating index files.
     if not record_keys:
@@ -473,22 +476,24 @@ class BeamWriter(object):
         # (bucket_id, (hkey, serialized_example))
         | "GroupByBucket" >> beam.GroupByKey()
         # (bucket_id, [(hkey0, serialized0), ...])
-        | "SortBucketsGetSizeLen" >> (
-            beam.ParDo(self._sort_bucket)
-            .with_outputs(self._OUTPUT_TAG_BUCKETS_LEN_SIZE, main="buckets")))
-        # buckets = (bucketid, [serialized0, serialized1, ...])
-        # buckets_len_size = (bucketid, (num_examples_bucket, bucket_byte_size))
+        | "SortBucketsGetSizeLen" >>
+        (beam.ParDo(self._sort_bucket).with_outputs(
+            self._OUTPUT_TAG_BUCKETS_LEN_SIZE, main="buckets")))
+    # buckets = (bucketid, [serialized0, serialized1, ...])
+    # buckets_len_size = (bucketid, (num_examples_bucket, bucket_byte_size))
 
     boundaries = (
         buckets_len_size
         | "CombineBucketsSizes" >> beam.transforms.combiners.ToDict()
         # {bucketid: (num_examples_bucket, bucket_byte_size)}
-        | "GetBoundaries"  >> beam.ParDo(
-            self._get_boundaries_per_bucket_shard))
-        # (bucketid, (shard_path, from, to)
+        | "GetBoundaries" >> beam.ParDo(self._get_boundaries_per_bucket_shard))
+    # (bucketid, (shard_path, from, to)
 
     return (
-        {"examples": buckets, "boundaries": boundaries}
+        {
+            "examples": buckets,
+            "boundaries": boundaries
+        }
         # {
         #     "examples": (bucketid, [serialized0, serialized1, ...])
         #     "boundaries": (bucketid, (shard_path, from, to)

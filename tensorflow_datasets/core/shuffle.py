@@ -69,7 +69,7 @@ def get_bucket_number(hkey, shards_number):
   """Returns bucket (shard) number (int) for given hashed key (int)."""
   # We purposely do not use modulo (%) to keep global order across shards.
   # floor(key * shards_number / HKEYS_NUMBER), with HKEYS_NUMBER = 2**HKEY_SIZE.
-  return math.trunc((hkey * shards_number)>>HKEY_SIZE)
+  return math.trunc((hkey * shards_number) >> HKEY_SIZE)
 
 
 class _Bucket(object):
@@ -203,7 +203,7 @@ class Shuffler(object):
   def _add_to_mem_buffer(self, hkey, data):
     self._mem_buffer.append((hkey, data))
     if self._total_bytes > MAX_MEM_BUFFER_SIZE:
-      for hkey, data  in self._mem_buffer:
+      for hkey, data in self._mem_buffer:
         self._add_to_bucket(hkey, data)
       self._mem_buffer = None
       self._in_memory = False
@@ -213,8 +213,8 @@ class Shuffler(object):
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
     if not isinstance(data, six.binary_type):
-      raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' % (
-          type(data)))
+      raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' %
+                           (type(data)))
     hkey = self._hasher.hash_key(key)
     self._total_bytes += len(data)
     if self._in_memory:

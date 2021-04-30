@@ -117,7 +117,8 @@ class MockFs(object):
     return list({
         # Extract `path/<dirname>/...` -> `<dirname>`
         os.path.relpath(p, path).split(os.path.sep)[0]
-        for p in self.files if p.startswith(path)
+        for p in self.files
+        if p.startswith(path)
     })
 
   @contextlib.contextmanager
@@ -210,14 +211,11 @@ def mock_tf(symbol_name: str, *args: Any, **kwargs: Any) -> Iterator[None]:
       getattr(module, symbol_name)  # Trigger the lazy-loading of the TF API.
       # Patch the module/object
       stack.enter_context(
-          mock.patch.object(module, symbol_name, *args, **kwargs)
-      )
+          mock.patch.object(module, symbol_name, *args, **kwargs))
     yield
 
 
-def run_in_graph_and_eager_modes(func=None,
-                                 config=None,
-                                 use_gpu=True):
+def run_in_graph_and_eager_modes(func=None, config=None, use_gpu=True):
   """Execute the decorated test in both graph mode and eager mode.
 
   This function returns a decorator intended to be applied to test methods in
