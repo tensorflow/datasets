@@ -280,14 +280,7 @@ def _search_script_path(ds_to_build: str) -> Optional[tfds.core.ReadOnlyPath]:
   # * Dataset file (e.g. `my_dataset.py`)
   # * Dataset module (e.g. `my_dataset`)
 
-  # TODO(py3.7): Should be `path.expanduser().resolve()` but `.resolve()` fails
-  # on some environments when the file doesn't exists.
-  # https://stackoverflow.com/questions/55710900/pathlib-resolve-method-not-resolving-non-existant-files
-  path = tfds.core.as_path(ds_to_build).expanduser()
-  if not path.exists():
-    path = tfds.core.as_path(pathlib.Path()).resolve() / path
-  else:
-    path = path.resolve()
+  path = tfds.core.as_path(ds_to_build).expanduser().resolve()
 
   if path.exists():
     if path.is_dir():  # dataset-as-folder, use `my_dataset/my_dataset.py`
