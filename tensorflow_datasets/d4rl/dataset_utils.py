@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """Utils to generate builders for D4RL datasets."""
-from typing import Any, Dict, Iterable, List, Tuple, Union
+from typing import Any, Dict
 
 import h5py
 import numpy as np
@@ -35,8 +35,18 @@ def generate_examples(file_path: str):
   # is_first corresponds to the done flag delayed by one step.
   dataset_dict['is_first'] = [True] + done[:-1]
 
-  # TODO(sabela): Add extra keys for metadata (qpos, qval, goal) that is only
-  # present in some datasets.
+  # Get step metadata
+  infos_dict = {}
+  if 'infos/qpos' in dataset_dict.keys():
+    infos_dict = {
+        'qpos': dataset_dict['infos/qpos'],
+        'qvel': dataset_dict['infos/qvel'],
+        'action_log_probs': dataset_dict['infos/action_log_probs']
+    }
+  # Flatten reward
+  dataset_dict['rewards'] = np.squeeze(dataset_dict['rewards'])
+
+  episode_metadata = _get_episode_metadata(dataset_dict)
   dataset_dict = {
       'observation': dataset_dict['observations'],
       'action': dataset_dict['actions'],
@@ -45,23 +55,69 @@ def generate_examples(file_path: str):
       'is_terminal': dataset_dict['terminals'],
       'is_first': dataset_dict['is_first'],
   }
+  if infos_dict:
+    dataset_dict['infos'] = infos_dict
   num_steps = len(dataset_dict['is_first'])
   prev = 0
   counter = 0
   for pos in range(num_steps):
     if dataset_dict['is_first'][pos] and pos > prev:
-      yield counter, _get_episode(dataset_dict, prev, pos)
+      yield counter, _get_episode(dataset_dict, episode_metadata, prev, pos)
       prev = pos
       counter += 1
   if prev < num_steps:
-    yield counter, _get_episode(dataset_dict, prev, num_steps)
+    yield counter, _get_episode(dataset_dict, episode_metadata, prev, num_steps)
 
 
-def _get_episode(steps: Dict[str, Any], begin: int, end: int) -> Dict[str, Any]:
+def _get_episode_metadata(dataset: Dict[str, Any]) -> Dict[str, Any]:
+  """Generate a metadata dictionary using flattened metadata keys.
+
+  Args:
+    dataset: dictionary containing the dataset keys and values. Keys are
+      flatened.
+
+  Returns:
+    Nested dictionary with the episode metadata.
+
+  If the dataset contains:
+  {
+    'metadata/v1/v2': 1,
+    'metadata/v3': 2,
+  }
+  Returns
+  {
+    'v1':{
+      'v2': 1,
+    }
+    'v3': 2,
+  }
+  It assumes that the flattened metadata keys are well-formed.
+  """
+  episode_metadata = {}
+  for k in dataset.keys():
+    if 'metadata/' not in k:
+      continue
+    keys = k.split('/')[1:]
+    nested_dict = episode_metadata
+    leaf_value = dataset[k]
+    for index, nested_key in enumerate(keys):
+      if index == (len(keys) - 1):
+        nested_dict[nested_key] = leaf_value
+      else:
+        if nested_key not in nested_dict:
+          nested_dict[nested_key] = {}
+        nested_dict = nested_dict[nested_key]
+
+  return episode_metadata
+
+
+def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
+                 begin: int, end: int) -> Dict[str, Any]:
   """Builds a full episode dict.
 
   Args:
       steps: a dict with all steps in a dataset
+      episode_metadata: dict with the episode metadata
       begin: defines a starting position of an episode
       end: defines an ending position of an episode
 
@@ -70,11 +126,8 @@ def _get_episode(steps: Dict[str, Any], begin: int, end: int) -> Dict[str, Any]:
   """
   # It's an initial step if the episode is empty.
   episode = {}
-  episode['is_first'] = steps['is_first'][begin:end]
-  episode['observation'] = steps['observation'][begin:end]
-  episode['action'] = steps['action'][begin:end]
-  episode['reward'] = steps['reward'][begin:end]
-  episode['discount'] = steps['discount'][begin:end]
+  for k in ['is_first', 'observation', 'action', 'reward', 'discount']:
+    episode[k] = steps[k][begin:end]
   episode['is_terminal'] = [False] * (end - begin)
   if steps['is_terminal'][end - 1]:
     # If the step is terminal, then we propagate the information to a next
@@ -91,58 +144,14 @@ def _get_episode(steps: Dict[str, Any], begin: int, end: int) -> Dict[str, Any]:
     episode['discount'] = np.array(
         np.concatenate((episode['discount'], [0.0])), dtype=np.float32)
     episode['is_terminal'] = np.concatenate((episode['is_terminal'], [True]))
-  return {'steps': _unpack_steps(episode)}
-
-
-def _get_nested_field(data: Union[Dict[str, Any], Tuple[Any], List[Any]],
-                      index: int) -> Any:
-  """Gets nested data and returns element at index respecting the shape.
-
-  It assumes that the most leaf type is a list.
-
-  If the input data is, for example:
-  data = {
-    'field_1': {
-        'nested': [1,2,3],
-    },
-    'field_2': [4, 5, 6],
-  }
-  index = 1
-  The output is:
-  {
-    'field_1':{
-      'nested': 2,
-    },
-    'field_2': 5,
-  }
-
-  Args:
-    data: data with nested shape, where the most inner type is a list.
-    index: index in the list to construct the returned element.
-
-  Returns:
-    Element i of data respecting the nested shape.
-
-  Raises:
-    ValueError if the input data type is not dict, tuple, list or np.ndarray.
-  """
-  if isinstance(data, list) or isinstance(data, np.ndarray):
-    return data[index]
-  if isinstance(data, dict):
-    return {k: _get_nested_field(data[k], index) for k in data}
-  if isinstance(data, tuple):
-    return (_get_nested_field(data[k], index) for k in data)
-  raise ValueError(f'Data has to be list, dict or tuple and it is {type(data)}')
-
-
-def _unpack_steps(steps: Dict[str, List[Any]]) -> Iterable[Dict[str, Any]]:
-  """Gets a step represented as a dict[nested_list] and returns list[dict]."""
-  length = len(steps['is_first'])
-  for i in range(length):
-    step = {}
-    for k in steps:
-      step[k] = _get_nested_field(steps[k], i)
-    yield step
+  if 'infos' in steps.keys():
+    episode['infos'] = {}
+    for k in steps['infos'].keys():
+      episode['infos'][k] = steps['infos'][k][begin:end]
+  full_episode = {'steps': episode}
+  if episode_metadata:
+    full_episode.update(episode_metadata)
+  return full_episode
 
 
 def _get_dataset_keys(h5file):

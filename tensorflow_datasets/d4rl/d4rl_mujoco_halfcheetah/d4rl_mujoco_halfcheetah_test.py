@@ -20,7 +20,7 @@ import tensorflow_datasets.public_api as tfds
 
 
 class D4rlMujocoHalfcheetahTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for halfcheetah dataset."""
+  """Tests for halfcheetah datasets."""
   DATASET_CLASS = d4rl_mujoco_halfcheetah.D4rlMujocoHalfcheetah
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -30,8 +30,58 @@ class D4rlMujocoHalfcheetahTest(tfds.testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {'file_path': 'halfcheetah_medium.hdf5'}
   DL_DOWNLOAD_RESULT = {'file_path': 'halfcheetah_medium.hdf5'}
 
-  # builder configs only affect the dataset path
   BUILDER_CONFIG_NAMES_TO_TEST = ['v0-medium']
+
+
+class D4rlMujocoHalfcheetahInfosTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for halfcheetah datasets with step metadata."""
+  DATASET_CLASS = d4rl_mujoco_halfcheetah.D4rlMujocoHalfcheetah
+  SPLITS = {
+      'train': 2,  # Number of fake train example
+  }
+  SKIP_TF1_GRAPH_MODE = True
+
+  DL_EXTRACT_RESULT = {'file_path': 'halfcheetah_random-v1.hdf5'}
+  DL_DOWNLOAD_RESULT = {'file_path': 'halfcheetah_random-v1.hdf5'}
+
+  BUILDER_CONFIG_NAMES_TO_TEST = ['v1-random']
+
+
+class D4rlMujocoHalfcheetahReplayTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for halfcheetah datasets with replay.
+
+  These datasets have the following special features:
+    * Contain step metadata.
+    * Contain two fields of episode metadata.
+    * Use float64 types (instead of float32)
+    * Rewards are stored with shape (1,) instead of scalar
+
+  """
+  DATASET_CLASS = d4rl_mujoco_halfcheetah.D4rlMujocoHalfcheetah
+  SPLITS = {
+      'train': 2,  # Number of fake train example
+  }
+  SKIP_TF1_GRAPH_MODE = True
+
+  DL_EXTRACT_RESULT = {'file_path': 'halfcheetah_medium_replay-v1.hdf5'}
+  DL_DOWNLOAD_RESULT = {'file_path': 'halfcheetah_medium_replay-v1.hdf5'}
+
+  BUILDER_CONFIG_NAMES_TO_TEST = ['v1-medium-replay']
+
+
+class D4rlMujocoHalfcheetahMetadataTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for halfcheetah datasets with all the metadata fields."""
+  DATASET_CLASS = d4rl_mujoco_halfcheetah.D4rlMujocoHalfcheetah
+  SPLITS = {
+      'train': 2,  # Number of fake train example
+  }
+  SKIP_TF1_GRAPH_MODE = True
+
+  DL_EXTRACT_RESULT = {'file_path': 'halfcheetah_medium-v2.hdf5'}
+  DL_DOWNLOAD_RESULT = {'file_path': 'halfcheetah_medium-v2.hdf5'}
+
+  BUILDER_CONFIG_NAMES_TO_TEST = ['v2-medium']
+
 
 if __name__ == '__main__':
   tfds.testing.test_main()

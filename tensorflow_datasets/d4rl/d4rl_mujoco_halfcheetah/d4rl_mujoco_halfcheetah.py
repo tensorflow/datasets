@@ -46,9 +46,13 @@ class DatasetConfig(tfds.core.BuilderConfig):
 class D4rlMujocoHalfcheetah(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for halfcheetah dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
+      '1.0.0':
+          'Initial release.',
+      '1.0.1':
+          'Support for episode and step metadata, and unification of the' +
+          ' reward shape accross all the configs.'
   }
 
   # pytype: disable=wrong-keyword-args
@@ -126,36 +130,89 @@ class D4rlMujocoHalfcheetah(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    float_type = tf.float32
-    scalar_info = float_type
     replay_datasets = {
         'v1-medium-replay', 'v1-full-replay', 'v2-medium-replay',
         'v2-full-replay'
     }
+    full_metadata_datasets = {
+        'v1-expert', 'v2-expert', 'v1-medium', 'v2-medium'
+    }
+    float_type = tf.float32
     if self.builder_config.name in replay_datasets:
       float_type = tf.float64
-      scalar_info = tfds.features.Tensor(shape=(1,), dtype=float_type)
+
+    steps_dict = {
+        'observation': tfds.features.Tensor(shape=(17,), dtype=float_type),
+        'action': tfds.features.Tensor(shape=(6,), dtype=float_type),
+        'reward': float_type,
+        'is_terminal': tf.bool,
+        'is_first': tf.bool,
+        'discount': float_type,
+    }
+    # All except for v0 contain step metadata
+    if self.builder_config.dataset_dir != 'gym_mujoco':
+      steps_dict['infos'] = {
+          # Infos correspond to state information.
+          # See https://github.com/rail-berkeley/d4rl/wiki/Tasks#gym.
+          'action_log_probs': float_type,
+          'qpos': tfds.features.Tensor(shape=(9,), dtype=float_type),
+          'qvel': tfds.features.Tensor(shape=(9,), dtype=float_type),
+      }
+    # Episode metadata
+    episode_metadata = {}
+    # Replay datasets contain only two fields of the metadata.
+    if self.builder_config.name in replay_datasets:
+      episode_metadata = {
+          'algorithm': tf.string,
+          'iteration': tf.int32,
+      }
+    if self.builder_config.name in full_metadata_datasets:
+      episode_metadata = {
+          'algorithm': tf.string,
+          'iteration': tf.int32,
+          # The policy dictionary contains the weights of the policy used to
+          # generate the dataset.
+          # See https://github.com/rail-berkeley/d4rl/wiki/Tasks#gym.
+          'policy': {
+              'fc0': {
+                  'bias':
+                      tfds.features.Tensor(shape=(256,), dtype=float_type),
+                  'weight':
+                      tfds.features.Tensor(shape=(256, 17), dtype=float_type),
+              },
+              'fc1': {
+                  'bias':
+                      tfds.features.Tensor(shape=(256,), dtype=float_type),
+                  'weight':
+                      tfds.features.Tensor(shape=(256, 256), dtype=float_type),
+              },
+              'last_fc': {
+                  'bias':
+                      tfds.features.Tensor(shape=(6,), dtype=float_type),
+                  'weight':
+                      tfds.features.Tensor(shape=(6, 256), dtype=float_type),
+              },
+              'last_fc_log_std': {
+                  'bias':
+                      tfds.features.Tensor(shape=(6,), dtype=float_type),
+                  'weight':
+                      tfds.features.Tensor(shape=(6, 256), dtype=float_type),
+              },
+              'nonlinearity': tf.string,
+              'output_distribution': tf.string,
+          },
+      }
+
+    features_dict = {
+        'steps': tfds.features.Dataset(steps_dict),
+    }
+    if episode_metadata:
+      features_dict.update(episode_metadata)
 
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            'steps':
-                tfds.features.Dataset({
-                    'observation':
-                        tfds.features.Tensor(shape=(17,), dtype=float_type),
-                    'action':
-                        tfds.features.Tensor(shape=(6,), dtype=float_type),
-                    'reward':
-                        scalar_info,
-                    'is_terminal':
-                        tf.bool,
-                    'is_first':
-                        tf.bool,
-                    'discount':
-                        scalar_info,
-                }),
-        }),
+        features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=None,  # disabled
         homepage='https://sites.google.com/view/d4rl/home',
         citation=_CITATION,
