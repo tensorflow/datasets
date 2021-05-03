@@ -28,7 +28,9 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.0.1`** (default): Support for episode and step metadata, and
+        unification of the reward shape accross all the configs.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -37,6 +39,10 @@ standardized environments and datasets for training and benchmarking algorithms.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -82,40 +88,6 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v0-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_mujoco_halfcheetah/v0-medium
 
 *   **Download size**: `82.92 MiB`
@@ -146,40 +118,6 @@ FeaturesDict({
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v0-medium-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v0-medium-expert
 
@@ -212,40 +150,6 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v0-medium-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_mujoco_halfcheetah/v0-mixed
 
 *   **Download size**: `8.60 MiB`
@@ -276,40 +180,6 @@ FeaturesDict({
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v0-mixed-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v0-random
 
@@ -342,49 +212,15 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v0-random-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_mujoco_halfcheetah/v1-expert
 
 *   **Download size**: `146.94 MiB`
 
-*   **Dataset size**: `97.45 MiB`
+*   **Dataset size**: `450.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    No
 
 *   **Splits**:
 
@@ -396,9 +232,36 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'algorithm': tf.string,
+    'iteration': tf.int32,
+    'policy': FeaturesDict({
+        'fc0': FeaturesDict({
+            'bias': Tensor(shape=(256,), dtype=tf.float32),
+            'weight': Tensor(shape=(256, 17), dtype=tf.float32),
+        }),
+        'fc1': FeaturesDict({
+            'bias': Tensor(shape=(256,), dtype=tf.float32),
+            'weight': Tensor(shape=(256, 256), dtype=tf.float32),
+        }),
+        'last_fc': FeaturesDict({
+            'bias': Tensor(shape=(6,), dtype=tf.float32),
+            'weight': Tensor(shape=(6, 256), dtype=tf.float32),
+        }),
+        'last_fc_log_std': FeaturesDict({
+            'bias': Tensor(shape=(6,), dtype=tf.float32),
+            'weight': Tensor(shape=(6, 256), dtype=tf.float32),
+        }),
+        'nonlinearity': tf.string,
+        'output_distribution': tf.string,
+    }),
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float32,
+            'qpos': Tensor(shape=(9,), dtype=tf.float32),
+            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
@@ -406,50 +269,16 @@ FeaturesDict({
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v1-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v1-medium
 
 *   **Download size**: `146.65 MiB`
 
-*   **Dataset size**: `97.45 MiB`
+*   **Dataset size**: `450.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    No
 
 *   **Splits**:
 
@@ -461,9 +290,36 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'algorithm': tf.string,
+    'iteration': tf.int32,
+    'policy': FeaturesDict({
+        'fc0': FeaturesDict({
+            'bias': Tensor(shape=(256,), dtype=tf.float32),
+            'weight': Tensor(shape=(256, 17), dtype=tf.float32),
+        }),
+        'fc1': FeaturesDict({
+            'bias': Tensor(shape=(256,), dtype=tf.float32),
+            'weight': Tensor(shape=(256, 256), dtype=tf.float32),
+        }),
+        'last_fc': FeaturesDict({
+            'bias': Tensor(shape=(6,), dtype=tf.float32),
+            'weight': Tensor(shape=(6, 256), dtype=tf.float32),
+        }),
+        'last_fc_log_std': FeaturesDict({
+            'bias': Tensor(shape=(6,), dtype=tf.float32),
+            'weight': Tensor(shape=(6, 256), dtype=tf.float32),
+        }),
+        'nonlinearity': tf.string,
+        'output_distribution': tf.string,
+    }),
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float32,
+            'qpos': Tensor(shape=(9,), dtype=tf.float32),
+            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
@@ -471,50 +327,16 @@ FeaturesDict({
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v1-medium-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v1-medium-expert
 
 *   **Download size**: `293.00 MiB`
 
-*   **Dataset size**: `194.90 MiB`
+*   **Dataset size**: `340.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
+    No
 
 *   **Splits**:
 
@@ -529,6 +351,11 @@ FeaturesDict({
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float32,
+            'qpos': Tensor(shape=(9,), dtype=tf.float32),
+            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
@@ -536,46 +363,12 @@ FeaturesDict({
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v1-medium-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v1-medium-replay
 
 *   **Download size**: `57.68 MiB`
 
-*   **Dataset size**: `19.68 MiB`
+*   **Dataset size**: `34.35 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -591,60 +384,33 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'algorithm': tf.string,
+    'iteration': tf.int32,
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float64),
-        'discount': Tensor(shape=(1,), dtype=tf.float64),
+        'discount': tf.float64,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float64,
+            'qpos': Tensor(shape=(9,), dtype=tf.float64),
+            'qvel': Tensor(shape=(9,), dtype=tf.float64),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
-        'reward': Tensor(shape=(1,), dtype=tf.float64),
+        'reward': tf.float64,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v1-medium-replay-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v1-full-replay
 
 *   **Download size**: `285.01 MiB`
 
-*   **Dataset size**: `97.45 MiB`
+*   **Dataset size**: `170.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -656,60 +422,33 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'algorithm': tf.string,
+    'iteration': tf.int32,
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float64),
-        'discount': Tensor(shape=(1,), dtype=tf.float64),
+        'discount': tf.float64,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float64,
+            'qpos': Tensor(shape=(9,), dtype=tf.float64),
+            'qvel': Tensor(shape=(9,), dtype=tf.float64),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
-        'reward': Tensor(shape=(1,), dtype=tf.float64),
+        'reward': tf.float64,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v1-full-replay-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v1-random
 
 *   **Download size**: `145.19 MiB`
 
-*   **Dataset size**: `97.45 MiB`
+*   **Dataset size**: `170.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -724,6 +463,11 @@ FeaturesDict({
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float32,
+            'qpos': Tensor(shape=(9,), dtype=tf.float32),
+            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
@@ -731,50 +475,16 @@ FeaturesDict({
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v1-random-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v2-expert
 
 *   **Download size**: `209.48 MiB`
 
-*   **Dataset size**: `97.45 MiB`
+*   **Dataset size**: `450.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    No
 
 *   **Splits**:
 
@@ -786,9 +496,36 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'algorithm': tf.string,
+    'iteration': tf.int32,
+    'policy': FeaturesDict({
+        'fc0': FeaturesDict({
+            'bias': Tensor(shape=(256,), dtype=tf.float32),
+            'weight': Tensor(shape=(256, 17), dtype=tf.float32),
+        }),
+        'fc1': FeaturesDict({
+            'bias': Tensor(shape=(256,), dtype=tf.float32),
+            'weight': Tensor(shape=(256, 256), dtype=tf.float32),
+        }),
+        'last_fc': FeaturesDict({
+            'bias': Tensor(shape=(6,), dtype=tf.float32),
+            'weight': Tensor(shape=(6, 256), dtype=tf.float32),
+        }),
+        'last_fc_log_std': FeaturesDict({
+            'bias': Tensor(shape=(6,), dtype=tf.float32),
+            'weight': Tensor(shape=(6, 256), dtype=tf.float32),
+        }),
+        'nonlinearity': tf.string,
+        'output_distribution': tf.string,
+    }),
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float32,
+            'qpos': Tensor(shape=(9,), dtype=tf.float32),
+            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
@@ -796,50 +533,16 @@ FeaturesDict({
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v2-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v2-full-replay
 
 *   **Download size**: `285.01 MiB`
 
-*   **Dataset size**: `97.45 MiB`
+*   **Dataset size**: `170.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -851,60 +554,33 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'algorithm': tf.string,
+    'iteration': tf.int32,
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float64),
-        'discount': Tensor(shape=(1,), dtype=tf.float64),
+        'discount': tf.float64,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float64,
+            'qpos': Tensor(shape=(9,), dtype=tf.float64),
+            'qvel': Tensor(shape=(9,), dtype=tf.float64),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
-        'reward': Tensor(shape=(1,), dtype=tf.float64),
+        'reward': tf.float64,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v2-full-replay-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v2-medium
 
 *   **Download size**: `209.48 MiB`
 
-*   **Dataset size**: `97.45 MiB`
+*   **Dataset size**: `450.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    No
 
 *   **Splits**:
 
@@ -916,9 +592,36 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'algorithm': tf.string,
+    'iteration': tf.int32,
+    'policy': FeaturesDict({
+        'fc0': FeaturesDict({
+            'bias': Tensor(shape=(256,), dtype=tf.float32),
+            'weight': Tensor(shape=(256, 17), dtype=tf.float32),
+        }),
+        'fc1': FeaturesDict({
+            'bias': Tensor(shape=(256,), dtype=tf.float32),
+            'weight': Tensor(shape=(256, 256), dtype=tf.float32),
+        }),
+        'last_fc': FeaturesDict({
+            'bias': Tensor(shape=(6,), dtype=tf.float32),
+            'weight': Tensor(shape=(6, 256), dtype=tf.float32),
+        }),
+        'last_fc_log_std': FeaturesDict({
+            'bias': Tensor(shape=(6,), dtype=tf.float32),
+            'weight': Tensor(shape=(6, 256), dtype=tf.float32),
+        }),
+        'nonlinearity': tf.string,
+        'output_distribution': tf.string,
+    }),
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float32,
+            'qpos': Tensor(shape=(9,), dtype=tf.float32),
+            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
@@ -927,49 +630,15 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v2-medium-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_mujoco_halfcheetah/v2-medium-expert
 
 *   **Download size**: `418.37 MiB`
 
-*   **Dataset size**: `194.90 MiB`
+*   **Dataset size**: `340.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
+    No
 
 *   **Splits**:
 
@@ -984,6 +653,11 @@ FeaturesDict({
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float32,
+            'qpos': Tensor(shape=(9,), dtype=tf.float32),
+            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
@@ -992,45 +666,11 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v2-medium-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_mujoco_halfcheetah/v2-medium-replay
 
 *   **Download size**: `57.68 MiB`
 
-*   **Dataset size**: `19.68 MiB`
+*   **Dataset size**: `34.35 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1046,60 +686,33 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'algorithm': tf.string,
+    'iteration': tf.int32,
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float64),
-        'discount': Tensor(shape=(1,), dtype=tf.float64),
+        'discount': tf.float64,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float64,
+            'qpos': Tensor(shape=(9,), dtype=tf.float64),
+            'qvel': Tensor(shape=(9,), dtype=tf.float64),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
-        'reward': Tensor(shape=(1,), dtype=tf.float64),
+        'reward': tf.float64,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v2-medium-replay-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v2-random
 
 *   **Download size**: `208.68 MiB`
 
-*   **Dataset size**: `97.45 MiB`
+*   **Dataset size**: `170.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
@@ -1114,6 +727,11 @@ FeaturesDict({
     'steps': Dataset({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
+        'infos': FeaturesDict({
+            'action_log_probs': tf.float32,
+            'qpos': Tensor(shape=(9,), dtype=tf.float32),
+            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+        }),
         'is_first': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
@@ -1121,37 +739,3 @@ FeaturesDict({
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_halfcheetah-v2-random-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
