@@ -44,6 +44,9 @@ toc:
     title: yes_no
   title: Audio
 - section:
+  - path: /datasets/catalog/d4rl_mujoco_ant
+    status: nightly
+    title: d4rl_mujoco_ant
   - path: /datasets/catalog/d4rl_mujoco_halfcheetah
     status: nightly
     title: d4rl_mujoco_halfcheetah
@@ -456,6 +459,9 @@ toc:
     title: salient_span_wikipedia
   - path: /datasets/catalog/scan
     title: scan
+  - path: /datasets/catalog/schema_guided_dialogue
+    status: nightly
+    title: schema_guided_dialogue
   - path: /datasets/catalog/scicite
     title: scicite
   - path: /datasets/catalog/sentiment140
