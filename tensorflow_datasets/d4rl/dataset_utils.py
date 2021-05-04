@@ -20,6 +20,34 @@ import h5py
 import numpy as np
 from tensorflow.io import gfile
 
+_DESCRIPTION = """
+D4RL is an open-source benchmark for offline reinforcement learning. It provides
+standardized environments and datasets for training and benchmarking algorithms.
+"""
+
+_CITATION = """\
+@misc{fu2020d4rl,
+    title={D4RL: Datasets for Deep Data-Driven Reinforcement Learning},
+    author={Justin Fu and Aviral Kumar and Ofir Nachum and George Tucker and Sergey Levine},
+    year={2020},
+    eprint={2004.07219},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG}
+}
+"""
+
+
+def description():
+  return _DESCRIPTION
+
+
+def citation():
+  return _CITATION
+
+
+def url():
+  return 'https://sites.google.com/view/d4rl/home'
+
 
 def generate_examples(file_path: str):
   """Provides a common generate_examples method for D4RL datasets."""
@@ -129,6 +157,11 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
   for k in ['is_first', 'observation', 'action', 'reward', 'discount']:
     episode[k] = steps[k][begin:end]
   episode['is_terminal'] = [False] * (end - begin)
+  if 'infos' in steps.keys():
+    episode['infos'] = {}
+    for k in steps['infos'].keys():
+      episode['infos'][k] = steps['infos'][k][begin:end]
+
   if steps['is_terminal'][end - 1]:
     # If the step is terminal, then we propagate the information to a next
     # state. This matches the definition in RLDS. See types.py.
@@ -144,10 +177,10 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
     episode['discount'] = np.array(
         np.concatenate((episode['discount'], [0.0])), dtype=np.float32)
     episode['is_terminal'] = np.concatenate((episode['is_terminal'], [True]))
-  if 'infos' in steps.keys():
-    episode['infos'] = {}
-    for k in steps['infos'].keys():
-      episode['infos'][k] = steps['infos'][k][begin:end]
+    if 'infos' in steps.keys():
+      for k in steps['infos'].keys():
+        episode['infos'][k] = np.concatenate(
+            (episode['infos'][k], [np.zeros_like(steps['infos'][k][0])]))
   full_episode = {'steps': episode}
   if episode_metadata:
     full_episode.update(episode_metadata)
@@ -169,13 +202,13 @@ def _get_dataset_keys(h5file):
 def read_d4rl_dataset(file_path: str):
   """Reads a D4RL dataset and returns the dataset as a dictionary."""
   with gfile.GFile(file_path, 'rb') as f:
-    dataset_file = h5py.File(f, 'r')
-    dataset_dict = {}
-    for k in _get_dataset_keys(dataset_file):
-      try:
-        # first try loading as an array
-        dataset_dict[k] = dataset_file[k][:]
-      except ValueError:  # try loading as a scalar
-        dataset_dict[k] = dataset_file[k][()]
-    dataset_file.close()
+    with h5py.File(f, 'r') as dataset_file:
+      dataset_dict = {}
+      for k in _get_dataset_keys(dataset_file):
+        try:
+          # first try loading as an array
+          dataset_dict[k] = dataset_file[k][:]
+        except ValueError:  # try loading as a scalar
+          dataset_dict[k] = dataset_file[k][()]
+
     return dataset_dict
