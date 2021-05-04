@@ -98,5 +98,8 @@ message DatasetInfo {
   // even for datasets read from.
   string module_name = 15;
 
-  // Next available: 16
+  // Specifies whether examples should be shuffled.
+  bool disable_shuffling = 16;
+
+  // Next available: 17
 }

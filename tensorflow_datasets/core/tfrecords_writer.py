@@ -233,23 +233,28 @@ class Writer(object):
 
   """
 
-  def __init__(self,
-               example_specs,
-               path,
-               hash_salt,
-               file_format=file_adapters.DEFAULT_FILE_FORMAT):
+  def __init__(
+      self,
+      example_specs,
+      path,
+      hash_salt,
+      disable_shuffling: bool,
+      file_format=file_adapters.DEFAULT_FILE_FORMAT,
+  ):
     """Initializes Writer.
 
     Args:
       example_specs: spec to build ExampleSerializer.
       path (str): path where records should be written in.
       hash_salt (str or bytes): salt to hash keys.
+      disable_shuffling (bool): Specifies whether to shuffle the records.
       file_format (FileFormat): format of the record files in which the dataset
         should be written in.
     """
     self._example_specs = example_specs
     self._serializer = example_serializer.ExampleSerializer(example_specs)
-    self._shuffler = shuffle.Shuffler(os.path.dirname(path), hash_salt)
+    self._shuffler = shuffle.Shuffler(
+        os.path.dirname(path), hash_salt, disable_shuffling)
     self._num_examples = 0
     self._path = path
     self._file_format = file_format
@@ -343,6 +348,7 @@ class BeamWriter(object):
                example_specs,
                path,
                hash_salt,
+               disable_shuffling,
                file_format=file_adapters.DEFAULT_FILE_FORMAT):
     """Init BeamWriter.
 
@@ -355,6 +361,7 @@ class BeamWriter(object):
           a list with the number of examples in each final shard. Eg:
             "[10,11,10,11]".
       hash_salt: string, the salt to use for hashing of keys.
+      disable_shuffling: bool, specifies whether to shuffle the records.
       file_format: file_adapters.FileFormat, format of the record files in which
         the dataset will be read/written from.
     """
@@ -362,6 +369,7 @@ class BeamWriter(object):
         example_specs=example_specs,
         path=path,
         hash_salt=hash_salt,
+        disable_shuffling=disable_shuffling,
         file_format=file_format)
     self._path = os.fspath(path)
     self._split_info_path = "%s.split_info.json" % path
@@ -370,6 +378,7 @@ class BeamWriter(object):
     self._hasher = hashing.Hasher(hash_salt)
     self._split_info = None
     self._file_format = file_format
+    self._disable_shuffling = disable_shuffling
 
   def __getstate__(self):
     return self._original_state
@@ -380,11 +389,14 @@ class BeamWriter(object):
   def _serialize_shard(
       self,
       key_example: Tuple[hashing.HashKey, Example],
-  ) -> Tuple[int, Tuple[int, bytes]]:
+  ) -> Tuple[int, Tuple[Any, bytes]]:
     """Returns (shard#, (hkey, serialized_example))."""
     key, example = key_example
     serialized_example = self._serializer.serialize_example(example)
-    hkey = self._hasher.hash_key(key)
+    if self._disable_shuffling:
+      hkey = key
+    else:
+      hkey = self._hasher.hash_key(key)
     bucketid = shuffle.get_bucket_number(hkey, _BEAM_NUM_TEMP_SHARDS)
     hkey = _long_for_py2(hkey)
     bucketid = _long_for_py2(bucketid)

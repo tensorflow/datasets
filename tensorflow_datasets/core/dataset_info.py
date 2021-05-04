@@ -80,6 +80,7 @@ class DatasetInfo(object):
                description=None,
                features=None,
                supervised_keys=None,
+               disable_shuffling: bool = False,
                homepage=None,
                citation=None,
                metadata=None,
@@ -99,6 +100,7 @@ class DatasetInfo(object):
         `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
         with `as_supervised=True`, the `tf.data.Dataset` object will yield
         the (input, target) defined here.
+      disable_shuffling: `bool`, specify whether to shuffle the examples.
       homepage: `str`, optional, the homepage for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
@@ -123,6 +125,7 @@ class DatasetInfo(object):
         name=builder.name,
         description=utils.dedent(description),
         version=str(builder.version),
+        disable_shuffling=disable_shuffling,
         config_name=config_name,
         config_description=config_description,
         citation=utils.dedent(citation),
@@ -180,6 +183,10 @@ class DatasetInfo(object):
   @property
   def version(self):
     return self._builder.version
+
+  @property
+  def disable_shuffling(self) -> bool:
+    return self.as_proto.disable_shuffling
 
   @property
   def homepage(self):
@@ -477,6 +484,7 @@ class DatasetInfo(object):
         ("dataset_size", self.dataset_size),
         ("features", _indent(repr(self.features))),
         ("supervised_keys", self.supervised_keys),
+        ("disable_shuffling", self.disable_shuffling),
         ("splits", splits),
         ("citation", _indent(f'"""{self.citation}"""')),
         # Proto add a \n that we strip.

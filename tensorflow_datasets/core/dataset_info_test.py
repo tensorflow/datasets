@@ -115,6 +115,14 @@ class DatasetInfoTest(testing.TestCase):
     self.assertEqual(
         info.module_name, "tensorflow_datasets.testing.test_utils"
     )
+    self.assertEqual(False, info.disable_shuffling)
+
+  def test_disable_shuffling(self):
+    info = dataset_info.DatasetInfo(
+        builder=self._builder, disable_shuffling=True)
+    info.read_from_directory(_INFO_DIR)
+
+    self.assertEqual(True, info.disable_shuffling)
 
   def test_reading_empty_properties(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
@@ -385,6 +393,7 @@ _INFO_STR = '''tfds.core.DatasetInfo(
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
     }),
     supervised_keys=('image', 'label'),
+    disable_shuffling=False,
     splits={
         'test': <SplitInfo num_examples=20, num_shards=1>,
         'train': <SplitInfo num_examples=20, num_shards=1>,

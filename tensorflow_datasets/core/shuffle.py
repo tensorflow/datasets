@@ -166,15 +166,17 @@ class _Bucket(object):
 class Shuffler(object):
   """Stores data in temp buckets, restitute it shuffled."""
 
-  def __init__(self, dirpath, hash_salt):
+  def __init__(self, dirpath, hash_salt, disable_shuffling: bool = False):
     """Initialize Shuffler.
 
     Args:
       dirpath (string): directory in which to store temporary files.
       hash_salt (string or bytes): salt to hash keys.
+      disable_shuffling (bool): specify whether to shuffle by hashing the key.
     """
     grp_name = uuid.uuid4()
     self._hasher = hashing.Hasher(hash_salt)
+    self._disable_shuffling = disable_shuffling
     self._buckets = []
     for i in range(BUCKETS_NUMBER):
       path = os.path.join(dirpath, 'bucket_%s_%03d.tmp' % (grp_name, i))
@@ -215,7 +217,10 @@ class Shuffler(object):
     if not isinstance(data, six.binary_type):
       raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' %
                            (type(data)))
-    hkey = self._hasher.hash_key(key)
+    if self._disable_shuffling:
+      hkey = key
+    else:
+      hkey = self._hasher.hash_key(key)
     self._total_bytes += len(data)
     if self._in_memory:
       self._add_to_mem_buffer(hkey, data)

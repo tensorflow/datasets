@@ -187,6 +187,16 @@ class WriterTest(testing.TestCase):
 
   EMPTY_SPLIT_ERROR = 'No examples were yielded.'
   TOO_SMALL_SPLIT_ERROR = 'num_examples (1) < number_of_shards (2)'
+  RECORDS_TO_WRITE = [
+      (1, b'a'),
+      (2, b'b'),
+      (3, b'c'),
+      (4, b'd'),
+      (5, b'e'),
+      (6, b'f'),
+      (7, b'g'),
+      (8, b'hi'),
+  ]
 
   @mock.patch.object(example_serializer, 'ExampleSerializer',
                      testing.DummySerializer)
@@ -194,9 +204,14 @@ class WriterTest(testing.TestCase):
              to_write,
              path,
              salt='',
+             disable_shuffling=False,
              file_format=file_adapters.DEFAULT_FILE_FORMAT):
     writer = tfrecords_writer.Writer(
-        'some spec', path, hash_salt=salt, file_format=file_format)
+        'some spec',
+        path,
+        hash_salt=salt,
+        disable_shuffling=disable_shuffling,
+        file_format=file_format)
     for key, record in to_write:
       writer.write(key, record)
     return writer.finalize()
@@ -207,19 +222,9 @@ class WriterTest(testing.TestCase):
     Number of records is evenly distributed (2-1-2-1-2).
     """
     path = os.path.join(self.tmp_dir, 'foo.tfrecord')
-    to_write = [
-        (1, b'a'),
-        (2, b'b'),
-        (3, b'c'),
-        (4, b'd'),
-        (5, b'e'),
-        (6, b'f'),
-        (7, b'g'),
-        (8, b'hi'),
-    ]
     with mock.patch.object(
         tfrecords_writer, '_get_number_shards', return_value=5):
-      shards_length, total_size = self._write(to_write, path)
+      shards_length, total_size = self._write(self.RECORDS_TO_WRITE, path)
     self.assertEqual(shards_length, [2, 1, 2, 1, 2])
     self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
@@ -232,6 +237,32 @@ class WriterTest(testing.TestCase):
         [b'a', b'b'],
         [b'hi'],
         [b'e', b'c'],
+    ])
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
+
+  def test_write_tfrecord_sorted_by_key(self):
+    """Writes 8 records in 5 shards without shuffling.
+
+    Number of records is evenly distributed (2-1-2-1-2).
+    """
+    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
+    with mock.patch.object(
+        tfrecords_writer, '_get_number_shards', return_value=5):
+      shards_length, total_size = self._write(
+          self.RECORDS_TO_WRITE, path, disable_shuffling=True)
+    self.assertEqual(shards_length, [2, 1, 2, 1, 2])
+    self.assertEqual(total_size, 9)
+    written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
+    self.assertEqual(written_files,
+                     ['foo.tfrecord-0000%s-of-00005' % i for i in range(5)])
+    self.assertEqual(all_recs, [
+        [b'a', b'b'],
+        [b'c'],
+        [b'd', b'e'],
+        [b'f'],
+        [b'g', b'hi'],
     ])
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
@@ -275,10 +306,16 @@ class TfrecordsWriterBeamTest(WriterTest):
              to_write,
              path,
              salt='',
+             disable_shuffling=False,
              file_format=file_adapters.DEFAULT_FILE_FORMAT):
     beam = lazy_imports_lib.lazy_imports.apache_beam
     writer = tfrecords_writer.BeamWriter(
-        'some spec', path, salt, file_format=file_format)
+        'some spec',
+        path,
+        salt,
+        disable_shuffling=disable_shuffling,
+        file_format=file_format,
+        )
     # Here we need to disable type check as `beam.Create` is not capable of
     # inferring the type of the PCollection elements.
     options = beam.options.pipeline_options.PipelineOptions(

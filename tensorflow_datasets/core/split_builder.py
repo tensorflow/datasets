@@ -264,6 +264,7 @@ class SplitBuilder:
       split_name: str,
       generator: SplitGenerator,
       path: type_utils.PathLike,
+      disable_shuffling: bool,
   ) -> _SplitInfoFuture:
     """Start the split generation.
 
@@ -271,13 +272,19 @@ class SplitBuilder:
       split_name: Name of the split to generate
       generator: Generator, beam.PTransform,... yielding the examples
       path: path where the split should be saved
+      disable_shuffling: Specifies whether to shuffle the examples
 
     Returns:
       split_info_future: Future containing the `split_info`, once generation
         is complete. The `tfds.core.SplitInfo` can be accessed through
         `split_info_future.result()`
     """
-    build_kwargs = dict(split_name=split_name, generator=generator, path=path)
+    build_kwargs = dict(
+        split_name=split_name,
+        generator=generator,
+        path=path,
+        disable_shuffling=disable_shuffling,
+    )
     # Depending on the type of generator, we use the corresponding
     # `_build_from_xyz` method.
     if isinstance(generator, collections.abc.Iterable):
@@ -307,6 +314,7 @@ class SplitBuilder:
       split_name: str,
       generator: Iterable[KeyExample],
       path: type_utils.PathLike,
+      disable_shuffling: bool,
   ) -> _SplitInfoFuture:
     """Split generator for example generators.
 
@@ -314,6 +322,7 @@ class SplitBuilder:
       split_name: str,
       generator: Iterable[KeyExample],
       path: type_utils.PathLike,
+      disable_shuffling: Specifies whether to shuffle the examples,
 
     Returns:
       future: The future containing the `tfds.core.SplitInfo`.
@@ -336,6 +345,7 @@ class SplitBuilder:
         example_specs=self._features.get_serialized_info(),
         path=path,
         hash_salt=split_name,
+        disable_shuffling=disable_shuffling,
         file_format=self._file_format,
     )
     for key, example in utils.tqdm(
@@ -364,6 +374,7 @@ class SplitBuilder:
       split_name: str,
       generator: 'beam.PCollection[KeyExample]',
       path: type_utils.PathLike,
+      disable_shuffling: bool,
   ) -> _SplitInfoFuture:
     """Split generator for `beam.PCollection`."""
     # TODO(tfds): Should try to add support to `max_examples_per_split`
@@ -373,6 +384,7 @@ class SplitBuilder:
         example_specs=self._features.get_serialized_info(),
         path=path,
         hash_salt=split_name,
+        disable_shuffling=disable_shuffling,
         file_format=self._file_format,
     )
 

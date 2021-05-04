@@ -38,6 +38,7 @@ from tensorflow_datasets.core.utils import read_config as read_config_lib
 tf.enable_v2_behavior()
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
+DummyOrderedDatasetSharedGenerator = testing.DummyOrderedDatasetSharedGenerator
 
 
 @dataclasses.dataclass
@@ -494,6 +495,21 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     with mock.patch.object(dataset_info.DatasetInfo, "read_from_directory"):
       _, info = load.load("multi_dir_dataset", split=[], with_info=True)
     self.assertEqual(info.data_dir, data_dir)
+
+
+class OrderedDatasetBuilderTest(testing.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    super(OrderedDatasetBuilderTest, cls).setUpClass()
+    cls.builder = DummyOrderedDatasetSharedGenerator(
+        data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
+    cls.builder.download_and_prepare()
+
+  @testing.run_in_graph_and_eager_modes()
+  def test_sorted_by_key(self):
+    with self.assertRaises(NotImplementedError):
+      self.builder.as_dataset(split=splits_lib.Split.TRAIN, shuffle_files=False)
 
 
 class BuilderPickleTest(testing.TestCase):

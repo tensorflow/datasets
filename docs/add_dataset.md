@@ -36,8 +36,8 @@ ds = tfds.load('my_dataset')  # `my_dataset` registered
 
 ## Overview
 
-Datasets are distributed in all kinds of formats and in all kinds of places,
-and they're not always stored in a format that's ready to feed into a machine
+Datasets are distributed in all kinds of formats and in all kinds of places, and
+they're not always stored in a format that's ready to feed into a machine
 learning pipeline. Enter TFDS.
 
 TFDS process those datasets into a standard format (external data -> serialized
@@ -158,6 +158,8 @@ def _info(self):
       # specify them here. They'll be used if as_supervised=True in
       # builder.as_dataset.
       supervised_keys=('image', 'label'),
+      # Specify whether to disable shuffling on the examples. Set to False by default.
+      disable_shuffling=False,
       # Bibtex citation for the dataset
       citation=r"""
       @article{my-awesome-dataset-2020,
@@ -174,6 +176,8 @@ Most fields should be self-explanatory. Some precisions:
     or the
     [feature connector guide](https://www.tensorflow.org/datasets/features) for
     more info.
+*   `disable_shuffling`: See section
+    [Maintain dataset order](#maintain-dataset-order).
 *   `citation`: To find the `BibText` citation:
     *   Search the dataset website for citation instruction (use that in BibTex
         format).
@@ -186,6 +190,27 @@ Most fields should be self-explanatory. Some precisions:
         you can use the [BibTeX Online Editor](https://truben.no/latex/bibtex/)
         to create a custom BibTeX entry (the drop-down menu has an `Online`
         entry type).
+
+#### Maintain dataset order
+
+By default, the records of the datasets are shuffled when stored in order to
+make the distribution of classes more uniform across the dataset, since often
+records belonging to the same class are contiguous. In order to specify that the
+dataset should be sorted by the key generated provided by `_generate_examples`
+the field `disable_shuffling` should be set to `True`. By default it is set to
+`False`.
+
+```python
+def _info(self):
+  return tfds.core.DatasetInfo(
+    # [...]
+    disable_shuffling=True,
+    # [...]
+  )
+```
+
+Keep in mind that disabling shuffling has a performance impact as shards cannot
+be read in parallel anymore.
 
 ### `_split_generators`: downloads and splits data
 
@@ -290,12 +315,15 @@ This method will typically read source dataset artifacts (e.g. a CSV file) and
 yield `(key, feature_dict)` tuples:
 
 *   `key`: Example identifier. Used to deterministically shuffle the examples
-    using `hash(key)`. Should be:
+    using `hash(key)` or to sort by key when shuffling is disabled (see section
+    [Maintain dataset order](#maintain-dataset-order)). Should be:
     *   **unique**: If two examples use the same key, an exception will be
         raised.
     *   **deterministic**: Should not depend on `download_dir`,
         `os.path.listdir` order,... Generating the data twice should yield the
         same key.
+    *   **comparable**: If shuffling is disabled the key will be used to sort
+        the dataset.
 *   `feature_dict`: A `dict` containing the example values.
     *   The structure should match the `features=` structure defined in
         `tfds.core.DatasetInfo`.

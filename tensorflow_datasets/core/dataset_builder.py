@@ -951,6 +951,9 @@ class FileReaderBuilder(DatasetBuilder):
       read_config=None,
       shuffle_files=False,
   ) -> tf.data.Dataset:
+    # TODO(alcastano): Disable shuffling during reading
+    if self.info.disable_shuffling:
+      raise NotImplementedError
     decode_fn = functools.partial(
         self.info.features.decode_example, decoders=decoders)
     return self._tfrecords_reader.read(
@@ -1089,10 +1092,13 @@ class GeneratorBasedBuilder(FileReaderBuilder):
           same key.
         * Deterministic: When generating the dataset twice, the same example
           should have the same key.
+        * Comparable: If shuffling is disabled the key will be used to sort the
+        dataset.
         Good keys can be the image id, or line number if examples are extracted
         from a text file.
-        The key will be hashed and sorted to shuffle examples deterministically,
-        such as generating the dataset multiple times keep examples in the
+        The example will be sorted by `hash(key)` if shuffling is enabled, and
+        otherwise by `key`.
+        Generating the dataset multiple times will keep examples in the
         same order.
       example: `dict<str feature_name, feature_value>`, a feature dictionary
         ready to be encoded and written to disk. The example will be
@@ -1158,6 +1164,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
               split_name=split_name,
               generator=generator,
               path=self.data_path / f"{self.name}-{split_name}.{path_suffix}",
+              disable_shuffling=self.info.disable_shuffling,
           ) for split_name, generator in utils.tqdm(
               split_generators.items(),
               desc="Generating splits...",
