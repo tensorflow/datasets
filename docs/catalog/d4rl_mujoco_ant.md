@@ -30,19 +30,6 @@ standardized environments and datasets for training and benchmarking algorithms.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -70,6 +57,20 @@ Split | Examples
 
 ## d4rl_mujoco_ant/v0-expert (default config)
 
+*   **Download size**: `131.34 MiB`
+
+*   **Dataset size**: `463.95 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,288
+
 *   **Features**:
 
 ```python
@@ -86,6 +87,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_ant/v0-medium
+
+*   **Download size**: `131.39 MiB`
+
+*   **Dataset size**: `463.79 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,122
 
 *   **Features**:
 
@@ -104,6 +119,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_ant/v0-medium-expert
 
+*   **Download size**: `262.73 MiB`
+
+*   **Dataset size**: `927.74 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,410
+
 *   **Features**:
 
 ```python
@@ -120,6 +149,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_ant/v0-mixed
+
+*   **Download size**: `104.63 MiB`
+
+*   **Dataset size**: `463.95 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,320
 
 *   **Features**:
 
@@ -138,6 +181,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_ant/v0-random
 
+*   **Download size**: `139.50 MiB`
+
+*   **Dataset size**: `463.98 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,377
+
 *   **Features**:
 
 ```python
@@ -154,6 +211,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_ant/v1-expert
+
+*   **Download size**: `220.72 MiB`
+
+*   **Dataset size**: `967.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,033
 
 *   **Features**:
 
@@ -199,6 +270,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_ant/v1-medium
 
+*   **Download size**: `222.39 MiB`
+
+*   **Dataset size**: `1022.25 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,179
+
 *   **Features**:
 
 ```python
@@ -243,6 +328,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_ant/v1-medium-expert
 
+*   **Download size**: `442.25 MiB`
+
+*   **Dataset size**: `1.13 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,211
+
 *   **Features**:
 
 ```python
@@ -264,6 +363,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_ant/v1-medium-replay
+
+*   **Download size**: `132.05 MiB`
+
+*   **Dataset size**: `174.79 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 485
 
 *   **Features**:
 
@@ -289,6 +402,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_ant/v1-full-replay
 
+*   **Download size**: `437.57 MiB`
+
+*   **Dataset size**: `578.53 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,319
+
 *   **Features**:
 
 ```python
@@ -313,6 +440,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_ant/v1-random
 
+*   **Download size**: `225.18 MiB`
+
+*   **Dataset size**: `582.40 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,741
+
 *   **Features**:
 
 ```python
@@ -334,6 +475,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_ant/v2-expert
+
+*   **Download size**: `317.69 MiB`
+
+*   **Dataset size**: `967.85 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,035
 
 *   **Features**:
 
@@ -379,6 +534,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_ant/v2-full-replay
 
+*   **Download size**: `437.57 MiB`
+
+*   **Dataset size**: `578.53 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,319
+
 *   **Features**:
 
 ```python
@@ -402,6 +571,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_ant/v2-medium
+
+*   **Download size**: `320.11 MiB`
+
+*   **Dataset size**: `1.01 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,203
 
 *   **Features**:
 
@@ -447,6 +630,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_ant/v2-medium-expert
 
+*   **Download size**: `637.02 MiB`
+
+*   **Dataset size**: `1.13 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,237
+
 *   **Features**:
 
 ```python
@@ -468,6 +665,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_ant/v2-medium-replay
+
+*   **Download size**: `132.05 MiB`
+
+*   **Dataset size**: `174.79 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 485
 
 *   **Features**:
 
@@ -492,6 +703,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_ant/v2-random
+
+*   **Download size**: `326.67 MiB`
+
+*   **Dataset size**: `582.47 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,822
 
 *   **Features**:
 
