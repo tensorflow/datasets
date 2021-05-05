@@ -17,15 +17,22 @@
 
 Note: these functions are not meant to be used inside of a TF graph.
 """
+import csv
 
 import subprocess
-from typing import List, Optional
+from typing import Any, List, Optional
 
 import numpy as np
 
 import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import resource_utils
 from tensorflow_datasets.core.utils import tf_utils
+
+
+PilImage = Any  # Require lazy deps.
+THUMBNAIL_SIZE = 128
 
 
 @py_utils.memoize()
@@ -83,3 +90,79 @@ def ffmpeg_run(
         'the instrutions at https://ffmpeg.org/. '
         f'Original exception: {e}'
     )
+
+
+@py_utils.memoize()
+def get_colormap() -> np.ndarray:
+  """Loads the colormap.
+
+  The colormap was precomputed using Glasbey et al. algorythm (Colour Displays
+  for Categorical Images, 2017) to generate maximally distinct colors.
+
+  It was generated using https://github.com/taketwo/glasbey:
+
+  ```python
+  gb = glasbey.Glasbey(
+      base_palette=[(0, 0, 0), (228, 26, 28), (55, 126, 184), (77, 175, 74)],
+      no_black=True,
+  )
+  palette = gb.generate_palette(size=256)
+  gb.save_palette(palette, 'colormap.csv')
+  ```
+
+  Returns:
+    colormap: A `np.array(shape=(255, 3), dtype=np.uint8)` representing the
+      mapping id -> color.
+  """
+  colormap_path = resource_utils.tfds_path() / 'core/utils/colormap.csv'
+  with colormap_path.open() as f:
+    return np.array(list(csv.reader(f)), dtype=np.uint8)
+
+
+def apply_colormap(image: np.ndarray) -> np.ndarray:
+  """Apply colormap from grayscale (h, w, 1) to colored (h, w, 3) image."""
+  image = image.squeeze(axis=-1)  # (h, w, 1) -> (h, w)
+  cmap = get_colormap()  # Get the (256, 3) colormap
+  # Normalize uint16 and convert each value to a unique color
+  return cmap[image % len(cmap)]
+
+
+# Visualization single image
+
+
+def _postprocess_noop(img: PilImage) -> PilImage:
+  return img
+
+
+def _postprocess_convert_rgb(img: PilImage) -> PilImage:
+  return img.convert('RGB')
+
+
+def create_thumbnail(
+    ex: np.ndarray,
+    *,
+    use_colormap: bool,
+    default_dimensions: bool = True) -> PilImage:
+  """Creates the image from the np.array input."""
+  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
+
+  if use_colormap:  # Apply the colormap first as it modify the shape/dtype
+    ex = apply_colormap(ex)
+
+  _, _, c = ex.shape
+  postprocess = _postprocess_noop
+  if c == 1:
+    ex = ex.squeeze(axis=-1)
+    mode = 'L'
+  elif ex.dtype == np.uint16:
+    mode = 'I;16'
+    postprocess = _postprocess_convert_rgb
+  else:
+    mode = None
+  img = PIL_Image.fromarray(ex, mode=mode)
+  img = postprocess(img)
+  if default_dimensions:
+    img.thumbnail(
+        (THUMBNAIL_SIZE, THUMBNAIL_SIZE))  # Resize the image in-place
+  return img
+

@@ -15,7 +15,6 @@
 
 """Image feature."""
 
-import csv
 import os
 import tempfile
 from typing import Any, List
@@ -23,7 +22,6 @@ from typing import Any, List
 import numpy as np
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.utils import type_utils
@@ -193,7 +191,7 @@ class Image(feature.FeatureConnector):
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
     # Normalize image and resize
-    img = _create_thumbnail(ex, use_colormap=self._use_colormap)
+    img = utils.create_thumbnail(ex, use_colormap=self._use_colormap)
 
     # Convert to base64
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
@@ -227,40 +225,6 @@ class Image(feature.FeatureConnector):
     }
 
 
-# Visualization single image
-
-
-def _create_thumbnail(ex: np.ndarray, *, use_colormap: bool) -> PilImage:
-  """Creates the image from the np.array input."""
-  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
-
-  if use_colormap:  # Apply the colormap first as it modify the shape/dtype
-    ex = _apply_colormap(ex)
-
-  _, _, c = ex.shape
-  postprocess = _postprocess_noop
-  if c == 1:
-    ex = ex.squeeze(axis=-1)
-    mode = 'L'
-  elif ex.dtype == np.uint16:
-    mode = 'I;16'
-    postprocess = _postprocess_convert_rgb
-  else:
-    mode = None
-  img = PIL_Image.fromarray(ex, mode=mode)
-  img = postprocess(img)
-  img.thumbnail((THUMBNAIL_SIZE, THUMBNAIL_SIZE))  # Resize the image in-place
-  return img
-
-
-def _postprocess_noop(img: PilImage) -> PilImage:
-  return img
-
-
-def _postprocess_convert_rgb(img: PilImage) -> PilImage:
-  return img.convert('RGB')
-
-
 # Visualization Video
 
 
@@ -268,7 +232,9 @@ def make_video_repr_html(ex, *, use_colormap: bool):
   """Returns the encoded `<video>` or GIF <img/> HTML."""
   # Use GIF to generate a HTML5 compatible video if FFMPEG is not
   # installed on the system.
-  images = [_create_thumbnail(frame, use_colormap=use_colormap) for frame in ex]
+  images = [
+      utils.create_thumbnail(frame, use_colormap=use_colormap) for frame in ex
+  ]
 
   if not images:
     return 'Video with 0 frames.'
@@ -390,38 +356,3 @@ def _get_and_validate_colormap(use_colormap, shape, encoding_format):
       )
 
   return use_colormap
-
-
-@utils.memoize()
-def _get_colormap() -> np.ndarray:
-  """Loads the colormap.
-
-  The colormap was precomputed using Glasbey et al. algorythm (Colour Displays
-  for Categorical Images, 2017) to generate maximally distinct colors.
-
-  It was generated using https://github.com/taketwo/glasbey:
-
-  ```python
-  gb = glasbey.Glasbey(
-      base_palette=[(0, 0, 0), (228, 26, 28), (55, 126, 184), (77, 175, 74)],
-      no_black=True,
-  )
-  palette = gb.generate_palette(size=256)
-  gb.save_palette(palette, 'colormap.csv')
-  ```
-
-  Returns:
-    colormap: A `np.array(shape=(255, 3), dtype=np.uint8)` representing the
-      mapping id -> color.
-  """
-  colormap_path = utils.tfds_path() / 'core/features/colormap.csv'
-  with colormap_path.open() as f:
-    return np.array(list(csv.reader(f)), dtype=np.uint8)
-
-
-def _apply_colormap(image: np.ndarray) -> np.ndarray:
-  """Apply colormap from grayscale (h, w, 1) to colored (h, w, 3) image."""
-  image = image.squeeze(axis=-1)  # (h, w, 1) -> (h, w)
-  cmap = _get_colormap()  # Get the (256, 3) colormap
-  # Normalize uint16 and convert each value to a unique color
-  return cmap[image % len(cmap)]
