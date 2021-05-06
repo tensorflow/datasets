@@ -11,11 +11,6 @@
 
 # `imagenette`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Imagenette is a subset of 10 easily classified classes from the Imagenet
@@ -42,9 +37,7 @@ Dec 6 2019).
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`1.0.0`** (default): No release notes.
 
 *   **Features**:
 

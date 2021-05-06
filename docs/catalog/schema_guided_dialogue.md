@@ -11,10 +11,6 @@
 
 # `schema_guided_dialogue`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 The Schema-Guided Dialogue (SGD) dataset consists of over 20k annotated

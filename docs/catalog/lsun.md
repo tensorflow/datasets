@@ -11,11 +11,6 @@
 
 # `lsun`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Large scale images showing different objects from given categories like bedroom,
@@ -643,7 +638,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## lsun/airplane <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/airplane
 
 *   **Config description**: Images of category airplane
 
@@ -669,7 +664,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/bicycle <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/bicycle
 
 *   **Config description**: Images of category bicycle
 
@@ -695,7 +690,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/bird <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/bird
 
 *   **Config description**: Images of category bird
 
@@ -721,7 +716,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/boat <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/boat
 
 *   **Config description**: Images of category boat
 
@@ -747,7 +742,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/bottle <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/bottle
 
 *   **Config description**: Images of category bottle
 
@@ -773,7 +768,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/bus <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/bus
 
 *   **Config description**: Images of category bus
 
@@ -799,7 +794,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/car <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/car
 
 *   **Config description**: Images of category car
 
@@ -825,7 +820,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/cat <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/cat
 
 *   **Config description**: Images of category cat
 
@@ -851,7 +846,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/chair <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/chair
 
 *   **Config description**: Images of category chair
 
@@ -877,7 +872,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/cow <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/cow
 
 *   **Config description**: Images of category cow
 
@@ -903,7 +898,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/dining_table <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/dining_table
 
 *   **Config description**: Images of category dining_table
 
@@ -929,7 +924,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/dog <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/dog
 
 *   **Config description**: Images of category dog
 
@@ -955,7 +950,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/horse <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/horse
 
 *   **Config description**: Images of category horse
 
@@ -981,7 +976,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/motorbike <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/motorbike
 
 *   **Config description**: Images of category motorbike
 
@@ -1007,7 +1002,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/potted_plant <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/potted_plant
 
 *   **Config description**: Images of category potted_plant
 
@@ -1033,7 +1028,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/sheep <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/sheep
 
 *   **Config description**: Images of category sheep
 
@@ -1059,7 +1054,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/sofa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/sofa
 
 *   **Config description**: Images of category sofa
 
@@ -1085,7 +1080,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/train <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/train
 
 *   **Config description**: Images of category train
 
@@ -1111,7 +1106,7 @@ Split     | Examples
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
 
-## lsun/tv-monitor <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## lsun/tv-monitor
 
 *   **Config description**: Images of category tv-monitor
 

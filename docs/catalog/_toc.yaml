@@ -45,15 +45,12 @@ toc:
   title: Audio
 - section:
   - path: /datasets/catalog/d4rl_mujoco_ant
-    status: nightly
     title: d4rl_mujoco_ant
   - path: /datasets/catalog/d4rl_mujoco_halfcheetah
-    status: nightly
     title: d4rl_mujoco_halfcheetah
   title: D4rl
 - section:
   - path: /datasets/catalog/ogbg_molpcba
-    status: nightly
     title: ogbg_molpcba
   title: Graphs
 - section:
@@ -124,7 +121,6 @@ toc:
   - path: /datasets/catalog/cats_vs_dogs
     title: cats_vs_dogs
   - path: /datasets/catalog/chexpert
-    status: nightly
     title: chexpert (manual)
   - path: /datasets/catalog/cifar10
     title: cifar10
@@ -307,7 +303,6 @@ toc:
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/efron_morris75
-    status: nightly
     title: efron_morris75
   - path: /datasets/catalog/forest_fires
     title: forest_fires
@@ -398,7 +393,6 @@ toc:
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/dolphin_number_word
-    status: nightly
     title: dolphin_number_word
   - path: /datasets/catalog/drop
     title: drop
@@ -409,7 +403,6 @@ toc:
   - path: /datasets/catalog/gap
     title: gap
   - path: /datasets/catalog/gem
-    status: nightly
     title: gem
   - path: /datasets/catalog/glue
     title: glue
@@ -460,7 +453,6 @@ toc:
   - path: /datasets/catalog/scan
     title: scan
   - path: /datasets/catalog/schema_guided_dialogue
-    status: nightly
     title: schema_guided_dialogue
   - path: /datasets/catalog/scicite
     title: scicite
@@ -469,7 +461,6 @@ toc:
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/star_cfq
-    status: nightly
     title: star_cfq
   - path: /datasets/catalog/story_cloze
     title: story_cloze (manual)
@@ -482,7 +473,6 @@ toc:
   - path: /datasets/catalog/wiki40b
     title: wiki40b
   - path: /datasets/catalog/wikiann
-    status: nightly
     title: wikiann
   - path: /datasets/catalog/wikipedia
     title: wikipedia
@@ -515,7 +505,6 @@ toc:
   - path: /datasets/catalog/ted_multi_translate
     title: ted_multi_translate
   - path: /datasets/catalog/wmt13_translate
-    status: nightly
     title: wmt13_translate (manual)
   - path: /datasets/catalog/wmt14_translate
     title: wmt14_translate (manual)
@@ -544,16 +533,13 @@ toc:
   - path: /datasets/catalog/starcraft_video
     title: starcraft_video
   - path: /datasets/catalog/tao
-    status: nightly
     title: tao (manual)
   - path: /datasets/catalog/ucf101
     title: ucf101
   - path: /datasets/catalog/youtube_vis
-    status: nightly
     title: youtube_vis (manual)
   title: Video
 - section:
   - path: /datasets/catalog/gref
-    status: nightly
     title: gref (manual)
   title: Vision language

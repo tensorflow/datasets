@@ -11,11 +11,6 @@
 
 # `imagenet_r`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 ImageNet-R is a set of images labelled with ImageNet labels that were obtained
@@ -42,10 +37,8 @@ as a dictionary with the following keys:
 *   **Versions**:
 
     *   `0.1.0`: No release notes.
-    *   **`0.2.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fix file_name, from absolute path to path relative to imagenet-r
-        directory, ie: "imagenet_synset_id/filename.jpg".
+    *   **`0.2.0`** (default): Fix file_name, from absolute path to path
+        relative to imagenet-r directory, ie: "imagenet_synset_id/filename.jpg".
 
 *   **Download size**: `2.04 GiB`
 

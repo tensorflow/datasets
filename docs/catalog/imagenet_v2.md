@@ -11,11 +11,6 @@
 
 # `imagenet_v2`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 ImageNet-v2 is an ImageNet test set (10 per class) collected by closely
@@ -41,13 +36,9 @@ as a dictionary with the following keys:
 *   **Versions**:
 
     *   `1.0.0`: Initial version.
-    *   `2.0.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Files updated.
-    *   **`3.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fix file_name, from absolute path to path relative to data directory,
-        ie: "class_id/filename.jpg".
+    *   `2.0.0`: Files updated.
+    *   **`3.0.0`** (default): Fix file_name, from absolute path to path
+        relative to data directory, ie: "class_id/filename.jpg".
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

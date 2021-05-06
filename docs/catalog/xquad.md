@@ -11,11 +11,6 @@
 
 # `xquad`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 XQuAD (Cross-lingual Question Answering Dataset) is a benchmark dataset for
@@ -40,11 +35,9 @@ to run XQuAD in the "translate-train" or "translate-test" settings.
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fixes issue with a number of examples where answer spans are misaligned
-        due to context white-space removal. This change impacts roughly 14% of
-        test examples.
+    *   **`3.0.0`** (default): Fixes issue with a number of examples where
+        answer spans are misaligned due to context white-space removal. This
+        change impacts roughly 14% of test examples.
 
 *   **Features**:
 

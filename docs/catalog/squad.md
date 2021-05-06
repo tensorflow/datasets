@@ -11,11 +11,6 @@
 
 # `squad`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset,
@@ -31,10 +26,8 @@ corresponding reading passage, or the question might be unanswerable.
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fixes issue with small number of examples (19) where answer spans are
-        misaligned due to context white-space removal.
+    *   **`3.0.0`** (default): Fixes issue with small number of examples (19)
+        where answer spans are misaligned due to context white-space removal.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -11,11 +11,6 @@
 
 # `civil_comments`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 This version of the CivilComments Dataset provides access to the primary seven
@@ -53,16 +48,11 @@ comment text.
 *   **Versions**:
 
     *   `1.0.0`: Initial full release.
-    *   `1.0.1`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added a unique id for each comment.
+    *   `1.0.1`: Added a unique id for each comment.
     *   `1.1.0`: Added CivilCommentsCovert config.
-    *   `1.1.1`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added CivilCommentsCovert config with correct checksum.
-    *   **`1.1.2`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added separate citation for CivilCommentsCovert dataset.
+    *   `1.1.1`: Added CivilCommentsCovert config with correct checksum.
+    *   **`1.1.2`** (default): Added separate citation for CivilCommentsCovert
+        dataset.
 
 *   **Download size**: `397.83 MiB`
 
@@ -285,7 +275,7 @@ $(document).ready(() => {
 }
 ```
 
-## civil_comments/CivilCommentsCovert <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## civil_comments/CivilCommentsCovert
 
 *   **Config description**: The CivilCommentsCovert set is a subset of
     CivilCommentsIdentities with ~20% of the train and test splits further

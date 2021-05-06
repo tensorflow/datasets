@@ -11,11 +11,6 @@
 
 # `tydi_qa`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 TyDi QA is a question answering dataset covering 11 typologically diverse
@@ -58,11 +53,9 @@ both.
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fixes issue with a number of examples where answer spans are misaligned
-        due to context white-space removal. This change impacts roughly 25% of
-        train and dev examples.
+    *   **`3.0.0`** (default): Fixes issue with a number of examples where
+        answer spans are misaligned due to context white-space removal. This
+        change impacts roughly 25% of train and dev examples.
 
 *   **Download size**: `121.30 MiB`
 
