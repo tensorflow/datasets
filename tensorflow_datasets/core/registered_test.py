@@ -22,6 +22,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
 
 
@@ -42,6 +43,8 @@ class EmptyDatasetBuilder(registered.RegisteredDataset):
     self.as_dataset_kwargs = kwargs
     return self
 
+  VERSION = utils.Version("1.0.0")
+  BUILDER_CONFIGS = []
   builder_configs = {}
 
 
@@ -177,19 +180,15 @@ class RegisteredTest(testing.TestCase):
       name = "colab_builder"
       self.assertNotIn(name, load.list_builders())
 
-      class ColabBuilder(registered.RegisteredDataset):
-
-        def __init__(self, **kwargs):
-          del kwargs
+      class ColabBuilder(EmptyDatasetBuilder):
+        pass
 
       self.assertIn(name, load.list_builders())
       self.assertIsInstance(load.builder(name), ColabBuilder)
       old_colab_class = ColabBuilder
 
-      class ColabBuilder(registered.RegisteredDataset):  # pylint: disable=function-redefined
-
-        def __init__(self, **kwargs):
-          del kwargs
+      class ColabBuilder(EmptyDatasetBuilder):  # pylint: disable=function-redefined
+        pass
 
       self.assertIsInstance(load.builder(name), ColabBuilder)
       self.assertNotIsInstance(load.builder(name), old_colab_class)

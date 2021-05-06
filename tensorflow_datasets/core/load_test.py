@@ -24,6 +24,7 @@ from unittest import mock
 import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
+from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import visibility

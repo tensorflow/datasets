@@ -21,7 +21,7 @@ import inspect
 import json
 import os
 import sys
-from typing import Any, ClassVar, Dict, Iterable, List, Optional, Union
+from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, Union
 
 from absl import logging
 import dataclasses
@@ -225,14 +225,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @utils.memoized_property
   def canonical_version(self) -> utils.Version:
-    if self._builder_config and self._builder_config.version:
-      return utils.Version(self._builder_config.version)
-    elif self.VERSION:
-      return utils.Version(self.VERSION)
-    else:
-      raise ValueError(
-          f"DatasetBuilder {self.name} does not have a defined version. "
-          "Please add a `VERSION = tfds.core.Version('x.y.z')` to the class.")
+    return cannonical_version_for_config(self, self._builder_config)
 
   @utils.memoized_property
   def supported_versions(self):
@@ -1229,3 +1222,37 @@ def load_default_config_name(common_dir: ReadOnlyPath,) -> Optional[str]:
     return None
   data = json.loads(config_path.read_text())
   return data.get("default_config_name")
+
+
+def cannonical_version_for_config(
+    instance_or_cls: Union[DatasetBuilder, Type[DatasetBuilder]],
+    config: Optional[BuilderConfig] = None,
+) -> utils.Version:
+  """Get the cannonical version for the given config.
+
+  This allow to get the version without instanciating the class.
+  The version can be stored either at the class or in the config object.
+
+  Args:
+    instance_or_cls: The instance or class on which get the version
+    config: The config which might contain the version, or None if the
+      dataset do not have config.
+
+  Returns:
+    version: The extracted version.
+  """
+  if instance_or_cls.BUILDER_CONFIGS and config is None:
+    raise ValueError(
+        f"Cannot infer version on {instance_or_cls.name}. Unknown config."
+    )
+
+  if config and config.version:
+    return utils.Version(config.version)
+  elif instance_or_cls.VERSION:
+    return utils.Version(instance_or_cls.VERSION)
+  else:
+    raise ValueError(
+        f"DatasetBuilder {instance_or_cls.name} does not have a defined "
+        "version. Please add a `VERSION = tfds.core.Version('x.y.z')` to the "
+        "class."
+    )

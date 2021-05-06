@@ -24,6 +24,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import logging as tfds_logging
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 
@@ -109,3 +110,31 @@ def test_registered_logger_is_called(
           read_config=read_config,
       )
   ]
+
+
+def test_cannonical_version_for_config():
+  get_version = dataset_builder.cannonical_version_for_config
+
+  # No config
+  version = get_version(testing.DummyDataset)
+  assert version == utils.Version('1.0.0')
+
+  class DummyDatasetWithConfig(testing.DummyDataset, skip_registration=True):
+    BUILDER_CONFIGS = [
+        dataset_builder.BuilderConfig(name='x', version='2.0.0'),
+        dataset_builder.BuilderConfig(name='y'),
+    ]
+
+  with pytest.raises(ValueError, match='Cannot infer version'):
+    version = get_version(DummyDatasetWithConfig)
+
+  version = get_version(
+      DummyDatasetWithConfig, DummyDatasetWithConfig.builder_configs['x'],
+  )
+  assert version == utils.Version('2.0.0')
+
+  version = get_version(
+      DummyDatasetWithConfig,
+      DummyDatasetWithConfig.builder_configs['y'],
+  )
+  assert version == utils.Version('1.0.0')

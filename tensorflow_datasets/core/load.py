@@ -16,12 +16,14 @@
 """Access registered datasets."""
 
 import difflib
+import json
 import posixpath
 import re
 import textwrap
 import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Type
 
+from absl import logging
 from tensorflow_datasets.core import community
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
@@ -30,6 +32,7 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
@@ -131,7 +134,9 @@ def builder(
   Raises:
     DatasetNotFoundError: if `name` is unrecognized.
   """
-  # 'kaggle:my_dataset:1.0.0' -> ('kaggle', 'my_dataset', {'version': '1.0.0'})
+  # 'kaggle:my_ds/config:1.0.0' -> (
+  #     DatasetName('kaggle:my_ds'), {'version': '1.0.0', 'config': 'conf0'}
+  # )
   name, builder_kwargs = naming.parse_builder_name_kwargs(
       name, **builder_kwargs
   )

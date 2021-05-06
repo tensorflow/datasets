@@ -25,6 +25,7 @@ from unittest import mock
 
 import tensorflow as tf
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core import load
 from tensorflow_datasets.core.github_api import github_path
 from tensorflow_datasets.testing import test_utils
 
