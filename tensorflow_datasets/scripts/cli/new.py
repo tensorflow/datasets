@@ -94,12 +94,15 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
 
 def _create_dataset_files(args: argparse.Namespace) -> None:
   """Creates the dataset directory. Executed by `tfds new <name>`."""
+  if not naming.is_valid_dataset_and_class_name(args.dataset_name):
+    raise ValueError(
+        'Invalid dataset name. It should be a valid Python class name.')
+
   create_dataset_files(dataset_name=args.dataset_name, dataset_dir=args.dir)
 
 
 def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
   """Creates the dataset files."""
-
   # Creates the root directory
   dataset_dir = dataset_dir.expanduser() / dataset_name
   dataset_dir.mkdir(parents=True)

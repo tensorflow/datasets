@@ -26,13 +26,24 @@ def _run_cli(cmd: str) -> None:
   main.main(main._parse_flags([''] + cmd.split()))
 
 
-def test_new_wrong_args(capsys):
+def test_new_without_args(capsys):
   # Dataset name is required argument
   with pytest.raises(SystemExit):
     _run_cli('new')
 
   captured = capsys.readouterr()
   assert 'the following arguments are required: dataset_name' in captured.err
+
+
+def test_new_invalid_name():
+  # Dataset name is required argument
+  error_message = (
+      'Invalid dataset name. It should be a valid Python class name.')
+  invalid_names = ['foo-15', '15foo']
+  for invalid_name in invalid_names:
+    with pytest.raises(ValueError) as execution_info:
+      _run_cli('new '+invalid_name)
+    assert execution_info.value.args[0] == error_message
 
 
 def test_new_outside_tfds(tmp_path: pathlib.Path):

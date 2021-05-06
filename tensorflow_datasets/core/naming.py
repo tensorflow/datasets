@@ -27,10 +27,13 @@ from tensorflow_datasets.core.utils import py_utils
 _first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
 _all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
+_NAME_CLASS = r'[a-zA-Z][\w]*'
+_NAME_CLASS_REG = re.compile(r'^'+_NAME_CLASS+r'$')
+
 # Regex matching 'dataset/config:1.*.*/arg=123'
 _NAME_REG = re.compile(
     r'^'
-    r'(?P<dataset_name>([\w\-]+:)?[\w]+)'
+    r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
     r'(/(?P<config>[\w\-\.]+))?'
     r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
     r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
@@ -78,6 +81,12 @@ class DatasetName:
 def is_valid_dataset_name(name_str: str) -> bool:
   """Returns True is the given name is a valid dataset name."""
   res = _NAME_REG.match(name_str)
+  return bool(res)
+
+
+def is_valid_dataset_and_class_name(name_str: str) -> bool:
+  """Returns True is the given name is a valid dataset and class name."""
+  res = _NAME_CLASS_REG.match(name_str)
   return bool(res)
 
 
