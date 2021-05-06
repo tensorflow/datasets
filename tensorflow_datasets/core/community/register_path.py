@@ -113,7 +113,7 @@ class DataDirRegister(register_base.BaseRegister):
       close_matches = difflib.get_close_matches(
           name.namespace, self._ns2data_dir, n=1
       )
-      hint = f'\nDid you meant: {close_matches[0]}' if close_matches else ''
+      hint = f'\nDid you mean: {close_matches[0]}' if close_matches else ''
       raise KeyError(
           f'Namespace `{name.namespace}` for `{name}` not found. '
           f'Should be one of {sorted(self._ns2data_dir)}{hint}'

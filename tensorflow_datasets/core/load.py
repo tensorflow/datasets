@@ -457,6 +457,6 @@ def _reraise_with_list_builders(
   # Add close matches
   close_matches = difflib.get_close_matches(str(name), all_datasets, n=1)
   if close_matches:
-    error_string += f'\nDid you meant: {name} -> {close_matches[0]}\n'
+    error_string += f'\nDid you mean: {name} -> {close_matches[0]}\n'
 
   raise py_utils.reraise(e, suffix=error_string)
