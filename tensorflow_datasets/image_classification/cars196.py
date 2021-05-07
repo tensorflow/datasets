@@ -19,7 +19,7 @@ import six.moves.urllib as urllib
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-_URL = 'http://imagenet.stanford.edu/internal/car196/'
+_URL = 'https://ai.stanford.edu/~jkrause/car196/'
 _EXTRA_URL = 'https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz'
 
 _DESCRIPTION = (
