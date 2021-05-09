@@ -18,6 +18,7 @@
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core import utils
 
 
 class Optional(feature.FeatureConnector):
@@ -52,3 +53,31 @@ class Optional(feature.FeatureConnector):
     }
     ```
     """
+
+    def __init__(self, feature):
+        """Construct the Optional connector
+
+        Args:
+          feature: `tfds.features` feature to wrap
+        """
+        #Convert primitive datatypes to tensor, raise error for invalid feature.
+        #Like tf.int32 -> Tensor(shape=(), dtype=tf.int32)
+        self._feature = to_feature(feature)
+
+    @property
+    def feature(self):
+        """The wrapped feature."""
+        return self._feature
+
+    def get_tensor_info(self):
+        """See base class for details."""
+        
+
+def to_feature(value):
+  """Convert the given value to Feature if necessary."""
+  if isinstance(value, feature.FeatureConnector):
+    return value
+  elif utils.is_dtype(value):  # tf.int32, tf.string,...
+    return feature.Tensor(shape=(), dtype=tf.as_dtype(value))
+  else:
+    raise ValueError('Feature not supported with `Optional`: {}'.format(value))
