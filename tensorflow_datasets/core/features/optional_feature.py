@@ -84,10 +84,15 @@ class Optional(feature.FeatureConnector):
             return self.feature.encode_example(data)
 
     def decode_example(self, tfdata):
-        if tfdata.numpy().decode() == 'OptionalNone':
-            return None
+        condition = None
+        if condition:
+            return tf.experimental.Optional.empty(
+                tf.TensorSpec(shape=(), dtype=self.feature._dtype, name=None)
+            )
         else:
-            return self.feature.decode_example(tfdata)
+            return tf.experimental.Optional.from_value(
+                self.feature.decode_example(tfdata)
+                )
 
 def to_feature(value):
   """Convert the given value to Feature if necessary."""
