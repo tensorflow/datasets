@@ -71,7 +71,23 @@ class Optional(feature.FeatureConnector):
 
     def get_tensor_info(self):
         """See base class for details."""
-        
+        return self.feature.get_tensor_info()
+
+    def get_serialized_info(self):
+        """See base class for details."""
+        return self.feature.get_serialized_info()
+
+    def encode_example(self, data):
+        if data==None:
+            return 'OptionalNone'
+        else:
+            return self.feature.encode_example(data)
+
+    def decode_example(self, tfdata):
+        if tfdata.numpy().decode() == 'OptionalNone':
+            return None
+        else:
+            return self.feature.decode_example(tfdata)
 
 def to_feature(value):
   """Convert the given value to Feature if necessary."""
