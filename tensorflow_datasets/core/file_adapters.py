@@ -136,7 +136,11 @@ class RiegeliFileAdapter(FileAdapter):
     with riegeli.RecordWriter(
         tf.io.gfile.GFile(os.fspath(path), 'wb'),
         options='transpose') as writer:
-      return writer.write_records_with_keys(records=iterator)
+      positions = []
+      for record in iterator:
+        writer.write_record(record)
+        positions.append(writer.last_pos)
+      return positions
 
 
 # Create a mapping from FileFormat -> FileAdapter.
