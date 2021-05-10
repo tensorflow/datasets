@@ -48,6 +48,9 @@ toc:
     title: d4rl_mujoco_ant
   - path: /datasets/catalog/d4rl_mujoco_halfcheetah
     title: d4rl_mujoco_halfcheetah
+  - path: /datasets/catalog/d4rl_mujoco_hopper
+    status: nightly
+    title: d4rl_mujoco_hopper
   title: D4rl
 - section:
   - path: /datasets/catalog/ogbg_molpcba
