@@ -18,7 +18,10 @@ from typing import Any, Dict
 
 import h5py
 import numpy as np
-from tensorflow.io import gfile
+import tensorflow as tf
+
+gfile = tf.io.gfile
+
 
 _DESCRIPTION = """
 D4RL is an open-source benchmark for offline reinforcement learning. It provides
