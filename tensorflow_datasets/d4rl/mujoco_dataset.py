@@ -316,8 +316,12 @@ class D4RLMujocoDatasetBuilder(
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     ds_dir = self.builder_config.dataset_dir
-    ds_name = (
-        self._ds_config.name + '_' + self.builder_config.file_suffix + '.hdf5')
+    name = self._ds_config.name
+    if name == 'walker2d' and self.builder_config.name == 'v0-mixed':
+      # There is a mismatch in the name of the original files, where one of them
+      # uses walker instead of walker2d.
+      name = 'walker'
+    ds_name = (name + '_' + self.builder_config.file_suffix + '.hdf5')
     path = dl_manager.download_and_extract({
         'file_path':
             'http://rail.eecs.berkeley.edu/datasets/offline_rl/' + ds_dir +
