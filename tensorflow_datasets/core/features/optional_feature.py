@@ -78,21 +78,23 @@ class Optional(feature.FeatureConnector):
         return self.feature.get_serialized_info()
 
     def encode_example(self, data):
-        if data==None:
+        if data is None:
             return 'OptionalNone'
         else:
             return self.feature.encode_example(data)
 
     def decode_example(self, tfdata):
-        condition = None
-        if condition:
+        """Decode example based on whether it is a None value or a valid one."""
+        def is_none():
             return tf.experimental.Optional.empty(
-                tf.TensorSpec(shape=(), dtype=self.feature._dtype, name=None)
+                tf.TensorSpec(shape=(28,28,1), dtype=self.feature._dtype, name=None)
             )
-        else:
+        def is_valid():
             return tf.experimental.Optional.from_value(
                 self.feature.decode_example(tfdata)
                 )
+        result = tf.cond(tf.math.equal(tfdata, 'OptionalNone'), is_none, is_valid)
+        return result
 
 def to_feature(value):
   """Convert the given value to Feature if necessary."""
