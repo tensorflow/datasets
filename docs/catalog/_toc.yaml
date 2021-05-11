@@ -51,6 +51,9 @@ toc:
   - path: /datasets/catalog/d4rl_mujoco_hopper
     status: nightly
     title: d4rl_mujoco_hopper
+  - path: /datasets/catalog/d4rl_mujoco_walker2d
+    status: nightly
+    title: d4rl_mujoco_walker2d
   title: D4rl
 - section:
   - path: /datasets/catalog/ogbg_molpcba
