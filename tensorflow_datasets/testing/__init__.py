@@ -26,7 +26,6 @@ from tensorflow_datasets.testing.test_case import TestCase
 from tensorflow_datasets.testing.test_utils import DummyDataset
 from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
 from tensorflow_datasets.testing.test_utils import DummyMnist
-from tensorflow_datasets.testing.test_utils import DummyOrderedDatasetSharedGenerator
 from tensorflow_datasets.testing.test_utils import DummyParser
 from tensorflow_datasets.testing.test_utils import DummySerializer
 from tensorflow_datasets.testing.test_utils import fake_examples_dir

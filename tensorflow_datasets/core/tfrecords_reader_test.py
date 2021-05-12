@@ -37,6 +37,15 @@ from tensorflow_datasets.core.utils import shard_utils
 # Skip the cardinality test for backward compatibility with TF <= 2.1.
 _SKIP_CARDINALITY_TEST = not hasattr(tf.data.experimental, 'assert_cardinality')
 
+_SHUFFLE_FILES_ERROR_MESSAGE = ('Dataset is an ordered dataset '
+                                '(\'disable_shuffling=True\'), but examples '
+                                'will not be read in order because '
+                                '`shuffle_files=True`.')
+_CYCLE_LENGTH_ERROR_MESSAGE = ('Dataset is an ordered dataset '
+                               '(\'disable_shuffling=True\'), but examples will'
+                               ' not be read in order because '
+                               '`ReadConfig.interleave_cycle_length != 1`.')
+
 
 def _write_tfrecord_from_shard_spec(shard_spec, get):
   """Write tfrecord shard given shard_spec and buckets to read data from.
@@ -523,6 +532,64 @@ class ReaderTest(testing.TestCase):
     # If num_workers > num_shards, raise error
     with self.assertRaisesRegexp(ValueError, 'Cannot shard the pipeline'):
       read(num_workers=6, index=0)
+
+  def test_shuffle_files_should_be_disabled(self):
+    self._write_tfrecord('train', 4, 'abcdefghijkl')
+    fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, _SHUFFLE_FILES_ERROR_MESSAGE):
+      self.reader.read_files(
+          [
+              shard_utils.FileInstruction(
+                  filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+          ],
+          read_config=read_config_lib.ReadConfig(),
+          shuffle_files=True,
+          disable_shuffling=True,
+      )
+
+  def test_cycle_length_must_be_one(self):
+    self._write_tfrecord('train', 4, 'abcdefghijkl')
+    fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
+    instructions = [
+        shard_utils.FileInstruction(
+            filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+    ]
+    # In ordered dataset interleave_cycle_length is set to 1 by default
+    self.reader.read_files(
+        instructions,
+        read_config=read_config_lib.ReadConfig(),
+        shuffle_files=False,
+        disable_shuffling=True,
+    )
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, _CYCLE_LENGTH_ERROR_MESSAGE):
+      self.reader.read_files(
+          instructions,
+          read_config=read_config_lib.ReadConfig(interleave_cycle_length=16),
+          shuffle_files=False,
+          disable_shuffling=True,
+      )
+
+  def test_ordering_guard(self):
+    self._write_tfrecord('train', 4, 'abcdefghijkl')
+    fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
+    instructions = [
+        shard_utils.FileInstruction(
+            filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+    ]
+    reported_warnings = []
+    with mock.patch('absl.logging.warning', reported_warnings.append):
+      self.reader.read_files(
+          instructions,
+          read_config=read_config_lib.ReadConfig(
+              interleave_cycle_length=16, enable_ordering_guard=False),
+          shuffle_files=True,
+          disable_shuffling=True,
+      )
+      expected_warning = _SHUFFLE_FILES_ERROR_MESSAGE+'\n'+_CYCLE_LENGTH_ERROR_MESSAGE
+      reported_warning = ''.join(reported_warnings)
+      self.assertEqual(reported_warning, expected_warning)
 
 if __name__ == '__main__':
   testing.test_main()

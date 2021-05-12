@@ -540,10 +540,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         `False`.
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
-        customized feature keys need to be present. See
-        [the
+        customized feature keys need to be present. See [the
           guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
-          for more info.
+            for more info.
       read_config: `tfds.ReadConfig`, Additional options to configure the input
         pipeline (e.g. seed, num parallel reads,...).
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset` will have
@@ -944,9 +943,6 @@ class FileReaderBuilder(DatasetBuilder):
       read_config=None,
       shuffle_files=False,
   ) -> tf.data.Dataset:
-    # TODO(alcastano): Disable shuffling during reading
-    if self.info.disable_shuffling:
-      raise NotImplementedError
     decode_fn = functools.partial(
         self.info.features.decode_example, decoders=decoders)
     return self._tfrecords_reader.read(
@@ -956,6 +952,7 @@ class FileReaderBuilder(DatasetBuilder):
         decode_fn=decode_fn,
         read_config=read_config,
         shuffle_files=shuffle_files,
+        disable_shuffling=self.info.disable_shuffling,
     )
 
 
@@ -1235,16 +1232,15 @@ def cannonical_version_for_config(
 
   Args:
     instance_or_cls: The instance or class on which get the version
-    config: The config which might contain the version, or None if the
-      dataset do not have config.
+    config: The config which might contain the version, or None if the dataset
+      do not have config.
 
   Returns:
     version: The extracted version.
   """
   if instance_or_cls.BUILDER_CONFIGS and config is None:
     raise ValueError(
-        f"Cannot infer version on {instance_or_cls.name}. Unknown config."
-    )
+        f"Cannot infer version on {instance_or_cls.name}. Unknown config.")
 
   if config and config.version:
     return utils.Version(config.version)
@@ -1254,5 +1250,4 @@ def cannonical_version_for_config(
     raise ValueError(
         f"DatasetBuilder {instance_or_cls.name} does not have a defined "
         "version. Please add a `VERSION = tfds.core.Version('x.y.z')` to the "
-        "class."
-    )
+        "class.")

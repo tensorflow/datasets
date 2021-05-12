@@ -320,17 +320,6 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
       yield i, {'x': i}
 
 
-class DummyOrderedDatasetSharedGenerator(DummyDatasetSharedGenerator):
-  """Test DatasetBuilder."""
-
-  def _info(self):
-    return dataset_info.DatasetInfo(
-        builder=self,
-        features=features.FeaturesDict({'x': tf.int64}),
-        supervised_keys=('x', 'x'),
-        disable_shuffling=True)
-
-
 class DummyMnist(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 

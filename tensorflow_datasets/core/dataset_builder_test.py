@@ -38,7 +38,6 @@ from tensorflow_datasets.core.utils import read_config as read_config_lib
 tf.enable_v2_behavior()
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
-DummyOrderedDatasetSharedGenerator = testing.DummyOrderedDatasetSharedGenerator
 
 
 @dataclasses.dataclass
@@ -497,19 +496,52 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     self.assertEqual(info.data_dir, data_dir)
 
 
+class DummyOrderedDataset(dataset_builder.GeneratorBasedBuilder):
+  VERSION = utils.Version("1.0.0")
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": tf.int64}),
+        disable_shuffling=True,
+    )
+
+  def _split_generators(self, dl_manager):
+    del dl_manager
+    return {"train": self._generate_examples(range_=range(500))}
+
+  def _generate_examples(self, range_):
+    for i in range_:
+      yield i, {"x": i}
+
+
 class OrderedDatasetBuilderTest(testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
     super(OrderedDatasetBuilderTest, cls).setUpClass()
-    cls.builder = DummyOrderedDatasetSharedGenerator(
-        data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
-    cls.builder.download_and_prepare()
+    with mock.patch(
+        "tensorflow_datasets.core.tfrecords_writer._get_number_shards",
+        lambda x, y: 10):
+      cls.builder = DummyOrderedDataset(
+          data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
+      cls.builder.download_and_prepare()
 
   @testing.run_in_graph_and_eager_modes()
   def test_sorted_by_key(self):
-    with self.assertRaises(NotImplementedError):
-      self.builder.as_dataset(split=splits_lib.Split.TRAIN, shuffle_files=False)
+    # For ordered dataset ReadConfig.interleave_cycle_length=1 by default
+    read_config = read_config_lib.ReadConfig()
+    ds = self.builder.as_dataset(
+        split=splits_lib.Split.TRAIN,
+        shuffle_files=False,
+        read_config=read_config)
+    ds_values = list(dataset_utils.as_numpy(ds))
+    self.assertListEqual(self.builder.info.splits["train"].shard_lengths,
+                         [50] * 10)
+    self.assertEqual(
+        [e["x"] for e in ds_values],
+        list(range(500)),
+    )
 
 
 class BuilderPickleTest(testing.TestCase):

@@ -21,6 +21,7 @@ import os
 import re
 from typing import Any, Callable, Dict, Iterable, List, NamedTuple, Optional, Sequence, Union
 
+from absl import logging
 import attr
 
 import numpy as np
@@ -205,6 +206,7 @@ def _read_files(
     file_instructions: Sequence[shard_utils.FileInstruction],
     read_config: read_config_lib.ReadConfig,
     shuffle_files: bool,
+    disable_shuffling: bool,
     file_format: file_adapters.FileFormat,
 ) -> tf.data.Dataset:
   """Returns tf.data.Dataset for given file instructions.
@@ -215,8 +217,10 @@ def _read_files(
     read_config: Additional options to configure the
       input pipeline (e.g. seed, num parallel reads,...).
     shuffle_files: Defaults to False. True to shuffle input files.
-    file_format: Format of the record files in which the dataset
-      will be read/written from.
+    disable_shuffling: Specifies if the dataset being read has shuffling
+      disabled.
+    file_format: Format of the record files in which the dataset will be
+      read/written from.
 
   Returns:
     The dataset object.
@@ -241,6 +245,17 @@ def _read_files(
 
   cycle_length = read_config.interleave_cycle_length
   block_length = read_config.interleave_block_length
+
+  if cycle_length == read_config_lib.MISSING:
+    cycle_length = _get_default_interleave_cycle_length(
+        disable_shuffling=disable_shuffling)
+
+  if disable_shuffling:
+    _verify_read_config_for_ordered_dataset(
+        read_config,
+        interleave_cycle_length=cycle_length,
+        shuffle_files=shuffle_files,)
+
 
   instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
@@ -299,6 +314,46 @@ def _read_files(
   return ds
 
 
+def _get_default_interleave_cycle_length(disable_shuffling: bool) -> int:
+  if disable_shuffling:
+    logging.info(
+        '`interleave_cycle_length` set to 1 to read examples in order.')
+    return 1
+  else:
+    return 16
+
+
+def _verify_read_config_for_ordered_dataset(
+    read_config: read_config_lib.ReadConfig,
+    interleave_cycle_length: int,
+    shuffle_files: bool,
+    ):
+  """Check that read parameters will not affect the ordering of the dataset.
+
+  The user can bypass the error by setting `enable_ordering_guard=False`.
+
+  Args:
+    read_config: The input pipeline options.
+    interleave_cycle_length: Cycle length for `tf.data.Dataset.interleave`.
+    shuffle_files: If True, input files are shuffled before being read.
+  """
+  error_messages = []
+  if shuffle_files:
+    error_messages.append(
+        'Dataset is an ordered dataset (\'disable_shuffling=True\'), but examples will not be read in order because `shuffle_files=True`.'
+    )
+  if interleave_cycle_length != 1:
+    error_messages.append(
+        'Dataset is an ordered dataset (\'disable_shuffling=True\'), but examples will not be read in order because `ReadConfig.interleave_cycle_length != 1`.'
+    )
+  if error_messages:
+    error_message = '\n'.join(error_messages)
+    if read_config.enable_ordering_guard:
+      raise ValueError(error_message)
+    else:
+      logging.warning(error_message)
+
+
 class Reader(object):
   """Build a tf.data.Dataset object out of Instruction instance(s).
 
@@ -329,6 +384,7 @@ class Reader(object):
       split_infos,
       read_config,
       shuffle_files,
+      disable_shuffling: bool = False,
       decode_fn: Optional[DecodeFn] = None,
   ):
     """Returns tf.data.Dataset instance(s).
@@ -341,6 +397,8 @@ class Reader(object):
       split_infos (list of SplitInfo proto): the available splits for dataset.
       read_config: `tfds.ReadConfig`, the input pipeline options
       shuffle_files (bool): If True, input files are shuffled before being read.
+      disable_shuffling: Specifies if the dataset being read has shuffling
+        disabled.
       decode_fn: Eventual additional processing to apply to the example
         after deserialization.
 
@@ -356,6 +414,7 @@ class Reader(object):
           file_instructions,
           read_config=read_config,
           shuffle_files=shuffle_files,
+          disable_shuffling=disable_shuffling,
           decode_fn=decode_fn,
       )
 
@@ -367,6 +426,7 @@ class Reader(object):
       *,
       read_config: read_config_lib.ReadConfig,
       shuffle_files: bool,
+      disable_shuffling: bool = False,
       decode_fn: Optional[DecodeFn] = None,
   ) -> tf.data.Dataset:
     """Returns single tf.data.Dataset instance for the set of file instructions.
@@ -377,6 +437,8 @@ class Reader(object):
         skip/take indicates which example read in the shard: `ds.skip().take()`
       read_config: The input pipeline options
       shuffle_files: If True, input files are shuffled before being read.
+      disable_shuffling: Specifies if the dataset being read has shuffling
+        disabled.
       decode_fn: Eventual additional processing to apply to the example
         after deserialization.
 
@@ -398,6 +460,7 @@ class Reader(object):
         file_instructions=file_instructions,
         read_config=read_config,
         shuffle_files=shuffle_files,
+        disable_shuffling=disable_shuffling,
         file_format=self._file_format,
     )
 
