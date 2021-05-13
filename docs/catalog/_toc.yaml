@@ -548,4 +548,7 @@ toc:
 - section:
   - path: /datasets/catalog/gref
     title: gref (manual)
+  - path: /datasets/catalog/ref_coco
+    status: nightly
+    title: ref_coco (manual)
   title: Vision language
