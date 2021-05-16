@@ -77,6 +77,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
   }
 
   def _info(self):
+    """Provides Dataset info."""
     # Annotation descriptions are in the object development kit.
     annotations = {
         "type": tfds.features.ClassLabel(names=_OBJECT_LABELS),
@@ -101,6 +102,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns Split Generators."""
     filenames = {
         "images": _DATA_URL + "/" + _IMAGES_FNAME,
         "annotations": _DATA_URL + "/" + _LABELS_FNAME,

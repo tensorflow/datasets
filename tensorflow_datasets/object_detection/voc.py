@@ -218,6 +218,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
         yield image_id, example
 
   def _generate_example(self, data_path, image_id, load_annotations):
+    """Generate examples as dicts."""
     image_filepath = os.path.join(
         data_path,
         os.path.normpath("VOCdevkit/VOC{}/JPEGImages/{}.jpg".format(

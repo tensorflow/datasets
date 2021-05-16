@@ -175,6 +175,7 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Provides Dataset info."""
     source_class_label = tfds.features.ClassLabel(
         names=IMAGE_LEVEL_SOURCES + BBOX_SOURCES)
     all_class_label = tfds.features.ClassLabel(

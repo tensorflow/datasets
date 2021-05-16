@@ -62,6 +62,7 @@ class WiderFace(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
+    """Provides Dataset info."""
     features = {
         'image':
             tfds.features.Image(encoding_format='jpeg'),
