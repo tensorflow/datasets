@@ -20,6 +20,8 @@ from tensorflow_datasets.audio import librispeech
 
 
 class LibrispeechTest(testing.DatasetBuilderTestCase):
+  """Tests for librispeech dataset module."""
+
   DATASET_CLASS = librispeech.Librispeech
   SPLITS = {
       "train_clean100": 2,

@@ -120,7 +120,7 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
       example_id = '{}_{}'.format(word, wavname)
       if word in WORDS:
         label = word
-      elif word == SILENCE or word == BACKGROUND_NOISE:
+      elif word in (SILENCE, BACKGROUND_NOISE):
         # The main tar file already contains all of the test files, except for
         # the silence ones. In fact it does not contain silence files at all.
         # So for the test set we take the silence files from the test tar file,
@@ -157,10 +157,11 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
                   label,
           }
           yield example_id, example
-        except lazy_imports_lib.lazy_imports.pydub.exceptions.CouldntDecodeError:
+        except lazy_imports_lib.lazy_imports.pydub.exceptions.CouldntDecodeError: # pylint: disable=line-too-long
           pass
 
   def _split_archive(self, train_archive):
+    """Returns training and validation set paths."""
     train_paths = []
     for path, file_obj in train_archive:
       if 'testing_list.txt' in path:
@@ -182,3 +183,4 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
         set(train_paths) - set(validation_paths) - set(train_test_paths))
 
     return train_paths, validation_paths
+    

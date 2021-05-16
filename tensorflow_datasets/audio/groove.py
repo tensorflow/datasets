@@ -113,6 +113,8 @@ class Groove(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Returns Dataset info."""
+
     features_dict = {
         "id": tf.string,
         "drummer":
@@ -160,6 +162,8 @@ class Groove(tfds.core.GeneratorBasedBuilder):
         for split, split_rows in rows.items()]
 
   def _generate_examples(self, rows, data_dir):
+    """Yields examples."""
+
     split_bars = self._builder_config.split_bars
     for row in rows:
       split_genre = row["style"].split("/")

@@ -88,6 +88,7 @@ class Libritts(tfds.core.BeamBasedBuilder):
     )
 
   def _populate_metadata(self, archive_paths):
+    """Generate metadata of LibriTTS dataset."""
     # All archives contain the same metadata.
     archive_path = list(archive_paths.values())[0]
 
