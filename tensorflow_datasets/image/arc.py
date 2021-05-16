@@ -45,7 +45,7 @@ _BASE_URL = "https://github.com/fchollet/ARC/"
 class ARCConfig(tfds.core.BuilderConfig):
   """BuilderConfig for ARC."""
 
-  def __init__(self, *, version, commit, **kwargs):
+  def __init__(self, *, version: str, commit: str, **kwargs):
     """BuilderConfig for ARC.
 
     Args:
@@ -53,7 +53,7 @@ class ARCConfig(tfds.core.BuilderConfig):
       commit: github.com/fchollet/ARC commit to use (defaults to "master").
       **kwargs: keyword arguments forwarded to super.
     """
-    super(ARCConfig, self).__init__(
+    super().__init__(
         version=tfds.core.Version(version), **kwargs)
     self.commit = commit
     self.download_url = "{}zipball/{}".format(_BASE_URL, self.commit)
@@ -109,6 +109,7 @@ class ARC(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Downloads the data, defines the splits and returns SplitGenerators."""
 
     # dl_manager is a tfds.download.DownloadManager that can be used to
@@ -137,6 +138,7 @@ class ARC(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, directory):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Yields (key, example) tuples from the dataset."""
     json_filepaths = tf.io.gfile.glob(os.path.join(directory, "*.json"))
     for json_path in sorted(json_filepaths):

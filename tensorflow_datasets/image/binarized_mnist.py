@@ -65,6 +65,7 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Returns SplitGenerators."""
     filenames = {
         "train_data": _TRAIN_DATA_FILENAME,
@@ -93,6 +94,7 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_path):
+    #pylint: disable= missing-yield-type-doc
     """Generate Binarized MNIST examples as dicts.
 
     Args:

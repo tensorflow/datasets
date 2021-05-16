@@ -29,6 +29,7 @@ class MNISTTest(testing.DatasetBuilderTestCase):
       "validation": 2,
       "test": 2,
   }
+  #pylint: disable=protected-access
   DL_EXTRACT_RESULT = {
       "train_data": binarized_mnist._TRAIN_DATA_FILENAME,
       "validation_data": binarized_mnist._VALID_DATA_FILENAME,
