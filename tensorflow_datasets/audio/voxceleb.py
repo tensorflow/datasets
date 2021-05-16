@@ -65,6 +65,7 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+	#pylint: disable=missing-type-doc, missing-param-doc
     """Returns SplitGenerators."""
     zip_path = os.path.join(dl_manager.manual_dir, 'vox_dev_wav.zip')
     if not tf.io.gfile.exists(zip_path):
@@ -104,6 +105,7 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, extract_path, file_names):
+	#pylint: disable=missing-type-doc, missing-param-doc
     """Yields examples."""
     for file_name in file_names:
       full_name = os.path.join(extract_path, 'wav', file_name)
@@ -115,6 +117,7 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
       yield file_name, example
 
   def _calculate_splits(self, iden_splits_path):
+	#pylint: disable=missing-type-doc, missing-param-doc
     """Read the train/dev/test splits from VoxCeleb's iden_split.txt file."""
     data_splits = collections.defaultdict(set)
     with tf.io.gfile.GFile(iden_splits_path) as f:

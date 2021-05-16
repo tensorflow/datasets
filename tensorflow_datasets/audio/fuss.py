@@ -126,6 +126,8 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """Returns split generators."""
     url, extracted_dirname = _DL_METADATA[self.builder_config.name]
     base_dir = dl_manager.download_and_extract(url)
     splits = []
@@ -142,6 +144,7 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
     return splits
 
   def _parse_segments(self, path):
+    #pylint: disable=missing-function-docstring
     segments = []
     if not tf.io.gfile.exists(path):
       # Some segments files are missing in the "unprocessed" set.
@@ -161,6 +164,7 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
     return segments
 
   def _generate_examples(self, base_dir, split):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Generates examples for the given split."""
     path = os.path.join(base_dir, "%s_example_list.txt" % split)
     split_dir = os.path.join(base_dir, split)

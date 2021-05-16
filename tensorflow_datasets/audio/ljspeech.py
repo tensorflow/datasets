@@ -67,6 +67,7 @@ class Ljspeech(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
     extracted_dir = dl_manager.download_and_extract(_DL_URL)
     return [
         tfds.core.SplitGenerator(
@@ -76,6 +77,7 @@ class Ljspeech(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, directory):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Yields examples."""
     metadata_path = os.path.join(directory, "LJSpeech-1.1", "metadata.csv")
     with tf.io.gfile.GFile(metadata_path) as f:

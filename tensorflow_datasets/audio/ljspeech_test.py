@@ -20,6 +20,7 @@ from tensorflow_datasets.audio import ljspeech
 
 
 class LJSpeechTest(testing.DatasetBuilderTestCase):
+  """LJSpeech Test class"""
   DATASET_CLASS = ljspeech.Ljspeech
   SPLITS = {
       "train": 2,

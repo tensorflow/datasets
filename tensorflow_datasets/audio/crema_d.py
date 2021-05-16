@@ -41,7 +41,7 @@ range of basic emotional states (happy, sad, anger, fear, disgust, and neutral).
 7,442 clips of 91 actors with diverse ethnic backgrounds were collected.
 This release contains only the audio stream from the original audio-visual
 recording.
-The samples are splitted between train, validation and testing so that samples 
+The samples are splitted between train, validation and testing so that samples
 from each speaker belongs to exactly one split.
 """
 
@@ -54,6 +54,7 @@ LABELS = ['NEU', 'HAP', 'SAD', 'ANG', 'FEA', 'DIS']
 
 
 def _compute_split_boundaries(split_probs, n_items):
+  # pylint: disable=missing-type-doc, missing-raises-doc
   """Computes boundary indices for each of the splits in split_probs.
 
   Args:
@@ -62,8 +63,8 @@ def _compute_split_boundaries(split_probs, n_items):
     n_items: Number of items we want to split.
 
   Returns:
-    The item indices of boundaries between different splits. For the above
-    example and n_items=100, these will be
+    split_boundaries: List of item indices of boundaries between different
+    splits. For the above example and n_items=100, these will be
     [('train', 0, 60), ('dev', 60, 80), ('test', 80, 100)].
   """
   if len(split_probs) > n_items:
@@ -88,6 +89,7 @@ def _compute_split_boundaries(split_probs, n_items):
 
 
 def _get_inter_splits_by_group(items_and_groups, split_probs, split_number):
+  # pylint: disable=missing-type-doc
   """Split items to train/dev/test, so all items in group go into same split.
 
   Each group contains all the samples from the same speaker ID. The samples are
@@ -101,7 +103,7 @@ def _get_inter_splits_by_group(items_and_groups, split_probs, split_number):
     split_number: Generated splits should change with split_number.
 
   Returns:
-    Dictionary that looks like {split name -> set(ids)}.
+    splits_to_ids: Dictionary that looks like {split name -> set(ids)}.
   """
   groups = sorted(set(group_id for item_id, group_id in items_and_groups))
   rng = np.random.RandomState(split_number)
@@ -141,6 +143,7 @@ class CremaD(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    # pylint: disable=missing-param-doc, missing-type-doc
     """Returns SplitGenerators."""
     dl_manager.download_checksums(_CHECKSUMS_URL)
     csv_path = dl_manager.download({'summary_table': SUMMARY_TABLE_URL})
@@ -180,6 +183,7 @@ class CremaD(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, file_paths_and_names):
+    # pylint: disable=missing-param-doc, missing-type-doc
     """Yields examples."""
     for file_path, file_name in file_paths_and_names:
       speaker_id = file_name.split('_')[0]

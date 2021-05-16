@@ -70,6 +70,7 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
   """Configuration Class for Mozilla CommonVoice Dataset."""
 
   def __init__(self, *, language, accents=None, **kwargs):
+    # pylint: disable=missing-type-doc, missing-raises-doc
     """Constructs CommonVoiceConfig.
 
     Args:
@@ -87,7 +88,7 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
     kwargs.setdefault("name", language)
     kwargs.setdefault("description", "Language Code: %s" % language)
     kwargs.setdefault("version", tfds.core.Version("1.0.0"))
-    super(CommonVoiceConfig, self).__init__(**kwargs)
+    super().__init__(**kwargs)
 
 
 class CommonVoice(tfds.core.GeneratorBasedBuilder):
@@ -136,7 +137,7 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
         ) for k, v in _SPLITS.items()
     ]
 
-  def _generate_examples(self, audio_path, label_path):
+  def _generate_examples(self, audio_path: str, label_path: str):
     """Generate Voice samples and statements given the data paths.
 
     Args:

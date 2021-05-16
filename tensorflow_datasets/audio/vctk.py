@@ -79,6 +79,7 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
+    """Dataset info."""
     speaker_list = [
         "p225", "p226", "p227", "p228", "p229", "p230", "p231", "p232", "p233",
         "p234", "p236", "p237", "p238", "p239", "p240", "p241", "p243", "p244",
@@ -122,6 +123,8 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """Return SplitGenerators."""
     extracted_dir = dl_manager.download_and_extract(_DL_URL)
     self._populate_metadata(extracted_dir)
     return [
@@ -132,6 +135,8 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _populate_metadata(self, extracted_dir):
+    #pylint: disable=missing-type-doc, missing-param-doc
+    """Dataset metadata."""
     path = os.path.join(extracted_dir, "speaker-info.txt")
     speaker_info = tf.io.gfile.GFile(path).read()
     speaker_to_gender = {}
@@ -146,6 +151,7 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
     self.info.metadata["speaker_to_accent"] = speaker_to_accent
 
   def _generate_examples(self, extracted_dir):
+    #pylint: disable=missing-type-doc, missing-param-doc
     """Yields examples."""
     speech_dir = "wav48_silence_trimmed"
     mic = "_%s" % self.builder_config.name
