@@ -25,6 +25,7 @@ from typing import Any, List, Optional, Type
 from absl import logging
 
 import dataclasses
+import sys
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import registered
@@ -35,6 +36,7 @@ from tensorflow_datasets.core.community import load
 from tensorflow_datasets.core.community import register_base
 from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils import tfds_path
 
 # Datasets are installed as `import tfds_community.<ns>.<ds>.<hash>`
 _IMPORT_MODULE_NAME = 'tfds_community'
@@ -182,7 +184,16 @@ class _PackageIndex(collections.UserDict):
       logging.info(
           'Could not refresh the package index (GCS unavailable): %s', e
       )
-      return
+
+      #Checking for unsuccessful fetch on windows os
+      if 'win' in sys.platform:
+        logging.info(
+            'Using local cache for windows OS'
+        )
+        local_cache = tfds_path().joinpath('community-datasets-list.jsonl')
+        content = local_cache.read_text()
+      else:
+        return
 
     # If read was sucessful, update the cache with the new dataset list
     self._cached_path.write_text(content)
