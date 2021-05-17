@@ -25,14 +25,13 @@ import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets as tfds
 
-
 flags.DEFINE_boolean('dry_run', True, 'If True, just print, do nothing.')
 flags.DEFINE_boolean('overwrite', False, 'If True, overwrites the data.')
 flags.DEFINE_string(
     'from_directory', tfds.core.constants.DATA_DIR,
     'Where to get the info files from (datasets/ dir on placer).')
-flags.DEFINE_string(
-    'to_directory', None, 'Path where dataset info files will be copied.')
+flags.DEFINE_string('to_directory', None,
+                    'Path where dataset info files will be copied.')
 
 FLAGS = flags.FLAGS
 
@@ -72,6 +71,6 @@ def main(_):
       FLAGS.to_directory or tfds.core.gcs_path('dataset_info'),
   )
 
+
 if __name__ == '__main__':
   app.run(main)
-

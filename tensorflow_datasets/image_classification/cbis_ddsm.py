@@ -24,7 +24,6 @@ import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _DESCRIPTION = """\
 The CBIS-DDSM (Curated Breast Imaging Subset of DDSM) is an updated and
 standardized version of the Digital Database for Screening Mammography (DDSM).
@@ -109,11 +108,13 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
   def __init__(self, image_size=None, patch_size=None, **kwargs):
     kwargs['version'] = tfds.core.Version('3.0.0')
     kwargs['release_notes'] = {
-        '3.0.0': """
+        '3.0.0':
+            """
         Better cropping sampling
         (https://github.com/tensorflow/datasets/pull/2502)
         """,
-        '2.0.1': 'New split API (https://tensorflow.org/datasets/splits)',
+        '2.0.1':
+            'New split API (https://tensorflow.org/datasets/splits)',
     }
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)
     self.image_size = image_size
@@ -175,8 +176,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=features_fn_map[self.builder_config.name](),
-        homepage=
-        'https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM',
+        homepage='https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM',
         citation=_CITATION)
 
   def _get_features_original_base(self):
@@ -187,11 +187,14 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'view': tfds.features.ClassLabel(names=_IMAGE_VIEW_LABELS),
         'patient': tfds.features.Text(),
         'abnormalities': {
-            'id': tfds.features.Tensor(shape=(), dtype=tf.int32),
-            'mask': tfds.features.Image(shape=(None, None, 1)),
+            'id':
+                tfds.features.Tensor(shape=(), dtype=tf.int32),
+            'mask':
+                tfds.features.Image(shape=(None, None, 1)),
             'assessment':
                 tfds.features.ClassLabel(num_classes=_ASSESSMENT_NUM_CLASSES),
-            'pathology': tfds.features.ClassLabel(names=_PATHOLOGY_LABELS),
+            'pathology':
+                tfds.features.ClassLabel(names=_PATHOLOGY_LABELS),
             'subtlety':
                 tfds.features.ClassLabel(num_classes=_SUBTELTY_NUM_CLASSES),
             # TODO(jpuigcerver): Include original crops when TFDS allows it.
@@ -208,14 +211,13 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'calc_type':
             tfds.features.ClassLabel(
                 names_file=tfds.core.tfds_path(
-                    os.path.join(
-                        'image_classification', 'cbis_ddsm_calc_types.txt'))),
+                    os.path.join('image_classification',
+                                 'cbis_ddsm_calc_types.txt'))),
         'calc_distribution':
             tfds.features.ClassLabel(
                 names_file=tfds.core.tfds_path(
-                    os.path.join(
-                        'image_classification',
-                        'cbis_ddsm_calc_distributions.txt'))),
+                    os.path.join('image_classification',
+                                 'cbis_ddsm_calc_distributions.txt'))),
     })
     features['abnormalities'] = tfds.features.Sequence(
         tfds.features.FeaturesDict(features['abnormalities']))
@@ -227,13 +229,13 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'mass_shape':
             tfds.features.ClassLabel(
                 names_file=tfds.core.tfds_path(
-                    os.path.join(
-                        'image_classification', 'cbis_ddsm_mass_shapes.txt'))),
+                    os.path.join('image_classification',
+                                 'cbis_ddsm_mass_shapes.txt'))),
         'mass_margins':
             tfds.features.ClassLabel(
                 names_file=tfds.core.tfds_path(
-                    os.path.join(
-                        'image_classification', 'cbis_ddsm_mass_margins.txt'))),
+                    os.path.join('image_classification',
+                                 'cbis_ddsm_mass_margins.txt'))),
     })
     features['abnormalities'] = tfds.features.Sequence(
         tfds.features.FeaturesDict(features['abnormalities']))
@@ -241,14 +243,15 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
 
   def _get_features_patches(self):
     return tfds.features.FeaturesDict({
-        'id': tfds.features.Text(),
+        'id':
+            tfds.features.Text(),
         'image':
             tfds.features.Image(shape=(None, None, 1), encoding_format='jpeg'),
         'label':
             tfds.features.ClassLabel(
                 names_file=tfds.core.tfds_path(
-                    os.path.join(
-                        'image_classification', 'cbis_ddsm_patch_labels.txt'))),
+                    os.path.join('image_classification',
+                                 'cbis_ddsm_patch_labels.txt'))),
     })
 
   def _split_generators(self, dl_manager):
@@ -373,11 +376,16 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
       for _, example in sorted(patient_examples.items()):
         if _include_example_in_split(example):
           record = {
-              'id': example['id'],
-              'patient': example['patient'],
-              'image': example['image'],
-              'view': example['view'],
-              'breast': example['breast'],
+              'id':
+                  example['id'],
+              'patient':
+                  example['patient'],
+              'image':
+                  example['image'],
+              'view':
+                  example['view'],
+              'breast':
+                  example['breast'],
               # pylint: disable=g-complex-comprehension
               'abnormalities': [{
                   k: v for k, v in abnormality.items() if k not in ['type']
@@ -607,9 +615,8 @@ def _get_breast_mask(image, min_breast_color_threshold=0.05):
   cv2 = tfds.core.lazy_imports.cv2
   threshold = int(image.max() * min_breast_color_threshold)
   _, image_binary = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY)
-  contours = _find_contours(
-      image_binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE
-  )
+  contours = _find_contours(image_binary, cv2.RETR_LIST,
+                            cv2.CHAIN_APPROX_SIMPLE)
   contours_areas = [cv2.contourArea(cont) for cont in contours]
   biggest_contour_idx = np.argmax(contours_areas)
   return cv2.drawContours(
@@ -741,11 +748,11 @@ def _sample_positive_patches(image,
       patch_y = np.random.randint(min_y, max_y + 1)
       patch_x = np.random.randint(min_x, max_x + 1)
       if _patch_overlaps_any_abnormality_above_threshold(
-          patch_y, patch_x, patch_size, [abnormality_mask],
-          [abnormality_area], min_overlap_threshold):
+          patch_y, patch_x, patch_size, [abnormality_mask], [abnormality_area],
+          min_overlap_threshold):
         number_of_yielded_patches += 1
-        yield image[patch_y:(patch_y + patch_size[0]), patch_x:(patch_x +
-                                                                patch_size[1])]
+        yield image[patch_y:(patch_y + patch_size[0]),
+                    patch_x:(patch_x + patch_size[1])]
       # If we have yielded all requested patches return.
       if number_of_yielded_patches >= number_of_patches:
         return
@@ -851,8 +858,8 @@ def _sample_negative_patches(image,
               patch_y, patch_x, patch_size, abnormalities_masks,
               abnormalities_areas, max_abnorm_overlap_threshold)):
         number_of_yielded_patches += 1
-        yield image[patch_y:(patch_y + patch_size[0]), patch_x:(patch_x +
-                                                                patch_size[1])]
+        yield image[patch_y:(patch_y + patch_size[0]),
+                    patch_x:(patch_x + patch_size[1])]
       # If we have yielded all requested patches return.
       if number_of_yielded_patches >= number_of_patches:
         return

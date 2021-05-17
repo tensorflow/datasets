@@ -75,6 +75,7 @@ def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
   # See:
   # https://stackoverflow.com/questions/64792295/how-to-get-self-instance-in-mock-mock-call-args
   generated_ds_names = []
+
   def _download_and_prepare(self, *args, **kwargs):
     # Remove version from generated name (as only last version can be generated)
     full_name = '/'.join(self.info.full_name.split('/')[:-1])
@@ -172,8 +173,7 @@ def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disabl
   data_dir = mock_default_data_dir / 'mnist/3.0.1'
   data_dir.mkdir(parents=True)
   metadata_path = tfds.core.tfds_path(
-      'testing/test_data/dataset_info/mnist/3.0.1'
-  )
+      'testing/test_data/dataset_info/mnist/3.0.1')
 
   for f in metadata_path.iterdir():  # Copy metadata files.
     data_dir.joinpath(f.name).write_text(f.read_text())

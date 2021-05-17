@@ -32,5 +32,6 @@ class INaturalist2017Test(testing.DatasetBuilderTestCase):
       "trainval_images": "train_val_images.tar.gz",
   }
 
+
 if __name__ == "__main__":
   testing.test_main()

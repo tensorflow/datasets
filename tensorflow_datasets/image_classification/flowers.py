@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Flowers dataset.
-"""
+"""Flowers dataset."""
 
 import os
 
@@ -42,14 +41,16 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description="A large set of images of flowers",
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
-            "label": tfds.features.ClassLabel(
-                names=["dandelion", "daisy", "tulips", "sunflowers", "roses"]),
+            "image":
+                tfds.features.Image(),
+            "label":
+                tfds.features.ClassLabel(names=[
+                    "dandelion", "daisy", "tulips", "sunflowers", "roses"
+                ]),
         }),
         supervised_keys=("image", "label"),
         homepage="https://www.tensorflow.org/tutorials/load_data/images",
-        citation=_CITATION
-        )
+        citation=_CITATION)
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download(_URL)
@@ -58,9 +59,7 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "images_dir_path": dl_manager.iter_archive(path)
-            }),
+            gen_kwargs={"images_dir_path": dl_manager.iter_archive(path)}),
     ]
 
   def _generate_examples(self, images_dir_path):

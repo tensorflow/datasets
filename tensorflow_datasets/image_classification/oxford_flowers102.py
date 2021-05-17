@@ -19,7 +19,6 @@ import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _BASE_URL = "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/"
 
 _NAMES = [

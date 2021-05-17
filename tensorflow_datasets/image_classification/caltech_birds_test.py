@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 from tensorflow_datasets.image_classification import caltech_birds
 import tensorflow_datasets.testing as tfds_test
 
@@ -43,9 +42,7 @@ class CaltechBirds2011Test(tfds_test.DatasetBuilderTestCase):
       'extracted/TAR_GZ.CUB_200_2011.tar.gz', 'extracted/segmentations.tgz'
   ]
 
-  DL_DOWNLOAD_RESULT = [
-      'CUB_200_2011.tar.gz'
-  ]
+  DL_DOWNLOAD_RESULT = ['CUB_200_2011.tar.gz']
 
 
 if __name__ == '__main__':

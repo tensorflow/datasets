@@ -68,14 +68,20 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
-            "shape_label": tfds.features.ClassLabel(names=_CLASSES),
-            "shape_imagenet_labels": tfds.features.Sequence(
-                tfds.features.ClassLabel(names_file=imagenet_names_file)),
-            "texture_label": tfds.features.ClassLabel(names=_CLASSES),
-            "texture_imagenet_labels": tfds.features.Sequence(
-                tfds.features.ClassLabel(names_file=imagenet_names_file)),
-            "file_name": tfds.features.Text(),
+            "image":
+                tfds.features.Image(),
+            "shape_label":
+                tfds.features.ClassLabel(names=_CLASSES),
+            "shape_imagenet_labels":
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(names_file=imagenet_names_file)),
+            "texture_label":
+                tfds.features.ClassLabel(names=_CLASSES),
+            "texture_imagenet_labels":
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(names_file=imagenet_names_file)),
+            "file_name":
+                tfds.features.Text(),
         }),
         supervised_keys=("image", "shape_label"),
         homepage=_BASE_URL,
@@ -93,9 +99,10 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "data_dir_path": os.path.join(
-                    dl_paths["texture_vs_shape"], _DATA_DIR_PATH),
-                "imagenet_mapping_path": dl_paths["imagenet_mapping"]
+                "data_dir_path":
+                    os.path.join(dl_paths["texture_vs_shape"], _DATA_DIR_PATH),
+                "imagenet_mapping_path":
+                    dl_paths["imagenet_mapping"]
             },
         ),
     ]
@@ -109,8 +116,10 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
       mapping_txt = f.read()
     mapping = {}
     for match in re.finditer(r"([a-z]+)\s*=\s*\[([^\]]+)\]", mapping_txt):
-      mapping[match.group(1)] = list(sorted(imagenet_names.intersection(
-          re.sub(r"\s", "", match.group(2)).split(","))))
+      mapping[match.group(1)] = list(
+          sorted(
+              imagenet_names.intersection(
+                  re.sub(r"\s", "", match.group(2)).split(","))))
 
     # Process images.
     for shape_class_name in tf.io.gfile.listdir(data_dir_path):

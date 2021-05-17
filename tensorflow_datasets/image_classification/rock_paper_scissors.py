@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Rock, Paper, Scissors dataset.
-"""
+"""Rock, Paper, Scissors dataset."""
 
 import re
 import tensorflow_datasets.public_api as tfds
@@ -36,8 +35,7 @@ _IMAGE_SIZE = 300
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
 
 _NAME_RE = re.compile(
-    r"^(rps|rps-test-set)(?:/|\\)(rock|paper|scissors)(?:/|\\)[\w-]*\.png$"
-)
+    r"^(rps|rps-test-set)(?:/|\\)(rock|paper|scissors)(?:/|\\)[\w-]*\.png$")
 
 
 class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
@@ -53,14 +51,14 @@ class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description="Images of hands playing rock, paper, scissor game.",
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(
-                names=["rock", "paper", "scissors"]),
+            "image":
+                tfds.features.Image(shape=_IMAGE_SHAPE),
+            "label":
+                tfds.features.ClassLabel(names=["rock", "paper", "scissors"]),
         }),
         supervised_keys=("image", "label"),
         homepage="http://laurencemoroney.com/rock-paper-scissors-dataset",
-        citation=_CITATION
-        )
+        citation=_CITATION)
 
   def _split_generators(self, dl_manager):
     train_path, test_path = dl_manager.download([_TRAIN_URL, _TEST_URL])

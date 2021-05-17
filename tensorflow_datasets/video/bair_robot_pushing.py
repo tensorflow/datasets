@@ -34,7 +34,6 @@ DATA_URL = "http://rail.eecs.berkeley.edu/datasets/bair_robot_pushing_dataset_v0
 FRAMES_PER_VIDEO = 30
 IMG_SHAPE = (64, 64, 3)
 
-
 _CITATION = """\
 @misc{1710.05268,
   Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
@@ -56,12 +55,18 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     # The Bair dataset consist of a sequence of frames (video) with associated
     # metadata (action and position)
-    features = tfds.features.Sequence({
-        "image_main": tfds.features.Image(shape=IMG_SHAPE),
-        "image_aux1": tfds.features.Image(shape=IMG_SHAPE),
-        "action": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
-        "endeffector_pos": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-    }, length=FRAMES_PER_VIDEO)
+    features = tfds.features.Sequence(
+        {
+            "image_main":
+                tfds.features.Image(shape=IMG_SHAPE),
+            "image_aux1":
+                tfds.features.Image(shape=IMG_SHAPE),
+            "action":
+                tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+            "endeffector_pos":
+                tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+        },
+        length=FRAMES_PER_VIDEO)
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -107,8 +112,8 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         all_frames = []
         for frame_id in range(FRAMES_PER_VIDEO):
           # Extract all features from the original proto context field
-          frame_feature = {   # pylint: disable=g-complex-comprehension
-              out_key: example.context.feature[in_key.format(frame_id)]   # pylint: disable=g-complex-comprehension
+          frame_feature = {  # pylint: disable=g-complex-comprehension
+              out_key: example.context.feature[in_key.format(frame_id)]  # pylint: disable=g-complex-comprehension
               for out_key, in_key in [
                   ("image_main", "{}/image_main/encoded"),
                   ("image_aux1", "{}/image_aux1/encoded"),

@@ -66,8 +66,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         homepage="http://www.vision.caltech.edu/Image_Datasets/Caltech101/",
-        citation=_CITATION
-        )
+        citation=_CITATION)
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download_and_extract(_URL)
@@ -123,8 +122,8 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
           if _TRAIN_POINTS_PER_CLASS > len(fnames):
             raise ValueError("Fewer than {} ({}) points in class {}".format(
                 _TRAIN_POINTS_PER_CLASS, len(fnames), d))
-          train_fnames = np.random.choice(fnames, _TRAIN_POINTS_PER_CLASS,
-                                          replace=False)
+          train_fnames = np.random.choice(
+              fnames, _TRAIN_POINTS_PER_CLASS, replace=False)
           test_fnames = set(fnames).difference(train_fnames)
           fnames_to_emit = train_fnames if is_train_split else test_fnames
 

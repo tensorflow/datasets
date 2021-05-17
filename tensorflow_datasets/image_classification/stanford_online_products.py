@@ -75,6 +75,7 @@ class StanfordOnlineProducts(tfds.core.GeneratorBasedBuilder):
     Args:
       file_path: str, path to the Ebay_(train/test/info).txt file. Having
         Columns ['class_id', 'super_class_id', 'path']
+
     Yields:
       Dataset examples.
     """

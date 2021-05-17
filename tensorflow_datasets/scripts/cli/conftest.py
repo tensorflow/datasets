@@ -29,7 +29,6 @@ def _mock_argparse_flags():
   # another test):
   # `flags.DEFINE_string('data_dir')` with `parser.add_argument('--data_dir')`
   # We patch argparse_flags during test, so absl flags are ignored.
-  with mock.patch(
-      'absl.flags.argparse_flags.ArgumentParser', argparse.ArgumentParser
-  ):
+  with mock.patch('absl.flags.argparse_flags.ArgumentParser',
+                  argparse.ArgumentParser):
     yield

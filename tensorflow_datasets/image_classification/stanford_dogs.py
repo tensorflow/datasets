@@ -98,6 +98,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
 
     # Parsing the mat file which contains the list of train/test images
     scipy = tfds.core.lazy_imports.scipy
+
     def parse_mat_file(file_name):
       with tf.io.gfile.GFile(file_name, "rb") as f:
         parsed_mat_arr = scipy.io.loadmat(f, squeeze_me=True)
@@ -186,9 +187,12 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
         )
 
       yield fname, {
-          "image": fobj,
-          "image/filename": fname,
-          "label": label,
+          "image":
+              fobj,
+          "image/filename":
+              fname,
+          "label":
+              label,
           "objects": [{
               "bbox": build_box(attributes, n)
           } for n in range(len(attributes["xmin"]))]

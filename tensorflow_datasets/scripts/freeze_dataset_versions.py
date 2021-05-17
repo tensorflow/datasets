@@ -32,6 +32,7 @@ import tensorflow_datasets as tfds
 def main(_):
   tfds.core.visibility.set_availables([
       tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+      tfds.core.visibility.DatasetType
   ])
 
   registered_names = tfds.core.load.list_full_names()

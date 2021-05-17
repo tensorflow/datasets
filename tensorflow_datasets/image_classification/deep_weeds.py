@@ -90,7 +90,8 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
     """Define Splits."""
     paths = dl_manager.download_and_extract({
         "image": _URL,
-        "label": _URL_LABELS})
+        "label": _URL_LABELS
+    })
 
     return [
         tfds.core.SplitGenerator(

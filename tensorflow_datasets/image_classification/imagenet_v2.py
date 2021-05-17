@@ -18,7 +18,6 @@ import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _CITATION = r"""
 @inproceedings{recht2019imagenet,
   title={Do ImageNet Classifiers Generalize to ImageNet?},
@@ -98,8 +97,10 @@ class ImagenetV2(tfds.core.GeneratorBasedBuilder):
       tfds.core.Version('2.0.0'),
   ]
   RELEASE_NOTES = {
-      '1.0.0': 'Initial version.',
-      '2.0.0': 'Files updated.',
+      '1.0.0':
+          'Initial version.',
+      '2.0.0':
+          'Files updated.',
       '3.0.0': ('Fix file_name, from absolute path to path relative to '
                 'data directory, ie: "class_id/filename.jpg".'),
   }

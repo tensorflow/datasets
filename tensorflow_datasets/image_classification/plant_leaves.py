@@ -124,8 +124,7 @@ class PlantLeaves(tfds.core.GeneratorBasedBuilder):
                 "Retry limit reached. Try downloading the dataset again.")
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
-              gen_kwargs={"image_files": image_files})
+              name=tfds.Split.TRAIN, gen_kwargs={"image_files": image_files})
       ]
 
   def _generate_examples(self, image_files):

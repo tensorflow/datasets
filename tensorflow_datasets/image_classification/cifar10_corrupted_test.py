@@ -22,7 +22,9 @@ from tensorflow_datasets.image_classification import cifar10_corrupted
 class Cifar10CorruptedTest(testing.DatasetBuilderTestCase):
 
   BUILDER_CONFIG_NAMES_TO_TEST = [
-      "elastic_1", "elastic_4", "elastic_5",
+      "elastic_1",
+      "elastic_4",
+      "elastic_5",
   ]
 
   DATASET_CLASS = cifar10_corrupted.Cifar10Corrupted

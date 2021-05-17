@@ -19,7 +19,6 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _DESCRIPTION = """
 The DAVIS 2017 video object segmentation dataset.
 """
@@ -60,9 +59,7 @@ def _read_annotation(annotation_path):
 class DavisConfig(tfds.core.BuilderConfig):
   """"Configuration for RoboNet video rescaling."""
 
-  def __init__(
-      self, *, full_resolution=False, **kwargs
-  ):
+  def __init__(self, *, full_resolution=False, **kwargs):
     """The parameters specifying how the dataset will be processed.
 
     The dataset comes with two versions, 1080p and 480p video. Set
@@ -140,10 +137,8 @@ class Davis(tfds.core.GeneratorBasedBuilder):
     val_files = trainval_data / 'DAVIS/ImageSets/2017/val.txt'
 
     return {
-        tfds.Split.TRAIN:
-            self._generate_examples(train_files),
-        tfds.Split.VALIDATION:
-            self._generate_examples(val_files)
+        tfds.Split.TRAIN: self._generate_examples(train_files),
+        tfds.Split.VALIDATION: self._generate_examples(val_files)
     }
 
   def _generate_examples(self, path):
@@ -153,7 +148,7 @@ class Davis(tfds.core.GeneratorBasedBuilder):
     root_path = path.parent.parent.parent  # Move up three directories.
     resolution = 'Full-Resolution' if self.builder_config.full_resolution else '480p'
     for video in videos_to_include:
-      images_path = root_path /'JPEGImages' / resolution / video
+      images_path = root_path / 'JPEGImages' / resolution / video
       annotations_path = root_path / 'Annotations' / resolution / video
       seq_len = len(list(images_path.iterdir()))
       images = []
@@ -169,4 +164,3 @@ class Davis(tfds.core.GeneratorBasedBuilder):
       metadata = {'num_frames': seq_len, 'video_name': video}
       key = video + resolution
       yield key, {'video': video_dict, 'metadata': metadata}
-

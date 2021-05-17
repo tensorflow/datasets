@@ -21,9 +21,7 @@ import tensorflow_datasets.testing as tfds_test
 
 class GeirhosConflictStimuliTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = geirhos_conflict_stimuli.GeirhosConflictStimuli
-  SPLITS = {
-      'test': 2
-  }
+  SPLITS = {'test': 2}
 
   DL_EXTRACT_RESULT = {
       'texture_vs_shape': 'texture_vs_shape',

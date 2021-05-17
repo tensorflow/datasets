@@ -28,10 +28,9 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string("output_dir", "/tmp/datasets_api",
                     "Where to output the docs")
-flags.DEFINE_string(
-    "code_url_prefix",
-    "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/",
-    "The url prefix for links to code.")
+flags.DEFINE_string("code_url_prefix",
+                    "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/",
+                    "The url prefix for links to code.")
 
 flags.DEFINE_bool("search_hints", True,
                   "Include metadata search hints in the generated files")

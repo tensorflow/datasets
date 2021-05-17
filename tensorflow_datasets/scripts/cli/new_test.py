@@ -42,7 +42,7 @@ def test_new_invalid_name():
   invalid_names = ['foo-15', '15foo']
   for invalid_name in invalid_names:
     with pytest.raises(ValueError) as execution_info:
-      _run_cli('new '+invalid_name)
+      _run_cli('new ' + invalid_name)
     assert execution_info.value.args[0] == error_message
 
 

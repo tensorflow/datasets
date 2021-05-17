@@ -24,8 +24,7 @@ from absl import logging
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-
-_DESCRIPTION = '''\
+_DESCRIPTION = """\
 ILSVRC 2012, commonly known as 'ImageNet' is an image dataset organized
 according to the WordNet hierarchy. Each meaningful concept in WordNet,
 possibly described by multiple words or word phrases, is called a "synonym set"
@@ -79,11 +78,11 @@ format of the text file is 100,000 lines corresponding to each image in the test
 split. Each line of integers correspond to the rank-ordered, top 5 predictions
 for each test image. The integers are 1-indexed corresponding to the line number
 in the corresponding labels file. See imagenet2012_labels.txt.
-'''
+"""
 
 # Web-site is asking to cite paper from 2015.
 # http://www.image-net.org/challenges/LSVRC/2012/index#cite
-_CITATION = '''\
+_CITATION = """\
 @article{ILSVRC15,
 Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},
 Title = {{ImageNet Large Scale Visual Recognition Challenge}},
@@ -94,7 +93,7 @@ volume={115},
 number={3},
 pages={211-252}
 }
-'''
+"""
 
 _LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 
@@ -102,7 +101,6 @@ _LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 # corresponding image names (and not in the order they have been added to the
 # tar file).
 _VALIDATION_LABELS_FNAME = 'image_classification/imagenet2012_validation_labels.txt'
-
 
 # From https://github.com/cytsai/ilsvrc-cmyk-image-list
 CMYK_IMAGES = [
@@ -141,16 +139,22 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
       tfds.core.Version('5.0.0'),
   ]
   RELEASE_NOTES = {
-      '5.1.0': 'Added test split.',
-      '5.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
-      '4.0.0': '(unpublished)',
-      '3.0.0': """
+      '5.1.0':
+          'Added test split.',
+      '5.0.0':
+          'New split API (https://tensorflow.org/datasets/splits)',
+      '4.0.0':
+          '(unpublished)',
+      '3.0.0':
+          """
       Fix colorization on ~12 images (CMYK -> RGB).
       Fix format for consistency (convert the single png image to Jpeg).
       Faster generation reading directly from the archive.
       """,
-      '2.0.1': 'Encoding fix. No changes from user point of view.',
-      '2.0.0': 'Fix validation labels.',
+      '2.0.1':
+          'Encoding fix. No changes from user point of view.',
+      '2.0.0':
+          'Fix validation labels.',
   }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
@@ -181,7 +185,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
 
     Args:
       val_path: path to TAR file containing validation images. It is used to
-      retrieve the name of pictures and associate them to labels.
+        retrieve the name of pictures and associate them to labels.
 
     Returns:
       dict, mapping from image name (str) to label (str).
@@ -227,8 +231,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
           f' * train: {train_path}\n'
           f' * test: {test_path}\n'
           f' * validation: {val_path}\n'
-          'At least one of the split should be available.'
-      )
+          'At least one of the split should be available.')
     return splits
 
   def _fix_image(self, image_fname, image):
@@ -241,15 +244,17 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
       image = io.BytesIO(tfds.core.utils.png_to_jpeg(image.read()))
     return image
 
-  def _generate_examples(self, archive, validation_labels=None,
+  def _generate_examples(self,
+                         archive,
+                         validation_labels=None,
                          labels_exist=True):
     """Yields examples."""
     if not labels_exist:  # Test split
       for key, example in self._generate_examples_test(archive):
         yield key, example
     if validation_labels:  # Validation split
-      for key, example in self._generate_examples_validation(archive,
-                                                             validation_labels):
+      for key, example in self._generate_examples_validation(
+          archive, validation_labels):
         yield key, example
     # Training split. Main archive contains archives names after a synset noun.
     # Each sub-archive contains pictures associated to that synset.
@@ -295,7 +300,8 @@ def _add_split_if_exists(split_list, split, split_path, dl_manager, **kwargs):
         'ImageNet 2012 Challenge %s split not found at %s. '
         'Proceeding with data generation anyways but the split will be '
         'missing from the dataset...',
-        str(split), split_path,
+        str(split),
+        split_path,
     )
   else:
     split_list.append(
@@ -305,5 +311,4 @@ def _add_split_if_exists(split_list, split, split_path, dl_manager, **kwargs):
                 'archive': dl_manager.iter_archive(split_path),
                 **kwargs
             },
-        ),
-    )
+        ),)

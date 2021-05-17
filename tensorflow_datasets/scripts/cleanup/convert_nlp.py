@@ -74,10 +74,7 @@ def _parse_flags(_) -> argparse.Namespace:
       description="Tool to add hugging face datasets",
   )
   parser.add_argument(
-      "--nlp_path",
-      type=pathlib.Path,
-      help="Path of the nlp directory"
-  )
+      "--nlp_path", type=pathlib.Path, help="Path of the nlp directory")
   parser.add_argument(
       "--dataset_name",
       type=str,
@@ -113,8 +110,7 @@ def create_dataset_files(
     raise ValueError(f"Invalid Dataset Type {dataset_type}")
 
   #  Create dataset timeplate files from new.py
-  new.create_dataset_files(dataset_name=dataset_name,
-                           dataset_dir=dataset_dir)
+  new.create_dataset_files(dataset_name=dataset_name, dataset_dir=dataset_dir)
 
   #  Path of the dataset file
   nlp_datasets_path = nlp_path.expanduser() / "datasets"

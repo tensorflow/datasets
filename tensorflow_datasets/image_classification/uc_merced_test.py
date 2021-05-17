@@ -25,5 +25,6 @@ class UcMercedTest(testing.DatasetBuilderTestCase):
       "train": 5,
   }
 
+
 if __name__ == "__main__":
   testing.test_main()
