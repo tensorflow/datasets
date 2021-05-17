@@ -28,8 +28,8 @@ class TedliumReleaseConfig(tfds.core.BuilderConfig):
   """BuilderConfig for a release of the TED-LIUM dataset."""
 
   def __init__(self, *, url, download_url, split_paths, citation, **kwargs):
-    super(TedliumReleaseConfig,
-          self).__init__(version=tfds.core.Version("1.0.1"), **kwargs)
+    super(TedliumReleaseConfig, self).__init__(
+        version=tfds.core.Version("1.0.1"), **kwargs)
     self.url = url
     self.download_url = download_url
     # List of split, path pairs containing the relative path within the

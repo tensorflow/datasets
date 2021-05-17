@@ -40,10 +40,7 @@ The tracks are all 22050Hz Mono 16-bit audio files in .wav format.
 _DOWNLOAD_URL = "http://opihi.cs.uvic.ca/sound/music_speech.tar.gz"
 _HOMEPAGE_URL = "http://marsyas.info/index.html"
 
-_CLASS_LABELS = [
-    "music",
-    "speech"
-]
+_CLASS_LABELS = ["music", "speech"]
 
 
 class GTZANMusicSpeech(tfds.core.GeneratorBasedBuilder):
@@ -56,13 +53,9 @@ class GTZANMusicSpeech(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "audio":
-                tfds.features.Audio(
-                    file_format="wav",
-                    sample_rate=22050),
+            "audio": tfds.features.Audio(file_format="wav", sample_rate=22050),
             "label": tfds.features.ClassLabel(names=_CLASS_LABELS),
-            "audio/filename":
-                tfds.features.Text(),
+            "audio/filename": tfds.features.Text(),
         }),
         supervised_keys=("audio", "label"),
         homepage=_HOMEPAGE_URL,
@@ -76,10 +69,7 @@ class GTZANMusicSpeech(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "path": path
-            }),
+            name=tfds.Split.TRAIN, gen_kwargs={"path": path}),
     ]
 
   def _generate_examples(self, path):
