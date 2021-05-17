@@ -129,16 +129,20 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "lr_path": extracted_paths["train_lr_url"],
-                "hr_path": os.path.join(extracted_paths["train_hr_url"],
-                                        "DIV2K_train_HR"),
+                "lr_path":
+                    extracted_paths["train_lr_url"],
+                "hr_path":
+                    os.path.join(extracted_paths["train_hr_url"],
+                                 "DIV2K_train_HR"),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "lr_path": extracted_paths["valid_lr_url"],
-                "hr_path": os.path.join(extracted_paths["valid_hr_url"],
-                                        "DIV2K_valid_HR"),
+                "lr_path":
+                    extracted_paths["valid_lr_url"],
+                "hr_path":
+                    os.path.join(extracted_paths["valid_hr_url"],
+                                 "DIV2K_valid_HR"),
             }),
     ]
 

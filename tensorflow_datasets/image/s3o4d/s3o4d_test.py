@@ -40,5 +40,6 @@ class S3o4dTest(testing.DatasetBuilderTestCase):
       'dragon_test_latent': 'dragon/test_latents.npz',
   }
 
+
 if __name__ == '__main__':
   testing.test_main()

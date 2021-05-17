@@ -102,8 +102,7 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(filepath=filepath)),
+            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)),
     ]
 
   def _generate_examples(self, filepath):
@@ -129,8 +128,8 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
     for i in range(values_array.shape[1]):
       labels_array[:, i] = _discretize(values_array[:, i])  # pylint: disable=unsupported-assignment-operation
 
-    for i, (image, labels, values) in enumerate(moves.zip(
-        image_array, labels_array, values_array)):
+    for i, (image, labels, values) in enumerate(
+        moves.zip(image_array, labels_array, values_array)):
       record = {
           "image": image,
           "label_floor_hue": labels[0],

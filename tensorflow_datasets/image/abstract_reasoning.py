@@ -198,8 +198,10 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "context": tfds.features.Video(shape=(8, 160, 160, 1)),
-            "answers": tfds.features.Video(shape=(8, 160, 160, 1)),
+            "context":
+                tfds.features.Video(shape=(8, 160, 160, 1)),
+            "answers":
+                tfds.features.Video(shape=(8, 160, 160, 1)),
             "target":
                 tfds.features.ClassLabel(num_classes=8),
             "meta_target":
@@ -229,8 +231,7 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
                 "split": "val",
             }),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
+            name=tfds.Split.TEST, gen_kwargs={
                 "folder": path,
                 "split": "test",
             }),

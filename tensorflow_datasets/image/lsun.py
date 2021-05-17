@@ -45,7 +45,6 @@ _CITATION = """\
 }
 """
 
-
 # From http://dl.yf.io/lsun/categories.txt minus "test"
 _SCENES_CATEGORIES = [
     "classroom",
@@ -88,6 +87,8 @@ def _make_lmdb_dataset(path):
   return tfds.core.lazy_imports.tensorflow_io.IODataset.from_lmdb(path)
 
 
+
+
 class Lsun(tfds.core.GeneratorBasedBuilder):
   """Lsun dataset."""
 
@@ -124,9 +125,10 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
               gen_kwargs={
-                  "extracted_dir": extracted_dirs["train"],
-                  "file_path": "%s_%s_lmdb" % (self.builder_config.name,
-                                               "train")
+                  "extracted_dir":
+                      extracted_dirs["train"],
+                  "file_path":
+                      "%s_%s_lmdb" % (self.builder_config.name, "train")
               }),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,
