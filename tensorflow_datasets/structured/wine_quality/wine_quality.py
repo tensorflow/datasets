@@ -90,7 +90,6 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
           description="White Wine",
           dl_url=_DOWNLOAD_URL_WHITE_WINES,
       ),
-
       WineQualityConfig(
           name="red",
           description="Red Wine",

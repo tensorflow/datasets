@@ -37,14 +37,13 @@ _DESCRIPTION = ("Dataset describing the survival status of "
                 "Float and int missing values are replaced with -1, string "
                 "missing values are replaced with 'Unknown'.")
 
-_EMBARKED_DICT = collections.OrderedDict([
-    ("C", "Cherbourg"), ("Q", "Queenstown"), ("S", "Southampton"),
-    ("?", "Unknown")
-])
+_EMBARKED_DICT = collections.OrderedDict([("C", "Cherbourg"),
+                                          ("Q", "Queenstown"),
+                                          ("S", "Southampton"),
+                                          ("?", "Unknown")])
 
-_PCLASS_DICT = collections.OrderedDict([
-    ("1", "1st_class"), ("2", "2nd_class"), ("3", "3rd_class")
-])
+_PCLASS_DICT = collections.OrderedDict([("1", "1st_class"), ("2", "2nd_class"),
+                                        ("3", "3rd_class")])
 
 _SURVIVED_DICT = {"1": "survived", "0": "died"}
 
@@ -103,13 +102,13 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "survived": tfds.features.ClassLabel(names=["died", "survived"]),
-            "features": {name: dtype
-                         for name, (dtype, func) in FEATURE_DICT.items()}
+            "features": {
+                name: dtype for name, (dtype, func) in FEATURE_DICT.items()
+            }
         }),
         supervised_keys=("features", "survived"),
         homepage="https://www.openml.org/d/40945",
-        citation=_CITATION
-        )
+        citation=_CITATION)
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download(_URL)
@@ -117,10 +116,7 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "file_path": path
-            }),
+            name=tfds.Split.TRAIN, gen_kwargs={"file_path": path}),
     ]
 
   def _generate_examples(self, file_path):

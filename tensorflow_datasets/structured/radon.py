@@ -102,8 +102,7 @@ class Radon(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'activity': tf.float32,
-            'features': {name: dtype
-                         for name, (dtype, _) in FEATURES.items()}
+            'features': {name: dtype for name, (dtype, _) in FEATURES.items()}
         }),
         supervised_keys=('features', 'activity'),
         homepage='http://www.stat.columbia.edu/~gelman/arm/examples/radon/',
