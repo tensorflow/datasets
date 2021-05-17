@@ -60,9 +60,8 @@ class TaoTest(tfds.testing.DatasetBuilderTestCase):
       for ex in [train_ex, val_ex]:
         # There should be the same number of each of these; a number
         # per group of bboxes indicating which frame they correspond to.
-        self.assertEqual(
-            ex['tracks']['bboxes'].shape[0],
-            ex['tracks']['frames'].shape[0])
+        self.assertEqual(ex['tracks']['bboxes'].shape[0],
+                         ex['tracks']['frames'].shape[0])
 
     with self.subTest('check_video'):
       splits = builder.as_dataset()
@@ -72,6 +71,7 @@ class TaoTest(tfds.testing.DatasetBuilderTestCase):
       # more frames. For testing purposes we load a single dummy 10 X 10 image.
       self.assertEqual(train_ex['video'].shape, (1, 28, 42, 3))
       self.assertEqual(val_ex['video'].shape, (1, 28, 42, 3))
+
 
 if __name__ == '__main__':
   tfds.testing.test_main()
