@@ -100,18 +100,17 @@ class Video(sequence_feature.Sequence):
     Args:
       shape: tuple of ints, the shape of the video (num_frames, height, width,
         channels), where channels is 1 or 3.
-      encoding_format: The video is stored as a sequence of encoded images.
-        You can use any encoding format supported by image_feature.Feature.
+      encoding_format: The video is stored as a sequence of encoded images. You
+        can use any encoding format supported by image_feature.Feature.
       ffmpeg_extra_args: A sequence of additional args to be passed to the
-        ffmpeg binary. Specifically, ffmpeg will be called as:
-          ``
-          ffmpeg -i <input_file> <ffmpeg_extra_args> %010d.<encoding_format>
-          ``
+        ffmpeg binary. Specifically, ffmpeg will be called as: `` ffmpeg -i
+          <input_file> <ffmpeg_extra_args> %010d.<encoding_format> ``
       use_colormap: Forwarded to `tfds.features.Image`. If `True`,
         `tfds.as_dataframe` will display each value in the image with a
         different color.
-      dtype: tf.uint16 or tf.uint8 (default).
-        tf.uint16 can be used only with png encoding_format
+      dtype: tf.uint16 or tf.uint8 (default). tf.uint16 can be used only with
+        png encoding_format
+
     Raises:
       ValueError: If the shape is invalid
     """
@@ -191,5 +190,6 @@ class Video(sequence_feature.Sequence):
   def repr_html(self, ex: np.ndarray) -> str:
     """Video are displayed as `<video>`."""
     return image_feature.make_video_repr_html(
-        ex, use_colormap=self.feature._use_colormap  # pylint: disable=protected-access
+        ex,
+        use_colormap=self.feature._use_colormap  # pylint: disable=protected-access
     )

@@ -248,14 +248,13 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
   def test_decoding(self):
 
     self.assertFeatureEagerOnly(
-        feature=feature_lib.Dataset(
-            {
-                'a': tf.string,
-                'b': {
-                    'c': tf.uint8,
-                }
-            },
-            length=None),
+        feature=feature_lib.Dataset({
+            'a': tf.string,
+            'b': {
+                'c': tf.uint8,
+            }
+        },
+                                    length=None),
         shape={
             'a': (),
             'b': {

@@ -32,8 +32,7 @@ from tensorflow_datasets.core.utils import version as version_lib
 
 
 class ReadOnlyBuilder(
-    dataset_builder.FileReaderBuilder, skip_registration=True
-):
+    dataset_builder.FileReaderBuilder, skip_registration=True):
   """Generic DatasetBuilder loading from a directory."""
 
   def __init__(self, builder_dir: str):
@@ -50,8 +49,7 @@ class ReadOnlyBuilder(
     info_path = os.path.join(builder_dir, dataset_info.DATASET_INFO_FILENAME)
     if not tf.io.gfile.exists(info_path):
       raise FileNotFoundError(
-          f'Could not load `ReadOnlyBuilder`: {info_path} does not exists.'
-      )
+          f'Could not load `ReadOnlyBuilder`: {info_path} does not exists.')
 
     # Restore name, config, info
     info_proto = dataset_info.read_from_json(info_path)
@@ -84,8 +82,7 @@ class ReadOnlyBuilder(
     if self.info.features is None:
       raise ValueError(
           f'Cannot restore {self.info.full_name}. It likelly mean the dataset '
-          'was generated with an old TFDS version (<=3.2.1).'
-      )
+          'was generated with an old TFDS version (<=3.2.1).')
 
   def _create_builder_config(
       self, builder_config: Optional[dataset_builder.BuilderConfig]
@@ -132,7 +129,8 @@ def builder_from_directory(builder_dir: str) -> dataset_builder.DatasetBuilder:
 
 
 def builder_from_files(
-    name: str, **builder_kwargs: Any,
+    name: str,
+    **builder_kwargs: Any,
 ) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from files, auto-infering location.
 
@@ -162,13 +160,11 @@ def builder_from_files(
     return builder_from_directory(builder_dir)
   else:
     data_dirs = constants.list_data_dirs(
-        given_data_dir=builder_kwargs.get('data_dir')
-    )
+        given_data_dir=builder_kwargs.get('data_dir'))
     raise registered.DatasetNotFoundError(
         f'Could not find dataset files for: {name}. Make sure the dataset '
         f'has been generated in: {data_dirs}. If the dataset has configs, you '
-        'might have to specify the config name.'
-    )
+        'might have to specify the config name.')
 
 
 def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
@@ -193,8 +189,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   """
   # Normalize builder kwargs
   name, builder_kwargs = naming.parse_builder_name_kwargs(
-      name, **builder_kwargs
-  )
+      name, **builder_kwargs)
   version = builder_kwargs.pop('version', None)
   config = builder_kwargs.pop('config', None)
   data_dir = builder_kwargs.pop('data_dir', None)
@@ -204,12 +199,8 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   # * version='experimental_latest'
   # * config objects (rather than `str`)
   # * custom DatasetBuilder.__init__ kwargs
-  if (
-      name.namespace
-      or version == 'experimental_latest'
-      or isinstance(config, dataset_builder.BuilderConfig)
-      or builder_kwargs
-  ):
+  if (name.namespace or version == 'experimental_latest' or
+      isinstance(config, dataset_builder.BuilderConfig) or builder_kwargs):
     return None
 
   # Search the dataset across all registered data_dirs
@@ -238,8 +229,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
     # ```
     raise ValueError(
         f'Dataset {name} detected in multiple locations: {all_builder_dirs}. '
-        'Please resolve the ambiguity by explicitly setting `data_dir=`.'
-    )
+        'Please resolve the ambiguity by explicitly setting `data_dir=`.')
   else:
     return next(iter(all_builder_dirs))  # List has a single element
 

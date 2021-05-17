@@ -53,7 +53,6 @@ from tensorflow_datasets.core.utils import type_utils
 
 from google.protobuf import json_format
 
-
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
 LICENSE_FILENAME = "LICENSE"
@@ -74,32 +73,32 @@ class DatasetInfo(object):
   builder.download_and_prepare()`).
   """
 
-  def __init__(self,
-               *,
-               builder,
-               description=None,
-               features=None,
-               supervised_keys=None,
-               disable_shuffling: bool = False,
-               homepage=None,
-               citation=None,
-               metadata=None,
-               license: Optional[str] = None,  # pylint: disable=redefined-builtin
-               redistribution_info=None):
+  def __init__(
+      self,
+      *,
+      builder,
+      description=None,
+      features=None,
+      supervised_keys=None,
+      disable_shuffling: bool = False,
+      homepage=None,
+      citation=None,
+      metadata=None,
+      license: Optional[str] = None,  # pylint: disable=redefined-builtin
+      redistribution_info=None):
     """Constructs DatasetInfo.
 
     Args:
       builder: `DatasetBuilder`, dataset builder for this info.
       description: `str`, description of this dataset.
-      features: `tfds.features.FeaturesDict`, Information on the feature dict
-        of the `tf.data.Dataset()` object from the `builder.as_dataset()`
-        method.
-      supervised_keys: `tuple` of `(input_key, target_key)`, Specifies the
-        input feature and the label for supervised learning, if applicable for
-        the dataset. The keys correspond to the feature names to select in
+      features: `tfds.features.FeaturesDict`, Information on the feature dict of
+        the `tf.data.Dataset()` object from the `builder.as_dataset()` method.
+      supervised_keys: `tuple` of `(input_key, target_key)`, Specifies the input
+        feature and the label for supervised learning, if applicable for the
+        dataset. The keys correspond to the feature names to select in
         `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
-        with `as_supervised=True`, the `tf.data.Dataset` object will yield
-        the (input, target) defined here.
+        with `as_supervised=True`, the `tf.data.Dataset` object will yield the
+        (input, target) defined here.
       disable_shuffling: `bool`, specify whether to shuffle the examples.
       homepage: `str`, optional, the homepage for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
@@ -213,9 +212,8 @@ class DatasetInfo(object):
   def download_size(self) -> utils.Size:
     """Downloaded files size, in bytes."""
     # Fallback to deprecated `size_in_bytes` if `download_size` is empty.
-    return utils.Size(
-        self.as_proto.download_size or self.as_proto.size_in_bytes
-    )
+    return utils.Size(self.as_proto.download_size or
+                      self.as_proto.size_in_bytes)
 
   @download_size.setter
   def download_size(self, size):
@@ -253,26 +251,23 @@ class DatasetInfo(object):
     if self._builder.name != split_dict._dataset_name:  # pylint: disable=protected-access
       raise AssertionError(
           "SplitDict dataset_name does not seems to match dataset_info. "  # pylint: disable=protected-access
-          f"{self._builder.name} != {split_dict._dataset_name}"
-      )
+          f"{self._builder.name} != {split_dict._dataset_name}")
 
     # If the statistics have been pre-loaded, forward the statistics
     # into the new split_dict
     new_split_infos = []
     for split_info in split_dict.values():
       old_split_info = self._splits.get(split_info.name)
-      if (
-          not split_info.statistics.ByteSize()
-          and old_split_info
-          and old_split_info.statistics.ByteSize()
-          and old_split_info.shard_lengths == split_info.shard_lengths
-      ):
+      if (not split_info.statistics.ByteSize() and old_split_info and
+          old_split_info.statistics.ByteSize() and
+          old_split_info.shard_lengths == split_info.shard_lengths):
         split_info = split_info.replace(statistics=old_split_info.statistics)
       new_split_infos.append(split_info)
 
     # Update the dictionary representation.
     self._splits = splits_lib.SplitDict(
-        new_split_infos, dataset_name=self._builder.name,
+        new_split_infos,
+        dataset_name=self._builder.name,
     )
 
     # Update the proto
@@ -370,8 +365,7 @@ class DatasetInfo(object):
           "Try to load `DatasetInfo` from a directory which does not exist or "
           "does not contain `dataset_info.json`. Please delete the directory "
           f"`{dataset_info_dir}`  if you are trying to re-generate the "
-          "dataset."
-      )
+          "dataset.")
 
     # Load the metadata from disk
     parsed_proto = read_from_json(json_filename)
@@ -386,13 +380,10 @@ class DatasetInfo(object):
     # For `ReadOnlyBuilder`, reconstruct the features from the config.
     elif tf.io.gfile.exists(feature_lib.make_config_path(dataset_info_dir)):
       self._features = feature_lib.FeatureConnector.from_config(
-          dataset_info_dir
-      )
+          dataset_info_dir)
     # Restore the MetaDataDict from metadata.json if there is any
-    if (
-        self.metadata is not None
-        or tf.io.gfile.exists(_metadata_filepath(dataset_info_dir))
-    ):
+    if (self.metadata is not None or
+        tf.io.gfile.exists(_metadata_filepath(dataset_info_dir))):
       # If the dataset was loaded from file, self.metadata will be `None`, so
       # we create a MetadataDict first.
       if self.metadata is None:
@@ -449,8 +440,9 @@ class DatasetInfo(object):
     data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
     if not data_files:
       return
-    logging.info("Load pre-computed DatasetInfo (eg: splits, num examples,...) "
-                 "from GCS: %s", self.full_name)
+    logging.info(
+        "Load pre-computed DatasetInfo (eg: splits, num examples,...) "
+        "from GCS: %s", self.full_name)
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
       tf.io.gfile.copy(os.fspath(gcs_utils.gcs_path(fname)), out_fname)
@@ -460,15 +452,13 @@ class DatasetInfo(object):
     SKIP = object()  # pylint: disable=invalid-name
 
     splits = _indent("\n".join(
-        ["{"]
-        + [f"    '{k}': {split}," for k, split in sorted(self.splits.items())]
-        + ["}"]
-    ))
+        ["{"] +
+        [f"    '{k}': {split}," for k, split in sorted(self.splits.items())] +
+        ["}"]))
 
     if self._info_proto.config_description:
       config_description = _indent(
-          f'"""\n{self._info_proto.config_description}\n"""'
-      )
+          f'"""\n{self._info_proto.config_description}\n"""')
     else:
       config_description = SKIP
 
@@ -527,12 +517,13 @@ def get_dataset_feature_statistics(builder, split):
   if filetype_suffix not in ["tfrecord", "csv"]:
     raise ValueError(
         "Cannot generate statistics for filetype {}".format(filetype_suffix))
-  filepattern = naming.filepattern_for_dataset_split(
-      builder.name, split, builder.data_dir, filetype_suffix)
+  filepattern = naming.filepattern_for_dataset_split(builder.name, split,
+                                                     builder.data_dir,
+                                                     filetype_suffix)
   # Avoid generating a large number of buckets in rank histogram
   # (default is 1000).
-  stats_options = tfdv.StatsOptions(num_top_values=10,
-                                    num_rank_histogram_buckets=10)
+  stats_options = tfdv.StatsOptions(
+      num_top_values=10, num_rank_histogram_buckets=10)
   if filetype_suffix == "csv":
     statistics = tfdv.generate_statistics_from_csv(
         filepattern, stats_options=stats_options)
@@ -564,11 +555,8 @@ def pack_as_supervised_ds(
     ds_info: DatasetInfo,
 ) -> tf.data.Dataset:
   """Pack `(input, label)` dataset as `{'key0': input, 'key1': label}`."""
-  if (
-      ds_info.supervised_keys
-      and isinstance(ds.element_spec, tuple)
-      and len(ds.element_spec) == 2
-  ):
+  if (ds_info.supervised_keys and isinstance(ds.element_spec, tuple) and
+      len(ds.element_spec) == 2):
     x_key, y_key = ds_info.supervised_keys
     ds = ds.map(lambda x, y: {x_key: x, y_key: y})
     return ds
@@ -655,12 +643,12 @@ class BeamMetadataDict(MetadataDict):
           "`tfds.core.BeamMetadataDict` can\'t be used on `beam.PTransform`, "
           "only on `beam.PCollection`. See `_generate_examples` doc on how "
           "to use `beam.PCollection`, or wrap your `_generate_examples` inside "
-          f"a @beam.ptransform_fn. Got: {key}: {item}"
-      )
+          f"a @beam.ptransform_fn. Got: {key}: {item}")
     elif isinstance(item, beam.pvalue.PValue):
       if key in self:
         raise ValueError("Already added PValue with key: %s" % key)
       logging.info("Lazily adding metadata item with Beam: %s", key)
+
       def _to_json(item_list):
         if len(item_list) != 1:
           raise ValueError(
@@ -668,6 +656,7 @@ class BeamMetadataDict(MetadataDict):
               len(item_list))
         item = item_list[0]
         return json.dumps(item)
+
       _ = (
           item
           | "metadata_%s_tolist" % key >> beam.combiners.ToList()
@@ -676,8 +665,7 @@ class BeamMetadataDict(MetadataDict):
               self._temp_filepath(key),
               num_shards=1,
               shard_name_template="",
-          )
-      )
+          ))
     super(BeamMetadataDict, self).__setitem__(key, item)
 
   def save_metadata(self, data_dir):

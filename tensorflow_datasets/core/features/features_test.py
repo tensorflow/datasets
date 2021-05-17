@@ -14,9 +14,7 @@
 # limitations under the License.
 
 # coding=utf-8
-"""Tests for tensorflow_datasets.core.features.feature.
-
-"""
+"""Tests for tensorflow_datasets.core.features.feature."""
 
 import textwrap
 import numpy as np
@@ -44,10 +42,7 @@ class AnInputConnector(features_lib.FeatureConnector):
 
   def encode_example(self, example_data):
     # Encode take the input data and wrap in in a dict
-    return {
-        'a': example_data + 1,
-        'b': example_data * 10
-    }
+    return {'a': example_data + 1, 'b': example_data * 10}
 
   def decode_example(self, tfexample_dict):
     # Merge the two values
@@ -177,8 +172,7 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
                             'height': 256,
                             'width': 128,
                         },
-                        'metadata/path':
-                            tf.compat.as_bytes('path/to/xyz.jpg'),
+                        'metadata/path': tf.compat.as_bytes('path/to/xyz.jpg'),
                     },
                 },
             ),
@@ -197,10 +191,12 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
 
     label = features_lib.ClassLabel(names=['m', 'f'])
     feature_dict = features_lib.FeaturesDict({
-        'metadata': features_lib.Sequence({
-            'frame': features_lib.Image(shape=(32, 32, 3)),
-        }),
-        'label': features_lib.Sequence(label),
+        'metadata':
+            features_lib.Sequence({
+                'frame': features_lib.Image(shape=(32, 32, 3)),
+            }),
+        'label':
+            features_lib.Sequence(label),
     })
 
     self.assertEqual(
@@ -285,13 +281,11 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
             ),
             # Invalid shape
             testing.FeatureExpectationItem(
-                value=
-                np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
+                value=np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
             ),
-        ]
-    )
+        ])
 
   def test_bool_flat(self):
 
@@ -316,8 +310,7 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
                 value=False,
                 expected=False,
             ),
-        ]
-    )
+        ])
 
   def test_bool_array(self):
 
@@ -334,8 +327,7 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
                 value=[True, False, True],
                 expected=[True, False, True],
             ),
-        ]
-    )
+        ])
 
   def test_string(self):
     nonunicode_text = 'hello world'
@@ -412,13 +404,14 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
       pass
 
     self.assertEqual(
-        repr(features_lib.FeaturesDict({
-            'colapsed': features_lib.Tensor(shape=(), dtype=tf.int32),
-            # Tensor with defined shape are printed expanded
-            'noncolapsed': features_lib.Tensor(shape=(1,), dtype=tf.int32),
-            # Tensor inherited are expanded
-            'child': ChildTensor(shape=(), dtype=tf.int32),
-        })),
+        repr(
+            features_lib.FeaturesDict({
+                'colapsed': features_lib.Tensor(shape=(), dtype=tf.int32),
+                # Tensor with defined shape are printed expanded
+                'noncolapsed': features_lib.Tensor(shape=(1,), dtype=tf.int32),
+                # Tensor inherited are expanded
+                'child': ChildTensor(shape=(), dtype=tf.int32),
+            })),
         textwrap.dedent("""\
         FeaturesDict({
             'child': ChildTensor(shape=(), dtype=tf.int32),

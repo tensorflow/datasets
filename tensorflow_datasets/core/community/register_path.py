@@ -59,8 +59,8 @@ class DataDirRegister(register_base.BaseRegister):
     """Contructor.
 
     Args:
-      path: Path to the register files containing the mapping
-        namespace -> data_dir
+      path: Path to the register files containing the mapping namespace ->
+        data_dir
     """
     self._path: utils.ReadOnlyPath = utils.as_path(path)
 
@@ -84,49 +84,45 @@ class DataDirRegister(register_base.BaseRegister):
     return sorted(_iter_builder_names(self._ns2data_dir))
 
   def builder_cls(
-      self, name: utils.DatasetName,
+      self,
+      name: utils.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the builder classes."""
     if name.namespace not in self.namespaces:  # pylint: disable=unsupported-membership-test
       raise registered.DatasetNotFoundError(
           f'Namespace {name.namespace} not found. Should be one of: '
-          f'{sorted(self.namespaces)}'
-      )
+          f'{sorted(self.namespaces)}')
     raise NotImplementedError(
         'builder_cls does not support data_dir-based community datasets. Got: '
-        f'{name}'
-    )
+        f'{name}')
 
   def builder(
-      self, name: utils.DatasetName, **builder_kwargs: Any,
+      self,
+      name: utils.DatasetName,
+      **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
     data_dir = builder_kwargs.pop('data_dir', None)
     if data_dir:
       raise ValueError(
           '`data_dir` cannot be set for data_dir-based community datasets. '
-          f'Dataset should already be generated. Got: {data_dir}'
-      )
+          f'Dataset should already be generated. Got: {data_dir}')
     if name.namespace is None:
       raise AssertionError(f'No namespace found: {name}')
     if name.namespace not in self._ns2data_dir:  # pylint: disable=unsupported-membership-test
       close_matches = difflib.get_close_matches(
-          name.namespace, self._ns2data_dir, n=1
-      )
+          name.namespace, self._ns2data_dir, n=1)
       hint = f'\nDid you mean: {close_matches[0]}' if close_matches else ''
-      raise KeyError(
-          f'Namespace `{name.namespace}` for `{name}` not found. '
-          f'Should be one of {sorted(self._ns2data_dir)}{hint}'
-      )
+      raise KeyError(f'Namespace `{name.namespace}` for `{name}` not found. '
+                     f'Should be one of {sorted(self._ns2data_dir)}{hint}')
     return read_only_builder.builder_from_files(
         name.name,
         data_dir=self._ns2data_dir[name.namespace],
         **builder_kwargs,
     )
 
-  def get_builder_root_dir(
-      self, name: utils.DatasetName
-  ) -> utils.ReadWritePath:
+  def get_builder_root_dir(self,
+                           name: utils.DatasetName) -> utils.ReadWritePath:
     """Returns root dir of the generated builder (without version/config)."""
     return self._ns2data_dir[name.namespace] / name.name
 
@@ -147,20 +143,18 @@ def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:
 
 
 def _iter_builder_names(
-    ns2data_dir: Dict[str, utils.ReadOnlyPath],
-) -> Iterator[str]:
+    ns2data_dir: Dict[str, utils.ReadOnlyPath],) -> Iterator[str]:
   """Yields the `ns:name` dataset names."""
   FILTERED_DIRNAME = frozenset(('downloads',))  # pylint: disable=invalid-name
 
   def _is_valid_dataset_name(dataset_name: str) -> bool:
-    return (
-        dataset_name not in FILTERED_DIRNAME
-        and naming.is_valid_dataset_name(dataset_name)
-    )
+    return (dataset_name not in FILTERED_DIRNAME and
+            naming.is_valid_dataset_name(dataset_name))
 
   # For better performances, load all namespaces asynchonously
   def _get_builder_names_single_namespace(
-      ns_name: str, data_dir: utils.ReadOnlyPath,
+      ns_name: str,
+      data_dir: utils.ReadOnlyPath,
   ) -> List[str]:
     # Note: `data_dir` might contain non-dataset folders, but checking
     # individual dataset would have significant performance drop, so

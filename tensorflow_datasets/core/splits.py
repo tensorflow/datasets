@@ -15,7 +15,6 @@
 
 """Splits related API."""
 
-
 import typing
 from typing import Any, List, Optional, Union
 
@@ -45,8 +44,7 @@ class SplitInfo:
   shard_lengths: List[int]
   num_bytes: int
   statistics: statistics_pb2.DatasetFeatureStatistics = dataclasses.field(
-      default_factory=statistics_pb2.DatasetFeatureStatistics,
-  )
+      default_factory=statistics_pb2.DatasetFeatureStatistics,)
   # Inside `SplitDict`, `SplitInfo` has additional arguments required for
   # `file_instructions`
   # Rather than `dataset_name`, should use a structure containing file format,
@@ -188,7 +186,8 @@ class Split(str):
     you do not want to use this during model iteration as you may overfit to it.
 
   See the
-  [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+  [guide on
+  splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
   for more information.
   """
 
@@ -216,16 +215,14 @@ class SplitDict(utils.NonMutableDict):
 
     super(SplitDict, self).__init__(
         {split_info.name: split_info for split_info in split_infos},
-        error_msg="Split {key} already present"
-    )
+        error_msg="Split {key} already present")
     self._dataset_name = dataset_name
 
   def __getitem__(self, key):
     if not self:
       raise KeyError(
           f"Trying to access `splits[{key!r}]` but `splits` is empty. "
-          "This likely indicate the dataset has not been generated yet."
-      )
+          "This likely indicate the dataset has not been generated yet.")
     # 1st case: The key exists: `info.splits['train']`
     elif str(key) in self:
       return super(SplitDict, self).__getitem__(str(key))
@@ -278,6 +275,4 @@ def even_splits(
   if n <= 0 or n > 100:
     raise ValueError(f"n should be > 0 and <= 100. Got {n}")
   partitions = [round(i * 100 / n) for i in range(n + 1)]
-  return [
-      f"{split}[{partitions[i]}%:{partitions[i+1]}%]" for i in range(n)
-  ]
+  return [f"{split}[{partitions[i]}%:{partitions[i+1]}%]" for i in range(n)]

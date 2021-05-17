@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""As dataframe util.
-"""
+"""As dataframe util."""
 
 import typing
 from typing import Any, Callable, Dict, List, Optional, Tuple
@@ -36,10 +35,8 @@ try:
 except ImportError:
   DataFrame = object
 
-
 # Should be `pandas.io.formats.style.Styler`, but is a costly import
 Styler = Any
-
 
 TreeDict = type_utils.TreeDict
 
@@ -86,11 +83,9 @@ class ColumnInfo:
       try:
         return repr_fn(val)
       except Exception as e:  # pylint: disable=broad-except
-        err_msg = (
-            f'HTML formatting of column {name} failed:\n'
-            f' * feature: {feature}\n'
-            f' * input: {val!r}\n'
-        )
+        err_msg = (f'HTML formatting of column {name} failed:\n'
+                   f' * feature: {feature}\n'
+                   f' * input: {val!r}\n')
         py_utils.reraise(e, prefix=err_msg)
 
     return ColumnInfo(
@@ -141,6 +136,7 @@ class StyledDataFrame(DataFrame):
   ```
 
   """
+
   # StyledDataFrame could be improved such as the style is forwarded when
   # selecting sub-data frames.
 

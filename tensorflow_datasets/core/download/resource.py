@@ -35,7 +35,6 @@ from tensorflow_datasets.core.utils import type_utils
 # Should be `Union[int, float, bool, str, Dict[str, Json], List[Json]]`
 Json = Any
 
-
 _hex_codec = codecs.getdecoder('hex_codec')
 
 
@@ -64,9 +63,9 @@ _EXTRACTION_METHOD_TO_EXTS = [
     (ExtractMethod.BZIP2, ['.bz2']),
 ]
 
-_KNOWN_EXTENSIONS = [
-    ext_ for ext_ in itertools.chain(  # pylint: disable=g-complex-comprehension
-        *[extensions_ for _, extensions_ in _EXTRACTION_METHOD_TO_EXTS])]
+_KNOWN_EXTENSIONS = list(
+    itertools.chain(  # pylint: disable=g-complex-comprehension
+        *[extensions_ for _, extensions_ in _EXTRACTION_METHOD_TO_EXTS]))
 
 _NETLOC_COMMON_PREFIXES = [
     'www.',
@@ -219,8 +218,7 @@ def rename_info_file(
     overwrite: bool = False,
 ) -> None:
   tf.io.gfile.rename(
-      _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite
-  )
+      _get_info_path(src_path), _get_info_path(dst_path), overwrite=overwrite)
 
 
 @synchronize_decorator
@@ -263,8 +261,8 @@ def write_info_file(
   if info.get('url_info', url_info_dict) != url_info_dict:
     raise ValueError(
         'File info {} contains a different checksum that the downloaded one: '
-        'Stored: {}; Expected: {}'.format(
-            info_path, info['url_info'], url_info_dict))
+        'Stored: {}; Expected: {}'.format(info_path, info['url_info'],
+                                          url_info_dict))
   info = dict(
       urls=list(urls),
       dataset_names=list(set(dataset_names)),
@@ -298,8 +296,8 @@ class Resource(object):
 
     Args:
       url: `str`, the URL at which to download the resource.
-      extract_method: `ExtractMethod` to be used to extract resource. If
-        not set, will be guessed from downloaded file name `original_fname`.
+      extract_method: `ExtractMethod` to be used to extract resource. If not
+        set, will be guessed from downloaded file name `original_fname`.
       path: `str`, path of resource on local disk. Can be None if resource has
         not be downloaded yet. In such case, `url` must be set.
     """

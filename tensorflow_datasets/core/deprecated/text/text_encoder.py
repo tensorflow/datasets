@@ -36,11 +36,13 @@ ALL_REGEX = _re_compile(r"(\W+)")
 
 
 
-
 class TextEncoderConfig(object):
   """Configuration for `tfds.features.Text`."""
 
-  def __init__(self, encoder=None, encoder_cls=None, vocab_size=None,
+  def __init__(self,
+               encoder=None,
+               encoder_cls=None,
+               vocab_size=None,
                name=None):
     if encoder:
       if (encoder_cls or vocab_size):
@@ -145,8 +147,9 @@ class ByteTextEncoder(TextEncoder):
       tok_id = self._additional_token_to_id.get(substr)
       if tok_id is None:
         offset = len(self.additional_tokens)
-        tok_ids = [i + offset for i in
-                   list(bytearray(tf.compat.as_bytes(substr)))]
+        tok_ids = [
+            i + offset for i in list(bytearray(tf.compat.as_bytes(substr)))
+        ]
       else:
         tok_ids = [tok_id]
       ids.extend(tok_ids)
@@ -360,9 +363,9 @@ class Tokenizer(object):
 
     Args:
       alphanum_only: `bool`, if `True`, only parse out alphanumeric tokens
-        (non-alphanumeric characters are dropped);
-        otherwise, keep all characters (individual tokens will still be either
-        all alphanumeric or all non-alphanumeric).
+        (non-alphanumeric characters are dropped); otherwise, keep all
+        characters (individual tokens will still be either all alphanumeric or
+        all non-alphanumeric).
       reserved_tokens: `list<str>`, a list of strings that, if any are in `s`,
         will be preserved as whole tokens, even if they contain mixed
         alphanumeric/non-alphanumeric characters.

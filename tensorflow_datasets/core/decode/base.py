@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Base decoders.
-"""
+"""Base decoders."""
 
 import abc
 import functools
@@ -59,7 +58,6 @@ class Decoder(object):
     Args:
       feature: `tfds.features.FeatureConnector`, the feature to which is applied
         this transformation.
-
     """
     self.feature = feature
 
@@ -141,8 +139,8 @@ class DecoderFn(Decoder):
 
   def decode_example(self, serialized_example):
     """Decode the example using the function."""
-    return self._fn(
-        serialized_example, self.feature, *self._args, **self._kwargs)
+    return self._fn(serialized_example, self.feature, *self._args,
+                    **self._kwargs)
 
 
 def make_decoder(output_dtype=None):
@@ -182,6 +180,7 @@ def make_decoder(output_dtype=None):
     @functools.wraps(fn)
     def decorated(*args, **kwargs):
       return DecoderFn(fn, output_dtype, *args, **kwargs)
+
     return decorated
 
   return decorator

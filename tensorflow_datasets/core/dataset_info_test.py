@@ -41,7 +41,6 @@ _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
                                    "dataset_info", "mnist_unlabeled", "3.0.1")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
-
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
 
@@ -112,9 +111,7 @@ class DatasetInfoTest(testing.TestCase):
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
-    self.assertEqual(
-        info.module_name, "tensorflow_datasets.testing.test_utils"
-    )
+    self.assertEqual(info.module_name, "tensorflow_datasets.testing.test_utils")
     self.assertEqual(False, info.disable_shuffling)
 
   def test_disable_shuffling(self):
@@ -205,8 +202,7 @@ class DatasetInfoTest(testing.TestCase):
           supervised_keys=("input (new)", "output (new)"),
           homepage="http://some-location-new",
           citation="some citation (new)",
-          redistribution_info={"license": "some license (new)"}
-      )
+          redistribution_info={"license": "some license (new)"})
       restored_info.download_size = 789
       restored_info.as_proto.splits.add(name="validation", num_bytes=288)
       restored_info.as_proto.schema.feature.add()
@@ -223,8 +219,8 @@ class DatasetInfoTest(testing.TestCase):
       # Even though restored_info has been restored, informations defined in
       # the code overwrite informations from the json file.
       self.assertEqual(restored_info.description, "A description")
-      self.assertEqual(
-          restored_info.supervised_keys, ("input (new)", "output (new)"))
+      self.assertEqual(restored_info.supervised_keys,
+                       ("input (new)", "output (new)"))
       self.assertEqual(restored_info.homepage, "http://some-location-new")
       self.assertEqual(restored_info.citation, "some citation (new)")
       self.assertEqual(restored_info.redistribution_info.license,
@@ -260,9 +256,7 @@ class DatasetInfoTest(testing.TestCase):
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       builder.download_and_prepare(
           download_config=download.DownloadConfig(
-              compute_stats=download.ComputeStatsMode.AUTO,
-          ),
-      )
+              compute_stats=download.ComputeStatsMode.AUTO,),)
 
       # Overall
       self.assertEqual(30, builder.info.splits.total_num_examples)
@@ -270,7 +264,8 @@ class DatasetInfoTest(testing.TestCase):
       # Per split.
       test_split = builder.info.splits["test"].to_proto()
       train_split = builder.info.splits["train"].to_proto()
-      expected_schema = text_format.Parse("""
+      expected_schema = text_format.Parse(
+          """
       feature {
         name: "x"
         type: INT
@@ -286,23 +281,19 @@ class DatasetInfoTest(testing.TestCase):
       }""", schema_pb2.Schema())
       self.assertEqual(train_split.statistics.num_examples, 20)
       self.assertLen(train_split.statistics.features, 1)
-      self.assertEqual(
-          train_split.statistics.features[0].path.step[0], "x")
+      self.assertEqual(train_split.statistics.features[0].path.step[0], "x")
       self.assertLen(
-          train_split.statistics.features[0].num_stats.common_stats.
-          num_values_histogram.buckets, 10)
-      self.assertLen(
-          train_split.statistics.features[0].num_stats.histograms, 2)
+          train_split.statistics.features[0].num_stats.common_stats
+          .num_values_histogram.buckets, 10)
+      self.assertLen(train_split.statistics.features[0].num_stats.histograms, 2)
 
       self.assertEqual(test_split.statistics.num_examples, 10)
       self.assertLen(test_split.statistics.features, 1)
-      self.assertEqual(
-          test_split.statistics.features[0].path.step[0], "x")
+      self.assertEqual(test_split.statistics.features[0].path.step[0], "x")
       self.assertLen(
-          test_split.statistics.features[0].num_stats.common_stats.
-          num_values_histogram.buckets, 10)
-      self.assertLen(
-          test_split.statistics.features[0].num_stats.histograms, 2)
+          test_split.statistics.features[0].num_stats.common_stats
+          .num_values_histogram.buckets, 10)
+      self.assertLen(test_split.statistics.features[0].num_stats.histograms, 2)
       self.assertEqual(builder.info.as_proto.schema, expected_schema)
 
   @testing.run_in_graph_and_eager_modes()
@@ -311,9 +302,7 @@ class DatasetInfoTest(testing.TestCase):
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
       builder.download_and_prepare(
           download_config=download.DownloadConfig(
-              compute_stats=download.ComputeStatsMode.AUTO,
-          ),
-      )
+              compute_stats=download.ComputeStatsMode.AUTO,),)
 
       expected_schema = text_format.Parse(
           """
@@ -359,8 +348,8 @@ feature {
 
   def test_updates_on_bucket_info(self):
 
-    info = dataset_info.DatasetInfo(builder=self._builder,
-                                    description="won't be updated")
+    info = dataset_info.DatasetInfo(
+        builder=self._builder, description="won't be updated")
     # No statistics in the above.
     self.assertEqual(0, info.splits.total_num_examples)
     self.assertEqual(0, len(info.as_proto.schema.feature))
@@ -409,7 +398,6 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     redistribution_info=license: "test license",
 )'''
 # pylint: enable=g-inconsistent-quotes
-
 
 if __name__ == "__main__":
   testing.test_main()

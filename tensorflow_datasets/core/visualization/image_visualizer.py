@@ -34,13 +34,13 @@ def _make_grid(plot_single_ex_fn, ds, rows, cols, plot_scale):
     plot_single_ex_fn: Function with fill a single cell of the grid, with
       signature `fn(ax: matplotlib.axes.Axes, ex: Nested[np.array]) -> None`
     ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
-      should not be batched. Examples will be consumed in order until
-      (rows * cols) are read or the dataset is consumed.
+      should not be batched. Examples will be consumed in order until (rows *
+      cols) are read or the dataset is consumed.
     rows: `int`, number of rows of the display grid.
     cols: `int`, number of columns of the display grid.
-    plot_scale: `float`, controls the plot size of the images. Keep this
-      value around 3 to get a good plot. High and low values may cause
-      the labels to get overlapped.
+    plot_scale: `float`, controls the plot size of the images. Keep this value
+      around 3 to get a good plot. High and low values may cause the labels to
+      get overlapped.
 
   Returns:
     fig: The `matplotlib.Figure` object.
@@ -54,7 +54,7 @@ def _make_grid(plot_single_ex_fn, ds, rows, cols, plot_scale):
   fig.subplots_adjust(hspace=1 / plot_scale, wspace=1 / plot_scale)
 
   for i, ex in enumerate(examples):
-    ax = fig.add_subplot(rows, cols, i+1)
+    ax = fig.add_subplot(rows, cols, i + 1)
     plot_single_ex_fn(ax, ex)
 
   plt.show()
@@ -100,16 +100,16 @@ class ImageGridVisualizer(visualizer.Visualizer):
 
     Args:
       ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
-        should not be batched. Examples will be consumed in order until
-        (rows * cols) are read or the dataset is consumed.
+        should not be batched. Examples will be consumed in order until (rows *
+        cols) are read or the dataset is consumed.
       ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
       rows: `int`, number of rows of the display grid.
       cols: `int`, number of columns of the display grid.
-      plot_scale: `float`, controls the plot size of the images. Keep this
-        value around 3 to get a good plot. High and low values may cause
-        the labels to get overlapped.
+      plot_scale: `float`, controls the plot size of the images. Keep this value
+        around 3 to get a good plot. High and low values may cause the labels to
+        get overlapped.
       image_key: `string`, name of the feature that contains the image. If not
-         set, the system will try to auto-detect it.
+        set, the system will try to auto-detect it.
 
     Returns:
       fig: The pyplot figure.
@@ -125,8 +125,8 @@ class ImageGridVisualizer(visualizer.Visualizer):
       image_key = image_keys[0]
 
     # Optionally extract the label key
-    label_keys = visualizer.extract_keys(
-        ds_info.features, features_lib.ClassLabel)
+    label_keys = visualizer.extract_keys(ds_info.features,
+                                         features_lib.ClassLabel)
     label_key = label_keys[0] if len(label_keys) == 1 else None
     if not label_key:
       logging.info('Was not able to auto-infer label.')

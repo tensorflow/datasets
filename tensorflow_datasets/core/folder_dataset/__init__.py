@@ -24,7 +24,6 @@ with registered.skip_registration():
   from tensorflow_datasets.core.folder_dataset.translate_folder import TranslateFolder
   # pylint: enable=g-import-not-at-top
 
-
 __all__ = [
     "ImageFolder",
     "TranslateFolder",

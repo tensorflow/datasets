@@ -45,21 +45,18 @@ class _IterableDataset(collections.abc.Iterable):
       **kwargs: Any,
   ):
     self._ds = ds
-    self._make_iterator_fn = functools.partial(
-        make_iterator_fn, ds, *args, **kwargs
-    )
+    self._make_iterator_fn = functools.partial(make_iterator_fn, ds, *args,
+                                               **kwargs)
 
   def __len__(self) -> int:
     """Dataset length."""
     if isinstance(self._ds, tf.data.Dataset):
       return len(self._ds)
     else:
-      raise TypeError(
-          '__len__() is not supported for `tfds.as_numpy` datasets '
-          'created in graph mode.'
-      )
+      raise TypeError('__len__() is not supported for `tfds.as_numpy` datasets '
+                      'created in graph mode.')
 
-  def __iter__(self) ->  Iterator[NumpyElem]:
+  def __iter__(self) -> Iterator[NumpyElem]:
     """Calling `iter(ds)` multiple times recreates a new iterator."""
     return self._make_iterator_fn()
 
@@ -96,15 +93,12 @@ def _graph_dataset_iterator(ds_iter, graph: tf.Graph) -> Iterator[NumpyElem]:
 def _assert_ds_types(nested_ds: Tree[TensorflowElem]) -> None:
   """Assert all inputs are from valid types."""
   for el in tf.nest.flatten(nested_ds):
-    if not (
-        isinstance(el, (tf.Tensor, tf.RaggedTensor))
-        or tf_compat.is_dataset(el)
-    ):
+    if not (isinstance(el, (tf.Tensor, tf.RaggedTensor)) or
+            tf_compat.is_dataset(el)):
       nested_types = tf.nest.map_structure(type, nested_ds)
       raise TypeError(
           'Arguments to as_numpy must be tf.Tensors or tf.data.Datasets. '
-          f'Got: {nested_types}.'
-      )
+          f'Got: {nested_types}.')
 
 
 def _elem_to_numpy_eager(tf_el: TensorflowElem) -> NumpyElem:
@@ -193,5 +187,7 @@ def dataset_shape_is_fully_defined(ds):
 
 
 def features_shape_is_fully_defined(features):
-  return all([tf.TensorShape(info.shape).is_fully_defined() for info in
-              tf.nest.flatten(features.get_tensor_info())])
+  return all([
+      tf.TensorShape(info.shape).is_fully_defined()
+      for info in tf.nest.flatten(features.get_tensor_info())
+  ])

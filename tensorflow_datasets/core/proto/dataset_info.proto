@@ -2,12 +2,13 @@
 // splits.
 
 syntax = "proto3";
-option cc_enable_arenas = true;
 
 package tensorflow_datasets;
 
-import "tensorflow_metadata/proto/v0/statistics.proto";
 import "tensorflow_metadata/proto/v0/schema.proto";
+import "tensorflow_metadata/proto/v0/statistics.proto";
+
+option cc_enable_arenas = true;
 
 // Message to represent location of a dataset, for now just has a url field, but
 // can internally have folders etc.
@@ -69,7 +70,7 @@ message DatasetInfo {
 
   // DEPRECATED
   // *Approximate* size in bytes of this dataset on disk.
-  int64 size_in_bytes = 4 [deprecated=true];
+  int64 size_in_bytes = 4 [deprecated = true];
 
   // Size in bytes of downloaded files.
   int64 download_size = 12;
@@ -79,7 +80,7 @@ message DatasetInfo {
 
   // DEPRECATED
   // Checksums of resources: URL to checksum of resource at URL.
-  map<string, string> download_checksums = 10 [deprecated=true];
+  map<string, string> download_checksums = 10 [deprecated = true];
 
   // The schema of the dataset.
   tensorflow.metadata.v0.Schema schema = 6;

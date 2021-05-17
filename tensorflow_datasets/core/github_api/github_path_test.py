@@ -25,20 +25,18 @@ import pytest
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.github_api import github_path
 
-
 _SKIP_NON_HERMETIC = False
 
 # Non hermetic tests are explicitly marked and skipped if `_SKIP_NON_HERMETIC`
 # is True.
 non_hermetic_test = pytest.mark.skipif(
-    _SKIP_NON_HERMETIC, reason='Non-hermetic test skipped.',
+    _SKIP_NON_HERMETIC,
+    reason='Non-hermetic test skipped.',
 )
 
 _original_query_github = github_path._PathMetadata._query_github
 
-
-_AUTHOR_EXPECTED_CONTENT = textwrap.dedent(
-    """\
+_AUTHOR_EXPECTED_CONTENT = textwrap.dedent("""\
     # This is the list of TensorFlow Datasets authors for copyright purposes.
     #
     # This does not necessarily list everyone who has contributed code, since in
@@ -46,9 +44,7 @@ _AUTHOR_EXPECTED_CONTENT = textwrap.dedent(
     # of contributors, see the revision history in source control.
 
     Google Inc.
-    """
-)
-
+    """)
 
 # Note: assert_no_api_call is globally applied on all tests (in conftest.py)
 
@@ -56,9 +52,8 @@ _AUTHOR_EXPECTED_CONTENT = textwrap.dedent(
 @contextlib.contextmanager
 def enable_api_call():
   """Contextmanager which locally re-enable API calls."""
-  with mock.patch.object(
-      github_path._PathMetadata, '_query_github', _original_query_github
-  ):
+  with mock.patch.object(github_path._PathMetadata, '_query_github',
+                         _original_query_github):
     yield
 
 
@@ -96,19 +91,15 @@ def test_invalid_github_path():
     _ = github_path.GithubPath('github://not/a/path')
 
   with pytest.raises(ValueError, match='Invalid github path'):
-    _ = github_path.GithubPath(
-        'github://tensorflow/tree/master/docs/README.md'
-    )
+    _ = github_path.GithubPath('github://tensorflow/tree/master/docs/README.md')
 
   # `blob` isn't accepted for consistency between paths.
   with pytest.raises(ValueError, match='/blob/` isn\'t accepted.'):
     _ = github_path.GithubPath(
-        'github://tensorflow/datasets/blob/master/docs/README.md'
-    )
+        'github://tensorflow/datasets/blob/master/docs/README.md')
 
   p = github_path.GithubPath(
-      'github://tensorflow/datasets/tree/master/docs/README.md'
-  )
+      'github://tensorflow/datasets/tree/master/docs/README.md')
   p = p.parent  # /docs
   _ = p._metadata
   p = p.parent  # /

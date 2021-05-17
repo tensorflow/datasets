@@ -72,9 +72,8 @@ class _Extractor(object):
     self._pbar_path.update_total(1)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
-    future = self._executor.submit(
-        self._sync_extract, path, extract_method, to_path
-    )
+    future = self._executor.submit(self._sync_extract, path, extract_method,
+                                   to_path)
     return promise.Promise.resolve(future)
 
   def _sync_extract(self, from_path, method, to_path):
@@ -94,9 +93,8 @@ class _Extractor(object):
       # Check if running on windows
       if os.name == 'nt' and dst_path and len(dst_path) > 250:
         msg += (
-            '\n'
-            'On windows, path lengths greater than 260 characters may '
-            'result in an error. See the doc to remove the limitation: '
+            '\nOn windows, path lengths greater than 260 characters may result'
+            ' in an error. See the doc to remove the limitation: '
             'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
         )
       raise ExtractError(msg)
@@ -128,10 +126,8 @@ def _copy(src_file, dest_path):
 
 def _normpath(path):
   path = os.path.normpath(path)
-  if (path.startswith('.')
-      or os.path.isabs(path)
-      or path.endswith('~')
-      or os.path.basename(path).startswith('.')):
+  if (path.startswith('.') or os.path.isabs(path) or path.endswith('~') or
+      os.path.basename(path).startswith('.')):
     return None
   return path
 
@@ -244,6 +240,5 @@ def iter_archive(
   """
   if method == resource_lib.ExtractMethod.NO_EXTRACT:
     raise ValueError(
-        f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.'
-    )
+        f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.')
   return _EXTRACT_METHODS[method](path)  # pytype: disable=bad-return-type

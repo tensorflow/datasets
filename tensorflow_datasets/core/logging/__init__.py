@@ -64,4 +64,5 @@ def as_dataset() -> Callable[[_T], _T]:
           decoders=kwargs.get('decoders', None))
 
     return function(*args, **kwargs)
+
   return decorator

@@ -50,14 +50,12 @@ def dummy_register():
     Ds0(data_dir=tmp_path / 'mlds').download_and_prepare()
     # Namespace 2: (non-existing)
 
-    content = textwrap.dedent(
-        f"""
+    content = textwrap.dedent(f"""
         [Namespaces]
         kaggle='{os.fspath(tmp_path / 'kaggle')}'
         mlds='{os.fspath(tmp_path / 'mlds')}'
         other='/tmp/path/to/non-existing-path'
-        """
-    )
+        """)
 
     dummy_path = tmp_path / 'dummy-community-datasets.toml'
     dummy_path.write_text(content)
@@ -81,8 +79,7 @@ def test_register_builder(dummy_register):  # pylint: disable=redefined-outer-na
 
   with pytest.raises(ValueError, match='`data_dir` cannot be set for'):
     dummy_register.builder(
-        utils.DatasetName('mlds:ds0'), data_dir='/path/to/data_dir'
-    )
+        utils.DatasetName('mlds:ds0'), data_dir='/path/to/data_dir')
 
   with pytest.raises(KeyError, match='Namespace .* not found.'):
     dummy_register.builder(utils.DatasetName('non-existing-namespace:ds0'))

@@ -26,9 +26,7 @@ from typing import Any, AnyStr, ClassVar, Iterator, Optional, Type, TypeVar
 import tensorflow as tf
 from tensorflow_datasets.core.utils import type_utils
 
-
 _P = TypeVar('_P')
-
 
 URI_PREFIXES = ('gs://', 's3://')
 _URI_SCHEMES = frozenset(('gs', 's3'))
@@ -65,11 +63,8 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
   # raise mutable input error).
   @property
   def _uri_scheme(self) -> Optional[str]:
-    if (
-        len(self.parts) >= 2
-        and self.parts[0] == '/'
-        and self.parts[1] in _URI_SCHEMES
-    ):
+    if (len(self.parts) >= 2 and self.parts[0] == '/' and
+        self.parts[1] in _URI_SCHEMES):
       return self.parts[1]
     else:
       return None

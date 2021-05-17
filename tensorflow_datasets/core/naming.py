@@ -28,17 +28,15 @@ _first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
 _all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
 _NAME_CLASS = r'[a-zA-Z][\w]*'
-_NAME_CLASS_REG = re.compile(r'^'+_NAME_CLASS+r'$')
+_NAME_CLASS_REG = re.compile(r'^' + _NAME_CLASS + r'$')
 
 # Regex matching 'dataset/config:1.*.*/arg=123'
-_NAME_REG = re.compile(
-    r'^'
-    r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
-    r'(/(?P<config>[\w\-\.]+))?'
-    r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
-    r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
-    r'$'
-)
+_NAME_REG = re.compile(r'^'
+                       r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
+                       r'(/(?P<config>[\w\-\.]+))?'
+                       r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
+                       r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
+                       r'$')
 
 Value = Union[str, int, float, bool]
 
@@ -61,8 +59,7 @@ class DatasetName:
       raise ValueError(
           "Name should be defined by `DatasetName('ns:name')` or "
           "`DatasetName(namespace='ns', name='name'). Mixing args and kwargs "
-          "is invalid."
-      )
+          'is invalid.')
     if namespace_name:
       if ':' in namespace_name:
         namespace, name = namespace_name.split(':')
@@ -122,11 +119,9 @@ def parse_builder_name_kwargs(
 
 
 def _dataset_name_and_kwargs_from_name_str(
-    name_str: str,
-) -> Tuple[str, Dict[str, Value]]:
+    name_str: str,) -> Tuple[str, Dict[str, Value]]:
   """Extract kwargs from name str."""
-  err_msg = textwrap.dedent(
-      f"""\
+  err_msg = textwrap.dedent(f"""\
       Parsing builder name string {name_str} failed.
       The builder name string must be of the following format:
         dataset_name[/config_name][:version][/kwargs]
@@ -145,8 +140,7 @@ def _dataset_name_and_kwargs_from_name_str(
           my_dataset/config1:1.*.*
           my_dataset/config1/arg1=val1,arg2=val2
           my_dataset/config1:1.2.3/right=True,foo=bar,rate=1.2
-      """
-  )
+      """)
 
   res = _NAME_REG.match(name_str)
   if not res:
@@ -226,7 +220,9 @@ def sharded_filenames(filename_prefix, num_shards):
   ]
 
 
-def filepattern_for_dataset_split(dataset_name, split, data_dir,
+def filepattern_for_dataset_split(dataset_name,
+                                  split,
+                                  data_dir,
                                   filetype_suffix=None):
   prefix = filename_prefix_for_split(dataset_name, split)
   if filetype_suffix:
@@ -235,16 +231,22 @@ def filepattern_for_dataset_split(dataset_name, split, data_dir,
   return '%s*' % filepath
 
 
-def filenames_for_dataset_split(
-    dataset_name, split, num_shards, filetype_suffix=None):
+def filenames_for_dataset_split(dataset_name,
+                                split,
+                                num_shards,
+                                filetype_suffix=None):
   prefix = filename_prefix_for_split(dataset_name, split)
   if filetype_suffix:
     prefix += '.%s' % filetype_suffix
   return sharded_filenames(prefix, num_shards)
 
 
-def filepaths_for_dataset_split(dataset_name, split, num_shards, data_dir,
+def filepaths_for_dataset_split(dataset_name,
+                                split,
+                                num_shards,
+                                data_dir,
                                 filetype_suffix=None):
+  """File paths of a given dataset split."""
   filenames = filenames_for_dataset_split(
       dataset_name=dataset_name,
       split=split,

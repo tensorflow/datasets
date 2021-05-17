@@ -46,9 +46,18 @@ def test_add_tfds_id(dummy_builder: dataset_builder.DatasetBuilder):  # pylint: 
       'tfds_id': tf.TensorSpec(shape=(), dtype=tf.string),
   }
   assert list(dataset_utils.as_numpy(ds)) == [
-      {'id': 0, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__0'},
-      {'id': 1, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__1'},
-      {'id': 2, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__2'},
+      {
+          'id': 0,
+          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__0'
+      },
+      {
+          'id': 1,
+          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__1'
+      },
+      {
+          'id': 2,
+          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__2'
+      },
   ]
 
   # Subsplit API works too
@@ -58,8 +67,14 @@ def test_add_tfds_id(dummy_builder: dataset_builder.DatasetBuilder):  # pylint: 
       'tfds_id': tf.TensorSpec(shape=(), dtype=tf.string),
   }
   assert list(dataset_utils.as_numpy(ds)) == [
-      {'id': 1, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__1'},
-      {'id': 2, 'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__2'},
+      {
+          'id': 1,
+          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__1'
+      },
+      {
+          'id': 2,
+          'tfds_id': b'dummy_dataset-train.tfrecord-00000-of-00001__2'
+      },
   ]
 
 
@@ -69,7 +84,9 @@ def test_add_tfds_id_as_supervised(
   """Tests `add_tfds_id=True` with `as_supervised=True`."""
   read_config = read_config_lib.ReadConfig(add_tfds_id=True)
   ds = dummy_builder.as_dataset(
-      split='train', read_config=read_config, as_supervised=True,
+      split='train',
+      read_config=read_config,
+      as_supervised=True,
   )
   # `add_tfds_id=True` is ignored when `as_supervised=True`
   assert ds.element_spec == (
@@ -80,7 +97,7 @@ def test_add_tfds_id_as_supervised(
 
 def test_registered_logger_is_called(
     dummy_builder: dataset_builder.DatasetBuilder,  # pylint: disable=redefined-outer-name
-    ):
+):
   logger = mock.MagicMock()
   tfds_logging.register(logger)
 
@@ -88,7 +105,9 @@ def test_registered_logger_is_called(
   read_config.try_autocache = False
   read_config.num_parallel_calls_for_decode = 42
   ds = dummy_builder.as_dataset(
-      split='train', read_config=read_config, as_supervised=True,
+      split='train',
+      read_config=read_config,
+      as_supervised=True,
   )
   # Logging doesn't change the result:
   assert ds.element_spec == (
@@ -129,7 +148,8 @@ def test_cannonical_version_for_config():
     version = get_version(DummyDatasetWithConfig)
 
   version = get_version(
-      DummyDatasetWithConfig, DummyDatasetWithConfig.builder_configs['x'],
+      DummyDatasetWithConfig,
+      DummyDatasetWithConfig.builder_configs['x'],
   )
   assert version == utils.Version('2.0.0')
 

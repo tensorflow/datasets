@@ -83,8 +83,7 @@ class BBoxFeature(feature.Tensor):
             'BBox coordinates should have min <= max. Got {}.'.format(bbox))
 
     return super(BBoxFeature, self).encode_example(
-        [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax]
-    )
+        [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax])
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes."""

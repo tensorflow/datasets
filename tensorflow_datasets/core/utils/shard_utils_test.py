@@ -23,8 +23,8 @@ class GetReadInstructionsTest(testing.TestCase):
 
   def test_read_all_even_sharding(self):
     # Even sharding
-    res = shard_utils.get_file_instructions(
-        0, 12, ['f1', 'f2', 'f3'], [4, 4, 4])
+    res = shard_utils.get_file_instructions(0, 12, ['f1', 'f2', 'f3'],
+                                            [4, 4, 4])
     self.assertEqual(res, [
         shard_utils.FileInstruction(
             filename='f1', skip=0, take=-1, num_examples=4),
@@ -35,8 +35,8 @@ class GetReadInstructionsTest(testing.TestCase):
     ])
 
   def test_read_all_empty_shard(self):
-    res = shard_utils.get_file_instructions(
-        0, 12, ['f1', 'f2', 'f3', 'f4'], [4, 4, 0, 4])
+    res = shard_utils.get_file_instructions(0, 12, ['f1', 'f2', 'f3', 'f4'],
+                                            [4, 4, 0, 4])
     self.assertEqual(res, [
         shard_utils.FileInstruction(
             filename='f1', skip=0, take=-1, num_examples=4),
@@ -47,8 +47,8 @@ class GetReadInstructionsTest(testing.TestCase):
     ])
 
   def test_from1_to10(self):
-    res = shard_utils.get_file_instructions(
-        1, 10, ['f1', 'f2', 'f3', 'f4'], [4, 4, 0, 4])
+    res = shard_utils.get_file_instructions(1, 10, ['f1', 'f2', 'f3', 'f4'],
+                                            [4, 4, 0, 4])
     self.assertEqual(res, [
         shard_utils.FileInstruction(
             filename='f1', skip=1, take=-1, num_examples=3),
@@ -59,14 +59,14 @@ class GetReadInstructionsTest(testing.TestCase):
     ])
 
   def test_nothing_to_read(self):
-    res = shard_utils.get_file_instructions(
-        0, 0, ['f1', 'f2', 'f3', 'f4'], [0, 3, 0, 2])
+    res = shard_utils.get_file_instructions(0, 0, ['f1', 'f2', 'f3', 'f4'],
+                                            [0, 3, 0, 2])
     self.assertEqual(res, [])
-    res = shard_utils.get_file_instructions(
-        4, 4, ['f1', 'f2', 'f3', 'f4'], [0, 3, 0, 2])
+    res = shard_utils.get_file_instructions(4, 4, ['f1', 'f2', 'f3', 'f4'],
+                                            [0, 3, 0, 2])
     self.assertEqual(res, [])
-    res = shard_utils.get_file_instructions(
-        5, 5, ['f1', 'f2', 'f3', 'f4'], [0, 3, 0, 2])
+    res = shard_utils.get_file_instructions(5, 5, ['f1', 'f2', 'f3', 'f4'],
+                                            [0, 3, 0, 2])
     self.assertEqual(res, [])
 
 

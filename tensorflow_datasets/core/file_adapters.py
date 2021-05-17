@@ -54,10 +54,9 @@ class FileAdapter(abc.ABC):
   PATH_SUFFIX = ClassVar[str]
 
   @abc.abstractclassmethod
-  def make_tf_data(
-      cls,
-      filename: type_utils.PathLike,
-      buffer_size: Optional[int] = None) -> tf.data.Dataset:
+  def make_tf_data(cls,
+                   filename: type_utils.PathLike,
+                   buffer_size: Optional[int] = None) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     raise NotImplementedError()
 
@@ -83,10 +82,9 @@ class TfRecordFileAdapter(FileAdapter):
   FILE_SUFFIX = 'tfrecord'
 
   @classmethod
-  def make_tf_data(
-      cls,
-      filename: type_utils.PathLike,
-      buffer_size: Optional[int] = None) -> tf.data.Dataset:
+  def make_tf_data(cls,
+                   filename: type_utils.PathLike,
+                   buffer_size: Optional[int] = None) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     return tf.data.TFRecordDataset(filename, buffer_size=buffer_size)
 
@@ -114,10 +112,9 @@ class RiegeliFileAdapter(FileAdapter):
   FILE_SUFFIX = 'riegeli'
 
   @classmethod
-  def make_tf_data(
-      cls,
-      filename: type_utils.PathLike,
-      buffer_size: Optional[int] = None) -> tf.data.Dataset:
+  def make_tf_data(cls,
+                   filename: type_utils.PathLike,
+                   buffer_size: Optional[int] = None) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     return riegeli_tf.RiegeliDataset(filename, buffer_size=buffer_size)
 
@@ -152,7 +149,5 @@ ADAPTER_FOR_FORMAT = {
 
 def is_example_file(filename: str) -> bool:
   """Whether the given filename is a record file."""
-  return any(
-      f'.{adapter.FILE_SUFFIX}' in filename
-      for adapter in ADAPTER_FOR_FORMAT.values()
-  )
+  return any(f'.{adapter.FILE_SUFFIX}' in filename
+             for adapter in ADAPTER_FOR_FORMAT.values())

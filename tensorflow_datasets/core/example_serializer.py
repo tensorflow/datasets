@@ -42,8 +42,8 @@ class ExampleSerializer(object):
 
     Args:
       example: Nested `dict` containing the input to serialize. The input
-        structure and values dtype/shape must match the `example_specs`
-        provided at construction.
+        structure and values dtype/shape must match the `example_specs` provided
+        at construction.
 
     Returns:
       serialize_proto: `str`, the serialized `tf.train.Example` proto
@@ -63,12 +63,14 @@ def _dict_to_tf_example(example_dict, tensor_info_dict):
   Returns:
     example_proto: `tf.train.Example`, the encoded example proto.
   """
+
   def run_with_reraise(fn, k, example_data, tensor_info):
     try:
       return fn(example_data, tensor_info)
     except Exception as e:  # pylint: disable=broad-except
       utils.reraise(
-          e, f"Error while serializing feature `{k}`: `{tensor_info}`: ",
+          e,
+          f"Error while serializing feature `{k}`: `{tensor_info}`: ",
       )
 
   if tensor_info_dict:
@@ -83,8 +85,8 @@ def _dict_to_tf_example(example_dict, tensor_info_dict):
     # }
     example_dict = utils.flatten_nest_dict({
         k: run_with_reraise(_add_ragged_fields, k, example_data, tensor_info)
-        for k, (example_data, tensor_info)
-        in utils.zip_dict(example_dict, tensor_info_dict)
+        for k, (example_data,
+                tensor_info) in utils.zip_dict(example_dict, tensor_info_dict)
     })
     example_dict = {
         k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
@@ -145,8 +147,7 @@ def _item_to_tf_feature(item, tensor_info):
         "Unsupported value: {}.\n"
         "tf.train.Feature does not support type {}. "
         "This may indicate that one of the FeatureConnectors received an "
-        "unsupported value as input.".format(repr(v), repr(type(v)))
-    )
+        "unsupported value as input.".format(repr(v), repr(type(v))))
 
 
 RaggedExtraction = collections.namedtuple("RaggedExtraction", [
@@ -237,13 +238,14 @@ def _extract_ragged_attributes(nested_list, tensor_info):
   flat_values = []
   nested_row_lengths = [[] for _ in range(tensor_info.sequence_rank)]
   # Reccursivelly append to `flat_values`, `nested_row_lengths`
-  _fill_ragged_attribute(RaggedExtraction(
-      nested_list=nested_list,
-      flat_values=flat_values,
-      nested_row_lengths=nested_row_lengths,
-      curr_ragged_rank=0,
-      tensor_info=tensor_info,
-  ))
+  _fill_ragged_attribute(
+      RaggedExtraction(
+          nested_list=nested_list,
+          flat_values=flat_values,
+          nested_row_lengths=nested_row_lengths,
+          curr_ragged_rank=0,
+          tensor_info=tensor_info,
+      ))
   if not flat_values:  # The full sequence is empty
     flat_values = np.empty(
         shape=(0,) + tensor_info.shape[tensor_info.sequence_rank:],
@@ -280,10 +282,11 @@ def _fill_ragged_attribute(ext):
   if ext.curr_ragged_rank < ext.tensor_info.sequence_rank - 1:
     # If there are additional Sequence dimension, recurse 1 level deeper.
     for sub_list in ext.nested_list:
-      _fill_ragged_attribute(ext._replace(
-          nested_list=sub_list,
-          curr_ragged_rank=ext.curr_ragged_rank + 1,
-      ))
+      _fill_ragged_attribute(
+          ext._replace(
+              nested_list=sub_list,
+              curr_ragged_rank=ext.curr_ragged_rank + 1,
+          ))
   else:
     # Otherwise, we reached the max level deep, so add the current items
     for item in ext.nested_list:

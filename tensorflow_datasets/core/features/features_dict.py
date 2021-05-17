@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""FeatureDict: Main feature connector container.
-"""
+"""FeatureDict: Main feature connector container."""
 
 import six
 import tensorflow.compat.v2 as tf
@@ -113,8 +112,8 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     Args:
       feature_dict (dict): Dictionary containing the feature connectors of a
         example. The keys should correspond to the data dict as returned by
-        tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically
-        be converted into FeatureConnector.
+        tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically be
+        converted into FeatureConnector.
 
     Raises:
       ValueError: If one of the given features is not recognized
@@ -177,8 +176,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
   @classmethod
   def from_json_content(cls, value: Json) -> 'FeaturesDict':
     return cls({
-        k: feature_lib.FeatureConnector.from_json(v)
-        for k, v in value.items()
+        k: feature_lib.FeatureConnector.from_json(v) for k, v in value.items()
     })
 
   def to_json_content(self) -> Json:
@@ -196,8 +194,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
         example[k] = feature.encode_example(example_value)
       except Exception as e:  # pylint: disable=broad-except
         utils.reraise(
-            e, prefix=f'In <{feature.__class__.__name__}> with name "{k}":\n'
-        )
+            e, prefix=f'In <{feature.__class__.__name__}> with name "{k}":\n')
     return example
 
   def _flatten(self, x):
@@ -218,8 +215,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
           'this means that the provided dict structure does not match the '
           '`FeatureDict`. Please check for typos in the key names. '
           'Available keys: {}. Unrecognized keys: {}'.format(
-              list(self.keys()), list(set(x.keys()) - set(self.keys())))
-      )
+              list(self.keys()), list(set(x.keys()) - set(self.keys()))))
     return out
 
   def _nest(self, list_x):
@@ -228,7 +224,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     out = {}
     for k, f in sorted(self.items()):
       offset = len(f._flatten(None))  # pylint: disable=protected-access
-      out[k] = f._nest(list_x[curr_pos:curr_pos+offset])  # pylint: disable=protected-access
+      out[k] = f._nest(list_x[curr_pos:curr_pos + offset])  # pylint: disable=protected-access
       curr_pos += offset
     if curr_pos != len(list_x):
       raise ValueError(

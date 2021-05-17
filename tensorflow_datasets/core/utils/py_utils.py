@@ -13,9 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Some python utils function and classes.
-
-"""
+"""Some python utils function and classes."""
 
 import base64
 import contextlib
@@ -48,7 +46,6 @@ Tree = type_utils.Tree
 # https://stackoverflow.com/questions/14946264/python-lru-cache-decorator-per-instance
 # For @property methods, use @memoized_property below.
 memoize = functools.lru_cache
-
 
 T = TypeVar('T')
 
@@ -119,7 +116,7 @@ class NonMutableDict(dict):
   def __setitem__(self, key, value):
     if key in self:
       raise ValueError(self._error_msg.format(key=key))
-    return super(NonMutableDict, self). __setitem__(key, value)
+    return super(NonMutableDict, self).__setitem__(key, value)
 
   def update(self, other):
     if any(k in self for k in other):
@@ -175,8 +172,9 @@ def map_nested(function, data_struct, dict_only=False, map_tuple=False):
     if map_tuple:
       types_.append(tuple)
     if isinstance(data_struct, tuple(types_)):
-      mapped = [map_nested(function, v, dict_only, map_tuple)
-                for v in data_struct]
+      mapped = [
+          map_nested(function, v, dict_only, map_tuple) for v in data_struct
+      ]
       if isinstance(data_struct, list):
         return mapped
       else:
@@ -194,7 +192,8 @@ def zip_nested(arg0, *args, **kwargs):
   # Could add support for more exotic data_struct, like OrderedDict
   if isinstance(arg0, dict):
     return {
-        k: zip_nested(*a, dict_only=dict_only) for k, a in zip_dict(arg0, *args)
+        k: zip_nested(*a, dict_only=dict_only)
+        for k, a in zip_dict(arg0, *args)
     }
   elif not dict_only:
     if isinstance(arg0, list):
@@ -310,8 +309,7 @@ def incomplete_dir(dirname: type_utils.PathLike) -> Iterator[str]:
 
 @contextlib.contextmanager
 def incomplete_file(
-    path: type_utils.ReadWritePath,
-) -> Iterator[type_utils.ReadWritePath]:
+    path: type_utils.ReadWritePath,) -> Iterator[type_utils.ReadWritePath]:
   """Writes to path atomically, by writing to temp file and renaming it."""
   tmp_path = path.parent / f'{path.name}.incomplete.{uuid.uuid4().hex}'
   try:
@@ -347,9 +345,7 @@ def reraise(
       type(e).__str__ is not BaseException.__str__
       # This should never happens unless the user plays with Exception
       # internals
-      or not hasattr(e, 'args')
-      or not isinstance(e.args, tuple)
-  ):
+      or not hasattr(e, 'args') or not isinstance(e.args, tuple)):
     msg = f'{prefix}{e}{suffix}'
     # Could try to dynamically create a
     # `type(type(e).__name__, (ReraisedError, type(e)), {})`, but should be
@@ -372,8 +368,7 @@ def reraise(
   else:
     e.args = tuple(
         p for p in (prefix,) + e.args + (suffix,)
-        if not isinstance(p, str) or p
-    )
+        if not isinstance(p, str) or p)
     raise  # pylint: disable=misplaced-bare-raise
 
 
@@ -401,8 +396,10 @@ def try_reraise(*args, **kwargs):
 
 def rgetattr(obj, attr, *args):
   """Get attr that handles dots in attr name."""
+
   def _getattr(obj, attr):
     return getattr(obj, attr, *args)
+
   return functools.reduce(_getattr, [obj] + attr.split('.'))
 
 
@@ -484,9 +481,7 @@ def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
   ]
 
 
-def get_base64(
-    write_fn: Union[bytes, Callable[[io.BytesIO], None]],
-) -> str:
+def get_base64(write_fn: Union[bytes, Callable[[io.BytesIO], None]],) -> str:
   """Extracts the base64 string of an object by writing into a tmp buffer."""
   if isinstance(write_fn, bytes):  # Value already encoded
     bytes_value = write_fn

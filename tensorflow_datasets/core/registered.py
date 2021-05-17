@@ -92,8 +92,7 @@ class RegisteredDataset(abc.ABC):
       raise ValueError(f'Dataset with name {cls.name} already registered.')
     elif cls.name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
-          f'Dataset with name {cls.name} already registered as abstract.'
-      )
+          f'Dataset with name {cls.name} already registered as abstract.')
 
     # Add the dataset to the registers
     if is_abstract:
@@ -110,8 +109,7 @@ def _is_builder_available(builder_cls: Type[RegisteredDataset]) -> bool:
 def list_imported_builders() -> List[str]:
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   all_builders = [
-      builder_name
-      for builder_name, builder_cls in _DATASET_REGISTRY.items()
+      builder_name for builder_name, builder_cls in _DATASET_REGISTRY.items()
       if _is_builder_available(builder_cls)
   ]
   return sorted(all_builders)
@@ -136,4 +134,3 @@ def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
     msg = f'Dataset {name} is not available. Only: {available_types}'
     raise PermissionError(msg)
   return builder_cls  # pytype: disable=bad-return-type
-

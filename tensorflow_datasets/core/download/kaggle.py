@@ -72,14 +72,16 @@ def _run_command(command_args: List[str]) -> str:
     return subprocess.check_output(command_args, encoding='UTF-8')
   except (subprocess.CalledProcessError, FileNotFoundError) as err:
     if isinstance(err, subprocess.CalledProcessError) and '404' in err.output:
-      raise ValueError(textwrap.dedent("""\
+      raise ValueError(
+          textwrap.dedent("""\
       Error for command: {}
 
       Competition {} not found. Please ensure you have spelled the name
       correctly.
       """).format(command_str, competition_or_dataset))
     else:
-      raise RuntimeError(textwrap.dedent("""\
+      raise RuntimeError(
+          textwrap.dedent("""\
       Error for command: {}
 
       To download Kaggle data through TFDS, follow the instructions to install
@@ -91,9 +93,8 @@ def _run_command(command_args: List[str]) -> str:
       """).format(command_str, competition_or_dataset))
 
 
-def _download_competition_or_dataset(
-    competition_or_dataset: str, output_dir: str
-) -> None:
+def _download_competition_or_dataset(competition_or_dataset: str,
+                                     output_dir: str) -> None:
   """Downloads the data and extracts it if it was zipped by the kaggle api.
 
   Args:

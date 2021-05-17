@@ -53,7 +53,9 @@ class ResourcePath(zipfile.Path):
   """
 
   def __fspath__(self) -> str:
-    """Path string for `os.path.join`, `open`,... compatibility.
+    """Path string for `os.path.join`, `open`,...
+
+    compatibility.
 
     Note: Calling `os.fspath` on the path extract the file, so should be
     discouraged. Prefer using `read_bytes`,... This only works for files,

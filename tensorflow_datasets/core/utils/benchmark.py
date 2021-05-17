@@ -64,8 +64,8 @@ def benchmark(
   - Number of examples/sec
 
   Args:
-    ds: Dataset to benchmark. Can be any iterable. Note: The iterable will
-      be fully consumed.
+    ds: Dataset to benchmark. Can be any iterable. Note: The iterable will be
+      fully consumed.
     num_iter: Number of iteration to perform (iteration might be batched)
     batch_size: Batch size of the dataset, used to normalize iterations
 
@@ -96,24 +96,20 @@ def benchmark(
   if num_iter and i < num_iter:
     logging.warning(
         'Number of iteration shorter than expected ({} vs {})'.format(
-            i, num_iter
-        )
-    )
+            i, num_iter))
   if i == -1:  # No iteration besides the second batch
     end_time = first_batch_time
 
   print('\n************ Summary ************\n')
   num_examples = (i + 1) * batch_size
   stats = {
-      'first+lasts': _log_stats(
-          'First included', start_time, end_time, num_examples + batch_size
-      ),
-      'first': _log_stats(
-          'First only', start_time, first_batch_time, batch_size
-      ),
-      'lasts': _log_stats(
-          'First excluded', first_batch_time, end_time, num_examples
-      )
+      'first+lasts':
+          _log_stats('First included', start_time, end_time,
+                     num_examples + batch_size),
+      'first':
+          _log_stats('First only', start_time, first_batch_time, batch_size),
+      'lasts':
+          _log_stats('First excluded', first_batch_time, end_time, num_examples)
   }
   raw_stats = {
       'start_time': start_time,
@@ -123,14 +119,12 @@ def benchmark(
   }
   stats = pd.DataFrame.from_dict(stats, orient='index')
   raw_stats = pd.DataFrame.from_dict(
-      raw_stats, orient='index', columns=['duration']
-  )
+      raw_stats, orient='index', columns=['duration'])
   return BenchmarkResult(stats=stats, raw_stats=raw_stats)
 
 
-def _log_stats(
-    msg: str, start: float, end: float, num_examples: int
-) -> StatDict:
+def _log_stats(msg: str, start: float, end: float,
+               num_examples: int) -> StatDict:
   """Log and returns stats."""
   if not num_examples:
     stats = {
@@ -145,8 +139,6 @@ def _log_stats(
         'num_examples': num_examples,
         'avg': num_examples / total_time,
     }
-  print(
-      'Examples/sec ({}) {avg:.2f} ex/sec (total: {num_examples} ex, '
-      '{duration:.2f} sec)'.format(msg, **stats)
-  )
+  print('Examples/sec ({}) {avg:.2f} ex/sec (total: {num_examples} ex, '
+        '{duration:.2f} sec)'.format(msg, **stats))
   return stats

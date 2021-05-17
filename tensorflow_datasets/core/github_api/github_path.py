@@ -72,8 +72,7 @@ class _PathMetadata:
   def __init__(self, path: str, *, private=False):
     if not private:
       raise AssertionError(
-          'Metadata should be created using `_PathMetadata.from_cache`'
-      )
+          'Metadata should be created using `_PathMetadata.from_cache`')
     repo, branch, subpath = _parse_github_path(path)  # pytype: disable=name-error
 
     # Read-only attributes
@@ -132,10 +131,8 @@ class _PathMetadata:
 
     """
     # e.g. 'https://api.github.com/repos/tensorflow/datasets/contents/docs'
-    url = (
-        f'https://api.github.com/repos/{self.repo}/contents/{self.subpath}'
-        f'?ref={self.branch}'
-    )
+    url = (f'https://api.github.com/repos/{self.repo}/contents/{self.subpath}'
+           f'?ref={self.branch}')
     query_content = self._query_github(url)
     if isinstance(query_content, list):  # Directory
       self._init_directory(query_content)
@@ -199,8 +196,7 @@ class _PathMetadata:
           f'Request failed for {self._path}:\n'
           f' Request: {url}\n'
           f' Error: {resp.status_code}\n'
-          f' Reason: {resp.content}',
-      )
+          f' Reason: {resp.content}',)
     return resp.json()
 
   def __repr__(self) -> str:
@@ -282,10 +278,8 @@ class GithubPath(pathlib.PurePosixPath):
 
   def as_raw_url(self) -> str:
     """Returns the raw content url (https://raw.githubusercontent.com)."""
-    return (
-        'https://raw.githubusercontent.com/'
-        f'{self.repo}/{self.branch}/{self.subpath}'
-    )
+    return ('https://raw.githubusercontent.com/'
+            f'{self.repo}/{self.branch}/{self.subpath}')
 
   def iterdir(self) -> Iterator['GithubPath']:
     """Yields the sub-paths."""
@@ -315,11 +309,9 @@ class GithubPath(pathlib.PurePosixPath):
     url = self.as_raw_url()
     resp = requests.get(url)
     if resp.status_code != 200:
-      raise FileNotFoundError(
-          f'Request failed for {url}\n'
-          f' Error: {resp.status_code}\n'
-          f' Reason: {resp.content}'
-      )
+      raise FileNotFoundError(f'Request failed for {url}\n'
+                              f' Error: {resp.status_code}\n'
+                              f' Reason: {resp.content}')
     return resp.content
 
   def read_text(self, encoding: Optional[str] = None) -> str:
@@ -365,10 +357,8 @@ def _parse_github_path(path: str) -> Tuple[str, str, str]:
   Raises:
     ValueError: If the path is invalid
   """
-  err_msg = (
-      f'Invalid github path: {path}. Expected format: '
-      '`github://<owner>/<name>/tree/<branch>[/<path>]`.'
-  )
+  err_msg = (f'Invalid github path: {path}. Expected format: '
+             '`github://<owner>/<name>/tree/<branch>[/<path>]`.')
 
   if not path.startswith(_URI_PREFIX):
     raise ValueError(err_msg)

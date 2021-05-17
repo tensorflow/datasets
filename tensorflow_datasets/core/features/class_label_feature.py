@@ -40,10 +40,10 @@ class ClassLabel(feature.Tensor):
 
     Args:
       num_classes: `int`, number of classes. All labels must be < num_classes.
-      names: `list<str>`, string names for the integer classes. The
-        order in which the names are provided is kept.
-      names_file: `str`, path to a file with names for the integer
-        classes, one per line.
+      names: `list<str>`, string names for the integer classes. The order in
+        which the names are provided is kept.
+      names_file: `str`, path to a file with names for the integer classes, one
+        per line.
     """
     super(ClassLabel, self).__init__(shape=(), dtype=tf.int64)
 
@@ -99,9 +99,8 @@ class ClassLabel(feature.Tensor):
     elif self._num_classes != num_classes:
       raise ValueError(
           "ClassLabel number of names do not match the defined num_classes. "
-          "Got {} names VS {} num_classes".format(
-              num_classes, self._num_classes)
-      )
+          "Got {} names VS {} num_classes".format(num_classes,
+                                                  self._num_classes))
 
   def str2int(self, str_value):
     """Conversion class name string => integer."""
@@ -137,8 +136,7 @@ class ClassLabel(feature.Tensor):
     if self._num_classes is None:
       raise ValueError(
           "Trying to use ClassLabel feature with undefined number of class. "
-          "Please set ClassLabel.names or num_classes."
-      )
+          "Please set ClassLabel.names or num_classes.")
 
     # If a string is given, convert to associated integer
     if isinstance(example_data, str):
