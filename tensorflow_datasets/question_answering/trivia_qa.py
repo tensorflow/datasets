@@ -23,7 +23,6 @@ import six
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _CITATION = """
 @article{2017arXivtriviaqa,
        author = {{Joshi}, Mandar and {Choi}, Eunsol and {Weld},
@@ -130,29 +129,19 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Text(),
             "entity_pages":
                 tfds.features.Sequence({
-                    "doc_source":
-                        tfds.features.Text(),
-                    "filename":
-                        tfds.features.Text(),
-                    "title":
-                        tfds.features.Text(),
-                    "wiki_context":
-                        tfds.features.Text(),
+                    "doc_source": tfds.features.Text(),
+                    "filename": tfds.features.Text(),
+                    "title": tfds.features.Text(),
+                    "wiki_context": tfds.features.Text(),
                 }),
             "search_results":
                 tfds.features.Sequence({
-                    "description":
-                        tfds.features.Text(),
-                    "filename":
-                        tfds.features.Text(),
-                    "rank":
-                        tf.int32,
-                    "title":
-                        tfds.features.Text(),
-                    "url":
-                        tfds.features.Text(),
-                    "search_context":
-                        tfds.features.Text(),
+                    "description": tfds.features.Text(),
+                    "filename": tfds.features.Text(),
+                    "rank": tf.int32,
+                    "title": tfds.features.Text(),
+                    "url": tfds.features.Text(),
+                    "search_context": tfds.features.Text(),
                 }),
             "answer":
                 tfds.features.FeaturesDict({
@@ -172,7 +161,6 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
                         tfds.features.Text(),
                 }),
         }),
-
         supervised_keys=None,
         homepage="http://nlp.cs.washington.edu/triviaqa/",
         citation=_CITATION,
@@ -190,8 +178,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
 
     qa_dir = (
         os.path.join(file_paths["unfiltered"], "triviaqa-unfiltered")
-        if cfg.unfiltered else
-        os.path.join(file_paths["rc"], "qa"))
+        if cfg.unfiltered else os.path.join(file_paths["rc"], "qa"))
     train_files = tf.io.gfile.glob(os.path.join(qa_dir, _TRAIN_FILE_FORMAT))
     valid_files = tf.io.gfile.glob(
         os.path.join(qa_dir, _VALIDATION_FILE_FORMAT))
@@ -207,19 +194,25 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"files": train_files,
-                        "web_dir": web_evidence_dir,
-                        "wiki_dir": wiki_evidence_dir}),
+            gen_kwargs={
+                "files": train_files,
+                "web_dir": web_evidence_dir,
+                "wiki_dir": wiki_evidence_dir
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"files": valid_files,
-                        "web_dir": web_evidence_dir,
-                        "wiki_dir": wiki_evidence_dir}),
+            gen_kwargs={
+                "files": valid_files,
+                "web_dir": web_evidence_dir,
+                "wiki_dir": wiki_evidence_dir
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"files": test_files,
-                        "web_dir": web_evidence_dir,
-                        "wiki_dir": wiki_evidence_dir}),
+            gen_kwargs={
+                "files": test_files,
+                "web_dir": web_evidence_dir,
+                "wiki_dir": wiki_evidence_dir
+            }),
     ]
 
   def _generate_examples(self, files, web_dir, wiki_dir):
@@ -227,6 +220,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
 
     def parse_example(article):
       """Return a single example from an article JSON record."""
+
       def _strip(collection):
         return [item.strip() for item in collection]
 
@@ -250,20 +244,13 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
         }
       else:
         answer_dict = {
-            "aliases":
-                [],
-            "normalized_aliases":
-                [],
-            "matched_wiki_entity_name":
-                "<unk>",
-            "normalized_matched_wiki_entity_name":
-                "<unk>",
-            "normalized_value":
-                "<unk>",
-            "type":
-                "",
-            "value":
-                "<unk>",
+            "aliases": [],
+            "normalized_aliases": [],
+            "matched_wiki_entity_name": "<unk>",
+            "normalized_matched_wiki_entity_name": "<unk>",
+            "normalized_value": "<unk>",
+            "type": "",
+            "value": "<unk>",
         }
 
       if self.builder_config.exclude_context:
@@ -291,22 +278,20 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
 
       def _strip_if_str(v):
         return v.strip() if isinstance(v, six.string_types) else v
+
       def _transpose_and_strip_dicts(dicts, field_names):
         return {
             tfds.core.naming.camelcase_to_snakecase(k):
-                [_strip_if_str(d[k]) for d in dicts]
-            for k in field_names
+            [_strip_if_str(d[k]) for d in dicts] for k in field_names
         }
 
       search_results = _transpose_and_strip_dicts(
           _add_context(
               article.get("SearchResults", []), "SearchContext", web_dir),
-          ["Description", "Filename", "Rank", "Title", "Url",
-           "SearchContext"])
+          ["Description", "Filename", "Rank", "Title", "Url", "SearchContext"])
 
       entity_pages = _transpose_and_strip_dicts(
-          _add_context(
-              article.get("EntityPages", []), "WikiContext", wiki_dir),
+          _add_context(article.get("EntityPages", []), "WikiContext", wiki_dir),
           ["DocSource", "Filename", "Title", "WikiContext"])
 
       question = article["Question"].strip()
