@@ -35,4 +35,3 @@ class D4rlMujocoHopper(mujoco_dataset.D4RLMujocoDatasetBuilder):
     config = mujoco_dataset.DatasetConfig(
         name='hopper', obs_len=11, action_len=3, qpos_len=6, qvel_len=6)
     super().__init__(ds_config=config, **kwargs)
-
