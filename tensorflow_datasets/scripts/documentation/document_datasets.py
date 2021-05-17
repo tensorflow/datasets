@@ -56,8 +56,8 @@ class BuilderDocumentation:
 
   Attributes:
     name: Documentation page name (e.g. `mnist`, `kaggle:mnist`)
-    filestem: Documentation page name without suffix
-      (e.g. `mnist`, `kaggle_mnist`)
+    filestem: Documentation page name without suffix (e.g. `mnist`,
+      `kaggle_mnist`)
     content: Documentation content
     section: Documentation section (e.g `text`, `image`,...)
     namespace: Dataset namespace
@@ -72,9 +72,7 @@ class BuilderDocumentation:
   is_nightly: bool
 
 
-def _load_builder(
-    name: str,
-) -> Optional[BuilderToDocument]:
+def _load_builder(name: str,) -> Optional[BuilderToDocument]:
   """Load the builder to document.
 
   Args:
@@ -91,9 +89,7 @@ def _load_builder(
     return _load_builder_from_code(name)
 
 
-def _load_builder_from_location(
-    name: str,
-) -> Optional[BuilderToDocument]:
+def _load_builder_from_location(name: str,) -> Optional[BuilderToDocument]:
   """Load the builder, config,... to document."""
   namespace = tfds.core.utils.DatasetName(name).namespace
   try:
@@ -125,7 +121,8 @@ def _maybe_load_config(name: str) -> Optional[tfds.core.DatasetBuilder]:
 
 
 def _load_all_configs(
-    name: str, builder: tfds.core.DatasetBuilder,
+    name: str,
+    builder: tfds.core.DatasetBuilder,
 ) -> List[tfds.core.DatasetBuilder]:
   """Load all builder configs."""
   # `data_dir/name/config/version/` -> `data_dir/name/`
@@ -151,9 +148,7 @@ def _load_all_configs(
   return [builder] + config_builders
 
 
-def _load_builder_from_code(
-    name: str,
-) -> BuilderToDocument:
+def _load_builder_from_code(name: str,) -> BuilderToDocument:
   """Load the builder, config,... to document."""
   builder_cls = tfds.builder_cls(name)
   section = _get_section(builder_cls)
@@ -165,8 +160,7 @@ def _load_builder_from_code(
 
     with futures.ThreadPoolExecutor(max_workers=_WORKER_COUNT_CONFIGS) as tpool:
       config_builders = list(
-          tpool.map(get_config_builder, builder_cls.BUILDER_CONFIGS),
-      )
+          tpool.map(get_config_builder, builder_cls.BUILDER_CONFIGS),)
     return BuilderToDocument(
         section=section,
         namespace=None,
@@ -192,7 +186,8 @@ def _get_section(builder_cls: Type[tfds.core.DatasetBuilder]) -> str:
 
 
 def _document_single_builder(
-    name: str, **kwargs: Any,
+    name: str,
+    **kwargs: Any,
 ) -> Optional[BuilderDocumentation]:
   """Doc string for a single builder, with or without configs."""
   with tfds.core.utils.try_reraise(f'Error for `{name}`: '):
@@ -215,11 +210,9 @@ def _document_single_builder_inner(
       builder=doc_info.builder,
       config_builders=doc_info.config_builders,
       nightly_doc_util=nightly_doc_util,
-      **kwargs
-  )
+      **kwargs)
   is_nightly = bool(
-      nightly_doc_util and nightly_doc_util.is_builder_nightly(name)
-  )
+      nightly_doc_util and nightly_doc_util.is_builder_nightly(name))
   return BuilderDocumentation(
       name=name,
       filestem=name.replace(':', '_'),
@@ -246,8 +239,8 @@ def iter_documentation_builders(
   """Create dataset documentation string for given datasets.
 
   Args:
-    datasets: list of datasets for which to create documentation.
-              If None, then all available datasets will be used.
+    datasets: list of datasets for which to create documentation. If None, then
+      all available datasets will be used.
     doc_util_paths: Additional path for visualization, nightly info,...
 
   Yields:
@@ -274,8 +267,7 @@ def iter_documentation_builders(
 
   if doc_util_paths.fig_base_path:
     nightly_doc_util = doc_utils.NightlyDocUtil(
-        path=doc_util_paths.nightly_path,
-    )
+        path=doc_util_paths.nightly_path,)
   else:
     nightly_doc_util = None
 
@@ -302,9 +294,8 @@ def iter_documentation_builders(
   print('All builder documentations generated!')
 
 
-def make_category_to_builders_dict() -> Dict[
-    str, List[tfds.core.DatasetBuilder]
-]:
+def make_category_to_builders_dict(
+) -> Dict[str, List[tfds.core.DatasetBuilder]]:
   """Loads all builders with their associated category."""
   datasets = _all_tfds_datasets()
   print(f'Creating the vanilla builders for {len(datasets)} datasets...')

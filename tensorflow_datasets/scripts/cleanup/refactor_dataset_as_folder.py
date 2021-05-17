@@ -69,8 +69,7 @@ class BuilderCodeInfo:
 
   @classmethod
   def from_builder_cls(
-      cls, builder_cls: Type[tfds.core.DatasetBuilder]
-  ) -> 'BuilderCodeInfo':
+      cls, builder_cls: Type[tfds.core.DatasetBuilder]) -> 'BuilderCodeInfo':
     path = tfds.core.utils.to_write_path(builder_cls.code_path)
     return cls(
         file=path,
@@ -109,8 +108,7 @@ def _add_init_file(code_info: BuilderCodeInfo) -> None:
 def _mv_fake_data_dir(code_info: BuilderCodeInfo) -> None:
   """Move the fake data directory."""
   src_fake_dir_path = (
-      TFDS_PATH / 'testing/test_data/fake_examples' / code_info.name
-  )
+      TFDS_PATH / 'testing/test_data/fake_examples' / code_info.name)
   dst_fake_dir_path = code_info.dst / 'dummy_data'
   _rename_dir(src_fake_dir_path, dst_fake_dir_path)
 
@@ -139,8 +137,7 @@ def _mv_checksums(code_info: BuilderCodeInfo) -> None:
 def _mv_create_fake_data(code_info: BuilderCodeInfo) -> None:
   """Move the `fake_data` generation script file."""
   create_fake_data_file = (
-      TFDS_PATH / 'testing/fake_data_generation' / f'{code_info.name}.py'
-  )
+      TFDS_PATH / 'testing/fake_data_generation' / f'{code_info.name}.py')
   if create_fake_data_file.exists():
     create_fake_data_file.rename(code_info.dst / 'make_dummy_data.py')
 
@@ -177,10 +174,8 @@ def refactor_dataset(ds_name: str) -> None:
 
 def refactor_datasets() -> None:
   """Refactoring all dataset into one folder."""
-  for ds_name in (
-      FLAGS.datasets.split(',')
-      or tfds.list_builders(with_community_datasets=False)
-  ):
+  for ds_name in (FLAGS.datasets.split(',') or
+                  tfds.list_builders(with_community_datasets=False)):
     refactor_dataset(ds_name)
 
 

@@ -29,7 +29,6 @@ import dataclasses
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
 
-
 # Dict of `full_names_dict['dataset']['config']['version']`
 FullNamesDict = Dict[str, Dict[str, Dict[str, Any]]]
 # Same as `FullNamesDict`, but contains `True` for nightly datasets:
@@ -44,18 +43,15 @@ class DocUtilPaths:
   """Structure containing the utils paths."""
   # VisualizationDocUtil
   fig_base_path: Optional[tfds.core.PathLike] = tfds.core.gcs_path(
-      'visualization/fig/'
-  )
+      'visualization/fig/')
   fig_base_url: str = 'https://storage.googleapis.com/tfds-data/visualization/fig/'
   # DataframeDocUtil
   df_base_path: Optional[tfds.core.PathLike] = tfds.core.gcs_path(
-      'visualization/dataframe'
-  )
+      'visualization/dataframe')
   df_base_url: str = 'https://storage.googleapis.com/tfds-data/visualization/dataframe/'
   # NightlyDocUtil
   nightly_path: Optional[tfds.core.PathLike] = tfds.core.utils.tfds_path(
-      'stable_versions.txt'
-  )
+      'stable_versions.txt')
 
 
 class VisualizationDocUtil(object):
@@ -153,10 +149,9 @@ class DataframeDocUtil(object):
 def _split_full_name(full_name: str) -> Tuple[str, str, str]:
   """Extracts the `(ds name, config, version)` from the full_name."""
   if not tfds.core.load.is_full_name(full_name):
-    raise ValueError(
-        f'Parsing builder name string {full_name} failed.'
-        'The builder name string must be of the following format:'
-        '`dataset_name[/config_name]/version`')
+    raise ValueError(f'Parsing builder name string {full_name} failed.'
+                     'The builder name string must be of the following format:'
+                     '`dataset_name[/config_name]/version`')
   ds_name, *optional_config, version = full_name.split('/')
   assert len(optional_config) <= 1
   config = next(iter(optional_config)) if optional_config else ''
@@ -165,9 +160,8 @@ def _split_full_name(full_name: str) -> Tuple[str, str, str]:
 
 def _full_names_to_dict(full_names: List[str]) -> FullNamesDict:
   """Creates the dict `d['dataset']['config']['version']`."""
-  full_names_dict = collections.defaultdict(
-      lambda: collections.defaultdict(  # pylint: disable=g-long-lambda
-          lambda: collections.defaultdict(type(None))))
+  full_names_dict = collections.defaultdict(lambda: collections.defaultdict(  # pylint: disable=g-long-lambda
+      lambda: collections.defaultdict(type(None))))
   for full_name in full_names:
     ds_name, config, version = _split_full_name(full_name)
     full_names_dict[ds_name][config][version]  # pylint: disable=pointless-statement
@@ -179,9 +173,8 @@ def _build_nightly_dict(
     stable_version_ds: FullNamesDict,
 ) -> NightlyDict:
   """Computes the nightly dict from the registered and stable dict."""
-  nightly_ds = collections.defaultdict(
-      lambda: collections.defaultdict(  # pylint: disable=g-long-lambda
-          lambda: collections.defaultdict(bool)))
+  nightly_ds = collections.defaultdict(lambda: collections.defaultdict(  # pylint: disable=g-long-lambda
+      lambda: collections.defaultdict(bool)))
   for dataset in registered_ds:
     if dataset in stable_version_ds:
       for config in registered_ds[dataset]:
@@ -261,6 +254,7 @@ class NightlyDocUtil(object):
 
   def has_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
     """Returns True if any of the builder/config/version is new."""
+
     def reduce(value):
       if isinstance(value, bool):
         return value

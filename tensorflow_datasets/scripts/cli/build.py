@@ -32,8 +32,7 @@ import tensorflow_datasets as tfds
 def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: disable=protected-access
   """Add subparser for `build` command."""
   build_parser = parsers.add_parser(
-      'build', help='Commands for downloading and preparing datasets.'
-  )
+      'build', help='Commands for downloading and preparing datasets.')
   build_parser.add_argument(
       'datasets',  # Positional arguments
       type=str,
@@ -53,8 +52,7 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   debug_group = build_parser.add_argument_group(
       'Debug & tests',
       description='--pdb Enter post-mortem debugging mode '
-      'if an exception is raised.'
-  )
+      'if an exception is raised.')
   debug_group.add_argument(
       '--overwrite',
       action='store_true',
@@ -65,8 +63,7 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       type=int,
       nargs='?',
       const=1,
-      help=
-      'When set, only generate the first X examples (default to 1), rather '
+      help='When set, only generate the first X examples (default to 1), rather '
       'than the full dataset.'
       'If set to 0, only execute the `_split_generators` (which download the '
       'original data), but skip `_generator_examples`',
@@ -78,11 +75,10 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       '--data_dir',
       type=tfds.core.as_path,
       # Should match tfds.core.constant.DATA_DIR !!
-      default=tfds.core.as_path(os.environ.get(
-          'TFDS_DATA_DIR', os.path.join('~', 'tensorflow_datasets')
-      )),
-      help=
-      'Where to place datasets. Default to '
+      default=tfds.core.as_path(
+          os.environ.get('TFDS_DATA_DIR',
+                         os.path.join('~', 'tensorflow_datasets'))),
+      help='Where to place datasets. Default to '
       '`~/tensorflow_datasets/` or `TFDS_DATA_DIR` environement variable.',
   )
   path_group.add_argument(
@@ -98,40 +94,35 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   path_group.add_argument(
       '--manual_dir',
       type=tfds.core.as_path,
-      help=
-      'Where to manually download data (required for some datasets). '
+      help='Where to manually download data (required for some datasets). '
       'Default to `<download_dir>/manual/`.',
   )
   path_group.add_argument(
       '--add_name_to_manual_dir',
       action='store_true',
-      help=
-      'If true, append the dataset name to the `manual_dir` (e.g. '
+      help='If true, append the dataset name to the `manual_dir` (e.g. '
       '`<download_dir>/manual/<dataset_name>/`. Useful to avoid collisions '
-      'if many datasets are generated.'
-  )
+      'if many datasets are generated.')
 
   # **** Generation options ****
   generation_group = build_parser.add_argument_group('Generation')
   generation_group.add_argument(
-      '--config', '-c',
+      '--config',
+      '-c',
       type=str,
-      help='Config name to build. Build all configs if not set.'
-  )
+      help='Config name to build. Build all configs if not set.')
   # We are forced to have 2 flags to avoid ambiguity when config name is
   # a number (e.g. `voc/2017`)
   generation_group.add_argument(
       '--config_idx',
       type=int,
-      help=
-      'Config id to build (`builder_cls.BUILDER_CONFIGS[config_idx]`). '
-      'Mutually exclusive with `--config`.'
-  )
+      help='Config id to build (`builder_cls.BUILDER_CONFIGS[config_idx]`). '
+      'Mutually exclusive with `--config`.')
   generation_group.add_argument(
-      '--imports', '-i',
+      '--imports',
+      '-i',
       type=str,
-      help='Comma separated list of module to import to register datasets.'
-  )
+      help='Comma separated list of module to import to register datasets.')
   generation_group.add_argument(
       '--register_checksums',
       action='store_true',
@@ -149,26 +140,21 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       help='A (comma-separated) list of flags to pass to `PipelineOptions` '
       'when preparing with Apache Beam. '
       '(see: https://www.tensorflow.org/datasets/beam_datasets). '
-      'Example: `--beam_pipeline_options=job_name=my-job,project=my-project`'
-  )
+      'Example: `--beam_pipeline_options=job_name=my-job,project=my-project`')
 
   # **** Automation options ****
   automation_group = build_parser.add_argument_group(
-      'Automation', description='Used by automated scripts.'
-  )
+      'Automation', description='Used by automated scripts.')
   automation_group.add_argument(
       '--exclude_datasets',
       type=str,
-      help=
-      'If set, generate all datasets except the one defined here. '
-      'Comma separated list of datasets to exclude. '
-  )
+      help='If set, generate all datasets except the one defined here. '
+      'Comma separated list of datasets to exclude. ')
   automation_group.add_argument(
       '--experimental_latest_version',
       action='store_true',
       help='Build the latest Version(experiments=...) available rather than '
-      'default version.'
-  )
+      'default version.')
 
   build_parser.set_defaults(subparser_fn=_build_datasets)
 
@@ -185,9 +171,8 @@ def _build_datasets(args: argparse.Namespace) -> None:
     if datasets:
       raise ValueError('--exclude_datasets can\'t be used with `datasets`')
     datasets = (
-        set(tfds.list_builders(with_community_datasets=False))
-        - set(args.exclude_datasets.split(','))
-    )
+        set(tfds.list_builders(with_community_datasets=False)) -
+        set(args.exclude_datasets.split(',')))
     datasets = sorted(datasets)  # `set` is not deterministic
   else:
     datasets = datasets or ['']  # Empty string for default
@@ -210,8 +195,7 @@ def _make_builders(
   if args.experimental_latest_version:
     if 'version' in builder_kwargs:
       raise ValueError(
-          'Can\'t have both `--experimental_latest` and version set (`:1.0.0`)'
-      )
+          'Can\'t have both `--experimental_latest` and version set (`:1.0.0`)')
     builder_kwargs['version'] = 'experimental_latest'
 
   # Eventually overwrite config
@@ -240,8 +224,7 @@ def _make_builders(
 
 
 def _get_builder_cls(
-    ds_to_build: str,
-) -> Tuple[Type[tfds.core.DatasetBuilder], Dict[str, str]]:
+    ds_to_build: str,) -> Tuple[Type[tfds.core.DatasetBuilder], Dict[str, str]]:
   """Infer the builder class to build.
 
   Args:
@@ -266,8 +249,7 @@ def _get_builder_cls(
   name, builder_kwargs = tfds.core.naming.parse_builder_name_kwargs(ds_to_build)
   builder_cls = tfds.builder_cls(str(name))
   logging.info(
-      f'Loading dataset {ds_to_build} from imports: {builder_cls.__module__}'
-  )
+      f'Loading dataset {ds_to_build} from imports: {builder_cls.__module__}')
   builder_kwargs = typing.cast(Dict[str, str], builder_kwargs)
   return builder_cls, builder_kwargs
 
@@ -300,30 +282,25 @@ def _search_script_path(ds_to_build: str) -> Optional[tfds.core.ReadOnlyPath]:
   if path.exists():
     return path
   # Path not found. Use heuristic to detect if user intended to pass a path:
-  elif (
-      not ds_to_build
-      or ds_to_build.endswith((os.sep, '.py'))  # ds.py
-      or tfds.core.as_path(ds_to_build).is_absolute()  # /path/to
-      or ds_to_build.count(os.sep) > 1  # path/dataset/config
-  ):
+  elif (not ds_to_build or ds_to_build.endswith((os.sep, '.py'))  # ds.py
+        or tfds.core.as_path(ds_to_build).is_absolute()  # /path/to
+        or ds_to_build.count(os.sep) > 1  # path/dataset/config
+       ):
     raise FileNotFoundError(
         f'Could not find generation script for `{ds_to_build}`: '
-        f'{path} not found.'
-    )
+        f'{path} not found.')
   else:
     return None
 
 
 def _validate_script_path(
-    path: tfds.core.ReadOnlyPath,
-) -> Optional[tfds.core.ReadOnlyPath]:
+    path: tfds.core.ReadOnlyPath,) -> Optional[tfds.core.ReadOnlyPath]:
   """Validates and returns the `dataset.py` generation script path."""
   if path.suffix != '.py':
     raise ValueError(f'Expected `.py` file. Invalid dataset path: {path}.')
   if not path.exists():
     raise FileNotFoundError(
-        f'Could not find dataset generation script: {path}. '
-    )
+        f'Could not find dataset generation script: {path}. ')
   return path
 
 
@@ -366,8 +343,7 @@ def _download_and_prepare(
 
 
 def _make_download_config(
-    args: argparse.Namespace,
-) -> tfds.download.DownloadConfig:
+    args: argparse.Namespace,) -> tfds.download.DownloadConfig:
   """Generate the download and prepare configuration."""
   # Load the download config
   dl_config = tfds.download.DownloadConfig(
@@ -388,8 +364,7 @@ def _make_download_config(
   if beam is not None:
     if args.beam_pipeline_options:
       dl_config.beam_options = beam.options.pipeline_options.PipelineOptions(
-          flags=[f'--{opt}' for opt in args.beam_pipeline_options.split(',')]
-      )
+          flags=[f'--{opt}' for opt in args.beam_pipeline_options.split(',')])
 
   return dl_config
 
@@ -412,18 +387,15 @@ def _get_config_name(
     The config name to generate, or None.
   """
   num_config = sum(
-      c is not None for c in (config_kwarg, config_name, config_idx)
-  )
+      c is not None for c in (config_kwarg, config_name, config_idx))
   if num_config > 1:
     raise ValueError(
         'Config should only be defined once by either `ds_name/config`, '
-        '`--config` or `--config_idx`'
-    )
+        '`--config` or `--config_idx`')
   elif num_config == 1 and not builder_cls.BUILDER_CONFIGS:
     raise ValueError(
         f'Cannot generate requested config: Dataset {builder_cls.name} does '
-        'not have config.'
-    )
+        'not have config.')
 
   if config_kwarg:  # `ds_name/config`
     return config_kwarg
@@ -431,11 +403,9 @@ def _get_config_name(
     return config_name
   elif config_idx is not None:  # `--config_idx 123`
     if config_idx > len(builder_cls.BUILDER_CONFIGS):
-      raise ValueError(
-          f'--config_idx {config_idx} greater than number '
-          f'of configs {len(builder_cls.BUILDER_CONFIGS)} for '
-          f'{builder_cls.name}.'
-      )
+      raise ValueError(f'--config_idx {config_idx} greater than number '
+                       f'of configs {len(builder_cls.BUILDER_CONFIGS)} for '
+                       f'{builder_cls.name}.')
     else:
       # Use `config.name` to avoid
       # https://github.com/tensorflow/datasets/issues/2348

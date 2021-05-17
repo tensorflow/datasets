@@ -40,20 +40,15 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import termcolor
 
-
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'data_dir', tfds.core.constants.DATA_DIR, 'Path to the data directory.'
-)
-flags.DEFINE_boolean(
-    'skip_confirmation', False, 'Whether to skip user confirmation or not.'
-)
-
+flags.DEFINE_string('data_dir', tfds.core.constants.DATA_DIR,
+                    'Path to the data directory.')
+flags.DEFINE_boolean('skip_confirmation', False,
+                     'Whether to skip user confirmation or not.')
 
 # Nested dict representing the file structure.
 TreeDict = Dict[str, 'TreeDict']  # pytype: disable=not-supported-yet
-
 
 # Folder in this lists are never deleted
 DIRS_TO_KEEP = frozenset({'downloads', 'download', 'manual', 'extracted'})
@@ -186,8 +181,7 @@ def _get_extra_dirs(
     dirs_to_keep = []
     dirs_to_delete = []
     _extract_dirs_from_future(
-        dirs_to_keep=dirs_to_keep, dirs_to_delete=dirs_to_delete, future=future
-    )
+        dirs_to_keep=dirs_to_keep, dirs_to_delete=dirs_to_delete, future=future)
   return sorted(dirs_to_keep), sorted(dirs_to_delete)
 
 
@@ -199,12 +193,14 @@ def _display_dirs(
   """Display dirs to keep and delete."""
   dirs_to_keep = set(dirs_to_keep)
   dirs_to_delete = set(dirs_to_delete)
+
   # Format dirs to strip prefix and keep in bold.
   def _format(d, keep: bool):
     d = str(d.relative_to(data_dir))
     if keep:
       d = termcolor.colored(f'{d} (*)', attrs=['bold'])
     return d
+
   all_dirs = [
       _format(d, keep=d in dirs_to_keep)
       for d in sorted(dirs_to_keep | dirs_to_delete)
@@ -214,10 +210,8 @@ def _display_dirs(
   print('Path indicated in bold (*) will be kept, the other will be deleted.\n')
   print('\n'.join(all_dirs))
   print()
-  print(
-      f'{len(dirs_to_delete)} datasets to delete, {len(dirs_to_keep)} to '
-      'keep.\n'
-  )
+  print(f'{len(dirs_to_delete)} datasets to delete, {len(dirs_to_keep)} to '
+        'keep.\n')
 
 
 def delete_old_versions(

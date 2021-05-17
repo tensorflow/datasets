@@ -34,10 +34,9 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'datasets', None,
     'Comma separated list of datasets to generates. None for all datasets.')
-flags.DEFINE_string(
-    'dst_dir', None, 'Destination dir to save the images.')
-flags.DEFINE_boolean(
-    'overwrite', False, 'If True, overwrite the existing visualizations.')
+flags.DEFINE_string('dst_dir', None, 'Destination dir to save the images.')
+flags.DEFINE_boolean('overwrite', False,
+                     'If True, overwrite the existing visualizations.')
 
 
 def _save_fig(dst_path: str, figure: matplotlib.figure.Figure) -> None:

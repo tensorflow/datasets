@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Script utils for generating datasets figures and dataframes.
-"""
+r"""Script utils for generating datasets figures and dataframes."""
 
 import concurrent.futures
 import functools
@@ -116,10 +115,11 @@ def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
   if datasets is None:
     return tfds.core.load.list_full_names(current_version_only=True)
   else:
-    builder_names = list(itertools.chain.from_iterable([
-        tfds.core.load.single_full_names(builder_name)
-        for builder_name in datasets
-    ]))
+    builder_names = list(
+        itertools.chain.from_iterable([
+            tfds.core.load.single_full_names(builder_name)
+            for builder_name in datasets
+        ]))
     return builder_names
 
 
@@ -153,8 +153,7 @@ def multi_thread_map(
   """
   full_names = _get_full_names(datasets)
   with concurrent.futures.ThreadPoolExecutor(
-      max_workers=_WORKER_COUNT_DATASETS,
-  ) as executor:
+      max_workers=_WORKER_COUNT_DATASETS,) as executor:
     list(executor.map(worker_fn, full_names))
 
 

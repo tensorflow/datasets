@@ -35,9 +35,8 @@ Filename = NewType('Filename', Optional[str])
 # pylint: disable=logging-format-interpolation
 
 
-def _collect_path_to_url_infos() -> Dict[
-    tfds.core.ReadWritePath, Dict[Url, checksums.UrlInfo]
-]:
+def _collect_path_to_url_infos(
+) -> Dict[tfds.core.ReadWritePath, Dict[Url, checksums.UrlInfo]]:
   """Collect checksums paths to url_infos."""
   # Collect legacy checksums paths
   url_info_paths = list(checksums._checksum_paths().values())  # pylint: disable=protected-access
@@ -50,9 +49,9 @@ def _collect_path_to_url_infos() -> Dict[
 
   url_info_paths = [tfds.core.utils.to_write_path(p) for p in url_info_paths]
   return {
-      path: typing.cast(
-          Dict[Url, checksums.UrlInfo], checksums.load_url_infos(path)
-      ) for path in url_info_paths
+      path: typing.cast(Dict[Url, checksums.UrlInfo],
+                        checksums.load_url_infos(path))
+      for path in url_info_paths
   }
 
 
@@ -94,8 +93,7 @@ def _update_url_info(
   if old_filename and old_filename != new_filename:
     tqdm.tqdm.write(
         f'Filename for {url} already exist. Updating `{old_filename}` to '
-        f'`{new_filename}`'
-    )
+        f'`{new_filename}`')
   return dataclasses.replace(url_info, filename=new_filename)
 
 
@@ -104,25 +102,23 @@ def main(_):
   path_to_url_infos = _collect_path_to_url_infos()
 
   # Remove duplicate urls (merge all Dict[Url, UrlInfo] together)
-  all_url_infos = dict(itertools.chain.from_iterable(
-      d.items() for d in path_to_url_infos.values()
-  ))
+  all_url_infos = dict(
+      itertools.chain.from_iterable(
+          d.items() for d in path_to_url_infos.values()))
 
   logging.info('Start fetching filenames.')
   with futures.ThreadPoolExecutor(max_workers=100) as executor:
     # Query all filenames in parallel
     iter_all_url_infos = tqdm.tqdm(all_url_infos.items(), desc='Urls sent')
     received_tqdm = tqdm.tqdm(
-        desc='Filenames received', total=len(all_url_infos)
-    )
+        desc='Filenames received', total=len(all_url_infos))
     urls_to_filename = {
         url: executor.submit(_request_filename, url, url_info, received_tqdm)
         for url, url_info in iter_all_url_infos
     }
     # Update and save the new UrlInfo
     for path, url_infos in tqdm.tqdm(
-        path_to_url_infos.items(), desc='Saving filenames'
-    ):
+        path_to_url_infos.items(), desc='Saving filenames'):
       # Update the UrlInfo with the new filenames
       url_infos = {
           url: _update_url_info(url, url_info, urls_to_filename[url].result())
