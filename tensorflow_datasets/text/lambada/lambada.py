@@ -89,8 +89,7 @@ class Lambada(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                'filepath':
-                    os.path.join(dl_dir, 'lambada_test_plain_text.txt')
+                'filepath': os.path.join(dl_dir, 'lambada_test_plain_text.txt')
             },
         ),
     ]
@@ -100,6 +99,4 @@ class Lambada(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(filepath) as f:
       for idx, line in enumerate(f):
         key = '%s_%d' % (os.path.basename(filepath), idx)
-        yield key, {
-            'passage': line
-        }
+        yield key, {'passage': line}

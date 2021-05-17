@@ -65,8 +65,7 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'premise':
-                tfds.features.Translation(
-                    languages=_LANGUAGES,),
+                tfds.features.Translation(languages=_LANGUAGES,),
             'hypothesis':
                 tfds.features.TranslationVariableLanguages(
                     languages=_LANGUAGES,),

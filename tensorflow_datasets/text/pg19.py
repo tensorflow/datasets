@@ -87,19 +87,22 @@ class Pg19(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'metadata': metadata_dict,
-                'filepath': os.path.join(_DATA_DIR, 'train')},
+                'filepath': os.path.join(_DATA_DIR, 'train')
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'metadata': metadata_dict,
-                'filepath': os.path.join(_DATA_DIR, 'validation')},
+                'filepath': os.path.join(_DATA_DIR, 'validation')
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'metadata': metadata_dict,
-                'filepath': os.path.join(_DATA_DIR, 'test')},
+                'filepath': os.path.join(_DATA_DIR, 'test')
+            },
         ),
     ]
 

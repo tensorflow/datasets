@@ -46,8 +46,7 @@ Features include message id, message text and timestamp.
 Target is list of messages that current message replies to.
 Each record contains a list of messages from one day of IRC chat.
 """
-_DOWNLOAD_URL = \
-    "https://github.com/jkkummerfeld/irc-disentanglement/zipball/fd379e9"
+_DOWNLOAD_URL = "https://github.com/jkkummerfeld/irc-disentanglement/zipball/fd379e9"
 _DOWNLOAD_ARCHIVE_SUBDIR = os.path.join(
     "jkkummerfeld-irc-disentanglement-fd379e9", "data")
 
@@ -90,8 +89,7 @@ def _read_texts_file(path):
 def _read_annot_file(path):
   """Reads file with replies annotation."""
   with tf.io.gfile.GFile(path, "r") as f:
-    return [(int(first), int(second))
-            for first, second, _ in map(str.split, f)]
+    return [(int(first), int(second)) for first, second, _ in map(str.split, f)]
 
 
 def _parse_out_timestamps(raw_texts, day_str):
@@ -154,7 +152,7 @@ def _prepare_examples(texts_file_path, annot_file_path, day_str):
         _MESSAGE_TEXT: texts[line_idx],
         _MESSAGE_TIMESTAMP: timestamps[line_idx],
         _MESSAGE_PARENTS_IDS: parents_ids
-        }
+    }
 
 
 class IrcDisentanglement(tfds.core.GeneratorBasedBuilder):
@@ -167,20 +165,26 @@ class IrcDisentanglement(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            _IRC_DAY_KEY: tfds.features.Sequence(
-                tfds.features.FeaturesDict({
-                    _MESSAGE_ID: tfds.features.Text(),
-                    _MESSAGE_TEXT: tfds.features.Text(),
-                    _MESSAGE_TIMESTAMP: tfds.features.Text(),
-                    _MESSAGE_PARENTS_IDS: tfds.features.Sequence(
-                        tfds.features.Text()),
-                }))}),
+            _IRC_DAY_KEY:
+                tfds.features.Sequence(
+                    tfds.features.FeaturesDict({
+                        _MESSAGE_ID:
+                            tfds.features.Text(),
+                        _MESSAGE_TEXT:
+                            tfds.features.Text(),
+                        _MESSAGE_TIMESTAMP:
+                            tfds.features.Text(),
+                        _MESSAGE_PARENTS_IDS:
+                            tfds.features.Sequence(tfds.features.Text()),
+                    }))
+        }),
         homepage="https://jkk.name/irc-disentanglement",
         citation=_CITATION,
     )
 
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager
-                       ) -> List[tfds.core.SplitGenerator]:
+  def _split_generators(
+      self, dl_manager: tfds.download.DownloadManager
+  ) -> List[tfds.core.SplitGenerator]:
     """Returns SplitGenerators."""
     base_dir = dl_manager.download_and_extract(_DOWNLOAD_URL)
     data_dir = os.path.join(base_dir, _DOWNLOAD_ARCHIVE_SUBDIR)
@@ -188,23 +192,31 @@ class IrcDisentanglement(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"day_to_paths":
-                            _get_day_to_paths(os.path.join(data_dir, "train"))},
+            gen_kwargs={
+                "day_to_paths":
+                    _get_day_to_paths(os.path.join(data_dir, "train"))
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"day_to_paths":
-                            _get_day_to_paths(os.path.join(data_dir, "dev"))},
+            gen_kwargs={
+                "day_to_paths": _get_day_to_paths(
+                    os.path.join(data_dir, "dev"))
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"day_to_paths":
-                            _get_day_to_paths(os.path.join(data_dir, "test"))},
+            gen_kwargs={
+                "day_to_paths":
+                    _get_day_to_paths(os.path.join(data_dir, "test"))
+            },
         ),
     ]
 
   def _generate_examples(self, day_to_paths):
     """Yields examples."""
     for day, paths in day_to_paths.items():
-      yield day, {_IRC_DAY_KEY: list(
-          _prepare_examples(paths["text"], paths["annot"], day))}
+      yield day, {
+          _IRC_DAY_KEY:
+              list(_prepare_examples(paths["text"], paths["annot"], day))
+      }

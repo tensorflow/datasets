@@ -43,7 +43,8 @@ _END_MARKS = (".", "?", "!", "\"")
 _ELLIPSIS = "..."
 _POLICY_SUBSTRINGS = [
     "terms of use", "privacy policy", "cookie policy", "uses cookies",
-    "use of cookies", "use cookies"]
+    "use of cookies", "use cookies"
+]
 
 # Memoized sentence tokenizer.
 _SENTENCE_TOKENIZER = None
@@ -52,18 +53,22 @@ UNKNOWN_LANGUAGE = "und"
 
 
 def get_counter_inc_fn(namespace):
+
   def counter_inc_fn(counter, amt=1):
     tfds.core.lazy_imports.apache_beam.metrics.Metrics.counter(
         namespace, counter).inc(amt)
+
   return counter_inc_fn
 
 
 def get_hashed_url_filter_fn(predicate_fn):
+
   def filter_fn(el):
     url, _ = el
     val = int(
         hashlib.md5(tf.compat.as_text(url).encode("utf-8")).hexdigest(), 16)
     return predicate_fn(val)
+
   return filter_fn
 
 
@@ -86,6 +91,7 @@ def _get_sentences(text):
   if not _SENTENCE_TOKENIZER:
     _SENTENCE_TOKENIZER = _load_sentence_tokenizer()
   return list(_SENTENCE_TOKENIZER.tokenize(tf.compat.as_text(text)))
+
 
 # Global lock used for language detection modules that aren't threadsafe.
 langdetect_lock = threading.Lock()
@@ -200,6 +206,7 @@ def clean_page(url_and_features,
       be skipped.
     max_word_length: int, the maximum number of characters allowed in a word.
       Lines containing a word with too many characters are removed.
+
   Yields:
     The url and cleaned text for the page.
   """
@@ -280,9 +287,9 @@ def _remove_lines_from_text(el, counter_inc_fn, min_num_sentences):
   line that has been selected to keep.
 
   Args:
-    el: `(string, {'features': features_dict, 'lines': [string]})`,
-      element containing the result of a join on key with both the page text
-      and lower-cased, hashed lines to remove.
+    el: `(string, {'features': features_dict, 'lines': [string]})`, element
+      containing the result of a join on key with both the page text and
+      lower-cased, hashed lines to remove.
     counter_inc_fn: function, a function taking the name of a counter to be
       incremented and the (optional) amount.
     min_num_sentences: int, the minimum number of sentences a page needs to not
@@ -295,8 +302,8 @@ def _remove_lines_from_text(el, counter_inc_fn, min_num_sentences):
   url, join_values = el
   features = join_values["features"]
 
-  assert len(features) == 1, "Invalid page count (%d) for %s" % (
-      len(features), url)
+  assert len(features) == 1, "Invalid page count (%d) for %s" % (len(features),
+                                                                 url)
   features = features[0]
   text = features["text"]
   lines_to_keep = set(join_values["lines"])
@@ -341,16 +348,15 @@ def remove_duplicate_text(pages, min_num_sentences=_MIN_NUM_SENTENCES):
   lines_to_keep = line_to_selected_url | beam.Map(lambda x: (x[1][0], x[0]))
 
   # Output: url, text
-  final_docs = (
-      {
-          "features": pages,
-          "lines": lines_to_keep
-      }
-      | "group_features_and_lines_by_url" >> beam.CoGroupByKey()
-      | beam.FlatMap(
-          _remove_lines_from_text,
-          counter_inc_fn=get_counter_inc_fn("dedupe-lines"),
-          min_num_sentences=min_num_sentences))
+  final_docs = ({
+      "features": pages,
+      "lines": lines_to_keep
+  }
+                | "group_features_and_lines_by_url" >> beam.CoGroupByKey()
+                | beam.FlatMap(
+                    _remove_lines_from_text,
+                    counter_inc_fn=get_counter_inc_fn("dedupe-lines"),
+                    min_num_sentences=min_num_sentences))
 
   return final_docs
 
@@ -362,8 +368,8 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
     counter_inc_fn = get_counter_inc_fn("split-wet-file")
   counter_inc_fn("wet-file")
 
-  with tf.io.gfile.GFile(wet_file_path, "rb") as f, gzip.GzipFile(
-      fileobj=f) as g:
+  with tf.io.gfile.GFile(wet_file_path,
+                         "rb") as f, gzip.GzipFile(fileobj=f) as g:
     url = None
     content = None
     content_len = None
@@ -546,4 +552,3 @@ def paragraph_filter(page, min_paragraphs=3, min_paragraph_len=200):
     return False
   get_counter_inc_fn("paragraph-filter")("passed")
   return True
-

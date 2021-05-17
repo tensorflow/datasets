@@ -56,12 +56,8 @@ class C4UtilsTest(testing.TestCase):
 
   def run_clean_page(self, features):
     counters, counter_inc_fn = _get_counters()
-    results = list(
-        c4_utils.get_clean_page_fn()(
-            url_and_features=("url", features),
-            counter_inc_fn=counter_inc_fn
-        )
-    )
+    results = list(c4_utils.get_clean_page_fn()(
+        url_and_features=("url", features), counter_inc_fn=counter_inc_fn))
     self.assertLessEqual(len(results), 1)
     result = None if not results else results[0][1]
     return result, counters
@@ -182,8 +178,7 @@ This line should be okay."""
     import apache_beam.testing.util as beam_testing_util  # pylint:disable=g-import-not-at-top
     beam = lazy_imports.apache_beam
     input_urls_and_text = [
-        ("url/1-0",
-         "This is a duplicated line.\nThis is a unique line.\n"
+        ("url/1-0", "This is a duplicated line.\nThis is a unique line.\n"
          "This one comes first and so it stays.\n"
          "This one is duplicate within the page so the others are removed.\n"
          "Here is a sentence between the duplicates.\n"
@@ -193,36 +188,32 @@ This line should be okay."""
          "This is 2nd unique line.\nThis one comes second so it is removed "
          "even though the capitalizaiton is different.\n"
          "this is a Duplicated line. "),
-        ("url/3-4",
-         "This is a 3rd unique line.\nThis is a duplicated line.\n"
+        ("url/3-4", "This is a 3rd unique line.\nThis is a duplicated line.\n"
          "This one comes third and so it is removed. But the page stays "
          "because there are still 3 sentences remaining."),
-        ("url/4-4",
-         "This is a 4th unique line.\nThis is a duplicated line.\n"
+        ("url/4-4", "This is a 4th unique line.\nThis is a duplicated line.\n"
          "This one comes third and so it is removed, and the page is too "
          "since there aren't enough sentences left."),
     ]
     expected_urls_and_text = [
-        ("url/1-0",
-         "This is a duplicated line.\nThis is a unique line.\n"
+        ("url/1-0", "This is a duplicated line.\nThis is a unique line.\n"
          "This one comes first and so it stays.\n"
          "This one is duplicate within the page so the others are removed.\n"
          "Here is a sentence between the duplicates."),
-        ("url/3-4",
-         "This is a 3rd unique line.\n"
+        ("url/3-4", "This is a 3rd unique line.\n"
          "This one comes third and so it is removed. But the page stays "
          "because there are still 3 sentences remaining."),
     ]
     with beam.Pipeline() as pipeline:
-      pages = pipeline | beam.Create([
-          (url, {"text": text}) for url, text in input_urls_and_text
-      ])
+      pages = pipeline | beam.Create([(url, {
+          "text": text
+      }) for url, text in input_urls_and_text])
       deduped_pages = c4_utils.remove_duplicate_text(pages)
       beam_testing_util.assert_that(
           deduped_pages,
-          beam_testing_util.equal_to([
-              (url, {"text": text}) for url, text in expected_urls_and_text
-          ]))
+          beam_testing_util.equal_to([(url, {
+              "text": text
+          }) for url, text in expected_urls_and_text]))
 
   def test_split_wet_file(self):
     if six.PY2:
@@ -231,16 +222,14 @@ This line should be okay."""
     counters, counter_inc_fn = _get_counters()
     list(
         c4_utils.split_wet_file(
-            os.path.join(
-                testing.fake_examples_dir(),
-                "c4/c4_wet_files/cc_0.warc.wet.gz"),
+            os.path.join(testing.fake_examples_dir(),
+                         "c4/c4_wet_files/cc_0.warc.wet.gz"),
             counter_inc_fn=counter_inc_fn))
-    self.assertEqual(
-        {
-            "wet-file": 1,
-            "passed": 6,
-            "filtered:no_url": 1,
-        }, dict(counters))
+    self.assertEqual({
+        "wet-file": 1,
+        "passed": 6,
+        "filtered:no_url": 1,
+    }, dict(counters))
 
   def test_badwords_filter(self):
     padding_text = """This page starts out with some text.
@@ -271,8 +260,10 @@ But then, all of a sudden, there's a badword... or not?
         "de",  # doesn't have badwords listed
     ]
     expected_outputs = [True, False, False, False, True, False, True]
-    badwords_filter_fn = c4_utils.get_badwords_filter_fn(
-        badwords={"en": ["ass"], "es": ["culo"]})
+    badwords_filter_fn = c4_utils.get_badwords_filter_fn(badwords={
+        "en": ["ass"],
+        "es": ["culo"]
+    })
 
     outputs = [
         badwords_filter_fn(  # pylint:disable=g-complex-comprehension

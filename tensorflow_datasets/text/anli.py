@@ -57,9 +57,7 @@ class AnliConfig(tfds.core.BuilderConfig):
       round_dir: str. The directory for the Anli round to read.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(AnliConfig, self).__init__(
-        version=VERSION,
-        **kwargs)
+    super(AnliConfig, self).__init__(version=VERSION, **kwargs)
     self.round_dir = round_dir
 
 
@@ -108,21 +106,23 @@ class Anli(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "filepath": os.path.join(
-                    dl_dir, EXTRACT_PATH_TOKEN, self._builder_config.round_dir,
-                    "test.jsonl")
+                "filepath":
+                    os.path.join(dl_dir, EXTRACT_PATH_TOKEN,
+                                 self._builder_config.round_dir, "test.jsonl")
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"filepath": os.path.join(
-                dl_dir, EXTRACT_PATH_TOKEN, self._builder_config.round_dir,
-                "dev.jsonl")}),
+            gen_kwargs={
+                "filepath":
+                    os.path.join(dl_dir, EXTRACT_PATH_TOKEN,
+                                 self._builder_config.round_dir, "dev.jsonl")
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "filepath": os.path.join(
-                    dl_dir, EXTRACT_PATH_TOKEN, self._builder_config.round_dir,
-                    "train.jsonl")
+                "filepath":
+                    os.path.join(dl_dir, EXTRACT_PATH_TOKEN,
+                                 self._builder_config.round_dir, "train.jsonl")
             })
     ]
 

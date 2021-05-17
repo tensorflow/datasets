@@ -27,6 +27,7 @@ import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 from absl import flags  # pylint:disable=g-bad-import-order,g-import-not-at-top
+
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean(
     "wikipedia_auto_select_flume_mode", True,
@@ -67,24 +68,25 @@ WIKIPEDIA_LANGUAGES = [
     "es", "et", "eu", "ext", "fa", "ff", "fi", "fiu-vro", "fj", "fo", "fr",
     "frp", "frr", "fur", "fy", "ga", "gag", "gan", "gd", "gl", "glk", "gn",
     "gom", "gor", "got", "gu", "gv", "ha", "hak", "haw", "he", "hi", "hif",
-    "ho", "hr", "hsb", "ht", "hu", "hy", "ia", "id", "ie", "ig", "ii",
-    "ik", "ilo", "inh", "io", "is", "it", "iu", "ja", "jam", "jbo", "jv", "ka",
-    "kaa", "kab", "kbd", "kbp", "kg", "ki", "kj", "kk", "kl", "km", "kn", "ko",
-    "koi", "krc", "ks", "ksh", "ku", "kv", "kw", "ky", "la", "lad", "lb",
-    "lbe", "lez", "lfn", "lg", "li", "lij", "lmo", "ln", "lo", "lrc", "lt",
-    "ltg", "lv", "mai", "map-bms", "mdf", "mg", "mh", "mhr", "mi", "min", "mk",
-    "ml", "mn", "mr", "mrj", "ms", "mt", "mus", "mwl", "my", "myv", "mzn", "na",
-    "nah", "nap", "nds", "nds-nl", "ne", "new", "ng", "nl", "nn", "no", "nov",
-    "nrm", "nso", "nv", "ny", "oc", "olo", "om", "or", "os", "pa", "pag", "pam",
-    "pap", "pcd", "pdc", "pfl", "pi", "pih", "pl", "pms", "pnb", "pnt", "ps",
-    "pt", "qu", "rm", "rmy", "rn", "ro", "roa-rup", "roa-tara", "ru", "rue",
-    "rw", "sa", "sah", "sat", "sc", "scn", "sco", "sd", "se", "sg", "sh", "si",
+    "ho", "hr", "hsb", "ht", "hu", "hy", "ia", "id", "ie", "ig", "ii", "ik",
+    "ilo", "inh", "io", "is", "it", "iu", "ja", "jam", "jbo", "jv", "ka", "kaa",
+    "kab", "kbd", "kbp", "kg", "ki", "kj", "kk", "kl", "km", "kn", "ko", "koi",
+    "krc", "ks", "ksh", "ku", "kv", "kw", "ky", "la", "lad", "lb", "lbe", "lez",
+    "lfn", "lg", "li", "lij", "lmo", "ln", "lo", "lrc", "lt", "ltg", "lv",
+    "mai", "map-bms", "mdf", "mg", "mh", "mhr", "mi", "min", "mk", "ml", "mn",
+    "mr", "mrj", "ms", "mt", "mus", "mwl", "my", "myv", "mzn", "na", "nah",
+    "nap", "nds", "nds-nl", "ne", "new", "ng", "nl", "nn", "no", "nov", "nrm",
+    "nso", "nv", "ny", "oc", "olo", "om", "or", "os", "pa", "pag", "pam", "pap",
+    "pcd", "pdc", "pfl", "pi", "pih", "pl", "pms", "pnb", "pnt", "ps", "pt",
+    "qu", "rm", "rmy", "rn", "ro", "roa-rup", "roa-tara", "ru", "rue", "rw",
+    "sa", "sah", "sat", "sc", "scn", "sco", "sd", "se", "sg", "sh", "si",
     "simple", "sk", "sl", "sm", "sn", "so", "sq", "sr", "srn", "ss", "st",
     "stq", "su", "sv", "sw", "szl", "ta", "tcy", "te", "tet", "tg", "th", "ti",
     "tk", "tl", "tn", "to", "tpi", "tr", "ts", "tt", "tum", "tw", "ty", "tyv",
     "udm", "ug", "uk", "ur", "uz", "ve", "vec", "vep", "vi", "vls", "vo", "wa",
     "war", "wo", "wuu", "xal", "xh", "xmf", "yi", "yo", "za", "zea", "zh",
-    "zh-classical", "zh-min-nan", "zh-yue", "zu"]
+    "zh-classical", "zh-min-nan", "zh-yue", "zu"
+]
 
 # Use mirror (your.org) to avoid download caps.
 _BASE_URL_TMPL = "https://dumps.wikimedia.your.org/{lang}wiki/{date}/"
@@ -105,8 +107,7 @@ class WikipediaConfig(tfds.core.BuilderConfig):
     """
     super(WikipediaConfig, self).__init__(
         name=f"{date}.{language}",
-        description=
-        f"Wikipedia dataset for {language}, parsed from {date} dump.",
+        description=f"Wikipedia dataset for {language}, parsed from {date} dump.",
         **kwargs)
     self.date = date
     self.language = language
@@ -151,6 +152,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+
     def _base_url(lang):
       return _BASE_URL_TMPL.format(
           lang=lang.replace("-", "_"), date=self._builder_config.date)
@@ -167,8 +169,8 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       dump_info = json.load(f)
     multistream_dump_info = dump_info["jobs"]["articlesmultistreamdump"]
     assert multistream_dump_info["status"] == "done", (
-        "Specified dump (%s) multistream status is not 'done': %s" % (
-            _base_url(lang), multistream_dump_info["status"]))
+        "Specified dump (%s) multistream status is not 'done': %s" %
+        (_base_url(lang), multistream_dump_info["status"]))
 
     for fname, info in multistream_dump_info["files"].items():
       if ".xml" not in fname:
@@ -234,8 +236,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       id_, title, raw_content = inputs
       try:
         text = _parse_and_clean_wikicode(raw_content)
-      except (
-          tfds.core.lazy_imports.mwparserfromhell.parser.ParserError) as e:
+      except (tfds.core.lazy_imports.mwparserfromhell.parser.ParserError) as e:
         beam.metrics.Metrics.counter(language, "parser-error").inc()
         logging.error("mwparserfromhell ParseError: %s", e)
         return
@@ -246,17 +247,12 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
       beam.metrics.Metrics.counter(language, "cleaned-examples").inc()
 
-      yield id_, {
-          "title": title,
-          "text": text
-      }
+      yield id_, {"title": title, "text": text}
 
-    return (
-        beam.Create(filepaths)
-        | beam.FlatMap(_extract_content)
-        | beam.transforms.Reshuffle()
-        | beam.FlatMap(_clean_content)
-    )
+    return (beam.Create(filepaths)
+            | beam.FlatMap(_extract_content)
+            | beam.transforms.Reshuffle()
+            | beam.FlatMap(_clean_content))
 
 
 def _parse_and_clean_wikicode(raw_content):
@@ -266,14 +262,18 @@ def _parse_and_clean_wikicode(raw_content):
   # Filters for references, tables, and file/image links.
   re_rm_wikilink = re.compile(
       "^(?:File|Image|Media):", flags=re.IGNORECASE | re.UNICODE)
+
   def rm_wikilink(obj):
     return bool(re_rm_wikilink.match(six.text_type(obj.title)))  # pytype: disable=wrong-arg-types
+
   def rm_tag(obj):
     return six.text_type(obj.tag) in {"ref", "table"}
+
   def rm_template(obj):
     return obj.name.lower() in {
         "reflist", "notelist", "notelist-ua", "notelist-lr", "notelist-ur",
-        "notelist-lg"}
+        "notelist-lg"
+    }
 
   def try_remove_obj(obj, section):
     try:

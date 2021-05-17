@@ -66,10 +66,11 @@ class SchemaGuidedDialogue(tfds.core.GeneratorBasedBuilder):
             # TODO(arunchaganty): include frame and state annotations
             "first_speaker": tfds.features.ClassLabel(names=["USER", "SYSTEM"]),
             "metadata": {
-                "services": tfds.features.Sequence({
-                    "name": tf.string,
-                    # TODO(arunchaganty): include service definitions
-                })
+                "services":
+                    tfds.features.Sequence({
+                        "name": tf.string,
+                        # TODO(arunchaganty): include service definitions
+                    })
             }
         }),
         supervised_keys=None,
@@ -79,16 +80,19 @@ class SchemaGuidedDialogue(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    path = dl_manager.download_and_extract(
-        _DATA_URL + "/archive/refs/heads/master.zip")
+    path = dl_manager.download_and_extract(_DATA_URL +
+                                           "/archive/refs/heads/master.zip")
 
     return {
-        "train": self._generate_examples(
-            path / "dstc8-schema-guided-dialogue-master" / "train"),
-        "dev": self._generate_examples(
-            path / "dstc8-schema-guided-dialogue-master" / "dev"),
-        "test": self._generate_examples(
-            path / "dstc8-schema-guided-dialogue-master" / "test"),
+        "train":
+            self._generate_examples(
+                path / "dstc8-schema-guided-dialogue-master" / "train"),
+        "dev":
+            self._generate_examples(
+                path / "dstc8-schema-guided-dialogue-master" / "dev"),
+        "test":
+            self._generate_examples(
+                path / "dstc8-schema-guided-dialogue-master" / "test"),
     }
 
   def _generate_examples(self, path):
@@ -110,7 +114,8 @@ class SchemaGuidedDialogue(tfds.core.GeneratorBasedBuilder):
             # TODO(arunchaganty): include frame and state annotations
             "metadata": {
                 # TODO(arunchaganty): include schema definitions
-                "services": [{"name": service,
-                              } for service in datum["services"]],
+                "services": [{
+                    "name": service,
+                } for service in datum["services"]],
             },
         }

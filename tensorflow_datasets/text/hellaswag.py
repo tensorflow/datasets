@@ -96,4 +96,3 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
             'label': elem.get('label', -1),
             'split_type': elem['split_type']
         }
-

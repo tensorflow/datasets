@@ -57,7 +57,8 @@ WIKIPEDIA_LANGUAGES = [
     "en", "ar", "zh-cn", "zh-tw", "nl", "fr", "de", "it", "ja", "ko", "pl",
     "pt", "ru", "es", "th", "tr", "bg", "ca", "cs", "da", "el", "et", "fa",
     "fi", "he", "hi", "hr", "hu", "id", "lt", "lv", "ms", "no", "ro", "sk",
-    "sl", "sr", "sv", "tl", "uk", "vi"]
+    "sl", "sr", "sv", "tl", "uk", "vi"
+]
 
 
 class Wiki40bConfig(tfds.core.BuilderConfig):
@@ -95,12 +96,9 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "wikidata_id":
-                tfds.features.Text(),
-            "text":
-                tfds.features.Text(),
-            "version_id":
-                tfds.features.Text(),
+            "wikidata_id": tfds.features.Text(),
+            "text": tfds.features.Text(),
+            "version_id": tfds.features.Text(),
         }),
         supervised_keys=None,
         homepage=_URL,
@@ -119,21 +117,25 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "filepaths": os.path.join(
-                    _DATA_DIRECTORY, "train", "{}_examples-*".format(lang))},
+                "filepaths":
+                    os.path.join(_DATA_DIRECTORY, "train",
+                                 "{}_examples-*".format(lang))
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "filepaths": os.path.join(
-                    _DATA_DIRECTORY, "dev", "{}_examples-*".format(lang))}
-        ),
+                "filepaths":
+                    os.path.join(_DATA_DIRECTORY, "dev",
+                                 "{}_examples-*".format(lang))
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "filepaths": os.path.join(
-                    _DATA_DIRECTORY, "test", "{}_examples-*".format(lang))}
-        ),
+                "filepaths":
+                    os.path.join(_DATA_DIRECTORY, "test",
+                                 "{}_examples-*".format(lang))
+            }),
     ]
 
   def _build_pcollection(self, pipeline, filepaths):
@@ -143,20 +145,21 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
 
     def _extract_content(example):
       """Extracts content from a TFExample."""
-      wikidata_id = example.features.feature[
-          "wikidata_id"].bytes_list.value[0].decode("utf-8")
-      text = example.features.feature[
-          "text"].bytes_list.value[0].decode("utf-8")
-      version_id = example.features.feature[
-          "version_id"].bytes_list.value[0].decode("utf-8")
+      wikidata_id = example.features.feature["wikidata_id"].bytes_list.value[
+          0].decode("utf-8")
+      text = example.features.feature["text"].bytes_list.value[0].decode(
+          "utf-8")
+      version_id = example.features.feature["version_id"].bytes_list.value[
+          0].decode("utf-8")
 
       # wikidata_id could be duplicated with different texts.
-      yield wikidata_id + text, {"wikidata_id": wikidata_id,
-                                 "text": text,
-                                 "version_id": version_id,}
+      yield wikidata_id + text, {
+          "wikidata_id": wikidata_id,
+          "text": text,
+          "version_id": version_id,
+      }
 
-    return (
-        pipeline
-        | beam.io.ReadFromTFRecord(
-            filepaths, coder=beam.coders.ProtoCoder(tf.train.Example))
-        | beam.FlatMap(_extract_content))
+    return (pipeline
+            | beam.io.ReadFromTFRecord(
+                filepaths, coder=beam.coders.ProtoCoder(tf.train.Example))
+            | beam.FlatMap(_extract_content))

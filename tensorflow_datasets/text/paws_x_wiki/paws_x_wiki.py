@@ -68,8 +68,7 @@ class PawsXWikiConfig(tfds.core.BuilderConfig):
 
   def __init__(self, *, language, **kwargs):
     if language not in _LANGUAGES:
-      raise ValueError("language must be one of {}".format(
-          list(_LANGUAGES)))
+      raise ValueError("language must be one of {}".format(list(_LANGUAGES)))
 
     super(PawsXWikiConfig, self).__init__(**kwargs)
     self.language = language
@@ -123,15 +122,19 @@ class PawsXWiki(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"path": os.path.join(base_path,
-                                             self.builder_config.language,
-                                             "test_2k.tsv")},
+            gen_kwargs={
+                "path":
+                    os.path.join(base_path, self.builder_config.language,
+                                 "test_2k.tsv")
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"path": os.path.join(base_path,
-                                             self.builder_config.language,
-                                             "dev_2k.tsv")},
+            gen_kwargs={
+                "path":
+                    os.path.join(base_path, self.builder_config.language,
+                                 "dev_2k.tsv")
+            },
         ),
     ]
 

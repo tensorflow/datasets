@@ -36,10 +36,11 @@ class Pg19Test(tfds.testing.DatasetBuilderTestCase):
 
   DATASET_CLASS = pg19.Pg19
   SPLITS = {
-      "train": 3,   # Number of fake train example
-      "test": 1,      # Number of fake test example
+      "train": 3,  # Number of fake train example
+      "test": 1,  # Number of fake test example
       "validation": 1  # Number of fake validation example
   }
+
 
 if __name__ == "__main__":
   tfds.testing.test_main()

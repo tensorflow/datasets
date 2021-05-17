@@ -182,7 +182,8 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           description=textwrap.dedent("""\
             The Microsoft Research Paraphrase Corpus (Dolan & Brockett, 2005) is a corpus of
             sentence pairs automatically extracted from online news sources, with human annotations
-            for whether the sentences in the pair are semantically equivalent."""),  # pylint: disable=line-too-long
+            for whether the sentences in the pair are semantically equivalent."""
+                                     ),  # pylint: disable=line-too-long
           text_features={
               "sentence1": "",
               "sentence2": ""
@@ -198,8 +199,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               booktitle={Proceedings of the Third International Workshop on Paraphrasing (IWP2005)},
               year={2005}
             }"""),
-          url="https://www.microsoft.com/en-us/download/details.aspx?id=52398"
-      ),
+          url="https://www.microsoft.com/en-us/download/details.aspx?id=52398"),
       GlueConfig(
           name="qqp",
           description=textwrap.dedent("""\
@@ -282,7 +282,8 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             question and the context sentence. The task is to determine whether the context sentence contains
             the answer to the question. This modified version of the original task removes the requirement that
             the model select the exact answer, but also removes the simplifying assumptions that the answer
-            is always present in the input and that lexical overlap is a reliable cue."""),  # pylint: disable=line-too-long
+            is always present in the input and that lexical overlap is a reliable cue."""
+                                     ),  # pylint: disable=line-too-long
           text_features={
               "question": "question",
               "sentence": "sentence",
@@ -306,7 +307,8 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             entailment challenges. We combine the data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim
             et al., 2006), RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli et al., 2009).4 Examples are
             constructed based on news and Wikipedia text. We convert all datasets to a two-class split, where
-            for three-class datasets we collapse neutral and contradiction into not entailment, for consistency."""),  # pylint: disable=line-too-long
+            for three-class datasets we collapse neutral and contradiction into not entailment, for consistency."""
+                                     ),  # pylint: disable=line-too-long
           text_features={
               "sentence1": "sentence1",
               "sentence2": "sentence2",
@@ -348,8 +350,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               booktitle={TAC},
               year={2009}
             }"""),
-          url="https://aclweb.org/aclwiki/Recognizing_Textual_Entailment"
-      ),
+          url="https://aclweb.org/aclwiki/Recognizing_Textual_Entailment"),
       GlueConfig(
           name="wnli",
           description=textwrap.dedent("""\
@@ -581,9 +582,12 @@ def _mnli_split_generator(name, data_dir, split, matched):
   return tfds.core.SplitGenerator(
       name=name,
       gen_kwargs={
-          "data_file": os.path.join(
-              data_dir,
-              "%s_%s.tsv" % (split, "matched" if matched else "mismatched")),
-          "split": split,
-          "mrpc_files": None,
+          "data_file":
+              os.path.join(
+                  data_dir, "%s_%s.tsv" %
+                  (split, "matched" if matched else "mismatched")),
+          "split":
+              split,
+          "mrpc_files":
+              None,
       })
