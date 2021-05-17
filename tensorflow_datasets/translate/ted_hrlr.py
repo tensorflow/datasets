@@ -128,8 +128,8 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "source_file":
-                    os.path.join(data_dir, "{}.train".format(
-                        source.replace("_", "-"))),
+                    os.path.join(data_dir,
+                                 "{}.train".format(source.replace("_", "-"))),
                 "target_file":
                     os.path.join(data_dir, "{}.train".format(target))
             }),
@@ -137,8 +137,8 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "source_file":
-                    os.path.join(data_dir, "{}.dev".format(
-                        source.split("_")[0])),
+                    os.path.join(data_dir,
+                                 "{}.dev".format(source.split("_")[0])),
                 "target_file":
                     os.path.join(data_dir, "{}.dev".format(target))
             }),
@@ -146,8 +146,8 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TEST,
             gen_kwargs={
                 "source_file":
-                    os.path.join(data_dir, "{}.test".format(
-                        source.split("_")[0])),
+                    os.path.join(data_dir,
+                                 "{}.test".format(source.split("_")[0])),
                 "target_file":
                     os.path.join(data_dir, "{}.test".format(target))
             }),
@@ -165,8 +165,7 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             source_sentences), len(target_sentences), source_file, target_file)
 
     source, target = self.builder_config.language_pair
-    for idx, (l1, l2) in enumerate(
-        zip(source_sentences, target_sentences)):
+    for idx, (l1, l2) in enumerate(zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.
       if all(result.values()):

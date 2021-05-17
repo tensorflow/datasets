@@ -60,10 +60,6 @@ class Wmt17Translate(wmt.WmtTranslate):
             "wikiheadlines_fi", "wikiheadlines_ru", "setimes_2", "uncorpus_v1",
             "rapid_2016", "leta_v1", "dcep_v1", "onlinebooks_v1"
         ] + wmt.CWMT_SUBSET_NAMES,
-        tfds.Split.VALIDATION: [
-            "newsdev2017", "newstest2016", "newstestB2016"
-        ],
-        tfds.Split.TEST: [
-            "newstest2017", "newstestB2017"
-        ]
+        tfds.Split.VALIDATION: ["newsdev2017", "newstest2016", "newstestB2016"],
+        tfds.Split.TEST: ["newstest2017", "newstestB2017"]
     }

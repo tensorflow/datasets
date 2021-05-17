@@ -59,10 +59,6 @@ class Wmt16Translate(wmt.WmtTranslate):
             "newscommentary_v11", "czeng_16pre", "yandexcorpus",
             "wikiheadlines_fi", "wikiheadlines_ru", "setimes_2"
         ],
-        tfds.Split.VALIDATION: [
-            "newsdev2016", "newstest2015"
-        ],
-        tfds.Split.TEST: [
-            "newstest2016", "newstestB2016"
-        ]
+        tfds.Split.VALIDATION: ["newsdev2016", "newstest2015"],
+        tfds.Split.TEST: ["newstest2016", "newstestB2016"]
     }
