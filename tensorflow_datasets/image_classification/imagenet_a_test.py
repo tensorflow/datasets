@@ -44,12 +44,13 @@ class ImagenetATest(tfds.testing.DatasetBuilderTestCase):
     dataset = builder.as_dataset()
     for features in dataset_utils.as_numpy(dataset['test']):
       label_frequncies.update([label_feature.int2str(features['label'])])
-    self.assertEqual(dict(label_frequncies),
-                     {'n01580077': 2,
-                      'n01616318': 3,
-                      'n07697313': 5})
+    self.assertEqual(
+        dict(label_frequncies), {
+            'n01580077': 2,
+            'n01616318': 3,
+            'n07697313': 5
+        })
 
 
 if __name__ == '__main__':
   tfds.testing.test_main()
-

@@ -81,9 +81,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       So2satConfig(
-          selection='rgb',
-          name='rgb',
-          description='Sentinel-2 RGB channels'),
+          selection='rgb', name='rgb', description='Sentinel-2 RGB channels'),
       So2satConfig(
           selection='all',
           name='all',

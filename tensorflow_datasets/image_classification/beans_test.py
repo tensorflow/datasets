@@ -30,9 +30,10 @@ class BeansTest(tfds_test.DatasetBuilderTestCase):
       'validation': 3,
   }
 
-  DL_EXTRACT_RESULT = ['beans_train.zip', 'beans_validation.zip',
-                       'beans_test.zip']
+  DL_EXTRACT_RESULT = [
+      'beans_train.zip', 'beans_validation.zip', 'beans_test.zip'
+  ]
+
 
 if __name__ == '__main__':
   tfds_test.test_main()
-

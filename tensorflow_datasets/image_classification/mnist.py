@@ -244,7 +244,6 @@ class EMNIST(MNIST):
           train_examples=697932,
           test_examples=116323,
           description="EMNIST ByClass",
-
       ),
       EMNISTConfig(
           name="bymerge",
@@ -325,9 +324,8 @@ class EMNIST(MNIST):
     }
 
     dir_name = os.path.join(dl_manager.download_and_extract(self.URL), "gzip")
-    extracted = dl_manager.extract({
-        k: os.path.join(dir_name, fname) for k, fname in filenames.items()
-    })
+    extracted = dl_manager.extract(
+        {k: os.path.join(dir_name, fname) for k, fname in filenames.items()})
 
     return [
         tfds.core.SplitGenerator(

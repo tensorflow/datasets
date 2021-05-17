@@ -75,11 +75,9 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
     paths = dl_manager.download_and_extract(resources)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=dict(split='test', paths=paths)),
+            name=tfds.Split.TEST, gen_kwargs=dict(split='test', paths=paths)),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(split='train', paths=paths)),
+            name=tfds.Split.TRAIN, gen_kwargs=dict(split='train', paths=paths)),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs=dict(split='valid', paths=paths)),

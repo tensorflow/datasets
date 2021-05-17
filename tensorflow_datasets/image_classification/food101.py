@@ -87,7 +87,6 @@ class Food101(tfds.core.GeneratorBasedBuilder):
                 "image_dir_path": image_dir_path
             },
         ),
-
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={

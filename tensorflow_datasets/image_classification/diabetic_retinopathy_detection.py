@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""https://www.kaggle.com/c/diabetic-retinopathy-detection/data.
-"""
+"""https://www.kaggle.com/c/diabetic-retinopathy-detection/data."""
 
 import csv
 import io
@@ -24,7 +23,6 @@ from absl import logging
 import numpy as np
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
-
 
 _CITATION = """\
 @ONLINE {kaggle-diabetic-retinopathy,
@@ -230,8 +228,10 @@ def _resize_image_if_necessary(image_fobj, target_pixels=None):
   return io.BytesIO(buff.tostring())
 
 
-def _btgraham_processing(
-    image_fobj, filepath, target_pixels, crop_to_radius=False):
+def _btgraham_processing(image_fobj,
+                         filepath,
+                         target_pixels,
+                         crop_to_radius=False):
   """Process an image as the winner of the 2015 Kaggle competition.
 
   Args:
@@ -251,7 +251,9 @@ def _btgraham_processing(
   image = _scale_radius_size(image, filepath, target_radius_size=target_pixels)
   image = _subtract_local_average(image, target_radius_size=target_pixels)
   image = _mask_and_crop_to_radius(
-      image, target_radius_size=target_pixels, radius_mask_ratio=0.9,
+      image,
+      target_radius_size=target_pixels,
+      radius_mask_ratio=0.9,
       crop_to_radius=crop_to_radius)
   # Encode the image with quality=72 and store it in a BytesIO object.
   _, buff = cv2.imencode(".jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 72])
@@ -280,12 +282,14 @@ def _subtract_local_average(image, target_radius_size):
   return image
 
 
-def _mask_and_crop_to_radius(
-    image, target_radius_size, radius_mask_ratio=0.9, crop_to_radius=False):
+def _mask_and_crop_to_radius(image,
+                             target_radius_size,
+                             radius_mask_ratio=0.9,
+                             crop_to_radius=False):
   """Mask and crop image to the given radius ratio."""
   cv2 = tfds.core.lazy_imports.cv2
   mask = np.zeros(image.shape)
-  center = (image.shape[1]//2, image.shape[0]//2)
+  center = (image.shape[1] // 2, image.shape[0] // 2)
   radius = int(target_radius_size * radius_mask_ratio)
   cv2.circle(mask, center=center, radius=radius, color=(1, 1, 1), thickness=-1)
   image = image * mask + (1 - mask) * 128

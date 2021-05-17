@@ -22,8 +22,7 @@ import tarfile
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-
-_DESCRIPTION = '''\
+_DESCRIPTION = """\
 This dataset contains ILSVRC-2012 (ImageNet) validation images augmented with a
 new set of "Re-Assessed" (ReaL) labels from the "Are we done with ImageNet"
 paper, see https://arxiv.org/abs/2006.07159. These labels are collected using
@@ -37,9 +36,9 @@ One possible way of doing this is with the following NumPy code:
 is_correct = [pred in real_labels[i] for i, pred in enumerate(predictions) if real_labels[i]]
 real_accuracy = np.mean(is_correct)
 ```
-'''
+"""
 
-_CITATION = '''\
+_CITATION = """\
 @article{beyer2020imagenet,
   title={Are we done with ImageNet?},
   author={Lucas Beyer and Olivier J. Henaff and Alexander Kolesnikov and Xiaohua Zhai and Aaron van den Oord},
@@ -56,7 +55,7 @@ _CITATION = '''\
   number={3},
   pages={211-252}
 }
-'''
+"""
 
 _VALIDATION_LABELS_FNAME = 'image_classification/imagenet2012_validation_labels.txt'
 _LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
@@ -84,11 +83,15 @@ class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'image': tfds.features.Image(encoding_format='jpeg'),
-            'original_label': tfds.features.ClassLabel(names_file=names_file),
-            'real_label': tfds.features.Sequence(
-                tfds.features.ClassLabel(names_file=names_file)),
-            'file_name': tfds.features.Text(),
+            'image':
+                tfds.features.Image(encoding_format='jpeg'),
+            'original_label':
+                tfds.features.ClassLabel(names_file=names_file),
+            'real_label':
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(names_file=names_file)),
+            'file_name':
+                tfds.features.Text(),
         }),
         supervised_keys=('image', 'real_label'),
         homepage='https://github.com/google-research/reassessed-imagenet',
@@ -98,8 +101,10 @@ class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
   def _get_real_labels(self, dl_manager):
     with tf.io.gfile.GFile(dl_manager.download(_REAL_LABELS_URL), 'r') as f:
       # ReaL labels are ordered in the lexicographical order.
-      return {'ILSVRC2012_val_{:08}.JPEG'.format(i + 1): labels
-              for i, labels in enumerate(json.load(f))}
+      return {
+          'ILSVRC2012_val_{:08}.JPEG'.format(i + 1): labels
+          for i, labels in enumerate(json.load(f))
+      }
 
   @staticmethod
   def _get_original_labels(val_path):
@@ -107,7 +112,7 @@ class Imagenet2012Real(tfds.core.GeneratorBasedBuilder):
 
     Args:
       val_path: path to TAR file containing validation images. It is used to
-      retrieve the name of pictures and associate them to labels.
+        retrieve the name of pictures and associate them to labels.
 
     Returns:
       dict, mapping from image name (str) to label (str).

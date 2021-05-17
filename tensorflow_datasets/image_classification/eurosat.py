@@ -69,8 +69,8 @@ class EurosatConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    super(EurosatConfig, self).__init__(version=tfds.core.Version('2.0.0'),
-                                        **kwargs)
+    super(EurosatConfig, self).__init__(
+        version=tfds.core.Version('2.0.0'), **kwargs)
     self.selection = selection
     self.download_url = download_url
     self.subdir = subdir
@@ -157,8 +157,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
 
 def _extract_channels(filename):
   with tf.io.gfile.GFile(filename, 'rb') as f:
-    arr = tfds.core.lazy_imports.tifffile.imread(
-        io.BytesIO(f.read()))
+    arr = tfds.core.lazy_imports.tifffile.imread(io.BytesIO(f.read()))
 
   arr = arr.astype('float32')
   return arr

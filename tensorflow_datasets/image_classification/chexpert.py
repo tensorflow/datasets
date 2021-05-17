@@ -22,7 +22,6 @@ import os
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _DESCRIPTION = """\
 CheXpert is a large dataset of chest X-rays and competition for automated chest 
 x-ray interpretation, which features uncertainty labels and radiologist-labeled 
@@ -88,17 +87,19 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "name": tfds.features.Text(),  # patient info
-            "image": tfds.features.Image(),
-            "label": tfds.features.Sequence(
-                tfds.features.ClassLabel(names=_LABELS.values())),
-            "image_view": tfds.features.ClassLabel(names=[
-                "frontal", "lateral"]),
+            "name":
+                tfds.features.Text(),  # patient info
+            "image":
+                tfds.features.Image(),
+            "label":
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(names=_LABELS.values())),
+            "image_view":
+                tfds.features.ClassLabel(names=["frontal", "lateral"]),
         }),
         supervised_keys=("image", "label"),
         homepage="https://stanfordmlgroup.github.io/competitions/chexpert/",
-        citation=_CITATION
-    )
+        citation=_CITATION)
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""

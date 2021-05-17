@@ -98,4 +98,3 @@ class ImagenetA(tfds.core.GeneratorBasedBuilder):
             'file_name': image_filename,
         }
         yield image_filename, features
-

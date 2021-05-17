@@ -26,7 +26,6 @@ import tensorflow_datasets.public_api as tfds
 _CIFAR_IMAGE_SIZE = 32
 _CIFAR_IMAGE_SHAPE = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
 
-
 _CITATION = """\
 @TECHREPORT{Krizhevsky09learningmultiple,
     author = {Alex Krizhevsky},
@@ -174,15 +173,16 @@ class Cifar100(Cifar10):
     )
 
 
-class CifarInfo(collections.namedtuple("_CifarInfo", [
-    "name",
-    "url",
-    "prefix",
-    "train_files",
-    "test_files",
-    "label_files",
-    "label_keys",
-])):
+class CifarInfo(
+    collections.namedtuple("_CifarInfo", [
+        "name",
+        "url",
+        "prefix",
+        "train_files",
+        "test_files",
+        "label_files",
+        "label_keys",
+    ])):
   """Contains the information necessary to generate a CIFAR dataset.
 
   Attributes:
@@ -204,13 +204,13 @@ def _load_data(path, labels_number=1):
   offset = 0
   max_offset = len(data) - 1
   while offset < max_offset:
-    labels = np.frombuffer(data, dtype=np.uint8, count=labels_number,
-                           offset=offset).reshape((labels_number,))
+    labels = np.frombuffer(
+        data, dtype=np.uint8, count=labels_number, offset=offset).reshape(
+            (labels_number,))
     # 1 byte per label, 1024 * 3 = 3072 bytes for the image.
     offset += labels_number
-    img = (np.frombuffer(data, dtype=np.uint8, count=3072, offset=offset)
-           .reshape((3, _CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE))
-           .transpose((1, 2, 0))
-          )
+    img = (
+        np.frombuffer(data, dtype=np.uint8, count=3072, offset=offset).reshape(
+            (3, _CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE)).transpose((1, 2, 0)))
     offset += 3072
     yield labels, img

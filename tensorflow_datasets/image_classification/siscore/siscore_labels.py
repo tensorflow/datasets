@@ -79,7 +79,6 @@ DATASET_LABELS = {
     "zucchini": 60
 }
 
-
 IMAGENET_LABELS = {
     "ambulance": 407,
     "armadillo": 363,

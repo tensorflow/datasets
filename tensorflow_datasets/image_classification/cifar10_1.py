@@ -20,7 +20,6 @@ import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
-
 _CITATION = """\
 @article{recht2018cifar10.1,
   author = {Benjamin Recht and Rebecca Roelofs and Ludwig Schmidt and Vaishaal Shankar},

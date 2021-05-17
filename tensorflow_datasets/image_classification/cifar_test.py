@@ -17,7 +17,6 @@
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import cifar
 
-
 # testing/cifar.py generates fake input data
 
 

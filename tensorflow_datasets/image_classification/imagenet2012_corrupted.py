@@ -101,9 +101,10 @@ class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
 
 _VERSION = tfds.core.Version('3.1.0')
 _RELEASE_NOTES = {
-    '0.0.1': 'Initial dataset',
+    '0.0.1':
+        'Initial dataset',
     '3.1.0':
-    'Implement missing corruptions. Fix crop/resize ordering, file encoding',
+        'Implement missing corruptions. Fix crop/resize ordering, file encoding',
 }
 
 
