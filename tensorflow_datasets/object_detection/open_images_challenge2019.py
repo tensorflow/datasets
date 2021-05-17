@@ -129,13 +129,16 @@ class OpenImagesChallenge2019Detection(_OpenImagesChallenge2019):
     return {
         "train_image_label":
             _GOOGLE_URL_PREFIX + "train-detection-human-imagelabels.csv",
-        "train_boxes": _GOOGLE_URL_PREFIX + "train-detection-bbox.csv",
+        "train_boxes":
+            _GOOGLE_URL_PREFIX + "train-detection-bbox.csv",
         "validation_image_label":
             _GOOGLE_URL_PREFIX + "validation-detection-human-imagelabels.csv",
         "validation_boxes":
             _GOOGLE_URL_PREFIX + "validation-detection-bbox.csv",
-        "classes": _GOOGLE_URL_PREFIX + "classes-description-500.csv",
-        "hierarchy": _GOOGLE_URL_PREFIX + "label500-hierarchy.json",
+        "classes":
+            _GOOGLE_URL_PREFIX + "classes-description-500.csv",
+        "hierarchy":
+            _GOOGLE_URL_PREFIX + "label500-hierarchy.json",
     }
 
   def _info(self):
@@ -144,23 +147,27 @@ class OpenImagesChallenge2019Detection(_OpenImagesChallenge2019):
         builder=self,
         description=_DESCRIPTION + "\n\n" + _DESCRIPTION_DETECTION,
         features=tfds.features.FeaturesDict({
-            "id": tfds.features.Text(),
-            "image": tfds.features.Image(),
+            "id":
+                tfds.features.Text(),
+            "image":
+                tfds.features.Image(),
             # A sequence of image-level labels.
-            "objects": tfds.features.Sequence({
-                "label": label,
-                # All labels have been verified by humans.
-                #  - If confidence is 1.0, the object IS in the image.
-                #  - If confidence is 0.0, the object is NOT in the image.
-                "confidence": tf.float32,
-                "source": tfds.features.Text(),
-            }),
+            "objects":
+                tfds.features.Sequence({
+                    "label": label,
+                    # All labels have been verified by humans.
+                    #  - If confidence is 1.0, the object IS in the image.
+                    #  - If confidence is 0.0, the object is NOT in the image.
+                    "confidence": tf.float32,
+                    "source": tfds.features.Text(),
+                }),
             # A sequence of bounding boxes.
-            "bobjects": tfds.features.Sequence({
-                "label": label,
-                "bbox": tfds.features.BBoxFeature(),
-                "is_group_of": tf.bool,
-            }),
+            "bobjects":
+                tfds.features.Sequence({
+                    "label": label,
+                    "bbox": tfds.features.BBoxFeature(),
+                    "is_group_of": tf.bool,
+                }),
         }),
         homepage=_URL,
     )
@@ -190,11 +197,11 @@ class OpenImagesChallenge2019Detection(_OpenImagesChallenge2019):
       )
     # Fill class names after the data has been downloaded.
     oi_beam.fill_class_names_in_tfds_info(paths["classes"], self.info.features)
-    return (
-        pipeline | beam.Create(paths["{}_images".format(split)]) |
-        "ReadImages" >> beam.ParDo(oi_beam.ReadZipFn()) |
-        "ProcessImages" >> beam.ParDo(oi_beam.ProcessImageFn(
-            target_pixels=self.builder_config.target_pixels, jpeg_quality=72)) |
-        "GenerateExamples" >> beam.ParDo(
-            oi_beam.CreateDetectionExampleFn(**generate_examples_kwargs))
-    )
+    return (pipeline | beam.Create(paths["{}_images".format(split)])
+            | "ReadImages" >> beam.ParDo(oi_beam.ReadZipFn())
+            | "ProcessImages" >> beam.ParDo(
+                oi_beam.ProcessImageFn(
+                    target_pixels=self.builder_config.target_pixels,
+                    jpeg_quality=72))
+            | "GenerateExamples" >> beam.ParDo(
+                oi_beam.CreateDetectionExampleFn(**generate_examples_kwargs)))

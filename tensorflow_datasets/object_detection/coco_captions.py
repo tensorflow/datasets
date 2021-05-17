@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""COCO 2014 dataset with caption annotations and splits from Karpathy and Li.
-"""
+"""COCO 2014 dataset with caption annotations and splits from Karpathy and Li."""
 
 import collections
 import json
