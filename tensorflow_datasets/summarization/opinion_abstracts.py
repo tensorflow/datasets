@@ -56,16 +56,14 @@ _URL = "http://www.ccs.neu.edu/home/luwang/datasets/opinion_abstracts.zip"
 class OpinionAbstractsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for OpinionAbstracts."""
 
-  def __init__(
-      self,
-      *,
-      filename: Text = None,
-      name_key: Text = None,
-      id_key: Text = None,
-      opinions_key: Text = None,
-      summary_key: Text = None,
-      **kwargs
-  ):
+  def __init__(self,
+               *,
+               filename: Text = None,
+               name_key: Text = None,
+               id_key: Text = None,
+               opinions_key: Text = None,
+               summary_key: Text = None,
+               **kwargs):
     """BuilderConfig for OpinionAbstracts."""
     super(OpinionAbstractsConfig, self).__init__(
         version=tfds.core.Version("1.0.0"), **kwargs)

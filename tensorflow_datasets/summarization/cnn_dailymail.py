@@ -205,13 +205,17 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('3.1.0')
   RELEASE_NOTES = {
-      '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
-      '2.0.0': """
+      '1.0.0':
+          'New split API (https://tensorflow.org/datasets/splits)',
+      '2.0.0':
+          """
       Separate target sentences with newline. (Having the model predict newline
       separators makes it easier to evaluate using summary-level ROUGE.)
       """,
-      '3.0.0': 'Using cased version.',
-      '3.1.0': 'Removed BuilderConfig',
+      '3.0.0':
+          'Using cased version.',
+      '3.1.0':
+          'Removed BuilderConfig',
   }
 
   def _info(self):
@@ -234,8 +238,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={'files': train_files}),
+            name=tfds.Split.TRAIN, gen_kwargs={'files': train_files}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
