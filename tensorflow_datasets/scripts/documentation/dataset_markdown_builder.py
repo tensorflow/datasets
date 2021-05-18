@@ -381,7 +381,7 @@ class DatasetCitationSection(Section):
 
 class KnowYourDataSection(Section):
 
-  NAME = 'Explore the dataset'
+  NAME = 'Visualization'
 
   def __init__(self):
     super().__init__()
@@ -393,7 +393,14 @@ class KnowYourDataSection(Section):
   def content(self, builder: tfds.core.DatasetBuilder):
     url = self._catalog_urls.get(builder.name)
     if url:
-      return f'[KnowYourData visualization]({url}){{.external}}'
+      return f"""
+        <a class="button button-with-icon" href="{url}">
+          Explore in Know Your Data
+          <span class="material-icons icon-after" aria-hidden="true">
+            north_east
+          </span>
+        </a>
+      """
     else:
       return _SKIP_SECTION
 
@@ -633,6 +640,7 @@ def get_markdown_string(
   """Build the dataset markdown."""
 
   all_sections = [
+      KnowYourDataSection(),
       DatasetDescriptionSection(),
       ConfigDescriptionSection(),
       HomepageSection(),
@@ -645,7 +653,6 @@ def get_markdown_string(
       SplitInfoSection(),
       FeatureInfoSection(),
       SupervisedKeySection(),
-      KnowYourDataSection(),
   ]
   if visu_doc_util:
     all_sections.append(DatasetVisualizationSection(visu_doc_util))

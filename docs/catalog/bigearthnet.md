@@ -11,6 +11,12 @@
 
 # `bigearthnet`
 
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=bigearthnet">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The BigEarthNet is a new large-scale Sentinel-2 benchmark archive, consisting of
@@ -69,7 +75,6 @@ URL: http://bigearth.net/
 Split     | Examples
 :-------- | -------:
 `'train'` | 590,326
-
 
 *   **Citation**:
 
