@@ -300,6 +300,11 @@ toc:
     title: xquad
   title: Question answering
 - section:
+  - path: /datasets/catalog/rlu_dmlab_seekavoid_arena01
+    status: nightly
+    title: rlu_dmlab_seekavoid_arena01
+  title: Rl unplugged
+- section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/cherry_blossoms
