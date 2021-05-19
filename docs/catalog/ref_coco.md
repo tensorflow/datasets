@@ -78,8 +78,6 @@ refcocog | umd       | test  | 5023  | 2600
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -107,12 +105,7 @@ refcocog | umd       | test  | 5023  | 2600
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Features**:
 
@@ -188,10 +181,61 @@ FeaturesDict({
 
 ## ref_coco/refcoco_unc (default config)
 
+*   **Dataset size**: `3.24 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'testA'`      | 750
+`'testB'`      | 750
+`'train'`      | 16,994
+`'validation'` | 1,500
+
 ## ref_coco/refcoco_google
+
+*   **Dataset size**: `4.60 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,527
+`'train'`      | 19,213
+`'validation'` | 4,559
 
 ## ref_coco/refcocoplus_unc
 
+*   **Dataset size**: `3.24 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'testA'`      | 750
+`'testB'`      | 750
+`'train'`      | 16,992
+`'validation'` | 1,500
+
 ## ref_coco/refcocog_google
 
+*   **Dataset size**: `4.59 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 24,698
+`'validation'` | 4,650
+
 ## ref_coco/refcocog_umd
+
+*   **Dataset size**: `4.04 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,600
+`'train'`      | 21,899
+`'validation'` | 1,300
