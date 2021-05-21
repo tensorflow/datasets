@@ -75,6 +75,7 @@ _OBJECTS_CATEGORIES = [
     "dog",
     "horse",
     "motorbike",
+    "person",
     "potted_plant",
     "sheep",
     "sofa",
@@ -96,9 +97,10 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=category,
           description="Images of category %s" % category,
-          version=tfds.core.Version("3.0.0"),
+          version=tfds.core.Version("3.0.1"),
           release_notes={
               "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+              "3.0.1": "Add builder config for missing `person` object category",
           },
       ) for category in (_SCENES_CATEGORIES + _OBJECTS_CATEGORIES)
   ]
