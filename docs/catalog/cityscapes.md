@@ -13,12 +13,6 @@
 
 Warning: Manual download required. See instructions below.
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=cityscapes">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 Cityscapes is a dataset consisting of diverse urban street scenes across 50
