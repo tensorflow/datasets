@@ -97,10 +97,10 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=category,
           description="Images of category %s" % category,
-          version=tfds.core.Version("3.0.1"),
+          version=tfds.core.Version("3.1.0"),
           release_notes={
               "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
-              "3.0.1": "Add builder config for missing `person` object category",
+              "3.1.0": "Add builder config for missing `person` object category, and add `id` to the feature dict",
           },
       ) for category in (_SCENES_CATEGORIES + _OBJECTS_CATEGORIES)
   ]
@@ -111,6 +111,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
         description=("Large scale images showing different objects "
                      "from given categories like bedroom, tower etc."),
         features=tfds.features.FeaturesDict({
+            "id": tfds.features.Text(),
             "image": tfds.features.Image(encoding_format="jpeg"),
         }),
         homepage="https://www.yf.io/p/lsun",
@@ -156,6 +157,9 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     with tf.Graph().as_default():
       path = os.path.join(extracted_dir, file_path, "data.mdb")
       dataset = _make_lmdb_dataset(path)
-      for i, (_, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
-        record = {"image": io.BytesIO(jpeg_image)}
+      for i, (id_bytes, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
+        record = {
+          "id": id_bytes.decode("utf-8"),
+          "image": io.BytesIO(jpeg_image),
+        }
         yield i, record
