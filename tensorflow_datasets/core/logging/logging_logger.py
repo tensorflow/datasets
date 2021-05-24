@@ -15,10 +15,11 @@
 
 """A logger logging using absl.logging module."""
 
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 
 from absl import logging
 
+from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core.logging import base_logger
 from tensorflow_datasets.core.utils import read_config as tfds_read_config
 
@@ -26,9 +27,10 @@ from tensorflow_datasets.core.utils import read_config as tfds_read_config
 class LoggingLogger(base_logger.Logger):
 
   def as_dataset(self, *, dataset_name: str, config_name: Optional[str],
-                 version: str, data_path: str, split: str,
+                 version: str, data_path: str,
+                 split: Union[str, tfrecords_reader.ReadInstruction],
                  batch_size: Optional[int], shuffle_files: bool,
                  read_config: tfds_read_config.ReadConfig, as_supervised: bool,
                  decoders: Dict[str, str]):
     logging.info("Constructing tf.data.Dataset %s for split %s, from %s",
-                 dataset_name, split, data_path)
+                 dataset_name, str(split), data_path)
