@@ -85,7 +85,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
 
 def _get_files(prefix: str, num_shards: int) -> List[str]:
   return [
-      f'{prefix}/tfrecord-{i:05d}-of-{num_shards:05d}'
+      tfds.core.as_path(f'{prefix}/tfrecord-{i:05d}-of-{num_shards:05d}')
       for i in range(num_shards)
   ]
 
@@ -147,6 +147,7 @@ class DMLabDatasetBuilder(
   """DatasetBuilder for RLU DMLab."""
 
   _SHARDS = 500
+  _INPUT_FILE_PREFIX = 'gs://rl_unplugged/dmlab/'
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -189,14 +190,15 @@ class DMLabDatasetBuilder(
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
+    del dl_manager
     run = self.builder_config.name
     task = self.builder_config.task
-    paths = dl_manager.download_and_extract({
+    paths = {
         'file_paths':
             _get_files(
-                prefix=f'gs://rl_unplugged/dmlab/{task}/{run}',
+                prefix=f'{self._INPUT_FILE_PREFIX}/{task}/{run}',
                 num_shards=self._SHARDS),
-    })
+    }
     return {
         'train': self._generate_examples(paths),
     }

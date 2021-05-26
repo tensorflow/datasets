@@ -16,6 +16,7 @@
 """rlu_dmlab_seekavoid_arena01 dataset."""
 
 import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.rl_unplugged import dmlab_dataset
 from tensorflow_datasets.rl_unplugged.rlu_dmlab_seekavoid_arena01 import rlu_dmlab_seekavoid_arena01
 
 
@@ -29,19 +30,15 @@ class RluDmlabSeekavoidArena01Test(tfds.testing.DatasetBuilderTestCase):
 
   SKIP_TF1_GRAPH_MODE = True
 
-  DL_EXTRACT_RESULT = {
-      'file_paths': [
-          'dmlab_seekavoid_arena01_training_0_tfrecord-00000-of-00500'
-      ]
-  }
-  DL_DOWNLOAD_RESULT = {
-      'file_paths': [
-          'dmlab_seekavoid_arena01_training_0_tfrecord-00000-of-00500'
-      ]
-  }
-
   # The different configs are only different in the name of the files.
   BUILDER_CONFIG_NAMES_TO_TEST = ['training_0']
+
+  @classmethod
+  def setUpClass(cls):
+    dmlab_dataset.DMLabDatasetBuilder._INPUT_FILE_PREFIX = cls.dummy_data
+    dmlab_dataset.DMLabDatasetBuilder._SHARDS = 1
+    super().setUpClass()
+
 
 if __name__ == '__main__':
   tfds.testing.test_main()
