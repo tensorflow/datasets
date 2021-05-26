@@ -30,6 +30,7 @@ tower etc.
 
 ```python
 FeaturesDict({
+    'id': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
@@ -993,6 +994,32 @@ Split     | Examples
 Split     | Examples
 :-------- | --------:
 `'train'` | 1,194,101
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+## lsun/person
+
+*   **Config description**: Images of category person
+
+*   **Download size**: `476.61 GiB`
+
+*   **Dataset size**: `439.45 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | --------:
+`'train'` | 18,890,816
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
