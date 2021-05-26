@@ -22,9 +22,10 @@ from tensorflow_datasets.rl_unplugged import dmlab_dataset
 class RluDmlabSeekavoidArena01(dmlab_dataset.DMLabDatasetBuilder):
   """DatasetBuilder for rlu_dmlab_seekavoid_arena01 dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.0.1': 'Complete list of builder configs.',
   }
   _TASK = 'seekavoid_arena_01'
   _EPISODE_LENGTH = 301
@@ -33,31 +34,31 @@ class RluDmlabSeekavoidArena01(dmlab_dataset.DMLabDatasetBuilder):
   BUILDER_CONFIGS = [
       dmlab_dataset.BuilderConfig(
           name='training_0', task=_TASK, episode_length=_EPISODE_LENGTH),
-      # TODO(b/188125902): Enable the rest of the configs once we double check
-      # that the first one works.
-      #  dmlab_dataset.TaskConfig(name='training_1',
-      #                         task=_TASK,
-      #                         episode_length=_EPISODE_LENGTH),
-      # dmlab_dataset.TaskConfig(name='training_2',
-      #                         task=_TASK,
-      #                         episode_length=_EPISODE_LENGTH),
-      #  dmlab_dataset.TaskConfig(name='snapshot_0_eps_0.0',
-      #                         task=_TASK,
-      #                         episode_length=_EPISODE_LENGTH),
-      # dmlab_dataset.TaskConfig(name='snapshot_1_eps_0.0',
-      #                         task=_TASK,
-      #                         episode_length=_EPISODE_LENGTH),
-      #  dmlab_dataset.TaskConfig(name='snapshot_0_eps_0.01',
-      #                         task=_TASK,
-      #                         episode_length=_EPISODE_LENGTH),
-      # dmlab_dataset.TaskConfig(name='snapshot_1_eps_0.01',
-      #                         task=_TASK,
-      #                         episode_length=_EPISODE_LENGTH),
-      #  dmlab_dataset.TaskConfig(name='snapshot_0_eps_0.25',
-      #                         task=_TASK,
-      #                         episode_length=_EPISODE_LENGTH),
-      # dmlab_dataset.TaskConfig(name='snapshot_1_eps_0.25',
-      #                         task=_TASK,
-      #                         episode_length=_EPISODE_LENGTH),
+      dmlab_dataset.BuilderConfig(
+          name='training_1', task=_TASK, episode_length=_EPISODE_LENGTH),
+      dmlab_dataset.BuilderConfig(
+          name='training_2', task=_TASK, episode_length=_EPISODE_LENGTH),
+      dmlab_dataset.BuilderConfig(
+          name='snapshot_0_eps_0.0', task=_TASK,
+          episode_length=_EPISODE_LENGTH),
+      dmlab_dataset.BuilderConfig(
+          name='snapshot_1_eps_0.0', task=_TASK,
+          episode_length=_EPISODE_LENGTH),
+      dmlab_dataset.BuilderConfig(
+          name='snapshot_0_eps_0.01',
+          task=_TASK,
+          episode_length=_EPISODE_LENGTH),
+      dmlab_dataset.BuilderConfig(
+          name='snapshot_1_eps_0.01',
+          task=_TASK,
+          episode_length=_EPISODE_LENGTH),
+      dmlab_dataset.BuilderConfig(
+          name='snapshot_0_eps_0.25',
+          task=_TASK,
+          episode_length=_EPISODE_LENGTH),
+      dmlab_dataset.BuilderConfig(
+          name='snapshot_1_eps_0.25',
+          task=_TASK,
+          episode_length=_EPISODE_LENGTH),
   ]
   # pytype: enable=wrong-keyword-args
