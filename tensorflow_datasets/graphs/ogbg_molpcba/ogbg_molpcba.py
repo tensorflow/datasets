@@ -103,9 +103,10 @@ ReadOnlyPath = type_utils.ReadOnlyPath
 class OgbgMolpcba(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for ogbg_molpcba dataset."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
   RELEASE_NOTES = {
       '0.1.0': 'Initial release of experimental API.',
+      '0.1.1': 'Exposes the number of edges in each graph explicitly.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -120,6 +121,8 @@ class OgbgMolpcba(tfds.core.GeneratorBasedBuilder):
                                               dtype=tf.int64),
             'node_feat': tfds.features.Tensor(shape=(None, 9),
                                               dtype=tf.float32),
+            'num_edges': tfds.features.Tensor(shape=(None,),
+                                              dtype=tf.int64),
             'edge_feat': tfds.features.Tensor(shape=(None, 3),
                                               dtype=tf.float32),
             'edge_index': tfds.features.Tensor(shape=(None, 2),
@@ -175,10 +178,11 @@ class OgbgMolpcba(tfds.core.GeneratorBasedBuilder):
       node_slice = slice(
           accumulated_num_nodes[idx], accumulated_num_nodes[idx + 1]
       )
+      node_feat = all_data['node_feat'][node_slice]
+      num_edges = all_data['num_edges'][idx]
       edge_slice = slice(
           accumulated_num_edges[idx], accumulated_num_edges[idx + 1]
       )
-      node_feat = all_data['node_feat'][node_slice]
       edge_feat = all_data['edge_feat'][edge_slice]
       edge_index = all_data['edge_index'][edge_slice]
 
@@ -187,6 +191,7 @@ class OgbgMolpcba(tfds.core.GeneratorBasedBuilder):
           'labels': labels,
           'num_nodes': num_nodes,
           'node_feat': node_feat,
+          'num_edges': num_edges,
           'edge_feat': edge_feat,
           'edge_index': edge_index,
       }
