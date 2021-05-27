@@ -14,4 +14,5 @@
 # limitations under the License.
 
 """RLU datasets."""
+from tensorflow_datasets.rl_unplugged.rlu_dmlab_explore_object_rewards_few import RluDmlabExploreObjectRewardsFew
 from tensorflow_datasets.rl_unplugged.rlu_dmlab_seekavoid_arena01 import RluDmlabSeekavoidArena01
