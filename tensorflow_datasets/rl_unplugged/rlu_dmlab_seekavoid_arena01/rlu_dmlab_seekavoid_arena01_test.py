@@ -22,7 +22,6 @@ from tensorflow_datasets.rl_unplugged.rlu_dmlab_seekavoid_arena01 import rlu_dml
 
 class RluDmlabSeekavoidArena01Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_dmlab_seekavoid_arena01 dataset."""
-  # TODO(rlu_dmlab_seekavoid_arena01):
   DATASET_CLASS = rlu_dmlab_seekavoid_arena01.RluDmlabSeekavoidArena01
   SPLITS = {
       'train': 2,  # Number of fake train example
