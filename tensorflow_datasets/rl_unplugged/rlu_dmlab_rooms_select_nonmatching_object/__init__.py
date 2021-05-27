@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""RLU datasets."""
-from tensorflow_datasets.rl_unplugged.rlu_dmlab_explore_object_rewards_few import RluDmlabExploreObjectRewardsFew
-from tensorflow_datasets.rl_unplugged.rlu_dmlab_explore_object_rewards_many import RluDmlabExploreObjectRewardsMany
-from tensorflow_datasets.rl_unplugged.rlu_dmlab_rooms_select_nonmatching_object import RluDmlabRoomsSelectNonmatchingObject
-from tensorflow_datasets.rl_unplugged.rlu_dmlab_seekavoid_arena01 import RluDmlabSeekavoidArena01
+"""rlu_dmlab_rooms_select_nonmatching_object dataset."""
+
+from tensorflow_datasets.rl_unplugged.rlu_dmlab_rooms_select_nonmatching_object.rlu_dmlab_rooms_select_nonmatching_object import RluDmlabRoomsSelectNonmatchingObject
