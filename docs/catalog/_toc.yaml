@@ -300,6 +300,18 @@ toc:
     title: xquad
   title: Question answering
 - section:
+  - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
+    status: nightly
+    title: rlu_dmlab_explore_object_rewards_few
+  - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_many
+    status: nightly
+    title: rlu_dmlab_explore_object_rewards_many
+  - path: /datasets/catalog/rlu_dmlab_rooms_select_nonmatching_object
+    status: nightly
+    title: rlu_dmlab_rooms_select_nonmatching_object
+  - path: /datasets/catalog/rlu_dmlab_rooms_watermaze
+    status: nightly
+    title: rlu_dmlab_rooms_watermaze
   - path: /datasets/catalog/rlu_dmlab_seekavoid_arena01
     status: nightly
     title: rlu_dmlab_seekavoid_arena01

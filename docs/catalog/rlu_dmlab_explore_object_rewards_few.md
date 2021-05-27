@@ -2,14 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-  <meta itemprop="name" content="rlu_dmlab_seekavoid_arena01" />
-  <meta itemprop="description" content="RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL&#10;Unplugged is designed around the following considerations: to facilitate ease of&#10;use, we provide the datasets with a unified API which makes it easy for the&#10;practitioner to work with all data in the suite once a general pipeline has been&#10;established.&#10;&#10;DeepMind Lab dataset has several levels from the challenging, partially&#10;observable [Deepmind Lab suite](https://github.com/deepmind/lab). DeepMind Lab&#10;dataset is collected by training distributed R2D2 by [Kapturowski et al., 2018]&#10;(https://openreview.net/forum?id=r1lyTjAqYX) agents from scratch on individual&#10;tasks. We recorded the experience across all actors during entire training runs&#10;a few times for every task. The details of the dataset generation process is&#10;described in [Gulcehre et al., 2021](https://arxiv.org/abs/2103.09575).&#10;&#10;We release datasets for five different DeepMind Lab levels: `seekavoid_arena_01`,&#10;`explore_rewards_few`, `explore_rewards_many`, `rooms_watermaze`,&#10;`rooms_select_nonmatching_object`. We also release the snapshot datasets for&#10;`seekavoid_arena_01` level that we generated the datasets from a trained R2D2&#10;snapshot with different levels of epsilons for the epsilon-greedy algorithm&#10;when evaluating the agent in the environment.&#10;&#10;DeepMind Lab dataset is fairly large-scale. We recommend you to try it if you&#10;are interested in large-scale offline RL models with memory.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;rlu_dmlab_seekavoid_arena01&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
-  <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/rlu_dmlab_seekavoid_arena01" />
+  <meta itemprop="name" content="rlu_dmlab_explore_object_rewards_few" />
+  <meta itemprop="description" content="RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL&#10;Unplugged is designed around the following considerations: to facilitate ease of&#10;use, we provide the datasets with a unified API which makes it easy for the&#10;practitioner to work with all data in the suite once a general pipeline has been&#10;established.&#10;&#10;DeepMind Lab dataset has several levels from the challenging, partially&#10;observable [Deepmind Lab suite](https://github.com/deepmind/lab). DeepMind Lab&#10;dataset is collected by training distributed R2D2 by [Kapturowski et al., 2018]&#10;(https://openreview.net/forum?id=r1lyTjAqYX) agents from scratch on individual&#10;tasks. We recorded the experience across all actors during entire training runs&#10;a few times for every task. The details of the dataset generation process is&#10;described in [Gulcehre et al., 2021](https://arxiv.org/abs/2103.09575).&#10;&#10;We release datasets for five different DeepMind Lab levels: `seekavoid_arena_01`,&#10;`explore_rewards_few`, `explore_rewards_many`, `rooms_watermaze`,&#10;`rooms_select_nonmatching_object`. We also release the snapshot datasets for&#10;`seekavoid_arena_01` level that we generated the datasets from a trained R2D2&#10;snapshot with different levels of epsilons for the epsilon-greedy algorithm&#10;when evaluating the agent in the environment.&#10;&#10;DeepMind Lab dataset is fairly large-scale. We recommend you to try it if you&#10;are interested in large-scale offline RL models with memory.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;rlu_dmlab_explore_object_rewards_few&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/rlu_dmlab_explore_object_rewards_few" />
   <meta itemprop="sameAs" content="https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged" />
   <meta itemprop="citation" content="@article{gulcehre2021rbve,&#10;    title={Regularized Behavior Value Estimation},&#10;    author={{\c{C}}aglar G{\&quot;{u}}l{\c{c}}ehre and&#10;               Sergio G{\&#x27;{o}}mez Colmenarejo and&#10;               Ziyu Wang and&#10;               Jakub Sygnowski and&#10;               Thomas Paine and&#10;               Konrad Zolna and&#10;               Yutian Chen and&#10;               Matthew W. Hoffman and&#10;               Razvan Pascanu and&#10;               Nando de Freitas},&#10;    year={2021},&#10;    journal   = {CoRR},&#10;    url       = {https://arxiv.org/abs/2103.09575},&#10;    eprint={2103.09575},&#10;    archivePrefix={arXiv},&#10;}" />
 </div>
 
-# `rlu_dmlab_seekavoid_arena01`
+# `rlu_dmlab_explore_object_rewards_few`
 
 Note: This dataset was added recently and is only available in our
 `tfds-nightly` package
@@ -46,18 +46,23 @@ are interested in large-scale offline RL models with memory.
     [https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged](https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged)
 
 *   **Source code**:
-    [`tfds.rl_unplugged.rlu_dmlab_seekavoid_arena01.RluDmlabSeekavoidArena01`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/rl_unplugged/rlu_dmlab_seekavoid_arena01/rlu_dmlab_seekavoid_arena01.py)
+    [`tfds.rl_unplugged.rlu_dmlab_explore_object_rewards_few.RluDmlabExploreObjectRewardsFew`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/rl_unplugged/rlu_dmlab_explore_object_rewards_few/rlu_dmlab_explore_object_rewards_few.py)
 
 *   **Versions**:
 
-    *   `1.0.0`: Initial release.
-    *   **`1.0.1`** (default): Complete list of builder configs.
+    *   **`1.0.0`** (default): Initial release.
 
 *   **Download size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 89,144
 
 *   **Features**:
 
@@ -115,92 +120,14 @@ FeaturesDict({
 }
 ```
 
-## rlu_dmlab_seekavoid_arena01/training_0 (default config)
+## rlu_dmlab_explore_object_rewards_few/training_0 (default config)
 
-*   **Dataset size**: `381.09 GiB`
+*   **Dataset size**: `1019.97 GiB`
 
-*   **Splits**:
+## rlu_dmlab_explore_object_rewards_few/training_1
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 134,707
+*   **Dataset size**: `1.04 TiB`
 
-## rlu_dmlab_seekavoid_arena01/training_1
+## rlu_dmlab_explore_object_rewards_few/training_2
 
-*   **Dataset size**: `360.73 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 128,472
-
-## rlu_dmlab_seekavoid_arena01/training_2
-
-*   **Dataset size**: `378.54 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 133,545
-
-## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.0
-
-*   **Dataset size**: `94.82 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
-
-## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.0
-
-*   **Dataset size**: `94.67 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
-
-## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.01
-
-*   **Dataset size**: `94.76 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
-
-## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.01
-
-*   **Dataset size**: `94.64 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
-
-## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.25
-
-*   **Dataset size**: `93.95 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
-
-## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.25
-
-*   **Dataset size**: `93.92 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
+*   **Dataset size**: `1015.40 GiB`

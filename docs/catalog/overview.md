@@ -190,6 +190,14 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Rl unplugged`
 
+*   [`rlu_dmlab_explore_object_rewards_few`](rlu_dmlab_explore_object_rewards_few.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_dmlab_explore_object_rewards_many`](rlu_dmlab_explore_object_rewards_many.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_dmlab_rooms_select_nonmatching_object`](rlu_dmlab_rooms_select_nonmatching_object.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_dmlab_rooms_watermaze`](rlu_dmlab_rooms_watermaze.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`rlu_dmlab_seekavoid_arena01`](rlu_dmlab_seekavoid_arena01.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
