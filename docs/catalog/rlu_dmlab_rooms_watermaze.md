@@ -54,16 +54,9 @@ are interested in large-scale offline RL models with memory.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Features**:
 
@@ -123,6 +116,30 @@ FeaturesDict({
 
 ## rlu_dmlab_rooms_watermaze/training_0 (default config)
 
+*   **Dataset size**: `967.73 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 67,876
+
 ## rlu_dmlab_rooms_watermaze/training_1
 
+*   **Dataset size**: `967.55 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 66,922
+
 ## rlu_dmlab_rooms_watermaze/training_2
+
+*   **Dataset size**: `892.49 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 67,081
