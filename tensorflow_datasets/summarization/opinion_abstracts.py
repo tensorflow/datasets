@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Any, Dict, Iterator, List, Text, Tuple
+from typing import Any, Dict, Iterator, List, Optional, Text, Tuple
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -58,11 +58,11 @@ class OpinionAbstractsConfig(tfds.core.BuilderConfig):
 
   def __init__(self,
                *,
-               filename: Text = None,
-               name_key: Text = None,
-               id_key: Text = None,
-               opinions_key: Text = None,
-               summary_key: Text = None,
+               filename: Optional[Text] = None,
+               name_key: Optional[Text] = None,
+               id_key: Optional[Text] = None,
+               opinions_key: Optional[Text] = None,
+               summary_key: Optional[Text] = None,
                **kwargs):
     """BuilderConfig for OpinionAbstracts."""
     super(OpinionAbstractsConfig, self).__init__(
@@ -138,7 +138,7 @@ class OpinionAbstracts(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self,
-                         path: Text = None
+                         path: Optional[Text] = None
                         ) -> Iterator[Tuple[Text, Dict[Text, Any]]]:
     """Yields examples."""
     with tf.io.gfile.GFile(path, "rb") as f:

@@ -29,7 +29,7 @@ import sys
 import textwrap
 import threading
 import typing
-from typing import Any, Callable, Iterator, List, NoReturn, Tuple, Type, TypeVar, Union
+from typing import Any, Callable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
 import uuid
 
 from six.moves import urllib
@@ -331,8 +331,8 @@ def atomic_write(path, mode):
 
 def reraise(
     e: Exception,
-    prefix: str = None,
-    suffix: str = None,
+    prefix: Optional[str] = None,
+    suffix: Optional[str] = None,
 ) -> NoReturn:
   """Reraise an exception with an additional message."""
   prefix = prefix or ''

@@ -234,7 +234,7 @@ def _all_tfds_datasets() -> List[str]:
 def iter_documentation_builders(
     datasets: Optional[List[str]] = None,
     *,
-    doc_util_paths: doc_utils.DocUtilPaths = None,
+    doc_util_paths: Optional[doc_utils.DocUtilPaths] = None,
 ) -> Iterator[BuilderDocumentation]:
   """Create dataset documentation string for given datasets.
 
@@ -249,6 +249,7 @@ def iter_documentation_builders(
   print('Retrieving the list of builders...')
   datasets = datasets or _all_tfds_datasets()
 
+  # pytype: disable=attribute-error
   if doc_util_paths.fig_base_path:
     visu_doc_util = doc_utils.VisualizationDocUtil(
         base_path=doc_util_paths.fig_base_path,
@@ -270,6 +271,7 @@ def iter_documentation_builders(
         path=doc_util_paths.nightly_path,)
   else:
     nightly_doc_util = None
+  # pytype: enable=attribute-error
 
   document_single_builder_fn = functools.partial(
       _document_single_builder,
