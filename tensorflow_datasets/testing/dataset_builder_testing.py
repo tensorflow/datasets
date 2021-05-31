@@ -23,7 +23,6 @@ import itertools
 import numbers
 import os
 import textwrap
-import types
 from typing import Iterator, List, Optional, Union
 from unittest import mock
 
@@ -555,7 +554,7 @@ def checksum(example):
         flat_str.append(str(list(element.ravel())))
       else:
         flat_str.append(element.tobytes())
-    elif isinstance(element, types.GeneratorType):
+    elif isinstance(element, dataset_utils._IterableDataset):  # pylint: disable=protected-access
       for nested_e in element:
         _bytes_flatten(flat_str, nested_e)
     else:

@@ -186,6 +186,12 @@ class DatasetAsNumPyTest(testing.TestCase):
     self.assertAllEqual(rt1, [])
     self.assertAllEqual(rt2, [[4], [5, 6]])
 
+  def test_none_ds(self):
+    ds = tf.data.Dataset.range(10)
+    ds = ds.map(lambda x: (x, None))
+    exs = list(dataset_utils.as_numpy(ds))
+    self.assertAllEqual(exs, [(x, None) for x in range(10)])
+
 
 if __name__ == "__main__":
   testing.test_main()

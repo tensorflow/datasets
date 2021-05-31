@@ -29,8 +29,8 @@ from tensorflow_datasets.core.utils import type_utils
 Tree = type_utils.Tree
 Tensor = type_utils.Tensor
 
-TensorflowElem = Union[Tensor, tf.data.Dataset]
-NumpyValue = Union[tf.RaggedTensor, np.ndarray, np.generic, bytes]
+TensorflowElem = Union[None, Tensor, tf.data.Dataset]
+NumpyValue = Union[None, tf.RaggedTensor, np.ndarray, np.generic, bytes]
 NumpyElem = Union[NumpyValue, Iterable[NumpyValue]]
 
 
@@ -61,18 +61,9 @@ class _IterableDataset(collections.abc.Iterable):
     return self._make_iterator_fn()
 
 
-def _eager_dataset_element_to_numpy(
-    t: Any) -> Union[NumpyElem, Iterator[NumpyElem]]:
-  if isinstance(t, tf.RaggedTensor):
-    return t
-  if isinstance(t, tf.data.Dataset):
-    return _eager_dataset_iterator(t)
-  return t._numpy()  # pylint: disable=protected-access
-
-
 def _eager_dataset_iterator(ds: tf.data.Dataset) -> Iterator[NumpyElem]:
   for elem in ds:
-    yield tf.nest.map_structure(_eager_dataset_element_to_numpy, elem)
+    yield tf.nest.map_structure(_elem_to_numpy_eager, elem)
 
 
 def _graph_dataset_iterator(ds_iter, graph: tf.Graph) -> Iterator[NumpyElem]:
@@ -101,14 +92,18 @@ def _assert_ds_types(nested_ds: Tree[TensorflowElem]) -> None:
           f'Got: {nested_types}.')
 
 
-def _elem_to_numpy_eager(tf_el: TensorflowElem) -> NumpyElem:
+def _elem_to_numpy_eager(
+    tf_el: TensorflowElem
+) -> Union[NumpyElem, Iterable[NumpyElem]]:
   """Converts a single element from tf to numpy."""
   if isinstance(tf_el, tf.Tensor):
-    return tf_el._numpy()  # pylint: disable=protected-access
+    return tf_el._numpy()  # pytype: disable=attribute-error  # pylint: disable=protected-access
   elif isinstance(tf_el, tf.RaggedTensor):
     return tf_el
   elif tf_compat.is_dataset(tf_el):
     return _IterableDataset(_eager_dataset_iterator, tf_el)
+  elif tf_el is None:
+    return None
   else:
     raise AssertionError(f'Unexpected element: {type(tf_el)}: {tf_el}')
 
