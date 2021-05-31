@@ -18,7 +18,7 @@
 import os
 import re
 import textwrap
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import dataclasses
 
@@ -162,7 +162,7 @@ def _dataset_name_and_kwargs_from_name_str(
     py_utils.reraise(e, prefix=err_msg)  # pytype: disable=bad-return-type
 
 
-def _kwargs_str_to_kwargs(kwargs_str):
+def _kwargs_str_to_kwargs(kwargs_str: str):
   """Converts given `kwargs` as str into kwargs dict."""
   if not kwargs_str:
     return {}
@@ -174,7 +174,7 @@ def _kwargs_str_to_kwargs(kwargs_str):
   return kwargs
 
 
-def _cast_to_pod(val: str) -> Union[Value]:
+def _cast_to_pod(val: str) -> Value:
   """Try cast to bool, int, float, str, in that order."""
   bools = {'True': True, 'False': False}
   if val in bools:
@@ -211,7 +211,7 @@ def filename_prefix_for_split(name: str, split: str) -> str:
   return '%s-%s' % (filename_prefix_for_name(name), split)
 
 
-def sharded_filenames(filename_prefix, num_shards):
+def sharded_filenames(filename_prefix: str, num_shards: int) -> List[str]:
   """Sharded filenames given prefix and number of shards."""
   shard_suffix = '%05d-of-%05d'
   return [
@@ -220,10 +220,10 @@ def sharded_filenames(filename_prefix, num_shards):
   ]
 
 
-def filepattern_for_dataset_split(dataset_name,
-                                  split,
-                                  data_dir,
-                                  filetype_suffix=None):
+def filepattern_for_dataset_split(dataset_name: str,
+                                  split: str,
+                                  data_dir: str,
+                                  filetype_suffix: Optional[str] = None) -> str:
   prefix = filename_prefix_for_split(dataset_name, split)
   if filetype_suffix:
     prefix += '.%s' % filetype_suffix
@@ -231,21 +231,23 @@ def filepattern_for_dataset_split(dataset_name,
   return '%s*' % filepath
 
 
-def filenames_for_dataset_split(dataset_name,
-                                split,
-                                num_shards,
-                                filetype_suffix=None):
+def filenames_for_dataset_split(
+    dataset_name: str,
+    split: str,
+    num_shards: int,
+    filetype_suffix: Optional[str] = None) -> List[str]:
   prefix = filename_prefix_for_split(dataset_name, split)
   if filetype_suffix:
     prefix += '.%s' % filetype_suffix
   return sharded_filenames(prefix, num_shards)
 
 
-def filepaths_for_dataset_split(dataset_name,
-                                split,
-                                num_shards,
-                                data_dir,
-                                filetype_suffix=None):
+def filepaths_for_dataset_split(
+    dataset_name: str,
+    split: str,
+    num_shards: int,
+    data_dir: str,
+    filetype_suffix: Optional[str] = None) -> List[str]:
   """File paths of a given dataset split."""
   filenames = filenames_for_dataset_split(
       dataset_name=dataset_name,
