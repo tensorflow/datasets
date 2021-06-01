@@ -118,6 +118,10 @@ class GlueConfig(tfds.core.BuilderConfig):
     """
     super(GlueConfig, self).__init__(
         version=tfds.core.Version("2.0.0"),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+            tfds.core.Version("1.0.1"),
+        ],
         release_notes={
             "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
             "1.0.1": "Update dead URL links.",
