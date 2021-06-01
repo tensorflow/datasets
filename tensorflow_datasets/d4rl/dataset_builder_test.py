@@ -16,7 +16,7 @@
 """Tests for mujoco_build_configs."""
 
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.d4rl import mujoco_dataset
+from tensorflow_datasets.d4rl import dataset_builder
 
 
 def _mujoco_replay_datasets():
@@ -34,45 +34,57 @@ def _mujoco_full_metadata_datasets():
 class MujocoDatasetTest(tf.test.TestCase):
 
   def test_builder_config_step_metadata(self):
-    for config in mujoco_dataset.BUILDER_CONFIGS:
+    for config in dataset_builder.MUJOCO_BUILDER_CONFIGS:
       if config.name in _mujoco_replay_datasets():
         self.assertEqual(config.float_type, tf.float64)
       else:
         self.assertEqual(config.float_type, tf.float32)
 
   def test_builder_config_float_type(self):
-    for config in mujoco_dataset.BUILDER_CONFIGS:
+    for config in dataset_builder.MUJOCO_BUILDER_CONFIGS:
       if config.dataset_dir != 'gym_mujoco':
-        self.assertTrue(config.has_step_metadata,
+        self.assertTrue(config.step_metadata_keys,
                         f'Config {config.name} should contain step metadata.')
       else:
         self.assertFalse(
-            config.has_step_metadata,
+            config.step_metadata_keys,
             f'Config {config.name} should NOT contain step metadata.')
 
   def test_builder_config_episode_metadata(self):
-    for config in mujoco_dataset.BUILDER_CONFIGS:
+    for config in dataset_builder.MUJOCO_BUILDER_CONFIGS:
       if config.name in _mujoco_replay_datasets():
         self.assertTrue(
-            config.has_episode_metadata,
+            config.episode_metadata_keys,
             f'Config {config.name} should contain episode metadata.')
         self.assertFalse(
             config.has_policy_metadata,
             f'Config {config.name} should NOT contain policy metadata.')
+        self.assertFalse(
+            config.has_policy_last_fc_log_std,
+            f'Config {config.name} should NOT contain policy values for last_fc_log_std.'
+        )
       elif config.name in _mujoco_full_metadata_datasets():
         self.assertTrue(
-            config.has_episode_metadata,
+            config.episode_metadata_keys,
             f'Config {config.name} should contain episode metadata.')
         self.assertTrue(
             config.has_policy_metadata,
             f'Config {config.name} should contain policy metadata.')
+        self.assertTrue(
+            config.has_policy_last_fc_log_std,
+            f'Config {config.name} should contain policy values for last_fc_log_std.'
+        )
       else:
         self.assertFalse(
-            config.has_episode_metadata,
+            config.episode_metadata_keys,
             f'Config {config.name} should NOT contain episode metadata.')
         self.assertFalse(
             config.has_policy_metadata,
             f'Config {config.name} should NOT contain policy metadata.')
+        self.assertFalse(
+            config.has_policy_last_fc_log_std,
+            f'Config {config.name} should NOT contain policy values for last_fc_log_std.'
+        )
 
 
 if __name__ == '__main__':

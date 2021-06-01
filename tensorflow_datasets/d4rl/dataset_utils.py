@@ -67,17 +67,12 @@ def generate_examples(file_path: str):
   dataset_dict['is_first'] = [True] + done[:-1]
 
   # Get step metadata
-  infos_dict = {}
-  if 'infos/qpos' in dataset_dict.keys():
-    infos_dict = {
-        'qpos': dataset_dict['infos/qpos'],
-        'qvel': dataset_dict['infos/qvel'],
-        'action_log_probs': dataset_dict['infos/action_log_probs']
-    }
+  infos_dict = _get_nested_metadata(dataset_dict, 'infos')
+
   # Flatten reward
   dataset_dict['rewards'] = np.squeeze(dataset_dict['rewards'])
 
-  episode_metadata = _get_episode_metadata(dataset_dict)
+  episode_metadata = _get_nested_metadata(dataset_dict, 'metadata')
   dataset_dict = {
       'observation': dataset_dict['observations'],
       'action': dataset_dict['actions'],
@@ -100,12 +95,14 @@ def generate_examples(file_path: str):
     yield counter, _get_episode(dataset_dict, episode_metadata, prev, num_steps)
 
 
-def _get_episode_metadata(dataset: Dict[str, Any]) -> Dict[str, Any]:
+def _get_nested_metadata(dataset: Dict[str, Any],
+                         prefix: str) -> Dict[str, Any]:
   """Generate a metadata dictionary using flattened metadata keys.
 
   Args:
     dataset: dictionary containing the dataset keys and values. Keys are
       flatened.
+    prefix: common prefix of the metadata fields.
 
   Returns:
     Nested dictionary with the episode metadata.
@@ -115,7 +112,7 @@ def _get_episode_metadata(dataset: Dict[str, Any]) -> Dict[str, Any]:
     'metadata/v1/v2': 1,
     'metadata/v3': 2,
   }
-  Returns
+  and prefix='metadata', it returns:
   {
     'v1':{
       'v2': 1,
@@ -126,7 +123,7 @@ def _get_episode_metadata(dataset: Dict[str, Any]) -> Dict[str, Any]:
   """
   episode_metadata = {}
   for k in dataset.keys():
-    if 'metadata/' not in k:
+    if f'{prefix}/' not in k:
       continue
     keys = k.split('/')[1:]
     nested_dict = episode_metadata

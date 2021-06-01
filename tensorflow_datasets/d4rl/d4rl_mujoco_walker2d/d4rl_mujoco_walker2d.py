@@ -17,11 +17,11 @@
 
 from typing import Any
 
-from tensorflow_datasets.d4rl import mujoco_dataset
+from tensorflow_datasets.d4rl import dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
-class D4rlMujocoWalker2d(mujoco_dataset.D4RLMujocoDatasetBuilder):
+class D4rlMujocoWalker2d(dataset_builder.D4RLDatasetBuilder):
   """DatasetBuilder for walker2d dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
@@ -29,10 +29,10 @@ class D4rlMujocoWalker2d(mujoco_dataset.D4RLMujocoDatasetBuilder):
       '1.0.0': 'Initial release.',
   }
 
-  BUILDER_CONFIGS = mujoco_dataset.BUILDER_CONFIGS
+  BUILDER_CONFIGS = dataset_builder.MUJOCO_BUILDER_CONFIGS
 
   def __init__(self, **kwargs: Any):
-    config = mujoco_dataset.DatasetConfig(
+    config = dataset_builder.DatasetConfig(
         name='walker2d', obs_len=17, action_len=6, qpos_len=9, qvel_len=9)
     super().__init__(ds_config=config, **kwargs)
 

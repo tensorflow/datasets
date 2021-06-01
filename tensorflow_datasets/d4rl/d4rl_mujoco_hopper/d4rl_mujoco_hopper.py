@@ -17,11 +17,11 @@
 
 from typing import Any
 
-from tensorflow_datasets.d4rl import mujoco_dataset
+from tensorflow_datasets.d4rl import dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
-class D4rlMujocoHopper(mujoco_dataset.D4RLMujocoDatasetBuilder):
+class D4rlMujocoHopper(dataset_builder.D4RLDatasetBuilder):
   """DatasetBuilder for hopper dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
@@ -29,9 +29,9 @@ class D4rlMujocoHopper(mujoco_dataset.D4RLMujocoDatasetBuilder):
       '1.0.0': 'Initial release.',
   }
 
-  BUILDER_CONFIGS = mujoco_dataset.BUILDER_CONFIGS
+  BUILDER_CONFIGS = dataset_builder.MUJOCO_BUILDER_CONFIGS
 
   def __init__(self, **kwargs: Any):
-    config = mujoco_dataset.DatasetConfig(
+    config = dataset_builder.DatasetConfig(
         name='hopper', obs_len=11, action_len=3, qpos_len=6, qvel_len=6)
     super().__init__(ds_config=config, **kwargs)
