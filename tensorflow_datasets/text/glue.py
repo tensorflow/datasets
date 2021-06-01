@@ -117,10 +117,11 @@ class GlueConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(GlueConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"),
+        version=tfds.core.Version("2.0.0"),
         release_notes={
             "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
             "1.0.1": "Update dead URL links.",
+            "2.0.0": "Update data source for glue/qqp.",
         },
         **kwargs)
     self.text_features = text_features
@@ -212,7 +213,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           },
           label_classes=["not_duplicate", "duplicate"],
           label_column="is_duplicate",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FQQP.zip?alt=media&token=700c6acf-160d-4d89-81d1-de4191d02cb5",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/QQP.zip",
           data_dir="QQP",
           citation=textwrap.dedent("""\
           @online{WinNT,
