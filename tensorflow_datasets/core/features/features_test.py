@@ -16,7 +16,10 @@
 # coding=utf-8
 """Tests for tensorflow_datasets.core.features.feature."""
 
+import pathlib
+import sys
 import textwrap
+
 import numpy as np
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
@@ -419,6 +422,39 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
             'noncolapsed': Tensor(shape=(1,), dtype=tf.int32),
         })"""),
     )
+
+
+def test_custom_feature_connector(tmp_path: pathlib.Path):
+  module_name = 'tensorflow_datasets.core.features.test_feature'
+  feature_qualname = f'{module_name}.CustomFeatureConnector'
+  assert module_name not in sys.modules
+  assert feature_qualname not in features_lib.FeatureConnector._registered_features
+
+  # Save tfds.feature.Tensor to avoid importing the custom feature connector
+  feature = features_lib.Tensor(shape=(), dtype=tf.int32)
+  feature.save_config(tmp_path)
+
+  # Update the features.json file to simulate as if the original
+  # FeatureConnector had been save
+  feature_path = tmp_path / 'features.json'
+  content = feature_path.read_text()
+  content = content.replace(
+      'tensorflow_datasets.core.features.feature.Tensor',
+      feature_qualname,
+  )
+  feature_path.write_text(content)
+
+  # Loading will load the custom feature connector, even if it is not
+  # registered yet.
+  feature = features_lib.FeatureConnector.from_config(tmp_path)
+
+  # After loading, the custom feature connector is registered
+  assert module_name in sys.modules
+  assert feature_qualname in features_lib.FeatureConnector._registered_features
+
+  # Check that the loaded feature is the custom feature
+  from tensorflow_datasets.core.features import test_feature  # pylint: disable=g-import-not-at-top
+  assert isinstance(feature, test_feature.CustomFeatureConnector)
 
 
 if __name__ == '__main__':

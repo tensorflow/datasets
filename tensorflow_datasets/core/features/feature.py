@@ -19,6 +19,7 @@ import abc
 import collections
 import functools
 import html
+import importlib
 import json
 import os
 from typing import Dict, Type, TypeVar
@@ -179,10 +180,25 @@ class FeatureConnector(object):
     Returns:
       The reconstructed FeatureConnector.
     """
-    subclass = cls._registered_features.get(value['type'])
+    feature_qualname = value['type']  # my_project.xyz.MyFeature
+    err_msg = f'Unrecognized FeatureConnector type: {feature_qualname}.\n'
+
+    # Dynamically import custom feature-connectors
+    if feature_qualname not in cls._registered_features:
+      # Split `my_project.xyz.MyFeature` -> (`my_project.xyz`, `MyFeature`)
+      module_name, _ = feature_qualname.rsplit('.', maxsplit=1)  # pytype: disable=attribute-error
+      try:
+        # Import to register the FeatureConnector
+        importlib.import_module(module_name)
+      except ImportError:
+        raise ValueError(
+            f'{err_msg}Could not import {module_name}. You might have to '
+            'install additional dependencies.')
+
+    subclass = cls._registered_features.get(feature_qualname)
     if subclass is None:
-      raise ValueError(f'Unrecognized FeatureConnector type: {value["type"]}\n'
-                       f'Supported: {list(cls._registered_features)}')
+      raise ValueError(f'{err_msg}Supported: {list(cls._registered_features)}')
+
     return subclass.from_json_content(value['content'])
 
   def to_json(self) -> Json:

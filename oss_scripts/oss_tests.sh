@@ -32,7 +32,7 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 # * Wmt19 is failing during tarfile extraction due to:
 #   https://bugs.python.org/issue39430
 #   TODO(tfds): Restore test with new Python release.
-# * test_utils.py is not a test file
+# * test_utils.py, test_feature.py is not a test file
 # * build_docs_test: See b/142892342
 pytest \
   -vv \
@@ -44,6 +44,7 @@ pytest \
   --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
   --ignore="tensorflow_datasets/translate/wmt19_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
+  --ignore="tensorflow_datasets/core/features/test_feature.py" \
   --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
 set_status
 
