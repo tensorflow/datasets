@@ -17,11 +17,11 @@
 
 from typing import Any
 
-from tensorflow_datasets.d4rl import mujoco_dataset
+from tensorflow_datasets.d4rl import dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
-class D4rlMujocoAnt(mujoco_dataset.D4RLMujocoDatasetBuilder):
+class D4rlMujocoAnt(dataset_builder.D4RLDatasetBuilder):
   """DatasetBuilder for ant dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
@@ -29,9 +29,13 @@ class D4rlMujocoAnt(mujoco_dataset.D4RLMujocoDatasetBuilder):
       '1.0.0': 'Initial release.',
   }
 
-  BUILDER_CONFIGS = mujoco_dataset.BUILDER_CONFIGS
+  BUILDER_CONFIGS = dataset_builder.MUJOCO_BUILDER_CONFIGS
 
   def __init__(self, **kwargs: Any):
-    config = mujoco_dataset.DatasetConfig(
-        name='ant', obs_len=111, action_len=8, qpos_len=15, qvel_len=14)
+    config = dataset_builder.DatasetConfig(
+        name='ant',
+        obs_len=111,
+        action_len=8,
+        qpos_len=15,
+        qvel_len=14)
     super().__init__(ds_config=config, **kwargs)
