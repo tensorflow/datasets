@@ -44,6 +44,9 @@ toc:
     title: yes_no
   title: Audio
 - section:
+  - path: /datasets/catalog/d4rl_adroit_door
+    status: nightly
+    title: d4rl_adroit_door
   - path: /datasets/catalog/d4rl_mujoco_ant
     title: d4rl_mujoco_ant
   - path: /datasets/catalog/d4rl_mujoco_halfcheetah

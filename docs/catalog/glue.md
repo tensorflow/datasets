@@ -11,6 +11,11 @@
 
 # `glue`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 GLUE, the General Language Understanding Evaluation benchmark
@@ -22,15 +27,11 @@ evaluating, and analyzing natural language understanding systems.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
     *   `1.0.1`: Update dead URL links.
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    *   **`2.0.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Update data source for glue/qqp.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -39,6 +40,10 @@ evaluating, and analyzing natural language understanding systems.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## glue/cola (default config)
 
@@ -51,6 +56,12 @@ evaluating, and analyzing natural language understanding systems.
     [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
 
 *   **Download size**: `368.14 KiB`
+
+*   **Dataset size**: `965.49 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
@@ -69,40 +80,6 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-cola-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -134,15 +111,18 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://nlp.stanford.edu/sentiment/index.html](https://nlp.stanford.edu/sentiment/index.html)
 
-*   **Download size**: `7.09 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,821
-`'train'`      | 67,349
-`'validation'` | 872
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -153,40 +133,6 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-sst2-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -219,15 +165,18 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://www.microsoft.com/en-us/download/details.aspx?id=52398](https://www.microsoft.com/en-us/download/details.aspx?id=52398)
 
-*   **Download size**: `1.43 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,725
-`'train'`      | 3,668
-`'validation'` | 408
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -239,40 +188,6 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mrpc-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -303,15 +218,18 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs](https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs)
 
-*   **Download size**: `57.73 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 390,965
-`'train'`      | 363,849
-`'validation'` | 40,430
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -323,40 +241,6 @@ FeaturesDict({
     'question2': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-qqp-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -389,15 +273,18 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark](http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)
 
-*   **Download size**: `784.05 KiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,379
-`'train'`      | 5,749
-`'validation'` | 1,500
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -409,40 +296,6 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-stsb-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -483,6 +336,12 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `298.29 MiB`
 
+*   **Dataset size**: `100.56 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split                     | Examples
@@ -503,40 +362,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -583,14 +408,18 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
 
-*   **Download size**: `298.29 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 9,847
-`'validation'` | 9,832
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -602,40 +431,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli_mismatched-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -682,14 +477,18 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
 
-*   **Download size**: `298.29 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 9,796
-`'validation'` | 9,815
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -701,40 +500,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli_matched-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -791,15 +556,18 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
-*   **Download size**: `10.14 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 5,463
-`'train'`      | 104,743
-`'validation'` | 5,463
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -811,40 +579,6 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-qnli-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -879,15 +613,18 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
 
-*   **Download size**: `680.81 KiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 3,000
-`'train'`      | 2,490
-`'validation'` | 277
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -899,40 +636,6 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-rte-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -1006,15 +709,18 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
 
-*   **Download size**: `28.32 KiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 146
-`'train'`      | 635
-`'validation'` | 71
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -1026,40 +732,6 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-wnli-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -1094,6 +766,12 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `217.05 KiB`
 
+*   **Dataset size**: `299.16 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Splits**:
 
 Split    | Examples
@@ -1110,40 +788,6 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-ax-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 

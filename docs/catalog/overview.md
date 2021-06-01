@@ -49,6 +49,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `D4rl`
 
+*   [`d4rl_adroit_door`](d4rl_adroit_door.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`d4rl_mujoco_ant`](d4rl_mujoco_ant.md)
 *   [`d4rl_mujoco_halfcheetah`](d4rl_mujoco_halfcheetah.md)
 *   [`d4rl_mujoco_hopper`](d4rl_mujoco_hopper.md)
