@@ -159,4 +159,4 @@ major version of the dataset is constant.
 For example, `tfds.load("mnist:3.0.0", split="train[10:20]")` and
 `tfds.load("mnist:3.2.0", split="train[10:20]")` will always contain the same
 elements - regardless of platform, architecture, etc. - even though some of
-the records might have different values (eg: imgage encoding, label, ...).
+the records might have different values (eg: image encoding, label, ...).
