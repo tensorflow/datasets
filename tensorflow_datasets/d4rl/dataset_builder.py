@@ -66,7 +66,13 @@ _ACTION_LOG_PROBS = 'action_log_probs'
 _ACTION_MEAN = 'action_mean'
 _ACTION_LOGSTD = 'action_logstd'
 _ACTION_LOG_STD = 'action_log_std'
-_DOOR_BODY_POS = 'door_body_pos'
+
+_ADROIT_BODY_POS = 'adroit_body_pos'
+
+_ADROIT_BODY_POS_KEYS = {
+    'door': ['door_body_pos'],
+    'hammer': ['board_pos', 'target_pos'],
+}
 
 # Constants used to identify episode metadata keys
 _ALGORITHM = 'algorithm'
@@ -187,7 +193,6 @@ MUJOCO_BUILDER_CONFIGS = [
         step_metadata_keys=set([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         ),
 ]
-
 ADROIT_BUILDER_CONFIGS = [
     BuilderConfig(
         name='v0-human',
@@ -213,13 +218,13 @@ ADROIT_BUILDER_CONFIGS = [
         name='v1-human',
         dataset_dir='hand_dapg_v1',
         file_suffix='-human-v1',
-        step_metadata_keys=set([_QPOS, _QVEL, _DOOR_BODY_POS]),
+        step_metadata_keys=set([_QPOS, _QVEL, _ADROIT_BODY_POS]),
         ),
     BuilderConfig(
         name='v1-cloned',
         dataset_dir='hand_dapg_v1',
         file_suffix='-cloned-v1',
-        step_metadata_keys=set([_QPOS, _QVEL, _DOOR_BODY_POS]),
+        step_metadata_keys=set([_QPOS, _QVEL, _ADROIT_BODY_POS]),
         episode_metadata_keys=set([_ALGORITHM]),
         has_policy_metadata=True,
         has_policy_last_fc_log_std=False,
@@ -230,7 +235,7 @@ ADROIT_BUILDER_CONFIGS = [
         dataset_dir='hand_dapg_v1',
         file_suffix='-expert-v1',
         step_metadata_keys=set(
-            [_QPOS, _QVEL, _DOOR_BODY_POS, _ACTION_MEAN, _ACTION_LOG_STD]),
+            [_QPOS, _QVEL, _ADROIT_BODY_POS, _ACTION_MEAN, _ACTION_LOG_STD]),
         episode_metadata_keys=set([_ALGORITHM]),
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
@@ -264,8 +269,11 @@ def _get_step_metadata(
     elif k == _QVEL:
       infos_dict[k] = tfds.features.Tensor(
           shape=(ds_config.qvel_len,), dtype=float_type)
-    elif k == _DOOR_BODY_POS:
-      infos_dict[k] = tfds.features.Tensor(shape=(3,), dtype=float_type)
+    elif k == _ADROIT_BODY_POS:
+      # We use the task name to get the names of the body position keys.
+      adroit_keys = _ADROIT_BODY_POS_KEYS[ds_config.name]
+      for ak in adroit_keys:
+        infos_dict[ak] = tfds.features.Tensor(shape=(3,), dtype=float_type)
     elif k in [_ACTION_MEAN, _ACTION_LOG_STD, _ACTION_LOGSTD]:
       infos_dict[k] = tfds.features.Tensor(
           shape=(ds_config.action_len,), dtype=float_type)
@@ -322,8 +330,9 @@ def _get_policy_info(
       'nonlinearity': tf.string,
       'output_distribution': tf.string,
   }
-  if ds_config.name == 'door' and builder_config.name == 'v1-cloned':
-    # v1-cloned from d4rl_adroit_door uses a different policy shape
+  if ds_config.name in ['door', 'hammer'
+                       ] and builder_config.name == 'v1-cloned':
+    # v1-cloned from d4rl_adroit uses a different policy shape
     # TODO(b/186214745): Ideally, we should avoid using ifs on ds_config.name.
     policy_dict['fc0']['weight'] = tfds.features.Tensor(
         shape=(ds_config.obs_len, builder_config.policy_size), dtype=float_type)
@@ -373,9 +382,10 @@ def get_features_dict(
       'discount':
           float_type,
   }
-  if ds_config.name == 'door' and builder_config.name == 'v0-cloned':
-    # In d4rl_adroit_door/v0-cloned, action uses a different float type than the
-    # rest of the dataset.
+  if ds_config.name in ['door', 'hammer'
+                       ] and builder_config.name == 'v0-cloned':
+    # In D4RL adroit door and hammer in the v0-cloned config, action uses a
+    # different float type than the rest of the dataset.
     # TODO(b/186214745): Ideally, we should avoid using ifs on ds_config.name.
     steps_dict['action'] = tfds.features.Tensor(
         shape=(ds_config.action_len,), dtype=tf.float32)
