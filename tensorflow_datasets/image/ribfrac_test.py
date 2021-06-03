@@ -8,10 +8,10 @@ import ribfrac
 
 class RibfracTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ribfrac dataset."""
-  # TODO(ribfrac):
+  SKIP_CHECKSUMS = True
   DATASET_CLASS = ribfrac.Ribfrac
   SPLITS = {
-      'train': 1,  # Number of fake train example
+      'valid': 1,  # Number of fake train example
   }
 
   # If you are calling `download/download_and_extract` with a dict, like:
@@ -20,8 +20,8 @@ class RibfracTest(tfds.testing.DatasetBuilderTestCase):
   # fake data directory
   DL_EXTRACT_RESULT = { 
     'valid': {
-      'valid_images_1': 'ribfrac-val-images/RibFrac421-image.nii.gz',
-      'valid_masks_1': 'ribfrac-val-labels/RibFrac421-label.nii.gz',
+      'valid_images_1': '',
+      'valid_masks_1': '',
       'csv_1': 'ribfrac-val-info.csv'
     }
   }

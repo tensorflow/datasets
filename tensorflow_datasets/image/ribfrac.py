@@ -41,7 +41,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'patient_id': tfds.features.Tensor(shape=(None, ), dtype=tf.string),
+            'patient_id': tfds.features.Tensor(shape=(), dtype=tf.string),
             'image': tfds.features.Tensor(shape=(None, 512, 512), dtype=tf.int16),
             'mask' : tfds.features.Tensor(shape=(None, 512, 512), dtype=tf.int16),
             'label_id': tfds.features.Tensor(shape=(None,), dtype=tf.int8),
@@ -68,7 +68,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
 
     return {
         'valid': self._generate_examples(
-            images_path=path['valid']['valid_images_1'] / 'ribfrac1-val-images',
+            images_path=path['valid']['valid_images_1'] / 'ribfrac-val-images',
             masks_path=path['valid']['valid_masks_1'] / 'ribfrac-val-labels',
             csv_path=csvpath['valid']['csv_1'],
           )
