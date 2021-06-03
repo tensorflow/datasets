@@ -68,7 +68,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
 
     return {
         'valid': self._generate_examples(
-            images_path=path['valid']['valid_images_1'] / 'ribfrac-val-images',
+            images_path=path['valid']['valid_images_1'] / 'ribfrac1-val-images',
             masks_path=path['valid']['valid_masks_1'] / 'ribfrac-val-labels',
             csv_path=csvpath['valid']['csv_1'],
           )
