@@ -257,3 +257,55 @@ def filepaths_for_dataset_split(
   )
   filepaths = [os.path.join(data_dir, fname) for fname in filenames]
   return filepaths
+
+
+@dataclasses.dataclass(eq=True, frozen=True)
+class FilenameInfo:
+  """Structure representing a filename.
+
+  Filenames have the following specs:
+
+  ```
+  <dataset_name>-<split_name>.<file-extension>-xxxxxx-of-yyyyyy
+  ```
+
+  """
+  dataset_name: str
+  split: str
+  filetype_suffix: str
+  shard_index: int
+  num_shards: int
+
+  @classmethod
+  def from_str(cls, filename: str) -> 'FilenameInfo':
+    """Factory to create a `FilenameInfo` from filename."""
+    match = _parse_filename(filename)
+    if not match:  # No match found
+      raise ValueError(
+          f'Filename {filename!r} does not follow pattern: '
+          '<dataset_name>-<split_name>.<file-extension>-xxxxxx-of-yyyyyy')
+    values = match.groupdict()
+    return cls(
+        dataset_name=values['dataset_name'],
+        split=values['split'],
+        filetype_suffix=values['filetype_suffix'],
+        shard_index=int(values['shard_index']),
+        num_shards=int(values['num_shards']),
+    )
+
+  @staticmethod
+  def is_valid(filename: str) -> bool:
+    """Returns True if the filename follow the given pattern."""
+    return bool(_parse_filename(filename))
+
+  def __str__(self) -> str:
+    return (f'{self.dataset_name}-{self.split}.{self.filetype_suffix}-'
+            f'{self.shard_index:05}-of-{self.num_shards:05}')
+
+
+def _parse_filename(filename: str) -> 're.Match':  # pytype: disable=module-attr
+  """Parse the tf-record filename."""
+  pattern = (rf'(?P<dataset_name>{_NAME_CLASS})-(?P<split>\w+)\.'
+             r'(?P<filetype_suffix>\w+)-'
+             r'(?P<shard_index>\d\d\d\d\d)-of-(?P<num_shards>\d\d\d\d\d)')
+  return re.fullmatch(pattern, filename)

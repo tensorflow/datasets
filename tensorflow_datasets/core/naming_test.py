@@ -237,3 +237,41 @@ def test_naming_sorted():
       naming.DatasetName('aaa:zzz'),
       naming.DatasetName('zzz:aaa'),
   ]
+
+
+def test_filename_info():
+  filename = 'mnist-test.tfrecord-00000-of-00001'
+  assert naming.FilenameInfo.is_valid(filename)
+  file_info = naming.FilenameInfo.from_str(filename)
+  assert str(file_info) == filename
+  assert file_info.dataset_name == 'mnist'
+  assert file_info.split == 'test'
+  assert file_info.filetype_suffix == 'tfrecord'
+  assert file_info.shard_index == 0
+  assert file_info.num_shards == 1
+
+
+@pytest.mark.parametrize(
+    'filename',
+    [
+        'mnist-train.tfrecord-00000-of-00001',
+        'mnist123-test.tfrecord-00032-of-01024',
+        'mni23_st-test.riegeli-00032-of-01024',
+    ],
+)
+def test_filename_info_valid(filename):
+  assert naming.FilenameInfo.is_valid(filename)
+  assert filename == str(naming.FilenameInfo.from_str(filename))
+
+
+@pytest.mark.parametrize(
+    'filename',
+    [
+        'mnist-train.tfrecord-000-of-001',  # Wrong shard number
+        'mni-st-train.tfrecord-00000-of-00001',  # Wrong name
+    ],
+)
+def test_filename_info_invalid(filename):
+  assert not naming.FilenameInfo.is_valid(filename)
+  with pytest.raises(ValueError, match='Filename .* does not follow pattern'):
+    naming.FilenameInfo.from_str(filename)
