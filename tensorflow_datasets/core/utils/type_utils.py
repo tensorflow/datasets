@@ -53,6 +53,11 @@ JsonValue = Union[str, bool, int, float, None, List['JsonValue'],
                  ]
 Json = Dict[str, JsonValue]
 
+# Types for the tfrecord example construction.
+
+Key = Union[int, str, bytes]
+KeySerializedExample = Tuple[Key, bytes]  # `(key, serialized_proto)`
+
 # pytype: disable=ignored-abstractmethod
 
 

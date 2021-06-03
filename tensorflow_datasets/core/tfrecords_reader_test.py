@@ -317,7 +317,7 @@ class ReaderTest(testing.TestCase):
         tfrecords_writer, '_get_number_shards', return_value=shards_number):
       shard_specs = tfrecords_writer._get_shard_specs(num_examples, 0,
                                                       [num_examples], path)
-    serialized_records = [six.b(rec) for rec in records]
+    serialized_records = [(key, six.b(rec)) for key, rec in enumerate(records)]
     for shard_spec in shard_specs:
       _write_tfrecord_from_shard_spec(shard_spec,
                                       lambda unused_i: iter(serialized_records))

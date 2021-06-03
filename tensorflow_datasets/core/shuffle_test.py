@@ -108,7 +108,7 @@ class ShuffleTest(testing.TestCase):
           size += len(f.read())
       self.assertEqual(size, expected_size)
     # Check records can be read as expected:
-    records = list(iter(shuffler))
+    records = list(ex for _, ex in shuffler)
     self.assertEqual(records, expected_order)
 
   def test_all_mem(self):
@@ -139,7 +139,8 @@ class ShuffleTest(testing.TestCase):
     shuffler.add(2, b'b')
     shuffler.add(1, b'c')
     iterator = iter(shuffler)
-    self.assertEqual(next(iterator), b'a')
+    self.assertEqual(
+        next(iterator), (86269847664267119453139349052967691808, b'a'))
     with self.assertRaises(shuffle.DuplicatedKeysError):
       next(iterator)
 
