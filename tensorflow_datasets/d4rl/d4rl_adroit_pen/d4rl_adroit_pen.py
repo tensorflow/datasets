@@ -35,6 +35,7 @@ class D4rlAdroitPen(dataset_builder.D4RLDatasetBuilder):
       dataset_builder.BuilderConfig(
           name='v1-expert',
           dataset_dir='hand_dapg_v1',
+          env='adroit',
           file_suffix='-expert-v1',
           step_metadata_keys=set([
               dataset_builder._QPOS, dataset_builder._QVEL,
