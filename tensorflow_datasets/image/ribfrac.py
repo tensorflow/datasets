@@ -138,7 +138,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
         dtype=np.int8
       )
       yield f, {
-          'patient_id': str(f).replace('-image.nii.gz', ''),
+          'patient_id': str(f).replace('-image.nii.gz', '').replace('-label.nii.gz',''),
           'image': np.transpose(image_image_data),
           'mask': np.transpose(mask_image_data),
           'label_id': label_id,
