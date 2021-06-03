@@ -55,23 +55,47 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract({
+      'train_1': {
+        'train_images_1': 'https://zenodo.org/record/3893508/files/ribfrac-train-images-1.zip',
+        'train_masks_1': 'https://zenodo.org/record/3893508/files/ribfrac-train-labels-1.zip',
+      },
+      'train_2': {
+        'train_images_2': 'https://zenodo.org/record/3893498/files/ribfrac-train-images-2.zip',
+        'train_masks_2': 'https://zenodo.org/record/3893498/files/ribfrac-train-labels-2.zip',
+      },
       'valid': {
         'valid_images_1': 'https://zenodo.org/record/3893496/files/ribfrac-val-images.zip',
         'valid_masks_1': 'https://zenodo.org/record/3893496/files/ribfrac-val-labels.zip',
       },
     })
     csvpath = dl_manager.download({
+      'train_1': {
+        'csv_1': 'https://zenodo.org/record/3893508/files/ribfrac-train-info-1.csv',
+      },
+      'train_2': {
+        'csv_2': 'https://zenodo.org/record/3893498/files/ribfrac-train-info-2.csv',
+      },
       'valid': {
         'csv_1': 'https://zenodo.org/record/3893496/files/ribfrac-val-info.csv',
       }
     })
 
     return {
+        'train_1': self._generate_examples(
+          images_path=path['train_1']['train_images_1'] / 'Part1',
+          masks_path=path['train_1']['train_masks_1'] / 'Part1',
+          csv_path=csvpath['train_1']['csv_1'],
+        ),
+        'train_2': self._generate_examples(
+          images_path=path['train_2']['train_images_2'] / 'Part2',
+          masks_path=path['train_2']['train_masks_2'] / 'Part2',
+          csv_path=csvpath['train_2']['csv_2'],
+        ),
         'valid': self._generate_examples(
             images_path=path['valid']['valid_images_1'] / 'ribfrac-val-images',
             masks_path=path['valid']['valid_masks_1'] / 'ribfrac-val-labels',
             csv_path=csvpath['valid']['csv_1'],
-          )
+        ),
     }
 
   def _generate_examples(self, images_path, masks_path, csv_path):
@@ -88,8 +112,8 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
       mask_image_data = np.array(mask.dataobj, dtype=np.int16)
 
       label_csv = pd.read_csv(csv_path, index_col='public_id')
-      label_id = np.array(label_csv.loc[f.replace('-image.nii.gz','')]['label_id'], ndmin=1, dtype=np.int8)
-      label_code = np.array(label_csv.loc[f.replace('-image.nii.gz','')]['label_code'], ndmin=1, dtype=np.int8)
+      label_id = np.array(label_csv.loc[f.replace('-image.nii.gz','').replace('-label.nii.gz','')]['label_id'], ndmin=1, dtype=np.int8)
+      label_code = np.array(label_csv.loc[f.replace('-image.nii.gz','').replace('-label.nii.gz','')]['label_code'], ndmin=1, dtype=np.int8)
       yield f, {
           'patient_id': str(f).replace('-image.nii.gz', ''),
           'image': np.transpose(image_image_data),
