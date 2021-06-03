@@ -42,8 +42,14 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'patient_id': tfds.features.Tensor(shape=(), dtype=tf.string),
-            'image': tfds.features.Tensor(shape=(None, 512, 512), dtype=tf.int16),
-            'mask' : tfds.features.Tensor(shape=(None, 512, 512), dtype=tf.int16),
+            'image': tfds.features.Tensor(
+              shape=(None, 512, 512),
+              dtype=tf.int16
+            ),
+            'mask' : tfds.features.Tensor(
+              shape=(None, 512, 512),
+              dtype=tf.int16
+            ),
             'label_id': tfds.features.Tensor(shape=(None,), dtype=tf.int8),
             'label_code': tfds.features.Tensor(shape=(None,), dtype=tf.int8),
         }),
@@ -56,27 +62,36 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract({
       'train_1': {
-        'train_images_1': 'https://zenodo.org/record/3893508/files/ribfrac-train-images-1.zip',
-        'train_masks_1': 'https://zenodo.org/record/3893508/files/ribfrac-train-labels-1.zip',
+        'train_images_1':
+          'https://zenodo.org/record/3893508/files/ribfrac-train-images-1.zip',
+        'train_masks_1':
+          'https://zenodo.org/record/3893508/files/ribfrac-train-labels-1.zip',
       },
       'train_2': {
-        'train_images_2': 'https://zenodo.org/record/3893498/files/ribfrac-train-images-2.zip',
-        'train_masks_2': 'https://zenodo.org/record/3893498/files/ribfrac-train-labels-2.zip',
+        'train_images_2':
+          'https://zenodo.org/record/3893498/files/ribfrac-train-images-2.zip',
+        'train_masks_2':
+          'https://zenodo.org/record/3893498/files/ribfrac-train-labels-2.zip',
       },
       'valid': {
-        'valid_images_1': 'https://zenodo.org/record/3893496/files/ribfrac-val-images.zip',
-        'valid_masks_1': 'https://zenodo.org/record/3893496/files/ribfrac-val-labels.zip',
+        'valid_images_1':
+          'https://zenodo.org/record/3893496/files/ribfrac-val-images.zip',
+        'valid_masks_1':
+          'https://zenodo.org/record/3893496/files/ribfrac-val-labels.zip',
       },
     })
     csvpath = dl_manager.download({
       'train_1': {
-        'csv_1': 'https://zenodo.org/record/3893508/files/ribfrac-train-info-1.csv',
+        'csv_1':
+          'https://zenodo.org/record/3893508/files/ribfrac-train-info-1.csv',
       },
       'train_2': {
-        'csv_2': 'https://zenodo.org/record/3893498/files/ribfrac-train-info-2.csv',
+        'csv_2':
+          'https://zenodo.org/record/3893498/files/ribfrac-train-info-2.csv',
       },
       'valid': {
-        'csv_1': 'https://zenodo.org/record/3893496/files/ribfrac-val-info.csv',
+        'csv_1':
+          'https://zenodo.org/record/3893496/files/ribfrac-val-info.csv',
       }
     })
 
@@ -112,8 +127,16 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
       mask_image_data = np.array(mask.dataobj, dtype=np.int16)
 
       label_csv = pd.read_csv(csv_path, index_col='public_id')
-      label_id = np.array(label_csv.loc[f.replace('-image.nii.gz','').replace('-label.nii.gz','')]['label_id'], ndmin=1, dtype=np.int8)
-      label_code = np.array(label_csv.loc[f.replace('-image.nii.gz','').replace('-label.nii.gz','')]['label_code'], ndmin=1, dtype=np.int8)
+      label_id = np.array(
+        label_csv.loc[f.replace('-image.nii.gz','').replace('-label.nii.gz','')]['label_id'],
+        ndmin=1,
+        dtype=np.int8
+      )
+      label_code = np.array(
+        label_csv.loc[f.replace('-image.nii.gz','').replace('-label.nii.gz','')]['label_code'],
+        ndmin=1,
+        dtype=np.int8
+      )
       yield f, {
           'patient_id': str(f).replace('-image.nii.gz', ''),
           'image': np.transpose(image_image_data),
