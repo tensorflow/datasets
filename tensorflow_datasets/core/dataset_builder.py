@@ -903,29 +903,22 @@ class FileReaderBuilder(DatasetBuilder):
 
   """
 
-  def __init__(
-      self,
-      *,
-      file_format: Union[
-          None, str,
-          file_adapters.FileFormat] = file_adapters.DEFAULT_FILE_FORMAT,
-      **kwargs: Any):
+  def __init__(self,
+               *,
+               file_format: Union[None, str, file_adapters.FileFormat] = None,
+               **kwargs: Any):
     """Initializes an instance of FileReaderBuilder.
 
     Callers must pass arguments as keyword arguments.
 
     Args:
       file_format: EXPERIMENTAL, may change at any time; Format of the record
-        files in which dataset will be read/written to. Defaults to `tfrecord`.
+        files in which dataset will be read/written to. If `None`, defaults to
+        `tfrecord`.
       **kwargs: Arguments passed to `DatasetBuilder`.
     """
     super().__init__(**kwargs)
-    try:
-      self._file_format = file_adapters.FileFormat(file_format)
-    except ValueError:
-      all_values = [f.value for f in file_adapters.FileFormat]
-      raise ValueError(f"{file_format} is not a valid format. "
-                       f"Valid file formats: {all_values}")
+    self.info.set_file_format(file_format)
 
   @utils.memoized_property
   def _example_specs(self):
@@ -934,7 +927,7 @@ class FileReaderBuilder(DatasetBuilder):
   @property
   def _tfrecords_reader(self):
     return tfrecords_reader.Reader(self._data_dir, self._example_specs,
-                                   self._file_format)
+                                   self.info.file_format)
 
   def _as_dataset(
       self,
@@ -1108,7 +1101,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         max_examples_per_split=download_config.max_examples_per_split,
         beam_options=download_config.beam_options,
         beam_runner=download_config.beam_runner,
-        file_format=self._file_format,
+        file_format=self.info.file_format,
     )
     # Wrap the generation inside a context manager.
     # If `beam` is used during generation (when a pipeline gets created),
@@ -1147,7 +1140,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
 
       # Start generating data for all splits
       path_suffix = file_adapters.ADAPTER_FOR_FORMAT[
-          self._file_format].FILE_SUFFIX
+          self.info.file_format].FILE_SUFFIX
 
       split_info_futures = [
           split_builder.submit_split_generation(  # pylint: disable=g-complex-comprehension

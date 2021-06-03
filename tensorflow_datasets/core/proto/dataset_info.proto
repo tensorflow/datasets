@@ -102,5 +102,9 @@ message DatasetInfo {
   // Specifies whether examples should be shuffled.
   bool disable_shuffling = 16;
 
-  // Next available: 17
+  // File format used.
+  // Use string to allow format extension without regenerating the proto.
+  string file_format = 17;
+
+  // Next available: 18
 }

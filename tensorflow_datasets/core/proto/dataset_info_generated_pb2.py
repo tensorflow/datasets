@@ -26,18 +26,18 @@ from google.protobuf import symbol_database as _symbol_database
 
 _sym_db = _symbol_database.Default()
 
-from tensorflow_metadata.proto.v0 import statistics_pb2 as tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2
 from tensorflow_metadata.proto.v0 import schema_pb2 as tensorflow__metadata_dot_proto_dot_v0_dot_schema__pb2
+from tensorflow_metadata.proto.v0 import statistics_pb2 as tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2
 
 DESCRIPTOR = _descriptor.FileDescriptor(
     name='dataset_info.proto',
     package='tensorflow_datasets',
     syntax='proto3',
     serialized_options=b'\370\001\001',
-    serialized_pb=b'\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a-tensorflow_metadata/proto/v0/statistics.proto\x1a)tensorflow_metadata/proto/v0/schema.proto\"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01 \x03(\t\"\x9d\x01\n\tSplitInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nnum_shards\x18\x02 \x01(\x03\x12\x15\n\rshard_lengths\x18\x04 \x03(\x03\x12\x11\n\tnum_bytes\x18\x05 \x01(\x03\x12\x44\n\nstatistics\x18\x03 \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\"/\n\x0eSupervisedKeys\x12\r\n\x05input\x18\x01 \x01(\t\x12\x0e\n\x06output\x18\x02 \x01(\t\"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01 \x01(\t\"\x95\x05\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12\x13\n\x0b\x63onfig_name\x18\r \x01(\t\x12\x1a\n\x12\x63onfig_description\x18\x0e \x01(\t\x12\x10\n\x08\x63itation\x18\x03 \x01(\t\x12\x19\n\rsize_in_bytes\x18\x04 \x01(\x03\x42\x02\x18\x01\x12\x15\n\rdownload_size\x18\x0c \x01(\x03\x12\x36\n\x08location\x18\x05 \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06 \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07 \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08 \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10 \x01(\x08\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3',
+    serialized_pb=b'\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a)tensorflow_metadata/proto/v0/schema.proto\x1a-tensorflow_metadata/proto/v0/statistics.proto\"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01 \x03(\t\"\x9d\x01\n\tSplitInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nnum_shards\x18\x02 \x01(\x03\x12\x15\n\rshard_lengths\x18\x04 \x03(\x03\x12\x11\n\tnum_bytes\x18\x05 \x01(\x03\x12\x44\n\nstatistics\x18\x03 \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\"/\n\x0eSupervisedKeys\x12\r\n\x05input\x18\x01 \x01(\t\x12\x0e\n\x06output\x18\x02 \x01(\t\"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01 \x01(\t\"\xaa\x05\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12\x13\n\x0b\x63onfig_name\x18\r \x01(\t\x12\x1a\n\x12\x63onfig_description\x18\x0e \x01(\t\x12\x10\n\x08\x63itation\x18\x03 \x01(\t\x12\x19\n\rsize_in_bytes\x18\x04 \x01(\x03\x42\x02\x18\x01\x12\x15\n\rdownload_size\x18\x0c \x01(\x03\x12\x36\n\x08location\x18\x05 \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06 \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07 \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08 \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10 \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11 \x01(\t\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3',
     dependencies=[
-        tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2.DESCRIPTOR,
         tensorflow__metadata_dot_proto_dot_v0_dot_schema__pb2.DESCRIPTOR,
+        tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2.DESCRIPTOR,
     ])
 
 _DATASETLOCATION = _descriptor.Descriptor(
@@ -323,8 +323,8 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1020,
-    serialized_end=1076,
+    serialized_start=1041,
+    serialized_end=1097,
 )
 
 _DATASETINFO = _descriptor.Descriptor(
@@ -606,6 +606,23 @@ _DATASETINFO = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='file_format',
+            full_name='tensorflow_datasets.DatasetInfo.file_format',
+            index=16,
+            number=17,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR),
     ],
     extensions=[],
     nested_types=[
@@ -618,7 +635,7 @@ _DATASETINFO = _descriptor.Descriptor(
     extension_ranges=[],
     oneofs=[],
     serialized_start=415,
-    serialized_end=1076,
+    serialized_end=1097,
 )
 
 _SPLITINFO.fields_by_name[

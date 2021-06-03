@@ -35,12 +35,13 @@ import json
 import os
 import posixpath
 import tempfile
-from typing import Optional
+from typing import Optional, Union
 
 from absl import logging
 import six
 import tensorflow.compat.v2 as tf
 
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
@@ -59,8 +60,6 @@ LICENSE_FILENAME = "LICENSE"
 METADATA_FILENAME = "metadata.json"
 
 
-# TODO(tfds): Do we require to warn the user about the peak memory used while
-# constructing the dataset?
 class DatasetInfo(object):
   """Information about a dataset.
 
@@ -190,8 +189,7 @@ class DatasetInfo(object):
   @property
   def homepage(self):
     urls = self.as_proto.location.urls
-    tfds_homepage = "https://www.tensorflow.org/datasets/catalog/{}".format(
-        self.name)
+    tfds_homepage = f"https://www.tensorflow.org/datasets/catalog/{self.name}"
     return urls and urls[0] or tfds_homepage
 
   @property
@@ -241,6 +239,41 @@ class DatasetInfo(object):
   @property
   def module_name(self):
     return self.as_proto.module_name
+
+  @property
+  def file_format(self) -> Optional[file_adapters.FileFormat]:
+    if not self.as_proto.file_format:
+      return None
+    return file_adapters.FileFormat(self.as_proto.file_format)
+
+  def set_file_format(
+      self,
+      file_format: Union[None, str, file_adapters.FileFormat],
+  ) -> None:
+    """Internal function to define the file format.
+
+    The file format is set during `FileReaderBuilder.__init__`,
+    not `DatasetInfo.__init__`.
+
+    Args:
+      file_format: The file format.
+    """
+    # If file format isn't present already, fallback to `DEFAULT_FILE_FORMAT`
+    file_format = (
+        file_format  # Format explicitly given: tfds.builder(..., file_format=x)
+        or self.file_format  # Format restored from dataset_info.json
+        or file_adapters.DEFAULT_FILE_FORMAT)
+    try:
+      new_file_format = file_adapters.FileFormat(file_format)
+    except ValueError as e:
+      all_values = [f.value for f in file_adapters.FileFormat]
+      utils.reraise(e, suffix=f". Valid file formats: {all_values}")
+
+    # If the file format has been set once, file format should be consistent
+    if self.file_format and self.file_format != new_file_format:
+      raise ValueError(f"File format is already set to {self.file_format}. "
+                       f"Got {new_file_format}")
+    self.as_proto.file_format = new_file_format.value
 
   @property
   def splits(self):

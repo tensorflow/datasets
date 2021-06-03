@@ -17,14 +17,17 @@
 
 import json
 import os
+import pathlib
 import tempfile
 import numpy as np
+import pytest
 
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.image_classification import mnist
@@ -364,6 +367,59 @@ feature {
     # These are dynamically computed, so will be updated.
     self.assertEqual(40, info.splits.total_num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
+
+
+@pytest.mark.parametrize(
+    "file_format",
+    [
+        file_adapters.FileFormat.TFRECORD,
+    ])
+def test_file_format_save_restore(
+    tmp_path: pathlib.Path,
+    file_format: file_adapters.FileFormat,
+):
+  builder = testing.DummyDataset(data_dir=tmp_path, file_format=file_format)
+
+  assert isinstance(builder.info.file_format, file_adapters.FileFormat)
+  assert builder.info.file_format is file_format
+
+  builder.download_and_prepare()
+
+  # When restoring the builder, we do not provide the `file_format=`
+  # yet it is correctly restored
+  builder2 = testing.DummyDataset(data_dir=tmp_path)
+  assert builder2.info.file_format is file_format
+
+  # Explicitly passing the correct format is accepted.
+  builder3 = testing.DummyDataset(data_dir=tmp_path, file_format=file_format)
+  assert builder3.info.file_format is file_format
+
+  # Providing an inconsistent format is rejected.
+  with pytest.raises(ValueError, match="File format is already set to"):
+    different_file_format = {
+        file_adapters.FileFormat.TFRECORD: file_adapters.FileFormat.RIEGELI,
+        file_adapters.FileFormat.RIEGELI: file_adapters.FileFormat.TFRECORD,
+    }[file_format]
+    testing.DummyDataset(data_dir=tmp_path, file_format=different_file_format)
+
+
+def test_file_format_values(tmp_path: pathlib.Path):
+  # Default file format
+  builder = testing.DummyDataset(data_dir=tmp_path, file_format=None)
+  assert builder.info.file_format == file_adapters.FileFormat.TFRECORD
+
+  # str accepted
+  builder = testing.DummyDataset(data_dir=tmp_path, file_format="riegeli")
+  assert builder.info.file_format == file_adapters.FileFormat.RIEGELI
+
+  # file_adapters.FileFormat accepted
+  builder = testing.DummyDataset(
+      data_dir=tmp_path, file_format=file_adapters.FileFormat.RIEGELI)
+  assert builder.info.file_format == file_adapters.FileFormat.RIEGELI
+
+  # Unknown value
+  with pytest.raises(ValueError, match="is not a valid FileFormat"):
+    testing.DummyDataset(data_dir=tmp_path, file_format="arrow")
 
 
 # pylint: disable=g-inconsistent-quotes
