@@ -18,14 +18,12 @@
 import math
 import os
 import struct
-from typing import Iterator
 import uuid
 
 import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import hashing
-from tensorflow_datasets.core.utils import type_utils
 
 # Approximately how much data to store in memory before writing to disk.
 # If the amount of data to shuffle is < MAX_MEM_BUFFER_SIZE, no intermediary
@@ -229,7 +227,7 @@ class Shuffler(object):
     else:
       self._add_to_bucket(hkey, data)
 
-  def __iter__(self) -> Iterator[type_utils.KeySerializedExample]:
+  def __iter__(self):
     self._read_only = True
     previous_hkey = None
     previous_data = None
@@ -238,7 +236,7 @@ class Shuffler(object):
       if hkey == previous_hkey:
         raise DuplicatedKeysError(data, previous_data)
       previous_hkey = hkey
-      yield hkey, data
+      yield data
       previous_data = data
 
   def _iter_mem(self):

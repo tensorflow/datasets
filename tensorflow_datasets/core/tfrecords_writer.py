@@ -158,9 +158,9 @@ def _get_shard_boundaries(
 
 def _write_examples(
     path: type_utils.PathLike,
-    iterator: Iterable[type_utils.KeySerializedExample],
+    iterator: Iterable[bytes],
     file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT
-) -> Optional[file_adapters.ExamplePositions]:
+) -> Optional[Iterable[Any]]:
   """Write examples from iterator in the given `file_format`."""
   return file_adapters.ADAPTER_FOR_FORMAT[file_format].write_examples(
       path, iterator)
@@ -402,19 +402,17 @@ class BeamWriter(object):
     bucketid = _long_for_py2(bucketid)
     return (bucketid, (hkey, serialized_example))
 
-  def _sort_bucket(
-      self,
-      bucketid_examples: Tuple[int, List[type_utils.KeySerializedExample]],
-  ):
+  def _sort_bucket(self, bucketid_examples):
     """Sort the examples in bucket, emits total size and len on side."""
     beam = lazy_imports_lib.lazy_imports.apache_beam
     bucketid, examples = bucketid_examples
     examples = sorted(examples)  # We know by design it fits in memory.
-    # Compare continuous examples
-    for ex0, ex1 in zip(examples[:-1], examples[1:]):
-      if ex0[0] == ex1[0]:  # Different keys
-        _raise_error_for_duplicated_keys(ex0[1], ex1[1], self._example_specs)
-    total_size = sum(len(ex[1]) for ex in examples)
+    for i in range(len(examples) - 1):
+      if examples[i][0] == examples[i + 1][0]:
+        _raise_error_for_duplicated_keys(examples[i][1], examples[i + 1][1],
+                                         self._example_specs)
+    examples = [ex[1] for ex in examples]
+    total_size = sum(len(ex) for ex in examples)
     yield beam.pvalue.TaggedOutput(self._OUTPUT_TAG_BUCKETS_LEN_SIZE,
                                    (bucketid, (len(examples), total_size)))
     yield (bucketid, examples)
@@ -468,14 +466,10 @@ class BeamWriter(object):
     for shardpath, from_, to in data["boundaries"]:
       yield (shardpath, (bucketid, examples[from_:to]))
 
-  def _write_final_shard(
-      self,
-      shardid_examples: Tuple[str, List[Tuple[
-          int, List[type_utils.KeySerializedExample]]]],
-  ):
-    """Write all examples from multiple buckets into the same shard."""
+  def _write_final_shard(self, shardid_examples):
     shard_path, examples_by_bucket = shardid_examples
-    examples = itertools.chain(*[ex[1] for ex in sorted(examples_by_bucket)])
+    examples = list(
+        itertools.chain(*[ex[1] for ex in sorted(examples_by_bucket)]))
     record_keys = _write_examples(shard_path, examples, self._file_format)
     # If there are no record_keys, skip creating index files.
     if not record_keys:
@@ -491,13 +485,13 @@ class BeamWriter(object):
         examples_pcollection
         # (key, example)
         | "SerializeBucketize" >> beam.Map(self._serialize_shard)
-        # (bucket_id, hkey_serialized_ex))
+        # (bucket_id, (hkey, serialized_example))
         | "GroupByBucket" >> beam.GroupByKey()
-        # (bucket_id, [hkey_serialized_ex0, ...])
+        # (bucket_id, [(hkey0, serialized0), ...])
         | "SortBucketsGetSizeLen" >>
         (beam.ParDo(self._sort_bucket).with_outputs(
             self._OUTPUT_TAG_BUCKETS_LEN_SIZE, main="buckets")))
-    # buckets = (bucketid, [hkey_serialized_ex0, ...])
+    # buckets = (bucketid, [serialized0, serialized1, ...])
     # buckets_len_size = (bucketid, (num_examples_bucket, bucket_byte_size))
 
     boundaries = (
@@ -513,12 +507,12 @@ class BeamWriter(object):
             "boundaries": boundaries
         }
         # {
-        #     "examples": (bucketid, [hkey_serialized_ex0, ...])
+        #     "examples": (bucketid, [serialized0, serialized1, ...])
         #     "boundaries": (bucketid, (shard_path, from, to)
         # }
         | "GroupBucketsAndBoundaries" >> beam.CoGroupByKey()
         # (bucketid, {
-        #     "examples": [[hkey_serialized_ex0, ...]],
+        #     "examples": [[serialized0, serialized1, ...]],
         #     "boundaries": [(shard_path, from, to), ...],
         # })
         | "GetExamplesPerShard" >> beam.FlatMap(self._emits_examples_per_shard)

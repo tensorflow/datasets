@@ -15,12 +15,6 @@
 
 """Tests for file_adapters."""
 
-import pathlib
-from typing import Type
-
-import pytest
-from tensorflow_datasets import testing
-from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import file_adapters
 
 
@@ -40,21 +34,4 @@ def test_format_suffix():
       file_adapters.FileFormat.RIEGELI].FILE_SUFFIX == 'riegeli'
 
 
-@pytest.mark.parametrize(
-    'file_format',
-    [
-        file_adapters.FileFormat.TFRECORD,
-    ])
-@pytest.mark.parametrize('builder_cls', [
-    testing.DummyDataset,
-    testing.DummyBeamDataset,
-])
-def test_read_write(
-    tmp_path: pathlib.Path,
-    builder_cls: Type[dataset_builder.DatasetBuilder],
-    file_format: file_adapters.FileFormat,
-):
-  builder = builder_cls(data_dir=tmp_path, file_format=file_format)
-  builder.download_and_prepare()
-  ds = builder.as_dataset(split='train')
-  assert list(ds.as_numpy_iterator()) == [{'id': i} for i in range(3)]
+# TODO(mohitreddy): Add tests for `make_tf_data` and `write_examples` methods.

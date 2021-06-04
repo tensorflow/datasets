@@ -23,7 +23,6 @@ from tensorflow_datasets.testing.feature_test_case import SubTestCase
 from tensorflow_datasets.testing.mocking import mock_data
 from tensorflow_datasets.testing.mocking import MockPolicy
 from tensorflow_datasets.testing.test_case import TestCase
-from tensorflow_datasets.testing.test_utils import DummyBeamDataset
 from tensorflow_datasets.testing.test_utils import DummyDataset
 from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
 from tensorflow_datasets.testing.test_utils import DummyMnist
