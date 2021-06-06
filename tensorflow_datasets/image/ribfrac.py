@@ -1,6 +1,7 @@
 """ribfrac dataset."""
-import tensorflow as tf
+
 import tensorflow_datasets as tfds
+import tensorflow as tf
 import numpy as np
 import nibabel as nib
 
@@ -58,7 +59,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+  def _split_generators(self, dl_manager: tfds.core.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract({
       'train_1': {
