@@ -19,21 +19,14 @@ import abc
 import enum
 import os
 
-from typing import Any, ClassVar, Iterable, Optional
+from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.utils import type_utils
 
-try:
-  import riegeli  # pylint: disable=g-import-not-at-top
-except ImportError:
-  riegeli = Any
 
-try:
-  from riegeli.tensorflow.ops import riegeli_dataset_ops as riegeli_tf  # pylint: disable=g-import-not-at-top
-except ImportError:
-  riegeli_tf = Any
+ExamplePositions = List[Any]
 
 
 class FileFormat(enum.Enum):
@@ -51,18 +44,25 @@ DEFAULT_FILE_FORMAT = FileFormat.TFRECORD
 class FileAdapter(abc.ABC):
   """Interface for Adapter objects which read and write examples in a format."""
 
-  PATH_SUFFIX = ClassVar[str]
+  FILE_SUFFIX: ClassVar[str]
 
-  @abc.abstractclassmethod
-  def make_tf_data(cls,
-                   filename: type_utils.PathLike,
-                   buffer_size: Optional[int] = None) -> tf.data.Dataset:
+  @classmethod
+  @abc.abstractmethod
+  def make_tf_data(
+      cls,
+      filename: type_utils.PathLike,
+      buffer_size: Optional[int] = None,
+  ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     raise NotImplementedError()
 
-  @abc.abstractclassmethod
-  def write_examples(cls, path: type_utils.PathLike,
-                     iterator: Iterable[bytes]) -> Optional[Iterable[Any]]:
+  @classmethod
+  @abc.abstractmethod
+  def write_examples(
+      cls,
+      path: type_utils.PathLike,
+      iterator: Iterable[type_utils.KeySerializedExample],
+  ) -> Optional[ExamplePositions]:
     """Write examples from given iterator in given path.
 
     Args:
@@ -82,15 +82,20 @@ class TfRecordFileAdapter(FileAdapter):
   FILE_SUFFIX = 'tfrecord'
 
   @classmethod
-  def make_tf_data(cls,
-                   filename: type_utils.PathLike,
-                   buffer_size: Optional[int] = None) -> tf.data.Dataset:
+  def make_tf_data(
+      cls,
+      filename: type_utils.PathLike,
+      buffer_size: Optional[int] = None,
+  ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     return tf.data.TFRecordDataset(filename, buffer_size=buffer_size)
 
   @classmethod
-  def write_examples(cls, path: type_utils.PathLike,
-                     iterator: Iterable[bytes]) -> Optional[Iterable[Any]]:
+  def write_examples(
+      cls,
+      path: type_utils.PathLike,
+      iterator: Iterable[type_utils.KeySerializedExample],
+  ) -> Optional[ExamplePositions]:
     """Write examples from given iterator in given path.
 
     Args:
@@ -101,7 +106,7 @@ class TfRecordFileAdapter(FileAdapter):
       None
     """
     with tf.io.TFRecordWriter(os.fspath(path)) as writer:
-      for serialized_example in iterator:
+      for _, serialized_example in iterator:
         writer.write(serialized_example)
       writer.flush()
 
@@ -112,15 +117,20 @@ class RiegeliFileAdapter(FileAdapter):
   FILE_SUFFIX = 'riegeli'
 
   @classmethod
-  def make_tf_data(cls,
-                   filename: type_utils.PathLike,
-                   buffer_size: Optional[int] = None) -> tf.data.Dataset:
-    """Returns TensorFlow Dataset comprising given record file."""
+  def make_tf_data(
+      cls,
+      filename: type_utils.PathLike,
+      buffer_size: Optional[int] = None,
+  ) -> tf.data.Dataset:
+    from riegeli.tensorflow.ops import riegeli_dataset_ops as riegeli_tf  # pylint: disable=g-import-not-at-top
     return riegeli_tf.RiegeliDataset(filename, buffer_size=buffer_size)
 
   @classmethod
-  def write_examples(cls, path: type_utils.PathLike,
-                     iterator: Iterable[bytes]) -> Optional[Iterable[Any]]:
+  def write_examples(
+      cls,
+      path: type_utils.PathLike,
+      iterator: Iterable[type_utils.KeySerializedExample],
+  ) -> Optional[ExamplePositions]:
     """Write examples from given iterator in given path.
 
     Args:
@@ -130,20 +140,32 @@ class RiegeliFileAdapter(FileAdapter):
     Returns:
       List of record positions for each record in the given iterator.
     """
-    with riegeli.RecordWriter(
-        tf.io.gfile.GFile(os.fspath(path), 'wb'),
-        options='transpose') as writer:
-      positions = []
-      for record in iterator:
-        writer.write_record(record)
-        positions.append(writer.last_pos)
-      return positions
+    positions = []
+    import riegeli  # pylint: disable=g-import-not-at-top
+    with tf.io.gfile.GFile(os.fspath(path), 'wb') as f:
+      with riegeli.RecordWriter(f, options='transpose') as writer:
+        for _, record in iterator:
+          writer.write_record(record)
+          positions.append(writer.last_pos)
+    return positions
+
+
+def _to_bytes(key: type_utils.Key) -> bytes:
+  """Convert the key to bytes."""
+  if isinstance(key, int):
+    return key.to_bytes(128, byteorder='big')  # Use 128 as this match md5
+  elif isinstance(key, bytes):
+    return key
+  elif isinstance(key, str):
+    return key.encode('utf-8')
+  else:
+    raise TypeError(f'Invalid key type: {type(key)}')
 
 
 # Create a mapping from FileFormat -> FileAdapter.
-ADAPTER_FOR_FORMAT = {
+ADAPTER_FOR_FORMAT: Dict[FileFormat, Type[FileAdapter]] = {
     FileFormat.RIEGELI: RiegeliFileAdapter,
-    FileFormat.TFRECORD: TfRecordFileAdapter
+    FileFormat.TFRECORD: TfRecordFileAdapter,
 }
 
 

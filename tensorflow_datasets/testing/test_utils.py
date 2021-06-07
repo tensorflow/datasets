@@ -29,6 +29,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 
 
@@ -376,6 +377,14 @@ class DummyDataset(
   def _generate_examples(self):
     for i in range(3):
       yield i, {'id': i}
+
+
+class DummyBeamDataset(DummyDataset, skip_registration=True):
+  """Minimal beam DatasetBuilder."""
+
+  def _generate_examples(self):
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    return beam.Create(list(range(3))) | beam.Map(lambda i: (i, {'id': i}))
 
 
 def test_main():
