@@ -4,6 +4,7 @@ import tensorflow_datasets as tfds
 import tensorflow as tf
 import numpy as np
 import nibabel as nib
+from itertools import chain
 
 _DESCRIPTION = """
 This challenge establishes a large-scale benchmark dataset
@@ -16,12 +17,26 @@ detection), plus a 4-type classification.
 """
 
 _CITATION = """
-@article{ribfrac2020,
-  title={Deep-Learning-Assisted Detection and Segmentation of Rib Fractures from
-   CT Scans: Development and Validation of FracNet},
-  author={Jin, Liang and Yang, Jiancheng and Kuang, Kaiming and Ni, Bingbing and
-   Gao, Yiyi and Sun, Yingli and Gao, Pan and Ma, Weiling and Tan, Mingyu and 
-  Kang, Hui and Chen, Jiajun and Li, Ming},
+@article{
+  ribfrac2020,
+  title={
+    Deep-Learning-Assisted Detection and Segmentation of Rib Fractures from CT
+    Scans: Development and Validation of FracNet
+  },
+  author={
+    Jin,
+    Liang and Yang,
+    Jiancheng and Kuang,
+    Kaiming and Ni,
+    Bingbing and Gao,
+    Yiyi and Sun,
+    Yingli and Gao,
+    Pan and Ma,
+    Weiling and Tan,
+    Mingyu and Kang,
+    Hui and Chen,
+    Jiajun and Li, Ming
+  },
   journal={EBioMedicine},
   year={2020},
   publisher={Elsevier}
@@ -30,7 +45,6 @@ _CITATION = """
 
 class Ribfrac(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for ribfrac dataset."""
-
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
@@ -39,24 +53,24 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            'patient_id': tfds.features.Tensor(shape=(), dtype=tf.string),
-            'image': tfds.features.Tensor(
-              shape=(None, 512, 512),
-              dtype=tf.int16
-            ),
-            'mask' : tfds.features.Tensor(
-              shape=(None, 512, 512),
-              dtype=tf.int16
-            ),
-            'label_id': tfds.features.Tensor(shape=(None,), dtype=tf.int8),
-            'label_code': tfds.features.Tensor(shape=(None,), dtype=tf.int8),
-        }),
-        supervised_keys=(None),
-        homepage='https://ribfrac.grand-challenge.org/',
-        citation=_CITATION,
+      builder=self,
+      description=_DESCRIPTION,
+      features=tfds.features.FeaturesDict({
+          'patient_id': tfds.features.Tensor(shape=(), dtype=tf.string),
+          'image': tfds.features.Tensor(
+            shape=(None, 512, 512),
+            dtype=tf.int16
+          ),
+          'mask' : tfds.features.Tensor(
+            shape=(None, 512, 512),
+            dtype=tf.int16
+          ),
+          'label_id': tfds.features.Tensor(shape=(None,), dtype=tf.int8),
+          'label_code': tfds.features.Tensor(shape=(None,), dtype=tf.int8),
+      }),
+      supervised_keys=(None),
+      homepage='https://ribfrac.grand-challenge.org/',
+      citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager: tfds.core.download.DownloadManager):
@@ -95,25 +109,28 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
           'https://zenodo.org/record/3893496/files/ribfrac-val-info.csv',
       }
     })
-
     return {
-        'train_1': self._generate_examples(
-          images_path=path['train_1']['train_images_1'] / 'Part1',
-          masks_path=path['train_1']['train_masks_1'] / 'Part1',
-          csv_path=csvpath['train_1']['csv_1'],
-        ),
-        'train_2': self._generate_examples(
-          images_path=path['train_2']['train_images_2'] / 'Part2',
-          masks_path=path['train_2']['train_masks_2'] / 'Part2',
-          csv_path=csvpath['train_2']['csv_2'],
-        ),
-        'valid': self._generate_examples(
-            images_path=path['valid']['valid_images_1'] / 'ribfrac-val-images',
-            masks_path=path['valid']['valid_masks_1'] / 'ribfrac-val-labels',
-            csv_path=csvpath['valid']['csv_1'],
-        ),
+      'train': self._generate_train(path, csvpath),
+      'valid': self._generate_examples(
+        images_path=path['valid']['valid_images_1'] / 'ribfrac-val-images',
+        masks_path=path['valid']['valid_masks_1'] / 'ribfrac-val-labels',
+        csv_path=csvpath['valid']['csv_1'],
+      ),
     }
 
+  def _generate_train(self, path, csvpath):
+    part1 = self._generate_examples(
+      images_path=path['train_1']['train_images_1'] / 'Part1',
+      masks_path=path['train_1']['train_masks_1'] / 'Part1',
+      csv_path=csvpath['train_1']['csv_1'],
+    )
+    part2 = self._generate_examples(
+      images_path=path['train_2']['train_images_2'] / 'Part2',
+      masks_path=path['train_2']['train_masks_2'] / 'Part2',
+      csv_path=csvpath['train_2']['csv_2'],
+    )
+    for example in chain(part1, part2):
+      yield example
   def _generate_examples(self, images_path, masks_path, csv_path):
     """Yields examples."""
     os = tfds.core.lazy_imports.os
@@ -139,9 +156,9 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
         dtype=np.int8
       )
       yield f, {
-          'patient_id': str(f).replace('-image.nii.gz', '').replace('-label.nii.gz',''),
-          'image': np.transpose(image_image_data),
-          'mask': np.transpose(mask_image_data),
-          'label_id': label_id,
-          'label_code': label_code,
+        'patient_id': str(f).replace('-image.nii.gz', '').replace('-label.nii.gz',''),
+        'image': np.transpose(image_image_data),
+        'mask': np.transpose(mask_image_data),
+        'label_id': label_id,
+        'label_code': label_code,
       }

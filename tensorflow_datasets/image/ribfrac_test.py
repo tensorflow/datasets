@@ -8,8 +8,7 @@ class RibfracTest(tfds.testing.DatasetBuilderTestCase):
   SKIP_CHECKSUMS = True
   DATASET_CLASS = ribfrac.Ribfrac
   SPLITS = {
-    'train_1': 2,
-    'train_2': 2,
+    'train': 4,
     'valid': 1,
   }
 
