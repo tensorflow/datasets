@@ -58,7 +58,7 @@ per week in order to prevent overfitting.
 To evaluate the accuracy on the test split, one must first create an account at
 image-net.org. This account must be approved by the site administrator. After
 the account is created, one can submit the results to the test server at
-http://www.image-net.org/challenges/LSVRC/2013/test_server
+https://image-net.org/challenges/LSVRC/eval_server.php
 The submission consists of several ASCII text files corresponding to multiple
 tasks. The task of interest is "Classification submission (top-5 cls error)".
 A sample of an exported text file looks like the following:
