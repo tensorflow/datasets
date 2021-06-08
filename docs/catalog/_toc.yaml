@@ -116,6 +116,9 @@ toc:
     title: scene_parse150
   - path: /datasets/catalog/shapes3d
     title: shapes3d
+  - path: /datasets/catalog/symmetric_solids
+    status: nightly
+    title: symmetric_solids
   - path: /datasets/catalog/the300w_lp
     title: the300w_lp
   title: Image

@@ -82,7 +82,7 @@ def _get_dataset_from_filename(
 ):
   """Returns a tf.data.Dataset instance from given instructions."""
   ds = file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
-      instruction.filepath, _BUFFER_SIZE)
+      instruction.filepath, buffer_size=_BUFFER_SIZE)
   if do_skip:
     ds = ds.skip(instruction.skip)
   if do_take:

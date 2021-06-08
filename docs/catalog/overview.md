@@ -92,6 +92,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`s3o4d`](s3o4d.md)
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
+*   [`symmetric_solids`](symmetric_solids.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`the300w_lp`](the300w_lp.md)
 
 ### `Image classification`
