@@ -131,6 +131,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
     )
     for example in chain(part1, part2):
       yield example
+
   def _generate_examples(self, images_path, masks_path, csv_path):
     """Yields examples."""
     os = tfds.core.lazy_imports.os
@@ -144,19 +145,21 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
       mask = nib.load(os.path.join(str(masks_path), mask_id))
       mask_image_data = np.array(mask.dataobj, dtype=np.int16)
 
+      patient_id = f.replace('-image.nii.gz','').replace('-label.nii.gz','')
       label_csv = pd.read_csv(csv_path, index_col='public_id')
       label_id = np.array(
-        label_csv.loc[f.replace('-image.nii.gz','').replace('-label.nii.gz','')]['label_id'],
+        label_csv.loc[patient_id]['label_id'],
         ndmin=1,
         dtype=np.int8
       )
       label_code = np.array(
-        label_csv.loc[f.replace('-image.nii.gz','').replace('-label.nii.gz','')]['label_code'],
+        label_csv.loc[patient_id]['label_code'],
         ndmin=1,
         dtype=np.int8
       )
+
       yield f, {
-        'patient_id': str(f).replace('-image.nii.gz', '').replace('-label.nii.gz',''),
+        'patient_id': str(patient_id),
         'image': np.transpose(image_image_data),
         'mask': np.transpose(mask_image_data),
         'label_id': label_id,
