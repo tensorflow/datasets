@@ -22,6 +22,7 @@ from tensorflow_datasets.core.logging import logging_logger
 
 import wrapt
 
+
 _T = TypeVar('_T')
 
 _registered_loggers: Optional[List[base_logger.Logger]] = None
