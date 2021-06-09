@@ -15,15 +15,15 @@
 
 """Tests for compute_split_info."""
 
-import tensorflow_datasets as tfds
-from tensorflow_datasets.scripts.tools import compute_split_info
+from tensorflow_datasets import testing
+from tensorflow_datasets.core.folder_dataset import compute_split_utils
 
 
 def test_compute_split_info(tmp_path):
-  builder = tfds.testing.DummyDataset(data_dir=tmp_path)
+  builder = testing.DummyDataset(data_dir=tmp_path)
   builder.download_and_prepare()
 
-  split_infos = compute_split_info.compute_split_info(
+  split_infos = compute_split_utils.compute_split_info(
       data_dir=tmp_path / builder.info.full_name,
       out_dir=tmp_path,
   )
@@ -32,6 +32,6 @@ def test_compute_split_info(tmp_path):
          ] == [s.to_proto() for s in builder.info.splits.values()]
 
   # Split info are correctly saved
-  split_path = tmp_path / compute_split_info._out_filename('train')
-  split_info = compute_split_info._split_info_from_path(split_path)
+  split_path = tmp_path / compute_split_utils._out_filename('train')
+  split_info = compute_split_utils._split_info_from_path(split_path)
   assert builder.info.splits['train'].to_proto() == split_info.to_proto()
