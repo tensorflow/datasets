@@ -161,14 +161,8 @@ def _process_split(
 
   # Check that the file extension is correct.
   file_suffix, = {f.filetype_suffix for f in file_infos}
-  file_suffix_to_adapter = {
-      adapter.FILE_SUFFIX: adapter
-      for adapter in file_adapters.ADAPTER_FOR_FORMAT.values()
-  }
-  if file_suffix not in file_suffix_to_adapter:
-    raise ValueError('Unrecognized file extension: Should be one of '
-                     f'{file_suffix_to_adapter.values()}')
-  adapter = file_suffix_to_adapter[file_suffix]
+  file_format = file_adapters.file_format_from_suffix(file_suffix)
+  adapter = file_adapters.ADAPTER_FOR_FORMAT[file_format]
 
   # Build the pipeline to process one split
   return (pipeline
@@ -245,3 +239,15 @@ def _split_info_from_path(path: utils.ReadWritePath) -> split_lib.SplitInfo:
   json_str = path.read_text()
   proto = json_format.Parse(json_str, dataset_info_pb2.SplitInfo())
   return split_lib.SplitInfo.from_proto(proto)
+
+
+def split_infos_from_path(
+    path: utils.PathLike,
+    split_names: List[str],
+) -> List[split_lib.SplitInfo]:
+  """Restore the split info from a directory."""
+  path = utils.as_path(path)
+  return [
+      _split_info_from_path(path / _out_filename(split_name))
+      for split_name in split_names
+  ]
