@@ -25,7 +25,6 @@ import tensorflow as tf
 
 from tensorflow_datasets.core.utils import type_utils
 
-
 ExamplePositions = List[Any]
 
 
@@ -167,6 +166,19 @@ ADAPTER_FOR_FORMAT: Dict[FileFormat, Type[FileAdapter]] = {
     FileFormat.RIEGELI: RiegeliFileAdapter,
     FileFormat.TFRECORD: TfRecordFileAdapter,
 }
+
+_FILE_SUFFIX_TO_FORMAT = {
+    adapter.FILE_SUFFIX: file_format
+    for file_format, adapter in ADAPTER_FOR_FORMAT.items()
+}
+
+
+def file_format_from_suffix(file_suffix: str) -> FileFormat:
+  """Returns the file format associated with the file extension (`tfrecord`)."""
+  if file_suffix not in _FILE_SUFFIX_TO_FORMAT:
+    raise ValueError('Unrecognized file extension: Should be one of '
+                     f'{list(_FILE_SUFFIX_TO_FORMAT.values())}')
+  return _FILE_SUFFIX_TO_FORMAT[file_suffix]
 
 
 def is_example_file(filename: str) -> bool:

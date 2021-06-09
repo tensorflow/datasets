@@ -15,9 +15,13 @@
 
 """Lazy imports for heavy dependencies."""
 
+import functools
 import importlib
+from typing import TypeVar
 
 from tensorflow_datasets.core.utils import py_utils as utils
+
+_Fn = TypeVar("_Fn")
 
 
 def _try_import(module_name):
@@ -189,3 +193,19 @@ class LazyImporter(object):
 
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
+
+
+def beam_ptransform_fn(fn: _Fn) -> _Fn:
+  """Lazy version of `@beam.ptransform_fn`."""
+
+  lazy_decorated_fn = None
+
+  @functools.wraps(fn)
+  def decorated(*args, **kwargs):
+    nonlocal lazy_decorated_fn
+    # Actually decorate the function only the first time it is called
+    if lazy_decorated_fn is None:
+      lazy_decorated_fn = lazy_imports.apache_beam.ptransform_fn(fn)
+    return lazy_decorated_fn(*args, **kwargs)
+
+  return decorated

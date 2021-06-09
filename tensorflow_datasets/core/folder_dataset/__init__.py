@@ -13,9 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Custom Datasets APIs."""
+"""Utils to load data comming from third party sources directly with TFDS."""
 
 from tensorflow_datasets.core import registered
+
+from tensorflow_datasets.core.folder_dataset.compute_split_utils import compute_split_info
+from tensorflow_datasets.core.folder_dataset.write_metadata_utils import write_metadata
 
 # Custom datasets cannot be instanciated through `tfds.load`
 with registered.skip_registration():
@@ -25,6 +28,8 @@ with registered.skip_registration():
   # pylint: enable=g-import-not-at-top
 
 __all__ = [
+    "compute_split_info",
     "ImageFolder",
     "TranslateFolder",
+    "write_metadata",
 ]
