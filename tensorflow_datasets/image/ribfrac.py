@@ -43,6 +43,9 @@ _CITATION = """
 }
 """
 
+_BUCKET_PATH = 's3://gradient-scratch/william/'
+using_bucket = True
+
 class Ribfrac(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for ribfrac dataset."""
   VERSION = tfds.core.Version('1.0.0')
@@ -75,60 +78,83 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.core.download.DownloadManager):
     """Returns SplitGenerators."""
-    path = dl_manager.download_and_extract({
-      'train_1': {
-        'train_images_1':
-          'https://zenodo.org/record/3893508/files/ribfrac-train-images-1.zip',
-        'train_masks_1':
-          'https://zenodo.org/record/3893508/files/ribfrac-train-labels-1.zip',
-      },
-      'train_2': {
-        'train_images_2':
-          'https://zenodo.org/record/3893498/files/ribfrac-train-images-2.zip',
-        'train_masks_2':
-          'https://zenodo.org/record/3893498/files/ribfrac-train-labels-2.zip',
-      },
-      'valid': {
-        'valid_images_1':
-          'https://zenodo.org/record/3893496/files/ribfrac-val-images.zip',
-        'valid_masks_1':
-          'https://zenodo.org/record/3893496/files/ribfrac-val-labels.zip',
-      },
-    })
-    csvpath = dl_manager.download({
-      'train_1': {
-        'csv_1':
-          'https://zenodo.org/record/3893508/files/ribfrac-train-info-1.csv',
-      },
-      'train_2': {
-        'csv_2':
-          'https://zenodo.org/record/3893498/files/ribfrac-train-info-2.csv',
-      },
-      'valid': {
-        'csv_1':
-          'https://zenodo.org/record/3893496/files/ribfrac-val-info.csv',
+    if(using_bucket):
+      return {
+        'train': self._generate_train(_BUCKET_PATH, _BUCKET_PATH),
+        'valid': self._generate_examples(
+          images_path=_BUCKET_PATH / 'ribfrac-val-images',
+          masks_path=_BUCKET_PATH / 'ribfrac-val-labels',
+          csv_path=_BUCKET_PATH / 'ribfrac-val-info.csv',
+        ),
       }
-    })
-    return {
-      'train': self._generate_train(path, csvpath),
-      'valid': self._generate_examples(
-        images_path=path['valid']['valid_images_1'] / 'ribfrac-val-images',
-        masks_path=path['valid']['valid_masks_1'] / 'ribfrac-val-labels',
-        csv_path=csvpath['valid']['csv_1'],
-      ),
-    }
+    else:
+      path = dl_manager.download_and_extract({
+        'train_1': {
+          'train_images_1':
+            'https://zenodo.org/record/3893508/files/ribfrac-train-images-1.zip',
+          'train_masks_1':
+            'https://zenodo.org/record/3893508/files/ribfrac-train-labels-1.zip',
+        },
+        'train_2': {
+          'train_images_2':
+            'https://zenodo.org/record/3893498/files/ribfrac-train-images-2.zip',
+          'train_masks_2':
+            'https://zenodo.org/record/3893498/files/ribfrac-train-labels-2.zip',
+        },
+        'valid': {
+          'valid_images_1':
+            'https://zenodo.org/record/3893496/files/ribfrac-val-images.zip',
+          'valid_masks_1':
+            'https://zenodo.org/record/3893496/files/ribfrac-val-labels.zip',
+        },
+      })
+      csvpath = dl_manager.download({
+        'train_1': {
+          'csv_1':
+            'https://zenodo.org/record/3893508/files/ribfrac-train-info-1.csv',
+        },
+        'train_2': {
+          'csv_2':
+            'https://zenodo.org/record/3893498/files/ribfrac-train-info-2.csv',
+        },
+        'valid': {
+          'csv_1':
+            'https://zenodo.org/record/3893496/files/ribfrac-val-info.csv',
+        }
+      })
+      return {
+        'train': self._generate_train(path, csvpath),
+        'valid': self._generate_examples(
+          images_path=path['valid']['valid_images_1'] / 'ribfrac-val-images',
+          masks_path=path['valid']['valid_masks_1'] / 'ribfrac-val-labels',
+          csv_path=csvpath['valid']['csv_1'],
+        ),
+      }
 
   def _generate_train(self, path, csvpath):
-    part1 = self._generate_examples(
-      images_path=path['train_1']['train_images_1'] / 'Part1',
-      masks_path=path['train_1']['train_masks_1'] / 'Part1',
-      csv_path=csvpath['train_1']['csv_1'],
-    )
-    part2 = self._generate_examples(
-      images_path=path['train_2']['train_images_2'] / 'Part2',
-      masks_path=path['train_2']['train_masks_2'] / 'Part2',
-      csv_path=csvpath['train_2']['csv_2'],
-    )
+    if(using_bucket):
+      part1 = self._generate_examples(
+        images_path=path / 'Part1',
+        masks_path=path / 'Part1-labels',
+        csv_path=csvpath / 'ribfrac-train-info-1.csv',
+      )
+      part2 = self._generate_examples(
+        images_path=path / 'Part2',
+        masks_path=path / 'Part2-labels',
+        csv_path=csvpath / 'ribfrac-train-info-2.csv',
+      )
+    else:
+      part1 = self._generate_examples(
+        images_path=path['train_1']['train_images_1'] / 'Part1',
+        masks_path=path['train_1']['train_masks_1'] / 'Part1',
+        csv_path=csvpath['train_1']['csv_1'],
+      )
+      part2 = self._generate_examples(
+        images_path=path['train_2']['train_images_2'] / 'Part2',
+        masks_path=path['train_2']['train_masks_2'] / 'Part2',
+        csv_path=csvpath['train_2']['csv_2'],
+      )
+
     for example in chain(part1, part2):
       yield example
 
@@ -136,32 +162,73 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     os = tfds.core.lazy_imports.os
     pd = tfds.core.lazy_imports.pandas
-
     filepath_list = tf.io.gfile.listdir(images_path)
-    for f in filepath_list:
-      image = nib.load(os.path.join(str(images_path), f))
-      image_image_data = np.array(image.dataobj, dtype=np.int16)
-      mask_id = f.replace('-image.nii.gz', '-label.nii.gz')
-      mask = nib.load(os.path.join(str(masks_path), mask_id))
-      mask_image_data = np.array(mask.dataobj, dtype=np.int16)
+    if(using_bucket):
+      for f in filepath_list:
+        image_path = os.path.join(images_path, f)
+        byte = tf.io.gfile.GFile(image_path, mode='rb')
+        temp = open(f, 'ab')
+        temp.write(byte.read())
+        temp.close()
+        image = nib.load('./' + temp.name)
+        os.remove('./' + temp.name)
+        image_image_data = np.array(image.dataobj, dtype=np.int16)
 
-      patient_id = f.replace('-image.nii.gz','').replace('-label.nii.gz','')
-      label_csv = pd.read_csv(csv_path, index_col='public_id')
-      label_id = np.array(
-        label_csv.loc[patient_id]['label_id'],
-        ndmin=1,
-        dtype=np.int8
-      )
-      label_code = np.array(
-        label_csv.loc[patient_id]['label_code'],
-        ndmin=1,
-        dtype=np.int8
-      )
+        mask_id = f.replace('-image.nii.gz', '-label.nii.gz')
+        mask_path = os.path.join(masks_path, mask_id)
+        byte = tf.io.gfile.GFile(mask_path, mode='rb')
+        temp = open(mask_id, 'ab')
+        temp.write(byte.read())
+        temp.close()
+        mask = nib.load('./' + temp.name)
+        os.remove('./' + temp.name)
+        mask_image_data = np.array(mask.dataobj, dtype=np.int16)
 
-      yield f, {
-        'patient_id': str(patient_id),
-        'image': np.transpose(image_image_data),
-        'mask': np.transpose(mask_image_data),
-        'label_id': label_id,
-        'label_code': label_code,
-      }
+        patient_id = f.replace('-image.nii.gz','').replace('-label.nii.gz','')
+        label_csv = pd.read_csv(tf.io.gfile.GFile(csv_path), index_col='public_id')
+        label_id = np.array(
+          label_csv.loc[patient_id]['label_id'],
+          ndmin=1,
+          dtype=np.int8
+        )
+        label_code = np.array(
+          label_csv.loc[patient_id]['label_code'],
+          ndmin=1,
+          dtype=np.int8
+        )
+
+        yield f, {
+          'patient_id': str(patient_id),
+          'image': np.transpose(image_image_data),
+          'mask': np.transpose(mask_image_data),
+          'label_id': label_id,
+          'label_code': label_code,
+        }
+    else:
+      for f in filepath_list:
+        image = nib.load(os.path.join(str(images_path), f))
+        image_image_data = np.array(image.dataobj, dtype=np.int16)
+        mask_id = f.replace('-image.nii.gz', '-label.nii.gz')
+        mask = nib.load(os.path.join(str(masks_path), mask_id))
+        mask_image_data = np.array(mask.dataobj, dtype=np.int16)
+
+        patient_id = f.replace('-image.nii.gz','').replace('-label.nii.gz','')
+        label_csv = pd.read_csv(csv_path, index_col='public_id')
+        label_id = np.array(
+          label_csv.loc[patient_id]['label_id'],
+          ndmin=1,
+          dtype=np.int8
+        )
+        label_code = np.array(
+          label_csv.loc[patient_id]['label_code'],
+          ndmin=1,
+          dtype=np.int8
+        )
+
+        yield f, {
+          'patient_id': str(patient_id),
+          'image': np.transpose(image_image_data),
+          'mask': np.transpose(mask_image_data),
+          'label_id': label_id,
+          'label_code': label_code,
+        }
