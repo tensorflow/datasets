@@ -23,6 +23,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import splits as split_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.folder_dataset import compute_split_utils
@@ -49,6 +50,7 @@ def write_metadata(
     features: features_lib.FeatureConnector,
     split_infos: Union[type_utils.PathLike, List[split_lib.SplitInfo]],
     version: Union[None, str, utils.Version] = '1.0.0',
+    check_data: bool = True,
     **ds_info_kwargs,
 ) -> None:
   """Add metadata required to load with TFDS.
@@ -64,6 +66,8 @@ def write_metadata(
       of `tfds.core.SplitInfo` (returned value of
       `tfds.folder_dataset.compute_split_info`)
     version: Optional dataset version (default to 1.0.0)
+    check_data: If True, perform additional check to validate the data in
+      data_dir is valid
     **ds_info_kwargs: Additional metadata forwarded to `tfds.core.DatasetInfo` (
       description, homepage,...). Will appear in the doc.
   """
@@ -115,6 +119,14 @@ def write_metadata(
 
   # Save all metadata (dataset_info.json, features.json,...)
   ds_info.write_to_directory(data_dir)
+
+  # Make sure that the data can be loaded (feature connector match the actual
+  # specs)
+  if check_data:
+    builder = read_only_builder.builder_from_directory(data_dir)
+    ds = builder.as_dataset(split=next(iter(builder.info.splits)))
+    for _ in ds.take(1):  # Try to load the first example
+      pass
 
 
 def _load_splits(
