@@ -25,8 +25,26 @@ def _split_generator(...):
   }
 ```
 
-**Rational**: The new API is less verbose and more explicit. The old API will be
-removed in future version.
+**Rationale**: The new API is less verbose and more explicit. The old API will
+be removed in future version.
+
+## New datasets should be self-contained in a folder
+
+When adding a dataset inside the `tensorflow_datasets/` repository, please make
+sure to follow the dataset-as-folder structure (all checksums, dummy data,
+implementation code self-contained in a folder).
+
+*   Old datasets (bad): `<category>/<ds_name>.py`
+*   New datasets (good): `<category>/<ds_name>/<ds_name>.py`
+
+Use the
+[TFDS CLI](https://www.tensorflow.org/datasets/cli#tfds_new_implementing_a_new_dataset)
+(`tfds new`, or `gtfds new` for googlers) to generate the template.
+
+**Rationale**: Old structure required absolute paths for checksums, fake data
+and was distributing the dataset files in many places. It was making it harder
+to implement datasets outside the TFDS repository. For consistency, the new
+structure should be used everywhere now.
 
 ## Description lists should be formatted as markdown
 
@@ -45,8 +63,9 @@ Some other text.
 """
 ```
 
-**Rational**: Badly formatted description create visual artifacts in our catalog
-documentation. Without the empty lines, the above text would be rendered as:
+**Rationale**: Badly formatted description create visual artifacts in our
+catalog documentation. Without the empty lines, the above text would be rendered
+as:
 
 Some text. 1. Item 1 2. Item 1 3. Item 1 Some other text
 
@@ -61,7 +80,7 @@ features = {
 }
 ```
 
-**Rational**: Human readable labels are used in many places:
+**Rationale**: Human readable labels are used in many places:
 
 *   Allow to yield `str` directly in `_generate_examples`: `yield {'label':
     'dog'}`
@@ -82,7 +101,7 @@ features = {
 }
 ```
 
-**Rational**: It allow static shape inference (e.g.
+**Rationale**: It allow static shape inference (e.g.
 `ds.element_spec['image'].shape`), which is required for batching (batching
 images of unknown shape would require resizing them first).
 
@@ -91,7 +110,7 @@ images of unknown shape would require resizing them first).
 When possible, prefer the more specific types `tfds.features.ClassLabel`,
 `tfds.features.BBoxFeatures`,... instead of the generic `tfds.features.Tensor`.
 
-**Rational**: In addition of being more semantically correct, specific features
+**Rationale**: In addition of being more semantically correct, specific features
 provides additional metadata to users and are detected by tools.
 
 ## Lazy imports in global space
@@ -106,8 +125,8 @@ def f() -> beam.Map:
   ...
 ```
 
-**Rational**: Using lazy imports in the global scope would import the module for
-all tfds users, defeating the purpose of lazy imports.
+**Rationale**: Using lazy imports in the global scope would import the module
+for all tfds users, defeating the purpose of lazy imports.
 
 ## Dynamically computing train/test splits
 
@@ -130,7 +149,7 @@ def _split_generator():
   }
 ```
 
-**Rational**: TFDS try to provide datasets as close as the original data. The
+**Rationale**: TFDS try to provide datasets as close as the original data. The
 [sub-split API](https://www.tensorflow.org/datasets/splits ``) should be used
 instead to let users dynamically create the subsplits they want:
 
