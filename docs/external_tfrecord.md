@@ -115,8 +115,14 @@ tfds.folder_dataset.write_metadata(
     # Pass the `out_dir` argument of compute_split_info (see section above)
     # You can also explicitly pass a list of `tfds.core.SplitInfo`
     split_infos='/path/to/my/dataset/1.0.0/',
+
     # Optionally, additional DatasetInfo metadata can be provided
+    # See:
+    # https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetInfo
+    description="""Multi-line description."""
     homepage='http://my-project.org',
+    supervised_keys=('image', 'label'),
+    citation="""BibTex citation.""",
 )
 ```
 
