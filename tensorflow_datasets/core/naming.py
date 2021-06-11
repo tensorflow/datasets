@@ -303,7 +303,7 @@ class FilenameInfo:
             f'{self.shard_index:05}-of-{self.num_shards:05}')
 
 
-def _parse_filename(filename: str) -> 're.Match':  # pytype: disable=module-attr
+def _parse_filename(filename: str) -> Optional['re.Match']:  # pytype: disable=module-attr
   """Parse the tf-record filename."""
   pattern = (rf'(?P<dataset_name>{_NAME_CLASS})-(?P<split>\w+)\.'
              r'(?P<filetype_suffix>\w+)-'

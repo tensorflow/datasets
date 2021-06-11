@@ -35,7 +35,7 @@ class ReadOnlyBuilder(
     dataset_builder.FileReaderBuilder, skip_registration=True):
   """Generic DatasetBuilder loading from a directory."""
 
-  def __init__(self, builder_dir: str):
+  def __init__(self, builder_dir: utils.PathLike):
     """Constructor.
 
     Args:
@@ -104,7 +104,8 @@ class ReadOnlyBuilder(
     raise AssertionError('ReadOnlyBuilder can\'t be generated.')
 
 
-def builder_from_directory(builder_dir: str) -> dataset_builder.DatasetBuilder:
+def builder_from_directory(
+    builder_dir: utils.PathLike,) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
   This function reconstruct the `tfds.core.DatasetBuilder` without
