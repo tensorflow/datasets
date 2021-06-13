@@ -62,8 +62,7 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
     raise ImportError(
         "This version of TensorFlow Datasets requires TensorFlow "
         f"version >= {MIN_TF_VERSION}; Detected an installation of version "
-        f"{tf.__version__}. Please upgrade TensorFlow to proceed."
-    )
+        f"{tf.__version__}. Please upgrade TensorFlow to proceed.")
 
 
 def is_dataset(ds):

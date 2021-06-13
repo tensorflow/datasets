@@ -315,7 +315,7 @@ class TfrecordsWriterBeamTest(WriterTest):
         salt,
         disable_shuffling=disable_shuffling,
         file_format=file_format,
-        )
+    )
     # Here we need to disable type check as `beam.Create` is not capable of
     # inferring the type of the PCollection elements.
     options = beam.options.pipeline_options.PipelineOptions(

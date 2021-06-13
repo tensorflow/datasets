@@ -11,6 +11,12 @@
 
 # `coco`
 
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=coco">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 COCO is a large-scale object detection, segmentation, and captioning dataset.
@@ -39,7 +45,6 @@ defines 200 classes but only uses 133.
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-
 
 *   **Citation**:
 

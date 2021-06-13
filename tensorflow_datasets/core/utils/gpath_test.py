@@ -25,7 +25,6 @@ import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import gpath as gpathlib
 
-
 _GCS_SCHEME = 'gs://'
 
 
@@ -52,17 +51,14 @@ def gcs_mocked_path(tmp_path: pathlib.Path):
       # 'stat',
       # 'walk',
   ]
-  origin_gfile = types.SimpleNamespace(**{
-      name: getattr(tf.io.gfile, name) for name in gfile_fn_names
-  })
+  origin_gfile = types.SimpleNamespace(
+      **{name: getattr(tf.io.gfile, name) for name in gfile_fn_names})
   with testing.mock_tf(
       'tf.io.gfile',
       GFile=lambda p, *args, **kwargs: origin_gfile.GFile(  # pylint: disable=g-long-lambda
-          _norm_path(p), *args, **kwargs
-      ),
+          _norm_path(p), *args, **kwargs),
       copy=lambda p1, p2, **kwargs: origin_gfile.copy(  # pylint: disable=g-long-lambda
-          _norm_path(p1), _norm_path(p2), **kwargs
-      ),
+          _norm_path(p1), _norm_path(p2), **kwargs),
       exists=lambda p: origin_gfile.exists(_norm_path(p)),
       glob=lambda p: origin_gfile.glob(_norm_path(p)),
       isdir=lambda p: origin_gfile.isdir(_norm_path(p)),
@@ -71,8 +67,7 @@ def gcs_mocked_path(tmp_path: pathlib.Path):
       mkdir=lambda p: origin_gfile.mkdir(_norm_path(p)),
       remove=lambda p: origin_gfile.remove(_norm_path(p)),
       rename=lambda p1, p2, **kwargs: origin_gfile.rename(  # pylint: disable=g-long-lambda
-          _norm_path(p1), _norm_path(p2), **kwargs
-      ),
+          _norm_path(p1), _norm_path(p2), **kwargs),
       rmtree=lambda p: origin_gfile.rmtree(_norm_path(p)),
   ):
     yield tmp_path
@@ -129,8 +124,14 @@ def test_repr_windows():
         ('~',),
         ('relative/path',),
         ('/tmp/to/something',),
-        ('/tmp/to', 'something',),
-        (pathlib.Path('/tmp/to'), 'something',),
+        (
+            '/tmp/to',
+            'something',
+        ),
+        (
+            pathlib.Path('/tmp/to'),
+            'something',
+        ),
         ('~/to/something',),
     ],
 )
@@ -192,8 +193,10 @@ def test_gcs(gcs_mocked_path: pathlib.Path):
 
 def test_open(gcs_mocked_path: pathlib.Path):
 
-  files = ['foo.py', 'bar.py', 'foo_bar.py', 'dataset.json',
-           'dataset_info.json', 'readme.md']
+  files = [
+      'foo.py', 'bar.py', 'foo_bar.py', 'dataset.json', 'dataset_info.json',
+      'readme.md'
+  ]
   dataset_path = gpathlib.PosixGPath('gs://bucket/dataset')
 
   dataset_path.mkdir(parents=True)

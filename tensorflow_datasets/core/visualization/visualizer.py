@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Base visualizer class.
-"""
+"""Base visualizer class."""
 
 import abc
 from typing import Any
@@ -54,18 +53,14 @@ class Visualizer(object):
     """
 
   @abc.abstractmethod
-  def show(
-      self,
-      ds: tf.data.Dataset,
-      ds_info: dataset_info.DatasetInfo,
-      **options_kwargs: Any
-  ):
+  def show(self, ds: tf.data.Dataset, ds_info: dataset_info.DatasetInfo,
+           **options_kwargs: Any):
     """Display the dataset.
 
     Args:
       ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
-        should not be batched. Examples will be consumed in order until
-        (rows * cols) are read or the dataset is consumed.
+        should not be batched. Examples will be consumed in order until (rows *
+        cols) are read or the dataset is consumed.
       ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
       **options_kwargs: Additional display options, specific to the dataset type
         to visualize. See the `tfds.visualization` for a list of available

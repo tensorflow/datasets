@@ -110,10 +110,8 @@ class GeneratorBasedBuilder(
         name_to_configs = {c.name: c for c in cls.BUILDER_CONFIGS}
         new_ordered_configs = [name_to_configs[cls.DEFAULT_CONFIG_NAME]]
         new_ordered_configs.extend(
-            config
-            for name, config in name_to_configs.items()
-            if name != cls.DEFAULT_CONFIG_NAME
-        )
+            config for name, config in name_to_configs.items()
+            if name != cls.DEFAULT_CONFIG_NAME)
         cls.BUILDER_CONFIGS = new_ordered_configs
     super().__init_subclass__(**kwargs)
 
@@ -171,8 +169,7 @@ def _make_scalar_feature(dtype: str) -> tf.dtypes.DType:
   else:
     raise ValueError(
         f'Unrecognized type {dtype}. Please open an issue if you think '
-        'this is a bug.'
-    )
+        'this is a bug.')
 
 
 class Value:
@@ -277,7 +274,6 @@ for attr in dir(_MockedHFDatasets.features):
     continue
   setattr(_MockedHFDatasets, attr, getattr(_MockedHFDatasets.features, attr))
 
-
 # Mock the standard file API to use GFile
 
 
@@ -308,21 +304,14 @@ def mock_builtin_to_use_gfile() -> Iterator[None]:
   Yields:
     None
   """
-  with mock.patch.object(
-      builtins, 'open', _new_open
-  ), mock.patch(
+  with mock.patch.object(builtins, 'open', _new_open), mock.patch(
       # Patch `__new__` as `Path` might have already be imported as
       # `from pathlib import Path`
-      'pathlib.Path.__new__', _new_pathlib_path_new
-  ), mock.patch.object(
-      os.path, 'exists', tf.io.gfile.exists
-  ), mock.patch.object(
-      os.path, 'isdir', tf.io.gfile.isdir
-  ), mock.patch.object(
-      os, 'listdir', tf.io.gfile.listdir
-  ), mock.patch.object(
-      os, 'walk', tf.io.gfile.walk
-  ), mock.patch.object(
-      glob, 'glob', tf.io.gfile.glob
-  ):
+      'pathlib.Path.__new__',
+      _new_pathlib_path_new), mock.patch.object(
+          os.path, 'exists', tf.io.gfile.exists), mock.patch.object(
+              os.path, 'isdir', tf.io.gfile.isdir), mock.patch.object(
+                  os, 'listdir', tf.io.gfile.listdir), mock.patch.object(
+                      os, 'walk', tf.io.gfile.walk), mock.patch.object(
+                          glob, 'glob', tf.io.gfile.glob):
     yield

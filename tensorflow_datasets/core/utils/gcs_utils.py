@@ -35,7 +35,6 @@ GCS_DATASETS_DIR = 'datasets'
 
 _is_gcs_disabled = False
 
-
 # Exception raised when GCS isn't available
 # * UnimplementedError: On windows, gs:// isn't supported on old TF versions.
 #   https://github.com/tensorflow/tensorflow/issues/38477
@@ -98,9 +97,9 @@ def is_dataset_on_gcs(dataset_name: str) -> bool:
   return not _is_gcs_disabled and exists(gcs_path(dir_name))
 
 
-def download_gcs_dataset(
-    dataset_name, local_dataset_dir, max_simultaneous_downloads=25
-):
+def download_gcs_dataset(dataset_name,
+                         local_dataset_dir,
+                         max_simultaneous_downloads=25):
   """Downloads prepared GCS dataset to local dataset directory."""
   if _is_gcs_disabled:
     raise AssertionError('Cannot download from GCS when _is_gcs_disabled')

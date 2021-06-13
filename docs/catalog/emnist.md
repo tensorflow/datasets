@@ -11,6 +11,12 @@
 
 # `emnist`
 
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=emnist">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The EMNIST dataset is a set of handwritten character digits derived from the
@@ -43,7 +49,6 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
-
 
 *   **Citation**:
 

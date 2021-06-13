@@ -308,8 +308,7 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     # 0.0.2: Initial version.
     super(SuperGlueConfig, self).__init__(
-        version=tfds.core.Version("1.0.2"),
-        **kwargs)
+        version=tfds.core.Version("1.0.2"), **kwargs)
     self.features = features
     self.label_classes = label_classes
     self.data_url = data_url
@@ -565,6 +564,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
 
 def _fix_wst(ex):
   """Fixes most cases where spans are not actually substrings of text."""
+
   def _fix_span_text(k):
     """Fixes a single span."""
     text = ex[k + "_text"]
@@ -593,6 +593,7 @@ def _fix_wst(ex):
     text = text.replace("\n", " ")
     ex[k + "_text"] = text
     assert ex[k + "_text"] in ex["text"], ex
+
   _fix_span_text("span1")
   _fix_span_text("span2")
   return ex

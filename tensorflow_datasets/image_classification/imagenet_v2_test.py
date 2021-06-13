@@ -20,9 +20,9 @@ import tensorflow_datasets.public_api as tfds
 
 class ImagenetV2Test(tfds.testing.DatasetBuilderTestCase):
 
-  BUILDER_CONFIG_NAMES_TO_TEST = ['matched-frequency',
-                                  'threshold-0.7',
-                                  'topimages']
+  BUILDER_CONFIG_NAMES_TO_TEST = [
+      'matched-frequency', 'threshold-0.7', 'topimages'
+  ]
 
   DATASET_CLASS = imagenet_v2.ImagenetV2
   SPLITS = {

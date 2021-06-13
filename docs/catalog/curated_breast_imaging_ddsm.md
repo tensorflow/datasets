@@ -13,6 +13,12 @@
 
 Warning: Manual download required. See instructions below.
 
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=curated_breast_imaging_ddsm">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The CBIS-DDSM (Curated Breast Imaging Subset of DDSM) is an updated and
@@ -64,7 +70,6 @@ Resulting images should be put in `manual_dir`, like:
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-
 
 *   **Citation**:
 

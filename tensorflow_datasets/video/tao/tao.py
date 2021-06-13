@@ -24,10 +24,8 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _VIDEO_URL = 'https://motchallenge.net/data/'
 _ANNOTATIONS_URL = 'https://github.com/TAO-Dataset/annotations/archive/v1.2.tar.gz'
-
 
 _DESCRIPTION = """
 The TAO dataset is a large video object detection dataset consisting of
@@ -70,13 +68,14 @@ def _build_annotations_index(
   return vids, ann_to_images, track_to_anns, vid_to_tracks
 
 
-def _merge_categories_map(annotations: NestedDict)->Dict[str, str]:
+def _merge_categories_map(annotations: NestedDict) -> Dict[str, str]:
   """Some categories should be renamed into others.
 
   This code segment is based on the TAO provided preprocessing API.
 
   Args:
     annotations: a dictionary containing all the annotations
+
   Returns:
     merge_map: dictionary mapping from category id to merged id
   """
@@ -110,15 +109,15 @@ def _maybe_prepare_manual_data(dl_manager: tfds.download.DownloadManager):
   return dl_manager.extract(files)
 
 
-def _get_category_id_map(annotations_root)->Dict[str, int]:
+def _get_category_id_map(annotations_root) -> Dict[str, int]:
   """Gets a map from the TAO category id to a tfds category index.
 
   The tfds category index is the index which a category appears in the
   label list.
 
   Args:
-    annotations_root: directory containing the train and validation
-      annotations.
+    annotations_root: directory containing the train and validation annotations.
+
   Returns:
     id_map: A dict mapping from TAO category id to tfds category index,
       filtered to contain only categories appearing in the train and val set.
@@ -175,8 +174,8 @@ def _preprocess_annotations(annotations_file: str,
 
 
 def _create_per_track_annotation(track, track_to_anns: NestedDict,
-                                 anns_to_image: NestedDict,
-                                 height: int, width: int)->NestedDict:
+                                 anns_to_image: NestedDict, height: int,
+                                 width: int) -> NestedDict:
   """Prepares annotation for a single track within a video."""
   per_track_anno = {}
   per_track_anno['bboxes'] = []
@@ -196,8 +195,8 @@ def _create_per_track_annotation(track, track_to_anns: NestedDict,
     ymax = min(1., (ann['bbox'][1] + ann['bbox'][3]) / height)
     xmin = max(0., ann['bbox'][0] / width)
     xmax = min(1., (ann['bbox'][0] + ann['bbox'][2]) / width)
-    per_track_anno['bboxes'].append(tfds.features.BBox(ymin=ymin, ymax=ymax,
-                                                       xmin=xmin, xmax=xmax))
+    per_track_anno['bboxes'].append(
+        tfds.features.BBox(ymin=ymin, ymax=ymax, xmin=xmin, xmax=xmax))
     per_track_anno['frames'].append(anns_to_image[ann['id']]['frame_index'])
 
   # Frame indices should be sorted.
@@ -269,10 +268,11 @@ class Tao(tfds.core.BeamBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     names_file = tfds.core.tfds_path('video/tao/labels.txt')
-    video_shape = (
-        None, self.builder_config.height, self.builder_config.width, 3)
+    video_shape = (None, self.builder_config.height, self.builder_config.width,
+                   3)
     all_features = {
-        'video': tfds.features.Video(video_shape),
+        'video':
+            tfds.features.Video(video_shape),
         'metadata': {
             'height':
                 tf.int32,
@@ -317,7 +317,8 @@ class Tao(tfds.core.BeamBasedBuilder):
     data = dl_manager.download_and_extract({
         'train': _VIDEO_URL + '1-TAO_TRAIN.zip',
         'val': _VIDEO_URL + '2-TAO_VAL.zip',
-        'annotations': _ANNOTATIONS_URL})
+        'annotations': _ANNOTATIONS_URL
+    })
 
     manual_train, manual_val = _maybe_prepare_manual_data(dl_manager)
     id_map = _get_category_id_map(data['annotations'] / 'annotations-1.2')
@@ -328,13 +329,15 @@ class Tao(tfds.core.BeamBasedBuilder):
                 data_path=data['train'],
                 manual_path=manual_train,
                 annotations_path=data['annotations'] / 'annotations-1.2' /
-                'train.json', id_map=id_map),
+                'train.json',
+                id_map=id_map),
         tfds.Split.VALIDATION:
             self._generate_examples(
                 data_path=data['val'],
                 manual_path=manual_val,
                 annotations_path=data['annotations'] / 'annotations-1.2' /
-                'validation.json', id_map=id_map)
+                'validation.json',
+                id_map=id_map)
     }
 
   def _maybe_resize_video(self, frames_list):
@@ -347,8 +350,8 @@ class Tao(tfds.core.BeamBasedBuilder):
       with tf.io.gfile.GFile(frame, 'rb') as f:
         image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
         image = np.asarray(image)
-      image = cv2.resize(image, (self.builder_config.width,
-                                 self.builder_config.height))
+      image = cv2.resize(
+          image, (self.builder_config.width, self.builder_config.height))
       resized_images.append(image)
     return resized_images
 

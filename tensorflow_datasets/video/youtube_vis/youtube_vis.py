@@ -25,7 +25,6 @@ import tensorflow as tf
 import tensorflow_datasets.core.utils.type_utils as type_utils
 import tensorflow_datasets.public_api as tfds
 
-
 _DESCRIPTION = """
 Youtube-vis is a video instance segmentation dataset. It contains 2,883
 high-resolution YouTube videos, a per-pixel category label set including 40
@@ -61,7 +60,7 @@ NUM_TRAIN_EXAMPLES = 2238
 NestedDict = Dict[str, Any]
 
 
-def _convert_bbox(box: List[float], height: int, width: int)->List[float]:
+def _convert_bbox(box: List[float], height: int, width: int) -> List[float]:
   """Converts bbox from coco x,y,w,h to xmin, ymin, xmax, ymax tfds format."""
   return tfds.features.BBox(
       xmin=box[0] / width,
@@ -70,9 +69,9 @@ def _convert_bbox(box: List[float], height: int, width: int)->List[float]:
       ymax=(box[1] + box[3]) / height)
 
 
-def _decode_segmentation(segmentation: Union[List[NestedDict], NestedDict],
-                         video: NestedDict, desired_height: int,
-                         desired_width: int):
+def _decode_segmentation(segmentation: Union[List[NestedDict],
+                                             NestedDict], video: NestedDict,
+                         desired_height: int, desired_width: int):
   """Converts the run length encoded segmentation into an image."""
   pycocotools = tfds.core.lazy_imports.pycocotools
   rle = pycocotools.frPyObjects(segmentation, video['height'], video['width'])
@@ -83,15 +82,16 @@ def _decode_segmentation(segmentation: Union[List[NestedDict], NestedDict],
   assert segmentation.shape[1] == video['width']
   if video['height'] != desired_height or video['width'] != desired_width:
     cv2 = tfds.core.lazy_imports.cv2
-    segmentation = cv2.resize(segmentation, (desired_width, desired_height),
-                              interpolation=cv2.INTER_NEAREST)
+    segmentation = cv2.resize(
+        segmentation, (desired_width, desired_height),
+        interpolation=cv2.INTER_NEAREST)
   segmentation = np.expand_dims(segmentation, axis=-1)
   assert len(segmentation.shape) == 3
   return segmentation
 
 
 def _find_frame_index(frame_filename: str,
-                      all_video_frame_paths: List[type_utils.PathLike])->int:
+                      all_video_frame_paths: List[type_utils.PathLike]) -> int:
   for index, path in enumerate(all_video_frame_paths):
     if frame_filename in os.fspath(path):
       return index
@@ -116,6 +116,7 @@ def _create_per_track_annotation(
       resizing occurs.
     desired_width: The width the video will be resized to. If None, no resizing.
       occurs.
+
   Returns:
     A data entry for a single object track for the video.
   """
@@ -131,8 +132,8 @@ def _create_per_track_annotation(
     if box is None:
       continue
     frames_with_labels.append(frame_idx)
-    per_track_anno['bboxes'].append(_convert_bbox(box, video['height'],
-                                                  video['width']))
+    per_track_anno['bboxes'].append(
+        _convert_bbox(box, video['height'], video['width']))
     # all_video_frame_paths is a superset of the annotated frames, and we
     # need to convert the index into the annotated frames to an index into
     # all_video_frame_paths.
@@ -168,7 +169,7 @@ def _create_per_track_annotation(
 
 
 def _create_metadata(video: NestedDict, height: int, width: int,
-                     num_frames: int)->NestedDict:
+                     num_frames: int) -> NestedDict:
   """Creates the metadata entry for a video."""
   metadata = {}
   metadata['height'] = height or video['height']
@@ -197,13 +198,13 @@ class YoutubeVisConfig(tfds.core.BuilderConfig):
   """"Configuration for Youtube-vis video instance segmentation dataset.
 
   Attributes:
-    height: An optional integer height to resize all videos to. If None,
-      no resizing will occur.
-    width: An optional integer width to resize all videos to. If None,
-      no resizing will occur.
-    only_frames_with_labels: A bool indicating whether we should include
-      only frames which have labels (True) or whether all frames,
-      including those without labels, should be included (False).
+    height: An optional integer height to resize all videos to. If None, no
+      resizing will occur.
+    width: An optional integer width to resize all videos to. If None, no
+      resizing will occur.
+    only_frames_with_labels: A bool indicating whether we should include only
+      frames which have labels (True) or whether all frames, including those
+      without labels, should be included (False).
   """
 
   def __init__(self,
@@ -225,14 +226,13 @@ class YoutubeVisConfig(tfds.core.BuilderConfig):
     Args:
       height: optional height to resize all images to
       width: optional width to resize all images to
-      only_frames_with_labels: whether or not to include the frames
-        which don't have labels in the data export.
+      only_frames_with_labels: whether or not to include the frames which don't
+        have labels in the data export.
       split_train_data_range: If not None, must be a tuple of two integers
-        indicating the slice (left-inclusive, right-exclusive) of the train
-        data to subsample into a manufactured training split. Because the
-        default validation and test splits contain no labels, this allows for
-        validation and testing without uploading to the youtube_vis
-        third party servers.
+        indicating the slice (left-inclusive, right-exclusive) of the train data
+        to subsample into a manufactured training split. Because the default
+        validation and test splits contain no labels, this allows for validation
+        and testing without uploading to the youtube_vis third party servers.
       split_val_data_range: If not None, must be a tuple of integers indicating
         the slice (left-inclusive, right-exclusive) of the train data to
         subsample into a manufactured validation split. Because the default
@@ -244,6 +244,7 @@ class YoutubeVisConfig(tfds.core.BuilderConfig):
         and test splits contain no labels, this allows for validation and
         testing without uploading to the youtube_vis third party servers.
       **kwargs: Passed on to the constructor of `BuilderConfig`.
+
     Raises:
       ValueError if split data ranges are outside of acceptable values.
     """
@@ -261,21 +262,24 @@ class YoutubeVisConfig(tfds.core.BuilderConfig):
     if split_train_data_range is not None:
       if split_train_data_range[0] < 0 or split_train_data_range[
           1] > NUM_TRAIN_EXAMPLES:
-        raise ValueError('split_train_data_range must be within '
-                         f'[0, {NUM_TRAIN_EXAMPLES}] ',
-                         f'got instead: {split_train_data_range}.')
+        raise ValueError(
+            'split_train_data_range must be within '
+            f'[0, {NUM_TRAIN_EXAMPLES}] ',
+            f'got instead: {split_train_data_range}.')
     if split_val_data_range is not None:
       if split_val_data_range[0] < 0 or split_val_data_range[
           1] > NUM_TRAIN_EXAMPLES:
-        raise ValueError('split_val_data_range must be within '
-                         f'[0, {NUM_TRAIN_EXAMPLES}] ',
-                         f'got instead: {split_val_data_range}.')
+        raise ValueError(
+            'split_val_data_range must be within '
+            f'[0, {NUM_TRAIN_EXAMPLES}] ',
+            f'got instead: {split_val_data_range}.')
     if split_test_data_range is not None:
       if split_test_data_range[0] < 0 or split_test_data_range[
           1] > NUM_TRAIN_EXAMPLES:
-        raise ValueError('split_test_data_range must be within '
-                         f'[0, {NUM_TRAIN_EXAMPLES}] ',
-                         f'got instead: {split_test_data_range}.')
+        raise ValueError(
+            'split_test_data_range must be within '
+            f'[0, {NUM_TRAIN_EXAMPLES}] ',
+            f'got instead: {split_test_data_range}.')
     self.split_train_data_range = split_train_data_range
     self.split_val_data_range = split_val_data_range
     self.split_test_data_range = split_test_data_range
@@ -306,14 +310,14 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
       YoutubeVisConfig(
           name='480_640_full',
           description='All images are bilinearly resized to 480 X 640 with all '
-                      'frames included.',
+          'frames included.',
           height=480,
           width=640,
       ),
       YoutubeVisConfig(
           name='480_640_only_frames_with_labels',
           description='All images are bilinearly resized to 480 X 640 with only'
-                      ' frames with labels included.',
+          ' frames with labels included.',
           height=480,
           width=640,
           only_frames_with_labels=True,
@@ -321,7 +325,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
       YoutubeVisConfig(
           name='only_frames_with_labels',
           description='Only images with labels included at their native '
-                      'resolution.',
+          'resolution.',
           only_frames_with_labels=True,
       ),
       # BEGIN GOOGLE_INTERNAL
@@ -342,8 +346,8 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
       YoutubeVisConfig(
           name='480_640_full_train_split',
           description='All images are bilinearly resized to 480 X 640 with all '
-                      'frames included. The val and test splits are '
-                      'manufactured from the training data.',
+          'frames included. The val and test splits are '
+          'manufactured from the training data.',
           height=480,
           width=640,
           # Use the first 1838 train videos for training.
@@ -356,8 +360,8 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
       YoutubeVisConfig(
           name='480_640_only_frames_with_labels_train_split',
           description='All images are bilinearly resized to 480 X 640 with only'
-                      ' frames with labels included. The val and test splits '
-                      'are manufactured from the training data.',
+          ' frames with labels included. The val and test splits '
+          'are manufactured from the training data.',
           height=480,
           width=640,
           only_frames_with_labels=True,
@@ -371,8 +375,8 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
       YoutubeVisConfig(
           name='only_frames_with_labels_train_split',
           description='Only images with labels included at their native '
-                      'resolution. The val and test splits are manufactured '
-                      'from the training data.',
+          'resolution. The val and test splits are manufactured '
+          'from the training data.',
           only_frames_with_labels=True,
           # Use the first 1838 train videos for training.
           split_train_data_range=(0, 1838),
@@ -391,33 +395,34 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     names_file = tfds.core.tfds_path('video/youtube_vis/labels.txt')
-    video_shape = (
-        None, self.builder_config.height, self.builder_config.width, 3)
-    seg_shape = (
-        None, self.builder_config.height, self.builder_config.width, 1)
+    video_shape = (None, self.builder_config.height, self.builder_config.width,
+                   3)
+    seg_shape = (None, self.builder_config.height, self.builder_config.width, 1)
     all_features = {
-        'video': tfds.features.Video(video_shape),
+        'video':
+            tfds.features.Video(video_shape),
         'metadata': {
-            'height':
-                tf.int32,
-            'width':
-                tf.int32,
-            'num_frames':
-                tf.int32,
-            'video_name':
-                tf.string,
+            'height': tf.int32,
+            'width': tf.int32,
+            'num_frames': tf.int32,
+            'video_name': tf.string,
         },
         'tracks':
             tfds.features.Sequence({
-                'bboxes': tfds.features.Sequence(tfds.features.BBoxFeature()),
-                'segmentations': tfds.features.Video(seg_shape,
-                                                     use_colormap=True),
-                'category': tfds.features.ClassLabel(names_file=names_file),
-                'is_crowd': tf.bool,
-                'areas': tfds.features.Sequence(tf.float32),
+                'bboxes':
+                    tfds.features.Sequence(tfds.features.BBoxFeature()),
+                'segmentations':
+                    tfds.features.Video(seg_shape, use_colormap=True),
+                'category':
+                    tfds.features.ClassLabel(names_file=names_file),
+                'is_crowd':
+                    tf.bool,
+                'areas':
+                    tfds.features.Sequence(tf.float32),
                 # Labels do not occur for all frames. This indicates the
                 # indices of the frames that have labels.
-                'frames': tfds.features.Sequence(tf.int32)
+                'frames':
+                    tfds.features.Sequence(tf.int32)
             })
     }
     return tfds.core.DatasetInfo(
@@ -485,15 +490,15 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
         tfds.Split.VALIDATION:
             self._generate_examples(
                 annotations=extracted_files['valid_annotations'],
-                all_frames=extracted_files['valid_all_frames'] /
-                val_dir / 'JPEGImages',
+                all_frames=extracted_files['valid_all_frames'] / val_dir /
+                'JPEGImages',
                 video_range_to_use=val_data_range,
             ),
         tfds.Split.TEST:
             self._generate_examples(
                 annotations=extracted_files['test_annotations'],
-                all_frames=extracted_files['test_all_frames'] /
-                test_dir / 'JPEGImages',
+                all_frames=extracted_files['test_all_frames'] / test_dir /
+                'JPEGImages',
                 video_range_to_use=test_data_range,
             ),
     }
@@ -508,12 +513,13 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
       with tf.io.gfile.GFile(frame, 'rb') as f:
         image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
         image = np.asarray(image)
-      image = cv2.resize(image, (self.builder_config.width,
-                                 self.builder_config.height))
+      image = cv2.resize(
+          image, (self.builder_config.width, self.builder_config.height))
       resized_images.append(image)
     return resized_images
 
-  def _generate_examples(self, annotations: type_utils.ReadOnlyPath,
+  def _generate_examples(self,
+                         annotations: type_utils.ReadOnlyPath,
                          all_frames: type_utils.ReadOnlyPath,
                          video_range_to_use: Optional[Tuple[int, int]] = None):
     beam = tfds.core.lazy_imports.apache_beam
@@ -545,8 +551,8 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
       track_annotations = video_id_to_tracks[video_id]
       for track in track_annotations:
         data_example['tracks'].append(
-            _create_per_track_annotation(video, frames_list, track,
-                                         height, width))
+            _create_per_track_annotation(video, frames_list, track, height,
+                                         width))
       data_example['video'] = self._maybe_resize_video(frames_list)
       return data_example['metadata']['video_name'], data_example
 

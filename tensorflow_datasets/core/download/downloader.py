@@ -36,7 +36,6 @@ from tensorflow_datasets.core.download import checksums as checksums_lib
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
-
 # Response interface. Has `.url` and `.headers` attribute
 Response = Union[requests.Response, urllib.response.addinfourl]
 
@@ -53,8 +52,7 @@ def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
 
 
 def _filename_from_content_disposition(
-    content_disposition: str,
-) -> Optional[str]:
+    content_disposition: str,) -> Optional[str]:
   """Extract the filename from the content disposition.
 
   Parse the content_definition as defined in:
@@ -90,8 +88,7 @@ def _filename_from_content_disposition(
   elif len(match) != 1:
     raise ValueError(
         f'Error while parsing filename for: {content_disposition}\n'
-        f'Multiple filename detected: {list(match)}'
-    )
+        f'Multiple filename detected: {list(match)}')
   return os.path.basename(match[0].rstrip())
 
 
@@ -139,7 +136,10 @@ class _Downloader(object):
         yield
 
   def download(
-      self, url: str, destination_path: str, verify: bool = True
+      self,
+      url: str,
+      destination_path: str,
+      verify: bool = True
   ) -> 'promise.Promise[concurrent.futures.Future[DownloadResult]]':
     """Download url to given path.
 
@@ -155,28 +155,30 @@ class _Downloader(object):
     """
     destination_path = os.fspath(destination_path)
     self._pbar_url.update_total(1)
-    future = self._executor.submit(
-        self._sync_download, url, destination_path, verify)
+    future = self._executor.submit(self._sync_download, url, destination_path,
+                                   verify)
     return promise.Promise.resolve(future)
 
   def _sync_file_copy(
-      self, filepath: str, destination_path: str,
+      self,
+      filepath: str,
+      destination_path: str,
   ) -> DownloadResult:
     """Downloads the file through `tf.io.gfile` API."""
     filename = os.path.basename(filepath)
     out_path = os.path.join(destination_path, filename)
     tf.io.gfile.copy(filepath, out_path)
     url_info = checksums_lib.compute_url_info(
-        out_path, checksum_cls=self._checksumer_cls
-    )
+        out_path, checksum_cls=self._checksumer_cls)
     self._pbar_dl_size.update_total(url_info.size)
     self._pbar_dl_size.update(url_info.size)
     self._pbar_url.update(1)
     return DownloadResult(path=utils.as_path(out_path), url_info=url_info)
 
-  def _sync_download(
-      self, url: str, destination_path: str, verify: bool = True
-  ) -> DownloadResult:
+  def _sync_download(self,
+                     url: str,
+                     destination_path: str,
+                     verify: bool = True) -> DownloadResult:
     """Synchronous version of `download` method.
 
     To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,

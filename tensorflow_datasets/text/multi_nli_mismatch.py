@@ -83,8 +83,7 @@ class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"filepath": train_path}),
+            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_path}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={"filepath": validation_path}),

@@ -75,8 +75,8 @@ class Ucf101Config(tfds.core.BuilderConfig):
     self.width = width
     self.height = height
     if split_number not in (1, 2, 3):
-      raise ValueError('Unknown split number {}, should be 1, 2 or 3'.format(
-          split_number))
+      raise ValueError(
+          'Unknown split number {}, should be 1, 2 or 3'.format(split_number))
     self.split_number = split_number
 
 
@@ -122,20 +122,23 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
     if self.builder_config.width is not None:
       if self.builder_config.height is None:
         raise ValueError('Provide either both height and width or none.')
-      ffmpeg_extra_args = (
-          '-vf', 'scale={}x{}'.format(self.builder_config.height,
-                                      self.builder_config.width))
+      ffmpeg_extra_args = ('-vf',
+                           'scale={}x{}'.format(self.builder_config.height,
+                                                self.builder_config.width))
     else:
       ffmpeg_extra_args = []
 
-    video_shape = (
-        None, self.builder_config.height, self.builder_config.width, 3)
+    video_shape = (None, self.builder_config.height, self.builder_config.width,
+                   3)
     labels_names_file = tfds.core.tfds_path(_LABELS_FNAME)
     features = tfds.features.FeaturesDict({
-        'video': tfds.features.Video(video_shape,
-                                     ffmpeg_extra_args=ffmpeg_extra_args,
-                                     encoding_format='jpeg'),
-        'label': tfds.features.ClassLabel(names_file=labels_names_file),
+        'video':
+            tfds.features.Video(
+                video_shape,
+                ffmpeg_extra_args=ffmpeg_extra_args,
+                encoding_format='jpeg'),
+        'label':
+            tfds.features.ClassLabel(names_file=labels_names_file),
     })
     return tfds.core.DatasetInfo(
         builder=self,
@@ -158,18 +161,24 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                'videos_dir': downloaded_urls['videos'],
-                'splits_dir': downloaded_urls['splits'],
-                'data_list': '{}/trainlist{:02d}.txt'.format(
-                    splits_folder, self.builder_config.split_number),
+                'videos_dir':
+                    downloaded_urls['videos'],
+                'splits_dir':
+                    downloaded_urls['splits'],
+                'data_list':
+                    '{}/trainlist{:02d}.txt'.format(
+                        splits_folder, self.builder_config.split_number),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                'videos_dir': downloaded_urls['videos'],
-                'splits_dir': downloaded_urls['splits'],
-                'data_list': '{}/testlist{:02d}.txt'.format(
-                    splits_folder, self.builder_config.split_number),
+                'videos_dir':
+                    downloaded_urls['videos'],
+                'splits_dir':
+                    downloaded_urls['splits'],
+                'data_list':
+                    '{}/testlist{:02d}.txt'.format(
+                        splits_folder, self.builder_config.split_number),
             }),
     ]
 

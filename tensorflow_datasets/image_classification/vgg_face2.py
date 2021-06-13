@@ -38,7 +38,6 @@ distribution for different identities is varied, from 87 to 843, with an \
 average of 362 images for each subject.
 """
 
-
 _LABELS_FNAME = 'image_classification/vgg_face2_labels.txt'
 
 

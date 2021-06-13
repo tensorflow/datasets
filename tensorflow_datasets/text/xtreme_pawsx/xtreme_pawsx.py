@@ -31,7 +31,6 @@ _CITATION = """\
       eprint    = {2003.11080}
 }"""
 
-
 _DESCRIPTION = """
 This dataset contains machine translations of the English PAWS training
 data. The translations are provided by the XTREME benchmark and cover the following
@@ -56,7 +55,6 @@ XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingu
 at https://arxiv.org/abs/2003.11080
 """
 
-
 _XTREME_TRANSLATIONS_FORMAT = "https://storage.googleapis.com/xtreme_translations/PAWSX/translate-train/en-{0}-translated.tsv"
 
 _CLASS_LABELS = ["different_meaning", "paraphrase"]
@@ -69,8 +67,7 @@ class XtremePawsxConfig(tfds.core.BuilderConfig):
 
   def __init__(self, *, language, **kwargs):
     if language not in _LANGUAGES:
-      raise ValueError("language must be one of {}".format(
-          list(_LANGUAGES)))
+      raise ValueError("language must be one of {}".format(list(_LANGUAGES)))
 
     super(XtremePawsxConfig, self).__init__(**kwargs)
     self.language = language
@@ -114,6 +111,7 @@ class XtremePawsx(tfds.core.GeneratorBasedBuilder):
 
     Args:
       path: The path of the file to be read for this split
+
     Yields:
       Generator yielding the next examples
     """
@@ -123,8 +121,7 @@ class XtremePawsx(tfds.core.GeneratorBasedBuilder):
           f,
           delimiter="\t",
           fieldnames=[
-              "en_sentence1", "en_sentence2", "sentence1", "sentence2",
-              "label"
+              "en_sentence1", "en_sentence2", "sentence1", "sentence2", "label"
           ])
 
       # tsv file format: id  sentence1  sentence2 label

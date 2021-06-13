@@ -114,9 +114,10 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
     # Test with FeatureDict
     self.assertFeature(
         feature=features_lib.FeaturesDict({
-            'image': features_lib.Image(
-                shape=(30, 60, 3), encoding_format='jpeg'),
-            'label': tf.int64,
+            'image':
+                features_lib.Image(shape=(30, 60, 3), encoding_format='jpeg'),
+            'label':
+                tf.int64,
         }),
         shape={
             'image': (30, 60, 3),

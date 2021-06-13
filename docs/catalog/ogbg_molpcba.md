@@ -11,6 +11,11 @@
 
 # `ogbg_molpcba`
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 'ogbg-molpcba' is a molecular dataset sampled from PubChem BioAssay. It is a
@@ -61,11 +66,14 @@ benchmark for molecular machine learning. Chemical Science, 9(2):513-530, 2018.
 
 *   **Versions**:
 
-    *   **`0.1.0`** (default): Initial release of experimental API.
+    *   `0.1.0`: Initial release of experimental API.
+    *   **`0.1.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Exposes the number of edges in each graph explicitly.
 
 *   **Download size**: `37.70 MiB`
 
-*   **Dataset size**: `814.18 MiB`
+*   **Dataset size**: `822.53 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -87,6 +95,7 @@ FeaturesDict({
     'edge_index': Tensor(shape=(None, 2), dtype=tf.int64),
     'labels': Tensor(shape=(128,), dtype=tf.float32),
     'node_feat': Tensor(shape=(None, 9), dtype=tf.float32),
+    'num_edges': Tensor(shape=(None,), dtype=tf.int64),
     'num_nodes': Tensor(shape=(None,), dtype=tf.int64),
 })
 ```
@@ -110,7 +119,7 @@ FeaturesDict({
 <div id="dataframecontent" style="overflow-x:scroll"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ogbg_molpcba-0.1.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ogbg_molpcba-0.1.1.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).

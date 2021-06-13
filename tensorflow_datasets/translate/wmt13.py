@@ -34,9 +34,7 @@ _CITATION = """
 
 """
 
-_LANGUAGE_PAIRS = [
-    (lang, "en") for lang in ["cs", "de", "fr", "es", "ru"]
-]
+_LANGUAGE_PAIRS = [(lang, "en") for lang in ["cs", "de", "fr", "es", "ru"]]
 
 
 class Wmt13Translate(wmt.WmtTranslate):
@@ -58,14 +56,12 @@ class Wmt13Translate(wmt.WmtTranslate):
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "commoncrawl", "multiun",
-            "newscommentary_v8", "gigafren", "wikiheadlines_ru",
-            "yandexcorpus", "czeng_10"],
-        tfds.Split.VALIDATION: [
-            "newstest2012", "newstest2011", "newstest2010",
-            "newstest2009", "newstest2008", "newssyscomb2009"
+            "europarl_v7", "commoncrawl", "multiun", "newscommentary_v8",
+            "gigafren", "wikiheadlines_ru", "yandexcorpus", "czeng_10"
         ],
-        tfds.Split.TEST: [
-            "newstest2013"
-        ]
+        tfds.Split.VALIDATION: [
+            "newstest2012", "newstest2011", "newstest2010", "newstest2009",
+            "newstest2008", "newssyscomb2009"
+        ],
+        tfds.Split.TEST: ["newstest2013"]
     }

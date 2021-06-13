@@ -87,18 +87,15 @@ class CLIC(tfds.core.GeneratorBasedBuilder):
     test_dirs = {k: v for k, v in downloaded_dirs.items() if 'test' in k}
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
+            name=tfds.Split.TRAIN, gen_kwargs={
                 'download_path': train_dirs,
             }),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            gen_kwargs={
+            name=tfds.Split.VALIDATION, gen_kwargs={
                 'download_path': val_dirs,
             }),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
+            name=tfds.Split.TEST, gen_kwargs={
                 'download_path': test_dirs,
             })
     ]
@@ -113,4 +110,3 @@ class CLIC(tfds.core.GeneratorBasedBuilder):
             yield file_path, {
                 'image': os.path.join(root, file_path),
             }
-

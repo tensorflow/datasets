@@ -27,18 +27,13 @@ class SalientSpanWikipediaSentencesTest(testing.DatasetBuilderTestCase):
       'test_examples.tfrecord.gz')
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['sentences']
-  SPLITS = {
-      'train': 4
-  }
+  SPLITS = {'train': 4}
 
 
 class SalientSpanWikipediaDocumentsTest(SalientSpanWikipediaSentencesTest):
   BUILDER_CONFIG_NAMES_TO_TEST = ['documents']
-  SPLITS = {
-      'train': 2
-  }
+  SPLITS = {'train': 2}
 
 
 if __name__ == '__main__':
   testing.test_main()
-

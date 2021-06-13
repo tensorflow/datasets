@@ -21,10 +21,9 @@ import contextlib
 import numpy as np
 import tensorflow.compat.v2 as tf
 
-
 # Struct containing a graph for the TFGraphRunner
-GraphRun = collections.namedtuple(
-    'GraphRun', 'graph, session, placeholder, output')
+GraphRun = collections.namedtuple('GraphRun',
+                                  'graph, session, placeholder, output')
 
 # Struct containing the run args, kwargs
 RunArgs = collections.namedtuple('RunArgs', 'fct, input')

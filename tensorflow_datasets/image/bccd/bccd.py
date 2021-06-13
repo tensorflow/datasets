@@ -73,8 +73,7 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image":
                 tfds.features.Image(
-                    shape=(480, 640, 3),
-                    encoding_format="jpeg"),
+                    shape=(480, 640, 3), encoding_format="jpeg"),
             "image/filename":
                 tfds.features.Text(),
             # Multiple bounding box per image
@@ -97,11 +96,8 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
 
     dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
     # Name of the extracted folder is 'BCCD_Dataset-1.0'
-    extracted_dir_path = os.path.join(dl_path,
-                                      "BCCD_Dataset-1.0")
-    splits_dir_path = os.path.join(extracted_dir_path,
-                                   "BCCD",
-                                   "ImageSets",
+    extracted_dir_path = os.path.join(dl_path, "BCCD_Dataset-1.0")
+    splits_dir_path = os.path.join(extracted_dir_path, "BCCD", "ImageSets",
                                    "Main")
 
     for root, _, filename in tf.io.gfile.walk(splits_dir_path):
@@ -151,17 +147,14 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
     bbox_attrib = ["xmin", "xmax", "ymin", "ymax", "width", "height"]
     xml_list = collections.defaultdict(str)
 
-    images_dir_path = os.path.join(extracted_dir_path,
-                                   "BCCD",
-                                   "JPEGImages")
+    images_dir_path = os.path.join(extracted_dir_path, "BCCD", "JPEGImages")
 
-    annotations_dir_path = os.path.join(extracted_dir_path,
-                                        "BCCD",
+    annotations_dir_path = os.path.join(extracted_dir_path, "BCCD",
                                         "Annotations")
+
     def get_image_file_path(filename):
       """Returns image path."""
-      return os.path.join(images_dir_path,
-                          "{}.jpg".format(filename.strip()))
+      return os.path.join(images_dir_path, "{}.jpg".format(filename.strip()))
 
     def get_annotations_file_path(filename):
       """Returns annotations file path."""
@@ -197,12 +190,15 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
 
       key = fname
       example = {
-          "image": get_image_file_path(fname),
-          "image/filename": fname,
-          "objects": [{  # pylint: disable=g-complex-comprehension
-              "label": get_label(attributes, n),
-              "bbox": build_box(attributes, n)
-          } for n in range(len(attributes["name"]))]
-
+          "image":
+              get_image_file_path(fname),
+          "image/filename":
+              fname,
+          "objects": [
+              {  # pylint: disable=g-complex-comprehension
+                  "label": get_label(attributes, n),
+                  "bbox": build_box(attributes, n)
+              } for n in range(len(attributes["name"]))
+          ]
       }
       yield key, example

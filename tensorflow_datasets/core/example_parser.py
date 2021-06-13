@@ -32,10 +32,11 @@ class ExampleParser(object):
     Returns:
       The `dict` of `tf.io.FixedLenFeature`, `tf.io.VarLenFeature`, ...
     """
+
     # Convert individual fields into tf.train.Example compatible format
     def build_single_spec(k, v):
-      with utils.try_reraise(
-          "Specification error for feature {} ({}): ".format(k, v)):
+      with utils.try_reraise("Specification error for feature {} ({}): ".format(
+          k, v)):
         return _to_tf_example_spec(v)
 
     return {
@@ -78,10 +79,11 @@ class ExampleParser(object):
     )
     example = utils.pack_as_nest_dict(example, nested_feature_specs)
 
-    example = {
+    example = {  # pylint:disable=g-complex-comprehension
         k: _deserialize_single_field(example_data, tensor_info)
-        for k, (example_data, tensor_info)
-        in utils.zip_dict(example, self._flat_example_specs)
+        for k, (
+            example_data,
+            tensor_info) in utils.zip_dict(example, self._flat_example_specs)
     }
     # Reconstruct all nesting
     example = utils.pack_as_nest_dict(example, self._example_specs)
@@ -159,8 +161,7 @@ def _to_tf_example_spec(tensor_info):
             shape=(),
             dtype=tf.int64,
             allow_missing=True,
-        )
-        for k in range(tensor_info.sequence_rank - 1)
+        ) for k in range(tensor_info.sequence_rank - 1)
     }
     tf_specs["ragged_flat_values"] = tf.io.FixedLenSequenceFeature(
         shape=tensor_info.shape[tensor_info.sequence_rank:],

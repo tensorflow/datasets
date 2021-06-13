@@ -200,9 +200,8 @@ _CONTENT_DISPOSITION_FILENAME_PAIRS = [
 ]
 
 
-@pytest.mark.parametrize(
-    ('content_disposition', 'filename'), _CONTENT_DISPOSITION_FILENAME_PAIRS
-)
+@pytest.mark.parametrize(('content_disposition', 'filename'),
+                         _CONTENT_DISPOSITION_FILENAME_PAIRS)
 def test_filename_from_content_disposition(
     content_disposition: str,
     filename: Optional[str],
@@ -217,18 +216,15 @@ def test_filename_from_content_disposition(
         (
             # Filename should be parsed from the ascii name, not UTF-8
             """attachment;filename="hello.zip";filename*=UTF-8''other.zip""",
-            'hello.zip'
-        ),
+            'hello.zip'),
         (
             # If ascii filename can't be parsed, filename parsed from url
             """attachment;filename*=UTF-8''other.zip""",
-            'baz.zip'
-        ),
+            'baz.zip'),
         (
             # No headers, filename parsed from url
             None,
-            'baz.zip'
-        ),
+            'baz.zip'),
     ],
 )
 def test_filename_from_headers(

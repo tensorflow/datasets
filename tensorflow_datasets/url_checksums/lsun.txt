@@ -32,6 +32,7 @@ http://dl.yf.io/lsun/objects/dining_table.zip	51826252804	4c40a17884c7180a8f75a7
 http://dl.yf.io/lsun/objects/dog.zip	155606131278	dab08a84ce3facb2ac7261f58c1eea7f070a6d118b82f9778b6a1cf56ed15db4	dog.zip
 http://dl.yf.io/lsun/objects/horse.zip	73864289242	2ec7893f3308da7f68cc2bdb1e9a75cde7abf842628feea1c49c30006e9c3a1b	horse.zip
 http://dl.yf.io/lsun/objects/motorbike.zip	44948708338	76cba2c366269bf86ce57ff496a229b0a237d1095e4bddeec02c9c6b9aa1b9a3	motorbike.zip
+http://dl.yf.io/lsun/objects/person.zip	511754125920	4f6c58c308dfde383d77a018eed37a14e328cd7115b40396a38e15db68b00520	person.zip
 http://dl.yf.io/lsun/objects/potted_plant.zip	45844458500	98f723f17f256d7ad07018d19b4cb8d78ab17cedd994b49e5de366fec799d4d8	potted_plant.zip
 http://dl.yf.io/lsun/objects/sheep.zip	19063172058	549234a3cb2608adddea405c0918c64b143ee5636a7d6426a90ccc870f0928d0	sheep.zip
 http://dl.yf.io/lsun/objects/sofa.zip	60484209620	945c1a1a6106b57a47bda7287f223fcb95aa3fbd32fa7294d2a3741e4c143d95	sofa.zip

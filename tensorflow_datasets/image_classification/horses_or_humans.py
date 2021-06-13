@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Horses or Humans dataset.
-"""
+"""Horses or Humans dataset."""
 
 import re
 import tensorflow_datasets.public_api as tfds
@@ -52,13 +51,11 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
         description="A large set of images of horses and humans.",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(
-                names=["horses", "humans"]),
+            "label": tfds.features.ClassLabel(names=["horses", "humans"]),
         }),
         supervised_keys=("image", "label"),
         homepage="http://laurencemoroney.com/horses-or-humans-dataset",
-        citation=_CITATION
-        )
+        citation=_CITATION)
 
   def _split_generators(self, dl_manager):
     train_path, test_path = dl_manager.download([_TRAIN_URL, _TEST_URL])
@@ -66,14 +63,10 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "archive": dl_manager.iter_archive(train_path)
-            }),
+            gen_kwargs={"archive": dl_manager.iter_archive(train_path)}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={
-                "archive": dl_manager.iter_archive(test_path)
-            }),
+            gen_kwargs={"archive": dl_manager.iter_archive(test_path)}),
     ]
 
   def _generate_examples(self, archive):

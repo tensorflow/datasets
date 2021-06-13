@@ -18,6 +18,7 @@
 # needs to happen before anything else, since the imports below will try to
 # import tensorflow, too.
 from tensorflow_datasets.core import tf_compat
+
 tf_compat.ensure_tf_install()
 
 # pylint:disable=g-import-not-at-top
@@ -64,8 +65,7 @@ from tensorflow_datasets.core.utils.type_utils import ReadWritePath
 
 def benchmark(*args, **kwargs):
   raise DeprecationWarning(
-      "`tfds.core.benchmark` has been renamed to `tfds.benchmark`"
-  )
+      "`tfds.core.benchmark` has been renamed to `tfds.benchmark`")
 
 
 __all__ = [

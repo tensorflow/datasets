@@ -54,7 +54,8 @@ class BaseRegister(abc.ABC):
 
   @abc.abstractmethod
   def builder_cls(
-      self, name: utils.DatasetName,
+      self,
+      name: utils.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the `tfds.core.DatasetBuilder` instance.
 
@@ -71,7 +72,9 @@ class BaseRegister(abc.ABC):
 
   @abc.abstractmethod
   def builder(
-      self, name: utils.DatasetName, **builder_kwargs: Any,
+      self,
+      name: utils.DatasetName,
+      **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the `tfds.core.DatasetBuilder` instance.
 

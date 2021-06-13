@@ -126,9 +126,8 @@ class NsynthConfig(tfds.core.BuilderConfig):
         version=v233,
         supported_versions=[v232, v231, v230],
         release_notes={
-            "2.3.3":
-            "F0 computed with fix in CREPE wave normalization "
-            "(https://github.com/marl/crepe/issues/49).",
+            "2.3.3": "F0 computed with fix in CREPE wave normalization "
+                     "(https://github.com/marl/crepe/issues/49).",
             "2.3.2": "Use Audio feature.",
             "2.3.1": "F0 computed with normalization fix in CREPE.",
             "2.3.0": "New `loudness_db` feature in decibels (unormalized).",

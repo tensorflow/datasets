@@ -107,9 +107,8 @@ class _InstalledPackage:
     return cls(
         package=DatasetPackage.from_json(data['package']),
         # TODO(py3.7): Should use `datetime.fromisoformat`
-        instalation_date=datetime.datetime.strptime(
-            data['instalation_date'], '%Y-%m-%dT%H:%M:%S.%f'
-        ),
+        instalation_date=datetime.datetime.strptime(data['instalation_date'],
+                                                    '%Y-%m-%dT%H:%M:%S.%f'),
         hash=data['hash'],
     )
 
@@ -152,8 +151,7 @@ class _PackageIndex(collections.UserDict):
     super().__init__()
     self._remote_path: utils.ReadOnlyPath = utils.as_path(path)
     self._cached_path: utils.ReadOnlyPath = (
-        cache.cache_path() / 'community-datasets-list.jsonl'
-    )
+        cache.cache_path() / 'community-datasets-list.jsonl')
 
     # Pre-load the index from the cache
     if self._cached_path.exists():
@@ -163,7 +161,8 @@ class _PackageIndex(collections.UserDict):
     """Update the index from the given `jsonl` content."""
     dataset_packages = [
         DatasetPackage.from_json(json.loads(line))
-        for line in content.splitlines() if line.strip()
+        for line in content.splitlines()
+        if line.strip()
     ]
     self.clear()
     self.update({src.name: src for src in dataset_packages})
@@ -179,9 +178,8 @@ class _PackageIndex(collections.UserDict):
     except gcs_utils.GCS_UNAVAILABLE_EXCEPTIONS as e:
       # Do not crash if GCS access not available, but instead silently reuse
       # the cache.
-      logging.info(
-          'Could not refresh the package index (GCS unavailable): %s', e
-      )
+      logging.info('Could not refresh the package index (GCS unavailable): %s',
+                   e)
       return
 
     # If read was sucessful, update the cache with the new dataset list
@@ -235,7 +233,8 @@ class PackageRegister(register_base.BaseRegister):
     return sorted(str(name) for name in self._package_index)  # pylint: disable=not-an-iterable
 
   def builder_cls(
-      self, name: utils.DatasetName,
+      self,
+      name: utils.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the builder class."""
     # Download the dataset generation code, or reuse the cache
@@ -249,7 +248,9 @@ class PackageRegister(register_base.BaseRegister):
     return load.builder_cls_from_module(installed_dataset.module_name)
 
   def builder(
-      self, name: utils.DatasetName, **builder_kwargs: Any,
+      self,
+      name: utils.DatasetName,
+      **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
     return self.builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
@@ -298,8 +299,7 @@ def _download_or_reuse_cache(
     # If still not found, raise an DatasetNotFoundError
     raise registered.DatasetNotFoundError(
         f'Could not find dataset {name}: Dataset not found among the '
-        f'{len(package_index)} datasets of the community index.'
-    )
+        f'{len(package_index)} datasets of the community index.')
 
   # If package was found, download it.
   installed_package = _download_and_cache(package)
@@ -307,12 +307,10 @@ def _download_or_reuse_cache(
 
 
 def _get_last_installed_version(
-    name: utils.DatasetName,
-) -> Optional[_InstalledPackage]:
+    name: utils.DatasetName,) -> Optional[_InstalledPackage]:
   """Checks whether the datasets is installed locally and returns it."""
   root_dir = (
-      cache.module_path() / _IMPORT_MODULE_NAME / name.namespace / name.name
-  )
+      cache.module_path() / _IMPORT_MODULE_NAME / name.namespace / name.name)
   if not root_dir.exists():  # Dataset not found
     return None
 
@@ -325,8 +323,7 @@ def _get_last_installed_version(
       if metadata.exists()
   ]
   all_installed_packages = sorted(
-      all_installed_packages, key=lambda p: p.instalation_date
-  )
+      all_installed_packages, key=lambda p: p.instalation_date)
 
   if not all_installed_packages:  # No valid package found
     return None
@@ -371,8 +368,7 @@ def _download_and_cache(package: DatasetPackage) -> _InstalledPackage:
     if installation_path.exists():  # Package already exists (with same hash)
       # In the future, we should be smarter to allow overwrite.
       raise ValueError(
-          f'Package {package} already installed in {installation_path}.'
-      )
+          f'Package {package} already installed in {installation_path}.')
     installation_path.parent.mkdir(parents=True, exist_ok=True)
     tmp_dir.rename(installation_path)
   finally:

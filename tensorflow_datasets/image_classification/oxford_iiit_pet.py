@@ -21,13 +21,11 @@ import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
-
 _DESCRIPTION = """\
 The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
 images for each class. The images have large variations in scale, pose and
 lighting. All images have an associated ground truth annotation of breed.
 """
-
 
 _CITATION = """\
 @InProceedings{parkhi12a,
@@ -64,13 +62,16 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
-            "label": tfds.features.ClassLabel(names=_LABEL_CLASSES),
-            "species": tfds.features.ClassLabel(names=_SPECIES_CLASSES),
-            "file_name": tfds.features.Text(),
-            "segmentation_mask": tfds.features.Image(
-                shape=(None, None, 1), use_colormap=True
-            )
+            "image":
+                tfds.features.Image(),
+            "label":
+                tfds.features.ClassLabel(names=_LABEL_CLASSES),
+            "species":
+                tfds.features.ClassLabel(names=_SPECIES_CLASSES),
+            "file_name":
+                tfds.features.Text(),
+            "segmentation_mask":
+                tfds.features.Image(shape=(None, None, 1), use_colormap=True)
         }),
         supervised_keys=("image", "label"),
         homepage="http://www.robots.ox.ac.uk/~vgg/data/pets/",
@@ -94,21 +95,22 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
     train_split = tfds.core.SplitGenerator(
         name="train",
         gen_kwargs={
-            "images_dir_path": images_path_dir,
-            "annotations_dir_path": annotations_path_dir,
-            "images_list_file": os.path.join(annotations_path_dir,
-                                             "trainval.txt"),
-            },
-        )
+            "images_dir_path":
+                images_path_dir,
+            "annotations_dir_path":
+                annotations_path_dir,
+            "images_list_file":
+                os.path.join(annotations_path_dir, "trainval.txt"),
+        },
+    )
     test_split = tfds.core.SplitGenerator(
         name="test",
         gen_kwargs={
             "images_dir_path": images_path_dir,
             "annotations_dir_path": annotations_path_dir,
-            "images_list_file": os.path.join(annotations_path_dir,
-                                             "test.txt")
-            },
-        )
+            "images_list_file": os.path.join(annotations_path_dir, "test.txt")
+        },
+    )
 
     return [train_split, test_split]
 

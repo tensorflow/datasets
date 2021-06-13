@@ -21,7 +21,6 @@ import json
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _CITATION = """
 @inproceedings{orqa,
 title = {Latent Retrieval for Weakly Supervised Open Domain Question Answering},

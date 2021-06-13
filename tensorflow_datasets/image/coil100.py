@@ -49,9 +49,8 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("2.0.0")
   RELEASE_NOTES = {
-      "2.0.0":
-          "Change features (`object_id` is now `ClassLabel`, rename "
-          "`label` -> `angle_label`, add `angle`)",
+      "2.0.0": "Change features (`object_id` is now `ClassLabel`, rename "
+               "`label` -> `angle_label`, add `angle`)",
       "1.0.0": "Initial release",
   }
 
@@ -68,8 +67,7 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
             "angle": tf.int64,
         }),
         supervised_keys=("image", "angle_label"),
-        homepage=
-        "http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php",
+        homepage="http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php",
         citation=_CITATION,
     )
 

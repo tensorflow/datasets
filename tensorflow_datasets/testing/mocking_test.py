@@ -115,6 +115,16 @@ def test_mocking_wider_face():
     assert ex['faces']['expression'].dtype == tf.bool
 
 
+@pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_coco_captions():
+  ds = tfds.load('coco_captions', split='train')
+  assert (ds.element_spec['captions']['text'] == tf.TensorSpec(
+      shape=(None,), dtype=tf.string))
+  for ex in ds.take(2):
+    assert ex['captions']['text'].dtype == tf.string
+    ex['captions']['text'].shape.assert_is_compatible_with((None,))
+
+
 def test_custom_as_dataset(mock_data):
   def _as_dataset(self, *args, **kwargs):  # pylint: disable=unused-argument
     return tf.data.Dataset.from_generator(

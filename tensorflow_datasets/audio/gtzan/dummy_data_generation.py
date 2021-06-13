@@ -50,9 +50,7 @@ def _generate_data():
   label = random.choice(labels)
   random_number_for_filename = random.randint(0, 99)
   filename = "{}.{:05d}".format(label, random_number_for_filename)
-  filepath = os.path.join(_output_dir(),
-                          "genres",
-                          label,
+  filepath = os.path.join(_output_dir(), "genres", label,
                           "{}.wav".format(filename))
   dirname = os.path.dirname(filepath)
   if not tf.io.gfile.exists(dirname):

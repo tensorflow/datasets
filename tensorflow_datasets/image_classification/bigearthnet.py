@@ -127,13 +127,9 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
 
   BUILDER_CONFIGS = [
       BigearthnetConfig(
-          selection='rgb',
-          name='rgb',
-          description='Sentinel-2 RGB channels'),
+          selection='rgb', name='rgb', description='Sentinel-2 RGB channels'),
       BigearthnetConfig(
-          selection='all',
-          name='all',
-          description='13 Sentinel-2 channels'),
+          selection='all', name='all', description='13 Sentinel-2 channels'),
   ]
 
   def _info(self):
@@ -232,16 +228,15 @@ def _read_archive(archive_path, selection):
   """Yields non-processed examples out of archive."""
   example = {}
   read_band_files = 0
-  for fpath, fobj in tfds.core.download.extractor.iter_tar_stream(
-      archive_path):
+  for fpath, fobj in tfds.core.download.extractor.iter_tar_stream(archive_path):
     read_band_files += 1
     _, patch_name, fname = fpath.split(os.path.sep)
     if fname.endswith('_labels_metadata.json'):
       example['metadata'] = fobj.read()
     elif fname.endswith('.tif'):
       band = fname[-7:-4]
-      if selection != 'rgb' or (
-          selection == 'rgb' and band in {'B02', 'B03', 'B04'}):
+      if selection != 'rgb' or (selection == 'rgb' and
+                                band in {'B02', 'B03', 'B04'}):
         example[band] = fobj.read()
         example.setdefault('bands', []).append(band)
     else:

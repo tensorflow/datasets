@@ -73,38 +73,47 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'id': tf.string,
+            'id':
+                tf.string,
             'document': {
-                'title': tfds.features.Text(),
-                'url': tfds.features.Text(),
-                'html': tfds.features.Text(),
-                'tokens': tfds.features.Sequence({
-                    'token': tfds.features.Text(),
-                    'is_html': tf.bool,
-                })
+                'title':
+                    tfds.features.Text(),
+                'url':
+                    tfds.features.Text(),
+                'html':
+                    tfds.features.Text(),
+                'tokens':
+                    tfds.features.Sequence({
+                        'token': tfds.features.Text(),
+                        'is_html': tf.bool,
+                    })
             },
             'question': {
                 'text': tfds.features.Text(),
                 'tokens': tfds.features.Sequence(tf.string),
             },
-            'annotations': tfds.features.Sequence({
-                'id': tf.string,
-                'long_answer': {
-                    'start_token': tf.int64,
-                    'end_token': tf.int64,
-                    'start_byte': tf.int64,
-                    'end_byte': tf.int64,
-                },
-                'short_answers': tfds.features.Sequence({
-                    'start_token': tf.int64,
-                    'end_token': tf.int64,
-                    'start_byte': tf.int64,
-                    'end_byte': tf.int64,
-                    'text': tfds.features.Text(),
+            'annotations':
+                tfds.features.Sequence({
+                    'id':
+                        tf.string,
+                    'long_answer': {
+                        'start_token': tf.int64,
+                        'end_token': tf.int64,
+                        'start_byte': tf.int64,
+                        'end_byte': tf.int64,
+                    },
+                    'short_answers':
+                        tfds.features.Sequence({
+                            'start_token': tf.int64,
+                            'end_token': tf.int64,
+                            'start_byte': tf.int64,
+                            'end_byte': tf.int64,
+                            'text': tfds.features.Text(),
+                        }),
+                    'yes_no_answer':
+                        tfds.features.ClassLabel(names=['NO', 'YES']
+                                                )  # Can also be -1 for NONE.
                 }),
-                'yes_no_answer': tfds.features.ClassLabel(
-                    names=['NO', 'YES'])  # Can also be -1 for NONE.
-            }),
         }),
         supervised_keys=None,
         homepage=_URL,
@@ -138,8 +147,7 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
 
       def _parse_short_answer(short_ans):
         """"Extract text of short answer."""
-        ans_bytes = html_bytes[
-            short_ans['start_byte']:short_ans['end_byte']]
+        ans_bytes = html_bytes[short_ans['start_byte']:short_ans['end_byte']]
         # Remove non-breaking spaces.
         ans_bytes = ans_bytes.replace(b'\xc2\xa0', b' ')
         text = ans_bytes.decode('utf-8')
@@ -157,7 +165,8 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
       def _parse_annotation(an_json):
         return {
             # Convert to str since some IDs cannot be represented by tf.int64.
-            'id': str(an_json['annotation_id']),
+            'id':
+                str(an_json['annotation_id']),
             'long_answer': {
                 'start_token': an_json['long_answer']['start_token'],
                 'end_token': an_json['long_answer']['end_token'],
@@ -165,24 +174,30 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
                 'end_byte': an_json['long_answer']['end_byte'],
             },
             'short_answers': [
-                _parse_short_answer(ans) for ans in an_json['short_answers']],
-            'yes_no_answer': (
-                -1 if an_json['yes_no_answer'] == 'NONE'
-                else an_json['yes_no_answer'])
+                _parse_short_answer(ans) for ans in an_json['short_answers']
+            ],
+            'yes_no_answer': (-1 if an_json['yes_no_answer'] == 'NONE' else
+                              an_json['yes_no_answer'])
         }
 
       beam.metrics.Metrics.counter('nq', 'examples').inc()
       # Convert to str since some IDs cannot be represented by tf.int64.
       id_ = str(ex_json['example_id'])
       return id_, {
-          'id': id_,
+          'id':
+              id_,
           'document': {
-              'title': ex_json['document_title'],
-              'url': ex_json['document_url'],
-              'html': html_bytes,
+              'title':
+                  ex_json['document_title'],
+              'url':
+                  ex_json['document_url'],
+              'html':
+                  html_bytes,
               'tokens': [
-                  {'token': t['token'], 'is_html': t['html_token']}
-                  for t in ex_json['document_tokens']
+                  {  # pylint: disable=g-complex-comprehension
+                      'token': t['token'],
+                      'is_html': t['html_token']
+                  } for t in ex_json['document_tokens']
               ]
           },
           'question': {
@@ -194,8 +209,7 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
           ]
       }
 
-    return (
-        pipeline
-        | beam.Create([os.fspath(f) for f in filepaths])
-        | beam.io.ReadAllFromText()
-        | beam.Map(_parse_example))
+    return (pipeline
+            | beam.Create([os.fspath(f) for f in filepaths])
+            | beam.io.ReadAllFromText()
+            | beam.Map(_parse_example))

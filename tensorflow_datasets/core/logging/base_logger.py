@@ -15,8 +15,9 @@
 
 """This module defines the methods a logger implementation should define."""
 
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 
+from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core.utils import read_config as tfds_read_config
 
 
@@ -29,7 +30,8 @@ class Logger:
   """
 
   def as_dataset(self, *, dataset_name: str, config_name: Optional[str],
-                 version: str, data_path: str, split: str,
+                 version: str, data_path: str,
+                 split: Union[str, tfrecords_reader.ReadInstruction],
                  batch_size: Optional[int], shuffle_files: bool,
                  read_config: tfds_read_config.ReadConfig, as_supervised: bool,
                  decoders: Dict[str, str]):

@@ -117,24 +117,20 @@ _TABLE_OPTIONS = ['movies', 'ratings']
 class MovieLensConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MovieLens dataset."""
 
-  def __init__(
-      self,
-      format_version: Optional[str] = None,
-      table_option: Optional[str] = None,
-      download_url: Optional[str] = None,
-      parsing_fn: Optional[Callable[
-          [str],
-          Iterator[Tuple[int, Dict[str, Any]]],
-      ]] = None,
-      **kwargs
-  ) -> None:
+  def __init__(self,
+               format_version: Optional[str] = None,
+               table_option: Optional[str] = None,
+               download_url: Optional[str] = None,
+               parsing_fn: Optional[Callable[[str], Iterator[Tuple[int, Dict[
+                   str, Any]]],]] = None,
+               **kwargs) -> None:
     """Constructs a MovieLensConfig.
 
     Args:
       format_version: a string to identify the format of the dataset, one of
-          '_FORMAT_VERSIONS'.
+        '_FORMAT_VERSIONS'.
       table_option: a string to identify the table to expose, one of
-          '_TABLE_OPTIONS'.
+        '_TABLE_OPTIONS'.
       download_url: a string url for downloading the dataset.
       parsing_fn: a callable for parsing the data.
       **kwargs: keyword arguments forwarded to super.
@@ -166,10 +162,8 @@ class MovieLensConfig(tfds.core.BuilderConfig):
     return self._download_url
 
   @property
-  def parsing_fn(self) -> Optional[Callable[
-      [str],
-      Iterator[Tuple[int, Dict[str, Any]]],
-  ]]:
+  def parsing_fn(
+      self) -> Optional[Callable[[str], Iterator[Tuple[int, Dict[str, Any]]],]]:
     return self._parsing_fn
 
 
@@ -191,10 +185,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='25m',
           table_option='ratings',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-25m.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-25m.zip'),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
       MovieLensConfig(
@@ -205,10 +197,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='25m',
           table_option='movies',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-25m.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-25m.zip'),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
       # The latest-small dataset is changed over time. Its checksum might need
@@ -228,10 +218,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='latest-small',
           table_option='ratings',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-latest-small.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-latest-small.zip'),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
       MovieLensConfig(
@@ -242,10 +230,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='latest-small',
           table_option='movies',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-latest-small.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-latest-small.zip'),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
       MovieLensConfig(
@@ -261,10 +247,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='100k',
           table_option='ratings',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-100k.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-100k.zip'),
           parsing_fn=movielens_parsing.parse_100k_ratings_data,
       ),
       MovieLensConfig(
@@ -275,10 +259,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='100k',
           table_option='movies',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-100k.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-100k.zip'),
           parsing_fn=movielens_parsing.parse_100k_movies_data,
       ),
       MovieLensConfig(
@@ -296,10 +278,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='1m',
           table_option='ratings',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-1m.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-1m.zip'),
           parsing_fn=movielens_parsing.parse_1m_ratings_data,
       ),
       MovieLensConfig(
@@ -310,10 +290,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='1m',
           table_option='movies',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-1m.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-1m.zip'),
           parsing_fn=movielens_parsing.parse_1m_movies_data,
       ),
       MovieLensConfig(
@@ -328,10 +306,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='20m',
           table_option='ratings',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-20m.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-20m.zip'),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
       MovieLensConfig(
@@ -342,10 +318,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='20m',
           table_option='movies',
-          download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-20m.zip'
-          ),
+          download_url=('http://files.grouplens.org/datasets/movielens/'
+                        'ml-20m.zip'),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
   ]
@@ -355,16 +329,35 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns DatasetInfo according to self.builder_config."""
     movie_features_dict = {
-        'movie_id': tf.string,
-        'movie_title': tf.string,
-        'movie_genres': tfds.features.Sequence(
-            tfds.features.ClassLabel(names=[
-                'Action', 'Adventure', 'Animation', 'Children', 'Comedy',
-                'Crime', 'Documentary', 'Drama', 'Fantasy', 'Film-Noir',
-                'Horror', 'IMAX', 'Musical', 'Mystery', 'Romance', 'Sci-Fi',
-                'Thriller', 'Unknown', 'War', 'Western', '(no genres listed)',
-            ]),
-        ),
+        'movie_id':
+            tf.string,
+        'movie_title':
+            tf.string,
+        'movie_genres':
+            tfds.features.Sequence(
+                tfds.features.ClassLabel(names=[
+                    'Action',
+                    'Adventure',
+                    'Animation',
+                    'Children',
+                    'Comedy',
+                    'Crime',
+                    'Documentary',
+                    'Drama',
+                    'Fantasy',
+                    'Film-Noir',
+                    'Horror',
+                    'IMAX',
+                    'Musical',
+                    'Mystery',
+                    'Romance',
+                    'Sci-Fi',
+                    'Thriller',
+                    'Unknown',
+                    'War',
+                    'Western',
+                    '(no genres listed)',
+                ]),),
     }
     rating_features_dict = {
         'user_id': tf.string,
@@ -373,18 +366,39 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
         'timestamp': tf.int64,
     }
     demographic_features_dict = {
-        'user_gender': tf.bool,
-        'bucketized_user_age': tf.float32,
-        'user_occupation_label': tfds.features.ClassLabel(names=[
-            'academic/educator', 'artist', 'clerical/admin', 'customer service',
-            'doctor/health care', 'entertainment', 'executive/managerial',
-            'farmer', 'homemaker', 'lawyer', 'librarian', 'other/not specified',
-            'programmer', 'retired', 'sales/marketing', 'scientist',
-            'self-employed', 'student', 'technician/engineer',
-            'tradesman/craftsman', 'unemployed', 'writer',
-        ]),
-        'user_occupation_text': tf.string,
-        'user_zip_code': tf.string,
+        'user_gender':
+            tf.bool,
+        'bucketized_user_age':
+            tf.float32,
+        'user_occupation_label':
+            tfds.features.ClassLabel(names=[
+                'academic/educator',
+                'artist',
+                'clerical/admin',
+                'customer service',
+                'doctor/health care',
+                'entertainment',
+                'executive/managerial',
+                'farmer',
+                'homemaker',
+                'lawyer',
+                'librarian',
+                'other/not specified',
+                'programmer',
+                'retired',
+                'sales/marketing',
+                'scientist',
+                'self-employed',
+                'student',
+                'technician/engineer',
+                'tradesman/craftsman',
+                'unemployed',
+                'writer',
+            ]),
+        'user_occupation_text':
+            tf.string,
+        'user_zip_code':
+            tf.string,
     }
 
     features_dict = {}
@@ -416,13 +430,11 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(
-      self,
-      dl_manager: tfds.download.DownloadManager
+      self, dl_manager: tfds.download.DownloadManager
   ) -> List[tfds.core.SplitGenerator]:
     """Returns SplitGenerators."""
     extracted_path = dl_manager.download_and_extract(
-        self.builder_config.download_url,
-    )
+        self.builder_config.download_url,)
     dir_path = os.path.join(
         extracted_path,
         'ml-%s' % self.builder_config.format_version,
@@ -436,8 +448,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(
       self,
-      dir_path: Optional[str] = None
-  ) -> Iterator[Tuple[int, Dict[str, Any]]]:
+      dir_path: Optional[str] = None) -> Iterator[Tuple[int, Dict[str, Any]]]:
     """Yields examples by calling the corresponding parsing function."""
     for ex in self.builder_config.parsing_fn(dir_path):
       yield ex

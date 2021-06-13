@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Street View House Numbers (SVHN) Dataset, cropped version.
-"""
+"""Street View House Numbers (SVHN) Dataset, cropped version."""
 
 import numpy as np
 from six.moves import urllib
@@ -23,7 +22,6 @@ import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 URL = "http://ufldl.stanford.edu/housenumbers/"
-
 
 _CITATION = """\
 @article{Netzer2011,
@@ -112,8 +110,8 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
     assert np.max(data["y"]) <= 10  # Sanity check
     assert np.min(data["y"]) > 0
 
-    for i, (image, label) in enumerate(zip(
-        np.rollaxis(data["X"], -1), data["y"])):
+    for i, (image,
+            label) in enumerate(zip(np.rollaxis(data["X"], -1), data["y"])):
       label = label.reshape(())
       record = {
           "image": image,
@@ -122,5 +120,6 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
       if self.version > "3.0.0":
         record["id"] = "{}{:06d}".format(split_prefix, i)
       yield i, record
+
 
 # TODO(tfds): Add the SvhnFull dataset

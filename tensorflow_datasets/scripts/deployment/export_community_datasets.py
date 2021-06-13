@@ -27,7 +27,6 @@ import tensorflow_datasets as tfds
 import toml
 import tqdm
 
-
 # Community datasets namespaces and code location from where the datasets
 # package index will be constructed.
 _IN_PATH = tfds.core.tfds_path() / 'community-datasets.toml'
@@ -51,16 +50,15 @@ def export_community_datasets(
   Args:
     in_path: Config path containing the namespaces and dataset lookup
       instructions.
-    out_path: File containing all detected datasets. Detected dataset will
-      be saved to this file. Previous content is erased.
+    out_path: File containing all detected datasets. Detected dataset will be
+      saved to this file. Previous content is erased.
   """
   ds_packages = _find_community_ds_packages(in_path)
   _save_community_ds_packages(out_path, ds_packages)
 
 
 def _find_community_ds_packages(
-    config_path: pathlib.Path,
-) -> List[DatasetPackage]:
+    config_path: pathlib.Path,) -> List[DatasetPackage]:
   """Find all namepaces/dataset from the config.
 
   Config should contain the instructions in the following format:
@@ -79,16 +77,14 @@ def _find_community_ds_packages(
   """
   config = toml.load(config_path)
   all_packages = itertools.chain.from_iterable(
-      _list_ds_packages_for_namespace(
-          namespace, tfds.core.as_path(src_code_path)
-      ) for namespace, src_code_path in tqdm.tqdm(config['Namespaces'].items())
-  )
+      _list_ds_packages_for_namespace(namespace, tfds.core.as_path(
+          src_code_path))
+      for namespace, src_code_path in tqdm.tqdm(config['Namespaces'].items()))
   return sorted(all_packages, key=lambda package: package.name)
 
 
-def _save_community_ds_packages(
-    file_path: tfds.typing.ReadWritePath, ds_packages: List[DatasetPackage]
-) -> None:
+def _save_community_ds_packages(file_path: tfds.typing.ReadWritePath,
+                                ds_packages: List[DatasetPackage]) -> None:
   """Save all loaded datasets in the package index.
 
   Saved file will have the following `.jsonl` format:
@@ -161,8 +157,7 @@ def _list_ds_packages_for_namespace(
 
 
 def _get_dataset_source(
-    ds_path: tfds.typing.ReadOnlyPath,
-) -> Optional[DatasetSource]:
+    ds_path: tfds.typing.ReadOnlyPath,) -> Optional[DatasetSource]:
   """Returns True if the given path correspond to a dataset.
 
   Currently a simple heuristic is used. This function checks the path has the

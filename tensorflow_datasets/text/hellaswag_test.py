@@ -36,4 +36,3 @@ class HellaswagTest(tfds.testing.DatasetBuilderTestCase):
 
 if __name__ == "__main__":
   tfds.testing.test_main()
-

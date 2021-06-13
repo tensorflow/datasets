@@ -81,15 +81,16 @@ def _deduplicate(data):
     if all(same_id_data[0] == x for x in same_id_data):
       unique_data.append(same_id_data[0])
     else:
-      non_deleted_same_id_data = [row for row in same_id_data
-                                  if row["author"] != "[deleted]"]
+      non_deleted_same_id_data = [
+          row for row in same_id_data if row["author"] != "[deleted]"
+      ]
       if len(non_deleted_same_id_data) != 1:
         raise ValueError("Found several message with id {} in the original"
                          " data".format(non_deleted_same_id_data[0]["id"]))
       unique_data.append(non_deleted_same_id_data[0])
 
-  return sorted(unique_data,
-                key=lambda row: (row["link_id"], row["created_utc"]))
+  return sorted(
+      unique_data, key=lambda row: (row["link_id"], row["created_utc"]))
 
 
 class RedditDisentanglement(tfds.core.GeneratorBasedBuilder):
@@ -108,15 +109,17 @@ class RedditDisentanglement(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            _THREAD_KEY: tfds.features.Sequence(
-                tfds.features.FeaturesDict({
-                    _MESSAGE_ID: tfds.features.Text(),
-                    _MESSAGE_TEXT: tfds.features.Text(),
-                    _MESSAGE_TIMESTAMP: tfds.features.Text(),
-                    _MESSAGE_AUTHOR: tfds.features.Text(),
-                    _MESSAGE_LINK_ID: tfds.features.Text(),
-                    _MESSAGE_PARENT_ID: tfds.features.Text()
-                }))}),
+            _THREAD_KEY:
+                tfds.features.Sequence(
+                    tfds.features.FeaturesDict({
+                        _MESSAGE_ID: tfds.features.Text(),
+                        _MESSAGE_TEXT: tfds.features.Text(),
+                        _MESSAGE_TIMESTAMP: tfds.features.Text(),
+                        _MESSAGE_AUTHOR: tfds.features.Text(),
+                        _MESSAGE_LINK_ID: tfds.features.Text(),
+                        _MESSAGE_PARENT_ID: tfds.features.Text()
+                    }))
+        }),
         homepage="https://github.com/henghuiz/MaskedHierarchicalTransformer",
         citation=_CITATION,
     )
@@ -126,18 +129,19 @@ class RedditDisentanglement(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"path": os.path.join(
-                dl_manager.manual_dir, "train.csv")},
+            gen_kwargs={
+                "path": os.path.join(dl_manager.manual_dir, "train.csv")
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"path": os.path.join(
-                dl_manager.manual_dir, "val.csv")},
+            gen_kwargs={"path": os.path.join(dl_manager.manual_dir, "val.csv")},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"path": os.path.join(
-                dl_manager.manual_dir, "test.csv")},
+            gen_kwargs={
+                "path": os.path.join(dl_manager.manual_dir, "test.csv")
+            },
         ),
     ]
 

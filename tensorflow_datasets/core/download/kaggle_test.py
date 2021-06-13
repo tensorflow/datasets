@@ -46,14 +46,13 @@ class KaggleTest(testing.TestCase):
   def test_competition_download_404(self):
     with testing.mock_kaggle_api(err_msg='404 - Not found'):
       with testing.tmp_dir() as tmp_dir:
-        with self.assertRaisesRegex(
-            ValueError, 'Please ensure you have spelled the name'):
+        with self.assertRaisesRegex(ValueError,
+                                    'Please ensure you have spelled the name'):
           kaggle.download_kaggle_data('digit-recognize', tmp_dir)
 
   def test_kaggle_type(self):
     self.assertEqual(
-        kaggle._get_kaggle_type('digit-recognizer'), 'competitions'
-    )
+        kaggle._get_kaggle_type('digit-recognizer'), 'competitions')
     self.assertEqual(kaggle._get_kaggle_type('author/dataset'), 'datasets')
 
 

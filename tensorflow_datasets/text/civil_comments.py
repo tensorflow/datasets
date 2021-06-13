@@ -194,8 +194,9 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
   }
 
   def _info(self):
-    citation = (_CITATION if not self.builder_config.include_covert_labels
-                else _COVERT_CITATION)
+    citation = (
+        _CITATION
+        if not self.builder_config.include_covert_labels else _COVERT_CITATION)
     features = {'text': tfds.features.Text()}
     labels = [
         'id', 'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',

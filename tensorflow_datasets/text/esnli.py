@@ -80,8 +80,10 @@ class Esnli(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
 
     files = dl_manager.download_and_extract({
-        'train': [os.path.join(_URL, 'esnli_train_1.csv'),
-                  os.path.join(_URL, 'esnli_train_2.csv')],
+        'train': [
+            os.path.join(_URL, 'esnli_train_1.csv'),
+            os.path.join(_URL, 'esnli_train_2.csv')
+        ],
         'validation': [os.path.join(_URL, 'esnli_dev.csv')],
         'test': [os.path.join(_URL, 'esnli_test.csv')]
     })

@@ -25,8 +25,7 @@ from tensorflow_datasets.core.community import huggingface_wrapper
 
 
 def builder_cls_from_module(
-    module_name: str,
-) -> Type[dataset_builder.DatasetBuilder]:
+    module_name: str,) -> Type[dataset_builder.DatasetBuilder]:
   """Imports the module and extract the `tfds.core.DatasetBuilder`.
 
   Args:
@@ -56,6 +55,5 @@ def builder_cls_from_module(
     raise ValueError(
         f'Could not load DatasetBuilder from: {module_name}. '
         'Make sure the module only contains a single `DatasetBuilder`. '
-        f'Detected builders: {builder_classes}'
-    )
+        f'Detected builders: {builder_classes}')
   return builder_classes[0]

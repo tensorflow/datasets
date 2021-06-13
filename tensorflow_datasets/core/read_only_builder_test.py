@@ -41,10 +41,14 @@ class DummyConfigMnist(testing.DummyDataset):
 
   BUILDER_CONFIGS = [
       dataset_builder.BuilderConfig(
-          name='dummy_config', version='0.1.0', description='testing config',
+          name='dummy_config',
+          version='0.1.0',
+          description='testing config',
       ),
       dataset_builder.BuilderConfig(
-          name='dummy_config2', version='0.1.0', description='testing config',
+          name='dummy_config2',
+          version='0.1.0',
+          description='testing config',
       ),
   ]
 
@@ -81,8 +85,7 @@ def test_builder_files_exists(code_builder: dataset_builder.DatasetBuilder):
 
   # If the version is specified but files not found, load from the code
   builder = load.builder(
-      f'{code_builder.name}:*.*.*', data_dir='/tmp/path/tfds/not-exists'
-  )
+      f'{code_builder.name}:*.*.*', data_dir='/tmp/path/tfds/not-exists')
   assert isinstance(builder, type(code_builder))
   assert not isinstance(builder, read_only_builder.ReadOnlyBuilder)
 
@@ -98,8 +101,7 @@ def test_builder_config(code_builder: dataset_builder.DatasetBuilder):
     # Config isn't present in the code anymore
     with pytest.raises(ValueError, match='BuilderConfig .* not found'):
       load.builder(
-          f'{code_builder.name}/dummy_config', data_dir='/tmp/path/not-exists'
-      )
+          f'{code_builder.name}/dummy_config', data_dir='/tmp/path/not-exists')
 
     # But previously generated configs still be loaded from disk
     builder = load.builder(f'{code_builder.name}/dummy_config')
@@ -136,8 +138,7 @@ def test_builder_code_not_found(code_builder: dataset_builder.DatasetBuilder):
 
     with pytest.raises(registered.DatasetNotFoundError):
       load.load(
-          code_builder.name, split=[], data_dir='/tmp/non-existing/tfds/dir'
-      )
+          code_builder.name, split=[], data_dir='/tmp/non-existing/tfds/dir')
 
 
 # Test both with and without config
@@ -179,8 +180,7 @@ def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
 
 def test_not_exists(tmp_path: pathlib.Path):
   with pytest.raises(
-      FileNotFoundError, match='Could not load `ReadOnlyBuilder`'
-  ):
+      FileNotFoundError, match='Could not load `ReadOnlyBuilder`'):
     read_only_builder.builder_from_directory(tmp_path)
 
 
@@ -191,8 +191,7 @@ def test_not_registered():
 
 # We assume that all datasets are added into `data_dir='path/to'`
 _find_builder_dir = functools.partial(
-    read_only_builder._find_builder_dir, data_dir='path/to'
-)
+    read_only_builder._find_builder_dir, data_dir='path/to')
 
 
 def test_find_builder_dir_with_multiple_data_dir(mock_fs: testing.MockFs):
@@ -278,8 +277,7 @@ def test_find_builder_config_code(mock_fs: testing.MockFs):
         dataset_builder.BuilderConfig(  # pylint: disable=g-complex-comprehension
             name=name,
             version='2.0.0',
-            description=f'{name} description'
-        )
+            description=f'{name} description')
         for name in ('default_config', 'other_config')
     ]
 
@@ -294,28 +292,18 @@ def test_find_builder_config_code(mock_fs: testing.MockFs):
   # If code can be reached, use it to load the default config name
   # Note that the existing version is loaded, even if the code is at a
   # more recent version.
-  assert (
-      _find_builder_dir('my_dataset')
-      == 'path/to/my_dataset/default_config/1.0.0'
-  )
+  assert (_find_builder_dir('my_dataset') ==
+          'path/to/my_dataset/default_config/1.0.0')
   # Explicitly given version with implicit config.
-  assert (
-      _find_builder_dir('my_dataset:0.0.1')
-      == 'path/to/my_dataset/default_config/0.0.1'
-  )
+  assert (_find_builder_dir('my_dataset:0.0.1') ==
+          'path/to/my_dataset/default_config/0.0.1')
   # When config is explicitly given, load the last detected version
-  assert (
-      _find_builder_dir('my_dataset/other_config')
-      == 'path/to/my_dataset/other_config/1.0.0'
-  )
-  assert (
-      _find_builder_dir('my_dataset/old_config')
-      == 'path/to/my_dataset/old_config/1.0.0'
-  )
-  assert (
-      _find_builder_dir('my_dataset/old_config:0.8.0')
-      == 'path/to/my_dataset/old_config/0.8.0'
-  )
+  assert (_find_builder_dir('my_dataset/other_config') ==
+          'path/to/my_dataset/other_config/1.0.0')
+  assert (_find_builder_dir('my_dataset/old_config') ==
+          'path/to/my_dataset/old_config/1.0.0')
+  assert (_find_builder_dir('my_dataset/old_config:0.8.0') ==
+          'path/to/my_dataset/old_config/0.8.0')
   assert _find_builder_dir('my_dataset/broken_config') is None
   assert _find_builder_dir('my_dataset/unknown_config') is None
 
@@ -328,7 +316,8 @@ def test_get_version_str(mock_fs: testing.MockFs):
   mock_fs.add_file('path/to/ds/2.0.1/features.json')
 
   get_version_str = functools.partial(
-      read_only_builder._get_version_str, 'path/to/ds/'  # pylint: disable=protected-access
+      read_only_builder._get_version_str,
+      'path/to/ds/'  # pylint: disable=protected-access
   )
 
   # requested_version is None -> Returns last version

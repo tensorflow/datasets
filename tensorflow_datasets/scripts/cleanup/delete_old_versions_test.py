@@ -105,4 +105,4 @@ def test_delete_script(tmp_path: pathlib.PurePath):
 
 def _norm_path(root_path: pathlib.Path, paths: List[str]) -> List[pathlib.Path]:
   """Normalize paths (for windows compatibility)."""
-  return [root_path / p for p in  paths]
+  return [root_path / p for p in paths]

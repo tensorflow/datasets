@@ -68,8 +68,8 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
       vocab_list: `list<str>`, list of subwords for the vocabulary. Note that an
         underscore at the end of a subword indicates the end of the word (i.e. a
         space will be inserted afterwards when decoding). Underscores in the
-        interior of subwords are disallowed and should use the underscore
-        escape sequence.
+        interior of subwords are disallowed and should use the underscore escape
+        sequence.
     """
     self._init_from_list(vocab_list)
 

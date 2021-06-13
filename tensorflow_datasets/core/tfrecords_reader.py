@@ -21,6 +21,7 @@ import os
 import re
 from typing import Any, Callable, Dict, Iterable, List, NamedTuple, Optional, Sequence, Union
 
+from absl import logging
 import attr
 
 import numpy as np
@@ -40,10 +41,10 @@ Tensor = utils.Tensor
 ParseFn = Callable[[Tensor], TreeDict[Tensor]]
 DecodeFn = Callable[[TreeDict[Tensor]], TreeDict[Tensor]]
 
+_BUFFER_SIZE = 8 << 20  # 8 MiB per file.
 
-_BUFFER_SIZE = 8<<20  # 8 MiB per file.
-
-_SUB_SPEC_RE = re.compile(r'''
+_SUB_SPEC_RE = re.compile(
+    r"""
 ^
  (?P<split>[\w-]+)
  (\[
@@ -54,7 +55,7 @@ _SUB_SPEC_RE = re.compile(r'''
    (?P<to_pct>%)?)?
  \])?
 $
-''', re.X)
+""", re.X)
 
 _ADDITION_SEP_RE = re.compile(r'\s*\+\s*')
 
@@ -81,8 +82,7 @@ def _get_dataset_from_filename(
 ):
   """Returns a tf.data.Dataset instance from given instructions."""
   ds = file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
-      instruction.filepath, _BUFFER_SIZE
-  )
+      instruction.filepath, buffer_size=_BUFFER_SIZE)
   if do_skip:
     ds = ds.skip(instruction.skip)
   if do_take:
@@ -90,8 +90,7 @@ def _get_dataset_from_filename(
   if add_tfds_id:  # For each example, generate a unique id.
     id_ds = _make_id_dataset(
         filename=instruction.filename,
-        start_index=instruction.skip if do_skip else 0
-    )
+        start_index=instruction.skip if do_skip else 0)
     ds = tf.data.Dataset.zip(_IdExample(id=id_ds, example=ds))
   return ds
 
@@ -129,8 +128,7 @@ def _decode_with_id(
   decoded_ex = decode_fn(id_ex.example)
   if not isinstance(decoded_ex, dict):
     raise TypeError(
-        f'Features should be `dict` when `add_tfds_id=True`. Got: {decoded_ex}'
-    )
+        f'Features should be `dict` when `add_tfds_id=True`. Got: {decoded_ex}')
   decoded_ex['tfds_id'] = id_ex.id
   return decoded_ex
 
@@ -147,15 +145,13 @@ def make_file_instructions(
     name: Name of the dataset.
     split_infos: Dataset splits information
     instruction: `ReadInstruction` or `str`
-    file_format: Format of the record files in which the dataset
-      will be read/written from.
+    file_format: Format of the record files in which the dataset will be
+      read/written from.
 
   Returns:
     file_intructions: FileInstructions instance
   """
-  name2shard_lengths = {
-      info.name: info.shard_lengths for info in split_infos
-  }
+  name2shard_lengths = {info.name: info.shard_lengths for info in split_infos}
   name2len = {
       name: sum(lengths) for name, lengths in name2shard_lengths.items()
   }
@@ -205,6 +201,7 @@ def _read_files(
     file_instructions: Sequence[shard_utils.FileInstruction],
     read_config: read_config_lib.ReadConfig,
     shuffle_files: bool,
+    disable_shuffling: bool,
     file_format: file_adapters.FileFormat,
 ) -> tf.data.Dataset:
   """Returns tf.data.Dataset for given file instructions.
@@ -212,11 +209,13 @@ def _read_files(
   Args:
     file_instructions: the information on the files to read including
       `ds.skip().take()`
-    read_config: Additional options to configure the
-      input pipeline (e.g. seed, num parallel reads,...).
+    read_config: Additional options to configure the input pipeline (e.g. seed,
+      num parallel reads,...).
     shuffle_files: Defaults to False. True to shuffle input files.
-    file_format: Format of the record files in which the dataset
-      will be read/written from.
+    disable_shuffling: Specifies if the dataset being read has shuffling
+      disabled.
+    file_format: Format of the record files in which the dataset will be
+      read/written from.
 
   Returns:
     The dataset object.
@@ -242,6 +241,18 @@ def _read_files(
   cycle_length = read_config.interleave_cycle_length
   block_length = read_config.interleave_block_length
 
+  if cycle_length == read_config_lib.MISSING:
+    cycle_length = _get_default_interleave_cycle_length(
+        disable_shuffling=disable_shuffling)
+
+  if disable_shuffling:
+    _verify_read_config_for_ordered_dataset(
+        read_config,
+        interleave_cycle_length=cycle_length,
+        shuffle_files=shuffle_files,
+    )
+
+
   instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
   # On distributed environments, we can shard per-file if a
@@ -257,8 +268,7 @@ def _read_files(
           'To shard the data, you may want to use the subsplit API '
           'instead: https://www.tensorflow.org/datasets/splits'.format(
               len(file_instructions),
-              read_config.input_context.num_input_pipelines)
-      )
+              read_config.input_context.num_input_pipelines))
     instruction_ds = instruction_ds.shard(
         num_shards=read_config.input_context.num_input_pipelines,
         index=read_config.input_context.input_pipeline_id,
@@ -299,6 +309,46 @@ def _read_files(
   return ds
 
 
+def _get_default_interleave_cycle_length(disable_shuffling: bool) -> int:
+  if disable_shuffling:
+    logging.info(
+        '`interleave_cycle_length` set to 1 to read examples in order.')
+    return 1
+  else:
+    return 16
+
+
+def _verify_read_config_for_ordered_dataset(
+    read_config: read_config_lib.ReadConfig,
+    interleave_cycle_length: int,
+    shuffle_files: bool,
+):
+  """Check that read parameters will not affect the ordering of the dataset.
+
+  The user can bypass the error by setting `enable_ordering_guard=False`.
+
+  Args:
+    read_config: The input pipeline options.
+    interleave_cycle_length: Cycle length for `tf.data.Dataset.interleave`.
+    shuffle_files: If True, input files are shuffled before being read.
+  """
+  error_messages = []
+  if shuffle_files:
+    error_messages.append(
+        'Dataset is an ordered dataset (\'disable_shuffling=True\'), but examples will not be read in order because `shuffle_files=True`.'
+    )
+  if interleave_cycle_length != 1:
+    error_messages.append(
+        'Dataset is an ordered dataset (\'disable_shuffling=True\'), but examples will not be read in order because `ReadConfig.interleave_cycle_length != 1`.'
+    )
+  if error_messages:
+    error_message = '\n'.join(error_messages)
+    if read_config.enable_ordering_guard:
+      raise ValueError(error_message)
+    else:
+      logging.warning(error_message)
+
+
 class Reader(object):
   """Build a tf.data.Dataset object out of Instruction instance(s).
 
@@ -314,8 +364,8 @@ class Reader(object):
     Args:
       path (str): path where tfrecords are stored.
       example_specs: spec to build ExampleParser.
-      file_format: file_adapters.FileFormat, format of the record files in
-        which the dataset will be read/written from.
+      file_format: file_adapters.FileFormat, format of the record files in which
+        the dataset will be read/written from.
     """
     self._path = path
     self._parser = example_parser.ExampleParser(example_specs)
@@ -329,6 +379,7 @@ class Reader(object):
       split_infos,
       read_config,
       shuffle_files,
+      disable_shuffling: bool = False,
       decode_fn: Optional[DecodeFn] = None,
   ):
     """Returns tf.data.Dataset instance(s).
@@ -341,14 +392,17 @@ class Reader(object):
       split_infos (list of SplitInfo proto): the available splits for dataset.
       read_config: `tfds.ReadConfig`, the input pipeline options
       shuffle_files (bool): If True, input files are shuffled before being read.
-      decode_fn: Eventual additional processing to apply to the example
-        after deserialization.
+      disable_shuffling: Specifies if the dataset being read has shuffling
+        disabled.
+      decode_fn: Eventual additional processing to apply to the example after
+        deserialization.
 
     Returns:
        a single tf.data.Dataset instance if instruction is a single
        ReadInstruction instance. Otherwise a dict/list of tf.data.Dataset
        corresponding to given instructions param shape.
     """
+
     def _read_instruction_to_ds(instruction):
       file_instructions = make_file_instructions(
           name, split_infos, instruction, file_format=self._file_format)
@@ -356,6 +410,7 @@ class Reader(object):
           file_instructions,
           read_config=read_config,
           shuffle_files=shuffle_files,
+          disable_shuffling=disable_shuffling,
           decode_fn=decode_fn,
       )
 
@@ -367,18 +422,21 @@ class Reader(object):
       *,
       read_config: read_config_lib.ReadConfig,
       shuffle_files: bool,
+      disable_shuffling: bool = False,
       decode_fn: Optional[DecodeFn] = None,
   ) -> tf.data.Dataset:
     """Returns single tf.data.Dataset instance for the set of file instructions.
 
     Args:
-      file_instructions: The files information.
-        The filenames contains the relative path, not absolute.
+      file_instructions: The files information. The filenames contains the
+        relative path, not absolute.
         skip/take indicates which example read in the shard: `ds.skip().take()`
       read_config: The input pipeline options
       shuffle_files: If True, input files are shuffled before being read.
-      decode_fn: Eventual additional processing to apply to the example
-        after deserialization.
+      disable_shuffling: Specifies if the dataset being read has shuffling
+        disabled.
+      decode_fn: Eventual additional processing to apply to the example after
+        deserialization.
 
     Returns:
        a tf.data.Dataset instance.
@@ -398,6 +456,7 @@ class Reader(object):
         file_instructions=file_instructions,
         read_config=read_config,
         shuffle_files=shuffle_files,
+        disable_shuffling=disable_shuffling,
         file_format=self._file_format,
     )
 
@@ -415,8 +474,7 @@ class Reader(object):
     # Eventually add the `tfds_id` after the decoding
     if read_config and read_config.add_tfds_id:
       parse_and_decode = functools.partial(
-          _decode_with_id, decode_fn=parse_and_decode
-      )
+          _decode_with_id, decode_fn=parse_and_decode)
 
     ds = ds.map(
         parse_and_decode,
@@ -442,8 +500,10 @@ class _RelativeInstruction(object):
   # ending index, or None if no upper boundary.
   to = attr.ib()  # : Optional[int]
   unit = attr.ib(validator=attr.validators.in_(['%', 'abs']))  # : str
-  rounding = attr.ib(validator=attr.validators.in_([  # : str
-      'closest', 'pct1_dropremainder']))
+  rounding = attr.ib(
+      validator=attr.validators.in_([  # : str
+          'closest', 'pct1_dropremainder'
+      ]))
 
   @from_.validator
   @to.validator
@@ -464,7 +524,7 @@ def _str_to_relative_instruction(spec):
       from_=int(res.group('from')) if res.group('from') else None,
       to=int(res.group('to')) if res.group('to') else None,
       unit=unit,
-      )
+  )
 
 
 def _pct_to_abs_pct1(boundary, num_examples):
@@ -487,8 +547,9 @@ def _rel_to_abs_instr(rel_instr, name2len):
     rel_instr: RelativeInstruction instance.
     name2len: dict {split_name: num_examples}.
   """
-  pct_to_abs = (_pct_to_abs_closest if rel_instr.rounding == 'closest'
-                else _pct_to_abs_pct1)
+  pct_to_abs = (
+      _pct_to_abs_closest
+      if rel_instr.rounding == 'closest' else _pct_to_abs_pct1)
   split = rel_instr.splitname
   if split not in name2len:
     raise ValueError('Unknown split "{}". Should be one of {}.'.format(
@@ -588,13 +649,13 @@ class ReadInstruction(object):
         used. Ignored when slicing with absolute indices.
         Possible values:
          - 'closest' (default): The specified percentages are rounded to the
-           closest value. Use this if you want specified percents to be as
-           much exact as possible.
+           closest value. Use this if you want specified percents to be as much
+           exact as possible.
          - 'pct1_dropremainder': the specified percentages are treated as
-           multiple of 1%. Use this option if you want consistency. Eg:
-             len(5%) == 5 * len(1%).
-           Using this option, one might not be able to use the full set of
-           examples, if the number of those is not a multiple of 100.
+           multiple of 1%. Use this option if you want consistency. Eg: len(5%)
+             == 5 * len(1%). Using this option, one might not be able to use the
+             full set of examples, if the number of those is not a multiple of
+             100.
       from_ (int):
       to (int): alternative way of specifying slicing boundaries. If any of
         {from_, to, unit} argument is used, slicing cannot be specified as
@@ -610,8 +671,7 @@ class ReadInstruction(object):
     # This constructor is not always called. See factory method
     # `_read_instruction_from_relative_instructions`. Common init instructions
     # MUST be placed in the _init method.
-    self._init(
-        [_RelativeInstruction(split_name, from_, to, unit, rounding)])
+    self._init([_RelativeInstruction(split_name, from_, to, unit, rounding)])
 
   @classmethod
   def from_spec(cls, spec):
@@ -619,13 +679,13 @@ class ReadInstruction(object):
 
     Args:
       spec (str): split(s) + optional slice(s) to read. A slice can be
-            specified, using absolute numbers (int) or percentages (int). E.g.
+        specified, using absolute numbers (int) or percentages (int). E.g.
               `test`: test split.
               `test + validation`: test split + validation split.
               `test[10:]`: test split, minus its first 10 records.
               `test[:10%]`: first 10% records of test split.
               `test[:-5%]+train[40%:60%]`: first 95% of test + middle 20% of
-                                           train.
+                train.
 
     Returns:
       ReadInstruction instance.
@@ -664,5 +724,7 @@ class ReadInstruction(object):
     Returns:
       list of _AbsoluteInstruction instances (corresponds to the + in spec).
     """
-    return [_rel_to_abs_instr(rel_instr, name2len)
-            for rel_instr in self._relative_instructions]
+    return [
+        _rel_to_abs_instr(rel_instr, name2len)
+        for rel_instr in self._relative_instructions
+    ]

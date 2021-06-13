@@ -18,7 +18,7 @@
 import os
 import re
 import textwrap
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import dataclasses
 
@@ -28,17 +28,15 @@ _first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
 _all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
 _NAME_CLASS = r'[a-zA-Z][\w]*'
-_NAME_CLASS_REG = re.compile(r'^'+_NAME_CLASS+r'$')
+_NAME_CLASS_REG = re.compile(r'^' + _NAME_CLASS + r'$')
 
 # Regex matching 'dataset/config:1.*.*/arg=123'
-_NAME_REG = re.compile(
-    r'^'
-    r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
-    r'(/(?P<config>[\w\-\.]+))?'
-    r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
-    r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
-    r'$'
-)
+_NAME_REG = re.compile(r'^'
+                       r'(?P<dataset_name>([\w\-]+:)?' + _NAME_CLASS + r')'
+                       r'(/(?P<config>[\w\-\.]+))?'
+                       r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
+                       r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
+                       r'$')
 
 Value = Union[str, int, float, bool]
 
@@ -61,8 +59,7 @@ class DatasetName:
       raise ValueError(
           "Name should be defined by `DatasetName('ns:name')` or "
           "`DatasetName(namespace='ns', name='name'). Mixing args and kwargs "
-          "is invalid."
-      )
+          'is invalid.')
     if namespace_name:
       if ':' in namespace_name:
         namespace, name = namespace_name.split(':')
@@ -122,11 +119,9 @@ def parse_builder_name_kwargs(
 
 
 def _dataset_name_and_kwargs_from_name_str(
-    name_str: str,
-) -> Tuple[str, Dict[str, Value]]:
+    name_str: str,) -> Tuple[str, Dict[str, Value]]:
   """Extract kwargs from name str."""
-  err_msg = textwrap.dedent(
-      f"""\
+  err_msg = textwrap.dedent(f"""\
       Parsing builder name string {name_str} failed.
       The builder name string must be of the following format:
         dataset_name[/config_name][:version][/kwargs]
@@ -145,8 +140,7 @@ def _dataset_name_and_kwargs_from_name_str(
           my_dataset/config1:1.*.*
           my_dataset/config1/arg1=val1,arg2=val2
           my_dataset/config1:1.2.3/right=True,foo=bar,rate=1.2
-      """
-  )
+      """)
 
   res = _NAME_REG.match(name_str)
   if not res:
@@ -168,7 +162,7 @@ def _dataset_name_and_kwargs_from_name_str(
     py_utils.reraise(e, prefix=err_msg)  # pytype: disable=bad-return-type
 
 
-def _kwargs_str_to_kwargs(kwargs_str):
+def _kwargs_str_to_kwargs(kwargs_str: str):
   """Converts given `kwargs` as str into kwargs dict."""
   if not kwargs_str:
     return {}
@@ -180,7 +174,7 @@ def _kwargs_str_to_kwargs(kwargs_str):
   return kwargs
 
 
-def _cast_to_pod(val: str) -> Union[Value]:
+def _cast_to_pod(val: str) -> Value:
   """Try cast to bool, int, float, str, in that order."""
   bools = {'True': True, 'False': False}
   if val in bools:
@@ -217,7 +211,7 @@ def filename_prefix_for_split(name: str, split: str) -> str:
   return '%s-%s' % (filename_prefix_for_name(name), split)
 
 
-def sharded_filenames(filename_prefix, num_shards):
+def sharded_filenames(filename_prefix: str, num_shards: int) -> List[str]:
   """Sharded filenames given prefix and number of shards."""
   shard_suffix = '%05d-of-%05d'
   return [
@@ -226,8 +220,10 @@ def sharded_filenames(filename_prefix, num_shards):
   ]
 
 
-def filepattern_for_dataset_split(dataset_name, split, data_dir,
-                                  filetype_suffix=None):
+def filepattern_for_dataset_split(dataset_name: str,
+                                  split: str,
+                                  data_dir: str,
+                                  filetype_suffix: Optional[str] = None) -> str:
   prefix = filename_prefix_for_split(dataset_name, split)
   if filetype_suffix:
     prefix += '.%s' % filetype_suffix
@@ -236,15 +232,23 @@ def filepattern_for_dataset_split(dataset_name, split, data_dir,
 
 
 def filenames_for_dataset_split(
-    dataset_name, split, num_shards, filetype_suffix=None):
+    dataset_name: str,
+    split: str,
+    num_shards: int,
+    filetype_suffix: Optional[str] = None) -> List[str]:
   prefix = filename_prefix_for_split(dataset_name, split)
   if filetype_suffix:
     prefix += '.%s' % filetype_suffix
   return sharded_filenames(prefix, num_shards)
 
 
-def filepaths_for_dataset_split(dataset_name, split, num_shards, data_dir,
-                                filetype_suffix=None):
+def filepaths_for_dataset_split(
+    dataset_name: str,
+    split: str,
+    num_shards: int,
+    data_dir: str,
+    filetype_suffix: Optional[str] = None) -> List[str]:
+  """File paths of a given dataset split."""
   filenames = filenames_for_dataset_split(
       dataset_name=dataset_name,
       split=split,
@@ -253,3 +257,55 @@ def filepaths_for_dataset_split(dataset_name, split, num_shards, data_dir,
   )
   filepaths = [os.path.join(data_dir, fname) for fname in filenames]
   return filepaths
+
+
+@dataclasses.dataclass(eq=True, frozen=True)
+class FilenameInfo:
+  """Structure representing a filename.
+
+  Filenames have the following specs:
+
+  ```
+  <dataset_name>-<split_name>.<file-extension>-xxxxxx-of-yyyyyy
+  ```
+
+  """
+  dataset_name: str
+  split: str
+  filetype_suffix: str
+  shard_index: int
+  num_shards: int
+
+  @classmethod
+  def from_str(cls, filename: str) -> 'FilenameInfo':
+    """Factory to create a `FilenameInfo` from filename."""
+    match = _parse_filename(filename)
+    if not match:  # No match found
+      raise ValueError(
+          f'Filename {filename!r} does not follow pattern: '
+          '<dataset_name>-<split_name>.<file-extension>-xxxxxx-of-yyyyyy')
+    values = match.groupdict()
+    return cls(
+        dataset_name=values['dataset_name'],
+        split=values['split'],
+        filetype_suffix=values['filetype_suffix'],
+        shard_index=int(values['shard_index']),
+        num_shards=int(values['num_shards']),
+    )
+
+  @staticmethod
+  def is_valid(filename: str) -> bool:
+    """Returns True if the filename follow the given pattern."""
+    return bool(_parse_filename(filename))
+
+  def __str__(self) -> str:
+    return (f'{self.dataset_name}-{self.split}.{self.filetype_suffix}-'
+            f'{self.shard_index:05}-of-{self.num_shards:05}')
+
+
+def _parse_filename(filename: str) -> Optional['re.Match']:  # pytype: disable=module-attr
+  """Parse the tf-record filename."""
+  pattern = (rf'(?P<dataset_name>{_NAME_CLASS})-(?P<split>\w+)\.'
+             r'(?P<filetype_suffix>\w+)-'
+             r'(?P<shard_index>\d\d\d\d\d)-of-(?P<num_shards>\d\d\d\d\d)')
+  return re.fullmatch(pattern, filename)

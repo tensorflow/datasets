@@ -30,5 +30,6 @@ class ListBuilderTest(tfds.testing.TestCase):
     # The tests datasets should not be present in the registered datasets
     self.assertEmpty(test_datasets & registered_datasets)
 
+
 if __name__ == "__main__":
   tfds.testing.test_main()

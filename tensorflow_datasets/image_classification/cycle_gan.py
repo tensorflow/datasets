@@ -88,16 +88,14 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=
-        "A dataset consisting of images from two classes A and "
+        description="A dataset consisting of images from two classes A and "
         "B (For example: horses/zebras, apple/orange,...)",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names=["A", "B"]),
         }),
         supervised_keys=("image", "label"),
-        homepage=
-        "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/",
+        homepage="https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/",
         citation=_CITATION,
     )
 
@@ -115,26 +113,22 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name="trainA",
-            gen_kwargs={
+            name="trainA", gen_kwargs={
                 "path": train_a_path,
                 "label": "A",
             }),
         tfds.core.SplitGenerator(
-            name="trainB",
-            gen_kwargs={
+            name="trainB", gen_kwargs={
                 "path": train_b_path,
                 "label": "B",
             }),
         tfds.core.SplitGenerator(
-            name="testA",
-            gen_kwargs={
+            name="testA", gen_kwargs={
                 "path": test_a_path,
                 "label": "A",
             }),
         tfds.core.SplitGenerator(
-            name="testB",
-            gen_kwargs={
+            name="testB", gen_kwargs={
                 "path": test_b_path,
                 "label": "B",
             }),

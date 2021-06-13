@@ -97,9 +97,7 @@ class ScanConfig(tfds.core.BuilderConfig):
     """
     # Version history:
     super(ScanConfig, self).__init__(
-        name=name,
-        version=tfds.core.Version('1.1.1'),
-        **kwargs)
+        name=name, version=tfds.core.Version('1.1.1'), **kwargs)
     self.splitfile = splitfile
     if 'mcd' in name:
       self.splitfile = name + '.json'

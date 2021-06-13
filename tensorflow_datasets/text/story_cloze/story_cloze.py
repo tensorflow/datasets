@@ -117,8 +117,9 @@ class StoryCloze(tfds.core.GeneratorBasedBuilder):
             row['InputSentence1'], row['InputSentence2'], row['InputSentence3'],
             row['InputSentence4']
         ])
-        endings = [row['RandomFifthSentenceQuiz1'],
-                   row['RandomFifthSentenceQuiz2']]
+        endings = [
+            row['RandomFifthSentenceQuiz1'], row['RandomFifthSentenceQuiz2']
+        ]
 
         yield row['InputStoryid'], {
             'context': context,

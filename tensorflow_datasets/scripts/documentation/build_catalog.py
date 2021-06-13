@@ -94,29 +94,28 @@ def build_catalog(
     datasets: Lists of dataset to document (all if not set)
     catalog_dir: Destination path for the catalog
     doc_util_paths: Additional path for visualization, nightly info,...
-    toc_relative_path: Relative path of the catalog directory, used to
-      generate the table of content relative links.
+    toc_relative_path: Relative path of the catalog directory, used to generate
+      the table of content relative links.
     index_template: Default template for the index page.
     index_filename: Name of the catalog index file.
-    dataset_types: Restrict the generation to the given dataset types.
-      Default to all open source non-community datasets
+    dataset_types: Restrict the generation to the given dataset types. Default
+      to all open source non-community datasets
   """
   dataset_types = dataset_types or [
       tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+      tfds.core.visibility.DatasetType
   ]
   tfds.core.visibility.set_availables(dataset_types)
 
   catalog_dir = tfds.core.as_path(catalog_dir)
   index_template = index_template or tfds.core.tfds_path(
-      'scripts/documentation/templates/catalog_overview.md'
-  )
+      'scripts/documentation/templates/catalog_overview.md')
   index_template = tfds.core.as_path(index_template)
 
   # Iterate over the builder documentations
   section_to_builder_docs = collections.defaultdict(list)
   for builder_doc in document_datasets.iter_documentation_builders(
-      datasets, doc_util_paths=doc_util_paths or doc_utils.DocUtilPaths()
-  ):
+      datasets, doc_util_paths=doc_util_paths or doc_utils.DocUtilPaths()):
     # Write the builder documentation
     dataset_file = catalog_dir / f'{builder_doc.filestem}.md'
     dataset_file.write_text(builder_doc.content)
@@ -134,19 +133,20 @@ def build_catalog(
 
 def _save_table_of_content(
     catalog_dir: tfds.core.ReadWritePath,
-    section_to_builder_docs: Dict[
-        str, List[document_datasets.BuilderDocumentation]
-    ],
+    section_to_builder_docs: Dict[str,
+                                  List[document_datasets.BuilderDocumentation]],
     toc_relative_path: str,
     index_template: tfds.core.ReadOnlyPath,
     index_filename: str,
 ) -> None:
   """Builds and saves the table of contents (`_toc.yaml` and `overview.md`)."""
   # For _toc.yaml
-  toc_yaml = {'toc': [{
-      'title': 'Overview',
-      'path': os.path.join(toc_relative_path, 'overview'),
-  }]}
+  toc_yaml = {
+      'toc': [{
+          'title': 'Overview',
+          'path': os.path.join(toc_relative_path, 'overview'),
+      }]
+  }
   # For overview.md
   toc_overview = []
 

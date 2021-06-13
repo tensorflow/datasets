@@ -22,14 +22,12 @@ from tensorflow_datasets.core.community import load
 
 def test_import():
   builder_cls = load.builder_cls_from_module(
-      'tensorflow_datasets.testing.dummy_dataset.dummy_dataset'
-  )
+      'tensorflow_datasets.testing.dummy_dataset.dummy_dataset')
   assert builder_cls.__name__ == 'DummyDataset'
 
   # Module should have been cached
   builder_cls_2 = load.builder_cls_from_module(
-      'tensorflow_datasets.testing.dummy_dataset.dummy_dataset'
-  )
+      'tensorflow_datasets.testing.dummy_dataset.dummy_dataset')
   assert builder_cls is builder_cls_2
 
   from tensorflow_datasets.testing.dummy_dataset import dummy_dataset  # pylint: disable=g-import-not-at-top

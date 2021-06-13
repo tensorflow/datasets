@@ -69,10 +69,11 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
     self.assertEqual([
         'foo-train-00000-of-00002',
         'foo-train-00001-of-00002',
-    ], naming.filenames_for_dataset_split(
-        dataset_name='foo',
-        split=splits.Split.TRAIN,
-        num_shards=2))
+    ],
+                     naming.filenames_for_dataset_split(
+                         dataset_name='foo',
+                         split=splits.Split.TRAIN,
+                         num_shards=2))
 
   def test_filepaths_for_dataset_split(self):
     self.assertEqual([
@@ -98,28 +99,31 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
                          filetype_suffix='bar'))
 
   def test_filepattern_for_dataset_split(self):
-    self.assertEqual('/tmp/bar/foo-test*',
-                     naming.filepattern_for_dataset_split(
-                         dataset_name='foo',
-                         split=splits.Split.TEST,
-                         data_dir='/tmp/bar/'))
-    self.assertEqual('/tmp/bar/foo-test.bar*',
-                     naming.filepattern_for_dataset_split(
-                         dataset_name='foo',
-                         split=splits.Split.TEST,
-                         filetype_suffix='bar',
-                         data_dir='/tmp/bar/'))
+    self.assertEqual(
+        '/tmp/bar/foo-test*',
+        naming.filepattern_for_dataset_split(
+            dataset_name='foo', split=splits.Split.TEST, data_dir='/tmp/bar/'))
+    self.assertEqual(
+        '/tmp/bar/foo-test.bar*',
+        naming.filepattern_for_dataset_split(
+            dataset_name='foo',
+            split=splits.Split.TEST,
+            filetype_suffix='bar',
+            data_dir='/tmp/bar/'))
 
 
 def test_dataset_name_and_kwargs_from_name_str():
   assert naming._dataset_name_and_kwargs_from_name_str('ds1') == ('ds1', {})
   assert naming._dataset_name_and_kwargs_from_name_str('ds1:1.2.*') == (
       'ds1',
-      {'version': '1.2.*'},
+      {
+          'version': '1.2.*'
+      },
   )
   assert naming._dataset_name_and_kwargs_from_name_str('ds1/config1') == (
-      'ds1', {'config': 'config1'}
-  )
+      'ds1', {
+          'config': 'config1'
+      })
   assert naming._dataset_name_and_kwargs_from_name_str('ds1/config1:1.*.*') == (
       'ds1', {
           'config': 'config1',
@@ -177,23 +181,25 @@ def dataset_name():
     ['name', 'result'],
     [
         ('ds1', (naming.DatasetName('ds1'), {})),
-        ('ds1:1.0.0', (naming.DatasetName('ds1'), {'version': '1.0.0'})),
+        ('ds1:1.0.0', (naming.DatasetName('ds1'), {
+            'version': '1.0.0'
+        })),
         ('ns1:ds1', (naming.DatasetName('ns1:ds1'), {})),
         (
             'ns1:ds1:1.0.0',
-            (naming.DatasetName('ns1:ds1'), {'version': '1.0.0'}),
+            (naming.DatasetName('ns1:ds1'), {
+                'version': '1.0.0'
+            }),
         ),
         ('ns1:ds1/conf:1.0.0', (naming.DatasetName('ns1:ds1'), {
             'version': '1.0.0',
             'config': 'conf',
         })),
-        (
-            'grand-vision:katr/128x128:1.0.0',
-            (naming.DatasetName('grand-vision:katr'), {
-                'version': '1.0.0',
-                'config': '128x128',
-            })
-        ),
+        ('grand-vision:katr/128x128:1.0.0',
+         (naming.DatasetName('grand-vision:katr'), {
+             'version': '1.0.0',
+             'config': '128x128',
+         })),
     ],
 )
 def test_parse_builder_name_kwargs(name, result):
@@ -203,9 +209,10 @@ def test_parse_builder_name_kwargs(name, result):
 def test_parse_builder_name_kwargs_with_kwargs():
   parse = naming.parse_builder_name_kwargs
 
-  assert parse('ds1', data_dir='/abc') == (
-      naming.DatasetName('ds1'), {'data_dir': '/abc'}
-  )
+  assert parse(
+      'ds1', data_dir='/abc') == (naming.DatasetName('ds1'), {
+          'data_dir': '/abc'
+      })
 
   with pytest.raises(TypeError, match='got multiple values for keyword arg'):
     parse('ds1:1.0.0', version='1.0.0')  # Version defined twice
@@ -230,3 +237,41 @@ def test_naming_sorted():
       naming.DatasetName('aaa:zzz'),
       naming.DatasetName('zzz:aaa'),
   ]
+
+
+def test_filename_info():
+  filename = 'mnist-test.tfrecord-00000-of-00001'
+  assert naming.FilenameInfo.is_valid(filename)
+  file_info = naming.FilenameInfo.from_str(filename)
+  assert str(file_info) == filename
+  assert file_info.dataset_name == 'mnist'
+  assert file_info.split == 'test'
+  assert file_info.filetype_suffix == 'tfrecord'
+  assert file_info.shard_index == 0
+  assert file_info.num_shards == 1
+
+
+@pytest.mark.parametrize(
+    'filename',
+    [
+        'mnist-train.tfrecord-00000-of-00001',
+        'mnist123-test.tfrecord-00032-of-01024',
+        'mni23_st-test.riegeli-00032-of-01024',
+    ],
+)
+def test_filename_info_valid(filename):
+  assert naming.FilenameInfo.is_valid(filename)
+  assert filename == str(naming.FilenameInfo.from_str(filename))
+
+
+@pytest.mark.parametrize(
+    'filename',
+    [
+        'mnist-train.tfrecord-000-of-001',  # Wrong shard number
+        'mni-st-train.tfrecord-00000-of-00001',  # Wrong name
+    ],
+)
+def test_filename_info_invalid(filename):
+  assert not naming.FilenameInfo.is_valid(filename)
+  with pytest.raises(ValueError, match='Filename .* does not follow pattern'):
+    naming.FilenameInfo.from_str(filename)

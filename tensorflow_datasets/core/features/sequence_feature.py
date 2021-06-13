@@ -126,8 +126,7 @@ class Sequence(top_level_feature.TopLevelFeature):
     if self._length is not None and len(sequence_elements) != self._length:
       raise ValueError(
           'Input sequence length do not match the defined one. Got {} != '
-          '{}'.format(len(sequence_elements), self._length)
-      )
+          '{}'.format(len(sequence_elements), self._length))
 
     # Empty sequences return empty arrays
     if not sequence_elements:
@@ -192,8 +191,7 @@ class Sequence(top_level_feature.TopLevelFeature):
   def from_json_content(cls, value: Json) -> 'Sequence':
     return cls(
         feature=feature_lib.FeatureConnector.from_json(value['feature']),
-        length=value['length']
-    )
+        length=value['length'])
 
   def to_json_content(self) -> Json:
     return {
@@ -256,11 +254,11 @@ def transpose_dict_list(dict_list):
           'The length of all elements of one sequence should be the same. '
           'Got {} != {}'.format(length['value'], len(elem)))
     return elem
+
   utils.map_nested(update_length, dict_list, dict_only=True)
 
   # 3. Extract each individual elements
   return [
-      utils.map_nested(
-          lambda elem: elem[i], dict_list, dict_only=True)   # pylint: disable=cell-var-from-loop
+      utils.map_nested(lambda elem: elem[i], dict_list, dict_only=True)  # pylint: disable=cell-var-from-loop
       for i in range(length['value'])  # pytype: disable=wrong-arg-types
   ]

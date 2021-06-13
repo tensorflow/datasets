@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Any, Dict, Iterator, List, Text, Tuple
+from typing import Any, Dict, Iterator, List, Optional, Text, Tuple
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -110,7 +110,7 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(
       self,
-      data_paths: List[Dict[Text, Any]] = None
+      data_paths: Optional[List[Dict[Text, Any]]] = None
   ) -> Iterator[Tuple[Any, Dict[Text, Any]]]:
     """Yields examples."""
     for d in data_paths:

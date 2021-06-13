@@ -71,7 +71,6 @@ def set_availables(new_ds_types: Iterable[DatasetType]) -> None:
 
   Args:
     new_ds_types: New ds types.
-
   """
   _current_available.clear()
   _current_available.update(new_ds_types)

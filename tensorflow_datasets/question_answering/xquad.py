@@ -111,28 +111,25 @@ class Xquad(tfds.core.GeneratorBasedBuilder):
     lang = self.builder_config.language
 
     if lang == "en":
-      filepaths = dl_manager.download_and_extract(
-          {
-              "test": _URL_FORMAT.format(lang=lang),
-          }
-      )
+      filepaths = dl_manager.download_and_extract({
+          "test": _URL_FORMAT.format(lang=lang),
+      })
     else:
-      filepaths = dl_manager.download_and_extract(
-          {
-              "test": _URL_FORMAT.format(lang=lang),
-              "translate-train": _XTREME_SQUAD_URL_FORMAT.format(
-                  split="train", lang=lang),
-              "translate-dev": _XTREME_SQUAD_URL_FORMAT.format(
-                  split="dev", lang=lang),
-              "translate-test": _XTREME_XQUAD_URL_FORMAT.format(lang=lang),
-          }
-      )
+      filepaths = dl_manager.download_and_extract({
+          "test":
+              _URL_FORMAT.format(lang=lang),
+          "translate-train":
+              _XTREME_SQUAD_URL_FORMAT.format(split="train", lang=lang),
+          "translate-dev":
+              _XTREME_SQUAD_URL_FORMAT.format(split="dev", lang=lang),
+          "translate-test":
+              _XTREME_XQUAD_URL_FORMAT.format(lang=lang),
+      })
 
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=split,
-            gen_kwargs={"filepath": path})
-        for split, path in filepaths.items()
+            gen_kwargs={"filepath": path}) for split, path in filepaths.items()
     ]
 
   def _generate_examples(self, filepath):

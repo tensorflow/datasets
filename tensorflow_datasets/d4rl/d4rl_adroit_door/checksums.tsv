@@ -1,0 +1,6 @@
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/door-demos-v0-bc-combined.hdf5	631681308	829cd0cd312ac3b0d2de77fa39ff90be6aff56bfb6a2053db9467cbc18ec9191	door-demos-v0-bc-combined.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/door-v0_demos_clipped.hdf5	3118318	9df6345e28fcec8f44c0af4d6dacc6ef996958b39b568f53df85cf41dd03412b	door-v0_demos_clipped.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/door-v0_expert_clipped.hdf5	535876867	a6e6c29985cac509ba5391dcc15ec08fa1df0907b115c0c65998153d4271989d	door-v0_expert_clipped.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/door-cloned-v1.hdf5	294356136	1f6a60ecc4d2a2e5c02f41dd3412be61bb265a33dcf120ceee9e9682d4fe4d48	door-cloned-v1.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/door-expert-v1.hdf5	536056678	66df4cd4e0a1e0b72ea72653ce088e29ecbfa99bac3cd2b52e64092e9a0aaab4	door-expert-v1.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/door-human-v1.hdf5	3121206	f9691288c3ddf2b4e7b31bdae0d8444b80ba035515495f8a902d60c43ee09370	door-human-v1.hdf5

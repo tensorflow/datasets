@@ -21,8 +21,8 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.object_detection import open_images_challenge2019
 
 _BASE_EXAMPLE_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)),
-    "testing", "test_data", "fake_examples")
+    os.path.dirname(os.path.dirname(__file__)), "testing", "test_data",
+    "fake_examples")
 
 open_images_challenge2019._NUM_CLASSES = 6  # This is only done for testing!
 
@@ -47,14 +47,15 @@ class OpenImagesChallenge2019DetectionTest(testing.DatasetBuilderTestCase):
       "hierarchy":
           "challenge-2019-label500-hierarchy.json",
   }
-  EXAMPLE_DIR = os.path.join(
-      _BASE_EXAMPLE_DIR, "open_images_challenge2019_detection")
+  EXAMPLE_DIR = os.path.join(_BASE_EXAMPLE_DIR,
+                             "open_images_challenge2019_detection")
 
   SPLITS = {  # Expected number of examples on each split.
       "train": 15,
       "test": 2,
       "validation": 3,
   }
+
 
 if __name__ == "__main__":
   testing.test_main()

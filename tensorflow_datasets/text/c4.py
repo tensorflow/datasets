@@ -82,13 +82,21 @@ _BADWORDS_LANGS = [
     "pt", "ru", "sv", "th", "tlh", "tr", "zh"
 ]
 
-
 DEFAULT_CC_VERSION = "2019-18"
 
 OPENWEBTEXT_CC_VERSIONS = (  # August 2018 - July 2019
     "2019-18",  # Original default for single-crawl dataset (April 2019).
-    "2019-30", "2019-26", "2019-22", "2019-13", "2019-09", "2019-04", "2018-51",
-    "2018-47", "2018-43", "2018-39", "2018-34")
+    "2019-30",
+    "2019-26",
+    "2019-22",
+    "2019-13",
+    "2019-09",
+    "2019-04",
+    "2018-51",
+    "2018-47",
+    "2018-43",
+    "2018-39",
+    "2018-34")
 
 ALL_CC_VERSIONS = (  # as of September 23, 2020
     "2013-20", "2013-48", "2014-10", "2014-15", "2014-23", "2014-35", "2014-41",
@@ -101,9 +109,7 @@ ALL_CC_VERSIONS = (  # as of September 23, 2020
     "2018-39", "2018-43", "2018-47", "2018-51", "2019-04", "2019-09", "2019-13",
     "2019-18", "2019-22", "2019-26", "2019-30", "2019-35", "2019-39", "2019-43",
     "2019-47", "2019-51", "2020-05", "2020-10", "2020-16", "2020-24", "2020-29",
-    "2020-34"
-)
-
+    "2020-34")
 
 _KNOWN_CORRUPT_WET_FILES = (  # as of September 23, 2020
     # files that raise EOFError
@@ -135,15 +141,15 @@ _KNOWN_CORRUPT_WET_FILES = (  # as of September 23, 2020
 # "multilingual" config below.
 MC4_LANGUAGES = [
     "af", "am", "ar", "az", "be", "bg", "bg-Latn", "bn", "ca", "ceb", "co",
-    "cs", "cy", "da", "de", "el", "el-Latn", "en", "eo", "es", "et", "eu",
-    "fa", "fi", "fil", "fr", "fy", "ga", "gd", "gl", "gu", "ha", "haw", "hi",
+    "cs", "cy", "da", "de", "el", "el-Latn", "en", "eo", "es", "et", "eu", "fa",
+    "fi", "fil", "fr", "fy", "ga", "gd", "gl", "gu", "ha", "haw", "hi",
     "hi-Latn", "hmn", "ht", "hu", "hy", "id", "ig", "is", "it", "iw", "ja",
-    "ja-Latn", "jv", "ka", "kk", "km", "kn", "ko", "ku", "ky", "la", "lb",
-    "lo", "lt", "lv", "mg", "mi", "mk", "ml", "mn", "mr", "ms", "mt", "my",
-    "ne", "nl", "no", "ny", "pa", "pl", "ps", "pt", "ro", "ru", "ru-Latn",
-    "sd", "si", "sk", "sl", "sm", "sn", "so", "sq", "sr", "st", "su", "sv",
-    "sw", "ta", "te", "tg", "th", "tr", "uk", "ur", "uz", "vi", "xh", "yi",
-    "yo", "zh", "zh-Latn", "zu"
+    "ja-Latn", "jv", "ka", "kk", "km", "kn", "ko", "ku", "ky", "la", "lb", "lo",
+    "lt", "lv", "mg", "mi", "mk", "ml", "mn", "mr", "ms", "mt", "my", "ne",
+    "nl", "no", "ny", "pa", "pl", "ps", "pt", "ro", "ru", "ru-Latn", "sd", "si",
+    "sk", "sl", "sm", "sn", "so", "sq", "sr", "st", "su", "sv", "sw", "ta",
+    "te", "tg", "th", "tr", "uk", "ur", "uz", "vi", "xh", "yi", "yo", "zh",
+    "zh-Latn", "zu"
 ]
 
 
@@ -170,7 +176,7 @@ class C4Config(tfds.core.BuilderConfig):
         use as the raw source text. Set to None to use default.
       clean: bool, whether to heuristically filter out lines and pages
         considered low quality. Note: only expected to work reliably for English
-        pages.
+          pages.
       badwords_filter: bool, whether to filter out pages with badwords.
       paragraph_filter: bool, whether to filter out pages with too few or too
         short paragraphs.
@@ -223,8 +229,7 @@ class C4(tfds.core.BeamBasedBuilder):
           clean=False,
           dedupe=False,
           badwords_filter=False,
-          description=
-          "Disables all cleaning (deduplication, removal based on bad words, "
+          description="Disables all cleaning (deduplication, removal based on bad words, "
           "etc.)"),
       C4Config(
           "realnewslike",
@@ -233,8 +238,7 @@ class C4(tfds.core.BeamBasedBuilder):
           clean=True,
           dedupe=True,
           badwords_filter=True,
-          description=
-          "Filters from the default config to only include content from the "
+          description="Filters from the default config to only include content from the "
           "domains used in the 'RealNews' dataset (Zellers et al., 2019)."),
       C4Config(
           "webtextlike",
@@ -244,8 +248,7 @@ class C4(tfds.core.BeamBasedBuilder):
           clean=True,
           dedupe=True,
           badwords_filter=True,
-          description=
-          "Filters from the default config to only include content from the "
+          description="Filters from the default config to only include content from the "
           "URLs in OpenWebText (https://github.com/jcpeterson/openwebtext)."),
       C4Config(
           "multilingual",
@@ -255,8 +258,7 @@ class C4(tfds.core.BeamBasedBuilder):
           paragraph_filter=True,
           dedupe=True,
           badwords_filter=True,
-          description=
-          "Multilingual C4 (mC4) has 101 languages and is generated from 71 "
+          description="Multilingual C4 (mC4) has 101 languages and is generated from 71 "
           "Common Crawl dumps."),
   ]
 
@@ -273,8 +275,7 @@ class C4(tfds.core.BeamBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
         citation=_CITATION,
-        homepage=
-        "https://github.com/google-research/text-to-text-transfer-transformer#datasets",
+        homepage="https://github.com/google-research/text-to-text-transfer-transformer#datasets",
     )
 
   def _split_generators(self, dl_manager, pipeline):
@@ -286,11 +287,13 @@ class C4(tfds.core.BeamBasedBuilder):
     files_to_download = {}
     files_to_download["wet_path_urls"] = [
         _WET_PATH_URL.format(cc_version=cc_version)
-        for cc_version in cc_versions]
+        for cc_version in cc_versions
+    ]
     if self.builder_config.badwords_filter:
       files_to_download["badwords"] = {
           lang: _BADWORDS_URL.format(lang=lang)
-          for lang in _BADWORDS_LANGS if lang != "en"
+          for lang in _BADWORDS_LANGS
+          if lang != "en"
       }
       # Use older "en" file for reproducibility of the original C4.
       files_to_download["badwords"]["en"] = _EN_BADWORDS_URL
@@ -310,8 +313,8 @@ class C4(tfds.core.BeamBasedBuilder):
 
     file_paths = tf.nest.map_structure(os.fspath, file_paths)
 
-    page_content_pcollection = self._get_page_content(
-        pipeline, file_paths, dl_manager)
+    page_content_pcollection = self._get_page_content(pipeline, file_paths,
+                                                      dl_manager)
 
     def _lang_filter(url_and_page, lang):
       _, page = url_and_page
@@ -333,9 +336,7 @@ class C4(tfds.core.BeamBasedBuilder):
                   split="train",
                   page_content=page_content_pcollection,
                   split_filter_fn=c4_utils.get_hashed_url_filter_fn(
-                      predicate_fn=train_predicate_fn
-                  )
-              ),
+                      predicate_fn=train_predicate_fn)),
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,
@@ -343,9 +344,7 @@ class C4(tfds.core.BeamBasedBuilder):
                   split="validation",
                   page_content=page_content_pcollection,
                   split_filter_fn=c4_utils.get_hashed_url_filter_fn(
-                      predicate_fn=validation_predicate_fn
-                  )
-              ),
+                      predicate_fn=validation_predicate_fn)),
           ),
       ]
 
@@ -358,22 +357,16 @@ class C4(tfds.core.BeamBasedBuilder):
                   split=lang,
                   page_content=page_content_pcollection,
                   split_filter_fn=functools.partial(
-                      _filter, lang=lang,
-                      predicate_fn=train_predicate_fn
-                  ),
-              )
-          ),
+                      _filter, lang=lang, predicate_fn=train_predicate_fn),
+              )),
           tfds.core.SplitGenerator(
               name=f"{lang}-validation",
               gen_kwargs=dict(
                   split=f"{lang}-validation",
                   page_content=page_content_pcollection,
                   split_filter_fn=functools.partial(
-                      _filter, lang=lang,
-                      predicate_fn=validation_predicate_fn
-                  ),
-              )
-          )
+                      _filter, lang=lang, predicate_fn=validation_predicate_fn),
+              ))
       ])
     return splits
 
@@ -410,8 +403,8 @@ class C4(tfds.core.BeamBasedBuilder):
             compression_type=beam.io.filesystem.CompressionTypes.UNCOMPRESSED)
         # Increase parallelism.
         | beam.Reshuffle()
-        | "filter_corrupt_wet_files" >> beam.Filter(
-            lambda p: p not in _KNOWN_CORRUPT_WET_FILES)
+        | "filter_corrupt_wet_files" >>
+        beam.Filter(lambda p: p not in _KNOWN_CORRUPT_WET_FILES)
         | beam.Map(
             download_wet_file,
             dl_dir=os.path.join(dl_manager.download_dir, "c4_wet_files")))
@@ -445,19 +438,17 @@ class C4(tfds.core.BeamBasedBuilder):
     if self.builder_config.webtextlike:
       webtextlike_urls = (
           pipeline
-          | "read_webtextlike_urls" >>
-          beam.io.ReadFromText(
+          | "read_webtextlike_urls" >> beam.io.ReadFromText(
               os.path.join(file_paths["openwebtext_urls_zip"],
                            _OPENWEBTEXT_URLS_FILE_PATTERN))
           | "add_dummy_page" >> beam.Map(lambda x: (x, ""))
           | "normal_webtext_url" >> beam.Map(c4_utils.normalize_url))
-      page_content = (
-          {
-              "text": page_content,
-              "webtextlike_urls": webtextlike_urls
-          }
-          | "group_webtextlike_urls" >> beam.CoGroupByKey()
-          | beam.FlatMap(c4_utils.filter_by_webtextlike))
+      page_content = ({
+          "text": page_content,
+          "webtextlike_urls": webtextlike_urls
+      }
+                      | "group_webtextlike_urls" >> beam.CoGroupByKey()
+                      | beam.FlatMap(c4_utils.filter_by_webtextlike))
 
     if self.builder_config.paragraph_filter:
       page_content |= beam.Filter(c4_utils.paragraph_filter)
@@ -509,6 +500,7 @@ class C4(tfds.core.BeamBasedBuilder):
           "content-length": features["content-length"],
           "timestamp": features["timestamp"]
       }
+
     return (page_content
             | beam.Filter(split_filter_fn)
             | beam.Map(_emit_examples))

@@ -41,9 +41,7 @@ def _output_dir():
 def _generate_data():
   """Generate data examples."""
   wav_file = fake_data_utils.get_random_wav_c1(duration=1, sample=22050)
-  filepath = os.path.join(_output_dir(),
-                          "music_speech",
-                          "speech_wav",
+  filepath = os.path.join(_output_dir(), "music_speech", "speech_wav",
                           "{}.wav".format("test"))
   dirname = os.path.dirname(filepath)
   if not tf.io.gfile.exists(dirname):

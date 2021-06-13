@@ -63,18 +63,15 @@ class Audio(feature.Tensor):
     """
     self._file_format = file_format
     if len(shape) > 2:
-      raise ValueError(
-          'Audio shape should be either (length,) or '
-          f'(length, num_channels), got {shape}.'
-      )
+      raise ValueError('Audio shape should be either (length,) or '
+                       f'(length, num_channels), got {shape}.')
     self._shape = shape
     self._sample_rate = sample_rate
     super().__init__(shape=shape, dtype=dtype)
 
   def _encode_file(self, fobj, file_format):
     audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
-        fobj, format=file_format
-    )
+        fobj, format=file_format)
     np_dtype = np.dtype(self.dtype.as_numpy_dtype)
     raw_samples = np.array(audio_segment.get_array_of_samples())
     raw_samples = raw_samples.astype(np_dtype)
@@ -116,13 +113,9 @@ class Audio(feature.Tensor):
       #   by default)
       rate = 16000
 
-    audio_str = utils.get_base64(
-        lambda buff: _save_wav(buff, ex, rate)
-    )
-    return (
-        f'<audio controls src="data:audio/ogg;base64,{audio_str}" '
-        ' controlsList="nodownload" />'
-    )
+    audio_str = utils.get_base64(lambda buff: _save_wav(buff, ex, rate))
+    return (f'<audio controls src="data:audio/ogg;base64,{audio_str}" '
+            ' controlsList="nodownload" />')
 
   @classmethod
   def from_json_content(cls, value: Json) -> 'Audio':

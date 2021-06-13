@@ -26,12 +26,11 @@ from tensorflow_datasets.core import features as features_lib
 
 tf.enable_v2_behavior()
 
-
 randint = np.random.randint
 
 
-class ImageFeatureTest(
-    testing.FeatureExpectationsTestCase, parameterized.TestCase):
+class ImageFeatureTest(testing.FeatureExpectationsTestCase,
+                       parameterized.TestCase):
 
   @parameterized.parameters(
       (tf.uint8, 3),
@@ -49,14 +48,15 @@ class ImageFeatureTest(
     }[channels]
 
     img_file_path = os.path.join(
-        os.path.dirname(__file__), '../../testing/test_data', filename
-    )
+        os.path.dirname(__file__), '../../testing/test_data', filename)
     with tf.io.gfile.GFile(img_file_path, 'rb') as f:
       img_byte_content = f.read()
-    img_file_expected_content = np.array([  # see tests_data/README.md
-        [[0, 255, 0, 255], [255, 0, 0, 255], [255, 0, 255, 255]],
-        [[0, 0, 255, 255], [255, 255, 0, 255], [126, 127, 128, 255]],
-    ], dtype=np_dtype)[:, :, :channels]  # Truncate (h, w, 4) -> (h, w, c)
+    img_file_expected_content = np.array(
+        [  # see tests_data/README.md
+            [[0, 255, 0, 255], [255, 0, 0, 255], [255, 0, 255, 255]],
+            [[0, 0, 255, 255], [255, 255, 0, 255], [126, 127, 128, 255]],
+        ],
+        dtype=np_dtype)[:, :, :channels]  # Truncate (h, w, 4) -> (h, w, c)
     if dtype == tf.uint16:
       img_file_expected_content *= 257  # Scale int16 images
 
@@ -112,8 +112,7 @@ class ImageFeatureTest(
         test_attributes=dict(
             _encoding_format=None,
             _use_colormap=False,
-        )
-    )
+        ))
 
   def test_image_shaped(self):
 
@@ -143,8 +142,7 @@ class ImageFeatureTest(
         test_attributes=dict(
             _encoding_format='png',
             _use_colormap=True,
-        )
-    )
+        ))
 
 
 if __name__ == '__main__':

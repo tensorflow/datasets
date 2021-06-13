@@ -128,13 +128,17 @@ class CosE(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"files": files["dev"],
-                        "cqa_indexed": cqa_indexed},
+            gen_kwargs={
+                "files": files["dev"],
+                "cqa_indexed": cqa_indexed
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"files": files["train"],
-                        "cqa_indexed": cqa_indexed},
+            gen_kwargs={
+                "files": files["train"],
+                "cqa_indexed": cqa_indexed
+            },
         ),
     ]
 

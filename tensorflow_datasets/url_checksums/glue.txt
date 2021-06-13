@@ -2,11 +2,11 @@ https://bit.ly/2BOtOJ7	222257	0e13510b1bb14436ff7e2ee82338f0efb0133ecf2e73507a69
 https://dl.fbaipublicfiles.com/glue/data/CoLA.zip	376971	f212fcd832b8f7b435fb991f101abf89f96b933ab400603bf198960dfc32cbff	CoLA.zip
 https://dl.fbaipublicfiles.com/glue/data/MNLI.zip	312783507	e7c1d896d26ed6caf700110645df426cc2d8ebf02a5ab743d5a5c68ac1c83633	MNLI.zip
 https://dl.fbaipublicfiles.com/glue/data/QNLIv2.zip	10627589	e634e78627a29adaecd4f955359b22bf5e70f2cbd93b493f2d624138a0c0e5f5	QNLIv2.zip
+https://dl.fbaipublicfiles.com/glue/data/QQP.zip	41696084	40e7c862c04eb26ee04b67fd900e76c45c6ba8e6d8fab4f8f1f8072a1a3fbae0	QQP.zip
 https://dl.fbaipublicfiles.com/glue/data/RTE.zip	697150	6bf86de103ecd335f3441bd43574d23fef87ecc695977a63b82d5efb206556ee	RTE.zip
 https://dl.fbaipublicfiles.com/glue/data/SST-2.zip	7439277	d67e16fb55739c1b32cdce9877596db1c127dc322d93c082281f64057c16deaa	SST-2.zip
 https://dl.fbaipublicfiles.com/glue/data/STS-B.zip	802872	e60a6393de5a8b5b9bac5020a1554b54e3691f9d600b775bd131e613ac179c85	STS-B.zip
 https://dl.fbaipublicfiles.com/glue/data/WNLI.zip	28999	ae0e8e4d16f4d46d4a0a566ec7ecceccfd3fbfaa4a7a4b4e02848c0f2561ac46	WNLI.zip
 https://dl.fbaipublicfiles.com/senteval/senteval_data/msr_paraphrase_test.txt	441275	a04e271090879aaba6423d65b94950c089298587d9c084bf9cd7439bd785f784	msr_paraphrase_test.txt
 https://dl.fbaipublicfiles.com/senteval/senteval_data/msr_paraphrase_train.txt	1047044	60a9b09084528f0673eedee2b69cb941920f0b8cd0eeccefc464a98768457f89	msr_paraphrase_train.txt
-https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FQQP.zip?alt=media&token=700c6acf-160d-4d89-81d1-de4191d02cb5	60534884	67cb8f5fe66c90a0bc1bf5792e3924f63008b064ab7a473736c919d20bb140ad	data_QQP.zip
 https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2Fmrpc_dev_ids.tsv?alt=media&token=ec5c0836-31d5-48f4-b431-7480817f1adc	6222	971d7767d81b997fd9060ade0ec23c4fc31cbb226a55d1bd4a1bac474eb81dc7	data_mrpc_dev_ids.tsv

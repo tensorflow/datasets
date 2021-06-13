@@ -14,22 +14,35 @@
 # limitations under the License.
 
 """TFDS logging module."""
-from typing import Callable, TypeVar
+from typing import Callable, TypeVar, List, Optional
 
+from absl import flags
 from tensorflow_datasets.core.logging import base_logger
 from tensorflow_datasets.core.logging import logging_logger
 
 import wrapt
 
+
 _T = TypeVar('_T')
 
-_REGISTERED_LOGGERS = [
-    logging_logger.LoggingLogger(),
-]
+_registered_loggers: Optional[List[base_logger.Logger]] = None
 
 
+def _check_init_registered_loggers() -> None:
+  """Initializes the registered loggers if they are not set yet."""
+  global _registered_loggers
+  if _registered_loggers is None:
+    _registered_loggers = [
+        logging_logger.LoggingLogger(),
+    ]
 
-def register(logger: base_logger.Logger):
+
+def _get_registered_loggers() -> List[base_logger.Logger]:
+  _check_init_registered_loggers()
+  return _registered_loggers
+
+
+def register(logger: base_logger.Logger) -> None:
   """Register an additional logger within TFDS.
 
   Registered loggers are called on TFDS events, synchronously, from the same
@@ -39,7 +52,9 @@ def register(logger: base_logger.Logger):
   Args:
     logger: the logger to register.
   """
-  _REGISTERED_LOGGERS.append(logger)
+  global _registered_loggers
+  _check_init_registered_loggers()
+  _registered_loggers.append(logger)
 
 
 def as_dataset() -> Callable[[_T], _T]:
@@ -50,7 +65,7 @@ def as_dataset() -> Callable[[_T], _T]:
     config_name = builder.builder_config.name if builder.builder_config else ''
     data_path = builder.data_dir
 
-    for logger in _REGISTERED_LOGGERS:
+    for logger in _get_registered_loggers():
       logger.as_dataset(
           dataset_name=builder.name,
           config_name=config_name,
@@ -64,4 +79,5 @@ def as_dataset() -> Callable[[_T], _T]:
           decoders=kwargs.get('decoders', None))
 
     return function(*args, **kwargs)
+
   return decorator

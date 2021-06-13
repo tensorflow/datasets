@@ -29,9 +29,8 @@ from tensorflow_datasets.core import features
 tf.enable_v2_behavior()
 
 
-class AudioFeatureTest(
-    testing.FeatureExpectationsTestCase, parameterized.TestCase
-):
+class AudioFeatureTest(testing.FeatureExpectationsTestCase,
+                       parameterized.TestCase):
 
   @parameterized.parameters([(1,), (2,), (8,)])
   def test_numpy_array(self, num_channels):
@@ -39,9 +38,7 @@ class AudioFeatureTest(
 
     self.assertFeature(
         feature=features.Audio(
-            sample_rate=1000,
-            shape=_shape_for_channels(num_channels)
-        ),
+            sample_rate=1000, shape=_shape_for_channels(num_channels)),
         shape=_shape_for_channels(num_channels),
         dtype=tf.int64,
         tests=[
@@ -53,16 +50,14 @@ class AudioFeatureTest(
         test_attributes=dict(
             _file_format=None,
             sample_rate=1000,
-        )
-    )
+        ))
 
   @parameterized.parameters([(1,), (2,), (8,)])
   def test_numpy_array_float(self, num_channels):
     np_audio = _create_np_audio(num_channels).astype(np.float32)
     self.assertFeature(
         feature=features.Audio(
-            dtype=tf.float32, shape=_shape_for_channels(num_channels)
-        ),
+            dtype=tf.float32, shape=_shape_for_channels(num_channels)),
         shape=_shape_for_channels(num_channels),
         dtype=tf.float32,
         tests=[
@@ -81,8 +76,7 @@ class AudioFeatureTest(
 
     self.assertFeature(
         feature=features.Audio(
-            file_format='wav', shape=_shape_for_channels(num_channels)
-        ),
+            file_format='wav', shape=_shape_for_channels(num_channels)),
         shape=_shape_for_channels(num_channels),
         dtype=tf.int64,
         tests=[
@@ -95,8 +89,7 @@ class AudioFeatureTest(
                 expected=np_audio,
             ),
         ],
-        test_attributes=dict(_file_format='wav',)
-    )
+        test_attributes=dict(_file_format='wav',))
 
   @parameterized.parameters([(1,), (2,), (8,)])
   def test_file_object(self, num_channels):
@@ -119,8 +112,7 @@ class AudioFeatureTest(
     with GFileWithSeekOnRead(tmp_file, 'rb') as file_obj:
       self.assertFeature(
           feature=features.Audio(
-              file_format='wav', shape=_shape_for_channels(num_channels)
-          ),
+              file_format='wav', shape=_shape_for_channels(num_channels)),
           shape=_shape_for_channels(num_channels),
           dtype=tf.int64,
           tests=[
@@ -146,8 +138,7 @@ def _create_np_audio(num_channels: int) -> np.ndarray:
       -2**10,
       2**10,
       size=_shape_for_channels(num_channels, length=10),
-      dtype=np.int64
-  )
+      dtype=np.int64)
 
 
 def _write_wave_file(np_audio, path):

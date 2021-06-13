@@ -44,10 +44,28 @@ toc:
     title: yes_no
   title: Audio
 - section:
+  - path: /datasets/catalog/d4rl_adroit_door
+    status: nightly
+    title: d4rl_adroit_door
+  - path: /datasets/catalog/d4rl_adroit_hammer
+    status: nightly
+    title: d4rl_adroit_hammer
+  - path: /datasets/catalog/d4rl_adroit_pen
+    status: nightly
+    title: d4rl_adroit_pen
+  - path: /datasets/catalog/d4rl_adroit_relocate
+    status: nightly
+    title: d4rl_adroit_relocate
   - path: /datasets/catalog/d4rl_mujoco_ant
     title: d4rl_mujoco_ant
   - path: /datasets/catalog/d4rl_mujoco_halfcheetah
     title: d4rl_mujoco_halfcheetah
+  - path: /datasets/catalog/d4rl_mujoco_hopper
+    status: nightly
+    title: d4rl_mujoco_hopper
+  - path: /datasets/catalog/d4rl_mujoco_walker2d
+    status: nightly
+    title: d4rl_mujoco_walker2d
   title: D4rl
 - section:
   - path: /datasets/catalog/ogbg_molpcba
@@ -98,6 +116,9 @@ toc:
     title: scene_parse150
   - path: /datasets/catalog/shapes3d
     title: shapes3d
+  - path: /datasets/catalog/symmetric_solids
+    status: nightly
+    title: symmetric_solids
   - path: /datasets/catalog/the300w_lp
     title: the300w_lp
   title: Image
@@ -293,6 +314,23 @@ toc:
   - path: /datasets/catalog/xquad
     title: xquad
   title: Question answering
+- section:
+  - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
+    status: nightly
+    title: rlu_dmlab_explore_object_rewards_few
+  - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_many
+    status: nightly
+    title: rlu_dmlab_explore_object_rewards_many
+  - path: /datasets/catalog/rlu_dmlab_rooms_select_nonmatching_object
+    status: nightly
+    title: rlu_dmlab_rooms_select_nonmatching_object
+  - path: /datasets/catalog/rlu_dmlab_rooms_watermaze
+    status: nightly
+    title: rlu_dmlab_rooms_watermaze
+  - path: /datasets/catalog/rlu_dmlab_seekavoid_arena01
+    status: nightly
+    title: rlu_dmlab_seekavoid_arena01
+  title: Rl unplugged
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
@@ -542,4 +580,7 @@ toc:
 - section:
   - path: /datasets/catalog/gref
     title: gref (manual)
+  - path: /datasets/catalog/ref_coco
+    status: nightly
+    title: ref_coco (manual)
   title: Vision language

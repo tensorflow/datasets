@@ -13,9 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Decoder public API.
-
-"""
+"""Decoder public API."""
 
 from tensorflow_datasets.core.decode.base import Decoder
 from tensorflow_datasets.core.decode.base import make_decoder

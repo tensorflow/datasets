@@ -27,15 +27,13 @@ SRC_BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/'
 
 # Directory where to store processed datasets.
 # If modifying this, should also update `scripts/cli/build.py` `--data_dir`
-DATA_DIR = os.environ.get(
-    'TFDS_DATA_DIR', os.path.join('~', 'tensorflow_datasets')
-)
+DATA_DIR = os.environ.get('TFDS_DATA_DIR',
+                          os.path.join('~', 'tensorflow_datasets'))
 
 # Suffix of files / directories which aren't finished downloading / extracting.
 INCOMPLETE_SUFFIX = '.incomplete'
 
 # Note: GCS constants are defined in `core/utils/gcs_utils.py`
-
 
 _registered_data_dir = set()
 
@@ -61,9 +59,7 @@ def add_data_dir(data_dir):
   _registered_data_dir.add(data_dir)
 
 
-def list_data_dirs(
-    given_data_dir: Optional[str] = None,
-) -> List[str]:
+def list_data_dirs(given_data_dir: Optional[str] = None,) -> List[str]:
   """Return the list of all `data_dir` to look-up.
 
   Args:
@@ -82,9 +78,7 @@ def list_data_dirs(
     return sorted(os.path.expanduser(d) for d in all_data_dirs)
 
 
-def get_default_data_dir(
-    given_data_dir: Optional[str] = None,
-) -> str:
+def get_default_data_dir(given_data_dir: Optional[str] = None,) -> str:
   """Returns the default data_dir."""
   if given_data_dir:
     return os.path.expanduser(given_data_dir)

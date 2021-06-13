@@ -37,6 +37,7 @@ from tensorflow_datasets.image.nyu_depth_v2 import NyuDepthV2
 from tensorflow_datasets.image.s3o4d import S3o4d
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
+from tensorflow_datasets.image.symmetric_solids import SymmetricSolids
 from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image_classification.beans import Beans
 from tensorflow_datasets.image_classification.bigearthnet import Bigearthnet

@@ -23,21 +23,11 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import image_utils
 
 # pylint: disable=bad-whitespace
-SIX_PIXELS = [
-    [[  0, 255,   0],
-     [255,   0,   0],
-     [255,   0, 255]],
-    [[  0,   0, 255],
-     [255, 255,   0],
-     [126, 127, 128]]]
+SIX_PIXELS = [[[0, 255, 0], [255, 0, 0], [255, 0, 255]],
+              [[0, 0, 255], [255, 255, 0], [126, 127, 128]]]
 
-SIX_PIXELS_JPEG = [
-    [[158, 161,  92],
-     [ 76,  79,  10],
-     [180,  57, 181]],
-    [[ 33,  36,   0],
-     [229, 232, 163],
-     [201,  78, 202]]]
+SIX_PIXELS_JPEG = [[[158, 161, 92], [76, 79, 10], [180, 57, 181]],
+                   [[33, 36, 0], [229, 232, 163], [201, 78, 202]]]
 # pylint: enable=bad-whitespace
 
 

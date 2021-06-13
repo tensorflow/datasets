@@ -41,6 +41,11 @@ landing_page:
         {% dynamic endif %}
   - classname: devsite-landing-row-cards
     items:
+    - heading: "Explore datasets with Know Your Data"
+      image_path: /resources/images/kyd-screenshot.jpg
+      buttons:
+      - label: Go to Know Your Data
+        path: https://knowyourdata.withgoogle.com
     - heading: Introducing TensorFlow Datasets
       image_path: /resources/images/tf-logo-card-16x9.png
       path: https://blog.tensorflow.org/2019/02/introducing-tensorflow-datasets.html
@@ -53,8 +58,3 @@ landing_page:
       buttons:
       - label: View on GitHub
         path: https://github.com/tensorflow/datasets
-    - heading: "TensorFlow Datasets (TF Dev Summit '19)"
-      youtube_id: -nTe44WT0ZI
-      buttons:
-      - label: Watch the video
-        path: https://www.youtube.com/watch?v=-nTe44WT0ZI

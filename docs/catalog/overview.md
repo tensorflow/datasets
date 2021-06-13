@@ -49,8 +49,20 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `D4rl`
 
+*   [`d4rl_adroit_door`](d4rl_adroit_door.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`d4rl_adroit_hammer`](d4rl_adroit_hammer.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`d4rl_adroit_pen`](d4rl_adroit_pen.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`d4rl_adroit_relocate`](d4rl_adroit_relocate.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`d4rl_mujoco_ant`](d4rl_mujoco_ant.md)
 *   [`d4rl_mujoco_halfcheetah`](d4rl_mujoco_halfcheetah.md)
+*   [`d4rl_mujoco_hopper`](d4rl_mujoco_hopper.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`d4rl_mujoco_walker2d`](d4rl_mujoco_walker2d.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Graphs`
 
@@ -80,6 +92,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`s3o4d`](s3o4d.md)
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
+*   [`symmetric_solids`](symmetric_solids.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`the300w_lp`](the300w_lp.md)
 
 ### `Image classification`
@@ -183,6 +197,19 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`tydi_qa`](tydi_qa.md)
 *   [`web_questions`](web_questions.md)
 *   [`xquad`](xquad.md)
+
+### `Rl unplugged`
+
+*   [`rlu_dmlab_explore_object_rewards_few`](rlu_dmlab_explore_object_rewards_few.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_dmlab_explore_object_rewards_many`](rlu_dmlab_explore_object_rewards_many.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_dmlab_rooms_select_nonmatching_object`](rlu_dmlab_rooms_select_nonmatching_object.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_dmlab_rooms_watermaze`](rlu_dmlab_rooms_watermaze.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_dmlab_seekavoid_arena01`](rlu_dmlab_seekavoid_arena01.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Structured`
 
@@ -320,5 +347,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Vision language`
 
 *   [`gref`](gref.md)
+*   [`ref_coco`](ref_coco.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 --------------------------------------------------------------------------------

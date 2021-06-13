@@ -29,7 +29,6 @@ ReadWritePath = type_utils.ReadWritePath
 PathLikeCls = Union[Type[ReadOnlyPath], Type[ReadWritePath]]
 T = TypeVar('T')
 
-
 _PATHLIKE_CLS: Tuple[PathLikeCls, ...] = (
     gpath.PosixGPath,
     gpath.WindowsGPath,
@@ -44,9 +43,13 @@ _URI_PREFIXES_TO_CLS: Dict[str, PathLikeCls] = {
 @typing.overload
 def register_pathlike_cls(path_cls_or_uri_prefix: str) -> Callable[[T], T]:
   ...
+
+
 @typing.overload
 def register_pathlike_cls(path_cls_or_uri_prefix: T) -> T:
   ...
+
+
 def register_pathlike_cls(path_cls_or_uri_prefix):
   """Register the class to be forwarded as-is in `as_path`.
 
@@ -76,6 +79,8 @@ def register_pathlike_cls(path_cls_or_uri_prefix):
   else:
     _PATHLIKE_CLS = _PATHLIKE_CLS + (path_cls_or_uri_prefix,)
     return path_cls_or_uri_prefix
+
+
 # pylint: enable=g-wrong-blank-lines
 
 

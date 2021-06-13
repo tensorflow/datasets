@@ -72,13 +72,11 @@ def dummy_register():
 
     # Create the remote index content
     # Note the absence of `"` for the `src_multi_json` as it is parsed as `dict`
-    content = textwrap.dedent(
-        f"""\
+    content = textwrap.dedent(f"""\
         {{"name": "kaggle:dummy_dataset", "source": "{src_single.to_json()}"}}
         {{"name": "kaggle:ds1", "source": "{src_single.to_json()}"}}
         {{"name": "mlds:dummy_dataset", "source": {src_multi_json}}}
-        """
-    )
+        """)
     dummy_path = tmp_path / 'dummy-community-datasets.toml'
     dummy_path.write_text(content)
 
@@ -111,8 +109,7 @@ def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
   with mock.patch.object(
       register_package,
       '_download_and_cache',
-      side_effect=ValueError('Dataset should have been cached already')
-  ):
+      side_effect=ValueError('Dataset should have been cached already')):
     ds_name = utils.DatasetName('kaggle:dummy_dataset')
     builder_cls2 = dummy_register.builder_cls(ds_name)
   assert builder_cls is builder_cls2
@@ -142,8 +139,7 @@ def test_dataset_package():
   pkg = register_package.DatasetPackage(
       name=utils.DatasetName('ns:ds'),
       source=dataset_sources.DatasetSource.from_json(
-          'github://<owner>/<name>/tree/<branch>/my_ds/ds.py',
-      ),
+          'github://<owner>/<name>/tree/<branch>/my_ds/ds.py',),
   )
   assert register_package.DatasetPackage.from_json(pkg.to_json()) == pkg
 

@@ -58,32 +58,32 @@ class DownloadConfig:
   """Configuration for `tfds.core.DatasetBuilder.download_and_prepare`.
 
   Attributes:
-    extract_dir: `str`, directory where extracted files are stored.
-      Defaults to "<download_dir>/extracted".
+    extract_dir: `str`, directory where extracted files are stored. Defaults to
+      "<download_dir>/extracted".
     manual_dir: `str`, read-only directory where manually downloaded/extracted
       data is stored. Defaults to `<download_dir>/manual`.
-    download_mode: `tfds.GenerateMode`, how to deal with downloads or data
-      that already exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will
-      reuse both downloads and data if it already exists.
-    compute_stats: `tfds.download.ComputeStats`, whether to compute
-      statistics over the generated data. Defaults to `AUTO`.
-    max_examples_per_split: `int`, optional max number of examples to write
-      into each split (used for testing).
-      If set to 0, only execute the `_split_generators` (download the
-      original data), but skip `_generator_examples`.
+    download_mode: `tfds.GenerateMode`, how to deal with downloads or data that
+      already exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will reuse
+      both downloads and data if it already exists.
+    compute_stats: `tfds.download.ComputeStats`, whether to compute statistics
+      over the generated data. Defaults to `AUTO`.
+    max_examples_per_split: `int`, optional max number of examples to write into
+      each split (used for testing). If set to 0, only execute the
+      `_split_generators` (download the original data), but skip
+      `_generator_examples`.
     register_checksums: `bool`, defaults to False. If True, checksum of
       downloaded files are recorded.
-    force_checksums_validation: `bool`, defaults to False. If True, raises
-      an error if an URL do not have checksums.
-    beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
-      based on Beam for the generation.
+    force_checksums_validation: `bool`, defaults to False. If True, raises an
+      error if an URL do not have checksums.
+    beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets based
+      on Beam for the generation.
     beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
       datasets based on Beam for the generation.
-    try_download_gcs: `bool`, defaults to True. If True, prepared dataset
-      will be downloaded from GCS, when available. If False, dataset will be
+    try_download_gcs: `bool`, defaults to True. If True, prepared dataset will
+      be downloaded from GCS, when available. If False, dataset will be
       downloaded and prepared from scratch.
-    verify_ssl: `bool`, defaults to True. If True, will verify certificate
-      when downloading dataset.
+    verify_ssl: `bool`, defaults to True. If True, will verify certificate when
+      downloading dataset.
   """
   extract_dir: Optional[utils.PathLike] = None
   manual_dir: Optional[utils.PathLike] = None
@@ -168,19 +168,19 @@ class DownloadManager(object):
       download_dir: Path to directory where downloads are stored.
       extract_dir: Path to directory where artifacts are extracted.
       manual_dir: Path to manually downloaded/extracted data directory.
-      manual_dir_instructions: Human readable instructions on how to
-        prepare contents of the manual_dir for this dataset.
+      manual_dir_instructions: Human readable instructions on how to prepare
+        contents of the manual_dir for this dataset.
       url_infos: Urls info for the checksums.
-      dataset_name: Name of dataset this instance will be used for. If
-        provided, downloads will contain which datasets they were used for.
+      dataset_name: Name of dataset this instance will be used for. If provided,
+        downloads will contain which datasets they were used for.
       force_download: If True, always [re]download.
       force_extraction: If True, always [re]extract.
-      force_checksums_validation: If True, raises an error if an URL do not
-        have checksums.
-      register_checksums: If True, dl checksums aren't
-        checked, but stored into file.
-      register_checksums_path: Path were to save checksums. Should be set
-        if register_checksums is True.
+      force_checksums_validation: If True, raises an error if an URL do not have
+        checksums.
+      register_checksums: If True, dl checksums aren't checked, but stored into
+        file.
+      register_checksums_path: Path were to save checksums. Should be set if
+        register_checksums is True.
       verify_ssl: `bool`, defaults to True. If True, will verify certificate
         when downloading dataset.
 
@@ -295,8 +295,9 @@ class DownloadManager(object):
   @utils.build_synchronize_decorator()
   @utils.memoize()
   def _download(
-      self, resource: Union[str, resource_lib.Resource]
-  ) -> promise.Promise[ReadOnlyPath]:
+      self,
+      resource: Union[str,
+                      resource_lib.Resource]) -> promise.Promise[ReadOnlyPath]:
     """Download resource, returns Promise->path to downloaded file.
 
     This function:
@@ -327,11 +328,9 @@ class DownloadManager(object):
         expected_url_info=expected_url_info,
     )
     url_path = self._get_dl_path(
-        url, sha256=hashlib.sha256(url.encode('utf-8')).hexdigest()
-    )
+        url, sha256=hashlib.sha256(url.encode('utf-8')).hexdigest())
     checksum_path = self._get_dl_path(
-        url, sha256=expected_url_info.checksum
-    ) if expected_url_info else None
+        url, sha256=expected_url_info.checksum) if expected_url_info else None
 
     # Get the cached path and url_info (if they exists)
     dl_result = _get_cached_path(
@@ -342,8 +341,7 @@ class DownloadManager(object):
     )
     if dl_result.path and not self._force_download:  # Download was cached
       logging.info(
-          f'Skipping download of {url}: File cached in {dl_result.path}'
-      )
+          f'Skipping download of {url}: File cached in {dl_result.path}')
       future = promise.Promise.resolve(dl_result)
     else:
       # Download in an empty tmp directory (to avoid name collisions)
@@ -353,8 +351,7 @@ class DownloadManager(object):
       download_tmp_dir.mkdir()
       logging.info(f'Downloading {url} into {download_tmp_dir}...')
       future = self._downloader.download(
-          url, download_tmp_dir, verify=self._verify_ssl
-      )
+          url, download_tmp_dir, verify=self._verify_ssl)
 
     # Post-process the result
     return future.then(lambda dl_result: self._register_or_validate_checksums(  # pylint: disable=g-long-lambda
@@ -390,8 +387,7 @@ class DownloadManager(object):
       if not computed_url_info:
         raise ValueError(
             f'Cannot register checksums for {url}: no computed chechsum. '
-            '--register_checksums with manually downloaded data not supported.'
-        )
+            '--register_checksums with manually downloaded data not supported.')
       # Note:
       # * We save even if `expected_url_info == computed_url_info` as
       #   `expected_url_info` might have been loaded from another dataset.
@@ -495,9 +491,11 @@ class DownloadManager(object):
     """Download-extract `Resource` or url, returns Promise->path."""
     if isinstance(resource, str):
       resource = resource_lib.Resource(url=resource)
+
     def callback(path):
       resource.path = path
       return self._extract(resource)
+
     return self._download(resource).then(callback)
 
   def download_checksums(self, checksums_url):
@@ -512,14 +510,14 @@ class DownloadManager(object):
     Read the installation guide at https://www.kaggle.com/docs/api.
 
     Args:
-      competition_or_dataset: Dataset name (`zillow/zecon`) or
-        competition name (`titanic`)
+      competition_or_dataset: Dataset name (`zillow/zecon`) or competition name
+        (`titanic`)
 
     Returns:
       The path to the downloaded files.
     """
-    return kaggle.download_kaggle_data(
-        competition_or_dataset, self._download_dir)
+    return kaggle.download_kaggle_data(competition_or_dataset,
+                                       self._download_dir)
 
   @typing.overload
   def download(self, url_or_urls: Url) -> ReadOnlyPath:
@@ -549,7 +547,8 @@ class DownloadManager(object):
       return _map_promise(self._download, url_or_urls)
 
   def iter_archive(
-      self, resource: ExtractPath,
+      self,
+      resource: ExtractPath,
   ) -> Iterator[Tuple[str, typing.BinaryIO]]:
     """Returns iterator over files within archive.
 
@@ -571,9 +570,8 @@ class DownloadManager(object):
     ...
 
   @typing.overload
-  def extract(
-      self, path_or_paths: Dict[str, ExtractPath]
-  ) -> Dict[str, ReadOnlyPath]:
+  def extract(self,
+              path_or_paths: Dict[str, ExtractPath]) -> Dict[str, ReadOnlyPath]:
     ...
 
   @typing.overload
@@ -584,11 +582,10 @@ class DownloadManager(object):
     """Extract given path(s).
 
     Args:
-      path_or_paths: path or `list`/`dict` of path of file to extract. Each
-        path can be a `str` or `tfds.download.Resource`.
-
-    If not explicitly specified in `Resource`, the extraction method is deduced
-    from downloaded file name.
+      path_or_paths: path or `list`/`dict` of path of file to extract. Each path
+        can be a `str` or `tfds.download.Resource`.  If not explicitly specified
+        in `Resource`, the extraction method is deduced from downloaded file
+        name.
 
     Returns:
       extracted_path(s): `str`, The extracted paths matching the given input
@@ -604,8 +601,7 @@ class DownloadManager(object):
 
   @typing.overload
   def download_and_extract(
-      self, url_or_urls: Dict[str, Url]
-  ) -> Dict[str, ReadOnlyPath]:
+      self, url_or_urls: Dict[str, Url]) -> Dict[str, ReadOnlyPath]:
     ...
 
   @typing.overload
@@ -623,10 +619,9 @@ class DownloadManager(object):
 
     Args:
       url_or_urls: url or `list`/`dict` of urls to download and extract. Each
-        url can be a `str` or `tfds.download.Resource`.
-
-    If not explicitly specified in `Resource`, the extraction method will
-    automatically be deduced from downloaded file name.
+        url can be a `str` or `tfds.download.Resource`.  If not explicitly
+        specified in `Resource`, the extraction method will automatically be
+        deduced from downloaded file name.
 
     Returns:
       extracted_path(s): `str`, extracted paths of given URL(s).
@@ -646,16 +641,13 @@ class DownloadManager(object):
     if not self._manual_dir:
       raise AssertionError('Manual directory not enabled.')
     if not self._manual_dir_instructions:
-      raise ValueError(
-          'To access `dl_manager.manual_dir`, please set '
-          '`MANUAL_DOWNLOAD_INSTRUCTIONS` in your dataset.'
-      )
+      raise ValueError('To access `dl_manager.manual_dir`, please set '
+                       '`MANUAL_DOWNLOAD_INSTRUCTIONS` in your dataset.')
     if not self._manual_dir.exists() or not list(self._manual_dir.iterdir()):
       raise AssertionError(
           f'Manual directory {self._manual_dir} does not exist or is empty. '
           'Create it and download/extract dataset artifacts in there using '
-          f'instructions:\n{self._manual_dir_instructions}'
-      )
+          f'instructions:\n{self._manual_dir_instructions}')
     return self._manual_dir
 
 
@@ -737,17 +729,12 @@ def _validate_checksums(
       computed_url_info = checksums.compute_url_info(path)
     # Checksums have not been registered
     if not expected_url_info:
-      raise ValueError(
-          f'Missing checksums url: {url}, yet '
-          '`force_checksums_validation=True`. '
-          'Did you forgot to register checksums ?'
-      )
+      raise ValueError(f'Missing checksums url: {url}, yet '
+                       '`force_checksums_validation=True`. '
+                       'Did you forgot to register checksums ?')
 
-  if (
-      expected_url_info
-      and computed_url_info
-      and expected_url_info != computed_url_info
-  ):
+  if (expected_url_info and computed_url_info and
+      expected_url_info != computed_url_info):
     msg = (
         f'Artifact {url}, downloaded to {path}, has wrong checksum:\n'
         f'* Expected: {expected_url_info}\n'
@@ -776,4 +763,5 @@ def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
   all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
   res = tf.nest.map_structure(lambda p: p.get(), all_promises)  # Wait promises
+
   return res

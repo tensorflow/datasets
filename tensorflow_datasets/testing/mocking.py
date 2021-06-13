@@ -275,6 +275,20 @@ class RandomFakeGenerator(object):
     self._builder = builder
     self._num_examples = num_examples
 
+  def _generate_random_string_array(self, shape):
+    """Generates an array of random strings."""
+
+    def rand_str():
+      return ''.join(
+          self._rgn.choice(
+              list(' abcdefghij'), size=(self._py_rng.randint(10, 20))))
+
+    if not shape:
+      return rand_str()
+
+    return np.array([rand_str() for _ in range(np.prod(shape, dtype=np.int32))
+                    ]).reshape(shape)
+
   def _generate_random_array(self, feature, tensor_info):
     """Generates a random tensor for a single feature."""
     # TODO(tfds): Could improve the fake generatiion:
@@ -302,10 +316,7 @@ class RandomFakeGenerator(object):
     elif dtype.is_bool:
       return (self._rgn.random_sample(shape) < .5).astype(dtype.as_numpy_dtype)
     elif dtype == tf.string:
-      return ''.join(
-          self._py_rng.choice(' abcdefghij')
-          for _ in range(self._py_rng.randint(10, 20))
-      )
+      return self._generate_random_string_array(shape)
     raise ValueError('Fake generation not supported for {}'.format(dtype))
 
   def _generate_example(self):

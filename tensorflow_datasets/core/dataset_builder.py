@@ -540,10 +540,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         `False`.
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
-        customized feature keys need to be present. See
-        [the
+        customized feature keys need to be present. See [the
           guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
-          for more info.
+            for more info.
       read_config: `tfds.ReadConfig`, Additional options to configure the input
         pipeline (e.g. seed, num parallel reads,...).
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset` will have
@@ -904,29 +903,22 @@ class FileReaderBuilder(DatasetBuilder):
 
   """
 
-  def __init__(
-      self,
-      *,
-      file_format: Union[
-          None, str,
-          file_adapters.FileFormat] = file_adapters.DEFAULT_FILE_FORMAT,
-      **kwargs: Any):
+  def __init__(self,
+               *,
+               file_format: Union[None, str, file_adapters.FileFormat] = None,
+               **kwargs: Any):
     """Initializes an instance of FileReaderBuilder.
 
     Callers must pass arguments as keyword arguments.
 
     Args:
       file_format: EXPERIMENTAL, may change at any time; Format of the record
-        files in which dataset will be read/written to. Defaults to `tfrecord`.
+        files in which dataset will be read/written to. If `None`, defaults to
+        `tfrecord`.
       **kwargs: Arguments passed to `DatasetBuilder`.
     """
     super().__init__(**kwargs)
-    try:
-      self._file_format = file_adapters.FileFormat(file_format)
-    except ValueError:
-      all_values = [f.value for f in file_adapters.FileFormat]
-      raise ValueError(f"{file_format} is not a valid format. "
-                       f"Valid file formats: {all_values}")
+    self.info.set_file_format(file_format)
 
   @utils.memoized_property
   def _example_specs(self):
@@ -935,7 +927,7 @@ class FileReaderBuilder(DatasetBuilder):
   @property
   def _tfrecords_reader(self):
     return tfrecords_reader.Reader(self._data_dir, self._example_specs,
-                                   self._file_format)
+                                   self.info.file_format)
 
   def _as_dataset(
       self,
@@ -944,9 +936,6 @@ class FileReaderBuilder(DatasetBuilder):
       read_config=None,
       shuffle_files=False,
   ) -> tf.data.Dataset:
-    # TODO(alcastano): Disable shuffling during reading
-    if self.info.disable_shuffling:
-      raise NotImplementedError
     decode_fn = functools.partial(
         self.info.features.decode_example, decoders=decoders)
     return self._tfrecords_reader.read(
@@ -956,6 +945,7 @@ class FileReaderBuilder(DatasetBuilder):
         decode_fn=decode_fn,
         read_config=read_config,
         shuffle_files=shuffle_files,
+        disable_shuffling=self.info.disable_shuffling,
     )
 
 
@@ -1111,7 +1101,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
         max_examples_per_split=download_config.max_examples_per_split,
         beam_options=download_config.beam_options,
         beam_runner=download_config.beam_runner,
-        file_format=self._file_format,
+        file_format=self.info.file_format,
     )
     # Wrap the generation inside a context manager.
     # If `beam` is used during generation (when a pipeline gets created),
@@ -1150,7 +1140,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
 
       # Start generating data for all splits
       path_suffix = file_adapters.ADAPTER_FOR_FORMAT[
-          self._file_format].FILE_SUFFIX
+          self.info.file_format].FILE_SUFFIX
 
       split_info_futures = [
           split_builder.submit_split_generation(  # pylint: disable=g-complex-comprehension
@@ -1235,16 +1225,15 @@ def cannonical_version_for_config(
 
   Args:
     instance_or_cls: The instance or class on which get the version
-    config: The config which might contain the version, or None if the
-      dataset do not have config.
+    config: The config which might contain the version, or None if the dataset
+      do not have config.
 
   Returns:
     version: The extracted version.
   """
   if instance_or_cls.BUILDER_CONFIGS and config is None:
     raise ValueError(
-        f"Cannot infer version on {instance_or_cls.name}. Unknown config."
-    )
+        f"Cannot infer version on {instance_or_cls.name}. Unknown config.")
 
   if config and config.version:
     return utils.Version(config.version)
@@ -1254,5 +1243,4 @@ def cannonical_version_for_config(
     raise ValueError(
         f"DatasetBuilder {instance_or_cls.name} does not have a defined "
         "version. Please add a `VERSION = tfds.core.Version('x.y.z')` to the "
-        "class."
-    )
+        "class.")

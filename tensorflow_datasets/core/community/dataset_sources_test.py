@@ -25,10 +25,8 @@ def test_dataset_source():
   uri = 'github://owner/repo/tree/master/.../audio/gtzan/gtzan.py'
   src = dataset_sources.DatasetSource.from_json(uri)
   assert isinstance(src.root_path, github_api.GithubPath)
-  assert (
-      os.fspath(src.root_path)
-      == 'github://owner/repo/tree/master/.../audio/gtzan'
-  )
+  assert (os.fspath(
+      src.root_path) == 'github://owner/repo/tree/master/.../audio/gtzan')
   assert src.filenames == ['gtzan.py']
   src_json = src.to_json()
   assert uri == src_json
@@ -42,10 +40,8 @@ def test_dataset_source_multifiles():
   }
   src = dataset_sources.DatasetSource.from_json(json_input)
   assert isinstance(src.root_path, github_api.GithubPath)
-  assert (
-      os.fspath(src.root_path)
-      == 'github://owner/repo/tree/master/.../audio/gtzan'
-  )
+  assert (os.fspath(
+      src.root_path) == 'github://owner/repo/tree/master/.../audio/gtzan')
   assert src.filenames == ['checksums.tsv', 'gtzan.py']
   src_json = src.to_json()
   assert json_input == src_json

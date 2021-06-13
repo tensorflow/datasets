@@ -48,10 +48,8 @@ class GermanCreditNumeric(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "features":
-                tfds.features.Tensor(shape=(24,), dtype=tf.int32),
-            "label":
-                tfds.features.ClassLabel(names=["Bad", "Good"]),
+            "features": tfds.features.Tensor(shape=(24,), dtype=tf.int32),
+            "label": tfds.features.ClassLabel(names=["Bad", "Good"]),
         }),
         supervised_keys=("features", "label"),
         homepage="https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)",
@@ -67,8 +65,7 @@ class GermanCreditNumeric(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"records": records}),
+            name=tfds.Split.TRAIN, gen_kwargs={"records": records}),
     ]
 
   def _generate_examples(self, records):

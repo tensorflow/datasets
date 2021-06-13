@@ -56,11 +56,9 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(
-                shape=mnist.MNIST_IMAGE_SHAPE)}),
-        homepage=
-        "http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html",
+        features=tfds.features.FeaturesDict(
+            {"image": tfds.features.Image(shape=mnist.MNIST_IMAGE_SHAPE)}),
+        homepage="http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html",
         citation=_CITATION,
     )
 
@@ -77,19 +75,13 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs=dict(
-                data_path=files["train_data"],
-            )),
+            gen_kwargs=dict(data_path=files["train_data"],)),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs=dict(
-                data_path=files["validation_data"],
-            )),
+            gen_kwargs=dict(data_path=files["validation_data"],)),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs=dict(
-                data_path=files["test_data"],
-            )),
+            gen_kwargs=dict(data_path=files["test_data"],)),
     ]
 
   def _generate_examples(self, data_path):
@@ -102,7 +94,8 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
       Generator yielding the next examples
     """
     with tf.io.gfile.GFile(data_path, "rb") as f:
-      images = (np.loadtxt(f, delimiter=" ", dtype=np.uint8)
-                .reshape((-1,) + mnist.MNIST_IMAGE_SHAPE))
+      images = (
+          np.loadtxt(f, delimiter=" ",
+                     dtype=np.uint8).reshape((-1,) + mnist.MNIST_IMAGE_SHAPE))
     for index, image in enumerate(images):
       yield index, {"image": image}

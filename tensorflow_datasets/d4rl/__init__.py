@@ -14,5 +14,11 @@
 # limitations under the License.
 
 """D4RL datasets."""
+from tensorflow_datasets.d4rl.d4rl_adroit_door import D4rlAdroitDoor
+from tensorflow_datasets.d4rl.d4rl_adroit_hammer import D4rlAdroitHammer
+from tensorflow_datasets.d4rl.d4rl_adroit_pen import D4rlAdroitPen
+from tensorflow_datasets.d4rl.d4rl_adroit_relocate import D4rlAdroitRelocate
 from tensorflow_datasets.d4rl.d4rl_mujoco_ant import D4rlMujocoAnt
 from tensorflow_datasets.d4rl.d4rl_mujoco_halfcheetah import D4rlMujocoHalfcheetah
+from tensorflow_datasets.d4rl.d4rl_mujoco_hopper import D4rlMujocoHopper
+from tensorflow_datasets.d4rl.d4rl_mujoco_walker2d import D4rlMujocoWalker2d

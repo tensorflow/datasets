@@ -101,8 +101,7 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(filepath=filepath)),
+            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)),
     ]
 
   def _generate_examples(self, filepath):
@@ -122,8 +121,8 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
       class_array = np.array(h5dataset["latents"]["classes"])
       values_array = np.array(h5dataset["latents"]["values"])
 
-    for i, (image, classes, values) in enumerate(moves.zip(
-        image_array, class_array, values_array)):
+    for i, (image, classes, values) in enumerate(
+        moves.zip(image_array, class_array, values_array)):
       record = dict(
           image=np.expand_dims(image, -1),
           label_shape=classes[1],

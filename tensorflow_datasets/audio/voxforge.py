@@ -53,7 +53,6 @@ _HOMEPAGE = 'http://www.voxforge.org/'
 
 _SAMPLE_RATE = 16000
 
-
 _URLS_LIST_FILE = 'https://storage.googleapis.com/tfds-data/downloads/voxforge/voxforge_urls.txt'
 
 LABELS = ['de', 'en', 'es', 'fr', 'it', 'ru']
@@ -152,10 +151,13 @@ class Voxforge(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'audio': tfds.features.Audio(file_format='wav',
-                                         sample_rate=_SAMPLE_RATE),
-            'label': tfds.features.ClassLabel(names=LABELS),
-            'speaker_id': tf.string
+            'audio':
+                tfds.features.Audio(
+                    file_format='wav', sample_rate=_SAMPLE_RATE),
+            'label':
+                tfds.features.ClassLabel(names=LABELS),
+            'speaker_id':
+                tf.string
         }),
         supervised_keys=('audio', 'label'),
         homepage=_HOMEPAGE,
@@ -189,18 +191,24 @@ class Voxforge(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={'file_names': splits['train'],
-                        'dl_manager': dl_manager},
+            gen_kwargs={
+                'file_names': splits['train'],
+                'dl_manager': dl_manager
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={'file_names': splits['validation'],
-                        'dl_manager': dl_manager},
+            gen_kwargs={
+                'file_names': splits['validation'],
+                'dl_manager': dl_manager
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={'file_names': splits['test'],
-                        'dl_manager': dl_manager},
+            gen_kwargs={
+                'file_names': splits['test'],
+                'dl_manager': dl_manager
+            },
         ),
     ]
 
@@ -228,7 +236,4 @@ def _generate_examples(fname, dl_manager):
     if sample_rate != _SAMPLE_RATE:
       raise ValueError(
           f'Data sample rate was {sample_rate}, but must be {_SAMPLE_RATE}')
-    yield key, {
-        'audio': samples,
-        'label': label,
-        'speaker_id': speaker_id}
+    yield key, {'audio': samples, 'label': label, 'speaker_id': speaker_id}

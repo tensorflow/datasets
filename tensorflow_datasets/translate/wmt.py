@@ -49,7 +49,6 @@ builder = tfds.builder("wmt_translate", config=config)
 
 """
 
-
 CWMT_SUBSET_NAMES = [
     "casia2015", "casict2011", "casict2015", "datum2015", "datum2017", "neu2017"
 ]
@@ -94,6 +93,7 @@ class SubDataset(object):
     """Injects languages into (potentially) template strings."""
     if src not in self.sources:
       raise ValueError("Invalid source for '{0}': {1}".format(self.name, src))
+
     def _format_string(s):
       if "{0}" in s and "{1}" and "{src}" in s:
         return s.format(*sorted([src, self.target]), src=src)
@@ -103,6 +103,7 @@ class SubDataset(object):
         return s.format(src=src)
       else:
         return s
+
     return [_format_string(s) for s in strings]
 
   def get_url(self, src):
@@ -120,7 +121,7 @@ _TRAIN_SUBSETS = [
     # pylint:disable=line-too-long
     SubDataset(
         name="commoncrawl",
-        target="en",   # fr-de pair in commoncrawl_frde
+        target="en",  # fr-de pair in commoncrawl_frde
         sources={"cs", "de", "es", "fr", "ru"},
         url="http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz",
         path=("commoncrawl.{src}-en.{src}", "commoncrawl.{src}-en.en")),
@@ -128,8 +129,10 @@ _TRAIN_SUBSETS = [
         name="commoncrawl_frde",
         target="de",
         sources={"fr"},
-        url=("http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.fr.gz",
-             "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.de.gz"),
+        url=(
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.fr.gz",
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.de.gz"
+        ),
         path=("", "")),
     SubDataset(
         name="czeng_10",
@@ -184,8 +187,10 @@ _TRAIN_SUBSETS = [
         name="europarl_v7_frde",
         target="de",
         sources={"fr"},
-        url=("http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.fr.gz",
-             "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.de.gz"),
+        url=(
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.fr.gz",
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.de.gz"
+        ),
         path=("", "")),
     SubDataset(
         name="europarl_v8_18",
@@ -317,8 +322,10 @@ _TRAIN_SUBSETS = [
         name="paracrawl_v3_frde",
         target="de",
         sources={"fr"},
-        url=("http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.de.gz",
-             "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.fr.gz"),
+        url=(
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.de.gz",
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.fr.gz"
+        ),
         path=("", "")),
     SubDataset(
         name="rapid_2016",
@@ -468,8 +475,7 @@ _DEV_SUBSETS = [
         target="en",
         sources={"cs", "de", "es", "fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newssyscomb2009.{src}",
-              "dev/newssyscomb2009.en")),
+        path=("dev/newssyscomb2009.{src}", "dev/newssyscomb2009.en")),
     SubDataset(
         name="newstest2008",
         target="en",
@@ -571,8 +577,7 @@ _CZENG17_FILTER = SubDataset(
     target="en",
     sources={"cs"},
     url="http://ufal.mff.cuni.cz/czeng/download.php?f=convert_czeng16_to_17.pl.zip",
-    path="convert_czeng16_to_17.pl"
-)
+    path="convert_czeng16_to_17.pl")
 
 
 class WmtConfig(tfds.core.BuilderConfig):
@@ -621,12 +626,11 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   """
 
   def __init__(self, *args, **kwargs):
-    if type(self) == WmtTranslate and "config" not in kwargs:   # pylint: disable=unidiomatic-typecheck
+    if type(self) == WmtTranslate and "config" not in kwargs:  # pylint: disable=unidiomatic-typecheck
       raise ValueError(
           "The raw `wmt_translate` can only be instantiated with the config "
           "kwargs. You may want to use one of the `wmtYY_translate` "
-          "implementation instead to get the WMT dataset for a specific year."
-      )
+          "implementation instead to get the WMT dataset for a specific year.")
     super(WmtTranslate, self).__init__(*args, **kwargs)
 
   @property
@@ -658,8 +662,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair,
-        ),
+            languages=self.builder_config.language_pair,),
         supervised_keys=(src, target),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation,
@@ -710,9 +713,10 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=split,
-            gen_kwargs={"split_subsets": split_subsets,
-                        "extraction_map": extraction_map})
-        for split, split_subsets in self.subsets.items()
+            gen_kwargs={
+                "split_subsets": split_subsets,
+                "extraction_map": extraction_map
+            }) for split, split_subsets in self.subsets.items()
     ]
 
   def _generate_examples(self, split_subsets, extraction_map):
@@ -723,8 +727,10 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       rel_paths = ds.get_path(source)
       if len(extract_dirs) == 1:
         extract_dirs = extract_dirs * len(rel_paths)
-      return [os.path.join(ex_dir, rel_path) if rel_path else ex_dir
-              for ex_dir, rel_path in zip(extract_dirs, rel_paths)]
+      return [
+          os.path.join(ex_dir, rel_path) if rel_path else ex_dir
+          for ex_dir, rel_path in zip(extract_dirs, rel_paths)
+      ]
 
     for ss_name in split_subsets:
       logging.info("Generating examples from: %s", ss_name)
@@ -778,6 +784,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
 
 def _parse_parallel_sentences(f1, f2):
   """Returns examples from parallel SGML or text files, which may be gzipped."""
+
   def _parse_text(path):
     """Returns the sentences from a single text file, which may be gzipped."""
     split_path = path.split(".")
@@ -820,23 +827,20 @@ def _parse_parallel_sentences(f1, f2):
 
   assert f1_files and f2_files, "No matching files found: %s, %s." % (f1, f2)
   assert len(f1_files) == len(f2_files), (
-      "Number of files do not match: %d vs %d for %s vs %s." % (
-          len(f1_files), len(f2_files), f1, f2))
+      "Number of files do not match: %d vs %d for %s vs %s." %
+      (len(f1_files), len(f2_files), f1, f2))
 
   for f_id, (f1_i, f2_i) in enumerate(zip(sorted(f1_files), sorted(f2_files))):
     l1_sentences, l1 = parse_file(f1_i)
     l2_sentences, l2 = parse_file(f2_i)
 
     assert len(l1_sentences) == len(l2_sentences), (
-        "Sizes do not match: %d vs %d for %s vs %s." % (
-            len(l1_sentences), len(l2_sentences), f1_i, f2_i))
+        "Sizes do not match: %d vs %d for %s vs %s." %
+        (len(l1_sentences), len(l2_sentences), f1_i, f2_i))
 
     for line_id, (s1, s2) in enumerate(zip(l1_sentences, l2_sentences)):
       key = "{}/{}".format(f_id, line_id)
-      yield key, {
-          l1: s1,
-          l2: s2
-      }
+      yield key, {l1: s1, l2: s2}
 
 
 def _parse_frde_bitext(fr_path, de_path):
@@ -845,17 +849,15 @@ def _parse_frde_bitext(fr_path, de_path):
   with tf.io.gfile.GFile(de_path) as f:
     de_sentences = f.read().split("\n")
   assert len(fr_sentences) == len(de_sentences), (
-      "Sizes do not match: %d vs %d for %s vs %s." % (
-          len(fr_sentences), len(de_sentences), fr_path, de_path))
+      "Sizes do not match: %d vs %d for %s vs %s." %
+      (len(fr_sentences), len(de_sentences), fr_path, de_path))
   for line_id, (s1, s2) in enumerate(zip(fr_sentences, de_sentences)):
-    yield line_id, {
-        "fr": s1,
-        "de": s2
-    }
+    yield line_id, {"fr": s1, "de": s2}
 
 
 def _parse_tmx(path):
   """Generates examples from TMX file."""
+
   def _get_tuv_lang(tuv):
     for k, v in tuv.items():
       if k.endswith("}lang"):
@@ -876,8 +878,8 @@ def _parse_tmx(path):
     for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):  # pytype: disable=wrong-arg-types
       if elem.tag == "tu":
         yield line_id, {
-            _get_tuv_lang(tuv):
-                _get_tuv_seg(tuv) for tuv in elem.iterfind("tuv")
+            _get_tuv_lang(tuv): _get_tuv_seg(tuv)
+            for tuv in elem.iterfind("tuv")
         }
         elem.clear()
 
@@ -894,15 +896,11 @@ def _parse_tsv(path, language_pair=None):
     for j, line in enumerate(f):
       cols = line.split("\t")
       if len(cols) != 2:
-        logging.warning(
-            "Skipping line %d in TSV (%s) with %d != 2 columns.",
-            j, path, len(cols))
+        logging.warning("Skipping line %d in TSV (%s) with %d != 2 columns.", j,
+                        path, len(cols))
         continue
       s1, s2 = cols
-      yield j, {
-          l1: s1.strip(),
-          l2: s2.strip()
-      }
+      yield j, {l1: s1.strip(), l2: s2.strip()}
 
 
 def _parse_wikiheadlines(path):
@@ -913,10 +911,7 @@ def _parse_wikiheadlines(path):
   with tf.io.gfile.GFile(path) as f:
     for line_id, line in enumerate(f):
       s1, s2 = line.split("|||")
-      yield line_id, {
-          l1: s1.strip(),
-          l2: s2.strip()
-      }
+      yield line_id, {l1: s1.strip(), l2: s2.strip()}
 
 
 def _parse_czeng(*paths, **kwargs):
@@ -927,9 +922,8 @@ def _parse_czeng(*paths, **kwargs):
     with tf.io.gfile.GFile(filter_path) as f:
       bad_blocks = set(
           re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split())  # pytype: disable=attribute-error
-    logging.info(
-        "Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
-        len(bad_blocks))
+    logging.info("Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
+                 len(bad_blocks))
 
   for path in paths:
     for gz_path in tf.io.gfile.glob(path):
@@ -958,7 +952,4 @@ def _parse_hindencorp(path):
       if len(split_line) != 5:
         logging.warning("Skipping invalid HindEnCorp line: %s", line)
         continue
-      yield line_id, {
-          "en": split_line[3].strip(),
-          "hi": split_line[4].strip()
-      }
+      yield line_id, {"en": split_line[3].strip(), "hi": split_line[4].strip()}

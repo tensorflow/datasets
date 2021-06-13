@@ -135,8 +135,8 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
     """
     dat_arr, cat_arr, info_arr = _load_chunk(dat_path, cat_path, info_path)
 
-    for i, (image, category, info_vec) in enumerate(moves.zip(
-        dat_arr, cat_arr, info_arr)):
+    for i, (image, category,
+            info_vec) in enumerate(moves.zip(dat_arr, cat_arr, info_arr)):
       record = {
           "image": image[0],
           "image2": image[1],

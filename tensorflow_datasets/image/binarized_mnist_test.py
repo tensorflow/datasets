@@ -18,7 +18,6 @@
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import binarized_mnist
 
-
 # testing/binarized_mnist.py generates fake input data
 
 
@@ -34,6 +33,7 @@ class MNISTTest(testing.DatasetBuilderTestCase):
       "validation_data": binarized_mnist._VALID_DATA_FILENAME,
       "test_data": binarized_mnist._TEST_DATA_FILENAME,
   }
+
 
 if __name__ == "__main__":
   testing.test_main()

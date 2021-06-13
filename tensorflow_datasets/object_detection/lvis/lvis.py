@@ -162,8 +162,9 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
           'image': image,
           'image/id': image_info['id'],
           'neg_category_ids': [i - 1 for i in neg_category_ids],
-          'not_exhaustive_category_ids':
-              [i - 1 for i in not_exhaustive_category_ids],
+          'not_exhaustive_category_ids': [
+              i - 1 for i in not_exhaustive_category_ids
+          ],
           'objects': [],
       }
       for inst in instances:
@@ -205,8 +206,9 @@ def _build_bbox(image_info, x, y, width, height):
 def _build_segmentation_mask(image_info, seg):
   cv2 = tfds.core.lazy_imports.cv2
   mask = np.zeros((image_info['height'], image_info['width']), np.uint8)
-  assert all(len(poly) % 2 == 0 and len(poly) >= 6 for poly in seg), \
-      f'Annotation contains an invalid polygon with < 3 points: {seg}'
+  error_msg = f'Annotation contains an invalid polygon with < 3 points: {seg}'
+  assert all(len(poly) % 2 == 0 and len(poly) >= 6 for poly in seg), error_msg
+
   for poly in seg:
     poly = np.asarray(poly, np.int32).reshape((1, -1, 2))
     cv2.fillPoly(mask, poly, 255)

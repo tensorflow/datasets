@@ -20,7 +20,6 @@ import json
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _DS_PATH = 'https://www.microsoft.com/en-us/research/uploads/prod/2016/02//dolphin-number_word_std.zip'
 
 _DESCRIPTION = """
@@ -45,11 +44,9 @@ class DolphinNumberWord(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('0.0.2')
   RELEASE_NOTES = {
-      '0.0.1':
-          'Initial release.',
-      '0.0.2':
-          'RaggedTensor fix. Equations and Sources represented as a single'
-          'string with components delimited by spaces',
+      '0.0.1': 'Initial release.',
+      '0.0.2': 'RaggedTensor fix. Equations and Sources represented as a single'
+               'string with components delimited by spaces',
       '0.0.3':
           'Reintroduced logic to handle edge-case involving examples without '
           'sources.'

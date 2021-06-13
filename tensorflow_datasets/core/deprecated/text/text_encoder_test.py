@@ -75,8 +75,7 @@ class ByteTextEncoderTest(parameterized.TestCase, testing.TestCase):
     text_additional = '%s %s%s%s' % (additional_tokens[0], ZH_HELLO,
                                      additional_tokens[1], additional_tokens[2])
     expected_ids = [1, 32 + 1 + len(additional_tokens)] + hello_ids + [2, 3]
-    self.assertEqual(expected_ids,
-                     encoder.encode(text_additional))
+    self.assertEqual(expected_ids, encoder.encode(text_additional))
     self.assertEqual(text_additional, encoder.decode(expected_ids))
     self.assertEqual(text_encoder.NUM_BYTES + 1 + len(additional_tokens),
                      encoder.vocab_size)
@@ -101,17 +100,14 @@ class ByteTextEncoderTest(parameterized.TestCase, testing.TestCase):
 class TokenTextEncoderTest(testing.TestCase):
 
   def test_encode_decode(self):
-    encoder = text_encoder.TokenTextEncoder(
-        vocab_list=['hi', 'bye', ZH_HELLO])
+    encoder = text_encoder.TokenTextEncoder(vocab_list=['hi', 'bye', ZH_HELLO])
     ids = [i + 1 for i in [0, 1, 2, 0]]
     self.assertEqual(ids, encoder.encode('hi  bye %s hi' % ZH_HELLO))
     self.assertEqual('hi bye %shi' % ZH_HELLO, encoder.decode(ids))
 
   def test_oov(self):
     encoder = text_encoder.TokenTextEncoder(
-        vocab_list=['hi', 'bye', ZH_HELLO],
-        oov_buckets=1,
-        oov_token='UNK')
+        vocab_list=['hi', 'bye', ZH_HELLO], oov_buckets=1, oov_token='UNK')
     ids = [i + 1 for i in [0, 3, 3, 1]]
     self.assertEqual(ids, encoder.encode('hi boo foo bye'))
     self.assertEqual('hi UNK UNK bye', encoder.decode(ids))
@@ -119,9 +115,7 @@ class TokenTextEncoderTest(testing.TestCase):
 
   def test_multiple_oov(self):
     encoder = text_encoder.TokenTextEncoder(
-        vocab_list=['hi', 'bye', ZH_HELLO],
-        oov_buckets=2,
-        oov_token='UNK')
+        vocab_list=['hi', 'bye', ZH_HELLO], oov_buckets=2, oov_token='UNK')
     encoded = encoder.encode('hi boo zoo too foo bye')
     self.assertEqual(1, encoded[0])
     self.assertEqual(2, encoded[-1])
@@ -222,20 +216,20 @@ class TokenizeTest(parameterized.TestCase, testing.TestCase):
 
   def test_default(self):
     text = 'hi<<>><<>foo!^* bar &&  bye (%s hi)' % ZH_HELLO
-    self.assertEqual(['hi', 'foo', 'bar', 'bye', ZH_HELLO.strip(), 'hi'],
+    self.assertEqual(['hi', 'foo', 'bar', 'bye',
+                      ZH_HELLO.strip(), 'hi'],
                      text_encoder.Tokenizer().tokenize(text))
 
   def test_with_nonalphanum(self):
     text = 'hi world<<>><<>foo!^* bar &&  bye (%s hi)' % ZH_HELLO
     tokens = [
         'hi', ' ', 'world', '<<>><<>', 'foo', '!^* ', 'bar', ' &&  ', 'bye',
-        ' (', ZH_HELLO.strip(), '  ', 'hi', ')'
+        ' (',
+        ZH_HELLO.strip(), '  ', 'hi', ')'
     ]
     tokenizer = text_encoder.Tokenizer(alphanum_only=False)
-    self.assertEqual(
-        tokens, tokenizer.tokenize(text))
-    self.assertEqual(
-        text, tokenizer.join(tokenizer.tokenize(text)))
+    self.assertEqual(tokens, tokenizer.tokenize(text))
+    self.assertEqual(text, tokenizer.join(tokenizer.tokenize(text)))
 
   @parameterized.parameters(
       # Single Space at at beginning
@@ -259,20 +253,23 @@ class TokenizeTest(parameterized.TestCase, testing.TestCase):
 
   def test_reserved_tokens(self):
     text = 'hello worldbar bar foozoo zoo FOO<EOS>'
-    tokens = ['hello', ' ', 'world', 'bar', ' ', 'bar', ' ', 'foozoo',
-              ' ', 'zoo', ' ', 'FOO', '<EOS>']
-    tokenizer = text_encoder.Tokenizer(alphanum_only=False,
-                                       reserved_tokens=['<EOS>', 'FOO', 'bar'])
+    tokens = [
+        'hello', ' ', 'world', 'bar', ' ', 'bar', ' ', 'foozoo', ' ', 'zoo',
+        ' ', 'FOO', '<EOS>'
+    ]
+    tokenizer = text_encoder.Tokenizer(
+        alphanum_only=False, reserved_tokens=['<EOS>', 'FOO', 'bar'])
     self.assertEqual(tokens, tokenizer.tokenize(text))
     self.assertEqual(text, tokenizer.join(tokenizer.tokenize(text)))
 
   def test_reserved_tokens_with_regex_chars(self):
     text = r'hello worldba\)r bar foozoo zoo FOO|<EOS>'
-    tokens = ['hello', ' ', 'world', r'ba\)r', ' ', 'bar', ' ', 'foozoo',
-              ' ', 'zoo', ' ', 'FOO|', '<EOS>']
+    tokens = [
+        'hello', ' ', 'world', r'ba\)r', ' ', 'bar', ' ', 'foozoo', ' ', 'zoo',
+        ' ', 'FOO|', '<EOS>'
+    ]
     tokenizer = text_encoder.Tokenizer(
-        alphanum_only=False,
-        reserved_tokens=['<EOS>', 'FOO|', r'ba\)r'])
+        alphanum_only=False, reserved_tokens=['<EOS>', 'FOO|', r'ba\)r'])
     self.assertEqual(tokens, tokenizer.tokenize(text))
     self.assertEqual(text, tokenizer.join(tokenizer.tokenize(text)))
 

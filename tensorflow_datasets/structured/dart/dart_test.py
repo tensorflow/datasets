@@ -98,8 +98,7 @@ class DartTest(tfds.testing.DatasetBuilderTestCase):
     dart_dataset = dart.Dart()
     with mock.patch.object(
         json, 'load',
-        return_value=json.loads(json_str)), mock.patch.object(
-            tf, 'io'):
+        return_value=json.loads(json_str)), mock.patch.object(tf, 'io'):
       for i, (_, example) in enumerate(dart_dataset._generate_examples('')):
         self.assertCountEqual(example, expected_examples[i])
 

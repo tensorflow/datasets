@@ -74,29 +74,34 @@ class ExtractorTest(testing.TestCase):
       self.assertEqual(_read(path), content, 'File %s has bad content.' % path)
 
   def test_zip(self):
-    self._test_extract(
-        ZIP, 'arch1.zip',
-        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_extract(ZIP, 'arch1.zip', {
+        '6pixels.png': self.f1_content,
+        'foo.csv': self.f2_content
+    })
 
   def test_tar(self):
-    self._test_extract(
-        TAR, 'arch1.tar',
-        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_extract(TAR, 'arch1.tar', {
+        '6pixels.png': self.f1_content,
+        'foo.csv': self.f2_content
+    })
 
   def test_targz(self):
-    self._test_extract(
-        TAR_GZ, 'arch1.tar.gz',
-        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_extract(TAR_GZ, 'arch1.tar.gz', {
+        '6pixels.png': self.f1_content,
+        'foo.csv': self.f2_content
+    })
 
   def test_tar_stream(self):
-    self._test_extract(
-        TAR_STREAM, 'arch1.tar',
-        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_extract(TAR_STREAM, 'arch1.tar', {
+        '6pixels.png': self.f1_content,
+        'foo.csv': self.f2_content
+    })
 
   def test_targz_stream(self):
-    self._test_extract(
-        TAR_GZ_STREAM, 'arch1.tar.gz',
-        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+    self._test_extract(TAR_GZ_STREAM, 'arch1.tar.gz', {
+        '6pixels.png': self.f1_content,
+        'foo.csv': self.f2_content
+    })
 
   def test_gzip(self):
     from_path = os.path.join(self.test_data, 'archives', 'arch1.tar.gz')
@@ -125,8 +130,8 @@ class ExtractorTest(testing.TestCase):
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
     promise = self.extractor.extract(from_path, ZIP, self.to_path)
     expected_msg = 'File is not a zip file'
-    with self.assertRaisesWithPredicateMatch(
-        extractor.ExtractError, expected_msg):
+    with self.assertRaisesWithPredicateMatch(extractor.ExtractError,
+                                             expected_msg):
       promise.get()
 
 

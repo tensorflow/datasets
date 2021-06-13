@@ -19,6 +19,7 @@ import abc
 import collections
 import functools
 import html
+import importlib
 import json
 import os
 from typing import Dict, Type, TypeVar
@@ -173,18 +174,31 @@ class FeatureConnector(object):
     ```
 
     Args:
-      value: `dict(type=, content=)` containing the feature to restore.
-        Match dict returned by `to_json`.
+      value: `dict(type=, content=)` containing the feature to restore. Match
+        dict returned by `to_json`.
 
     Returns:
       The reconstructed FeatureConnector.
     """
-    subclass = cls._registered_features.get(value['type'])
+    feature_qualname = value['type']  # my_project.xyz.MyFeature
+    err_msg = f'Unrecognized FeatureConnector type: {feature_qualname}.\n'
+
+    # Dynamically import custom feature-connectors
+    if feature_qualname not in cls._registered_features:
+      # Split `my_project.xyz.MyFeature` -> (`my_project.xyz`, `MyFeature`)
+      module_name, _ = feature_qualname.rsplit('.', maxsplit=1)  # pytype: disable=attribute-error
+      try:
+        # Import to register the FeatureConnector
+        importlib.import_module(module_name)
+      except ImportError:
+        raise ValueError(
+            f'{err_msg}Could not import {module_name}. You might have to '
+            'install additional dependencies.')
+
+    subclass = cls._registered_features.get(feature_qualname)
     if subclass is None:
-      raise ValueError(
-          f'Unrecognized FeatureConnector type: {value["type"]}\n'
-          f'Supported: {list(cls._registered_features)}'
-      )
+      raise ValueError(f'{err_msg}Supported: {list(cls._registered_features)}')
+
     return subclass.from_json_content(value['content'])
 
   def to_json(self) -> Json:
@@ -222,7 +236,8 @@ class FeatureConnector(object):
                 }
             },
             "target": {
-                "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "type":
+                "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
                 "num_classes": 10
             }
         }
@@ -415,8 +430,8 @@ class FeatureConnector(object):
     overwrite this method to apply a custom batch decoding.
 
     Args:
-      tfexample_data: Same `tf.Tensor` inputs as `decode_example`, but with
-        and additional first dimension for the sequence length.
+      tfexample_data: Same `tf.Tensor` inputs as `decode_example`, but with and
+        additional first dimension for the sequence length.
 
     Returns:
       tensor_data: Tensor or dictionary of tensor, output of the tf.data.Dataset
@@ -439,10 +454,8 @@ class FeatureConnector(object):
     if (
         # input/output could potentially be a `dict` for custom feature
         # connectors. Empty length not supported for those for now.
-        isinstance(ex, dict)
-        or isinstance(self.shape, dict)
-        or not _has_shape_ambiguity(in_shape=ex.shape, out_shape=self.shape)
-    ):
+        isinstance(ex, dict) or isinstance(self.shape, dict) or
+        not _has_shape_ambiguity(in_shape=ex.shape, out_shape=self.shape)):
       return decode_map_fn(ex)
     else:
       # `tf.map_fn` cannot resolve ambiguity when decoding an empty sequence
@@ -537,7 +550,7 @@ class FeatureConnector(object):
 
     Args:
       x: A nested `dict` like structure matching the structure of the
-      `FeatureConnector`. Note that some elements may be missing.
+        `FeatureConnector`. Note that some elements may be missing.
 
     Returns:
       `list`: The flattened list of element of `x`. Order is guaranteed to be
@@ -688,8 +701,7 @@ class Tensor(FeatureConnector):
     if isinstance(example_data, tf.Tensor):
       raise TypeError(
           f'Error encoding: {example_data!r}. `_generate_examples` should '
-          'yield `np.array` compatible values, not `tf.Tensor`'
-      )
+          'yield `np.array` compatible values, not `tf.Tensor`')
     if not isinstance(example_data, np.ndarray):
       example_data = np.array(example_data, dtype=np_dtype)
     # Ensure the shape and dtype match
@@ -760,8 +772,7 @@ def _has_shape_ambiguity(in_shape: Shape, out_shape: Shape) -> bool:
       in_shape[0] is None  # Empty sequence
       # Unknown output shape (note that sequence length isn't present,
       # as `self.shape` is called from the inner feature).
-      and None in out_shape
-  )
+      and None in out_shape)
 
 
 def _make_empty_seq_output(
@@ -771,6 +782,6 @@ def _make_empty_seq_output(
   """Return an empty (0, *shape) `tf.Tensor` with `0` instead of `None`."""
   if not isinstance(shape, (tuple, list)) or None not in shape:
     raise ValueError(f'Could not construct empty output for shape: {shape}')
-  return tf.constant(
-      [], shape=[0] + [0 if d is None else d for d in shape], dtype=dtype
-  )
+  return tf.constant([],
+                     shape=[0] + [0 if d is None else d for d in shape],
+                     dtype=dtype)

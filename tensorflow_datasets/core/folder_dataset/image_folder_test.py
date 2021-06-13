@@ -23,9 +23,8 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.folder_dataset import image_folder
 import tensorflow_datasets.public_api as tfds
 
-_EXAMPLE_DIR = os.path.join(
-    tfds.testing.test_utils.fake_examples_dir(), 'image_folder'
-)
+_EXAMPLE_DIR = os.path.join(tfds.testing.test_utils.fake_examples_dir(),
+                            'image_folder')
 
 original_init = tfds.ImageFolder.__init__
 original_download_and_prepare = tfds.ImageFolder.download_and_prepare
@@ -75,10 +74,8 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
         'root_dir/train/label3/img2.png',
         'root_dir/train/label2/img1.png',
         'root_dir/train/label2/img2.png',
-
         'root_dir/val/label1/img1.png',
         'root_dir/val/label2/img2.png',
-
         'root_dir/test/label1/img1.png',
         'root_dir/test/label2/img1.png',
         'root_dir/test/label4/img1.PNG',
@@ -92,39 +89,45 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
       split_examples, labels = image_folder._get_split_label_images('root_dir')
       builder = tfds.ImageFolder(root_dir='root_dir')
       builder_params = tfds.ImageFolder(
-          root_dir='root_dir', dtype=tf.uint16, shape=(128, 128, 1)
-      )
+          root_dir='root_dir', dtype=tf.uint16, shape=(128, 128, 1))
 
-    self.assertEqual(split_examples, {
-        'train': [
-            image_folder._Example(
-                image_path='root_dir/train/label2/img1.png', label='label2'),
-            image_folder._Example(
-                image_path='root_dir/train/label3/img3.png', label='label3'),
-            image_folder._Example(
-                image_path='root_dir/train/label3/img2.png', label='label3'),
-            image_folder._Example(
-                image_path='root_dir/train/label3/img1.png', label='label3'),
-            image_folder._Example(
-                image_path='root_dir/train/label2/img2.png', label='label2'),
-            image_folder._Example(
-                image_path='root_dir/train/label1/img1.png', label='label1'),
-        ],
-        'val': [
-            image_folder._Example(
-                image_path='root_dir/val/label2/img2.png', label='label2'),
-            image_folder._Example(
-                image_path='root_dir/val/label1/img1.png', label='label1'),
-        ],
-        'test': [
-            image_folder._Example(
-                image_path='root_dir/test/label1/img1.png', label='label1'),
-            image_folder._Example(
-                image_path='root_dir/test/label2/img1.png', label='label2'),
-            image_folder._Example(
-                image_path='root_dir/test/label4/img1.PNG', label='label4'),
-        ],
-    })
+    self.assertEqual(
+        split_examples, {
+            'train': [
+                image_folder._Example(
+                    image_path='root_dir/train/label2/img1.png',
+                    label='label2'),
+                image_folder._Example(
+                    image_path='root_dir/train/label3/img3.png',
+                    label='label3'),
+                image_folder._Example(
+                    image_path='root_dir/train/label3/img2.png',
+                    label='label3'),
+                image_folder._Example(
+                    image_path='root_dir/train/label3/img1.png',
+                    label='label3'),
+                image_folder._Example(
+                    image_path='root_dir/train/label2/img2.png',
+                    label='label2'),
+                image_folder._Example(
+                    image_path='root_dir/train/label1/img1.png',
+                    label='label1'),
+            ],
+            'val': [
+                image_folder._Example(
+                    image_path='root_dir/val/label2/img2.png', label='label2'),
+                image_folder._Example(
+                    image_path='root_dir/val/label1/img1.png', label='label1'),
+            ],
+            'test': [
+                image_folder._Example(
+                    image_path='root_dir/test/label1/img1.png', label='label1'),
+                image_folder._Example(
+                    image_path='root_dir/test/label2/img1.png', label='label2'),
+                image_folder._Example(
+                    image_path='root_dir/test/label4/img1.PNG', label='label4'),
+            ],
+        })
     self.assertEqual(builder.info.splits['train'].num_examples, 6)
     self.assertEqual(builder.info.splits['val'].num_examples, 2)
     self.assertEqual(builder.info.splits['test'].num_examples, 3)
@@ -162,27 +165,27 @@ class ImageFolderFunctionTest(tfds.testing.TestCase):
 
       # Decoded images should be found if passing decoders=None
       ds = builder.as_dataset(split='train', decoders=None)
-      self.assertEqual(ds.element_spec, {
-          'image/filename': tf.TensorSpec(shape=(), dtype=tf.string),
-          'image': tf.TensorSpec(shape=(None, None, 3), dtype=tf.uint8),
-          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
-      })
+      self.assertEqual(
+          ds.element_spec, {
+              'image/filename': tf.TensorSpec(shape=(), dtype=tf.string),
+              'image': tf.TensorSpec(shape=(None, None, 3), dtype=tf.uint8),
+              'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+          })
 
       # Encoded images should be found if passing decoders=SkipDecoding()
       ds = builder.as_dataset(
-          split='train', decoders={'image': tfds.decode.SkipDecoding()}
-      )
-      self.assertEqual(ds.element_spec, {
-          'image/filename': tf.TensorSpec(shape=(), dtype=tf.string),
-          'image': tf.TensorSpec(shape=(), dtype=tf.string),
-          'label': tf.TensorSpec(shape=(), dtype=tf.int64),
-      })
+          split='train', decoders={'image': tfds.decode.SkipDecoding()})
+      self.assertEqual(
+          ds.element_spec, {
+              'image/filename': tf.TensorSpec(shape=(), dtype=tf.string),
+              'image': tf.TensorSpec(shape=(), dtype=tf.string),
+              'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+          })
 
       # Invalid keys should throw ValueError
       with self.assertRaisesWithPredicateMatch(ValueError, 'Unrecognized keys'):
         builder.as_dataset(
-            split='train', decoders={'invalid_key': tfds.decode.SkipDecoding()}
-        )
+            split='train', decoders={'invalid_key': tfds.decode.SkipDecoding()})
 
 
 if __name__ == '__main__':

@@ -16,3 +16,4 @@
 """Vision and Language datasets."""
 
 from tensorflow_datasets.vision_language.gref import Gref
+from tensorflow_datasets.vision_language.refcoco import RefCoco

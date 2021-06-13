@@ -31,7 +31,6 @@ import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
-
 DATA_URL_SAMPLE = ('https://drive.google.com/uc?export=download&'
                    'id=1YX2TgT8IKSn9V4wGCwdzbRnS53yicV2P')
 DATA_URL = ('https://drive.google.com/uc?export=download&'
@@ -55,9 +54,12 @@ _CITATION = """\
 class RobonetConfig(tfds.core.BuilderConfig):
   """"Configuration for RoboNet video rescaling."""
 
-  def __init__(
-      self, *, sample_dataset=False, width=None, height=None, **kwargs
-  ):
+  def __init__(self,
+               *,
+               sample_dataset=False,
+               width=None,
+               height=None,
+               **kwargs):
     """The parameters specifying how the dataset will be processed.
 
     The dataset comes with three separate splits. You can specify which split
@@ -117,29 +119,31 @@ class Robonet(tfds.core.BeamBasedBuilder):
     if self.builder_config.width is not None:
       if self.builder_config.height is None:
         raise ValueError('Provide either both height and width or none.')
-      ffmpeg_extra_args = (
-          '-vf', 'scale={}x{}'.format(self.builder_config.height,
-                                      self.builder_config.width))
+      ffmpeg_extra_args = ('-vf',
+                           'scale={}x{}'.format(self.builder_config.height,
+                                                self.builder_config.width))
     else:
       ffmpeg_extra_args = []
 
-    video_shape = (
-        None, self.builder_config.height, self.builder_config.width, 3)
+    video_shape = (None, self.builder_config.height, self.builder_config.width,
+                   3)
 
     features = tfds.features.FeaturesDict({
         # Video frames: uint8 [None, Time, Width, Height, Channels]
-        'video': tfds.features.Video(
-            video_shape,
-            ffmpeg_extra_args=ffmpeg_extra_args,
-            encoding_format='png'),
+        'video':
+            tfds.features.Video(
+                video_shape,
+                ffmpeg_extra_args=ffmpeg_extra_args,
+                encoding_format='png'),
         # Robot actions: float32, [None, ACTIONS_DIM]
-        'actions': tfds.features.Tensor(
-            shape=(None, ACTIONS_DIM), dtype=tf.float32),
+        'actions':
+            tfds.features.Tensor(shape=(None, ACTIONS_DIM), dtype=tf.float32),
         # Robot states: float32, [None, STATE_DIM]
-        'states': tfds.features.Tensor(
-            shape=(None, STATES_DIM), dtype=tf.float32),
+        'states':
+            tfds.features.Tensor(shape=(None, STATES_DIM), dtype=tf.float32),
         # Filename: Text
-        'filename': tfds.features.Text()
+        'filename':
+            tfds.features.Text()
     })
 
     return tfds.core.DatasetInfo(
@@ -180,11 +184,11 @@ class Robonet(tfds.core.BeamBasedBuilder):
       with h5py.File(filename) as hf:
         video_bytes = hf['env']['cam0_video']['frames'][:].tostring()
         states = hf['env']['state'][:].astype(np.float32)
-        states = np.pad(
-            states, ((0, 0), (0, STATES_DIM-states.shape[1])), 'constant')
+        states = np.pad(states, ((0, 0), (0, STATES_DIM - states.shape[1])),
+                        'constant')
         actions = hf['policy']['actions'][:].astype(np.float32)
-        actions = np.pad(
-            actions, ((0, 0), (0, ACTIONS_DIM-actions.shape[1])), 'constant')
+        actions = np.pad(actions, ((0, 0), (0, ACTIONS_DIM - actions.shape[1])),
+                         'constant')
 
       basename = os.path.basename(filename)
       features = {
@@ -196,8 +200,4 @@ class Robonet(tfds.core.BeamBasedBuilder):
       return basename, features
 
     filenames = tf.io.gfile.glob(os.path.join(filedir, '*.hdf5'))
-    return (
-        pipeline
-        | beam.Create(filenames)
-        | beam.Map(_process_example)
-    )
+    return pipeline | beam.Create(filenames) | beam.Map(_process_example)

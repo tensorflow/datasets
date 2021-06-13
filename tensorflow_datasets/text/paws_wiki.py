@@ -127,4 +127,3 @@ class PawsWiki(tfds.core.GeneratorBasedBuilder):
             "label": int(row["label"]),
         }
         yield key, example
-

@@ -11,6 +11,12 @@
 
 # `imagenet_resized`
 
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=imagenet_resized">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 This dataset consists of the ImageNet dataset resized to fixed size. The images
@@ -54,7 +60,6 @@ Split          | Examples
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
-
 
 *   **Citation**:
 

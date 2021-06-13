@@ -30,4 +30,3 @@ class MovieRationalesTest(testing.DatasetBuilderTestCase):
 
 if __name__ == "__main__":
   testing.test_main()
-

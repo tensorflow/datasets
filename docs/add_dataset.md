@@ -477,6 +477,11 @@ For example, if you're contributing to `tensorflow/datasets`, add the module
 import to its subdirectory's `__init__.py` (e.g.
 [`image/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/__init__.py).
 
+### Check for common implementation gotchas
+
+Please check for the
+[common implementation gotchas](https://www.tensorflow.org/datasets/common_gotchas).
+
 ## Test your dataset
 
 ### Download and prepare: `tfds build`
