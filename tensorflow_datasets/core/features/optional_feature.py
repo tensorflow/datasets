@@ -87,7 +87,9 @@ class Optional(feature.FeatureConnector):
         """Decode example based on whether it is a None value or a valid one."""
         def is_none():
             return tf.experimental.Optional.empty(
-                tf.TensorSpec(shape=(28,28,1), dtype=self.feature._dtype, name=None)
+                tf.TensorSpec(shape=self.get_tensor_info().shape,
+                              dtype=self.get_tensor_info().dtype, 
+                              name=None)
             )
         def is_valid():
             return tf.experimental.Optional.from_value(
@@ -95,6 +97,7 @@ class Optional(feature.FeatureConnector):
                 )
         result = tf.cond(tf.math.equal(tfdata, 'OptionalNone'), is_none, is_valid)
         return result
+
 
 def to_feature(value):
   """Convert the given value to Feature if necessary."""
