@@ -43,15 +43,34 @@ _CITATION = """
 }
 """
 
-_BUCKET_PATH = 's3://gradient-scratch/william'
 using_bucket = True
+_BUCKET_PATH = 's3://gradient-scratch/william'
+_DATA_OPTIONS = ['stack', 'no_stack']
+_BUCKET_PATHS = {
+  'stack': '',
+  'no_stack': 'light',
+}
+
+class RibfracConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for Ribfrac""""
+  def __init__(self, *, data=None, **kwargs):
+    if data not in _DATA_OPTIONS:
+      raise ValueError("data must be one of %s" % _DATA_OPTIONS)
+    super(RibfracConfig, self).__init__(**kwargs)
+    self.data = data
 
 class Ribfrac(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for ribfrac dataset."""
-  VERSION = tfds.core.Version('1.0.1')
-  RELEASE_NOTES = {
-      '1.0.1': 'Initial release.',
-  }
+
+  BUILDER_CONFIGS = [
+    RibfracConfig(
+      name=config_name,
+      VERSION = tfds.core.Version('1.0.1')
+      RELEASE_NOTES = {
+          '1.0.1': 'Initial release.',
+      }
+    ) for config_name in _DATA_OPTIONS
+  ]
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -80,13 +99,14 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.core.download.DownloadManager):
     """Returns SplitGenerators."""
+    _BUCKET_CONFIG_PATH = _BUCKET_PATH + _BUCKET_PATHS[self.builder_config.name]
     if(using_bucket):
       return {
-        'train': self._generate_train(_BUCKET_PATH, _BUCKET_PATH),
+        'train': self._generate_train(_BUCKET_CONFIG_PATH, _BUCKET_CONFIG_PATH),
         'valid': self._generate_examples(
-          images_path=_BUCKET_PATH + '/ribfrac-val-images',
-          masks_path=_BUCKET_PATH + '/ribfrac-val-labels',
-          csv_path=_BUCKET_PATH + '/ribfrac-val-info.csv',
+          images_path=_BUCKET_CONFIG_PATH + '/ribfrac-val-images',
+          masks_path=_BUCKET_CONFIG_PATH + '/ribfrac-val-labels',
+          csv_path=_BUCKET_CONFIG_PATH + '/ribfrac-val-info.csv',
         ),
       }
     else:
