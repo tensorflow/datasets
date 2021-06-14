@@ -358,6 +358,9 @@ toc:
     title: movie_lens
   - path: /datasets/catalog/movielens
     title: movielens
+  - path: /datasets/catalog/protein_net
+    status: nightly
+    title: protein_net
   - path: /datasets/catalog/radon
     title: radon
   - path: /datasets/catalog/rock_you

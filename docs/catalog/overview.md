@@ -226,6 +226,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`iris`](iris.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
+*   [`protein_net`](protein_net.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`radon`](radon.md)
 *   [`rock_you`](rock_you.md)
 *   [`titanic`](titanic.md)
