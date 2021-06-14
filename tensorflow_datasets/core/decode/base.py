@@ -18,12 +18,10 @@
 import abc
 import functools
 
-import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 
-@six.add_metaclass(abc.ABCMeta)
-class Decoder(object):
+class Decoder(abc.ABC):
   """Base decoder object.
 
   `tfds.decode.Decoder` allows for overriding the default decoding by
@@ -97,7 +95,7 @@ class SkipDecoding(Decoder):
   Example of usage:
 
   ```python
-  ds = ds.load(
+  ds = tfds.load(
       'imagenet2012',
       split='train',
       decoders={

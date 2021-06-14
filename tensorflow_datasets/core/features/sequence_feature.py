@@ -163,6 +163,9 @@ class Sequence(top_level_feature.TopLevelFeature):
     """Convenience method to access the underlying features."""
     return self._feature[key]
 
+  def __contains__(self, key: str) -> bool:
+    return key in self._feature
+
   def __getattr__(self, key):
     """Allow to access the underlying attributes directly."""
     return getattr(self._feature, key)
