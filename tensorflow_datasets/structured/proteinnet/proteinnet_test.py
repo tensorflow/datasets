@@ -15,8 +15,8 @@
 
 """ProteinNet dataset tests."""
 
-from tensorflow_datasets.bio.proteinnet.proteinnet import ProteinNet
 import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.structured.proteinnet.proteinnet import ProteinNet
 
 
 class ProteinNetTest(tfds.testing.DatasetBuilderTestCase):

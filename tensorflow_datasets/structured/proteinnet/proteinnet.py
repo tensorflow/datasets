@@ -16,10 +16,10 @@
 """ProteinNet dataset."""
 
 import os
-from typing import Dict, Sequence, Union, Iterator, Tuple, Optional, List
+from typing import Dict, Iterator, List, Optional, Sequence, Tuple, Union
+import urllib
 
 import numpy as np
-from six.moves import urllib
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 

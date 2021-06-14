@@ -20,6 +20,8 @@ import contextlib
 
 import numpy as np
 import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import type_utils
 
 # Struct containing a graph for the TFGraphRunner
 GraphRun = collections.namedtuple('GraphRun',
@@ -143,6 +145,23 @@ def assert_shape_match(shape1, shape2):
                      (shape1.ndims, shape2.ndims))
   shape1.assert_same_rank(shape2)
   shape1.assert_is_compatible_with(shape2)
+
+
+def shapes_are_compatible(
+    shapes0: type_utils.TreeDict[type_utils.Shape],
+    shapes1: type_utils.TreeDict[type_utils.Shape],
+) -> bool:
+  """Returns True if all shapes are compatible."""
+  # Use `py_utils.map_nested` instead of `tf.nest.map_structure` as shapes are
+  # tuple/list.
+  shapes0 = py_utils.map_nested(tf.TensorShape, shapes0, dict_only=True)
+  shapes1 = py_utils.map_nested(tf.TensorShape, shapes1, dict_only=True)
+  all_values = tf.nest.map_structure(
+      lambda s0, s1: s0.is_compatible_with(s1),
+      shapes0,
+      shapes1,
+  )
+  return all(tf.nest.flatten(all_values))
 
 
 @contextlib.contextmanager

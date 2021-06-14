@@ -87,17 +87,17 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   `DatasetBuilder` has 3 key methods:
 
-    * `tfds.DatasetBuilder.info`: documents the dataset, including feature
+    * `DatasetBuilder.info`: documents the dataset, including feature
       names, types, and shapes, version, splits, citation, etc.
-    * `tfds.DatasetBuilder.download_and_prepare`: downloads the source data
+    * `DatasetBuilder.download_and_prepare`: downloads the source data
       and writes it to disk.
-    * `tfds.DatasetBuilder.as_dataset`: builds an input pipeline using
+    * `DatasetBuilder.as_dataset`: builds an input pipeline using
       `tf.data.Dataset`s.
 
   **Configuration**: Some `DatasetBuilder`s expose multiple variants of the
   dataset by defining a `tfds.core.BuilderConfig` subclass and accepting a
   config object (or name) on construction. Configurable datasets expose a
-  pre-defined set of configurations in `tfds.DatasetBuilder.builder_configs`.
+  pre-defined set of configurations in `DatasetBuilder.builder_configs`.
 
   Typical `DatasetBuilder` usage:
 
@@ -924,11 +924,6 @@ class FileReaderBuilder(DatasetBuilder):
   def _example_specs(self):
     return self.info.features.get_serialized_info()
 
-  @property
-  def _tfrecords_reader(self):
-    return tfrecords_reader.Reader(self._data_dir, self._example_specs,
-                                   self.info.file_format)
-
   def _as_dataset(
       self,
       split=splits_lib.Split.TRAIN,
@@ -936,9 +931,24 @@ class FileReaderBuilder(DatasetBuilder):
       read_config=None,
       shuffle_files=False,
   ) -> tf.data.Dataset:
-    decode_fn = functools.partial(
-        self.info.features.decode_example, decoders=decoders)
-    return self._tfrecords_reader.read(
+    # Partial decoding
+    if isinstance(decoders, decode.PartialDecoding):
+      features = decoders.extract_features(self.info.features)
+      example_specs = features.get_serialized_info()
+      decoders = decoders.decoders
+    # Full decoding (all features decoded)
+    else:
+      features = self.info.features
+      example_specs = self._example_specs
+      decoders = decoders  # pylint: disable=self-assigning-variable
+
+    reader = tfrecords_reader.Reader(
+        self._data_dir,
+        example_specs=example_specs,
+        file_format=self.info.file_format,
+    )
+    decode_fn = functools.partial(features.decode_example, decoders=decoders)
+    return reader.read(
         name=self.name,
         instructions=split,
         split_infos=self.info.splits.values(),
