@@ -19,7 +19,7 @@ import six.moves.urllib as urllib
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-_URL = 'http://imagenet.stanford.edu/internal/car196/'
+_URL = 'http://ai.stanford.edu/~jkrause/car196/'
 _EXTRA_URL = 'https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz'
 
 _DESCRIPTION = (
@@ -244,10 +244,15 @@ _CITATION = """\
 class Cars196(tfds.core.GeneratorBasedBuilder):
   """Car Images dataset."""
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('2.0.1')
   SUPPORTED_VERSIONS = [
       tfds.core.Version('2.1.0'),
   ]
+
+  RELEASE_NOTES = {
+      '2.0.0': 'Initial release',
+      '2.0.1': 'Website URL update',
+  }
 
   def _info(self):
     """Define the dataset info."""
