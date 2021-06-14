@@ -27,6 +27,7 @@ from tensorflow_datasets.structured.higgs import Higgs
 from tensorflow_datasets.structured.howell import Howell
 from tensorflow_datasets.structured.iris import Iris
 from tensorflow_datasets.structured.movielens import Movielens
+from tensorflow_datasets.structured.proteinnet import ProteinNet
 from tensorflow_datasets.structured.radon import Radon
 from tensorflow_datasets.structured.rock_you import RockYou
 from tensorflow_datasets.structured.titanic import Titanic

@@ -15,4 +15,4 @@
 
 """ProteinNet dataset."""
 
-from tensorflow_datasets.bio.proteinnet.proteinnet import ProteinNet
+from tensorflow_datasets.structured.proteinnet.proteinnet import ProteinNet

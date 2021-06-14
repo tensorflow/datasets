@@ -76,6 +76,10 @@ you can experiment in colab:
     feature_specs = tfds.core.utils.flatten_nest_dict(nested_feature_specs)
     ```
 
+Note: If you're using custom feature connector, make sure to implement
+`to_json_content`/`from_json_content` and test with `self.assertFeature` (see
+[feature connector guide](https://www.tensorflow.org/datasets/features#create_your_own_tfdsfeaturesfeatureconnector))
+
 ### Get statistics on splits
 
 TFDS requires to know the exact number of example within each shard. This is
