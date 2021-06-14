@@ -50,7 +50,7 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 
 """
 
-_URL = "http://www.ccs.neu.edu/home/luwang/datasets/opinion_abstracts.zip"
+_URL = "https://web.eecs.umich.edu/~wangluxy/datasets/opinion_abstracts.zip"
 
 
 class OpinionAbstractsConfig(tfds.core.BuilderConfig):
