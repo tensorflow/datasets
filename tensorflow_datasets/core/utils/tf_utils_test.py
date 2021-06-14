@@ -19,8 +19,6 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import tf_utils
 
-tf.enable_v2_behavior()
-
 
 class TfUtilsTest(testing.TestCase):
 
@@ -50,6 +48,25 @@ class TfUtilsTest(testing.TestCase):
       self.assertEqual(len(graph_runner._graph_run_cache), 2)
     else:
       self.assertEqual(len(graph_runner._graph_run_cache), 0)
+
+
+def test_shapes_are_compatible():
+  assert tf_utils.shapes_are_compatible(
+      {'a': {
+          'b': (28, 28, 3)
+      }},
+      {'a': {
+          'b': (None, None, 3)
+      }},
+  )
+  assert not tf_utils.shapes_are_compatible(
+      {'a': {
+          'b': (28, 28, 3)
+      }},
+      {'a': {
+          'b': (None, 27, 3)
+      }},
+  )
 
 
 if __name__ == '__main__':
