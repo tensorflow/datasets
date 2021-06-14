@@ -43,14 +43,14 @@ _CITATION = """
 }
 """
 
-_BUCKET_PATH = 's3://gradient-scratch/william/'
+_BUCKET_PATH = 's3://gradient-scratch/william'
 using_bucket = True
 
 class Ribfrac(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for ribfrac dataset."""
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
+      '1.0.1': 'Initial release.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -60,14 +60,16 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
       description=_DESCRIPTION,
       features=tfds.features.FeaturesDict({
           'patient_id': tfds.features.Tensor(shape=(), dtype=tf.string),
-          'image': tfds.features.Tensor(
-            shape=(None, 512, 512),
-            dtype=tf.int16
-          ),
-          'mask' : tfds.features.Tensor(
-            shape=(None, 512, 512),
-            dtype=tf.int16
-          ),
+          'image_pair': tfds.features.Sequence({
+              'image': tfds.features.Image(
+                shape=(512, 512, 1),
+                dtype=tf.uint16,
+              ),
+              'mask' : tfds.features.Tensor(
+                shape=(512, 512, 1),
+                dtype=tf.bool,
+              ),
+          }, length=None),
           'label_id': tfds.features.Tensor(shape=(None,), dtype=tf.int8),
           'label_code': tfds.features.Tensor(shape=(None,), dtype=tf.int8),
       }),
@@ -82,9 +84,9 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
       return {
         'train': self._generate_train(_BUCKET_PATH, _BUCKET_PATH),
         'valid': self._generate_examples(
-          images_path=_BUCKET_PATH / 'ribfrac-val-images',
-          masks_path=_BUCKET_PATH / 'ribfrac-val-labels',
-          csv_path=_BUCKET_PATH / 'ribfrac-val-info.csv',
+          images_path=_BUCKET_PATH + '/ribfrac-val-images',
+          masks_path=_BUCKET_PATH + '/ribfrac-val-labels',
+          csv_path=_BUCKET_PATH + '/ribfrac-val-info.csv',
         ),
       }
     else:
@@ -134,14 +136,14 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
   def _generate_train(self, path, csvpath):
     if(using_bucket):
       part1 = self._generate_examples(
-        images_path=path / 'Part1',
-        masks_path=path / 'Part1-labels',
-        csv_path=csvpath / 'ribfrac-train-info-1.csv',
+        images_path=path + '/Part1',
+        masks_path=path + '/Part1-labels',
+        csv_path=csvpath + '/ribfrac-train-info-1.csv',
       )
       part2 = self._generate_examples(
-        images_path=path / 'Part2',
-        masks_path=path / 'Part2-labels',
-        csv_path=csvpath / 'ribfrac-train-info-2.csv',
+        images_path=path + '/Part2',
+        masks_path=path + '/Part2-labels',
+        csv_path=csvpath + '/ribfrac-train-info-2.csv',
       )
     else:
       part1 = self._generate_examples(
@@ -170,19 +172,27 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
         temp = open(f, 'ab')
         temp.write(byte.read())
         temp.close()
-        image = nib.load('./' + temp.name)
-        os.remove('./' + temp.name)
-        image_image_data = np.array(image.dataobj, dtype=np.int16)
+        image = nib.load(os.path.abspath(temp.name))
+        image_image_data = np.array(image.dataobj, dtype=np.uint16)
+        image_stack = np.expand_dims(np.transpose(image_image_data), -1)
+        img_list = []
+        for img_slice in image_stack:
+            img_list.append(img_slice)
+        os.remove(os.path.abspath(temp.name))
 
         mask_id = f.replace('-image.nii.gz', '-label.nii.gz')
         mask_path = os.path.join(masks_path, mask_id)
         byte = tf.io.gfile.GFile(mask_path, mode='rb')
-        temp = open(mask_id, 'ab')
-        temp.write(byte.read())
-        temp.close()
-        mask = nib.load('./' + temp.name)
-        os.remove('./' + temp.name)
-        mask_image_data = np.array(mask.dataobj, dtype=np.int16)
+        temp1 = open(mask_id, 'ab')
+        temp1.write(byte.read())
+        temp1.close()
+        mask = nib.load(os.path.abspath(temp1.name))
+        mask_image_data = np.array(mask.dataobj, dtype=np.uint8)
+        mask_stack = np.expand_dims(np.transpose(mask_image_data), -1).astype(np.bool)
+        mask_list = []
+        for mask_slice in mask_stack:
+            mask_list.append(mask_slice)
+        os.remove(os.path.abspath(temp1.name))
 
         patient_id = f.replace('-image.nii.gz','').replace('-label.nii.gz','')
         label_csv = pd.read_csv(tf.io.gfile.GFile(csv_path), index_col='public_id')
@@ -199,8 +209,10 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
 
         yield f, {
           'patient_id': str(patient_id),
-          'image': np.transpose(image_image_data),
-          'mask': np.transpose(mask_image_data),
+          'image_pair': {
+              'image': img_list,
+              'mask': mask_list,
+          },
           'label_id': label_id,
           'label_code': label_code,
         }
@@ -208,9 +220,18 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
       for f in filepath_list:
         image = nib.load(os.path.join(str(images_path), f))
         image_image_data = np.array(image.dataobj, dtype=np.int16)
+        image_stack = np.expand_dims(np.transpose(image_image_data),-1) #[None, 512, 512, 1]
+        img_list = []
+        for img_slice in image_stack:
+            img_list.append(img_slice)
+
         mask_id = f.replace('-image.nii.gz', '-label.nii.gz')
         mask = nib.load(os.path.join(str(masks_path), mask_id))
         mask_image_data = np.array(mask.dataobj, dtype=np.int16)
+        mask_stack = np.expand_dims(np.transpose(mask_image_data),-1)
+        mask_list = []
+        for mask_slice in mask_stack:
+            mask_list.append(mask_slice)
 
         patient_id = f.replace('-image.nii.gz','').replace('-label.nii.gz','')
         label_csv = pd.read_csv(csv_path, index_col='public_id')
@@ -227,8 +248,10 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
 
         yield f, {
           'patient_id': str(patient_id),
-          'image': np.transpose(image_image_data),
-          'mask': np.transpose(mask_image_data),
+          'image_pair': {
+            'image': img_list,
+            'mask': mask_list,
+          },
           'label_id': label_id,
           'label_code': label_code,
         }
