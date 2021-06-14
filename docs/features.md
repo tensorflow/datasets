@@ -119,8 +119,12 @@ and implement the abstract methods:
     `get_tensor_info()` is different from how the data are actually written on
     disk, then you need to overwrite `get_serialized_info()` to match the specs
     of the `tf.train.Example`
+*   `to_json_content`/`from_json_content`: This is required to allow your
+    dataset to be loaded without the original source code. See
+    [Audio feature](https://github.com/tensorflow/datasets/blob/65a76cb53c8ff7f327a3749175bc4f8c12ff465e/tensorflow_datasets/core/features/audio_feature.py#L121)
+    for an example.
 
-Feature connectors should be tested with `self.assertFeature` and
+Note: Make sure to test your Feature connectors with `self.assertFeature` and
 `tfds.testing.FeatureExpectationItem`. Have a look at
 [test examples](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature_test.py):
 
