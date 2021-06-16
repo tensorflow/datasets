@@ -578,8 +578,7 @@ class ReaderTest(testing.TestCase):
           disable_shuffling=True,
       )
       expected_warning = _SHUFFLE_FILES_ERROR_MESSAGE + '\n' + _CYCLE_LENGTH_ERROR_MESSAGE
-      reported_warning = ''.join(reported_warnings)
-      self.assertEqual(reported_warning, expected_warning)
+      self.assertIn(expected_warning, reported_warnings)
 
 
 if __name__ == '__main__':
