@@ -48,7 +48,7 @@ _BUCKET_PATH = 's3://gradient-scratch/william'
 _DATA_OPTIONS = ['stack', 'no_stack']
 _BUCKET_PATHS = {
   'stack': '',
-  'no_stack': 'light',
+  'no_stack': '/light',
 }
 
 class RibfracConfig(tfds.core.BuilderConfig):
