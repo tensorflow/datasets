@@ -17,8 +17,9 @@
 
 import os
 import tempfile
-from typing import Any, List
+from typing import Any, List, Optional
 
+import dataclasses
 import numpy as np
 import tensorflow.compat.v2 as tf
 
@@ -40,8 +41,9 @@ _ACCEPTABLE_CHANNELS = {
 }
 
 _ACCEPTABLE_DTYPES = {
-    'png': [tf.uint8, tf.uint16],
+    'png': [tf.uint8, tf.uint16, tf.float32],
     'jpeg': [tf.uint8],
+    None: [tf.uint8, tf.uint16, tf.float32],
 }
 
 THUMBNAIL_SIZE = 128
@@ -50,6 +52,104 @@ THUMBNAIL_SIZE = 128
 # Could add a framerate kwargs in __init__ to allow datasets to customize
 # the output.
 _VISU_FRAMERATE = 10
+
+
+@dataclasses.dataclass
+class _ImageEncoder:
+  """Utils which encode/decode images."""
+  shape: utils.Shape
+  dtype: tf.dtypes.DType
+  encoding_format: Optional[str]
+
+  # TODO(tfds): Should deprecate the TFGraph runner in favor of simpler
+  # implementation
+  @utils.memoized_property
+  def _runner(self) -> utils.TFGraphRunner:
+    return utils.TFGraphRunner()
+
+  def encode_image_or_path(self, image_or_path_or_fobj):
+    """Convert the given image into a dict convertible to tf example."""
+    if isinstance(image_or_path_or_fobj, np.ndarray):
+      encoded_image = self._encode_image(image_or_path_or_fobj)
+    elif isinstance(image_or_path_or_fobj, type_utils.PathLikeCls):
+      image_or_path_or_fobj = os.fspath(image_or_path_or_fobj)
+      with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
+        encoded_image = image_f.read()
+    elif isinstance(image_or_path_or_fobj, bytes):
+      encoded_image = image_or_path_or_fobj
+    else:
+      encoded_image = image_or_path_or_fobj.read()
+    # If encoding is explicitly set, should verify that bytes match encoding.
+    return encoded_image
+
+  def _encode_image(self, np_image: np.ndarray) -> bytes:
+    """Returns np_image encoded as jpeg or png."""
+    _validate_np_array(np_image, shape=self.shape, dtype=self.dtype)
+
+    # When encoding isn't defined, default to PNG.
+    # Should we be more strict about explicitly define the encoding (raise
+    # error / warning instead) ?
+    # It has created subtle issues for imagenet_corrupted: images are read as
+    # JPEG images to apply some processing, but final image saved as PNG
+    # (default) rather than JPEG.
+    return self._runner.run(_ENCODE_FN[self.encoding_format or 'png'], np_image)
+
+  def decode_image(self, img: tf.Tensor) -> tf.Tensor:
+    """Decode the jpeg or png bytes to 3d tensor."""
+    img = tf.image.decode_image(img, channels=self.shape[-1], dtype=self.dtype)
+    img.set_shape(self.shape)
+    return img
+
+
+class _FloatImageEncoder(_ImageEncoder):
+  """Image encoder of float32.
+
+  Wrapper around `_ImageEncoder` which bitcast 1-channel float32 image
+  into 4-channels uint8, so image can be encoded to PNG.
+  """
+
+  def __init__(
+      self,
+      *,
+      shape: utils.Shape,
+      dtype: tf.dtypes.DType,
+      encoding_format: str,
+  ):
+    # Assert that shape and encoding are valid when dtype==tf.float32.
+    if shape[-1] != 1:
+      raise ValueError(
+          'tfds.features.Image only support single-channel for tf.float32. '
+          f'Got shape={shape}')
+    if encoding_format and encoding_format != 'png':
+      raise ValueError(
+          'tfds.features.Image only support PNG encoding for tf.float32')
+    self._float_shape = shape
+    super().__init__(
+        shape=shape[:2] + (4,),
+        dtype=tf.uint8,
+        encoding_format=encoding_format,
+    )
+
+  def encode_image_or_path(self, image_or_path_or_fobj):
+    """Convert the given image into a dict convertible to tf example."""
+    if not isinstance(image_or_path_or_fobj, np.ndarray):
+      raise ValueError(
+          'tfds.features.Image only support `np.ndarray` for tf.float32 '
+          f'images, not paths. Got: {image_or_path_or_fobj!r}')
+    return self._encode_image(image_or_path_or_fobj)
+
+  def _encode_image(self, np_image: np.ndarray) -> bytes:
+    _validate_np_array(np_image, shape=self._float_shape, dtype=tf.float32)
+    # Bitcast 1 channel float32 -> 4 channels uint8
+    np_image = np_image.view(np.uint8)
+    np_image = super()._encode_image(np_image)
+    return np_image
+
+  def decode_image(self, img: tf.Tensor) -> tf.Tensor:
+    img = super().decode_image(img)
+    # Bitcast 4 channels uint8 -> 1 channel float32
+    img = tf.bitcast(img, tf.float32)[..., None]
+    return img
 
 
 class Image(feature.FeatureConnector):
@@ -90,12 +190,14 @@ class Image(feature.FeatureConnector):
     ```
   """
 
-  def __init__(self,
-               *,
-               shape=None,
-               dtype=None,
-               encoding_format=None,
-               use_colormap=False):
+  def __init__(
+      self,
+      *,
+      shape: Optional[utils.Shape] = None,
+      dtype: Optional[tf.dtypes.DType] = None,
+      encoding_format: Optional[str] = None,
+      use_colormap: bool = False,
+  ):
     """Construct the connector.
 
     Args:
@@ -105,8 +207,10 @@ class Image(feature.FeatureConnector):
         For other images: (height, width, channels). height and width can be
           None. See `tf.image.encode_*` for doc on channels parameter. Defaults
           to (None, None, 3).
-      dtype: tf.uint16 or tf.uint8 (default). tf.uint16 can be used only with
-        png encoding_format
+      dtype: `tf.uint8` (default), `tf.uint16` or `tf.float32`. * `tf.uint16`
+        requires png encoding_format. * `tf.float32` only supports
+        single-channel image. Internally float images are bitcasted to
+        4-channels `tf.uint8` and saved as PNG.
       encoding_format: 'jpeg' or 'png'. Format to serialize `np.ndarray` images
         on disk. If None, encode images as PNG. If image is loaded from
         {bmg,gif,jpeg,png} file, this parameter is ignored, and file original
@@ -125,9 +229,18 @@ class Image(feature.FeatureConnector):
     self._shape = _get_and_validate_shape(shape, self._encoding_format)
     self._dtype = _get_and_validate_dtype(dtype, self._encoding_format)
     self._use_colormap = _get_and_validate_colormap(use_colormap, self._shape,
+                                                    self._dtype,
                                                     self._encoding_format)
 
-    self._runner = None
+    if self._dtype == tf.float32:  # Float images encoded as 4-channels uint8
+      encoder_cls = _FloatImageEncoder
+    else:
+      encoder_cls = _ImageEncoder
+    self._image_encoder = encoder_cls(
+        shape=self._shape,
+        dtype=self._dtype,
+        encoding_format=self._encoding_format,
+    )
 
   def get_tensor_info(self):
     # Image is returned as a 3-d uint8 tf.Tensor.
@@ -137,49 +250,13 @@ class Image(feature.FeatureConnector):
     # Only store raw image (includes size).
     return feature.TensorInfo(shape=(), dtype=tf.string)
 
-  def _encode_image(self, np_image):
-    """Returns np_image encoded as jpeg or png."""
-    if not self._runner:
-      self._runner = utils.TFGraphRunner()
-    if np_image.dtype != self._dtype.as_numpy_dtype:
-      raise ValueError(f'Image dtype should be {self._dtype.as_numpy_dtype}. '
-                       f'Detected: {np_image.dtype}.')
-    utils.assert_shape_match(np_image.shape, self._shape)
-    # When encoding isn't defined, default to PNG.
-    # Should we be more strict about explicitly define the encoding (raise
-    # error / warning instead) ?
-    # It has created subtle issues for imagenet_corrupted: images are read as
-    # JPEG images to apply some processing, but final image saved as PNG
-    # (default) rather than JPEG.
-    return self._runner.run(_ENCODE_FN[self._encoding_format or 'png'],
-                            np_image)
-
-  def __getstate__(self):
-    state = self.__dict__.copy()
-    state['_runner'] = None
-    return state
-
   def encode_example(self, image_or_path_or_fobj):
     """Convert the given image into a dict convertible to tf example."""
-    if isinstance(image_or_path_or_fobj, np.ndarray):
-      encoded_image = self._encode_image(image_or_path_or_fobj)
-    elif isinstance(image_or_path_or_fobj, type_utils.PathLikeCls):
-      image_or_path_or_fobj = os.fspath(image_or_path_or_fobj)
-      with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
-        encoded_image = image_f.read()
-    elif isinstance(image_or_path_or_fobj, bytes):
-      encoded_image = image_or_path_or_fobj
-    else:
-      encoded_image = image_or_path_or_fobj.read()
-    # If encoding is explicitly set, should verify that bytes match encoding.
-    return encoded_image
+    return self._image_encoder.encode_image_or_path(image_or_path_or_fobj)
 
   def decode_example(self, example):
     """Reconstruct the image from the tf example."""
-    img = tf.image.decode_image(
-        example, channels=self._shape[-1], dtype=self._dtype)
-    img.set_shape(self._shape)
-    return img
+    return self._image_encoder.decode_image(example)
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
@@ -335,7 +412,7 @@ def _get_and_validate_shape(shape, encoding_format):
   return tuple(shape)
 
 
-def _get_and_validate_colormap(use_colormap, shape, encoding_format):
+def _get_and_validate_colormap(use_colormap, shape, dtype, encoding_format):
   """Validate that the given colormap is valid."""
   if use_colormap:
     if encoding_format and encoding_format != 'png':
@@ -344,5 +421,20 @@ def _get_and_validate_colormap(use_colormap, shape, encoding_format):
     if shape[-1] != 1:
       raise ValueError(
           f'Colormap is only available for gray-scale images. Got: {shape}')
+    if not dtype.is_integer:
+      raise ValueError(
+          f'Colormap is only available for interger images. Got: {dtype}')
 
   return use_colormap
+
+
+def _validate_np_array(
+    np_array: np.ndarray,
+    shape: utils.Shape,
+    dtype: tf.dtypes.DType,
+) -> None:
+  """Validate the numpy array match the expected shape/dtype."""
+  if np_array.dtype != dtype.as_numpy_dtype:
+    raise ValueError(f'Image dtype should be {dtype.as_numpy_dtype}. '
+                     f'Detected: {np_array.dtype}.')
+  utils.assert_shape_match(np_array.shape, shape)
