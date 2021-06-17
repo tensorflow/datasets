@@ -29,5 +29,6 @@ from tensorflow_datasets.summarization.reddit import Reddit
 from tensorflow_datasets.summarization.reddit_tifu import RedditTifu
 from tensorflow_datasets.summarization.samsum import Samsum
 from tensorflow_datasets.summarization.scientific_papers import ScientificPapers
+from tensorflow_datasets.summarization.summscreen import Summscreen
 from tensorflow_datasets.summarization.wikihow import Wikihow
 from tensorflow_datasets.summarization.xsum import Xsum
