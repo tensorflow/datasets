@@ -7,6 +7,7 @@ class RibfracTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ribfrac dataset."""
   SKIP_CHECKSUMS = True
   DATASET_CLASS = ribfrac.Ribfrac
+  BUILDER_CONFIG_TO_TEST = ['stack']
   SPLITS = {
     'train': 4,
     'valid': 1,

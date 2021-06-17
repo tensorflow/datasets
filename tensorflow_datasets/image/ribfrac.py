@@ -52,11 +52,12 @@ _BUCKET_PATHS = {
 }
 
 class RibfracConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for Ribfrac""""
-  def __init__(self, *, data=None, **kwargs):
+  """BuilderConfig for Ribfrac"""
+
+  def __init__(self, *, data='stack', name, version, release_notes):
     if data not in _DATA_OPTIONS:
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)
-    super(RibfracConfig, self).__init__(**kwargs)
+    super(RibfracConfig, self).__init__(name, version, release_notes)
     self.data = data
 
 class Ribfrac(tfds.core.GeneratorBasedBuilder):
@@ -65,8 +66,8 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
     RibfracConfig(
       name=config_name,
-      VERSION = tfds.core.Version('1.0.1')
-      RELEASE_NOTES = {
+      version = tfds.core.Version('1.0.1'),
+      release_notes = {
           '1.0.1': 'Initial release.',
       }
     ) for config_name in _DATA_OPTIONS
@@ -100,6 +101,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.core.download.DownloadManager):
     """Returns SplitGenerators."""
     _BUCKET_CONFIG_PATH = _BUCKET_PATH + _BUCKET_PATHS[self.builder_config.name]
+    print
     if(using_bucket):
       return {
         'train': self._generate_train(_BUCKET_CONFIG_PATH, _BUCKET_CONFIG_PATH),
@@ -156,13 +158,13 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
   def _generate_train(self, path, csvpath):
     if(using_bucket):
       part1 = self._generate_examples(
-        images_path=path + '/Part1',
-        masks_path=path + '/Part1-labels',
+        images_path=path + '/Part1/',
+        masks_path=path + '/Part1-labels/',
         csv_path=csvpath + '/ribfrac-train-info-1.csv',
       )
       part2 = self._generate_examples(
-        images_path=path + '/Part2',
-        masks_path=path + '/Part2-labels',
+        images_path=path + '/Part2/',
+        masks_path=path + '/Part2-labels/',
         csv_path=csvpath + '/ribfrac-train-info-2.csv',
       )
     else:
