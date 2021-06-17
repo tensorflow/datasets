@@ -43,35 +43,15 @@ _CITATION = """
 }
 """
 
-using_bucket = True
 _BUCKET_PATH = 's3://gradient-scratch/william'
-_DATA_OPTIONS = ['stack', 'no_stack']
-_BUCKET_PATHS = {
-  'stack': '',
-  'no_stack': '/light',
-}
-
-class RibfracConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for Ribfrac"""
-
-  def __init__(self, *, data='stack', name, version, release_notes):
-    if data not in _DATA_OPTIONS:
-      raise ValueError("data must be one of %s" % _DATA_OPTIONS)
-    super(RibfracConfig, self).__init__(name, version, release_notes)
-    self.data = data
+using_bucket = True
 
 class Ribfrac(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for ribfrac dataset."""
-
-  BUILDER_CONFIGS = [
-    RibfracConfig(
-      name=config_name,
-      version = tfds.core.Version('1.0.1'),
-      release_notes = {
-          '1.0.1': 'Initial release.',
-      }
-    ) for config_name in _DATA_OPTIONS
-  ]
+  VERSION = tfds.core.Version('1.0.1')
+  RELEASE_NOTES = {
+      '1.0.1': 'Initial release.',
+  }
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -100,15 +80,13 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.core.download.DownloadManager):
     """Returns SplitGenerators."""
-    _BUCKET_CONFIG_PATH = _BUCKET_PATH + _BUCKET_PATHS[self.builder_config.name]
-    print
     if(using_bucket):
       return {
-        'train': self._generate_train(_BUCKET_CONFIG_PATH, _BUCKET_CONFIG_PATH),
+        'train': self._generate_train(_BUCKET_PATH, _BUCKET_PATH),
         'valid': self._generate_examples(
-          images_path=_BUCKET_CONFIG_PATH + '/ribfrac-val-images',
-          masks_path=_BUCKET_CONFIG_PATH + '/ribfrac-val-labels',
-          csv_path=_BUCKET_CONFIG_PATH + '/ribfrac-val-info.csv',
+          images_path=_BUCKET_PATH + '/ribfrac-val-images',
+          masks_path=_BUCKET_PATH + '/ribfrac-val-labels',
+          csv_path=_BUCKET_PATH + '/ribfrac-val-info.csv',
         ),
       }
     else:
@@ -158,13 +136,13 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
   def _generate_train(self, path, csvpath):
     if(using_bucket):
       part1 = self._generate_examples(
-        images_path=path + '/Part1/',
-        masks_path=path + '/Part1-labels/',
+        images_path=path + '/Part1',
+        masks_path=path + '/Part1-labels',
         csv_path=csvpath + '/ribfrac-train-info-1.csv',
       )
       part2 = self._generate_examples(
-        images_path=path + '/Part2/',
-        masks_path=path + '/Part2-labels/',
+        images_path=path + '/Part2',
+        masks_path=path + '/Part2-labels',
         csv_path=csvpath + '/ribfrac-train-info-2.csv',
       )
     else:
@@ -241,7 +219,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
     else:
       for f in filepath_list:
         image = nib.load(os.path.join(str(images_path), f))
-        image_image_data = np.array(image.dataobj, dtype=np.uint16)
+        image_image_data = np.array(image.dataobj, dtype=np.int16)
         image_stack = np.expand_dims(np.transpose(image_image_data),-1) #[None, 512, 512, 1]
         img_list = []
         for img_slice in image_stack:
@@ -249,7 +227,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
 
         mask_id = f.replace('-image.nii.gz', '-label.nii.gz')
         mask = nib.load(os.path.join(str(masks_path), mask_id))
-        mask_image_data = np.array(mask.dataobj, dtype=np.bool)
+        mask_image_data = np.array(mask.dataobj, dtype=np.int16)
         mask_stack = np.expand_dims(np.transpose(mask_image_data),-1)
         mask_list = []
         for mask_slice in mask_stack:
