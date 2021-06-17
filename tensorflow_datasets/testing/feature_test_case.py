@@ -17,7 +17,9 @@
 
 import contextlib
 import functools
+from typing import Any, Optional, Type
 
+import dataclasses
 import dill
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -31,29 +33,45 @@ from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
 
 
-class FeatureExpectationItem(object):
-  """Test item of a FeatureExpectation."""
+@dataclasses.dataclass
+class FeatureExpectationItem:
+  """Test item of a FeatureExpectation.
 
-  def __init__(
-      self,
-      value,
-      expected=None,
-      expected_serialized=None,
-      decoders=None,
-      dtype=None,
-      shape=None,
-      raise_cls=None,
-      raise_msg=None):
-    self.value = value
-    self.expected = expected
-    self.expected_serialized = expected_serialized
-    self.decoders = decoders
-    self.dtype = dtype
-    self.shape = shape
-    if not decoders and (dtype is not None or shape is not None):
+  Should be passed to `assertFeature` method of `FeatureExpectationsTestCase`.
+
+  Each `FeatureExpectationItem` test an example serialization/deserialization (
+  `feature.encode_example` -> `example_serializer.serialize_example` ->
+  `example_parse.parse_example` -> `feature.decode_example`).
+
+  Attributes:
+    value: Input to `features.encode_example`
+    expected: Expected output after `features.decode_example`
+    expected_serialized: Optional
+    decoders: Optional `tfds.decode.Decoder` objects (to overwrite the default
+      `features.decode_example`). See
+      https://www.tensorflow.org/datasets/decode.
+    dtype: If `decoders` is provided, the output of `decode_example` is checked
+      against this value (otherwise, output is checked against `features.dtype`)
+    shape: If `decoders` is provided, the output of `decode_example` is checked
+      against this value (otherwise, output is checked against `features.shape`)
+    raise_cls: Expected error raised during `features.encode_example`. When set
+      `expected` and `expected_serialized` should be `None`.
+    raise_msg: Expected error message regex.
+    atol: If provided, compare float values with this precision (use default
+      otherwise).
+  """
+  value: Any
+  expected: Optional[Any] = None
+  expected_serialized: Optional[Any] = None
+  decoders: Optional[utils.TreeDict[Any]] = None
+  dtype: Optional[tf.dtypes.DType] = None
+  shape: Optional[utils.Shape] = None
+  raise_cls: Optional[Type[Exception]] = None
+  raise_msg: Optional[str] = None
+
+  def __post_init__(self):
+    if not self.decoders and (self.dtype is not None or self.shape is not None):
       raise ValueError('dtype and shape should only be set with transform')
-    self.raise_cls = raise_cls
-    self.raise_msg = raise_msg
 
 
 class SubTestCase(test_case.TestCase):
@@ -126,19 +144,22 @@ class FeatureExpectationsTestCase(SubTestCase):
       tests,
       serialized_info=None,
       skip_feature_tests=False,
-      test_attributes=None):
+      test_attributes=None,
+  ):
     """Test the given feature against the predicates."""
     self.assertFeatureEagerOnly(feature, shape, dtype, tests, serialized_info,
                                 skip_feature_tests, test_attributes)
 
-  def assertFeatureEagerOnly(self,
-                             feature,
-                             shape,
-                             dtype,
-                             tests,
-                             serialized_info=None,
-                             skip_feature_tests=False,
-                             test_attributes=None):
+  def assertFeatureEagerOnly(
+      self,
+      feature,
+      shape,
+      dtype,
+      tests,
+      serialized_info=None,
+      skip_feature_tests=False,
+      test_attributes=None,
+  ):
     """Test the given feature against the predicates."""
 
     with self._subTest('feature'):
@@ -177,7 +198,8 @@ class FeatureExpectationsTestCase(SubTestCase):
       tests,
       serialized_info=None,
       skip_feature_tests=False,
-      test_attributes=None):
+      test_attributes=None,
+  ):
     with self._subTest('shape'):
       self.assertEqual(feature.shape, shape)
     with self._subTest('dtype'):
@@ -221,8 +243,8 @@ class FeatureExpectationsTestCase(SubTestCase):
           raise ValueError(
               'test.raise_msg should be set with {} for test {}'.format(
                   test.raise_cls, type(feature)))
-        with self.assertRaisesWithPredicateMatch(
-            test.raise_cls, test.raise_msg):
+        with self.assertRaisesWithPredicateMatch(test.raise_cls,
+                                                 test.raise_msg):
           features_encode_decode(fdict, input_value, decoders=test.decoders)
     else:
       # Test the serialization only
@@ -276,7 +298,8 @@ class FeatureExpectationsTestCase(SubTestCase):
           # Eventually construct the tf.RaggedTensor
           expected = tf.nest.map_structure(
               lambda t: t.build() if isinstance(t, RaggedConstant) else t,
-              test.expected)
+              test.expected,
+          )
           self.assertAllEqualNested(out_numpy, expected)
 
         # Assert the HTML representation works

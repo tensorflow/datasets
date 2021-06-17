@@ -20,11 +20,10 @@ import pathlib
 
 from absl.testing import parameterized
 import numpy as np
-import tensorflow.compat.v2 as tf
+import pytest
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
-
-tf.enable_v2_behavior()
 
 randint = np.random.randint
 
@@ -144,6 +143,47 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase,
             _use_colormap=True,
         ))
 
+  def test_images_float(self):
+    img = np.random.rand(28, 28, 1).astype(np.float32)
+    img_other_shape = np.random.rand(12, 34, 1).astype(np.float32)
 
-if __name__ == '__main__':
-  testing.test_main()
+    self.assertFeature(
+        feature=features_lib.Image(shape=(None, None, 1), dtype=tf.float32),
+        shape=(None, None, 1),
+        dtype=tf.float32,
+        tests=[
+            # Numpy array
+            testing.FeatureExpectationItem(
+                value=img,
+                expected=img,
+            ),
+            # 'img' shape can be dynamic
+            testing.FeatureExpectationItem(
+                value=img_other_shape,
+                expected=img_other_shape,
+            ),
+            # Invalid type
+            testing.FeatureExpectationItem(
+                value=img.astype(np.float64),
+                raise_cls=ValueError,
+                raise_msg='dtype should be',
+            ),
+        ],
+        test_attributes=dict(
+            _encoding_format=None,
+            _use_colormap=False,
+        ))
+
+
+@pytest.mark.parametrize(
+    'shape, dtype, encoding_format, err_msg',
+    [
+        (None, tf.uint16, r'jpeg', 'Acceptable `dtype` for jpeg:'),
+        (None, tf.float32, None, 'only support single-channel'),
+        ((None, None, 1), tf.float64, None, 'Acceptable `dtype`'),
+    ],
+)
+def test_invalid_img(shape, dtype, encoding_format, err_msg):
+  with pytest.raises(ValueError, match=err_msg):
+    features_lib.Image(
+        shape=shape, dtype=dtype, encoding_format=encoding_format)
