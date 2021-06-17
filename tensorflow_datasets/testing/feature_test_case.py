@@ -68,6 +68,7 @@ class FeatureExpectationItem:
   shape: Optional[utils.Shape] = None
   raise_cls: Optional[Type[Exception]] = None
   raise_msg: Optional[str] = None
+  atol: Optional[float] = None
 
   def __post_init__(self):
     if not self.decoders and (self.dtype is not None or self.shape is not None):
@@ -94,15 +95,22 @@ class SubTestCase(test_case.TestCase):
       yield
     self._sub_test_stack.pop()
 
-  def assertAllEqualNested(self, d1, d2):
-    """Same as assertAllEqual but compatible with nested dict."""
+  def assertAllEqualNested(self, d1, d2, *, atol: Optional[float] = None):
+    """Same as assertAllEqual but compatible with nested dict.
+
+    Args:
+      d1: First element to compare
+      d2: Second element to compare
+      atol: If given, perform a close float comparison. Otherwise, perform an
+        exact comparison
+    """
     if isinstance(d1, dict):
       # assertAllEqual do not works well with dictionaries so assert
       # on each individual elements instead
       zipped_examples = utils.zip_nested(d1, d2, dict_only=True)
       utils.map_nested(
           # recursively call assertAllEqualNested in case there is a dataset.
-          lambda x: self.assertAllEqualNested(x[0], x[1]),
+          lambda x: self.assertAllEqualNested(x[0], x[1], atol=atol),
           zipped_examples,
           dict_only=True,
       )
@@ -111,7 +119,9 @@ class SubTestCase(test_case.TestCase):
       # level of nested datasets is not supported.
       self.assertEqual(len(d1), len(d2))
       for ex1, ex2 in zip(d1, d2):
-        self.assertAllEqualNested(ex1, ex2)
+        self.assertAllEqualNested(ex1, ex2, atol=atol)
+    elif atol:
+      self.assertAllClose(d1, d2, atol=atol)
     else:
       self.assertAllEqual(d1, d2)
 
@@ -300,7 +310,7 @@ class FeatureExpectationsTestCase(SubTestCase):
               lambda t: t.build() if isinstance(t, RaggedConstant) else t,
               test.expected,
           )
-          self.assertAllEqualNested(out_numpy, expected)
+          self.assertAllEqualNested(out_numpy, expected, atol=test.atol)
 
         # Assert the HTML representation works
         if not test.decoders:
