@@ -241,7 +241,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
     else:
       for f in filepath_list:
         image = nib.load(os.path.join(str(images_path), f))
-        image_image_data = np.array(image.dataobj, dtype=np.int16)
+        image_image_data = np.array(image.dataobj, dtype=np.uint16)
         image_stack = np.expand_dims(np.transpose(image_image_data),-1) #[None, 512, 512, 1]
         img_list = []
         for img_slice in image_stack:
@@ -249,7 +249,7 @@ class Ribfrac(tfds.core.GeneratorBasedBuilder):
 
         mask_id = f.replace('-image.nii.gz', '-label.nii.gz')
         mask = nib.load(os.path.join(str(masks_path), mask_id))
-        mask_image_data = np.array(mask.dataobj, dtype=np.int16)
+        mask_image_data = np.array(mask.dataobj, dtype=np.bool)
         mask_stack = np.expand_dims(np.transpose(mask_image_data),-1)
         mask_list = []
         for mask_slice in mask_stack:
