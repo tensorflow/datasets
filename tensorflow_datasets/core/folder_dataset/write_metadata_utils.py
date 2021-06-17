@@ -108,6 +108,7 @@ def write_metadata(
       features=features,
       **ds_info_kwargs,
   )
+  ds_info.set_file_format(file_format)
 
   # Add the split infos
   split_dict = _load_splits(
