@@ -66,6 +66,12 @@ class TFGraphRunner(object):
     # non-eager mode.
     self._graph_run_cache = {}
 
+  def __getstate__(self):
+    return {}
+
+  def __setstate__(self, state):
+    self.__init__(**state)
+
   def run(self, fct, input_):
     """Execute the given TensorFlow function."""
     # TF 2.0

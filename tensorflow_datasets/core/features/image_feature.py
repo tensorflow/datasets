@@ -250,17 +250,6 @@ class Image(feature.FeatureConnector):
     # Only store raw image (includes size).
     return feature.TensorInfo(shape=(), dtype=tf.string)
 
-  def __getstate__(self):
-    return dict(  # Save the original state
-        shape=self._shape,
-        dtype=self._dtype,
-        encoding_format=self._encoding_format,
-        use_colormap=self._use_colormap,
-    )
-
-  def __setstate__(self, state):
-    self.__init__(**state)
-
   def encode_example(self, image_or_path_or_fobj):
     """Convert the given image into a dict convertible to tf example."""
     return self._image_encoder.encode_image_or_path(image_or_path_or_fobj)
