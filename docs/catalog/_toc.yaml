@@ -407,6 +407,9 @@ toc:
     title: samsum (manual)
   - path: /datasets/catalog/scientific_papers
     title: scientific_papers
+  - path: /datasets/catalog/summscreen
+    status: nightly
+    title: summscreen
   - path: /datasets/catalog/wikihow
     title: wikihow (manual)
   - path: /datasets/catalog/xsum

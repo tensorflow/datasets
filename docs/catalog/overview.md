@@ -253,6 +253,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`reddit_tifu`](reddit_tifu.md)
 *   [`samsum`](samsum.md)
 *   [`scientific_papers`](scientific_papers.md)
+*   [`summscreen`](summscreen.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wikihow`](wikihow.md)
 *   [`xsum`](xsum.md)
 
