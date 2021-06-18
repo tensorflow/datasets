@@ -32,7 +32,7 @@ class PartialDecoding:
   """Allow to decode a subset of features.
 
   See guide:
-  https://www.tensorflow.org/datasets/decode#only-decode-a-sub-set-of-the-features
+  https://www.tensorflow.org/datasets/decode#only_decode_a_sub-set_of_the_features
 
   """
 
