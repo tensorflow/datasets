@@ -790,6 +790,7 @@ nsynth/gansynth_subset/2.3.2
 nsynth/gansynth_subset/2.3.3
 nyu_depth_v2/0.0.1
 ogbg_molpcba/0.1.0
+ogbg_molpcba/0.1.1
 omniglot/3.0.0
 open_images_challenge2019_detection/200k/1.0.0
 open_images_challenge2019_detection/300k/1.0.0
