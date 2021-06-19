@@ -15,6 +15,8 @@
 
 """Visualizer utils."""
 
+from tensorflow_datasets.core.visualization.graph_visualizer import GraphVisualizer
+from tensorflow_datasets.core.visualization.graph_visualizer import GraphVisualizerMetadataDict
 from tensorflow_datasets.core.visualization.image_visualizer import ImageGridVisualizer
 from tensorflow_datasets.core.visualization.show_examples import show_examples
 from tensorflow_datasets.core.visualization.show_examples import show_statistics
@@ -22,6 +24,8 @@ from tensorflow_datasets.core.visualization.visualizer import Visualizer
 
 __all__ = [
     "ImageGridVisualizer",
+    "GraphVisualizer",
+    "GraphVisualizerMetadataDict",
     "show_examples",
     "show_statistics",
     "Visualizer",

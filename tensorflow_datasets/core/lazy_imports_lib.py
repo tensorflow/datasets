@@ -103,6 +103,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def networkx(cls):
+    return _try_import("networkx")
+
+  @utils.classproperty
+  @classmethod
   def nltk(cls):
     return _try_import("nltk")
 

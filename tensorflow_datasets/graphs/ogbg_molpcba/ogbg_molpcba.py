@@ -43,6 +43,9 @@ All the molecules are pre-processed using RDKit ([1]).
    bond stereochemistry, as well as an additional bond feature indicating
    whether the bond is conjugated.
 
+The exact description of all features is available at
+https://github.com/snap-stanford/ogb/blob/master/ogb/utils/features.py.
+
 ### Prediction
 The task is to predict 128 different biological activities (inactive/active).
 See [2] and [3] for more description about these targets.
@@ -75,7 +78,7 @@ _CITATION = """
                Michele Catasta and
                Jure Leskovec},
   editor    = {Hugo Larochelle and
-               Marc{'}Aurelio Ranzato and
+               Marc Aurelio Ranzato and
                Raia Hadsell and
                Maria{-}Florina Balcan and
                Hsuan{-}Tien Lin},
@@ -103,10 +106,11 @@ ReadOnlyPath = type_utils.ReadOnlyPath
 class OgbgMolpcba(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for ogbg_molpcba dataset."""
 
-  VERSION = tfds.core.Version('0.1.1')
+  VERSION = tfds.core.Version('0.1.2')
   RELEASE_NOTES = {
       '0.1.0': 'Initial release of experimental API.',
       '0.1.1': 'Exposes the number of edges in each graph explicitly.',
+      '0.1.2': 'Add metadata field for GraphVisualizer.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -117,22 +121,27 @@ class OgbgMolpcba(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # We mimic the features of the OGB platform-agnostic DataLoader.
         features=tfds.features.FeaturesDict({
-            'num_nodes': tfds.features.Tensor(shape=(None,),
-                                              dtype=tf.int64),
-            'node_feat': tfds.features.Tensor(shape=(None, 9),
-                                              dtype=tf.float32),
-            'num_edges': tfds.features.Tensor(shape=(None,),
-                                              dtype=tf.int64),
-            'edge_feat': tfds.features.Tensor(shape=(None, 3),
-                                              dtype=tf.float32),
-            'edge_index': tfds.features.Tensor(shape=(None, 2),
-                                               dtype=tf.int64),
-            'labels': tfds.features.Tensor(shape=(128,),
-                                           dtype=tf.float32),
+            'num_nodes':
+                tfds.features.Tensor(shape=(None,), dtype=tf.int64),
+            'node_feat':
+                tfds.features.Tensor(shape=(None, 9), dtype=tf.float32),
+            'num_edges':
+                tfds.features.Tensor(shape=(None,), dtype=tf.int64),
+            'edge_feat':
+                tfds.features.Tensor(shape=(None, 3), dtype=tf.float32),
+            'edge_index':
+                tfds.features.Tensor(shape=(None, 2), dtype=tf.int64),
+            'labels':
+                tfds.features.Tensor(shape=(128,), dtype=tf.float32),
         }),
         supervised_keys=None,
         homepage=_OGB_URL,
         citation=_CITATION,
+        metadata=tfds.core.MetadataDict({
+            'graph_visualizer':
+                tfds.visualization.GraphVisualizerMetadataDict(
+                    edgelist_feature_name='edge_index')
+        }),
     )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):

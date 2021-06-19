@@ -41,6 +41,65 @@ class ShowExamplesTest(testing.TestCase):
     visualization.show_examples(ds, ds_info)
 
   @mock.patch('matplotlib.pyplot.figure')
+  def test_show_examples_graph(self, _):
+    with testing.mock_data(num_examples=20):
+      ds, ds_info = load.load('ogbg_molpcba', split='train', with_info=True)
+    visualization.show_examples(ds, ds_info)
+
+  @mock.patch('matplotlib.pyplot.figure')
+  def test_show_examples_graph_with_colors_and_labels(self, _):
+    with testing.mock_data(num_examples=20):
+      ds, ds_info = load.load('ogbg_molpcba', split='train', with_info=True)
+
+    # Dictionaries used to map nodes and edges to colors.
+    atomic_numbers_to_elements = {
+        6: 'C',
+        7: 'N',
+        8: 'O',
+        9: 'F',
+        14: 'Si',
+        15: 'P',
+        16: 'S',
+        17: 'Cl',
+        35: 'Br,'
+    }
+    elements_to_colors = {
+        element: f'C{index}'
+        for index, element in enumerate(atomic_numbers_to_elements.values())
+    }
+    bond_types_to_colors = {num: f'C{num}' for num in range(4)}
+
+    # Functions that wrap around the above dictionariess.
+    def node_color_fn(graph):
+      atomic_numbers = 1 + graph['node_feat'][:, 0].numpy()
+      return {
+          index: elements_to_colors[atomic_numbers_to_elements[atomic_number]]
+          for index, atomic_number in enumerate(atomic_numbers)
+      }
+
+    def node_label_fn(graph):
+      atomic_numbers = 1 + graph['node_feat'][:, 0].numpy()
+      return {
+          index: atomic_numbers_to_elements[atomic_number]
+          for index, atomic_number in enumerate(atomic_numbers)
+      }
+
+    def edge_color_fn(graph):
+      bonds = graph['edge_index'].numpy()
+      bond_types = graph['edge_feat'][:, 0].numpy()
+      return {
+          tuple(bond): bond_types_to_colors[bond_type]
+          for bond, bond_type in zip(bonds, bond_types)
+      }
+
+    visualization.show_examples(
+        ds,
+        ds_info,
+        node_color_fn=node_color_fn,
+        node_label_fn=node_label_fn,
+        edge_color_fn=edge_color_fn)
+
+  @mock.patch('matplotlib.pyplot.figure')
   def test_show_examples_missing_sample(self, _):
     with testing.mock_data(num_examples=3):
       ds, ds_info = load.load('imagenet2012', split='train', with_info=True)

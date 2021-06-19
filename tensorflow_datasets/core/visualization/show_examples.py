@@ -22,11 +22,14 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.visualization import graph_visualizer
 from tensorflow_datasets.core.visualization import image_visualizer
+
 from tensorflow_metadata.proto.v0 import statistics_pb2
 
 _ALL_VISUALIZERS = [
     image_visualizer.ImageGridVisualizer(),
+    graph_visualizer.GraphVisualizer(),
 ]
 
 
@@ -71,8 +74,9 @@ def show_examples(ds: tf.data.Dataset, ds_info: dataset_info.DatasetInfo,
   for visualizer in _ALL_VISUALIZERS:
     if visualizer.match(ds_info):
       return visualizer.show(ds, ds_info, **options_kwargs)
-    raise ValueError('Visualisation not supported for dataset `{}`'.format(
-        ds_info.name))
+
+  raise ValueError('Visualisation not supported for dataset `{}`'.format(
+      ds_info.name))
 
 
 def show_statistics(
