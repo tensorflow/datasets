@@ -22,13 +22,12 @@ import html
 import importlib
 import json
 import os
-from typing import Dict, Type, TypeVar
+from typing import Dict, List, Type, TypeVar
 
 import numpy as np
 import six
 import tensorflow.compat.v2 as tf
 
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -112,9 +111,19 @@ class FeatureConnector(object):
   # Keep track of all sub-classes.
   _registered_features: Dict[str, Type['FeatureConnector']] = {}
 
+  # FeatureConnector use the module name to reconstruct/reload the features in
+  # `features = FeatureConnector.from_config('features.json')`
+  # For backward compatibility, after renaming/moving/ `my_feature.py` to a new
+  # location, it is possible to specify the previous `module.MyFeature` names.
+  ALIASES: List[str] = []
+
   def __init_subclass__(cls):
     """Registers subclasses features."""
     cls._registered_features[f'{cls.__module__}.{cls.__name__}'] = cls
+    # Also register the aliases. Note: We use __dict__ to make sure the alias
+    # is only registered for the class. Not it's child.
+    for module_alias in cls.__dict__.get('ALIASES', []):
+      cls._registered_features[module_alias] = cls
 
   @abc.abstractmethod
   def get_tensor_info(self):
@@ -673,82 +682,9 @@ class FeatureConnector(object):
     pass
 
 
-class Tensor(FeatureConnector):
-  """`FeatureConnector` for generic data of arbitrary shape and type."""
-
-  def __init__(self, *, shape, dtype):
-    """Construct a Tensor feature."""
-    self._shape = tuple(shape)
-    self._dtype = dtype
-
-  def get_tensor_info(self):
-    """See base class for details."""
-    return TensorInfo(shape=self._shape, dtype=self._dtype)
-
-  def decode_batch_example(self, example_data):
-    """See base class for details."""
-    # Overwrite the `tf.map_fn`, decoding is a no-op
-    return self.decode_example(example_data)
-
-  def decode_ragged_example(self, example_data):
-    """See base class for details."""
-    # Overwrite the `tf.map_fn`, decoding is a no-op
-    return self.decode_example(example_data)
-
-  def encode_example(self, example_data):
-    """See base class for details."""
-    np_dtype = np.dtype(self.dtype.as_numpy_dtype)
-    if isinstance(example_data, tf.Tensor):
-      raise TypeError(
-          f'Error encoding: {example_data!r}. `_generate_examples` should '
-          'yield `np.array` compatible values, not `tf.Tensor`')
-    if not isinstance(example_data, np.ndarray):
-      example_data = np.array(example_data, dtype=np_dtype)
-    # Ensure the shape and dtype match
-    if example_data.dtype != np_dtype:
-      raise ValueError('Dtype {} do not match {}'.format(
-          example_data.dtype, np_dtype))
-    utils.assert_shape_match(example_data.shape, self._shape)
-    return example_data
-
-  @classmethod
-  def from_json_content(cls, value: Json) -> 'Tensor':
-    shape = tuple(value['shape'])
-    dtype = tf.dtypes.as_dtype(value['dtype'])
-    return cls(shape=shape, dtype=dtype)
-
-  def to_json_content(self) -> Json:
-    return {
-        'shape': list(self._shape),
-        'dtype': self._dtype.name,
-    }
-
-
 def make_config_path(root_dir: str) -> str:
   """Returns the path to the features config."""
   return os.path.join(root_dir, 'features.json')
-
-
-def get_inner_feature_repr(feature):
-  """Utils which returns the object which should get printed in __repr__.
-
-  This is used in container features (Sequence, FeatureDict) to print scalar
-  Tensor in a less verbose way `Sequence(tf.int32)` rather than
-  `Sequence(Tensor(shape=(), dtype=tf.in32))`.
-
-  Args:
-    feature: The feature to dispaly
-
-  Returns:
-    Either the feature or it's inner value.
-  """
-  # We only print `tf.int32` rather than `Tensor(shape=(), dtype=tf.int32)`
-  # * For the base `Tensor` class (and not subclass).
-  # * When shape is scalar (explicit check to avoid trigger when `shape=None`).
-  if type(feature) == Tensor and feature.shape == ():  # pylint: disable=unidiomatic-typecheck,g-explicit-bool-comparison
-    return repr(feature.dtype)
-  else:
-    return repr(feature)
 
 
 def _repr_html(ex) -> str:

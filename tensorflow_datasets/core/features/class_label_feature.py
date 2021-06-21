@@ -17,13 +17,13 @@
 
 import os
 import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
 
-class ClassLabel(feature.Tensor):
+class ClassLabel(tensor_feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
   def __init__(self, *, num_classes=None, names=None, names_file=None):

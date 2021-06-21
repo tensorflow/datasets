@@ -23,8 +23,8 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.features import image_feature
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -34,7 +34,7 @@ BBox = collections.namedtuple('BBox', 'ymin, xmin, ymax, xmax')
 PilImage = Any
 
 
-class BBoxFeature(feature.Tensor):
+class BBoxFeature(tensor_feature.Tensor):
   """`FeatureConnector` for a normalized bounding box.
 
   Note: If you have multiple bounding boxes, you may want to wrap the feature

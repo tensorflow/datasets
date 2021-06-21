@@ -21,6 +21,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.utils import type_utils
 
@@ -184,7 +185,7 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   def __repr__(self):
     """Display the feature."""
-    inner_feature_repr = feature_lib.get_inner_feature_repr(self._feature)
+    inner_feature_repr = tensor_feature.get_inner_feature_repr(self._feature)
     if inner_feature_repr.startswith('FeaturesDict('):
       # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
       inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]

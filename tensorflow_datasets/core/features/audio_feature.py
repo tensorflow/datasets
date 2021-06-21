@@ -23,13 +23,13 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
 
-class Audio(feature.Tensor):
+class Audio(tensor_feature.Tensor):
   """`tfds.features.FeatureConnector` for audio.
 
   In `_generate_examples`, Audio accept:

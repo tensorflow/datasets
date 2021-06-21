@@ -20,6 +20,7 @@ import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.utils import type_utils
 
@@ -153,7 +154,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     lines = ['{}({{'.format(type(self).__name__)]
     # Add indentation
     for key, feature in sorted(list(self._feature_dict.items())):
-      feature_repr = feature_lib.get_inner_feature_repr(feature)
+      feature_repr = tensor_feature.get_inner_feature_repr(feature)
       all_sub_lines = '\'{}\': {},'.format(key, feature_repr)
       lines.extend('    ' + l for l in all_sub_lines.split('\n'))
     lines.append('})')
@@ -256,7 +257,7 @@ def to_feature(value):
   if isinstance(value, feature_lib.FeatureConnector):
     return value
   elif utils.is_dtype(value):  # tf.int32, tf.string,...
-    return feature_lib.Tensor(shape=(), dtype=tf.as_dtype(value))
+    return tensor_feature.Tensor(shape=(), dtype=tf.as_dtype(value))
   elif isinstance(value, dict):
     return FeaturesDict(value)
   else:
