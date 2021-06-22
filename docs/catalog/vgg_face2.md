@@ -13,12 +13,6 @@
 
 Warning: Manual download required. See instructions below.
 
-*   **Visualization**:
-    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=vgg_face2">
-    Explore in Know Your Data
-    <span class="material-icons icon-after" aria-hidden="true"> north_east
-    </span> </a>
-
 *   **Description**:
 
 VGGFace2 is a large-scale face recognition dataset. Images are downloaded from

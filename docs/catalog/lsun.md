@@ -184,10 +184,6 @@ FeaturesDict({
 
 *   **Config description**: Images of category motorbike
 
-## lsun/person <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-
-*   **Config description**: Images of category person
-
 ## lsun/potted_plant
 
 *   **Config description**: Images of category potted_plant
