@@ -17,6 +17,7 @@
 
 import collections
 import contextlib
+from typing import Union
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -168,6 +169,42 @@ def shapes_are_compatible(
       shapes1,
   )
   return all(tf.nest.flatten(all_values))
+
+
+def normalize_shape(
+    shape: Union[type_utils.Shape, tf.TensorShape]) -> type_utils.Shape:
+  """Normalize `tf.TensorShape` to tuple of int/None."""
+  if isinstance(shape, tf.TensorShape):
+    return tuple(shape.as_list())  # pytype: disable=attribute-error
+  else:
+    assert isinstance(shape, tuple)
+    return shape
+
+
+def merge_shape(tf_shape: tf.Tensor, np_shape: type_utils.Shape):
+  """Returns the most static version of the shape.
+
+  Static `None` values are replaced by dynamic `tf.Tensor` values.
+
+  Example:
+
+  ```
+  merge_shape(
+      tf_shape=tf.constant([28, 28, 3]),
+      np_shape=(None, None, 3),
+  ) == (tf.Tensor(numpy=28), tf.Tensor(numpy=28), 3)
+  ```
+
+  Args:
+    tf_shape: The tf.Tensor containing the shape (e.g. `tf.shape(x)`)
+    np_shape: The static shape tuple (e.g. `(None, None, 3)`)
+
+  Returns:
+    A tuple like np_shape, but with `None` values replaced by `tf.Tensor` values
+  """
+  assert_shape_match(tf_shape.shape, (len(np_shape),))
+  return tuple(
+      tf_shape[i] if dim is None else dim for i, dim in enumerate(np_shape))
 
 
 @contextlib.contextmanager

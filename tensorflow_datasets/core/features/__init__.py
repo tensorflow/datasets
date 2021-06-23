@@ -29,6 +29,7 @@ from tensorflow_datasets.core.features.feature import TensorInfo
 from tensorflow_datasets.core.features.features_dict import FeaturesDict
 from tensorflow_datasets.core.features.image_feature import Image
 from tensorflow_datasets.core.features.sequence_feature import Sequence
+from tensorflow_datasets.core.features.tensor_feature import Encoding
 from tensorflow_datasets.core.features.tensor_feature import Tensor
 from tensorflow_datasets.core.features.text_feature import Text
 from tensorflow_datasets.core.features.translation_feature import Translation

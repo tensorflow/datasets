@@ -35,8 +35,7 @@ class ExampleParser(object):
 
     # Convert individual fields into tf.train.Example compatible format
     def build_single_spec(k, v):
-      with utils.try_reraise("Specification error for feature {} ({}): ".format(
-          k, v)):
+      with utils.try_reraise(f"Specification error for feature {k!r} ({v}): "):
         return _to_tf_example_spec(v)
 
     return {
@@ -146,9 +145,12 @@ def _to_tf_example_spec(tensor_info):
         dtype=dtype,
         default_value=tensor_info.default_value,
     )
-  elif (tensor_info.shape.count(None) == 1 and tensor_info.shape[0] is None):
+  elif tensor_info.shape.count(None) == 1:
+    # Extract the defined shape (without the None dimension)
+    # The original shape is restored in `_deserialize_single_field`
+    shape = tuple(dim for dim in tensor_info.shape if dim is not None)
     return tf.io.FixedLenSequenceFeature(  # First shape undefined
-        shape=tensor_info.shape[1:],
+        shape=shape,
         dtype=dtype,
         allow_missing=True,
         default_value=tensor_info.default_value,
@@ -172,5 +174,6 @@ def _to_tf_example_spec(tensor_info):
     return tf_specs
   else:
     raise NotImplementedError(
-        "Tensor with a unknown dimension not at the first position not "
-        "supported: {}".format(tensor_info))
+        "Multiple unknown dimension not supported.\n"
+        "If using `tfds.features.Tensor`, please set "
+        "`Tensor(..., encoding='zlib')` (or 'bytes', or 'gzip')")
