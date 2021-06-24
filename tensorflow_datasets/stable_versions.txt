@@ -2122,7 +2122,6 @@ ucf101/ucf101_2/2.0.0
 ucf101/ucf101_3/2.0.0
 vctk/mic1/1.0.0
 vctk/mic2/1.0.0
-vgg_face2/1.0.0
 visual_domain_decathlon/aircraft/1.2.0
 visual_domain_decathlon/cifar100/1.2.0
 visual_domain_decathlon/daimlerpedcls/1.2.0
