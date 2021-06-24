@@ -70,8 +70,6 @@ _RECAP_SOURCE_FULL_NAMES = {
 }
 _SPLITS = ['train', 'dev', 'test']
 
-VERSION = tfds.core.Version('1.0.0')
-
 
 def _load_file(path):
   with tf.io.gfile.GFile(path, 'r') as f:
@@ -119,14 +117,14 @@ class SummscreenConfig(tfds.core.BuilderConfig):
       recap_source: str. The directory for the source of recaps to read.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(SummscreenConfig, self).__init__(version=VERSION, **kwargs)
+    super(SummscreenConfig, self).__init__(**kwargs)
     self.recap_source = recap_source
 
 
 class Summscreen(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for non-tokenized, non-anonymized SummScreen dataset."""
 
-  VERSION = VERSION
+  VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
   }
@@ -157,12 +155,18 @@ class Summscreen(tfds.core.GeneratorBasedBuilder):
       })
     elif self._builder_config.recap_source == 'tms':
       features = tfds.features.FeaturesDict({
-          _TRANSCRIPT: tfds.features.Text(),
-          _RECAP: tfds.features.Text(),
-          'episode_summary': tfds.features.Text(),
-          'show_title': tfds.features.Text(),
-          'transcript_author': tfds.features.Text(),
-          'recap_author': tfds.features.Text(),
+          _TRANSCRIPT:
+              tfds.features.Text(),
+          _RECAP:
+              tfds.features.Text(),
+          'episode_summary':
+              tfds.features.Text(),
+          'show_title':
+              tfds.features.Text(),
+          'transcript_author':
+              tfds.features.Tensor(shape=(None,), dtype=tf.string),
+          'recap_author':
+              tfds.features.Text(),
       })
     else:
       raise KeyError(
@@ -211,7 +215,7 @@ class Summscreen(tfds.core.GeneratorBasedBuilder):
         yield fname, {
             _TRANSCRIPT: '\n'.join(example['Transcript']),
             _RECAP: '\n'.join(example['Recap']),
-            'episode_summary': example['Episode Summary'],
+            'episode_summary': '\n'.join(example['Episode Summary']),
             'show_title': example['Show Title'],
             'transcript_author': example['Transcript Author'],
             'recap_author': example['Recap Author'],
