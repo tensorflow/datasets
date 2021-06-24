@@ -41,7 +41,6 @@ MAX_OBJECT_HEIGHT_WIDTH = 400
 MIN_NUM_OBJECTS = 1
 MAX_NUM_OBJECTS = 3
 
-
 def _output_dir():
   return os.path.join(FLAGS.tfds_dir, "image", "bccd", "dummy_data")
 

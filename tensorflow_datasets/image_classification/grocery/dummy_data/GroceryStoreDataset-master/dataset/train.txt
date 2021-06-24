@@ -1,0 +1,3 @@
+train/Fruit/Apple/Golden-Delicious/Golden-Delicious_001.jpg, 0, 0
+train/Fruit/Apple/Golden-Delicious/Golden-Delicious_002.jpg, 0, 0
+train/Fruit/Apple/Golden-Delicious/Golden-Delicious_003.jpg, 0, 0
