@@ -17,6 +17,7 @@
 
 import enum
 from typing import Union
+import zlib
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -142,7 +143,8 @@ class Tensor(feature_lib.FeatureConnector):
     # Eventually encode the data
     if self._encoded_to_bytes:
       example_data = example_data.tobytes()
-      # TODO(epot): Compress the bytes!!
+      if self._encoding == Encoding.ZLIB:
+        example_data = zlib.compress(example_data)
 
     # For dynamically shaped tensors, also save the shape (the proto
     # flatten all values so we need a way to recover the shape).
@@ -165,7 +167,8 @@ class Tensor(feature_lib.FeatureConnector):
       shape = tuple(-1 if dim is None else dim for dim in self._shape)
 
     if self._encoded_to_bytes:
-      # TODO(epot): De-compress the bytes!!
+      if self._encoding == Encoding.ZLIB:
+        value = tf.io.decode_compressed(value, compression_type='ZLIB')
       value = tf.io.decode_raw(value, self._dtype)
       value = tf.reshape(value, shape)
 

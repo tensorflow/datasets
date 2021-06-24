@@ -74,6 +74,9 @@ class FeatureTensorTest(
                 raise_msg='are incompatible',
             ),
         ],
+        test_attributes={
+            '_encoding': encoding,
+        },
     )
 
   @parameterized.parameters([
