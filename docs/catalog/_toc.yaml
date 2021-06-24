@@ -259,8 +259,6 @@ toc:
     title: tf_flowers
   - path: /datasets/catalog/uc_merced
     title: uc_merced
-  - path: /datasets/catalog/vgg_face2
-    title: vgg_face2 (manual)
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
   title: Image classification
@@ -336,6 +334,9 @@ toc:
     title: amazon_us_reviews
   - path: /datasets/catalog/cherry_blossoms
     title: cherry_blossoms
+  - path: /datasets/catalog/covid19
+    status: nightly
+    title: covid19
   - path: /datasets/catalog/dart
     title: dart
   - path: /datasets/catalog/e2e_cleaned
