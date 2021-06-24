@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
 from tensorflow_datasets.structured.cherry_blossoms import CherryBlossoms
+from tensorflow_datasets.structured.covid19 import Covid19
 from tensorflow_datasets.structured.dart import Dart
 from tensorflow_datasets.structured.e2e_cleaned import E2eCleaned
 from tensorflow_datasets.structured.efron_morris_75 import EfronMorris75
