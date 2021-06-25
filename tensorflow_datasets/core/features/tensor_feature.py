@@ -86,10 +86,6 @@ class Tensor(feature_lib.FeatureConnector):
     self._encoded_to_bytes = self._encoding != Encoding.NONE
     self._dynamic_shape = self._shape.count(None) > 1
 
-    if self._dynamic_shape and not self._encoded_to_bytes:
-      raise ValueError('Multiple unknown dimensions Tensor require to set '
-                       "`Tensor(..., encoding='zlib')` (or 'bytes'). "
-                       f'For {self}')
     if self._dtype == tf.string and self._encoded_to_bytes:
       raise NotImplementedError(
           'tfds.features.Tensor() does not support `encoding=` when '
@@ -125,6 +121,15 @@ class Tensor(feature_lib.FeatureConnector):
 
   def encode_example(self, example_data):
     """See base class for details."""
+    # TODO(epot): Is there a better workaround ?
+    # It seems some user have non-conventional use of tfds.features.Tensor where
+    # they defined shape=(None, None) even if it wasn't supported.
+    # For backward compatibility, the check is moved inside encode example.
+    if self._dynamic_shape and not self._encoded_to_bytes:
+      raise ValueError('Multiple unknown dimensions Tensor require to set '
+                       "`Tensor(..., encoding='zlib')` (or 'bytes'). "
+                       f'For {self}')
+
     np_dtype = np.dtype(self.dtype.as_numpy_dtype)
     if isinstance(example_data, tf.Tensor):
       raise TypeError(

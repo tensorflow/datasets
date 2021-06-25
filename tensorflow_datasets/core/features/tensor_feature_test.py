@@ -354,7 +354,7 @@ def test_invalid_input():
     features_lib.Tensor(
         shape=(2, None, None),
         dtype=tf.uint8,
-    )
+    ).encode_example(None)
 
   with pytest.raises(
       NotImplementedError,
