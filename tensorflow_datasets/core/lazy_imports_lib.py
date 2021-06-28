@@ -63,8 +63,7 @@ class LazyImporter(object):
   @utils.classproperty
   @classmethod
   def cv2(cls):
-    return _try_import("cvx2").latest  # GOOGLE-INTERNAL  # pytype: disable=attribute-error
-    return _try_import("cv2")  # pylint: disable=unreachable
+    return _try_import("cv2")
 
   @utils.classproperty
   @classmethod
