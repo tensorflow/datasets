@@ -11,6 +11,7 @@
 
 # `forest_fires`
 
+
 *   **Description**:
 
 This is a regression task, where the aim is to predict the burned area of forest

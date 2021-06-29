@@ -11,6 +11,7 @@
 
 # `moving_mnist`
 
+
 *   **Description**:
 
 Moving variant of MNIST database of handwritten digits. This is the data used by

@@ -11,6 +11,7 @@
 
 # `natural_questions_open`
 
+
 *   **Description**:
 
 The NQ-Open task, introduced by Lee et.al. 2019, is an open domain question

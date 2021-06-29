@@ -11,6 +11,7 @@
 
 # `wiki_table_questions`
 
+
 *   **Description**:
 
 The dataset contains pairs table-question, and the respective answer. The

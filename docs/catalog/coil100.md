@@ -11,6 +11,7 @@
 
 # `coil100`
 
+
 *   **Description**:
 
 The dataset contains 7200 color images of 100 objects (72 images per object).

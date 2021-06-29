@@ -11,6 +11,7 @@
 
 # `sentiment140`
 
+
 *   **Description**:
 
 Sentiment140 allows you to discover the sentiment of a brand, product, or topic

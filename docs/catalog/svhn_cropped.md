@@ -11,6 +11,7 @@
 
 # `svhn_cropped`
 
+
 *   **Description**:
 
 The Street View House Numbers (SVHN) Dataset is an image digit recognition

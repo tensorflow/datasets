@@ -11,6 +11,7 @@
 
 # `downsampled_imagenet`
 
+
 *   **Visualization**:
     <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=downsampled_imagenet">
     Explore in Know Your Data

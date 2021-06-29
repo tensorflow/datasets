@@ -11,6 +11,7 @@
 
 # `stanford_dogs`
 
+
 *   **Description**:
 
 The Stanford Dogs dataset contains images of 120 breeds of dogs from around the

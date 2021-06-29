@@ -11,6 +11,7 @@
 
 # `wiki_table_text`
 
+
 *   **Description**:
 
 Wikipedia tables with at least 3 rows and 2 columns, 3 random rows for each

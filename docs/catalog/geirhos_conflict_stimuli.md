@@ -11,6 +11,7 @@
 
 # `geirhos_conflict_stimuli`
 
+
 *   **Description**:
 
 Shape/texture conflict stimuli from "ImageNet-trained CNNs are biased towards
