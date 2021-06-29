@@ -515,7 +515,10 @@ def _display_dataset_heading(
     builder: tfds.core.DatasetBuilder,
 ) -> str:
   ds_name = tfds.core.utils.DatasetName(namespace=namespace, name=builder.name)
-  return f'# `{ds_name}`'
+  return f"""
+      # `{ds_name}`
+
+      """
 
 
 def _display_nightly_str(
