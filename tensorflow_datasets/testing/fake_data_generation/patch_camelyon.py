@@ -26,7 +26,6 @@ import h5py
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils
 
-
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
 FLAGS = flags.FLAGS

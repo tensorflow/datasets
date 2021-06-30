@@ -13,9 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Generate MNIST-like files, smaller and with random data.
-
-"""
+r"""Generate MNIST-like files, smaller and with random data."""
 
 import os
 

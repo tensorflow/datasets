@@ -13,9 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Generate Binarized MNIST-like files, smaller and with random data.
-
-"""
+r"""Generate Binarized MNIST-like files, smaller and with random data."""
 
 import os
 
@@ -46,8 +44,8 @@ _TEST_DATA_FILENAME = "binarized_mnist_test.amat"
 
 
 def make_images(num_images):
-  return (np.random.randint(256, size=(28 * 28 * num_images), dtype=np.uint8)
-          .reshape((num_images, -1)))
+  return (np.random.randint(256, size=(28 * 28 * num_images),
+                            dtype=np.uint8).reshape((num_images, -1)))
 
 
 def write_image_file(filename, num_images):

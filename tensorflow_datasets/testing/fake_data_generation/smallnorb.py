@@ -37,8 +37,7 @@ FACTOR_VALUES = [
 TRAINING_OUTPUT_NAME = "smallnorb-5x46789x9x18x6x2x96x96-training"
 TESTING_OUTPUT_NAME = "smallnorb-5x01235x9x18x6x2x96x96-testing"
 
-flags.DEFINE_string("tfds_dir", None,
-                    "Path to tensorflow_datasets directory.")
+flags.DEFINE_string("tfds_dir", None, "Path to tensorflow_datasets directory.")
 FLAGS = flags.FLAGS
 
 
@@ -103,8 +102,8 @@ def _create_chunk(prefix, random_state):
 def _generate():
   """Generates a fake data set and writes it to the fake_examples directory."""
   tfds_dir = FLAGS.tfds_dir or str(utils.tfds_write_path())
-  output_dir = os.path.join(tfds_dir, "testing", "test_data",
-                            "fake_examples", "smallnorb")
+  output_dir = os.path.join(tfds_dir, "testing", "test_data", "fake_examples",
+                            "smallnorb")
   test_utils.remake_dir(output_dir)
   random_state = np.random.RandomState(0)
   _create_chunk(os.path.join(output_dir, TRAINING_OUTPUT_NAME), random_state)

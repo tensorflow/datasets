@@ -28,7 +28,6 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import fake_data_utils
 
-
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
 FLAGS = flags.FLAGS
@@ -38,8 +37,8 @@ _NUM_OBJECTS = 7
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data',
-                      'fake_examples', 'clevr', 'CLEVR_v1.0')
+  return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
+                      'clevr', 'CLEVR_v1.0')
 
 
 def _generate_data(split):
@@ -51,9 +50,10 @@ def _generate_data(split):
     tf.io.gfile.makedirs(images_dir)
   for i in range(_IMAGE_NUMBERS[split]):
     image_name = 'CLEVR_{}_{:06d}.png'.format(split, i)
-    tf.io.gfile.copy(fake_data_utils.get_random_png(),
-                     os.path.join(images_dir, image_name),
-                     overwrite=True)
+    tf.io.gfile.copy(
+        fake_data_utils.get_random_png(),
+        os.path.join(images_dir, image_name),
+        overwrite=True)
 
   if split in ['train', 'val']:
     # Generate annotations
@@ -61,16 +61,19 @@ def _generate_data(split):
     if not tf.io.gfile.exists(scenes_dir):
       tf.io.gfile.makedirs(scenes_dir)
 
-    annotations = {'scenes': [{'objects':
-                                   [{'color': 'red',
-                                     'shape': 'sphere',
-                                     'size': 'small',
-                                     'material': 'rubber',
-                                     '3d_coords': [0.0, 0.0, 0.0],
-                                     'pixel_coords': [0.0, 0.0, 0.0],
-                                     'rotation': 0.0}] * _NUM_OBJECTS
-                              }] * _IMAGE_NUMBERS[split]
-                  }
+    annotations = {
+        'scenes': [{
+            'objects': [{
+                'color': 'red',
+                'shape': 'sphere',
+                'size': 'small',
+                'material': 'rubber',
+                '3d_coords': [0.0, 0.0, 0.0],
+                'pixel_coords': [0.0, 0.0, 0.0],
+                'rotation': 0.0
+            }] * _NUM_OBJECTS
+        }] * _IMAGE_NUMBERS[split]
+    }
 
     annotations_file = os.path.join(scenes_dir,
                                     'CLEVR_{}_scenes.json'.format(split))

@@ -42,11 +42,13 @@ class HFDataset(datasets.GeneratorBasedBuilder):
     return datasets.DatasetInfo(
         description="""Some description.""",
         features=datasets.Features({
-            "id": datasets.Value("string"),
+            "id":
+                datasets.Value("string"),
             "vals": [datasets.Value("int32")],  # list is alias for Sequence.
-            "answers": datasets.features.Sequence({
-                "text": datasets.Value("string"),
-            }),
+            "answers":
+                datasets.features.Sequence({
+                    "text": datasets.Value("string"),
+                }),
         }),
         homepage="http://some-webpage.org",
         citation="""@article{Some citation}""",

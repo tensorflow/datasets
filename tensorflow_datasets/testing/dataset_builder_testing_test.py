@@ -23,6 +23,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 class DatasetBuilderTesting(tf.test.TestCase):
 
   def test_checksum_string(self):
+
     def _make_hash():
       return dataset_builder_testing.checksum(
           tf.constant([b'foo', b'bar-obj']).numpy())

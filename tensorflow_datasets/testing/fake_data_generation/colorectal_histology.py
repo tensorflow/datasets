@@ -29,8 +29,8 @@ from tensorflow_datasets.image_classification import colorectal_histology
 flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
                     "Path to tensorflow_datasets directory")
 # --compression=raw may be more portable, but results in massive files (>100mb)
-flags.DEFINE_string(
-    "compression", "tiff_lzw", "Used by PIL to compress fake images")
+flags.DEFINE_string("compression", "tiff_lzw",
+                    "Used by PIL to compress fake images")
 FLAGS = flags.FLAGS
 
 # pylint: disable=protected-access
@@ -64,8 +64,8 @@ def main(_):
   base_dir = os.path.join(
       histology_dir(False), colorectal_histology._TILES_SUBDIR)
   for ci, class_name in enumerate(colorectal_histology._CLASS_NAMES):
-    subdir = os.path.join(
-        base_dir, colorectal_histology._class_subdir(ci, class_name))
+    subdir = os.path.join(base_dir,
+                          colorectal_histology._class_subdir(ci, class_name))
     tf.io.gfile.makedirs(subdir)
 
     for i, image_data in enumerate(

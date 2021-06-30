@@ -29,6 +29,7 @@ class RunInGraphAndEagerTest(test_case.TestCase):
 
   def test_run_in_graph_and_eager_modes(self):
     l = []
+
     def inc(self, with_brackets):
       del self  # self argument is required by run_in_graph_and_eager_modes.
       mode = 'eager' if tf.executing_eagerly() else 'graph'
@@ -41,12 +42,13 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     f(self, with_brackets=True)
 
     self.assertEqual(len(l), 4)
-    self.assertEqual(set(l), {
-        ('with_brackets', 'graph'),
-        ('with_brackets', 'eager'),
-        ('without_brackets', 'graph'),
-        ('without_brackets', 'eager'),
-    })
+    self.assertEqual(
+        set(l), {
+            ('with_brackets', 'graph'),
+            ('with_brackets', 'eager'),
+            ('without_brackets', 'graph'),
+            ('without_brackets', 'eager'),
+        })
 
   def test_run_in_graph_and_eager_modes_setup_in_same_mode(self):
     modes = []
@@ -76,6 +78,7 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     # pylint: disable=g-import-not-at-top,reimported
     import tensorflow as tf_lib1
     import tensorflow.compat.v2 as tf_lib2
+
     # pylint: enable=g-import-not-at-top,reimported
 
     def f():
@@ -95,7 +98,8 @@ class RunInGraphAndEagerTest(test_case.TestCase):
 
 
 @pytest.mark.parametrize(
-    'as_path_fn', [pathlib.Path, str]  # Test both PathLike and str
+    'as_path_fn',
+    [pathlib.Path, str]  # Test both PathLike and str
 )
 def test_mock_fs(as_path_fn):
   _p = as_path_fn  # pylint: disable=invalid-name
@@ -138,10 +142,8 @@ def test_mock_fs(as_path_fn):
     assert fs.files['/path/to/file1_moved'] == 'Content of file 1'
 
     # Test `tf.io.gfile.listdir`
-    assert (
-        set(tf.io.gfile.listdir(_p('/path/to')))
-        == set(tf.io.gfile.listdir(_p('/path/to/')))
-    )
+    assert (set(tf.io.gfile.listdir(_p('/path/to'))) == set(
+        tf.io.gfile.listdir(_p('/path/to/'))))
     assert set(tf.io.gfile.listdir(_p('/path/to'))) == {'file1_moved', 'file2'}
     assert set(tf.io.gfile.listdir(_p('/path'))) == {'file.txt', 'to'}
 

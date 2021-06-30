@@ -72,7 +72,6 @@ FORBIDDEN_OS_PATH_FUNCTIONS = (
     "isfile",
 )
 
-
 _ORGINAL_NP_LOAD = np.load
 
 
@@ -85,9 +84,8 @@ def _np_load(file_, mmap_mode=None, allow_pickle=False, **kwargs):
   return _ORGINAL_NP_LOAD(file_, mmap_mode, allow_pickle, **kwargs)
 
 
-class DatasetBuilderTestCase(
-    parameterized.TestCase, feature_test_case.SubTestCase
-):
+class DatasetBuilderTestCase(parameterized.TestCase,
+                             feature_test_case.SubTestCase):
   """Inherit this class to test your DatasetBuilder class.
 
   You must set the following class attributes:
@@ -138,9 +136,8 @@ class DatasetBuilderTestCase(
 
   DATASET_CLASS = None
   VERSION = None
-  BUILDER_CONFIG_NAMES_TO_TEST: Optional[List[
-      Union[str, dataset_builder.BuilderConfig]
-  ]] = None
+  BUILDER_CONFIG_NAMES_TO_TEST: Optional[List[Union[
+      str, dataset_builder.BuilderConfig]]] = None
   DL_EXTRACT_RESULT = None
   DL_DOWNLOAD_RESULT = None
   EXAMPLE_DIR = None
@@ -235,8 +232,8 @@ class DatasetBuilderTestCase(
 
     mock_builtins = __builtins__.copy()  # pytype: disable=module-attr
     mock_builtins["open"] = mock.Mock(side_effect=err)
-    open_patcher = mock.patch(
-        self.DATASET_CLASS.__module__ + ".__builtins__", mock_builtins)
+    open_patcher = mock.patch(self.DATASET_CLASS.__module__ + ".__builtins__",
+                              mock_builtins)
     open_patcher.start()
     self.patchers.append(open_patcher)
 
@@ -253,9 +250,8 @@ class DatasetBuilderTestCase(
     # all needed methods were implemented.
 
   def test_registered(self):
-    self.assertIn(self.builder.name, load.list_builders(
-        with_community_datasets=False,
-    ))
+    self.assertIn(self.builder.name,
+                  load.list_builders(with_community_datasets=False,))
 
   def test_info(self):
     info = self.builder.info
@@ -319,10 +315,8 @@ class DatasetBuilderTestCase(
           # https://github.com/tensorflow/datasets/issues/2348
           configs_to_test.append(config)
         else:
-          raise ValueError(
-              f"Invalid config {config} specified in test."
-              f"Available: {list(self.builder.builder_configs)}"
-          )
+          raise ValueError(f"Invalid config {config} specified in test."
+                           f"Available: {list(self.builder.builder_configs)}")
     else:
       configs_to_test.extend(cfg.name for cfg in self.builder.BUILDER_CONFIGS)
 
@@ -347,12 +341,11 @@ class DatasetBuilderTestCase(
       return
 
     err_msg = (
-        "Did you forget to record checksums with `--register_checksums` ? "
-        "See instructions at: "
-        "hhttps://www.tensorflow.org/datasets/add_dataset#run_the_generation_code"
-        "If want to opt-out of checksums validation, please add "
-        "`SKIP_CHECKSUMS = True` to the `DatasetBuilderTestCase`.\n"
-    )
+        "Did you forget to record checksums with `--register_checksums` ? See "
+        "instructions at: "
+        "hhttps://www.tensorflow.org/datasets/add_dataset#run_the_generation_codeIf"
+        " want to opt-out of checksums validation, please add `SKIP_CHECKSUMS "
+        "= True` to the `DatasetBuilderTestCase`.\n")
     url_infos = self.DATASET_CLASS.url_infos
     filepath = self.DATASET_CLASS._checksums_path  # pylint: disable=protected-access
     # Legacy checksums: Search in `checksums/` dir
@@ -371,8 +364,7 @@ class DatasetBuilderTestCase(
     missing_urls = self._download_urls - set(url_infos.keys())
     self.assertEmpty(
         missing_urls,
-        f"Some urls checksums are missing at: {filepath}\n{err_msg}"
-    )
+        f"Some urls checksums are missing at: {filepath}\n{err_msg}")
 
   def _download_and_prepare_as_dataset(self, builder):
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
@@ -447,19 +439,16 @@ class DatasetBuilderTestCase(
       else:  # Unexpected
         return examples
 
-    with mock.patch.object(
-        builder, "_generate_examples", new_generate_examples
-    ):
+    with mock.patch.object(builder, "_generate_examples",
+                           new_generate_examples):
       yield
 
   def _assert_key_valid(self, key):
     if isinstance(key, str) and os.fspath(self.dummy_data) in key:
-      err_msg = (
-          "Key yield in '_generate_examples' method "
-          f"contain user directory path: {key}.\n"
-          "This makes the dataset example order non-deterministic. "
-          "Please use `filepath.name`, or `os.path.basename` instead."
-      )
+      err_msg = ("Key yield in '_generate_examples' method "
+                 f"contain user directory path: {key}.\n"
+                 "This makes the dataset example order non-deterministic. "
+                 "Please use `filepath.name`, or `os.path.basename` instead.")
       raise ValueError(err_msg)
 
   def _assertAsDataset(self, builder):
@@ -506,15 +495,13 @@ class DatasetBuilderTestCase(
 
     # If configs specified, ensure they are all valid
     if builder.builder_config and builder.builder_config.description:
-      err_msg = textwrap.dedent(
-          """\
+      err_msg = textwrap.dedent("""\
           The BuilderConfig description should be a one-line description of
           the config.
           It shouldn't be the same as `builder.info.description` to avoid
           redundancy. Both `config.description` and `builder.info.description`
           will be displayed in the catalog.
-          """
-      )
+          """)
       ratio = difflib.SequenceMatcher(
           None,
           builder.builder_config.description,
@@ -563,8 +550,7 @@ def checksum(example):
 
   flat_str = _bytes_flatten([], example)
   flat_bytes = [
-      s.encode("utf-8") if not isinstance(s, bytes) else s
-      for s in flat_str
+      s.encode("utf-8") if not isinstance(s, bytes) else s for s in flat_str
   ]
   flat_bytes = b"".join(flat_bytes)
 

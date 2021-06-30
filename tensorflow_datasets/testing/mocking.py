@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Mock util for tfds.
-"""
+"""Mock util for tfds."""
 
 import contextlib
 import enum
@@ -44,10 +43,9 @@ class MockPolicy(enum.Enum):
     USE_FILES: Load dataset from the metadata files (present in the `data_dir`
       kwarg of `tfds.testing.mock_data`, raise error if data_dir is not
       reachable.
-    USE_CODE: Load the data from the original dataset generation class. Do
-      not use any generated files. More is more convenient but less
-      safe than `USE_FILES`. Not all features might be available (e.g. no
-      split-names).
+    USE_CODE: Load the data from the original dataset generation class. Do not
+      use any generated files. More is more convenient but less safe than
+      `USE_FILES`. Not all features might be available (e.g. no split-names).
   """
   AUTO = enum.auto()
   USE_CODE = enum.auto()
@@ -130,9 +128,8 @@ def mock_data(
     as_dataset_fn: if provided, will replace the default random example
       generator. This function mock the `FileAdapterBuilder._as_dataset`
     data_dir: Folder containing the metadata file (searched in
-      `data_dir/dataset_name/version`).
-      Overwrite `data_dir` kwargs from `tfds.load`.
-      Used in `MockPolicy.USE_FILES` mode.
+      `data_dir/dataset_name/version`). Overwrite `data_dir` kwargs from
+      `tfds.load`. Used in `MockPolicy.USE_FILES` mode.
 
   Yields:
     None
@@ -259,8 +256,7 @@ def mock_data(
     # when the public `__init__` API is imported.
     try:
       stack.enter_context(
-          mock.patch('tensorflow_datasets.builder', mock_builder),
-      )
+          mock.patch('tensorflow_datasets.builder', mock_builder),)
     except AttributeError:
       pass
     yield
@@ -296,8 +292,7 @@ class RandomFakeGenerator(object):
     # * For Sequence features
     # * For Text
     shape = [  # Fill dynamic shape with random values
-        self._rgn.randint(5, 50) if s is None else s
-        for s in tensor_info.shape
+        self._rgn.randint(5, 50) if s is None else s for s in tensor_info.shape
     ]
     if isinstance(feature, features_lib.ClassLabel):
       max_value = feature.num_classes

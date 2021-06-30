@@ -35,8 +35,7 @@ def get_random_picture(height=None, width=None, channels=CHANNELS_NB):
   """Returns random picture as np.ndarray (int)."""
   height = height or random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
   width = width or random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
-  return np.random.randint(
-      256, size=(height, width, channels), dtype=np.uint8)
+  return np.random.randint(256, size=(height, width, channels), dtype=np.uint8)
 
 
 def get_random_jpeg(height=None, width=None, channels=CHANNELS_NB):
@@ -71,14 +70,15 @@ def get_random_png(height=None, width=None, channels=CHANNELS_NB):
 def get_random_audio(duration=_AUDIO_DURATION, sample=_SAMPLE_RATE):
   """Returns random audio as np.ndarray (float32)."""
   sample_number = np.arange(duration * sample)
-  waveform = np.sin(
-      2 * np.pi * sample_number * 440.0 / sample).astype(np.float32)
+  waveform = np.sin(2 * np.pi * sample_number * 440.0 / sample).astype(
+      np.float32)
   waveform = waveform * 0.3
   return waveform
 
 
-def get_random_wav_c1(
-    channels=1, duration=_AUDIO_DURATION, sample=_SAMPLE_RATE):
+def get_random_wav_c1(channels=1,
+                      duration=_AUDIO_DURATION,
+                      sample=_SAMPLE_RATE):
   """Returns path to WAV audio having channels = 1."""
   audio = get_random_audio(duration, sample).reshape(-1, channels)
   wav = tf.audio.encode_wav(audio, sample)
@@ -89,8 +89,9 @@ def get_random_wav_c1(
   return f.name
 
 
-def get_random_wav_c2(
-    channels=2, duration=_AUDIO_DURATION, sample=_SAMPLE_RATE):
+def get_random_wav_c2(channels=2,
+                      duration=_AUDIO_DURATION,
+                      sample=_SAMPLE_RATE):
   """Returns path to WAV audio having channels = 2."""
   audio = get_random_audio(duration, sample).reshape(-1, channels)
   wav = tf.audio.encode_wav(audio, sample)

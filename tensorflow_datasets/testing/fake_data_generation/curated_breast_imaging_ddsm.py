@@ -33,7 +33,7 @@ flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
 FLAGS = flags.FLAGS
 
-MAMMOGRAPHY_HEIGHT = 100    # Note: Much smaller than original images.
+MAMMOGRAPHY_HEIGHT = 100  # Note: Much smaller than original images.
 MAMMOGRAPHY_WIDTH = 80
 ABNORMALITY_SIZE_MIN = 10
 ABNORMALITY_SIZE_MAX = 20
@@ -60,16 +60,17 @@ def _yield_mammography_with_abnormalities():
                          dtype=np.uint8)
   # Draw a rectangle representing the breast region.
   breast_h = np.random.randint(
-      int(MAMMOGRAPHY_HEIGHT * 0.7), int(MAMMOGRAPHY_HEIGHT * 0.9) + 1)
+      int(MAMMOGRAPHY_HEIGHT * 0.7),
+      int(MAMMOGRAPHY_HEIGHT * 0.9) + 1)
   breast_w = np.random.randint(
-      int(MAMMOGRAPHY_WIDTH * 0.7), int(MAMMOGRAPHY_WIDTH * 0.9) + 1)
+      int(MAMMOGRAPHY_WIDTH * 0.7),
+      int(MAMMOGRAPHY_WIDTH * 0.9) + 1)
   breast_y = np.random.randint(0, MAMMOGRAPHY_HEIGHT - breast_h)
   breast_x = np.random.randint(0, MAMMOGRAPHY_WIDTH - breast_w)
   breast_intensity = np.random.randint(BREAST_INTENSITY_MIN,
                                        BREAST_INTENSITY_MAX + 1)
-  mammography[
-      breast_y:(breast_y + breast_h),
-      breast_x:(breast_x + breast_w)] = breast_intensity
+  mammography[breast_y:(breast_y + breast_h),
+              breast_x:(breast_x + breast_w)] = breast_intensity
 
   abnormalities = []  # Note: pairs of (mask, crop).
   for _ in range(np.random.randint(1, NUM_ABNORMALITIES_MAX + 1)):
@@ -81,13 +82,12 @@ def _yield_mammography_with_abnormalities():
     while np.absolute(abnorm_intensity - breast_intensity) < 10:
       abnorm_intensity = np.random.randint(int(BREAST_INTENSITY_MIN * 1.2), 256)
     # Draw abnormality in the mammography.
-    mammography[
-        abnorm_y:(abnorm_y + abnorm_h),
-        abnorm_x:(abnorm_x + abnorm_w)] = abnorm_intensity
+    mammography[abnorm_y:(abnorm_y + abnorm_h),
+                abnorm_x:(abnorm_x + abnorm_w)] = abnorm_intensity
     # Abnormality mask w.r.t the full mammography.
     abnorm_mask = np.zeros_like(mammography)
-    abnorm_mask[
-        abnorm_y:(abnorm_y + abnorm_h), abnorm_x:(abnorm_x + abnorm_w)] = 255
+    abnorm_mask[abnorm_y:(abnorm_y + abnorm_h),
+                abnorm_x:(abnorm_x + abnorm_w)] = 255
     # Abnormality crop.
     abnorm_crop = np.ones((abnorm_h, abnorm_w)) * abnorm_intensity
     abnormalities.append((abnorm_mask, abnorm_crop))
@@ -102,9 +102,9 @@ def _yield_csv_rows_base(output_dir, row_extra_info_gen_fn):
   breast_density = np.random.randint(1, 5)
   left_or_right_breast = np.random.choice(['LEFT', 'RIGHT'])
   image_view = np.random.choice(['CC', 'MLO'])
-  study_id = tuple(np.random.randint(0, 999999999+1, size=2))
+  study_id = tuple(np.random.randint(0, 999999999 + 1, size=2))
   study_id = '1.3.6.1.4.1.9590.100.1.2.%010d.%010d' % study_id
-  series_id = tuple(np.random.randint(0, 999999999+1, size=2))
+  series_id = tuple(np.random.randint(0, 999999999 + 1, size=2))
   series_id = '1.3.6.1.4.1.9590.100.1.2.%010d.%010d' % series_id
   remake_dirs(os.path.join(output_dir, '%s/%s' % (study_id, series_id)))
   # Write mammography image.
@@ -115,26 +115,36 @@ def _yield_csv_rows_base(output_dir, row_extra_info_gen_fn):
   for abnormality_id, abnormality in enumerate(abnormalities, 1):
     # Write abnormality crop image.
     crop_basename = '%s/%s/%06d' % (study_id, series_id, abnormality_id * 2 - 1)
-    write_png(
-        os.path.join(output_dir, crop_basename + '.png'), abnormality[1])
+    write_png(os.path.join(output_dir, crop_basename + '.png'), abnormality[1])
     # Write abnormality mask image.
     mask_basename = '%s/%s/%06d' % (study_id, series_id, abnormality_id * 2)
-    write_png(
-        os.path.join(output_dir, mask_basename + '.png'), abnormality[0])
+    write_png(os.path.join(output_dir, mask_basename + '.png'), abnormality[0])
     row = {
-        'patient_id': patient_id,
-        'breast density': breast_density,
-        'left or right breast': left_or_right_breast,
-        'image view': image_view,
-        'abnormality id': abnormality_id,
-        'abnormality type': 'calcification',
-        'assessment': np.random.randint(1, 5),
-        'pathology': np.random.choice(
-            ['BENIGN', 'BENIGN_WITHOUT_CALLBACK', 'MALIGNANT']),
-        'subtlety': np.random.randint(1, 5),
-        'image file path': mammography_basename + '.dcm',
-        'cropped image file path': crop_basename + '.dcm',
-        'ROI mask file path': mask_basename + '.dcm',
+        'patient_id':
+            patient_id,
+        'breast density':
+            breast_density,
+        'left or right breast':
+            left_or_right_breast,
+        'image view':
+            image_view,
+        'abnormality id':
+            abnormality_id,
+        'abnormality type':
+            'calcification',
+        'assessment':
+            np.random.randint(1, 5),
+        'pathology':
+            np.random.choice(['BENIGN', 'BENIGN_WITHOUT_CALLBACK',
+                              'MALIGNANT']),
+        'subtlety':
+            np.random.randint(1, 5),
+        'image file path':
+            mammography_basename + '.dcm',
+        'cropped image file path':
+            crop_basename + '.dcm',
+        'ROI mask file path':
+            mask_basename + '.dcm',
     }
     row.update(row_extra_info_gen_fn())
     yield row
@@ -142,6 +152,7 @@ def _yield_csv_rows_base(output_dir, row_extra_info_gen_fn):
 
 def _yield_csv_rows_calc(output_dir, calc_types, calc_distributions):
   """Generate a row for the calcification abnormalities."""
+
   def _row_extra_info_gen_fn():
     return {
         'calc type': np.random.choice(calc_types),
@@ -153,6 +164,7 @@ def _yield_csv_rows_calc(output_dir, calc_types, calc_distributions):
 
 def _yield_csv_rows_mass(output_dir, mass_shapes, mass_margins):
   """Generate a row for the mass abnormalities."""
+
   def _row_extra_info_gen_fn():
     return {
         'mass shape': np.random.choice(mass_shapes),

@@ -33,8 +33,7 @@ import tensorflow_datasets as tfds
 @pytest.fixture(
     params=[
         tfds.testing.MockPolicy.USE_FILES, tfds.testing.MockPolicy.USE_CODE
-    ],
-)
+    ],)
 def mock_data(request):
   """Parametrized fixture to test both `USE_FILES` and `USE_CODE` policy."""
   return functools.partial(tfds.testing.mock_data, policy=request.param)
@@ -107,10 +106,8 @@ def test_mocking_imagenet_decoders():
 @pytest.mark.usefixtures('apply_mock_data')
 def test_mocking_wider_face():
   ds = tfds.load('wider_face', split='train')
-  assert (
-      ds.element_spec['faces']['expression']
-      == tf.TensorSpec(shape=(None,), dtype=tf.bool)
-  )
+  assert (ds.element_spec['faces']['expression'] == tf.TensorSpec(
+      shape=(None,), dtype=tf.bool))
   for ex in ds.take(2):
     assert ex['faces']['expression'].dtype == tf.bool
 
@@ -126,11 +123,13 @@ def test_mocking_coco_captions():
 
 
 def test_custom_as_dataset(mock_data):
+
   def _as_dataset(self, *args, **kwargs):  # pylint: disable=unused-argument
     return tf.data.Dataset.from_generator(
-        lambda: ({  # pylint: disable=g-long-lambda
-            'text': t,
-        } for t in ['some sentence', 'some other sentence']),
+        lambda: (  # pylint: disable=g-long-lambda
+            {
+                'text': t
+            } for t in ['some sentence', 'some other sentence']),
         output_types=self.info.features.dtype,
         output_shapes=self.info.features.shape,
     )

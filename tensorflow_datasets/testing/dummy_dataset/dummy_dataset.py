@@ -38,9 +38,7 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                'path': os.path.join(path, 'train.txt')
-            },
+            gen_kwargs={'path': os.path.join(path, 'train.txt')},
         ),
     ]
 
