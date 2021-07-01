@@ -313,6 +313,9 @@ toc:
     title: xquad
   title: Question answering
 - section:
+  - path: /datasets/catalog/rlu_atari
+    status: nightly
+    title: rlu_atari
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
     status: nightly
     title: rlu_dmlab_explore_object_rewards_few
