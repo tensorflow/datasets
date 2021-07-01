@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """RLU datasets."""
+from tensorflow_datasets.rl_unplugged.rlu_atari import RluAtari
 from tensorflow_datasets.rl_unplugged.rlu_dmlab_explore_object_rewards_few import RluDmlabExploreObjectRewardsFew
 from tensorflow_datasets.rl_unplugged.rlu_dmlab_explore_object_rewards_many import RluDmlabExploreObjectRewardsMany
 from tensorflow_datasets.rl_unplugged.rlu_dmlab_rooms_select_nonmatching_object import RluDmlabRoomsSelectNonmatchingObject

@@ -26,46 +26,8 @@ use, we provide the datasets with a unified API which makes it easy for the
 practitioner to work with all data in the suite once a general pipeline has been
 established.
 
-DeepMind Lab dataset has several levels from the challenging, partially
-observable [Deepmind Lab suite](https://github.com/deepmind/lab). DeepMind Lab
-dataset is collected by training distributed R2D2 by [Kapturowski et al., 2018]
-(https://openreview.net/forum?id=r1lyTjAqYX) agents from scratch on individual
-tasks. We recorded the experience across all actors during entire training runs
-a few times for every task. The details of the dataset generation process is
-described in [Gulcehre et al., 2021](https://arxiv.org/abs/2103.09575).
-
-We release datasets for five different DeepMind Lab levels: `seekavoid_arena_01`,
-`explore_rewards_few`, `explore_rewards_many`, `rooms_watermaze`,
-`rooms_select_nonmatching_object`. We also release the snapshot datasets for
-`seekavoid_arena_01` level that we generated the datasets from a trained R2D2
-snapshot with different levels of epsilons for the epsilon-greedy algorithm
-when evaluating the agent in the environment.
-
-DeepMind Lab dataset is fairly large-scale. We recommend you to try it if you
-are interested in large-scale offline RL models with memory.
-
 """
 
-_CITATION = """
-@article{gulcehre2021rbve,
-    title={Regularized Behavior Value Estimation},
-    author={{\\c{C}}aglar G{\\"{u}}l{\\c{c}}ehre and
-               Sergio G{\\'{o}}mez Colmenarejo and
-               Ziyu Wang and
-               Jakub Sygnowski and
-               Thomas Paine and
-               Konrad Zolna and
-               Yutian Chen and
-               Matthew W. Hoffman and
-               Razvan Pascanu and
-               Nando de Freitas},
-    year={2021},
-    journal   = {CoRR},
-    url       = {https://arxiv.org/abs/2103.09575},
-    eprint={2103.09575},
-    archivePrefix={arXiv},
-}
-"""
 
 _HOMEPAGE = 'https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged'
 
@@ -84,14 +46,20 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     """Returns the dataset metadata."""
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_DESCRIPTION,
+        description=_DESCRIPTION + self.get_description(),
         features=self.get_features_dict(),
         supervised_keys=None,  # disabled
         homepage=_HOMEPAGE,
-        citation=_CITATION,
+        citation=self.get_citation(),
     )
 
   def get_file_prefix(self):
+    raise NotImplementedError()
+
+  def get_citation(self):
+    raise NotImplementedError
+
+  def get_description(self):
     raise NotImplementedError()
 
   def num_shards(self):
