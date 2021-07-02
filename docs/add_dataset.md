@@ -6,8 +6,6 @@ repository).
 Check our [list of datasets](catalog/overview.md) to see if the dataset you want
 is already present.
 
-Note: Googlers, see [tfds-add](http://goto.google.com/tfds-add) guide.
-
 ## TL;DR
 
 The easiest way to write a new dataset is to use the
