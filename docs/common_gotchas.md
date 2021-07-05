@@ -156,3 +156,37 @@ instead to let users dynamically create the subsplits they want:
 ```python
 ds_train, ds_test = tfds.load(..., split=['train[:80%]', 'train[80%:]'])
 ```
+
+## Python style guide
+
+### Prefer to use pathlib API
+
+Instead of the `tf.io.gfile` API, it is preferable to use the
+[pathlib API](https://docs.python.org/3/library/pathlib.html). All `dl_manager`
+methods returns pathlib-like objects compatible with GCS, S3,...
+
+```python
+path = dl_manager.download_and_extract('http://some-website/my_data.zip')
+
+json_path = path / 'data/file.json'
+
+json.loads(json_path.read_text())
+```
+
+**Rationale**: pathlib API is a modern object oriented file API which remove
+boilerplate. Using `.read_text()` / `.read_bytes()` also guarantee the files are
+correctly closed.
+
+### If the method is not using `self`, it should be a function
+
+If a class method is not using `self`, it should be a simple function (defined
+outside the class).
+
+**Rationale**: It makes it explicit to the reader that the function do not have
+side effects, nor hidden input/output:
+
+```python
+x = f(y)  # Clear inputs/outputs
+
+x = self.f(y)  # Does f depend on additional hidden variables ? Is it stateful ?
+```

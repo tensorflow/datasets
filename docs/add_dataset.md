@@ -350,12 +350,29 @@ def _generate_examples(self, images_path, label_path):
 
 #### File access and `tf.io.gfile`
 
-In order to support Cloud storage systems, use `tf.io.gfile` API instead of
-built-in for file operations. Ex:
+In order to support Cloud storage systems, avoid the use of the Python built-in
+I/O ops.
+
+Instead, the `dl_manager` returns
+[pathlib-like](https://docs.python.org/3/library/pathlib.html) objects directly
+compatible with Google Cloud storage:
+
+```python
+path = dl_manager.download_and_extract('http://some-website/my_data.zip')
+
+json_path = path / 'data/file.json'
+
+json.loads(json_path.read_text())
+```
+
+Alternatively, use `tf.io.gfile` API instead of built-in for file operations:
 
 *   `open` -> `tf.io.gfile.GFile`
 *   `os.rename` -> `tf.io.gfile.rename`
 *   ...
+
+Pathlib should be prefered to `tf.io.gfile` (see
+[rational](https://www.tensorflow.org/datasets/common_gotchas#prefer_to_use_pathlib_api).
 
 #### Extra dependencies
 
