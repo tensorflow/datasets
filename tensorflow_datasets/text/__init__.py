@@ -26,6 +26,7 @@ from tensorflow_datasets.text.civil_comments import CivilComments
 from tensorflow_datasets.text.clinc_oos import ClincOOS
 from tensorflow_datasets.text.cos_e import CosE
 from tensorflow_datasets.text.definite_pronoun_resolution import DefinitePronounResolution
+from tensorflow_datasets.text.docnli import DocNLI
 from tensorflow_datasets.text.dolphin_number_word import DolphinNumberWord
 from tensorflow_datasets.text.drop import Drop
 from tensorflow_datasets.text.eraser_multi_rc import EraserMultiRc
