@@ -189,6 +189,9 @@ toc:
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
+  - path: /datasets/catalog/imagenet2012_multilabel
+    status: nightly
+    title: imagenet2012_multilabel (manual)
   - path: /datasets/catalog/imagenet2012_real
     title: imagenet2012_real (manual)
   - path: /datasets/catalog/imagenet2012_subset
