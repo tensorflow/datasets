@@ -443,6 +443,9 @@ toc:
     title: cos_e
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/doc_nli
+    status: nightly
+    title: doc_nli
   - path: /datasets/catalog/dolphin_number_word
     title: dolphin_number_word
   - path: /datasets/catalog/drop

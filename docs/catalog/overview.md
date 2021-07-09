@@ -275,6 +275,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`clinc_oos`](clinc_oos.md)
 *   [`cos_e`](cos_e.md)
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
+*   [`doc_nli`](doc_nli.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dolphin_number_word`](dolphin_number_word.md)
 *   [`drop`](drop.md)
 *   [`eraser_multi_rc`](eraser_multi_rc.md)
