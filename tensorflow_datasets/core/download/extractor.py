@@ -15,6 +15,7 @@
 
 """Module to use to extract archives. No business logic."""
 
+import abc
 import bz2
 import concurrent.futures
 import contextlib
@@ -69,7 +70,6 @@ class _Extractor(object):
     """Returns `promise.Promise` => to_path."""
     path = os.fspath(path)
     to_path = os.fspath(to_path)
-    self._pbar_path.update_total(1)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
     future = self._executor.submit(self._sync_extract, path, extract_method,
@@ -83,10 +83,13 @@ class _Extractor(object):
     path = None
     dst_path = None  # To avoid undefined variable if exception is raised
     try:
-      for path, handle in iter_archive(from_path, method):
+      arch_iter = iter_archive(from_path, method)
+      self._pbar_path.update_total(len(arch_iter))
+      for path, handle in arch_iter:
         path = tf.compat.as_text(path)
-        dst_path = path and os.path.join(to_path_tmp, path) or to_path_tmp
+        dst_path = os.path.join(to_path_tmp, path) if path else to_path_tmp
         _copy(handle, dst_path)
+        self._pbar_path.update(1)
     except BaseException as err:
       msg = 'Error while extracting {} to {} (file: {}) : {}'.format(
           from_path, to_path, path, err)
@@ -97,7 +100,7 @@ class _Extractor(object):
             ' in an error. See the doc to remove the limitation: '
             'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
         )
-      raise ExtractError(msg)
+      raise ExtractError(msg) from err
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
     if tf.io.gfile.exists(to_path):
@@ -109,7 +112,6 @@ class _Extractor(object):
       tf.io.gfile.rename(to_path, path_to_delete)
       tf.io.gfile.rmtree(path_to_delete)
     tf.io.gfile.rename(to_path_tmp, to_path)
-    self._pbar_path.update(1)
     return utils.as_path(to_path)
 
 
@@ -141,30 +143,69 @@ def _open_or_pass(path_or_fobj):
     yield path_or_fobj
 
 
-def iter_tar(arch_f, stream=False):
-  """Iter over tar archive, yielding (path, object-like) tuples.
-
-  Args:
-    arch_f: File object of the archive to iterate.
-    stream: If True, open the archive in stream mode which allows for faster
-      processing and less temporary disk consumption, but random access to the
-      file is not allowed.
-
-  Yields:
-    (filepath, extracted_fobj) for each file in the archive.
+class _ArchiveIterator(abc.ABC):
   """
-  read_type = 'r' + ('|' if stream else ':') + '*'
+  Base iterator class for Archive files
+  Also provides len() functionality
+  """
 
-  with _open_or_pass(arch_f) as fobj:
-    tar = tarfile.open(mode=read_type, fileobj=fobj)
-    for member in tar:
-      if stream and (member.islnk() or member.issym()):
+  def __init__(self, arch_f):
+    self._open_cm = _open_or_pass(arch_f)
+    self.fobj = self._open_cm.__enter__()
+    self._iter = self._iter_archive()
+
+  def __iter__(self):
+    return self
+
+  def __next__(self):
+    for path, extract_file in self._iter:
+      return (path, extract_file)
+    self._open_cm.__exit__(None, None, None)
+    raise StopIteration
+
+  @utils.memoize()
+  def __len__(self) -> int:
+    """Return no of files in this archive"""
+    return self._get_num_files()
+
+  @abc.abstractmethod
+  def _get_num_files(self) -> int:
+    """Return no of files in this archive"""
+
+  @abc.abstractmethod
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    """Return iterator which yields (path, extract_file_object) for all files"""
+
+
+class _TarIterator(_ArchiveIterator):
+  """ArchiveIterator for tar files"""
+
+  def __init__(self, arch_f, stream=False):
+    super().__init__(arch_f)
+    self.stream = stream
+
+    read_type = 'r' + ('|' if self.stream else ':') + '*'
+    self.tar = tarfile.open(mode=read_type, fileobj=self.fobj)
+
+  def _get_num_files(self) -> int:
+    num_files = sum(1 for member in self.tar if member.isfile())
+    if self.stream:
+      # In stream mode, once we iterate over the file we can't go back
+      # So instead of opening the file again, we seek to 0,
+      # and reinstantiate the tar file
+      self.fobj.seek(0)
+      self.tar = tarfile.open(mode='r|*', fileobj=self.fobj)
+    return num_files
+
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    for member in self.tar:
+      if self.stream and (member.islnk() or member.issym()):
         # Links cannot be dereferenced in stream mode.
         logging.warning('Skipping link during extraction: %s', member.name)
         continue
 
       try:
-        extract_file = tar.extractfile(member)
+        extract_file = self.tar.extractfile(member)
       except KeyError:
         if not (member.islnk() or member.issym()):
           raise  # Forward exception non-link files which couldn't be extracted
@@ -183,35 +224,68 @@ def iter_tar(arch_f, stream=False):
           continue
         yield (path, extract_file)
 
+def iter_tar(arch_f, stream=False):
+  return _TarIterator(arch_f, stream)
 
 def iter_tar_stream(arch_f):
-  return iter_tar(arch_f, stream=True)
+  return _TarIterator(arch_f, stream=True)
 
 
-def iter_gzip(arch_f):
-  with _open_or_pass(arch_f) as fobj:
-    gzip_ = gzip.GzipFile(fileobj=fobj)
+class _GzipIterator(_ArchiveIterator):
+  """ArchiveIterator for gzip(.gz) files"""
+
+  def _get_num_files(self) -> int:
+    return 1
+
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    gzip_ = gzip.GzipFile(fileobj=self.fobj)
     yield ('', gzip_)  # No inner file.
 
+def iter_gzip(arch_f):
+  return _GzipIterator(arch_f)
 
-def iter_bzip2(arch_f):
-  with _open_or_pass(arch_f) as fobj:
-    bz2_ = bz2.BZ2File(filename=fobj)
+
+class _Bzip2Iterator(_ArchiveIterator):
+  """ArchiveIterator for bzip2(.bz2) files"""
+
+  def _get_num_files(self) -> int:
+    return 1
+
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    bz2_ = bz2.BZ2File(filename=self.fobj)
     yield ('', bz2_)  # No inner file.
 
+def iter_bzip2(arch_f):
+  return _Bzip2Iterator(arch_f)
 
-def iter_zip(arch_f):
-  """Iterate over zip archive."""
-  with _open_or_pass(arch_f) as fobj:
-    z = zipfile.ZipFile(fobj)
+
+class _ZipIterator(_ArchiveIterator):
+  """ArchiveIterator for zip files"""
+
+  def __init__(self, arch_f):
+    super().__init__(arch_f)
+    self.z = zipfile.ZipFile(self.fobj)
+
+  def _get_num_files(self) -> int:
+    z = self.z
+    num_files = sum(1 for member in z.infolist() if not member.is_dir())
+    return num_files
+
+  def _iter_archive(self) -> Iterator[Tuple[str, typing.BinaryIO]]:
+    z = self.z
     for member in z.infolist():
       extract_file = z.open(member)
-      if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
+      if member.is_dir():  # pytype: disable=attribute-error
+        # Filter directories
         continue
       path = _normpath(member.filename)
       if not path:
         continue
       yield (path, extract_file)
+
+def iter_zip(arch_f):
+  """Iterate over zip archive."""
+  return _ZipIterator(arch_f)
 
 
 _EXTRACT_METHODS = {
