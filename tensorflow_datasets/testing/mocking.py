@@ -28,6 +28,7 @@ import numpy as np
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import tfrecords_reader
@@ -176,22 +177,30 @@ def mock_data(
     del split
     del kwargs
 
+    # Partial decoding
+    if isinstance(decoders, decode.PartialDecoding):
+      features = decoders.extract_features(self.info.features)
+      decoders = decoders.decoders
+    # Full decoding (all features decoded)
+    else:
+      features = self.info.features
+      decoders = decoders  # pylint: disable=self-assigning-variable
+
     if decoders is None:
       generator_cls = RandomFakeGenerator
-      specs = self.info.features.get_tensor_info()
+      specs = features.get_tensor_info()
       decode_fn = lambda ex: ex  # identity
     else:
       # If a decoder is passed, encode/decode the examples.
       generator_cls = EncodedRandomFakeGenerator
-      specs = self.info.features.get_serialized_info()
-      decode_fn = functools.partial(
-          self.info.features.decode_example, decoders=decoders)
+      specs = features.get_serialized_info()
+      decode_fn = functools.partial(features.decode_example, decoders=decoders)
 
     ds = tf.data.Dataset.from_generator(
         # `from_generator` takes a callable with signature () -> iterable
         # Recreating a new generator each time ensure that all pipelines are
         # using the same examples
-        lambda: generator_cls(builder=self, num_examples=num_examples),
+        lambda: generator_cls(features=features, num_examples=num_examples),
         output_types=tf.nest.map_structure(lambda t: t.dtype, specs),
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
     )
@@ -265,10 +274,10 @@ def mock_data(
 class RandomFakeGenerator(object):
   """Generator of fake examples randomly and deterministically generated."""
 
-  def __init__(self, builder, num_examples, seed=0):
+  def __init__(self, features, num_examples, seed=0):
     self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
     self._py_rng = random.Random(seed)
-    self._builder = builder
+    self._features = features
     self._num_examples = num_examples
 
   def _generate_random_string_array(self, shape):
@@ -316,7 +325,7 @@ class RandomFakeGenerator(object):
 
   def _generate_example(self):
     """Generate the next example."""
-    root_feature = self._builder.info.features
+    root_feature = self._features
     flat_features = root_feature._flatten(root_feature)  # pylint: disable=protected-access
     flat_tensor_info = root_feature._flatten(root_feature.get_tensor_info())  # pylint: disable=protected-access
     flat_np = [
@@ -337,4 +346,4 @@ class EncodedRandomFakeGenerator(RandomFakeGenerator):
   def __iter__(self):
     """Yields all fake examples."""
     for ex in super(EncodedRandomFakeGenerator, self).__iter__():
-      yield self._builder.info.features.encode_example(ex)
+      yield self._features.encode_example(ex)

@@ -83,6 +83,21 @@ def test_mocking_add_tfds_id():
 
 
 @pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_partial_decoding():
+  ds = tfds.load(
+      'mnist',
+      split='train',
+      decoders=tfds.decode.PartialDecoding({
+          'image': tfds.features.Image(shape=(None, None, 1)),
+      }),
+  )
+  assert ds.element_spec == {
+      'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+  }
+  list(ds.take(3))  # Iteration should work
+
+
+@pytest.mark.usefixtures('apply_mock_data')
 def test_mocking_imagenet_decoders():
   """Test with SkipDecoding."""
   ds, ds_info = tfds.load(
