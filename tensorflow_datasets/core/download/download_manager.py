@@ -342,6 +342,8 @@ class DownloadManager(object):
     if dl_result.path and not self._force_download:  # Download was cached
       logging.info(
           f'Skipping download of {url}: File cached in {dl_result.path}')
+      # Still update the progression bar to indicate the file was downloaded
+      self._downloader.increase_tqdm(dl_result)
       future = promise.Promise.resolve(dl_result)
     else:
       # Download in an empty tmp directory (to avoid name collisions)

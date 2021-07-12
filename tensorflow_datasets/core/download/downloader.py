@@ -135,6 +135,14 @@ class _Downloader(object):
         self._pbar_dl_size = pbar_dl_size
         yield
 
+  def increase_tqdm(self, dl_result: DownloadResult) -> None:
+    """Update the tqdm bars to visually indicate the dl_result is downloaded."""
+    self._pbar_url.update_total(1)
+    self._pbar_url.update(1)
+    if dl_result.url_info:  # Info unknown for manually downloaded files
+      self._pbar_dl_size.update_total(dl_result.url_info.size)
+      self._pbar_dl_size.update(dl_result.url_info.size)
+
   def download(
       self,
       url: str,
