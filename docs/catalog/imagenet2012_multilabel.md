@@ -113,9 +113,9 @@ final_avg /= num_classes
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `236.72 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.33 KiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -126,12 +126,13 @@ final_avg /= num_classes
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'validation'` | 3
 
 *   **Features**:
 
