@@ -17,6 +17,7 @@
 
 import collections
 import contextlib
+import functools
 from typing import Union
 
 import numpy as np
@@ -135,6 +136,7 @@ def is_dtype(value):
   return True
 
 
+@functools.lru_cache()
 def assert_shape_match(shape1, shape2):
   """Ensure the shape1 match the pattern given by shape2.
 

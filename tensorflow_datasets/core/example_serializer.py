@@ -118,7 +118,7 @@ def _is_string(item):
 def _item_to_np_array(item, dtype, shape):
   """Single item to a np.array."""
   original_item = item
-  item = np.array(item, dtype=dtype.as_numpy_dtype)
+  item = np.asanyarray(item, dtype=dtype.as_numpy_dtype)
   utils.assert_shape_match(item.shape, shape)
   if dtype == tf.string and not _is_string(original_item):
     raise ValueError(
@@ -134,13 +134,12 @@ def _item_to_tf_feature(item, tensor_info):
   if v.dtype == np.bool_:
     v = v.astype(int)
 
-  v = v.flatten()  # Convert v into a 1-d array
   if np.issubdtype(v.dtype, np.integer):
-    return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
+    return tf.train.Feature(int64_list=tf.train.Int64List(value=v.flat))
   elif np.issubdtype(v.dtype, np.floating):
-    return tf.train.Feature(float_list=tf.train.FloatList(value=v))
+    return tf.train.Feature(float_list=tf.train.FloatList(value=v.flat))
   elif tensor_info.dtype == tf.string:
-    v = [tf.compat.as_bytes(x) for x in v]
+    v = [tf.compat.as_bytes(x) for x in v.flat]
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
   else:
     raise ValueError(
