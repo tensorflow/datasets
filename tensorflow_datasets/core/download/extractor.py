@@ -20,6 +20,7 @@ import concurrent.futures
 import contextlib
 import gzip
 import io
+import multiprocessing
 import os
 import tarfile
 import typing
@@ -52,7 +53,8 @@ class UnsafeArchiveError(Exception):
 class _Extractor(object):
   """Singleton (use `get_extractor()` module fct) to extract archives."""
 
-  def __init__(self, max_workers=12):
+  def __init__(self, max_workers=None):
+    max_workers = max_workers or multiprocessing.cpu_count()
     self._executor = concurrent.futures.ThreadPoolExecutor(
         max_workers=max_workers)
     self._pbar_path = None
