@@ -207,9 +207,9 @@ def iter_zip(arch_f):
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
-      extract_file = z.open(member)
       if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
         continue
+      extract_file = z.open(member)
       path = _normpath(member.filename)
       if not path:
         continue
