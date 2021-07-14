@@ -361,6 +361,9 @@ toc:
     title: howell
   - path: /datasets/catalog/iris
     title: iris
+  - path: /datasets/catalog/kddcup99
+    status: nightly
+    title: kddcup99
   - path: /datasets/catalog/movie_lens
     title: movie_lens
   - path: /datasets/catalog/movielens

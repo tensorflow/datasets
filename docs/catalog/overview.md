@@ -229,6 +229,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`higgs`](higgs.md)
 *   [`howell`](howell.md)
 *   [`iris`](iris.md)
+*   [`kddcup99`](kddcup99.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
 *   [`protein_net`](protein_net.md)
