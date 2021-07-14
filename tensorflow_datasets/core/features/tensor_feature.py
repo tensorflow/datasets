@@ -16,12 +16,12 @@
 """Feature connector."""
 
 import enum
-from typing import Union
+import functools
 import zlib
+from typing import Union
 
 import numpy as np
 import tensorflow.compat.v2 as tf
-
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 
@@ -119,6 +119,7 @@ class Tensor(feature_lib.FeatureConnector):
       }
     return serialized_spec
 
+  @functools.lru_cache(maxsize=2048)
   def encode_example(self, example_data):
     """See base class for details."""
     # TODO(epot): Is there a better workaround ?
@@ -131,19 +132,10 @@ class Tensor(feature_lib.FeatureConnector):
                        f'For {self}')
 
     np_dtype = np.dtype(self.dtype.as_numpy_dtype)
-    if isinstance(example_data, tf.Tensor):
-      raise TypeError(
-          f'Error encoding: {example_data!r}. `_generate_examples` should '
-          'yield `np.array` compatible values, not `tf.Tensor`')
-    if not isinstance(example_data, np.ndarray):
-      example_data = np.array(example_data, dtype=np_dtype)
-    # Ensure the shape and dtype match
-    if example_data.dtype != np_dtype:
-      raise ValueError('Dtype {} do not match {}'.format(
-          example_data.dtype, np_dtype))
 
-    shape = example_data.shape
-    utils.assert_shape_match(shape, self._shape)
+    example_data = np.asanyarray(example_data, dtype=np_dtype)
+    # Ensure the shape matches
+    utils.assert_shape_match(example_data.shape, self._shape)
 
     # Eventually encode the data
     if self._encoded_to_bytes:
