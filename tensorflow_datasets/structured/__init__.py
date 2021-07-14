@@ -27,6 +27,7 @@ from tensorflow_datasets.structured.german_credit_numeric import GermanCreditNum
 from tensorflow_datasets.structured.higgs import Higgs
 from tensorflow_datasets.structured.howell import Howell
 from tensorflow_datasets.structured.iris import Iris
+from tensorflow_datasets.structured.kddcup99 import Kddcup99
 from tensorflow_datasets.structured.movielens import Movielens
 from tensorflow_datasets.structured.proteinnet import ProteinNet
 from tensorflow_datasets.structured.radon import Radon
