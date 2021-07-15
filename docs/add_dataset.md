@@ -59,7 +59,7 @@ Use [TFDS CLI](https://www.tensorflow.org/datasets/cli) to generate the required
 template python files.
 
 ```sh
-cd path/to/project/datasets/  # Or use `--dir=path/to/project/datasets/` bellow
+cd path/to/project/datasets/  # Or use `--dir=path/to/project/datasets/` below
 tfds new my_dataset
 ```
 
@@ -85,7 +85,7 @@ of `tfds.core.DatasetBuilder` which takes care of most boilerplate. It supports:
 *   Small/medium datasets which can be generated on a single machine (this
     tutorial).
 *   Very large datasets which require distributed generation (using
-    [Apache Beam](https://beam.apache.org/)). See our
+    [Apache Beam](https://beam.apache.org/), see our
     [huge dataset guide](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset))
 
 Here is a minimal example of dataset class:
