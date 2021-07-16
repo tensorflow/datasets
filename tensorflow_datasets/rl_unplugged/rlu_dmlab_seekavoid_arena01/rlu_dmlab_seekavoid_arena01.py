@@ -30,10 +30,10 @@ _CONFIG_NAMES = ['training_0', 'training_1', 'training_2',
 class RluDmlabSeekavoidArena01(dmlab_dataset.DMLabDatasetBuilder):
   """DatasetBuilder for rlu_dmlab_seekavoid_arena01 dataset."""
 
-  VERSION = tfds.core.Version('1.0.1')
+  VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
-      '1.0.1': 'Complete list of builder configs.',
+      '1.1.0': 'Added is_last.',
   }
 
   # pytype: disable=wrong-keyword-args

@@ -65,6 +65,7 @@ def generate_examples(file_path: str):
   ]
   # is_first corresponds to the done flag delayed by one step.
   dataset_dict['is_first'] = [True] + done[:-1]
+  dataset_dict['is_last'] = done
 
   # Get step metadata
   infos_dict = _get_nested_metadata(dataset_dict, 'infos')
@@ -80,6 +81,7 @@ def generate_examples(file_path: str):
       'discount': np.ones_like(dataset_dict['rewards']),
       'is_terminal': dataset_dict['terminals'],
       'is_first': dataset_dict['is_first'],
+      'is_last': dataset_dict['is_last'],
   }
   if infos_dict:
     dataset_dict['infos'] = infos_dict
@@ -154,8 +156,13 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
   """
   # It's an initial step if the episode is empty.
   episode = {}
-  for k in ['is_first', 'observation', 'action', 'reward', 'discount']:
+  for k in [
+      'is_first', 'is_last', 'observation', 'action', 'reward', 'discount'
+  ]:
     episode[k] = steps[k][begin:end]
+  # In some cases, the episode ends with terminals = timeouts = False. However,
+  # We still want to signal that this is the last sep of an episode.
+  episode['is_last'][-1] = True
   episode['is_terminal'] = [False] * (end - begin)
   if 'infos' in steps.keys():
     episode['infos'] = {}
@@ -177,6 +184,8 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
     episode['discount'] = np.array(
         np.concatenate((episode['discount'], [0.0])), dtype=np.float32)
     episode['is_terminal'] = np.concatenate((episode['is_terminal'], [True]))
+    episode['is_last'][-1] = False
+    episode['is_last'] = np.concatenate((episode['is_last'], [True]))
     if 'infos' in steps.keys():
       for k in steps['infos'].keys():
         episode['infos'][k] = np.concatenate(

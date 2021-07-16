@@ -105,6 +105,7 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
                 'reward': tf.float32,
                 'is_terminal': tf.bool,
                 'is_first': tf.bool,
+                'is_last': tf.bool,
                 'discount': tf.float32,
             }),
         'episode_id':
@@ -172,6 +173,7 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
             'reward': data['rewards'],
             'discount': data['discounts'],
             'is_first': [True] + [False] * (episode_length - 1),
+            'is_last': [False] * (episode_length - 1) + [True],
             'is_terminal': [False] * (episode_length)
         }
     }

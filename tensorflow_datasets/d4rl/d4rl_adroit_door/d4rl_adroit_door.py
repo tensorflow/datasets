@@ -23,10 +23,10 @@ import tensorflow_datasets.public_api as tfds
 class D4rlAdroitDoor(dataset_builder.D4RLDatasetBuilder):
   """DatasetBuilder for d4rl_adroit_door dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
-      '1.0.0':
-          'Initial release.',
+      '1.0.0': 'Initial release.',
+      '1.1.0': 'Added is_last.',
   }
 
   BUILDER_CONFIGS = dataset_builder.ADROIT_BUILDER_CONFIGS

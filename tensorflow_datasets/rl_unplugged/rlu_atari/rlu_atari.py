@@ -138,9 +138,10 @@ class RluAtari(rlu_common.RLUBuilder):
   _SHARDS = 100
   _INPUT_FILE_PREFIX = 'gs://rl_unplugged/atari_episodes/'
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.1.0': 'Added is_last.',
   }
 
   BUILDER_CONFIGS = _builder_configs()
@@ -168,6 +169,8 @@ class RluAtari(rlu_common.RLUBuilder):
                 'is_terminal':
                     tf.bool,
                 'is_first':
+                    tf.bool,
+                'is_last':
                     tf.bool,
                 'discount':
                     tf.float32,
@@ -222,6 +225,7 @@ class RluAtari(rlu_common.RLUBuilder):
     episode_length = tf.size(data['actions'])
     is_first = tf.concat([[True], [False] * tf.ones(episode_length - 1)],
                          axis=0)
+    is_last = tf.concat([[False] * tf.ones(episode_length - 1), [True]], axis=0)
 
     is_terminal = [False] * tf.ones_like(data['actions'])
     discounts = data['discounts']
@@ -243,6 +247,7 @@ class RluAtari(rlu_common.RLUBuilder):
             'clipped_reward': data['clipped_rewards'],
             'discount': discounts,
             'is_first': is_first,
+            'is_last': is_last,
             'is_terminal': is_terminal,
         }
     }

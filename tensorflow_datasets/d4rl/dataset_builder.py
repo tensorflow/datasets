@@ -416,6 +416,8 @@ def get_features_dict(
           tf.bool,
       'is_first':
           tf.bool,
+      'is_last':
+          tf.bool,
       'discount':
           float_type,
   }
