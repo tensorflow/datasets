@@ -29,7 +29,21 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default): Added is_last.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -38,6 +52,10 @@ standardized environments and datasets for training and benchmarking algorithms.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -54,20 +72,6 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 ## d4rl_adroit_hammer/v0-human (default config)
 
-*   **Download size**: `5.33 MiB`
-
-*   **Dataset size**: `6.09 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 70
-
 *   **Features**:
 
 ```python
@@ -80,6 +84,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(33,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(46,), dtype=tf.float32),
         'reward': tf.float32,
@@ -87,55 +92,7 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_hammer-v0-human-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_hammer/v0-cloned
-
-*   **Download size**: `644.69 MiB`
-
-*   **Dataset size**: `537.87 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,594
 
 *   **Features**:
 
@@ -149,6 +106,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(33,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(46,), dtype=tf.float64),
         'reward': tf.float64,
@@ -156,55 +114,7 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_hammer-v0-cloned-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_hammer/v0-expert
-
-*   **Download size**: `529.91 MiB`
-
-*   **Dataset size**: `735.92 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
 
 *   **Features**:
 
@@ -220,6 +130,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(33,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(46,), dtype=tf.float32),
         'reward': tf.float32,
@@ -227,55 +138,7 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_hammer-v0-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_hammer/v1-human
-
-*   **Download size**: `5.35 MiB`
-
-*   **Dataset size**: `6.33 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25
 
 *   **Features**:
 
@@ -291,6 +154,7 @@ FeaturesDict({
             'target_pos': Tensor(shape=(3,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(46,), dtype=tf.float32),
         'reward': tf.float32,
@@ -298,55 +162,7 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_hammer-v1-human-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_hammer/v1-cloned
-
-*   **Download size**: `425.93 MiB`
-
-*   **Dataset size**: `1.68 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 3,606
 
 *   **Features**:
 
@@ -379,6 +195,7 @@ FeaturesDict({
             'target_pos': Tensor(shape=(3,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(46,), dtype=tf.float32),
         'reward': tf.float32,
@@ -386,55 +203,7 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_hammer-v1-cloned-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_hammer/v1-expert
-
-*   **Download size**: `531.24 MiB`
-
-*   **Dataset size**: `842.46 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
 
 *   **Features**:
 
@@ -473,43 +242,10 @@ FeaturesDict({
             'target_pos': Tensor(shape=(3,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(46,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_hammer-v1-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->

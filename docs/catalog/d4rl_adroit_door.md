@@ -29,7 +29,8 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default): Added is_last.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -38,6 +39,10 @@ standardized environments and datasets for training and benchmarking algorithms.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -56,7 +61,7 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Download size**: `2.97 MiB`
 
-*   **Dataset size**: `3.35 MiB`
+*   **Dataset size**: `3.36 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -80,6 +85,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
@@ -87,45 +93,11 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_door-v0-human-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_door/v0-cloned
 
 *   **Download size**: `602.42 MiB`
 
-*   **Dataset size**: `496.36 MiB`
+*   **Dataset size**: `497.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -149,6 +121,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float64),
         'reward': tf.float64,
@@ -156,45 +129,11 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_door-v0-cloned-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_door/v0-expert
 
 *   **Download size**: `511.05 MiB`
 
-*   **Dataset size**: `709.22 MiB`
+*   **Dataset size**: `710.30 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -220,6 +159,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
@@ -227,55 +167,20 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_door-v0-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_door/v1-human
 
-*   **Download size**: `2.98 MiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `3.41 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 25
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -290,6 +195,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
@@ -297,55 +203,20 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_door-v1-human-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_door/v1-cloned
 
-*   **Download size**: `280.72 MiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `1.85 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 4,358
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -377,6 +248,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
@@ -384,55 +256,20 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_door-v1-cloned-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_adroit_door/v1-expert
 
-*   **Download size**: `511.22 MiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `802.40 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
+Split | Examples
+:---- | -------:
 
 *   **Features**:
 
@@ -470,43 +307,10 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_door-v1-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->

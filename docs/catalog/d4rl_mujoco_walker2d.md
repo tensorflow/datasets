@@ -29,7 +29,21 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default): Added is_last.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -38,6 +52,10 @@ standardized environments and datasets for training and benchmarking algorithms.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -54,20 +72,6 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 ## d4rl_mujoco_walker2d/v0-expert (default config)
 
-*   **Download size**: `78.41 MiB`
-
-*   **Dataset size**: `97.64 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,628
-
 *   **Features**:
 
 ```python
@@ -76,63 +80,16 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v0-medium
 
-*   **Download size**: `80.83 MiB`
-
-*   **Dataset size**: `98.64 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,315
-
 *   **Features**:
 
 ```python
@@ -141,63 +98,16 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v0-medium-expert
 
-*   **Download size**: `159.24 MiB`
-
-*   **Dataset size**: `196.28 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 6,943
-
 *   **Features**:
 
 ```python
@@ -206,63 +116,16 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v0-mixed
 
-*   **Download size**: `8.42 MiB`
-
-*   **Dataset size**: `9.95 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 501
-
 *   **Features**:
 
 ```python
@@ -271,63 +134,16 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-mixed-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v0-random
 
-*   **Download size**: `78.41 MiB`
-
-*   **Dataset size**: `109.92 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 50,988
-
 *   **Features**:
 
 ```python
@@ -336,63 +152,16 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-random-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-expert
 
-*   **Download size**: `143.06 MiB`
-
-*   **Dataset size**: `451.57 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,003
-
 *   **Features**:
 
 ```python
@@ -428,63 +197,16 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-medium
 
-*   **Download size**: `144.23 MiB`
-
-*   **Dataset size**: `508.98 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,207
-
 *   **Features**:
 
 ```python
@@ -520,63 +242,16 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-medium-expert
 
-*   **Download size**: `286.69 MiB`
-
-*   **Dataset size**: `340.21 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 2,209
-
 *   **Features**:
 
 ```python
@@ -590,63 +265,16 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-medium-replay
 
-*   **Download size**: `84.37 MiB`
-
-*   **Dataset size**: `51.73 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,093
-
 *   **Features**:
 
 ```python
@@ -662,63 +290,16 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
         'reward': tf.float64,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-replay-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-full-replay
 
-*   **Download size**: `278.95 MiB`
-
-*   **Dataset size**: `170.49 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,888
-
 *   **Features**:
 
 ```python
@@ -734,63 +315,16 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
         'reward': tf.float64,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-full-replay-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-random
 
-*   **Download size**: `132.36 MiB`
-
-*   **Dataset size**: `189.99 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 48,790
-
 *   **Features**:
 
 ```python
@@ -804,63 +338,16 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-random-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v2-expert
 
-*   **Download size**: `205.56 MiB`
-
-*   **Dataset size**: `451.01 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,001
-
 *   **Features**:
 
 ```python
@@ -896,63 +383,16 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v2-full-replay
 
-*   **Download size**: `278.95 MiB`
-
-*   **Dataset size**: `170.49 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,888
-
 *   **Features**:
 
 ```python
@@ -968,6 +408,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
         'reward': tf.float64,
@@ -975,55 +416,7 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-full-replay-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_mujoco_walker2d/v2-medium
-
-*   **Download size**: `206.94 MiB`
-
-*   **Dataset size**: `504.48 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,191
 
 *   **Features**:
 
@@ -1060,6 +453,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -1067,55 +461,7 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_mujoco_walker2d/v2-medium-expert
-
-*   **Download size**: `411.91 MiB`
-
-*   **Dataset size**: `340.20 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 2,191
 
 *   **Features**:
 
@@ -1130,6 +476,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -1137,55 +484,7 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-expert-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_mujoco_walker2d/v2-medium-replay
-
-*   **Download size**: `84.37 MiB`
-
-*   **Dataset size**: `51.73 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,093
 
 *   **Features**:
 
@@ -1202,6 +501,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
         'reward': tf.float64,
@@ -1209,55 +509,7 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-replay-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## d4rl_mujoco_walker2d/v2-random
-
-*   **Download size**: `195.28 MiB`
-
-*   **Dataset size**: `190.04 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 48,908
 
 *   **Features**:
 
@@ -1272,43 +524,10 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
     }),
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-random-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
