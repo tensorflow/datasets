@@ -25,15 +25,11 @@ import pytest
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.image_classification import mnist
-
-from google.protobuf import text_format
-from tensorflow_metadata.proto.v0 import schema_pb2
 
 tf.enable_v2_behavior()
 
@@ -252,83 +248,6 @@ class DatasetInfoTest(testing.TestCase):
   def test_str_smoke(self):
     info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
     _ = str(info)
-
-  @testing.run_in_graph_and_eager_modes()
-  def test_statistics_generation(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare(
-          download_config=download.DownloadConfig(
-              compute_stats=download.ComputeStatsMode.AUTO,),)
-
-      # Overall
-      self.assertEqual(30, builder.info.splits.total_num_examples)
-
-      # Per split.
-      test_split = builder.info.splits["test"].to_proto()
-      train_split = builder.info.splits["train"].to_proto()
-      expected_schema = text_format.Parse(
-          """
-      feature {
-        name: "x"
-        type: INT
-        presence {
-          min_fraction: 1.0
-          min_count: 1
-        }
-        shape {
-          dim {
-            size: 1
-          }
-        }
-      }""", schema_pb2.Schema())
-      self.assertEqual(train_split.statistics.num_examples, 20)
-      self.assertLen(train_split.statistics.features, 1)
-      self.assertEqual(train_split.statistics.features[0].path.step[0], "x")
-      self.assertLen(
-          train_split.statistics.features[0].num_stats.common_stats
-          .num_values_histogram.buckets, 10)
-      self.assertLen(train_split.statistics.features[0].num_stats.histograms, 2)
-
-      self.assertEqual(test_split.statistics.num_examples, 10)
-      self.assertLen(test_split.statistics.features, 1)
-      self.assertEqual(test_split.statistics.features[0].path.step[0], "x")
-      self.assertLen(
-          test_split.statistics.features[0].num_stats.common_stats
-          .num_values_histogram.buckets, 10)
-      self.assertLen(test_split.statistics.features[0].num_stats.histograms, 2)
-      self.assertEqual(builder.info.as_proto.schema, expected_schema)
-
-  @testing.run_in_graph_and_eager_modes()
-  def test_schema_generation_variable_sizes(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = RandomShapedImageGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare(
-          download_config=download.DownloadConfig(
-              compute_stats=download.ComputeStatsMode.AUTO,),)
-
-      expected_schema = text_format.Parse(
-          """
-feature {
-  name: "im"
-  type: BYTES
-  presence {
-    min_fraction: 1.0
-    min_count: 1
-  }
-  shape {
-    dim {
-      size: -1
-    }
-    dim {
-      size: -1
-    }
-    dim {
-      size: 3
-    }
-  }
-}""", schema_pb2.Schema())
-      self.assertEqual(builder.info.as_proto.schema, expected_schema)
 
   def test_metadata(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:

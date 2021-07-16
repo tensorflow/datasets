@@ -575,41 +575,16 @@ class BuilderRestoreGcsTest(testing.TestCase):
     self.patch_gcs = patcher
     self.addCleanup(patcher.stop)
 
-    patcher = mock.patch.object(
-        dataset_info.DatasetInfo,
-        "compute_dynamic_properties",
-    )
-    self.compute_dynamic_property = patcher.start()
-    self.addCleanup(patcher.stop)
-
   def test_stats_restored_from_gcs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      builder.download_and_prepare()
-
-      # Statistics shouldn't have been recomputed
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
-      self.assertFalse(self.compute_dynamic_property.called)
+      self.assertEqual(builder.info.splits["train"].num_examples, 20)
 
   def test_stats_not_restored_gcs_overwritten(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # If split are different that the one restored, stats should be recomputed
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      dl_config = download.DownloadConfig(
-          max_examples_per_split=5,
-          compute_stats=download.ComputeStatsMode.AUTO,
-      )
-      builder.download_and_prepare(download_config=dl_config)
-
-      # Statistics should have been recomputed (split different from the
-      # restored ones)
-      self.assertTrue(self.compute_dynamic_property.called)
+      self.assertEqual(builder.info.splits["train"].num_examples, 20)
 
   def test_gcs_not_exists(self):
     # By disabling the patch, and because DummyMnist is not on GCS, we can
@@ -619,52 +594,13 @@ class BuilderRestoreGcsTest(testing.TestCase):
       builder = testing.DummyMnist(data_dir=tmp_dir)
       # No dataset_info restored, so stats are empty
       self.assertEqual(builder.info.splits.total_num_examples, 0)
-      self.assertFalse(self.compute_dynamic_property.called)
 
-      dl_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.AUTO,)
+      dl_config = download.DownloadConfig()
       builder.download_and_prepare(download_config=dl_config)
 
       # Statistics should have been recomputed
-      self.assertTrue(self.compute_dynamic_property.called)
+      self.assertEqual(builder.info.splits["train"].num_examples, 20)
     self.patch_gcs.start()
-
-  def test_skip_stats(self):
-    # Test when stats do not exists yet and compute_stats='skip'
-
-    # By disabling the patch, and because DummyMnist is not on GCS, we can
-    # simulate a new dataset starting from scratch
-    self.patch_gcs.stop()
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      # No dataset_info restored, so stats are empty
-      builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits, {})
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      download_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.SKIP,)
-      builder.download_and_prepare(download_config=download_config)
-
-      # Statistics computation should have been skipped
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 0)
-      self.assertFalse(self.compute_dynamic_property.called)
-    self.patch_gcs.start()
-
-  def test_force_stats(self):
-    # Test when stats already exists but compute_stats='force'
-
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      # No dataset_info restored, so stats are empty
-      builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 40)
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      download_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.FORCE,)
-      builder.download_and_prepare(download_config=download_config)
-
-      # Statistics computation should have been recomputed
-      self.assertTrue(self.compute_dynamic_property.called)
 
 
 class DatasetBuilderReadTest(testing.TestCase):

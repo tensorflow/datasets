@@ -319,41 +319,6 @@ class DatasetInfo(object):
   def _license_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
-  def compute_dynamic_properties(self):
-    self._compute_dynamic_properties(self._builder)
-    self._fully_initialized = True
-
-  def _compute_dynamic_properties(self, builder):
-    """Update from the DatasetBuilder."""
-    # Fill other things by going over the dataset.
-    splits = self.splits
-    for split_info in utils.tqdm(
-        splits.values(), desc="Computing statistics...", unit=" split"):
-      try:
-        split_name = split_info.name
-        # Fill DatasetFeatureStatistics.
-        dataset_feature_statistics, schema = get_dataset_feature_statistics(
-            builder, split_name)
-
-        # Add the statistics to this split.
-        split_info.statistics.CopyFrom(dataset_feature_statistics)
-
-        # Set the schema at the top-level since this is independent of the
-        # split.
-        self.as_proto.schema.CopyFrom(schema)
-
-      except tf.errors.InvalidArgumentError:
-        # This means there is no such split, even though it was specified in the
-        # info, the least we can do is to log this.
-        logging.error(("%s's info() property specifies split %s, but it "
-                       "doesn't seem to have been generated. Please ensure "
-                       "that the data was downloaded for this split and re-run "
-                       "download_and_prepare."), self.name, split_name)
-        raise
-
-    # Set splits to trigger proto update in setter
-    self.set_splits(splits)
-
   @property
   def as_json(self):
     return json_format.MessageToJson(self.as_proto, sort_keys=True)

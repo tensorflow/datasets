@@ -106,13 +106,5 @@ class ShowExamplesTest(testing.TestCase):
     visualization.show_examples(ds.take(3), ds_info)
 
 
-class ShowStatisticsTest(testing.TestCase):
-
-  def test_show_examples(self):
-    with testing.mock_data():
-      builder = load.builder('imagenet2012')
-      visualization.show_statistics(builder.info)
-
-
 if __name__ == '__main__':
   testing.test_main()

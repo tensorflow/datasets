@@ -445,26 +445,6 @@ class DatasetBuilder(registered.RegisteredDataset):
           # DatasetInfo, you'll likely also want to update
           # DatasetInfo.read_from_directory to possibly restore these attributes
           # when reading from package data.
-
-          # Skip statistics computation if tfdv isn't present
-          try:
-            import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,import-outside-toplevel,unused-import  # pytype: disable=import-error
-            skip_stats_computation = False
-          except ImportError:
-            skip_stats_computation = True
-
-          splits = list(self.info.splits.values())
-          statistics_already_computed = bool(splits and
-                                             splits[0].statistics.num_examples)
-          # Update DatasetInfo metadata by computing statistics from the data.
-          if (skip_stats_computation or
-              download_config.compute_stats == download.ComputeStatsMode.SKIP or
-              download_config.compute_stats == download.ComputeStatsMode.AUTO
-              and statistics_already_computed):
-            pass
-          else:  # Mode is forced or stats do not exists yet
-            logging.info("Computing statistics.")
-            self.info.compute_dynamic_properties()
           self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
