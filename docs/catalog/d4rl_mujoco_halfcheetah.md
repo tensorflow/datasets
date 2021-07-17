@@ -37,19 +37,6 @@ standardized environments and datasets for training and benchmarking algorithms.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Added is_last.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -77,6 +64,20 @@ Split | Examples
 
 ## d4rl_mujoco_halfcheetah/v0-expert (default config)
 
+*   **Download size**: `83.44 MiB`
+
+*   **Dataset size**: `98.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,002
+
 *   **Features**:
 
 ```python
@@ -94,6 +95,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_halfcheetah/v0-medium
+
+*   **Download size**: `82.92 MiB`
+
+*   **Dataset size**: `98.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,002
 
 *   **Features**:
 
@@ -113,6 +128,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_halfcheetah/v0-medium-expert
 
+*   **Download size**: `166.36 MiB`
+
+*   **Dataset size**: `196.86 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,004
+
 *   **Features**:
 
 ```python
@@ -130,6 +159,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_halfcheetah/v0-mixed
+
+*   **Download size**: `8.60 MiB`
+
+*   **Dataset size**: `9.94 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 101
 
 *   **Features**:
 
@@ -149,6 +192,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_halfcheetah/v0-random
 
+*   **Download size**: `84.79 MiB`
+
+*   **Dataset size**: `98.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,002
+
 *   **Features**:
 
 ```python
@@ -166,6 +223,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_halfcheetah/v1-expert
+
+*   **Download size**: `146.94 MiB`
+
+*   **Dataset size**: `451.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,000
 
 *   **Features**:
 
@@ -212,6 +283,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_halfcheetah/v1-medium
 
+*   **Download size**: `146.65 MiB`
+
+*   **Dataset size**: `451.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,000
+
 *   **Features**:
 
 ```python
@@ -257,6 +342,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_halfcheetah/v1-medium-expert
 
+*   **Download size**: `293.00 MiB`
+
+*   **Dataset size**: `342.02 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,000
+
 *   **Features**:
 
 ```python
@@ -279,6 +378,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_halfcheetah/v1-medium-replay
+
+*   **Download size**: `57.68 MiB`
+
+*   **Dataset size**: `34.55 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 202
 
 *   **Features**:
 
@@ -305,6 +418,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_halfcheetah/v1-full-replay
 
+*   **Download size**: `285.01 MiB`
+
+*   **Dataset size**: `171.05 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,000
+
 *   **Features**:
 
 ```python
@@ -330,6 +457,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_halfcheetah/v1-random
 
+*   **Download size**: `145.19 MiB`
+
+*   **Dataset size**: `171.01 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,000
+
 *   **Features**:
 
 ```python
@@ -352,6 +493,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_halfcheetah/v2-expert
+
+*   **Download size**: `209.48 MiB`
+
+*   **Dataset size**: `451.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,000
 
 *   **Features**:
 
@@ -398,6 +553,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_halfcheetah/v2-full-replay
 
+*   **Download size**: `285.01 MiB`
+
+*   **Dataset size**: `171.05 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,000
+
 *   **Features**:
 
 ```python
@@ -422,6 +591,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_halfcheetah/v2-medium
+
+*   **Download size**: `209.48 MiB`
+
+*   **Dataset size**: `451.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,000
 
 *   **Features**:
 
@@ -468,6 +651,20 @@ FeaturesDict({
 
 ## d4rl_mujoco_halfcheetah/v2-medium-expert
 
+*   **Download size**: `418.37 MiB`
+
+*   **Dataset size**: `342.02 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,000
+
 *   **Features**:
 
 ```python
@@ -490,6 +687,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_halfcheetah/v2-medium-replay
+
+*   **Download size**: `57.68 MiB`
+
+*   **Dataset size**: `34.55 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 202
 
 *   **Features**:
 
@@ -515,6 +726,20 @@ FeaturesDict({
 ```
 
 ## d4rl_mujoco_halfcheetah/v2-random
+
+*   **Download size**: `208.68 MiB`
+
+*   **Dataset size**: `171.01 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,000
 
 *   **Features**:
 

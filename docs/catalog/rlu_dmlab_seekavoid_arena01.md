@@ -56,16 +56,9 @@ are interested in large-scale offline RL models with memory.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Features**:
 
@@ -126,18 +119,90 @@ FeaturesDict({
 
 ## rlu_dmlab_seekavoid_arena01/training_0 (default config)
 
+*   **Dataset size**: `381.13 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 134,707
+
 ## rlu_dmlab_seekavoid_arena01/training_1
+
+*   **Dataset size**: `360.77 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 128,472
 
 ## rlu_dmlab_seekavoid_arena01/training_2
 
+*   **Dataset size**: `378.58 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 133,545
+
 ## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.0
+
+*   **Dataset size**: `94.83 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,340
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.0
 
+*   **Dataset size**: `94.68 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,340
+
 ## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.01
+
+*   **Dataset size**: `94.77 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,340
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.01
 
+*   **Dataset size**: `94.65 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,340
+
 ## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.25
 
+*   **Dataset size**: `93.96 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,340
+
 ## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.25
+
+*   **Dataset size**: `93.93 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,340

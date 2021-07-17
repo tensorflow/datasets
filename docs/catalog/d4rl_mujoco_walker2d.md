@@ -32,19 +32,6 @@ standardized environments and datasets for training and benchmarking algorithms.
     *   `1.0.0`: Initial release.
     *   **`1.1.0`** (default): Added is_last.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -52,10 +39,6 @@ Split | Examples
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -72,6 +55,20 @@ Split | Examples
 
 ## d4rl_mujoco_walker2d/v0-expert (default config)
 
+*   **Download size**: `78.41 MiB`
+
+*   **Dataset size**: `98.64 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,628
+
 *   **Features**:
 
 ```python
@@ -87,9 +84,57 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-expert-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v0-medium
 
+*   **Download size**: `80.83 MiB`
+
+*   **Dataset size**: `99.72 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,315
+
 *   **Features**:
 
 ```python
@@ -105,9 +150,57 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v0-medium-expert
 
+*   **Download size**: `159.24 MiB`
+
+*   **Dataset size**: `198.36 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,943
+
 *   **Features**:
 
 ```python
@@ -123,9 +216,57 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-expert-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v0-mixed
 
+*   **Download size**: `8.42 MiB`
+
+*   **Dataset size**: `10.06 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 501
+
 *   **Features**:
 
 ```python
@@ -141,9 +282,57 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-mixed-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v0-random
 
+*   **Download size**: `78.41 MiB`
+
+*   **Dataset size**: `112.04 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 50,988
+
 *   **Features**:
 
 ```python
@@ -159,9 +348,57 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-random-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-expert
 
+*   **Download size**: `143.06 MiB`
+
+*   **Dataset size**: `452.55 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,003
+
 *   **Features**:
 
 ```python
@@ -204,9 +441,57 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-expert-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-medium
 
+*   **Download size**: `144.23 MiB`
+
+*   **Dataset size**: `509.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,207
+
 *   **Features**:
 
 ```python
@@ -249,9 +534,27 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_walker2d/v1-medium-expert
 
+*   **Download size**: `286.69 MiB`
+
+*   **Dataset size**: `342.18 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,209
+
 *   **Features**:
 
 ```python
@@ -272,9 +575,27 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_walker2d/v1-medium-replay
 
+*   **Download size**: `84.37 MiB`
+
+*   **Dataset size**: `52.05 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,093
+
 *   **Features**:
 
 ```python
@@ -297,9 +618,27 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_walker2d/v1-full-replay
 
+*   **Download size**: `278.95 MiB`
+
+*   **Dataset size**: `171.49 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,888
+
 *   **Features**:
 
 ```python
@@ -322,9 +661,57 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:scroll"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-full-replay-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-random
 
+*   **Download size**: `132.36 MiB`
+
+*   **Dataset size**: `192.06 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 48,790
+
 *   **Features**:
 
 ```python
@@ -345,9 +732,27 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_walker2d/v2-expert
 
+*   **Download size**: `205.56 MiB`
+
+*   **Dataset size**: `451.99 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,001
+
 *   **Features**:
 
 ```python
@@ -390,9 +795,27 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_walker2d/v2-full-replay
 
+*   **Download size**: `278.95 MiB`
+
+*   **Dataset size**: `171.49 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,888
+
 *   **Features**:
 
 ```python
@@ -416,7 +839,25 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_walker2d/v2-medium
+
+*   **Download size**: `206.94 MiB`
+
+*   **Dataset size**: `505.47 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,191
 
 *   **Features**:
 
@@ -461,7 +902,25 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_walker2d/v2-medium-expert
+
+*   **Download size**: `411.91 MiB`
+
+*   **Dataset size**: `342.17 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,191
 
 *   **Features**:
 
@@ -484,7 +943,25 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_walker2d/v2-medium-replay
+
+*   **Download size**: `84.37 MiB`
+
+*   **Dataset size**: `52.05 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,093
 
 *   **Features**:
 
@@ -509,7 +986,25 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_walker2d/v2-random
+
+*   **Download size**: `195.28 MiB`
+
+*   **Dataset size**: `192.11 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 48,908
 
 *   **Features**:
 
@@ -531,3 +1026,7 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.

@@ -56,16 +56,9 @@ are interested in large-scale offline RL models with memory.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Features**:
 
@@ -126,6 +119,30 @@ FeaturesDict({
 
 ## rlu_dmlab_rooms_select_nonmatching_object/training_0 (default config)
 
+*   **Dataset size**: `1.26 TiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 667,349
+
 ## rlu_dmlab_rooms_select_nonmatching_object/training_1
 
+*   **Dataset size**: `1.23 TiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 666,923
+
 ## rlu_dmlab_rooms_select_nonmatching_object/training_2
+
+*   **Dataset size**: `1.24 TiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 666,927
