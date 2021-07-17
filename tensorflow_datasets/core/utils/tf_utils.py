@@ -136,7 +136,7 @@ def is_dtype(value):
   return True
 
 
-@functools.cache
+@functools.lru_cache
 def assert_shape_match(shape1, shape2):
   """Ensure the shape1 match the pattern given by shape2.
 
