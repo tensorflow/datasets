@@ -17,6 +17,7 @@
 
 import pathlib
 
+import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
@@ -24,28 +25,44 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.folder_dataset import write_metadata_utils
 
 
-def test_write_metadata(tmp_path: pathlib.Path):
+@pytest.mark.parametrize(
+    'file_format',
+    [
+        None,
+    ],
+)
+def test_write_metadata(
+    tmp_path: pathlib.Path,
+    file_format: testing.DummyDataset,
+):
   tmp_path = utils.as_path(tmp_path)
 
-  src_builder = testing.DummyDataset(data_dir=tmp_path)
+  src_builder = testing.DummyDataset(
+      data_dir=tmp_path / 'origin',
+      file_format=file_format,
+  )
   src_builder.download_and_prepare()
 
-  src_dir = tmp_path / src_builder.info.full_name
   dst_dir = tmp_path / 'copy'
   dst_dir.mkdir()
 
   # Copy all the tfrecord files, but not the dataset info
-  for f in src_dir.iterdir():
+  for f in src_builder.data_path.iterdir():
     if naming.FilenameInfo.is_valid(f.name):
       f.copy(dst_dir / f.name)
 
   metadata_path = dst_dir / 'dataset_info.json'
 
+  if file_format is None:
+    split_infos = list(src_builder.info.splits.values())
+  else:
+    split_infos = None  # Auto-compute split infos
+
   assert not metadata_path.exists()
   write_metadata_utils.write_metadata(
       data_dir=dst_dir,
       features=src_builder.info.features,
-      split_infos=list(src_builder.info.splits.values()),
+      split_infos=split_infos,
       description='my test description.')
   assert metadata_path.exists()
 
@@ -53,6 +70,7 @@ def test_write_metadata(tmp_path: pathlib.Path):
   builder = read_only_builder.builder_from_directory(dst_dir)
   assert builder.name == 'dummy_dataset'
   assert set(builder.info.splits) == {'train'}
+  assert builder.info.splits['train'].num_examples == 3
   assert builder.info.description == 'my test description.'
 
   # Values are the same

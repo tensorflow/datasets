@@ -16,9 +16,11 @@
 r"""Beam pipeline which compute the number of examples in the given tfrecord."""
 
 import collections
+import functools
+import itertools
 import os
 import pprint
-from typing import Dict, List, Type
+from typing import Dict, List, Optional, Type
 
 import dataclasses
 from tensorflow_datasets.core import file_adapters
@@ -29,7 +31,6 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
 
 from google.protobuf import json_format
-
 
 _SplitFilesDict = Dict[str, List[naming.FilenameInfo]]
 
@@ -45,7 +46,7 @@ class _ShardInfo:
 def compute_split_info(
     *,
     data_dir: utils.PathLike,
-    out_dir: utils.PathLike,
+    out_dir: Optional[utils.PathLike] = None,
 ) -> List[split_lib.SplitInfo]:
   """Compute the split info on the given files.
 
@@ -58,15 +59,13 @@ def compute_split_info(
   Args:
     data_dir: Directory containing the `.tfrecord` files (or similar format)
     out_dir: Output directory on which save the metadata. It should be available
-      from the apache beam workers.
+      from the apache beam workers. If not set, apache beam won't be used (only
+      available with some file formats).
 
   Returns:
     split_infos: The list of `tfds.core.SplitInfo`.
   """
   data_dir = utils.as_path(data_dir)
-  out_dir = utils.as_path(out_dir)
-
-  assert out_dir.exists(), f'{out_dir} does not exists'
 
   # Auto-detect the splits from the files
   split_files = _extract_split_files(data_dir)
@@ -74,12 +73,15 @@ def compute_split_info(
   for split_name, file_infos in split_files.items():
     print(f' * {split_name}: {file_infos[0].num_shards} shards')
 
-  # Launch the beam pipeline to extract compute the split info
-  split_infos = _compute_split_statistics(
-      split_files=split_files,
-      data_dir=data_dir,
-      out_dir=out_dir,
-  )
+  # Launch the beam pipeline to compute the split info
+  if out_dir is not None:
+    split_infos = _compute_split_statistics_beam(
+        split_files=split_files,
+        data_dir=data_dir,
+        out_dir=out_dir,
+    )
+  else:
+    raise NotImplementedError('compute_split_info require out_dir kwargs.')
 
   print('Computed split infos: ')
   pprint.pprint(split_infos)
@@ -108,13 +110,17 @@ def _extract_split_files(data_dir: utils.ReadWritePath) -> _SplitFilesDict:
   return split_files
 
 
-def _compute_split_statistics(
+def _compute_split_statistics_beam(
     *,
     split_files: _SplitFilesDict,
     data_dir: utils.ReadWritePath,
-    out_dir: utils.ReadWritePath,
+    out_dir: utils.PathLike,
 ) -> List[split_lib.SplitInfo]:
   """Compute statistics."""
+  out_dir = utils.as_path(out_dir)
+
+  assert out_dir.exists(), f'{out_dir} does not exists'
+
   beam = lazy_imports_lib.lazy_imports.apache_beam
 
   # Launch the beam pipeline computation
@@ -171,6 +177,7 @@ def _process_split(
           # Group everything in a single elem (_ShardInfo -> List[_ShardInfo])
           | _group_all()  # pytype: disable=missing-parameter  # pylint: disable=no-value-for-parameter
           | beam.Map(_merge_shard_info)
+          | beam.Map(_shard_info_to_json_str)
           | beam.io.WriteToText(  # pytype: disable=missing-parameter
               os.fspath(out_dir / _out_filename(split_name)),
               num_shards=1,
@@ -210,7 +217,7 @@ def _process_shard(
   )
 
 
-def _merge_shard_info(shard_infos: List[_ShardInfo],) -> str:
+def _merge_shard_info(shard_infos: List[_ShardInfo]) -> split_lib.SplitInfo:
   """Merge all shard info from one splits and returns the json.
 
   Args:
@@ -221,11 +228,14 @@ def _merge_shard_info(shard_infos: List[_ShardInfo],) -> str:
   """
   split_name, = {s.file_info.split for s in shard_infos}
   shard_infos = sorted(shard_infos, key=lambda s: s.file_info.shard_index)
-  split_info = split_lib.SplitInfo(
+  return split_lib.SplitInfo(
       name=split_name,
       shard_lengths=[s.num_examples for s in shard_infos],
       num_bytes=sum(s.bytes_size for s in shard_infos),
   )
+
+
+def _shard_info_to_json_str(split_info: split_lib.SplitInfo) -> str:
   proto = split_info.to_proto()
   return json_format.MessageToJson(proto, sort_keys=True)
 
