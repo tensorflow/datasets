@@ -21,7 +21,7 @@ import pathlib
 import posixpath
 import types
 import typing
-from typing import Any, AnyStr, ClassVar, Iterator, Optional, Type, TypeVar
+from typing import Any, ClassVar, Iterator, Optional, Type, TypeVar, Union
 
 import tensorflow as tf
 from tensorflow_datasets.core.utils import type_utils
@@ -156,14 +156,14 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
       encoding: Optional[str] = None,
       errors: Optional[str] = None,
       **kwargs: Any,
-  ) -> typing.IO[AnyStr]:
+  ) -> typing.IO[Union[str, bytes]]:
     """Opens the file."""
     if errors:
       raise NotImplementedError
     if encoding and not encoding.lower().startswith(('utf8', 'utf-8')):
       raise ValueError(f'Only UTF-8 encoding supported. Not: {encoding}')
     gfile = tf.io.gfile.GFile(self._path_str, mode, **kwargs)
-    gfile = typing.cast(typing.IO[AnyStr], gfile)  # pytype: disable=invalid-typevar
+    gfile = typing.cast(typing.IO[Union[str, bytes]], gfile)
     return gfile
 
   def rename(self: _P, target: type_utils.PathLike) -> _P:
