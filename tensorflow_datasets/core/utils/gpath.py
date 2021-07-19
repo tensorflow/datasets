@@ -163,7 +163,7 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
     if encoding and not encoding.lower().startswith(('utf8', 'utf-8')):
       raise ValueError(f'Only UTF-8 encoding supported. Not: {encoding}')
     gfile = tf.io.gfile.GFile(self._path_str, mode, **kwargs)
-    gfile = typing.cast(typing.IO[Union[str, bytes]], gfile)
+    gfile = typing.cast(typing.IO[Union[str, bytes]], gfile)  # pytype: disable=invalid-annotation
     return gfile
 
   def rename(self: _P, target: type_utils.PathLike) -> _P:
