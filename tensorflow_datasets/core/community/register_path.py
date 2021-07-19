@@ -102,11 +102,6 @@ class DataDirRegister(register_base.BaseRegister):
       **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
-    data_dir = builder_kwargs.pop('data_dir', None)
-    if data_dir:
-      raise ValueError(
-          '`data_dir` cannot be set for data_dir-based community datasets. '
-          f'Dataset should already be generated. Got: {data_dir}')
     if name.namespace is None:
       raise AssertionError(f'No namespace found: {name}')
     if name.namespace not in self._ns2data_dir:  # pylint: disable=unsupported-membership-test
@@ -115,9 +110,12 @@ class DataDirRegister(register_base.BaseRegister):
       hint = f'\nDid you mean: {close_matches[0]}' if close_matches else ''
       raise KeyError(f'Namespace `{name.namespace}` for `{name}` not found. '
                      f'Should be one of {sorted(self._ns2data_dir)}{hint}')
+    data_dir = builder_kwargs.pop('data_dir', None)
+    if not data_dir:
+      data_dir = self._ns2data_dir[name.namespace]
     return read_only_builder.builder_from_files(
         name.name,
-        data_dir=self._ns2data_dir[name.namespace],
+        data_dir=data_dir,
         **builder_kwargs,
     )
 

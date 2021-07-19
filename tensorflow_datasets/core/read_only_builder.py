@@ -196,11 +196,10 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   data_dir = builder_kwargs.pop('data_dir', None)
 
   # Builder cannot be found if it uses:
-  # * namespace
   # * version='experimental_latest'
   # * config objects (rather than `str`)
   # * custom DatasetBuilder.__init__ kwargs
-  if (name.namespace or version == 'experimental_latest' or
+  if (version == 'experimental_latest' or
       isinstance(config, dataset_builder.BuilderConfig) or builder_kwargs):
     return None
 

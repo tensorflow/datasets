@@ -31,6 +31,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import load
+from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.testing import test_utils
 
@@ -139,6 +140,7 @@ def mock_data(
   original_init_fn = dataset_builder.DatasetBuilder.__init__
   original_as_dataset_fn = dataset_builder.DatasetBuilder.as_dataset
   original_builder_fn = load.builder
+  original_builder_from_files = read_only_builder.builder_from_files
 
   def mock_download_and_prepare(self, *args, **kwargs):
     """`builder.download_and_prepare` is a no-op."""
@@ -217,6 +219,14 @@ def mock_data(
 
     return ds
 
+  def new_builder_from_files(*args, **kwargs):
+    kwargs.pop('data_dir')
+    # Since we inject `data_dir` at this point, we do to mock DatasetBuilder
+    # anymore.
+    with mock.patch(f'{core}.dataset_builder.DatasetBuilder.__init__',
+                    original_init_fn):
+      return original_builder_from_files(*args, data_dir=data_dir)
+
   if not as_dataset_fn:
     as_dataset_fn = mock_as_dataset
 
@@ -258,6 +268,10 @@ def mock_data(
         (
             f'{core}.dataset_builder.FileReaderBuilder._as_dataset',
             as_dataset_fn,
+        ),
+        (
+            f'{core}.read_only_builder.builder_from_files',
+            new_builder_from_files,
         ),
     ]:
       stack.enter_context(mock.patch(path, mocked_fn))
