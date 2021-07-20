@@ -224,3 +224,27 @@ def test_cardinality():
   with tfds.testing.mock_data(num_examples=15):
     ds = tfds.load('mnist', split='train')
     assert ds.cardinality().numpy().item() == 15
+
+
+@pytest.mark.parametrize(
+    'ds_name',
+    [
+        'dummy_dataset',
+    ],
+)
+def test_mock_non_registered_datasets(
+    dummy_dataset: tfds.testing.DummyDataset,
+    ds_name: str,
+):
+  # Without mocking, the dataset cannot be found
+  with pytest.raises(tfds.core.registered.DatasetNotFoundError):
+    # Do not test 'huggingface:dummy_dataset' to not have tests
+    # access non-hermetic resources.
+    tfds.builder('dummy_dataset')
+
+  data_dir = dummy_dataset._data_dir_root
+  # After mocking, the dataset is restored from the metadata files.
+  with tfds.testing.mock_data(data_dir=data_dir, num_examples=15):
+    builder = tfds.builder(ds_name)
+    ds = builder.as_dataset(split='train')
+    assert len(list(ds)) == 15

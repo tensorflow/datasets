@@ -30,7 +30,7 @@ import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
-from tensorflow_datasets.core import load
+from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.testing import test_utils
 
@@ -138,7 +138,7 @@ def mock_data(
 
   original_init_fn = dataset_builder.DatasetBuilder.__init__
   original_as_dataset_fn = dataset_builder.DatasetBuilder.as_dataset
-  original_builder_fn = load.builder
+  original_builder_from_files = read_only_builder.builder_from_files
 
   def mock_download_and_prepare(self, *args, **kwargs):
     """`builder.download_and_prepare` is a no-op."""
@@ -227,13 +227,20 @@ def mock_data(
   else:  # AUTO or USE_FILES with explicitly given `data_dir`
     mock_data_dir = data_dir
 
-  def mock_builder(*args, data_dir=None, **kwargs):
-    del data_dir  # Unused. Inject `mock_data_dir` instead.
-    return original_builder_fn(*args, data_dir=mock_data_dir, **kwargs)
-
   def mock_init(*args, data_dir=None, **kwargs):
     del data_dir  # Unused. Inject `mock_data_dir` instead.
     return original_init_fn(*args, data_dir=mock_data_dir, **kwargs)
+
+  def new_builder_from_files(*args, **kwargs):
+    # Replace the user-given data dir by the mocked one
+    kwargs.pop('data_dir', None)
+    # `DatasetBuilder.__init__` is mocked above to inject the wrong data_dir.
+    # So we restore the original `DatasetBuilder.__init__` inside
+    # `builder_from_files` calls.
+    with mock.patch(f'{core}.dataset_builder.DatasetBuilder.__init__',
+                    original_init_fn):
+      return original_builder_from_files(
+          *args, data_dir=mock_data_dir, **kwargs)
 
   core = 'tensorflow_datasets.core'
   with contextlib.ExitStack() as stack:
@@ -242,10 +249,13 @@ def mock_data(
         (f'{core}.utils.gcs_utils.exists', lambda path: False),
         # Patch `data_dir`: `data_dir` explicitly set by users will be ignored.
         # `data_dir` is used at two places:
-        # * `tfds.builder` to search read-only datasets loaded from config.
+        # * `builder_from_files` to search read-only datasets loaded from config
         # * `DatasetBuilder.__init__` otherwise
         (f'{core}.dataset_builder.DatasetBuilder.__init__', mock_init),
-        (f'{core}.load.builder', mock_builder),
+        (
+            f'{core}.read_only_builder.builder_from_files',
+            new_builder_from_files,
+        ),
         # Patch DatasetBuilder
         (
             f'{core}.dataset_builder.DatasetBuilder.download_and_prepare',
@@ -261,13 +271,6 @@ def mock_data(
         ),
     ]:
       stack.enter_context(mock.patch(path, mocked_fn))
-    # We patch `tfds.builder` alias separatelly, as the alias only exists
-    # when the public `__init__` API is imported.
-    try:
-      stack.enter_context(
-          mock.patch('tensorflow_datasets.builder', mock_builder),)
-    except AttributeError:
-      pass
     yield
 
 
