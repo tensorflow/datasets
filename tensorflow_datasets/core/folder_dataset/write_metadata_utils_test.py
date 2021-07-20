@@ -33,7 +33,7 @@ from tensorflow_datasets.core.folder_dataset import write_metadata_utils
 )
 def test_write_metadata(
     tmp_path: pathlib.Path,
-    file_format: testing.DummyDataset,
+    file_format,
 ):
   tmp_path = utils.as_path(tmp_path)
 
@@ -69,6 +69,7 @@ def test_write_metadata(
   # After metadata are written, builder can be restored from the directory
   builder = read_only_builder.builder_from_directory(dst_dir)
   assert builder.name == 'dummy_dataset'
+  assert builder.version == '1.0.0'
   assert set(builder.info.splits) == {'train'}
   assert builder.info.splits['train'].num_examples == 3
   assert builder.info.description == 'my test description.'

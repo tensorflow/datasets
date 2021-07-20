@@ -50,7 +50,7 @@ def write_metadata(
     features: features_lib.FeatureConnector,
     split_infos: Union[None, type_utils.PathLike,
                        List[split_lib.SplitInfo]] = None,
-    version: Union[None, str, utils.Version] = '1.0.0',
+    version: Union[None, str, utils.Version] = None,
     check_data: bool = True,
     **ds_info_kwargs,
 ) -> None:
@@ -67,7 +67,8 @@ def write_metadata(
       list of `tfds.core.SplitInfo` (returned value of
       `tfds.folder_dataset.compute_split_info`) * `None` to auto-compute the
       split info.
-    version: Optional dataset version (default to 1.0.0)
+    version: Optional dataset version (auto-infer by default, or fallback to
+      1.0.0)
     check_data: If True, perform additional check to validate the data in
       data_dir is valid
     **ds_info_kwargs: Additional metadata forwarded to `tfds.core.DatasetInfo` (
@@ -98,6 +99,12 @@ def write_metadata(
       kwds=dict(skip_registration=True),
       exec_body=None,
   )
+
+  if version is None:  # Automatically detect the version
+    if utils.Version.is_valid(data_dir.name):
+      version = data_dir.name
+    else:
+      version = '1.0.0'
   cls.VERSION = utils.Version(version)
 
   # Create a dummy builder (use non existant folder to make sure
