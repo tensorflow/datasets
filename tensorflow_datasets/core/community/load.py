@@ -54,6 +54,8 @@ def builder_cls_from_module(
   if len(builder_classes) != 1:
     raise ValueError(
         f'Could not load DatasetBuilder from: {module_name}. '
-        'Make sure the module only contains a single `DatasetBuilder`. '
+        'Make sure the module only contains a single `DatasetBuilder`.\n'
+        'If no dataset is detected, make sure that all abstractmethods are '
+        'implemented.\n'
         f'Detected builders: {builder_classes}')
   return builder_classes[0]
