@@ -175,8 +175,7 @@ class Image(feature.FeatureConnector):
     ```python
     features=features.FeaturesDict({
         'input': features.Image(),
-        'target': features.Image(shape=(None, None, 1),
-                                   encoding_format='png'),
+        'target': features.Image(shape=(None, None, 1), encoding_format='png'),
     })
     ```
 
@@ -190,6 +189,8 @@ class Image(feature.FeatureConnector):
     ```
   """
 
+  # If updating the signature here, LabeledImage and Video should likely be
+  # updated too.
   def __init__(
       self,
       *,
@@ -404,6 +405,8 @@ def _get_and_validate_dtype(dtype, encoding_format):
 
 def _get_and_validate_shape(shape, encoding_format):
   """Update the shape."""
+  if len(shape) <= 2:
+    raise ValueError(f'Image shape should be (h, w, c). Got: {shape}')
   channels = shape[-1]
   acceptable_channels = _ACCEPTABLE_CHANNELS.get(encoding_format)
   if acceptable_channels and channels not in acceptable_channels:

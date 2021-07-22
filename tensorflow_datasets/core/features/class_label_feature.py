@@ -26,6 +26,7 @@ Json = type_utils.Json
 class ClassLabel(tensor_feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
+  # If updating the signature here, LabeledImage should likely be updated too.
   def __init__(self, *, num_classes=None, names=None, names_file=None):
     """Constructs a ClassLabel FeatureConnector.
 
