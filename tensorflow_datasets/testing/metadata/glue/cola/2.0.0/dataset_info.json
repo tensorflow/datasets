@@ -1,0 +1,38 @@
+{
+  "citation": "@article{warstadt2018neural,\n  title={Neural Network Acceptability Judgments},\n  author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},\n  journal={arXiv preprint arXiv:1805.12471},\n  year={2018}\n}\n@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
+  "configDescription": "The Corpus of Linguistic Acceptability consists of English\nacceptability judgments drawn from books and journal articles on\nlinguistic theory. Each example is a sequence of words annotated\nwith whether it is a grammatical English sentence.",
+  "configName": "cola",
+  "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
+  "downloadSize": "376971",
+  "location": {
+    "urls": [
+      "https://nyu-mll.github.io/CoLA/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.glue",
+  "name": "glue",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "784577",
+      "shardLengths": [
+        "8551"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "96804",
+      "shardLengths": [
+        "1043"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "107278",
+      "shardLengths": [
+        "1063"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

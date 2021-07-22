@@ -1,0 +1,33 @@
+{
+  "citation": "@inproceedings{inproceedings,\nauthor = {Shi, Shuming and Wang, Yuehui and Lin, Chin-Yew and Liu, Xiaojiang and Rui, Yong},\nyear = {2015},\nmonth = {09},\npages = {},\ntitle = {Automatically Solving Number Word Problems by Semantic Parsing and Reasoning},\ndoi = {10.18653/v1/D15-1135}\n}",
+  "description": "Dolphin Math Word Problem dataset (2015), as presented in https://www.microsoft.com/en-us/research/uploads/prod/2016/02//dolphin-sigmadolphin.datasets.pdf",
+  "downloadSize": "287153",
+  "location": {
+    "urls": [
+      "https://www.microsoft.com/en-us/research/project/sigmadolphin-2/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.dolphin_number_word.dolphin_number_word",
+  "name": "dolphin_number_word",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "311928",
+      "shardLengths": [
+        "864"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "1249795",
+      "shardLengths": [
+        "3507"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "text",
+    "output": "ans"
+  },
+  "version": "0.0.2"
+}

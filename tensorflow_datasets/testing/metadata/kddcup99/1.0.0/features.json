@@ -1,0 +1,333 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "duration": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "protocol_type": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 3
+            }
+        },
+        "service": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 71
+            }
+        },
+        "flag": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 11
+            }
+        },
+        "src_bytes": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "dst_bytes": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "land": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "bool",
+                "encoding": "none"
+            }
+        },
+        "wrong_fragment": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "urgent": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "hot": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "num_failed_logins": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "logged_in": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "bool",
+                "encoding": "none"
+            }
+        },
+        "num_compromised": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "root_shell": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "bool",
+                "encoding": "none"
+            }
+        },
+        "su_attempted": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "num_root": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "num_file_creations": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "num_shells": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "num_access_files": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "num_outbound_cmds": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "is_hot_login": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "bool",
+                "encoding": "none"
+            }
+        },
+        "is_guest_login": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "bool",
+                "encoding": "none"
+            }
+        },
+        "count": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "srv_count": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "serror_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "srv_serror_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "rerror_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "srv_rerror_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "same_srv_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "diff_srv_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "srv_diff_host_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_count": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_srv_count": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_same_srv_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_diff_srv_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_same_src_port_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_srv_diff_host_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_serror_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_srv_serror_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_rerror_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "dst_host_srv_rerror_rate": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "label": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 40
+            }
+        }
+    }
+}

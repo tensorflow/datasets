@@ -1,0 +1,117 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "gem_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "gem_parent_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "dialog_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "turn_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32"
+            }
+        },
+        "service": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "prompt": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "context": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "string"
+                    }
+                },
+                "length": null
+            }
+        },
+        "dialog_acts": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                    "content": {
+                        "act": {
+                            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "content": {
+                                "num_classes": 18
+                            }
+                        },
+                        "slot": {
+                            "type": "tensorflow_datasets.core.features.feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "string"
+                            }
+                        },
+                        "values": {
+                            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                            "content": {
+                                "feature": {
+                                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                                    "content": {
+                                        "shape": [],
+                                        "dtype": "string"
+                                    }
+                                },
+                                "length": null
+                            }
+                        }
+                    }
+                },
+                "length": null
+            }
+        },
+        "target": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "references": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "string"
+                    }
+                },
+                "length": null
+            }
+        }
+    }
+}

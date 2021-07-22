@@ -1,0 +1,39 @@
+{
+  "citation": "@article{DBLP:journals/corr/Pont-TusetPCASG17,\n  author    = {Jordi Pont{-}Tuset and\n               Federico Perazzi and\n               Sergi Caelles and\n               Pablo Arbelaez and\n               Alexander Sorkine{-}Hornung and\n               Luc Van Gool},\n  title     = {The 2017 {DAVIS} Challenge on Video Object Segmentation},\n  journal   = {CoRR},\n  volume    = {abs/1704.00675},\n  year      = {2017},\n  url       = {http://arxiv.org/abs/1704.00675},\n  archivePrefix = {arXiv},\n  eprint    = {1704.00675},\n  timestamp = {Mon, 13 Aug 2018 16:48:55 +0200},\n  biburl    = {https://dblp.org/rec/journals/corr/Pont-TusetPCASG17.bib},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "configDescription": "The 480p version of the dataset",
+  "configName": "480p",
+  "description": "The DAVIS 2017 video object segmentation dataset.",
+  "downloadSize": "832766765",
+  "location": {
+    "urls": [
+      "https://davischallenge.org/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.video.davis.davis",
+  "name": "davis",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "565578772",
+      "shardLengths": [
+        "8",
+        "7",
+        "7",
+        "8",
+        "8",
+        "7",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "265165261",
+      "shardLengths": [
+        "15",
+        "15"
+      ]
+    }
+  ],
+  "version": "2.1.0"
+}
