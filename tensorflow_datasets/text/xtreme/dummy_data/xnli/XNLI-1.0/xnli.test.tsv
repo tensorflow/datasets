@@ -1,0 +1,3 @@
+language	gold_label	sentence1_binary_parse	sentence2_binary_parse	sentence1_parse	sentence2_parse	sentence1	sentence2	promptID	pairID	genre	label1	label2	label3	label4	label5	sentence1_tokenized	sentence2_tokenized	match
+ar	entailment					قال أنهم اتجهوا إلى الشمال.	قال أنهم صعدوا شمالاً.	73	219	facetoface	entailment	entailment	entailment	entailment	entailment	قال أنهم اتجهوا إلى الشمال .	قال أنهم صعدوا شمالاً .	True
+en	neutral					لا، لأكون صادقًا، لم أقرأ أي من الكتب التي كان من المفترض أن أقرأها.	لم أقرأ أي كتب أطول من 100 صفحة.	79	235	facetoface	neutral	contradiction	neutral	neutral	neutral	لا ، لأكون صادقًا ، لم أقرأ أي من الكتب التي كان من المفترض أن أقرأها .	لم أقرأ أي كتب أطول من 100 صفحة .	True
