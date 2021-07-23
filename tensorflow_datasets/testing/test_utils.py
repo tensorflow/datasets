@@ -440,3 +440,30 @@ class DummyParser(object):
 
   def parse_example(self, ex):
     return ex
+
+
+def assert_features_equal(features0, features1) -> None:
+  """Asserts that the 2 nested FeatureConnector structure match."""
+  _assert_features_equal(
+      features.features_dict.to_feature(features0),
+      features.features_dict.to_feature(features1),
+  )
+
+
+def _assert_features_equal(features0, features1) -> None:
+  tf.nest.map_structure(_assert_feature_equal, features0, features1)
+
+
+def _assert_feature_equal(feature0, feature1):
+  """Assert that 2 features are equals."""
+  assert type(feature0) == type(feature1)  # pylint: disable=unidiomatic-typecheck
+  assert repr(feature0) == repr(feature1)
+  assert feature0.shape == feature1.shape
+  assert feature0.dtype == feature1.dtype
+  if isinstance(feature0, features.FeaturesDict):
+    _assert_features_equal(dict(feature0), dict(feature1))
+  if isinstance(feature0, features.Sequence):
+    assert feature0._length == feature1._length  # pylint: disable=protected-access
+    _assert_features_equal(feature0.feature, feature1.feature)
+  if isinstance(feature0, features.ClassLabel):
+    assert feature0.names == feature1.names
