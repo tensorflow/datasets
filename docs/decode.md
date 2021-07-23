@@ -156,9 +156,26 @@ features you need. All other features will be ignored/skipped.
 ```python
 builder = tfds.builder('my_dataset')
 builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
+    'image': True,
+    'metadata': {'num_objects', 'scene_name'},
+    'objects': {'label'},
+})
+```
+
+TFDS will select the subset of `builder.info.features` matching the given
+`tfds.decode.PartialDecoding` structure.
+
+In the above code, the featured are implictly extracted to match
+`builder.info.features`. It is also possible to explicitly define the features.
+The above code is equivalent to:
+
+```python
+builder = tfds.builder('my_dataset')
+builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
     'image': tfds.features.Image(),
     'metadata': {
         'num_objects': tf.int64,
+        'scene_name': tfds.features.Text(),
     }
     'objects': tfds.features.Sequence({
         'label': tfds.features.ClassLabel(names=[]),
@@ -166,11 +183,8 @@ builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
 })
 ```
 
-TFDS will select the subset of `builder.info.features` matching the given
-`tfds.decode.PartialDecoding` structure. The original metadata (label names,
-image shape,...) are automatically reused so it's not required to provide them.
+The original metadata (label names, image shape,...) are automatically reused so
+it's not required to provide them.
 
 `tfds.decode.SkipDecoding` can be passed to `tfds.decode.PartialDecoding`,
 through the `PartialDecoding(..., decoders={})` kwargs.
-
-Note: This API is still experimental so might change in the future.

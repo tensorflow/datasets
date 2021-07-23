@@ -160,3 +160,10 @@ can be more performant to skip the image decoding with
 
 The code for both examples is available in the
 [decode guide](https://www.tensorflow.org/datasets/decode#usage_examples).
+
+### Skip unused features
+
+If you're only using a subset of the features, it is possible to entirely skip
+some features. If your dataset has many unused features, not decoding them can
+significantly improve performances. See
+https://www.tensorflow.org/datasets/decode#only_decode_a_sub-set_of_the_features.

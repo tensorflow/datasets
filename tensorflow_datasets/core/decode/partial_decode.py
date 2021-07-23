@@ -16,15 +16,17 @@
 """Partial feature connector decoding util."""
 
 import typing
-from typing import Dict, Optional
+from typing import Any, Callable, Dict, Optional, Union
 
+import tensorflow as tf
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.decode import base
 from tensorflow_datasets.core.features import features_dict
 
 # Expected feature specs provided by the user
-_FeatureSpecs = utils.TreeDict[features_lib.FeatureConnector]
+_FeatureSpecElem = Union[features_lib.FeatureConnector, Any]
+_FeatureSpecs = utils.TreeDict[_FeatureSpecElem]
 _FeaturesDict = Dict[str, features_lib.FeatureConnector]
 
 
@@ -67,10 +69,70 @@ class PartialDecoding:
     """
     with utils.try_reraise(
         'Provided PartialDecoding specs does not match actual features: '):
+
+      # Convert non-features into features
+      expected_feature = _normalize_feature_item(
+          feature=features,
+          expected_feature=self._feature_specs,
+      )
+      # Get the intersection of `features` and `expected_feature`
       return _extract_features(
           feature=features,
-          expected_feature=features_dict.to_feature(self._feature_specs),
+          expected_feature=features_dict.to_feature(expected_feature),
       )
+
+
+def _normalize_feature_item(
+    feature: features_lib.FeatureConnector,
+    expected_feature: _FeatureSpecs,
+) -> _FeatureSpecs:
+  """."""
+  # If user provide a FeatureConnector, use this
+  if isinstance(expected_feature,
+                (features_lib.FeatureConnector, tf.dtypes.DType)):
+    return expected_feature
+  # If the user provide a bool, use the matching feature connector
+  # Example: {'cameras': True} -> `{'camera': FeatureDict({'image': Image()})}`
+  elif isinstance(expected_feature, bool):
+    if not expected_feature:
+      raise NotImplementedError('PartialDecoding does not support `False`.')
+    return feature
+  # If the user provide a sequence, merge it with the associated feature.
+  elif isinstance(expected_feature, (list, set, dict)):
+    if isinstance(expected_feature, (list, set)):
+      expected_feature = {k: True for k in expected_feature}
+    return _normalize_feature_dict(
+        feature=feature,
+        expected_feature=expected_feature,
+    )
+  else:
+    raise TypeError(f'Unexpected partial feature spec: {expected_feature!r}')
+
+
+def _normalize_feature_dict(
+    feature: features_lib.FeatureConnector,
+    expected_feature: _FeatureSpecs,
+) -> _FeatureSpecs:
+  """."""
+  if type(feature) == features_lib.FeaturesDict:  # pylint: disable=unidiomatic-typecheck
+    return {  # Extract the feature subset  # pylint: disable=g-complex-comprehension
+        k: _extract_feature_item(
+            feature=feature,
+            expected_key=k,
+            expected_value=v,
+            fn=_normalize_feature_item,
+        ) for k, v in expected_feature.items()
+    }
+  elif type(feature) == features_lib.Sequence:  # pylint: disable=unidiomatic-typecheck
+    inner_features = _normalize_feature_dict(
+        feature=feature.feature,  # pytype: disable=attribute-error
+        expected_feature=expected_feature,
+    )
+    return features_lib.Sequence(inner_features)
+  else:
+    raise ValueError(
+        f'Unexpected structure {expected_feature!r} does not match '
+        f'{feature!r}')
 
 
 def _extract_features(
@@ -86,10 +148,13 @@ def _extract_features(
   # Use `type` rather than `isinstance` to not recurse into inherited classes.
   if type(feature) == features_lib.FeaturesDict:  # pylint: disable=unidiomatic-typecheck
     expected_feature = typing.cast(features_lib.FeaturesDict, expected_feature)
-    return features_lib.FeaturesDict({  # Extract the feature subset
+    return features_lib.FeaturesDict({  # Extract the feature subset  # pylint: disable=g-complex-comprehension
         k: _extract_feature_item(
-            feature=feature, expected_key=k, expected_value=v)
-        for k, v in expected_feature.items()
+            feature=feature,
+            expected_key=k,
+            expected_value=v,
+            fn=_extract_features,
+        ) for k, v in expected_feature.items()
     })
   elif type(feature) == features_lib.Sequence:  # pylint: disable=unidiomatic-typecheck
     feature = typing.cast(features_lib.Sequence, feature)
@@ -111,6 +176,7 @@ def _extract_feature_item(
     feature: features_lib.FeaturesDict,
     expected_key: str,
     expected_value: features_lib.FeatureConnector,
+    fn: Callable[..., Any],
 ) -> features_lib.FeatureConnector:
   """Calls `_extract_features(feature[key], expected_feature=value)`."""
   assert isinstance(feature, features_lib.FeaturesDict)
@@ -118,5 +184,4 @@ def _extract_feature_item(
     raise ValueError(f'Missing expected feature {expected_key!r}.')
 
   with utils.try_reraise(f'In {expected_key!r}: '):
-    return _extract_features(
-        feature=feature[expected_key], expected_feature=expected_value)
+    return fn(feature=feature[expected_key], expected_feature=expected_value)

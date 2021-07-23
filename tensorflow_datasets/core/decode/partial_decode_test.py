@@ -124,6 +124,85 @@ def test_extract_features():
     )
 
 
+def test_extract_features_values():
+  features = features_lib.FeaturesDict({
+      'img': features_lib.Image(shape=(256, 256, 3)),
+      'img2': features_lib.Image(shape=(256, 256, 3)),
+      'metadata': {
+          'label': features_lib.ClassLabel(num_classes=4),
+          'other': tf.string,
+      },
+      'sequence': features_lib.Sequence({
+          'x': tf.int64,
+          'y': tf.int64,
+      }),
+      'sequence_flat': features_lib.Sequence(tf.int64),
+  })
+
+  result = _extract_features(
+      feature=features,
+      expected_feature={
+          'img': True,
+          'metadata': ['label'],
+          'sequence': {'y'},
+          'sequence_flat': True,
+      },
+  )
+  _assert_features_equal(
+      result,
+      features_lib.FeaturesDict({
+          'img': features_lib.Image(shape=(256, 256, 3)),
+          'metadata': {
+              'label': features_lib.ClassLabel(num_classes=4),
+          },
+          'sequence': features_lib.Sequence({
+              'y': tf.int64,
+          }),
+          'sequence_flat': features_lib.Sequence(tf.int64),
+      }),
+  )
+
+  result = _extract_features(
+      feature=features,
+      expected_feature={'metadata', 'sequence'},
+  )
+  _assert_features_equal(
+      result,
+      features_lib.FeaturesDict({
+          'metadata': {
+              'label': features_lib.ClassLabel(num_classes=4),
+              'other': tf.string,
+          },
+          'sequence': features_lib.Sequence({
+              'x': tf.int64,
+              'y': tf.int64,
+          }),
+      }),
+  )
+
+  # Test, mixing Features with non-features.
+  result = _extract_features(
+      feature=features,
+      expected_feature={
+          'img': features_lib.Image(),
+          'sequence': {
+              'x': tf.int64,
+              'y': True,
+          },
+      },
+  )
+  _assert_features_equal(
+      result,
+      features_lib.FeaturesDict({
+          'img': features_lib.Image(shape=(256, 256, 3)),
+          'sequence': features_lib.Sequence({
+              'x': tf.int64,
+              'y': tf.int64,
+          }),
+      }),
+  )
+
+
 def test_partial_decode(dummy_mnist: testing.DummyMnist):
   ds = dummy_mnist.as_dataset(
       split='train',
