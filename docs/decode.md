@@ -176,7 +176,7 @@ builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
     'metadata': {
         'num_objects': tf.int64,
         'scene_name': tfds.features.Text(),
-    }
+    },
     'objects': tfds.features.Sequence({
         'label': tfds.features.ClassLabel(names=[]),
     }),
