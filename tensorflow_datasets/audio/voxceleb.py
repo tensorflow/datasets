@@ -58,6 +58,7 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio': tfds.features.Audio(file_format='wav', sample_rate=16000),
             'label': tfds.features.ClassLabel(num_classes=NUM_CLASSES),
+            'youtube_id': tfds.features.Text(),
         }),
         supervised_keys=('audio', 'label'),
         homepage=_HOMEPAGE,
@@ -109,9 +110,9 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
       full_name = os.path.join(extract_path, 'wav', file_name)
       if not tf.io.gfile.exists(full_name):
         continue
-      speaker, _, _ = file_name[:-len('.wav')].split('/')
+      speaker, ytid, _ = file_name[:-len('.wav')].split('/')
       speaker_id = int(speaker[3:])
-      example = {'audio': full_name, 'label': speaker_id}
+      example = {'audio': full_name, 'label': speaker_id, 'youtube_id': ytid}
       yield file_name, example
 
   def _calculate_splits(self, iden_splits_path):
