@@ -143,6 +143,8 @@ def test_extract_features_values():
       feature=features,
       expected_feature={
           'img': True,
+          'img2': False,
+          'unknown_key': False,  # Extra keys are filtered
           'metadata': ['label'],
           'sequence': {'y'},
           'sequence_flat': True,
@@ -187,7 +189,7 @@ def test_extract_features_values():
           'img': features_lib.Image(),
           'sequence': {
               'x': tf.int64,
-              'y': True,
+              'y': False,
           },
       },
   )
@@ -197,7 +199,6 @@ def test_extract_features_values():
           'img': features_lib.Image(shape=(256, 256, 3)),
           'sequence': features_lib.Sequence({
               'x': tf.int64,
-              'y': tf.int64,
           }),
       }),
   )

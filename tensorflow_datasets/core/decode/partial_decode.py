@@ -86,7 +86,7 @@ def _normalize_feature_item(
     feature: features_lib.FeatureConnector,
     expected_feature: _FeatureSpecs,
 ) -> _FeatureSpecs:
-  """."""
+  """Extract the features matching the expected_feature structure."""
   # If user provide a FeatureConnector, use this
   if isinstance(expected_feature,
                 (features_lib.FeatureConnector, tf.dtypes.DType)):
@@ -94,8 +94,7 @@ def _normalize_feature_item(
   # If the user provide a bool, use the matching feature connector
   # Example: {'cameras': True} -> `{'camera': FeatureDict({'image': Image()})}`
   elif isinstance(expected_feature, bool):
-    if not expected_feature:
-      raise NotImplementedError('PartialDecoding does not support `False`.')
+    assert expected_feature  # `False` values should have been filtered already
     return feature
   # If the user provide a sequence, merge it with the associated feature.
   elif isinstance(expected_feature, (list, set, dict)):
@@ -113,16 +112,21 @@ def _normalize_feature_dict(
     feature: features_lib.FeatureConnector,
     expected_feature: _FeatureSpecs,
 ) -> _FeatureSpecs:
-  """."""
+  """Extract the features matching the expected_feature structure."""
   if type(feature) == features_lib.FeaturesDict:  # pylint: disable=unidiomatic-typecheck
-    return {  # Extract the feature subset  # pylint: disable=g-complex-comprehension
+    inner_features = {
+        k: v for k, v in expected_feature.items() if v is not False  # pylint: disable=g-bool-id-comparison
+    }
+    inner_features = {  # Extract the feature subset  # pylint: disable=g-complex-comprehension
         k: _extract_feature_item(
             feature=feature,
             expected_key=k,
             expected_value=v,
             fn=_normalize_feature_item,
-        ) for k, v in expected_feature.items()
+        ) for k, v in inner_features.items()
     }
+    # Filter `False` values
+    return inner_features
   elif type(feature) == features_lib.Sequence:  # pylint: disable=unidiomatic-typecheck
     inner_features = _normalize_feature_dict(
         feature=feature.feature,  # pytype: disable=attribute-error
