@@ -12,11 +12,6 @@
 # `d4rl_mujoco_halfcheetah`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 D4RL is an open-source benchmark for offline reinforcement learning. It provides
@@ -33,9 +28,7 @@ standardized environments and datasets for training and benchmarking algorithms.
     *   `1.0.0`: Initial release.
     *   `1.0.1`: Support for episode and step metadata, and unification of the
         reward shape across all the configs.
-    *   **`1.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added is_last.
+    *   **`1.1.0`** (default): Added is_last.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

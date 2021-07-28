@@ -12,11 +12,6 @@
 # `ogbg_molpcba`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 'ogbg-molpcba' is a molecular dataset sampled from PubChem BioAssay. It is a
@@ -72,9 +67,7 @@ benchmark for molecular machine learning. Chemical Science, 9(2):513-530, 2018.
 
     *   `0.1.0`: Initial release of experimental API.
     *   `0.1.1`: Exposes the number of edges in each graph explicitly.
-    *   **`0.1.2`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Add metadata field for GraphVisualizer.
+    *   **`0.1.2`** (default): Add metadata field for GraphVisualizer.
 
 *   **Download size**: `37.70 MiB`
 

@@ -12,11 +12,6 @@
 # `glue`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 GLUE, the General Language Understanding Evaluation benchmark
@@ -29,12 +24,8 @@ evaluating, and analyzing natural language understanding systems.
 *   **Versions**:
 
     *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
-    *   `1.0.1`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Update dead URL links.
-    *   **`2.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Update data source for glue/qqp.
+    *   `1.0.1`: Update dead URL links.
+    *   **`2.0.0`** (default): Update data source for glue/qqp.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

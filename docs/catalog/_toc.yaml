@@ -45,26 +45,20 @@ toc:
   title: Audio
 - section:
   - path: /datasets/catalog/d4rl_adroit_door
-    status: nightly
     title: d4rl_adroit_door
   - path: /datasets/catalog/d4rl_adroit_hammer
-    status: nightly
     title: d4rl_adroit_hammer
   - path: /datasets/catalog/d4rl_adroit_pen
-    status: nightly
     title: d4rl_adroit_pen
   - path: /datasets/catalog/d4rl_adroit_relocate
-    status: nightly
     title: d4rl_adroit_relocate
   - path: /datasets/catalog/d4rl_mujoco_ant
     title: d4rl_mujoco_ant
   - path: /datasets/catalog/d4rl_mujoco_halfcheetah
     title: d4rl_mujoco_halfcheetah
   - path: /datasets/catalog/d4rl_mujoco_hopper
-    status: nightly
     title: d4rl_mujoco_hopper
   - path: /datasets/catalog/d4rl_mujoco_walker2d
-    status: nightly
     title: d4rl_mujoco_walker2d
   title: D4rl
 - section:
@@ -117,7 +111,6 @@ toc:
   - path: /datasets/catalog/shapes3d
     title: shapes3d
   - path: /datasets/catalog/symmetric_solids
-    status: nightly
     title: symmetric_solids
   - path: /datasets/catalog/the300w_lp
     title: the300w_lp
@@ -190,7 +183,6 @@ toc:
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
   - path: /datasets/catalog/imagenet2012_multilabel
-    status: nightly
     title: imagenet2012_multilabel (manual)
   - path: /datasets/catalog/imagenet2012_real
     title: imagenet2012_real (manual)
@@ -317,22 +309,16 @@ toc:
   title: Question answering
 - section:
   - path: /datasets/catalog/rlu_atari
-    status: nightly
     title: rlu_atari
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
-    status: nightly
     title: rlu_dmlab_explore_object_rewards_few
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_many
-    status: nightly
     title: rlu_dmlab_explore_object_rewards_many
   - path: /datasets/catalog/rlu_dmlab_rooms_select_nonmatching_object
-    status: nightly
     title: rlu_dmlab_rooms_select_nonmatching_object
   - path: /datasets/catalog/rlu_dmlab_rooms_watermaze
-    status: nightly
     title: rlu_dmlab_rooms_watermaze
   - path: /datasets/catalog/rlu_dmlab_seekavoid_arena01
-    status: nightly
     title: rlu_dmlab_seekavoid_arena01
   title: Rl unplugged
 - section:
@@ -341,7 +327,6 @@ toc:
   - path: /datasets/catalog/cherry_blossoms
     title: cherry_blossoms
   - path: /datasets/catalog/covid19
-    status: nightly
     title: covid19
   - path: /datasets/catalog/dart
     title: dart
@@ -362,14 +347,12 @@ toc:
   - path: /datasets/catalog/iris
     title: iris
   - path: /datasets/catalog/kddcup99
-    status: nightly
     title: kddcup99
   - path: /datasets/catalog/movie_lens
     title: movie_lens
   - path: /datasets/catalog/movielens
     title: movielens
   - path: /datasets/catalog/protein_net
-    status: nightly
     title: protein_net
   - path: /datasets/catalog/radon
     title: radon
@@ -418,7 +401,6 @@ toc:
   - path: /datasets/catalog/scientific_papers
     title: scientific_papers
   - path: /datasets/catalog/summscreen
-    status: nightly
     title: summscreen
   - path: /datasets/catalog/wikihow
     title: wikihow (manual)
@@ -447,7 +429,6 @@ toc:
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/doc_nli
-    status: nightly
     title: doc_nli
   - path: /datasets/catalog/dolphin_number_word
     title: dolphin_number_word
@@ -600,6 +581,5 @@ toc:
   - path: /datasets/catalog/gref
     title: gref (manual)
   - path: /datasets/catalog/ref_coco
-    status: nightly
     title: ref_coco (manual)
   title: Vision language

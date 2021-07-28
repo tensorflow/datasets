@@ -12,11 +12,6 @@
 # `cars196`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Visualization**:
     <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=cars196">
     Explore in Know Your Data
@@ -39,9 +34,7 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 *   **Versions**:
 
     *   `2.0.0`: Initial release
-    *   **`2.0.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Website URL update
+    *   **`2.0.1`** (default): Website URL update
     *   `2.1.0`: No release notes.
 
 *   **Download size**: `Unknown size`
