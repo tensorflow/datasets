@@ -46,6 +46,8 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.2.1')
 
+  RELEASE_NOTES = {'1.2.1': 'Add youtube_id field'}
+
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   manual_dir should contain the file vox_dev_wav.zip. The instructions for
   downloading this file are found in {}. This dataset requires registration.
