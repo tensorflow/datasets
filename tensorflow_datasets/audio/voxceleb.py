@@ -44,7 +44,7 @@ NUM_CLASSES = 1252
 class Voxceleb(tfds.core.GeneratorBasedBuilder):
   """The VoxCeleb dataset for speaker identification."""
 
-  VERSION = tfds.core.Version('1.1.1')
+  VERSION = tfds.core.Version('1.2.1')
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   manual_dir should contain the file vox_dev_wav.zip. The instructions for
