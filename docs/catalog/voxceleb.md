@@ -37,9 +37,9 @@ audio part of the voxceleb1.1 dataset.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Add youtube_id field
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.68 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `107.98 GiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -49,12 +49,15 @@ audio part of the voxceleb1.1 dataset.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 7,972
+`'train'`      | 134,000
+`'validation'` | 6,670
 
 *   **Features**:
 
