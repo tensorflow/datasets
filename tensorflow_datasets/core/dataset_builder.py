@@ -883,10 +883,12 @@ class FileReaderBuilder(DatasetBuilder):
 
   """
 
-  def __init__(self,
-               *,
-               file_format: Union[None, str, file_adapters.FileFormat] = None,
-               **kwargs: Any):
+  def __init__(
+      self,
+      *,
+      file_format: Union[None, str, file_adapters.FileFormat] = None,
+      **kwargs: Any,
+  ):
     """Initializes an instance of FileReaderBuilder.
 
     Callers must pass arguments as keyword arguments.

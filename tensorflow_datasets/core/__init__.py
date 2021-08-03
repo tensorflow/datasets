@@ -37,6 +37,8 @@ from tensorflow_datasets.core.dataset_info import DatasetInfo
 from tensorflow_datasets.core.dataset_info import Metadata
 from tensorflow_datasets.core.dataset_info import MetadataDict
 
+from tensorflow_datasets.core.file_adapters import FileFormat
+
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 
 from tensorflow_datasets.core.read_only_builder import builder_from_directory
@@ -80,6 +82,7 @@ __all__ = [
     "DatasetInfo",
     "DatasetNotFoundError",
     "Experiment",
+    "FileFormat",
     "GeneratorBasedBuilder",
     "gcs_path",
     "lazy_imports",
