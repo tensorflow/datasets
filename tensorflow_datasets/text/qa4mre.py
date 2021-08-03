@@ -271,7 +271,7 @@ class Qa4mre(tfds.core.GeneratorBasedBuilder):
 
     if cfg.track == 'main':
       download_urls['{}.main.{}'.format(cfg.year, cfg.lang)] = os.path.join(
-          _BASE_URL, PATHS[cfg.year]['_PATH_TMPL_MAIN_GS'].format(cfg.lang))
+          _BASE_URL, PATHS[cfg.year]['_PATH_TMPL_MAIN_GS'].format(cfg.lang))  # pytype: disable=attribute-error
 
     if cfg.year in ['2012', '2013'] and cfg.track == 'alzheimers':
       download_urls['{}.alzheimers.EN'.format(cfg.year)] = os.path.join(
