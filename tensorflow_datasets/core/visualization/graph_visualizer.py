@@ -45,12 +45,14 @@ class GraphVisualizerMetadataDict(dataset_info.MetadataDict):
 def _extract_metadata_dict(
     metadata: Optional[dataset_info.Metadata]
 ) -> Optional[GraphVisualizerMetadataDict]:
+  """Extracts out the metadata dict for the GraphVisualizer."""
   if metadata is None:
     return None
 
   for metadata_entry in metadata.values():
-    if isinstance(metadata_entry, GraphVisualizerMetadataDict):
-      return metadata_entry
+    for key in metadata_entry:
+      if key == 'edgelist_feature_name':
+        return metadata_entry
   return None
 
 
@@ -160,7 +162,7 @@ def _make_edge_getter_fn(ds_info: dataset_info.DatasetInfo) -> _GraphFn:
 
 
 def _make_node_color_mapper(node_color_map: _NodeColorDict,
-                            default_color='C0') -> _NodeColorFn:
+                            default_color: str = 'C0') -> _NodeColorFn:
   """Helper to map nodes to colors."""
 
   def node_color_mapper(node):
@@ -170,7 +172,7 @@ def _make_node_color_mapper(node_color_map: _NodeColorDict,
 
 
 def _make_edge_color_mapper(edge_color_map: _EdgeColorDict,
-                            default_color='C0') -> _EdgeColorFn:
+                            default_color: str = 'C0') -> _EdgeColorFn:
   """Helper to map edges to colors."""
 
   def edge_color_mapper(edge):
