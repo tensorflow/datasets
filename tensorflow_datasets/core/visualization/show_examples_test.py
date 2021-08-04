@@ -69,7 +69,7 @@ class ShowExamplesTest(testing.TestCase):
     }
     bond_types_to_colors = {num: f'C{num}' for num in range(4)}
 
-    # Functions that wrap around the above dictionariess.
+    # Node colors are atomic numbers.
     def node_color_fn(graph):
       atomic_numbers = 1 + graph['node_feat'][:, 0].numpy()
       return {
@@ -77,6 +77,7 @@ class ShowExamplesTest(testing.TestCase):
           for index, atomic_number in enumerate(atomic_numbers)
       }
 
+    # Node labels are element names.
     def node_label_fn(graph):
       atomic_numbers = 1 + graph['node_feat'][:, 0].numpy()
       return {
@@ -84,6 +85,7 @@ class ShowExamplesTest(testing.TestCase):
           for index, atomic_number in enumerate(atomic_numbers)
       }
 
+    # Edge colors are bond types.
     def edge_color_fn(graph):
       bonds = graph['edge_index'].numpy()
       bond_types = graph['edge_feat'][:, 0].numpy()
