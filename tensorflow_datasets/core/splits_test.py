@@ -142,7 +142,7 @@ class SplitsTest(testing.TestCase):
 
   def test_sub_split_wrong_key(self):
     with self.assertRaisesWithPredicateMatch(ValueError,
-                                             "Unknown split \"unknown\""):
+                                             "Unknown split 'unknown'"):
       _ = self._builder.info.splits["unknown"]
 
   def test_split_enum(self):

@@ -65,8 +65,13 @@ def _write_tfrecord_from_shard_spec(shard_spec, get):
 
 class GetDatasetFilesTest(testing.TestCase):
 
-  NAME2SHARD_LENGTHS = {
-      'train': [3, 2, 3, 2, 3],  # 13 examples.
+  SPLIT_INFOS = {
+      'train':
+          splits.SplitInfo(
+              name='train',
+              shard_lengths=[3, 2, 3, 2, 3],  # 13 examples.
+              num_bytes=0,
+          ),
   }
 
   PATH_PATTERN = 'mnist-train.tfrecord-0000%d-of-00005'
@@ -74,7 +79,7 @@ class GetDatasetFilesTest(testing.TestCase):
   def _get_files(self, instruction):
     file_instructions = tfrecords_reader._make_file_instructions_from_absolutes(
         name='mnist',
-        name2shard_lengths=self.NAME2SHARD_LENGTHS,
+        split_infos=self.SPLIT_INFOS,
         absolute_instructions=[instruction],
     )
     return file_instructions
@@ -166,7 +171,16 @@ class ReadInstructionTest(testing.TestCase):
 
   def setUp(self):
     super(ReadInstructionTest, self).setUp()
-    self.splits = {'train': 200, 'test': 101, 'validation': 30, 'dev-train': 10}
+    self.splits = {
+        'train':
+            splits.SplitInfo(name='train', shard_lengths=[200], num_bytes=0),
+        'test':
+            splits.SplitInfo(name='train', shard_lengths=[101], num_bytes=0),
+        'validation':
+            splits.SplitInfo(name='train', shard_lengths=[30], num_bytes=0),
+        'dev-train':
+            splits.SplitInfo(name='train', shard_lengths=[5, 5], num_bytes=0),
+    }
 
   def check_from_ri(self, ri, expected):
     res = ri.to_absolute(self.splits)
@@ -279,7 +293,7 @@ class ReadInstructionTest(testing.TestCase):
     self.assertRaises('validation[:250%:2]',
                       'Unrecognized split format: \'validation[:250%:2]\'')
     # Unexisting split:
-    self.assertRaises('imaginary', 'Unknown split "imaginary"')
+    self.assertRaises('imaginary', "Unknown split 'imaginary'")
     # Invalid boundaries abs:
     self.assertRaises('validation[:31]', 'incompatible with 30 examples')
     # Invalid boundaries %:
