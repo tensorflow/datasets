@@ -21,6 +21,7 @@ import functools
 import io
 import itertools
 import logging
+import operator
 import os
 import random
 import shutil
@@ -29,7 +30,7 @@ import sys
 import textwrap
 import threading
 import typing
-from typing import Any, Callable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
+from typing import Any, Callable, Iterable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
 import uuid
 
 from six.moves import urllib
@@ -501,3 +502,8 @@ def add_sys_path(path: type_utils.PathLike) -> Iterator[None]:
     yield
   finally:
     sys.path.remove(path)
+
+
+def prod(iterable: Iterable[int], *, start=1) -> int:
+  """Backport of python 3.8 `math.prod`."""
+  return functools.reduce(operator.mul, iterable, start)

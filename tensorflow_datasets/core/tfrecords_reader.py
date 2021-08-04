@@ -62,7 +62,7 @@ _SLICE_RE = re.compile(
     r"""^
     (
         (?P<val>-?\d+)
-        (?P<unit>(?:%))?
+        (?P<unit>(?:%|shard))?
     )?
     $""",
     re.X,  # Ignore whitespace
@@ -510,7 +510,7 @@ class _RelativeInstruction(object):
   from_ = attr.ib()  # : Optional[int]
   # ending index, or None if no upper boundary.
   to = attr.ib()  # : Optional[int]
-  unit = attr.ib(validator=attr.validators.in_(['%', 'abs']))  # : str
+  unit = attr.ib(validator=attr.validators.in_(['%', 'abs', 'shard']))  # : str
   rounding = attr.ib(
       validator=attr.validators.in_([  # : str
           'closest', 'pct1_dropremainder'
@@ -548,6 +548,10 @@ def _str_to_relative_instruction(spec: str) -> 'ReadInstruction':
       from_ = from_match['val']
       to = int(from_) + 1
       unit = from_match['unit'] or 'abs'
+      if unit != 'shard':
+        raise ValueError(
+            f'Invalid split format: {spec!r}. Absolute or percent only '
+            'support slice syntax.')
     elif len(slices) == 2:
       from_match, to_match = slices
       from_ = from_match['val']
@@ -606,6 +610,12 @@ def _rel_to_abs_instr(
   if rel_instr.unit == '%':
     from_ = 0 if from_ is None else pct_to_abs(from_, num_examples)
     to = num_examples if to is None else pct_to_abs(to, num_examples)
+  elif rel_instr.unit == 'shard':
+    shard_lengths = split_infos[split].shard_lengths
+    from_ = 0 if from_ is None else sum(shard_lengths[:from_])
+    if to is not None and to <= 0:
+      to = len(shard_lengths) + to
+    to = num_examples if to is None else sum(shard_lengths[:to])
   elif rel_instr.unit == 'abs':
     from_ = 0 if from_ is None else from_
     to = num_examples if to is None else to

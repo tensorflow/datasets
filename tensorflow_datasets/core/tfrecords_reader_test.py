@@ -593,5 +593,42 @@ class ReaderTest(testing.TestCase):
       self.assertIn(expected_warning, reported_warnings)
 
 
+def test_shard_api():
+  si = tfds.core.SplitInfo(
+      name='train',
+      shard_lengths=[10, 20, 13],
+      num_bytes=0,
+  )
+  fi = [
+      shard_utils.FileInstruction(
+          filename='ds_name-train.tfrecord-00000-of-00003',
+          skip=0,
+          take=-1,
+          num_examples=10,
+      ),
+      shard_utils.FileInstruction(
+          filename='ds_name-train.tfrecord-00001-of-00003',
+          skip=0,
+          take=-1,
+          num_examples=20,
+      ),
+      shard_utils.FileInstruction(
+          filename='ds_name-train.tfrecord-00002-of-00003',
+          skip=0,
+          take=-1,
+          num_examples=13,
+      ),
+  ]
+  sd = splits.SplitDict([si], dataset_name='ds_name')
+  assert sd['train[0shard]'].file_instructions == [fi[0]]
+  assert sd['train[1shard]'].file_instructions == [fi[1]]
+  assert sd['train[-1shard]'].file_instructions == [fi[-1]]
+  assert sd['train[-2shard]'].file_instructions == [fi[-2]]
+  assert sd['train[:2shard]'].file_instructions == fi[:2]
+  assert sd['train[1shard:]'].file_instructions == fi[1:]
+  assert sd['train[-1shard:]'].file_instructions == fi[-1:]
+  assert sd['train[1:-1shard]'].file_instructions == fi[1:-1]
+
+
 if __name__ == '__main__':
   testing.test_main()
