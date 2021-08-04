@@ -181,7 +181,7 @@ class ReadInstructionTest(testing.TestCase):
     ri = tfrecords_reader.ReadInstruction.from_spec(spec)
     return self.check_from_ri(ri, expected)
 
-  def assertRaises(self, spec, msg, exc_cls=AssertionError):
+  def assertRaises(self, spec, msg, exc_cls=ValueError):
     with self.assertRaisesWithPredicateMatch(exc_cls, msg):
       ri = tfrecords_reader.ReadInstruction.from_spec(spec)
       ri.to_absolute(self.splits)
@@ -263,8 +263,7 @@ class ReadInstructionTest(testing.TestCase):
         'test', unit='%', to=10, rounding='pct1_dropremainder')
     ri2 = tfrecords_reader.ReadInstruction(
         'test', unit='%', from_=90, rounding='closest')
-    with self.assertRaisesWithPredicateMatch(AssertionError,
-                                             'different rounding'):
+    with self.assertRaisesWithPredicateMatch(ValueError, 'different rounding'):
       unused_ = ri1 + ri2
 
   def test_invalid_rounding(self):
@@ -278,10 +277,9 @@ class ReadInstructionTest(testing.TestCase):
   def test_invalid_spec(self):
     # Invalid format:
     self.assertRaises('validation[:250%:2]',
-                      'Unrecognized instruction format: validation[:250%:2]')
+                      'Unrecognized split format: \'validation[:250%:2]\'')
     # Unexisting split:
-    self.assertRaises(
-        'imaginary', 'Unknown split "imaginary"', exc_cls=ValueError)
+    self.assertRaises('imaginary', 'Unknown split "imaginary"')
     # Invalid boundaries abs:
     self.assertRaises('validation[:31]', 'incompatible with 30 examples')
     # Invalid boundaries %:
@@ -291,7 +289,7 @@ class ReadInstructionTest(testing.TestCase):
                       'Percent slice boundaries must be > -100 and < 100')
     # pct1_dropremainder with < 100 examples
     with self.assertRaisesWithPredicateMatch(
-        AssertionError, 'with less than 100 elements is forbidden'):
+        ValueError, 'with less than 100 elements is forbidden'):
       ri = tfrecords_reader.ReadInstruction(
           'validation', to=99, unit='%', rounding='pct1_dropremainder')
       ri.to_absolute(self.splits)
@@ -329,7 +327,7 @@ class ReaderTest(testing.TestCase):
 
   def test_nodata_instruction(self):
     # Given instruction corresponds to no data.
-    with self.assertRaisesWithPredicateMatch(AssertionError,
+    with self.assertRaisesWithPredicateMatch(ValueError,
                                              'corresponds to no data!'):
       train_info = splits.SplitInfo(
           name='train',

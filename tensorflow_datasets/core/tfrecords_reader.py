@@ -35,6 +35,10 @@ from tensorflow_datasets.core.utils import shard_utils
 
 SplitInfo = Any
 
+# Accepted split values (in `as_dataset(split=...)`)
+SplitArg = Union[str, 'ReadInstruction']
+
+Tree = utils.Tree
 TreeDict = utils.TreeDict
 Tensor = utils.Tensor
 
@@ -43,19 +47,26 @@ DecodeFn = Callable[[TreeDict[Tensor]], TreeDict[Tensor]]
 
 _BUFFER_SIZE = 8 << 20  # 8 MiB per file.
 
+# <split_name>[<split_selector>] (e.g. `train[54%:]`)
 _SUB_SPEC_RE = re.compile(
-    r"""
-^
- (?P<split>[\w-]+)
- (\[
-  ((?P<from>-?\d+)
-   (?P<from_pct>%)?)?
-  :
-  ((?P<to>-?\d+)
-   (?P<to_pct>%)?)?
- \])?
-$
-""", re.X)
+    r"""^
+    (?P<split_name>[\w-]+)
+    (\[
+      (?P<split_selector>[\d\w%:-]+)
+    \])?
+    $""",
+    re.X,  # Ignore whitespace
+)
+# <val><unit> (e.g. `-54%`)
+_SLICE_RE = re.compile(
+    r"""^
+    (
+        (?P<val>-?\d+)
+        (?P<unit>(?:%))?
+    )?
+    $""",
+    re.X,  # Ignore whitespace
+)
 
 _ADDITION_SEP_RE = re.compile(r'\s*\+\s*')
 
@@ -136,7 +147,7 @@ def _decode_with_id(
 def make_file_instructions(
     name: str,
     split_infos: Iterable[SplitInfo],
-    instruction: Union['ReadInstruction', str],
+    instruction: SplitArg,
     file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
 ) -> List[shard_utils.FileInstruction]:
   """Returns instructions of the split dict.
@@ -355,10 +366,12 @@ class Reader(object):
   This class should not typically be exposed to the TFDS user.
   """
 
-  def __init__(self,
-               path,
-               example_specs,
-               file_format=file_adapters.DEFAULT_FILE_FORMAT):
+  def __init__(
+      self,
+      path,
+      example_specs,
+      file_format=file_adapters.DEFAULT_FILE_FORMAT,
+  ):
     """Initializes Reader.
 
     Args:
@@ -375,8 +388,8 @@ class Reader(object):
       self,
       *,
       name,
-      instructions,
-      split_infos,
+      instructions: Tree[SplitArg],
+      split_infos: List[SplitInfo],
       read_config,
       shuffle_files,
       disable_shuffling: bool = False,
@@ -443,7 +456,7 @@ class Reader(object):
     """
     if not file_instructions:
       msg = f'Instruction {file_instructions} corresponds to no data!'
-      raise AssertionError(msg)
+      raise ValueError(msg)
 
     # Prepend path to filename
     file_instructions = [
@@ -509,20 +522,52 @@ class _RelativeInstruction(object):
   @to.validator
   def check_boundary_pct(self, unused_attribute, value):
     if self.unit == '%' and value is not None and abs(value) > 100:
-      raise AssertionError('Percent slice boundaries must be > -100 and < 100.')
+      raise ValueError('Percent slice boundaries must be > -100 and < 100.')
 
 
-def _str_to_relative_instruction(spec):
+def _str_to_relative_instruction(spec: str) -> 'ReadInstruction':
   """Returns ReadInstruction for given string."""
+  # <split_name>[<split_selector>] (e.g. `train[54%:]`)
   res = _SUB_SPEC_RE.match(spec)
+  err_msg = (f'Unrecognized split format: {spec!r}. See format at '
+             'https://www.tensorflow.org/datasets/splits')
   if not res:
-    raise AssertionError('Unrecognized instruction format: %s' % spec)
-  unit = '%' if res.group('from_pct') or res.group('to_pct') else 'abs'
+    raise ValueError(err_msg)
+  split_name = res.group('split_name')
+  split_selector = res.group('split_selector')
+
+  if split_selector is None:  # split='train'
+    from_ = None
+    to = None
+    unit = 'abs'
+  else:  # split='train[x:y]' or split='train[x]'
+    slices = [_SLICE_RE.match(x) for x in split_selector.split(':')]
+    # Make sure all slices are valid, and at least one is not empty
+    if not all(slices) or not any(x.group(0) for x in slices):
+      raise ValueError(err_msg)
+    if len(slices) == 1:
+      from_match, = slices
+      from_ = from_match['val']
+      to = int(from_) + 1
+      unit = from_match['unit'] or 'abs'
+    elif len(slices) == 2:
+      from_match, to_match = slices
+      from_ = from_match['val']
+      to = to_match['val']
+      unit = from_match['unit'] or to_match['unit'] or 'abs'
+    else:
+      raise ValueError(err_msg)
+
+  if from_ is not None:
+    from_ = int(from_)
+  if to is not None:
+    to = int(to)
+
   return ReadInstruction(
-      split_name=res.group('split'),
+      split_name=split_name,
       rounding='closest',
-      from_=int(res.group('from')) if res.group('from') else None,
-      to=int(res.group('to')) if res.group('to') else None,
+      from_=from_,
+      to=to,
       unit=unit,
   )
 
@@ -532,7 +577,7 @@ def _pct_to_abs_pct1(boundary, num_examples):
   if num_examples < 100:
     msg = ('Using "pct1_dropremainder" rounding on a split with less than 100 '
            'elements is forbidden: it always results in an empty dataset.')
-    raise AssertionError(msg)
+    raise ValueError(msg)
   return boundary * math.trunc(num_examples / 100.)
 
 
@@ -566,7 +611,7 @@ def _rel_to_abs_instr(rel_instr, name2len):
   if abs(from_) > num_examples or abs(to) > num_examples:
     msg = 'Requested slice [%s:%s] incompatible with %s examples.' % (
         from_ or '', to or '', num_examples)
-    raise AssertionError(msg)
+    raise ValueError(msg)
   if from_ < 0:
     from_ = num_examples + from_
   elif from_ == 0:
@@ -634,12 +679,12 @@ class ReadInstruction(object):
 
   def __init__(
       self,
-      split_name,
+      split_name: str,
       *,
-      rounding='closest',
-      from_=None,
-      to=None,
-      unit=None,
+      rounding: str = 'closest',
+      from_: Optional[int] = None,
+      to: Optional[int] = None,
+      unit: Optional[str] = None,
   ):
     """Initialize ReadInstruction.
 
@@ -663,6 +708,7 @@ class ReadInstruction(object):
       unit (str): optional, one of:
         '%': to set the slicing unit as percents of the split size.
         'abs': to set the slicing unit as absolute numbers.
+        'shard': to set the slicing unit as shard.
     """
     # Unit is optional only if the full dataset is read, otherwise, will
     # `_RelativeInstruction` validator will fail.
@@ -693,7 +739,7 @@ class ReadInstruction(object):
     spec = str(spec)  # Need to convert to str in case of `Split` instance.
     subs = _ADDITION_SEP_RE.split(spec)
     if not subs:
-      raise AssertionError('No instructions could be built out of %s' % spec)
+      raise ValueError('No instructions could be built out of %s' % spec)
     instruction = _str_to_relative_instruction(subs[0])
     return sum([_str_to_relative_instruction(sub) for sub in subs[1:]],
                instruction)
@@ -702,11 +748,11 @@ class ReadInstruction(object):
     """Returns a new ReadInstruction obj, result of appending other to self."""
     if not isinstance(other, ReadInstruction):
       msg = 'ReadInstruction can only be added to another ReadInstruction obj.'
-      raise AssertionError(msg)
+      raise ValueError(msg)
     other_ris = other._relative_instructions  # pylint: disable=protected-access
     if self._relative_instructions[0].rounding != other_ris[0].rounding:
-      raise AssertionError('It is forbidden to sum ReadInstruction instances '
-                           'with different rounding values.')
+      raise ValueError('It is forbidden to sum ReadInstruction instances '
+                       'with different rounding values.')
     return self._read_instruction_from_relative_instructions(
         self._relative_instructions + other_ris)
 

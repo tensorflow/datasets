@@ -560,8 +560,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         read_config=read_config,
         as_supervised=as_supervised,
     )
-    datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
-    return datasets
+    all_ds = tf.nest.map_structure(build_single_dataset, split)
+    return all_ds
 
   def _build_single_dataset(
       self,
@@ -908,10 +908,10 @@ class FileReaderBuilder(DatasetBuilder):
 
   def _as_dataset(
       self,
-      split=splits_lib.Split.TRAIN,
-      decoders=None,
-      read_config=None,
-      shuffle_files=False,
+      split,
+      decoders,
+      read_config,
+      shuffle_files,
   ) -> tf.data.Dataset:
     # Partial decoding
     if isinstance(decoders, decode.PartialDecoding):
