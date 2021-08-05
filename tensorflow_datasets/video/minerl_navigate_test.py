@@ -22,6 +22,8 @@ from tensorflow_datasets.video import minerl_navigate
 class MinerlNavigateTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = minerl_navigate.MinerlNavigate
 
+  SKIP_CHECKSUMS = True
+
   SPLITS = {
       "train": 1,
       "test": 1,
