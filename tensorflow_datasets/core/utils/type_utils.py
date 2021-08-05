@@ -45,6 +45,9 @@ Tree = Union[T, TupleOrList['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-s
 
 Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
 
+# Nested dict of tensor
+TensorDict = TreeDict[Tensor]
+
 Dim = Optional[int]
 Shape = TupleOrList[Dim]
 

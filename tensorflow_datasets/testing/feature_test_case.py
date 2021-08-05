@@ -16,17 +16,15 @@
 """Test case util to test `tfds.features.FeatureConnector`."""
 
 import contextlib
+import dataclasses
 import functools
 from typing import Any, Optional, Type
 
-import dataclasses
 import dill
 import numpy as np
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.core import example_parser
-from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.testing import test_case
@@ -345,23 +343,14 @@ class FeatureExpectationsTestCase(SubTestCase):
 
 def features_encode_decode(features_dict, example, decoders):
   """Runs the full pipeline: encode > write > tmp files > read > decode."""
-  # Encode example
-  encoded_example = features_dict.encode_example(example)
-
   # Serialize/deserialize the example
-  specs = features_dict.get_serialized_info()
-  serializer = example_serializer.ExampleSerializer(specs)
-  parser = example_parser.ExampleParser(specs)
+  serialized_example = features_dict.serialize_example(example)
 
-  serialized_example = serializer.serialize_example(encoded_example)
-  ds = tf.data.Dataset.from_tensors(serialized_example)
-  ds = ds.map(parser.parse_example)
-
-  # Decode the example
   decode_fn = functools.partial(
-      features_dict.decode_example,
+      features_dict.deserialize_example,
       decoders=decoders,
   )
+  ds = tf.data.Dataset.from_tensors(serialized_example)
   ds = ds.map(decode_fn)
 
   if tf.executing_eagerly():
