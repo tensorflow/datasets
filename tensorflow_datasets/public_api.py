@@ -17,10 +17,12 @@
 
 # pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order,wrong-import-position
 from tensorflow_datasets.core import tf_compat
+
 tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
 from tensorflow_datasets.core import folder_dataset
+from tensorflow_datasets.core import beam_utils as beam
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import deprecated
@@ -54,10 +56,10 @@ with core.registered.skip_registration():
   # (e.g. DummyMnist,...).
   from tensorflow_datasets import testing
 
-
 __all__ = [
     "as_dataframe",
     "as_numpy",
+    "beam",
     "benchmark",
     "core",
     "deprecated",
