@@ -15,6 +15,10 @@
 
 """Wrapper around FeatureDict to allow better control over decoding."""
 
+from typing import Union
+
+import tensorflow as tf
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 
 
@@ -28,7 +32,7 @@ class TopLevelFeature(feature_lib.FeatureConnector):
   eventually better support for augmentations.
   """
 
-  def decode_example(self, serialized_example, decoders=None):
+  def decode_example(self, serialized_example, *, decoders=None):
     # pylint: disable=line-too-long
     """Decode the serialize examples.
 
@@ -68,6 +72,54 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     # Step 3: Restore nesting [] => {}
     nested_decoded = self._nest(flatten_decoded)
     return nested_decoded
+
+  def serialize_example(self, example_data) -> bytes:
+    """Encodes nested data values into `tf.train.Example` bytes.
+
+    See `deserialize_example` to decode the proto into `tf.Tensor`.
+
+    Args:
+      example_data: Example data to encode (numpy-like nested dict)
+
+    Returns:
+      The serialized `tf.train.Example`.
+    """
+    example_data = self.encode_example(example_data)
+    return self._example_serializer.serialize_example(example_data)
+
+  def deserialize_example(
+      self,
+      serialized_example: Union[tf.Tensor, bytes],
+      *,
+      decoders=None,
+  ) -> utils.TensorDict:
+    """Decodes the `tf.train.Example` data into `tf.Tensor`.
+
+    See `serialize_example` to encode the data into proto.
+
+    Args:
+      serialized_example: The tensor-like object containing the serialized
+        `tf.train.Example` proto.
+      decoders: Eventual decoders to apply (see
+        [documentation](https://www.tensorflow.org/datasets/decode))
+
+    Returns:
+      The decoded features tensors.
+    """
+    example_data = self._example_parser.parse_example(serialized_example)
+    return self.decode_example(example_data, decoders=decoders)
+
+  @utils.memoized_property
+  def _example_parser(self):
+    from tensorflow_datasets.core import example_parser  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+    example_specs = self.get_serialized_info()
+    return example_parser.ExampleParser(example_specs)
+
+  @utils.memoized_property
+  def _example_serializer(self):
+    from tensorflow_datasets.core import example_serializer  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+    example_specs = self.get_serialized_info()
+    return example_serializer.ExampleSerializer(example_specs)
 
 
 def _decode_feature(feature, example, serialized_info, decoder):
