@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """DAVIS 2017 dataset for video object segmentation."""
+# pytype: skip-file
 
 import numpy as np
 import tensorflow as tf
