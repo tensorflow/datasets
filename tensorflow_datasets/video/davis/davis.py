@@ -154,8 +154,8 @@ class Davis(tfds.core.GeneratorBasedBuilder):
       images = []
       annotations = []
       for i in range(seq_len):
-        image_path = images_path / f'{i:05d}.jpg'
-        annotation_path = annotations_path / f'{i:05d}.png'
+        image_path = f'{images_path}/{i:05d}.jpg'
+        annotation_path = f'{annotations_path}/{i:05d}.png'
         annotation = _read_annotation(annotation_path)
         images.append(image_path)
         annotations.append(annotation)
