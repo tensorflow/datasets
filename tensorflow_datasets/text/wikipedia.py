@@ -203,7 +203,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
           utf_f = f
 
         # To clear root, to free-up more memory than just `elem.clear()`.
-        context = etree.iterparse(utf_f, events=("end",))
+        context = etree.iterparse(utf_f, events=("end",))  # pytype: disable=wrong-arg-types
         context = iter(context)
         unused_event, root = next(context)
         for unused_event, elem in context:
