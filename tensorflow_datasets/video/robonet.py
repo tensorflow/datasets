@@ -182,7 +182,7 @@ class Robonet(tfds.core.BeamBasedBuilder):
       """Converts one video from hdf5 format."""
       h5py = tfds.core.lazy_imports.h5py
       with h5py.File(filename) as hf:
-        video_bytes = hf['env']['cam0_video']['frames'][:].tostring()
+        video_bytes = hf['env']['cam0_video']['frames'][:].tobytes()
         states = hf['env']['state'][:].astype(np.float32)
         states = np.pad(states, ((0, 0), (0, STATES_DIM - states.shape[1])),
                         'constant')

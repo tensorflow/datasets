@@ -225,7 +225,7 @@ def _resize_image_if_necessary(image_fobj, target_pixels=None):
     image = cv2.resize(image, dsize=None, fx=factor, fy=factor)
   # Encode the image with quality=72 and store it in a BytesIO object.
   _, buff = cv2.imencode(".jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 72])
-  return io.BytesIO(buff.tostring())
+  return io.BytesIO(buff.tobytes())
 
 
 def _btgraham_processing(image_fobj,
@@ -257,7 +257,7 @@ def _btgraham_processing(image_fobj,
       crop_to_radius=crop_to_radius)
   # Encode the image with quality=72 and store it in a BytesIO object.
   _, buff = cv2.imencode(".jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 72])
-  return io.BytesIO(buff.tostring())
+  return io.BytesIO(buff.tobytes())
 
 
 def _scale_radius_size(image, filepath, target_radius_size):

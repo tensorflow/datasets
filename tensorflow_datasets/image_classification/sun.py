@@ -111,7 +111,7 @@ def _encode_jpeg(image, quality=None):
   cv2 = tfds.core.lazy_imports.cv2
   extra_args = [[int(cv2.IMWRITE_JPEG_QUALITY), quality]] if quality else []
   _, buff = cv2.imencode(".jpg", image, *extra_args)
-  return io.BytesIO(buff.tostring())
+  return io.BytesIO(buff.tobytes())
 
 
 def _process_image_file(fobj,
