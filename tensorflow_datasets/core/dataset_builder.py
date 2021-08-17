@@ -619,7 +619,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # allow the user to overwritte it.
 
     if wants_full_dataset:
-      return tf.data.experimental.get_single_element(ds)
+      return tf_compat.get_single_element(ds)
     return ds
 
   def _should_cache_ds(self, split, shuffle_files, read_config):

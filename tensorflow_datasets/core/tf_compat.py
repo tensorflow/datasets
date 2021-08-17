@@ -71,6 +71,15 @@ def is_dataset(ds):
   return isinstance(ds, (tf.data.Dataset, tf.compat.v1.data.Dataset))
 
 
+def get_single_element(ds):
+  """Calls `tf.data.Dataset.get_single_element`."""
+  import tensorflow as tf  # pylint: disable=import-outside-toplevel
+  if hasattr(ds, "get_single_element"):  # tf 2.6 and above
+    return ds.get_single_element()
+  else:
+    return tf.data.experimental.get_single_element(ds)
+
+
 def _make_pathlike_fn(fn, nb_path_arg=1):
   """Wrap the function in a PathLike-compatible function."""
 
