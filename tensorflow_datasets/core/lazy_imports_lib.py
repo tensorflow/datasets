@@ -82,6 +82,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def jax(cls):
+    return _try_import("jax")
+
+  @utils.classproperty
+  @classmethod
   def langdetect(cls):
     return _try_import("langdetect")
 

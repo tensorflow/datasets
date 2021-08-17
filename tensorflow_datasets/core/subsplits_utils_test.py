@@ -133,3 +133,11 @@ def test_even_splits_add():
           split_infos['validation[4:6]'].file_instructions)
   assert (split_infos[splits[1]].file_instructions ==
           split_infos['validation[6:8]'].file_instructions)
+
+
+def test_split_for_jax_process():
+  split = subsplits_utils.split_for_jax_process('train')
+  assert isinstance(split, subsplits_utils._EvenSplit)
+  assert split.split == 'train'
+  assert split.index == 0
+  assert split.count == 1
