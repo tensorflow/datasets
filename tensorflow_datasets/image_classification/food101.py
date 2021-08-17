@@ -69,7 +69,7 @@ class Food101(tfds.core.GeneratorBasedBuilder):
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=("image", "label"),
-        homepage="https://www.vision.ee.ethz.ch/datasets_extra/food-101/",
+        homepage="https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/",
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
