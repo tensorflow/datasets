@@ -191,9 +191,10 @@ def _get_original_labels(val_path):
 class Imagenet2012Multilabel(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for imagenet2012_multilabel dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('2.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '2.0.0': 'Fixed ILSVRC2012_img_val.tar file.',
   }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
