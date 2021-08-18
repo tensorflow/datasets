@@ -1,59 +1,85 @@
 # Splits and slicing
 
-All `DatasetBuilder`s expose various data subsets defined as splits (eg:
-`train`, `test`). When constructing a `tf.data.Dataset` instance using either
-`tfds.load()` or `tfds.DatasetBuilder.as_dataset()`, one can specify which
-split(s) to retrieve. It is also possible to retrieve slice(s) of split(s)
-as well as combinations of those.
+All TFDS datasets expose various data splits (e.g. `'train'`, `'test'`) which
+can be explored in the
+[catalog](https://www.tensorflow.org/datasets/catalog/overview).
 
-*   [Slicing API](#slicing-api)
-    *   [Examples](#examples)
-    *   [Percentage slicing and rounding](#percentage-slicing-and-rounding)
-    *   [Reproducibility](#reproducibility)
+In addition of the "official" dataset splits, TFDS allow to select slice(s) of
+split(s) and various combinaison.
 
 ## Slicing API
 
-Slicing instructions are specified in `tfds.load` or `tfds.DatasetBuilder.as_dataset`.
+Slicing instructions are specified in `tfds.load` or
+`tfds.DatasetBuilder.as_dataset` through the `split=` kwarg.
 
-Instructions can be provided as either strings or `ReadInstruction`s. Strings
-are more compact and readable for simple cases, while `ReadInstruction`s provide
-more options and might be easier to use with variable slicing parameters.
+```python
+ds = tfds.load('my_dataset', split='train[:75%]')
+```
 
-NOTE: Due to the shards being read in parallel, order isn't guaranteed to be
-consistent between sub-splits. In other words reading `test[0:100]` followed by
-`test[100:200]` may yield examples in a different order than reading
-`test[:200]`.
+```python
+builder = tfds.builder('my_dataset')
+ds = builder.as_dataset(split='test+train[:75%]')
+```
 
-### Examples
+Split can be:
 
-Examples using the string API:
+*   **Plain split** (`'train'`, `'test'`): All examples within the split
+    selected.
+*   **Slices**: Slices have the same semantic as
+    [python slice notation](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations).
+    Slices can be:
+    *   **Absolute** (`'train[123:450]'`, `train[:40]`):
+    *   **Percent** (`'train[:75%]'`, `'train[25%:75%]'`): Divide the full data
+        into 100 even slices. If the data is not divisible by 100, some percent
+        might contain additional examples.
+    *   **Shard** (`train[:4shard]`, `train[4shard]`): Select all examples in
+        the requested shard. (see `info.splits['train'].num_shards` to get the
+        number of shards of the split)
+*   **Union of splits** (`'train+test'`, `'train[:25%]+test'`): Splits will be
+    interleaved together.
+*   **List of splits** (`['train', 'test']`): Multiple `tf.data.Dataset` are
+    returned separately:
 
-```py
-# The full `train` split.
-train_ds = tfds.load('mnist', split='train')
+```python
+# Returns both train and test split separately
+train_ds, test_ds = tfds.load('mnist', split=['train', 'test[50%]'])
+```
 
-# The full `train` split and the full `test` split as two distinct datasets.
-train_ds, test_ds = tfds.load('mnist', split=['train', 'test'])
+Note: Due to the shards being
+[interleaved](https://www.tensorflow.org/api_docs/python/tf/data/Dataset?version=nightly#interleave),
+order isn't guaranteed to be consistent between sub-splits. In other words
+reading `test[0:100]` followed by `test[100:200]` may yield examples in a
+different order than reading `test[:200]`.
 
-# The full `train` and `test` splits, interleaved together.
-train_test_ds = tfds.load('mnist', split='train+test')
+## `tfds.even_splits`
 
-# From record 10 (included) to record 20 (excluded) of `train` split.
-train_10_20_ds = tfds.load('mnist', split='train[10:20]')
+`tfds.even_splits` generates a list of non-overlapping sub-splits of same size.
 
-# The first 10% of train split.
-train_10pct_ds = tfds.load('mnist', split='train[:10%]')
+```python
+# Divide the dataset into 3 even parts, each containing 1/3 of the data
+split0, split1, split2 = tfds.even_splits('train', n=3)
 
-# The first 10% of train + the last 80% of train.
-train_10_80pct_ds = tfds.load('mnist', split='train[:10%]+train[-80%:]')
+ds = tfds.load('my_dataset', split=split2)
+```
 
-# 10-fold cross-validation (see also next section on rounding behavior):
-# The validation datasets are each going to be 10%:
-# [0%:10%], [10%:20%], ..., [90%:100%].
-# And the training datasets are each going to be the complementary 90%:
-# [10%:100%] (for a corresponding validation set of [0%:10%]),
-# [0%:10%] + [20%:100%] (for a validation set of [10%:20%]), ...,
-# [0%:90%] (for a validation set of [90%:100%]).
+## Slicing and metadata
+
+It is possible to get additional info on the splits/subsplits (`num_examples`,
+`file_instructions`,...) using the
+[dataset info](https://www.tensorflow.org/datasets/overview#access_the_dataset_metadata):
+
+```python
+builder = tfds.builder('my_dataset')
+builder.info.splits['train'].num_examples  # 10_000
+builder.info.splits['train[:75%]'].num_examples  # 7_500 (also works with slices)
+builder.info.splits.keys()  # ['train', 'test']
+```
+
+## Cross validation
+
+Examples of 10-fold cross-validation using the string API:
+
+```python
 vals_ds = tfds.load('mnist', split=[
     f'train[{k}%:{k+10}%]' for k in range(0, 100, 10)
 ])
@@ -62,101 +88,54 @@ trains_ds = tfds.load('mnist', split=[
 ])
 ```
 
-Examples using the `ReadInstruction` API (equivalent as above):
+The validation datasets are each going to be 10%: `[0%:10%]`, `[10%:20%]`, ...,
+`[90%:100%]`. And the training datasets are each going to be the complementary
+90%: `[10%:100%]` (for a corresponding validation set of `[0%:10%]`), `[0%:10%]
++ [20%:100%]`(for a validation set of `[10%:20%]`),...
 
-```py
-# The full `train` split.
-train_ds = tfds.load('mnist', split=tfds.core.ReadInstruction('train'))
+## `tfds.core.ReadInstruction` and rounding
 
-# The full `train` split and the full `test` split as two distinct datasets.
-train_ds, test_ds = tfds.load('mnist', split=[
-    tfds.core.ReadInstruction('train'),
-    tfds.core.ReadInstruction('test'),
-])
+Rather than `str`, it is possible to pass splits as `tfds.core.ReadInstruction`:
 
-# The full `train` and `test` splits, interleaved together.
-ri = tfds.core.ReadInstruction('train') + tfds.core.ReadInstruction('test')
-train_test_ds = tfds.load('mnist', split=ri)
-
-# From record 10 (included) to record 20 (excluded) of `train` split.
-train_10_20_ds = tfds.load('mnist', split=tfds.core.ReadInstruction(
-    'train', from_=10, to=20, unit='abs'))
-
-# The first 10% of train split.
-train_10_20_ds = tfds.load('mnist', split=tfds.core.ReadInstruction(
-    'train', to=10, unit='%'))
-
-# The first 10% of train + the last 80% of train.
-ri = (tfds.core.ReadInstruction('train', to=10, unit='%') +
-      tfds.core.ReadInstruction('train', from_=-80, unit='%'))
-train_10_80pct_ds = tfds.load('mnist', split=ri)
-
-# 10-fold cross-validation (see also next section on rounding behavior):
-# The validation datasets are each going to be 10%:
-# [0%:10%], [10%:20%], ..., [90%:100%].
-# And the training datasets are each going to be the complementary 90%:
-# [10%:100%] (for a corresponding validation set of [0%:10%]),
-# [0%:10%] + [20%:100%] (for a validation set of [10%:20%]), ...,
-# [0%:90%] (for a validation set of [90%:100%]).
-vals_ds = tfds.load('mnist', [
-    tfds.core.ReadInstruction('train', from_=k, to=k+10, unit='%')
-    for k in range(0, 100, 10)])
-trains_ds = tfds.load('mnist', [
-    (tfds.core.ReadInstruction('train', to=k, unit='%') +
-     tfds.core.ReadInstruction('train', from_=k+10, unit='%'))
-    for k in range(0, 100, 10)])
-```
-
-### `tfds.even_splits`
-
-`tfds.even_splits` generates a list of non-overlapping sub-splits of same size.
+For example, `split = 'train[50%:75%] + test'` is equivalent to:
 
 ```python
-assert tfds.even_splits('train', n=3) == [
-    'train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]',
-]
-```
-
-### Percentage slicing and rounding
-
-If a slice of a split is requested using the percent (`%`) unit, and the
-requested slice boundaries do not divide evenly by `100`, then the default
-behaviour it to round boundaries to the nearest integer (`closest`). This means
-that some slices may contain more examples than others. For example:
-
-```py
-# Assuming "train" split contains 101 records.
-# 100 records, from 0 to 100.
-tfds.load("mnist", split="test[:99%]")
-# 2 records, from 49 to 51.
-tfds.load("mnist", split="test[49%:50%]")
-```
-
-Alternatively, the user can use the rounding `pct1_dropremainder`, so specified
-percentage boundaries are treated as multiples of 1%. This option should be used
-when consistency is needed (eg: `len(5%) == 5 * len(1%)`). This means the last
-examples may be truncated if `info.split[split_name].num_examples % 100 != 0`.
-
-Example:
-
-```py
-# Records 0 (included) to 99 (excluded).
-split = tfds.core.ReadInstruction(
-    'test',
-    to=99,
-    rounding='pct1_dropremainder',
-    unit = '%',
+split = (
+    tfds.core.ReadInstruction(
+        'train',
+        from_=50,
+        to=75,
+        unit='%',
+    )
+    + tfds.core.ReadInstruction('test')
 )
-tfds.load("mnist", split=split)
+ds = tfds.load('my_dataset', split=split)
 ```
 
-### Reproducibility
+`unit` can be:
 
-The sub-split API guarantees that any given split slice (or `ReadInstruction`)
-will always produce the same set of records on a given dataset, as long as the
-major version of the dataset is constant.
+*   `abs`: Absolute slicing
+*   `%`: Percent slicing
+*   `shard`: Shard slicing
 
-For example, `tfds.load("mnist:3.0.0", split="train[10:20]")` and
-`tfds.load("mnist:3.2.0", split="train[10:20]")` will always contain the same
-elements - regardless of platform, architecture, etc. - even though some of
-the records might have different values (eg: image encoding, label, ...).
+`tfds.ReadInstruction` also has a rounding argument. If the number of example in
+the dataset is not divide evenly by `100`:
+
+*   `rounding='closest'` (default): The remaining examples are distributed among
+    the percent, so some percent might contain additional examples.
+*   `rounding='pct1_dropremainder'`: The remaining examples are dropped, but
+    this guarantee all percent contain the exact same number of example (eg:
+    `len(5%) == 5 * len(1%)`).
+
+### Reproducibility & determinism
+
+During generation, for a given dataset version, TFDS guarantee that examples are
+deterministically shuffled on disk. So generating the dataset twice (in 2
+different computers) won't change the example order.
+
+Similarly, the subsplit API will always select the same `set` of examples,
+regardless of platform, architecture, etc. This mean `set('train[:20%]') ==
+set('train[:10%]') + set('train[10%:20%]')`.
+
+However, the order in which example are read might **not** be deterministic.
+This depends on other parameters (e.g. whether `shuffle_files=True`).
