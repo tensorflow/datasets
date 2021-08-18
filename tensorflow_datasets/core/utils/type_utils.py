@@ -39,6 +39,7 @@ T = TypeVar('T')
 # Note: `TupleOrList` avoid abiguity from `Sequence` (`str` is `Sequence[str]`,
 # `bytes` is `Sequence[int]`).
 TupleOrList = Union[Tuple[T, ...], List[T]]
+ListOrElem = Union[T, List[T]]
 
 TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
 Tree = Union[T, TupleOrList['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-supported-yet

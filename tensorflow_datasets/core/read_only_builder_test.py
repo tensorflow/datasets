@@ -178,6 +178,23 @@ def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
   assert builder.version == builder2.version
 
 
+def test_read_only_builder_multi_dir(
+    code_builder: dataset_builder.DatasetBuilder,
+    tmp_path: pathlib.Path,
+):
+  some_dir = tmp_path / 'other'
+  some_dir.mkdir()
+
+  builder = read_only_builder.builder_from_files(
+      code_builder.name,
+      data_dir=[
+          code_builder._data_dir_root, some_dir, '/tmp/non-existing-dir/'
+      ],
+  )
+  assert builder.name == code_builder.name
+  assert builder.data_dir == code_builder.data_dir
+
+
 def test_not_exists(tmp_path: pathlib.Path):
   with pytest.raises(
       FileNotFoundError, match='Could not load `ReadOnlyBuilder`'):
