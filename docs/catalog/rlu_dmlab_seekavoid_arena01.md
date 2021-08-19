@@ -127,7 +127,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-training_0-1.1.0.html";
@@ -171,7 +171,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-training_1-1.1.0.html";
@@ -215,7 +215,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-training_2-1.1.0.html";
@@ -259,7 +259,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_0_eps_0.0-1.1.0.html";
@@ -303,7 +303,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_1_eps_0.0-1.1.0.html";
@@ -347,7 +347,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_0_eps_0.01-1.1.0.html";
@@ -391,7 +391,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_1_eps_0.01-1.1.0.html";
@@ -435,7 +435,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_0_eps_0.25-1.1.0.html";
@@ -479,7 +479,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_1_eps_0.25-1.1.0.html";

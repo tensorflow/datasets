@@ -80,7 +80,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-boolq-1.0.2.html";
@@ -173,7 +173,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-cb-1.0.2.html";
@@ -267,7 +267,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-copa-1.0.2.html";
@@ -365,7 +365,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-multirc-1.0.2.html";
@@ -459,7 +459,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-record-1.0.2.html";
@@ -554,7 +554,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-rte-1.0.2.html";
@@ -674,7 +674,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wic-1.0.2.html";
@@ -797,7 +797,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wsc-1.0.2.html";
@@ -916,7 +916,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wsc.fixed-1.0.2.html";
@@ -1009,7 +1009,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-axb-1.0.2.html";
@@ -1098,7 +1098,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-axg-1.0.2.html";

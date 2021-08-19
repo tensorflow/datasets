@@ -127,7 +127,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_rooms_select_nonmatching_object-training_0-1.1.0.html";
@@ -171,7 +171,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_rooms_select_nonmatching_object-training_1-1.1.0.html";
@@ -215,7 +215,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_rooms_select_nonmatching_object-training_2-1.1.0.html";

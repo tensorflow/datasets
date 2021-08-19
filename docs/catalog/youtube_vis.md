@@ -130,7 +130,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/youtube_vis-full-1.0.0.html";
@@ -201,7 +201,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/youtube_vis-480_640_full-1.0.0.html";
@@ -272,7 +272,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/youtube_vis-480_640_only_frames_with_labels-1.0.0.html";
@@ -343,7 +343,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/youtube_vis-only_frames_with_labels-1.0.0.html";
@@ -415,7 +415,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/youtube_vis-full_train_split-1.0.0.html";
@@ -487,7 +487,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/youtube_vis-480_640_full_train_split-1.0.0.html";
@@ -559,7 +559,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/youtube_vis-480_640_only_frames_with_labels_train_split-1.0.0.html";
@@ -630,7 +630,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/youtube_vis-only_frames_with_labels_train_split-1.0.0.html";

@@ -119,7 +119,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Wireless_v1_00-0.1.0.html";
@@ -167,7 +167,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Watches_v1_00-0.1.0.html";
@@ -215,7 +215,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Video_Games_v1_00-0.1.0.html";
@@ -263,7 +263,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Video_DVD_v1_00-0.1.0.html";
@@ -311,7 +311,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Video_v1_00-0.1.0.html";
@@ -359,7 +359,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Toys_v1_00-0.1.0.html";
@@ -407,7 +407,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Tools_v1_00-0.1.0.html";
@@ -455,7 +455,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Sports_v1_00-0.1.0.html";
@@ -503,7 +503,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Software_v1_00-0.1.0.html";
@@ -551,7 +551,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Shoes_v1_00-0.1.0.html";
@@ -599,7 +599,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Pet_Products_v1_00-0.1.0.html";
@@ -647,7 +647,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Personal_Care_Appliances_v1_00-0.1.0.html";
@@ -695,7 +695,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-PC_v1_00-0.1.0.html";
@@ -743,7 +743,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Outdoors_v1_00-0.1.0.html";
@@ -791,7 +791,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Office_Products_v1_00-0.1.0.html";
@@ -839,7 +839,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Musical_Instruments_v1_00-0.1.0.html";
@@ -887,7 +887,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Music_v1_00-0.1.0.html";
@@ -935,7 +935,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Mobile_Electronics_v1_00-0.1.0.html";
@@ -983,7 +983,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Mobile_Apps_v1_00-0.1.0.html";
@@ -1031,7 +1031,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Major_Appliances_v1_00-0.1.0.html";
@@ -1079,7 +1079,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Luggage_v1_00-0.1.0.html";
@@ -1127,7 +1127,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Lawn_and_Garden_v1_00-0.1.0.html";
@@ -1175,7 +1175,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Kitchen_v1_00-0.1.0.html";
@@ -1223,7 +1223,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Jewelry_v1_00-0.1.0.html";
@@ -1271,7 +1271,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Home_Improvement_v1_00-0.1.0.html";
@@ -1319,7 +1319,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Home_Entertainment_v1_00-0.1.0.html";
@@ -1367,7 +1367,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Home_v1_00-0.1.0.html";
@@ -1415,7 +1415,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Health_Personal_Care_v1_00-0.1.0.html";
@@ -1463,7 +1463,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Grocery_v1_00-0.1.0.html";
@@ -1511,7 +1511,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Gift_Card_v1_00-0.1.0.html";
@@ -1559,7 +1559,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Furniture_v1_00-0.1.0.html";
@@ -1607,7 +1607,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Electronics_v1_00-0.1.0.html";
@@ -1655,7 +1655,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Video_Games_v1_00-0.1.0.html";
@@ -1703,7 +1703,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Video_Download_v1_00-0.1.0.html";
@@ -1751,7 +1751,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Software_v1_00-0.1.0.html";
@@ -1799,7 +1799,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Music_Purchase_v1_00-0.1.0.html";
@@ -1847,7 +1847,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Ebook_Purchase_v1_00-0.1.0.html";
@@ -1895,7 +1895,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Camera_v1_00-0.1.0.html";
@@ -1943,7 +1943,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Books_v1_00-0.1.0.html";
@@ -1991,7 +1991,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Beauty_v1_00-0.1.0.html";
@@ -2039,7 +2039,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Baby_v1_00-0.1.0.html";
@@ -2087,7 +2087,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Automotive_v1_00-0.1.0.html";
@@ -2135,7 +2135,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Apparel_v1_00-0.1.0.html";
@@ -2183,7 +2183,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Ebook_Purchase_v1_01-0.1.0.html";
@@ -2231,7 +2231,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Books_v1_01-0.1.0.html";
@@ -2279,7 +2279,7 @@ Split     | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Books_v1_02-0.1.0.html";
