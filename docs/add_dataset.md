@@ -431,7 +431,7 @@ This is done through `tfds.core.BuilderConfig`s:
     class MyDataset(tfds.core.GeneratorBasedBuilder):
       VERSION = tfds.core.Version('1.0.0')
       # pytype: disable=wrong-keyword-args
-      BUILDER_CONFIG = [
+      BUILDER_CONFIGS = [
           # `name` (and optionally `description`) are required for each config
           MyDatasetConfig(name='small', description='Small ...', img_size=(8, 8)),
           MyDatasetConfig(name='big', description='Big ...', img_size=(32, 32)),
