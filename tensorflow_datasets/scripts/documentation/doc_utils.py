@@ -113,7 +113,7 @@ class DataframeDocUtil(object):
     {{% framebox %}}
 
     <button id="{button_id}">Display examples...</button>
-    <div id="{content_id}" style="overflow-x:scroll"></div>
+    <div id="{content_id}" style="overflow-x:auto"></div>
     <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
     <script>
     var url = "{url}";
