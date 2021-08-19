@@ -101,10 +101,12 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     _reraise_with_list_builders(e, name=ds_name)  # pytype: disable=bad-return-type
 
 
-def builder(name: str,
-            *,
-            try_gcs: bool = False,
-            **builder_kwargs: Any) -> dataset_builder.DatasetBuilder:
+def builder(
+    name: str,
+    *,
+    try_gcs: bool = False,
+    **builder_kwargs: Any,
+) -> dataset_builder.DatasetBuilder:
   """Fetches a `tfds.core.DatasetBuilder` by string name.
 
   Args:
