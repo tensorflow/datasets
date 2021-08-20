@@ -35,6 +35,9 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 #   TODO(tfds): Restore test with new Python release.
 # * test_utils.py, test_feature.py is not a test file
 # * build_docs_test: See b/142892342
+# * rlds: It depends on envlogger that needs a newer version of libstdc++.
+#   TODO(sabela): Restore once we manage to either re-package envlogger or
+#   update libstdc++ in the kokoro image.
 pytest \
   -vv \
   -n auto \
@@ -47,7 +50,8 @@ pytest \
   --ignore="tensorflow_datasets/translate/wmt19_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
   --ignore="tensorflow_datasets/core/features/test_feature.py" \
-  --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+  --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
+  --ignore="tensorflow_datasets/rlds/robosuite_panda_pick_place_can/robosuite_panda_pick_place_can_test.py"
 set_status
 
 # Test notebooks in isolated environments

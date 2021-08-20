@@ -67,6 +67,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def envlogger(cls):
+    return _try_import("envlogger.reader")
+
+  @utils.classproperty
+  @classmethod
   def gcld3(cls):
     return _try_import("gcld3")  # pylint: disable=unreachable
 

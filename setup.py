@@ -144,6 +144,7 @@ DATASET_EXTRAS = {
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
+    'robosuite_panda_pick_place_can': ['envlogger'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'wider_face': ['Pillow'],
