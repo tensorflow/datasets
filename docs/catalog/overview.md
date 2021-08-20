@@ -200,6 +200,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`rlu_dmlab_rooms_watermaze`](rlu_dmlab_rooms_watermaze.md)
 *   [`rlu_dmlab_seekavoid_arena01`](rlu_dmlab_seekavoid_arena01.md)
 
+### `Rlds`
+
+*   [`robosuite_panda_pick_place_can`](robosuite_panda_pick_place_can.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Structured`
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)

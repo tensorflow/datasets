@@ -322,6 +322,11 @@ toc:
     title: rlu_dmlab_seekavoid_arena01
   title: Rl unplugged
 - section:
+  - path: /datasets/catalog/robosuite_panda_pick_place_can
+    status: nightly
+    title: robosuite_panda_pick_place_can
+  title: Rlds
+- section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/cherry_blossoms
