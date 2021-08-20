@@ -107,6 +107,7 @@ def _load_builder_from_location(name: str,) -> Optional[BuilderToDocument]:
     return None
   except Exception as e:  # pylint: disable=broad-except
     logging.error(f'CorruptedDatasetError: {name!r}', exc_info=e)
+    return None
   if builder.builder_config:
     config_builders = _load_all_configs(name, builder)
   else:
