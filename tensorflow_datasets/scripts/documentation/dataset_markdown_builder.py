@@ -21,6 +21,7 @@ Displayed in https://www.tensorflow.org/datasets/catalog/.
 
 import abc
 import html
+import os
 import textwrap
 from typing import List, Optional, Union
 
@@ -159,13 +160,49 @@ class SourceCodeSection(Section):
   def content(self, builder: tfds.core.DatasetBuilder):
     # TODO(tfds): Display the source code
     if isinstance(builder, tfds.core.read_only_builder.ReadOnlyBuilder):
-      return ('Missing '
-              '([#2813](https://github.com/tensorflow/datasets/issues/2813))')
+      return _get_read_only_builder_source_code_link(builder)
     class_path = tfds.core.utils.get_class_path(builder).split('.')
     del class_path[-2]
     class_path = '.'.join(class_path)
     class_url = tfds.core.utils.get_class_url(builder)
     return f'[`{class_path}`]({class_url})'
+
+
+def _get_read_only_builder_source_code_link(
+    builder: tfds.core.DatasetBuilder) -> str:
+  """Extract the source code for read-only builder."""
+  if 'read_only_builder' in builder.__module__:  # module unknown
+    return ('Missing (dataset generated before '
+            '[#2813](https://github.com/tensorflow/datasets/issues/2813))')
+  module_url = 'https://github.com/tensorflow/datasets'
+  # TODO(epot): For datasets built with `tfds build` __module__ correspond
+  # to the relative path, not absolute so can't be recover.
+  return f'[{builder.__module__}]({module_url})'
+
+
+class LocationSection(Section):
+
+  NAME = 'Path'
+
+  def get_key(self, _):
+    return True  # Always common to all configs
+
+  def content(self, builder: tfds.core.DatasetBuilder):
+    # Path is only documented for community datasets
+    if (not isinstance(builder, tfds.core.read_only_builder.ReadOnlyBuilder)
+        # If datasets have not yet been regenerated after update, even TFDS
+        # datasets can be ReadOnlyBuilder
+        or builder.__module__.startswith('tensorflow_datasets')):
+      return _SKIP_SECTION
+
+    # /.../ds/config/1.0.0/ -> /.../ds/
+    path = builder.data_path.parent
+    if builder.builder_config:
+      path = path.parent
+    path = os.fspath(path)
+
+    # Link is automatically added, so can just return the path
+    return path  # pylint: disable=protected-access
 
 
 class VersionSection(Section):
@@ -648,6 +685,7 @@ def get_markdown_string(
       ConfigDescriptionSection(),
       HomepageSection(),
       SourceCodeSection(),
+      LocationSection(),
       VersionSection(nightly_doc_util),
       DownloadSizeSection(),
       DatasetSizeSection(),
