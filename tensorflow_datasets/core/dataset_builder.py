@@ -16,15 +16,15 @@
 """DatasetBuilder base class."""
 
 import abc
+import dataclasses
 import functools
 import inspect
 import json
 import os
 import sys
-from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, Union
+from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, Union
 
 from absl import logging
-import dataclasses
 import six
 import tensorflow.compat.v2 as tf
 
@@ -596,10 +596,25 @@ class DatasetBuilder(registered.RegisteredDataset):
     if as_supervised:
       if not self.info.supervised_keys:
         raise ValueError(
-            "as_supervised=True but %s does not support a supervised "
-            "(input, label) structure." % self.name)
-      input_f, target_f = self.info.supervised_keys
-      ds = ds.map(lambda fs: (fs[input_f], fs[target_f]))
+            f"as_supervised=True but {self.name} does not support a supervised "
+            "structure.")
+
+      def lookup_nest(features: Dict[str, Any]) -> Tuple[Any, ...]:
+        """Converts `features` to the structure described by `supervised_keys`.
+
+        Note that there is currently no way to access features in nested
+        feature dictionaries.
+
+        Args:
+          features: dictionary of features
+
+        Returns:
+          A tuple with elements structured according to `supervised_keys`
+        """
+        return tf.nest.map_structure(lambda key: features[key],
+                                     self.info.supervised_keys)
+
+      ds = ds.map(lookup_nest)
 
     # Add prefetch by default
     if not read_config.skip_prefetch:

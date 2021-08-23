@@ -71,6 +71,8 @@ def return_same(d):
 FEATURE_DICT = collections.OrderedDict([
     ("pclass", (tfds.features.ClassLabel(names=_PCLASS_DICT.values()),
                 lambda d: convert_to_label(d, _PCLASS_DICT))),
+    ("survived", (tfds.features.ClassLabel(names=_SURVIVED_DICT.values()),
+                  lambda d: convert_to_label(d, _SURVIVED_DICT))),
     ("name", (tf.string, convert_to_string)),
     ("sex", (tfds.features.ClassLabel(names=["male", "female"]), return_same)),
     ("age", (tf.float32, convert_to_float)),
@@ -91,22 +93,38 @@ _URL = "https://www.openml.org/data/get_csv/16826755/phpMYEkMl"
 
 class Titanic(tfds.core.GeneratorBasedBuilder):
   """Titanic dataset."""
-  VERSION = tfds.core.Version("2.0.0")
+  VERSION = tfds.core.Version("3.0.0")
+  SUPPORTED_VERSIONS = [tfds.core.Version("3.0.0"), tfds.core.Version("2.0.0")]
   RELEASE_NOTES = {
+      "3.0.0": ("Use a standard flat dictionary of features for the dataset. "
+                "Use `as_supervised=True` to split the dataset into "
+                "a `(features_dict, survived)` tuple."),
       "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
   }
 
   def _info(self):
+    supervised_features = FEATURE_DICT.copy()
+    survived_feature, unused_func = supervised_features.pop("survived")
+
+    if self.version >= "3.0.0":
+      supervised_keys = ({key: key for key in supervised_features.keys()},
+                         "survived")
+      features = features = tfds.features.FeaturesDict(
+          {name: dtype for name, (dtype, func) in FEATURE_DICT.items()})
+    else:
+      supervised_keys = ("features", "survived")
+      features = tfds.features.FeaturesDict({
+          "survived": survived_feature,
+          "features": {
+              name: dtype
+              for name, (dtype, func) in supervised_features.items()
+          }
+      })
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "survived": tfds.features.ClassLabel(names=["died", "survived"]),
-            "features": {
-                name: dtype for name, (dtype, func) in FEATURE_DICT.items()
-            }
-        }),
-        supervised_keys=("features", "survived"),
+        features=features,
+        supervised_keys=supervised_keys,
         homepage="https://www.openml.org/d/40945",
         citation=_CITATION)
 
@@ -128,15 +146,20 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
     Yields:
       The features and the target
     """
-
     with tf.io.gfile.GFile(file_path) as f:
       raw_data = csv.DictReader(f)
-      for i, row in enumerate(raw_data):
-        survive_val = row.pop("survived")
-        yield i, {
-            "survived": convert_to_label(survive_val, _SURVIVED_DICT),
-            "features": {
-                name: FEATURE_DICT[name][1](value)
-                for name, value in row.items()
-            }
-        }
+      if self.version >= "3.0.0":
+        for i, row in enumerate(raw_data):
+          yield i, {
+              name: FEATURE_DICT[name][1](value) for name, value in row.items()
+          }
+      else:
+        for i, row in enumerate(raw_data):
+          survive_val = row.pop("survived")
+          yield i, {
+              "survived": convert_to_label(survive_val, _SURVIVED_DICT),
+              "features": {
+                  name: FEATURE_DICT[name][1](value)
+                  for name, value in row.items()
+              }
+          }
