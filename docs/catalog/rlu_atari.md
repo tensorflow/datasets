@@ -6158,16 +6158,17 @@ Split     | Examples
 
 ## rlu_atari/Riverraid_run_1
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `65.38 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 37,557
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6175,16 +6176,17 @@ Split | Examples
 
 ## rlu_atari/Riverraid_run_2
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `65.53 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 38,018
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6192,16 +6194,17 @@ Split | Examples
 
 ## rlu_atari/Riverraid_run_3
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `65.51 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 38,112
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6209,16 +6212,17 @@ Split | Examples
 
 ## rlu_atari/Riverraid_run_4
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `64.51 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 64,993
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6226,16 +6230,17 @@ Split | Examples
 
 ## rlu_atari/Riverraid_run_5
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `65.37 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 37,849
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6243,16 +6248,17 @@ Split | Examples
 
 ## rlu_atari/RoadRunner_run_1
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `51.02 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 45,469
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6260,16 +6266,17 @@ Split | Examples
 
 ## rlu_atari/RoadRunner_run_2
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `51.03 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 47,447
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6277,16 +6284,17 @@ Split | Examples
 
 ## rlu_atari/RoadRunner_run_3
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `51.00 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 45,812
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6294,16 +6302,17 @@ Split | Examples
 
 ## rlu_atari/RoadRunner_run_4
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `51.05 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 46,139
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6311,16 +6320,17 @@ Split | Examples
 
 ## rlu_atari/RoadRunner_run_5
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `51.02 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 45,202
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6328,16 +6338,17 @@ Split | Examples
 
 ## rlu_atari/Robotank_run_1
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `50.34 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,144
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6345,16 +6356,17 @@ Split | Examples
 
 ## rlu_atari/Robotank_run_2
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `50.42 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,000
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6362,16 +6374,17 @@ Split | Examples
 
 ## rlu_atari/Robotank_run_3
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `50.53 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,235
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6379,16 +6392,17 @@ Split | Examples
 
 ## rlu_atari/Robotank_run_4
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `50.55 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,089
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6396,16 +6410,17 @@ Split | Examples
 
 ## rlu_atari/Robotank_run_5
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `50.27 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,339
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6413,16 +6428,17 @@ Split | Examples
 
 ## rlu_atari/Seaquest_run_1
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `42.13 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 33,872
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6430,16 +6446,17 @@ Split | Examples
 
 ## rlu_atari/Seaquest_run_2
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `42.84 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 32,606
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6447,16 +6464,17 @@ Split | Examples
 
 ## rlu_atari/Seaquest_run_3
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `42.86 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 35,662
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6464,16 +6482,17 @@ Split | Examples
 
 ## rlu_atari/Seaquest_run_4
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `42.79 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 34,697
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6481,16 +6500,17 @@ Split | Examples
 
 ## rlu_atari/Seaquest_run_5
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `42.83 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 32,783
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6498,16 +6518,17 @@ Split | Examples
 
 ## rlu_atari/SpaceInvaders_run_1
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `53.86 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 30,348
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6515,16 +6536,17 @@ Split | Examples
 
 ## rlu_atari/SpaceInvaders_run_2
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `54.26 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 32,554
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6532,16 +6554,17 @@ Split | Examples
 
 ## rlu_atari/SpaceInvaders_run_3
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `54.16 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 30,473
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6549,16 +6572,17 @@ Split | Examples
 
 ## rlu_atari/SpaceInvaders_run_4
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `54.23 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 32,610
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6566,16 +6590,17 @@ Split | Examples
 
 ## rlu_atari/SpaceInvaders_run_5
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `54.22 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 32,355
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6583,16 +6608,17 @@ Split | Examples
 
 ## rlu_atari/StarGunner_run_1
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `25.84 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 50,949
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6600,16 +6626,17 @@ Split | Examples
 
 ## rlu_atari/StarGunner_run_2
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `26.12 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 41,634
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6617,16 +6644,17 @@ Split | Examples
 
 ## rlu_atari/StarGunner_run_3
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `26.03 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 43,322
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6634,16 +6662,17 @@ Split | Examples
 
 ## rlu_atari/StarGunner_run_4
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `25.81 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 50,409
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6651,16 +6680,17 @@ Split | Examples
 
 ## rlu_atari/StarGunner_run_5
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `25.94 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 48,237
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6668,16 +6698,17 @@ Split | Examples
 
 ## rlu_atari/TimePilot_run_1
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `45.04 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 47,894
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
