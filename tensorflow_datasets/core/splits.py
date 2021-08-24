@@ -15,16 +15,17 @@
 
 """Splits related API."""
 
+import dataclasses
 import typing
 from typing import Any, List, Optional, Union
-
-import dataclasses
 
 from tensorflow_datasets.core import proto as proto_lib
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_metadata.proto.v0 import statistics_pb2
+
+SplitArg = tfrecords_reader.SplitArg
 
 
 @dataclasses.dataclass(eq=False, frozen=True)

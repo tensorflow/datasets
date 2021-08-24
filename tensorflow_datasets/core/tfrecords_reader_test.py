@@ -205,9 +205,8 @@ class ReadInstructionTest(testing.TestCase):
     ri = self.check_from_spec('train', [('train', None, None)])
     self.assertEqual(
         str(ri),
-        ('ReadInstruction(['
-         "_RelativeInstruction(splitname='train', from_=None, to=None, "
-         "unit='abs', rounding='closest')])"))
+        "ReadInstruction('train')",
+    )
     self.check_from_spec('test', [('test', None, None)])
     # Addition of splits:
     self.check_from_spec('train+test', [
@@ -229,9 +228,7 @@ class ReadInstructionTest(testing.TestCase):
     self.check_from_spec('train[-1%:]', [('train', 198, None)])
     ri = self.check_from_spec('test[:99%]', [('test', None, 100)])
     self.assertEqual(
-        str(ri),
-        ("ReadInstruction([_RelativeInstruction(splitname='test', from_=None,"
-         " to=99, unit='%', rounding='closest')])"))
+        str(ri), "ReadInstruction('test[:99%]', rounding='closest')")
     # No overlap:
     self.check_from_spec('test[100%:]', [('test', 101, None)])
     # Percent slicing, pct1_dropremainder rounding:
@@ -263,29 +260,17 @@ class ReadInstructionTest(testing.TestCase):
     ri = ri1 + ri2 + ri3
     self.assertEqual(
         str(ri),
-        ('ReadInstruction(['
-         "_RelativeInstruction(splitname='train', from_=10, to=20, unit='abs',"
-         " rounding='closest'), "
-         "_RelativeInstruction(splitname='test', from_=10, to=20, unit='abs',"
-         " rounding='closest'), "
-         "_RelativeInstruction(splitname='train', from_=1, to=5, unit='abs',"
-         " rounding='closest')])"))
-
-  def test_add_invalid(self):
-    # Mixed rounding:
-    ri1 = tfrecords_reader.ReadInstruction(
-        'test', unit='%', to=10, rounding='pct1_dropremainder')
-    ri2 = tfrecords_reader.ReadInstruction(
-        'test', unit='%', from_=90, rounding='closest')
-    with self.assertRaisesWithPredicateMatch(ValueError, 'different rounding'):
-      unused_ = ri1 + ri2
+        "ReadInstruction('train[10:20]')"
+        "+ReadInstruction('test[10:20]')"
+        "+ReadInstruction('train[1:5]')",
+    )
 
   def test_invalid_rounding(self):
-    with self.assertRaisesWithPredicateMatch(ValueError, 'rounding'):
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Rounding should be'):
       tfrecords_reader.ReadInstruction('test', unit='%', rounding='unexisting')
 
   def test_invalid_unit(self):
-    with self.assertRaisesWithPredicateMatch(ValueError, 'unit'):
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Unit should be'):
       tfrecords_reader.ReadInstruction('test', unit='kg', rounding='closest')
 
   def test_invalid_spec(self):
@@ -298,9 +283,9 @@ class ReadInstructionTest(testing.TestCase):
     self.assertRaises('validation[:31]', 'incompatible with 30 examples')
     # Invalid boundaries %:
     self.assertRaises('validation[:250%]',
-                      'Percent slice boundaries must be > -100 and < 100')
+                      'percent slice boundaries should be in [-100, 100]')
     self.assertRaises('validation[-101%:]',
-                      'Percent slice boundaries must be > -100 and < 100')
+                      'percent slice boundaries should be in [-100, 100]')
     # pct1_dropremainder with < 100 examples
     with self.assertRaisesWithPredicateMatch(
         ValueError, 'with less than 100 elements is forbidden'):

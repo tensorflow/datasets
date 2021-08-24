@@ -16,6 +16,7 @@
 """DatasetBuilder base class."""
 
 import abc
+import dataclasses
 import functools
 import inspect
 import json
@@ -24,7 +25,6 @@ import sys
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, Union
 
 from absl import logging
-import dataclasses
 import six
 import tensorflow.compat.v2 as tf
 
@@ -49,6 +49,7 @@ import termcolor
 
 ReadOnlyPath = type_utils.ReadOnlyPath
 ReadWritePath = type_utils.ReadWritePath
+Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
 VersionOrStr = Union[utils.Version, str]
 
@@ -453,7 +454,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   @tfds_logging.as_dataset()
   def as_dataset(
       self,
-      split: Optional[Union[str, tfrecords_reader.ReadInstruction]] = None,
+      split: Optional[Tree[splits_lib.SplitArg]] = None,
       *,
       batch_size: Optional[int] = None,
       shuffle_files: bool = False,

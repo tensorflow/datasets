@@ -195,7 +195,7 @@ def _try_load_from_files_first(
 def load(
     name: str,
     *,
-    split: Optional[Tree[splits_lib.Split]] = None,
+    split: Optional[Tree[splits_lib.SplitArg]] = None,
     data_dir: Optional[str] = None,
     batch_size: Optional[int] = None,
     shuffle_files: bool = False,

@@ -15,14 +15,16 @@
 
 """Defined Reader and ReadInstruction to read tfrecord files."""
 
+import abc
+import dataclasses
 import functools
 import math
+import operator
 import os
 import re
 from typing import Any, Callable, Dict, Iterable, List, NamedTuple, Optional, Sequence, Union
 
 from absl import logging
-import attr
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -36,7 +38,7 @@ from tensorflow_datasets.core.utils import shard_utils
 SplitInfo = Any
 
 # Accepted split values (in `as_dataset(split=...)`)
-SplitArg = Union[str, 'ReadInstruction']
+SplitArg = Union[str, 'AbstractSplit']
 
 Tree = utils.Tree
 TreeDict = utils.TreeDict
@@ -162,12 +164,22 @@ def make_file_instructions(
   Returns:
     file_intructions: FileInstructions instance
   """
+  from tensorflow_datasets.core import splits as splits_lib  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+
   # The code could be simplified by forwarding SplitDict everywhere
-  split_infos = {info.name: info for info in split_infos}
-  if not isinstance(instruction, ReadInstruction):
-    instruction = ReadInstruction.from_spec(instruction)
+  split_infos = splits_lib.SplitDict(list(split_infos), dataset_name=name)
+
+  if isinstance(instruction, str):
+    instruction = AbstractSplit.from_spec(instruction)
+
   # Create the absolute instruction (per split)
   absolute_instructions = instruction.to_absolute(split_infos)
+
+  # TODO(epot): Should try to merge the instructions together as well as
+  # performing additional validation. For example, should raise an error
+  # if there is overlapp between splits (`train[:50]+train[:25]`)
+  # If there is a single shard, `train[:25]+train[50:75]` could be optimized
+  # into a single `ds.take(25).skip(50-25).take(75-50)`
 
   return _make_file_instructions_from_absolutes(
       name=name,
@@ -180,7 +192,7 @@ def make_file_instructions(
 def _make_file_instructions_from_absolutes(
     name: str,
     split_infos: Dict[str, SplitInfo],
-    absolute_instructions: 'ReadInstruction',
+    absolute_instructions: List['_AbsoluteInstruction'],
     file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
 ) -> List[shard_utils.FileInstruction]:
   """Returns the files instructions from the absolute instructions list."""
@@ -494,35 +506,6 @@ class Reader(object):
     return ds
 
 
-@attr.s(frozen=True)
-class _AbsoluteInstruction(object):
-  """A machine friendly slice: defined absolute positive boundaries."""
-  splitname = attr.ib()  # : str
-  from_ = attr.ib()  # uint (starting index).
-  to = attr.ib()  # uint (ending index).
-
-
-@attr.s(frozen=True)
-class _RelativeInstruction(object):
-  """Represents a single parsed slicing instruction, can use % and negatives."""
-  splitname = attr.ib()  # : str
-  # starting index, or None if no lower boundary.
-  from_ = attr.ib()  # : Optional[int]
-  # ending index, or None if no upper boundary.
-  to = attr.ib()  # : Optional[int]
-  unit = attr.ib(validator=attr.validators.in_(['%', 'abs', 'shard']))  # : str
-  rounding = attr.ib(
-      validator=attr.validators.in_([  # : str
-          'closest', 'pct1_dropremainder'
-      ]))
-
-  @from_.validator
-  @to.validator
-  def check_boundary_pct(self, unused_attribute, value):
-    if self.unit == '%' and value is not None and abs(value) > 100:
-      raise ValueError('Percent slice boundaries must be > -100 and < 100.')
-
-
 def _str_to_relative_instruction(spec: str) -> 'ReadInstruction':
   """Returns ReadInstruction for given string."""
   # <split_name>[<split_selector>] (e.g. `train[54%:]`)
@@ -588,19 +571,19 @@ def _pct_to_abs_closest(boundary, num_examples):
 
 
 def _rel_to_abs_instr(
-    rel_instr: '_RelativeInstruction',
+    rel_instr: 'ReadInstruction',
     split_infos: Dict[str, SplitInfo],
 ):
   """Returns _AbsoluteInstruction instance for given RelativeInstruction.
 
   Args:
-    rel_instr: RelativeInstruction instance.
+    rel_instr: ReadInstruction instance.
     split_infos: dict {split_name: split_infos}.
   """
   pct_to_abs = (
       _pct_to_abs_closest
       if rel_instr.rounding == 'closest' else _pct_to_abs_pct1)
-  split = rel_instr.splitname
+  split = rel_instr.split_name
   if split not in split_infos:
     raise ValueError(
         f'Unknown split {split!r}. Should be one of {list(split_infos)}.')
@@ -636,104 +619,16 @@ def _rel_to_abs_instr(
   return _AbsoluteInstruction(split, from_, to)
 
 
-class ReadInstruction(object):
-  """Reading instruction for a dataset.
+class AbstractSplit(abc.ABC):
+  """Abstract base class of splits.
 
-  Note: Due to the shards being read in parallel, order isn't guaranteed to be
-  consistent between sub-splits. In other words reading `test[0:100]` followed
-  by `test[100:200]` may yield examples in a different order than reading
-  `test[:200]`.
-
-  Examples of usage:
-
-  ```
-  # The following lines are equivalent:
-  ds = tfds.load('mnist', split='test[:33%]')
-  ds = tfds.load('mnist', split=tfds.core.ReadInstruction.from_spec(
-      'test[:33%]'))
-  ds = tfds.load('mnist', split=tfds.core.ReadInstruction(
-      'test', to=33, unit='%'))
-  ds = tfds.load('mnist', split=tfds.core.ReadInstruction(
-      'test', from_=0, to=33, unit='%'))
-
-  # The following lines are equivalent:
-  ds = tfds.load('mnist', split='test[:33%]+train[1:-1]')
-  ds = tfds.load('mnist', split=tfds.core.ReadInstruction.from_spec(
-      'test[:33%]+train[1:-1]'))
-  ds = tfds.load('mnist', split=(
-      tfds.core.ReadInstruction('test', to=33, unit='%') +
-      tfds.core.ReadInstruction('train', from_=1, to=-1, unit='abs')))
-
-  # 10-fold validation:
-  tests = tfds.load(
-      'mnist',
-      [tfds.core.ReadInstruction('train', from_=k, to=k+10, unit='%')
-       for k in range(0, 100, 10)])
-  trains = tfds.load(
-      'mnist',
-      [tfds.core.ReadInstruction('train', to=k, unit='%') +
-       tfds.core.ReadInstruction('train', from_=k+10, unit='%')
-       for k in range(0, 100, 10)])
-  ```
+  Abstract splits are combined together, then passed to
+  `tfds.load(..., split=)` or `builder.as_dataset(split=...)`
 
   """
 
-  def _init(self, relative_instructions):
-    # Private initializer.
-    self._relative_instructions = relative_instructions
-
   @classmethod
-  def _read_instruction_from_relative_instructions(cls, relative_instructions):
-    """Returns ReadInstruction obj initialized with relative_instructions."""
-    # Use __new__ to bypass __init__ used by public API and not conveniant here.
-    result = cls.__new__(cls)
-    result._init(relative_instructions)  # pylint: disable=protected-access
-    return result
-
-  def __init__(
-      self,
-      split_name: str,
-      *,
-      rounding: str = 'closest',
-      from_: Optional[int] = None,
-      to: Optional[int] = None,
-      unit: Optional[str] = None,
-  ):
-    """Initialize ReadInstruction.
-
-    Args:
-      split_name (str): name of the split to read. Eg: 'train'.
-      rounding (str): The rounding behaviour to use when percent slicing is
-        used. Ignored when slicing with absolute indices.
-        Possible values:
-         - 'closest' (default): The specified percentages are rounded to the
-           closest value. Use this if you want specified percents to be as much
-           exact as possible.
-         - 'pct1_dropremainder': the specified percentages are treated as
-           multiple of 1%. Use this option if you want consistency. Eg: len(5%)
-             == 5 * len(1%). Using this option, one might not be able to use the
-             full set of examples, if the number of those is not a multiple of
-             100.
-      from_ (int):
-      to (int): alternative way of specifying slicing boundaries. If any of
-        {from_, to, unit} argument is used, slicing cannot be specified as
-        string.
-      unit (str): optional, one of:
-        '%': to set the slicing unit as percents of the split size.
-        'abs': to set the slicing unit as absolute numbers.
-        'shard': to set the slicing unit as shard.
-    """
-    # Unit is optional only if the full dataset is read, otherwise, will
-    # `_RelativeInstruction` validator will fail.
-    if from_ is None and to is None and unit is None:
-      unit = '%'
-    # This constructor is not always called. See factory method
-    # `_read_instruction_from_relative_instructions`. Common init instructions
-    # MUST be placed in the _init method.
-    self._init([_RelativeInstruction(split_name, from_, to, unit, rounding)])
-
-  @classmethod
-  def from_spec(cls, spec):
+  def from_spec(cls, spec: Union[str, 'AbstractSplit']) -> 'AbstractSplit':
     """Creates a ReadInstruction instance out of a string spec.
 
     Args:
@@ -747,43 +642,133 @@ class ReadInstruction(object):
                 train.
 
     Returns:
-      ReadInstruction instance.
+      The split instance.
     """
+    if isinstance(spec, AbstractSplit):
+      return spec
+
     spec = str(spec)  # Need to convert to str in case of `Split` instance.
     subs = _ADDITION_SEP_RE.split(spec)
     if not subs:
-      raise ValueError('No instructions could be built out of %s' % spec)
-    instruction = _str_to_relative_instruction(subs[0])
-    return sum([_str_to_relative_instruction(sub) for sub in subs[1:]],
-               instruction)
+      raise ValueError(f'No instructions could be built out of {spec!r}')
+    instructions = [_str_to_relative_instruction(s) for s in subs]
+    return functools.reduce(operator.add, instructions)
 
-  def __add__(self, other):
-    """Returns a new ReadInstruction obj, result of appending other to self."""
-    if not isinstance(other, ReadInstruction):
-      msg = 'ReadInstruction can only be added to another ReadInstruction obj.'
-      raise ValueError(msg)
-    other_ris = other._relative_instructions  # pylint: disable=protected-access
-    if self._relative_instructions[0].rounding != other_ris[0].rounding:
-      raise ValueError('It is forbidden to sum ReadInstruction instances '
-                       'with different rounding values.')
-    return self._read_instruction_from_relative_instructions(
-        self._relative_instructions + other_ris)
-
-  def __str__(self):
-    return 'ReadInstruction(%s)' % self._relative_instructions
-
-  def to_absolute(self, split_infos):
+  @abc.abstractmethod
+  def to_absolute(self, split_infos) -> List['_AbsoluteInstruction']:
     """Translate instruction into a list of absolute instructions.
 
     Those absolute instructions are then to be added together.
 
     Args:
-      split_infos: dict associating split names to split info.
+      split_infos: `tfds.core.SplitDict` dict associating split names to split
+        info.
 
     Returns:
       list of _AbsoluteInstruction instances (corresponds to the + in spec).
     """
-    return [
-        _rel_to_abs_instr(rel_instr, split_infos)
-        for rel_instr in self._relative_instructions
-    ]
+    raise NotImplementedError
+
+  def __add__(self, other: Union[str, 'AbstractSplit']) -> 'AbstractSplit':
+    """Sum of 2 splits."""
+    if not isinstance(other, (str, AbstractSplit)):
+      raise TypeError(f'Adding split {self!r} with non-split value: {other!r}')
+    if isinstance(other, str):  # Normalize strings
+      other = AbstractSplit.from_spec(other)
+    return _SplitAdd(self, other)
+
+
+@dataclasses.dataclass(frozen=True)
+class _AbsoluteInstruction:
+  """A machine friendly slice: defined absolute positive boundaries."""
+  splitname: str
+  from_: int  # uint (starting index).
+  to: int  # uint (ending index).
+
+  def to_absolute(self, split_infos) -> List['_AbsoluteInstruction']:
+    del split_infos  # unused
+    return [self]
+
+
+@dataclasses.dataclass(frozen=True)
+class _SplitAdd(AbstractSplit):
+  """Sum of 2 splits.
+
+  `'train+test'` is equivalent to
+  `_SplitAdd(ReadInstruction('train'), ReadInstruction('test'))`
+
+  """
+  left: AbstractSplit
+  right: AbstractSplit
+
+  # Should we forbid to sum 2 read-instruction with different units ?
+
+  def __repr__(self):
+    return f'{self.left!r}+{self.right!r}'
+
+  def to_absolute(self, split_infos) -> List[_AbsoluteInstruction]:
+    # Merge instructions from left and right
+    return (self.left.to_absolute(split_infos) +
+            self.right.to_absolute(split_infos))
+
+
+@dataclasses.dataclass(frozen=True)
+class ReadInstruction(AbstractSplit):
+  """Reading instruction for a dataset.
+
+  See the guide: https://www.tensorflow.org/datasets/splits
+
+  Attributes:
+    split_name: name of the split to read. Eg: 'train'.
+    from_: Starting index, or None if no lower boundary.
+    to: Ending index, or None if no upper boundary.
+    unit: optional, one of:
+      '%': to set the slicing unit as percents of the split size.
+      'abs': to set the slicing unit as absolute numbers.
+      'shard': to set the slicing unit as shard.
+    rounding: The rounding behaviour to use when percent slicing is used.
+      Ignored when slicing with absolute indices.
+      Possible values:
+       - 'closest' (default): The specified percentages are rounded to the
+         closest value. Use this if you want specified percents to be as much
+         exact as possible.
+       - 'pct1_dropremainder': the specified percentages are treated as
+         multiple of 1%. Use this option if you want consistency. Eg: len(5%) ==
+           5 * len(1%). Using this option, one might not be able to use the full
+           set of examples, if the number of those is not a multiple of 100.
+  """
+  split_name: str
+  # TODO(py3.10): Add `_ = dataclasses.KW_ONLY`
+  from_: Optional[int] = None
+  to: Optional[int] = None
+  unit: str = 'abs'
+  rounding: str = 'closest'
+
+  def __post_init__(self):
+    # Perform validation
+    allowed_units = ['%', 'abs', 'shard']
+    allowed_rounding = ['closest', 'pct1_dropremainder']
+    if self.unit not in allowed_units:
+      raise ValueError(
+          f'Unit should be one of {allowed_units}. Got {self.unit!r}')
+    if self.rounding not in allowed_rounding:
+      raise ValueError(f'Rounding should be one of {allowed_rounding}. '
+                       f'Got: {self.rounding!r}')
+    if self.unit == '%':
+      if abs(self.from_ or 0) > 100 or abs(self.to or 0) > 100:
+        raise ValueError('When unit=%, percent slice boundaries should be '
+                         f'in [-100, 100]. Got: {self}')
+
+  def __repr__(self) -> str:
+    unit = '' if self.unit == 'abs' else self.unit
+    from_ = '' if self.from_ is None else f'{self.from_}{unit}'
+    to = '' if self.to is None else f'{self.to}{unit}'
+    if self.from_ is None and self.to is None:
+      slice_str = ''  # Full split selected
+    else:
+      slice_str = f'[{from_}:{to}]'
+    rounding = f', rounding={self.rounding!r}' if self.unit == '%' else ''
+    return f'ReadInstruction(\'{self.split_name}{slice_str}\'{rounding})'
+
+  def to_absolute(self, split_infos) -> List[_AbsoluteInstruction]:
+    return [_rel_to_abs_instr(self, split_infos)]

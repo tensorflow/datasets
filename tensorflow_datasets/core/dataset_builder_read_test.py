@@ -28,19 +28,10 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 
-@pytest.fixture(scope='module')
-def dummy_builder(tmp_path_factory):
-  """Dummy dataset shared accross tests."""
-  data_dir = tmp_path_factory.mktemp('datasets')
-  builder = testing.DummyDataset(data_dir=data_dir)
-  builder.download_and_prepare()
-  yield builder
-
-
-def test_add_tfds_id(dummy_builder: dataset_builder.DatasetBuilder):  # pylint: disable=redefined-outer-name
+def test_add_tfds_id(dummy_dataset: dataset_builder.DatasetBuilder):
   """Tests `add_tfds_id=True`."""
   read_config = read_config_lib.ReadConfig(add_tfds_id=True)
-  ds = dummy_builder.as_dataset(split='train', read_config=read_config)
+  ds = dummy_dataset.as_dataset(split='train', read_config=read_config)
   assert ds.element_spec == {
       'id': tf.TensorSpec(shape=(), dtype=tf.int64),
       'tfds_id': tf.TensorSpec(shape=(), dtype=tf.string),
@@ -61,7 +52,7 @@ def test_add_tfds_id(dummy_builder: dataset_builder.DatasetBuilder):  # pylint: 
   ]
 
   # Subsplit API works too
-  ds = dummy_builder.as_dataset(split='train[1:]', read_config=read_config)
+  ds = dummy_dataset.as_dataset(split='train[1:]', read_config=read_config)
   assert ds.element_spec == {
       'id': tf.TensorSpec(shape=(), dtype=tf.int64),
       'tfds_id': tf.TensorSpec(shape=(), dtype=tf.string),
@@ -79,11 +70,10 @@ def test_add_tfds_id(dummy_builder: dataset_builder.DatasetBuilder):  # pylint: 
 
 
 def test_add_tfds_id_as_supervised(
-    dummy_builder: dataset_builder.DatasetBuilder,  # pylint: disable=redefined-outer-name
-):
+    dummy_dataset: dataset_builder.DatasetBuilder):
   """Tests `add_tfds_id=True` with `as_supervised=True`."""
   read_config = read_config_lib.ReadConfig(add_tfds_id=True)
-  ds = dummy_builder.as_dataset(
+  ds = dummy_dataset.as_dataset(
       split='train',
       read_config=read_config,
       as_supervised=True,
@@ -96,15 +86,14 @@ def test_add_tfds_id_as_supervised(
 
 
 def test_registered_logger_is_called(
-    dummy_builder: dataset_builder.DatasetBuilder,  # pylint: disable=redefined-outer-name
-):
+    dummy_dataset: dataset_builder.DatasetBuilder):
   logger = mock.MagicMock()
   tfds_logging.register(logger)
 
   read_config = read_config_lib.ReadConfig(add_tfds_id=True)
   read_config.try_autocache = False
   read_config.num_parallel_calls_for_decode = 42
-  ds = dummy_builder.as_dataset(
+  ds = dummy_dataset.as_dataset(
       split='train',
       read_config=read_config,
       as_supervised=True,
