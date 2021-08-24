@@ -35,7 +35,7 @@ import json
 import os
 import posixpath
 import tempfile
-from typing import Optional, Union
+from typing import Dict, Optional, Tuple, Union
 
 from absl import logging
 import six
@@ -53,6 +53,10 @@ from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import type_utils
 
 from google.protobuf import json_format
+
+# TODO(b/109648354): Remove the "pytype: disable" comment.
+Nest = Union[Tuple["Nest", ...], Dict[str, "Nest"], str]  # pytype: disable=not-supported-yet
+SupervisedKeysType = Union[Tuple[Nest, Nest], Tuple[Nest, Nest, Nest]]
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
@@ -78,7 +82,7 @@ class DatasetInfo(object):
       builder,
       description=None,
       features=None,
-      supervised_keys=None,
+      supervised_keys: Optional[SupervisedKeysType] = None,
       disable_shuffling: bool = False,
       homepage=None,
       citation=None,
@@ -92,12 +96,27 @@ class DatasetInfo(object):
       description: `str`, description of this dataset.
       features: `tfds.features.FeaturesDict`, Information on the feature dict of
         the `tf.data.Dataset()` object from the `builder.as_dataset()` method.
-      supervised_keys: `tuple` of `(input_key, target_key)`, Specifies the input
-        feature and the label for supervised learning, if applicable for the
-        dataset. The keys correspond to the feature names to select in
-        `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
-        with `as_supervised=True`, the `tf.data.Dataset` object will yield the
-        (input, target) defined here.
+      supervised_keys: Specifies the input structure for supervised learning,
+        if applicable for the dataset, used with "as_supervised". The keys
+        correspond to the feature names to select in `info.features`. When
+        calling `tfds.core.DatasetBuilder.as_dataset()` with
+        `as_supervised=True`, the `tf.data.Dataset` object will yield the
+        structure defined by the keys passed here, instead of that defined by
+        the `features` argument. Typically this is a `(input_key, target_key)`
+        tuple, and the dataset yields a tuple of tensors `(input, target)`
+        tensors.
+
+        To yield a more complex structure, pass a tuple of `tf.nest` compatible
+        structures of feature keys. The resulting `Dataset` will yield
+        structures with each key replaced by the coresponding tensor. For
+        example, passing a triple of keys would return a dataset
+        that yields `(feature, target, sample_weights)` triples for keras.
+        Using `supervised_keys=({'a':'a','b':'b'}, 'c')` would create a dataset
+        yielding a tuple with a dictionary of features in the `features`
+        position.
+
+        Note that Selecting features in nested `tfds.features.FeaturesDict`
+        objects is not supported.
       disable_shuffling: `bool`, specify whether to shuffle the examples.
       homepage: `str`, optional, the homepage for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
@@ -143,10 +162,8 @@ class DatasetInfo(object):
     self._features = features
     self._splits = splits_lib.SplitDict([], dataset_name=self._builder.name)
     if supervised_keys is not None:
-      assert isinstance(supervised_keys, tuple)
-      assert len(supervised_keys) == 2
-      self._info_proto.supervised_keys.input = supervised_keys[0]
-      self._info_proto.supervised_keys.output = supervised_keys[1]
+      self._info_proto.supervised_keys.CopyFrom(
+          _supervised_keys_to_proto(supervised_keys))
 
     if metadata and not isinstance(metadata, Metadata):
       raise ValueError(
@@ -230,7 +247,7 @@ class DatasetInfo(object):
     if not self.as_proto.HasField("supervised_keys"):
       return None
     supervised_keys = self.as_proto.supervised_keys
-    return (supervised_keys.input, supervised_keys.output)
+    return _supervised_keys_from_proto(supervised_keys)
 
   @property
   def redistribution_info(self):
@@ -482,6 +499,82 @@ class DatasetInfo(object):
         lines.append(f"    {key}={value},")
     lines.append(")")
     return "\n".join(lines)
+
+
+def _nest_to_proto(nest: Nest) -> dataset_info_pb2.SupervisedKeys.Nest:
+  """Creates a `SupervisedKeys.Nest` from a limited `tf.nest` style structure.
+
+  Args:
+    nest: A `tf.nest` structure of tuples, dictionaries or string feature keys.
+
+  Returns:
+    The same structure as a `SupervisedKeys.Nest` proto.
+  """
+  nest_type = type(nest)
+  proto = dataset_info_pb2.SupervisedKeys.Nest()
+  if nest_type is tuple:
+    for item in nest:
+      proto.tuple.items.append(_nest_to_proto(item))
+  elif nest_type is dict:
+    nest = {key: _nest_to_proto(value) for key, value in nest.items()}
+    proto.dict.CopyFrom(dataset_info_pb2.SupervisedKeys.Dict(dict=nest))
+  elif nest_type is str:
+    proto.feature_key = nest
+  else:
+    raise ValueError("The nested structures in `supervised_keys` must only "
+                     "contain instances of (tuple, dict, str), no subclasses.\n"
+                     f"Found type: {nest_type}")
+
+  return proto
+
+
+def _supervised_keys_to_proto(
+    keys: SupervisedKeysType) -> dataset_info_pb2.SupervisedKeys:
+  """Converts a `supervised_keys` tuple to a SupervisedKeys proto."""
+  if not isinstance(keys, tuple) or len(keys) not in [2, 3]:
+    raise ValueError(
+        "`supervised_keys` must contain a tuple of 2 or 3 elements.\n"
+        f"got: {keys!r}")
+
+  proto = dataset_info_pb2.SupervisedKeys(
+      tuple=dataset_info_pb2.SupervisedKeys.Tuple(
+          items=(_nest_to_proto(key) for key in keys)))
+  return proto
+
+
+def _nest_from_proto(proto: dataset_info_pb2.SupervisedKeys.Nest) -> Nest:
+  """Creates a `tf.nest` style structure from a `SupervisedKeys.Nest` proto.
+
+  Args:
+    proto: A `SupervisedKeys.Nest` proto.
+
+  Returns:
+    The proto converted to a `tf.nest` style structure of tuples, dictionaries
+    or strings.
+  """
+  if proto.HasField("tuple"):
+    return tuple(_nest_from_proto(item) for item in proto.tuple.items)
+  elif proto.HasField("dict"):
+    return {
+        key: _nest_from_proto(value) for key, value in proto.dict.dict.items()
+    }
+  elif proto.HasField("feature_key"):
+    return proto.feature_key
+  else:
+    raise ValueError("`SupervisedKeys.Nest` proto must contain one of "
+                     f"(tuple, dict, feature_key). Got: {proto}")
+
+
+def _supervised_keys_from_proto(
+    proto: dataset_info_pb2.SupervisedKeys) -> SupervisedKeysType:
+  """Converts a `SupervisedKeys` proto back to a simple python tuple."""
+  if proto.input and proto.output:
+    return (proto.input, proto.output)
+  elif proto.tuple:
+    return tuple(_nest_from_proto(item) for item in proto.tuple.items)
+  else:
+    raise ValueError("A `SupervisedKeys` proto must have either `input` and "
+                     "`output` defined, or `tuple`, got: {proto}")
 
 
 def _indent(content):

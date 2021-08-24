@@ -15,11 +15,13 @@
 
 """Tests for tensorflow_datasets.core.dataset_builder."""
 
+import dataclasses
 import os
 import tempfile
 from unittest import mock
 
-import dataclasses
+from absl.testing import parameterized
+
 import dill
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -661,13 +663,6 @@ class DatasetBuilderReadTest(testing.TestCase):
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=2)
     self.assertEqual(1, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
 
-  @testing.run_in_graph_and_eager_modes()
-  def test_supervised_keys(self):
-    x, _ = dataset_utils.as_numpy(
-        self.builder.as_dataset(
-            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
-    self.assertEqual(x.shape[0], 20)
-
   def test_autocache(self):
     # All the following should cache
 
@@ -725,6 +720,81 @@ class DatasetBuilderReadTest(testing.TestCase):
   def test_with_tfds_info(self):
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN)
     self.assertEqual(0, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
+
+
+class DummyDatasetWithSupervisedKeys(DummyDatasetSharedGenerator):
+
+  def __init__(self, *args, supervised_keys=None, **kwargs):
+    self.supervised_keys = supervised_keys
+    super().__init__(*args, **kwargs)
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": tf.int64}),
+        supervised_keys=self.supervised_keys,
+    )
+
+
+class DatasetBuilderAsSupervisedTest(parameterized.TestCase, testing.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    super().setUpClass()
+    cls._tfds_tmp_dir = testing.make_tmp_dir()
+    builder = DummyDatasetWithSupervisedKeys(data_dir=cls._tfds_tmp_dir)
+    builder.download_and_prepare()
+
+  @classmethod
+  def tearDownClass(cls):
+    super().tearDownClass()
+    testing.rm_tmp_dir(cls._tfds_tmp_dir)
+
+  @testing.run_in_graph_and_eager_modes()
+  def test_supervised_keys_basic(self):
+    self.builder = DummyDatasetWithSupervisedKeys(
+        data_dir=self._tfds_tmp_dir, supervised_keys=("x", "x"))
+    x, _ = dataset_utils.as_numpy(
+        self.builder.as_dataset(
+            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
+    self.assertEqual(x.shape[0], 20)
+
+  def test_supervised_keys_triple(self):
+    self.builder = DummyDatasetWithSupervisedKeys(
+        data_dir=self._tfds_tmp_dir, supervised_keys=("x", "x", "x"))
+    result = dataset_utils.as_numpy(
+        self.builder.as_dataset(
+            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
+    self.assertLen(result, 3)
+    self.assertEqual(result[0].shape[0], 20)
+
+  def test_supervised_keys_nested(self):
+    self.builder = DummyDatasetWithSupervisedKeys(
+        data_dir=self._tfds_tmp_dir,
+        supervised_keys=("x", ("x", ("x", "x")), {
+            "a": "x",
+            "b": ("x",)
+        }))
+    single, pair, a_dict = dataset_utils.as_numpy(
+        self.builder.as_dataset(
+            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
+    self.assertEqual(single.shape[0], 20)
+    self.assertLen(pair, 2)
+    self.assertEqual(pair[1][1].shape[0], 20)
+    self.assertLen(a_dict, 2)
+    self.assertEqual(a_dict["b"][0].shape[0], 20)
+
+  @parameterized.named_parameters(
+      ("not_a_tuple", "x", "tuple of 2 or 3"),
+      ("wrong_length_tuple", ("x", "x", "x", "x", "x"), "tuple of 2 or 3"),
+      ("wrong_nested_type", ("x", ["x", "x"]), "tuple, dict, str"),
+  )
+  def test_bad_supervised_keys(self, supervised_keys, error_message):
+    with self.assertRaisesRegex(ValueError, error_message):
+      self.builder = DummyDatasetWithSupervisedKeys(
+          data_dir=self._tfds_tmp_dir,
+          # Not a tuple
+          supervised_keys=supervised_keys)
 
 
 

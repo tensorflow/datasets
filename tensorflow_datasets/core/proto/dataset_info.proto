@@ -41,8 +41,29 @@ message SplitInfo {
 // This message indicates which feature in the dataset schema is the input and
 // which one is the output.
 message SupervisedKeys {
-  string input = 1;
-  string output = 2;
+  // Historical: Used before 2021-08-23
+  // `input` and `output` are no longer used, but can still be loaded.
+  // now everything goes in `tuple`
+  string input = 1 [deprecated = true];
+  string output = 2 [deprecated = true];
+
+  Tuple tuple = 3;
+
+  message Tuple {
+    repeated Nest items = 1;
+  }
+
+  message Dict {
+    map<string, Nest> dict = 1;
+  }
+
+  message Nest {
+    oneof nest {
+      string feature_key = 1;
+      Tuple tuple = 2;
+      Dict dict = 3;
+    }
+  }
 }
 
 // This message includes information for redistribution of the dataset.
