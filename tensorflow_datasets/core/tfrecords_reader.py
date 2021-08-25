@@ -623,12 +623,14 @@ class AbstractSplit(abc.ABC):
   """Abstract base class of splits.
 
   Abstract splits are combined together, then passed to
-  `tfds.load(..., split=)` or `builder.as_dataset(split=...)`
+  `tfds.load(..., split=)` or `builder.as_dataset(split=...)`.
+
+  See the guide: https://www.tensorflow.org/datasets/splits
 
   """
 
   @classmethod
-  def from_spec(cls, spec: Union[str, 'AbstractSplit']) -> 'AbstractSplit':
+  def from_spec(cls, spec: SplitArg) -> 'AbstractSplit':
     """Creates a ReadInstruction instance out of a string spec.
 
     Args:
@@ -700,8 +702,6 @@ class _SplitAdd(AbstractSplit):
   """
   left: AbstractSplit
   right: AbstractSplit
-
-  # Should we forbid to sum 2 read-instruction with different units ?
 
   def __repr__(self):
     return f'{self.left!r}+{self.right!r}'

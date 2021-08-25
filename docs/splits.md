@@ -51,7 +51,7 @@ order isn't guaranteed to be consistent between sub-splits. In other words
 reading `test[0:100]` followed by `test[100:200]` may yield examples in a
 different order than reading `test[:200]`.
 
-## `tfds.even_splits`
+## `tfds.even_splits` & multi-host training
 
 `tfds.even_splits` generates a list of non-overlapping sub-splits of same size.
 
@@ -61,6 +61,19 @@ split0, split1, split2 = tfds.even_splits('train', n=3)
 
 ds = tfds.load('my_dataset', split=split2)
 ```
+
+This can be particularly useful when training in a distributed setting, where
+each host should receive a slice of the original data. Here is an example with
+jax:
+
+```python
+splits = tfds.even_splits('train', n=jax.process_count(), drop_remainder=True)
+# The current `process_index` load only `1 / process_count` of the data.
+ds = tfds.load('my_dataset', split=splits[jax.process_index()])
+```
+
+`tfds.even_splits` accepts on any split value as input (e.g.
+`'train[75%:]+test'`)
 
 ## Slicing and metadata
 

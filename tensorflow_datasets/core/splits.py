@@ -250,30 +250,3 @@ class SplitDict(utils.NonMutableDict):
   def total_num_examples(self):
     """Return the total number of examples."""
     return sum(s.num_examples for s in self.values())
-
-
-def even_splits(
-    split: str,
-    n: int,
-) -> List[str]:
-  """Generates a list of sub-splits of same size.
-
-  Example:
-
-  ```python
-  assert tfds.even_splits('train', n=3) == [
-      'train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]',
-  ]
-  ```
-
-  Args:
-    split: Split name (e.g. 'train', 'test',...)
-    n: Number of sub-splits to create
-
-  Returns:
-    The list of subsplits.
-  """
-  if n <= 0 or n > 100:
-    raise ValueError(f"n should be > 0 and <= 100. Got {n}")
-  partitions = [round(i * 100 / n) for i in range(n + 1)]
-  return [f"{split}[{partitions[i]}%:{partitions[i+1]}%]" for i in range(n)]
