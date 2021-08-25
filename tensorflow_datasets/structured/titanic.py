@@ -45,7 +45,7 @@ _EMBARKED_DICT = collections.OrderedDict([("C", "Cherbourg"),
 _PCLASS_DICT = collections.OrderedDict([("1", "1st_class"), ("2", "2nd_class"),
                                         ("3", "3rd_class")])
 
-_SURVIVED_DICT = {"1": "survived", "0": "died"}
+_SURVIVED_DICT = {"0": "died", "1": "survived"}
 
 
 def convert_to_float(d):
