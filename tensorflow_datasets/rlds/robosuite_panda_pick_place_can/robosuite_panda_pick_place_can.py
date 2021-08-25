@@ -172,4 +172,4 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, path):
     """Yields examples."""
     file_path = path['file_path']
-    return rlds_base.generate_beam_examples(file_path)
+    return rlds_base.generate_examples(file_path)
