@@ -1,0 +1,7 @@
+studyName,Sample Number,Species,Region,Island,Stage,Individual ID,Clutch Completion,Date Egg,Culmen Length (mm),Culmen Depth (mm),Flipper Length (mm),Body Mass (g),Sex,Delta 15 N (o/oo),Delta 13 C (o/oo),Comments
+STUDY123,1,One,A,Z,Alive,P1,Yes,01/01/70,1.2,2.3,345,456,MALE,,,A comment.
+STUDY123,2,Two,A,Y,Alive,P2,Yes,01/01/70,9.8,8.7,100,300,.,1.2345,-1.2345,Sex unclear
+STUDY123,3,Three,B,X,Alive,P3,Yes,01/01/70,55.55,88.88,200,10000,FEMALE,99.999,-99.999,
+STUDY123,4,One,B,Z,Alive,P4,Yes,01/01/70,,,,,,,,Mostly empty
+STUDY123,5,Two,C,Y,Alive,P5,Yes,01/01/01,3.33,"","",333,FEMALE,3.333,-33.33,
+STUDY123,6,Three,C,X,Alive,P5,Yes,12/12/12,"",4.44,"","",MALE,4.44,-44.44,
