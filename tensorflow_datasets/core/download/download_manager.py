@@ -733,7 +733,7 @@ def _validate_checksums(
     if not expected_url_info:
       raise ValueError(f'Missing checksums url: {url}, yet '
                        '`force_checksums_validation=True`. '
-                       'Did you forgot to register checksums ?')
+                       'Did you forget to register checksums ?')
 
   if (expected_url_info and computed_url_info and
       expected_url_info != computed_url_info):
