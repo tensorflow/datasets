@@ -57,20 +57,10 @@ class Caltech256(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_BASE_URL)
-    return [
-      tfds.core.SplitGenerator(
-        name=tfds.Split.TRAIN,
-        gen_kwargs={
-          'images_dir_path': path,
-          'is_train_split': True,
-        }),
-      tfds.core.SplitGenerator(
-        name=tfds.Split.TEST,
-        gen_kwargs={
-          'images_dir_path': path,
-          'is_train_split': False,
-        }),
-    ]
+    return {
+      'train': self._generate_examples(path, True),
+      'test': self._generate_examples(path, False),
+    }
 
   def _generate_examples(self, images_dir_path, is_train_split):
     """Yields examples of data images and labels."""
