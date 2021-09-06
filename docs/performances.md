@@ -69,7 +69,8 @@ the first one thanks to the caching.
 
 ### Auto-caching
 
-By default, TFDS auto-caches datasets which satisfy the following constraints:
+By default, TFDS auto-caches (with `ds.cache()`) datasets which satisfy the
+following constraints:
 
 *   Total dataset size (all splits) is defined and < 250 MiB
 *   `shuffle_files` is disabled, or only a single shard is read
