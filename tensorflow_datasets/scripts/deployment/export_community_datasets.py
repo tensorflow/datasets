@@ -19,7 +19,6 @@ r"""Script which parse registered repositories and save datasets found.
 
 import itertools
 import json
-import pathlib
 from typing import List, Optional
 
 from absl import app
@@ -38,11 +37,11 @@ DatasetPackage = tfds.core.community.register_package.DatasetPackage
 
 
 def main(_):
-  export_community_datasets(in_path=_IN_PATH, out_path=_OUT_PATH)
+  export_community_datasets(in_path=_IN_PATH, out_path=_OUT_PATH)  # pytype: disable=wrong-arg-types
 
 
 def export_community_datasets(
-    in_path: tfds.typing.ReadOnlyPath,
+    in_path: tfds.typing.ReadWritePath,
     out_path: tfds.typing.ReadWritePath,
 ) -> None:
   """Exports community datasets.
@@ -58,7 +57,7 @@ def export_community_datasets(
 
 
 def _find_community_ds_packages(
-    config_path: pathlib.Path,) -> List[DatasetPackage]:
+    config_path: tfds.typing.ReadWritePath,) -> List[DatasetPackage]:
   """Find all namepaces/dataset from the config.
 
   Config should contain the instructions in the following format:
@@ -157,7 +156,7 @@ def _list_ds_packages_for_namespace(
 
 
 def _get_dataset_source(
-    ds_path: tfds.typing.ReadOnlyPath,) -> Optional[DatasetSource]:
+    ds_path: tfds.typing.ReadWritePath,) -> Optional[DatasetSource]:
   """Returns True if the given path correspond to a dataset.
 
   Currently a simple heuristic is used. This function checks the path has the

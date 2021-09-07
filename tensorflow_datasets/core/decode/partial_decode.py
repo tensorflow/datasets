@@ -16,7 +16,7 @@
 """Partial feature connector decoding util."""
 
 import typing
-from typing import Any, Callable, Dict, Optional, Union
+from typing import Any, Callable, Optional, Union
 
 import tensorflow as tf
 from tensorflow_datasets.core import features as features_lib
@@ -27,7 +27,6 @@ from tensorflow_datasets.core.features import features_dict
 # Expected feature specs provided by the user
 _FeatureSpecElem = Union[features_lib.FeatureConnector, Any]
 _FeatureSpecs = utils.TreeDict[_FeatureSpecElem]
-_FeaturesDict = Dict[str, features_lib.FeatureConnector]
 
 
 class PartialDecoding:

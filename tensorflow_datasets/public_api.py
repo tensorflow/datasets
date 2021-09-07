@@ -21,6 +21,7 @@ from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
+from tensorflow_datasets import typing
 from tensorflow_datasets.core import folder_dataset
 from tensorflow_datasets.core import beam_utils as beam
 from tensorflow_datasets.core import download
@@ -39,7 +40,6 @@ from tensorflow_datasets.core.load import list_builders
 from tensorflow_datasets.core.load import load
 from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.subsplits_utils import even_splits
-from tensorflow_datasets.core.utils import type_utils as typing
 from tensorflow_datasets.core.utils.benchmark import benchmark
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.read_config import ReadConfig
