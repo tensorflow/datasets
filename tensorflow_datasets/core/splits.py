@@ -185,6 +185,7 @@ class Split(str):
     model architecture, etc.).
   * `TEST`: the testing data. This is the data to report metrics on. Typically
     you do not want to use this during model iteration as you may overfit to it.
+  * `ALL`: All splits from the dataset merged together (`'train+test+...'`).
 
   See the
   [guide on
@@ -199,6 +200,7 @@ class Split(str):
 Split.TRAIN = Split("train")
 Split.TEST = Split("test")
 Split.VALIDATION = Split("validation")
+Split.ALL = Split("all")
 
 if typing.TYPE_CHECKING:
   # For type checking, `tfds.Split` is an alias for `str` with additional

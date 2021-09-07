@@ -107,6 +107,8 @@ class SplitsTest(testing.TestCase):
         s["test[75%:]"].num_examples + s["test[:75%]"].num_examples,
     )
 
+    self.assertEqual(s["all"].num_examples, s.total_num_examples)
+
   def test_sub_split_file_instructions(self):
     fi = self._builder.info.splits["train[75%:]"].file_instructions
     self.assertEqual(fi, [

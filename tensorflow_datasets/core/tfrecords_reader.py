@@ -506,7 +506,7 @@ class Reader(object):
     return ds
 
 
-def _str_to_relative_instruction(spec: str) -> 'ReadInstruction':
+def _str_to_relative_instruction(spec: str) -> 'AbstractSplit':
   """Returns ReadInstruction for given string."""
   # <split_name>[<split_selector>] (e.g. `train[54%:]`)
   res = _SUB_SPEC_RE.match(spec)
@@ -516,6 +516,15 @@ def _str_to_relative_instruction(spec: str) -> 'ReadInstruction':
     raise ValueError(err_msg)
   split_name = res.group('split_name')
   split_selector = res.group('split_selector')
+
+  if split_name == 'all':
+    if split_selector:
+      # TODO(tfds): `all[:75%]` could be supported by creating a
+      # `_SliceSplit(split, from_=, to=, unit=)`.
+      raise NotImplementedError(
+          f'{split_name!r} does not support slice. Please open a github issue '
+          'if you need this feature.')
+    return _SplitAll()
 
   if split_selector is None:  # split='train'
     from_ = None
@@ -532,9 +541,7 @@ def _str_to_relative_instruction(spec: str) -> 'ReadInstruction':
       to = int(from_) + 1
       unit = from_match['unit'] or 'abs'
       if unit != 'shard':
-        raise ValueError(
-            f'Invalid split format: {spec!r}. Absolute or percent only '
-            'support slice syntax.')
+        raise ValueError('Absolute or percent only support slice syntax.')
     elif len(slices) == 2:
       from_match, to_match = slices
       from_ = from_match['val']
@@ -650,10 +657,14 @@ class AbstractSplit(abc.ABC):
       return spec
 
     spec = str(spec)  # Need to convert to str in case of `Split` instance.
+
     subs = _ADDITION_SEP_RE.split(spec)
     if not subs:
       raise ValueError(f'No instructions could be built out of {spec!r}')
-    instructions = [_str_to_relative_instruction(s) for s in subs]
+    with utils.try_reraise(f'Error parsing split {spec!r}. See format at: '
+                           'https://www.tensorflow.org/datasets/splits\n'):
+      instructions = [_str_to_relative_instruction(s) for s in subs]
+    # Merge all splits together (_SplitAll)
     return functools.reduce(operator.add, instructions)
 
   @abc.abstractmethod
@@ -710,6 +721,16 @@ class _SplitAdd(AbstractSplit):
     # Merge instructions from left and right
     return (self.left.to_absolute(split_infos) +
             self.right.to_absolute(split_infos))
+
+
+class _SplitAll(AbstractSplit):
+  """Union of all splits of the dataset."""
+
+  def to_absolute(self, split_infos) -> List[_AbsoluteInstruction]:
+    # Create the union of all splits
+    split_names = split_infos.keys()
+    split = AbstractSplit.from_spec('+'.join(split_names))
+    return split.to_absolute(split_infos)
 
 
 @dataclasses.dataclass(frozen=True)

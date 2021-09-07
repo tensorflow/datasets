@@ -28,7 +28,8 @@ Split can be:
 *   **Slices**: Slices have the same semantic as
     [python slice notation](https://docs.python.org/3/library/stdtypes.html#common-sequence-operations).
     Slices can be:
-    *   **Absolute** (`'train[123:450]'`, `train[:40]`):
+    *   **Absolute** (`'train[123:450]'`, `train[:4000]`): (see note bellow for
+        caveat about read order)
     *   **Percent** (`'train[:75%]'`, `'train[25%:75%]'`): Divide the full data
         into 100 even slices. If the data is not divisible by 100, some percent
         might contain additional examples.
@@ -37,6 +38,8 @@ Split can be:
         number of shards of the split)
 *   **Union of splits** (`'train+test'`, `'train[:25%]+test'`): Splits will be
     interleaved together.
+*   **Full dataset** (`'all'`): `'all'` is a special split name corresponding to
+    the union of all splits (equivalent to `'train+test+...'`).
 *   **List of splits** (`['train', 'test']`): Multiple `tf.data.Dataset` are
     returned separately:
 
@@ -49,7 +52,9 @@ Note: Due to the shards being
 [interleaved](https://www.tensorflow.org/api_docs/python/tf/data/Dataset?version=nightly#interleave),
 order isn't guaranteed to be consistent between sub-splits. In other words
 reading `test[0:100]` followed by `test[100:200]` may yield examples in a
-different order than reading `test[:200]`.
+different order than reading `test[:200]`. See
+[determinism guide](https://www.tensorflow.org/datasets/determinism#determinism_when_reading)
+to understand the order in which TFDS read examples.
 
 ## `tfds.even_splits` & multi-host training
 
