@@ -15,6 +15,8 @@
 
 """To deserialize bytes (Example) to tf.Example."""
 
+import numpy as np
+
 import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import utils
 
@@ -72,10 +74,40 @@ class ExampleParser(object):
     #     },
     # }
     flat_feature_specs = utils.flatten_nest_dict(nested_feature_specs)
+
+    unsupported_dtype_features = {}
+    # since TF proto does not support dtypes other than `tf.int64` for integers
+    # fetch the features that are not `tf.int64` and temporarily replace them
+    # with dtype=tf.int64, after parsing the serialized example, restore changes
+    # and cast the feature value and spec back to the original dtype.
+
+    # QnA: Should we also try doing this for bool and floats?
+    for feature, spec in flat_feature_specs.items():
+      if (np.issubdtype(spec.dtype.as_numpy_dtype, np.integer) and
+          spec.dtype != tf.int64):
+        unsupported_dtype_features[feature] = spec
+        spec_type = type(spec)
+        if isinstance(spec, tf.io.FixedLenFeature):
+          supported_spec = spec_type(spec.shape, dtype=tf.int64,
+                                     default_value=spec.default_value)
+        else:
+          supported_spec = spec_type(spec.shape, dtype=tf.int64,
+                                     default_value=spec.default_value,
+                                     allow_missing=spec.allow_missing)
+        flat_feature_specs.pop(feature)
+        flat_feature_specs[feature] = supported_spec
+
     example = tf.io.parse_single_example(
         serialized=serialized_example,
         features=flat_feature_specs,
     )
+
+    # cast back the feature to original dtype and also restore the feature_spec.
+    if len(unsupported_dtype_features) > 0:
+      for feature, spec in unsupported_dtype_features.items():
+        flat_feature_specs.pop(feature)
+        flat_feature_specs[feature] = spec
+        tf.cast(example[feature], spec.dtype)
     example = utils.pack_as_nest_dict(example, nested_feature_specs)
 
     example = {  # pylint:disable=g-complex-comprehension
@@ -126,7 +158,10 @@ def _to_tf_example_spec(tensor_info):
   # to int64 which is space ineficient, no support for complexes or quantized
   # It seems quite space inefficient to convert bool to int64
   if tensor_info.dtype.is_integer or tensor_info.dtype.is_bool:
-    dtype = tf.int64
+    if tensor_info.dtype.is_bool:
+      dtype = tf.int64
+    else:
+      dtype = tensor_info.dtype
   elif tensor_info.dtype.is_floating:
     dtype = tf.float32
   elif tensor_info.dtype == tf.string:
@@ -161,7 +196,7 @@ def _to_tf_example_spec(tensor_info):
     tf_specs = {  # pylint: disable=g-complex-comprehension
         "ragged_row_lengths_{}".format(k): tf.io.FixedLenSequenceFeature(  # pylint: disable=g-complex-comprehension
             shape=(),
-            dtype=tf.int64,
+            dtype=dtype,
             allow_missing=True,
         ) for k in range(tensor_info.sequence_rank - 1)
     }

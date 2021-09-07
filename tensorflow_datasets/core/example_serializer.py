@@ -136,7 +136,11 @@ def _item_to_tf_feature(item, tensor_info):
 
   v = v.flatten()  # Convert v into a 1-d array
   if np.issubdtype(v.dtype, np.integer):
-    return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
+    if tensor_info.dtype == tf.int64:
+      return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
+    else:
+      v = [tf.compat.as_bytes(x) for x in str(v)]
+      return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
   elif np.issubdtype(v.dtype, np.floating):
     return tf.train.Feature(float_list=tf.train.FloatList(value=v))
   elif tensor_info.dtype == tf.string:
