@@ -93,9 +93,10 @@ _URL = "https://www.openml.org/data/get_csv/16826755/phpMYEkMl"
 
 class Titanic(tfds.core.GeneratorBasedBuilder):
   """Titanic dataset."""
-  VERSION = tfds.core.Version("3.0.0")
-  SUPPORTED_VERSIONS = [tfds.core.Version("3.0.0"), tfds.core.Version("2.0.0")]
+  VERSION = tfds.core.Version("4.0.0")
+  SUPPORTED_VERSIONS = [tfds.core.Version("2.0.0")]
   RELEASE_NOTES = {
+      "4.0.0": "Fix inverted labels which were inverted in the 3.0.0.",
       "3.0.0": ("Use a standard flat dictionary of features for the dataset. "
                 "Use `as_supervised=True` to split the dataset into "
                 "a `(features_dict, survived)` tuple."),
