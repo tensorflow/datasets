@@ -21,7 +21,7 @@ and @ PIRM (ECCV 2018)
 
 import os.path
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """

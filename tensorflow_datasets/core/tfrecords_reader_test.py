@@ -22,7 +22,7 @@ from unittest import mock
 
 import six
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing

@@ -21,7 +21,7 @@ from typing import Any, Callable, Iterable, Iterator, Union
 
 import numpy as np
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import type_utils

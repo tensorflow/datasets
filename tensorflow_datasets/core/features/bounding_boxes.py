@@ -19,7 +19,7 @@ import collections
 from typing import Any
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils

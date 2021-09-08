@@ -15,7 +15,7 @@
 
 """Tests for tensorflow_datasets.testing.dataset_builder_testing."""
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.testing import dataset_builder_testing
 

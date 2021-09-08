@@ -15,6 +15,7 @@
 
 """To write records into sharded tfrecord files."""
 
+import dataclasses
 import itertools
 import json
 import os
@@ -22,9 +23,8 @@ import os
 from typing import Any, Iterable, List, Optional, Tuple
 
 from absl import logging
-import dataclasses
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer

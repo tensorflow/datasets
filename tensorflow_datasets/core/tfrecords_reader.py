@@ -27,7 +27,7 @@ from typing import Any, Callable, Dict, Iterable, List, NamedTuple, Optional, Se
 from absl import logging
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming

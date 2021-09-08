@@ -19,7 +19,7 @@ import collections
 import os
 from typing import Dict, List, Tuple
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features as features_lib

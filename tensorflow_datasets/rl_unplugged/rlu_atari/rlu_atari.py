@@ -15,10 +15,10 @@
 
 """RLU Atari datasets."""
 
+import dataclasses
 from typing import Any, Dict
 
-import dataclasses
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
 

@@ -18,7 +18,7 @@
 import textwrap
 from unittest import mock
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured.wiki_table_questions import wiki_table_questions
 

@@ -24,7 +24,7 @@ from typing import Any, Iterator
 from unittest import mock
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -195,7 +195,7 @@ def mock_tf(symbol_name: str, *args: Any, **kwargs: Any) -> Iterator[None]:
   """
   # pylint: disable=g-import-not-at-top,reimported
   import tensorflow as tf_lib1
-  import tensorflow.compat.v2 as tf_lib2
+  import tensorflow as tf_lib2
   # pylint: enable=g-import-not-at-top,reimported
 
   tf_symbol, *tf_submodules, symbol_name = symbol_name.split('.')
@@ -389,7 +389,6 @@ class DummyBeamDataset(DummyDataset, skip_registration=True):
 
 def test_main():
   """Entrypoint for tests."""
-  tf.enable_v2_behavior()
   tf.test.main()
 
 

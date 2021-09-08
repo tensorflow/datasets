@@ -19,7 +19,7 @@ import abc
 from typing import Any
 
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_info
 

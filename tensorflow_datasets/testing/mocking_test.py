@@ -19,7 +19,7 @@ import functools
 
 import pytest
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 # Import the final API to:
 # * Register datasets

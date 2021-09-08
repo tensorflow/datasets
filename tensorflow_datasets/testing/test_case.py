@@ -22,7 +22,7 @@ from unittest import mock
 
 from absl import logging
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.testing import setup_teardown
 

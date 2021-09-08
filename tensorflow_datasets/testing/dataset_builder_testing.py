@@ -29,7 +29,7 @@ from unittest import mock
 from absl import logging
 from absl.testing import parameterized
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -148,7 +148,6 @@ class DatasetBuilderTestCase(parameterized.TestCase,
 
   @classmethod
   def setUpClass(cls):
-    tf.enable_v2_behavior()
     super().setUpClass()
     name = cls.__name__
     # Check class has the right attributes

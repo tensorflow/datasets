@@ -18,10 +18,7 @@ r"""Binary exercising critical workflow of tensorflow datasets.
 """
 
 from absl import app
-import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
-
-tf.enable_v2_behavior()
 
 
 def main(argv):

@@ -30,7 +30,7 @@ import zipfile
 
 from absl import logging
 import promise
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils

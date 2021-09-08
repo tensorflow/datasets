@@ -22,11 +22,9 @@ import tempfile
 from absl.testing import parameterized
 import numpy as np
 import pydub
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-
-tf.enable_v2_behavior()
 
 
 class AudioFeatureTest(testing.FeatureExpectationsTestCase,

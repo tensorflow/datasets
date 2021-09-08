@@ -26,7 +26,7 @@ import re
 from typing import Any, Optional
 
 from six.moves import urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib

@@ -16,11 +16,9 @@
 """Tests for tensorflow_datasets.core.features.sequence_feature."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as feature_lib
-
-tf.enable_v2_behavior()
 
 
 class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):

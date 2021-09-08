@@ -16,11 +16,9 @@
 """Tests for tensorflow_datasets.core.dataset_utils."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
-
-tf.enable_v2_behavior()
 
 
 def _create_dataset(rng):

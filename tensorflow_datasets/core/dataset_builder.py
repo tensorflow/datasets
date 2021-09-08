@@ -26,7 +26,7 @@ from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, U
 
 from absl import logging
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info

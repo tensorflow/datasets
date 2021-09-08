@@ -15,11 +15,10 @@
 
 """This module contains the reader config."""
 
+import dataclasses
 from typing import Callable, Optional, Sequence, Union
 
-import dataclasses
-
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core.utils import shard_utils
 
 InterleaveSortFn = Callable[[Sequence[shard_utils.FileInstruction]],

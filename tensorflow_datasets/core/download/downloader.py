@@ -17,6 +17,7 @@
 
 import concurrent.futures
 import contextlib
+import dataclasses
 import functools
 import hashlib
 import io
@@ -25,11 +26,10 @@ import re
 from typing import Any, ContextManager, Iterable, Iterator, Optional, Tuple, Union
 import urllib
 
-import dataclasses
 import promise
 import requests
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib

@@ -17,7 +17,7 @@
 
 import csv
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 URL = "https://raw.githubusercontent.com/rmcelreath/rethinking/master/data/Howell1.csv"

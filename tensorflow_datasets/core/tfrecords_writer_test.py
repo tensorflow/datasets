@@ -19,7 +19,7 @@ import json
 import os
 from unittest import mock
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import example_parser

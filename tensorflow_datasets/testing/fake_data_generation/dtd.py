@@ -23,7 +23,7 @@ import random
 from absl import app
 from absl import flags
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils

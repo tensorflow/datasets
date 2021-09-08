@@ -19,7 +19,7 @@
 from absl.testing import parameterized
 import numpy as np
 import pytest
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
 

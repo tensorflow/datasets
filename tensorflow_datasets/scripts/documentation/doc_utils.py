@@ -20,13 +20,12 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 """
 
 import collections
+import dataclasses
 import os
 import textwrap
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-import dataclasses
-
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets as tfds
 
 # Dict of `full_names_dict['dataset']['config']['version']`

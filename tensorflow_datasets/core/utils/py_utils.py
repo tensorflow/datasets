@@ -34,7 +34,7 @@ from typing import Any, Callable, Iterable, Iterator, List, NoReturn, Optional, 
 import uuid
 
 from six.moves import urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.utils import type_utils

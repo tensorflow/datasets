@@ -25,7 +25,7 @@ from unittest import mock
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
@@ -210,7 +210,7 @@ def mock_data(
     if read_config and read_config.add_tfds_id:
       ds_id = tfrecords_reader._make_id_dataset(  # pylint: disable=protected-access
           filename=f'{self.name}-split.tfrecord-00000-of-00001',
-          start_index=0,
+          start_index=0,  # pytype: disable=wrong-arg-types
       )
       ds = tf.data.Dataset.zip((ds, ds_id))
       ds = ds.map(lambda ex, id: {'tfds_id': id, **ex})

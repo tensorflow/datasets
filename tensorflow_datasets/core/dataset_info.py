@@ -39,7 +39,7 @@ from typing import Dict, Optional, Tuple, Union
 
 from absl import logging
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib

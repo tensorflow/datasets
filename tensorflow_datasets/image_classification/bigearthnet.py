@@ -20,7 +20,7 @@ import json
 import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -77,7 +77,7 @@ _LABELS = [
     'Discontinuous urban fabric', 'Dump sites', 'Estuaries',
     'Fruit trees and berry plantations', 'Green urban areas',
     'Industrial or commercial units', 'Inland marshes', 'Intertidal flats',
-    'Land principally occupied by agriculture, with significant areas of '
+    'Land principally occupied by agriculture, with significant areas of '  # pylint: disable=implicit-str-concat
     'natural vegetation', 'Mineral extraction sites', 'Mixed forest',
     'Moors and heathland', 'Natural grassland', 'Non-irrigated arable land',
     'Olive groves', 'Pastures', 'Peatbogs', 'Permanently irrigated land',

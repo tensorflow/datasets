@@ -15,7 +15,7 @@
 
 """Tests for tensorflow_datasets.core.utils.tf_utils."""
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import tf_utils
 

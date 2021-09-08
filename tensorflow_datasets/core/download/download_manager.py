@@ -16,15 +16,15 @@
 """Download manager interface."""
 
 import concurrent.futures
+import dataclasses
 import hashlib
 import typing
 from typing import Any, Dict, Iterator, Optional, Tuple, Union
 import uuid
 
 from absl import logging
-import dataclasses
 import promise
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums

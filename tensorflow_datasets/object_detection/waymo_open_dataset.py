@@ -17,7 +17,7 @@
 
 import os
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.proto import waymo_dataset_pb2 as open_dataset
 import tensorflow_datasets.public_api as tfds
 

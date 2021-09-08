@@ -16,13 +16,11 @@
 """Tests for tensorflow_datasets.core.features.dataset_feature."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import decode as decode_lib
 from tensorflow_datasets.core import features as feature_lib
-
-tf.enable_v2_behavior()
 
 
 class IncrementDecoder(decode_lib.Decoder):

@@ -16,7 +16,7 @@
 """ClassLabel feature."""
 
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 

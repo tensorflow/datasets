@@ -22,7 +22,7 @@ import tempfile
 import numpy as np
 import pytest
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
@@ -30,8 +30,6 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.image_classification import mnist
-
-tf.enable_v2_behavior()
 
 _TFDS_DIR = utils.tfds_path()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",

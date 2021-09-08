@@ -26,7 +26,7 @@ from typing import Dict, List, Type, TypeVar
 
 import numpy as np
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.utils import type_utils
 

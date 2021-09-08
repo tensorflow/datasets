@@ -19,7 +19,7 @@ import pathlib
 
 import pytest
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
@@ -77,7 +77,7 @@ class RunInGraphAndEagerTest(test_case.TestCase):
   def test_mock_tf(self):
     # pylint: disable=g-import-not-at-top,reimported
     import tensorflow as tf_lib1
-    import tensorflow.compat.v2 as tf_lib2
+    import tensorflow as tf_lib2
 
     # pylint: enable=g-import-not-at-top,reimported
 
