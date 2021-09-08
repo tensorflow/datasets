@@ -36,7 +36,6 @@ import uuid
 from six.moves import urllib
 import tensorflow as tf
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.utils import type_utils
 
 Tree = type_utils.Tree
@@ -474,6 +473,7 @@ def basename_from_url(url: str) -> str:
 
 def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
   """Returns name of info files within dir_path."""
+  from tensorflow_datasets.core import file_adapters  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
   path = os.fspath(dir_path)
   return [
       fname for fname in tf.io.gfile.listdir(path)
