@@ -32,7 +32,7 @@ established.
 _HOMEPAGE = 'https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged'
 
 
-def _get_files(prefix: str, num_shards: int) -> List[str]:
+def get_files(prefix: str, num_shards: int) -> List[str]:
   return [
       tfds.core.as_path(f'{prefix}-{i:05d}-of-{num_shards:05d}')
       for i in range(num_shards)
@@ -79,7 +79,7 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
 
     paths = {
         'file_paths':
-            _get_files(
+            get_files(
                 prefix=self.get_file_prefix(), num_shards=self.num_shards()),
     }
     return {
