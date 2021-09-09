@@ -391,8 +391,11 @@ class SupervisedKeySection(Section):
       ' (See [`as_supervised` doc]'
       '(https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args))')
 
-  def get_key(self, builder: tfds.core.DatasetBuilder):
-    return builder.info.supervised_keys
+  def get_key(self, builder: tfds.core.DatasetBuilder) -> Key:
+    # get_key() must return a Key (str/int), but supervised_keys can be a tuple
+    # or dict. Keys also need to be hashable, but dicts are mutable and tuples
+    # can contain mutable entries, so use repr as a snapshot.
+    return repr(builder.info.supervised_keys)
 
   def content(self, builder: tfds.core.DatasetBuilder):
     return f'`{str(builder.info.supervised_keys)}`'
