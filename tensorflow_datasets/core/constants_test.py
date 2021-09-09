@@ -15,6 +15,8 @@
 
 """Tests for tensorflow_datasets.core.constants."""
 
+import os
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
 

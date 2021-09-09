@@ -765,5 +765,4 @@ def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
   all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
   res = tf.nest.map_structure(lambda p: p.get(), all_promises)  # Wait promises
-
   return res
