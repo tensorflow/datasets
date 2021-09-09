@@ -320,6 +320,9 @@ toc:
     title: rlu_dmlab_rooms_watermaze
   - path: /datasets/catalog/rlu_dmlab_seekavoid_arena01
     title: rlu_dmlab_seekavoid_arena01
+  - path: /datasets/catalog/rlu_rwrl
+    status: nightly
+    title: rlu_rwrl
   title: Rl unplugged
 - section:
   - path: /datasets/catalog/robosuite_panda_pick_place_can
@@ -357,6 +360,9 @@ toc:
     title: movie_lens
   - path: /datasets/catalog/movielens
     title: movielens
+  - path: /datasets/catalog/penguins
+    status: nightly
+    title: penguins
   - path: /datasets/catalog/protein_net
     title: protein_net
   - path: /datasets/catalog/radon

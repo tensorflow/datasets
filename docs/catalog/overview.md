@@ -199,6 +199,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`rlu_dmlab_rooms_select_nonmatching_object`](rlu_dmlab_rooms_select_nonmatching_object.md)
 *   [`rlu_dmlab_rooms_watermaze`](rlu_dmlab_rooms_watermaze.md)
 *   [`rlu_dmlab_seekavoid_arena01`](rlu_dmlab_seekavoid_arena01.md)
+*   [`rlu_rwrl`](rlu_rwrl.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Rlds`
 
@@ -222,6 +224,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`kddcup99`](kddcup99.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
+*   [`penguins`](penguins.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`protein_net`](protein_net.md)
 *   [`radon`](radon.md)
 *   [`rock_you`](rock_you.md)
