@@ -43,6 +43,7 @@ __all__ = [
     "BBoxFeature",
     "ClassLabel",
     "Dataset",
+    "Encoding",
     "FeatureConnector",
     "FeaturesDict",
     "LabeledImage",
