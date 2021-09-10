@@ -15,15 +15,18 @@
 
 """TFDS typing annotations."""
 
-from tensorflow_datasets.core import splits as _splits
+from tensorflow_datasets.core import splits
+from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.utils import type_utils
 
 # pylint: disable=unused-import
 from tensorflow_datasets.core.utils.type_utils import *  # pylint: disable=wildcard-import
 # pylint: enable=unused-import
 
-SplitArg = _splits.SplitArg
+FeatureConnectorArg = feature.FeatureConnectorArg
+SplitArg = splits.SplitArg
 
 __all__ = type_utils.__all__ + [
+    'FeatureConnectorArg',
     'SplitArg',
 ]

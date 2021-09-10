@@ -191,5 +191,5 @@ class Video(sequence_feature.Sequence):
     """Video are displayed as `<video>`."""
     return image_feature.make_video_repr_html(
         ex,
-        use_colormap=self.feature._use_colormap  # pylint: disable=protected-access
+        use_colormap=self.feature._use_colormap  # pylint: disable=protected-access  # pytype: disable=attribute-error
     )

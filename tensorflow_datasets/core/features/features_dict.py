@@ -15,7 +15,8 @@
 
 """FeatureDict: Main feature connector container."""
 
-import six
+from typing import Dict
+
 import tensorflow as tf
 
 from tensorflow_datasets.core import utils
@@ -107,7 +108,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   """
 
-  def __init__(self, feature_dict):
+  def __init__(self, feature_dict: Dict[str, feature_lib.FeatureConnectorArg]):
     """Initialize the features.
 
     Args:
@@ -236,7 +237,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
   def save_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     # Recursively save all child features
-    for feature_key, feature in six.iteritems(self._feature_dict):
+    for feature_key, feature in self._feature_dict.items():
       feature_key = feature_key.replace('/', '.')
       if feature_name:
         feature_key = '-'.join((feature_name, feature_key))
@@ -245,14 +246,14 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
   def load_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     # Recursively load all child features
-    for feature_key, feature in six.iteritems(self._feature_dict):
+    for feature_key, feature in self._feature_dict.items():
       feature_key = feature_key.replace('/', '.')
       if feature_name:
         feature_key = '-'.join((feature_name, feature_key))
       feature.load_metadata(data_dir, feature_name=feature_key)
 
 
-def to_feature(value):
+def to_feature(value: feature_lib.FeatureConnectorArg):
   """Convert the given value to Feature if necessary."""
   if isinstance(value, feature_lib.FeatureConnector):
     return value
