@@ -16,7 +16,9 @@
 """Minerl Navigate Video dataset."""
 
 import os
+import json
 
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -45,6 +47,8 @@ _CITATION = """
 
 _DOWNLOAD_URL = "https://archive.org/download/minerl_navigate/minerl_navigate.zip"
 
+VIDEO_LEN = 500
+
 
 class MinerlNavigate(tfds.core.GeneratorBasedBuilder):
   """MineRL Navigate Video Dataset."""
@@ -60,7 +64,57 @@ class MinerlNavigate(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(
             {
-                "video": tfds.features.Video(shape=(None, 64, 64, 3)),
+                "video":
+                    tfds.features.Video(shape=(None, 64, 64, 3)),
+                "actions":
+                    tfds.features.FeaturesDict(
+                        {
+                            "attack":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.int32
+                                ),
+                            "back":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.int32
+                                ),
+                            "camera_x":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.float32
+                                ),
+                            "camera_y":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.float32
+                                ),
+                            "forward":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.int32
+                                ),
+                            "jump":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.int32
+                                ),
+                            "left":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.int32
+                                ),
+                            "place":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.int32
+                                ),
+                            "right":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.int32
+                                ),
+                            "sneak":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.int32
+                                ),
+                            "sprint":
+                                tfds.features.Tensor(
+                                    shape=(VIDEO_LEN,), dtype=tf.int32
+                                )
+                        }
+                    )
             }
         ),
         supervised_keys=None,
@@ -77,7 +131,23 @@ class MinerlNavigate(tfds.core.GeneratorBasedBuilder):
     }
 
   def _generate_examples(self, path):
+    metadata = json.loads((path / "metadata.json").read_text())
     for f in path.glob("*.mp4"):
-      yield str(os.path.basename(f)), {
+      key = str(os.path.basename(f))
+      actions = {
+          "attack": metadata[key]["attack"],
+          "back": metadata[key]["back"],
+          "camera_x": metadata[key]["camera_x"],
+          "camera_y": metadata[key]["camera_y"],
+          "forward": metadata[key]["forward"],
+          "jump": metadata[key]["jump"],
+          "left": metadata[key]["left"],
+          "place": metadata[key]["place"],
+          "right": metadata[key]["right"],
+          "sneak": metadata[key]["sneak"],
+          "sprint": metadata[key]["sprint"],
+      }
+      yield key, {
           "video": str(f.resolve()),
+          "actions": actions,
       }
