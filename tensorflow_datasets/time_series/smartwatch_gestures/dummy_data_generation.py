@@ -67,6 +67,8 @@ def _generate_data():
     fpath = _dummy_file(99, 1, i)
     if not fpath.exists():
       fpath.parent.mkdir(parents=True, exist_ok=True)
+    else:
+      fpath.unlink()
 
     t_milli = _init_time(13)
     t_nanos = _init_time(14)
