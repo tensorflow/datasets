@@ -33,12 +33,11 @@ def _output_dir():
   ) / 'time_series' / 'smartwatch_gestures' / 'dummy_data'
 
 
-def _dummy_file() -> Path:
+def _dummy_file(participant: int, gesture: int, attempt: int) -> Path:
   """return path to fake data file"""
-  participant = f'U{random.randint(1,99):02}'
-  gesture = f'{random.randint(1,20):02}'
-  attempt = f'{random.randint(1,99):02}.txt'
-
+  participant = f'U{participant:02}'
+  gesture = f'{gesture:02}'
+  attempt = f'{attempt:02}.txt'
   return _output_dir() / participant / gesture / attempt
 
 
@@ -64,8 +63,8 @@ def _inc_accel(x: float) -> float:
 
 
 def _generate_data():
-  for _ in range(NUMBER_OF_EXAMPLES):
-    fpath = _dummy_file()
+  for i in range(NUMBER_OF_EXAMPLES):
+    fpath = _dummy_file(99, 1, i)
     if not fpath.exists():
       fpath.parent.mkdir(parents=True, exist_ok=True)
 
