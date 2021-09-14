@@ -28,7 +28,6 @@ _CITATION = """
   doi={}}
 """
 
-
 class SmartwatchGesturesDataset(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for smartwatch_gestures_dataset dataset."""
 
@@ -45,16 +44,16 @@ class SmartwatchGesturesDataset(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'features': tfds.features.Sequence({
-              # 'time_millis': tf.uint64,
-              # 'time_nanos': tf.uint64,
-              # 'time_event': tf.uint64,
+              'time_millis': tf.uint64,
+              'time_nanos': tf.uint64,
+              'time_event': tf.uint64,
               'accel_x': tf.float64,
               'accel_y': tf.float64,
               'accel_z': tf.float64,
             }),
             'participant': tf.uint8, # might be interesting to see if some participants are easier to classify than others
             'attempt': tf.uint8, # gesture number (debug: to check files are loaded as expected)
-            'gesture': tfds.features.ClassLabel(names_file='tev_smartwatch_gestures_dataset/class_labels.txt')
+            'gesture': tfds.features.ClassLabel(names_file='smartwatch_gestures_dataset/class_labels.txt')
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
@@ -80,7 +79,7 @@ class SmartwatchGesturesDataset(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     for f in path.glob('*/*/*.txt'):
 
-      table = pd.read_table(f, sep=' ', header=None, names=['time_millis', 'time_nanos', 'time_event', 'axis_x', 'axis_y', 'axis_z'])
+      table = pd.read_table(f, sep=' ', header=None, names=['time_millis', 'time_nanos', 'time_event', 'accel_x', 'accel_y', 'accel_z'])
 
       # create a unique key for each recorded gesture
       participant_numstr = f.parent.parent.name[1:] # drop the "U"
@@ -93,9 +92,9 @@ class SmartwatchGesturesDataset(tfds.core.GeneratorBasedBuilder):
             'time_millis': table['time_millis'].to_numpy(),
             'time_nanos': table['time_nanos'].to_numpy(),
             'time_event': table['time_event'].to_numpy(),
-            'accel_x': table['axis_x'].to_numpy(),
-            'accel_y': table['axis_y'].to_numpy(),
-            'accel_z': table['axis_z'].to_numpy(),
+            'accel_x': table['accel_x'].to_numpy(),
+            'accel_y': table['accel_y'].to_numpy(),
+            'accel_z': table['accel_z'].to_numpy(),
           },
           'participant': int(participant_numstr),
           'attempt': int(attempt_numstr),
