@@ -90,8 +90,8 @@ class SmartwatchGestures(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     # (smartwatch_gestures): Downloads the data
     path = dl_manager.download_and_extract(
-      'https://drive.google.com/uc?export=download\
-        &id=1nEs-JlAQv6xpuSIqahTKK68TgK37GirP'
+      f'https://drive.google.com/uc?export=download&'
+      f'id=1nEs-JlAQv6xpuSIqahTKK68TgK37GirP'
     )
 
     # There are no predefined train/val/test split for this dataset.
