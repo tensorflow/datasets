@@ -1,6 +1,5 @@
 """smartwatch_gestures_dataset dataset."""
 
-import pandas as pd
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
@@ -77,6 +76,9 @@ class SmartwatchGesturesDataset(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
+
+    pd = tfds.core.lazy_imports.pandas
+
     for f in path.glob('*/*/*.txt'):
 
       table = pd.read_table(f, sep=' ', header=None, names=['time_millis', 'time_nanos', 'time_event', 'accel_x', 'accel_y', 'accel_z'])
