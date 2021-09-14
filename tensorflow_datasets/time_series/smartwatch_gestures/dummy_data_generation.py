@@ -30,7 +30,7 @@ NUMBER_OF_EXAMPLES = 3
 
 def _output_dir():
   return tfds.core.tfds_path(
-  ) / 'time_series' / 'smartwatch_gestures' / 'dummy_data'
+  ) / 'time_series' / 'smartwatch_gestures' / 'dummy_data' / 'gestures-dataset'
 
 
 def _dummy_file(participant: int, gesture: int, attempt: int) -> Path:

@@ -56,6 +56,7 @@ from tensorflow_datasets import rlds
 from tensorflow_datasets import structured
 from tensorflow_datasets import summarization
 from tensorflow_datasets import text
+from tensorflow_datasets import time_series
 from tensorflow_datasets import translate
 from tensorflow_datasets import video
 from tensorflow_datasets import vision_language
@@ -67,4 +68,3 @@ from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
 # __all__ for import * as well as documentation
 from tensorflow_datasets import public_api  # pylint: disable=g-bad-import-order
 __all__ = public_api.__all__
-

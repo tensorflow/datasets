@@ -15,7 +15,7 @@
 """smartwatch_gestures dataset."""
 
 import tensorflow_datasets.public_api as tfds
-from . import smartwatch_gestures
+from tensorflow_datasets.time_series.smartwatch_gestures import smartwatch_gestures
 
 
 class SmartwatchGesturesTest(tfds.testing.DatasetBuilderTestCase):

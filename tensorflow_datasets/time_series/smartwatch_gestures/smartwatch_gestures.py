@@ -86,7 +86,7 @@ class SmartwatchGestures(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+  def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     # (smartwatch_gestures): Downloads the data
     path = dl_manager.download_and_extract(

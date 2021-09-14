@@ -14,4 +14,4 @@
 # limitations under the License.
 """smartwatch_gestures dataset."""
 
-from .smartwatch_gestures import SmartwatchGestures
+from tensorflow_datasets.time_series.smartwatch_gestures.smartwatch_gestures import SmartwatchGestures
