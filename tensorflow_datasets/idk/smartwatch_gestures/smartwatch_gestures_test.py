@@ -12,16 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""smartwatch_gestures_dataset dataset."""
+"""smartwatch_gestures dataset."""
 
 import tensorflow_datasets as tfds
 from . import smartwatch_gestures
 
 
 class SmartwatchGesturesTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for smartwatch_gestures_dataset dataset."""
-  # TODO(smartwatch_gestures_dataset):
-  DATASET_CLASS = smartwatch_gestures.SmartwatchGesturesDataset
+  """Tests for smartwatch_gestures dataset."""
+  # (smartwatch_gestures):
+  DATASET_CLASS = smartwatch_gestures.SmartwatchGestures
   SPLITS = {
       'train': 3,  # Number of fake train example
   }

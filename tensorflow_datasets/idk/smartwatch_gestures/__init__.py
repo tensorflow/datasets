@@ -12,6 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""smartwatch_gestures_dataset dataset."""
+"""smartwatch_gestures dataset."""
 
-from .smartwatch_gestures_dataset import SmartwatchGesturesDataset
+from .smartwatch_gestures import SmartwatchGestures
