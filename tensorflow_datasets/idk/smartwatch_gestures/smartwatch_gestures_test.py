@@ -15,13 +15,13 @@
 """smartwatch_gestures_dataset dataset."""
 
 import tensorflow_datasets as tfds
-from . import smartwatch_gestures_dataset
+from . import smartwatch_gestures
 
 
-class SmartwatchGesturesDatasetTest(tfds.testing.DatasetBuilderTestCase):
+class SmartwatchGesturesTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for smartwatch_gestures_dataset dataset."""
   # TODO(smartwatch_gestures_dataset):
-  DATASET_CLASS = smartwatch_gestures_dataset.SmartwatchGesturesDataset
+  DATASET_CLASS = smartwatch_gestures.SmartwatchGesturesDataset
   SPLITS = {
       'train': 3,  # Number of fake train example
   }

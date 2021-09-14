@@ -41,8 +41,8 @@ _CITATION = """
   doi={}}
 """
 
-class SmartwatchGesturesDataset(tfds.core.GeneratorBasedBuilder):
-  """DatasetBuilder for smartwatch_gestures_dataset dataset."""
+class SmartwatchGestures(tfds.core.GeneratorBasedBuilder):
+  """DatasetBuilder for smartwatch_gestures dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
@@ -51,6 +51,9 @@ class SmartwatchGesturesDataset(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
+    class_label = tfds.features.ClassLabel(
+        names_file=tfds.core.tfds_path(
+            'idk/smartwatch_gestures/class_labels.txt'))
     # (tev_smartwatch_gestures_dataset): Specifies the tfds.core.DatasetInfo object
     return tfds.core.DatasetInfo(
         builder=self,
@@ -66,7 +69,7 @@ class SmartwatchGesturesDataset(tfds.core.GeneratorBasedBuilder):
             }),
             'participant': tf.uint8, # might be interesting to see if some participants are easier to classify than others
             'attempt': tf.uint8, # gesture number (debug: to check files are loaded as expected)
-            'gesture': tfds.features.ClassLabel(names_file='smartwatch_gestures_dataset/class_labels.txt')
+            'gesture': class_label
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if
