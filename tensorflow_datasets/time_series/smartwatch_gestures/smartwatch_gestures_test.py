@@ -14,7 +14,7 @@
 # limitations under the License.
 """smartwatch_gestures dataset."""
 
-import tensorflow_datasets as tfds
+import tensorflow_datasets.public_api as tfds
 from . import smartwatch_gestures
 
 
