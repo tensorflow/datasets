@@ -18,6 +18,7 @@
 import collections
 import dataclasses
 import functools
+import os
 from typing import Any, Dict, Generator, Optional, Sequence, Text, Tuple, Union
 
 import tensorflow.compat.v2 as tf
@@ -268,16 +269,14 @@ def tf_feature_to_tfds_feature(nested: Union[tf.io.FixedLenFeature, Dict[Text,
     raise ValueError(f'Unsupported type {type(nested)}')
 
 
-def get_episode_id_from_example(tf_example: tf.Tensor) -> tf.Tensor:
-  return tf.strings.to_hash_bucket_fast(tf_example, 2**31 - 1)
-
-
 class RluRwrl(rlu_common.RLUBuilder):
   """DatasetBuilder for rlu_rwrl dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.0.1': 'Fixes a bug in RLU RWRL dataset where there are duplicated '
+               'episode ids in one of the humanoid datasets.',
   }
   _INPUT_FILE_PREFIX = 'gs://rl_unplugged/rwrl/'
 
@@ -317,8 +316,6 @@ class RluRwrl(rlu_common.RLUBuilder):
                 'discount':
                     tf_feature_to_tfds_feature(feature_description['discount']),
             }),
-        'episode_id':
-            tf.int64,
         'episode_return':
             tf.float32,
     })
@@ -366,7 +363,6 @@ class RluRwrl(rlu_common.RLUBuilder):
     episode_return = tf.reduce_sum(reward)
     episode = {
         # Episode Metadata
-        'episode_id': get_episode_id_from_example(tf_example),
         'episode_return': episode_return,
         'steps': {
             'observation': data['observation'],
@@ -397,6 +393,8 @@ class RluRwrl(rlu_common.RLUBuilder):
     def _generate_examples_one_file(
         path) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
       """Yields examples from one file."""
+      counter = 0
+      key_prefix = os.path.basename(path)
       # Dataset of tf.Examples containing full episodes.
       example_ds = tf.data.TFRecordDataset(filenames=str(path))
       # Dataset of episodes, each represented as a dataset of steps.
@@ -407,8 +405,8 @@ class RluRwrl(rlu_common.RLUBuilder):
           num_parallel_calls=tf.data.experimental.AUTOTUNE)
       episode_ds = tfds.as_numpy(episode_ds)
       for e in episode_ds:
-        # The key of the episode is converted to string because int64 is not
-        # supported as key.
-        yield str(e['episode_id']), e
+        episode_id = counter
+        yield f'{key_prefix}/{episode_id}', e
+        counter += 1
 
     return beam.Create(file_paths) | beam.FlatMap(_generate_examples_one_file)
