@@ -47,7 +47,7 @@ class _WriteBuilder(
 def write_metadata(
     *,
     data_dir: type_utils.PathLike,
-    features: features_lib.FeatureConnector,
+    features: features_lib.feature.FeatureConnectorArg,
     split_infos: Union[None, type_utils.PathLike,
                        List[split_lib.SplitInfo]] = None,
     version: Union[None, str, utils.Version] = None,
@@ -61,7 +61,7 @@ def write_metadata(
 
   Args:
     data_dir: Dataset path on which save the metadata
-    features: `tfds.features.FeaturesDict` matching the proto specs.
+    features: dict of `tfds.features.FeatureConnector` matching the proto specs.
     split_infos: Can be either:  * A path to the pre-computed split info values
       ( the `out_dir` kwarg of `tfds.folder_dataset.compute_split_info`) * A
       list of `tfds.core.SplitInfo` (returned value of
@@ -74,6 +74,7 @@ def write_metadata(
     **ds_info_kwargs: Additional metadata forwarded to `tfds.core.DatasetInfo` (
       description, homepage,...). Will appear in the doc.
   """
+  features = features_lib.features_dict.to_feature(features)
   data_dir = utils.as_path(data_dir)
   # Extract the tf-record filenames
   tfrecord_files = [
@@ -135,9 +136,8 @@ def write_metadata(
   # specs)
   if check_data:
     builder = read_only_builder.builder_from_directory(data_dir)
-    ds = builder.as_dataset(split=next(iter(builder.info.splits)))
-    for _ in ds.take(1):  # Try to load the first example
-      pass
+    split_name = next(iter(builder.info.splits))
+    _, = builder.as_dataset(split=f'{split_name}[:1]')  # Load the first example
 
 
 def _load_splits(
