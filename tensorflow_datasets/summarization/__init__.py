@@ -18,6 +18,7 @@
 from tensorflow_datasets.summarization.aeslc import Aeslc
 from tensorflow_datasets.summarization.big_patent import BigPatent
 from tensorflow_datasets.summarization.billsum import Billsum
+from tensorflow_datasets.summarization.booksum import Booksum
 from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymail
 from tensorflow_datasets.summarization.covid19sum import Covid19sum
 from tensorflow_datasets.summarization.gigaword import Gigaword
