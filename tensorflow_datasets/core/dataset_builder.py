@@ -930,6 +930,7 @@ class FileReaderBuilder(DatasetBuilder):
       shuffle_files,
   ) -> tf.data.Dataset:
     # Partial decoding
+    # TODO(epot): Should be moved inside `features.decode_example`
     if isinstance(decoders, decode.PartialDecoding):
       features = decoders.extract_features(self.info.features)
       example_specs = features.get_serialized_info()
