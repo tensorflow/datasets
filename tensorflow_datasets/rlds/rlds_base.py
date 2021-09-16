@@ -85,7 +85,7 @@ def build_info(ds_config: DatasetConfig,
   )
 
 
-def _get_log_paths(root_dir: str) -> List[str]:
+def get_log_paths(root_dir: str) -> List[str]:
   """Returns the paths of environment logs under a (set of) directories.
 
   We assume that a sub-directory with metadata.riegeli file contains the logs.
@@ -112,7 +112,7 @@ def generate_examples(path):
   """Yields examples."""
   # TODO(sabela): Consider adding the option of passing a filter to remove
   # some of the episodes.
-  tag_dirs = _get_log_paths(path.resolve())
+  tag_dirs = get_log_paths(path.resolve())
   for tag_dir in tag_dirs:
     yield from _generate_examples_from_log_path(tag_dir)
 
@@ -121,7 +121,7 @@ def generate_beam_examples(path):
   """Yields examples using Beam."""
   beam = tfds.core.lazy_imports.apache_beam
 
-  tag_dirs = _get_log_paths(path.resolve())
+  tag_dirs = get_log_paths(path.resolve())
   return beam.Create(tag_dirs) | beam.FlatMap(_generate_examples_from_log_path)
 
 
