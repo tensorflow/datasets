@@ -179,6 +179,7 @@ def mock_data(
 
     # Partial decoding
     if isinstance(decoders, decode.PartialDecoding):
+      # TODO(epot): Should be moved inside `features.decode_example`
       features = decoders.extract_features(self.info.features)
       decoders = decoders.decoders
     # Full decoding (all features decoded)
@@ -205,7 +206,7 @@ def mock_data(
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
     )
     ds = ds.apply(tf.data.experimental.assert_cardinality(num_examples))
-    ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
     if read_config and read_config.add_tfds_id:
       ds_id = tfrecords_reader._make_id_dataset(  # pylint: disable=protected-access
