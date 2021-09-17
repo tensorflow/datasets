@@ -241,6 +241,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`aeslc`](aeslc.md)
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
+*   [`booksum`](booksum.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cnn_dailymail`](cnn_dailymail.md)
 *   [`covid19sum`](covid19sum.md)
 *   [`gigaword`](gigaword.md)

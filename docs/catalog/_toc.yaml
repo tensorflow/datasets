@@ -389,6 +389,9 @@ toc:
     title: big_patent
   - path: /datasets/catalog/billsum
     title: billsum
+  - path: /datasets/catalog/booksum
+    status: nightly
+    title: booksum (manual)
   - path: /datasets/catalog/cnn_dailymail
     title: cnn_dailymail
   - path: /datasets/catalog/covid19sum
