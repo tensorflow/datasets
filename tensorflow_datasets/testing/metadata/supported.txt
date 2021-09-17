@@ -873,6 +873,7 @@ reddit/1.0.0
 reddit_tifu/long/1.1.0
 reddit_tifu/short/1.1.0
 resisc45/3.0.0
+rlu_atari/Pong_run_1/1.1.0
 robonet/robonet_128/4.0.1
 robonet/robonet_64/4.0.1
 robonet/robonet_sample_128/4.0.1

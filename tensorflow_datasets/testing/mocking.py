@@ -187,15 +187,18 @@ def mock_data(
       features = self.info.features
       decoders = decoders  # pylint: disable=self-assigning-variable
 
-    if decoders is None:
-      generator_cls = RandomFakeGenerator
-      specs = features.get_tensor_info()
-      decode_fn = lambda ex: ex  # identity
-    else:
+    has_nested_dataset = any(
+        isinstance(f, features_lib.Dataset)
+        for f in features._flatten(features))  # pylint: disable=protected-access
+    if decoders is not None or has_nested_dataset:
       # If a decoder is passed, encode/decode the examples.
       generator_cls = EncodedRandomFakeGenerator
       specs = features.get_serialized_info()
       decode_fn = functools.partial(features.decode_example, decoders=decoders)
+    else:
+      generator_cls = RandomFakeGenerator
+      specs = features.get_tensor_info()
+      decode_fn = lambda ex: ex  # identity
 
     ds = tf.data.Dataset.from_generator(
         # `from_generator` takes a callable with signature () -> iterable
@@ -298,12 +301,22 @@ class RandomFakeGenerator(object):
     return np.array([rand_str() for _ in range(np.prod(shape, dtype=np.int32))
                     ]).reshape(shape)
 
-  def _generate_random_array(self, feature, tensor_info):
+  def _generate_random_obj(self, feature, tensor_info):
     """Generates a random tensor for a single feature."""
     # TODO(tfds): Could improve the fake generatiion:
     # * Use the feature statistics (min, max)
     # * For Sequence features
     # * For Text
+
+    # First we deal with the case of sub-datasets:
+    if isinstance(feature, features_lib.Dataset):
+      # In sub-datasets we set number of examples to 1. An alternative
+      # solution with setting num_examples to N = self._num_examples would
+      # imply generating O(N*N) examples for nesting of depth 2.
+      generator = RandomFakeGenerator(feature.feature, num_examples=1)
+      # Returns the list of examples in the nested dataset.
+      return list(generator)
+
     shape = [  # Fill dynamic shape with random values
         self._rgn.randint(5, 50) if s is None else s for s in tensor_info.shape
     ]
@@ -332,11 +345,11 @@ class RandomFakeGenerator(object):
     root_feature = self._features
     flat_features = root_feature._flatten(root_feature)  # pylint: disable=protected-access
     flat_tensor_info = root_feature._flatten(root_feature.get_tensor_info())  # pylint: disable=protected-access
-    flat_np = [
-        self._generate_random_array(feature, tensor_info)
+    flat_objs = [
+        self._generate_random_obj(feature, tensor_info)
         for feature, tensor_info in zip(flat_features, flat_tensor_info)
     ]
-    return root_feature._nest(flat_np)  # pylint: disable=protected-access
+    return root_feature._nest(flat_objs)  # pylint: disable=protected-access
 
   def __iter__(self):
     """Yields all fake examples."""
