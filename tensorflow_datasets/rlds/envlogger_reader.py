@@ -43,7 +43,7 @@ def _get_episode_metadata(episode: Sequence[Any]) -> Dict[str, Any]:
 def _get_step_metadata(step: Any) -> Dict[str, Any]:
   """Extracts the custom metadata from the step.
 
-  Note that it returns the dictionary contained in the step, so further
+  Note that it may return the dictionary contained in the step, so further
   modifications will affect the step itself.
 
   Args:
@@ -55,7 +55,14 @@ def _get_step_metadata(step: Any) -> Dict[str, Any]:
   if not isinstance(step.custom_data, dict):
     # We ignore step metadata if step.custom_data is not a dictionary
     return {}
-  return step.custom_data
+  if 'episode_metadata' in step.custom_data:
+    # Some datasets used an old version of EnvLogger that stores episode
+    # metadata in the first step.
+    return {
+        k: v for k, v in step.custom_data.items() if k != 'episode_metadata'
+    }
+  else:
+    return step.custom_data
 
 
 def get_episode_dict(
