@@ -200,7 +200,7 @@ def _generate_steps(
   # We use episode[1] here because in the first steps some of the fields(like
   # the action, migt be None, so the shape is unknown).
   empty_step = _build_empty_step(episode[1], step_fn)
-  steps = {k: _empty_nested_list(v) for k, v in empty_step.items()}
+  steps = _empty_nested_list(empty_step)
 
   prev_step = None
   for step in episode:
@@ -246,41 +246,50 @@ def _append_nested(
     return collection
 
 
-def _empty_nested_list(
-    data: Union[np.ndarray, List[Any], Tuple[Any, ...], Dict[str, Any]]
-) -> Union[List[Any], Tuple[Any, ...], Dict[str, Any]]:
-  """Creates an element like data but with empty lists in the nested dimensions.
+def _apply_recursive(
+    data: Union[np.ndarray, List[Any], Tuple[Any, ...], Dict[str, Any]],
+    fn: Callable[[Any],
+                 Any]) -> Union[List[Any], Tuple[Any, ...], Dict[str, Any]]:
+  """Applies a function recursively to the nested dimensions of the input.
 
   Args:
     data: scalar, array, list, tuple or dictionary.
+    fn: function to apply to the most nested dimension.
+
+  Returns:
+    item with the same shape of data but with fn applied to the most nested
+    dimension
+  """
+  if isinstance(data, dict):
+    return {k: _apply_recursive(data[k], fn) for k in data}
+  elif isinstance(data, tuple):
+    return tuple(_apply_recursive(x, fn) for x in data)
+  else:
+    return fn(data)
+
+
+def _empty_nested_list(data: Dict[str, Any]) -> Dict[str, Any]:
+  """Creates an element like data but with empty lists in the nested dimensions.
+
+  Args:
+    data: dictionary.
 
   Returns:
     item with the same shape of data but with empty lists in its nested
     dimensions.
   """
-  if isinstance(data, dict):
-    return {k: _empty_nested_list(data[k]) for k in data}
-  elif isinstance(data, tuple):
-    return tuple(_empty_nested_list(x) for x in data)
-  else:
-    return []
+
+  return {k: _apply_recursive(v, lambda x: []) for k, v in data.items()}
 
 
-def _to_nested_list(
-    data: Union[np.ndarray, List[Any], Tuple[Any, ...], Dict[str, Any]]
-) -> Union[List[Any], Tuple[Any, ...], Dict[str, Any]]:
+def _to_nested_list(data: Dict[str, Any]) -> Dict[str, Any]:
   """Transforms data to lists of length 1 in the nested dimensions.
 
   Args:
-    data: scalar, array, list, tuple or dictionary.
+    data: dictionary.
 
   Returns:
     item with the same shape of data but with lists of length 1 in its nested
     dimensions.
   """
-  if isinstance(data, dict):
-    return {k: _to_nested_list(data[k]) for k in data}
-  elif isinstance(data, tuple):
-    return tuple(_to_nested_list(x) for x in data)
-  else:
-    return [data]
+  return {k: _apply_recursive(v, lambda x: [x]) for k, v in data.items()}
