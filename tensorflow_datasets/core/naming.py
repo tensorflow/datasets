@@ -15,12 +15,11 @@
 
 """Utilities for file names."""
 
+import dataclasses
 import os
 import re
 import textwrap
 from typing import Any, Dict, List, Optional, Tuple, Union
-
-import dataclasses
 
 from tensorflow_datasets.core.utils import py_utils
 
