@@ -19,6 +19,9 @@ import concurrent.futures
 import difflib
 from typing import Any, Dict, FrozenSet, Iterator, List, Type
 
+from absl import flags
+from absl import logging
+
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import naming
@@ -28,7 +31,12 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
 import toml
 
+TFDS_DEBUG_VERBOSE = flags.DEFINE_boolean('tfds_debug_list_dir', False,
+                                          'Debug the catalog generation')
+
 ListOrElem = utils.ListOrElem
+
+# pylint: disable=logging-format-interpolation
 
 
 class DataDirRegister(register_base.BaseRegister):
@@ -147,7 +155,7 @@ def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:
       FileNotFoundError,
       tf.errors.NotFoundError,
       tf.errors.PermissionDeniedError,
-  ):
+  ) as e:
     pass
 
 
