@@ -22,6 +22,10 @@ import tensorflow as tf
 from tensorflow_datasets.core.utils import type_utils
 import tensorflow_datasets.public_api as tfds
 
+# Type hints.
+ArrayDict = Dict[Text, np.ndarray]
+ReadOnlyPath = type_utils.ReadOnlyPath
+
 _DESCRIPTION = """
 'ogbg-molpcba' is a molecular dataset sampled from PubChem BioAssay.
 It is a graph prediction dataset from the Open Graph Benchmark (OGB).
@@ -98,23 +102,27 @@ _CITATION = """
 _OGB_URL = 'https://ogb.stanford.edu/docs/graphprop'
 _DOWNLOAD_URL = 'https://snap.stanford.edu/ogb/data/graphproppred/csv_mol_download/pcba.zip'
 
-# Type hints.
-ArrayDict = Dict[Text, np.ndarray]
-ReadOnlyPath = type_utils.ReadOnlyPath
+# File containing the names of individual tasks.
+_TASKS_FNAME = 'graphs/ogbg_molpcba/ogbg_molpcba_tasks.txt'
 
 
 class OgbgMolpcba(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for ogbg_molpcba dataset."""
 
-  VERSION = tfds.core.Version('0.1.2')
+  VERSION = tfds.core.Version('0.1.3')
   RELEASE_NOTES = {
       '0.1.0': 'Initial release of experimental API.',
       '0.1.1': 'Exposes the number of edges in each graph explicitly.',
       '0.1.2': 'Add metadata field for GraphVisualizer.',
+      '0.1.3': 'Add metadata field for names of individual tasks.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
+    # Read the individual task names.
+    tasks_file = tfds.core.tfds_path(_TASKS_FNAME)
+    tasks = tasks_file.read_text().splitlines()
+
     # Specify the tfds.core.DatasetInfo object
     return tfds.core.DatasetInfo(
         builder=self,
@@ -138,6 +146,8 @@ class OgbgMolpcba(tfds.core.GeneratorBasedBuilder):
         homepage=_OGB_URL,
         citation=_CITATION,
         metadata=tfds.core.MetadataDict({
+            'tasks':
+                tasks,
             'graph_visualizer':
                 tfds.visualization.GraphVisualizerMetadataDict(
                     edgelist_feature_name='edge_index')

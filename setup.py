@@ -84,6 +84,7 @@ DEV_REQUIRE = [
 
 # Static files needed by datasets.
 DATASET_FILES = [
+    'graphs/ogbg_molpcba/ogbg_molpcba_tasks.txt',
     'image_classification/caltech101_labels.txt',
     'image_classification/categories_places365.txt',
     'image_classification/cbis_ddsm_calc_distributions.txt',
