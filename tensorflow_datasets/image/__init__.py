@@ -84,6 +84,7 @@ from tensorflow_datasets.image_classification.mnist_corrupted import MNISTCorrup
 from tensorflow_datasets.image_classification.omniglot import Omniglot
 from tensorflow_datasets.image_classification.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image_classification.oxford_iiit_pet import OxfordIIITPet
+from tensorflow_datasets.image_classification.pass_dataset import PASS
 from tensorflow_datasets.image_classification.patch_camelyon import PatchCamelyon
 from tensorflow_datasets.image_classification.pet_finder import PetFinder
 from tensorflow_datasets.image_classification.places365_small import Places365Small
@@ -101,6 +102,6 @@ from tensorflow_datasets.image_classification.sun import Sun397
 from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image_classification.pass_dataset import PASS
+
 
 # Legacy aliases
