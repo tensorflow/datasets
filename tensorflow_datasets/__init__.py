@@ -51,6 +51,7 @@ from tensorflow_datasets import image_classification
 from tensorflow_datasets import object_detection
 from tensorflow_datasets import question_answering
 from tensorflow_datasets import d4rl
+from tensorflow_datasets import ranking
 from tensorflow_datasets import rl_unplugged
 from tensorflow_datasets import rlds
 from tensorflow_datasets import structured

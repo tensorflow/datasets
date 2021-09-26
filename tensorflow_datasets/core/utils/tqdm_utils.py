@@ -95,6 +95,23 @@ def async_tqdm(*args, **kwargs):
     return EmptyTqdm(*args, **kwargs)
 
 
+def display_progress_bar(enable: bool) -> None:
+  """Controls whether Tqdm progress bar is enabled/disabled.
+
+  Usage:
+
+  ```
+  tfds.display_progress_bar(enable=True)
+  ```
+
+  Args:
+    enable: whether to display the progress bar.
+  """
+  # Replace tqdm
+  global _active
+  _active = enable
+
+
 def disable_progress_bar():
   """Disables Tqdm progress bar.
 
