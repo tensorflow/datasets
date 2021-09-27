@@ -3,7 +3,6 @@
 import tensorflow_datasets as tfds
 import urllib.request
 import tensorflow.compat.v2 as tf
-import glob
 pd = tfds.core.lazy_imports.pandas
 
 _DESCRIPTION = """
@@ -59,7 +58,7 @@ class PASS(tfds.core.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: tfds.download.DownloadManager):
         """Returns SplitGenerators."""
-        paths = dl_manager.download_and_extract(_URLS)
+        paths = dl_manager.download(_URLS)
         with tf.io.gfile.GFile(paths['meta_data']) as f:
             meta = pd.read_csv(f)
         meta = {m[1]['hash']:m[1]['unickname'] for m in meta.iterrows()}
@@ -67,20 +66,19 @@ class PASS(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs=dict(
                 parts=paths['train_images'],
-                meta=meta),
+                meta=meta,
+                dl_manager=dl_manager),
         )]
 
 
-    def _generate_examples(self, parts, meta):
+    def _generate_examples(self, dl_manager, parts, meta):
         """Yields examples."""
         _idx = 0
         for part in parts:
-            images = glob.glob(str(part)+'/PASS_dataset/*/*.jpg')
-            for image in images:
+            for fname, fobj in dl_manager.iter_archive(part):
                 _idx += 1
-                image_path = image
                 record = {
-                    "image": image_path,
-                    "image/creator_uname": meta[image.split('/')[-1].split('.')[0]]
+                    "image": fobj,
+                    "image/creator_uname": meta[fname.split('/')[-1].split('.')[0]]
                 }
                 yield _idx, record
