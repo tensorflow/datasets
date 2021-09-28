@@ -320,7 +320,8 @@ def _read_files(
   # If the number of examples read in the tf-record is known, we forward
   # the information to the tf.data.Dataset object.
   # Check the `tf.data.experimental` for backward compatibility with TF <= 2.1
-  if (not read_config.input_context and  # TODO(epot): Restore cardinality
+  if (read_config.assert_cardinality and
+      not read_config.input_context and  # TODO(epot): Restore cardinality
       hasattr(tf.data.experimental, 'assert_cardinality')):
     # TODO(b/154963426): Replace by per-shard cardinality (warning if
     # `experimental_interleave_sort_fn` is set).

@@ -577,6 +577,26 @@ class ReaderTest(testing.TestCase):
       expected_warning = _SHUFFLE_FILES_ERROR_MESSAGE + '\n' + _CYCLE_LENGTH_ERROR_MESSAGE
       self.assertIn(expected_warning, reported_warnings)
 
+  @mock.patch(
+      'tensorflow.data.experimental.assert_cardinality',
+      wraps=tf.data.experimental.assert_cardinality)
+  def test_assert_cardinality_is_on_by_default(self, assert_cardinality):
+    train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
+    self.reader.read(
+        name='mnist', instructions='train', split_infos=[train_info])
+    assert_cardinality.assert_called_with(12)
+
+  @mock.patch('tensorflow.data.experimental.assert_cardinality')
+  def test_assert_cardinality_can_be_disabled_through_readconfig(
+      self, assert_cardinality):
+    train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
+    self.reader.read(
+        name='mnist',
+        instructions='train',
+        split_infos=[train_info],
+        read_config=read_config_lib.ReadConfig(assert_cardinality=False))
+    assert not assert_cardinality.called
+
 
 def test_shard_api():
   si = tfds.core.SplitInfo(

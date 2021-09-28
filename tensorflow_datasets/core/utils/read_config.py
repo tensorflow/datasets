@@ -77,6 +77,11 @@ class ReadConfig:
       interleaving files. By default using tf.data's AUTOTUNE.
     enable_ordering_guard: When True (default), an exception is raised if
       shuffling or interleaving are used on an ordered dataset.
+    assert_cardinality: When True (default), an exception is raised if at the
+      end of an Epoch the number of read examples does not match the expected
+      number from dataset metadata. A power user would typically want to set
+      False if input files have been tempered with and they don't mind missing
+      records or have too many of them.
   """
   # General tf.data.Dataset parametters
   options: tf.data.Options = dataclasses.field(default_factory=tf.data.Options)
@@ -98,3 +103,4 @@ class ReadConfig:
   num_parallel_calls_for_interleave_files: Optional[int] = (
       tf.data.experimental.AUTOTUNE)
   enable_ordering_guard: bool = True
+  assert_cardinality: bool = True
