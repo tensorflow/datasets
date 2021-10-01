@@ -212,7 +212,7 @@ class DownloadManager(object):
 
     self._download_dir: ReadWritePath = download_dir
     self._extract_dir: ReadWritePath = extract_dir
-    self._manual_dir: Optional[ReadOnlyPath] = manual_dir
+    self._manual_dir: Optional[ReadOnlyPath] = manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
     self._download_dir.mkdir(parents=True, exist_ok=True)
     self._extract_dir.mkdir(parents=True, exist_ok=True)

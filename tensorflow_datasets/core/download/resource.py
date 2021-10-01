@@ -302,7 +302,7 @@ class Resource(object):
         not be downloaded yet. In such case, `url` must be set.
     """
     self.url = url
-    self.path: utils.ReadWritePath = utils.as_path(path) if path else None
+    self.path: utils.ReadWritePath = utils.as_path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._extract_method = extract_method
 
   @classmethod
