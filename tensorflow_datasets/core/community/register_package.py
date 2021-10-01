@@ -183,7 +183,7 @@ class _PackageIndex(collections.UserDict):
       return
 
     # If read was sucessful, update the cache with the new dataset list
-    self._cached_path.write_text(content)
+    self._cached_path.write_text(content)  # pytype: disable=attribute-error  # attribute-variable-annotations
     self._refresh_from_content(content)
 
 
