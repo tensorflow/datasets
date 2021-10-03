@@ -12,11 +12,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Minerl Navigate Video dataset."""
 
 import os
 import json
+import numpy as np
 
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
@@ -48,6 +48,7 @@ _CITATION = """
 _DOWNLOAD_URL = "https://archive.org/download/minerl_navigate/minerl_navigate.zip"
 
 VIDEO_LEN = 500
+NUM_ACTIONS = 11
 
 
 class MinerlNavigate(tfds.core.GeneratorBasedBuilder):
@@ -67,53 +68,8 @@ class MinerlNavigate(tfds.core.GeneratorBasedBuilder):
                 "video":
                     tfds.features.Video(shape=(None, 64, 64, 3)),
                 "actions":
-                    tfds.features.FeaturesDict(
-                        {
-                            "attack":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.int32
-                                ),
-                            "back":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.int32
-                                ),
-                            "camera_x":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.float32
-                                ),
-                            "camera_y":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.float32
-                                ),
-                            "forward":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.int32
-                                ),
-                            "jump":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.int32
-                                ),
-                            "left":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.int32
-                                ),
-                            "place":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.int32
-                                ),
-                            "right":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.int32
-                                ),
-                            "sneak":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.int32
-                                ),
-                            "sprint":
-                                tfds.features.Tensor(
-                                    shape=(VIDEO_LEN,), dtype=tf.int32
-                                )
-                        }
+                    tfds.features.Tensor(
+                        shape=(VIDEO_LEN, NUM_ACTIONS), dtype=tf.float32
                     )
             }
         ),
@@ -132,21 +88,18 @@ class MinerlNavigate(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     metadata = json.loads((path / "metadata.json").read_text())
+    action_keys = sorted(
+        [
+            "attack", "back", "camera_x", "camera_y", "forward", "jump", "left",
+            "place", "right", "sneak", "sprint"
+        ]
+    )
+    assert len(action_keys) == NUM_ACTIONS
     for f in path.glob("*.mp4"):
       key = str(os.path.basename(f))
-      actions = {
-          "attack": metadata[key]["attack"],
-          "back": metadata[key]["back"],
-          "camera_x": metadata[key]["camera_x"],
-          "camera_y": metadata[key]["camera_y"],
-          "forward": metadata[key]["forward"],
-          "jump": metadata[key]["jump"],
-          "left": metadata[key]["left"],
-          "place": metadata[key]["place"],
-          "right": metadata[key]["right"],
-          "sneak": metadata[key]["sneak"],
-          "sprint": metadata[key]["sprint"],
-      }
+      actions = dict([(k, metadata[key][k]) for k in action_keys])
+      actions = np.stack([actions[k] for k in action_keys],
+                         axis=1).astype(np.float32)
       yield key, {
           "video": str(f.resolve()),
           "actions": actions,
