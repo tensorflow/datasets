@@ -138,9 +138,14 @@ def _load_all_configs(
     if path.name in filtered_dirs:
       return None  # Default config is already loaded
     try:
-      return tfds.builder(f'{name}/{path.name}')
+      builder_conf = tfds.builder(f'{name}/{path.name}')
     except tfds.core.DatasetNotFoundError:
       return None
+    if not builder_conf.builder_config:
+      # Unexpected sub-config with wrong metadata.
+      # This can happen if the user manually mess-up with the directories.
+      return None
+    return builder_conf
 
   with futures.ThreadPoolExecutor(max_workers=_WORKER_COUNT_CONFIGS) as tpool:
     config_names = sorted(common_dir.iterdir())
