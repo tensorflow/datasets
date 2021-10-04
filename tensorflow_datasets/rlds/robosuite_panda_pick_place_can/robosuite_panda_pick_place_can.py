@@ -54,6 +54,8 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
   _DATA_PATHS = {
       'human_dc29b40a':
           'https://storage.googleapis.com/rlds_external_data_release/rlds_robosuite_panda_pick_place_can_human_state_only_dc29b40a.tar.gz',
+      'human_images_dc29b40a':
+          'https://storage.googleapis.com/rlds_external_data_release/rlds_robosuite_panda_pick_place_can_human_dc29b40a.tar.gz',
       'synthetic_stochastic_sac_afe13968':
           'https://storage.googleapis.com/rlds_external_data_release/rlds_robosuite_panda_pick_place_can_synthetic_stochastic_sac_afe13968.tar.gz'
   }
@@ -106,6 +108,76 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
           description='Human generated dataset (50 episodes).',
+          supervised_keys=None,
+      ),
+      rlds_base.DatasetConfig(
+          name='human_images_dc29b40a',
+          observation_info={
+              'birdview_image':
+                  tfds.features.Image(
+                      shape=(256, 256, 3),
+                      dtype=tf.uint8,
+                      encoding_format='png'),
+              'object-state':
+                  tfds.features.Tensor(shape=(14,), dtype=tf.float64),
+              'Can_pos':
+                  tfds.features.Tensor(shape=(3,), dtype=tf.float64),
+              'Can_to_robot0_eef_quat':
+                  tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+              'robot0_joint_pos_cos':
+                  tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+              'robot0_eye_in_hand_image':
+                  tfds.features.Image(
+                      shape=(256, 256, 3),
+                      dtype=tf.uint8,
+                      encoding_format='png'),
+              'robot0_gripper_qpos':
+                  tfds.features.Tensor(shape=(2,), dtype=tf.float64),
+              'robot0_proprio-state':
+                  tfds.features.Tensor(shape=(32,), dtype=tf.float64),
+              'robot0_robotview_image':
+                  tfds.features.Image(
+                      shape=(256, 256, 3),
+                      dtype=tf.uint8,
+                      encoding_format='png'),
+              'robot0_joint_vel':
+                  tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+              'robot0_joint_pos_sin':
+                  tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+              'agentview_image':
+                  tfds.features.Image(
+                      shape=(256, 256, 3),
+                      dtype=tf.uint8,
+                      encoding_format='png'),
+              'Can_quat':
+                  tfds.features.Tensor(shape=(4,), dtype=tf.float64),
+              'Can_to_robot0_eef_pos':
+                  tfds.features.Tensor(shape=(3,), dtype=tf.float64),
+              'robot0_gripper_qvel':
+                  tfds.features.Tensor(shape=(2,), dtype=tf.float64),
+              'robot0_eef_pos':
+                  tfds.features.Tensor(shape=(3,), dtype=tf.float64),
+              'robot0_eef_quat':
+                  tfds.features.Tensor(shape=(4,), dtype=tf.float64),
+          },
+          action_info=tfds.features.Tensor(shape=(7,), dtype=tf.float64),
+          reward_info=tf.float64,
+          discount_info=tf.float64,
+          episode_metadata_info={
+              'agent_id': tf.string,
+              'episode_index': tf.int32,
+              'episode_id': tf.string,
+          },
+          step_metadata_info={
+              'tag:placed': tf.bool,
+              'image': tfds.features.Image(),
+          },
+          citation=_CITATION,
+          overall_description=_DESCRIPTION,
+          description=(
+              'Human generated dataset, including images with different camera'
+              ' angles in the observation.'
+              ' Note that it may take some time to generate.'),
           supervised_keys=None,
       ),
       rlds_base.DatasetConfig(

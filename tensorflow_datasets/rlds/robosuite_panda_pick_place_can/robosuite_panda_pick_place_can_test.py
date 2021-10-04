@@ -34,6 +34,22 @@ class RobosuitePandaPickPlaceCanHumanTest(tfds.testing.DatasetBuilderTestCase):
   DL_DOWNLOAD_RESULT = {'file_path': 'human_dc29b40a'}
 
 
+class RobosuitePandaPickPlaceCanHumanImagesTest(
+    tfds.testing.DatasetBuilderTestCase):
+  """Tests for robosuite_panda_pick_place_can dataset."""
+  DATASET_CLASS = robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan
+  SPLITS = {
+      'train': 2,  # Number of fake train example
+  }
+
+  SKIP_TF1_GRAPH_MODE = True
+
+  BUILDER_CONFIG_NAMES_TO_TEST = ['human_images_dc29b40a']
+
+  DL_EXTRACT_RESULT = {'file_path': 'human_images_dc29b40a'}
+  DL_DOWNLOAD_RESULT = {'file_path': 'human_images_dc29b40a'}
+
+
 class RobosuitePandaPickPlaceCanSyntheticTest(
     tfds.testing.DatasetBuilderTestCase):
   """Tests for robosuite_panda_pick_place_can dataset."""
