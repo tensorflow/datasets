@@ -308,6 +308,11 @@ toc:
     title: xquad
   title: Question answering
 - section:
+  - path: /datasets/catalog/istella
+    status: nightly
+    title: istella
+  title: Ranking
+- section:
   - path: /datasets/catalog/rlu_atari
     title: rlu_atari
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few

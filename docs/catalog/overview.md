@@ -191,6 +191,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`web_questions`](web_questions.md)
 *   [`xquad`](xquad.md)
 
+### `Ranking`
+
+*   [`istella`](istella.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Rl unplugged`
 
 *   [`rlu_atari`](rlu_atari.md)
