@@ -13,5 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Ranking datasets."""
-from tensorflow_datasets.ranking.istella import Istella
+"""istella dataset."""
+
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.ranking.istella import istella
+
+
+class IstellaTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for istella dataset."""
+  DATASET_CLASS = istella.Istella
+  SPLITS = {
+      'train': 2,  # Number of fake train example
+      'test': 2,  # Number of fake test example
+  }
+  BUILDER_CONFIG_NAMES_TO_TEST = ['main']
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()

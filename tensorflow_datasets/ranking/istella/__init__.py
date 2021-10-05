@@ -13,5 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Ranking datasets."""
-from tensorflow_datasets.ranking.istella import Istella
+"""istella dataset."""
+
+from tensorflow_datasets.ranking.istella.istella import Istella
