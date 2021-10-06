@@ -55,18 +55,9 @@ ds = tfds.load("istella")
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Features**:
 
@@ -330,6 +321,41 @@ FeaturesDict({
 
 ## istella/main (default config)
 
+*   **Download size**: `1.20 GiB`
+
+*   **Dataset size**: `8.77 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 9,799
+`'train'` | 23,219
+
 ## istella/s
 
+*   **Download size**: `450.26 MiB`
+
+*   **Dataset size**: `2.97 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,562
+`'train'` | 19,245
+`'vali'`  | 7,211
+
 ## istella/x
+
+*   **Download size**: `4.42 GiB`
+
+*   **Dataset size**: `22.11 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
