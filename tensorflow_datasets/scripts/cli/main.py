@@ -38,6 +38,7 @@ import tensorflow_datasets.public_api as tfds
 # Import commands
 from tensorflow_datasets.scripts.cli import build
 from tensorflow_datasets.scripts.cli import new
+from tensorflow_datasets.scripts.cli import list as list_
 
 FLAGS = flags.FLAGS
 
@@ -59,6 +60,7 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
   subparser = parser.add_subparsers(title='command')
   build.register_subparser(subparser)
   new.register_subparser(subparser)
+  list_.register_subparser(subparser)
   return parser.parse_args(argv[1:])
 
 
