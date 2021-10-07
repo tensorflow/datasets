@@ -15,15 +15,13 @@ import itertools
 import os
 import sys
 
-import pkg_resources
 from setuptools import find_packages
 from setuptools import setup
 
+nightly = False
 if '--nightly' in sys.argv:
   nightly = True
   sys.argv.remove('--nightly')
-else:
-  nightly = False
 
 project_name = 'tensorflow-datasets'
 
@@ -35,22 +33,22 @@ from version import __version__  # pytype: disable=import-error  # pylint: disab
 
 if nightly:
   project_name = 'tfds-nightly'
-  # Version as `X.Y.Z.dev199912312459`
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
-  curr_version = pkg_resources.parse_version(__version__)
-  __version__ = f'{curr_version.base_version}.dev{datestring}'
+  __version__ += 'dev%s' % datestring
 
 
 DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
+    'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'dm-tree',
     'future',
     'numpy',
     'promise',
-    'protobuf>=3.12.2',
+    'protobuf>=3.6.1',
     'requests>=2.19.0',
     'six',
     'tensorflow-metadata',
@@ -58,33 +56,32 @@ REQUIRED_PKGS = [
     'tqdm',
     # Standard library backports
     'dataclasses;python_version<"3.7"',
-    'typing_extensions;python_version<"3.8"',
     'importlib_resources;python_version<"3.9"',
 ]
 
 TESTS_REQUIRE = [
     'jupyter',
+    'mako',
     'pytest',
     'pytest-xdist',
     # Lazy-deps required by core
     'pandas',
     'pydub',
     'apache_beam',
+    # TFDV is only available for Python 3.6
+    'tensorflow-data-validation;python_version<"3.7"',
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
-    # Required by scripts/documentation/
-    'pyyaml',
 ]
 
 # Additional deps for formatting
 DEV_REQUIRE = [
-    'pylint>=2.6.0',
+    'pylint>=2.5.3',
     'yapf',
 ]
 
 # Static files needed by datasets.
 DATASET_FILES = [
-    'graphs/ogbg_molpcba/ogbg_molpcba_tasks.txt',
     'image_classification/caltech101_labels.txt',
     'image_classification/categories_places365.txt',
     'image_classification/cbis_ddsm_calc_distributions.txt',
@@ -108,26 +105,23 @@ DATASET_FILES = [
     'image_classification/sun397_tfds_te.txt',
     'image_classification/sun397_tfds_tr.txt',
     'image_classification/sun397_tfds_va.txt',
+    'image_classification/vgg_face2_labels.txt',
     'object_detection/open_images_classes_all.txt',
     'object_detection/open_images_classes_boxable.txt',
     'object_detection/open_images_classes_trainable.txt',
-    'video/tao/labels.txt',
     'video/ucf101_labels.txt',
-    'video/youtube_vis/labels.txt',
 ]
 
 # Extra dependencies required by specific datasets
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
-    'c4': ['apache_beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
+    'c4': ['apache_beam', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
-    'duke_ultrasound': ['scipy'],
-    'eurosat': ['scikit-image', 'tifffile', 'imagecodecs'],
+    'eurosat': ['scikit-image',],
     'groove': ['pretty_midi', 'pydub'],
-    'gtzan': ['pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
@@ -136,24 +130,24 @@ DATASET_EXTRAS = {
         'scipy'
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
-    'lsun': ['tensorflow-io'],
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     # See https://github.com/librosa/librosa/issues/1160
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
-    'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
-    'robosuite_panda_pick_place_can': ['envlogger'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
+    'duke_ultrasound': ['scipy'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
+    'lsun': ['tensorflow-io'],
+    'pathVQA' : ['json', 'random'],
 }
 
 
 # Those datasets have dependencies which conflict with the rest of TFDS, so
-# running them in an isolated environments.
+# running them in an isolated environements.
 # See `./oss_scripts/oss_tests.sh` for the isolated test.
 ISOLATED_DATASETS = ('nsynth', 'lsun')
 
@@ -166,7 +160,8 @@ all_dataset_extras = list(itertools.chain.from_iterable(
 
 EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
-    'tensorflow': ['tensorflow>=2.1'],
+    'tensorflow': ['tensorflow>=1.15.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
     'tensorflow-data-validation': ['tensorflow-data-validation'],
 
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
@@ -189,7 +184,6 @@ setup(
     packages=find_packages(),
     package_data={
         'tensorflow_datasets': DATASET_FILES + [
-            'core/utils/colormap.csv',
             'scripts/documentation/templates/*',
             'url_checksums/*',
             'checksums.tsv',
