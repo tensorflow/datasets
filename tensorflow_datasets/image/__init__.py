@@ -34,6 +34,7 @@ from tensorflow_datasets.image.flic import Flic
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.nyu_depth_v2 import NyuDepthV2
+from tensorflow_datasets.image.pass_dataset import PASS
 from tensorflow_datasets.image.s3o4d import S3o4d
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
@@ -84,7 +85,6 @@ from tensorflow_datasets.image_classification.mnist_corrupted import MNISTCorrup
 from tensorflow_datasets.image_classification.omniglot import Omniglot
 from tensorflow_datasets.image_classification.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image_classification.oxford_iiit_pet import OxfordIIITPet
-from tensorflow_datasets.image_classification.pass_dataset import PASS
 from tensorflow_datasets.image_classification.patch_camelyon import PatchCamelyon
 from tensorflow_datasets.image_classification.pet_finder import PetFinder
 from tensorflow_datasets.image_classification.places365_small import Places365Small
