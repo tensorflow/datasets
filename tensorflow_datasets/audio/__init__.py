@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 
 """Audio datasets."""
 
+from tensorflow_datasets.audio.accentdb import Accentdb
 from tensorflow_datasets.audio.commonvoice import CommonVoice
 from tensorflow_datasets.audio.commonvoice import CommonVoiceConfig
 from tensorflow_datasets.audio.crema_d import CremaD
@@ -24,7 +25,6 @@ from tensorflow_datasets.audio.groove import Groove
 from tensorflow_datasets.audio.gtzan import GTZAN
 from tensorflow_datasets.audio.gtzan_music_speech import GTZANMusicSpeech
 from tensorflow_datasets.audio.librispeech import Librispeech
-from tensorflow_datasets.audio.librispeech import LibrispeechConfig
 from tensorflow_datasets.audio.libritts import Libritts
 from tensorflow_datasets.audio.ljspeech import Ljspeech
 from tensorflow_datasets.audio.nsynth import Nsynth

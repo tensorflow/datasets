@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ from tensorflow_datasets.image_classification.geirhos_conflict_stimuli import Ge
 from tensorflow_datasets.image_classification.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image_classification.imagenet import Imagenet2012
 from tensorflow_datasets.image_classification.imagenet2012_corrupted import Imagenet2012Corrupted
+from tensorflow_datasets.image_classification.imagenet2012_multilabel import Imagenet2012Multilabel
 from tensorflow_datasets.image_classification.imagenet2012_real import Imagenet2012Real
 from tensorflow_datasets.image_classification.imagenet2012_subset import Imagenet2012Subset
 from tensorflow_datasets.image_classification.imagenet_a import ImagenetA
@@ -73,6 +74,7 @@ from tensorflow_datasets.image_classification.plantae_k import PlantaeK
 from tensorflow_datasets.image_classification.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image_classification.resisc45 import Resisc45
 from tensorflow_datasets.image_classification.rock_paper_scissors import RockPaperScissors
+from tensorflow_datasets.image_classification.siscore import Siscore
 from tensorflow_datasets.image_classification.smallnorb import Smallnorb
 from tensorflow_datasets.image_classification.so2sat import So2sat
 from tensorflow_datasets.image_classification.stanford_dogs import StanfordDogs
@@ -81,5 +83,4 @@ from tensorflow_datasets.image_classification.stl10 import Stl10
 from tensorflow_datasets.image_classification.sun import Sun397
 from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
-from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon

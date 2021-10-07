@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -44,7 +44,7 @@ High-quality version of the CELEBA
 dataset, consisting of 30000 images in 1024 x 1024 resolution.
 
 Note: CelebAHQ dataset may contain potential bias. The fairness indicators
-[example](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb)
+[example](https://www.tensorflow.org/responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_TFCO_CelebA_Case_Study)
 goes into detail about several considerations to keep in mind while using the
 CelebAHQ dataset.
 
@@ -63,13 +63,15 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         1024.
       **kwargs: keyword arguments forwarded to super.
     """
-    v2 = tfds.core.Version(
-        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+    v2 = tfds.core.Version("2.0.0")
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
         version=v2,
+        release_notes={
+            "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.resolution = resolution
     self.file_name = "data%dx%d.tar" % (resolution, resolution)
@@ -84,8 +86,6 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
   Detailed instructions are here:
   https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
   """
-
-  VERSION = tfds.core.Version("0.1.0")
 
   BUILDER_CONFIGS = [
       CelebaHQConfig(resolution=1024),
@@ -105,15 +105,16 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(
-                    shape=(self.builder_config.resolution,
-                           self.builder_config.resolution, 3),
-                    encoding_format="png"),
-            "image/filename":
-                tfds.features.Text(),
-        },),
+        features=tfds.features.FeaturesDict(
+            {
+                "image":
+                    tfds.features.Image(
+                        shape=(self.builder_config.resolution,
+                               self.builder_config.resolution, 3),
+                        encoding_format="png"),
+                "image/filename":
+                    tfds.features.Text(),
+            },),
         homepage="https://github.com/tkarras/progressive_growing_of_gans",
         citation=_CITATION,
     )

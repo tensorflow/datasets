@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """PG-19 language modeling dataset."""
 
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -44,7 +44,7 @@ stored in metadata.csv which contains
 (book_id, short_book_title, publication_date, book_link).
 """
 
-_DATA_DIR = tfds.core.gcs_path('gs://deepmind-gutenberg')
+_DATA_DIR = tfds.core.as_path('gs://deepmind-gutenberg')
 
 
 class Pg19(tfds.core.GeneratorBasedBuilder):
@@ -87,19 +87,22 @@ class Pg19(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'metadata': metadata_dict,
-                'filepath': os.path.join(_DATA_DIR, 'train')},
+                'filepath': os.path.join(_DATA_DIR, 'train')
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'metadata': metadata_dict,
-                'filepath': os.path.join(_DATA_DIR, 'validation')},
+                'filepath': os.path.join(_DATA_DIR, 'validation')
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'metadata': metadata_dict,
-                'filepath': os.path.join(_DATA_DIR, 'test')},
+                'filepath': os.path.join(_DATA_DIR, 'test')
+            },
         ),
     ]
 

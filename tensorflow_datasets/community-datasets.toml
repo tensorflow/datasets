@@ -1,0 +1,4 @@
+[Namespaces]
+# You can add your own datasets here to register them in TFDS. See details
+# at: https://www.tensorflow.org/datasets/community
+huggingface = "github://huggingface/datasets/tree/master/datasets"

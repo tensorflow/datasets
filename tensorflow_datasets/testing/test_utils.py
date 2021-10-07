@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,28 +16,21 @@
 """Test utilities."""
 
 import contextlib
-import functools
 import io
 import os
 import subprocess
 import tempfile
-from typing import Iterator
+from typing import Any, Iterator
+from unittest import mock
 
-from absl.testing import absltest
-
-import dill
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.core import example_parser
-from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import splits
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.testing import test_case
 
 
 @contextlib.contextmanager
@@ -115,24 +108,30 @@ class MockFs(object):
       yield self
 
   def add_file(self, path, content=None) -> None:
+    path = os.fspath(path)
     content = 'Content of {}'.format(path) if content is None else content
     self.files[path] = content
 
   def _list_directory(self, path):
+    path = os.fspath(path)
     path = path.rstrip(os.path.sep) + os.path.sep  # Make sure path is a `dir/`
     return list({
         # Extract `path/<dirname>/...` -> `<dirname>`
         os.path.relpath(p, path).split(os.path.sep)[0]
-        for p in self.files if p.startswith(path)
+        for p in self.files
+        if p.startswith(path)
     })
 
   @contextlib.contextmanager
   def _open(self, path, mode='r'):
     """Patch `tf.io.gfile.GFile`."""
+    path = os.fspath(path)
     if mode.startswith('w'):
       self.add_file(path, '')
     is_binary = 'b' in mode
 
+    if path not in self.files:
+      raise FileNotFoundError(f'File {path} does not exists.')
     content = self.files[path]
     if is_binary:
       fobj = io.BytesIO(content.encode('utf-8'))
@@ -146,6 +145,8 @@ class MockFs(object):
     self.files[path] = new_content.decode('utf-8') if is_binary else new_content  # pytype: disable=attribute-error
 
   def _rename(self, from_, to, overwrite=False):
+    from_ = os.fspath(from_)
+    to = os.fspath(to)
     if not overwrite and to in self.files:
       raise FileExistsError('Cannot overwrite: {} -> {}'.format(from_, to))  # pytype: disable=name-error
     if from_ not in self.files:
@@ -154,6 +155,7 @@ class MockFs(object):
 
   def _exists(self, path: str) -> bool:
     """Returns True, if any file/directory exists."""
+    path = os.fspath(path)
     path = path.rstrip(os.path.sep)  # Normalize path
     # Check full path existence
     if path in self.files:
@@ -165,9 +167,8 @@ class MockFs(object):
     return False
 
   def mock(self):
-    return absltest.mock.patch.object(
-        tf.io,
-        'gfile',
+    return mock_tf(
+        'tf.io.gfile',
         exists=self._exists,
         makedirs=lambda _: None,
         # Used to get name of file as downloaded:
@@ -177,69 +178,45 @@ class MockFs(object):
     )
 
 
-class FeatureExpectationItem(object):
-  """Test item of a FeatureExpectation."""
+@contextlib.contextmanager
+def mock_tf(symbol_name: str, *args: Any, **kwargs: Any) -> Iterator[None]:
+  """Patch TF API.
 
-  def __init__(
-      self,
-      value,
-      expected=None,
-      expected_serialized=None,
-      decoders=None,
-      dtype=None,
-      shape=None,
-      raise_cls=None,
-      raise_msg=None):
-    self.value = value
-    self.expected = expected
-    self.expected_serialized = expected_serialized
-    self.decoders = decoders
-    self.dtype = dtype
-    self.shape = shape
-    if not decoders and (dtype is not None or shape is not None):
-      raise ValueError('dtype and shape should only be set with transform')
-    self.raise_cls = raise_cls
-    self.raise_msg = raise_msg
+  This function is similar to `mock.patch.object`, but patch both
+  `tf.Xyz` and `tf.compat.v2.Xyz`.
 
+  Args:
+    symbol_name: Symbol to patch (e.g. `tf.io.gfile`)
+    *args: Arguments to forward to `mock.patch.object`
+    **kwargs: Arguments to forward to `mock.patch.object`
 
-class SubTestCase(test_case.TestCase):
-  """Adds subTest() context manager to the TestCase if supported.
-
-  Note: To use this feature, make sure you call super() in setUpClass to
-  initialize the sub stack.
+  Yields:
+    None
   """
+  # pylint: disable=g-import-not-at-top,reimported
+  import tensorflow as tf_lib1
+  import tensorflow as tf_lib2
+  # pylint: enable=g-import-not-at-top,reimported
 
-  @classmethod
-  def setUpClass(cls):
-    super(SubTestCase, cls).setUpClass()
-    cls._sub_test_stack = []
+  tf_symbol, *tf_submodules, symbol_name = symbol_name.split('.')
+  if tf_symbol != 'tf':
+    raise ValueError('Symbol name to patch should start by `tf`.')
 
-  @contextlib.contextmanager
-  def _subTest(self, test_str):
-    self._sub_test_stack.append(test_str)
-    sub_test_str = '/'.join(self._sub_test_stack)
-    with self.subTest(sub_test_str):
-      yield
-    self._sub_test_stack.pop()
-
-  def assertAllEqualNested(self, d1, d2):
-    """Same as assertAllEqual but compatible with nested dict."""
-    if isinstance(d1, dict):
-      # assertAllEqual do not works well with dictionaries so assert
-      # on each individual elements instead
-      zipped_examples = utils.zip_nested(d1, d2, dict_only=True)
-      utils.map_nested(
-          lambda x: self.assertAllEqual(x[0], x[1]),
-          zipped_examples,
-          dict_only=True,
-      )
-    else:
-      self.assertAllEqual(d1, d2)
+  with contextlib.ExitStack() as stack:
+    # Patch both `tf` and `tf.compat.v2`
+    for tf_lib in (tf_lib1, tf_lib2):
+      # Recursivelly load the submodules/subobjects (e.g. `tf.io.gfile`)
+      module = tf_lib
+      for submodule in tf_submodules:
+        module = getattr(module, submodule)
+      getattr(module, symbol_name)  # Trigger the lazy-loading of the TF API.
+      # Patch the module/object
+      stack.enter_context(
+          mock.patch.object(module, symbol_name, *args, **kwargs))
+    yield
 
 
-def run_in_graph_and_eager_modes(func=None,
-                                 config=None,
-                                 use_gpu=True):
+def run_in_graph_and_eager_modes(func=None, config=None, use_gpu=True):
   """Execute the decorated test in both graph mode and eager mode.
 
   This function returns a decorator intended to be applied to test methods in
@@ -312,219 +289,6 @@ def run_in_graph_and_eager_modes(func=None,
   return decorator
 
 
-class RaggedConstant(object):
-  """Container of tf.ragged.constant values.
-
-  This simple wrapper forward the arguments to delay the RaggedTensor
-  construction after `@run_in_graph_and_eager_modes` has been called.
-  This is required to avoid incompabilities between Graph/eager.
-  """
-
-  def __init__(self, *args, **kwargs):
-    self._args = args
-    self._kwargs = dict(kwargs)
-
-  def build(self):
-    return tf.ragged.constant(*self._args, **self._kwargs)
-
-
-class FeatureExpectationsTestCase(SubTestCase):
-  """Tests FeatureExpectations with full encode-decode."""
-
-  @run_in_graph_and_eager_modes()
-  def assertFeature(
-      self,
-      feature,
-      shape,
-      dtype,
-      tests,
-      serialized_info=None,
-      skip_feature_tests=False,
-      test_attributes=None):
-    """Test the given feature against the predicates."""
-
-    with self._subTest('feature'):
-      self._assert_feature(
-          feature=feature,
-          shape=shape,
-          dtype=dtype,
-          tests=tests,
-          serialized_info=serialized_info,
-          skip_feature_tests=skip_feature_tests,
-          test_attributes=test_attributes,
-      )
-    # TODO(tfds): Remove `skip_feature_tests` after text encoders are removed
-    if not skip_feature_tests:
-      # Test the feature again to make sure that feature restored from config
-      # behave similarly.
-      with self._subTest('feature_roundtrip'):
-        with tmp_dir() as config_dir:
-          feature.save_config(config_dir)
-          new_feature = feature.from_config(config_dir)
-        self._assert_feature(
-            feature=new_feature,
-            shape=shape,
-            dtype=dtype,
-            tests=tests,
-            serialized_info=serialized_info,
-            skip_feature_tests=skip_feature_tests,
-            test_attributes=test_attributes,
-        )
-
-  def _assert_feature(
-      self,
-      feature,
-      shape,
-      dtype,
-      tests,
-      serialized_info=None,
-      skip_feature_tests=False,
-      test_attributes=None):
-    with self._subTest('shape'):
-      self.assertEqual(feature.shape, shape)
-    with self._subTest('dtype'):
-      self.assertEqual(feature.dtype, dtype)
-
-    # Check the serialized features
-    if serialized_info:
-      with self._subTest('serialized_info'):
-        self.assertEqual(
-            serialized_info,
-            feature.get_serialized_info(),
-        )
-
-    if not skip_feature_tests and test_attributes:
-      for key, value in test_attributes.items():
-        self.assertEqual(getattr(feature, key), value)
-
-    # Create the feature dict
-    fdict = features.FeaturesDict({'inner': feature})
-
-    for i, test in enumerate(tests):
-      with self._subTest(str(i)):
-        self.assertFeatureTest(
-            fdict=fdict,
-            test=test,
-            feature=feature,
-            shape=shape,
-            dtype=dtype,
-        )
-
-  def assertFeatureTest(self, fdict, test, feature, shape, dtype):
-    """Test that encode=>decoding of a value works correctly."""
-    # test feature.encode_example can be pickled and unpickled for beam.
-    dill.loads(dill.dumps(feature.encode_example))
-
-    input_value = {'inner': test.value}
-
-    if test.raise_cls is not None:
-      with self._subTest('raise'):
-        if not test.raise_msg:
-          raise ValueError(
-              'test.raise_msg should be set with {} for test {}'.format(
-                  test.raise_cls, type(feature)))
-        with self.assertRaisesWithPredicateMatch(
-            test.raise_cls, test.raise_msg):
-          features_encode_decode(fdict, input_value, decoders=test.decoders)
-    else:
-      # Test the serialization only
-      if test.expected_serialized is not None:
-        with self._subTest('out_serialize'):
-          self.assertEqual(
-              test.expected_serialized,
-              feature.encode_example(test.value),
-          )
-
-      # Test serialization + decoding from disk
-      with self._subTest('out'):
-        out_tensor, out_numpy = features_encode_decode(
-            fdict,
-            input_value,
-            decoders={'inner': test.decoders},
-        )
-        out_tensor = out_tensor['inner']
-        out_numpy = out_numpy['inner']
-
-        # Assert the returned type match the expected one
-        with self._subTest('dtype'):
-          out_dtypes = tf.nest.map_structure(lambda s: s.dtype, out_tensor)
-          self.assertEqual(out_dtypes, test.dtype or feature.dtype)
-        with self._subTest('shape'):
-          # For shape, because (None, 3) match with (5, 3), we use
-          # tf.TensorShape.assert_is_compatible_with on each of the elements
-          expected_shape = feature.shape if test.shape is None else test.shape
-          out_shapes = utils.zip_nested(out_tensor, expected_shape)
-          utils.map_nested(
-              lambda x: x[0].shape.assert_is_compatible_with(x[1]),
-              out_shapes
-          )
-
-        # Assert value
-        with self._subTest('out_value'):
-          # Eventually construct the tf.RaggedTensor
-          expected = tf.nest.map_structure(
-              lambda t: t.build() if isinstance(t, RaggedConstant) else t,
-              test.expected)
-          self.assertAllEqualNested(out_numpy, expected)
-
-        # Assert the HTML representation works
-        if not test.decoders:
-          with self._subTest('repr'):
-            self._test_repr(feature, out_numpy)
-
-  def _test_repr(
-      self,
-      feature: features.FeatureConnector,
-      out_numpy: np.ndarray,
-  ) -> None:
-    """Test that the HTML repr works."""
-    # pylint: disable=protected-access
-    flat_example = feature._flatten(out_numpy)
-    flat_features = feature._flatten(feature)
-    flat_serialized_info = feature._flatten(feature.get_serialized_info())
-    # pylint: enable=protected-access
-    for ex, f, spec in zip(flat_example, flat_features, flat_serialized_info):
-      # Features with multi-data not supported
-      if isinstance(spec, dict):
-        continue
-      elif spec.sequence_rank == 0:
-        text = f.repr_html(ex)
-      elif spec.sequence_rank == 1:
-        text = f.repr_html_batch(ex)
-      elif spec.sequence_rank > 1:
-        text = f.repr_html_ragged(ex)
-      self.assertIsInstance(text, str)
-
-
-def features_encode_decode(features_dict, example, decoders):
-  """Runs the full pipeline: encode > write > tmp files > read > decode."""
-  # Encode example
-  encoded_example = features_dict.encode_example(example)
-
-  # Serialize/deserialize the example
-  specs = features_dict.get_serialized_info()
-  serializer = example_serializer.ExampleSerializer(specs)
-  parser = example_parser.ExampleParser(specs)
-
-  serialized_example = serializer.serialize_example(encoded_example)
-  ds = tf.data.Dataset.from_tensors(serialized_example)
-  ds = ds.map(parser.parse_example)
-
-  # Decode the example
-  decode_fn = functools.partial(
-      features_dict.decode_example,
-      decoders=decoders,
-  )
-  ds = ds.map(decode_fn)
-
-  if tf.executing_eagerly():
-    out_tensor = next(iter(ds))
-  else:
-    out_tensor = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
-  out_numpy = dataset_utils.as_numpy(out_tensor)
-  return out_tensor, out_numpy
-
-
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 
@@ -547,14 +311,10 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [
-        splits.SplitGenerator(
-            name=splits.Split.TRAIN,
-            gen_kwargs={'range_': range(20)}),
-        splits.SplitGenerator(
-            name=splits.Split.TEST,
-            gen_kwargs={'range_': range(20, 30)}),
-    ]
+    return {
+        'train': self._generate_examples(range_=range(20)),
+        'test': self._generate_examples(range_=range(20, 30)),
+    }
 
   def _generate_examples(self, range_):
     for i in range_:
@@ -577,14 +337,10 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    return [
-        splits.SplitGenerator(
-            name=splits.Split.TRAIN,
-            gen_kwargs=dict()),
-        splits.SplitGenerator(
-            name=splits.Split.TEST,
-            gen_kwargs=dict()),
-    ]
+    return {
+        'train': self._generate_examples(),
+        'test': self._generate_examples(),
+    }
 
   def _generate_examples(self):
     for i in range(20):
@@ -594,9 +350,45 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
       }
 
 
+class DummyDataset(
+    dataset_builder.GeneratorBasedBuilder,
+    skip_registration=True,
+):
+  """Minimal DatasetBuilder."""
+
+  VERSION = utils.Version('1.0.0')
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({
+            'id': tf.int64,
+        }),
+        supervised_keys=('id', 'id'),
+        description='Minimal DatasetBuilder.',
+    )
+
+  def _split_generators(self, dl_manager):
+    del dl_manager
+    return {
+        'train': self._generate_examples(),
+    }
+
+  def _generate_examples(self):
+    for i in range(3):
+      yield i, {'id': i}
+
+
+class DummyBeamDataset(DummyDataset, skip_registration=True):
+  """Minimal beam DatasetBuilder."""
+
+  def _generate_examples(self):
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    return beam.Create(list(range(3))) | beam.Map(lambda i: (i, {'id': i}))
+
+
 def test_main():
   """Entrypoint for tests."""
-  tf.enable_v2_behavior()
   tf.test.main()
 
 
@@ -625,7 +417,7 @@ def mock_kaggle_api(err_msg=None):
       f.write(competition_or_dataset)
     return 'Downloading {} to {}'.format(competition_or_dataset, fpath)
 
-  with absltest.mock.patch('subprocess.check_output', check_output):
+  with mock.patch('subprocess.check_output', check_output):
     yield
 
 
@@ -647,3 +439,30 @@ class DummyParser(object):
 
   def parse_example(self, ex):
     return ex
+
+
+def assert_features_equal(features0, features1) -> None:
+  """Asserts that the 2 nested FeatureConnector structure match."""
+  _assert_features_equal(
+      features.features_dict.to_feature(features0),
+      features.features_dict.to_feature(features1),
+  )
+
+
+def _assert_features_equal(features0, features1) -> None:
+  tf.nest.map_structure(_assert_feature_equal, features0, features1)
+
+
+def _assert_feature_equal(feature0, feature1):
+  """Assert that 2 features are equals."""
+  assert type(feature0) == type(feature1)  # pylint: disable=unidiomatic-typecheck
+  assert repr(feature0) == repr(feature1)
+  assert feature0.shape == feature1.shape
+  assert feature0.dtype == feature1.dtype
+  if isinstance(feature0, features.FeaturesDict):
+    _assert_features_equal(dict(feature0), dict(feature1))
+  if isinstance(feature0, features.Sequence):
+    assert feature0._length == feature1._length  # pylint: disable=protected-access
+    _assert_features_equal(feature0.feature, feature1.feature)
+  if isinstance(feature0, features.ClassLabel):
+    assert feature0.names == feature1.names

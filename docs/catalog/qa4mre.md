@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="qa4mre" />
   <meta itemprop="description" content="QA4MRE dataset was created for the CLEF 2011/2012/2013 shared tasks to promote research in &#10;question answering and reading comprehension. The dataset contains a supporting &#10;passage and a set of questions corresponding to the passage. Multiple options &#10;for answers are provided for each question, of which only one is correct. The &#10;training and test datasets are available for the main track.&#10;Additional gold standard documents are available for two pilot studies: one on &#10;alzheimers data, and the other on entrance exams data.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;qa4mre&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/qa4mre" />
@@ -11,6 +10,7 @@
 </div>
 
 # `qa4mre`
+
 
 *   **Description**:
 
@@ -62,6 +62,10 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -88,21 +92,10 @@ isbn="978-3-642-40802-1"
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
-
 ## qa4mre/2011.main.DE (default config)
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for DE language in 2011 year.
+*   **Config description**: This configuration includes the main track for DE
+    language in 2011 year.
 
 *   **Dataset size**: `1.69 MiB`
 
@@ -112,17 +105,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 120
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2011.main.DE-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2011.main.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for EN language in 2011 year.
+*   **Config description**: This configuration includes the main track for EN
+    language in 2011 year.
 
 *   **Dataset size**: `1.52 MiB`
 
@@ -132,17 +152,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 120
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2011.main.EN-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2011.main.ES
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for ES language in 2011 year.
+*   **Config description**: This configuration includes the main track for ES
+    language in 2011 year.
 
 *   **Dataset size**: `1.64 MiB`
 
@@ -152,17 +199,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 120
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2011.main.ES-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2011.main.IT
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for IT language in 2011 year.
+*   **Config description**: This configuration includes the main track for IT
+    language in 2011 year.
 
 *   **Dataset size**: `1.61 MiB`
 
@@ -172,17 +246,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 120
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2011.main.IT-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2011.main.RO
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for RO language in 2011 year.
+*   **Config description**: This configuration includes the main track for RO
+    language in 2011 year.
 
 *   **Dataset size**: `1.68 MiB`
 
@@ -192,17 +293,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 120
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2011.main.RO-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2012.main.AR
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for AR language in 2012 year.
+*   **Config description**: This configuration includes the main track for AR
+    language in 2012 year.
 
 *   **Dataset size**: `2.62 MiB`
 
@@ -212,17 +340,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 160
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2012.main.AR-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2012.main.BG
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for BG language in 2012 year.
+*   **Config description**: This configuration includes the main track for BG
+    language in 2012 year.
 
 *   **Dataset size**: `3.33 MiB`
 
@@ -232,17 +387,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 160
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2012.main.BG-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2012.main.DE
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for DE language in 2012 year.
+*   **Config description**: This configuration includes the main track for DE
+    language in 2012 year.
 
 *   **Dataset size**: `2.02 MiB`
 
@@ -252,17 +434,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 160
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2012.main.DE-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2012.main.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for EN language in 2012 year.
+*   **Config description**: This configuration includes the main track for EN
+    language in 2012 year.
 
 *   **Dataset size**: `1.71 MiB`
 
@@ -272,17 +481,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 160
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2012.main.EN-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2012.main.ES
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for ES language in 2012 year.
+*   **Config description**: This configuration includes the main track for ES
+    language in 2012 year.
 
 *   **Dataset size**: `1.99 MiB`
 
@@ -292,17 +528,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 160
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2012.main.ES-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2012.main.IT
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for IT language in 2012 year.
+*   **Config description**: This configuration includes the main track for IT
+    language in 2012 year.
 
 *   **Dataset size**: `2.01 MiB`
 
@@ -311,18 +574,45 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 160
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2012.main.IT-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## qa4mre/2012.main.RO
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for RO language in 2012 year.
+*   **Config description**: This configuration includes the main track for RO
+    language in 2012 year.
 
 *   **Dataset size**: `2.01 MiB`
 
@@ -332,17 +622,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 160
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2012.main.RO-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2012.alzheimers.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the alzheimers
-    track for EN language in 2012 year.
+*   **Config description**: This configuration includes the alzheimers track for
+    EN language in 2012 year.
 
 *   **Dataset size**: `1.57 MiB`
 
@@ -352,17 +669,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 40
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2012.alzheimers.EN-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2013.main.AR
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for AR language in 2013 year.
+*   **Config description**: This configuration includes the main track for AR
+    language in 2013 year.
 
 *   **Dataset size**: `4.04 MiB`
 
@@ -372,17 +716,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 284
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2013.main.AR-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2013.main.BG
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for BG language in 2013 year.
+*   **Config description**: This configuration includes the main track for BG
+    language in 2013 year.
 
 *   **Dataset size**: `5.21 MiB`
 
@@ -392,17 +763,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 284
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2013.main.BG-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2013.main.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for EN language in 2013 year.
+*   **Config description**: This configuration includes the main track for EN
+    language in 2013 year.
 
 *   **Dataset size**: `2.81 MiB`
 
@@ -412,17 +810,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 284
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2013.main.EN-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2013.main.ES
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for ES language in 2013 year.
+*   **Config description**: This configuration includes the main track for ES
+    language in 2013 year.
 
 *   **Dataset size**: `3.35 MiB`
 
@@ -432,17 +857,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 284
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2013.main.ES-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2013.main.RO
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the main track
-    for RO language in 2013 year.
+*   **Config description**: This configuration includes the main track for RO
+    language in 2013 year.
 
 *   **Dataset size**: `3.26 MiB`
 
@@ -452,17 +904,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 284
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2013.main.RO-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2013.alzheimers.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the alzheimers
-    track for EN language in 2013 year.
+*   **Config description**: This configuration includes the alzheimers track for
+    EN language in 2013 year.
 
 *   **Dataset size**: `2.50 MiB`
 
@@ -472,17 +951,44 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 40
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2013.alzheimers.EN-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## qa4mre/2013.entrance_exam.EN
 
-*   **Config description**: QA4MRE dataset was created for the CLEF
-    2011/2012/2013 shared tasks to promote research in question answering and
-    reading comprehension. The dataset contains a supporting passage and a set
-    of questions corresponding to the passage. Multiple options for answers are
-    provided for each question, of which only one is correct. The training and
-    test datasets are available for the main track. Additional gold standard
-    documents are available for two pilot studies: one on alzheimers data, and
-    the other on entrance exams data. This configuration includes the
-    entrance_exam track for EN language in 2013 year.
+*   **Config description**: This configuration includes the entrance_exam track
+    for EN language in 2013 year.
 
 *   **Dataset size**: `186.01 KiB`
 
@@ -491,3 +997,37 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 46
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/qa4mre-2013.entrance_exam.EN-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

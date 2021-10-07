@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,34 +15,141 @@
 
 """Image feature."""
 
-import json
+import dataclasses
 import os
+import tempfile
+from typing import Any, List, Optional
 
 import numpy as np
-import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
-from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
+PilImage = Any  # Require lazy deps.
 
-ENCODE_FN = {
+_ENCODE_FN = {
     'png': tf.image.encode_png,
     'jpeg': tf.image.encode_jpeg,
 }
 
-ACCEPTABLE_CHANNELS = {
-    'png': (0, 1, 2, 3),
+_ACCEPTABLE_CHANNELS = {
+    'png': (0, 1, 2, 3, 4),
     'jpeg': (0, 1, 3),
 }
 
-ACCEPTABLE_DTYPES = {
-    'png': [tf.uint8, tf.uint16],
+_ACCEPTABLE_DTYPES = {
+    'png': [tf.uint8, tf.uint16, tf.float32],
     'jpeg': [tf.uint8],
+    None: [tf.uint8, tf.uint16, tf.float32],
 }
+
+THUMBNAIL_SIZE = 128
+
+# Framerate for the `tfds.as_dataframe` visualization
+# Could add a framerate kwargs in __init__ to allow datasets to customize
+# the output.
+_VISU_FRAMERATE = 10
+
+
+@dataclasses.dataclass
+class _ImageEncoder:
+  """Utils which encode/decode images."""
+  shape: utils.Shape
+  dtype: tf.dtypes.DType
+  encoding_format: Optional[str]
+
+  # TODO(tfds): Should deprecate the TFGraph runner in favor of simpler
+  # implementation
+  @utils.memoized_property
+  def _runner(self) -> utils.TFGraphRunner:
+    return utils.TFGraphRunner()
+
+  def encode_image_or_path(self, image_or_path_or_fobj):
+    """Convert the given image into a dict convertible to tf example."""
+    if isinstance(image_or_path_or_fobj, np.ndarray):
+      encoded_image = self._encode_image(image_or_path_or_fobj)
+    elif isinstance(image_or_path_or_fobj, type_utils.PathLikeCls):
+      image_or_path_or_fobj = os.fspath(image_or_path_or_fobj)
+      with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
+        encoded_image = image_f.read()
+    elif isinstance(image_or_path_or_fobj, bytes):
+      encoded_image = image_or_path_or_fobj
+    else:
+      encoded_image = image_or_path_or_fobj.read()
+    # If encoding is explicitly set, should verify that bytes match encoding.
+    return encoded_image
+
+  def _encode_image(self, np_image: np.ndarray) -> bytes:
+    """Returns np_image encoded as jpeg or png."""
+    _validate_np_array(np_image, shape=self.shape, dtype=self.dtype)
+
+    # When encoding isn't defined, default to PNG.
+    # Should we be more strict about explicitly define the encoding (raise
+    # error / warning instead) ?
+    # It has created subtle issues for imagenet_corrupted: images are read as
+    # JPEG images to apply some processing, but final image saved as PNG
+    # (default) rather than JPEG.
+    return self._runner.run(_ENCODE_FN[self.encoding_format or 'png'], np_image)
+
+  def decode_image(self, img: tf.Tensor) -> tf.Tensor:
+    """Decode the jpeg or png bytes to 3d tensor."""
+    img = tf.image.decode_image(img, channels=self.shape[-1], dtype=self.dtype)
+    img.set_shape(self.shape)
+    return img
+
+
+class _FloatImageEncoder(_ImageEncoder):
+  """Image encoder of float32.
+
+  Wrapper around `_ImageEncoder` which bitcast 1-channel float32 image
+  into 4-channels uint8, so image can be encoded to PNG.
+  """
+
+  def __init__(
+      self,
+      *,
+      shape: utils.Shape,
+      dtype: tf.dtypes.DType,
+      encoding_format: str,
+  ):
+    # Assert that shape and encoding are valid when dtype==tf.float32.
+    if shape[-1] != 1:
+      raise ValueError(
+          'tfds.features.Image only support single-channel for tf.float32. '
+          f'Got shape={shape}')
+    if encoding_format and encoding_format != 'png':
+      raise ValueError(
+          'tfds.features.Image only support PNG encoding for tf.float32')
+    self._float_shape = shape
+    super().__init__(
+        shape=shape[:2] + (4,),
+        dtype=tf.uint8,
+        encoding_format=encoding_format,
+    )
+
+  def encode_image_or_path(self, image_or_path_or_fobj):
+    """Convert the given image into a dict convertible to tf example."""
+    if not isinstance(image_or_path_or_fobj, np.ndarray):
+      raise ValueError(
+          'tfds.features.Image only support `np.ndarray` for tf.float32 '
+          f'images, not paths. Got: {image_or_path_or_fobj!r}')
+    return self._encode_image(image_or_path_or_fobj)
+
+  def _encode_image(self, np_image: np.ndarray) -> bytes:
+    _validate_np_array(np_image, shape=self._float_shape, dtype=tf.float32)
+    # Bitcast 1 channel float32 -> 4 channels uint8
+    np_image = np_image.view(np.uint8)
+    np_image = super()._encode_image(np_image)
+    return np_image
+
+  def decode_image(self, img: tf.Tensor) -> tf.Tensor:
+    img = super().decode_image(img)
+    # Bitcast 4 channels uint8 -> 1 channel float32
+    img = tf.bitcast(img, tf.float32)[..., None]
+    return img
 
 
 class Image(feature.FeatureConnector):
@@ -68,8 +175,7 @@ class Image(feature.FeatureConnector):
     ```python
     features=features.FeaturesDict({
         'input': features.Image(),
-        'target': features.Image(shape=(None, None, 1),
-                                   encoding_format='png'),
+        'target': features.Image(shape=(None, None, 1), encoding_format='png'),
     })
     ```
 
@@ -83,7 +189,16 @@ class Image(feature.FeatureConnector):
     ```
   """
 
-  def __init__(self, *, shape=None, dtype=None, encoding_format=None):
+  # If updating the signature here, LabeledImage and Video should likely be
+  # updated too.
+  def __init__(
+      self,
+      *,
+      shape: Optional[utils.Shape] = None,
+      dtype: Optional[tf.dtypes.DType] = None,
+      encoding_format: Optional[str] = None,
+      use_colormap: bool = False,
+  ):
     """Construct the connector.
 
     Args:
@@ -91,52 +206,42 @@ class Image(feature.FeatureConnector):
         For GIF images: (num_frames, height, width, channels=3). num_frames,
           height and width can be None.
         For other images: (height, width, channels). height and width can be
-          None. See `tf.image.encode_*` for doc on channels parameter.
-        Defaults to (None, None, 3).
-      dtype: tf.uint16 or tf.uint8 (default).
-        tf.uint16 can be used only with png encoding_format
-      encoding_format: 'jpeg' or 'png' (default). Format to serialize np.ndarray
-        images on disk.
-        If image is loaded from {bmg,gif,jpeg,png} file, this parameter is
-        ignored, and file original encoding is used.
+          None. See `tf.image.encode_*` for doc on channels parameter. Defaults
+          to (None, None, 3).
+      dtype: `tf.uint8` (default), `tf.uint16` or `tf.float32`. * `tf.uint16`
+        requires png encoding_format. * `tf.float32` only supports
+        single-channel image. Internally float images are bitcasted to
+        4-channels `tf.uint8` and saved as PNG.
+      encoding_format: 'jpeg' or 'png'. Format to serialize `np.ndarray` images
+        on disk. If None, encode images as PNG. If image is loaded from
+        {bmg,gif,jpeg,png} file, this parameter is ignored, and file original
+        encoding is used.
+      use_colormap: Only used for gray-scale images. If `True`,
+        `tfds.as_dataframe` will display each value in the image with a
+        different color.
 
     Raises:
       ValueError: If the shape is invalid
     """
-    self._encoding_format = None
-    self._shape = None
-    self._runner = None
-    self._dtype = None
-
     # Set and validate values
-    self.set_encoding_format(encoding_format or 'png')
-    self.set_shape(shape or (None, None, 3))
-    self.set_dtype(dtype or tf.uint8)
+    shape = shape or (None, None, 3)
+    dtype = dtype or tf.uint8
+    self._encoding_format = _get_and_validate_encoding(encoding_format)
+    self._shape = _get_and_validate_shape(shape, self._encoding_format)
+    self._dtype = _get_and_validate_dtype(dtype, self._encoding_format)
+    self._use_colormap = _get_and_validate_colormap(use_colormap, self._shape,
+                                                    self._dtype,
+                                                    self._encoding_format)
 
-  def set_dtype(self, dtype):
-    """Update the dtype."""
-    dtype = tf.as_dtype(dtype)
-    acceptable_dtypes = ACCEPTABLE_DTYPES[self._encoding_format]
-    if dtype not in acceptable_dtypes:
-      raise ValueError('Acceptable `dtype` for %s: %s (was %s)' % (
-          self._encoding_format, acceptable_dtypes, dtype))
-    self._dtype = dtype
-
-  def set_encoding_format(self, encoding_format):
-    """Update the encoding format."""
-    supported = ENCODE_FN.keys()
-    if encoding_format not in supported:
-      raise ValueError('`encoding_format` must be one of %s.' % supported)
-    self._encoding_format = encoding_format
-
-  def set_shape(self, shape):
-    """Update the shape."""
-    channels = shape[-1]
-    acceptable_channels = ACCEPTABLE_CHANNELS[self._encoding_format]
-    if channels not in acceptable_channels:
-      raise ValueError('Acceptable `channels` for %s: %s (was %s)' % (
-          self._encoding_format, acceptable_channels, channels))
-    self._shape = tuple(shape)
+    if self._dtype == tf.float32:  # Float images encoded as 4-channels uint8
+      encoder_cls = _FloatImageEncoder
+    else:
+      encoder_cls = _ImageEncoder
+    self._image_encoder = encoder_cls(
+        shape=self._shape,
+        dtype=self._dtype,
+        encoding_format=self._encoding_format,
+    )
 
   def get_tensor_info(self):
     # Image is returned as a 3-d uint8 tf.Tensor.
@@ -146,62 +251,18 @@ class Image(feature.FeatureConnector):
     # Only store raw image (includes size).
     return feature.TensorInfo(shape=(), dtype=tf.string)
 
-  def _encode_image(self, np_image):
-    """Returns np_image encoded as jpeg or png."""
-    if not self._runner:
-      self._runner = utils.TFGraphRunner()
-    if np_image.dtype != self._dtype.as_numpy_dtype:
-      raise ValueError('Image dtype should be %s. Detected: %s.' % (
-          self._dtype.as_numpy_dtype, np_image.dtype))
-    utils.assert_shape_match(np_image.shape, self._shape)
-    return self._runner.run(ENCODE_FN[self._encoding_format], np_image)
-
-  def __getstate__(self):
-    state = self.__dict__.copy()
-    state['_runner'] = None
-    return state
-
   def encode_example(self, image_or_path_or_fobj):
     """Convert the given image into a dict convertible to tf example."""
-    if isinstance(image_or_path_or_fobj, np.ndarray):
-      encoded_image = self._encode_image(image_or_path_or_fobj)
-    elif isinstance(image_or_path_or_fobj, six.string_types):
-      with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
-        encoded_image = image_f.read()
-    else:
-      encoded_image = image_or_path_or_fobj.read()
-    return encoded_image
+    return self._image_encoder.encode_image_or_path(image_or_path_or_fobj)
 
   def decode_example(self, example):
     """Reconstruct the image from the tf example."""
-    img = tf.image.decode_image(
-        example, channels=self._shape[-1], dtype=self._dtype)
-    img.set_shape(self._shape)
-    return img
-
-  def save_metadata(self, data_dir, feature_name=None):
-    """See base class for details."""
-    filepath = _get_metadata_filepath(data_dir, feature_name)
-    with tf.io.gfile.GFile(filepath, 'w') as f:
-      json.dump({
-          'shape': [-1 if d is None else d for d in self._shape],
-          'encoding_format': self._encoding_format,
-      }, f, sort_keys=True)
-
-  def load_metadata(self, data_dir, feature_name=None):
-    """See base class for details."""
-    # Restore names if defined
-    filepath = _get_metadata_filepath(data_dir, feature_name)
-    if tf.io.gfile.exists(filepath):
-      with tf.io.gfile.GFile(filepath, 'r') as f:
-        info_data = json.load(f)
-      self.set_encoding_format(info_data['encoding_format'])
-      self.set_shape([None if d == -1 else d for d in info_data['shape']])
+    return self._image_encoder.decode_image(example)
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Images are displayed as thumbnail."""
     # Normalize image and resize
-    img = create_thumbnail(ex)
+    img = utils.create_thumbnail(ex, use_colormap=self._use_colormap)
 
     # Convert to base64
     img_str = utils.get_base64(lambda buff: img.save(buff, format='PNG'))
@@ -209,48 +270,174 @@ class Image(feature.FeatureConnector):
     # Display HTML
     return f'<img src="data:image/png;base64,{img_str}" alt="Img" />'
 
+  def repr_html_batch(self, ex: np.ndarray) -> str:
+    """`Sequence(Image())` are displayed as `<video>`."""
+    if ex.shape[0] == 1:
+      ex = ex.squeeze(axis=0)  # (1, h, w, c) -> (h, w, c)
+      return self.repr_html(ex)
+    else:
+      return make_video_repr_html(ex, use_colormap=self._use_colormap)
+
   @classmethod
   def from_json_content(cls, value: Json) -> 'Image':
-    shape = tuple(value['shape'])
-    dtype = tf.dtypes.as_dtype(value['dtype'])
-    encoding_format = value['encoding_format']
-    return cls(shape=shape, dtype=dtype, encoding_format=encoding_format)
+    return cls(
+        shape=tuple(value['shape']),
+        dtype=tf.dtypes.as_dtype(value['dtype']),
+        encoding_format=value['encoding_format'],
+        use_colormap=value.get('use_colormap'),
+    )
 
   def to_json_content(self) -> Json:
     return {
         'shape': list(self._shape),
         'dtype': self._dtype.name,
-        'encoding_format': self._encoding_format
+        'encoding_format': self._encoding_format,
+        'use_colormap': self._use_colormap
     }
 
 
-def create_thumbnail(ex):
-  """Creates the image from the np.array input."""
-  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
+# Visualization Video
 
-  _, _, c = ex.shape
-  postprocess = _postprocess_noop
-  if c == 1:
-    ex = ex.squeeze(axis=-1)
-    mode = 'L'
-  elif ex.dtype == np.uint16:
-    mode = 'I;16'
-    postprocess = _postprocess_convert_rgb
+
+def make_video_repr_html(ex, *, use_colormap: bool):
+  """Returns the encoded `<video>` or GIF <img/> HTML."""
+  # Use GIF to generate a HTML5 compatible video if FFMPEG is not
+  # installed on the system.
+  images = [
+      utils.create_thumbnail(frame, use_colormap=use_colormap) for frame in ex
+  ]
+
+  if not images:
+    return 'Video with 0 frames.'
+
+  # Display the video HTML (either GIF of mp4 if ffmpeg is installed)
+  try:
+    utils.ffmpeg_run(['-version'])  # Check for ffmpeg installation.
+  except FileNotFoundError:
+    # print as `stderr` is displayed poorly on Colab
+    print('FFMPEG not detected. Falling back on GIF.')
+    return _get_repr_html_gif(images)
   else:
-    mode = None
-  img = PIL_Image.fromarray(ex, mode=mode)
-  img = postprocess(img)
-  img.thumbnail((128, 128))  # Resize the image in-place
-  return img
+    return _get_repr_html_ffmpeg(images)
 
 
-def _postprocess_noop(img):
-  return img
+def _get_repr_html_ffmpeg(images: List[PilImage]) -> str:
+  """Runs ffmpeg to get the mp4 encoded <video> str."""
+  # Find number of digits in len to give names.
+  num_digits = len(str(len(images))) + 1
+  with tempfile.TemporaryDirectory() as video_dir:
+    for i, img in enumerate(images):
+      f = os.path.join(video_dir, f'img{i:0{num_digits}d}.png')
+      img.save(f, format='png')
+
+    ffmpeg_args = [
+        '-framerate',
+        str(_VISU_FRAMERATE),
+        '-i',
+        os.path.join(video_dir, f'img%0{num_digits}d.png'),
+        # Using native h264 to encode video stream to H.264 codec
+        # Default encoding does not seems to be supported by chrome.
+        '-vcodec',
+        'h264',
+        # When outputting H.264, `-pix_fmt yuv420p` maximize compatibility
+        # with bad video players.
+        # Ref: https://trac.ffmpeg.org/wiki/Slideshow
+        '-pix_fmt',
+        'yuv420p',
+        # ffmpeg require height/width to be even, so we rescale it
+        # https://stackoverflow.com/questions/20847674/ffmpeg-libx264-height-not-divisible-by-2
+        '-vf',
+        'pad=ceil(iw/2)*2:ceil(ih/2)*2',
+        # Native encoder cannot encode images of small scale
+        # or the the hardware encoder may be busy which raises
+        # Error: cannot create compression session
+        # so allow software encoding
+        # '-allow_sw', '1',
+    ]
+    video_path = utils.as_path(video_dir) / 'output.mp4'
+    ffmpeg_args.append(os.fspath(video_path))
+    utils.ffmpeg_run(ffmpeg_args)
+    video_str = utils.get_base64(video_path.read_bytes())
+  return (f'<video height="{THUMBNAIL_SIZE}" width="175" '
+          'controls loop autoplay muted playsinline>'
+          f'<source src="data:video/mp4;base64,{video_str}"  type="video/mp4" >'
+          '</video>')
 
 
-def _postprocess_convert_rgb(img):
-  return img.convert('RGB')
+def _get_repr_html_gif(images: List[PilImage]) -> str:
+  """Get the <img/> str."""
+
+  def write_buff(buff):
+    images[0].save(
+        buff,
+        format='GIF',
+        save_all=True,
+        append_images=images[1:],
+        duration=1000 / _VISU_FRAMERATE,
+        loop=0,
+    )
+
+  # Convert to base64
+  gif_str = utils.get_base64(write_buff)
+  return f'<img src="data:image/png;base64,{gif_str}" alt="Gif" />'
 
 
-def _get_metadata_filepath(data_dir, feature_name):
-  return os.path.join(data_dir, '{}.image.json'.format(feature_name))
+# Other image utils
+
+
+def _get_and_validate_encoding(encoding_format):
+  """Update the encoding format."""
+  supported = _ENCODE_FN.keys()
+  if encoding_format and encoding_format not in supported:
+    raise ValueError(f'`encoding_format` must be one of {supported}.')
+  return encoding_format
+
+
+def _get_and_validate_dtype(dtype, encoding_format):
+  """Update the dtype."""
+  dtype = tf.as_dtype(dtype)
+  acceptable_dtypes = _ACCEPTABLE_DTYPES.get(encoding_format)
+  if acceptable_dtypes and dtype not in acceptable_dtypes:
+    raise ValueError(f'Acceptable `dtype` for {encoding_format}: '
+                     f'{acceptable_dtypes} (was {dtype})')
+  return dtype
+
+
+def _get_and_validate_shape(shape, encoding_format):
+  """Update the shape."""
+  if len(shape) <= 2:
+    raise ValueError(f'Image shape should be (h, w, c). Got: {shape}')
+  channels = shape[-1]
+  acceptable_channels = _ACCEPTABLE_CHANNELS.get(encoding_format)
+  if acceptable_channels and channels not in acceptable_channels:
+    raise ValueError(f'Acceptable `channels` for {encoding_format}: '
+                     f'{acceptable_channels} (was {channels})')
+  return tuple(shape)
+
+
+def _get_and_validate_colormap(use_colormap, shape, dtype, encoding_format):
+  """Validate that the given colormap is valid."""
+  if use_colormap:
+    if encoding_format and encoding_format != 'png':
+      raise ValueError(
+          f'Colormap is only available for PNG images. Got: {encoding_format}')
+    if shape[-1] != 1:
+      raise ValueError(
+          f'Colormap is only available for gray-scale images. Got: {shape}')
+    if not dtype.is_integer:
+      raise ValueError(
+          f'Colormap is only available for interger images. Got: {dtype}')
+
+  return use_colormap
+
+
+def _validate_np_array(
+    np_array: np.ndarray,
+    shape: utils.Shape,
+    dtype: tf.dtypes.DType,
+) -> None:
+  """Validate the numpy array match the expected shape/dtype."""
+  if np_array.dtype != dtype.as_numpy_dtype:
+    raise ValueError(f'Image dtype should be {dtype.as_numpy_dtype}. '
+                     f'Detected: {np_array.dtype}.')
+  utils.assert_shape_match(np_array.shape, shape)

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,4 +28,5 @@ def test_main():
 
   # Argparse call `sys.exit(0)` when `--version` is passed.
   with mock.patch('sys.exit', _check_exit):
-    main.main(main._parse_flags(['', '--version']))
+    version_flag = '--version'
+    main.main(main._parse_flags(['', version_flag]))

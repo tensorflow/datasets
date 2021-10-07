@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,26 +17,33 @@
 
 import concurrent.futures
 import contextlib
+import dataclasses
 import functools
 import hashlib
 import io
 import os
 import re
-from typing import Any, ContextManager, Iterable, Iterator, Tuple, Union
+from typing import Any, ContextManager, Iterable, Iterator, Optional, Tuple, Union
+import urllib
+
 import promise
 import requests
 
-from six.moves import urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
-
 # Response interface. Has `.url` and `.headers` attribute
 Response = Union[requests.Response, urllib.response.addinfourl]
+
+
+@dataclasses.dataclass(eq=False, frozen=True)
+class DownloadResult:
+  path: utils.ReadWritePath
+  url_info: checksums_lib.UrlInfo
 
 
 @utils.memoize()
@@ -44,12 +51,54 @@ def get_downloader(*args: Any, **kwargs: Any) -> '_Downloader':
   return _Downloader(*args, **kwargs)
 
 
+def _filename_from_content_disposition(
+    content_disposition: str,) -> Optional[str]:
+  """Extract the filename from the content disposition.
+
+  Parse the content_definition as defined in:
+  https://tools.ietf.org/html/rfc2616
+
+  Note:
+
+   * If both encoded (`filename*=`) and ascii (filename=) name are defined,
+     the function returns the ascii name, as encoding might create issue on
+     some systems
+   * If only the encoded name is defined (e.g.
+     `filename*=UTF-8''%e2%82%ac.txt`), the function return None as this is
+     not yet supported.
+
+  Args:
+      content_disposition: String to parse.
+
+  Returns:
+      filename: The filename, or None if filename could not be parsed
+  """
+  match = re.findall(
+      # Regex (see unittests for examples):
+      # ` *` : Strip eventual whitespaces
+      # `['"]?` : Filename is optionally wrapped in quote
+      # `([^;\r\n"']+)` : Filename can be any symbol except those
+      # `;?` : Stop when encountering optional `;`
+      r"""filename= *['"]?([^;\r\n"']+)['"]? *;?""",
+      content_disposition,
+      flags=re.IGNORECASE,
+  )
+  if not match:
+    return None
+  elif len(match) != 1:
+    raise ValueError(
+        f'Error while parsing filename for: {content_disposition}\n'
+        f'Multiple filename detected: {list(match)}')
+  return os.path.basename(match[0].rstrip())
+
+
 def _get_filename(response: Response) -> str:
   content_disposition = response.headers.get('content-disposition', None)
   if content_disposition:
-    match = re.findall('filename="(.+?)"', content_disposition)
-    if match:
-      return match[0]
+    filename = _filename_from_content_disposition(content_disposition)
+    if filename:
+      return filename
+  # Otherwise, fallback on extracting the name from the url.
   return utils.basename_from_url(response.url)
 
 
@@ -86,7 +135,20 @@ class _Downloader(object):
         self._pbar_dl_size = pbar_dl_size
         yield
 
-  def download(self, url: str, destination_path: str):
+  def increase_tqdm(self, dl_result: DownloadResult) -> None:
+    """Update the tqdm bars to visually indicate the dl_result is downloaded."""
+    self._pbar_url.update_total(1)
+    self._pbar_url.update(1)
+    if dl_result.url_info:  # Info unknown for manually downloaded files
+      self._pbar_dl_size.update_total(dl_result.url_info.size)
+      self._pbar_dl_size.update(dl_result.url_info.size)
+
+  def download(
+      self,
+      url: str,
+      destination_path: str,
+      verify: bool = True
+  ) -> 'promise.Promise[concurrent.futures.Future[DownloadResult]]':
     """Download url to given path.
 
     Returns Promise -> sha256 of downloaded file.
@@ -94,34 +156,48 @@ class _Downloader(object):
     Args:
       url: address of resource to download.
       destination_path: `str`, path to directory where to download the resource.
+      verify: whether to verify ssl certificates
 
     Returns:
       Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
     """
+    destination_path = os.fspath(destination_path)
     self._pbar_url.update_total(1)
-    future = self._executor.submit(self._sync_download, url, destination_path)
+    future = self._executor.submit(self._sync_download, url, destination_path,
+                                   verify)
     return promise.Promise.resolve(future)
 
   def _sync_file_copy(
-      self, filepath: str, destination_path: str) -> checksums_lib.UrlInfo:
-    out_path = os.path.join(destination_path, os.path.basename(filepath))
+      self,
+      filepath: str,
+      destination_path: str,
+  ) -> DownloadResult:
+    """Downloads the file through `tf.io.gfile` API."""
+    filename = os.path.basename(filepath)
+    out_path = os.path.join(destination_path, filename)
     tf.io.gfile.copy(filepath, out_path)
-    hexdigest, size = utils.read_checksum_digest(
+    url_info = checksums_lib.compute_url_info(
         out_path, checksum_cls=self._checksumer_cls)
-    return checksums_lib.UrlInfo(checksum=hexdigest, size=size)
+    self._pbar_dl_size.update_total(url_info.size)
+    self._pbar_dl_size.update(url_info.size)
+    self._pbar_url.update(1)
+    return DownloadResult(path=utils.as_path(out_path), url_info=url_info)
 
-  def _sync_download(
-      self, url: str, destination_path: str) -> checksums_lib.UrlInfo:
+  def _sync_download(self,
+                     url: str,
+                     destination_path: str,
+                     verify: bool = True) -> DownloadResult:
     """Synchronous version of `download` method.
 
     To download through a proxy, the `HTTP_PROXY`, `HTTPS_PROXY`,
-    `REQUESTS_CA_BUNDLE`,... environement variables can be exported, as
+    `REQUESTS_CA_BUNDLE`,... environment variables can be exported, as
     described in:
     https://requests.readthedocs.io/en/master/user/advanced/#proxies
 
     Args:
       url: url to download
       destination_path: path where to write it
+      verify: whether to verify ssl certificates
 
     Returns:
       None
@@ -137,7 +213,7 @@ class _Downloader(object):
     except tf.errors.UnimplementedError:
       pass
 
-    with _open_url(url) as (response, iter_content):
+    with _open_url(url, verify=verify) as (response, iter_content):
       fname = _get_filename(response)
       path = os.path.join(destination_path, fname)
       size = 0
@@ -160,14 +236,25 @@ class _Downloader(object):
             self._pbar_dl_size.update(size_mb // unit_mb)
             size_mb %= unit_mb
     self._pbar_url.update(1)
-    return checksums_lib.UrlInfo(checksum=checksum.hexdigest(), size=size)
+    return DownloadResult(
+        path=utils.as_path(path),
+        url_info=checksums_lib.UrlInfo(
+            checksum=checksum.hexdigest(),
+            size=utils.Size(size),
+            filename=fname,
+        ),
+    )
 
 
-def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
+def _open_url(
+    url: str,
+    **kwargs: Any,
+) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
   """Context manager to open an url.
 
   Args:
     url: The url to open
+    **kwargs: Additional kwargs to forward to `request.get`.
 
   Returns:
     response: The url response with `.url` and `.header` attributes.
@@ -175,21 +262,29 @@ def _open_url(url: str) -> ContextManager[Tuple[Response, Iterable[bytes]]]:
   """
   # Download FTP urls with `urllib`, otherwise use `requests`
   open_fn = _open_with_urllib if url.startswith('ftp') else _open_with_requests
-  return open_fn(url)
+  return open_fn(url, **kwargs)
 
 
 @contextlib.contextmanager
-def _open_with_requests(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+def _open_with_requests(
+    url: str,
+    **kwargs: Any,
+) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+  """Open url with request."""
   with requests.Session() as session:
     if _DRIVE_URL.match(url):
       url = _get_drive_url(url, session)
-    with session.get(url, stream=True) as response:
+    with session.get(url, stream=True, **kwargs) as response:
       _assert_status(response)
       yield (response, response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE))
 
 
 @contextlib.contextmanager
-def _open_with_urllib(url: str) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+def _open_with_urllib(
+    url: str,
+    **kwargs: Any,
+) -> Iterator[Tuple[Response, Iterable[bytes]]]:
+  del kwargs
   with urllib.request.urlopen(url) as response:  # pytype: disable=attribute-error
     yield (
         response,

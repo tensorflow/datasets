@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import collections
 
 from absl import logging
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.deprecated.text import text_encoder
 
@@ -68,8 +68,8 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
       vocab_list: `list<str>`, list of subwords for the vocabulary. Note that an
         underscore at the end of a subword indicates the end of the word (i.e. a
         space will be inserted afterwards when decoding). Underscores in the
-        interior of subwords are disallowed and should use the underscore
-        escape sequence.
+        interior of subwords are disallowed and should use the underscore escape
+        sequence.
     """
     self._init_from_list(vocab_list)
 

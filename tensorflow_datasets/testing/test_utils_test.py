@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,20 +15,21 @@
 
 """Tests for tensorflow_datasets.core.test_utils."""
 
-import sys
+import pathlib
 
-import tensorflow.compat.v2 as tf
+import pytest
+
+import tensorflow as tf
 
 from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
-
-tf.enable_v2_behavior()
 
 
 class RunInGraphAndEagerTest(test_case.TestCase):
 
   def test_run_in_graph_and_eager_modes(self):
     l = []
+
     def inc(self, with_brackets):
       del self  # self argument is required by run_in_graph_and_eager_modes.
       mode = 'eager' if tf.executing_eagerly() else 'graph'
@@ -41,12 +42,13 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     f(self, with_brackets=True)
 
     self.assertEqual(len(l), 4)
-    self.assertEqual(set(l), {
-        ('with_brackets', 'graph'),
-        ('with_brackets', 'eager'),
-        ('without_brackets', 'graph'),
-        ('without_brackets', 'eager'),
-    })
+    self.assertEqual(
+        set(l), {
+            ('with_brackets', 'graph'),
+            ('with_brackets', 'eager'),
+            ('without_brackets', 'graph'),
+            ('without_brackets', 'eager'),
+        })
 
   def test_run_in_graph_and_eager_modes_setup_in_same_mode(self):
     modes = []
@@ -72,53 +74,83 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     self.assertEqual(modes[0:2], ['setup_eager', 'run_eager'])
     self.assertEqual(modes[2:], ['setup_graph', 'run_graph'])
 
-  def test_mock_fs(self):
-    if sys.version_info.major < 3:  # Disable test on Python2
-      return
+  def test_mock_tf(self):
+    # pylint: disable=g-import-not-at-top,reimported
+    import tensorflow as tf_lib1
+    import tensorflow as tf_lib2
 
-    fs = test_utils.MockFs()
-    with fs.mock():
-      fs.add_file('/path/to/file1', 'Content of file 1')
-      fs.add_file('/path/file.txt', 'Content of file.txt')
+    # pylint: enable=g-import-not-at-top,reimported
 
-      # Test `tf.io.gfile.exists`
-      self.assertTrue(tf.io.gfile.exists('/path/to/file1'))
-      self.assertTrue(tf.io.gfile.exists('/path/to/'))
-      self.assertTrue(tf.io.gfile.exists('/path/to'))
-      self.assertTrue(tf.io.gfile.exists('/path'))
-      self.assertFalse(tf.io.gfile.exists('/pat'))
-      self.assertFalse(tf.io.gfile.exists('/path/to/file1_nonexisting'))
-      self.assertFalse(tf.io.gfile.exists('/path/to_file1_nonexisting'))
+    def f():
+      pass
 
-      # Test `tf.io.gfile.GFile` (write and read mode)
-      with tf.io.gfile.GFile('/path/to/file2', 'w') as f:
-        f.write('Content of file 2 (old)')
-      self.assertEqual(fs.files['/path/to/file2'], 'Content of file 2 (old)')
-      with tf.io.gfile.GFile('/path/to/file2', 'w') as f:
-        f.write('Content of file 2 (new)')
-      self.assertEqual(fs.files['/path/to/file2'], 'Content of file 2 (new)')
-      with tf.io.gfile.GFile('/path/to/file2', 'r') as f:
-        self.assertEqual(f.read(), 'Content of file 2 (new)')
+    with test_utils.mock_tf('tf.io.gfile', exists=f):
+      # Both aliases should have been patched
+      self.assertIs(tf_lib1.io.gfile.exists, f)
+      self.assertIs(tf_lib2.io.gfile.exists, f)
 
-      # Test `tf.io.gfile.rename`
-      self.assertEqual(fs.files['/path/to/file1'], 'Content of file 1')
-      tf.io.gfile.rename('/path/to/file1', '/path/to/file1_moved')
-      self.assertNotIn('/path/to/file1', fs.files)
-      self.assertEqual(fs.files['/path/to/file1_moved'], 'Content of file 1')
+    self.assertIsNot(tf_lib1.io.gfile.exists, f)
+    self.assertIsNot(tf_lib2.io.gfile.exists, f)
 
-      # Test `tf.io.gfile.listdir`
-      self.assertCountEqual(
-          tf.io.gfile.listdir('/path/to'), tf.io.gfile.listdir('/path/to/'))
-      self.assertCountEqual(
-          tf.io.gfile.listdir('/path/to'), ['file1_moved', 'file2'])
-      self.assertCountEqual(tf.io.gfile.listdir('/path'), ['file.txt', 'to'])
+    with test_utils.mock_tf('tf.io.gfile.exists', f):
+      self.assertIs(tf_lib1.io.gfile.exists, f)
+      self.assertIs(tf_lib2.io.gfile.exists, f)
 
-      # Test `MockFs.files`
-      self.assertEqual(fs.files, {
-          '/path/to/file2': 'Content of file 2 (new)',
-          '/path/to/file1_moved': 'Content of file 1',
-          '/path/file.txt': 'Content of file.txt',
-      })
 
-if __name__ == '__main__':
-  test_utils.test_main()
+@pytest.mark.parametrize(
+    'as_path_fn',
+    [pathlib.Path, str]  # Test both PathLike and str
+)
+def test_mock_fs(as_path_fn):
+  _p = as_path_fn  # pylint: disable=invalid-name
+  fs = test_utils.MockFs()
+  with fs.mock():
+    fs.add_file(_p('/path/to/file1'), 'Content of file 1')
+    fs.add_file(_p('/path/file.txt'), 'Content of file.txt')
+
+    # Test `tf.io.gfile.exists`
+    assert tf.io.gfile.exists(_p('/path/to/file1'))
+    assert tf.io.gfile.exists(_p('/path/to/'))
+    assert tf.io.gfile.exists(_p('/path/to'))
+    assert tf.io.gfile.exists(_p('/path'))
+    assert not tf.io.gfile.exists(_p('/pat'))
+    assert not tf.io.gfile.exists(_p('/path/to/file1_nonexisting'))
+    assert not tf.io.gfile.exists(_p('/path/to_file1_nonexisting'))
+
+    # Test `tf.io.gfile.exists` (relative path)
+    fs.add_file(_p('relative_path/to/file.txt'), 'Content')
+    assert tf.io.gfile.exists(_p('relative_path/to/file.txt'))
+    assert tf.io.gfile.exists(_p('relative_path/to/'))
+    assert tf.io.gfile.exists(_p('relative_path/to'))
+    assert tf.io.gfile.exists(_p('relative_path'))
+    assert not tf.io.gfile.exists(_p('/relative_path/to'))
+
+    # Test `tf.io.gfile.GFile` (write and read mode)
+    with tf.io.gfile.GFile(_p('/path/to/file2'), 'w') as f:
+      f.write('Content of file 2 (old)')
+    assert fs.files['/path/to/file2'] == 'Content of file 2 (old)'
+    with tf.io.gfile.GFile(_p('/path/to/file2'), 'w') as f:
+      f.write('Content of file 2 (new)')
+    assert fs.files['/path/to/file2'] == 'Content of file 2 (new)'
+    with tf.io.gfile.GFile(_p('/path/to/file2'), 'r') as f:
+      assert f.read() == 'Content of file 2 (new)'
+
+    # Test `tf.io.gfile.rename`
+    assert fs.files['/path/to/file1'] == 'Content of file 1'
+    tf.io.gfile.rename(_p('/path/to/file1'), _p('/path/to/file1_moved'))
+    assert '/path/to/file1' not in fs.files
+    assert fs.files['/path/to/file1_moved'] == 'Content of file 1'
+
+    # Test `tf.io.gfile.listdir`
+    assert (set(tf.io.gfile.listdir(_p('/path/to'))) == set(
+        tf.io.gfile.listdir(_p('/path/to/'))))
+    assert set(tf.io.gfile.listdir(_p('/path/to'))) == {'file1_moved', 'file2'}
+    assert set(tf.io.gfile.listdir(_p('/path'))) == {'file.txt', 'to'}
+
+    # Test `MockFs.files`
+    assert fs.files == {
+        '/path/to/file2': 'Content of file 2 (new)',
+        '/path/to/file1_moved': 'Content of file 1',
+        '/path/file.txt': 'Content of file.txt',
+        'relative_path/to/file.txt': 'Content',
+    }

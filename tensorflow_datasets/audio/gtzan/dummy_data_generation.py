@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import random
 
 from absl import app
 from absl import flags
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.audio.gtzan import gtzan
 from tensorflow_datasets.core.utils import py_utils
 import tensorflow_datasets.public_api as tfds
@@ -50,9 +50,7 @@ def _generate_data():
   label = random.choice(labels)
   random_number_for_filename = random.randint(0, 99)
   filename = "{}.{:05d}".format(label, random_number_for_filename)
-  filepath = os.path.join(_output_dir(),
-                          "genres",
-                          label,
+  filepath = os.path.join(_output_dir(), "genres", label,
                           "{}.wav".format(filename))
   dirname = os.path.dirname(filepath)
   if not tf.io.gfile.exists(dirname):

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,10 +20,12 @@ import os
 import posixpath
 from typing import List, Optional
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
+from tensorflow_datasets.core.utils import generic_path
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tqdm_utils
+from tensorflow_datasets.core.utils import type_utils
 
 GCS_ROOT_DIR = 'gs://tfds-data'
 
@@ -33,36 +35,46 @@ GCS_DATASETS_DIR = 'datasets'
 
 _is_gcs_disabled = False
 
+# Exception raised when GCS isn't available
+# * UnimplementedError: On windows, gs:// isn't supported on old TF versions.
+#   https://github.com/tensorflow/tensorflow/issues/38477
+# * FailedPreconditionError: (e.g. no internet)
+# * PermissionDeniedError: Some environments block GCS access.
+# * AbortedError: All 10 retry attempts failed.
+GCS_UNAVAILABLE_EXCEPTIONS = (
+    tf.errors.UnimplementedError,
+    tf.errors.FailedPreconditionError,
+    tf.errors.PermissionDeniedError,
+    tf.errors.AbortedError,
+)
 
-def exists(path: str) -> bool:
-  """Checks if path exists. Returns False if issues occur connecting to GCS."""
-  try:
-    return tf.io.gfile.exists(path)
-  # * UnimplementedError: On windows, gs:// isn't supported.
-  # * FailedPreconditionError: Raised by TF
-  except (tf.errors.UnimplementedError, tf.errors.FailedPreconditionError):
-    # TODO(tfds): Investigate why windows, gs:// isn't supported.
-    # https://github.com/tensorflow/tensorflow/issues/38477
-    return False
 
-
-def gcs_path(suffix: Optional[str] = None) -> str:
+def gcs_path(*relative_path: type_utils.PathLike) -> type_utils.ReadWritePath:
   """Returns the GCS URI path.
 
   Args:
-    suffix: Eventual relative path in the bucket. If `None`, returns the root
-      GCS bucket uri.
+    *relative_path: Eventual relative path in the bucket.
 
   Returns:
     path: The GCS uri.
   """
-  if not suffix:
-    path = GCS_ROOT_DIR
-  elif suffix.startswith('gs://'):  # Path is already a full path
-    path = suffix
-  else:
-    path = posixpath.join(GCS_ROOT_DIR, suffix)
-  return path
+  return generic_path.as_path(GCS_ROOT_DIR).joinpath(*relative_path)
+
+
+# Community datasets index.
+# This file contains the list of all community datasets with their associated
+# location.
+# Datasets there are downloaded and installed locally by the
+# `PackageRegister` during `tfds.builder`
+GCS_COMMUNITY_INDEX_PATH = gcs_path() / 'community-datasets-list.jsonl'
+
+
+def exists(path: type_utils.ReadWritePath) -> bool:
+  """Checks if path exists. Returns False if issues occur connecting to GCS."""
+  try:
+    return path.exists()
+  except GCS_UNAVAILABLE_EXCEPTIONS:  # pylint: disable=catching-non-exception
+    return False
 
 
 @py_utils.memoize()
@@ -71,7 +83,7 @@ def gcs_listdir(dir_name: str) -> Optional[List[str]]:
   root_dir = gcs_path(dir_name)
   if _is_gcs_disabled or not exists(root_dir):
     return None
-  return [posixpath.join(dir_name, f) for f in tf.io.gfile.listdir(root_dir)]
+  return [posixpath.join(dir_name, f.name) for f in root_dir.iterdir()]
 
 
 def gcs_dataset_info_files(dataset_dir: str) -> Optional[List[str]]:
@@ -85,9 +97,9 @@ def is_dataset_on_gcs(dataset_name: str) -> bool:
   return not _is_gcs_disabled and exists(gcs_path(dir_name))
 
 
-def download_gcs_dataset(
-    dataset_name, local_dataset_dir, max_simultaneous_downloads=25
-):
+def download_gcs_dataset(dataset_name,
+                         local_dataset_dir,
+                         max_simultaneous_downloads=25):
   """Downloads prepared GCS dataset to local dataset directory."""
   if _is_gcs_disabled:
     raise AssertionError('Cannot download from GCS when _is_gcs_disabled')
@@ -107,7 +119,7 @@ def download_gcs_dataset(
     def _copy_from_gcs(gcs_path_):
       # Copy 'gs://tfds-data/datasets/ds/1.0.0/file' -> `local_dir/file`
       tf.io.gfile.copy(
-          gcs_path(gcs_path_),
+          os.fspath(gcs_path(gcs_path_)),
           os.path.join(local_dataset_dir, posixpath.basename(gcs_path_)),
       )
       pbar.update(1)

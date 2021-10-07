@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="coco_captions" />
   <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and&#10;captioning dataset. This version contains images, bounding boxes, labels, and&#10;captions from COCO 2014, split into the subsets defined by Karpathy and Li&#10;(2015). This effectively divides the original COCO 2014 validation data into&#10;new 5000-image validation and test sets, plus a &quot;restval&quot; set containing the&#10;remaining ~30k images. All splits have caption annotations.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;coco_captions&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/coco_captions-2014-1.1.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/coco_captions" />
@@ -12,9 +11,12 @@
 
 # `coco_captions`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=coco_captions">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Description**:
 
@@ -25,16 +27,8 @@ divides the original COCO 2014 validation data into new 5000-image validation
 and test sets, plus a "restval" set containing the remaining ~30k images. All
 splits have caption annotations.
 
-*   **Config description**: COCO is a large-scale object detection,
-    segmentation, and captioning dataset. This version contains images, bounding
-    boxes " and labels for the 2014 version. Note:
-
-    *   Some images from the train and validation sets don't have annotations.
-    *   Coco 2014 and 2017 uses the same images, but different train/val/test
-        splits
-    *   The test split don't have any annotations (only images).
-    *   Coco defines 91 classes but the data only uses 80 classes.
-    *   Panotptic annotations defines defines 200 classes but only uses 133.
+*   **Config description**: This version contains images, bounding boxes and
+    labels for the 2014 version.
 
 *   **Homepage**: [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
@@ -87,6 +81,45 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/coco_captions-2014-1.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/coco_captions-2014-1.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -128,10 +161,5 @@ FeaturesDict({
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/coco_captions-2014-1.1.0.png" alt="Visualization" width="500px">
 
 ## coco_captions/2014 (default config)

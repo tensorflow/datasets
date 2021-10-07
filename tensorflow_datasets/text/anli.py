@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Commonsense Explanations (CoS-E) Dataset."""
+"""Adversarial Natural Language Inference (ANLI) Dataset."""
 
 import json
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -57,9 +57,7 @@ class AnliConfig(tfds.core.BuilderConfig):
       round_dir: str. The directory for the Anli round to read.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(AnliConfig, self).__init__(
-        version=VERSION,
-        **kwargs)
+    super(AnliConfig, self).__init__(version=VERSION, **kwargs)
     self.round_dir = round_dir
 
 
@@ -108,21 +106,23 @@ class Anli(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "filepath": os.path.join(
-                    dl_dir, EXTRACT_PATH_TOKEN, self._builder_config.round_dir,
-                    "test.jsonl")
+                "filepath":
+                    os.path.join(dl_dir, EXTRACT_PATH_TOKEN,
+                                 self._builder_config.round_dir, "test.jsonl")
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"filepath": os.path.join(
-                dl_dir, EXTRACT_PATH_TOKEN, self._builder_config.round_dir,
-                "dev.jsonl")}),
+            gen_kwargs={
+                "filepath":
+                    os.path.join(dl_dir, EXTRACT_PATH_TOKEN,
+                                 self._builder_config.round_dir, "dev.jsonl")
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "filepath": os.path.join(
-                    dl_dir, EXTRACT_PATH_TOKEN, self._builder_config.round_dir,
-                    "train.jsonl")
+                "filepath":
+                    os.path.join(dl_dir, EXTRACT_PATH_TOKEN,
+                                 self._builder_config.round_dir, "train.jsonl")
             })
     ]
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = r"""\
@@ -25,13 +25,14 @@ _CITATION = r"""\
   title = {What's All the {FUSS} About Free Universal Sound Separation Data?},
   author = {Scott Wisdom and Hakan Erdogan and Daniel P. W. Ellis and Romain Serizel and Nicolas Turpault and Eduardo Fonseca and Justin Salamon and Prem Seetharaman and John R. Hershey},
   year = {2020},
+  url = {https://arxiv.org/abs/2011.00803},
 }
 
 @inproceedings{fonseca2020fsd50k,
   author = {Eduardo Fonseca and Xavier Favory and Jordi Pons and Frederic Font Corbera and Xavier Serra},
   title = {{FSD}50k: an open dataset of human-labeled sound events},
   year = {2020},
-}
+  url = {https://arxiv.org/abs/2010.00475},
 }
 """
 

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,10 +20,9 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
-
 
 _SUN397_CITATION = """\
 @INPROCEEDINGS{Xiao:2010,
@@ -90,15 +89,16 @@ def _decode_image(fobj, session, filename):
 
   buf = fobj.read()
   image = tfds.core.lazy_imports.cv2.imdecode(
-      np.fromstring(buf, dtype=np.uint8), flags=3)  # Note: Converts to RGB.
+      np.frombuffer(buf, dtype=np.uint8), flags=3)  # Note: Converts to RGB.
   if image is None:
     logging.warning(
         "Image %s could not be decoded by OpenCV, falling back to TF", filename)
     try:
       image = tf.image.decode_image(buf, channels=3)
       image = session.run(image)
-    except tf.errors.InvalidArgumentError:
-      logging.fatal("Image %s could not be decoded by Tensorflow", filename)
+    except tf.errors.InvalidArgumentError as e:
+      raise ValueError(
+          f"{e}. Image {filename} could not be decoded by Tensorflow.")
 
   # The GIF images contain a single frame.
   if len(image.shape) == 4:  # rank=4 -> rank=3
@@ -111,11 +111,14 @@ def _encode_jpeg(image, quality=None):
   cv2 = tfds.core.lazy_imports.cv2
   extra_args = [[int(cv2.IMWRITE_JPEG_QUALITY), quality]] if quality else []
   _, buff = cv2.imencode(".jpg", image, *extra_args)
-  return io.BytesIO(buff.tostring())
+  return io.BytesIO(buff.tobytes())
 
 
-def _process_image_file(
-    fobj, session, filename, quality=None, target_pixels=None):
+def _process_image_file(fobj,
+                        session,
+                        filename,
+                        quality=None,
+                        target_pixels=None):
   """Process image files from the dataset."""
   # We need to read the image files and convert them to JPEG, since some files
   # actually contain GIF, PNG or BMP data (despite having a .jpg extension) and
@@ -134,8 +137,11 @@ def _process_image_file(
 class Sun397Config(tfds.core.BuilderConfig):
   """BuilderConfig for Sun 397 dataset."""
 
-  def __init__(
-      self, target_pixels=None, partition=None, quality=None, **kwargs):
+  def __init__(self,
+               target_pixels=None,
+               partition=None,
+               quality=None,
+               **kwargs):
     self._target_pixels = target_pixels
     self._partition = partition
     self._quality = quality
@@ -199,12 +205,12 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
           "va": "sun397_tfds_va.txt",
       }
       for split, filename in tfds_split_files.items():
-        tfds_split_files[split] = tfds.core.get_tfds_path(
+        tfds_split_files[split] = tfds.core.tfds_path(
             os.path.join("image_classification", filename))
     self._tfds_split_files = tfds_split_files
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(
+    names_file = tfds.core.tfds_path(
         os.path.join("image_classification", "sun397_labels.txt"))
     return tfds.core.DatasetInfo(
         builder=self,
@@ -219,10 +225,12 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     paths = dl_manager.download_and_extract({
-        "images": tfds.download.Resource(
-            url=_SUN397_URL + "SUN397.tar.gz",
-            extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
-        "partitions": _SUN397_URL + "download/Partitions.zip",
+        "images":
+            tfds.download.Resource(
+                url=_SUN397_URL + "SUN397.tar.gz",
+                extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
+        "partitions":
+            _SUN397_URL + "download/Partitions.zip",
     })
     if not isinstance(paths, dict):
       # While testing download_and_extract() returns the dir containing the
@@ -281,7 +289,9 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
             # To class: /c/car_interior/backseat
             label = "/".join(filename.split("/")[:-1])
             image = _process_image_file(
-                fobj, sess, filename,
+                fobj,
+                sess,
+                filename,
                 quality=self.builder_config.quality,
                 target_pixels=self.builder_config.target_pixels)
             record = {
@@ -316,5 +326,5 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
     return splits_sets
 
   def _load_image_set_from_file(self, filepath):
-    with tf.io.gfile.GFile(filepath, mode="r") as f:
+    with tf.io.gfile.GFile(os.fspath(filepath), mode="r") as f:
       return set([line.strip() for line in f])

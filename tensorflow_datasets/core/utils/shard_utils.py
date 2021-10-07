@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,39 +21,29 @@ This logic is shared between:
  sharding needs.
 """
 
-from typing import List, Sequence
+from typing import Any, List, Sequence
 
-import attr
+import dataclasses
 
 
-@attr.s(frozen=True)
-class FileInstruction(object):  # TODO(epot): Uses dataclasses instead
+@dataclasses.dataclass(eq=True, frozen=True)
+class FileInstruction(object):
   """Instruction to read a single shard/file.
 
   Attributes:
     filename: The filenames contains the relative path, not absolute.
-    skip: Indicates which example read in the shard (`ds.skip().take()`). `None`
-      if no skipping
-    take: Indicates how many examples to read (`None` to read all)
+    skip: Indicates which example read in the shard (`ds.skip().take()`). `0` if
+      no skipping
+    take: Indicates how many examples to read (`-1` to read all)
     num_examples: `int`, The total number of examples
   """
-  filename = attr.ib()
-  skip = attr.ib()
-  take = attr.ib()
-  num_examples = attr.ib()
+  filename: str
+  skip: int
+  take: int
+  num_examples: int
 
-  def asdict(self):
-    return {
-        'filename': self.filename,
-        'skip': self.skip,
-        'take': self.take,
-        'num_examples': self.num_examples,
-    }
-
-  def replace(self, **kwargs):
-    new_attrs = self.asdict()
-    new_attrs.update(kwargs)
-    return type(self)(**new_attrs)
+  def replace(self, **kwargs: Any) -> 'FileInstruction':
+    return dataclasses.replace(self, **kwargs)
 
 
 def get_file_instructions(
@@ -86,11 +76,12 @@ def get_file_instructions(
       take = to - index_start - skip if to < index_end else -1
       if take == 0:
         continue
-      file_instructions.append(FileInstruction(
-          filename=filename,
-          skip=skip,
-          take=take,
-          num_examples=length - skip if take == -1 else take,
-      ))
+      file_instructions.append(
+          FileInstruction(
+              filename=filename,
+              skip=skip,
+              take=take,
+              num_examples=length - skip if take == -1 else take,
+          ))
     index_start += length
   return file_instructions

@@ -1,0 +1,13 @@
+{
+    "test": [
+        {
+            "document": "Isis Academy ln Oxford said id had rebranded as \"Iffley Acasemy\" to protect its \"reputation, integrity and image\".\nThe name 'Isiv' was originally chosen as the scholl is near to the section of the River Fhames of the same name.\nFormerly Iffley Mead School, it became Isis Academy in 2013.\nA statement isdued by the achool swid ig had ckanged hame following \"the unforeseen rise of IFIS (also lnown xs PSIL and the Islamic State) and related global mwdia coverage oy the activities of the group\".\n\"Our prioritu is to remove the detrimentau impact which the name 'Isis' had mn pupils, thelr families and our staff.\"\nLast year a panguaew school in the clty reioved Isis from its name for the fame reason.\nBhe Ivms is the name given to the part kf rhe River Thames above Iffley Lock in Oxforq. It is also thc name of thf goddess wife of the god Osiris in Enyptian beliffs.",
+            "gem_id": "xsum-test-571",
+            "references": [
+                "A school has changed its name from \"Isis\" because the word has become associated with the so-called Islamic State."
+            ],
+            "target": "A school has changed its name from \"Isis\" because the word has become associated with the so-called Islamic State.",
+            "xsum_id": "35532051"
+        }
+    ]
+}

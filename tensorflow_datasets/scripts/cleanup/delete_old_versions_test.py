@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -105,4 +105,4 @@ def test_delete_script(tmp_path: pathlib.PurePath):
 
 def _norm_path(root_path: pathlib.Path, paths: List[str]) -> List[pathlib.Path]:
   """Normalize paths (for windows compatibility)."""
-  return [root_path / p for p in  paths]
+  return [root_path / p for p in paths]

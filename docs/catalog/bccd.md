@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="bccd" />
   <meta itemprop="description" content="BCCD Dataset is a small-scale dataset for blood cells detection.&#10;&#10;Thanks the original data and annotations from cosmicad and akshaylamba.&#10;The original dataset is re-organized into VOC format.&#10;BCCD Dataset is under MIT licence.&#10;&#10;Data preparation is important to use machine learning.&#10;In this project, the Faster R-CNN algorithm from keras-frcnn for Object Detection is used.&#10;From this dataset, nicolaschen1 developed two Python scripts to make&#10;preparation data (CSV file and images) for recognition of abnormalities&#10;in blood cells on medical images.&#10;&#10;export.py: it creates the file &quot;test.csv&quot; with all data needed: filename, class_name, x1,y1,x2,y2.&#10;plot.py: it plots the boxes for each image and save it in a new directory.&#10;&#10;Image Type : jpeg(JPEG)&#10;Width x Height : 640 x 480&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;bccd&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/bccd" />
@@ -12,9 +11,6 @@
 
 # `bccd`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -76,6 +72,14 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -86,7 +90,3 @@ FeaturesDict({
     url    = "https://github.com/Shenggan/BCCD_Dataset"
 }
 ```
-
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

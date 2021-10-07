@@ -1,0 +1,100 @@
+WARC/1.0
+WARC-Type: warcinfo
+WARC-Date: 2019-04-26T19:04:32Z
+WARC-Filename: wet_0.warc.wet.gz
+WARC-Record-ID: <urn:uuid:3619dc30-d31b-4ef4-b5d9-fccee12dafd8>
+Content-Type: application/warc-fields
+Content-Length: 369
+
+Software-Info: ia-web-commons.1.1.9-SNAPSHOT-20190415082620
+Extracted-Date: Fri, 26 Apr 2019 19:04:32 GMT
+robots: checked via crawler-commons 1.1-SNAPSHOT (https://github.com/crawler-commons/crawler-commons)
+isPartOf: CC-MAIN-2019-18
+operator: Common Crawl Admin (info@commoncrawl.org)
+description: Wide crawl of the web for April 2019
+publisher: Common Crawl
+
+
+
+WARC/1.0
+WARC-Type: conversion
+WARC-Target-URI: http://fake.com/url/1
+WARC-Date: 2019-04-18T10:38:25Z
+WARC-Record-ID: <urn:uuid:23d84b81-bffc-4ed9-90ae-55a429dbf541>
+WARC-Refers-To: <urn:uuid:716838d3-9c47-4879-9767-a891453e47c0>
+WARC-Block-Digest: sha1:XFU7ISMKJHM3VU3BIHSI73QHAVT3OL52
+Content-Type: text/plain
+Content-Length: 19621
+
+Once upon a time there was a dear little girl who was loved by every one who looked at her, but most of all by her grandmother, and there was nothing that she would not have given to the child. Once she gave her a little cap of red velvet, which suited her so well that she would never wear anything else. So she was always called Little Red Riding Hood.
+One day her mother said to her, "Come, Little Red Riding Hood, here is a piece of cake and a bottle of wine. Take them to your grandmother, she is ill and weak, and they will do her good. Set out before it gets hot, and when you are going, walk nicely and quietly and do not run off the path, or you may fall and break the bottle, and then your grandmother will get nothing.
+And when you go into her room, don't forget to say, good-morning, and don't peep into every corner before you do it." I will take great care, said Little Red Riding Hood to her mother, and gave her hand on it. The grandmother lived out in the wood, half a league from the village, and just as Little Red Riding Hood entered the wood, a wolf met her.
+
+WARC/1.0
+WARC-Type: conversion
+WARC-Target-URI: http://fake.com/url/2
+WARC-Date: 2019-04-18T11:05:28Z
+WARC-Record-ID: <urn:uuid:1c03ff34-fe12-4dd7-9857-149952095cbb>
+WARC-Refers-To: <urn:uuid:7da148a2-62dd-46ba-9d15-16d52764dc64>
+WARC-Block-Digest: sha1:3S6BDXANT74BOAODTYXC4KGTC2274XBI
+Content-Type: text/plain
+Content-Length: 619
+
+This is another fake webpage, but it's not long enough.
+
+WARC/1.0
+WARC-Type: conversion
+WARC-Target-URI: http://fake.com/url/de
+WARC-Date: 2019-04-18T11:05:28Z
+WARC-Record-ID: <urn:uuid:1c03ff34-fe12-4dd7-9857-149952095cbb>
+WARC-Refers-To: <urn:uuid:7da148a2-62dd-46ba-9d15-16d52764dc64>
+WARC-Block-Digest: sha1:3S6BDXANT74BOAODTYXC4KGTC2274XBI
+Content-Type: text/plain
+Content-Length: 619
+
+Rot·käppchen wohnt bei ihrer Mutter. An einem Morgen gibt die Mutter Rot∙käppchen einen Korb. In dem Korb ist Wein. Und Kuchen. Dann sagt die Mutter zu Rot∙käppchen: Bring den Korb zur Groß∙mutter. Und grüß die Groß·mutter lieb von mir.
+Die Groß∙mutter ist krank. Die Groß∙mutter soll wieder zu Kräften kommen. Und schnell gesund werden. Also beeil dich. Aber bleib auf dem Weg. Und pass gut auf die Dinge im Korb auf. Rot∙käppchen antwortet: Liebe Mutter. Ich bleibe auf dem Weg.
+Und ich beeile mich. Das verspreche ich dir. Dann geht Rot·käppchen in den Wald zur Groß·mutter. Im Wald trifft Rot∙käppchen einen Wolf. Der Wolf ist ein böses Tier. Aber das weiß Rot∙käppchen nicht. Deshalb hat Rot∙käppchen auch keine Angst vor dem Wolf.
+
+WARC/1.0
+WARC-Type: conversion
+WARC-Target-URI: http://fake.com/url/de-786
+WARC-Date: 2019-04-18T11:05:28Z
+WARC-Record-ID: <urn:uuid:1c03ff34-fe12-4dd7-9857-149952095cbb>
+WARC-Refers-To: <urn:uuid:7da148a2-62dd-46ba-9d15-16d52764dc64>
+WARC-Block-Digest: sha1:3S6BDXANT74BOAODTYXC4KGTC2274XBI
+Content-Type: text/plain
+Content-Length: 619
+
+Validierung. Rot·käppchen wohnt bei ihrer Mutter. An einem Morgen gibt die Mutter Rot∙käppchen einen Korb. In dem Korb ist Wein. Und Kuchen. Dann sagt die Mutter zu Rot∙käppchen: Bring den Korb zur Groß∙mutter. Und grüß die Groß·mutter lieb von mir.
+Validierung. Die Groß∙mutter ist krank. Die Groß∙mutter soll wieder zu Kräften kommen. Und schnell gesund werden. Also beeil dich. Aber bleib auf dem Weg. Und pass gut auf die Dinge im Korb auf. Rot∙käppchen antwortet: Liebe Mutter. Ich bleibe auf dem Weg.
+Validierung. Und ich beeile mich. Das verspreche ich dir. Dann geht Rot·käppchen in den Wald zur Groß·mutter. Im Wald trifft Rot∙käppchen einen Wolf. Der Wolf ist ein böses Tier. Aber das weiß Rot∙käppchen nicht. Deshalb hat Rot∙käppchen auch keine Angst vor dem Wolf.
+
+
+WARC/1.0
+WARC-Type: conversion
+WARC-Target-URI: http://fake.com/url/und
+WARC-Date: 2019-04-18T11:05:28Z
+WARC-Record-ID: <urn:uuid:1c03ff34-fe12-4dd7-9857-149952095cbb>
+WARC-Refers-To: <urn:uuid:7da148a2-62dd-46ba-9d15-16d52764dc64>
+WARC-Block-Digest: sha1:3S6BDXANT74BOAODTYXC4KGTC2274XBI
+Content-Type: text/plain
+Content-Length: 619
+
+Repetitive text labeled "und" by gcld3. Repetitive text labeled "und" by gcld3. Repetitive text labeled "und" by gcld3. Repetitive text labeled "und" by gcld3. Repetitive text labeled "und" by gcld3. Repetitive text labeled "und" by gcld3.
+This is repetitive text. This is repetitive text. This is repetitive text. This is repetitive text. This is repetitive text. This is repetitive text. This is repetitive text. This is repetitive text. This is repetitive text. This is repetitive text.
+That was repetetitive text. That was repetetitive text. That was repetetitive text. That was repetetitive text. That was repetetitive text. That was repetetitive text. That was repetetitive text. That was repetetitive text. That was repetetitive text.
+
+WARC/1.0
+WARC-Type: conversion
+WARC-Target-URI: http://fake.com/url/und-27
+WARC-Date: 2019-04-18T11:05:28Z
+WARC-Record-ID: <urn:uuid:1c03ff34-fe12-4dd7-9857-149952095cbb>
+WARC-Refers-To: <urn:uuid:7da148a2-62dd-46ba-9d15-16d52764dc64>
+WARC-Block-Digest: sha1:3S6BDXANT74BOAODTYXC4KGTC2274XBI
+Content-Type: text/plain
+Content-Length: 619
+
+This will be "und" in validation. This will be "und" in validation. This will be "und" in validation. This will be "und" in validation. This will be "und" in validation. This will be "und" in validation. This will be "und" in validation.
+It will be "und" because it's repetitive. It will be "und" because it's repetitive. It will be "und" because it's repetitive. It will be "und" because it's repetitive. It will be "und" because it's repetitive. It will be "und" because it's repetitive.
+It will be in validation because of the URL. It will be in validation because of the URL. It will be in validation because of the URL. It will be in validation because of the URL. It will be in validation because of the URL. It will be in validation because of the URL.

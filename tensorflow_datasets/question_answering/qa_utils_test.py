@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,11 +59,11 @@ class QAUtilsTest(testing.TestCase):
              'id': '3',
              'title': 'Paris_France',
              'context':
-                 'Paris is the largest city in France with over 2 million '
+                 '  Paris is the largest city in France with over 2 million '
                  'inhabitants. It is the capital of France.',
              'question': 'What is the capital of France?',
              'answers': {
-                 'answer_start': [1, 7],
+                 'answer_start': [3, 9],
                  'text': ['Paris', 'France']
              }
          })])

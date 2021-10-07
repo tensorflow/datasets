@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,10 @@ import abc
 import collections
 import contextlib
 import inspect
-from typing import ClassVar, Iterator
+from typing import ClassVar, Iterator, List, Type
 
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.utils import py_utils
 
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
@@ -31,15 +32,14 @@ _DATASET_REGISTRY = {}
 # <str snake_cased_name, abstract DatasetBuilder subclass>
 _ABSTRACT_DATASET_REGISTRY = {}
 
-# Datasets that are under active development and which we can't therefore load.
-# <str snake_cased_name, in development DatasetBuilder subclass>
-_IN_DEVELOPMENT_REGISTRY = {}
-
 # Keep track of Dict[str (module name), List[DatasetBuilder]]
 # This is directly accessed by `tfds.community.builder_cls_from_module` when
 # importing community packages.
 _MODULE_TO_DATASETS = collections.defaultdict(list)
 
+
+class DatasetNotFoundError(ValueError):
+  """Exception raised when the dataset cannot be found."""
 
 
 _skip_registration = False
@@ -61,10 +61,6 @@ class RegisteredDataset(abc.ABC):
 
   # Name of the dataset, automatically filled.
   name: ClassVar[str]
-
-  # Set to True for datasets that are under active development and should not
-  # be available through tfds.{load, builder} or documented in overview.md.
-  IN_DEVELOPMENT: ClassVar[bool] = False
 
 
   def __init_subclass__(cls, skip_registration=False, **kwargs):  # pylint: disable=redefined-outer-name
@@ -94,19 +90,47 @@ class RegisteredDataset(abc.ABC):
       pass
     elif cls.name in _DATASET_REGISTRY:
       raise ValueError(f'Dataset with name {cls.name} already registered.')
-    elif cls.name in _IN_DEVELOPMENT_REGISTRY:
-      raise ValueError(
-          f'Dataset with name {cls.name} already registered as in development.'
-      )
     elif cls.name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
-          f'Dataset with name {cls.name} already registered as abstract.'
-      )
+          f'Dataset with name {cls.name} already registered as abstract.')
 
     # Add the dataset to the registers
     if is_abstract:
       _ABSTRACT_DATASET_REGISTRY[cls.name] = cls
-    elif cls.IN_DEVELOPMENT:
-      _IN_DEVELOPMENT_REGISTRY[cls.name] = cls
     else:
       _DATASET_REGISTRY[cls.name] = cls
+
+
+def _is_builder_available(builder_cls: Type[RegisteredDataset]) -> bool:
+  """Returns `True` is the builder is available."""
+  return visibility.DatasetType.TFDS_PUBLIC.is_available()
+
+
+def list_imported_builders() -> List[str]:
+  """Returns the string names of all `tfds.core.DatasetBuilder`s."""
+  all_builders = [
+      builder_name for builder_name, builder_cls in _DATASET_REGISTRY.items()
+      if _is_builder_available(builder_cls)
+  ]
+  return sorted(all_builders)
+
+
+def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
+  """Returns the Registered dataset class."""
+  if name in _ABSTRACT_DATASET_REGISTRY:
+    # Will raise TypeError: Can't instantiate abstract class X with abstract
+    # methods y, before __init__ even get called
+    _ABSTRACT_DATASET_REGISTRY[name]()  # pytype: disable=not-callable
+    # Alternativelly, could manually extract the list of non-implemented
+    # abstract methods.
+    raise AssertionError(f'Dataset {name} is an abstract class.')
+
+  if name not in _DATASET_REGISTRY:
+    raise DatasetNotFoundError(f'Dataset {name} not found.')
+
+  builder_cls = _DATASET_REGISTRY[name]
+  if not _is_builder_available(builder_cls):
+    available_types = visibility.get_availables()
+    msg = f'Dataset {name} is not available. Only: {available_types}'
+    raise PermissionError(msg)
+  return builder_cls  # pytype: disable=bad-return-type

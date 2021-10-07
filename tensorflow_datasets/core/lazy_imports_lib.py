@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,13 @@
 
 """Lazy imports for heavy dependencies."""
 
+import functools
 import importlib
+from typing import TypeVar
 
 from tensorflow_datasets.core.utils import py_utils as utils
+
+_Fn = TypeVar("_Fn")
 
 
 def _try_import(module_name):
@@ -48,18 +52,34 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def bs4(cls):
+    return _try_import("bs4")
+
+  @utils.classproperty
+  @classmethod
   def crepe(cls):
     return _try_import("crepe")
 
   @utils.classproperty
   @classmethod
   def cv2(cls):
-    return _try_import("cv2")  # pylint: disable=unreachable
+    return _try_import("cv2")
+
+  @utils.classproperty
+  @classmethod
+  def envlogger(cls):
+    return _try_import("envlogger.reader")
+
+  @utils.classproperty
+  @classmethod
+  def gcld3(cls):
+    return _try_import("gcld3")  # pylint: disable=unreachable
 
   @utils.classproperty
   @classmethod
   def h5py(cls):
     return _try_import("h5py")
+
 
   @utils.classproperty
   @classmethod
@@ -78,6 +98,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def lxml(cls):
+    return _try_import("lxml")
+
+  @utils.classproperty
+  @classmethod
   def matplotlib(cls):
     _try_import("matplotlib.pyplot")
     return _try_import("matplotlib")
@@ -86,6 +111,11 @@ class LazyImporter(object):
   @classmethod
   def mwparserfromhell(cls):
     return _try_import("mwparserfromhell")
+
+  @utils.classproperty
+  @classmethod
+  def networkx(cls):
+    return _try_import("networkx")
 
   @utils.classproperty
   @classmethod
@@ -107,8 +137,18 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def PIL_ImageDraw(cls):  # pylint: disable=invalid-name
+    return _try_import("PIL.ImageDraw")
+
+  @utils.classproperty
+  @classmethod
   def pretty_midi(cls):
     return _try_import("pretty_midi")
+
+  @utils.classproperty
+  @classmethod
+  def pycocotools(cls):
+    return _try_import("pycocotools.mask")
 
   @utils.classproperty
   @classmethod
@@ -124,6 +164,7 @@ class LazyImporter(object):
   @classmethod
   def scipy(cls):
     _try_import("scipy.io")
+    _try_import("scipy.io.wavfile")
     _try_import("scipy.ndimage")
     return _try_import("scipy")
 
@@ -140,6 +181,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def tifffile(cls):
+    return _try_import("tifffile")
+
+  @utils.classproperty
+  @classmethod
   def tensorflow_data_validation(cls):
     return _try_import("tensorflow_data_validation")
 
@@ -152,6 +198,7 @@ class LazyImporter(object):
   @classmethod
   def tldextract(cls):
     return _try_import("tldextract")
+
 
   @utils.classproperty
   @classmethod
@@ -167,3 +214,19 @@ class LazyImporter(object):
 
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
+
+
+def beam_ptransform_fn(fn: _Fn) -> _Fn:
+  """Lazy version of `@beam.ptransform_fn`."""
+
+  lazy_decorated_fn = None
+
+  @functools.wraps(fn)
+  def decorated(*args, **kwargs):
+    nonlocal lazy_decorated_fn
+    # Actually decorate the function only the first time it is called
+    if lazy_decorated_fn is None:
+      lazy_decorated_fn = lazy_imports.apache_beam.ptransform_fn(fn)
+    return lazy_decorated_fn(*args, **kwargs)
+
+  return decorated

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,8 +41,10 @@ _URL = 'https://patchcamelyon.grand-challenge.org/'
 class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
   """PatchCamelyon."""
 
-  VERSION = tfds.core.Version(
-      '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+  VERSION = tfds.core.Version('2.0.0')
+  RELEASE_NOTES = {
+      '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -73,11 +75,9 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
     paths = dl_manager.download_and_extract(resources)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=dict(split='test', paths=paths)),
+            name=tfds.Split.TEST, gen_kwargs=dict(split='test', paths=paths)),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(split='train', paths=paths)),
+            name=tfds.Split.TRAIN, gen_kwargs=dict(split='train', paths=paths)),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs=dict(split='valid', paths=paths)),

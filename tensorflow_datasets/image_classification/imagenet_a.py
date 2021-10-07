@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """The ImageNet-A image classification dataset."""
 
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = r"""
@@ -52,7 +52,7 @@ class ImagenetA(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(_IMAGENET_LABELS_FILENAME)
+    names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FILENAME)
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.
@@ -98,4 +98,3 @@ class ImagenetA(tfds.core.GeneratorBasedBuilder):
             'file_name': image_filename,
         }
         yield image_filename, features
-

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,25 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Text feature.
-
-"""
+"""Text feature."""
 
 import html
 import os
 import textwrap
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.deprecated import text as text_lib
-from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
 
-class Text(feature.Tensor):
+class Text(tensor_feature.Tensor):
   """`FeatureConnector` for text, encoding to integers with a `TextEncoder`."""
 
   def __init__(self, encoder=None, encoder_config=None):
@@ -47,8 +45,7 @@ class Text(feature.Tensor):
       raise ValueError("If encoder is provided, encoder_config must be None.")
     if encoder:
       encoder_config = text_lib.TextEncoderConfig(
-          encoder_cls=type(encoder),
-          vocab_size=encoder.vocab_size)
+          encoder_cls=type(encoder), vocab_size=encoder.vocab_size)
     elif encoder_config:
       encoder = encoder_config.encoder
 
@@ -79,10 +76,8 @@ class Text(feature.Tensor):
     self._encoder = new_encoder
     encoder_cls = self._encoder_cls or type(None)
     if not isinstance(new_encoder, encoder_cls):
-      raise ValueError(
-          "Changing type of encoder. Got %s but must be %s" %
-          (type(new_encoder).__name__,
-           self._encoder_cls.__name__))
+      raise ValueError("Changing type of encoder. Got %s but must be %s" %
+                       (type(new_encoder).__name__, self._encoder_cls.__name__))
 
   def maybe_set_encoder(self, new_encoder):
     """Set encoder, but no-op if encoder is already set."""
@@ -144,8 +139,8 @@ class Text(feature.Tensor):
     by `SubwordTextEncoder.build_from_corpus()`.
 
     Args:
-      corpus_generator: generator yielding `str`, from which
-        subwords will be constructed.
+      corpus_generator: generator yielding `str`, from which subwords will be
+        constructed.
       **kwargs: kwargs forwarded to `SubwordTextEncoder.build_from_corpus()`
     """
     if self._encoder_cls is not text_lib.SubwordTextEncoder:
@@ -173,7 +168,11 @@ class Text(feature.Tensor):
     if self.encoder is not None:
       return repr(ex)
 
-    ex = ex.decode("utf-8")
+    try:
+      ex = ex.decode("utf-8")
+    except UnicodeDecodeError:
+      # Some datasets have invalid UTF-8 examples (e.g. opinosis)
+      return repr(ex[:1000])
     ex = html.escape(ex)
     ex = textwrap.shorten(ex, width=1000)  # Truncate long text
     return ex
@@ -183,17 +182,15 @@ class Text(feature.Tensor):
     if "use_encoder" in value:
       raise ValueError(
           "Deprecated encoder not supported. Please use the plain text version "
-          "with `tensorflow_text`."
-      )
+          "with `tensorflow_text`.")
     del value  # Unused
     return cls()
 
   def to_json_content(self) -> Json:
-    if self._encoder or self._encoder_config:
+    if self._encoder:
       logging.warning(
           "Dataset is using deprecated text encoder API which will be removed "
           "soon. Please use the plain_text version of the dataset and migrate "
-          "to `tensorflow_text`."
-      )
+          "to `tensorflow_text`.")
       return dict(use_encoder=True)
     return dict()

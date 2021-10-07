@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="tiny_shakespeare" />
   <meta itemprop="description" content="40,000 lines of Shakespeare from a variety of Shakespeare&#x27;s plays. Featured in Andrej Karpathy&#x27;s blog post &#x27;The Unreasonable Effectiveness of Recurrent Neural Networks&#x27;: http://karpathy.github.io/2015/05/21/rnn-effectiveness/.&#10;&#10;To use for e.g. character modelling:&#10;&#10;```&#10;d = tfds.load(name=&#x27;tiny_shakespeare&#x27;)[&#x27;train&#x27;]&#10;d = d.map(lambda x: tf.strings.unicode_split(x[&#x27;text&#x27;], &#x27;UTF-8&#x27;))&#10;# train split includes vocabulary for other splits&#10;vocabulary = sorted(set(next(iter(d)).numpy()))&#10;d = d.map(lambda x: {&#x27;cur_char&#x27;: x[:-1], &#x27;next_char&#x27;: x[1:]})&#10;d = d.unbatch()&#10;seq_len = 100&#10;batch_size = 2&#10;d = d.batch(seq_len)&#10;d = d.batch(batch_size)&#10;```&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;tiny_shakespeare&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/tiny_shakespeare" />
@@ -11,6 +10,7 @@
 </div>
 
 # `tiny_shakespeare`
+
 
 *   **Description**:
 
@@ -71,6 +71,44 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tiny_shakespeare-1.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -81,7 +119,3 @@ FeaturesDict({
   howpublished={\url{https://github.com/karpathy/char-rnn}}
 }
 ```
-
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

@@ -35,10 +35,25 @@ for image, label in ds:
   pass
 ```
 
+## TFDS core values
+
+TFDS has been built with these principles in mind:
+
+* **Simplicity**: Standard use-cases should work out-of-the box
+* **Performance**: TFDS follows
+  [best practices](https://www.tensorflow.org/guide/data_performance)
+  and can achieve state-of-the-art speed
+* **Determinism/reproducibility**: All users get the same examples in the same
+  order
+* **Customisability**: Advanced users can have fine-grained control
+
+If those use cases are not satisfied, please send us
+[feedback](https://github.com/tensorflow/datasets/issues).
+
 ## Want a certain dataset?
 
 Adding a dataset is really straightforward by following
-[our guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md).
+[our guide](https://www.tensorflow.org/datasets/add_dataset).
 
 Request a dataset by opening a
 [Dataset request GitHub issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=dataset+request&template=dataset-request.md&title=%5Bdata+request%5D+%3Cdataset+name%3E).
@@ -46,7 +61,6 @@ Request a dataset by opening a
 And vote on the current
 [set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request)
 by adding a thumbs-up reaction to the issue.
-
 
 ### Citation
 

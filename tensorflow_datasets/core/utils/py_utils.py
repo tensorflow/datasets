@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,17 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Some python utils function and classes.
-
-"""
+"""Some python utils function and classes."""
 
 import base64
 import contextlib
 import functools
-import hashlib
 import io
 import itertools
 import logging
+import operator
 import os
 import random
 import shutil
@@ -31,23 +29,16 @@ import string
 import sys
 import textwrap
 import threading
-import types
-from typing import Any, Callable, Iterator, List, NoReturn, TypeVar, Union
+import typing
+from typing import Any, Callable, Iterable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
 import uuid
 
 from six.moves import urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core.utils import type_utils
 
-
-# pylint: disable=g-import-not-at-top
-if sys.version_info >= (3, 9):
-  import importlib.resources as importlib_resources
-else:
-  import importlib_resources
-
-# pylint: enable=g-import-not-at-top
-
+Tree = type_utils.Tree
 
 # NOTE: When used on an instance method, the cache is shared across all
 # instances and IS NOT per-instance.
@@ -56,17 +47,17 @@ else:
 # For @property methods, use @memoized_property below.
 memoize = functools.lru_cache
 
-
 T = TypeVar('T')
 
 Fn = TypeVar('Fn', bound=Callable[..., Any])
 
 
 def is_notebook():
-  """Returns True if running in a notebook (Colab, Jupyter) environement."""
-  # Inspired from the tfdm autonotebook code
+  """Returns True if running in a notebook (Colab, Jupyter) environment."""
+  # Inspired from the tqdm autonotebook code
   try:
-    import IPython  # pytype: disable=import-error  # pylint: disable=import-outside-toplevel,g-import-not-at-top
+    # Use sys.module as we do not want to trigger import
+    IPython = sys.modules['IPython']  # pylint: disable=invalid-name
     if 'IPKernelApp' not in IPython.get_ipython().config:
       return False  # Run in a IPython terminal
   except:  # pylint: disable=bare-except
@@ -125,7 +116,7 @@ class NonMutableDict(dict):
   def __setitem__(self, key, value):
     if key in self:
       raise ValueError(self._error_msg.format(key=key))
-    return super(NonMutableDict, self). __setitem__(key, value)
+    return super(NonMutableDict, self).__setitem__(key, value)
 
   def update(self, other):
     if any(k in self for k in other):
@@ -157,11 +148,14 @@ class memoized_property(property):  # pylint: disable=invalid-name
     return cached
 
 
-def resource_path(
-    package: Union[str, types.ModuleType]
-) -> importlib_resources.abc.Traversable:  # pytype: disable=module-attr
-  """Returns `importlib.resources.files`."""
-  return importlib_resources.files(package)  # pytype: disable=module-attr
+if typing.TYPE_CHECKING:
+  # TODO(b/171883689): There is likelly better way to annotate descriptors
+
+  def classproperty(fn: Callable[[Type[Any]], T]) -> T:  # pylint: disable=function-redefined
+    return fn(type(None))
+
+  def memoized_property(fn: Callable[[Any], T]) -> T:  # pylint: disable=function-redefined
+    return fn(None)
 
 
 def map_nested(function, data_struct, dict_only=False, map_tuple=False):
@@ -178,8 +172,9 @@ def map_nested(function, data_struct, dict_only=False, map_tuple=False):
     if map_tuple:
       types_.append(tuple)
     if isinstance(data_struct, tuple(types_)):
-      mapped = [map_nested(function, v, dict_only, map_tuple)
-                for v in data_struct]
+      mapped = [
+          map_nested(function, v, dict_only, map_tuple) for v in data_struct
+      ]
       if isinstance(data_struct, list):
         return mapped
       else:
@@ -197,7 +192,8 @@ def zip_nested(arg0, *args, **kwargs):
   # Could add support for more exotic data_struct, like OrderedDict
   if isinstance(arg0, dict):
     return {
-        k: zip_nested(*a, dict_only=dict_only) for k, a in zip_dict(arg0, *args)
+        k: zip_nested(*a, dict_only=dict_only)
+        for k, a in zip_dict(arg0, *args)
     }
   elif not dict_only:
     if isinstance(arg0, list):
@@ -218,6 +214,40 @@ def flatten_nest_dict(d):
     else:
       flat_dict[k] = v
   return flat_dict
+
+
+# Note: Could use `tree.flatten_with_path` instead, but makes it harder for
+# users to compile from source.
+def flatten_with_path(
+    structure: Tree[T],
+) -> Iterator[Tuple[Tuple[Union[str, int], ...], T]]:  # pytype: disable=invalid-annotation
+  """Convert a TreeDict into a flat list of paths and their values.
+
+  ```py
+  flatten_with_path({'a': {'b': v}}) == [(('a', 'b'), v)]
+  ```
+
+  Args:
+    structure: Nested input structure
+
+  Yields:
+    The `(path, value)` tuple. With path being the tuple of `dict` keys and
+      `list` indexes
+  """
+  if isinstance(structure, dict):
+    key_struct_generator = sorted(structure.items())
+  elif isinstance(structure, (list, tuple)):
+    key_struct_generator = enumerate(structure)
+  else:
+    key_struct_generator = None  # End of recursion
+
+  if key_struct_generator is not None:
+    for key, sub_structure in key_struct_generator:
+      # Recurse into sub-structures
+      for sub_path, sub_value in flatten_with_path(sub_structure):
+        yield (key,) + sub_path, sub_value
+  else:
+    yield (), structure  # Leaf, yield value
 
 
 def dedent(text):
@@ -256,78 +286,6 @@ def nullcontext(enter_result: T = None) -> Iterator[T]:
   yield enter_result
 
 
-def as_proto_cls(proto_cls):
-  """Simulate proto inheritance.
-
-  By default, protobuf do not support direct inheritance, so this decorator
-  simulates inheritance to the class to which it is applied.
-
-  Example:
-
-  ```
-  @as_proto_class(proto.MyProto)
-  class A(object):
-    def custom_method(self):
-      return self.proto_field * 10
-
-  p = proto.MyProto(proto_field=123)
-
-  a = A()
-  a.CopyFrom(p)  # a is like a proto object
-  assert a.proto_field == 123
-  a.custom_method()  # But has additional methods
-
-  ```
-
-  Args:
-    proto_cls: The protobuf class to inherit from
-
-  Returns:
-    decorated_cls: The decorated class
-  """
-
-  def decorator(cls):
-    """Decorator applied to the class."""
-
-    class ProtoCls(object):
-      """Base class simulating the protobuf."""
-
-      def __init__(self, *args, **kwargs):
-        super(ProtoCls, self).__setattr__(
-            '_ProtoCls__proto',
-            proto_cls(*args, **kwargs),
-        )
-
-      def __getattr__(self, attr_name):
-        return getattr(self.__proto, attr_name)
-
-      def __setattr__(self, attr_name, new_value):
-        try:
-          if isinstance(new_value, list):
-            self.ClearField(attr_name)
-            getattr(self.__proto, attr_name).extend(new_value)
-          else:
-            return setattr(self.__proto, attr_name, new_value)
-        except AttributeError:
-          return super(ProtoCls, self).__setattr__(attr_name, new_value)
-
-      def __eq__(self, other):
-        return self.__proto, other.get_proto()
-
-      def get_proto(self):
-        return self.__proto
-
-      def __repr__(self):
-        return '<{cls_name}\n{proto_repr}\n>'.format(
-            cls_name=cls.__name__, proto_repr=repr(self.__proto))
-
-    decorator_cls = type(cls.__name__, (cls, ProtoCls), {
-        '__doc__': cls.__doc__,
-    })
-    return decorator_cls
-  return decorator
-
-
 def _get_incomplete_path(filename):
   """Returns a temporary filename based on filename."""
   random_suffix = ''.join(
@@ -336,8 +294,9 @@ def _get_incomplete_path(filename):
 
 
 @contextlib.contextmanager
-def incomplete_dir(dirname):
+def incomplete_dir(dirname: type_utils.PathLike) -> Iterator[str]:
   """Create temporary dir for dirname and rename on exit."""
+  dirname = os.fspath(dirname)
   tmp_dir = _get_incomplete_path(dirname)
   tf.io.gfile.makedirs(tmp_dir)
   try:
@@ -348,17 +307,17 @@ def incomplete_dir(dirname):
       tf.io.gfile.rmtree(tmp_dir)
 
 
-def tfds_dir() -> str:
-  """Path to tensorflow_datasets directory.
-
-  The difference with `tfds.core.get_tfds_path` is that this function can be
-  used for write access while `tfds.core.get_tfds_path` should be used for
-  read-only.
-
-  Returns:
-    tfds_dir: The root TFDS path.
-  """
-  return os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+@contextlib.contextmanager
+def incomplete_file(
+    path: type_utils.ReadWritePath,) -> Iterator[type_utils.ReadWritePath]:
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_path = path.parent / f'{path.name}.incomplete.{uuid.uuid4().hex}'
+  try:
+    yield tmp_path
+    tmp_path.replace(path)
+  finally:
+    # Eventually delete the tmp_path if exception was raised
+    tmp_path.unlink(missing_ok=True)
 
 
 @contextlib.contextmanager
@@ -370,37 +329,10 @@ def atomic_write(path, mode):
   tf.io.gfile.rename(tmp_path, path, overwrite=True)
 
 
-def get_tfds_path(relative_path):
-  """Returns absolute path to file given path relative to tfds root."""
-  path = os.path.join(tfds_dir(), relative_path)
-  return path
-
-
-def get_resource_path(path) -> str:
-  """Get the read-only resource path."""
-  # For compatibility with `zip` archives, we should replace this by a pathlike
-  # abstraction, which uses `importlib.resource.files()`
-  return str(path)
-
-
-def read_checksum_digest(path, checksum_cls=hashlib.sha256):
-  """Given a hash constructor, returns checksum digest and size of file."""
-  checksum = checksum_cls()
-  size = 0
-  with tf.io.gfile.GFile(path, 'rb') as f:
-    while True:
-      block = f.read(io.DEFAULT_BUFFER_SIZE)
-      size += len(block)
-      if not block:
-        break
-      checksum.update(block)
-  return checksum.hexdigest(), size
-
-
 def reraise(
     e: Exception,
-    prefix: str = None,
-    suffix: str = None,
+    prefix: Optional[str] = None,
+    suffix: Optional[str] = None,
 ) -> NoReturn:
   """Reraise an exception with an additional message."""
   prefix = prefix or ''
@@ -413,17 +345,16 @@ def reraise(
       type(e).__str__ is not BaseException.__str__
       # This should never happens unless the user plays with Exception
       # internals
-      or not hasattr(e, 'args')
-      or not isinstance(e.args, tuple)
-  ):
+      or not hasattr(e, 'args') or not isinstance(e.args, tuple)):
     msg = f'{prefix}{e}{suffix}'
     # Could try to dynamically create a
     # `type(type(e).__name__, (ReraisedError, type(e)), {})`, but should be
     # carefull when nesting `reraise` as well as compatibility with external
     # code.
-    # Special case ModuleNotFoundError, ImportError which can be re-raised
-    # with the same type.
-    if isinstance(e, ImportError):
+    # Some base exception class (ImportError, OSError) and subclasses (
+    # ModuleNotFoundError, FileNotFoundError) have custom `__str__` error
+    # message. We re-raise those with same type to allow except in caller code.
+    if isinstance(e, (ImportError, OSError)):
       exception = type(e)(msg)
     else:
       exception = RuntimeError(f'{type(e).__name__}: {msg}')
@@ -437,8 +368,7 @@ def reraise(
   else:
     e.args = tuple(
         p for p in (prefix,) + e.args + (suffix,)
-        if not isinstance(p, str) or p
-    )
+        if not isinstance(p, str) or p)
     raise  # pylint: disable=misplaced-bare-raise
 
 
@@ -466,8 +396,10 @@ def try_reraise(*args, **kwargs):
 
 def rgetattr(obj, attr, *args):
   """Get attr that handles dots in attr name."""
+
   def _getattr(obj, attr):
     return getattr(obj, attr, *args)
+
   return functools.reduce(_getattr, [obj] + attr.split('.'))
 
 
@@ -531,22 +463,47 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
 
 def basename_from_url(url: str) -> str:
   """Returns file name of file at given url."""
-  return os.path.basename(urllib.parse.urlparse(url).path) or 'unknown_name'
+  filename = urllib.parse.urlparse(url).path
+  filename = os.path.basename(filename)
+  # Replace `%2F` (html code for `/`) by `_`.
+  # This is consistent with how Chrome rename downloaded files.
+  filename = filename.replace('%2F', '_')
+  return filename or 'unknown_name'
 
 
-def list_info_files(dir_path: str) -> List[str]:
+def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
   """Returns name of info files within dir_path."""
-  # TODO(tfds): Is there a better filtering scheme which would be more
-  # resistant to future modifications (ex: tfrecord => other format)
+  from tensorflow_datasets.core import file_adapters  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
+  path = os.fspath(dir_path)
   return [
-      fname for fname in tf.io.gfile.listdir(dir_path)
-      if '.tfrecord' not in fname and
-      not tf.io.gfile.isdir(os.path.join(dir_path, fname))
+      fname for fname in tf.io.gfile.listdir(path)
+      if not tf.io.gfile.isdir(os.path.join(path, fname)) and
+      not file_adapters.is_example_file(fname)
   ]
 
 
-def get_base64(write_fn: Callable[[io.BytesIO], None]) -> str:
+def get_base64(write_fn: Union[bytes, Callable[[io.BytesIO], None]],) -> str:
   """Extracts the base64 string of an object by writing into a tmp buffer."""
-  buffer = io.BytesIO()
-  write_fn(buffer)
-  return base64.b64encode(buffer.getvalue()).decode('ascii')  # pytype: disable=bad-return-type
+  if isinstance(write_fn, bytes):  # Value already encoded
+    bytes_value = write_fn
+  else:
+    buffer = io.BytesIO()
+    write_fn(buffer)
+    bytes_value = buffer.getvalue()
+  return base64.b64encode(bytes_value).decode('ascii')  # pytype: disable=bad-return-type
+
+
+@contextlib.contextmanager
+def add_sys_path(path: type_utils.PathLike) -> Iterator[None]:
+  """Temporary add given path to `sys.path`."""
+  path = os.fspath(path)
+  try:
+    sys.path.insert(0, path)
+    yield
+  finally:
+    sys.path.remove(path)
+
+
+def prod(iterable: Iterable[int], *, start=1) -> int:
+  """Backport of python 3.8 `math.prod`."""
+  return functools.reduce(operator.mul, iterable, start)

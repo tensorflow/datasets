@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,8 +30,7 @@ class OpusTestCustomConfigTest(tfds.testing.DatasetBuilderTestCase):
     config = opus.OpusConfig(
         version=tfds.core.Version("0.1.0"),
         language_pair=("de", "en"),
-        subsets=["Tanzil", "EMEA"]
-    )
+        subsets=["Tanzil", "EMEA"])
     opus.Opus.BUILDER_CONFIGS = [config]
 
   @classmethod

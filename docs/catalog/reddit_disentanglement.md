@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="reddit_disentanglement" />
   <meta itemprop="description" content="This dataset contains ~3M messages from reddit.&#10;Every message is labeled with metadata. The task is to predict the id of its&#10;parent message in the corresponding thread.&#10;Each record contains a list of messages from one thread.&#10;Duplicated and broken records are removed from the dataset.&#10;&#10;&#10;Features are:&#10;  - id - message id&#10;  - text - message text&#10;  - author - message author&#10;  - created_utc - message UTC timestamp&#10;  - link_id - id of the post that the comment relates to&#10;Target:&#10;  - parent_id - id of the parent message in the current thread&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;reddit_disentanglement&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/reddit_disentanglement" />
@@ -11,6 +10,7 @@
 </div>
 
 # `reddit_disentanglement`
+
 
 Warning: Manual download required. See instructions below.
 
@@ -76,6 +76,14 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -86,7 +94,3 @@ FeaturesDict({
   year={2019}
 }
 ```
-
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

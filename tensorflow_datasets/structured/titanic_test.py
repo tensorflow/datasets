@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ import tensorflow_datasets.testing as tfds_test
 class TitanicTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = titanic.Titanic
 
-  SPLITS = {
-      'train': 5
-  }
+  SPLITS = {'train': 5}
 
   DL_EXTRACT_RESULT = 'test.csv'
 

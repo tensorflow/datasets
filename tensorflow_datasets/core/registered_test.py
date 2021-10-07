@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
 
 
@@ -42,17 +43,16 @@ class EmptyDatasetBuilder(registered.RegisteredDataset):
     self.as_dataset_kwargs = kwargs
     return self
 
+  VERSION = utils.Version("1.0.0")
+  BUILDER_CONFIGS = []
+  builder_configs = {}
+
 
 class UnregisteredBuilder(EmptyDatasetBuilder):
 
   @abc.abstractproperty
   def an_abstract_property(self):
     pass
-
-
-class InDevelopmentDatasetBuilder(EmptyDatasetBuilder):
-
-  IN_DEVELOPMENT = True
 
 
 class RegisteredTest(testing.TestCase):
@@ -64,7 +64,8 @@ class RegisteredTest(testing.TestCase):
     self.assertIn(name, load.list_builders())
 
     nonexistent = "nonexistent_foobar_dataset"
-    with self.assertRaisesWithPredicateMatch(ValueError, "not found"):
+    with self.assertRaisesWithPredicateMatch(registered.DatasetNotFoundError,
+                                             "not found"):
       load.builder(nonexistent)
     # Prints registered datasets
     with self.assertRaisesWithPredicateMatch(ValueError, name):
@@ -88,18 +89,8 @@ class RegisteredTest(testing.TestCase):
     self.assertEqual(name, UnregisteredBuilder.name)
     self.assertNotIn(name, load.list_builders())
 
-    with self.assertRaisesWithPredicateMatch(ValueError, "an abstract class"):
-      load.builder(name)
-
-  def test_in_development(self):
-    name = "in_development_dataset_builder"
-    self.assertEqual(name, InDevelopmentDatasetBuilder.name)
-    self.assertNotIn(name, load.list_builders())
-
     with self.assertRaisesWithPredicateMatch(
-        ValueError,
-        ("Dataset %s is under active development and is not available yet."
-        ) % name):
+        TypeError, "Can't instantiate abstract class"):
       load.builder(name)
 
   def test_builder_with_kwargs(self):
@@ -115,8 +106,13 @@ class RegisteredTest(testing.TestCase):
   def test_builder_fullname(self):
     fullname = "empty_dataset_builder/conf1-attr:1.0.1/k1=1,k2=2"
     builder = load.builder(fullname, data_dir="bar")
-    expected = {"k1": 1, "k2": 2, "version": "1.0.1",
-                "config": "conf1-attr", "data_dir": "bar"}
+    expected = {
+        "k1": 1,
+        "k2": 2,
+        "version": "1.0.1",
+        "config": "conf1-attr",
+        "data_dir": "bar"
+    }
     self.assertEqual(expected, builder.kwargs)
 
   def test_builder_camel_case(self):
@@ -131,12 +127,14 @@ class RegisteredTest(testing.TestCase):
 
     # EmptyDatasetBuilder returns self from as_dataset
     builder = load.load(
-        name=name, split=splits.Split.TEST, data_dir=data_dir,
-        download=False, as_dataset_kwargs=as_dataset_kwargs)
+        name=name,
+        split=splits.Split.TEST,
+        data_dir=data_dir,
+        download=False,
+        as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertFalse(builder.download_called)
-    self.assertEqual(splits.Split.TEST,
-                     builder.as_dataset_kwargs.pop("split"))
+    self.assertEqual(splits.Split.TEST, builder.as_dataset_kwargs.pop("split"))
     self.assertIsNone(builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
     self.assertFalse(builder.as_dataset_kwargs.pop("decoders"))
@@ -146,20 +144,21 @@ class RegisteredTest(testing.TestCase):
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
     builder = load.load(
-        name, split=splits.Split.TRAIN, data_dir=data_dir,
-        download=True, as_dataset_kwargs=as_dataset_kwargs)
+        name,
+        split=splits.Split.TRAIN,
+        data_dir=data_dir,
+        download=True,
+        as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)
 
     # Tests for different batch_size
     # By default batch_size=None
-    builder = load.load(
-        name=name, split=splits.Split.TEST, data_dir=data_dir)
+    builder = load.load(name=name, split=splits.Split.TEST, data_dir=data_dir)
     self.assertIsNone(builder.as_dataset_kwargs.pop("batch_size"))
     # Setting batch_size=1
     builder = load.load(
-        name=name, split=splits.Split.TEST, data_dir=data_dir,
-        batch_size=1)
+        name=name, split=splits.Split.TEST, data_dir=data_dir, batch_size=1)
     self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
 
   def test_load_all_splits(self):
@@ -188,14 +187,14 @@ class RegisteredTest(testing.TestCase):
       name = "colab_builder"
       self.assertNotIn(name, load.list_builders())
 
-      class ColabBuilder(registered.RegisteredDataset):
+      class ColabBuilder(EmptyDatasetBuilder):
         pass
 
       self.assertIn(name, load.list_builders())
       self.assertIsInstance(load.builder(name), ColabBuilder)
       old_colab_class = ColabBuilder
 
-      class ColabBuilder(registered.RegisteredDataset):  # pylint: disable=function-redefined
+      class ColabBuilder(EmptyDatasetBuilder):  # pylint: disable=function-redefined
         pass
 
       self.assertIsInstance(load.builder(name), ColabBuilder)
@@ -208,6 +207,7 @@ class RegisteredTest(testing.TestCase):
       pass
 
     with self.assertRaisesWithPredicateMatch(ValueError, "already registered"):
+
       class DuplicateBuilder(registered.RegisteredDataset):  # pylint: disable=function-redefined
         pass
 

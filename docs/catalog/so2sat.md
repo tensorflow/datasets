@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="so2sat" />
   <meta itemprop="description" content="So2Sat LCZ42 is a dataset consisting of co-registered synthetic aperture radar&#10;and multispectral optical image patches acquired by the Sentinel-1 and&#10;Sentinel-2 remote sensing satellites, and the corresponding local climate zones&#10;(LCZ) label. The dataset is distributed over 42 cities across different&#10;continents and cultural regions of the world.&#10;&#10;The full dataset (`all`) consists of 8 Sentinel-1 and 10 Sentinel-2 channels.&#10;Alternatively, one can select the `rgb` subset, which contains only the optical&#10;frequency bands of Sentinel-2, rescaled and encoded as JPEG.&#10;&#10;Dataset URL: http://doi.org/10.14459/2018MP1454690&#10;License: http://creativecommons.org/licenses/by/4.0&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;so2sat&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/so2sat" />
@@ -12,10 +11,6 @@
 
 # `so2sat`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -40,11 +35,9 @@ http://creativecommons.org/licenses/by/4.0
 
 *   **Versions**:
 
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
     *   **`2.1.0`** (default): Using updated optical channels calibration
         factor.
-    *   `2.0.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        New split API (https://tensorflow.org/datasets/splits)
 
 *   **Download size**: `Unknown size`
 
@@ -59,11 +52,15 @@ http://creativecommons.org/licenses/by/4.0
 Split | Examples
 :---- | -------:
 
-*   **Citation**:
-
-*   **Visualization**
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+*   **Citation**:
 
 ## so2sat/rgb (default config)
 

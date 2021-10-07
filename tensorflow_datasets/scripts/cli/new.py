@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 
 import argparse
 import itertools
+import os
 import pathlib
+import subprocess
 import textwrap
 import dataclasses
 
@@ -47,19 +49,15 @@ class DatasetInfo:
 
   def __post_init__(self):
     self.cls_name = naming.snake_to_camelcase(self.name)
-    self.tfds_api = (
-        'tensorflow_datasets.public_api'
-        if self.in_tfds
-        else 'tensorflow_datasets'
-    )
+    self.tfds_api = ('tensorflow_datasets.public_api'
+                     if self.in_tfds else 'tensorflow_datasets')
     self.todo = f'TODO({self.name})'
 
     if self.in_tfds:
       # `/path/to/tensorflow_datasets/image/my_dataset`
       # ->`tensorflow_datasets.image.my_dataset`
-      import_parts = itertools.dropwhile(
-          lambda p: p != 'tensorflow_datasets', self.path.parts
-      )
+      import_parts = itertools.dropwhile(lambda p: p != 'tensorflow_datasets',
+                                         self.path.parts)
       ds_import = '.'.join(import_parts)
     else:
       # For external datasets, it's difficult to correctly infer the full
@@ -73,8 +71,7 @@ class DatasetInfo:
 def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: disable=protected-access
   """Add subparser for `new` command."""
   new_parser = parsers.add_parser(
-      'new', help='Creates a new dataset directory from the template.'
-  )
+      'new', help='Creates a new dataset directory from the template.')
   new_parser.add_argument(
       'dataset_name',  # Positional argument
       type=str,
@@ -85,24 +82,26 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       type=pathlib.Path,
       default=pathlib.Path.cwd(),
       help=('Path where the dataset directory will be created. '
-            'Defaults to current directory.')
-  )
+            'Defaults to current directory.'))
   new_parser.set_defaults(subparser_fn=_create_dataset_files)
 
 
 def _create_dataset_files(args: argparse.Namespace) -> None:
   """Creates the dataset directory. Executed by `tfds new <name>`."""
+  if not naming.is_valid_dataset_and_class_name(args.dataset_name):
+    raise ValueError(
+        'Invalid dataset name. It should be a valid Python class name.')
+
   create_dataset_files(dataset_name=args.dataset_name, dataset_dir=args.dir)
 
 
 def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
   """Creates the dataset files."""
-
   # Creates the root directory
   dataset_dir = dataset_dir.expanduser() / dataset_name
   dataset_dir.mkdir(parents=True)
   # TODO(py3.7): Should be `dir.expanduser().resolve()` but `.resolve()` fails
-  # on some environements when the file doesn't exists.
+  # on some environments when the file doesn't exists.
   # https://stackoverflow.com/questions/55710900/pathlib-resolve-method-not-resolving-non-existant-files
   dataset_dir = dataset_dir.resolve()
 
@@ -115,28 +114,32 @@ def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
   _create_init(info)
   _create_dummy_data(info)
   _create_checksum(info)
+  if in_tfds:
+    _add_to_parent_init(info)
 
   print(
       'Dataset generated at {}\n'
       'You can start searching `{}` to complete the implementation.\n'
       'Please check '
       'https://www.tensorflow.org/datasets/add_dataset for additional details.'
-      .format(info.path, info.todo)
-  )
+      .format(info.path, info.todo))
 
 
 def _create_dataset_file(info: DatasetInfo) -> None:
   """Create a new dataset from a template."""
   file_path = info.path / f'{info.name}.py'
 
-  content = textwrap.dedent(
-      f'''\
+  content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
       import {info.tfds_api} as tfds
 
       # {info.todo}: Markdown description  that will appear on the catalog page.
       _DESCRIPTION = """
+      Description is **formatted** as markdown.
+
+      It should also contain any processing which has been applied (if any),
+      (e.g. corrupted example skipped, images cropped,...):
       """
 
       # {info.todo}: BibTeX citation
@@ -147,7 +150,10 @@ def _create_dataset_file(info: DatasetInfo) -> None:
       class {info.cls_name}(tfds.core.GeneratorBasedBuilder):
         """DatasetBuilder for {info.name} dataset."""
 
-        VERSION = tfds.core.Version('0.1.0')
+        VERSION = tfds.core.Version('1.0.0')
+        RELEASE_NOTES = {{
+            '1.0.0': 'Initial release.',
+        }}
 
         def _info(self) -> tfds.core.DatasetInfo:
           """Returns the dataset metadata."""
@@ -157,11 +163,13 @@ def _create_dataset_file(info: DatasetInfo) -> None:
               description=_DESCRIPTION,
               features=tfds.features.FeaturesDict({{
                   # These are the features of your dataset like images, labels ...
+                  'image': tfds.features.Image(shape=(None, None, 3)),
+                  'label': tfds.features.ClassLabel(names=['no', 'yes']),
               }}),
               # If there's a common (input, target) tuple from the
               # features, specify them here. They'll be used if
               # `as_supervised=True` in `builder.as_dataset`.
-              supervised_keys=None,  # e.g. ('image', 'label')
+              supervised_keys=('image', 'label'),  # Set to `None` to disable
               homepage='https://dataset-homepage/',
               citation=_CITATION,
           )
@@ -169,22 +177,22 @@ def _create_dataset_file(info: DatasetInfo) -> None:
         def _split_generators(self, dl_manager: tfds.download.DownloadManager):
           """Returns SplitGenerators."""
           # {info.todo}: Downloads the data and defines the splits
-          # dl_manager is a tfds.download.DownloadManager that can be used to
-          # download and extract URLs
-          return [
-              tfds.core.SplitGenerator(
-                  name=tfds.Split.TRAIN,
-                  # These kwargs will be passed to _generate_examples
-                  gen_kwargs={{}},
-              ),
-          ]
+          path = dl_manager.download_and_extract('https://todo-data-url')
 
-        def _generate_examples(self):
+          # {info.todo}: Returns the Dict[split names, Iterator[Key, Example]]
+          return {{
+              'train': self._generate_examples(path / 'train_imgs'),
+          }}
+
+        def _generate_examples(self, path):
           """Yields examples."""
           # {info.todo}: Yields (key, example) tuples from the dataset
-          yield 'key', {{}}
-      '''
-  )
+          for f in path.glob('*.jpeg'):
+            yield 'key', {{
+                'image': f,
+                'label': 'yes',
+            }}
+      ''')
   file_path.write_text(content)
 
 
@@ -192,8 +200,7 @@ def _create_dataset_test(info: DatasetInfo) -> None:
   """Adds the `dummy_data/` directory."""
   file_path = info.path.joinpath(f'{info.name}_test.py')
 
-  content = textwrap.dedent(
-      f'''\
+  content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
       import {info.tfds_api} as tfds
@@ -218,8 +225,7 @@ def _create_dataset_test(info: DatasetInfo) -> None:
 
       if __name__ == '__main__':
         tfds.testing.test_main()
-      '''
-  )
+      ''')
   file_path.write_text(content)
 
 
@@ -233,13 +239,11 @@ def _create_init(info: DatasetInfo) -> None:
     # from .my_dataset import MyDataset
     ds_import = f'{info.ds_import}{info.name}'
   # Could also import the BuilderConfig if it exists.
-  content = textwrap.dedent(
-      f'''\
+  content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
       from {ds_import} import {info.cls_name}
-      '''
-  )
+      ''')
   file_path.write_text(content)
 
 
@@ -255,11 +259,23 @@ def _create_dummy_data(info: DatasetInfo) -> None:
 def _create_checksum(info: DatasetInfo) -> None:
   """Adds the `checksums.tsv` file."""
   file_path = info.path / 'checksums.tsv'
-  content = textwrap.dedent(
-      f"""\
+  content = textwrap.dedent(f"""\
       # {info.todo}: If your dataset downloads files, then the checksums
       # will be automatically added here when running
       # `tfds build --register_checksums`.
-      """
-  )
+      """)
   file_path.write_text(content)
+
+
+def _add_to_parent_init(info: DatasetInfo) -> None:
+  """Add `import` dataset in the `<ds_type>/__init__.py` file."""
+  if not info.in_tfds:
+    # Could add global init, but would be tricky to foresee all use-cases
+    raise NotImplementedError(
+        'Adding __init__.py in non-tfds dir not supported.')
+
+  import_path = info.path.parent / '__init__.py'
+  if not import_path.exists():
+    return  # Should this be an error instead ?
+  import_path.write_text(import_path.read_text() +
+                         f'from {info.ds_import} import {info.cls_name}\n')

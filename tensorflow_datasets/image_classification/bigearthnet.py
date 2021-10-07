@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import json
 import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -77,7 +77,7 @@ _LABELS = [
     'Discontinuous urban fabric', 'Dump sites', 'Estuaries',
     'Fruit trees and berry plantations', 'Green urban areas',
     'Industrial or commercial units', 'Inland marshes', 'Intertidal flats',
-    'Land principally occupied by agriculture, with significant areas of '
+    'Land principally occupied by agriculture, with significant areas of '  # pylint: disable=implicit-str-concat
     'natural vegetation', 'Mineral extraction sites', 'Mixed forest',
     'Moors and heathland', 'Natural grassland', 'Non-irrigated arable land',
     'Olive groves', 'Pastures', 'Peatbogs', 'Permanently irrigated land',
@@ -89,7 +89,7 @@ _LABELS = [
 
 _DATA_OPTIONS = ['rgb', 'all']
 
-_ZIP_FILE = 'http://bigearth.net/downloads/BigEarthNet-v1.0.tar.gz'
+_ZIP_FILE = 'http://bigearth.net/downloads/BigEarthNet-S2-v1.0.tar.gz'
 _ZIP_SUBIDR = 'BigEarthNet-v1.0'
 
 # To clip and rescale the RGB channels for the JPEG images visualizatoin.
@@ -113,10 +113,11 @@ class BigearthnetConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    v100 = tfds.core.Version(
-        '1.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
     super(BigearthnetConfig, self).__init__(
-        version=v100,
+        version=tfds.core.Version('1.0.0'),
+        release_notes={
+            '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+        },
         **kwargs)
     self.selection = selection
 
@@ -126,13 +127,9 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
 
   BUILDER_CONFIGS = [
       BigearthnetConfig(
-          selection='rgb',
-          name='rgb',
-          description='Sentinel-2 RGB channels'),
+          selection='rgb', name='rgb', description='Sentinel-2 RGB channels'),
       BigearthnetConfig(
-          selection='all',
-          name='all',
-          description='13 Sentinel-2 channels'),
+          selection='all', name='all', description='13 Sentinel-2 channels'),
   ]
 
   def _info(self):
@@ -231,16 +228,15 @@ def _read_archive(archive_path, selection):
   """Yields non-processed examples out of archive."""
   example = {}
   read_band_files = 0
-  for fpath, fobj in tfds.core.download.extractor.iter_tar_stream(
-      archive_path):
+  for fpath, fobj in tfds.core.download.extractor.iter_tar_stream(archive_path):
     read_band_files += 1
     _, patch_name, fname = fpath.split(os.path.sep)
     if fname.endswith('_labels_metadata.json'):
       example['metadata'] = fobj.read()
     elif fname.endswith('.tif'):
       band = fname[-7:-4]
-      if selection != 'rgb' or (
-          selection == 'rgb' and band in {'B02', 'B03', 'B04'}):
+      if selection != 'rgb' or (selection == 'rgb' and
+                                band in {'B02', 'B03', 'B04'}):
         example[band] = fobj.read()
         example.setdefault('bands', []).append(band)
     else:

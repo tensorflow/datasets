@@ -24,10 +24,16 @@ upper_tabs:
         path: /datasets/keras_example
 
       - heading: "Features & performances"
+      - title: TFDS CLI
+        path: /datasets/cli
       - title: Splits and slicing API
         path: /datasets/splits
       - title: Performance tips
         path: /datasets/performances
+      - title: Determinism
+        path: /datasets/determinism
+      - title: Feature connectors
+        path: /datasets/features
       - title: Feature decoding
         path: /datasets/decode
       - title: Versioning
@@ -35,17 +41,23 @@ upper_tabs:
       - title: Store your dataset on GCS
         path: /datasets/gcs
 
-      - heading: "Add your dataset"
-      - title: Add a dataset
+      - heading: "Create your dataset"
+      - title: Create your dataset
         path: /datasets/add_dataset
-      - title: Add huge datasets (Apache Beam)
+      - title: Huge datasets (Apache Beam)
         path: /datasets/beam_datasets
+      - title: Contribute to TFDS
+        path: /datasets/contribute
+      - title: Common gotchas
+        path: /datasets/common_gotchas
+      - title: External tfrecord with TFDS
+        path: /datasets/external_tfrecord
 
     - name: API
       skip_translation: true
       contents:
       - title: All Symbols
-        path: /datasets/api_docs/python/
-      - include: /datasets/api_docs/python/_toc.yaml
+        path: /datasets/api_docs/python/tfds/all_symbols
+      - include: /datasets/api_docs/python/tfds/_toc.yaml
 
 - include: /_upper_tabs_right.yaml

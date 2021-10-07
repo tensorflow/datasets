@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,22 +33,39 @@ Documentation:
 * [Colab tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
 * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
 """
+# pylint: enable=line-too-long
+# pylint: disable=g-import-not-at-top,g-bad-import-order,wrong-import-position,unused-import
 
-import sys
 
-# pylint: disable=g-import-not-at-top
+# Ensure TensorFlow is importable and its version is sufficiently recent. This
+# needs to happen before anything else, since the imports below will try to
+# import tensorflow, too.
+from tensorflow_datasets.core import tf_compat
+tf_compat.ensure_tf_install()
 
-# TODO(py2): Cleanup once Py2 support is dropped entirely
-if sys.version_info[0] < 3:
-  print("""
-  ************************************************
-  *   WARNING: TFDS IS UNSUPORTED FOR PYTHON 2   *
-  ************************************************
-  """)
-  from tensorflow_datasets import __init__py2 as api
-  from tensorflow_datasets.__init__py2 import *
-else:
-  from tensorflow_datasets import __init__py3 as api
-  from tensorflow_datasets.__init__py3 import *
+# Imports for registration
+from tensorflow_datasets import audio
+from tensorflow_datasets import graphs
+from tensorflow_datasets import image
+from tensorflow_datasets import image_classification
+from tensorflow_datasets import object_detection
+from tensorflow_datasets import question_answering
+from tensorflow_datasets import d4rl
+from tensorflow_datasets import ranking
+from tensorflow_datasets import rl_unplugged
+from tensorflow_datasets import rlds
+from tensorflow_datasets import structured
+from tensorflow_datasets import summarization
+from tensorflow_datasets import text
+from tensorflow_datasets import translate
+from tensorflow_datasets import video
+from tensorflow_datasets import vision_language
 
-__all__ = api.__all__
+
+# Public API to create and generate a dataset
+from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
+
+# __all__ for import * as well as documentation
+from tensorflow_datasets import public_api  # pylint: disable=g-bad-import-order
+__all__ = public_api.__all__
+

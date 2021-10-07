@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -51,97 +51,27 @@ _DL_URLS = {
 }
 
 
-class LibrispeechConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for Librispeech."""
-
-  def __init__(self, *, text_encoder_config=None, **kwargs):
-    """Constructs a LibrispeechConfig.
-
-    Args:
-      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
-        configuration for the `tfds.deprecated.text.TextEncoder` used for the
-        text feature.
-      **kwargs: keyword arguments forwarded to super.
-    """
-    name = kwargs.get("name")
-    if name is None:
-      name = (text_encoder_config.name if text_encoder_config else "plain_text")
-    kwargs["name"] = name
-
-    description = kwargs.get("description")
-    if description is None:
-      if text_encoder_config:
-        description = "Transcriptions use the %s" % (
-            text_encoder_config.encoder_cls.__name__)
-      else:
-        description = "Transcriptions are in plain text."
-    kwargs["description"] = description
-
-    super(LibrispeechConfig, self).__init__(**kwargs)
-    self.text_encoder_config = text_encoder_config
-
-
-def _make_builder_configs():
-  """Make built-in Librispeech BuilderConfigs.
-
-  Uses 3 text encodings (plain_text, subwords with 8k vocab, subwords with 32k
-  vocab).
-
-  Returns:
-    `list<tfds.audio.LibrispeechConfig>`
-  """
-  text_encoder_configs = [
-      None,
-      tfds.deprecated.text.TextEncoderConfig(
-          name="subwords8k",
-          encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-          vocab_size=2**13),
-      tfds.deprecated.text.TextEncoderConfig(
-          name="subwords32k",
-          encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-          vocab_size=2**15),
-  ]
-  configs = []
-  for text_encoder_config in text_encoder_configs:
-    config = LibrispeechConfig(
-        version=tfds.core.Version("1.1.0"),
-        text_encoder_config=text_encoder_config)
-    configs.append(config)
-  return configs
-
-
 class Librispeech(tfds.core.BeamBasedBuilder):
   """Librispeech dataset."""
 
-  BUILDER_CONFIGS = _make_builder_configs()
+  VERSION = tfds.core.Version("2.1.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "speech":
-                tfds.features.Audio(sample_rate=16000),
-            "text":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "speaker_id":
-                tf.int64,
-            "chapter_id":
-                tf.int64,
-            "id":
-                tf.string,
+            "speech": tfds.features.Audio(sample_rate=16000),
+            "text": tfds.features.Text(),
+            "speaker_id": tf.int64,
+            "chapter_id": tf.int64,
+            "id": tf.string,
         }),
         supervised_keys=("speech", "text"),
         homepage=_URL,
         citation=_CITATION,
         metadata=tfds.core.MetadataDict(sample_rate=16000,),
     )
-
-  def _vocab_text_gen(self, dirs):
-    for directory in dirs:
-      for _, example in _generate_librispeech_examples(directory):
-        yield example["text"]
 
   def _populate_metadata(self, dirs):
     # All dirs contain the same metadata.
@@ -169,15 +99,11 @@ class Librispeech(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     extracted_dirs = dl_manager.download_and_extract(_DL_URLS)
-    # Generate vocabulary from training data if SubwordTextEncoder configured.
-    all_train_dirs = [
-        v for k, v in extracted_dirs.items() if k.startswith("train")
-    ]
-    self.info.features["text"].maybe_build_from_corpus(
-        self._vocab_text_gen(all_train_dirs))
     self._populate_metadata(extracted_dirs)
-    splits = [tfds.core.SplitGenerator(name=k, gen_kwargs={"directory": v})
-              for k, v in extracted_dirs.items()]
+    splits = [
+        tfds.core.SplitGenerator(name=k, gen_kwargs={"directory": v})
+        for k, v in extracted_dirs.items()
+    ]
     return splits
 
   def _build_pcollection(self, pipeline, directory):

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import tempfile
 from absl import app
 from absl import flags
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import fake_data_utils
@@ -50,9 +50,10 @@ def _generate_data():
     tf.io.gfile.makedirs(images_dir)
   for i in range(_TRAIN_IMAGES_NUMBER + _TEST_IMAGES_NUMBER):
     image_name = 'image{:03d}.jpg'.format(i)
-    tf.io.gfile.copy(fake_data_utils.get_random_jpeg(),
-                     os.path.join(images_dir, image_name),
-                     overwrite=True)
+    tf.io.gfile.copy(
+        fake_data_utils.get_random_jpeg(),
+        os.path.join(images_dir, image_name),
+        overwrite=True)
 
   # Generate annotations
   annotations_dir = os.path.join(_output_dir(), 'annotations')
@@ -74,15 +75,16 @@ def _generate_data():
       for i in range(num_examples):
         fobj.write('image{:03d} {} 0 0\n'.format(global_count, i % 37))
         global_count += 1
-    tf.io.gfile.copy(fobj.name, os.path.join(annotations_dir, filename),
-                     overwrite=True)
+    tf.io.gfile.copy(
+        fobj.name, os.path.join(annotations_dir, filename), overwrite=True)
 
   # Create trimaps
   for i in range(_TRAIN_IMAGES_NUMBER + _TEST_IMAGES_NUMBER):
     trimap_name = 'image{:03d}.png'.format(i)
-    tf.io.gfile.copy(fake_data_utils.get_random_png(channels=1),
-                     os.path.join(trimaps_dir, trimap_name),
-                     overwrite=True)
+    tf.io.gfile.copy(
+        fake_data_utils.get_random_png(channels=1),
+        os.path.join(trimaps_dir, trimap_name),
+        overwrite=True)
 
 
 def main(argv):

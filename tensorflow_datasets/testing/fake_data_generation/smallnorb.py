@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import os
 from absl import app
 from absl import flags
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.testing import test_utils
 
 NUM_IMAGES = 5
@@ -37,8 +37,7 @@ FACTOR_VALUES = [
 TRAINING_OUTPUT_NAME = "smallnorb-5x46789x9x18x6x2x96x96-training"
 TESTING_OUTPUT_NAME = "smallnorb-5x01235x9x18x6x2x96x96-testing"
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory.")
+flags.DEFINE_string("tfds_dir", None, "Path to tensorflow_datasets directory.")
 FLAGS = flags.FLAGS
 
 
@@ -102,8 +101,9 @@ def _create_chunk(prefix, random_state):
 
 def _generate():
   """Generates a fake data set and writes it to the fake_examples directory."""
-  output_dir = os.path.join(FLAGS.tfds_dir, "testing", "test_data",
-                            "fake_examples", "smallnorb")
+  tfds_dir = FLAGS.tfds_dir or str(utils.tfds_write_path())
+  output_dir = os.path.join(tfds_dir, "testing", "test_data", "fake_examples",
+                            "smallnorb")
   test_utils.remake_dir(output_dir)
   random_state = np.random.RandomState(0)
   _create_chunk(os.path.join(output_dir, TRAINING_OUTPUT_NAME), random_state)

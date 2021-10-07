@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -56,7 +56,9 @@ class Wmt19Translate(wmt.WmtTranslate):
             "paracrawl_v1_ru", "paracrawl_v3_frde", "commoncrawl",
             "commoncrawl_frde", "newscommentary_v14", "newscommentary_v14_frde",
             "czeng_17", "yandexcorpus", "wikititles_v1", "uncorpus_v1",
-            "rapid_2016_ltfi", "rapid_2019"] + wmt.CWMT_SUBSET_NAMES,
+            "rapid_2016_ltfi", "rapid_2019"
+        ] + wmt.CWMT_SUBSET_NAMES,
         tfds.Split.VALIDATION: [
-            "euelections_dev2019", "newsdev2019", "newstest2018"]
+            "euelections_dev2019", "newsdev2019", "newstest2018"
+        ]
     }

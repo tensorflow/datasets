@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 beam = tfds.core.lazy_imports.apache_beam
@@ -53,7 +53,7 @@ class ProcessImageFn(beam.DoFn):
   def process(self, element):
     filename, content = element
     try:
-      image = cv2.imdecode(np.fromstring(content, dtype=np.uint8), flags=3)
+      image = cv2.imdecode(np.frombuffer(content, dtype=np.uint8), flags=3)
     except:
       logging.info("Exception raised while decoding image %s", filename)
       raise
@@ -74,7 +74,7 @@ class ProcessImageFn(beam.DoFn):
         image = cv2.resize(image, dsize=None, fx=factor, fy=factor)
       # Encode the image with quality=72 and store it in a BytesIO object.
       _, buff = cv2.imencode(".jpg", image, self._jpeg_quality)
-      yield filename, io.BytesIO(buff.tostring())
+      yield filename, io.BytesIO(buff.tobytes())
 
 
 class CreateDetectionExampleFn(beam.DoFn):

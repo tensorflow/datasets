@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import os
 import random
 import numpy as np
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -136,11 +136,10 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
         "attrs.pairs", "attrs.shape.color", "attrs.line.type",].
       **kwargs: keyword arguments forwarded to super.
     """
-    v100 = tfds.core.Version(
-        "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
     super(AbstractReasoningConfig, self).__init__(
-        version=v100,
-        **kwargs)
+        version=tfds.core.Version("1.0.0"),
+        **kwargs,
+    )
     self.split_type = split_type
 
 
@@ -199,8 +198,10 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "context": tfds.features.Video(shape=(8, 160, 160, 1)),
-            "answers": tfds.features.Video(shape=(8, 160, 160, 1)),
+            "context":
+                tfds.features.Video(shape=(8, 160, 160, 1)),
+            "answers":
+                tfds.features.Video(shape=(8, 160, 160, 1)),
             "target":
                 tfds.features.ClassLabel(num_classes=8),
             "meta_target":
@@ -230,8 +231,7 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
                 "split": "val",
             }),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
+            name=tfds.Split.TEST, gen_kwargs={
                 "folder": path,
                 "split": "test",
             }),

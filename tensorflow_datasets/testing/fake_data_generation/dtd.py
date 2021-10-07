@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import random
 from absl import app
 from absl import flags
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
@@ -45,7 +45,7 @@ def _makedir_if_not_exists(dirname):
 
 def _generate_data(split_name, num_examples):
   """Generate test data."""
-  names_file = tfds.core.get_tfds_path(
+  names_file = tfds.core.tfds_path(
       os.path.join("image", "dtd_key_attributes.txt"))
   label_names = tfds.features.ClassLabel(names_file=names_file).names
 

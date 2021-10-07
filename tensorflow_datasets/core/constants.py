@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,11 +18,18 @@
 # IMPORTANT: when changing values here, update docstrings.
 
 import os
+from typing import List, Optional
+
+from tensorflow_datasets.core.utils import type_utils
+
+PathLike = type_utils.PathLike
+ListOrElem = type_utils.ListOrElem
 
 # Github base URL
 SRC_BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/'
 
 # Directory where to store processed datasets.
+# If modifying this, should also update `scripts/cli/build.py` `--data_dir`
 DATA_DIR = os.environ.get('TFDS_DATA_DIR',
                           os.path.join('~', 'tensorflow_datasets'))
 
@@ -30,7 +37,6 @@ DATA_DIR = os.environ.get('TFDS_DATA_DIR',
 INCOMPLETE_SUFFIX = '.incomplete'
 
 # Note: GCS constants are defined in `core/utils/gcs_utils.py`
-
 
 _registered_data_dir = set()
 
@@ -50,12 +56,40 @@ def add_data_dir(data_dir):
   Args:
     data_dir: New data_dir to register.
   """
+  # Remove trailing / to avoid same directory being included twice in the set
+  # with and without a final slash.
+  data_dir = data_dir.rstrip('/')
   _registered_data_dir.add(data_dir)
 
 
-def list_data_dirs():
-  """Return the list of all registered `data_dir`."""
-  all_data_dirs = _registered_data_dir | {DATA_DIR}
-  return sorted(os.path.expanduser(d) for d in all_data_dirs)
+def list_data_dirs(
+    given_data_dir: Optional[ListOrElem[PathLike]] = None,) -> List[PathLike]:
+  """Return the list of all `data_dir` to look-up.
+
+  Args:
+    given_data_dir: If a `data_dir` is provided, only the explicitly given
+      `data_dir` will be returned, otherwise the list of all registered data_dir
+      is returned
+
+  Returns:
+    The list of all data_dirs to look-up.
+  """
+  # If the data dir is explicitly given, no need to search everywhere.
+  if given_data_dir:
+    if isinstance(given_data_dir, list):
+      return given_data_dir
+    else:
+      return [given_data_dir]
+  else:
+    all_data_dirs = _registered_data_dir | {DATA_DIR}
+    return sorted(os.path.expanduser(d) for d in all_data_dirs)
+
+
+def get_default_data_dir(given_data_dir: Optional[str] = None,) -> str:
+  """Returns the default data_dir."""
+  if given_data_dir:
+    return os.path.expanduser(given_data_dir)
+  else:
+    return os.path.expanduser(DATA_DIR)
 
 

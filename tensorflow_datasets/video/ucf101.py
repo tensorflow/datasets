@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import os
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 UCF_101_URL = 'https://storage.googleapis.com/thumos14_files/UCF101_videos.zip'
@@ -63,19 +63,21 @@ class Ucf101Config(tfds.core.BuilderConfig):
       height: An integer with the height or None.
       **kwargs: Passed on to the constructor of `BuilderConfig`.
     """
-    super(Ucf101Config, self).__init__(**kwargs)
+    super(Ucf101Config, self).__init__(
+        version=tfds.core.Version('2.0.0'),
+        release_notes={
+            '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+        },
+        **kwargs,
+    )
     if (width is None) ^ (height is None):
       raise ValueError('Either both dimensions should be set, or none of them')
     self.width = width
     self.height = height
     if split_number not in (1, 2, 3):
-      raise ValueError('Unknown split number {}, should be 1, 2 or 3'.format(
-          split_number))
+      raise ValueError(
+          'Unknown split number {}, should be 1, 2 or 3'.format(split_number))
     self.split_number = split_number
-
-
-_VERSION = tfds.core.Version(
-    '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
 
 
 class Ucf101(tfds.core.GeneratorBasedBuilder):
@@ -92,7 +94,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           width=256,
           height=256,
           split_number=1,
-          version=_VERSION,
       ),
       Ucf101Config(
           name='ucf101_1',
@@ -100,7 +101,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           width=None,
           height=None,
           split_number=1,
-          version=_VERSION,
       ),
       Ucf101Config(
           name='ucf101_2',
@@ -108,7 +108,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           width=None,
           height=None,
           split_number=2,
-          version=_VERSION,
       ),
       Ucf101Config(
           name='ucf101_3',
@@ -116,7 +115,6 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           width=None,
           height=None,
           split_number=3,
-          version=_VERSION,
       ),
   ]
 
@@ -124,20 +122,23 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
     if self.builder_config.width is not None:
       if self.builder_config.height is None:
         raise ValueError('Provide either both height and width or none.')
-      ffmpeg_extra_args = (
-          '-vf', 'scale={}x{}'.format(self.builder_config.height,
-                                      self.builder_config.width))
+      ffmpeg_extra_args = ('-vf',
+                           'scale={}x{}'.format(self.builder_config.height,
+                                                self.builder_config.width))
     else:
       ffmpeg_extra_args = []
 
-    video_shape = (
-        None, self.builder_config.height, self.builder_config.width, 3)
-    labels_names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    video_shape = (None, self.builder_config.height, self.builder_config.width,
+                   3)
+    labels_names_file = tfds.core.tfds_path(_LABELS_FNAME)
     features = tfds.features.FeaturesDict({
-        'video': tfds.features.Video(video_shape,
-                                     ffmpeg_extra_args=ffmpeg_extra_args,
-                                     encoding_format='jpeg'),
-        'label': tfds.features.ClassLabel(names_file=labels_names_file),
+        'video':
+            tfds.features.Video(
+                video_shape,
+                ffmpeg_extra_args=ffmpeg_extra_args,
+                encoding_format='jpeg'),
+        'label':
+            tfds.features.ClassLabel(names_file=labels_names_file),
     })
     return tfds.core.DatasetInfo(
         builder=self,
@@ -160,18 +161,24 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                'videos_dir': downloaded_urls['videos'],
-                'splits_dir': downloaded_urls['splits'],
-                'data_list': '{}/trainlist{:02d}.txt'.format(
-                    splits_folder, self.builder_config.split_number),
+                'videos_dir':
+                    downloaded_urls['videos'],
+                'splits_dir':
+                    downloaded_urls['splits'],
+                'data_list':
+                    '{}/trainlist{:02d}.txt'.format(
+                        splits_folder, self.builder_config.split_number),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                'videos_dir': downloaded_urls['videos'],
-                'splits_dir': downloaded_urls['splits'],
-                'data_list': '{}/testlist{:02d}.txt'.format(
-                    splits_folder, self.builder_config.split_number),
+                'videos_dir':
+                    downloaded_urls['videos'],
+                'splits_dir':
+                    downloaded_urls['splits'],
+                'data_list':
+                    '{}/testlist{:02d}.txt'.format(
+                        splits_folder, self.builder_config.split_number),
             }),
     ]
 

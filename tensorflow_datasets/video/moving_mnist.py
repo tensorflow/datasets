@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """MovingMNIST."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.video.moving_sequence import image_as_moving_sequence  # pylint: disable=unused-import
 
@@ -51,16 +51,19 @@ for generating training/validation data from the MNIST dataset.
 class MovingMnist(tfds.core.GeneratorBasedBuilder):
   """MovingMnist."""
 
-  VERSION = tfds.core.Version(
-      "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("1.0.0")
+  RELEASE_NOTES = {
+      "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image_sequence": tfds.features.Video(
-                shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,))
+            "image_sequence":
+                tfds.features.Video(
+                    shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,))
         }),
         homepage=_URL,
         citation=_CITATION,
@@ -74,8 +77,7 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     # function to create training/validation dataset from MNIST.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=dict(data_path=data_path)),
+            name=tfds.Split.TEST, gen_kwargs=dict(data_path=data_path)),
     ]
 
   def _generate_examples(self, data_path):

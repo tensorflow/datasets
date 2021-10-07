@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 """Tests for the Split API."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core.utils import shard_utils
@@ -30,39 +29,36 @@ RANGE_VAL = list(range(6000, 6010))
 class SplitDictTest(testing.TestCase):
 
   def test_num_shards(self):
-    sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(name="train", shard_lengths=[1, 2, 3]))
+    si = tfds.core.SplitInfo(name="train", shard_lengths=[1, 2, 3], num_bytes=0)
+    sd = splits.SplitDict([si], dataset_name="ds_name")
     self.assertEqual(sd["train"].num_shards, 3)
 
-    # When both values are set, shard_lengths has priority.
-    sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(name="train", num_shards=3, shard_lengths=[1,]))
-    self.assertEqual(sd["train"].num_shards, 1)
-
-    # With legacy mode, use legacy value
-    sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(name="train", num_shards=3))
-    self.assertEqual(sd["train"].num_shards, 3)
+  def test_empty_split(self):
+    sd = splits.SplitDict([], dataset_name="ds_name")
+    with self.assertRaisesWithPredicateMatch(KeyError, "`splits` is empty"):
+      _ = sd["train"]
 
 
 class SplitsDictTest(testing.TestCase):
 
   @property
   def split_dict(self):
-    sd = splits.SplitDict("ds_name")
-    sd.add(tfds.core.SplitInfo(name="train", num_shards=10))
-    sd.add(tfds.core.SplitInfo(name="test", num_shards=1))
+    si = [
+        tfds.core.SplitInfo(name="train", shard_lengths=[10, 10], num_bytes=0),
+        tfds.core.SplitInfo(name="test", shard_lengths=[1], num_bytes=0),
+    ]
+    sd = splits.SplitDict(si, dataset_name="ds_name")
     return sd
 
-  # .add is implicitly tested, since s was created by calling .add
   def test_get(self):
     s = self.split_dict["train"]
     self.assertEqual("train", s.name)
-    self.assertEqual(10, s.num_shards)
+    self.assertEqual(2, s.num_shards)
 
   def test_from_proto(self):
     sd = splits.SplitDict.from_proto(
-        "ds_name", [proto.SplitInfo(name="validation", num_shards=5)])
+        "ds_name",
+        [proto.SplitInfo(name="validation", shard_lengths=[5], num_bytes=0)])
     self.assertIn("validation", sd)
     self.assertNotIn("train", sd)
     self.assertNotIn("test", sd)
@@ -71,55 +67,19 @@ class SplitsDictTest(testing.TestCase):
     sd = self.split_dict
     sdp = sd.to_proto()
 
-    self.assertEqual("test", sdp[0].name)
-    self.assertEqual(1, sdp[0].num_shards)
+    # Split order is preserved
+    self.assertEqual("train", sdp[0].name)
+    self.assertEqual([10, 10], sdp[0].shard_lengths)
 
-    self.assertEqual("train", sdp[1].name)
-    self.assertEqual(10, sdp[1].num_shards)
+    self.assertEqual("test", sdp[1].name)
+    self.assertEqual([1], sdp[1].shard_lengths)
 
   def test_bool(self):
-    sd = splits.SplitDict("ds_name")
+    sd = splits.SplitDict([], dataset_name="ds_name")
     self.assertFalse(sd)  # Empty split is False
-    sd.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    si = [tfds.core.SplitInfo(name="train", shard_lengths=[5], num_bytes=0)]
+    sd = splits.SplitDict(si, dataset_name="ds_name")
     self.assertTrue(sd)  # Non-empty split is True
-
-  def test_check_splits_equals(self):
-    s1 = splits.SplitDict("ds_name")
-    s1.add(tfds.core.SplitInfo(name="train", num_shards=10))
-    s1.add(tfds.core.SplitInfo(name="test", num_shards=3))
-
-    s2 = splits.SplitDict("ds_name")
-    s2.add(tfds.core.SplitInfo(name="train", num_shards=10))
-    s2.add(tfds.core.SplitInfo(name="test", num_shards=3))
-
-    s3 = splits.SplitDict("ds_name")
-    s3.add(tfds.core.SplitInfo(name="train", num_shards=10))
-    s3.add(tfds.core.SplitInfo(name="test", num_shards=3))
-    s3.add(tfds.core.SplitInfo(name="valid", num_shards=0))
-
-    s4 = splits.SplitDict("ds_name")
-    s4.add(tfds.core.SplitInfo(name="train", num_shards=11))
-    s4.add(tfds.core.SplitInfo(name="test", num_shards=3))
-
-    self.assertTrue(splits.check_splits_equals(s1, s1))
-    self.assertTrue(splits.check_splits_equals(s1, s2))
-    self.assertFalse(splits.check_splits_equals(s1, s3))  # Not same names
-    self.assertFalse(splits.check_splits_equals(s1, s4))  # Nb of shards !=
-
-  def test_split_overwrite(self):
-    s1 = splits.SplitDict("ds_name")
-    s1.add(tfds.core.SplitInfo(name="train", shard_lengths=[15]))
-
-    s2 = splits.SplitDict("ds_name")
-    s2.add(tfds.core.SplitInfo(name="train", shard_lengths=[15]))
-
-    self.assertTrue(splits.check_splits_equals(s1, s2))
-
-    # Modifying num_shards should also modify the underlying proto
-    s2["train"].shard_lengths = [5, 5, 5]
-    self.assertEqual(s2["train"].shard_lengths, [5, 5, 5])
-    self.assertEqual(s2["train"].get_proto().shard_lengths, [5, 5, 5])
-    self.assertFalse(splits.check_splits_equals(s1, s2))
 
 
 class SplitsTest(testing.TestCase):
@@ -127,7 +87,6 @@ class SplitsTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(SplitsTest, cls).setUpClass()
-    dataset_builder._is_py2_download_and_prepare_disabled = False
     cls._builder = testing.DummyDatasetSharedGenerator(
         data_dir=testing.make_tmp_dir())
     cls._builder.download_and_prepare()
@@ -148,23 +107,32 @@ class SplitsTest(testing.TestCase):
         s["test[75%:]"].num_examples + s["test[:75%]"].num_examples,
     )
 
+    self.assertEqual(s["all"].num_examples, s.total_num_examples)
+
   def test_sub_split_file_instructions(self):
     fi = self._builder.info.splits["train[75%:]"].file_instructions
-    self.assertEqual(fi, [shard_utils.FileInstruction(
-        filename="dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
-        skip=15,
-        take=-1,
-        num_examples=5,
-    )])
+    self.assertEqual(fi, [
+        shard_utils.FileInstruction(
+            filename="dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+            skip=15,
+            take=-1,
+            num_examples=5,
+        )
+    ])
+
+  def test_sub_split_num_shards(self):
+    self.assertEqual(self._builder.info.splits["train[75%:]"].num_shards, 1)
 
   def test_split_file_instructions(self):
     fi = self._builder.info.splits["train"].file_instructions
-    self.assertEqual(fi, [shard_utils.FileInstruction(
-        filename="dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
-        skip=0,
-        take=-1,
-        num_examples=20,
-    )])
+    self.assertEqual(fi, [
+        shard_utils.FileInstruction(
+            filename="dummy_dataset_shared_generator-train.tfrecord-00000-of-00001",
+            skip=0,
+            take=-1,
+            num_examples=20,
+        )
+    ])
 
   def test_sub_split_filenames(self):
     self.assertEqual(self._builder.info.splits["train"].filenames, [
@@ -175,22 +143,13 @@ class SplitsTest(testing.TestCase):
     ])
 
   def test_sub_split_wrong_key(self):
-    with self.assertRaisesWithPredicateMatch(
-        ValueError, "Unknown split \"unknown\""):
+    with self.assertRaisesWithPredicateMatch(ValueError,
+                                             "Unknown split 'unknown'"):
       _ = self._builder.info.splits["unknown"]
 
   def test_split_enum(self):
     self.assertEqual(repr(splits.Split.TRAIN), "Split('train')")
     self.assertIsInstance(splits.Split.TRAIN, splits.Split)
-
-  def test_even_splits(self):
-    self.assertEqual(
-        ["train[0%:33%]", "train[33%:67%]", "train[67%:100%]"],
-        splits.even_splits("train", n=3),
-    )
-    self.assertEqual([
-        "train[0%:25%]", "train[25%:50%]", "train[50%:75%]", "train[75%:100%]"
-    ], splits.even_splits("train", 4))
 
 
 if __name__ == "__main__":

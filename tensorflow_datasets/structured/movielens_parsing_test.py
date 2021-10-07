@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,8 +32,7 @@ class MovieLensUtilsTest(tfds.testing.TestCase):
         'ml-latest-small',
     )
     movies_generator = movielens_parsing.parse_current_movies_data(
-        latest_small_path
-    )
+        latest_small_path)
     expected_result = [
         (0, {
             'movie_id': '1',

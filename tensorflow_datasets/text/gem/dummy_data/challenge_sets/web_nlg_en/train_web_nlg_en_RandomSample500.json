@@ -1,0 +1,14 @@
+{
+    "train": [
+        {
+            "category": "Airport",
+            "gem_id": "web_nlg_en-train-230",
+            "input": [
+                "Alpena_County_Regional_Airport | elevationAboveTheSeaLevel | 210"
+            ],
+            "references": [],
+            "target": "Alpena County Regional Airport elevation above the sea level in metres is 210.",
+            "webnlg_id": "train/Airport/1/Id97"
+        }
+    ]
+}

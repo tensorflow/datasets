@@ -1,0 +1,34 @@
+{
+  "train": [
+    {
+      "dialog_acts": [
+        {
+          "act": 13,
+          "slot": "departure_time",
+          "values": []
+        },
+        {
+          "act": 13,
+          "slot": "group_size",
+          "values": []
+        },
+        {
+          "act": 13,
+          "slot": "destination",
+          "values": []
+        }
+      ],
+      "dialog_id": "59_00092",
+      "gem_id": "schema_guided_dialog-train-63104",
+      "prompt": "Friday next week please.",
+      "references": [],
+      "target": "How many tickets to where do you need. Is there a preferred time?",
+      "turn_id": 3,
+      "context": [
+        "I need a bus ticket.",
+        "For when?"
+      ],
+      "service": "Buses_2"
+    }
+  ]
+}

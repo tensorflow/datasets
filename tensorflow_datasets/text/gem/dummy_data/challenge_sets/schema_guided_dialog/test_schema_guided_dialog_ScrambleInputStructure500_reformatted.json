@@ -1,0 +1,40 @@
+{
+  "test": [
+    {
+      "dialog_acts": [
+        {
+          "act": 13,
+          "slot": "from_city",
+          "values": []
+        }
+      ],
+      "dialog_id": "22_00032",
+      "gem_id": "schema_guided_dialog-test-3381",
+      "prompt": "Find me a direct or other bus that goes there.I want to leave today and we are 3 people.",
+      "references": [
+        "From where you want to go?"
+      ],
+      "target": "From where you want to go?",
+      "turn_id": 17,
+      "context": [
+        "Find me something interesting to do.",
+        "In what city you prefer to be?",
+        "Around Philadelphia will be okay.",
+        "What type of event you want? Music or Theater or something else?",
+        "I like Music and I want something on the 9th.",
+        "Very popular is Babymetal and is taking place at The Fillmore Philadelphia on march 9th at 4 pm.",
+        "Tell me where is located the venue.",
+        "29 East Allen Street is the address.",
+        "Tell me the cost per ticket.",
+        "$45 is the cost per one ticket.",
+        "Good, but something else you can find me?",
+        "Very popular is Brockhampton that take place at The Fillmore Philadelphia on March 9th at 7:30 pm.",
+        "Sounds really good.",
+        "You want to book tickets for this?",
+        "No,not now maybe later.",
+        "With something else I can help you?"
+      ],
+      "service": "Buses_3"
+    }
+  ]
+}

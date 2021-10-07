@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -57,8 +57,6 @@ class ARCConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version(version), **kwargs)
     self.commit = commit
     self.download_url = "{}zipball/{}".format(_BASE_URL, self.commit)
-    self.download_resource = tfds.download.Resource(
-        url=self.download_url, extract_method=tfds.download.ExtractMethod.ZIP)
 
 
 class ARC(tfds.core.GeneratorBasedBuilder):
@@ -116,7 +114,7 @@ class ARC(tfds.core.GeneratorBasedBuilder):
     # dl_manager is a tfds.download.DownloadManager that can be used to
     # download and extract URLs
     extracted_dir = dl_manager.download_and_extract(
-        self.builder_config.download_resource)
+        self.builder_config.download_url)
     extract_subdir = [
         path for path in tf.io.gfile.listdir(extracted_dir)
         if path.startswith("fchollet-ARC-")

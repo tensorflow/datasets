@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import json
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -52,13 +52,9 @@ class BlimpConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     name = paradigm_uid
-
-    description = _DESCRIPTION
-    description += ('This configuration includes the paradigm {}.').format(name)
-
     super(BlimpConfig, self).__init__(
         name=name,
-        description=description,
+        description=f'This configuration includes the paradigm {name}.',
         version=tfds.core.Version('0.1.0'),
         **kwargs)
 

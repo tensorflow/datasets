@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -51,7 +51,6 @@ ATTR_HEADINGS = (
     "Rosy_Cheeks Sideburns Smiling Straight_Hair Wavy_Hair Wearing_Earrings "
     "Wearing_Hat Wearing_Lipstick Wearing_Necklace Wearing_Necktie Young"
 ).split()
-
 
 _CITATION = """\
 @inproceedings{conf/iccv/LiuLWT15,
@@ -89,7 +88,7 @@ computer vision tasks: face attribute recognition, face detection, and landmark\
  (or facial part) localization.
 
 Note: CelebA dataset may contain potential bias. The fairness indicators
-[example](https://github.com/tensorflow/fairness-indicators/blob/master/fairness_indicators/documentation/examples/Fairness_Indicators_TFCO_CelebA_Case_Study.ipynb)
+[example](https://www.tensorflow.org/responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_TFCO_CelebA_Case_Study)
 goes into detail about several considerations to keep in mind while using the
 CelebA dataset.
 """
@@ -98,11 +97,13 @@ CelebA dataset.
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
-  VERSION = tfds.core.Version(
-      "2.0.1", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.1")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.0.0"),
   ]
+  RELEASE_NOTES = {
+      "2.0.1": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -114,9 +115,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
                     shape=(218, 178, 3), encoding_format="jpeg"),
             "landmarks": {name: tf.int64 for name in LANDMARK_HEADINGS},
             # Attributes could be some special MultiLabel FeatureConnector
-            "attributes": {
-                name: tf.bool for name in ATTR_HEADINGS
-            },
+            "attributes": {name: tf.bool for name in ATTR_HEADINGS},
         }),
         homepage="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
         citation=_CITATION,
@@ -133,8 +132,8 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     # Load all images in memory (~1 GiB)
     # Use split to convert: `img_align_celeba/000005.jpg` -> `000005.jpg`
     all_images = {
-        os.path.split(k)[-1]: img for k, img in
-        dl_manager.iter_archive(downloaded_dirs["img_align_celeba"])
+        os.path.split(k)[-1]: img for k, img in dl_manager.iter_archive(
+            downloaded_dirs["img_align_celeba"])
     }
 
     return [

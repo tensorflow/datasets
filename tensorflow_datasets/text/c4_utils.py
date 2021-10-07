@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,12 +18,13 @@
 import functools
 import gzip
 import hashlib
+import heapq
 import io
 import re
 import threading
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # WET file constants
@@ -42,33 +43,43 @@ _END_MARKS = (".", "?", "!", "\"")
 _ELLIPSIS = "..."
 _POLICY_SUBSTRINGS = [
     "terms of use", "privacy policy", "cookie policy", "uses cookies",
-    "use of cookies", "use cookies"]
+    "use of cookies", "use cookies"
+]
 
 # Memoized sentence tokenizer.
 _SENTENCE_TOKENIZER = None
 
+UNKNOWN_LANGUAGE = "und"
+
 
 def get_counter_inc_fn(namespace):
+
   def counter_inc_fn(counter, amt=1):
     tfds.core.lazy_imports.apache_beam.metrics.Metrics.counter(
         namespace, counter).inc(amt)
+
   return counter_inc_fn
 
 
 def get_hashed_url_filter_fn(predicate_fn):
+
   def filter_fn(el):
     url, _ = el
     val = int(
         hashlib.md5(tf.compat.as_text(url).encode("utf-8")).hexdigest(), 16)
     return predicate_fn(val)
+
   return filter_fn
+
+
+_nltk_lock = threading.Lock()
 
 
 def _load_sentence_tokenizer():
   """Returns a sentence tokenization function."""
   nltk = tfds.core.lazy_imports.nltk
   # Lock to avoid a race-condition in the creation of the download directory.
-  with threading.Lock():
+  with _nltk_lock:
     nltk.download("punkt")
     return nltk.data.load("nltk:tokenizers/punkt/english.pickle")
 
@@ -82,52 +93,98 @@ def _get_sentences(text):
   return list(_SENTENCE_TOKENIZER.tokenize(tf.compat.as_text(text)))
 
 
-def is_language(page, language, min_probability=0.99):
-  """Returns True iff text is in `language` with at least `min_probability`."""
-  unused_url, features = page
+# Global lock used for language detection modules that aren't threadsafe.
+langdetect_lock = threading.Lock()
+
+
+def detect_english(page, min_probability=0.99):
+  """Yields page iff text is 'en' with at least `min_probability`."""
+  url, features = page
   text = features["text"]
 
-  counter_inc_fn = get_counter_inc_fn("detected-lang")
+  counter_inc_fn = get_counter_inc_fn("english-filter")
 
   langdetect = tfds.core.lazy_imports.langdetect
   # Make langdetect predictions deterministic.
-  langdetect.DetectorFactory.seed = 0
-  try:
-    predictions = langdetect.detect_langs(text)
-  except langdetect.lang_detect_exception.LangDetectException:
-    counter_inc_fn("langdetect-exception")
-    return False
+  with langdetect_lock:
+    langdetect.DetectorFactory.seed = 0
+    try:
+      predictions = langdetect.detect_langs(text)
+    except langdetect.lang_detect_exception.LangDetectException:
+      counter_inc_fn("filtered:langdetect_exception")
+      return
   if not predictions:
-    counter_inc_fn("page-filtered-nolangpredictions")
-    return False
+    counter_inc_fn("filtered:no_predictions")
+    return
   best_prediction = predictions[0]
   if best_prediction.prob < min_probability:
-    counter_inc_fn("page-filtered-lowlangdetectconf")
-    return False
-  if best_prediction.lang != language:
-    counter_inc_fn("page-filtered-ignoredlang")
-    counter_inc_fn("page-filtered-ignoredlang-%s" % (best_prediction.lang))
-    return False
-  counter_inc_fn("page-emited-%s" % best_prediction.lang)
-  return True
+    counter_inc_fn("filtered:low_confidence")
+    return
+  if best_prediction.lang != "en":
+    counter_inc_fn("filtered:ignored_language")
+    counter_inc_fn("filtered:ignored_language-%s" % (best_prediction.lang,))
+    return
+
+  counter_inc_fn("passed")
+  features = dict(features)
+  features["language"] = "en"
+  yield url, features
 
 
-def get_clean_page_fn(badwords=None):
+def detect_languages(pages, valid_languages):
+  """Predicts page language using cld3 and adds to features."""
+
+  beam = tfds.core.lazy_imports.apache_beam
+
+  class _PredictLanguageFn(beam.DoFn):
+    """Predicts page's language using cld3 and adds to features."""
+
+    def __init__(self, valid_languages, min_probability=0.7):
+      self._valid_languages = set(valid_languages)
+      self._counter_inc_fn = get_counter_inc_fn("language-filter")
+      self._min_probability = min_probability
+
+    def start_bundle(self):
+
+      with langdetect_lock:
+        self._detector = tfds.core.lazy_imports.gcld3.NNetLanguageIdentifier(
+            # CLD3 is not expected to work well on very short documents.
+            min_num_bytes=100,
+            max_num_bytes=10000)
+
+    def process(self, page):
+      url, features = page
+      features = dict(features)
+      with langdetect_lock:
+        result = self._detector.FindLanguage(features["text"])
+      if not result.is_reliable:
+        self._counter_inc_fn("filtered:no_predictions")
+        lang = UNKNOWN_LANGUAGE
+      elif result.probability < self._min_probability:
+        self._counter_inc_fn("filtered:low_confidence")
+        lang = UNKNOWN_LANGUAGE
+      else:
+        lang = result.language
+        if lang not in self._valid_languages:
+          self._counter_inc_fn("filtered:ignored_language")
+          return
+      self._counter_inc_fn("passed")
+      self._counter_inc_fn("passed:%s" % lang)
+      features["language"] = lang
+      yield url, features
+
+  return pages | beam.ParDo(_PredictLanguageFn(valid_languages=valid_languages))
+
+
+def get_clean_page_fn():
   """Returns `clean_page` with pre-compiled badword and citation regexes."""
   # Used to filter citation from Wikipedia pages (among others).
   citation_regex = re.compile(r"\[\d*\]|\[edit\]|\[citation needed\]")
-  if badwords:
-    badwords_regex = re.compile(
-        "[^a-z]({})[^a-z]".format("|".join(badwords or [])))
-  else:
-    badwords_regex = None
-  return functools.partial(
-      clean_page, citation_regex=citation_regex, badwords_regex=badwords_regex)
+  return functools.partial(clean_page, citation_regex=citation_regex)
 
 
 def clean_page(url_and_features,
                citation_regex,
-               badwords_regex=None,
                counter_inc_fn=None,
                min_words_per_line=_MIN_WORDS_PER_LINE,
                min_num_sentences=_MIN_NUM_SENTENCES,
@@ -141,8 +198,6 @@ def clean_page(url_and_features,
   Args:
     url_and_features: tuple(string, dict), the url and features of the page.
     citation_regex: Regex to use for finding Wikipedia-like citations to filter.
-    badwords_regex: Regex to use for finding badwords. Default None, which means
-      don't apply badwords filtering.
     counter_inc_fn: function, a function taking the name of a counter to be
       incremented and the (optional) amount. Defaults to a beam Metric counter.
     min_words_per_line: int, the minimum number of words a line needs to not be
@@ -151,6 +206,7 @@ def clean_page(url_and_features,
       be skipped.
     max_word_length: int, the maximum number of characters allowed in a word.
       Lines containing a word with too many characters are removed.
+
   Yields:
     The url and cleaned text for the page.
   """
@@ -173,46 +229,40 @@ def clean_page(url_and_features,
   for line in lines:
     line = line.strip()
     if line_has_too_long_word(line):
-      counter_inc_fn("lines-with-too-long-word")
+      counter_inc_fn("line-filtered:too_long_word")
       continue
     line = citation_regex.sub("", line)
     if not line.endswith(_END_MARKS) or line.endswith(_ELLIPSIS):
-      counter_inc_fn("lines-no-endmark")
+      counter_inc_fn("line-filtered:no_endmark")
       continue
     if len(line.split()) < min_words_per_line:
-      counter_inc_fn("lines-too-short")
+      counter_inc_fn("line-filtered:too_short")
       continue
     line_lower = line.lower()
     # Remove documents which contain lorem ipsum
     if "lorem ipsum" in line_lower:
-      counter_inc_fn("filtered-page-loremipsum")
+      counter_inc_fn("filtered:loremipsum")
       return
     # Remove "javascript must be enabled" notices
     if "javascript" in line_lower:
-      counter_inc_fn("lines-javascript")
+      counter_inc_fn("line-filtered:javascript")
       continue
     # Remove docs which probably contain javascript code
     if "{" in line:
-      counter_inc_fn("filtered-page-squigglybracket")
+      counter_inc_fn("filtered:squigglybracket")
       return
     # Remove policy lines
     if any(p in line_lower for p in _POLICY_SUBSTRINGS):
-      counter_inc_fn("lines-policy")
+      counter_inc_fn("line-filtered:policy")
       continue
-    # If any badword appears on its own in the line, skip this doc
-    if badwords_regex:
-      badwords_found = badwords_regex.search(line_lower)
-      if badwords_found is not None:
-        counter_inc_fn("filtered-page-badword")
-        return
     num_sentences += len(_get_sentences(line))
     valid_lines.append(line)
-    counter_inc_fn("lines-valid")
+    counter_inc_fn("line-passed")
 
   if num_sentences < min_num_sentences:
-    counter_inc_fn("filtered-page-toofewsentences")
+    counter_inc_fn("filtered:too_few_sentences")
     return
-  counter_inc_fn("emitted-clean-pages")
+  counter_inc_fn("passed")
   features["text"] = "\n".join(valid_lines).strip()
   yield url, features
 
@@ -237,9 +287,9 @@ def _remove_lines_from_text(el, counter_inc_fn, min_num_sentences):
   line that has been selected to keep.
 
   Args:
-    el: `(string, {'features': features_dict, 'lines': [string]})`,
-      element containing the result of a join on key with both the page text
-      and lower-cased, hashed lines to remove.
+    el: `(string, {'features': features_dict, 'lines': [string]})`, element
+      containing the result of a join on key with both the page text and
+      lower-cased, hashed lines to remove.
     counter_inc_fn: function, a function taking the name of a counter to be
       incremented and the (optional) amount.
     min_num_sentences: int, the minimum number of sentences a page needs to not
@@ -252,8 +302,8 @@ def _remove_lines_from_text(el, counter_inc_fn, min_num_sentences):
   url, join_values = el
   features = join_values["features"]
 
-  assert len(features) == 1, "Invalid page count (%d) for %s" % (
-      len(features), url)
+  assert len(features) == 1, "Invalid page count (%d) for %s" % (len(features),
+                                                                 url)
   features = features[0]
   text = features["text"]
   lines_to_keep = set(join_values["lines"])
@@ -262,19 +312,21 @@ def _remove_lines_from_text(el, counter_inc_fn, min_num_sentences):
   for line in text.split("\n"):
     hashed_line = _hash_text(line.strip().lower())
     if hashed_line not in lines_to_keep:
-      counter_inc_fn("filtered-lines-global_duplicate")
+      counter_inc_fn("line-filtered:global_duplicate")
     elif hashed_line in hashed_lines:
-      counter_inc_fn("filtered-lines-local_duplicate")
+      counter_inc_fn("line-filtered:local_duplicate")
     else:
+      counter_inc_fn("line-passed")
       new_lines.append(line)
       hashed_lines.add(hashed_line)
   new_text = "\n".join(new_lines)
   if not new_text:
-    counter_inc_fn("filtered-deduped_page-empty")
+    counter_inc_fn("filtered:empty")
     return
   if min_num_sentences and len(_get_sentences(new_text)) < min_num_sentences:
-    counter_inc_fn("filtered-deduped_page-toofewsentences")
+    counter_inc_fn("filtered:too_few_sentences")
     return
+  counter_inc_fn("passed")
   new_features = features.copy()
   new_features["text"] = new_text
   yield (url, new_features)
@@ -296,16 +348,15 @@ def remove_duplicate_text(pages, min_num_sentences=_MIN_NUM_SENTENCES):
   lines_to_keep = line_to_selected_url | beam.Map(lambda x: (x[1][0], x[0]))
 
   # Output: url, text
-  final_docs = (
-      {
-          "features": pages,
-          "lines": lines_to_keep
-      }
-      | "group_features_and_lines_by_url" >> beam.CoGroupByKey()
-      | beam.FlatMap(
-          _remove_lines_from_text,
-          counter_inc_fn=get_counter_inc_fn("dedupe-lines"),
-          min_num_sentences=min_num_sentences))
+  final_docs = ({
+      "features": pages,
+      "lines": lines_to_keep
+  }
+                | "group_features_and_lines_by_url" >> beam.CoGroupByKey()
+                | beam.FlatMap(
+                    _remove_lines_from_text,
+                    counter_inc_fn=get_counter_inc_fn("dedupe-lines"),
+                    min_num_sentences=min_num_sentences))
 
   return final_docs
 
@@ -317,8 +368,8 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
     counter_inc_fn = get_counter_inc_fn("split-wet-file")
   counter_inc_fn("wet-file")
 
-  with tf.io.gfile.GFile(wet_file_path, "rb") as f, gzip.GzipFile(
-      fileobj=f) as g:
+  with tf.io.gfile.GFile(wet_file_path,
+                         "rb") as f, gzip.GzipFile(fileobj=f) as g:
     url = None
     content = None
     content_len = None
@@ -328,17 +379,17 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
     def _maybe_get_page():
       """Generate a (url, {features}) page."""
       if not url and url is not None:
-        counter_inc_fn("page-filtered-nourl")
+        counter_inc_fn("filtered:no_url")
       if not content and content is not None:
-        counter_inc_fn("page-filtered-nocontent")
+        counter_inc_fn("filtered:no_content")
       if not content_type and content_type is not None:
-        counter_inc_fn("page-nocontenttype")
+        counter_inc_fn("filtered:no_content_type")
       if not content_len and content_len is not None:
-        counter_inc_fn("page-nocontentlen")
+        counter_inc_fn("filtered:no_content_len")
       if not timestamp and timestamp is not None:
-        counter_inc_fn("page-notimestamp")
+        counter_inc_fn("filtered:no_timestamp")
       if content and url:
-        counter_inc_fn("page-emitted")
+        counter_inc_fn("passed")
         return (url, {
             "text": "\n".join(content),
             "content-type": content_type,
@@ -385,61 +436,66 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
 
 
 def dedupe_urls(el):
-  """Returns the first value for a given URL."""
-  counter_inc_fn = get_counter_inc_fn("dedupe-urls")
-  url, vals = el
+  """Deterministically return as random page for a given URL."""
+  counter_inc_fn = get_counter_inc_fn("duplicate-url-filter")
+
+  url, pages = el
   cnt = 0
-  v = None
-  for v in vals:
+  page, page_hash = None, None
+  for p in pages:
     cnt += 1
-  counter_inc_fn("filtered-url-duplicate", cnt - 1)
-  counter_inc_fn("unique-url")
-  return url, v
+    p_hash = _hash_text(p["text"])
+    if not page_hash or p_hash > page_hash:
+      page = p
+      page_hash = p_hash
+  counter_inc_fn("filtered", cnt - 1)
+  counter_inc_fn("passed")
+  return url, page
 
 
 def is_valid_length(el, max_length=1.9e5):
   """Returns False iff page's text is too long."""
-  counter_inc_fn = get_counter_inc_fn("is-valid-length")
+  counter_inc_fn = get_counter_inc_fn("too-long-filter")
   _, page = el
   if len(page["text"]) > max_length:
-    counter_inc_fn("filtered-page-contenttoolong")
+    counter_inc_fn("filtered")
     return False
-  counter_inc_fn("valid-length")
+  counter_inc_fn("passed")
   return True
 
 
 def is_realnews_domain(el, realnews_domains):
   """Returns False iff page's (sub)domain is not allowed."""
-  counter_inc_fn = get_counter_inc_fn("is-realnews-domain")
+  counter_inc_fn = get_counter_inc_fn("realnews-domain-filter")
   url, _ = el
   ext = tfds.core.lazy_imports.tldextract.extract(url)
   main_domain = ext.domain + "." + ext.suffix
   if main_domain not in realnews_domains:
-    counter_inc_fn("filtered-url-invaliddomain")
+    counter_inc_fn("filtered:bad_domain")
     return False
   allowed_subdomains = realnews_domains[main_domain]
   if (isinstance(allowed_subdomains, list) and
       ext.subdomain not in allowed_subdomains):
-    counter_inc_fn("filtered-url-invalidsubdomain")
+    counter_inc_fn("filtered:bad_subdomain")
     return False
-  counter_inc_fn("realnews-domain")
+  counter_inc_fn("passed")
   return True
 
 
 def filter_by_webtextlike(el):
   """Yields only pages with a matching WebText-like URL."""
-  counter_inc_fn = get_counter_inc_fn("filter-by-webtextlike")
+  counter_inc_fn = get_counter_inc_fn("webtextlike-filter")
   url, join_values = el
   text = join_values["text"]
   webtextlike = join_values["webtextlike_urls"]
   if not webtextlike:
-    counter_inc_fn("filtered-url-notwebtextlike")
+    counter_inc_fn("filtered")
     return
   if not text:
-    counter_inc_fn("missing-webtextlike")
+    counter_inc_fn("missing-page")
     return
   assert len(text) == 1
-  counter_inc_fn("found-webtextlike")
+  counter_inc_fn("passed")
   yield url, text[0]
 
 
@@ -450,3 +506,49 @@ def normalize_url(el):
   url = re.sub(r"\?(utm_|ref|feed).*", "", url)
   url = url.rstrip("/")
   return url, val
+
+
+def get_badwords_filter_fn(badwords):
+  """Filters pages that contain any language-specific bad words."""
+  badwords_regex = {  # pylint:disable=g-complex-comprehension
+      lang: (
+          # For Chinese and Thai, match bad words regardless of context.
+          re.compile("|".join(words)) if lang in ("th", "zh")
+          # For other languages, match only when flanked by non-word chars.
+          else re.compile(r"(?:\W|^)({})(?:\W|$)".format("|".join(words))))
+      for lang, words in badwords.items()
+  }
+
+  def badwords_filter(page):
+    _, features = page
+    lang = features["language"].split("-")[0]  # remove suffix if present
+
+    if lang in badwords_regex:
+      text = features["text"]
+      badwords_found = badwords_regex[lang].search(text.lower())
+      if badwords_found is not None:
+        get_counter_inc_fn("badwords-filter")("filtered")
+        get_counter_inc_fn("badwords-filter-%s" % lang)("filtered")
+        return False
+      get_counter_inc_fn("badwords-filter-%s" % lang)("passed")
+
+    get_counter_inc_fn("badwords-filter")("passed")
+    return True
+
+  return badwords_filter
+
+
+def paragraph_filter(page, min_paragraphs=3, min_paragraph_len=200):
+  """Returns False iff a page has too few or too short paragraphs."""
+
+  _, features = page
+
+  lines = features["text"].split("\n")
+  # Filter out docs that don't have at least three "paragraphs"
+  # (lines >= `min_paragraph_len` chars).
+  if (len(lines) < min_paragraphs or
+      min(heapq.nlargest(3, [len(l) for l in lines])) < min_paragraph_len):
+    get_counter_inc_fn("paragraph-filter")("filtered")
+    return False
+  get_counter_inc_fn("paragraph-filter")("passed")
+  return True

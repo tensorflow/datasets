@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import json
 import os
 
 import six.moves.urllib as urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -59,17 +59,20 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "id": tfds.features.Text(),
-            "image": tfds.features.Image(),
-            "label": tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
-                    os.path.join(
-                        "image_classification", "inaturalist_labels.txt"))),
-            "supercategory": tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
-                    os.path.join(
-                        "image_classification",
-                        "inaturalist_supercategories.txt"))),
+            "id":
+                tfds.features.Text(),
+            "image":
+                tfds.features.Image(),
+            "label":
+                tfds.features.ClassLabel(
+                    names_file=tfds.core.tfds_path(
+                        os.path.join("image_classification",
+                                     "inaturalist_labels.txt"))),
+            "supercategory":
+                tfds.features.ClassLabel(
+                    names_file=tfds.core.tfds_path(
+                        os.path.join("image_classification",
+                                     "inaturalist_supercategories.txt"))),
         }),
         supervised_keys=("image", "label"),
         homepage="https://github.com/visipedia/inat_comp/tree/master/2017",
@@ -87,7 +90,6 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
             tfds.download.Resource(
                 url=urllib.parse.urljoin(_URL, "test2017.tar.gz"),
                 extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
-
     })
     return [
         tfds.core.SplitGenerator(

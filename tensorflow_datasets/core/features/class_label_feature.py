@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,17 +16,17 @@
 """ClassLabel feature."""
 
 import os
-import six
-import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core.features import feature
+import tensorflow as tf
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
 
-class ClassLabel(feature.Tensor):
+class ClassLabel(tensor_feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
+  # If updating the signature here, LabeledImage should likely be updated too.
   def __init__(self, *, num_classes=None, names=None, names_file=None):
     """Constructs a ClassLabel FeatureConnector.
 
@@ -41,10 +41,10 @@ class ClassLabel(feature.Tensor):
 
     Args:
       num_classes: `int`, number of classes. All labels must be < num_classes.
-      names: `list<str>`, string names for the integer classes. The
-        order in which the names are provided is kept.
-      names_file: `str`, path to a file with names for the integer
-        classes, one per line.
+      names: `list<str>`, string names for the integer classes. The order in
+        which the names are provided is kept.
+      names_file: `str`, path to a file with names for the integer classes, one
+        per line.
     """
     super(ClassLabel, self).__init__(shape=(), dtype=tf.int64)
 
@@ -100,9 +100,8 @@ class ClassLabel(feature.Tensor):
     elif self._num_classes != num_classes:
       raise ValueError(
           "ClassLabel number of names do not match the defined num_classes. "
-          "Got {} names VS {} num_classes".format(
-              num_classes, self._num_classes)
-      )
+          "Got {} names VS {} num_classes".format(num_classes,
+                                                  self._num_classes))
 
   def str2int(self, str_value):
     """Conversion class name string => integer."""
@@ -138,12 +137,15 @@ class ClassLabel(feature.Tensor):
     if self._num_classes is None:
       raise ValueError(
           "Trying to use ClassLabel feature with undefined number of class. "
-          "Please set ClassLabel.names or num_classes."
-      )
+          "Please set ClassLabel.names or num_classes.")
 
     # If a string is given, convert to associated integer
-    if isinstance(example_data, six.string_types):
+    if isinstance(example_data, str):
       example_data = self.str2int(example_data)
+    elif isinstance(example_data, bytes):
+      # Accept bytes if user yield `tensor.numpy()`
+      # Python 3 doesn't interpret byte strings as strings directly.
+      example_data = self.str2int(example_data.decode("utf-8"))
 
     # Allowing -1 to mean no label.
     if not -1 <= example_data < self._num_classes:
@@ -190,6 +192,7 @@ def _get_names_filepath(data_dir, feature_name):
 
 
 def _load_names_from_file(names_filepath):
+  names_filepath = os.fspath(names_filepath)
   with tf.io.gfile.GFile(names_filepath, "r") as f:
     return [
         name.strip()

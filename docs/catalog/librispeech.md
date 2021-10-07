@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="librispeech" />
   <meta itemprop="description" content="LibriSpeech is a corpus of approximately 1000 hours of read English speech with sampling rate of 16 kHz,&#10;prepared by Vassil Panayotov with the assistance of Daniel Povey. The data is derived from read&#10;audiobooks from the LibriVox project, and has been carefully segmented and aligned.87&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;librispeech&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/librispeech" />
@@ -11,6 +10,7 @@
 </div>
 
 # `librispeech`
+
 
 *   **Description**:
 
@@ -26,9 +26,11 @@ project, and has been carefully segmented and aligned.87
 
 *   **Versions**:
 
-    *   **`1.1.0`** (default): No release notes.
+    *   **`2.1.0`** (default): No release notes.
 
 *   **Download size**: `57.14 GiB`
+
+*   **Dataset size**: `304.47 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -46,33 +48,6 @@ Split              | Examples
 `'train_clean360'` | 104,014
 `'train_other500'` | 148,688
 
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('speech', 'text')`
-
-*   **Citation**:
-
-```
-@inproceedings{panayotov2015librispeech,
-  title={Librispeech: an ASR corpus based on public domain audio books},
-  author={Panayotov, Vassil and Chen, Guoguo and Povey, Daniel and Khudanpur, Sanjeev},
-  booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2015 IEEE International Conference on},
-  pages={5206--5210},
-  year={2015},
-  organization={IEEE}
-}
-```
-
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
-
-## librispeech/plain_text (default config)
-
-*   **Config description**: Transcriptions are in plain text.
-
-*   **Dataset size**: `304.47 GiB`
-
 *   **Features**:
 
 ```python
@@ -85,38 +60,57 @@ FeaturesDict({
 })
 ```
 
-## librispeech/subwords8k
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('speech', 'text')`
 
-*   **Config description**: Transcriptions use the SubwordTextEncoder
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-*   **Dataset size**: `304.44 GiB`
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
-*   **Features**:
+<!-- mdformat off(HTML should not be auto-formatted) -->
 
-```python
-FeaturesDict({
-    'chapter_id': tf.int64,
-    'id': tf.string,
-    'speaker_id': tf.int64,
-    'speech': Audio(shape=(None,), dtype=tf.int64),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8215>),
-})
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/librispeech-2.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+*   **Citation**:
+
 ```
-
-## librispeech/subwords32k
-
-*   **Config description**: Transcriptions use the SubwordTextEncoder
-
-*   **Dataset size**: `304.44 GiB`
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'chapter_id': tf.int64,
-    'id': tf.string,
-    'speaker_id': tf.int64,
-    'speech': Audio(shape=(None,), dtype=tf.int64),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32550>),
-})
+@inproceedings{panayotov2015librispeech,
+  title={Librispeech: an ASR corpus based on public domain audio books},
+  author={Panayotov, Vassil and Chen, Guoguo and Povey, Daniel and Khudanpur, Sanjeev},
+  booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2015 IEEE International Conference on},
+  pages={5206--5210},
+  year={2015},
+  organization={IEEE}
+}
 ```

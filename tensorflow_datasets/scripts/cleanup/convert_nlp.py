@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ import re
 
 from absl import app
 from absl.flags import argparse_flags
-from tensorflow_datasets.core.utils import py_utils
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.scripts.cli import new
 
 TO_CONVERT = [
@@ -74,10 +74,7 @@ def _parse_flags(_) -> argparse.Namespace:
       description="Tool to add hugging face datasets",
   )
   parser.add_argument(
-      "--nlp_path",
-      type=pathlib.Path,
-      help="Path of the nlp directory"
-  )
+      "--nlp_path", type=pathlib.Path, help="Path of the nlp directory")
   parser.add_argument(
       "--dataset_name",
       type=str,
@@ -107,14 +104,13 @@ def create_dataset_files(
 ) -> None:
   """Create template files."""
   #  Path of the converted dataset directory
-  tfds_root_path = pathlib.Path(py_utils.tfds_dir())
+  tfds_root_path = tfds.core.utils.tfds_write_path()
   dataset_dir = tfds_root_path / dataset_type
   if not dataset_dir.is_dir():
     raise ValueError(f"Invalid Dataset Type {dataset_type}")
 
   #  Create dataset timeplate files from new.py
-  new.create_dataset_files(dataset_name=dataset_name,
-                           dataset_dir=dataset_dir)
+  new.create_dataset_files(dataset_name=dataset_name, dataset_dir=dataset_dir)
 
   #  Path of the dataset file
   nlp_datasets_path = nlp_path.expanduser() / "datasets"

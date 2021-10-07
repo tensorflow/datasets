@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,9 +55,7 @@ class SpokenDigit(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "audio": tfds.features.Audio(
-                file_format="wav",
-                sample_rate=8000),
+            "audio": tfds.features.Audio(file_format="wav", sample_rate=8000),
             "label": tfds.features.ClassLabel(num_classes=10),
             "audio/filename": tfds.features.Text()
         }),
@@ -68,23 +66,14 @@ class SpokenDigit(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns Split Generators."""
-    dl_path = dl_manager.download_and_extract(
-        tfds.download.Resource(
-            url=_DOWNLOAD_URL,
-            # Specify extract method manually as filename reported by github.com
-            # misses the .tar extension so auto-detection doesn't work.
-            extract_method=tfds.download.ExtractMethod.TAR))
-    extracted_dir_path = os.path.join(
-        dl_path,
-        "free-spoken-digit-dataset-1.0.9")
+    dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
+    extracted_dir_path = os.path.join(dl_path,
+                                      "free-spoken-digit-dataset-1.0.9")
     path = os.path.join(extracted_dir_path, "recordings")
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "path": path
-            })
+            name=tfds.Split.TRAIN, gen_kwargs={"path": path})
     ]
 
   def _generate_examples(self, path):
@@ -108,4 +97,3 @@ class SpokenDigit(tfds.core.GeneratorBasedBuilder):
               "audio/filename": fname,
           }
           yield key, example
-

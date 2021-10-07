@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -53,7 +53,7 @@ Original paper URL: https://arxiv.org/abs/1511.08060
 Dataset URL: https://data.mendeley.com/datasets/tywbtsjrjv/1
 """
 
-_URL = "https://data.mendeley.com/datasets/tywbtsjrjv/1/files/d5652a28-c1d8-4b76-97f3-72fb80f94efc/Plant_leaf_diseases_dataset_without_augmentation.zip"
+_URL = "https://data.mendeley.com/public-files/datasets/tywbtsjrjv/files/d5652a28-c1d8-4b76-97f3-72fb80f94efc/file_downloaded"
 _LABELS = [
     "Apple___Apple_scab",
     "Apple___Black_rot",
@@ -99,7 +99,7 @@ _LABELS = [
 class PlantVillage(tfds.core.GeneratorBasedBuilder):
   """The PlantVillage dataset of healthy and unhealthy leaves."""
 
-  VERSION = tfds.core.Version("1.0.1")
+  VERSION = tfds.core.Version("1.0.2")
 
   def _info(self):
     return tfds.core.DatasetInfo(
