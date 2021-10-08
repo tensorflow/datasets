@@ -18,8 +18,6 @@
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-pd = tfds.core.lazy_imports.pandas
-
 _DESCRIPTION = """
 PASS is a large-scale image dataset that does not include any humans,
 human parts, or other personally identifiable information.
@@ -78,7 +76,7 @@ class PASS(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     paths = dl_manager.download(_URLS)
     with tf.io.gfile.GFile(paths['meta_data']) as f:
-      meta = pd.read_csv(f)
+      meta = tfds.core.lazy_imports.pandas.read_csv(f)
     meta = {m[1]['hash']: m[1]['unickname'] for m in meta.iterrows()}
     return {
         'train':
