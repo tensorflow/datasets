@@ -104,6 +104,9 @@ toc:
     title: lsun
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
+  - path: /datasets/catalog/pass
+    status: nightly
+    title: pass
   - path: /datasets/catalog/s3o4d
     title: s3o4d
   - path: /datasets/catalog/scene_parse150

@@ -83,6 +83,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`lost_and_found`](lost_and_found.md)
 *   [`lsun`](lsun.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
+*   [`pass`](pass.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`s3o4d`](s3o4d.md)
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
