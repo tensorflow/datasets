@@ -1124,6 +1124,8 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       # forward it to `self._split_generators`
       # We add this magic because the pipeline kwargs is only used by c4 and
       # we do not want to make the API more verbose for a single advanced case.
+      # See also the documentation at the end here:
+      # https://www.tensorflow.org/datasets/api_docs/python/tfds/core/GeneratorBasedBuilder?version=nightly#_generate_examples
       signature = inspect.signature(self._split_generators)
       if "pipeline" in signature.parameters.keys():
         optional_pipeline_kwargs = dict(pipeline=split_builder.beam_pipeline)
