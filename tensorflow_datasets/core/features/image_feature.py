@@ -226,9 +226,9 @@ class Image(feature.FeatureConnector):
     # Set and validate values
     shape = shape or (None, None, 3)
     dtype = dtype or tf.uint8
-    self._encoding_format = _get_and_validate_encoding(encoding_format)
-    self._shape = _get_and_validate_shape(shape, self._encoding_format)
-    self._dtype = _get_and_validate_dtype(dtype, self._encoding_format)
+    self._encoding_format = get_and_validate_encoding(encoding_format)
+    self._shape = get_and_validate_shape(shape, self._encoding_format)
+    self._dtype = get_and_validate_dtype(dtype, self._encoding_format)
     self._use_colormap = _get_and_validate_colormap(use_colormap, self._shape,
                                                     self._dtype,
                                                     self._encoding_format)
@@ -385,7 +385,7 @@ def _get_repr_html_gif(images: List[PilImage]) -> str:
 # Other image utils
 
 
-def _get_and_validate_encoding(encoding_format):
+def get_and_validate_encoding(encoding_format):
   """Update the encoding format."""
   supported = _ENCODE_FN.keys()
   if encoding_format and encoding_format not in supported:
@@ -393,7 +393,7 @@ def _get_and_validate_encoding(encoding_format):
   return encoding_format
 
 
-def _get_and_validate_dtype(dtype, encoding_format):
+def get_and_validate_dtype(dtype, encoding_format):
   """Update the dtype."""
   dtype = tf.as_dtype(dtype)
   acceptable_dtypes = _ACCEPTABLE_DTYPES.get(encoding_format)
@@ -403,7 +403,7 @@ def _get_and_validate_dtype(dtype, encoding_format):
   return dtype
 
 
-def _get_and_validate_shape(shape, encoding_format):
+def get_and_validate_shape(shape, encoding_format):
   """Update the shape."""
   if len(shape) <= 2:
     raise ValueError(f'Image shape should be (h, w, c). Got: {shape}')
