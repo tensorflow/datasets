@@ -22,6 +22,7 @@ from tensorflow_datasets.summarization.booksum import Booksum
 from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymail
 from tensorflow_datasets.summarization.covid19sum import Covid19sum
 from tensorflow_datasets.summarization.gigaword import Gigaword
+from tensorflow_datasets.summarization.gov_report import GovReport
 from tensorflow_datasets.summarization.multi_news import MultiNews
 from tensorflow_datasets.summarization.newsroom import Newsroom
 from tensorflow_datasets.summarization.opinion_abstracts import OpinionAbstracts

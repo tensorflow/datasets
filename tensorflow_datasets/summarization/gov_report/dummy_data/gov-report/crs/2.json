@@ -1,0 +1,52 @@
+{
+  "reports":{
+    "section_title":"",
+    "paragraphs":[
+
+    ],
+    "subsections":[
+      {
+        "section_title":"Introduction",
+        "paragraphs":[
+          "p1",
+          "p2"
+        ],
+        "subsections":[
+          {
+            "section_title":"Background",
+            "paragraphs":[
+              "p3"
+            ],
+            "subsections":[
+            ]
+          }
+        ]
+      },
+      {
+        "section_title":"Section",
+        "paragraphs":[
+          "p4",
+          "p5"
+        ],
+        "subsections":[
+        ]
+      },
+      {
+        "section_title":"Conclusion",
+        "paragraphs":[
+          "p6"
+        ],
+        "subsections":[
+        ]
+      }
+    ]
+  },
+  "summary":[
+    "s1",
+    "s2",
+    "s3"
+  ],
+  "title":"An Overview",
+  "released_date":"2014-02-07T00:00:00",
+  "id":"RLxxxx2"
+}
