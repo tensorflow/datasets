@@ -89,9 +89,10 @@ class IstellaConfig(tfds.core.BuilderConfig):
 class Istella(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for istella dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.1")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
+      "1.0.1": "Fix serialization to support float64."
   }
   # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
@@ -104,12 +105,14 @@ class Istella(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
+    encoding = tfds.features.Encoding.ZLIB
     features = {
-        name: tfds.features.Tensor(shape=(None,), dtype=tf.float64)
+        name: tfds.features.Tensor(
+            shape=(None,), dtype=tf.float64, encoding=encoding)
         for name in _FEATURE_NAMES.values()
     }
     features[_LABEL_NAME] = tfds.features.Tensor(
-        shape=(None,), dtype=tf.float64)
+        shape=(None,), dtype=tf.float64, encoding=encoding)
 
     return tfds.core.DatasetInfo(
         builder=self,
