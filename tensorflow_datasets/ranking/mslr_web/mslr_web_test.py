@@ -13,6 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Ranking datasets."""
-from tensorflow_datasets.ranking.istella import Istella
-from tensorflow_datasets.ranking.mslr_web import MslrWeb
+"""mslr_web dataset."""
+
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.ranking.mslr_web import mslr_web
+
+
+class MslrWebTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for mslr_web dataset."""
+  DATASET_CLASS = mslr_web.MslrWeb
+  SPLITS = {
+      "train": 6,
+      "vali": 2,
+      "test": 2,
+  }
+  BUILDER_CONFIG_NAMES_TO_TEST = ["10k_fold1"]
+
+
+if __name__ == "__main__":
+  tfds.testing.test_main()
