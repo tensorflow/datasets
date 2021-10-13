@@ -129,8 +129,10 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
           multilingual=True),
   ]
 
-  VERSION = tfds.core.Version('0.3.0')
+  VERSION = tfds.core.Version('0.3.1')
   RELEASE_NOTES = {
+      '0.3.1': ('Added a unique id for each comment. (For the Multilingual '
+                'config, these are only unique within each split.)'),
       '0.3.0': 'Added WikipediaToxicityMultilingual config.',
       '0.2.0': 'Updated features for consistency with CivilComments dataset.',
   }
@@ -139,7 +141,11 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
     description = _COMMON_DESCRIPTION
     homepage = _MULTILINGUAL_HOMEPAGE if self.builder_config.multilingual else _SUBTYPES_HOMEPAGE
 
-    features = {'text': tfds.features.Text(), 'language': tfds.features.Text()}
+    features = {
+        'text': tfds.features.Text(),
+        'id': tfds.features.Text(),
+        'language': tfds.features.Text()
+    }
     labels = ['toxicity']
     if not self.builder_config.multilingual:
       labels += TOXICITY_SUBTYPES
@@ -198,6 +204,7 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
       for row in reader:
         example = {}
         example['text'] = row['comment_text']
+        example['id'] = row['id']
         example['language'] = row['lang']
         example['toxicity'] = float(row['toxic'])
 
