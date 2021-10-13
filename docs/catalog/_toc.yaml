@@ -314,6 +314,9 @@ toc:
   - path: /datasets/catalog/istella
     status: nightly
     title: istella
+  - path: /datasets/catalog/mslr_web
+    status: nightly
+    title: mslr_web
   title: Ranking
 - section:
   - path: /datasets/catalog/rlu_atari
@@ -406,6 +409,9 @@ toc:
     title: covid19sum (manual)
   - path: /datasets/catalog/gigaword
     title: gigaword
+  - path: /datasets/catalog/gov_report
+    status: nightly
+    title: gov_report
   - path: /datasets/catalog/multi_news
     title: multi_news
   - path: /datasets/catalog/newsroom

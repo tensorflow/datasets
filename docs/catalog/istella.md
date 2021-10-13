@@ -53,7 +53,8 @@ ds = tfds.load("istella")
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.0.1`** (default): Fix serialization to support float64.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -295,6 +296,10 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -319,7 +324,7 @@ FeaturesDict({
 
 *   **Download size**: `1.20 GiB`
 
-*   **Dataset size**: `8.77 GiB`
+*   **Dataset size**: `1.40 GiB`
 
 *   **Splits**:
 
@@ -328,45 +333,11 @@ Split     | Examples
 `'test'`  | 9,799
 `'train'` | 23,219
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-main-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## istella/s
 
 *   **Download size**: `450.26 MiB`
 
-*   **Dataset size**: `2.97 GiB`
+*   **Dataset size**: `728.40 MiB`
 
 *   **Splits**:
 
@@ -376,45 +347,11 @@ Split     | Examples
 `'train'` | 19,245
 `'vali'`  | 7,211
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-s-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## istella/x
 
 *   **Download size**: `4.42 GiB`
 
-*   **Dataset size**: `22.11 GiB`
+*   **Dataset size**: `2.06 GiB`
 
 *   **Splits**:
 
@@ -423,37 +360,3 @@ Split     | Examples
 `'test'`  | 2,000
 `'train'` | 6,000
 `'vali'`  | 2,000
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-x-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->

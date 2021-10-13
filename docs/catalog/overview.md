@@ -197,6 +197,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`istella`](istella.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`mslr_web`](mslr_web.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Rl unplugged`
 
@@ -253,6 +255,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cnn_dailymail`](cnn_dailymail.md)
 *   [`covid19sum`](covid19sum.md)
 *   [`gigaword`](gigaword.md)
+*   [`gov_report`](gov_report.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`multi_news`](multi_news.md)
 *   [`newsroom`](newsroom.md)
 *   [`opinion_abstracts`](opinion_abstracts.md)

@@ -36,7 +36,9 @@ text.
 *   **Versions**:
 
     *   `0.2.0`: Updated features for consistency with CivilComments dataset.
-    *   **`0.3.0`** (default): Added WikipediaToxicityMultilingual config.
+    *   `0.3.0`: Added WikipediaToxicityMultilingual config.
+    *   **`0.3.1`** (default): Added a unique id for each comment. (For the
+        Multilingual config, these are only unique within each split.)
 
 *   **Download size**: `50.57 MiB`
 
@@ -51,6 +53,10 @@ text.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -94,7 +100,7 @@ details.
 *   **Homepage**:
     [https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data)
 
-*   **Dataset size**: `122.35 MiB`
+*   **Dataset size**: `128.32 MiB`
 
 *   **Splits**:
 
@@ -107,6 +113,7 @@ Split     | Examples
 
 ```python
 FeaturesDict({
+    'id': Text(shape=(), dtype=tf.string),
     'identity_attack': tf.float32,
     'insult': tf.float32,
     'language': Text(shape=(), dtype=tf.string),
@@ -117,40 +124,6 @@ FeaturesDict({
     'toxicity': tf.float32,
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia_toxicity_subtypes-EnglishSubtypes-0.3.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## wikipedia_toxicity_subtypes/Multilingual <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
@@ -171,7 +144,7 @@ for more details.
 *   **Homepage**:
     [https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data)
 
-*   **Dataset size**: `33.99 MiB`
+*   **Dataset size**: `35.13 MiB`
 
 *   **Splits**:
 
@@ -184,42 +157,9 @@ Split          | Examples
 
 ```python
 FeaturesDict({
+    'id': Text(shape=(), dtype=tf.string),
     'language': Text(shape=(), dtype=tf.string),
     'text': Text(shape=(), dtype=tf.string),
     'toxicity': tf.float32,
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikipedia_toxicity_subtypes-Multilingual-0.3.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
