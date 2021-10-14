@@ -70,10 +70,11 @@ class DatasetInfo(object):
   `DatasetInfo` documents datasets, including its name, version, and features.
   See the constructor arguments and properties for a full list.
 
-  Note: Not all fields are known on construction and may be updated later
-  by `compute_dynamic_properties`. For example: the min and max values of a
-  feature is typically updated during data generation (i.e. on calling
-  builder.download_and_prepare()`).
+  Note: Not all fields are known if the dataset hasn't been generated yet
+  (before the first `builder.download_and_prepare()` call). For example splits
+  names or number of examples might be missing (as they are computed
+  at dataset creation time).
+
   """
 
   def __init__(
