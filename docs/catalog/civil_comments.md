@@ -12,6 +12,11 @@
 # `civil_comments`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This version of the CivilComments Dataset provides access to the primary seven
@@ -52,8 +57,10 @@ comment text.
     *   `1.0.1`: Added a unique id for each comment.
     *   `1.1.0`: Added CivilCommentsCovert config.
     *   `1.1.1`: Added CivilCommentsCovert config with correct checksum.
-    *   **`1.1.2`** (default): Added separate citation for CivilCommentsCovert
-        dataset.
+    *   `1.1.2`: Added separate citation for CivilCommentsCovert dataset.
+    *   **`1.1.3`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Corrected id types from float to string.
 
 *   **Download size**: `397.83 MiB`
 
@@ -65,13 +72,17 @@ comment text.
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## civil_comments/CivilComments (default config)
 
 *   **Config description**: The CivilComments set here includes all the data,
     but only the basic seven labels (toxicity, severe_toxicity, obscene, threat,
     insult, identity_attack, and sexual_explicit).
 
-*   **Dataset size**: `959.64 MiB`
+*   **Dataset size**: `964.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -89,7 +100,7 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'id': tf.float32,
+    'id': tf.string,
     'identity_attack': tf.float32,
     'insult': tf.float32,
     'obscene': tf.float32,
@@ -100,40 +111,6 @@ FeaturesDict({
     'toxicity': tf.float32,
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilComments-1.1.2.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -165,7 +142,7 @@ $(document).ready(() => {
     However, it only includes the subset (roughly a quarter) of the data with
     all these features.
 
-*   **Dataset size**: `510.17 MiB`
+*   **Dataset size**: `511.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -193,7 +170,7 @@ FeaturesDict({
     'heterosexual': tf.float32,
     'hindu': tf.float32,
     'homosexual_gay_or_lesbian': tf.float32,
-    'id': tf.float32,
+    'id': tf.string,
     'identity_attack': tf.float32,
     'insult': tf.float32,
     'intellectual_or_learning_disability': tf.float32,
@@ -218,40 +195,6 @@ FeaturesDict({
     'white': tf.float32,
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsIdentities-1.1.2.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -287,7 +230,7 @@ $(document).ready(() => {
     detailed in a forthcoming paper at
     https://sites.google.com/corp/view/hciandnlp/accepted-papers.
 
-*   **Dataset size**: `79.61 MiB`
+*   **Dataset size**: `79.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -322,7 +265,7 @@ FeaturesDict({
     'heterosexual': tf.float32,
     'hindu': tf.float32,
     'homosexual_gay_or_lesbian': tf.float32,
-    'id': tf.float32,
+    'id': tf.string,
     'identity_attack': tf.float32,
     'implicitly_offensive': tf.float32,
     'insult': tf.float32,
@@ -350,40 +293,6 @@ FeaturesDict({
     'white': tf.float32,
 })
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsCovert-1.1.2.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
