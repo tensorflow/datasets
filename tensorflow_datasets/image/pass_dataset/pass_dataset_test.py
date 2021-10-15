@@ -1,7 +1,7 @@
 """pass dataset."""
 
-import tensorflow_datasets as tfds
-import pass_dataset
+from tensorflow_datasets.image.pass_dataset import pass_dataset
+import tensorflow_datasets.public_api as tfds
 
 
 class PASSTest(tfds.testing.DatasetBuilderTestCase):
