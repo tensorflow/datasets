@@ -11,6 +11,7 @@
 
 # `rock_you`
 
+
 *   **Description**:
 
 This dataset contains 14,344,391 passwords that were leaked or stolen from
@@ -70,7 +71,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rock_you-1.0.0.html";

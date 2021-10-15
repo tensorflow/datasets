@@ -17,7 +17,7 @@
 
 import collections
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 
 def _create_moving_sequence(image, pad_lefts, total_padding):
@@ -125,7 +125,7 @@ def image_as_moving_sequence(image,
 
   Example usage:
   ```python
-  import tensorflow.compat.v2 as tf
+  import tensorflow as tf
   import tensorflow_datasets as tfds
   from tensorflow_datasets.video import moving_sequence
   tf.enable_v2_behavior()

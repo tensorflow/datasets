@@ -11,9 +11,6 @@
 
 # `d4rl_mujoco_walker2d`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -28,7 +25,8 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default): Added is_last.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -55,7 +53,7 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Download size**: `78.41 MiB`
 
-*   **Dataset size**: `97.64 MiB`
+*   **Dataset size**: `98.64 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -75,6 +73,7 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -90,10 +89,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -120,7 +119,7 @@ $(document).ready(() => {
 
 *   **Download size**: `80.83 MiB`
 
-*   **Dataset size**: `98.64 MiB`
+*   **Dataset size**: `99.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -140,6 +139,7 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -155,10 +155,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -185,7 +185,7 @@ $(document).ready(() => {
 
 *   **Download size**: `159.24 MiB`
 
-*   **Dataset size**: `196.28 MiB`
+*   **Dataset size**: `198.36 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -205,6 +205,7 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -220,10 +221,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -250,7 +251,7 @@ $(document).ready(() => {
 
 *   **Download size**: `8.42 MiB`
 
-*   **Dataset size**: `9.95 MiB`
+*   **Dataset size**: `10.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -270,6 +271,7 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -285,10 +287,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-mixed-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-mixed-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -315,7 +317,7 @@ $(document).ready(() => {
 
 *   **Download size**: `78.41 MiB`
 
-*   **Dataset size**: `109.92 MiB`
+*   **Dataset size**: `112.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -335,6 +337,7 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -350,10 +353,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-random-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-random-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -380,7 +383,7 @@ $(document).ready(() => {
 
 *   **Download size**: `143.06 MiB`
 
-*   **Dataset size**: `451.57 MiB`
+*   **Dataset size**: `452.55 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -427,6 +430,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -442,10 +446,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -472,7 +476,7 @@ $(document).ready(() => {
 
 *   **Download size**: `144.23 MiB`
 
-*   **Dataset size**: `508.98 MiB`
+*   **Dataset size**: `509.97 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -519,6 +523,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -534,10 +539,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -564,7 +569,7 @@ $(document).ready(() => {
 
 *   **Download size**: `286.69 MiB`
 
-*   **Dataset size**: `340.21 MiB`
+*   **Dataset size**: `342.18 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -589,6 +594,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -604,10 +610,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -634,7 +640,7 @@ $(document).ready(() => {
 
 *   **Download size**: `84.37 MiB`
 
-*   **Dataset size**: `51.73 MiB`
+*   **Dataset size**: `52.05 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -661,6 +667,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
         'reward': tf.float64,
@@ -676,10 +683,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-replay-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-replay-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -706,7 +713,7 @@ $(document).ready(() => {
 
 *   **Download size**: `278.95 MiB`
 
-*   **Dataset size**: `170.49 MiB`
+*   **Dataset size**: `171.49 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -733,6 +740,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
         'reward': tf.float64,
@@ -748,10 +756,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-full-replay-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-full-replay-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -778,7 +786,7 @@ $(document).ready(() => {
 
 *   **Download size**: `132.36 MiB`
 
-*   **Dataset size**: `189.99 MiB`
+*   **Dataset size**: `192.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -803,6 +811,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -818,10 +827,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-random-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-random-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -848,7 +857,7 @@ $(document).ready(() => {
 
 *   **Download size**: `205.56 MiB`
 
-*   **Dataset size**: `451.01 MiB`
+*   **Dataset size**: `451.99 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -895,6 +904,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -910,10 +920,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -940,7 +950,7 @@ $(document).ready(() => {
 
 *   **Download size**: `278.95 MiB`
 
-*   **Dataset size**: `170.49 MiB`
+*   **Dataset size**: `171.49 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -967,6 +977,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
         'reward': tf.float64,
@@ -982,10 +993,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-full-replay-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-full-replay-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -1012,7 +1023,7 @@ $(document).ready(() => {
 
 *   **Download size**: `206.94 MiB`
 
-*   **Dataset size**: `504.48 MiB`
+*   **Dataset size**: `505.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1059,6 +1070,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -1074,10 +1086,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -1104,7 +1116,7 @@ $(document).ready(() => {
 
 *   **Download size**: `411.91 MiB`
 
-*   **Dataset size**: `340.20 MiB`
+*   **Dataset size**: `342.17 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1129,6 +1141,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -1144,10 +1157,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -1174,7 +1187,7 @@ $(document).ready(() => {
 
 *   **Download size**: `84.37 MiB`
 
-*   **Dataset size**: `51.73 MiB`
+*   **Dataset size**: `52.05 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1201,6 +1214,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float64),
         'reward': tf.float64,
@@ -1216,10 +1230,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-replay-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-replay-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -1246,7 +1260,7 @@ $(document).ready(() => {
 
 *   **Download size**: `195.28 MiB`
 
-*   **Dataset size**: `190.04 MiB`
+*   **Dataset size**: `192.11 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1271,6 +1285,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(9,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(17,), dtype=tf.float32),
         'reward': tf.float32,
@@ -1286,10 +1301,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-random-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-random-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).

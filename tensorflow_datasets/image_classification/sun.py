@@ -20,7 +20,7 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
@@ -111,7 +111,7 @@ def _encode_jpeg(image, quality=None):
   cv2 = tfds.core.lazy_imports.cv2
   extra_args = [[int(cv2.IMWRITE_JPEG_QUALITY), quality]] if quality else []
   _, buff = cv2.imencode(".jpg", image, *extra_args)
-  return io.BytesIO(buff.tostring())
+  return io.BytesIO(buff.tobytes())
 
 
 def _process_image_file(fobj,

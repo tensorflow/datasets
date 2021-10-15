@@ -1,0 +1,184 @@
+{
+  "initial_annots": {
+    "ILSVRC2012_val_00000001.JPEG": {
+      "wrong": [
+        "n01665541",
+        "n01697457",
+        "n01737021",
+        "n01744401"
+      ],
+      "correct": [
+        "n01751748"
+      ]
+    },
+    "ILSVRC2012_val_00000004.JPEG": {
+      "correct": [
+        "n04263257"
+      ],
+      "wrong": [
+        "n07930864",
+        "n07932039"
+      ]
+    },
+    "ILSVRC2012_val_00000005.JPEG": {
+      "wrong": [
+        "n02088364",
+        "n02730930",
+        "n03710721",
+        "n03785016",
+        "n04589890"
+      ],
+      "correct": [
+        "n02804414",
+        "n03125729",
+        "n03131574",
+        "n04399382"
+      ]
+    },
+    "ILSVRC2012_val_00000011.JPEG": {
+      "correct": [
+        "n01917289"
+      ]
+    },
+    "ILSVRC2012_val_00000012.JPEG": {
+      "correct": [
+        "n02125311"
+      ]
+    },
+    "ILSVRC2012_val_00000014.JPEG": {
+      "correct": [
+        "n04065272"
+      ]
+    },
+    "ILSVRC2012_val_00000016.JPEG": {
+      "correct": [
+        "n02066245"
+      ]
+    },
+    "ILSVRC2012_val_00000017.JPEG": {
+      "wrong": [
+        "n01443537",
+        "n01632777",
+        "n02948072",
+        "n03325584",
+        "n04033901",
+        "n04456115"
+      ],
+      "correct": [
+        "n01914609",
+        "n02317335"
+      ]
+    },
+    "ILSVRC2012_val_00000018.JPEG": {
+      "wrong": [
+        "n01608432"
+      ],
+      "correct": [
+        "n01616318"
+      ]
+    },
+    "ILSVRC2012_val_00000019.JPEG": {
+      "correct": [
+        "n02971356"
+      ],
+      "wrong": [
+        "n03179701",
+        "n04550184"
+      ]
+    },
+    "ILSVRC2012_val_00000022.JPEG": {
+      "wrong": [
+        "n02089867",
+        "n02089973",
+        "n02090622",
+        "n02091032",
+        "n02091134",
+        "n02091831",
+        "n02093428",
+        "n02099712",
+        "n02104029",
+        "n02111500",
+        "n02403003",
+        "n04336792"
+      ],
+      "correct": [
+        "n02091244"
+      ],
+      "unclear": [
+        "n02105412"
+      ]
+    }
+  },
+  "problematic_images": {
+    "ILSVRC2012_val_00000064.JPEG": {
+      "reason": "marked as problematic in the review server",
+      "reviewer": "vaishaal",
+      "server_username": "vaishaal",
+      "time_marked": "2019-03-29T22:48:36.956685+00:00",
+      "time_reviewed": "2019-03-29T22:49:32.290916+00:00"
+    },
+    "ILSVRC2012_val_00000124.JPEG": {
+      "reason": "marked as problematic in the review server",
+      "reviewer": "ludwig",
+      "server_username": "becca",
+      "time_marked": "2018-12-30T01:13:45.526738+00:00",
+      "time_reviewed": "2019-04-15T19:44:48.040912+00:00"
+    },
+    "ILSVRC2012_val_00000136.JPEG": {
+      "reason": "marked as problematic in the review server",
+      "reviewer": "ludwig",
+      "server_username": "ludwig",
+      "time_marked": "2019-04-13T21:17:21.300010+00:00",
+      "time_reviewed": "2019-04-13T21:17:21.301922+00:00"
+    },
+    "ILSVRC2012_val_00000148.JPEG": {
+      "reason": "marked as problematic in the review server",
+      "reviewer": "ludwig",
+      "server_username": "ludwig",
+      "time_marked": "2019-04-17T22:33:07.538700+00:00",
+      "time_reviewed": "2019-04-17T22:33:07.541307+00:00"
+    },
+    "ILSVRC2012_val_00000162.JPEG": {
+      "reason": "marked as problematic in the review server",
+      "reviewer": "ludwig",
+      "server_username": "becca",
+      "time_marked": "2019-02-19T00:11:16.381777+00:00",
+      "time_reviewed": "2019-03-21T18:38:12.583456+00:00"
+    },
+    "ILSVRC2012_val_00000229.JPEG": {
+      "reason": "marked as problematic in the review server",
+      "reviewer": "vaishaal",
+      "server_username": "vaishaal",
+      "time_marked": "2019-03-29T21:14:57.244867+00:00",
+      "time_reviewed": "2019-03-29T21:14:57.245359+00:00"
+    },
+    "ILSVRC2012_val_00000269.JPEG": {
+      "reason": "marked as problematic in the review server",
+      "reviewer": "ludwig",
+      "server_username": "ludwig",
+      "time_marked": "2019-03-21T18:18:47.518596+00:00",
+      "time_reviewed": "2019-03-21T18:18:47.518667+00:00"
+    },
+    "ILSVRC2012_val_00000270.JPEG": {
+      "reason": "wnid is marked wrong",
+      "reviewer": "ludwig",
+      "server_user_name": "vaishaal",
+      "time_marked": "2019-03-28T21:19:20.847361+00:00",
+      "time_reviewed": "2019-05-03T23:32:30.092264+00:00"
+    },
+    "ILSVRC2012_val_00000296.JPEG": {
+      "reason": "marked as problematic in the review server",
+      "reviewer": "becca",
+      "server_username": "becca",
+      "time_marked": "2019-05-04T22:57:40.547644+00:00",
+      "time_reviewed": "2019-05-04T22:57:40.547710+00:00"
+    },
+    "ILSVRC2012_val_00000312.JPEG": {
+      "reason": "marked as problematic in the review server",
+      "reviewer": "ludwig",
+      "server_username": "becca",
+      "time_marked": "2019-03-12T19:04:07.717703+00:00",
+      "time_reviewed": "2019-04-15T19:31:07.441995+00:00"
+    }
+  }
+}

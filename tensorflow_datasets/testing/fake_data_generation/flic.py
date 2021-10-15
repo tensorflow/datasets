@@ -22,7 +22,7 @@ from absl import flags
 
 import numpy as np
 import scipy.io
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import fake_data_utils

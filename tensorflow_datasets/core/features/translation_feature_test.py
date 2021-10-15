@@ -16,12 +16,10 @@
 # coding=utf-8
 """Tests for tensorflow_datasets.core.deprecated.text_feature."""
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.deprecated.text import text_encoder
-
-tf.enable_v2_behavior()
 
 DE_HELLO = "hallo "
 EN_HELLO = "hello "

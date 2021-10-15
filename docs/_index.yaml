@@ -24,7 +24,7 @@ landing_page:
         <a href="./catalog/overview#all_datasets">list of datasets</a>.
     - code_block: |
         <pre class = "prettyprint">
-        import tensorflow.compat.v2 as tf
+        import tensorflow as tf
         import tensorflow_datasets as tfds
 
         # Construct a tf.data.Dataset

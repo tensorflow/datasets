@@ -29,23 +29,29 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 #   is linked to static libraries compiled again specific TF version, which
 #   makes test fails with linking error (libtensorflow_io_golang.so).
 # * Imagenet2012Corrupted requires imagemagick binary.
+# * beam_utils_test: Open source beam crash with internal error.
 # * Wmt19 is failing during tarfile extraction due to:
 #   https://bugs.python.org/issue39430
 #   TODO(tfds): Restore test with new Python release.
 # * test_utils.py, test_feature.py is not a test file
 # * build_docs_test: See b/142892342
+# * rlds: It depends on envlogger that needs a newer version of libstdc++.
+#   TODO(sabela): Restore once we manage to either re-package envlogger or
+#   update libstdc++ in the kokoro image.
 pytest \
   -vv \
   -n auto \
   --disable-warnings $EXTRA_IGNORE \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+  --ignore="tensorflow_datasets/core/beam_utils_test.py" \
   --ignore="tensorflow_datasets/core/dataset_builder_notfdv_test.py" \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
   --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
   --ignore="tensorflow_datasets/translate/wmt19_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
   --ignore="tensorflow_datasets/core/features/test_feature.py" \
-  --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+  --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
+  --ignore="tensorflow_datasets/rlds/robosuite_panda_pick_place_can/robosuite_panda_pick_place_can_test.py"
 set_status
 
 # Test notebooks in isolated environments

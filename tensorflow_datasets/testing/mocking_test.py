@@ -19,7 +19,7 @@ import functools
 
 import pytest
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 # Import the final API to:
 # * Register datasets
@@ -33,8 +33,7 @@ import tensorflow_datasets as tfds
 @pytest.fixture(
     params=[
         tfds.testing.MockPolicy.USE_FILES, tfds.testing.MockPolicy.USE_CODE
-    ],
-)
+    ],)
 def mock_data(request):
   """Parametrized fixture to test both `USE_FILES` and `USE_CODE` policy."""
   return functools.partial(tfds.testing.mock_data, policy=request.param)
@@ -84,6 +83,21 @@ def test_mocking_add_tfds_id():
 
 
 @pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_partial_decoding():
+  ds = tfds.load(
+      'mnist',
+      split='train',
+      decoders=tfds.decode.PartialDecoding({
+          'image': tfds.features.Image(shape=(None, None, 1)),
+      }),
+  )
+  assert ds.element_spec == {
+      'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+  }
+  list(ds.take(3))  # Iteration should work
+
+
+@pytest.mark.usefixtures('apply_mock_data')
 def test_mocking_imagenet_decoders():
   """Test with SkipDecoding."""
   ds, ds_info = tfds.load(
@@ -107,10 +121,8 @@ def test_mocking_imagenet_decoders():
 @pytest.mark.usefixtures('apply_mock_data')
 def test_mocking_wider_face():
   ds = tfds.load('wider_face', split='train')
-  assert (
-      ds.element_spec['faces']['expression']
-      == tf.TensorSpec(shape=(None,), dtype=tf.bool)
-  )
+  assert (ds.element_spec['faces']['expression'] == tf.TensorSpec(
+      shape=(None,), dtype=tf.bool))
   for ex in ds.take(2):
     assert ex['faces']['expression'].dtype == tf.bool
 
@@ -126,11 +138,13 @@ def test_mocking_coco_captions():
 
 
 def test_custom_as_dataset(mock_data):
+
   def _as_dataset(self, *args, **kwargs):  # pylint: disable=unused-argument
     return tf.data.Dataset.from_generator(
-        lambda: ({  # pylint: disable=g-long-lambda
-            'text': t,
-        } for t in ['some sentence', 'some other sentence']),
+        lambda: (  # pylint: disable=g-long-lambda
+            {
+                'text': t
+            } for t in ['some sentence', 'some other sentence']),
         output_types=self.info.features.dtype,
         output_shapes=self.info.features.shape,
     )
@@ -210,3 +224,73 @@ def test_cardinality():
   with tfds.testing.mock_data(num_examples=15):
     ds = tfds.load('mnist', split='train')
     assert ds.cardinality().numpy().item() == 15
+
+
+@pytest.mark.parametrize(
+    'ds_name',
+    [
+        'dummy_dataset',
+    ],
+)
+def test_mock_non_registered_datasets(
+    dummy_dataset: tfds.testing.DummyDataset,
+    ds_name: str,
+):
+  # Without mocking, the dataset cannot be found
+  with pytest.raises(tfds.core.registered.DatasetNotFoundError):
+    # Do not test 'huggingface:dummy_dataset' to not have tests
+    # access non-hermetic resources.
+    tfds.builder('dummy_dataset')
+
+  data_dir = dummy_dataset._data_dir_root
+  # After mocking, the dataset is restored from the metadata files.
+  with tfds.testing.mock_data(data_dir=data_dir, num_examples=15):
+    builder = tfds.builder(ds_name)
+    ds = builder.as_dataset(split='train')
+    assert len(list(ds)) == 15
+
+
+def test_mocking_rlu_nested_dataset(mock_data):
+  """Test of a nested dataset.
+
+  In this test we use the dataset rlu_atari.
+  The dataset has the following features:
+
+    features=tfds.features.FeaturesDict({
+      'clipped_episode_return': tf.float32,
+      'episode_id': tf.int64,
+      'episode_return': tf.float32,
+      'steps': tfds.features.Dataset({
+          'action': tf.int64,
+          'clipped_reward': tf.float32,
+          'discount': tf.float32,
+          'is_first': tf.bool,
+          'is_last': tf.bool,
+          'is_terminal': tf.bool,
+          'observation': tfds.features.Image(shape=(84, 84, 1), dtype=tf.uint8),
+          'reward': tf.float32,
+      }),
+    })
+
+  Args:
+    mock_data: the stream of mock data points.
+  """
+  with mock_data(num_examples=3):
+    ds = tfds.load('rlu_atari/Pong_run_1', split='train')
+
+    steps = ds.element_spec['steps']
+    assert isinstance(steps, tf.data.DatasetSpec)
+    assert steps.element_spec['reward'] == tf.TensorSpec(
+        shape=(), dtype=tf.float32)
+
+    for ex in ds.take(3):
+      ds_steps = ex['steps']
+      assert isinstance(ds_steps, tf.data.Dataset)
+
+      ds_steps_iter = iter(ds_steps)
+      steps_ex = next(ds_steps_iter)
+      assert set(steps_ex.keys()) == {
+          'action', 'clipped_reward', 'discount', 'is_first', 'is_last',
+          'is_terminal', 'observation', 'reward'
+      }
+      assert steps_ex['observation'].shape == (84, 84, 1)

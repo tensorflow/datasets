@@ -18,7 +18,7 @@
 import os
 from unittest import mock
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.folder_dataset import image_folder
 import tensorflow_datasets.public_api as tfds

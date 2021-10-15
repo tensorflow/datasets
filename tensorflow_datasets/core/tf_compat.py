@@ -44,7 +44,7 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
   _ensure_tf_install_called = True
 
   try:
-    import tensorflow.compat.v2 as tf  # pylint: disable=import-outside-toplevel
+    import tensorflow as tf  # pylint: disable=import-outside-toplevel
   except ImportError:
     # Print more informative error message, then reraise.
     print("\n\n***************************************************************")
@@ -67,8 +67,17 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
 
 def is_dataset(ds):
   """Whether ds is a Dataset. Compatible across TF versions."""
-  import tensorflow.compat.v2 as tf  # pylint: disable=import-outside-toplevel
+  import tensorflow as tf  # pylint: disable=import-outside-toplevel
   return isinstance(ds, (tf.data.Dataset, tf.compat.v1.data.Dataset))
+
+
+def get_single_element(ds):
+  """Calls `tf.data.Dataset.get_single_element`."""
+  import tensorflow as tf  # pylint: disable=import-outside-toplevel
+  if hasattr(ds, "get_single_element"):  # tf 2.6 and above
+    return ds.get_single_element()
+  else:
+    return tf.data.experimental.get_single_element(ds)
 
 
 def _make_pathlike_fn(fn, nb_path_arg=1):
@@ -93,7 +102,7 @@ def mock_gfile_pathlike():
   Yields:
     None
   """
-  import tensorflow.compat.v2 as tf  # pylint: disable=import-outside-toplevel
+  import tensorflow as tf  # pylint: disable=import-outside-toplevel
   import tensorflow_datasets.testing as tfds_test  # pytype: disable=import-error
 
   class GFile(tf.io.gfile.GFile):

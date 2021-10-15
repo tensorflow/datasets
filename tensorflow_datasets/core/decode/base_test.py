@@ -18,13 +18,11 @@
 import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import decode as decode_lib
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import utils
-
-tf.enable_v2_behavior()
 
 randint = np.random.randint
 

@@ -47,9 +47,10 @@ class _WriteBuilder(
 def write_metadata(
     *,
     data_dir: type_utils.PathLike,
-    features: features_lib.FeatureConnector,
-    split_infos: Union[type_utils.PathLike, List[split_lib.SplitInfo]],
-    version: Union[None, str, utils.Version] = '1.0.0',
+    features: features_lib.feature.FeatureConnectorArg,
+    split_infos: Union[None, type_utils.PathLike,
+                       List[split_lib.SplitInfo]] = None,
+    version: Union[None, str, utils.Version] = None,
     check_data: bool = True,
     **ds_info_kwargs,
 ) -> None:
@@ -60,17 +61,20 @@ def write_metadata(
 
   Args:
     data_dir: Dataset path on which save the metadata
-    features: `tfds.features.FeaturesDict` matching the proto specs.
-    split_infos: Can be either: a path to the pre-computed split info values (
-      the `out_dir` kwarg of `tfds.folder_dataset.compute_split_info`) or a list
-      of `tfds.core.SplitInfo` (returned value of
-      `tfds.folder_dataset.compute_split_info`)
-    version: Optional dataset version (default to 1.0.0)
+    features: dict of `tfds.features.FeatureConnector` matching the proto specs.
+    split_infos: Can be either:  * A path to the pre-computed split info values
+      ( the `out_dir` kwarg of `tfds.folder_dataset.compute_split_info`) * A
+      list of `tfds.core.SplitInfo` (returned value of
+      `tfds.folder_dataset.compute_split_info`) * `None` to auto-compute the
+      split info.
+    version: Optional dataset version (auto-infer by default, or fallback to
+      1.0.0)
     check_data: If True, perform additional check to validate the data in
       data_dir is valid
     **ds_info_kwargs: Additional metadata forwarded to `tfds.core.DatasetInfo` (
       description, homepage,...). Will appear in the doc.
   """
+  features = features_lib.features_dict.to_feature(features)
   data_dir = utils.as_path(data_dir)
   # Extract the tf-record filenames
   tfrecord_files = [
@@ -96,6 +100,12 @@ def write_metadata(
       kwds=dict(skip_registration=True),
       exec_body=None,
   )
+
+  if version is None:  # Automatically detect the version
+    if utils.Version.is_valid(data_dir.name):
+      version = data_dir.name
+    else:
+      version = '1.0.0'
   cls.VERSION = utils.Version(version)
 
   # Create a dummy builder (use non existant folder to make sure
@@ -108,9 +118,11 @@ def write_metadata(
       features=features,
       **ds_info_kwargs,
   )
+  ds_info.set_file_format(file_format)
 
   # Add the split infos
   split_dict = _load_splits(
+      data_dir=data_dir,
       split_infos=split_infos,
       file_infos=file_infos,
       builder=builder,
@@ -124,21 +136,24 @@ def write_metadata(
   # specs)
   if check_data:
     builder = read_only_builder.builder_from_directory(data_dir)
-    ds = builder.as_dataset(split=next(iter(builder.info.splits)))
-    for _ in ds.take(1):  # Try to load the first example
-      pass
+    split_name = next(iter(builder.info.splits))
+    _, = builder.as_dataset(split=f'{split_name}[:1]')  # Load the first example
 
 
 def _load_splits(
-    split_infos: Union[type_utils.PathLike, List[split_lib.SplitInfo]],
+    *,
+    data_dir: utils.ReadWritePath,
+    split_infos: Union[None, type_utils.PathLike, List[split_lib.SplitInfo]],
     file_infos: List[naming.FilenameInfo],
     builder: dataset_builder.DatasetBuilder,
 ) -> split_lib.SplitDict:
   """Load the SplitDict which can be passed to DatasetInfo."""
   split_names = sorted(set(f.split for f in file_infos))
 
+  if split_infos is None:  # Auto-compute the split-infos
+    split_infos = compute_split_utils.compute_split_info(data_dir=data_dir)
   # Load the List[SplitInfo]
-  if isinstance(split_infos, type_utils.PathLikeCls):
+  elif isinstance(split_infos, type_utils.PathLikeCls):
     split_infos = compute_split_utils.split_infos_from_path(
         path=split_infos,
         split_names=split_names,

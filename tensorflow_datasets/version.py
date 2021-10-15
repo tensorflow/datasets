@@ -24,7 +24,7 @@ This file is replaced by `version_stable.py` for stable releases
 
 # We follow Semantic Versioning (https://semver.org/)
 _MAJOR_VERSION = '4'
-_MINOR_VERSION = '3'
+_MINOR_VERSION = '4'
 _PATCH_VERSION = '0'
 
 __version__ = '.'.join([

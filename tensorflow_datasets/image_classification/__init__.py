@@ -15,6 +15,7 @@
 
 """Image Classification datasets."""
 
+from tensorflow_datasets.image.pass_dataset import PASS
 from tensorflow_datasets.image_classification.beans import Beans
 from tensorflow_datasets.image_classification.bigearthnet import Bigearthnet
 from tensorflow_datasets.image_classification.binary_alpha_digits import BinaryAlphaDigits
@@ -45,6 +46,7 @@ from tensorflow_datasets.image_classification.geirhos_conflict_stimuli import Ge
 from tensorflow_datasets.image_classification.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image_classification.imagenet import Imagenet2012
 from tensorflow_datasets.image_classification.imagenet2012_corrupted import Imagenet2012Corrupted
+from tensorflow_datasets.image_classification.imagenet2012_multilabel import Imagenet2012Multilabel
 from tensorflow_datasets.image_classification.imagenet2012_real import Imagenet2012Real
 from tensorflow_datasets.image_classification.imagenet2012_subset import Imagenet2012Subset
 from tensorflow_datasets.image_classification.imagenet_a import ImagenetA
@@ -82,5 +84,4 @@ from tensorflow_datasets.image_classification.stl10 import Stl10
 from tensorflow_datasets.image_classification.sun import Sun397
 from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
-from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon

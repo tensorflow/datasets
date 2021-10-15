@@ -790,6 +790,7 @@ nsynth/gansynth_subset/2.3.2
 nsynth/gansynth_subset/2.3.3
 nyu_depth_v2/0.0.1
 ogbg_molpcba/0.1.0
+ogbg_molpcba/0.1.1
 omniglot/3.0.0
 open_images_challenge2019_detection/200k/1.0.0
 open_images_challenge2019_detection/300k/1.0.0
@@ -872,6 +873,7 @@ reddit/1.0.0
 reddit_tifu/long/1.1.0
 reddit_tifu/short/1.1.0
 resisc45/3.0.0
+rlu_atari/Pong_run_1/1.1.0
 robonet/robonet_128/4.0.1
 robonet/robonet_64/4.0.1
 robonet/robonet_sample_128/4.0.1
@@ -981,7 +983,6 @@ ucf101/ucf101_2/2.0.0
 ucf101/ucf101_3/2.0.0
 vctk/mic1/1.0.0
 vctk/mic2/1.0.0
-vgg_face2/1.0.0
 visual_domain_decathlon/aircraft/1.2.0
 visual_domain_decathlon/cifar100/1.2.0
 visual_domain_decathlon/daimlerpedcls/1.2.0

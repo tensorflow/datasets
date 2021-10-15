@@ -26,7 +26,7 @@ import re
 from typing import Any, Optional
 
 from six.moves import urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
@@ -302,7 +302,7 @@ class Resource(object):
         not be downloaded yet. In such case, `url` must be set.
     """
     self.url = url
-    self.path: utils.ReadWritePath = utils.as_path(path) if path else None
+    self.path: utils.ReadWritePath = utils.as_path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._extract_method = extract_method
 
   @classmethod

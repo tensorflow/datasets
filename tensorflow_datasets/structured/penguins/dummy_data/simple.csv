@@ -1,0 +1,5 @@
+species,island,culmen_length_mm,culmen_depth_mm,flipper_length_mm,body_mass_g,sex
+Adelie,Biscoe,1.2,2.3,45,56,MALE
+Chinstrap,Dream,NA,9.9,888,456,FEMALE
+Gentoo,Torgersen,99.0,NA,1,NA,MALE
+Adelie,Dream,3.1415,2.718,NA,100,NA

@@ -11,6 +11,7 @@
 
 # `ljspeech`
 
+
 *   **Description**:
 
 This is a public domain speech dataset consisting of 13,100 short audio clips of
@@ -73,7 +74,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ljspeech-1.1.0.html";

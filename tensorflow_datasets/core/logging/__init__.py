@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """TFDS logging module."""
-from typing import Callable, TypeVar, List, Optional
+from typing import Callable, List, Optional, TypeVar
 
 from absl import flags
 from tensorflow_datasets.core.logging import base_logger

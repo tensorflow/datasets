@@ -24,9 +24,10 @@ _EPISODE_LENGTH = 1801
 class RluDmlabRoomsWatermaze(dmlab_dataset.DMLabDatasetBuilder):
   """DatasetBuilder for rlu_dmlab_rooms_select_nonmatching_object dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.1.0': 'Added is_last.',
   }
 
   # pytype: disable=wrong-keyword-args
@@ -39,5 +40,3 @@ class RluDmlabRoomsWatermaze(dmlab_dataset.DMLabDatasetBuilder):
           name='training_2', task=_TASK, episode_length=_EPISODE_LENGTH)
   ]
   # pytype: enable=wrong-keyword-args
-
-

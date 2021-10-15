@@ -22,6 +22,9 @@ from typing import List, Optional
 
 from tensorflow_datasets.core.utils import type_utils
 
+PathLike = type_utils.PathLike
+ListOrElem = type_utils.ListOrElem
+
 # Github base URL
 SRC_BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/'
 
@@ -59,7 +62,8 @@ def add_data_dir(data_dir):
   _registered_data_dir.add(data_dir)
 
 
-def list_data_dirs(given_data_dir: Optional[str] = None,) -> List[str]:
+def list_data_dirs(
+    given_data_dir: Optional[ListOrElem[PathLike]] = None,) -> List[PathLike]:
   """Return the list of all `data_dir` to look-up.
 
   Args:
@@ -72,7 +76,10 @@ def list_data_dirs(given_data_dir: Optional[str] = None,) -> List[str]:
   """
   # If the data dir is explicitly given, no need to search everywhere.
   if given_data_dir:
-    return [given_data_dir]
+    if isinstance(given_data_dir, list):
+      return given_data_dir
+    else:
+      return [given_data_dir]
   else:
     all_data_dirs = _registered_data_dir | {DATA_DIR}
     return sorted(os.path.expanduser(d) for d in all_data_dirs)

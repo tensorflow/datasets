@@ -17,10 +17,13 @@
 
 # pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order,wrong-import-position
 from tensorflow_datasets.core import tf_compat
+
 tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
+from tensorflow_datasets import typing
 from tensorflow_datasets.core import folder_dataset
+from tensorflow_datasets.core import beam_utils as beam
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import deprecated
@@ -35,14 +38,14 @@ from tensorflow_datasets.core.load import builder
 from tensorflow_datasets.core.load import builder_cls
 from tensorflow_datasets.core.load import list_builders
 from tensorflow_datasets.core.load import load
-from tensorflow_datasets.core.splits import even_splits
 from tensorflow_datasets.core.splits import Split
-from tensorflow_datasets.core.utils import type_utils as typing
+from tensorflow_datasets.core.subsplits_utils import even_splits
 from tensorflow_datasets.core.utils.benchmark import benchmark
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.read_config import ReadConfig
 from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
 from tensorflow_datasets.core.utils.tqdm_utils import enable_progress_bar
+from tensorflow_datasets.core.utils.tqdm_utils import display_progress_bar
 from tensorflow_datasets.core.visualization import show_examples
 from tensorflow_datasets.core.visualization import show_statistics
 from tensorflow_datasets.version import __version__
@@ -54,10 +57,10 @@ with core.registered.skip_registration():
   # (e.g. DummyMnist,...).
   from tensorflow_datasets import testing
 
-
 __all__ = [
     "as_dataframe",
     "as_numpy",
+    "beam",
     "benchmark",
     "core",
     "deprecated",
@@ -67,6 +70,7 @@ __all__ = [
     "decode",
     "disable_progress_bar",
     "enable_progress_bar",
+    "display_progress_bar",
     "download",
     "even_splits",
     "features",

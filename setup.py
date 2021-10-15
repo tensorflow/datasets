@@ -46,7 +46,6 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
-    'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
     'numpy',
@@ -71,8 +70,6 @@ TESTS_REQUIRE = [
     'pandas',
     'pydub',
     'apache_beam',
-    # TFDV is only available for Python 3.6
-    'tensorflow-data-validation;python_version<"3.7"',
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
@@ -87,6 +84,7 @@ DEV_REQUIRE = [
 
 # Static files needed by datasets.
 DATASET_FILES = [
+    'graphs/ogbg_molpcba/ogbg_molpcba_tasks.txt',
     'image_classification/caltech101_labels.txt',
     'image_classification/categories_places365.txt',
     'image_classification/cbis_ddsm_calc_distributions.txt',
@@ -110,7 +108,6 @@ DATASET_FILES = [
     'image_classification/sun397_tfds_te.txt',
     'image_classification/sun397_tfds_tr.txt',
     'image_classification/sun397_tfds_va.txt',
-    'image_classification/vgg_face2_labels.txt',
     'object_detection/open_images_classes_all.txt',
     'object_detection/open_images_classes_boxable.txt',
     'object_detection/open_images_classes_trainable.txt',
@@ -144,9 +141,10 @@ DATASET_EXTRAS = {
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     # See https://github.com/librosa/librosa/issues/1160
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
-    'ogbg_molpcba': ['pandas'],
+    'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
+    'robosuite_panda_pick_place_can': ['envlogger'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'wider_face': ['Pillow'],

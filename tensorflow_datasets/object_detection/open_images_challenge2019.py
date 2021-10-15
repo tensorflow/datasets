@@ -20,7 +20,7 @@ https://storage.googleapis.com/openimages/web/challenge2019.html
 
 import abc
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -69,7 +69,7 @@ class OpenImagesChallenge2019Config(tfds.core.BuilderConfig):
     return self._target_pixels
 
 
-class _OpenImagesChallenge2019(tfds.core.BeamBasedBuilder):
+class _OpenImagesChallenge2019(tfds.core.BeamBasedBuilder):  # pytype: disable=ignored-abstractmethod  # abcmeta-check
   """Base abstract class for Open Images Challenge 2019 datasets."""
 
   BUILDER_CONFIGS = [

@@ -11,6 +11,7 @@
 
 # `librispeech`
 
+
 *   **Description**:
 
 LibriSpeech is a corpus of approximately 1000 hours of read English speech with
@@ -75,7 +76,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/librispeech-2.1.0.html";

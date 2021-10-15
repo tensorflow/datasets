@@ -18,7 +18,7 @@
 from typing import Optional
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils

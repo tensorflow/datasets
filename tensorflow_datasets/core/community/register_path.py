@@ -19,6 +19,9 @@ import concurrent.futures
 import difflib
 from typing import Any, Dict, FrozenSet, Iterator, List, Type
 
+from absl import flags
+from absl import logging
+
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import naming
@@ -27,6 +30,13 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
 import toml
+
+TFDS_DEBUG_VERBOSE = flags.DEFINE_boolean('tfds_debug_list_dir', False,
+                                          'Debug the catalog generation')
+
+ListOrElem = utils.ListOrElem
+
+# pylint: disable=logging-format-interpolation
 
 
 class DataDirRegister(register_base.BaseRegister):
@@ -65,13 +75,13 @@ class DataDirRegister(register_base.BaseRegister):
     self._path: utils.ReadOnlyPath = utils.as_path(path)
 
   @utils.memoized_property
-  def _ns2data_dir(self) -> Dict[str, utils.ReadWritePath]:
+  def _ns2data_dir(self) -> Dict[str, List[utils.ReadWritePath]]:
     """Mapping `namespace` -> `data_dir`."""
     # Lazy-load the namespaces the first requested time.
     config = toml.loads(self._path.read_text())
     return {
-        namespace: utils.as_path(path)
-        for namespace, path in config['Namespaces'].items()
+        namespace: _as_path_list(path_or_paths)
+        for namespace, path_or_paths in config['Namespaces'].items()
     }
 
   @utils.memoized_property
@@ -121,10 +131,17 @@ class DataDirRegister(register_base.BaseRegister):
         **builder_kwargs,
     )
 
-  def get_builder_root_dir(self,
-                           name: utils.DatasetName) -> utils.ReadWritePath:
+  def get_builder_root_dirs(
+      self, name: utils.DatasetName) -> List[utils.ReadWritePath]:
     """Returns root dir of the generated builder (without version/config)."""
-    return self._ns2data_dir[name.namespace] / name.name
+    return [d / name.name for d in self._ns2data_dir[name.namespace]]
+
+
+def _as_path_list(path_or_paths: ListOrElem[str]) -> List[utils.ReadWritePath]:
+  if isinstance(path_or_paths, list):
+    return [utils.as_path(p) for p in path_or_paths]
+  else:
+    return [utils.as_path(path_or_paths)]
 
 
 def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:
@@ -138,12 +155,12 @@ def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:
       FileNotFoundError,
       tf.errors.NotFoundError,
       tf.errors.PermissionDeniedError,
-  ):
+  ) as e:
     pass
 
 
 def _iter_builder_names(
-    ns2data_dir: Dict[str, utils.ReadOnlyPath],) -> Iterator[str]:
+    ns2data_dir: Dict[str, List[utils.ReadOnlyPath]],) -> Iterator[str]:
   """Yields the `ns:name` dataset names."""
   FILTERED_DIRNAME = frozenset(('downloads',))  # pylint: disable=invalid-name
 
@@ -166,9 +183,15 @@ def _iter_builder_names(
     ]
 
   with concurrent.futures.ThreadPoolExecutor(max_workers=10) as ex:
-    builder_names_futures = [
-        ex.submit(_get_builder_names_single_namespace, ns_name, data_dir)
-        for ns_name, data_dir in ns2data_dir.items()
-    ]
+    builder_names_futures = []
+    for ns_name, data_dirs in ns2data_dir.items():
+      for data_dir in data_dirs:
+        future = ex.submit(
+            _get_builder_names_single_namespace,
+            ns_name,
+            data_dir,
+        )
+        builder_names_futures.append(future)
+
     for future in concurrent.futures.as_completed(builder_names_futures):
       yield from future.result()

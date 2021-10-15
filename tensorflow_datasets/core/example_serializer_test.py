@@ -16,7 +16,7 @@
 """Tests for tensorflow_datasets.core.example_serializer."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import example_serializer

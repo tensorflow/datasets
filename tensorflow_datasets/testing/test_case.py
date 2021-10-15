@@ -22,10 +22,9 @@ from unittest import mock
 
 from absl import logging
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.testing import setup_teardown
-
 
 GCS_ACCESS_FNS = {
     "original_info": gcs_utils.gcs_dataset_info_files,
@@ -90,8 +89,8 @@ class TestCase(tf.test.TestCase):
       predicate_fct = lambda err: predicate in str(err)
     else:
       predicate_fct = predicate
-    return super(TestCase, self).assertRaisesWithPredicateMatch(
-        err_type, predicate_fct)
+    return super(TestCase,
+                 self).assertRaisesWithPredicateMatch(err_type, predicate_fct)
 
   @contextlib.contextmanager
   def assertLogs(self, text, level="info"):

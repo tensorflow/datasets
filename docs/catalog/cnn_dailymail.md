@@ -11,6 +11,12 @@
 
 # `cnn_dailymail`
 
+
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 CNN/DailyMail non-anonymized summarization dataset.
@@ -34,7 +40,12 @@ each highlight, which is the target summary
 
     *   `3.0.0`: Using cased version.
 
-    *   **`3.1.0`** (default): Removed BuilderConfig
+    *   `3.1.0`: Removed BuilderConfig
+
+    *   **`3.2.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Remove extra space before added sentence period. This shouldn't affect
+        ROUGE scores because punctuation is removed.
 
 *   **Download size**: `558.32 MiB`
 
@@ -77,10 +88,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.1.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.2.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).

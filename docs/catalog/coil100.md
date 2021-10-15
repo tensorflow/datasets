@@ -11,6 +11,7 @@
 
 # `coil100`
 
+
 *   **Description**:
 
 The dataset contains 7200 color images of 100 objects (72 images per object).
@@ -74,7 +75,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/coil100-2.0.0.html";

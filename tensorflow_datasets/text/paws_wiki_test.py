@@ -13,22 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.text import paws_wiki
 
 
-class PawsWikiTest(testing.DatasetBuilderTestCase):
+class PawsWikiLabeldFinalTokenizedTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["labeled_final_tokenized"]
   DATASET_CLASS = paws_wiki.PawsWiki
   SPLITS = {
       "train": 2,  # Number of fake train examples
       "validation": 2,  # Number of fake validation examples
       "test": 3,  # Number of fake test examples
   }
-  DL_EXTRACT_RESULT = {"paws_wiki": ""}
+  DL_EXTRACT_RESULT = {"labeled_final": ""}
+
+
+class PawsWikiLabeledSwapRawTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["labeled_swap_raw"]
+  DATASET_CLASS = paws_wiki.PawsWiki
+  SPLITS = {
+      "train": 2,  # Number of fake train examples
+  }
+  DL_EXTRACT_RESULT = {"labeled_swap": "", "raw_and_mapping": ""}
 
 
 if __name__ == "__main__":

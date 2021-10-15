@@ -21,11 +21,11 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 
 import collections
 from concurrent import futures
+import dataclasses
 import functools
 from typing import Any, Dict, Iterator, List, Optional, Type
 
-import dataclasses
-
+from absl import logging
 import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
@@ -39,6 +39,8 @@ _WORKER_COUNT_CONFIGS = 20
 _BUILDER_BLACKLIST = [
     'wmt_translate',
 ]
+
+# pylint: disable=logging-format-interpolation
 
 
 @dataclasses.dataclass(eq=False, frozen=True)
@@ -103,6 +105,9 @@ def _load_builder_from_location(name: str,) -> Optional[BuilderToDocument]:
   except tf.errors.PermissionDeniedError:
     tqdm.tqdm.write(f'Warning: Skip dataset {name} due to permission error')
     return None
+  except Exception as e:  # pylint: disable=broad-except
+    logging.error(f'CorruptedDatasetError: {name!r}', exc_info=e)
+    return None
   if builder.builder_config:
     config_builders = _load_all_configs(name, builder)
   else:
@@ -133,9 +138,14 @@ def _load_all_configs(
     if path.name in filtered_dirs:
       return None  # Default config is already loaded
     try:
-      return tfds.builder(f'{name}/{path.name}')
+      builder_conf = tfds.builder(f'{name}/{path.name}')
     except tfds.core.DatasetNotFoundError:
       return None
+    if not builder_conf.builder_config:
+      # Unexpected sub-config with wrong metadata.
+      # This can happen if the user manually mess-up with the directories.
+      return None
+    return builder_conf
 
   with futures.ThreadPoolExecutor(max_workers=_WORKER_COUNT_CONFIGS) as tpool:
     config_names = sorted(common_dir.iterdir())

@@ -18,7 +18,7 @@
 import os
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 UCF_101_URL = 'https://storage.googleapis.com/thumos14_files/UCF101_videos.zip'

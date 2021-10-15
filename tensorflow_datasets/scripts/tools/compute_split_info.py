@@ -30,12 +30,15 @@ from typing import List
 from absl import app
 from absl.flags import argparse_flags
 import tensorflow_datasets as tfds
+from tensorflow_datasets.scripts.utils import flag_utils
 
 
 # Open source pytests globally import all files, so create duplicate FLAGS
 # error when using absl.flags. So we use argparse instead.
 def _parse_flags(argv: List[str]) -> argparse.Namespace:
-  """Parse command line flags."""
+  """Parses command line flags."""
+  argv = flag_utils.normalize_flags(argv)  # See b/174043007 for context.
+
   parser = argparse_flags.ArgumentParser(
       description='Tensorflow Datasets CLI tool',)
   parser.add_argument(

@@ -20,13 +20,12 @@ Used by tensorflow_datasets/scripts/documentation/build_catalog.py
 """
 
 import collections
+import dataclasses
 import os
 import textwrap
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-import dataclasses
-
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets as tfds
 
 # Dict of `full_names_dict['dataset']['config']['version']`
@@ -113,7 +112,7 @@ class DataframeDocUtil(object):
     {{% framebox %}}
 
     <button id="{button_id}">Display examples...</button>
-    <div id="{content_id}" style="overflow-x:scroll"></div>
+    <div id="{content_id}" style="overflow-x:auto"></div>
     <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
     <script>
     var url = "{url}";

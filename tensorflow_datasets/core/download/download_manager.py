@@ -16,15 +16,15 @@
 """Download manager interface."""
 
 import concurrent.futures
+import dataclasses
 import hashlib
 import typing
 from typing import Any, Dict, Iterator, Optional, Tuple, Union
 import uuid
 
 from absl import logging
-import dataclasses
 import promise
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums
@@ -212,7 +212,7 @@ class DownloadManager(object):
 
     self._download_dir: ReadWritePath = download_dir
     self._extract_dir: ReadWritePath = extract_dir
-    self._manual_dir: Optional[ReadOnlyPath] = manual_dir
+    self._manual_dir: Optional[ReadOnlyPath] = manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
     self._download_dir.mkdir(parents=True, exist_ok=True)
     self._extract_dir.mkdir(parents=True, exist_ok=True)
@@ -342,6 +342,8 @@ class DownloadManager(object):
     if dl_result.path and not self._force_download:  # Download was cached
       logging.info(
           f'Skipping download of {url}: File cached in {dl_result.path}')
+      # Still update the progression bar to indicate the file was downloaded
+      self._downloader.increase_tqdm(dl_result)
       future = promise.Promise.resolve(dl_result)
     else:
       # Download in an empty tmp directory (to avoid name collisions)
@@ -763,5 +765,4 @@ def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
   all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
   res = tf.nest.map_structure(lambda p: p.get(), all_promises)  # Wait promises
-
   return res

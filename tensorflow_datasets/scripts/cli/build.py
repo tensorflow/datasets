@@ -140,7 +140,15 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       help='A (comma-separated) list of flags to pass to `PipelineOptions` '
       'when preparing with Apache Beam. '
       '(see: https://www.tensorflow.org/datasets/beam_datasets). '
-      'Example: `--beam_pipeline_options=job_name=my-job,project=my-project`')
+      'Example: `--beam_pipeline_options=job_name=my-job,project=my-project`',
+  )
+  format_values = [f.value for f in tfds.core.FileFormat]
+  generation_group.add_argument(
+      '--file_format',
+      type=str,
+      help='File format to which generate the tf-examples. '
+      f'Available values: {format_values} (see `tfds.core.FileFormat`).',
+  )
 
   # **** Automation options ****
   automation_group = build_parser.add_argument_group(
@@ -205,6 +213,9 @@ def _make_builders(
       config_name=args.config,
       config_idx=args.config_idx,
   )
+
+  if args.file_format:
+    builder_kwargs['file_format'] = args.file_format
 
   make_builder = functools.partial(
       _make_builder,

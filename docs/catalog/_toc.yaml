@@ -45,26 +45,20 @@ toc:
   title: Audio
 - section:
   - path: /datasets/catalog/d4rl_adroit_door
-    status: nightly
     title: d4rl_adroit_door
   - path: /datasets/catalog/d4rl_adroit_hammer
-    status: nightly
     title: d4rl_adroit_hammer
   - path: /datasets/catalog/d4rl_adroit_pen
-    status: nightly
     title: d4rl_adroit_pen
   - path: /datasets/catalog/d4rl_adroit_relocate
-    status: nightly
     title: d4rl_adroit_relocate
   - path: /datasets/catalog/d4rl_mujoco_ant
     title: d4rl_mujoco_ant
   - path: /datasets/catalog/d4rl_mujoco_halfcheetah
     title: d4rl_mujoco_halfcheetah
   - path: /datasets/catalog/d4rl_mujoco_hopper
-    status: nightly
     title: d4rl_mujoco_hopper
   - path: /datasets/catalog/d4rl_mujoco_walker2d
-    status: nightly
     title: d4rl_mujoco_walker2d
   title: D4rl
 - section:
@@ -110,6 +104,9 @@ toc:
     title: lsun
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
+  - path: /datasets/catalog/pass
+    status: nightly
+    title: pass
   - path: /datasets/catalog/s3o4d
     title: s3o4d
   - path: /datasets/catalog/scene_parse150
@@ -117,7 +114,6 @@ toc:
   - path: /datasets/catalog/shapes3d
     title: shapes3d
   - path: /datasets/catalog/symmetric_solids
-    status: nightly
     title: symmetric_solids
   - path: /datasets/catalog/the300w_lp
     title: the300w_lp
@@ -189,6 +185,8 @@ toc:
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
+  - path: /datasets/catalog/imagenet2012_multilabel
+    title: imagenet2012_multilabel (manual)
   - path: /datasets/catalog/imagenet2012_real
     title: imagenet2012_real (manual)
   - path: /datasets/catalog/imagenet2012_subset
@@ -259,8 +257,6 @@ toc:
     title: tf_flowers
   - path: /datasets/catalog/uc_merced
     title: uc_merced
-  - path: /datasets/catalog/vgg_face2
-    title: vgg_face2 (manual)
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
   title: Image classification
@@ -315,27 +311,42 @@ toc:
     title: xquad
   title: Question answering
 - section:
-  - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
+  - path: /datasets/catalog/istella
     status: nightly
+    title: istella
+  - path: /datasets/catalog/mslr_web
+    status: nightly
+    title: mslr_web
+  title: Ranking
+- section:
+  - path: /datasets/catalog/rlu_atari
+    title: rlu_atari
+  - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
     title: rlu_dmlab_explore_object_rewards_few
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_many
-    status: nightly
     title: rlu_dmlab_explore_object_rewards_many
   - path: /datasets/catalog/rlu_dmlab_rooms_select_nonmatching_object
-    status: nightly
     title: rlu_dmlab_rooms_select_nonmatching_object
   - path: /datasets/catalog/rlu_dmlab_rooms_watermaze
-    status: nightly
     title: rlu_dmlab_rooms_watermaze
   - path: /datasets/catalog/rlu_dmlab_seekavoid_arena01
-    status: nightly
     title: rlu_dmlab_seekavoid_arena01
+  - path: /datasets/catalog/rlu_rwrl
+    status: nightly
+    title: rlu_rwrl
   title: Rl unplugged
+- section:
+  - path: /datasets/catalog/robosuite_panda_pick_place_can
+    status: nightly
+    title: robosuite_panda_pick_place_can
+  title: Rlds
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/cherry_blossoms
     title: cherry_blossoms
+  - path: /datasets/catalog/covid19
+    title: covid19
   - path: /datasets/catalog/dart
     title: dart
   - path: /datasets/catalog/e2e_cleaned
@@ -354,10 +365,17 @@ toc:
     title: howell
   - path: /datasets/catalog/iris
     title: iris
+  - path: /datasets/catalog/kddcup99
+    title: kddcup99
   - path: /datasets/catalog/movie_lens
     title: movie_lens
   - path: /datasets/catalog/movielens
     title: movielens
+  - path: /datasets/catalog/penguins
+    status: nightly
+    title: penguins
+  - path: /datasets/catalog/protein_net
+    title: protein_net
   - path: /datasets/catalog/radon
     title: radon
   - path: /datasets/catalog/rock_you
@@ -382,12 +400,18 @@ toc:
     title: big_patent
   - path: /datasets/catalog/billsum
     title: billsum
+  - path: /datasets/catalog/booksum
+    status: nightly
+    title: booksum (manual)
   - path: /datasets/catalog/cnn_dailymail
     title: cnn_dailymail
   - path: /datasets/catalog/covid19sum
     title: covid19sum (manual)
   - path: /datasets/catalog/gigaword
     title: gigaword
+  - path: /datasets/catalog/gov_report
+    status: nightly
+    title: gov_report
   - path: /datasets/catalog/multi_news
     title: multi_news
   - path: /datasets/catalog/newsroom
@@ -404,6 +428,8 @@ toc:
     title: samsum (manual)
   - path: /datasets/catalog/scientific_papers
     title: scientific_papers
+  - path: /datasets/catalog/summscreen
+    title: summscreen
   - path: /datasets/catalog/wikihow
     title: wikihow (manual)
   - path: /datasets/catalog/xsum
@@ -430,6 +456,8 @@ toc:
     title: cos_e
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/doc_nli
+    title: doc_nli
   - path: /datasets/catalog/dolphin_number_word
     title: dolphin_number_word
   - path: /datasets/catalog/drop
@@ -581,6 +609,5 @@ toc:
   - path: /datasets/catalog/gref
     title: gref (manual)
   - path: /datasets/catalog/ref_coco
-    status: nightly
     title: ref_coco (manual)
   title: Vision language

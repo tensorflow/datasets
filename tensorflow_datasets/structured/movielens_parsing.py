@@ -20,7 +20,7 @@ import csv
 import os
 from typing import Any, Dict, Iterator, Tuple
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 
 def parse_current_movies_data(

@@ -70,7 +70,8 @@ the first one thanks to the caching.
 
 ### Auto-caching
 
-By default, TFDS auto-caches datasets which satisfy the following constraints:
+By default, TFDS auto-caches (with `ds.cache()`) datasets which satisfy the
+following constraints:
 
 *   Total dataset size (all splits) is defined and < 250 MiB
 *   `shuffle_files` is disabled, or only a single shard is read
@@ -121,7 +122,7 @@ possible to opt-out of this feature with `tfds.ReadConfig`: either by setting
 `read_config.shuffle_seed` or overwriting
 `read_config.options.experimental_deterministic`.
 
-### Auto-shard your data across workers
+### Auto-shard your data across workers (TF)
 
 When training on multiple workers, you can use the `input_context` argument of
 `tfds.ReadConfig`, so each worker will read a subset of the data.
@@ -149,6 +150,17 @@ Note: When using `tf.distribute.Strategy`, the `input_context` can be
 automatically created with
 [distribute_datasets_from_function](https://www.tensorflow.org/api_docs/python/tf/distribute/Strategy#distribute_datasets_from_function)
 
+### Auto-shard your data across workers (Jax)
+
+With Jax, you can use the `tfds.even_splits` API to distribute your data across
+workers. See the [split API guide](https://www.tensorflow.org/datasets/splits).
+
+```python
+splits = tfds.even_splits('train', n=jax.process_count(), drop_remainder=True)
+# The current `process_index` load only `1 / process_count` of the data.
+ds = tfds.load('my_dataset', split=splits[jax.process_index()])
+```
+
 ### Faster image decoding
 
 By default, TFDS automatically decodes images. However, there are cases where it
@@ -160,5 +172,11 @@ can be more performant to skip the image decoding with
 *   When cropping images, to use the fused `tf.image.decode_and_crop_jpeg` op.
 
 The code for both examples is available in the
-[Customizing feature decoding](https://www.tensorflow.org/datasets/decode#usage_examples)
-guide.
+[decode guide](https://www.tensorflow.org/datasets/decode#usage_examples).
+
+### Skip unused features
+
+If you're only using a subset of the features, it is possible to entirely skip
+some features. If your dataset has many unused features, not decoding them can
+significantly improve performances. See
+https://www.tensorflow.org/datasets/decode#only_decode_a_sub-set_of_the_features.

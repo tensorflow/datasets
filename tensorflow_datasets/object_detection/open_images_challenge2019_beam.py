@@ -23,7 +23,7 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 beam = tfds.core.lazy_imports.apache_beam
@@ -74,7 +74,7 @@ class ProcessImageFn(beam.DoFn):
         image = cv2.resize(image, dsize=None, fx=factor, fy=factor)
       # Encode the image with quality=72 and store it in a BytesIO object.
       _, buff = cv2.imencode(".jpg", image, self._jpeg_quality)
-      yield filename, io.BytesIO(buff.tostring())
+      yield filename, io.BytesIO(buff.tobytes())
 
 
 class CreateDetectionExampleFn(beam.DoFn):

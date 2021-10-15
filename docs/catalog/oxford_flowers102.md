@@ -11,6 +11,7 @@
 
 # `oxford_flowers102`
 
+
 *   **Description**:
 
 The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly
@@ -81,7 +82,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/oxford_flowers102-2.1.1.html";

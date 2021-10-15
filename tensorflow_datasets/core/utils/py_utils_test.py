@@ -306,7 +306,7 @@ def test_flatten_with_path():
     ['url', 'filename'],
     [
         (
-            'http://test.com/appspot.com/tsvsWithoutLabels%2FAX.tsv?'
+            'http://test.com/appspot.com/tsvsWithoutLabels%2FAX.tsv?'  # pylint: disable=implicit-str-concat
             'Id=firebase&Expires=2498860800',
             'tsvsWithoutLabels_AX.tsv'  # `%2F` -> `_`
         ),

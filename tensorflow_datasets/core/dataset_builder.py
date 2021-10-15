@@ -16,17 +16,17 @@
 """DatasetBuilder base class."""
 
 import abc
+import dataclasses
 import functools
 import inspect
 import json
 import os
 import sys
-from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, Union
+from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, Union
 
 from absl import logging
-import dataclasses
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
@@ -49,6 +49,7 @@ import termcolor
 
 ReadOnlyPath = type_utils.ReadOnlyPath
 ReadWritePath = type_utils.ReadWritePath
+Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
 VersionOrStr = Union[utils.Version, str]
 
@@ -87,17 +88,17 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   `DatasetBuilder` has 3 key methods:
 
-    * `tfds.DatasetBuilder.info`: documents the dataset, including feature
+    * `DatasetBuilder.info`: documents the dataset, including feature
       names, types, and shapes, version, splits, citation, etc.
-    * `tfds.DatasetBuilder.download_and_prepare`: downloads the source data
+    * `DatasetBuilder.download_and_prepare`: downloads the source data
       and writes it to disk.
-    * `tfds.DatasetBuilder.as_dataset`: builds an input pipeline using
+    * `DatasetBuilder.as_dataset`: builds an input pipeline using
       `tf.data.Dataset`s.
 
   **Configuration**: Some `DatasetBuilder`s expose multiple variants of the
   dataset by defining a `tfds.core.BuilderConfig` subclass and accepting a
   config object (or name) on construction. Configurable datasets expose a
-  pre-defined set of configurations in `tfds.DatasetBuilder.builder_configs`.
+  pre-defined set of configurations in `DatasetBuilder.builder_configs`.
 
   Typical `DatasetBuilder` usage:
 
@@ -445,26 +446,6 @@ class DatasetBuilder(registered.RegisteredDataset):
           # DatasetInfo, you'll likely also want to update
           # DatasetInfo.read_from_directory to possibly restore these attributes
           # when reading from package data.
-
-          # Skip statistics computation if tfdv isn't present
-          try:
-            import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,import-outside-toplevel,unused-import  # pytype: disable=import-error
-            skip_stats_computation = False
-          except ImportError:
-            skip_stats_computation = True
-
-          splits = list(self.info.splits.values())
-          statistics_already_computed = bool(splits and
-                                             splits[0].statistics.num_examples)
-          # Update DatasetInfo metadata by computing statistics from the data.
-          if (skip_stats_computation or
-              download_config.compute_stats == download.ComputeStatsMode.SKIP or
-              download_config.compute_stats == download.ComputeStatsMode.AUTO
-              and statistics_already_computed):
-            pass
-          else:  # Mode is forced or stats do not exists yet
-            logging.info("Computing statistics.")
-            self.info.compute_dynamic_properties()
           self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
@@ -473,7 +454,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   @tfds_logging.as_dataset()
   def as_dataset(
       self,
-      split: Optional[Union[str, tfrecords_reader.ReadInstruction]] = None,
+      split: Optional[Tree[splits_lib.SplitArg]] = None,
       *,
       batch_size: Optional[int] = None,
       shuffle_files: bool = False,
@@ -580,8 +561,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         read_config=read_config,
         as_supervised=as_supervised,
     )
-    datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
-    return datasets
+    all_ds = tf.nest.map_structure(build_single_dataset, split)
+    return all_ds
 
   def _build_single_dataset(
       self,
@@ -616,10 +597,25 @@ class DatasetBuilder(registered.RegisteredDataset):
     if as_supervised:
       if not self.info.supervised_keys:
         raise ValueError(
-            "as_supervised=True but %s does not support a supervised "
-            "(input, label) structure." % self.name)
-      input_f, target_f = self.info.supervised_keys
-      ds = ds.map(lambda fs: (fs[input_f], fs[target_f]))
+            f"as_supervised=True but {self.name} does not support a supervised "
+            "structure.")
+
+      def lookup_nest(features: Dict[str, Any]) -> Tuple[Any, ...]:
+        """Converts `features` to the structure described by `supervised_keys`.
+
+        Note that there is currently no way to access features in nested
+        feature dictionaries.
+
+        Args:
+          features: dictionary of features
+
+        Returns:
+          A tuple with elements structured according to `supervised_keys`
+        """
+        return tf.nest.map_structure(lambda key: features[key],
+                                     self.info.supervised_keys)
+
+      ds = ds.map(lookup_nest)
 
     # Add prefetch by default
     if not read_config.skip_prefetch:
@@ -639,7 +635,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # allow the user to overwritte it.
 
     if wants_full_dataset:
-      return tf.data.experimental.get_single_element(ds)
+      return tf_compat.get_single_element(ds)
     return ds
 
   def _should_cache_ds(self, split, shuffle_files, read_config):
@@ -903,10 +899,12 @@ class FileReaderBuilder(DatasetBuilder):
 
   """
 
-  def __init__(self,
-               *,
-               file_format: Union[None, str, file_adapters.FileFormat] = None,
-               **kwargs: Any):
+  def __init__(
+      self,
+      *,
+      file_format: Union[None, str, file_adapters.FileFormat] = None,
+      **kwargs: Any,
+  ):
     """Initializes an instance of FileReaderBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -924,21 +922,32 @@ class FileReaderBuilder(DatasetBuilder):
   def _example_specs(self):
     return self.info.features.get_serialized_info()
 
-  @property
-  def _tfrecords_reader(self):
-    return tfrecords_reader.Reader(self._data_dir, self._example_specs,
-                                   self.info.file_format)
-
   def _as_dataset(
       self,
-      split=splits_lib.Split.TRAIN,
-      decoders=None,
-      read_config=None,
-      shuffle_files=False,
+      split,
+      decoders,
+      read_config,
+      shuffle_files,
   ) -> tf.data.Dataset:
-    decode_fn = functools.partial(
-        self.info.features.decode_example, decoders=decoders)
-    return self._tfrecords_reader.read(
+    # Partial decoding
+    # TODO(epot): Should be moved inside `features.decode_example`
+    if isinstance(decoders, decode.PartialDecoding):
+      features = decoders.extract_features(self.info.features)
+      example_specs = features.get_serialized_info()
+      decoders = decoders.decoders
+    # Full decoding (all features decoded)
+    else:
+      features = self.info.features
+      example_specs = self._example_specs
+      decoders = decoders  # pylint: disable=self-assigning-variable
+
+    reader = tfrecords_reader.Reader(
+        self._data_dir,
+        example_specs=example_specs,
+        file_format=self.info.file_format,
+    )
+    decode_fn = functools.partial(features.decode_example, decoders=decoders)
+    return reader.read(
         name=self.name,
         instructions=split,
         split_infos=self.info.splits.values(),
@@ -1115,6 +1124,8 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       # forward it to `self._split_generators`
       # We add this magic because the pipeline kwargs is only used by c4 and
       # we do not want to make the API more verbose for a single advanced case.
+      # See also the documentation at the end here:
+      # https://www.tensorflow.org/datasets/api_docs/python/tfds/core/GeneratorBasedBuilder?version=nightly#_generate_examples
       signature = inspect.signature(self._split_generators)
       if "pipeline" in signature.parameters.keys():
         optional_pipeline_kwargs = dict(pipeline=split_builder.beam_pipeline)

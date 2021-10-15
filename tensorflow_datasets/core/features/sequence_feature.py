@@ -15,12 +15,15 @@
 
 """Sequence feature."""
 
+from typing import Optional
+
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.utils import type_utils
 
@@ -80,19 +83,21 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   """
 
-  def __init__(self, feature, length=None, **kwargs):
+  def __init__(
+      self,
+      feature: feature_lib.FeatureConnectorArg,
+      length: Optional[int] = None,
+  ):
     """Construct a sequence dict.
 
     Args:
-      feature: `dict`, the features to wrap
+      feature: The features to wrap (any feature supported)
       length: `int`, length of the sequence if static and known in advance
-      **kwargs: `dict`, constructor kwargs of `tfds.features.FeaturesDict`
     """
     # Convert {} => FeaturesDict, tf.int32 => Tensor(shape=(), dtype=tf.int32)
     self._feature = features_dict.to_feature(feature)
     self._length = length
-    assert not kwargs, 'Json export/import should be updated'
-    super(Sequence, self).__init__(**kwargs)
+    super(Sequence, self).__init__()
 
   @property
   def feature(self):
@@ -161,7 +166,10 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   def __getitem__(self, key):
     """Convenience method to access the underlying features."""
-    return self._feature[key]
+    return self._feature[key]  # pytype: disable=unsupported-operands
+
+  def __contains__(self, key: str) -> bool:
+    return key in self._feature  # pytype: disable=unsupported-operands
 
   def __getattr__(self, key):
     """Allow to access the underlying attributes directly."""
@@ -181,7 +189,7 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   def __repr__(self):
     """Display the feature."""
-    inner_feature_repr = feature_lib.get_inner_feature_repr(self._feature)
+    inner_feature_repr = tensor_feature.get_inner_feature_repr(self._feature)
     if inner_feature_repr.startswith('FeaturesDict('):
       # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
       inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]

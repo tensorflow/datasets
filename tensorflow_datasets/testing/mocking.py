@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Mock util for tfds.
-"""
+"""Mock util for tfds."""
 
 import contextlib
 import enum
@@ -26,11 +25,12 @@ from unittest import mock
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
-from tensorflow_datasets.core import load
+from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.testing import test_utils
 
@@ -44,10 +44,9 @@ class MockPolicy(enum.Enum):
     USE_FILES: Load dataset from the metadata files (present in the `data_dir`
       kwarg of `tfds.testing.mock_data`, raise error if data_dir is not
       reachable.
-    USE_CODE: Load the data from the original dataset generation class. Do
-      not use any generated files. More is more convenient but less
-      safe than `USE_FILES`. Not all features might be available (e.g. no
-      split-names).
+    USE_CODE: Load the data from the original dataset generation class. Do not
+      use any generated files. More is more convenient but less safe than
+      `USE_FILES`. Not all features might be available (e.g. no split-names).
   """
   AUTO = enum.auto()
   USE_CODE = enum.auto()
@@ -130,9 +129,8 @@ def mock_data(
     as_dataset_fn: if provided, will replace the default random example
       generator. This function mock the `FileAdapterBuilder._as_dataset`
     data_dir: Folder containing the metadata file (searched in
-      `data_dir/dataset_name/version`).
-      Overwrite `data_dir` kwargs from `tfds.load`.
-      Used in `MockPolicy.USE_FILES` mode.
+      `data_dir/dataset_name/version`). Overwrite `data_dir` kwargs from
+      `tfds.load`. Used in `MockPolicy.USE_FILES` mode.
 
   Yields:
     None
@@ -140,7 +138,7 @@ def mock_data(
 
   original_init_fn = dataset_builder.DatasetBuilder.__init__
   original_as_dataset_fn = dataset_builder.DatasetBuilder.as_dataset
-  original_builder_fn = load.builder
+  original_builder_from_files = read_only_builder.builder_from_files
 
   def mock_download_and_prepare(self, *args, **kwargs):
     """`builder.download_and_prepare` is a no-op."""
@@ -179,32 +177,44 @@ def mock_data(
     del split
     del kwargs
 
-    if decoders is None:
-      generator_cls = RandomFakeGenerator
-      specs = self.info.features.get_tensor_info()
-      decode_fn = lambda ex: ex  # identity
+    # Partial decoding
+    if isinstance(decoders, decode.PartialDecoding):
+      # TODO(epot): Should be moved inside `features.decode_example`
+      features = decoders.extract_features(self.info.features)
+      decoders = decoders.decoders
+    # Full decoding (all features decoded)
     else:
+      features = self.info.features
+      decoders = decoders  # pylint: disable=self-assigning-variable
+
+    has_nested_dataset = any(
+        isinstance(f, features_lib.Dataset)
+        for f in features._flatten(features))  # pylint: disable=protected-access
+    if decoders is not None or has_nested_dataset:
       # If a decoder is passed, encode/decode the examples.
       generator_cls = EncodedRandomFakeGenerator
-      specs = self.info.features.get_serialized_info()
-      decode_fn = functools.partial(
-          self.info.features.decode_example, decoders=decoders)
+      specs = features.get_serialized_info()
+      decode_fn = functools.partial(features.decode_example, decoders=decoders)
+    else:
+      generator_cls = RandomFakeGenerator
+      specs = features.get_tensor_info()
+      decode_fn = lambda ex: ex  # identity
 
     ds = tf.data.Dataset.from_generator(
         # `from_generator` takes a callable with signature () -> iterable
         # Recreating a new generator each time ensure that all pipelines are
         # using the same examples
-        lambda: generator_cls(builder=self, num_examples=num_examples),
+        lambda: generator_cls(features=features, num_examples=num_examples),
         output_types=tf.nest.map_structure(lambda t: t.dtype, specs),
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
     )
     ds = ds.apply(tf.data.experimental.assert_cardinality(num_examples))
-    ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
     if read_config and read_config.add_tfds_id:
       ds_id = tfrecords_reader._make_id_dataset(  # pylint: disable=protected-access
           filename=f'{self.name}-split.tfrecord-00000-of-00001',
-          start_index=0,
+          start_index=0,  # pytype: disable=wrong-arg-types
       )
       ds = tf.data.Dataset.zip((ds, ds_id))
       ds = ds.map(lambda ex, id: {'tfds_id': id, **ex})
@@ -221,13 +231,20 @@ def mock_data(
   else:  # AUTO or USE_FILES with explicitly given `data_dir`
     mock_data_dir = data_dir
 
-  def mock_builder(*args, data_dir=None, **kwargs):
-    del data_dir  # Unused. Inject `mock_data_dir` instead.
-    return original_builder_fn(*args, data_dir=mock_data_dir, **kwargs)
-
   def mock_init(*args, data_dir=None, **kwargs):
     del data_dir  # Unused. Inject `mock_data_dir` instead.
     return original_init_fn(*args, data_dir=mock_data_dir, **kwargs)
+
+  def new_builder_from_files(*args, **kwargs):
+    # Replace the user-given data dir by the mocked one
+    kwargs.pop('data_dir', None)
+    # `DatasetBuilder.__init__` is mocked above to inject the wrong data_dir.
+    # So we restore the original `DatasetBuilder.__init__` inside
+    # `builder_from_files` calls.
+    with mock.patch(f'{core}.dataset_builder.DatasetBuilder.__init__',
+                    original_init_fn):
+      return original_builder_from_files(
+          *args, data_dir=mock_data_dir, **kwargs)
 
   core = 'tensorflow_datasets.core'
   with contextlib.ExitStack() as stack:
@@ -236,10 +253,13 @@ def mock_data(
         (f'{core}.utils.gcs_utils.exists', lambda path: False),
         # Patch `data_dir`: `data_dir` explicitly set by users will be ignored.
         # `data_dir` is used at two places:
-        # * `tfds.builder` to search read-only datasets loaded from config.
+        # * `builder_from_files` to search read-only datasets loaded from config
         # * `DatasetBuilder.__init__` otherwise
         (f'{core}.dataset_builder.DatasetBuilder.__init__', mock_init),
-        (f'{core}.load.builder', mock_builder),
+        (
+            f'{core}.read_only_builder.builder_from_files',
+            new_builder_from_files,
+        ),
         # Patch DatasetBuilder
         (
             f'{core}.dataset_builder.DatasetBuilder.download_and_prepare',
@@ -255,24 +275,16 @@ def mock_data(
         ),
     ]:
       stack.enter_context(mock.patch(path, mocked_fn))
-    # We patch `tfds.builder` alias separatelly, as the alias only exists
-    # when the public `__init__` API is imported.
-    try:
-      stack.enter_context(
-          mock.patch('tensorflow_datasets.builder', mock_builder),
-      )
-    except AttributeError:
-      pass
     yield
 
 
 class RandomFakeGenerator(object):
   """Generator of fake examples randomly and deterministically generated."""
 
-  def __init__(self, builder, num_examples, seed=0):
+  def __init__(self, features, num_examples, seed=0):
     self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
     self._py_rng = random.Random(seed)
-    self._builder = builder
+    self._features = features
     self._num_examples = num_examples
 
   def _generate_random_string_array(self, shape):
@@ -289,15 +301,24 @@ class RandomFakeGenerator(object):
     return np.array([rand_str() for _ in range(np.prod(shape, dtype=np.int32))
                     ]).reshape(shape)
 
-  def _generate_random_array(self, feature, tensor_info):
+  def _generate_random_obj(self, feature, tensor_info):
     """Generates a random tensor for a single feature."""
     # TODO(tfds): Could improve the fake generatiion:
     # * Use the feature statistics (min, max)
     # * For Sequence features
     # * For Text
+
+    # First we deal with the case of sub-datasets:
+    if isinstance(feature, features_lib.Dataset):
+      # In sub-datasets we set number of examples to 1. An alternative
+      # solution with setting num_examples to N = self._num_examples would
+      # imply generating O(N*N) examples for nesting of depth 2.
+      generator = RandomFakeGenerator(feature.feature, num_examples=1)
+      # Returns the list of examples in the nested dataset.
+      return list(generator)
+
     shape = [  # Fill dynamic shape with random values
-        self._rgn.randint(5, 50) if s is None else s
-        for s in tensor_info.shape
+        self._rgn.randint(5, 50) if s is None else s for s in tensor_info.shape
     ]
     if isinstance(feature, features_lib.ClassLabel):
       max_value = feature.num_classes
@@ -321,14 +342,14 @@ class RandomFakeGenerator(object):
 
   def _generate_example(self):
     """Generate the next example."""
-    root_feature = self._builder.info.features
+    root_feature = self._features
     flat_features = root_feature._flatten(root_feature)  # pylint: disable=protected-access
     flat_tensor_info = root_feature._flatten(root_feature.get_tensor_info())  # pylint: disable=protected-access
-    flat_np = [
-        self._generate_random_array(feature, tensor_info)
+    flat_objs = [
+        self._generate_random_obj(feature, tensor_info)
         for feature, tensor_info in zip(flat_features, flat_tensor_info)
     ]
-    return root_feature._nest(flat_np)  # pylint: disable=protected-access
+    return root_feature._nest(flat_objs)  # pylint: disable=protected-access
 
   def __iter__(self):
     """Yields all fake examples."""
@@ -342,4 +363,4 @@ class EncodedRandomFakeGenerator(RandomFakeGenerator):
   def __iter__(self):
     """Yields all fake examples."""
     for ex in super(EncodedRandomFakeGenerator, self).__iter__():
-      yield self._builder.info.features.encode_example(ex)
+      yield self._features.encode_example(ex)

@@ -15,7 +15,7 @@
 
 """Tests for tensorflow_datasets.core.features.top_level_feature."""
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core.features import top_level_feature

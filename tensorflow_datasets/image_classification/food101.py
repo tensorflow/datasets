@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz"
@@ -69,7 +69,7 @@ class Food101(tfds.core.GeneratorBasedBuilder):
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=("image", "label"),
-        homepage="https://www.vision.ee.ethz.ch/datasets_extra/food-101/",
+        homepage="https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/",
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

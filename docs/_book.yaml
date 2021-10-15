@@ -30,6 +30,8 @@ upper_tabs:
         path: /datasets/splits
       - title: Performance tips
         path: /datasets/performances
+      - title: Determinism
+        path: /datasets/determinism
       - title: Feature connectors
         path: /datasets/features
       - title: Feature decoding
@@ -38,8 +40,6 @@ upper_tabs:
         path: /datasets/datasets_versioning
       - title: Store your dataset on GCS
         path: /datasets/gcs
-      - title: Community
-        path: /datasets/community
 
       - heading: "Create your dataset"
       - title: Create your dataset

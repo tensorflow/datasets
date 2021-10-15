@@ -20,7 +20,7 @@ import json
 import os
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.object_detection import coco
 import tensorflow_datasets.public_api as tfds

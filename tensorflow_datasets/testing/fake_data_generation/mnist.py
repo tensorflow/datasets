@@ -13,16 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Generate MNIST-like files, smaller and with random data.
-
-"""
+r"""Generate MNIST-like files, smaller and with random data."""
 
 import os
 
 from absl import app
 from absl import flags
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import test_utils

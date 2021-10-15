@@ -15,10 +15,10 @@
 
 """Builder and Buidler Configs for D4RL Datasets."""
 
+import dataclasses
 from typing import Any, Dict, FrozenSet
 
-import dataclasses
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.d4rl import dataset_utils
 import tensorflow_datasets.public_api as tfds
 
@@ -415,6 +415,8 @@ def get_features_dict(
       'is_terminal':
           tf.bool,
       'is_first':
+          tf.bool,
+      'is_last':
           tf.bool,
       'discount':
           float_type,

@@ -20,16 +20,16 @@ import os
 import textwrap
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.deprecated import text as text_lib
-from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
 
-class Text(feature.Tensor):
+class Text(tensor_feature.Tensor):
   """`FeatureConnector` for text, encoding to integers with a `TextEncoder`."""
 
   def __init__(self, encoder=None, encoder_config=None):

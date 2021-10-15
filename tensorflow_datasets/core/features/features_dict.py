@@ -15,11 +15,13 @@
 
 """FeatureDict: Main feature connector container."""
 
-import six
-import tensorflow.compat.v2 as tf
+from typing import Dict
+
+import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.utils import type_utils
 
@@ -106,7 +108,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   """
 
-  def __init__(self, feature_dict):
+  def __init__(self, feature_dict: Dict[str, feature_lib.FeatureConnectorArg]):
     """Initialize the features.
 
     Args:
@@ -153,7 +155,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     lines = ['{}({{'.format(type(self).__name__)]
     # Add indentation
     for key, feature in sorted(list(self._feature_dict.items())):
-      feature_repr = feature_lib.get_inner_feature_repr(feature)
+      feature_repr = tensor_feature.get_inner_feature_repr(feature)
       all_sub_lines = '\'{}\': {},'.format(key, feature_repr)
       lines.extend('    ' + l for l in all_sub_lines.split('\n'))
     lines.append('})')
@@ -235,7 +237,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
   def save_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     # Recursively save all child features
-    for feature_key, feature in six.iteritems(self._feature_dict):
+    for feature_key, feature in self._feature_dict.items():
       feature_key = feature_key.replace('/', '.')
       if feature_name:
         feature_key = '-'.join((feature_name, feature_key))
@@ -244,19 +246,19 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
   def load_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     # Recursively load all child features
-    for feature_key, feature in six.iteritems(self._feature_dict):
+    for feature_key, feature in self._feature_dict.items():
       feature_key = feature_key.replace('/', '.')
       if feature_name:
         feature_key = '-'.join((feature_name, feature_key))
       feature.load_metadata(data_dir, feature_name=feature_key)
 
 
-def to_feature(value):
+def to_feature(value: feature_lib.FeatureConnectorArg):
   """Convert the given value to Feature if necessary."""
   if isinstance(value, feature_lib.FeatureConnector):
     return value
   elif utils.is_dtype(value):  # tf.int32, tf.string,...
-    return feature_lib.Tensor(shape=(), dtype=tf.as_dtype(value))
+    return tensor_feature.Tensor(shape=(), dtype=tf.as_dtype(value))
   elif isinstance(value, dict):
     return FeaturesDict(value)
   else:

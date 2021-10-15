@@ -11,9 +11,6 @@
 
 # `d4rl_adroit_relocate`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -28,7 +25,8 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default): Added is_last.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -55,7 +53,7 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Download size**: `4.87 MiB`
 
-*   **Dataset size**: `5.47 MiB`
+*   **Dataset size**: `5.48 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -79,6 +77,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(36,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
@@ -94,10 +93,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v0-human-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v0-human-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -124,7 +123,7 @@ $(document).ready(() => {
 
 *   **Download size**: `647.11 MiB`
 
-*   **Dataset size**: `549.40 MiB`
+*   **Dataset size**: `550.50 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -148,6 +147,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(36,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float64),
         'reward': tf.float64,
@@ -163,10 +163,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v0-cloned-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v0-cloned-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -193,7 +193,7 @@ $(document).ready(() => {
 
 *   **Download size**: `581.53 MiB`
 
-*   **Dataset size**: `777.88 MiB`
+*   **Dataset size**: `778.97 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -219,6 +219,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(36,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
@@ -234,10 +235,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v0-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v0-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -264,7 +265,7 @@ $(document).ready(() => {
 
 *   **Download size**: `5.92 MiB`
 
-*   **Dataset size**: `6.93 MiB`
+*   **Dataset size**: `6.94 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -292,6 +293,7 @@ FeaturesDict({
             'target_pos': Tensor(shape=(3,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
@@ -307,10 +309,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v1-human-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v1-human-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -337,7 +339,7 @@ $(document).ready(() => {
 
 *   **Download size**: `554.39 MiB`
 
-*   **Dataset size**: `1.85 GiB`
+*   **Dataset size**: `1.86 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -382,6 +384,7 @@ FeaturesDict({
             'target_pos': Tensor(shape=(3,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
@@ -397,10 +400,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v1-cloned-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v1-cloned-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -427,7 +430,7 @@ $(document).ready(() => {
 
 *   **Download size**: `682.47 MiB`
 
-*   **Dataset size**: `1011.40 MiB`
+*   **Dataset size**: `1012.49 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -478,6 +481,7 @@ FeaturesDict({
             'target_pos': Tensor(shape=(3,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(39,), dtype=tf.float32),
         'reward': tf.float32,
@@ -493,10 +497,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v1-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_relocate-v1-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).

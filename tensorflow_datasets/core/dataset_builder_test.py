@@ -15,14 +15,16 @@
 
 """Tests for tensorflow_datasets.core.dataset_builder."""
 
+import dataclasses
 import os
 import tempfile
 from unittest import mock
 
-import dataclasses
+from absl.testing import parameterized
+
 import dill
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
@@ -34,8 +36,6 @@ from tensorflow_datasets.core import load
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
-
-tf.enable_v2_behavior()
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
@@ -575,41 +575,16 @@ class BuilderRestoreGcsTest(testing.TestCase):
     self.patch_gcs = patcher
     self.addCleanup(patcher.stop)
 
-    patcher = mock.patch.object(
-        dataset_info.DatasetInfo,
-        "compute_dynamic_properties",
-    )
-    self.compute_dynamic_property = patcher.start()
-    self.addCleanup(patcher.stop)
-
   def test_stats_restored_from_gcs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      builder.download_and_prepare()
-
-      # Statistics shouldn't have been recomputed
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
-      self.assertFalse(self.compute_dynamic_property.called)
+      self.assertEqual(builder.info.splits["train"].num_examples, 20)
 
   def test_stats_not_restored_gcs_overwritten(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # If split are different that the one restored, stats should be recomputed
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      dl_config = download.DownloadConfig(
-          max_examples_per_split=5,
-          compute_stats=download.ComputeStatsMode.AUTO,
-      )
-      builder.download_and_prepare(download_config=dl_config)
-
-      # Statistics should have been recomputed (split different from the
-      # restored ones)
-      self.assertTrue(self.compute_dynamic_property.called)
+      self.assertEqual(builder.info.splits["train"].num_examples, 20)
 
   def test_gcs_not_exists(self):
     # By disabling the patch, and because DummyMnist is not on GCS, we can
@@ -619,52 +594,13 @@ class BuilderRestoreGcsTest(testing.TestCase):
       builder = testing.DummyMnist(data_dir=tmp_dir)
       # No dataset_info restored, so stats are empty
       self.assertEqual(builder.info.splits.total_num_examples, 0)
-      self.assertFalse(self.compute_dynamic_property.called)
 
-      dl_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.AUTO,)
+      dl_config = download.DownloadConfig()
       builder.download_and_prepare(download_config=dl_config)
 
       # Statistics should have been recomputed
-      self.assertTrue(self.compute_dynamic_property.called)
+      self.assertEqual(builder.info.splits["train"].num_examples, 20)
     self.patch_gcs.start()
-
-  def test_skip_stats(self):
-    # Test when stats do not exists yet and compute_stats='skip'
-
-    # By disabling the patch, and because DummyMnist is not on GCS, we can
-    # simulate a new dataset starting from scratch
-    self.patch_gcs.stop()
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      # No dataset_info restored, so stats are empty
-      builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits, {})
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      download_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.SKIP,)
-      builder.download_and_prepare(download_config=download_config)
-
-      # Statistics computation should have been skipped
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 0)
-      self.assertFalse(self.compute_dynamic_property.called)
-    self.patch_gcs.start()
-
-  def test_force_stats(self):
-    # Test when stats already exists but compute_stats='force'
-
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      # No dataset_info restored, so stats are empty
-      builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 40)
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      download_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.FORCE,)
-      builder.download_and_prepare(download_config=download_config)
-
-      # Statistics computation should have been recomputed
-      self.assertTrue(self.compute_dynamic_property.called)
 
 
 class DatasetBuilderReadTest(testing.TestCase):
@@ -725,13 +661,6 @@ class DatasetBuilderReadTest(testing.TestCase):
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=2)
     self.assertEqual(1, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
 
-  @testing.run_in_graph_and_eager_modes()
-  def test_supervised_keys(self):
-    x, _ = dataset_utils.as_numpy(
-        self.builder.as_dataset(
-            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
-    self.assertEqual(x.shape[0], 20)
-
   def test_autocache(self):
     # All the following should cache
 
@@ -789,6 +718,81 @@ class DatasetBuilderReadTest(testing.TestCase):
   def test_with_tfds_info(self):
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN)
     self.assertEqual(0, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
+
+
+class DummyDatasetWithSupervisedKeys(DummyDatasetSharedGenerator):
+
+  def __init__(self, *args, supervised_keys=None, **kwargs):
+    self.supervised_keys = supervised_keys
+    super().__init__(*args, **kwargs)
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": tf.int64}),
+        supervised_keys=self.supervised_keys,
+    )
+
+
+class DatasetBuilderAsSupervisedTest(parameterized.TestCase, testing.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    super().setUpClass()
+    cls._tfds_tmp_dir = testing.make_tmp_dir()
+    builder = DummyDatasetWithSupervisedKeys(data_dir=cls._tfds_tmp_dir)
+    builder.download_and_prepare()
+
+  @classmethod
+  def tearDownClass(cls):
+    super().tearDownClass()
+    testing.rm_tmp_dir(cls._tfds_tmp_dir)
+
+  @testing.run_in_graph_and_eager_modes()
+  def test_supervised_keys_basic(self):
+    self.builder = DummyDatasetWithSupervisedKeys(
+        data_dir=self._tfds_tmp_dir, supervised_keys=("x", "x"))
+    x, _ = dataset_utils.as_numpy(
+        self.builder.as_dataset(
+            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
+    self.assertEqual(x.shape[0], 20)
+
+  def test_supervised_keys_triple(self):
+    self.builder = DummyDatasetWithSupervisedKeys(
+        data_dir=self._tfds_tmp_dir, supervised_keys=("x", "x", "x"))
+    result = dataset_utils.as_numpy(
+        self.builder.as_dataset(
+            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
+    self.assertLen(result, 3)
+    self.assertEqual(result[0].shape[0], 20)
+
+  def test_supervised_keys_nested(self):
+    self.builder = DummyDatasetWithSupervisedKeys(
+        data_dir=self._tfds_tmp_dir,
+        supervised_keys=("x", ("x", ("x", "x")), {
+            "a": "x",
+            "b": ("x",)
+        }))
+    single, pair, a_dict = dataset_utils.as_numpy(
+        self.builder.as_dataset(
+            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
+    self.assertEqual(single.shape[0], 20)
+    self.assertLen(pair, 2)
+    self.assertEqual(pair[1][1].shape[0], 20)
+    self.assertLen(a_dict, 2)
+    self.assertEqual(a_dict["b"][0].shape[0], 20)
+
+  @parameterized.named_parameters(
+      ("not_a_tuple", "x", "tuple of 2 or 3"),
+      ("wrong_length_tuple", ("x", "x", "x", "x", "x"), "tuple of 2 or 3"),
+      ("wrong_nested_type", ("x", ["x", "x"]), "tuple, dict, str"),
+  )
+  def test_bad_supervised_keys(self, supervised_keys, error_message):
+    with self.assertRaisesRegex(ValueError, error_message):
+      self.builder = DummyDatasetWithSupervisedKeys(
+          data_dir=self._tfds_tmp_dir,
+          # Not a tuple
+          supervised_keys=supervised_keys)
 
 
 

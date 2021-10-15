@@ -11,6 +11,7 @@
 
 # `wider_face`
 
+
 *   **Description**:
 
 WIDER FACE dataset is a face detection benchmark dataset, of which images are
@@ -84,7 +85,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wider_face-0.1.0.html";

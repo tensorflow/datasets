@@ -20,6 +20,7 @@ import concurrent.futures
 import contextlib
 import gzip
 import io
+import multiprocessing
 import os
 import tarfile
 import typing
@@ -29,7 +30,7 @@ import zipfile
 
 from absl import logging
 import promise
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
@@ -52,7 +53,8 @@ class UnsafeArchiveError(Exception):
 class _Extractor(object):
   """Singleton (use `get_extractor()` module fct) to extract archives."""
 
-  def __init__(self, max_workers=12):
+  def __init__(self, max_workers=None):
+    max_workers = max_workers or multiprocessing.cpu_count()
     self._executor = concurrent.futures.ThreadPoolExecutor(
         max_workers=max_workers)
     self._pbar_path = None
@@ -205,9 +207,9 @@ def iter_zip(arch_f):
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
-      extract_file = z.open(member)
       if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
         continue
+      extract_file = z.open(member)
       path = _normpath(member.filename)
       if not path:
         continue

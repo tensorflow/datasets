@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # General (main) citation for CivilComments and CivilCommentsIdentities.
@@ -178,14 +178,9 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
           include_covert_labels=True),
   ]
 
-  VERSION = tfds.core.Version('1.1.2')
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version('1.1.2'),
-      tfds.core.Version('1.1.1'),
-      tfds.core.Version('1.0.1'),
-      tfds.core.Version('1.0.0'),
-  ]
+  VERSION = tfds.core.Version('1.1.3')
   RELEASE_NOTES = {
+      '1.1.3': 'Corrected id types from float to string.',
       '1.1.2': 'Added separate citation for CivilCommentsCovert dataset.',
       '1.1.1': 'Added CivilCommentsCovert config with correct checksum.',
       '1.1.0': 'Added CivilCommentsCovert config.',
@@ -197,9 +192,9 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
     citation = (
         _CITATION
         if not self.builder_config.include_covert_labels else _COVERT_CITATION)
-    features = {'text': tfds.features.Text()}
+    features = {'text': tfds.features.Text(), 'id': tf.string}
     labels = [
-        'id', 'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',
+        'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',
         'identity_attack', 'sexual_explicit'
     ]
     if self.builder_config.include_identity_labels:

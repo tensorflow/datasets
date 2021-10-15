@@ -34,7 +34,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
     package='tensorflow_datasets',
     syntax='proto3',
     serialized_options=b'\370\001\001',
-    serialized_pb=b'\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a)tensorflow_metadata/proto/v0/schema.proto\x1a-tensorflow_metadata/proto/v0/statistics.proto\"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01 \x03(\t\"\x9d\x01\n\tSplitInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nnum_shards\x18\x02 \x01(\x03\x12\x15\n\rshard_lengths\x18\x04 \x03(\x03\x12\x11\n\tnum_bytes\x18\x05 \x01(\x03\x12\x44\n\nstatistics\x18\x03 \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\"/\n\x0eSupervisedKeys\x12\r\n\x05input\x18\x01 \x01(\t\x12\x0e\n\x06output\x18\x02 \x01(\t\"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01 \x01(\t\"\xaa\x05\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12\x13\n\x0b\x63onfig_name\x18\r \x01(\t\x12\x1a\n\x12\x63onfig_description\x18\x0e \x01(\t\x12\x10\n\x08\x63itation\x18\x03 \x01(\t\x12\x19\n\rsize_in_bytes\x18\x04 \x01(\x03\x42\x02\x18\x01\x12\x15\n\rdownload_size\x18\x0c \x01(\x03\x12\x36\n\x08location\x18\x05 \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06 \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07 \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08 \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10 \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11 \x01(\t\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3',
+    create_key=_descriptor._internal_create_key,
+    serialized_pb=b'\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a)tensorflow_metadata/proto/v0/schema.proto\x1a-tensorflow_metadata/proto/v0/statistics.proto\"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01 \x03(\t\"\x9d\x01\n\tSplitInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nnum_shards\x18\x02 \x01(\x03\x12\x15\n\rshard_lengths\x18\x04 \x03(\x03\x12\x11\n\tnum_bytes\x18\x05 \x01(\x03\x12\x44\n\nstatistics\x18\x03 \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\"\xf3\x03\n\x0eSupervisedKeys\x12\x11\n\x05input\x18\x01 \x01(\tB\x02\x18\x01\x12\x12\n\x06output\x18\x02 \x01(\tB\x02\x18\x01\x12\x38\n\x05tuple\x18\x03 \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.Tuple\x1a@\n\x05Tuple\x12\x37\n\x05items\x18\x01 \x03(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest\x1a\x9f\x01\n\x04\x44ict\x12@\n\x04\x64ict\x18\x01 \x03(\x0b\x32\x32.tensorflow_datasets.SupervisedKeys.Dict.DictEntry\x1aU\n\tDictEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x37\n\x05value\x18\x02 \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest:\x02\x38\x01\x1a\x9b\x01\n\x04Nest\x12\x15\n\x0b\x66\x65\x61ture_key\x18\x01 \x01(\tH\x00\x12:\n\x05tuple\x18\x02 \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.TupleH\x00\x12\x38\n\x04\x64ict\x18\x03 \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.DictH\x00\x42\x06\n\x04nest\"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01 \x01(\t\"\xaa\x05\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12\x13\n\x0b\x63onfig_name\x18\r \x01(\t\x12\x1a\n\x12\x63onfig_description\x18\x0e \x01(\t\x12\x10\n\x08\x63itation\x18\x03 \x01(\t\x12\x19\n\rsize_in_bytes\x18\x04 \x01(\x03\x42\x02\x18\x01\x12\x15\n\rdownload_size\x18\x0c \x01(\x03\x12\x36\n\x08location\x18\x05 \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06 \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07 \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08 \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10 \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11 \x01(\t\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3',
     dependencies=[
         tensorflow__metadata_dot_proto_dot_v0_dot_schema__pb2.DESCRIPTOR,
         tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2.DESCRIPTOR,
@@ -46,6 +47,7 @@ _DATASETLOCATION = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name='urls',
@@ -63,7 +65,8 @@ _DATASETLOCATION = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
     ],
     extensions=[],
     nested_types=[],
@@ -83,6 +86,7 @@ _SPLITINFO = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name='name',
@@ -100,7 +104,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='num_shards',
             full_name='tensorflow_datasets.SplitInfo.num_shards',
@@ -117,7 +122,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='shard_lengths',
             full_name='tensorflow_datasets.SplitInfo.shard_lengths',
@@ -134,7 +140,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='num_bytes',
             full_name='tensorflow_datasets.SplitInfo.num_bytes',
@@ -151,7 +158,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='statistics',
             full_name='tensorflow_datasets.SplitInfo.statistics',
@@ -168,7 +176,8 @@ _SPLITINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
     ],
     extensions=[],
     nested_types=[],
@@ -182,12 +191,233 @@ _SPLITINFO = _descriptor.Descriptor(
     serialized_end=324,
 )
 
+_SUPERVISEDKEYS_TUPLE = _descriptor.Descriptor(
+    name='Tuple',
+    full_name='tensorflow_datasets.SupervisedKeys.Tuple',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='items',
+            full_name='tensorflow_datasets.SupervisedKeys.Tuple.items',
+            index=0,
+            number=1,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=442,
+    serialized_end=506,
+)
+
+_SUPERVISEDKEYS_DICT_DICTENTRY = _descriptor.Descriptor(
+    name='DictEntry',
+    full_name='tensorflow_datasets.SupervisedKeys.Dict.DictEntry',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='key',
+            full_name='tensorflow_datasets.SupervisedKeys.Dict.DictEntry.key',
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
+        _descriptor.FieldDescriptor(
+            name='value',
+            full_name='tensorflow_datasets.SupervisedKeys.Dict.DictEntry.value',
+            index=1,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=b'8\001',
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=583,
+    serialized_end=668,
+)
+
+_SUPERVISEDKEYS_DICT = _descriptor.Descriptor(
+    name='Dict',
+    full_name='tensorflow_datasets.SupervisedKeys.Dict',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='dict',
+            full_name='tensorflow_datasets.SupervisedKeys.Dict.dict',
+            index=0,
+            number=1,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
+    ],
+    extensions=[],
+    nested_types=[
+        _SUPERVISEDKEYS_DICT_DICTENTRY,
+    ],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=509,
+    serialized_end=668,
+)
+
+_SUPERVISEDKEYS_NEST = _descriptor.Descriptor(
+    name='Nest',
+    full_name='tensorflow_datasets.SupervisedKeys.Nest',
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    create_key=_descriptor._internal_create_key,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name='feature_key',
+            full_name='tensorflow_datasets.SupervisedKeys.Nest.feature_key',
+            index=0,
+            number=1,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
+        _descriptor.FieldDescriptor(
+            name='tuple',
+            full_name='tensorflow_datasets.SupervisedKeys.Nest.tuple',
+            index=1,
+            number=2,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
+        _descriptor.FieldDescriptor(
+            name='dict',
+            full_name='tensorflow_datasets.SupervisedKeys.Nest.dict',
+            index=2,
+            number=3,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
+    ],
+    extensions=[],
+    nested_types=[],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax='proto3',
+    extension_ranges=[],
+    oneofs=[
+        _descriptor.OneofDescriptor(
+            name='nest',
+            full_name='tensorflow_datasets.SupervisedKeys.Nest.nest',
+            index=0,
+            containing_type=None,
+            create_key=_descriptor._internal_create_key,
+            fields=[]),
+    ],
+    serialized_start=671,
+    serialized_end=826,
+)
+
 _SUPERVISEDKEYS = _descriptor.Descriptor(
     name='SupervisedKeys',
     full_name='tensorflow_datasets.SupervisedKeys',
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name='input',
@@ -204,8 +434,9 @@ _SUPERVISEDKEYS = _descriptor.Descriptor(
             containing_type=None,
             is_extension=False,
             extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR),
+            serialized_options=b'\030\001',
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='output',
             full_name='tensorflow_datasets.SupervisedKeys.output',
@@ -221,19 +452,42 @@ _SUPERVISEDKEYS = _descriptor.Descriptor(
             containing_type=None,
             is_extension=False,
             extension_scope=None,
+            serialized_options=b'\030\001',
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
+        _descriptor.FieldDescriptor(
+            name='tuple',
+            full_name='tensorflow_datasets.SupervisedKeys.tuple',
+            index=2,
+            number=3,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
     ],
     extensions=[],
-    nested_types=[],
+    nested_types=[
+        _SUPERVISEDKEYS_TUPLE,
+        _SUPERVISEDKEYS_DICT,
+        _SUPERVISEDKEYS_NEST,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=326,
-    serialized_end=373,
+    serialized_start=327,
+    serialized_end=826,
 )
 
 _REDISTRIBUTIONINFO = _descriptor.Descriptor(
@@ -242,6 +496,7 @@ _REDISTRIBUTIONINFO = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name='license',
@@ -259,7 +514,8 @@ _REDISTRIBUTIONINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
     ],
     extensions=[],
     nested_types=[],
@@ -269,8 +525,8 @@ _REDISTRIBUTIONINFO = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=375,
-    serialized_end=412,
+    serialized_start=828,
+    serialized_end=865,
 )
 
 _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
@@ -279,6 +535,7 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name='key',
@@ -296,7 +553,8 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='value',
             full_name='tensorflow_datasets.DatasetInfo.DownloadChecksumsEntry.value',
@@ -313,7 +571,8 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
     ],
     extensions=[],
     nested_types=[],
@@ -323,8 +582,8 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1041,
-    serialized_end=1097,
+    serialized_start=1494,
+    serialized_end=1550,
 )
 
 _DATASETINFO = _descriptor.Descriptor(
@@ -333,6 +592,7 @@ _DATASETINFO = _descriptor.Descriptor(
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
+    create_key=_descriptor._internal_create_key,
     fields=[
         _descriptor.FieldDescriptor(
             name='name',
@@ -350,7 +610,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='description',
             full_name='tensorflow_datasets.DatasetInfo.description',
@@ -367,7 +628,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='version',
             full_name='tensorflow_datasets.DatasetInfo.version',
@@ -384,7 +646,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='config_name',
             full_name='tensorflow_datasets.DatasetInfo.config_name',
@@ -401,7 +664,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='config_description',
             full_name='tensorflow_datasets.DatasetInfo.config_description',
@@ -418,7 +682,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='citation',
             full_name='tensorflow_datasets.DatasetInfo.citation',
@@ -435,7 +700,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='size_in_bytes',
             full_name='tensorflow_datasets.DatasetInfo.size_in_bytes',
@@ -452,7 +718,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=b'\030\001',
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='download_size',
             full_name='tensorflow_datasets.DatasetInfo.download_size',
@@ -469,7 +736,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='location',
             full_name='tensorflow_datasets.DatasetInfo.location',
@@ -486,7 +754,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='download_checksums',
             full_name='tensorflow_datasets.DatasetInfo.download_checksums',
@@ -503,7 +772,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=b'\030\001',
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='schema',
             full_name='tensorflow_datasets.DatasetInfo.schema',
@@ -520,7 +790,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='splits',
             full_name='tensorflow_datasets.DatasetInfo.splits',
@@ -537,7 +808,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='supervised_keys',
             full_name='tensorflow_datasets.DatasetInfo.supervised_keys',
@@ -554,7 +826,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='redistribution_info',
             full_name='tensorflow_datasets.DatasetInfo.redistribution_info',
@@ -571,7 +844,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='module_name',
             full_name='tensorflow_datasets.DatasetInfo.module_name',
@@ -588,7 +862,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='disable_shuffling',
             full_name='tensorflow_datasets.DatasetInfo.disable_shuffling',
@@ -605,7 +880,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
         _descriptor.FieldDescriptor(
             name='file_format',
             full_name='tensorflow_datasets.DatasetInfo.file_format',
@@ -622,7 +898,8 @@ _DATASETINFO = _descriptor.Descriptor(
             is_extension=False,
             extension_scope=None,
             serialized_options=None,
-            file=DESCRIPTOR),
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key),
     ],
     extensions=[],
     nested_types=[
@@ -634,12 +911,39 @@ _DATASETINFO = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=415,
-    serialized_end=1097,
+    serialized_start=868,
+    serialized_end=1550,
 )
 
 _SPLITINFO.fields_by_name[
     'statistics'].message_type = tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2._DATASETFEATURESTATISTICS
+_SUPERVISEDKEYS_TUPLE.fields_by_name[
+    'items'].message_type = _SUPERVISEDKEYS_NEST
+_SUPERVISEDKEYS_TUPLE.containing_type = _SUPERVISEDKEYS
+_SUPERVISEDKEYS_DICT_DICTENTRY.fields_by_name[
+    'value'].message_type = _SUPERVISEDKEYS_NEST
+_SUPERVISEDKEYS_DICT_DICTENTRY.containing_type = _SUPERVISEDKEYS_DICT
+_SUPERVISEDKEYS_DICT.fields_by_name[
+    'dict'].message_type = _SUPERVISEDKEYS_DICT_DICTENTRY
+_SUPERVISEDKEYS_DICT.containing_type = _SUPERVISEDKEYS
+_SUPERVISEDKEYS_NEST.fields_by_name[
+    'tuple'].message_type = _SUPERVISEDKEYS_TUPLE
+_SUPERVISEDKEYS_NEST.fields_by_name['dict'].message_type = _SUPERVISEDKEYS_DICT
+_SUPERVISEDKEYS_NEST.containing_type = _SUPERVISEDKEYS
+_SUPERVISEDKEYS_NEST.oneofs_by_name['nest'].fields.append(
+    _SUPERVISEDKEYS_NEST.fields_by_name['feature_key'])
+_SUPERVISEDKEYS_NEST.fields_by_name[
+    'feature_key'].containing_oneof = _SUPERVISEDKEYS_NEST.oneofs_by_name[
+        'nest']
+_SUPERVISEDKEYS_NEST.oneofs_by_name['nest'].fields.append(
+    _SUPERVISEDKEYS_NEST.fields_by_name['tuple'])
+_SUPERVISEDKEYS_NEST.fields_by_name[
+    'tuple'].containing_oneof = _SUPERVISEDKEYS_NEST.oneofs_by_name['nest']
+_SUPERVISEDKEYS_NEST.oneofs_by_name['nest'].fields.append(
+    _SUPERVISEDKEYS_NEST.fields_by_name['dict'])
+_SUPERVISEDKEYS_NEST.fields_by_name[
+    'dict'].containing_oneof = _SUPERVISEDKEYS_NEST.oneofs_by_name['nest']
+_SUPERVISEDKEYS.fields_by_name['tuple'].message_type = _SUPERVISEDKEYS_TUPLE
 _DATASETINFO_DOWNLOADCHECKSUMSENTRY.containing_type = _DATASETINFO
 _DATASETINFO.fields_by_name['location'].message_type = _DATASETLOCATION
 _DATASETINFO.fields_by_name[
@@ -681,11 +985,55 @@ SupervisedKeys = _reflection.GeneratedProtocolMessageType(
     'SupervisedKeys',
     (_message.Message,),
     {
-        'DESCRIPTOR': _SUPERVISEDKEYS,
-        '__module__': 'dataset_info_pb2'
+        'Tuple':
+            _reflection.GeneratedProtocolMessageType(
+                'Tuple',
+                (_message.Message,),
+                {
+                    'DESCRIPTOR': _SUPERVISEDKEYS_TUPLE,
+                    '__module__': 'dataset_info_pb2'
+                    # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Tuple)
+                }),
+        'Dict':
+            _reflection.GeneratedProtocolMessageType(
+                'Dict',
+                (_message.Message,),
+                {
+                    'DictEntry':
+                        _reflection.GeneratedProtocolMessageType(
+                            'DictEntry',
+                            (_message.Message,),
+                            {
+                                'DESCRIPTOR': _SUPERVISEDKEYS_DICT_DICTENTRY,
+                                '__module__': 'dataset_info_pb2'
+                                # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Dict.DictEntry)
+                            }),
+                    'DESCRIPTOR':
+                        _SUPERVISEDKEYS_DICT,
+                    '__module__':
+                        'dataset_info_pb2'
+                    # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Dict)
+                }),
+        'Nest':
+            _reflection.GeneratedProtocolMessageType(
+                'Nest',
+                (_message.Message,),
+                {
+                    'DESCRIPTOR': _SUPERVISEDKEYS_NEST,
+                    '__module__': 'dataset_info_pb2'
+                    # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys.Nest)
+                }),
+        'DESCRIPTOR':
+            _SUPERVISEDKEYS,
+        '__module__':
+            'dataset_info_pb2'
         # @@protoc_insertion_point(class_scope:tensorflow_datasets.SupervisedKeys)
     })
 _sym_db.RegisterMessage(SupervisedKeys)
+_sym_db.RegisterMessage(SupervisedKeys.Tuple)
+_sym_db.RegisterMessage(SupervisedKeys.Dict)
+_sym_db.RegisterMessage(SupervisedKeys.Dict.DictEntry)
+_sym_db.RegisterMessage(SupervisedKeys.Nest)
 
 RedistributionInfo = _reflection.GeneratedProtocolMessageType(
     'RedistributionInfo',
@@ -720,6 +1068,9 @@ _sym_db.RegisterMessage(DatasetInfo)
 _sym_db.RegisterMessage(DatasetInfo.DownloadChecksumsEntry)
 
 DESCRIPTOR._options = None
+_SUPERVISEDKEYS_DICT_DICTENTRY._options = None
+_SUPERVISEDKEYS.fields_by_name['input']._options = None
+_SUPERVISEDKEYS.fields_by_name['output']._options = None
 _DATASETINFO_DOWNLOADCHECKSUMSENTRY._options = None
 _DATASETINFO.fields_by_name['size_in_bytes']._options = None
 _DATASETINFO.fields_by_name['download_checksums']._options = None

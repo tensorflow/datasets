@@ -63,7 +63,12 @@ class LazyImporter(object):
   @utils.classproperty
   @classmethod
   def cv2(cls):
-    return _try_import("cv2")  # pylint: disable=unreachable
+    return _try_import("cv2")
+
+  @utils.classproperty
+  @classmethod
+  def envlogger(cls):
+    return _try_import("envlogger.reader")
 
   @utils.classproperty
   @classmethod
@@ -74,6 +79,7 @@ class LazyImporter(object):
   @classmethod
   def h5py(cls):
     return _try_import("h5py")
+
 
   @utils.classproperty
   @classmethod
@@ -100,6 +106,11 @@ class LazyImporter(object):
   @classmethod
   def mwparserfromhell(cls):
     return _try_import("mwparserfromhell")
+
+  @utils.classproperty
+  @classmethod
+  def networkx(cls):
+    return _try_import("networkx")
 
   @utils.classproperty
   @classmethod

@@ -24,7 +24,7 @@ from typing import Any, Iterator
 from unittest import mock
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -195,7 +195,7 @@ def mock_tf(symbol_name: str, *args: Any, **kwargs: Any) -> Iterator[None]:
   """
   # pylint: disable=g-import-not-at-top,reimported
   import tensorflow as tf_lib1
-  import tensorflow.compat.v2 as tf_lib2
+  import tensorflow as tf_lib2
   # pylint: enable=g-import-not-at-top,reimported
 
   tf_symbol, *tf_submodules, symbol_name = symbol_name.split('.')
@@ -389,7 +389,6 @@ class DummyBeamDataset(DummyDataset, skip_registration=True):
 
 def test_main():
   """Entrypoint for tests."""
-  tf.enable_v2_behavior()
   tf.test.main()
 
 
@@ -440,3 +439,30 @@ class DummyParser(object):
 
   def parse_example(self, ex):
     return ex
+
+
+def assert_features_equal(features0, features1) -> None:
+  """Asserts that the 2 nested FeatureConnector structure match."""
+  _assert_features_equal(
+      features.features_dict.to_feature(features0),
+      features.features_dict.to_feature(features1),
+  )
+
+
+def _assert_features_equal(features0, features1) -> None:
+  tf.nest.map_structure(_assert_feature_equal, features0, features1)
+
+
+def _assert_feature_equal(feature0, feature1):
+  """Assert that 2 features are equals."""
+  assert type(feature0) == type(feature1)  # pylint: disable=unidiomatic-typecheck
+  assert repr(feature0) == repr(feature1)
+  assert feature0.shape == feature1.shape
+  assert feature0.dtype == feature1.dtype
+  if isinstance(feature0, features.FeaturesDict):
+    _assert_features_equal(dict(feature0), dict(feature1))
+  if isinstance(feature0, features.Sequence):
+    assert feature0._length == feature1._length  # pylint: disable=protected-access
+    _assert_features_equal(feature0.feature, feature1.feature)
+  if isinstance(feature0, features.ClassLabel):
+    assert feature0.names == feature1.names

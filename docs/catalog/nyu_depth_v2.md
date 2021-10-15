@@ -11,6 +11,7 @@
 
 # `nyu_depth_v2`
 
+
 *   **Description**:
 
 The NYU-Depth V2 data set is comprised of video sequences from a variety of
@@ -68,7 +69,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/nyu_depth_v2-0.0.1.html";

@@ -15,10 +15,10 @@
 
 """SI-SCORE synthetic dataset."""
 
-import os
 import dataclasses
+import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.image_classification.siscore import siscore_labels
 import tensorflow_datasets.public_api as tfds
 

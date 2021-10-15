@@ -16,16 +16,17 @@
 """ClassLabel feature."""
 
 import os
-import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core.features import feature
+import tensorflow as tf
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
 
-class ClassLabel(feature.Tensor):
+class ClassLabel(tensor_feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
+  # If updating the signature here, LabeledImage should likely be updated too.
   def __init__(self, *, num_classes=None, names=None, names_file=None):
     """Constructs a ClassLabel FeatureConnector.
 

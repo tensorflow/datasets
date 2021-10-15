@@ -11,6 +11,12 @@
 
 # `voxceleb`
 
+
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -27,11 +33,13 @@ audio part of the voxceleb1.1 dataset.
 
 *   **Versions**:
 
-    *   **`1.1.1`** (default): No release notes.
+    *   **`1.2.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Add youtube_id field
 
 *   **Download size**: `4.68 MiB`
 
-*   **Dataset size**: `107.97 GiB`
+*   **Dataset size**: `107.98 GiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -57,6 +65,7 @@ Split          | Examples
 FeaturesDict({
     'audio': Audio(shape=(None,), dtype=tf.int64),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1252),
+    'youtube_id': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -76,10 +85,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/voxceleb-1.1.1.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/voxceleb-1.2.1.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).

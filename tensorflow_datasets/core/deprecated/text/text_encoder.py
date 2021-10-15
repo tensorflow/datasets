@@ -23,7 +23,7 @@ import json
 import re
 
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 
 def _re_compile(pattern):

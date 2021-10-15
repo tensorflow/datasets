@@ -16,20 +16,22 @@
 """Audio feature."""
 
 import os
+from typing import Optional, Union
 import wave
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
+Encoding = tensor_feature.Encoding
 
 
-class Audio(feature.Tensor):
+class Audio(tensor_feature.Tensor):
   """`tfds.features.FeatureConnector` for audio.
 
   In `_generate_examples`, Audio accept:
@@ -45,10 +47,11 @@ class Audio(feature.Tensor):
   def __init__(
       self,
       *,
-      file_format=None,
+      file_format: Optional[str] = None,
       shape=(None,),
       dtype=tf.int64,
       sample_rate=None,
+      encoding: Union[str, Encoding] = Encoding.NONE,
   ):
     """Constructs the connector.
 
@@ -60,6 +63,8 @@ class Audio(feature.Tensor):
       sample_rate: `int`, additional metadata exposed to the user through
         `info.features['audio'].sample_rate`. This value isn't used neither in
         encoding nor decoding.
+      encoding: Internal encoding. See `tfds.features.Encoding` for available
+        values.
     """
     self._file_format = file_format
     if len(shape) > 2:
@@ -67,7 +72,7 @@ class Audio(feature.Tensor):
                        f'(length, num_channels), got {shape}.')
     self._shape = shape
     self._sample_rate = sample_rate
-    super().__init__(shape=shape, dtype=dtype)
+    super().__init__(shape=shape, dtype=dtype, encoding=encoding)
 
   def _encode_file(self, fobj, file_format):
     audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(

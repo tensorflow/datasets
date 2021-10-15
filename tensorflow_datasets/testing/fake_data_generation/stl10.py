@@ -51,8 +51,7 @@ def _generate_stl10_data():
   output_dir = stl_output_dir()
   test_utils.remake_dir(output_dir)
   for fname in ["train_y.bin", "test_y.bin"]:
-    labels = np.random.randint(
-        NUMBER_LABELS, size=(1), dtype=np.uint8)
+    labels = np.random.randint(NUMBER_LABELS, size=(1), dtype=np.uint8)
     dump(stl_output_dir(), fname, labels)
 
   for fname in ["train_X.bin", "test_X.bin", "unlabeled_X.bin"]:

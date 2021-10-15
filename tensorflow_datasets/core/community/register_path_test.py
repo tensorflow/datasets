@@ -45,14 +45,17 @@ def dummy_register():
     # Prepare the datasets
     # Namespace 0
     Ds0(data_dir=tmp_path / 'kaggle').download_and_prepare()
-    Ds1(data_dir=tmp_path / 'kaggle').download_and_prepare()
+    Ds1(data_dir=tmp_path / 'kaggle2').download_and_prepare()
     # Namespace 1
     Ds0(data_dir=tmp_path / 'mlds').download_and_prepare()
     # Namespace 2: (non-existing)
 
     content = textwrap.dedent(f"""
         [Namespaces]
-        kaggle='{os.fspath(tmp_path / 'kaggle')}'
+        kaggle=[
+            '{os.fspath(tmp_path / 'kaggle')}',
+            '{os.fspath(tmp_path / 'kaggle2')}',
+        ]
         mlds='{os.fspath(tmp_path / 'mlds')}'
         other='/tmp/path/to/non-existing-path'
         """)

@@ -107,6 +107,8 @@ class SplitsTest(testing.TestCase):
         s["test[75%:]"].num_examples + s["test[:75%]"].num_examples,
     )
 
+    self.assertEqual(s["all"].num_examples, s.total_num_examples)
+
   def test_sub_split_file_instructions(self):
     fi = self._builder.info.splits["train[75%:]"].file_instructions
     self.assertEqual(fi, [
@@ -142,25 +144,12 @@ class SplitsTest(testing.TestCase):
 
   def test_sub_split_wrong_key(self):
     with self.assertRaisesWithPredicateMatch(ValueError,
-                                             "Unknown split \"unknown\""):
+                                             "Unknown split 'unknown'"):
       _ = self._builder.info.splits["unknown"]
 
   def test_split_enum(self):
     self.assertEqual(repr(splits.Split.TRAIN), "Split('train')")
     self.assertIsInstance(splits.Split.TRAIN, splits.Split)
-
-  def test_even_splits(self):
-    self.assertEqual(
-        ["train[0%:33%]", "train[33%:67%]", "train[67%:100%]"],
-        splits.even_splits("train", n=3),
-    )
-    self.assertEqual([
-        "train[0%:25%]", "train[25%:50%]", "train[50%:75%]", "train[75%:100%]"
-    ], splits.even_splits("train", 4))
-    with self.assertRaises(ValueError):
-      splits.even_splits("train", 0)
-    with self.assertRaises(ValueError):
-      splits.even_splits("train", 101)
 
 
 if __name__ == "__main__":

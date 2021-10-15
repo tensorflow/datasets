@@ -24,9 +24,10 @@ import tensorflow_datasets.public_api as tfds
 class D4rlMujocoWalker2d(dataset_builder.D4RLDatasetBuilder):
   """DatasetBuilder for walker2d dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.1.0': 'Added is_last.',
   }
 
   BUILDER_CONFIGS = dataset_builder.MUJOCO_BUILDER_CONFIGS
@@ -35,4 +36,3 @@ class D4rlMujocoWalker2d(dataset_builder.D4RLDatasetBuilder):
     config = dataset_builder.DatasetConfig(
         name='walker2d', obs_len=17, action_len=6, qpos_len=9, qvel_len=9)
     super().__init__(ds_config=config, **kwargs)
-

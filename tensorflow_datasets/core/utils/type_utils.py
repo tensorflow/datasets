@@ -30,6 +30,8 @@ except ImportError:
   Protocol = typing_extensions.Protocol
 # pylint: enable=g-import-not-at-top
 
+_symbols_to_exclude = set(globals().keys())
+
 # Accept both `str` and `pathlib.Path`-like
 PathLike = Union[str, os.PathLike]
 PathLikeCls = (str, os.PathLike)  # Used in `isinstance`
@@ -39,11 +41,15 @@ T = TypeVar('T')
 # Note: `TupleOrList` avoid abiguity from `Sequence` (`str` is `Sequence[str]`,
 # `bytes` is `Sequence[int]`).
 TupleOrList = Union[Tuple[T, ...], List[T]]
+ListOrElem = Union[T, List[T]]
 
 TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
 Tree = Union[T, TupleOrList['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-supported-yet
 
 Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
+
+# Nested dict of tensor
+TensorDict = TreeDict[Tensor]
 
 Dim = Optional[int]
 Shape = TupleOrList[Dim]
@@ -289,3 +295,7 @@ class ReadWritePath(ReadOnlyPath, Protocol):
   @abc.abstractmethod
   def copy(self: T, dst: PathLike, overwrite: bool = False) -> T:
     """Copy the current file to the given destination."""
+
+
+__all__ = sorted(k for k in globals()
+                 if k not in _symbols_to_exclude and not k.startswith('_'))

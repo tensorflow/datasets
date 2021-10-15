@@ -11,9 +11,6 @@
 
 # `d4rl_adroit_pen`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -28,7 +25,8 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default): Added is_last.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -79,6 +77,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(45,), dtype=tf.float32),
         'reward': tf.float32,
@@ -94,10 +93,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v0-human-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v0-human-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -124,7 +123,7 @@ $(document).ready(() => {
 
 *   **Download size**: `292.85 MiB`
 
-*   **Dataset size**: `251.96 MiB`
+*   **Dataset size**: `252.55 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -148,6 +147,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(45,), dtype=tf.float64),
         'reward': tf.float64,
@@ -163,10 +163,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v0-cloned-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v0-cloned-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -193,7 +193,7 @@ $(document).ready(() => {
 
 *   **Download size**: `250.13 MiB`
 
-*   **Dataset size**: `343.83 MiB`
+*   **Dataset size**: `344.41 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -219,6 +219,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(45,), dtype=tf.float32),
         'reward': tf.float32,
@@ -234,10 +235,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v0-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v0-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -264,7 +265,7 @@ $(document).ready(() => {
 
 *   **Download size**: `1.95 MiB`
 
-*   **Dataset size**: `2.59 MiB`
+*   **Dataset size**: `2.60 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -289,6 +290,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(45,), dtype=tf.float32),
         'reward': tf.float32,
@@ -304,10 +306,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v1-human-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v1-human-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -376,6 +378,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(45,), dtype=tf.float32),
         'reward': tf.float32,
@@ -391,10 +394,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v1-cloned-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v1-cloned-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -421,7 +424,7 @@ $(document).ready(() => {
 
 *   **Download size**: `249.90 MiB`
 
-*   **Dataset size**: `547.89 MiB`
+*   **Dataset size**: `548.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -469,6 +472,7 @@ FeaturesDict({
             'qvel': Tensor(shape=(30,), dtype=tf.float32),
         }),
         'is_first': tf.bool,
+        'is_last': tf.bool,
         'is_terminal': tf.bool,
         'observation': Tensor(shape=(45,), dtype=tf.float32),
         'reward': tf.float32,
@@ -484,10 +488,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v1-expert-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_adroit_pen-v1-expert-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).

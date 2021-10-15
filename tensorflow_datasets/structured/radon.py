@@ -23,7 +23,7 @@ import collections
 
 import numpy as np
 import six.moves.urllib as urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 BASE_URL = 'http://www.stat.columbia.edu/~gelman/arm/examples/radon/'

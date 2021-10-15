@@ -15,6 +15,7 @@
 
 """To write records into sharded tfrecord files."""
 
+import dataclasses
 import itertools
 import json
 import os
@@ -22,9 +23,8 @@ import os
 from typing import Any, Iterable, List, Optional, Tuple
 
 from absl import logging
-import dataclasses
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
@@ -476,7 +476,10 @@ class BeamWriter(object):
     """Write all examples from multiple buckets into the same shard."""
     shard_path, examples_by_bucket = shardid_examples
     examples = itertools.chain(*[ex[1] for ex in sorted(examples_by_bucket)])
-    record_keys = _write_examples(shard_path, examples, self._file_format)
+    # Write in a tmp file potential race condition if `--xxxxx_enable_backups`
+    # is set and multiple workers try to write to the same file.
+    with utils.incomplete_file(utils.as_path(shard_path)) as tmp_path:
+      record_keys = _write_examples(tmp_path, examples, self._file_format)
     # If there are no record_keys, skip creating index files.
     if not record_keys:
       return

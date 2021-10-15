@@ -19,7 +19,7 @@ Apply common corruptions to the images in ImageNet2012 dataset.
 """
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.image_classification import corruptions
 from tensorflow_datasets.image_classification.imagenet import Imagenet2012
 import tensorflow_datasets.public_api as tfds

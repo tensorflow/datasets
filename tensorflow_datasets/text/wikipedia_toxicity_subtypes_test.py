@@ -15,19 +15,25 @@
 
 """Tests for WikipediaToxicitySubtypes dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import wikipedia_toxicity_subtypes
 
 
 class WikipediaToxicitySubtypesTest(tfds.testing.DatasetBuilderTestCase):
   DATASET_CLASS = wikipedia_toxicity_subtypes.WikipediaToxicitySubtypes
+  BUILDER_CONFIG_NAMES_TO_TEST = ["EnglishSubtypes"]
   SPLITS = {
       "train": 3,  # Number of fake train examples
       "test": 1,  # Number of fake test examples
+  }
+
+
+class WikipediaToxicityMultilingualTest(tfds.testing.DatasetBuilderTestCase):
+  DATASET_CLASS = wikipedia_toxicity_subtypes.WikipediaToxicitySubtypes
+  BUILDER_CONFIG_NAMES_TO_TEST = ["Multilingual"]
+  SPLITS = {
+      "validation": 2,  # Number of fake validation examples
+      "test": 2,  # Number of fake test examples
   }
 
 

@@ -15,12 +15,10 @@
 
 """Tests for moving_sequence."""
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets import testing
 import tensorflow_datasets.video.moving_sequence as ms
-
-tf.enable_v2_behavior()
 
 
 class MovingSequenceTest(tf.test.TestCase):

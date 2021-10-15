@@ -23,7 +23,7 @@ import xml.etree.cElementTree as etree
 
 from absl import logging
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 from absl import flags  # pylint:disable=g-bad-import-order,g-import-not-at-top
@@ -203,7 +203,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
           utf_f = f
 
         # To clear root, to free-up more memory than just `elem.clear()`.
-        context = etree.iterparse(utf_f, events=("end",))
+        context = etree.iterparse(utf_f, events=("end",))  # pytype: disable=wrong-arg-types
         context = iter(context)
         unused_event, root = next(context)
         for unused_event, elem in context:

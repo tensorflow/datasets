@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-/!\ IF YOU WANT PEOPLE TO HELP YOU, PLEASE GIVE AS MUCH DETAIL AS POSSIBLE, INCLUDING THE FULL STACKTRACE AND CODE SNIPPET
+/!\ PLEASE INCLUDE THE FULL STACKTRACE AND CODE SNIPPET
 
 **Short description**
 Description of the bug.
@@ -22,9 +22,11 @@ Description of the bug.
 
 **Reproduction instructions**
 
+```python
+<put a code snippet, a link to a gist or a colab here>
 ```
-<put a code snippet or link to a gist here>
-```
+
+If you share a colab, make sure to update the permissions to share it.
 
 **Link to logs**
 If applicable, <link to gist with logs, stack trace>

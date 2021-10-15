@@ -16,7 +16,7 @@
 """ParaCrawl (Bitextor) parallel open-source machine translation benchmark."""
 
 import collections
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 

@@ -11,6 +11,7 @@
 
 # `caltech_birds2010`
 
+
 *   **Description**:
 
 Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos of 200 bird
@@ -72,7 +73,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/caltech_birds2010-0.1.1.html";

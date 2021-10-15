@@ -20,7 +20,7 @@ import os
 import posixpath
 from typing import List, Optional
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core.utils import generic_path
 from tensorflow_datasets.core.utils import py_utils
@@ -73,7 +73,7 @@ def exists(path: type_utils.ReadWritePath) -> bool:
   """Checks if path exists. Returns False if issues occur connecting to GCS."""
   try:
     return path.exists()
-  except GCS_UNAVAILABLE_EXCEPTIONS:
+  except GCS_UNAVAILABLE_EXCEPTIONS:  # pylint: disable=catching-non-exception
     return False
 
 

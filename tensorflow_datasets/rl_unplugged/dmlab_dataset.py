@@ -15,20 +15,14 @@
 
 """Builder for DMLab Datasets."""
 
-import functools
-from typing import Any, Dict, Generator, List, Tuple
-
 import dataclasses
-import tensorflow.compat.v2 as tf
+from typing import Any, Dict
+
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.rl_unplugged import rlu_common
 
-_DESCRIPTION = """
-RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL
-Unplugged is designed around the following considerations: to facilitate ease of
-use, we provide the datasets with a unified API which makes it easy for the
-practitioner to work with all data in the suite once a general pipeline has been
-established.
-
+_DMLAB_DESCRIPTION = """
 DeepMind Lab dataset has several levels from the challenging, partially
 observable [Deepmind Lab suite](https://github.com/deepmind/lab). DeepMind Lab
 dataset is collected by training distributed R2D2 by [Kapturowski et al., 2018]
@@ -46,7 +40,6 @@ when evaluating the agent in the environment.
 
 DeepMind Lab dataset is fairly large-scale. We recommend you to try it if you
 are interested in large-scale offline RL models with memory.
-
 """
 
 _CITATION = """
@@ -83,148 +76,105 @@ class BuilderConfig(tfds.core.BuilderConfig):
   episode_length: int = 301
 
 
-def _get_files(prefix: str, num_shards: int) -> List[str]:
-  return [
-      tfds.core.as_path(f'{prefix}/tfrecord-{i:05d}-of-{num_shards:05d}')
-      for i in range(num_shards)
-  ]
-
-
-_HOMEPAGE = 'https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged'
-
-
-def _tf_example_to_step_ds(tf_example: tf.train.Example,
-                           episode_length: int) -> Dict[str, Any]:
-  """Create an episode from a TF example."""
-
-  # Parse tf.Example.
-  def sequence_feature(shape, dtype=tf.float32):
-    return tf.io.FixedLenFeature(shape=[episode_length] + shape, dtype=dtype)
-
-  feature_description = {
-      'episode_id': tf.io.FixedLenFeature([], tf.int64),
-      'start_idx': tf.io.FixedLenFeature([], tf.int64),
-      'episode_return': tf.io.FixedLenFeature([], tf.float32),
-      'observations_pixels': sequence_feature([], tf.string),
-      'observations_reward': sequence_feature([]),
-      # actions are one-hot arrays.
-      'observations_action': sequence_feature([15]),
-      'actions': sequence_feature([], tf.int64),
-      'rewards': sequence_feature([]),
-      'discounted_rewards': sequence_feature([]),
-      'discounts': sequence_feature([]),
-  }
-
-  data = tf.io.parse_single_example(tf_example, feature_description)
-
-  episode = {
-      # Episode Metadata
-      'episode_id': data['episode_id'],
-      'episode_return': data['episode_return'],
-      'steps': {
-          'observation': {
-              'pixels':
-                  data['observations_pixels'],
-              'last_action':
-                  tf.argmax(
-                      data['observations_action'], axis=1,
-                      output_type=tf.int64),
-              'last_reward':
-                  data['observations_reward'],
-          },
-          'action': data['actions'],
-          'reward': data['rewards'],
-          'discount': data['discounts'],
-          'is_first': [True] + [False] * (episode_length - 1),
-          'is_terminal': [False] * (episode_length)
-      }
-  }
-  return episode
-
-
-class DMLabDatasetBuilder(
-    tfds.core.GeneratorBasedBuilder, skip_registration=True):
+class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
   """DatasetBuilder for RLU DMLab."""
 
   _SHARDS = 500
   _INPUT_FILE_PREFIX = 'gs://rl_unplugged/dmlab/'
 
-  def _info(self) -> tfds.core.DatasetInfo:
-    """Returns the dataset metadata."""
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            'steps':
-                tfds.features.Dataset({
-                    'observation': {
-                        'pixels':
-                            tfds.features.Image(
-                                shape=(
-                                    72,
-                                    96,
-                                    3,
-                                ),
-                                dtype=tf.uint8,
-                                encoding_format='png'),
-                        'last_action':
-                            tf.int64,
-                        'last_reward':
-                            tf.float32,
-                    },
-                    'action': tf.int64,
-                    'reward': tf.float32,
-                    'is_terminal': tf.bool,
-                    'is_first': tf.bool,
-                    'discount': tf.float32,
-                }),
-            'episode_id':
-                tf.int64,
-            'episode_return':
-                tf.float32,
-        }),
-        supervised_keys=None,  # disabled
-        homepage=_HOMEPAGE,
-        citation=_CITATION,
-    )
+  def get_features_dict(self):
+    return tfds.features.FeaturesDict({
+        'steps':
+            tfds.features.Dataset({
+                'observation': {
+                    'pixels':
+                        tfds.features.Image(
+                            shape=(
+                                72,
+                                96,
+                                3,
+                            ),
+                            dtype=tf.uint8,
+                            encoding_format='png'),
+                    'last_action':
+                        tf.int64,
+                    'last_reward':
+                        tf.float32,
+                },
+                'action': tf.int64,
+                'reward': tf.float32,
+                'is_terminal': tf.bool,
+                'is_first': tf.bool,
+                'is_last': tf.bool,
+                'discount': tf.float32,
+            }),
+        'episode_id':
+            tf.int64,
+        'episode_return':
+            tf.float32,
+    })
 
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
-    """Returns SplitGenerators."""
-    del dl_manager
+  def get_description(self):
+    return _DMLAB_DESCRIPTION
+
+  def get_citation(self):
+    return _CITATION
+
+  def get_file_prefix(self):
     run = self.builder_config.name
     task = self.builder_config.task
-    paths = {
-        'file_paths':
-            _get_files(
-                prefix=f'{self._INPUT_FILE_PREFIX}/{task}/{run}',
-                num_shards=self._SHARDS),
+    return f'{self._INPUT_FILE_PREFIX}/{task}/{run}/tfrecord'
+
+  def num_shards(self):
+    return self._SHARDS
+
+  def tf_example_to_step_ds(self,
+                            tf_example: tf.train.Example) -> Dict[str, Any]:
+    """Create an episode from a TF example."""
+    episode_length = self.builder_config.episode_length
+
+    # Parse tf.Example.
+    def sequence_feature(shape, dtype=tf.float32):
+      return tf.io.FixedLenFeature(shape=[episode_length] + shape, dtype=dtype)
+
+    feature_description = {
+        'episode_id': tf.io.FixedLenFeature([], tf.int64),
+        'start_idx': tf.io.FixedLenFeature([], tf.int64),
+        'episode_return': tf.io.FixedLenFeature([], tf.float32),
+        'observations_pixels': sequence_feature([], tf.string),
+        'observations_reward': sequence_feature([]),
+        # actions are one-hot arrays.
+        'observations_action': sequence_feature([15]),
+        'actions': sequence_feature([], tf.int64),
+        'rewards': sequence_feature([]),
+        'discounted_rewards': sequence_feature([]),
+        'discounts': sequence_feature([]),
     }
-    return {
-        'train': self._generate_examples(paths),
+
+    data = tf.io.parse_single_example(tf_example, feature_description)
+
+    episode = {
+        # Episode Metadata
+        'episode_id': data['episode_id'],
+        'episode_return': data['episode_return'],
+        'steps': {
+            'observation': {
+                'pixels':
+                    data['observations_pixels'],
+                'last_action':
+                    tf.argmax(
+                        data['observations_action'],
+                        axis=1,
+                        output_type=tf.int64),
+                'last_reward':
+                    data['observations_reward'],
+            },
+            'action': data['actions'],
+            'reward': data['rewards'],
+            'discount': data['discounts'],
+            'is_first': [True] + [False] * (episode_length - 1),
+            'is_last': [False] * (episode_length - 1) + [True],
+            'is_terminal': [False] * (episode_length)
+        }
     }
-
-  def _generate_examples(self, paths):
-    """Yields examples."""
-    beam = tfds.core.lazy_imports.apache_beam
-    file_paths = paths['file_paths']
-
-    def _generate_examples_one_file(
-        path) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
-      """Yields examples from one file."""
-      # Dataset of tf.Examples containing full episodes.
-      example_ds = tf.data.TFRecordDataset(
-          filenames=str(path), compression_type='GZIP')
-      # Dataset of episodes, each represented as a dataset of steps.
-      tf_example_to_step_ds_with_length = functools.partial(
-          _tf_example_to_step_ds,
-          episode_length=self.builder_config.episode_length)
-      episode_ds = example_ds.map(
-          tf_example_to_step_ds_with_length,
-          num_parallel_calls=tf.data.experimental.AUTOTUNE)
-      episode_ds = tfds.as_numpy(episode_ds)
-      for e in episode_ds:
-        # The key of the episode is converted to string because int64 is not
-        # supported as key.
-        yield str(e['episode_id']), e
-
-    return beam.Create(file_paths) | beam.FlatMap(_generate_examples_one_file)
+    return episode

@@ -6,8 +6,6 @@ repository).
 Check our [list of datasets](catalog/overview.md) to see if the dataset you want
 is already present.
 
-Note: Googlers, see [tfds-add](http://goto.google.com/tfds-add) guide.
-
 ## TL;DR
 
 The easiest way to write a new dataset is to use the
@@ -61,7 +59,7 @@ Use [TFDS CLI](https://www.tensorflow.org/datasets/cli) to generate the required
 template python files.
 
 ```sh
-cd path/to/project/datasets/  # Or use `--dir=path/to/project/datasets/` bellow
+cd path/to/project/datasets/  # Or use `--dir=path/to/project/datasets/` below
 tfds new my_dataset
 ```
 
@@ -87,7 +85,7 @@ of `tfds.core.DatasetBuilder` which takes care of most boilerplate. It supports:
 *   Small/medium datasets which can be generated on a single machine (this
     tutorial).
 *   Very large datasets which require distributed generation (using
-    [Apache Beam](https://beam.apache.org/)). See our
+    [Apache Beam](https://beam.apache.org/), see our
     [huge dataset guide](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset))
 
 Here is a minimal example of dataset class:
@@ -352,12 +350,29 @@ def _generate_examples(self, images_path, label_path):
 
 #### File access and `tf.io.gfile`
 
-In order to support Cloud storage systems, use `tf.io.gfile` API instead of
-built-in for file operations. Ex:
+In order to support Cloud storage systems, avoid the use of the Python built-in
+I/O ops.
+
+Instead, the `dl_manager` returns
+[pathlib-like](https://docs.python.org/3/library/pathlib.html) objects directly
+compatible with Google Cloud storage:
+
+```python
+path = dl_manager.download_and_extract('http://some-website/my_data.zip')
+
+json_path = path / 'data/file.json'
+
+json.loads(json_path.read_text())
+```
+
+Alternatively, use `tf.io.gfile` API instead of built-in for file operations:
 
 *   `open` -> `tf.io.gfile.GFile`
 *   `os.rename` -> `tf.io.gfile.rename`
 *   ...
+
+Pathlib should be prefered to `tf.io.gfile` (see
+[rational](https://www.tensorflow.org/datasets/common_gotchas#prefer_to_use_pathlib_api).
 
 #### Extra dependencies
 
@@ -416,7 +431,7 @@ This is done through `tfds.core.BuilderConfig`s:
     class MyDataset(tfds.core.GeneratorBasedBuilder):
       VERSION = tfds.core.Version('1.0.0')
       # pytype: disable=wrong-keyword-args
-      BUILDER_CONFIG = [
+      BUILDER_CONFIGS = [
           # `name` (and optionally `description`) are required for each config
           MyDatasetConfig(name='small', description='Small ...', img_size=(8, 8)),
           MyDatasetConfig(name='big', description='Big ...', img_size=(32, 32)),
