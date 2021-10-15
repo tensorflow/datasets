@@ -64,9 +64,9 @@ class PASS(tfds.core.GeneratorBasedBuilder):
                 'image': tfds.features.Image(shape=(None, None, 3)),      # the image
                 'image/creator_uname': tf.string,                         # the photographer/creator
                 'image/hash':tf.string,                                   # the hash, as computed from YFCC-100M
-                'image/gps_lon':tf.float,                                 # Longitude of image if existent, otw. NaN
-                'image/gps_lat':tf.float,                                 # Latitude of image if existent, otw. NaN
-                'image/date_taken': pd._libs.tslibs.timestamps.Timestamp, # datetime of image
+                'image/gps_lon':tfds.features.Tensor(shape=(1,), dtype=tf.float32),                                 # Longitude of image if existent, otw. NaN
+                'image/gps_lat':tfds.features.Tensor(shape=(1,), dtype=tf.float32),                                 # Latitude of image if existent, otw. NaN
+                'image/date_taken': tf.string, # datetime of image
             }),
             supervised_keys=None,
             homepage='https://www.robots.ox.ac.uk/~vgg/research/pass/',
@@ -104,6 +104,6 @@ class PASS(tfds.core.GeneratorBasedBuilder):
                     "image/hash": img_hash,
                     "image/gps_lon": meta['longitude'],
                     "image/gps_lat": meta['latitude'],
-                    "image/date_taken": pd.to_datetime(meta['datetime']),
+                    "image/date_taken": meta['datetime'],
                 }
                 yield i, record
