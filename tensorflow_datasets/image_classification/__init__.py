@@ -15,7 +15,6 @@
 
 """Image Classification datasets."""
 
-from tensorflow_datasets.image.pass_dataset import PASS
 from tensorflow_datasets.image_classification.beans import Beans
 from tensorflow_datasets.image_classification.bigearthnet import Bigearthnet
 from tensorflow_datasets.image_classification.binary_alpha_digits import BinaryAlphaDigits
