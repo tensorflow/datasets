@@ -17,7 +17,6 @@
 
 import tensorflow_datasets.public_api as tfds
 import tensorflow.compat.v2 as tf
-pd = tfds.core.lazy_imports.pandas
 
 _DESCRIPTION = """
 PASS is a large-scale image dataset that does not include any humans,
@@ -76,6 +75,7 @@ class PASS(tfds.core.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager: tfds.download.DownloadManager):
         """Returns SplitGenerators."""
+        pd = tfds.core.lazy_imports.pandas
         paths = dl_manager.download(_URLS)
         with tf.io.gfile.GFile(paths['meta_data']) as f:
             meta = pd.read_csv(f)
@@ -91,6 +91,7 @@ class PASS(tfds.core.GeneratorBasedBuilder):
 
     def _generate_examples(self, dl_manager, parts, meta):
         """Yields examples."""
+        pd = tfds.core.lazy_imports.pandas
         i = 0
         for part in parts:
             for fname, fobj in dl_manager.iter_archive(part):
