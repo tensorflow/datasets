@@ -65,6 +65,7 @@ def generate_examples(file_path: str):
   ]
   # is_first corresponds to the done flag delayed by one step.
   dataset_dict['is_first'] = [True] + done[:-1]
+  # is_last is not used but this is needed to build a valid dictionary.
   dataset_dict['is_last'] = done
 
   # Get step metadata
@@ -160,9 +161,8 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
       'is_first', 'is_last', 'observation', 'action', 'reward', 'discount'
   ]:
     episode[k] = steps[k][begin:end]
-  # In some cases, the episode ends with terminals = timeouts = False. However,
-  # We still want to signal that this is the last sep of an episode.
-  episode['is_last'][-1] = True
+
+  episode['is_last'] = [False] * (end - begin)
   episode['is_terminal'] = [False] * (end - begin)
   if 'infos' in steps.keys():
     episode['infos'] = {}
@@ -170,26 +170,45 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
       episode['infos'][k] = steps['infos'][k][begin:end]
 
   if steps['is_terminal'][end - 1]:
-    # If the step is terminal, then we propagate the information to a next
-    # state. This matches the definition in RLDS. See types.py.
+    # In HDF5, the terminal bit is associated with the previous observation.
+    # To comply with RLDS standard (see types.py), we propagate this information
+    # to a next state. This matches the definition in RLDS. See types.py.
     episode['is_first'] = np.concatenate((episode['is_first'], [False]))
-    # Observation, action and reward are dummy.
+    # In HDF5 datasets, the last observation is never recorded.
+    # In order to avoid discarding the last transition to the terminal state,
+    # we create a dummy observation set to zeros.
+    # Since no solution is perfect, the design choice was to keep as much
+    # information as possible and let the user decide to keep or ignore such
+    # transitions.
     episode['observation'] = np.concatenate(
         (episode['observation'], [np.zeros_like(steps['observation'][0])]))
+    # Action and reward are set to dummy values since not relevant.
+    # When IS_LAST is set, any field coming temporally after the last
+    # observation is invalid.
     episode['action'] = np.concatenate(
         (episode['action'], [np.zeros_like(steps['action'][0])]))
     episode['reward'] = np.concatenate(
         (episode['reward'], [np.zeros_like(steps['reward'][0])]))
+    # The discount of the previous step is set to 0 since we have a transition
+    # to a terminal state.
+    # The very last discount is set to a dummy value (0.0) since when IS_LAST
+    # is set, any field coming temporally after the last observation is invalid.
     episode['discount'][-1] = 0.0
     episode['discount'] = np.array(
         np.concatenate((episode['discount'], [0.0])), dtype=np.float32)
     episode['is_terminal'] = np.concatenate((episode['is_terminal'], [True]))
-    episode['is_last'][-1] = False
     episode['is_last'] = np.concatenate((episode['is_last'], [True]))
     if 'infos' in steps.keys():
       for k in steps['infos'].keys():
         episode['infos'][k] = np.concatenate(
             (episode['infos'][k], [np.zeros_like(steps['infos'][k][0])]))
+  else:
+    # Despite the fact that the last action and reward are valid in the
+    # stored dataset (in the final transition, [obs, action, reward, next_obs],
+    # only one step was stoted as [obs, action, reward], insted of adding one
+    # extra step with [next_obs, 0, 0]). We set IS_LAST=True so that
+    # it is consistent with other typical datasets.
+    episode['is_last'][-1] = True
   full_episode = {'steps': episode}
   if episode_metadata:
     full_episode.update(episode_metadata)
