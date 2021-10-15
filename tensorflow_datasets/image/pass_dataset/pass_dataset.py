@@ -104,6 +104,6 @@ class PASS(tfds.core.GeneratorBasedBuilder):
                     "image/hash": img_hash,
                     "image/gps_lon": meta['longitude'] if 'longitude' in meta else 0,
                     "image/gps_lat": meta['latitude']  if 'latitude' in meta else 0,
-                    "image/date_taken": meta['datetime'],
+                    "image/date_taken": meta['datetaken'],
                 }
                 yield i, record
