@@ -52,6 +52,7 @@ class PASS(tfds.core.GeneratorBasedBuilder):
 
     VERSION = tfds.core.Version('2.0.0')
     RELEASE_NOTES = {
+        '1.0.0': 'Initial release.',
         '2.0.0': 'v2: Removed 472 images from v1 as they contained humans. Also added metadata: datetaken and GPS. ',
     }
 
@@ -61,12 +62,12 @@ class PASS(tfds.core.GeneratorBasedBuilder):
             builder=self,
             description=_DESCRIPTION,
             features=tfds.features.FeaturesDict({
-                'image': tfds.features.Image(shape=(None, None, 3)),      # the image
-                'image/creator_uname': tf.string,                         # the photographer/creator
-                'image/hash':tf.string,                                   # the hash, as computed from YFCC-100M
-                'image/gps_lon':tfds.features.Tensor(shape=(1,), dtype=tf.float32),                                 # Longitude of image if existent, otw. NaN
-                'image/gps_lat':tfds.features.Tensor(shape=(1,), dtype=tf.float32),                                 # Latitude of image if existent, otw. NaN
-                'image/date_taken': tf.string, # datetime of image
+                'image': tfds.features.Image(shape=(None, None, 3)),                 # the image
+                'image/creator_uname': tfds.features.Text(),                         # the photographer/creator
+                'image/hash':tfds.features.Text(),                                   # the hash, as computed from YFCC-100M
+                'image/gps_lon':tfds.features.Tensor(shape=(), dtype=tf.float32),    # Longitude of image if existent, otw. NaN
+                'image/gps_lat':tfds.features.Tensor(shape=(), dtype=tf.float32),    # Latitude of image if existent, otw. NaN
+                'image/date_taken': tfds.features.Text(),                            # datetime of image
             }),
             supervised_keys=None,
             homepage='https://www.robots.ox.ac.uk/~vgg/research/pass/',
@@ -97,13 +98,13 @@ class PASS(tfds.core.GeneratorBasedBuilder):
             for fname, fobj in dl_manager.iter_archive(part):
                 i += 1
                 img_hash = fname.split('/')[-1].split('.')[0]
-                meta = meta.loc[img_hash]
+                img_meta = meta.loc[img_hash]
                 record = {
                     "image": fobj,
-                    "image/creator_uname": meta['unickname'],
+                    "image/creator_uname": img_meta['unickname'],
                     "image/hash": img_hash,
-                    "image/gps_lon": meta['longitude'] if 'longitude' in meta else 0,
-                    "image/gps_lat": meta['latitude']  if 'latitude' in meta else 0,
-                    "image/date_taken": meta['datetaken'],
+                    "image/gps_lon": img_meta['longitude'] if 'longitude' in img_meta else 0,
+                    "image/gps_lat": img_meta['latitude']  if 'latitude' in img_meta else 0,
+                    "image/date_taken": img_meta['datetaken'],
                 }
                 yield i, record
