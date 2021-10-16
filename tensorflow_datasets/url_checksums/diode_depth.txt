@@ -1,0 +1,5 @@
+
+http://diode-dataset.s3.amazonaws.com/train.tar.gz 	86747209190	3a94632398fe1d002d89f11743f748b1	train.tar.gz
+
+http://diode-dataset.s3.amazonaws.com/val.tar.gz 	2774625282	5c895d09201b88973c8fe4552a67dd85	val.tar.gz
+
