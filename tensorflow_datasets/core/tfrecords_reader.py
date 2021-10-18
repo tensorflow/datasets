@@ -64,7 +64,7 @@ _SUB_SPEC_RE = re.compile(
 _SLICE_RE = re.compile(
     r"""^
     (
-        (?P<val>-?\d+)
+        (?P<val>-?[\d_]+)
         (?P<unit>(?:%|shard))?
     )?
     $""",

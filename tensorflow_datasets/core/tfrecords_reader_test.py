@@ -249,6 +249,9 @@ class ReadInstructionTest(testing.TestCase):
     # Empty:
     # Slices resulting in empty datasets are valid with 'closest' rounding:
     self.check_from_spec('validation[:1%]', [('validation', None, 0)])
+    # New integer syntax
+    self.check_from_spec('train[4_2:9_9]', [('train', 42, 99)])
+    self.check_from_spec('train[:1_0%]', [('train', None, 20)])
 
     # Supports splits with '-' in name.
     ri = self.check_from_spec('dev-train', [('dev-train', None, None)])
