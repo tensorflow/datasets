@@ -181,7 +181,8 @@ class Shuffler(object):
     self._disable_shuffling = disable_shuffling
     self._buckets = []
     for i in range(BUCKETS_NUMBER):
-      path = os.path.join(dirpath, 'bucket_%s_%03d.tmp' % (grp_name, i))
+      bucket_name = 'bucket_%s_%03d.tmp' % (grp_name, i)
+      path = os.path.join(dirpath, bucket_name)
       self._buckets.append(_Bucket(path))
     self._read_only = False
     self._total_bytes = 0
