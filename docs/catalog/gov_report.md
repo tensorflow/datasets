@@ -193,7 +193,7 @@ $(document).ready(() => {
 
 *   **Config description**: CRS report with summary. Structures flattened and
     joined by newline while add html tags. Tags are only added for
-    secition_title in a format like <h2>xxx<h2>.
+    secition_title in a format like `<h2>xxx<h2>`.
 
 *   **Dataset size**: `351.25 MiB`
 
@@ -259,7 +259,7 @@ $(document).ready(() => {
 
 *   **Config description**: GAO report with highlight Structures flattened and
     joined by newline while add html tags. Tags are only added for
-    secition_title in a format like <h2>xxx<h2>.
+    secition_title in a format like `<h2>xxx<h2>`.
 
 *   **Dataset size**: `692.72 MiB`
 
