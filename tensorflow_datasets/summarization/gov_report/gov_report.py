@@ -56,9 +56,9 @@ _GAO_ADDITIONAL_KEYS = ("url", "fastfact", "published_date")
 _STYLE_DESCRIPTIONS = {
     "whitespace": "Structures flattened and joined by whitespace. "
                   "This is the format used by original paper",
-    "html":
-        "Structures flattened and joined by newline while add html tags. "
-        "Tags are only added for secition_title in a format like <h2>xxx<h2>.",
+    "html": "Structures flattened and joined by newline while add html tags. "
+            "Tags are only added for secition_title in a format like "
+            "`<h2>xxx<h2>`.",
     "json": "Structures represented as raw json.",
 }
 
