@@ -184,6 +184,10 @@ class DatasetInfo(object):
     return self.as_proto.name
 
   @property
+  def config_name(self):
+    return self.as_proto.config_name
+
+  @property
   def full_name(self):
     """Full canonical name: (<dataset_name>/<config_name>/<version>)."""
     names = [self._builder.name]
