@@ -116,6 +116,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`deep_weeds`](deep_weeds.md)
 *   [`diabetic_retinopathy_detection`](diabetic_retinopathy_detection.md)
 *   [`dmlab`](dmlab.md)
+*   [`domainnet`](domainnet.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dtd`](dtd.md)
 *   [`emnist`](emnist.md)
 *   [`eurosat`](eurosat.md)

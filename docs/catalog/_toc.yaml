@@ -165,6 +165,9 @@ toc:
     title: diabetic_retinopathy_detection (manual)
   - path: /datasets/catalog/dmlab
     title: dmlab
+  - path: /datasets/catalog/domainnet
+    status: nightly
+    title: domainnet
   - path: /datasets/catalog/dtd
     title: dtd
   - path: /datasets/catalog/emnist
