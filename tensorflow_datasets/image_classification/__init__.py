@@ -38,6 +38,7 @@ from tensorflow_datasets.image_classification.cycle_gan import CycleGAN
 from tensorflow_datasets.image_classification.deep_weeds import DeepWeeds
 from tensorflow_datasets.image_classification.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
 from tensorflow_datasets.image_classification.dmlab import Dmlab
+from tensorflow_datasets.image_classification.domainnet import Domainnet
 from tensorflow_datasets.image_classification.dtd import Dtd
 from tensorflow_datasets.image_classification.eurosat import Eurosat
 from tensorflow_datasets.image_classification.flowers import TFFlowers
