@@ -18,13 +18,12 @@
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _DESCRIPTION = """
 PASS is a large-scale image dataset that does not include any humans,
 human parts, or other personally identifiable information.
 It that can be used for high-quality self-supervised pretraining while significantly reducing privacy concerns.
 
-PASS contains 1.440.191 images without any labels sourced from YFCC-100M.
+PASS contains 1,439,719 images without any labels sourced from YFCC-100M.
 
 All images in this dataset are licenced under the CC-BY licence, as is the dataset itself.
 For YFCC-100M see  http://www.multimediacommons.org/.
@@ -42,21 +41,25 @@ year = "2021"
 _URLS = {
     'train_images': [
         tfds.download.Resource(  # pylint:disable=g-complex-comprehension
-            url=f'https://zenodo.org/record/5528345/files/PASS.{i}.tar',
-            extract_method=tfds.download.ExtractMethod.TAR) for i in range(10)
+            url='https://zenodo.org/record/5570664/files/PASS.%s.tar' % i_,
+            extract_method=tfds.download.ExtractMethod.TAR)
+        for i_ in '0123456789'
     ],
     'meta_data':
         tfds.download.Resource(
-            url='https://zenodo.org/record/5528345/files/pass_metadata.csv')
+            url='https://zenodo.org/record/5570664/files/pass_metadata.csv')
 }
 
 
 class PASS(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for pass dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('2.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '2.0.0':
+          'v2: Removed 472 images from v1 as they contained humans. Also added'
+          ' metadata: datetaken and GPS. ',
   }
 
   def _info(self):
@@ -65,8 +68,19 @@ class PASS(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'image': tfds.features.Image(shape=(None, None, 3)),
-            'image/creator_uname': tf.string,
+            'image': tfds.features.Image(shape=(None, None, 3)),  # The image.
+            'image/creator_uname':
+                tfds.features.Text(),  # The photographer/creator.
+            'image/hash':
+                tfds.features.Text(),  # The hash, as computed from YFCC-100M.
+            'image/gps_lon': tfds.features.Tensor(
+                shape=(),
+                dtype=tf.float32),  # Longitude of image if existent, otw. NaN.
+            'image/gps_lat': tfds.features.Tensor(
+                shape=(),
+                dtype=tf.float32),  # Latitude of image if existent, otw. NaN.
+            'image/date_taken': tfds.features.Text(
+            ),  # Datetime of image if not NaN, else empty string.
         }),
         supervised_keys=None,
         homepage='https://www.robots.ox.ac.uk/~vgg/research/pass/',
@@ -76,15 +90,17 @@ class PASS(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     pd = tfds.core.lazy_imports.pandas
-
     paths = dl_manager.download(_URLS)
     with tf.io.gfile.GFile(paths['meta_data']) as f:
       meta = pd.read_csv(f)
-    meta = {m[1]['hash']: m[1]['unickname'] for m in meta.iterrows()}
-    return {
-        'train':
-            self._generate_examples(dl_manager, paths['train_images'], meta)
-    }
+    meta = meta.set_index('hash')
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs=dict(
+                parts=paths['train_images'], meta=meta, dl_manager=dl_manager),
+        )
+    ]
 
   def _generate_examples(self, dl_manager, parts, meta):
     """Yields examples."""
@@ -92,8 +108,22 @@ class PASS(tfds.core.GeneratorBasedBuilder):
     for part in parts:
       for fname, fobj in dl_manager.iter_archive(part):
         i += 1
+        img_hash = fname.split('/')[-1].split('.')[0]
+        img_meta = meta.loc[img_hash]
+
         record = {
-            'image': fobj,
-            'image/creator_uname': meta[fname.split('/')[-1].split('.')[0]]
+            'image':
+                fobj,
+            'image/creator_uname':
+                img_meta['unickname'],
+            'image/hash':
+                img_hash,
+            'image/gps_lon':
+                img_meta['longitude'] if 'longitude' in img_meta else 0,
+            'image/gps_lat':
+                img_meta['latitude'] if 'latitude' in img_meta else 0,
+            'image/date_taken':
+                img_meta['datetaken']
+                if img_meta['datetaken'] == img_meta['datetaken'] else ''
         }
         yield i, record
