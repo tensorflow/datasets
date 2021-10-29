@@ -306,5 +306,5 @@ def _parse_filename(filename: str) -> Optional['re.Match']:  # pytype: disable=m
   """Parse the tf-record filename."""
   pattern = (rf'(?P<dataset_name>{_NAME_CLASS})-(?P<split>\w+)\.'
              r'(?P<filetype_suffix>\w+)-'
-             r'(?P<shard_index>\d\d\d\d\d)-of-(?P<num_shards>\d\d\d\d\d)')
+             r'(?P<shard_index>\d{5,})-of-(?P<num_shards>\d{5,})')
   return re.fullmatch(pattern, filename)

@@ -239,7 +239,7 @@ def test_naming_sorted():
   ]
 
 
-def test_filename_info():
+def test_filename_info_with_small_shard_num():
   filename = 'mnist-test.tfrecord-00000-of-00001'
   assert naming.FilenameInfo.is_valid(filename)
   file_info = naming.FilenameInfo.from_str(filename)
@@ -249,6 +249,18 @@ def test_filename_info():
   assert file_info.filetype_suffix == 'tfrecord'
   assert file_info.shard_index == 0
   assert file_info.num_shards == 1
+
+
+def test_filename_info_with_huge_shard_num():
+  filename = 'web_image_text-full.tfrecord-56234-of-104448'
+  assert naming.FilenameInfo.is_valid(filename)
+  file_info = naming.FilenameInfo.from_str(filename)
+  assert str(file_info) == filename
+  assert file_info.dataset_name == 'web_image_text'
+  assert file_info.split == 'full'
+  assert file_info.filetype_suffix == 'tfrecord'
+  assert file_info.shard_index == 56234
+  assert file_info.num_shards == 104448
 
 
 @pytest.mark.parametrize(
