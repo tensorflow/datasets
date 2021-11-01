@@ -294,3 +294,53 @@ def test_mocking_rlu_nested_dataset(mock_data):
           'is_terminal', 'observation', 'reward'
       }
       assert steps_ex['observation'].shape == (84, 84, 1)
+
+
+def get_steps(data, window_size=4):
+  """Extract the steps dataset and create out of it a window datset."""
+  episode_ds = data['steps']
+  episode_ds = episode_ds.window(window_size, drop_remainder=True)
+  return episode_ds
+
+
+def test_mocking_rlu_nested_dataset_with_map(mock_data):
+  """Test of a nested dataset with map.
+
+  In this test we use the dataset rlu_atari.
+  The dataset has features as in test_mocking_rlu_nested_dataset.
+
+  Args:
+    mock_data: the stream of mock data points.
+  """
+
+  with mock_data(num_examples=3):
+    ds = tfds.load('rlu_atari/Pong_run_1', split='train').repeat()
+
+    # The commented test below differs only in using flat_map instead of map.
+    ds_flat_steps = ds.map(get_steps)
+    ds_flat_steps = iter(ds_flat_steps)
+    obs_rew_act = next(ds_flat_steps)
+    assert obs_rew_act.element_spec['observation'] == tf.data.DatasetSpec(
+        tf.TensorSpec(shape=(84, 84, 1), dtype=tf.uint8), tf.TensorShape([]))
+
+
+# def test_mocking_rlu_nested_dataset_with_flat_map(mock_data):
+#   """Test of a nested dataset.
+
+#   In this test we use the dataset rlu_atari.
+#   The dataset has features as in test_mocking_rlu_nested_dataset.
+
+#   Args:
+#     mock_data: the stream of mock data points.
+#   """
+#   # The mocked variant hangs.
+#   with mock_data(num_examples=3):
+#     ds = tfds.load('rlu_atari/Pong_run_1', split='train').repeat()
+#     ds_flat_steps = ds.flat_map(get_steps)
+#     ds_flat_steps = iter(ds_flat_steps)
+#     obs_rew_act = next(ds_flat_steps)
+#     # Notice, that the main difference is that we take
+#     # obs_rew_act['observation'] instead of
+#     # obs_rew_act.element_spec['observation'] in the previous test.
+#     assert obs_rew_act['observation'].element_spec == tf.TensorSpec(
+#         shape=(84, 84, 1), dtype=tf.uint8)
