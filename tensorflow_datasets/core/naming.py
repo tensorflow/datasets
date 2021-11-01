@@ -298,8 +298,12 @@ class FilenameInfo:
     return bool(_parse_filename(filename))
 
   def __str__(self) -> str:
-    return (f'{self.dataset_name}-{self.split}.{self.filetype_suffix}-'
-            f'{self.shard_index:05}-of-{self.num_shards:05}')
+    # Note: It's possible for `shard_index` and `num_shards` to exceed 5 digits,
+    # e.g., "000123-of-654321", "123456-of-654321".
+    num_digits = max(5, len(str(self.num_shards)))
+    return (
+        f'{self.dataset_name}-{self.split}.{self.filetype_suffix}-'
+        f'{self.shard_index:0{num_digits}}-of-{self.num_shards:0{num_digits}}')
 
 
 def _parse_filename(filename: str) -> Optional['re.Match']:  # pytype: disable=module-attr

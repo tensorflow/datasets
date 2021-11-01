@@ -252,15 +252,19 @@ def test_filename_info_with_small_shard_num():
 
 
 def test_filename_info_with_huge_shard_num():
-  filename = 'web_image_text-full.tfrecord-56234-of-104448'
-  assert naming.FilenameInfo.is_valid(filename)
-  file_info = naming.FilenameInfo.from_str(filename)
-  assert str(file_info) == filename
-  assert file_info.dataset_name == 'web_image_text'
-  assert file_info.split == 'full'
-  assert file_info.filetype_suffix == 'tfrecord'
-  assert file_info.shard_index == 56234
-  assert file_info.num_shards == 104448
+  filenames = [
+      'web_image_text-full.tfrecord-056234-of-104448',
+      'web_image_text-full.tfrecord-56234-of-104448',  # backward compatible
+  ]
+  for filename in filenames:
+    assert naming.FilenameInfo.is_valid(filename)
+    file_info = naming.FilenameInfo.from_str(filename)
+    assert str(file_info) == filenames[0]
+    assert file_info.dataset_name == 'web_image_text'
+    assert file_info.split == 'full'
+    assert file_info.filetype_suffix == 'tfrecord'
+    assert file_info.shard_index == 56234
+    assert file_info.num_shards == 104448
 
 
 @pytest.mark.parametrize(
