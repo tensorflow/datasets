@@ -93,16 +93,23 @@ def _load_builder(name: str,) -> Optional[BuilderToDocument]:
 
 def _load_builder_from_location(name: str,) -> Optional[BuilderToDocument]:
   """Load the builder, config,... to document."""
-  namespace = tfds.core.utils.DatasetName(name).namespace
+  dataset_name = tfds.core.utils.DatasetName(name)
+  logging.info(f'Loading builder {dataset_name} from location')
   try:
     builder = tfds.builder(name)
-  except tfds.core.DatasetNotFoundError:
+    logging.debug(f'Loaded builder from location: {builder}')
+  except tfds.core.DatasetNotFoundError as e:
+    logging.info(
+        f'Dataset {dataset_name} not found, will now try to load from sub-folder',
+        exc_info=e)
     # If tfds.core.DatasetNotFoundError, it might be the default
-    # config isn't found. Should try to load a sub-folder (to check ).
+    # config isn't found. Should try to load a sub-folder (to check).
     builder = _maybe_load_config(name)
     if not builder:
-      return builder
-  except tf.errors.PermissionDeniedError:
+      logging.error(f'Dataset {dataset_name} not found', exc_info=e)
+      return None
+  except tf.errors.PermissionDeniedError as e:
+    logging.error(f'Permission denied for {dataset_name}', exc_info=e)
     tqdm.tqdm.write(f'Warning: Skip dataset {name} due to permission error')
     return None
   except Exception as e:  # pylint: disable=broad-except
@@ -113,8 +120,8 @@ def _load_builder_from_location(name: str,) -> Optional[BuilderToDocument]:
   else:
     config_builders = []
   return BuilderToDocument(
-      section=namespace,
-      namespace=namespace,
+      section=dataset_name.namespace,
+      namespace=dataset_name.namespace,
       builder=builder,
       config_builders=config_builders,
   )
@@ -213,6 +220,8 @@ def _document_single_builder_inner(
   tqdm.tqdm.write(f'Document builder {name}...')
   doc_info = _load_builder(name)
   if doc_info is None:
+    logging.warn(
+        f'No doc info was found for document builder {name}. Skipping.')
     return None
 
   out_str = dataset_markdown_builder.get_markdown_string(
