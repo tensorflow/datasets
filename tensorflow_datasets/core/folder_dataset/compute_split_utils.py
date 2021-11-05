@@ -20,7 +20,7 @@ import functools
 import itertools
 import os
 import pprint
-from typing import Dict, List, Optional, Type
+from typing import cast, Dict, List, Optional, Type
 
 import dataclasses
 from tensorflow_datasets.core import file_adapters
