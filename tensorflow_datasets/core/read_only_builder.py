@@ -55,6 +55,8 @@ class ReadOnlyBuilder(
     info_proto = dataset_info.read_from_json(info_path)
     self.name = info_proto.name
     self.VERSION = version_lib.Version(info_proto.version)  # pylint: disable=invalid-name
+    release_notes = info_proto.release_notes or {}
+    self.RELEASE_NOTES = release_notes  # pylint: disable=invalid-name
     if info_proto.module_name:
       # Overwrite the module so documenting `ReadOnlyBuilder` point to the
       # original source code.
@@ -64,6 +66,7 @@ class ReadOnlyBuilder(
           name=info_proto.config_name,
           description=info_proto.config_description,
           version=info_proto.version or None,
+          release_notes=release_notes,
       )
     else:
       builder_config = None

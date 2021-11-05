@@ -143,6 +143,7 @@ class DatasetInfo(object):
         name=builder.name,
         description=utils.dedent(description),
         version=str(builder.version),
+        release_notes=builder.release_notes,
         disable_shuffling=disable_shuffling,
         config_name=config_name,
         config_description=config_description,
@@ -203,6 +204,10 @@ class DatasetInfo(object):
   @property
   def version(self):
     return self._builder.version
+
+  @property
+  def release_notes(self) -> Optional[Dict[str, str]]:
+    return self._builder.release_notes
 
   @property
   def disable_shuffling(self) -> bool:

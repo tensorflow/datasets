@@ -111,6 +111,12 @@ class DatasetInfoTest(testing.TestCase):
     self.assertEqual(info.module_name, "tensorflow_datasets.testing.test_utils")
     self.assertEqual(False, info.disable_shuffling)
 
+    self.assertEqual(info.version, utils.Version("1.0.0"))
+    self.assertEqual(info.release_notes, {
+        "1.0.0": "Release notes 1.0.0",
+        "2.0.0": "Release notes 2.0.0"
+    })
+
   def test_disable_shuffling(self):
     info = dataset_info.DatasetInfo(
         builder=self._builder, disable_shuffling=True)
@@ -216,6 +222,11 @@ class DatasetInfoTest(testing.TestCase):
       # Even though restored_info has been restored, informations defined in
       # the code overwrite informations from the json file.
       self.assertEqual(restored_info.description, "A description")
+      self.assertEqual(restored_info.version, utils.Version("1.0.0"))
+      self.assertEqual(restored_info.release_notes, {
+          "1.0.0": "Release notes 1.0.0",
+          "2.0.0": "Release notes 2.0.0"
+      })
       self.assertEqual(restored_info.supervised_keys,
                        ("input (new)", "output (new)"))
       self.assertEqual(restored_info.homepage, "http://some-location-new")

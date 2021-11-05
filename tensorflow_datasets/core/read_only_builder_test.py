@@ -43,11 +43,13 @@ class DummyConfigMnist(testing.DummyDataset):
       dataset_builder.BuilderConfig(
           name='dummy_config',
           version='0.1.0',
+          release_notes={'0.1.0': 'Release notes 0.1.0'},
           description='testing config',
       ),
       dataset_builder.BuilderConfig(
           name='dummy_config2',
           version='0.1.0',
+          release_notes={'0.1.0': 'Release notes 0.1.0'},
           description='testing config',
       ),
   ]
@@ -153,6 +155,7 @@ def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
   assert builder.info.full_name == code_builder.info.full_name
   assert repr(builder.info) == repr(code_builder.info)
   assert builder.VERSION == code_builder.info.version
+  assert builder.RELEASE_NOTES == code_builder.info.release_notes
   assert builder.__module__ == type(code_builder).__module__
   assert read_only_builder.ReadOnlyBuilder.VERSION is None
 

@@ -293,6 +293,10 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 
   VERSION = utils.Version('1.0.0')
+  RELEASE_NOTES = {
+      '1.0.0': 'Release notes 1.0.0',
+      '2.0.0': 'Release notes 2.0.0'
+  }
   SUPPORTED_VERSIONS = [
       '2.0.0',
       '0.0.9',

@@ -80,6 +80,9 @@ message DatasetInfo {
   // Version string of the dataset (ex: '1.0.5')
   string version = 9;
 
+  // Release notes of the dataset
+  map<string, string> release_notes = 18;
+
   // Config name of the dataset
   string config_name = 13;
 
@@ -127,5 +130,5 @@ message DatasetInfo {
   // Use string to allow format extension without regenerating the proto.
   string file_format = 17;
 
-  // Next available: 18
+  // Next available: 19
 }
