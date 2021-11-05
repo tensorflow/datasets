@@ -35,9 +35,14 @@ metadata.
 """
 
 _CITATION = """
- @misc{google-research, title={RLDS},
- url={https://github.com/google-research/rlds}, journal={GitHub},
- author={S. Ramos, S. Girgin et al.}}
+@misc{ramos2021rlds,
+      title={RLDS: an Ecosystem to Generate, Share and Use Datasets in Reinforcement Learning},
+      author={Sabela Ramos and Sertan Girgin and Léonard Hussenot and Damien Vincent and Hanna Yakubovich and Daniel Toyama and Anita Gergely and Piotr Stanczyk and Raphael Marinier and Jeremiah Harmsen and Olivier Pietquin and Nikola Momchev},
+      year={2021},
+      eprint={2111.02767},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
 """
 
 _HOMEPAGE = 'https://github.com/google-research/rlds'
