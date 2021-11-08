@@ -93,33 +93,45 @@ _ADROIT_BODY_POS_KEYS = {
 _ALGORITHM = 'algorithm'
 _ITERATION = 'iteration'
 
+# Data description
+_MUJOCO_DESCRIPTION = ('See more details about the task and its versions in '
+                       'https://github.com/rail-berkeley/d4rl/wiki/Tasks#gym')
+_ADROIT_DESCRIPTION = (
+    'See more details about the task and its versions in '
+    'https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit')
+
 # pytype: disable=wrong-keyword-args
 MUJOCO_BUILDER_CONFIGS = [
     BuilderConfig(
         name='v0-expert',
         dataset_dir='gym_mujoco',
         env='mujoco',
-        file_suffix='_expert'),
+        file_suffix='_expert',
+        description=_MUJOCO_DESCRIPTION),
     BuilderConfig(
         name='v0-medium',
         dataset_dir='gym_mujoco',
         env='mujoco',
-        file_suffix='_medium'),
+        file_suffix='_medium',
+        description=_MUJOCO_DESCRIPTION),
     BuilderConfig(
         name='v0-medium-expert',
         dataset_dir='gym_mujoco',
         env='mujoco',
-        file_suffix='_medium_expert'),
+        file_suffix='_medium_expert',
+        description=_MUJOCO_DESCRIPTION),
     BuilderConfig(
         name='v0-mixed',
         dataset_dir='gym_mujoco',
         env='mujoco',
-        file_suffix='_mixed'),
+        file_suffix='_mixed',
+        description=_MUJOCO_DESCRIPTION),
     BuilderConfig(
         name='v0-random',
         dataset_dir='gym_mujoco',
         env='mujoco',
-        file_suffix='_random'),
+        file_suffix='_random',
+        description=_MUJOCO_DESCRIPTION),
     BuilderConfig(
         name='v1-expert',
         dataset_dir='gym_mujoco_v1',
@@ -129,7 +141,8 @@ MUJOCO_BUILDER_CONFIGS = [
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
-        policy_size=256),
+        policy_size=256,
+        description=_MUJOCO_DESCRIPTION),
     BuilderConfig(
         name='v1-medium',
         dataset_dir='gym_mujoco_v1',
@@ -139,13 +152,15 @@ MUJOCO_BUILDER_CONFIGS = [
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
-        policy_size=256),
+        policy_size=256,
+        description=_MUJOCO_DESCRIPTION),
     BuilderConfig(
         name='v1-medium-expert',
         dataset_dir='gym_mujoco_v1',
         env='mujoco',
         file_suffix='_medium_expert-v1',
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
+        description=_MUJOCO_DESCRIPTION,
     ),
     BuilderConfig(
         name='v1-medium-replay',
@@ -155,6 +170,7 @@ MUJOCO_BUILDER_CONFIGS = [
         float_type=tf.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
+        description=_MUJOCO_DESCRIPTION,
     ),
     BuilderConfig(
         name='v1-full-replay',
@@ -164,6 +180,7 @@ MUJOCO_BUILDER_CONFIGS = [
         float_type=tf.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
+        description=_MUJOCO_DESCRIPTION,
     ),
     BuilderConfig(
         name='v1-random',
@@ -171,6 +188,7 @@ MUJOCO_BUILDER_CONFIGS = [
         env='mujoco',
         file_suffix='_random-v1',
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
+        description=_MUJOCO_DESCRIPTION,
     ),
     BuilderConfig(
         name='v2-expert',
@@ -181,7 +199,8 @@ MUJOCO_BUILDER_CONFIGS = [
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
-        policy_size=256),
+        policy_size=256,
+        description=_MUJOCO_DESCRIPTION),
     BuilderConfig(
         name='v2-full-replay',
         dataset_dir='gym_mujoco_v2',
@@ -190,6 +209,7 @@ MUJOCO_BUILDER_CONFIGS = [
         float_type=tf.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
+        description=_MUJOCO_DESCRIPTION,
     ),
     BuilderConfig(
         name='v2-medium',
@@ -200,13 +220,15 @@ MUJOCO_BUILDER_CONFIGS = [
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
-        policy_size=256),
+        policy_size=256,
+        description=_MUJOCO_DESCRIPTION),
     BuilderConfig(
         name='v2-medium-expert',
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium_expert-v2',
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
+        description=_MUJOCO_DESCRIPTION,
     ),
     BuilderConfig(
         name='v2-medium-replay',
@@ -216,6 +238,7 @@ MUJOCO_BUILDER_CONFIGS = [
         float_type=tf.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
+        description=_MUJOCO_DESCRIPTION,
     ),
     BuilderConfig(
         name='v2-random',
@@ -223,6 +246,7 @@ MUJOCO_BUILDER_CONFIGS = [
         env='mujoco',
         file_suffix='_random-v2',
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
+        description=_MUJOCO_DESCRIPTION,
     ),
 ]
 ADROIT_BUILDER_CONFIGS = [
@@ -232,6 +256,7 @@ ADROIT_BUILDER_CONFIGS = [
         env='adroit',
         file_suffix='-v0_demos_clipped',
         step_metadata_keys=frozenset([_QPOS, _QVEL]),
+        description=_ADROIT_DESCRIPTION,
     ),
     BuilderConfig(
         name='v0-cloned',
@@ -240,6 +265,7 @@ ADROIT_BUILDER_CONFIGS = [
         file_suffix='-demos-v0-bc-combined',
         float_type=tf.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL]),
+        description=_ADROIT_DESCRIPTION,
     ),
     BuilderConfig(
         name='v0-expert',
@@ -248,6 +274,7 @@ ADROIT_BUILDER_CONFIGS = [
         file_suffix='-v0_expert_clipped',
         step_metadata_keys=frozenset(
             [_QPOS, _QVEL, _ACTION_MEAN, _ACTION_LOGSTD]),
+        description=_ADROIT_DESCRIPTION,
     ),
     BuilderConfig(
         name='v1-human',
@@ -255,6 +282,7 @@ ADROIT_BUILDER_CONFIGS = [
         env='adroit',
         file_suffix='-human-v1',
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ADROIT_BODY_POS]),
+        description=_ADROIT_DESCRIPTION,
     ),
     BuilderConfig(
         name='v1-cloned',
@@ -266,6 +294,7 @@ ADROIT_BUILDER_CONFIGS = [
         has_policy_metadata=True,
         has_policy_last_fc_log_std=False,
         policy_size=256,
+        description=_ADROIT_DESCRIPTION,
     ),
     BuilderConfig(
         name='v1-expert',
@@ -278,6 +307,7 @@ ADROIT_BUILDER_CONFIGS = [
         has_policy_metadata=True,
         has_policy_last_fc_log_std=True,
         policy_size=32,
+        description=_ADROIT_DESCRIPTION,
     ),
 ]
 # pytype: enable=wrong-keyword-args
