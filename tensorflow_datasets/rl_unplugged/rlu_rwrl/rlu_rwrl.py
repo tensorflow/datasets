@@ -337,7 +337,7 @@ class RluRwrl(rlu_common.RLUBuilder):
 
   def num_shards(self):
     try:
-      return self._SHARDS  # For testing.
+      return self._SHARDS  # For testing.  # type: ignore
     except AttributeError:
       pass
     domain = self.builder_config.domain

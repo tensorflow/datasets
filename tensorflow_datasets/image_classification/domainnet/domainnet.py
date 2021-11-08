@@ -122,6 +122,9 @@ class Domainnet(tfds.core.GeneratorBasedBuilder):
 
   _BASE_URL = 'http://csr.bu.edu/ftp/visda/2019/multi-source'
 
+  img_path: Any
+  splits: Dict[str, Any]
+
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     return tfds.core.DatasetInfo(

@@ -60,7 +60,8 @@ NUM_TRAIN_EXAMPLES = 2238
 NestedDict = Dict[str, Any]
 
 
-def _convert_bbox(box: List[float], height: int, width: int) -> List[float]:
+def _convert_bbox(box: List[float], height: int,
+                  width: int) -> tfds.features.BBox:
   """Converts bbox from coco x,y,w,h to xmin, ymin, xmax, ymax tfds format."""
   return tfds.features.BBox(
       xmin=box[0] / width,

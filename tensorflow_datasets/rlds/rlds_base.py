@@ -49,10 +49,10 @@ class DatasetConfig(tfds.core.BuilderConfig):
   overall_description: str = ''
   homepage: str = ''
   citation: str = ''
-  observation_info: tfds.features.FeatureConnector = None
-  action_info: tfds.features.FeatureConnector = None
-  reward_info: tfds.features.FeatureConnector = None
-  discount_info: tfds.features.FeatureConnector = None
+  observation_info: Optional[tfds.typing.FeatureConnectorArg] = None
+  action_info: Optional[tfds.features.FeatureConnector] = None
+  reward_info: Optional[tfds.features.FeatureConnector] = None
+  discount_info: Optional[tfds.features.FeatureConnector] = None
   step_metadata_info: Optional[Dict[str, tfds.features.FeatureConnector]] = None
   episode_metadata_info: Optional[Dict[str,
                                        tfds.features.FeatureConnector]] = None

@@ -80,7 +80,7 @@ class Booksum(tfds.core.GeneratorBasedBuilder):
       "1.0.0": "Initial release.",
   }
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
-  1) Go to https://github.com/salesforce/booksum, and run steps 1-3. Place the 
+  1) Go to https://github.com/salesforce/booksum, and run steps 1-3. Place the
      whole `booksum` git project in the manual folder.
   2) Download the chapterized books from https://storage.cloud.google.com/sfr-books-dataset-chapters-research/all_chapterized_books.zip
      and unzip to the manual folder.
@@ -120,40 +120,42 @@ class Booksum(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _split_generators(
-      self, dl_manager: tfds.download.DownloadManager
-  ):
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     granularity = self._builder_config.granularity
     alignments_base_path = os.path.join(
         dl_manager.manual_dir, "booksum", "alignments",
         f"{granularity}-level-summary-alignments")
     return {
-        "train": self._generate_examples(
-            alignments_path=os.path.join(
-                alignments_base_path,
-                _SPLIT_FILENAMES[granularity]["train"]),
-            base_path=dl_manager.manual_dir,
-            granularity=granularity),
-        "validation": self._generate_examples(
-            alignments_path=os.path.join(
-                alignments_base_path,
-                _SPLIT_FILENAMES[granularity]["validation"]),
-            base_path=dl_manager.manual_dir,
-            granularity=granularity),
-        "test": self._generate_examples(
-            alignments_path=os.path.join(
-                alignments_base_path,
-                _SPLIT_FILENAMES[granularity]["test"]),
-            base_path=dl_manager.manual_dir,
-            granularity=granularity),
+        "train":
+            self._generate_examples(
+                alignments_path=os.path.join(
+                    alignments_base_path,
+                    _SPLIT_FILENAMES[granularity]["train"]),
+                base_path=dl_manager.manual_dir,
+                granularity=granularity),
+        "validation":
+            self._generate_examples(
+                alignments_path=os.path.join(
+                    alignments_base_path,
+                    _SPLIT_FILENAMES[granularity]["validation"]),
+                base_path=dl_manager.manual_dir,
+                granularity=granularity),
+        "test":
+            self._generate_examples(
+                alignments_path=os.path.join(
+                    alignments_base_path,
+                    _SPLIT_FILENAMES[granularity]["test"]),
+                base_path=dl_manager.manual_dir,
+                granularity=granularity),
     }
 
-  def _generate_examples(self,
-                         alignments_path: Text,
-                         base_path: Text,
-                         granularity: Text,
-                        ) -> Iterator[Tuple[Text, Dict[Text, Text]]]:
+  def _generate_examples(
+      self,
+      alignments_path: tfds.typing.PathLike,
+      base_path: tfds.typing.PathLike,
+      granularity: Text,
+  ) -> Iterator[Tuple[Text, Dict[Text, Text]]]:
     """Yields examples."""
     with tf.io.gfile.GFile(alignments_path, "r") as f:
       for i, line in enumerate(f.read().strip().splitlines()):
@@ -176,5 +178,3 @@ class Booksum(tfds.core.GeneratorBasedBuilder):
             _DOCUMENT: input_text,
             _SUMMARY: summary_text,
         }
-
-

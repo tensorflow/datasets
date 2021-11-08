@@ -24,7 +24,7 @@ import multiprocessing
 import os
 import tarfile
 import typing
-from typing import Iterator, Tuple
+from typing import Iterator, Tuple, Union
 import uuid
 import zipfile
 
@@ -228,7 +228,7 @@ _EXTRACT_METHODS = {
 
 
 def iter_archive(
-    path: utils.PathLike,
+    path: Union[utils.PathLike, typing.BinaryIO],
     method: resource_lib.ExtractMethod,
 ) -> Iterator[Tuple[str, typing.BinaryIO]]:
   """Iterate over an archive.

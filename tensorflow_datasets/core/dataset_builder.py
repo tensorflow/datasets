@@ -79,7 +79,8 @@ class BuilderConfig:
   name: str
   version: Optional[VersionOrStr] = None
   release_notes: Optional[Dict[str, str]] = None
-  supported_versions: List[str] = dataclasses.field(default_factory=list)
+  supported_versions: List[VersionOrStr] = dataclasses.field(
+      default_factory=list)
   description: Optional[str] = None
 
 

@@ -15,6 +15,8 @@
 
 """Module including definitions for all RLU datasets."""
 
+import os
+
 from typing import Any, Dict, Generator, List, Tuple
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -34,7 +36,7 @@ _HOMEPAGE = 'https://github.com/deepmind/deepmind-research/tree/master/rl_unplug
 
 def get_files(prefix: str, num_shards: int) -> List[str]:
   return [
-      tfds.core.as_path(f'{prefix}-{i:05d}-of-{num_shards:05d}')
+      os.fspath(tfds.core.as_path(f'{prefix}-{i:05d}-of-{num_shards:05d}'))
       for i in range(num_shards)
   ]
 

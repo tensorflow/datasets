@@ -44,7 +44,7 @@ TupleOrList = Union[Tuple[T, ...], List[T]]
 ListOrElem = Union[T, List[T]]
 
 TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
-Tree = Union[T, TupleOrList['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-supported-yet
+Tree = Union[T, Any]
 
 Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
 

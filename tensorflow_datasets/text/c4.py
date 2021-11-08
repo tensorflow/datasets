@@ -387,7 +387,8 @@ class C4(tfds.core.BeamBasedBuilder):
         tf.io.gfile.makedirs(tmp_dir)
         downloader = tfds.download.downloader.get_downloader()
         with downloader.tqdm():
-          dl_path = downloader.download(url, tmp_dir).get().path
+          # TODO(slebedev): Investigate why pytype infers Promise[Future[...]].
+          dl_path = downloader.download(url, tmp_dir).get().path  # type: ignore
         tf.io.gfile.rename(os.fspath(dl_path), out_path, overwrite=True)
       finally:
         if tf.io.gfile.exists(tmp_dir):

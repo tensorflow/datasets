@@ -17,7 +17,7 @@
 
 import os
 import tempfile
-from typing import Sequence
+from typing import Sequence, Optional
 
 import numpy as np
 import tensorflow as tf
@@ -89,7 +89,7 @@ class Video(sequence_feature.Sequence):
 
   def __init__(
       self,
-      shape: Sequence[int],
+      shape: Sequence[Optional[int]],
       encoding_format: str = 'png',
       ffmpeg_extra_args: Sequence[str] = (),
       use_colormap: bool = False,
