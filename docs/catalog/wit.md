@@ -1,0 +1,96 @@
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wit" />
+  <meta itemprop="description" content="Wikipedia-based Image Text (WIT) Dataset is a large multimodal multilingual&#10;dataset. WIT is composed of a curated set of 37.6 million entity rich image-text&#10;examples with 11.5 million unique images across 108 Wikipedia languages. Its&#10;size enables WIT to be used as a pretraining dataset for multimodal machine&#10;learning models.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;wit&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wit" />
+  <meta itemprop="sameAs" content="https://github.com/google-research-datasets/wit/" />
+  <meta itemprop="citation" content="@article{srinivasan2021wit,&#10;  title={WIT: Wikipedia-based Image Text Dataset for Multimodal Multilingual Machine Learning},&#10;  author={Srinivasan, Krishna and Raman, Karthik and Chen, Jiecao and Bendersky, Michael and Najork, Marc},&#10;  journal={arXiv preprint arXiv:2103.01913},&#10;  year={2021}&#10;}" />
+</div>
+
+# `wit`
+
+
+Note: This dataset was added recently and is only available in our
+`tfds-nightly` package
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
+
+*   **Description**:
+
+Wikipedia-based Image Text (WIT) Dataset is a large multimodal multilingual
+dataset. WIT is composed of a curated set of 37.6 million entity rich image-text
+examples with 11.5 million unique images across 108 Wikipedia languages. Its
+size enables WIT to be used as a pretraining dataset for multimodal machine
+learning models.
+
+*   **Homepage**:
+    [https://github.com/google-research-datasets/wit/](https://github.com/google-research-datasets/wit/)
+
+*   **Source code**:
+    [`tfds.vision_language.wit.Wit`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/vision_language/wit/wit.py)
+
+*   **Versions**:
+
+    *   **`1.0.0`** (default): Initial release. It loads the WIT dataset from
+        https://storage.googleapis.com/gresearch/wit/
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'attribution_passes_lang_id': tf.bool,
+    'caption_alt_text_description': Text(shape=(), dtype=tf.string),
+    'caption_attribution_description': Text(shape=(), dtype=tf.string),
+    'caption_reference_description': Text(shape=(), dtype=tf.string),
+    'context_page_description': Text(shape=(), dtype=tf.string),
+    'context_section_description': Text(shape=(), dtype=tf.string),
+    'hierarchical_section_title': Text(shape=(), dtype=tf.string),
+    'image_url': Text(shape=(), dtype=tf.string),
+    'is_main_image': tf.bool,
+    'language': Text(shape=(), dtype=tf.string),
+    'mime_type': Text(shape=(), dtype=tf.string),
+    'original_height': tf.int32,
+    'original_width': tf.int32,
+    'page_changed_recently': tf.bool,
+    'page_title': Text(shape=(), dtype=tf.string),
+    'page_url': Text(shape=(), dtype=tf.string),
+    'section_title': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+*   **Citation**:
+
+```
+@article{srinivasan2021wit,
+  title={WIT: Wikipedia-based Image Text Dataset for Multimodal Multilingual Machine Learning},
+  author={Srinivasan, Krishna and Raman, Karthik and Chen, Jiecao and Bendersky, Michael and Najork, Marc},
+  journal={arXiv preprint arXiv:2103.01913},
+  year={2021}
+}
+```

@@ -366,5 +366,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`gref`](gref.md)
 *   [`ref_coco`](ref_coco.md)
+*   [`wit`](wit.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 --------------------------------------------------------------------------------

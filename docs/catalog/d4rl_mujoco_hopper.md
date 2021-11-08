@@ -17,6 +17,9 @@
 D4RL is an open-source benchmark for offline reinforcement learning. It provides
 standardized environments and datasets for training and benchmarking algorithms.
 
+*   **Config description**: See more details about the task and its versions in
+    https://github.com/rail-berkeley/d4rl/wiki/Tasks#gym
+
 *   **Homepage**:
     [https://sites.google.com/view/d4rl/home](https://sites.google.com/view/d4rl/home)
 

@@ -51,6 +51,9 @@ standardized environments and datasets for training and benchmarking algorithms.
 
 ## d4rl_adroit_pen/v0-human (default config)
 
+*   **Config description**: See more details about the task and its versions in
+    https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
+
 *   **Download size**: `1.94 MiB`
 
 *   **Dataset size**: `2.52 MiB`
@@ -121,6 +124,9 @@ $(document).ready(() => {
 
 ## d4rl_adroit_pen/v0-cloned
 
+*   **Config description**: See more details about the task and its versions in
+    https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
+
 *   **Download size**: `292.85 MiB`
 
 *   **Dataset size**: `252.55 MiB`
@@ -190,6 +196,9 @@ $(document).ready(() => {
 <!-- mdformat on -->
 
 ## d4rl_adroit_pen/v0-expert
+
+*   **Config description**: See more details about the task and its versions in
+    https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
 
 *   **Download size**: `250.13 MiB`
 
@@ -263,6 +272,9 @@ $(document).ready(() => {
 
 ## d4rl_adroit_pen/v1-human
 
+*   **Config description**: See more details about the task and its versions in
+    https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
+
 *   **Download size**: `1.95 MiB`
 
 *   **Dataset size**: `2.60 MiB`
@@ -333,6 +345,9 @@ $(document).ready(() => {
 <!-- mdformat on -->
 
 ## d4rl_adroit_pen/v1-cloned
+
+*   **Config description**: See more details about the task and its versions in
+    https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
 
 *   **Download size**: `147.89 MiB`
 

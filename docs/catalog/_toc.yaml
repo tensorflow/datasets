@@ -613,4 +613,7 @@ toc:
     title: gref (manual)
   - path: /datasets/catalog/ref_coco
     title: ref_coco (manual)
+  - path: /datasets/catalog/wit
+    status: nightly
+    title: wit
   title: Vision language
