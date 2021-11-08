@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Vision and Language datasets."""
+"""wit dataset."""
 
-from tensorflow_datasets.vision_language.gref import Gref
-from tensorflow_datasets.vision_language.refcoco import RefCoco
-from tensorflow_datasets.vision_language.wit import Wit
+from tensorflow_datasets.vision_language.wit.wit import Wit

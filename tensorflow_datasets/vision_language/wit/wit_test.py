@@ -13,8 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Vision and Language datasets."""
+"""Wikipedia-based Image Text (WIT) Dataset."""
 
-from tensorflow_datasets.vision_language.gref import Gref
-from tensorflow_datasets.vision_language.refcoco import RefCoco
-from tensorflow_datasets.vision_language.wit import Wit
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.vision_language.wit import wit
+
+
+class WitTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for wit dataset."""
+  DATASET_CLASS = wit.Wit
+  SPLITS = {
+      'train': 3,
+  }
+
+  DL_EXTRACT_RESULT = {'wit': ['train-00000-of-00009.tsv']}
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()
