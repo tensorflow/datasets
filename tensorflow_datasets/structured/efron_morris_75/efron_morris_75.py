@@ -81,7 +81,7 @@ class EfronMorris75(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with path.open() as f:
+    with path.open() as f:  # pytype: disable=attribute-error  # gen-stub-imports
       reader = csv.DictReader(f, delimiter='\t')
       for index, row in enumerate(reader):
         example = dict(row.items())

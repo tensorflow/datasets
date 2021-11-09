@@ -272,7 +272,7 @@ class Tao(tfds.core.BeamBasedBuilder):
                    3)
     all_features = {
         'video':
-            tfds.features.Video(video_shape),
+            tfds.features.Video(video_shape),  # pytype: disable=wrong-arg-types  # gen-stub-imports
         'metadata': {
             'height':
                 tf.int32,

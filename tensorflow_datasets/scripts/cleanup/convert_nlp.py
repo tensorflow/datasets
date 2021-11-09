@@ -110,7 +110,7 @@ def create_dataset_files(
     raise ValueError(f"Invalid Dataset Type {dataset_type}")
 
   #  Create dataset timeplate files from new.py
-  new.create_dataset_files(dataset_name=dataset_name, dataset_dir=dataset_dir)
+  new.create_dataset_files(dataset_name=dataset_name, dataset_dir=dataset_dir)  # pytype: disable=wrong-arg-types  # gen-stub-imports
 
   #  Path of the dataset file
   nlp_datasets_path = nlp_path.expanduser() / "datasets"

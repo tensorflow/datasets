@@ -88,7 +88,7 @@ class CherryBlossoms(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with path.open() as f:
+    with path.open() as f:  # pytype: disable=attribute-error  # gen-stub-imports
       reader = csv.DictReader(f, delimiter=';')
       for index, row in enumerate(reader):
         example = {k: v.replace('NA', 'nan') for k, v in row.items()}

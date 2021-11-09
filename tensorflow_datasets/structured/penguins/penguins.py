@@ -205,7 +205,7 @@ class Penguins(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with path.open() as f:
+    with path.open() as f:  # pytype: disable=attribute-error  # gen-stub-imports
       for i, row in enumerate(csv.DictReader(f)):
         row = {f: self._clean_up(f, v) for f, v in row.items()}
 

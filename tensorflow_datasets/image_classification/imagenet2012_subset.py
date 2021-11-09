@@ -142,7 +142,7 @@ class Imagenet2012Subset(Imagenet2012):
       # alternative, as this loads ~150MB in RAM.
       fobj_mem = io.BytesIO(fobj.read())
       for image_fname, image in tfds.download.iter_archive(
-          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM):
+          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM):  # pytype: disable=wrong-arg-types  # gen-stub-imports
         image = self._fix_image(image_fname, image)
         if subset is None or image_fname in subset:  # filtering using subset.
           record = {

@@ -126,7 +126,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         "rgb_screen":
             tfds.features.Video(
                 shape=(None, self.builder_config.resolution,
-                       self.builder_config.resolution, 3)),
+                       self.builder_config.resolution, 3)),  # pytype: disable=wrong-arg-types  # gen-stub-imports
     })
     return tfds.core.DatasetInfo(
         builder=self,

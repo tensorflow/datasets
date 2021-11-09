@@ -46,7 +46,7 @@ class D4rlAdroitPen(dataset_builder.D4RLDatasetBuilder):
           episode_metadata_keys=frozenset([dataset_builder._ALGORITHM]),
           has_policy_metadata=True,
           has_policy_last_fc_log_std=True,
-          policy_size=64,
+          policy_size=64,  # pytype: disable=wrong-arg-types  # gen-stub-imports
       ),
   ]
 

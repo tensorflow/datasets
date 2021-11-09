@@ -162,13 +162,13 @@ class Domainnet(tfds.core.GeneratorBasedBuilder):
                          split: Text = 'train'
                         ) -> Iterator[Tuple[Text, Dict[Text, Any]]]:
     """Generator of examples for each split."""
-    with tf.io.gfile.GFile(self.splits[split]) as split_file:
+    with tf.io.gfile.GFile(self.splits[split]) as split_file:  # pytype: disable=attribute-error  # gen-stub-imports
       for i, img_class_line in enumerate(split_file.read().split('\n')):
         if not img_class_line:
           continue
         key = f'{self.builder_config.name}_{split}_{i:08d}'
 
         example_path, example_class = img_class_line.split(' ')
-        example_fullpath = os.path.join(self.img_path, example_path)
+        example_fullpath = os.path.join(self.img_path, example_path)  # pytype: disable=attribute-error  # gen-stub-imports
 
         yield key, {'image': example_fullpath, 'label': int(example_class)}

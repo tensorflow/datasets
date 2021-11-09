@@ -136,7 +136,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
             tfds.features.Video(
                 video_shape,
                 ffmpeg_extra_args=ffmpeg_extra_args,
-                encoding_format='jpeg'),
+                encoding_format='jpeg'),  # pytype: disable=wrong-arg-types  # gen-stub-imports
         'label':
             tfds.features.ClassLabel(names_file=labels_names_file),
     })

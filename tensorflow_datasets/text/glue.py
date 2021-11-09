@@ -127,7 +127,7 @@ class GlueConfig(tfds.core.BuilderConfig):
             "1.0.1": "Update dead URL links.",
             "2.0.0": "Update data source for glue/qqp.",
         },
-        **kwargs)
+        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.text_features = text_features
     self.label_column = label_column
     self.label_classes = label_classes

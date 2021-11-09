@@ -132,7 +132,7 @@ class NsynthConfig(tfds.core.BuilderConfig):
             "2.3.1": "F0 computed with normalization fix in CREPE.",
             "2.3.0": "New `loudness_db` feature in decibels (unormalized).",
         },
-        **kwargs)
+        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.gansynth_subset = gansynth_subset
     self.estimate_f0_and_loudness = estimate_f0_and_loudness
 

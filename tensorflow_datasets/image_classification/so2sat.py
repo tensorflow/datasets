@@ -71,7 +71,7 @@ class So2satConfig(tfds.core.BuilderConfig):
             '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
             '2.1.0': 'Using updated optical channels calibration factor.',
         },
-        **kwargs,
+        **kwargs,  # pytype: disable=wrong-arg-types  # gen-stub-imports
     )
     self.selection = selection
 

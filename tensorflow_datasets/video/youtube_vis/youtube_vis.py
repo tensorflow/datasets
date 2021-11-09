@@ -67,7 +67,7 @@ def _convert_bbox(box: List[float], height: int,
       xmin=box[0] / width,
       ymin=box[1] / height,
       xmax=(box[0] + box[2]) / width,
-      ymax=(box[1] + box[3]) / height)
+      ymax=(box[1] + box[3]) / height)  # pytype: disable=bad-return-type  # gen-stub-imports
 
 
 def _decode_segmentation(segmentation: Union[List[NestedDict],
@@ -401,7 +401,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     seg_shape = (None, self.builder_config.height, self.builder_config.width, 1)
     all_features = {
         'video':
-            tfds.features.Video(video_shape),
+            tfds.features.Video(video_shape),  # pytype: disable=wrong-arg-types  # gen-stub-imports
         'metadata': {
             'height': tf.int32,
             'width': tf.int32,
@@ -413,7 +413,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
                 'bboxes':
                     tfds.features.Sequence(tfds.features.BBoxFeature()),
                 'segmentations':
-                    tfds.features.Video(seg_shape, use_colormap=True),
+                    tfds.features.Video(seg_shape, use_colormap=True),  # pytype: disable=wrong-arg-types  # gen-stub-imports
                 'category':
                     tfds.features.ClassLabel(names_file=names_file),
                 'is_crowd':
