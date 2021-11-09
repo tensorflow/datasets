@@ -24,9 +24,6 @@ tf_compat.ensure_tf_install()
 # pylint:disable=g-import-not-at-top
 
 from tensorflow_datasets.core import community  # pylint: disable=g-bad-import-order
-
-from tensorflow_datasets.core.constants import add_data_dir
-
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
@@ -59,6 +56,7 @@ from tensorflow_datasets.core.utils import gcs_path
 from tensorflow_datasets.core.utils import tfds_path
 from tensorflow_datasets.core.utils import Version
 from tensorflow_datasets.core.utils.benchmark import BenchmarkResult
+from tensorflow_datasets.core.utils.file_utils import add_data_dir
 from tensorflow_datasets.core.utils.generic_path import as_path
 from tensorflow_datasets.core.utils.type_utils import PathLike
 from tensorflow_datasets.core.utils.type_utils import ReadOnlyPath

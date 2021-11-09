@@ -13,20 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.constants."""
+"""Tests for file_utils."""
 
 import os
-
+from absl.testing import flagsaver
+import pytest
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import constants
+from tensorflow_datasets.core.utils import file_utils
 
 
-class ConstantsTest(testing.TestCase):
-
-  def test_default_data_dir(self):
-    data_dir = constants.get_default_data_dir(given_data_dir=None)
-    self.assertNotEmpty(data_dir)
-    self.assertIsInstance(data_dir, str)
+def test_default_data_dir():
+  data_dir = file_utils.get_default_data_dir(given_data_dir=None)
+  assert data_dir
+  assert isinstance(data_dir, str)
 
 if __name__ == '__main__':
   testing.test_main()

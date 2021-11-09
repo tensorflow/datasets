@@ -41,6 +41,7 @@ from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
@@ -704,9 +705,9 @@ class DatasetBuilder(registered.RegisteredDataset):
     builder_dir = self._relative_data_dir(with_version=False)
     version_dir = self._relative_data_dir(with_version=True)
 
-    default_data_dir = constants.get_default_data_dir(
+    default_data_dir = file_utils.get_default_data_dir(
         given_data_dir=given_data_dir)
-    all_data_dirs = constants.list_data_dirs(given_data_dir=given_data_dir)
+    all_data_dirs = file_utils.list_data_dirs(given_data_dir=given_data_dir)
 
     all_versions = set()
     requested_version_dirs = {}

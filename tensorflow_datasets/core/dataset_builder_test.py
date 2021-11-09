@@ -35,6 +35,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
@@ -385,7 +386,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
   def setUp(self):
     super(DatasetBuilderMultiDirTest, self).setUp()
     # Sanity check to make sure that no dir is registered
-    self.assertEmpty(constants._registered_data_dir)
+    self.assertEmpty(file_utils._registered_data_dir)
     # Create a new temp dir
     self.other_data_dir = os.path.join(self.get_temp_dir(), "other_dir")
     # Overwrite the default data_dir (as files get created)
@@ -396,7 +397,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
   def tearDown(self):
     super(DatasetBuilderMultiDirTest, self).tearDown()
     # Restore to the default `_registered_data_dir`
-    constants._registered_data_dir = set()
+    file_utils._registered_data_dir = set()
     # Clear-up existing dirs
     if tf.io.gfile.exists(self.other_data_dir):
       tf.io.gfile.rmtree(self.other_data_dir)
@@ -425,7 +426,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     # No data_dir is passed
     # Multiple data_dirs are registered
     # -> use default path
-    constants.add_data_dir(self.other_data_dir)
+    file_utils.add_data_dir(self.other_data_dir)
     self.assertBuildDataDir(
         self.builder._build_data_dir(None), self.default_data_dir)
 
@@ -434,7 +435,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     # Multiple data_dirs are registered
     # Data dir contains old versions
     # -> use default path
-    constants.add_data_dir(self.other_data_dir)
+    file_utils.add_data_dir(self.other_data_dir)
     tf.io.gfile.makedirs(
         os.path.join(self.other_data_dir, "dummy_dataset_shared_generator",
                      "0.1.0"))
@@ -449,7 +450,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     # Multiple data_dirs are registered
     # Data found
     # -> Re-load existing data
-    constants.add_data_dir(self.other_data_dir)
+    file_utils.add_data_dir(self.other_data_dir)
     tf.io.gfile.makedirs(
         os.path.join(self.other_data_dir, "dummy_dataset_shared_generator",
                      "1.0.0"))
@@ -458,7 +459,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
 
   def test_default_multi_dir_duplicate(self):
     # If two data dirs contains the dataset, raise an error...
-    constants.add_data_dir(self.other_data_dir)
+    file_utils.add_data_dir(self.other_data_dir)
     tf.io.gfile.makedirs(
         os.path.join(self.default_data_dir, "dummy_dataset_shared_generator",
                      "1.0.0"))
@@ -471,7 +472,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
   def test_expicit_multi_dir(self):
     # If two data dirs contains the same version
     # Data dir is explicitly passed
-    constants.add_data_dir(self.other_data_dir)
+    file_utils.add_data_dir(self.other_data_dir)
     tf.io.gfile.makedirs(
         os.path.join(self.default_data_dir, "dummy_dataset_shared_generator",
                      "1.0.0"))
@@ -483,7 +484,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
 
   def test_load_data_dir(self):
     """Ensure that `tfds.load` also supports multiple data_dir."""
-    constants.add_data_dir(self.other_data_dir)
+    file_utils.add_data_dir(self.other_data_dir)
 
     class MultiDirDataset(DummyDatasetSharedGenerator):  # pylint: disable=unused-variable
       VERSION = utils.Version("1.2.0")

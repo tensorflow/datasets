@@ -21,13 +21,13 @@ from typing import Any, Optional, Tuple, Type
 
 import tensorflow as tf
 
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import version as version_lib
 
 
@@ -111,12 +111,12 @@ def builder_from_directory(
     builder_dir: utils.PathLike,) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
-  This function reconstruct the `tfds.core.DatasetBuilder` without
-  requirering the original generation code.
+  Reconstructs the `tfds.core.DatasetBuilder` without requiring the original
+  generation code.
 
-  It will read the `<builder_dir>/features.json` in order to infer the
-  structure (feature names, nested dict,...) and content (image, sequence,...)
-  of the dataset. The serialization format is defined in
+  From `<builder_dir>/features.json` it infers the structure (feature names,
+  nested dict,...) and content (image, sequence,...) of the dataset. The
+  serialization format is defined in
   `tfds.features.FeatureConnector` in `to_json()`.
 
   Note: This function only works for datasets generated with TFDS `4.0.0` or
@@ -138,11 +138,11 @@ def builder_from_files(
 ) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from files, auto-infering location.
 
-  This function is similar to `tfds.builder` (same signature), but create
+  This function is similar to `tfds.builder` (same signature), but creates
   the `tfds.core.DatasetBuilder` directly from files, without loading
   original generation source code.
 
-  It does not supports:
+  It does not support:
 
    * namespaces (e.g. 'kaggle:dataset')
    * config objects (`dataset/config` valid, but not `config=MyConfig()`)
@@ -160,15 +160,14 @@ def builder_from_files(
   """
   # Find and load dataset builder.
   builder_dir = _find_builder_dir(name, **builder_kwargs)
-  if builder_dir is not None:  # A generated dataset was found on disk
-    return builder_from_directory(builder_dir)
-  else:
-    data_dirs = constants.list_data_dirs(
+  if builder_dir is None:
+    data_dirs = file_utils.list_data_dirs(
         given_data_dir=builder_kwargs.get('data_dir'))
     raise registered.DatasetNotFoundError(
         f'Could not find dataset files for: {name}. Make sure the dataset '
         f'has been generated in: {data_dirs}. If the dataset has configs, you '
         'might have to specify the config name.')
+  return builder_from_directory(builder_dir)
 
 
 def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
@@ -178,7 +177,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
 
    * If the dataset is present, but is legacy (no feature config file), None
      is returned.
-   * If the config isn't specified, the function try to infer the default
+   * If the config isn't specified, the function tries to infer the default
      config name from the original `DatasetBuilder`.
    * The function searches in all `data_dir` registered with
      `tfds.core.add_data_dir`. If the dataset exists in multiple dirs, an error
@@ -209,7 +208,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
 
   # Search the dataset across all registered data_dirs
   all_builder_dirs = []
-  for current_data_dir in constants.list_data_dirs(given_data_dir=data_dir):
+  for current_data_dir in file_utils.list_data_dirs(given_data_dir=data_dir):
     builder_dir = _find_builder_dir_single_dir(
         name.name,
         data_dir=current_data_dir,
@@ -234,8 +233,8 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
     raise ValueError(
         f'Dataset {name} detected in multiple locations: {all_builder_dirs}. '
         'Please resolve the ambiguity by explicitly setting `data_dir=`.')
-  else:
-    return next(iter(all_builder_dirs))  # List has a single element
+
+  return all_builder_dirs[0]
 
 
 def _find_builder_dir_single_dir(
@@ -245,17 +244,17 @@ def _find_builder_dir_single_dir(
     config_name: Optional[str] = None,
     version_str: Optional[str] = None,
 ) -> Optional[str]:
-  """Same as `find_builder_dir` but require explicit dir."""
+  """Same as `find_builder_dir` but requires explicit dir."""
   # Construct the `ds_name/config/` path
   builder_dir = os.path.join(data_dir, builder_name)
   if not config_name:
     # If the BuilderConfig is not specified:
-    # * Either the dataset don't have config
+    # * Either the dataset doesn't have a config
     # * Either the default config should be used
     # Currently, in order to infer the default config, we are still relying on
     # the code.
     # TODO(tfds): How to avoid code dependency and automatically infer the
-    # config existance and name ?
+    # config existence and name?
     config_name = _get_default_config_name(builder_dir, builder_name)
 
   # If has config (explicitly given or default config), append it to the path
@@ -270,7 +269,7 @@ def _find_builder_dir_single_dir(
 
   builder_dir = os.path.join(builder_dir, version_str)
 
-  # Check for builder dir existance
+  # Check for builder dir existence
   try:
     if not tf.io.gfile.exists(builder_dir):
       return None
@@ -281,6 +280,7 @@ def _find_builder_dir_single_dir(
   # has to contain the feature configuration.
   if not tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):
     return None
+
   return builder_dir
 
 

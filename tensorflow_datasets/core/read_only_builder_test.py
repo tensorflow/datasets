@@ -30,6 +30,7 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core.utils import file_utils
 
 
 class DummyNoConfMnist(testing.DummyDataset):
@@ -221,7 +222,7 @@ def test_find_builder_dir_with_multiple_data_dir(mock_fs: testing.MockFs):
   assert read_only_builder._find_builder_dir('ds0') is None
 
   with mock.patch.object(
-      constants,
+      file_utils,
       'list_data_dirs',
       return_value=[constants.DATA_DIR, 'path/to'],
   ):

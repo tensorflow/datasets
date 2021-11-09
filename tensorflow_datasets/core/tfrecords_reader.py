@@ -28,11 +28,11 @@ from absl import logging
 
 import numpy as np
 import tensorflow as tf
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import shard_utils
 
