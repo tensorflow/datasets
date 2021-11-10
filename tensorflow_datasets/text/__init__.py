@@ -43,6 +43,7 @@ from tensorflow_datasets.text.lambada import Lambada
 from tensorflow_datasets.text.librispeech_lm import LibrispeechLm
 from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.math_dataset import MathDataset
+from tensorflow_datasets.text.math_qa import MathQa
 from tensorflow_datasets.text.movie_rationales import MovieRationales
 from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch

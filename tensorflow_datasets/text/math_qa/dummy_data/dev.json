@@ -1,0 +1,11 @@
+[
+    {
+        "Problem": "I have 1 apple on left hand and another apple on right hand, how many apples do I have?",
+        "Rationale": "\"explanation : 1 + 1",
+        "options": "a ) 1 , b ) 3 , c ) none of these",
+        "correct": "c",
+        "annotated_formula": "add(1, 1)",
+        "linear_formula": "add(n0, n1)",
+        "category": "general"
+    }
+]
