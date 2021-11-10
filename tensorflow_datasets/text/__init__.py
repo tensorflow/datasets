@@ -36,6 +36,7 @@ from tensorflow_datasets.text.gem import Gem
 from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.goemotions import Goemotions
 from tensorflow_datasets.text.gpt3 import Gpt3
+from tensorflow_datasets.text.gsm8k import Gsm8k
 from tensorflow_datasets.text.hellaswag import Hellaswag
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.irc_disentanglement import IrcDisentanglement
