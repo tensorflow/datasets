@@ -65,6 +65,7 @@ from tensorflow_datasets.text.schema_guided_dialogue import SchemaGuidedDialogue
 from tensorflow_datasets.text.scicite import Scicite
 from tensorflow_datasets.text.sentiment140 import Sentiment140
 from tensorflow_datasets.text.snli import Snli
+from tensorflow_datasets.text.squad_question_generation import SquadQuestionGeneration
 from tensorflow_datasets.text.star_cfq import StarCFQ
 from tensorflow_datasets.text.story_cloze import StoryCloze
 from tensorflow_datasets.text.super_glue import SuperGlue
