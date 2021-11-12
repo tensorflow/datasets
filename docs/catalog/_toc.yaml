@@ -479,6 +479,9 @@ toc:
     title: goemotions
   - path: /datasets/catalog/gpt3
     title: gpt3
+  - path: /datasets/catalog/gsm8k
+    status: nightly
+    title: gsm8k
   - path: /datasets/catalog/hellaswag
     title: hellaswag
   - path: /datasets/catalog/imdb_reviews
@@ -493,6 +496,9 @@ toc:
     title: lm1b
   - path: /datasets/catalog/math_dataset
     title: math_dataset
+  - path: /datasets/catalog/math_qa
+    status: nightly
+    title: math_qa
   - path: /datasets/catalog/movie_rationales
     title: movie_rationales
   - path: /datasets/catalog/multi_nli
@@ -529,6 +535,9 @@ toc:
     title: sentiment140
   - path: /datasets/catalog/snli
     title: snli
+  - path: /datasets/catalog/squad_question_generation
+    status: nightly
+    title: squad_question_generation
   - path: /datasets/catalog/star_cfq
     title: star_cfq
   - path: /datasets/catalog/story_cloze
