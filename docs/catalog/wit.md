@@ -35,18 +35,19 @@ learning models.
     *   **`1.0.0`** (default): Initial release. It loads the WIT dataset from
         https://storage.googleapis.com/gresearch/wit/
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `24.87 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `80.11 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | ---------:
+`'train'` | 37,046,386
 
 *   **Features**:
 
