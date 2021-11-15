@@ -25,6 +25,7 @@ from tensorflow_datasets.core.utils import type_utils
 
 PathLike = type_utils.PathLike
 ListOrElem = type_utils.ListOrElem
+ReadWritePath = type_utils.ReadWritePath
 
 _registered_data_dir = set()
 

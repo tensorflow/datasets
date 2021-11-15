@@ -222,11 +222,24 @@ def sharded_filenames(filename_prefix: str, num_shards: int) -> List[str]:
 def filepattern_for_dataset_split(dataset_name: str,
                                   split: str,
                                   data_dir: str,
-                                  filetype_suffix: Optional[str] = None) -> str:
+                                  filetype_suffix: Optional[str] = None,
+                                  num_shards: Optional[int] = None) -> str:
+  """Returns the file pattern for the given dataset.
+
+  Args:
+    dataset_name: Name of the dataset
+    split: Name of the requested split
+    data_dir: The base folder that contains the dataset.
+    filetype_suffix: Optional suffix, e.g. tfrecord
+    num_shards: Optional argument. If specified, will return file@num_shards
+      notation, otherwise file*.
+  """
   prefix = filename_prefix_for_split(dataset_name, split)
   if filetype_suffix:
     prefix += '.%s' % filetype_suffix
-  filepath = os.path.join(data_dir, prefix)
+  filepath = os.path.join(os.fspath(data_dir), prefix)
+  if num_shards:
+    return '%s@%d' % (filepath, num_shards)
   return '%s*' % filepath
 
 
