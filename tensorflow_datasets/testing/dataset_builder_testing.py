@@ -99,11 +99,15 @@ class DatasetBuilderTestCase(parameterized.TestCase,
     * BUILDER_CONFIG_NAMES_TO_TEST: `list[str | tfds.core.BuilderConfig]`,
       the list of builder configs that should be tested. If None, all the
       BUILDER_CONFIGS from the class will be tested.
-    * DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
+    * DL_EXTRACT_RESULT: `dict[str, str]`, the returned result of mocked
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
       If not specified, path to `fake_examples` will always be returned.
-    * DL_DOWNLOAD_RESULT: `dict[str]`, the returned result of mocked
+    * DL_EXTRACT_ONLY_RESULT: `dict[str, str]`, the returned result of mocked
+      `extract` method. The values should be the path of files present in the
+      `fake_examples` directory, relative to that directory. If not specified:
+      will call DownloadManager `extract` method.
+    * DL_DOWNLOAD_RESULT: `dict[str, str]`, the returned result of mocked
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
       If not specified: will use DL_EXTRACT_RESULT (this is due to backwards
@@ -138,8 +142,9 @@ class DatasetBuilderTestCase(parameterized.TestCase,
   VERSION = None
   BUILDER_CONFIG_NAMES_TO_TEST: Optional[List[Union[
       str, dataset_builder.BuilderConfig]]] = None
-  DL_EXTRACT_RESULT = None
-  DL_DOWNLOAD_RESULT = None
+  DL_EXTRACT_RESULT: Optional[str] = None
+  DL_EXTRACT_ONLY_RESULT: Optional[str] = None
+  DL_DOWNLOAD_RESULT: Optional[str] = None
   EXAMPLE_DIR = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
@@ -277,6 +282,14 @@ class DatasetBuilderTestCase(parameterized.TestCase,
         self.DL_EXTRACT_RESULT,
     )
 
+  def _get_dl_extract_only_result(self, url):
+    if self.DL_EXTRACT_ONLY_RESULT:
+      tf.nest.map_structure(self._add_url, url)
+      return tf.nest.map_structure(
+          lambda fname: self.dummy_data / fname,
+          self.DL_EXTRACT_ONLY_RESULT,
+      )
+
   def _get_dl_download_result(self, url):
     tf.nest.map_structure(self._add_url, url)
     if self.DL_DOWNLOAD_RESULT is None:
@@ -375,14 +388,19 @@ class DatasetBuilderTestCase(parameterized.TestCase,
     manual_dir = (
         self.dummy_data
         if builder.MANUAL_DOWNLOAD_INSTRUCTIONS else missing_dir_mock)
+
+    patches = {
+        "download_and_extract": self._get_dl_extract_result,
+        "download": self._get_dl_download_result,
+        "download_checksums": self._download_checksums,
+        "manual_dir": manual_dir,
+        "download_dir": self.dummy_data
+    }
+    if self.DL_EXTRACT_ONLY_RESULT:
+      patches["extract"] = self._get_dl_extract_only_result
+
     with mock.patch.multiple(
-        "tensorflow_datasets.core.download.DownloadManager",
-        download_and_extract=self._get_dl_extract_result,
-        download=self._get_dl_download_result,
-        download_checksums=self._download_checksums,
-        manual_dir=manual_dir,
-        download_dir=self.dummy_data,
-    ):
+        "tensorflow_datasets.core.download.DownloadManager", **patches):
       # For Beam datasets, set-up the runner config
       beam_runner = None
 
