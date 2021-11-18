@@ -374,5 +374,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ref_coco`](ref_coco.md)
 *   [`wit`](wit.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`wit_kaggle`](wit_kaggle.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 --------------------------------------------------------------------------------

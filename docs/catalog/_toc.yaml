@@ -625,4 +625,7 @@ toc:
   - path: /datasets/catalog/wit
     status: nightly
     title: wit
+  - path: /datasets/catalog/wit_kaggle
+    status: nightly
+    title: wit_kaggle (manual)
   title: Vision language
