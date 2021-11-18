@@ -28,7 +28,7 @@ three options:
 *   using your Google account
 *   using a service account (can be easily shared with others in your team)
 
-You can find detailed informations in
+You can find detailed information in
 [Google Cloud documentation](https://cloud.google.com/docs/authentication/getting-started)
 
 ### Simplified instructions
