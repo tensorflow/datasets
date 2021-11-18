@@ -508,7 +508,7 @@ cd path/to/datasets/my_dataset/
 tfds build --register_checksums
 ```
 
-Some useful flags for developpement:
+Some useful flags for development:
 
 *   `--pdb`: Enter debugging mode if an exception is raised.
 *   `--overwrite`: Delete existing files if the dataset was already generated.
