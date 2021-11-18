@@ -116,7 +116,7 @@ pylint tensorflow_datasets/core/some_file.py
 ```
 
 You can try `yapf` to auto-format a file, but the tool is not perfect, so you'll
-likelly have to manually apply fixes afterward.
+likely have to manually apply fixes afterward.
 
 ```sh
 yapf tensorflow_datasets/core/some_file.py
