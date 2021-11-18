@@ -165,7 +165,7 @@ builder.as_dataset(split='train', decoders=tfds.decode.PartialDecoding({
 TFDS will select the subset of `builder.info.features` matching the given
 `tfds.decode.PartialDecoding` structure.
 
-In the above code, the featured are implictly extracted to match
+In the above code, the featured are implicitly extracted to match
 `builder.info.features`. It is also possible to explicitly define the features.
 The above code is equivalent to:
 
