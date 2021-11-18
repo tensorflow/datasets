@@ -469,7 +469,7 @@ Version can refer to two different meaning:
 To update a dataset:
 
 *   For "external" data update: Multiple users may want to access a specific
-    year/version simlutaneously. This is done by using one
+    year/version simultaneously. This is done by using one
     `tfds.core.BuilderConfig` per version (e.g. `coco/2017`, `coco/2019`) or one
     class per version (e.g. `Voc2007`, `Voc2012`).
 *   For "internal" code update: Users only download the most recent version. Any
