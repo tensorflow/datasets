@@ -93,7 +93,7 @@ features = {
 ## Forgot image shape
 
 When using `tfds.features.Image`, `tfds.features.Video`, if the images have
-static shape, they should be expliclty specified:
+static shape, they should be explicitly specified:
 
 ```python
 features = {
