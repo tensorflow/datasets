@@ -391,7 +391,7 @@ the correct citation for each contained dataset.
 *   **Config description**: The Semantic Textual Similarity Benchmark (Cer et
     al., 2017) is a collection of sentence pairs drawn from news headlines,
     video and image captions, and natural language inference data. Each pair is
-    human-annotated with a similarity score from 1 to 5.
+    human-annotated with a similarity score from 0 to 5.
 
 *   **Homepage**:
     [http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark](http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)
