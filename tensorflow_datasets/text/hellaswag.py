@@ -41,11 +41,7 @@ _HELLASWAG_URL = 'https://raw.githubusercontent.com/rowanz/hellaswag/master/data
 class Hellaswag(tfds.core.GeneratorBasedBuilder):
   """HellaSwag Dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
-  RELEASE_NOTES = {
-      '1.0.0': 'Adding separate splits for in-domain and out-of-domain '
-               'validation/test sets.'
-  }
+  VERSION = tfds.core.Version('0.0.1')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -72,28 +68,27 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
         'test': os.path.join(_HELLASWAG_URL, 'hellaswag_test.jsonl'),
     })
 
-    return {
-        'train': self._generate_examples(files['train']),
-        'validation': self._generate_examples(files['validation']),
-        'test': self._generate_examples(files['test']),
-        'validation_ind': self._generate_examples(files['validation'], 'IND'),
-        'validation_ood': self._generate_examples(files['validation'], 'OOD'),
-        'test_ind': self._generate_examples(files['test'], 'IND'),
-        'test_ood': self._generate_examples(files['test'], 'OOD')
-    }
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs={'filepath': files['train']},
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={'filepath': files['validation']},
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            gen_kwargs={'filepath': files['test']},
+        ),
+    ]
 
-  def _generate_examples(self, filepath, domain=None):
+  def _generate_examples(self, filepath):
     """Yields examples."""
     with tf.io.gfile.GFile(filepath) as f:
       for idx, line in enumerate(f):
         elem = json.loads(line)
         elem_id = '%s_%d' % (os.path.basename(filepath), idx)
-
-        if domain == 'IND' and elem['split_type'] != 'indomain':
-          continue
-        if domain == 'OOD' and elem['split_type'] != 'zeroshot':
-          continue
-
         yield elem_id, {
             'context': elem['ctx'],
             'endings': elem['endings'],
