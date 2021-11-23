@@ -135,12 +135,13 @@ class RluAtari(rlu_common.RLUBuilder):
   """DatasetBuilder for RLU Atari."""
 
   _SHARDS = 100
-  _INPUT_FILE_PREFIX = 'gs://rl_unplugged/atari_episodes/'
+  _INPUT_FILE_PREFIX = 'gs://rl_unplugged/atari_episodes_v2/'
 
-  VERSION = tfds.core.Version('1.1.0')
+  VERSION = tfds.core.Version('1.2.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
       '1.1.0': 'Added is_last.',
+      '1.2.0': 'Added checkpoint id'
   }
 
   BUILDER_CONFIGS = _builder_configs()
@@ -174,6 +175,8 @@ class RluAtari(rlu_common.RLUBuilder):
                 'discount':
                     tf.float32,
             }),
+        'checkpoint_id':
+            tf.int64,
         'episode_id':
             tf.int64,
         'episode_return':
@@ -202,7 +205,9 @@ class RluAtari(rlu_common.RLUBuilder):
 
     # Parse tf.Example.
     feature_description = {
-        'episode_id':
+        'checkpoint_idx':
+            tf.io.FixedLenFeature([], tf.int64),
+        'episode_idx':
             tf.io.FixedLenFeature([], tf.int64),
         'episode_return':
             tf.io.FixedLenFeature([], tf.float32),
@@ -236,7 +241,8 @@ class RluAtari(rlu_common.RLUBuilder):
       discounts = tf.concat([discounts[1:], [0.]], axis=0)
     episode = {
         # Episode Metadata
-        'episode_id': data['episode_id'],
+        'episode_id': data['episode_idx'],
+        'checkpoint_id': data['checkpoint_idx'],
         'episode_return': data['episode_return'],
         'clipped_episode_return': data['clipped_episode_return'],
         'steps': {

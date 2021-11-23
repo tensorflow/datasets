@@ -22,7 +22,7 @@ class RluAtariTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for rlu_atari dataset."""
   DATASET_CLASS = rlu_atari.RluAtari
   SPLITS = {
-      'train': 2,  # Number of fake train example
+      'train': 1,  # Number of fake train example
   }
 
   SKIP_TF1_GRAPH_MODE = True
