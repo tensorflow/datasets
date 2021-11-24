@@ -23,15 +23,21 @@ class HellaswagTest(tfds.testing.DatasetBuilderTestCase):
   DATASET_CLASS = hellaswag.Hellaswag
   SPLITS = {
       "train": 2,  # Number of fake train example
-      "test": 1,  # Number of fake test example
-      "validation": 1,
+      "test": 2,  # Number of fake test example
+      "validation": 2,
+      "validation_ind": 1,
+      "validation_ood": 1,
+      "test_ind": 1,
+      "test_ood": 1
   }
-
   DL_EXTRACT_RESULT = {
       "train": "hellaswag_train.jsonl",
       "test": "hellaswag_test.jsonl",
       "validation": "hellaswag_val.jsonl",
   }
+  OVERLAPPING_SPLITS = [
+      "validation_ind", "validation_ood", "test_ind", "test_ood"
+  ]
 
 
 if __name__ == "__main__":
