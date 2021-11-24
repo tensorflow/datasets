@@ -70,6 +70,11 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
   def get_features_dict(self):
     raise NotImplementedError()
 
+  def get_episode_id(self, episode):
+    # The key of the episode is converted to string because int64 is not
+    # supported as key.
+    return str(episode['episode_id'])
+
   def tf_example_to_step_ds(self,
                             tf_example: tf.train.Example) -> Dict[str, Any]:
     """Create an episode from a TF example."""
@@ -105,8 +110,6 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
           num_parallel_calls=tf.data.experimental.AUTOTUNE)
       episode_ds = tfds.as_numpy(episode_ds)
       for e in episode_ds:
-        # The key of the episode is converted to string because int64 is not
-        # supported as key.
-        yield str(e['episode_id']), e
+        yield self.get_episode_id(e), e
 
     return beam.Create(file_paths) | beam.FlatMap(_generate_examples_one_file)
