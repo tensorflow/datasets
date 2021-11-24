@@ -31,6 +31,7 @@ class SquadQuestionGenerationTest(tfds.testing.DatasetBuilderTestCase):
       "train": "train-v1.1.json",
       "dev": "dev-v1.1.json",
       "mapping": "",
+      "redistribute": "",
   }
 
 
