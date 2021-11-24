@@ -80,6 +80,14 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     """Create an episode from a TF example."""
     raise NotImplementedError()
 
+  def get_splits(self, paths):
+    return {
+        'train': self._generate_examples(paths, 0),
+    }
+
+  def belongs_to_split(self, episode, split_id):
+    return True
+
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     del dl_manager
@@ -89,11 +97,9 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
             get_files(
                 prefix=self.get_file_prefix(), num_shards=self.num_shards()),
     }
-    return {
-        'train': self._generate_examples(paths),
-    }
+    return self.get_splits(paths)
 
-  def _generate_examples(self, paths):
+  def _generate_examples(self, paths, split_id):
     """Yields examples."""
     beam = tfds.core.lazy_imports.apache_beam
     file_paths = paths['file_paths']
@@ -110,6 +116,7 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
           num_parallel_calls=tf.data.experimental.AUTOTUNE)
       episode_ds = tfds.as_numpy(episode_ds)
       for e in episode_ds:
-        yield self.get_episode_id(e), e
+        if self.belongs_to_split(e, split_id):
+          yield self.get_episode_id(e), e
 
     return beam.Create(file_paths) | beam.FlatMap(_generate_examples_one_file)
