@@ -1398,18 +1398,18 @@ $(document).ready(() => {
 
 ```
 @inproceedings{gardent2017creating,
-  author =  "Gardent, Claire
+  author = "Gardent, Claire
     and Shimorina, Anastasia
     and Narayan, Shashi
     and Perez-Beltrachini, Laura",
-  title =   "Creating Training Corpora for NLG Micro-Planners",
-  booktitle =   "Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
-  year =    "2017",
-  publisher =   "Association for Computational Linguistics",
-  pages =   "179--188",
-  location =    "Vancouver, Canada",
-  doi =     "10.18653/v1/P17-1017",
-  url =     "http://www.aclweb.org/anthology/P17-1017"
+  title = "Creating Training Corpora for NLG Micro-Planners",
+  booktitle = "Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+  year = "2017",
+  publisher = "Association for Computational Linguistics",
+  pages = "179--188",
+  location = "Vancouver, Canada",
+  doi = "10.18653/v1/P17-1017",
+  url = "http://www.aclweb.org/anthology/P17-1017"
 }
 @article{gehrmann2021gem,
   author    = {Sebastian Gehrmann and
@@ -1560,18 +1560,18 @@ $(document).ready(() => {
 
 ```
 @inproceedings{gardent2017creating,
-  author =  "Gardent, Claire
+  author = "Gardent, Claire
     and Shimorina, Anastasia
     and Narayan, Shashi
     and Perez-Beltrachini, Laura",
-  title =   "Creating Training Corpora for NLG Micro-Planners",
-  booktitle =   "Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
-  year =    "2017",
-  publisher =   "Association for Computational Linguistics",
-  pages =   "179--188",
-  location =    "Vancouver, Canada",
-  doi =     "10.18653/v1/P17-1017",
-  url =     "http://www.aclweb.org/anthology/P17-1017"
+  title = "Creating Training Corpora for NLG Micro-Planners",
+  booktitle = "Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+  year = "2017",
+  publisher = "Association for Computational Linguistics",
+  pages = "179--188",
+  location = "Vancouver, Canada",
+  doi = "10.18653/v1/P17-1017",
+  url = "http://www.aclweb.org/anthology/P17-1017"
 }
 @article{gehrmann2021gem,
   author    = {Sebastian Gehrmann and
