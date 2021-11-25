@@ -41,12 +41,17 @@ _HELLASWAG_URL = 'https://raw.githubusercontent.com/rowanz/hellaswag/master/data
 class Hellaswag(tfds.core.GeneratorBasedBuilder):
   """HellaSwag Dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.1.0')
   RELEASE_NOTES = {
+      '1.1.0': 'Another split dimension for source (wikihow vs activitynet)',
       '1.0.0': 'Adding separate splits for in-domain and out-of-domain '
                'validation/test sets.'
   }
-  SUPPORTED_VERSIONS = [tfds.core.Version('1.0.0'), tfds.core.Version('0.0.1')]
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('1.1.0'),
+      tfds.core.Version('1.0.0'),
+      tfds.core.Version('0.0.1')
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -58,6 +63,7 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
             'activity_label': tfds.features.Text(),
             'label': tf.int32,
             'split_type': tfds.features.Text(),
+            'source_id': tfds.features.Text(),
         }),
         supervised_keys=None,
         homepage='https://rowanzellers.com/hellaswag/',
@@ -74,16 +80,35 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
     })
 
     return {
-        'train': self._generate_examples(files['train']),
-        'validation': self._generate_examples(files['validation']),
-        'test': self._generate_examples(files['test']),
-        'validation_ind': self._generate_examples(files['validation'], 'IND'),
-        'validation_ood': self._generate_examples(files['validation'], 'OOD'),
-        'test_ind': self._generate_examples(files['test'], 'IND'),
-        'test_ood': self._generate_examples(files['test'], 'OOD')
+        'train':
+            self._generate_examples(files['train']),
+        'train_activitynet':
+            self._generate_examples(files['train'], source='activitynet'),
+        'train_wikihow':
+            self._generate_examples(files['train'], source='wikihow'),
+        'validation':
+            self._generate_examples(files['validation']),
+        'test':
+            self._generate_examples(files['test']),
+        'validation_ind_activitynet':
+            self._generate_examples(files['validation'], 'IND', 'activitynet'),
+        'validation_ood_activitynet':
+            self._generate_examples(files['validation'], 'OOD', 'activitynet'),
+        'test_ind_activitynet':
+            self._generate_examples(files['test'], 'IND', 'activitynet'),
+        'test_ood_activitynet':
+            self._generate_examples(files['test'], 'OOD', 'activitynet'),
+        'validation_ind_wikihow':
+            self._generate_examples(files['validation'], 'IND', 'wikihow'),
+        'validation_ood_wikihow':
+            self._generate_examples(files['validation'], 'OOD', 'wikihow'),
+        'test_ind_wikihow':
+            self._generate_examples(files['test'], 'IND', 'wikihow'),
+        'test_ood_wikihow':
+            self._generate_examples(files['test'], 'OOD', 'wikihow')
     }
 
-  def _generate_examples(self, filepath, domain=None):
+  def _generate_examples(self, filepath, domain=None, source=None):
     """Yields examples."""
     with tf.io.gfile.GFile(filepath) as f:
       for idx, line in enumerate(f):
@@ -94,11 +119,14 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
           continue
         if domain == 'OOD' and elem['split_type'] != 'zeroshot':
           continue
+        if source and not elem['source_id'].startswith(source):
+          continue
 
         yield elem_id, {
             'context': elem['ctx'],
             'endings': elem['endings'],
             'activity_label': elem['activity_label'],
             'label': elem.get('label', -1),
-            'split_type': elem['split_type']
+            'split_type': elem['split_type'],
+            'source_id': elem['source_id']
         }
