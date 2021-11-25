@@ -56,7 +56,7 @@ class RluAtari(rlu_common.RLUBuilder):
     return self._SHARDS
 
   def get_episode_id(self, episode):
-    return f'{episode["episode_id"]}'
+    return f'{episode["checkpoint_id"]}_{episode["episode_id"]}'
 
   def tf_example_to_step_ds(self,
                             tf_example: tf.train.Example) -> Dict[str, Any]:
