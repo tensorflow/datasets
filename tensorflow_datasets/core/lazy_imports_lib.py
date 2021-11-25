@@ -17,7 +17,7 @@
 
 import functools
 import importlib
-from typing import TypeVar
+from typing import Any, Callable, TypeVar
 
 from tensorflow_datasets.core.utils import py_utils as utils
 
@@ -205,7 +205,7 @@ class LazyImporter(object):
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
 
 
-def beam_ptransform_fn(fn: _Fn) -> _Fn:
+def beam_ptransform_fn(fn: Callable[..., Any]) -> Callable[..., Any]:
   """Lazy version of `@beam.ptransform_fn`."""
 
   lazy_decorated_fn = None
