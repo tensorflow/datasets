@@ -87,7 +87,7 @@ ds_train, ds_test = tfds.load(name="mnist", split=["train", "test"], data_dir="g
 If dataset owners allowed anonymous access, you can just go ahead and run the
 tfds.load code - and it would work like a normal internet download.
 
-If dataset requires authentification, please use the instructions above to decide
+If dataset requires authentication, please use the instructions above to decide
 on which option you want (own account vs service account) and communicate the
 account name (a.k.a email) to the dataset owner. After they enable you access to
 the GCS directory, you should be able to run the tfds download code.
