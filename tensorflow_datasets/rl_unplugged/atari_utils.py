@@ -151,8 +151,6 @@ def atari_example_to_rlds(tf_example: tf.train.Example) -> Dict[str, Any]:
 
   # Parse tf.Example.
   feature_description = {
-      'checkpoint_idx':
-          tf.io.FixedLenFeature([], tf.int64),
       'episode_idx':
           tf.io.FixedLenFeature([], tf.int64),
       'episode_return':
@@ -187,7 +185,6 @@ def atari_example_to_rlds(tf_example: tf.train.Example) -> Dict[str, Any]:
   episode = {
       # Episode Metadata
       'episode_id': data['episode_idx'],
-      'checkpoint_id': data['checkpoint_idx'],
       'episode_return': data['episode_return'],
       'clipped_episode_return': data['clipped_episode_return'],
       'steps': {
@@ -235,8 +232,6 @@ def features_dict():
               'discount':
                   tf.float32,
           }),
-      'checkpoint_id':
-          tf.int64,
       'episode_id':
           tf.int64,
       'episode_return':

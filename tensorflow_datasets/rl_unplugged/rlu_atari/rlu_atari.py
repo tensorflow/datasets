@@ -27,13 +27,12 @@ class RluAtari(rlu_common.RLUBuilder):
   """DatasetBuilder for RLU Atari."""
 
   _SHARDS = 100
-  _INPUT_FILE_PREFIX = 'gs://rl_unplugged/atari_episodes_v2/'
+  _INPUT_FILE_PREFIX = 'gs://rl_unplugged/atari_episodes/'
 
   VERSION = tfds.core.Version('1.2.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
       '1.1.0': 'Added is_last.',
-      '1.2.0': 'Added checkpoint id'
   }
 
   BUILDER_CONFIGS = atari_utils.builder_configs()
@@ -56,7 +55,7 @@ class RluAtari(rlu_common.RLUBuilder):
     return self._SHARDS
 
   def get_episode_id(self, episode):
-    return f'{episode["checkpoint_id"]}_{episode["episode_id"]}'
+    return f'{episode["episode_id"]}'
 
   def tf_example_to_step_ds(self,
                             tf_example: tf.train.Example) -> Dict[str, Any]:
