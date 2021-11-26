@@ -205,8 +205,6 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Rl unplugged`
 
 *   [`rlu_atari`](rlu_atari.md)
-*   [`rlu_atari_checkpoints`](rlu_atari_checkpoints.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`rlu_dmlab_explore_object_rewards_few`](rlu_dmlab_explore_object_rewards_few.md)
 *   [`rlu_dmlab_explore_object_rewards_many`](rlu_dmlab_explore_object_rewards_many.md)
 *   [`rlu_dmlab_rooms_select_nonmatching_object`](rlu_dmlab_rooms_select_nonmatching_object.md)

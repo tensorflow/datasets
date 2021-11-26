@@ -55,7 +55,7 @@ Besides the reward of each step, this dataset includes the clipped reward
     *   `1.1.0`: Added is_last.
     *   **`1.2.0`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added checkpoint id
+        No release notes.
 
 *   **Download size**: `Unknown size`
 
@@ -74,7 +74,6 @@ Split | Examples
 
 ```python
 FeaturesDict({
-    'checkpoint_id': tf.int64,
     'clipped_episode_return': tf.float32,
     'episode_id': tf.int64,
     'episode_return': tf.float32,
