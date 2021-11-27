@@ -57,6 +57,7 @@ class MockPolicy(enum.Enum):
 def mock_data(
     num_examples: int = 1,
     *,
+    num_sub_examples: int = 1,
     policy: MockPolicy = MockPolicy.AUTO,
     as_dataset_fn: Optional[Callable[..., tf.data.Dataset]] = None,
     data_dir: Optional[str] = None,
@@ -124,6 +125,7 @@ def mock_data(
 
   Args:
     num_examples: number of fake example to generate.
+    num_sub_examples: number of examples to generate in nested Dataset features.
     policy: Strategy to use to generate the fake examples. See
       `tfds.testing.MockPolicy`.
     as_dataset_fn: if provided, will replace the default random example
@@ -204,7 +206,12 @@ def mock_data(
         # `from_generator` takes a callable with signature () -> iterable
         # Recreating a new generator each time ensure that all pipelines are
         # using the same examples
-        lambda: generator_cls(features=features, num_examples=num_examples),
+        # pylint: disable=g-long-lambda]
+        lambda: generator_cls(
+            features=features,
+            num_examples=num_examples,
+            num_sub_examples=num_sub_examples),
+        # pylint: enable=g-long-lambda]
         output_types=tf.nest.map_structure(lambda t: t.dtype, specs),
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
     )
@@ -281,11 +288,16 @@ def mock_data(
 class RandomFakeGenerator(object):
   """Generator of fake examples randomly and deterministically generated."""
 
-  def __init__(self, features, num_examples, seed=0):
+  def __init__(self,
+               features,
+               num_examples: int,
+               num_sub_examples: int = 1,
+               seed: int = 0):
     self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
     self._py_rng = random.Random(seed)
     self._features = features
     self._num_examples = num_examples
+    self._num_sub_examples = num_sub_examples
 
   def _generate_random_string_array(self, shape):
     """Generates an array of random strings."""
@@ -310,10 +322,11 @@ class RandomFakeGenerator(object):
 
     # First we deal with the case of sub-datasets:
     if isinstance(feature, features_lib.Dataset):
-      # In sub-datasets we set number of examples to 1. An alternative
-      # solution with setting num_examples to N = self._num_examples would
-      # imply generating O(N*N) examples for nesting of depth 2.
-      generator = RandomFakeGenerator(feature.feature, num_examples=1)
+      # For sub-datasets self._num_sub_examples examples are generated.
+      generator = RandomFakeGenerator(
+          feature.feature,
+          num_examples=self._num_sub_examples,
+          num_sub_examples=1)
       # Returns the list of examples in the nested dataset.
       return list(generator)
 
