@@ -16,6 +16,7 @@
 """Wikipedia-based Image Text (WIT) Dataset for the Kaggle competition."""
 import base64
 import csv
+import functools
 import gzip
 import io
 import sys
@@ -58,6 +59,8 @@ _CITATION = """
 """
 
 _EMPTY_IMAGE_BYTES = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg=="
+
+_BEAM_NAMESPACE = "TFDS_WIT_KAGGLE"
 
 
 class WitKaggleConfig(tfds.core.BuilderConfig):
@@ -117,8 +120,11 @@ class WitKaggleConfig(tfds.core.BuilderConfig):
 class WitKaggle(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for wit_kaggle dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.1")
   RELEASE_NOTES = {
+      "1.0.1":
+          "Optimize Beam pipeline to avoid strugglers, ignoring rows without "
+          "an image URL. Also added more Beam counters.",
       "1.0.0":
           """Initial release. It provides the train and test datasets from the
       Wikipedia - Image/Caption Matching Kaggle competition
@@ -264,12 +270,16 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
     Returns:
       Examples.
     """
+    beam = tfds.core.lazy_imports.apache_beam
+    counter = functools.partial(beam.metrics.Metrics.counter, _BEAM_NAMESPACE)
 
     def _get_csv_reader(filename):
       if filename.suffix == ".gz":
+        counter("gz_csv_files").inc()
         g = tf.io.gfile.GFile(filename, "rb")
         f = gzip.open(g, "rt", newline="")
       else:
+        counter("normal_csv_files").inc()
         f = tf.io.gfile.GFile(filename, "r")
       return csv.reader(f, delimiter="\t")
 
@@ -277,15 +287,23 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
       r"""Contains image_url \t image_pixel \t metadata_url."""
       reader = _get_csv_reader(filename)
       for row in reader:
+        counter("pixel_rows").inc()
         image_url, image_representation, metadata_url = row
-        yield [image_url, (image_representation, metadata_url)]
+        if image_url:
+          yield [image_url, (image_representation, metadata_url)]
+        else:
+          counter("pixel_rows_no_image_url").inc()
 
     def _read_resnet_rows(filename):
       r"""Contains image_url \t resnet_embedding."""
       reader = _get_csv_reader(filename)
       for row in reader:
+        counter("resnet_rows").inc()
         image_url, image_representation = row
-        yield [image_url, image_representation]
+        if image_url:
+          yield [image_url, image_representation]
+        else:
+          counter("resnet_rows_no_image_url").inc()
 
     def _read_samples_rows(folder_path):
       """Contains samples: train and test have different fields."""
@@ -294,11 +312,16 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
         f = tf.io.gfile.GFile(file_path, "r")
         csv_reader = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_ALL)
         for row in csv_reader:
+          counter("samples_rows").inc()
           sample = {
               feature_key: row[feature_key] for feature_key in
               self.builder_config.split_specific_features.keys()
           }
-          yield [row["image_url"], sample]
+          image_url = row["image_url"]
+          if image_url:
+            yield [image_url, sample]
+          else:
+            counter("samples_rows_no_image_url").inc()
 
     def _process_examples(el):
       sample_url, sample_fields = el
@@ -325,9 +348,9 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
           sample["metadata_url"] = sample_metadata
         else:
           if len(set(sample_fields["image_pixels"])) > 1:
-            beam.metrics.Metrics.counter("image_pixels", "multiple").inc()
+            counter("image_pixels_multiple").inc()
           else:
-            beam.metrics.Metrics.counter("image_pixels", "missing").inc()
+            counter("image_pixels_missing").inc()
             sample["image"] = io.BytesIO(base64.b64decode(_EMPTY_IMAGE_BYTES))
           sample["metadata_url"] = ""
 
@@ -338,14 +361,12 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
           sample["embedding"] = image_resnet
         else:
           if len(set(sample_fields["image_resnet"])) > 1:
-            beam.metrics.Metrics.counter("image_resnet", "multiple").inc()
+            counter("image_resnet_multiple").inc()
           else:
-            beam.metrics.Metrics.counter("image_resnet", "missing").inc()
+            counter("image_resnet_missing").inc()
           sample["embedding"] = self.builder_config.empty_resnet_embedding
 
         yield sample_id, sample
-
-    beam = tfds.core.lazy_imports.apache_beam
 
     # Read embeddings and bytes representations from (possibly compressed) csv.
     image_resnet_files = [
@@ -377,4 +398,5 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
         "image_resnet": resnet_collection,
     }
             | "Group by image_url" >> beam.CoGroupByKey()
+            | "Reshuffle" >> beam.Reshuffle()
             | "Process and yield examples" >> beam.FlatMap(_process_examples))
