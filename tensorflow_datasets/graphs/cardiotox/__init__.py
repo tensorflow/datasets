@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Graph mining datasets."""
+"""cardiotox dataset."""
 
-from tensorflow_datasets.graphs.cardiotox import Cardiotox
-from tensorflow_datasets.graphs.ogbg_molpcba import OgbgMolpcba
+from tensorflow_datasets.graphs.cardiotox.cardiotox import Cardiotox
