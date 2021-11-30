@@ -62,6 +62,9 @@ toc:
     title: d4rl_mujoco_walker2d
   title: D4rl
 - section:
+  - path: /datasets/catalog/cardiotox
+    status: nightly
+    title: cardiotox
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
   title: Graphs
@@ -184,6 +187,9 @@ toc:
     title: horses_or_humans
   - path: /datasets/catalog/i_naturalist2017
     title: i_naturalist2017
+  - path: /datasets/catalog/i_naturalist2018
+    status: nightly
+    title: i_naturalist2018
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted

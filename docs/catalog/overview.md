@@ -60,6 +60,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Graphs`
 
+*   [`cardiotox`](cardiotox.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`ogbg_molpcba`](ogbg_molpcba.md)
 
 ### `Image`
@@ -126,6 +128,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`geirhos_conflict_stimuli`](geirhos_conflict_stimuli.md)
 *   [`horses_or_humans`](horses_or_humans.md)
 *   [`i_naturalist2017`](i_naturalist2017.md)
+*   [`i_naturalist2018`](i_naturalist2018.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
 *   [`imagenet2012_multilabel`](imagenet2012_multilabel.md)
