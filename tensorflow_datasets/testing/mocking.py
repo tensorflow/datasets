@@ -56,8 +56,9 @@ class MockPolicy(enum.Enum):
 @contextlib.contextmanager
 def mock_data(
     num_examples: int = 1,
-    *,
     num_sub_examples: int = 1,
+    max_value: Optional[int] = None,
+    *,
     policy: MockPolicy = MockPolicy.AUTO,
     as_dataset_fn: Optional[Callable[..., tf.data.Dataset]] = None,
     data_dir: Optional[str] = None,
@@ -126,6 +127,7 @@ def mock_data(
   Args:
     num_examples: number of fake example to generate.
     num_sub_examples: number of examples to generate in nested Dataset features.
+    max_value: the maximum value present in generated tensors.
     policy: Strategy to use to generate the fake examples. See
       `tfds.testing.MockPolicy`.
     as_dataset_fn: if provided, will replace the default random example
@@ -210,7 +212,8 @@ def mock_data(
         lambda: generator_cls(
             features=features,
             num_examples=num_examples,
-            num_sub_examples=num_sub_examples),
+            num_sub_examples=num_sub_examples,
+            max_value=max_value),
         # pylint: enable=g-long-lambda]
         output_types=tf.nest.map_structure(lambda t: t.dtype, specs),
         output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
@@ -292,12 +295,14 @@ class RandomFakeGenerator(object):
                features,
                num_examples: int,
                num_sub_examples: int = 1,
+               max_value: Optional[int] = None,
                seed: int = 0):
     self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
     self._py_rng = random.Random(seed)
     self._features = features
     self._num_examples = num_examples
     self._num_sub_examples = num_sub_examples
+    self._max_value = max_value
 
   def _generate_random_string_array(self, shape):
     """Generates an array of random strings."""
@@ -326,7 +331,8 @@ class RandomFakeGenerator(object):
       generator = RandomFakeGenerator(
           feature.feature,
           num_examples=self._num_sub_examples,
-          num_sub_examples=1)
+          num_sub_examples=1,
+          max_value=self._max_value)
       # Returns the list of examples in the nested dataset.
       return list(generator)
 
@@ -337,6 +343,8 @@ class RandomFakeGenerator(object):
       max_value = feature.num_classes
     elif isinstance(feature, features_lib.Text) and feature.vocab_size:
       max_value = feature.vocab_size
+    elif self._max_value:
+      max_value = self._max_value
     else:
       max_value = 255
 

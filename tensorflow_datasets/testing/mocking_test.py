@@ -293,3 +293,98 @@ def test_mocking_rlu_nested_dataset():
           'is_terminal', 'observation', 'reward'
       }
       assert steps_ex['observation'].shape == (84, 84, 1)
+
+
+def _get_steps(data, window_size=4):
+  """Extract the steps dataset and create out of it a window dataset."""
+  episode_ds = data['steps']
+  # The line below creates a variant dataset
+  episode_ds = episode_ds.window(window_size, drop_remainder=True)
+  return episode_ds
+
+
+def test_mocking_rlu_nested_dataset_with_windows(num_sub_examples=36,
+                                                 max_value=8):
+  """Test of a nested dataset with windows.
+
+  In this test we use the dataset rlu_atari - see the docstring of
+  test_mocking_rlu_nested_dataset for a full list of features. Together with
+  the next test it checks the working of the num_sub_examples in mock_data.
+
+  The test below shows that setting num_sub_examples to a sufficiently high
+  number allow to create window datasets from a nested dataset.
+
+  Args:
+    num_sub_examples: number of examples to generate in a nested subdataset.
+    max_value: the maximum value present in generated tensors.
+  """
+  with tfds.testing.mock_data(
+      num_examples=3,
+      num_sub_examples=num_sub_examples,
+      max_value=max_value,
+      policy=tfds.testing.MockPolicy.USE_CODE):
+    ds = tfds.load('rlu_atari/Pong_run_1', split='train')
+
+    steps = ds.element_spec['steps']
+    assert isinstance(steps, tf.data.DatasetSpec)
+    assert steps.element_spec['reward'] == tf.TensorSpec(
+        shape=(), dtype=tf.float32)
+
+    for ex in ds.take(3):
+      ds_steps = ex['steps']
+      assert isinstance(ds_steps, tf.data.Dataset)
+      assert ds_steps.cardinality().numpy().item() == num_sub_examples
+
+      # the window method is applied in get_steps
+      ds_flat_steps = ds.flat_map(_get_steps)
+      ds_flat_steps = iter(ds_flat_steps)
+
+      obs_rew_act = next(ds_flat_steps)
+
+      assert obs_rew_act['observation'].element_spec == tf.TensorSpec(
+          shape=(84, 84, 1), dtype=tf.uint8)
+      assert (next(iter(tfds.as_numpy(obs_rew_act['observation']))) <=
+              max_value).all()
+      assert (next(iter(tfds.as_numpy(obs_rew_act['action']))) <=
+              max_value).all()
+
+
+def test_mocking_rlu_nested_dataset_with_windows_fail(num_sub_examples=1):
+  """Test of a nested dataset with windows.
+
+  In this test we use the dataset rlu_atari - see the docstring of
+  test_mocking_rlu_nested_dataset for a full list of features. Together with
+  the next test it checks the working of the num_sub_examples in mock_data.
+
+  The test below shows that setting num_sub_examples to 1 leads to the
+  StopIteration exception.
+
+  Args:
+    num_sub_examples: number of examples to generate in a nested subdataset.
+  """
+  with tfds.testing.mock_data(
+      num_examples=3,
+      num_sub_examples=num_sub_examples,
+      policy=tfds.testing.MockPolicy.USE_CODE):
+    ds = tfds.load('rlu_atari/Pong_run_1', split='train')
+
+    steps = ds.element_spec['steps']
+    assert isinstance(steps, tf.data.DatasetSpec)
+    assert steps.element_spec['reward'] == tf.TensorSpec(
+        shape=(), dtype=tf.float32)
+
+    for ex in ds.take(1):
+      ds_steps = ex['steps']
+      assert isinstance(ds_steps, tf.data.Dataset)
+      assert ds_steps.cardinality().numpy().item() == num_sub_examples
+
+      # the window method is applied in get_steps
+      ds_flat_steps = ds.flat_map(_get_steps)
+      ds_flat_steps = iter(ds_flat_steps)
+
+      raises_stop_iteration = False
+      try:
+        next(ds_flat_steps)
+      except StopIteration:
+        raises_stop_iteration = True
+      assert raises_stop_iteration
