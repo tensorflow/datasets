@@ -84,6 +84,7 @@ FeaturesDict({
 
 *   **Citation**:
 
+
 ## open_images_challenge2019_detection/200k (default config)
 
 *   **Config description**: Images have at most 200,000 pixels, at 72 JPEG

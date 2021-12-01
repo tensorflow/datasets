@@ -113,6 +113,7 @@ Resulting images should be put in `manual_dir`, like:
 }
 ```
 
+
 ## curated_breast_imaging_ddsm/patches (default config)
 
 *   **Config description**: Patches containing both calsification and mass

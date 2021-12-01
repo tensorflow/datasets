@@ -104,6 +104,7 @@ FeaturesDict({
 }
 ```
 
+
 ## wine_quality/white (default config)
 
 *   **Config description**: White Wine

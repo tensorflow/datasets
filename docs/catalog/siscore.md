@@ -62,6 +62,7 @@ FeaturesDict({
 }
 ```
 
+
 ## siscore/rotation (default config)
 
 *   **Config description**: factor of variation: rotation

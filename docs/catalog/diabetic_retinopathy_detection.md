@@ -82,6 +82,7 @@ FeaturesDict({
 }
 ```
 
+
 ## diabetic_retinopathy_detection/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.

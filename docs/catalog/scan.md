@@ -95,6 +95,7 @@ FeaturesDict({
 }
 ```
 
+
 ## scan/simple (default config)
 
 *   **Download size**: `17.82 MiB`

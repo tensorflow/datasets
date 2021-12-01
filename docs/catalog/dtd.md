@@ -111,3 +111,4 @@ Title     = {Describing Textures in the Wild},
 Booktitle = {Proceedings of the {IEEE} Conf. on Computer Vision and Pattern Recognition ({CVPR})},
 Year      = {2014}}
 ```
+

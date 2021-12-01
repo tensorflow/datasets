@@ -115,3 +115,4 @@ $(document).ready(() => {
     url="https://github.com/AI-Lab-Makerere/ibean/"
 }
 ```
+

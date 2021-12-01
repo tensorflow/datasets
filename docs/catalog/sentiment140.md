@@ -119,3 +119,4 @@ $(document).ready(() => {
     url    = "http://help.sentiment140.com/home"
 }
 ```
+

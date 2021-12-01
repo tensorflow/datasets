@@ -73,6 +73,7 @@ FeaturesDict({
 }
 ```
 
+
 ## big_patent/all (default config)
 
 *   **Config description**: Patents under all categories.

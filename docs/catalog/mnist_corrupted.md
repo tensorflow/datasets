@@ -73,6 +73,7 @@ FeaturesDict({
 }
 ```
 
+
 ## mnist_corrupted/identity (default config)
 
 *   **Config description**: Corruption method: identity

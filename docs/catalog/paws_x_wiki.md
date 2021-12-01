@@ -82,6 +82,7 @@ FeaturesDict({
 }
 ```
 
+
 ## paws_x_wiki/de (default config)
 
 *   **Config description**: Translated to de

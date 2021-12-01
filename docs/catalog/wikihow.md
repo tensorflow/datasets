@@ -78,6 +78,7 @@ clean up extra commas.
 }
 ```
 
+
 ## wikihow/all (default config)
 
 *   **Config description**: Use the concatenation of all paragraphs as the

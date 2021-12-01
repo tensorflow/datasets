@@ -65,6 +65,7 @@ FeaturesDict({
 }
 ```
 
+
 ## lsun/classroom (default config)
 
 *   **Config description**: Images of category classroom

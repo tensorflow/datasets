@@ -82,6 +82,7 @@ FeaturesDict({
   }
 ```
 
+
 ## flic/small (default config)
 
 *   **Config description**: Uses 5003 examples used in CVPR13 MODEC paper.

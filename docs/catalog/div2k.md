@@ -69,6 +69,7 @@ FeaturesDict({
 }
 ```
 
+
 ## div2k/bicubic_x2 (default config)
 
 *   **Config description**: Uses bicubic_x2 data.

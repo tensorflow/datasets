@@ -114,6 +114,7 @@ to get the links to download the dataset.
 }
 ```
 
+
 ## wit_kaggle/train_with_extended_features (default config)
 
 *   **Config description**: Training samples for the Wikipedia-Image/Caption

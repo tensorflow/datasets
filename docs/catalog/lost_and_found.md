@@ -74,6 +74,7 @@ Split     | Examples
 }
 ```
 
+
 ## lost_and_found/semantic_segmentation (default config)
 
 *   **Config description**: Lost and Found semantic segmentation dataset.

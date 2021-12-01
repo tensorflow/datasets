@@ -63,6 +63,7 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 }
 ```
 
+
 ## emnist/byclass (default config)
 
 *   **Config description**: EMNIST ByClass

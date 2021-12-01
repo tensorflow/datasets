@@ -83,6 +83,7 @@ FeaturesDict({
 }
 ```
 
+
 ## downsampled_imagenet/32x32 (default config)
 
 *   **Config description**: A dataset consisting of Train and Validation images

@@ -89,6 +89,7 @@ Split     | Examples
 }
 ```
 
+
 ## bigearthnet/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels

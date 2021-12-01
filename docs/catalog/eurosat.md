@@ -59,6 +59,7 @@ Split     | Examples
 }
 ```
 
+
 ## eurosat/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels

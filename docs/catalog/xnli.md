@@ -135,3 +135,4 @@ $(document).ready(() => {
   location = "Brussels, Belgium",
 }
 ```
+

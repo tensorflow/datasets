@@ -62,6 +62,7 @@ Split | Examples
 
 *   **Citation**:
 
+
 ## so2sat/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels

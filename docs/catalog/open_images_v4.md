@@ -142,6 +142,7 @@ FeaturesDict({
 }
 ```
 
+
 ## open_images_v4/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.

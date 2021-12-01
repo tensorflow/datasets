@@ -75,6 +75,7 @@ FeaturesDict({
 }
 ```
 
+
 ## cifar10_corrupted/brightness_1 (default config)
 
 *   **Config description**: Corruption method: brightness, severity level: 1

@@ -90,6 +90,7 @@ Split     | Examples
 }
 ```
 
+
 ## celeb_a_hq/1024 (default config)
 
 *   **Config description**: CelebaHQ images in 1024 x 1024 resolution

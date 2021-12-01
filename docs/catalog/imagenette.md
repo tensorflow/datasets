@@ -69,6 +69,7 @@ FeaturesDict({
 }
 ```
 
+
 ## imagenette/full-size-v2 (default config)
 
 *   **Config description**: full-size variant.

@@ -53,6 +53,7 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
+
 ## wordnet/WN18 (default config)
 
 *   **Config description**: This WORDNET TENSOR DATA consists of a collection of

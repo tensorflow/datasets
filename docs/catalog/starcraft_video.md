@@ -73,6 +73,7 @@ Split          | Examples
 }
 ```
 
+
 ## starcraft_video/brawl_64 (default config)
 
 *   **Config description**: Brawl map with 64x64 resolution.

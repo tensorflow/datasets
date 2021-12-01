@@ -80,6 +80,7 @@ Split          | Examples
 }
 ```
 
+
 ## tao/480_640 (default config)
 
 *   **Config description**: All images are bilinearly resized to 480 X 640

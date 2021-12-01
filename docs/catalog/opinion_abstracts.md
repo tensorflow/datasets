@@ -61,6 +61,7 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 }
 ```
 
+
 ## opinion_abstracts/rotten_tomatoes (default config)
 
 *   **Config description**: Professional critics and consensus of 3,731 movies.

@@ -54,6 +54,7 @@ archivePrefix = {arXiv},
 }
 ```
 
+
 ## squad/v1.1 (default config)
 
 *   **Config description**: Version 1.1.0 of SQUAD

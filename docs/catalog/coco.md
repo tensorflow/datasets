@@ -74,6 +74,7 @@ defines 200 classes but only uses 133.
 }
 ```
 
+
 ## coco/2014 (default config)
 
 *   **Config description**: This version contains images, bounding boxes and

@@ -56,6 +56,7 @@ note={under review}
 }
 ```
 
+
 ## gov_report/crs_whitespace (default config)
 
 *   **Config description**: CRS report with summary. Structures flattened and

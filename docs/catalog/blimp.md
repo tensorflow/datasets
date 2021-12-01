@@ -76,6 +76,7 @@ FeaturesDict({
 }
 ```
 
+
 ## blimp/adjunct_island (default config)
 
 *   **Config description**: This configuration includes the paradigm

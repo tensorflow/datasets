@@ -77,10 +77,10 @@ FeaturesDict({
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `({'home.dest': 'home.dest', 'fare': 'fare', 'cabin': 'cabin', 'age': 'age',
-    'pclass': 'pclass', 'name': 'name', 'ticket': 'ticket', 'body': 'body',
-    'embarked': 'embarked', 'parch': 'parch', 'sibsp': 'sibsp', 'boat': 'boat',
-    'sex': 'sex'}, 'survived')`
+    `({'age': 'age', 'embarked': 'embarked', 'name': 'name', 'boat': 'boat',
+    'sex': 'sex', 'sibsp': 'sibsp', 'ticket': 'ticket', 'parch': 'parch',
+    'pclass': 'pclass', 'cabin': 'cabin', 'body': 'body', 'home.dest':
+    'home.dest', 'fare': 'fare'}, 'survived')`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -131,3 +131,4 @@ year   = "2017",
 url    = "https://www.openml.org/d/40945"
 }
 ```
+

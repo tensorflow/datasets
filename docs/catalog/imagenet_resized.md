@@ -73,6 +73,7 @@ Split          | Examples
 }
 ```
 
+
 ## imagenet_resized/8x8 (default config)
 
 *   **Config description**: Images resized to 8x8

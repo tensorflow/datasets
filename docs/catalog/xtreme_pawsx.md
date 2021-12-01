@@ -80,6 +80,7 @@ FeaturesDict({
 }
 ```
 
+
 ## xtreme_pawsx/de (default config)
 
 *   **Config description**: Translated to de
