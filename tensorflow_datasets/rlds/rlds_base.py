@@ -62,6 +62,12 @@ class DatasetConfig(tfds.core.BuilderConfig):
 def build_info(ds_config: DatasetConfig,
                builder: tfds.core.DatasetBuilder) -> tfds.core.DatasetInfo:
   """Returns the dataset metadata."""
+  step_metadata = ds_config.step_metadata_info
+  if step_metadata is None:
+    step_metadata = {}
+  episode_metadata = ds_config.episode_metadata_info
+  if episode_metadata is None:
+    episode_metadata = {}
   return tfds.core.DatasetInfo(
       builder=builder,
       description=ds_config.overall_description,
@@ -75,9 +81,9 @@ def build_info(ds_config: DatasetConfig,
                   'is_first': tf.bool,
                   'is_last': tf.bool,
                   'discount': ds_config.discount_info,
-                  **ds_config.step_metadata_info,
+                  **step_metadata,
               }),
-          **ds_config.episode_metadata_info,
+          **episode_metadata,
       }),
       supervised_keys=ds_config.supervised_keys,
       homepage=ds_config.homepage,
