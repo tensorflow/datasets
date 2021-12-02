@@ -460,7 +460,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       *,
       batch_size: Optional[int] = None,
       shuffle_files: bool = False,
-      decoders: Optional[TreeDict[decode.Decoder]] = None,
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
       read_config: Optional[read_config_lib.ReadConfig] = None,
       as_supervised: bool = False,
   ):
@@ -571,7 +571,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       split,
       shuffle_files,
       batch_size,
-      decoders,
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
       read_config,
       as_supervised,
   ):
@@ -787,11 +787,13 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _as_dataset(self,
-                  split,
-                  decoders=None,
-                  read_config=None,
-                  shuffle_files=False):
+  def _as_dataset(
+      self,
+      split,
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
+      read_config=None,
+      shuffle_files=False,
+  ):
     """Constructs a `tf.data.Dataset`.
 
     Internal implementation to overwrite when inheriting from DatasetBuilder.
@@ -927,7 +929,7 @@ class FileReaderBuilder(DatasetBuilder):
   def _as_dataset(
       self,
       split,
-      decoders,
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
       read_config,
       shuffle_files,
   ) -> tf.data.Dataset:
