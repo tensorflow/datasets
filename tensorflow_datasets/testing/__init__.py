@@ -20,8 +20,10 @@ from tensorflow_datasets.testing.feature_test_case import FeatureExpectationItem
 from tensorflow_datasets.testing.feature_test_case import FeatureExpectationsTestCase
 from tensorflow_datasets.testing.feature_test_case import RaggedConstant
 from tensorflow_datasets.testing.feature_test_case import SubTestCase
+from tensorflow_datasets.testing.mocking import DataFactory
 from tensorflow_datasets.testing.mocking import mock_data
 from tensorflow_datasets.testing.mocking import MockPolicy
+from tensorflow_datasets.testing.mocking import SpecificValueFactory
 from tensorflow_datasets.testing.test_case import TestCase
 from tensorflow_datasets.testing.test_utils import assert_features_equal
 from tensorflow_datasets.testing.test_utils import DummyBeamDataset
