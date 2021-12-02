@@ -16,5 +16,6 @@
 """Public API of the proto package."""
 
 from tensorflow_datasets.core.proto import dataset_info_generated_pb2 as dataset_info_pb2  # pylint: disable=line-too-long
+from tensorflow_datasets.core.proto import feature_generated_pb2 as feature_pb2  # pylint: disable=line-too-long
 
 SplitInfo = dataset_info_pb2.SplitInfo

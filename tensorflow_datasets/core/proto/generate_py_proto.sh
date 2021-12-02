@@ -37,6 +37,11 @@ if [ ! -f ${DATASET_INFO_PROTO} ]; then
     echo "${DATASET_INFO_PROTO} not found."
     echo "Please run this script from the appropriate root directory."
 fi
+FEATURE_PROTO="${TMP_TFDS_PROTO_DIR}/feature.proto"
+if [ ! -f ${FEATURE_PROTO} ]; then
+    echo "${FEATURE_PROTO} not found."
+    echo "Please run this script from the appropriate root directory."
+fi
 
 # Clone tf.metadata
 git clone https://github.com/tensorflow/metadata.git ${TMP_METADATA_DIR}
@@ -46,12 +51,22 @@ protoc ${DATASET_INFO_PROTO} \
   --python_out=${TMP_TFDS_PROTO_DIR} \
   --proto_path=${TMP_METADATA_DIR} \
   --proto_path=${TMP_TFDS_PROTO_DIR}
+# Invoke protoc compiler on feature.proto
+protoc ${FEATURE_PROTO} \
+  --python_out=${TMP_TFDS_PROTO_DIR} \
+  --proto_path=${TMP_METADATA_DIR} \
+  --proto_path=${TMP_TFDS_PROTO_DIR}
 
 # Add pylint ignore and name the file as generated.
 GENERATED_DATASET_INFO_PY="${TMP_TFDS_PROTO_DIR}/dataset_info_generated_pb2.py"
 mv ${TMP_TFDS_PROTO_DIR}/dataset_info_pb2.py \
   ${GENERATED_DATASET_INFO_PY}
 pylint_skip_file "${GENERATED_DATASET_INFO_PY}"
+
+GENERATED_FEATURE_PY="${TMP_TFDS_PROTO_DIR}/feature_generated_pb2.py"
+mv ${TMP_TFDS_PROTO_DIR}/feature_pb2.py \
+  ${GENERATED_FEATURE_PY}
+pylint_skip_file "${GENERATED_FEATURE_PY}"
 
 
 LICENSING_TEXT=$(cat <<-END
@@ -74,4 +89,6 @@ END
 
 printf "%s\n%s" "${LICENSING_TEXT}" "$(cat ${GENERATED_DATASET_INFO_PY})" > \
   ${GENERATED_DATASET_INFO_PY}
+printf "%s\n%s" "${LICENSING_TEXT}" "$(cat ${GENERATED_FEATURE_PY})" > \
+  ${GENERATED_FEATURE_PY}
 
