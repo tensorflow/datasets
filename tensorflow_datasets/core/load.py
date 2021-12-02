@@ -201,7 +201,7 @@ def load(
     shuffle_files: bool = False,
     download: bool = True,
     as_supervised: bool = False,
-    decoders: Optional[TreeDict[decode.Decoder]] = None,
+    decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
     read_config: Optional[read_config_lib.ReadConfig] = None,
     with_info: bool = False,
     builder_kwargs: Optional[Dict[str, Any]] = None,
