@@ -293,3 +293,59 @@ def test_mocking_rlu_nested_dataset():
           'is_terminal', 'observation', 'reward'
       }
       assert steps_ex['observation'].shape == (84, 84, 1)
+
+
+def _get_steps(data, window_size=4):
+  """Extract the steps dataset and create out of it a window dataset."""
+  episode_ds = data['steps']
+  # The line below creates a variant dataset
+  return episode_ds.window(window_size, drop_remainder=True)
+
+
+@pytest.mark.parametrize('num_sub_examples', [1, 36])
+def test_mocking_rlu_nested_dataset_with_windows(num_sub_examples,
+                                                 num_examples=3,
+                                                 max_value=8,
+                                                 window_size=4):
+  """Test of a nested dataset with windows.
+
+  In this test we use the dataset rlu_atari - see the docstring of
+  test_mocking_rlu_nested_dataset for a full list of features.
+
+  The test checks in particular that after application of the window method
+  the number of elements in the dataset is
+
+  num_examples * (num_sub_examples // window_size).
+
+  Args:
+    num_sub_examples: Number of examples to generate in a nested subdataset.
+    num_examples: Number of examples to generate in the dataset.
+    max_value: The maximum value present in generated tensors.
+    window_size: The size of the sequence window.
+  """
+  with tfds.testing.mock_data(
+      num_examples=num_examples,
+      num_sub_examples=num_sub_examples,
+      max_value=max_value,
+      policy=tfds.testing.MockPolicy.USE_CODE):
+    ds = tfds.load('rlu_atari/Pong_run_1', split='train')
+
+    for ex in ds.take(3):
+      ds_steps = ex['steps']
+      assert ds_steps.cardinality().numpy().item() == num_sub_examples
+
+      # the window method is applied in _get_steps
+      ds_flat_steps = ds.flat_map(
+          functools.partial(_get_steps, window_size=window_size))
+      ds_flat_steps = iter(ds_flat_steps)
+
+      assert len(list(ds_flat_steps)) == num_examples * (
+          num_sub_examples // window_size)
+
+      for obs_rew_act in ds_flat_steps:
+        assert obs_rew_act['observation'].element_spec == tf.TensorSpec(
+            shape=(84, 84, 1), dtype=tf.uint8)
+        assert (next(iter(tfds.as_numpy(obs_rew_act['observation']))) <=
+                max_value).all()
+        assert (next(iter(tfds.as_numpy(obs_rew_act['action']))) <=
+                max_value).all()
