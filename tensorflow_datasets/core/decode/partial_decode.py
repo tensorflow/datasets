@@ -26,7 +26,9 @@ from tensorflow_datasets.core.features import features_dict
 
 # Expected feature specs provided by the user
 _FeatureSpecElem = Union[features_lib.FeatureConnector, Any]
-_FeatureSpecs = utils.TreeDict[_FeatureSpecElem]
+FeatureSpecs = utils.TreeDict[_FeatureSpecElem]
+
+DecoderArg = Union[base.Decoder, 'PartialDecoding']
 
 
 class PartialDecoding:
@@ -39,7 +41,7 @@ class PartialDecoding:
 
   def __init__(
       self,
-      features: _FeatureSpecs,
+      features: FeatureSpecs,
       decoders: Optional[utils.TreeDict[base.Decoder]] = None,
   ):
     """Constructor.
@@ -83,8 +85,8 @@ class PartialDecoding:
 
 def _normalize_feature_item(
     feature: features_lib.FeatureConnector,
-    expected_feature: _FeatureSpecs,
-) -> _FeatureSpecs:
+    expected_feature: FeatureSpecs,
+) -> FeatureSpecs:
   """Extract the features matching the expected_feature structure."""
   # If user provide a FeatureConnector, use this
   if isinstance(expected_feature,
@@ -109,8 +111,8 @@ def _normalize_feature_item(
 
 def _normalize_feature_dict(
     feature: features_lib.FeatureConnector,
-    expected_feature: _FeatureSpecs,
-) -> _FeatureSpecs:
+    expected_feature: FeatureSpecs,
+) -> FeatureSpecs:
   """Extract the features matching the expected_feature structure."""
   if type(feature) == features_lib.FeaturesDict:  # pylint: disable=unidiomatic-typecheck
     inner_features = {

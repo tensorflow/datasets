@@ -15,6 +15,7 @@
 
 """TFDS typing annotations."""
 
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.utils import type_utils
@@ -23,10 +24,14 @@ from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.type_utils import *  # pylint: disable=wildcard-import
 # pylint: enable=unused-import
 
+DecoderArg = decode.partial_decode.DecoderArg
+FeatureSpecs = decode.partial_decode.FeatureSpecs
 FeatureConnectorArg = feature.FeatureConnectorArg
 SplitArg = splits.SplitArg
 
 __all__ = type_utils.__all__ + [
+    'DecoderArg',
     'FeatureConnectorArg',
+    'FeatureSpecs',
     'SplitArg',
 ]
