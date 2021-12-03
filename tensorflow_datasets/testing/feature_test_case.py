@@ -197,6 +197,21 @@ class FeatureExpectationsTestCase(SubTestCase):
             skip_feature_tests=skip_feature_tests,
             test_attributes=test_attributes,
         )
+      with self._subTest('feature_proto_roundtrip'):
+        with test_utils.tmp_dir() as config_dir:
+          feature_proto = feature.to_proto()
+          feature.save_metadata(config_dir, feature_name=None)
+          new_feature = feature.from_proto(feature_proto)
+          new_feature.load_metadata(config_dir, feature_name=None)
+          self._assert_feature(
+              feature=new_feature,
+              shape=shape,
+              dtype=dtype,
+              tests=tests,
+              serialized_info=serialized_info,
+              skip_feature_tests=skip_feature_tests,
+              test_attributes=test_attributes,
+          )
 
   def _assert_feature(
       self,

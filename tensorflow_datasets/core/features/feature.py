@@ -28,6 +28,7 @@ import numpy as np
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -214,6 +215,10 @@ class FeatureConnector(object):
 
     return subclass.from_json_content(value['content'])
 
+  @property
+  def _fully_qualified_class_name(self):
+    return f'{type(self).__module__}.{type(self).__name__}'
+
   def to_json(self) -> Json:
     # pylint: disable=line-too-long
     """Exports the FeatureConnector to Json.
@@ -263,7 +268,7 @@ class FeatureConnector(object):
     """
     # pylint: enable=line-too-long
     return {
-        'type': f'{type(self).__module__}.{type(self).__name__}',
+        'type': self._fully_qualified_class_name,
         'content': self.to_json_content(),
     }
 
@@ -271,7 +276,7 @@ class FeatureConnector(object):
   def from_json_content(cls: Type[T], value: Json) -> T:
     """FeatureConnector factory (to overwrite).
 
-    Subclasses should overwritte this method. importing
+    Subclasses should overwrite this method. importing
     the feature connector from the config.
 
     This function should not be called directly. `FeatureConnector.from_json`
@@ -302,6 +307,31 @@ class FeatureConnector(object):
         `from_json_content` when reconstructing the feature.
     """
     return dict()
+
+  def to_proto(self) -> feature_pb2.Feature:
+    """Exports the FeatureConnector to a proto.
+
+    For features that have a specific schema defined in a proto, this
+    function needs to be overriden. If there's no specific proto schema,
+    then the feature will be represented using JSON.
+
+    Returns:
+      The feature proto describing this feature.
+    """
+    return feature_pb2.Feature(
+        python_class_name=self._fully_qualified_class_name,
+        json_feature=feature_pb2.JsonFeature(
+            json=json.dumps(self.to_json_content())),
+    )
+
+  @classmethod
+  def from_proto(cls, feature: feature_pb2.Feature) -> 'FeatureConnector':
+    if feature.HasField('json_feature'):
+      return FeatureConnector.from_json({
+          'type': feature.python_class_name,
+          'content': json.loads(feature.json_feature.json)
+      })
+    raise NotImplementedError
 
   def save_config(self, root_dir: str) -> None:
     """Exports the `FeatureConnector` to a file.
