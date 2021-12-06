@@ -34,11 +34,13 @@ established.
 _HOMEPAGE = 'https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged'
 
 
+def filename(prefix: str, num_shards: int, shard_id: int):
+  return os.fspath(
+      tfds.core.as_path(f'{prefix}-{shard_id:05d}-of-{num_shards:05d}'))
+
+
 def get_files(prefix: str, num_shards: int) -> List[str]:
-  return [
-      os.fspath(tfds.core.as_path(f'{prefix}-{i:05d}-of-{num_shards:05d}'))
-      for i in range(num_shards)  # pytype: disable=bad-return-type  # gen-stub-imports
-  ]
+  return [filename(prefix, num_shards, i) for i in range(num_shards)]  # pytype: disable=bad-return-type  # gen-stub-imports
 
 
 class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
@@ -80,26 +82,23 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     """Create an episode from a TF example."""
     raise NotImplementedError()
 
-  def get_splits(self, paths):
-    return {
-        'train': self._generate_examples(paths, 0),
-    }
-
-  def belongs_to_split(self, episode, split_id):
-    return True
-
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
-    """Returns SplitGenerators."""
-    del dl_manager
-
+  def get_splits(self):
     paths = {
         'file_paths':
             get_files(
                 prefix=self.get_file_prefix(), num_shards=self.num_shards()),
     }
-    return self.get_splits(paths)
+    return {
+        'train': self._generate_examples(paths),
+    }
 
-  def _generate_examples(self, paths, split_id):
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+    """Returns SplitGenerators."""
+    del dl_manager
+
+    return self.get_splits()
+
+  def _generate_examples(self, paths):
     """Yields examples."""
     beam = tfds.core.lazy_imports.apache_beam
     file_paths = paths['file_paths']
@@ -116,7 +115,6 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
           num_parallel_calls=tf.data.experimental.AUTOTUNE)
       episode_ds = tfds.as_numpy(episode_ds)
       for e in episode_ds:
-        if self.belongs_to_split(e, split_id):
-          yield self.get_episode_id(e), e
+        yield self.get_episode_id(e), e
 
     return beam.Create(file_paths) | beam.FlatMap(_generate_examples_one_file)

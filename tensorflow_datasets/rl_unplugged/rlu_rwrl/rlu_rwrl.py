@@ -376,7 +376,7 @@ class RluRwrl(rlu_common.RLUBuilder):
     }
     return episode
 
-  def _generate_examples(self, paths, _):
+  def _generate_examples(self, paths):
     """Yields examples."""
     beam = tfds.core.lazy_imports.apache_beam
     file_paths = paths['file_paths']
