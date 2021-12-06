@@ -131,6 +131,46 @@ CMYK_IMAGES = [
 PNG_IMAGES = ['n02105855_2933.JPEG']
 
 
+def get_validation_labels(val_path):
+  """Returns labels for validation.
+
+  Args:
+    val_path: path to TAR file containing validation images. It is used to
+      retrieve the name of pictures and associate them to labels.
+
+  Returns:
+    dict, mapping from image name (str) to label (str).
+  """
+  labels_path = tfds.core.tfds_path(_VALIDATION_LABELS_FNAME)
+  with tf.io.gfile.GFile(os.fspath(labels_path)) as labels_f:
+    # `splitlines` to remove trailing `\r` in Windows
+    labels = labels_f.read().strip().splitlines()
+  with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:
+    tar = tarfile.open(mode='r:', fileobj=tar_f_obj)
+    images = sorted(tar.getnames())
+  return dict(zip(images, labels))
+
+
+def generate_examples_validation(archive, labels):
+  for fname, fobj in archive:
+    record = {
+        'file_name': fname,
+        'image': fobj,
+        'label': labels[fname],
+    }
+    yield fname, record
+
+
+def generate_examples_test(archive):
+  for fname, fobj in archive:
+    record = {
+        'file_name': fname,
+        'image': fobj,
+        'label': -1,
+    }
+    yield fname, record
+
+
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
@@ -179,26 +219,6 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  @staticmethod
-  def _get_validation_labels(val_path):
-    """Returns labels for validation.
-
-    Args:
-      val_path: path to TAR file containing validation images. It is used to
-        retrieve the name of pictures and associate them to labels.
-
-    Returns:
-      dict, mapping from image name (str) to label (str).
-    """
-    labels_path = tfds.core.tfds_path(_VALIDATION_LABELS_FNAME)
-    with tf.io.gfile.GFile(os.fspath(labels_path)) as labels_f:
-      # `splitlines` to remove trailing `\r` in Windows
-      labels = labels_f.read().strip().splitlines()
-    with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:
-      tar = tarfile.open(mode='r:', fileobj=tar_f_obj)
-      images = sorted(tar.getnames())
-    return dict(zip(images, labels))
-
   def _split_generators(self, dl_manager):
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
@@ -215,7 +235,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
         split=tfds.Split.VALIDATION,
         split_path=val_path,
         dl_manager=dl_manager,
-        validation_labels=self._get_validation_labels(val_path),
+        validation_labels=get_validation_labels(val_path),
     )
     _add_split_if_exists(
         split_list=splits,
@@ -251,11 +271,11 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
                          labels_exist=True):
     """Yields examples."""
     if not labels_exist:  # Test split
-      for key, example in self._generate_examples_test(archive):
+      for key, example in generate_examples_test(archive):
         yield key, example
     if validation_labels:  # Validation split
-      for key, example in self._generate_examples_validation(
-          archive, validation_labels):
+      for key, example in generate_examples_validation(archive,
+                                                       validation_labels):
         yield key, example
     # Training split. Main archive contains archives names after a synset noun.
     # Each sub-archive contains pictures associated to that synset.
@@ -274,24 +294,6 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
             'label': label,
         }
         yield image_fname, record
-
-  def _generate_examples_validation(self, archive, labels):
-    for fname, fobj in archive:
-      record = {
-          'file_name': fname,
-          'image': fobj,
-          'label': labels[fname],
-      }
-      yield fname, record
-
-  def _generate_examples_test(self, archive):
-    for fname, fobj in archive:
-      record = {
-          'file_name': fname,
-          'image': fobj,
-          'label': -1,
-      }
-      yield fname, record
 
 
 def _add_split_if_exists(split_list, split, split_path, dl_manager, **kwargs):
