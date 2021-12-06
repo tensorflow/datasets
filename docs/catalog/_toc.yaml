@@ -330,6 +330,9 @@ toc:
 - section:
   - path: /datasets/catalog/rlu_atari
     title: rlu_atari
+  - path: /datasets/catalog/rlu_atari_checkpoints
+    status: nightly
+    title: rlu_atari_checkpoints
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
     title: rlu_dmlab_explore_object_rewards_few
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_many

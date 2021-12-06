@@ -12,6 +12,11 @@
 # `rlu_atari`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL
@@ -47,7 +52,10 @@ Besides the reward of each step, this dataset includes the clipped reward
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.1.0`** (default): Added is_last.
+    *   `1.1.0`: Added is_last.
+    *   **`1.2.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Added checkpoint id
 
 *   **Download size**: `Unknown size`
 
@@ -59,6 +67,7 @@ Besides the reward of each step, this dataset includes the clipped reward
 
 ```python
 FeaturesDict({
+    'checkpoint_id': tf.int64,
     'clipped_episode_return': tf.float32,
     'episode_id': tf.int64,
     'episode_return': tf.float32,
@@ -83,6 +92,10 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -103,667 +116,157 @@ FeaturesDict({
 
 ## rlu_atari/Alien_run_1 (default config)
 
-*   **Dataset size**: `104.59 GiB`
+*   **Dataset size**: `74.09 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 55,978
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Alien_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 55,945
 
 ## rlu_atari/Alien_run_2
 
-*   **Dataset size**: `104.49 GiB`
+*   **Dataset size**: `74.32 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 50,386
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Alien_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 50,353
 
 ## rlu_atari/Alien_run_3
 
-*   **Dataset size**: `104.55 GiB`
+*   **Dataset size**: `74.21 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 53,222
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Alien_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 53,194
 
 ## rlu_atari/Alien_run_4
 
-*   **Dataset size**: `104.73 GiB`
+*   **Dataset size**: `74.62 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 55,438
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Alien_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 55,405
 
 ## rlu_atari/Alien_run_5
 
-*   **Dataset size**: `104.66 GiB`
+*   **Dataset size**: `74.28 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 54,871
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Alien_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 54,836
 
 ## rlu_atari/Amidar_run_1
 
-*   **Dataset size**: `90.91 GiB`
+*   **Dataset size**: `77.10 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 23,177
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Amidar_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 23,153
 
 ## rlu_atari/Amidar_run_2
 
-*   **Dataset size**: `91.50 GiB`
+*   **Dataset size**: `76.89 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 22,730
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Amidar_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 22,713
 
 ## rlu_atari/Amidar_run_3
 
-*   **Dataset size**: `90.66 GiB`
+*   **Dataset size**: `77.22 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 28,059
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Amidar_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 28,050
 
 ## rlu_atari/Amidar_run_4
 
-*   **Dataset size**: `90.74 GiB`
+*   **Dataset size**: `77.34 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 26,735
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Amidar_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 26,716
 
 ## rlu_atari/Amidar_run_5
 
-*   **Dataset size**: `90.50 GiB`
+*   **Dataset size**: `77.61 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 26,042
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Amidar_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 26,027
 
 ## rlu_atari/Assault_run_1
 
-*   **Dataset size**: `29.99 GiB`
+*   **Dataset size**: `28.89 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 44,263
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Assault_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 44,237
 
 ## rlu_atari/Assault_run_2
 
-*   **Dataset size**: `29.93 GiB`
+*   **Dataset size**: `28.81 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 46,141
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Assault_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 46,114
 
 ## rlu_atari/Assault_run_3
 
-*   **Dataset size**: `29.96 GiB`
+*   **Dataset size**: `28.85 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 46,169
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Assault_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 46,146
 
 ## rlu_atari/Assault_run_4
 
-*   **Dataset size**: `29.94 GiB`
+*   **Dataset size**: `28.83 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 45,551
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Assault_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 45,517
 
 ## rlu_atari/Assault_run_5
 
-*   **Dataset size**: `29.92 GiB`
+*   **Dataset size**: `28.82 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 45,313
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Assault_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 45,283
 
 ## rlu_atari/Asterix_run_1
 
-*   **Dataset size**: `43.29 GiB`
+*   **Dataset size**: `46.74 GiB`
 
 *   **Splits**:
 
@@ -771,43 +274,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 57,870
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Asterix_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Asterix_run_2
 
-*   **Dataset size**: `43.37 GiB`
+*   **Dataset size**: `46.83 GiB`
 
 *   **Splits**:
 
@@ -815,43 +284,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 56,851
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Asterix_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Asterix_run_3
 
-*   **Dataset size**: `43.15 GiB`
+*   **Dataset size**: `46.64 GiB`
 
 *   **Splits**:
 
@@ -859,43 +294,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 67,577
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Asterix_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Asterix_run_4
 
-*   **Dataset size**: `43.32 GiB`
+*   **Dataset size**: `46.76 GiB`
 
 *   **Splits**:
 
@@ -903,43 +304,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 58,131
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Asterix_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Asterix_run_5
 
-*   **Dataset size**: `43.33 GiB`
+*   **Dataset size**: `46.79 GiB`
 
 *   **Splits**:
 
@@ -947,703 +314,159 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 58,081
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Asterix_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Atlantis_run_1
 
-*   **Dataset size**: `47.85 GiB`
+*   **Dataset size**: `41.65 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 9,948
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Atlantis_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 9,937
 
 ## rlu_atari/Atlantis_run_2
 
-*   **Dataset size**: `47.66 GiB`
+*   **Dataset size**: `41.43 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 10,743
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Atlantis_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 10,736
 
 ## rlu_atari/Atlantis_run_3
 
-*   **Dataset size**: `47.85 GiB`
+*   **Dataset size**: `41.67 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 9,063
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Atlantis_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 9,056
 
 ## rlu_atari/Atlantis_run_4
 
-*   **Dataset size**: `47.83 GiB`
+*   **Dataset size**: `41.73 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 10,257
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Atlantis_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 10,255
 
 ## rlu_atari/Atlantis_run_5
 
-*   **Dataset size**: `47.80 GiB`
+*   **Dataset size**: `41.66 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 9,693
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Atlantis_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 9,689
 
 ## rlu_atari/BankHeist_run_1
 
-*   **Dataset size**: `88.96 GiB`
+*   **Dataset size**: `72.12 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 41,848
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BankHeist_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 41,824
 
 ## rlu_atari/BankHeist_run_2
 
-*   **Dataset size**: `88.96 GiB`
+*   **Dataset size**: `72.12 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 42,119
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BankHeist_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 42,097
 
 ## rlu_atari/BankHeist_run_3
 
-*   **Dataset size**: `88.89 GiB`
+*   **Dataset size**: `72.01 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 43,785
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BankHeist_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 43,758
 
 ## rlu_atari/BankHeist_run_4
 
-*   **Dataset size**: `88.99 GiB`
+*   **Dataset size**: `72.12 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 42,268
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BankHeist_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 42,234
 
 ## rlu_atari/BankHeist_run_5
 
-*   **Dataset size**: `88.98 GiB`
+*   **Dataset size**: `72.15 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 41,950
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BankHeist_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 41,935
 
 ## rlu_atari/BattleZone_run_1
 
-*   **Dataset size**: `56.79 GiB`
+*   **Dataset size**: `58.01 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 23,883
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BattleZone_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 23,864
 
 ## rlu_atari/BattleZone_run_2
 
-*   **Dataset size**: `56.82 GiB`
+*   **Dataset size**: `57.98 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 26,247
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BattleZone_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 26,224
 
 ## rlu_atari/BattleZone_run_3
 
-*   **Dataset size**: `56.80 GiB`
+*   **Dataset size**: `57.99 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,723
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BattleZone_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 24,706
 
 ## rlu_atari/BattleZone_run_4
 
-*   **Dataset size**: `56.67 GiB`
+*   **Dataset size**: `57.92 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 22,666
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BattleZone_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 22,650
 
 ## rlu_atari/BattleZone_run_5
 
-*   **Dataset size**: `56.82 GiB`
+*   **Dataset size**: `58.02 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 25,461
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BattleZone_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 25,447
 
 ## rlu_atari/BeamRider_run_1
 
-*   **Dataset size**: `45.59 GiB`
+*   **Dataset size**: `43.90 GiB`
 
 *   **Splits**:
 
@@ -1651,43 +474,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 16,403
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BeamRider_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/BeamRider_run_2
 
-*   **Dataset size**: `45.61 GiB`
+*   **Dataset size**: `43.92 GiB`
 
 *   **Splits**:
 
@@ -1695,43 +484,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 16,138
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BeamRider_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/BeamRider_run_3
 
-*   **Dataset size**: `45.59 GiB`
+*   **Dataset size**: `43.91 GiB`
 
 *   **Splits**:
 
@@ -1739,43 +494,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 16,606
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BeamRider_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/BeamRider_run_4
 
-*   **Dataset size**: `45.59 GiB`
+*   **Dataset size**: `43.91 GiB`
 
 *   **Splits**:
 
@@ -1783,43 +504,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 16,316
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BeamRider_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/BeamRider_run_5
 
-*   **Dataset size**: `45.61 GiB`
+*   **Dataset size**: `43.93 GiB`
 
 *   **Splits**:
 
@@ -1827,263 +514,59 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 16,076
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-BeamRider_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Boxing_run_1
 
-*   **Dataset size**: `70.27 GiB`
+*   **Dataset size**: `46.00 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 49,522
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Boxing_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 49,485
 
 ## rlu_atari/Boxing_run_2
 
-*   **Dataset size**: `70.08 GiB`
+*   **Dataset size**: `45.78 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 53,692
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Boxing_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 53,651
 
 ## rlu_atari/Boxing_run_3
 
-*   **Dataset size**: `70.19 GiB`
+*   **Dataset size**: `45.98 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 53,033
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Boxing_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 53,000
 
 ## rlu_atari/Boxing_run_4
 
-*   **Dataset size**: `70.09 GiB`
+*   **Dataset size**: `45.87 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 53,784
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Boxing_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 53,756
 
 ## rlu_atari/Boxing_run_5
 
-*   **Dataset size**: `70.22 GiB`
+*   **Dataset size**: `45.98 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 51,508
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Boxing_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 51,467
 
 ## rlu_atari/Breakout_run_1
 
-*   **Dataset size**: `40.56 GiB`
+*   **Dataset size**: `30.85 GiB`
 
 *   **Splits**:
 
@@ -2091,43 +574,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 41,839
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Breakout_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Breakout_run_2
 
-*   **Dataset size**: `40.50 GiB`
+*   **Dataset size**: `30.81 GiB`
 
 *   **Splits**:
 
@@ -2135,43 +584,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 42,291
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Breakout_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Breakout_run_3
 
-*   **Dataset size**: `40.53 GiB`
+*   **Dataset size**: `30.84 GiB`
 
 *   **Splits**:
 
@@ -2179,43 +594,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 41,774
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Breakout_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Breakout_run_4
 
-*   **Dataset size**: `40.57 GiB`
+*   **Dataset size**: `30.85 GiB`
 
 *   **Splits**:
 
@@ -2223,43 +604,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 41,691
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Breakout_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Breakout_run_5
 
-*   **Dataset size**: `40.59 GiB`
+*   **Dataset size**: `30.90 GiB`
 
 *   **Splits**:
 
@@ -2267,923 +614,209 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 41,703
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Breakout_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Carnival_run_1
 
-*   **Dataset size**: `33.31 GiB`
+*   **Dataset size**: `33.77 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 218,570
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Carnival_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 218,526
 
 ## rlu_atari/Carnival_run_2
 
-*   **Dataset size**: `33.43 GiB`
+*   **Dataset size**: `33.88 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 222,257
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Carnival_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 222,221
 
 ## rlu_atari/Carnival_run_3
 
-*   **Dataset size**: `33.31 GiB`
+*   **Dataset size**: `33.79 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 224,210
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Carnival_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 224,169
 
 ## rlu_atari/Carnival_run_4
 
-*   **Dataset size**: `33.34 GiB`
+*   **Dataset size**: `33.80 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 218,652
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Carnival_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 218,607
 
 ## rlu_atari/Carnival_run_5
 
-*   **Dataset size**: `34.21 GiB`
+*   **Dataset size**: `34.71 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 218,484
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Carnival_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 218,428
 
 ## rlu_atari/Centipede_run_1
 
-*   **Dataset size**: `35.37 GiB`
+*   **Dataset size**: `35.97 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 94,419
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Centipede_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 94,369
 
 ## rlu_atari/Centipede_run_2
 
-*   **Dataset size**: `35.04 GiB`
+*   **Dataset size**: `35.86 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 105,491
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Centipede_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 105,430
 
 ## rlu_atari/Centipede_run_3
 
-*   **Dataset size**: `35.00 GiB`
+*   **Dataset size**: `35.88 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 106,031
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Centipede_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 105,965
 
 ## rlu_atari/Centipede_run_4
 
-*   **Dataset size**: `35.45 GiB`
+*   **Dataset size**: `36.13 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 99,744
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Centipede_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 99,675
 
 ## rlu_atari/Centipede_run_5
 
-*   **Dataset size**: `35.44 GiB`
+*   **Dataset size**: `36.14 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 86,618
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Centipede_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 86,569
 
 ## rlu_atari/ChopperCommand_run_1
 
-*   **Dataset size**: `42.02 GiB`
+*   **Dataset size**: `40.20 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 69,296
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-ChopperCommand_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 69,258
 
 ## rlu_atari/ChopperCommand_run_2
 
-*   **Dataset size**: `42.17 GiB`
+*   **Dataset size**: `40.35 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 66,478
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-ChopperCommand_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 66,438
 
 ## rlu_atari/ChopperCommand_run_3
 
-*   **Dataset size**: `42.13 GiB`
+*   **Dataset size**: `40.35 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 68,104
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-ChopperCommand_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 68,073
 
 ## rlu_atari/ChopperCommand_run_4
 
-*   **Dataset size**: `42.18 GiB`
+*   **Dataset size**: `40.42 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 67,728
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-ChopperCommand_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 67,685
 
 ## rlu_atari/ChopperCommand_run_5
 
-*   **Dataset size**: `42.28 GiB`
+*   **Dataset size**: `40.52 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 67,481
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-ChopperCommand_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 67,438
 
 ## rlu_atari/CrazyClimber_run_1
 
-*   **Dataset size**: `75.88 GiB`
+*   **Dataset size**: `51.40 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 12,557
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-CrazyClimber_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 12,547
 
 ## rlu_atari/CrazyClimber_run_2
 
-*   **Dataset size**: `76.71 GiB`
+*   **Dataset size**: `51.87 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 12,844
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-CrazyClimber_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 12,833
 
 ## rlu_atari/CrazyClimber_run_3
 
-*   **Dataset size**: `75.62 GiB`
+*   **Dataset size**: `51.37 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 12,594
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-CrazyClimber_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 12,587
 
 ## rlu_atari/CrazyClimber_run_4
 
-*   **Dataset size**: `75.52 GiB`
+*   **Dataset size**: `51.30 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 12,421
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-CrazyClimber_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 12,414
 
 ## rlu_atari/CrazyClimber_run_5
 
-*   **Dataset size**: `75.89 GiB`
+*   **Dataset size**: `51.48 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 12,484
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-CrazyClimber_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 12,479
 
 ## rlu_atari/DemonAttack_run_1
 
-*   **Dataset size**: `26.33 GiB`
+*   **Dataset size**: `24.28 GiB`
 
 *   **Splits**:
 
@@ -3191,43 +824,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 22,438
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DemonAttack_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/DemonAttack_run_2
 
-*   **Dataset size**: `26.50 GiB`
+*   **Dataset size**: `24.42 GiB`
 
 *   **Splits**:
 
@@ -3235,43 +834,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 19,770
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DemonAttack_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/DemonAttack_run_3
 
-*   **Dataset size**: `26.48 GiB`
+*   **Dataset size**: `24.41 GiB`
 
 *   **Splits**:
 
@@ -3279,43 +844,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 19,817
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DemonAttack_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/DemonAttack_run_4
 
-*   **Dataset size**: `26.25 GiB`
+*   **Dataset size**: `24.21 GiB`
 
 *   **Splits**:
 
@@ -3323,43 +854,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 23,391
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DemonAttack_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/DemonAttack_run_5
 
-*   **Dataset size**: `26.07 GiB`
+*   **Dataset size**: `24.05 GiB`
 
 *   **Splits**:
 
@@ -3367,43 +864,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 25,903
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DemonAttack_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/DoubleDunk_run_1
 
-*   **Dataset size**: `71.87 GiB`
+*   **Dataset size**: `49.59 GiB`
 
 *   **Splits**:
 
@@ -3411,43 +874,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 14,393
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DoubleDunk_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/DoubleDunk_run_2
 
-*   **Dataset size**: `71.79 GiB`
+*   **Dataset size**: `49.56 GiB`
 
 *   **Splits**:
 
@@ -3455,43 +884,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 15,077
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DoubleDunk_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/DoubleDunk_run_3
 
-*   **Dataset size**: `71.69 GiB`
+*   **Dataset size**: `49.52 GiB`
 
 *   **Splits**:
 
@@ -3499,43 +894,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 14,357
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DoubleDunk_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/DoubleDunk_run_4
 
-*   **Dataset size**: `71.80 GiB`
+*   **Dataset size**: `49.55 GiB`
 
 *   **Splits**:
 
@@ -3543,43 +904,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 14,700
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DoubleDunk_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/DoubleDunk_run_5
 
-*   **Dataset size**: `71.78 GiB`
+*   **Dataset size**: `49.57 GiB`
 
 *   **Splits**:
 
@@ -3587,395 +914,99 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 14,718
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-DoubleDunk_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Enduro_run_1
 
-*   **Dataset size**: `60.73 GiB`
+*   **Dataset size**: `56.95 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 5,640
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Enduro_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 5,634
 
 ## rlu_atari/Enduro_run_2
 
-*   **Dataset size**: `60.68 GiB`
+*   **Dataset size**: `56.94 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 5,643
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Enduro_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 5,642
 
 ## rlu_atari/Enduro_run_3
 
-*   **Dataset size**: `60.69 GiB`
+*   **Dataset size**: `56.94 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 5,770
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Enduro_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 5,769
 
 ## rlu_atari/Enduro_run_4
 
-*   **Dataset size**: `60.68 GiB`
+*   **Dataset size**: `56.94 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 5,602
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Enduro_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 5,601
 
 ## rlu_atari/Enduro_run_5
 
-*   **Dataset size**: `60.70 GiB`
+*   **Dataset size**: `56.92 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 5,778
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Enduro_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 5,775
 
 ## rlu_atari/FishingDerby_run_1
 
-*   **Dataset size**: `94.90 GiB`
+*   **Dataset size**: `63.76 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 28,369
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-FishingDerby_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 28,353
 
 ## rlu_atari/FishingDerby_run_2
 
-*   **Dataset size**: `94.93 GiB`
+*   **Dataset size**: `63.76 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 27,982
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-FishingDerby_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 27,962
 
 ## rlu_atari/FishingDerby_run_3
 
-*   **Dataset size**: `94.87 GiB`
+*   **Dataset size**: `63.74 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 28,547
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-FishingDerby_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 28,533
 
 ## rlu_atari/FishingDerby_run_4
 
-*   **Dataset size**: `94.96 GiB`
+*   **Dataset size**: `63.78 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 27,786
+
+## rlu_atari/FishingDerby_run_5
+
+*   **Dataset size**: `63.77 GiB`
 
 *   **Splits**:
 
@@ -3983,737 +1014,259 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 27,811
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-FishingDerby_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
-## rlu_atari/FishingDerby_run_5
-
-*   **Dataset size**: `94.91 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 27,827
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-FishingDerby_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## rlu_atari/Freeway_run_1
 
-*   **Dataset size**: `74.87 GiB`
+*   **Dataset size**: `51.13 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,443
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Freeway_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 24,428
 
 ## rlu_atari/Freeway_run_2
 
-*   **Dataset size**: `74.86 GiB`
+*   **Dataset size**: `51.14 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,436
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Freeway_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 24,428
 
 ## rlu_atari/Freeway_run_3
 
-*   **Dataset size**: `74.92 GiB`
+*   **Dataset size**: `51.18 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,447
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Freeway_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 24,428
 
 ## rlu_atari/Freeway_run_4
 
-*   **Dataset size**: `74.91 GiB`
+*   **Dataset size**: `51.19 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,445
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Freeway_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 24,428
 
 ## rlu_atari/Freeway_run_5
 
-*   **Dataset size**: `74.70 GiB`
+*   **Dataset size**: `50.72 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,446
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Freeway_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 24,428
 
 ## rlu_atari/Frostbite_run_1
 
-*   **Dataset size**: `59.26 GiB`
+*   **Dataset size**: `57.22 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 67,132
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Frostbite_run_1-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 67,091
 
 ## rlu_atari/Frostbite_run_2
 
-*   **Dataset size**: `58.33 GiB`
+*   **Dataset size**: `56.45 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 69,206
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Frostbite_run_2-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 69,165
 
 ## rlu_atari/Frostbite_run_3
 
-*   **Dataset size**: `58.54 GiB`
+*   **Dataset size**: `56.76 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 65,736
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Frostbite_run_3-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 65,693
 
 ## rlu_atari/Frostbite_run_4
 
-*   **Dataset size**: `58.79 GiB`
+*   **Dataset size**: `56.98 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 66,187
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Frostbite_run_4-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 66,150
 
 ## rlu_atari/Frostbite_run_5
 
-*   **Dataset size**: `58.74 GiB`
+*   **Dataset size**: `56.77 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 65,269
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_atari-Frostbite_run_5-1.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+`'train'` | 65,228
 
 ## rlu_atari/Gopher_run_1
 
-*   **Dataset size**: `38.00 GiB`
+*   **Dataset size**: `36.50 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,293
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 24,272
 
 ## rlu_atari/Gopher_run_2
 
-*   **Dataset size**: `38.02 GiB`
+*   **Dataset size**: `36.53 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 23,599
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 23,591
 
 ## rlu_atari/Gopher_run_3
 
-*   **Dataset size**: `38.00 GiB`
+*   **Dataset size**: `36.52 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,246
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 24,238
 
 ## rlu_atari/Gopher_run_4
 
-*   **Dataset size**: `38.03 GiB`
+*   **Dataset size**: `36.52 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 23,429
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 23,415
 
 ## rlu_atari/Gopher_run_5
 
-*   **Dataset size**: `38.04 GiB`
+*   **Dataset size**: `36.51 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,151
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 24,136
 
 ## rlu_atari/Gravitar_run_1
 
-*   **Dataset size**: `35.26 GiB`
+*   **Dataset size**: `34.09 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 75,411
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 75,393
 
 ## rlu_atari/Gravitar_run_2
 
-*   **Dataset size**: `34.87 GiB`
+*   **Dataset size**: `33.86 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 74,731
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 74,719
 
 ## rlu_atari/Gravitar_run_3
 
-*   **Dataset size**: `34.26 GiB`
+*   **Dataset size**: `33.29 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 74,279
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 74,262
 
 ## rlu_atari/Gravitar_run_4
 
-*   **Dataset size**: `34.29 GiB`
+*   **Dataset size**: `33.35 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 74,779
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 74,766
 
 ## rlu_atari/Gravitar_run_5
 
-*   **Dataset size**: `34.69 GiB`
+*   **Dataset size**: `33.67 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 74,060
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 74,043
 
 ## rlu_atari/Hero_run_1
 
-*   **Dataset size**: `62.49 GiB`
+*   **Dataset size**: `46.83 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 41,490
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 41,461
 
 ## rlu_atari/Hero_run_2
 
-*   **Dataset size**: `61.91 GiB`
+*   **Dataset size**: `46.64 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 36,706
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 36,680
 
 ## rlu_atari/Hero_run_3
 
-*   **Dataset size**: `62.20 GiB`
+*   **Dataset size**: `46.85 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 40,959
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 40,925
 
 ## rlu_atari/Hero_run_4
 
-*   **Dataset size**: `62.50 GiB`
+*   **Dataset size**: `46.86 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 40,779
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 40,757
 
 ## rlu_atari/Hero_run_5
 
-*   **Dataset size**: `62.76 GiB`
+*   **Dataset size**: `46.93 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 43,936
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 43,907
 
 ## rlu_atari/IceHockey_run_1
 
-*   **Dataset size**: `45.80 GiB`
+*   **Dataset size**: `37.28 GiB`
 
 *   **Splits**:
 
@@ -4721,13 +1274,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 15,623
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/IceHockey_run_2
 
-*   **Dataset size**: `45.84 GiB`
+*   **Dataset size**: `37.28 GiB`
 
 *   **Splits**:
 
@@ -4735,13 +1284,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 15,610
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/IceHockey_run_3
 
-*   **Dataset size**: `45.90 GiB`
+*   **Dataset size**: `37.37 GiB`
 
 *   **Splits**:
 
@@ -4749,13 +1294,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 15,132
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/IceHockey_run_4
 
-*   **Dataset size**: `45.89 GiB`
+*   **Dataset size**: `37.35 GiB`
 
 *   **Splits**:
 
@@ -4763,23 +1304,15 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 15,342
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/IceHockey_run_5
 
-*   **Dataset size**: `45.90 GiB`
+*   **Dataset size**: `37.36 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
 `'train'` | 15,287
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
 
 ## rlu_atari/Jamesbond_run_1
 
@@ -4789,141 +1322,111 @@ Split     | Examples
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 34,806
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 34,791
 
 ## rlu_atari/Jamesbond_run_2
 
-*   **Dataset size**: `35.32 GiB`
+*   **Dataset size**: `35.22 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 37,747
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 37,727
 
 ## rlu_atari/Jamesbond_run_3
 
-*   **Dataset size**: `35.47 GiB`
+*   **Dataset size**: `35.38 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 33,913
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 33,891
 
 ## rlu_atari/Jamesbond_run_4
 
-*   **Dataset size**: `35.20 GiB`
+*   **Dataset size**: `35.17 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 35,276
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 35,252
 
 ## rlu_atari/Jamesbond_run_5
 
-*   **Dataset size**: `35.32 GiB`
+*   **Dataset size**: `35.30 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 33,601
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 33,579
 
 ## rlu_atari/Kangaroo_run_1
 
-*   **Dataset size**: `61.89 GiB`
+*   **Dataset size**: `55.25 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 25,765
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 25,748
 
 ## rlu_atari/Kangaroo_run_2
 
-*   **Dataset size**: `61.41 GiB`
+*   **Dataset size**: `54.78 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 26,442
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 26,428
 
 ## rlu_atari/Kangaroo_run_3
 
-*   **Dataset size**: `61.35 GiB`
+*   **Dataset size**: `54.73 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 28,701
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 28,684
 
 ## rlu_atari/Kangaroo_run_4
 
-*   **Dataset size**: `62.01 GiB`
+*   **Dataset size**: `55.39 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 24,508
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 24,495
 
 ## rlu_atari/Kangaroo_run_5
 
-*   **Dataset size**: `61.16 GiB`
+*   **Dataset size**: `54.56 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 25,585
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 25,568
 
 ## rlu_atari/Krull_run_1
 
-*   **Dataset size**: `97.47 GiB`
+*   **Dataset size**: `90.54 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 37,989
+
+## rlu_atari/Krull_run_2
+
+*   **Dataset size**: `90.60 GiB`
 
 *   **Splits**:
 
@@ -4931,139 +1434,89 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 38,011
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
-## rlu_atari/Krull_run_2
-
-*   **Dataset size**: `97.55 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 38,035
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Krull_run_3
 
-*   **Dataset size**: `97.43 GiB`
+*   **Dataset size**: `90.46 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 38,225
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 38,204
 
 ## rlu_atari/Krull_run_4
 
-*   **Dataset size**: `97.53 GiB`
+*   **Dataset size**: `90.57 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 37,988
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 37,960
 
 ## rlu_atari/Krull_run_5
 
-*   **Dataset size**: `97.52 GiB`
+*   **Dataset size**: `90.58 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 38,128
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 38,109
 
 ## rlu_atari/KungFuMaster_run_1
 
-*   **Dataset size**: `65.95 GiB`
+*   **Dataset size**: `62.07 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 19,474
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 19,460
 
 ## rlu_atari/KungFuMaster_run_2
 
-*   **Dataset size**: `65.82 GiB`
+*   **Dataset size**: `61.93 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 21,385
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 21,367
 
 ## rlu_atari/KungFuMaster_run_3
 
-*   **Dataset size**: `65.83 GiB`
+*   **Dataset size**: `61.96 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 20,606
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 20,591
 
 ## rlu_atari/KungFuMaster_run_4
 
-*   **Dataset size**: `66.05 GiB`
+*   **Dataset size**: `62.19 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 18,711
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 18,700
 
 ## rlu_atari/KungFuMaster_run_5
 
-*   **Dataset size**: `66.03 GiB`
+*   **Dataset size**: `62.18 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 18,588
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 18,580
 
 ## rlu_atari/MsPacman_run_1
 
-*   **Dataset size**: `111.39 GiB`
+*   **Dataset size**: `75.74 GiB`
 
 *   **Splits**:
 
@@ -5071,13 +1524,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 41,975
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/MsPacman_run_2
 
-*   **Dataset size**: `111.47 GiB`
+*   **Dataset size**: `75.83 GiB`
 
 *   **Splits**:
 
@@ -5085,13 +1534,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 42,282
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/MsPacman_run_3
 
-*   **Dataset size**: `111.54 GiB`
+*   **Dataset size**: `75.93 GiB`
 
 *   **Splits**:
 
@@ -5099,13 +1544,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 41,289
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/MsPacman_run_4
 
-*   **Dataset size**: `111.44 GiB`
+*   **Dataset size**: `75.58 GiB`
 
 *   **Splits**:
 
@@ -5113,13 +1554,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 41,983
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/MsPacman_run_5
 
-*   **Dataset size**: `111.21 GiB`
+*   **Dataset size**: `75.62 GiB`
 
 *   **Splits**:
 
@@ -5127,153 +1564,109 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 42,831
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/NameThisGame_run_1
 
-*   **Dataset size**: `61.33 GiB`
+*   **Dataset size**: `61.00 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 11,311
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 11,303
 
 ## rlu_atari/NameThisGame_run_2
 
-*   **Dataset size**: `61.39 GiB`
+*   **Dataset size**: `61.06 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 11,512
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 11,506
 
 ## rlu_atari/NameThisGame_run_3
 
-*   **Dataset size**: `61.20 GiB`
+*   **Dataset size**: `60.86 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 11,268
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 11,260
 
 ## rlu_atari/NameThisGame_run_4
 
-*   **Dataset size**: `61.52 GiB`
+*   **Dataset size**: `61.16 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 12,265
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 12,259
 
 ## rlu_atari/NameThisGame_run_5
 
-*   **Dataset size**: `61.68 GiB`
+*   **Dataset size**: `61.30 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 12,491
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 12,483
 
 ## rlu_atari/Phoenix_run_1
 
-*   **Dataset size**: `28.26 GiB`
+*   **Dataset size**: `27.33 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 30,267
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 30,241
 
 ## rlu_atari/Phoenix_run_2
 
-*   **Dataset size**: `28.35 GiB`
+*   **Dataset size**: `27.46 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 27,481
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 27,471
 
 ## rlu_atari/Phoenix_run_3
 
-*   **Dataset size**: `28.70 GiB`
+*   **Dataset size**: `27.82 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 27,429
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 27,417
 
 ## rlu_atari/Phoenix_run_4
 
-*   **Dataset size**: `28.38 GiB`
+*   **Dataset size**: `27.41 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 30,182
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 30,163
 
 ## rlu_atari/Phoenix_run_5
 
-*   **Dataset size**: `28.28 GiB`
+*   **Dataset size**: `27.35 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 31,192
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 31,181
 
 ## rlu_atari/Pong_run_1
 
-*   **Dataset size**: `24.31 GiB`
+*   **Dataset size**: `21.05 GiB`
 
 *   **Splits**:
 
@@ -5281,13 +1674,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 23,239
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Pong_run_2
 
-*   **Dataset size**: `24.54 GiB`
+*   **Dataset size**: `21.31 GiB`
 
 *   **Splits**:
 
@@ -5295,13 +1684,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 16,862
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Pong_run_3
 
-*   **Dataset size**: `24.50 GiB`
+*   **Dataset size**: `21.28 GiB`
 
 *   **Splits**:
 
@@ -5309,13 +1694,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 18,593
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Pong_run_4
 
-*   **Dataset size**: `24.50 GiB`
+*   **Dataset size**: `21.30 GiB`
 
 *   **Splits**:
 
@@ -5323,13 +1704,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 17,112
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Pong_run_5
 
-*   **Dataset size**: `24.28 GiB`
+*   **Dataset size**: `21.09 GiB`
 
 *   **Splits**:
 
@@ -5337,13 +1714,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 23,268
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Pooyan_run_1
 
-*   **Dataset size**: `57.20 GiB`
+*   **Dataset size**: `55.55 GiB`
 
 *   **Splits**:
 
@@ -5351,13 +1724,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 29,471
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Pooyan_run_2
 
-*   **Dataset size**: `57.13 GiB`
+*   **Dataset size**: `55.47 GiB`
 
 *   **Splits**:
 
@@ -5365,13 +1734,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 29,940
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Pooyan_run_3
 
-*   **Dataset size**: `57.12 GiB`
+*   **Dataset size**: `55.45 GiB`
 
 *   **Splits**:
 
@@ -5379,13 +1744,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 30,167
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Pooyan_run_4
 
-*   **Dataset size**: `57.18 GiB`
+*   **Dataset size**: `55.57 GiB`
 
 *   **Splits**:
 
@@ -5393,13 +1754,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 29,314
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Pooyan_run_5
 
-*   **Dataset size**: `57.18 GiB`
+*   **Dataset size**: `55.52 GiB`
 
 *   **Splits**:
 
@@ -5407,13 +1764,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 29,811
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Qbert_run_1
 
-*   **Dataset size**: `126.52 GiB`
+*   **Dataset size**: `96.95 GiB`
 
 *   **Splits**:
 
@@ -5421,13 +1774,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 47,635
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Qbert_run_2
 
-*   **Dataset size**: `126.74 GiB`
+*   **Dataset size**: `97.27 GiB`
 
 *   **Splits**:
 
@@ -5435,13 +1784,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 46,382
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Qbert_run_3
 
-*   **Dataset size**: `126.75 GiB`
+*   **Dataset size**: `97.44 GiB`
 
 *   **Splits**:
 
@@ -5449,13 +1794,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 46,775
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Qbert_run_4
 
-*   **Dataset size**: `126.56 GiB`
+*   **Dataset size**: `97.31 GiB`
 
 *   **Splits**:
 
@@ -5463,13 +1804,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 47,412
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Qbert_run_5
 
-*   **Dataset size**: `126.61 GiB`
+*   **Dataset size**: `97.12 GiB`
 
 *   **Splits**:
 
@@ -5477,83 +1814,59 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 46,099
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Riverraid_run_1
 
-*   **Dataset size**: `65.38 GiB`
+*   **Dataset size**: `48.65 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 37,557
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 37,536
 
 ## rlu_atari/Riverraid_run_2
 
-*   **Dataset size**: `65.53 GiB`
+*   **Dataset size**: `48.80 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 38,018
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 37,998
 
 ## rlu_atari/Riverraid_run_3
 
-*   **Dataset size**: `65.51 GiB`
+*   **Dataset size**: `48.79 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 38,112
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 38,086
 
 ## rlu_atari/Riverraid_run_4
 
-*   **Dataset size**: `64.51 GiB`
+*   **Dataset size**: `47.92 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 64,993
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 64,952
 
 ## rlu_atari/Riverraid_run_5
 
-*   **Dataset size**: `65.37 GiB`
+*   **Dataset size**: `48.67 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 37,849
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 37,823
 
 ## rlu_atari/RoadRunner_run_1
 
-*   **Dataset size**: `51.02 GiB`
+*   **Dataset size**: `41.90 GiB`
 
 *   **Splits**:
 
@@ -5561,13 +1874,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 45,469
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/RoadRunner_run_2
 
-*   **Dataset size**: `51.03 GiB`
+*   **Dataset size**: `41.85 GiB`
 
 *   **Splits**:
 
@@ -5575,13 +1884,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 47,447
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/RoadRunner_run_3
 
-*   **Dataset size**: `51.00 GiB`
+*   **Dataset size**: `41.89 GiB`
 
 *   **Splits**:
 
@@ -5589,13 +1894,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 45,812
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/RoadRunner_run_4
 
-*   **Dataset size**: `51.05 GiB`
+*   **Dataset size**: `41.88 GiB`
 
 *   **Splits**:
 
@@ -5603,13 +1904,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 46,139
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/RoadRunner_run_5
 
-*   **Dataset size**: `51.02 GiB`
+*   **Dataset size**: `41.92 GiB`
 
 *   **Splits**:
 
@@ -5617,13 +1914,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 45,202
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Robotank_run_1
 
-*   **Dataset size**: `50.34 GiB`
+*   **Dataset size**: `47.39 GiB`
 
 *   **Splits**:
 
@@ -5631,13 +1924,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 9,144
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Robotank_run_2
 
-*   **Dataset size**: `50.42 GiB`
+*   **Dataset size**: `47.47 GiB`
 
 *   **Splits**:
 
@@ -5645,13 +1934,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 9,000
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Robotank_run_3
 
-*   **Dataset size**: `50.53 GiB`
+*   **Dataset size**: `47.50 GiB`
 
 *   **Splits**:
 
@@ -5659,13 +1944,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 9,235
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Robotank_run_4
 
-*   **Dataset size**: `50.55 GiB`
+*   **Dataset size**: `47.54 GiB`
 
 *   **Splits**:
 
@@ -5673,13 +1954,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 9,089
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Robotank_run_5
 
-*   **Dataset size**: `50.27 GiB`
+*   **Dataset size**: `47.32 GiB`
 
 *   **Splits**:
 
@@ -5687,13 +1964,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 9,339
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Seaquest_run_1
 
-*   **Dataset size**: `42.13 GiB`
+*   **Dataset size**: `40.89 GiB`
 
 *   **Splits**:
 
@@ -5701,13 +1974,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 33,872
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Seaquest_run_2
 
-*   **Dataset size**: `42.84 GiB`
+*   **Dataset size**: `41.82 GiB`
 
 *   **Splits**:
 
@@ -5715,13 +1984,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 32,606
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Seaquest_run_3
 
-*   **Dataset size**: `42.86 GiB`
+*   **Dataset size**: `41.91 GiB`
 
 *   **Splits**:
 
@@ -5729,13 +1994,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 35,662
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Seaquest_run_4
 
-*   **Dataset size**: `42.79 GiB`
+*   **Dataset size**: `41.78 GiB`
 
 *   **Splits**:
 
@@ -5743,13 +2004,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 34,697
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Seaquest_run_5
 
-*   **Dataset size**: `42.83 GiB`
+*   **Dataset size**: `41.89 GiB`
 
 *   **Splits**:
 
@@ -5757,503 +2014,359 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 32,783
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/SpaceInvaders_run_1
 
-*   **Dataset size**: `53.86 GiB`
+*   **Dataset size**: `49.89 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 30,348
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 30,333
 
 ## rlu_atari/SpaceInvaders_run_2
 
-*   **Dataset size**: `54.26 GiB`
+*   **Dataset size**: `50.21 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 32,554
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 32,534
 
 ## rlu_atari/SpaceInvaders_run_3
 
-*   **Dataset size**: `54.16 GiB`
+*   **Dataset size**: `50.11 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 30,473
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 30,449
 
 ## rlu_atari/SpaceInvaders_run_4
 
-*   **Dataset size**: `54.23 GiB`
+*   **Dataset size**: `50.09 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 32,610
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 32,587
 
 ## rlu_atari/SpaceInvaders_run_5
 
-*   **Dataset size**: `54.22 GiB`
+*   **Dataset size**: `50.11 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 32,355
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 32,337
 
 ## rlu_atari/StarGunner_run_1
 
-*   **Dataset size**: `25.84 GiB`
+*   **Dataset size**: `22.83 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 50,949
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 50,939
 
 ## rlu_atari/StarGunner_run_2
 
-*   **Dataset size**: `26.12 GiB`
+*   **Dataset size**: `23.12 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 41,634
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 41,624
 
 ## rlu_atari/StarGunner_run_3
 
-*   **Dataset size**: `26.03 GiB`
+*   **Dataset size**: `23.04 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 43,322
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 43,315
 
 ## rlu_atari/StarGunner_run_4
 
-*   **Dataset size**: `25.81 GiB`
+*   **Dataset size**: `22.81 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 50,409
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 50,397
 
 ## rlu_atari/StarGunner_run_5
 
-*   **Dataset size**: `25.94 GiB`
+*   **Dataset size**: `22.94 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 48,237
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 48,224
 
 ## rlu_atari/TimePilot_run_1
 
-*   **Dataset size**: `45.04 GiB`
+*   **Dataset size**: `41.67 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 47,894
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 47,855
 
 ## rlu_atari/TimePilot_run_2
 
-*   **Dataset size**: `44.91 GiB`
+*   **Dataset size**: `41.56 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 48,242
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 48,216
 
 ## rlu_atari/TimePilot_run_3
 
-*   **Dataset size**: `45.20 GiB`
+*   **Dataset size**: `41.84 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 46,209
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 46,181
 
 ## rlu_atari/TimePilot_run_4
 
-*   **Dataset size**: `45.24 GiB`
+*   **Dataset size**: `41.86 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 46,090
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 46,061
 
 ## rlu_atari/TimePilot_run_5
 
-*   **Dataset size**: `45.08 GiB`
+*   **Dataset size**: `41.71 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 47,656
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 47,624
 
 ## rlu_atari/UpNDown_run_1
 
-*   **Dataset size**: `104.96 GiB`
+*   **Dataset size**: `100.37 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 33,871
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 33,847
 
 ## rlu_atari/UpNDown_run_2
 
-*   **Dataset size**: `104.56 GiB`
+*   **Dataset size**: `99.92 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 33,486
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 33,467
 
 ## rlu_atari/UpNDown_run_3
 
-*   **Dataset size**: `104.62 GiB`
+*   **Dataset size**: `100.04 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 33,443
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 33,425
 
 ## rlu_atari/UpNDown_run_4
 
-*   **Dataset size**: `104.63 GiB`
+*   **Dataset size**: `100.16 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 33,036
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 33,018
 
 ## rlu_atari/UpNDown_run_5
 
-*   **Dataset size**: `104.81 GiB`
+*   **Dataset size**: `100.25 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 33,614
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 33,591
 
 ## rlu_atari/VideoPinball_run_1
 
-*   **Dataset size**: `96.53 GiB`
+*   **Dataset size**: `71.93 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 12,043
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 12,037
 
 ## rlu_atari/VideoPinball_run_2
 
-*   **Dataset size**: `96.39 GiB`
+*   **Dataset size**: `71.62 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 23,884
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 23,868
 
 ## rlu_atari/VideoPinball_run_3
 
-*   **Dataset size**: `96.10 GiB`
+*   **Dataset size**: `71.22 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 25,268
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 25,253
 
 ## rlu_atari/VideoPinball_run_4
 
-*   **Dataset size**: `96.57 GiB`
+*   **Dataset size**: `71.90 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 13,816
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 13,809
 
 ## rlu_atari/VideoPinball_run_5
 
-*   **Dataset size**: `96.62 GiB`
+*   **Dataset size**: `71.92 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 13,251
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 13,239
 
 ## rlu_atari/WizardOfWor_run_1
 
-*   **Dataset size**: `83.10 GiB`
+*   **Dataset size**: `60.70 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 37,915
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 37,887
 
 ## rlu_atari/WizardOfWor_run_2
 
-*   **Dataset size**: `82.86 GiB`
+*   **Dataset size**: `60.66 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 39,031
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 39,005
 
 ## rlu_atari/WizardOfWor_run_3
 
-*   **Dataset size**: `82.74 GiB`
+*   **Dataset size**: `60.66 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 47,541
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 47,518
 
 ## rlu_atari/WizardOfWor_run_4
 
-*   **Dataset size**: `82.55 GiB`
+*   **Dataset size**: `60.29 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 46,317
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 46,291
 
 ## rlu_atari/WizardOfWor_run_5
 
-*   **Dataset size**: `82.95 GiB`
+*   **Dataset size**: `60.99 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 44,936
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 44,904
 
 ## rlu_atari/YarsRevenge_run_1
 
-*   **Dataset size**: `68.16 GiB`
+*   **Dataset size**: `69.40 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 56,014
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 55,982
 
 ## rlu_atari/YarsRevenge_run_2
 
-*   **Dataset size**: `68.92 GiB`
+*   **Dataset size**: `70.34 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 56,260
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 56,225
 
 ## rlu_atari/YarsRevenge_run_3
 
-*   **Dataset size**: `69.27 GiB`
+*   **Dataset size**: `70.60 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 58,043
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 58,010
 
 ## rlu_atari/YarsRevenge_run_4
 
-*   **Dataset size**: `68.17 GiB`
+*   **Dataset size**: `69.51 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 56,327
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 56,292
 
 ## rlu_atari/YarsRevenge_run_5
 
-*   **Dataset size**: `69.86 GiB`
+*   **Dataset size**: `71.32 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
-`'train'` | 57,308
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
+`'train'` | 57,275
 
 ## rlu_atari/Zaxxon_run_1
 
-*   **Dataset size**: `47.61 GiB`
+*   **Dataset size**: `39.05 GiB`
 
 *   **Splits**:
 
@@ -6261,13 +2374,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 31,146
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Zaxxon_run_2
 
-*   **Dataset size**: `47.94 GiB`
+*   **Dataset size**: `39.22 GiB`
 
 *   **Splits**:
 
@@ -6275,13 +2384,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 33,318
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Zaxxon_run_3
 
-*   **Dataset size**: `47.49 GiB`
+*   **Dataset size**: `39.02 GiB`
 
 *   **Splits**:
 
@@ -6289,13 +2394,9 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 31,266
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Zaxxon_run_4
 
-*   **Dataset size**: `48.02 GiB`
+*   **Dataset size**: `39.31 GiB`
 
 *   **Splits**:
 
@@ -6303,20 +2404,12 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 32,862
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
-
 ## rlu_atari/Zaxxon_run_5
 
-*   **Dataset size**: `46.56 GiB`
+*   **Dataset size**: `37.75 GiB`
 
 *   **Splits**:
 
 Split     | Examples
 :-------- | -------:
 `'train'` | 44,701
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Only shown for the first 100 configs.
