@@ -1,0 +1,20 @@
+{
+    "iskZwzri42zg0vdZGVRJYIP25svQgQLc.jpeg": {
+        "cooling": false,
+        "pollen": false,
+        "varroa": false,
+        "wasps": true
+    },
+    "l01Y3euvXnrq1XdlpA8oBVRc3uaXDKVo.jpeg": {
+        "cooling": false,
+        "pollen": true,
+        "varroa": false,
+        "wasps": false
+    },
+    "KMM0R4UV5leP51apLk4VNkLJMrudWdF1.jpeg": {
+        "cooling": false,
+        "pollen": true,
+        "varroa": false,
+        "wasps": false
+    }
+}
