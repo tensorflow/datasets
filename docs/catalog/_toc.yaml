@@ -206,6 +206,9 @@ toc:
     title: imagenet_r
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
+  - path: /datasets/catalog/imagenet_sketch
+    status: nightly
+    title: imagenet_sketch
   - path: /datasets/catalog/imagenet_v2
     title: imagenet_v2
   - path: /datasets/catalog/imagenette
