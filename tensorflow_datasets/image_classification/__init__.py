@@ -53,6 +53,7 @@ from tensorflow_datasets.image_classification.imagenet2012_subset import Imagene
 from tensorflow_datasets.image_classification.imagenet_a import ImagenetA
 from tensorflow_datasets.image_classification.imagenet_r import ImagenetR
 from tensorflow_datasets.image_classification.imagenet_resized import ImagenetResized
+from tensorflow_datasets.image_classification.imagenet_sketch import ImagenetSketch
 from tensorflow_datasets.image_classification.imagenet_v2 import ImagenetV2
 from tensorflow_datasets.image_classification.imagenette import Imagenette
 from tensorflow_datasets.image_classification.imagewang import Imagewang
