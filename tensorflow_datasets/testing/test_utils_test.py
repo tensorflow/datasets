@@ -63,6 +63,10 @@ class RunInGraphAndEagerTest(test_case.TestCase):
         super(ExampleTest, self).setUp()
         modes.append('setup_' + mode_name())
 
+      def subTest(self, msg, **params):
+        modes.append('subtest_' + msg)
+        return super().subTest(msg, **params)
+
       @test_utils.run_in_graph_and_eager_modes
       def testBody(self):
         modes.append('run_' + mode_name())
@@ -71,8 +75,14 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     e.setUp()
     e.testBody()
 
-    self.assertEqual(modes[0:2], ['setup_eager', 'run_eager'])
-    self.assertEqual(modes[2:], ['setup_graph', 'run_graph'])
+    self.assertEqual(modes, [
+        'setup_eager',
+        'subtest_eager_mode',
+        'run_eager',
+        'subtest_graph_mode',
+        'setup_graph',
+        'run_graph',
+    ])
 
   def test_mock_tf(self):
     # pylint: disable=g-import-not-at-top,reimported

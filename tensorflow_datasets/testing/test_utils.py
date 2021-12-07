@@ -271,15 +271,15 @@ def run_in_graph_and_eager_modes(func=None, config=None, use_gpu=True):
         raise ValueError('Must be executing eagerly when using the '
                          'run_in_graph_and_eager_modes decorator.')
 
-      # Run eager block
-      f(self, *args, **kwargs)
-      self.tearDown()
+      with self.subTest('eager_mode'):
+        f(self, *args, **kwargs)
+        self.tearDown()
 
-      # Run in graph mode block
-      with tf.Graph().as_default():
-        self.setUp()
-        with self.test_session(use_gpu=use_gpu, config=config):
-          f(self, *args, **kwargs)
+      with self.subTest('graph_mode'):
+        with tf.Graph().as_default():
+          self.setUp()
+          with self.test_session(use_gpu=use_gpu, config=config):
+            f(self, *args, **kwargs)
 
     return decorated
 
