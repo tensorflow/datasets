@@ -16,6 +16,7 @@ message Feature {
   string python_class_name = 1;
   oneof content {
     JsonFeature json_feature = 2;
+    FeaturesDict features_dict = 3;
   }
 }
 
