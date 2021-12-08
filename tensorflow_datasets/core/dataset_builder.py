@@ -353,6 +353,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
+    elif data_exists and download_config.download_mode == REUSE_CACHE_IF_EXISTS:
+      logging.info("Deleting pre-existing dataset %s (%s)", self.name,
+                   self._data_dir)
+      utils.as_path(self._data_dir).rmtree()  # Delete pre-existing data.
+      data_exists = tf.io.gfile.exists(self._data_dir)
 
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(

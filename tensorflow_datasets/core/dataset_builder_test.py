@@ -604,6 +604,25 @@ class BuilderRestoreGcsTest(testing.TestCase):
     self.patch_gcs.start()
 
 
+class DatasetBuilderGenerateModeTest(testing.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    super(DatasetBuilderGenerateModeTest, cls).setUpClass()
+
+  def test_reuse_cache_if_exists(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+      dl_config = download.DownloadConfig(max_examples_per_split=3)
+      builder.download_and_prepare(download_config=dl_config)
+
+      dl_config = download.DownloadConfig(
+          download_mode=download.GenerateMode.REUSE_CACHE_IF_EXISTS,
+          max_examples_per_split=5)
+      builder.download_and_prepare(download_config=dl_config)
+      self.assertEqual(builder.info.splits["train"].num_examples, 5)
+
+
 class DatasetBuilderReadTest(testing.TestCase):
 
   @classmethod
