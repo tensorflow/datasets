@@ -98,23 +98,24 @@ class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
 
     return self.get_splits()
 
+  def generate_examples_one_file(
+      self, path) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
+    """Yields examples from one file."""
+    # Dataset of tf.Examples containing full episodes.
+    example_ds = tf.data.TFRecordDataset(
+        filenames=str(path), compression_type='GZIP')
+    # Dataset of episodes, each represented as a dataset of steps.
+    episode_ds = example_ds.map(
+        self.tf_example_to_step_ds,
+        num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    episode_ds = tfds.as_numpy(episode_ds)
+    for e in episode_ds:
+      yield self.get_episode_id(e), e
+
   def _generate_examples(self, paths):
     """Yields examples."""
     beam = tfds.core.lazy_imports.apache_beam
     file_paths = paths['file_paths']
 
-    def _generate_examples_one_file(
-        path) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
-      """Yields examples from one file."""
-      # Dataset of tf.Examples containing full episodes.
-      example_ds = tf.data.TFRecordDataset(
-          filenames=str(path), compression_type='GZIP')
-      # Dataset of episodes, each represented as a dataset of steps.
-      episode_ds = example_ds.map(
-          self.tf_example_to_step_ds,
-          num_parallel_calls=tf.data.experimental.AUTOTUNE)
-      episode_ds = tfds.as_numpy(episode_ds)
-      for e in episode_ds:
-        yield self.get_episode_id(e), e
-
-    return beam.Create(file_paths) | beam.FlatMap(_generate_examples_one_file)
+    return beam.Create(file_paths) | beam.FlatMap(
+        self.generate_examples_one_file)

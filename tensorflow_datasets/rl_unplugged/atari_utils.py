@@ -133,6 +133,28 @@ _SHORT_GAMES = [
 ]
 
 
+_FEATURE_DESCRIPTION = {
+    'checkpoint_idx':
+        tf.io.FixedLenFeature([], tf.int64),
+    'episode_idx':
+        tf.io.FixedLenFeature([], tf.int64),
+    'episode_return':
+        tf.io.FixedLenFeature([], tf.float32),
+    'clipped_episode_return':
+        tf.io.FixedLenFeature([], tf.float32),
+    'observations':
+        tf.io.FixedLenSequenceFeature([], tf.string, allow_missing=True),
+    'actions':
+        tf.io.FixedLenSequenceFeature([], tf.int64, allow_missing=True),
+    'unclipped_rewards':
+        tf.io.FixedLenSequenceFeature([], tf.float32, allow_missing=True),
+    'clipped_rewards':
+        tf.io.FixedLenSequenceFeature([], tf.float32, allow_missing=True),
+    'discounts':
+        tf.io.FixedLenSequenceFeature([], tf.float32, allow_missing=True),
+}
+
+
 def num_shards(game: str, shards: int) -> int:
   if game in _SHORT_GAMES:
     return shards - 1
@@ -162,29 +184,7 @@ def atari_example_to_rlds(tf_example: tf.train.Example) -> Dict[str, Any]:
 
   """
 
-  # Parse tf.Example.
-  feature_description = {
-      'checkpoint_idx':
-          tf.io.FixedLenFeature([], tf.int64),
-      'episode_idx':
-          tf.io.FixedLenFeature([], tf.int64),
-      'episode_return':
-          tf.io.FixedLenFeature([], tf.float32),
-      'clipped_episode_return':
-          tf.io.FixedLenFeature([], tf.float32),
-      'observations':
-          tf.io.FixedLenSequenceFeature([], tf.string, allow_missing=True),
-      'actions':
-          tf.io.FixedLenSequenceFeature([], tf.int64, allow_missing=True),
-      'unclipped_rewards':
-          tf.io.FixedLenSequenceFeature([], tf.float32, allow_missing=True),
-      'clipped_rewards':
-          tf.io.FixedLenSequenceFeature([], tf.float32, allow_missing=True),
-      'discounts':
-          tf.io.FixedLenSequenceFeature([], tf.float32, allow_missing=True),
-  }
-
-  data = tf.io.parse_single_example(tf_example, feature_description)
+  data = tf.io.parse_single_example(tf_example, _FEATURE_DESCRIPTION)
   episode_length = tf.size(data['actions'])
   is_first = tf.concat([[True], [False] * tf.ones(episode_length - 1)], axis=0)
   is_last = tf.concat([[False] * tf.ones(episode_length - 1), [True]], axis=0)
