@@ -22,6 +22,12 @@ import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import atari_utils
 from tensorflow_datasets.rl_unplugged import rlu_common
 
+_EXTRA_DESCRIPTION = """
+  Each of the configurations is broken into splits. Splits correspond to
+  checkpoints of 1M steps (note that the number of episodes may difer).
+  Checkpoints are ordered in time (so checkpoint 0 ran before checkpoint 1).
+"""
+
 
 class RluAtariCheckpoints(rlu_common.RLUBuilder):
   """DatasetBuilder for RLU Atari with one split per checkpoint."""
@@ -41,7 +47,7 @@ class RluAtariCheckpoints(rlu_common.RLUBuilder):
     return atari_utils.features_dict()
 
   def get_description(self):
-    return atari_utils.description()
+    return atari_utils.description() + _EXTRA_DESCRIPTION
 
   def get_citation(self):
     return atari_utils.citation()
@@ -71,4 +77,3 @@ class RluAtariCheckpoints(rlu_common.RLUBuilder):
       }
       checkpoints[f'checkpoint_{i:02d}'] = self._generate_examples(paths)
     return checkpoints
-

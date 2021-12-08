@@ -23,11 +23,16 @@ from tensorflow_datasets.rl_unplugged import atari_utils
 from tensorflow_datasets.rl_unplugged import rlu_common
 
 _EXTRA_DESCRIPTION = """
-  Each of the configurations is broken into splits, and episodes within each
-  split are ordered.
+  Each of the configurations is broken into splits. Splits correspond to
+  checkpoints of 1M steps (note that the number of episodes may difer).
+  Checkpoints are ordered in time (so checkpoint 0 ran before checkpoint 1).
 
-  Check https://www.tensorflow.org/datasets/determinism if you want to ensure
+  Episodes within each split are ordered. Check
+  https://www.tensorflow.org/datasets/determinism if you want to ensure
   that you read episodes in order.
+
+  This dataset corresponds to the one used in the DQN replay paper.
+  https://research.google/tools/datasets/dqn-replay/
 """
 
 
