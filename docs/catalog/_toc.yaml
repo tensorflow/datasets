@@ -202,6 +202,9 @@ toc:
     title: imagenet2012_subset (manual)
   - path: /datasets/catalog/imagenet_a
     title: imagenet_a
+  - path: /datasets/catalog/imagenet_lt
+    status: nightly
+    title: imagenet_lt (manual)
   - path: /datasets/catalog/imagenet_r
     title: imagenet_r
   - path: /datasets/catalog/imagenet_resized
@@ -336,6 +339,9 @@ toc:
   - path: /datasets/catalog/rlu_atari_checkpoints
     status: nightly
     title: rlu_atari_checkpoints
+  - path: /datasets/catalog/rlu_atari_checkpoints_ordered
+    status: nightly
+    title: rlu_atari_checkpoints_ordered
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
     title: rlu_dmlab_explore_object_rewards_few
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_many

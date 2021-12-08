@@ -136,6 +136,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`imagenet2012_real`](imagenet2012_real.md)
 *   [`imagenet2012_subset`](imagenet2012_subset.md)
 *   [`imagenet_a`](imagenet_a.md)
+*   [`imagenet_lt`](imagenet_lt.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet_r`](imagenet_r.md)
 *   [`imagenet_resized`](imagenet_resized.md)
 *   [`imagenet_sketch`](imagenet_sketch.md)
@@ -212,6 +214,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`rlu_atari`](rlu_atari.md)
 *   [`rlu_atari_checkpoints`](rlu_atari_checkpoints.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_atari_checkpoints_ordered`](rlu_atari_checkpoints_ordered.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`rlu_dmlab_explore_object_rewards_few`](rlu_dmlab_explore_object_rewards_few.md)
 *   [`rlu_dmlab_explore_object_rewards_many`](rlu_dmlab_explore_object_rewards_many.md)

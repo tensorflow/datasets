@@ -31,14 +31,17 @@ and some endings which complete the context.
 *   **Versions**:
 
     *   `0.0.1`: No release notes.
-    *   **`1.0.0`** (default)
+    *   `1.0.0`
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Adding separate splits for in-domain and out-of-domain validation/test
         sets.
+    *   **`1.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Another split dimension for source (wikihow vs activitynet)
 
 *   **Download size**: `68.18 MiB`
 
-*   **Dataset size**: `69.14 MiB`
+*   **Dataset size**: `107.45 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -46,15 +49,21 @@ and some endings which complete the context.
 
 *   **Splits**:
 
-Split              | Examples
-:----------------- | -------:
-`'test'`           | 10,003
-`'test_ind'`       | 5,002
-`'test_ood'`       | 5,001
-`'train'`          | 39,905
-`'validation'`     | 10,042
-`'validation_ind'` | 5,001
-`'validation_ood'` | 5,041
+Split                          | Examples
+:----------------------------- | -------:
+`'test'`                       | 10,003
+`'test_ind_activitynet'`       | 1,870
+`'test_ind_wikihow'`           | 3,132
+`'test_ood_activitynet'`       | 1,651
+`'test_ood_wikihow'`           | 3,350
+`'train'`                      | 39,905
+`'train_activitynet'`          | 14,740
+`'train_wikihow'`              | 25,165
+`'validation'`                 | 10,042
+`'validation_ind_activitynet'` | 1,809
+`'validation_ind_wikihow'`     | 3,192
+`'validation_ood_activitynet'` | 1,434
+`'validation_ood_wikihow'`     | 3,607
 
 *   **Features**:
 
@@ -64,6 +73,7 @@ FeaturesDict({
     'context': Text(shape=(), dtype=tf.string),
     'endings': Sequence(Text(shape=(), dtype=tf.string)),
     'label': tf.int32,
+    'source_id': Text(shape=(), dtype=tf.string),
     'split_type': Text(shape=(), dtype=tf.string),
 })
 ```
@@ -78,37 +88,7 @@ FeaturesDict({
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/hellaswag-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+    Missing.
 
 *   **Citation**:
 
