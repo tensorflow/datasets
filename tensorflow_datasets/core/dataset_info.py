@@ -64,6 +64,32 @@ LICENSE_FILENAME = "LICENSE"
 METADATA_FILENAME = "metadata.json"
 
 
+@six.add_metaclass(abc.ABCMeta)
+class Metadata(dict):
+  """Abstract base class for DatasetInfo metadata container.
+
+  `builder.info.metadata` allows the dataset to expose additional general
+  information about the dataset which are not specific to a feature or
+  individual example.
+
+  To implement the interface, overwrite `save_metadata` and
+  `load_metadata`.
+
+  See `tfds.core.MetadataDict` for a simple implementation that acts as a
+  dict that saves data to/from a JSON file.
+  """
+
+  @abc.abstractmethod
+  def save_metadata(self, data_dir):
+    """Save the metadata."""
+    raise NotImplementedError()
+
+  @abc.abstractmethod
+  def load_metadata(self, data_dir):
+    """Restore the metadata."""
+    raise NotImplementedError()
+
+
 class DatasetInfo(object):
   """Information about a dataset.
 
@@ -81,24 +107,24 @@ class DatasetInfo(object):
       self,
       *,
       builder,
-      description=None,
-      features=None,
+      description: Optional[str] = None,
+      features: Optional[feature_lib.FeatureConnector] = None,
       supervised_keys: Optional[SupervisedKeysType] = None,
       disable_shuffling: bool = False,
-      homepage=None,
-      citation=None,
-      metadata=None,
+      homepage: Optional[str] = None,
+      citation: Optional[str] = None,
+      metadata: Optional[Metadata] = None,
       license: Optional[str] = None,  # pylint: disable=redefined-builtin
-      redistribution_info=None):
+      redistribution_info: Optional[Dict[str, str]] = None):
     """Constructs DatasetInfo.
 
     Args:
       builder: `DatasetBuilder`, dataset builder for this info.
-      description: `str`, description of this dataset.
-      features: `tfds.features.FeaturesDict`, Information on the feature dict of
-        the `tf.data.Dataset()` object from the `builder.as_dataset()` method.
-      supervised_keys: Specifies the input structure for supervised learning,
-        if applicable for the dataset, used with "as_supervised". The keys
+      description: description of this dataset.
+      features: Information on the feature dict of the `tf.data.Dataset()`
+        object from the `builder.as_dataset()` method.
+      supervised_keys: Specifies the input structure for supervised learning, if
+        applicable for the dataset, used with "as_supervised". The keys
         correspond to the feature names to select in `info.features`. When
         calling `tfds.core.DatasetBuilder.as_dataset()` with
         `as_supervised=True`, the `tf.data.Dataset` object will yield the
@@ -116,19 +142,19 @@ class DatasetInfo(object):
         yielding a tuple with a dictionary of features in the `features`
         position.
 
-        Note that Selecting features in nested `tfds.features.FeaturesDict`
+        Note that selecting features in nested `tfds.features.FeaturesDict`
         objects is not supported.
-      disable_shuffling: `bool`, specify whether to shuffle the examples.
-      homepage: `str`, optional, the homepage for this dataset.
-      citation: `str`, optional, the citation to use for this dataset.
-      metadata: `tfds.core.Metadata`, additonal object which will be
+      disable_shuffling: whether to disable shuffling the examples.
+      homepage: the homepage for this dataset.
+      citation: the citation to use for this dataset.
+      metadata: `tfds.core.Metadata`, additional object which will be
         stored/restored with the dataset. This allows for storing additional
         information with the dataset.
-      license: Optional license of the dataset
-      redistribution_info: `dict`, optional, information needed for
-        redistribution, as specified in `dataset_info_pb2.RedistributionInfo`.
-        The content of the `license` subfield will automatically be written to a
-        LICENSE file stored with the dataset.
+      license: license of the dataset.
+      redistribution_info: information needed for redistribution, as specified
+        in `dataset_info_pb2.RedistributionInfo`. The content of the `license`
+        subfield will automatically be written to a LICENSE file stored with the
+        dataset.
     """
     self._builder = builder
 
@@ -177,15 +203,15 @@ class DatasetInfo(object):
     self._fully_initialized = False
 
   @property
-  def as_proto(self):
+  def as_proto(self) -> dataset_info_pb2.DatasetInfo:
     return self._info_proto
 
   @property
-  def name(self):
+  def name(self) -> str:
     return self.as_proto.name
 
   @property
-  def config_name(self):
+  def config_name(self) -> str:
     return self.as_proto.config_name
 
   @property
@@ -651,6 +677,27 @@ def read_from_json(path: type_utils.PathLike) -> dataset_info_pb2.DatasetInfo:
   return parsed_proto
 
 
+def read_proto_from_builder_dir(
+    builder_dir: type_utils.PathLike) -> dataset_info_pb2.DatasetInfo:
+  """Reads the dataset info from the given builder dir.
+
+  Args:
+    builder_dir: The folder that contains the dataset info files.
+
+  Returns:
+    The DatasetInfo proto as read from the builder dir.
+
+  Raises:
+    FileNotFoundError: If the builder_dir does not exists.
+  """
+  info_path = os.path.join(
+      os.path.expanduser(builder_dir), DATASET_INFO_FILENAME)
+  if not tf.io.gfile.exists(info_path):
+    raise FileNotFoundError(
+        f"Could not load dataset info: {info_path} does not exists.")
+  return read_from_json(info_path)
+
+
 def pack_as_supervised_ds(
     ds: tf.data.Dataset,
     ds_info: DatasetInfo,
@@ -663,32 +710,6 @@ def pack_as_supervised_ds(
     return ds
   else:  # If dataset isn't a supervised tuple (input, label), return as-is
     return ds
-
-
-@six.add_metaclass(abc.ABCMeta)
-class Metadata(dict):
-  """Abstract base class for DatasetInfo metadata container.
-
-  `builder.info.metadata` allows the dataset to expose additional general
-  information about the dataset which are not specific to a feature or
-  individual example.
-
-  To implement the interface, overwrite `save_metadata` and
-  `load_metadata`.
-
-  See `tfds.core.MetadataDict` for a simple implementation that acts as a
-  dict that saves data to/from a JSON file.
-  """
-
-  @abc.abstractmethod
-  def save_metadata(self, data_dir):
-    """Save the metadata."""
-    raise NotImplementedError()
-
-  @abc.abstractmethod
-  def load_metadata(self, data_dir):
-    """Restore the metadata."""
-    raise NotImplementedError()
 
 
 def _metadata_filepath(data_dir):

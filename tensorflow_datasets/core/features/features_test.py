@@ -295,5 +295,30 @@ def test_tensor_feature_backward_compatibility():
   assert registered[module_base + 'feature.Tensor'] is cls
 
 
+def test_from_json_content_backward_compatibility():
+  legacy_json = {
+      'type': 'tensorflow_datasets.core.features.features_dict.FeaturesDict',
+      'content': {
+          'input': {
+              'type': 'tensorflow_datasets.core.features.image_feature.Image',
+              'content': {
+                  'shape': [28, 28, 3],
+                  'dtype': 'uint8',
+                  'encoding_format': 'png'
+              }
+          },
+          'target': {
+              'type':
+                  'tensorflow_datasets.core.features.class_label_feature.ClassLabel',
+              'content': {
+                  'num_classes': 10
+              }
+          }
+      }
+  }
+  parsed_features_dict = features_lib.FeatureConnector.from_json(legacy_json)
+  assert parsed_features_dict.keys() == set(['input', 'target'])
+
+
 if __name__ == '__main__':
   testing.test_main()

@@ -15,7 +15,7 @@
 
 """FeatureDict: Main feature connector container."""
 
-from typing import Dict
+from typing import Dict, Union
 
 import tensorflow as tf
 
@@ -23,6 +23,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -176,16 +177,27 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     }
 
   @classmethod
-  def from_json_content(cls, value: Json) -> 'FeaturesDict':
-    return cls({
-        k: feature_lib.FeatureConnector.from_json(v) for k, v in value.items()
-    })
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.FeaturesDict]) -> 'FeaturesDict':
+    if isinstance(value, dict):
+      features = {
+          k: feature_lib.FeatureConnector.from_json(v)
+          for k, v in value.items()
+      }
+    else:
+      features = {
+          name: feature_lib.FeatureConnector.from_proto(proto)
+          for name, proto in value.features.items()
+      }
+    return cls(features)
 
-  def to_json_content(self) -> Json:
-    return {
-        feature_key: feature.to_json()
-        for feature_key, feature in self._feature_dict.items()
-    }
+  def to_json_content(self) -> feature_pb2.FeaturesDict:
+    return feature_pb2.FeaturesDict(
+        features={
+            feature_key: feature.to_proto()
+            for feature_key, feature in self._feature_dict.items()
+        },
+    )
 
   def encode_example(self, example_dict):
     """See base class for details."""

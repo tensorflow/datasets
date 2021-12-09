@@ -41,6 +41,7 @@ from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
@@ -83,6 +84,19 @@ class BuilderConfig:
   supported_versions: List[VersionOrStr] = dataclasses.field(
       default_factory=list)
   description: Optional[str] = None
+
+  @classmethod
+  def from_dataset_info(
+      cls,
+      info_proto: dataset_info_pb2.DatasetInfo) -> Optional["BuilderConfig"]:
+    if not info_proto.config_name:
+      return None
+    return BuilderConfig(
+        name=info_proto.config_name,
+        description=info_proto.config_description,
+        version=info_proto.version,
+        release_notes=info_proto.release_notes or {},
+    )
 
 
 class DatasetBuilder(registered.RegisteredDataset):
