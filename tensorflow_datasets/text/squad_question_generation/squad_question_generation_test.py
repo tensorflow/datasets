@@ -19,8 +19,9 @@ import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text.squad_question_generation import squad_question_generation
 
 
-class SquadQuestionGenerationTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for squad_question_generation dataset."""
+class SquadQuestionGenerationSplitDuTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for squad_question_generation (split_du) dataset."""
+  BUILDER_CONFIG_NAMES_TO_TEST = ["split_du"]
   DATASET_CLASS = squad_question_generation.SquadQuestionGeneration
   SPLITS = {
       "train": 3,  # Number of fake train example
@@ -28,10 +29,26 @@ class SquadQuestionGenerationTest(tfds.testing.DatasetBuilderTestCase):
       "test": 1,  # Number of fake test example
   }
   DL_EXTRACT_RESULT = {
-      "train": "train-v1.1.json",
-      "dev": "dev-v1.1.json",
-      "mapping": "",
-      "redistribute": "",
+      "train": "split_du/train.json",
+      "dev": "split_du/dev.json",
+      "test": "split_du/test.json",
+  }
+
+
+class SquadQuestionGenerationSplitZhouTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for squad_question_generation (split_zhou) dataset."""
+  BUILDER_CONFIG_NAMES_TO_TEST = ["split_zhou"]
+  DATASET_CLASS = squad_question_generation.SquadQuestionGeneration
+  SPLITS = {
+      "train": 3,  # Number of fake train example
+      "validation": 1,  # Number of fake dev example
+      "test": 1,  # Number of fake test example
+  }
+  DL_EXTRACT_RESULT = {
+      "train": "split_zhou/train-v1.1.json",
+      "dev": "split_zhou/dev-v1.1.json",
+      "mapping": "split_zhou/",
+      "redistribute": "split_zhou/",
   }
 
 
