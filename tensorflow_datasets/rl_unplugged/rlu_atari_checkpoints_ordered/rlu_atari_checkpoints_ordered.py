@@ -82,7 +82,12 @@ class RluAtariCheckpointsOrdered(rlu_common.RLUBuilder):
     return atari_utils.num_shards(self.builder_config.game, self._SHARDS)
 
   def get_episode_id(self, episode):
-    return atari_utils.episode_id(episode)
+    # TODO(b/209933106): Ordered datasets need an int id so we cannot use the
+    # one from atari_utils. We estimate that there are at most 20k episodes
+    # per checkpoint (numbers star at 0), 1e10 should be a more than safe
+    # number.
+    episode_id = episode['checkpoint_id'] * 1e10 + episode['episode_id']
+    return episode_id
 
   def tf_example_to_step_ds(self,
                             tf_example: tf.train.Example) -> Dict[str, Any]:
