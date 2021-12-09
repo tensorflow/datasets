@@ -243,6 +243,14 @@ class Image(feature.FeatureConnector):
         encoding_format=self._encoding_format,
     )
 
+  @property
+  def encoding_format(self) -> Optional[str]:
+    return self._encoding_format
+
+  @property
+  def use_colormap(self) -> bool:
+    return self._use_colormap
+
   def get_tensor_info(self):
     # Image is returned as a 3-d uint8 tf.Tensor.
     return feature.TensorInfo(shape=self._shape, dtype=self._dtype)
