@@ -16,7 +16,7 @@
 """Builder and Buidler Configs for D4RL Datasets."""
 
 import dataclasses
-from typing import Any, Dict, FrozenSet
+from typing import Any, Dict, FrozenSet, Optional
 
 import tensorflow as tf
 from tensorflow_datasets.d4rl import dataset_utils
@@ -52,17 +52,21 @@ class DatasetConfig():
       does not include step metadata).
     qvel_len: first dimension of the infos/qvel field (ignored if the dataset
       does not include step metadata).
+    goal_len: first dimension of the infos/goal field (ignored if the dataset
+      does not include step metadata).
   """
   name: str
   obs_len: int
   action_len: int
   qpos_len: int
   qvel_len: int
+  goal_len: Optional[int] = None
 
 
 # Constants used to identify step metadata keys
 _QPOS = 'qpos'
 _QVEL = 'qvel'
+_GOAL = 'goal'
 _ACTION_LOG_PROBS = 'action_log_probs'
 _ACTION_MEAN = 'action_mean'
 _ACTION_LOGSTD = 'action_logstd'
@@ -338,6 +342,9 @@ def _get_step_metadata(
     elif k == _QVEL:
       infos_dict[k] = tfds.features.Tensor(
           shape=(ds_config.qvel_len,), dtype=float_type)
+    elif k == _GOAL:
+      infos_dict[k] = tfds.features.Tensor(
+          shape=(ds_config.goal_len,), dtype=float_type)
     elif k == _ADROIT_BODY_POS:
       # We use the task name to get the names of the body position keys.
       adroit_keys = _ADROIT_BODY_POS_KEYS[ds_config.name]
