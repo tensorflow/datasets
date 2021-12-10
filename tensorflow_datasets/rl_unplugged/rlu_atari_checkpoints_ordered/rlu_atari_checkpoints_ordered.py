@@ -87,7 +87,7 @@ class RluAtariCheckpointsOrdered(rlu_common.RLUBuilder):
     # per checkpoint (numbers star at 0), 1e10 should be a more than safe
     # number.
     episode_id = episode['checkpoint_id'] * 1e10 + episode['episode_id']
-    return episode_id
+    return int(episode_id)
 
   def tf_example_to_step_ds(self,
                             tf_example: tf.train.Example) -> Dict[str, Any]:
