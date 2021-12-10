@@ -52,6 +52,9 @@ toc:
     title: d4rl_adroit_pen
   - path: /datasets/catalog/d4rl_adroit_relocate
     title: d4rl_adroit_relocate
+  - path: /datasets/catalog/d4rl_antmaze
+    status: nightly
+    title: d4rl_antmaze
   - path: /datasets/catalog/d4rl_mujoco_ant
     title: d4rl_mujoco_ant
   - path: /datasets/catalog/d4rl_mujoco_halfcheetah

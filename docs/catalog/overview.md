@@ -53,6 +53,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`d4rl_adroit_hammer`](d4rl_adroit_hammer.md)
 *   [`d4rl_adroit_pen`](d4rl_adroit_pen.md)
 *   [`d4rl_adroit_relocate`](d4rl_adroit_relocate.md)
+*   [`d4rl_antmaze`](d4rl_antmaze.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`d4rl_mujoco_ant`](d4rl_mujoco_ant.md)
 *   [`d4rl_mujoco_halfcheetah`](d4rl_mujoco_halfcheetah.md)
 *   [`d4rl_mujoco_hopper`](d4rl_mujoco_hopper.md)
