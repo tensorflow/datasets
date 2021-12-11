@@ -77,10 +77,10 @@ FeaturesDict({
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `({'pclass': 'pclass', 'sex': 'sex', 'body': 'body', 'home.dest':
-    'home.dest', 'name': 'name', 'age': 'age', 'embarked': 'embarked', 'boat':
-    'boat', 'parch': 'parch', 'ticket': 'ticket', 'sibsp': 'sibsp', 'cabin':
-    'cabin', 'fare': 'fare'}, 'survived')`
+    `({'ticket': 'ticket', 'body': 'body', 'parch': 'parch', 'cabin': 'cabin',
+    'embarked': 'embarked', 'home.dest': 'home.dest', 'name': 'name', 'boat':
+    'boat', 'pclass': 'pclass', 'sibsp': 'sibsp', 'fare': 'fare', 'age': 'age',
+    'sex': 'sex'}, 'survived')`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
