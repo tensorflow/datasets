@@ -98,6 +98,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Image classification`
 
 *   [`beans`](beans.md)
+*   [`bee_dataset`](bee_dataset.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`bigearthnet`](bigearthnet.md)
 *   [`binary_alpha_digits`](binary_alpha_digits.md)
 *   [`caltech101`](caltech101.md)

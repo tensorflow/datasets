@@ -127,6 +127,9 @@ toc:
 - section:
   - path: /datasets/catalog/beans
     title: beans
+  - path: /datasets/catalog/bee_dataset
+    status: nightly
+    title: bee_dataset
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
   - path: /datasets/catalog/binary_alpha_digits
