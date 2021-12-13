@@ -27,6 +27,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
 
@@ -201,7 +202,7 @@ class FeatureExpectationsTestCase(SubTestCase):
         with test_utils.tmp_dir() as config_dir:
           feature_proto = feature.to_proto()
           feature.save_metadata(config_dir, feature_name=None)
-          new_feature = feature.from_proto(feature_proto)
+          new_feature = feature_lib.FeatureConnector.from_proto(feature_proto)
           new_feature.load_metadata(config_dir, feature_name=None)
           self._assert_feature(
               feature=new_feature,
