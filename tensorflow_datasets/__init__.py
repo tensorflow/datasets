@@ -57,6 +57,7 @@ from tensorflow_datasets import rlds
 from tensorflow_datasets import structured
 from tensorflow_datasets import summarization
 from tensorflow_datasets import text
+from tensorflow_datasets import time_series
 from tensorflow_datasets import translate
 from tensorflow_datasets import video
 from tensorflow_datasets import vision_language
