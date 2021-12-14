@@ -596,6 +596,11 @@ toc:
     title: yelp_polarity_reviews
   title: Text
 - section:
+  - path: /datasets/catalog/smartwatch_gestures
+    status: nightly
+    title: smartwatch_gestures
+  title: Time series
+- section:
   - path: /datasets/catalog/flores
     title: flores
   - path: /datasets/catalog/opus
