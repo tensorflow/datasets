@@ -16,6 +16,7 @@
 """Source-based register."""
 
 import collections
+import dataclasses
 import datetime
 import hashlib
 import json
@@ -23,8 +24,6 @@ import tempfile
 from typing import Any, List, Optional, Type
 
 from absl import logging
-
-import dataclasses
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import registered

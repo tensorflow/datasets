@@ -32,8 +32,8 @@ from tensorflow_datasets.testing import test_utils
 def assert_no_api_call():
   """Globally disable github API calls."""
   with mock.patch.object(
-      github_path._PathMetadata,  # pylint: disable=protected-access
-      '_query_github',
+      github_path.GithubApi,  # pylint: disable=protected-access
+      'query',
       side_effect=AssertionError('Forbidden API call'),
   ):
     yield

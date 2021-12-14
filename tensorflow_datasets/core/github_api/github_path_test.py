@@ -34,7 +34,7 @@ non_hermetic_test = pytest.mark.skipif(
     reason='Non-hermetic test skipped.',
 )
 
-_original_query_github = github_path._PathMetadata._query_github
+_original_query_github = github_path.GithubApi.query
 
 _AUTHOR_EXPECTED_CONTENT = textwrap.dedent("""\
     # This is the list of TensorFlow Datasets authors for copyright purposes.
@@ -52,7 +52,7 @@ _AUTHOR_EXPECTED_CONTENT = textwrap.dedent("""\
 @contextlib.contextmanager
 def enable_api_call():
   """Contextmanager which locally re-enable API calls."""
-  with mock.patch.object(github_path._PathMetadata, '_query_github',
+  with mock.patch.object(github_path.GithubApi, 'query',
                          _original_query_github):
     yield
 
@@ -199,8 +199,9 @@ def test_github_api_exists():
   assert readme.exists()
   assert core.exists()
   # Recreating a new Path reuse the cache
-  assert (core.parent.parent / 'README.md').is_file()
-  assert (core.parent.parent / 'README.md')._metadata is readme._metadata
+  readme_recreated = core.parent.parent / 'README.md'
+  assert readme_recreated.is_file()
+  assert readme_recreated._metadata == readme._metadata
 
 
 @non_hermetic_test
@@ -243,3 +244,61 @@ def test_github_api_copy(tmp_path):
 def test_assert_no_api_call():
   with pytest.raises(AssertionError, match='Forbidden API call'):
     github_path.GithubPath.from_repo('tensorflow/datasets', 'v1.0.0').exists()
+
+
+def test_get_tree():
+  tree = {
+      'tree': [
+          {
+              'path': 'code1.py',
+              'type': 'blob',
+          },
+          {
+              'path': 'myfolder',
+              'type': 'tree',
+          },
+          {
+              'path': 'myfolder/code2.py',
+              'type': 'blob',
+          },
+          {
+              'path': 'myfolder/mysubfolder',
+              'type': 'tree',
+          },
+          {
+              'path': 'myfolder/mysubfolder/code3.py',
+              'type': 'blob',
+          },
+      ]
+  }
+  with mock.patch.object(github_path.GithubApi, 'query', return_value=tree):
+    root = github_path.GithubPath.from_repo('tensorflow/datasets', 'v9.9.9')
+
+    def gh_path(file: str) -> github_path.GithubPath:
+      return github_path.GithubPath(
+          f'github://tensorflow/datasets/tree/v9.9.9/{file}')
+
+    def assert_is_file(file):
+      assert file.is_file()
+      assert not file.is_dir()
+      assert file.exists()
+
+    def assert_is_folder(folder, files):
+      assert set(folder.iterdir()) == files
+      assert folder.is_dir()
+      assert not folder.is_file()
+      assert folder.exists()
+
+    myfolder = gh_path('myfolder')
+    mysubfolder = gh_path('myfolder/mysubfolder')
+    code1 = gh_path('code1.py')
+    code2 = gh_path('myfolder/code2.py')
+    code3 = gh_path('myfolder/mysubfolder/code3.py')
+
+    assert_is_folder(root, {code1, myfolder})
+    assert_is_folder(myfolder, {code2, mysubfolder})
+    assert_is_folder(mysubfolder, {code3})
+
+    assert_is_file(code1)
+    assert_is_file(code2)
+    assert_is_file(code3)

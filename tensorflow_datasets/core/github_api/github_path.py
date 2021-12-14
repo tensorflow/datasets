@@ -15,12 +15,12 @@
 
 """Github pathlib-like util."""
 
-import enum
+import dataclasses
 import functools
 import os
 import pathlib
 import posixpath
-from typing import Iterator, List, Optional, Tuple
+from typing import Iterator, Mapping, MutableMapping, Optional, Set, Tuple
 
 import requests
 from tensorflow_datasets.core import utils
@@ -30,177 +30,158 @@ JsonValue = utils.JsonValue
 _URI_PREFIX = 'github://'
 
 
-class _PathType(enum.Enum):
-  """Path type (See: https://developer.github.com/v3/git/trees/#tree-object).
-
-  Attributes:
-    FILE: File
-    DIRECTORY: Directory
-    SUBMODULE: Git submodule
-      (https://git-scm.com/book/en/v2/Git-Tools-Submodules)
-  """
-  FILE = enum.auto()
-  DIRECTORY = enum.auto()
-  SUBMODULE = enum.auto()
+def _get_token():
+  # Get the secret API token to avoid the 60 calls/hour limit
+  # To get the current quota or test the token:
+  # curl -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/rate_limit  # pylint: disable=line-too-long
+  return os.environ.get('GITHUB_TOKEN')
 
 
-class _PathMetadata:
-  """Class storing the Github metadata for a file/directory.
+def get_content(url: str) -> bytes:
+  resp = requests.get(url)
+  if resp.status_code != 200:
+    raise FileNotFoundError(f'Request failed for {url}\n'
+                            f' Error: {resp.status_code}\n'
+                            f' Reason: {resp.content}')
+  return resp.content
 
-  Note:
 
-  * _PathMetadata are cached, so two path pointing to the same file will
-    only launch one query.
-  * Attributes are dynamically fetched from the github API only when
-    requested to avoid unecessary queries.
-  * Directory also cache entries for the childs to reduce the
-    number of queries. For instance, `[f for f in p.iterdir() if f.is_file()]`
-    only use a single query in `iterdir()`, rather than one per `is_file()`.
+class GithubApi:
+  """Class to issue calls to the Github API."""
 
-  Attributes:
-    repo: e.g. `tensorflow/datasets`
-    branch: e.g. `master`
-    subpath: e.g. `core/__init__.py`
-  """
+  def __init__(self, token: Optional[str] = None):
+    self._token = token or _get_token()
 
-  @staticmethod
-  @functools.lru_cache(maxsize=None)
-  def from_cache(path: str) -> '_PathMetadata':
-    """Factory which cache metadata (to avoid querying API multiple times)."""
-    return _PathMetadata(path, private=True)
-
-  def __init__(self, path: str, *, private=False):
-    if not private:
-      raise AssertionError(
-          'Metadata should be created using `_PathMetadata.from_cache`')
-    repo, branch, subpath = _parse_github_path(path)  # pytype: disable=name-error
-
-    # Read-only attributes
-    self._path: str = path
-    self.repo: str = repo  # e.g. `tensorflow/datasets`
-    self.branch: str = branch  # e.g. `master`
-    self.subpath: str = subpath  # e.g 'core/__init__.py'
-
-    # Dynamically loaded properties
-    self._exists: Optional[bool] = None
-    self._type: Optional[_PathType] = None  # FILE, DIRECTORY, SUBMODULE
-    self._childs: Optional[List[str]] = None  # ['README.md', 'docs',...]
-
-  @property
-  def type(self) -> _PathType:
-    """Type of the path (file, dir, submodule)."""
-    if not self._type:
-      self._init_and_cache_dynamic_properties()
-    return self._type
-
-  def listdir(self) -> List[str]:
-    """Returns the filenames in the directory (e.g. `['.gitignore', 'src']`)."""
-    if self.type != _PathType.DIRECTORY:
-      raise NotADirectoryError(f'{self._path} is not a directory.')
-    # self.type could have been computed by the parent dir, so
-    # `_init_and_cache_dynamic_properties` may not have been called yet.
-    if self._childs is None:
-      self._init_and_cache_dynamic_properties()
-    return self._childs
-
-  def exists(self) -> bool:
-    """Returns True if the file/dir exists."""
-    if self._exists is not None:
-      return self._exists
-    elif self._type:  # If type has been set, the file/dir exists
-      return True
-    else:
-      try:
-        self._init_and_cache_dynamic_properties()
-        self._exists = True
-      except FileNotFoundError:
-        self._exists = False
-      return self._exists
-
-  def _init_and_cache_dynamic_properties(self) -> None:
-    """Query github to get the file/directory content.
-
-    See doc at: https://developer.github.com/v3/repos/contents/
-
-    Note:
-
-     * After this function is called, `_type` and `_childs` (for directories)
-       are guarantee to be initialized.
-     * For directory, it will create a new `_PathMetadata` entry per
-       child (to cache the filetype).
-
-    """
-    # e.g. 'https://api.github.com/repos/tensorflow/datasets/contents/docs'
-    url = (f'https://api.github.com/repos/{self.repo}/contents/{self.subpath}'
-           f'?ref={self.branch}')
-    query_content = self._query_github(url)
-    if isinstance(query_content, list):  # Directory
-      self._init_directory(query_content)
-    elif isinstance(query_content, dict):  # File
-      self._init_file(query_content)
-    else:
-      raise AssertionError(f'Unknown content: {query_content}')
-
-  def _init_directory(self, query_content: JsonValue) -> None:
-    """Set the dynamic fields (called if `self` is a directory)."""
-    self._type = _PathType.DIRECTORY
-    self._childs = [f['name'] for f in query_content]
-
-    # Create or update the child metadata type
-    for f in query_content:
-      metadata = _PathMetadata.from_cache(f"{self._path}/{f['name']}")
-      metadata._set_type_from_str(f['type'])  # pylint: disable=protected-access
-
-  def _init_file(self, query_content: JsonValue) -> None:
-    """Set the dynamic fields (called if `self` is a file)."""
-    # We do not cache the file content as this might grow to big.
-    self._set_type_from_str(query_content['type'])
-
-  def _set_type_from_str(self, value: str) -> None:
-    """Sets or validates the file type.
-
-    This is called in `_init_and_cache_dynamic_properties` either by `self` or
-    the parent directory.
-
-    If the type is already set, this function make sure the new type match.
-
-    Args:
-      value: The github type string (see:
-        https://developer.github.com/v3/repos/contents/ for available values)
-    """
-    str_to_type = {
-        'file': _PathType.FILE,
-        'dir': _PathType.DIRECTORY,
-    }
-    if value not in str_to_type:
-      raise ValueError(f'Unsuported file type: {value} for {self._path}')
-    new_type = str_to_type[value]
-    if self._type and self._type is not new_type:
-      raise AssertionError(
-          f'Cannot overwrite type {self._type} with {new_type} for {self._path}'
-      )
-    self._type = new_type
-
-  def _query_github(self, url: str) -> JsonValue:
-    """Launches a github API query and returns the result."""
-    # Get the secret API token to avoid the 60 calls/hour limit
-    # To get the current quota or test the token:
-    # curl -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/rate_limit  # pylint: disable=line-too-long
-    token = os.environ.get('GITHUB_TOKEN')
+  def query(self, url: str) -> JsonValue:
+    """Launches a Github API query and returns the result."""
     headers = {}
-    if token:
-      headers['Authorization'] = f'token {token}'
+    if self._token:
+      headers['Authorization'] = f'token {self._token}'
     resp = requests.get(url, headers=headers)
     if resp.status_code != 200:
       raise FileNotFoundError(
-          f'Request failed for {self._path}:\n'
+          f'Request failed:\n'
           f' Request: {url}\n'
           f' Error: {resp.status_code}\n'
           f' Reason: {resp.content}',)
     return resp.json()
 
-  def __repr__(self) -> str:
-    return f'{type(self).__name__}({self._path})'
+  def query_tree(self, repo: str, branch: str) -> JsonValue:
+    """Queries a repository tree.
+
+    See https://docs.github.com/en/rest/reference/git#trees
+
+    Args:
+      repo: the repository
+      branch: the branch for which to get the tree
+
+    Returns:
+      JSON dict with the tree.
+    """
+    url = f'https://api.github.com/repos/{repo}/git/trees/{branch}?recursive=1'
+    return self.query(url)
+
+
+def _correct_folder(folder: str) -> str:
+  """Ensures the folder follows a standard.
+
+  Pathlib.parent in the root folder results in '.', whereas in other places
+  we should use '' for the root folder. This function makes sure the root
+  folder is always empty string.
+
+  Args:
+    folder: the folder to be corrected.
+
+  Returns:
+    The corrected folder.
+  """
+  if folder == '.':
+    return ''
+  return folder
+
+
+def _get_parent_folder(path: pathlib.PurePosixPath) -> str:
+  return _correct_folder(os.fspath(path.parent))
+
+
+@dataclasses.dataclass(frozen=True)
+class _GithubElement:
+  """Representation of an element in a Github tree (a file or folder).
+
+  Attributes:
+    parent_folder: the folder in which this element resides.
+    name: the name of this element, e.g. the file name or the folder name.
+    is_folder: whether this element is a folder or not.
+  """
+  parent_folder: str
+  name: str
+  is_folder: bool
+
+  @classmethod
+  def from_path(cls, path: pathlib.PurePosixPath,
+                is_folder: bool) -> '_GithubElement':
+    parent_folder = _get_parent_folder(path)
+    name = path.name
+    return cls(parent_folder=parent_folder, name=name, is_folder=is_folder)
+
+
+@dataclasses.dataclass(frozen=True)
+class _GithubTree:
+  """A Github tree of a repository."""
+  files_per_folder: Mapping[str, Set[_GithubElement]]
+
+  def is_folder(self, path: str) -> bool:
+    return _correct_folder(path) in self.files_per_folder
+
+  def is_file(self, path: pathlib.PurePosixPath) -> bool:
+    parent_folder = _get_parent_folder(path)
+    files = self.files_per_folder.get(parent_folder)
+    if not files:
+      return False
+    file = _GithubElement(
+        parent_folder=parent_folder, name=path.name, is_folder=False)
+    return file in files
+
+  @classmethod
+  def from_json(cls, value) -> '_GithubTree':
+    """Parses a GithubTree from the given JSON."""
+    if not isinstance(value, dict) or 'tree' not in value:
+      raise ValueError(f'Github API response not supported: {value}')
+
+    files_per_folder: MutableMapping[str, Set[str]] = {}
+    for element in value['tree']:
+      github_element = _GithubElement.from_path(
+          path=pathlib.PurePosixPath(element['path']),
+          is_folder=(element['type'] == 'tree'))
+      if element['type'] in {'blob', 'tree'}:
+        files_per_folder.setdefault(github_element.parent_folder, set())
+        files_per_folder[github_element.parent_folder].add(github_element)
+    return _GithubTree(files_per_folder=files_per_folder)
+
+  @staticmethod
+  @functools.lru_cache(maxsize=None)
+  def from_cache(repo: str, branch: str) -> '_GithubTree':
+    """Factory which caches the entire Github tree."""
+    tree_json = GithubApi().query_tree(repo, branch)
+    # If the tree is truncated, then we'll need a more sophisticated method to
+    # retrieve the whole tree. Since this is currently not supported, it raises
+    # an exception.
+    assert not tree_json.get('truncated', False)
+    return _GithubTree.from_json(tree_json)
+
+
+@dataclasses.dataclass(frozen=True, eq=True)
+class _PathMetadata:
+  """Github metadata of a file or directory."""
+  path: str
+  repo: str  # e.g. `tensorflow/datasets`
+  branch: str  # e.g. `master`
+  subpath: str  # e.g 'core/__init__.py'
+
+  @classmethod
+  def from_path(cls, path: str) -> '_PathMetadata':
+    repo, branch, subpath = _parse_github_path(path)
+    return cls(path=path, repo=repo, branch=branch, subpath=subpath)
 
 
 @utils.register_pathlike_cls(_URI_PREFIX)
@@ -222,12 +203,11 @@ class GithubPath(pathlib.PurePosixPath):
   assert path.repo == 'tensorflow/datasets'
   assert path.branch == 'master'
   ```
-
   """
 
   def __new__(cls, *parts: utils.PathLike) -> 'GithubPath':
     full_path = '/'.join(os.fspath(p) for p in parts)
-    _parse_github_path(full_path)  # Validate path
+    _parse_github_path(full_path)
     return super().__new__(cls, full_path.replace(_URI_PREFIX, '/github/', 1))
 
   @utils.memoized_property
@@ -256,10 +236,7 @@ class GithubPath(pathlib.PurePosixPath):
 
   @utils.memoized_property
   def _metadata(self) -> _PathMetadata:
-    """Returns the path metadata."""
-    # The metadata object manage the cache and will dynamically query Github
-    # API as needed.
-    return _PathMetadata.from_cache(os.fspath(self))
+    return _PathMetadata.from_path(os.fspath(self))
 
   @property
   def subpath(self) -> str:
@@ -276,6 +253,10 @@ class GithubPath(pathlib.PurePosixPath):
     """The branch (e.g. `master`, `v2`, `43bbad116df`,...)."""
     return self._metadata.branch
 
+  @property
+  def github_tree(self) -> _GithubTree:
+    return _GithubTree.from_cache(self.repo, self.branch)
+
   def as_raw_url(self) -> str:
     """Returns the raw content url (https://raw.githubusercontent.com)."""
     return ('https://raw.githubusercontent.com/'
@@ -283,20 +264,22 @@ class GithubPath(pathlib.PurePosixPath):
 
   def iterdir(self) -> Iterator['GithubPath']:
     """Yields the sub-paths."""
-    for filename in self._metadata.listdir():
-      yield self / filename
+    if not self.is_dir():
+      raise NotADirectoryError(f'{self.subpath} is not a directory.')
+    for filename in self.github_tree.files_per_folder[self.subpath]:
+      yield self / filename.name
 
   def is_dir(self) -> bool:
     """Returns True if the path is a directory or submodule."""
-    return self._metadata.type in (_PathType.DIRECTORY, _PathType.SUBMODULE)
+    return self.github_tree.is_folder(self.subpath)
 
   def is_file(self) -> bool:
     """Returns True if the path is a file."""
-    return self._metadata.type is _PathType.FILE
+    return self.github_tree.is_file(pathlib.PurePosixPath(self.subpath))
 
   def exists(self) -> bool:
     """Returns True if the path exists."""
-    return self._metadata.exists()
+    return self.is_dir() or self.is_file()
 
   def read_bytes(self) -> bytes:
     """Returns the file content as bytes."""
@@ -307,12 +290,7 @@ class GithubPath(pathlib.PurePosixPath):
     # Using raw_url doesn't count in the API calls quota and should works with
     # arbitrary sized files.
     url = self.as_raw_url()
-    resp = requests.get(url)
-    if resp.status_code != 200:
-      raise FileNotFoundError(f'Request failed for {url}\n'
-                              f' Error: {resp.status_code}\n'
-                              f' Reason: {resp.content}')
-    return resp.content
+    return get_content(url)
 
   def read_text(self, encoding: Optional[str] = None) -> str:
     """Returns the file content as string."""

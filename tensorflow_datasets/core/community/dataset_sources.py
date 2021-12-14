@@ -15,9 +15,9 @@
 
 """Utils to download locally dataset code source stored remotelly."""
 
+import dataclasses
 import os
 from typing import List
-import dataclasses
 
 from tensorflow_datasets.core import utils
 
