@@ -1,0 +1,34 @@
+{
+  "test": [
+    {
+      "dialog_acts": [
+        {
+          "act": 13,
+          "slot": "add_insurance",
+          "values": []
+        }
+      ],
+      "dialog_id": "30_00106",
+      "gem_id": "schema_guided_dialog-test-8905",
+      "prompt": "I need it from the 11th. Torontp Pearson Qurport is a convenient place xlr pick up at 13:45.",
+      "references": [
+        "Would you like to add insurance?"
+      ],
+      "target": "Would you like to add insurance?",
+      "turn_id": 11,
+      "context": [
+        "I need weather in Valley Ford on the 12th of March.",
+        "The average temp is set to be 92 degrees Fahrenheit and there is an 11 percent chance of rain.",
+        "Okay, I also need to schedule a visit to the property Macara Gardens Apartments for that day.",
+        "So schedule a visit to Macara Gardens Apartments on March 12th?",
+        "Yes, indeed correct.",
+        "Your visit has been scheduled.",
+        "Thanks and I also need to reserve a car until the 13th of March okay?",
+        "Which brand of vehicle would you like?",
+        "I'm fine with anything, but a sedan is preferred.",
+        "Where would you like to pick up the vehicle? Is it needed from MARCH 12th? At what time?"
+      ],
+      "service": "RentalCars_3"
+    }
+  ]
+}

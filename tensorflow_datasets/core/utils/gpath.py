@@ -21,14 +21,12 @@ import pathlib
 import posixpath
 import types
 import typing
-from typing import Any, AnyStr, ClassVar, Iterator, Optional, Type, TypeVar
+from typing import Any, ClassVar, Iterator, Optional, Type, TypeVar, Union
 
 import tensorflow as tf
 from tensorflow_datasets.core.utils import type_utils
 
-
 _P = TypeVar('_P')
-
 
 URI_PREFIXES = ('gs://', 's3://')
 _URI_SCHEMES = frozenset(('gs', 's3'))
@@ -65,11 +63,8 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
   # raise mutable input error).
   @property
   def _uri_scheme(self) -> Optional[str]:
-    if (
-        len(self.parts) >= 2
-        and self.parts[0] == '/'
-        and self.parts[1] in _URI_SCHEMES
-    ):
+    if (len(self.parts) >= 2 and self.parts[0] == '/' and
+        self.parts[1] in _URI_SCHEMES):
       return self.parts[1]
     else:
       return None
@@ -161,27 +156,37 @@ class _GPath(pathlib.PurePath, type_utils.ReadWritePath):
       encoding: Optional[str] = None,
       errors: Optional[str] = None,
       **kwargs: Any,
-  ) -> typing.IO[AnyStr]:
+  ) -> typing.IO[Union[str, bytes]]:
     """Opens the file."""
     if errors:
       raise NotImplementedError
     if encoding and not encoding.lower().startswith(('utf8', 'utf-8')):
       raise ValueError(f'Only UTF-8 encoding supported. Not: {encoding}')
     gfile = tf.io.gfile.GFile(self._path_str, mode, **kwargs)
-    gfile = typing.cast(typing.IO[AnyStr], gfile)  # pytype: disable=invalid-typevar
+    gfile = typing.cast(typing.IO[Union[str, bytes]], gfile)
     return gfile
 
   def rename(self: _P, target: type_utils.PathLike) -> _P:
     """Rename file or directory to the given target."""
-    target = os.fspath(self._new(target))  # Normalize gs:// URI
-    tf.io.gfile.rename(self._path_str, target)
-    return self._new(target)
+    # Note: Issue if WindowsPath and target is gs://. Rather than using `_new`,
+    # `GPath.__new__` should dynamically return either `PosixGPath` or
+    # `WindowsPath`, similarly to `pathlib.Path`.
+    target = self._new(target)
+    tf.io.gfile.rename(self._path_str, os.fspath(target))
+    return target
 
   def replace(self: _P, target: type_utils.PathLike) -> _P:
     """Replace file or directory to the given target."""
-    target = os.fspath(self._new(target))  # Normalize gs:// URI
-    tf.io.gfile.rename(self._path_str, target, overwrite=True)
-    return self._new(target)
+    target = self._new(target)
+    tf.io.gfile.rename(self._path_str, os.fspath(target), overwrite=True)
+    return target
+
+  def copy(self: _P, dst: type_utils.PathLike, overwrite: bool = False) -> _P:
+    """Remove the directory."""
+    # Could add a recursive=True mode
+    dst = self._new(dst)
+    tf.io.gfile.copy(self._path_str, os.fspath(dst), overwrite=overwrite)
+    return dst
 
 
 class PosixGPath(_GPath, pathlib.PurePosixPath):

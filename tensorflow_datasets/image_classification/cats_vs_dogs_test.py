@@ -23,9 +23,7 @@ cats_vs_dogs._NUM_CORRUPT_IMAGES = 0  # pylint: disable=protected-access
 class CatsVsDogsTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cats_vs_dogs.CatsVsDogs
 
-  SPLITS = {
-      'train': 4
-  }
+  SPLITS = {'train': 4}
   DL_EXTRACT_RESULT = 'cats_vs_dogs.zip'
 
 

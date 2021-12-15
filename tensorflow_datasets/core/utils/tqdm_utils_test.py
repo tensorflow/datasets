@@ -35,6 +35,19 @@ class TqdmUtilsTest(testing.TestCase):
       self.assertEqual(20, len(list(train_ds)))
       self.assertEqual(20, len(list(test_ds)))
 
+  def test_disable_tqdm2(self):
+    tqdm_utils.display_progress_bar(enable=False)
+
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+      builder.download_and_prepare()
+
+      # Check the data has been generated
+      train_ds, test_ds = builder.as_dataset(split=['train', 'test'])
+      train_ds, test_ds = dataset_utils.as_numpy((train_ds, test_ds))
+      self.assertEqual(20, len(list(train_ds)))
+      self.assertEqual(20, len(list(test_ds)))
+
 
 if __name__ == '__main__':
   testing.test_main()

@@ -46,9 +46,7 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
-    'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
-    'future',
     'numpy',
     'promise',
     'protobuf>=3.12.2',
@@ -71,8 +69,6 @@ TESTS_REQUIRE = [
     'pandas',
     'pydub',
     'apache_beam',
-    # TFDV is only available for Python 3.6
-    'tensorflow-data-validation;python_version<"3.7"',
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
@@ -87,6 +83,7 @@ DEV_REQUIRE = [
 
 # Static files needed by datasets.
 DATASET_FILES = [
+    'graphs/ogbg_molpcba/ogbg_molpcba_tasks.txt',
     'image_classification/caltech101_labels.txt',
     'image_classification/categories_places365.txt',
     'image_classification/cbis_ddsm_calc_distributions.txt',
@@ -110,11 +107,12 @@ DATASET_FILES = [
     'image_classification/sun397_tfds_te.txt',
     'image_classification/sun397_tfds_tr.txt',
     'image_classification/sun397_tfds_va.txt',
-    'image_classification/vgg_face2_labels.txt',
     'object_detection/open_images_classes_all.txt',
     'object_detection/open_images_classes_boxable.txt',
     'object_detection/open_images_classes_trainable.txt',
+    'video/tao/labels.txt',
     'video/ucf101_labels.txt',
+    'video/youtube_vis/labels.txt',
 ]
 
 # Extra dependencies required by specific datasets
@@ -125,8 +123,10 @@ DATASET_EXTRAS = {
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
+    'duke_ultrasound': ['scipy'],
     'eurosat': ['scikit-image', 'tifffile', 'imagecodecs'],
     'groove': ['pretty_midi', 'pydub'],
+    'gtzan': ['pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
@@ -135,19 +135,22 @@ DATASET_EXTRAS = {
         'scipy'
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'lsun': ['tensorflow-io'],
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     # See https://github.com/librosa/librosa/issues/1160
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
+    'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
+    'robosuite_panda_pick_place_can': ['envlogger'],
+    'smartwatch_gestures': ['pandas'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
-    'duke_ultrasound': ['scipy'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
-    'lsun': ['tensorflow-io'],
     'wsc273': ['bs4', 'lxml'],
+    'youtube_vis': ['pycocotools'],
 }
 
 
@@ -188,6 +191,7 @@ setup(
     packages=find_packages(),
     package_data={
         'tensorflow_datasets': DATASET_FILES + [
+            'core/utils/colormap.csv',
             'scripts/documentation/templates/*',
             'url_checksums/*',
             'checksums.tsv',

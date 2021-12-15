@@ -15,7 +15,7 @@
 
 """To deserialize bytes (Example) to tf.Example."""
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import utils
 
 
@@ -25,22 +25,9 @@ class ExampleParser(object):
   def __init__(self, example_specs):
     self._example_specs = example_specs
     self._flat_example_specs = utils.flatten_nest_dict(self._example_specs)
-
-  def _build_feature_specs(self):
-    """Returns the `tf.train.Example` feature specification.
-
-    Returns:
-      The `dict` of `tf.io.FixedLenFeature`, `tf.io.VarLenFeature`, ...
-    """
-    # Convert individual fields into tf.train.Example compatible format
-    def build_single_spec(k, v):
-      with utils.try_reraise(
-          "Specification error for feature {} ({}): ".format(k, v)):
-        return _to_tf_example_spec(v)
-
-    return {
-        k: build_single_spec(k, v) for k, v in self._flat_example_specs.items()
-    }
+    self._nested_feature_specs = _build_feature_specs(self._flat_example_specs)
+    self._flat_feature_specs = utils.flatten_nest_dict(
+        self._nested_feature_specs)
 
   def parse_example(self, serialized_example):
     """Deserialize a single `tf.train.Example` proto.
@@ -59,8 +46,6 @@ class ExampleParser(object):
       example: A nested `dict` of `tf.Tensor` values. The structure and tensors
         shape/dtype match the  `example_specs` provided at construction.
     """
-    nested_feature_specs = self._build_feature_specs()
-
     # Because of RaggedTensor specs, feature_specs can be a 2-level nested dict,
     # so have to wrap `tf.io.parse_single_example` between
     # `flatten_nest_dict`/`pack_as_nest_dict`.
@@ -71,21 +56,39 @@ class ExampleParser(object):
     #         'ragged_row_lengths_0', tf.io.FixedLenSequenceFeature(...),
     #     },
     # }
-    flat_feature_specs = utils.flatten_nest_dict(nested_feature_specs)
     example = tf.io.parse_single_example(
         serialized=serialized_example,
-        features=flat_feature_specs,
+        features=self._flat_feature_specs,
     )
-    example = utils.pack_as_nest_dict(example, nested_feature_specs)
+    example = utils.pack_as_nest_dict(example, self._nested_feature_specs)
 
-    example = {
+    example = {  # pylint:disable=g-complex-comprehension
         k: _deserialize_single_field(example_data, tensor_info)
-        for k, (example_data, tensor_info)
-        in utils.zip_dict(example, self._flat_example_specs)
+        for k, (
+            example_data,
+            tensor_info) in utils.zip_dict(example, self._flat_example_specs)
     }
     # Reconstruct all nesting
     example = utils.pack_as_nest_dict(example, self._example_specs)
     return example
+
+
+def _build_feature_specs(flat_example_specs):
+  """Returns the `tf.train.Example` feature specification.
+
+  Args:
+    flat_example_specs: flattened example specs.
+
+  Returns:
+    The `dict` of `tf.io.FixedLenFeature`, `tf.io.VarLenFeature`, ...
+  """
+
+  # Convert individual fields into tf.train.Example compatible format
+  def build_single_spec(k, v):
+    with utils.try_reraise(f"Specification error for feature {k!r} ({v}): "):
+      return _to_tf_example_spec(v)
+
+  return {k: build_single_spec(k, v) for k, v in flat_example_specs.items()}
 
 
 def _deserialize_single_field(example_data, tensor_info):
@@ -144,9 +147,12 @@ def _to_tf_example_spec(tensor_info):
         dtype=dtype,
         default_value=tensor_info.default_value,
     )
-  elif (tensor_info.shape.count(None) == 1 and tensor_info.shape[0] is None):
+  elif tensor_info.shape.count(None) == 1:
+    # Extract the defined shape (without the None dimension)
+    # The original shape is restored in `_deserialize_single_field`
+    shape = tuple(dim for dim in tensor_info.shape if dim is not None)
     return tf.io.FixedLenSequenceFeature(  # First shape undefined
-        shape=tensor_info.shape[1:],
+        shape=shape,
         dtype=dtype,
         allow_missing=True,
         default_value=tensor_info.default_value,
@@ -159,8 +165,7 @@ def _to_tf_example_spec(tensor_info):
             shape=(),
             dtype=tf.int64,
             allow_missing=True,
-        )
-        for k in range(tensor_info.sequence_rank - 1)
+        ) for k in range(tensor_info.sequence_rank - 1)
     }
     tf_specs["ragged_flat_values"] = tf.io.FixedLenSequenceFeature(
         shape=tensor_info.shape[tensor_info.sequence_rank:],
@@ -171,5 +176,6 @@ def _to_tf_example_spec(tensor_info):
     return tf_specs
   else:
     raise NotImplementedError(
-        "Tensor with a unknown dimension not at the first position not "
-        "supported: {}".format(tensor_info))
+        "Multiple unknown dimension not supported.\n"
+        "If using `tfds.features.Tensor`, please set "
+        "`Tensor(..., encoding='zlib')` (or 'bytes', or 'gzip')")

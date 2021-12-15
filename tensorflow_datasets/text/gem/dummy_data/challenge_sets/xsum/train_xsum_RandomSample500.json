@@ -1,0 +1,11 @@
+{
+    "train": [
+        {
+            "document": "Cheryl Briggs is standing aside as the party's prospective Oxford West and Abingdon candidate \"to put the greater good\" before Green Party interests.\nShe said Liberal Democrat Layla Moran offered \"the best chance of beating the Conservatives\".\nThe Tories said the move was \"proof of grubby deals\" by opposition parties.\nConservative Nicola Blackwood won the seat from Liberal Democrat Evan Harris by 176 votes in 2010.\nMs Blackwood increased her majority to beat the second place Liberal Democrats by 9,582 votes in the 2015 general election.\nThe Green Party has asked Labour to support Ms Moran.\nOxfordshire Green Party chairwoman Sarah Wood said: \"Given the damage that an unconstrained Conservative government can do, we would hope that they can be brave enough to put the national interest above narrow party politics this time.\"\nOxford city councillor and disability rights campaigner Marie Tidball is contesting the seat for Labour.\nA Labour spokeswoman said: \"There's only one alternative government and that's Labour.\n\"The only way to get the change we need, to build a fair economy and strong public services is to vote Labour. People don't want backroom deals.\"\nThe Green Party has also agreed not to contest Twickenham and Richmond Park, in favour of the Liberal Democrats.\nThe Lib Dems will not contest Brighton Pavilion, which is held by the Greens' co-leader Caroline Lucas.\nA Conservative spokeswoman said: \"This is yet more proof of grubby deals being struck to build a coalition of chaos that would prop up Jeremy Corbyn in Downing Street.\n\"Make no mistake; whether it says Green or Lib Dem on the ballot, it is Jeremy Corbyn who will get the vote to take charge of our Brexit negotiations.\"",
+            "gem_id": "xsum-train-21584",
+            "references": [],
+            "target": "The Green Party will not contest one of Oxford's constituencies in the general election after agreeing to support the Liberal Democrats.",
+            "xsum_id": "39829130"
+        }
+    ]
+}

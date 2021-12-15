@@ -15,7 +15,7 @@
 
 """TensorFlow dataset for Binary Alphadigits."""
 import six.moves.urllib as urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = 'https://cs.nyu.edu/~roweis/data/'
@@ -79,4 +79,4 @@ class BinaryAlphaDigits(tfds.core.GeneratorBasedBuilder):
       label = mat['classlabels'][0][i].item()
       for j in range(len(mat['dat'][i])):
         image = mat['dat'][i][j].reshape(20, 16, 1)
-        yield '%d_%d'%(i, j), {'label': label, 'image': image}
+        yield '%d_%d' % (i, j), {'label': label, 'image': image}

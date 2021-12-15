@@ -27,7 +27,7 @@ from absl import flags
 import numpy as np
 import png
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 FLAGS = flags.FLAGS
 

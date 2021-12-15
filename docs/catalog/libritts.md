@@ -11,6 +11,7 @@
 
 # `libritts`
 
+
 *   **Description**:
 
 LibriTTS is a multi-speaker English corpus of approximately 585 hours of read
@@ -72,19 +73,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text_normalized', 'speech')`
 
-*   **Citation**:
-
-```
-@inproceedings{zen2019libritts,
-  title = {LibriTTS: A Corpus Derived from LibriSpeech for Text-to-Speech},
-  author = {H. Zen and V. Dang and R. Clark and Y. Zhang and R. J. Weiss and Y. Jia and Z. Chen and Y. Wu},
-  booktitle = {Proc. Interspeech},
-  month = sep,
-  year = {2019},
-  doi = {10.21437/Interspeech.2019-2441},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -97,7 +85,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/libritts-1.0.1.html";
@@ -122,3 +110,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{zen2019libritts,
+  title = {LibriTTS: A Corpus Derived from LibriSpeech for Text-to-Speech},
+  author = {H. Zen and V. Dang and R. Clark and Y. Zhang and R. J. Weiss and Y. Jia and Z. Chen and Y. Wu},
+  booktitle = {Proc. Interspeech},
+  month = sep,
+  year = {2019},
+  doi = {10.21437/Interspeech.2019-2441},
+}
+```
+

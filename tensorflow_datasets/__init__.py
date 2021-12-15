@@ -45,14 +45,20 @@ tf_compat.ensure_tf_install()
 
 # Imports for registration
 from tensorflow_datasets import audio
+from tensorflow_datasets import graphs
 from tensorflow_datasets import image
 from tensorflow_datasets import image_classification
 from tensorflow_datasets import object_detection
 from tensorflow_datasets import question_answering
+from tensorflow_datasets import d4rl
+from tensorflow_datasets import ranking
+from tensorflow_datasets import rl_unplugged
+from tensorflow_datasets import rlds
 from tensorflow_datasets import simplification
 from tensorflow_datasets import structured
 from tensorflow_datasets import summarization
 from tensorflow_datasets import text
+from tensorflow_datasets import time_series
 from tensorflow_datasets import translate
 from tensorflow_datasets import video
 from tensorflow_datasets import vision_language

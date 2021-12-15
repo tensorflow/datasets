@@ -23,7 +23,7 @@ test images uploaded by the original authors.
 import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.image_classification import mnist
 import tensorflow_datasets.public_api as tfds
 

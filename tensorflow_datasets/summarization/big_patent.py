@@ -92,7 +92,7 @@ class BigPatentConfig(tfds.core.BuilderConfig):
             "2.0.0": "Update to use cased raw strings",
             "1.0.0": "lower cased tokenized words",
         },
-        **kwargs)
+        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.cpc_codes = cpc_codes
 
 

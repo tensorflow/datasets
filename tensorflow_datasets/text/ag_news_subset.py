@@ -18,9 +18,8 @@
 import csv
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
 
 _CITATION = """
 @misc{zhang2015characterlevel,
@@ -67,12 +66,9 @@ class AGNewsSubset(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "label":
-                tfds.features.ClassLabel(names=_LABEL_NAMES),
-            "title":
-                tfds.features.Text(),
-            "description":
-                tfds.features.Text(),
+            "label": tfds.features.ClassLabel(names=_LABEL_NAMES),
+            "title": tfds.features.Text(),
+            "description": tfds.features.Text(),
         }),
         supervised_keys=("description", "label"),
         homepage=_HOMEPAGE_URL,

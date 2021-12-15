@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -73,7 +73,7 @@ class ScientificPapersConfig(tfds.core.BuilderConfig):
     super(ScientificPapersConfig, self).__init__(
         version=tfds.core.Version("1.1.1"),
         supported_versions=[tfds.core.Version("1.1.0")],
-        **kwargs)
+        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.filename = filename
 
 

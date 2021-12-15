@@ -11,6 +11,7 @@
 
 # `ljspeech`
 
+
 *   **Description**:
 
 This is a public domain speech dataset consisting of 13,100 short audio clips of
@@ -61,17 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text_normalized', 'speech')`
 
-*   **Citation**:
-
-```
-@misc{ljspeech17,
-  author       = {Keith Ito},
-  title        = {The LJ Speech Dataset},
-  howpublished = {\url{https://keithito.com/LJ-Speech-Dataset/}},
-  year         = 2017
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -84,7 +74,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ljspeech-1.1.0.html";
@@ -109,3 +99,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{ljspeech17,
+  author       = {Keith Ito},
+  title        = {The LJ Speech Dataset},
+  howpublished = {\url{https://keithito.com/LJ-Speech-Dataset/}},
+  year         = 2017
+}
+```
+

@@ -20,8 +20,8 @@ function install_tf() {
   local version=$1
   if [[ "$version" == "tf-nightly"  ]]
   then
-    pip install -q tf-nightly;
+    pip install tf-nightly;
   else
-    pip install -q "tensorflow==$version"
+    pip install "tensorflow==$version"
   fi
 }

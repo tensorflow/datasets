@@ -11,6 +11,7 @@
 
 # `flores`
 
+
 *   **Description**:
 
 Evaluation datasets for low-resource machine translation: Nepali-English and
@@ -32,6 +33,10 @@ Sinhala-English.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -45,9 +50,6 @@ Sinhala-English.
 }
 ```
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## flores/neen (default config)
 
@@ -83,7 +85,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flores-neen-1.2.0.html";
@@ -143,7 +145,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flores-sien-1.2.0.html";

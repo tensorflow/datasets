@@ -34,7 +34,6 @@ from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
 
-
 ZIP = resource_lib.ExtractMethod.ZIP
 TAR = resource_lib.ExtractMethod.TAR
 NO_EXTRACT = resource_lib.ExtractMethod.NO_EXTRACT
@@ -173,23 +172,21 @@ class DownloadManagerTest(testing.TestCase):
     content = json.dumps(info)
     self.fs.add_file(path, content)
 
-  def _get_manager(
-      self,
-      register_checksums=True,
-      url_infos=None,
-      dl_dir='/dl_dir',
-      extract_dir='/extract_dir',
-      **kwargs
-  ):
+  def _get_manager(self,
+                   register_checksums=True,
+                   url_infos=None,
+                   dl_dir='/dl_dir',
+                   extract_dir='/extract_dir',
+                   manual_dir='/manual_dir',
+                   **kwargs):
     manager = dm.DownloadManager(
         dataset_name='mnist',
         download_dir=dl_dir,
         extract_dir=extract_dir,
-        manual_dir='/manual_dir',
+        manual_dir=manual_dir,
         register_checksums=register_checksums,
         register_checksums_path='/checksums/checksums.tsv',
-        **kwargs
-    )
+        **kwargs)
     if url_infos:
       manager._url_infos = url_infos
     return manager
@@ -206,9 +203,8 @@ class DownloadManagerTest(testing.TestCase):
     # A url is cached, so not downloaded.
     self.dl_results[b.url] = b.url_info
     self.dl_results[c.url] = c.url_info
-    manager = self._get_manager(url_infos={
-        art.url: art.url_info for art in (a, b, c)
-    })
+    manager = self._get_manager(
+        url_infos={art.url: art.url_info for art in (a, b, c)})
     downloads = manager.download({
         'cached': a.url,
         'new': b.url,
@@ -238,9 +234,7 @@ class DownloadManagerTest(testing.TestCase):
     self.dl_results[b.url] = b.url_info
     manager = self._get_manager(
         register_checksums=False,  # Register with manual download not supported
-        url_infos={
-            art.url: art.url_info for art in (a, b)
-        },
+        url_infos={art.url: art.url_info for art in (a, b)},
     )
     downloads = manager.download({
         'manual': a.url,
@@ -256,8 +250,8 @@ class DownloadManagerTest(testing.TestCase):
     """One file already extracted, one file with NO_EXTRACT, one to extract."""
     cached = resource_lib.Resource(path='/dl_dir/cached', extract_method=ZIP)
     new_ = resource_lib.Resource(path='/dl_dir/new', extract_method=TAR)
-    no_extract = resource_lib.Resource(path='/dl_dir/noextract',
-                                       extract_method=NO_EXTRACT)
+    no_extract = resource_lib.Resource(
+        path='/dl_dir/noextract', extract_method=NO_EXTRACT)
     self.fs.add_file('/extract_dir/ZIP.cached')
     self.extract_results['/dl_dir/new'] = '/extract_dir/TAR.new'
     manager = self._get_manager()
@@ -281,9 +275,8 @@ class DownloadManagerTest(testing.TestCase):
     manager = self._get_manager()
     out1 = manager.extract(['/dl_dir/foo.tar', '/dl_dir/foo.tar'])
     out2 = manager.extract('/dl_dir/foo.tar')
-    self.assertEqual(
-        out1, _as_path(['/extract_dir/TAR.foo', '/extract_dir/TAR.foo'])
-    )
+    self.assertEqual(out1,
+                     _as_path(['/extract_dir/TAR.foo', '/extract_dir/TAR.foo']))
     self.assertEqual(out2, _as_path('/extract_dir/TAR.foo'))
     # Result is memoize so extract has only been called once
     self.assertCountEqual(self.extracted_paths, [_as_path('/dl_dir/foo.tar')])
@@ -306,6 +299,27 @@ class DownloadManagerTest(testing.TestCase):
         'b': b.file_path,
     })
 
+  def test_download_and_extract_no_manual_dir(self):
+    a, b = Artifact('a.zip'), Artifact('b')
+    self.dl_results[a.url] = a.url_info
+    self.dl_results[b.url] = b.url_info
+    self.extract_results[a.file_path] = f'/extract_dir/ZIP.{a.file_name}'
+    # url_b doesn't need any extraction.
+
+    # Result is the same after caching:
+    manager = self._get_manager(
+        manual_dir=None,
+        url_infos={
+            a.url: a.url_info,
+            b.url: b.url_info,
+        },
+    )
+    res = manager.download_and_extract({'a': a.url, 'b': b.url})
+    self.assertEqual(res, {
+        'a': _as_path('/extract_dir/ZIP.%s' % a.file_name),
+        'b': b.file_path,
+    })
+
   def test_download_and_extract_archive_ext_in_fname(self):
     # Make sure extraction method is properly deduced from original fname, and
     # not from URL.
@@ -321,6 +335,7 @@ class DownloadManagerTest(testing.TestCase):
     self.assertEqual(res, _as_path({
         'a': '/extract_dir/ZIP.%s' % a.file_name,
     }))
+
 
   def test_download_and_extract_already_downloaded(self):
     a = Artifact('a')  # Extract can't be deduced from the url, but from .INFO
@@ -370,11 +385,12 @@ class DownloadManagerTest(testing.TestCase):
     manager = self._get_manager(
         register_checksums=False,
         url_infos={
-            a.url: checksums_lib.UrlInfo(
-                size=a.url_info.size,
-                checksum=sha_b,
-                filename=a.url_info.filename,
-            ),
+            a.url:
+                checksums_lib.UrlInfo(
+                    size=a.url_info.size,
+                    checksum=sha_b,
+                    filename=a.url_info.filename,
+                ),
         },
     )
     with self.assertRaises(dm.NonMatchingChecksumError):
@@ -385,8 +401,8 @@ class DownloadManagerTest(testing.TestCase):
     pickle.loads(pickle.dumps(dl_manager))
 
     dl_manager = self._get_manager(register_checksums=True)
-    with self.assertRaisesRegex(
-        NotImplementedError, '`register_checksums` must be disabled'):
+    with self.assertRaisesRegex(NotImplementedError,
+                                '`register_checksums` must be disabled'):
       pickle.dumps(dl_manager)
 
   def test_force_checksums_validation(self):
@@ -407,17 +423,13 @@ class DownloadManagerTest(testing.TestCase):
     self.dl_results[a.url] = a.url_info
 
     # Download the URL
-    dl_manager = self._get_manager(
-        register_checksums=False,
-    )
+    dl_manager = self._get_manager(register_checksums=False,)
     self.assertEqual(dl_manager.download(a.url), a.url_path)
     self.assertCountEqual(self.downloaded_urls, [a.url])
     self.assertContainFiles([a.url_path, _info_path(a.url_path)])
 
     # Reuse downloaded cache
-    dl_manager = self._get_manager(
-        register_checksums=False,
-    )
+    dl_manager = self._get_manager(register_checksums=False,)
     self.assertEqual(dl_manager.download(a.url), a.url_path)
     self.assertCountEqual(self.downloaded_urls, [a.url])
     self.assertContainFiles([a.url_path, _info_path(a.url_path)])
@@ -430,7 +442,9 @@ class DownloadManagerTest(testing.TestCase):
     self.assertCountEqual(self.downloaded_urls, [a.url])
     # The files have been renamed `url_path` -> `file_path`
     self.assertContainFiles([
-        a.file_path, _info_path(a.file_path), '/checksums/checksums.tsv',
+        a.file_path,
+        _info_path(a.file_path),
+        '/checksums/checksums.tsv',
     ])
 
     # After checksums have been registered, `file_path` is used
@@ -441,7 +455,9 @@ class DownloadManagerTest(testing.TestCase):
     self.assertEqual(dl_manager.download(a.url), a.file_path)
     self.assertCountEqual(self.downloaded_urls, [a.url])
     self.assertContainFiles([
-        a.file_path, _info_path(a.file_path), '/checksums/checksums.tsv',
+        a.file_path,
+        _info_path(a.file_path),
+        '/checksums/checksums.tsv',
     ])
 
     # Registering checksums twice still reuse the cached `file_path`
@@ -452,19 +468,21 @@ class DownloadManagerTest(testing.TestCase):
     self.assertEqual(dl_manager.download(a.url), a.file_path)
     self.assertCountEqual(self.downloaded_urls, [a.url])  # Still one download
     self.assertContainFiles([
-        a.file_path, _info_path(a.file_path), '/checksums/checksums.tsv',
+        a.file_path,
+        _info_path(a.file_path),
+        '/checksums/checksums.tsv',
     ])
 
     # Checksums unknown, so `file_path` unknown, re-downloading
-    dl_manager = self._get_manager(
-        register_checksums=False,
-    )
+    dl_manager = self._get_manager(register_checksums=False,)
     self.assertEqual(dl_manager.download(a.url), a.url_path)
     self.assertCountEqual(self.downloaded_urls, [a.url, a.url])  # Re-download!!
     self.assertContainFiles([
-        a.url_path, _info_path(a.url_path),
+        a.url_path,
+        _info_path(a.url_path),
         # `file_path` still exists from previous download
-        a.file_path, _info_path(a.file_path),
+        a.file_path,
+        _info_path(a.file_path),
         '/checksums/checksums.tsv',
     ])
 
@@ -473,9 +491,7 @@ class DownloadManagerTest(testing.TestCase):
     self.dl_results[a.url] = a.url_info
 
     # url_info unknown: File download in url_path
-    dl_manager = self._get_manager(
-        register_checksums=False,
-    )
+    dl_manager = self._get_manager(register_checksums=False,)
     self.assertEqual(dl_manager.download(a.url), a.url_path)
     self.assertCountEqual(self.downloaded_urls, [a.url])
     self.assertContainFiles([a.url_path, _info_path(a.url_path)])
@@ -554,9 +570,7 @@ class DownloadManagerTest(testing.TestCase):
     self.dl_results[old_a.url] = old_a.url_info
 
     # Old file downloaded to it's url path (with old checksums)
-    dl_manager = self._get_manager(
-        register_checksums=False,
-    )
+    dl_manager = self._get_manager(register_checksums=False,)
     self.assertEqual(dl_manager.download(old_a.url), old_a.url_path)
     self.assertCountEqual(self.downloaded_urls, [old_a.url])
     self.assertContainFiles([old_a.url_path, _info_path(old_a.url_path)])
@@ -575,9 +589,11 @@ class DownloadManagerTest(testing.TestCase):
     self.assertCountEqual(self.downloaded_urls, [old_a.url, old_a.url])
     self.assertContainFiles([
         # Old file still cached
-        old_a.url_path, _info_path(old_a.url_path),
+        old_a.url_path,
+        _info_path(old_a.url_path),
         # Re-downloaded with new checksum
-        new_a.file_path, _info_path(new_a.file_path),
+        new_a.file_path,
+        _info_path(new_a.file_path),
     ])
 
 

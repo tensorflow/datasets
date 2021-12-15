@@ -11,6 +11,13 @@
 
 # `malaria`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=malaria">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The Malaria dataset contains a total of 27,558 cell images with equal instances
@@ -54,23 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{rajaraman2018pre,
-  title={Pre-trained convolutional neural networks as feature extractors toward
-  improved malaria parasite detection in thin blood smear images},
-  author={Rajaraman, Sivaramakrishnan and Antani, Sameer K and Poostchi, Mahdieh
-  and Silamut, Kamolrat and Hossain, Md A and Maude, Richard J and Jaeger,
-  Stefan and Thoma, George R},
-  journal={PeerJ},
-  volume={6},
-  pages={e4568},
-  year={2018},
-  publisher={PeerJ Inc.}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -84,7 +74,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/malaria-1.0.0.html";
@@ -109,3 +99,21 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{rajaraman2018pre,
+  title={Pre-trained convolutional neural networks as feature extractors toward
+  improved malaria parasite detection in thin blood smear images},
+  author={Rajaraman, Sivaramakrishnan and Antani, Sameer K and Poostchi, Mahdieh
+  and Silamut, Kamolrat and Hossain, Md A and Maude, Richard J and Jaeger,
+  Stefan and Thoma, George R},
+  journal={PeerJ},
+  volume={6},
+  pages={e4568},
+  year={2018},
+  publisher={PeerJ Inc.}
+}
+```
+

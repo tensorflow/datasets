@@ -20,11 +20,9 @@ import os
 import pathlib
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-
-tf.enable_v2_behavior()
 
 
 class VideoFeatureTest(testing.FeatureExpectationsTestCase):
@@ -46,11 +44,7 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=np_video,
             ),
         ],
-        test_attributes=dict(
-            _encoding_format='png',
-            _extra_ffmpeg_args=[]
-        )
-    )
+        test_attributes=dict(_encoding_format='png', _extra_ffmpeg_args=[]))
 
   def test_video_concatenated_frames(self):
     video_shape = (None, 400, 640, 3)

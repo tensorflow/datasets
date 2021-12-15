@@ -1,0 +1,41 @@
+[
+    {
+        "paragraphs": [
+          {
+                "context": "The term heresy is from Greek \u03b1\u1f35\u03c1\u03b5\u03c3\u03b9\u03c2 originally meant \"choice\" or \"thing chosen\", but it came to mean the \"party or school of a man's choice\" and also referred to that process whereby a young person would examine various philosophies to determine how to live. The word \"heresy\" is usually used within a Christian, Jewish, or Islamic context, and implies slightly different meanings in each. The founder or leader of a heretical movement is called a heresiarch, while individuals who espouse heresy or commit heresy are known as heretics. Heresiology is the study of heresy.",
+                "qas": [
+                    {
+                        "answers": [
+                            {
+                                "answer_start": 24,
+                                "text": "Greek"
+                            }
+                        ],
+                        "id": "56de70004396321400ee28cd",
+                        "question": "What language does the term heresy find its roots in?"
+                    },
+                    {
+                        "answers": [
+                            {
+                                "answer_start": 355,
+                                "text": "slightly different"
+                            }
+                        ],
+                        "id": "56de70004396321400ee28ce",
+                        "question": "What is the relationship between the context heresy is used in for Christian, Jewish, or Islamic cultures?"
+                    },
+                    {
+                        "answers": [
+                            {
+                                "answer_start": 450,
+                                "text": "heresiarch"
+                            }
+                        ],
+                        "id": "56de70004396321400ee28cf",
+                        "question": "What is the head person of a heretical movement called?"
+                    }
+                  ]
+            }
+          ]
+    }
+]

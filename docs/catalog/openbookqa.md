@@ -11,6 +11,7 @@
 
 # `openbookqa`
 
+
 *   **Description**:
 
 The dataset contains 5,957 4-way multiple choice questions. Additionally, they
@@ -68,17 +69,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('question', 'answerKey')`
 
-*   **Citation**:
-
-```
-@article{mihaylov2018can,
-  title={Can a suit of armor conduct electricity? a new dataset for open book question answering},
-  author={Mihaylov, Todor and Clark, Peter and Khot, Tushar and Sabharwal, Ashish},
-  journal={arXiv preprint arXiv:1809.02789},
-  year={2018}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -91,7 +81,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/openbookqa-0.1.0.html";
@@ -116,3 +106,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{mihaylov2018can,
+  title={Can a suit of armor conduct electricity? a new dataset for open book question answering},
+  author={Mihaylov, Todor and Clark, Peter and Khot, Tushar and Sabharwal, Ashish},
+  journal={arXiv preprint arXiv:1809.02789},
+  year={2018}
+}
+```
+

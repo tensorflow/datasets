@@ -19,6 +19,30 @@ Note: `load.py` code was previously in `registered.py`, so some of the tests
 are still on `registered_test.py`.
 """
 
+from unittest import mock
 
-def test_dummy():
-  assert True  # Pytest raise error if no tests are detected
+import pytest
+from tensorflow_datasets import testing
+from tensorflow_datasets.core import load
+from tensorflow_datasets.core import read_only_builder
+from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.core import visibility
+
+
+@visibility.set_availables_tmp([
+    visibility.DatasetType.COMMUNITY_PUBLIC,
+])
+def test_community_public_load():
+  with mock.patch(
+      'tensorflow_datasets.core.community.community_register.list_builders',
+      return_value=['ns:ds'],
+  ), mock.patch(
+      'tensorflow_datasets.core.community.community_register.builder_cls',
+      return_value=testing.DummyDataset,
+  ):
+    assert load.list_builders() == ['ns:ds']
+
+    # Builder is correctly returned
+    assert load.builder_cls('ns:ds') is testing.DummyDataset
+    assert isinstance(load.builder('ns:ds'), testing.DummyDataset)

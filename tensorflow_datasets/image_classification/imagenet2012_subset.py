@@ -18,12 +18,11 @@
 import io
 import os
 
-import tensorflow.compat.v2 as tf
-from tensorflow_datasets.image_classification.imagenet import Imagenet2012
+import tensorflow as tf
+from tensorflow_datasets.image_classification import imagenet
 import tensorflow_datasets.public_api as tfds
 
-
-_DESCRIPTION = '''\
+_DESCRIPTION = """\
 Imagenet2012Subset is a subset of original ImageNet ILSVRC 2012 dataset.
 The dataset share the *same* validation set as the original ImageNet ILSVRC 2012
 dataset. However, the training set is subsampled in a label balanced fashion.
@@ -35,9 +34,9 @@ more example than others.
 
 This is supposed to be used as a benchmark for semi-supervised learning, and
 has been originally used in SimCLR paper (https://arxiv.org/abs/2002.05709).
-'''
+"""
 
-_CITATION = '''\
+_CITATION = """\
 @article{chen2020simple,
   title={A Simple Framework for Contrastive Learning of Visual Representations},
   author={Chen, Ting and Kornblith, Simon and Norouzi, Mohammad and Hinton, Geoffrey},
@@ -54,17 +53,19 @@ _CITATION = '''\
   number={3},
   pages={211-252}
 }
-'''
+"""
 
 # pylint: disable=line-too-long
 _LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 SUBSET2FILES = {
-    '1pct': 'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/1percent.txt',
-    '10pct': 'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/10percent.txt'
+    '1pct':
+        'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/1percent.txt',
+    '10pct':
+        'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/10percent.txt'
 }
 
 
-class Imagenet2012Subset(Imagenet2012):
+class Imagenet2012Subset(imagenet.Imagenet2012):
   """Class balanced subset of Imagenet 2012 dataset."""
 
   BUILDER_CONFIGS = [
@@ -91,6 +92,9 @@ class Imagenet2012Subset(Imagenet2012):
     )
 
   def _split_generators(self, dl_manager):
+
+    # Import ImageNet here to avoid circular dependencies
+
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
 
@@ -105,7 +109,7 @@ class Imagenet2012Subset(Imagenet2012):
     # Download and load subset file.
     subset_file = dl_manager.download(SUBSET2FILES[self.builder_config.name])
     if isinstance(subset_file, list):  # it will only be a list during testing,
-      subset_file = subset_file[0]     # where the first entry is 1percent.txt.
+      subset_file = subset_file[0]  # where the first entry is 1percent.txt.
     with tf.io.gfile.GFile(subset_file) as fp:
       subset = set(fp.read().splitlines())  # remove trailing `\r` in Windows
 
@@ -121,7 +125,7 @@ class Imagenet2012Subset(Imagenet2012):
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'archive': dl_manager.iter_archive(val_path),
-                'validation_labels': self._get_validation_labels(val_path),
+                'validation_labels': imagenet.get_validation_labels(val_path),
             },
         ),
     ]
@@ -129,8 +133,8 @@ class Imagenet2012Subset(Imagenet2012):
   def _generate_examples(self, archive, subset=None, validation_labels=None):
     """Yields examples."""
     if validation_labels:  # Validation split
-      for key, example in self._generate_examples_validation(archive,
-                                                             validation_labels):
+      for key, example in imagenet.generate_examples_validation(
+          archive, validation_labels):
         yield key, example
     # Training split. Main archive contains archives names after a synset noun.
     # Each sub-archive contains pictures associated to that synset.
@@ -141,7 +145,7 @@ class Imagenet2012Subset(Imagenet2012):
       # alternative, as this loads ~150MB in RAM.
       fobj_mem = io.BytesIO(fobj.read())
       for image_fname, image in tfds.download.iter_archive(
-          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM):
+          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM):  # pytype: disable=wrong-arg-types  # gen-stub-imports
         image = self._fix_image(image_fname, image)
         if subset is None or image_fname in subset:  # filtering using subset.
           record = {

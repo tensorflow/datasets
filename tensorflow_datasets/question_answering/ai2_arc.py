@@ -43,7 +43,7 @@ We pose ARC as a challenge to the community.
 """
 
 _HOMEPAGE = "https://allenai.org/data/arc"
-_URL = "https://ai2-datasets.s3-us-west-2.amazonaws.com/arc/ARC-V1-Feb2018.zip"
+_URL = "https://ai2-public-datasets.s3-us-west-2.amazonaws.com/arc/ARC-V1-Feb2018.zip"
 
 
 class Ai2ArcConfig(tfds.core.BuilderConfig):

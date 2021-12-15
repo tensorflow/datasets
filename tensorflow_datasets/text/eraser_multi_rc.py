@@ -17,7 +17,7 @@
 
 import json
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -75,20 +75,26 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             # These kwargs will be passed to _generate_examples
-            gen_kwargs={'data_dir': data_dir,
-                        'filepath': os.path.join(data_dir, 'train.jsonl')},
+            gen_kwargs={
+                'data_dir': data_dir,
+                'filepath': os.path.join(data_dir, 'train.jsonl')
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             # These kwargs will be passed to _generate_examples
-            gen_kwargs={'data_dir': data_dir,
-                        'filepath': os.path.join(data_dir, 'val.jsonl')},
+            gen_kwargs={
+                'data_dir': data_dir,
+                'filepath': os.path.join(data_dir, 'val.jsonl')
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             # These kwargs will be passed to _generate_examples
-            gen_kwargs={'data_dir': data_dir,
-                        'filepath': os.path.join(data_dir, 'test.jsonl')},
+            gen_kwargs={
+                'data_dir': data_dir,
+                'filepath': os.path.join(data_dir, 'test.jsonl')
+            },
         ),
     ]
 

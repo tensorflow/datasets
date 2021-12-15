@@ -34,8 +34,7 @@ from tensorflow_datasets.testing import fake_data_utils
 
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
-flags.DEFINE_boolean('real', False,
-                     'Generate data for Imagenet2012Real.')
+flags.DEFINE_boolean('real', False, 'Generate data for Imagenet2012Real.')
 FLAGS = flags.FLAGS
 
 TRAIN_SYNSET_NUMBER = 10
@@ -47,14 +46,14 @@ def _get_synset(synset_name):
   """Returns path to synset archive."""
   fobj = tempfile.NamedTemporaryFile(delete=False, mode='wb', suffix='.tar')
   tar = tarfile.open(mode='w', fileobj=fobj)
-  for i in range(1, TRAIN_IMAGES_PER_SYNSET+1):
+  for i in range(1, TRAIN_IMAGES_PER_SYNSET + 1):
     fname = '%s_%s.JPEG' % (synset_name, i)
     # There are a few PNG and CMYK images:
     if synset_name == 'n01440764' and i == 1:
       path = fake_data_utils.get_random_png()
     elif synset_name == 'n01440764' and i in [2, 3]:
-      path = os.path.join(
-          FLAGS.tfds_dir, 'testing', 'test_data', '6pixels_cmyk.jpeg')
+      path = os.path.join(FLAGS.tfds_dir, 'testing', 'test_data',
+                          '6pixels_cmyk.jpeg')
     else:
       path = fake_data_utils.get_random_jpeg()
     tar.add(path, arcname=fname)
@@ -83,10 +82,9 @@ def _generate_train_archive():
 
 def _generate_val_archive():
   """Generate val archive."""
-  output_path = os.path.join(_ilsvrc2012_output_dir(),
-                             'ILSVRC2012_img_val.tar')
+  output_path = os.path.join(_ilsvrc2012_output_dir(), 'ILSVRC2012_img_val.tar')
   tar = tarfile.open(output_path, mode='w')
-  for i in range(1, VAL_IMAGES_NUMBER+1):
+  for i in range(1, VAL_IMAGES_NUMBER + 1):
     fname = 'ILSVRC2012_val_{:08}.JPEG'.format(i)
     jpeg = fake_data_utils.get_random_jpeg()
     tar.add(jpeg, arcname=fname)

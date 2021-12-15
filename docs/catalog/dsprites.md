@@ -11,6 +11,13 @@
 
 # `dsprites`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=dsprites">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 dSprites is a dataset of 2D shapes procedurally generated from 6 ground truth
@@ -85,17 +92,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@misc{dsprites17,
-author = {Loic Matthey and Irina Higgins and Demis Hassabis and Alexander Lerchner},
-title = {dSprites: Disentanglement testing Sprites dataset},
-howpublished= {https://github.com/deepmind/dsprites-dataset/},
-year = "2017",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -109,7 +105,7 @@ year = "2017",
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/dsprites-2.0.0.html";
@@ -134,3 +130,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{dsprites17,
+author = {Loic Matthey and Irina Higgins and Demis Hassabis and Alexander Lerchner},
+title = {dSprites: Disentanglement testing Sprites dataset},
+howpublished= {https://github.com/deepmind/dsprites-dataset/},
+year = "2017",
+}
+```
+

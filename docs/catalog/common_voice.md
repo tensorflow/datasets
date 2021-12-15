@@ -11,6 +11,7 @@
 
 # `common_voice`
 
+
 *   **Description**:
 
 Mozilla Common Voice Dataset
@@ -42,8 +43,6 @@ Split | Examples
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -51,6 +50,9 @@ Split | Examples
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Missing.
+
+*   **Citation**:
+
 
 ## common_voice/en (default config)
 

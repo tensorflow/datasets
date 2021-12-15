@@ -11,6 +11,7 @@
 
 # `coil100`
 
+
 *   **Description**:
 
 The dataset contains 7200 color images of 100 objects (72 images per object).
@@ -61,17 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'angle_label')`
 
-*   **Citation**:
-
-```
-@article{nene1996columbia,
-  title={Columbia object image library (coil-20)},
-  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},
-  year={1996},
-  publisher={Technical report CUCS-005-96}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -85,7 +75,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/coil100-2.0.0.html";
@@ -110,3 +100,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{nene1996columbia,
+  title={Columbia object image library (coil-20)},
+  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},
+  year={1996},
+  publisher={Technical report CUCS-005-96}
+}
+```
+

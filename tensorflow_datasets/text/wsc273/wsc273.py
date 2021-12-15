@@ -15,7 +15,7 @@
 
 """WSC273 Dataset."""
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -96,9 +96,8 @@ def normalize_text(text):
 
 def normalize_cap(option, pron):
   """Normalize the capitalization of the option according to the pronoun."""
-  cap_tuples = [
-      ("The", "the"), ("His", "his"), ("My", "my"),
-      ("Her", "her"), ("Their", "their"), ("An", "an"), ("A", "a")]
+  cap_tuples = [("The", "the"), ("His", "his"), ("My", "my"), ("Her", "her"),
+                ("Their", "their"), ("An", "an"), ("A", "a")]
   uncap_dict = dict(cap_tuples)
   cap_dict = dict([(t[1], t[0]) for t in cap_tuples])
   words = option.split(" ")

@@ -68,8 +68,7 @@ def _make_builder_configs():
             name='%dx%d' % (size, size),
             size=size,
             description=f'Images resized to {size}x{size}',
-        ),
-    )
+        ),)
   return configs
 
 

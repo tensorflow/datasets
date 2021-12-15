@@ -32,10 +32,10 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'datasets', None,
     'Comma separated list of datasets to generates. None for all datasets.')
-flags.DEFINE_string(
-    'dst_dir', None, 'Destination dir to save the dataframe html.')
-flags.DEFINE_boolean(
-    'overwrite', False, 'If True, overwrite the existing visualizations.')
+flags.DEFINE_string('dst_dir', None,
+                    'Destination dir to save the dataframe html.')
+flags.DEFINE_boolean('overwrite', False,
+                     'If True, overwrite the existing visualizations.')
 
 
 def _save_html(dst_path: str, df: pandas.DataFrame) -> None:

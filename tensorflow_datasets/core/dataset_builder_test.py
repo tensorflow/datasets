@@ -15,14 +15,16 @@
 
 """Tests for tensorflow_datasets.core.dataset_builder."""
 
+import dataclasses
 import os
 import tempfile
 from unittest import mock
 
-import dataclasses
+from absl.testing import parameterized
+
 import dill
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
@@ -33,9 +35,8 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
-
-tf.enable_v2_behavior()
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
@@ -123,16 +124,15 @@ class DatasetBuilderTest(testing.TestCase):
     # ...), and so our datasets aren't guaranteed either.
     l = list(range(20))
     np.random.RandomState(42).shuffle(l)
-    self.assertEqual(l, [
-        0, 17, 15, 1, 8, 5, 11, 3, 18, 16, 13, 2, 9, 19, 4, 12, 7, 10, 14, 6
-    ])
+    self.assertEqual(
+        l,
+        [0, 17, 15, 1, 8, 5, 11, 3, 18, 16, 13, 2, 9, 19, 4, 12, 7, 10, 14, 6])
 
     # Ensure determinism. If this test fails, this mean the dataset are not
     # deterministically generated.
     self.assertEqual(
         [e["x"] for e in ds_values],
-        [6, 16, 19, 12, 14, 18, 5, 13, 15, 4, 10, 17, 0, 8, 3, 1, 9, 7, 11,
-         2],
+        [6, 16, 19, 12, 14, 18, 5, 13, 15, 4, 10, 17, 0, 8, 3, 1, 9, 7, 11, 2],
     )
 
   @testing.run_in_graph_and_eager_modes()
@@ -144,30 +144,24 @@ class DatasetBuilderTest(testing.TestCase):
           side_effect=NotImplementedError):
         # Make sure the dataset cannot be generated.
         with self.assertRaises(NotImplementedError):
-          load.load(
-              name="mnist",
-              data_dir=tmp_dir)
+          load.load(name="mnist", data_dir=tmp_dir)
         # Enable GCS access so that dataset will be loaded from GCS.
         with self.gcs_access():
-          _, info = load.load(
-              name="mnist",
-              data_dir=tmp_dir,
-              with_info=True)
+          _, info = load.load(name="mnist", data_dir=tmp_dir, with_info=True)
       self.assertSetEqual(
-          set(["dataset_info.json",
-               "image.image.json",
-               "mnist-test.tfrecord-00000-of-00001",
-               "mnist-train.tfrecord-00000-of-00001",
-              ]),
-          set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/3.0.1"))))
+          set([
+              "dataset_info.json",
+              "image.image.json",
+              "mnist-test.tfrecord-00000-of-00001",
+              "mnist-train.tfrecord-00000-of-00001",
+          ]), set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/3.0.1"))))
 
       self.assertEqual(set(info.splits.keys()), set(["train", "test"]))
 
   @testing.run_in_graph_and_eager_modes()
   def test_multi_split(self):
     ds_train, ds_test = self.builder.as_dataset(
-        split=["train", "test"],
-        shuffle_files=False)
+        split=["train", "test"], shuffle_files=False)
 
     data = list(dataset_utils.as_numpy(ds_train))
     self.assertEqual(20, len(data))
@@ -239,29 +233,28 @@ class DatasetBuilderTest(testing.TestCase):
       # Test that the config was used and they didn't collide.
       splits_list = ["train", "test"]
       for builder, incr in [(builder1, 1), (builder2, 2)]:
-        train_data, test_data = [   # pylint: disable=g-complex-comprehension
-            [el["x"] for el in   # pylint: disable=g-complex-comprehension
-             dataset_utils.as_numpy(builder.as_dataset(split=split))]
-            for split in splits_list
+        train_data, test_data = [  # pylint: disable=g-complex-comprehension
+            [
+                el["x"] for el in  # pylint: disable=g-complex-comprehension
+                dataset_utils.as_numpy(builder.as_dataset(split=split))
+            ] for split in splits_list
         ]
 
         self.assertEqual(20, len(train_data))
         self.assertEqual(10, len(test_data))
-        self.assertCountEqual(
-            [incr + el for el in range(30)],
-            train_data + test_data
-        )
+        self.assertCountEqual([incr + el for el in range(30)],
+                              train_data + test_data)
 
   def test_read_config(self):
     is_called = []
+
     def interleave_sort(lists):
       is_called.append(True)
       return lists
 
     read_config = read_config_lib.ReadConfig(
-        experimental_interleave_sort_fn=interleave_sort,
-    )
-    read_config.options.experimental_stats.prefix = "tfds_prefix"
+        experimental_interleave_sort_fn=interleave_sort,)
+    read_config.options.experimental_slack = True
     ds = self.builder.as_dataset(
         split="train",
         read_config=read_config,
@@ -269,7 +262,7 @@ class DatasetBuilderTest(testing.TestCase):
     )
 
     # Check that the ReadConfig options are properly set
-    self.assertEqual(ds.options().experimental_stats.prefix, "tfds_prefix")
+    self.assertTrue(ds.options().experimental_slack)
 
     # The instruction function should have been called
     self.assertEqual(is_called, [True])
@@ -333,8 +326,8 @@ class DatasetBuilderTest(testing.TestCase):
 
   def test_invalid_split_dataset(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      with self.assertRaisesWithPredicateMatch(
-          ValueError, "`all` is a reserved keyword"):
+      with self.assertRaisesWithPredicateMatch(ValueError,
+                                               "`all` is a reserved keyword"):
         # Raise error during .download_and_prepare()
         load.load(
             name="invalid_split_dataset",
@@ -393,7 +386,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
   def setUp(self):
     super(DatasetBuilderMultiDirTest, self).setUp()
     # Sanity check to make sure that no dir is registered
-    self.assertEmpty(constants._registered_data_dir)
+    self.assertEmpty(file_utils._registered_data_dir)
     # Create a new temp dir
     self.other_data_dir = os.path.join(self.get_temp_dir(), "other_dir")
     # Overwrite the default data_dir (as files get created)
@@ -404,7 +397,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
   def tearDown(self):
     super(DatasetBuilderMultiDirTest, self).tearDown()
     # Restore to the default `_registered_data_dir`
-    constants._registered_data_dir = set()
+    file_utils._registered_data_dir = set()
     # Clear-up existing dirs
     if tf.io.gfile.exists(self.other_data_dir):
       tf.io.gfile.rmtree(self.other_data_dir)
@@ -433,7 +426,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     # No data_dir is passed
     # Multiple data_dirs are registered
     # -> use default path
-    constants.add_data_dir(self.other_data_dir)
+    file_utils.add_data_dir(self.other_data_dir)
     self.assertBuildDataDir(
         self.builder._build_data_dir(None), self.default_data_dir)
 
@@ -442,11 +435,13 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     # Multiple data_dirs are registered
     # Data dir contains old versions
     # -> use default path
-    constants.add_data_dir(self.other_data_dir)
-    tf.io.gfile.makedirs(os.path.join(
-        self.other_data_dir, "dummy_dataset_shared_generator", "0.1.0"))
-    tf.io.gfile.makedirs(os.path.join(
-        self.other_data_dir, "dummy_dataset_shared_generator", "0.2.0"))
+    file_utils.add_data_dir(self.other_data_dir)
+    tf.io.gfile.makedirs(
+        os.path.join(self.other_data_dir, "dummy_dataset_shared_generator",
+                     "0.1.0"))
+    tf.io.gfile.makedirs(
+        os.path.join(self.other_data_dir, "dummy_dataset_shared_generator",
+                     "0.2.0"))
     self.assertBuildDataDir(
         self.builder._build_data_dir(None), self.default_data_dir)
 
@@ -455,48 +450,99 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     # Multiple data_dirs are registered
     # Data found
     # -> Re-load existing data
-    constants.add_data_dir(self.other_data_dir)
-    tf.io.gfile.makedirs(os.path.join(
-        self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
+    file_utils.add_data_dir(self.other_data_dir)
+    tf.io.gfile.makedirs(
+        os.path.join(self.other_data_dir, "dummy_dataset_shared_generator",
+                     "1.0.0"))
     self.assertBuildDataDir(
         self.builder._build_data_dir(None), self.other_data_dir)
 
   def test_default_multi_dir_duplicate(self):
     # If two data dirs contains the dataset, raise an error...
-    constants.add_data_dir(self.other_data_dir)
-    tf.io.gfile.makedirs(os.path.join(
-        self.default_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
-    tf.io.gfile.makedirs(os.path.join(
-        self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
+    file_utils.add_data_dir(self.other_data_dir)
+    tf.io.gfile.makedirs(
+        os.path.join(self.default_data_dir, "dummy_dataset_shared_generator",
+                     "1.0.0"))
+    tf.io.gfile.makedirs(
+        os.path.join(self.other_data_dir, "dummy_dataset_shared_generator",
+                     "1.0.0"))
     with self.assertRaisesRegex(ValueError, "found in more than one directory"):
       self.builder._build_data_dir(None)
 
   def test_expicit_multi_dir(self):
     # If two data dirs contains the same version
     # Data dir is explicitly passed
-    constants.add_data_dir(self.other_data_dir)
-    tf.io.gfile.makedirs(os.path.join(
-        self.default_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
-    tf.io.gfile.makedirs(os.path.join(
-        self.other_data_dir, "dummy_dataset_shared_generator", "1.0.0"))
+    file_utils.add_data_dir(self.other_data_dir)
+    tf.io.gfile.makedirs(
+        os.path.join(self.default_data_dir, "dummy_dataset_shared_generator",
+                     "1.0.0"))
+    tf.io.gfile.makedirs(
+        os.path.join(self.other_data_dir, "dummy_dataset_shared_generator",
+                     "1.0.0"))
     self.assertBuildDataDir(
         self.builder._build_data_dir(self.other_data_dir), self.other_data_dir)
 
   def test_load_data_dir(self):
     """Ensure that `tfds.load` also supports multiple data_dir."""
-    constants.add_data_dir(self.other_data_dir)
+    file_utils.add_data_dir(self.other_data_dir)
 
     class MultiDirDataset(DummyDatasetSharedGenerator):  # pylint: disable=unused-variable
       VERSION = utils.Version("1.2.0")
 
-    data_dir = os.path.join(
-        self.other_data_dir, "multi_dir_dataset", "1.2.0"
-    )
+    data_dir = os.path.join(self.other_data_dir, "multi_dir_dataset", "1.2.0")
     tf.io.gfile.makedirs(data_dir)
 
     with mock.patch.object(dataset_info.DatasetInfo, "read_from_directory"):
       _, info = load.load("multi_dir_dataset", split=[], with_info=True)
     self.assertEqual(info.data_dir, data_dir)
+
+
+class DummyOrderedDataset(dataset_builder.GeneratorBasedBuilder):
+  VERSION = utils.Version("1.0.0")
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": tf.int64}),
+        disable_shuffling=True,
+    )
+
+  def _split_generators(self, dl_manager):
+    del dl_manager
+    return {"train": self._generate_examples(range_=range(500))}
+
+  def _generate_examples(self, range_):
+    for i in range_:
+      yield i, {"x": i}
+
+
+class OrderedDatasetBuilderTest(testing.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    super(OrderedDatasetBuilderTest, cls).setUpClass()
+    with mock.patch(
+        "tensorflow_datasets.core.tfrecords_writer._get_number_shards",
+        lambda x, y: 10):
+      cls.builder = DummyOrderedDataset(
+          data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
+      cls.builder.download_and_prepare()
+
+  @testing.run_in_graph_and_eager_modes()
+  def test_sorted_by_key(self):
+    # For ordered dataset ReadConfig.interleave_cycle_length=1 by default
+    read_config = read_config_lib.ReadConfig()
+    ds = self.builder.as_dataset(
+        split=splits_lib.Split.TRAIN,
+        shuffle_files=False,
+        read_config=read_config)
+    ds_values = list(dataset_utils.as_numpy(ds))
+    self.assertListEqual(self.builder.info.splits["train"].shard_lengths,
+                         [50] * 10)
+    self.assertEqual(
+        [e["x"] for e in ds_values],
+        list(range(500)),
+    )
 
 
 class BuilderPickleTest(testing.TestCase):
@@ -525,46 +571,21 @@ class BuilderRestoreGcsTest(testing.TestCase):
     patcher = mock.patch.object(
         dataset_info.DatasetInfo,
         "initialize_from_bucket",
-        new=load_mnist_dataset_info
-    )
+        new=load_mnist_dataset_info)
     patcher.start()
     self.patch_gcs = patcher
-    self.addCleanup(patcher.stop)
-
-    patcher = mock.patch.object(
-        dataset_info.DatasetInfo, "compute_dynamic_properties",
-    )
-    self.compute_dynamic_property = patcher.start()
     self.addCleanup(patcher.stop)
 
   def test_stats_restored_from_gcs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      builder.download_and_prepare()
-
-      # Statistics shouldn't have been recomputed
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
-      self.assertFalse(self.compute_dynamic_property.called)
+      self.assertEqual(builder.info.splits["train"].num_examples, 20)
 
   def test_stats_not_restored_gcs_overwritten(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # If split are different that the one restored, stats should be recomputed
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      dl_config = download.DownloadConfig(
-          max_examples_per_split=5,
-          compute_stats=download.ComputeStatsMode.AUTO,
-      )
-      builder.download_and_prepare(download_config=dl_config)
-
-      # Statistics should have been recomputed (split different from the
-      # restored ones)
-      self.assertTrue(self.compute_dynamic_property.called)
+      self.assertEqual(builder.info.splits["train"].num_examples, 20)
 
   def test_gcs_not_exists(self):
     # By disabling the patch, and because DummyMnist is not on GCS, we can
@@ -574,55 +595,32 @@ class BuilderRestoreGcsTest(testing.TestCase):
       builder = testing.DummyMnist(data_dir=tmp_dir)
       # No dataset_info restored, so stats are empty
       self.assertEqual(builder.info.splits.total_num_examples, 0)
-      self.assertFalse(self.compute_dynamic_property.called)
 
-      dl_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.AUTO,
-      )
+      dl_config = download.DownloadConfig()
       builder.download_and_prepare(download_config=dl_config)
 
       # Statistics should have been recomputed
-      self.assertTrue(self.compute_dynamic_property.called)
+      self.assertEqual(builder.info.splits["train"].num_examples, 20)
     self.patch_gcs.start()
 
-  def test_skip_stats(self):
-    # Test when stats do not exists yet and compute_stats='skip'
 
-    # By disabling the patch, and because DummyMnist is not on GCS, we can
-    # simulate a new dataset starting from scratch
-    self.patch_gcs.stop()
+class DatasetBuilderGenerateModeTest(testing.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    super(DatasetBuilderGenerateModeTest, cls).setUpClass()
+
+  def test_reuse_cache_if_exists(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      # No dataset_info restored, so stats are empty
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits, {})
-      self.assertFalse(self.compute_dynamic_property.called)
+      dl_config = download.DownloadConfig(max_examples_per_split=3)
+      builder.download_and_prepare(download_config=dl_config)
 
-      download_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.SKIP,
-      )
-      builder.download_and_prepare(download_config=download_config)
-
-      # Statistics computation should have been skipped
-      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 0)
-      self.assertFalse(self.compute_dynamic_property.called)
-    self.patch_gcs.start()
-
-  def test_force_stats(self):
-    # Test when stats already exists but compute_stats='force'
-
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      # No dataset_info restored, so stats are empty
-      builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 40)
-      self.assertFalse(self.compute_dynamic_property.called)
-
-      download_config = download.DownloadConfig(
-          compute_stats=download.ComputeStatsMode.FORCE,
-      )
-      builder.download_and_prepare(download_config=download_config)
-
-      # Statistics computation should have been recomputed
-      self.assertTrue(self.compute_dynamic_property.called)
+      dl_config = download.DownloadConfig(
+          download_mode=download.GenerateMode.REUSE_CACHE_IF_EXISTS,
+          max_examples_per_split=5)
+      builder.download_and_prepare(download_config=dl_config)
+      self.assertEqual(builder.info.splits["train"].num_examples, 5)
 
 
 class DatasetBuilderReadTest(testing.TestCase):
@@ -645,10 +643,10 @@ class DatasetBuilderReadTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_all_splits(self):
-    splits = dataset_utils.as_numpy(
-        self.builder.as_dataset(batch_size=-1))
-    self.assertSetEqual(set(splits.keys()),
-                        set([splits_lib.Split.TRAIN, splits_lib.Split.TEST]))
+    splits = dataset_utils.as_numpy(self.builder.as_dataset(batch_size=-1))
+    self.assertSetEqual(
+        set(splits.keys()), set([splits_lib.Split.TRAIN,
+                                 splits_lib.Split.TEST]))
 
     # Test that enum and string both access same object
     self.assertIs(splits["train"], splits[splits_lib.Split.TRAIN])
@@ -662,8 +660,9 @@ class DatasetBuilderReadTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_with_batch_size(self):
-    items = list(dataset_utils.as_numpy(self.builder.as_dataset(
-        split="train+test", batch_size=10)))
+    items = list(
+        dataset_utils.as_numpy(
+            self.builder.as_dataset(split="train+test", batch_size=10)))
     # 3 batches of 10
     self.assertEqual(3, len(items))
     x1, x2, x3 = items[0]["x"], items[1]["x"], items[2]["x"]
@@ -682,63 +681,138 @@ class DatasetBuilderReadTest(testing.TestCase):
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=2)
     self.assertEqual(1, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
 
-  @testing.run_in_graph_and_eager_modes()
-  def test_supervised_keys(self):
-    x, _ = dataset_utils.as_numpy(self.builder.as_dataset(
-        split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
-    self.assertEqual(x.shape[0], 20)
-
   def test_autocache(self):
     # All the following should cache
 
     # Default should cache as dataset is small and has a single shard
-    self.assertTrue(self.builder._should_cache_ds(
-        split="train",
-        shuffle_files=True,
-        read_config=read_config_lib.ReadConfig(),
-    ))
+    self.assertTrue(
+        self.builder._should_cache_ds(
+            split="train",
+            shuffle_files=True,
+            read_config=read_config_lib.ReadConfig(),
+        ))
 
     # Multiple shards should cache when shuffling is disabled
-    self.assertTrue(self.builder._should_cache_ds(
-        split="train+test",
-        shuffle_files=False,
-        read_config=read_config_lib.ReadConfig(),
-    ))
+    self.assertTrue(
+        self.builder._should_cache_ds(
+            split="train+test",
+            shuffle_files=False,
+            read_config=read_config_lib.ReadConfig(),
+        ))
 
     # Multiple shards should cache when re-shuffling is disabled
-    self.assertTrue(self.builder._should_cache_ds(
-        split="train+test",
-        shuffle_files=True,
-        read_config=read_config_lib.ReadConfig(
-            shuffle_reshuffle_each_iteration=False),
-    ))
+    self.assertTrue(
+        self.builder._should_cache_ds(
+            split="train+test",
+            shuffle_files=True,
+            read_config=read_config_lib.ReadConfig(
+                shuffle_reshuffle_each_iteration=False),
+        ))
 
     # Sub-split API can cache if only a single shard is selected.
-    self.assertTrue(self.builder._should_cache_ds(
-        split="train+test[:0]",
-        shuffle_files=True,
-        read_config=read_config_lib.ReadConfig(),
-    ))
+    self.assertTrue(
+        self.builder._should_cache_ds(
+            split="train+test[:0]",
+            shuffle_files=True,
+            read_config=read_config_lib.ReadConfig(),
+        ))
 
     # All the following should NOT cache
 
     # Default should not cache if try_autocache is disabled
-    self.assertFalse(self.builder._should_cache_ds(
-        split="train",
-        shuffle_files=True,
-        read_config=read_config_lib.ReadConfig(try_autocache=False),
-    ))
+    self.assertFalse(
+        self.builder._should_cache_ds(
+            split="train",
+            shuffle_files=True,
+            read_config=read_config_lib.ReadConfig(try_autocache=False),
+        ))
 
     # Multiple shards should not cache when shuffling is enabled
-    self.assertFalse(self.builder._should_cache_ds(
-        split="train+test",
-        shuffle_files=True,
-        read_config=read_config_lib.ReadConfig(),
-    ))
+    self.assertFalse(
+        self.builder._should_cache_ds(
+            split="train+test",
+            shuffle_files=True,
+            read_config=read_config_lib.ReadConfig(),
+        ))
 
   def test_with_tfds_info(self):
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN)
     self.assertEqual(0, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
+
+
+class DummyDatasetWithSupervisedKeys(DummyDatasetSharedGenerator):
+
+  def __init__(self, *args, supervised_keys=None, **kwargs):
+    self.supervised_keys = supervised_keys
+    super().__init__(*args, **kwargs)
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": tf.int64}),
+        supervised_keys=self.supervised_keys,
+    )
+
+
+class DatasetBuilderAsSupervisedTest(parameterized.TestCase, testing.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    super().setUpClass()
+    cls._tfds_tmp_dir = testing.make_tmp_dir()
+    builder = DummyDatasetWithSupervisedKeys(data_dir=cls._tfds_tmp_dir)
+    builder.download_and_prepare()
+
+  @classmethod
+  def tearDownClass(cls):
+    super().tearDownClass()
+    testing.rm_tmp_dir(cls._tfds_tmp_dir)
+
+  @testing.run_in_graph_and_eager_modes()
+  def test_supervised_keys_basic(self):
+    self.builder = DummyDatasetWithSupervisedKeys(
+        data_dir=self._tfds_tmp_dir, supervised_keys=("x", "x"))
+    x, _ = dataset_utils.as_numpy(
+        self.builder.as_dataset(
+            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
+    self.assertEqual(x.shape[0], 20)
+
+  def test_supervised_keys_triple(self):
+    self.builder = DummyDatasetWithSupervisedKeys(
+        data_dir=self._tfds_tmp_dir, supervised_keys=("x", "x", "x"))
+    result = dataset_utils.as_numpy(
+        self.builder.as_dataset(
+            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
+    self.assertLen(result, 3)
+    self.assertEqual(result[0].shape[0], 20)
+
+  def test_supervised_keys_nested(self):
+    self.builder = DummyDatasetWithSupervisedKeys(
+        data_dir=self._tfds_tmp_dir,
+        supervised_keys=("x", ("x", ("x", "x")), {
+            "a": "x",
+            "b": ("x",)
+        }))
+    single, pair, a_dict = dataset_utils.as_numpy(
+        self.builder.as_dataset(
+            split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
+    self.assertEqual(single.shape[0], 20)
+    self.assertLen(pair, 2)
+    self.assertEqual(pair[1][1].shape[0], 20)
+    self.assertLen(a_dict, 2)
+    self.assertEqual(a_dict["b"][0].shape[0], 20)
+
+  @parameterized.named_parameters(
+      ("not_a_tuple", "x", "tuple of 2 or 3"),
+      ("wrong_length_tuple", ("x", "x", "x", "x", "x"), "tuple of 2 or 3"),
+      ("wrong_nested_type", ("x", ["x", "x"]), "tuple, dict, str"),
+  )
+  def test_bad_supervised_keys(self, supervised_keys, error_message):
+    with self.assertRaisesRegex(ValueError, error_message):
+      self.builder = DummyDatasetWithSupervisedKeys(
+          data_dir=self._tfds_tmp_dir,
+          # Not a tuple
+          supervised_keys=supervised_keys)
 
 
 
@@ -752,11 +826,12 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({
-            "frames": features.Sequence({
-                "coordinates": features.Sequence(
-                    features.Tensor(shape=(2,), dtype=tf.int32)
-                ),
-            }),
+            "frames":
+                features.Sequence({
+                    "coordinates":
+                        features.Sequence(
+                            features.Tensor(shape=(2,), dtype=tf.int32)),
+                }),
         }),
     )
 
@@ -765,11 +840,7 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
     return {"train": self._generate_examples()}
 
   def _generate_examples(self):
-    ex0 = [
-        [[0, 1], [2, 3], [4, 5]],
-        [],
-        [[6, 7]]
-    ]
+    ex0 = [[[0, 1], [2, 3], [4, 5]], [], [[6, 7]]]
     ex1 = []
     ex2 = [
         [[10, 11]],
@@ -802,27 +873,36 @@ class NestedSequenceBuilderTest(testing.TestCase):
           with_info=True,
           shuffle_files=False)
       ex0, ex1, ex2 = [
-          ex["frames"]["coordinates"]
-          for ex in dataset_utils.as_numpy(ds_train)
+          ex["frames"]["coordinates"] for ex in dataset_utils.as_numpy(ds_train)
       ]
-      self.assertAllEqual(ex0, tf.ragged.constant([
-          [[0, 1], [2, 3], [4, 5]],
-          [],
-          [[6, 7]],
-      ], inner_shape=(2,)))
+      self.assertAllEqual(
+          ex0,
+          tf.ragged.constant([
+              [[0, 1], [2, 3], [4, 5]],
+              [],
+              [[6, 7]],
+          ],
+                             inner_shape=(2,)))
       self.assertAllEqual(ex1, tf.ragged.constant([], ragged_rank=1))
-      self.assertAllEqual(ex2, tf.ragged.constant([
-          [[10, 11]],
-          [[12, 13], [14, 15]],
-      ], inner_shape=(2,)))
+      self.assertAllEqual(
+          ex2,
+          tf.ragged.constant([
+              [[10, 11]],
+              [[12, 13], [14, 15]],
+          ],
+                             inner_shape=(2,)))
 
       self.assertEqual(
           ds_info.features.dtype,
-          {"frames": {"coordinates": tf.int32}},
+          {"frames": {
+              "coordinates": tf.int32
+          }},
       )
       self.assertEqual(
           ds_info.features.shape,
-          {"frames": {"coordinates": (None, None, 2)}},
+          {"frames": {
+              "coordinates": (None, None, 2)
+          }},
       )
       nested_tensor_info = ds_info.features.get_tensor_info()
       self.assertEqual(

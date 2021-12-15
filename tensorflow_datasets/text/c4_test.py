@@ -26,7 +26,9 @@ class C4Test(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = {
       "wet_path_urls": ["wet_urls.txt"],
       "wet_files": ["cc_0.warc.wet.gz", "cc_1.warc.wet.gz"],
-      "badwords": {"en": "badwords.txt"},
+      "badwords": {
+          "en": "badwords.txt"
+      },
   }
   SPLITS = {
       "train": 2,
@@ -56,6 +58,7 @@ class C4MultilingualTest(C4Test):
       "und": 1,
       "und-validation": 1,
   }
+
 
 if __name__ == "__main__":
   testing.test_main()

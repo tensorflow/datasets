@@ -19,7 +19,7 @@ import collections
 import csv
 import six
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -56,8 +56,7 @@ class XtremeXnli(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'premise':
-                tfds.features.Translation(
-                    languages=_LANGUAGES,),
+                tfds.features.Translation(languages=_LANGUAGES,),
             'hypothesis':
                 tfds.features.TranslationVariableLanguages(
                     languages=_LANGUAGES,),
@@ -78,7 +77,7 @@ class XtremeXnli(tfds.core.GeneratorBasedBuilder):
         lang: _XTREME_TRANSLATIONS_FORMAT.format(lang)
         for lang in _LANGUAGES
         if lang != 'en'
-        }
+    }
     dl_dirs = dl_manager.download_and_extract(download_urls)
     return {'train': self._generate_examples(dl_dirs)}
 

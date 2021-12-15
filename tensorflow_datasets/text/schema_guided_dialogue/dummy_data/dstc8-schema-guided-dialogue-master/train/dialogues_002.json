@@ -1,0 +1,18 @@
+[
+  {
+    "dialogue_id": "2_00000",
+    "services": [
+      "Service_2"
+    ],
+    "turns": [
+      {
+        "speaker": "USER",
+        "utterance": "utterance 1"
+      },
+      {
+        "speaker": "SYSTEM",
+        "utterance": "utterance 2"
+      }
+    ]
+  }
+]

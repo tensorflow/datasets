@@ -11,6 +11,7 @@
 
 # `movie_rationales`
 
+
 *   **Description**:
 
 The movie rationale dataset contains human annotated rationales for movie
@@ -56,22 +57,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@unpublished{eraser2019,
-    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
-    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}
-}
-@InProceedings{zaidan-eisner-piatko-2008:nips,
-  author    =  {Omar F. Zaidan  and  Jason Eisner  and  Christine Piatko},
-  title     =  {Machine Learning with Annotator Rationales to Reduce Annotation Cost},
-  booktitle =  {Proceedings of the NIPS*2008 Workshop on Cost Sensitive Learning},
-  month     =  {December},
-  year      =  {2008}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -84,7 +69,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_rationales-0.1.0.html";
@@ -109,3 +94,20 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@unpublished{eraser2019,
+    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
+    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}
+}
+@InProceedings{zaidan-eisner-piatko-2008:nips,
+  author    =  {Omar F. Zaidan  and  Jason Eisner  and  Christine Piatko},
+  title     =  {Machine Learning with Annotator Rationales to Reduce Annotation Cost},
+  booktitle =  {Proceedings of the NIPS*2008 Workshop on Cost Sensitive Learning},
+  month     =  {December},
+  year      =  {2008}
+}
+```
+

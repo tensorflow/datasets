@@ -38,10 +38,7 @@ _INPUT_FILE_PATTERN = "gs://realm-data/realm-data/pretrain_corpus/wikipedia_anno
 class SalientSpanWikipediaConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SalientSpanWikipedia dataset."""
 
-  def __init__(self,
-               *,
-               split_sentences,
-               **kwargs):
+  def __init__(self, *, split_sentences, **kwargs):
     """BuilderConfig for SalientSpanWikipedia.
 
     Args:
@@ -50,9 +47,7 @@ class SalientSpanWikipediaConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     self.split_sentences = split_sentences
-    super(SalientSpanWikipediaConfig, self).__init__(
-        version=_VERSION,
-        **kwargs)
+    super(SalientSpanWikipediaConfig, self).__init__(version=_VERSION, **kwargs)
 
 
 class SalientSpanWikipedia(tfds.core.BeamBasedBuilder):
@@ -71,13 +66,16 @@ class SalientSpanWikipedia(tfds.core.BeamBasedBuilder):
 
   def _info(self):
     feature_dict = {
-        "title": tfds.features.Text(),
-        "text": tfds.features.Text(),
-        "spans": tfds.features.Sequence({
-            "start": tf.int32,
-            "limit": tf.int32,
-            "type": tf.string,
-        }),
+        "title":
+            tfds.features.Text(),
+        "text":
+            tfds.features.Text(),
+        "spans":
+            tfds.features.Sequence({
+                "start": tf.int32,
+                "limit": tf.int32,
+                "type": tf.string,
+            }),
     }
     if not self.builder_config.split_sentences:
       feature_dict["sentences"] = tfds.features.Sequence({
@@ -96,8 +94,8 @@ class SalientSpanWikipedia(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"split_sentences": self.builder_config.split_sentences}
-        ),
+            gen_kwargs={"split_sentences": self.builder_config.split_sentences
+                       }),
     ]
 
   def _build_pcollection(self, pipeline, split_sentences):
@@ -112,6 +110,7 @@ class SalientSpanWikipedia(tfds.core.BeamBasedBuilder):
 
       def int_feat(key):
         return np.array(ex.features.feature[key].int64_list.value, np.int32)
+
       def str_feat(key):
         return np.array(ex.features.feature[key].bytes_list.value)
 
@@ -141,11 +140,10 @@ class SalientSpanWikipedia(tfds.core.BeamBasedBuilder):
         }
       else:
         span_i = 0
-        for sent_i, (sent_start, sent_limit) in enumerate(
-            zip(sent_start, sent_limit)):
+        for sent_i, (sent_start,
+                     sent_limit) in enumerate(zip(sent_start, sent_limit)):
           span_indices = []
-          while (span_i < len(span_start) and
-                 span_start[span_i] < sent_limit):
+          while (span_i < len(span_start) and span_start[span_i] < sent_limit):
             if span_limit[span_i] <= sent_limit:
               span_indices.append(span_i)
             else:
@@ -168,9 +166,8 @@ class SalientSpanWikipedia(tfds.core.BeamBasedBuilder):
               }
           }
 
-    return (
-        pipeline
-        | beam.io.ReadFromTFRecord(
-            _INPUT_FILE_PATTERN,
-            coder=beam.coders.ProtoCoder(tf.train.Example))
-        | beam.FlatMap(_emit_example))
+    return (pipeline
+            | beam.io.ReadFromTFRecord(
+                _INPUT_FILE_PATTERN,
+                coder=beam.coders.ProtoCoder(tf.train.Example))
+            | beam.FlatMap(_emit_example))

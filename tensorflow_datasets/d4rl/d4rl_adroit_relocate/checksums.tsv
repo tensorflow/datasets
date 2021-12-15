@@ -1,0 +1,6 @@
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/relocate-demos-v0-bc-combined.hdf5	678538907	3beae21b72cfa485aecd82137e6697fe0b65c0f5cc77a100b12c25878fd19d9a	relocate-demos-v0-bc-combined.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/relocate-v0_demos_clipped.hdf5	5106553	c6c115c416c1e1f82357df88565fc0e59e8aa814a09401fd9a8c82e7669905c0	relocate-v0_demos_clipped.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/relocate-v0_expert_clipped.hdf5	609782583	ef712103ecfde7eef8e5ef9a405a698ff8dbc7963d37b268b51e407752627ca2	relocate-v0_expert_clipped.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/relocate-cloned-v1.hdf5	581319494	8baf2b7f0a7e44e6263e89a4c544a5dd98475f2dada833ba60d887e08fc77772	relocate-cloned-v1.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/relocate-expert-v1.hdf5	715618341	ab13714637424e636e768fff1351900dbe5155c5c4529eace97fa1f97a2fd03b	relocate-expert-v1.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/relocate-human-v1.hdf5	6206987	8820800fd733153fc3cac495c237fad1793d00a3650e01cd1510c49fc9964c9c	relocate-human-v1.hdf5

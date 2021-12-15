@@ -11,6 +11,7 @@
 
 # `coqa`
 
+
 *   **Description**:
 
 CoQA: A Conversational Question Answering Challenge
@@ -59,19 +60,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@misc{reddy2018coqa,
-    title={CoQA: A Conversational Question Answering Challenge},
-    author={Siva Reddy and Danqi Chen and Christopher D. Manning},
-    year={2018},
-    eprint={1808.07042},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -84,7 +72,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/coqa-1.0.0.html";
@@ -109,3 +97,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{reddy2018coqa,
+    title={CoQA: A Conversational Question Answering Challenge},
+    author={Siva Reddy and Danqi Chen and Christopher D. Manning},
+    year={2018},
+    eprint={1808.07042},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```
+

@@ -20,7 +20,6 @@ import os
 from tensorflow_datasets import testing
 from tensorflow_datasets.object_detection import coco_captions
 
-
 _BASE_EXAMPLE_DIR = os.path.join(
     os.path.dirname(os.path.dirname(__file__)), "testing", "test_data",
     "fake_examples")

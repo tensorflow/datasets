@@ -21,7 +21,6 @@ import re
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _CITATION = """
 @inproceedings{berant-etal-2013-semantic,
     title = "Semantic Parsing on {F}reebase from Question-Answer Pairs",
@@ -63,12 +62,9 @@ class WebQuestions(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'url':
-                tfds.features.Text(),
-            'question':
-                tfds.features.Text(),
-            'answers':
-                tfds.features.Sequence(tfds.features.Text()),
+            'url': tfds.features.Text(),
+            'question': tfds.features.Text(),
+            'answers': tfds.features.Sequence(tfds.features.Text()),
         }),
         supervised_keys=None,
         homepage='https://worksheets.codalab.org/worksheets/0xba659fe363cb46e7a505c5b6a774dc8a',
@@ -91,8 +87,8 @@ class WebQuestions(tfds.core.GeneratorBasedBuilder):
     def _target_to_answers(target):
       target = re.sub(r'^\(list |\)$', '', target)
       return [
-          ''.join(ans) for ans in
-          re.findall(r'\(description (?:"([^"]+?)"|([^)]+?))\)\w*', target)
+          ''.join(ans) for ans in re.findall(
+              r'\(description (?:"([^"]+?)"|([^)]+?))\)\w*', target)
       ]
 
     with tf.io.gfile.GFile(file_path) as f:

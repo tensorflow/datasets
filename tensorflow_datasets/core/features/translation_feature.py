@@ -76,9 +76,9 @@ class Translation(features_dict.FeaturesDict):
         convert text to integer. One can be shared one per language provided. If
         None, the text will be utf-8 byte-encoded.
       encoder_config: `tfds.deprecated.text.TextEncoderConfig` or
-        `list<tfds.deprecated.text.TextEncoderConfig>` (optional), needed
-        if restoring from a file with `load_metadata`. One config can be shared
-        or one per language can be provided.
+        `list<tfds.deprecated.text.TextEncoderConfig>` (optional), needed if
+        restoring from a file with `load_metadata`. One config can be shared or
+        one per language can be provided.
     """
     # If encoder and encoder_config aren't lists, use the same values for all
     # languages.
@@ -89,9 +89,10 @@ class Translation(features_dict.FeaturesDict):
     if not isinstance(encoder_config, collections_abc.Iterable):
       encoder_config = [encoder_config] * len(languages)
 
-    super(Translation, self).__init__(
-        {lang: text_feature.Text(enc, enc_conf) for lang, enc, enc_conf in zip(
-            languages, encoder, encoder_config)})
+    super(Translation, self).__init__({
+        lang: text_feature.Text(enc, enc_conf)
+        for lang, enc, enc_conf in zip(languages, encoder, encoder_config)
+    })
 
   @property
   def languages(self):
@@ -103,16 +104,13 @@ class Translation(features_dict.FeaturesDict):
     if "use_encoder" in value:
       raise ValueError(
           "TFDS does not support datasets with Encoder. Please use the plain "
-          "text version with `tensorflow_text`."
-      )
+          "text version with `tensorflow_text`.")
     return cls(**value)
 
   def to_json_content(self) -> Json:
     if self._encoder or self._encoder_config:
-      print(
-          "WARNING: TFDS encoder are deprecated and will be removed soon. "
-          "Please use `tensorflow_text` instead with the plain text dataset."
-      )
+      print("WARNING: TFDS encoder are deprecated and will be removed soon. "
+            "Please use `tensorflow_text` instead with the plain text dataset.")
       return {"languages": self.languages, "use_encoder": True}
     return {"languages": self.languages}
 
@@ -205,9 +203,10 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
     # Ensure translations are in ascending order by language code.
     languages, translations = zip(*sorted(translation_tuples))
 
-    return super(TranslationVariableLanguages, self).encode_example(
-        {"language": languages,
-         "translation": translations})
+    return super(TranslationVariableLanguages, self).encode_example({
+        "language": languages,
+        "translation": translations
+    })
 
   @classmethod
   def from_json_content(cls, value: Json) -> "TranslationVariableLanguages":

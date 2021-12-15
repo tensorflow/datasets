@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -105,15 +105,16 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(
-                    shape=(self.builder_config.resolution,
-                           self.builder_config.resolution, 3),
-                    encoding_format="png"),
-            "image/filename":
-                tfds.features.Text(),
-        },),
+        features=tfds.features.FeaturesDict(
+            {
+                "image":
+                    tfds.features.Image(
+                        shape=(self.builder_config.resolution,
+                               self.builder_config.resolution, 3),
+                        encoding_format="png"),
+                "image/filename":
+                    tfds.features.Text(),
+            },),
         homepage="https://github.com/tkarras/progressive_growing_of_gans",
         citation=_CITATION,
     )

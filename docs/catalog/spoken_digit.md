@@ -11,6 +11,7 @@
 
 # `spoken_digit`
 
+
 *   **Description**:
 
 A free audio dataset of spoken digits. Think MNIST for audio.
@@ -62,17 +63,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {Free Spoken Digit Dataset,
-    author = "Zohar Jackson",
-    title  = "Spoken_Digit",
-    year   = "2016",
-    url    = "https://github.com/Jakobovski/free-spoken-digit-dataset"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -85,7 +75,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/spoken_digit-1.0.9.html";
@@ -110,3 +100,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {Free Spoken Digit Dataset,
+    author = "Zohar Jackson",
+    title  = "Spoken_Digit",
+    year   = "2016",
+    url    = "https://github.com/Jakobovski/free-spoken-digit-dataset"
+}
+```
+

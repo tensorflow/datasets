@@ -11,6 +11,7 @@
 
 # `gtzan_music_speech`
 
+
 *   **Description**:
 
 The dataset was collected for the purposes of music/speech discrimination. The
@@ -56,17 +57,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {Music Speech,
-    author = "Tzanetakis, George",
-    title  = "GTZAN Music/Speech Collection",
-    year   = "1999",
-    url    = "http://marsyas.info/index.html"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -79,7 +69,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gtzan_music_speech-1.0.0.html";
@@ -104,3 +94,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {Music Speech,
+    author = "Tzanetakis, George",
+    title  = "GTZAN Music/Speech Collection",
+    year   = "1999",
+    url    = "http://marsyas.info/index.html"
+}
+```
+

@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Wrapper around tqdm.
-"""
+"""Wrapper around tqdm."""
 
 import contextlib
 import os
@@ -53,7 +52,7 @@ class TqdmStream:
 class EmptyTqdm(object):
   """Dummy tqdm which doesn't do anything."""
 
-  def __init__(self, *args, **kwargs):   # pylint: disable=unused-argument
+  def __init__(self, *args, **kwargs):  # pylint: disable=unused-argument
     self._iterator = args[0] if args else None
 
   def __iter__(self):
@@ -61,8 +60,10 @@ class EmptyTqdm(object):
 
   def __getattr__(self, _):
     """Return empty function."""
-    def empty_fn(*args, **kwargs):   # pylint: disable=unused-argument
+
+    def empty_fn(*args, **kwargs):  # pylint: disable=unused-argument
       return
+
     return empty_fn
 
   def __enter__(self):
@@ -70,6 +71,7 @@ class EmptyTqdm(object):
 
   def __exit__(self, type_, value, traceback):
     return
+
 
 _active = True
 # Disable progression bar when TFDS is executed inside TF kokoro documentation
@@ -93,16 +95,51 @@ def async_tqdm(*args, **kwargs):
     return EmptyTqdm(*args, **kwargs)
 
 
-def disable_progress_bar():
-  """Disabled Tqdm progress bar.
+def display_progress_bar(enable: bool) -> None:
+  """Controls whether Tqdm progress bar is enabled/disabled.
 
   Usage:
 
+  ```
+  tfds.display_progress_bar(enable=True)
+  ```
+
+  Args:
+    enable: whether to display the progress bar.
+  """
+  # Replace tqdm
+  global _active
+  _active = enable
+
+
+def disable_progress_bar():
+  """Disables Tqdm progress bar.
+
+  Usage:
+
+  ```
   tfds.disable_progress_bar()
+  ```
+
   """
   # Replace tqdm
   global _active
   _active = False
+
+
+def enable_progress_bar():
+  """Enables Tqdm progress bar.
+
+  Usage:
+
+  ```
+  tfds.enable_progress_bar()
+  ```
+
+  """
+  # Replace tqdm
+  global _active
+  _active = True
 
 
 @contextlib.contextmanager
@@ -129,7 +166,6 @@ def _async_tqdm(*args, **kwargs):
     pbar = _TqdmPbarAsync(pbar)
     yield pbar
     pbar.clear()  # pop pbar from the active list of pbar
-    print()  # Avoid the next log to overlapp with the bar
 
 
 class _TqdmPbarAsync(object):

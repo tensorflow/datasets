@@ -22,7 +22,11 @@ import tensorflow_datasets.testing as tfds_test
 class NsynthFullTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = nsynth.Nsynth
   # Make test run faster by using fewer output shards.
-  nsynth._SPLIT_SHARDS = {"train": 1, "valid": 1, "test": 1,}
+  nsynth._SPLIT_SHARDS = {
+      "train": 1,
+      "valid": 1,
+      "test": 1,
+  }
   BUILDER_CONFIG_NAMES_TO_TEST = ["full"]
   SPLITS = {"train": 3, "test": 3, "valid": 3}
   DL_EXTRACT_RESULT = {

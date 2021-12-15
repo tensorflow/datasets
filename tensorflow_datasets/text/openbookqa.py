@@ -50,12 +50,13 @@ class Openbookqa(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            'question': {'stem': tfds.features.Text(),
-                         'choice_A': tfds.features.Text(),
-                         'choice_B': tfds.features.Text(),
-                         'choice_C': tfds.features.Text(),
-                         'choice_D': tfds.features.Text(),
-                         },
+            'question': {
+                'stem': tfds.features.Text(),
+                'choice_A': tfds.features.Text(),
+                'choice_B': tfds.features.Text(),
+                'choice_C': tfds.features.Text(),
+                'choice_D': tfds.features.Text(),
+            },
             'fact1': tfds.features.Text(),
             'humanScore': tfds.features.Tensor(shape=(), dtype=tf.float32),
             'clarity': tfds.features.Tensor(shape=(), dtype=tf.float32),

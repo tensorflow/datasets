@@ -11,6 +11,7 @@
 
 # `definite_pronoun_resolution`
 
+
 *   **Description**:
 
 Composed by 30 students from one of the author's undergraduate classes. These
@@ -63,19 +64,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('sentence', 'label')`
 
-*   **Citation**:
-
-```
-@inproceedings{rahman2012resolving,
-  title={Resolving complex cases of definite pronouns: the winograd schema challenge},
-  author={Rahman, Altaf and Ng, Vincent},
-  booktitle={Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning},
-  pages={777--789},
-  year={2012},
-  organization={Association for Computational Linguistics}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -88,7 +76,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/definite_pronoun_resolution-1.1.0.html";
@@ -113,3 +101,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{rahman2012resolving,
+  title={Resolving complex cases of definite pronouns: the winograd schema challenge},
+  author={Rahman, Altaf and Ng, Vincent},
+  booktitle={Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning},
+  pages={777--789},
+  year={2012},
+  organization={Association for Computational Linguistics}
+}
+```
+

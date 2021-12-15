@@ -17,7 +17,7 @@
 
 import os
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -69,8 +69,7 @@ class Aflw2k3d(tfds.core.GeneratorBasedBuilder):
             "landmarks_68_3d_z":
                 tfds.features.Tensor(shape=(68, 1), dtype=tf.float32),
         }),
-        homepage=
-        "http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm",
+        homepage="http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm",
         citation=_CITATION,
     )
 

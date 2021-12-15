@@ -11,6 +11,13 @@
 
 # `omniglot`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=omniglot">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 Omniglot data set for one-shot learning. This dataset contains 1623 different
@@ -59,21 +66,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{lake2015human,
-  title={Human-level concept learning through probabilistic program induction},
-  author={Lake, Brenden M and Salakhutdinov, Ruslan and Tenenbaum, Joshua B},
-  journal={Science},
-  volume={350},
-  number={6266},
-  pages={1332--1338},
-  year={2015},
-  publisher={American Association for the Advancement of Science}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -87,7 +79,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/omniglot-3.0.0.html";
@@ -112,3 +104,19 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{lake2015human,
+  title={Human-level concept learning through probabilistic program induction},
+  author={Lake, Brenden M and Salakhutdinov, Ruslan and Tenenbaum, Joshua B},
+  journal={Science},
+  volume={350},
+  number={6266},
+  pages={1332--1338},
+  year={2015},
+  publisher={American Association for the Advancement of Science}
+}
+```
+

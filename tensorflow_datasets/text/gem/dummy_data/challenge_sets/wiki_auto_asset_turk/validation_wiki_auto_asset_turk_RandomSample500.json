@@ -1,0 +1,13 @@
+[
+    {
+        "gem_id": "wiki_auto_asset_turk-validation-37600",
+        "gem_parent_id": "wiki_auto_asset_turk-validation-37600",
+        "references": [
+            "The humans and elves start a siege of the Lonely Mountain."
+        ],
+        "source": "In many ways the Smaug episode reflects and references the dragon of \"Beowulf\", and Tolkien uses the episode to put into practice some of the ground-breaking literary theories he had developed about the Old English poem in its portrayal of the dragon as having bestial intelligence.",
+        "source_id": "371_11141-1-52-1",
+        "target": "The humans and elves start a siege of the Lonely Mountain.",
+        "target_id": "371_11141-0-11-4"
+    }
+]

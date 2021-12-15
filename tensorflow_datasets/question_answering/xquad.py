@@ -47,7 +47,6 @@ splits for each non-English language from XTREME (Hu et al., 2020). These can \
 be used to run XQuAD in the "translate-train" or "translate-test" settings.
 """
 
-
 LANGUAGES = ["ar", "de", "el", "en", "es", "hi", "ru", "th", "tr", "vi", "zh"]
 
 _URL_FORMAT = "https://github.com/deepmind/xquad/raw/master/xquad.{lang}.json"
@@ -65,8 +64,7 @@ class XquadConfig(tfds.core.BuilderConfig):
       language: string, a valid language code.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(XquadConfig, self).__init__(
-        version=tfds.core.Version("2.0.0"), **kwargs)
+    super(XquadConfig, self).__init__(**kwargs)
     self.language = language
 
 
@@ -89,6 +87,14 @@ class Xquad(tfds.core.GeneratorBasedBuilder):
       )
   ]
 
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0":
+          "Fixes issue with a number of examples where answer spans are "
+          "misaligned due to context white-space removal. This change impacts "
+          "roughly  14% of test examples."
+  }
+
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
@@ -105,28 +111,25 @@ class Xquad(tfds.core.GeneratorBasedBuilder):
     lang = self.builder_config.language
 
     if lang == "en":
-      filepaths = dl_manager.download_and_extract(
-          {
-              "test": _URL_FORMAT.format(lang=lang),
-          }
-      )
+      filepaths = dl_manager.download_and_extract({
+          "test": _URL_FORMAT.format(lang=lang),
+      })
     else:
-      filepaths = dl_manager.download_and_extract(
-          {
-              "test": _URL_FORMAT.format(lang=lang),
-              "translate-train": _XTREME_SQUAD_URL_FORMAT.format(
-                  split="train", lang=lang),
-              "translate-dev": _XTREME_SQUAD_URL_FORMAT.format(
-                  split="dev", lang=lang),
-              "translate-test": _XTREME_XQUAD_URL_FORMAT.format(lang=lang),
-          }
-      )
+      filepaths = dl_manager.download_and_extract({
+          "test":
+              _URL_FORMAT.format(lang=lang),
+          "translate-train":
+              _XTREME_SQUAD_URL_FORMAT.format(split="train", lang=lang),
+          "translate-dev":
+              _XTREME_SQUAD_URL_FORMAT.format(split="dev", lang=lang),
+          "translate-test":
+              _XTREME_XQUAD_URL_FORMAT.format(lang=lang),
+      })
 
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=split,
-            gen_kwargs={"filepath": path})
-        for split, path in filepaths.items()
+            gen_kwargs={"filepath": path}) for split, path in filepaths.items()
     ]
 
   def _generate_examples(self, filepath):

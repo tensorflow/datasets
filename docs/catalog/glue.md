@@ -11,6 +11,7 @@
 
 # `glue`
 
+
 *   **Description**:
 
 GLUE, the General Language Understanding Evaluation benchmark
@@ -22,15 +23,13 @@ evaluating, and analyzing natural language understanding systems.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
     *   `1.0.1`: Update dead URL links.
-
-*   **Dataset size**: `Unknown size`
+    *   **`2.0.0`** (default): Update data source for glue/qqp.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -39,6 +38,7 @@ evaluating, and analyzing natural language understanding systems.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
 
 ## glue/cola (default config)
 
@@ -51,6 +51,8 @@ evaluating, and analyzing natural language understanding systems.
     [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
 
 *   **Download size**: `368.14 KiB`
+
+*   **Dataset size**: `965.49 KiB`
 
 *   **Splits**:
 
@@ -70,26 +72,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@article{warstadt2018neural,
-  title={Neural Network Acceptability Judgments},
-  author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},
-  journal={arXiv preprint arXiv:1805.12471},
-  year={2018}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -98,10 +80,10 @@ the correct citation for each contained dataset.
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-cola-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-cola-2.0.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -124,6 +106,26 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@article{warstadt2018neural,
+  title={Neural Network Acceptability Judgments},
+  author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1805.12471},
+  year={2018}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
 ## glue/sst2
 
 *   **Config description**: The Stanford Sentiment Treebank consists of
@@ -135,6 +137,8 @@ $(document).ready(() => {
     [https://nlp.stanford.edu/sentiment/index.html](https://nlp.stanford.edu/sentiment/index.html)
 
 *   **Download size**: `7.09 MiB`
+
+*   **Dataset size**: `7.22 MiB`
 
 *   **Splits**:
 
@@ -153,6 +157,40 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-sst2-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -175,6 +213,39 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
+## glue/mrpc
+
+*   **Config description**: The Microsoft Research Paraphrase Corpus (Dolan &
+    Brockett, 2005) is a corpus of sentence pairs automatically extracted from
+    online news sources, with human annotations for whether the sentences in the
+    pair are semantically equivalent.
+
+*   **Homepage**:
+    [https://www.microsoft.com/en-us/download/details.aspx?id=52398](https://www.microsoft.com/en-us/download/details.aspx?id=52398)
+
+*   **Download size**: `1.43 MiB`
+
+*   **Dataset size**: `1.74 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,725
+`'train'`      | 3,668
+`'validation'` | 408
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'idx': tf.int32,
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=tf.string),
+    'sentence2': Text(shape=(), dtype=tf.string),
+})
+```
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -183,10 +254,10 @@ the correct citation for each contained dataset.
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-sst2-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mrpc-2.0.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -208,37 +279,6 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
-
-## glue/mrpc
-
-*   **Config description**: The Microsoft Research Paraphrase Corpus (Dolan &
-    Brockett, 2005) is a corpus of sentence pairs automatically extracted from
-    online news sources, with human annotations for whether the sentences in the
-    pair are semantically equivalent.
-
-*   **Homepage**:
-    [https://www.microsoft.com/en-us/download/details.aspx?id=52398](https://www.microsoft.com/en-us/download/details.aspx?id=52398)
-
-*   **Download size**: `1.43 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,725
-`'train'`      | 3,668
-`'validation'` | 408
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
-})
-```
 
 *   **Citation**:
 
@@ -260,6 +300,38 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
+## glue/qqp
+
+*   **Config description**: The Quora Question Pairs2 dataset is a collection of
+    question pairs from the community question-answering website Quora. The task
+    is to determine whether a pair of questions are semantically equivalent.
+
+*   **Homepage**:
+    [https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs](https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs)
+
+*   **Download size**: `39.76 MiB`
+
+*   **Dataset size**: `150.37 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 390,965
+`'train'`      | 363,846
+`'validation'` | 40,430
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'idx': tf.int32,
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'question1': Text(shape=(), dtype=tf.string),
+    'question2': Text(shape=(), dtype=tf.string),
+})
+```
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -268,10 +340,10 @@ the correct citation for each contained dataset.
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mrpc-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-qqp-2.0.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -293,36 +365,6 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
-
-## glue/qqp
-
-*   **Config description**: The Quora Question Pairs2 dataset is a collection of
-    question pairs from the community question-answering website Quora. The task
-    is to determine whether a pair of questions are semantically equivalent.
-
-*   **Homepage**:
-    [https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs](https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs)
-
-*   **Download size**: `57.73 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 390,965
-`'train'`      | 363,849
-`'validation'` | 40,430
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'question1': Text(shape=(), dtype=tf.string),
-    'question2': Text(shape=(), dtype=tf.string),
-})
-```
 
 *   **Citation**:
 
@@ -345,6 +387,39 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
+## glue/stsb
+
+*   **Config description**: The Semantic Textual Similarity Benchmark (Cer et
+    al., 2017) is a collection of sentence pairs drawn from news headlines,
+    video and image captions, and natural language inference data. Each pair is
+    human-annotated with a similarity score from 0 to 5.
+
+*   **Homepage**:
+    [http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark](http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)
+
+*   **Download size**: `784.05 KiB`
+
+*   **Dataset size**: `1.58 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,379
+`'train'`      | 5,749
+`'validation'` | 1,500
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'idx': tf.int32,
+    'label': tf.float32,
+    'sentence1': Text(shape=(), dtype=tf.string),
+    'sentence2': Text(shape=(), dtype=tf.string),
+})
+```
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -353,10 +428,10 @@ the correct citation for each contained dataset.
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-qqp-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-stsb-2.0.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -378,37 +453,6 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
-
-## glue/stsb
-
-*   **Config description**: The Semantic Textual Similarity Benchmark (Cer et
-    al., 2017) is a collection of sentence pairs drawn from news headlines,
-    video and image captions, and natural language inference data. Each pair is
-    human-annotated with a similarity score from 1 to 5.
-
-*   **Homepage**:
-    [http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark](http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)
-
-*   **Download size**: `784.05 KiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,379
-`'train'`      | 5,749
-`'validation'` | 1,500
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'idx': tf.int32,
-    'label': tf.float32,
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
-})
-```
 
 *   **Citation**:
 
@@ -430,40 +474,6 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-stsb-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## glue/mnli
 
 *   **Config description**: The Multi-Genre Natural Language Inference Corpus is
@@ -482,6 +492,8 @@ $(document).ready(() => {
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
 
 *   **Download size**: `298.29 MiB`
+
+*   **Dataset size**: `100.56 MiB`
 
 *   **Splits**:
 
@@ -504,6 +516,40 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -541,40 +587,6 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## glue/mnli_mismatched
 
 *   **Config description**: The mismatched validation and test splits from MNLI.
@@ -584,6 +596,8 @@ $(document).ready(() => {
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
 
 *   **Download size**: `298.29 MiB`
+
+*   **Dataset size**: `4.79 MiB`
 
 *   **Splits**:
 
@@ -603,6 +617,40 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli_mismatched-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -640,40 +688,6 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli_mismatched-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## glue/mnli_matched
 
 *   **Config description**: The matched validation and test splits from MNLI.
@@ -683,6 +697,8 @@ $(document).ready(() => {
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
 
 *   **Download size**: `298.29 MiB`
+
+*   **Dataset size**: `4.58 MiB`
 
 *   **Splits**:
 
@@ -702,6 +718,40 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli_matched-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -738,40 +788,6 @@ FeaturesDict({
 Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli_matched-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## glue/qnli
 
@@ -793,6 +809,8 @@ $(document).ready(() => {
 
 *   **Download size**: `10.14 MiB`
 
+*   **Dataset size**: `32.99 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -812,26 +830,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@article{rajpurkar2016squad,
-  title={Squad: 100,000+ questions for machine comprehension of text},
-  author={Rajpurkar, Pranav and Zhang, Jian and Lopyrev, Konstantin and Liang, Percy},
-  journal={arXiv preprint arXiv:1606.05250},
-  year={2016}
-}
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -840,10 +838,10 @@ the correct citation for each contained dataset.
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-qnli-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-qnli-2.0.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -866,6 +864,26 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@article{rajpurkar2016squad,
+  title={Squad: 100,000+ questions for machine comprehension of text},
+  author={Rajpurkar, Pranav and Zhang, Jian and Lopyrev, Konstantin and Liang, Percy},
+  journal={arXiv preprint arXiv:1606.05250},
+  year={2016}
+}
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
 ## glue/rte
 
 *   **Config description**: The Recognizing Textual Entailment (RTE) datasets
@@ -880,6 +898,8 @@ $(document).ready(() => {
     [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
 
 *   **Download size**: `680.81 KiB`
+
+*   **Dataset size**: `2.15 MiB`
 
 *   **Splits**:
 
@@ -899,6 +919,40 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-rte-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -946,40 +1000,6 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-rte-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## glue/wnli
 
 *   **Config description**: The Winograd Schema Challenge (Levesque et al.,
@@ -1008,6 +1028,8 @@ $(document).ready(() => {
 
 *   **Download size**: `28.32 KiB`
 
+*   **Dataset size**: `198.88 KiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -1026,6 +1048,40 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-wnli-2.0.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -1047,40 +1103,6 @@ Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset.
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-wnli-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## glue/ax
 
 *   **Config description**: A manually-curated evaluation dataset for
@@ -1093,6 +1115,8 @@ $(document).ready(() => {
     [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
 
 *   **Download size**: `217.05 KiB`
+
+*   **Dataset size**: `299.16 KiB`
 
 *   **Splits**:
 
@@ -1111,20 +1135,6 @@ FeaturesDict({
 })
 ```
 
-*   **Citation**:
-
-```
-@inproceedings{wang2019glue,
-  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
-  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
-  note={In the Proceedings of ICLR.},
-  year={2019}
-}
-
-Note that each GLUE dataset has its own citation. Please see the source to see
-the correct citation for each contained dataset.
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1133,10 +1143,10 @@ the correct citation for each contained dataset.
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-ax-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-ax-2.0.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -1158,3 +1168,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```

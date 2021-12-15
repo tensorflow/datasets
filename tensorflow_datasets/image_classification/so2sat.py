@@ -16,7 +16,7 @@
 """So2SAT remote sensing dataset."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -71,7 +71,7 @@ class So2satConfig(tfds.core.BuilderConfig):
             '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
             '2.1.0': 'Using updated optical channels calibration factor.',
         },
-        **kwargs,
+        **kwargs,  # pytype: disable=wrong-arg-types  # gen-stub-imports
     )
     self.selection = selection
 
@@ -81,9 +81,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       So2satConfig(
-          selection='rgb',
-          name='rgb',
-          description='Sentinel-2 RGB channels'),
+          selection='rgb', name='rgb', description='Sentinel-2 RGB channels'),
       So2satConfig(
           selection='all',
           name='all',

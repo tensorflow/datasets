@@ -11,6 +11,7 @@
 
 # `eurosat`
 
+
 *   **Description**:
 
 EuroSAT dataset is based on Sentinel-2 satellite images covering 13 spectral
@@ -58,6 +59,7 @@ Split     | Examples
 }
 ```
 
+
 ## eurosat/rgb (default config)
 
 *   **Config description**: Sentinel-2 RGB channels
@@ -91,7 +93,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/eurosat-rgb-2.0.0.html";
@@ -149,7 +151,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/eurosat-all-2.0.0.html";

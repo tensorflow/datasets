@@ -11,6 +11,7 @@
 
 # `opinosis`
 
+
 *   **Description**:
 
 The Opinosis Opinion Dataset consists of sentences extracted from reviews for 51
@@ -54,19 +55,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('review_sents', 'summaries')`
 
-*   **Citation**:
-
-```
-@inproceedings{ganesan2010opinosis,
-  title={Opinosis: a graph-based approach to abstractive summarization of highly redundant opinions},
-  author={Ganesan, Kavita and Zhai, ChengXiang and Han, Jiawei},
-  booktitle={Proceedings of the 23rd International Conference on Computational Linguistics},
-  pages={340--348},
-  year={2010},
-  organization={Association for Computational Linguistics}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -79,7 +67,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/opinosis-1.0.0.html";
@@ -104,3 +92,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{ganesan2010opinosis,
+  title={Opinosis: a graph-based approach to abstractive summarization of highly redundant opinions},
+  author={Ganesan, Kavita and Zhai, ChengXiang and Han, Jiawei},
+  booktitle={Proceedings of the 23rd International Conference on Computational Linguistics},
+  pages={340--348},
+  year={2010},
+  organization={Association for Computational Linguistics}
+}
+```
+

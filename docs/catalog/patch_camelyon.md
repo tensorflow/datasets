@@ -11,6 +11,13 @@
 
 # `patch_camelyon`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=patch_camelyon">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The PatchCamelyon benchmark is a new and challenging image classification
@@ -61,19 +68,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@misc{b_s_veeling_j_linmans_j_winkens_t_cohen_2018_2546921,
-  author       = {B. S. Veeling, J. Linmans, J. Winkens, T. Cohen, M. Welling},
-  title        = {Rotation Equivariant CNNs for Digital Pathology},
-  month        = sep,
-  year         = 2018,
-  doi          = {10.1007/978-3-030-00934-2_24},
-  url          = {https://doi.org/10.1007/978-3-030-00934-2_24}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -87,7 +81,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/patch_camelyon-2.0.0.html";
@@ -112,3 +106,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{b_s_veeling_j_linmans_j_winkens_t_cohen_2018_2546921,
+  author       = {B. S. Veeling, J. Linmans, J. Winkens, T. Cohen, M. Welling},
+  title        = {Rotation Equivariant CNNs for Digital Pathology},
+  month        = sep,
+  year         = 2018,
+  doi          = {10.1007/978-3-030-00934-2_24},
+  url          = {https://doi.org/10.1007/978-3-030-00934-2_24}
+}
+```
+

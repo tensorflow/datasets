@@ -11,6 +11,7 @@
 
 # `speech_commands`
 
+
 *   **Description**:
 
 An audio dataset of spoken words designed to help train and evaluate keyword
@@ -64,23 +65,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@article{speechcommandsv2,
-   author = {{Warden}, P.},
-    title = "{Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition}",
-  journal = {ArXiv e-prints},
-  archivePrefix = "arXiv",
-  eprint = {1804.03209},
-  primaryClass = "cs.CL",
-  keywords = {Computer Science - Computation and Language, Computer Science - Human-Computer Interaction},
-    year = 2018,
-    month = apr,
-    url = {https://arxiv.org/abs/1804.03209},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -93,7 +77,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/speech_commands-0.0.2.html";
@@ -118,3 +102,21 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{speechcommandsv2,
+   author = {{Warden}, P.},
+    title = "{Speech Commands: A Dataset for Limited-Vocabulary Speech Recognition}",
+  journal = {ArXiv e-prints},
+  archivePrefix = "arXiv",
+  eprint = {1804.03209},
+  primaryClass = "cs.CL",
+  keywords = {Computer Science - Computation and Language, Computer Science - Human-Computer Interaction},
+    year = 2018,
+    month = apr,
+    url = {https://arxiv.org/abs/1804.03209},
+}
+```
+

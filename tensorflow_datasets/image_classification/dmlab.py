@@ -19,7 +19,7 @@ import io
 
 import os
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -44,10 +44,13 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
         {close, far, very far} x {positive reward, negative reward}
         respectively."""),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=(360, 480, 3),
-                                         encoding_format="jpeg"),
-            "filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(num_classes=6),
+            "image":
+                tfds.features.Image(
+                    shape=(360, 480, 3), encoding_format="jpeg"),
+            "filename":
+                tfds.features.Text(),
+            "label":
+                tfds.features.ClassLabel(num_classes=6),
         }),
         homepage="https://github.com/google-research/task_adaptation",
         citation=r"""@article{zhai2019visual,
@@ -64,8 +67,7 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
                               primaryClass={cs.CV},
                               url = {https://arxiv.org/abs/1910.04867}
                           }""",
-        supervised_keys=("image", "label")
-    )
+        supervised_keys=("image", "label"))
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download_and_extract(_URL)

@@ -11,6 +11,7 @@
 
 # `cats_vs_dogs`
 
+
 *   **Description**:
 
 A large set of images of cats and dogs. There are 1738 corrupted images that are
@@ -55,21 +56,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@Inproceedings (Conference){asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization,
-author = {Elson, Jeremy and Douceur, John (JD) and Howell, Jon and Saul, Jared},
-title = {Asirra: A CAPTCHA that Exploits Interest-Aligned Manual Image Categorization},
-booktitle = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
-year = {2007},
-month = {October},
-publisher = {Association for Computing Machinery, Inc.},
-url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization/},
-edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -83,7 +69,7 @@ edition = {Proceedings of 14th ACM Conference on Computer and Communications Sec
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cats_vs_dogs-4.0.0.html";
@@ -108,3 +94,19 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@Inproceedings (Conference){asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization,
+author = {Elson, Jeremy and Douceur, John (JD) and Howell, Jon and Saul, Jared},
+title = {Asirra: A CAPTCHA that Exploits Interest-Aligned Manual Image Categorization},
+booktitle = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
+year = {2007},
+month = {October},
+publisher = {Association for Computing Machinery, Inc.},
+url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization/},
+edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
+}
+```
+

@@ -19,7 +19,7 @@ import json
 import os
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -83,8 +83,7 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
             _SUMMARY: tfds.features.Text(),
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        homepage=
-        "https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset",
+        homepage="https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset",
         citation=_CITATION,
     )
 

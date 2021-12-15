@@ -11,6 +11,7 @@
 
 # `caltech_birds2011`
 
+
 *   **Description**:
 
 Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos of 200 bird
@@ -60,18 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@techreport{WelinderEtal2010,
-Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
-Institution = {California Institute of Technology},
-Number = {CNS-TR-2010-001},
-Title = {{Caltech-UCSD Birds 200}},
-Year = {2010}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -84,7 +73,7 @@ Year = {2010}
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/caltech_birds2011-0.1.1.html";
@@ -109,3 +98,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@techreport{WelinderEtal2010,
+Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},
+Institution = {California Institute of Technology},
+Number = {CNS-TR-2010-001},
+Title = {{Caltech-UCSD Birds 200}},
+Year = {2010}
+}
+```
+

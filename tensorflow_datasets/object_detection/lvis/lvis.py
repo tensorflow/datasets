@@ -74,17 +74,25 @@ _INVALID_ANNOTATIONS = [
     10932
 ]
 
+_NUM_CLASSES = 1203
+
 
 class Lvis(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for lvis dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.2.0')
   RELEASE_NOTES = {
-      '1.0.0': 'Initial release. Test split has dummy annotations.',
+      '1.1.0':
+          'Added fields `neg_category_ids` and `not_exhaustive_category_ids`.',
+      '1.2.0':
+          'Added class names.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
+    class_label = tfds.features.ClassLabel(
+        names_file=tfds.core.tfds_path(
+            'object_detection/lvis/lvis_classes.txt'))
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -93,13 +101,17 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Image(encoding_format='jpeg'),
             'image/id':
                 tf.int64,
+            'neg_category_ids':
+                tfds.features.Sequence(class_label),
+            'not_exhaustive_category_ids':
+                tfds.features.Sequence(class_label),
             'objects':
                 tfds.features.Sequence({
                     # LVIS has unique id for each annotation.
                     'id': tf.int64,
                     'area': tf.int64,
                     'bbox': tfds.features.BBoxFeature(),
-                    'label': tfds.features.ClassLabel(num_classes=1203),
+                    'label': class_label,
                     'segmentation': tfds.features.Image(shape=(None, None, 1)),
                 }),
         }),
@@ -136,15 +148,23 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, image_dirs, annotation_file):
     """Yields examples."""
     lvis_annotation = LvisAnnotation(annotation_file)
-    for image_info in lvis_annotation.images:
+
+    def _process_example(image_info):
       # Search image dirs.
       filename = pathlib.Path(image_info['coco_url']).name
       image = _find_image_in_dirs(image_dirs, filename)
       instances = lvis_annotation.get_annotations(img_id=image_info['id'])
       instances = [x for x in instances if x['id'] not in _INVALID_ANNOTATIONS]
+      neg_category_ids = image_info.get('neg_category_ids', [])
+      not_exhaustive_category_ids = image_info.get(
+          'not_exhaustive_category_ids', [])
       example = {
           'image': image,
           'image/id': image_info['id'],
+          'neg_category_ids': [i - 1 for i in neg_category_ids],
+          'not_exhaustive_category_ids': [
+              i - 1 for i in not_exhaustive_category_ids
+          ],
           'objects': [],
       }
       for inst in instances:
@@ -160,13 +180,16 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
             'segmentation':
                 _build_segmentation_mask(image_info, inst['segmentation'])
         })
-      yield image_info['id'], example
+      return image_info['id'], example
+
+    beam = tfds.core.lazy_imports.apache_beam
+    return beam.Create(lvis_annotation.images) | beam.Map(_process_example)
 
 
 def _find_image_in_dirs(image_dirs, filename):
   """Finds `filename` in one of the `image_dir` folders."""
   images = [d / filename for d in image_dirs if (d / filename).exists()]
-  assert len(images) == 1, filename
+  assert len(images) == 1, (images, image_dirs, filename)
   return images[0]
 
 
@@ -183,8 +206,9 @@ def _build_bbox(image_info, x, y, width, height):
 def _build_segmentation_mask(image_info, seg):
   cv2 = tfds.core.lazy_imports.cv2
   mask = np.zeros((image_info['height'], image_info['width']), np.uint8)
-  assert all(len(poly) % 2 == 0 and len(poly) >= 6 for poly in seg), \
-      f'Annotation contains an invalid polygon with < 3 points: {seg}'
+  error_msg = f'Annotation contains an invalid polygon with < 3 points: {seg}'
+  assert all(len(poly) % 2 == 0 and len(poly) >= 6 for poly in seg), error_msg
+
   for poly in seg:
     poly = np.asarray(poly, np.int32).reshape((1, -1, 2))
     cv2.fillPoly(mask, poly, 255)

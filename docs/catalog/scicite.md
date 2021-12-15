@@ -11,6 +11,7 @@
 
 # `scicite`
 
+
 *   **Description**:
 
 This is a dataset for classifying citation intents in academic papers. The main
@@ -74,17 +75,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('string', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{Cohan2019Structural,
-  author={Arman Cohan and Waleed Ammar and Madeleine Van Zuylen and Field Cady},
-  title={Structural Scaffolds for Citation Intent Classification in Scientific Publications},
-  booktitle="NAACL",
-  year="2019"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -97,7 +87,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/scicite-1.0.0.html";
@@ -122,3 +112,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{Cohan2019Structural,
+  author={Arman Cohan and Waleed Ammar and Madeleine Van Zuylen and Field Cady},
+  title={Structural Scaffolds for Citation Intent Classification in Scientific Publications},
+  booktitle="NAACL",
+  year="2019"
+}
+```
+

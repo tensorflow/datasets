@@ -22,9 +22,7 @@ import tensorflow_datasets.testing as tfds_test
 class TitanicTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = titanic.Titanic
 
-  SPLITS = {
-      'train': 5
-  }
+  SPLITS = {'train': 5}
 
   DL_EXTRACT_RESULT = 'test.csv'
 

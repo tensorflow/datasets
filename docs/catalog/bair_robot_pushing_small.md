@@ -11,6 +11,7 @@
 
 # `bair_robot_pushing_small`
 
+
 *   **Description**:
 
 This data set contains roughly 44,000 examples of robot pushing motions,
@@ -58,17 +59,6 @@ Sequence({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@misc{1710.05268,
-  Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
-  Title = {Self-Supervised Visual Planning with Temporal Skip Connections},
-  Year = {2017},
-  Eprint = {arXiv:1710.05268},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -81,7 +71,7 @@ Sequence({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/bair_robot_pushing_small-2.0.0.html";
@@ -106,3 +96,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{1710.05268,
+  Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
+  Title = {Self-Supervised Visual Planning with Temporal Skip Connections},
+  Year = {2017},
+  Eprint = {arXiv:1710.05268},
+}
+```
+

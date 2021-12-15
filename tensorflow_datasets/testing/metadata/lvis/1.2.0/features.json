@@ -1,0 +1,97 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "image": {
+            "type": "tensorflow_datasets.core.features.image_feature.Image",
+            "content": {
+                "shape": [
+                    null,
+                    null,
+                    3
+                ],
+                "dtype": "uint8",
+                "encoding_format": "jpeg",
+                "use_colormap": false
+            }
+        },
+        "image/id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int64"
+            }
+        },
+        "neg_category_ids": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                    "content": {
+                        "num_classes": 1203
+                    }
+                },
+                "length": null
+            }
+        },
+        "not_exhaustive_category_ids": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                    "content": {
+                        "num_classes": 1203
+                    }
+                },
+                "length": null
+            }
+        },
+        "objects": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                    "content": {
+                        "id": {
+                            "type": "tensorflow_datasets.core.features.feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "int64"
+                            }
+                        },
+                        "area": {
+                            "type": "tensorflow_datasets.core.features.feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "int64"
+                            }
+                        },
+                        "bbox": {
+                            "type": "tensorflow_datasets.core.features.bounding_boxes.BBoxFeature",
+                            "content": {}
+                        },
+                        "label": {
+                            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "content": {
+                                "num_classes": 1203
+                            }
+                        },
+                        "segmentation": {
+                            "type": "tensorflow_datasets.core.features.image_feature.Image",
+                            "content": {
+                                "shape": [
+                                    null,
+                                    null,
+                                    1
+                                ],
+                                "dtype": "uint8",
+                                "encoding_format": null,
+                                "use_colormap": false
+                            }
+                        }
+                    }
+                },
+                "length": null
+            }
+        }
+    }
+}

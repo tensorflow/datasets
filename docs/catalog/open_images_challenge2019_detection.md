@@ -11,6 +11,13 @@
 
 # `open_images_challenge2019_detection`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=open_images_challenge2019_detection">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 Open Images is a collaborative release of ~9 million images annotated with
@@ -77,6 +84,7 @@ FeaturesDict({
 
 *   **Citation**:
 
+
 ## open_images_challenge2019_detection/200k (default config)
 
 *   **Config description**: Images have at most 200,000 pixels, at 72 JPEG
@@ -97,7 +105,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/open_images_challenge2019_detection-200k-1.0.0.html";
@@ -143,7 +151,7 @@ $(document).ready(() => {
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/open_images_challenge2019_detection-300k-1.0.0.html";
