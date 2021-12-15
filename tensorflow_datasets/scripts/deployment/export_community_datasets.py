@@ -157,40 +157,41 @@ def _list_ds_packages_for_namespace(
 
 def _get_dataset_source(
     ds_path: tfds.typing.ReadWritePath,) -> Optional[DatasetSource]:
-  """Returns True if the given path correspond to a dataset.
+  """Returns a `DatasetSource` instance if the given path corresponds to a dataset.
 
-  Currently a simple heuristic is used. This function checks the path has the
-  following structure:
+  To determine whether the given path contains a dataset, a simple heuristic is
+  used that checks whether the path has the following structure:
 
   ```
   <ds_name>/
       <ds_name>.py
   ```
 
-  If so, all `.py`, `.txt`, `.tsv` files will be added to the package.
+  If so, all `.py`, `.txt`, `.tsv`, `.json` files will be added to the package.
 
   Args:
     ds_path: Path of the dataset module
 
   Returns:
-    True if the path match the expected file structure
+    A `DatasetSource` instance if the path matches the expected file structure.
   """
   filter_list = {'__init__.py'}
-  suffixes_list = ('.txt', '.tsv', '.py')
+  suffixes_list = ('.txt', '.tsv', '.py', '.json')
+
+  def is_interesting_file(fname: str) -> bool:
+    return fname.endswith(suffixes_list) and fname not in filter_list
 
   if not ds_path.is_dir():
     return None
   all_filenames = set(f.name for f in ds_path.iterdir())
-  # The dataset package is composed of all `.py` present in the dataset folder.
-  if f'{ds_path.name}.py' in all_filenames:
-    return DatasetSource(
-        root_path=ds_path,
-        filenames=sorted([
-            fname for fname in all_filenames
-            if fname.endswith(suffixes_list) and fname not in filter_list
-        ]),
-    )
-  return None
+  if f'{ds_path.name}.py' not in all_filenames:
+    return None
+
+  return DatasetSource(
+      root_path=ds_path,
+      filenames=sorted(
+          [fname for fname in all_filenames if is_interesting_file(fname)]),
+  )
 
 
 if __name__ == '__main__':
