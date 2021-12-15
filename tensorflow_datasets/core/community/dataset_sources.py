@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Utils to download locally dataset code source stored remotelly."""
+"""Utils to download remotely stored dataset source code."""
 
 import dataclasses
 import os
@@ -67,11 +67,11 @@ def download_from_source(
 
   Args:
     source: Source of the dataset.
-    dst: Empty directory on which copying the source
+    dst: Empty directory to which the source will be copied
   """
   # Download the files
   # Note: We do not check for file existance before copying/downloading it to
-  # not trigger unecessary queries when `source.root_path` is `GithubPath`.
+  # not trigger unnecessary queries when `source.root_path` is `GithubPath`.
   # A `FileNotFoundError` is triggered if the file can't be downloaded.
   for filename in source.filenames:
     path = source.root_path / filename

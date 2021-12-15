@@ -48,7 +48,7 @@ class DatasetPackage:
 
   Attributes:
     name: Dataset name
-    source: Source to locate of the source code (e.g. `github://...`)
+    source: Source that contains the source code (e.g. `github://...`)
   """
   name: utils.DatasetName
   source: dataset_sources_lib.DatasetSource
