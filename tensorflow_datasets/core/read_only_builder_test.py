@@ -22,6 +22,7 @@ from unittest import mock
 
 import dill
 import pytest
+import tensorflow as tf
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import constants
@@ -30,6 +31,8 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core.features import features_dict
+from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import file_utils
 
 
@@ -145,7 +148,7 @@ def test_builder_code_not_found(code_builder: dataset_builder.DatasetBuilder):
 
 
 # Test both with and without config
-def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
+def test_builder_from_directory(code_builder: dataset_builder.DatasetBuilder):
   """Builder can be created from the files only."""
 
   # Reconstruct the dataset
@@ -182,7 +185,40 @@ def test_read_only_builder(code_builder: dataset_builder.DatasetBuilder):
   assert builder.version == builder2.version
 
 
-def test_read_only_builder_multi_dir(
+def test_builder_from_metadata(code_builder: dataset_builder.DatasetBuilder):
+  features = features_dict.FeaturesDict({
+      'a': tf.float32,
+      'b': tf.string,
+  })
+  info_proto = dataset_info_pb2.DatasetInfo(
+      name='abcd',
+      description='efgh',
+      config_name='en',
+      config_description='something',
+      version='9.9.9',
+      release_notes={'9.9.9': 'release description'},
+      citation='some citation',
+      features=features.to_proto())
+  builder = read_only_builder.builder_from_metadata(
+      code_builder.data_dir, info_proto=info_proto)
+  assert builder.name == info_proto.name
+  assert builder.info.description == info_proto.description
+  assert builder.info.citation == info_proto.citation
+  assert builder.info.version == info_proto.version
+  assert builder.builder_config
+  assert builder.builder_config.name == info_proto.config_name
+  assert builder.builder_config.version == info_proto.version
+  assert builder.builder_config.description == info_proto.config_description
+  assert builder.builder_config.release_notes == info_proto.release_notes
+  assert str(builder.info.features) == str(features)
+
+
+def test_builder_from_directory_dir_not_exists(tmp_path: pathlib.Path):
+  with pytest.raises(FileNotFoundError, match='Could not load dataset info'):
+    read_only_builder.builder_from_directory(tmp_path)
+
+
+def test_builder_from_files_multi_dir(
     code_builder: dataset_builder.DatasetBuilder,
     tmp_path: pathlib.Path,
 ):
@@ -197,12 +233,6 @@ def test_read_only_builder_multi_dir(
   )
   assert builder.name == code_builder.name
   assert builder.data_dir == code_builder.data_dir
-
-
-def test_not_exists(tmp_path: pathlib.Path):
-  with pytest.raises(
-      FileNotFoundError, match='Could not load `ReadOnlyBuilder`'):
-    read_only_builder.builder_from_directory(tmp_path)
 
 
 def test_not_registered():

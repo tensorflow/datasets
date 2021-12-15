@@ -183,6 +183,9 @@ class FeatureConnector(object):
     # Dynamically import custom feature-connectors
     if python_class_name not in cls._registered_features:
       # Split `my_project.xyz.MyFeature` -> (`my_project.xyz`, `MyFeature`)
+      if '.' not in python_class_name:
+        raise ValueError(
+            f'Python class name must contain a dot, got: "{python_class_name}"')
       module_name, _ = python_class_name.rsplit('.', maxsplit=1)  # pytype: disable=attribute-error
       try:
         # Import to register the FeatureConnector
