@@ -1,0 +1,13 @@
+{
+    "validation": [
+        {
+            "document": "The Abominable Bride - which starred Benedict Cumberbatch and Martin Freeman as Sherlock Holmes and Dr Watson - attracted 34.7% of the TV audience.\nThe final episode of ITV drama Downton Abbey won the Christmas Day ratings battle with an average of 6.6m viewers.\nBBC One's New Year's Eve fireworks was watched by more than 12m, the BBC said.\nSherlock attracted 8.4m viewers, the highest overnight audience across all channels for a drama of the festive season, the BBC said.\nThe two-hour Downton Abbey finale attracted a peak audience of 7.1m, beating the Strictly Come Dancing Christmas special as the most watched Christmas Day show.\nThe Strictly special was the BBC's most-watched show of Christmas Day, with a peak of seven million viewers and an average of 6.5m.",
+            "gem_id": "xsum-validation-484",
+            "references": [
+                "BBC One show Sherlock attracted more than eight million viewers for its New Year's Day special - the highest TV drama audience of the festive season."
+            ],
+            "target": "BBC One show Sherlock attracted more than eight million viewers for its New Year's Day special - the highest TV drama audience of the festive season.",
+            "xsum_id": "35215753"
+        }
+   ]
+}

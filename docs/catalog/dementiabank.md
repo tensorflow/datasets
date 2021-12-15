@@ -11,6 +11,7 @@
 
 # `dementiabank`
 
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -72,17 +73,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@article{boller2005dementiabank,
-  title={Dementiabank database guide},
-  author={Boller, Francois and Becker, James},
-  journal={University of Pittsburgh},
-  year={2005}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -95,7 +85,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/dementiabank-1.0.0.html";
@@ -120,3 +110,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{boller2005dementiabank,
+  title={Dementiabank database guide},
+  author={Boller, Francois and Becker, James},
+  journal={University of Pittsburgh},
+  year={2005}
+}
+```
+

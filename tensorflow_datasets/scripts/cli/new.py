@@ -49,19 +49,15 @@ class DatasetInfo:
 
   def __post_init__(self):
     self.cls_name = naming.snake_to_camelcase(self.name)
-    self.tfds_api = (
-        'tensorflow_datasets.public_api'
-        if self.in_tfds
-        else 'tensorflow_datasets'
-    )
+    self.tfds_api = ('tensorflow_datasets.public_api'
+                     if self.in_tfds else 'tensorflow_datasets')
     self.todo = f'TODO({self.name})'
 
     if self.in_tfds:
       # `/path/to/tensorflow_datasets/image/my_dataset`
       # ->`tensorflow_datasets.image.my_dataset`
-      import_parts = itertools.dropwhile(
-          lambda p: p != 'tensorflow_datasets', self.path.parts
-      )
+      import_parts = itertools.dropwhile(lambda p: p != 'tensorflow_datasets',
+                                         self.path.parts)
       ds_import = '.'.join(import_parts)
     else:
       # For external datasets, it's difficult to correctly infer the full
@@ -75,8 +71,7 @@ class DatasetInfo:
 def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: disable=protected-access
   """Add subparser for `new` command."""
   new_parser = parsers.add_parser(
-      'new', help='Creates a new dataset directory from the template.'
-  )
+      'new', help='Creates a new dataset directory from the template.')
   new_parser.add_argument(
       'dataset_name',  # Positional argument
       type=str,
@@ -87,19 +82,21 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       type=pathlib.Path,
       default=pathlib.Path.cwd(),
       help=('Path where the dataset directory will be created. '
-            'Defaults to current directory.')
-  )
+            'Defaults to current directory.'))
   new_parser.set_defaults(subparser_fn=_create_dataset_files)
 
 
 def _create_dataset_files(args: argparse.Namespace) -> None:
   """Creates the dataset directory. Executed by `tfds new <name>`."""
+  if not naming.is_valid_dataset_and_class_name(args.dataset_name):
+    raise ValueError(
+        'Invalid dataset name. It should be a valid Python class name.')
+
   create_dataset_files(dataset_name=args.dataset_name, dataset_dir=args.dir)
 
 
 def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
   """Creates the dataset files."""
-
   # Creates the root directory
   dataset_dir = dataset_dir.expanduser() / dataset_name
   dataset_dir.mkdir(parents=True)
@@ -125,8 +122,7 @@ def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
       'You can start searching `{}` to complete the implementation.\n'
       'Please check '
       'https://www.tensorflow.org/datasets/add_dataset for additional details.'
-      .format(info.path, info.todo)
-  )
+      .format(info.path, info.todo))
 
 
 def _create_dataset_file(info: DatasetInfo) -> None:
@@ -204,8 +200,7 @@ def _create_dataset_test(info: DatasetInfo) -> None:
   """Adds the `dummy_data/` directory."""
   file_path = info.path.joinpath(f'{info.name}_test.py')
 
-  content = textwrap.dedent(
-      f'''\
+  content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
       import {info.tfds_api} as tfds
@@ -230,8 +225,7 @@ def _create_dataset_test(info: DatasetInfo) -> None:
 
       if __name__ == '__main__':
         tfds.testing.test_main()
-      '''
-  )
+      ''')
   file_path.write_text(content)
 
 
@@ -245,13 +239,11 @@ def _create_init(info: DatasetInfo) -> None:
     # from .my_dataset import MyDataset
     ds_import = f'{info.ds_import}{info.name}'
   # Could also import the BuilderConfig if it exists.
-  content = textwrap.dedent(
-      f'''\
+  content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
       from {ds_import} import {info.cls_name}
-      '''
-  )
+      ''')
   file_path.write_text(content)
 
 
@@ -267,13 +259,11 @@ def _create_dummy_data(info: DatasetInfo) -> None:
 def _create_checksum(info: DatasetInfo) -> None:
   """Adds the `checksums.tsv` file."""
   file_path = info.path / 'checksums.tsv'
-  content = textwrap.dedent(
-      f"""\
+  content = textwrap.dedent(f"""\
       # {info.todo}: If your dataset downloads files, then the checksums
       # will be automatically added here when running
       # `tfds build --register_checksums`.
-      """
-  )
+      """)
   file_path.write_text(content)
 
 
@@ -282,13 +272,10 @@ def _add_to_parent_init(info: DatasetInfo) -> None:
   if not info.in_tfds:
     # Could add global init, but would be tricky to foresee all use-cases
     raise NotImplementedError(
-        'Adding __init__.py in non-tfds dir not supported.'
-    )
+        'Adding __init__.py in non-tfds dir not supported.')
 
   import_path = info.path.parent / '__init__.py'
   if not import_path.exists():
     return  # Should this be an error instead ?
-  import_path.write_text(
-      import_path.read_text()
-      + f'from {info.ds_import} import {info.cls_name}\n'
-  )
+  import_path.write_text(import_path.read_text() +
+                         f'from {info.ds_import} import {info.cls_name}\n')

@@ -106,15 +106,19 @@ class Ai2ArcWithIR(tfds.core.GeneratorBasedBuilder):
         # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "id": tfds.features.Text(),
-            "question": tfds.features.Text(),
+            "id":
+                tfds.features.Text(),
+            "question":
+                tfds.features.Text(),
             "choices":
                 tfds.features.Sequence({
                     "text": tfds.features.Text(),
                     "label": tfds.features.ClassLabel(names=options)
                 }),
-            "answerKey": tfds.features.ClassLabel(names=options),
-            "paragraph": tfds.features.Text(),
+            "answerKey":
+                tfds.features.ClassLabel(names=options),
+            "paragraph":
+                tfds.features.Text(),
         }),
         supervised_keys=None,
         homepage=_HOMEPAGE,

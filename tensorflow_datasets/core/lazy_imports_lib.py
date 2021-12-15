@@ -15,9 +15,13 @@
 
 """Lazy imports for heavy dependencies."""
 
+import functools
 import importlib
+from typing import Any, Callable, TypeVar
 
 from tensorflow_datasets.core.utils import py_utils as utils
+
+_Fn = TypeVar("_Fn")
 
 
 def _try_import(module_name):
@@ -59,7 +63,12 @@ class LazyImporter(object):
   @utils.classproperty
   @classmethod
   def cv2(cls):
-    return _try_import("cv2")  # pylint: disable=unreachable
+    return _try_import("cv2")
+
+  @utils.classproperty
+  @classmethod
+  def envlogger(cls):
+    return _try_import("envlogger.reader")
 
   @utils.classproperty
   @classmethod
@@ -99,6 +108,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def networkx(cls):
+    return _try_import("networkx")
+
+  @utils.classproperty
+  @classmethod
   def nltk(cls):
     return _try_import("nltk")
 
@@ -124,6 +138,11 @@ class LazyImporter(object):
   @classmethod
   def pretty_midi(cls):
     return _try_import("pretty_midi")
+
+  @utils.classproperty
+  @classmethod
+  def pycocotools(cls):
+    return _try_import("pycocotools.mask")
 
   @utils.classproperty
   @classmethod
@@ -169,6 +188,7 @@ class LazyImporter(object):
   def tldextract(cls):
     return _try_import("tldextract")
 
+
   @utils.classproperty
   @classmethod
   def os(cls):
@@ -183,3 +203,19 @@ class LazyImporter(object):
 
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
+
+
+def beam_ptransform_fn(fn: Callable[..., Any]) -> Callable[..., Any]:
+  """Lazy version of `@beam.ptransform_fn`."""
+
+  lazy_decorated_fn = None
+
+  @functools.wraps(fn)
+  def decorated(*args, **kwargs):
+    nonlocal lazy_decorated_fn
+    # Actually decorate the function only the first time it is called
+    if lazy_decorated_fn is None:
+      lazy_decorated_fn = lazy_imports.apache_beam.ptransform_fn(fn)
+    return lazy_decorated_fn(*args, **kwargs)
+
+  return decorated

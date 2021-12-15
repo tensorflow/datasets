@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -83,8 +83,7 @@ class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"filepath": train_path}),
+            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_path}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={"filepath": validation_path}),

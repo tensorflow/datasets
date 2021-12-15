@@ -13,18 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Base decoders.
-"""
+"""Base decoders."""
 
 import abc
 import functools
 
-import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 
-@six.add_metaclass(abc.ABCMeta)
-class Decoder(object):
+class Decoder(abc.ABC):
   """Base decoder object.
 
   `tfds.decode.Decoder` allows for overriding the default decoding by
@@ -59,7 +56,6 @@ class Decoder(object):
     Args:
       feature: `tfds.features.FeatureConnector`, the feature to which is applied
         this transformation.
-
     """
     self.feature = feature
 
@@ -99,7 +95,7 @@ class SkipDecoding(Decoder):
   Example of usage:
 
   ```python
-  ds = ds.load(
+  ds = tfds.load(
       'imagenet2012',
       split='train',
       decoders={
@@ -141,8 +137,8 @@ class DecoderFn(Decoder):
 
   def decode_example(self, serialized_example):
     """Decode the example using the function."""
-    return self._fn(
-        serialized_example, self.feature, *self._args, **self._kwargs)
+    return self._fn(serialized_example, self.feature, *self._args,
+                    **self._kwargs)
 
 
 def make_decoder(output_dtype=None):
@@ -182,6 +178,7 @@ def make_decoder(output_dtype=None):
     @functools.wraps(fn)
     def decorated(*args, **kwargs):
       return DecoderFn(fn, output_dtype, *args, **kwargs)
+
     return decorated
 
   return decorator

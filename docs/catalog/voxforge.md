@@ -11,6 +11,7 @@
 
 # `voxforge`
 
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -68,6 +69,14 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -79,10 +88,3 @@ FeaturesDict({
 }
 ```
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.

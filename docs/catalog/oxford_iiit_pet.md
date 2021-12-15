@@ -11,6 +11,13 @@
 
 # `oxford_iiit_pet`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=oxford_iiit_pet">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
@@ -58,17 +65,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@InProceedings{parkhi12a,
-  author       = "Parkhi, O. M. and Vedaldi, A. and Zisserman, A. and Jawahar, C.~V.",
-  title        = "Cats and Dogs",
-  booktitle    = "IEEE Conference on Computer Vision and Pattern Recognition",
-  year         = "2012",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -81,7 +77,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/oxford_iiit_pet-3.2.0.html";
@@ -106,3 +102,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{parkhi12a,
+  author       = "Parkhi, O. M. and Vedaldi, A. and Zisserman, A. and Jawahar, C.~V.",
+  title        = "Cats and Dogs",
+  booktitle    = "IEEE Conference on Computer Vision and Pattern Recognition",
+  year         = "2012",
+}
+```
+

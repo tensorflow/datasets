@@ -214,6 +214,4 @@ def _filenames_equal(
 ) -> bool:
   """Compare filenames."""
   return all(
-      l.filename == r.filename
-      for _, (l, r) in utils.zip_dict(left, right)
-  )
+      l.filename == r.filename for _, (l, r) in utils.zip_dict(left, right))

@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 from tensorflow_datasets.image_classification import stanford_dogs
 import tensorflow_datasets.testing as tfds_test
 

@@ -11,6 +11,13 @@
 
 # `citrus_leaves`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=citrus_leaves">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The original citrus dataset contains 759 images of healthy and unhealthy citrus
@@ -63,22 +70,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{rauf2019citrus,
-  title={A citrus fruits and leaves dataset for detection and classification of
-citrus diseases through machine learning},
-  author={Rauf, Hafiz Tayyab and Saleem, Basharat Ali and Lali, M Ikram Ullah
-and Khan, Muhammad Attique and Sharif, Muhammad and Bukhari, Syed Ahmad Chan},
-  journal={Data in brief},
-  volume={26},
-  pages={104340},
-  year={2019},
-  publisher={Elsevier}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -92,7 +83,7 @@ and Khan, Muhammad Attique and Sharif, Muhammad and Bukhari, Syed Ahmad Chan},
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/citrus_leaves-0.1.2.html";
@@ -117,3 +108,20 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{rauf2019citrus,
+  title={A citrus fruits and leaves dataset for detection and classification of
+citrus diseases through machine learning},
+  author={Rauf, Hafiz Tayyab and Saleem, Basharat Ali and Lali, M Ikram Ullah
+and Khan, Muhammad Attique and Sharif, Muhammad and Bukhari, Syed Ahmad Chan},
+  journal={Data in brief},
+  volume={26},
+  pages={104340},
+  year={2019},
+  publisher={Elsevier}
+}
+```
+

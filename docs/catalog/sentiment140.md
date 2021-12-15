@@ -11,6 +11,7 @@
 
 # `sentiment140`
 
+
 *   **Description**:
 
 Sentiment140 allows you to discover the sentiment of a brand, product, or topic
@@ -70,17 +71,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'polarity')`
 
-*   **Citation**:
-
-```
-@ONLINE {Sentiment140,
-    author = "Go, Alec and Bhayani, Richa and Huang, Lei",
-    title  = "Twitter Sentiment Classification using Distant Supervision",
-    year   = "2009",
-    url    = "http://help.sentiment140.com/home"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -93,7 +83,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/sentiment140-1.0.0.html";
@@ -118,3 +108,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {Sentiment140,
+    author = "Go, Alec and Bhayani, Richa and Huang, Lei",
+    title  = "Twitter Sentiment Classification using Distant Supervision",
+    year   = "2009",
+    url    = "http://help.sentiment140.com/home"
+}
+```
+

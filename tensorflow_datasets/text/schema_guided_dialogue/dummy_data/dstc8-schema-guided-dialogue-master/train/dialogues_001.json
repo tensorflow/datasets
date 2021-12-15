@@ -1,0 +1,38 @@
+[
+  {
+    "dialogue_id": "1_00000",
+    "services": [
+      "Service_1"
+    ],
+    "turns": [
+      {
+        "speaker": "USER",
+        "utterance": "utterance 1"
+      },
+      {
+        "speaker": "SYSTEM",
+        "utterance": "utterance 2"
+      },
+      {
+        "speaker": "USER",
+        "utterance": "utterance 3"
+      }
+    ]
+  },
+  {
+    "dialogue_id": "1_00001",
+    "services": [
+      "Service_1"
+    ],
+    "turns": [
+      {
+        "speaker": "SYSTEM",
+        "utterance": "utterance 1"
+      },
+      {
+        "speaker": "USER",
+        "utterance": "utterance 2"
+      }
+    ]
+  }
+]

@@ -11,6 +11,7 @@
 
 # `eraser_multi_rc`
 
+
 *   **Description**:
 
 Eraser Multi RC is a dataset for queries over multi-line passages, along with
@@ -60,21 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@unpublished{eraser2019,
-    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
-    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}
-}
-@inproceedings{MultiRC2018,
-    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},
-    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},
-    booktitle = {NAACL},
-    year = {2018}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -87,7 +73,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/eraser_multi_rc-0.1.1.html";
@@ -112,3 +98,19 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@unpublished{eraser2019,
+    title = {ERASER: A Benchmark to Evaluate Rationalized NLP Models},
+    author = {Jay DeYoung and Sarthak Jain and Nazneen Fatema Rajani and Eric Lehman and Caiming Xiong and Richard Socher and Byron C. Wallace}
+}
+@inproceedings{MultiRC2018,
+    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},
+    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},
+    booktitle = {NAACL},
+    year = {2018}
+}
+```
+

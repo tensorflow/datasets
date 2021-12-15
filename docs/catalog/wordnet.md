@@ -11,6 +11,7 @@
 
 # `wordnet`
 
+
 *   **Description**:
 
 WordNet is a large lexical database of English. Nouns, verbs, adjectives and
@@ -52,6 +53,7 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
+
 ## wordnet/WN18 (default config)
 
 *   **Config description**: This WORDNET TENSOR DATA consists of a collection of
@@ -69,6 +71,40 @@ Split          | Examples
 `'test'`       | 5,000
 `'train'`      | 141,442
 `'validation'` | 5,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
+<script>
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wordnet-WN18-0.1.0.html";
+$(document).ready(() => {
+  $("#displaydataframe").click((event) => {
+    // Disable the button after clicking (dataframe loaded only once).
+    $("#displaydataframe").prop("disabled", true);
+
+    // Pre-fetch and display the content
+    $.get(url, (data) => {
+      $("#dataframecontent").html(data);
+    }).fail(() => {
+      $("#dataframecontent").html(
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.'
+      );
+    });
+  });
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -103,6 +139,21 @@ url = {http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-mult
 }
 ```
 
+## wordnet/WN18RR
+
+*   **Config description**: Same as WN18 but fixes test leakage through inverse
+    relations. See https://github.com/TimDettmers/ConvE.
+
+*   **Dataset size**: `7.02 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 3,134
+`'train'`      | 86,835
+`'validation'` | 3,034
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -111,10 +162,10 @@ url = {http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-mult
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wordnet-WN18-0.1.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wordnet-WN18RR-0.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -136,21 +187,6 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
-
-## wordnet/WN18RR
-
-*   **Config description**: Same as WN18 but fixes test leakage through inverse
-    relations. See https://github.com/TimDettmers/ConvE.
-
-*   **Dataset size**: `7.02 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 3,134
-`'train'`      | 86,835
-`'validation'` | 3,034
 
 *   **Citation**:
 
@@ -183,37 +219,3 @@ numpages = {3}
     Month = {February}
 }
 ```
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wordnet-WN18RR-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->

@@ -11,6 +11,13 @@
 
 # `waymo_open_dataset`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=waymo_open_dataset">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The Waymo Open Dataset is comprised of high resolution sensor data collected by
@@ -86,6 +93,10 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -98,9 +109,6 @@ year = {2020}
 }
 ```
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## waymo_open_dataset/v1.2 (default config)
 
@@ -123,7 +131,7 @@ Split          | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/waymo_open_dataset-v1.2-0.2.0.html";
@@ -170,7 +178,7 @@ Split          | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/waymo_open_dataset-v1.1-0.2.0.html";
@@ -223,7 +231,7 @@ Split          | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/waymo_open_dataset-v1.0-0.2.0.html";

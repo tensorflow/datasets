@@ -18,13 +18,11 @@
 import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import decode as decode_lib
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import utils
-
-tf.enable_v2_behavior()
 
 randint = np.random.randint
 
@@ -114,9 +112,10 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
     # Test with FeatureDict
     self.assertFeature(
         feature=features_lib.FeaturesDict({
-            'image': features_lib.Image(
-                shape=(30, 60, 3), encoding_format='jpeg'),
-            'label': tf.int64,
+            'image':
+                features_lib.Image(shape=(30, 60, 3), encoding_format='jpeg'),
+            'label':
+                tf.int64,
         }),
         shape={
             'image': (30, 60, 3),

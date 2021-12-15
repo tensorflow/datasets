@@ -6,8 +6,6 @@ repository).
 Check our [list of datasets](catalog/overview.md) to see if the dataset you want
 is already present.
 
-Note: Googlers, see [tfds-add](http://goto.google.com/tfds-add) guide.
-
 ## TL;DR
 
 The easiest way to write a new dataset is to use the
@@ -36,8 +34,8 @@ ds = tfds.load('my_dataset')  # `my_dataset` registered
 
 ## Overview
 
-Datasets are distributed in all kinds of formats and in all kinds of places,
-and they're not always stored in a format that's ready to feed into a machine
+Datasets are distributed in all kinds of formats and in all kinds of places, and
+they're not always stored in a format that's ready to feed into a machine
 learning pipeline. Enter TFDS.
 
 TFDS process those datasets into a standard format (external data -> serialized
@@ -61,7 +59,7 @@ Use [TFDS CLI](https://www.tensorflow.org/datasets/cli) to generate the required
 template python files.
 
 ```sh
-cd path/to/project/datasets/  # Or use `--dir=path/to/project/datasets/` bellow
+cd path/to/project/datasets/  # Or use `--dir=path/to/project/datasets/` below
 tfds new my_dataset
 ```
 
@@ -87,7 +85,7 @@ of `tfds.core.DatasetBuilder` which takes care of most boilerplate. It supports:
 *   Small/medium datasets which can be generated on a single machine (this
     tutorial).
 *   Very large datasets which require distributed generation (using
-    [Apache Beam](https://beam.apache.org/)). See our
+    [Apache Beam](https://beam.apache.org/), see our
     [huge dataset guide](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset))
 
 Here is a minimal example of dataset class:
@@ -105,7 +103,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
     """Dataset metadata (homepage, citation,...)."""
     return tfds.core.DatasetInfo(
         builder=self,
-        features=tfds.features.FeatureDict({
+        features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(256, 256, 3)),
             'label': tfds.features.ClassLabel(names=['no', 'yes']),
         }),
@@ -158,6 +156,8 @@ def _info(self):
       # specify them here. They'll be used if as_supervised=True in
       # builder.as_dataset.
       supervised_keys=('image', 'label'),
+      # Specify whether to disable shuffling on the examples. Set to False by default.
+      disable_shuffling=False,
       # Bibtex citation for the dataset
       citation=r"""
       @article{my-awesome-dataset-2020,
@@ -174,6 +174,8 @@ Most fields should be self-explanatory. Some precisions:
     or the
     [feature connector guide](https://www.tensorflow.org/datasets/features) for
     more info.
+*   `disable_shuffling`: See section
+    [Maintain dataset order](#maintain-dataset-order).
 *   `citation`: To find the `BibText` citation:
     *   Search the dataset website for citation instruction (use that in BibTex
         format).
@@ -186,6 +188,27 @@ Most fields should be self-explanatory. Some precisions:
         you can use the [BibTeX Online Editor](https://truben.no/latex/bibtex/)
         to create a custom BibTeX entry (the drop-down menu has an `Online`
         entry type).
+
+#### Maintain dataset order
+
+By default, the records of the datasets are shuffled when stored in order to
+make the distribution of classes more uniform across the dataset, since often
+records belonging to the same class are contiguous. In order to specify that the
+dataset should be sorted by the key generated provided by `_generate_examples`
+the field `disable_shuffling` should be set to `True`. By default it is set to
+`False`.
+
+```python
+def _info(self):
+  return tfds.core.DatasetInfo(
+    # [...]
+    disable_shuffling=True,
+    # [...]
+  )
+```
+
+Keep in mind that disabling shuffling has a performance impact as shards cannot
+be read in parallel anymore.
 
 ### `_split_generators`: downloads and splits data
 
@@ -289,13 +312,16 @@ def _split_generators(self, dl_manager):
 This method will typically read source dataset artifacts (e.g. a CSV file) and
 yield `(key, feature_dict)` tuples:
 
-*   `key`: Example identifier. Used to deterministically suffle the examples
-    using `hash(key)`. Should be:
+*   `key`: Example identifier. Used to deterministically shuffle the examples
+    using `hash(key)` or to sort by key when shuffling is disabled (see section
+    [Maintain dataset order](#maintain-dataset-order)). Should be:
     *   **unique**: If two examples use the same key, an exception will be
         raised.
     *   **deterministic**: Should not depend on `download_dir`,
         `os.path.listdir` order,... Generating the data twice should yield the
         same key.
+    *   **comparable**: If shuffling is disabled the key will be used to sort
+        the dataset.
 *   `feature_dict`: A `dict` containing the example values.
     *   The structure should match the `features=` structure defined in
         `tfds.core.DatasetInfo`.
@@ -324,12 +350,29 @@ def _generate_examples(self, images_path, label_path):
 
 #### File access and `tf.io.gfile`
 
-In order to support Cloud storage systems, use `tf.io.gfile` API instead of
-built-in for file operations. Ex:
+In order to support Cloud storage systems, avoid the use of the Python built-in
+I/O ops.
+
+Instead, the `dl_manager` returns
+[pathlib-like](https://docs.python.org/3/library/pathlib.html) objects directly
+compatible with Google Cloud storage:
+
+```python
+path = dl_manager.download_and_extract('http://some-website/my_data.zip')
+
+json_path = path / 'data/file.json'
+
+json.loads(json_path.read_text())
+```
+
+Alternatively, use `tf.io.gfile` API instead of built-in for file operations:
 
 *   `open` -> `tf.io.gfile.GFile`
 *   `os.rename` -> `tf.io.gfile.rename`
 *   ...
+
+Pathlib should be prefered to `tf.io.gfile` (see
+[rational](https://www.tensorflow.org/datasets/common_gotchas#prefer_to_use_pathlib_api).
 
 #### Extra dependencies
 
@@ -388,7 +431,7 @@ This is done through `tfds.core.BuilderConfig`s:
     class MyDataset(tfds.core.GeneratorBasedBuilder):
       VERSION = tfds.core.Version('1.0.0')
       # pytype: disable=wrong-keyword-args
-      BUILDER_CONFIG = [
+      BUILDER_CONFIGS = [
           # `name` (and optionally `description`) are required for each config
           MyDatasetConfig(name='small', description='Small ...', img_size=(8, 8)),
           MyDatasetConfig(name='big', description='Big ...', img_size=(32, 32)),
@@ -421,7 +464,7 @@ Version can refer to two different meaning:
 
 *   The "external" original data version: e.g. COCO v2019, v2017,...
 *   The "internal" TFDS code version: e.g. rename a feature in
-    `tfds.features.FeatureDict`, fix a bug in `_generate_examples`
+    `tfds.features.FeaturesDict`, fix a bug in `_generate_examples`
 
 To update a dataset:
 
@@ -448,6 +491,11 @@ ds = tfds.load('my_dataset')  # MyDataset available
 For example, if you're contributing to `tensorflow/datasets`, add the module
 import to its subdirectory's `__init__.py` (e.g.
 [`image/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/__init__.py).
+
+### Check for common implementation gotchas
+
+Please check for the
+[common implementation gotchas](https://www.tensorflow.org/datasets/common_gotchas).
 
 ## Test your dataset
 

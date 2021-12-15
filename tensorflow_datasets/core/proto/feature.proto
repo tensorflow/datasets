@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package tensorflow_datasets;
+
+option cc_enable_arenas = true;
+
+// Dictionary of features.
+message FeaturesDict {
+  // Mapping between feature name and features.
+  map<string, Feature> features = 1;
+}
+
+message Feature {
+  // The fully qualified class name for Python.
+  // E.g. tensorflow_datasets.core.features.audio_feature.Audio
+  string python_class_name = 1;
+  oneof content {
+    JsonFeature json_feature = 2;
+    FeaturesDict features_dict = 3;
+  }
+}
+
+// A feature whose schema is specified using JSON (without a strictly defined
+// schema).
+message JsonFeature {
+  // JSON string describing the characteristics of the feature.
+  string json = 1;
+}

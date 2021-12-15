@@ -11,6 +11,7 @@
 
 # `quac`
 
+
 *   **Description**:
 
 Question Answering in Context is a dataset for modeling, understanding, and
@@ -72,17 +73,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('context', 'answers')`
 
-*   **Citation**:
-
-```
-@article{choi2018quac,
-  title={Quac: Question answering in context},
-  author={Choi, Eunsol and He, He and Iyyer, Mohit and Yatskar, Mark and Yih, Wen-tau and Choi, Yejin and Liang, Percy and Zettlemoyer, Luke},
-  journal={arXiv preprint arXiv:1808.07036},
-  year={2018}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -95,7 +85,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/quac-1.0.0.html";
@@ -120,3 +110,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{choi2018quac,
+  title={Quac: Question answering in context},
+  author={Choi, Eunsol and He, He and Iyyer, Mohit and Yatskar, Mark and Yih, Wen-tau and Choi, Yejin and Liang, Percy and Zettlemoyer, Luke},
+  journal={arXiv preprint arXiv:1808.07036},
+  year={2018}
+}
+```
+

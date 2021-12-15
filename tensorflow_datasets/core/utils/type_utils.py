@@ -30,6 +30,8 @@ except ImportError:
   Protocol = typing_extensions.Protocol
 # pylint: enable=g-import-not-at-top
 
+_symbols_to_exclude = set(globals().keys())
+
 # Accept both `str` and `pathlib.Path`-like
 PathLike = Union[str, os.PathLike]
 PathLikeCls = (str, os.PathLike)  # Used in `isinstance`
@@ -39,21 +41,28 @@ T = TypeVar('T')
 # Note: `TupleOrList` avoid abiguity from `Sequence` (`str` is `Sequence[str]`,
 # `bytes` is `Sequence[int]`).
 TupleOrList = Union[Tuple[T, ...], List[T]]
+ListOrElem = Union[T, List[T]]
 
 TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
-Tree = Union[T, TupleOrList['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-supported-yet
-
+Tree = Union[T, Any]
 
 Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
+
+# Nested dict of tensor
+TensorDict = TreeDict[Tensor]
 
 Dim = Optional[int]
 Shape = TupleOrList[Dim]
 
-JsonValue = Union[
-    str, bool, int, float, None, List['JsonValue'], Dict[str, 'JsonValue'],  # pytype: disable=not-supported-yet
-]
+JsonValue = Union[str, bool, int, float, None, List['JsonValue'],
+                  Dict[str, 'JsonValue'],  # pytype: disable=not-supported-yet
+                 ]
 Json = Dict[str, JsonValue]
 
+# Types for the tfrecord example construction.
+
+Key = Union[int, str, bytes]
+KeySerializedExample = Tuple[Key, bytes]  # `(key, serialized_proto)`
 
 # pytype: disable=ignored-abstractmethod
 
@@ -71,30 +80,70 @@ class PurePath(Protocol):
 
   # pylint: disable=multiple-statements,line-too-long
 
-  def __new__(cls: Type[T], *args: PathLike) -> T: raise NotImplementedError
-  def __fspath__(self) -> str: raise NotImplementedError
-  def __hash__(self) -> int: raise NotImplementedError
-  def __lt__(self, other: 'PurePath') -> bool: raise NotImplementedError
-  def __le__(self, other: 'PurePath') -> bool: raise NotImplementedError
-  def __gt__(self, other: 'PurePath') -> bool: raise NotImplementedError
-  def __ge__(self, other: 'PurePath') -> bool: raise NotImplementedError
-  def __truediv__(self: T, key: PathLike) -> T: raise NotImplementedError
-  def __rtruediv__(self: T, key: PathLike) -> T: raise NotImplementedError
-  def __bytes__(self) -> bytes: raise NotImplementedError
-  def as_posix(self) -> str: raise NotImplementedError
-  def as_uri(self) -> str: raise NotImplementedError
-  def is_absolute(self) -> bool: raise NotImplementedError
-  def is_reserved(self) -> bool: raise NotImplementedError
-  def match(self, path_pattern: str) -> bool: raise NotImplementedError
-  def relative_to(self: T, *other: PathLike) -> T: raise NotImplementedError
-  def with_name(self: T, name: str) -> T: raise NotImplementedError
-  def with_suffix(self: T, suffix: str) -> T: raise NotImplementedError
-  def joinpath(self: T, *other: PathLike) -> T: raise NotImplementedError
+  def __new__(cls: Type[T], *args: PathLike) -> T:
+    raise NotImplementedError
+
+  def __fspath__(self) -> str:
+    raise NotImplementedError
+
+  def __hash__(self) -> int:
+    raise NotImplementedError
+
+  def __lt__(self, other: 'PurePath') -> bool:
+    raise NotImplementedError
+
+  def __le__(self, other: 'PurePath') -> bool:
+    raise NotImplementedError
+
+  def __gt__(self, other: 'PurePath') -> bool:
+    raise NotImplementedError
+
+  def __ge__(self, other: 'PurePath') -> bool:
+    raise NotImplementedError
+
+  def __truediv__(self: T, key: PathLike) -> T:
+    raise NotImplementedError
+
+  def __rtruediv__(self: T, key: PathLike) -> T:
+    raise NotImplementedError
+
+  def __bytes__(self) -> bytes:
+    raise NotImplementedError
+
+  def as_posix(self) -> str:
+    raise NotImplementedError
+
+  def as_uri(self) -> str:
+    raise NotImplementedError
+
+  def is_absolute(self) -> bool:
+    raise NotImplementedError
+
+  def is_reserved(self) -> bool:
+    raise NotImplementedError
+
+  def match(self, path_pattern: str) -> bool:
+    raise NotImplementedError
+
+  def relative_to(self: T, *other: PathLike) -> T:
+    raise NotImplementedError
+
+  def with_name(self: T, name: str) -> T:
+    raise NotImplementedError
+
+  def with_suffix(self: T, suffix: str) -> T:
+    raise NotImplementedError
+
+  def joinpath(self: T, *other: PathLike) -> T:
+    raise NotImplementedError
 
   @property
-  def parents(self: T) -> Sequence[T]: raise NotImplementedError
+  def parents(self: T) -> Sequence[T]:
+    raise NotImplementedError
+
   @property
-  def parent(self: T) -> T: raise NotImplementedError
+  def parent(self: T) -> T:
+    raise NotImplementedError
 
   # py3.9 backport of PurePath.is_relative_to.
   def is_relative_to(self, *other: PathLike) -> bool:
@@ -114,6 +163,13 @@ class ReadOnlyPath(PurePath, Protocol):
   See [pathlib.Path](https://docs.python.org/3/library/pathlib.html)
   documentation.
   """
+
+  def __new__(cls: Type[T], *args: PathLike) -> T:
+    if cls in (ReadOnlyPath, ReadWritePath):
+      from tensorflow_datasets.core.utils import generic_path  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+      return generic_path.as_path(*args)
+    else:
+      return super().__new__(cls, *args)
 
   @abc.abstractmethod
   def exists(self) -> bool:
@@ -169,6 +225,10 @@ class ReadOnlyPath(PurePath, Protocol):
     """Reads contents of self as bytes."""
     with self.open('r', encoding=encoding) as f:
       return f.read()
+
+  def format(self: T, *args: Any, **kwargs: Any) -> T:
+    """Apply `str.format()` to the path."""
+    return type(self)(os.fspath(self).format(*args, **kwargs))  # pytype: disable=not-instantiable
 
 
 class ReadWritePath(ReadOnlyPath, Protocol):
@@ -231,3 +291,11 @@ class ReadWritePath(ReadOnlyPath, Protocol):
   @abc.abstractmethod
   def replace(self: T, target: PathLike) -> T:
     """Overwrites the destination path."""
+
+  @abc.abstractmethod
+  def copy(self: T, dst: PathLike, overwrite: bool = False) -> T:
+    """Copy the current file to the given destination."""
+
+
+__all__ = sorted(k for k in globals()
+                 if k not in _symbols_to_exclude and not k.startswith('_'))

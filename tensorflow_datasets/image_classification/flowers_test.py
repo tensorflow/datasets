@@ -21,11 +21,10 @@ from tensorflow_datasets.image_classification import flowers
 class TFFlowersTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = flowers.TFFlowers
 
-  SPLITS = {
-      'train': 5
-  }
+  SPLITS = {'train': 5}
 
   DL_DOWNLOAD_RESULT = 'flower_photos.tgz'
+
 
 if __name__ == '__main__':
   testing.test_main()

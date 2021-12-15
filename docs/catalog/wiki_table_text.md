@@ -11,6 +11,7 @@
 
 # `wiki_table_text`
 
+
 *   **Description**:
 
 Wikipedia tables with at least 3 rows and 2 columns, 3 random rows for each
@@ -64,18 +65,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('input_text', 'target_text')`
 
-*   **Citation**:
-
-```
-@inproceedings{bao2018table,
-  title={Table-to-Text: Describing Table Region with Natural Language},
-  author={Junwei Bao and Duyu Tang and Nan Duan and Zhao Yan and Yuanhua Lv and Ming Zhou and Tiejun Zhao},
-  booktitle={AAAI},
-  url={https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/download/16138/16782},
-  year={2018}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -88,7 +77,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wiki_table_text-1.0.0.html";
@@ -113,3 +102,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{bao2018table,
+  title={Table-to-Text: Describing Table Region with Natural Language},
+  author={Junwei Bao and Duyu Tang and Nan Duan and Zhao Yan and Yuanhua Lv and Ming Zhou and Tiejun Zhao},
+  booktitle={AAAI},
+  url={https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/download/16138/16782},
+  year={2018}
+}
+```
+

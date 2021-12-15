@@ -11,6 +11,7 @@
 
 # `xsum`
 
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -73,18 +74,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('document', 'summary')`
 
-*   **Citation**:
-
-```
-@article{Narayan2018DontGM,
-  title={Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization},
-  author={Shashi Narayan and Shay B. Cohen and Mirella Lapata},
-  journal={ArXiv},
-  year={2018},
-  volume={abs/1808.08745}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -97,7 +86,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xsum-1.1.0.html";
@@ -122,3 +111,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{Narayan2018DontGM,
+  title={Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization},
+  author={Shashi Narayan and Shay B. Cohen and Mirella Lapata},
+  journal={ArXiv},
+  year={2018},
+  volume={abs/1808.08745}
+}
+```
+

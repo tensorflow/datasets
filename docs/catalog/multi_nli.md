@@ -11,6 +11,7 @@
 
 # `multi_nli`
 
+
 *   **Description**:
 
 The Multi-Genre Natural Language Inference (MultiNLI) corpus is a crowd-sourced
@@ -60,28 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@InProceedings{N18-1101,
-  author = "Williams, Adina
-            and Nangia, Nikita
-            and Bowman, Samuel",
-  title = "A Broad-Coverage Challenge Corpus for
-           Sentence Understanding through Inference",
-  booktitle = "Proceedings of the 2018 Conference of
-               the North American Chapter of the
-               Association for Computational Linguistics:
-               Human Language Technologies, Volume 1 (Long
-               Papers)",
-  year = "2018",
-  publisher = "Association for Computational Linguistics",
-  pages = "1112--1122",
-  location = "New Orleans, Louisiana",
-  url = "http://aclweb.org/anthology/N18-1101"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -94,7 +73,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/multi_nli-1.1.0.html";
@@ -119,3 +98,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{N18-1101,
+  author = "Williams, Adina
+            and Nangia, Nikita
+            and Bowman, Samuel",
+  title = "A Broad-Coverage Challenge Corpus for
+           Sentence Understanding through Inference",
+  booktitle = "Proceedings of the 2018 Conference of
+               the North American Chapter of the
+               Association for Computational Linguistics:
+               Human Language Technologies, Volume 1 (Long
+               Papers)",
+  year = "2018",
+  publisher = "Association for Computational Linguistics",
+  pages = "1112--1122",
+  location = "New Orleans, Louisiana",
+  url = "http://aclweb.org/anthology/N18-1101"
+}
+```
+

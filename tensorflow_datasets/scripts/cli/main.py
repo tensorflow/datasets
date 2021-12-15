@@ -24,7 +24,6 @@ See: https://www.tensorflow.org/datasets/cli
 
 import argparse
 import logging as python_logging
-import re
 import sys
 from typing import List
 
@@ -38,48 +37,27 @@ import tensorflow_datasets.public_api as tfds
 # Import commands
 from tensorflow_datasets.scripts.cli import build
 from tensorflow_datasets.scripts.cli import new
+from tensorflow_datasets.scripts.utils import flag_utils
 
 FLAGS = flags.FLAGS
 
 
 def _parse_flags(argv: List[str]) -> argparse.Namespace:
   """Command lines flag parsing."""
-  # Normalize explicit boolean flags for absl.flags compatibility
-  # See b/174043007 for context.
-  argv = _normalize_flags(argv)
+  argv = flag_utils.normalize_flags(argv)  # See b/174043007 for context.
 
   parser = argparse_flags.ArgumentParser(
-      description='Tensorflow Datasets CLI tool',
-  )
+      description='Tensorflow Datasets CLI tool',)
   parser.add_argument(
       '--version',
       action='version',
-      version='TensorFlow Datasets: ' + tfds.__version__
-  )
+      version='TensorFlow Datasets: ' + tfds.__version__)
   parser.set_defaults(subparser_fn=lambda _: parser.print_help())
   # Register sub-commands
   subparser = parser.add_subparsers(title='command')
   build.register_subparser(subparser)
   new.register_subparser(subparser)
   return parser.parse_args(argv[1:])
-
-
-def _normalize_flags(argv: List[str]) -> List[str]:
-  """Normalize explicit bolean flags for absl.flags compatibility."""
-  bolean_flag_patern = re.compile(r'--[\w_]+=(true|false)')
-
-  def _normalize_flag(arg: str) -> str:
-    if not bolean_flag_patern.match(arg):
-      return arg
-    if arg.endswith('=true'):
-      return arg[:-len('=true')]  # `--flag=true` -> `--flag`
-    elif arg.endswith('=false'):
-      # `--flag=false` -> `--noflag`
-      return '--no' + arg[len('--'):-len('=false')]
-    else:
-      raise AssertionError(f'Unrecognized arg: {arg}')
-
-  return [_normalize_flag(a) for a in argv]
 
 
 def main(args: argparse.Namespace) -> None:
@@ -98,13 +76,11 @@ def main(args: argparse.Namespace) -> None:
   # `absl.run` (e.g. open source `pytest` tests)
   if not FLAGS.is_parsed() or (
       # If user explicitly request logs, keep C++ logger
-      not FLAGS.logtostderr
-      and not FLAGS.alsologtostderr
+      not FLAGS.logtostderr and not FLAGS.alsologtostderr
   ):
     # Using cleaner, less verbose logger
     formatter = python_logging.Formatter(
-        '{levelname}[{filename}]: {message}', style='{'
-    )
+        '{levelname}[{filename}]: {message}', style='{')
     logging.use_python_logging(quiet=True)
     logging.set_verbosity(logging.INFO)
     python_handler = logging.get_absl_handler().python_handler

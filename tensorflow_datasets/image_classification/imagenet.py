@@ -21,11 +21,10 @@ import tarfile
 
 from absl import logging
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-
-_DESCRIPTION = '''\
+_DESCRIPTION = """\
 ILSVRC 2012, commonly known as 'ImageNet' is an image dataset organized
 according to the WordNet hierarchy. Each meaningful concept in WordNet,
 possibly described by multiple words or word phrases, is called a "synonym set"
@@ -59,7 +58,7 @@ per week in order to prevent overfitting.
 To evaluate the accuracy on the test split, one must first create an account at
 image-net.org. This account must be approved by the site administrator. After
 the account is created, one can submit the results to the test server at
-http://www.image-net.org/challenges/LSVRC/2013/test_server
+https://image-net.org/challenges/LSVRC/eval_server.php
 The submission consists of several ASCII text files corresponding to multiple
 tasks. The task of interest is "Classification submission (top-5 cls error)".
 A sample of an exported text file looks like the following:
@@ -79,11 +78,11 @@ format of the text file is 100,000 lines corresponding to each image in the test
 split. Each line of integers correspond to the rank-ordered, top 5 predictions
 for each test image. The integers are 1-indexed corresponding to the line number
 in the corresponding labels file. See imagenet2012_labels.txt.
-'''
+"""
 
 # Web-site is asking to cite paper from 2015.
 # http://www.image-net.org/challenges/LSVRC/2012/index#cite
-_CITATION = '''\
+_CITATION = """\
 @article{ILSVRC15,
 Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},
 Title = {{ImageNet Large Scale Visual Recognition Challenge}},
@@ -94,7 +93,7 @@ volume={115},
 number={3},
 pages={211-252}
 }
-'''
+"""
 
 _LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 
@@ -102,7 +101,6 @@ _LABELS_FNAME = 'image_classification/imagenet2012_labels.txt'
 # corresponding image names (and not in the order they have been added to the
 # tar file).
 _VALIDATION_LABELS_FNAME = 'image_classification/imagenet2012_validation_labels.txt'
-
 
 # From https://github.com/cytsai/ilsvrc-cmyk-image-list
 CMYK_IMAGES = [
@@ -133,6 +131,46 @@ CMYK_IMAGES = [
 PNG_IMAGES = ['n02105855_2933.JPEG']
 
 
+def get_validation_labels(val_path):
+  """Returns labels for validation.
+
+  Args:
+    val_path: path to TAR file containing validation images. It is used to
+      retrieve the name of pictures and associate them to labels.
+
+  Returns:
+    dict, mapping from image name (str) to label (str).
+  """
+  labels_path = tfds.core.tfds_path(_VALIDATION_LABELS_FNAME)
+  with tf.io.gfile.GFile(os.fspath(labels_path)) as labels_f:
+    # `splitlines` to remove trailing `\r` in Windows
+    labels = labels_f.read().strip().splitlines()
+  with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:
+    tar = tarfile.open(mode='r:', fileobj=tar_f_obj)
+    images = sorted(tar.getnames())
+  return dict(zip(images, labels))
+
+
+def generate_examples_validation(archive, labels):
+  for fname, fobj in archive:
+    record = {
+        'file_name': fname,
+        'image': fobj,
+        'label': labels[fname],
+    }
+    yield fname, record
+
+
+def generate_examples_test(archive):
+  for fname, fobj in archive:
+    record = {
+        'file_name': fname,
+        'image': fobj,
+        'label': -1,
+    }
+    yield fname, record
+
+
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
@@ -141,16 +179,22 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
       tfds.core.Version('5.0.0'),
   ]
   RELEASE_NOTES = {
-      '5.1.0': 'Added test split.',
-      '5.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
-      '4.0.0': '(unpublished)',
-      '3.0.0': """
+      '5.1.0':
+          'Added test split.',
+      '5.0.0':
+          'New split API (https://tensorflow.org/datasets/splits)',
+      '4.0.0':
+          '(unpublished)',
+      '3.0.0':
+          """
       Fix colorization on ~12 images (CMYK -> RGB).
       Fix format for consistency (convert the single png image to Jpeg).
       Faster generation reading directly from the archive.
       """,
-      '2.0.1': 'Encoding fix. No changes from user point of view.',
-      '2.0.0': 'Fix validation labels.',
+      '2.0.1':
+          'Encoding fix. No changes from user point of view.',
+      '2.0.0':
+          'Fix validation labels.',
   }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
@@ -175,26 +219,6 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  @staticmethod
-  def _get_validation_labels(val_path):
-    """Returns labels for validation.
-
-    Args:
-      val_path: path to TAR file containing validation images. It is used to
-      retrieve the name of pictures and associate them to labels.
-
-    Returns:
-      dict, mapping from image name (str) to label (str).
-    """
-    labels_path = tfds.core.tfds_path(_VALIDATION_LABELS_FNAME)
-    with tf.io.gfile.GFile(os.fspath(labels_path)) as labels_f:
-      # `splitlines` to remove trailing `\r` in Windows
-      labels = labels_f.read().strip().splitlines()
-    with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:
-      tar = tarfile.open(mode='r:', fileobj=tar_f_obj)
-      images = sorted(tar.getnames())
-    return dict(zip(images, labels))
-
   def _split_generators(self, dl_manager):
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
@@ -211,7 +235,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
         split=tfds.Split.VALIDATION,
         split_path=val_path,
         dl_manager=dl_manager,
-        validation_labels=self._get_validation_labels(val_path),
+        validation_labels=get_validation_labels(val_path),
     )
     _add_split_if_exists(
         split_list=splits,
@@ -227,8 +251,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
           f' * train: {train_path}\n'
           f' * test: {test_path}\n'
           f' * validation: {val_path}\n'
-          'At least one of the split should be available.'
-      )
+          'At least one of the split should be available.')
     return splits
 
   def _fix_image(self, image_fname, image):
@@ -236,20 +259,23 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     if self.version < '3.0.0':
       return image
     if image_fname in CMYK_IMAGES:
-      image = io.BytesIO(tfds.core.utils.jpeg_cmyk_to_rgb(image.read()))
+      image = io.BytesIO(
+          tfds.core.utils.jpeg_cmyk_to_rgb(image.read()).tobytes())
     elif image_fname in PNG_IMAGES:
-      image = io.BytesIO(tfds.core.utils.png_to_jpeg(image.read()))
+      image = io.BytesIO(tfds.core.utils.png_to_jpeg(image.read()).tobytes())
     return image
 
-  def _generate_examples(self, archive, validation_labels=None,
+  def _generate_examples(self,
+                         archive,
+                         validation_labels=None,
                          labels_exist=True):
     """Yields examples."""
     if not labels_exist:  # Test split
-      for key, example in self._generate_examples_test(archive):
+      for key, example in generate_examples_test(archive):
         yield key, example
     if validation_labels:  # Validation split
-      for key, example in self._generate_examples_validation(archive,
-                                                             validation_labels):
+      for key, example in generate_examples_validation(archive,
+                                                       validation_labels):
         yield key, example
     # Training split. Main archive contains archives names after a synset noun.
     # Each sub-archive contains pictures associated to that synset.
@@ -269,24 +295,6 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
         }
         yield image_fname, record
 
-  def _generate_examples_validation(self, archive, labels):
-    for fname, fobj in archive:
-      record = {
-          'file_name': fname,
-          'image': fobj,
-          'label': labels[fname],
-      }
-      yield fname, record
-
-  def _generate_examples_test(self, archive):
-    for fname, fobj in archive:
-      record = {
-          'file_name': fname,
-          'image': fobj,
-          'label': -1,
-      }
-      yield fname, record
-
 
 def _add_split_if_exists(split_list, split, split_path, dl_manager, **kwargs):
   """Add split to given list of splits only if the file exists."""
@@ -295,7 +303,8 @@ def _add_split_if_exists(split_list, split, split_path, dl_manager, **kwargs):
         'ImageNet 2012 Challenge %s split not found at %s. '
         'Proceeding with data generation anyways but the split will be '
         'missing from the dataset...',
-        str(split), split_path,
+        str(split),
+        split_path,
     )
   else:
     split_list.append(
@@ -305,5 +314,4 @@ def _add_split_if_exists(split_list, split, split_path, dl_manager, **kwargs):
                 'archive': dl_manager.iter_archive(split_path),
                 **kwargs
             },
-        ),
-    )
+        ),)

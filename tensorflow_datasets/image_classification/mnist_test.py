@@ -18,7 +18,6 @@
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import mnist
 
-
 # testing/mnist.py generates fake input data
 
 mnist._TRAIN_EXAMPLES = 10  # pylint: disable=protected-access

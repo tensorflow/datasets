@@ -63,5 +63,5 @@ def create_zipfile(zip_filepath, splits_with_ids, suffixes, maindir=None):
             img = get_random_png(height=1024, width=2048, channels=3)
           else:
             img = get_random_png(height=1024, width=2048, channels=1)
-          z.write(img, os.path.join(split, city,
-                                    '{}_{}.png'.format(img_id, suffix)))
+          z.write(img,
+                  os.path.join(split, city, '{}_{}.png'.format(img_id, suffix)))

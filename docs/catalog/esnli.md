@@ -11,6 +11,7 @@
 
 # `esnli`
 
+
 *   **Description**:
 
 The e-SNLI dataset extends the Stanford Natural Language Inference Dataset to
@@ -60,21 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@incollection{NIPS2018_8163,
-title = {e-SNLI: Natural Language Inference with Natural Language Explanations},
-author = {Camburu, Oana-Maria and Rockt"{a}schel, Tim and Lukasiewicz, Thomas and Blunsom, Phil},
-booktitle = {Advances in Neural Information Processing Systems 31},
-editor = {S. Bengio and H. Wallach and H. Larochelle and K. Grauman and N. Cesa-Bianchi and R. Garnett},
-pages = {9539--9549},
-year = {2018},
-publisher = {Curran Associates, Inc.},
-url = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-natural-language-explanations.pdf}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -87,7 +73,7 @@ url = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-n
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/esnli-0.1.0.html";
@@ -112,3 +98,19 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@incollection{NIPS2018_8163,
+title = {e-SNLI: Natural Language Inference with Natural Language Explanations},
+author = {Camburu, Oana-Maria and Rockt"{a}schel, Tim and Lukasiewicz, Thomas and Blunsom, Phil},
+booktitle = {Advances in Neural Information Processing Systems 31},
+editor = {S. Bengio and H. Wallach and H. Larochelle and K. Grauman and N. Cesa-Bianchi and R. Garnett},
+pages = {9539--9549},
+year = {2018},
+publisher = {Curran Associates, Inc.},
+url = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-natural-language-explanations.pdf}
+}
+```
+

@@ -20,7 +20,7 @@ import os
 import re
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -65,12 +65,21 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             # Images are of varying size
-            "image": tfds.features.Image(),
-            "image/filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(num_classes=200),
-            "label_name": tfds.features.Text(),
-            "bbox": tfds.features.BBoxFeature(),
-            "segmentation_mask": tfds.features.Image(shape=(None, None, 1)),
+            "image":
+                tfds.features.Image(),
+            "image/filename":
+                tfds.features.Text(),
+            "label":
+                tfds.features.ClassLabel(num_classes=200),
+            "label_name":
+                tfds.features.Text(),
+            "bbox":
+                tfds.features.BBoxFeature(),
+            "segmentation_mask":
+                tfds.features.Image(
+                    shape=(None, None, 1),
+                    use_colormap=True,
+                ),
         }),
         supervised_keys=("image", "label"),
         homepage=_URL,

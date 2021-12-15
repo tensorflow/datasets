@@ -11,6 +11,7 @@
 
 # `librispeech_lm`
 
+
 *   **Description**:
 
 Language modeling resources to be used in conjunction with the LibriSpeech ASR
@@ -51,19 +52,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'text')`
 
-*   **Citation**:
-
-```
-@inproceedings{panayotov2015librispeech,
-  title={Librispeech: an ASR corpus based on public domain audio books},
-  author={Panayotov, Vassil and Chen, Guoguo and Povey, Daniel and Khudanpur, Sanjeev},
-  booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2015 IEEE International Conference on},
-  pages={5206--5210},
-  year={2015},
-  organization={IEEE}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -76,7 +64,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/librispeech_lm-0.1.0.html";
@@ -101,3 +89,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{panayotov2015librispeech,
+  title={Librispeech: an ASR corpus based on public domain audio books},
+  author={Panayotov, Vassil and Chen, Guoguo and Povey, Daniel and Khudanpur, Sanjeev},
+  booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2015 IEEE International Conference on},
+  pages={5206--5210},
+  year={2015},
+  organization={IEEE}
+}
+```
+

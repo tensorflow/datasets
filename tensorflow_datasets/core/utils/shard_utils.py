@@ -32,8 +32,8 @@ class FileInstruction(object):
 
   Attributes:
     filename: The filenames contains the relative path, not absolute.
-    skip: Indicates which example read in the shard (`ds.skip().take()`). `0`
-      if no skipping
+    skip: Indicates which example read in the shard (`ds.skip().take()`). `0` if
+      no skipping
     take: Indicates how many examples to read (`-1` to read all)
     num_examples: `int`, The total number of examples
   """
@@ -76,11 +76,12 @@ def get_file_instructions(
       take = to - index_start - skip if to < index_end else -1
       if take == 0:
         continue
-      file_instructions.append(FileInstruction(
-          filename=filename,
-          skip=skip,
-          take=take,
-          num_examples=length - skip if take == -1 else take,
-      ))
+      file_instructions.append(
+          FileInstruction(
+              filename=filename,
+              skip=skip,
+              take=take,
+              num_examples=length - skip if take == -1 else take,
+          ))
     index_start += length
   return file_instructions

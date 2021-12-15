@@ -11,6 +11,7 @@
 
 # `trivia_qa`
 
+
 *   **Description**:
 
 TriviaqQA is a reading comprehension dataset containing over 650K
@@ -82,6 +83,10 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -98,9 +103,6 @@ archivePrefix = {arXiv},
 }
 ```
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## trivia_qa/rc (default config)
 
@@ -116,7 +118,7 @@ archivePrefix = {arXiv},
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/trivia_qa-rc-1.1.0.html";
@@ -155,7 +157,7 @@ $(document).ready(() => {
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/trivia_qa-rc.nocontext-1.1.0.html";
@@ -196,7 +198,7 @@ $(document).ready(() => {
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/trivia_qa-unfiltered-1.1.0.html";
@@ -236,7 +238,7 @@ $(document).ready(() => {
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/trivia_qa-unfiltered.nocontext-1.1.0.html";

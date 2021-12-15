@@ -11,6 +11,7 @@
 
 # `goemotions`
 
+
 *   **Description**:
 
 The GoEmotions dataset contains 58k carefully curated Reddit comments labeled
@@ -86,27 +87,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{demszky-2020-goemotions,
-    title = "{G}o{E}motions: A Dataset of Fine-Grained Emotions",
-    author = "Demszky, Dorottya  and
-      Movshovitz-Attias, Dana  and
-      Ko, Jeongwoo  and
-      Cowen, Alan  and
-      Nemade, Gaurav  and
-      Ravi, Sujith",
-    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
-    month = jul,
-    year = "2020",
-    address = "Online",
-    publisher = "Association for Computational Linguistics",
-    url = "https://www.aclweb.org/anthology/2020.acl-main.372",
-    pages = "4040--4054",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -119,7 +99,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/goemotions-0.1.0.html";
@@ -144,3 +124,25 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{demszky-2020-goemotions,
+    title = "{G}o{E}motions: A Dataset of Fine-Grained Emotions",
+    author = "Demszky, Dorottya  and
+      Movshovitz-Attias, Dana  and
+      Ko, Jeongwoo  and
+      Cowen, Alan  and
+      Nemade, Gaurav  and
+      Ravi, Sujith",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.372",
+    pages = "4040--4054",
+}
+```
+

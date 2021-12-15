@@ -73,9 +73,10 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            'audio': tfds.features.Audio(
-                file_format='wav', sample_rate=SAMPLE_RATE),
-            'label': tfds.features.ClassLabel(names=WORDS + [SILENCE, UNKNOWN])
+            'audio':
+                tfds.features.Audio(file_format='wav', sample_rate=SAMPLE_RATE),
+            'label':
+                tfds.features.ClassLabel(names=WORDS + [SILENCE, UNKNOWN])
         }),
         supervised_keys=('audio', 'label'),
         # Homepage of the dataset for documentation
@@ -95,18 +96,24 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={'archive': dl_manager.iter_archive(dl_path),
-                        'file_list': train_paths},
+            gen_kwargs={
+                'archive': dl_manager.iter_archive(dl_path),
+                'file_list': train_paths
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={'archive': dl_manager.iter_archive(dl_path),
-                        'file_list': validation_paths},
+            gen_kwargs={
+                'archive': dl_manager.iter_archive(dl_path),
+                'file_list': validation_paths
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={'archive': dl_manager.iter_archive(dl_test_path),
-                        'file_list': None},
+            gen_kwargs={
+                'archive': dl_manager.iter_archive(dl_test_path),
+                'file_list': None
+            },
         ),
     ]
 
@@ -173,8 +180,7 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
         train_paths.append(path)
 
     # Original validation files did include silence - we add them manually here
-    validation_paths.append(
-        os.path.join(BACKGROUND_NOISE, 'running_tap.wav'))
+    validation_paths.append(os.path.join(BACKGROUND_NOISE, 'running_tap.wav'))
 
     # The paths for the train set is just whichever paths that do not exist in
     # either the test or validation splits.

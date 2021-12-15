@@ -1,0 +1,14 @@
+{
+    "validation": [
+        {
+            "dialog_act": "inform(food=Mexican,kids_allowed=yes,name='Bar\u00e1\u010dnick\u00e1 rychta')",
+            "dialog_act_delexicalized": "inform(food=X-food,kids_allowed=yes,name=X-name)",
+            "gem_id": "cs_restaurants-validation-32",
+            "references": [
+                "Bar\u00e1\u010dnick\u00e1 rychta je vhodn\u00e1 pro d\u011bti a m\u00e1 mexick\u00e1 j\u00eddla ."
+            ],
+            "target": "Bar\u00e1\u010dnick\u00e1 rychta je vhodn\u00e1 pro d\u011bti a m\u00e1 mexick\u00e1 j\u00eddla .",
+            "target_delexicalized": "X-name je vhodn\u00e1 pro d\u011bti a m\u00e1 X-food j\u00eddla ."
+        }
+    ]
+}

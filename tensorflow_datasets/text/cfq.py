@@ -19,7 +19,7 @@ import json
 import os
 import re
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -105,9 +105,7 @@ class CFQConfig(tfds.core.BuilderConfig):
       directory = 'splits'
       split_name = name
     super(CFQConfig, self).__init__(
-        name=name,
-        version=tfds.core.Version('1.2.0'),
-        **kwargs)
+        name=name, version=tfds.core.Version('1.2.0'), **kwargs)
     self.split_file = os.path.join(directory, split_name + '.json')
 
 

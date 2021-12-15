@@ -23,12 +23,9 @@ class ImageNet2012RealTest(tfds.testing.DatasetBuilderTestCase):
   """Test for ImageNet2012Real dataset."""
 
   DATASET_CLASS = imagenet2012_real.Imagenet2012Real
-  SPLITS = {
-      "validation": 10
-  }
+  SPLITS = {"validation": 10}
   DL_DOWNLOAD_RESULT = "real.json"
 
 
 if __name__ == "__main__":
   tfds.testing.test_main()
-

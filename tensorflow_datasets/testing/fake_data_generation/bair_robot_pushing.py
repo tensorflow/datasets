@@ -25,7 +25,7 @@ mkdir train/
 from absl import app
 from absl import flags
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 FLAGS = flags.FLAGS
 

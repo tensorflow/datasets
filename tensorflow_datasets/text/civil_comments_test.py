@@ -19,12 +19,23 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.text import civil_comments
 
 
-class CivilCommentsTest(testing.DatasetBuilderTestCase):
+class CivilCommentsNoCovertTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = civil_comments.CivilComments
+  BUILDER_CONFIG_NAMES_TO_TEST = ["CivilComments", "CivilCommentsIdentities"]
   SPLITS = {
       "train": 2,  # Number of fake train examples
       "test": 1,  # Number of fake test examples
       "validation": 1,  # Number of fake validation examples
+  }
+
+
+# Separate test for CivilCommentsCovert without validation split.
+class CivilCommentsCovertTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = civil_comments.CivilComments
+  BUILDER_CONFIG_NAMES_TO_TEST = ["CivilCommentsCovert"]
+  SPLITS = {
+      "train": 2,  # Number of fake train examples
+      "test": 1,  # Number of fake test examples
   }
 
 

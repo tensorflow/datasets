@@ -20,7 +20,7 @@ from __future__ import unicode_literals
 import os
 
 from absl.testing import parameterized
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.deprecated.text import subword_text_encoder

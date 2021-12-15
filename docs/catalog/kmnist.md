@@ -11,6 +11,13 @@
 
 # `kmnist`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=kmnist">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 Kuzushiji-MNIST is a drop-in replacement for the MNIST dataset (28x28 grayscale,
@@ -56,20 +63,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@online{clanuwat2018deep,
-  author       = {Tarin Clanuwat and Mikel Bober-Irizar and Asanobu Kitamoto and Alex Lamb and Kazuaki Yamamoto and David Ha},
-  title        = {Deep Learning for Classical Japanese Literature},
-  date         = {2018-12-03},
-  year         = {2018},
-  eprintclass  = {cs.CV},
-  eprinttype   = {arXiv},
-  eprint       = {cs.CV/1812.01718},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -83,7 +76,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/kmnist-3.0.1.html";
@@ -108,3 +101,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@online{clanuwat2018deep,
+  author       = {Tarin Clanuwat and Mikel Bober-Irizar and Asanobu Kitamoto and Alex Lamb and Kazuaki Yamamoto and David Ha},
+  title        = {Deep Learning for Classical Japanese Literature},
+  date         = {2018-12-03},
+  year         = {2018},
+  eprintclass  = {cs.CV},
+  eprinttype   = {arXiv},
+  eprint       = {cs.CV/1812.01718},
+}
+```
+

@@ -11,6 +11,7 @@
 
 # `lfw`
 
+
 *   **Description**:
 
 Labeled Faces in the Wild: A Database for Studying Face Recognition in
@@ -53,19 +54,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('label', 'image')`
 
-*   **Citation**:
-
-```
-@TechReport{LFWTech,
-    author = {Gary B. Huang and Manu Ramesh and Tamara Berg and Erik Learned-Miller},
-    title = {Labeled Faces in the Wild: A Database for Studying Face Recognition in Unconstrained Environments},
-    institution = {University of Massachusetts, Amherst},
-    year = 2007,
-    number = {07-49},
-    month = {October}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -79,7 +67,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/lfw-0.1.0.html";
@@ -104,3 +92,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@TechReport{LFWTech,
+    author = {Gary B. Huang and Manu Ramesh and Tamara Berg and Erik Learned-Miller},
+    title = {Labeled Faces in the Wild: A Database for Studying Face Recognition in Unconstrained Environments},
+    institution = {University of Massachusetts, Amherst},
+    year = 2007,
+    number = {07-49},
+    month = {October}
+}
+```
+

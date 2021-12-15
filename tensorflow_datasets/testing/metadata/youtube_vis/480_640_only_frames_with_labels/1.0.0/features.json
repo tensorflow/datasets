@@ -1,0 +1,124 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "video": {
+            "type": "tensorflow_datasets.core.features.video_feature.Video",
+            "content": {
+                "shape": [
+                    null,
+                    480,
+                    640,
+                    3
+                ],
+                "encoding_format": "png",
+                "ffmpeg_extra_args": []
+            }
+        },
+        "metadata": {
+            "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+            "content": {
+                "height": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "int32"
+                    }
+                },
+                "width": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "int32"
+                    }
+                },
+                "num_frames": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "int32"
+                    }
+                },
+                "video_name": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "string"
+                    }
+                }
+            }
+        },
+        "tracks": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                    "content": {
+                        "bboxes": {
+                            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                            "content": {
+                                "feature": {
+                                    "type": "tensorflow_datasets.core.features.bounding_boxes.BBoxFeature",
+                                    "content": {}
+                                },
+                                "length": null
+                            }
+                        },
+                        "segmentations": {
+                            "type": "tensorflow_datasets.core.features.video_feature.Video",
+                            "content": {
+                                "shape": [
+                                    null,
+                                    480,
+                                    640,
+                                    1
+                                ],
+                                "encoding_format": "png",
+                                "ffmpeg_extra_args": []
+                            }
+                        },
+                        "category": {
+                            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "content": {
+                                "num_classes": 40
+                            }
+                        },
+                        "is_crowd": {
+                            "type": "tensorflow_datasets.core.features.feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "bool"
+                            }
+                        },
+                        "areas": {
+                            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                            "content": {
+                                "feature": {
+                                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                                    "content": {
+                                        "shape": [],
+                                        "dtype": "float32"
+                                    }
+                                },
+                                "length": null
+                            }
+                        },
+                        "frames": {
+                            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                            "content": {
+                                "feature": {
+                                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                                    "content": {
+                                        "shape": [],
+                                        "dtype": "int32"
+                                    }
+                                },
+                                "length": null
+                            }
+                        }
+                    }
+                },
+                "length": null
+            }
+        }
+    }
+}

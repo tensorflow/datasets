@@ -19,7 +19,7 @@ Apply common corruptions to the images in ImageNet2012 dataset.
 """
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.image_classification import corruptions
 from tensorflow_datasets.image_classification.imagenet import Imagenet2012
 import tensorflow_datasets.public_api as tfds
@@ -101,9 +101,10 @@ class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
 
 _VERSION = tfds.core.Version('3.1.0')
 _RELEASE_NOTES = {
-    '0.0.1': 'Initial dataset',
+    '0.0.1':
+        'Initial dataset',
     '3.1.0':
-    'Implement missing corruptions. Fix crop/resize ordering, file encoding',
+        'Implement missing corruptions. Fix crop/resize ordering, file encoding',
 }
 
 

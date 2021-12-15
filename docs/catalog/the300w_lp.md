@@ -11,6 +11,7 @@
 
 # `the300w_lp`
 
+
 *   **Description**:
 
 300W-LP Dataset is expanded from 300W, which standardises multiple alignment
@@ -69,28 +70,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/ZhuLLSL15,
-  author    = {Xiangyu Zhu and
-               Zhen Lei and
-               Xiaoming Liu and
-               Hailin Shi and
-               Stan Z. Li},
-  title     = {Face Alignment Across Large Poses: {A} 3D Solution},
-  journal   = {CoRR},
-  volume    = {abs/1511.07212},
-  year      = {2015},
-  url       = {http://arxiv.org/abs/1511.07212},
-  archivePrefix = {arXiv},
-  eprint    = {1511.07212},
-  timestamp = {Mon, 13 Aug 2018 16:48:23 +0200},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuLLSL15},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -104,7 +83,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/the300w_lp-1.0.0.html";
@@ -129,3 +108,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{DBLP:journals/corr/ZhuLLSL15,
+  author    = {Xiangyu Zhu and
+               Zhen Lei and
+               Xiaoming Liu and
+               Hailin Shi and
+               Stan Z. Li},
+  title     = {Face Alignment Across Large Poses: {A} 3D Solution},
+  journal   = {CoRR},
+  volume    = {abs/1511.07212},
+  year      = {2015},
+  url       = {http://arxiv.org/abs/1511.07212},
+  archivePrefix = {arXiv},
+  eprint    = {1511.07212},
+  timestamp = {Mon, 13 Aug 2018 16:48:23 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuLLSL15},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+

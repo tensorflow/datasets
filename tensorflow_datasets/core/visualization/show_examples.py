@@ -13,30 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Show example util.
-"""
+"""Show example util."""
 
 from typing import Any
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.visualization import graph_visualizer
 from tensorflow_datasets.core.visualization import image_visualizer
-from tensorflow_metadata.proto.v0 import statistics_pb2
 
+from tensorflow_metadata.proto.v0 import statistics_pb2
 
 _ALL_VISUALIZERS = [
     image_visualizer.ImageGridVisualizer(),
+    graph_visualizer.GraphVisualizer(),
 ]
 
 
-def show_examples(
-    ds: tf.data.Dataset,
-    ds_info: dataset_info.DatasetInfo,
-    **options_kwargs: Any
-):
+def show_examples(ds: tf.data.Dataset, ds_info: dataset_info.DatasetInfo,
+                  **options_kwargs: Any):
   """Visualize images (and labels) from an image classification dataset.
 
   This function is for interactive use (Colab, Jupyter). It displays and return
@@ -50,14 +48,14 @@ def show_examples(
 
   Args:
     ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
-      should not be batched. Examples will be consumed in order until
-      (rows * cols) are read or the dataset is consumed.
+      should not be batched. Examples will be consumed in order until (rows *
+      cols) are read or the dataset is consumed.
     ds_info: The dataset info object to which extract the label and features
       info. Available either through `tfds.load('mnist', with_info=True)` or
       `tfds.builder('mnist').info`
     **options_kwargs: Additional display options, specific to the dataset type
-      to visualize. Are forwarded to `tfds.visualization.Visualizer.show`.
-      See the `tfds.visualization` for a list of available visualizers.
+      to visualize. Are forwarded to `tfds.visualization.Visualizer.show`. See
+      the `tfds.visualization` for a list of available visualizers.
 
   Returns:
     fig: The `matplotlib.Figure` object
@@ -76,9 +74,9 @@ def show_examples(
   for visualizer in _ALL_VISUALIZERS:
     if visualizer.match(ds_info):
       return visualizer.show(ds, ds_info, **options_kwargs)
-    raise ValueError(
-        'Visualisation not supported for dataset `{}`'.format(ds_info.name)
-    )
+
+  raise ValueError('Visualisation not supported for dataset `{}`'.format(
+      ds_info.name))
 
 
 def show_statistics(
@@ -116,8 +114,8 @@ def show_statistics(
   Args:
     ds_info: The `tfds.core.DatasetInfo` object containing the statistics.
     split: Split for which generate the statistics.
-    disable_logging: `bool`, if True, disable the tfdv logs which can be
-      too verbose.
+    disable_logging: `bool`, if True, disable the tfdv logs which can be too
+      verbose.
 
   Returns:
     `None`
@@ -131,6 +129,6 @@ def show_statistics(
 
   # Creates the statistics.
   statistics = statistics_pb2.DatasetFeatureStatisticsList()
-  statistics.datasets.add().CopyFrom(ds_info.splits[split].statistics)
+  statistics.datasets.add().CopyFrom(ds_info.splits[split].statistics)  # pytype: disable=attribute-error  # bind-properties
   with utils.disable_logging() if disable_logging else utils.nullcontext():
     return tfdv.visualize_statistics(statistics)

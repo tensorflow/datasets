@@ -11,6 +11,7 @@
 
 # `savee`
 
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -72,19 +73,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@inproceedings{Vlasenko_combiningframe,
-author = {Vlasenko, Bogdan and Schuller, Bjorn and Wendemuth, Andreas and Rigoll, Gerhard},
-year = {2007},
-month = {01},
-pages = {2249-2252},
-title = {Combining frame and turn-level information for robust recognition of emotions within speech},
-journal = {Proceedings of Interspeech}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -97,7 +85,7 @@ journal = {Proceedings of Interspeech}
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/savee-1.0.0.html";
@@ -122,3 +110,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{Vlasenko_combiningframe,
+author = {Vlasenko, Bogdan and Schuller, Bjorn and Wendemuth, Andreas and Rigoll, Gerhard},
+year = {2007},
+month = {01},
+pages = {2249-2252},
+title = {Combining frame and turn-level information for robust recognition of emotions within speech},
+journal = {Proceedings of Interspeech}
+}
+```
+

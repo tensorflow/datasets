@@ -23,7 +23,7 @@ import random
 from absl import app
 from absl import flags
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import fake_data_utils
 
@@ -56,8 +56,7 @@ def _generate_data():
   for _ in range(NUMBER_OF_EXAMPLES):
     wav_file = fake_data_utils.get_random_wav_c1(duration=6, sample=8000)
     filename = _get_file_name()
-    filepath = os.path.join(_output_dir(),
-                            "waves_yesno",
+    filepath = os.path.join(_output_dir(), "waves_yesno",
                             "{}.wav".format(filename))
     dirname = os.path.dirname(filepath)
     if not tf.io.gfile.exists(dirname):

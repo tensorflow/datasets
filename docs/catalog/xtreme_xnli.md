@@ -11,6 +11,7 @@
 
 # `xtreme_xnli`
 
+
 *   **Description**:
 
 This dataset contains machine translations of MNLI into each of the XNLI
@@ -74,20 +75,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{hu2020xtreme,
-      author    = {Junjie Hu and Sebastian Ruder and Aditya Siddhant and Graham Neubig and Orhan Firat and Melvin Johnson},
-      title     = {XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization},
-      journal   = {CoRR},
-      volume    = {abs/2003.11080},
-      year      = {2020},
-      archivePrefix = {arXiv},
-      eprint    = {2003.11080}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -100,7 +87,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xtreme_xnli-1.1.0.html";
@@ -125,3 +112,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{hu2020xtreme,
+      author    = {Junjie Hu and Sebastian Ruder and Aditya Siddhant and Graham Neubig and Orhan Firat and Melvin Johnson},
+      title     = {XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization},
+      journal   = {CoRR},
+      volume    = {abs/2003.11080},
+      year      = {2020},
+      archivePrefix = {arXiv},
+      eprint    = {2003.11080}
+}
+```
+

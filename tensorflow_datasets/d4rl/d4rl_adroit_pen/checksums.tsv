@@ -1,0 +1,6 @@
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/pen-demos-v0-bc-combined.hdf5	307070889	f881ab4b03c0b8e0b8632b29dd00b803e012637f115b6556645e8eb3c8a0242d	pen-demos-v0-bc-combined.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/pen-v0_demos_clipped.hdf5	2037685	64103c05d3b33b4cc0591db187396a4da58f87b707db99401d8f994cb91a7a4d	pen-v0_demos_clipped.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/pen-v0_expert_clipped.hdf5	262280734	0ad80bc6d5e655d01ff547750ac826ae53d143b1506456f826ced6f2b99e38ce	pen-v0_expert_clipped.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/pen-cloned-v1.hdf5	155074191	6d1a982cee1950501bedebbddedbcbb377e6284d379986c83abac8a6c0be0c22	pen-cloned-v1.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/pen-expert-v1.hdf5	262040663	3791b8ca6a802061770af2977c051ac3ae261488210ce73788760a5b8308f374	pen-expert-v1.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/pen-human-v1.hdf5	2040573	209e345b2150b633f30a11612612c60f49e941f127ce6c4dc0cd790501c46f9f	pen-human-v1.hdf5

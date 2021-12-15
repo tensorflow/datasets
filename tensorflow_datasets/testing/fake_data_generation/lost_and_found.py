@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """Script to generate fake 'Lost and Found' data."""
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.testing.cityscapes as cityscapes
 

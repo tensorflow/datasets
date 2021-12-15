@@ -33,9 +33,7 @@ _CITATION = """
 }
 """
 
-_LANGUAGE_PAIRS = [
-    (lang, "en") for lang in ["cs", "de", "fi", "fr", "ru"]
-]
+_LANGUAGE_PAIRS = [(lang, "en") for lang in ["cs", "de", "fi", "fr", "ru"]]
 
 
 class Wmt15Translate(wmt.WmtTranslate):
@@ -57,11 +55,13 @@ class Wmt15Translate(wmt.WmtTranslate):
         tfds.Split.TRAIN: [
             "europarl_v7", "europarl_v8_16", "commoncrawl", "multiun",
             "newscommentary_v10", "gigafren", "czeng_10", "yandexcorpus",
-            "wikiheadlines_fi", "wikiheadlines_ru"],
+            "wikiheadlines_fi", "wikiheadlines_ru"
+        ],
         tfds.Split.VALIDATION: [
             "newsdev2015", "newsdiscussdev2015", "newstest2014"
         ],
         tfds.Split.TEST: [
-            "newstest2015", "newsdiscusstest2015",
+            "newstest2015",
+            "newsdiscusstest2015",
         ]
     }

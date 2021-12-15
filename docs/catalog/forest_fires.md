@@ -11,6 +11,7 @@
 
 # `forest_fires`
 
+
 *   **Description**:
 
 This is a regression task, where the aim is to predict the burned area of forest
@@ -102,24 +103,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('area', 'features')`
 
-*   **Citation**:
-
-```
-@misc{Dua:2019 ,
-author = "Dua, Dheeru and Graff, Casey",
-year = "2017",
-title = "{UCI} Machine Learning Repository",
-url = "http://archive.ics.uci.edu/ml",
-institution = "University of California, Irvine, School of Information and Computer Sciences" }
-
-@article{cortez2007data,
-  title={A data mining approach to predict forest fires using meteorological data},
-  author={Cortez, Paulo and Morais, Anibal de Jesus Raimundo},
-  year={2007},
-  publisher={Associa{\c{c}}{\~a}o Portuguesa para a Intelig{\^e}ncia Artificial (APPIA)}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -132,7 +115,7 @@ institution = "University of California, Irvine, School of Information and Compu
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/forest_fires-0.0.1.html";
@@ -157,3 +140,22 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{Dua:2019 ,
+author = "Dua, Dheeru and Graff, Casey",
+year = "2017",
+title = "{UCI} Machine Learning Repository",
+url = "http://archive.ics.uci.edu/ml",
+institution = "University of California, Irvine, School of Information and Computer Sciences" }
+
+@article{cortez2007data,
+  title={A data mining approach to predict forest fires using meteorological data},
+  author={Cortez, Paulo and Morais, Anibal de Jesus Raimundo},
+  year={2007},
+  publisher={Associa{\c{c}}{\~a}o Portuguesa para a Intelig{\^e}ncia Artificial (APPIA)}
+}
+```
+

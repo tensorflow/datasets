@@ -28,5 +28,6 @@ class BillsumTest(testing.DatasetBuilderTestCase):
   }
   DL_EXTRACT_RESULT = ""
 
+
 if __name__ == "__main__":
   testing.test_main()

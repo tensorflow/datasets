@@ -11,6 +11,7 @@
 
 # `wmt18_translate`
 
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -63,6 +64,14 @@ builder = tfds.builder("wmt_translate", config=config)
 Split | Examples
 :---- | -------:
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -82,13 +91,6 @@ Split | Examples
 }
 ```
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 ## wmt18_translate/cs-en (default config)
 

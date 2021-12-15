@@ -17,21 +17,19 @@
 
 import json
 import os
+import pathlib
 import tempfile
 import numpy as np
+import pytest
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.image_classification import mnist
-
-from google.protobuf import text_format
-from tensorflow_metadata.proto.v0 import schema_pb2
-
-tf.enable_v2_behavior()
 
 _TFDS_DIR = utils.tfds_path()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
@@ -39,7 +37,6 @@ _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
 _INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
                                    "dataset_info", "mnist_unlabeled", "3.0.1")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
-
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
@@ -111,9 +108,21 @@ class DatasetInfoTest(testing.TestCase):
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
-    self.assertEqual(
-        info.module_name, "tensorflow_datasets.testing.test_utils"
-    )
+    self.assertEqual(info.module_name, "tensorflow_datasets.testing.test_utils")
+    self.assertEqual(False, info.disable_shuffling)
+
+    self.assertEqual(info.version, utils.Version("1.0.0"))
+    self.assertEqual(info.release_notes, {
+        "1.0.0": "Release notes 1.0.0",
+        "2.0.0": "Release notes 2.0.0"
+    })
+
+  def test_disable_shuffling(self):
+    info = dataset_info.DatasetInfo(
+        builder=self._builder, disable_shuffling=True)
+    info.read_from_directory(_INFO_DIR)
+
+    self.assertEqual(True, info.disable_shuffling)
 
   def test_reading_empty_properties(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
@@ -165,7 +174,7 @@ class DatasetInfoTest(testing.TestCase):
         supervised_keys=("input", "output"),
         homepage="http://some-location",
         citation="some citation",
-        redistribution_info={"license": "some license"}
+        license="some license",
     )
     info.download_size = 456
     info.as_proto.splits.add(name="train", num_bytes=512)
@@ -196,8 +205,7 @@ class DatasetInfoTest(testing.TestCase):
           supervised_keys=("input (new)", "output (new)"),
           homepage="http://some-location-new",
           citation="some citation (new)",
-          redistribution_info={"license": "some license (new)"}
-      )
+          redistribution_info={"license": "some license (new)"})
       restored_info.download_size = 789
       restored_info.as_proto.splits.add(name="validation", num_bytes=288)
       restored_info.as_proto.schema.feature.add()
@@ -214,8 +222,13 @@ class DatasetInfoTest(testing.TestCase):
       # Even though restored_info has been restored, informations defined in
       # the code overwrite informations from the json file.
       self.assertEqual(restored_info.description, "A description")
-      self.assertEqual(
-          restored_info.supervised_keys, ("input (new)", "output (new)"))
+      self.assertEqual(restored_info.version, utils.Version("1.0.0"))
+      self.assertEqual(restored_info.release_notes, {
+          "1.0.0": "Release notes 1.0.0",
+          "2.0.0": "Release notes 2.0.0"
+      })
+      self.assertEqual(restored_info.supervised_keys,
+                       ("input (new)", "output (new)"))
       self.assertEqual(restored_info.homepage, "http://some-location-new")
       self.assertEqual(restored_info.citation, "some citation (new)")
       self.assertEqual(restored_info.redistribution_info.license,
@@ -245,90 +258,6 @@ class DatasetInfoTest(testing.TestCase):
     info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
     _ = str(info)
 
-  @testing.run_in_graph_and_eager_modes()
-  def test_statistics_generation(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare(
-          download_config=download.DownloadConfig(
-              compute_stats=download.ComputeStatsMode.AUTO,
-          ),
-      )
-
-      # Overall
-      self.assertEqual(30, builder.info.splits.total_num_examples)
-
-      # Per split.
-      test_split = builder.info.splits["test"].to_proto()
-      train_split = builder.info.splits["train"].to_proto()
-      expected_schema = text_format.Parse("""
-      feature {
-        name: "x"
-        type: INT
-        presence {
-          min_fraction: 1.0
-          min_count: 1
-        }
-        shape {
-          dim {
-            size: 1
-          }
-        }
-      }""", schema_pb2.Schema())
-      self.assertEqual(train_split.statistics.num_examples, 20)
-      self.assertLen(train_split.statistics.features, 1)
-      self.assertEqual(
-          train_split.statistics.features[0].path.step[0], "x")
-      self.assertLen(
-          train_split.statistics.features[0].num_stats.common_stats.
-          num_values_histogram.buckets, 10)
-      self.assertLen(
-          train_split.statistics.features[0].num_stats.histograms, 2)
-
-      self.assertEqual(test_split.statistics.num_examples, 10)
-      self.assertLen(test_split.statistics.features, 1)
-      self.assertEqual(
-          test_split.statistics.features[0].path.step[0], "x")
-      self.assertLen(
-          test_split.statistics.features[0].num_stats.common_stats.
-          num_values_histogram.buckets, 10)
-      self.assertLen(
-          test_split.statistics.features[0].num_stats.histograms, 2)
-      self.assertEqual(builder.info.as_proto.schema, expected_schema)
-
-  @testing.run_in_graph_and_eager_modes()
-  def test_schema_generation_variable_sizes(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = RandomShapedImageGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare(
-          download_config=download.DownloadConfig(
-              compute_stats=download.ComputeStatsMode.AUTO,
-          ),
-      )
-
-      expected_schema = text_format.Parse(
-          """
-feature {
-  name: "im"
-  type: BYTES
-  presence {
-    min_fraction: 1.0
-    min_count: 1
-  }
-  shape {
-    dim {
-      size: -1
-    }
-    dim {
-      size: -1
-    }
-    dim {
-      size: 3
-    }
-  }
-}""", schema_pb2.Schema())
-      self.assertEqual(builder.info.as_proto.schema, expected_schema)
-
   def test_metadata(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
@@ -340,10 +269,18 @@ feature {
       builder2 = RandomShapedImageGenerator(data_dir=tmp_dir)
       self.assertEqual(builder2.info.metadata, {"some_key": 123})
 
+      # Metadata should have been restored even if the builder code was not
+      # available and we restored from files.
+      builder3 = read_only_builder.builder_from_files(
+          builder.name,
+          data_dir=tmp_dir,
+      )
+      self.assertEqual(builder3.info.metadata, {"some_key": 123})
+
   def test_updates_on_bucket_info(self):
 
-    info = dataset_info.DatasetInfo(builder=self._builder,
-                                    description="won't be updated")
+    info = dataset_info.DatasetInfo(
+        builder=self._builder, description="won't be updated")
     # No statistics in the above.
     self.assertEqual(0, info.splits.total_num_examples)
     self.assertEqual(0, len(info.as_proto.schema.feature))
@@ -358,6 +295,59 @@ feature {
     # These are dynamically computed, so will be updated.
     self.assertEqual(40, info.splits.total_num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
+
+
+@pytest.mark.parametrize(
+    "file_format",
+    [
+        file_adapters.FileFormat.TFRECORD,
+    ])
+def test_file_format_save_restore(
+    tmp_path: pathlib.Path,
+    file_format: file_adapters.FileFormat,
+):
+  builder = testing.DummyDataset(data_dir=tmp_path, file_format=file_format)
+
+  assert isinstance(builder.info.file_format, file_adapters.FileFormat)
+  assert builder.info.file_format is file_format
+
+  builder.download_and_prepare()
+
+  # When restoring the builder, we do not provide the `file_format=`
+  # yet it is correctly restored
+  builder2 = testing.DummyDataset(data_dir=tmp_path)
+  assert builder2.info.file_format is file_format
+
+  # Explicitly passing the correct format is accepted.
+  builder3 = testing.DummyDataset(data_dir=tmp_path, file_format=file_format)
+  assert builder3.info.file_format is file_format
+
+  # Providing an inconsistent format is rejected.
+  with pytest.raises(ValueError, match="File format is already set to"):
+    different_file_format = {
+        file_adapters.FileFormat.TFRECORD: file_adapters.FileFormat.RIEGELI,
+        file_adapters.FileFormat.RIEGELI: file_adapters.FileFormat.TFRECORD,
+    }[file_format]
+    testing.DummyDataset(data_dir=tmp_path, file_format=different_file_format)
+
+
+def test_file_format_values(tmp_path: pathlib.Path):
+  # Default file format
+  builder = testing.DummyDataset(data_dir=tmp_path, file_format=None)
+  assert builder.info.file_format == file_adapters.FileFormat.TFRECORD
+
+  # str accepted
+  builder = testing.DummyDataset(data_dir=tmp_path, file_format="riegeli")
+  assert builder.info.file_format == file_adapters.FileFormat.RIEGELI
+
+  # file_adapters.FileFormat accepted
+  builder = testing.DummyDataset(
+      data_dir=tmp_path, file_format=file_adapters.FileFormat.RIEGELI)
+  assert builder.info.file_format == file_adapters.FileFormat.RIEGELI
+
+  # Unknown value
+  with pytest.raises(ValueError, match="is not a valid FileFormat"):
+    testing.DummyDataset(data_dir=tmp_path, file_format="arrow")
 
 
 # pylint: disable=g-inconsistent-quotes
@@ -376,6 +366,7 @@ _INFO_STR = '''tfds.core.DatasetInfo(
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
     }),
     supervised_keys=('image', 'label'),
+    disable_shuffling=False,
     splits={
         'test': <SplitInfo num_examples=20, num_shards=1>,
         'train': <SplitInfo num_examples=20, num_shards=1>,
@@ -391,7 +382,6 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     redistribution_info=license: "test license",
 )'''
 # pylint: enable=g-inconsistent-quotes
-
 
 if __name__ == "__main__":
   testing.test_main()

@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import collections
 
 from tensorflow_datasets import testing
@@ -47,9 +46,17 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
       for features in dataset_utils.as_numpy(dataset[split_name]):
         label_name = label_feature.int2str(features['label'])
         label_frequncies[split_name][label_name] += 1
-    self.assertEqual(dict(label_frequncies),
-                     {'test': {'Archery': 1, 'Nunchucks': 1},
-                      'train': {'Archery': 1, 'Nunchucks': 2}})
+    self.assertEqual(
+        dict(label_frequncies), {
+            'test': {
+                'Archery': 1,
+                'Nunchucks': 1
+            },
+            'train': {
+                'Archery': 1,
+                'Nunchucks': 2
+            }
+        })
 
 
 if __name__ == '__main__':

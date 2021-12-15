@@ -16,7 +16,7 @@
 """Labeled faces in wild."""
 
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = "http://vis-www.cs.umass.edu/lfw/lfw.tgz"
@@ -62,8 +62,7 @@ class LFW(tfds.core.GeneratorBasedBuilder):
     # There is no train/test split predefined
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
+            name=tfds.Split.TRAIN, gen_kwargs={
                 "data_path": path,
             }),
     ]

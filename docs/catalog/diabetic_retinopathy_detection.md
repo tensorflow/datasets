@@ -11,6 +11,7 @@
 
 # `diabetic_retinopathy_detection`
 
+
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -81,6 +82,7 @@ FeaturesDict({
 }
 ```
 
+
 ## diabetic_retinopathy_detection/original (default config)
 
 *   **Config description**: Images at their original resolution and quality.
@@ -98,7 +100,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/diabetic_retinopathy_detection-original-3.0.0.html";
@@ -141,7 +143,7 @@ $(document).ready(() => {
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/diabetic_retinopathy_detection-1M-3.0.0.html";
@@ -184,7 +186,7 @@ $(document).ready(() => {
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/diabetic_retinopathy_detection-250K-3.0.0.html";
@@ -230,7 +232,7 @@ $(document).ready(() => {
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/diabetic_retinopathy_detection-btgraham-300-3.0.0.html";

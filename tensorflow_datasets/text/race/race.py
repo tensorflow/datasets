@@ -90,15 +90,9 @@ class Race(tfds.core.GeneratorBasedBuilder):
     task = self.builder_config.name
 
     return {
-        "train":
-            self._generate_examples(
-                path / "train" / task),
-        "dev":
-            self._generate_examples(
-                path / "dev" / task),
-        "test":
-            self._generate_examples(
-                path / "test" / task),
+        "train": self._generate_examples(path / "train" / task),
+        "dev": self._generate_examples(path / "dev" / task),
+        "test": self._generate_examples(path / "test" / task),
     }
 
   def _generate_examples(self, path):

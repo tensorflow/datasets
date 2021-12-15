@@ -87,20 +87,22 @@ class S3o4d(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
 
     suffices = {'img': 'images.zip', 'latent': 'latents.npz'}
-    prod = itertools.product(
-        ['bunny', 'dragon'], ['train', 'test'], ['img', 'latent'])
+    prod = itertools.product(['bunny', 'dragon'], ['train', 'test'],
+                             ['img', 'latent'])
     path_dict = dict([
         ('_'.join([a, b, c]),
          f'https://storage.googleapis.com/dm_s3o4d/{a}/{b}_{suffices[c]}')
-        for a, b, c in prod])
+        for a, b, c in prod
+    ])
     paths = dl_manager.download(path_dict)
 
     return dict([
-        ('_'.join([a, b]),  # pylint: disable=g-complex-comprehension
-         self._generate_examples(
-             dl_manager, paths['_'.join([a, b, 'img'])],
-             paths['_'.join([a, b, 'latent'])], a))
-        for a, b in itertools.product(['bunny', 'dragon'], ['train', 'test'])])
+        (  # pylint: disable=g-complex-comprehension
+            '_'.join([a, b]),
+            self._generate_examples(dl_manager, paths['_'.join([a, b, 'img'])],
+                                    paths['_'.join([a, b, 'latent'])], a))
+        for a, b in itertools.product(['bunny', 'dragon'], ['train', 'test'])
+    ])
 
   def _generate_examples(self, dl_manager: tfds.download.DownloadManager,
                          img_path, latent_path, label):

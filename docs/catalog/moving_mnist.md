@@ -11,6 +11,7 @@
 
 # `moving_mnist`
 
+
 *   **Description**:
 
 Moving variant of MNIST database of handwritten digits. This is the data used by
@@ -55,26 +56,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/SrivastavaMS15,
-  author    = {Nitish Srivastava and
-               Elman Mansimov and
-               Ruslan Salakhutdinov},
-  title     = {Unsupervised Learning of Video Representations using LSTMs},
-  journal   = {CoRR},
-  volume    = {abs/1502.04681},
-  year      = {2015},
-  url       = {http://arxiv.org/abs/1502.04681},
-  archivePrefix = {arXiv},
-  eprint    = {1502.04681},
-  timestamp = {Mon, 13 Aug 2018 16:47:05 +0200},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/SrivastavaMS15},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -87,7 +68,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/moving_mnist-1.0.0.html";
@@ -112,3 +93,24 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{DBLP:journals/corr/SrivastavaMS15,
+  author    = {Nitish Srivastava and
+               Elman Mansimov and
+               Ruslan Salakhutdinov},
+  title     = {Unsupervised Learning of Video Representations using LSTMs},
+  journal   = {CoRR},
+  volume    = {abs/1502.04681},
+  year      = {2015},
+  url       = {http://arxiv.org/abs/1502.04681},
+  archivePrefix = {arXiv},
+  eprint    = {1502.04681},
+  timestamp = {Mon, 13 Aug 2018 16:47:05 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/SrivastavaMS15},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+

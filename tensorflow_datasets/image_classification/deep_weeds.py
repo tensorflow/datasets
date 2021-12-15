@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = "https://drive.google.com/uc?export=download&id=1xnK3B6K6KekDI55vwJ0vnc2IGoDga9cj"
@@ -90,7 +90,8 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
     """Define Splits."""
     paths = dl_manager.download_and_extract({
         "image": _URL,
-        "label": _URL_LABELS})
+        "label": _URL_LABELS
+    })
 
     return [
         tfds.core.SplitGenerator(

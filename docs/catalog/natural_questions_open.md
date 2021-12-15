@@ -11,6 +11,7 @@
 
 # `natural_questions_open`
 
+
 *   **Description**:
 
 The NQ-Open task, introduced by Lee et.al. 2019, is an open domain question
@@ -56,27 +57,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{orqa,
-title = {Latent Retrieval for Weakly Supervised Open Domain Question Answering},
-author = {Lee, Kenton and Chang, Ming-Wei and Toutanova, Kristina},
-year = {2019},
-month = {01},
-pages = {6086-6096},
-booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
-doi = {10.18653/v1/P19-1612}
-}
-
-@article{47761,
-title = {Natural Questions: a Benchmark for Question Answering Research},
-author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-year = {2019},
-journal = {Transactions of the Association of Computational Linguistics}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -89,7 +69,7 @@ journal = {Transactions of the Association of Computational Linguistics}
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/natural_questions_open-1.0.0.html";
@@ -114,3 +94,25 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{orqa,
+title = {Latent Retrieval for Weakly Supervised Open Domain Question Answering},
+author = {Lee, Kenton and Chang, Ming-Wei and Toutanova, Kristina},
+year = {2019},
+month = {01},
+pages = {6086-6096},
+booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+doi = {10.18653/v1/P19-1612}
+}
+
+@article{47761,
+title = {Natural Questions: a Benchmark for Question Answering Research},
+author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+year = {2019},
+journal = {Transactions of the Association of Computational Linguistics}
+}
+```
+

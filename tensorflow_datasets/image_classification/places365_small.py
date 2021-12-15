@@ -17,7 +17,7 @@
 import csv
 import os
 import six.moves.urllib as urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.csail.mit.edu/places/places365/"

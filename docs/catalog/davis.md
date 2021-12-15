@@ -11,6 +11,7 @@
 
 # `davis`
 
+
 *   **Description**:
 
 The DAVIS 2017 video object segmentation dataset.
@@ -22,7 +23,9 @@ The DAVIS 2017 video object segmentation dataset.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   `2.0.0`: Change instance ids to be 0, 1, 2, ...
+    *   **`2.1.0`** (default): Fix instance ids order.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -54,6 +57,10 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -77,9 +84,6 @@ FeaturesDict({
 }
 ```
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## davis/480p (default config)
 
@@ -87,7 +91,7 @@ FeaturesDict({
 
 *   **Download size**: `794.19 MiB`
 
-*   **Dataset size**: `795.49 MiB`
+*   **Dataset size**: `792.26 MiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -97,10 +101,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/davis-480p-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/davis-480p-2.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -129,7 +133,7 @@ $(document).ready(() => {
 
 *   **Download size**: `2.75 GiB`
 
-*   **Dataset size**: `2.79 GiB`
+*   **Dataset size**: `2.78 GiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -139,10 +143,10 @@ $(document).ready(() => {
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/davis-full_resolution-1.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/davis-full_resolution-2.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).

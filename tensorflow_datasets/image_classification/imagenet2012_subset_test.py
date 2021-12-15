@@ -18,7 +18,6 @@
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import imagenet2012_subset
 
-
 imagenet2012_subset.Imagenet2012Subset.PNG_IMAGES = ["n01440764_1.JPEG"]
 imagenet2012_subset.Imagenet2012Subset.CMYK_IMAGES = [
     "n01440764_2.JPEG",

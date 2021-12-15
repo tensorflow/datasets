@@ -7,12 +7,13 @@ Please read https://www.tensorflow.org/datasets/contribute#pr_checklist to make 
 * Dataset Name: <name>
 * Issue Reference: <link>
 * `dataset_info.json` Gist: <link>
-  
+
 ## Description
 
 <description>
-  
+
 ## Checklist
+
 * [ ] Address all TODO's
 * [ ] Add alphabetized import to subdirectory's `__init__.py`
 * [ ] Run `download_and_prepare` successfully

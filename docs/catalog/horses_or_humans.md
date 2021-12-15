@@ -11,6 +11,13 @@
 
 # `horses_or_humans`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=horses_or_humans">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 A large set of images of horses and humans.
@@ -54,18 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@ONLINE {horses_or_humans,
-author = "Laurence Moroney",
-title = "Horses or Humans Dataset",
-month = "feb",
-year = "2019",
-url = "http://laurencemoroney.com/horses-or-humans-dataset"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -79,7 +74,7 @@ url = "http://laurencemoroney.com/horses-or-humans-dataset"
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/horses_or_humans-3.0.0.html";
@@ -104,3 +99,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {horses_or_humans,
+author = "Laurence Moroney",
+title = "Horses or Humans Dataset",
+month = "feb",
+year = "2019",
+url = "http://laurencemoroney.com/horses-or-humans-dataset"
+}
+```
+

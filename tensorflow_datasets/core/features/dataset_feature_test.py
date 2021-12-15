@@ -16,12 +16,18 @@
 """Tests for tensorflow_datasets.core.features.dataset_feature."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import decode as decode_lib
 from tensorflow_datasets.core import features as feature_lib
 
-tf.enable_v2_behavior()
+
+class IncrementDecoder(decode_lib.Decoder):
+  """Basic decoder that just adds 1 to the encoded example."""
+
+  def decode_example(self, serialized_example):
+    return serialized_example + 1
 
 
 class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
@@ -157,6 +163,126 @@ class DatasetDictFeatureTest(testing.FeatureExpectationsTestCase):
                     'b': {
                         'c': np.ones(shape=(100, 4, 2), dtype=np.int32),
                         'd': [5] * 100,
+                    }
+                }),
+            ),
+        ],
+    )
+
+  def test_input_dict(self):
+
+    self.assertFeatureEagerOnly(
+        feature=feature_lib.Dataset({
+            'a': tf.string,
+            'b': {
+                'c': feature_lib.Tensor(shape=(4, 2), dtype=tf.int32),
+                'd': tf.uint8,
+            }
+        }, length=None),
+        shape={
+            'a': (),
+            'b': {
+                'c': (4, 2),
+                'd': (),
+            }
+        },
+        dtype={
+            'a': tf.string,
+            'b': {
+                'c': tf.int32,
+                'd': tf.uint8,
+            }
+        },
+        tests=[
+            testing.FeatureExpectationItem(
+                value={
+                    'a': ['aa', 'b', 'ccc'],
+                    'b': {
+                        'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
+                        'd': [1, 2, 3],
+                    }
+                },
+                expected=tf.data.Dataset.from_tensor_slices({
+                    'a': [
+                        tf.compat.as_bytes(t) for t in ('aa', 'b', 'ccc')
+                    ],
+                    'b': {
+                        'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
+                        'd': [1, 2, 3],
+                    }
+                }),
+            ),
+            testing.FeatureExpectationItem(
+                value={
+                    'a': [str(i) for i in range(100)],
+                    'b': {   # pylint: disable=g-complex-comprehension
+                        'c': [np.ones(shape=(4, 2), dtype=np.int32) for _ in range(100)],
+                        'd': [5 for _ in range(100)],
+                    }
+                },
+                expected=tf.data.Dataset.from_tensor_slices({
+                    'a': [tf.compat.as_bytes(str(i)) for i in range(100)],
+                    'b': {
+                        'c': np.ones(shape=(100, 4, 2), dtype=np.int32),
+                        'd': [5] * 100,
+                    }
+                }),
+                ),
+            # Wrong length in one of the lists.
+            testing.FeatureExpectationItem(
+                value={
+                    'a': ['aa'],
+                    'b': {
+                        'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
+                        'd': [1, 2, 3],
+                    }
+                },
+                raise_cls=ValueError,
+                raise_msg='The length of all elements of one sequence should be the same.',
+            ),
+        ],
+    )
+
+  def test_decoding(self):
+
+    self.assertFeatureEagerOnly(
+        feature=feature_lib.Dataset({
+            'a': tf.string,
+            'b': {
+                'c': tf.uint8,
+            }
+        },
+                                    length=None),
+        shape={
+            'a': (),
+            'b': {
+                'c': (),
+            }
+        },
+        dtype={
+            'a': tf.string,
+            'b': {
+                'c': tf.uint8,
+            }
+        },
+        tests=[
+            testing.FeatureExpectationItem(
+                value=dataset_utils.as_numpy(
+                    tf.data.Dataset.from_tensor_slices({
+                        'a': ['aa', 'b', 'ccc'],
+                        'b': {
+                            'c': [1, 2, 3],
+                        }
+                    })),
+                decoders={
+                    'b': {
+                        'c': IncrementDecoder(),
+                    },
+                },
+                expected=tf.data.Dataset.from_tensor_slices({
+                    'a': [tf.compat.as_bytes(t) for t in ('aa', 'b', 'ccc')],
+                    'b': {
+                        'c': [2, 3, 4],
                     }
                 }),
             ),

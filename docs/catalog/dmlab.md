@@ -11,6 +11,13 @@
 
 # `dmlab`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=dmlab">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The Dmlab dataset contains frames observed by the agent acting in the DeepMind
@@ -61,25 +68,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{zhai2019visual,
-        title={The Visual Task Adaptation Benchmark},
-        author={Xiaohua Zhai and Joan Puigcerver and Alexander Kolesnikov and
-               Pierre Ruyssen and Carlos Riquelme and Mario Lucic and
-               Josip Djolonga and Andre Susano Pinto and Maxim Neumann and
-               Alexey Dosovitskiy and Lucas Beyer and Olivier Bachem and
-               Michael Tschannen and Marcin Michalski and Olivier Bousquet and
-               Sylvain Gelly and Neil Houlsby},
-                              year={2019},
-                              eprint={1910.04867},
-                              archivePrefix={arXiv},
-                              primaryClass={cs.CV},
-                              url = {https://arxiv.org/abs/1910.04867}
-                          }
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -93,7 +81,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/dmlab-2.0.1.html";
@@ -118,3 +106,23 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{zhai2019visual,
+        title={The Visual Task Adaptation Benchmark},
+        author={Xiaohua Zhai and Joan Puigcerver and Alexander Kolesnikov and
+               Pierre Ruyssen and Carlos Riquelme and Mario Lucic and
+               Josip Djolonga and Andre Susano Pinto and Maxim Neumann and
+               Alexey Dosovitskiy and Lucas Beyer and Olivier Bachem and
+               Michael Tschannen and Marcin Michalski and Olivier Bousquet and
+               Sylvain Gelly and Neil Houlsby},
+                              year={2019},
+                              eprint={1910.04867},
+                              archivePrefix={arXiv},
+                              primaryClass={cs.CV},
+                              url = {https://arxiv.org/abs/1910.04867}
+                          }
+```
+

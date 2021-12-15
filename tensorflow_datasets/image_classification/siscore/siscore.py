@@ -15,13 +15,12 @@
 
 """SI-SCORE synthetic dataset."""
 
-import os
 import dataclasses
+import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.image_classification.siscore import siscore_labels
 import tensorflow_datasets.public_api as tfds
-
 
 _CITATION = """\
 @misc{djolonga2020robustness,
@@ -63,8 +62,8 @@ class SiscoreConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SI-Score.
 
   Attributes:
-      variant: str. The synthetic dataset variant. One of 'rotation', 'size'
-        and 'location'.
+      variant: str. The synthetic dataset variant. One of 'rotation', 'size' and
+        'location'.
       name: str. The name of the factor to vary (same as variant).
       description: str. A brief description of the config (different from the
         global dataset description).
@@ -89,8 +88,10 @@ class Siscore(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         features=tfds.features.FeaturesDict({
-            "image_id": tf.int64,
-            "image": tfds.features.Image(),
+            "image_id":
+                tf.int64,
+            "image":
+                tfds.features.Image(),
             # ImageNet label space
             "label":
                 tfds.features.ClassLabel(num_classes=1000),

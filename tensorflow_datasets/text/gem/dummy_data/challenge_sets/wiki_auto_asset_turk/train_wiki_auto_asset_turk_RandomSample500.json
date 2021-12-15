@@ -1,0 +1,13 @@
+[
+    {
+        "gem_id": "wiki_auto_asset_turk-train-300394",
+        "gem_parent_id": "wiki_auto_asset_turk-train-300394",
+        "references": [
+            "Stevenson was Governor of Illinois from January 10, 1949-January 12, 1953."
+        ],
+        "source": "In 1945, Stevenson took a temporary position in the State Department, as special assistant to US Secretary of State Edward Stettinius to work with Assistant Secretary of State Archibald MacLeish on a proposed world organization.",
+        "source_id": "295_375879-1-15-0",
+        "target": "Stevenson was Governor of Illinois from January 10, 1949-January 12, 1953.",
+        "target_id": "295_375879-0-2-2"
+    }
+]

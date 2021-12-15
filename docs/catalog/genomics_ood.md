@@ -11,6 +11,7 @@
 
 # `genomics_ood`
 
+
 *   **Description**:
 
 Bacteria identification based on genomic sequences holds the promise of early
@@ -86,25 +87,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('seq', 'label')`
 
-*   **Citation**:
-
-```
-@inproceedings{ren2019likelihood,
-  title={Likelihood ratios for out-of-distribution detection},
-  author={Ren, Jie and
-  Liu, Peter J and
-  Fertig, Emily and
-  Snoek, Jasper and
-  Poplin, Ryan and
-  Depristo, Mark and
-  Dillon, Joshua and
-  Lakshminarayanan, Balaji},
-  booktitle={Advances in Neural Information Processing Systems},
-  pages={14707--14718},
-  year={2019}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -117,7 +99,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/genomics_ood-0.0.1.html";
@@ -142,3 +124,23 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{ren2019likelihood,
+  title={Likelihood ratios for out-of-distribution detection},
+  author={Ren, Jie and
+  Liu, Peter J and
+  Fertig, Emily and
+  Snoek, Jasper and
+  Poplin, Ryan and
+  Depristo, Mark and
+  Dillon, Joshua and
+  Lakshminarayanan, Balaji},
+  booktitle={Advances in Neural Information Processing Systems},
+  pages={14707--14718},
+  year={2019}
+}
+```
+

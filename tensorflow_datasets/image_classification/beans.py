@@ -58,7 +58,7 @@ class Beans(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-            "label": tfds. features.ClassLabel(names=_LABELS)
+            "label": tfds.features.ClassLabel(names=_LABELS)
         }),
         supervised_keys=("image", "label"),
         homepage="https://github.com/AI-Lab-Makerere/ibean/",
@@ -72,18 +72,15 @@ class Beans(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "archive": dl_manager.iter_archive(train_path)},
+            gen_kwargs={"archive": dl_manager.iter_archive(train_path)},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={
-                "archive": dl_manager.iter_archive(val_path)},
+            gen_kwargs={"archive": dl_manager.iter_archive(val_path)},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={
-                "archive": dl_manager.iter_archive(test_path)},
+            gen_kwargs={"archive": dl_manager.iter_archive(test_path)},
         ),
     ]
 
@@ -98,4 +95,3 @@ class Beans(tfds.core.GeneratorBasedBuilder):
           "label": label,
       }
       yield fname, record
-

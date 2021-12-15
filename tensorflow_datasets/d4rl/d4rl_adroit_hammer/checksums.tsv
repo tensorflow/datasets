@@ -1,0 +1,6 @@
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/hammer-demos-v0-bc-combined.hdf5	676007664	a645a67b7bc2a793146ddbb62977510d760b730520bf4eb7456eb14319704744	hammer-demos-v0-bc-combined.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/hammer-v0_demos_clipped.hdf5	5585672	96bbad34845982807057d931956b0007b267b75ffef6caacbaa45b1544bf68d5	hammer-v0_demos_clipped.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg/hammer-v0_expert_clipped.hdf5	555652333	1e51edf95b007a127565725bb157b562127d9ae15f10b7ee08d34a7aa1a0122b	hammer-v0_expert_clipped.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/hammer-cloned-v1.hdf5	446616879	e48d75b159bdd72f51d3f01448d3eca4d38275714e11e995c14a36f6cf159db3	hammer-cloned-v1.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/hammer-expert-v1.hdf5	557047483	1c069a0f6e4852493023c77dc3b3a12d8d5ac2e3a034827fea3ab8a161e7185f	hammer-expert-v1.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/hand_dapg_v1/hammer-human-v1.hdf5	5606475	3e42f3f49b5c92a901601dfe867c6c62a9651cbe79f6760ec8b402a15816a498	hammer-human-v1.hdf5

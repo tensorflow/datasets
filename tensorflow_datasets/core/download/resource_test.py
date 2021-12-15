@@ -38,12 +38,12 @@ class GuessExtractMethodTest(testing.TestCase):
         ('bar.bz2', BZIP2),
     ]:
       res = resource._guess_extract_method(fname)
-      self.assertEqual(res, expected_result, '(%s)->%s instead of %s' % (
-          fname, res, expected_result))
+      self.assertEqual(res, expected_result,
+                       '(%s)->%s instead of %s' % (fname, res, expected_result))
 
 
 class DlDirNameTest(testing.TestCase):
-  urls = '''\
+  urls = """\
 http://data.statmt.org/wmt17/translation-task/dev.tgz
 http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz
 http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/train-images-idx3-ubyte.gz
@@ -58,8 +58,8 @@ https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json
 https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/valid-00000-of-00001.tfrecords
 https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00005-of-00010.tfrecords
 https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz\
-'''.split('\n')
-  expected = '''\
+""".split('\n')
+  expected = """\
 data.statmt.org_wmt17_translation-task_devDjZ11PU9sKPPvF2sZTAzTsV7Pi3IYHaPDMOoeEuby2E.tgz
 data.stat.org_wmt1_tran-task_trai-para-nc-6LWgxBgzCHdv_LtotNmnXjpCH6OhzkF8D3v10aRrznA.tgz
 fashion-mnist_train-images-idx3-ubytepR2BibiiUp2twRbpoktblvl2KbaPDel0VUV9KrXm91Y.gz
@@ -74,7 +74,7 @@ rajpurkar_SQuAD-explorer_train-v1.1uLsZc14btZFRCgHMAy9Mn5abwO6wga4bMozTBvOyQAg.j
 scv_Brawl_64x64_png_valid-0_1Ez3yPwN0QDCxBd0xHeLb2DfUERJjkqFd2dyL5Z7-ULg.tfrecords
 scv_CollectMi_128x128_png_train-5_10kiunW_2RTDhXuPrxCVkUZKCoWpADYBUWE8DpraC8zAA.tfrecords
 cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.tar.gz\
-'''.split('\n')
+""".split('\n')
 
   def test_(self):
     for url, expected in zip(self.urls, self.expected):

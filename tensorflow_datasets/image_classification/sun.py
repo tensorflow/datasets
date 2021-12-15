@@ -20,10 +20,9 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
-
 
 _SUN397_CITATION = """\
 @INPROCEEDINGS{Xiao:2010,
@@ -99,8 +98,7 @@ def _decode_image(fobj, session, filename):
       image = session.run(image)
     except tf.errors.InvalidArgumentError as e:
       raise ValueError(
-          f"{e}. Image {filename} could not be decoded by Tensorflow."
-      )
+          f"{e}. Image {filename} could not be decoded by Tensorflow.")
 
   # The GIF images contain a single frame.
   if len(image.shape) == 4:  # rank=4 -> rank=3
@@ -113,11 +111,14 @@ def _encode_jpeg(image, quality=None):
   cv2 = tfds.core.lazy_imports.cv2
   extra_args = [[int(cv2.IMWRITE_JPEG_QUALITY), quality]] if quality else []
   _, buff = cv2.imencode(".jpg", image, *extra_args)
-  return io.BytesIO(buff.tostring())
+  return io.BytesIO(buff.tobytes())
 
 
-def _process_image_file(
-    fobj, session, filename, quality=None, target_pixels=None):
+def _process_image_file(fobj,
+                        session,
+                        filename,
+                        quality=None,
+                        target_pixels=None):
   """Process image files from the dataset."""
   # We need to read the image files and convert them to JPEG, since some files
   # actually contain GIF, PNG or BMP data (despite having a .jpg extension) and
@@ -136,8 +137,11 @@ def _process_image_file(
 class Sun397Config(tfds.core.BuilderConfig):
   """BuilderConfig for Sun 397 dataset."""
 
-  def __init__(
-      self, target_pixels=None, partition=None, quality=None, **kwargs):
+  def __init__(self,
+               target_pixels=None,
+               partition=None,
+               quality=None,
+               **kwargs):
     self._target_pixels = target_pixels
     self._partition = partition
     self._quality = quality
@@ -221,10 +225,12 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     paths = dl_manager.download_and_extract({
-        "images": tfds.download.Resource(
-            url=_SUN397_URL + "SUN397.tar.gz",
-            extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
-        "partitions": _SUN397_URL + "download/Partitions.zip",
+        "images":
+            tfds.download.Resource(
+                url=_SUN397_URL + "SUN397.tar.gz",
+                extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
+        "partitions":
+            _SUN397_URL + "download/Partitions.zip",
     })
     if not isinstance(paths, dict):
       # While testing download_and_extract() returns the dir containing the
@@ -283,7 +289,9 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
             # To class: /c/car_interior/backseat
             label = "/".join(filename.split("/")[:-1])
             image = _process_image_file(
-                fobj, sess, filename,
+                fobj,
+                sess,
+                filename,
                 quality=self.builder_config.quality,
                 target_pixels=self.builder_config.target_pixels)
             record = {

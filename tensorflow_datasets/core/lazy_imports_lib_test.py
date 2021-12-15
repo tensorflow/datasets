@@ -38,6 +38,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "os",
       "pandas",
       "pretty_midi",
+      "pycocotools",
       "pydub",
       "scipy",
       "skimage",
@@ -48,8 +49,8 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     getattr(tfds.core.lazy_imports, module_name)
 
   def test_bad_import(self):
-    with self.assertRaisesWithPredicateMatch(
-        ModuleNotFoundError, "extras_require"):
+    with self.assertRaisesWithPredicateMatch(ModuleNotFoundError,
+                                             "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
 
 

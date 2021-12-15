@@ -16,7 +16,7 @@
 """Wine quality dataset."""
 
 import csv
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -90,7 +90,6 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
           description="White Wine",
           dl_url=_DOWNLOAD_URL_WHITE_WINES,
       ),
-
       WineQualityConfig(
           name="red",
           description="Red Wine",

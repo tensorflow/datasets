@@ -31,7 +31,6 @@ import numpy as np
 from tensorflow_datasets.core.utils import py_utils
 import tensorflow_datasets.public_api as tfds
 
-
 flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
                     "Path to tensorflow_datasets directory")
 FLAGS = flags.FLAGS
@@ -41,8 +40,8 @@ MAX_HEIGHT_WIDTH = 15
 
 
 def _output_dir():
-  return os.path.join(
-      FLAGS.tfds_dir, "testing", "test_data", "fake_examples", "sun397")
+  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
+                      "sun397")
 
 
 def _get_random_picture(height=None, width=None, channels=None):
@@ -58,8 +57,8 @@ def _encode_image(image, image_format=None, fobj=None):
 
   Args:
     image: A numpy array with shape (height, width, channels).
-    image_format: Encode and write the image in this format.
-      If None, JPEG is used.
+    image_format: Encode and write the image in this format. If None, JPEG is
+      used.
     fobj: File object to write the encoded image. Random access (seek) is
       required. If None, it creates a BytesIO file.
 
@@ -87,8 +86,7 @@ def _encode_image(image, image_format=None, fobj=None):
 def _generate_data():
   """Generate random data for testing the Sun397 dataset builder."""
 
-  names_file = tfds.core.tfds_path(
-      os.path.join("image", "sun397_labels.txt"))
+  names_file = tfds.core.tfds_path(os.path.join("image", "sun397_labels.txt"))
   label_names = tfds.features.ClassLabel(names_file=names_file).names
 
   def _generate_image_to_tar(image_format, channels, tar):
@@ -98,8 +96,8 @@ def _generate_data():
     # Regardless of the actual format, always write with .jpg extension.
     fobj = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
     _encode_image(image, image_format, fobj=fobj)
-    filename = "SUN397/%s/sun_%s.jpg" % (label,
-                                         md5.new(fobj.read()).hexdigest())
+    filename = "SUN397/%s/sun_%s.jpg" % (label, md5.new(
+        fobj.read()).hexdigest())
     fobj.seek(0)
     fobj.close()
     tar.add(fobj.name, arcname=filename)

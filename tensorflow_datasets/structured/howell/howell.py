@@ -17,7 +17,7 @@
 
 import csv
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 URL = "https://raw.githubusercontent.com/rmcelreath/rethinking/master/data/Howell1.csv"
@@ -87,7 +87,7 @@ class Howell(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, file_path):
     """Yields examples."""
-    with file_path.open() as f:
+    with file_path.open() as f:  # pytype: disable=attribute-error  # gen-stub-imports
       reader = csv.DictReader(f, delimiter=";")
       for index, row in enumerate(reader):
         example = dict(row.items())

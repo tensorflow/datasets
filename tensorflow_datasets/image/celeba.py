@@ -23,7 +23,7 @@ Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -51,7 +51,6 @@ ATTR_HEADINGS = (
     "Rosy_Cheeks Sideburns Smiling Straight_Hair Wavy_Hair Wearing_Earrings "
     "Wearing_Hat Wearing_Lipstick Wearing_Necklace Wearing_Necktie Young"
 ).split()
-
 
 _CITATION = """\
 @inproceedings{conf/iccv/LiuLWT15,
@@ -116,9 +115,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
                     shape=(218, 178, 3), encoding_format="jpeg"),
             "landmarks": {name: tf.int64 for name in LANDMARK_HEADINGS},
             # Attributes could be some special MultiLabel FeatureConnector
-            "attributes": {
-                name: tf.bool for name in ATTR_HEADINGS
-            },
+            "attributes": {name: tf.bool for name in ATTR_HEADINGS},
         }),
         homepage="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
         citation=_CITATION,
@@ -135,8 +132,8 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     # Load all images in memory (~1 GiB)
     # Use split to convert: `img_align_celeba/000005.jpg` -> `000005.jpg`
     all_images = {
-        os.path.split(k)[-1]: img for k, img in
-        dl_manager.iter_archive(downloaded_dirs["img_align_celeba"])
+        os.path.split(k)[-1]: img for k, img in dl_manager.iter_archive(
+            downloaded_dirs["img_align_celeba"])
     }
 
     return [

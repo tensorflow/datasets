@@ -22,10 +22,7 @@ from typing import List, Union
 import six
 import tensorflow as tf
 
-_VERSION_TMPL = (
-    r"^(?P<major>{v})"
-    r"\.(?P<minor>{v})"
-    r"\.(?P<patch>{v})$")
+_VERSION_TMPL = (r"^(?P<major>{v})" r"\.(?P<minor>{v})" r"\.(?P<patch>{v})$")
 _VERSION_WILDCARD_REG = re.compile(_VERSION_TMPL.format(v=r"\d+|\*"))
 _VERSION_RESOLVED_REG = re.compile(_VERSION_TMPL.format(v=r"\d+"))
 
@@ -77,8 +74,7 @@ class Version(object):
       version_str = str(version)
       experiments = experiments or version._experiments
       tfds_version_to_prepare = (
-          tfds_version_to_prepare or version.tfds_version_to_prepare
-      )
+          tfds_version_to_prepare or version.tfds_version_to_prepare)
     else:
       version_str = version
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
@@ -87,8 +83,7 @@ class Version(object):
       if isinstance(experiments, str):
         raise ValueError(
             f"Invalid Version('{version}', '{experiments}'). Description is "
-            "deprecated. RELEASE_NOTES should be used instead."
-        )
+            "deprecated. RELEASE_NOTES should be used instead.")
       self._experiments.update(experiments)
     self.major, self.minor, self.patch = _str_to_version(version_str)
 
@@ -149,8 +144,8 @@ class Version(object):
         number or a wildcard.
     """
     major, minor, patch = _str_to_version(other_version, allow_wildcard=True)
-    return (major in [self.major, "*"] and minor in [self.minor, "*"]
-            and patch in [self.patch, "*"])
+    return (major in [self.major, "*"] and minor in [self.minor, "*"] and
+            patch in [self.patch, "*"])
 
   @classmethod
   def is_valid(cls, version: str) -> bool:
@@ -173,8 +168,10 @@ def _str_to_version(version_str, allow_wildcard=False):
       msg += " with {x,y,z} being digits."
     raise ValueError(msg)
   return tuple(
-      v if v == "*" else int(v)
-      for v in [res.group("major"), res.group("minor"), res.group("patch")])
+      v if v == "*" else int(v)  # pylint:disable=g-complex-comprehension
+      for v in [res.group("major"),
+                res.group("minor"),
+                res.group("patch")])
 
 
 def list_all_versions(root_dir: str) -> List[Version]:
