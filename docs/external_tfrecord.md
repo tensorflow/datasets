@@ -35,7 +35,7 @@ For example, MNIST has the
 ### Provide the feature structure
 
 For TFDS to be able to decode the `tf.train.Example` proto, you need to provide
-the `tfds.features` sturcture matching your specs. For example:
+the `tfds.features` structure matching your specs. For example:
 
 ```python
 features = tfds.features.FeaturesDict({
