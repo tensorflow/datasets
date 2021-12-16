@@ -59,7 +59,7 @@ class DatasetPackage:
   def from_json(cls, data: utils.Json) -> 'DatasetPackage':
     """Factory which creates the cls from json."""
     return cls(
-        name=utils.DatasetName(data['name']),
+        name=utils.DatasetName(namespace_name=data['name']),
         source=dataset_sources_lib.DatasetSource.from_json(data['source']),
     )
 

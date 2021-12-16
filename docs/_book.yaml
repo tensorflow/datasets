@@ -15,6 +15,10 @@ upper_tabs:
       skip_translation: true
       contents:
       - include: /datasets/catalog/_toc.yaml
+    - name: Community Catalog
+      skip_translation: true
+      contents:
+      - include: /datasets/community_catalog/_toc.yaml
     - name: Guide
       contents:
       - heading: "Get started"

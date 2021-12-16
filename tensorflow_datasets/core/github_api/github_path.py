@@ -262,6 +262,10 @@ class GithubPath(pathlib.PurePosixPath):
     return ('https://raw.githubusercontent.com/'
             f'{self.repo}/{self.branch}/{self.subpath}')
 
+  def as_human_friendly_url(self) -> str:
+    """Returns the human friendly url."""
+    return f'https://github.com/{self.repo}/blob/{self.branch}/{self.subpath}'
+
   def iterdir(self) -> Iterator['GithubPath']:
     """Yields the sub-paths."""
     if not self.is_dir():
