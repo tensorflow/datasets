@@ -374,6 +374,9 @@ toc:
     title: cherry_blossoms
   - path: /datasets/catalog/covid19
     title: covid19
+  - path: /datasets/catalog/cs_restaurants
+    status: nightly
+    title: cs_restaurants
   - path: /datasets/catalog/dart
     title: dart
   - path: /datasets/catalog/e2e_cleaned
