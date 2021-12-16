@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import collections
 import os
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -148,8 +148,10 @@ class CremaD(tfds.core.GeneratorBasedBuilder):
     speaker_ids = []
     wav_names = []
     # These are file names which do do not exist in the github
-    bad_files = set(['FileName', '1040_ITH_SAD_XX', '1006_TIE_NEU_XX',
-                     '1013_WSI_DIS_XX', '1017_IWW_FEA_XX'])
+    bad_files = set([
+        'FileName', '1040_ITH_SAD_XX', '1006_TIE_NEU_XX', '1013_WSI_DIS_XX',
+        '1017_IWW_FEA_XX'
+    ])
     with tf.io.gfile.GFile(csv_path['summary_table']) as f:
       for line in f:
         wav_name = line.strip().split(',')[1].replace('"', '')

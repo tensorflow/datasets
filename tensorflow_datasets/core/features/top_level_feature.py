@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Wrapper around FeatureDict to allow better control over decoding.
-"""
+"""Wrapper around FeatureDict to allow better control over decoding."""
 
+from typing import Union
+
+import tensorflow as tf
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 
 
@@ -29,7 +32,7 @@ class TopLevelFeature(feature_lib.FeatureConnector):
   eventually better support for augmentations.
   """
 
-  def decode_example(self, serialized_example, decoders=None):
+  def decode_example(self, serialized_example, *, decoders=None):
     # pylint: disable=line-too-long
     """Decode the serialize examples.
 
@@ -37,9 +40,9 @@ class TopLevelFeature(feature_lib.FeatureConnector):
       serialized_example: Nested `dict` of `tf.Tensor`
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
-        customized feature keys need to be present. See
-        [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
-        for more info.
+        customized feature keys need to be present. See [the
+          guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+            for more info.
 
     Returns:
       example: Nested `dict` containing the decoded nested examples.
@@ -62,38 +65,88 @@ class TopLevelFeature(feature_lib.FeatureConnector):
             example,
             serialized_info,
             decoder,
-        ) in zip(
-            flat_features,
-            flat_example,
-            flat_serialized_info,
-            flat_decoders
-        )
+        ) in zip(flat_features, flat_example, flat_serialized_info,
+                 flat_decoders)
     ]
 
     # Step 3: Restore nesting [] => {}
     nested_decoded = self._nest(flatten_decoded)
     return nested_decoded
 
+  def serialize_example(self, example_data) -> bytes:
+    """Encodes nested data values into `tf.train.Example` bytes.
+
+    See `deserialize_example` to decode the proto into `tf.Tensor`.
+
+    Args:
+      example_data: Example data to encode (numpy-like nested dict)
+
+    Returns:
+      The serialized `tf.train.Example`.
+    """
+    example_data = self.encode_example(example_data)
+    return self._example_serializer.serialize_example(example_data)
+
+  def deserialize_example(
+      self,
+      serialized_example: Union[tf.Tensor, bytes],
+      *,
+      decoders=None,
+  ) -> utils.TensorDict:
+    """Decodes the `tf.train.Example` data into `tf.Tensor`.
+
+    See `serialize_example` to encode the data into proto.
+
+    Args:
+      serialized_example: The tensor-like object containing the serialized
+        `tf.train.Example` proto.
+      decoders: Eventual decoders to apply (see
+        [documentation](https://www.tensorflow.org/datasets/decode))
+
+    Returns:
+      The decoded features tensors.
+    """
+    example_data = self._example_parser.parse_example(serialized_example)
+    return self.decode_example(example_data, decoders=decoders)
+
+  @utils.memoized_property
+  def _example_parser(self):
+    from tensorflow_datasets.core import example_parser  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+    example_specs = self.get_serialized_info()
+    return example_parser.ExampleParser(example_specs)
+
+  @utils.memoized_property
+  def _example_serializer(self):
+    from tensorflow_datasets.core import example_serializer  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+    example_specs = self.get_serialized_info()
+    return example_serializer.ExampleSerializer(example_specs)
+
 
 def _decode_feature(feature, example, serialized_info, decoder):
   """Decode a single feature."""
-  # TODO(tfds): Support decoders for tfds.features.Dataset
-
-  # Eventually overwrite the default decoding
   if decoder is not None:
-    decoder.setup(feature=feature)
+    # If the decoder is still a dict, it means that the feature is a Dataset
+    # (it wasn't flattened).
+    if isinstance(decoder, dict):
+      decode_kwargs = dict(decoders=decoder)
+      decoder = feature
+    else:
+      # Eventually overwrite the default decoding
+      decode_kwargs = {}
+      decoder.setup(feature=feature)
   else:
+    decode_kwargs = {}
     decoder = feature
 
   sequence_rank = _get_sequence_rank(serialized_info)
   if sequence_rank == 0:
-    return decoder.decode_example(example)
+    return decoder.decode_example(example, **decode_kwargs)
   elif sequence_rank == 1:
     # Return a batch of examples from a sequence
-    return decoder.decode_batch_example(example)
+    return decoder.decode_batch_example(example, **decode_kwargs)
   elif sequence_rank > 1:
     # Use ragged tensor if the sequance rank is greater than one
-    return decoder.decode_ragged_example(example)
+    return decoder.decode_ragged_example(example, **decode_kwargs)
 
 
 def _get_sequence_rank(serialized_info):
@@ -116,6 +169,5 @@ def _get_sequence_rank(serialized_info):
     raise NotImplementedError(
         'Decoding do not support mixing sequence and context features within a '
         'single FeatureConnector. Received inputs of different sequence_rank: '
-        '{}'.format(sequence_ranks)
-    )
+        '{}'.format(sequence_ranks))
   return next(iter(sequence_ranks))

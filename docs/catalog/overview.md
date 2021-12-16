@@ -47,6 +47,25 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`voxforge`](voxforge.md)
 *   [`yes_no`](yes_no.md)
 
+### `D4rl`
+
+*   [`d4rl_adroit_door`](d4rl_adroit_door.md)
+*   [`d4rl_adroit_hammer`](d4rl_adroit_hammer.md)
+*   [`d4rl_adroit_pen`](d4rl_adroit_pen.md)
+*   [`d4rl_adroit_relocate`](d4rl_adroit_relocate.md)
+*   [`d4rl_antmaze`](d4rl_antmaze.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`d4rl_mujoco_ant`](d4rl_mujoco_ant.md)
+*   [`d4rl_mujoco_halfcheetah`](d4rl_mujoco_halfcheetah.md)
+*   [`d4rl_mujoco_hopper`](d4rl_mujoco_hopper.md)
+*   [`d4rl_mujoco_walker2d`](d4rl_mujoco_walker2d.md)
+
+### `Graphs`
+
+*   [`cardiotox`](cardiotox.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`ogbg_molpcba`](ogbg_molpcba.md)
+
 ### `Image`
 
 *   [`abstract_reasoning`](abstract_reasoning.md)
@@ -68,15 +87,19 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`lost_and_found`](lost_and_found.md)
 *   [`lsun`](lsun.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
-*   [`s3o4d`](s3o4d.md)
+*   [`pass`](pass.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`s3o4d`](s3o4d.md)
 *   [`scene_parse150`](scene_parse150.md)
 *   [`shapes3d`](shapes3d.md)
+*   [`symmetric_solids`](symmetric_solids.md)
 *   [`the300w_lp`](the300w_lp.md)
 
 ### `Image classification`
 
 *   [`beans`](beans.md)
+*   [`bee_dataset`](bee_dataset.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`bigearthnet`](bigearthnet.md)
 *   [`binary_alpha_digits`](binary_alpha_digits.md)
 *   [`caltech101`](caltech101.md)
@@ -85,6 +108,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cars196`](cars196.md)
 *   [`cassava`](cassava.md)
 *   [`cats_vs_dogs`](cats_vs_dogs.md)
+*   [`chexpert`](chexpert.md)
 *   [`cifar10`](cifar10.md)
 *   [`cifar100`](cifar100.md)
 *   [`cifar10_1`](cifar10_1.md)
@@ -98,6 +122,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`deep_weeds`](deep_weeds.md)
 *   [`diabetic_retinopathy_detection`](diabetic_retinopathy_detection.md)
 *   [`dmlab`](dmlab.md)
+*   [`domainnet`](domainnet.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dtd`](dtd.md)
 *   [`emnist`](emnist.md)
 *   [`eurosat`](eurosat.md)
@@ -106,13 +132,20 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`geirhos_conflict_stimuli`](geirhos_conflict_stimuli.md)
 *   [`horses_or_humans`](horses_or_humans.md)
 *   [`i_naturalist2017`](i_naturalist2017.md)
+*   [`i_naturalist2018`](i_naturalist2018.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
+*   [`imagenet2012_multilabel`](imagenet2012_multilabel.md)
 *   [`imagenet2012_real`](imagenet2012_real.md)
 *   [`imagenet2012_subset`](imagenet2012_subset.md)
 *   [`imagenet_a`](imagenet_a.md)
+*   [`imagenet_lt`](imagenet_lt.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet_r`](imagenet_r.md)
 *   [`imagenet_resized`](imagenet_resized.md)
+*   [`imagenet_sketch`](imagenet_sketch.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet_v2`](imagenet_v2.md)
 *   [`imagenette`](imagenette.md)
 *   [`imagewang`](imagewang.md)
@@ -143,7 +176,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`svhn_cropped`](svhn_cropped.md)
 *   [`tf_flowers`](tf_flowers.md)
 *   [`uc_merced`](uc_merced.md)
-*   [`vgg_face2`](vgg_face2.md)
 *   [`visual_domain_decathlon`](visual_domain_decathlon.md)
 
 ### `Object detection`
@@ -152,7 +184,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`coco_captions`](coco_captions.md)
 *   [`kitti`](kitti.md)
 *   [`lvis`](lvis.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`open_images_challenge2019_detection`](open_images_challenge2019_detection.md)
 *   [`open_images_v4`](open_images_v4.md)
 *   [`voc`](voc.md)
@@ -176,33 +207,60 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`web_questions`](web_questions.md)
 *   [`xquad`](xquad.md)
 
+### `Ranking`
+
+*   [`istella`](istella.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`mslr_web`](mslr_web.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Rl unplugged`
+
+*   [`rlu_atari`](rlu_atari.md)
+*   [`rlu_atari_checkpoints`](rlu_atari_checkpoints.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_atari_checkpoints_ordered`](rlu_atari_checkpoints_ordered.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`rlu_dmlab_explore_object_rewards_few`](rlu_dmlab_explore_object_rewards_few.md)
+*   [`rlu_dmlab_explore_object_rewards_many`](rlu_dmlab_explore_object_rewards_many.md)
+*   [`rlu_dmlab_rooms_select_nonmatching_object`](rlu_dmlab_rooms_select_nonmatching_object.md)
+*   [`rlu_dmlab_rooms_watermaze`](rlu_dmlab_rooms_watermaze.md)
+*   [`rlu_dmlab_seekavoid_arena01`](rlu_dmlab_seekavoid_arena01.md)
+*   [`rlu_rwrl`](rlu_rwrl.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+### `Rlds`
+
+*   [`robosuite_panda_pick_place_can`](robosuite_panda_pick_place_can.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Structured`
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)
 *   [`cherry_blossoms`](cherry_blossoms.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`covid19`](covid19.md)
 *   [`dart`](dart.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
+*   [`efron_morris75`](efron_morris75.md)
 *   [`forest_fires`](forest_fires.md)
 *   [`genomics_ood`](genomics_ood.md)
 *   [`german_credit_numeric`](german_credit_numeric.md)
 *   [`higgs`](higgs.md)
 *   [`howell`](howell.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`iris`](iris.md)
+*   [`kddcup99`](kddcup99.md)
 *   [`movie_lens`](movie_lens.md)
 *   [`movielens`](movielens.md)
+*   [`penguins`](penguins.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`protein_net`](protein_net.md)
 *   [`radon`](radon.md)
 *   [`rock_you`](rock_you.md)
 *   [`titanic`](titanic.md)
 *   [`web_nlg`](web_nlg.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki_bio`](wiki_bio.md)
 *   [`wiki_table_questions`](wiki_table_questions.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki_table_text`](wiki_table_text.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wine_quality`](wine_quality.md)
 
 ### `Summarization`
@@ -210,9 +268,13 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`aeslc`](aeslc.md)
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
+*   [`booksum`](booksum.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cnn_dailymail`](cnn_dailymail.md)
 *   [`covid19sum`](covid19sum.md)
 *   [`gigaword`](gigaword.md)
+*   [`gov_report`](gov_report.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`multi_news`](multi_news.md)
 *   [`newsroom`](newsroom.md)
 *   [`opinion_abstracts`](opinion_abstracts.md)
@@ -221,6 +283,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`reddit_tifu`](reddit_tifu.md)
 *   [`samsum`](samsum.md)
 *   [`scientific_papers`](scientific_papers.md)
+*   [`summscreen`](summscreen.md)
 *   [`wikihow`](wikihow.md)
 *   [`xsum`](xsum.md)
 
@@ -236,14 +299,18 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`clinc_oos`](clinc_oos.md)
 *   [`cos_e`](cos_e.md)
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
+*   [`doc_nli`](doc_nli.md)
+*   [`dolphin_number_word`](dolphin_number_word.md)
 *   [`drop`](drop.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`eraser_multi_rc`](eraser_multi_rc.md)
 *   [`esnli`](esnli.md)
 *   [`gap`](gap.md)
+*   [`gem`](gem.md)
 *   [`glue`](glue.md)
 *   [`goemotions`](goemotions.md)
 *   [`gpt3`](gpt3.md)
+*   [`gsm8k`](gsm8k.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`hellaswag`](hellaswag.md)
 *   [`imdb_reviews`](imdb_reviews.md)
 *   [`irc_disentanglement`](irc_disentanglement.md)
@@ -251,6 +318,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`librispeech_lm`](librispeech_lm.md)
 *   [`lm1b`](lm1b.md)
 *   [`math_dataset`](math_dataset.md)
+*   [`math_qa`](math_qa.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`movie_rationales`](movie_rationales.md)
 *   [`multi_nli`](multi_nli.md)
 *   [`multi_nli_mismatch`](multi_nli_mismatch.md)
@@ -261,31 +330,37 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`piqa`](piqa.md)
 *   [`qa4mre`](qa4mre.md)
 *   [`quac`](quac.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`race`](race.md)
 *   [`reddit_disentanglement`](reddit_disentanglement.md)
 *   [`salient_span_wikipedia`](salient_span_wikipedia.md)
 *   [`scan`](scan.md)
+*   [`schema_guided_dialogue`](schema_guided_dialogue.md)
 *   [`scicite`](scicite.md)
 *   [`sentiment140`](sentiment140.md)
 *   [`snli`](snli.md)
+*   [`squad_question_generation`](squad_question_generation.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`star_cfq`](star_cfq.md)
 *   [`story_cloze`](story_cloze.md)
 *   [`super_glue`](super_glue.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)
 *   [`wiki40b`](wiki40b.md)
+*   [`wikiann`](wikiann.md)
 *   [`wikipedia`](wikipedia.md)
 *   [`wikipedia_toxicity_subtypes`](wikipedia_toxicity_subtypes.md)
 *   [`winogrande`](winogrande.md)
 *   [`wordnet`](wordnet.md)
 *   [`wsc273`](wsc273.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`xnli`](xnli.md)
 *   [`xtreme_pawsx`](xtreme_pawsx.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`xtreme_xnli`](xtreme_xnli.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`yelp_polarity_reviews`](yelp_polarity_reviews.md)
+
+### `Time series`
+
+*   [`smartwatch_gestures`](smartwatch_gestures.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Translate`
 
@@ -294,6 +369,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`para_crawl`](para_crawl.md)
 *   [`ted_hrlr_translate`](ted_hrlr_translate.md)
 *   [`ted_multi_translate`](ted_multi_translate.md)
+*   [`wmt13_translate`](wmt13_translate.md)
 *   [`wmt14_translate`](wmt14_translate.md)
 *   [`wmt15_translate`](wmt15_translate.md)
 *   [`wmt16_translate`](wmt16_translate.md)
@@ -309,6 +385,17 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`moving_mnist`](moving_mnist.md)
 *   [`robonet`](robonet.md)
 *   [`starcraft_video`](starcraft_video.md)
+*   [`tao`](tao.md)
 *   [`ucf101`](ucf101.md)
+*   [`youtube_vis`](youtube_vis.md)
+
+### `Vision language`
+
+*   [`gref`](gref.md)
+*   [`ref_coco`](ref_coco.md)
+*   [`wit`](wit.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`wit_kaggle`](wit_kaggle.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 --------------------------------------------------------------------------------

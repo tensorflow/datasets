@@ -11,6 +11,7 @@
 
 # `crema_d`
 
+
 *   **Description**:
 
 CREMA-D is an audio-visual data set for emotion recognition. The data set
@@ -61,21 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
 
-*   **Citation**:
-
-```
-@article{cao2014crema,
-  title={{CREMA-D}: Crowd-sourced emotional multimodal actors dataset},
-  author={Cao, Houwei and Cooper, David G and Keutmann, Michael K and Gur, Ruben C and Nenkova, Ani and Verma, Ragini},
-  journal={IEEE transactions on affective computing},
-  volume={5},
-  number={4},
-  pages={377--390},
-  year={2014},
-  publisher={IEEE}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -88,7 +74,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/crema_d-1.0.0.html";
@@ -113,3 +99,19 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{cao2014crema,
+  title={{CREMA-D}: Crowd-sourced emotional multimodal actors dataset},
+  author={Cao, Houwei and Cooper, David G and Keutmann, Michael K and Gur, Ruben C and Nenkova, Ani and Verma, Ragini},
+  journal={IEEE transactions on affective computing},
+  volume={5},
+  number={4},
+  pages={377--390},
+  year={2014},
+  publisher={IEEE}
+}
+```
+

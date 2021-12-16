@@ -37,15 +37,4 @@ python -c "import tensorflow_datasets as tfds; tfds.load('mnist', split='train')
 # Then install the test dependencies
 pip install -e .[tests-all]
 
-if [[ "$TF_VERSION" == "tf-nightly" ]]
-then
-  # `tensorflow` is automatically installed with `tensorflow-data-validation`
-  # so uninstall `tensorflow` to avoid conflicts with `tf-nightly`
-  pip uninstall -y tensorflow
-  # Use --no-deps, otherwise protobuf and other package are reverted to
-  # previous version
-  pip install tf-nightly --upgrade --force-reinstall --no-deps
-  python -c "import tensorflow as tf ; assert 'dev' in tf.__version__"
-fi
-
 pip freeze

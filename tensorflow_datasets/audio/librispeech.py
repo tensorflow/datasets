@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -100,8 +100,10 @@ class Librispeech(tfds.core.BeamBasedBuilder):
   def _split_generators(self, dl_manager):
     extracted_dirs = dl_manager.download_and_extract(_DL_URLS)
     self._populate_metadata(extracted_dirs)
-    splits = [tfds.core.SplitGenerator(name=k, gen_kwargs={"directory": v})
-              for k, v in extracted_dirs.items()]
+    splits = [
+        tfds.core.SplitGenerator(name=k, gen_kwargs={"directory": v})
+        for k, v in extracted_dirs.items()
+    ]
     return splits
 
   def _build_pcollection(self, pipeline, directory):

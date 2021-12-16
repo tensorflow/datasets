@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,10 +28,9 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string("output_dir", "/tmp/datasets_api",
                     "Where to output the docs")
-flags.DEFINE_string(
-    "code_url_prefix",
-    "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/",
-    "The url prefix for links to code.")
+flags.DEFINE_string("code_url_prefix",
+                    "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/",
+                    "The url prefix for links to code.")
 
 flags.DEFINE_bool("search_hints", True,
                   "Include metadata search hints in the generated files")

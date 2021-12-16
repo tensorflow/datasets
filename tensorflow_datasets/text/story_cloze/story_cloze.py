@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """Story Cloze Test is a new commonsense reasoning framework
@@ -117,8 +117,9 @@ class StoryCloze(tfds.core.GeneratorBasedBuilder):
             row['InputSentence1'], row['InputSentence2'], row['InputSentence3'],
             row['InputSentence4']
         ])
-        endings = [row['RandomFifthSentenceQuiz1'],
-                   row['RandomFifthSentenceQuiz2']]
+        endings = [
+            row['RandomFifthSentenceQuiz1'], row['RandomFifthSentenceQuiz2']
+        ]
 
         yield row['InputStoryid'], {
             'context': context,

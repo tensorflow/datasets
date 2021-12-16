@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ each language expresses -- such that we expect models performing well on this \
 set to generalize across a large number of the languages in the world. It \
 contains language phenomena that would not be found in English-only corpora. \
 To provide a realistic information-seeking task and avoid priming effects, \
-questions are written by people who want to know the answer, but don’t know \
+questions are written by people who want to know the answer, but don't know \
 the answer yet, (unlike SQuAD and its descendents) and the data is collected \
 directly in each language without the use of translation (unlike MLQA and \
 XQuAD).
@@ -61,7 +61,6 @@ must rely on labeled English data plus existing machine translation systems.
 
 Typically, you should use EITHER the train or translate-train split, but not both.
 """
-
 
 LANGUAGES = {
     "ar": "arabic",
@@ -89,10 +88,17 @@ class TydiQA(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       TydiQAConfig(
           name="goldp",
-          description="Gold passage (GoldP) task (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline).",
-          version=tfds.core.Version("2.0.0"),
+          description="Gold passage (GoldP) task (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline)."
       ),
   ]
+
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0":
+          "Fixes issue with a number of examples where answer spans are "
+          "misaligned due to context white-space removal. This change impacts "
+          "roughly 25% of train and dev examples."
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(

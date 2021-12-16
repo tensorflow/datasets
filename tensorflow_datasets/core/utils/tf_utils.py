@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,14 +17,16 @@
 
 import collections
 import contextlib
+from typing import Union
 
 import numpy as np
-import tensorflow.compat.v2 as tf
-
+import tensorflow as tf
+from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import type_utils
 
 # Struct containing a graph for the TFGraphRunner
-GraphRun = collections.namedtuple(
-    'GraphRun', 'graph, session, placeholder, output')
+GraphRun = collections.namedtuple('GraphRun',
+                                  'graph, session, placeholder, output')
 
 # Struct containing the run args, kwargs
 RunArgs = collections.namedtuple('RunArgs', 'fct, input')
@@ -64,6 +66,12 @@ class TFGraphRunner(object):
     # Cache containing all compiled graph and opened session. Only used in
     # non-eager mode.
     self._graph_run_cache = {}
+
+  def __getstate__(self):
+    return {}
+
+  def __setstate__(self, state):
+    self.__init__(**state)
 
   def run(self, fct, input_):
     """Execute the given TensorFlow function."""
@@ -144,6 +152,59 @@ def assert_shape_match(shape1, shape2):
                      (shape1.ndims, shape2.ndims))
   shape1.assert_same_rank(shape2)
   shape1.assert_is_compatible_with(shape2)
+
+
+def shapes_are_compatible(
+    shapes0: type_utils.TreeDict[type_utils.Shape],
+    shapes1: type_utils.TreeDict[type_utils.Shape],
+) -> bool:
+  """Returns True if all shapes are compatible."""
+  # Use `py_utils.map_nested` instead of `tf.nest.map_structure` as shapes are
+  # tuple/list.
+  shapes0 = py_utils.map_nested(tf.TensorShape, shapes0, dict_only=True)
+  shapes1 = py_utils.map_nested(tf.TensorShape, shapes1, dict_only=True)
+  all_values = tf.nest.map_structure(
+      lambda s0, s1: s0.is_compatible_with(s1),
+      shapes0,
+      shapes1,
+  )
+  return all(tf.nest.flatten(all_values))
+
+
+def normalize_shape(
+    shape: Union[type_utils.Shape, tf.TensorShape]) -> type_utils.Shape:
+  """Normalize `tf.TensorShape` to tuple of int/None."""
+  if isinstance(shape, tf.TensorShape):
+    return tuple(shape.as_list())  # pytype: disable=attribute-error
+  else:
+    assert isinstance(shape, tuple)
+    return shape
+
+
+def merge_shape(tf_shape: tf.Tensor, np_shape: type_utils.Shape):
+  """Returns the most static version of the shape.
+
+  Static `None` values are replaced by dynamic `tf.Tensor` values.
+
+  Example:
+
+  ```
+  merge_shape(
+      tf_shape=tf.constant([28, 28, 3]),
+      np_shape=(None, None, 3),
+  ) == (tf.Tensor(numpy=28), tf.Tensor(numpy=28), 3)
+  ```
+
+  Args:
+    tf_shape: The tf.Tensor containing the shape (e.g. `tf.shape(x)`)
+    np_shape: The static shape tuple (e.g. `(None, None, 3)`)
+
+  Returns:
+    A tuple like np_shape, but with `None` values replaced by `tf.Tensor` values
+  """
+  assert_shape_match(tf_shape.shape, (len(np_shape),))
+  return tuple(
+      tf_shape[i] if dim is None else dim for i, dim in enumerate(np_shape))
 
 
 @contextlib.contextmanager

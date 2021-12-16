@@ -11,6 +11,12 @@
 
 # `hellaswag`
 
+
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context
@@ -24,11 +30,18 @@ and some endings which complete the context.
 
 *   **Versions**:
 
-    *   **`0.0.1`** (default): No release notes.
+    *   `0.0.1`: No release notes.
+    *   `1.0.0`
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Adding separate splits for in-domain and out-of-domain validation/test
+        sets.
+    *   **`1.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Another split dimension for source (wikihow vs activitynet)
 
 *   **Download size**: `68.18 MiB`
 
-*   **Dataset size**: `51.66 MiB`
+*   **Dataset size**: `107.45 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -36,11 +49,21 @@ and some endings which complete the context.
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 10,003
-`'train'`      | 39,905
-`'validation'` | 10,042
+Split                          | Examples
+:----------------------------- | -------:
+`'test'`                       | 10,003
+`'test_ind_activitynet'`       | 1,870
+`'test_ind_wikihow'`           | 3,132
+`'test_ood_activitynet'`       | 1,651
+`'test_ood_wikihow'`           | 3,350
+`'train'`                      | 39,905
+`'train_activitynet'`          | 14,740
+`'train_wikihow'`              | 25,165
+`'validation'`                 | 10,042
+`'validation_ind_activitynet'` | 1,809
+`'validation_ind_wikihow'`     | 3,192
+`'validation_ood_activitynet'` | 1,434
+`'validation_ood_wikihow'`     | 3,607
 
 *   **Features**:
 
@@ -50,6 +73,7 @@ FeaturesDict({
     'context': Text(shape=(), dtype=tf.string),
     'endings': Sequence(Text(shape=(), dtype=tf.string)),
     'label': tf.int32,
+    'source_id': Text(shape=(), dtype=tf.string),
     'split_type': Text(shape=(), dtype=tf.string),
 })
 ```
@@ -57,17 +81,6 @@ FeaturesDict({
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
-
-*   **Citation**:
-
-```
-@inproceedings{zellers2019hellaswag,
-    title={HellaSwag: Can a Machine Really Finish Your Sentence?},
-    author={Zellers, Rowan and Holtzman, Ari and Bisk, Yonatan and Farhadi, Ali and Choi, Yejin},
-    booktitle ={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
-    year={2019}
-}
-```
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -81,10 +94,10 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/hellaswag-0.0.1.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/hellaswag-1.1.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -106,3 +119,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{zellers2019hellaswag,
+    title={HellaSwag: Can a Machine Really Finish Your Sentence?},
+    author={Zellers, Rowan and Holtzman, Ari and Bisk, Yonatan and Farhadi, Ali and Choi, Yejin},
+    booktitle ={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+    year={2019}
+}
+```
+

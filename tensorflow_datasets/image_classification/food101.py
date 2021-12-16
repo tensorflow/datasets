@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz"
@@ -69,7 +69,7 @@ class Food101(tfds.core.GeneratorBasedBuilder):
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=("image", "label"),
-        homepage="https://www.vision.ee.ethz.ch/datasets_extra/food-101/",
+        homepage="https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/",
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
@@ -87,7 +87,6 @@ class Food101(tfds.core.GeneratorBasedBuilder):
                 "image_dir_path": image_dir_path
             },
         ),
-
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={

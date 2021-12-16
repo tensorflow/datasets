@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -62,14 +62,15 @@ def document_single_builder_fn(tmp_path):
 
 
 def test_document_datasets():
-  all_docs = list(document_datasets.iter_documentation_builders(
-      datasets=['mnist', 'coco'],  # Builder with and without config
-      doc_util_paths=doc_utils.DocUtilPaths(
-          fig_base_path=None,
-          df_base_path=None,
-          nightly_path=None,
-      ),
-  ))
+  all_docs = list(
+      document_datasets.iter_documentation_builders(
+          datasets=['mnist', 'coco'],  # Builder with and without config
+          doc_util_paths=doc_utils.DocUtilPaths(
+              fig_base_path=None,
+              df_base_path=None,
+              nightly_path=None,
+          ),
+      ))
   assert {d.name for d in all_docs} == {'mnist', 'coco'}
 
 
@@ -83,8 +84,7 @@ def test_with_config(document_single_builder_fn):  # pylint: disable=redefined-o
   assert (
       '<meta itemprop="url" content="'
       f'https://www.tensorflow.org/datasets/catalog/{DummyDatasetConfigs.name}"'
-      ' />'
-  ) in doc.content
+      ' />') in doc.content
 
 
 def test_with_config_shared_version(document_single_builder_fn):  # pylint: disable=redefined-outer-name

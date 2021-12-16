@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,6 +57,18 @@ _ORDERED_ITEMS_SPLIT2 = [
     b'The',
 ]
 
+_SORTED_ITEMS = [
+    (1, b'The'),
+    (2, b'quick '),
+    (3, b'brown'),
+    (4, b' fox '),
+    (5, b'jumps'),
+    (6, b'over'),
+    (7, b' the '),
+    (8, b'lazy'),
+    (9, b' dog.'),
+]
+
 _TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS_SPLIT1)
 
 
@@ -80,13 +92,13 @@ class GetShardTest(testing.TestCase):
 
 class ShuffleTest(testing.TestCase):
 
-  def _test_items(self, salt, expected_order):
-    shuffler = shuffle.Shuffler(self.get_temp_dir(), salt)
-    for key, item in _ITEMS:
+  def _test_items(self, salt, items, expected_order, disable_shuffling=False):
+    shuffler = shuffle.Shuffler(self.get_temp_dir(), salt, disable_shuffling)
+    for key, item in items:
       shuffler.add(key, item)
     self.assertEqual(shuffler.size, _TOTAL_SIZE)
     if not shuffler._in_memory:  # Check size of temporary bucket files
-      expected_size = (16 + 8) * len(_ITEMS) + sum(len(t[1]) for t in _ITEMS)
+      expected_size = (16 + 8) * len(items) + sum(len(t[1]) for t in items)
       size = 0
       for bucket in shuffler._buckets:
         if not bucket._fobj:
@@ -96,17 +108,23 @@ class ShuffleTest(testing.TestCase):
           size += len(f.read())
       self.assertEqual(size, expected_size)
     # Check records can be read as expected:
-    records = list(iter(shuffler))
+    records = list(ex for _, ex in shuffler)
     self.assertEqual(records, expected_order)
 
   def test_all_mem(self):
-    self._test_items('split1', _ORDERED_ITEMS_SPLIT1)
-    self._test_items('split2', _ORDERED_ITEMS_SPLIT2)
+    self._test_items('split1', _ITEMS, _ORDERED_ITEMS_SPLIT1)
+    self._test_items('split2', _ITEMS, _ORDERED_ITEMS_SPLIT2)
 
   @mock.patch.object(shuffle, 'MAX_MEM_BUFFER_SIZE', 0)
   def test_disk(self):
-    self._test_items('split1', _ORDERED_ITEMS_SPLIT1)
-    self._test_items('split2', _ORDERED_ITEMS_SPLIT2)
+    self._test_items('split1', _ITEMS, _ORDERED_ITEMS_SPLIT1)
+    self._test_items('split2', _ITEMS, _ORDERED_ITEMS_SPLIT2)
+
+  def test_sorted_by_key(self):
+    self._test_items(
+        'split1',
+        _SORTED_ITEMS, [value for key, value in _SORTED_ITEMS],
+        disable_shuffling=True)
 
   def test_nonbytes(self):
     shuffler = shuffle.Shuffler(self.get_temp_dir(), 'split1')
@@ -121,7 +139,8 @@ class ShuffleTest(testing.TestCase):
     shuffler.add(2, b'b')
     shuffler.add(1, b'c')
     iterator = iter(shuffler)
-    self.assertEqual(next(iterator), b'a')
+    self.assertEqual(
+        next(iterator), (86269847664267119453139349052967691808, b'a'))
     with self.assertRaises(shuffle.DuplicatedKeysError):
       next(iterator)
 

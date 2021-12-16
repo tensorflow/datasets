@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,7 +50,6 @@ from typing import Union
 
 import numpy as np
 
-
 HashKey = Union[str, bytes, int, np.ndarray]
 
 
@@ -82,12 +81,11 @@ class Hasher(object):
 
     Args:
       key (bytes, string or anything convertible to a string): key to be hashed.
-        If the key is a string, it will be encoded to bytes using utf-8.
-        If the key is neither a string nor bytes, it will be converted to a str,
-          then to bytes.
-        This means that `"1"` (str) and `1` (int) will have the same hash. The
-        intent of the hash being to shuffle keys, it is recommended that all
-        keys of a given set to shuffle use a single type.
+        If the key is a string, it will be encoded to bytes using utf-8. If the
+        key is neither a string nor bytes, it will be converted to a str, then
+        to bytes. This means that `"1"` (str) and `1` (int) will have the same
+        hash. The intent of the hash being to shuffle keys, it is recommended
+        that all keys of a given set to shuffle use a single type.
 
     Returns:
       128 bits integer, hash of key.

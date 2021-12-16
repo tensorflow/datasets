@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,5 +21,7 @@ from tensorflow_datasets.video.moving_mnist import MovingMnist
 from tensorflow_datasets.video.robonet import Robonet
 from tensorflow_datasets.video.starcraft import StarcraftVideo
 from tensorflow_datasets.video.starcraft import StarcraftVideoConfig
+from tensorflow_datasets.video.tao import Tao
 from tensorflow_datasets.video.ucf101 import Ucf101
 from tensorflow_datasets.video.ucf101 import Ucf101Config
+from tensorflow_datasets.video.youtube_vis import YoutubeVis

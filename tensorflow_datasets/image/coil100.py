@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = "http://www.cs.columbia.edu/CAVE/databases/SLAM_coil-20_coil-100/coil-100/coil-100.zip"
@@ -49,9 +49,8 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("2.0.0")
   RELEASE_NOTES = {
-      "2.0.0":
-          "Change features (`object_id` is now `ClassLabel`, rename "
-          "`label` -> `angle_label`, add `angle`)",
+      "2.0.0": "Change features (`object_id` is now `ClassLabel`, rename "
+               "`label` -> `angle_label`, add `angle`)",
       "1.0.0": "Initial release",
   }
 
@@ -68,8 +67,7 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
             "angle": tf.int64,
         }),
         supervised_keys=("image", "angle_label"),
-        homepage=
-        "http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php",
+        homepage="http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php",
         citation=_CITATION,
     )
 

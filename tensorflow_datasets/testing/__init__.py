@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ from tensorflow_datasets.testing.feature_test_case import SubTestCase
 from tensorflow_datasets.testing.mocking import mock_data
 from tensorflow_datasets.testing.mocking import MockPolicy
 from tensorflow_datasets.testing.test_case import TestCase
+from tensorflow_datasets.testing.test_utils import assert_features_equal
+from tensorflow_datasets.testing.test_utils import DummyBeamDataset
 from tensorflow_datasets.testing.test_utils import DummyDataset
 from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
 from tensorflow_datasets.testing.test_utils import DummyMnist
@@ -39,6 +41,7 @@ from tensorflow_datasets.testing.test_utils import test_main
 from tensorflow_datasets.testing.test_utils import tmp_dir
 
 __all__ = [
+    "assert_features_equal",
     "DummyDataset",
     "DatasetBuilderTestCase",
     "DummyDatasetSharedGenerator",

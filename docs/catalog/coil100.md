@@ -11,10 +11,6 @@
 
 # `coil100`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -34,10 +30,8 @@ pose intervals of 5 degrees.This corresponds to 72 poses per object
 *   **Versions**:
 
     *   `1.0.0`: Initial release
-    *   **`2.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Change features (`object_id` is now `ClassLabel`, rename `label` ->
-        `angle_label`, add `angle`)
+    *   **`2.0.0`** (default): Change features (`object_id` is now `ClassLabel`,
+        rename `label` -> `angle_label`, add `angle`)
 
 *   **Download size**: `124.63 MiB`
 
@@ -68,17 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'angle_label')`
 
-*   **Citation**:
-
-```
-@article{nene1996columbia,
-  title={Columbia object image library (coil-20)},
-  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},
-  year={1996},
-  publisher={Technical report CUCS-005-96}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -92,7 +75,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/coil100-2.0.0.html";
@@ -117,3 +100,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{nene1996columbia,
+  title={Columbia object image library (coil-20)},
+  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},
+  year={1996},
+  publisher={Technical report CUCS-005-96}
+}
+```
+

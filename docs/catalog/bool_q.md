@@ -11,6 +11,7 @@
 
 # `bool_q`
 
+
 *   **Description**:
 
 BoolQ is a question answering dataset for yes/no questions containing 15942
@@ -61,17 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{clark2019boolq,
-  title =     {BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},
-  author =    {Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},
-  booktitle = {NAACL},
-  year =      {2019},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -84,7 +74,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/bool_q-1.0.0.html";
@@ -109,3 +99,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{clark2019boolq,
+  title =     {BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},
+  author =    {Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},
+  booktitle = {NAACL},
+  year =      {2019},
+}
+```
+

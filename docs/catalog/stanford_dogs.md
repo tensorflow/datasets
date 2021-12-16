@@ -11,6 +11,7 @@
 
 # `stanford_dogs`
 
+
 *   **Description**:
 
 The Stanford Dogs dataset contains images of 120 breeds of dogs from around the
@@ -61,28 +62,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@inproceedings{KhoslaYaoJayadevaprakashFeiFei_FGVC2011,
-author = "Aditya Khosla and Nityananda Jayadevaprakash and Bangpeng Yao and
-          Li Fei-Fei",
-title = "Novel Dataset for Fine-Grained Image Categorization",
-booktitle = "First Workshop on Fine-Grained Visual Categorization,
-             IEEE Conference on Computer Vision and Pattern Recognition",
-year = "2011",
-month = "June",
-address = "Colorado Springs, CO",
-}
-@inproceedings{imagenet_cvpr09,
-        AUTHOR = {Deng, J. and Dong, W. and Socher, R. and Li, L.-J. and
-                  Li, K. and Fei-Fei, L.},
-        TITLE = {{ImageNet: A Large-Scale Hierarchical Image Database}},
-        BOOKTITLE = {CVPR09},
-        YEAR = {2009},
-        BIBSOURCE = "http://www.image-net.org/papers/imagenet_cvpr09.bib"}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -96,7 +75,7 @@ address = "Colorado Springs, CO",
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/stanford_dogs-0.2.0.html";
@@ -121,3 +100,26 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{KhoslaYaoJayadevaprakashFeiFei_FGVC2011,
+author = "Aditya Khosla and Nityananda Jayadevaprakash and Bangpeng Yao and
+          Li Fei-Fei",
+title = "Novel Dataset for Fine-Grained Image Categorization",
+booktitle = "First Workshop on Fine-Grained Visual Categorization,
+             IEEE Conference on Computer Vision and Pattern Recognition",
+year = "2011",
+month = "June",
+address = "Colorado Springs, CO",
+}
+@inproceedings{imagenet_cvpr09,
+        AUTHOR = {Deng, J. and Dong, W. and Socher, R. and Li, L.-J. and
+                  Li, K. and Fei-Fei, L.},
+        TITLE = {{ImageNet: A Large-Scale Hierarchical Image Database}},
+        BOOKTITLE = {CVPR09},
+        YEAR = {2009},
+        BIBSOURCE = "http://www.image-net.org/papers/imagenet_cvpr09.bib"}
+```
+

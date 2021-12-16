@@ -11,10 +11,6 @@
 
 # `lm1b`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -58,30 +54,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'text')`
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/ChelbaMSGBK13,
-  author    = {Ciprian Chelba and
-               Tomas Mikolov and
-               Mike Schuster and
-               Qi Ge and
-               Thorsten Brants and
-               Phillipp Koehn},
-  title     = {One Billion Word Benchmark for Measuring Progress in Statistical Language
-               Modeling},
-  journal   = {CoRR},
-  volume    = {abs/1312.3005},
-  year      = {2013},
-  url       = {http://arxiv.org/abs/1312.3005},
-  archivePrefix = {arXiv},
-  eprint    = {1312.3005},
-  timestamp = {Mon, 13 Aug 2018 16:46:16 +0200},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/ChelbaMSGBK13},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -94,7 +66,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/lm1b-1.1.0.html";
@@ -119,3 +91,28 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{DBLP:journals/corr/ChelbaMSGBK13,
+  author    = {Ciprian Chelba and
+               Tomas Mikolov and
+               Mike Schuster and
+               Qi Ge and
+               Thorsten Brants and
+               Phillipp Koehn},
+  title     = {One Billion Word Benchmark for Measuring Progress in Statistical Language
+               Modeling},
+  journal   = {CoRR},
+  volume    = {abs/1312.3005},
+  year      = {2013},
+  url       = {http://arxiv.org/abs/1312.3005},
+  archivePrefix = {arXiv},
+  eprint    = {1312.3005},
+  timestamp = {Mon, 13 Aug 2018 16:46:16 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/ChelbaMSGBK13},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,17 +15,17 @@
 
 """Splits related API."""
 
-
+import dataclasses
 import typing
 from typing import Any, List, Optional, Union
-
-import dataclasses
 
 from tensorflow_datasets.core import proto as proto_lib
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_metadata.proto.v0 import statistics_pb2
+
+SplitArg = tfrecords_reader.SplitArg
 
 
 @dataclasses.dataclass(eq=False, frozen=True)
@@ -45,8 +45,7 @@ class SplitInfo:
   shard_lengths: List[int]
   num_bytes: int
   statistics: statistics_pb2.DatasetFeatureStatistics = dataclasses.field(
-      default_factory=statistics_pb2.DatasetFeatureStatistics,
-  )
+      default_factory=statistics_pb2.DatasetFeatureStatistics,)
   # Inside `SplitDict`, `SplitInfo` has additional arguments required for
   # `file_instructions`
   # Rather than `dataset_name`, should use a structure containing file format,
@@ -158,6 +157,10 @@ class SubSplitInfo(object):
     return sum(f.num_examples for f in self._file_instructions)
 
   @property
+  def num_shards(self) -> int:
+    return len(self.file_instructions)
+
+  @property
   def file_instructions(self) -> List[shard_utils.FileInstruction]:
     """Returns the list of dict(filename, take, skip)."""
     return self._file_instructions
@@ -182,9 +185,11 @@ class Split(str):
     model architecture, etc.).
   * `TEST`: the testing data. This is the data to report metrics on. Typically
     you do not want to use this during model iteration as you may overfit to it.
+  * `ALL`: All splits from the dataset merged together (`'train+test+...'`).
 
   See the
-  [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+  [guide on
+  splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
   for more information.
   """
 
@@ -195,6 +200,7 @@ class Split(str):
 Split.TRAIN = Split("train")
 Split.TEST = Split("test")
 Split.VALIDATION = Split("validation")
+Split.ALL = Split("all")
 
 if typing.TYPE_CHECKING:
   # For type checking, `tfds.Split` is an alias for `str` with additional
@@ -212,16 +218,14 @@ class SplitDict(utils.NonMutableDict):
 
     super(SplitDict, self).__init__(
         {split_info.name: split_info for split_info in split_infos},
-        error_msg="Split {key} already present"
-    )
+        error_msg="Split {key} already present")
     self._dataset_name = dataset_name
 
   def __getitem__(self, key):
     if not self:
       raise KeyError(
           f"Trying to access `splits[{key!r}]` but `splits` is empty. "
-          "This likely indicate the dataset has not been generated yet."
-      )
+          "This likely indicate the dataset has not been generated yet.")
     # 1st case: The key exists: `info.splits['train']`
     elif str(key) in self:
       return super(SplitDict, self).__getitem__(str(key))
@@ -248,32 +252,3 @@ class SplitDict(utils.NonMutableDict):
   def total_num_examples(self):
     """Return the total number of examples."""
     return sum(s.num_examples for s in self.values())
-
-
-def even_splits(
-    split: str,
-    n: int,
-) -> List[str]:
-  """Generates a list of sub-splits of same size.
-
-  Example:
-
-  ```python
-  assert tfds.even_splits('train', n=3) == [
-      'train[0%:33%]', 'train[33%:67%]', 'train[67%:100%]',
-  ]
-  ```
-
-  Args:
-    split: Split name (e.g. 'train', 'test',...)
-    n: Number of sub-splits to create
-
-  Returns:
-    The list of subsplits.
-  """
-  if n <= 0 or n > 100:
-    raise ValueError(f"n should be > 0 and <= 100. Got {n}")
-  partitions = [round(i * 100 / n) for i in range(n + 1)]
-  return [
-      f"{split}[{partitions[i]}%:{partitions[i+1]}%]" for i in range(n)
-  ]

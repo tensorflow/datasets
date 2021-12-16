@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import os
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -90,11 +90,9 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     test_files = _test_data_filenames(lm1b_path)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"files": train_files}),
+            name=tfds.Split.TRAIN, gen_kwargs={"files": train_files}),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={"files": test_files}),
+            name=tfds.Split.TEST, gen_kwargs={"files": test_files}),
     ]
 
   def _generate_examples(self, files):

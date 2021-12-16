@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -92,7 +92,7 @@ class BigPatentConfig(tfds.core.BuilderConfig):
             "2.0.0": "Update to use cased raw strings",
             "1.0.0": "lower cased tokenized words",
         },
-        **kwargs)
+        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.cpc_codes = cpc_codes
 
 

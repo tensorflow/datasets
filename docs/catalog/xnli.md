@@ -11,6 +11,7 @@
 
 # `xnli`
 
+
 *   **Description**:
 
 XNLI is a subset of a few thousand examples from MNLI which has been translated
@@ -77,26 +78,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@InProceedings{conneau2018xnli,
-  author = "Conneau, Alexis
-                 and Rinott, Ruty
-                 and Lample, Guillaume
-                 and Williams, Adina
-                 and Bowman, Samuel R.
-                 and Schwenk, Holger
-                 and Stoyanov, Veselin",
-  title = "XNLI: Evaluating Cross-lingual Sentence Representations",
-  booktitle = "Proceedings of the 2018 Conference on Empirical Methods
-               in Natural Language Processing",
-  year = "2018",
-  publisher = "Association for Computational Linguistics",
-  location = "Brussels, Belgium",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -109,7 +90,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xnli-1.1.0.html";
@@ -134,3 +115,24 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{conneau2018xnli,
+  author = "Conneau, Alexis
+                 and Rinott, Ruty
+                 and Lample, Guillaume
+                 and Williams, Adina
+                 and Bowman, Samuel R.
+                 and Schwenk, Holger
+                 and Stoyanov, Veselin",
+  title = "XNLI: Evaluating Cross-lingual Sentence Representations",
+  booktitle = "Proceedings of the 2018 Conference on Empirical Methods
+               in Natural Language Processing",
+  year = "2018",
+  publisher = "Association for Computational Linguistics",
+  location = "Brussels, Belgium",
+}
+```
+

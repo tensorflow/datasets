@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import os
 import xml.etree.ElementTree as ET
 from absl import logging
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # pylint: disable=anomalous-backslash-in-string
@@ -271,7 +271,7 @@ class Qa4mre(tfds.core.GeneratorBasedBuilder):
 
     if cfg.track == 'main':
       download_urls['{}.main.{}'.format(cfg.year, cfg.lang)] = os.path.join(
-          _BASE_URL, PATHS[cfg.year]['_PATH_TMPL_MAIN_GS'].format(cfg.lang))
+          _BASE_URL, PATHS[cfg.year]['_PATH_TMPL_MAIN_GS'].format(cfg.lang))  # pytype: disable=attribute-error
 
     if cfg.year in ['2012', '2013'] and cfg.track == 'alzheimers':
       download_urls['{}.alzheimers.EN'.format(cfg.year)] = os.path.join(

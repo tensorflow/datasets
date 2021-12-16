@@ -11,6 +11,7 @@
 
 # `voc`
 
+
 *   **Description**:
 
 This dataset contains the data from the PASCAL Visual Object Classes Challenge,
@@ -56,6 +57,7 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+
 ## voc/2007 (default config)
 
 *   **Config description**: This dataset contains the data from the PASCAL
@@ -78,15 +80,6 @@ Split          | Examples
 `'train'`      | 2,501
 `'validation'` | 2,510
 
-*   **Citation**:
-
-```
-@misc{pascal-voc-2007,
-    author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
-    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2007 {(VOC2007)} {R}esults",
-    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -100,7 +93,7 @@ Split          | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/voc-2007-4.0.0.html";
@@ -126,6 +119,15 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
+*   **Citation**:
+
+```
+@misc{pascal-voc-2007,
+    author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
+    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2007 {(VOC2007)} {R}esults",
+    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
+```
+
 ## voc/2012
 
 *   **Config description**: This dataset contains the data from the PASCAL
@@ -148,15 +150,6 @@ Split          | Examples
 `'train'`      | 5,717
 `'validation'` | 5,823
 
-*   **Citation**:
-
-```
-@misc{pascal-voc-2012,
-    author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
-    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2012 {(VOC2012)} {R}esults",
-    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html"}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -170,7 +163,7 @@ Split          | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/voc-2012-4.0.0.html";
@@ -195,3 +188,12 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{pascal-voc-2012,
+    author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
+    title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2012 {(VOC2012)} {R}esults",
+    howpublished = "http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html"}
+```

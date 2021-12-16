@@ -11,6 +11,13 @@
 
 # `plantae_k`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=plantae_k">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 This dataset contains 2153 images of healthy and unhealthy plant leaves divided
@@ -62,17 +69,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@misc{,
-  author={Vippon Preet Kour, Sakshi Arora},
-  title={PlantaeK: A leaf database of native plants of Jammu and Kashmir},
-  howpublished={Mendeley Data},
-  year={2019}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -86,7 +82,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/plantae_k-0.1.0.html";
@@ -111,3 +107,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{,
+  author={Vippon Preet Kour, Sakshi Arora},
+  title={PlantaeK: A leaf database of native plants of Jammu and Kashmir},
+  howpublished={Mendeley Data},
+  year={2019}
+}
+```
+

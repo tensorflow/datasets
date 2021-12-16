@@ -11,10 +11,6 @@
 
 # `para_crawl`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -30,6 +26,10 @@ Web-Scale Parallel Corpora for Official European Languages.
 
     *   **`1.2.0`** (default): No release notes.
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -40,11 +40,8 @@ Web-Scale Parallel Corpora for Official European Languages.
 }
 ```
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
-## para_crawl/enbg (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enbg (default config)
 
 *   **Config description**: Translation dataset from English to bg.
 
@@ -83,7 +80,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enbg-1.2.0.html";
@@ -109,7 +106,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/encs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/encs
 
 *   **Config description**: Translation dataset from English to cs.
 
@@ -148,7 +145,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-encs-1.2.0.html";
@@ -174,7 +171,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enda <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enda
 
 *   **Config description**: Translation dataset from English to da.
 
@@ -213,7 +210,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enda-1.2.0.html";
@@ -239,7 +236,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ende <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ende
 
 *   **Config description**: Translation dataset from English to de.
 
@@ -278,7 +275,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-ende-1.2.0.html";
@@ -304,7 +301,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enel <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enel
 
 *   **Config description**: Translation dataset from English to el.
 
@@ -343,7 +340,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enel-1.2.0.html";
@@ -369,7 +366,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enes <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enes
 
 *   **Config description**: Translation dataset from English to es.
 
@@ -408,7 +405,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enes-1.2.0.html";
@@ -434,7 +431,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enet <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enet
 
 *   **Config description**: Translation dataset from English to et.
 
@@ -473,7 +470,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enet-1.2.0.html";
@@ -499,7 +496,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enfi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enfi
 
 *   **Config description**: Translation dataset from English to fi.
 
@@ -538,7 +535,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enfi-1.2.0.html";
@@ -564,7 +561,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enfr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enfr
 
 *   **Config description**: Translation dataset from English to fr.
 
@@ -603,7 +600,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enfr-1.2.0.html";
@@ -629,7 +626,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enga <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enga
 
 *   **Config description**: Translation dataset from English to ga.
 
@@ -668,7 +665,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enga-1.2.0.html";
@@ -694,7 +691,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enhr <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enhr
 
 *   **Config description**: Translation dataset from English to hr.
 
@@ -733,7 +730,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enhr-1.2.0.html";
@@ -759,7 +756,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enhu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enhu
 
 *   **Config description**: Translation dataset from English to hu.
 
@@ -798,7 +795,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enhu-1.2.0.html";
@@ -824,7 +821,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enit <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enit
 
 *   **Config description**: Translation dataset from English to it.
 
@@ -863,7 +860,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enit-1.2.0.html";
@@ -889,7 +886,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enlt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enlt
 
 *   **Config description**: Translation dataset from English to lt.
 
@@ -928,7 +925,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enlt-1.2.0.html";
@@ -954,7 +951,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enlv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enlv
 
 *   **Config description**: Translation dataset from English to lv.
 
@@ -993,7 +990,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enlv-1.2.0.html";
@@ -1019,7 +1016,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enmt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enmt
 
 *   **Config description**: Translation dataset from English to mt.
 
@@ -1058,7 +1055,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enmt-1.2.0.html";
@@ -1084,7 +1081,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ennl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ennl
 
 *   **Config description**: Translation dataset from English to nl.
 
@@ -1123,7 +1120,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-ennl-1.2.0.html";
@@ -1149,7 +1146,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enpl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enpl
 
 *   **Config description**: Translation dataset from English to pl.
 
@@ -1188,7 +1185,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enpl-1.2.0.html";
@@ -1214,7 +1211,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enpt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enpt
 
 *   **Config description**: Translation dataset from English to pt.
 
@@ -1253,7 +1250,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enpt-1.2.0.html";
@@ -1279,7 +1276,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/enro <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/enro
 
 *   **Config description**: Translation dataset from English to ro.
 
@@ -1318,7 +1315,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-enro-1.2.0.html";
@@ -1344,7 +1341,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ensk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ensk
 
 *   **Config description**: Translation dataset from English to sk.
 
@@ -1383,7 +1380,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-ensk-1.2.0.html";
@@ -1409,7 +1406,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ensl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ensl
 
 *   **Config description**: Translation dataset from English to sl.
 
@@ -1448,7 +1445,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-ensl-1.2.0.html";
@@ -1474,7 +1471,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## para_crawl/ensv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## para_crawl/ensv
 
 *   **Config description**: Translation dataset from English to sv.
 
@@ -1513,7 +1510,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/para_crawl-ensv-1.2.0.html";

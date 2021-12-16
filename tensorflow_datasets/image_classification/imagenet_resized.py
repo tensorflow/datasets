@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -68,8 +68,7 @@ def _make_builder_configs():
             name='%dx%d' % (size, size),
             size=size,
             description=f'Images resized to {size}x{size}',
-        ),
-    )
+        ),)
   return configs
 
 

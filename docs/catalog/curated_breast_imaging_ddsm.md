@@ -11,7 +11,14 @@
 
 # `curated_breast_imaging_ddsm`
 
+
 Warning: Manual download required. See instructions below.
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=curated_breast_imaging_ddsm">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Description**:
 
@@ -106,6 +113,7 @@ Resulting images should be put in `manual_dir`, like:
 }
 ```
 
+
 ## curated_breast_imaging_ddsm/patches (default config)
 
 *   **Config description**: Patches containing both calsification and mass
@@ -147,7 +155,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/curated_breast_imaging_ddsm-patches-3.0.0.html";
@@ -223,7 +231,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/curated_breast_imaging_ddsm-original-calc-3.0.0.html";
@@ -299,7 +307,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/curated_breast_imaging_ddsm-original-mass-3.0.0.html";

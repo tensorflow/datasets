@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,12 +43,13 @@ class GcsUtilsTest(testing.TestCase):
       )
       with tempfile.TemporaryDirectory() as f:
         gcs_utils.download_gcs_dataset('mnist/2.0.0', f)
-        self.assertCountEqual(os.listdir(f), [
-            'mnist-test.tfrecord-00000-of-00001',
-            'mnist-train.tfrecord-00000-of-00001',
-            'dataset_info.json',
-            'image.image.json',
-        ])
+        self.assertCountEqual(
+            os.listdir(f), [
+                'mnist-test.tfrecord-00000-of-00001',
+                'mnist-train.tfrecord-00000-of-00001',
+                'dataset_info.json',
+                'image.image.json',
+            ])
 
   def test_mnist(self):
     with self.gcs_access():

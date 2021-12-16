@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ def _mock_argparse_flags():
   # another test):
   # `flags.DEFINE_string('data_dir')` with `parser.add_argument('--data_dir')`
   # We patch argparse_flags during test, so absl flags are ignored.
-  with mock.patch(
-      'absl.flags.argparse_flags.ArgumentParser', argparse.ArgumentParser
-  ):
+  with mock.patch('absl.flags.argparse_flags.ArgumentParser',
+                  argparse.ArgumentParser):
     yield

@@ -11,9 +11,6 @@
 
 # `cherry_blossoms`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -78,17 +75,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@ONLINE {
-    author = "Aono, Yasuyuki",
-    title  = "Historical Series of Phenological data for Cherry Tree Flowering at Kyoto City (and March Mean Temperature Reconstructions)",
-    year   = "2012",
-    url    = "http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -101,7 +87,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cherry_blossoms-1.0.0.html";
@@ -126,3 +112,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {
+    author = "Aono, Yasuyuki",
+    title  = "Historical Series of Phenological data for Cherry Tree Flowering at Kyoto City (and March Mean Temperature Reconstructions)",
+    year   = "2012",
+    url    = "http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/"
+}
+```
+

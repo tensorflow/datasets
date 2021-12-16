@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,15 +90,9 @@ class Race(tfds.core.GeneratorBasedBuilder):
     task = self.builder_config.name
 
     return {
-        "train":
-            self._generate_examples(
-                path / "train" / task),
-        "dev":
-            self._generate_examples(
-                path / "dev" / task),
-        "test":
-            self._generate_examples(
-                path / "test" / task),
+        "train": self._generate_examples(path / "train" / task),
+        "dev": self._generate_examples(path / "dev" / task),
+        "test": self._generate_examples(path / "test" / task),
     }
 
   def _generate_examples(self, path):

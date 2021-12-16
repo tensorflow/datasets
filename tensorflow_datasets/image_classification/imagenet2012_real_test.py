@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,12 +23,9 @@ class ImageNet2012RealTest(tfds.testing.DatasetBuilderTestCase):
   """Test for ImageNet2012Real dataset."""
 
   DATASET_CLASS = imagenet2012_real.Imagenet2012Real
-  SPLITS = {
-      "validation": 10
-  }
+  SPLITS = {"validation": 10}
   DL_DOWNLOAD_RESULT = "real.json"
 
 
 if __name__ == "__main__":
   tfds.testing.test_main()
-

@@ -11,6 +11,7 @@
 
 # `billsum`
 
+
 *   **Description**:
 
 BillSum, summarization of US Congressional and California state bills.
@@ -60,19 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'summary')`
 
-*   **Citation**:
-
-```
-@misc{kornilova2019billsum,
-    title={BillSum: A Corpus for Automatic Summarization of US Legislation},
-    author={Anastassia Kornilova and Vlad Eidelman},
-    year={2019},
-    eprint={1910.00523},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -85,7 +73,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/billsum-3.0.0.html";
@@ -110,3 +98,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{kornilova2019billsum,
+    title={BillSum: A Corpus for Automatic Summarization of US Legislation},
+    author={Anastassia Kornilova and Vlad Eidelman},
+    year={2019},
+    eprint={1910.00523},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```
+

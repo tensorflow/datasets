@@ -11,6 +11,12 @@
 
 # `titanic`
 
+
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Dataset describing the survival status of individual passengers on the Titanic.
@@ -26,16 +32,21 @@ missing values are replaced with -1, string missing values are replaced with
 
 *   **Versions**:
 
-    *   **`2.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   `3.0.0`: Use a standard flat dictionary of features for the dataset. Use
+        `as_supervised=True` to split the dataset into a `(features_dict,
+        survived)` tuple.
+    *   **`4.0.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Fix inverted labels which were inverted in the 3.0.0.
 
 *   **Download size**: `114.98 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `382.58 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -47,40 +58,29 @@ Split     | Examples
 
 ```python
 FeaturesDict({
-    'features': FeaturesDict({
-        'age': tf.float32,
-        'boat': tf.string,
-        'body': tf.int32,
-        'cabin': tf.string,
-        'embarked': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
-        'fare': tf.float32,
-        'home.dest': tf.string,
-        'name': tf.string,
-        'parch': tf.int32,
-        'pclass': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-        'sex': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'sibsp': tf.int32,
-        'ticket': tf.string,
-    }),
+    'age': tf.float32,
+    'boat': tf.string,
+    'body': tf.int32,
+    'cabin': tf.string,
+    'embarked': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
+    'fare': tf.float32,
+    'home.dest': tf.string,
+    'name': tf.string,
+    'parch': tf.int32,
+    'pclass': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'sex': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sibsp': tf.int32,
     'survived': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'ticket': tf.string,
 })
 ```
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('features', 'survived')`
-
-*   **Citation**:
-
-```
-@ONLINE {titanic,
-author = "Frank E. Harrell Jr., Thomas Cason",
-title  = "Titanic dataset",
-month  = "oct",
-year   = "2017",
-url    = "https://www.openml.org/d/40945"
-}
-```
+    `({'body': 'body', 'boat': 'boat', 'embarked': 'embarked', 'fare': 'fare',
+    'sex': 'sex', 'parch': 'parch', 'pclass': 'pclass', 'ticket': 'ticket',
+    'cabin': 'cabin', 'name': 'name', 'age': 'age', 'sibsp': 'sibsp',
+    'home.dest': 'home.dest'}, 'survived')`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -94,10 +94,10 @@ url    = "https://www.openml.org/d/40945"
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/titanic-2.0.0.html";
+var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/titanic-4.0.0.html";
 $(document).ready(() => {
   $("#displaydataframe").click((event) => {
     // Disable the button after clicking (dataframe loaded only once).
@@ -119,3 +119,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@ONLINE {titanic,
+author = "Frank E. Harrell Jr., Thomas Cason",
+title  = "Titanic dataset",
+month  = "oct",
+year   = "2017",
+url    = "https://www.openml.org/d/40945"
+}
+```
+

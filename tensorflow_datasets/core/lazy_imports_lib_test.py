@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "os",
       "pandas",
       "pretty_midi",
+      "pycocotools",
       "pydub",
       "scipy",
       "skimage",
@@ -48,8 +49,8 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
     getattr(tfds.core.lazy_imports, module_name)
 
   def test_bad_import(self):
-    with self.assertRaisesWithPredicateMatch(
-        ModuleNotFoundError, "extras_require"):
+    with self.assertRaisesWithPredicateMatch(ModuleNotFoundError,
+                                             "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
 
 

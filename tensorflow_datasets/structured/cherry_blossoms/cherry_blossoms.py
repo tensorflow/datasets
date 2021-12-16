@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import csv
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 URL = 'https://raw.githubusercontent.com/rmcelreath/rethinking/master/data/cherry_blossoms.csv'
@@ -88,7 +88,7 @@ class CherryBlossoms(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with path.open() as f:
+    with path.open() as f:  # pytype: disable=attribute-error  # gen-stub-imports
       reader = csv.DictReader(f, delimiter=';')
       for index, row in enumerate(reader):
         example = {k: v.replace('NA', 'nan') for k, v in row.items()}

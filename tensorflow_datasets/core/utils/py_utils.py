@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,17 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Some python utils function and classes.
-
-"""
+"""Some python utils function and classes."""
 
 import base64
 import contextlib
 import functools
-import hashlib
 import io
 import itertools
 import logging
+import operator
 import os
 import random
 import shutil
@@ -32,14 +30,12 @@ import sys
 import textwrap
 import threading
 import typing
-from typing import Any, Callable, Iterator, List, NoReturn, Tuple, Type, TypeVar, Union
+from typing import Any, Callable, Iterable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
 import uuid
 
 from six.moves import urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import file_adapters
-from tensorflow_datasets.core import units
 from tensorflow_datasets.core.utils import type_utils
 
 Tree = type_utils.Tree
@@ -51,7 +47,6 @@ Tree = type_utils.Tree
 # For @property methods, use @memoized_property below.
 memoize = functools.lru_cache
 
-
 T = TypeVar('T')
 
 Fn = TypeVar('Fn', bound=Callable[..., Any])
@@ -59,9 +54,10 @@ Fn = TypeVar('Fn', bound=Callable[..., Any])
 
 def is_notebook():
   """Returns True if running in a notebook (Colab, Jupyter) environment."""
-  # Inspired from the tfdm autonotebook code
+  # Inspired from the tqdm autonotebook code
   try:
-    import IPython  # pytype: disable=import-error  # pylint: disable=import-outside-toplevel,g-import-not-at-top
+    # Use sys.module as we do not want to trigger import
+    IPython = sys.modules['IPython']  # pylint: disable=invalid-name
     if 'IPKernelApp' not in IPython.get_ipython().config:
       return False  # Run in a IPython terminal
   except:  # pylint: disable=bare-except
@@ -120,7 +116,7 @@ class NonMutableDict(dict):
   def __setitem__(self, key, value):
     if key in self:
       raise ValueError(self._error_msg.format(key=key))
-    return super(NonMutableDict, self). __setitem__(key, value)
+    return super(NonMutableDict, self).__setitem__(key, value)
 
   def update(self, other):
     if any(k in self for k in other):
@@ -176,8 +172,9 @@ def map_nested(function, data_struct, dict_only=False, map_tuple=False):
     if map_tuple:
       types_.append(tuple)
     if isinstance(data_struct, tuple(types_)):
-      mapped = [map_nested(function, v, dict_only, map_tuple)
-                for v in data_struct]
+      mapped = [
+          map_nested(function, v, dict_only, map_tuple) for v in data_struct
+      ]
       if isinstance(data_struct, list):
         return mapped
       else:
@@ -195,7 +192,8 @@ def zip_nested(arg0, *args, **kwargs):
   # Could add support for more exotic data_struct, like OrderedDict
   if isinstance(arg0, dict):
     return {
-        k: zip_nested(*a, dict_only=dict_only) for k, a in zip_dict(arg0, *args)
+        k: zip_nested(*a, dict_only=dict_only)
+        for k, a in zip_dict(arg0, *args)
     }
   elif not dict_only:
     if isinstance(arg0, list):
@@ -311,8 +309,7 @@ def incomplete_dir(dirname: type_utils.PathLike) -> Iterator[str]:
 
 @contextlib.contextmanager
 def incomplete_file(
-    path: type_utils.ReadWritePath,
-) -> Iterator[type_utils.ReadWritePath]:
+    path: type_utils.ReadWritePath,) -> Iterator[type_utils.ReadWritePath]:
   """Writes to path atomically, by writing to temp file and renaming it."""
   tmp_path = path.parent / f'{path.name}.incomplete.{uuid.uuid4().hex}'
   try:
@@ -332,28 +329,10 @@ def atomic_write(path, mode):
   tf.io.gfile.rename(tmp_path, path, overwrite=True)
 
 
-def read_checksum_digest(
-    path: type_utils.PathLike,
-    checksum_cls=hashlib.sha256,
-) -> Tuple[str, units.Size]:
-  """Given a hash constructor, returns checksum digest and size of file."""
-  checksum = checksum_cls()
-  size = 0
-  with tf.io.gfile.GFile(os.fspath(path), 'rb') as f:
-    while True:
-      block = f.read(io.DEFAULT_BUFFER_SIZE)
-      size += len(block)
-      if not block:
-        break
-      checksum.update(block)
-  # base64 digest would have been better.
-  return checksum.hexdigest(), units.Size(size)
-
-
 def reraise(
     e: Exception,
-    prefix: str = None,
-    suffix: str = None,
+    prefix: Optional[str] = None,
+    suffix: Optional[str] = None,
 ) -> NoReturn:
   """Reraise an exception with an additional message."""
   prefix = prefix or ''
@@ -366,17 +345,16 @@ def reraise(
       type(e).__str__ is not BaseException.__str__
       # This should never happens unless the user plays with Exception
       # internals
-      or not hasattr(e, 'args')
-      or not isinstance(e.args, tuple)
-  ):
+      or not hasattr(e, 'args') or not isinstance(e.args, tuple)):
     msg = f'{prefix}{e}{suffix}'
     # Could try to dynamically create a
     # `type(type(e).__name__, (ReraisedError, type(e)), {})`, but should be
     # carefull when nesting `reraise` as well as compatibility with external
     # code.
-    # Special case ModuleNotFoundError, ImportError which can be re-raised
-    # with the same type.
-    if isinstance(e, ImportError):
+    # Some base exception class (ImportError, OSError) and subclasses (
+    # ModuleNotFoundError, FileNotFoundError) have custom `__str__` error
+    # message. We re-raise those with same type to allow except in caller code.
+    if isinstance(e, (ImportError, OSError)):
       exception = type(e)(msg)
     else:
       exception = RuntimeError(f'{type(e).__name__}: {msg}')
@@ -390,8 +368,7 @@ def reraise(
   else:
     e.args = tuple(
         p for p in (prefix,) + e.args + (suffix,)
-        if not isinstance(p, str) or p
-    )
+        if not isinstance(p, str) or p)
     raise  # pylint: disable=misplaced-bare-raise
 
 
@@ -419,8 +396,10 @@ def try_reraise(*args, **kwargs):
 
 def rgetattr(obj, attr, *args):
   """Get attr that handles dots in attr name."""
+
   def _getattr(obj, attr):
     return getattr(obj, attr, *args)
+
   return functools.reduce(_getattr, [obj] + attr.split('.'))
 
 
@@ -484,11 +463,17 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
 
 def basename_from_url(url: str) -> str:
   """Returns file name of file at given url."""
-  return os.path.basename(urllib.parse.urlparse(url).path) or 'unknown_name'
+  filename = urllib.parse.urlparse(url).path
+  filename = os.path.basename(filename)
+  # Replace `%2F` (html code for `/`) by `_`.
+  # This is consistent with how Chrome rename downloaded files.
+  filename = filename.replace('%2F', '_')
+  return filename or 'unknown_name'
 
 
 def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
   """Returns name of info files within dir_path."""
+  from tensorflow_datasets.core import file_adapters  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
   path = os.fspath(dir_path)
   return [
       fname for fname in tf.io.gfile.listdir(path)
@@ -497,9 +482,7 @@ def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
   ]
 
 
-def get_base64(
-    write_fn: Union[bytes, Callable[[io.BytesIO], None]],
-) -> str:
+def get_base64(write_fn: Union[bytes, Callable[[io.BytesIO], None]],) -> str:
   """Extracts the base64 string of an object by writing into a tmp buffer."""
   if isinstance(write_fn, bytes):  # Value already encoded
     bytes_value = write_fn
@@ -519,3 +502,8 @@ def add_sys_path(path: type_utils.PathLike) -> Iterator[None]:
     yield
   finally:
     sys.path.remove(path)
+
+
+def prod(iterable: Iterable[int], *, start=1) -> int:
+  """Backport of python 3.8 `math.prod`."""
+  return functools.reduce(operator.mul, iterable, start)

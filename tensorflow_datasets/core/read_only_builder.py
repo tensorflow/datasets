@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,54 +21,51 @@ from typing import Any, Optional, Tuple, Type
 
 import tensorflow as tf
 
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.proto import dataset_info_pb2
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import version as version_lib
 
 
 class ReadOnlyBuilder(
-    dataset_builder.FileReaderBuilder, skip_registration=True
-):
+    dataset_builder.FileReaderBuilder, skip_registration=True):
   """Generic DatasetBuilder loading from a directory."""
 
-  def __init__(self, builder_dir: str):
+  def __init__(self,
+               builder_dir: utils.PathLike,
+               *,
+               info_proto: Optional[dataset_info_pb2.DatasetInfo] = None):
     """Constructor.
 
     Args:
       builder_dir: Directory of the dataset to load (e.g.
         `~/tensorflow_datasets/mnist/3.0.0/`)
+      info_proto: DatasetInfo describing the name, config, etc of the requested
+        dataset. Note that this overwrites dataset info that may be present in
+        builder_dir.
 
     Raises:
       FileNotFoundError: If the builder_dir does not exists.
     """
     builder_dir = os.path.expanduser(builder_dir)
-    info_path = os.path.join(builder_dir, dataset_info.DATASET_INFO_FILENAME)
-    if not tf.io.gfile.exists(info_path):
-      raise FileNotFoundError(
-          f'Could not load `ReadOnlyBuilder`: {info_path} does not exists.'
-      )
+    if not info_proto:
+      info_proto = dataset_info.read_proto_from_builder_dir(builder_dir)
+    self._info_proto = info_proto
 
-    # Restore name, config, info
-    info_proto = dataset_info.read_from_json(info_path)
     self.name = info_proto.name
     self.VERSION = version_lib.Version(info_proto.version)  # pylint: disable=invalid-name
+    self.RELEASE_NOTES = info_proto.release_notes or {}  # pylint: disable=invalid-name
     if info_proto.module_name:
       # Overwrite the module so documenting `ReadOnlyBuilder` point to the
       # original source code.
       self.__module__ = info_proto.module_name
-    if info_proto.config_name:
-      builder_config = dataset_builder.BuilderConfig(
-          name=info_proto.config_name,
-          description=info_proto.config_description,
-          version=info_proto.version or None,
-      )
-    else:
-      builder_config = None
+
+    builder_config = dataset_builder.BuilderConfig.from_dataset_info(info_proto)
     # __init__ will call _build_data_dir, _create_builder_config,
     # _pick_version to set the data_dir, config, and version
     super().__init__(
@@ -76,11 +73,15 @@ class ReadOnlyBuilder(
         config=builder_config,
         version=info_proto.version,
     )
+
+    # For pickling, should come after super.__init__ which is setting that same
+    # _original_state attribute.
+    self._original_state = dict(builder_dir=builder_dir)
+
     if self.info.features is None:
       raise ValueError(
-          f'Cannot restore {self.info.full_name}. It likelly mean the dataset '
-          'was generated with an old TFDS version (<=3.2.1).'
-      )
+          f'Cannot restore {self.info.full_name}. It likely means the dataset '
+          'was generated with an old TFDS version (<=3.2.1).')
 
   def _create_builder_config(
       self, builder_config: Optional[dataset_builder.BuilderConfig]
@@ -94,7 +95,7 @@ class ReadOnlyBuilder(
     return data_dir, data_dir  # _data_dir_root, _data_dir are builder_dir.
 
   def _info(self) -> dataset_info.DatasetInfo:
-    return dataset_info.DatasetInfo(builder=self)
+    return dataset_info.DatasetInfo.from_proto(self, self._info_proto)
 
   def _download_and_prepare(self, **kwargs):  # pylint: disable=arguments-differ
     # DatasetBuilder.download_and_prepare is a no-op as self.data_dir already
@@ -102,15 +103,16 @@ class ReadOnlyBuilder(
     raise AssertionError('ReadOnlyBuilder can\'t be generated.')
 
 
-def builder_from_directory(builder_dir: str) -> dataset_builder.DatasetBuilder:
+def builder_from_directory(
+    builder_dir: utils.PathLike,) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
-  This function reconstruct the `tfds.core.DatasetBuilder` without
-  requirering the original generation code.
+  Reconstructs the `tfds.core.DatasetBuilder` without requiring the original
+  generation code.
 
-  It will read the `<builder_dir>/features.json` in order to infer the
-  structure (feature names, nested dict,...) and content (image, sequence,...)
-  of the dataset. The serialization format is defined in
+  From `<builder_dir>/features.json` it infers the structure (feature names,
+  nested dict,...) and content (image, sequence,...) of the dataset. The
+  serialization format is defined in
   `tfds.features.FeatureConnector` in `to_json()`.
 
   Note: This function only works for datasets generated with TFDS `4.0.0` or
@@ -126,16 +128,42 @@ def builder_from_directory(builder_dir: str) -> dataset_builder.DatasetBuilder:
   return ReadOnlyBuilder(builder_dir=builder_dir)
 
 
+def builder_from_metadata(
+    builder_dir: utils.PathLike,
+    info_proto: dataset_info_pb2.DatasetInfo) -> dataset_builder.DatasetBuilder:
+  """Loads a `tfds.core.DatasetBuilder` from the given metadata.
+
+  Reconstructs the `tfds.core.DatasetBuilder` without requiring the original
+  generation code. The given `info_proto` overrides whatever dataset info is in
+  `builder_dir`.
+
+  The dataset structure (feature names, nested dict,...) and content (image,
+  sequence, ...) is used from the given DatasetInfo.
+
+  Args:
+    builder_dir: path of the directory containing the dataset to read (e.g.
+      `~/tensorflow_datasets/mnist/3.0.0/`). Dataset info in this folder is
+      overridden by the `info_proto`.
+    info_proto: DatasetInfo describing the name, config, features, etc of the
+      requested dataset.
+
+  Returns:
+    builder: `tf.core.DatasetBuilder`, builder for dataset at the given path.
+  """
+  return ReadOnlyBuilder(builder_dir=builder_dir, info_proto=info_proto)
+
+
 def builder_from_files(
-    name: str, **builder_kwargs: Any,
+    name: str,
+    **builder_kwargs: Any,
 ) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from files, auto-infering location.
 
-  This function is similar to `tfds.builder` (same signature), but create
+  This function is similar to `tfds.builder` (same signature), but creates
   the `tfds.core.DatasetBuilder` directly from files, without loading
   original generation source code.
 
-  It does not supports:
+  It does not support:
 
    * namespaces (e.g. 'kaggle:dataset')
    * config objects (`dataset/config` valid, but not `config=MyConfig()`)
@@ -153,16 +181,14 @@ def builder_from_files(
   """
   # Find and load dataset builder.
   builder_dir = _find_builder_dir(name, **builder_kwargs)
-  if builder_dir is not None:  # A generated dataset was found on disk
-    return builder_from_directory(builder_dir)
-  else:
-    data_dirs = constants.list_data_dirs(
-        given_data_dir=builder_kwargs.get('data_dir')
-    )
+  if builder_dir is None:
+    data_dirs = file_utils.list_data_dirs(
+        given_data_dir=builder_kwargs.get('data_dir'))
     raise registered.DatasetNotFoundError(
         f'Could not find dataset files for: {name}. Make sure the dataset '
-        f'has been generated in: {data_dirs}.'
-    )
+        f'has been generated in: {data_dirs}. If the dataset has configs, you '
+        'might have to specify the config name.')
+  return builder_from_directory(builder_dir)
 
 
 def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
@@ -172,7 +198,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
 
    * If the dataset is present, but is legacy (no feature config file), None
      is returned.
-   * If the config isn't specified, the function try to infer the default
+   * If the config isn't specified, the function tries to infer the default
      config name from the original `DatasetBuilder`.
    * The function searches in all `data_dir` registered with
      `tfds.core.add_data_dir`. If the dataset exists in multiple dirs, an error
@@ -187,8 +213,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   """
   # Normalize builder kwargs
   name, builder_kwargs = naming.parse_builder_name_kwargs(
-      name, **builder_kwargs
-  )
+      name, **builder_kwargs)
   version = builder_kwargs.pop('version', None)
   config = builder_kwargs.pop('config', None)
   data_dir = builder_kwargs.pop('data_dir', None)
@@ -198,17 +223,13 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   # * version='experimental_latest'
   # * config objects (rather than `str`)
   # * custom DatasetBuilder.__init__ kwargs
-  if (
-      name.namespace
-      or version == 'experimental_latest'
-      or isinstance(config, dataset_builder.BuilderConfig)
-      or builder_kwargs
-  ):
+  if (name.namespace or version == 'experimental_latest' or
+      isinstance(config, dataset_builder.BuilderConfig) or builder_kwargs):
     return None
 
   # Search the dataset across all registered data_dirs
   all_builder_dirs = []
-  for current_data_dir in constants.list_data_dirs(given_data_dir=data_dir):
+  for current_data_dir in file_utils.list_data_dirs(given_data_dir=data_dir):
     builder_dir = _find_builder_dir_single_dir(
         name.name,
         data_dir=current_data_dir,
@@ -232,10 +253,9 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
     # ```
     raise ValueError(
         f'Dataset {name} detected in multiple locations: {all_builder_dirs}. '
-        'Please resolve the ambiguity by explicitly setting `data_dir=`.'
-    )
-  else:
-    return next(iter(all_builder_dirs))  # List has a single element
+        'Please resolve the ambiguity by explicitly setting `data_dir=`.')
+
+  return all_builder_dirs[0]
 
 
 def _find_builder_dir_single_dir(
@@ -245,17 +265,17 @@ def _find_builder_dir_single_dir(
     config_name: Optional[str] = None,
     version_str: Optional[str] = None,
 ) -> Optional[str]:
-  """Same as `find_builder_dir` but require explicit dir."""
+  """Same as `find_builder_dir` but requires explicit dir."""
   # Construct the `ds_name/config/` path
   builder_dir = os.path.join(data_dir, builder_name)
   if not config_name:
     # If the BuilderConfig is not specified:
-    # * Either the dataset don't have config
+    # * Either the dataset doesn't have a config
     # * Either the default config should be used
     # Currently, in order to infer the default config, we are still relying on
     # the code.
     # TODO(tfds): How to avoid code dependency and automatically infer the
-    # config existance and name ?
+    # config existence and name?
     config_name = _get_default_config_name(builder_dir, builder_name)
 
   # If has config (explicitly given or default config), append it to the path
@@ -270,13 +290,18 @@ def _find_builder_dir_single_dir(
 
   builder_dir = os.path.join(builder_dir, version_str)
 
-  # Check for builder dir existance
-  if not tf.io.gfile.exists(builder_dir):
+  # Check for builder dir existence
+  try:
+    if not tf.io.gfile.exists(builder_dir):
+      return None
+  except tf.errors.PermissionDeniedError:
     return None
+
   # Backward compatibility, in order to be a valid ReadOnlyBuilder, the folder
   # has to contain the feature configuration.
   if not tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):
     return None
+
   return builder_dir
 
 
@@ -284,9 +309,12 @@ def _get_default_config_name(builder_dir: str, name: str) -> Optional[str]:
   """Returns the default config of the given dataset, None if not found."""
   # Search for the DatasetBuilder generation code
   try:
+    # Warning: The registered dataset may not match the files (e.g. if
+    # the imported datasets has the same name as the generated files while
+    # being 2 differents datasets)
     cls = registered.imported_builder_cls(name)
     cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
-  except registered.DatasetNotFoundError:
+  except (registered.DatasetNotFoundError, PermissionError):
     pass
   else:
     # If code found, return the default config

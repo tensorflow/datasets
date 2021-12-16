@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """The LAMBADA dataset evaluates the capabilities of computational
@@ -89,8 +89,7 @@ class Lambada(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                'filepath':
-                    os.path.join(dl_dir, 'lambada_test_plain_text.txt')
+                'filepath': os.path.join(dl_dir, 'lambada_test_plain_text.txt')
             },
         ),
     ]
@@ -100,6 +99,4 @@ class Lambada(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(filepath) as f:
       for idx, line in enumerate(f):
         key = '%s_%d' % (os.path.basename(filepath), idx)
-        yield key, {
-            'passage': line
-        }
+        yield key, {'passage': line}

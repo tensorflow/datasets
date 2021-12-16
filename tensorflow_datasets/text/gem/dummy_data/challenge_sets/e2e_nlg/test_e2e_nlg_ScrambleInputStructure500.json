@@ -1,0 +1,12 @@
+{
+    "test": [
+        {
+            "gem_id": "e2e_nlg-test-916",
+            "meaning_representation": "customer rating[average], familyFriendly[yes], name[The Cricketers], eatType[coffee shop], near[Caf\u00e9 Sicilia]",
+            "references": [
+                "The Cricketers is a coffee shop near Caf\u00e9 Sicilia. Yes it is children friendly. It has an average customer rating."
+            ],
+            "target": "The Cricketers is a coffee shop near Caf\u00e9 Sicilia. Yes it is children friendly. It has an average customer rating."
+        }
+    ]
+}

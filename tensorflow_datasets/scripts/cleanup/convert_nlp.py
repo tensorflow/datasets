@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -74,10 +74,7 @@ def _parse_flags(_) -> argparse.Namespace:
       description="Tool to add hugging face datasets",
   )
   parser.add_argument(
-      "--nlp_path",
-      type=pathlib.Path,
-      help="Path of the nlp directory"
-  )
+      "--nlp_path", type=pathlib.Path, help="Path of the nlp directory")
   parser.add_argument(
       "--dataset_name",
       type=str,
@@ -113,8 +110,7 @@ def create_dataset_files(
     raise ValueError(f"Invalid Dataset Type {dataset_type}")
 
   #  Create dataset timeplate files from new.py
-  new.create_dataset_files(dataset_name=dataset_name,
-                           dataset_dir=dataset_dir)
+  new.create_dataset_files(dataset_name=dataset_name, dataset_dir=dataset_dir)  # pytype: disable=wrong-arg-types  # gen-stub-imports
 
   #  Path of the dataset file
   nlp_datasets_path = nlp_path.expanduser() / "datasets"

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,7 +54,8 @@ class BaseRegister(abc.ABC):
 
   @abc.abstractmethod
   def builder_cls(
-      self, name: utils.DatasetName,
+      self,
+      name: utils.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the `tfds.core.DatasetBuilder` instance.
 
@@ -71,7 +72,9 @@ class BaseRegister(abc.ABC):
 
   @abc.abstractmethod
   def builder(
-      self, name: utils.DatasetName, **builder_kwargs: Any,
+      self,
+      name: utils.DatasetName,
+      **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the `tfds.core.DatasetBuilder` instance.
 

@@ -11,6 +11,7 @@
 
 # `irc_disentanglement`
 
+
 *   **Description**:
 
 IRC Disentanglement dataset contains over 77,563 messages from Ubuntu IRC
@@ -63,25 +64,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@InProceedings{acl19disentangle,
-  author    = {Jonathan K. Kummerfeld and Sai R. Gouravajhala and Joseph Peper and Vignesh Athreya and Chulaka Gunasekara and Jatin Ganhotra and Siva Sankalp Patel and Lazaros Polymenakos and Walter S. Lasecki},
-  title     = {A Large-Scale Corpus for Conversation Disentanglement},
-  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
-  location  = {Florence, Italy},
-  month     = {July},
-  year      = {2019},
-  doi       = {10.18653/v1/P19-1374},
-  pages     = {3846--3856},
-  url       = {https://aclweb.org/anthology/papers/P/P19/P19-1374/},
-  arxiv     = {https://arxiv.org/abs/1810.11118},
-  software  = {https://jkk.name/irc-disentanglement},
-  data      = {https://jkk.name/irc-disentanglement},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -94,7 +76,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/irc_disentanglement-2.0.0.html";
@@ -119,3 +101,23 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@InProceedings{acl19disentangle,
+  author    = {Jonathan K. Kummerfeld and Sai R. Gouravajhala and Joseph Peper and Vignesh Athreya and Chulaka Gunasekara and Jatin Ganhotra and Siva Sankalp Patel and Lazaros Polymenakos and Walter S. Lasecki},
+  title     = {A Large-Scale Corpus for Conversation Disentanglement},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
+  location  = {Florence, Italy},
+  month     = {July},
+  year      = {2019},
+  doi       = {10.18653/v1/P19-1374},
+  pages     = {3846--3856},
+  url       = {https://aclweb.org/anthology/papers/P/P19/P19-1374/},
+  arxiv     = {https://arxiv.org/abs/1810.11118},
+  software  = {https://jkk.name/irc-disentanglement},
+  data      = {https://jkk.name/irc-disentanglement},
+}
+```
+

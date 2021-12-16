@@ -11,6 +11,7 @@
 
 # `web_questions`
 
+
 *   **Description**:
 
 This dataset consists of 6,642 question/answer pairs. The questions are supposed
@@ -57,25 +58,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{berant-etal-2013-semantic,
-    title = "Semantic Parsing on {F}reebase from Question-Answer Pairs",
-    author = "Berant, Jonathan  and
-      Chou, Andrew  and
-      Frostig, Roy  and
-      Liang, Percy",
-    booktitle = "Proceedings of the 2013 Conference on Empirical Methods in Natural Language Processing",
-    month = oct,
-    year = "2013",
-    address = "Seattle, Washington, USA",
-    publisher = "Association for Computational Linguistics",
-    url = "https://www.aclweb.org/anthology/D13-1160",
-    pages = "1533--1544",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -88,7 +70,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/web_questions-1.0.0.html";
@@ -113,3 +95,23 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{berant-etal-2013-semantic,
+    title = "Semantic Parsing on {F}reebase from Question-Answer Pairs",
+    author = "Berant, Jonathan  and
+      Chou, Andrew  and
+      Frostig, Roy  and
+      Liang, Percy",
+    booktitle = "Proceedings of the 2013 Conference on Empirical Methods in Natural Language Processing",
+    month = oct,
+    year = "2013",
+    address = "Seattle, Washington, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/D13-1160",
+    pages = "1533--1544",
+}
+```
+

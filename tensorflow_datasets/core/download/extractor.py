@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,16 +20,17 @@ import concurrent.futures
 import contextlib
 import gzip
 import io
+import multiprocessing
 import os
 import tarfile
 import typing
-from typing import Iterator, Tuple
+from typing import Iterator, Tuple, Union
 import uuid
 import zipfile
 
 from absl import logging
 import promise
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
@@ -52,7 +53,8 @@ class UnsafeArchiveError(Exception):
 class _Extractor(object):
   """Singleton (use `get_extractor()` module fct) to extract archives."""
 
-  def __init__(self, max_workers=12):
+  def __init__(self, max_workers=None):
+    max_workers = max_workers or multiprocessing.cpu_count()
     self._executor = concurrent.futures.ThreadPoolExecutor(
         max_workers=max_workers)
     self._pbar_path = None
@@ -72,9 +74,8 @@ class _Extractor(object):
     self._pbar_path.update_total(1)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
-    future = self._executor.submit(
-        self._sync_extract, path, extract_method, to_path
-    )
+    future = self._executor.submit(self._sync_extract, path, extract_method,
+                                   to_path)
     return promise.Promise.resolve(future)
 
   def _sync_extract(self, from_path, method, to_path):
@@ -94,16 +95,21 @@ class _Extractor(object):
       # Check if running on windows
       if os.name == 'nt' and dst_path and len(dst_path) > 250:
         msg += (
-            '\n'
-            'On windows, path lengths greater than 260 characters may '
-            'result in an error. See the doc to remove the limitation: '
+            '\nOn windows, path lengths greater than 260 characters may result'
+            ' in an error. See the doc to remove the limitation: '
             'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
         )
       raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
     if tf.io.gfile.exists(to_path):
-      tf.io.gfile.rmtree(to_path)
+      # `rename` is atomic, but not `rmtree`.
+      # When 2 builder scripts (for each config) extract the same file, one can
+      # `rename` while the other is still running `rmtree`, leading to corrupted
+      # archive dir.
+      path_to_delete = to_path_tmp + '.todelete'
+      tf.io.gfile.rename(to_path, path_to_delete)
+      tf.io.gfile.rmtree(path_to_delete)
     tf.io.gfile.rename(to_path_tmp, to_path)
     self._pbar_path.update(1)
     return utils.as_path(to_path)
@@ -122,10 +128,8 @@ def _copy(src_file, dest_path):
 
 def _normpath(path):
   path = os.path.normpath(path)
-  if (path.startswith('.')
-      or os.path.isabs(path)
-      or path.endswith('~')
-      or os.path.basename(path).startswith('.')):
+  if (path.startswith('.') or os.path.isabs(path) or path.endswith('~') or
+      os.path.basename(path).startswith('.')):
     return None
   return path
 
@@ -160,7 +164,21 @@ def iter_tar(arch_f, stream=False):
         # Links cannot be dereferenced in stream mode.
         logging.warning('Skipping link during extraction: %s', member.name)
         continue
-      extract_file = tar.extractfile(member)
+
+      try:
+        extract_file = tar.extractfile(member)
+      except KeyError:
+        if not (member.islnk() or member.issym()):
+          raise  # Forward exception non-link files which couldn't be extracted
+        # The link could not be extracted, which likely indicates a corrupted
+        # archive.
+        logging.warning(
+            'Skipping extraction of invalid link: %s -> %s',
+            member.name,
+            member.linkname,
+        )
+        continue
+
       if extract_file:  # File with data (not directory):
         path = _normpath(member.path)  # pytype: disable=attribute-error
         if not path:
@@ -189,9 +207,9 @@ def iter_zip(arch_f):
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
-      extract_file = z.open(member)
       if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
         continue
+      extract_file = z.open(member)
       path = _normpath(member.filename)
       if not path:
         continue
@@ -210,7 +228,7 @@ _EXTRACT_METHODS = {
 
 
 def iter_archive(
-    path: utils.PathLike,
+    path: Union[utils.PathLike, typing.BinaryIO],
     method: resource_lib.ExtractMethod,
 ) -> Iterator[Tuple[str, typing.BinaryIO]]:
   """Iterate over an archive.
@@ -224,6 +242,5 @@ def iter_archive(
   """
   if method == resource_lib.ExtractMethod.NO_EXTRACT:
     raise ValueError(
-        f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.'
-    )
+        f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.')
   return _EXTRACT_METHODS[method](path)  # pytype: disable=bad-return-type

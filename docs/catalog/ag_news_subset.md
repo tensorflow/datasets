@@ -11,6 +11,7 @@
 
 # `ag_news_subset`
 
+
 *   **Description**:
 
 AG is a collection of more than 1 million news articles. News articles have been
@@ -72,19 +73,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('description', 'label')`
 
-*   **Citation**:
-
-```
-@misc{zhang2015characterlevel,
-    title={Character-level Convolutional Networks for Text Classification},
-    author={Xiang Zhang and Junbo Zhao and Yann LeCun},
-    year={2015},
-    eprint={1509.01626},
-    archivePrefix={arXiv},
-    primaryClass={cs.LG}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -97,7 +85,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ag_news_subset-1.0.0.html";
@@ -122,3 +110,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{zhang2015characterlevel,
+    title={Character-level Convolutional Networks for Text Classification},
+    author={Xiang Zhang and Junbo Zhao and Yann LeCun},
+    year={2015},
+    eprint={1509.01626},
+    archivePrefix={arXiv},
+    primaryClass={cs.LG}
+}
+```
+

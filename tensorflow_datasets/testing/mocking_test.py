@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import functools
 
 import pytest
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 # Import the final API to:
 # * Register datasets
@@ -33,8 +33,7 @@ import tensorflow_datasets as tfds
 @pytest.fixture(
     params=[
         tfds.testing.MockPolicy.USE_FILES, tfds.testing.MockPolicy.USE_CODE
-    ],
-)
+    ],)
 def mock_data(request):
   """Parametrized fixture to test both `USE_FILES` and `USE_CODE` policy."""
   return functools.partial(tfds.testing.mock_data, policy=request.param)
@@ -72,6 +71,33 @@ def test_mocking_imagenet():
 
 
 @pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_add_tfds_id():
+  read_config = tfds.ReadConfig(add_tfds_id=True)
+  ds = tfds.load('mnist', split='train', read_config=read_config)
+  assert ds.element_spec == {
+      'tfds_id': tf.TensorSpec(shape=(), dtype=tf.string),
+      'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+      'label': tf.TensorSpec(shape=(), dtype=tf.int64),
+  }
+  list(ds.take(3))  # Iteration should work
+
+
+@pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_partial_decoding():
+  ds = tfds.load(
+      'mnist',
+      split='train',
+      decoders=tfds.decode.PartialDecoding({
+          'image': tfds.features.Image(shape=(None, None, 1)),
+      }),
+  )
+  assert ds.element_spec == {
+      'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
+  }
+  list(ds.take(3))  # Iteration should work
+
+
+@pytest.mark.usefixtures('apply_mock_data')
 def test_mocking_imagenet_decoders():
   """Test with SkipDecoding."""
   ds, ds_info = tfds.load(
@@ -95,20 +121,30 @@ def test_mocking_imagenet_decoders():
 @pytest.mark.usefixtures('apply_mock_data')
 def test_mocking_wider_face():
   ds = tfds.load('wider_face', split='train')
-  assert (
-      ds.element_spec['faces']['expression']
-      == tf.TensorSpec(shape=(None,), dtype=tf.bool)
-  )
+  assert (ds.element_spec['faces']['expression'] == tf.TensorSpec(
+      shape=(None,), dtype=tf.bool))
   for ex in ds.take(2):
     assert ex['faces']['expression'].dtype == tf.bool
 
 
+@pytest.mark.usefixtures('apply_mock_data')
+def test_mocking_coco_captions():
+  ds = tfds.load('coco_captions', split='train')
+  assert (ds.element_spec['captions']['text'] == tf.TensorSpec(
+      shape=(None,), dtype=tf.string))
+  for ex in ds.take(2):
+    assert ex['captions']['text'].dtype == tf.string
+    ex['captions']['text'].shape.assert_is_compatible_with((None,))
+
+
 def test_custom_as_dataset(mock_data):
+
   def _as_dataset(self, *args, **kwargs):  # pylint: disable=unused-argument
     return tf.data.Dataset.from_generator(
-        lambda: ({  # pylint: disable=g-long-lambda
-            'text': t,
-        } for t in ['some sentence', 'some other sentence']),
+        lambda: (  # pylint: disable=g-long-lambda
+            {
+                'text': t
+            } for t in ['some sentence', 'some other sentence']),
         output_types=self.info.features.dtype,
         output_shapes=self.info.features.shape,
     )
@@ -178,3 +214,138 @@ def test_mock_data_use_files(tmp_path):
   ):
     with pytest.raises(ValueError, match='copy the real metadata files'):
       tfds.load('mnist')
+
+
+def test_cardinality():
+  with tfds.testing.mock_data(num_examples=8):
+    ds = tfds.load('mnist', split='train')
+    assert ds.cardinality().numpy().item() == 8
+
+  with tfds.testing.mock_data(num_examples=15):
+    ds = tfds.load('mnist', split='train')
+    assert ds.cardinality().numpy().item() == 15
+
+
+@pytest.mark.parametrize(
+    'ds_name',
+    [
+        'dummy_dataset',
+    ],
+)
+def test_mock_non_registered_datasets(
+    dummy_dataset: tfds.testing.DummyDataset,
+    ds_name: str,
+):
+  # Without mocking, the dataset cannot be found
+  with pytest.raises(tfds.core.registered.DatasetNotFoundError):
+    # Do not test 'huggingface:dummy_dataset' to not have tests
+    # access non-hermetic resources.
+    tfds.builder('dummy_dataset')
+
+  data_dir = dummy_dataset._data_dir_root
+  # After mocking, the dataset is restored from the metadata files.
+  with tfds.testing.mock_data(data_dir=data_dir, num_examples=15):
+    builder = tfds.builder(ds_name)
+    ds = builder.as_dataset(split='train')
+    assert len(list(ds)) == 15
+
+
+def test_mocking_rlu_nested_dataset():
+  """Test of a nested dataset.
+
+  In this test we use the dataset rlu_atari.
+  The dataset has the following features:
+
+    features=tfds.features.FeaturesDict({
+      'clipped_episode_return': tf.float32,
+      'episode_id': tf.int64,
+      'checkpoint_id': tf.int64,
+      'episode_return': tf.float32,
+      'steps': tfds.features.Dataset({
+          'action': tf.int64,
+          'clipped_reward': tf.float32,
+          'discount': tf.float32,
+          'is_first': tf.bool,
+          'is_last': tf.bool,
+          'is_terminal': tf.bool,
+          'observation': tfds.features.Image(shape=(84, 84, 1), dtype=tf.uint8),
+          'reward': tf.float32,
+      }),
+    })
+  """
+  with tfds.testing.mock_data(
+      num_examples=3, policy=tfds.testing.MockPolicy.USE_CODE):
+    ds = tfds.load('rlu_atari/Pong_run_1', split='train')
+
+    steps = ds.element_spec['steps']
+    assert isinstance(steps, tf.data.DatasetSpec)
+    assert steps.element_spec['reward'] == tf.TensorSpec(
+        shape=(), dtype=tf.float32)
+
+    for ex in ds.take(3):
+      ds_steps = ex['steps']
+      assert isinstance(ds_steps, tf.data.Dataset)
+
+      ds_steps_iter = iter(ds_steps)
+      steps_ex = next(ds_steps_iter)
+      assert set(steps_ex.keys()) == {
+          'action', 'clipped_reward', 'discount', 'is_first', 'is_last',
+          'is_terminal', 'observation', 'reward'
+      }
+      assert steps_ex['observation'].shape == (84, 84, 1)
+
+
+def _get_steps(data, window_size=4):
+  """Extract the steps dataset and create out of it a window dataset."""
+  episode_ds = data['steps']
+  # The line below creates a variant dataset
+  return episode_ds.window(window_size, drop_remainder=True)
+
+
+@pytest.mark.parametrize('num_sub_examples', [1, 36])
+def test_mocking_rlu_nested_dataset_with_windows(num_sub_examples,
+                                                 num_examples=3,
+                                                 max_value=8,
+                                                 window_size=4):
+  """Test of a nested dataset with windows.
+
+  In this test we use the dataset rlu_atari - see the docstring of
+  test_mocking_rlu_nested_dataset for a full list of features.
+
+  The test checks in particular that after application of the window method
+  the number of elements in the dataset is
+
+  num_examples * (num_sub_examples // window_size).
+
+  Args:
+    num_sub_examples: Number of examples to generate in a nested subdataset.
+    num_examples: Number of examples to generate in the dataset.
+    max_value: The maximum value present in generated tensors.
+    window_size: The size of the sequence window.
+  """
+  with tfds.testing.mock_data(
+      num_examples=num_examples,
+      num_sub_examples=num_sub_examples,
+      max_value=max_value,
+      policy=tfds.testing.MockPolicy.USE_CODE):
+    ds = tfds.load('rlu_atari/Pong_run_1', split='train')
+
+    for ex in ds.take(3):
+      ds_steps = ex['steps']
+      assert ds_steps.cardinality().numpy().item() == num_sub_examples
+
+      # the window method is applied in _get_steps
+      ds_flat_steps = ds.flat_map(
+          functools.partial(_get_steps, window_size=window_size))
+      ds_flat_steps = iter(ds_flat_steps)
+
+      assert len(list(ds_flat_steps)) == num_examples * (
+          num_sub_examples // window_size)
+
+      for obs_rew_act in ds_flat_steps:
+        assert obs_rew_act['observation'].element_spec == tf.TensorSpec(
+            shape=(84, 84, 1), dtype=tf.uint8)
+        assert (next(iter(tfds.as_numpy(obs_rew_act['observation']))) <=
+                max_value).all()
+        assert (next(iter(tfds.as_numpy(obs_rew_act['action']))) <=
+                max_value).all()

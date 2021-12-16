@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,13 +20,13 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import six.moves.urllib as urllib
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-BASE_URL = 'http://www.stat.columbia.edu/~gelman/arm/examples/radon'
+BASE_URL = 'http://www.stat.columbia.edu/~gelman/arm/examples/radon/'
 
 _CITATION = """\
 @book{GelmanHill:2007,
@@ -102,8 +102,7 @@ class Radon(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'activity': tf.float32,
-            'features': {name: dtype
-                         for name, (dtype, _) in FEATURES.items()}
+            'features': {name: dtype for name, (dtype, _) in FEATURES.items()}
         }),
         supervised_keys=('features', 'activity'),
         homepage='http://www.stat.columbia.edu/~gelman/arm/examples/radon/',
@@ -113,8 +112,8 @@ class Radon(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     paths = dl_manager.download({
-        'file_path_srrs2': os.path.join(BASE_URL, 'srrs2.dat'),
-        'file_path_cty': os.path.join(BASE_URL, 'cty.dat')
+        'file_path_srrs2': urllib.parse.urljoin(BASE_URL, 'srrs2.dat'),
+        'file_path_cty': urllib.parse.urljoin(BASE_URL, 'cty.dat')
     })
     return [
         tfds.core.SplitGenerator(

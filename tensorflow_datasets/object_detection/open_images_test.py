@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,8 +26,9 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
       'validation': 12,
   }
   DL_EXTRACT_RESULT = {
-      'train_images': ['s3-tar_train_sha1_%s.tar' % i
-                       for i in '0123456789abcdef'],
+      'train_images': [
+          's3-tar_train_sha1_%s.tar' % i for i in '0123456789abcdef'
+      ],
       'test_images': 's3-tar_test_sha2.tar',
       'validation_images': 's3-tar_validation_sha3.tar',
       'train_human_labels': 'train-human-labels.csv',

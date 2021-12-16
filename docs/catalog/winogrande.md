@@ -11,6 +11,7 @@
 
 # `winogrande`
 
+
 *   **Description**:
 
 The WinoGrande, a large-scale dataset of 44k problems, inspired by the original
@@ -62,17 +63,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{sakaguchi2019winogrande,
-    title={WinoGrande: An Adversarial Winograd Schema Challenge at Scale},
-    author={Sakaguchi, Keisuke and Bras, Ronan Le and Bhagavatula, Chandra and Choi, Yejin},
-    journal={arXiv preprint arXiv:1907.10641},
-    year={2019}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -85,7 +75,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/winogrande-1.1.0.html";
@@ -110,3 +100,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{sakaguchi2019winogrande,
+    title={WinoGrande: An Adversarial Winograd Schema Challenge at Scale},
+    author={Sakaguchi, Keisuke and Bras, Ronan Le and Bhagavatula, Chandra and Choi, Yejin},
+    journal={arXiv preprint arXiv:1907.10641},
+    year={2019}
+}
+```
+

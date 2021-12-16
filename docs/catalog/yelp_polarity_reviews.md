@@ -11,10 +11,6 @@
 
 # `yelp_polarity_reviews`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -82,23 +78,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'label')`
 
-*   **Citation**:
-
-```
-@article{zhangCharacterlevelConvolutionalNetworks2015,
-  archivePrefix = {arXiv},
-  eprinttype = {arxiv},
-  eprint = {1509.01626},
-  primaryClass = {cs},
-  title = {Character-Level {{Convolutional Networks}} for {{Text Classification}}},
-  abstract = {This article offers an empirical exploration on the use of character-level convolutional networks (ConvNets) for text classification. We constructed several large-scale datasets to show that character-level convolutional networks could achieve state-of-the-art or competitive results. Comparisons are offered against traditional models such as bag of words, n-grams and their TFIDF variants, and deep learning models such as word-based ConvNets and recurrent neural networks.},
-  journal = {arXiv:1509.01626 [cs]},
-  author = {Zhang, Xiang and Zhao, Junbo and LeCun, Yann},
-  month = sep,
-  year = {2015},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -111,7 +90,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/yelp_polarity_reviews-0.2.0.html";
@@ -136,3 +115,21 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{zhangCharacterlevelConvolutionalNetworks2015,
+  archivePrefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1509.01626},
+  primaryClass = {cs},
+  title = {Character-Level {{Convolutional Networks}} for {{Text Classification}}},
+  abstract = {This article offers an empirical exploration on the use of character-level convolutional networks (ConvNets) for text classification. We constructed several large-scale datasets to show that character-level convolutional networks could achieve state-of-the-art or competitive results. Comparisons are offered against traditional models such as bag of words, n-grams and their TFIDF variants, and deep learning models such as word-based ConvNets and recurrent neural networks.},
+  journal = {arXiv:1509.01626 [cs]},
+  author = {Zhang, Xiang and Zhao, Junbo and LeCun, Yann},
+  month = sep,
+  year = {2015},
+}
+```
+

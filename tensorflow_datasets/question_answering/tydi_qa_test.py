@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,18 +32,12 @@ class TydiQATest(testing.DatasetBuilderTestCase):
       for lang in tydi_qa.LANGUAGES
   })
 
-  SPLITS = {
-      "train": 3,
-      "validation": 2
-  }
+  SPLITS = {"train": 3, "validation": 2}
+  SPLITS.update({f"validation-{lang}": 1 for lang in tydi_qa.LANGUAGES})
   SPLITS.update({
-      f"validation-{lang}": 1
-      for lang in tydi_qa.LANGUAGES
+      f"translate-train-{lang}": 1 for lang in tydi_qa.LANGUAGES if lang != "en"
   })
-  SPLITS.update({
-      f"translate-train-{lang}": 1
-      for lang in tydi_qa.LANGUAGES if lang != "en"
-  })
+
 
 if __name__ == "__main__":
   testing.test_main()

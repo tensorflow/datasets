@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 
 import json
 import os
-from typing import Any, Dict, Iterator, List, Text, Tuple
+from typing import Any, Dict, Iterator, List, Optional, Text, Tuple
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -110,7 +110,7 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(
       self,
-      data_paths: List[Dict[Text, Any]] = None
+      data_paths: Optional[List[Dict[Text, Any]]] = None
   ) -> Iterator[Tuple[Any, Dict[Text, Any]]]:
     """Yields examples."""
     for d in data_paths:

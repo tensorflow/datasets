@@ -1,0 +1,4 @@
+https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data/test.jsonl	749738	3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14	test.jsonl
+https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data/test_socratic.jsonl	972978	c96673362fa7a699f4836a9b6474a067448f95fe58064727501ee63ba4c3fdb6	test_socratic.jsonl
+https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data/train.jsonl	4166206	17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465	train.jsonl
+https://raw.githubusercontent.com/openai/grade-school-math/master/grade_school_math/data/train_socratic.jsonl	5401739	153d86551187cfd64ef7afb59bfd0ef75cea3ae9388e7ad31e43920b6dd77872	train_socratic.jsonl

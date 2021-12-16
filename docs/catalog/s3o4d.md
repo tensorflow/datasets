@@ -11,9 +11,12 @@
 
 # `s3o4d`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=s3o4d">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Description**:
 
@@ -86,18 +89,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@article{pfau2020disentangling,
-  title={Disentangling by Subspace Diffusion},
-  author={Pfau, David and Higgins, Irina and Botev, Aleksandar and Racani\`ere,
-  S{\'e}bastian},
-  journal={Advances in Neural Information Processing Systems (NeurIPS)},
-  year={2020}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -111,7 +102,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/s3o4d-1.0.0.html";
@@ -136,3 +127,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{pfau2020disentangling,
+  title={Disentangling by Subspace Diffusion},
+  author={Pfau, David and Higgins, Irina and Botev, Aleksandar and Racani\`ere,
+  S{\'e}bastian},
+  journal={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2020}
+}
+```
+

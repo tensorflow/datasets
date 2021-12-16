@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 """The Definite Pronoun Resolution Dataset."""
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -74,11 +74,9 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
     })
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={'filepath': files['test']}),
+            name=tfds.Split.TEST, gen_kwargs={'filepath': files['test']}),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={'filepath': files['train']}),
+            name=tfds.Split.TRAIN, gen_kwargs={'filepath': files['train']}),
     ]
 
   def _generate_examples(self, filepath):

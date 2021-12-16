@@ -11,10 +11,6 @@
 
 # `flores`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -37,6 +33,10 @@ Sinhala-English.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -50,11 +50,8 @@ Sinhala-English.
 }
 ```
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
-## flores/neen (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## flores/neen (default config)
 
 *   **Config description**: Translation dataset from ne to en.
 
@@ -88,7 +85,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flores-neen-1.2.0.html";
@@ -114,7 +111,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## flores/sien <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## flores/sien
 
 *   **Config description**: Translation dataset from si to en.
 
@@ -148,7 +145,7 @@ Translation({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/flores-sien-1.2.0.html";

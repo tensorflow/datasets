@@ -1,0 +1,23 @@
+{
+    "validation": [
+        {
+            "concept_set_id": 844,
+            "concepts": [
+                "bench",
+                "kid",
+                "line",
+                "ride",
+                "sit"
+            ],
+            "gem_id": "common_gen-validation-844",
+            "references": [
+                "The kid stood in line for the ride while I chose to sit on the bench.",
+                "The line for the ride at the fair was too long so the kid went to go sit on the bench nearby.",
+                "The parents sat on a bench while the kids waited in line for an amusement park ride.",
+                "A kid sits on a bench while the kid waits in line to go on a ride at the fair.",
+                "People wait in line for a ride while kids sit on bench."
+            ],
+            "target": "The kid stood in line for the ride while I chose to sit on the bench."
+        }
+    ]
+}

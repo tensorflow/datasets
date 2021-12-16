@@ -11,10 +11,6 @@
 
 # `cityscapes`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 Warning: Manual download required. See instructions below.
 
@@ -79,6 +75,10 @@ get the files.
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -90,9 +90,6 @@ get the files.
 }
 ```
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## cityscapes/semantic_segmentation (default config)
 
@@ -126,7 +123,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cityscapes-semantic_segmentation-1.0.0.html";
@@ -152,7 +149,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## cityscapes/semantic_segmentation_extra <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cityscapes/semantic_segmentation_extra
 
 *   **Config description**: Cityscapes semantic segmentation dataset with
     train_extra split and coarse labels.
@@ -185,7 +182,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cityscapes-semantic_segmentation_extra-1.0.0.html";
@@ -211,7 +208,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## cityscapes/stereo_disparity <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cityscapes/stereo_disparity
 
 *   **Config description**: Cityscapes stereo image and disparity maps dataset.
 
@@ -244,7 +241,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cityscapes-stereo_disparity-1.0.0.html";
@@ -270,7 +267,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## cityscapes/stereo_disparity_extra <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## cityscapes/stereo_disparity_extra
 
 *   **Config description**: Cityscapes stereo image and disparity maps dataset
     with train_extra split.
@@ -304,7 +301,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cityscapes-stereo_disparity_extra-1.0.0.html";

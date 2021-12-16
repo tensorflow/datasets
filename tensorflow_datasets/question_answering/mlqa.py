@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,9 +35,7 @@ evaluating multilingual question answering performance. The dataset consists \
 of 7 languages: Arabic, German, Spanish, English, Hindi, Vietnamese, Chinese.
 """
 
-
 LANGUAGES = ["ar", "de", "en", "es", "hi", "vi", "zh"]
-
 
 _DOWNLOAD_URL = "https://dl.fbaipublicfiles.com/MLQA/MLQA_V1.zip"
 
@@ -95,8 +93,7 @@ class Mlqa(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=split,
-            gen_kwargs={"filepath": path})
-        for split, path in filepaths.items()
+            gen_kwargs={"filepath": path}) for split, path in filepaths.items()
     ]
 
   def _generate_examples(self, filepath):

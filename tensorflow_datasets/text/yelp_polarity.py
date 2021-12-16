@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """Yelp Polarity Reviews dataset."""
 
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -92,16 +92,14 @@ class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     arch_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
-    train_file = os.path.join(
-        arch_path, "yelp_review_polarity_csv", "train.csv")
+    train_file = os.path.join(arch_path, "yelp_review_polarity_csv",
+                              "train.csv")
     test_file = os.path.join(arch_path, "yelp_review_polarity_csv", "test.csv")
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"filepath": train_file}),
+            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_file}),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={"filepath": test_file}),
+            name=tfds.Split.TEST, gen_kwargs={"filepath": test_file}),
     ]
 
   def _generate_examples(self, filepath):

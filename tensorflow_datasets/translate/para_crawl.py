@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """ParaCrawl (Bitextor) parallel open-source machine translation benchmark."""
 
 import collections
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
@@ -90,9 +90,8 @@ class ParaCrawlConfig(tfds.core.BuilderConfig):
 
     # Initialize the base class.
     name = f"en{target_language}"
-    description = (
-        "Translation dataset from English to %s."
-    ) % (target_language)
+    description = ("Translation dataset from English to %s.") % (
+        target_language)
     super(ParaCrawlConfig, self).__init__(
         name=name,
         description=description,
@@ -115,8 +114,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
       # The version below does not refer to the version of the released
       # database. It only indicates the version of the TFDS integration.
       ParaCrawlConfig(  # pylint: disable=g-complex-comprehension
-          target_language=target_language,
-      )
+          target_language=target_language,)
       for target_language in _target_languages()
   ]
 
@@ -125,9 +123,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.Translation(
-            languages=("en", target_language),
-        ),
+        features=tfds.features.Translation(languages=("en", target_language),),
         supervised_keys=("en", target_language),
         homepage=_BENCHMARK_URL,
         citation=_CITATION)

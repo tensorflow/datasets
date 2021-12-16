@@ -11,6 +11,7 @@
 
 # `trec`
 
+
 *   **Description**:
 
 The Text REtrieval Conference (TREC) Question Classification dataset contains
@@ -60,30 +61,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{li-roth-2002-learning,
-    title = "Learning Question Classifiers",
-    author = "Li, Xin  and
-      Roth, Dan",
-    booktitle = "{COLING} 2002: The 19th International Conference on Computational Linguistics",
-    year = "2002",
-    url = "https://www.aclweb.org/anthology/C02-1150",
-}
-@inproceedings{hovy-etal-2001-toward,
-    title = "Toward Semantics-Based Answer Pinpointing",
-    author = "Hovy, Eduard  and
-      Gerber, Laurie  and
-      Hermjakob, Ulf  and
-      Lin, Chin-Yew  and
-      Ravichandran, Deepak",
-    booktitle = "Proceedings of the First International Conference on Human Language Technology Research",
-    year = "2001",
-    url = "https://www.aclweb.org/anthology/H01-1069",
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -96,7 +73,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/trec-1.0.0.html";
@@ -121,3 +98,28 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{li-roth-2002-learning,
+    title = "Learning Question Classifiers",
+    author = "Li, Xin  and
+      Roth, Dan",
+    booktitle = "{COLING} 2002: The 19th International Conference on Computational Linguistics",
+    year = "2002",
+    url = "https://www.aclweb.org/anthology/C02-1150",
+}
+@inproceedings{hovy-etal-2001-toward,
+    title = "Toward Semantics-Based Answer Pinpointing",
+    author = "Hovy, Eduard  and
+      Gerber, Laurie  and
+      Hermjakob, Ulf  and
+      Lin, Chin-Yew  and
+      Ravichandran, Deepak",
+    booktitle = "Proceedings of the First International Conference on Human Language Technology Research",
+    year = "2001",
+    url = "https://www.aclweb.org/anthology/H01-1069",
+}
+```
+

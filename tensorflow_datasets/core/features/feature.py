@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,21 +18,31 @@
 import abc
 import collections
 import functools
+import html
+import importlib
 import json
 import os
-from typing import Dict, Type, TypeVar
+from typing import Dict, List, Type, TypeVar, Union
 
 import numpy as np
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
-from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
+
+from google.protobuf import descriptor
+from google.protobuf import json_format
+from google.protobuf import message
 
 Json = type_utils.Json
 Shape = type_utils.Shape
 
 T = TypeVar('T', bound='FeatureConnector')
+
+# FeatureConnector-like input accepted by `Sequence()`, `Optional()`,...
+FeatureConnectorArg = Union['FeatureConnector',
+                            Dict[str, 'FeatureConnectorArg'], tf.dtypes.DType]  # pytype: disable=not-supported-yet
 
 
 class TensorInfo(object):
@@ -108,11 +118,21 @@ class FeatureConnector(object):
   """
 
   # Keep track of all sub-classes.
-  _registered_features: Dict[str, 'FeatureConnector'] = {}
+  _registered_features: Dict[str, Type['FeatureConnector']] = {}
+
+  # FeatureConnector use the module name to reconstruct/reload the features in
+  # `features = FeatureConnector.from_config('features.json')`
+  # For backward compatibility, after renaming/moving/ `my_feature.py` to a new
+  # location, it is possible to specify the previous `module.MyFeature` names.
+  ALIASES: List[str] = []
 
   def __init_subclass__(cls):
     """Registers subclasses features."""
     cls._registered_features[f'{cls.__module__}.{cls.__name__}'] = cls
+    # Also register the aliases. Note: We use __dict__ to make sure the alias
+    # is only registered for the class. Not it's child.
+    for module_alias in cls.__dict__.get('ALIASES', []):
+      cls._registered_features[module_alias] = cls
 
   @abc.abstractmethod
   def get_tensor_info(self):
@@ -156,6 +176,36 @@ class FeatureConnector(object):
     return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
 
   @classmethod
+  def cls_from_name(cls, python_class_name: str) -> Type['FeatureConnector']:
+    """Returns the feature class for the given Python class."""
+    err_msg = f'Unrecognized FeatureConnector type: {python_class_name}.'
+
+    # Dynamically import custom feature-connectors
+    if python_class_name not in cls._registered_features:
+      # Split `my_project.xyz.MyFeature` -> (`my_project.xyz`, `MyFeature`)
+      if '.' not in python_class_name:
+        raise ValueError(
+            f'Python class name must contain a dot, got: "{python_class_name}"')
+      module_name, _ = python_class_name.rsplit('.', maxsplit=1)  # pytype: disable=attribute-error
+      try:
+        # Import to register the FeatureConnector
+        importlib.import_module(module_name)
+      except ImportError:
+        raise ValueError(
+            f'{err_msg}\nCould not import {module_name}. You might have to '
+            'install additional dependencies.')
+
+    feature_class = cls._registered_features.get(python_class_name)
+    if feature_class is None:
+      raise ValueError(f'{err_msg}\n'
+                       f'Supported: {list(cls._registered_features)}')
+    return feature_class
+
+  @property
+  def _fully_qualified_class_name(self):
+    return f'{type(self).__module__}.{type(self).__name__}'
+
+  @classmethod
   def from_json(cls, value: Json) -> 'FeatureConnector':
     """FeatureConnector factory.
 
@@ -172,19 +222,20 @@ class FeatureConnector(object):
     ```
 
     Args:
-      value: `dict(type=, content=)` containing the feature to restore.
-        Match dict returned by `to_json`.
+      value: `dict(type=, content=)` containing the feature to restore. Match
+        dict returned by `to_json`.
 
     Returns:
       The reconstructed FeatureConnector.
     """
-    subclass = cls._registered_features.get(value['type'])
-    if subclass is None:
-      raise ValueError(
-          f'Unrecognized FeatureConnector type: {value["type"]}\n'
-          f'Supported: {list(cls._registered_features)}'
-      )
-    return subclass.from_json_content(value['content'])
+    class_name = value['type']  # my_project.xyz.MyFeature
+    content = value['content']
+    feature_cls = cls.cls_from_name(class_name)
+    proto_cls_name = value.get('proto_cls')
+    if proto_cls_name:  # The content is a proto, need to reconstruct it
+      proto_cls = _name2proto_cls(proto_cls_name)
+      content = json_format.Parse(content, proto_cls())
+    return feature_cls.from_json_content(content)
 
   def to_json(self) -> Json:
     # pylint: disable=line-too-long
@@ -221,47 +272,64 @@ class FeatureConnector(object):
                 }
             },
             "target": {
-                "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
-                "num_classes": 10
+                "type":
+                "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                "content": {
+                  "num_classes": 10
+                }
             }
         }
     }
     ```
 
     Returns:
-      A `dict(type=, content=)`. Will be forwarded to
-        `from_json` when reconstructing the feature.
+      A `dict(type=, content=)`. Will be forwarded to `from_json` when
+      reconstructing the feature.
     """
     # pylint: enable=line-too-long
+    content = self.to_json_content()
+    if isinstance(content, message.Message):  # Content is proto
+      # e.g. `tensorflow_datasets.JsonFeature`
+      proto_cls_name = type(content).DESCRIPTOR.full_name
+      content = json_format.MessageToJson(content)
+    elif isinstance(content, dict):  # Content is json
+      proto_cls_name = ''
+    else:
+      raise TypeError(f'Unexpected feature connector value: {content}')
     return {
-        'type': f'{type(self).__module__}.{type(self).__name__}',
-        'content': self.to_json_content(),
+        'type': self._fully_qualified_class_name,
+        'content': content,
+        'proto_cls': proto_cls_name,
     }
 
   @classmethod
-  def from_json_content(cls: Type[T], value: Json) -> T:
+  def from_json_content(
+      cls: Type[T],
+      value: Union[Json, message.Message],
+  ) -> T:
     """FeatureConnector factory (to overwrite).
 
-    Subclasses should overwritte this method. importing
-    the feature connector from the config.
+    Subclasses should overwrite this method. This method is used when
+    importing the feature connector from the config.
 
     This function should not be called directly. `FeatureConnector.from_json`
     should be called instead.
 
-    This function  See existing FeatureConnector for
-    example of implementation.
+    See existing FeatureConnectors for implementation examples.
 
     Args:
-      value: FeatureConnector information. Match the `dict` returned by
+      value: FeatureConnector information represented as either Json or a
+        Feature proto. The content must match what is returned by
         `to_json_content`.
 
     Returns:
       The reconstructed FeatureConnector.
     """
-    # Should this be an abstract method once user features have been updated ?
+    if not isinstance(value, dict):
+      raise TypeError(f'Unexpected feature connector value: {value!r}')
     return cls(**value)  # pytype: disable=not-instantiable
 
-  def to_json_content(self) -> Json:
+  def to_json_content(self) -> Union[Json, message.Message]:
     """FeatureConnector factory (to overwrite).
 
     This function should be overwritten by the subclass to allow re-importing
@@ -269,10 +337,47 @@ class FeatureConnector(object):
     example of implementation.
 
     Returns:
-      Dict containing the FeatureConnector metadata. Will be forwarded to
-        `from_json_content` when reconstructing the feature.
+      The FeatureConnector metadata in either a dict, or a Feature proto. This
+      output is used in `from_json_content` when reconstructing the feature.
     """
-    return dict()
+    return {}
+
+  def to_proto(self) -> feature_pb2.Feature:
+    """Exports the FeatureConnector to the Feature proto.
+
+    For features that have a specific schema defined in a proto, this
+    function needs to be overriden. If there's no specific proto schema,
+    then the feature will be represented using JSON.
+
+    Returns:
+      The feature proto describing this feature.
+    """
+    content = self.to_json_content()
+    # If the feature metadata is represented in JSON, then wrap the JSON in the
+    # Feature proto.
+    if isinstance(content, dict):
+      content = feature_pb2.JsonFeature(json=json.dumps(content))
+    if not isinstance(content, message.Message):
+      raise TypeError(
+          f'to_json_content should return json or proto. Not: {content!r}')
+    # Automatically compute the oneof field name:
+    # e.g. {'json_feature': feature_pb2.JsonFeature()}
+    oneof_kwarg = {_proto2oneof_field_name(content): content}
+    return feature_pb2.Feature(
+        python_class_name=self._fully_qualified_class_name,
+        **oneof_kwarg,
+    )
+
+  @classmethod
+  def from_proto(cls, feature: feature_pb2.Feature) -> T:
+    feature_cls = cls.cls_from_name(feature.python_class_name)
+    # Extract which feature is set (e.g. `json_feature`)
+    feature_field_name = feature.WhichOneof('content')
+    feature_content = getattr(feature, feature_field_name)
+    # Legacy mode, json content is restored as dict
+    if isinstance(feature_content, feature_pb2.JsonFeature):
+      feature_content = json.loads(feature_content.json)
+    return feature_cls.from_json_content(feature_content)
 
   def save_config(self, root_dir: str) -> None:
     """Exports the `FeatureConnector` to a file.
@@ -414,8 +519,8 @@ class FeatureConnector(object):
     overwrite this method to apply a custom batch decoding.
 
     Args:
-      tfexample_data: Same `tf.Tensor` inputs as `decode_example`, but with
-        and additional first dimension for the sequence length.
+      tfexample_data: Same `tf.Tensor` inputs as `decode_example`, but with and
+        additional first dimension for the sequence length.
 
     Returns:
       tensor_data: Tensor or dictionary of tensor, output of the tf.data.Dataset
@@ -438,10 +543,8 @@ class FeatureConnector(object):
     if (
         # input/output could potentially be a `dict` for custom feature
         # connectors. Empty length not supported for those for now.
-        isinstance(ex, dict)
-        or isinstance(self.shape, dict)
-        or not _has_shape_ambiguity(in_shape=ex.shape, out_shape=self.shape)
-    ):
+        isinstance(ex, dict) or isinstance(self.shape, dict) or
+        not _has_shape_ambiguity(in_shape=ex.shape, out_shape=self.shape)):
       return decode_map_fn(ex)
     else:
       # `tf.map_fn` cannot resolve ambiguity when decoding an empty sequence
@@ -480,7 +583,20 @@ class FeatureConnector(object):
 
   def repr_html_batch(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Sequence)."""
-    return _repr_html(ex)
+    _MAX_SUB_ROWS = 7  # pylint: disable=invalid-name
+    if isinstance(ex, tf.RaggedTensor):  # e.g. `Sequence(Video())`
+      return _repr_html(ex)
+    # Truncate sequences which contains too many sub-examples
+    if len(ex) > _MAX_SUB_ROWS:
+      ex = ex[:_MAX_SUB_ROWS]
+      overflow = ['...']
+    else:
+      overflow = []
+    batch_ex = '<br/>'.join([self.repr_html(x) for x in ex] + overflow)
+    # TODO(tfds): How to limit the max-height to the neighboors cells ?
+    return (
+        f'<div style="overflow-y: scroll; max-height: 300px;" >{batch_ex}</div>'
+    )
 
   def repr_html_ragged(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of the object (Nested sequence)."""
@@ -523,7 +639,7 @@ class FeatureConnector(object):
 
     Args:
       x: A nested `dict` like structure matching the structure of the
-      `FeatureConnector`. Note that some elements may be missing.
+        `FeatureConnector`. Note that some elements may be missing.
 
     Returns:
       `list`: The flattened list of element of `x`. Order is guaranteed to be
@@ -558,7 +674,7 @@ class FeatureConnector(object):
     ])
     ```
 
-    Will produce the following flattened output:
+    Will produce the following nested output:
     ```
     {
         'a': None,
@@ -646,83 +762,9 @@ class FeatureConnector(object):
     pass
 
 
-class Tensor(FeatureConnector):
-  """`FeatureConnector` for generic data of arbitrary shape and type."""
-
-  def __init__(self, *, shape, dtype):
-    """Construct a Tensor feature."""
-    self._shape = tuple(shape)
-    self._dtype = dtype
-
-  def get_tensor_info(self):
-    """See base class for details."""
-    return TensorInfo(shape=self._shape, dtype=self._dtype)
-
-  def decode_batch_example(self, example_data):
-    """See base class for details."""
-    # Overwrite the `tf.map_fn`, decoding is a no-op
-    return self.decode_example(example_data)
-
-  def decode_ragged_example(self, example_data):
-    """See base class for details."""
-    # Overwrite the `tf.map_fn`, decoding is a no-op
-    return self.decode_example(example_data)
-
-  def encode_example(self, example_data):
-    """See base class for details."""
-    np_dtype = np.dtype(self.dtype.as_numpy_dtype)
-    if isinstance(example_data, tf.Tensor):
-      raise TypeError(
-          f'Error encoding: {example_data!r}. `_generate_examples` should '
-          'yield `np.array` compatible values, not `tf.Tensor`'
-      )
-    if not isinstance(example_data, np.ndarray):
-      example_data = np.array(example_data, dtype=np_dtype)
-    # Ensure the shape and dtype match
-    if example_data.dtype != np_dtype:
-      raise ValueError('Dtype {} do not match {}'.format(
-          example_data.dtype, np_dtype))
-    utils.assert_shape_match(example_data.shape, self._shape)
-    return example_data
-
-  @classmethod
-  def from_json_content(cls, value: Json) -> 'Tensor':
-    shape = tuple(value['shape'])
-    dtype = tf.dtypes.as_dtype(value['dtype'])
-    return cls(shape=shape, dtype=dtype)
-
-  def to_json_content(self) -> Json:
-    return {
-        'shape': list(self._shape),
-        'dtype': self._dtype.name,
-    }
-
-
 def make_config_path(root_dir: str) -> str:
   """Returns the path to the features config."""
   return os.path.join(root_dir, 'features.json')
-
-
-def get_inner_feature_repr(feature):
-  """Utils which returns the object which should get printed in __repr__.
-
-  This is used in container features (Sequence, FeatureDict) to print scalar
-  Tensor in a less verbose way `Sequence(tf.int32)` rather than
-  `Sequence(Tensor(shape=(), dtype=tf.in32))`.
-
-  Args:
-    feature: The feature to dispaly
-
-  Returns:
-    Either the feature or it's inner value.
-  """
-  # We only print `tf.int32` rather than `Tensor(shape=(), dtype=tf.int32)`
-  # * For the base `Tensor` class (and not subclass).
-  # * When shape is scalar (explicit check to avoid trigger when `shape=None`).
-  if type(feature) == Tensor and feature.shape == ():  # pylint: disable=unidiomatic-typecheck,g-explicit-bool-comparison
-    return repr(feature.dtype)
-  else:
-    return repr(feature)
 
 
 def _repr_html(ex) -> str:
@@ -731,7 +773,9 @@ def _repr_html(ex) -> str:
     # Do not print individual values for array as it is slow
     # TODO(tfds): We could display a snippet, like the first/last tree items
     return f'{type(ex).__qualname__}(shape={ex.shape}, dtype={ex.dtype})'
-  return repr(ex)
+
+  # Escape symbols which might have special meaning in HTML like '<', '>'
+  return html.escape(repr(ex))
 
 
 def _has_shape_ambiguity(in_shape: Shape, out_shape: Shape) -> bool:
@@ -744,8 +788,33 @@ def _has_shape_ambiguity(in_shape: Shape, out_shape: Shape) -> bool:
       in_shape[0] is None  # Empty sequence
       # Unknown output shape (note that sequence length isn't present,
       # as `self.shape` is called from the inner feature).
-      and None in out_shape
-  )
+      and None in out_shape)
+
+
+@functools.lru_cache(None)
+def _feature_content_fields() -> List[descriptor.FieldDescriptor]:
+  """Returns the `oneof content` descriptor fields of the `Feature` proto."""
+  return list(feature_pb2.Feature.DESCRIPTOR.oneofs_by_name['content'].fields)
+
+
+def _name2proto_cls(cls_name: str) -> Type[message.Message]:
+  """Returns the name to the proto class."""
+  all_cls_descriptors = [f.message_type for f in _feature_content_fields()]
+  name2cls = {
+      desc.full_name: desc._concrete_class for desc in all_cls_descriptors  # pylint: disable=protected-access
+  }
+  return name2cls[cls_name]
+
+
+def _proto2oneof_field_name(proto: message.Message) -> str:
+  """Returns the field name associated with the class."""
+  for field in _feature_content_fields():
+    if field.message_type._concrete_class == type(proto):  # pylint: disable=protected-access
+      return field.name
+  supported_cls = [
+      f.message_type._concrete_class.name for f in _feature_content_fields()  # pylint: disable=protected-access
+  ]
+  raise ValueError(f'Unknown proto {type(proto)}. Supported: {supported_cls}.')
 
 
 def _make_empty_seq_output(
@@ -755,6 +824,6 @@ def _make_empty_seq_output(
   """Return an empty (0, *shape) `tf.Tensor` with `0` instead of `None`."""
   if not isinstance(shape, (tuple, list)) or None not in shape:
     raise ValueError(f'Could not construct empty output for shape: {shape}')
-  return tf.constant(
-      [], shape=[0] + [0 if d is None else d for d in shape], dtype=dtype
-  )
+  return tf.constant([],
+                     shape=[0] + [0 if d is None else d for d in shape],
+                     dtype=dtype)

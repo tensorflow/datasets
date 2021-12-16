@@ -11,6 +11,7 @@
 
 # `cosmos_qa`
 
+
 *   **Description**:
 
 Cosmos QA is a large-scale dataset of 35.6K problems that require
@@ -65,21 +66,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{huang-etal-2019-cosmos,
-    title = "Cosmos {QA}: Machine Reading Comprehension with Contextual Commonsense Reasoning",
-    author = "Huang, Lifu  and
-      Le Bras, Ronan  and
-      Bhagavatula, Chandra  and
-      Choi, Yejin",
-    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
-    year = "2019",
-    url = "https://www.aclweb.org/anthology/D19-1243"
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -92,7 +78,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cosmos_qa-1.0.0.html";
@@ -117,3 +103,19 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{huang-etal-2019-cosmos,
+    title = "Cosmos {QA}: Machine Reading Comprehension with Contextual Commonsense Reasoning",
+    author = "Huang, Lifu  and
+      Le Bras, Ronan  and
+      Bhagavatula, Chandra  and
+      Choi, Yejin",
+    booktitle = "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+    year = "2019",
+    url = "https://www.aclweb.org/anthology/D19-1243"
+}
+```
+

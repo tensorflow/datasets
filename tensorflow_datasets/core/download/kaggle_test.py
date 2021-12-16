@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import kaggle
 
@@ -46,14 +46,13 @@ class KaggleTest(testing.TestCase):
   def test_competition_download_404(self):
     with testing.mock_kaggle_api(err_msg='404 - Not found'):
       with testing.tmp_dir() as tmp_dir:
-        with self.assertRaisesRegex(
-            ValueError, 'Please ensure you have spelled the name'):
+        with self.assertRaisesRegex(ValueError,
+                                    'Please ensure you have spelled the name'):
           kaggle.download_kaggle_data('digit-recognize', tmp_dir)
 
   def test_kaggle_type(self):
     self.assertEqual(
-        kaggle._get_kaggle_type('digit-recognizer'), 'competitions'
-    )
+        kaggle._get_kaggle_type('digit-recognizer'), 'competitions')
     self.assertEqual(kaggle._get_kaggle_type('author/dataset'), 'datasets')
 
 

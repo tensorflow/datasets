@@ -225,3 +225,24 @@ downloads).
 ```sh
 tfds build my_dataset --register_checksums
 ```
+
+## Pipeline using TFDS as input
+
+If you want to create a beam pipeline which takes a TFDS dataset as source, you
+can use the `tfds.beam.ReadFromTFDS`:
+
+```python
+builder = tfds.builder('my_dataset')
+
+_ = (
+    pipeline
+    | tfds.beam.ReadFromTFDS(builder, split='train')
+    | beam.Map(tfds.as_numpy)
+    | ...
+)
+```
+
+It will process each shard of the dataset in parallel.
+
+Note: This require the dataset to be already generated. To generate datasets
+using beam, see the other sections.

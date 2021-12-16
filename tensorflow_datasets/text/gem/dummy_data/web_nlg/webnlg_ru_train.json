@@ -1,0 +1,28 @@
+{
+  "language": "ru",
+  "values": [
+      {
+          "input": [
+              "Aarhus_Airport | cityServed | \"Aarhus, Denmark\""
+          ],
+          "target": [
+              "Орхус - аэропорт города Орхус, Дания.",
+              "Аэропорт Орхус обслуживает город Орхус, Дания."
+          ],
+          "category": "Airport",
+          "id": 0,
+          "webnlg-id": "train/Airport/1/Id1"
+      },
+      {
+          "input": [
+              "Aarhus_Airport | cityServed | Aarhus"
+          ],
+          "target": [
+              "Аэропорт Орхус обслуживает город Орхус."
+          ],
+          "category": "Airport",
+          "id": 1,
+          "webnlg-id": "train/Airport/1/Id2"
+      }
+  ]
+}

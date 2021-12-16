@@ -89,10 +89,10 @@ To create your own feature connector, you need to inherit from
 `tfds.features.FeatureConnector` and implement the abstract methods.
 
 *   If your feature is a single tensor value, it's best to inherit from
-    `tfds.feature.Tensor` and use `super()` when needed. See
+    `tfds.features.Tensor` and use `super()` when needed. See
     `tfds.features.BBoxFeature` source code for an example.
 *   If your feature is a container of multiple tensors, it's best to inherit
-    from `tfds.feature.FeaturesDict` and use the `super()` to automatically
+    from `tfds.features.FeaturesDict` and use the `super()` to automatically
     encode sub-connectors.
 
 The `tfds.features.FeatureConnector` object abstracts away how the feature is
@@ -119,8 +119,12 @@ and implement the abstract methods:
     `get_tensor_info()` is different from how the data are actually written on
     disk, then you need to overwrite `get_serialized_info()` to match the specs
     of the `tf.train.Example`
+*   `to_json_content`/`from_json_content`: This is required to allow your
+    dataset to be loaded without the original source code. See
+    [Audio feature](https://github.com/tensorflow/datasets/blob/65a76cb53c8ff7f327a3749175bc4f8c12ff465e/tensorflow_datasets/core/features/audio_feature.py#L121)
+    for an example.
 
-Feature connectors should be tested with `self.assertFeature` and
+Note: Make sure to test your Feature connectors with `self.assertFeature` and
 `tfds.testing.FeatureExpectationItem`. Have a look at
 [test examples](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature_test.py):
 

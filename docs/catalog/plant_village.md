@@ -11,6 +11,13 @@
 
 # `plant_village`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=plant_village">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 The PlantVillage dataset consists of 54303 healthy and unhealthy leaf images
@@ -63,27 +70,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@article{DBLP:journals/corr/HughesS15,
-  author    = {David P. Hughes and
-               Marcel Salath{'{e}}},
-  title     = {An open access repository of images on plant health to enable the
-               development of mobile disease diagnostics through machine
-               learning and crowdsourcing},
-  journal   = {CoRR},
-  volume    = {abs/1511.08060},
-  year      = {2015},
-  url       = {http://arxiv.org/abs/1511.08060},
-  archivePrefix = {arXiv},
-  eprint    = {1511.08060},
-  timestamp = {Mon, 13 Aug 2018 16:48:21 +0200},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/HughesS15},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -97,7 +83,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/plant_village-1.0.2.html";
@@ -122,3 +108,25 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@article{DBLP:journals/corr/HughesS15,
+  author    = {David P. Hughes and
+               Marcel Salath{'{e}}},
+  title     = {An open access repository of images on plant health to enable the
+               development of mobile disease diagnostics through machine
+               learning and crowdsourcing},
+  journal   = {CoRR},
+  volume    = {abs/1511.08060},
+  year      = {2015},
+  url       = {http://arxiv.org/abs/1511.08060},
+  archivePrefix = {arXiv},
+  eprint    = {1511.08060},
+  timestamp = {Mon, 13 Aug 2018 16:48:21 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/HughesS15},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+

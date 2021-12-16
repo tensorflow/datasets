@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,8 +39,7 @@ def test_beam(tmp_path: pathlib.Path):
     ptransform = (
         beam.Create(range(9))
         | beam.Map(lambda x: x * 10)
-        | beam.io.WriteToText(os.fspath(path), shard_name_template='')
-    )
+        | beam.io.WriteToText(os.fspath(path), shard_name_template=''))
     _ = split_builder.beam_pipeline | ptransform
 
   assert path.read_text() == '\n'.join(str(x * 10) for x in range(9)) + '\n'

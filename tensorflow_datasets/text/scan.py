@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import json
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -97,9 +97,7 @@ class ScanConfig(tfds.core.BuilderConfig):
     """
     # Version history:
     super(ScanConfig, self).__init__(
-        name=name,
-        version=tfds.core.Version('1.1.1'),
-        **kwargs)
+        name=name, version=tfds.core.Version('1.1.1'), **kwargs)
     self.splitfile = splitfile
     if 'mcd' in name:
       self.splitfile = name + '.json'

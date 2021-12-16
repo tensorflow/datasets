@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import collections
 import csv
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -78,8 +78,9 @@ for entry in _DATA_OPTIONS_V1_02:
   _DATA_OPTIONS.append(entry + "_v1_02")
 
 _DL_URLS = {
-    name: "https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_us_" +
-          name + ".tsv.gz" for name in _DATA_OPTIONS
+    name:
+    f"https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_us_{name}.tsv.gz"
+    for name in _DATA_OPTIONS
 }
 
 
@@ -144,10 +145,9 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
 
     # There is no predefined train/val/test split for this dataset.
     return [
-        tfds.core.SplitGenerator(
-            name="train", gen_kwargs={
-                "file_path": path,
-            }),
+        tfds.core.SplitGenerator(name="train", gen_kwargs={
+            "file_path": path,
+        }),
     ]
 
   def _generate_examples(self, file_path):

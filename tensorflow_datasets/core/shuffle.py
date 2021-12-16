@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,12 +18,14 @@
 import math
 import os
 import struct
+from typing import Iterator
 import uuid
 
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import hashing
+from tensorflow_datasets.core.utils import type_utils
 
 # Approximately how much data to store in memory before writing to disk.
 # If the amount of data to shuffle is < MAX_MEM_BUFFER_SIZE, no intermediary
@@ -69,7 +71,7 @@ def get_bucket_number(hkey, shards_number):
   """Returns bucket (shard) number (int) for given hashed key (int)."""
   # We purposely do not use modulo (%) to keep global order across shards.
   # floor(key * shards_number / HKEYS_NUMBER), with HKEYS_NUMBER = 2**HKEY_SIZE.
-  return math.trunc((hkey * shards_number)>>HKEY_SIZE)
+  return math.trunc((hkey * shards_number) >> HKEY_SIZE)
 
 
 class _Bucket(object):
@@ -166,18 +168,21 @@ class _Bucket(object):
 class Shuffler(object):
   """Stores data in temp buckets, restitute it shuffled."""
 
-  def __init__(self, dirpath, hash_salt):
+  def __init__(self, dirpath, hash_salt, disable_shuffling: bool = False):
     """Initialize Shuffler.
 
     Args:
       dirpath (string): directory in which to store temporary files.
       hash_salt (string or bytes): salt to hash keys.
+      disable_shuffling (bool): specify whether to shuffle by hashing the key.
     """
     grp_name = uuid.uuid4()
     self._hasher = hashing.Hasher(hash_salt)
+    self._disable_shuffling = disable_shuffling
     self._buckets = []
     for i in range(BUCKETS_NUMBER):
-      path = os.path.join(dirpath, 'bucket_%s_%03d.tmp' % (grp_name, i))
+      bucket_name = 'bucket_%s_%03d.tmp' % (grp_name, i)
+      path = os.path.join(dirpath, bucket_name)
       self._buckets.append(_Bucket(path))
     self._read_only = False
     self._total_bytes = 0
@@ -203,7 +208,7 @@ class Shuffler(object):
   def _add_to_mem_buffer(self, hkey, data):
     self._mem_buffer.append((hkey, data))
     if self._total_bytes > MAX_MEM_BUFFER_SIZE:
-      for hkey, data  in self._mem_buffer:
+      for hkey, data in self._mem_buffer:
         self._add_to_bucket(hkey, data)
       self._mem_buffer = None
       self._in_memory = False
@@ -213,16 +218,19 @@ class Shuffler(object):
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
     if not isinstance(data, six.binary_type):
-      raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' % (
-          type(data)))
-    hkey = self._hasher.hash_key(key)
+      raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' %
+                           (type(data)))
+    if self._disable_shuffling:
+      hkey = key
+    else:
+      hkey = self._hasher.hash_key(key)
     self._total_bytes += len(data)
     if self._in_memory:
       self._add_to_mem_buffer(hkey, data)
     else:
       self._add_to_bucket(hkey, data)
 
-  def __iter__(self):
+  def __iter__(self) -> Iterator[type_utils.KeySerializedExample]:
     self._read_only = True
     previous_hkey = None
     previous_data = None
@@ -231,7 +239,7 @@ class Shuffler(object):
       if hkey == previous_hkey:
         raise DuplicatedKeysError(data, previous_data)
       previous_hkey = hkey
-      yield data
+      yield hkey, data
       previous_data = data
 
   def _iter_mem(self):

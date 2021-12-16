@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import os
 import numpy as np
 from six.moves import urllib
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -244,7 +244,6 @@ class EMNIST(MNIST):
           train_examples=697932,
           test_examples=116323,
           description="EMNIST ByClass",
-
       ),
       EMNISTConfig(
           name="bymerge",
@@ -325,9 +324,8 @@ class EMNIST(MNIST):
     }
 
     dir_name = os.path.join(dl_manager.download_and_extract(self.URL), "gzip")
-    extracted = dl_manager.extract({
-        k: os.path.join(dir_name, fname) for k, fname in filenames.items()
-    })
+    extracted = dl_manager.extract(
+        {k: os.path.join(dir_name, fname) for k, fname in filenames.items()})
 
     return [
         tfds.core.SplitGenerator(

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import hashlib
 import os
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -75,11 +75,6 @@ _DL_URLS = {
 
 _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
-_SUPPORTED_VERSIONS = [
-    # Same data as 0.0.2
-    tfds.core.Version('1.0.0'),
-    tfds.core.Version('2.0.0'),
-]
 
 
 def _get_url_hashes(path):
@@ -150,7 +145,7 @@ def _read_text_file(text_file):
   return lines
 
 
-def _get_art_abs(story_file, tfds_version):
+def _get_art_abs(story_file):
   """Get abstract (highlights) and article from a story file path."""
   # Based on https://github.com/abisee/cnn-dailymail/blob/master/
   #     make_datafiles.py
@@ -171,7 +166,7 @@ def _get_art_abs(story_file, tfds_version):
       return line
     if line[-1] in END_TOKENS:
       return line
-    return line + ' .'
+    return line + '.'
 
   lines = [fix_missing_period(line) for line in lines]
 
@@ -191,11 +186,7 @@ def _get_art_abs(story_file, tfds_version):
 
   # Make article into a single string
   article = ' '.join(article_lines)
-
-  if tfds_version >= '2.0.0':
-    abstract = '\n'.join(highlights)
-  else:
-    abstract = ' '.join(highlights)
+  abstract = '\n'.join(highlights)
 
   return article, abstract
 
@@ -203,15 +194,24 @@ def _get_art_abs(story_file, tfds_version):
 class CnnDailymail(tfds.core.GeneratorBasedBuilder):
   """CNN/DailyMail non-anonymized summarization dataset."""
 
-  VERSION = tfds.core.Version('3.1.0')
+  VERSION = tfds.core.Version('3.2.0')
   RELEASE_NOTES = {
-      '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
-      '2.0.0': """
+      '1.0.0':
+          'New split API (https://tensorflow.org/datasets/splits)',
+      '2.0.0':
+          """
       Separate target sentences with newline. (Having the model predict newline
       separators makes it easier to evaluate using summary-level ROUGE.)
       """,
-      '3.0.0': 'Using cased version.',
-      '3.1.0': 'Removed BuilderConfig',
+      '3.0.0':
+          'Using cased version.',
+      '3.1.0':
+          'Removed BuilderConfig',
+      '3.2.0':
+          """
+      Remove extra space before added sentence period.
+      This shouldn't affect ROUGE scores because punctuation is removed.
+      """,
   }
 
   def _info(self):
@@ -234,8 +234,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={'files': train_files}),
+            name=tfds.Split.TRAIN, gen_kwargs={'files': train_files}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
@@ -248,7 +247,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, files):
     for p in files:
-      article, highlights = _get_art_abs(p, self.version)
+      article, highlights = _get_art_abs(p)
       if not article or not highlights:
         continue
       fname = os.path.basename(p)

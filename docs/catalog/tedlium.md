@@ -11,6 +11,7 @@
 
 # `tedlium`
 
+
 *   **Description**:
 
 The TED-LIUM corpus is English-language TED talks, with transcriptions, sampled
@@ -47,6 +48,7 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
+
 ## tedlium/release1 (default config)
 
 *   **Config description**: The TED-LIUM corpus is English-language TED talks,
@@ -73,18 +75,6 @@ Split          | Examples
 `'train'`      | 56,803
 `'validation'` | 591
 
-*   **Citation**:
-
-```
-@inproceedings{rousseau2012tedlium,
-  title={TED-LIUM: an Automatic Speech Recognition dedicated corpus},
-  author={Rousseau, Anthony and Del{\'e}glise, Paul and Est{\`e}ve, Yannick},
-  booktitle={Conference on Language Resources and Evaluation (LREC)},
-  pages={125--129},
-  year={2012}
-}
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -93,7 +83,7 @@ Split          | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tedlium-release1-1.0.1.html";
@@ -118,6 +108,18 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{rousseau2012tedlium,
+  title={TED-LIUM: an Automatic Speech Recognition dedicated corpus},
+  author={Rousseau, Anthony and Del{\'e}glise, Paul and Est{\`e}ve, Yannick},
+  booktitle={Conference on Language Resources and Evaluation (LREC)},
+  pages={125--129},
+  year={2012}
+}
+```
 
 ## tedlium/release2
 
@@ -151,17 +153,6 @@ Split          | Examples
 `'train'`      | 92,973
 `'validation'` | 591
 
-*   **Citation**:
-
-```
-@inproceedings{rousseau2014tedlium2,
-  title={Enhancing the {TED-LIUM} Corpus with Selected Data for Language Modeling and More {TED} Talks},
-  author={Rousseau, Anthony and Del{\'e}glise, Paul and Est{\`e}ve, Yannick},
-  booktitle={Conference on Language Resources and Evaluation (LREC)},
-  year={2014}
-}
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -170,7 +161,7 @@ Split          | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tedlium-release2-1.0.1.html";
@@ -195,6 +186,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{rousseau2014tedlium2,
+  title={Enhancing the {TED-LIUM} Corpus with Selected Data for Language Modeling and More {TED} Talks},
+  author={Rousseau, Anthony and Del{\'e}glise, Paul and Est{\`e}ve, Yannick},
+  booktitle={Conference on Language Resources and Evaluation (LREC)},
+  year={2014}
+}
+```
 
 ## tedlium/release3
 
@@ -244,19 +246,6 @@ Split          | Examples
 `'train'`      | 268,263
 `'validation'` | 591
 
-*   **Citation**:
-
-```
-@inproceedings{hernandez2018tedlium3,
-  title={TED-LIUM 3: twice as much data and corpus repartition for experiments on speaker adaptation},
-  author={Hernandez, Fran{\c{c}}ois and Nguyen, Vincent and Ghannay, Sahar and Tomashenko, Natalia and Est{\`e}ve, Yannick},
-  booktitle={International Conference on Speech and Computer},
-  pages={198--208},
-  year={2018},
-  organization={Springer}
-}
-```
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -265,7 +254,7 @@ Split          | Examples
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tedlium-release3-1.0.1.html";
@@ -290,3 +279,16 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{hernandez2018tedlium3,
+  title={TED-LIUM 3: twice as much data and corpus repartition for experiments on speaker adaptation},
+  author={Hernandez, Fran{\c{c}}ois and Nguyen, Vincent and Ghannay, Sahar and Tomashenko, Natalia and Est{\`e}ve, Yannick},
+  booktitle={International Conference on Speech and Computer},
+  pages={198--208},
+  year={2018},
+  organization={Springer}
+}
+```

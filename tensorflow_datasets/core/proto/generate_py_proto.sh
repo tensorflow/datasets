@@ -3,6 +3,7 @@
 # This script use the protoc compiler to generate the python code of the
 # all of our proto files.
 
+set -e # Fail on errors
 
 # Ensure we have the desired protoc version.
 MIN_VERSION="libprotoc 3.11.2"
@@ -15,12 +16,6 @@ else
   echo "Using $CURR_VERSION"
 fi
 
-# Function to prepend a pylint directive to skip the generated python file.
-function pylint_skip_file() {
-  local file_name=$1
-  printf "%s\n%s" "# pylint: skip-file" "$(cat ${file_name})" > ${file_name}
-}
-
 
 # Setup tmp directories
 TMP_DIR=$(mktemp -d)
@@ -31,12 +26,20 @@ echo "Temporary directory created: "
 echo ${TMP_DIR}
 
 
+function check_file_exists() {
+  local file_name=$1
+  if [ ! -f ${file_name} ]; then
+      echo "${file_name} not found."
+      echo "Please run this script from the appropriate root directory."
+      exit 1
+  fi
+}
+
 TMP_TFDS_PROTO_DIR="${TMP_TFDS_DIR}/tensorflow_datasets/core/proto"
 DATASET_INFO_PROTO="${TMP_TFDS_PROTO_DIR}/dataset_info.proto"
-if [ ! -f ${DATASET_INFO_PROTO} ]; then
-    echo "${DATASET_INFO_PROTO} not found."
-    echo "Please run this script from the appropriate root directory."
-fi
+FEATURE_PROTO="${TMP_TFDS_PROTO_DIR}/feature.proto"
+check_file_exists ${DATASET_INFO_PROTO}
+check_file_exists ${FEATURE_PROTO}
 
 # Clone tf.metadata
 git clone https://github.com/tensorflow/metadata.git ${TMP_METADATA_DIR}
@@ -46,12 +49,11 @@ protoc ${DATASET_INFO_PROTO} \
   --python_out=${TMP_TFDS_PROTO_DIR} \
   --proto_path=${TMP_METADATA_DIR} \
   --proto_path=${TMP_TFDS_PROTO_DIR}
-
-# Add pylint ignore and name the file as generated.
-GENERATED_DATASET_INFO_PY="${TMP_TFDS_PROTO_DIR}/dataset_info_generated_pb2.py"
-mv ${TMP_TFDS_PROTO_DIR}/dataset_info_pb2.py \
-  ${GENERATED_DATASET_INFO_PY}
-pylint_skip_file "${GENERATED_DATASET_INFO_PY}"
+# Invoke protoc compiler on feature.proto
+protoc ${FEATURE_PROTO} \
+  --python_out=${TMP_TFDS_PROTO_DIR} \
+  --proto_path=${TMP_METADATA_DIR} \
+  --proto_path=${TMP_TFDS_PROTO_DIR}
 
 
 LICENSING_TEXT=$(cat <<-END
@@ -72,6 +74,23 @@ LICENSING_TEXT=$(cat <<-END
 END
 )
 
-printf "%s\n%s" "${LICENSING_TEXT}" "$(cat ${GENERATED_DATASET_INFO_PY})" > \
-  ${GENERATED_DATASET_INFO_PY}
+# Prepends the following to the given file:
+# - a pylint directive to skip the generated python file
+# - a license
+# Writes the result to the target file.
+function add_preamble() {
+  local file_name=$1
+  local target_file_name=$2
+  printf "%s\n%s\n%s" \
+    "# pylint: skip-file" \
+    "${LICENSING_TEXT}" \
+    "$(cat ${file_name})" \
+    > ${target_file_name}
+}
+
+GENERATED_DATASET_INFO_PY="${TMP_TFDS_PROTO_DIR}/dataset_info_generated_pb2.py"
+add_preamble "${TMP_TFDS_PROTO_DIR}/dataset_info_pb2.py" "${GENERATED_DATASET_INFO_PY}"
+
+GENERATED_FEATURE_PY="${TMP_TFDS_PROTO_DIR}/feature_generated_pb2.py"
+add_preamble "${TMP_TFDS_PROTO_DIR}/feature_pb2.py" "${GENERATED_FEATURE_PY}"
 

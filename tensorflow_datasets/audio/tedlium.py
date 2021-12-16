@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import os
 import re
 import numpy as np
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -28,8 +28,8 @@ class TedliumReleaseConfig(tfds.core.BuilderConfig):
   """BuilderConfig for a release of the TED-LIUM dataset."""
 
   def __init__(self, *, url, download_url, split_paths, citation, **kwargs):
-    super(TedliumReleaseConfig,
-          self).__init__(version=tfds.core.Version("1.0.1"), **kwargs)
+    super(TedliumReleaseConfig, self).__init__(
+        version=tfds.core.Version("1.0.1"), **kwargs)
     self.url = url
     self.download_url = download_url
     # List of split, path pairs containing the relative path within the

@@ -11,6 +11,7 @@
 
 # `mctaco`
 
+
 *   **Description**:
 
 MC-TACO is a dataset of 13k question-answer pairs that require temporal
@@ -67,17 +68,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Citation**:
-
-```
-@inproceedings{ZKNR19,
-    author = {Ben Zhou, Daniel Khashabi, Qiang Ning and Dan Roth},
-    title = {"Going on a vacation" takes longer than "Going for a walk": A Study of Temporal Commonsense Understanding },
-    booktitle = {EMNLP},
-    year = {2019},
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -90,7 +80,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mctaco-1.0.0.html";
@@ -115,3 +105,15 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@inproceedings{ZKNR19,
+    author = {Ben Zhou, Daniel Khashabi, Qiang Ning and Dan Roth},
+    title = {"Going on a vacation" takes longer than "Going for a walk": A Study of Temporal Commonsense Understanding },
+    booktitle = {EMNLP},
+    year = {2019},
+}
+```
+

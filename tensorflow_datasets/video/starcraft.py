@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """SCV dataset from http://arxiv.org/abs/1812.01717 ."""
 
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -126,7 +126,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         "rgb_screen":
             tfds.features.Video(
                 shape=(None, self.builder_config.resolution,
-                       self.builder_config.resolution, 3)),
+                       self.builder_config.resolution, 3)),  # pytype: disable=wrong-arg-types  # gen-stub-imports
     })
     return tfds.core.DatasetInfo(
         builder=self,

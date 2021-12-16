@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,7 +53,9 @@ class ResourcePath(zipfile.Path):
   """
 
   def __fspath__(self) -> str:
-    """Path string for `os.path.join`, `open`,... compatibility.
+    """Path string for `os.path.join`, `open`,...
+
+    compatibility.
 
     Note: Calling `os.fspath` on the path extract the file, so should be
     discouraged. Prefer using `read_bytes`,... This only works for files,

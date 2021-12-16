@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """Omniglot dataset."""
 
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -98,13 +98,11 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
                 "directory": extracted_dirs["eval"],
             }),
         tfds.core.SplitGenerator(
-            name="small1",
-            gen_kwargs={
+            name="small1", gen_kwargs={
                 "directory": extracted_dirs["small1"],
             }),
         tfds.core.SplitGenerator(
-            name="small2",
-            gen_kwargs={
+            name="small2", gen_kwargs={
                 "directory": extracted_dirs["small2"],
             }),
     ]

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ and @ PIRM (ECCV 2018)
 
 import os.path
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -129,16 +129,20 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "lr_path": extracted_paths["train_lr_url"],
-                "hr_path": os.path.join(extracted_paths["train_hr_url"],
-                                        "DIV2K_train_HR"),
+                "lr_path":
+                    extracted_paths["train_lr_url"],
+                "hr_path":
+                    os.path.join(extracted_paths["train_hr_url"],
+                                 "DIV2K_train_HR"),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "lr_path": extracted_paths["valid_lr_url"],
-                "hr_path": os.path.join(extracted_paths["valid_hr_url"],
-                                        "DIV2K_valid_HR"),
+                "lr_path":
+                    extracted_paths["valid_lr_url"],
+                "hr_path":
+                    os.path.join(extracted_paths["valid_hr_url"],
+                                 "DIV2K_valid_HR"),
             }),
     ]
 

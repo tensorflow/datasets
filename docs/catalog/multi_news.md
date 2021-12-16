@@ -11,6 +11,7 @@
 
 # `multi_news`
 
+
 *   **Description**:
 
 Multi-News, consists of news articles and human-written summaries of these
@@ -59,19 +60,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('document', 'summary')`
 
-*   **Citation**:
-
-```
-@misc{alex2019multinews,
-    title={Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model},
-    author={Alexander R. Fabbri and Irene Li and Tianwei She and Suyi Li and Dragomir R. Radev},
-    year={2019},
-    eprint={1906.01749},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -84,7 +72,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/multi_news-1.0.0.html";
@@ -109,3 +97,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{alex2019multinews,
+    title={Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model},
+    author={Alexander R. Fabbri and Irene Li and Tianwei She and Suyi Li and Dragomir R. Radev},
+    year={2019},
+    eprint={1906.01749},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```
+

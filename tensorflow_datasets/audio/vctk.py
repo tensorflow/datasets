@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -149,8 +149,7 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     speech_dir = "wav48_silence_trimmed"
     mic = "_%s" % self.builder_config.name
-    speech_glob = os.path.join(extracted_dir, speech_dir, "*",
-                               "*%s.flac" % mic)
+    speech_glob = os.path.join(extracted_dir, speech_dir, "*", "*%s.flac" % mic)
     for speech_path in tf.io.gfile.glob(speech_glob):
       text_path = speech_path.replace(speech_dir, "txt").split(mic)[0] + ".txt"
       key, _ = os.path.splitext(os.path.basename(text_path))

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """The ImageNet-R image classification dataset."""
 
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = r"""
@@ -53,7 +53,14 @@ _IMAGENET_R_URL = r'https://people.eecs.berkeley.edu/~hendrycks/imagenet-r.tar'
 class ImagenetR(tfds.core.GeneratorBasedBuilder):
   """ImageNet object renditions with ImageNet labels."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.2.0')
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('0.1.0'),
+  ]
+  RELEASE_NOTES = {
+      '0.2.0': ('Fix file_name, from absolute path to path relative to '
+                'imagenet-r directory, ie: "imagenet_synset_id/filename.jpg".')
+  }
 
   def _info(self):
     names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FILENAME)
@@ -99,6 +106,6 @@ class ImagenetR(tfds.core.GeneratorBasedBuilder):
         features = {
             'image': image_path,
             'label': class_synset,
-            'file_name': image_path,
+            'file_name': os.path.join(class_synset, image_filename),
         }
         yield f'{class_synset}_{image_filename}', features

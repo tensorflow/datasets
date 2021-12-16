@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,18 +24,20 @@ _EXAMPLE_DIR = os.path.join(
     os.path.normpath(os.path.dirname(__file__) + '/../'), 'testing',
     'test_data', 'fake_examples', 'sun397')
 
-
 # Could use functools.partialmethod in Python3
 original_init = sun.Sun397.__init__
 
 
 def new_init(self, tfds_split_files=None, **kwargs):
   assert tfds_split_files is None
-  original_init(self, tfds_split_files={
-      'tr': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_tr.txt'),
-      'te': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_te.txt'),
-      'va': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_va.txt'),
-  }, **kwargs)
+  original_init(
+      self,
+      tfds_split_files={
+          'tr': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_tr.txt'),
+          'te': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_te.txt'),
+          'va': os.path.join(_EXAMPLE_DIR, 'sun397_tfds_va.txt'),
+      },
+      **kwargs)
 
 
 # Patch init to add init arguments without changing the class.__name__ and
@@ -62,6 +64,7 @@ class Sun397TfdsTest(testing.DatasetBuilderTestCase):
       'test': 2,
       'validation': 2,
   }
+
 
 if __name__ == '__main__':
   testing.test_main()

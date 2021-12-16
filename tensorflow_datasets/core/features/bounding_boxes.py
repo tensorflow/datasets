@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,12 +19,12 @@ import collections
 from typing import Any
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.features import image_feature
+from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -34,11 +34,11 @@ BBox = collections.namedtuple('BBox', 'ymin, xmin, ymax, xmax')
 PilImage = Any
 
 
-class BBoxFeature(feature.Tensor):
+class BBoxFeature(tensor_feature.Tensor):
   """`FeatureConnector` for a normalized bounding box.
 
   Note: If you have multiple bounding boxes, you may want to wrap the feature
-  inside a `tfds.feature.Sequence`.
+  inside a `tfds.features.Sequence`.
 
   Input:
     * `tfds.features.BBox` tuple.
@@ -52,7 +52,7 @@ class BBoxFeature(feature.Tensor):
 
     ```
     features=features.FeatureDict({
-        'bbox': features.BBox(shape=(None, 64, 64, 3)),
+        'bbox': tfds.features.BBox(),
     })
     ```
 
@@ -60,7 +60,7 @@ class BBoxFeature(feature.Tensor):
 
     ```
     yield {
-        'input': tfds.feature.BBox(ymin=0.3, xmin=0.8, ymax=0.5, xmax=1.0),
+        'input': tfds.features.BBox(ymin=0.3, xmin=0.8, ymax=0.5, xmax=1.0),
     }
     ```
   """
@@ -83,8 +83,7 @@ class BBoxFeature(feature.Tensor):
             'BBox coordinates should have min <= max. Got {}.'.format(bbox))
 
     return super(BBoxFeature, self).encode_example(
-        [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax]
-    )
+        [bbox.ymin, bbox.xmin, bbox.ymax, bbox.xmax])
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Returns the HTML str representation of an Image with BBoxes."""

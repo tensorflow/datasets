@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,8 +19,10 @@
 from tensorflow_datasets.core.naming import DatasetName
 from tensorflow_datasets.core.units import Size
 from tensorflow_datasets.core.utils import docs
+from tensorflow_datasets.core.utils import tree_utils as tree
 from tensorflow_datasets.core.utils.gcs_utils import gcs_path
 from tensorflow_datasets.core.utils.generic_path import as_path
+from tensorflow_datasets.core.utils.generic_path import register_pathlike_cls
 from tensorflow_datasets.core.utils.image_utils import *
 from tensorflow_datasets.core.utils.py_utils import *
 from tensorflow_datasets.core.utils.resource_utils import *

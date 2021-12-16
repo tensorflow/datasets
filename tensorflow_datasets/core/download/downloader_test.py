@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2021 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ from typing import Optional
 from unittest import mock
 
 import pytest
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resource_lib
@@ -192,12 +192,16 @@ _CONTENT_DISPOSITION_FILENAME_PAIRS = [
             filename*= UTF-8''%e2%82%ac%20rates.zip""",
         None,
     ),
+    # Give only file base name when directory path is given
+    (
+        'inline;filename=path/to/dir/f-name.png;filename*=UTF-8',
+        'f-name.png',
+    )
 ]
 
 
-@pytest.mark.parametrize(
-    ('content_disposition', 'filename'), _CONTENT_DISPOSITION_FILENAME_PAIRS
-)
+@pytest.mark.parametrize(('content_disposition', 'filename'),
+                         _CONTENT_DISPOSITION_FILENAME_PAIRS)
 def test_filename_from_content_disposition(
     content_disposition: str,
     filename: Optional[str],
@@ -212,18 +216,15 @@ def test_filename_from_content_disposition(
         (
             # Filename should be parsed from the ascii name, not UTF-8
             """attachment;filename="hello.zip";filename*=UTF-8''other.zip""",
-            'hello.zip'
-        ),
+            'hello.zip'),
         (
             # If ascii filename can't be parsed, filename parsed from url
             """attachment;filename*=UTF-8''other.zip""",
-            'baz.zip'
-        ),
+            'baz.zip'),
         (
             # No headers, filename parsed from url
             None,
-            'baz.zip'
-        ),
+            'baz.zip'),
     ],
 )
 def test_filename_from_headers(

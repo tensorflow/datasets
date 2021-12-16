@@ -11,6 +11,13 @@
 
 # `cassava`
 
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=cassava">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Description**:
 
 Cassava consists of leaf images for the cassava plant depicting healthy and four
@@ -61,19 +68,6 @@ FeaturesDict({
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
 
-*   **Citation**:
-
-```
-@misc{mwebaze2019icassava,
-    title={iCassava 2019Fine-Grained Visual Categorization Challenge},
-    author={Ernest Mwebaze and Timnit Gebru and Andrea Frome and Solomon Nsumba and Jeremy Tusubira},
-    year={2019},
-    eprint={1908.02900},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
-}
-```
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -87,7 +81,7 @@ FeaturesDict({
 {% framebox %}
 
 <button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:scroll"></div>
+<div id="dataframecontent" style="overflow-x:auto"></div>
 <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
 var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cassava-0.1.0.html";
@@ -112,3 +106,17 @@ $(document).ready(() => {
 {% endframebox %}
 
 <!-- mdformat on -->
+
+*   **Citation**:
+
+```
+@misc{mwebaze2019icassava,
+    title={iCassava 2019Fine-Grained Visual Categorization Challenge},
+    author={Ernest Mwebaze and Timnit Gebru and Andrea Frome and Solomon Nsumba and Jeremy Tusubira},
+    year={2019},
+    eprint={1908.02900},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+```
+
