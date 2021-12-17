@@ -158,9 +158,9 @@ FeaturesDict({
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `({'culmen_depth_mm': 'culmen_depth_mm', 'island': 'island',
-    'culmen_length_mm': 'culmen_length_mm', 'sex': 'sex', 'flipper_length_mm':
-    'flipper_length_mm', 'body_mass_g': 'body_mass_g', 'species': 'species'},
+    `({'island': 'island', 'flipper_length_mm': 'flipper_length_mm',
+    'culmen_depth_mm': 'culmen_depth_mm', 'body_mass_g': 'body_mass_g',
+    'species': 'species', 'culmen_length_mm': 'culmen_length_mm', 'sex': 'sex'},
     'species')`
 
 *   **Examples**
