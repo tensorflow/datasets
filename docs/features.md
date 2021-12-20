@@ -66,6 +66,29 @@ ds.element_spec == {
 }
 ```
 
+## Serialize/deserialize to proto
+
+TFDS expose a low-level API to serialize/deserialize examples to
+`tf.train.Example` proto.
+
+To serialize `dict[np.ndarray | Path | str | ...]` to proto `bytes`, use
+`features.serialize_example`:
+
+```python
+with tf.io.TFRecordWriter('path/to/file.tfrecord') as writer:
+  for ex in all_exs:
+    ex_bytes = features.serialize_example(data)
+    f.write(ex_bytes)
+```
+
+To deserialize to proto `bytes` to `tf.Tensor`, use
+`features.deserialize_example`:
+
+```python
+ds = tf.data.TFRecordDataset('path/to/file.tfrecord')
+ds = ds.map(features.deserialize_example)
+```
+
 ## Access metadata
 
 See the
