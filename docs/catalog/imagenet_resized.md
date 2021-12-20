@@ -43,7 +43,8 @@ indexed by subtracting one.
 
 *   **Versions**:
 
-    *   **`0.1.0`** (default): No release notes.
+    *   **`0.1.0`** (default): Imagenet Resized Datset
+    *   `0.1.1`: Webisite URL update
 
 *   **Dataset size**: `Unknown size`
 
