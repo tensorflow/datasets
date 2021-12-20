@@ -47,7 +47,7 @@ Additionally, the original authors 1 index there labels which we convert to
 """
 
 _LABELS_FNAME = 'image_classification/imagenet_resized_labels.txt'
-_URL_PREFIX = 'http://www.image-net.org/image/downsample/'
+_URL_PREFIX = 'http://www.image-net.org/data/downsample/'
 
 
 class ImagenetResizedConfig(tfds.core.BuilderConfig):
@@ -75,7 +75,11 @@ def _make_builder_configs():
 class ImagenetResized(tfds.core.GeneratorBasedBuilder):
   """Imagenet Resized dataset."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
+  RELEASE_NOTES = {
+      '0.1.0': 'Imagenet Resized Datset',
+      '0.1.1': 'Webisite URL update',
+  }
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
