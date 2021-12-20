@@ -61,6 +61,26 @@ Specifying the features allow TFDS to automatically decode images, video,...
 Like any other TFDS datasets, features metadata (e.g. label names,...) will be
 exposed to the user (e.g. `info.features['label'].names`).
 
+#### If you control the generation pipeline
+
+If you generate datasets outside of TFDS but still control the generation
+pipeline, you can use `tfds.features.FeatureConnector.serialize_example` to
+encode your data from `dict[np.ndarray]` to `tf.train.Example` proto `bytes`:
+
+```python
+with tf.io.TFRecordWriter('path/to/file.tfrecord') as writer:
+  for ex in all_exs:
+    ex_bytes = features.serialize_example(data)
+    f.write(ex_bytes)
+```
+
+This will ensure feature compatibility with TFDS.
+
+Similarly, a `feature.deserialize_example` exists to decode the proto
+([example](https://www.tensorflow.org/datasets/features#serializedeserialize_to_proto))
+
+#### If you don't control the generation pipeline
+
 If you're not sure what your `tfds.features` translates into `tf.train.Example`,
 you can experiment in colab:
 
