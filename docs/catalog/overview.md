@@ -359,6 +359,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`xtreme_xnli`](xtreme_xnli.md)
 *   [`yelp_polarity_reviews`](yelp_polarity_reviews.md)
 
+### `Text simplification`
+
+*   [`asset`](asset.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Time series`
 
 *   [`smartwatch_gestures`](smartwatch_gestures.md)
