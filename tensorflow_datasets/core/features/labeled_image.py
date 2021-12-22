@@ -17,6 +17,7 @@
 
 from typing import Dict, List, Optional, Union
 
+from etils import epath
 import tensorflow as tf
 from tensorflow_datasets.core.features import class_label_feature
 from tensorflow_datasets.core.features import feature as feature_lib
@@ -26,7 +27,7 @@ from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
 
-_LabelArg = Union[List[str], type_utils.PathLike, None, int]
+_LabelArg = Union[List[str], epath.PathLike, None, int]
 
 
 class LabeledImage(image_feature.Image):
@@ -133,7 +134,7 @@ def _labels_to_kwarg(labels: _LabelArg) -> Dict[str, _LabelArg]:
     return {}
   elif isinstance(labels, int):
     kwarg_name = 'num_classes'
-  elif isinstance(labels, type_utils.PathLikeCls):
+  elif isinstance(labels, epath.PathLikeCls):
     kwarg_name = 'names_file'
   elif isinstance(labels, list):
     kwarg_name = 'names'

@@ -15,6 +15,7 @@
 
 """Tests for build_community."""
 
+from etils import epath
 import tensorflow_datasets as tfds  # pylint: disable=unused-import
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.scripts.documentation import build_community_catalog
@@ -25,7 +26,7 @@ DatasetName = utils.DatasetName
 
 
 def _create_dataset_package(namespace: str, name: str) -> DatasetPackage:
-  path = utils.as_path(
+  path = epath.Path(
       f'github://huggingface/datasets/tree/master/datasets/{name}')
   return DatasetPackage(
       name=DatasetName(namespace_name=f'{namespace}:{name}'),

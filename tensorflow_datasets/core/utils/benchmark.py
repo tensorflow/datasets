@@ -15,11 +15,11 @@
 
 """Benchmark utils."""
 
+import dataclasses
 import time
 from typing import Any, Dict, Iterable, Optional, Union
 
 from absl import logging
-import dataclasses
 from tensorflow_datasets.core.utils import tqdm_utils
 
 try:

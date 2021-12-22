@@ -19,6 +19,7 @@ import json
 import os
 import re
 
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -194,7 +195,7 @@ def _get_english_words():
   global _ENGLISH_WORDS
   if not _ENGLISH_WORDS:
     nltk = tfds.core.lazy_imports.nltk
-    resource_path = tfds.core.utils.resource_path(nltk)
+    resource_path = epath.resource_path(nltk)
     data_path = os.fspath(resource_path / "nltk_data/corpora/words/en")
     word_list = nltk.data.load(data_path, format="raw").decode("utf-8")
     _ENGLISH_WORDS = frozenset(word_list.split("\n"))

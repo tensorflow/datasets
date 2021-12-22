@@ -223,7 +223,8 @@ Most datasets need to download data from the web. This is done using the
 *   `download_and_extract`: Same as
     `dl_manager.extract(dl_manager.download(urls))`
 
-All those methods returns `tfds.core.ReadOnlyPath`, which are
+All those methods returns `tfds.core.Path` (aliases for
+[`epath.Path`](https://github.com/google/etils)), which are
 [pathlib.Path-like](https://docs.python.org/3/library/pathlib.html) objects.
 
 Those methods supports arbitrary nested structure (`list`, `dict`), like:

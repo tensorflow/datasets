@@ -20,6 +20,7 @@ import os
 import tempfile
 from typing import Any, List, Optional, Union
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 
@@ -74,7 +75,7 @@ class _ImageEncoder:
     """Convert the given image into a dict convertible to tf example."""
     if isinstance(image_or_path_or_fobj, np.ndarray):
       encoded_image = self._encode_image(image_or_path_or_fobj)
-    elif isinstance(image_or_path_or_fobj, type_utils.PathLikeCls):
+    elif isinstance(image_or_path_or_fobj, epath.PathLikeCls):
       image_or_path_or_fobj = os.fspath(image_or_path_or_fobj)
       with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
         encoded_image = image_f.read()
@@ -385,7 +386,7 @@ def _get_repr_html_ffmpeg(images: List[PilImage]) -> str:
         # so allow software encoding
         # '-allow_sw', '1',
     ]
-    video_path = utils.as_path(video_dir) / 'output.mp4'
+    video_path = epath.Path(video_dir) / 'output.mp4'
     ffmpeg_args.append(os.fspath(video_path))
     utils.ffmpeg_run(ffmpeg_args)
     video_str = utils.get_base64(video_path.read_bytes())

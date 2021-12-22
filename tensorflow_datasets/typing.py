@@ -15,6 +15,7 @@
 
 """TFDS typing annotations."""
 
+from etils import epath
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core.features import feature
@@ -23,6 +24,9 @@ from tensorflow_datasets.core.utils import type_utils
 # pylint: disable=unused-import
 from tensorflow_datasets.core.utils.type_utils import *  # pylint: disable=wildcard-import
 # pylint: enable=unused-import
+
+# Accept both `str` and `pathlib.Path`-like
+PathLike = epath.PathLike
 
 DecoderArg = decode.partial_decode.DecoderArg
 FeatureSpecs = decode.partial_decode.FeatureSpecs
@@ -33,5 +37,6 @@ __all__ = type_utils.__all__ + [
     'DecoderArg',
     'FeatureConnectorArg',
     'FeatureSpecs',
+    'PathLike',
     'SplitArg',
 ]

@@ -26,7 +26,7 @@ from typing import Dict, Iterator, Optional, Tuple, Type
 from absl import logging
 import tensorflow_datasets as tfds
 
-# pylint: disable=logging-format-interpolation
+# pylint: disable=logging-fstring-interpolation
 
 
 def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: disable=protected-access
@@ -73,9 +73,9 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   path_group = build_parser.add_argument_group('Paths')
   path_group.add_argument(
       '--data_dir',
-      type=tfds.core.as_path,
+      type=tfds.core.Path,
       # Should match tfds.core.constant.DATA_DIR !!
-      default=tfds.core.as_path(
+      default=tfds.core.Path(
           os.environ.get('TFDS_DATA_DIR',
                          os.path.join('~', 'tensorflow_datasets'))),
       help='Where to place datasets. Default to '
@@ -83,17 +83,17 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   )
   path_group.add_argument(
       '--download_dir',
-      type=tfds.core.as_path,
+      type=tfds.core.Path,
       help='Where to place downloads. Default to `<data_dir>/downloads/`.',
   )
   path_group.add_argument(
       '--extract_dir',
-      type=tfds.core.as_path,
+      type=tfds.core.Path,
       help='Where to extract files. Default to `<download_dir>/extracted/`.',
   )
   path_group.add_argument(
       '--manual_dir',
-      type=tfds.core.as_path,
+      type=tfds.core.Path,
       help='Where to manually download data (required for some datasets). '
       'Default to `<download_dir>/manual/`.',
   )
@@ -265,7 +265,7 @@ def _get_builder_cls(
   return builder_cls, builder_kwargs
 
 
-def _search_script_path(ds_to_build: str) -> Optional[tfds.core.ReadOnlyPath]:
+def _search_script_path(ds_to_build: str) -> Optional[tfds.core.Path]:
   """Check whether the requested dataset match a file on disk."""
   # If the dataset file exists, use it. Valid values are:
   # * Empty string (use default directory)
@@ -276,9 +276,9 @@ def _search_script_path(ds_to_build: str) -> Optional[tfds.core.ReadOnlyPath]:
   # TODO(py3.7): Should be `path.expanduser().resolve()` but `.resolve()` fails
   # on some environments when the file doesn't exists.
   # https://stackoverflow.com/questions/55710900/pathlib-resolve-method-not-resolving-non-existant-files
-  path = tfds.core.as_path(ds_to_build).expanduser()
+  path = tfds.core.Path(ds_to_build).expanduser()
   if not path.exists():
-    path = tfds.core.as_path(pathlib.Path()).resolve() / path
+    path = tfds.core.Path(pathlib.Path()).resolve() / path
   else:
     path = path.resolve()
 
@@ -294,7 +294,7 @@ def _search_script_path(ds_to_build: str) -> Optional[tfds.core.ReadOnlyPath]:
     return path
   # Path not found. Use heuristic to detect if user intended to pass a path:
   elif (not ds_to_build or ds_to_build.endswith((os.sep, '.py'))  # ds.py
-        or tfds.core.as_path(ds_to_build).is_absolute()  # /path/to
+        or tfds.core.Path(ds_to_build).is_absolute()  # /path/to
         or ds_to_build.count(os.sep) > 1  # path/dataset/config
        ):
     raise FileNotFoundError(
@@ -304,8 +304,7 @@ def _search_script_path(ds_to_build: str) -> Optional[tfds.core.ReadOnlyPath]:
     return None
 
 
-def _validate_script_path(
-    path: tfds.core.ReadOnlyPath,) -> Optional[tfds.core.ReadOnlyPath]:
+def _validate_script_path(path: tfds.core.Path,) -> Optional[tfds.core.Path]:
   """Validates and returns the `dataset.py` generation script path."""
   if path.suffix != '.py':
     raise ValueError(f'Expected `.py` file. Invalid dataset path: {path}.')

@@ -24,7 +24,6 @@ import typing
 from typing import Any, Callable, Dict, Iterator, Iterable, List, Optional, Tuple, Union
 
 from absl import logging
-
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
@@ -298,7 +297,7 @@ class SplitBuilder:
         import apache_beam as beam  # pylint: disable=g-import-not-at-top
       except ImportError:
         # Beam can't be imported, what was the object returned by the user ?
-        raise unknown_generator_type
+        raise unknown_generator_type  # pylint: disable=raise-missing-from
       if isinstance(generator, beam.PTransform):
         # Generate the beam.PCollection
         pcollection = self.beam_pipeline | split_name >> generator

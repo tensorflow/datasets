@@ -20,9 +20,9 @@ import json
 import os
 from typing import Any, Dict, List, Optional, Tuple, Union
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
-import tensorflow_datasets.core.utils.type_utils as type_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -92,7 +92,7 @@ def _decode_segmentation(segmentation: Union[List[NestedDict],
 
 
 def _find_frame_index(frame_filename: str,
-                      all_video_frame_paths: List[type_utils.PathLike]) -> int:
+                      all_video_frame_paths: List[epath.PathLike]) -> int:
   for index, path in enumerate(all_video_frame_paths):
     if frame_filename in os.fspath(path):
       return index
@@ -103,7 +103,7 @@ def _find_frame_index(frame_filename: str,
 
 def _create_per_track_annotation(
     video: NestedDict,
-    all_video_frame_paths: List[type_utils.PathLike],
+    all_video_frame_paths: List[epath.PathLike],
     track_annotation: NestedDict,
     desired_height: Optional[int] = None,
     desired_width: Optional[int] = None) -> NestedDict:
@@ -520,8 +520,8 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     return resized_images
 
   def _generate_examples(self,
-                         annotations: type_utils.ReadOnlyPath,
-                         all_frames: type_utils.ReadOnlyPath,
+                         annotations: epath.Path,
+                         all_frames: epath.Path,
                          video_range_to_use: Optional[Tuple[int, int]] = None):
     beam = tfds.core.lazy_imports.apache_beam
     annotations = json.loads(annotations.read_text())

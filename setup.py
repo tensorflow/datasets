@@ -46,6 +46,7 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'etils[epath-no-tf]',
     'numpy',
     'promise',
     'protobuf>=3.12.2',
@@ -203,7 +204,7 @@ setup(
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     extras_require=EXTRAS_REQUIRE,
     classifiers=[
         'Development Status :: 4 - Beta',

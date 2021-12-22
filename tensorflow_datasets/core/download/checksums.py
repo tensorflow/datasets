@@ -15,15 +15,14 @@
 
 """Methods to retrieve and store size/checksums associated to URLs."""
 
+import dataclasses
 import hashlib
 import io
 from typing import Any, Dict, Iterable, Optional
 
 from absl import logging
-import dataclasses
-
+from etils import epath
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import type_utils
 
 _CHECKSUM_DIRS = [
     utils.tfds_path() / 'url_checksums',
@@ -52,11 +51,11 @@ class UrlInfo:
 
 
 def compute_url_info(
-    path: utils.PathLike,
+    path: epath.PathLike,
     checksum_cls=hashlib.sha256,
 ) -> UrlInfo:
   """Locally compute size, checksums of the given file."""
-  path = utils.as_path(path)
+  path = epath.Path(path)
 
   checksum = checksum_cls()
   size = 0
@@ -112,12 +111,12 @@ def add_checksums_dir(checksums_dir: str) -> None:
 
 
 @utils.memoize()
-def _checksum_paths() -> Dict[str, type_utils.ReadOnlyPath]:
+def _checksum_paths() -> Dict[str, epath.Path]:
   """Returns dict {'dataset_name': 'path/to/checksums/file'}."""
   dataset2path = {}
   for dir_path in _CHECKSUM_DIRS:
     if isinstance(dir_path, str):
-      dir_path = utils.as_path(dir_path)
+      dir_path = epath.Path(dir_path)
     if not dir_path.exists():
       pass
     for file_path in dir_path.iterdir():
@@ -169,13 +168,13 @@ def get_all_url_infos() -> Dict[str, UrlInfo]:
   return url_infos
 
 
-def load_url_infos(path: type_utils.PathLike) -> Dict[str, UrlInfo]:
+def load_url_infos(path: epath.PathLike) -> Dict[str, UrlInfo]:
   """Loads the checksums."""
-  return _parse_url_infos(utils.as_path(path).read_text().splitlines())
+  return _parse_url_infos(epath.Path(path).read_text().splitlines())
 
 
 def save_url_infos(
-    path: type_utils.ReadWritePath,
+    path: epath.Path,
     url_infos: Dict[str, UrlInfo],
 ) -> None:
   """Store given checksums and sizes for specific dataset.
