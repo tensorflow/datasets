@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Text simplification datasets."""
+"""wiki_auto dataset."""
 
-from tensorflow_datasets.text_simplification.asset import Asset
-from tensorflow_datasets.text_simplification.wiki_auto import WikiAuto
+from tensorflow_datasets.text_simplification.wiki_auto.wiki_auto import WikiAuto
