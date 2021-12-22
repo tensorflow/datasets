@@ -28,19 +28,18 @@ else:
 project_name = 'tensorflow-datasets'
 
 # To enable importing version.py directly, we add its path to sys.path.
-version_path = os.path.join(
-    os.path.dirname(__file__), 'tensorflow_datasets')
+version_path = os.path.join(os.path.dirname(__file__), 'tensorflow_datasets')
 sys.path.append(version_path)
 from version import __version__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
 
 if nightly:
   project_name = 'tfds-nightly'
   # Version as `X.Y.Z.dev199912312459`
-  datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
-                datetime.datetime.now().strftime('%Y%m%d%H%M'))
+  datestring = (
+      os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
+      datetime.datetime.now().strftime('%Y%m%d%H%M'))
   curr_version = pkg_resources.parse_version(__version__)
   __version__ = f'{curr_version.base_version}.dev{datestring}'
-
 
 DOCLINES = __doc__.split('\n')
 
@@ -59,6 +58,11 @@ REQUIRED_PKGS = [
     'dataclasses;python_version<"3.7"',
     'typing_extensions;python_version<"3.8"',
     'importlib_resources;python_version<"3.9"',
+    'etils[epy]',
+] + [
+    # Add etils[epath-no-tf]
+    'importlib_resources',
+    'zipp',
 ]
 
 TESTS_REQUIRE = [
@@ -153,18 +157,16 @@ DATASET_EXTRAS = {
     'youtube_vis': ['pycocotools'],
 }
 
-
 # Those datasets have dependencies which conflict with the rest of TFDS, so
 # running them in an isolated environments.
 # See `./oss_scripts/oss_tests.sh` for the isolated test.
 ISOLATED_DATASETS = ('nsynth', 'lsun')
 
 # Extra dataset deps are required for the tests
-all_dataset_extras = list(itertools.chain.from_iterable(
-    deps for ds_name, deps in DATASET_EXTRAS.items()
-    if ds_name not in ISOLATED_DATASETS
-))
-
+all_dataset_extras = list(
+    itertools.chain.from_iterable(
+        deps for ds_name, deps in DATASET_EXTRAS.items()
+        if ds_name not in ISOLATED_DATASETS))
 
 EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
@@ -190,17 +192,16 @@ setup(
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
-        'tensorflow_datasets': DATASET_FILES + [
-            'core/utils/colormap.csv',
-            'scripts/documentation/templates/*',
-            'url_checksums/*',
-            'checksums.tsv',
-        ],
+        'tensorflow_datasets':
+            DATASET_FILES + [
+                'core/utils/colormap.csv',
+                'scripts/documentation/templates/*',
+                'url_checksums/*',
+                'checksums.tsv',
+            ],
     },
     exclude_package_data={
-        'tensorflow_datasets': [
-            'dummy_data/*',
-        ],
+        'tensorflow_datasets': ['dummy_data/*',],
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,

@@ -24,6 +24,7 @@ import types
 from typing import Iterator, NamedTuple, Optional, Union
 from unittest import mock
 
+from etils import epath
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -287,7 +288,7 @@ def _new_open(*args, encoding=None, **kwargs):
 def _new_pathlib_path_new(cls, *args):
   """Mocked `pathlib.Path.__new__`."""
   del cls
-  return utils.as_path(*args)
+  return epath.Path(*args)
 
 
 @contextlib.contextmanager

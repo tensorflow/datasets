@@ -28,6 +28,7 @@ from unittest import mock
 
 from absl import logging
 from absl.testing import parameterized
+from etils import epath
 import numpy as np
 import tensorflow as tf
 
@@ -195,15 +196,15 @@ class DatasetBuilderTestCase(parameterized.TestCase,
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def dummy_data(cls) -> utils.ReadOnlyPath:  # pylint: disable=no-self-argument
+  def dummy_data(cls) -> epath.Path:  # pylint: disable=no-self-argument
     """Path to the `dummy_data/` directory."""
     if cls is DatasetBuilderTestCase:  # Required for build_api_docs
       return None  # pytype: disable=bad-return-type
 
     dummy_data_expected = cls.DATASET_CLASS.code_path.parent / "dummy_data"
-    fake_example_dir = utils.as_path(test_utils.fake_examples_dir())
+    fake_example_dir = epath.Path(test_utils.fake_examples_dir())
     if cls.EXAMPLE_DIR is not None:
-      dummy_data_found = utils.as_path(cls.EXAMPLE_DIR)
+      dummy_data_found = epath.Path(cls.EXAMPLE_DIR)
       dummy_data_expected = dummy_data_found  # Dir to display in the error
     elif dummy_data_expected.exists():
       dummy_data_found = dummy_data_expected

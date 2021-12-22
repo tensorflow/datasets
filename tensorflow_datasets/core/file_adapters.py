@@ -21,6 +21,7 @@ import os
 
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type
 
+from etils import epath
 import tensorflow as tf
 
 from tensorflow_datasets.core.utils import type_utils
@@ -49,7 +50,7 @@ class FileAdapter(abc.ABC):
   @abc.abstractmethod
   def make_tf_data(
       cls,
-      filename: type_utils.PathLike,
+      filename: epath.PathLike,
       buffer_size: Optional[int] = None,
   ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
@@ -59,7 +60,7 @@ class FileAdapter(abc.ABC):
   @abc.abstractmethod
   def write_examples(
       cls,
-      path: type_utils.PathLike,
+      path: epath.PathLike,
       iterator: Iterable[type_utils.KeySerializedExample],
   ) -> Optional[ExamplePositions]:
     """Write examples from given iterator in given path.
@@ -83,7 +84,7 @@ class TfRecordFileAdapter(FileAdapter):
   @classmethod
   def make_tf_data(
       cls,
-      filename: type_utils.PathLike,
+      filename: epath.PathLike,
       buffer_size: Optional[int] = None,
   ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
@@ -92,7 +93,7 @@ class TfRecordFileAdapter(FileAdapter):
   @classmethod
   def write_examples(
       cls,
-      path: type_utils.PathLike,
+      path: epath.PathLike,
       iterator: Iterable[type_utils.KeySerializedExample],
   ) -> Optional[ExamplePositions]:
     """Write examples from given iterator in given path.
@@ -118,7 +119,7 @@ class RiegeliFileAdapter(FileAdapter):
   @classmethod
   def make_tf_data(
       cls,
-      filename: type_utils.PathLike,
+      filename: epath.PathLike,
       buffer_size: Optional[int] = None,
   ) -> tf.data.Dataset:
     from riegeli.tensorflow.ops import riegeli_dataset_ops as riegeli_tf  # pylint: disable=g-import-not-at-top
@@ -127,7 +128,7 @@ class RiegeliFileAdapter(FileAdapter):
   @classmethod
   def write_examples(
       cls,
-      path: type_utils.PathLike,
+      path: epath.PathLike,
       iterator: Iterable[type_utils.KeySerializedExample],
   ) -> Optional[ExamplePositions]:
     """Write examples from given iterator in given path.

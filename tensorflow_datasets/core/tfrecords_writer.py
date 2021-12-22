@@ -23,6 +23,7 @@ import os
 from typing import Any, Iterable, List, Optional, Tuple
 
 from absl import logging
+from etils import epath
 import six
 import tensorflow as tf
 
@@ -88,7 +89,7 @@ def _raise_error_for_duplicated_keys(example1, example2, example_specs):
   raise AssertionError(msg + " See logs above to view the examples.")
 
 
-def _get_index_path(path: str) -> type_utils.PathLike:
+def _get_index_path(path: str) -> epath.PathLike:
   """Returns path to the index file of the records stored at the given path.
 
   E.g: Say the path to a shard of records (of a particular split) are stored at
@@ -157,7 +158,7 @@ def _get_shard_boundaries(
 
 
 def _write_examples(
-    path: type_utils.PathLike,
+    path: epath.PathLike,
     iterator: Iterable[type_utils.KeySerializedExample],
     file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT
 ) -> Optional[file_adapters.ExamplePositions]:
@@ -166,7 +167,7 @@ def _write_examples(
       path, iterator)
 
 
-def _write_index_file(sharded_index_path: type_utils.PathLike,
+def _write_index_file(sharded_index_path: epath.PathLike,
                       record_keys: List[Any]):
   """Writes index file for records of a shard at given `sharded_index_path`.
 
@@ -478,7 +479,7 @@ class BeamWriter(object):
     examples = itertools.chain(*[ex[1] for ex in sorted(examples_by_bucket)])
     # Write in a tmp file potential race condition if `--xxxxx_enable_backups`
     # is set and multiple workers try to write to the same file.
-    with utils.incomplete_file(utils.as_path(shard_path)) as tmp_path:
+    with utils.incomplete_file(epath.Path(shard_path)) as tmp_path:
       record_keys = _write_examples(tmp_path, examples, self._file_format)
     # If there are no record_keys, skip creating index files.
     if not record_keys:

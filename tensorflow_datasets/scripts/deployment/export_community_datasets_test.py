@@ -96,6 +96,6 @@ def test_toml_valid():
   """Makes sure that reading the `.toml` file is valid."""
   config = toml.load(export_community_datasets._IN_PATH)
   _ = {
-      namespace: tfds.core.as_path(src_code_path)
+      namespace: tfds.core.Path(src_code_path)
       for namespace, src_code_path in config['Namespaces'].items()
   }

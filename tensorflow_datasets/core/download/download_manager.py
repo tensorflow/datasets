@@ -23,6 +23,7 @@ from typing import Any, Dict, Iterator, Optional, Tuple, Union
 import uuid
 
 from absl import logging
+from etils import epath
 import promise
 import tensorflow as tf
 
@@ -35,14 +36,12 @@ from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
 from tensorflow_datasets.core.utils import type_utils
 
-# pylint: disable=logging-format-interpolation
+# pylint: disable=logging-fstring-interpolation
 
 Tree = type_utils.Tree
-ReadOnlyPath = type_utils.ReadOnlyPath
-ReadWritePath = type_utils.ReadWritePath
 
 Url = Union[str, resource_lib.Resource]
-ExtractPath = Union[type_utils.PathLike, resource_lib.Resource]
+ExtractPath = Union[epath.PathLike, resource_lib.Resource]
 
 
 class NonMatchingChecksumError(Exception):
@@ -85,8 +84,8 @@ class DownloadConfig:
     verify_ssl: `bool`, defaults to True. If True, will verify certificate when
       downloading dataset.
   """
-  extract_dir: Optional[utils.PathLike] = None
-  manual_dir: Optional[utils.PathLike] = None
+  extract_dir: Optional[epath.PathLike] = None
+  manual_dir: Optional[epath.PathLike] = None
   download_mode: util.GenerateMode = util.GenerateMode.REUSE_DATASET_IF_EXISTS
   compute_stats: util.ComputeStatsMode = util.ComputeStatsMode.SKIP
   max_examples_per_split: Optional[int] = None
@@ -149,9 +148,9 @@ class DownloadManager(object):
   def __init__(
       self,
       *,
-      download_dir: type_utils.PathLike,
-      extract_dir: Optional[type_utils.PathLike] = None,
-      manual_dir: Optional[type_utils.PathLike] = None,
+      download_dir: epath.PathLike,
+      extract_dir: Optional[epath.PathLike] = None,
+      manual_dir: Optional[epath.PathLike] = None,
       manual_dir_instructions: Optional[str] = None,
       url_infos: Optional[Dict[str, checksums.UrlInfo]] = None,
       dataset_name: Optional[str] = None,
@@ -159,7 +158,7 @@ class DownloadManager(object):
       force_extraction: bool = False,
       force_checksums_validation: bool = False,
       register_checksums: bool = False,
-      register_checksums_path: Optional[type_utils.PathLike] = None,
+      register_checksums_path: Optional[epath.PathLike] = None,
       verify_ssl: bool = True,
   ):
     """Download manager constructor.
@@ -192,7 +191,7 @@ class DownloadManager(object):
         raise ValueError(
             'When register_checksums=True, register_checksums_path should be set.'
         )
-      register_checksums_path = utils.as_path(register_checksums_path)
+      register_checksums_path = epath.Path(register_checksums_path)
       if not register_checksums_path.exists():
         # Create the file here to make sure user has write access before
         # starting downloads.
@@ -202,17 +201,17 @@ class DownloadManager(object):
         # (e.g. TFDS installed by admin)
         register_checksums_path.write_text(register_checksums_path.read_text())
 
-    download_dir = utils.as_path(download_dir).expanduser()
+    download_dir = epath.Path(download_dir).expanduser()
     if extract_dir:
-      extract_dir = utils.as_path(extract_dir).expanduser()
+      extract_dir = epath.Path(extract_dir).expanduser()
     else:
       extract_dir = download_dir / 'extracted'
     if manual_dir:
-      manual_dir = utils.as_path(manual_dir).expanduser()
+      manual_dir = epath.Path(manual_dir).expanduser()
 
-    self._download_dir: ReadWritePath = download_dir
-    self._extract_dir: ReadWritePath = extract_dir
-    self._manual_dir: Optional[ReadOnlyPath] = manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
+    self._download_dir: epath.Path = download_dir
+    self._extract_dir: epath.Path = extract_dir
+    self._manual_dir: Optional[epath.Path] = manual_dir  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._manual_dir_instructions = utils.dedent(manual_dir_instructions)
     self._download_dir.mkdir(parents=True, exist_ok=True)
     self._extract_dir.mkdir(parents=True, exist_ok=True)
@@ -274,7 +273,7 @@ class DownloadManager(object):
     """Returns the total size of downloaded files."""
     return sum(url_info.size for url_info in self._recorded_url_infos.values())
 
-  def _get_dl_path(self, url: str, sha256: str) -> ReadWritePath:
+  def _get_dl_path(self, url: str, sha256: str) -> epath.Path:
     return self._download_dir / resource_lib.get_dl_fname(url, sha256)
 
   @property
@@ -297,7 +296,7 @@ class DownloadManager(object):
   def _download(
       self,
       resource: Union[str,
-                      resource_lib.Resource]) -> promise.Promise[ReadOnlyPath]:
+                      resource_lib.Resource]) -> promise.Promise[epath.Path]:
     """Download resource, returns Promise->path to downloaded file.
 
     This function:
@@ -367,13 +366,13 @@ class DownloadManager(object):
 
   def _register_or_validate_checksums(
       self,
-      path: ReadWritePath,
+      path: epath.Path,
       url: str,
       expected_url_info: Optional[checksums.UrlInfo],
       computed_url_info: Optional[checksums.UrlInfo],
-      checksum_path: Optional[ReadWritePath],
-      url_path: ReadWritePath,
-  ) -> ReadOnlyPath:
+      checksum_path: Optional[epath.Path],
+      url_path: epath.Path,
+  ) -> epath.Path:
     """Validates/records checksums and renames final downloaded path."""
     # `path` can be:
     # * Manually downloaded
@@ -431,12 +430,12 @@ class DownloadManager(object):
   def _rename_and_get_final_dl_path(
       self,
       url: str,
-      path: ReadWritePath,
+      path: epath.Path,
       expected_url_info: Optional[checksums.UrlInfo],
       computed_url_info: Optional[checksums.UrlInfo],
-      checksum_path: Optional[ReadWritePath],
-      url_path: ReadWritePath,
-  ) -> ReadWritePath:
+      checksum_path: Optional[epath.Path],
+      url_path: epath.Path,
+  ) -> epath.Path:
     """Eventually rename the downloaded file if checksums were recorded."""
     # `path` can be:
     # * Manually downloaded
@@ -471,9 +470,9 @@ class DownloadManager(object):
 
   @utils.build_synchronize_decorator()
   @utils.memoize()
-  def _extract(self, resource: ExtractPath) -> promise.Promise[ReadOnlyPath]:
+  def _extract(self, resource: ExtractPath) -> promise.Promise[epath.Path]:
     """Extract a single archive, returns Promise->path to extraction result."""
-    if isinstance(resource, type_utils.PathLikeCls):
+    if isinstance(resource, epath.PathLikeCls):
       resource = resource_lib.Resource(path=resource)
     path = resource.path
     extract_method = resource.extract_method
@@ -505,7 +504,7 @@ class DownloadManager(object):
     checksums_path = self.download(checksums_url)
     self._url_infos.update(checksums.load_url_infos(checksums_path))
 
-  def download_kaggle_data(self, competition_or_dataset: str) -> ReadWritePath:
+  def download_kaggle_data(self, competition_or_dataset: str) -> epath.Path:
     """Download data for a given Kaggle Dataset or competition.
 
     Note: This function requires the Kaggle CLI tool.
@@ -522,15 +521,15 @@ class DownloadManager(object):
                                        self._download_dir)
 
   @typing.overload
-  def download(self, url_or_urls: Url) -> ReadOnlyPath:
+  def download(self, url_or_urls: Url) -> epath.Path:
     ...
 
   @typing.overload
-  def download(self, url_or_urls: Dict[str, Url]) -> Dict[str, ReadOnlyPath]:
+  def download(self, url_or_urls: Dict[str, Url]) -> Dict[str, epath.Path]:
     ...
 
   @typing.overload
-  def download(self, url_or_urls: Tree[Url]) -> Tree[ReadOnlyPath]:
+  def download(self, url_or_urls: Tree[Url]) -> Tree[epath.Path]:
     ...
 
   def download(self, url_or_urls):
@@ -563,21 +562,21 @@ class DownloadManager(object):
     Returns:
       Generator yielding tuple (path_within_archive, file_obj).
     """
-    if isinstance(resource, type_utils.PathLikeCls):
+    if isinstance(resource, epath.PathLikeCls):
       resource = resource_lib.Resource(path=resource)
     return extractor.iter_archive(resource.path, resource.extract_method)
 
   @typing.overload
-  def extract(self, path_or_paths: ExtractPath) -> ReadOnlyPath:
+  def extract(self, path_or_paths: ExtractPath) -> epath.Path:
     ...
 
   @typing.overload
-  def extract(self,
-              path_or_paths: Dict[str, ExtractPath]) -> Dict[str, ReadOnlyPath]:
+  def extract(self, path_or_paths: Dict[str,
+                                        ExtractPath]) -> Dict[str, epath.Path]:
     ...
 
   @typing.overload
-  def extract(self, path_or_paths: Tree[ExtractPath]) -> Tree[ReadOnlyPath]:
+  def extract(self, path_or_paths: Tree[ExtractPath]) -> Tree[epath.Path]:
     ...
 
   def extract(self, path_or_paths):
@@ -598,16 +597,16 @@ class DownloadManager(object):
       return _map_promise(self._extract, path_or_paths)
 
   @typing.overload
-  def download_and_extract(self, url_or_urls: Url) -> ReadOnlyPath:
+  def download_and_extract(self, url_or_urls: Url) -> epath.Path:
     ...
 
   @typing.overload
   def download_and_extract(
-      self, url_or_urls: Dict[str, Url]) -> Dict[str, ReadOnlyPath]:
+      self, url_or_urls: Dict[str, Url]) -> Dict[str, epath.Path]:
     ...
 
   @typing.overload
-  def download_and_extract(self, url_or_urls: Tree[Url]) -> Tree[ReadOnlyPath]:
+  def download_and_extract(self, url_or_urls: Tree[Url]) -> Tree[epath.Path]:
     ...
 
   def download_and_extract(self, url_or_urls):
@@ -634,11 +633,11 @@ class DownloadManager(object):
         return _map_promise(self._download_extract, url_or_urls)
 
   @property
-  def download_dir(self) -> ReadOnlyPath:
+  def download_dir(self) -> epath.Path:
     return self._download_dir
 
   @utils.memoized_property
-  def manual_dir(self) -> ReadOnlyPath:
+  def manual_dir(self) -> epath.Path:
     """Returns the directory containing the manually extracted data."""
     if not self._manual_dir:
       raise AssertionError('Manual directory not enabled.')
@@ -654,9 +653,9 @@ class DownloadManager(object):
 
 
 def _get_cached_path(
-    manually_downloaded_path: Optional[ReadWritePath],
-    checksum_path: Optional[ReadWritePath],
-    url_path: ReadWritePath,
+    manually_downloaded_path: Optional[epath.Path],
+    checksum_path: Optional[epath.Path],
+    url_path: epath.Path,
     expected_url_info: Optional[checksums.UrlInfo],
 ) -> downloader.DownloadResult:
   """Returns the downloaded path and computed url-info.
@@ -698,9 +697,9 @@ def _get_cached_path(
 
 
 def _get_manually_downloaded_path(
-    manual_dir: Optional[ReadOnlyPath],
+    manual_dir: Optional[epath.Path],
     expected_url_info: Optional[checksums.UrlInfo],
-) -> Optional[ReadOnlyPath]:
+) -> Optional[epath.Path]:
   """Checks if file is already downloaded in manual_dir."""
   if not manual_dir:  # Manual dir not passed
     return None
@@ -717,7 +716,7 @@ def _get_manually_downloaded_path(
 
 def _validate_checksums(
     url: str,
-    path: ReadOnlyPath,
+    path: epath.Path,
     computed_url_info: Optional[checksums.UrlInfo],
     expected_url_info: Optional[checksums.UrlInfo],
     force_checksums_validation: bool,
@@ -747,7 +746,7 @@ def _validate_checksums(
     raise NonMatchingChecksumError(msg)
 
 
-def _read_url_info(url_path: type_utils.PathLike) -> checksums.UrlInfo:
+def _read_url_info(url_path: epath.PathLike) -> checksums.UrlInfo:
   """Loads the `UrlInfo` from the `.INFO` file."""
   file_info = resource_lib.read_info_file(url_path)
   if 'url_info' not in file_info:

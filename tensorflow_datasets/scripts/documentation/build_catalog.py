@@ -23,6 +23,7 @@ from typing import Dict, List, Optional
 
 from absl import app
 from absl.flags import argparse_flags
+from etils import epath
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts.documentation import doc_utils
@@ -81,10 +82,10 @@ def _create_section_toc(
 def build_catalog(
     datasets: Optional[List[str]] = None,
     *,
-    catalog_dir: Optional[tfds.core.utils.PathLike] = None,
+    catalog_dir: Optional[epath.PathLike] = None,
     doc_util_paths: Optional[doc_utils.DocUtilPaths] = None,
     toc_relative_path: str = '/datasets/catalog/',
-    index_template: Optional[tfds.core.utils.PathLike] = None,
+    index_template: Optional[epath.PathLike] = None,
     index_filename: str = 'overview.md',
     dataset_types: Optional[List[tfds.core.visibility.DatasetType]] = None,
 ) -> None:
@@ -107,10 +108,10 @@ def build_catalog(
   ]
   tfds.core.visibility.set_availables(dataset_types)
 
-  catalog_dir = tfds.core.as_path(catalog_dir)
+  catalog_dir = tfds.core.Path(catalog_dir)
   index_template = index_template or tfds.core.tfds_path(
       'scripts/documentation/templates/catalog_overview.md')
-  index_template = tfds.core.as_path(index_template)
+  index_template = tfds.core.Path(index_template)
 
   # Iterate over the builder documentations
   section_to_builder_docs = collections.defaultdict(list)
@@ -132,11 +133,11 @@ def build_catalog(
 
 
 def _save_table_of_content(
-    catalog_dir: tfds.core.ReadWritePath,
+    catalog_dir: tfds.core.Path,
     section_to_builder_docs: Dict[str,
                                   List[document_datasets.BuilderDocumentation]],
     toc_relative_path: str,
-    index_template: tfds.core.ReadOnlyPath,
+    index_template: tfds.core.Path,
     index_filename: str,
 ) -> None:
   """Builds and saves the table of contents (`_toc.yaml` and `overview.md`)."""

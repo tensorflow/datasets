@@ -26,6 +26,7 @@ import re
 from typing import Any, ContextManager, Iterable, Iterator, Optional, Tuple, Union
 import urllib
 
+from etils import epath
 import promise
 import requests
 
@@ -42,7 +43,7 @@ Response = Union[requests.Response, urllib.response.addinfourl]
 
 @dataclasses.dataclass(eq=False, frozen=True)
 class DownloadResult:
-  path: utils.ReadWritePath
+  path: epath.Path
   url_info: checksums_lib.UrlInfo
 
 
@@ -181,7 +182,7 @@ class _Downloader(object):
     self._pbar_dl_size.update_total(url_info.size)
     self._pbar_dl_size.update(url_info.size)
     self._pbar_url.update(1)
-    return DownloadResult(path=utils.as_path(out_path), url_info=url_info)
+    return DownloadResult(path=epath.Path(out_path), url_info=url_info)
 
   def _sync_download(self,
                      url: str,
@@ -237,7 +238,7 @@ class _Downloader(object):
             size_mb %= unit_mb
     self._pbar_url.update(1)
     return DownloadResult(
-        path=utils.as_path(path),
+        path=epath.Path(path),
         url_info=checksums_lib.UrlInfo(
             checksum=checksum.hexdigest(),
             size=utils.Size(size),

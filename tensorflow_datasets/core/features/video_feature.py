@@ -19,6 +19,7 @@ import os
 import tempfile
 from typing import Sequence, Optional, Union
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import utils
@@ -132,7 +133,7 @@ class Video(sequence_feature.Sequence):
     )
 
   def _ffmpeg_decode(self, path_or_fobj):
-    if isinstance(path_or_fobj, type_utils.PathLikeCls):
+    if isinstance(path_or_fobj, epath.PathLikeCls):
       ffmpeg_args = ['-i', os.fspath(path_or_fobj)]
       ffmpeg_stdin = None
     else:
@@ -145,13 +146,13 @@ class Video(sequence_feature.Sequence):
       ffmpeg_args.append(out_pattern)
       utils.ffmpeg_run(ffmpeg_args, ffmpeg_stdin)
       frames = [  # Load all encoded images
-          p.read_bytes() for p in sorted(utils.as_path(ffmpeg_dir).iterdir())
+          p.read_bytes() for p in sorted(epath.Path(ffmpeg_dir).iterdir())
       ]
     return frames
 
   def encode_example(self, video_or_path_or_fobj):
     """Converts the given image into a dict convertible to tf example."""
-    if isinstance(video_or_path_or_fobj, type_utils.PathLikeCls):
+    if isinstance(video_or_path_or_fobj, epath.PathLikeCls):
       video_or_path_or_fobj = os.fspath(video_or_path_or_fobj)
       if not os.path.isfile(video_or_path_or_fobj):
         _, video_temp_path = tempfile.mkstemp()

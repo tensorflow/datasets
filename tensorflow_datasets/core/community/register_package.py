@@ -25,6 +25,7 @@ from typing import Any, List, Optional, Type
 
 from absl import logging
 
+from etils import epath
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
@@ -94,7 +95,7 @@ class _InstalledPackage:
     return f'{_IMPORT_MODULE_NAME}.{name.namespace}.{name.name}.{self.hash}.{name.name}'
 
   @property
-  def installation_path(self) -> utils.ReadWritePath:
+  def installation_path(self) -> epath.Path:
     """Local path of the package."""
     name = self.package.name
     sub_dir = f'{_IMPORT_MODULE_NAME}/{name.namespace}/{name.name}/{self.hash}'
@@ -140,7 +141,7 @@ class _PackageIndex(collections.UserDict):
 
   """
 
-  def __init__(self, path: utils.PathLike):
+  def __init__(self, path: epath.PathLike):
     """Contructor.
 
     Args:
@@ -148,8 +149,8 @@ class _PackageIndex(collections.UserDict):
         dataset packages)
     """
     super().__init__()
-    self._remote_path: utils.ReadOnlyPath = utils.as_path(path)
-    self._cached_path: utils.ReadOnlyPath = (
+    self._remote_path: epath.Path = epath.Path(path)
+    self._cached_path: epath.Path = (
         cache.cache_path() / 'community-datasets-list.jsonl')
 
     # Pre-load the index from the cache
@@ -209,14 +210,14 @@ class PackageRegister(register_base.BaseRegister):
 
   """
 
-  def __init__(self, path: utils.PathLike):
+  def __init__(self, path: epath.PathLike):
     """Contructor.
 
     Args:
       path: Path to the register files containing the list of dataset sources,
         forwarded to `_PackageIndex`
     """
-    self._path = utils.as_path(path)
+    self._path = epath.Path(path)
 
   @utils.memoized_property
   def _package_index(self) -> _PackageIndex:
@@ -342,7 +343,7 @@ def _download_and_cache(package: DatasetPackage) -> _InstalledPackage:
   Returns:
     installed_dataset: The installed dataset package.
   """
-  tmp_dir = utils.as_path(tempfile.mkdtemp())
+  tmp_dir = epath.Path(tempfile.mkdtemp())
   try:
     # Download the package in a tmp directory
     dataset_sources_lib.download_from_source(
@@ -378,7 +379,7 @@ def _download_and_cache(package: DatasetPackage) -> _InstalledPackage:
   return installed_package
 
 
-def _compute_dir_hash(path: utils.ReadOnlyPath) -> str:
+def _compute_dir_hash(path: epath.Path) -> str:
   """Computes the checksums of the given directory deterministically."""
   all_files = sorted(path.iterdir())
 

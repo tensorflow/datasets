@@ -38,6 +38,7 @@ import tempfile
 from typing import Dict, Optional, Tuple, Union
 
 from absl import logging
+from etils import epath
 import six
 import tensorflow as tf
 
@@ -50,7 +51,6 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import gcs_utils
-from tensorflow_datasets.core.utils import type_utils
 
 from google.protobuf import json_format
 
@@ -697,16 +697,16 @@ def get_dataset_feature_statistics(builder, split):
   return statistics.datasets[0], schema
 
 
-def read_from_json(path: type_utils.PathLike) -> dataset_info_pb2.DatasetInfo:
+def read_from_json(path: epath.PathLike) -> dataset_info_pb2.DatasetInfo:
   """Read JSON-formatted proto into DatasetInfo proto."""
-  json_str = utils.as_path(path).read_text()
+  json_str = epath.Path(path).read_text()
   # Parse it back into a proto.
   parsed_proto = json_format.Parse(json_str, dataset_info_pb2.DatasetInfo())
   return parsed_proto
 
 
 def read_proto_from_builder_dir(
-    builder_dir: type_utils.PathLike) -> dataset_info_pb2.DatasetInfo:
+    builder_dir: epath.PathLike) -> dataset_info_pb2.DatasetInfo:
   """Reads the dataset info from the given builder dir.
 
   Args:

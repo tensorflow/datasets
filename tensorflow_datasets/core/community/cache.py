@@ -28,11 +28,11 @@ The cache (default to `~/.cache/tensorflow_datasets/`) is used for:
 import os
 import sys
 
+from etils import epath
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import type_utils
 
 
-def _default_cache_dir() -> type_utils.ReadWritePath:
+def _default_cache_dir() -> epath.Path:
   """Returns the default cache directory."""
   if 'TFDS_CACHE_DIR' in os.environ:
     path = os.environ['TFDS_CACHE_DIR']
@@ -40,11 +40,11 @@ def _default_cache_dir() -> type_utils.ReadWritePath:
     path = os.path.join(os.environ['XDG_CACHE_HOME'], 'tensorflow_datasets')
   else:
     path = os.path.join('~', '.cache', 'tensorflow_datasets')
-  return utils.as_path(path).expanduser()
+  return epath.Path(path).expanduser()
 
 
 @utils.memoize()
-def cache_path() -> type_utils.ReadWritePath:
+def cache_path() -> epath.Path:
   """Returns the path to the TFDS cache."""
   path = _default_cache_dir()
   path.mkdir(parents=True, exist_ok=True)
@@ -52,7 +52,7 @@ def cache_path() -> type_utils.ReadWritePath:
 
 
 @utils.memoize()
-def module_path() -> type_utils.ReadWritePath:
+def module_path() -> epath.Path:
   """Returns the path to the cached TFDS dynamically installed modules.
 
   Calling this function will update `sys.path` so modules installed in this

@@ -25,12 +25,12 @@ import os
 import re
 from typing import Any, Optional
 
+from etils import epath
 from six.moves import urllib
 import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
-from tensorflow_datasets.core.utils import type_utils
 
 # Should be `Union[int, float, bool, str, Dict[str, Json], List[Json]]`
 Json = Any
@@ -195,12 +195,12 @@ def get_dl_dirname(url):
   return get_dl_fname(url, checksum)
 
 
-def _get_info_path(path: type_utils.PathLike) -> str:
+def _get_info_path(path: epath.PathLike) -> str:
   """Returns path (`str`) of INFO file associated with resource at path."""
   return '%s.INFO' % os.fspath(path)
 
 
-def _read_info(info_path: type_utils.PathLike) -> Json:
+def _read_info(info_path: epath.PathLike) -> Json:
   """Returns info dict or None."""
   if not tf.io.gfile.exists(os.fspath(info_path)):
     return None
@@ -213,8 +213,8 @@ synchronize_decorator = utils.build_synchronize_decorator()
 
 
 def rename_info_file(
-    src_path: type_utils.PathLike,
-    dst_path: type_utils.PathLike,
+    src_path: epath.PathLike,
+    dst_path: epath.PathLike,
     overwrite: bool = False,
 ) -> None:
   tf.io.gfile.rename(
@@ -222,14 +222,14 @@ def rename_info_file(
 
 
 @synchronize_decorator
-def read_info_file(info_path: type_utils.PathLike) -> Json:
+def read_info_file(info_path: epath.PathLike) -> Json:
   return _read_info(_get_info_path(info_path))
 
 
 @synchronize_decorator
 def write_info_file(
     url: str,
-    path: type_utils.PathLike,
+    path: epath.PathLike,
     dataset_name: str,
     original_fname: str,
     url_info: checksums_lib.UrlInfo,
@@ -273,7 +273,7 @@ def write_info_file(
     json.dump(info, info_f, sort_keys=True)
 
 
-def get_extract_method(path: type_utils.PathLike):
+def get_extract_method(path: epath.PathLike):
   """Returns `ExtractMethod` to use on resource at path. Cannot be None."""
   path = os.fspath(path)
   info_path = _get_info_path(path)
@@ -290,7 +290,7 @@ class Resource(object):
       *,
       url: Optional[str] = None,
       extract_method: Optional[ExtractMethod] = None,
-      path: Optional[type_utils.PathLike] = None,
+      path: Optional[epath.PathLike] = None,
   ):
     """Resource constructor.
 
@@ -302,11 +302,11 @@ class Resource(object):
         not be downloaded yet. In such case, `url` must be set.
     """
     self.url = url
-    self.path: utils.ReadWritePath = utils.as_path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
+    self.path: epath.Path = epath.Path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._extract_method = extract_method
 
   @classmethod
-  def exists_locally(cls, path: type_utils.PathLike):
+  def exists_locally(cls, path: epath.PathLike):
     """Returns whether the resource exists locally, at `resource.path`."""
     # If INFO file doesn't exist, consider resource does NOT exist, as it would
     # prevent guessing the `extract_method`.

@@ -17,21 +17,21 @@
 
 import collections.abc
 import contextlib
+import dataclasses
 import itertools
 import sys
 import typing
 from typing import Any, Callable, Dict, Iterator, Iterable, List, Optional, Tuple, Union
 
 from absl import logging
-import dataclasses
 
+from etils import epath
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import type_utils
 
 if typing.TYPE_CHECKING:
   import apache_beam as beam  # pytype: disable=import-error
@@ -263,7 +263,7 @@ class SplitBuilder:
       self,
       split_name: str,
       generator: SplitGenerator,
-      path: type_utils.PathLike,
+      path: epath.PathLike,
       disable_shuffling: bool,
   ) -> _SplitInfoFuture:
     """Start the split generation.
@@ -313,7 +313,7 @@ class SplitBuilder:
       self,
       split_name: str,
       generator: Iterable[KeyExample],
-      path: type_utils.PathLike,
+      path: epath.PathLike,
       disable_shuffling: bool,
   ) -> _SplitInfoFuture:
     """Split generator for example generators.
@@ -321,7 +321,7 @@ class SplitBuilder:
     Args:
       split_name: str,
       generator: Iterable[KeyExample],
-      path: type_utils.PathLike,
+      path: epath.PathLike,
       disable_shuffling: Specifies whether to shuffle the examples,
 
     Returns:
@@ -373,7 +373,7 @@ class SplitBuilder:
       self,
       split_name: str,
       generator: 'beam.PCollection[KeyExample]',
-      path: type_utils.PathLike,
+      path: epath.PathLike,
       disable_shuffling: bool,
   ) -> _SplitInfoFuture:
     """Split generator for `beam.PCollection`."""

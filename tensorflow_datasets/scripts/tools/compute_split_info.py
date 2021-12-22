@@ -43,12 +43,12 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
       description='Tensorflow Datasets CLI tool',)
   parser.add_argument(
       '--data_dir',
-      type=tfds.core.as_path,
+      type=tfds.core.Path,
       help='Path to the dataset files.',
   )
   parser.add_argument(
       '--out_dir',
-      type=tfds.core.as_path,
+      type=tfds.core.Path,
       help='Computed metadata will be written here.',
   )
   return parser.parse_args(argv[1:])

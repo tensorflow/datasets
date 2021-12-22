@@ -36,7 +36,7 @@ _HOMEPAGE = 'https://github.com/deepmind/deepmind-research/tree/master/rl_unplug
 
 def filename(prefix: str, num_shards: int, shard_id: int):
   return os.fspath(
-      tfds.core.as_path(f'{prefix}-{shard_id:05d}-of-{num_shards:05d}'))
+      tfds.core.Path(f'{prefix}-{shard_id:05d}-of-{num_shards:05d}'))
 
 
 def get_files(prefix: str, num_shards: int) -> List[str]:

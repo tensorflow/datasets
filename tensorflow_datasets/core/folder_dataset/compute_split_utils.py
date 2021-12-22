@@ -16,13 +16,14 @@
 r"""Beam pipeline which compute the number of examples in the given tfrecord."""
 
 import collections
+import dataclasses
 import functools
 import itertools
 import os
 import pprint
 from typing import cast, Dict, List, Optional, Type
 
-import dataclasses
+from etils import epath
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
@@ -45,8 +46,8 @@ class _ShardInfo:
 
 def compute_split_info(
     *,
-    data_dir: utils.PathLike,
-    out_dir: Optional[utils.PathLike] = None,
+    data_dir: epath.PathLike,
+    out_dir: Optional[epath.PathLike] = None,
 ) -> List[split_lib.SplitInfo]:
   """Compute the split info on the given files.
 
@@ -65,7 +66,7 @@ def compute_split_info(
   Returns:
     split_infos: The list of `tfds.core.SplitInfo`.
   """
-  data_dir = utils.as_path(data_dir)
+  data_dir = epath.Path(data_dir)
 
   # Auto-detect the splits from the files
   split_files = _extract_split_files(data_dir)
@@ -89,7 +90,7 @@ def compute_split_info(
   return split_infos
 
 
-def _extract_split_files(data_dir: utils.ReadWritePath) -> _SplitFilesDict:
+def _extract_split_files(data_dir: epath.Path) -> _SplitFilesDict:
   """Extract the files."""
   files = sorted(data_dir.iterdir())
   file_infos = [
@@ -113,11 +114,11 @@ def _extract_split_files(data_dir: utils.ReadWritePath) -> _SplitFilesDict:
 def _compute_split_statistics_beam(
     *,
     split_files: _SplitFilesDict,
-    data_dir: utils.ReadWritePath,
-    out_dir: utils.PathLike,
+    data_dir: epath.Path,
+    out_dir: epath.PathLike,
 ) -> List[split_lib.SplitInfo]:
   """Compute statistics."""
-  out_dir = utils.as_path(out_dir)
+  out_dir = epath.Path(out_dir)
 
   assert out_dir.exists(), f'{out_dir} does not exists'
 
@@ -149,8 +150,8 @@ def _compute_split_statistics_beam(
 def _process_split(
     pipeline,
     *,
-    data_dir: utils.ReadWritePath,
-    out_dir: utils.ReadWritePath,
+    data_dir: epath.Path,
+    out_dir: epath.Path,
     file_infos: List[naming.FilenameInfo],
 ):
   """Process a single split."""
@@ -199,7 +200,7 @@ def _group_all(pipeline):
 def _process_shard(
     file_info: naming.FilenameInfo,
     *,
-    data_dir: utils.ReadWritePath,
+    data_dir: epath.Path,
     adapter: Type[file_adapters.FileAdapter],
 ) -> _ShardInfo:
   """Process a single `.tfrecord` file."""
@@ -244,7 +245,7 @@ def _out_filename(split_name: str) -> str:
   return f'{split_name}-info.json'
 
 
-def _split_info_from_path(path: utils.ReadWritePath) -> split_lib.SplitInfo:
+def _split_info_from_path(path: epath.Path) -> split_lib.SplitInfo:
   """Load the split info from the path."""
   json_str = path.read_text()
   proto = json_format.Parse(json_str, dataset_info_pb2.SplitInfo())
@@ -252,11 +253,11 @@ def _split_info_from_path(path: utils.ReadWritePath) -> split_lib.SplitInfo:
 
 
 def split_infos_from_path(
-    path: utils.PathLike,
+    path: epath.PathLike,
     split_names: List[str],
 ) -> List[split_lib.SplitInfo]:
   """Restore the split info from a directory."""
-  path = utils.as_path(path)
+  path = epath.Path(path)
   return [
       _split_info_from_path(path / _out_filename(split_name))
       for split_name in split_names

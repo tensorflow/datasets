@@ -44,7 +44,7 @@ stored in metadata.csv which contains
 (book_id, short_book_title, publication_date, book_link).
 """
 
-_DATA_DIR = tfds.core.as_path('gs://deepmind-gutenberg')
+_DATA_DIR = tfds.core.Path('gs://deepmind-gutenberg')
 
 
 class Pg19(tfds.core.GeneratorBasedBuilder):

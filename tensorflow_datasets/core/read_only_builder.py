@@ -19,6 +19,7 @@ import os
 import typing
 from typing import Any, Optional, Tuple, Type
 
+from etils import epath
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -37,7 +38,7 @@ class ReadOnlyBuilder(
   """Generic DatasetBuilder loading from a directory."""
 
   def __init__(self,
-               builder_dir: utils.PathLike,
+               builder_dir: epath.PathLike,
                *,
                info_proto: Optional[dataset_info_pb2.DatasetInfo] = None):
     """Constructor.
@@ -104,7 +105,7 @@ class ReadOnlyBuilder(
 
 
 def builder_from_directory(
-    builder_dir: utils.PathLike,) -> dataset_builder.DatasetBuilder:
+    builder_dir: epath.PathLike,) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
   Reconstructs the `tfds.core.DatasetBuilder` without requiring the original
@@ -129,7 +130,7 @@ def builder_from_directory(
 
 
 def builder_from_metadata(
-    builder_dir: utils.PathLike,
+    builder_dir: epath.PathLike,
     info_proto: dataset_info_pb2.DatasetInfo) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given metadata.
 
@@ -317,7 +318,7 @@ def _get_default_config_name(builder_dir: str, name: str) -> Optional[str]:
       return cls.BUILDER_CONFIGS[0].name
 
   # Otherwise, try to load default config from common metadata
-  return dataset_builder.load_default_config_name(utils.as_path(builder_dir))
+  return dataset_builder.load_default_config_name(epath.Path(builder_dir))
 
 
 def _get_version_str(

@@ -19,6 +19,7 @@ import dataclasses
 import os
 from typing import List
 
+from etils import epath
 from tensorflow_datasets.core import utils
 
 
@@ -31,18 +32,18 @@ class DatasetSource:
       `gs://.../my_dataset/`, `github://.../my_dataset/`)
     filenames: Content of the dataset package
   """
-  root_path: utils.ReadWritePath
+  root_path: epath.Path
   filenames: List[str]
 
   @classmethod
   def from_json(cls, value: utils.JsonValue) -> 'DatasetSource':
     """Imports from JSON."""
     if isinstance(value, str):  # Single-file dataset ('.../my_dataset.py')
-      path = utils.as_path(value)
+      path = epath.Path(value)
       return cls(root_path=path.parent, filenames=[path.name])
     elif isinstance(value, dict):  # Multi-file dataset
       return cls(
-          root_path=utils.as_path(value['root_path']),
+          root_path=epath.Path(value['root_path']),
           filenames=value['filenames'],
       )
     else:
@@ -61,7 +62,7 @@ class DatasetSource:
 
 def download_from_source(
     source: DatasetSource,
-    dst: utils.ReadWritePath,
+    dst: epath.Path,
 ) -> None:
   """Download the remote dataset code locally to the dst path.
 

@@ -19,6 +19,7 @@ import os
 from typing import Optional, Union
 import wave
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 
@@ -91,7 +92,7 @@ class Audio(tensor_feature.Tensor):
   def encode_example(self, audio_or_path_or_fobj):
     if isinstance(audio_or_path_or_fobj, (np.ndarray, list)):
       return audio_or_path_or_fobj
-    elif isinstance(audio_or_path_or_fobj, type_utils.PathLikeCls):
+    elif isinstance(audio_or_path_or_fobj, epath.PathLikeCls):
       filename = os.fspath(audio_or_path_or_fobj)
       file_format = self._file_format or filename.split('.')[-1]
       with tf.io.gfile.GFile(filename, 'rb') as audio_f:

@@ -12,7 +12,7 @@ function create_virtualenv() {
   rm -rf $env_name
   virtualenv -p $env_python $env_name
   source $env_name/bin/activate
-  pip install --upgrade pip
+  pip install --upgrade pip setuptools wheel
   popd
 }
 

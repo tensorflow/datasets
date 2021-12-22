@@ -20,9 +20,9 @@ import os
 import textwrap
 from unittest import mock
 
+from etils import epath
 import pytest
 
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.github_api import github_path
 
 _SKIP_NON_HERMETIC = False
@@ -73,7 +73,7 @@ def test_parse_github_path():
 
 def test_github_path_registered_as_path():
   uri = 'github://tensorflow/datasets/tree/master/docs/README.md'
-  path = utils.as_path(uri)
+  path = epath.Path(uri)
   assert isinstance(path, github_path.GithubPath)
   assert os.fspath(path) == uri
 
