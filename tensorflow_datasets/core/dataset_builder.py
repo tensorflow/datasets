@@ -591,7 +591,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       shuffle_files,
       batch_size,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
-      read_config,
+      read_config: read_config_lib.ReadConfig,
       as_supervised,
   ):
     """as_dataset for a single split."""
@@ -810,7 +810,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       self,
       split,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
-      read_config=None,
+      read_config: Optional[read_config_lib.ReadConfig] = None,
       shuffle_files=False,
   ):
     """Constructs a `tf.data.Dataset`.
