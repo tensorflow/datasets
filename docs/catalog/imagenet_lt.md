@@ -42,9 +42,9 @@ path should be set with --manual_dir in order to generate this dataset.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.21 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `20.92 GiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -56,12 +56,15 @@ path should be set with --manual_dir in order to generate this dataset.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 50,000
+`'train'`      | 115,846
+`'validation'` | 20,000
 
 *   **Features**:
 
