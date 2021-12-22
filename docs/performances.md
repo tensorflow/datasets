@@ -116,11 +116,10 @@ ds = tfds.load('imagenet2012', split='train', shuffle_files=True)
 ```
 
 Additionally, when `shuffle_files=True`, TFDS disables
-[`options.experimental_deterministic`](https://www.tensorflow.org/api_docs/python/tf/data/Options#experimental_deterministic),
+[`options.deterministic`](https://www.tensorflow.org/api_docs/python/tf/data/Options#deterministic),
 which may give a slight performance boost. To get deterministic shuffling, it is
 possible to opt-out of this feature with `tfds.ReadConfig`: either by setting
-`read_config.shuffle_seed` or overwriting
-`read_config.options.experimental_deterministic`.
+`read_config.shuffle_seed` or overwriting `read_config.options.deterministic`.
 
 ### Auto-shard your data across workers (TF)
 
