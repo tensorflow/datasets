@@ -38,8 +38,8 @@ class ReadConfig:
 
   Attributes:
     options: `tf.data.Options()`, dataset options to use. Note that when
-      `shuffle_files` is True and no seed is defined, experimental_deterministic
-      will be set to False internally, unless it is defined here.
+      `shuffle_files` is True and no seed is defined, deterministic will be set
+      to False internally, unless it is defined here.
     try_autocache: If True (default) and the dataset satisfy the right
       conditions (dataset small enough, files not shuffled,...) the dataset will
       be cached during the first iteration (through `ds = ds.cache()`).

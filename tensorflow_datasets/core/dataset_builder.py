@@ -646,11 +646,10 @@ class DatasetBuilder(registered.RegisteredDataset):
     # non-deterministic
     # This code should probably be moved inside tfreader, such as
     # all the tf.data.Options are centralized in a single place.
-    if (shuffle_files and
-        read_config.options.experimental_deterministic is None and
+    if (shuffle_files and read_config.options.deterministic is None and
         read_config.shuffle_seed is None):
       options = tf.data.Options()
-      options.experimental_deterministic = False
+      options.deterministic = False
       ds = ds.with_options(options)
     # If shuffle is False, keep the default value (deterministic), which
     # allow the user to overwritte it.
