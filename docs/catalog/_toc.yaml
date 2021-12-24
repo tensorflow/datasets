@@ -602,6 +602,9 @@ toc:
   - path: /datasets/catalog/asset
     status: nightly
     title: asset
+  - path: /datasets/catalog/wiki_auto
+    status: nightly
+    title: wiki_auto
   title: Text simplification
 - section:
   - path: /datasets/catalog/smartwatch_gestures

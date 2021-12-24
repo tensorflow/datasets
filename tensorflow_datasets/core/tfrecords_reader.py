@@ -178,7 +178,7 @@ def make_file_instructions(
 
   # TODO(epot): Should try to merge the instructions together as well as
   # performing additional validation. For example, should raise an error
-  # if there is overlapp between splits (`train[:50]+train[:25]`)
+  # if there is overlap between splits (`train[:50]+train[:25]`)
   # If there is a single shard, `train[:25]+train[50:75]` could be optimized
   # into a single `ds.take(25).skip(50-25).take(75-50)`
 
@@ -471,8 +471,9 @@ class Reader(object):
       raise ValueError(msg)
 
     # Prepend path to filename
+    path = self._path
     file_instructions = [
-        f.replace(filename=os.path.join(self._path, f.filename))
+        f.replace(filename=os.path.join(path, f.filename))
         for f in file_instructions
     ]
 
