@@ -591,7 +591,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       shuffle_files,
       batch_size,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
-      read_config,
+      read_config: read_config_lib.ReadConfig,
       as_supervised,
   ):
     """as_dataset for a single split."""
@@ -646,11 +646,12 @@ class DatasetBuilder(registered.RegisteredDataset):
     # non-deterministic
     # This code should probably be moved inside tfreader, such as
     # all the tf.data.Options are centralized in a single place.
-    if (shuffle_files and
-        read_config.options.experimental_deterministic is None and
-        read_config.shuffle_seed is None):
+    deterministic_field = "deterministic" if hasattr(
+        tf.data.Options(), "deterministic") else "experimental_deterministic"
+    if (shuffle_files and read_config.shuffle_seed is None and
+        getattr(read_config.options, deterministic_field) is None):
       options = tf.data.Options()
-      options.experimental_deterministic = False
+      setattr(options, deterministic_field, False)
       ds = ds.with_options(options)
     # If shuffle is False, keep the default value (deterministic), which
     # allow the user to overwritte it.
@@ -810,7 +811,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       self,
       split,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
-      read_config=None,
+      read_config: Optional[read_config_lib.ReadConfig] = None,
       shuffle_files=False,
   ):
     """Constructs a `tf.data.Dataset`.

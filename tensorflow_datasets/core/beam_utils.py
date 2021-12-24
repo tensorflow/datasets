@@ -53,6 +53,11 @@ def ReadFromTFDS(
 
   Use `tfds.as_numpy` to convert each examples from `tf.Tensor` to numpy.
 
+  The split argument can make use of subsplits, eg 'train[:100]', only when the
+  batch_size=None (in as_dataset_kwargs). Note: the order of the images will be
+  different than when tfds.load(split='train[:100]') is used, but the same
+  examples will be used.
+
   Args:
     pipeline: beam pipeline (automatically set)
     builder: Dataset builder to load
@@ -64,10 +69,6 @@ def ReadFromTFDS(
   """
   beam = lazy_imports_lib.lazy_imports.apache_beam
 
-  if '[' in split:
-    raise NotImplementedError(
-        f'ReadFromTFDS only supports plain splits. Got {split!r}. '
-        'Please open a github issue if you need this feature.')
   if not builder.info.splits.total_num_examples:
     raise ValueError(
         f'No examples found in {builder.name!r}. Was the dataset generated ?')
@@ -75,14 +76,27 @@ def ReadFromTFDS(
   def load_shard(file_instruction: shard_utils.FileInstruction):  # pylint: disable=invalid-name
     """Loads a single shard."""
     file_info = naming.FilenameInfo.from_str(file_instruction.filename)
-    # Could try to support subsplit by adding `ds.skip(file_instruction.skip)`
-    # but won't work if `batch_size =! None`. The best way would be to convert
-    # file_instruction to absolute instructions (and check that
-    # `splits[abs_split].file_instructions == [file_instruction]` ).
     ds = builder.as_dataset(
         split=f'{file_info.split}[{file_info.shard_index}shard]',
         **as_dataset_kwargs,
     )
+
+    # Subsplit is supported by adding ds.skip and ds.take, which will only work
+    # if `batch_size=None. An alternativ would be to convert file_instruction
+    # to absolute instructions (and check that
+    # `splits[abs_split].file_instructions == [file_instruction]` ).
+
+    if file_instruction.skip > 0 or file_instruction.take > 0:
+      batch_size = as_dataset_kwargs.get('batch_size')
+      if batch_size is not None:
+        raise NotImplementedError(f'ReadFromTFDS supports skip and take (used '
+                                  f'in split={split!r}) only when batch_size='
+                                  f'None. Got batch_size={batch_size!r}.')
+
+    if file_instruction.skip > 0:
+      ds = ds.skip(file_instruction.skip)
+    if file_instruction.take > 0:
+      ds = ds.take(file_instruction.take)
     return ds
 
   file_instructions = builder.info.splits[split].file_instructions
