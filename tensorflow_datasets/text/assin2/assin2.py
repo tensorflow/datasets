@@ -87,6 +87,7 @@ _CITATION = """
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 """
+
 _DOWNLOAD_URLS = {
     'train':
         'https://drive.google.com/u/0/uc?id=1Q9j1a83CuKzsHCGaNulSkNxBm7Dkn7Ln&export=download',
@@ -110,24 +111,14 @@ class Assin2(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict(
-            {
-                'text':
-                    tfds.features.Text(),
-                'hypothesis':
-                    tfds.features.Text(),
-                'id':
-                    tf.int32,
-                'entailment':
-                    tfds.features.ClassLabel(names=['None', 'Entailment']),
-                'similarity':
-                    tf.float32
-            }
-        ),
-        # If there's a common (input, target) tuple from the
-        # features, specify them here. They'll be used if
-        # `as_supervised=True` in `builder.as_dataset`.
-        supervised_keys=None,  # Set to `None` to disable
+        features=tfds.features.FeaturesDict({
+          'text': tfds.features.Text(),
+          'hypothesis': tfds.features.Text(),
+          'id': tf.int32,
+          'entailment': tfds.features.ClassLabel(names=['None', 'Entailment']),
+          'similarity': tf.float32
+          }),
+        supervised_keys=None,
         homepage=_HOMEPAGE,
         citation=_CITATION,
     )

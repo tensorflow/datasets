@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Util functions for assin2 dataset"""
+"""Utilities for assin2 dataset"""
 
 from xml.etree import cElementTree as ET
 from typing import List

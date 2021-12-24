@@ -20,7 +20,6 @@ from . import assin2
 
 class Assin2Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for assin2 dataset."""
-  # TODO(assin2):
   DATASET_CLASS = assin2.Assin2
   SPLITS = {
       'train': 5,
