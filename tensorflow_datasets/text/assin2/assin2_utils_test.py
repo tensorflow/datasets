@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tests for assin2_utils"""
-from tensorflow_datasets.text.assin2.assin2_utils import parse_xml_string, Pair
+from tensorflow_datasets.text.assin2.assin2_utils import Pair, parse_xml_string
 
 # pylint: disable=line-too-long
 cand_xml_str = """\
