@@ -136,7 +136,7 @@ class Assin2(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     with tf.io.gfile.GFile(path) as f:
       pairs = parse_xml_string(f.read())
-    # pairs = read_xml(path)
+
     for pair in pairs:
       yield pair.id, {
           'text': pair.text,
