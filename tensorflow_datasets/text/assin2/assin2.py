@@ -14,8 +14,8 @@
 # limitations under the License.
 """assin2 dataset."""
 
-import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text.assin2.assin2_utils import parse_xml_string
 
 _HOMEPAGE = 'https://sites.google.com/view/assin2/english'

@@ -14,9 +14,9 @@
 # limitations under the License.
 """Utilities for assin2 dataset"""
 
-from xml.etree import cElementTree as ET
-from typing import List
 from dataclasses import dataclass
+from typing import List
+from xml.etree import cElementTree as ET
 
 VALID_ENTAILMENT = {'Entailment', 'None'}
 
