@@ -72,6 +72,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def ftfy(cls):
+    return _try_import("ftfy")
+
+  @utils.classproperty
+  @classmethod
   def gcld3(cls):
     return _try_import("gcld3")  # pylint: disable=unreachable
 
