@@ -40,7 +40,7 @@ the fourth line contains the correct antecedent. If the target pronoun appears
 more than once in the sentence, its first occurrence is the one to be resolved.
 """
 
-_DATA_URL_PATTERN = 'http://www.hlt.utdallas.edu/~vince/data/emnlp12/{}.c.txt'
+_DATA_URL_PATTERN = 'https://s3.amazonaws.com/datasets.huggingface.co/definite_pronoun_resolution/{}.c.txt'
 
 
 class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):

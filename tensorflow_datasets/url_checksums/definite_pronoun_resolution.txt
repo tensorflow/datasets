@@ -1,2 +1,2 @@
-http://www.hlt.utdallas.edu/~vince/data/emnlp12/test.c.txt	67044	cf1cf025e1d59a5b363e6dcfbd5a13aae8a9830831ac16fd7f865aca7a1559d8	test.c.txt
-http://www.hlt.utdallas.edu/~vince/data/emnlp12/train.c.txt	160409	bc0a54b3ca1009d8d5b2ca5a221086aee2b0fc5cd03b22b9dfa9cdf44c629cec	train.c.txt
+https://s3.amazonaws.com/datasets.huggingface.co/definite_pronoun_resolution/test.c.txt	67044	cf1cf025e1d59a5b363e6dcfbd5a13aae8a9830831ac16fd7f865aca7a1559d8	test.c.txt
+https://s3.amazonaws.com/datasets.huggingface.co/definite_pronoun_resolution/train.c.txt	160408	c310158d0cbac1a556e3284e6c167f4478271d8d50b0b9d15dfe428c905a0867	train.c.txt
