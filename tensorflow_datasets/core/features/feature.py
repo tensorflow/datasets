@@ -22,12 +22,13 @@ import html
 import importlib
 import json
 import os
-from typing import Dict, List, Type, TypeVar, Union
+from typing import Dict, List, Optional, Type, TypeVar, Union
 
 import numpy as np
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
@@ -827,3 +828,35 @@ def _make_empty_seq_output(
   return tf.constant([],
                      shape=[0] + [0 if d is None else d for d in shape],
                      dtype=dtype)
+
+
+def to_shape_proto(shape: utils.Shape) -> feature_pb2.Shape:
+  """Converts TFDS shape to Shape proto (-1 is used for unspecified dimensions)."""
+  dimensions = []
+  for dimension in shape:
+    if dimension is None or dimension < 0:
+      dimensions.append(-1)
+    else:
+      dimensions.append(dimension)
+  return feature_pb2.Shape(dimensions=dimensions)
+
+
+def from_shape_proto(shape: feature_pb2.Shape) -> utils.Shape:
+  """Creates a TFDS shape from the Shape proto."""
+
+  def parse_dimension(dimension: int) -> Optional[int]:
+    if dimension == -1:
+      return None
+    if dimension >= 0:
+      return dimension
+    raise ValueError(f'Unexpected shape: {shape}')
+
+  return [parse_dimension(dimension) for dimension in shape.dimensions]
+
+
+def encode_dtype(dtype: tf.dtypes.DType) -> str:
+  return dtype.name
+
+
+def parse_dtype(dtype: str) -> tf.dtypes.DType:
+  return tf.dtypes.as_dtype(dtype)

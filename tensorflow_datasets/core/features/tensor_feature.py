@@ -24,6 +24,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.proto import feature_pb2
 
 Json = utils.Json
 Shape = utils.Shape
@@ -202,20 +203,26 @@ class Tensor(feature_lib.FeatureConnector):
       return self.decode_example(example_data)
 
   @classmethod
-  def from_json_content(cls, value: Json) -> 'Tensor':
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.TensorFeature]) -> 'Tensor':
+    if isinstance(value, dict):
+      return cls(
+          shape=tuple(value['shape']),
+          dtype=tf.dtypes.as_dtype(value['dtype']),
+          # Use .get for backward-compatibility
+          encoding=value.get('encoding', Encoding.NONE),
+      )
     return cls(
-        shape=tuple(value['shape']),
-        dtype=tf.dtypes.as_dtype(value['dtype']),
-        # Use .get for backward-compatibility
-        encoding=value.get('encoding', Encoding.NONE),
+        shape=feature_lib.from_shape_proto(value.shape),
+        dtype=feature_lib.parse_dtype(value.dtype),
+        encoding=value.encoding or Encoding.NONE,
     )
 
-  def to_json_content(self) -> Json:
-    return {
-        'shape': list(self._shape),
-        'dtype': self._dtype.name,
-        'encoding': self._encoding.value,
-    }
+  def to_json_content(self) -> feature_pb2.TensorFeature:
+    return feature_pb2.TensorFeature(
+        shape=feature_lib.to_shape_proto(self._shape),
+        dtype=feature_lib.encode_dtype(self._dtype),
+        encoding=self._encoding.value)
 
 
 def get_inner_feature_repr(feature):

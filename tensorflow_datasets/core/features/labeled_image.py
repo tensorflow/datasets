@@ -19,7 +19,9 @@ from typing import Dict, List, Optional, Union
 
 import tensorflow as tf
 from tensorflow_datasets.core.features import class_label_feature
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import image_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -104,14 +106,22 @@ class LabeledImage(image_feature.Image):
     return {'num_classes': self.num_classes}
 
   @classmethod
-  def from_json_content(cls, value: Json) -> 'LabeledImage':
-    return cls(**value)
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.ImageFeature]) -> 'LabeledImage':
+    if isinstance(value, dict):
+      # For backwards compatibility
+      return cls(**value)
+    return cls(
+        shape=feature_lib.from_shape_proto(value.shape),
+        dtype=feature_lib.parse_dtype(value.dtype),
+        encoding_format=value.encoding_format or None,
+        labels=value.label.num_classes or None,
+    )
 
-  def to_json_content(self) -> Json:
-    content = super().to_json_content()
-    content.pop('use_colormap')
-    content['labels'] = self.num_classes
-    return content
+  def to_json_content(self) -> feature_pb2.ImageFeature:
+    feature = super().to_json_content()
+    feature.label.CopyFrom(feature_pb2.ClassLabel(num_classes=self.num_classes))
+    return feature
 
 
 def _labels_to_kwarg(labels: _LabelArg) -> Dict[str, _LabelArg]:

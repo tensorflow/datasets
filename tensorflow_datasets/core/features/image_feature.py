@@ -18,13 +18,14 @@
 import dataclasses
 import os
 import tempfile
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Union
 
 import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -152,7 +153,7 @@ class _FloatImageEncoder(_ImageEncoder):
     return img
 
 
-class Image(feature.FeatureConnector):
+class Image(feature_lib.FeatureConnector):
   """`FeatureConnector` for images.
 
   During `_generate_examples`, the feature connector accept as input any of:
@@ -253,11 +254,11 @@ class Image(feature.FeatureConnector):
 
   def get_tensor_info(self):
     # Image is returned as a 3-d uint8 tf.Tensor.
-    return feature.TensorInfo(shape=self._shape, dtype=self._dtype)
+    return feature_lib.TensorInfo(shape=self._shape, dtype=self._dtype)
 
   def get_serialized_info(self):
     # Only store raw image (includes size).
-    return feature.TensorInfo(shape=(), dtype=tf.string)
+    return feature_lib.TensorInfo(shape=(), dtype=tf.string)
 
   def encode_example(self, image_or_path_or_fobj):
     """Convert the given image into a dict convertible to tf example."""
@@ -287,21 +288,29 @@ class Image(feature.FeatureConnector):
       return make_video_repr_html(ex, use_colormap=self._use_colormap)
 
   @classmethod
-  def from_json_content(cls, value: Json) -> 'Image':
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.ImageFeature]) -> 'Image':
+    if isinstance(value, dict):
+      # For backwards compatibility
+      return cls(
+          shape=tuple(value['shape']),
+          dtype=tf.dtypes.as_dtype(value['dtype']),
+          encoding_format=value['encoding_format'],
+          use_colormap=value.get('use_colormap'),
+      )
     return cls(
-        shape=tuple(value['shape']),
-        dtype=tf.dtypes.as_dtype(value['dtype']),
-        encoding_format=value['encoding_format'],
-        use_colormap=value.get('use_colormap'),
-    )
+        shape=feature_lib.from_shape_proto(value.shape),
+        dtype=feature_lib.parse_dtype(value.dtype),
+        encoding_format=value.encoding_format or None,
+        use_colormap=value.use_colormap)
 
-  def to_json_content(self) -> Json:
-    return {
-        'shape': list(self._shape),
-        'dtype': self._dtype.name,
-        'encoding_format': self._encoding_format,
-        'use_colormap': self._use_colormap
-    }
+  def to_json_content(self) -> feature_pb2.ImageFeature:
+    return feature_pb2.ImageFeature(
+        shape=feature_lib.to_shape_proto(self._shape),
+        dtype=feature_lib.encode_dtype(self._dtype),
+        encoding_format=self._encoding_format,
+        use_colormap=self._use_colormap,
+    )
 
 
 # Visualization Video

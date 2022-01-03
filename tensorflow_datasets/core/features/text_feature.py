@@ -18,12 +18,14 @@
 import html
 import os
 import textwrap
+from typing import Union
 
 from absl import logging
 import tensorflow as tf
 
 from tensorflow_datasets.core.deprecated import text as text_lib
 from tensorflow_datasets.core.features import tensor_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -178,19 +180,19 @@ class Text(tensor_feature.Tensor):
     return ex
 
   @classmethod
-  def from_json_content(cls, value: Json) -> "Text":
-    if "use_encoder" in value:
+  def from_json_content(cls, value: Union[Json,
+                                          feature_pb2.TextFeature]) -> "Text":
+    if isinstance(value, dict) and "use_encoder" in value:
       raise ValueError(
           "Deprecated encoder not supported. Please use the plain text version "
           "with `tensorflow_text`.")
-    del value  # Unused
     return cls()
 
-  def to_json_content(self) -> Json:
+  def to_json_content(self) -> Union[Json, feature_pb2.TextFeature]:
     if self._encoder:
       logging.warning(
           "Dataset is using deprecated text encoder API which will be removed "
           "soon. Please use the plain_text version of the dataset and migrate "
           "to `tensorflow_text`.")
       return dict(use_encoder=True)
-    return dict()
+    return feature_pb2.TextFeature()

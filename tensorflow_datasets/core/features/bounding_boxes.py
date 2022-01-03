@@ -16,15 +16,17 @@
 """Bounding boxes feature."""
 
 import collections
-from typing import Any
+from typing import Any, Union
 
 import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import tensor_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -95,12 +97,16 @@ class BBoxFeature(tensor_feature.Tensor):
     return _repr_html(ex)
 
   @classmethod
-  def from_json_content(cls, value: Json) -> 'BBoxFeature':
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.BoundingBoxFeature]) -> 'BBoxFeature':
     del value  # Unused
     return cls()
 
-  def to_json_content(self) -> Json:
-    return dict()
+  def to_json_content(self) -> feature_pb2.BoundingBoxFeature:
+    return feature_pb2.BoundingBoxFeature(
+        shape=feature_lib.to_shape_proto(self._shape),
+        dtype=feature_lib.encode_dtype(self._dtype),
+    )
 
 
 def _repr_html(ex: np.ndarray) -> str:

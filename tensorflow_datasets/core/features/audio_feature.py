@@ -24,7 +24,9 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -48,9 +50,9 @@ class Audio(tensor_feature.Tensor):
       self,
       *,
       file_format: Optional[str] = None,
-      shape=(None,),
-      dtype=tf.int64,
-      sample_rate=None,
+      shape: utils.Shape = (None,),
+      dtype: tf.dtypes.DType = tf.int64,
+      sample_rate: Optional[int] = None,
       encoding: Union[str, Encoding] = Encoding.NONE,
   ):
     """Constructs the connector.
@@ -123,21 +125,31 @@ class Audio(tensor_feature.Tensor):
             ' controlsList="nodownload" />')
 
   @classmethod
-  def from_json_content(cls, value: Json) -> 'Audio':
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.AudioFeature]) -> 'Audio':
+    if isinstance(value, dict):
+      # For backwards compatibility
+      return cls(
+          file_format=value['file_format'],
+          shape=tuple(value['shape']),
+          dtype=tf.dtypes.as_dtype(value['dtype']),
+          sample_rate=value['sample_rate'],
+      )
     return cls(
-        file_format=value['file_format'],
-        shape=tuple(value['shape']),
-        dtype=tf.dtypes.as_dtype(value['dtype']),
-        sample_rate=value['sample_rate'],
-    )
+        shape=feature_lib.from_shape_proto(value.shape),
+        dtype=feature_lib.parse_dtype(value.dtype),
+        file_format=value.file_format or None,
+        sample_rate=value.sample_rate,
+        encoding=value.encoding)
 
-  def to_json_content(self) -> Json:
-    return {
-        'file_format': self._file_format,
-        'shape': list(self._shape),
-        'dtype': self._dtype.name,
-        'sample_rate': self._sample_rate,
-    }
+  def to_json_content(self) -> feature_pb2.AudioFeature:
+    return feature_pb2.AudioFeature(
+        shape=feature_lib.to_shape_proto(self.shape),
+        dtype=feature_lib.encode_dtype(self.dtype),
+        file_format=self._file_format,
+        sample_rate=self._sample_rate,
+        encoding=self._encoding.name,
+    )
 
 
 def _save_wav(buff, data, rate) -> None:
