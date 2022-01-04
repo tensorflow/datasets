@@ -22,6 +22,7 @@ Displayed in https://www.tensorflow.org/datasets/catalog/.
 import abc
 import html
 import os
+import re
 import textwrap
 from typing import List, Optional, Union
 
@@ -177,7 +178,7 @@ def _get_read_only_builder_source_code_link(
   module_url = 'https://github.com/tensorflow/datasets'
   # TODO(epot): For datasets built with `tfds build` __module__ correspond
   # to the relative path, not absolute so can't be recover.
-  return f'[{builder.__module__}]({module_url})'
+  return f'[{module_name}]({module_url})'
 
 
 class LocationSection(Section):
