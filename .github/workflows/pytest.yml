@@ -17,7 +17,7 @@ jobs:
     # Install deps
     - uses: actions/setup-python@v2
       with:
-        python-version: 3.6
+        python-version: 3.7
 
     - run: pip --version
     - run: pip install -e .[tests-all]
