@@ -199,6 +199,8 @@ def _make_builders(
   """Yields builders to generate."""
   builder_cls, builder_kwargs = _get_builder_cls(ds_to_build)
 
+  if args.config_idx >= len(builder_cls.BUILDER_CONFIGS):
+    return None
   # Eventually overwrite version
   if args.experimental_latest_version:
     if 'version' in builder_kwargs:
