@@ -20,9 +20,7 @@ jobs:
         python-version: 3.6
 
     - run: pip --version
-    - run: pip install -e .[all,dev]
-
-    # Tensorflow has to be installed separately (to allow tf-nightly)
+    - run: pip install -e .[tests-all]
     - run: pip install tensorflow
 
     # Run tests
