@@ -23,4 +23,8 @@ jobs:
     - run: pip install -e .
     - run: pip freeze
 
-    - run: echo "test"
+    # Run tests
+    - name: Run core tests
+      run: pytest -vv -n auto
+
+    - run: echo "test completed"
