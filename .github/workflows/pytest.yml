@@ -20,7 +20,7 @@ jobs:
         python-version: 3.6
 
     - run: pip --version
-    - run: pip install -e .
+    - run: pip install -e .[all,dev]
     - run: pip freeze
 
     # Run tests
