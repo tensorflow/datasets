@@ -14,7 +14,7 @@ Please read https://www.tensorflow.org/datasets/contribute#pr_checklist to make 
 
 ## Checklist
 
-* [ ] Address all TODO's.
+* [ ] Address all TODO's
 * [ ] Add alphabetized import to subdirectory's `__init__.py`
 * [ ] Run `download_and_prepare` successfully
 * [ ] Add [checksums file](https://www.tensorflow.org/datasets/add_dataset#2_run_download_and_prepare_locally)
