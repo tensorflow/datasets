@@ -21,7 +21,9 @@ jobs:
 
     - run: pip --version
     - run: pip install -e .[all,dev]
-    - run: pip freeze
+
+    # Tensorflow has to be installed separately (to allow tf-nightly)
+    - run: pip install tensorflow
 
     # Run tests
     - name: Run core tests
