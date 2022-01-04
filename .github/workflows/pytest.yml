@@ -18,6 +18,9 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: 3.6
+
+    - run: pip --version
+    - run: pip install -e .
+    - run: pip freeze
+
     - run: echo "test"
-    - name: Run core tests
-      run: pytest  -vv  -n auto
