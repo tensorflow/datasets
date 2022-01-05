@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entailment-corpus>
+         <pair entailment="Entailment" id="1" similarity="4.9">
+             <t>Uma pequena menina está sorrindo e usando um nariz falso e óculos</t>
+             <h>A menina pequena está sorrindo e usando um nariz falso e óculos</h>
+         </pair>
+         <pair entailment="Entailment" id="2" similarity="4.8">
+             <t>Um grupo de pessoas jogando futebol está correndo no campo</t>
+             <h>Um grupo de jogadores de futebol está correndo no campo</h>
+         </pair>
+         <pair entailment="None" id="3" similarity="3.6">
+             <t>O homem está empinando uma motocicleta num chão que é praticamente árido</t>
+             <h>O homem está desmontando de uma moto para um chão que é praticamente árido</h>
+         </pair>
+         <pair entailment="Entailment" id="4" similarity="4.6">
+             <t>Um cervo está saltando sobre uma cerca de ferro</t>
+             <h>O cervo está saltando sobre a cerca</h>
+         </pair>
+         <pair entailment="Entailment" id="5" similarity="4.8">
+             <t>O homem está tocando a flauta</t>
+             <h>Um homem está tocando uma flauta</h>
+         </pair>
+</entailment-corpus>
