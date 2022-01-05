@@ -24,7 +24,7 @@ jobs:
     - run: pip install -e .
 
     - run: apt install -y protobuf-compiler
-    -r un: protoc --version
+    - run: protoc --version
     - run: pip install -e .[tests-all]
 
     # Run tests
