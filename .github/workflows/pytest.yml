@@ -23,7 +23,7 @@ jobs:
     - run: pip install tensorflow
     - run: pip install -e .
 
-    - run: apt install -y protobuf-compiler
+    - run: sudo apt install -y protobuf-compiler
     - run: protoc --version
     - run: pip install -e .[tests-all]
 
