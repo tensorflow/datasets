@@ -22,6 +22,8 @@ jobs:
     - run: pip --version
     - run: pip install tensorflow
     - run: pip install -e .
+
+    - run: ./tensorflow_datasets/core/proto/install_protoc.sh
     - run: pip install -e .[tests-all]
 
     # Run tests
