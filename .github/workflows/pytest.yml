@@ -20,8 +20,9 @@ jobs:
         python-version: 3.7
 
     - run: pip --version
-    - run: pip install -e .[tests-all]
     - run: pip install tensorflow
+    - run: pip install -e .
+    - run: pip install -e .[tests-all]
 
     # Run tests
     - name: Run core tests
