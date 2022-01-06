@@ -21,11 +21,14 @@ jobs:
 
     - run: pip --version
     - run: pip install tensorflow
+    # Delete this
     - run: pip install -e .
 
     - run: sudo apt install -y protobuf-compiler
+    - run: sudo apt-get install ffmpeg
     - run: protoc --version
     - run: pip install -e .[tests-all]
+    - run: pip install tensorflow_io
 
     # Run tests
     - name: Run core tests
