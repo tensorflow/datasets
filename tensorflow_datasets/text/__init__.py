@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.text.ag_news_subset import AGNewsSubset
 from tensorflow_datasets.text.anli import Anli
+from tensorflow_datasets.text.assin2 import Assin2
 from tensorflow_datasets.text.blimp import Blimp
 from tensorflow_datasets.text.bool_q import BoolQ
 from tensorflow_datasets.text.c4 import C4

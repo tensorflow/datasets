@@ -379,6 +379,9 @@ toc:
     title: cs_restaurants
   - path: /datasets/catalog/dart
     title: dart
+  - path: /datasets/catalog/diamonds
+    status: nightly
+    title: diamonds
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   - path: /datasets/catalog/efron_morris75
@@ -470,6 +473,9 @@ toc:
     title: ag_news_subset
   - path: /datasets/catalog/anli
     title: anli
+  - path: /datasets/catalog/assin2
+    status: nightly
+    title: assin2
   - path: /datasets/catalog/blimp
     title: blimp
   - path: /datasets/catalog/bool_q

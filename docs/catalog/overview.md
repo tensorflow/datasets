@@ -242,6 +242,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cs_restaurants`](cs_restaurants.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dart`](dart.md)
+*   [`diamonds`](diamonds.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`efron_morris75`](efron_morris75.md)
 *   [`forest_fires`](forest_fires.md)
@@ -293,6 +295,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`anli`](anli.md)
+*   [`assin2`](assin2.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`blimp`](blimp.md)
 *   [`bool_q`](bool_q.md)
 *   [`c4`](c4.md)

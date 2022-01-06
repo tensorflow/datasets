@@ -250,13 +250,18 @@ def load(
 
   Args:
     name: `str`, the registered name of the `DatasetBuilder` (the snake case
-      version of the class name). This can be either `'dataset_name'` or
-      `'dataset_name/config_name'` for datasets with `BuilderConfig`s. As a
-      convenience, this string may contain comma-separated keyword arguments for
-      the builder. For example `'foo_bar/a=True,b=3'` would use the `FooBar`
-      dataset passing the keyword arguments `a=True` and `b=3` (for builders
-      with configs, it would be `'foo_bar/zoo/a=True,b=3'` to use the `'zoo'`
-      config and pass to the builder keyword arguments `a=True` and `b=3`).
+      version of the class name). The config and version can also be specified
+      in the name as follows: `'dataset_name[/config_name][:version]'`. For
+        example, `'movielens/25m-ratings'` (for the latest version of
+      `'25m-ratings'`), `'movielens:0.1.0'` (for the default config and
+      version 0.1.0), or`'movielens/25m-ratings:0.1.0'`. Note that only the
+        latest version can be generated, but old versions can be read if they
+        are present on disk. For convenience, the `name` parameter can contain
+        comma-separated keyword arguments for the builder. For example,
+        `'foo_bar/a=True,b=3'` would use the `FooBar` dataset passing the
+        keyword arguments `a=True` and `b=3` (for builders with configs, it
+        would be `'foo_bar/zoo/a=True,b=3'` to use the `'zoo'` config and pass
+        to the builder keyword arguments `a=True` and `b=3`).
     split: Which split of the data to load (e.g. `'train'`, `'test'`,
       `['train', 'test']`, `'train[80%:]'`,...). See our
       [split API guide](https://www.tensorflow.org/datasets/splits). If `None`,

@@ -20,6 +20,7 @@ from tensorflow_datasets.structured.cherry_blossoms import CherryBlossoms
 from tensorflow_datasets.structured.covid19 import Covid19
 from tensorflow_datasets.structured.cs_restaurants import CSRestaurants
 from tensorflow_datasets.structured.dart import Dart
+from tensorflow_datasets.structured.diamonds import Diamonds
 from tensorflow_datasets.structured.e2e_cleaned import E2eCleaned
 from tensorflow_datasets.structured.efron_morris_75 import EfronMorris75
 from tensorflow_datasets.structured.forest_fires import ForestFires
