@@ -30,6 +30,7 @@ jobs:
     - run: pip install -e .[tests-all]
     - run: pip install tensorflow_io
     - run: pip install crepe
+    - run: pip install librosa
 
     # Run tests
     - name: Run core tests
