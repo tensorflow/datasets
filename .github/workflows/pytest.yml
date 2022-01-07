@@ -29,6 +29,7 @@ jobs:
     - run: protoc --version
     - run: pip install -e .[tests-all]
     - run: pip install tensorflow_io
+    - run: pip install crepe
 
     # Run tests
     - name: Run core tests
