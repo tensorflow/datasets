@@ -62,7 +62,7 @@ PS.: Description is extracted from [official homepage]({_HOMEPAGE}).
 """
 
 # pylint: disable=line-too-longm anomalous-backslash-in-string
-_CITATION = """
+_CITATION = r"""
 @inproceedings{DBLP:conf/propor/RealFO20,
   author    = {Livy Real and
                Erick Fonseca and
@@ -81,8 +81,8 @@ _CITATION = """
   pages     = {406--412},
   publisher = {Springer},
   year      = {2020},
-  url       = {https://doi.org/10.1007/978-3-030-41505-1\_39},
-  doi       = {10.1007/978-3-030-41505-1\_39},
+  url       = {https://doi.org/10.1007/978-3-030-41505-1_39},
+  doi       = {10.1007/978-3-030-41505-1_39},
   timestamp = {Tue, 03 Mar 2020 09:40:18 +0100},
   biburl    = {https://dblp.org/rec/conf/propor/RealFO20.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org}
