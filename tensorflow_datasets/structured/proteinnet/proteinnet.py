@@ -63,7 +63,7 @@ def _parse_array(lines: Sequence[str]) -> np.ndarray:
 
 def _parse_mask(line: str) -> np.ndarray:
   """Parse a string of `+` and `-` into a bool array."""
-  return np.array([ch == '+' for ch in line], dtype=np.bool)
+  return np.array([ch == '+' for ch in line], dtype=bool)
 
 
 def _read_entry(fin: tf.io.gfile.GFile) -> Optional[Tuple[str, _Example]]:
