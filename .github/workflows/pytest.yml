@@ -29,15 +29,8 @@ jobs:
     - run: protoc --version
     - run: pip install -e .[tests-all]
     - run: pip install tensorflow_io
-    - run: pip install crepe
-    - run: pip install librosa
 
     # Run tests
     - name: Run core tests
-      run: pytest -vv -n auto \
-          --ignore="tensorflow_datasets/audio/nsynth_test.py" \
-          --ignore="tensorflow_datasets/core/features/features_test.py" \
-          --ignore="tensorflow_datasets/testing/test_utils.py" \
-          --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+      run: pytest -vv -n auto --ignore="tensorflow_datasets/audio/nsynth_test.py" --ignore="tensorflow_datasets/core/features/features_test.py" --ignore="tensorflow_datasets/testing/test_utils.py" --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
     - run: echo "test completed"
