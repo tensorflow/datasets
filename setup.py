@@ -149,7 +149,7 @@ DATASET_EXTRAS = {
     'the300w_lp': ['scipy'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
-    'wsc273': ['bs4', 'lxml'],
+    'wsc273': ['beautifulsoup4', 'lxml'],
     'youtube_vis': ['pycocotools'],
 }
 
