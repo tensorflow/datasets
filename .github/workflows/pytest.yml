@@ -21,12 +21,9 @@ jobs:
 
     - run: pip --version
     - run: pip install tensorflow
-    # Delete this
-    - run: pip install -e .
 
-    # Install protobuf-compiler for
-    # - run: sudo apt install -y protobuf-compiler
-    # - run: protoc --version
+    # Install the protocol buffer compiler for gcld3 tests.
+    - run: sudo apt install -y protobuf-compiler
     # Install ffmpeg for Audio FeatureConnector tests.
     - run: sudo apt-get install ffmpeg
 
