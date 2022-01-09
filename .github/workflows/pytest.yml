@@ -24,10 +24,14 @@ jobs:
     # Delete this
     - run: pip install -e .
 
-    - run: sudo apt install -y protobuf-compiler
+    # Install protobuf-compiler for
+    # - run: sudo apt install -y protobuf-compiler
+    # Install ffmpeg for Audio FeatureConnector tests.
     - run: sudo apt-get install ffmpeg
+
     - run: protoc --version
     - run: pip install -e .[tests-all]
+    # Install tensorflow_io for lsun tests.
     - run: pip install tensorflow_io
 
     # Run tests
