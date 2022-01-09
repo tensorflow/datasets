@@ -26,10 +26,10 @@ jobs:
 
     # Install protobuf-compiler for
     # - run: sudo apt install -y protobuf-compiler
+    # - run: protoc --version
     # Install ffmpeg for Audio FeatureConnector tests.
     - run: sudo apt-get install ffmpeg
 
-    - run: protoc --version
     - run: pip install -e .[tests-all]
     # Install tensorflow_io for lsun tests.
     - run: pip install tensorflow_io
