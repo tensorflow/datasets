@@ -1,0 +1,42 @@
+name: Unittests
+
+on: push
+
+jobs:
+  pytest-job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        access_token: ${{ github.token }}
+
+    - uses: actions/checkout@v2
+
+    # Install deps
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - run: pip --version
+    - run: pip install tensorflow
+
+    # Install the protocol buffer compiler for gcld3 tests.
+    - run: sudo apt install -y protobuf-compiler
+    # Install ffmpeg for Audio FeatureConnector tests.
+    - run: sudo apt-get install ffmpeg
+
+    - run: pip install -e .[tests-all]
+    # Install tensorflow_io for lsun tests.
+    - run: pip install tensorflow_io
+
+    # Run tests
+    - name: Run core tests
+      run: |
+        pytest -vv -n auto \
+          --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+          --ignore="tensorflow_datasets/core/features/features_test.py" \
+          --ignore="tensorflow_datasets/testing/test_utils.py" \
+          --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
+          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
