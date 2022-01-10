@@ -103,7 +103,7 @@ def _deserialize_single_field(example_data, tensor_info):
     example_data = tf.reshape(example_data, shape)
 
   # Restore dtype
-  if example_data.dtype != tensor_info.dtype:
+  if not utils.is_same_tf_dtype(example_data.dtype, tensor_info.dtype):
     example_data = tf.dtypes.cast(example_data, tensor_info.dtype)
   return example_data
 

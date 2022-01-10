@@ -592,4 +592,5 @@ def compare_shapes_and_types(tensor_info, element_spec):
         raise TypeError(
             f"Feature {feature_name} has type {feature_info} but expected {spec}"
         )
-      utils.assert_shape_match(feature_info.shape, spec._shape)  # pylint: disable=protected-access
+      utils.assert_tf_shape_match(
+          tf.TensorShape(feature_info.shape), spec._shape)  # pylint: disable=protected-access

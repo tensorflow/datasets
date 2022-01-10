@@ -15,6 +15,7 @@
 
 """Tests for tensorflow_datasets.core.utils.tf_utils."""
 
+import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import tf_utils
@@ -67,6 +68,27 @@ def test_shapes_are_compatible():
           'b': (None, 27, 3)
       }},
   )
+
+
+def test_is_np_sub_dtype():
+  assert tf_utils.is_np_sub_dtype(np.int32, np.integer)
+  assert tf_utils.is_np_sub_dtype(np.int64, np.integer)
+  assert tf_utils.is_np_sub_dtype(np.float, np.floating)
+  assert not tf_utils.is_np_sub_dtype(np.int64, np.floating)
+  assert not tf_utils.is_np_sub_dtype(np.float, np.integer)
+
+
+def test_is_same_tf_dtype():
+  assert tf_utils.is_same_tf_dtype(tf.int32, tf.int32)
+  assert not tf_utils.is_same_tf_dtype(tf.int32, tf.int64)
+  assert not tf_utils.is_same_tf_dtype(tf.int64, tf.int32)
+
+
+def test_merge_shape():
+  tensor = tf.constant([28, 28, 3])
+  np_shape = (None, None, 3)
+  actual = tf_utils.merge_shape(tensor, np_shape)
+  assert actual == (tf.constant(28), tf.constant(28), 3)
 
 
 if __name__ == '__main__':
