@@ -60,6 +60,7 @@ class _ImageEncoder:
   """Utils which encode/decode images."""
   shape: utils.Shape
   dtype: tf.dtypes.DType
+  numpy_dtype: np.dtype
   encoding_format: Optional[str]
 
   # TODO(tfds): Should deprecate the TFGraph runner in favor of simpler
@@ -85,7 +86,11 @@ class _ImageEncoder:
 
   def _encode_image(self, np_image: np.ndarray) -> bytes:
     """Returns np_image encoded as jpeg or png."""
-    _validate_np_array(np_image, shape=self.shape, dtype=self.dtype)
+    _validate_np_array(
+        np_image,
+        shape=self.shape,
+        dtype=self.dtype,
+        numpy_dtype=self.numpy_dtype)
 
     # When encoding isn't defined, default to PNG.
     # Should we be more strict about explicitly define the encoding (raise
@@ -113,7 +118,6 @@ class _FloatImageEncoder(_ImageEncoder):
       self,
       *,
       shape: utils.Shape,
-      dtype: tf.dtypes.DType,
       encoding_format: str,
   ):
     # Assert that shape and encoding are valid when dtype==tf.float32.
@@ -128,6 +132,7 @@ class _FloatImageEncoder(_ImageEncoder):
     super().__init__(
         shape=shape[:2] + (4,),
         dtype=tf.uint8,
+        numpy_dtype=tf.uint8.as_numpy_dtype,
         encoding_format=encoding_format,
     )
 
@@ -235,14 +240,17 @@ class Image(feature_lib.FeatureConnector):
                                                     self._encoding_format)
 
     if self._dtype == tf.float32:  # Float images encoded as 4-channels uint8
-      encoder_cls = _FloatImageEncoder
+      self._image_encoder = _FloatImageEncoder(
+          shape=self._shape,
+          encoding_format=self._encoding_format,
+      )
     else:
-      encoder_cls = _ImageEncoder
-    self._image_encoder = encoder_cls(
-        shape=self._shape,
-        dtype=self._dtype,
-        encoding_format=self._encoding_format,
-    )
+      self._image_encoder = _ImageEncoder(
+          shape=self._shape,
+          dtype=self._dtype,
+          numpy_dtype=self._dtype.as_numpy_dtype,
+          encoding_format=self._encoding_format,
+      )
 
   @property
   def encoding_format(self) -> Optional[str]:
@@ -448,13 +456,13 @@ def _get_and_validate_colormap(use_colormap, shape, dtype, encoding_format):
   return use_colormap
 
 
-def _validate_np_array(
-    np_array: np.ndarray,
-    shape: utils.Shape,
-    dtype: tf.dtypes.DType,
-) -> None:
+def _validate_np_array(np_array: np.ndarray,
+                       shape: utils.Shape,
+                       dtype: tf.dtypes.DType,
+                       numpy_dtype: Optional[np.dtype] = None) -> None:
   """Validate the numpy array match the expected shape/dtype."""
-  if np_array.dtype != dtype.as_numpy_dtype:
-    raise ValueError(f'Image dtype should be {dtype.as_numpy_dtype}. '
+  numpy_dtype = numpy_dtype or dtype.as_numpy_dtype
+  if np_array.dtype != numpy_dtype:
+    raise ValueError(f'Image dtype should be {numpy_dtype}. '
                      f'Detected: {np_array.dtype}.')
   utils.assert_shape_match(np_array.shape, shape)

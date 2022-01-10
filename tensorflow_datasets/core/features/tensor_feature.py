@@ -131,7 +131,7 @@ class Tensor(feature_lib.FeatureConnector):
                        "`Tensor(..., encoding='zlib')` (or 'bytes'). "
                        f'For {self}')
 
-    np_dtype = np.dtype(self.dtype.as_numpy_dtype)
+    np_dtype = np.dtype(self.numpy_dtype)
     if isinstance(example_data, tf.Tensor):
       raise TypeError(
           f'Error encoding: {example_data!r}. `_generate_examples` should '
@@ -144,7 +144,8 @@ class Tensor(feature_lib.FeatureConnector):
           example_data.dtype, np_dtype))
 
     shape = example_data.shape
-    utils.assert_shape_match(shape, self._shape)
+    utils.assert_tf_shape_match(
+        tf.TensorShape(shape), tf.TensorShape(self._shape))
 
     # Eventually encode the data
     if self._encoded_to_bytes:
@@ -233,7 +234,7 @@ def get_inner_feature_repr(feature):
   `Sequence(Tensor(shape=(), dtype=tf.in32))`.
 
   Args:
-    feature: The feature to dispaly
+    feature: The feature to display
 
   Returns:
     Either the feature or it's inner value.

@@ -30,7 +30,7 @@ import sys
 import textwrap
 import threading
 import typing
-from typing import Any, Callable, Iterable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
+from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
 import uuid
 
 from six.moves import urllib
@@ -202,15 +202,14 @@ def zip_nested(arg0, *args, **kwargs):
   return (arg0,) + args
 
 
-def flatten_nest_dict(d):
+def flatten_nest_dict(d: type_utils.TreeDict[T]) -> Dict[str, T]:
   """Return the dict with all nested keys flattened joined with '/'."""
   # Use NonMutableDict to ensure there is no collision between features keys
   flat_dict = NonMutableDict()
   for k, v in d.items():
     if isinstance(v, dict):
-      flat_dict.update({
-          '{}/{}'.format(k, k2): v2 for k2, v2 in flatten_nest_dict(v).items()
-      })
+      flat_dict.update(
+          {f'{k}/{k2}': v2 for k2, v2 in flatten_nest_dict(v).items()})
     else:
       flat_dict[k] = v
   return flat_dict
@@ -269,7 +268,7 @@ def pack_as_nest_dict(flat_d, nest_d):
       sub_d = {
           k2: flat_d.pop('{}/{}'.format(k, k2)) for k2, _ in v_flat.items()
       }
-      # Recursivelly pack the dictionary
+      # Recursively pack the dictionary
       nest_out_d[k] = pack_as_nest_dict(sub_d, v)
     else:
       nest_out_d[k] = flat_d.pop(k)

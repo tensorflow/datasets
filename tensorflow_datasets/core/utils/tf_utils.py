@@ -135,8 +135,25 @@ def is_dtype(value):
   return True
 
 
-def assert_shape_match(shape1, shape2):
-  """Ensure the shape1 match the pattern given by shape2.
+@py_utils.memoize()
+def is_same_tf_dtype(v1: tf.dtypes.DType, v2: tf.dtypes.DType) -> bool:
+  return v1 == v2
+
+
+@py_utils.memoize()
+def is_np_sub_dtype(value: np.dtype, super_type: np.dtype) -> bool:
+  return np.issubdtype(value, super_type)
+
+
+@py_utils.memoize()
+def is_same_np_dtype(v1: np.dtype, v2: np.dtype) -> bool:
+  return v1 == v2
+
+
+@py_utils.memoize(maxsize=1000)
+def assert_shape_match(shape1: type_utils.Shape,
+                       shape2: type_utils.Shape) -> None:
+  """Ensure the shape1 matches the pattern given by shape2.
 
   Ex:
     assert_shape_match((64, 64, 3), (None, None, 3))
@@ -145,8 +162,11 @@ def assert_shape_match(shape1, shape2):
     shape1 (tuple): Static shape
     shape2 (tuple): Dynamic shape (can contain None)
   """
-  shape1 = tf.TensorShape(shape1)
-  shape2 = tf.TensorShape(shape2)
+  assert_tf_shape_match(tf.TensorShape(shape1), tf.TensorShape(shape2))
+
+
+def assert_tf_shape_match(shape1: tf.TensorShape,
+                          shape2: tf.TensorShape) -> None:
   if shape1.ndims is None or shape2.ndims is None:
     raise ValueError('Shapes must have known rank. Got %s and %s.' %
                      (shape1.ndims, shape2.ndims))
@@ -202,7 +222,7 @@ def merge_shape(tf_shape: tf.Tensor, np_shape: type_utils.Shape):
   Returns:
     A tuple like np_shape, but with `None` values replaced by `tf.Tensor` values
   """
-  assert_shape_match(tf_shape.shape, (len(np_shape),))
+  assert_tf_shape_match(tf_shape.shape, tf.TensorShape((len(np_shape),)))
   return tuple(
       tf_shape[i] if dim is None else dim for i, dim in enumerate(np_shape))
 
