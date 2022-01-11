@@ -807,11 +807,11 @@ class DatasetBuilder(registered.RegisteredDataset):
   @abc.abstractmethod
   def _as_dataset(
       self,
-      split,
+      split: splits_lib.Split,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
       read_config: Optional[read_config_lib.ReadConfig] = None,
-      shuffle_files=False,
-  ):
+      shuffle_files: bool = False,
+  ) -> tf.data.Dataset:
     """Constructs a `tf.data.Dataset`.
 
     Internal implementation to overwrite when inheriting from DatasetBuilder.
@@ -946,10 +946,10 @@ class FileReaderBuilder(DatasetBuilder):
 
   def _as_dataset(
       self,
-      split,
+      split: splits_lib.Split,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
-      read_config,
-      shuffle_files,
+      read_config: read_config_lib.ReadConfig,
+      shuffle_files: bool,
   ) -> tf.data.Dataset:
     # Partial decoding
     # TODO(epot): Should be moved inside `features.decode_example`
