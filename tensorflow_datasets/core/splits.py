@@ -21,6 +21,7 @@ from typing import Any, List, Optional, Union
 
 from tensorflow_datasets.core import proto as proto_lib
 from tensorflow_datasets.core import tfrecords_reader
+from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_metadata.proto.v0 import statistics_pb2
@@ -38,7 +39,7 @@ class SplitInfo:
       examples stored in each file.
     num_examples: Total number of examples (`sum(shard_lengths)`)
     num_shards: Number of files (`len(shard_lengths)`)
-    num_bytes: Size of the files
+    num_bytes: Size of the files (in bytes)
     statistics: Additional statistics of the split.
   """
   name: str
@@ -51,6 +52,10 @@ class SplitInfo:
   # Rather than `dataset_name`, should use a structure containing file format,
   # data_dir,...
   _dataset_name: Optional[str] = None
+
+  def __post_init__(self):
+    # Normalize bytes
+    super().__setattr__("num_bytes", units.Size(self.num_bytes))
 
   @classmethod
   def from_proto(cls, proto: proto_lib.SplitInfo) -> "SplitInfo":
