@@ -137,7 +137,7 @@ def _is_string(item):
 def _item_to_np_array(item, dtype: tf.dtypes.DType, numpy_dtype: np.dtype,
                       shape: Shape) -> np.ndarray:
   """Single item to a np.array."""
-  result = np.array(item, dtype=numpy_dtype)
+  result = np.asanyarray(item, dtype=numpy_dtype)
   utils.assert_shape_match(result.shape, shape)
   if utils.is_same_tf_dtype(dtype, tf.string) and not _is_string(item):
     raise ValueError(
@@ -152,20 +152,21 @@ def _item_to_tf_feature(
       item,
       shape=tensor_info.shape,
       dtype=tensor_info.dtype,
-      numpy_dtype=tensor_info.numpy_dtype)
+      numpy_dtype=tensor_info.numpy_dtype,
+  )
 
   # Convert boolean to integer (tf.train.Example does not support bool)
   if utils.is_same_np_dtype(v.dtype, np.bool_):
     v = v.astype(int)
 
-  v = v.flatten()  # Convert v into a 1-d array
+  vals = v.flat  # Convert v into a 1-d array (without extra copy)
   if utils.is_np_sub_dtype(v.dtype, np.integer):
-    return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
+    return tf.train.Feature(int64_list=tf.train.Int64List(value=vals))
   elif utils.is_np_sub_dtype(v.dtype, np.floating):
-    return tf.train.Feature(float_list=tf.train.FloatList(value=v))
+    return tf.train.Feature(float_list=tf.train.FloatList(value=vals))
   elif utils.is_same_tf_dtype(tensor_info.dtype, tf.string):
-    v = [tf.compat.as_bytes(x) for x in v]
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
+    vals = [tf.compat.as_bytes(x) for x in vals]
+    return tf.train.Feature(bytes_list=tf.train.BytesList(value=vals))
   else:
     raise ValueError(
         "Unsupported value: {}.\n"
