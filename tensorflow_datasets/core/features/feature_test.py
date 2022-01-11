@@ -76,3 +76,25 @@ def test_encode_and_parse_dtype():
   dtypes = [tf.int64, tf.string, tf.bfloat16, tf.bool]
   for dtype in dtypes:
     assert feature.parse_dtype(feature.encode_dtype(dtype)) == dtype
+
+
+def test_tensor_info_tensor_shape():
+  tensor_info = feature.TensorInfo(
+      shape=tf.TensorShape([28, 28, 3]), dtype=tf.int64)
+  assert tensor_info.shape == (28, 28, 3)
+
+
+def test_tensor_info_tensor_shape_with_none():
+  tensor_info = feature.TensorInfo(
+      shape=tf.TensorShape([None, None, 3]), dtype=tf.int64)
+  assert tensor_info.shape == (None, None, 3)
+
+
+def test_tensor_info_list_shape():
+  tensor_info = feature.TensorInfo(shape=[28, 28, 3], dtype=tf.int64)
+  assert tensor_info.shape == (28, 28, 3)
+
+
+def test_tensor_info_list_shape_with_none():
+  tensor_info = feature.TensorInfo(shape=[None, None, 3], dtype=tf.int64)
+  assert tensor_info.shape == (None, None, 3)

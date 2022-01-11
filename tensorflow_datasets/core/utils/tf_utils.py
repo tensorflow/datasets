@@ -17,7 +17,7 @@
 
 import collections
 import contextlib
-from typing import Union
+from typing import Any, Union
 
 import numpy as np
 import tensorflow as tf
@@ -124,6 +124,18 @@ class TFGraphRunner(object):
     # Close all sessions
     for graph_run in self._graph_run_cache.values():
       graph_run.session.close()
+
+
+def convert_to_shape(shape: Any) -> type_utils.Shape:
+  """Converts a shape to a TFDS shape."""
+  if isinstance(shape, tuple):
+    return shape
+  if isinstance(shape, tf.TensorShape):
+    return tuple(shape.as_list())
+  if isinstance(shape, list):
+    return tuple(shape)
+  raise ValueError(
+      f'Shape of type {type(shape)} with content {shape} is not supported!')
 
 
 def is_dtype(value):

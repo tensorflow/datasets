@@ -31,6 +31,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import type_utils
 
 from google.protobuf import descriptor
@@ -72,7 +73,7 @@ class TensorInfo(object):
       sequence_rank: `int`, Number of `tfds.features.Sequence` dimension.
       dataset_lvl: `int`, if >0, nesting level of a `tfds.features.Dataset`.
     """
-    self.shape = shape
+    self.shape = tf_utils.convert_to_shape(shape)
     self.dtype = dtype
     self.numpy_dtype: np.dtype = dtype.as_numpy_dtype
     self.default_value = default_value
@@ -80,7 +81,7 @@ class TensorInfo(object):
     self.dataset_lvl = dataset_lvl
 
   @classmethod
-  def copy_from(cls, tensor_info):
+  def copy_from(cls, tensor_info: 'TensorInfo') -> 'TensorInfo':
     """Copy constructor."""
     return cls(
         shape=tensor_info.shape,
@@ -89,6 +90,12 @@ class TensorInfo(object):
         sequence_rank=tensor_info.sequence_rank,
         dataset_lvl=tensor_info.dataset_lvl,
     )
+
+  @classmethod
+  def from_tensor_spec(cls, tensor_spec: tf.TensorSpec) -> 'TensorInfo':
+    return cls(
+        shape=tf_utils.convert_to_shape(tensor_spec.shape),
+        dtype=tensor_spec.dtype)
 
   def __eq__(self, other):
     """Equality."""
