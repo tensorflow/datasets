@@ -17,7 +17,6 @@
 
 import os
 from absl.testing import flagsaver
-import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config
