@@ -89,8 +89,11 @@ class GetDatasetFilesTest(testing.TestCase):
     files = self._get_files(instruction)
     self.assertEqual(files, [
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % i, skip=0, take=-1, num_examples=n)
-        for i, n in enumerate([3, 2, 3, 2, 3])
+            filename=self.PATH_PATTERN % i,
+            skip=0,
+            take=-1,
+            num_examples=n,
+            shard_length=n) for i, n in enumerate([3, 2, 3, 2, 3])
     ])
 
   def test_skip(self):
@@ -99,13 +102,29 @@ class GetDatasetFilesTest(testing.TestCase):
     files = self._get_files(instruction)
     self.assertEqual(files, [
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 1, skip=1, take=-1, num_examples=1),
+            filename=self.PATH_PATTERN % 1,
+            skip=1,
+            take=-1,
+            num_examples=1,
+            shard_length=2),
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 2, skip=0, take=-1, num_examples=3),
+            filename=self.PATH_PATTERN % 2,
+            skip=0,
+            take=-1,
+            num_examples=3,
+            shard_length=3),
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 3, skip=0, take=-1, num_examples=2),
+            filename=self.PATH_PATTERN % 3,
+            skip=0,
+            take=-1,
+            num_examples=2,
+            shard_length=2),
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 4, skip=0, take=-1, num_examples=3),
+            filename=self.PATH_PATTERN % 4,
+            skip=0,
+            take=-1,
+            num_examples=3,
+            shard_length=3),
     ])
 
   def test_take(self):
@@ -114,11 +133,23 @@ class GetDatasetFilesTest(testing.TestCase):
     files = self._get_files(instruction)
     self.assertEqual(files, [
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 0, skip=0, take=-1, num_examples=3),
+            filename=self.PATH_PATTERN % 0,
+            skip=0,
+            take=-1,
+            num_examples=3,
+            shard_length=3),
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 1, skip=0, take=-1, num_examples=2),
+            filename=self.PATH_PATTERN % 1,
+            skip=0,
+            take=-1,
+            num_examples=2,
+            shard_length=2),
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 2, skip=0, take=1, num_examples=1),
+            filename=self.PATH_PATTERN % 2,
+            skip=0,
+            take=1,
+            num_examples=1,
+            shard_length=3),
     ])
 
   def test_skip_take1(self):
@@ -127,7 +158,11 @@ class GetDatasetFilesTest(testing.TestCase):
     files = self._get_files(instruction)
     self.assertEqual(files, [
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 0, skip=1, take=1, num_examples=1),
+            filename=self.PATH_PATTERN % 0,
+            skip=1,
+            take=1,
+            num_examples=1,
+            shard_length=3),
     ])
 
   def test_skip_take2(self):
@@ -136,9 +171,17 @@ class GetDatasetFilesTest(testing.TestCase):
     files = self._get_files(instruction)
     self.assertEqual(files, [
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 2, skip=2, take=-1, num_examples=1),
+            filename=self.PATH_PATTERN % 2,
+            skip=2,
+            take=-1,
+            num_examples=1,
+            shard_length=3),
         shard_utils.FileInstruction(
-            filename=self.PATH_PATTERN % 3, skip=0, take=1, num_examples=1),
+            filename=self.PATH_PATTERN % 3,
+            skip=0,
+            take=1,
+            num_examples=1,
+            shard_length=2),
     ])
 
   def test_touching_boundaries(self):
@@ -474,9 +517,17 @@ class ReaderTest(testing.TestCase):
     ds = self.reader.read_files(
         [
             shard_utils.FileInstruction(
-                filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+                filename=fname_pattern % 1,
+                skip=0,
+                take=-1,
+                num_examples=3,
+                shard_length=3),
             shard_utils.FileInstruction(
-                filename=fname_pattern % 3, skip=1, take=1, num_examples=1),
+                filename=fname_pattern % 3,
+                skip=1,
+                take=1,
+                num_examples=1,
+                shard_length=2),
         ],
         read_config=read_config_lib.ReadConfig(),
         shuffle_files=False,
@@ -531,7 +582,11 @@ class ReaderTest(testing.TestCase):
       self.reader.read_files(
           [
               shard_utils.FileInstruction(
-                  filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+                  filename=fname_pattern % 1,
+                  skip=0,
+                  take=-1,
+                  num_examples=3,
+                  shard_length=3),
           ],
           read_config=read_config_lib.ReadConfig(),
           shuffle_files=True,
@@ -543,7 +598,11 @@ class ReaderTest(testing.TestCase):
     fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
     instructions = [
         shard_utils.FileInstruction(
-            filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+            filename=fname_pattern % 1,
+            skip=0,
+            take=-1,
+            num_examples=3,
+            shard_length=3),
     ]
     # In ordered dataset interleave_cycle_length is set to 1 by default
     self.reader.read_files(
@@ -566,7 +625,11 @@ class ReaderTest(testing.TestCase):
     fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
     instructions = [
         shard_utils.FileInstruction(
-            filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+            filename=fname_pattern % 1,
+            skip=0,
+            take=-1,
+            num_examples=3,
+            shard_length=3),
     ]
     reported_warnings = []
     with mock.patch('absl.logging.warning', reported_warnings.append):
@@ -613,19 +676,19 @@ def test_shard_api():
           skip=0,
           take=-1,
           num_examples=10,
-      ),
+          shard_length=10),
       shard_utils.FileInstruction(
           filename='ds_name-train.tfrecord-00001-of-00003',
           skip=0,
           take=-1,
           num_examples=20,
-      ),
+          shard_length=20),
       shard_utils.FileInstruction(
           filename='ds_name-train.tfrecord-00002-of-00003',
           skip=0,
           take=-1,
           num_examples=13,
-      ),
+          shard_length=13),
   ]
   sd = splits.SplitDict([si], dataset_name='ds_name')
   assert sd['train[0shard]'].file_instructions == [fi[0]]

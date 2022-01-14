@@ -34,12 +34,14 @@ class FileInstruction(object):
     skip: Indicates which example read in the shard (`ds.skip().take()`). `0` if
       no skipping.
     take: Indicates how many examples to read (`-1` to read all).
-    num_examples: `int`, The total number of examples.
+    num_examples: `int`, The total number of examples to read.
+    shard_length: `int`, The number of examples in the source.
   """
   filename: str
   skip: int
   take: int
   num_examples: int
+  shard_length: int
 
   def replace(self, **kwargs: Any) -> 'FileInstruction':
     return dataclasses.replace(self, **kwargs)
@@ -81,6 +83,7 @@ def get_file_instructions(
               skip=skip,
               take=take,
               num_examples=length - skip if take == -1 else take,
+              shard_length=length,
           ))
     index_start += length
   return file_instructions

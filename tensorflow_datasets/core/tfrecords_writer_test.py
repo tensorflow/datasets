@@ -48,32 +48,56 @@ class GetShardSpecsTest(testing.TestCase):
             _ShardSpec(0, '/bar.tfrecord-00000-of-00006',
                        '/bar.tfrecord-00000-of-00006_index.json', 1, [
                            shard_utils.FileInstruction(
-                               filename='0', skip=0, take=1, num_examples=1),
+                               filename='0',
+                               skip=0,
+                               take=1,
+                               num_examples=1,
+                               shard_length=8),
                        ]),
             _ShardSpec(1, '/bar.tfrecord-00001-of-00006',
                        '/bar.tfrecord-00001-of-00006_index.json', 2, [
                            shard_utils.FileInstruction(
-                               filename='0', skip=1, take=2, num_examples=2),
+                               filename='0',
+                               skip=1,
+                               take=2,
+                               num_examples=2,
+                               shard_length=8),
                        ]),
             _ShardSpec(2, '/bar.tfrecord-00002-of-00006',
                        '/bar.tfrecord-00002-of-00006_index.json', 1, [
                            shard_utils.FileInstruction(
-                               filename='0', skip=3, take=1, num_examples=1),
+                               filename='0',
+                               skip=3,
+                               take=1,
+                               num_examples=1,
+                               shard_length=8),
                        ]),
             _ShardSpec(3, '/bar.tfrecord-00003-of-00006',
                        '/bar.tfrecord-00003-of-00006_index.json', 1, [
                            shard_utils.FileInstruction(
-                               filename='0', skip=4, take=1, num_examples=1),
+                               filename='0',
+                               skip=4,
+                               take=1,
+                               num_examples=1,
+                               shard_length=8),
                        ]),
             _ShardSpec(4, '/bar.tfrecord-00004-of-00006',
                        '/bar.tfrecord-00004-of-00006_index.json', 2, [
                            shard_utils.FileInstruction(
-                               filename='0', skip=5, take=2, num_examples=2),
+                               filename='0',
+                               skip=5,
+                               take=2,
+                               num_examples=2,
+                               shard_length=8),
                        ]),
             _ShardSpec(5, '/bar.tfrecord-00005-of-00006',
                        '/bar.tfrecord-00005-of-00006_index.json', 1, [
                            shard_utils.FileInstruction(
-                               filename='0', skip=7, take=-1, num_examples=1),
+                               filename='0',
+                               skip=7,
+                               take=-1,
+                               num_examples=1,
+                               shard_length=8),
                        ]),
         ])
 
@@ -92,16 +116,32 @@ class GetShardSpecsTest(testing.TestCase):
             _ShardSpec(0, '/bar.tfrecord-00000-of-00002',
                        '/bar.tfrecord-00000-of-00002_index.json', 4, [
                            shard_utils.FileInstruction(
-                               filename='0', skip=0, take=-1, num_examples=2),
+                               filename='0',
+                               skip=0,
+                               take=-1,
+                               num_examples=2,
+                               shard_length=2),
                            shard_utils.FileInstruction(
-                               filename='1', skip=0, take=2, num_examples=2),
+                               filename='1',
+                               skip=0,
+                               take=2,
+                               num_examples=2,
+                               shard_length=3),
                        ]),
             _ShardSpec(1, '/bar.tfrecord-00001-of-00002',
                        '/bar.tfrecord-00001-of-00002_index.json', 4, [
                            shard_utils.FileInstruction(
-                               filename='1', skip=2, take=-1, num_examples=1),
+                               filename='1',
+                               skip=2,
+                               take=-1,
+                               num_examples=1,
+                               shard_length=3),
                            shard_utils.FileInstruction(
-                               filename='3', skip=0, take=-1, num_examples=3),
+                               filename='3',
+                               skip=0,
+                               take=-1,
+                               num_examples=3,
+                               shard_length=3),
                        ]),
         ])
 

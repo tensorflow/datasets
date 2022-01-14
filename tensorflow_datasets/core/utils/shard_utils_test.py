@@ -27,11 +27,11 @@ class GetReadInstructionsTest(testing.TestCase):
                                             [4, 4, 4])
     self.assertEqual(res, [
         shard_utils.FileInstruction(
-            filename='f1', skip=0, take=-1, num_examples=4),
+            filename='f1', skip=0, take=-1, num_examples=4, shard_length=4),
         shard_utils.FileInstruction(
-            filename='f2', skip=0, take=-1, num_examples=4),
+            filename='f2', skip=0, take=-1, num_examples=4, shard_length=4),
         shard_utils.FileInstruction(
-            filename='f3', skip=0, take=-1, num_examples=4),
+            filename='f3', skip=0, take=-1, num_examples=4, shard_length=4),
     ])
 
   def test_read_all_empty_shard(self):
@@ -39,11 +39,11 @@ class GetReadInstructionsTest(testing.TestCase):
                                             [4, 4, 0, 4])
     self.assertEqual(res, [
         shard_utils.FileInstruction(
-            filename='f1', skip=0, take=-1, num_examples=4),
+            filename='f1', skip=0, take=-1, num_examples=4, shard_length=4),
         shard_utils.FileInstruction(
-            filename='f2', skip=0, take=-1, num_examples=4),
+            filename='f2', skip=0, take=-1, num_examples=4, shard_length=4),
         shard_utils.FileInstruction(
-            filename='f4', skip=0, take=-1, num_examples=4),
+            filename='f4', skip=0, take=-1, num_examples=4, shard_length=4),
     ])
 
   def test_from1_to10(self):
@@ -51,11 +51,11 @@ class GetReadInstructionsTest(testing.TestCase):
                                             [4, 4, 0, 4])
     self.assertEqual(res, [
         shard_utils.FileInstruction(
-            filename='f1', skip=1, take=-1, num_examples=3),
+            filename='f1', skip=1, take=-1, num_examples=3, shard_length=4),
         shard_utils.FileInstruction(
-            filename='f2', skip=0, take=-1, num_examples=4),
+            filename='f2', skip=0, take=-1, num_examples=4, shard_length=4),
         shard_utils.FileInstruction(
-            filename='f4', skip=0, take=2, num_examples=2),
+            filename='f4', skip=0, take=2, num_examples=2, shard_length=4),
     ])
 
   def test_nothing_to_read(self):

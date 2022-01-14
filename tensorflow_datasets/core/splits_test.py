@@ -117,7 +117,7 @@ class SplitsTest(testing.TestCase):
             skip=15,
             take=-1,
             num_examples=5,
-        )
+            shard_length=20)
     ])
 
   def test_sub_split_num_shards(self):
@@ -131,7 +131,7 @@ class SplitsTest(testing.TestCase):
             skip=0,
             take=-1,
             num_examples=20,
-        )
+            shard_length=20)
     ])
 
   def test_sub_split_filenames(self):
