@@ -52,7 +52,7 @@ T = TypeVar('T')
 Fn = TypeVar('Fn', bound=Callable[..., Any])
 
 
-def is_notebook() -> bool:
+def is_notebook():
   """Returns True if running in a notebook (Colab, Jupyter) environment."""
   # Inspired from the tqdm autonotebook code
   try:
@@ -64,13 +64,6 @@ def is_notebook() -> bool:
     return False
   else:
     return True
-
-
-def warning(text: str) -> None:
-  if is_notebook():
-    print(text)
-  else:
-    logging.warning(text)
 
 
 @contextlib.contextmanager
