@@ -1,0 +1,355 @@
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="scrolls" />
+  <meta itemprop="description" content="SCROLLS: Standardized CompaRison Over Long Language Sequences.&#10;A suite of natural language tfds.core.that require reasoning over long texts.&#10;https://scrolls-benchmark.com/&#10;summ_screen_fd subset&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;scrolls&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/scrolls" />
+  <meta itemprop="sameAs" content="https://github.com/mingdachen/SummScreen" />
+  <meta itemprop="citation" content="@misc{chen2021summscreen,&#10;      title={SummScreen: A Dataset for Abstractive Screenplay Summarization},&#10;      author={Mingda Chen and Zewei Chu and Sam Wiseman and Kevin Gimpel},&#10;      year={2021},&#10;      eprint={2104.07091},&#10;      archivePrefix={arXiv},&#10;      primaryClass={cs.CL}&#10;}&#10;&#10;@misc{shaham2022scrolls,&#10;      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},&#10;      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},&#10;      year={2022},&#10;      eprint={2201.03533},&#10;      archivePrefix={arXiv},&#10;      primaryClass={cs.CL}&#10;}&#10;Note that each SCROLLS dataset has its own citation. Please see the source to&#10;get the correct citation for each contained dataset." />
+</div>
+
+# `scrolls`
+
+
+Note: This dataset was added recently and is only available in our
+`tfds-nightly` package
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
+
+*   **Source code**:
+    [`tfds.text.scrolls.Scrolls`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scrolls/scrolls.py)
+
+*   **Versions**:
+
+    *   **`1.0.0`** (default): Initial release.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'id': Text(shape=(), dtype=tf.string),
+    'input': Text(shape=(), dtype=tf.string),
+    'output': Text(shape=(), dtype=tf.string),
+    'pid': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+
+## scrolls/summ_screen_fd (default config)
+
+*   **Description**:
+
+SCROLLS: Standardized CompaRison Over Long Language Sequences. A suite of
+natural language tfds.core.that require reasoning over long texts.
+https://scrolls-benchmark.com/ summ_screen_fd subset
+
+*   **Config description**: summ_screen_fd subset
+
+*   **Homepage**:
+    [https://github.com/mingdachen/SummScreen](https://github.com/mingdachen/SummScreen)
+
+*   **Citation**:
+
+```
+@misc{chen2021summscreen,
+      title={SummScreen: A Dataset for Abstractive Screenplay Summarization},
+      author={Mingda Chen and Zewei Chu and Sam Wiseman and Kevin Gimpel},
+      year={2021},
+      eprint={2104.07091},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+
+@misc{shaham2022scrolls,
+      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},
+      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},
+      year={2022},
+      eprint={2201.03533},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+Note that each SCROLLS dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
+
+## scrolls/qasper
+
+*   **Description**:
+
+SCROLLS: Standardized CompaRison Over Long Language Sequences. A suite of
+natural language tfds.core.that require reasoning over long texts.
+https://scrolls-benchmark.com/ qasper subset
+
+*   **Config description**: qasper subset
+
+*   **Homepage**:
+    [https://allenai.org/project/qasper](https://allenai.org/project/qasper)
+
+*   **Citation**:
+
+```
+@inproceedings{dasigi-etal-2021-dataset,
+    title = "A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers",
+    author = "Dasigi, Pradeep  and
+      Lo, Kyle  and
+      Beltagy, Iz  and
+      Cohan, Arman  and
+      Smith, Noah A.  and
+      Gardner, Matt",
+    booktitle = "Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    month = jun,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.naacl-main.365",
+    doi = "10.18653/v1/2021.naacl-main.365",
+    pages = "4599--4610",
+    abstract = "Readers of academic research papers often read with the goal of answering specific questions. Question Answering systems that can answer those questions can make consumption of the content much more efficient. However, building such tools requires data that reflect the difficulty of the task arising from complex reasoning about claims made in multiple parts of a paper. In contrast, existing information-seeking question answering tfds.core.usually contain questions about generic factoid-type information. We therefore present Qasper, a dataset of 5049 questions over 1585 Natural Language Processing papers. Each question is written by an NLP practitioner who read only the title and abstract of the corresponding paper, and the question seeks information present in the full text. The questions are then answered by a separate set of NLP practitioners who also provide supporting evidence to answers. We find that existing models that do well on other QA tasks do not perform well on answering these questions, underperforming humans by at least 27 F1 points when answering them from entire papers, motivating further research in document-grounded, information-seeking QA, which our dataset is designed to facilitate.",
+}
+
+@misc{shaham2022scrolls,
+      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},
+      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},
+      year={2022},
+      eprint={2201.03533},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+Note that each SCROLLS dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
+
+## scrolls/qmsum
+
+*   **Description**:
+
+SCROLLS: Standardized CompaRison Over Long Language Sequences. A suite of
+natural language tfds.core.that require reasoning over long texts.
+https://scrolls-benchmark.com/ qmsum subset
+
+*   **Config description**: qmsum subset
+
+*   **Homepage**:
+    [https://github.com/Yale-LILY/QMSum](https://github.com/Yale-LILY/QMSum)
+
+*   **Citation**:
+
+```
+@inproceedings{zhong-etal-2021-qmsum,
+    title = "{QMS}um: A New Benchmark for Query-based Multi-domain Meeting Summarization",
+    author = "Zhong, Ming  and
+      Yin, Da  and
+      Yu, Tao  and
+      Zaidi, Ahmad  and
+      Mutuma, Mutethia  and
+      Jha, Rahul  and
+      Awadallah, Ahmed Hassan  and
+      Celikyilmaz, Asli  and
+      Liu, Yang  and
+      Qiu, Xipeng  and
+      Radev, Dragomir",
+    booktitle = "Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    month = jun,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.naacl-main.472",
+    doi = "10.18653/v1/2021.naacl-main.472",
+    pages = "5905--5921",
+    abstract = "Meetings are a key component of human collaboration. As increasing numbers of meetings are recorded and transcribed, meeting summaries have become essential to remind those who may or may not have attended the meetings about the key decisions made and the tasks to be completed. However, it is hard to create a single short summary that covers all the content of a long meeting involving multiple people and topics. In order to satisfy the needs of different types of users, we define a new query-based multi-domain meeting summarization task, where models have to select and summarize relevant spans of meetings in response to a query, and we introduce QMSum, a new benchmark for this task. QMSum consists of 1,808 query-summary pairs over 232 meetings in multiple domains. Besides, we investigate a locate-then-summarize method and evaluate a set of strong summarization baselines on the task. Experimental results and manual analysis reveal that QMSum presents significant challenges in long meeting summarization for future research. Dataset is available at \url{https://github.com/Yale-LILY/QMSum}.",
+}
+
+@misc{shaham2022scrolls,
+      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},
+      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},
+      year={2022},
+      eprint={2201.03533},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+Note that each SCROLLS dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
+
+## scrolls/narrative_qa
+
+*   **Description**:
+
+SCROLLS: Standardized CompaRison Over Long Language Sequences. A suite of
+natural language tfds.core.that require reasoning over long texts.
+https://scrolls-benchmark.com/ narrative_qa subset
+
+*   **Config description**: narrative_qa subset
+
+*   **Homepage**:
+    [https://deepmind.com/research/publications/narrativeqa-reading-comprehension-challenge](https://deepmind.com/research/publications/narrativeqa-reading-comprehension-challenge)
+
+*   **Citation**:
+
+```
+@article{kovcisky2018narrativeqa,
+  title={The narrativeqa reading comprehension challenge},
+  author={Ko{\v{c}}isk{\'y}, Tom{\'a}{\v{s}} and Schwarz, Jonathan and Blunsom, Phil and Dyer, Chris and Hermann, Karl Moritz and Melis, G{\'a}bor and Grefenstette, Edward},
+  journal={Transactions of the Association for Computational Linguistics},
+  volume={6},
+  pages={317--328},
+  year={2018},
+  publisher={MIT Press}
+}
+
+@misc{shaham2022scrolls,
+      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},
+      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},
+      year={2022},
+      eprint={2201.03533},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+Note that each SCROLLS dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
+
+## scrolls/gov_report
+
+*   **Description**:
+
+SCROLLS: Standardized CompaRison Over Long Language Sequences. A suite of
+natural language tfds.core.that require reasoning over long texts.
+https://scrolls-benchmark.com/ gov_report subset
+
+*   **Config description**: gov_report subset
+
+*   **Homepage**:
+    [https://gov-report-data.github.io/](https://gov-report-data.github.io/)
+
+*   **Citation**:
+
+```
+@inproceedings{huang-etal-2021-efficient,
+    title = "Efficient Attentions for Long Document Summarization",
+    author = "Huang, Luyang  and
+      Cao, Shuyang  and
+      Parulian, Nikolaus  and
+      Ji, Heng  and
+      Wang, Lu",
+    booktitle = "Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies",
+    month = jun,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.naacl-main.112",
+    doi = "10.18653/v1/2021.naacl-main.112",
+    pages = "1419--1436",
+    abstract = "The quadratic computational and memory complexities of large Transformers have limited their scalability for long document summarization. In this paper, we propose Hepos, a novel efficient encoder-decoder attention with head-wise positional strides to effectively pinpoint salient information from the source. We further conduct a systematic study of existing efficient self-attentions. Combined with Hepos, we are able to process ten times more tokens than existing models that use full attentions. For evaluation, we present a new dataset, GovReport, with significantly longer documents and summaries. Results show that our models produce significantly higher ROUGE scores than competitive comparisons, including new state-of-the-art results on PubMed. Human evaluation also shows that our models generate more informative summaries with fewer unfaithful errors.",
+}
+
+@misc{shaham2022scrolls,
+      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},
+      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},
+      year={2022},
+      eprint={2201.03533},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+Note that each SCROLLS dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
+
+## scrolls/contract_nli
+
+*   **Description**:
+
+SCROLLS: Standardized CompaRison Over Long Language Sequences. A suite of
+natural language tfds.core.that require reasoning over long texts.
+https://scrolls-benchmark.com/ contract_nli subset
+
+*   **Config description**: contract_nli subset
+
+*   **Homepage**:
+    [https://stanfordnlp.github.io/contract-nli/](https://stanfordnlp.github.io/contract-nli/)
+
+*   **Citation**:
+
+```
+@inproceedings{koreeda-manning-2021-contractnli,
+    title = "ContractNLI: A Dataset for Document-level Natural Language Inference for Contracts",
+    author = "Koreeda, Yuta  and
+      Manning, Christopher D.",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2021",
+    year = "2021",
+    publisher = "Association for Computational Linguistics"
+}
+
+
+@misc{shaham2022scrolls,
+      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},
+      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},
+      year={2022},
+      eprint={2201.03533},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+Note that each SCROLLS dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```
+
+## scrolls/quality
+
+*   **Description**:
+
+SCROLLS: Standardized CompaRison Over Long Language Sequences. A suite of
+natural language tfds.core.that require reasoning over long texts.
+https://scrolls-benchmark.com/ quality subset
+
+*   **Config description**: quality subset
+
+*   **Homepage**:
+    [https://github.com/nyu-mll/quality](https://github.com/nyu-mll/quality)
+
+*   **Citation**:
+
+```
+@article{pang2021quality,
+  title={{QuALITY}: Question Answering with Long Input Texts, Yes!},
+  author={Pang, Richard Yuanzhe and Parrish, Alicia and Joshi, Nitish and Nangia, Nikita and Phang, Jason and Chen, Angelica and Padmakumar, Vishakh and Ma, Johnny and Thompson, Jana and He, He and Bowman, Samuel R.},
+  journal={arXiv preprint arXiv:2112.08608},
+  year={2021}
+}
+
+
+@misc{shaham2022scrolls,
+      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},
+      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},
+      year={2022},
+      eprint={2201.03533},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+Note that each SCROLLS dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
+```

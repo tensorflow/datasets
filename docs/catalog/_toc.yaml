@@ -552,6 +552,9 @@ toc:
     title: qa4mre
   - path: /datasets/catalog/quac
     title: quac
+  - path: /datasets/catalog/quality
+    status: nightly
+    title: quality
   - path: /datasets/catalog/race
     title: race
   - path: /datasets/catalog/reddit_disentanglement
@@ -564,6 +567,9 @@ toc:
     title: schema_guided_dialogue
   - path: /datasets/catalog/scicite
     title: scicite
+  - path: /datasets/catalog/scrolls
+    status: nightly
+    title: scrolls
   - path: /datasets/catalog/sentiment140
     title: sentiment140
   - path: /datasets/catalog/snli
@@ -666,6 +672,9 @@ toc:
 - section:
   - path: /datasets/catalog/gref
     title: gref (manual)
+  - path: /datasets/catalog/grounded_scan
+    status: nightly
+    title: grounded_scan
   - path: /datasets/catalog/ref_coco
     title: ref_coco (manual)
   - path: /datasets/catalog/wit
