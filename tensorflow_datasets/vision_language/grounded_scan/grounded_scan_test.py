@@ -13,10 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Vision and Language datasets."""
+"""Grounded Scan dataset."""
 
-from tensorflow_datasets.vision_language.gref import Gref
-from tensorflow_datasets.vision_language.grounded_scan import GroundedScan
-from tensorflow_datasets.vision_language.refcoco import RefCoco
-from tensorflow_datasets.vision_language.wit import Wit
-from tensorflow_datasets.vision_language.wit_kaggle import WitKaggle
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.vision_language.grounded_scan import grounded_scan
+
+
+class GroundedScanTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for grounded_scan dataset."""
+  BUILDER_CONFIG_NAMES_TO_TEST = ["target_length_split"]
+  DATASET_CLASS = grounded_scan.GroundedScan
+
+  SPLITS = {
+      "train": 1,
+      "dev": 1,
+      "test": 1,
+      "target_lengths": 1,
+  }
+
+
+if __name__ == "__main__":
+  tfds.testing.test_main()
