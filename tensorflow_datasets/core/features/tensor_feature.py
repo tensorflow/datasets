@@ -25,6 +25,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import py_utils
 
 Json = utils.Json
 Shape = utils.Shape
@@ -92,10 +93,12 @@ class Tensor(feature_lib.FeatureConnector):
           'tfds.features.Tensor() does not support `encoding=` when '
           'dtype=tf.string. Please open a PR if you need this feature.')
 
+  @py_utils.memoize()
   def get_tensor_info(self) -> feature_lib.TensorInfo:
     """See base class for details."""
     return feature_lib.TensorInfo(shape=self._shape, dtype=self._dtype)
 
+  @py_utils.memoize()
   def get_serialized_info(self):
     """See base class for details."""
     if self._encoded_to_bytes:  # Values encoded (stored as bytes)
@@ -144,8 +147,9 @@ class Tensor(feature_lib.FeatureConnector):
           example_data.dtype, np_dtype))
 
     shape = example_data.shape
-    utils.assert_tf_shape_match(
-        tf.TensorShape(shape), tf.TensorShape(self._shape))
+    if isinstance(shape, tf.TensorShape):
+      shape = tuple(shape.as_list())
+    utils.assert_shape_match(shape, self._shape)
 
     # Eventually encode the data
     if self._encoded_to_bytes:

@@ -427,6 +427,7 @@ class FeatureConnector(object):
     feature.load_metadata(root_dir, feature_name=None)
     return feature
 
+  @py_utils.memoize()
   def get_serialized_info(self) -> Union[TensorInfo, Mapping[str, TensorInfo]]:
     """Return the shape/dtype of features after encoding (for the adapter).
 

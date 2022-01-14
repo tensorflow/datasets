@@ -106,9 +106,8 @@ def disable_logging():
 class NonMutableDict(dict):
   """Dict where keys can only be added but not modified.
 
-  Will raise an error if the user try to overwrite one key. The error message
-  can be customized during construction. It will be formatted using {key} for
-  the overwritten key.
+  Raises an error if a key is overwritten. The error message can be customized
+  during construction. It will be formatted using {key} for the overwritten key.
   """
 
   def __init__(self, *args, **kwargs):

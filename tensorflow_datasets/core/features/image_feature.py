@@ -26,6 +26,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -260,10 +261,12 @@ class Image(feature_lib.FeatureConnector):
   def use_colormap(self) -> bool:
     return self._use_colormap
 
+  @py_utils.memoize()
   def get_tensor_info(self):
     # Image is returned as a 3-d uint8 tf.Tensor.
     return feature_lib.TensorInfo(shape=self._shape, dtype=self._dtype)
 
+  @py_utils.memoize()
   def get_serialized_info(self):
     # Only store raw image (includes size).
     return feature_lib.TensorInfo(shape=(), dtype=tf.string)
