@@ -441,8 +441,8 @@ class DatasetInfo(object):
     json_filename = self._dataset_info_path(dataset_info_dir)
     if not tf.io.gfile.exists(json_filename):
       raise FileNotFoundError(
-          "Try to load `DatasetInfo` from a directory which does not exist or "
-          "does not contain `dataset_info.json`. Please delete the directory "
+          "Tried to load `DatasetInfo` from a directory which does not exist or"
+          " does not contain `dataset_info.json`. Please delete the directory "
           f"`{dataset_info_dir}`  if you are trying to re-generate the "
           "dataset.")
 
