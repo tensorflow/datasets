@@ -23,19 +23,6 @@ Note: This dataset was added recently and is only available in our
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Features**:
 
 ```python
@@ -73,6 +60,22 @@ https://scrolls-benchmark.com/ summ_screen_fd subset
 *   **Homepage**:
     [https://github.com/mingdachen/SummScreen](https://github.com/mingdachen/SummScreen)
 
+*   **Download size**: `48.67 MiB`
+
+*   **Dataset size**: `132.48 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 337
+`'train'`      | 3,673
+`'validation'` | 338
+
 *   **Citation**:
 
 ```
@@ -109,6 +112,22 @@ https://scrolls-benchmark.com/ qasper subset
 
 *   **Homepage**:
     [https://allenai.org/project/qasper](https://allenai.org/project/qasper)
+
+*   **Download size**: `19.20 MiB`
+
+*   **Dataset size**: `131.60 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,399
+`'train'`      | 2,567
+`'validation'` | 1,726
 
 *   **Citation**:
 
@@ -156,6 +175,22 @@ https://scrolls-benchmark.com/ qmsum subset
 
 *   **Homepage**:
     [https://github.com/Yale-LILY/QMSum](https://github.com/Yale-LILY/QMSum)
+
+*   **Download size**: `26.02 MiB`
+
+*   **Dataset size**: `97.86 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 281
+`'train'`      | 1,257
+`'validation'` | 272
 
 *   **Citation**:
 
@@ -209,6 +244,22 @@ https://scrolls-benchmark.com/ narrative_qa subset
 *   **Homepage**:
     [https://deepmind.com/research/publications/narrativeqa-reading-comprehension-challenge](https://deepmind.com/research/publications/narrativeqa-reading-comprehension-challenge)
 
+*   **Download size**: `7.50 GiB`
+
+*   **Dataset size**: `21.56 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 10,306
+`'train'`      | 55,003
+`'validation'` | 5,878
+
 *   **Citation**:
 
 ```
@@ -246,6 +297,22 @@ https://scrolls-benchmark.com/ gov_report subset
 
 *   **Homepage**:
     [https://gov-report-data.github.io/](https://gov-report-data.github.io/)
+
+*   **Download size**: `301.58 MiB`
+
+*   **Dataset size**: `1.01 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 973
+`'train'`      | 17,457
+`'validation'` | 972
 
 *   **Citation**:
 
@@ -293,6 +360,22 @@ https://scrolls-benchmark.com/ contract_nli subset
 *   **Homepage**:
     [https://stanfordnlp.github.io/contract-nli/](https://stanfordnlp.github.io/contract-nli/)
 
+*   **Download size**: `4.64 MiB`
+
+*   **Dataset size**: `112.56 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,091
+`'train'`      | 7,191
+`'validation'` | 1,037
+
 *   **Citation**:
 
 ```
@@ -330,6 +413,22 @@ https://scrolls-benchmark.com/ quality subset
 
 *   **Homepage**:
     [https://github.com/nyu-mll/quality](https://github.com/nyu-mll/quality)
+
+*   **Download size**: `29.80 MiB`
+
+*   **Dataset size**: `163.54 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,128
+`'train'`      | 2,523
+`'validation'` | 2,086
 
 *   **Citation**:
 
