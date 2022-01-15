@@ -15,10 +15,12 @@
 
 """Translation feature that supports multiple languages."""
 
+from typing import Union
 import six
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 try:
   # This fallback applies for all versions of Python before 3.3
@@ -100,19 +102,24 @@ class Translation(features_dict.FeaturesDict):
     return sorted(self.keys())
 
   @classmethod
-  def from_json_content(cls, value: Json) -> "Translation":
-    if "use_encoder" in value:
-      raise ValueError(
-          "TFDS does not support datasets with Encoder. Please use the plain "
-          "text version with `tensorflow_text`.")
-    return cls(**value)
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.TranslationFeature]) -> "Translation":
+    if isinstance(value, dict):
+      if "use_encoder" in value:
+        raise ValueError(
+            "TFDS does not support datasets with Encoder. Please use the plain "
+            "text version with `tensorflow_text`.")
+      return cls(**value)
+    assert not value.variable_languages_per_example
+    return cls(languages=value.languages)
 
-  def to_json_content(self) -> Json:
+  def to_json_content(self) -> feature_pb2.TranslationFeature:
     if self._encoder or self._encoder_config:
-      print("WARNING: TFDS encoder are deprecated and will be removed soon. "
-            "Please use `tensorflow_text` instead with the plain text dataset.")
-      return {"languages": self.languages, "use_encoder": True}
-    return {"languages": self.languages}
+      raise ValueError(
+          "TFDS encoder are deprecated and will be removed soon. "
+          "Please use `tensorflow_text` instead with the plain text dataset.")
+    return feature_pb2.TranslationFeature(
+        languages=self.languages, variable_languages_per_example=False)
 
 
 class TranslationVariableLanguages(sequence_feature.Sequence):
@@ -209,8 +216,14 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
     })
 
   @classmethod
-  def from_json_content(cls, value: Json) -> "TranslationVariableLanguages":
-    return cls(**value)
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.TranslationFeature]
+  ) -> "TranslationVariableLanguages":
+    if isinstance(value, dict):
+      return cls(**value)
+    assert value.variable_languages_per_example
+    return cls(languages=value.languages)
 
-  def to_json_content(self) -> Json:
-    return {"languages": self.languages}
+  def to_json_content(self) -> feature_pb2.TranslationFeature:
+    return feature_pb2.TranslationFeature(
+        languages=self.languages, variable_languages_per_example=True)

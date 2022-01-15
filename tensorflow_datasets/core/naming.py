@@ -210,9 +210,11 @@ def filename_prefix_for_split(name: str, split: str) -> str:
   return '%s-%s' % (filename_prefix_for_name(name), split)
 
 
-def sharded_filenames(filename_prefix: str, num_shards: int) -> List[str]:
+def sharded_filenames(filename_prefix: str, num_shards: int):
   """Sharded filenames given prefix and number of shards."""
-  shard_suffix = '%05d-of-%05d'
+  num_digits = max(len(str(num_shards)), 5)
+  assert num_digits < 10, num_shards
+  shard_suffix = f'%0{num_digits}d-of-%0{num_digits}d'
   return [
       '%s-%s' % (filename_prefix, shard_suffix % (i, num_shards))
       for i in range(num_shards)

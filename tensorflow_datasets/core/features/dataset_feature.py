@@ -21,6 +21,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import sequence_feature
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 
 
@@ -90,12 +91,14 @@ class Dataset(sequence_feature.Sequence):
 
   # TODO(tfds): Add support for TF1 graph mode.
 
+  @py_utils.memoize()
   def get_tensor_info(self):
     """Shape of one element of the dataset."""
     # Add the dataset level
     tensor_info = self._feature.get_tensor_info()
     return tf.nest.map_structure(_add_dataset_lvl, tensor_info)
 
+  @py_utils.memoize()
   def get_serialized_info(self):
     # Add the dataset level and the number of elements in the dataset
     tensor_info = super().get_serialized_info()

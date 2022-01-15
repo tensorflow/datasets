@@ -16,6 +16,7 @@
 """Vision and Language datasets."""
 
 from tensorflow_datasets.vision_language.gref import Gref
+from tensorflow_datasets.vision_language.grounded_scan import GroundedScan
 from tensorflow_datasets.vision_language.refcoco import RefCoco
 from tensorflow_datasets.vision_language.wit import Wit
 from tensorflow_datasets.vision_language.wit_kaggle import WitKaggle

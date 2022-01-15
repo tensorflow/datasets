@@ -733,7 +733,7 @@ def _validate_checksums(
     if not expected_url_info:
       raise ValueError(f'Missing checksums url: {url}, yet '
                        '`force_checksums_validation=True`. '
-                       'Did you forgot to register checksums ?')
+                       'Did you forget to register checksums?')
 
   if (expected_url_info and computed_url_info and
       expected_url_info != computed_url_info):
@@ -752,7 +752,7 @@ def _read_url_info(url_path: type_utils.PathLike) -> checksums.UrlInfo:
   file_info = resource_lib.read_info_file(url_path)
   if 'url_info' not in file_info:
     raise ValueError(
-        'Could not found `url_info` in {}. This likelly indicates that '
+        'Could not find `url_info` in {}. This likely indicates that '
         'the files where downloaded with a previous version of TFDS (<=3.1.0). '
     )
   url_info = file_info['url_info']

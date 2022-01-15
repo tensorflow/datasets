@@ -17,13 +17,15 @@
 
 import os
 import tempfile
-from typing import Sequence, Optional
+from typing import Sequence, Optional, Union
 
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -174,18 +176,30 @@ class Video(sequence_feature.Sequence):
     return super(Video, self).encode_example(encoded_video)
 
   @classmethod
-  def from_json_content(cls, value: Json) -> 'Video':
-    shape = tuple(value['shape'])
-    encoding_format = value['encoding_format']
-    ffmpeg_extra_args = value['ffmpeg_extra_args']
-    return cls(shape, encoding_format, ffmpeg_extra_args)
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.VideoFeature]) -> 'Video':
+    if isinstance(value, dict):
+      # For backwards compatibility
+      shape = tuple(value['shape'])
+      encoding_format = value['encoding_format']
+      ffmpeg_extra_args = value['ffmpeg_extra_args']
+      return cls(shape, encoding_format, ffmpeg_extra_args)
+    return cls(
+        shape=feature_lib.from_shape_proto(value.shape),
+        dtype=feature_lib.parse_dtype(value.dtype),
+        encoding_format=value.encoding_format or None,
+        use_colormap=value.use_colormap,
+        ffmpeg_extra_args=value.ffmpeg_extra_args,
+    )
 
-  def to_json_content(self) -> Json:
-    return {
-        'shape': list(self.shape),
-        'encoding_format': self._encoding_format,
-        'ffmpeg_extra_args': self._extra_ffmpeg_args
-    }
+  def to_json_content(self) -> feature_pb2.VideoFeature:
+    return feature_pb2.VideoFeature(
+        shape=feature_lib.to_shape_proto(self.shape),
+        dtype=feature_lib.encode_dtype(self.dtype),
+        encoding_format=self._encoding_format,
+        use_colormap=self._use_colormap,
+        ffmpeg_extra_args=self._extra_ffmpeg_args,
+    )
 
   def repr_html(self, ex: np.ndarray) -> str:
     """Video are displayed as `<video>`."""

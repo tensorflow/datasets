@@ -115,7 +115,8 @@ class DatasetInfo(object):
       citation: Optional[str] = None,
       metadata: Optional[Metadata] = None,
       license: Optional[str] = None,  # pylint: disable=redefined-builtin
-      redistribution_info: Optional[Dict[str, str]] = None):
+      redistribution_info: Optional[Dict[str, str]] = None,
+      split_dict: Optional[splits_lib.SplitDict] = None):
     """Constructs DatasetInfo.
 
     Args:
@@ -123,8 +124,8 @@ class DatasetInfo(object):
       description: `str`, description of this dataset.
       features: `tfds.features.FeaturesDict`, Information on the feature dict of
         the `tf.data.Dataset()` object from the `builder.as_dataset()` method.
-      supervised_keys: Specifies the input structure for supervised learning,
-        if applicable for the dataset, used with "as_supervised". The keys
+      supervised_keys: Specifies the input structure for supervised learning, if
+        applicable for the dataset, used with "as_supervised". The keys
         correspond to the feature names to select in `info.features`. When
         calling `tfds.core.DatasetBuilder.as_dataset()` with
         `as_supervised=True`, the `tf.data.Dataset` object will yield the
@@ -155,6 +156,7 @@ class DatasetInfo(object):
         in `dataset_info_pb2.RedistributionInfo`. The content of the `license`
         subfield will automatically be written to a LICENSE file stored with the
         dataset.
+      split_dict: information about the splits in this dataset.
     """
     self._builder = builder
 
@@ -189,6 +191,8 @@ class DatasetInfo(object):
             "the top-level. Got {}".format(features))
     self._features = features
     self._splits = splits_lib.SplitDict([], dataset_name=self._builder.name)
+    if split_dict:
+      self.set_splits(split_dict)
     if supervised_keys is not None:
       self._info_proto.supervised_keys.CopyFrom(
           _supervised_keys_to_proto(supervised_keys))
@@ -208,7 +212,7 @@ class DatasetInfo(object):
     """Instantiates DatasetInfo from the given builder and proto."""
     if builder.builder_config:
       assert builder.builder_config.name == proto.config_name
-      assert str(builder.version) == proto.version
+    assert str(builder.version) == proto.version
     features = None
     if proto.HasField("features"):
       features = feature_lib.FeatureConnector.from_proto(proto.features)
@@ -223,6 +227,7 @@ class DatasetInfo(object):
         disable_shuffling=proto.disable_shuffling,
         citation=proto.citation,
         license=proto.redistribution_info.license,
+        split_dict=splits_lib.SplitDict.from_proto(proto.name, proto.splits),
     )
 
   @property
@@ -269,7 +274,7 @@ class DatasetInfo(object):
     return urls and urls[0] or tfds_homepage
 
   @property
-  def citation(self):
+  def citation(self) -> str:
     return self.as_proto.citation
 
   @property
@@ -298,11 +303,11 @@ class DatasetInfo(object):
     return self._features
 
   @property
-  def metadata(self):
+  def metadata(self) -> Optional[Metadata]:
     return self._metadata
 
   @property
-  def supervised_keys(self):
+  def supervised_keys(self) -> Optional[SupervisedKeysType]:
     if not self.as_proto.HasField("supervised_keys"):
       return None
     supervised_keys = self.as_proto.supervised_keys
@@ -313,7 +318,7 @@ class DatasetInfo(object):
     return self.as_proto.redistribution_info
 
   @property
-  def module_name(self):
+  def module_name(self) -> str:
     return self.as_proto.module_name
 
   @property
@@ -352,14 +357,14 @@ class DatasetInfo(object):
     self.as_proto.file_format = new_file_format.value
 
   @property
-  def splits(self):
+  def splits(self) -> splits_lib.SplitDict:
     return self._splits
 
   def set_splits(self, split_dict: splits_lib.SplitDict) -> None:
     """Split setter (private method)."""
     if self._builder.name != split_dict._dataset_name:  # pylint: disable=protected-access
       raise AssertionError(
-          "SplitDict dataset_name does not seems to match dataset_info. "  # pylint: disable=protected-access
+          "SplitDict dataset_name does not seem to match dataset_info. "  # pylint: disable=protected-access
           f"{self._builder.name} != {split_dict._dataset_name}")
 
     # If the statistics have been pre-loaded, forward the statistics
@@ -385,7 +390,7 @@ class DatasetInfo(object):
       self.as_proto.splits.add().CopyFrom(split_info)
 
   @property
-  def initialized(self):
+  def initialized(self) -> bool:
     """Whether DatasetInfo has been fully initialized."""
     return self._fully_initialized
 
@@ -396,10 +401,10 @@ class DatasetInfo(object):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
   @property
-  def as_json(self):
+  def as_json(self) -> str:
     return json_format.MessageToJson(self.as_proto, sort_keys=True)
 
-  def write_to_directory(self, dataset_info_dir):
+  def write_to_directory(self, dataset_info_dir) -> None:
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
     # Save the features structure & metadata (vocabulary, labels,...)
     if self.features:
@@ -416,7 +421,7 @@ class DatasetInfo(object):
     with tf.io.gfile.GFile(self._dataset_info_path(dataset_info_dir), "w") as f:
       f.write(self.as_json)
 
-  def read_from_directory(self, dataset_info_dir):
+  def read_from_directory(self, dataset_info_dir: str) -> None:
     """Update DatasetInfo from the JSON files in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
@@ -436,8 +441,8 @@ class DatasetInfo(object):
     json_filename = self._dataset_info_path(dataset_info_dir)
     if not tf.io.gfile.exists(json_filename):
       raise FileNotFoundError(
-          "Try to load `DatasetInfo` from a directory which does not exist or "
-          "does not contain `dataset_info.json`. Please delete the directory "
+          "Tried to load `DatasetInfo` from a directory which does not exist or"
+          " does not contain `dataset_info.json`. Please delete the directory "
           f"`{dataset_info_dir}`  if you are trying to re-generate the "
           "dataset.")
 
@@ -506,7 +511,7 @@ class DatasetInfo(object):
     # Mark as fully initialized.
     self._fully_initialized = True
 
-  def initialize_from_bucket(self):
+  def initialize_from_bucket(self) -> None:
     """Initialize DatasetInfo from GCS bucket info files."""
     # In order to support Colab, we use the HTTP GCS API to access the metadata
     # files. They are copied locally and then loaded.

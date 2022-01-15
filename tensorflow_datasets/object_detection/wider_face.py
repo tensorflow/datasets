@@ -24,13 +24,13 @@ import tensorflow_datasets.public_api as tfds
 _PROJECT_URL = 'http://shuoyang1213.me/WIDERFACE/'
 
 _WIDER_TRAIN_URL = ('https://drive.google.com/uc?export=download&'
-                    'id=0B6eKvaijfFUDQUUwd21EckhUbWs')
+                    'id=15hGDLhsx8bLgLcIRD5DhYt5iBxnjNF1M')
 
 _WIDER_VAL_URL = ('https://drive.google.com/uc?export=download&'
-                  'id=0B6eKvaijfFUDd3dIRmpvSk8tLUk')
+                  'id=1GUCogbp16PMGa39thoMMeWxp7Rp5oM8Q')
 
 _WIDER_TEST_URL = ('https://drive.google.com/uc?export=download&'
-                   'id=0B6eKvaijfFUDbW4tdGpaYjgzZkU')
+                   'id=1HIfDbVEWKmsYKJZm4lchTBDLW5N7dY5T')
 
 _WIDER_ANNOT_URL = ('https://drive.google.com/uc?export=download&'
                     'id=1sAl2oml7hK6aZRdgRjqQJsjV5CEr7nl4')

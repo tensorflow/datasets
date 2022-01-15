@@ -21,6 +21,7 @@ import contextlib
 import distutils.version
 import functools
 import os
+from typing import Optional
 
 MIN_TF_VERSION = "2.1.0"
 
@@ -78,6 +79,22 @@ def get_single_element(ds):
     return ds.get_single_element()
   else:
     return tf.data.experimental.get_single_element(ds)
+
+
+def _get_option_deterministic_field() -> str:
+  import tensorflow as tf  # pylint: disable=import-outside-toplevel
+  if hasattr(tf.data.Options(), "deterministic"):
+    return "deterministic"
+  return "experimental_deterministic"
+
+
+def get_option_deterministic(options) -> Optional[bool]:
+  """Returns the option whether the output should be in deterministic order."""
+  return getattr(options, _get_option_deterministic_field())
+
+
+def set_option_deterministic(options, value: bool) -> None:
+  setattr(options, _get_option_deterministic_field(), value)
 
 
 def _make_pathlike_fn(fn, nb_path_arg=1):

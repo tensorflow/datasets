@@ -47,14 +47,17 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
     # camelcase_to_snakecase is a no-op if the name is already snake_case.
     self.assertEqual(naming.camelcase_to_snakecase(snake), snake)
 
-  def test_sharded_filenames(self):
+  @parameterized.parameters(
+      (2, '00000-of-00002', '00001-of-00002'),
+      (12345, '00000-of-12345', '12344-of-12345'),
+      (654321, '000000-of-654321', '654320-of-654321'),
+  )
+  def test_sharded_filenames(self, num_shards, expected_first_suffix,
+                             expected_last_suffix):
     prefix = '/tmp/foo'
-    num_shards = 2
-    expected = [
-        '/tmp/foo-00000-of-00002',
-        '/tmp/foo-00001-of-00002',
-    ]
-    self.assertEqual(expected, naming.sharded_filenames(prefix, num_shards))
+    names = naming.sharded_filenames(prefix, num_shards)
+    self.assertEqual(names[0], f'{prefix}-{expected_first_suffix}')
+    self.assertEqual(names[-1], f'{prefix}-{expected_last_suffix}')
 
   @parameterized.parameters(
       ('foo', 'foo-train'),

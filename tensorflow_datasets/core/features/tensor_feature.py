@@ -24,6 +24,8 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import py_utils
 
 Json = utils.Json
 Shape = utils.Shape
@@ -91,10 +93,12 @@ class Tensor(feature_lib.FeatureConnector):
           'tfds.features.Tensor() does not support `encoding=` when '
           'dtype=tf.string. Please open a PR if you need this feature.')
 
+  @py_utils.memoize()
   def get_tensor_info(self) -> feature_lib.TensorInfo:
     """See base class for details."""
     return feature_lib.TensorInfo(shape=self._shape, dtype=self._dtype)
 
+  @py_utils.memoize()
   def get_serialized_info(self):
     """See base class for details."""
     if self._encoded_to_bytes:  # Values encoded (stored as bytes)
@@ -130,7 +134,7 @@ class Tensor(feature_lib.FeatureConnector):
                        "`Tensor(..., encoding='zlib')` (or 'bytes'). "
                        f'For {self}')
 
-    np_dtype = np.dtype(self.dtype.as_numpy_dtype)
+    np_dtype = np.dtype(self.numpy_dtype)
     if isinstance(example_data, tf.Tensor):
       raise TypeError(
           f'Error encoding: {example_data!r}. `_generate_examples` should '
@@ -143,6 +147,8 @@ class Tensor(feature_lib.FeatureConnector):
           example_data.dtype, np_dtype))
 
     shape = example_data.shape
+    if isinstance(shape, tf.TensorShape):
+      shape = tuple(shape.as_list())
     utils.assert_shape_match(shape, self._shape)
 
     # Eventually encode the data
@@ -202,20 +208,26 @@ class Tensor(feature_lib.FeatureConnector):
       return self.decode_example(example_data)
 
   @classmethod
-  def from_json_content(cls, value: Json) -> 'Tensor':
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.TensorFeature]) -> 'Tensor':
+    if isinstance(value, dict):
+      return cls(
+          shape=tuple(value['shape']),
+          dtype=tf.dtypes.as_dtype(value['dtype']),
+          # Use .get for backward-compatibility
+          encoding=value.get('encoding', Encoding.NONE),
+      )
     return cls(
-        shape=tuple(value['shape']),
-        dtype=tf.dtypes.as_dtype(value['dtype']),
-        # Use .get for backward-compatibility
-        encoding=value.get('encoding', Encoding.NONE),
+        shape=feature_lib.from_shape_proto(value.shape),
+        dtype=feature_lib.parse_dtype(value.dtype),
+        encoding=value.encoding or Encoding.NONE,
     )
 
-  def to_json_content(self) -> Json:
-    return {
-        'shape': list(self._shape),
-        'dtype': self._dtype.name,
-        'encoding': self._encoding.value,
-    }
+  def to_json_content(self) -> feature_pb2.TensorFeature:
+    return feature_pb2.TensorFeature(
+        shape=feature_lib.to_shape_proto(self._shape),
+        dtype=feature_lib.encode_dtype(self._dtype),
+        encoding=self._encoding.value)
 
 
 def get_inner_feature_repr(feature):
@@ -226,7 +238,7 @@ def get_inner_feature_repr(feature):
   `Sequence(Tensor(shape=(), dtype=tf.in32))`.
 
   Args:
-    feature: The feature to dispaly
+    feature: The feature to display
 
   Returns:
     Either the feature or it's inner value.

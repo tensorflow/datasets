@@ -29,6 +29,8 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.proto import dataset_info_pb2
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.image_classification import mnist
 
 _TFDS_DIR = utils.tfds_path()
@@ -348,6 +350,30 @@ def test_file_format_values(tmp_path: pathlib.Path):
   # Unknown value
   with pytest.raises(ValueError, match="is not a valid FileFormat"):
     testing.DummyDataset(data_dir=tmp_path, file_format="arrow")
+
+
+def test_dataset_info_from_proto():
+  builder = RandomShapedImageGenerator(data_dir=testing.make_tmp_dir())
+  train = dataset_info_pb2.SplitInfo(
+      name="train", num_shards=2, shard_lengths=[4, 5])
+  test = dataset_info_pb2.SplitInfo(
+      name="test", num_shards=3, shard_lengths=[1, 2, 3])
+  text_feature = feature_pb2.Feature(
+      python_class_name="tensorflow_datasets.core.features.text_feature.Text",
+      text=feature_pb2.TextFeature())
+  proto = dataset_info_pb2.DatasetInfo(
+      name="random_shaped_image_generator",
+      version=str(builder.version),
+      features=feature_pb2.Feature(
+          python_class_name="tensorflow_datasets.core.features.features_dict.FeaturesDict",
+          features_dict=feature_pb2.FeaturesDict(
+              features={"text": text_feature})),
+      splits=[train, test])
+  result = dataset_info.DatasetInfo.from_proto(builder=builder, proto=proto)
+  assert result.splits["test"].shard_lengths == test.shard_lengths
+  assert result.splits["train"].shard_lengths == train.shard_lengths
+  assert set(result.features.keys()) == {"text"}
+  assert result.version == builder.version
 
 
 # pylint: disable=g-inconsistent-quotes

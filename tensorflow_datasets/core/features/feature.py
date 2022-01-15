@@ -22,13 +22,16 @@ import html
 import importlib
 import json
 import os
-from typing import Dict, List, Type, TypeVar, Union
+from typing import Dict, List, Mapping, Optional, Type, TypeVar, Union
 
 import numpy as np
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import type_utils
 
 from google.protobuf import descriptor
@@ -37,6 +40,7 @@ from google.protobuf import message
 
 Json = type_utils.Json
 Shape = type_utils.Shape
+TreeDict = type_utils.TreeDict
 
 T = TypeVar('T', bound='FeatureConnector')
 
@@ -49,15 +53,16 @@ class TensorInfo(object):
   """Structure containing info on the `tf.Tensor` shape/dtype."""
 
   __slots__ = [
-      'shape', 'dtype', 'default_value', 'sequence_rank', 'dataset_lvl'
+      'shape', 'dtype', 'numpy_dtype', 'default_value', 'sequence_rank',
+      'dataset_lvl'
   ]
 
   def __init__(self,
-               shape,
-               dtype,
+               shape: Shape,
+               dtype: tf.dtypes.DType,
                default_value=None,
-               sequence_rank=None,
-               dataset_lvl=0):
+               sequence_rank: Optional[int] = None,
+               dataset_lvl: int = 0):
     """Constructor.
 
     Args:
@@ -68,14 +73,15 @@ class TensorInfo(object):
       sequence_rank: `int`, Number of `tfds.features.Sequence` dimension.
       dataset_lvl: `int`, if >0, nesting level of a `tfds.features.Dataset`.
     """
-    self.shape = shape
+    self.shape = tf_utils.convert_to_shape(shape)
     self.dtype = dtype
+    self.numpy_dtype: np.dtype = dtype.as_numpy_dtype
     self.default_value = default_value
     self.sequence_rank = sequence_rank or 0
     self.dataset_lvl = dataset_lvl
 
   @classmethod
-  def copy_from(cls, tensor_info):
+  def copy_from(cls, tensor_info: 'TensorInfo') -> 'TensorInfo':
     """Copy constructor."""
     return cls(
         shape=tensor_info.shape,
@@ -84,6 +90,12 @@ class TensorInfo(object):
         sequence_rank=tensor_info.sequence_rank,
         dataset_lvl=tensor_info.dataset_lvl,
     )
+
+  @classmethod
+  def from_tensor_spec(cls, tensor_spec: tf.TensorSpec) -> 'TensorInfo':
+    return cls(
+        shape=tf_utils.convert_to_shape(tensor_spec.shape),
+        dtype=tensor_spec.dtype)
 
   def __eq__(self, other):
     """Equality."""
@@ -135,7 +147,7 @@ class FeatureConnector(object):
       cls._registered_features[module_alias] = cls
 
   @abc.abstractmethod
-  def get_tensor_info(self):
+  def get_tensor_info(self) -> TreeDict[TensorInfo]:
     """Return the tf.Tensor dtype/shape of the feature.
 
     This returns the tensor dtype/shape, as returned by .as_dataset by the
@@ -165,15 +177,20 @@ class FeatureConnector(object):
     """
     raise NotImplementedError
 
-  @property
+  @py_utils.memoized_property
   def shape(self):
     """Return the shape (or dict of shape) of this FeatureConnector."""
     return tf.nest.map_structure(lambda t: t.shape, self.get_tensor_info())
 
-  @property
-  def dtype(self):
+  @py_utils.memoized_property
+  def dtype(self) -> TreeDict[tf.dtypes.DType]:
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
     return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
+
+  @py_utils.memoized_property
+  def numpy_dtype(self) -> TreeDict[np.dtype]:
+    return tf.nest.map_structure(lambda t: t.numpy_dtype,
+                                 self.get_tensor_info())
 
   @classmethod
   def cls_from_name(cls, python_class_name: str) -> Type['FeatureConnector']:
@@ -410,7 +427,8 @@ class FeatureConnector(object):
     feature.load_metadata(root_dir, feature_name=None)
     return feature
 
-  def get_serialized_info(self):
+  @py_utils.memoize()
+  def get_serialized_info(self) -> Union[TensorInfo, Mapping[str, TensorInfo]]:
     """Return the shape/dtype of features after encoding (for the adapter).
 
     The `FileAdapter` then use those information to write data on disk.
@@ -827,3 +845,35 @@ def _make_empty_seq_output(
   return tf.constant([],
                      shape=[0] + [0 if d is None else d for d in shape],
                      dtype=dtype)
+
+
+def to_shape_proto(shape: utils.Shape) -> feature_pb2.Shape:
+  """Converts TFDS shape to Shape proto (-1 is used for unspecified dimensions)."""
+  dimensions = []
+  for dimension in shape:
+    if dimension is None or dimension < 0:
+      dimensions.append(-1)
+    else:
+      dimensions.append(dimension)
+  return feature_pb2.Shape(dimensions=dimensions)
+
+
+def from_shape_proto(shape: feature_pb2.Shape) -> utils.Shape:
+  """Creates a TFDS shape from the Shape proto."""
+
+  def parse_dimension(dimension: int) -> Optional[int]:
+    if dimension == -1:
+      return None
+    if dimension >= 0:
+      return dimension
+    raise ValueError(f'Unexpected shape: {shape}')
+
+  return [parse_dimension(dimension) for dimension in shape.dimensions]
+
+
+def encode_dtype(dtype: tf.dtypes.DType) -> str:
+  return dtype.name
+
+
+def parse_dtype(dtype: str) -> tf.dtypes.DType:
+  return tf.dtypes.as_dtype(dtype)

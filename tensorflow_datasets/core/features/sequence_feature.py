@@ -25,6 +25,7 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
+from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -111,12 +112,14 @@ class Sequence(top_level_feature.TopLevelFeature):
     tensor_info.sequence_rank += 1
     return tensor_info
 
+  @py_utils.memoize()
   def get_tensor_info(self):
     """See base class for details."""
     # Add the additional length dimension to every shape
     tensor_info = self._feature.get_tensor_info()
     return tf.nest.map_structure(self._add_length_dim, tensor_info)
 
+  @py_utils.memoize()
   def get_serialized_info(self):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
@@ -208,16 +211,16 @@ class Sequence(top_level_feature.TopLevelFeature):
     }
 
 
-def build_empty_np(serialized_info):
+def build_empty_np(serialized_info: feature_lib.TensorInfo):
   """Build empty sequence with the shape of serialized_info."""
   return np.empty(
       shape=tuple(s if s else 0 for s in serialized_info.shape),
-      dtype=serialized_info.dtype.as_numpy_dtype,
+      dtype=serialized_info.numpy_dtype,
   )
 
 
 def stack_nested(sequence_elements):
-  """Recursivelly stack the tensors from the same dict field."""
+  """Recursively stack the tensors from the same dict field."""
   if isinstance(sequence_elements[0], dict):
     return {
         # Stack along the first dimension
@@ -227,7 +230,7 @@ def stack_nested(sequence_elements):
   # Note: As each field can be a nested ragged list, we don't check here
   # that all elements from the list have matching dtype/shape.
   # Checking is done in `example_serializer` when elements
-  # are converted to numpy array and stacked togethers.
+  # are converted to numpy array and stacked together.
   return list(sequence_elements)
 
 

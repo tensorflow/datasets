@@ -290,19 +290,14 @@ def _find_builder_dir_single_dir(
 
   builder_dir = os.path.join(builder_dir, version_str)
 
-  # Check for builder dir existence
   try:
-    if not tf.io.gfile.exists(builder_dir):
-      return None
+    # Backward compatibility, in order to be a valid ReadOnlyBuilder, the folder
+    # has to contain the feature configuration.
+    if tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):
+      return str(builder_dir)
   except tf.errors.PermissionDeniedError:
     return None
-
-  # Backward compatibility, in order to be a valid ReadOnlyBuilder, the folder
-  # has to contain the feature configuration.
-  if not tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):
-    return None
-
-  return builder_dir
+  return None
 
 
 def _get_default_config_name(builder_dir: str, name: str) -> Optional[str]:

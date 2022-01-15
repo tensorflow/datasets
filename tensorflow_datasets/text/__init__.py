@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.text.ag_news_subset import AGNewsSubset
 from tensorflow_datasets.text.anli import Anli
+from tensorflow_datasets.text.assin2 import Assin2
 from tensorflow_datasets.text.blimp import Blimp
 from tensorflow_datasets.text.bool_q import BoolQ
 from tensorflow_datasets.text.brwac import Brwac
@@ -56,6 +57,7 @@ from tensorflow_datasets.text.pg19 import Pg19
 from tensorflow_datasets.text.piqa import PIQA
 from tensorflow_datasets.text.qa4mre import Qa4mre
 from tensorflow_datasets.text.quac import Quac
+from tensorflow_datasets.text.quality import Quality
 from tensorflow_datasets.text.race import Race
 from tensorflow_datasets.text.reddit_disentanglement import RedditDisentanglement
 from tensorflow_datasets.text.salient_span_wikipedia import SalientSpanWikipedia
@@ -64,6 +66,7 @@ from tensorflow_datasets.text.scan import Scan
 from tensorflow_datasets.text.scan import ScanConfig
 from tensorflow_datasets.text.schema_guided_dialogue import SchemaGuidedDialogue
 from tensorflow_datasets.text.scicite import Scicite
+from tensorflow_datasets.text.scrolls import Scrolls
 from tensorflow_datasets.text.sentiment140 import Sentiment140
 from tensorflow_datasets.text.snli import Snli
 from tensorflow_datasets.text.squad_question_generation import SquadQuestionGeneration

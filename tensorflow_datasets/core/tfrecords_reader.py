@@ -93,7 +93,7 @@ def _get_dataset_from_filename(
     do_take: bool,
     file_format: file_adapters.FileFormat,
     add_tfds_id: bool,
-):
+) -> tf.data.Dataset:
   """Returns a tf.data.Dataset instance from given instructions."""
   ds = file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
       instruction.filepath, buffer_size=_BUFFER_SIZE)
@@ -345,7 +345,7 @@ def _verify_read_config_for_ordered_dataset(
     read_config: read_config_lib.ReadConfig,
     interleave_cycle_length: int,
     shuffle_files: bool,
-):
+) -> None:
   """Check that read parameters will not affect the ordering of the dataset.
 
   The user can bypass the error by setting `enable_ordering_guard=False`.
@@ -399,14 +399,14 @@ class Reader(object):
   def read(
       self,
       *,
-      name,
+      name: str,
       instructions: Tree[SplitArg],
       split_infos: List[SplitInfo],
-      read_config,
-      shuffle_files,
+      read_config: read_config_lib.ReadConfig,
+      shuffle_files: bool,
       disable_shuffling: bool = False,
       decode_fn: Optional[DecodeFn] = None,
-  ):
+  ) -> Tree[tf.data.Dataset]:
     """Returns tf.data.Dataset instance(s).
 
     Args:
@@ -567,7 +567,7 @@ def _str_to_relative_instruction(spec: str) -> 'AbstractSplit':
   )
 
 
-def _pct_to_abs_pct1(boundary, num_examples):
+def _pct_to_abs_pct1(boundary, num_examples: int):
   # Using math.trunc here, since -99.5% should give -99%, not -100%.
   if num_examples < 100:
     msg = ('Using "pct1_dropremainder" rounding on a split with less than 100 '
@@ -576,14 +576,14 @@ def _pct_to_abs_pct1(boundary, num_examples):
   return boundary * math.trunc(num_examples / 100.)
 
 
-def _pct_to_abs_closest(boundary, num_examples):
+def _pct_to_abs_closest(boundary, num_examples: int) -> int:
   return int(round(boundary * num_examples / 100.))
 
 
 def _rel_to_abs_instr(
     rel_instr: 'ReadInstruction',
     split_infos: Dict[str, SplitInfo],
-):
+) -> '_AbsoluteInstruction':
   """Returns _AbsoluteInstruction instance for given RelativeInstruction.
 
   Args:

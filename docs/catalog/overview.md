@@ -242,6 +242,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cs_restaurants`](cs_restaurants.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dart`](dart.md)
+*   [`diamonds`](diamonds.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`efron_morris75`](efron_morris75.md)
 *   [`forest_fires`](forest_fires.md)
@@ -293,6 +295,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`anli`](anli.md)
+*   [`assin2`](assin2.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`blimp`](blimp.md)
 *   [`bool_q`](bool_q.md)
 *   [`c4`](c4.md)
@@ -332,12 +336,16 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`piqa`](piqa.md)
 *   [`qa4mre`](qa4mre.md)
 *   [`quac`](quac.md)
+*   [`quality`](quality.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`race`](race.md)
 *   [`reddit_disentanglement`](reddit_disentanglement.md)
 *   [`salient_span_wikipedia`](salient_span_wikipedia.md)
 *   [`scan`](scan.md)
 *   [`schema_guided_dialogue`](schema_guided_dialogue.md)
 *   [`scicite`](scicite.md)
+*   [`scrolls`](scrolls.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`sentiment140`](sentiment140.md)
 *   [`snli`](snli.md)
 *   [`squad_question_generation`](squad_question_generation.md)
@@ -401,6 +409,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Vision language`
 
 *   [`gref`](gref.md)
+*   [`grounded_scan`](grounded_scan.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`ref_coco`](ref_coco.md)
 *   [`wit`](wit.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>

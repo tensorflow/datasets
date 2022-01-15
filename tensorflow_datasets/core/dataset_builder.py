@@ -646,12 +646,10 @@ class DatasetBuilder(registered.RegisteredDataset):
     # non-deterministic
     # This code should probably be moved inside tfreader, such as
     # all the tf.data.Options are centralized in a single place.
-    deterministic_field = "deterministic" if hasattr(
-        tf.data.Options(), "deterministic") else "experimental_deterministic"
     if (shuffle_files and read_config.shuffle_seed is None and
-        getattr(read_config.options, deterministic_field) is None):
+        tf_compat.get_option_deterministic(read_config.options) is None):
       options = tf.data.Options()
-      setattr(options, deterministic_field, False)
+      tf_compat.set_option_deterministic(options, False)
       ds = ds.with_options(options)
     # If shuffle is False, keep the default value (deterministic), which
     # allow the user to overwritte it.
@@ -809,11 +807,11 @@ class DatasetBuilder(registered.RegisteredDataset):
   @abc.abstractmethod
   def _as_dataset(
       self,
-      split,
+      split: splits_lib.Split,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]] = None,
       read_config: Optional[read_config_lib.ReadConfig] = None,
-      shuffle_files=False,
-  ):
+      shuffle_files: bool = False,
+  ) -> tf.data.Dataset:
     """Constructs a `tf.data.Dataset`.
 
     Internal implementation to overwrite when inheriting from DatasetBuilder.
@@ -948,10 +946,10 @@ class FileReaderBuilder(DatasetBuilder):
 
   def _as_dataset(
       self,
-      split,
+      split: splits_lib.Split,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
-      read_config,
-      shuffle_files,
+      read_config: read_config_lib.ReadConfig,
+      shuffle_files: bool,
   ) -> tf.data.Dataset:
     # Partial decoding
     # TODO(epot): Should be moved inside `features.decode_example`

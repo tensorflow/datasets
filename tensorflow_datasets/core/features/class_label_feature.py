@@ -16,8 +16,11 @@
 """ClassLabel feature."""
 
 import os
+from typing import Union
+
 import tensorflow as tf
 from tensorflow_datasets.core.features import tensor_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
@@ -180,11 +183,14 @@ class ClassLabel(tensor_feature.Tensor):
       return f"{ex} ({self.int2str(ex)})"
 
   @classmethod
-  def from_json_content(cls, value: Json) -> "ClassLabel":
-    return cls(**value)
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.ClassLabel]) -> "ClassLabel":
+    if isinstance(value, dict):
+      return cls(**value)
+    return cls(num_classes=value.num_classes)
 
-  def to_json_content(self) -> Json:
-    return {"num_classes": self.num_classes}
+  def to_json_content(self) -> feature_pb2.ClassLabel:
+    return feature_pb2.ClassLabel(num_classes=self.num_classes)
 
 
 def _get_names_filepath(data_dir, feature_name):

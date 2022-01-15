@@ -1,0 +1,34 @@
+{
+    "sos_token": "<SOS>",
+    "eos_token": "<EOS>",
+    "pad_token": "<PAD>",
+    "idx_to_word": [
+        "<PAD>",
+        "<SOS>",
+        "<EOS>",
+        "turn right",
+        "walk",
+        "stay",
+        "turn left",
+        "push",
+        "pull"
+    ],
+    "word_to_idx": {
+        "<SOS>": 1,
+        "<EOS>": 2,
+        "turn right": 3,
+        "walk": 4,
+        "stay": 5,
+        "turn left": 6,
+        "push": 7,
+        "pull": 8
+    },
+    "word_frequencies": {
+        "turn right": 272665,
+        "walk": 1722375,
+        "stay": 624267,
+        "turn left": 1801048,
+        "push": 130038,
+        "pull": 362529
+    }
+}

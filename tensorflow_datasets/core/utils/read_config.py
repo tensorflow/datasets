@@ -16,6 +16,7 @@
 """This module contains the reader config."""
 
 import dataclasses
+import enum
 from typing import Callable, Optional, Sequence, Union
 
 import tensorflow as tf
