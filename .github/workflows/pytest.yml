@@ -69,7 +69,7 @@ jobs:
 
     - name: Run notebooks
       run: |
-        local notebook="docs/overview.ipynb"
+        notebook="docs/overview.ipynb"
         ipython kernel install --user --name tfds-notebook
         jupyter nbconvert \
           --ExecutePreprocessor.timeout=600 \
