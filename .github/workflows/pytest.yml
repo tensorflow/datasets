@@ -2,13 +2,55 @@ name: Unittests
 
 on: push
 
+# jobs:
+#   pytest-job:
+#     name: Core TFDS tests
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 30
+#     strategy:
+#       matrix:
+#         tf_version: ["tensorflow", "tf-nightly"]
+
+#     steps:
+#     - uses: styfle/cancel-workflow-action@0.9.1
+#       with:
+#         access_token: ${{ github.token }}
+
+#     - uses: actions/checkout@v2
+
+#     # Install deps
+#     - uses: actions/setup-python@v2
+#       with:
+#         python-version: 3.7
+
+#     - run: pip --version
+#     - run: pip install ${{ matrix.tf_version }}
+
+#     # Install the protocol buffer compiler for gcld3 tests.
+#     - run: sudo apt install -y protobuf-compiler
+#     # Install ffmpeg for Audio FeatureConnector tests.
+#     - run: sudo apt-get install ffmpeg
+
+#     - run: pip install -e .[tests-all]
+#     # Install tensorflow_io for lsun tests.
+#     - run: pip install tensorflow_io
+
+#     # Run tests
+#     - name: Run core tests
+#       run: |
+#         pytest -vv -n auto \
+#           --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+#           --ignore="tensorflow_datasets/core/features/features_test.py" \
+#           --ignore="tensorflow_datasets/testing/test_utils.py" \
+#           --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
+#           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+#     - run: echo "test completed"
+
 jobs:
-  pytest-job:
+  notebooktest-job:
+    name: Notebook tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    strategy:
-      matrix:
-        tf_version: ["tensorflow", "tf-nightly"]
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
@@ -23,24 +65,16 @@ jobs:
         python-version: 3.7
 
     - run: pip --version
-    - run: pip install ${{ matrix.tf_version }}
+    - run: pip install tf-nightly
 
-    # Install the protocol buffer compiler for gcld3 tests.
-    - run: sudo apt install -y protobuf-compiler
-    # Install ffmpeg for Audio FeatureConnector tests.
-    - run: sudo apt-get install ffmpeg
-
-    - run: pip install -e .[tests-all]
-    # Install tensorflow_io for lsun tests.
-    - run: pip install tensorflow_io
-
-    # Run tests
-    - name: Run core tests
+    - name: Run notebooks
       run: |
-        pytest -vv -n auto \
-          --ignore="tensorflow_datasets/audio/nsynth_test.py" \
-          --ignore="tensorflow_datasets/core/features/features_test.py" \
-          --ignore="tensorflow_datasets/testing/test_utils.py" \
-          --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
-    - run: echo "test completed"
+        local notebook="docs/overview.ipynb"
+        ipython kernel install --user --name tfds-notebook
+        jupyter nbconvert \
+          --ExecutePreprocessor.timeout=600 \
+          --ExecutePreprocessor.kernel_name=tfds-notebook \
+          --to notebook \
+          --execute $notebook
+
+    - run: echo "notebook tests completed"
