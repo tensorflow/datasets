@@ -68,14 +68,14 @@ class ResourcePath(zipfile.Path):
 
   # Required due to: https://bugs.python.org/issue42043
   def _next(self, at) -> 'ResourcePath':
-    return type(self)(self.root, at)
+    return type(self)(self.root, at)  # pytype: disable=attribute-error  # py39-upgrade
 
   def joinpath(self, *parts: PathLike) -> 'ResourcePath':
     """Overwrite `joinpath` to be consistent with `pathlib.Path`."""
     if not parts:
       return self
     else:
-      return super().joinpath(os.path.join(*parts))  # pylint: disable=no-value-for-parameter
+      return super().joinpath(os.path.join(*parts))  # pylint: disable=no-value-for-parameter  # pytype: disable=bad-return-type  # py39-upgrade
 
 
 def resource_path(package: Union[str, types.ModuleType]) -> ReadOnlyPath:

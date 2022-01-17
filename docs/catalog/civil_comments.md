@@ -12,6 +12,11 @@
 # `civil_comments`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This version of the CivilComments Dataset provides access to the primary seven
@@ -60,8 +65,10 @@ when making the labels.
     *   `1.1.1`: Added CivilCommentsCovert config with correct checksum.
     *   `1.1.2`: Added separate citation for CivilCommentsCovert dataset.
     *   `1.1.3`: Corrected id types from float to string.
-    *   **`1.2.0`** (default): Add toxic spans, context, and parent comment text
-        features.
+    *   `1.2.0`: Add toxic spans, context, and parent comment text features.
+    *   **`1.2.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `Unknown size`
 
@@ -354,30 +361,19 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    '_': tf.float32,
-    'a': tf.float32,
     'article_id': tf.int32,
-    'c': tf.float32,
-    'e': tf.float32,
-    'i': tf.float32,
+    'contextual_toxicity': tf.float32,
     'id': tf.string,
     'identity_attack': tf.float32,
     'insult': tf.float32,
-    'l': tf.float32,
-    'n': tf.float32,
-    'o': tf.float32,
     'obscene': tf.float32,
     'parent_id': tf.int32,
     'parent_text': Text(shape=(), dtype=tf.string),
     'severe_toxicity': tf.float32,
     'sexual_explicit': tf.float32,
-    't': tf.float32,
     'text': Text(shape=(), dtype=tf.string),
     'threat': tf.float32,
     'toxicity': tf.float32,
-    'u': tf.float32,
-    'x': tf.float32,
-    'y': tf.float32,
 })
 ```
 
