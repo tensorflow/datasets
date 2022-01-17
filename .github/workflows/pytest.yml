@@ -67,6 +67,7 @@ jobs:
     - run: pip --version
     - run: pip install tf-nightly
     - run: pip install ipython
+    - run: sudo apt install -y protobuf-compiler
 
     - run: pip install -e .[tests-all]
 
