@@ -22,7 +22,7 @@ import os
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_DOWNLOAD_URL = "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-1/{}.tar.gz"
+_DOWNLOAD_URL = "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-6.1-2020-12-11/{}.tar.gz"
 _SPLITS = {
     tfds.Split.TRAIN: "train",
     tfds.Split.TEST: "test",
@@ -33,36 +33,60 @@ _GENDER_CLASSES = ["male", "female", "other"]
 # OrderedDict to keep collection order constant (en is the default config)
 _LANGUAGE_ACCENTS = collections.OrderedDict([
     ("en", [
-        "canada", "us", "indian", "philippines", "england", "scotland", "other",
-        "australia", "hongkong", "african", "newzealand", "wales", "ireland",
-        "malaysia", "bermuda", "singapore", "southatlandtic"
+        "african","australia","bermuda","canada","england","hongkong","indian",
+        "ireland","malaysia","newzealand","philippines","scotland","singapore",
+        "southatlandtic","us","wales"
     ]),
     ("de", [
-        "germany", "switzerland", "austria", "other", "liechtenstein", "france",
-        "netherlands", "united_kingdom", "hungary", "poland"
+        "austria","belgium","brazil","bulgaria","canada","czechia","denmark",
+        "finland","france","germany","greece","hungary","italy","kazakhstan",
+        "liechtenstein","lithuania","luxembourg","namibia","netherlands",
+        "paraguay","poland","romania","russia","slovakia","slovenia",
+        "switzerland","turkey","united_kingdom","united_states"
+
     ]),
-    ("fr", [
-        "france", "switzerland", "belgium", "algeria", "canada", "other",
-        "germany", "tunisia", "senegal", "united_states",
-        "st_pierre_et_miquelon", "monaco", "mayotte", "cote_d_ivoire",
-        "guadeloupe", "martinique", "reunion", "portugal", "netherlands"
+   ("fr", [
+          "algeria","andorra","austria","belgium","benin","burkina_faso",
+          "burundi","cameroon","canada","central_african_republic","chad",
+          "comoros","congo_brazzaville","congo_kinshasa","cote_d_ivoire",
+          "cyprus","djibouti","equatorial_guinea","france","french_guiana",
+          "french_polynesia","gabon","germany","greece","guadeloupe",
+          "guinea","haiti","hungary","ireland","italy","lebanon","luxembourg",
+          "madagascar","mali","malta","martinique","mauritania","mauritius",
+          "mayotte","monaco","morocco","netherlands","new_caledonia","niger",
+          "portugal","reunion","romania","rwanda","senegal","seychelles",
+          "st_barthelemy","st_martin","st_pierre_et_miquelon","switzerland",
+          "syria","togo","tunisia","united_kingdom","united_states","vanuatu",
+          "wallis_et_futuna"
+
     ]),
     ("cy", ["united_kingdom", "other"]),
-    ("br", ["other"]),
+    ("br", ["gwenedeg","kerneveg","leoneg","tregerieg"]),
     ("cv", []),
     ("tr", ["other"]),
     ("tt", []),
     ("ky", ["other"]),
-    ("ga-IE", ["other", "ulaidh", "connachta"]),
+    ("ga-IE", [ "connachta", "ulaidh","mumhain","other"]),
     ("kab", ["other"]),
     ("ca",
-     ["northwestern", "central", "other", "valencian", "balearic", "northern"]),
-    ("zh-TW", ["other"]),
+     ["northwestern", "central", "other","valencian","balearic","northern"]),
+    ("zh-TW", 
+    [
+        "changhua_county","chiayi_city","chiayi_county","hong_kong",
+        "hsinchu_city","hsinchu_county","hualien_county","kaohsiung_city",
+        "keelung_city","kinmen_county","lienchiang_county","miaoli_county",
+        "nantou_county","new_taipei_city","penghu_county","pingtung_county",
+        "taichung_city","tainan_city","taipei_city","taitung_county",
+        "taoyuan_city","yilan_county","yunlin_county"
+    ]),
     ("sl", ["other"]),
     ("it", ["other"]),
-    ("nl", ["netherlands", "belgium", "other"]),
+    ("nl", [
+            "aruba","belgium","curacao","france","germany","indonesia","namibia",
+            "netherlands","sint_maarten","south_africa","suriname"]),
     ("cnh", ["other"]),
     ("eo", ["internacia", "other"]),
+    ("id",[])
 ])
 
 
@@ -71,7 +95,6 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
 
   def __init__(self, *, language, accents=None, **kwargs):
     """Constructs CommonVoiceConfig.
-
     Args:
      language: `str`, one of [ca, nl, br, de, sl, cy, en, kab, tt, zh-TW, eo,
        it, fr, ga-IE, tr, ky, cnh, cv]. Language Code of the Dataset to be used.
@@ -86,7 +109,7 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
 
     kwargs.setdefault("name", language)
     kwargs.setdefault("description", "Language Code: %s" % language)
-    kwargs.setdefault("version", tfds.core.Version("1.0.0"))
+    kwargs.setdefault("version", tfds.core.Version("6.1.0"))
     super(CommonVoiceConfig, self).__init__(**kwargs)
 
 
@@ -125,6 +148,8 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     dl_path = dl_manager.download_and_extract(
         _DOWNLOAD_URL.format(self.builder_config.language))
+    dl_path=os.path.join(dl_path,"cv-corpus-6.1-2020-12-11")
+    dl_path=os.path.join(dl_path,self.builder_config.language)
     clip_folder = os.path.join(dl_path, "clips")
     return [
         tfds.core.SplitGenerator(  # pylint: disable=g-complex-comprehension
@@ -138,18 +163,17 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, audio_path, label_path):
     """Generate Voice samples and statements given the data paths.
-
+    
     Args:
       audio_path: str, path to audio storage folder
       label_path: str, path to the label files
-
     Yields:
       example: The example `dict`
     """
     with tf.io.gfile.GFile(label_path) as file_:
       dataset = csv.DictReader(file_, delimiter="\t")
       for i, row in enumerate(dataset):
-        file_path = os.path.join(audio_path, "%s.mp3" % row["path"])
+        file_path = os.path.join(audio_path, "%s" % row["path"])
         if tf.io.gfile.exists(file_path):
           yield i, {
               "client_id": row["client_id"],
