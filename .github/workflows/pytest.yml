@@ -55,7 +55,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        notebook: $(printf '"%s"' docs/*ipynb)
+        notebook: [printf '"%s"' docs/*ipynb]
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
