@@ -66,6 +66,9 @@ jobs:
 
     - run: pip --version
     - run: pip install tf-nightly
+    - run: pip install ipython
+
+    - run: pip install -e .[tests-all]
 
     - name: Run notebooks
       run: |
