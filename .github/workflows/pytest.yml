@@ -84,7 +84,7 @@ jobs:
 
     # Separately test each notebook.
     - name: Run notebook
-      run: echo "${{ matrix.notebook }""
+      run: echo "${{ matrix.notebook }}"
       if: ${{ matrix.notebook }} != "docs/determinism.ipynb"
       # run: |
       #   ipython kernel install --user --name tfds-notebook
