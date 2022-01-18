@@ -91,4 +91,4 @@ jobs:
           --ExecutePreprocessor.timeout=600 \
           --ExecutePreprocessor.kernel_name=tfds-notebook \
           --to notebook \
-          --execute ${{ matrix.notebook }
+          --execute ${{ matrix.notebook }}
