@@ -95,5 +95,6 @@ jobs:
           --ExecutePreprocessor.kernel_name=tfds-notebook \
           --to notebook \
           --execute ${{ matrix.notebook }}
+      if: ${{ matrix.notebook }} != "docs/determinism.ipynb"
 
     - run: echo "notebook tests completed"
