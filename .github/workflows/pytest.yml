@@ -54,8 +54,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: |
-          echo "::set-output name=matrix::$(ls docs/*ipynb)"
+        run: echo "::set-output name=matrix::$(ls docs/*ipynb | jq -R -s -c 'split("\n")[:-1]')"
 
   notebooktest-job:
     name: Notebook tests
