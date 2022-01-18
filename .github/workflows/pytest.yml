@@ -74,7 +74,7 @@ jobs:
         access_token: ${{ github.token }}
     - uses: actions/checkout@v2
 
-    Install deps.
+    # Install deps.
     - uses: actions/setup-python@v2
       with:
         python-version: 3.7
