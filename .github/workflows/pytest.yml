@@ -86,9 +86,7 @@ jobs:
     - run: sudo apt install -y protobuf-compiler
 
     - run: pip install -e .[tests-all]
-    - run: |
-      echo "new job"
-      echo ${{ matrix.notebook }}
+    - run: echo ${{ matrix.notebook }}
     # - name: Run notebook
     #   run: |
     #     notebook="docs/overview.ipynb"
