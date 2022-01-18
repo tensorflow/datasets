@@ -84,7 +84,8 @@ jobs:
 
     # Separately test each notebook.
     - name: Run notebook
-      run: echo ${{ matrix.notebook }
+      run: echo "${{ matrix.notebook }""
+      if: ${{ matrix.notebook }} != "docs/determinism.ipynb"
       # run: |
       #   ipython kernel install --user --name tfds-notebook
       #   jupyter nbconvert \
@@ -92,4 +93,3 @@ jobs:
       #     --ExecutePreprocessor.kernel_name=tfds-notebook \
       #     --to notebook \
       #     --execute ${{ matrix.notebook }
-      if: ${{ matrix.notebook }} != "docs/determinism.ipynb"
