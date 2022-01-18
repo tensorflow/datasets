@@ -63,6 +63,8 @@ jobs:
     strategy:
       matrix:
         notebook: ${{ fromJson(needs.prepare-notebooktest.outputs.matrix) }}
+        exclude:
+          - notebook: docs/determinism.ipynb
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
@@ -70,25 +72,27 @@ jobs:
         access_token: ${{ github.token }}
     - uses: actions/checkout@v2
 
+    - run: echo ${{ matrix.notebook }}
+
+
     # Install deps.
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
+    # - uses: actions/setup-python@v2
+    #   with:
+    #     python-version: 3.7
 
-    - run: pip --version
-    - run: pip install tf-nightly
-    - run: pip install ipython
-    - run: sudo apt install -y protobuf-compiler
+    # - run: pip --version
+    # - run: pip install tf-nightly
+    # - run: pip install ipython
+    # - run: sudo apt install -y protobuf-compiler
 
-    - run: pip install -e .[tests-all]
+    # - run: pip install -e .[tests-all]
 
-    # Separately test each notebook.
-    - name: Run notebook
-      if: ${{ matrix.notebook }} != "docs/determinism.ipynb"
-      run: |
-        ipython kernel install --user --name tfds-notebook
-        jupyter nbconvert \
-          --ExecutePreprocessor.timeout=600 \
-          --ExecutePreprocessor.kernel_name=tfds-notebook \
-          --to notebook \
-          --execute ${{ matrix.notebook }}
+    # # Separately test each notebook.
+    # - name: Run notebook
+    #   run: |
+    #     ipython kernel install --user --name tfds-notebook
+    #     jupyter nbconvert \
+    #       --ExecutePreprocessor.timeout=600 \
+    #       --ExecutePreprocessor.kernel_name=tfds-notebook \
+    #       --to notebook \
+    #       --execute ${{ matrix.notebook }}
