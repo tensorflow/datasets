@@ -54,6 +54,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - uses: actions/checkout@v2
+    # Set up the matrix for notebooktest-job which contains all notebooks to test.
     - id: set-matrix
       run: echo "::set-output name=matrix::$(ls docs/*ipynb | jq -R -s -c 'split("\n")[:-1]')"
 
@@ -72,7 +73,7 @@ jobs:
         access_token: ${{ github.token }}
     - uses: actions/checkout@v2
 
-    # Install deps
+    # Install deps.
     - uses: actions/setup-python@v2
       with:
         python-version: 3.7
@@ -83,15 +84,16 @@ jobs:
     - run: sudo apt install -y protobuf-compiler
 
     - run: pip install -e .[tests-all]
-    - run: echo ${{ matrix.notebook }}
-    # - name: Run notebook
-    #   run: |
-    #     notebook="docs/overview.ipynb"
-    #     ipython kernel install --user --name tfds-notebook
-    #     jupyter nbconvert \
-    #       --ExecutePreprocessor.timeout=600 \
-    #       --ExecutePreprocessor.kernel_name=tfds-notebook \
-    #       --to notebook \
-    #       --execute $notebook
+
+    # Separately test each notebook.
+    - name: Run notebook
+      run: |
+        notebook="docs/overview.ipynb"
+        ipython kernel install --user --name tfds-notebook
+        jupyter nbconvert \
+          --ExecutePreprocessor.timeout=600 \
+          --ExecutePreprocessor.kernel_name=tfds-notebook \
+          --to notebook \
+          --execute ${{ matrix.notebook }}
 
     - run: echo "notebook tests completed"
