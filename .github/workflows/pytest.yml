@@ -53,6 +53,11 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
+    - uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        access_token: ${{ github.token }}
+
+    - uses: actions/checkout@v2
       - id: set-matrix
         run: echo "::set-output name=matrix::$(ls docs/*ipynb | jq -R -s -c 'split("\n")[:-1]')"
 
