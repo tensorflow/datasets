@@ -48,14 +48,25 @@ on: push
 
 
 jobs:
+  prepare-notebooktest:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          printf -v notebooks '"%s", ' docs/*ipynb
+          notebooks=${notebooks%, }
+          echo "::set-output name=matrix::[${notebooks}]"
 
   notebooktest-job:
     name: Notebook tests
+    needs: [prepare-notebooktest]
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
       matrix:
-        notebook: ${{ fromJson([$(IFS=, ; printf '"%s"' docs/*ipynb)]) }}
+        notebook: ${{needs.prepare-notebooktest.outputs.matrix}}
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
@@ -75,7 +86,9 @@ jobs:
     - run: sudo apt install -y protobuf-compiler
 
     - run: pip install -e .[tests-all]
-    - run: echo ${{ matrix.notebook }}
+    - run: |
+      echo "new job"
+      echo ${{ matrix.notebook }}
     # - name: Run notebook
     #   run: |
     #     notebook="docs/overview.ipynb"
