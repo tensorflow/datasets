@@ -63,10 +63,10 @@ jobs:
     strategy:
       matrix:
         notebook: ${{ fromJson(needs.prepare-notebooktest.outputs.matrix) }}
-        # Do not cancel in-progress jobs if any other matrix jobs fails.
-        fail-fast: false
         exclude:
           - notebook: docs/determinism.ipynb
+      # Do not cancel in-progress jobs if any other matrix jobs fails.
+      fail-fast: false
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
