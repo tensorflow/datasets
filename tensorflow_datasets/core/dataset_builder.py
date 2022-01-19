@@ -165,6 +165,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       data_dir: Optional[utils.PathLike] = None,
       config: Union[None, str, BuilderConfig] = None,
       version: Union[None, str, utils.Version] = None,
+      **builder_kwargs: Any,
   ):
     """Constructs a DatasetBuilder.
 
@@ -182,10 +183,10 @@ class DatasetBuilder(registered.RegisteredDataset):
           The special value "experimental_latest" will use the highest version,
           even if not default. This is not recommended unless you know what you
           are doing, as the version could be broken.
+      **builder_kwargs: `dict` of keyword arguments to build the dataset.
     """
     if data_dir:
       data_dir = os.fspath(data_dir)  # Pathlib -> str
-
     # For pickling:
     self._original_state = dict(
         data_dir=data_dir, config=config, version=version)
@@ -194,7 +195,8 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Extract code version (VERSION or config)
     self._version = self._pick_version(version)
     # Compute the base directory (for download) and dataset/version directory.
-    self._data_dir_root, self._data_dir = self._build_data_dir(data_dir)
+    self._data_dir_root, self._data_dir = self._build_data_dir(
+        data_dir, **builder_kwargs)
     if tf.io.gfile.exists(self._data_dir):
       self.info.read_from_directory(self._data_dir)
     else:  # Use the code version (do not restore data)
@@ -708,12 +710,13 @@ class DatasetBuilder(registered.RegisteredDataset):
     version_data_dir = os.path.join(builder_data_dir, str(self._version))
     return version_data_dir
 
-  def _build_data_dir(self, given_data_dir):
+  def _build_data_dir(self, given_data_dir, **builder_kwargs):
     """Return the data directory for the current version.
 
     Args:
       given_data_dir: `Optional[str]`, root `data_dir` passed as `__init__`
         argument.
+      **builder_kwargs: `dict` of keyword arguments to build the dataset.
 
     Returns:
       data_dir_root: `str`, The root dir containing all datasets, downloads,...
@@ -724,8 +727,9 @@ class DatasetBuilder(registered.RegisteredDataset):
     version_dir = self._relative_data_dir(with_version=True)
 
     default_data_dir = file_utils.get_default_data_dir(
-        given_data_dir=given_data_dir)
-    all_data_dirs = file_utils.list_data_dirs(given_data_dir=given_data_dir)
+        given_data_dir=given_data_dir, **builder_kwargs)
+    all_data_dirs = file_utils.list_data_dirs(
+        given_data_dir=given_data_dir, **builder_kwargs)
 
     all_versions = set()
     requested_version_dirs = {}

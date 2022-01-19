@@ -53,14 +53,15 @@ def add_data_dir(data_dir):
   _registered_data_dir.add(data_dir)
 
 
-def list_data_dirs(
-    given_data_dir: Optional[ListOrElem[PathLike]] = None,) -> List[PathLike]:
+def list_data_dirs(given_data_dir: Optional[ListOrElem[PathLike]] = None,
+                   **builder_kwargs) -> List[PathLike]:
   """Return the list of all `data_dir` to look-up.
 
   Args:
     given_data_dir: If a `data_dir` is provided, only the explicitly given
       `data_dir` will be returned, otherwise the list of all registered data_dir
       is returned
+    **builder_kwargs: Optional builder_kwargs.
 
   Returns:
     The list of all data_dirs to look-up.
@@ -72,11 +73,13 @@ def list_data_dirs(
     else:
       return [given_data_dir]
   else:
-    all_data_dirs = _registered_data_dir | {constants.DATA_DIR}
+    data_dir = constants.DATA_DIR
+    all_data_dirs = _registered_data_dir | {data_dir}
     return sorted(os.path.expanduser(d) for d in all_data_dirs)
 
 
-def get_default_data_dir(given_data_dir: Optional[str] = None,) -> str:
+def get_default_data_dir(given_data_dir: Optional[str] = None,
+                         **builder_kwargs) -> str:
   """Returns the default data_dir."""
   if given_data_dir:
     return os.path.expanduser(given_data_dir)
