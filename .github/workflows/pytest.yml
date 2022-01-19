@@ -4,8 +4,12 @@ on: push
 
 jobs:
   pytest-job:
+    name: Core TFDS tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      matrix:
+        tf_version: ["tensorflow", "tf-nightly"]
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
@@ -20,7 +24,7 @@ jobs:
         python-version: 3.7
 
     - run: pip --version
-    - run: pip install tensorflow
+    - run: pip install ${{ matrix.tf_version }}
 
     # Install the protocol buffer compiler for gcld3 tests.
     - run: sudo apt install -y protobuf-compiler
@@ -40,3 +44,54 @@ jobs:
           --ignore="tensorflow_datasets/testing/test_utils.py" \
           --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+
+  prepare-notebooktest:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - uses: actions/checkout@v2
+    # Set up the matrix for notebooktest-job which contains all notebooks to test.
+    - id: set-matrix
+      run: echo "::set-output name=matrix::$(ls docs/*ipynb | jq -R -s -c 'split("\n")[:-1]')"
+
+  notebooktest-job:
+    name: Notebook tests
+    needs: [prepare-notebooktest]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        notebook: ${{ fromJson(needs.prepare-notebooktest.outputs.matrix) }}
+        exclude:
+          - notebook: docs/determinism.ipynb
+      # Do not cancel in-progress jobs if any other matrix jobs fails.
+      fail-fast: false
+
+    steps:
+    - uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        access_token: ${{ github.token }}
+    - uses: actions/checkout@v2
+
+    # Install deps.
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - run: pip --version
+    - run: pip install tf-nightly
+    - run: pip install ipython
+    - run: sudo apt install -y protobuf-compiler
+
+    - run: pip install -e .[tests-all]
+
+    # Separately test each notebook.
+    - name: Run notebook
+      run: |
+        ipython kernel install --user --name tfds-notebook
+        jupyter nbconvert \
+          --ExecutePreprocessor.timeout=600 \
+          --ExecutePreprocessor.kernel_name=tfds-notebook \
+          --to notebook \
+          --execute ${{ matrix.notebook }}
