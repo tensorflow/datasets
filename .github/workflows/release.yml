@@ -25,6 +25,11 @@ jobs:
       with:
         python-version: 3.7
 
+    - name: Remove the `-nightly` suffix
+      # For stable version, we overwrite `version.py` by `version_stable.py` to
+      # remove the `-nightly` suffix.
+      run: mv tensorflow_datasets/version_stable.py tensorflow_datasets/version.py
+
     - name: Install deps.
       run: |
         python -m pip install --upgrade pip
