@@ -17,7 +17,7 @@
 
 from typing import Dict, Optional, Union
 
-from tensorflow_datasets.core import tfrecords_reader
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import read_config as tfds_read_config
 
 
@@ -29,12 +29,20 @@ class Logger:
   Exceptions are *NOT* caught.
   """
 
-  def as_dataset(self, *, dataset_name: str, config_name: Optional[str],
-                 version: str, data_path: str,
-                 split: Union[str, tfrecords_reader.ReadInstruction],
-                 batch_size: Optional[int], shuffle_files: bool,
-                 read_config: tfds_read_config.ReadConfig, as_supervised: bool,
-                 decoders: Dict[str, str]):
+  def as_dataset(
+      self,
+      *,
+      dataset_name: str,
+      config_name: Optional[str],
+      version: str,
+      data_path: str,
+      split: Union[str, splits_lib.ReadInstruction],
+      batch_size: Optional[int],
+      shuffle_files: bool,
+      read_config: tfds_read_config.ReadConfig,
+      as_supervised: bool,
+      decoders: Dict[str, str],
+  ):
     """Callback called when user calls `dataset_builder.as_dataset`.
 
     Callback is also triggered by `tfds.load`, which calls `as_dataset`.
