@@ -15,9 +15,11 @@
 
 """CivilComments from Jigsaw Unintended Bias Kaggle Competition."""
 
+import ast
 import csv
 import os
 
+import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -62,6 +64,31 @@ _COVERT_CITATION = """
 }
 """
 
+# Citation for CivilComments Toxic Spans.
+_SPANS_CITATION = """
+@inproceedings{pavlopoulos-etal-2021-semeval,
+    title = "{S}em{E}val-2021 Task 5: Toxic Spans Detection",
+    author = "Pavlopoulos, John  and Sorensen, Jeffrey  and Laugier, L{\'e}o and Androutsopoulos, Ion",
+    booktitle = "Proceedings of the 15th International Workshop on Semantic Evaluation (SemEval-2021)",
+    month = aug,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.semeval-1.6",
+    doi = "10.18653/v1/2021.semeval-1.6",
+    pages = "59--69",
+}
+"""
+
+# Citation for CivilComments Context.
+_CONTEXT_CITATION = """
+@misc{pavlopoulos2020toxicity, 
+    title={Toxicity Detection: Does Context Really Matter?},
+    author={John Pavlopoulos and Jeffrey Sorensen and Lucas Dixon and Nithum Thain and Ion Androutsopoulos},
+    year={2020}, eprint={2006.00998}, archivePrefix={arXiv}, primaryClass={cs.CL}
+}
+"""
+
 _COMMON_DESCRIPTION = """
 This version of the CivilComments Dataset provides access to the primary
 seven labels that were annotated by crowd workers, the toxicity and other
@@ -88,6 +115,12 @@ mentions, as well as covert offensiveness. This data set is an exact replica of
 the data released for the Jigsaw Unintended Bias in Toxicity Classification
 Kaggle challenge. This dataset is released under CC0, as is the underlying
 comment text.
+
+For comments that have a parent_id also in the civil comments data, the
+text of the previous comment is provided as the "parent_text" feature. Note
+that the splits were made without regard to this information, so using previous
+comments may leak some information. The annotators did not have access to the
+parent text when making the labels.
 """
 
 _CC_DESCRIPTION = """
@@ -113,7 +146,20 @@ annotation procedure is detailed in a forthcoming paper at
 https://sites.google.com/corp/view/hciandnlp/accepted-papers.
 """
 
-_DOWNLOAD_URL = 'https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/civil_comments_v1.1.zip'
+_CC_SPANS_DESCRIPTION = """
+The CivilComments Toxic Spans are a subset of CivilComments that is
+labeled at the span level - the indices of all character (unicode codepoints)
+boundaries that were tagged as toxic by a majority of the annotators is
+returned in a 'spans' feature.
+"""
+
+_CC_CONTEXT_DESCRIPTION = """
+The CivilComments Toxic Spans are a subset of CivilComments that was
+labeled by making available to the labelers the parent_text. It includes
+a contextual_toxicity feature.
+"""
+
+_DOWNLOAD_URL = 'https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/civil_comments_v1.2.zip'
 
 IDENTITY_LABELS = [
     'male', 'female', 'transgender', 'other_gender', 'heterosexual',
@@ -133,15 +179,59 @@ COVERT_LABELS = [
 ]
 
 
+def _labels(mode):
+  """Return the list of label features appropriate for the mode."""
+  if mode == 'spans':
+    return ['spans']
+  labels = [
+      'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',
+      'identity_attack', 'sexual_explicit'
+  ]
+  if mode in ['identity', 'covert']:
+    labels += IDENTITY_LABELS
+  if mode == 'covert':
+    labels += COVERT_LABELS
+  if mode == 'context':
+    labels += 'contextual_toxicity'
+  return labels
+
+
+def _parse_common(row):
+  """Parse common elements to TF Example from CSV row for non-spans mode."""
+  example = {}
+  example['id'] = row['id']
+  example['text'] = row['comment_text']
+  example['parent_text'] = row['parent_text']
+  parent_id = row['parent_id'] or 0
+  example['parent_id'] = int(float(parent_id))
+  example['article_id'] = int(row['article_id'])
+  return example
+
+
+def _parse_row_as_example(row, mode):
+  """Parse elements to TF Example, as appropriate for specified mode."""
+  example = _parse_common(row)
+  for label in _labels(mode):
+    if not row[label]:
+      return
+    example[label] = float(row[label])
+  return example
+
+
+def _parse_spans_row_as_example(row):
+  """Parse elements to TF Example for toxic spans mode."""
+  example = _parse_common(row)
+  example['spans'] = np.array(ast.literal_eval(row['spans']), dtype=np.int32)
+  return example
+
+
 class CivilCommentsConfig(tfds.core.BuilderConfig):
   """Configuration for `CivilComments`."""
 
-  def __init__(self, name, description, include_identity_labels,
-               include_covert_labels):
+  def __init__(self, name, description, mode):
     super(CivilCommentsConfig, self).__init__(
         name=name, description=description)
-    self.include_identity_labels = include_identity_labels
-    self.include_covert_labels = include_covert_labels
+    self.mode = mode
 
 
 class CivilComments(tfds.core.GeneratorBasedBuilder):
@@ -162,24 +252,28 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       CivilCommentsConfig(
-          name='CivilComments',
-          description=_CC_DESCRIPTION,
-          include_identity_labels=False,
-          include_covert_labels=False),
+          name='CivilComments', description=_CC_DESCRIPTION, mode='base'),
       CivilCommentsConfig(
           name='CivilCommentsIdentities',
           description=_CC_IDENTITIES_DESCRIPTION,
-          include_identity_labels=True,
-          include_covert_labels=False),
+          mode='identity'),
       CivilCommentsConfig(
           name='CivilCommentsCovert',
           description=_CC_COVERT_DESCRIPTION,
-          include_identity_labels=True,
-          include_covert_labels=True),
+          mode='covert'),
+      CivilCommentsConfig(
+          name='CivilCommentsToxicSpans',
+          description=_CC_SPANS_DESCRIPTION,
+          mode='spans'),
+      CivilCommentsConfig(
+          name='CivilCommentsInContext',
+          description=_CC_CONTEXT_DESCRIPTION,
+          mode='context'),
   ]
 
-  VERSION = tfds.core.Version('1.1.3')
+  VERSION = tfds.core.Version('1.2.0')
   RELEASE_NOTES = {
+      '1.2.0': 'Add toxic spans, context, and parent comment text features.',
       '1.1.3': 'Corrected id types from float to string.',
       '1.1.2': 'Added separate citation for CivilCommentsCovert dataset.',
       '1.1.1': 'Added CivilCommentsCovert config with correct checksum.',
@@ -189,28 +283,35 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
   }
 
   def _info(self):
-    citation = (
-        _CITATION
-        if not self.builder_config.include_covert_labels else _COVERT_CITATION)
-    features = {'text': tfds.features.Text(), 'id': tf.string}
-    labels = [
-        'toxicity', 'severe_toxicity', 'obscene', 'threat', 'insult',
-        'identity_attack', 'sexual_explicit'
-    ]
-    if self.builder_config.include_identity_labels:
-      labels += IDENTITY_LABELS
-    if self.builder_config.include_covert_labels:
-      labels += COVERT_LABELS
-
-    for label in labels:
-      features[label] = tf.float32
+    mode = self.builder_config.mode
+    citation = {
+        'base': _CITATION,
+        'identity': _CITATION,
+        'covert': _COVERT_CITATION,
+        'spans': _SPANS_CITATION,
+        'context': _CONTEXT_CITATION
+    }[mode]
+    features = {
+        'text': tfds.features.Text(),
+        'id': tf.string,
+        'parent_text': tfds.features.Text(),
+        'parent_id': tf.int32,
+        'article_id': tf.int32,
+    }
+    if mode == 'spans':
+      features['spans'] = tfds.features.Tensor(shape=(None,), dtype=tf.int32)
+      supervised_value = 'spans'
+    else:
+      for label in _labels(mode):
+        features[label] = tf.float32
+      supervised_value = 'toxicity'
 
     return tfds.core.DatasetInfo(
         builder=self,
         description=_COMMON_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
         # The supervised_keys version is very impoverished.
-        supervised_keys=('text', 'toxicity'),
+        supervised_keys=('text', supervised_value),
         homepage='https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data',
         citation=citation,
     )
@@ -218,70 +319,43 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
+    mode = self.builder_config.mode
+    filename = os.path.join(dl_path, 'civil_comments.csv')
 
     splits = [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                'filename':
-                    os.path.join(dl_path, 'train.csv'),
-                'toxicity_label':
-                    'target',
-                'include_identity_labels':
-                    self.builder_config.include_identity_labels,
-                'include_covert_labels':
-                    self.builder_config.include_covert_labels,
+                'filename': filename,
+                'mode': mode,
+                'split': 'train',
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                'filename':
-                    os.path.join(dl_path, 'test_private_expanded.csv'),
-                'toxicity_label':
-                    'toxicity',
-                'include_identity_labels':
-                    self.builder_config.include_identity_labels,
-                'include_covert_labels':
-                    self.builder_config.include_covert_labels,
+                'filename': filename,
+                'mode': mode,
+                'split': 'test_private',
             },
         ),
     ]
 
-    if not self.builder_config.include_covert_labels:
-      # Only add validation split if not including covert labels.
+    if mode != 'covert':
+      # Covert does not have validation split.
       validation_split_generator = tfds.core.SplitGenerator(
           name=tfds.Split.VALIDATION,
           gen_kwargs={
-              'filename':
-                  os.path.join(dl_path, 'test_public_expanded.csv'),
-              'toxicity_label':
-                  'toxicity',
-              'include_identity_labels':
-                  self.builder_config.include_identity_labels,
-              'include_covert_labels':
-                  self.builder_config.include_covert_labels,
+              'filename': filename,
+              'mode': mode,
+              'split': 'test_public',
           },
       )
       splits.insert(1, validation_split_generator)
 
     return splits
 
-  def _parse_row_as_example(self, row, toxicity_label, other_labels):
-    example = {}
-    example['id'] = row['id']
-    example['text'] = row['comment_text']
-    example['toxicity'] = float(row[toxicity_label])
-
-    for label in other_labels:
-      if not row[label] and (label in IDENTITY_LABELS or
-                             label in COVERT_LABELS):
-        return
-      example[label] = float(row[label])
-    return example
-
-  def _generate_examples(self, filename, toxicity_label,
-                         include_identity_labels, include_covert_labels):
+  def _generate_examples(self, filename, mode, split):
     """Yields examples.
 
     Each example contains a text input followed by several toxicity subtype
@@ -290,28 +364,21 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
 
     Args:
       filename: the path of the file to be read for this split.
-      toxicity_label: indicates 'target' or 'toxicity' to capture the variation
-        in the released labels for this dataset.
-      include_identity_labels: Whether to include identity labels.
-      include_covert_labels: Whether to include covert offensiveness labels.
+      mode: the specifc data subset and features to yield.
+      split: the split to extract, one of train, public_test, private_test.
 
     Yields:
-      A dictionary of features, all floating point except the input text. If
-      include_identity_labels or include_covert_labels are specified, only
-      examples with values for all requested labels are yielded.
+      A dictionary of features, depending upon the mode.
     """
-    labels = [
-        'severe_toxicity', 'obscene', 'threat', 'insult', 'identity_attack',
-        'sexual_explicit'
-    ]
-    if include_identity_labels:
-      labels += IDENTITY_LABELS
-    if include_covert_labels:
-      labels += COVERT_LABELS
-
     with tf.io.gfile.GFile(filename) as f:
       reader = csv.DictReader(f)
       for row in reader:
-        example = self._parse_row_as_example(row, toxicity_label, labels)
-        if example:
-          yield row['id'], example
+        if mode == 'spans':
+          if row['spans_split'] == split:
+            example = _parse_spans_row_as_example(row)
+            yield row['id'], example
+        else:
+          if row['split'] == split:
+            example = _parse_row_as_example(row, mode)
+            if example:
+              yield row['id'], example
