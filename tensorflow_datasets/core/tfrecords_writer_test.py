@@ -26,6 +26,7 @@ from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.tfrecords_writer import _ShardSpec
@@ -40,38 +41,45 @@ class GetShardSpecsTest(testing.TestCase):
                      mock.Mock(return_value=6))
   def test_1bucket_6shards(self):
     specs = tfrecords_writer._get_shard_specs(
-        num_examples=8, total_size=16, bucket_lengths=[8], path='/bar.tfrecord')
+        num_examples=8,
+        total_size=16,
+        bucket_lengths=[8],
+        filename_template=naming.ShardedFileTemplate(
+            dataset_name='bar',
+            split='train',
+            data_dir='/',
+            filetype_suffix='tfrecord'))
     self.assertEqual(
         specs,
         [
             # Shard#, path, from_bucket, examples_number, reading instructions.
-            _ShardSpec(0, '/bar.tfrecord-00000-of-00006',
-                       '/bar.tfrecord-00000-of-00006_index.json', 1, [
+            _ShardSpec(0, '/bar-train.tfrecord-00000-of-00006',
+                       '/bar-train.tfrecord-00000-of-00006_index.json', 1, [
                            shard_utils.FileInstruction(
                                filename='0', skip=0, take=1, num_examples=1),
                        ]),
-            _ShardSpec(1, '/bar.tfrecord-00001-of-00006',
-                       '/bar.tfrecord-00001-of-00006_index.json', 2, [
+            _ShardSpec(1, '/bar-train.tfrecord-00001-of-00006',
+                       '/bar-train.tfrecord-00001-of-00006_index.json', 2, [
                            shard_utils.FileInstruction(
                                filename='0', skip=1, take=2, num_examples=2),
                        ]),
-            _ShardSpec(2, '/bar.tfrecord-00002-of-00006',
-                       '/bar.tfrecord-00002-of-00006_index.json', 1, [
+            _ShardSpec(2, '/bar-train.tfrecord-00002-of-00006',
+                       '/bar-train.tfrecord-00002-of-00006_index.json', 1, [
                            shard_utils.FileInstruction(
                                filename='0', skip=3, take=1, num_examples=1),
                        ]),
-            _ShardSpec(3, '/bar.tfrecord-00003-of-00006',
-                       '/bar.tfrecord-00003-of-00006_index.json', 1, [
+            _ShardSpec(3, '/bar-train.tfrecord-00003-of-00006',
+                       '/bar-train.tfrecord-00003-of-00006_index.json', 1, [
                            shard_utils.FileInstruction(
                                filename='0', skip=4, take=1, num_examples=1),
                        ]),
-            _ShardSpec(4, '/bar.tfrecord-00004-of-00006',
-                       '/bar.tfrecord-00004-of-00006_index.json', 2, [
+            _ShardSpec(4, '/bar-train.tfrecord-00004-of-00006',
+                       '/bar-train.tfrecord-00004-of-00006_index.json', 2, [
                            shard_utils.FileInstruction(
                                filename='0', skip=5, take=2, num_examples=2),
                        ]),
-            _ShardSpec(5, '/bar.tfrecord-00005-of-00006',
-                       '/bar.tfrecord-00005-of-00006_index.json', 1, [
+            _ShardSpec(5, '/bar-train.tfrecord-00005-of-00006',
+                       '/bar-train.tfrecord-00005-of-00006_index.json', 1, [
                            shard_utils.FileInstruction(
                                filename='0', skip=7, take=-1, num_examples=1),
                        ]),
@@ -84,20 +92,24 @@ class GetShardSpecsTest(testing.TestCase):
         num_examples=8,
         total_size=16,
         bucket_lengths=[2, 3, 0, 3],
-        path='/bar.tfrecord')
+        filename_template=naming.ShardedFileTemplate(
+            dataset_name='bar',
+            split='train',
+            data_dir='/',
+            filetype_suffix='tfrecord'))
     self.assertEqual(
         specs,
         [
             # Shard#, path, examples_number, reading instructions.
-            _ShardSpec(0, '/bar.tfrecord-00000-of-00002',
-                       '/bar.tfrecord-00000-of-00002_index.json', 4, [
+            _ShardSpec(0, '/bar-train.tfrecord-00000-of-00002',
+                       '/bar-train.tfrecord-00000-of-00002_index.json', 4, [
                            shard_utils.FileInstruction(
                                filename='0', skip=0, take=-1, num_examples=2),
                            shard_utils.FileInstruction(
                                filename='1', skip=0, take=2, num_examples=2),
                        ]),
-            _ShardSpec(1, '/bar.tfrecord-00001-of-00002',
-                       '/bar.tfrecord-00001-of-00002_index.json', 4, [
+            _ShardSpec(1, '/bar-train.tfrecord-00001-of-00002',
+                       '/bar-train.tfrecord-00001-of-00002_index.json', 4, [
                            shard_utils.FileInstruction(
                                filename='1', skip=2, take=-1, num_examples=1),
                            shard_utils.FileInstruction(
@@ -202,13 +214,20 @@ class WriterTest(testing.TestCase):
                      testing.DummySerializer)
   def _write(self,
              to_write,
-             path,
              salt='',
+             dataset_name: str = 'foo',
+             split: str = 'train',
              disable_shuffling=False,
              file_format=file_adapters.DEFAULT_FILE_FORMAT):
+    filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
+    filename_template = naming.ShardedFileTemplate(
+        dataset_name=dataset_name,
+        split=split,
+        filetype_suffix=filetype_suffix,
+        data_dir=self.tmp_dir)
     writer = tfrecords_writer.Writer(
-        'some spec',
-        path,
+        example_specs='some spec',
+        filename_template=filename_template,
         hash_salt=salt,
         disable_shuffling=disable_shuffling,
         file_format=file_format)
@@ -221,16 +240,17 @@ class WriterTest(testing.TestCase):
 
     Number of records is evenly distributed (2-1-2-1-2).
     """
-    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
     with mock.patch.object(
         tfrecords_writer, '_get_number_shards', return_value=5):
-      shards_length, total_size = self._write(self.RECORDS_TO_WRITE, path)
+      shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
     self.assertEqual(shards_length, [2, 1, 2, 1, 2])
     self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
     written_index_files, all_indices = _read_indices(path)
-    self.assertEqual(written_files,
-                     ['foo.tfrecord-0000%s-of-00005' % i for i in range(5)])
+    self.assertEqual(
+        written_files,
+        ['foo-train.tfrecord-0000%s-of-00005' % i for i in range(5)])
     self.assertEqual(all_recs, [
         [b'f', b'g'],
         [b'd'],
@@ -246,17 +266,18 @@ class WriterTest(testing.TestCase):
 
     Number of records is evenly distributed (2-1-2-1-2).
     """
-    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
     with mock.patch.object(
         tfrecords_writer, '_get_number_shards', return_value=5):
       shards_length, total_size = self._write(
-          self.RECORDS_TO_WRITE, path, disable_shuffling=True)
+          to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
     self.assertEqual(shards_length, [2, 1, 2, 1, 2])
     self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
     written_index_files, all_indices = _read_indices(path)
-    self.assertEqual(written_files,
-                     ['foo.tfrecord-0000%s-of-00005' % i for i in range(5)])
+    self.assertEqual(
+        written_files,
+        ['foo-train.tfrecord-0000%s-of-00005' % i for i in range(5)])
     self.assertEqual(all_recs, [
         [b'a', b'b'],
         [b'c'],
@@ -269,31 +290,28 @@ class WriterTest(testing.TestCase):
 
   @mock.patch.object(example_parser, 'ExampleParser', testing.DummyParser)
   def test_write_duplicated_keys(self):
-    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
     to_write = [(1, b'a'), (2, b'b'), (1, b'c')]
     with mock.patch.object(
         tfrecords_writer, '_get_number_shards', return_value=1):
       with self.assertRaisesWithPredicateMatch(
           AssertionError, 'Two examples share the same hashed key'):
-        self._write(to_write, path)
+        self._write(to_write=to_write)
 
   def test_empty_split(self):
-    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
     to_write = []
     with mock.patch.object(
         tfrecords_writer, '_get_number_shards', return_value=1):
       with self.assertRaisesWithPredicateMatch(AssertionError,
                                                self.EMPTY_SPLIT_ERROR):
-        self._write(to_write, path)
+        self._write(to_write=to_write)
 
   def test_too_small_split(self):
-    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
     to_write = [(1, b'a')]
     with mock.patch.object(
         tfrecords_writer, '_get_number_shards', return_value=2):
       with self.assertRaisesWithPredicateMatch(AssertionError,
                                                self.TOO_SMALL_SPLIT_ERROR):
-        self._write(to_write, path)
+        self._write(to_write=to_write)
 
 
 class TfrecordsWriterBeamTest(WriterTest):
@@ -304,15 +322,22 @@ class TfrecordsWriterBeamTest(WriterTest):
                      testing.DummySerializer)
   def _write(self,
              to_write,
-             path,
+             dataset_name: str = 'foo',
+             split: str = 'train',
              salt='',
              disable_shuffling=False,
              file_format=file_adapters.DEFAULT_FILE_FORMAT):
+    filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
+    filename_template = naming.ShardedFileTemplate(
+        dataset_name=dataset_name,
+        split=split,
+        filetype_suffix=filetype_suffix,
+        data_dir=self.tmp_dir)
     beam = lazy_imports_lib.lazy_imports.apache_beam
     writer = tfrecords_writer.BeamWriter(
-        'some spec',
-        path,
-        salt,
+        example_specs='some spec',
+        filename_template=filename_template,
+        hash_salt=salt,
         disable_shuffling=disable_shuffling,
         file_format=file_format,
     )

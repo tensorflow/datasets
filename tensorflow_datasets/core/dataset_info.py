@@ -672,9 +672,12 @@ def get_dataset_feature_statistics(builder, split):
   if filetype_suffix not in ["tfrecord", "csv"]:
     raise ValueError(
         "Cannot generate statistics for filetype {}".format(filetype_suffix))
-  filepattern = naming.filepattern_for_dataset_split(builder.name, split,
-                                                     builder.data_dir,
-                                                     filetype_suffix)
+  filename_template = naming.ShardedFileTemplate(
+      data_dir=builder.data_dir,
+      dataset_name=builder.name,
+      split=split,
+      filetype_suffix=filetype_suffix)
+  filepattern = filename_template.sharded_filepaths_pattern()
   # Avoid generating a large number of buckets in rank histogram
   # (default is 1000).
   stats_options = tfdv.StatsOptions(

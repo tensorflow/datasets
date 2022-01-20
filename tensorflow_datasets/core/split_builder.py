@@ -17,21 +17,21 @@
 
 import collections.abc
 import contextlib
+import dataclasses
 import itertools
 import sys
 import typing
 from typing import Any, Callable, Dict, Iterator, Iterable, List, Optional, Tuple, Union
 
 from absl import logging
-import dataclasses
 
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import type_utils
 
 if typing.TYPE_CHECKING:
   import apache_beam as beam  # pytype: disable=import-error
@@ -263,7 +263,7 @@ class SplitBuilder:
       self,
       split_name: str,
       generator: SplitGenerator,
-      path: type_utils.PathLike,
+      filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
   ) -> _SplitInfoFuture:
     """Start the split generation.
@@ -271,7 +271,7 @@ class SplitBuilder:
     Args:
       split_name: Name of the split to generate
       generator: Generator, beam.PTransform,... yielding the examples
-      path: path where the split should be saved
+      filename_template: Template to format the filename for a shard.
       disable_shuffling: Specifies whether to shuffle the examples
 
     Returns:
@@ -282,7 +282,7 @@ class SplitBuilder:
     build_kwargs = dict(
         split_name=split_name,
         generator=generator,
-        path=path,
+        filename_template=filename_template,
         disable_shuffling=disable_shuffling,
     )
     # Depending on the type of generator, we use the corresponding
@@ -313,7 +313,7 @@ class SplitBuilder:
       self,
       split_name: str,
       generator: Iterable[KeyExample],
-      path: type_utils.PathLike,
+      filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
   ) -> _SplitInfoFuture:
     """Split generator for example generators.
@@ -321,7 +321,7 @@ class SplitBuilder:
     Args:
       split_name: str,
       generator: Iterable[KeyExample],
-      path: type_utils.PathLike,
+      filename_template: Template to format the filename for a shard.
       disable_shuffling: Specifies whether to shuffle the examples,
 
     Returns:
@@ -343,9 +343,10 @@ class SplitBuilder:
 
     writer = tfrecords_writer.Writer(
         example_specs=self._features.get_serialized_info(),
-        path=path,
+        filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
+        # TODO(weide) remove this because it's already in filename_template?
         file_format=self._file_format,
     )
     for key, example in utils.tqdm(
@@ -373,7 +374,7 @@ class SplitBuilder:
       self,
       split_name: str,
       generator: 'beam.PCollection[KeyExample]',
-      path: type_utils.PathLike,
+      filename_template: naming.ShardedFileTemplate,
       disable_shuffling: bool,
   ) -> _SplitInfoFuture:
     """Split generator for `beam.PCollection`."""
@@ -382,7 +383,7 @@ class SplitBuilder:
 
     beam_writer = tfrecords_writer.BeamWriter(
         example_specs=self._features.get_serialized_info(),
-        path=path,
+        filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
         file_format=self._file_format,

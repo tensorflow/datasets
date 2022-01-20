@@ -358,12 +358,13 @@ def _make_file_instructions_from_absolutes(
       raise ValueError(
           'Shard empty. This might means that dataset hasn\'t been generated '
           'yet and info not restored from GCS, or that legacy dataset is used.')
-    filenames = naming.filenames_for_dataset_split(
+    filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
+    filename_template = naming.ShardedFileTemplate(
         dataset_name=name,
         split=abs_instr.splitname,
-        num_shards=split_info.num_shards,
-        filetype_suffix=file_adapters.ADAPTER_FOR_FORMAT[file_format]
-        .FILE_SUFFIX)
+        filetype_suffix=filetype_suffix)
+    filenames = filename_template.sharded_filepaths(
+        num_shards=split_info.num_shards)
     from_ = 0 if abs_instr.from_ is None else abs_instr.from_
     to = split_info.num_examples if abs_instr.to is None else abs_instr.to
     single_file_instructions = shard_utils.get_file_instructions(

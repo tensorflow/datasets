@@ -17,7 +17,6 @@
 
 import functools
 import itertools
-import os
 from unittest import mock
 
 import six
@@ -27,6 +26,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import example_parser
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import tfrecords_writer
@@ -77,12 +77,19 @@ class ReaderTest(testing.TestCase):
       )
 
   def _write_tfrecord(self, split_name, shards_number, records):
-    path = os.path.join(self.tmp_dir, 'mnist-%s.tfrecord' % split_name)
+    filename_template = naming.ShardedFileTemplate(
+        dataset_name='mnist',
+        split=split_name,
+        filetype_suffix='tfrecord',
+        data_dir=self.tmp_dir)
     num_examples = len(records)
     with mock.patch.object(
         tfrecords_writer, '_get_number_shards', return_value=shards_number):
-      shard_specs = tfrecords_writer._get_shard_specs(num_examples, 0,
-                                                      [num_examples], path)
+      shard_specs = tfrecords_writer._get_shard_specs(
+          num_examples=num_examples,
+          total_size=0,
+          bucket_lengths=[num_examples],
+          filename_template=filename_template)
     serialized_records = [(key, six.b(rec)) for key, rec in enumerate(records)]
     for shard_spec in shard_specs:
       _write_tfrecord_from_shard_spec(shard_spec,
