@@ -103,7 +103,7 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
     })
     object_feature = tfds.features.FeaturesDict({
         'vector':
-            tfds.features.Sequence(tf.int32),
+            tfds.features.Text(),
         'position':
             position_feature,
         'object':
@@ -168,7 +168,7 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
 
     def _get_object_feature(raw_object):
       return {
-          'vector': [int(bit) for bit in raw_object['vector'].split()],
+          'vector': raw_object['vector'].strip(),
           'position': _get_position_feature(raw_object['position']),
           'object': {
               'shape': raw_object['object']['shape'],
