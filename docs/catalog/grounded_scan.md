@@ -66,7 +66,7 @@ FeaturesDict({
                 'column': tf.int32,
                 'row': tf.int32,
             }),
-            'vector': Sequence(tf.int32),
+            'vector': Text(shape=(), dtype=tf.string),
         }),
         'target_object': FeaturesDict({
             'object': FeaturesDict({
@@ -78,7 +78,7 @@ FeaturesDict({
                 'column': tf.int32,
                 'row': tf.int32,
             }),
-            'vector': Sequence(tf.int32),
+            'vector': Text(shape=(), dtype=tf.string),
         }),
     }),
     'target_commands': Sequence(Text(shape=(), dtype=tf.string)),

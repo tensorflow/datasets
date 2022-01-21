@@ -6,7 +6,7 @@
   <meta itemprop="description" content="The Proficient Human datasets were collected by 1 proficient operator using the&#10;[RoboTurk](https://roboturk.stanford.edu/) platform (with the exception of&#10;Transport, which had 2 proficient operators working together). Each dataset&#10;consists of 200 successful trajectories.&#10;&#10;Each task has two versions: one with low dimensional observations (`low_dim`),&#10;and one with images (`image`).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;robomimic_ph&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/robomimic_ph" />
   <meta itemprop="sameAs" content="https://arise-initiative.github.io/robomimic-web/" />
-  <meta itemprop="citation" content="@inproceedings{robomimic2021,&#10;  title={What Matters in Learning from Offline Human Demonstrations for Robot Manipulation},&#10;  author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany&#10;          and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese&#10;          and Yuke Zhu and Roberto Mart&#x27;{i}n-Mart&#x27;{i}n},&#10;  booktitle={arXiv preprint arXiv:2108.03298},&#10;  year={2021}&#10;}" />
+  <meta itemprop="citation" content="@inproceedings{robomimic2021,&#10;  title={What Matters in Learning from Offline Human Demonstrations for Robot Manipulation},&#10;  author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany&#10;          and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese&#10;          and Yuke Zhu and Roberto Mart&#x27;{i}n-Mart&#x27;{i}n},&#10;  booktitle={Conference on Robot Learning},&#10;  year={2021}&#10;}" />
 </div>
 
 # `robomimic_ph`
@@ -36,18 +36,11 @@ and one with images (`image`).
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 200
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -69,13 +62,21 @@ Split | Examples
   author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany
           and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese
           and Yuke Zhu and Roberto Mart'{i}n-Mart'{i}n},
-  booktitle={arXiv preprint arXiv:2108.03298},
+  booktitle={Conference on Robot Learning},
   year={2021}
 }
 ```
 
 
 ## robomimic_ph/lift_low_dim (default config)
+
+*   **Download size**: `17.69 MiB`
+
+*   **Dataset size**: `8.50 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Features**:
 
@@ -117,6 +118,14 @@ FeaturesDict({
 ```
 
 ## robomimic_ph/lift_image
+
+*   **Download size**: `798.43 MiB`
+
+*   **Dataset size**: `114.47 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Features**:
 
@@ -161,6 +170,14 @@ FeaturesDict({
 
 ## robomimic_ph/can_low_dim
 
+*   **Download size**: `43.38 MiB`
+
+*   **Dataset size**: `27.73 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Features**:
 
 ```python
@@ -201,6 +218,14 @@ FeaturesDict({
 ```
 
 ## robomimic_ph/can_image
+
+*   **Download size**: `1.87 GiB`
+
+*   **Dataset size**: `474.55 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Features**:
 
@@ -245,6 +270,14 @@ FeaturesDict({
 
 ## robomimic_ph/square_low_dim
 
+*   **Download size**: `47.69 MiB`
+
+*   **Dataset size**: `29.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Features**:
 
 ```python
@@ -285,6 +318,14 @@ FeaturesDict({
 ```
 
 ## robomimic_ph/square_image
+
+*   **Download size**: `2.42 GiB`
+
+*   **Dataset size**: `401.28 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Features**:
 
@@ -328,6 +369,14 @@ FeaturesDict({
 ```
 
 ## robomimic_ph/transport_low_dim
+
+*   **Download size**: `294.70 MiB`
+
+*   **Dataset size**: `208.05 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
 
 *   **Features**:
 
@@ -379,6 +428,14 @@ FeaturesDict({
 ```
 
 ## robomimic_ph/transport_image
+
+*   **Download size**: `15.07 GiB`
+
+*   **Dataset size**: `3.64 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Features**:
 
@@ -435,6 +492,14 @@ FeaturesDict({
 
 ## robomimic_ph/tool_hang_low_dim
 
+*   **Download size**: `192.29 MiB`
+
+*   **Dataset size**: `121.77 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
 *   **Features**:
 
 ```python
@@ -469,6 +534,14 @@ FeaturesDict({
 ```
 
 ## robomimic_ph/tool_hang_image
+
+*   **Download size**: `61.96 GiB`
+
+*   **Dataset size**: `9.10 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Features**:
 
