@@ -37,7 +37,7 @@ _CITATION = """
   author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany
           and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese
           and Yuke Zhu and Roberto Mart\'{i}n-Mart\'{i}n},
-  booktitle={arXiv preprint arXiv:2108.03298},
+  booktitle={Conference on Robot Learning},
   year={2021}
 }
 """
