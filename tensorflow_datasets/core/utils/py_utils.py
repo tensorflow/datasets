@@ -48,6 +48,7 @@ Tree = type_utils.Tree
 memoize = functools.lru_cache
 
 T = TypeVar('T')
+U = TypeVar('U')
 
 Fn = TypeVar('Fn', bound=Callable[..., Any])
 
@@ -103,7 +104,7 @@ def disable_logging():
     logger.disabled = logger_disabled
 
 
-class NonMutableDict(dict):
+class NonMutableDict(Dict[T, U]):
   """Dict where keys can only be added but not modified.
 
   Raises an error if a key is overwritten. The error message can be customized
@@ -120,12 +121,12 @@ class NonMutableDict(dict):
     super(NonMutableDict, self).__init__(*args, **kwargs)
 
   def __setitem__(self, key, value):
-    if key in self:
+    if key in self.keys():
       raise ValueError(self._error_msg.format(key=key))
     return super(NonMutableDict, self).__setitem__(key, value)
 
   def update(self, other):
-    if any(k in self for k in other):
+    if any(k in self.keys() for k in other):
       raise ValueError(self._error_msg.format(key=set(self) & set(other)))
     return super(NonMutableDict, self).update(other)
 

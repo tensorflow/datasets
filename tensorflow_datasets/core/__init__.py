@@ -28,6 +28,7 @@ from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
+from tensorflow_datasets.core.dataset_builder import filename_template_for
 
 from tensorflow_datasets.core.dataset_info import BeamMetadataDict
 from tensorflow_datasets.core.dataset_info import DatasetInfo
@@ -37,6 +38,8 @@ from tensorflow_datasets.core.dataset_info import MetadataDict
 from tensorflow_datasets.core.file_adapters import FileFormat
 
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
+
+from tensorflow_datasets.core.naming import ShardedFileTemplate
 
 from tensorflow_datasets.core.read_only_builder import builder_from_directory
 
@@ -80,6 +83,7 @@ __all__ = [
     "DatasetNotFoundError",
     "Experiment",
     "FileFormat",
+    "filename_template_for",
     "GeneratorBasedBuilder",
     "gcs_path",
     "lazy_imports",
@@ -89,6 +93,7 @@ __all__ = [
     "ReadInstruction",
     "ReadOnlyPath",
     "ReadWritePath",
+    "ShardedFileTemplate",
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",

@@ -367,6 +367,7 @@ class SplitBuilder:
         name=split_name,
         shard_lengths=shard_lengths,
         num_bytes=total_size,
+        filename_template=filename_template,
     )
     return _SplitInfoFuture(lambda: split_info)
 
@@ -415,6 +416,7 @@ class SplitBuilder:
           name=split_name,
           shard_lengths=shard_lengths,
           num_bytes=total_size,
+          filename_template=filename_template,
       )
 
     return _SplitInfoFuture(_resolve_future)

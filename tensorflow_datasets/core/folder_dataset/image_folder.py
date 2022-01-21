@@ -25,6 +25,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as split_lib
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version
@@ -98,15 +99,20 @@ class ImageFolder(dataset_builder.DatasetBuilder):
     # Update DatasetInfo labels
     self.info.features['label'].names = sorted(labels)
 
+    # Since jpgs are read directly, there is no filetype suffix for shards.
+    filename_template = naming.ShardedFileTemplate(
+        dataset_name=self.name, data_dir=self.data_dir, filetype_suffix=None)
+
     # Update DatasetInfo splits
     split_infos = [
         split_lib.SplitInfo(  # pylint: disable=g-complex-comprehension
             name=split_name,
             shard_lengths=[len(examples)],
             num_bytes=0,
+            filename_template=filename_template.replace(split=split_name),
         ) for split_name, examples in self._split_examples.items()
     ]
-    split_dict = split_lib.SplitDict(split_infos, dataset_name=self.name)
+    split_dict = split_lib.SplitDict(split_infos)
     self.info.set_splits(split_dict)
 
   def _info(self) -> dataset_info.DatasetInfo:

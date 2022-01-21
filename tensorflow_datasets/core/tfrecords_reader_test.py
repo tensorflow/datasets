@@ -76,12 +76,15 @@ class ReaderTest(testing.TestCase):
           shuffle_files=False,
       )
 
-  def _write_tfrecord(self, split_name, shards_number, records):
-    filename_template = naming.ShardedFileTemplate(
+  def _filename_template(self, split: str) -> naming.ShardedFileTemplate:
+    return naming.ShardedFileTemplate(
         dataset_name='mnist',
-        split=split_name,
+        split=split,
         filetype_suffix='tfrecord',
         data_dir=self.tmp_dir)
+
+  def _write_tfrecord(self, split_name, shards_number, records):
+    filename_template = self._filename_template(split=split_name)
     num_examples = len(records)
     with mock.patch.object(
         tfrecords_writer, '_get_number_shards', return_value=shards_number):
@@ -98,7 +101,7 @@ class ReaderTest(testing.TestCase):
         name=split_name,
         shard_lengths=[int(s.examples_number) for s in shard_specs],
         num_bytes=0,
-    )
+        filename_template=filename_template)
 
   def test_nodata_instruction(self):
     # Given instruction corresponds to no data.
@@ -108,9 +111,9 @@ class ReaderTest(testing.TestCase):
           name='train',
           shard_lengths=[2, 3, 2, 3, 2],
           num_bytes=0,
+          filename_template=self._filename_template(split='train'),
       )
       self.reader.read(
-          name='mnist',
           instructions='train[0:0]',
           split_infos=[train_info],
       )
@@ -118,7 +121,6 @@ class ReaderTest(testing.TestCase):
   def test_noskip_notake(self):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     ds = self.reader.read(
-        name='mnist',
         instructions='train',
         split_infos=[train_info],
     )
@@ -133,7 +135,6 @@ class ReaderTest(testing.TestCase):
   def test_overlap(self):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     ds = self.reader.read(
-        name='mnist',
         instructions='train+train[:2]',
         split_infos=[train_info],
     )
@@ -154,7 +155,6 @@ class ReaderTest(testing.TestCase):
     self.assertEqual(test_info.shard_lengths, [2, 3, 2])  # 7 ex.
     split_info = [train_info, test_info]
     ds = self.reader.read(
-        name='mnist',
         instructions='train[1:-1]+test[:-50%]',
         split_infos=split_info,
     )
@@ -169,7 +169,6 @@ class ReaderTest(testing.TestCase):
   def test_shuffle_files(self):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     ds = self.reader.read(
-        name='mnist',
         instructions='train',
         split_infos=[train_info],
         shuffle_files=True,
@@ -197,7 +196,6 @@ class ReaderTest(testing.TestCase):
     split_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     read_config = read_config_lib.ReadConfig(shuffle_seed=123,)
     ds = self.reader.read(
-        name='mnist',
         instructions='train',
         split_infos=[split_info],
         read_config=read_config,
@@ -217,7 +215,6 @@ class ReaderTest(testing.TestCase):
         for k in range(0, 100, 25)
     ]
     tests = self.reader.read(
-        name='mnist',
         instructions=instructions,
         split_infos=[train_info],
     )
@@ -225,7 +222,6 @@ class ReaderTest(testing.TestCase):
                      splits.ReadInstruction('train', from_=k + 25, unit='%'))
                     for k in range(0, 100, 25)]
     trains = self.reader.read(
-        name='mnist',
         instructions=instructions,
         split_infos=[train_info],
     )
@@ -241,13 +237,21 @@ class ReaderTest(testing.TestCase):
 
   def test_read_files(self):
     self._write_tfrecord('train', 4, 'abcdefghijkl')
-    fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
+    filename_template = self._filename_template(split='train')
     ds = self.reader.read_files(
         [
             shard_utils.FileInstruction(
-                filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+                filename=filename_template.sharded_filepath(
+                    shard_index=1, num_shards=4),
+                skip=0,
+                take=-1,
+                num_examples=3),
             shard_utils.FileInstruction(
-                filename=fname_pattern % 3, skip=1, take=1, num_examples=1),
+                filename=filename_template.sharded_filepath(
+                    shard_index=3, num_shards=4),
+                skip=1,
+                take=1,
+                num_examples=1),
         ],
         read_config=read_config_lib.ReadConfig(),
         shuffle_files=False,
@@ -263,7 +267,6 @@ class ReaderTest(testing.TestCase):
       return list(
           tfds.as_numpy(
               self.reader.read(
-                  name='mnist',
                   instructions='train',
                   split_infos=[split_info],
                   read_config=read_config_lib.ReadConfig(
@@ -296,13 +299,17 @@ class ReaderTest(testing.TestCase):
 
   def test_shuffle_files_should_be_disabled(self):
     self._write_tfrecord('train', 4, 'abcdefghijkl')
-    fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
+    filename_template = self._filename_template(split='train')
     with self.assertRaisesWithPredicateMatch(ValueError,
                                              _SHUFFLE_FILES_ERROR_MESSAGE):
       self.reader.read_files(
           [
               shard_utils.FileInstruction(
-                  filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+                  filename=filename_template.sharded_filepath(
+                      shard_index=1, num_shards=4),
+                  skip=0,
+                  take=-1,
+                  num_examples=3),
           ],
           read_config=read_config_lib.ReadConfig(),
           shuffle_files=True,
@@ -311,10 +318,14 @@ class ReaderTest(testing.TestCase):
 
   def test_cycle_length_must_be_one(self):
     self._write_tfrecord('train', 4, 'abcdefghijkl')
-    fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
+    filename_template = self._filename_template(split='train')
     instructions = [
         shard_utils.FileInstruction(
-            filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+            filename=filename_template.sharded_filepath(
+                shard_index=1, num_shards=4),
+            skip=0,
+            take=-1,
+            num_examples=3),
     ]
     # In ordered dataset interleave_cycle_length is set to 1 by default
     self.reader.read_files(
@@ -334,10 +345,14 @@ class ReaderTest(testing.TestCase):
 
   def test_ordering_guard(self):
     self._write_tfrecord('train', 4, 'abcdefghijkl')
-    fname_pattern = 'mnist-train.tfrecord-0000%d-of-00004'
+    filename_template = self._filename_template(split='train')
     instructions = [
         shard_utils.FileInstruction(
-            filename=fname_pattern % 1, skip=0, take=-1, num_examples=3),
+            filename=filename_template.sharded_filepath(
+                shard_index=1, num_shards=4),
+            skip=0,
+            take=-1,
+            num_examples=3),
     ]
     reported_warnings = []
     with mock.patch('absl.logging.warning', reported_warnings.append):
@@ -356,8 +371,7 @@ class ReaderTest(testing.TestCase):
       wraps=tf.data.experimental.assert_cardinality)
   def test_assert_cardinality_is_on_by_default(self, assert_cardinality):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
-    self.reader.read(
-        name='mnist', instructions='train', split_infos=[train_info])
+    self.reader.read(instructions='train', split_infos=[train_info])
     assert_cardinality.assert_called_with(12)
 
   @mock.patch('tensorflow.data.experimental.assert_cardinality')
@@ -365,7 +379,6 @@ class ReaderTest(testing.TestCase):
       self, assert_cardinality):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
     self.reader.read(
-        name='mnist',
         instructions='train',
         split_infos=[train_info],
         read_config=read_config_lib.ReadConfig(assert_cardinality=False))
@@ -377,28 +390,32 @@ def test_shard_api():
       name='train',
       shard_lengths=[10, 20, 13],
       num_bytes=0,
-  )
+      filename_template=naming.ShardedFileTemplate(
+          dataset_name='ds_name',
+          split='train',
+          filetype_suffix='tfrecord',
+          data_dir='/path'))
   fi = [
       shard_utils.FileInstruction(
-          filename='ds_name-train.tfrecord-00000-of-00003',
+          filename='/path/ds_name-train.tfrecord-00000-of-00003',
           skip=0,
           take=-1,
           num_examples=10,
       ),
       shard_utils.FileInstruction(
-          filename='ds_name-train.tfrecord-00001-of-00003',
+          filename='/path/ds_name-train.tfrecord-00001-of-00003',
           skip=0,
           take=-1,
           num_examples=20,
       ),
       shard_utils.FileInstruction(
-          filename='ds_name-train.tfrecord-00002-of-00003',
+          filename='/path/ds_name-train.tfrecord-00002-of-00003',
           skip=0,
           take=-1,
           num_examples=13,
       ),
   ]
-  sd = splits.SplitDict([si], dataset_name='ds_name')
+  sd = splits.SplitDict([si])
   assert sd['train[0shard]'].file_instructions == [fi[0]]
   assert sd['train[1shard]'].file_instructions == [fi[1]]
   assert sd['train[-1shard]'].file_instructions == [fi[-1]]

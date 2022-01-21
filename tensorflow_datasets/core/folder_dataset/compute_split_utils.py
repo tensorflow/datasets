@@ -16,13 +16,13 @@
 r"""Beam pipeline which compute the number of examples in the given tfrecord."""
 
 import collections
+import dataclasses
 import functools
 import itertools
 import os
 import pprint
 from typing import cast, Dict, List, Optional, Type
 
-import dataclasses
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
@@ -43,10 +43,28 @@ class _ShardInfo:
   bytes_size: int
 
 
+def compute_split_info_from_directory(
+    *,
+    out_dir: Optional[utils.PathLike] = None,
+    data_dir: utils.PathLike,
+) -> List[split_lib.SplitInfo]:
+  """Compute the split info for the split in the given data dir."""
+  # Get the dataset name and filetype suffix from the files in the data dir.
+  data_dir = utils.as_path(data_dir)
+  split_files = next(iter(_extract_split_files(data_dir).values()))
+  split_file = split_files[0]
+  filename_template = naming.ShardedFileTemplate(
+      data_dir=data_dir,
+      dataset_name=split_file.dataset_name,
+      filetype_suffix=split_file.filetype_suffix)
+  return compute_split_info(
+      out_dir=out_dir, filename_template=filename_template)
+
+
 def compute_split_info(
     *,
-    data_dir: utils.PathLike,
     out_dir: Optional[utils.PathLike] = None,
+    filename_template: naming.ShardedFileTemplate,
 ) -> List[split_lib.SplitInfo]:
   """Compute the split info on the given files.
 
@@ -57,18 +75,17 @@ def compute_split_info(
   https://www.tensorflow.org/datasets/external_tfrecord
 
   Args:
-    data_dir: Directory containing the `.tfrecord` files (or similar format)
     out_dir: Output directory on which save the metadata. It should be available
       from the apache beam workers. If not set, apache beam won't be used (only
       available with some file formats).
+    filename_template: filename template of the splits that contains the dir
+      which contains the data.
 
   Returns:
     split_infos: The list of `tfds.core.SplitInfo`.
   """
-  data_dir = utils.as_path(data_dir)
-
   # Auto-detect the splits from the files
-  split_files = _extract_split_files(data_dir)
+  split_files = _extract_split_files(filename_template.data_dir)
   print('Auto-detected splits:')
   for split_name, file_infos in split_files.items():
     print(f' * {split_name}: {file_infos[0].num_shards} shards')
@@ -77,8 +94,8 @@ def compute_split_info(
   if out_dir is not None:
     split_infos = _compute_split_statistics_beam(
         split_files=split_files,
-        data_dir=data_dir,
         out_dir=out_dir,
+        filename_template=filename_template,
     )
   else:
     raise NotImplementedError('compute_split_info require out_dir kwargs.')
@@ -113,8 +130,8 @@ def _extract_split_files(data_dir: utils.ReadWritePath) -> _SplitFilesDict:
 def _compute_split_statistics_beam(
     *,
     split_files: _SplitFilesDict,
-    data_dir: utils.ReadWritePath,
     out_dir: utils.PathLike,
+    filename_template: naming.ShardedFileTemplate,
 ) -> List[split_lib.SplitInfo]:
   """Compute statistics."""
   out_dir = utils.as_path(out_dir)
@@ -133,15 +150,16 @@ def _compute_split_statistics_beam(
   with beam.Pipeline(runner=runner, options=beam_options) as pipeline:
     for split_name, file_infos in split_files.items():
       _ = pipeline | split_name >> _process_split(  # pylint: disable=no-value-for-parameter
-          data_dir=data_dir,
+          filename_template=filename_template,
           out_dir=out_dir,
           file_infos=file_infos,  # pytype: disable=missing-parameter
       )
 
   # After the files have been computed
   return [
-      _split_info_from_path(out_dir / _out_filename(split_name))
-      for split_name in split_files
+      _split_info_from_path(
+          filename_template.replace(data_dir=out_dir, split=split))
+      for split in split_files
   ]
 
 
@@ -149,7 +167,7 @@ def _compute_split_statistics_beam(
 def _process_split(
     pipeline,
     *,
-    data_dir: utils.ReadWritePath,
+    filename_template: naming.ShardedFileTemplate,
     out_dir: utils.ReadWritePath,
     file_infos: List[naming.FilenameInfo],
 ):
@@ -169,6 +187,7 @@ def _process_split(
   file_suffix, = {f.filetype_suffix for f in file_infos}
   file_format = file_adapters.file_format_from_suffix(file_suffix)
   adapter = file_adapters.ADAPTER_FOR_FORMAT[file_format]
+  data_dir = utils.as_path(filename_template.data_dir)
 
   # Build the pipeline to process one split
   return (pipeline
@@ -176,8 +195,8 @@ def _process_split(
           | beam.Map(_process_shard, data_dir=data_dir, adapter=adapter)
           # Group everything in a single elem (_ShardInfo -> List[_ShardInfo])
           | _group_all()  # pytype: disable=missing-parameter  # pylint: disable=no-value-for-parameter
-          | beam.Map(_merge_shard_info)
-          | beam.Map(_shard_info_to_json_str)
+          | beam.Map(_merge_shard_info, filename_template=filename_template)
+          | beam.Map(_split_info_to_json_str)
           | beam.io.WriteToText(  # pytype: disable=missing-parameter
               os.fspath(out_dir / _out_filename(split_name)),
               num_shards=1,
@@ -217,25 +236,31 @@ def _process_shard(
   )
 
 
-def _merge_shard_info(shard_infos: List[_ShardInfo]) -> split_lib.SplitInfo:
-  """Merge all shard info from one splits and returns the json.
+def _merge_shard_info(
+    shard_infos: List[_ShardInfo],
+    filename_template: naming.ShardedFileTemplate,
+) -> split_lib.SplitInfo:
+  """Merge all shard info from one splits and returns the SplitInfo.
 
   Args:
     shard_infos: The shard infos from all shards.
+    filename_template: filename template of the splits.
 
   Returns:
     The json SplitInfo proto
   """
   split_name, = {s.file_info.split for s in shard_infos}
   shard_infos = sorted(shard_infos, key=lambda s: s.file_info.shard_index)
+  filename_template = filename_template.replace(split=split_name)
   return split_lib.SplitInfo(
       name=split_name,
       shard_lengths=[s.num_examples for s in shard_infos],
       num_bytes=sum(s.bytes_size for s in shard_infos),
+      filename_template=filename_template,
   )
 
 
-def _shard_info_to_json_str(split_info: split_lib.SplitInfo) -> str:
+def _split_info_to_json_str(split_info: split_lib.SplitInfo) -> str:
   proto = split_info.to_proto()
   return json_format.MessageToJson(proto, sort_keys=True)
 
@@ -244,20 +269,23 @@ def _out_filename(split_name: str) -> str:
   return f'{split_name}-info.json'
 
 
-def _split_info_from_path(path: utils.ReadWritePath) -> split_lib.SplitInfo:
+def _split_info_from_path(
+    filename_template: naming.ShardedFileTemplate,) -> split_lib.SplitInfo:
   """Load the split info from the path."""
+  path = filename_template.data_dir / _out_filename(filename_template.split)
   json_str = path.read_text()
   proto = json_format.Parse(json_str, dataset_info_pb2.SplitInfo())
-  return split_lib.SplitInfo.from_proto(proto)
+  return split_lib.SplitInfo.from_proto(
+      proto, filename_template=filename_template.replace(split=proto.name))
 
 
 def split_infos_from_path(
-    path: utils.PathLike,
     split_names: List[str],
+    filename_template: naming.ShardedFileTemplate,
 ) -> List[split_lib.SplitInfo]:
   """Restore the split info from a directory."""
-  path = utils.as_path(path)
   return [
-      _split_info_from_path(path / _out_filename(split_name))
+      _split_info_from_path(
+          filename_template=filename_template.replace(split=split_name))
       for split_name in split_names
   ]

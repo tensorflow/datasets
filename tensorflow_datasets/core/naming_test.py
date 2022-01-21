@@ -78,7 +78,8 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
         dataset_name='foo',
         split=splits.Split.TRAIN,
         num_shards=2,
-        filetype_suffix='bar')
+        filetype_suffix='bar',
+        data_dir='/path')
     self.assertEqual(
         actual,
         ['foo-train.bar-00000-of-00002', 'foo-train.bar-00001-of-00002'])
@@ -322,3 +323,19 @@ def test_sharded_file_template():
       filetype_suffix='tfrecord')
   assert template.sharded_filepath(
       shard_index=0, num_shards=10) == '/path/ds-train.tfrecord-00000-of-00010'
+
+
+def test_filename_template_empty_filetype_suffix():
+  with pytest.raises(
+      ValueError, match='Filetype suffix must be a non-empty string: .+'):
+    naming.ShardedFileTemplate(
+        data_dir='/path', dataset_name='mnist', filetype_suffix='')
+
+
+def test_filename_template_empty_split():
+  with pytest.raises(ValueError, match='Split must be a non-empty string: .+'):
+    naming.ShardedFileTemplate(
+        data_dir='/path',
+        dataset_name='mnist',
+        filetype_suffix='tfrecord',
+        split='')

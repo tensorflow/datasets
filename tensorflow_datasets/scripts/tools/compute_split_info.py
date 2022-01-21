@@ -56,7 +56,7 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
 
 def main(args: argparse.Namespace) -> None:
 
-  tfds.folder_dataset.compute_split_info(
+  tfds.folder_dataset.compute_split_info_from_directory(
       data_dir=args.data_dir,
       out_dir=args.out_dir,
   )

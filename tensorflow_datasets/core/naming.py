@@ -226,8 +226,8 @@ class ShardedFileTemplate:
 
   Attributes:
     dataset_name: the name of the dataset.
-    split: the split of the dataset.
     data_dir: the directory that contains the files for the shards.
+    split: the split of the dataset.
     filetype_suffix: the filetype suffix to denote the type of file. For
       example, `tfrecord`.
     filename_prefix: the part of the filename up until the shard information.
@@ -235,16 +235,31 @@ class ShardedFileTemplate:
       but now also includes the directory of the file if it is given.
   """
   dataset_name: str
-  split: str
-  filetype_suffix: str
-  data_dir: Optional[
-      type_utils.ReadWritePath] = None  # TODO(tfds): change to non-optional
+  data_dir: type_utils.ReadWritePath
+  filetype_suffix: Optional[str]
+  split: Optional[str] = None
+
+  def __post_init__(self):
+    self.data_dir = generic_path.as_path(self.data_dir)
+    if self.split is not None and not self.split:
+      raise ValueError(f'Split must be a non-empty string: {self}')
+    if self.filetype_suffix is not None and not self.filetype_suffix:
+      raise ValueError(f'Filetype suffix must be a non-empty string: {self}')
+
+  def is_complete(self) -> bool:
+    return bool(self.split and self.filetype_suffix)
+
+  def _assert_is_complete(self) -> None:
+    if not self.is_complete():
+      raise ValueError(f'Template is incomplete: {self}')
 
   @property
   def filename_prefix(self) -> str:
     """The part of the filename up until the shard information."""
-    if not self.dataset_name:
-      raise ValueError('No dataset name was given, cannot build shard filename')
+    if not self.split:
+      raise ValueError(f'Split must be a non-empty string: {self}')
+    if not self.filetype_suffix:
+      raise ValueError(f'Filetype suffix must be a non-empty string: {self}')
     filename_prefix = filename_prefix_for_split(
         name=self.dataset_name, split=self.split)
     return f'{filename_prefix}.{self.filetype_suffix}'
@@ -252,9 +267,23 @@ class ShardedFileTemplate:
   @property
   def filepath_prefix(self) -> str:
     """The part of the filename up until the shard info, including the folder if given."""
+    self._assert_is_complete()
     if self.data_dir:
       return os.path.join(self.data_dir, self.filename_prefix)
     return self.filename_prefix
+
+  def sharded_filename(
+      self,
+      *,
+      shard_index: int,
+      num_shards: int,
+  ) -> str:
+    """Returns the filename (excluding the path) for the given shard."""
+    assert shard_index >= 0
+    assert shard_index < num_shards
+    shard_suffix = shard_suffix_template(num_shards).format(
+        shard_index=shard_index, num_shards=num_shards)
+    return f'{self.filename_prefix}-{shard_suffix}'
 
   def sharded_filepath(
       self,
@@ -263,6 +292,7 @@ class ShardedFileTemplate:
       num_shards: int,
   ) -> str:
     """Returns the filename (including full path if `data_dir` is set) for the given shard."""
+    self._assert_is_complete()
     assert shard_index >= 0
     assert shard_index < num_shards
     shard_suffix = shard_suffix_template(num_shards).format(
@@ -287,13 +317,21 @@ class ShardedFileTemplate:
     Returns:
       the pattern describing all shards captured by this template.
     """
+    self._assert_is_complete()
     if num_shards:
       return f'{self.filepath_prefix}@{num_shards}'
     return f'{self.filepath_prefix}*'
 
   def sharded_filepaths(self, num_shards: int) -> List[str]:
+    self._assert_is_complete()
     return [
         self.sharded_filepath(shard_index=i, num_shards=num_shards)
+        for i in range(num_shards)
+    ]
+
+  def sharded_filenames(self, num_shards: int) -> List[str]:
+    return [
+        self.sharded_filename(shard_index=i, num_shards=num_shards)
         for i in range(num_shards)
     ]
 
@@ -335,11 +373,15 @@ def filenames_for_dataset_split(
     split: str,
     num_shards: int,
     filetype_suffix: str,
+    data_dir: Optional[type_utils.PathLike] = None,
 ) -> List[str]:
   # TODO(tfds): remove this by start using ShardedFileTemplate
   template = ShardedFileTemplate(
-      dataset_name=dataset_name, split=split, filetype_suffix=filetype_suffix)
-  return template.sharded_filepaths(num_shards=num_shards)
+      dataset_name=dataset_name,
+      split=split,
+      filetype_suffix=filetype_suffix,
+      data_dir=generic_path.as_path(data_dir))
+  return template.sharded_filenames(num_shards=num_shards)
 
 
 def filepaths_for_dataset_split(
@@ -351,14 +393,12 @@ def filepaths_for_dataset_split(
 ) -> List[str]:
   """File paths of a given dataset split."""
   # TODO(tfds): remove this by start using ShardedFileTemplate
-  filenames = filenames_for_dataset_split(
+  template = ShardedFileTemplate(
       dataset_name=dataset_name,
       split=split,
-      num_shards=num_shards,
       filetype_suffix=filetype_suffix,
-  )
-  filepaths = [os.path.join(data_dir, fname) for fname in filenames]
-  return filepaths
+      data_dir=generic_path.as_path(data_dir))
+  return template.sharded_filepaths(num_shards=num_shards)
 
 
 @dataclasses.dataclass(eq=True, frozen=True)
