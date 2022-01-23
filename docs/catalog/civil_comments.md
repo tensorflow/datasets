@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="civil_comments" />
-  <meta itemprop="description" content="This version of the CivilComments Dataset provides access to the primary&#10;seven labels that were annotated by crowd workers, the toxicity and other&#10;tags are a value between 0 and 1 indicating the fraction of annotators that&#10;assigned these attributes to the comment text.&#10;&#10;The other tags are only available for a fraction of the input examples. They&#10;are currently ignored for the main dataset; the CivilCommentsIdentities set&#10;includes those labels, but only consists of the subset of the data with them.&#10;The other attributes that were part of the original CivilComments release are&#10;included only in the raw data. See the Kaggle documentation for more details&#10;about the available features.&#10;&#10;The comments in this dataset come from an archive of the Civil Comments&#10;platform, a commenting plugin for independent news sites. These public comments&#10;were created from 2015 - 2017 and appeared on approximately 50 English-language&#10;news sites across the world. When Civil Comments shut down in 2017, they chose&#10;to make the public comments available in a lasting open archive to enable future&#10;research. The original data, published on figshare, includes the public comment&#10;text, some associated metadata such as article IDs, timestamps and&#10;commenter-generated &quot;civility&quot; labels, but does not include user ids. Jigsaw&#10;extended this dataset by adding additional labels for toxicity, identity&#10;mentions, as well as covert offensiveness. This data set is an exact replica of&#10;the data released for the Jigsaw Unintended Bias in Toxicity Classification&#10;Kaggle challenge. This dataset is released under CC0, as is the underlying&#10;comment text.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;civil_comments&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="This version of the CivilComments Dataset provides access to the primary&#10;seven labels that were annotated by crowd workers, the toxicity and other&#10;tags are a value between 0 and 1 indicating the fraction of annotators that&#10;assigned these attributes to the comment text.&#10;&#10;The other tags are only available for a fraction of the input examples. They&#10;are currently ignored for the main dataset; the CivilCommentsIdentities set&#10;includes those labels, but only consists of the subset of the data with them.&#10;The other attributes that were part of the original CivilComments release are&#10;included only in the raw data. See the Kaggle documentation for more details&#10;about the available features.&#10;&#10;The comments in this dataset come from an archive of the Civil Comments&#10;platform, a commenting plugin for independent news sites. These public comments&#10;were created from 2015 - 2017 and appeared on approximately 50 English-language&#10;news sites across the world. When Civil Comments shut down in 2017, they chose&#10;to make the public comments available in a lasting open archive to enable future&#10;research. The original data, published on figshare, includes the public comment&#10;text, some associated metadata such as article IDs, timestamps and&#10;commenter-generated &quot;civility&quot; labels, but does not include user ids. Jigsaw&#10;extended this dataset by adding additional labels for toxicity, identity&#10;mentions, as well as covert offensiveness. This data set is an exact replica of&#10;the data released for the Jigsaw Unintended Bias in Toxicity Classification&#10;Kaggle challenge. This dataset is released under CC0, as is the underlying&#10;comment text.&#10;&#10;For comments that have a parent_id also in the civil comments data, the&#10;text of the previous comment is provided as the &quot;parent_text&quot; feature. Note&#10;that the splits were made without regard to this information, so using previous&#10;comments may leak some information. The annotators did not have access to the&#10;parent text when making the labels.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;civil_comments&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/civil_comments" />
   <meta itemprop="sameAs" content="https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/abs-1903-04561,&#10;  author    = {Daniel Borkan and&#10;               Lucas Dixon and&#10;               Jeffrey Sorensen and&#10;               Nithum Thain and&#10;               Lucy Vasserman},&#10;  title     = {Nuanced Metrics for Measuring Unintended Bias with Real Data for Text&#10;               Classification},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1903.04561},&#10;  year      = {2019},&#10;  url       = {http://arxiv.org/abs/1903.04561},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1903.04561},&#10;  timestamp = {Sun, 31 Mar 2019 19:01:24 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1903-04561},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
@@ -45,6 +45,12 @@ the data released for the Jigsaw Unintended Bias in Toxicity Classification
 Kaggle challenge. This dataset is released under CC0, as is the underlying
 comment text.
 
+For comments that have a parent_id also in the civil comments data, the text of
+the previous comment is provided as the "parent_text" feature. Note that the
+splits were made without regard to this information, so using previous comments
+may leak some information. The annotators did not have access to the parent text
+when making the labels.
+
 *   **Homepage**:
     [https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data)
 
@@ -58,19 +64,31 @@ comment text.
     *   `1.1.0`: Added CivilCommentsCovert config.
     *   `1.1.1`: Added CivilCommentsCovert config with correct checksum.
     *   `1.1.2`: Added separate citation for CivilCommentsCovert dataset.
-    *   **`1.1.3`** (default)
+    *   `1.1.3`: Corrected id types from float to string.
+    *   **`1.2.0`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Corrected id types from float to string.
+        Add toxic spans, context, and parent comment text features.
 
-*   **Download size**: `397.83 MiB`
+*   **Download size**: `Unknown size`
 
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('text', 'toxicity')`
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 
 ## civil_comments/CivilComments (default config)
@@ -79,28 +97,17 @@ comment text.
     but only the basic seven labels (toxicity, severe_toxicity, obscene, threat,
     insult, identity_attack, and sexual_explicit).
 
-*   **Dataset size**: `964.77 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | --------:
-`'test'`       | 97,320
-`'train'`      | 1,804,874
-`'validation'` | 97,320
-
 *   **Features**:
 
 ```python
 FeaturesDict({
+    'article_id': tf.int32,
     'id': tf.string,
     'identity_attack': tf.float32,
     'insult': tf.float32,
     'obscene': tf.float32,
+    'parent_id': tf.int32,
+    'parent_text': Text(shape=(), dtype=tf.string),
     'severe_toxicity': tf.float32,
     'sexual_explicit': tf.float32,
     'text': Text(shape=(), dtype=tf.string),
@@ -109,39 +116,9 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilComments-1.1.3.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'toxicity')`
 
 *   **Citation**:
 
@@ -173,24 +150,11 @@ $(document).ready(() => {
     However, it only includes the subset (roughly a quarter) of the data with
     all these features.
 
-*   **Dataset size**: `511.32 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 21,577
-`'train'`      | 405,130
-`'validation'` | 21,293
-
 *   **Features**:
 
 ```python
 FeaturesDict({
+    'article_id': tf.int32,
     'asian': tf.float32,
     'atheist': tf.float32,
     'bisexual': tf.float32,
@@ -215,6 +179,8 @@ FeaturesDict({
     'other_race_or_ethnicity': tf.float32,
     'other_religion': tf.float32,
     'other_sexual_orientation': tf.float32,
+    'parent_id': tf.int32,
+    'parent_text': Text(shape=(), dtype=tf.string),
     'physical_disability': tf.float32,
     'psychiatric_or_mental_illness': tf.float32,
     'severe_toxicity': tf.float32,
@@ -227,39 +193,9 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsIdentities-1.1.3.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'toxicity')`
 
 *   **Citation**:
 
@@ -295,23 +231,11 @@ $(document).ready(() => {
     detailed in a forthcoming paper at
     https://sites.google.com/corp/view/hciandnlp/accepted-papers.
 
-*   **Dataset size**: `79.74 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'test'`  | 2,455
-`'train'` | 48,074
-
 *   **Features**:
 
 ```python
 FeaturesDict({
+    'article_id': tf.int32,
     'asian': tf.float32,
     'atheist': tf.float32,
     'bisexual': tf.float32,
@@ -347,6 +271,8 @@ FeaturesDict({
     'other_race_or_ethnicity': tf.float32,
     'other_religion': tf.float32,
     'other_sexual_orientation': tf.float32,
+    'parent_id': tf.int32,
+    'parent_text': Text(shape=(), dtype=tf.string),
     'physical_disability': tf.float32,
     'psychiatric_or_mental_illness': tf.float32,
     'severe_toxicity': tf.float32,
@@ -359,39 +285,9 @@ FeaturesDict({
 })
 ```
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
-<script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsCovert-1.1.3.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
-
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'toxicity')`
 
 *   **Citation**:
 
@@ -410,5 +306,97 @@ $(document).ready(() => {
     publisher = "Association for Computational Linguistics",
     url = "https://www.aclweb.org/anthology/2021.hcinlp-1.3",
     pages = "14--20"
+}
+```
+
+## civil_comments/CivilCommentsToxicSpans <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: The CivilComments Toxic Spans are a subset of
+    CivilComments that is labeled at the span level - the indices of all
+    character (unicode codepoints) boundaries that were tagged as toxic by a
+    majority of the annotators is returned in a 'spans' feature.
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    'article_id': tf.int32,
+    'id': tf.string,
+    'parent_id': tf.int32,
+    'parent_text': Text(shape=(), dtype=tf.string),
+    'spans': Tensor(shape=(None,), dtype=tf.int32),
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'spans')`
+
+*   **Citation**:
+
+```
+@inproceedings{pavlopoulos-etal-2021-semeval,
+    title = "{S}em{E}val-2021 Task 5: Toxic Spans Detection",
+    author = "Pavlopoulos, John  and Sorensen, Jeffrey  and Laugier, L{'e}o and Androutsopoulos, Ion",
+    booktitle = "Proceedings of the 15th International Workshop on Semantic Evaluation (SemEval-2021)",
+    month = aug,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.semeval-1.6",
+    doi = "10.18653/v1/2021.semeval-1.6",
+    pages = "59--69",
+}
+```
+
+## civil_comments/CivilCommentsInContext <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: The CivilComments Toxic Spans are a subset of
+    CivilComments that was labeled by making available to the labelers the
+    parent_text. It includes a contextual_toxicity feature.
+
+*   **Features**:
+
+```python
+FeaturesDict({
+    '_': tf.float32,
+    'a': tf.float32,
+    'article_id': tf.int32,
+    'c': tf.float32,
+    'e': tf.float32,
+    'i': tf.float32,
+    'id': tf.string,
+    'identity_attack': tf.float32,
+    'insult': tf.float32,
+    'l': tf.float32,
+    'n': tf.float32,
+    'o': tf.float32,
+    'obscene': tf.float32,
+    'parent_id': tf.int32,
+    'parent_text': Text(shape=(), dtype=tf.string),
+    'severe_toxicity': tf.float32,
+    'sexual_explicit': tf.float32,
+    't': tf.float32,
+    'text': Text(shape=(), dtype=tf.string),
+    'threat': tf.float32,
+    'toxicity': tf.float32,
+    'u': tf.float32,
+    'x': tf.float32,
+    'y': tf.float32,
+})
+```
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('text', 'toxicity')`
+
+*   **Citation**:
+
+```
+@misc{pavlopoulos2020toxicity,
+    title={Toxicity Detection: Does Context Really Matter?},
+    author={John Pavlopoulos and Jeffrey Sorensen and Lucas Dixon and Nithum Thain and Ion Androutsopoulos},
+    year={2020}, eprint={2006.00998}, archivePrefix={arXiv}, primaryClass={cs.CL}
 }
 ```

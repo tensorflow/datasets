@@ -52,12 +52,17 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
       (12345, '00000-of-12345', '12344-of-12345'),
       (654321, '000000-of-654321', '654320-of-654321'),
   )
-  def test_sharded_filenames(self, num_shards, expected_first_suffix,
+  def test_sharded_filepaths(self, num_shards, expected_first_suffix,
                              expected_last_suffix):
-    prefix = '/tmp/foo'
-    names = naming.sharded_filenames(prefix, num_shards)
-    self.assertEqual(names[0], f'{prefix}-{expected_first_suffix}')
-    self.assertEqual(names[-1], f'{prefix}-{expected_last_suffix}')
+    template = naming.ShardedFileTemplate(
+        split='train',
+        dataset_name='ds',
+        data_dir='/path',
+        filetype_suffix='tfrecord')
+    names = template.sharded_filepaths(num_shards)
+    path_template = '/path/ds-train.tfrecord-%s'
+    self.assertEqual(names[0], path_template % (expected_first_suffix))
+    self.assertEqual(names[-1], path_template % (expected_last_suffix))
 
   @parameterized.parameters(
       ('foo', 'foo-train'),
@@ -69,50 +74,35 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
     self.assertEqual(expected, naming.filename_prefix_for_split(prefix, split))
 
   def test_filenames_for_dataset_split(self):
-    self.assertEqual([
-        'foo-train-00000-of-00002',
-        'foo-train-00001-of-00002',
-    ],
-                     naming.filenames_for_dataset_split(
-                         dataset_name='foo',
-                         split=splits.Split.TRAIN,
-                         num_shards=2))
+    actual = naming.filenames_for_dataset_split(
+        dataset_name='foo',
+        split=splits.Split.TRAIN,
+        num_shards=2,
+        filetype_suffix='bar')
+    self.assertEqual(
+        actual,
+        ['foo-train.bar-00000-of-00002', 'foo-train.bar-00001-of-00002'])
 
   def test_filepaths_for_dataset_split(self):
-    self.assertEqual([
-        '/tmp/bar/foo-train-00000-of-00002',
-        '/tmp/bar/foo-train-00001-of-00002',
-    ],
-                     naming.filepaths_for_dataset_split(
-                         dataset_name='foo',
-                         split=splits.Split.TRAIN,
-                         num_shards=2,
-                         data_dir='/tmp/bar/'))
-
-  def test_filepaths_for_dataset_split_with_suffix(self):
-    self.assertEqual([
+    actual = naming.filepaths_for_dataset_split(
+        dataset_name='foo',
+        split=splits.Split.TRAIN,
+        num_shards=2,
+        data_dir='/tmp/bar/',
+        filetype_suffix='bar')
+    self.assertEqual(actual, [
         '/tmp/bar/foo-train.bar-00000-of-00002',
-        '/tmp/bar/foo-train.bar-00001-of-00002',
-    ],
-                     naming.filepaths_for_dataset_split(
-                         dataset_name='foo',
-                         split=splits.Split.TRAIN,
-                         num_shards=2,
-                         data_dir='/tmp/bar/',
-                         filetype_suffix='bar'))
+        '/tmp/bar/foo-train.bar-00001-of-00002'
+    ])
 
   def test_filepattern_for_dataset_split(self):
-    self.assertEqual(
-        '/tmp/bar/foo-test*',
-        naming.filepattern_for_dataset_split(
-            dataset_name='foo', split=splits.Split.TEST, data_dir='/tmp/bar/'))
     self.assertEqual(
         '/tmp/bar/foo-test.bar*',
         naming.filepattern_for_dataset_split(
             dataset_name='foo',
             split=splits.Split.TEST,
-            filetype_suffix='bar',
-            data_dir='/tmp/bar/'))
+            data_dir='/tmp/bar/',
+            filetype_suffix='bar'))
 
 
 def test_dataset_name_and_kwargs_from_name_str():
@@ -294,3 +284,41 @@ def test_filename_info_invalid(filename):
   assert not naming.FilenameInfo.is_valid(filename)
   with pytest.raises(ValueError, match='Filename .* does not follow pattern'):
     naming.FilenameInfo.from_str(filename)
+
+
+def test_filename_info_with_path():
+  filename_info = naming.FilenameInfo.from_str(
+      '/path/mnist-train.tfrecord-00032-of-01024')
+  assert filename_info == naming.FilenameInfo(
+      dataset_name='mnist',
+      split='train',
+      filetype_suffix='tfrecord',
+      shard_index=32,
+      num_shards=1024)
+
+
+def test_filename_template():
+  template = naming.ShardedFileTemplate(
+      data_dir='/path',
+      dataset_name='mnist',
+      split='train',
+      filetype_suffix='tfrecord')
+  assert template.sharded_filepath(
+      shard_index=0,
+      num_shards=1) == '/path/mnist-train.tfrecord-00000-of-00001'
+  assert template.sharded_filepath(
+      shard_index=0,
+      num_shards=25) == '/path/mnist-train.tfrecord-00000-of-00025'
+  assert template.sharded_filepath(
+      shard_index=10,
+      num_shards=25) == '/path/mnist-train.tfrecord-00010-of-00025'
+
+
+def test_sharded_file_template():
+  template = naming.ShardedFileTemplate(
+      split='train',
+      dataset_name='ds',
+      data_dir='/path',
+      filetype_suffix='tfrecord')
+  assert template.sharded_filepath(
+      shard_index=0, num_shards=10) == '/path/ds-train.tfrecord-00000-of-00010'

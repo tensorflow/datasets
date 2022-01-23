@@ -368,6 +368,11 @@ toc:
     title: robosuite_panda_pick_place_can
   title: Rlds
 - section:
+  - path: /datasets/catalog/robomimic_ph
+    status: nightly
+    title: robomimic_ph
+  title: Robomimic
+- section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/cherry_blossoms

@@ -34,6 +34,7 @@ from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import logging as tfds_logging
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
@@ -1175,19 +1176,26 @@ class GeneratorBasedBuilder(FileReaderBuilder):
       path_suffix = file_adapters.ADAPTER_FOR_FORMAT[
           self.info.file_format].FILE_SUFFIX
 
-      split_info_futures = [
-          split_builder.submit_split_generation(  # pylint: disable=g-complex-comprehension
-              split_name=split_name,
-              generator=generator,
-              path=self.data_path / f"{self.name}-{split_name}.{path_suffix}",
-              disable_shuffling=self.info.disable_shuffling,
-          ) for split_name, generator in utils.tqdm(
-              split_generators.items(),
-              desc="Generating splits...",
-              unit=" splits",
-              leave=False,
-          )
-      ]
+      split_info_futures = []
+      for split_name, generator in utils.tqdm(
+          split_generators.items(),
+          desc="Generating splits...",
+          unit=" splits",
+          leave=False,
+      ):
+        filename_template = naming.ShardedFileTemplate(
+            split=split_name,
+            dataset_name=self.name,
+            data_dir=self.data_path,
+            filetype_suffix=path_suffix)
+        future = split_builder.submit_split_generation(
+            split_name=split_name,
+            generator=generator,
+            filename_template=filename_template,
+            disable_shuffling=self.info.disable_shuffling,
+        )
+        split_info_futures.append(future)
+
     # Finalize the splits (after apache beam completed, if it was used)
     split_infos = [future.result() for future in split_info_futures]
 

@@ -95,7 +95,7 @@ def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
   builder_cls = dummy_register.builder_cls(ds_name)
   assert builder_cls.name == 'dummy_dataset'
 
-  clshash = 'd56c12548420c4101f36637fea941e4cbfc55aa3a005e0ea6d29b6401ec1e8bd'
+  clshash = 'e58f413affd65c267bae7acbd27fd5ac673d3e3ae13c316ffc2a461d00c8ab56'
   assert installed_path / f'{clshash}/dummy_dataset.py' == builder_cls.code_path
   assert 'kaggle' in builder_cls.code_path.parts
   assert issubclass(builder_cls, dataset_builder.DatasetBuilder)

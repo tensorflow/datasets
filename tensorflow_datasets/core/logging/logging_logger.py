@@ -19,18 +19,27 @@ from typing import Dict, Optional, Union
 
 from absl import logging
 
-from tensorflow_datasets.core import tfrecords_reader
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.logging import base_logger
 from tensorflow_datasets.core.utils import read_config as tfds_read_config
 
 
 class LoggingLogger(base_logger.Logger):
+  """A logger that is based on the absl logging module."""
 
-  def as_dataset(self, *, dataset_name: str, config_name: Optional[str],
-                 version: str, data_path: str,
-                 split: Union[str, tfrecords_reader.ReadInstruction],
-                 batch_size: Optional[int], shuffle_files: bool,
-                 read_config: tfds_read_config.ReadConfig, as_supervised: bool,
-                 decoders: Dict[str, str]):
+  def as_dataset(
+      self,
+      *,
+      dataset_name: str,
+      config_name: Optional[str],
+      version: str,
+      data_path: str,
+      split: Union[str, splits_lib.ReadInstruction],
+      batch_size: Optional[int],
+      shuffle_files: bool,
+      read_config: tfds_read_config.ReadConfig,
+      as_supervised: bool,
+      decoders: Dict[str, str],
+  ):
     logging.info("Constructing tf.data.Dataset %s for split %s, from %s",
                  dataset_name, str(split), data_path)

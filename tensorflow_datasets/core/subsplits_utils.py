@@ -22,11 +22,10 @@ from typing import List
 
 from absl import logging
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core import tfrecords_reader
 
 
 @dataclasses.dataclass(frozen=True)
-class _EvenSplit(tfrecords_reader.AbstractSplit):
+class _EvenSplit(splits_lib.AbstractSplit):
   """Split matching a subsplit of the given split."""
   split: splits_lib.SplitArg
   index: int
@@ -37,7 +36,7 @@ class _EvenSplit(tfrecords_reader.AbstractSplit):
     # Extract the absolute instructions
     # One absolute instruction is created per `+`, so `train[:54%]+train[60%:]`
     # will create 2 absolute instructions.
-    read_instruction = tfrecords_reader.AbstractSplit.from_spec(self.split)
+    read_instruction = splits_lib.AbstractSplit.from_spec(self.split)
     absolute_instructions = read_instruction.to_absolute(split_infos)
 
     # Create the subsplit
@@ -52,7 +51,7 @@ class _EvenSplit(tfrecords_reader.AbstractSplit):
       self,
       abs_inst,
       split_infos: splits_lib.SplitDict,
-  ) -> tfrecords_reader.ReadInstruction:
+  ) -> splits_lib.ReadInstruction:
     start = abs_inst.from_ or 0
     if abs_inst.to is None:  # Note: `abs_inst.to == 0` is valid
       end = split_infos[abs_inst.splitname].num_examples
@@ -78,7 +77,7 @@ class _EvenSplit(tfrecords_reader.AbstractSplit):
         shard_start += min(self.index, num_unused_examples)
         shard_end += min(self.index + 1, num_unused_examples)
 
-    return tfrecords_reader.ReadInstruction(
+    return splits_lib.ReadInstruction(
         abs_inst.splitname,
         from_=shard_start,
         to=shard_end,

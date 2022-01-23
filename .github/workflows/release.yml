@@ -1,0 +1,47 @@
+name: Publish tensorflow-datasets to PyPI
+
+on:
+  # Event manually triggered (in the Github UI)
+  workflow_dispatch:
+    inputs:
+      git-ref:
+        description: Git ref (e.g. SHA or tag) (Optional)
+        default: ""
+        required: false
+
+jobs:
+  publish-job:
+    # Prevents action from running on forks.
+    if: github.repository == 'tensorflow/datasets'
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.inputs.git-ref }}
+
+    - name: Setup Python.
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Remove the `-nightly` suffix.
+      # For stable version, we overwrite `version.py` by `version_stable.py` to
+      # remove the `-nightly` suffix.
+      run: mv tensorflow_datasets/version_stable.py tensorflow_datasets/version.py
+
+    - name: Install deps.
+      run: pip install setuptools wheel twine
+
+    - name: Create the source distribution and build the wheels.
+      run: |
+        python setup.py sdist
+        python setup.py bdist_wheel
+
+    - name: Publish the package.
+      run: |
+        twine check dist/*
+        twine upload dist/*
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}

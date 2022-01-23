@@ -18,7 +18,6 @@
 import dataclasses
 import itertools
 import json
-import os
 
 from typing import Any, Iterable, List, Optional, Tuple
 
@@ -31,6 +30,7 @@ from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import hashing
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import shuffle
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import shard_utils
@@ -108,7 +108,7 @@ def _get_shard_specs(
     num_examples: int,
     total_size: int,
     bucket_lengths: List[int],
-    path: str,
+    filename_template: naming.ShardedFileTemplate,
 ) -> List[_ShardSpec]:
   """Returns list of _ShardSpec instances, corresponding to shards to write.
 
@@ -116,7 +116,7 @@ def _get_shard_specs(
     num_examples: int, number of examples in split.
     total_size: int (bytes), sum of example sizes.
     bucket_lengths: list of ints, number of examples in each bucket.
-    path: string, path to tfrecord. `-xxxxx-of-xxxxx` will be added.
+    filename_template: template to format sharded filenames.
   """
   num_shards = _get_number_shards(total_size, num_examples)
   shard_boundaries = _get_shard_boundaries(num_examples, num_shards)
@@ -127,7 +127,8 @@ def _get_shard_specs(
     # Read the bucket indexes
     file_instructions = shard_utils.get_file_instructions(
         from_, to, bucket_indexes, bucket_lengths)
-    shard_path = "%s-%05d-of-%05d" % (path, shard_index, num_shards)
+    shard_path = filename_template.sharded_filepath(
+        shard_index=shard_index, num_shards=num_shards)
     index_path = _get_index_path(shard_path)
     shard_specs.append(
         _ShardSpec(
@@ -236,7 +237,7 @@ class Writer(object):
   def __init__(
       self,
       example_specs,
-      path,
+      filename_template: naming.ShardedFileTemplate,
       hash_salt,
       disable_shuffling: bool,
       file_format=file_adapters.DEFAULT_FILE_FORMAT,
@@ -245,7 +246,7 @@ class Writer(object):
 
     Args:
       example_specs: spec to build ExampleSerializer.
-      path (str): path where records should be written in.
+      filename_template: template to format sharded filenames.
       hash_salt (str or bytes): salt to hash keys.
       disable_shuffling (bool): Specifies whether to shuffle the records.
       file_format (FileFormat): format of the record files in which the dataset
@@ -254,9 +255,11 @@ class Writer(object):
     self._example_specs = example_specs
     self._serializer = example_serializer.ExampleSerializer(example_specs)
     self._shuffler = shuffle.Shuffler(
-        os.path.dirname(path), hash_salt, disable_shuffling)
+        dirpath=filename_template.data_dir,
+        hash_salt=hash_salt,
+        disable_shuffling=disable_shuffling)
     self._num_examples = 0
-    self._path = path
+    self._filename_template = filename_template
     self._file_format = file_format
 
   def write(self, key, example):
@@ -276,9 +279,10 @@ class Writer(object):
 
   def finalize(self):
     """Effectively writes examples to the tfrecord files."""
-    filename = os.path.basename(self._path)
+    filename = self._filename_template.sharded_filepaths_pattern()
     shard_specs = _get_shard_specs(self._num_examples, self._shuffler.size,
-                                   self._shuffler.bucket_lengths, self._path)
+                                   self._shuffler.bucket_lengths,
+                                   self._filename_template)
     # Here we just loop over the examples, and don't use the instructions, just
     # the final number of examples in every shard. Instructions could be used to
     # parallelize, but one would need to be careful not to sort buckets twice.
@@ -344,22 +348,23 @@ class BeamWriter(object):
   """
   _OUTPUT_TAG_BUCKETS_LEN_SIZE = "tag_buckets_len_size"
 
-  def __init__(self,
-               example_specs,
-               path,
-               hash_salt,
-               disable_shuffling,
-               file_format=file_adapters.DEFAULT_FILE_FORMAT):
+  def __init__(
+      self,
+      example_specs,
+      filename_template: naming.ShardedFileTemplate,
+      hash_salt,
+      disable_shuffling: bool,
+      file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
+  ):
     """Init BeamWriter.
+
+    Note that file "{filepath_prefix}.shard_lengths.json" is also created. It
+    contains a list with the number of examples in each final shard. Eg:
+    "[10,11,10,11]".
 
     Args:
       example_specs:
-      path: str, path where to write tfrecord file. Eg:
-        "/foo/mnist-train.tfrecord".
-        The suffix (eg: `.00000-of-00004` will be added by the BeamWriter. Note
-          that file "{path}.shard_lengths.json" is also created. It contains
-          a list with the number of examples in each final shard. Eg:
-            "[10,11,10,11]".
+      filename_template: template to format sharded filenames.
       hash_salt: string, the salt to use for hashing of keys.
       disable_shuffling: bool, specifies whether to shuffle the records.
       file_format: file_adapters.FileFormat, format of the record files in which
@@ -367,12 +372,12 @@ class BeamWriter(object):
     """
     self._original_state = dict(
         example_specs=example_specs,
-        path=path,
+        filename_template=filename_template,
         hash_salt=hash_salt,
         disable_shuffling=disable_shuffling,
         file_format=file_format)
-    self._path = os.fspath(path)
-    self._split_info_path = "%s.split_info.json" % path
+    self._filename_template = filename_template
+    self._split_info_path = "%s.split_info.json" % filename_template.filepath_prefix
     self._serializer = example_serializer.ExampleSerializer(example_specs)
     self._example_specs = example_specs
     self._hasher = hashing.Hasher(hash_salt)
@@ -442,8 +447,11 @@ class BeamWriter(object):
     bucket_lengths = [
         bucket2length.get(i, 0) for i in range(max(bucket2length.keys()) + 1)
     ]
-    shard_specs = _get_shard_specs(total_num_examples, total_size,
-                                   bucket_lengths, self._path)
+    shard_specs = _get_shard_specs(
+        num_examples=total_num_examples,
+        total_size=total_size,
+        bucket_lengths=bucket_lengths,
+        filename_template=self._filename_template)
     with tf.io.gfile.GFile(self._split_info_path, "w") as json_f:
       json_f.write(
           json.dumps({
