@@ -145,7 +145,7 @@ def _as_path_list(path_or_paths: ListOrElem[str]) -> List[utils.ReadWritePath]:
 
 
 def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:
-  """Same as `path.iterdir()`, but don't fail if path does not exists."""
+  """Same as `path.iterdir()`, but don't fail if path does not exist."""
   # Use try/except rather than `.exists()` to avoid an extra RPC call
   # per namespace
   try:

@@ -21,6 +21,7 @@ from typing import List, Optional
 
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import generic_path
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config
 from tensorflow_datasets.core.utils import type_utils
