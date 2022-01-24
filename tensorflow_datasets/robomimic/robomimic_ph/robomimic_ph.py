@@ -117,9 +117,10 @@ def _image_feature(size: int) -> tfds.features.Image:
 class RobomimicPh(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for robomimic_ph dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.0.1': 'Citation updated.',
   }
   BUILDER_CONFIGS = _builder_configs()
 
