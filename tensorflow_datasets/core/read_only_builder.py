@@ -267,7 +267,7 @@ def _find_builder_dir_single_dir(
 ) -> Optional[str]:
   """Same as `find_builder_dir` but requires explicit dir."""
   # Construct the `ds_name/config/` path
-  builder_dir = os.path.join(data_dir, builder_name)
+  builder_dir = utils.as_path(data_dir) / builder_name
   if not config_name:
     # If the BuilderConfig is not specified:
     # * Either the dataset doesn't have a config
@@ -280,7 +280,7 @@ def _find_builder_dir_single_dir(
 
   # If has config (explicitly given or default config), append it to the path
   if config_name:
-    builder_dir = os.path.join(builder_dir, config_name)
+    builder_dir = builder_dir / config_name
 
   # Extract the version
   version_str = _get_version_str(builder_dir, requested_version=version_str)
@@ -288,11 +288,12 @@ def _find_builder_dir_single_dir(
   if not version_str:  # Version not given or found
     return None
 
-  builder_dir = os.path.join(builder_dir, version_str)
+  builder_dir = builder_dir / version_str
 
   try:
     # Backward compatibility, in order to be a valid ReadOnlyBuilder, the folder
     # has to contain the feature configuration.
+    builder_dir = os.fspath(builder_dir)
     if tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):
       return str(builder_dir)
   except tf.errors.PermissionDeniedError:
@@ -300,7 +301,10 @@ def _find_builder_dir_single_dir(
   return None
 
 
-def _get_default_config_name(builder_dir: str, name: str) -> Optional[str]:
+def _get_default_config_name(
+    builder_dir: utils.ReadOnlyPath,
+    name: str,
+) -> Optional[str]:
   """Returns the default config of the given dataset, None if not found."""
   # Search for the DatasetBuilder generation code
   try:
@@ -317,11 +321,11 @@ def _get_default_config_name(builder_dir: str, name: str) -> Optional[str]:
       return cls.BUILDER_CONFIGS[0].name
 
   # Otherwise, try to load default config from common metadata
-  return dataset_builder.load_default_config_name(utils.as_path(builder_dir))
+  return dataset_builder.load_default_config_name(builder_dir)
 
 
 def _get_version_str(
-    builder_dir: str,
+    builder_dir: utils.ReadOnlyPath,
     *,
     requested_version: Optional[str] = None,
 ) -> Optional[str]:
@@ -334,7 +338,7 @@ def _get_version_str(
   Returns:
     version_str: The version directory name found in `builder_dir`.
   """
-  all_versions = version_lib.list_all_versions(builder_dir)
+  all_versions = version_lib.list_all_versions(os.fspath(builder_dir))
   # Version not given, using the last one.
   if not requested_version and all_versions:
     return str(all_versions[-1])

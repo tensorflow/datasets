@@ -1248,7 +1248,7 @@ def _save_default_config_name(
 
 def load_default_config_name(common_dir: ReadOnlyPath,) -> Optional[str]:
   """Load `builder_cls` metadata (common to all builder configs)."""
-  config_path = common_dir / ".config/metadata.json"
+  config_path = utils.as_path(common_dir) / ".config/metadata.json"
   if not config_path.exists():
     return None
   data = json.loads(config_path.read_text())
