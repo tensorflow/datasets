@@ -12,11 +12,6 @@
 # `imagenet2012_multilabel`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -113,9 +108,7 @@ final_avg /= num_classes
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`2.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fixed ILSVRC2012_img_val.tar file.
+    *   **`2.0.0`** (default): Fixed ILSVRC2012_img_val.tar file.
 
 *   **Download size**: `236.72 MiB`
 

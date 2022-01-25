@@ -12,11 +12,6 @@
 # `paws_wiki`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Existing paraphrase identification datasets lack sentence pairs that have high
@@ -86,7 +81,7 @@ FeaturesDict({
 ```
 
 
-## paws_wiki/labeled_final_tokenized (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## paws_wiki/labeled_final_tokenized (default config)
 
 *   **Config description**: Subset: labeled_final tokenized: True
 
@@ -138,7 +133,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## paws_wiki/labeled_final_raw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## paws_wiki/labeled_final_raw
 
 *   **Config description**: Subset: labeled_final tokenized: False
 
@@ -190,7 +185,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## paws_wiki/labeled_swap_tokenized <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## paws_wiki/labeled_swap_tokenized
 
 *   **Config description**: Subset: labeled_swap tokenized: True
 
@@ -240,7 +235,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## paws_wiki/labeled_swap_raw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## paws_wiki/labeled_swap_raw
 
 *   **Config description**: Subset: labeled_swap tokenized: False
 
@@ -290,7 +285,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## paws_wiki/unlabeled_final_tokenized <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## paws_wiki/unlabeled_final_tokenized
 
 *   **Config description**: Subset: unlabeled_final tokenized: True
 

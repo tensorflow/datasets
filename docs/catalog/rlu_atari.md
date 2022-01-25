@@ -12,11 +12,6 @@
 # `rlu_atari`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL
@@ -53,9 +48,7 @@ Besides the reward of each step, this dataset includes the clipped reward
 
     *   `1.0.0`: Initial release.
     *   `1.1.0`: Added is_last.
-    *   **`1.2.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added checkpoint id
+    *   **`1.2.0`** (default): Added checkpoint id
 
 *   **Download size**: `Unknown size`
 

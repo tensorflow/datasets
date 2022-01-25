@@ -12,11 +12,6 @@
 # `titanic`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Dataset describing the survival status of individual passengers on the Titanic.
@@ -36,9 +31,8 @@ missing values are replaced with -1, string missing values are replaced with
     *   `3.0.0`: Use a standard flat dictionary of features for the dataset. Use
         `as_supervised=True` to split the dataset into a `(features_dict,
         survived)` tuple.
-    *   **`4.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fix inverted labels which were inverted in the 3.0.0.
+    *   **`4.0.0`** (default): Fix inverted labels which were inverted in the
+        3.0.0.
 
 *   **Download size**: `114.98 KiB`
 
@@ -77,9 +71,9 @@ FeaturesDict({
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `({'sibsp': 'sibsp', 'fare': 'fare', 'sex': 'sex', 'cabin': 'cabin', 'body':
-    'body', 'ticket': 'ticket', 'name': 'name', 'age': 'age', 'embarked':
-    'embarked', 'pclass': 'pclass', 'boat': 'boat', 'parch': 'parch',
+    `({'ticket': 'ticket', 'age': 'age', 'sibsp': 'sibsp', 'cabin': 'cabin',
+    'body': 'body', 'name': 'name', 'fare': 'fare', 'sex': 'sex', 'parch':
+    'parch', 'pclass': 'pclass', 'boat': 'boat', 'embarked': 'embarked',
     'home.dest': 'home.dest'}, 'survived')`
 
 *   **Figure**

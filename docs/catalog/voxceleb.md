@@ -12,11 +12,6 @@
 # `voxceleb`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 Warning: Manual download required. See instructions below.
 
 *   **Description**:
@@ -33,9 +28,7 @@ audio part of the voxceleb1.1 dataset.
 
 *   **Versions**:
 
-    *   **`1.2.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Add youtube_id field
+    *   **`1.2.1`** (default): Add youtube_id field
 
 *   **Download size**: `4.68 MiB`
 

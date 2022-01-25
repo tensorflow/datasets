@@ -12,10 +12,6 @@
 # `math_qa`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 A large-scale dataset of math word problems and an interpretable neural math

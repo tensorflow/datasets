@@ -53,7 +53,6 @@ toc:
   - path: /datasets/catalog/d4rl_adroit_relocate
     title: d4rl_adroit_relocate
   - path: /datasets/catalog/d4rl_antmaze
-    status: nightly
     title: d4rl_antmaze
   - path: /datasets/catalog/d4rl_mujoco_ant
     title: d4rl_mujoco_ant
@@ -66,7 +65,6 @@ toc:
   title: D4rl
 - section:
   - path: /datasets/catalog/cardiotox
-    status: nightly
     title: cardiotox
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
@@ -111,7 +109,6 @@ toc:
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
   - path: /datasets/catalog/pass
-    status: nightly
     title: pass
   - path: /datasets/catalog/s3o4d
     title: s3o4d
@@ -128,7 +125,6 @@ toc:
   - path: /datasets/catalog/beans
     title: beans
   - path: /datasets/catalog/bee_dataset
-    status: nightly
     title: bee_dataset
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
@@ -175,7 +171,6 @@ toc:
   - path: /datasets/catalog/dmlab
     title: dmlab
   - path: /datasets/catalog/domainnet
-    status: nightly
     title: domainnet
   - path: /datasets/catalog/dtd
     title: dtd
@@ -194,7 +189,6 @@ toc:
   - path: /datasets/catalog/i_naturalist2017
     title: i_naturalist2017
   - path: /datasets/catalog/i_naturalist2018
-    status: nightly
     title: i_naturalist2018
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
@@ -209,14 +203,12 @@ toc:
   - path: /datasets/catalog/imagenet_a
     title: imagenet_a
   - path: /datasets/catalog/imagenet_lt
-    status: nightly
     title: imagenet_lt (manual)
   - path: /datasets/catalog/imagenet_r
     title: imagenet_r
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
   - path: /datasets/catalog/imagenet_sketch
-    status: nightly
     title: imagenet_sketch
   - path: /datasets/catalog/imagenet_v2
     title: imagenet_v2
@@ -333,20 +325,16 @@ toc:
   title: Question answering
 - section:
   - path: /datasets/catalog/istella
-    status: nightly
     title: istella
   - path: /datasets/catalog/mslr_web
-    status: nightly
     title: mslr_web
   title: Ranking
 - section:
   - path: /datasets/catalog/rlu_atari
     title: rlu_atari
   - path: /datasets/catalog/rlu_atari_checkpoints
-    status: nightly
     title: rlu_atari_checkpoints
   - path: /datasets/catalog/rlu_atari_checkpoints_ordered
-    status: nightly
     title: rlu_atari_checkpoints_ordered
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
     title: rlu_dmlab_explore_object_rewards_few
@@ -359,17 +347,14 @@ toc:
   - path: /datasets/catalog/rlu_dmlab_seekavoid_arena01
     title: rlu_dmlab_seekavoid_arena01
   - path: /datasets/catalog/rlu_rwrl
-    status: nightly
     title: rlu_rwrl
   title: Rl unplugged
 - section:
   - path: /datasets/catalog/robosuite_panda_pick_place_can
-    status: nightly
     title: robosuite_panda_pick_place_can
   title: Rlds
 - section:
   - path: /datasets/catalog/robomimic_ph
-    status: nightly
     title: robomimic_ph
   title: Robomimic
 - section:
@@ -380,12 +365,10 @@ toc:
   - path: /datasets/catalog/covid19
     title: covid19
   - path: /datasets/catalog/cs_restaurants
-    status: nightly
     title: cs_restaurants
   - path: /datasets/catalog/dart
     title: dart
   - path: /datasets/catalog/diamonds
-    status: nightly
     title: diamonds
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
@@ -410,7 +393,6 @@ toc:
   - path: /datasets/catalog/movielens
     title: movielens
   - path: /datasets/catalog/penguins
-    status: nightly
     title: penguins
   - path: /datasets/catalog/protein_net
     title: protein_net
@@ -439,7 +421,6 @@ toc:
   - path: /datasets/catalog/billsum
     title: billsum
   - path: /datasets/catalog/booksum
-    status: nightly
     title: booksum (manual)
   - path: /datasets/catalog/cnn_dailymail
     title: cnn_dailymail
@@ -448,7 +429,6 @@ toc:
   - path: /datasets/catalog/gigaword
     title: gigaword
   - path: /datasets/catalog/gov_report
-    status: nightly
     title: gov_report
   - path: /datasets/catalog/multi_news
     title: multi_news
@@ -479,7 +459,6 @@ toc:
   - path: /datasets/catalog/anli
     title: anli
   - path: /datasets/catalog/assin2
-    status: nightly
     title: assin2
   - path: /datasets/catalog/blimp
     title: blimp
@@ -518,7 +497,6 @@ toc:
   - path: /datasets/catalog/gpt3
     title: gpt3
   - path: /datasets/catalog/gsm8k
-    status: nightly
     title: gsm8k
   - path: /datasets/catalog/hellaswag
     title: hellaswag
@@ -535,7 +513,6 @@ toc:
   - path: /datasets/catalog/math_dataset
     title: math_dataset
   - path: /datasets/catalog/math_qa
-    status: nightly
     title: math_qa
   - path: /datasets/catalog/movie_rationales
     title: movie_rationales
@@ -558,7 +535,6 @@ toc:
   - path: /datasets/catalog/quac
     title: quac
   - path: /datasets/catalog/quality
-    status: nightly
     title: quality
   - path: /datasets/catalog/race
     title: race
@@ -573,14 +549,12 @@ toc:
   - path: /datasets/catalog/scicite
     title: scicite
   - path: /datasets/catalog/scrolls
-    status: nightly
     title: scrolls
   - path: /datasets/catalog/sentiment140
     title: sentiment140
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/squad_question_generation
-    status: nightly
     title: squad_question_generation
   - path: /datasets/catalog/star_cfq
     title: star_cfq
@@ -617,15 +591,12 @@ toc:
   title: Text
 - section:
   - path: /datasets/catalog/asset
-    status: nightly
     title: asset
   - path: /datasets/catalog/wiki_auto
-    status: nightly
     title: wiki_auto
   title: Text simplification
 - section:
   - path: /datasets/catalog/smartwatch_gestures
-    status: nightly
     title: smartwatch_gestures
   title: Time series
 - section:
@@ -678,14 +649,11 @@ toc:
   - path: /datasets/catalog/gref
     title: gref (manual)
   - path: /datasets/catalog/grounded_scan
-    status: nightly
     title: grounded_scan
   - path: /datasets/catalog/ref_coco
     title: ref_coco (manual)
   - path: /datasets/catalog/wit
-    status: nightly
     title: wit
   - path: /datasets/catalog/wit_kaggle
-    status: nightly
     title: wit_kaggle (manual)
   title: Vision language

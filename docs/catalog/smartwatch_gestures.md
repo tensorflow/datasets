@@ -12,10 +12,6 @@
 # `smartwatch_gestures`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 The **SmartWatch Gestures Dataset** has been collected to evaluate several

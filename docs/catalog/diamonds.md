@@ -12,10 +12,6 @@
 # `diamonds`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 This classic dataset contains physical attributes and prices of 53940 diamonds.

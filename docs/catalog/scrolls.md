@@ -12,10 +12,6 @@
 # `scrolls`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Source code**:
     [`tfds.text.scrolls.Scrolls`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/scrolls/scrolls.py)
 

@@ -12,11 +12,6 @@
 # `hellaswag`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context
@@ -31,13 +26,10 @@ and some endings which complete the context.
 *   **Versions**:
 
     *   `0.0.1`: No release notes.
-    *   `1.0.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Adding separate splits for in-domain and out-of-domain validation/test
-        sets.
-    *   **`1.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Another split dimension for source (wikihow vs activitynet)
+    *   `1.0.0`: Adding separate splits for in-domain and out-of-domain
+        validation/test sets.
+    *   **`1.1.0`** (default): Another split dimension for source (wikihow vs
+        activitynet)
 
 *   **Download size**: `68.18 MiB`
 

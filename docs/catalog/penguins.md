@@ -12,10 +12,6 @@
 # `penguins`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 Measurements for three penguin species observed in the Palmer Archipelago,
@@ -158,9 +154,10 @@ FeaturesDict({
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `({'culmen_depth_mm': 'culmen_depth_mm', 'body_mass_g': 'body_mass_g',
-    'sex': 'sex', 'flipper_length_mm': 'flipper_length_mm', 'island': 'island',
-    'species': 'species', 'culmen_length_mm': 'culmen_length_mm'}, 'species')`
+    `({'sex': 'sex', 'body_mass_g': 'body_mass_g', 'flipper_length_mm':
+    'flipper_length_mm', 'culmen_depth_mm': 'culmen_depth_mm', 'species':
+    'species', 'culmen_length_mm': 'culmen_length_mm', 'island': 'island'},
+    'species')`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

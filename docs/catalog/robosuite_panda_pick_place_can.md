@@ -12,10 +12,6 @@
 # `robosuite_panda_pick_place_can`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 These datasets have been created with the PickPlaceCan environment of the

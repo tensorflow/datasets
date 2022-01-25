@@ -12,11 +12,6 @@
 # `wikipedia_toxicity_subtypes`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The comments in this dataset come from an archive of Wikipedia talk page
@@ -76,7 +71,7 @@ text.
 ```
 
 
-## wikipedia_toxicity_subtypes/EnglishSubtypes (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia_toxicity_subtypes/EnglishSubtypes (default config)
 
 *   **Config description**: The comments in the WikipediaToxicitySubtypes config
     are from an archive of English Wikipedia talk page comments which have been
@@ -156,7 +151,7 @@ $(document).ready(() => {
 
 <!-- mdformat on -->
 
-## wikipedia_toxicity_subtypes/Multilingual <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## wikipedia_toxicity_subtypes/Multilingual
 
 *   **Config description**: The comments in the WikipediaToxicityMultilingual
     config here are from an archive of non-English Wikipedia talk page comments

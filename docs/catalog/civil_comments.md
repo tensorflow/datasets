@@ -12,11 +12,6 @@
 # `civil_comments`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 This version of the CivilComments Dataset provides access to the primary seven
@@ -65,9 +60,8 @@ when making the labels.
     *   `1.1.1`: Added CivilCommentsCovert config with correct checksum.
     *   `1.1.2`: Added separate citation for CivilCommentsCovert dataset.
     *   `1.1.3`: Corrected id types from float to string.
-    *   **`1.2.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Add toxic spans, context, and parent comment text features.
+    *   **`1.2.0`** (default): Add toxic spans, context, and parent comment text
+        features.
 
 *   **Download size**: `Unknown size`
 
@@ -309,7 +303,7 @@ FeaturesDict({
 }
 ```
 
-## civil_comments/CivilCommentsToxicSpans <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## civil_comments/CivilCommentsToxicSpans
 
 *   **Config description**: The CivilComments Toxic Spans are a subset of
     CivilComments that is labeled at the span level - the indices of all
@@ -350,7 +344,7 @@ FeaturesDict({
 }
 ```
 
-## civil_comments/CivilCommentsInContext <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## civil_comments/CivilCommentsInContext
 
 *   **Config description**: The CivilComments Toxic Spans are a subset of
     CivilComments that was labeled by making available to the labelers the
