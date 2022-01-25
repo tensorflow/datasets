@@ -45,7 +45,7 @@ def decode_image(image_bytes: bytes) -> np.ndarray:
   return runner.run(tf.image.decode_image, image_bytes)
 
 
-def png_to_jpeg(image_bytes: bytes, quality: int = 100) -> np.ndarray:
+def png_to_jpeg(image_bytes: bytes, quality: int = 100) -> bytes:
   """Converts PNG image (bytes or str) to JPEG (bytes)."""
   runner = _get_runner()
   decode_fn = lambda img: tf.image.decode_png(img, channels=3)
@@ -54,7 +54,7 @@ def png_to_jpeg(image_bytes: bytes, quality: int = 100) -> np.ndarray:
   return runner.run(fn, image)
 
 
-def jpeg_cmyk_to_rgb(image_bytes: bytes, quality: int = 100) -> np.ndarray:
+def jpeg_cmyk_to_rgb(image_bytes: bytes, quality: int = 100) -> bytes:
   """Converts JPEG CMYK image (bytes) to RGB JPEG (bytes)."""
   runner = _get_runner()
   image = runner.run(tf.image.decode_jpeg, image_bytes)

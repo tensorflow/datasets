@@ -52,12 +52,14 @@ class ImageUtilsTest(testing.TestCase):
   def test_png_4chan_to_jpeg(self):
     image = self._get_image('6pixels_4chan.png')
     jpeg = image_utils.png_to_jpeg(image)
+    self.assertIsInstance(jpeg, bytes)
     image_np_jpeg = image_utils.decode_image(jpeg)
     np.testing.assert_array_equal(image_np_jpeg, SIX_PIXELS_JPEG)
 
   def test_jpeg_cmyk_to_rgb(self):
     image = self._get_image('6pixels_cmyk.jpeg')
     new_image = image_utils.jpeg_cmyk_to_rgb(image, quality=100)
+    self.assertIsInstance(new_image, bytes)
     self.assertNotEqual(image, new_image)
     # Converting between color systems is not bijective, so high rtol.
     original_np_image = image_utils.decode_image(image)
