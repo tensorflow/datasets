@@ -33,6 +33,8 @@ from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.image_classification import mnist
 
+from google.protobuf import text_format
+
 _TFDS_DIR = utils.tfds_path()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
                          "mnist", "3.0.1")
@@ -374,6 +376,94 @@ def test_dataset_info_from_proto():
   assert result.splits["train"].shard_lengths == train.shard_lengths
   assert set(result.features.keys()) == {"text"}
   assert result.version == builder.version
+
+
+def test_supervised_keys_from_proto():
+  proto = text_format.Parse(
+      text="""
+  tuple: {
+      items: [
+        {
+          dict: {
+            dict: {
+              key: "f2"
+              value: { feature_key: "f2" }
+            },
+            dict: {
+              key: "f1"
+              value: { feature_key: "f1" }
+            },
+          }
+        },
+        {
+          feature_key: "target"
+        }
+      ]
+    }
+  """,
+      message=dataset_info_pb2.SupervisedKeys())
+  supervised_keys = dataset_info._supervised_keys_from_proto(proto=proto)
+  assert str(supervised_keys) == "({'f1': 'f1', 'f2': 'f2'}, 'target')"
+
+
+def test_supervised_keys_from_proto_different_ordering():
+  proto1 = text_format.Parse(
+      text="""
+  tuple: {
+      items: [
+        {
+          dict: {
+            dict: {
+              key: "f1"
+              value: { feature_key: "f1" }
+            },
+            dict: {
+              key: "f2"
+              value: { feature_key: "f2" }
+            },
+            dict: {
+              key: "f3"
+              value: { feature_key: "f3" }
+            },
+          }
+        },
+        {
+          feature_key: "target"
+        }
+      ]
+    }
+  """,
+      message=dataset_info_pb2.SupervisedKeys())
+  proto2 = text_format.Parse(
+      text="""
+  tuple: {
+      items: [
+        {
+          dict: {
+            dict: {
+              key: "f3"
+              value: { feature_key: "f3" }
+            },
+            dict: {
+              key: "f2"
+              value: { feature_key: "f2" }
+            },
+            dict: {
+              key: "f1"
+              value: { feature_key: "f1" }
+            },
+          }
+        },
+        {
+          feature_key: "target"
+        }
+      ]
+    }
+  """,
+      message=dataset_info_pb2.SupervisedKeys())
+  supervised_keys1 = dataset_info._supervised_keys_from_proto(proto=proto1)
+  supervised_keys2 = dataset_info._supervised_keys_from_proto(proto=proto2)
+  assert str(supervised_keys1) == str(supervised_keys2)
 
 
 # pylint: disable=g-inconsistent-quotes
