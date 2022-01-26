@@ -620,7 +620,8 @@ def _nest_from_proto(proto: dataset_info_pb2.SupervisedKeys.Nest) -> Nest:
     return tuple(_nest_from_proto(item) for item in proto.tuple.items)
   elif proto.HasField("dict"):
     return {
-        key: _nest_from_proto(value) for key, value in proto.dict.dict.items()
+        key: _nest_from_proto(proto.dict.dict[key])
+        for key in sorted(proto.dict.dict.keys())
     }
   elif proto.HasField("feature_key"):
     return proto.feature_key
