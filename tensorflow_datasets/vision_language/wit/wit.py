@@ -17,12 +17,12 @@
 
 import csv
 import os
-import sys
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-csv.field_size_limit(sys.maxsize)
+# Limit to 100 MB. Value must be smaller than the C long maximum value.
+csv.field_size_limit(100 * 1024**3)
 
 _DESCRIPTION = """
 Wikipedia-based Image Text (WIT) Dataset is a large multimodal multilingual
