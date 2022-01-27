@@ -82,7 +82,7 @@ _SPANS_CITATION = """
 
 # Citation for CivilComments Context.
 _CONTEXT_CITATION = """
-@misc{pavlopoulos2020toxicity, 
+@misc{pavlopoulos2020toxicity,
     title={Toxicity Detection: Does Context Really Matter?},
     author={John Pavlopoulos and Jeffrey Sorensen and Lucas Dixon and Nithum Thain and Ion Androutsopoulos},
     year={2020}, eprint={2006.00998}, archivePrefix={arXiv}, primaryClass={cs.CL}
@@ -192,7 +192,7 @@ def _labels(mode):
   if mode == 'covert':
     labels += COVERT_LABELS
   if mode == 'context':
-    labels += 'contextual_toxicity'
+    labels += ['contextual_toxicity']
   return labels
 
 
@@ -271,7 +271,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
           mode='context'),
   ]
 
-  VERSION = tfds.core.Version('1.2.0')
+  VERSION = tfds.core.Version('1.2.1')
   RELEASE_NOTES = {
       '1.2.0': 'Add toxic spans, context, and parent comment text features.',
       '1.1.3': 'Corrected id types from float to string.',
