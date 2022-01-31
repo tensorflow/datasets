@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Replace all images in the fake directory by more compressed version.
+r"""Replace all images in the fake directory with their compressed versions.
 
-This allow to reduce size of the images in the `fake_data/` directory.
+This allows to reduce size of the images in the `fake_data/` directory.
 
 Instructions:
 

@@ -150,7 +150,7 @@ def _load_all_configs(
       return None
     if not builder_conf.builder_config:
       # Unexpected sub-config with wrong metadata.
-      # This can happen if the user manually mess-up with the directories.
+      # This can happen if the user manually messed up with the directories.
       return None
     return builder_conf
 
@@ -255,7 +255,7 @@ def iter_documentation_builders(
     *,
     doc_util_paths: Optional[doc_utils.DocUtilPaths] = None,
 ) -> Iterator[BuilderDocumentation]:
-  """Create dataset documentation string for given datasets.
+  """Creates dataset documentation string for given datasets.
 
   Args:
     datasets: list of datasets for which to create documentation. If None, then
