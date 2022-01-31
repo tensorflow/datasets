@@ -81,8 +81,8 @@ Similarly, a `feature.deserialize_example` exists to decode the proto
 
 #### If you don't control the generation pipeline
 
-If you're not sure what your `tfds.features` translates into `tf.train.Example`,
-you can experiment in colab:
+If you want to see how `tfds.features` are represented in a `tf.train.Example`,
+you can examine this in colab:
 
 *   To translate `tfds.features` into the human readable structure of the
     `tf.train.Example`, you can call `features.get_serialized_info()`.
@@ -92,7 +92,7 @@ you can experiment in colab:
     ```python
     example_specs = features.get_serialized_info()
     parser = tfds.core.example_parser.ExampleParser(example_specs)
-    nested_feature_specs = parser._build_feature_specs()
+    nested_feature_specs = parser._nested_feature_specs
     feature_specs = tfds.core.utils.flatten_nest_dict(nested_feature_specs)
     ```
 
@@ -103,7 +103,7 @@ Note: If you're using custom feature connector, make sure to implement
 ### Get statistics on splits
 
 
-TFDS requires to know the exact number of example within each shard. This is
+TFDS requires to know the exact number of examples within each shard. This is
 required for features like `len(ds)`, or the
 [subplit API](https://www.tensorflow.org/datasets/splits):
 `split='train[75%:]'`.
