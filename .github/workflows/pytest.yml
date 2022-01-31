@@ -24,13 +24,21 @@ jobs:
       with:
         python-version: 3.7
 
-    - run: pip --version
     - run: pip install ${{ matrix.tf_version }}
 
-    # Install the protocol buffer compiler for gcld3 tests.
-    - run: sudo apt install -y protobuf-compiler
-    # Install ffmpeg for Audio FeatureConnector tests.
-    - run: sudo apt-get install ffmpeg
+    # Install the protocol buffer compiler for gcld3 tests and ffmpeg for Audio FeatureConnector tests.
+    - name: Install ubuntu dependencies
+      run: |
+        sudo apt install -y protobuf-compiler
+        sudo apt-get install ffmpeg
+      if: ${{ matrix.os }} == ubuntu-latest
+
+    - name: Install windows dependencies
+      run: |
+        choco install protoc
+        choco install ffmpeg
+      if: ${{ matrix.os }} == windows-latest
+
 
     - run: pip install -e .[tests-all]
     # Install tensorflow_io for lsun tests.
