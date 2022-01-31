@@ -12,7 +12,7 @@ jobs:
         tf_version: ["tensorflow", "tf-nightly"]
         os: [ubuntu-latest, windows-latest]
       # Do not cancel in-progress jobs if any other matrix jobs fails.
-      # fail-fast: false
+      fail-fast: false
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
@@ -28,7 +28,7 @@ jobs:
 
     - run: pip install ${{ matrix.tf_version }}
 
-    # Install the protocol buffer compiler for gcld3 tests and ffmpeg for Audio FeatureConnector tests.
+    # Protocol buffer compiler for gcld3 and ffmpeg for Audio FeatureConnector
     - name: Install ubuntu dependencies
       if: matrix.os == 'ubuntu-latest'
       run: |
