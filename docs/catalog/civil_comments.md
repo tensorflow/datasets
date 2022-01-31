@@ -12,11 +12,6 @@
 # `civil_comments`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 This version of the CivilComments Dataset provides access to the primary seven
@@ -66,9 +61,7 @@ when making the labels.
     *   `1.1.2`: Added separate citation for CivilCommentsCovert dataset.
     *   `1.1.3`: Corrected id types from float to string.
     *   `1.2.0`: Add toxic spans, context, and parent comment text features.
-    *   **`1.2.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`1.2.1`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 

@@ -30,6 +30,7 @@ More information can be found at: https://github.com/LauraRuis/groundedSCAN
 *   **Versions**:
 
     *   **`1.0.0`** (default): Initial release.
+    *   `1.1.0`: Changed `vector` feature to Text().
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
