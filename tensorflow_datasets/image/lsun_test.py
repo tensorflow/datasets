@@ -15,19 +15,20 @@
 
 """Tests for tensorflow_datasets.image.lsun."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import lsun
+# from tensorflow_datasets.image import lsun
 
 
-class LsunTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = lsun.Lsun
-  BUILDER_CONFIG_NAMES_TO_TEST = ["classroom"]
+# TODO(tfds) re-enable this test once the Github actions have been fixed.
+# class LsunTest(testing.DatasetBuilderTestCase):
+#   DATASET_CLASS = lsun.Lsun
+#   BUILDER_CONFIG_NAMES_TO_TEST = ["classroom"]
 
-  SPLITS = {
-      "train": 3,
-      "validation": 1,
-  }
+#   SPLITS = {
+#       "train": 3,
+#       "validation": 1,
+#   }
 
-  DL_EXTRACT_RESULT = {"train": "", "val": ""}
+#   DL_EXTRACT_RESULT = {"train": "", "val": ""}
 
 
 if __name__ == "__main__":
