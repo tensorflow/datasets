@@ -30,7 +30,7 @@ jobs:
 
     - run: pip install ${{ matrix.tf_version }}
 
-    # Protocol buffer compiler for gcld3 and ffmpeg for Audio FeatureConnector
+    # Protocol buffer compiler for gcld3 and ffmpeg for Audio FeatureConnector.
     - name: Install ubuntu dependencies
       if: matrix.os == 'ubuntu-latest'
       run: |
@@ -42,11 +42,12 @@ jobs:
       run: |
         choco install protoc
         choco install ffmpeg
-        pip install envlogger --user
 
-    - run: pip install -e .[tests-all]
     # Install tensorflow_io for lsun tests.
     - run: pip install tensorflow_io
+
+    # Install all dependencies.
+    - run: pip install -e .[tests-all]
 
     # Run tests
     - name: Run core tests
