@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Beam pipeline which compute the number of examples in the given tfrecord.
+r"""Beam pipeline which computes the number of examples in the given tfrecord.
 
 Compute the split info (num shards, num examples,...) metadata required
 by `tfds.core.DatasetInfo`. See documentation and usage at:

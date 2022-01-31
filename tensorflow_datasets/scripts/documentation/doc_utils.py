@@ -83,7 +83,7 @@ class VisualizationDocUtil(object):
 
 
 class DataframeDocUtil(object):
-  """Small util which generate the path/urls for the dataframes."""
+  """Small util which generates the path/urls for the dataframes."""
 
   def __init__(self, base_path: tfds.core.PathLike, base_url: str):
     """Constructor.
