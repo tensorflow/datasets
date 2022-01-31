@@ -5,11 +5,12 @@ on: push
 jobs:
   pytest-job:
     name: Core TFDS tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
     strategy:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
