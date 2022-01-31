@@ -37,6 +37,7 @@ jobs:
         sudo apt install -y protobuf-compiler
         sudo apt-get install ffmpeg
         pip install --upgrade pip
+        pip install envlogger[tfds]
 
     - name: Install windows dependencies
       if: matrix.os == 'windows-latest'
