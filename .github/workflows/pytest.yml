@@ -11,6 +11,8 @@ jobs:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
         os: [ubuntu-latest, windows-latest]
+      # Do not cancel in-progress jobs if any other matrix jobs fails.
+      # fail-fast: false
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
@@ -28,17 +30,16 @@ jobs:
 
     # Install the protocol buffer compiler for gcld3 tests and ffmpeg for Audio FeatureConnector tests.
     - name: Install ubuntu dependencies
+      if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt install -y protobuf-compiler
         sudo apt-get install ffmpeg
-      if: ${{ matrix.os }} == ubuntu-latest
 
     - name: Install windows dependencies
+      if: matrix.os == 'windows-latest'
       run: |
         choco install protoc
         choco install ffmpeg
-      if: ${{ matrix.os }} == windows-latest
-
 
     - run: pip install -e .[tests-all]
     # Install tensorflow_io for lsun tests.
