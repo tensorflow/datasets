@@ -26,6 +26,8 @@ jobs:
       with:
         python-version: 3.7
 
+    - run: pip install --upgrade pip
+
     - run: pip install ${{ matrix.tf_version }}
 
     # Protocol buffer compiler for gcld3 and ffmpeg for Audio FeatureConnector
@@ -40,6 +42,7 @@ jobs:
       run: |
         choco install protoc
         choco install ffmpeg
+        pip install envlogger
 
     - run: pip install -e .[tests-all]
     # Install tensorflow_io for lsun tests.
