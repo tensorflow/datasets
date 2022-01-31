@@ -17,12 +17,10 @@
 
 import csv
 import os
+import sys
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
-# Limit to 100 MB. Value must be smaller than the C long maximum value.
-csv.field_size_limit(100 * 1024**3)
 
 _DESCRIPTION = """
 Wikipedia-based Image Text (WIT) Dataset is a large multimodal multilingual
@@ -142,6 +140,8 @@ class Wit(tfds.core.GeneratorBasedBuilder):
       }
 
     def _read_rows(filename):
+      # Limit to 100 MB. Value must be smaller than the C long maximum value.
+      csv.field_size_limit(sys.maxsize)
       with tf.io.gfile.GFile(filename) as f:
         csv_reader = csv.DictReader(
             f, delimiter="\t", quoting=csv.QUOTE_MINIMAL)
