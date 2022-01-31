@@ -1,6 +1,10 @@
 name: Publish tfds-nightly to PyPI
 
 on:
+  # Event triggered daily at 00:30 am UTC
+  schedule:
+    - cron:  '30 0 * * *'
+
   # Event manually triggered (in the Github UI)
   workflow_dispatch:
     inputs:
