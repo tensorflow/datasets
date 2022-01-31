@@ -4,15 +4,12 @@ on: push
 
 jobs:
   pytest-job:
-    name: Core TFDS tests
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 40
+    name: "Core TFDS tests on ${{ matrix.tf_version }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
-        os: [ubuntu-latest, windows-latest]
-      # Do not cancel in-progress jobs if any other matrix jobs fails.
-      fail-fast: false
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
@@ -26,30 +23,17 @@ jobs:
       with:
         python-version: 3.7
 
-    - run: pip install --upgrade pip --user
-
+    - run: pip --version
     - run: pip install ${{ matrix.tf_version }}
 
-    # Protocol buffer compiler for gcld3 and ffmpeg for Audio FeatureConnector.
-    - name: Install ubuntu dependencies
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        sudo apt install -y protobuf-compiler
-        sudo apt-get install ffmpeg
-        pip install --upgrade pip
-        pip install envlogger[tfds]
+    # Install the protocol buffer compiler for gcld3 tests.
+    - run: sudo apt install -y protobuf-compiler
+    # Install ffmpeg for Audio FeatureConnector tests.
+    - run: sudo apt-get install ffmpeg
 
-    - name: Install windows dependencies
-      if: matrix.os == 'windows-latest'
-      run: |
-        choco install -y protoc
-        choco install ffmpeg
-
-    # Install tensorflow_io for lsun tests.
-    - run: pip install tensorflow-io
-
-    # Install all dependencies.
     - run: pip install -e .[tests-all]
+    # Install tensorflow_io for lsun tests.
+    - run: pip install tensorflow_io
 
     # Run tests
     - name: Run core tests
@@ -58,5 +42,6 @@ jobs:
           --ignore="tensorflow_datasets/audio/nsynth_test.py" \
           --ignore="tensorflow_datasets/core/features/features_test.py" \
           --ignore="tensorflow_datasets/testing/test_utils.py" \
+          --ignore="tensorflow_datasets/image/lsun_test.py" \
           --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
