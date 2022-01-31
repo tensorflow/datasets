@@ -93,6 +93,7 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('1.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.1.0': 'Changed `vector` feature to Text().',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
