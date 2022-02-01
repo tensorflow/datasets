@@ -165,7 +165,7 @@ all_dataset_extras = list(itertools.chain.from_iterable(
 
 # Those dependencies aren't available on Windows.
 ISOLATED_DATASETS_WINDOWS = ('envlogger', 'lsun',
-                             'robosuite_panda_pick_place_can')
+                             'robosuite_panda_pick_place_can', 'c4')
 all_dataset_extras_windows = list(
     itertools.chain.from_iterable(
         deps for ds_name, deps in DATASET_EXTRAS.items()
