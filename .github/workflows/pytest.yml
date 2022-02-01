@@ -39,6 +39,7 @@ jobs:
       run: |
         sudo apt install -y protobuf-compiler
         sudo apt-get install ffmpeg
+        pip install pytest pytest-cov
         pip install -e .[tests-all]
         pip install tensorflow_io
 
