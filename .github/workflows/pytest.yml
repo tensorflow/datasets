@@ -17,13 +17,6 @@ jobs:
     name: "Notebook tests"
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    strategy:
-      matrix:
-        notebook: ${{ fromJson(needs.prepare-notebooktest.outputs.matrix) }}
-        exclude:
-          - notebook: docs/determinism.ipynb
-      # Do not cancel in-progress jobs if any other matrix jobs fails.
-      fail-fast: false
 
     steps:
     - uses: styfle/cancel-workflow-action@0.9.1
@@ -49,9 +42,12 @@ jobs:
         ipython kernel install --user --name tfds-notebook
         for notebook in docs/*ipynb
           do
-          jupyter nbconvert \
-            --ExecutePreprocessor.timeout=600 \
-            --ExecutePreprocessor.kernel_name=tfds-notebook \
-            --to notebook \
-            --execute $notebook
+            if [$notebook != "docs/determinism.ipynb"]
+            then
+              jupyter nbconvert \
+                --ExecutePreprocessor.timeout=600 \
+                --ExecutePreprocessor.kernel_name=tfds-notebook \
+                --to notebook \
+                --execute $notebook
+            fi
           done
