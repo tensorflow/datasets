@@ -164,7 +164,7 @@ all_dataset_extras = list(itertools.chain.from_iterable(
 ))
 
 # Those dependencies aren't available on Windows.
-LINUX_ONLY_DEPENDENCIES = ['envlogger']
+LINUX_ONLY_DEPENDENCIES = ['envlogger', 'gcld3']
 all_dataset_extras_windows = [dep for dep in all_dataset_extras if dep not in LINUX_ONLY_DEPENDENCIES]
 
 
