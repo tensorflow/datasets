@@ -184,6 +184,50 @@ class SplitInfo:
     return dataclasses.replace(self, **kwargs)
 
 
+@dataclasses.dataclass(eq=False, frozen=True)
+class MultiSplitInfo(SplitInfo):
+  """SplitInfo for when a split is spread out over multiple folders.
+
+  This should only be used to read data and not when producing data.
+  """
+  split_infos: List[SplitInfo] = dataclasses.field(default_factory=list)
+
+  def __init__(self, name: str, split_infos: List[SplitInfo]):
+    if not split_infos:
+      raise ValueError('Need to pass a non-empty list of SplitInfos')
+    object.__setattr__(self, 'split_infos', split_infos)
+
+    # Compute attributes of parent class SplitInfo
+    shard_lengths = []
+    for split_info in split_infos:
+      shard_lengths.extend(split_info.shard_lengths)
+    # Note that num_bytes=0 means that the size isn't known. However, we do
+    # compute the sum because it will provide at least some information about
+    # the size, even though it may be incomplete.
+    num_bytes = sum(si.num_bytes for si in split_infos)
+    super().__init__(
+        name=name,
+        shard_lengths=shard_lengths,
+        num_bytes=num_bytes,
+        filename_template=None)
+
+  def to_proto(self) -> proto_lib.SplitInfo:
+    # The SplitInfo proto only supports a single split.
+    raise RuntimeError('to_proto is not supported on MultiSplitInfo')
+
+  def __repr__(self) -> str:
+    return (f'{self.__class__.__name__}('
+            f'name={self.name!r}, '
+            f'split_infos={self.split_infos!r})')
+
+  @property
+  def file_instructions(self) -> List[shard_utils.FileInstruction]:
+    result = []
+    for split_info in self.split_infos:
+      result.extend(split_info.file_instructions)
+    return result
+
+
 class SubSplitInfo(object):
   """Wrapper around a sub split info.
 

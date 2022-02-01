@@ -27,12 +27,55 @@ RANGE_TEST = list(range(3000, 3200))
 RANGE_VAL = list(range(6000, 6010))
 
 
-def _filename_template(split: str, dataset_name: str = 'ds_name'):
+def _filename_template(split: str,
+                       dataset_name: str = 'ds_name',
+                       data_dir: str = '/path'):
   return naming.ShardedFileTemplate(
       dataset_name=dataset_name,
       split=split,
-      data_dir='/path',
+      data_dir=data_dir,
       filetype_suffix='tfrecord')
+
+
+def test_multi_split_infos():
+  split = 'train'
+  split_infos = [
+      tfds.core.SplitInfo(
+          name=split,
+          shard_lengths=[10, 10],
+          num_bytes=100,
+          filename_template=_filename_template(split=split, data_dir='/abc')),
+      tfds.core.SplitInfo(
+          name=split,
+          shard_lengths=[1],
+          num_bytes=20,
+          filename_template=_filename_template(split=split, data_dir='/xyz')),
+  ]
+  multi_split_info = splits.MultiSplitInfo(name=split, split_infos=split_infos)
+  assert multi_split_info.num_bytes == 120
+  assert multi_split_info.num_examples == 21
+  assert multi_split_info.num_shards == 3
+  assert multi_split_info.shard_lengths == [10, 10, 1]
+  assert multi_split_info.file_instructions == [
+      shard_utils.FileInstruction(
+          filename='/abc/ds_name-train.tfrecord-00000-of-00002',
+          skip=0,
+          take=-1,
+          num_examples=10),
+      shard_utils.FileInstruction(
+          filename='/abc/ds_name-train.tfrecord-00001-of-00002',
+          skip=0,
+          take=-1,
+          num_examples=10),
+      shard_utils.FileInstruction(
+          filename='/xyz/ds_name-train.tfrecord-00000-of-00001',
+          skip=0,
+          take=-1,
+          num_examples=1)
+  ]
+  assert str(multi_split_info) == (
+      'MultiSplitInfo(name=\'train\', split_infos=[<SplitInfo num_examples=20, '
+      'num_shards=2>, <SplitInfo num_examples=1, num_shards=1>])')
 
 
 class SplitDictTest(testing.TestCase):
