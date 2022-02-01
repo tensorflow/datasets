@@ -164,9 +164,12 @@ all_dataset_extras = list(itertools.chain.from_iterable(
 ))
 
 # Those dependencies aren't available on Windows.
-LINUX_ONLY_DEPENDENCIES = ['envlogger', 'gcld3']
-all_dataset_extras_windows = [dep for dep in all_dataset_extras if dep not in LINUX_ONLY_DEPENDENCIES]
-
+ISOLATED_DATASETS_WINDOWS = ('envlogger', 'lsun',
+                             'robosuite_panda_pick_place_can')
+all_dataset_extras_windows = list(
+    itertools.chain.from_iterable(
+        deps for ds_name, deps in DATASET_EXTRAS.items()
+        if ds_name not in ISOLATED_DATASETS_WINDOWS))
 
 EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
