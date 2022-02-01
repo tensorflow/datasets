@@ -12,7 +12,10 @@ jobs:
         tf_version: ["tensorflow", "tf-nightly"]
 
     steps:
-    - uses: styfle/cancel-workflow-action@0.9.1
+    # Do not cancel actions on the main branch (as it mark the unittests as
+    # failed)
+    - if: ${{ github.ref != 'refs/heads/master' }}
+      uses: styfle/cancel-workflow-action@0.9.1
       with:
         access_token: ${{ github.token }}
 
