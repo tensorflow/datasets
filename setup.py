@@ -152,7 +152,6 @@ DATASET_EXTRAS = {
     'youtube_vis': ['pycocotools'],
 }
 
-
 # Those datasets have dependencies which conflict with the rest of TFDS, so
 # running them in an isolated environments.
 # See `./oss_scripts/oss_tests.sh` for the isolated test.
@@ -164,6 +163,10 @@ all_dataset_extras = list(itertools.chain.from_iterable(
     if ds_name not in ISOLATED_DATASETS
 ))
 
+# Those dependencies aren't available on Windows.
+LINUX_ONLY_DEPENDENCIES = ['envlogger']
+all_dataset_extras_windows = [dep for dep in all_dataset_extras if dep not in LINUX_ONLY_DEPENDENCIES]
+
 
 EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
@@ -173,6 +176,7 @@ EXTRAS_REQUIRE = {
     # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
     # and run in ./oss_scripts/oss_tests.sh
     'tests-all': TESTS_REQUIRE + all_dataset_extras,
+    'test-all-windows': TESTS_REQUIRE + all_dataset_extras_windows,
     'dev': TESTS_REQUIRE + DEV_REQUIRE,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)

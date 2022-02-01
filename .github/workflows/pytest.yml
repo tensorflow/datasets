@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
-        os: [ubuntu-latest]
+        os: [windows-latest]
       # Do not cancel in-progress jobs if any other matrix jobs fails.
       fail-fast: false
 
@@ -47,7 +47,7 @@ jobs:
     - run: pip install tensorflow_io
 
     # Install all dependencies.
-    - run: pip install -e $(grep -ivE "envlogger" .[tests-all])
+    - run: pip install -e .[test-all-windows]
 
     # Run tests
     - name: Run core tests
