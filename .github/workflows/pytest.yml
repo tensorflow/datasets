@@ -36,20 +36,18 @@ jobs:
       run: |
         sudo apt install -y protobuf-compiler
         sudo apt-get install ffmpeg
-        pip install envlogger[tfds] --user
 
     - name: Install windows dependencies
       if: matrix.os == 'windows-latest'
       run: |
         choco install -y protoc
         choco install ffmpeg
-        pip install envlogger[tfds] --user
 
     # Install tensorflow_io for lsun tests.
     - run: pip install tensorflow_io
 
     # Install all dependencies.
-    - run: pip install -e .[tests-all]
+    - run: pip install -e $(grep -ivE "envlogger" .[tests-all])
 
     # Run tests
     - name: Run core tests
@@ -59,4 +57,5 @@ jobs:
           --ignore="tensorflow_datasets/core/features/features_test.py" \
           --ignore="tensorflow_datasets/testing/test_utils.py" \
           --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
+          --ignore="tensorflow_datasets/rlds/robosuite_panda_pick_place_can/robosuite_panda_pick_place_can_test.py" \
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
