@@ -4,7 +4,7 @@ on: push
 
 jobs:
   pytest-job:
-    name: Core TFDS tests
+    name: "Core TFDS tests on ${{ matrix.tf_version }}"
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
