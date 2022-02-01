@@ -4,13 +4,14 @@ on: push
 
 jobs:
   pytest-job:
-    name: "Core TFDS tests on ${{ matrix.tf_version }}"
+    name: "Core TFDS tests on ${{ matrix.os }} with ${{ matrix.tf_version }}"
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
         os: [ubuntu-latest, windows-latest]
+      fail-fast: false
 
     steps:
     # Do not cancel actions on the main branch (as it mark the unittests as

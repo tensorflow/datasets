@@ -164,7 +164,7 @@ all_dataset_extras = list(
         if ds_name not in ISOLATED_DATASETS))
 
 # Those datasets have dependencies which are not supported in Windows.
-ISOLATED_DATASETS_WINDOWS = ISOLATED_DATASETS | (
+ISOLATED_DATASETS_WINDOWS = ISOLATED_DATASETS + (
     'robosuite_panda_pick_place_can', 'c4')
 all_dataset_extras_windows = list(
     itertools.chain.from_iterable(
