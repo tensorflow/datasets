@@ -471,6 +471,8 @@ class DatasetBuilder(registered.RegisteredDataset):
           self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
+      # The generated DatasetInfo contains references to `tmp_data_dir`
+      self.info.update_data_dir(self._data_dir)
     self._log_download_done()
 
   @tfds_logging.as_dataset()
@@ -684,7 +686,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return False
 
     # We do not want to cache data which has more than one shards when
-    # shuffling is enabled, as this would effectivelly disable shuffling.
+    # shuffling is enabled, as this would effectively disable shuffling.
     # An exception is for single shard (as shuffling is a no-op).
     # Another exception is if reshuffle is disabled (shuffling already cached)
     num_shards = len(self.info.splits[split].file_instructions)
@@ -971,7 +973,6 @@ class FileReaderBuilder(DatasetBuilder):
     )
     decode_fn = functools.partial(features.decode_example, decoders=decoders)
     return reader.read(
-        name=self.name,
         instructions=split,
         split_infos=self.info.splits.values(),
         decode_fn=decode_fn,
@@ -1200,7 +1201,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     split_infos = [future.result() for future in split_info_futures]
 
     # Update the info object with the splits.
-    split_dict = splits_lib.SplitDict(split_infos, dataset_name=self.name)
+    split_dict = splits_lib.SplitDict(split_infos)
     self.info.set_splits(split_dict)
 
 

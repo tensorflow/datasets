@@ -24,7 +24,8 @@ import re
 import typing
 from typing import Any, Dict, Iterable, List, Optional, Union
 
-from tensorflow_datasets.core import file_adapters
+from absl import logging
+
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import proto as proto_lib
 from tensorflow_datasets.core import units
@@ -60,6 +61,18 @@ _SLICE_RE = re.compile(
 _ADDITION_SEP_RE = re.compile(r'\s*\+\s*')
 
 
+@dataclasses.dataclass(frozen=True)
+class _AbsoluteInstruction:
+  """A machine friendly slice: defined absolute positive boundaries."""
+  splitname: str
+  from_: int  # uint (starting index).
+  to: int  # uint (ending index).
+
+  def to_absolute(self, split_infos) -> List['_AbsoluteInstruction']:
+    del split_infos  # unused
+    return [self]
+
+
 @dataclasses.dataclass(eq=False, frozen=True)
 class SplitInfo:
   """Wraps `proto.SplitInfo` with an additional property.
@@ -68,6 +81,7 @@ class SplitInfo:
     name: Name of the split (e.g. `train`, `test`,...)
     shard_lengths: List of length <number of files> containing the number of
       examples stored in each file.
+    filename_template: the template used to create sharded filenames.
     num_examples: Total number of examples (`sum(shard_lengths)`)
     num_shards: Number of files (`len(shard_lengths)`)
     num_bytes: Size of the files (in bytes)
@@ -76,24 +90,29 @@ class SplitInfo:
   name: str
   shard_lengths: List[int]
   num_bytes: int
+  filename_template: Optional[naming.ShardedFileTemplate] = None
   statistics: statistics_pb2.DatasetFeatureStatistics = dataclasses.field(
       default_factory=statistics_pb2.DatasetFeatureStatistics,)
-  # Inside `SplitDict`, `SplitInfo` has additional arguments required for
-  # `file_instructions`
-  # Rather than `dataset_name`, should use a structure containing file format,
-  # data_dir,...
-  _dataset_name: Optional[str] = None
 
   def __post_init__(self):
+    if self.filename_template and self.name != self.filename_template.split:
+      raise ValueError(f'Split name {self.name} must be equal to split name '
+                       f'in template {self.filename_template.split}')
     # Normalize bytes
     super().__setattr__('num_bytes', units.Size(self.num_bytes))
 
   @classmethod
-  def from_proto(cls, proto: proto_lib.SplitInfo) -> 'SplitInfo':
+  def from_proto(
+      cls,
+      proto: proto_lib.SplitInfo,
+      filename_template: naming.ShardedFileTemplate,
+  ) -> 'SplitInfo':
+    """Returns a SplitInfo class instance from a SplitInfo proto."""
     return cls(
         name=proto.name,
         shard_lengths=list(proto.shard_lengths),
         num_bytes=proto.num_bytes,
+        filename_template=filename_template.replace(split=proto.name),
         statistics=proto.statistics,
     )
 
@@ -150,9 +169,7 @@ class SplitInfo:
     Returns:
       A `dict(filename, take, skip)`
     """
-    # `self._dataset_name` is assigned in `SplitDict.add()`.
-    return make_file_instructions(
-        name=self._dataset_name,
+    return _make_file_instructions(
         split_infos=[self],
         instruction=str(self.name),
     )
@@ -244,18 +261,23 @@ if typing.TYPE_CHECKING:
   Split = Union[Split, str]
 
 
-class SplitDict(utils.NonMutableDict):
+class SplitDict(utils.NonMutableDict[str, SplitInfo]):
   """Split info object."""
 
-  def __init__(self, split_infos: List[SplitInfo], *, dataset_name: str):
-    # Forward the dataset name required to build file instructions:
-    # info.splits['train'].file_instructions
-    split_infos = [s.replace(_dataset_name=dataset_name) for s in split_infos]
-
+  def __init__(
+      self,
+      split_infos: List[SplitInfo],
+      *,
+      # TODO(b/216470058): remove this parameter
+      dataset_name: Optional[str] = None,  # deprecated, please don't use
+  ):
     super(SplitDict, self).__init__(
         {split_info.name: split_info for split_info in split_infos},
         error_msg='Split {key} already present')
-    self._dataset_name = dataset_name
+    if dataset_name:
+      logging.warning('DEPRECATED: SplitDict\'s dataset_name parameter is '
+                      'deprecated and can be removed.')
+    self._dataset_name = dataset_name  # deprecated, please don't use
 
   def __getitem__(self, key):
     if not self:
@@ -263,22 +285,29 @@ class SplitDict(utils.NonMutableDict):
           f'Trying to access `splits[{key!r}]` but `splits` is empty. '
           'This likely indicate the dataset has not been generated yet.')
     # 1st case: The key exists: `info.splits['train']`
-    elif str(key) in self:
+    elif str(key) in self.keys():
       return super(SplitDict, self).__getitem__(str(key))
     # 2nd case: Uses instructions: `info.splits['train[50%]']`
     else:
-      instructions = make_file_instructions(
-          name=self._dataset_name,
-          split_infos=self.values(),
+      instructions = _make_file_instructions(
+          split_infos=list(self.values()),
           instruction=key,
       )
       return SubSplitInfo(instructions)
 
   @classmethod
-  def from_proto(cls, dataset_name, repeated_split_infos):
+  def from_proto(
+      cls,
+      repeated_split_infos: Iterable[proto_lib.SplitInfo],
+      filename_template: naming.ShardedFileTemplate,
+  ) -> 'SplitDict':
     """Returns a new SplitDict initialized from the `repeated_split_infos`."""
-    split_infos = [SplitInfo.from_proto(s) for s in repeated_split_infos]
-    return cls(split_infos, dataset_name=dataset_name)
+    split_infos = [
+        SplitInfo.from_proto(
+            proto=s, filename_template=filename_template.replace(split=s.name))
+        for s in repeated_split_infos
+    ]
+    return cls(split_infos)
 
   def to_proto(self):
     """Returns a list of SplitInfo protos that we have."""
@@ -290,44 +319,50 @@ class SplitDict(utils.NonMutableDict):
     return sum(s.num_examples for s in self.values())
 
 
-@dataclasses.dataclass(frozen=True)
-class _AbsoluteInstruction:
-  """A machine friendly slice: defined absolute positive boundaries."""
-  splitname: str
-  from_: int  # uint (starting index).
-  to: int  # uint (ending index).
-
-  def to_absolute(self, split_infos) -> List['_AbsoluteInstruction']:
-    del split_infos  # unused
-    return [self]
-
-
-def make_file_instructions(
-    name: str,
+def _make_absolute_instructions(
     split_infos: Iterable[SplitInfo],
     instruction: SplitArg,
-    file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
-) -> List[shard_utils.FileInstruction]:
-  """Returns instructions of the split dict.
-
-  Args:
-    name: Name of the dataset.
-    split_infos: Dataset splits information
-    instruction: `ReadInstruction` or `str`
-    file_format: Format of the record files in which the dataset will be
-      read/written from.
-
-  Returns:
-    file_intructions: FileInstructions instance
-  """
-  # The code could be simplified by forwarding SplitDict everywhere
-  split_infos = SplitDict(list(split_infos), dataset_name=name)
-
+) -> List[_AbsoluteInstruction]:
   if isinstance(instruction, str):
     instruction = AbstractSplit.from_spec(instruction)
 
   # Create the absolute instruction (per split)
-  absolute_instructions = instruction.to_absolute(split_infos)
+  split_info_map = {split_info.name: split_info for split_info in split_infos}
+  return instruction.to_absolute(split_info_map)
+
+
+def _file_instructions_for_split(
+    instruction: _AbsoluteInstruction,
+    split_info: SplitInfo,
+) -> List[shard_utils.FileInstruction]:
+  """Returns the file instructions from the given instruction applied to the given split info."""
+  if not split_info.num_examples:
+    raise ValueError(
+        'Shard empty. This might means that dataset hasn\'t been generated '
+        'yet and info not restored from GCS, or that legacy dataset is used.')
+  filenames = split_info.filename_template.sharded_filepaths(
+      num_shards=split_info.num_shards)
+  to = split_info.num_examples if instruction.to is None else instruction.to
+  return shard_utils.get_file_instructions(
+      from_=instruction.from_ or 0,
+      to=to,
+      filenames=filenames,
+      shard_lengths=split_info.shard_lengths)
+
+
+def _make_file_instructions(
+    split_infos: List[SplitInfo],
+    instruction: SplitArg,
+) -> List[shard_utils.FileInstruction]:
+  """Returns file instructions by applying the given instruction on the given splits.
+
+  Args:
+    split_infos: Dataset splits information
+    instruction: `ReadInstruction` or `str`
+
+  Returns:
+    List of FileInstruction instances
+  """
 
   # TODO(epot): Should try to merge the instructions together as well as
   # performing additional validation. For example, should raise an error
@@ -335,42 +370,16 @@ def make_file_instructions(
   # If there is a single shard, `train[:25]+train[50:75]` could be optimized
   # into a single `ds.take(25).skip(50-25).take(75-50)`
 
-  return _make_file_instructions_from_absolutes(
-      name=name,
-      split_infos=split_infos,
-      absolute_instructions=absolute_instructions,
-      file_format=file_format,
-  )
-
-
-def _make_file_instructions_from_absolutes(
-    name: str,
-    split_infos: Dict[str, SplitInfo],
-    absolute_instructions: List[_AbsoluteInstruction],
-    file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT,
-) -> List[shard_utils.FileInstruction]:
-  """Returns the files instructions from the absolute instructions list."""
-  # For each split, return the files instruction (skip/take)
-  file_instructions = []
+  absolute_instructions = _make_absolute_instructions(
+      split_infos=split_infos, instruction=instruction)
+  instructions = []
+  info_per_split = {split_info.name: split_info for split_info in split_infos}
   for abs_instr in absolute_instructions:
-    split_info = split_infos[abs_instr.splitname]
-    if not split_info.num_examples:
-      raise ValueError(
-          'Shard empty. This might means that dataset hasn\'t been generated '
-          'yet and info not restored from GCS, or that legacy dataset is used.')
-    filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
-    filename_template = naming.ShardedFileTemplate(
-        dataset_name=name,
-        split=abs_instr.splitname,
-        filetype_suffix=filetype_suffix)
-    filenames = filename_template.sharded_filepaths(
-        num_shards=split_info.num_shards)
-    from_ = 0 if abs_instr.from_ is None else abs_instr.from_
-    to = split_info.num_examples if abs_instr.to is None else abs_instr.to
-    single_file_instructions = shard_utils.get_file_instructions(
-        from_, to, filenames, split_info.shard_lengths)
-    file_instructions.extend(single_file_instructions)
-  return file_instructions
+    split_info = info_per_split[str(abs_instr.splitname)]
+    instructions.extend(
+        _file_instructions_for_split(
+            instruction=abs_instr, split_info=split_info))
+  return instructions
 
 
 class AbstractSplit(abc.ABC):

@@ -91,6 +91,7 @@ __all__ = [
     "ReadInstruction",
     "ReadOnlyPath",
     "ReadWritePath",
+    "ShardedFileTemplate",
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",

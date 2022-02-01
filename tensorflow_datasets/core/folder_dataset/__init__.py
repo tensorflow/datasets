@@ -18,6 +18,7 @@
 from tensorflow_datasets.core import registered
 
 from tensorflow_datasets.core.folder_dataset.compute_split_utils import compute_split_info
+from tensorflow_datasets.core.folder_dataset.compute_split_utils import compute_split_info_from_directory
 from tensorflow_datasets.core.folder_dataset.write_metadata_utils import write_metadata
 
 # Custom datasets cannot be instanciated through `tfds.load`
@@ -29,6 +30,7 @@ with registered.skip_registration():
 
 __all__ = [
     "compute_split_info",
+    "compute_split_info_from_directory",
     "ImageFolder",
     "TranslateFolder",
     "write_metadata",

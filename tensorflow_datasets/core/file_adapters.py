@@ -36,6 +36,10 @@ class FileFormat(enum.Enum):
   TFRECORD = 'tfrecord'
   RIEGELI = 'riegeli'
 
+  @property
+  def file_suffix(self) -> str:
+    return ADAPTER_FOR_FORMAT[self].FILE_SUFFIX
+
 
 DEFAULT_FILE_FORMAT = FileFormat.TFRECORD
 

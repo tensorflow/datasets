@@ -60,7 +60,7 @@ def write_metadata(
   https://www.tensorflow.org/datasets/external_tfrecord
 
   Args:
-    data_dir: Dataset path on which save the metadata
+    data_dir: Dataset path on which to save the metadata
     features: dict of `tfds.features.FeatureConnector` matching the proto specs.
     split_infos: Can be either:  * A path to the pre-computed split info values
       ( the `out_dir` kwarg of `tfds.folder_dataset.compute_split_info`) * A
@@ -91,8 +91,8 @@ def write_metadata(
   # Use set with tuple expansion syntax to ensure all names are consistents
   snake_name, = {f.dataset_name for f in file_infos}
   camel_name = naming.snake_to_camelcase(snake_name)
-  file_format, = {f.filetype_suffix for f in file_infos}
-  file_format = file_adapters.file_format_from_suffix(file_format)
+  filetype_suffix, = {f.filetype_suffix for f in file_infos}
+  file_format = file_adapters.file_format_from_suffix(filetype_suffix)
 
   cls = types.new_class(
       camel_name,
@@ -125,6 +125,7 @@ def write_metadata(
       data_dir=data_dir,
       split_infos=split_infos,
       file_infos=file_infos,
+      filetype_suffix=filetype_suffix,
       builder=builder,
   )
   ds_info.set_splits(split_dict)
@@ -145,18 +146,24 @@ def _load_splits(
     data_dir: utils.ReadWritePath,
     split_infos: Union[None, type_utils.PathLike, List[split_lib.SplitInfo]],
     file_infos: List[naming.FilenameInfo],
+    filetype_suffix: str,
     builder: dataset_builder.DatasetBuilder,
 ) -> split_lib.SplitDict:
   """Load the SplitDict which can be passed to DatasetInfo."""
   split_names = sorted(set(f.split for f in file_infos))
 
+  filename_template = naming.ShardedFileTemplate(
+      dataset_name=builder.name,
+      data_dir=data_dir,
+      filetype_suffix=filetype_suffix)
   if split_infos is None:  # Auto-compute the split-infos
-    split_infos = compute_split_utils.compute_split_info(data_dir=data_dir)
+    split_infos = compute_split_utils.compute_split_info(
+        filename_template=filename_template)
   # Load the List[SplitInfo]
   elif isinstance(split_infos, type_utils.PathLikeCls):
     split_infos = compute_split_utils.split_infos_from_path(
-        path=split_infos,
         split_names=split_names,
+        filename_template=filename_template,
     )
   elif all(isinstance(s, split_lib.SplitInfo) for s in split_infos):
     given_splits = sorted([s.name for s in split_infos])
@@ -167,4 +174,6 @@ def _load_splits(
 
   split_protos = [s.to_proto() for s in split_infos]
   return split_lib.SplitDict.from_proto(
-      repeated_split_infos=split_protos, dataset_name=builder.name)
+      repeated_split_infos=split_protos,
+      filename_template=filename_template,
+  )
