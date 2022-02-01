@@ -48,17 +48,22 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
     self.assertEqual(naming.camelcase_to_snakecase(snake), snake)
 
   @parameterized.parameters(
-      (2, '00000-of-00002', '00001-of-00002'),
-      (12345, '00000-of-12345', '12344-of-12345'),
-      (654321, '000000-of-654321', '654320-of-654321'),
+      (2, True, '00000-of-00002', '00001-of-00002'),
+      (12345, True, '00000-of-12345', '12344-of-12345'),
+      (654321, True, '000000-of-654321', '654320-of-654321'),
+      (2, False, '00000', '00001'),
+      (12345, False, '00000', '12344'),
+      (654321, False, '000000', '654320'),
   )
-  def test_sharded_filepaths(self, num_shards, expected_first_suffix,
-                             expected_last_suffix):
+  def test_sharded_filepaths(self, num_shards: int, append_num_shards: bool,
+                             expected_first_suffix: str,
+                             expected_last_suffix: str):
     template = naming.ShardedFileTemplate(
         split='train',
         dataset_name='ds',
         data_dir='/path',
-        filetype_suffix='tfrecord')
+        filetype_suffix='tfrecord',
+        append_num_shards=append_num_shards)
     names = template.sharded_filepaths(num_shards)
     path_template = '/path/ds-train.tfrecord-%s'
     self.assertEqual(names[0], path_template % (expected_first_suffix))

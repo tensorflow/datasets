@@ -25,6 +25,8 @@ from tensorflow_datasets.core.utils import generic_path
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 
+_DEFAULT_NUM_DIGITS_FOR_SHARDS = 5
+
 _first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
 _all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
@@ -212,12 +214,35 @@ def filename_prefix_for_split(name: str, split: str) -> str:
   return '%s-%s' % (filename_prefix_for_name(name), split)
 
 
-def shard_suffix_template(num_shards: int) -> str:
-  num_digits = max(len(str(num_shards)), 5)
-  assert num_digits < 10, num_shards
+def shard_suffix_template(*, append_num_shards: bool,
+                          num_shards: Optional[int]) -> str:
+  """Returns the template for the shard suffix.
+
+  Note that if num_shards is not provided, we use 5 digits for shard numbers.
+
+  Arguments:
+    append_num_shards: whether to use xxxxx-of-yyyyy or just xxxxx suffix.
+    num_shards: optional number of shards. Required if append_num_shards is
+      True.
+
+  Returns:
+    the template for the shard suffix in the filename. The template contains two
+    parameters: 'shard_index' (required), and 'num_shards' (optional, only
+    required when 'append_num_shards' is True).
+  """
+  if (not num_shards or num_shards < 1) and append_num_shards:
+    raise ValueError('num_shards must be >0 when append_num_shards is True')
+  if num_shards:
+    num_digits = max(len(str(num_shards)), _DEFAULT_NUM_DIGITS_FOR_SHARDS)
+  else:
+    num_digits = _DEFAULT_NUM_DIGITS_FOR_SHARDS
+  assert num_digits < 10
   index_template = '{shard_index:0%d}' % num_digits
-  num_shards_template = '{num_shards:0%d}' % num_digits
-  return f'{index_template}-of-{num_shards_template}'
+  if append_num_shards:
+    num_shards_template = '{num_shards:0%d}' % num_digits
+    return f'{index_template}-of-{num_shards_template}'
+  else:
+    return index_template
 
 
 @dataclasses.dataclass()
@@ -227,9 +252,10 @@ class ShardedFileTemplate:
   Attributes:
     dataset_name: the name of the dataset.
     data_dir: the directory that contains the files for the shards.
-    split: the split of the dataset.
     filetype_suffix: the filetype suffix to denote the type of file. For
       example, `tfrecord`.
+    split: the split of the dataset.
+    append_num_shards: whether to use the xxxxx-of-yyyyy notation or just xxxxx.
     filename_prefix: the part of the filename up until the shard information.
     filepath_prefix: the part of the filename up until the shard information,
       but now also includes the directory of the file if it is given.
@@ -238,6 +264,7 @@ class ShardedFileTemplate:
   data_dir: type_utils.ReadWritePath
   filetype_suffix: Optional[str]
   split: Optional[str] = None
+  append_num_shards: bool = True
 
   def __post_init__(self):
     self.data_dir = generic_path.as_path(self.data_dir)
@@ -268,20 +295,30 @@ class ShardedFileTemplate:
   def filepath_prefix(self) -> str:
     """The part of the filename up until the shard info, including the folder if given."""
     self._assert_is_complete()
-    if self.data_dir:
-      return os.path.join(self.data_dir, self.filename_prefix)
-    return self.filename_prefix
+    assert self.data_dir
+    return os.path.join(self.data_dir, self.filename_prefix)
 
   def sharded_filename(
       self,
       *,
       shard_index: int,
-      num_shards: int,
+      num_shards: Optional[int],
   ) -> str:
-    """Returns the filename (excluding the path) for the given shard."""
+    """Returns the filename (excluding the path) for the given shard.
+
+    Arguments:
+      shard_index: the shard index for which to generate the filename.
+      num_shards: the total number of shards. If unknown, use None.
+
+    Returns:
+      The filename for the given shard.
+    """
     assert shard_index >= 0
-    assert shard_index < num_shards
-    shard_suffix = shard_suffix_template(num_shards).format(
+    if self.append_num_shards:
+      assert shard_index < num_shards
+    template = shard_suffix_template(
+        append_num_shards=self.append_num_shards, num_shards=num_shards)
+    shard_suffix = template.format(
         shard_index=shard_index, num_shards=num_shards)
     return f'{self.filename_prefix}-{shard_suffix}'
 
@@ -289,15 +326,14 @@ class ShardedFileTemplate:
       self,
       *,
       shard_index: int,
-      num_shards: int,
+      num_shards: Optional[int],
   ) -> str:
     """Returns the filename (including full path if `data_dir` is set) for the given shard."""
     self._assert_is_complete()
-    assert shard_index >= 0
-    assert shard_index < num_shards
-    shard_suffix = shard_suffix_template(num_shards).format(
+    assert self.data_dir
+    filename = self.sharded_filename(
         shard_index=shard_index, num_shards=num_shards)
-    return f'{self.filepath_prefix}-{shard_suffix}'
+    return os.path.join(self.data_dir, filename)
 
   def sharded_filepaths_pattern(
       self,
@@ -317,13 +353,11 @@ class ShardedFileTemplate:
     Returns:
       the pattern describing all shards captured by this template.
     """
-    self._assert_is_complete()
-    if num_shards:
+    if num_shards and self.append_num_shards:
       return f'{self.filepath_prefix}@{num_shards}'
     return f'{self.filepath_prefix}*'
 
   def sharded_filepaths(self, num_shards: int) -> List[str]:
-    self._assert_is_complete()
     return [
         self.sharded_filepath(shard_index=i, num_shards=num_shards)
         for i in range(num_shards)
