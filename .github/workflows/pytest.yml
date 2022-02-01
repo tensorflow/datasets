@@ -12,6 +12,8 @@ jobs:
         tf_version: ["tensorflow", "tf-nightly"]
         os: [ubuntu-latest, windows-latest]
       fail-fast: false
+    defaults:
+      shell: bash
 
     steps:
     # Do not cancel actions on the main branch (as it mark the unittests as
@@ -61,4 +63,3 @@ jobs:
           --ignore="tensorflow_datasets/rlds/robosuite_panda_pick_place_can/robosuite_panda_pick_place_can_test.py" \
           --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
-      shell: bash
