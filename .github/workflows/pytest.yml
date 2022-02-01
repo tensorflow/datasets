@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
-        os: [windows-latest]
+        os: [ubuntu-latest]
       # Do not cancel in-progress jobs if any other matrix jobs fails.
       fail-fast: false
 
@@ -36,6 +36,7 @@ jobs:
       run: |
         sudo apt install -y protobuf-compiler
         sudo apt-get install ffmpeg
+        pip install envlogger[tfds] --user
 
     - name: Install windows dependencies
       if: matrix.os == 'windows-latest'
