@@ -4,18 +4,19 @@ on: push
 
 jobs:
   pytest-job:
-    name: Core TFDS tests
+    name: "Core TFDS tests on ${{ matrix.tf_version }}"
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
         os: [ubuntu-latest]
-      # Do not cancel in-progress jobs if any other matrix jobs fails.
-      fail-fast: false
 
     steps:
-    - uses: styfle/cancel-workflow-action@0.9.1
+    # Do not cancel actions on the main branch (as it mark the unittests as
+    # failed)
+    - if: ${{ github.ref != 'refs/heads/master' }}
+      uses: styfle/cancel-workflow-action@0.9.1
       with:
         access_token: ${{ github.token }}
 
@@ -29,22 +30,17 @@ jobs:
     - run: pip --version
     - run: pip install ${{ matrix.tf_version }}
 
-    # Protocol buffer compiler for gcld3 and ffmpeg for Audio FeatureConnector.
     - name: Install ubuntu dependencies
       if: matrix.os == 'ubuntu-latest'
-      run: |
+
+      # Install the protocol buffer compiler for gcld3 tests.
+      # Install ffmpeg for Audio FeatureConnector tests.
+      # Install tensorflow_io for lsun tests.
+      - run: |
         sudo apt install -y protobuf-compiler
         sudo apt-get install ffmpeg
+        pip install -e .[tests-all]
         pip install tensorflow_io
-
-        pip install -e .[test-all]
-
-    - name: Install windows dependencies
-      if: matrix.os == 'windows-latest'
-      run: |
-        choco install -y protoc
-        choco install ffmpeg
-        pip install -e .[test-all-windows]
 
     # Run tests
     - name: Run core tests
@@ -55,5 +51,4 @@ jobs:
           --ignore="tensorflow_datasets/testing/test_utils.py" \
           --ignore="tensorflow_datasets/image/lsun_test.py" \
           --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
-          --ignore="tensorflow_datasets/rlds/robosuite_panda_pick_place_can/robosuite_panda_pick_place_can_test.py" \
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
