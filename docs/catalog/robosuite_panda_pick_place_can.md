@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="robosuite_panda_pick_place_can" />
-  <meta itemprop="description" content="These datasets have been created with the PickPlaceCan environment of the&#10;[robosuite robotic arm simulator](https://robosuite.ai/). The human datasets&#10;were recorded by a single operator using&#10;the [RLDS Creator](https://github.com/google-research/rlds-creator) and a&#10;gamepad controller.&#10;&#10;The synthetic datasets have been recorded using the&#10;[EnvLogger library](https://github.com/deepmind/envlogger).&#10;&#10;Episodes consist of 400 steps. In each episode, a tag is&#10;added when the task is completed, this tag is stored as part of the custom step&#10;metadata.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;robosuite_panda_pick_place_can&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="These datasets have been created with the PickPlaceCan environment of the&#10;[robosuite robotic arm simulator](https://robosuite.ai/). The human datasets&#10;were recorded by a single operator using&#10;the [RLDS Creator](https://github.com/google-research/rlds-creator) and a&#10;gamepad controller.&#10;&#10;The synthetic datasets have been recorded using the&#10;[EnvLogger library](https://github.com/deepmind/envlogger).&#10;&#10;Episodes consist of 400 steps. In each episode, a tag is&#10;added when the task is completed, this tag is stored as part of the custom step&#10;metadata.&#10;&#10;Note that, due to the EnvLogger dependency, generation of this dataset is&#10;currently supported on Linux environments only.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;robosuite_panda_pick_place_can&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/robosuite_panda_pick_place_can" />
   <meta itemprop="sameAs" content="https://github.com/google-research/rlds" />
   <meta itemprop="citation" content="@misc{ramos2021rlds,&#10;      title={RLDS: an Ecosystem to Generate, Share and Use Datasets in Reinforcement Learning},&#10;      author={Sabela Ramos and Sertan Girgin and Léonard Hussenot and Damien Vincent and Hanna Yakubovich and Daniel Toyama and Anita Gergely and Piotr Stanczyk and Raphael Marinier and Jeremiah Harmsen and Olivier Pietquin and Nikola Momchev},&#10;      year={2021},&#10;      eprint={2111.02767},&#10;      archivePrefix={arXiv},&#10;      primaryClass={cs.LG}&#10;}" />
@@ -25,6 +25,9 @@ The synthetic datasets have been recorded using the
 
 Episodes consist of 400 steps. In each episode, a tag is added when the task is
 completed, this tag is stored as part of the custom step metadata.
+
+Note that, due to the EnvLogger dependency, generation of this dataset is
+currently supported on Linux environments only.
 
 *   **Source code**:
     [`tfds.rlds.robosuite_panda_pick_place_can.RobosuitePandaPickPlaceCan`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/rlds/robosuite_panda_pick_place_can/robosuite_panda_pick_place_can.py)
