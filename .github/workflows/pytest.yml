@@ -47,7 +47,7 @@ jobs:
       run: |
         choco install -y protoc
         choco install ffmpeg
-        pip install pytest pytest-cov --user
+        pip install pytest pytest-cov pytest-xdist --user
         pip install -e .[test-all-windows]
         pip install tensorflow_io
 
