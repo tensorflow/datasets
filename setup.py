@@ -28,26 +28,24 @@ else:
 project_name = 'tensorflow-datasets'
 
 # To enable importing version.py directly, we add its path to sys.path.
-version_path = os.path.join(
-    os.path.dirname(__file__), 'tensorflow_datasets')
+version_path = os.path.join(os.path.dirname(__file__), 'tensorflow_datasets')
 sys.path.append(version_path)
 from version import __version__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
 
 if nightly:
   project_name = 'tfds-nightly'
   # Version as `X.Y.Z.dev199912312459`
-  datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
-                datetime.datetime.now().strftime('%Y%m%d%H%M'))
+  datestring = (
+      os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
+      datetime.datetime.now().strftime('%Y%m%d%H%M'))
   curr_version = pkg_resources.parse_version(__version__)
   __version__ = f'{curr_version.base_version}.dev{datestring}'
-
 
 DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
-    'future',
     'numpy',
     'promise',
     'protobuf>=3.12.2',
@@ -63,6 +61,7 @@ REQUIRED_PKGS = [
 ]
 
 TESTS_REQUIRE = [
+    'jax[cpu]',
     'jupyter',
     'pytest',
     'pytest-xdist',
@@ -84,6 +83,7 @@ DEV_REQUIRE = [
 
 # Static files needed by datasets.
 DATASET_FILES = [
+    'graphs/ogbg_molpcba/ogbg_molpcba_tasks.txt',
     'image_classification/caltech101_labels.txt',
     'image_classification/categories_places365.txt',
     'image_classification/cbis_ddsm_calc_distributions.txt',
@@ -144,6 +144,7 @@ DATASET_EXTRAS = {
     'pet_finder': ['pandas'],
     'robonet': ['h5py'],  # and ffmpeg installed
     'robosuite_panda_pick_place_can': ['envlogger'],
+    'smartwatch_gestures': ['pandas'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'wider_face': ['Pillow'],
@@ -152,27 +153,30 @@ DATASET_EXTRAS = {
     'youtube_vis': ['pycocotools'],
 }
 
-
 # Those datasets have dependencies which conflict with the rest of TFDS, so
 # running them in an isolated environments.
-# See `./oss_scripts/oss_tests.sh` for the isolated test.
 ISOLATED_DATASETS = ('nsynth', 'lsun')
 
 # Extra dataset deps are required for the tests
-all_dataset_extras = list(itertools.chain.from_iterable(
-    deps for ds_name, deps in DATASET_EXTRAS.items()
-    if ds_name not in ISOLATED_DATASETS
-))
+all_dataset_extras = list(
+    itertools.chain.from_iterable(
+        deps for ds_name, deps in DATASET_EXTRAS.items()
+        if ds_name not in ISOLATED_DATASETS))
 
+# Those datasets have dependencies which are not supported in Windows.
+ISOLATED_DATASETS_WINDOWS = ISOLATED_DATASETS | (
+    'robosuite_panda_pick_place_can', 'c4')
+all_dataset_extras_windows = list(
+    itertools.chain.from_iterable(
+        deps for ds_name, deps in DATASET_EXTRAS.items()
+        if ds_name not in ISOLATED_DATASETS_WINDOWS))
 
 EXTRAS_REQUIRE = {
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=2.1'],
     'tensorflow-data-validation': ['tensorflow-data-validation'],
-
-    # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
-    # and run in ./oss_scripts/oss_tests.sh
     'tests-all': TESTS_REQUIRE + all_dataset_extras,
+    'tests-all-windows': TESTS_REQUIRE + all_dataset_extras_windows,
     'dev': TESTS_REQUIRE + DEV_REQUIRE,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
@@ -189,17 +193,16 @@ setup(
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
-        'tensorflow_datasets': DATASET_FILES + [
-            'core/utils/colormap.csv',
-            'scripts/documentation/templates/*',
-            'url_checksums/*',
-            'checksums.tsv',
-        ],
+        'tensorflow_datasets':
+            DATASET_FILES + [
+                'core/utils/colormap.csv',
+                'scripts/documentation/templates/*',
+                'url_checksums/*',
+                'checksums.tsv',
+            ],
     },
     exclude_package_data={
-        'tensorflow_datasets': [
-            'dummy_data/*',
-        ],
+        'tensorflow_datasets': ['dummy_data/*',],
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,

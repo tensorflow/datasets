@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
     # Do not cancel actions on the main branch (as it mark the unittests as
@@ -30,16 +30,23 @@ jobs:
     - run: pip --version
     - run: pip install ${{ matrix.tf_version }}
 
+    # Install the protocol buffer compiler for gcld3 tests.
+    # Install ffmpeg for Audio FeatureConnector tests.
+    # Install tensorflow_io for lsun tests.
     - name: Install ubuntu dependencies
       if: matrix.os == 'ubuntu-latest'
-
-      # Install the protocol buffer compiler for gcld3 tests.
-      # Install ffmpeg for Audio FeatureConnector tests.
-      # Install tensorflow_io for lsun tests.
       run: |
         sudo apt install -y protobuf-compiler
         sudo apt-get install ffmpeg
         pip install -e .[tests-all]
+        pip install tensorflow_io
+
+    - name: Install windows dependencies
+      if: matrix.os == 'windows-latest'
+      run: |
+        choco install -y protoc
+        choco install ffmpeg
+        pip install -e .[test-all-windows]
         pip install tensorflow_io
 
     # Run tests
@@ -50,5 +57,6 @@ jobs:
           --ignore="tensorflow_datasets/core/features/features_test.py" \
           --ignore="tensorflow_datasets/testing/test_utils.py" \
           --ignore="tensorflow_datasets/image/lsun_test.py" \
+          --ignore="tensorflow_datasets/rlds/robosuite_panda_pick_place_can/robosuite_panda_pick_place_can_test.py" \
           --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
