@@ -34,6 +34,9 @@ The synthetic datasets have been recorded using the
 Episodes consist of 400 steps. In each episode, a tag is
 added when the task is completed, this tag is stored as part of the custom step
 metadata.
+
+Note that, due to the EnvLogger dependency, generation of this dataset is
+currently supported on Linux environments only.
 """
 
 _CITATION = """
