@@ -36,7 +36,7 @@ jobs:
       # Install the protocol buffer compiler for gcld3 tests.
       # Install ffmpeg for Audio FeatureConnector tests.
       # Install tensorflow_io for lsun tests.
-      - run: |
+      run: |
         sudo apt install -y protobuf-compiler
         sudo apt-get install ffmpeg
         pip install -e .[tests-all]
