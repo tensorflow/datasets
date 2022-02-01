@@ -12,8 +12,6 @@ jobs:
         tf_version: ["tensorflow", "tf-nightly"]
         os: [ubuntu-latest, windows-latest]
       fail-fast: false
-    defaults:
-      shell: bash
 
     steps:
     # Do not cancel actions on the main branch (as it mark the unittests as
