@@ -91,8 +91,7 @@ you can examine this in colab:
 
     ```python
     example_specs = features.get_serialized_info()
-    parser = tfds.core.example_parser.ExampleParser(example_specs)
-    nested_feature_specs = parser._nested_feature_specs
+    nested_feature_specs = tfds.core.example_parser._build_feature_specs(example_specs)
     feature_specs = tfds.core.utils.flatten_nest_dict(nested_feature_specs)
     ```
 
@@ -135,7 +134,7 @@ To automatically add the proper metadata files along your dataset, use
 
 ```python
 tfds.folder_dataset.write_metadata(
-    builder_dir='/path/to/my/dataset/1.0.0/',
+    data_dir='/path/to/my/dataset/1.0.0/',
     features=features,
     # Pass the `out_dir` argument of compute_split_info (see section above)
     # You can also explicitly pass a list of `tfds.core.SplitInfo`
