@@ -344,3 +344,27 @@ def test_filename_template_empty_split():
         dataset_name='mnist',
         filetype_suffix='tfrecord',
         split='')
+
+
+def test_parse_template_from_filepath():
+  assert naming.parse_template_from_filepath(
+      '/path/folder/mnist-train.tfrecord-00003') == naming.ShardedFileTemplate(
+          dataset_name='mnist',
+          data_dir='/path/folder',
+          filetype_suffix='tfrecord',
+          split='train',
+          append_num_shards=False)
+  assert naming.parse_template_from_filepath(
+      '/path/folder/mnist-train.tfrecord-00003-of-00009'
+  ) == naming.ShardedFileTemplate(
+      dataset_name='mnist',
+      data_dir='/path/folder',
+      filetype_suffix='tfrecord',
+      split='train',
+      append_num_shards=True)
+  # Misses the path
+  assert not naming.parse_template_from_filepath(
+      'mnist-train.tfrecord-00003-of-00009')
+  # Misses the filetype suffix
+  assert not naming.parse_template_from_filepath(
+      '/path/mnist-train-00003-of-00009')

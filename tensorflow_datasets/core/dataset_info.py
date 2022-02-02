@@ -219,10 +219,13 @@ class DatasetInfo(object):
     supervised_keys = None
     if proto.HasField("supervised_keys"):
       supervised_keys = _supervised_keys_from_proto(proto.supervised_keys)
-    filename_template = naming.ShardedFileTemplate(
-        dataset_name=builder.name,
-        data_dir=builder.data_dir,
-        filetype_suffix=proto.file_format or "tfrecord")
+    filename_template = read_filename_template_from_builder_dir(
+        builder.data_dir)
+    if not filename_template:
+      filename_template = naming.ShardedFileTemplate(
+          dataset_name=builder.name,
+          data_dir=builder.data_dir,
+          filetype_suffix=proto.file_format or "tfrecord")
     return cls(
         builder=builder,
         description=proto.description,
@@ -759,6 +762,27 @@ def read_proto_from_builder_dir(
     raise FileNotFoundError(
         f"Could not load dataset info: {info_path} does not exists.")
   return read_from_json(info_path)
+
+
+def read_filename_template_from_builder_dir(
+    builder_dir: type_utils.PathLike) -> Optional[naming.ShardedFileTemplate]:
+  """Extracts the filename template from the files in the builder dir.
+
+  Assumes that all files in the builder_dir use the same template.
+
+  Arguments:
+    builder_dir: the folder that contains the sharded files.
+
+  Returns:
+    the filename template that corresponds to the files in the dir.
+  """
+  for filename in tf.io.gfile.listdir(builder_dir):
+    filepath = os.path.join(os.fspath(builder_dir), filename)
+    filename_template = naming.parse_template_from_filepath(filepath)
+    if filename_template:
+      # Remove split from template
+      return filename_template.replace(split=None)
+  return None
 
 
 def pack_as_supervised_ds(

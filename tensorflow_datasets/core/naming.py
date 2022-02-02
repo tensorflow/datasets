@@ -41,6 +41,15 @@ _NAME_REG = re.compile(r'^'
                        r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
                        r'$')
 
+# Regex matching sharded files, e.g. /path/mnist-train.tfrecord-00001-of-00005
+# Supports xxxxx-of-yyyyy and xxxxx notation for shards.
+_DEFAULT_SHARDED_FILENAME_REG = re.compile(
+    r'(?P<data_dir>.*\/)'
+    rf'(?P<dataset_name>{_NAME_CLASS})-'
+    r'(?P<split>\w+)\.'
+    r'(?P<filetype_suffix>\w+)-'
+    r'(?P<shard_suffix>\d{5,}(-of-\d{5,})?)')
+
 Value = Union[str, int, float, bool]
 
 
@@ -492,3 +501,24 @@ def _parse_filename(filename: str) -> Optional['re.Match']:
              r'(?P<filetype_suffix>\w+)-'
              r'(?P<shard_index>\d{5,})-of-(?P<num_shards>\d{5,})')
   return re.fullmatch(pattern, filename)
+
+
+def parse_template_from_filepath(
+    filepath_str: str) -> Optional[ShardedFileTemplate]:
+  """Parses the sharded file template from the given file path."""
+  match = re.fullmatch(_DEFAULT_SHARDED_FILENAME_REG, filepath_str)
+  if not match:
+    return None
+  match_dict = match.groupdict()
+
+  shard_x_of_y_pattern = r'\d{5,}-of-\d{5,}'
+  shard_x_of_y_match = re.fullmatch(shard_x_of_y_pattern,
+                                    match_dict['shard_suffix'])
+  append_num_shards = bool(shard_x_of_y_match)
+  return ShardedFileTemplate(
+      dataset_name=match_dict['dataset_name'],
+      data_dir=generic_path.as_path(match_dict['data_dir']),
+      filetype_suffix=match_dict['filetype_suffix'],
+      split=match_dict['split'],
+      append_num_shards=append_num_shards,
+  )
