@@ -452,8 +452,10 @@ def test_builder_from_directories_reading(
   for filename in tf.io.gfile.listdir(code_builder.data_dir):
     filepath = f'{code_builder.data_dir}/{filename}'
     if not tf.io.gfile.isdir(filepath):
-      tf.io.gfile.copy(src=filepath, dst=other_dir1, overwrite=True)
-      tf.io.gfile.copy(src=filepath, dst=other_dir2, overwrite=True)
+      tf.io.gfile.copy(
+          src=filepath, dst=f'{other_dir1}/{filename}', overwrite=True)
+      tf.io.gfile.copy(
+          src=filepath, dst=f'{other_dir2}/{filename}', overwrite=True)
 
   builder = read_only_builder.builder_from_directories(
       [other_dir1, other_dir2, code_builder.data_dir])
