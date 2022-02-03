@@ -40,6 +40,7 @@ from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 
 from tensorflow_datasets.core.naming import ShardedFileTemplate
 
+from tensorflow_datasets.core.read_only_builder import builder_from_directories
 from tensorflow_datasets.core.read_only_builder import builder_from_directory
 
 from tensorflow_datasets.core.registered import DatasetNotFoundError
