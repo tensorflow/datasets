@@ -18,6 +18,7 @@
 import functools
 import os
 import pathlib
+from typing import Sequence
 from unittest import mock
 
 import dill
@@ -29,11 +30,15 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import load
+from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import file_utils
+
+from google.protobuf import json_format
 
 
 class DummyNoConfMnist(testing.DummyDataset):
@@ -387,3 +392,72 @@ def test_get_version_str(mock_fs: testing.MockFs):
   assert _find_builder_dir('ds:1.0.0') == 'path/to/ds/1.0.0'
   assert _find_builder_dir('ds:1.3.*') is None
   assert _find_builder_dir('ds:2.3.5') is None
+
+
+def test_builder_from_directories_splits(mock_fs: testing.MockFs):
+
+  def split_for(name: str, shard_lengths: Sequence[int]) -> proto.SplitInfo:
+    return proto.SplitInfo(name=name, shard_lengths=shard_lengths)
+
+  def dataset_info(splits):
+    text_feature = proto.feature_pb2.Feature(
+        python_class_name='tensorflow_datasets.core.features.text_feature.Text',
+        text=proto.feature_pb2.TextFeature())
+    features = proto.feature_pb2.Feature(
+        python_class_name='tensorflow_datasets.core.features.features_dict.FeaturesDict',
+        features_dict=proto.feature_pb2.FeaturesDict(
+            features={'text': text_feature}))
+    return proto.dataset_info_pb2.DatasetInfo(
+        name='ds_name',
+        version='1.0.0',
+        file_format='tfrecord',
+        splits=splits,
+        features=features)
+
+  split_train_1 = split_for('train', [4, 5])
+  split_test_1 = split_for('test', [3])
+
+  split_train_2 = split_for('train', [3, 7])
+  builder_dirs = {
+      '/path/dataset/a': dataset_info([split_train_1, split_test_1]),
+      '/path/dataset/b': dataset_info([split_train_2]),
+  }
+  for builder_dir, di_proto in builder_dirs.items():
+    content = json_format.MessageToJson(di_proto, sort_keys=True)
+    mock_fs.add_file(path=f'{builder_dir}/dataset_info.json', content=content)
+
+  result = read_only_builder.builder_from_directories(list(builder_dirs.keys()))
+
+  assert isinstance(result, read_only_builder.ReadOnlyBuilder)
+  assert isinstance(result.info.splits['train'], splits_lib.MultiSplitInfo)
+  assert isinstance(result.info.splits['test'], splits_lib.MultiSplitInfo)
+
+  assert str(result.info.splits['test']) == (
+      'MultiSplitInfo(name=\'test\', '
+      'split_infos=[<SplitInfo num_examples=3, num_shards=1>])')
+  assert str(result.info.splits['train']) == (
+      'MultiSplitInfo(name=\'train\', split_infos=['
+      '<SplitInfo num_examples=9, num_shards=2>, '
+      '<SplitInfo num_examples=10, num_shards=2>])')
+
+
+def test_builder_from_directories_reading(
+    code_builder: dataset_builder.DatasetBuilder):
+  other_dir1 = f'{code_builder.data_dir}/other1'
+  other_dir2 = f'{code_builder.data_dir}/other2'
+
+  # Copy from code_builder dir to the new dirs.
+  tf.io.gfile.makedirs(other_dir1)
+  tf.io.gfile.makedirs(other_dir2)
+  for filename in tf.io.gfile.listdir(code_builder.data_dir):
+    filepath = f'{code_builder.data_dir}/{filename}'
+    if not tf.io.gfile.isdir(filepath):
+      tf.io.gfile.copy(src=filepath, dst=other_dir1, overwrite=True)
+      tf.io.gfile.copy(src=filepath, dst=other_dir2, overwrite=True)
+
+  builder = read_only_builder.builder_from_directories(
+      [other_dir1, other_dir2, code_builder.data_dir])
+  train_np = dataset_utils.as_numpy(builder.as_dataset(split='train'))
+  assert len(train_np) == 9
+  ds = dataset_utils.as_numpy(builder.as_dataset(split='train').take(5))
+  assert len(ds) == 5

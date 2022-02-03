@@ -94,6 +94,46 @@ class SplitDictTest(testing.TestCase):
     with self.assertRaisesWithPredicateMatch(KeyError, '`splits` is empty'):
       _ = sd['train']
 
+  def test_merge_multiple(self):
+
+    def split_info_for(name: str, shard_lengths, template) -> splits.SplitInfo:
+      return splits.SplitInfo(
+          name=name,
+          shard_lengths=shard_lengths,
+          num_bytes=0,
+          filename_template=template)
+
+    template_a = naming.ShardedFileTemplate(
+        dataset_name='ds_name', data_dir='/a', filetype_suffix='tfrecord')
+    split_info_a1 = split_info_for('train', [1, 2, 3], template_a)
+    split_info_a2 = split_info_for('test', [1], template_a)
+    split_info_a3 = split_info_for('banana', [1], template_a)
+    split_dict_1 = splits.SplitDict(
+        [split_info_a1, split_info_a2, split_info_a3])
+
+    template_b = naming.ShardedFileTemplate(
+        dataset_name='ds_name', data_dir='/b', filetype_suffix='tfrecord')
+    split_info_b1 = split_info_for('train', [4, 5, 6], template_b)
+    split_info_b2 = split_info_for('test', [3], template_b)
+    split_dict_2 = splits.SplitDict([split_info_b1, split_info_b2])
+
+    template_c = naming.ShardedFileTemplate(
+        dataset_name='ds_name', data_dir='/c', filetype_suffix='tfrecord')
+    split_info_c1 = split_info_for('train', [8], template_c)
+    split_info_c2 = split_info_for('train', [9], template_c)
+    multi_split = splits.MultiSplitInfo(
+        name='train', split_infos=[split_info_c1, split_info_c2])
+    split_dict_3 = splits.SplitDict([multi_split])
+
+    merged = splits.SplitDict.merge_multiple(
+        [split_dict_1, split_dict_2, split_dict_3])
+    assert len(merged.values()) == 3
+    assert merged.get('train').split_infos == [
+        split_info_a1, split_info_b1, split_info_c1, split_info_c2
+    ]
+    assert merged.get('test').split_infos == [split_info_a2, split_info_b2]
+    assert merged.get('banana').split_infos == [split_info_a3]
+
 
 class SplitsDictTest(testing.TestCase):
 

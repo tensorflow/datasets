@@ -18,6 +18,7 @@
 import abc
 import dataclasses
 import functools
+import itertools
 import math
 import operator
 import re
@@ -95,9 +96,13 @@ class SplitInfo:
       default_factory=statistics_pb2.DatasetFeatureStatistics,)
 
   def __post_init__(self):
-    if self.filename_template and self.name != self.filename_template.split:
+    if (self.filename_template and self.filename_template.split and
+        self.name != self.filename_template.split):
       raise ValueError(f'Split name {self.name} must be equal to split name '
                        f'in template {self.filename_template.split}')
+    if (self.filename_template and not self.filename_template.split):
+      super().__setattr__('filename_template',
+                          self.filename_template.replace(split=self.name))
     # Normalize bytes
     super().__setattr__('num_bytes', units.Size(self.num_bytes))
 
@@ -361,6 +366,24 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
   def total_num_examples(self):
     """Return the total number of examples."""
     return sum(s.num_examples for s in self.values())
+
+  @classmethod
+  def merge_multiple(cls, split_dicts: List['SplitDict']) -> 'SplitDict':
+    info_per_split = []
+    for split in set(itertools.chain(*split_dicts)):
+      infos_of_split = []
+      for split_dict in split_dicts:
+        if split not in split_dict:
+          continue
+        split_info = split_dict[split]
+        if isinstance(split_info, MultiSplitInfo):
+          infos_of_split.extend(split_info.split_infos)
+        else:
+          infos_of_split.append(split_info)
+      info_per_split.append(
+          MultiSplitInfo(name=split, split_infos=infos_of_split))
+
+    return cls(split_infos=info_per_split)
 
 
 def _make_absolute_instructions(

@@ -369,6 +369,9 @@ class DatasetInfo(object):
   def set_splits(self, split_dict: splits_lib.SplitDict) -> None:
     """Split setter (private method)."""
     for split, split_info in split_dict.items():
+      if isinstance(split_info, splits_lib.MultiSplitInfo):
+        # When splits are from multiple folders, the dataset can be different.
+        continue
       if (split_info.filename_template and
           self._builder.name != split_info.filename_template.dataset_name):
         raise AssertionError(
@@ -385,6 +388,9 @@ class DatasetInfo(object):
         data_dir=self.data_dir,
         filetype_suffix=self.as_proto.file_format or "tfrecord")
     for split_info in split_dict.values():
+      if isinstance(split_info, splits_lib.MultiSplitInfo):
+        new_split_infos.append(split_info)
+        continue
       old_split_info = self._splits.get(split_info.name)
       if (not split_info.statistics.ByteSize() and old_split_info and
           old_split_info.statistics.ByteSize() and
@@ -400,14 +406,22 @@ class DatasetInfo(object):
     self._splits = splits_lib.SplitDict(new_split_infos)
 
     # Update the proto
+    # Note that the proto should not be saved or used for multi-folder datasets.
     del self.as_proto.splits[:]  # Clear previous
-    for split_info in split_dict.to_proto():
-      self.as_proto.splits.add().CopyFrom(split_info)
+    for split_info in self._splits.values():
+      if isinstance(split_info, splits_lib.MultiSplitInfo):
+        for si in split_info.split_infos:
+          self.as_proto.splits.add().CopyFrom(si.to_proto())
+      else:
+        self.as_proto.splits.add().CopyFrom(split_info.to_proto())
 
   def update_data_dir(self, data_dir: str) -> None:
     """Updates the data dir for each split."""
     new_split_infos = []
     for split_info in self._splits.values():
+      if isinstance(split_info, splits_lib.MultiSplitInfo):
+        raise RuntimeError(
+            "Updating the data_dir for MultiSplitInfo is not supported!")
       filename_template = split_info.filename_template.replace(
           data_dir=data_dir)
       new_split_info = split_info.replace(filename_template=filename_template)

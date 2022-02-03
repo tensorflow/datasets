@@ -27,7 +27,9 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import feature_pb2
@@ -299,6 +301,55 @@ class DatasetInfoTest(testing.TestCase):
     # These are dynamically computed, so will be updated.
     self.assertEqual(40, info.splits.total_num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
+
+  def test_set_splits_normal(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    split_info1 = splits_lib.SplitInfo(
+        name="train", shard_lengths=[1, 2], num_bytes=0)
+    split_info2 = splits_lib.SplitInfo(
+        name="test", shard_lengths=[1], num_bytes=0)
+    split_dict = splits_lib.SplitDict(split_infos=[split_info1, split_info2])
+    info.set_splits(split_dict)
+    self.assertEqual(str(info.splits), str(split_dict))
+    self.assertEqual(
+        str(info.as_proto.splits),
+        str([split_info1.to_proto(),
+             split_info2.to_proto()]))
+
+  def test_set_splits_incorrect_dataset_name(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    split_info1 = splits_lib.SplitInfo(
+        name="train",
+        shard_lengths=[1, 2],
+        num_bytes=0,
+        filename_template=naming.ShardedFileTemplate(
+            dataset_name="some_other_dataset",
+            split="train",
+            data_dir=info.data_dir,
+            filetype_suffix="tfrecord"))
+    split_dict = splits_lib.SplitDict(split_infos=[split_info1])
+    with pytest.raises(
+        AssertionError, match="SplitDict contains SplitInfo for split"):
+      info.set_splits(split_dict)
+
+  def test_set_splits_multi_split_info(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    split_info1 = splits_lib.SplitInfo(
+        name="train", shard_lengths=[1, 2], num_bytes=0)
+    split_info2 = splits_lib.SplitInfo(
+        name="test", shard_lengths=[1], num_bytes=0)
+    multi_split_info1 = splits_lib.MultiSplitInfo(
+        name="train", split_infos=[split_info1])
+    multi_split_info2 = splits_lib.MultiSplitInfo(
+        name="test", split_infos=[split_info2])
+    split_dict = splits_lib.SplitDict(
+        split_infos=[multi_split_info1, multi_split_info2])
+    info.set_splits(split_dict)
+    self.assertEqual(str(info.splits), str(split_dict))
+    self.assertEqual(
+        str(info.as_proto.splits),
+        str([split_info1.to_proto(),
+             split_info2.to_proto()]))
 
 
 @pytest.mark.parametrize(

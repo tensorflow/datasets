@@ -17,7 +17,7 @@
 
 import os
 import typing
-from typing import Any, Optional, Tuple, Type
+from typing import Any, List, Optional, Tuple, Type
 
 import tensorflow as tf
 
@@ -25,6 +25,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import dataset_info_pb2
@@ -126,6 +127,60 @@ def builder_from_directory(
     builder: `tf.core.DatasetBuilder`, builder for dataset at the given path.
   """
   return ReadOnlyBuilder(builder_dir=builder_dir)
+
+
+def builder_from_directories(
+    builder_dirs: List[utils.PathLike]) -> dataset_builder.DatasetBuilder:
+  """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
+
+  When a dataset is spread out over multiple folders, then this function can be
+  used to easily read from all builder dirs.
+
+  Note that the data in each folder must have the same features, dataset name,
+  and version.
+
+  Some examples of when a dataset might be spread out over multiple folders:
+
+  - in reinforcement learning, multiple agents each produce a dataset
+  - each day a new dataset is produced based on new incoming events
+
+  Arguments:
+    builder_dirs: the list of builder dirs from which the data should be read.
+
+  Returns:
+    the read only dataset builder that is configured to read from all the given
+    builder dirs.
+  """
+  if not builder_dirs:
+    raise ValueError('No builder dirs were given!')
+
+  dataset_infos = utils.tree.parallel_map(
+      dataset_info.read_proto_from_builder_dir, {d: d for d in builder_dirs})
+
+  # TODO(tfds): assert that the features of all datasets are identical.
+
+  def get_split_dict(builder_dir, dataset_info_proto) -> splits_lib.SplitDict:
+    filename_template = naming.ShardedFileTemplate(
+        dataset_name=dataset_info_proto.name,
+        data_dir=builder_dir,
+        filetype_suffix=dataset_info_proto.file_format)
+    return splits_lib.SplitDict.from_proto(
+        repeated_split_infos=dataset_info_proto.splits,
+        filename_template=filename_template)
+
+  merged_split_dict = splits_lib.SplitDict.merge_multiple([
+      get_split_dict(builder_dir, dataset_info_proto)
+      for builder_dir, dataset_info_proto in dataset_infos.items()
+  ])
+
+  # We create the ReadOnlyBuilder for a random builder_dir and then update the
+  # splits to capture the splits from all builder dirs.
+  random_builder_dir = builder_dirs[0]
+  random_builder = ReadOnlyBuilder(
+      builder_dir=random_builder_dir,
+      info_proto=dataset_infos[random_builder_dir])
+  random_builder.info.set_splits(merged_split_dict)
+  return random_builder
 
 
 def builder_from_metadata(
