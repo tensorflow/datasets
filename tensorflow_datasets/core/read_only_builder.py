@@ -130,7 +130,9 @@ def builder_from_directory(
 
 
 def builder_from_directories(
-    builder_dirs: List[utils.PathLike]) -> dataset_builder.DatasetBuilder:
+    builder_dirs: List[utils.PathLike],
+    *,
+    filetype_suffix: Optional[str] = None) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
   When a dataset is spread out over multiple folders, then this function can be
@@ -146,6 +148,8 @@ def builder_from_directories(
 
   Arguments:
     builder_dirs: the list of builder dirs from which the data should be read.
+    filetype_suffix: the filetype suffix (e.g. 'tfrecord') that is used if the
+      file format is not specified in the DatasetInfo.
 
   Returns:
     the read only dataset builder that is configured to read from all the given
@@ -163,7 +167,7 @@ def builder_from_directories(
     filename_template = naming.ShardedFileTemplate(
         dataset_name=dataset_info_proto.name,
         data_dir=builder_dir,
-        filetype_suffix=dataset_info_proto.file_format)
+        filetype_suffix=dataset_info_proto.file_format or filetype_suffix)
     return splits_lib.SplitDict.from_proto(
         repeated_split_infos=dataset_info_proto.splits,
         filename_template=filename_template)
