@@ -271,8 +271,10 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
           mode='context'),
   ]
 
-  VERSION = tfds.core.Version('1.2.1')
+  VERSION = tfds.core.Version('1.2.2')
   RELEASE_NOTES = {
+      '1.2.2': 'Update to reflect context only having a train split.',
+      '1.2.1': 'Fix incorrect formatting in context splits.',
       '1.2.0': 'Add toxic spans, context, and parent comment text features.',
       '1.1.3': 'Corrected id types from float to string.',
       '1.1.2': 'Added separate citation for CivilCommentsCovert dataset.',
@@ -330,19 +332,11 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
                 'mode': mode,
                 'split': 'train',
             },
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                'filename': filename,
-                'mode': mode,
-                'split': 'test_private',
-            },
-        ),
+        )
     ]
 
-    if mode != 'covert':
-      # Covert does not have validation split.
+    if mode != 'covert' and mode != 'context':
+      # Covert and context do not have validation split.
       validation_split_generator = tfds.core.SplitGenerator(
           name=tfds.Split.VALIDATION,
           gen_kwargs={
@@ -351,8 +345,19 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
               'split': 'test_public',
           },
       )
-      splits.insert(1, validation_split_generator)
+      splits.append(validation_split_generator)
 
+    if mode != 'context':
+      # Context has only a train split.
+      test_split_generator = tfds.core.SplitGenerator(
+          name=tfds.Split.TEST,
+          gen_kwargs={
+              'filename': filename,
+              'mode': mode,
+              'split': 'test_private',
+          },
+      )
+      splits.append(test_split_generator)
     return splits
 
   def _generate_examples(self, filename, mode, split):

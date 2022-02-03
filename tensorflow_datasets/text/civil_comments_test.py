@@ -32,15 +32,21 @@ class CivilCommentsNoCovertTest(testing.DatasetBuilderTestCase):
   }
 
 
-class CivilCommentsToxicSpansAndInContext(testing.DatasetBuilderTestCase):
+class CivilCommentsToxicSpans(testing.DatasetBuilderTestCase):
   DATASET_CLASS = civil_comments.CivilComments
-  BUILDER_CONFIG_NAMES_TO_TEST = [
-      "CivilCommentsToxicSpans", "CivilCommentsInContext"
-  ]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["CivilCommentsToxicSpans"]
   SPLITS = {
       "train": 2,  # Number of fake train examples
       "test": 1,  # Number of fake test examples
       "validation": 1,  # Number of fake validation examples
+  }
+
+
+class CivilCommentsInContext(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = civil_comments.CivilComments
+  BUILDER_CONFIG_NAMES_TO_TEST = ["CivilCommentsInContext"]
+  SPLITS = {
+      "train": 2,  # Number of fake train examples
   }
 
 
