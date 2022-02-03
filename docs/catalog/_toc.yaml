@@ -350,6 +350,9 @@ toc:
     title: rlu_rwrl
   title: Rl unplugged
 - section:
+  - path: /datasets/catalog/locomotion
+    status: nightly
+    title: locomotion
   - path: /datasets/catalog/robosuite_panda_pick_place_can
     title: robosuite_panda_pick_place_can
   title: Rlds

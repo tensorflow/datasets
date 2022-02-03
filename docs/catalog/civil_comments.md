@@ -12,6 +12,11 @@
 # `civil_comments`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This version of the CivilComments Dataset provides access to the primary seven
@@ -61,20 +66,12 @@ when making the labels.
     *   `1.1.2`: Added separate citation for CivilCommentsCovert dataset.
     *   `1.1.3`: Corrected id types from float to string.
     *   `1.2.0`: Add toxic spans, context, and parent comment text features.
-    *   **`1.2.1`** (default): No release notes.
+    *   `1.2.1`: Fix incorrect formatting in context splits.
+    *   **`1.2.2`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Update to reflect context only having a train split.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+*   **Download size**: `427.41 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -90,6 +87,20 @@ Split | Examples
 *   **Config description**: The CivilComments set here includes all the data,
     but only the basic seven labels (toxicity, severe_toxicity, obscene, threat,
     insult, identity_attack, and sexual_explicit).
+
+*   **Dataset size**: `1.39 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'test'`       | 97,320
+`'train'`      | 1,804,874
+`'validation'` | 97,320
 
 *   **Features**:
 
@@ -143,6 +154,20 @@ FeaturesDict({
     extended set of identity labels in addition to the basic seven labels.
     However, it only includes the subset (roughly a quarter) of the data with
     all these features.
+
+*   **Dataset size**: `622.02 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 21,577
+`'train'`      | 405,130
+`'validation'` | 21,293
 
 *   **Features**:
 
@@ -224,6 +249,19 @@ FeaturesDict({
     different types of covert offensiveness. The full annotation procedure is
     detailed in a forthcoming paper at
     https://sites.google.com/corp/view/hciandnlp/accepted-papers.
+
+*   **Dataset size**: `94.12 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,455
+`'train'` | 48,074
 
 *   **Features**:
 
@@ -310,6 +348,20 @@ FeaturesDict({
     character (unicode codepoints) boundaries that were tagged as toxic by a
     majority of the annotators is returned in a 'spans' feature.
 
+*   **Dataset size**: `5.03 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,000
+`'train'`      | 7,939
+`'validation'` | 682
+
 *   **Features**:
 
 ```python
@@ -349,6 +401,18 @@ FeaturesDict({
 *   **Config description**: The CivilComments Toxic Spans are a subset of
     CivilComments that was labeled by making available to the labelers the
     parent_text. It includes a contextual_toxicity feature.
+
+*   **Dataset size**: `8.90 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,969
 
 *   **Features**:
 
