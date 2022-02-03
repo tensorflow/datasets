@@ -5,7 +5,6 @@ on: push
 # Cancel in-progress jobs or runs for the current workflow if not on the main
 # branch (as it mark the unittests as failed).
 concurrency:
-  if: ${{ github.ref != 'refs/heads/master' }}
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
