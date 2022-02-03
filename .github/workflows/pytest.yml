@@ -2,23 +2,28 @@ name: Unittests
 
 on: push
 
+# Cancel in-progress runs for the current workflow if not on the main branch
+# (as it mark the unittests as failed).
+# Conditionals to concurrent are based on the solution proposed in this link:
+# https://github.community/t/concurrency-cancel-in-progress-but-not-when-ref-is-master/194707
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
+  # Cancel only PR intermediate builds
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+
 jobs:
   pytest-job:
     name: "Core TFDS tests on ${{ matrix.tf_version }}"
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
+      # Do not cancel in-progress jobs if any matrix job fails.
+      fail-fast: false
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
 
     steps:
-    # Do not cancel actions on the main branch (as it mark the unittests as
-    # failed)
-    - if: ${{ github.ref != 'refs/heads/master' }}
-      uses: styfle/cancel-workflow-action@0.9.1
-      with:
-        access_token: ${{ github.token }}
-
     - uses: actions/checkout@v2
 
     # Install deps
