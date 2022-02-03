@@ -36,7 +36,7 @@ _DESCRIPTION = """\
 This dataset consists of the ImageNet dataset resized to fixed size.
 The images here are the ones provided by Chrabaszcz et. al. using the box resize method.
 
-For [downsampled ImageNet](http://image-net.org/small/download.php) for unsupervised learning see `downsampled_imagenet`.
+For [downsampled ImageNet](http://image-net.org/download.php) for unsupervised learning see `downsampled_imagenet`.
 
 WARNING: The integer labels used are defined by the authors and do not match
 those from the other ImageNet datasets provided by Tensorflow datasets.
