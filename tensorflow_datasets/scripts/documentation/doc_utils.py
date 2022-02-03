@@ -113,24 +113,27 @@ class DataframeDocUtil(object):
 
     <button id="{button_id}">Display examples...</button>
     <div id="{content_id}" style="overflow-x:auto"></div>
-    <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
     <script>
-    var url = "{url}";
-    $(document).ready(() => {{
-      $("#{button_id}").click((event) => {{
-        // Disable the button after clicking (dataframe loaded only once).
-        $("#{button_id}").prop("disabled", true);
+    const url = "{url}";
+    const dataButton = document.getElementById('{button_id}');
+    dataButton.addEventListener('click', async () => {{
+      // Disable the button after clicking (dataframe loaded only once).
+      dataButton.disabled = true;
 
-        // Pre-fetch and display the content
-        $.get(url, (data) => {{
-          $("#{content_id}").html(data);
-        }}).fail(() => {{
-          $("#{content_id}").html(
+      const contentPane = document.getElementById('{content_id}');
+      try {{
+        const response = await fetch(url);
+        // Error response codes don't throw an error, so force an error to show
+        // the error message.
+        if (!response.ok) throw Error(response.statusText);
+
+        const data = await response.text();
+        contentPane.innerHTML = data;
+      }} catch (e) {{
+        contentPane.innerHTML =
             'Error loading examples. If the error persist, please open '
-            + 'a new issue.'
-          );
-        }});
-      }});
+            + 'a new issue.';
+      }}
     }});
     </script>
 
