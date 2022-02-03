@@ -1,6 +1,6 @@
 Thank you for your contribution!
 
-Please read https://www.tensorflow.org/datasets/contribute#pr_checklist to make sure your PR follow the guidelines.
+Please read https://www.tensorflow.org/datasets/contribute#pr_checklist to make sure your PR follows the guidelines.
 
 # Add Dataset
 
