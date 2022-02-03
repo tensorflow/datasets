@@ -2,12 +2,12 @@ name: Unittests
 
 on: push
 
-# Cancel in-progress jobs or runs for the current workflow if not on the main
+# Cancel in-progress runs for the current workflow if not on the main
 # branch (as it mark the unittests as failed).
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
+  # Cancel only PR intermediate builds
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 jobs:
   pytest-job:
