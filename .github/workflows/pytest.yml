@@ -1,17 +1,7 @@
 name: Unittests
 
 on:
-  # For merges, the testing workflow is activated only on the master branch.
-  push:
-    branches:
-      - "master"
-      - "test_*"
-      - "Conchylicultor*"
-  # pull_request:
-  #   types: [assigned, opened, synchronize, reopened]
-  #     # # Unittests are not triggered for PRs with the `merged` tag.
-  #     # - "test_*"
-  #     # - "!test_*/**merged"
+  push
 
 # Cancel in-progress runs for the current workflow if not on the main
 # branch (as it mark the unittests as failed).
@@ -22,6 +12,11 @@ concurrency:
 
 jobs:
   pytest-job:
+    # For merged PR, activate testing only on the master branch.
+    if:
+      (github.ref == 'refs/heads/master') || (github.event.action != 'closed')
+      # (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+
     name: "Core TFDS tests on ${{ matrix.tf_version }}"
     runs-on: ubuntu-latest
     timeout-minutes: 30
