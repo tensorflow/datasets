@@ -2,14 +2,14 @@ name: Unittests
 
 on:
   # For merges, the testing workflow is activated only on the master branch.
-  push:
-    branches:
-      - "master"
-  pull_request:
-    types: [assigned, opened, synchronize, reopened]
-      # # Unittests are not triggered for PRs with the `merged` tag.
-      # - "test_*"
-      # - "!test_*/**merged"
+  push
+  #   branches:
+  #     - "master"
+  # pull_request:
+  #   types: [assigned, opened, synchronize, reopened]
+  #     # # Unittests are not triggered for PRs with the `merged` tag.
+  #     # - "test_*"
+  #     # - "!test_*/**merged"
 
 # Cancel in-progress runs for the current workflow if not on the main
 # branch (as it mark the unittests as failed).
