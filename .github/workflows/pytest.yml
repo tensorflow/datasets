@@ -3,8 +3,10 @@ name: Unittests
 on:
   # For merges, the testing workflow is activated only on the master branch.
   push
-  #   branches:
-  #     - "master"
+    branches:
+      - "master"
+      - "test_*"
+      - "Conchylicultor*"
   # pull_request:
   #   types: [assigned, opened, synchronize, reopened]
   #     # # Unittests are not triggered for PRs with the `merged` tag.
