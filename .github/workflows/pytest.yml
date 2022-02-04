@@ -2,7 +2,7 @@ name: Unittests
 
 on:
   # For merges, the testing workflow is activated only on the master branch.
-  push
+  push:
     branches:
       - "master"
       - "test_*"
