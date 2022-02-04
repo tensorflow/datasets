@@ -14,8 +14,8 @@ jobs:
   pytest-job:
     # For merged PR, activate testing only on the master branch.
     if:
-      (github.ref == 'refs/heads/master') || (github.event.action != 'closed')
-      # (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+      # (github.ref == 'refs/heads/master') || (github.event.action != 'closed')
+      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
 
     name: "Core TFDS tests on ${{ matrix.tf_version }}"
     runs-on: ubuntu-latest
