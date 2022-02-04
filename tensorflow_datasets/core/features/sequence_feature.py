@@ -15,7 +15,7 @@
 
 """Sequence feature."""
 
-from typing import Optional
+from typing import Optional, Union
 
 import numpy as np
 import tensorflow as tf
@@ -25,6 +25,7 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 
@@ -199,16 +200,24 @@ class Sequence(top_level_feature.TopLevelFeature):
     return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
   @classmethod
-  def from_json_content(cls, value: Json) -> 'Sequence':
+  def from_json_content(
+      cls,
+      value: Union[Json, feature_pb2.Sequence],
+  ) -> 'Sequence':
+    if isinstance(value, dict):
+      # For backwards compatibility
+      return cls(
+          feature=feature_lib.FeatureConnector.from_json(value['feature']),
+          length=value['length'])
     return cls(
-        feature=feature_lib.FeatureConnector.from_json(value['feature']),
-        length=value['length'])
+        feature=feature_lib.FeatureConnector.from_proto(value.feature),
+        length=None if value.length == -1 else value.length)
 
-  def to_json_content(self) -> Json:
-    return {
-        'feature': self.feature.to_json(),
-        'length': self._length,
-    }
+  def to_json_content(self) -> feature_pb2.Sequence:
+    return feature_pb2.Sequence(
+        feature=self.feature.to_proto(),
+        length=-1 if self._length is None else self._length,
+    )
 
 
 def build_empty_np(serialized_info: feature_lib.TensorInfo):

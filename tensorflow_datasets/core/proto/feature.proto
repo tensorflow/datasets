@@ -25,6 +25,7 @@ message Feature {
     BoundingBoxFeature bounding_box = 9;
     TextFeature text = 10;
     TranslationFeature translation = 11;
+    Sequence sequence = 12;
   }
 }
 
@@ -104,4 +105,13 @@ message TranslationFeature {
   repeated string languages = 1;
   // Whether there's a variable or static list of languages per example.
   bool variable_languages_per_example = 2;
+}
+
+// A sequence of feature values. Could also be a sequence of feature dicts.
+message Sequence {
+  // The feature of which this is a sequence
+  Feature feature = 1;
+
+  // Optional length of the sequence.
+  int64 length = 2;
 }
