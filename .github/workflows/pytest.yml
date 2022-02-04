@@ -6,8 +6,10 @@ on:
     branches:
       - "master"
   pull_request:
-    branches:
-      - "test_*"
+    types: [assigned, opened, synchronize, reopened]
+      # # Unittests are not triggered for PRs with the `merged` tag.
+      # - "test_*"
+      # - "!test_*/**merged"
 
 # Cancel in-progress runs for the current workflow if not on the main
 # branch (as it mark the unittests as failed).
