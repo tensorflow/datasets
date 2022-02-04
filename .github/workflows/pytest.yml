@@ -1,6 +1,13 @@
 name: Unittests
 
-on: push
+on:
+  # For merges, the testing workflow is activated only on the master branch.
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "test_*"
 
 # Cancel in-progress runs for the current workflow if not on the main
 # branch (as it mark the unittests as failed).
@@ -19,13 +26,6 @@ jobs:
         tf_version: ["tensorflow", "tf-nightly"]
 
     steps:
-    # Do not cancel actions on the main branch (as it mark the unittests as
-    # failed)
-    - if: ${{ github.ref != 'refs/heads/master' }}
-      uses: styfle/cancel-workflow-action@0.9.1
-      with:
-        access_token: ${{ github.token }}
-
     - uses: actions/checkout@v2
 
     # Install deps
