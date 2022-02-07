@@ -66,6 +66,7 @@ TESTS_REQUIRE = [
     'jupyter',
     'pytest',
     'pytest-xdist',
+    'toml',
     # Lazy-deps required by core
     'pandas',
     'pydub',
