@@ -14,7 +14,6 @@ jobs:
   pytest-job:
     # For merged PR, activate testing only on the master branch.
     if:
-      # (github.ref == 'refs/heads/master') || (github.event.action != 'closed')
       (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
 
     name: "Core TFDS tests on ${{ matrix.tf_version }}"
@@ -30,7 +29,7 @@ jobs:
     # Install deps
     - uses: actions/setup-python@v2
       with:
-        python-version: 3.7
+        python-version:  3.7
 
     - run: pip --version
     - run: pip install ${{ matrix.tf_version }}
@@ -56,6 +55,10 @@ jobs:
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
 
   notebooktest-job:
+    # For merged PR, activate testing only on the master branch.
+    if:
+      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+
     name: "Notebook tests"
     runs-on: ubuntu-latest
     timeout-minutes: 30
