@@ -17,6 +17,7 @@
 
 import functools
 import itertools
+import os
 from unittest import mock
 
 import six
@@ -241,14 +242,16 @@ class ReaderTest(testing.TestCase):
     ds = self.reader.read_files(
         [
             shard_utils.FileInstruction(
-                filename=filename_template.sharded_filepath(
-                    shard_index=1, num_shards=4),
+                filename=os.fspath(
+                    filename_template.sharded_filepath(
+                        shard_index=1, num_shards=4)),
                 skip=0,
                 take=-1,
                 num_examples=3),
             shard_utils.FileInstruction(
-                filename=filename_template.sharded_filepath(
-                    shard_index=3, num_shards=4),
+                filename=os.fspath(
+                    filename_template.sharded_filepath(
+                        shard_index=3, num_shards=4)),
                 skip=1,
                 take=1,
                 num_examples=1),
@@ -305,8 +308,9 @@ class ReaderTest(testing.TestCase):
       self.reader.read_files(
           [
               shard_utils.FileInstruction(
-                  filename=filename_template.sharded_filepath(
-                      shard_index=1, num_shards=4),
+                  filename=os.fspath(
+                      filename_template.sharded_filepath(
+                          shard_index=1, num_shards=4)),
                   skip=0,
                   take=-1,
                   num_examples=3),
@@ -321,8 +325,9 @@ class ReaderTest(testing.TestCase):
     filename_template = self._filename_template(split='train')
     instructions = [
         shard_utils.FileInstruction(
-            filename=filename_template.sharded_filepath(
-                shard_index=1, num_shards=4),
+            filename=os.fspath(
+                filename_template.sharded_filepath(shard_index=1,
+                                                   num_shards=4)),
             skip=0,
             take=-1,
             num_examples=3),

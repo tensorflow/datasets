@@ -18,6 +18,7 @@
 import dataclasses
 import itertools
 import json
+import os
 
 from typing import Any, Iterable, List, Optional, Tuple
 
@@ -129,11 +130,11 @@ def _get_shard_specs(
         from_, to, bucket_indexes, bucket_lengths)
     shard_path = filename_template.sharded_filepath(
         shard_index=shard_index, num_shards=num_shards)
-    index_path = _get_index_path(shard_path)
+    index_path = _get_index_path(os.fspath(shard_path))
     shard_specs.append(
         _ShardSpec(
             shard_index=shard_index,
-            path=shard_path,
+            path=os.fspath(shard_path),
             index_path=index_path,
             examples_number=to - from_,
             file_instructions=file_instructions,

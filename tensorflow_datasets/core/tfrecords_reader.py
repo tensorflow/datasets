@@ -148,7 +148,7 @@ def _read_files(
   # Transpose the list[dict] into dict[list]
   tensor_inputs = _Instruction(
       filename=[os.path.basename(i.filename) for i in file_instructions],
-      filepath=[i.filename for i in file_instructions],
+      filepath=[os.fspath(i.filename) for i in file_instructions],
       # skip/take need to be converted to int64 explicitly
       skip=np.array([i.skip for i in file_instructions], dtype=np.int64),
       take=np.array([i.take for i in file_instructions], dtype=np.int64),

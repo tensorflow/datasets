@@ -463,3 +463,9 @@ def test_builder_from_directories_reading(
   assert len(train_np) == 9
   ds = dataset_utils.as_numpy(builder.as_dataset(split='train').take(5))
   assert len(ds) == 5
+
+  # Test split 'all'
+  train_np = dataset_utils.as_numpy(builder.as_dataset(split='all'))
+  assert len(train_np) == 9
+  ds = dataset_utils.as_numpy(builder.as_dataset(split='all').take(5))
+  assert len(ds) == 5
