@@ -12,6 +12,11 @@
 # `grounded_scan`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Grounded SCAN (gSCAN) is a synthetic dataset for evaluating compositional
@@ -29,8 +34,10 @@ More information can be found at: https://github.com/LauraRuis/groundedSCAN
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
-    *   `1.1.0`: Changed `vector` feature to Text().
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Changed `vector` feature to Text().
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -91,6 +98,10 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -120,7 +131,7 @@ FeaturesDict({
 
 *   **Download size**: `82.10 MiB`
 
-*   **Dataset size**: `1004.27 MiB`
+*   **Dataset size**: `998.11 MiB`
 
 *   **Splits**:
 
@@ -137,50 +148,13 @@ Split             | Examples
 `'visual'`        | 37,436
 `'visual_easier'` | 18,718
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/grounded_scan-compositional_splits-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## grounded_scan/target_length_split
 
 *   **Config description**: Examples for generalizing to larger target lengths.
 
 *   **Download size**: `53.41 MiB`
 
-*   **Dataset size**: `550.15 MiB`
+*   **Dataset size**: `546.73 MiB`
 
 *   **Splits**:
 
@@ -190,40 +164,3 @@ Split              | Examples
 `'target_lengths'` | 198,588
 `'test'`           | 37,784
 `'train'`          | 180,301
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/grounded_scan-target_length_split-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->

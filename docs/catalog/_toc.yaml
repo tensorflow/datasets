@@ -346,6 +346,9 @@ toc:
     title: rlu_dmlab_rooms_watermaze
   - path: /datasets/catalog/rlu_dmlab_seekavoid_arena01
     title: rlu_dmlab_seekavoid_arena01
+  - path: /datasets/catalog/rlu_locomotion
+    status: nightly
+    title: rlu_locomotion
   - path: /datasets/catalog/rlu_rwrl
     title: rlu_rwrl
   title: Rl unplugged
