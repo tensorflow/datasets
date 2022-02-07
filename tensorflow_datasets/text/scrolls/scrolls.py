@@ -153,7 +153,9 @@ class ScrollsConfig(tfds.core.BuilderConfig):
   url: str = ""
 
 
-_FEATURES = ("id", "pid", "input", "output")
+_INPUT_KEY = "input"
+_OUTPUT_KEY = "output"
+_FEATURES = ("id", "pid", _INPUT_KEY, _OUTPUT_KEY)
 
 
 class Scrolls(tfds.core.GeneratorBasedBuilder):
@@ -222,7 +224,7 @@ class Scrolls(tfds.core.GeneratorBasedBuilder):
         description=_SCROLLS_DESCRIPTION + self.builder_config.description,
         features=tfds.features.FeaturesDict(
             {feature: tfds.features.Text() for feature in _FEATURES}),
-        supervised_keys=None,
+        supervised_keys=(_INPUT_KEY, _OUTPUT_KEY),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation + "\n" + _SCROLLS_CITATION,
     )
