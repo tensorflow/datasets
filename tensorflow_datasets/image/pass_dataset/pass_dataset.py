@@ -124,6 +124,7 @@ class PASS(tfds.core.GeneratorBasedBuilder):
                 img_meta['latitude'] if 'latitude' in img_meta else 0,
             'image/date_taken':
                 img_meta['datetaken']
+                # Filtering out nan values (which are not equal to themselves).
                 if img_meta['datetaken'] == img_meta['datetaken'] else ''
         }
         yield i, record
