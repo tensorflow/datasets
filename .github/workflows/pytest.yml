@@ -1,11 +1,11 @@
 name: Unittests
 
 on:
-  push
-  # Do not trigger tests for documentation or markdown docs.
-  paths-ignore:
-    - '*.md'
-    - 'docs/**''
+  push:
+    # Do not trigger tests for documentation or markdown docs.
+    paths-ignore:
+      - '*.md'
+      - 'docs/**''
 
 # Cancel in-progress runs for the current workflow if not on the main
 # branch (as it mark the unittests as failed).
