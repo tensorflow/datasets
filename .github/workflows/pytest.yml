@@ -45,27 +45,8 @@ jobs:
     # Install the protocol buffer compiler for gcld3 tests.
     - run: sudo apt install -y protobuf-compiler
 
-    - name: Cache ffmpeg
-      uses: actions/cache@v2
-      id: cache-ffmpeg
-      with:
-          path: "~/ffmpeg"
-          key: ${{secrets.FFMPEG_VERSION}}
-
     # Install ffmpeg for Audio FeatureConnector tests.
-    - name: Install ffmpeg
-      env:
-        CACHE_HIT: ${{steps.cache-ffmpeg.outputs.cache-hit}}
-        FFMPEG_VERSION: ${{secrets.FFMPEG_VERSION}}
-      run: |
-        if [[ "$CACHE_HIT" == 'true' ]]; then
-          sudo cp --verbose --force --recursive ~/ffmpeg/* /
-        else
-          sudo apt-get install --yes ffmpeg="$FFMPEG_VERSION"
-          mkdir -p ~/ffmpeg
-          sudo dpkg -L ffmpeg | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/ffmpeg/
-        fi
-    # - run: sudo apt-get install ffmpeg
+    - run: sudo apt-get install ffmpeg
 
     - run: pip install -e .[tests-all]
     # Install tensorflow_io for lsun tests.
