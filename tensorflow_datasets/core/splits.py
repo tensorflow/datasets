@@ -21,6 +21,7 @@ import functools
 import itertools
 import math
 import operator
+import os
 import re
 import typing
 from typing import Any, Dict, Iterable, List, Optional, Union
@@ -182,7 +183,14 @@ class SplitInfo:
   @property
   def filenames(self) -> List[str]:
     """Returns the list of filenames."""
-    return sorted(f.filename for f in self.file_instructions)
+    return sorted(
+        self.filename_template.sharded_filenames(len(self.shard_lengths)))
+
+  @property
+  def filepaths(self) -> List[utils.ReadWritePath]:
+    """All the paths for all the files that are part of this split."""
+    return sorted(
+        self.filename_template.sharded_filepaths(len(self.shard_lengths)))
 
   def replace(self, **kwargs: Any) -> 'SplitInfo':
     """Returns a copy of the `SplitInfo` with updated attributes."""
@@ -232,6 +240,25 @@ class MultiSplitInfo(SplitInfo):
       result.extend(split_info.file_instructions)
     return result
 
+  @property
+  def filenames(self) -> List[str]:
+    """Returns the list of filenames."""
+    result = []
+    for split_info in self.split_infos:
+      result.extend(split_info.filenames)
+    return result
+
+  @property
+  def filepaths(self) -> List[utils.ReadWritePath]:
+    """All the paths for all the files that are part of this split."""
+    result = []
+    for split_info in self.split_infos:
+      result.extend(split_info.filepaths)
+    return result
+
+  def replace(self, **kwargs: Any) -> 'MultiSplitInfo':
+    raise RuntimeError('replace is not supported on MultiSplitInfo')
+
 
 class SubSplitInfo(object):
   """Wrapper around a sub split info.
@@ -270,7 +297,12 @@ class SubSplitInfo(object):
   @property
   def filenames(self) -> List[str]:
     """Returns the list of filenames."""
-    return sorted(f.filename for f in self.file_instructions)
+    return sorted(os.path.basename(f.filename) for f in self.file_instructions)
+
+  @property
+  def filepaths(self) -> List[utils.ReadWritePath]:
+    """Returns the list of filepaths."""
+    return sorted(utils.as_path(f.filename) for f in self.file_instructions)
 
 
 # TODO(epot): `: tfds.Split` type should be `Union[str, Split]`
@@ -407,13 +439,11 @@ def _file_instructions_for_split(
     raise ValueError(
         'Shard empty. This might means that dataset hasn\'t been generated '
         'yet and info not restored from GCS, or that legacy dataset is used.')
-  filenames = split_info.filename_template.sharded_filepaths(
-      num_shards=split_info.num_shards)
   to = split_info.num_examples if instruction.to is None else instruction.to
   return shard_utils.get_file_instructions(
       from_=instruction.from_ or 0,
       to=to,
-      filenames=filenames,
+      filenames=[os.fspath(fp) for fp in split_info.filepaths],
       shard_lengths=split_info.shard_lengths)
 
 

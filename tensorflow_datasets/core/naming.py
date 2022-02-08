@@ -327,13 +327,13 @@ class ShardedFileTemplate:
       *,
       shard_index: int,
       num_shards: Optional[int],
-  ) -> str:
+  ) -> generic_path.ReadWritePath:
     """Returns the filename (including full path if `data_dir` is set) for the given shard."""
     self._assert_is_complete()
     assert self.data_dir
     filename = self.sharded_filename(
         shard_index=shard_index, num_shards=num_shards)
-    return os.path.join(self.data_dir, filename)
+    return generic_path.as_path(os.path.join(self.data_dir, filename))
 
   def sharded_filepaths_pattern(
       self,
@@ -357,7 +357,8 @@ class ShardedFileTemplate:
       return f'{self.filepath_prefix}@{num_shards}'
     return f'{self.filepath_prefix}*'
 
-  def sharded_filepaths(self, num_shards: int) -> List[str]:
+  def sharded_filepaths(self,
+                        num_shards: int) -> List[generic_path.ReadWritePath]:
     return [
         self.sharded_filepath(shard_index=i, num_shards=num_shards)
         for i in range(num_shards)
@@ -399,7 +400,7 @@ def filepattern_for_dataset_split(
       dataset_name=dataset_name,
       split=split,
       filetype_suffix=filetype_suffix)
-  return template.sharded_filepaths_pattern(num_shards=num_shards)
+  return os.fspath(template.sharded_filepaths_pattern(num_shards=num_shards))
 
 
 def filenames_for_dataset_split(
@@ -416,7 +417,9 @@ def filenames_for_dataset_split(
       split=split,
       filetype_suffix=filetype_suffix,
       data_dir=generic_path.as_path(data_dir))
-  return template.sharded_filenames(num_shards=num_shards)
+  return [
+      os.fspath(fp) for fp in template.sharded_filenames(num_shards=num_shards)
+  ]
 
 
 def filepaths_for_dataset_split(
@@ -433,7 +436,9 @@ def filepaths_for_dataset_split(
       split=split,
       filetype_suffix=filetype_suffix,
       data_dir=generic_path.as_path(data_dir))
-  return template.sharded_filepaths(num_shards=num_shards)
+  return [
+      os.fspath(fp) for fp in template.sharded_filepaths(num_shards=num_shards)
+  ]
 
 
 @dataclasses.dataclass(eq=True, frozen=True)

@@ -15,6 +15,7 @@
 
 """Tests tensorflow_datasets.core.naming."""
 
+import os
 from absl.testing import parameterized
 
 import pytest
@@ -66,8 +67,10 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
         append_num_shards=append_num_shards)
     names = template.sharded_filepaths(num_shards)
     path_template = '/path/ds-train.tfrecord-%s'
-    self.assertEqual(names[0], path_template % (expected_first_suffix))
-    self.assertEqual(names[-1], path_template % (expected_last_suffix))
+    self.assertEqual(
+        os.fspath(names[0]), path_template % (expected_first_suffix))
+    self.assertEqual(
+        os.fspath(names[-1]), path_template % (expected_last_suffix))
 
   @parameterized.parameters(
       ('foo', 'foo-train'),
@@ -309,15 +312,15 @@ def test_filename_template():
       dataset_name='mnist',
       split='train',
       filetype_suffix='tfrecord')
-  assert template.sharded_filepath(
+  assert os.fspath(template.sharded_filepath(
       shard_index=0,
-      num_shards=1) == '/path/mnist-train.tfrecord-00000-of-00001'
-  assert template.sharded_filepath(
+      num_shards=1)) == '/path/mnist-train.tfrecord-00000-of-00001'
+  assert os.fspath(template.sharded_filepath(
       shard_index=0,
-      num_shards=25) == '/path/mnist-train.tfrecord-00000-of-00025'
-  assert template.sharded_filepath(
+      num_shards=25)) == '/path/mnist-train.tfrecord-00000-of-00025'
+  assert os.fspath(template.sharded_filepath(
       shard_index=10,
-      num_shards=25) == '/path/mnist-train.tfrecord-00010-of-00025'
+      num_shards=25)) == '/path/mnist-train.tfrecord-00010-of-00025'
 
 
 def test_sharded_file_template():
@@ -326,8 +329,8 @@ def test_sharded_file_template():
       dataset_name='ds',
       data_dir='/path',
       filetype_suffix='tfrecord')
-  assert template.sharded_filepath(
-      shard_index=0, num_shards=10) == '/path/ds-train.tfrecord-00000-of-00010'
+  assert os.fspath(template.sharded_filepath(
+      shard_index=0, num_shards=10)) == '/path/ds-train.tfrecord-00000-of-00010'
 
 
 def test_filename_template_empty_filetype_suffix():
