@@ -154,7 +154,7 @@ returned in a 'spans' feature.
 """
 
 _CC_CONTEXT_DESCRIPTION = """
-The CivilComments Toxic Spans are a subset of CivilComments that was
+The CivilComments in Context is a subset of CivilComments that was
 labeled by making available to the labelers the parent_text. It includes
 a contextual_toxicity feature.
 """
