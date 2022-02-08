@@ -542,7 +542,7 @@ dataButton.addEventListener('click', async () => {
 
 ## civil_comments/CivilCommentsInContext
 
-*   **Config description**: The CivilComments Toxic Spans are a subset of
+*   **Config description**: The CivilComments in Context is a subset of
     CivilComments that was labeled by making available to the labelers the
     parent_text. It includes a contextual_toxicity feature.
 
