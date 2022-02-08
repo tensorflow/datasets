@@ -183,8 +183,11 @@ class DatasetInfoTest(testing.TestCase):
         license="some license",
     )
     info.download_size = 456
-    info.as_proto.splits.add(name="train", num_bytes=512)
-    info.as_proto.splits.add(name="validation", num_bytes=64)
+    filepath_template = "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+    info.as_proto.splits.add(
+        name="train", num_bytes=512, filepath_template=filepath_template)
+    info.as_proto.splits.add(
+        name="validation", num_bytes=64, filepath_template=filepath_template)
     info.as_proto.schema.feature.add()
     info.as_proto.schema.feature.add()  # Add dynamic statistics
     info.download_checksums = {

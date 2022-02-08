@@ -118,16 +118,22 @@ class SplitInfo:
         name=proto.name,
         shard_lengths=list(proto.shard_lengths),
         num_bytes=proto.num_bytes,
-        filename_template=filename_template.replace(split=proto.name),
+        filename_template=filename_template.replace(
+            split=proto.name, template=proto.filepath_template),
         statistics=proto.statistics,
     )
 
   def to_proto(self) -> proto_lib.SplitInfo:
+    if self.filename_template:
+      filepath_template = self.filename_template.template
+    else:
+      filepath_template = naming.DEFAULT_FILENAME_TEMPLATE
     return proto_lib.SplitInfo(
         name=self.name,
         shard_lengths=self.shard_lengths,
         num_bytes=self.num_bytes,
         statistics=self.statistics if self.statistics.ByteSize() else None,
+        filepath_template=filepath_template,
     )
 
   @property

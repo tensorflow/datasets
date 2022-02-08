@@ -23,6 +23,7 @@ import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.core.utils import generic_path
 
 
 class NamingTest(parameterized.TestCase, testing.TestCase):
@@ -49,22 +50,17 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
     self.assertEqual(naming.camelcase_to_snakecase(snake), snake)
 
   @parameterized.parameters(
-      (2, True, '00000-of-00002', '00001-of-00002'),
-      (12345, True, '00000-of-12345', '12344-of-12345'),
-      (654321, True, '000000-of-654321', '654320-of-654321'),
-      (2, False, '00000', '00001'),
-      (12345, False, '00000', '12344'),
-      (654321, False, '000000', '654320'),
+      (2, '00000-of-00002', '00001-of-00002'),
+      (12345, '00000-of-12345', '12344-of-12345'),
+      (654321, '000000-of-654321', '654320-of-654321'),
   )
-  def test_sharded_filepaths(self, num_shards: int, append_num_shards: bool,
-                             expected_first_suffix: str,
+  def test_sharded_filepaths(self, num_shards: int, expected_first_suffix: str,
                              expected_last_suffix: str):
     template = naming.ShardedFileTemplate(
         split='train',
         dataset_name='ds',
         data_dir='/path',
-        filetype_suffix='tfrecord',
-        append_num_shards=append_num_shards)
+        filetype_suffix='tfrecord')
     names = template.sharded_filepaths(num_shards)
     path_template = '/path/ds-train.tfrecord-%s'
     self.assertEqual(
@@ -306,7 +302,7 @@ def test_filename_info_with_path():
       num_shards=1024)
 
 
-def test_filename_template():
+def test_sharded_file_template_sharded_filepath():
   template = naming.ShardedFileTemplate(
       data_dir='/path',
       dataset_name='mnist',
@@ -323,27 +319,116 @@ def test_filename_template():
       num_shards=25)) == '/path/mnist-train.tfrecord-00010-of-00025'
 
 
-def test_sharded_file_template():
-  template = naming.ShardedFileTemplate(
-      split='train',
-      dataset_name='ds',
-      data_dir='/path',
-      filetype_suffix='tfrecord')
-  assert os.fspath(template.sharded_filepath(
-      shard_index=0, num_shards=10)) == '/path/ds-train.tfrecord-00000-of-00010'
-
-
-def test_filename_template_empty_filetype_suffix():
+def test_sharded_file_template_empty_filetype_suffix():
   with pytest.raises(
       ValueError, match='Filetype suffix must be a non-empty string: .+'):
     naming.ShardedFileTemplate(
         data_dir='/path', dataset_name='mnist', filetype_suffix='')
 
 
-def test_filename_template_empty_split():
+def test_sharded_file_template_empty_split():
   with pytest.raises(ValueError, match='Split must be a non-empty string: .+'):
     naming.ShardedFileTemplate(
         data_dir='/path',
         dataset_name='mnist',
         filetype_suffix='tfrecord',
         split='')
+
+
+def test_sharded_file_template_shard_index():
+  builder_dir = generic_path.as_path('/my/path')
+  template = naming.ShardedFileTemplate(
+      template='data/mnist-train.tfrecord-{SHARD_INDEX}', data_dir=builder_dir)
+  assert os.fspath(template.sharded_filepath(
+      shard_index=12,
+      num_shards=100)) == '/my/path/data/mnist-train.tfrecord-00012'
+  assert os.fspath(template.sharded_filepaths_pattern()
+                  ) == '/my/path/data/mnist-train.tfrecord*'
+  assert os.fspath(template.sharded_filepaths_pattern(
+      num_shards=100)) == '/my/path/data/mnist-train.tfrecord@100'
+
+
+def test_sharded_file_template_sharded_filepath_shard_x_of_y():
+  builder_dir = generic_path.as_path('/my/path')
+  template_explicit = naming.ShardedFileTemplate(
+      template='data/mnist-train.tfrecord-{SHARD_INDEX}-of-{NUM_SHARDS}',
+      data_dir=builder_dir)
+  assert os.fspath(
+      template_explicit.sharded_filepath(shard_index=12, num_shards=100)
+  ) == '/my/path/data/mnist-train.tfrecord-00012-of-00100'
+
+  template = naming.ShardedFileTemplate(
+      template='data/mnist-train.tfrecord-{SHARD_X_OF_Y}', data_dir=builder_dir)
+  assert os.fspath(template.sharded_filepath(
+      shard_index=12,
+      num_shards=100)) == '/my/path/data/mnist-train.tfrecord-00012-of-00100'
+
+
+def test_sharded_file_template_sharded_filepath_shard_x_of_y_more_digits():
+  builder_dir = generic_path.as_path('/my/path')
+  template = naming.ShardedFileTemplate(
+      template='data/{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}',
+      data_dir=builder_dir,
+      dataset_name='mnist',
+      filetype_suffix='tfrecord',
+      split='train',
+  )
+  assert os.fspath(
+      template.sharded_filepath(shard_index=12, num_shards=1234567)
+  ) == '/my/path/data/mnist-train.tfrecord-0000012-of-1234567'
+
+
+def test_sharded_file_template_no_template():
+  builder_dir = generic_path.as_path('/my/path')
+  template = naming.ShardedFileTemplate(
+      data_dir=builder_dir,
+      dataset_name='imagenet',
+      filetype_suffix='riegeli',
+      split='test')
+  assert os.fspath(template.sharded_filepath(
+      shard_index=12,
+      num_shards=100)) == '/my/path/imagenet-test.riegeli-00012-of-00100'
+
+
+def test_sharded_file_template_no_template_incomplete():
+  builder_dir = generic_path.as_path('/my/path')
+  template_without_split = naming.ShardedFileTemplate(
+      data_dir=builder_dir, dataset_name='imagenet', filetype_suffix='riegeli')
+  with pytest.raises(KeyError):
+    template_without_split.sharded_filepath(shard_index=12, num_shards=100)
+
+
+def test_sharded_file_template_template_and_properties():
+  builder_dir = generic_path.as_path('/my/path')
+  template = naming.ShardedFileTemplate(
+      template='data/mnist-{SPLIT}.{FILEFORMAT}-{SHARD_INDEX}',
+      data_dir=builder_dir,
+      # dataset_name is ignored because the template doesn't have {DATASET}
+      dataset_name='imagenet',
+      filetype_suffix='riegeli',
+      split='test')
+  assert os.fspath(template.sharded_filepath(
+      shard_index=12,
+      num_shards=100)) == '/my/path/data/mnist-test.riegeli-00012'
+
+
+def test_replace_shard_suffix():
+  assert naming._replace_shard_suffix(
+      filepath='/path/file-00001-of-01234',
+      replacement='repl') == '/path/filerepl'
+  assert naming._replace_shard_suffix(
+      filepath='/path/file00001-of-01234',
+      replacement='repl') == '/path/filerepl'
+  assert naming._replace_shard_suffix(
+      filepath='/path/file-00001', replacement='repl') == '/path/filerepl'
+
+
+def test_replace_shard_suffix_folder_similar_to_shard():
+  assert naming._replace_shard_suffix(
+      filepath='/path/i-look-like-a-shard-000001/file-00001-of-01234',
+      replacement='repl') == '/path/i-look-like-a-shard-000001/filerepl'
+
+
+def test_replace_shard_suffix_no_suffix_found():
+  with pytest.raises(RuntimeError, match='Should do 1 shard suffix'):
+    naming._replace_shard_suffix(filepath='/path/a/b', replacement='')

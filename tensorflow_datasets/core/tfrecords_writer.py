@@ -378,7 +378,7 @@ class BeamWriter(object):
         disable_shuffling=disable_shuffling,
         file_format=file_format)
     self._filename_template = filename_template
-    self._split_info_path = "%s.split_info.json" % filename_template.filepath_prefix
+    self._split_info_path = f"{filename_template.filepath_prefix()}.split_info.json"
     self._serializer = example_serializer.ExampleSerializer(example_specs)
     self._example_specs = example_specs
     self._hasher = hashing.Hasher(hash_salt)
