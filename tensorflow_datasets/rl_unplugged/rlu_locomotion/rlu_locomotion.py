@@ -138,11 +138,6 @@ def _feature_description(task_name: str) -> Dict[str, Any]:
     }
 
 
-def _float_tensor_feature(size: int) -> tfds.features.Tensor:
-  return tfds.features.Tensor(
-      shape=(size,), dtype=tf.float32, encoding=tfds.features.Encoding.ZLIB)
-
-
 class RluLocomotion(rlu_common.RLUBuilder):
   """DatasetBuilder for rlu_locomotion dataset."""
 
@@ -162,55 +157,53 @@ class RluLocomotion(rlu_common.RLUBuilder):
     if 'humanoid' in self.builder_config.name:
       walker_features = {
           'joints_vel':
-              _float_tensor_feature(56),
+              rlu_common.float_tensor_feature(56),
           'sensors_velocimeter':
-              _float_tensor_feature(3),
+              rlu_common.float_tensor_feature(3),
           'sensors_gyro':
-              _float_tensor_feature(3),
+              rlu_common.float_tensor_feature(3),
           'joints_pos':
-              _float_tensor_feature(56),
+              rlu_common.float_tensor_feature(56),
           'world_zaxis':
-              _float_tensor_feature(3),
+              rlu_common.float_tensor_feature(3),
           'body_height':
-              _float_tensor_feature(1),
+              rlu_common.float_tensor_feature(1),
           'sensors_accelerometer':
-              _float_tensor_feature(3),
+              rlu_common.float_tensor_feature(3),
           'end_effectors_pos':
-              _float_tensor_feature(12),
+              rlu_common.float_tensor_feature(12),
           'egocentric_camera':
               tfds.features.Image(
                   shape=(64, 64, 3), dtype=tf.uint8, encoding_format='png'),
       }
       action_features = tfds.features.Tensor(shape=(56,), dtype=tf.float32)
-      metadata = {}
     else:  # 'rodent' datasets
       walker_features = {
           'joints_pos':
-              _float_tensor_feature(30),
+              rlu_common.float_tensor_feature(30),
           'joints_vel':
-              _float_tensor_feature(30),
+              rlu_common.float_tensor_feature(30),
           'tendons_pos':
-              _float_tensor_feature(8),
+              rlu_common.float_tensor_feature(8),
           'tendons_vel':
-              _float_tensor_feature(8),
+              rlu_common.float_tensor_feature(8),
           'appendages_pos':
-              _float_tensor_feature(15),
+              rlu_common.float_tensor_feature(15),
           'world_zaxis':
-              _float_tensor_feature(3),
+              rlu_common.float_tensor_feature(3),
           'sensors_accelerometer':
-              _float_tensor_feature(3),
+              rlu_common.float_tensor_feature(3),
           'sensors_velocimeter':
-              _float_tensor_feature(3),
+              rlu_common.float_tensor_feature(3),
           'sensors_gyro':
-              _float_tensor_feature(3),
+              rlu_common.float_tensor_feature(3),
           'sensors_touch':
-              _float_tensor_feature(4),
+              rlu_common.float_tensor_feature(4),
           'egocentric_camera':
               tfds.features.Image(
                   shape=(64, 64, 3), dtype=tf.uint8, encoding_format='png'),
       }
       action_features = tfds.features.Tensor(shape=(38,), dtype=tf.float32)
-      metadata = {}
 
     return tfds.features.FeaturesDict({
         'steps':
@@ -229,7 +222,6 @@ class RluLocomotion(rlu_common.RLUBuilder):
             tf.int64,
         'timestamp':
             tf.int64,
-        **metadata,
     })
 
   def get_description(self):

@@ -44,6 +44,11 @@ def get_files(prefix: str, num_shards: int) -> List[str]:
   return [filename(prefix, num_shards, i) for i in range(num_shards)]  # pytype: disable=bad-return-type  # gen-stub-imports
 
 
+def float_tensor_feature(size: int) -> tfds.features.Tensor:
+  return tfds.features.Tensor(
+      shape=(size,), dtype=tf.float32, encoding=tfds.features.Encoding.ZLIB)
+
+
 class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
   """DatasetBuilder for RLU."""
 
