@@ -72,6 +72,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def gcsfs_store(cls):
+    return _try_import("gcsfs").GCSFileSystem(token='anon').get_mapper
+
+  @utils.classproperty
+  @classmethod
   def gcld3(cls):
     return _try_import("gcld3")  # pylint: disable=unreachable
 
@@ -205,6 +210,11 @@ class LazyImporter(object):
   def test_foo(cls):
     """For testing purposes only."""
     return _try_import("test_foo")
+
+  @utils.classproperty
+  @classmethod
+  def zarr(cls):
+    return _try_import("zarr")
 
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name

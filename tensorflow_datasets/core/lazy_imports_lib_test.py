@@ -30,6 +30,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "bs4",
       "cv2",
       "gcld3",
+      "gcsfs_store",
       "langdetect",
       "lxml",
       "matplotlib",
@@ -44,6 +45,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "skimage",
       "tifffile",
       "tldextract",
+      "zarr",
   )
   def test_import(self, module_name):
     getattr(tfds.core.lazy_imports, module_name)
