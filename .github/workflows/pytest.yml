@@ -39,14 +39,14 @@ jobs:
     -name: Get current date
       id: date
       run: |
-        echo "::set-output name=date::$(date +'%Y-%m-%d')"
-        echo "DATE: ${{steps.date.outputs.date}}"
+        echo "::set-output name=today::$(date +'%Y-%m-%d')"
+        echo "DATE: ${{steps.date.outputs.today}}"
 
     # The cache is refreshed everyday.
     - uses: actions/cache@v2
       with:
         path: ${{ env.pythonLocation }}
-        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{steps.date.outputs.date}}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}
 
   #   - run: pip install ${{ matrix.tf_version }}
 
