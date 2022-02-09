@@ -51,7 +51,7 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: ${{ env.pythonLocation }}
-        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}-${{ matrix.tf_version }}
 
     - run: pip install ${{ matrix.tf_version }}
 
