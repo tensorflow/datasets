@@ -24,7 +24,6 @@ from tensorflow_datasets import core
 from tensorflow_datasets import typing
 from tensorflow_datasets.core import folder_dataset
 from tensorflow_datasets.core import beam_utils as beam
-from tensorflow_datasets.core import builder_from_directory
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import deprecated
@@ -39,6 +38,7 @@ from tensorflow_datasets.core.load import builder
 from tensorflow_datasets.core.load import builder_cls
 from tensorflow_datasets.core.load import list_builders
 from tensorflow_datasets.core.load import load
+from tensorflow_datasets.core.read_only_builder import builder_from_directory
 from tensorflow_datasets.core.read_only_builder import builder_from_directories
 from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.subsplits_utils import split_for_jax_process
@@ -70,6 +70,8 @@ __all__ = [
     "folder_dataset",
     "builder",
     "builder_cls",
+    "builder_from_directory",
+    "builder_from_directories",
     "decode",
     "disable_progress_bar",
     "enable_progress_bar",
