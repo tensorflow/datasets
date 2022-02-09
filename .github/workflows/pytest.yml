@@ -36,7 +36,7 @@ jobs:
         python-version:  3.7
 
     # Get current date.
-    -name: Get current date
+    - name: Get current date
       id: date
       run: |
         echo "::set-output name=today::$(date +'%Y-%m-%d')"
