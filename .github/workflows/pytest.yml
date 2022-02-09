@@ -48,68 +48,66 @@ jobs:
         path: ${{ env.pythonLocation }}
         key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}
 
-  #   - run: pip install ${{ matrix.tf_version }}
+    - run: pip install ${{ matrix.tf_version }}
 
-  #   # Install the protocol buffer compiler for gcld3 tests.
-  #   - run: sudo apt install -y protobuf-compiler
+    # Install the protocol buffer compiler for gcld3 tests.
+    - run: sudo apt install -y protobuf-compiler
 
-  #   # Install ffmpeg for Audio FeatureConnector tests.
-  #   - run: sudo apt-get install ffmpeg
+    # Install ffmpeg for Audio FeatureConnector tests.
+    - run: sudo apt-get install ffmpeg
 
-  #   - run: pip install -e .[tests-all]
-  #   # Install tensorflow_io for lsun tests.
-  #   - run: pip install tensorflow_io
+    - run: pip install -e .[tests-all]
 
-  #   # Run tests
-  #   - name: Run core tests
-  #     run: |
-  #       pytest -vv -n auto \
-  #         --ignore="tensorflow_datasets/audio/nsynth_test.py" \
-  #         --ignore="tensorflow_datasets/core/features/features_test.py" \
-  #         --ignore="tensorflow_datasets/testing/test_utils.py" \
-  #         --ignore="tensorflow_datasets/image/lsun_test.py" \
-  #         --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
-  #         --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+    # Run tests
+    - name: Run core tests
+      run: |
+        pytest -vv -n auto \
+          --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+          --ignore="tensorflow_datasets/core/features/features_test.py" \
+          --ignore="tensorflow_datasets/testing/test_utils.py" \
+          --ignore="tensorflow_datasets/image/lsun_test.py" \
+          --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
+          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
 
-  # notebooktest-job:
-  #   # For merged PR, activate testing only on the master branch.
-  #   if:
-  #     (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+  notebooktest-job:
+    # For merged PR, activate testing only on the master branch.
+    if:
+      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
 
-  #   name: "Notebook tests"
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 30
+    name: "Notebook tests"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
 
-  #   steps:
-  #   - uses: styfle/cancel-workflow-action@0.9.1
-  #     with:
-  #       access_token: ${{ github.token }}
-  #   - uses: actions/checkout@v2
+    steps:
+    - uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        access_token: ${{ github.token }}
+    - uses: actions/checkout@v2
 
-  #   # Install deps.
-  #   - uses: actions/setup-python@v2
-  #     with:
-  #       python-version: 3.7
+    # Install deps.
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
 
-  #   - run: pip --version
-  #   - run: pip install tf-nightly
-  #   - run: pip install ipython
-  #   - run: sudo apt install -y protobuf-compiler
+    - run: pip --version
+    - run: pip install tf-nightly
+    - run: pip install ipython
+    - run: sudo apt install -y protobuf-compiler
 
-  #   - run: pip install -e .[tests-all]
+    - run: pip install -e .[tests-all]
 
-  #   # Test each notebook sequentially.
-  #   - name: Run notebook
-  #     run: |
-  #       ipython kernel install --user --name tfds-notebook
-  #       for notebook in docs/*ipynb
-  #         do
-  #           if [$notebook != "docs/determinism.ipynb"]
-  #           then
-  #             jupyter nbconvert \
-  #               --ExecutePreprocessor.timeout=600 \
-  #               --ExecutePreprocessor.kernel_name=tfds-notebook \
-  #               --to notebook \
-  #               --execute $notebook
-  #           fi
-  #         done
+    # Test each notebook sequentially.
+    - name: Run notebook
+      run: |
+        ipython kernel install --user --name tfds-notebook
+        for notebook in docs/*ipynb
+          do
+            if [$notebook != "docs/determinism.ipynb"]
+            then
+              jupyter nbconvert \
+                --ExecutePreprocessor.timeout=600 \
+                --ExecutePreprocessor.kernel_name=tfds-notebook \
+                --to notebook \
+                --execute $notebook
+            fi
+          done
