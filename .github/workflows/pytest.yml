@@ -41,6 +41,18 @@ jobs:
       with:
         python-version: 3.7
 
+    # Get current date.
+    - name: Get current date
+      id: date
+      run: |
+        echo "::set-output name=today::$(date +'%Y-%m-%d')"
+
+    # The cache is refreshed everyday.
+    - uses: actions/cache@v2
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}
+
     - run: pip install ${{ matrix.tf_version }}
 
     # Install the protocol buffer compiler for gcld3 tests.
