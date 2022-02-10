@@ -159,11 +159,11 @@ loaded with TFDS (see next section).
 ### Directly from folder
 
 Once the metadata have been generated, datasets can be loaded using
-`tfds.core.builder_from_directory` which returns a `tfds.core.DatasetBuilder`
-with the standard TFDS API (like `tfds.builder`):
+`tfds.builder_from_directory` which returns a `tfds.core.DatasetBuilder` with
+the standard TFDS API (like `tfds.builder`):
 
 ```python
-builder = tfds.core.builder_from_directory('~/path/to/my_dataset/3.0.0/')
+builder = tfds.builder_from_directory('~/path/to/my_dataset/3.0.0/')
 
 # Metadata are avalailable as usual
 builder.info.splits['train'].num_examples
