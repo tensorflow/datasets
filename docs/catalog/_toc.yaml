@@ -194,6 +194,9 @@ toc:
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
+  - path: /datasets/catalog/imagenet2012_fewshot
+    status: nightly
+    title: imagenet2012_fewshot (manual)
   - path: /datasets/catalog/imagenet2012_multilabel
     title: imagenet2012_multilabel (manual)
   - path: /datasets/catalog/imagenet2012_real
@@ -369,6 +372,9 @@ toc:
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
+  - path: /datasets/catalog/ble_wind_field
+    status: nightly
+    title: ble_wind_field
   - path: /datasets/catalog/cherry_blossoms
     title: cherry_blossoms
   - path: /datasets/catalog/covid19

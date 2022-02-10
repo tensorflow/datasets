@@ -130,6 +130,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`i_naturalist2018`](i_naturalist2018.md)
 *   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
+*   [`imagenet2012_fewshot`](imagenet2012_fewshot.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet2012_multilabel`](imagenet2012_multilabel.md)
 *   [`imagenet2012_real`](imagenet2012_real.md)
 *   [`imagenet2012_subset`](imagenet2012_subset.md)
@@ -233,6 +235,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Structured`
 
 *   [`amazon_us_reviews`](amazon_us_reviews.md)
+*   [`ble_wind_field`](ble_wind_field.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cherry_blossoms`](cherry_blossoms.md)
 *   [`covid19`](covid19.md)
 *   [`cs_restaurants`](cs_restaurants.md)

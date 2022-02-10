@@ -52,17 +52,6 @@ are interested in comparing against other state of the art offline RL methods.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -70,10 +59,6 @@ Split | Examples
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -90,6 +75,18 @@ Split | Examples
 
 
 ## rlu_control_suite/cartpole_swingup (default config)
+
+*   **Dataset size**: `2.12 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 40
 
 *   **Features**:
 
@@ -112,7 +109,56 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_control_suite-cartpole_swingup-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## rlu_control_suite/cheetah_run
+
+*   **Dataset size**: `36.58 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 300
 
 *   **Features**:
 
@@ -135,7 +181,56 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_control_suite-cheetah_run-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## rlu_control_suite/finger_turn_hard
+
+*   **Dataset size**: `47.61 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 500
 
 *   **Features**:
 
@@ -160,7 +255,56 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_control_suite-finger_turn_hard-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## rlu_control_suite/fish_swim
+
+*   **Dataset size**: `32.81 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 200
 
 *   **Features**:
 
@@ -185,7 +329,56 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_control_suite-fish_swim-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## rlu_control_suite/humanoid_run
+
+*   **Dataset size**: `1.21 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,000
 
 *   **Features**:
 
@@ -212,7 +405,56 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_control_suite-humanoid_run-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## rlu_control_suite/manipulator_insert_ball
+
+*   **Dataset size**: `385.41 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,500
 
 *   **Features**:
 
@@ -239,9 +481,58 @@ FeaturesDict({
     'timestamp': tf.int64,
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_control_suite-manipulator_insert_ball-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## rlu_control_suite/manipulator_insert_peg
 
+*   **Dataset size**: `385.73 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,500
+
 *   **Features**:
 
 ```python
@@ -268,7 +559,56 @@ FeaturesDict({
 })
 ```
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_control_suite-manipulator_insert_peg-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## rlu_control_suite/walker_stand
+
+*   **Dataset size**: `31.78 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 200
 
 *   **Features**:
 
@@ -291,9 +631,58 @@ FeaturesDict({
     'timestamp': tf.int64,
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_control_suite-walker_stand-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## rlu_control_suite/walker_walk
 
+*   **Dataset size**: `31.78 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 200
+
 *   **Features**:
 
 ```python
@@ -315,3 +704,40 @@ FeaturesDict({
     'timestamp': tf.int64,
 })
 ```
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_control_suite-walker_walk-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
