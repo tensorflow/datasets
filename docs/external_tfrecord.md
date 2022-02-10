@@ -87,13 +87,7 @@ you can examine this in colab:
 *   To translate `tfds.features` into the human readable structure of the
     `tf.train.Example`, you can call `features.get_serialized_info()`.
 *   To get the exact `FixedLenFeature`,... spec passed to
-    `tf.io.parse_single_example`, you can use the following code snippet:
-
-    ```python
-    example_specs = features.get_serialized_info()
-    nested_feature_specs = tfds.core.example_parser._build_feature_specs(example_specs)
-    feature_specs = tfds.core.utils.flatten_nest_dict(nested_feature_specs)
-    ```
+    `tf.io.parse_single_example`, you can use `spec = features.tf_example_spec`
 
 Note: If you're using custom feature connector, make sure to implement
 `to_json_content`/`from_json_content` and test with `self.assertFeature` (see
