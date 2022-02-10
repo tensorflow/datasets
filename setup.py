@@ -143,6 +143,7 @@ DATASET_EXTRAS = {
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
+    'ct_lymph_nodes':['pydicom', 'nibabel'],
     'robonet': ['h5py'],  # and ffmpeg installed
     'robosuite_panda_pick_place_can': ['envlogger'],
     'smartwatch_gestures': ['pandas'],
