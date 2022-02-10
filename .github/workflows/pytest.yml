@@ -61,8 +61,6 @@ jobs:
     - run: sudo apt-get install ffmpeg
 
     - run: pip install -e .[tests-all]
-    # Install tensorflow_io for lsun tests.
-    - run: pip install tensorflow_io
 
     # Run tests
     - name: Run core tests
