@@ -93,32 +93,23 @@ def _dict_to_tf_example(
           f"Error while serializing feature `{k}`: `{tensor_info}`: ",
       )
 
-  if tensor_info_dict:
-    # Add the RaggedTensor fields for the nested sequences
-    # Nested sequences are encoded as {'flat_values':, 'row_lengths':}, so need
-    # to flatten the example nested dict again.
-    # Ex:
-    # Input: {'objects/tokens': [[0, 1, 2], [], [3, 4]]}
-    # Output: {
-    #     'objects/tokens/flat_values': [0, 1, 2, 3, 4],
-    #     'objects/tokens/row_lengths_0': [3, 0, 2],
-    # }
-    features = utils.flatten_nest_dict({
-        k: run_with_reraise(_add_ragged_fields, k, example_dict[k], tensor_info)
-        for k, tensor_info in tensor_info_dict.items()
-    })
-    features = {
-        k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
-        for k, (item, tensor_info) in features.items()
-    }
-  else:
-    # TODO(epot): The following code is only executed in tests and could be
-    # cleaned-up, as TensorInfo is always passed to _item_to_tf_feature.
-    features = {
-        k: run_with_reraise(_item_to_tf_feature, k, example_data, None)
-        for k, example_data in example_dict.items()
-    }
-
+  # Add the RaggedTensor fields for the nested sequences
+  # Nested sequences are encoded as {'flat_values':, 'row_lengths':}, so need
+  # to flatten the example nested dict again.
+  # Ex:
+  # Input: {'objects/tokens': [[0, 1, 2], [], [3, 4]]}
+  # Output: {
+  #     'objects/tokens/flat_values': [0, 1, 2, 3, 4],
+  #     'objects/tokens/row_lengths_0': [3, 0, 2],
+  # }
+  features = utils.flatten_nest_dict({
+      k: run_with_reraise(_add_ragged_fields, k, example_dict[k], tensor_info)
+      for k, tensor_info in tensor_info_dict.items()
+  })
+  features = {
+      k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
+      for k, (item, tensor_info) in features.items()
+  }
   return tf.train.Example(features=tf.train.Features(feature=features))
 
 
