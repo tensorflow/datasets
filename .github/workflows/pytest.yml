@@ -55,6 +55,8 @@ jobs:
 
     - run: pip install ${{ matrix.tf_version }}
 
+    # Update the package directory before installing.
+    - run: sudo apt-get update
     # Install the protocol buffer compiler for gcld3 tests.
     - run: sudo apt install -y protobuf-compiler
     # Install ffmpeg for Audio FeatureConnector tests.
@@ -65,7 +67,7 @@ jobs:
     # Run tests
     - name: Run core tests
       run: |
-        pytest -vv -n auto \
+        pytest --durations=100 -vv -n auto \
           --ignore="tensorflow_datasets/audio/nsynth_test.py" \
           --ignore="tensorflow_datasets/core/features/features_test.py" \
           --ignore="tensorflow_datasets/testing/test_utils.py" \
