@@ -120,7 +120,7 @@ def _generate_librispeech_examples(directory):
   transcripts_glob = os.path.join(directory, "LibriSpeech", "*/*/*/*.txt")
   for transcript_file in tf.io.gfile.glob(transcripts_glob):
     path = os.path.dirname(transcript_file)
-    with tf.io.gfile.GFile(os.path.join(path, transcript_file)) as f:
+    with tf.io.gfile.GFile(transcript_file) as f:
       for line in f:
         line = line.strip()
         key, transcript = line.split(" ", 1)
