@@ -41,7 +41,7 @@ FLAGS = absl.flags.FLAGS
 absl.flags.DEFINE_string('fake_dir', None,
                          'path to the directory which contains files')
 
-# Some dataset generation rely on the image content, so we cannot compress
+# Some dataset generation relies on the image content, so we cannot compress
 # those.
 SKIP_DATASETS = ['curated_breast_imaging_ddsm']
 
@@ -54,7 +54,7 @@ def rewrite_image(filepath):
   """
   image_content = PIL.Image.open(filepath)
   image = np.array(image_content)
-  # Filter unsuported images
+  # Filter unsupported images.
   if image_content.mode == 'RGBA' or image.dtype == np.bool:
     return
 
@@ -76,13 +76,13 @@ def rewrite_zip(root_dir, zip_filepath):
     root_dir: directory path which contain zip compressed file
     zip_filepath: path from directory to file
   """
-  # Creating a temporary file to store images
+  # Creating a temporary file to store images.
   with tempfile.TemporaryDirectory(dir=root_dir) as temp_dir:
     # Extraction of compressed .zip file
     with zipfile.ZipFile(zip_filepath, 'r') as zip_file:
       zip_file.extractall(path=temp_dir)
 
-    rewrite_dir(temp_dir)  # Recursivelly compress the archive content
+    rewrite_dir(temp_dir)  # Recursively compress the archive content.
 
     # Compress the .zip file again
     with zipfile.ZipFile(
