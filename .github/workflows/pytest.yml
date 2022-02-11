@@ -51,6 +51,7 @@ jobs:
     - run: pip install ${{ matrix.tf_version }}
 
     # Install the protocol buffer compiler for gcld3 tests.
+    - run: sudo apt-get update
     - run: sudo apt install -y protobuf-compiler
 
     # Install ffmpeg for Audio FeatureConnector tests.
