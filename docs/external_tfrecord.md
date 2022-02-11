@@ -174,6 +174,37 @@ for ex in ds:
   ...
 ```
 
+### Directly from multiple folders
+
+It is also possible to load data from multiple folders. This can happen, for
+example, in reinforcement learning when multiple agents are each generating a
+separate dataset and you want to load all of them together. Other use cases are
+when a new dataset is produced on a regular basis, e.g. a new dataset per day,
+and you want to load data from a date range.
+
+To load data from multiple folders, use `tfds.builder_from_directories`, which
+returns a `tfds.core.DatasetBuilder` with the standard TFDS API (like
+`tfds.builder`):
+
+```python
+builder = tfds.builder_from_directories(builder_dirs=[
+    '~/path/my_dataset/agent1/1.0.0/',
+    '~/path/my_dataset/agent2/1.0.0/',
+    '~/path/my_dataset/agent3/1.0.0/',
+])
+
+# Metadata are avalailable as usual
+builder.info.splits['train'].num_examples
+
+# Construct the tf.data.Dataset pipeline
+ds = builder.as_dataset(split='train[75%:]')
+for ex in ds:
+  ...
+```
+
+Note: each folder must have its own metadata, because this contains information
+about the splits.
+
 ### Folder structure (optional)
 
 For better compatibility with TFDS, you can organize your data as
