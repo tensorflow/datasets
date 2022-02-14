@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Script cleanup old generated datasets.
+r"""Script to clean up old generated datasets.
 
 The script will display the datasets to delete and will ask users for
 confirmation.
@@ -27,15 +27,13 @@ python -m tensorflow_datasets.scripts.cleanup.delete_old_versions
 
 import collections
 import concurrent.futures
+import dataclasses
 import os
 import pathlib
 from typing import Dict, Iterable, List, Tuple
 
 from absl import app
 from absl import flags
-
-import dataclasses
-
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import termcolor
@@ -90,7 +88,7 @@ def _extract_dirs_to_delete(
 ) -> TaskResult:
   """Tasks which compute the directories to keep and delete.
 
-  This recursivelly compute `listdir()` on the `curr_dir`, and compare with
+  This recursively computes `listdir()` on the `curr_dir`, and compares with
   `curr_tree` to check which directory to delete. Recursion is done on the
   remaining sub-directory (cleanup `data_dir/...`, then `data_dir/mnist/...`,
   ...)

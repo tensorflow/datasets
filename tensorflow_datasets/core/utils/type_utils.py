@@ -190,10 +190,10 @@ class ReadOnlyPath(PurePath, Protocol):
   @abc.abstractmethod
   def glob(self: T, pattern: str) -> Iterator[T]:
     """Yielding all matching files (of any kind)."""
-    # Might be able to implement using `iterdir` (recursivelly for `rglob`).
+    # Might be able to implement using `iterdir` (recursively for `rglob`).
 
   def rglob(self: T, pattern: str) -> Iterator[T]:
-    """Yielding all matching files recursivelly (of any kind)."""
+    """Yielding all matching files recursively (of any kind)."""
     return self.glob(f'**/{pattern}')
 
   def expanduser(self: T) -> T:

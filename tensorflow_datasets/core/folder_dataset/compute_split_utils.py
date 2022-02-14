@@ -208,7 +208,7 @@ def _process_split(
 def _group_all(pipeline):
   beam = lazy_imports_lib.lazy_imports.apache_beam
   # We do not use CombineGlobally(_process_shard) as it might be called
-  # recursivelly. We want `_process_shard` to be called only once on the full
+  # recursively. We want `_process_shard` to be called only once on the full
   # collection.
   return (pipeline
           | beam.GroupBy(lambda x: None)
