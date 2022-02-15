@@ -48,6 +48,9 @@ T = TypeVar('T', bound='FeatureConnector')
 FeatureConnectorArg = Union['FeatureConnector',
                             Dict[str, 'FeatureConnectorArg'], tf.dtypes.DType]  # pytype: disable=not-supported-yet
 
+# Name of the file to output the features information.
+FEATURES_FILENAME = 'features.json'
+
 
 class TensorInfo(object):
   """Structure containing info on the `tf.Tensor` shape/dtype."""
@@ -413,11 +416,11 @@ class FeatureConnector(object):
     Usage:
 
     ```
-    features = FeatureConnector.from_config('path/to/features.json')
+    features = FeatureConnector.from_config('path/to/dir')
     ```
 
     Args:
-      root_dir: Directory containing to the features.json file.
+      root_dir: Directory containing the features.json file.
 
     Returns:
       The reconstructed feature instance.
@@ -782,7 +785,7 @@ class FeatureConnector(object):
 
 def make_config_path(root_dir: str) -> str:
   """Returns the path to the features config."""
-  return os.path.join(root_dir, 'features.json')
+  return os.path.join(root_dir, FEATURES_FILENAME)
 
 
 def _repr_html(ex) -> str:
