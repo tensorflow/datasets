@@ -175,19 +175,24 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+  def _split_generators(
+      self,
+      dl_manager: tfds.download.DownloadManager,
+      pipeline,
+  ):
     """Returns SplitGenerators."""
 
     path = dl_manager.download_and_extract(self.builder_config.data_path)
-    return {
+    return {  # pylint:disable=g-complex-comprehension
         split_name: self._generate_examples(
-            path / self.builder_config.name, split_name=split_name)
+            pipeline=pipeline,
+            path=path / self.builder_config.name,
+            split_name=split_name)
         for split_name in self.builder_config.splits_names
     }
 
-  def _generate_examples(self, path, split_name):
+  def _generate_examples(self, pipeline, path, split_name: str):
     """Yields examples."""
-
     beam = tfds.core.lazy_imports.apache_beam
 
     def _get_position_feature(raw_position):
@@ -245,5 +250,6 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
       for i, example in enumerate(dataset['examples'][split_name]):
         yield f'{split_name}_{i}', _preprocess(example)
 
-    return ('Create pipeline' >> beam.Create([path])
-            | 'Process samples' >> beam.FlatMap(_yield_examples))
+    return (pipeline
+            | f'{split_name} Create pipeline' >> beam.Create([path])
+            | f'{split_name} Process samples' >> beam.FlatMap(_yield_examples))
