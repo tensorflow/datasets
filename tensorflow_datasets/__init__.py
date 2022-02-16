@@ -54,6 +54,7 @@ from tensorflow_datasets import d4rl
 from tensorflow_datasets import ranking
 from tensorflow_datasets import rl_unplugged
 from tensorflow_datasets import rlds
+from tensorflow_datasets import robotics
 from tensorflow_datasets import robomimic
 from tensorflow_datasets import structured
 from tensorflow_datasets import summarization
