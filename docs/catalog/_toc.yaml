@@ -370,6 +370,11 @@ toc:
     title: robomimic_ph
   title: Robomimic
 - section:
+  - path: /datasets/catalog/mt_opt
+    status: nightly
+    title: mt_opt
+  title: Robotics
+- section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/ble_wind_field
