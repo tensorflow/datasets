@@ -254,7 +254,13 @@ class FeatureConnector(object):
     proto_cls_name = value.get('proto_cls')
     if proto_cls_name:  # The content is a proto, need to reconstruct it
       proto_cls = _name2proto_cls(proto_cls_name)
-      content = json_format.Parse(content, proto_cls())
+      if isinstance(content, str):  # Backward compatible mode
+        content = json_format.Parse(content, proto_cls())
+      elif isinstance(content, dict):
+        content = json_format.ParseDict(content, proto_cls())
+      else:
+        raise ValueError(f'Type {type(content)} not supported when parsing '
+                         'features serialized as json.')
     return feature_cls.from_json_content(content)
 
   def to_json(self) -> Json:
@@ -311,7 +317,7 @@ class FeatureConnector(object):
     if isinstance(content, message.Message):  # Content is proto
       # e.g. `tensorflow_datasets.JsonFeature`
       proto_cls_name = type(content).DESCRIPTOR.full_name
-      content = json_format.MessageToJson(content)
+      content = json_format.MessageToDict(content)
     elif isinstance(content, dict):  # Content is json
       proto_cls_name = ''
     else:
