@@ -54,14 +54,15 @@ def add_data_dir(data_dir):
   _registered_data_dir.add(data_dir)
 
 
-def list_data_dirs(
-    given_data_dir: Optional[ListOrElem[PathLike]] = None,) -> List[PathLike]:
+def list_data_dirs(given_data_dir: Optional[ListOrElem[PathLike]] = None,
+                   dataset: Optional[str] = None) -> List[PathLike]:
   """Return the list of all `data_dir` to look-up.
 
   Args:
     given_data_dir: If a `data_dir` is provided, only the explicitly given
       `data_dir` will be returned, otherwise the list of all registered data_dir
       is returned
+    dataset: Dataset to load.
 
   Returns:
     The list of all data_dirs to look-up.
@@ -73,13 +74,39 @@ def list_data_dirs(
     else:
       return [given_data_dir]
   else:
-    all_data_dirs = _registered_data_dir | {constants.DATA_DIR}
+    default_data_dir = get_default_data_dir(
+        given_data_dir=given_data_dir, dataset=dataset)
+    all_data_dirs = _registered_data_dir | {default_data_dir}
     return sorted(os.path.expanduser(d) for d in all_data_dirs)
 
 
-def get_default_data_dir(given_data_dir: Optional[str] = None,) -> str:
+def _should_use_xpath(dataset):
+  """Returns True if TFDS should load a dataset from XFILE_DATA_DIR."""
+  if FLAGS.tfds_read_from_xfile:
+    datadir_to_xfile_checks_passed = True
+    # Cell and dataset checks.
+    if FLAGS.xfile_check_cell:
+      xm_experiment_cells = xmanager_utils.get_xm_experiment_cells()
+      if xm_experiment_cells:
+        if not xm_experiment_cells.issubset(set(FLAGS.xfile_accepted_cells)):
+          datadir_to_xfile_checks_passed = False
+      # If no cells found, the script wasn't called from xmanager.
+      else:
+        datadir_to_xfile_checks_passed = False
+    if FLAGS.xfile_check_dataset:
+      if dataset not in FLAGS.xfile_accepted_datasets:
+        datadir_to_xfile_checks_passed = False
+    if datadir_to_xfile_checks_passed:
+      return True
+  return False
+
+
+def get_default_data_dir(given_data_dir: Optional[str] = None,
+                         dataset: Optional[str] = None) -> str:
   """Returns the default data_dir."""
   if given_data_dir:
     return os.path.expanduser(given_data_dir)
+  elif 'TFDS_DATA_DIR' in os.environ:
+    return os.environ['TFDS_DATA_DIR']
   else:
-    return os.path.expanduser(constants.DATA_DIR)
+    return constants.DATA_DIR
