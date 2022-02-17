@@ -46,6 +46,10 @@ More information can be found at:
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Adds the new spatial_relation_splits config.
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Features**:
 
 ```python
@@ -101,10 +105,6 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 *   **Citation**:
 
 ```
@@ -147,10 +147,6 @@ FeaturesDict({
 
 *   **Dataset size**: `998.11 MiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split             | Examples
@@ -166,6 +162,43 @@ Split             | Examples
 `'visual'`        | 37,436
 `'visual_easier'` | 18,718
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/grounded_scan-compositional_splits-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## grounded_scan/target_length_split
 
 *   **Config description**: Examples for generalizing to larger target lengths.
@@ -173,10 +206,6 @@ Split             | Examples
 *   **Download size**: `53.41 MiB`
 
 *   **Dataset size**: `546.73 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -187,19 +216,64 @@ Split              | Examples
 `'test'`           | 37,784
 `'train'`          | 180,301
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/grounded_scan-target_length_split-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## grounded_scan/spatial_relation_splits <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 *   **Config description**: Examples for spatial relation reasoning.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `89.59 MiB`
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `675.09 MiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split                   | Examples
+:---------------------- | -------:
+`'dev'`                 | 2,617
+`'referent'`            | 30,492
+`'relation'`            | 6,285
+`'relative_position_1'` | 41,576
+`'relative_position_2'` | 41,529
+`'test'`                | 28,526
+`'train'`               | 259,088
+`'visual'`              | 62,250
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
