@@ -36,45 +36,43 @@ jobs:
       with:
         python-version:  3.7
 
-    - name: checks
+    # Get current date.
+    - name: Get current date
+      id: date
       run: |
-        echo "${{ #matrix.shard_id[@] }}"
+        echo "::set-output name=today::$(date +'%Y-%m-%d')"
+        echo "DATE: ${{steps.date.outputs.today}}"
 
+    # The cache is refreshed everyday.
+    - uses: actions/cache@v2
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}
 
-    # # Get current date.
-    # - name: Get current date
-    #   id: date
-    #   run: |
-    #     echo "::set-output name=today::$(date +'%Y-%m-%d')"
-    #     echo "DATE: ${{steps.date.outputs.today}}"
+    - run: pip install ${{ matrix.tf_version }}
 
-    # # The cache is refreshed everyday.
-    # - uses: actions/cache@v2
-    #   with:
-    #     path: ${{ env.pythonLocation }}
-    #     key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}
+    # Install pytest-shard for test parallelization
+    - run: pip install pytest-shard
 
-    # - run: pip install ${{ matrix.tf_version }}
+    # Install the protocol buffer compiler for gcld3 tests.
+    - run: sudo apt-get update
+    - run: sudo apt install -y protobuf-compiler
 
-    # # Install the protocol buffer compiler for gcld3 tests.
-    # - run: sudo apt-get update
-    # - run: sudo apt install -y protobuf-compiler
+    # Install ffmpeg for Audio FeatureConnector tests.
+    - run: sudo apt-get install ffmpeg
 
-    # # Install ffmpeg for Audio FeatureConnector tests.
-    # - run: sudo apt-get install ffmpeg
+    - run: pip install -e .[tests-all]
 
-    # - run: pip install -e .[tests-all]
-
-    # # Run tests
-    # - name: Run core tests
-    #   run: |
-    #     pytest --durations=50 -vv -n auto \
-    #       --ignore="tensorflow_datasets/audio/nsynth_test.py" \
-    #       --ignore="tensorflow_datasets/core/features/features_test.py" \
-    #       --ignore="tensorflow_datasets/testing/test_utils.py" \
-    #       --ignore="tensorflow_datasets/image/lsun_test.py" \
-    #       --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
-    #       --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+    # Run tests
+    - name: Run core tests
+      run: |
+        pytest --durations=50 -vv -n auto --shard-id=${{ matrix.shard_id }} --num_shards=2 \
+          --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+          --ignore="tensorflow_datasets/core/features/features_test.py" \
+          --ignore="tensorflow_datasets/testing/test_utils.py" \
+          --ignore="tensorflow_datasets/image/lsun_test.py" \
+          --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
+          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
 
   # notebooktest-job:
   #   # For merged PR, activate testing only on the master branch.
