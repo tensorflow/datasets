@@ -66,7 +66,7 @@ jobs:
     # Run tests
     - name: Run core tests
       run: |
-        pytest --durations=50 -vv -n auto --shard-id=${{ matrix.shard_id }} --num_shards=2 \
+        pytest --durations=50 -vv -n auto --shard-id=${{ matrix.shard_id }} \
           --ignore="tensorflow_datasets/audio/nsynth_test.py" \
           --ignore="tensorflow_datasets/core/features/features_test.py" \
           --ignore="tensorflow_datasets/testing/test_utils.py" \
