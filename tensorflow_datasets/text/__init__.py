@@ -66,6 +66,7 @@ from tensorflow_datasets.text.scan import Scan
 from tensorflow_datasets.text.scan import ScanConfig
 from tensorflow_datasets.text.schema_guided_dialogue import SchemaGuidedDialogue
 from tensorflow_datasets.text.scicite import Scicite
+from tensorflow_datasets.text.scitail import SciTail
 from tensorflow_datasets.text.scrolls import Scrolls
 from tensorflow_datasets.text.sentiment140 import Sentiment140
 from tensorflow_datasets.text.snli import Snli
