@@ -26,6 +26,7 @@ jobs:
     strategy:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
+        shard_id: [0, 1, 2, 3]
 
     steps:
     - uses: actions/checkout@v2
@@ -35,80 +36,85 @@ jobs:
       with:
         python-version:  3.7
 
-    # Get current date.
-    - name: Get current date
-      id: date
+    - name: checks
       run: |
-        echo "::set-output name=today::$(date +'%Y-%m-%d')"
-        echo "DATE: ${{steps.date.outputs.today}}"
+        echo "@{{ #matrix.shard_id[@] }}""
 
-    # The cache is refreshed everyday.
-    - uses: actions/cache@v2
-      with:
-        path: ${{ env.pythonLocation }}
-        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}
 
-    - run: pip install ${{ matrix.tf_version }}
+    # # Get current date.
+    # - name: Get current date
+    #   id: date
+    #   run: |
+    #     echo "::set-output name=today::$(date +'%Y-%m-%d')"
+    #     echo "DATE: ${{steps.date.outputs.today}}"
 
-    # Install the protocol buffer compiler for gcld3 tests.
-    - run: sudo apt-get update
-    - run: sudo apt install -y protobuf-compiler
+    # # The cache is refreshed everyday.
+    # - uses: actions/cache@v2
+    #   with:
+    #     path: ${{ env.pythonLocation }}
+    #     key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}
 
-    # Install ffmpeg for Audio FeatureConnector tests.
-    - run: sudo apt-get install ffmpeg
+    # - run: pip install ${{ matrix.tf_version }}
 
-    - run: pip install -e .[tests-all]
+    # # Install the protocol buffer compiler for gcld3 tests.
+    # - run: sudo apt-get update
+    # - run: sudo apt install -y protobuf-compiler
 
-    # Run tests
-    - name: Run core tests
-      run: |
-        pytest --durations=50 -vv -n auto \
-          --ignore="tensorflow_datasets/audio/nsynth_test.py" \
-          --ignore="tensorflow_datasets/core/features/features_test.py" \
-          --ignore="tensorflow_datasets/testing/test_utils.py" \
-          --ignore="tensorflow_datasets/image/lsun_test.py" \
-          --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+    # # Install ffmpeg for Audio FeatureConnector tests.
+    # - run: sudo apt-get install ffmpeg
 
-  notebooktest-job:
-    # For merged PR, activate testing only on the master branch.
-    if:
-      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+    # - run: pip install -e .[tests-all]
 
-    name: "Notebook tests"
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # # Run tests
+    # - name: Run core tests
+    #   run: |
+    #     pytest --durations=50 -vv -n auto \
+    #       --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+    #       --ignore="tensorflow_datasets/core/features/features_test.py" \
+    #       --ignore="tensorflow_datasets/testing/test_utils.py" \
+    #       --ignore="tensorflow_datasets/image/lsun_test.py" \
+    #       --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
+    #       --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
 
-    steps:
-    - uses: styfle/cancel-workflow-action@0.9.1
-      with:
-        access_token: ${{ github.token }}
-    - uses: actions/checkout@v2
+  # notebooktest-job:
+  #   # For merged PR, activate testing only on the master branch.
+  #   if:
+  #     (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
 
-    # Install deps.
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
+  #   name: "Notebook tests"
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 30
 
-    - run: pip --version
-    - run: pip install tf-nightly
-    - run: pip install ipython
-    - run: sudo apt install -y protobuf-compiler
+  #   steps:
+  #   - uses: styfle/cancel-workflow-action@0.9.1
+  #     with:
+  #       access_token: ${{ github.token }}
+  #   - uses: actions/checkout@v2
 
-    - run: pip install -e .[tests-all]
+  #   # Install deps.
+  #   - uses: actions/setup-python@v2
+  #     with:
+  #       python-version: 3.7
 
-    # Test each notebook sequentially.
-    - name: Run notebook
-      run: |
-        ipython kernel install --user --name tfds-notebook
-        for notebook in docs/*ipynb
-          do
-            if [$notebook != "docs/determinism.ipynb"]
-            then
-              jupyter nbconvert \
-                --ExecutePreprocessor.timeout=600 \
-                --ExecutePreprocessor.kernel_name=tfds-notebook \
-                --to notebook \
-                --execute $notebook
-            fi
-          done
+  #   - run: pip --version
+  #   - run: pip install tf-nightly
+  #   - run: pip install ipython
+  #   - run: sudo apt install -y protobuf-compiler
+
+  #   - run: pip install -e .[tests-all]
+
+  #   # Test each notebook sequentially.
+  #   - name: Run notebook
+  #     run: |
+  #       ipython kernel install --user --name tfds-notebook
+  #       for notebook in docs/*ipynb
+  #         do
+  #           if [$notebook != "docs/determinism.ipynb"]
+  #           then
+  #             jupyter nbconvert \
+  #               --ExecutePreprocessor.timeout=600 \
+  #               --ExecutePreprocessor.kernel_name=tfds-notebook \
+  #               --to notebook \
+  #               --execute $notebook
+  #           fi
+  #         done
