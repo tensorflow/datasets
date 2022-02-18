@@ -84,18 +84,19 @@ def _should_use_xpath(dataset):
   """Returns True if TFDS should load a dataset from XFILE_DATA_DIR."""
   if FLAGS.tfds_read_from_xfile:
     datadir_to_xfile_checks_passed = True
-    # Cell and dataset checks.
-    if FLAGS.xfile_check_cell:
-      xm_experiment_cells = xmanager_utils.get_xm_experiment_cells()
-      if xm_experiment_cells:
-        if not xm_experiment_cells.issubset(set(FLAGS.xfile_accepted_cells)):
-          datadir_to_xfile_checks_passed = False
-      # If no cells found, the script wasn't called from xmanager.
-      else:
-        datadir_to_xfile_checks_passed = False
     if FLAGS.xfile_check_dataset:
       if dataset not in FLAGS.xfile_accepted_datasets:
         datadir_to_xfile_checks_passed = False
+    if datadir_to_xfile_checks_passed:
+      # Cell and dataset checks.
+      if FLAGS.xfile_check_cell:
+        xm_experiment_cells = xmanager_utils.get_xm_experiment_cells()
+        if xm_experiment_cells:
+          if not xm_experiment_cells.issubset(set(FLAGS.xfile_accepted_cells)):
+            datadir_to_xfile_checks_passed = False
+        # If no cells found, the script wasn't called from xmanager.
+        else:
+          datadir_to_xfile_checks_passed = False
     if datadir_to_xfile_checks_passed:
       return True
   return False
