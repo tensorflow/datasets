@@ -188,6 +188,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ai2_arc`](ai2_arc.md)
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
+*   [`answer_equivalence`](answer_equivalence.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`coqa`](coqa.md)
 *   [`cosmos_qa`](cosmos_qa.md)
 *   [`mctaco`](mctaco.md)
@@ -324,6 +326,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`math_dataset`](math_dataset.md)
 *   [`math_qa`](math_qa.md)
 *   [`movie_rationales`](movie_rationales.md)
+*   [`mrqa`](mrqa.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`multi_nli`](multi_nli.md)
 *   [`multi_nli_mismatch`](multi_nli_mismatch.md)
 *   [`openbookqa`](openbookqa.md)
@@ -339,6 +343,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`salient_span_wikipedia`](salient_span_wikipedia.md)
 *   [`scan`](scan.md)
 *   [`schema_guided_dialogue`](schema_guided_dialogue.md)
+*   [`sci_tail`](sci_tail.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`scicite`](scicite.md)
 *   [`scrolls`](scrolls.md)
 *   [`sentiment140`](sentiment140.md)

@@ -301,6 +301,9 @@ toc:
     title: ai2_arc
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
+  - path: /datasets/catalog/answer_equivalence
+    status: nightly
+    title: answer_equivalence
   - path: /datasets/catalog/coqa
     title: coqa
   - path: /datasets/catalog/cosmos_qa
@@ -536,6 +539,9 @@ toc:
     title: math_qa
   - path: /datasets/catalog/movie_rationales
     title: movie_rationales
+  - path: /datasets/catalog/mrqa
+    status: nightly
+    title: mrqa
   - path: /datasets/catalog/multi_nli
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
@@ -566,6 +572,9 @@ toc:
     title: scan
   - path: /datasets/catalog/schema_guided_dialogue
     title: schema_guided_dialogue
+  - path: /datasets/catalog/sci_tail
+    status: nightly
+    title: sci_tail
   - path: /datasets/catalog/scicite
     title: scicite
   - path: /datasets/catalog/scrolls
