@@ -412,7 +412,8 @@ class FeatureConnector(object):
       root_dir: `path/to/dir` containing the `features.json`
     """
     with tf.io.gfile.GFile(make_config_path(root_dir), 'w') as f:
-      f.write(json.dumps(self.to_json(), indent=4))
+      json_dict = json_format.MessageToDict(self.to_proto())
+      f.write(json.dumps(json_dict, indent=4))
     self.save_metadata(root_dir, feature_name=None)
 
   @classmethod
@@ -432,7 +433,12 @@ class FeatureConnector(object):
       The reconstructed feature instance.
     """
     with tf.io.gfile.GFile(make_config_path(root_dir)) as f:
-      feature = FeatureConnector.from_json(json.loads(f.read()))
+      content = json.loads(f.read())
+      if 'type' in content:  # Legacy mode
+        feature = FeatureConnector.from_json(content)
+      else:
+        feature_proto = json_format.ParseDict(content, feature_pb2.Feature())
+        feature = FeatureConnector.from_proto(feature_proto)
     feature.load_metadata(root_dir, feature_name=None)
     return feature
 
