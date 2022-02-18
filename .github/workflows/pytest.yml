@@ -26,7 +26,7 @@ jobs:
     strategy:
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
-        shard_id: [0, 1, 2, 3]
+        shard_id: [0, 1]
 
     steps:
     - uses: actions/checkout@v2
@@ -38,7 +38,7 @@ jobs:
 
     - name: checks
       run: |
-        echo "@{{ #matrix.shard_id[@] }}"
+        echo "${{ #matrix.shard_id[@] }}"
 
 
     # # Get current date.
