@@ -38,7 +38,7 @@ jobs:
 
     - name: checks
       run: |
-        echo "@{{ #matrix.shard_id[@] }}""
+        echo "@{{ #matrix.shard_id[@] }}"
 
 
     # # Get current date.
