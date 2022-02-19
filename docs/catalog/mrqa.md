@@ -83,10 +83,6 @@ FeaturesDict({
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 
 ## mrqa/squad (default config)
 
@@ -109,6 +105,43 @@ Split          | Examples
 :------------- | -------:
 `'train'`      | 86,588
 `'validation'` | 10,507
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-squad-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -173,6 +206,43 @@ Split          | Examples
 :------------- | -------:
 `'train'`      | 74,160
 `'validation'` | 4,212
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-news_qa-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -239,6 +309,43 @@ Split          | Examples
 `'train'`      | 61,688
 `'validation'` | 7,785
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-trivia_qa-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -301,6 +408,43 @@ Split          | Examples
 `'train'`      | 117,384
 `'validation'` | 16,980
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-search_qa-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -355,6 +499,43 @@ Split          | Examples
 :------------- | -------:
 `'train'`      | 72,928
 `'validation'` | 5,901
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-hotpot_qa-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -425,6 +606,43 @@ Split          | Examples
 :------------- | -------:
 `'train'`      | 104,071
 `'validation'` | 12,836
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-natural_questions-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -506,6 +724,43 @@ Split    | Examples
 :------- | -------:
 `'test'` | 1,504
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-bio_asq-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -564,6 +819,43 @@ the correct citation for each contained dataset."
 Split    | Examples
 :------- | -------:
 `'test'` | 1,503
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-drop-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -632,6 +924,43 @@ Split    | Examples
 :------- | -------:
 `'test'` | 1,501
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-duo_rc-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -694,6 +1023,43 @@ the correct citation for each contained dataset."
 Split    | Examples
 :------- | -------:
 `'test'` | 674
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-race-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -761,6 +1127,43 @@ Split    | Examples
 :------- | -------:
 `'test'` | 2,948
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-relation_extraction-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 *   **Citation**:
 
 ```
@@ -822,6 +1225,43 @@ the correct citation for each contained dataset."
 Split    | Examples
 :------- | -------:
 `'test'` | 1,503
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mrqa-textbook_qa-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
