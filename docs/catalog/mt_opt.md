@@ -32,16 +32,9 @@ Datasets for the [MT-Opt paper](https://arxiv.org/abs/2104.08212).
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -74,6 +67,14 @@ Split | Examples
 *   **Config description**: This dataset contains task episodes collected across
     a fleet of real robots.
 
+*   **Dataset size**: `4.38 TiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 920,165
+
 *   **Features**:
 
 ```python
@@ -105,6 +106,15 @@ FeaturesDict({
 
 *   **Config description**: The success detectors dataset that contains human
     curated definitions of tasks completion.
+
+*   **Dataset size**: `548.56 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 94,636
+`'train'` | 380,234
 
 *   **Features**:
 
