@@ -193,9 +193,10 @@ class MtOpt(tfds.core.GeneratorBasedBuilder):
 
     for index, example in enumerate(tfds.as_numpy(decoded_examples)):
       if self.builder_config.name == 'rlds':
-        example_id = example['episode_id']
+        id_key = 'episode_id'
       else:
-        example_id = str(index) + str(example['task_code']) + str(hash(path))
+        id_key = 'task_code'
+      example_id = str(index) + str(example[id_key]) + str(hash(path))
       yield example_id, example
 
   def _generate_examples(self, paths):
