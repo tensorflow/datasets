@@ -205,6 +205,7 @@ class Image(feature_lib.FeatureConnector):
       dtype: Optional[tf.dtypes.DType] = None,
       encoding_format: Optional[str] = None,
       use_colormap: bool = False,
+      doc: feature_lib.DocArg = None,
   ):
     """Construct the connector.
 
@@ -226,10 +227,12 @@ class Image(feature_lib.FeatureConnector):
       use_colormap: Only used for gray-scale images. If `True`,
         `tfds.as_dataframe` will display each value in the image with a
         different color.
+      doc: Documentation of this feature (e.g. description).
 
     Raises:
       ValueError: If the shape is invalid
     """
+    super().__init__(doc=doc)
     # Set and validate values
     shape = shape or (None, None, 3)
     dtype = dtype or tf.uint8

@@ -14,6 +14,15 @@ message Feature {
   // The fully qualified class name for Python.
   // E.g. tensorflow_datasets.core.features.audio_feature.Audio
   string python_class_name = 1;
+
+  // Description of what this feature is. Could also explain where it came from
+  // and how it is expected to help.
+  string description = 14;
+
+  // The range of values that are possible. For example, the feature 'age' may
+  // have type tf.int32, but the values range from 0 to 150.
+  string value_range = 15;
+
   oneof content {
     JsonFeature json_feature = 2;
     FeaturesDict features_dict = 3;

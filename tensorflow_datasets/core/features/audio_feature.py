@@ -54,6 +54,7 @@ class Audio(tensor_feature.Tensor):
       dtype: tf.dtypes.DType = tf.int64,
       sample_rate: Optional[int] = None,
       encoding: Union[str, Encoding] = Encoding.NONE,
+      doc: feature_lib.DocArg = None,
   ):
     """Constructs the connector.
 
@@ -67,6 +68,7 @@ class Audio(tensor_feature.Tensor):
         encoding nor decoding.
       encoding: Internal encoding. See `tfds.features.Encoding` for available
         values.
+      doc: Documentation of this feature (e.g. description).
     """
     self._file_format = file_format
     if len(shape) > 2:
@@ -74,7 +76,7 @@ class Audio(tensor_feature.Tensor):
                        f'(length, num_channels), got {shape}.')
     self._shape = shape
     self._sample_rate = sample_rate
-    super().__init__(shape=shape, dtype=dtype, encoding=encoding)
+    super().__init__(shape=shape, dtype=dtype, encoding=encoding, doc=doc)
 
   def _encode_file(self, fobj, file_format):
     audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(

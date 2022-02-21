@@ -17,6 +17,7 @@
 
 import abc
 import collections
+import dataclasses
 import functools
 import html
 import importlib
@@ -113,6 +114,26 @@ class TensorInfo(object):
     )
 
 
+@dataclasses.dataclass()
+class Documentation:
+  """Feature documentation such as a textual description of what this feature means.
+
+  Attributes:
+    desc: optional textual description of this feature.
+    value_range: optional textual description of the value range of this
+      feature. For example, the feature 'age' could have value range 0 to 150.
+  """
+  desc: Optional[str] = None
+  value_range: Optional[str] = None
+
+  @classmethod
+  def from_proto(cls, feature: feature_pb2.Feature) -> 'Documentation':
+    return cls(desc=feature.description, value_range=feature.value_range)
+
+
+DocArg = Union[None, str, Documentation]
+
+
 @six.add_metaclass(abc.ABCMeta)
 class FeatureConnector(object):
   """Abstract base class for feature types.
@@ -140,6 +161,26 @@ class FeatureConnector(object):
   # For backward compatibility, after renaming/moving/ `my_feature.py` to a new
   # location, it is possible to specify the previous `module.MyFeature` names.
   ALIASES: List[str] = []
+
+  def __init__(
+      self,
+      *,
+      doc: DocArg = None,
+  ):
+    if isinstance(doc, str):
+      self._doc = Documentation(desc=doc)
+    elif isinstance(doc, Documentation):
+      self._doc = doc
+    else:
+      self._doc = Documentation()
+
+  @property
+  def doc(self) -> Documentation:
+    return self._doc
+
+  def _set_doc(self, doc: Documentation) -> None:
+    # Should only be used in from_proto!
+    self._doc = doc
 
   def __init_subclass__(cls):
     """Registers subclasses features."""
@@ -332,6 +373,7 @@ class FeatureConnector(object):
   def from_json_content(
       cls: Type[T],
       value: Union[Json, message.Message],
+      doc: Optional[DocArg] = None,
   ) -> T:
     """FeatureConnector factory (to overwrite).
 
@@ -347,13 +389,14 @@ class FeatureConnector(object):
       value: FeatureConnector information represented as either Json or a
         Feature proto. The content must match what is returned by
         `to_json_content`.
+      doc: Documentation of this feature (e.g. description).
 
     Returns:
       The reconstructed FeatureConnector.
     """
     if not isinstance(value, dict):
       raise TypeError(f'Unexpected feature connector value: {value!r}')
-    return cls(**value)  # pytype: disable=not-instantiable
+    return cls(doc=doc, **value)  # pytype: disable=not-instantiable
 
   def to_json_content(self) -> Union[Json, message.Message]:
     """FeatureConnector factory (to overwrite).
@@ -391,19 +434,26 @@ class FeatureConnector(object):
     oneof_kwarg = {_proto2oneof_field_name(content): content}
     return feature_pb2.Feature(
         python_class_name=self._fully_qualified_class_name,
+        description=self._doc.desc,
+        value_range=self._doc.value_range,
         **oneof_kwarg,
     )
 
   @classmethod
-  def from_proto(cls, feature: feature_pb2.Feature) -> T:
-    feature_cls = cls.cls_from_name(feature.python_class_name)
+  def from_proto(cls, feature_proto: feature_pb2.Feature) -> T:
+    """Instantiates a feature from its proto representation."""
+    feature_cls = cls.cls_from_name(feature_proto.python_class_name)
     # Extract which feature is set (e.g. `json_feature`)
-    feature_field_name = feature.WhichOneof('content')
-    feature_content = getattr(feature, feature_field_name)
+    feature_field_name = feature_proto.WhichOneof('content')
+    feature_content = getattr(feature_proto, feature_field_name)
     # Legacy mode, json content is restored as dict
     if isinstance(feature_content, feature_pb2.JsonFeature):
       feature_content = json.loads(feature_content.json)
-    return feature_cls.from_json_content(feature_content)
+
+    # Not all feature classes accept the documentation as an argument.
+    feature = feature_cls.from_json_content(value=feature_content)
+    feature._set_doc(Documentation.from_proto(feature_proto))  # pylint: disable=protected-access
+    return feature
 
   def save_config(self, root_dir: str) -> None:
     """Exports the `FeatureConnector` to a file.

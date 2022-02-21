@@ -24,11 +24,14 @@ from tensorflow_datasets.core.features.bounding_boxes import BBox
 from tensorflow_datasets.core.features.bounding_boxes import BBoxFeature
 from tensorflow_datasets.core.features.class_label_feature import ClassLabel
 from tensorflow_datasets.core.features.dataset_feature import Dataset
+from tensorflow_datasets.core.features.feature import DocArg
+from tensorflow_datasets.core.features.feature import Documentation
 from tensorflow_datasets.core.features.feature import FeatureConnector
 from tensorflow_datasets.core.features.feature import TensorInfo
 from tensorflow_datasets.core.features.features_dict import FeaturesDict
 from tensorflow_datasets.core.features.image_feature import Image
 from tensorflow_datasets.core.features.labeled_image import LabeledImage
+from tensorflow_datasets.core.features.scalar import Scalar
 from tensorflow_datasets.core.features.sequence_feature import Sequence
 from tensorflow_datasets.core.features.tensor_feature import Encoding
 from tensorflow_datasets.core.features.tensor_feature import Tensor
@@ -43,12 +46,15 @@ __all__ = [
     "BBoxFeature",
     "ClassLabel",
     "Dataset",
+    "DocArg",
+    "Documentation",
     "Encoding",
     "FeatureConnector",
     "FeaturesDict",
     "LabeledImage",
     "Tensor",
     "TensorInfo",
+    "Scalar",
     "Sequence",
     "Image",
     "Text",

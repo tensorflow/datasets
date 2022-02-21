@@ -96,6 +96,7 @@ class Video(sequence_feature.Sequence):
       ffmpeg_extra_args: Sequence[str] = (),
       use_colormap: bool = False,
       dtype=tf.uint8,
+      doc: feature_lib.DocArg = None,
   ):
     """Initializes the connector.
 
@@ -112,6 +113,7 @@ class Video(sequence_feature.Sequence):
         different color.
       dtype: tf.uint16 or tf.uint8 (default). tf.uint16 can be used only with
         png encoding_format
+      doc: Documentation of this feature (e.g. description).
 
     Raises:
       ValueError: If the shape is invalid
@@ -183,7 +185,11 @@ class Video(sequence_feature.Sequence):
       shape = tuple(value['shape'])
       encoding_format = value['encoding_format']
       ffmpeg_extra_args = value['ffmpeg_extra_args']
-      return cls(shape, encoding_format, ffmpeg_extra_args)
+      return cls(
+          shape=shape,
+          encoding_format=encoding_format,
+          ffmpeg_extra_args=ffmpeg_extra_args,
+      )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
         dtype=feature_lib.parse_dtype(value.dtype),

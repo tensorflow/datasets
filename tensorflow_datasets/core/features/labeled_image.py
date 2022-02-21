@@ -52,6 +52,7 @@ class LabeledImage(image_feature.Image):
       shape: Optional[type_utils.Shape] = None,
       dtype: Optional[tf.dtypes.DType] = None,
       encoding_format: Optional[str] = None,
+      doc: feature_lib.DocArg = None,
   ):
     """Constructor.
 
@@ -70,6 +71,7 @@ class LabeledImage(image_feature.Image):
       shape: Image shape (see `tfds.features.Image.__init__`)
       dtype: Image dtype (see `tfds.features.Image.__init__`)
       encoding_format: 'jpeg' or 'png' (see `tfds.features.Image.__init__`)
+      doc: Documentation of this feature (e.g. description).
     """
     super().__init__(
         # Label images have a single channel
@@ -77,6 +79,7 @@ class LabeledImage(image_feature.Image):
         dtype=dtype,
         encoding_format=encoding_format,
         use_colormap=True,  # LabeledImage always use colormap
+        doc=doc,
     )
     if self.shape[-1] != 1:
       raise ValueError(

@@ -24,6 +24,7 @@ from absl import logging
 import tensorflow as tf
 
 from tensorflow_datasets.core.deprecated import text as text_lib
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
@@ -34,7 +35,13 @@ Json = type_utils.Json
 class Text(tensor_feature.Tensor):
   """`FeatureConnector` for text, encoding to integers with a `TextEncoder`."""
 
-  def __init__(self, encoder=None, encoder_config=None):
+  def __init__(
+      self,
+      encoder=None,
+      encoder_config=None,
+      *,
+      doc: feature_lib.DocArg = None,
+  ):
     """Constructs a Text FeatureConnector.
 
     Args:
@@ -42,6 +49,7 @@ class Text(tensor_feature.Tensor):
         text to integers. If None, the text will be utf-8 byte-encoded.
       encoder_config: `tfds.deprecated.text.TextEncoderConfig`, needed if
         restoring from a file with `load_metadata`.
+      doc: Documentation of this feature (e.g. description).
     """
     if encoder and encoder_config:
       raise ValueError("If encoder is provided, encoder_config must be None.")
@@ -65,6 +73,7 @@ class Text(tensor_feature.Tensor):
     super(Text, self).__init__(
         shape=(None,) if has_encoder else (),
         dtype=tf.int64 if has_encoder else tf.string,
+        doc=doc,
     )
 
   @property

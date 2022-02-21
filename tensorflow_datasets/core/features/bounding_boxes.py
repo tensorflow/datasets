@@ -67,8 +67,12 @@ class BBoxFeature(tensor_feature.Tensor):
     ```
   """
 
-  def __init__(self):
-    super(BBoxFeature, self).__init__(shape=(4,), dtype=tf.float32)
+  def __init__(
+      self,
+      *,
+      doc: feature_lib.DocArg = None,
+  ):
+    super(BBoxFeature, self).__init__(shape=(4,), dtype=tf.float32, doc=doc)
 
   def encode_example(self, bbox):
     """See base class for details."""
