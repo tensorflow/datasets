@@ -151,13 +151,21 @@ automatically created with
 
 ### Auto-shard your data across workers (Jax)
 
-With Jax, you can use the `tfds.even_splits` API to distribute your data across
-workers. See the [split API guide](https://www.tensorflow.org/datasets/splits).
+With Jax, you can use the `tfds.split_for_jax_process` or `tfds.even_splits` API
+to distribute your data across workers. See the
+[split API guide](https://www.tensorflow.org/datasets/splits).
 
 ```python
+split = tfds.split_for_jax_process('train', drop_remainder=True)
+ds = tfds.load('my_dataset', split=split)
+```
+
+`tfds.split_for_jax_process` is a simple alias for:
+
+```python
+# The current `process_index` loads only `1 / process_count` of the data.
 splits = tfds.even_splits('train', n=jax.process_count(), drop_remainder=True)
-# The current `process_index` load only `1 / process_count` of the data.
-ds = tfds.load('my_dataset', split=splits[jax.process_index()])
+split = splits[jax.process_index()]
 ```
 
 ### Faster image decoding

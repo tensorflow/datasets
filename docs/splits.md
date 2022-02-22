@@ -69,17 +69,26 @@ ds = tfds.load('my_dataset', split=split2)
 ```
 
 This can be particularly useful when training in a distributed setting, where
-each host should receive a slice of the original data. Here is an example with
-jax:
+each host should receive a slice of the original data.
+
+With `Jax`, this can be simplified even further using
+`tfds.split_for_jax_process`:
 
 ```python
-splits = tfds.even_splits('train', n=jax.process_count(), drop_remainder=True)
-# The current `process_index` loads only `1 / process_count` of the data.
-ds = tfds.load('my_dataset', split=splits[jax.process_index()])
+split = tfds.split_for_jax_process('train', drop_remainder=True)
+ds = tfds.load('my_dataset', split=split)
 ```
 
-`tfds.even_splits` accepts on any split value as input (e.g.
-`'train[75%:]+test'`)
+`tfds.split_for_jax_process` is a simple alias for:
+
+```python
+# The current `process_index` loads only `1 / process_count` of the data.
+splits = tfds.even_splits('train', n=jax.process_count(), drop_remainder=True)
+split = splits[jax.process_index()]
+```
+
+`tfds.even_splits`, `tfds.split_for_jax_process` accepts on any split value as
+input (e.g. `'train[75%:]+test'`)
 
 ## Slicing and metadata
 
