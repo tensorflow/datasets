@@ -17,6 +17,7 @@
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import imagenet2012_fewshot
+import tensorflow_datasets.public_api as tfds
 
 imagenet2012_fewshot.Imagenet2012Fewshot.PNG_IMAGES = ["n01440764_1.JPEG"]
 imagenet2012_fewshot.Imagenet2012Fewshot.CMYK_IMAGES = [
@@ -26,8 +27,11 @@ imagenet2012_fewshot.Imagenet2012Fewshot.CMYK_IMAGES = [
 
 fake_example_dir = testing.test_utils.fake_examples_dir()
 imagenet2012_fewshot.SUBSET2FILES = {
-    "1shot": fake_example_dir + "/imagenet2012_fewshot/1shot.txt",
+    "1shot":
+        tfds.core.as_path(fake_example_dir + "/imagenet2012_fewshot/1shot.txt"),
 }
+imagenet2012_fewshot.TUNE_FILE = tfds.core.as_path(
+    fake_example_dir + "/imagenet2012_fewshot/tune.txt")
 
 
 class Imagenet2012FewshotTest(testing.DatasetBuilderTestCase):
@@ -35,6 +39,7 @@ class Imagenet2012FewshotTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["1shot"]
   SPLITS = {  # Expected number of examples on each split.
       "train": 1,
+      "tune": 1,
       "validation": 10,
   }
   DL_EXTRACT_RESULT = [

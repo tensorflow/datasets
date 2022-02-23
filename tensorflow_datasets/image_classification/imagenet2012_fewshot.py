@@ -50,6 +50,7 @@ SUBSET2FILES = {
     '5shot': tfds.core.gcs_path('downloads/imagenet2012_fewshot/5shot.txt'),
     '10shot': tfds.core.gcs_path('downloads/imagenet2012_fewshot/10shot.txt')
 }
+TUNE_FILE = tfds.core.gcs_path('downloads/imagenet2012_fewshot/tune.txt')
 
 
 class Imagenet2012Fewshot(imagenet2012_subset.Imagenet2012Subset):
@@ -93,13 +94,18 @@ class Imagenet2012Fewshot(imagenet2012_subset.Imagenet2012Subset):
     subset_file = SUBSET2FILES[self.builder_config.name]
     if isinstance(subset_file, list):  # it will only be a list during testing,
       subset_file = subset_file[0]  # where the first entry is 1shot.txt.
-    with tf.io.gfile.GFile(subset_file) as fp:
-      subset = set(fp.read().splitlines())  # remove trailing `\r` in Windows
+    subset = set(subset_file.read_text().splitlines())
+
+    # Get the file for tune split.
+    tuneset = set(TUNE_FILE.read_text().splitlines())
 
     return {
         tfds.Split.TRAIN:
             self._generate_examples(
                 archive=dl_manager.iter_archive(train_path), subset=subset),
+        tfds.Split('tune'):
+            self._generate_examples(
+                archive=dl_manager.iter_archive(train_path), subset=tuneset),
         tfds.Split.VALIDATION:
             self._generate_examples(
                 archive=dl_manager.iter_archive(val_path),
