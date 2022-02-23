@@ -26,6 +26,7 @@ import textwrap
 from typing import Iterator
 from unittest import mock
 
+from etils import epath
 import pytest
 
 from tensorflow_datasets.core import dataset_builder
@@ -37,9 +38,9 @@ from tensorflow_datasets.core.community import register_package
 
 
 @contextlib.contextmanager
-def mock_cache_path(new_cache_dir: utils.PathLike) -> Iterator[None]:
+def mock_cache_path(new_cache_dir: epath.PathLike) -> Iterator[None]:
   """Mock which overwrite the cache path."""
-  new_dir = utils.as_path(new_cache_dir)
+  new_dir = epath.Path(new_cache_dir)
 
   # Use `__wrapped__` to access the original function wrapped inside
   # `functools.lru_cache`

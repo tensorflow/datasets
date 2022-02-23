@@ -19,6 +19,7 @@ import os
 import typing
 from typing import Any, List, Optional, Tuple, Type
 
+from etils import epath
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -38,7 +39,7 @@ class ReadOnlyBuilder(
   """Generic DatasetBuilder loading from a directory."""
 
   def __init__(self,
-               builder_dir: utils.PathLike,
+               builder_dir: epath.PathLike,
                *,
                info_proto: Optional[dataset_info_pb2.DatasetInfo] = None):
     """Constructor.
@@ -105,7 +106,7 @@ class ReadOnlyBuilder(
 
 
 def builder_from_directory(
-    builder_dir: utils.PathLike,) -> dataset_builder.DatasetBuilder:
+    builder_dir: epath.PathLike,) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
   Reconstructs the `tfds.core.DatasetBuilder` without requiring the original
@@ -130,7 +131,7 @@ def builder_from_directory(
 
 
 def builder_from_directories(
-    builder_dirs: List[utils.PathLike],
+    builder_dirs: List[epath.PathLike],
     *,
     filetype_suffix: Optional[str] = None) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
@@ -188,7 +189,7 @@ def builder_from_directories(
 
 
 def builder_from_metadata(
-    builder_dir: utils.PathLike,
+    builder_dir: epath.PathLike,
     info_proto: dataset_info_pb2.DatasetInfo) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given metadata.
 
@@ -326,7 +327,7 @@ def _find_builder_dir_single_dir(
 ) -> Optional[str]:
   """Same as `find_builder_dir` but requires explicit dir."""
   # Construct the `ds_name/config/` path
-  builder_dir = utils.as_path(data_dir) / builder_name
+  builder_dir = epath.Path(data_dir) / builder_name
   if not config_name:
     # If the BuilderConfig is not specified:
     # * Either the dataset doesn't have a config
@@ -361,7 +362,7 @@ def _find_builder_dir_single_dir(
 
 
 def _get_default_config_name(
-    builder_dir: utils.ReadOnlyPath,
+    builder_dir: epath.Path,
     name: str,
 ) -> Optional[str]:
   """Returns the default config of the given dataset, None if not found."""
@@ -380,11 +381,11 @@ def _get_default_config_name(
       return cls.BUILDER_CONFIGS[0].name
 
   # Otherwise, try to load default config from common metadata
-  return dataset_builder.load_default_config_name(builder_dir)
+  return dataset_builder.load_default_config_name(epath.Path(builder_dir))
 
 
 def _get_version_str(
-    builder_dir: utils.ReadOnlyPath,
+    builder_dir: epath.Path,
     *,
     requested_version: Optional[str] = None,
 ) -> Optional[str]:

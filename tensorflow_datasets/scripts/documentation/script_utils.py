@@ -29,7 +29,7 @@ from absl import logging
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
-# pylint: disable=logging-format-interpolation,logging-not-lazy
+# pylint: disable=logging-format-interpolation,logging-not-lazy,logging-fstring-interpolation
 
 T = TypeVar('T')
 
@@ -55,7 +55,7 @@ def _log_exception(fn):
 def generate_and_save_artifact(
     full_name: str,
     *,
-    dst_dir: tfds.core.PathLike,
+    dst_dir: tfds.typing.PathLike,
     overwrite: bool,
     file_extension: str,
     get_artifact_fn: Callable[[tf.data.Dataset, tfds.core.DatasetInfo], T],

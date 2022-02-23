@@ -25,6 +25,7 @@ import sys
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, Union
 
 from absl import logging
+from etils import epath
 import six
 import tensorflow as tf
 
@@ -49,8 +50,6 @@ from tensorflow_datasets.core.utils import type_utils
 
 import termcolor
 
-ReadOnlyPath = type_utils.ReadOnlyPath
-ReadWritePath = type_utils.ReadWritePath
 Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
 VersionOrStr = Union[utils.Version, str]
@@ -162,7 +161,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   def __init__(
       self,
       *,
-      data_dir: Optional[utils.PathLike] = None,
+      data_dir: Optional[epath.PathLike] = None,
       config: Union[None, str, BuilderConfig] = None,
       version: Union[None, str, utils.Version] = None,
   ):
@@ -202,12 +201,12 @@ class DatasetBuilder(registered.RegisteredDataset):
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def code_path(cls) -> ReadOnlyPath:
+  def code_path(cls) -> epath.Path:
     """Returns the path to the file where the Dataset class is located.
 
     Note: As the code can be run inside zip file. The returned value is
-    a `ReadOnlyPath` by default. Use `tfds.core.utils.to_write_path()` to cast
-    the path into `ReadWritePath`.
+    a `Path` by default. Use `tfds.core.utils.to_write_path()` to cast
+    the path into `Path`.
 
     Returns:
       path: pathlib.Path like abstraction
@@ -218,7 +217,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       # Note: `utils.resource_path` will return either `zipfile.Path` (for
       # zipapp) or `pathlib.Path`.
       try:
-        path = utils.resource_path(modules[0])
+        path = epath.resource_path(modules[0])
       except TypeError:  # Module is not a package
         pass
       else:
@@ -226,12 +225,12 @@ class DatasetBuilder(registered.RegisteredDataset):
         # `pathlib.Path('.')` rather than the real path, so filter those by
         # checking for `parts`.
         # Check for `zipfile.Path` (`ResourcePath`) as it does not have `.parts`
-        if isinstance(path, utils.ResourcePath) or path.parts:
+        if isinstance(path, epath.resource_utils.ResourcePath) or path.parts:
           modules[-1] += ".py"
           return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
     # equivalent to the above return.
-    return utils.as_path(inspect.getfile(cls))
+    return epath.Path(inspect.getfile(cls))
 
   def __getstate__(self):
     return self._original_state
@@ -289,13 +288,13 @@ class DatasetBuilder(registered.RegisteredDataset):
     return self._data_dir
 
   @property
-  def data_path(self) -> type_utils.ReadWritePath:
+  def data_path(self) -> epath.Path:
     # Instead, should make `_data_dir` be Path everywhere
-    return utils.as_path(self._data_dir)
+    return epath.Path(self._data_dir)
 
   @utils.classproperty
   @classmethod
-  def _checksums_path(cls) -> ReadOnlyPath:
+  def _checksums_path(cls) -> epath.Path:
     """Returns the checksums path."""
     # Used:
     # * To load the checksums (in url_infos)
@@ -369,7 +368,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     elif data_exists and download_config.download_mode == REUSE_CACHE_IF_EXISTS:
       logging.info("Deleting pre-existing dataset %s (%s)", self.name,
                    self._data_dir)
-      utils.as_path(self._data_dir).rmtree()  # Delete pre-existing data.
+      epath.Path(self._data_dir).rmtree()  # Delete pre-existing data.
       data_exists = tf.io.gfile.exists(self._data_dir)
 
     if self.version.tfds_version_to_prepare:
@@ -1224,7 +1223,7 @@ def _check_split_names(split_names: Iterable[str]) -> None:
 
 
 def _save_default_config_name(
-    common_dir: ReadWritePath,
+    common_dir: epath.Path,
     *,
     default_config_name: str,
 ) -> None:
@@ -1246,9 +1245,9 @@ def _save_default_config_name(
     tmp_config_path.write_text(json.dumps(data))
 
 
-def load_default_config_name(common_dir: ReadOnlyPath,) -> Optional[str]:
+def load_default_config_name(common_dir: epath.Path,) -> Optional[str]:
   """Load `builder_cls` metadata (common to all builder configs)."""
-  config_path = utils.as_path(common_dir) / ".config/metadata.json"
+  config_path = epath.Path(common_dir) / ".config/metadata.json"
   if not config_path.exists():
     return None
   data = json.loads(config_path.read_text())

@@ -33,6 +33,7 @@ import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
 import uuid
 
+from etils import epath
 from six.moves import urllib
 import tensorflow as tf
 from tensorflow_datasets.core import constants
@@ -300,7 +301,7 @@ def _get_incomplete_path(filename):
 
 
 @contextlib.contextmanager
-def incomplete_dir(dirname: type_utils.PathLike) -> Iterator[str]:
+def incomplete_dir(dirname: epath.PathLike) -> Iterator[str]:
   """Create temporary dir for dirname and rename on exit."""
   dirname = os.fspath(dirname)
   tmp_dir = _get_incomplete_path(dirname)
@@ -314,8 +315,7 @@ def incomplete_dir(dirname: type_utils.PathLike) -> Iterator[str]:
 
 
 @contextlib.contextmanager
-def incomplete_file(
-    path: type_utils.ReadWritePath,) -> Iterator[type_utils.ReadWritePath]:
+def incomplete_file(path: epath.Path,) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
   tmp_path = path.parent / f'{path.name}.incomplete.{uuid.uuid4().hex}'
   try:
@@ -477,7 +477,7 @@ def basename_from_url(url: str) -> str:
   return filename or 'unknown_name'
 
 
-def list_info_files(dir_path: type_utils.PathLike) -> List[str]:
+def list_info_files(dir_path: epath.PathLike) -> List[str]:
   """Returns name of info files within dir_path."""
   from tensorflow_datasets.core import file_adapters  # pylint: disable=g-import-not-at-top  # pytype: disable=import-error
   path = os.fspath(dir_path)
@@ -500,7 +500,7 @@ def get_base64(write_fn: Union[bytes, Callable[[io.BytesIO], None]],) -> str:
 
 
 @contextlib.contextmanager
-def add_sys_path(path: type_utils.PathLike) -> Iterator[None]:
+def add_sys_path(path: epath.PathLike) -> Iterator[None]:
   """Temporary add given path to `sys.path`."""
   path = os.fspath(path)
   try:

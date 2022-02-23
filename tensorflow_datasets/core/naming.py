@@ -21,9 +21,8 @@ import re
 import textwrap
 from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Union
 
-from tensorflow_datasets.core.utils import generic_path
+from etils import epath
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.core.utils import type_utils
 
 _DEFAULT_NUM_DIGITS_FOR_SHARDS = 5
 
@@ -253,14 +252,14 @@ class ShardedFileTemplate:
     filetype_suffix: the filetype suffix to denote the type of file. For
       example, `tfrecord`.
   """
-  data_dir: type_utils.ReadWritePath
+  data_dir: epath.Path
   template: str = DEFAULT_FILENAME_TEMPLATE
   dataset_name: Optional[str] = None
   split: Optional[str] = None
   filetype_suffix: Optional[str] = None
 
   def __post_init__(self):
-    self.data_dir = generic_path.as_path(self.data_dir)
+    self.data_dir = epath.Path(self.data_dir)
     if self.split is not None and not self.split:
       raise ValueError(f'Split must be a non-empty string: {self}')
     if self.filetype_suffix is not None and not self.filetype_suffix:
@@ -301,7 +300,7 @@ class ShardedFileTemplate:
       *,
       shard_index: int,
       num_shards: Optional[int],
-  ) -> generic_path.ReadWritePath:
+  ) -> epath.Path:
     """Returns the filename (including full path if `data_dir` is set) for the given shard."""
     return self.data_dir / self._relative_filepath(
         shard_index=shard_index, num_shards=num_shards)
@@ -309,7 +308,7 @@ class ShardedFileTemplate:
   def sharded_filepaths(
       self,
       num_shards: int,
-  ) -> List[generic_path.ReadWritePath]:
+  ) -> List[epath.Path]:
     return [
         self.sharded_filepath(shard_index=i, num_shards=num_shards)
         for i in range(num_shards)
@@ -373,7 +372,7 @@ def filepattern_for_dataset_split(
       notation, otherwise file*.
   """
   template = ShardedFileTemplate(
-      data_dir=generic_path.as_path(data_dir),
+      data_dir=epath.Path(data_dir),
       dataset_name=dataset_name,
       split=split,
       filetype_suffix=filetype_suffix)
@@ -385,7 +384,7 @@ def filenames_for_dataset_split(
     split: str,
     num_shards: int,
     filetype_suffix: str,
-    data_dir: Optional[type_utils.PathLike] = None,
+    data_dir: Optional[epath.PathLike] = None,
 ) -> List[str]:
   """Returns the list of filenames for the given dataset and split."""
   # TODO(tfds): remove this by start using ShardedFileTemplate
@@ -393,7 +392,7 @@ def filenames_for_dataset_split(
       dataset_name=dataset_name,
       split=split,
       filetype_suffix=filetype_suffix,
-      data_dir=generic_path.as_path(data_dir))
+      data_dir=epath.Path(data_dir))
   return [
       os.fspath(fp) for fp in template.sharded_filenames(num_shards=num_shards)
   ]
@@ -412,7 +411,7 @@ def filepaths_for_dataset_split(
       dataset_name=dataset_name,
       split=split,
       filetype_suffix=filetype_suffix,
-      data_dir=generic_path.as_path(data_dir))
+      data_dir=epath.Path(data_dir))
   return [
       os.fspath(fp) for fp in template.sharded_filepaths(num_shards=num_shards)
   ]

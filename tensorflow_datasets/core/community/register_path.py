@@ -22,6 +22,7 @@ from typing import Any, Dict, FrozenSet, Iterator, List, Type
 from absl import flags
 from absl import logging
 
+from etils import epath
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import naming
@@ -36,7 +37,7 @@ TFDS_DEBUG_VERBOSE = flags.DEFINE_boolean('tfds_debug_list_dir', False,
 
 ListOrElem = utils.ListOrElem
 
-# pylint: disable=logging-format-interpolation
+# pylint: disable=logging-fstring-interpolation
 
 
 class DataDirRegister(register_base.BaseRegister):
@@ -65,17 +66,17 @@ class DataDirRegister(register_base.BaseRegister):
 
   """
 
-  def __init__(self, path: utils.PathLike):
+  def __init__(self, path: epath.PathLike):
     """Contructor.
 
     Args:
       path: Path to the register files containing the mapping namespace ->
         data_dir
     """
-    self._path: utils.ReadOnlyPath = utils.as_path(path)
+    self._path: epath.Path = epath.Path(path)
 
   @utils.memoized_property
-  def _ns2data_dir(self) -> Dict[str, List[utils.ReadWritePath]]:
+  def _ns2data_dir(self) -> Dict[str, List[epath.Path]]:
     """Mapping `namespace` -> `data_dir`."""
     # Lazy-load the namespaces the first requested time.
     config = toml.loads(self._path.read_text())
@@ -131,20 +132,19 @@ class DataDirRegister(register_base.BaseRegister):
         **builder_kwargs,
     )
 
-  def get_builder_root_dirs(
-      self, name: utils.DatasetName) -> List[utils.ReadWritePath]:
+  def get_builder_root_dirs(self, name: utils.DatasetName) -> List[epath.Path]:
     """Returns root dir of the generated builder (without version/config)."""
     return [d / name.name for d in self._ns2data_dir[name.namespace]]
 
 
-def _as_path_list(path_or_paths: ListOrElem[str]) -> List[utils.ReadWritePath]:
+def _as_path_list(path_or_paths: ListOrElem[str]) -> List[epath.Path]:
   if isinstance(path_or_paths, list):
-    return [utils.as_path(p) for p in path_or_paths]
+    return [epath.Path(p) for p in path_or_paths]
   else:
-    return [utils.as_path(path_or_paths)]
+    return [epath.Path(path_or_paths)]
 
 
-def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:
+def _maybe_iterdir(path: epath.Path) -> Iterator[epath.Path]:
   """Same as `path.iterdir()`, but don't fail if path does not exist."""
   # Use try/except rather than `.exists()` to avoid an extra RPC call
   # per namespace
@@ -160,7 +160,7 @@ def _maybe_iterdir(path: utils.ReadOnlyPath) -> Iterator[utils.ReadOnlyPath]:
 
 
 def _iter_builder_names(
-    ns2data_dir: Dict[str, List[utils.ReadOnlyPath]],) -> Iterator[str]:
+    ns2data_dir: Dict[str, List[epath.Path]],) -> Iterator[str]:
   """Yields the `ns:name` dataset names."""
   FILTERED_DIRNAME = frozenset(('downloads',))  # pylint: disable=invalid-name
 
@@ -171,7 +171,7 @@ def _iter_builder_names(
   # For better performances, load all namespaces asynchonously
   def _get_builder_names_single_namespace(
       ns_name: str,
-      data_dir: utils.ReadOnlyPath,
+      data_dir: epath.Path,
   ) -> List[str]:
     # Note: `data_dir` might contain non-dataset folders, but checking
     # individual dataset would have significant performance drop, so

@@ -18,12 +18,11 @@
 import os
 from absl.testing import parameterized
 
+from etils import epath
 import pytest
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits
-from tensorflow_datasets.core.utils import generic_path
 
 
 class NamingTest(parameterized.TestCase, testing.TestCase):
@@ -336,7 +335,7 @@ def test_sharded_file_template_empty_split():
 
 
 def test_sharded_file_template_shard_index():
-  builder_dir = generic_path.as_path('/my/path')
+  builder_dir = epath.Path('/my/path')
   template = naming.ShardedFileTemplate(
       template='data/mnist-train.tfrecord-{SHARD_INDEX}', data_dir=builder_dir)
   assert os.fspath(template.sharded_filepath(
@@ -349,7 +348,7 @@ def test_sharded_file_template_shard_index():
 
 
 def test_sharded_file_template_sharded_filepath_shard_x_of_y():
-  builder_dir = generic_path.as_path('/my/path')
+  builder_dir = epath.Path('/my/path')
   template_explicit = naming.ShardedFileTemplate(
       template='data/mnist-train.tfrecord-{SHARD_INDEX}-of-{NUM_SHARDS}',
       data_dir=builder_dir)
@@ -365,7 +364,7 @@ def test_sharded_file_template_sharded_filepath_shard_x_of_y():
 
 
 def test_sharded_file_template_sharded_filepath_shard_x_of_y_more_digits():
-  builder_dir = generic_path.as_path('/my/path')
+  builder_dir = epath.Path('/my/path')
   template = naming.ShardedFileTemplate(
       template='data/{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}',
       data_dir=builder_dir,
@@ -379,7 +378,7 @@ def test_sharded_file_template_sharded_filepath_shard_x_of_y_more_digits():
 
 
 def test_sharded_file_template_no_template():
-  builder_dir = generic_path.as_path('/my/path')
+  builder_dir = epath.Path('/my/path')
   template = naming.ShardedFileTemplate(
       data_dir=builder_dir,
       dataset_name='imagenet',
@@ -391,7 +390,7 @@ def test_sharded_file_template_no_template():
 
 
 def test_sharded_file_template_no_template_incomplete():
-  builder_dir = generic_path.as_path('/my/path')
+  builder_dir = epath.Path('/my/path')
   template_without_split = naming.ShardedFileTemplate(
       data_dir=builder_dir, dataset_name='imagenet', filetype_suffix='riegeli')
   with pytest.raises(KeyError):
@@ -399,7 +398,7 @@ def test_sharded_file_template_no_template_incomplete():
 
 
 def test_sharded_file_template_template_and_properties():
-  builder_dir = generic_path.as_path('/my/path')
+  builder_dir = epath.Path('/my/path')
   template = naming.ShardedFileTemplate(
       template='data/mnist-{SPLIT}.{FILEFORMAT}-{SHARD_INDEX}',
       data_dir=builder_dir,

@@ -41,8 +41,8 @@ def main(_):
 
 
 def export_community_datasets(
-    in_path: tfds.typing.ReadWritePath,
-    out_path: tfds.typing.ReadWritePath,
+    in_path: tfds.core.Path,
+    out_path: tfds.core.Path,
 ) -> None:
   """Exports community datasets.
 
@@ -57,7 +57,7 @@ def export_community_datasets(
 
 
 def _find_community_ds_packages(
-    config_path: tfds.typing.ReadWritePath,) -> List[DatasetPackage]:
+    config_path: tfds.core.Path,) -> List[DatasetPackage]:
   """Find all namepaces/dataset from the config.
 
   Config should contain the instructions in the following format:
@@ -76,13 +76,12 @@ def _find_community_ds_packages(
   """
   config = toml.load(config_path)
   all_packages = itertools.chain.from_iterable(
-      _list_ds_packages_for_namespace(namespace, tfds.core.as_path(
-          src_code_path))
+      _list_ds_packages_for_namespace(namespace, tfds.core.Path(src_code_path))
       for namespace, src_code_path in tqdm.tqdm(config['Namespaces'].items()))
   return sorted(all_packages, key=lambda package: package.name)
 
 
-def _save_community_ds_packages(file_path: tfds.typing.ReadWritePath,
+def _save_community_ds_packages(file_path: tfds.core.Path,
                                 ds_packages: List[DatasetPackage]) -> None:
   """Save all loaded datasets in the package index.
 
@@ -104,7 +103,7 @@ def _save_community_ds_packages(file_path: tfds.typing.ReadWritePath,
 
 def _list_ds_packages_for_namespace(
     namespace: str,
-    path: tfds.typing.ReadOnlyPath,
+    path: tfds.core.Path,
 ) -> List[DatasetPackage]:
   """Returns the dataset names found in a specific directory.
 
@@ -155,8 +154,7 @@ def _list_ds_packages_for_namespace(
   return all_packages
 
 
-def _get_dataset_source(
-    ds_path: tfds.typing.ReadWritePath,) -> Optional[DatasetSource]:
+def _get_dataset_source(ds_path: tfds.core.Path,) -> Optional[DatasetSource]:
   """Returns a `DatasetSource` instance if the given path corresponds to a dataset.
 
   To determine whether the given path contains a dataset, a simple heuristic is

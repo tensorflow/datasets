@@ -136,7 +136,7 @@ _NAME_TO_SPLITS = {
 
 def _filename(prefix: str, num_shards: int, shard_id: int):
   return os.fspath(
-      tfds.core.as_path(f'{prefix}-{shard_id:05d}-of-{num_shards:05d}'))
+      tfds.core.Path(f'{prefix}-{shard_id:05d}-of-{num_shards:05d}'))
 
 
 def _get_files(prefix: str, ds_name: str, split: str, num_shards: int):

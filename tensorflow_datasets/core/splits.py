@@ -27,7 +27,7 @@ import typing
 from typing import Any, Dict, Iterable, List, Optional, Union
 
 from absl import logging
-
+from etils import epath
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import proto as proto_lib
 from tensorflow_datasets.core import units
@@ -193,7 +193,7 @@ class SplitInfo:
         self.filename_template.sharded_filenames(len(self.shard_lengths)))
 
   @property
-  def filepaths(self) -> List[utils.ReadWritePath]:
+  def filepaths(self) -> List[epath.Path]:
     """All the paths for all the files that are part of this split."""
     return sorted(
         self.filename_template.sharded_filepaths(len(self.shard_lengths)))
@@ -255,7 +255,7 @@ class MultiSplitInfo(SplitInfo):
     return result
 
   @property
-  def filepaths(self) -> List[utils.ReadWritePath]:
+  def filepaths(self) -> List[epath.Path]:
     """All the paths for all the files that are part of this split."""
     result = []
     for split_info in self.split_infos:
@@ -306,9 +306,9 @@ class SubSplitInfo(object):
     return sorted(os.path.basename(f.filename) for f in self.file_instructions)
 
   @property
-  def filepaths(self) -> List[utils.ReadWritePath]:
+  def filepaths(self) -> List[epath.Path]:
     """Returns the list of filepaths."""
-    return sorted(utils.as_path(f.filename) for f in self.file_instructions)
+    return sorted(epath.Path(f.filename) for f in self.file_instructions)
 
 
 # TODO(epot): `: tfds.Split` type should be `Union[str, Split]`

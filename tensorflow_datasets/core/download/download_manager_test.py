@@ -22,12 +22,12 @@ import os
 import pickle
 from unittest import mock
 
+from etils import epath
 import promise
 
 import tensorflow as tf
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
 from tensorflow_datasets.core.download import download_manager as dm
 from tensorflow_datasets.core.download import downloader
@@ -44,7 +44,7 @@ def _sha256(str_):
 
 
 def _as_path(nested_paths):
-  return tf.nest.map_structure(utils.as_path, nested_paths)
+  return tf.nest.map_structure(epath.Path, nested_paths)
 
 
 def _info_path(path):
@@ -62,7 +62,7 @@ class PathDict(collections.UserDict):
     return super().__getitem__(os.fspath(key))
 
   def __setitem__(self, key, value):
-    return super().__setitem__(os.fspath(key), utils.as_path(value))
+    return super().__setitem__(os.fspath(key), epath.Path(value))
 
 
 class Artifact(object):
@@ -78,9 +78,9 @@ class Artifact(object):
         filename=name,
     )
     self.file_name = resource_lib.get_dl_fname(url, self.url_info.checksum)
-    self.file_path = utils.as_path(f'/dl_dir/{self.file_name}')
+    self.file_path = epath.Path(f'/dl_dir/{self.file_name}')
     self.url_name = resource_lib.get_dl_fname(url, _sha256(url))
-    self.url_path = utils.as_path(f'/dl_dir/{self.url_name}')
+    self.url_path = epath.Path(f'/dl_dir/{self.url_name}')
 
 
 class DownloadManagerTest(testing.TestCase):
@@ -117,7 +117,7 @@ class DownloadManagerTest(testing.TestCase):
       path = os.path.join(tmpdir_path, filename)
       self.fs.add_file(path)
       dl_result = downloader.DownloadResult(
-          path=utils.as_path(path),
+          path=epath.Path(path),
           url_info=self.dl_results[url],
       )
       return promise.Promise.resolve(dl_result)
@@ -241,7 +241,7 @@ class DownloadManagerTest(testing.TestCase):
         'download': b.url,
     })
     expected = {
-        'manual': utils.as_path(a_manual_path),
+        'manual': epath.Path(a_manual_path),
         'download': b.file_path,
     }
     self.assertEqual(downloads, expected)

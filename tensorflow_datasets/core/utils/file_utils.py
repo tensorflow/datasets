@@ -19,18 +19,45 @@ import os
 import pathlib
 from typing import List, Optional
 
+from absl import logging
+from etils import epath
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import generic_path
+from tensorflow_datasets.core.utils import docs
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config
 from tensorflow_datasets.core.utils import type_utils
 
-PathLike = type_utils.PathLike
+PathLike = epath.PathLike
 ListOrElem = type_utils.ListOrElem
-ReadWritePath = type_utils.ReadWritePath
+Path = epath.Path
 
 _registered_data_dir = set()
+
+
+@docs.deprecated
+def as_path(path: PathLike) -> Path:
+  """DEPRECATED. Please use `from etils import epath` with `epath.Path()`."""
+  msg = py_utils.dedent("""
+      `tfds.core.as_path` is deprecated. Pathlib API has been moved to a
+      separate module. To migrate, use:
+
+      ```
+      from etils import epath
+      path = epath.Path('gs://path/to/f.txt')
+      ```
+
+      Alternatively `tfds.core.Path` is an alias of `epath.Path`.
+
+      Installation: pip install etils[epath]
+      `etils[epath]` will install the `tf.io.gfile` backend from
+      tf-nightly. If you prefer another TF version, use
+      `etils[epath-no-tf]`.
+
+      """
+
+                       )
+  logging.warning(msg)
+  return epath.Path(path)
 
 
 def add_data_dir(data_dir):

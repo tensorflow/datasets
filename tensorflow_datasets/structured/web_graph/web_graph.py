@@ -90,7 +90,7 @@ class WebGraphConfig(tfds.core.BuilderConfig):
 
 def filename(subfolder: str, name: str):
   full_name = os.path.join(subfolder, name)
-  return os.fspath(tfds.core.as_path(full_name))
+  return os.fspath(tfds.core.Path(full_name))
 
 
 class WebGraph(tfds.core.GeneratorBasedBuilder):

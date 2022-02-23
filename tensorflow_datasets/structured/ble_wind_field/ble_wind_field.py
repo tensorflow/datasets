@@ -91,7 +91,7 @@ class BLEWindField(tfds.core.GeneratorBasedBuilder):
           description='Small sample of 256 fields from the dataset.',
           num_fields=256),
   ]
-  GCS_URL = tfds.core.as_path('gs://ble-public/downloads')
+  GCS_URL = tfds.core.Path('gs://ble-public/downloads')
   GCS_FILENAME = 'historical_wind_fields.zarr'
 
   def _info(self) -> tfds.core.DatasetInfo:
