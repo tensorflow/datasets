@@ -456,6 +456,9 @@ toc:
     title: gigaword
   - path: /datasets/catalog/gov_report
     title: gov_report
+  - path: /datasets/catalog/media_sum
+    status: nightly
+    title: media_sum (manual)
   - path: /datasets/catalog/multi_news
     title: multi_news
   - path: /datasets/catalog/newsroom

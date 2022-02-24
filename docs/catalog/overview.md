@@ -283,6 +283,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`covid19sum`](covid19sum.md)
 *   [`gigaword`](gigaword.md)
 *   [`gov_report`](gov_report.md)
+*   [`media_sum`](media_sum.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`multi_news`](multi_news.md)
 *   [`newsroom`](newsroom.md)
 *   [`opinion_abstracts`](opinion_abstracts.md)
