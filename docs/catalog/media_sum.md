@@ -50,7 +50,7 @@ the views of the media and guests, and should be viewed with discretion.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.11 GiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -65,12 +65,15 @@ https://github.com/zcgzcgzcg1/MediaSum/tree/main/data
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
+`'train'` | 443,596
+`'val'`   | 10,000
 
 *   **Features**:
 
