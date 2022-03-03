@@ -51,9 +51,6 @@ jobs:
 
     - run: pip install ${{ matrix.tf_version }}
 
-    # Install pytest-shard for test parallelization
-    - run: pip install pytest-shard
-
     # Install the protocol buffer compiler for gcld3 tests.
     - run: sudo apt-get update
     - run: sudo apt install -y protobuf-compiler
