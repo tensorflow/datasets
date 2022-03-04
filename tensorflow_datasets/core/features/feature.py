@@ -289,20 +289,24 @@ class FeatureConnector(object):
     Returns:
       The reconstructed FeatureConnector.
     """
-    class_name = value['type']  # my_project.xyz.MyFeature
-    content = value['content']
-    feature_cls = cls.cls_from_name(class_name)
-    proto_cls_name = value.get('proto_cls')
-    if proto_cls_name:  # The content is a proto, need to reconstruct it
-      proto_cls = _name2proto_cls(proto_cls_name)
-      if isinstance(content, str):  # Backward compatible mode
-        content = json_format.Parse(content, proto_cls())
-      elif isinstance(content, dict):
-        content = json_format.ParseDict(content, proto_cls())
-      else:
-        raise ValueError(f'Type {type(content)} not supported when parsing '
-                         'features serialized as json.')
-    return feature_cls.from_json_content(content)
+    if 'type' in value:  # Legacy mode
+      class_name = value['type']  # my_project.xyz.MyFeature
+      content = value['content']
+      feature_cls = cls.cls_from_name(class_name)
+      proto_cls_name = value.get('proto_cls')
+      if proto_cls_name:  # The content is a proto, need to reconstruct it
+        proto_cls = _name2proto_cls(proto_cls_name)
+        if isinstance(content, str):  # Backward compatible mode
+          content = json_format.Parse(content, proto_cls())
+        elif isinstance(content, dict):
+          content = json_format.ParseDict(content, proto_cls())
+        else:
+          raise ValueError(f'Type {type(content)} not supported when parsing '
+                           'features serialized as json.')
+      return feature_cls.from_json_content(content)
+    else:
+      feature_proto = json_format.ParseDict(value, feature_pb2.Feature())
+      return FeatureConnector.from_proto(feature_proto)
 
   def to_json(self) -> Json:
     # pylint: disable=line-too-long
@@ -484,11 +488,7 @@ class FeatureConnector(object):
     """
     with tf.io.gfile.GFile(make_config_path(root_dir)) as f:
       content = json.loads(f.read())
-      if 'type' in content:  # Legacy mode
-        feature = FeatureConnector.from_json(content)
-      else:
-        feature_proto = json_format.ParseDict(content, feature_pb2.Feature())
-        feature = FeatureConnector.from_proto(feature_proto)
+      feature = FeatureConnector.from_json(content)
     feature.load_metadata(root_dir, feature_name=None)
     return feature
 
