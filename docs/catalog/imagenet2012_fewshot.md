@@ -49,8 +49,6 @@ dataset. However, the training set is subsampled in a label balanced fashion. In
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -61,12 +59,7 @@ dataset. However, the training set is subsampled in a label balanced fashion. In
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Features**:
 
@@ -110,10 +103,40 @@ FeaturesDict({
 
 *   **Config description**: 1shot of total ImageNet training set.
 
+*   **Dataset size**: `6.46 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 1,000
+`'tune'`       | 1,000
+`'validation'` | 50,000
+
 ## imagenet2012_fewshot/5shot
 
 *   **Config description**: 5shot of total ImageNet training set.
 
+*   **Dataset size**: `6.88 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 5,000
+`'tune'`       | 1,000
+`'validation'` | 50,000
+
 ## imagenet2012_fewshot/10shot
 
 *   **Config description**: 10shot of total ImageNet training set.
+
+*   **Dataset size**: `7.42 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 10,000
+`'tune'`       | 1,000
+`'validation'` | 50,000
