@@ -43,6 +43,8 @@ from tensorflow_datasets.core.dataset_info import MetadataDict
 
 from tensorflow_datasets.core.file_adapters import FileFormat
 
+from tensorflow_datasets.core.github_api import GithubPath
+
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 
 from tensorflow_datasets.core.naming import ShardedFileTemplate
