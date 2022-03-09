@@ -34,7 +34,7 @@ _CITATION = """\
   }
 """
 
-_DATA_URL = "http://www.phontron.com/data/qi18naacl-dataset.tar.gz"
+_DATA_URL = "https://www.phontron.com/data/qi18naacl-dataset.tar.gz"
 
 _VALID_LANGUAGE_PAIRS = (
     ("az", "en"),

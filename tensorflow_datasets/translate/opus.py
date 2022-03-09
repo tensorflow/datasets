@@ -77,8 +77,8 @@ DATASET_MAP = {  # pylint:disable=g-complex-comprehension
         SubDataset(
             name="EMEA",
             description="A parallel corpus made out of PDF documents from the European Medicines Agency.",
-            homepage="http://opus.nlpl.eu/EMEA.php",
-            url="http://opus.nlpl.eu/download.php?f=EMEA/v3/moses/",
+            homepage="https://opus.nlpl.eu/EMEA.php",
+            url="https://opus.nlpl.eu/download.php?f=EMEA/v3/moses/",
             languages=[
                 "bg", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr",
                 "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk",
@@ -87,8 +87,8 @@ DATASET_MAP = {  # pylint:disable=g-complex-comprehension
         SubDataset(
             name="JRC-Acquis",
             description="A collection of legislative text of the European Union and currently comprises selected texts written between the 1950s and now.",
-            homepage="http://opus.nlpl.eu/JRC-Acquis.php",
-            url="http://opus.nlpl.eu/download.php?f=JRC-Acquis/",
+            homepage="https://opus.nlpl.eu/JRC-Acquis.php",
+            url="https://opus.nlpl.eu/download.php?f=JRC-Acquis/",
             languages=[
                 "bg", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr",
                 "hu", "it", "lt", "lv", "mt", "nl", "pl", "pt", "ro", "sk",
@@ -97,8 +97,8 @@ DATASET_MAP = {  # pylint:disable=g-complex-comprehension
         SubDataset(
             name="Tanzil",
             description="A collection of Quran translations compiled by the Tanzil project.",
-            homepage="http://opus.nlpl.eu/Tanzil.php",
-            url="http://opus.nlpl.eu/download.php?f=Tanzil/v1/moses/",
+            homepage="https://opus.nlpl.eu/Tanzil.php",
+            url="https://opus.nlpl.eu/download.php?f=Tanzil/v1/moses/",
             languages=[
                 "am", "ar", "az", "bg", "bn", "bs", "cs", "de", "dv", "en",
                 "es", "fa", "fr", "ha", "hi", "id", "it", "ja", "ko", "ku",
@@ -109,8 +109,8 @@ DATASET_MAP = {  # pylint:disable=g-complex-comprehension
         SubDataset(
             name="GNOME",
             description="A parallel corpus of GNOME localization files. Source: https://l10n.gnome.org",
-            homepage="http://opus.nlpl.eu/GNOME.php",
-            url="http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/",
+            homepage="https://opus.nlpl.eu/GNOME.php",
+            url="https://opus.nlpl.eu/download.php?f=GNOME/v1/moses/",
             languages=[
                 "af", "am", "an", "ang", "ar", "ar_TN", "ara", "as", "ast",
                 "az", "az_IR", "bal", "be", "bem", "bg", "bg_BG", "bn", "bn_IN",
@@ -137,8 +137,8 @@ DATASET_MAP = {  # pylint:disable=g-complex-comprehension
         SubDataset(
             name="KDE4",
             description="A parallel corpus of KDE4 localization files (v.2).",
-            homepage="http://opus.nlpl.eu/KDE4.php",
-            url="http://opus.nlpl.eu/download.php?f=KDE4/v2/moses/",
+            homepage="https://opus.nlpl.eu/KDE4.php",
+            url="https://opus.nlpl.eu/download.php?f=KDE4/v2/moses/",
             languages=[
                 "af", "ar", "as", "ast", "be", "bg", "bn", "bn_IN", "br", "ca",
                 "crh", "cs", "csb", "cy", "da", "de", "el", "en", "en_GB", "eo",
@@ -153,9 +153,9 @@ DATASET_MAP = {  # pylint:disable=g-complex-comprehension
             ]),
         SubDataset(
             name="PHP",
-            description="A parallel corpus originally extracted from http://se.php.net/download-docs.php.",
-            homepage="http://opus.nlpl.eu/PHP.php",
-            url="http://opus.nlpl.eu/download.php?f=PHP/v1/moses/",
+            description="A parallel corpus originally extracted from https://se.php.net/download-docs.php.",
+            homepage="https://opus.nlpl.eu/PHP.php",
+            url="https://opus.nlpl.eu/download.php?f=PHP/v1/moses/",
             languages=[
                 "cs", "de", "en", "es", "fi", "fr", "he", "hu", "it", "ja",
                 "ko", "nl", "pl", "pt_BR", "ro", "ru", "sk", "sl", "sv", "tr",
@@ -164,8 +164,8 @@ DATASET_MAP = {  # pylint:disable=g-complex-comprehension
         SubDataset(
             name="Ubuntu",
             description="A parallel corpus of Ubuntu localization files. Source: https://translations.launchpad.net",
-            homepage="http://opus.nlpl.eu/Ubuntu.php",
-            url="http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/",
+            homepage="https://opus.nlpl.eu/Ubuntu.php",
+            url="https://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/",
             languages=[
                 "ace", "af", "ak", "am", "an", "ang", "ar", "ar_SY", "ary",
                 "as", "ast", "az", "ba", "bal", "be", "bem", "ber", "bg", "bho",
@@ -197,15 +197,15 @@ DATASET_MAP = {  # pylint:disable=g-complex-comprehension
             ]),
         SubDataset(
             name="OpenOffice",
-            description="A collection of documents from http://www.openoffice.org/.",
-            homepage="http://opus.nlpl.eu/OpenOffice-v2.php",
-            url="http://opus.nlpl.eu/download.php?f=OpenOffice/v2/moses/",
+            description="A collection of documents from https://www.openoffice.org/.",
+            homepage="https://opus.nlpl.eu/OpenOffice-v2.php",
+            url="https://opus.nlpl.eu/download.php?f=OpenOffice/v2/moses/",
             languages=["de", "en", "es", "fr", "jp", "sv"]),
         SubDataset(
             name="OpenSubtitles",
-            description="A new collection of translated movie subtitles from http://www.opensubtitles.org/",
-            homepage="http://opus.nlpl.eu/OpenSubtitles-v2018.php",
-            url="http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/moses/",
+            description="A new collection of translated movie subtitles from https://www.opensubtitles.org/",
+            homepage="https://opus.nlpl.eu/OpenSubtitles-v2018.php",
+            url="https://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/moses/",
             languages=[
                 "af", "ar", "bg", "bn", "br", "bs", "ca", "cs", "da", "de",
                 "el", "en", "eo", "es", "et", "eu", "fa", "fi", "fr", "gl",
@@ -284,7 +284,7 @@ class Opus(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.Translation(
             languages=self.builder_config.language_pair),
         supervised_keys=(src, target),
-        homepage="http://opus.nlpl.eu/",
+        homepage="https://opus.nlpl.eu/",
         citation=_CITATION,
     )
 

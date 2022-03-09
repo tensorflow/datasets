@@ -28,7 +28,7 @@ _CITATION = """\
 @misc {paracrawl,
     title  = "ParaCrawl",
     year   = "2018",
-    url    = "http://paracrawl.eu/download.html."
+    url    = "https://paracrawl.eu/"
 }
 """
 
