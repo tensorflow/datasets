@@ -819,18 +819,33 @@ class FeatureConnector(object):
     )
 
   def catalog_documentation(self) -> List[CatalogFeatureDocumentation]:
-    tensor_info = self.get_tensor_info()
-    if not isinstance(tensor_info, TensorInfo):
+    """Returns the feature documentation to be shown in the catalog."""
+    raw_tensor_info = self.get_tensor_info()
+    tensor_info_per_feature = {}
+    if isinstance(raw_tensor_info, TensorInfo):
+      feature_name = ''  # Feature name is not known here
+      tensor_info_per_feature[feature_name] = raw_tensor_info
+    elif isinstance(raw_tensor_info, Mapping):
+      for feature_name, tensor_info in raw_tensor_info.items():
+        if not isinstance(tensor_info, TensorInfo):
+          raise RuntimeError(
+              'Only maps with value TensorInfo are supported '
+              f'(got {type(tensor_info)}). '
+              'Custom feature classes should override this method.')
+        tensor_info_per_feature[feature_name] = tensor_info
+    else:
       raise RuntimeError('Subclasses with nesting should override this method.')
-    return [
-        CatalogFeatureDocumentation(
-            name='',  # Feature name is not known here
-            cls_name=type(self).__name__,
-            tensor_info=tensor_info,
-            description=self._doc.desc,
-            value_range=self._doc.value_range,
-        )
-    ]
+    result = []
+    for feature_name, tensor_info in tensor_info_per_feature.items():
+      result.append(
+          CatalogFeatureDocumentation(
+              name=feature_name,
+              cls_name=type(self).__name__,
+              tensor_info=tensor_info,
+              description=self._doc.desc,
+              value_range=self._doc.value_range,
+          ))
+    return result
 
   def save_metadata(self, data_dir, feature_name):
     """Save the feature metadata on disk.
