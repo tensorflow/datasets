@@ -46,7 +46,7 @@ Split     | Examples
 :-------- | --------:
 `'train'` | 3,848,330
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -60,6 +60,20 @@ FeaturesDict({
     'summary': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape | Dtype     | Description
+:------------- | :----------- | :---- | :-------- | :----------
+               | FeaturesDict |       |           |
+author         | Tensor       |       | tf.string |
+body           | Tensor       |       | tf.string |
+content        | Tensor       |       | tf.string |
+id             | Tensor       |       | tf.string |
+normalizedBody | Tensor       |       | tf.string |
+subreddit      | Tensor       |       | tf.string |
+subreddit_id   | Tensor       |       | tf.string |
+summary        | Tensor       |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -76,7 +76,7 @@ All versions of the dataset have following features:
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -85,6 +85,15 @@ FeaturesDict({
     'row_tag': tf.int64,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class            | Shape   | Dtype    | Description
+:------ | :--------------- | :------ | :------- | :----------
+        | FeaturesDict     |         |          |
+col_tag | Sequence(Tensor) | (None,) | tf.int64 |
+gt_tag  | Sequence(Tensor) | (None,) | tf.int64 |
+row_tag | Tensor           |         | tf.int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -50,7 +50,7 @@ Split          | Examples
 `'train'`      | 12,880
 `'validation'` | 3,226
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -67,6 +67,22 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature            | Class        | Shape           | Dtype      | Description
+:----------------- | :----------- | :-------------- | :--------- | :----------
+                   | FeaturesDict |                 |            |
+faces              | Sequence     |                 |            |
+faces/bbox         | BBoxFeature  | (4,)            | tf.float32 |
+faces/blur         | Tensor       |                 | tf.uint8   |
+faces/expression   | Tensor       |                 | tf.bool    |
+faces/illumination | Tensor       |                 | tf.bool    |
+faces/invalid      | Tensor       |                 | tf.bool    |
+faces/occlusion    | Tensor       |                 | tf.uint8   |
+faces/pose         | Tensor       |                 | tf.bool    |
+image              | Image        | (None, None, 3) | tf.uint8   |
+image/filename     | Text         |                 | tf.string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

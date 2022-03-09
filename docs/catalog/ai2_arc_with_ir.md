@@ -42,7 +42,7 @@ https://arxiv.org/abs/2005.00700 ).
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -56,6 +56,19 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape | Dtype     | Description
+:------------ | :----------- | :---- | :-------- | :----------
+              | FeaturesDict |       |           |
+answerKey     | ClassLabel   |       | tf.int64  |
+choices       | Sequence     |       |           |
+choices/label | ClassLabel   |       | tf.int64  |
+choices/text  | Text         |       | tf.string |
+id            | Text         |       | tf.string |
+paragraph     | Text         |       | tf.string |
+question      | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

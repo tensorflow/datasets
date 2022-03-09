@@ -64,7 +64,7 @@ Output variable (based on sensory data):
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -84,6 +84,25 @@ FeaturesDict({
     'quality': tf.int32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                       | Class        | Shape | Dtype      | Description
+:---------------------------- | :----------- | :---- | :--------- | :----------
+                              | FeaturesDict |       |            |
+features                      | FeaturesDict |       |            |
+features/alcohol              | Tensor       |       | tf.float32 |
+features/chlorides            | Tensor       |       | tf.float32 |
+features/citric acid          | Tensor       |       | tf.float32 |
+features/density              | Tensor       |       | tf.float32 |
+features/fixed acidity        | Tensor       |       | tf.float32 |
+features/free sulfur dioxide  | Tensor       |       | tf.float32 |
+features/pH                   | Tensor       |       | tf.float32 |
+features/residual sugar       | Tensor       |       | tf.float32 |
+features/sulphates            | Tensor       |       | tf.float64 |
+features/total sulfur dioxide | Tensor       |       | tf.float32 |
+features/volatile acidity     | Tensor       |       | tf.float32 |
+quality                       | Tensor       |       | tf.int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

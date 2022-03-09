@@ -70,7 +70,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 737,280
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -87,6 +87,23 @@ FeaturesDict({
     'value_y_position': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape       | Dtype      | Description
+:---------------- | :----------- | :---------- | :--------- | :----------
+                  | FeaturesDict |             |            |
+image             | Image        | (64, 64, 1) | tf.uint8   |
+label_orientation | ClassLabel   |             | tf.int64   |
+label_scale       | ClassLabel   |             | tf.int64   |
+label_shape       | ClassLabel   |             | tf.int64   |
+label_x_position  | ClassLabel   |             | tf.int64   |
+label_y_position  | ClassLabel   |             | tf.int64   |
+value_orientation | Tensor       |             | tf.float32 |
+value_scale       | Tensor       |             | tf.float32 |
+value_shape       | Tensor       |             | tf.float32 |
+value_x_position  | Tensor       |             | tf.float32 |
+value_y_position  | Tensor       |             | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

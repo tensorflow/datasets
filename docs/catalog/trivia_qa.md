@@ -46,7 +46,7 @@ Split          | Examples
 `'train'`      | 87,622
 `'validation'` | 11,313
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -78,6 +78,35 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                    | Class          | Shape   | Dtype     | Description
+:----------------------------------------- | :------------- | :------ | :-------- | :----------
+                                           | FeaturesDict   |         |           |
+answer                                     | FeaturesDict   |         |           |
+answer/aliases                             | Sequence(Text) | (None,) | tf.string |
+answer/matched_wiki_entity_name            | Text           |         | tf.string |
+answer/normalized_aliases                  | Sequence(Text) | (None,) | tf.string |
+answer/normalized_matched_wiki_entity_name | Text           |         | tf.string |
+answer/normalized_value                    | Text           |         | tf.string |
+answer/type                                | Text           |         | tf.string |
+answer/value                               | Text           |         | tf.string |
+entity_pages                               | Sequence       |         |           |
+entity_pages/doc_source                    | Text           |         | tf.string |
+entity_pages/filename                      | Text           |         | tf.string |
+entity_pages/title                         | Text           |         | tf.string |
+entity_pages/wiki_context                  | Text           |         | tf.string |
+question                                   | Text           |         | tf.string |
+question_id                                | Text           |         | tf.string |
+question_source                            | Text           |         | tf.string |
+search_results                             | Sequence       |         |           |
+search_results/description                 | Text           |         | tf.string |
+search_results/filename                    | Text           |         | tf.string |
+search_results/rank                        | Tensor         |         | tf.int32  |
+search_results/search_context              | Text           |         | tf.string |
+search_results/title                       | Text           |         | tf.string |
+search_results/url                         | Text           |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

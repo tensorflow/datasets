@@ -44,13 +44,20 @@ Split    | Examples
 :------- | -------:
 `'test'` | 10,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape           | Dtype    | Description
+:------------- | :----------- | :-------------- | :------- | :----------
+               | FeaturesDict |                 |          |
+image_sequence | Video(Image) | (20, 64, 64, 1) | tf.uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

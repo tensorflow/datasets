@@ -40,7 +40,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -56,6 +56,22 @@ FeaturesDict({
     'two_prefix_method': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature             | Class        | Shape | Dtype     | Description
+:------------------ | :----------- | :---- | :-------- | :----------
+                    | FeaturesDict |       |           |
+UID                 | Text         |       | tf.string |
+field               | Text         |       | tf.string |
+lexically_identical | Tensor       |       | tf.bool   |
+linguistics_term    | Text         |       | tf.string |
+one_prefix_method   | Tensor       |       | tf.bool   |
+pair_id             | Tensor       |       | tf.int32  |
+sentence_bad        | Text         |       | tf.string |
+sentence_good       | Text         |       | tf.string |
+simple_LM_method    | Tensor       |       | tf.bool   |
+two_prefix_method   | Tensor       |       | tf.bool   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

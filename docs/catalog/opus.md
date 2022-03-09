@@ -36,7 +36,7 @@ builder = tfds.builder("opus", config=config)
 
     *   **`0.1.0`** (default): No release notes.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -44,6 +44,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+de      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

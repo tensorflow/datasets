@@ -73,7 +73,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 700
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -83,6 +83,16 @@ FeaturesDict({
     'video': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape             | Dtype      | Description
+:------- | :----------- | :---------------- | :--------- | :----------
+         | FeaturesDict |                   |            |
+actions  | Tensor       | (None, 5)         | tf.float32 |
+filename | Text         |                   | tf.string  |
+states   | Tensor       | (None, 5)         | tf.float32 |
+video    | Video(Image) | (None, 64, 64, 3) | tf.uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -139,7 +149,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 700
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -149,6 +159,16 @@ FeaturesDict({
     'video': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape               | Dtype      | Description
+:------- | :----------- | :------------------ | :--------- | :----------
+         | FeaturesDict |                     |            |
+actions  | Tensor       | (None, 5)           | tf.float32 |
+filename | Text         |                     | tf.string  |
+states   | Tensor       | (None, 5)           | tf.float32 |
+video    | Video(Image) | (None, 128, 128, 3) | tf.uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -205,7 +225,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 162,417
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -215,6 +235,16 @@ FeaturesDict({
     'video': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape             | Dtype      | Description
+:------- | :----------- | :---------------- | :--------- | :----------
+         | FeaturesDict |                   |            |
+actions  | Tensor       | (None, 5)         | tf.float32 |
+filename | Text         |                   | tf.string  |
+states   | Tensor       | (None, 5)         | tf.float32 |
+video    | Video(Image) | (None, 64, 64, 3) | tf.uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -271,7 +301,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 162,417
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -281,6 +311,16 @@ FeaturesDict({
     'video': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape               | Dtype      | Description
+:------- | :----------- | :------------------ | :--------- | :----------
+         | FeaturesDict |                     |            |
+actions  | Tensor       | (None, 5)           | tf.float32 |
+filename | Text         |                     | tf.string  |
+states   | Tensor       | (None, 5)           | tf.float32 |
+video    | Video(Image) | (None, 128, 128, 3) | tf.uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

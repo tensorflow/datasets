@@ -48,7 +48,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,309
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -68,6 +68,26 @@ FeaturesDict({
     'ticket': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype      | Description
+:-------- | :----------- | :---- | :--------- | :----------
+          | FeaturesDict |       |            |
+age       | Tensor       |       | tf.float32 |
+boat      | Tensor       |       | tf.string  |
+body      | Tensor       |       | tf.int32   |
+cabin     | Tensor       |       | tf.string  |
+embarked  | ClassLabel   |       | tf.int64   |
+fare      | Tensor       |       | tf.float32 |
+home.dest | Tensor       |       | tf.string  |
+name      | Tensor       |       | tf.string  |
+parch     | Tensor       |       | tf.int32   |
+pclass    | ClassLabel   |       | tf.int64   |
+sex       | ClassLabel   |       | tf.int64   |
+sibsp     | Tensor       |       | tf.int32   |
+survived  | ClassLabel   |       | tf.int64   |
+ticket    | Tensor       |       | tf.string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

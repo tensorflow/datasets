@@ -45,7 +45,7 @@ Split    | Examples
 :------- | -------:
 `'test'` | 1,280
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -57,6 +57,18 @@ FeaturesDict({
     'texture_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=16),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                 | Class                | Shape           | Dtype     | Description
+:---------------------- | :------------------- | :-------------- | :-------- | :----------
+                        | FeaturesDict         |                 |           |
+file_name               | Text                 |                 | tf.string |
+image                   | Image                | (None, None, 3) | tf.uint8  |
+shape_imagenet_labels   | Sequence(ClassLabel) | (None,)         | tf.int64  |
+shape_label             | ClassLabel           |                 | tf.int64  |
+texture_imagenet_labels | Sequence(ClassLabel) | (None,)         | tf.int64  |
+texture_label           | ClassLabel           |                 | tf.int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

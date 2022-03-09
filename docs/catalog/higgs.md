@@ -48,7 +48,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 11,000,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -83,6 +83,41 @@ FeaturesDict({
     'missing_energy_phi': tf.float64,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                  | Class        | Shape | Dtype      | Description
+:----------------------- | :----------- | :---- | :--------- | :----------
+                         | FeaturesDict |       |            |
+class_label              | Tensor       |       | tf.float32 |
+jet_1_b-tag              | Tensor       |       | tf.float64 |
+jet_1_eta                | Tensor       |       | tf.float64 |
+jet_1_phi                | Tensor       |       | tf.float64 |
+jet_1_pt                 | Tensor       |       | tf.float64 |
+jet_2_b-tag              | Tensor       |       | tf.float64 |
+jet_2_eta                | Tensor       |       | tf.float64 |
+jet_2_phi                | Tensor       |       | tf.float64 |
+jet_2_pt                 | Tensor       |       | tf.float64 |
+jet_3_b-tag              | Tensor       |       | tf.float64 |
+jet_3_eta                | Tensor       |       | tf.float64 |
+jet_3_phi                | Tensor       |       | tf.float64 |
+jet_3_pt                 | Tensor       |       | tf.float64 |
+jet_4_b-tag              | Tensor       |       | tf.float64 |
+jet_4_eta                | Tensor       |       | tf.float64 |
+jet_4_phi                | Tensor       |       | tf.float64 |
+jet_4_pt                 | Tensor       |       | tf.float64 |
+lepton_eta               | Tensor       |       | tf.float64 |
+lepton_pT                | Tensor       |       | tf.float64 |
+lepton_phi               | Tensor       |       | tf.float64 |
+m_bb                     | Tensor       |       | tf.float64 |
+m_jj                     | Tensor       |       | tf.float64 |
+m_jjj                    | Tensor       |       | tf.float64 |
+m_jlv                    | Tensor       |       | tf.float64 |
+m_lv                     | Tensor       |       | tf.float64 |
+m_wbb                    | Tensor       |       | tf.float64 |
+m_wwbb                   | Tensor       |       | tf.float64 |
+missing_energy_magnitude | Tensor       |       | tf.float64 |
+missing_energy_phi       | Tensor       |       | tf.float64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -56,7 +56,7 @@ Split          | Examples
 `'train'`      | 579,184
 `'validation'` | 95,986
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -66,6 +66,16 @@ FeaturesDict({
     'supercategory': ClassLabel(shape=(), dtype=tf.int64, num_classes=13),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape           | Dtype     | Description
+:------------ | :----------- | :-------------- | :-------- | :----------
+              | FeaturesDict |                 |           |
+id            | Text         |                 | tf.string |
+image         | Image        | (None, None, 3) | tf.uint8  |
+label         | ClassLabel   |                 | tf.int64  |
+supercategory | ClassLabel   |                 | tf.int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

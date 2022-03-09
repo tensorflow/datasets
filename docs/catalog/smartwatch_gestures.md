@@ -50,7 +50,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 3,251
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -67,6 +67,22 @@ FeaturesDict({
     'participant': tf.uint8,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature              | Class        | Shape | Dtype      | Description
+:------------------- | :----------- | :---- | :--------- | :----------
+                     | FeaturesDict |       |            |
+attempt              | Tensor       |       | tf.uint8   |
+features             | Sequence     |       |            |
+features/accel_x     | Tensor       |       | tf.float64 |
+features/accel_y     | Tensor       |       | tf.float64 |
+features/accel_z     | Tensor       |       | tf.float64 |
+features/time_event  | Tensor       |       | tf.uint64  |
+features/time_millis | Tensor       |       | tf.uint64  |
+features/time_nanos  | Tensor       |       | tf.uint64  |
+gesture              | ClassLabel   |       | tf.int64   |
+participant          | Tensor       |       | tf.uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

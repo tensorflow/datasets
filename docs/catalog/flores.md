@@ -64,7 +64,7 @@ Split          | Examples
 `'test'`       | 2,835
 `'validation'` | 2,559
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -72,6 +72,14 @@ Translation({
     'ne': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+ne      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -127,7 +135,7 @@ Split          | Examples
 `'test'`       | 2,766
 `'validation'` | 2,898
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -135,6 +143,14 @@ Translation({
     'si': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+si      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

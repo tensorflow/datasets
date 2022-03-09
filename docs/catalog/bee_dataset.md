@@ -85,7 +85,7 @@ Split     | Examples
 
 *   **Dataset size**: `97.96 MiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -98,6 +98,18 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature               | Class        | Shape         | Dtype      | Description
+:-------------------- | :----------- | :------------ | :--------- | :----------
+                      | FeaturesDict |               |            |
+input                 | Image        | (300, 150, 3) | tf.uint8   |
+output                | FeaturesDict |               |            |
+output/cooling_output | Tensor       |               | tf.float64 |
+output/pollen_output  | Tensor       |               | tf.float64 |
+output/varroa_output  | Tensor       |               | tf.float64 |
+output/wasps_output   | Tensor       |               | tf.float64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -148,7 +160,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `55.48 MiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -161,6 +173,18 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature               | Class        | Shape         | Dtype      | Description
+:-------------------- | :----------- | :------------ | :--------- | :----------
+                      | FeaturesDict |               |            |
+input                 | Image        | (200, 100, 3) | tf.uint8   |
+output                | FeaturesDict |               |            |
+output/cooling_output | Tensor       |               | tf.float64 |
+output/pollen_output  | Tensor       |               | tf.float64 |
+output/varroa_output  | Tensor       |               | tf.float64 |
+output/wasps_output   | Tensor       |               | tf.float64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -211,7 +235,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `37.43 MiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -224,6 +248,18 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature               | Class        | Shape        | Dtype      | Description
+:-------------------- | :----------- | :----------- | :--------- | :----------
+                      | FeaturesDict |              |            |
+input                 | Image        | (150, 75, 3) | tf.uint8   |
+output                | FeaturesDict |              |            |
+output/cooling_output | Tensor       |              | tf.float64 |
+output/pollen_output  | Tensor       |              | tf.float64 |
+output/varroa_output  | Tensor       |              | tf.float64 |
+output/wasps_output   | Tensor       |              | tf.float64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

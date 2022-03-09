@@ -50,7 +50,7 @@ More information can be found at:
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -96,6 +96,44 @@ FeaturesDict({
     'verb_in_command': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                  | Class          | Shape   | Dtype     | Description
+:--------------------------------------- | :------------- | :------ | :-------- | :----------
+                                         | FeaturesDict   |         |           |
+command                                  | Sequence(Text) | (None,) | tf.string |
+manner                                   | Text           |         | tf.string |
+meaning                                  | Sequence(Text) | (None,) | tf.string |
+referred_target                          | Text           |         | tf.string |
+situation                                | FeaturesDict   |         |           |
+situation/agent_direction                | Tensor         |         | tf.int32  |
+situation/agent_position                 | FeaturesDict   |         |           |
+situation/agent_position/column          | Tensor         |         | tf.int32  |
+situation/agent_position/row             | Tensor         |         | tf.int32  |
+situation/direction_to_target            | Text           |         | tf.string |
+situation/distance_to_target             | Tensor         |         | tf.int32  |
+situation/grid_size                      | Tensor         |         | tf.int32  |
+situation/placed_objects                 | Sequence       |         |           |
+situation/placed_objects/object          | FeaturesDict   |         |           |
+situation/placed_objects/object/color    | Text           |         | tf.string |
+situation/placed_objects/object/shape    | Text           |         | tf.string |
+situation/placed_objects/object/size     | Tensor         |         | tf.int32  |
+situation/placed_objects/position        | FeaturesDict   |         |           |
+situation/placed_objects/position/column | Tensor         |         | tf.int32  |
+situation/placed_objects/position/row    | Tensor         |         | tf.int32  |
+situation/placed_objects/vector          | Text           |         | tf.string |
+situation/target_object                  | FeaturesDict   |         |           |
+situation/target_object/object           | FeaturesDict   |         |           |
+situation/target_object/object/color     | Text           |         | tf.string |
+situation/target_object/object/shape     | Text           |         | tf.string |
+situation/target_object/object/size      | Tensor         |         | tf.int32  |
+situation/target_object/position         | FeaturesDict   |         |           |
+situation/target_object/position/column  | Tensor         |         | tf.int32  |
+situation/target_object/position/row     | Tensor         |         | tf.int32  |
+situation/target_object/vector           | Text           |         | tf.string |
+target_commands                          | Sequence(Text) | (None,) | tf.string |
+verb_in_command                          | Text           |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

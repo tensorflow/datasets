@@ -45,7 +45,7 @@ Split          | Examples
 `'test'`       | 5,010
 `'validation'` | 2,490
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -73,6 +73,32 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                | Class                        | Shape | Dtype     | Description
+:--------------------- | :--------------------------- | :---- | :-------- | :----------
+                       | FeaturesDict                 |       |           |
+hypothesis             | TranslationVariableLanguages |       |           |
+hypothesis/language    | Text                         |       | tf.string |
+hypothesis/translation | Text                         |       | tf.string |
+label                  | ClassLabel                   |       | tf.int64  |
+premise                | Translation                  |       |           |
+premise/ar             | Text                         |       | tf.string |
+premise/bg             | Text                         |       | tf.string |
+premise/de             | Text                         |       | tf.string |
+premise/el             | Text                         |       | tf.string |
+premise/en             | Text                         |       | tf.string |
+premise/es             | Text                         |       | tf.string |
+premise/fr             | Text                         |       | tf.string |
+premise/hi             | Text                         |       | tf.string |
+premise/ru             | Text                         |       | tf.string |
+premise/sw             | Text                         |       | tf.string |
+premise/th             | Text                         |       | tf.string |
+premise/tr             | Text                         |       | tf.string |
+premise/ur             | Text                         |       | tf.string |
+premise/vi             | Text                         |       | tf.string |
+premise/zh             | Text                         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

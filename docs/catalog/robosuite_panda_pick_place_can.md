@@ -79,7 +79,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 50
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -113,6 +113,38 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                  | Class        | Shape           | Dtype      | Description
+:--------------------------------------- | :----------- | :-------------- | :--------- | :----------
+                                         | FeaturesDict |                 |            |
+agent_id                                 | Tensor       |                 | tf.string  |
+episode_id                               | Tensor       |                 | tf.string  |
+episode_index                            | Tensor       |                 | tf.int32   |
+steps                                    | Dataset      |                 |            |
+steps/action                             | Tensor       | (7,)            | tf.float64 |
+steps/discount                           | Tensor       |                 | tf.float64 |
+steps/image                              | Image        | (None, None, 3) | tf.uint8   |
+steps/is_first                           | Tensor       |                 | tf.bool    |
+steps/is_last                            | Tensor       |                 | tf.bool    |
+steps/is_terminal                        | Tensor       |                 | tf.bool    |
+steps/observation                        | FeaturesDict |                 |            |
+steps/observation/Can_pos                | Tensor       | (3,)            | tf.float64 |
+steps/observation/Can_quat               | Tensor       | (4,)            | tf.float64 |
+steps/observation/Can_to_robot0_eef_pos  | Tensor       | (3,)            | tf.float64 |
+steps/observation/Can_to_robot0_eef_quat | Tensor       | (4,)            | tf.float32 |
+steps/observation/object-state           | Tensor       | (14,)           | tf.float64 |
+steps/observation/robot0_eef_pos         | Tensor       | (3,)            | tf.float64 |
+steps/observation/robot0_eef_quat        | Tensor       | (4,)            | tf.float64 |
+steps/observation/robot0_gripper_qpos    | Tensor       | (2,)            | tf.float64 |
+steps/observation/robot0_gripper_qvel    | Tensor       | (2,)            | tf.float64 |
+steps/observation/robot0_joint_pos_cos   | Tensor       | (7,)            | tf.float64 |
+steps/observation/robot0_joint_pos_sin   | Tensor       | (7,)            | tf.float64 |
+steps/observation/robot0_joint_vel       | Tensor       | (7,)            | tf.float64 |
+steps/observation/robot0_proprio-state   | Tensor       | (32,)           | tf.float64 |
+steps/reward                             | Tensor       |                 | tf.float64 |
+steps/tag:placed                         | Tensor       |                 | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -170,7 +202,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 50
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -208,6 +240,42 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                    | Class        | Shape           | Dtype      | Description
+:----------------------------------------- | :----------- | :-------------- | :--------- | :----------
+                                           | FeaturesDict |                 |            |
+agent_id                                   | Tensor       |                 | tf.string  |
+episode_id                                 | Tensor       |                 | tf.string  |
+episode_index                              | Tensor       |                 | tf.int32   |
+steps                                      | Dataset      |                 |            |
+steps/action                               | Tensor       | (7,)            | tf.float64 |
+steps/discount                             | Tensor       |                 | tf.float64 |
+steps/image                                | Image        | (None, None, 3) | tf.uint8   |
+steps/is_first                             | Tensor       |                 | tf.bool    |
+steps/is_last                              | Tensor       |                 | tf.bool    |
+steps/is_terminal                          | Tensor       |                 | tf.bool    |
+steps/observation                          | FeaturesDict |                 |            |
+steps/observation/Can_pos                  | Tensor       | (3,)            | tf.float64 |
+steps/observation/Can_quat                 | Tensor       | (4,)            | tf.float64 |
+steps/observation/Can_to_robot0_eef_pos    | Tensor       | (3,)            | tf.float64 |
+steps/observation/Can_to_robot0_eef_quat   | Tensor       | (4,)            | tf.float32 |
+steps/observation/agentview_image          | Image        | (256, 256, 3)   | tf.uint8   |
+steps/observation/birdview_image           | Image        | (256, 256, 3)   | tf.uint8   |
+steps/observation/object-state             | Tensor       | (14,)           | tf.float64 |
+steps/observation/robot0_eef_pos           | Tensor       | (3,)            | tf.float64 |
+steps/observation/robot0_eef_quat          | Tensor       | (4,)            | tf.float64 |
+steps/observation/robot0_eye_in_hand_image | Image        | (256, 256, 3)   | tf.uint8   |
+steps/observation/robot0_gripper_qpos      | Tensor       | (2,)            | tf.float64 |
+steps/observation/robot0_gripper_qvel      | Tensor       | (2,)            | tf.float64 |
+steps/observation/robot0_joint_pos_cos     | Tensor       | (7,)            | tf.float64 |
+steps/observation/robot0_joint_pos_sin     | Tensor       | (7,)            | tf.float64 |
+steps/observation/robot0_joint_vel         | Tensor       | (7,)            | tf.float64 |
+steps/observation/robot0_proprio-state     | Tensor       | (32,)           | tf.float64 |
+steps/observation/robot0_robotview_image   | Image        | (256, 256, 3)   | tf.uint8   |
+steps/reward                               | Tensor       |                 | tf.float64 |
+steps/tag:placed                           | Tensor       |                 | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -264,7 +332,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 200
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -298,6 +366,38 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                  | Class        | Shape           | Dtype      | Description
+:--------------------------------------- | :----------- | :-------------- | :--------- | :----------
+                                         | FeaturesDict |                 |            |
+agent_id                                 | Tensor       |                 | tf.string  |
+episode_id                               | Tensor       |                 | tf.string  |
+episode_index                            | Tensor       |                 | tf.int32   |
+steps                                    | Dataset      |                 |            |
+steps/action                             | Tensor       | (7,)            | tf.float32 |
+steps/discount                           | Tensor       |                 | tf.float64 |
+steps/image                              | Image        | (None, None, 3) | tf.uint8   |
+steps/is_first                           | Tensor       |                 | tf.bool    |
+steps/is_last                            | Tensor       |                 | tf.bool    |
+steps/is_terminal                        | Tensor       |                 | tf.bool    |
+steps/observation                        | FeaturesDict |                 |            |
+steps/observation/Can_pos                | Tensor       | (3,)            | tf.float32 |
+steps/observation/Can_quat               | Tensor       | (4,)            | tf.float32 |
+steps/observation/Can_to_robot0_eef_pos  | Tensor       | (3,)            | tf.float32 |
+steps/observation/Can_to_robot0_eef_quat | Tensor       | (4,)            | tf.float32 |
+steps/observation/object-state           | Tensor       | (14,)           | tf.float32 |
+steps/observation/robot0_eef_pos         | Tensor       | (3,)            | tf.float32 |
+steps/observation/robot0_eef_quat        | Tensor       | (4,)            | tf.float32 |
+steps/observation/robot0_gripper_qpos    | Tensor       | (2,)            | tf.float32 |
+steps/observation/robot0_gripper_qvel    | Tensor       | (2,)            | tf.float32 |
+steps/observation/robot0_joint_pos_cos   | Tensor       | (7,)            | tf.float32 |
+steps/observation/robot0_joint_pos_sin   | Tensor       | (7,)            | tf.float32 |
+steps/observation/robot0_joint_vel       | Tensor       | (7,)            | tf.float32 |
+steps/observation/robot0_proprio-state   | Tensor       | (32,)           | tf.float32 |
+steps/reward                             | Tensor       |                 | tf.float64 |
+steps/tag:placed                         | Tensor       |                 | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

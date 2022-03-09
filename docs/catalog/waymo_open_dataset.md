@@ -43,7 +43,7 @@ via https://waymo.com/open/licensing/
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -88,6 +88,40 @@ FeaturesDict({
     'timestamp_micros': tf.int64,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape           | Dtype      | Description
+:----------------------------- | :----------- | :-------------- | :--------- | :----------
+                               | FeaturesDict |                 |            |
+camera_FRONT                   | FeaturesDict |                 |            |
+camera_FRONT/image             | Image        | (1280, 1920, 3) | tf.uint8   |
+camera_FRONT/labels            | Sequence     |                 |            |
+camera_FRONT/labels/bbox       | BBoxFeature  | (4,)            | tf.float32 |
+camera_FRONT/labels/type       | ClassLabel   |                 | tf.int64   |
+camera_FRONT_LEFT              | FeaturesDict |                 |            |
+camera_FRONT_LEFT/image        | Image        | (1280, 1920, 3) | tf.uint8   |
+camera_FRONT_LEFT/labels       | Sequence     |                 |            |
+camera_FRONT_LEFT/labels/bbox  | BBoxFeature  | (4,)            | tf.float32 |
+camera_FRONT_LEFT/labels/type  | ClassLabel   |                 | tf.int64   |
+camera_FRONT_RIGHT             | FeaturesDict |                 |            |
+camera_FRONT_RIGHT/image       | Image        | (1280, 1920, 3) | tf.uint8   |
+camera_FRONT_RIGHT/labels      | Sequence     |                 |            |
+camera_FRONT_RIGHT/labels/bbox | BBoxFeature  | (4,)            | tf.float32 |
+camera_FRONT_RIGHT/labels/type | ClassLabel   |                 | tf.int64   |
+camera_SIDE_LEFT               | FeaturesDict |                 |            |
+camera_SIDE_LEFT/image         | Image        | (886, 1920, 3)  | tf.uint8   |
+camera_SIDE_LEFT/labels        | Sequence     |                 |            |
+camera_SIDE_LEFT/labels/bbox   | BBoxFeature  | (4,)            | tf.float32 |
+camera_SIDE_LEFT/labels/type   | ClassLabel   |                 | tf.int64   |
+camera_SIDE_RIGHT              | FeaturesDict |                 |            |
+camera_SIDE_RIGHT/image        | Image        | (886, 1920, 3)  | tf.uint8   |
+camera_SIDE_RIGHT/labels       | Sequence     |                 |            |
+camera_SIDE_RIGHT/labels/bbox  | BBoxFeature  | (4,)            | tf.float32 |
+camera_SIDE_RIGHT/labels/type  | ClassLabel   |                 | tf.int64   |
+context                        | FeaturesDict |                 |            |
+context/name                   | Text         |                 | tf.string  |
+timestamp_micros               | Tensor       |                 | tf.int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -127,7 +127,7 @@ to get the links to download the dataset.
 Split | Examples
 :---- | -------:
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -155,6 +155,33 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                                 | Class        | Shape           | Dtype      | Description
+:-------------------------------------- | :----------- | :-------------- | :--------- | :----------
+                                        | FeaturesDict |                 |            |
+attribution_passes_lang_id              | Tensor       |                 | tf.bool    |
+caption_alt_text_description            | Text         |                 | tf.string  |
+caption_attribution_description         | Text         |                 | tf.string  |
+caption_reference_description           | Text         |                 | tf.string  |
+caption_title_and_reference_description | Text         |                 | tf.string  |
+context_page_description                | Text         |                 | tf.string  |
+context_section_description             | Text         |                 | tf.string  |
+embedding                               | Tensor       | (2048,)         | tf.float32 |
+hierarchical_section_title              | Text         |                 | tf.string  |
+image                                   | Image        | (None, None, 3) | tf.uint8   |
+image_url                               | Text         |                 | tf.string  |
+is_main_image                           | Tensor       |                 | tf.bool    |
+language                                | Text         |                 | tf.string  |
+metadata_url                            | Text         |                 | tf.string  |
+mime_type                               | Text         |                 | tf.string  |
+original_height                         | Tensor       |                 | tf.int32   |
+original_width                          | Tensor       |                 | tf.int32   |
+page_changed_recently                   | Tensor       |                 | tf.bool    |
+page_title                              | Text         |                 | tf.string  |
+page_url                                | Text         |                 | tf.string  |
+section_title                           | Text         |                 | tf.string  |
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -180,7 +207,7 @@ Split                 | Examples
 :-------------------- | -------:
 `'test_without_gold'` | 92,366
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -192,6 +219,18 @@ FeaturesDict({
     'metadata_url': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                 | Class        | Shape           | Dtype      | Description
+:-------------------------------------- | :----------- | :-------------- | :--------- | :----------
+                                        | FeaturesDict |                 |            |
+caption_title_and_reference_description | Text         |                 | tf.string  |
+embedding                               | Tensor       | (2048,)         | tf.float32 |
+id                                      | Text         |                 | tf.string  |
+image                                   | Image        | (None, None, 3) | tf.uint8   |
+image_url                               | Text         |                 | tf.string  |
+metadata_url                            | Text         |                 | tf.string  |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

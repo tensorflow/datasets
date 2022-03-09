@@ -55,7 +55,7 @@ Image Type : jpeg(JPEG) Width x Height : 640 x 480
 Split | Examples
 :---- | -------:
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -67,6 +67,17 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape         | Dtype      | Description
+:------------- | :----------- | :------------ | :--------- | :----------
+               | FeaturesDict |               |            |
+image          | Image        | (480, 640, 3) | tf.uint8   |
+image/filename | Text         |               | tf.string  |
+objects        | Sequence     |               |            |
+objects/bbox   | BBoxFeature  | (4,)          | tf.float32 |
+objects/label  | ClassLabel   |               | tf.int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

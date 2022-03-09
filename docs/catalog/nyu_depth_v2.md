@@ -43,7 +43,7 @@ Split          | Examples
 `'train'`      | 47,584
 `'validation'` | 654
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -51,6 +51,14 @@ FeaturesDict({
     'image': Image(shape=(480, 640, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape         | Dtype      | Description
+:------ | :----------- | :------------ | :--------- | :----------
+        | FeaturesDict |               |            |
+depth   | Tensor       | (480, 640)    | tf.float16 |
+image   | Image        | (480, 640, 3) | tf.uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

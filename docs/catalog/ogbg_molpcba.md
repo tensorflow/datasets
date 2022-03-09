@@ -86,7 +86,7 @@ Split          | Examples
 `'train'`      | 350,343
 `'validation'` | 43,793
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -98,6 +98,18 @@ FeaturesDict({
     'num_nodes': Tensor(shape=(None,), dtype=tf.int64),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape     | Dtype      | Description
+:--------- | :----------- | :-------- | :--------- | :----------
+           | FeaturesDict |           |            |
+edge_feat  | Tensor       | (None, 3) | tf.float32 |
+edge_index | Tensor       | (None, 2) | tf.int64   |
+labels     | Tensor       | (128,)    | tf.float32 |
+node_feat  | Tensor       | (None, 9) | tf.float32 |
+num_edges  | Tensor       | (None,)   | tf.int64   |
+num_nodes  | Tensor       | (None,)   | tf.int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

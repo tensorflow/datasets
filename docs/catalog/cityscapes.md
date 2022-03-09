@@ -105,7 +105,7 @@ Split          | Examples
 `'train'`      | 2,975
 `'validation'` | 500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -114,6 +114,15 @@ FeaturesDict({
     'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature            | Class        | Shape           | Dtype     | Description
+:----------------- | :----------- | :-------------- | :-------- | :----------
+                   | FeaturesDict |                 |           |
+image_id           | Text         |                 | tf.string |
+image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
+segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -167,7 +176,7 @@ Split           | Examples
 `'train_extra'` | 19,998
 `'validation'`  | 500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -176,6 +185,15 @@ FeaturesDict({
     'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature            | Class        | Shape           | Dtype     | Description
+:----------------- | :----------- | :-------------- | :-------- | :----------
+                   | FeaturesDict |                 |           |
+image_id           | Text         |                 | tf.string |
+image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
+segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -228,7 +246,7 @@ Split          | Examples
 `'train'`      | 2,975
 `'validation'` | 500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -238,6 +256,16 @@ FeaturesDict({
     'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape           | Dtype     | Description
+:------------ | :----------- | :-------------- | :-------- | :----------
+              | FeaturesDict |                 |           |
+disparity_map | Image        | (1024, 2048, 1) | tf.uint8  |
+image_id      | Text         |                 | tf.string |
+image_left    | Image        | (1024, 2048, 3) | tf.uint8  |
+image_right   | Image        | (1024, 2048, 3) | tf.uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -291,7 +319,7 @@ Split           | Examples
 `'train_extra'` | 19,997
 `'validation'`  | 500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -301,6 +329,16 @@ FeaturesDict({
     'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape           | Dtype     | Description
+:------------ | :----------- | :-------------- | :-------- | :----------
+              | FeaturesDict |                 |           |
+disparity_map | Image        | (1024, 2048, 1) | tf.uint8  |
+image_id      | Text         |                 | tf.string |
+image_left    | Image        | (1024, 2048, 3) | tf.uint8  |
+image_right   | Image        | (1024, 2048, 3) | tf.uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

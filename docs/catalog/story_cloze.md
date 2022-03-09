@@ -50,7 +50,7 @@ system to choose the correct ending to a four-sentence story.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -59,6 +59,15 @@ FeaturesDict({
     'label': tf.int32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class          | Shape   | Dtype     | Description
+:------ | :------------- | :------ | :-------- | :----------
+        | FeaturesDict   |         |           |
+context | Text           |         | tf.string |
+endings | Sequence(Text) | (None,) | tf.string |
+label   | Tensor         |         | tf.int32  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -84,7 +84,7 @@ Split     | Examples
 `'train'` | 289,205
 `'valid'` | 12,678
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -111,6 +111,31 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                 | Class        | Shape    | Dtype      | Description
+:---------------------- | :----------- | :------- | :--------- | :----------
+                        | FeaturesDict |          |            |
+audio                   | Audio        | (64000,) | tf.float32 |
+id                      | Tensor       |          | tf.string  |
+instrument              | FeaturesDict |          |            |
+instrument/family       | ClassLabel   |          | tf.int64   |
+instrument/label        | ClassLabel   |          | tf.int64   |
+instrument/source       | ClassLabel   |          | tf.int64   |
+pitch                   | ClassLabel   |          | tf.int64   |
+qualities               | FeaturesDict |          |            |
+qualities/bright        | Tensor       |          | tf.bool    |
+qualities/dark          | Tensor       |          | tf.bool    |
+qualities/distortion    | Tensor       |          | tf.bool    |
+qualities/fast_decay    | Tensor       |          | tf.bool    |
+qualities/long_release  | Tensor       |          | tf.bool    |
+qualities/multiphonic   | Tensor       |          | tf.bool    |
+qualities/nonlinear_env | Tensor       |          | tf.bool    |
+qualities/percussive    | Tensor       |          | tf.bool    |
+qualities/reverb        | Tensor       |          | tf.bool    |
+qualities/tempo-synced  | Tensor       |          | tf.bool    |
+velocity                | ClassLabel   |          | tf.int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -169,7 +194,7 @@ Split     | Examples
 `'train'` | 60,788
 `'valid'` | 17,469
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -196,6 +221,31 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                 | Class        | Shape    | Dtype      | Description
+:---------------------- | :----------- | :------- | :--------- | :----------
+                        | FeaturesDict |          |            |
+audio                   | Audio        | (64000,) | tf.float32 |
+id                      | Tensor       |          | tf.string  |
+instrument              | FeaturesDict |          |            |
+instrument/family       | ClassLabel   |          | tf.int64   |
+instrument/label        | ClassLabel   |          | tf.int64   |
+instrument/source       | ClassLabel   |          | tf.int64   |
+pitch                   | ClassLabel   |          | tf.int64   |
+qualities               | FeaturesDict |          |            |
+qualities/bright        | Tensor       |          | tf.bool    |
+qualities/dark          | Tensor       |          | tf.bool    |
+qualities/distortion    | Tensor       |          | tf.bool    |
+qualities/fast_decay    | Tensor       |          | tf.bool    |
+qualities/long_release  | Tensor       |          | tf.bool    |
+qualities/multiphonic   | Tensor       |          | tf.bool    |
+qualities/nonlinear_env | Tensor       |          | tf.bool    |
+qualities/percussive    | Tensor       |          | tf.bool    |
+qualities/reverb        | Tensor       |          | tf.bool    |
+qualities/tempo-synced  | Tensor       |          | tf.bool    |
+velocity                | ClassLabel   |          | tf.int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -256,7 +306,7 @@ Split     | Examples
 `'train'` | 60,788
 `'valid'` | 17,469
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -291,6 +341,37 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                 | Class        | Shape    | Dtype      | Description
+:---------------------- | :----------- | :------- | :--------- | :----------
+                        | FeaturesDict |          |            |
+audio                   | Audio        | (64000,) | tf.float32 |
+f0                      | FeaturesDict |          |            |
+f0/confidence           | Tensor       | (1000,)  | tf.float32 |
+f0/hz                   | Tensor       | (1000,)  | tf.float32 |
+f0/midi                 | Tensor       | (1000,)  | tf.float32 |
+id                      | Tensor       |          | tf.string  |
+instrument              | FeaturesDict |          |            |
+instrument/family       | ClassLabel   |          | tf.int64   |
+instrument/label        | ClassLabel   |          | tf.int64   |
+instrument/source       | ClassLabel   |          | tf.int64   |
+loudness                | FeaturesDict |          |            |
+loudness/db             | Tensor       | (1000,)  | tf.float32 |
+pitch                   | ClassLabel   |          | tf.int64   |
+qualities               | FeaturesDict |          |            |
+qualities/bright        | Tensor       |          | tf.bool    |
+qualities/dark          | Tensor       |          | tf.bool    |
+qualities/distortion    | Tensor       |          | tf.bool    |
+qualities/fast_decay    | Tensor       |          | tf.bool    |
+qualities/long_release  | Tensor       |          | tf.bool    |
+qualities/multiphonic   | Tensor       |          | tf.bool    |
+qualities/nonlinear_env | Tensor       |          | tf.bool    |
+qualities/percussive    | Tensor       |          | tf.bool    |
+qualities/reverb        | Tensor       |          | tf.bool    |
+qualities/tempo-synced  | Tensor       |          | tf.bool    |
+velocity                | ClassLabel   |          | tf.int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

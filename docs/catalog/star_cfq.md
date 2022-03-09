@@ -35,7 +35,7 @@ data = tfds.load('star_cfq/single_pool_10x_b_cfq')
 
     *   **`1.1.0`** (default): No release notes.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -43,6 +43,14 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype     | Description
+:------- | :----------- | :---- | :-------- | :----------
+         | FeaturesDict |       |           |
+query    | Text         |       | tf.string |
+question | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

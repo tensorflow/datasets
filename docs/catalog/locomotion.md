@@ -71,7 +71,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 50
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -86,6 +86,20 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape  | Dtype      | Description
+:---------------- | :----------- | :----- | :--------- | :----------
+                  | FeaturesDict |        |            |
+steps             | Dataset      |        |            |
+steps/action      | Tensor       | (8,)   | tf.float32 |
+steps/discount    | Tensor       |        | tf.float32 |
+steps/is_first    | Tensor       |        | tf.bool    |
+steps/is_last     | Tensor       |        | tf.bool    |
+steps/is_terminal | Tensor       |        | tf.bool    |
+steps/observation | Tensor       | (111,) | tf.float32 |
+steps/reward      | Tensor       |        | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -143,7 +157,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 50
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -158,6 +172,20 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype      | Description
+:---------------- | :----------- | :---- | :--------- | :----------
+                  | FeaturesDict |       |            |
+steps             | Dataset      |       |            |
+steps/action      | Tensor       | (3,)  | tf.float32 |
+steps/discount    | Tensor       |       | tf.float32 |
+steps/is_first    | Tensor       |       | tf.bool    |
+steps/is_last     | Tensor       |       | tf.bool    |
+steps/is_terminal | Tensor       |       | tf.bool    |
+steps/observation | Tensor       | (11,) | tf.float32 |
+steps/reward      | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -215,7 +243,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 50
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -230,6 +258,20 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype      | Description
+:---------------- | :----------- | :---- | :--------- | :----------
+                  | FeaturesDict |       |            |
+steps             | Dataset      |       |            |
+steps/action      | Tensor       | (6,)  | tf.float32 |
+steps/discount    | Tensor       |       | tf.float32 |
+steps/is_first    | Tensor       |       | tf.bool    |
+steps/is_last     | Tensor       |       | tf.bool    |
+steps/is_terminal | Tensor       |       | tf.bool    |
+steps/observation | Tensor       | (17,) | tf.float32 |
+steps/reward      | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -287,7 +329,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 50
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -302,6 +344,20 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype      | Description
+:---------------- | :----------- | :---- | :--------- | :----------
+                  | FeaturesDict |       |            |
+steps             | Dataset      |       |            |
+steps/action      | Tensor       | (6,)  | tf.float32 |
+steps/discount    | Tensor       |       | tf.float32 |
+steps/is_first    | Tensor       |       | tf.bool    |
+steps/is_last     | Tensor       |       | tf.bool    |
+steps/is_terminal | Tensor       |       | tf.bool    |
+steps/observation | Tensor       | (17,) | tf.float32 |
+steps/reward      | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -359,7 +415,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 200
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -374,6 +430,20 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape  | Dtype      | Description
+:---------------- | :----------- | :----- | :--------- | :----------
+                  | FeaturesDict |        |            |
+steps             | Dataset      |        |            |
+steps/action      | Tensor       | (17,)  | tf.float32 |
+steps/discount    | Tensor       |        | tf.float32 |
+steps/is_first    | Tensor       |        | tf.bool    |
+steps/is_last     | Tensor       |        | tf.bool    |
+steps/is_terminal | Tensor       |        | tf.bool    |
+steps/observation | Tensor       | (376,) | tf.float32 |
+steps/reward      | Tensor       |        | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

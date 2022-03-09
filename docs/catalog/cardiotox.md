@@ -79,7 +79,7 @@ Split          | Examples
 `'train'`      | 6,523
 `'validation'` | 1,631
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -92,6 +92,19 @@ FeaturesDict({
     'pairs': Tensor(shape=(60, 60, 12), dtype=tf.float32),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape        | Dtype      | Description
+:------------ | :----------- | :----------- | :--------- | :----------
+              | FeaturesDict |              |            |
+active        | Tensor       | (2,)         | tf.int64   |
+atom_mask     | Tensor       | (60,)        | tf.float32 |
+atoms         | Tensor       | (60, 27)     | tf.float32 |
+dist2topk_nbs | Tensor       | (1,)         | tf.float32 |
+molecule_id   | Tensor       |              | tf.string  |
+pair_mask     | Tensor       | (60, 60)     | tf.float32 |
+pairs         | Tensor       | (60, 60, 12) | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

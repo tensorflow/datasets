@@ -59,7 +59,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 544
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -69,6 +69,16 @@ FeaturesDict({
     'weight': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape | Dtype      | Description
+:------ | :----------- | :---- | :--------- | :----------
+        | FeaturesDict |       |            |
+age     | Tensor       |       | tf.float32 |
+height  | Tensor       |       | tf.float32 |
+male    | Tensor       |       | tf.int32   |
+weight  | Tensor       |       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

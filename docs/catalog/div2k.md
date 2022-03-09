@@ -39,7 +39,7 @@ challenges @ NTIRE (CVPR 2017 and CVPR 2018) and @ PIRM (ECCV 2018)
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -47,6 +47,14 @@ FeaturesDict({
     'lr': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype    | Description
+:------ | :----------- | :-------------- | :------- | :----------
+        | FeaturesDict |                 |          |
+hr      | Image        | (None, None, 3) | tf.uint8 |
+lr      | Image        | (None, None, 3) | tf.uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -85,7 +85,7 @@ Split          | Examples
 `'train'`      | 3,673
 `'validation'` | 338
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -97,6 +97,18 @@ FeaturesDict({
     'transcript_author': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype     | Description
+:---------------- | :----------- | :---- | :-------- | :----------
+                  | FeaturesDict |       |           |
+episode_number    | Text         |       | tf.string |
+episode_title     | Text         |       | tf.string |
+recap             | Text         |       | tf.string |
+show_title        | Text         |       | tf.string |
+transcript        | Text         |       | tf.string |
+transcript_author | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -153,7 +165,7 @@ Split          | Examples
 `'train'`      | 18,915
 `'validation'` | 1,795
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -165,6 +177,18 @@ FeaturesDict({
     'transcript_author': Tensor(shape=(None,), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape   | Dtype     | Description
+:---------------- | :----------- | :------ | :-------- | :----------
+                  | FeaturesDict |         |           |
+episode_summary   | Text         |         | tf.string |
+recap             | Text         |         | tf.string |
+recap_author      | Text         |         | tf.string |
+show_title        | Text         |         | tf.string |
+transcript        | Text         |         | tf.string |
+transcript_author | Tensor       | (None,) | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -29,7 +29,7 @@ cleaning to strip markdown and unwanted sections (references, etc.).
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -37,6 +37,14 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape | Dtype     | Description
+:------ | :----------- | :---- | :-------- | :----------
+        | FeaturesDict |       |           |
+text    | Text         |       | tf.string |
+title   | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -63,7 +63,7 @@ Split          | Examples
 `'train'`      | 24,698
 `'validation'` | 4,650
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -84,6 +84,25 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                  | Class          | Shape           | Dtype      | Description
+:----------------------- | :------------- | :-------------- | :--------- | :----------
+                         | FeaturesDict   |                 |            |
+image                    | Image          | (None, None, 3) | tf.uint8   |
+image/id                 | Tensor         |                 | tf.int64   |
+objects                  | Sequence       |                 |            |
+objects/area             | Tensor         |                 | tf.int64   |
+objects/bbox             | BBoxFeature    | (4,)            | tf.float32 |
+objects/id               | Tensor         |                 | tf.int64   |
+objects/label            | Tensor         |                 | tf.int64   |
+objects/label_name       | ClassLabel     |                 | tf.int64   |
+objects/refexp           | Sequence       |                 |            |
+objects/refexp/raw       | Text           |                 | tf.string  |
+objects/refexp/referent  | Text           |                 | tf.string  |
+objects/refexp/refexp_id | Tensor         |                 | tf.int64   |
+objects/refexp/tokens    | Sequence(Text) | (None,)         | tf.string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

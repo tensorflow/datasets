@@ -104,7 +104,7 @@ refcocog | umd       | test  | 5023  | 2600
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -129,6 +129,30 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+| Feature                  | Class        | Shape  | Dtype      | Description |
+| :----------------------- | :----------- | :----- | :--------- | :---------- |
+|                          | FeaturesDict |        |            |             |
+| coco_annotations         | Sequence     |        |            |             |
+| coco_annotations/area    | Tensor       |        | tf.int64   |             |
+| coco_annotations/bbox    | BBoxFeature  | (4,)   | tf.float32 |             |
+| coco_annotations/id      | Tensor       |        | tf.int64   |             |
+| coco_annotations/label   | Tensor       |        | tf.int64   |             |
+| image                    | Image        | (None, | tf.uint8   |             |
+:                          :              : None,  :            :             :
+:                          :              : 3)     :            :             :
+| image/id                 | Tensor       |        | tf.int64   |             |
+| objects                  | Sequence     |        |            |             |
+| objects/area             | Tensor       |        | tf.int64   |             |
+| objects/bbox             | BBoxFeature  | (4,)   | tf.float32 |             |
+| objects/gt_box_index     | Tensor       |        | tf.int64   |             |
+| objects/id               | Tensor       |        | tf.int64   |             |
+| objects/label            | Tensor       |        | tf.int64   |             |
+| objects/refexp           | Sequence     |        |            |             |
+| objects/refexp/raw       | Text         |        | tf.string  |             |
+| objects/refexp/refexp_id | Tensor       |        | tf.int64   |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

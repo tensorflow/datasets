@@ -48,7 +48,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 61,225
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -65,6 +65,23 @@ FeaturesDict({
     'tex_params': Tensor(shape=(199,), dtype=tf.float32),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature          | Class        | Shape         | Dtype      | Description
+:--------------- | :----------- | :------------ | :--------- | :----------
+                 | FeaturesDict |               |            |
+color_params     | Tensor       | (7,)          | tf.float32 |
+exp_params       | Tensor       | (29,)         | tf.float32 |
+illum_params     | Tensor       | (10,)         | tf.float32 |
+image            | Image        | (450, 450, 3) | tf.uint8   |
+landmarks_2d     | Tensor       | (68, 2)       | tf.float32 |
+landmarks_3d     | Tensor       | (68, 2)       | tf.float32 |
+landmarks_origin | Tensor       | (68, 2)       | tf.float32 |
+pose_params      | Tensor       | (7,)          | tf.float32 |
+roi              | Tensor       | (4,)          | tf.float32 |
+shape_params     | Tensor       | (199,)        | tf.float32 |
+tex_params       | Tensor       | (199,)        | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

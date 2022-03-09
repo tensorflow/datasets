@@ -52,7 +52,7 @@ Split          | Examples
 `'train'`      | 134,000
 `'validation'` | 6,670
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -61,6 +61,15 @@ FeaturesDict({
     'youtube_id': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape   | Dtype     | Description
+:--------- | :----------- | :------ | :-------- | :----------
+           | FeaturesDict |         |           |
+audio      | Audio        | (None,) | tf.int64  |
+label      | ClassLabel   |         | tf.int64  |
+youtube_id | Text         |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

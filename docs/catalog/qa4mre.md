@@ -38,7 +38,7 @@ alzheimers data, and the other on entrance exams data.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -57,6 +57,24 @@ FeaturesDict({
     'topic_name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                   | Class        | Shape | Dtype     | Description
+:------------------------ | :----------- | :---- | :-------- | :----------
+                          | FeaturesDict |       |           |
+answer_options            | Sequence     |       |           |
+answer_options/answer_id  | Text         |       | tf.string |
+answer_options/answer_str | Text         |       | tf.string |
+correct_answer_id         | Text         |       | tf.string |
+correct_answer_str        | Text         |       | tf.string |
+document_id               | Text         |       | tf.string |
+document_str              | Text         |       | tf.string |
+question_id               | Text         |       | tf.string |
+question_str              | Text         |       | tf.string |
+test_id                   | Text         |       | tf.string |
+topic_id                  | Text         |       | tf.string |
+topic_name                | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

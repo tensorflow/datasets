@@ -72,7 +72,7 @@ Split              | Examples
 `'validation'`     | 100,000
 `'validation_ood'` | 600,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -82,6 +82,16 @@ FeaturesDict({
     'seq_info': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype     | Description
+:------- | :----------- | :---- | :-------- | :----------
+         | FeaturesDict |       |           |
+domain   | Text         |       | tf.string |
+label    | ClassLabel   |       | tf.int64  |
+seq      | Text         |       | tf.string |
+seq_info | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

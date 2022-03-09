@@ -49,7 +49,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 2,500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -58,6 +58,15 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape   | Dtype     | Description
+:------------- | :----------- | :------ | :-------- | :----------
+               | FeaturesDict |         |           |
+audio          | Audio        | (None,) | tf.int64  |
+audio/filename | Text         |         | tf.string |
+label          | ClassLabel   |         | tf.int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

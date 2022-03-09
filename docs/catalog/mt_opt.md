@@ -71,7 +71,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 920,165
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -97,6 +97,29 @@ FeaturesDict({
     'task_code': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape         | Dtype      | Description
+:--------------------------------- | :----------- | :------------ | :--------- | :----------
+                                   | FeaturesDict |               |            |
+episode_id                         | Tensor       |               | tf.string  |
+skill                              | Tensor       |               | tf.uint8   |
+steps                              | Dataset      |               |            |
+steps/action                       | FeaturesDict |               |            |
+steps/action/close_gripper         | Tensor       |               | tf.bool    |
+steps/action/open_gripper          | Tensor       |               | tf.bool    |
+steps/action/target_pose           | Tensor       | (7,)          | tf.float32 |
+steps/action/terminate             | Tensor       |               | tf.bool    |
+steps/is_first                     | Tensor       |               | tf.bool    |
+steps/is_last                      | Tensor       |               | tf.bool    |
+steps/is_terminal                  | Tensor       |               | tf.bool    |
+steps/observation                  | FeaturesDict |               |            |
+steps/observation/gripper_closed   | Tensor       |               | tf.bool    |
+steps/observation/height_to_bottom | Tensor       |               | tf.float32 |
+steps/observation/image            | Image        | (512, 640, 3) | tf.uint8   |
+steps/observation/state_dense      | Tensor       | (7,)          | tf.float32 |
+task_code                          | Tensor       |               | tf.string  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -149,7 +172,7 @@ Split     | Examples
 `'test'`  | 94,636
 `'train'` | 380,234
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -160,6 +183,17 @@ FeaturesDict({
     'task_code': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape         | Dtype     | Description
+:-------- | :----------- | :------------ | :-------- | :----------
+          | FeaturesDict |               |           |
+image_0   | Image        | (512, 640, 3) | tf.uint8  |
+image_1   | Image        | (480, 640, 3) | tf.uint8  |
+image_2   | Image        | (480, 640, 3) | tf.uint8  |
+success   | Tensor       |               | tf.bool   |
+task_code | Tensor       |               | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

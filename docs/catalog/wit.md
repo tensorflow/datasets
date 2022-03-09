@@ -45,7 +45,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 37,046,386
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -68,6 +68,29 @@ FeaturesDict({
     'section_title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                         | Class        | Shape | Dtype     | Description
+:------------------------------ | :----------- | :---- | :-------- | :----------
+                                | FeaturesDict |       |           |
+attribution_passes_lang_id      | Tensor       |       | tf.bool   |
+caption_alt_text_description    | Text         |       | tf.string |
+caption_attribution_description | Text         |       | tf.string |
+caption_reference_description   | Text         |       | tf.string |
+context_page_description        | Text         |       | tf.string |
+context_section_description     | Text         |       | tf.string |
+hierarchical_section_title      | Text         |       | tf.string |
+image_url                       | Text         |       | tf.string |
+is_main_image                   | Tensor       |       | tf.bool   |
+language                        | Text         |       | tf.string |
+mime_type                       | Text         |       | tf.string |
+original_height                 | Tensor       |       | tf.int32  |
+original_width                  | Tensor       |       | tf.int32  |
+page_changed_recently           | Tensor       |       | tf.bool   |
+page_title                      | Text         |       | tf.string |
+page_url                        | Text         |       | tf.string |
+section_title                   | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

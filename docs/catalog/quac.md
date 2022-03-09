@@ -47,7 +47,7 @@ Split          | Examples
 `'train'`      | 83,568
 `'validation'` | 7,354
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -68,6 +68,25 @@ FeaturesDict({
     'yesno': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                  | Class        | Shape | Dtype     | Description
+:----------------------- | :----------- | :---- | :-------- | :----------
+                         | FeaturesDict |       |           |
+answers                  | Sequence     |       |           |
+answers/answer_start     | Tensor       |       | tf.int32  |
+answers/text             | Text         |       | tf.string |
+background               | Text         |       | tf.string |
+context                  | Text         |       | tf.string |
+followup                 | Text         |       | tf.string |
+orig_answer              | FeaturesDict |       |           |
+orig_answer/answer_start | Tensor       |       | tf.int32  |
+orig_answer/text         | Text         |       | tf.string |
+question                 | Text         |       | tf.string |
+section_title            | Text         |       | tf.string |
+title                    | Text         |       | tf.string |
+yesno                    | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

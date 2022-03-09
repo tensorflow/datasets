@@ -45,7 +45,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 2,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -54,6 +54,15 @@ FeaturesDict({
     'landmarks_68_3d_z': Tensor(shape=(68, 1), dtype=tf.float32),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                       | Class        | Shape         | Dtype      | Description
+:---------------------------- | :----------- | :------------ | :--------- | :----------
+                              | FeaturesDict |               |            |
+image                         | Image        | (450, 450, 3) | tf.uint8   |
+landmarks_68_3d_xy_normalized | Tensor       | (68, 2)       | tf.float32 |
+landmarks_68_3d_z             | Tensor       | (68, 1)       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

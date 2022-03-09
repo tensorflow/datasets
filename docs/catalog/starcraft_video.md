@@ -80,13 +80,20 @@ Split          | Examples
 
 *   **Download size**: `6.40 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape             | Dtype    | Description
+:--------- | :----------- | :---------------- | :------- | :----------
+           | FeaturesDict |                   |          |
+rgb_screen | Video(Image) | (None, 64, 64, 3) | tf.uint8 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -131,13 +138,20 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `20.76 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape               | Dtype    | Description
+:--------- | :----------- | :------------------ | :------- | :----------
+           | FeaturesDict |                     |          |
+rgb_screen | Video(Image) | (None, 128, 128, 3) | tf.uint8 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -182,13 +196,20 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `7.83 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape             | Dtype    | Description
+:--------- | :----------- | :---------------- | :------- | :----------
+           | FeaturesDict |                   |          |
+rgb_screen | Video(Image) | (None, 64, 64, 3) | tf.uint8 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -233,13 +254,20 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `24.83 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape               | Dtype    | Description
+:--------- | :----------- | :------------------ | :------- | :----------
+           | FeaturesDict |                     |          |
+rgb_screen | Video(Image) | (None, 128, 128, 3) | tf.uint8 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -284,13 +312,20 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `1.77 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape             | Dtype    | Description
+:--------- | :----------- | :---------------- | :------- | :----------
+           | FeaturesDict |                   |          |
+rgb_screen | Video(Image) | (None, 64, 64, 3) | tf.uint8 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -335,13 +370,20 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `5.75 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape               | Dtype    | Description
+:--------- | :----------- | :------------------ | :------- | :----------
+           | FeaturesDict |                     |          |
+rgb_screen | Video(Image) | (None, 128, 128, 3) | tf.uint8 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -386,13 +428,20 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `2.48 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape             | Dtype    | Description
+:--------- | :----------- | :---------------- | :------- | :----------
+           | FeaturesDict |                   |          |
+rgb_screen | Video(Image) | (None, 64, 64, 3) | tf.uint8 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -437,13 +486,20 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `7.80 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape               | Dtype    | Description
+:--------- | :----------- | :------------------ | :------- | :----------
+           | FeaturesDict |                     |          |
+rgb_screen | Video(Image) | (None, 128, 128, 3) | tf.uint8 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -44,7 +44,7 @@ Split     | Examples
 `'test'`  | 5,794
 `'train'` | 5,994
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -56,6 +56,18 @@ FeaturesDict({
     'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape           | Dtype      | Description
+:---------------- | :----------- | :-------------- | :--------- | :----------
+                  | FeaturesDict |                 |            |
+bbox              | BBoxFeature  | (4,)            | tf.float32 |
+image             | Image        | (None, None, 3) | tf.uint8   |
+image/filename    | Text         |                 | tf.string  |
+label             | ClassLabel   |                 | tf.int64   |
+label_name        | Text         |                 | tf.string  |
+segmentation_mask | Image        | (None, None, 1) | tf.uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

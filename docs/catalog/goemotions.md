@@ -47,7 +47,7 @@ Split          | Examples
 `'train'`      | 43,410
 `'validation'` | 5,426
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -82,6 +82,41 @@ FeaturesDict({
     'surprise': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape | Dtype     | Description
+:------------- | :----------- | :---- | :-------- | :----------
+               | FeaturesDict |       |           |
+admiration     | Tensor       |       | tf.bool   |
+amusement      | Tensor       |       | tf.bool   |
+anger          | Tensor       |       | tf.bool   |
+annoyance      | Tensor       |       | tf.bool   |
+approval       | Tensor       |       | tf.bool   |
+caring         | Tensor       |       | tf.bool   |
+comment_text   | Text         |       | tf.string |
+confusion      | Tensor       |       | tf.bool   |
+curiosity      | Tensor       |       | tf.bool   |
+desire         | Tensor       |       | tf.bool   |
+disappointment | Tensor       |       | tf.bool   |
+disapproval    | Tensor       |       | tf.bool   |
+disgust        | Tensor       |       | tf.bool   |
+embarrassment  | Tensor       |       | tf.bool   |
+excitement     | Tensor       |       | tf.bool   |
+fear           | Tensor       |       | tf.bool   |
+gratitude      | Tensor       |       | tf.bool   |
+grief          | Tensor       |       | tf.bool   |
+joy            | Tensor       |       | tf.bool   |
+love           | Tensor       |       | tf.bool   |
+nervousness    | Tensor       |       | tf.bool   |
+neutral        | Tensor       |       | tf.bool   |
+optimism       | Tensor       |       | tf.bool   |
+pride          | Tensor       |       | tf.bool   |
+realization    | Tensor       |       | tf.bool   |
+relief         | Tensor       |       | tf.bool   |
+remorse        | Tensor       |       | tf.bool   |
+sadness        | Tensor       |       | tf.bool   |
+surprise       | Tensor       |       | tf.bool   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -67,7 +67,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 82,291,706
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -80,6 +80,18 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature     | Class        | Shape | Dtype     | Description
+:---------- | :----------- | :---- | :-------- | :----------
+            | FeaturesDict |       |           |
+spans       | Sequence     |       |           |
+spans/limit | Tensor       |       | tf.int32  |
+spans/start | Tensor       |       | tf.int32  |
+spans/type  | Tensor       |       | tf.string |
+text        | Text         |       | tf.string |
+title       | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -130,7 +142,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 13,353,718
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -147,6 +159,21 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+sentences       | Sequence     |       |           |
+sentences/limit | Tensor       |       | tf.int32  |
+sentences/start | Tensor       |       | tf.int32  |
+spans           | Sequence     |       |           |
+spans/limit     | Tensor       |       | tf.int32  |
+spans/start     | Tensor       |       | tf.int32  |
+spans/type      | Tensor       |       | tf.string |
+text            | Text         |       | tf.string |
+title           | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -74,7 +74,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 3,731
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -87,6 +87,18 @@ FeaturesDict({
     '_movie_name': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype     | Description
+:---------------- | :----------- | :---- | :-------- | :----------
+                  | FeaturesDict |       |           |
+_critic_consensus | Tensor       |       | tf.string |
+_critics          | Sequence     |       |           |
+_critics/key      | Tensor       |       | tf.string |
+_critics/value    | Tensor       |       | tf.string |
+_movie_id         | Tensor       |       | tf.string |
+_movie_name       | Tensor       |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -141,7 +153,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 2,259
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -154,6 +166,18 @@ FeaturesDict({
     '_debate_name': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                   | Class        | Shape | Dtype     | Description
+:------------------------ | :----------- | :---- | :-------- | :----------
+                          | FeaturesDict |       |           |
+_argument_sentences       | Sequence     |       |           |
+_argument_sentences/key   | Tensor       |       | tf.string |
+_argument_sentences/value | Tensor       |       | tf.string |
+_claim                    | Tensor       |       | tf.string |
+_claim_id                 | Tensor       |       | tf.string |
+_debate_name              | Tensor       |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -39,7 +39,7 @@ comprehension.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -50,6 +50,17 @@ FeaturesDict({
     'questions': Sequence(Text(shape=(), dtype=tf.string)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class                    | Shape        | Dtype     | Description
+:--------- | :----------------------- | :----------- | :-------- | :----------
+           | FeaturesDict             |              |           |
+answers    | Sequence(Text)           | (None,)      | tf.string |
+article    | Text                     |              | tf.string |
+example_id | Text                     |              | tf.string |
+options    | Sequence(Sequence(Text)) | (None, None) | tf.string |
+questions  | Sequence(Text)           | (None,)      | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

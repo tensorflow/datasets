@@ -81,7 +81,7 @@ Split     | Examples
 
 *   **Download size**: `5.44 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -90,6 +90,15 @@ FeaturesDict({
     'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature            | Class        | Shape           | Dtype     | Description
+:----------------- | :----------- | :-------------- | :-------- | :----------
+                   | FeaturesDict |                 |           |
+image_id           | Text         |                 | tf.string |
+image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
+segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -134,7 +143,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `12.16 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -144,6 +153,16 @@ FeaturesDict({
     'image_right': Image(shape=(1024, 2048, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape           | Dtype     | Description
+:------------ | :----------- | :-------------- | :-------- | :----------
+              | FeaturesDict |                 |           |
+disparity_map | Image        | (1024, 2048, 1) | tf.uint8  |
+image_id      | Text         |                 | tf.string |
+image_left    | Image        | (1024, 2048, 3) | tf.uint8  |
+image_right   | Image        | (1024, 2048, 3) | tf.uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -188,7 +207,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `12.19 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -200,6 +219,18 @@ FeaturesDict({
     'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature            | Class        | Shape           | Dtype     | Description
+:----------------- | :----------- | :-------------- | :-------- | :----------
+                   | FeaturesDict |                 |           |
+disparity_map      | Image        | (1024, 2048, 1) | tf.uint8  |
+image_id           | Text         |                 | tf.string |
+image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
+image_right        | Image        | (1024, 2048, 3) | tf.uint8  |
+instance_id        | Image        | (1024, 2048, 1) | tf.uint8  |
+segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -244,7 +275,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `34.90 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -256,6 +287,18 @@ FeaturesDict({
     'segmentation_label': Image(shape=(1024, 2048, 1), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature            | Class        | Shape           | Dtype     | Description
+:----------------- | :----------- | :-------------- | :-------- | :----------
+                   | FeaturesDict |                 |           |
+disparity_map      | Image        | (1024, 2048, 1) | tf.uint8  |
+image_id           | Text         |                 | tf.string |
+image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
+image_right        | Image        | (1024, 2048, 3) | tf.uint8  |
+instance_id        | Image        | (1024, 2048, 1) | tf.uint8  |
+segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

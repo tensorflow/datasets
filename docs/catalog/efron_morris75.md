@@ -46,7 +46,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 18
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -62,6 +62,22 @@ FeaturesDict({
     'SeasonHits': tf.int32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature          | Class        | Shape | Dtype      | Description
+:--------------- | :----------- | :---- | :--------- | :----------
+                 | FeaturesDict |       |            |
+At-Bats          | Tensor       |       | tf.int32   |
+BattingAverage   | Tensor       |       | tf.float32 |
+FirstName        | Tensor       |       | tf.string  |
+Hits             | Tensor       |       | tf.int32   |
+LastName         | Tensor       |       | tf.string  |
+RemainingAt-Bats | Tensor       |       | tf.int32   |
+RemainingAverage | Tensor       |       | tf.float32 |
+SeasonAt-Bats    | Tensor       |       | tf.int32   |
+SeasonAverage    | Tensor       |       | tf.float32 |
+SeasonHits       | Tensor       |       | tf.int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

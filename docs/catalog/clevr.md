@@ -51,7 +51,7 @@ Split          | Examples
 `'train'`      | 70,000
 `'validation'` | 15,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -72,6 +72,27 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+| Feature                  | Class        | Shape  | Dtype      | Description |
+| :----------------------- | :----------- | :----- | :--------- | :---------- |
+|                          | FeaturesDict |        |            |             |
+| file_name                | Text         |        | tf.string  |             |
+| image                    | Image        | (None, | tf.uint8   |             |
+:                          :              : None,  :            :             :
+:                          :              : 3)     :            :             :
+| objects                  | Sequence     |        |            |             |
+| objects/3d_coords        | Tensor       | (3,)   | tf.float32 |             |
+| objects/color            | ClassLabel   |        | tf.int64   |             |
+| objects/material         | ClassLabel   |        | tf.int64   |             |
+| objects/pixel_coords     | Tensor       | (3,)   | tf.float32 |             |
+| objects/rotation         | Tensor       |        | tf.float32 |             |
+| objects/shape            | ClassLabel   |        | tf.int64   |             |
+| objects/size             | ClassLabel   |        | tf.int64   |             |
+| question_answer          | Sequence     |        |            |             |
+| question_answer/answer   | Text         |        | tf.string  |             |
+| question_answer/question | Text         |        | tf.string  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

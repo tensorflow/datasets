@@ -68,7 +68,7 @@ Split          | Examples
 `'train'`      | 897
 `'validation'` | 124
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -84,6 +84,21 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+bpm             | Tensor       |       | tf.int32  |
+drummer         | ClassLabel   |       | tf.int64  |
+id              | Tensor       |       | tf.string |
+midi            | Tensor       |       | tf.string |
+style           | FeaturesDict |       |           |
+style/primary   | ClassLabel   |       | tf.int64  |
+style/secondary | Tensor       |       | tf.string |
+time_signature  | ClassLabel   |       | tf.int64  |
+type            | ClassLabel   |       | tf.int64  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -142,7 +157,7 @@ Split          | Examples
 `'train'`      | 846
 `'validation'` | 120
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -159,6 +174,22 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape   | Dtype      | Description
+:-------------- | :----------- | :------ | :--------- | :----------
+                | FeaturesDict |         |            |
+audio           | Audio        | (None,) | tf.float32 |
+bpm             | Tensor       |         | tf.int32   |
+drummer         | ClassLabel   |         | tf.int64   |
+id              | Tensor       |         | tf.string  |
+midi            | Tensor       |         | tf.string  |
+style           | FeaturesDict |         |            |
+style/primary   | ClassLabel   |         | tf.int64   |
+style/secondary | Tensor       |         | tf.string  |
+time_signature  | ClassLabel   |         | tf.int64   |
+type            | ClassLabel   |         | tf.int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -218,7 +249,7 @@ Split          | Examples
 `'train'`      | 18,163
 `'validation'` | 2,252
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -234,6 +265,21 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+bpm             | Tensor       |       | tf.int32  |
+drummer         | ClassLabel   |       | tf.int64  |
+id              | Tensor       |       | tf.string |
+midi            | Tensor       |       | tf.string |
+style           | FeaturesDict |       |           |
+style/primary   | ClassLabel   |       | tf.int64  |
+style/secondary | Tensor       |       | tf.string |
+time_signature  | ClassLabel   |       | tf.int64  |
+type            | ClassLabel   |       | tf.int64  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -292,7 +338,7 @@ Split          | Examples
 `'train'`      | 14,390
 `'validation'` | 2,034
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -309,6 +355,22 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape   | Dtype      | Description
+:-------------- | :----------- | :------ | :--------- | :----------
+                | FeaturesDict |         |            |
+audio           | Audio        | (None,) | tf.float32 |
+bpm             | Tensor       |         | tf.int32   |
+drummer         | ClassLabel   |         | tf.int64   |
+id              | Tensor       |         | tf.string  |
+midi            | Tensor       |         | tf.string  |
+style           | FeaturesDict |         |            |
+style/primary   | ClassLabel   |         | tf.int64   |
+style/secondary | Tensor       |         | tf.string  |
+time_signature  | ClassLabel   |         | tf.int64   |
+type            | ClassLabel   |         | tf.int64   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -368,7 +430,7 @@ Split          | Examples
 `'train'`      | 17,261
 `'validation'` | 2,121
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -384,6 +446,21 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+bpm             | Tensor       |       | tf.int32  |
+drummer         | ClassLabel   |       | tf.int64  |
+id              | Tensor       |       | tf.string |
+midi            | Tensor       |       | tf.string |
+style           | FeaturesDict |       |           |
+style/primary   | ClassLabel   |       | tf.int64  |
+style/secondary | Tensor       |       | tf.string |
+time_signature  | ClassLabel   |       | tf.int64  |
+type            | ClassLabel   |       | tf.int64  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

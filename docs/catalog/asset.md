@@ -82,7 +82,7 @@ Split          | Examples
 `'test'`       | 359
 `'validation'` | 2,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -90,6 +90,14 @@ FeaturesDict({
     'simplifications': Sequence(Text(shape=(), dtype=tf.string)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class          | Shape   | Dtype     | Description
+:-------------- | :------------- | :------ | :-------- | :----------
+                | FeaturesDict   |         |           |
+original        | Text           |         | tf.string |
+simplifications | Sequence(Text) | (None,) | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -141,7 +149,7 @@ Split    | Examples
 :------- | -------:
 `'full'` | 4,500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -153,6 +161,18 @@ FeaturesDict({
     'worker_id': tf.int32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature              | Class        | Shape | Dtype     | Description
+:------------------- | :----------- | :---- | :-------- | :----------
+                     | FeaturesDict |       |           |
+aspect               | ClassLabel   |       | tf.int64  |
+original             | Text         |       | tf.string |
+original_sentence_id | Tensor       |       | tf.int32  |
+rating               | Tensor       |       | tf.int32  |
+simplification       | Text         |       | tf.string |
+worker_id            | Tensor       |       | tf.int32  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

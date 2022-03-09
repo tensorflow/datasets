@@ -98,7 +98,7 @@ Split          | Examples
 `'train'`      | 1,804,874
 `'validation'` | 97,320
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -116,6 +116,24 @@ FeaturesDict({
     'toxicity': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype      | Description
+:-------------- | :----------- | :---- | :--------- | :----------
+                | FeaturesDict |       |            |
+article_id      | Tensor       |       | tf.int32   |
+id              | Tensor       |       | tf.string  |
+identity_attack | Tensor       |       | tf.float32 |
+insult          | Tensor       |       | tf.float32 |
+obscene         | Tensor       |       | tf.float32 |
+parent_id       | Tensor       |       | tf.int32   |
+parent_text     | Text         |       | tf.string  |
+severe_toxicity | Tensor       |       | tf.float32 |
+sexual_explicit | Tensor       |       | tf.float32 |
+text            | Text         |       | tf.string  |
+threat          | Tensor       |       | tf.float32 |
+toxicity        | Tensor       |       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -202,7 +220,7 @@ Split          | Examples
 `'train'`      | 405,130
 `'validation'` | 21,293
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -244,6 +262,48 @@ FeaturesDict({
     'white': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                             | Class        | Shape | Dtype      | Description
+:---------------------------------- | :----------- | :---- | :--------- | :----------
+                                    | FeaturesDict |       |            |
+article_id                          | Tensor       |       | tf.int32   |
+asian                               | Tensor       |       | tf.float32 |
+atheist                             | Tensor       |       | tf.float32 |
+bisexual                            | Tensor       |       | tf.float32 |
+black                               | Tensor       |       | tf.float32 |
+buddhist                            | Tensor       |       | tf.float32 |
+christian                           | Tensor       |       | tf.float32 |
+female                              | Tensor       |       | tf.float32 |
+heterosexual                        | Tensor       |       | tf.float32 |
+hindu                               | Tensor       |       | tf.float32 |
+homosexual_gay_or_lesbian           | Tensor       |       | tf.float32 |
+id                                  | Tensor       |       | tf.string  |
+identity_attack                     | Tensor       |       | tf.float32 |
+insult                              | Tensor       |       | tf.float32 |
+intellectual_or_learning_disability | Tensor       |       | tf.float32 |
+jewish                              | Tensor       |       | tf.float32 |
+latino                              | Tensor       |       | tf.float32 |
+male                                | Tensor       |       | tf.float32 |
+muslim                              | Tensor       |       | tf.float32 |
+obscene                             | Tensor       |       | tf.float32 |
+other_disability                    | Tensor       |       | tf.float32 |
+other_gender                        | Tensor       |       | tf.float32 |
+other_race_or_ethnicity             | Tensor       |       | tf.float32 |
+other_religion                      | Tensor       |       | tf.float32 |
+other_sexual_orientation            | Tensor       |       | tf.float32 |
+parent_id                           | Tensor       |       | tf.int32   |
+parent_text                         | Text         |       | tf.string  |
+physical_disability                 | Tensor       |       | tf.float32 |
+psychiatric_or_mental_illness       | Tensor       |       | tf.float32 |
+severe_toxicity                     | Tensor       |       | tf.float32 |
+sexual_explicit                     | Tensor       |       | tf.float32 |
+text                                | Text         |       | tf.string  |
+threat                              | Tensor       |       | tf.float32 |
+toxicity                            | Tensor       |       | tf.float32 |
+transgender                         | Tensor       |       | tf.float32 |
+white                               | Tensor       |       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -333,7 +393,7 @@ Split     | Examples
 `'test'`  | 2,455
 `'train'` | 48,074
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -386,6 +446,59 @@ FeaturesDict({
     'white': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                             | Class        | Shape | Dtype      | Description
+:---------------------------------- | :----------- | :---- | :--------- | :----------
+                                    | FeaturesDict |       |            |
+article_id                          | Tensor       |       | tf.int32   |
+asian                               | Tensor       |       | tf.float32 |
+atheist                             | Tensor       |       | tf.float32 |
+bisexual                            | Tensor       |       | tf.float32 |
+black                               | Tensor       |       | tf.float32 |
+buddhist                            | Tensor       |       | tf.float32 |
+christian                           | Tensor       |       | tf.float32 |
+covert_emoticons_emojis             | Tensor       |       | tf.float32 |
+covert_humor                        | Tensor       |       | tf.float32 |
+covert_masked_harm                  | Tensor       |       | tf.float32 |
+covert_microaggression              | Tensor       |       | tf.float32 |
+covert_obfuscation                  | Tensor       |       | tf.float32 |
+covert_political                    | Tensor       |       | tf.float32 |
+covert_sarcasm                      | Tensor       |       | tf.float32 |
+explicitly_offensive                | Tensor       |       | tf.float32 |
+female                              | Tensor       |       | tf.float32 |
+heterosexual                        | Tensor       |       | tf.float32 |
+hindu                               | Tensor       |       | tf.float32 |
+homosexual_gay_or_lesbian           | Tensor       |       | tf.float32 |
+id                                  | Tensor       |       | tf.string  |
+identity_attack                     | Tensor       |       | tf.float32 |
+implicitly_offensive                | Tensor       |       | tf.float32 |
+insult                              | Tensor       |       | tf.float32 |
+intellectual_or_learning_disability | Tensor       |       | tf.float32 |
+jewish                              | Tensor       |       | tf.float32 |
+latino                              | Tensor       |       | tf.float32 |
+male                                | Tensor       |       | tf.float32 |
+muslim                              | Tensor       |       | tf.float32 |
+not_offensive                       | Tensor       |       | tf.float32 |
+not_sure_offensive                  | Tensor       |       | tf.float32 |
+obscene                             | Tensor       |       | tf.float32 |
+other_disability                    | Tensor       |       | tf.float32 |
+other_gender                        | Tensor       |       | tf.float32 |
+other_race_or_ethnicity             | Tensor       |       | tf.float32 |
+other_religion                      | Tensor       |       | tf.float32 |
+other_sexual_orientation            | Tensor       |       | tf.float32 |
+parent_id                           | Tensor       |       | tf.int32   |
+parent_text                         | Text         |       | tf.string  |
+physical_disability                 | Tensor       |       | tf.float32 |
+psychiatric_or_mental_illness       | Tensor       |       | tf.float32 |
+severe_toxicity                     | Tensor       |       | tf.float32 |
+sexual_explicit                     | Tensor       |       | tf.float32 |
+text                                | Text         |       | tf.string  |
+threat                              | Tensor       |       | tf.float32 |
+toxicity                            | Tensor       |       | tf.float32 |
+transgender                         | Tensor       |       | tf.float32 |
+white                               | Tensor       |       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -469,7 +582,7 @@ Split          | Examples
 `'train'`      | 7,939
 `'validation'` | 682
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -481,6 +594,18 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature     | Class        | Shape   | Dtype     | Description
+:---------- | :----------- | :------ | :-------- | :----------
+            | FeaturesDict |         |           |
+article_id  | Tensor       |         | tf.int32  |
+id          | Tensor       |         | tf.string |
+parent_id   | Tensor       |         | tf.int32  |
+parent_text | Text         |         | tf.string |
+spans       | Tensor       | (None,) | tf.int32  |
+text        | Text         |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -558,7 +683,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 9,969
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -577,6 +702,25 @@ FeaturesDict({
     'toxicity': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature             | Class        | Shape | Dtype      | Description
+:------------------ | :----------- | :---- | :--------- | :----------
+                    | FeaturesDict |       |            |
+article_id          | Tensor       |       | tf.int32   |
+contextual_toxicity | Tensor       |       | tf.float32 |
+id                  | Tensor       |       | tf.string  |
+identity_attack     | Tensor       |       | tf.float32 |
+insult              | Tensor       |       | tf.float32 |
+obscene             | Tensor       |       | tf.float32 |
+parent_id           | Tensor       |       | tf.int32   |
+parent_text         | Text         |       | tf.string  |
+severe_toxicity     | Tensor       |       | tf.float32 |
+sexual_explicit     | Tensor       |       | tf.float32 |
+text                | Text         |       | tf.string  |
+threat              | Tensor       |       | tf.float32 |
+toxicity            | Tensor       |       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

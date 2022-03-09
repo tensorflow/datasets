@@ -46,7 +46,7 @@ Split          | Examples
 `'train'`      | 4,957
 `'validation'` | 500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -64,6 +64,23 @@ FeaturesDict({
     'turkIdAnonymized': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype      | Description
+:---------------- | :----------- | :---- | :--------- | :----------
+                  | FeaturesDict |       |            |
+answerKey         | ClassLabel   |       | tf.int64   |
+clarity           | Tensor       |       | tf.float32 |
+fact1             | Text         |       | tf.string  |
+humanScore        | Tensor       |       | tf.float32 |
+question          | FeaturesDict |       |            |
+question/choice_A | Text         |       | tf.string  |
+question/choice_B | Text         |       | tf.string  |
+question/choice_C | Text         |       | tf.string  |
+question/choice_D | Text         |       | tf.string  |
+question/stem     | Text         |       | tf.string  |
+turkIdAnonymized  | Text         |       | tf.string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

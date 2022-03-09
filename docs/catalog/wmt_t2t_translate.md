@@ -69,7 +69,7 @@ Split          | Examples
 `'train'`      | 4,592,289
 `'validation'` | 3,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -77,6 +77,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+de      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

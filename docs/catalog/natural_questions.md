@@ -46,7 +46,7 @@ Split          | Examples
 `'train'`      | 307,373
 `'validation'` | 7,830
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -83,6 +83,37 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                               | Class            | Shape   | Dtype     | Description
+:------------------------------------ | :--------------- | :------ | :-------- | :----------
+                                      | FeaturesDict     |         |           |
+annotations                           | Sequence         |         |           |
+annotations/id                        | Tensor           |         | tf.string |
+annotations/long_answer               | FeaturesDict     |         |           |
+annotations/long_answer/end_byte      | Tensor           |         | tf.int64  |
+annotations/long_answer/end_token     | Tensor           |         | tf.int64  |
+annotations/long_answer/start_byte    | Tensor           |         | tf.int64  |
+annotations/long_answer/start_token   | Tensor           |         | tf.int64  |
+annotations/short_answers             | Sequence         |         |           |
+annotations/short_answers/end_byte    | Tensor           |         | tf.int64  |
+annotations/short_answers/end_token   | Tensor           |         | tf.int64  |
+annotations/short_answers/start_byte  | Tensor           |         | tf.int64  |
+annotations/short_answers/start_token | Tensor           |         | tf.int64  |
+annotations/short_answers/text        | Text             |         | tf.string |
+annotations/yes_no_answer             | ClassLabel       |         | tf.int64  |
+document                              | FeaturesDict     |         |           |
+document/html                         | Text             |         | tf.string |
+document/title                        | Text             |         | tf.string |
+document/tokens                       | Sequence         |         |           |
+document/tokens/is_html               | Tensor           |         | tf.bool   |
+document/tokens/token                 | Text             |         | tf.string |
+document/url                          | Text             |         | tf.string |
+id                                    | Tensor           |         | tf.string |
+question                              | FeaturesDict     |         |           |
+question/text                         | Text             |         | tf.string |
+question/tokens                       | Sequence(Tensor) | (None,) | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

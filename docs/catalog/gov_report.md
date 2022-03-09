@@ -68,7 +68,7 @@ Split          | Examples
 `'train'`      | 6,514
 `'validation'` | 362
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -79,6 +79,17 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape | Dtype     | Description
+:------------ | :----------- | :---- | :-------- | :----------
+              | FeaturesDict |       |           |
+id            | Text         |       | tf.string |
+released_date | Text         |       | tf.string |
+reports       | Text         |       | tf.string |
+summary       | Text         |       | tf.string |
+title         | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -136,7 +147,7 @@ Split          | Examples
 `'train'`      | 11,005
 `'validation'` | 612
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -150,6 +161,20 @@ FeaturesDict({
     'url': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape | Dtype     | Description
+:------------- | :----------- | :---- | :-------- | :----------
+               | FeaturesDict |       |           |
+fastfact       | Text         |       | tf.string |
+highlight      | Text         |       | tf.string |
+id             | Text         |       | tf.string |
+published_date | Text         |       | tf.string |
+released_date  | Text         |       | tf.string |
+report         | Text         |       | tf.string |
+title          | Text         |       | tf.string |
+url            | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -208,7 +233,7 @@ Split          | Examples
 `'train'`      | 6,514
 `'validation'` | 362
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -219,6 +244,17 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape | Dtype     | Description
+:------------ | :----------- | :---- | :-------- | :----------
+              | FeaturesDict |       |           |
+id            | Text         |       | tf.string |
+released_date | Text         |       | tf.string |
+reports       | Text         |       | tf.string |
+summary       | Text         |       | tf.string |
+title         | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -277,7 +313,7 @@ Split          | Examples
 `'train'`      | 11,005
 `'validation'` | 612
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -291,6 +327,20 @@ FeaturesDict({
     'url': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape | Dtype     | Description
+:------------- | :----------- | :---- | :-------- | :----------
+               | FeaturesDict |       |           |
+fastfact       | Text         |       | tf.string |
+highlight      | Text         |       | tf.string |
+id             | Text         |       | tf.string |
+published_date | Text         |       | tf.string |
+released_date  | Text         |       | tf.string |
+report         | Text         |       | tf.string |
+title          | Text         |       | tf.string |
+url            | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -348,7 +398,7 @@ Split          | Examples
 `'train'`      | 6,514
 `'validation'` | 362
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -359,6 +409,17 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape | Dtype     | Description
+:------------ | :----------- | :---- | :-------- | :----------
+              | FeaturesDict |       |           |
+id            | Text         |       | tf.string |
+released_date | Text         |       | tf.string |
+reports       | Text         |       | tf.string |
+summary       | Text         |       | tf.string |
+title         | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -416,7 +477,7 @@ Split          | Examples
 `'train'`      | 11,005
 `'validation'` | 612
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -430,6 +491,20 @@ FeaturesDict({
     'url': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape | Dtype     | Description
+:------------- | :----------- | :---- | :-------- | :----------
+               | FeaturesDict |       |           |
+fastfact       | Text         |       | tf.string |
+highlight      | Text         |       | tf.string |
+id             | Text         |       | tf.string |
+published_date | Text         |       | tf.string |
+released_date  | Text         |       | tf.string |
+report         | Text         |       | tf.string |
+title          | Text         |       | tf.string |
+url            | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

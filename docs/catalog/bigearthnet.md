@@ -94,7 +94,7 @@ Split     | Examples
 
 *   **Config description**: Sentinel-2 RGB channels
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -114,6 +114,24 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                   | Class                | Shape         | Dtype     | Description
+:------------------------ | :------------------- | :------------ | :-------- | :----------
+                          | FeaturesDict         |               |           |
+filename                  | Text                 |               | tf.string |
+image                     | Image                | (120, 120, 3) | tf.uint8  |
+labels                    | Sequence(ClassLabel) | (None,)       | tf.int64  |
+metadata                  | FeaturesDict         |               |           |
+metadata/acquisition_date | Text                 |               | tf.string |
+metadata/coordinates      | FeaturesDict         |               |           |
+metadata/coordinates/lrx  | Tensor               |               | tf.int64  |
+metadata/coordinates/lry  | Tensor               |               | tf.int64  |
+metadata/coordinates/ulx  | Tensor               |               | tf.int64  |
+metadata/coordinates/uly  | Tensor               |               | tf.int64  |
+metadata/projection       | Text                 |               | tf.string |
+metadata/tile_source      | Text                 |               | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -165,7 +183,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: 13 Sentinel-2 channels
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -196,6 +214,35 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                   | Class                | Shape      | Dtype      | Description
+:------------------------ | :------------------- | :--------- | :--------- | :----------
+                          | FeaturesDict         |            |            |
+B01                       | Tensor               | (20, 20)   | tf.float32 |
+B02                       | Tensor               | (120, 120) | tf.float32 |
+B03                       | Tensor               | (120, 120) | tf.float32 |
+B04                       | Tensor               | (120, 120) | tf.float32 |
+B05                       | Tensor               | (60, 60)   | tf.float32 |
+B06                       | Tensor               | (60, 60)   | tf.float32 |
+B07                       | Tensor               | (60, 60)   | tf.float32 |
+B08                       | Tensor               | (120, 120) | tf.float32 |
+B09                       | Tensor               | (20, 20)   | tf.float32 |
+B11                       | Tensor               | (60, 60)   | tf.float32 |
+B12                       | Tensor               | (60, 60)   | tf.float32 |
+B8A                       | Tensor               | (60, 60)   | tf.float32 |
+filename                  | Text                 |            | tf.string  |
+labels                    | Sequence(ClassLabel) | (None,)    | tf.int64   |
+metadata                  | FeaturesDict         |            |            |
+metadata/acquisition_date | Text                 |            | tf.string  |
+metadata/coordinates      | FeaturesDict         |            |            |
+metadata/coordinates/lrx  | Tensor               |            | tf.int64   |
+metadata/coordinates/lry  | Tensor               |            | tf.int64   |
+metadata/coordinates/ulx  | Tensor               |            | tf.int64   |
+metadata/coordinates/uly  | Tensor               |            | tf.int64   |
+metadata/projection       | Text                 |            | tf.string  |
+metadata/tile_source      | Text                 |            | tf.string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

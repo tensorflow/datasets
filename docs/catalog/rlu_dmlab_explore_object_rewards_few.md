@@ -62,7 +62,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 89,144
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -83,6 +83,25 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                       | Class        | Shape       | Dtype      | Description
+:---------------------------- | :----------- | :---------- | :--------- | :----------
+                              | FeaturesDict |             |            |
+episode_id                    | Tensor       |             | tf.int64   |
+episode_return                | Tensor       |             | tf.float32 |
+steps                         | Dataset      |             |            |
+steps/action                  | Tensor       |             | tf.int64   |
+steps/discount                | Tensor       |             | tf.float32 |
+steps/is_first                | Tensor       |             | tf.bool    |
+steps/is_last                 | Tensor       |             | tf.bool    |
+steps/is_terminal             | Tensor       |             | tf.bool    |
+steps/observation             | FeaturesDict |             |            |
+steps/observation/last_action | Tensor       |             | tf.int64   |
+steps/observation/last_reward | Tensor       |             | tf.float32 |
+steps/observation/pixels      | Image        | (72, 96, 3) | tf.uint8   |
+steps/reward                  | Tensor       |             | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

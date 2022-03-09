@@ -33,7 +33,7 @@ paper.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -41,6 +41,14 @@ FeaturesDict({
     'context': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype     | Description
+:--------- | :----------- | :---- | :-------- | :----------
+           | FeaturesDict |       |           |
+completion | Text         |       | tf.string |
+context    | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

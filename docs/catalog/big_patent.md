@@ -43,7 +43,7 @@ summary: Patent abastract.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -51,6 +51,14 @@ FeaturesDict({
     'description': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature     | Class        | Shape | Dtype     | Description
+:---------- | :----------- | :---- | :-------- | :----------
+            | FeaturesDict |       |           |
+abstract    | Text         |       | tf.string |
+description | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

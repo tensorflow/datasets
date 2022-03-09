@@ -45,7 +45,7 @@ Split          | Examples
 `'train'`      | 2,000
 `'validation'` | 454
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -62,6 +62,23 @@ FeaturesDict({
     'URL': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape | Dtype     | Description
+:------------- | :----------- | :---- | :-------- | :----------
+               | FeaturesDict |       |           |
+A              | Text         |       | tf.string |
+A-coref        | Tensor       |       | tf.bool   |
+A-offset       | Tensor       |       | tf.int32  |
+B              | Text         |       | tf.string |
+B-coref        | Tensor       |       | tf.bool   |
+B-offset       | Tensor       |       | tf.int32  |
+ID             | Text         |       | tf.string |
+Pronoun        | Text         |       | tf.string |
+Pronoun-offset | Tensor       |       | tf.int32  |
+Text           | Text         |       | tf.string |
+URL            | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

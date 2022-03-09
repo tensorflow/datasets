@@ -59,13 +59,20 @@ Split          | Examples
 `'train'`      | 1
 `'validation'` | 1
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape | Dtype     | Description
+:------ | :----------- | :---- | :-------- | :----------
+        | FeaturesDict |       |           |
+text    | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

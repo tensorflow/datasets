@@ -62,7 +62,7 @@ Split          | Examples
 `'train'`      | 995,041
 `'validation'` | 108,837
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -79,6 +79,23 @@ FeaturesDict({
     'url': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype      | Description
+:-------------- | :----------- | :---- | :--------- | :----------
+                | FeaturesDict |       |            |
+compression     | Tensor       |       | tf.float32 |
+compression_bin | Text         |       | tf.string  |
+coverage        | Tensor       |       | tf.float32 |
+coverage_bin    | Text         |       | tf.string  |
+date            | Text         |       | tf.string  |
+density         | Tensor       |       | tf.float32 |
+density_bin     | Text         |       | tf.string  |
+summary         | Text         |       | tf.string  |
+text            | Text         |       | tf.string  |
+title           | Text         |       | tf.string  |
+url             | Text         |       | tf.string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -101,7 +101,7 @@ Split     | Examples
 `'test'`  | 63,978
 `'train'` | 159,571
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -116,6 +116,21 @@ FeaturesDict({
     'toxicity': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype      | Description
+:-------------- | :----------- | :---- | :--------- | :----------
+                | FeaturesDict |       |            |
+id              | Text         |       | tf.string  |
+identity_attack | Tensor       |       | tf.float32 |
+insult          | Tensor       |       | tf.float32 |
+language        | Text         |       | tf.string  |
+obscene         | Tensor       |       | tf.float32 |
+severe_toxicity | Tensor       |       | tf.float32 |
+text            | Text         |       | tf.string  |
+threat          | Tensor       |       | tf.float32 |
+toxicity        | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -182,7 +197,7 @@ Split          | Examples
 `'test'`       | 63,812
 `'validation'` | 8,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -192,6 +207,16 @@ FeaturesDict({
     'toxicity': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype      | Description
+:------- | :----------- | :---- | :--------- | :----------
+         | FeaturesDict |       |            |
+id       | Text         |       | tf.string  |
+language | Text         |       | tf.string  |
+text     | Text         |       | tf.string  |
+toxicity | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

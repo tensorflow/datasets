@@ -39,7 +39,7 @@ poor and data rich regimes.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -51,6 +51,18 @@ FeaturesDict({
     'tertiary': Tensor(shape=(None, 3), dtype=tf.float32),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape      | Dtype      | Description
+:----------- | :------------------- | :--------- | :--------- | :----------
+             | FeaturesDict         |            |            |
+evolutionary | Tensor               | (None, 21) | tf.float32 |
+id           | Text                 |            | tf.string  |
+length       | Tensor               |            | tf.int32   |
+mask         | Tensor               | (None,)    | tf.bool    |
+primary      | Sequence(ClassLabel) | (None,)    | tf.int64   |
+tertiary     | Tensor               | (None, 3)  | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -35,7 +35,7 @@ standardized environments and datasets for training and benchmarking algorithms.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -55,6 +55,24 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype      | Description
+:---------------- | :----------- | :---- | :--------- | :----------
+                  | FeaturesDict |       |            |
+steps             | Dataset      |       |            |
+steps/action      | Tensor       | (8,)  | tf.float32 |
+steps/discount    | Tensor       |       | tf.float32 |
+steps/infos       | FeaturesDict |       |            |
+steps/infos/goal  | Tensor       | (2,)  | tf.float32 |
+steps/infos/qpos  | Tensor       | (15,) | tf.float32 |
+steps/infos/qvel  | Tensor       | (14,) | tf.float32 |
+steps/is_first    | Tensor       |       | tf.bool    |
+steps/is_last     | Tensor       |       | tf.bool    |
+steps/is_terminal | Tensor       |       | tf.bool    |
+steps/observation | Tensor       | (29,) | tf.float32 |
+steps/reward      | Tensor       |       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

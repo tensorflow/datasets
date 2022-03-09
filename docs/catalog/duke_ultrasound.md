@@ -52,7 +52,7 @@ Split          | Examples
 `'train'`      | 2,556
 `'validation'` | 278
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -78,6 +78,31 @@ FeaturesDict({
     'width': tf.uint32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape   | Dtype      | Description
+:------------- | :----------- | :------ | :--------- | :----------
+               | FeaturesDict |         |            |
+das            | FeaturesDict |         |            |
+das/dB         | Tensor       | (None,) | tf.float32 |
+das/imag       | Tensor       | (None,) | tf.float32 |
+das/real       | Tensor       | (None,) | tf.float32 |
+dtce           | Tensor       | (None,) | tf.float32 |
+f0_hz          | Tensor       |         | tf.float32 |
+final_angle    | Tensor       |         | tf.float32 |
+final_radius   | Tensor       |         | tf.float32 |
+focus_cm       | Tensor       |         | tf.float32 |
+harmonic       | Tensor       |         | tf.bool    |
+height         | Tensor       |         | tf.uint32  |
+initial_angle  | Tensor       |         | tf.float32 |
+initial_radius | Tensor       |         | tf.float32 |
+probe          | Tensor       |         | tf.string  |
+scanner        | Tensor       |         | tf.string  |
+target         | Tensor       |         | tf.string  |
+timestamp_id   | Tensor       |         | tf.uint32  |
+voltage        | Tensor       |         | tf.float32 |
+width          | Tensor       |         | tf.uint32  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

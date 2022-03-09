@@ -87,7 +87,7 @@ Split    | Examples
 `'dev'`  | 73,249
 `'test'` | 118,074
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -99,6 +99,18 @@ FeaturesDict({
     'simple_sentence_id': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature            | Class        | Shape | Dtype      | Description
+:----------------- | :----------- | :---- | :--------- | :----------
+                   | FeaturesDict |       |            |
+GLEU-score         | Tensor       |       | tf.float64 |
+alignment_label    | ClassLabel   |       | tf.int64   |
+normal_sentence    | Text         |       | tf.string  |
+normal_sentence_id | Text         |       | tf.string  |
+simple_sentence    | Text         |       | tf.string  |
+simple_sentence_id | Text         |       | tf.string  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -155,7 +167,7 @@ Split    | Examples
 :------- | -------:
 `'full'` | 488,332
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -163,6 +175,14 @@ FeaturesDict({
     'simple_sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+normal_sentence | Text         |       | tf.string |
+simple_sentence | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -220,7 +240,7 @@ Split    | Examples
 :------- | -------:
 `'full'` | 591,994
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -228,6 +248,14 @@ FeaturesDict({
     'simple_sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+normal_sentence | Text         |       | tf.string |
+simple_sentence | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -285,7 +313,7 @@ Split    | Examples
 :------- | -------:
 `'full'` | 483,801
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -293,6 +321,14 @@ FeaturesDict({
     'simple_sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+normal_sentence | Text         |       | tf.string |
+simple_sentence | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -350,7 +386,7 @@ Split      | Examples
 `'part_1'` | 125,059
 `'part_2'` | 13,036
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -383,6 +419,33 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                          | Class        | Shape | Dtype     | Description
+:----------------------------------------------- | :----------- | :---- | :-------- | :----------
+                                                 | FeaturesDict |       |           |
+example_id                                       | Text         |       | tf.string |
+normal                                           | FeaturesDict |       |           |
+normal/normal_article_content                    | Sequence     |       |           |
+normal/normal_article_content/normal_sentence    | Text         |       | tf.string |
+normal/normal_article_content/normal_sentence_id | Text         |       | tf.string |
+normal/normal_article_id                         | Tensor       |       | tf.int32  |
+normal/normal_article_title                      | Text         |       | tf.string |
+normal/normal_article_url                        | Text         |       | tf.string |
+paragraph_alignment                              | Sequence     |       |           |
+paragraph_alignment/normal_paragraph_id          | Text         |       | tf.string |
+paragraph_alignment/simple_paragraph_id          | Text         |       | tf.string |
+sentence_alignment                               | Sequence     |       |           |
+sentence_alignment/normal_sentence_id            | Text         |       | tf.string |
+sentence_alignment/simple_sentence_id            | Text         |       | tf.string |
+simple                                           | FeaturesDict |       |           |
+simple/simple_article_content                    | Sequence     |       |           |
+simple/simple_article_content/simple_sentence    | Text         |       | tf.string |
+simple/simple_article_content/simple_sentence_id | Text         |       | tf.string |
+simple/simple_article_id                         | Tensor       |       | tf.int32  |
+simple/simple_article_title                      | Text         |       | tf.string |
+simple/simple_article_url                        | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

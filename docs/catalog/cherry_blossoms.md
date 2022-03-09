@@ -59,7 +59,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,215
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -70,6 +70,17 @@ FeaturesDict({
     'year': tf.int32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype      | Description
+:--------- | :----------- | :---- | :--------- | :----------
+           | FeaturesDict |       |            |
+doy        | Tensor       |       | tf.float32 |
+temp       | Tensor       |       | tf.float32 |
+temp_lower | Tensor       |       | tf.float32 |
+temp_upper | Tensor       |       | tf.float32 |
+year       | Tensor       |       | tf.int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

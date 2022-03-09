@@ -62,7 +62,7 @@ Split          | Examples
 `'train'`      | 8,551
 `'validation'` | 1,043
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -71,6 +71,15 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype     | Description
+:------- | :----------- | :---- | :-------- | :----------
+         | FeaturesDict |       |           |
+idx      | Tensor       |       | tf.int32  |
+label    | ClassLabel   |       | tf.int64  |
+sentence | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -151,7 +160,7 @@ Split          | Examples
 `'train'`      | 67,349
 `'validation'` | 872
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -160,6 +169,15 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype     | Description
+:------- | :----------- | :---- | :-------- | :----------
+         | FeaturesDict |       |           |
+idx      | Tensor       |       | tf.int32  |
+label    | ClassLabel   |       | tf.int64  |
+sentence | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -241,7 +259,7 @@ Split          | Examples
 `'train'`      | 3,668
 `'validation'` | 408
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -251,6 +269,16 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype     | Description
+:-------- | :----------- | :---- | :-------- | :----------
+          | FeaturesDict |       |           |
+idx       | Tensor       |       | tf.int32  |
+label     | ClassLabel   |       | tf.int64  |
+sentence1 | Text         |       | tf.string |
+sentence2 | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -330,7 +358,7 @@ Split          | Examples
 `'train'`      | 363,846
 `'validation'` | 40,430
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -340,6 +368,16 @@ FeaturesDict({
     'question2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype     | Description
+:-------- | :----------- | :---- | :-------- | :----------
+          | FeaturesDict |       |           |
+idx       | Tensor       |       | tf.int32  |
+label     | ClassLabel   |       | tf.int64  |
+question1 | Text         |       | tf.string |
+question2 | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -421,7 +459,7 @@ Split          | Examples
 `'train'`      | 5,749
 `'validation'` | 1,500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -431,6 +469,16 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype      | Description
+:-------- | :----------- | :---- | :--------- | :----------
+          | FeaturesDict |       |            |
+idx       | Tensor       |       | tf.int32   |
+label     | Tensor       |       | tf.float32 |
+sentence1 | Text         |       | tf.string  |
+sentence2 | Text         |       | tf.string  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -520,7 +568,7 @@ Split                     | Examples
 `'validation_matched'`    | 9,815
 `'validation_mismatched'` | 9,832
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -530,6 +578,16 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype     | Description
+:--------- | :----------- | :---- | :-------- | :----------
+           | FeaturesDict |       |           |
+hypothesis | Text         |       | tf.string |
+idx        | Tensor       |       | tf.int32  |
+label      | ClassLabel   |       | tf.int64  |
+premise    | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -624,7 +682,7 @@ Split          | Examples
 `'test'`       | 9,847
 `'validation'` | 9,832
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -634,6 +692,16 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype     | Description
+:--------- | :----------- | :---- | :-------- | :----------
+           | FeaturesDict |       |           |
+hypothesis | Text         |       | tf.string |
+idx        | Tensor       |       | tf.int32  |
+label      | ClassLabel   |       | tf.int64  |
+premise    | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -728,7 +796,7 @@ Split          | Examples
 `'test'`       | 9,796
 `'validation'` | 9,815
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -738,6 +806,16 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype     | Description
+:--------- | :----------- | :---- | :-------- | :----------
+           | FeaturesDict |       |           |
+hypothesis | Text         |       | tf.string |
+idx        | Tensor       |       | tf.int32  |
+label      | ClassLabel   |       | tf.int64  |
+premise    | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -843,7 +921,7 @@ Split          | Examples
 `'train'`      | 104,743
 `'validation'` | 5,463
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -853,6 +931,16 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype     | Description
+:------- | :----------- | :---- | :-------- | :----------
+         | FeaturesDict |       |           |
+idx      | Tensor       |       | tf.int32  |
+label    | ClassLabel   |       | tf.int64  |
+question | Text         |       | tf.string |
+sentence | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -936,7 +1024,7 @@ Split          | Examples
 `'train'`      | 2,490
 `'validation'` | 277
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -946,6 +1034,16 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype     | Description
+:-------- | :----------- | :---- | :-------- | :----------
+          | FeaturesDict |       |           |
+idx       | Tensor       |       | tf.int32  |
+label     | ClassLabel   |       | tf.int64  |
+sentence1 | Text         |       | tf.string |
+sentence2 | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1068,7 +1166,7 @@ Split          | Examples
 `'train'`      | 635
 `'validation'` | 71
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1078,6 +1176,16 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype     | Description
+:-------- | :----------- | :---- | :-------- | :----------
+          | FeaturesDict |       |           |
+idx       | Tensor       |       | tf.int32  |
+label     | ClassLabel   |       | tf.int64  |
+sentence1 | Text         |       | tf.string |
+sentence2 | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1157,7 +1265,7 @@ Split    | Examples
 :------- | -------:
 `'test'` | 1,104
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1167,6 +1275,16 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype     | Description
+:--------- | :----------- | :---- | :-------- | :----------
+           | FeaturesDict |       |           |
+hypothesis | Text         |       | tf.string |
+idx        | Tensor       |       | tf.int32  |
+label      | ClassLabel   |       | tf.int64  |
+premise    | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -66,7 +66,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 480,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -85,6 +85,25 @@ FeaturesDict({
     'value_wall_hue': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape       | Dtype      | Description
+:---------------- | :----------- | :---------- | :--------- | :----------
+                  | FeaturesDict |             |            |
+image             | Image        | (64, 64, 3) | tf.uint8   |
+label_floor_hue   | ClassLabel   |             | tf.int64   |
+label_object_hue  | ClassLabel   |             | tf.int64   |
+label_orientation | ClassLabel   |             | tf.int64   |
+label_scale       | ClassLabel   |             | tf.int64   |
+label_shape       | ClassLabel   |             | tf.int64   |
+label_wall_hue    | ClassLabel   |             | tf.int64   |
+value_floor_hue   | Tensor       |             | tf.float32 |
+value_object_hue  | Tensor       |             | tf.float32 |
+value_orientation | Tensor       |             | tf.float32 |
+value_scale       | Tensor       |             | tf.float32 |
+value_shape       | Tensor       |             | tf.float32 |
+value_wall_hue    | Tensor       |             | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -75,7 +75,7 @@ Split     | Examples
 `'train'` | 443,596
 `'val'`   | 10,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -88,6 +88,19 @@ FeaturesDict({
     'utt': Sequence(Text(shape=(), dtype=tf.string)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class          | Shape   | Dtype     | Description
+:------ | :------------- | :------ | :-------- | :----------
+        | FeaturesDict   |         |           |
+date    | Text           |         | tf.string |
+id      | Text           |         | tf.string |
+program | Text           |         | tf.string |
+speaker | Sequence(Text) | (None,) | tf.string |
+summary | Text           |         | tf.string |
+url     | Text           |         | tf.string |
+utt     | Sequence(Text) | (None,) | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

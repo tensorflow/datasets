@@ -44,7 +44,7 @@ Split     | Examples
 `'test'`  | 2,032
 `'train'` | 3,778
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -53,6 +53,15 @@ FeaturesDict({
     'url': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class          | Shape   | Dtype     | Description
+:------- | :------------- | :------ | :-------- | :----------
+         | FeaturesDict   |         |           |
+answers  | Sequence(Text) | (None,) | tf.string |
+question | Text           |         | tf.string |
+url      | Text           |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

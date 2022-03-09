@@ -49,13 +49,20 @@ atmospheric reanalyses of the global climate. Copernicus Climate Change Service
 
 *   **Download size**: `Unknown size`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'field': Tensor(shape=(21, 21, 10, 9, 2), dtype=tf.float32),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape              | Dtype      | Description
+:------ | :----------- | :----------------- | :--------- | :----------
+        | FeaturesDict |                    |            |
+field   | Tensor       | (21, 21, 10, 9, 2) | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

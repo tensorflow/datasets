@@ -87,7 +87,7 @@ Split          | Examples
 
 *   **Dataset size**: `482.30 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -111,6 +111,28 @@ FeaturesDict({
     'video': Video(Image(shape=(480, 640, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                              | Class                 | Shape               | Dtype      | Description
+:----------------------------------- | :-------------------- | :------------------ | :--------- | :----------
+                                     | FeaturesDict          |                     |            |
+metadata                             | FeaturesDict          |                     |            |
+metadata/dataset                     | Tensor                |                     | tf.string  |
+metadata/height                      | Tensor                |                     | tf.int32   |
+metadata/neg_category_ids            | Tensor                | (None,)             | tf.int32   |
+metadata/not_exhaustive_category_ids | Tensor                | (None,)             | tf.int32   |
+metadata/num_frames                  | Tensor                |                     | tf.int32   |
+metadata/video_name                  | Tensor                |                     | tf.string  |
+metadata/width                       | Tensor                |                     | tf.int32   |
+tracks                               | Sequence              |                     |            |
+tracks/bboxes                        | Sequence(BBoxFeature) | (None, 4)           | tf.float32 |
+tracks/category                      | ClassLabel            |                     | tf.int64   |
+tracks/frames                        | Sequence(Tensor)      | (None,)             | tf.int32   |
+tracks/is_crowd                      | Tensor                |                     | tf.bool    |
+tracks/scale_category                | Tensor                |                     | tf.string  |
+tracks/track_id                      | Tensor                |                     | tf.int32   |
+video                                | Video(Image)          | (None, 480, 640, 3) | tf.uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -155,7 +177,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `171.24 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -179,6 +201,28 @@ FeaturesDict({
     'video': Video(Image(shape=(None, None, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                              | Class                 | Shape                 | Dtype      | Description
+:----------------------------------- | :-------------------- | :-------------------- | :--------- | :----------
+                                     | FeaturesDict          |                       |            |
+metadata                             | FeaturesDict          |                       |            |
+metadata/dataset                     | Tensor                |                       | tf.string  |
+metadata/height                      | Tensor                |                       | tf.int32   |
+metadata/neg_category_ids            | Tensor                | (None,)               | tf.int32   |
+metadata/not_exhaustive_category_ids | Tensor                | (None,)               | tf.int32   |
+metadata/num_frames                  | Tensor                |                       | tf.int32   |
+metadata/video_name                  | Tensor                |                       | tf.string  |
+metadata/width                       | Tensor                |                       | tf.int32   |
+tracks                               | Sequence              |                       |            |
+tracks/bboxes                        | Sequence(BBoxFeature) | (None, 4)             | tf.float32 |
+tracks/category                      | ClassLabel            |                       | tf.int64   |
+tracks/frames                        | Sequence(Tensor)      | (None,)               | tf.int32   |
+tracks/is_crowd                      | Tensor                |                       | tf.bool    |
+tracks/scale_category                | Tensor                |                       | tf.string  |
+tracks/track_id                      | Tensor                |                       | tf.int32   |
+video                                | Video(Image)          | (None, None, None, 3) | tf.uint8   |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

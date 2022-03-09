@@ -33,7 +33,7 @@ iterative, adversarial human-and-model-in-the-loop procedure.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -43,6 +43,16 @@ FeaturesDict({
     'uid': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype     | Description
+:--------- | :----------- | :---- | :-------- | :----------
+           | FeaturesDict |       |           |
+context    | Text         |       | tf.string |
+hypothesis | Text         |       | tf.string |
+label      | ClassLabel   |       | tf.int64  |
+uid        | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

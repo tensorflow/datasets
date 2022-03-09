@@ -56,7 +56,7 @@ Split              | Examples
 `'train_clean360'` | 116,500
 `'train_other500'` | 205,044
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -68,6 +68,18 @@ FeaturesDict({
     'text_original': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape   | Dtype     | Description
+:-------------- | :----------- | :------ | :-------- | :----------
+                | FeaturesDict |         |           |
+chapter_id      | Tensor       |         | tf.int64  |
+id              | Tensor       |         | tf.string |
+speaker_id      | Tensor       |         | tf.int64  |
+speech          | Audio        | (None,) | tf.int64  |
+text_normalized | Text         |         | tf.string |
+text_original   | Text         |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

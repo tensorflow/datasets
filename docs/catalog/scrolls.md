@@ -19,7 +19,7 @@
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -29,6 +29,16 @@ FeaturesDict({
     'pid': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape | Dtype     | Description
+:------ | :----------- | :---- | :-------- | :----------
+        | FeaturesDict |       |           |
+id      | Text         |       | tf.string |
+input   | Text         |       | tf.string |
+output  | Text         |       | tf.string |
+pid     | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

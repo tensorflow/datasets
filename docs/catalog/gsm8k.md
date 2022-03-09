@@ -44,7 +44,7 @@ Split              | Examples
 `'train'`          | 7,473
 `'train_socratic'` | 7,473
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -54,6 +54,16 @@ FeaturesDict({
     'short_answer': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class        | Shape | Dtype     | Description
+:----------- | :----------- | :---- | :-------- | :----------
+             | FeaturesDict |       |           |
+annotation   | Text         |       | tf.string |
+answer       | Text         |       | tf.string |
+question     | Text         |       | tf.string |
+short_answer | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

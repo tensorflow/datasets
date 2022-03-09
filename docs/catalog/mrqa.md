@@ -44,7 +44,7 @@ More information can be found at: `https://mrqa.github.io/2019/shared.html`.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -74,6 +74,31 @@ FeaturesDict({
     'subset': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                            | Class            | Shape   | Dtype     | Description
+:--------------------------------- | :--------------- | :------ | :-------- | :----------
+                                   | FeaturesDict     |         |           |
+answers                            | Sequence(Tensor) | (None,) | tf.string |
+context                            | Tensor           |         | tf.string |
+context_tokens                     | Sequence         |         |           |
+context_tokens/offsets             | Tensor           |         | tf.int32  |
+context_tokens/tokens              | Tensor           |         | tf.string |
+detected_answers                   | Sequence         |         |           |
+detected_answers/char_spans        | Sequence         |         |           |
+detected_answers/char_spans/end    | Tensor           |         | tf.int32  |
+detected_answers/char_spans/start  | Tensor           |         | tf.int32  |
+detected_answers/text              | Tensor           |         | tf.string |
+detected_answers/token_spans       | Sequence         |         |           |
+detected_answers/token_spans/end   | Tensor           |         | tf.int32  |
+detected_answers/token_spans/start | Tensor           |         | tf.int32  |
+qid                                | Tensor           |         | tf.string |
+question                           | Tensor           |         | tf.string |
+question_tokens                    | Sequence         |         |           |
+question_tokens/offsets            | Tensor           |         | tf.int32  |
+question_tokens/tokens             | Tensor           |         | tf.string |
+subset                             | Tensor           |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

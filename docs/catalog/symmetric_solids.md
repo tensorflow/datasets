@@ -83,7 +83,7 @@ Split     | Examples
 `'test'`  | 40,000
 `'train'` | 360,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -93,6 +93,16 @@ FeaturesDict({
     'rotations_equivalent': Tensor(shape=(None, 3, 3), dtype=tf.float32),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature              | Class        | Shape         | Dtype      | Description
+:------------------- | :----------- | :------------ | :--------- | :----------
+                     | FeaturesDict |               |            |
+image                | Image        | (224, 224, 3) | tf.uint8   |
+label_shape          | ClassLabel   |               | tf.int64   |
+rotation             | Tensor       | (3, 3)        | tf.float32 |
+rotations_equivalent | Tensor       | (None, 3, 3)  | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

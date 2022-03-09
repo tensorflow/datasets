@@ -74,7 +74,7 @@ Split          | Examples
 `'train'`      | 87,599
 `'validation'` | 10,570
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -88,6 +88,19 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature              | Class        | Shape | Dtype     | Description
+:------------------- | :----------- | :---- | :-------- | :----------
+                     | FeaturesDict |       |           |
+answers              | Sequence     |       |           |
+answers/answer_start | Tensor       |       | tf.int32  |
+answers/text         | Text         |       | tf.string |
+context              | Text         |       | tf.string |
+id                   | Tensor       |       | tf.string |
+question             | Text         |       | tf.string |
+title                | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -145,7 +158,7 @@ Split          | Examples
 `'train'`      | 130,319
 `'validation'` | 11,873
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -164,6 +177,23 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype     | Description
+:----------------------------- | :----------- | :---- | :-------- | :----------
+                               | FeaturesDict |       |           |
+answers                        | Sequence     |       |           |
+answers/answer_start           | Tensor       |       | tf.int32  |
+answers/text                   | Text         |       | tf.string |
+context                        | Text         |       | tf.string |
+id                             | Tensor       |       | tf.string |
+is_impossible                  | Tensor       |       | tf.bool   |
+plausible_answers              | Sequence     |       |           |
+plausible_answers/answer_start | Tensor       |       | tf.int32  |
+plausible_answers/text         | Text         |       | tf.string |
+question                       | Text         |       | tf.string |
+title                          | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

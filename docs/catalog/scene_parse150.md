@@ -50,7 +50,7 @@ Split     | Examples
 `'test'`  | 2,000
 `'train'` | 20,210
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -58,6 +58,14 @@ FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape           | Dtype    | Description
+:--------- | :----------- | :-------------- | :------- | :----------
+           | FeaturesDict |                 |          |
+annotation | Image        | (None, None, 3) | tf.uint8 |
+image      | Image        | (None, None, 3) | tf.uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

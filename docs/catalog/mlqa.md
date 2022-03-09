@@ -34,7 +34,7 @@ evaluating multilingual question answering performance. The dataset consists of
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -48,6 +48,19 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature              | Class        | Shape | Dtype     | Description
+:------------------- | :----------- | :---- | :-------- | :----------
+                     | FeaturesDict |       |           |
+answers              | Sequence     |       |           |
+answers/answer_start | Tensor       |       | tf.int32  |
+answers/text         | Text         |       | tf.string |
+context              | Text         |       | tf.string |
+id                   | Tensor       |       | tf.string |
+question             | Text         |       | tf.string |
+title                | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -56,7 +56,7 @@ Besides the reward of each step, this dataset includes the clipped reward
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -76,6 +76,25 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                | Class        | Shape       | Dtype      | Description
+:--------------------- | :----------- | :---------- | :--------- | :----------
+                       | FeaturesDict |             |            |
+checkpoint_id          | Tensor       |             | tf.int64   |
+clipped_episode_return | Tensor       |             | tf.float32 |
+episode_id             | Tensor       |             | tf.int64   |
+episode_return         | Tensor       |             | tf.float32 |
+steps                  | Dataset      |             |            |
+steps/action           | Tensor       |             | tf.int64   |
+steps/clipped_reward   | Tensor       |             | tf.float32 |
+steps/discount         | Tensor       |             | tf.float32 |
+steps/is_first         | Tensor       |             | tf.bool    |
+steps/is_last          | Tensor       |             | tf.bool    |
+steps/is_terminal      | Tensor       |             | tf.bool    |
+steps/observation      | Image        | (84, 84, 1) | tf.uint8   |
+steps/reward           | Tensor       |             | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

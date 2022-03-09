@@ -81,7 +81,7 @@ Split          | Examples
 
 *   **Download size**: `237.11 MiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -89,6 +89,14 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape     | Dtype    | Description
+:------ | :----------- | :-------- | :------- | :----------
+        | FeaturesDict |           |          |
+image   | Image        | (8, 8, 3) | tf.uint8 |
+label   | ClassLabel   |           | tf.int64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -138,7 +146,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `923.34 MiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -146,6 +154,14 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype    | Description
+:------ | :----------- | :---------- | :------- | :----------
+        | FeaturesDict |             |          |
+image   | Image        | (16, 16, 3) | tf.uint8 |
+label   | ClassLabel   |             | tf.int64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -195,7 +211,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `3.46 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -203,6 +219,14 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype    | Description
+:------ | :----------- | :---------- | :------- | :----------
+        | FeaturesDict |             |          |
+image   | Image        | (32, 32, 3) | tf.uint8 |
+label   | ClassLabel   |             | tf.int64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -252,7 +276,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `13.13 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -260,6 +284,14 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype    | Description
+:------ | :----------- | :---------- | :------- | :----------
+        | FeaturesDict |             |          |
+image   | Image        | (64, 64, 3) | tf.uint8 |
+label   | ClassLabel   |             | tf.int64 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

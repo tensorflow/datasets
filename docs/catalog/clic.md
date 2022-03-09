@@ -55,13 +55,20 @@ Split          | Examples
 `'train'`      | 1,633
 `'validation'` | 102
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype    | Description
+:------ | :----------- | :-------------- | :------- | :----------
+        | FeaturesDict |                 |          |
+image   | Image        | (None, None, 3) | tf.uint8 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

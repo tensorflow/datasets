@@ -48,7 +48,7 @@ research lab, Jadavpur University, India.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -56,6 +56,14 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype    | Description
+:------ | :----------- | :---------- | :------- | :----------
+        | FeaturesDict |             |          |
+image   | Image        | (32, 32, 3) | tf.uint8 |
+label   | ClassLabel   |             | tf.int64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

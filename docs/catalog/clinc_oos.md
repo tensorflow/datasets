@@ -54,7 +54,7 @@ Split              | Examples
 `'validation'`     | 3,000
 `'validation_oos'` | 100
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -65,6 +65,17 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature     | Class        | Shape | Dtype     | Description
+:---------- | :----------- | :---- | :-------- | :----------
+            | FeaturesDict |       |           |
+domain      | Tensor       |       | tf.int32  |
+domain_name | Text         |       | tf.string |
+intent      | Tensor       |       | tf.int32  |
+intent_name | Text         |       | tf.string |
+text        | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -28,7 +28,7 @@ at 16kHz. It contains about 118 hours of speech.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -39,6 +39,17 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape   | Dtype     | Description
+:--------- | :----------- | :------ | :-------- | :----------
+           | FeaturesDict |         |           |
+gender     | ClassLabel   |         | tf.int64  |
+id         | Tensor       |         | tf.string |
+speaker_id | Tensor       |         | tf.string |
+speech     | Audio        | (None,) | tf.int64  |
+text       | Text         |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

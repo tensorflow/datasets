@@ -51,7 +51,7 @@ while 1 indicates the pair is a paraphrase.
 
 *   **Download size**: `57.47 MiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -60,6 +60,15 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype     | Description
+:-------- | :----------- | :---- | :-------- | :----------
+          | FeaturesDict |       |           |
+label     | ClassLabel   |       | tf.int64  |
+sentence1 | Text         |       | tf.string |
+sentence2 | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

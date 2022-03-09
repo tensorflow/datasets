@@ -69,7 +69,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 50
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -88,6 +88,23 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype      | Description
+:---------------- | :----------- | :---- | :--------- | :----------
+                  | FeaturesDict |       |            |
+steps             | Dataset      |       |            |
+steps/action      | Tensor       | (24,) | tf.float32 |
+steps/discount    | Tensor       |       | tf.float32 |
+steps/infos       | FeaturesDict |       |            |
+steps/infos/qpos  | Tensor       | (30,) | tf.float32 |
+steps/infos/qvel  | Tensor       | (30,) | tf.float32 |
+steps/is_first    | Tensor       |       | tf.bool    |
+steps/is_last     | Tensor       |       | tf.bool    |
+steps/is_terminal | Tensor       |       | tf.bool    |
+steps/observation | Tensor       | (45,) | tf.float32 |
+steps/reward      | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -145,7 +162,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 5,023
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -164,6 +181,23 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype      | Description
+:---------------- | :----------- | :---- | :--------- | :----------
+                  | FeaturesDict |       |            |
+steps             | Dataset      |       |            |
+steps/action      | Tensor       | (24,) | tf.float32 |
+steps/discount    | Tensor       |       | tf.float64 |
+steps/infos       | FeaturesDict |       |            |
+steps/infos/qpos  | Tensor       | (30,) | tf.float64 |
+steps/infos/qvel  | Tensor       | (30,) | tf.float64 |
+steps/is_first    | Tensor       |       | tf.bool    |
+steps/is_last     | Tensor       |       | tf.bool    |
+steps/is_terminal | Tensor       |       | tf.bool    |
+steps/observation | Tensor       | (45,) | tf.float64 |
+steps/reward      | Tensor       |       | tf.float64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -221,7 +255,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 5,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -242,6 +276,25 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                   | Class        | Shape | Dtype      | Description
+:------------------------ | :----------- | :---- | :--------- | :----------
+                          | FeaturesDict |       |            |
+steps                     | Dataset      |       |            |
+steps/action              | Tensor       | (24,) | tf.float32 |
+steps/discount            | Tensor       |       | tf.float32 |
+steps/infos               | FeaturesDict |       |            |
+steps/infos/action_logstd | Tensor       | (24,) | tf.float32 |
+steps/infos/action_mean   | Tensor       | (24,) | tf.float32 |
+steps/infos/qpos          | Tensor       | (30,) | tf.float32 |
+steps/infos/qvel          | Tensor       | (30,) | tf.float32 |
+steps/is_first            | Tensor       |       | tf.bool    |
+steps/is_last             | Tensor       |       | tf.bool    |
+steps/is_terminal         | Tensor       |       | tf.bool    |
+steps/observation         | Tensor       | (45,) | tf.float32 |
+steps/reward              | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -299,7 +352,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 25
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -319,6 +372,24 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                   | Class        | Shape | Dtype      | Description
+:------------------------ | :----------- | :---- | :--------- | :----------
+                          | FeaturesDict |       |            |
+steps                     | Dataset      |       |            |
+steps/action              | Tensor       | (24,) | tf.float32 |
+steps/discount            | Tensor       |       | tf.float32 |
+steps/infos               | FeaturesDict |       |            |
+steps/infos/desired_orien | Tensor       | (4,)  | tf.float32 |
+steps/infos/qpos          | Tensor       | (30,) | tf.float32 |
+steps/infos/qvel          | Tensor       | (30,) | tf.float32 |
+steps/is_first            | Tensor       |       | tf.bool    |
+steps/is_last             | Tensor       |       | tf.bool    |
+steps/is_terminal         | Tensor       |       | tf.bool    |
+steps/observation         | Tensor       | (45,) | tf.float32 |
+steps/reward              | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -376,7 +447,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 3,755
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -413,6 +484,37 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape      | Dtype      | Description
+:------------------------- | :----------- | :--------- | :--------- | :----------
+                           | FeaturesDict |            |            |
+algorithm                  | Tensor       |            | tf.string  |
+policy                     | FeaturesDict |            |            |
+policy/fc0                 | FeaturesDict |            |            |
+policy/fc0/bias            | Tensor       | (256,)     | tf.float32 |
+policy/fc0/weight          | Tensor       | (45, 256)  | tf.float32 |
+policy/fc1                 | FeaturesDict |            |            |
+policy/fc1/bias            | Tensor       | (256,)     | tf.float32 |
+policy/fc1/weight          | Tensor       | (256, 256) | tf.float32 |
+policy/last_fc             | FeaturesDict |            |            |
+policy/last_fc/bias        | Tensor       | (24,)      | tf.float32 |
+policy/last_fc/weight      | Tensor       | (256, 24)  | tf.float32 |
+policy/nonlinearity        | Tensor       |            | tf.string  |
+policy/output_distribution | Tensor       |            | tf.string  |
+steps                      | Dataset      |            |            |
+steps/action               | Tensor       | (24,)      | tf.float32 |
+steps/discount             | Tensor       |            | tf.float32 |
+steps/infos                | FeaturesDict |            |            |
+steps/infos/desired_orien  | Tensor       | (4,)       | tf.float32 |
+steps/infos/qpos           | Tensor       | (30,)      | tf.float32 |
+steps/infos/qvel           | Tensor       | (30,)      | tf.float32 |
+steps/is_first             | Tensor       |            | tf.bool    |
+steps/is_last              | Tensor       |            | tf.bool    |
+steps/is_terminal          | Tensor       |            | tf.bool    |
+steps/observation          | Tensor       | (45,)      | tf.float32 |
+steps/reward               | Tensor       |            | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -467,7 +569,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 5,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -510,6 +612,42 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                       | Class        | Shape    | Dtype      | Description
+:---------------------------- | :----------- | :------- | :--------- | :----------
+                              | FeaturesDict |          |            |
+algorithm                     | Tensor       |          | tf.string  |
+policy                        | FeaturesDict |          |            |
+policy/fc0                    | FeaturesDict |          |            |
+policy/fc0/bias               | Tensor       | (64,)    | tf.float32 |
+policy/fc0/weight             | Tensor       | (64, 45) | tf.float32 |
+policy/fc1                    | FeaturesDict |          |            |
+policy/fc1/bias               | Tensor       | (64,)    | tf.float32 |
+policy/fc1/weight             | Tensor       | (64, 64) | tf.float32 |
+policy/last_fc                | FeaturesDict |          |            |
+policy/last_fc/bias           | Tensor       | (24,)    | tf.float32 |
+policy/last_fc/weight         | Tensor       | (24, 64) | tf.float32 |
+policy/last_fc_log_std        | FeaturesDict |          |            |
+policy/last_fc_log_std/bias   | Tensor       | (24,)    | tf.float32 |
+policy/last_fc_log_std/weight | Tensor       | (24, 64) | tf.float32 |
+policy/nonlinearity           | Tensor       |          | tf.string  |
+policy/output_distribution    | Tensor       |          | tf.string  |
+steps                         | Dataset      |          |            |
+steps/action                  | Tensor       | (24,)    | tf.float32 |
+steps/discount                | Tensor       |          | tf.float32 |
+steps/infos                   | FeaturesDict |          |            |
+steps/infos/action_log_std    | Tensor       | (24,)    | tf.float32 |
+steps/infos/action_mean       | Tensor       | (24,)    | tf.float32 |
+steps/infos/desired_orien     | Tensor       | (4,)     | tf.float32 |
+steps/infos/qpos              | Tensor       | (30,)    | tf.float32 |
+steps/infos/qvel              | Tensor       | (30,)    | tf.float32 |
+steps/is_first                | Tensor       |          | tf.bool    |
+steps/is_last                 | Tensor       |          | tf.bool    |
+steps/is_terminal             | Tensor       |          | tf.bool    |
+steps/observation             | Tensor       | (45,)    | tf.float32 |
+steps/reward                  | Tensor       |          | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

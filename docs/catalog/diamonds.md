@@ -53,7 +53,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 53,940
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -71,6 +71,23 @@ FeaturesDict({
     'price': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature          | Class        | Shape | Dtype      | Description
+:--------------- | :----------- | :---- | :--------- | :----------
+                 | FeaturesDict |       |            |
+features         | FeaturesDict |       |            |
+features/carat   | Tensor       |       | tf.float32 |
+features/clarity | ClassLabel   |       | tf.int64   |
+features/color   | ClassLabel   |       | tf.int64   |
+features/cut     | ClassLabel   |       | tf.int64   |
+features/depth   | Tensor       |       | tf.float32 |
+features/table   | Tensor       |       | tf.float32 |
+features/x       | Tensor       |       | tf.float32 |
+features/y       | Tensor       |       | tf.float32 |
+features/z       | Tensor       |       | tf.float32 |
+price            | Tensor       |       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

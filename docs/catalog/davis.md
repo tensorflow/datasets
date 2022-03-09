@@ -38,7 +38,7 @@ Split          | Examples
 `'train'`      | 60
 `'validation'` | 30
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -52,6 +52,18 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature             | Class        | Shape           | Dtype     | Description
+:------------------ | :----------- | :-------------- | :-------- | :----------
+                    | FeaturesDict |                 |           |
+metadata            | FeaturesDict |                 |           |
+metadata/num_frames | Tensor       |                 | tf.int64  |
+metadata/video_name | Tensor       |                 | tf.string |
+video               | Sequence     |                 |           |
+video/frames        | Image        | (None, None, 3) | tf.uint8  |
+video/segmentations | Image        | (None, None, 1) | tf.uint8  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

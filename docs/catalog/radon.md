@@ -47,7 +47,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 12,573
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -83,6 +83,41 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype      | Description
+:---------------- | :----------- | :---- | :--------- | :----------
+                  | FeaturesDict |       |            |
+activity          | Tensor       |       | tf.float32 |
+features          | FeaturesDict |       |            |
+features/Uppm     | Tensor       |       | tf.float32 |
+features/adjwt    | Tensor       |       | tf.float32 |
+features/basement | Tensor       |       | tf.string  |
+features/cntyfips | Tensor       |       | tf.int32   |
+features/county   | Tensor       |       | tf.string  |
+features/dupflag  | Tensor       |       | tf.int32   |
+features/floor    | Tensor       |       | tf.int32   |
+features/idnum    | Tensor       |       | tf.int32   |
+features/lat      | Tensor       |       | tf.float32 |
+features/lon      | Tensor       |       | tf.float32 |
+features/pcterr   | Tensor       |       | tf.float32 |
+features/region   | Tensor       |       | tf.int32   |
+features/rep      | Tensor       |       | tf.int32   |
+features/room     | Tensor       |       | tf.int32   |
+features/startdt  | Tensor       |       | tf.int32   |
+features/starttm  | Tensor       |       | tf.int32   |
+features/state    | Tensor       |       | tf.string  |
+features/state2   | Tensor       |       | tf.string  |
+features/stfips   | Tensor       |       | tf.int32   |
+features/stopdt   | Tensor       |       | tf.int32   |
+features/stoptm   | Tensor       |       | tf.int32   |
+features/stratum  | Tensor       |       | tf.int32   |
+features/typebldg | Tensor       |       | tf.int32   |
+features/wave     | Tensor       |       | tf.int32   |
+features/windoor  | Tensor       |       | tf.string  |
+features/zip      | Tensor       |       | tf.int32   |
+features/zipflag  | Tensor       |       | tf.int32   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

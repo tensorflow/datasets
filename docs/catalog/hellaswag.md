@@ -57,7 +57,7 @@ Split                          | Examples
 `'validation_ood_activitynet'` | 1,434
 `'validation_ood_wikihow'`     | 3,607
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -69,6 +69,18 @@ FeaturesDict({
     'split_type': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class          | Shape   | Dtype     | Description
+:------------- | :------------- | :------ | :-------- | :----------
+               | FeaturesDict   |         |           |
+activity_label | Text           |         | tf.string |
+context        | Text           |         | tf.string |
+endings        | Sequence(Text) | (None,) | tf.string |
+label          | Tensor         |         | tf.int32  |
+source_id      | Text           |         | tf.string |
+split_type     | Text           |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

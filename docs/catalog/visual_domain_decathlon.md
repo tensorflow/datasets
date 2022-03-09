@@ -72,7 +72,7 @@ Split          | Examples
 `'train'`      | 3,334
 `'validation'` | 3,333
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -81,6 +81,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -145,7 +154,7 @@ Split          | Examples
 `'train'`      | 40,000
 `'validation'` | 10,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -154,6 +163,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -218,7 +236,7 @@ Split          | Examples
 `'train'`      | 23,520
 `'validation'` | 5,880
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -227,6 +245,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -291,7 +318,7 @@ Split          | Examples
 `'train'`      | 1,880
 `'validation'` | 1,880
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -300,6 +327,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -364,7 +400,7 @@ Split          | Examples
 `'train'`      | 31,367
 `'validation'` | 7,842
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -373,6 +409,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -437,7 +482,7 @@ Split          | Examples
 `'train'`      | 1,232,167
 `'validation'` | 49,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -446,6 +491,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -510,7 +564,7 @@ Split          | Examples
 `'train'`      | 17,853
 `'validation'` | 6,492
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -519,6 +573,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -583,7 +646,7 @@ Split          | Examples
 `'train'`      | 47,217
 `'validation'` | 26,040
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -592,6 +655,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -656,7 +728,7 @@ Split          | Examples
 `'train'`      | 7,585
 `'validation'` | 1,952
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -665,6 +737,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -729,7 +810,7 @@ Split          | Examples
 `'train'`      | 1,020
 `'validation'` | 1,020
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -738,6 +819,15 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+image   | Image        | (None, None, 3) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
+name    | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

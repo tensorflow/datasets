@@ -42,7 +42,7 @@ Split     | Examples
 `'test'`  | 232
 `'train'` | 300
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -62,6 +62,27 @@ FeaturesDict({
     'writer_labels': Sequence(tf.int32),
 })
 ```
+
+*   **Feature documentation**:
+
+| Feature       | Class                    | Shape   | Dtype     | Description |
+| :------------ | :----------------------- | :------ | :-------- | :---------- |
+|               | FeaturesDict             |         |           |             |
+| article       | Text                     |         | tf.string |             |
+| article_id    | Text                     |         | tf.string |             |
+| difficults    | Sequence(Tensor)         | (None,) | tf.bool   |             |
+| gold_labels   | Sequence(Tensor)         | (None,) | tf.int32  |             |
+| options       | Sequence(Sequence(Text)) | (None,  | tf.string |             |
+:               :                          : None)   :           :             :
+| question_ids  | Sequence(Text)           | (None,) | tf.string |             |
+| questions     | Sequence(Text)           | (None,) | tf.string |             |
+| set_unique_id | Text                     |         | tf.string |             |
+| source        | Text                     |         | tf.string |             |
+| title         | Text                     |         | tf.string |             |
+| topic         | Text                     |         | tf.string |             |
+| url           | Text                     |         | tf.string |             |
+| writer_id     | Text                     |         | tf.string |             |
+| writer_labels | Sequence(Tensor)         | (None,) | tf.int32  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

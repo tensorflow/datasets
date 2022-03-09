@@ -57,7 +57,7 @@ authors, publish_time, journal, url.
 Split | Examples
 :---- | -------:
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -77,6 +77,25 @@ FeaturesDict({
     'url': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype     | Description
+:---------------- | :----------- | :---- | :-------- | :----------
+                  | FeaturesDict |       |           |
+abstract          | Tensor       |       | tf.string |
+authors           | Tensor       |       | tf.string |
+body_text         | Sequence     |       |           |
+body_text/section | Tensor       |       | tf.string |
+body_text/text    | Tensor       |       | tf.string |
+doi               | Tensor       |       | tf.string |
+journal           | Tensor       |       | tf.string |
+license           | Tensor       |       | tf.string |
+publish_time      | Tensor       |       | tf.string |
+sha               | Tensor       |       | tf.string |
+source_x          | Tensor       |       | tf.string |
+title             | Tensor       |       | tf.string |
+url               | Tensor       |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

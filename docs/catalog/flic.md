@@ -53,7 +53,7 @@ Split     | Examples
 `'test'`  | 1,016
 `'train'` | 3,987
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -66,6 +66,19 @@ FeaturesDict({
     'ycoords': Sequence(tf.float64),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class            | Shape         | Dtype      | Description
+:-------------- | :--------------- | :------------ | :--------- | :----------
+                | FeaturesDict     |               |            |
+currframe       | Tensor           |               | tf.float64 |
+image           | Image            | (480, 720, 3) | tf.uint8   |
+moviename       | Text             |               | tf.string  |
+poselet_hit_idx | Sequence(Tensor) | (None,)       | tf.uint16  |
+torsobox        | BBoxFeature      | (4,)          | tf.float32 |
+xcoords         | Sequence(Tensor) | (None,)       | tf.float64 |
+ycoords         | Sequence(Tensor) | (None,)       | tf.float64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

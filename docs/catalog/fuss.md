@@ -59,7 +59,7 @@ Split          | Examples
 `'train'`      | 20,000
 `'validation'` | 1,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -77,6 +77,22 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                     | Class        | Shape     | Dtype      | Description
+:-------------------------- | :----------- | :-------- | :--------- | :----------
+                            | FeaturesDict |           |            |
+id                          | Tensor       |           | tf.string  |
+jams                        | Tensor       |           | tf.string  |
+mixture_audio               | Audio        | (160000,) | tf.int16   |
+segments                    | Sequence     |           |            |
+segments/end_time_seconds   | Tensor       |           | tf.float32 |
+segments/label              | Tensor       |           | tf.string  |
+segments/start_time_seconds | Tensor       |           | tf.float32 |
+sources                     | Sequence     |           |            |
+sources/audio               | Audio        | (160000,) | tf.int16   |
+sources/label               | ClassLabel   |           | tf.int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

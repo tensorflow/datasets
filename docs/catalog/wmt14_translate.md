@@ -92,7 +92,7 @@ Split          | Examples
 `'train'`      | 15,786,979
 `'validation'` | 3,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -100,6 +100,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+cs      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -156,7 +164,7 @@ Split          | Examples
 `'train'`      | 4,508,785
 `'validation'` | 3,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -164,6 +172,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+de      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -220,7 +236,7 @@ Split          | Examples
 `'train'`      | 40,836,876
 `'validation'` | 3,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -228,6 +244,14 @@ Translation({
     'fr': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+fr      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -284,7 +308,7 @@ Split          | Examples
 `'train'`      | 313,748
 `'validation'` | 520
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -292,6 +316,14 @@ Translation({
     'hi': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+hi      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -348,7 +380,7 @@ Split          | Examples
 `'train'`      | 2,486,965
 `'validation'` | 3,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -356,6 +388,14 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+ru      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

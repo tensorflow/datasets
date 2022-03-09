@@ -58,7 +58,7 @@ Split | Examples
 
 *   **Config description**: Language Code: en
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -73,11 +73,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/de
 
 *   **Config description**: Language Code: de
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -92,11 +106,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/fr
 
 *   **Config description**: Language Code: fr
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -111,11 +139,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/cy
 
 *   **Config description**: Language Code: cy
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -130,11 +172,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/br
 
 *   **Config description**: Language Code: br
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -148,12 +204,26 @@ FeaturesDict({
     'voice': Audio(shape=(None,), dtype=tf.int64),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
 
 ## common_voice/cv
 
 *   **Config description**: Language Code: cv
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -167,12 +237,26 @@ FeaturesDict({
     'voice': Audio(shape=(None,), dtype=tf.int64),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
 
 ## common_voice/tr
 
 *   **Config description**: Language Code: tr
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -187,11 +271,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/tt
 
 *   **Config description**: Language Code: tt
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -206,11 +304,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/ky
 
 *   **Config description**: Language Code: ky
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -225,11 +337,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/ga-IE
 
 *   **Config description**: Language Code: ga-IE
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -244,11 +370,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/kab
 
 *   **Config description**: Language Code: kab
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -263,11 +403,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/ca
 
 *   **Config description**: Language Code: ca
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -282,11 +436,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/zh-TW
 
 *   **Config description**: Language Code: zh-TW
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -300,12 +468,26 @@ FeaturesDict({
     'voice': Audio(shape=(None,), dtype=tf.int64),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
 
 ## common_voice/sl
 
 *   **Config description**: Language Code: sl
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -319,12 +501,26 @@ FeaturesDict({
     'voice': Audio(shape=(None,), dtype=tf.int64),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
 
 ## common_voice/it
 
 *   **Config description**: Language Code: it
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -339,11 +535,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/nl
 
 *   **Config description**: Language Code: nl
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -358,11 +568,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/cnh
 
 *   **Config description**: Language Code: cnh
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -377,11 +601,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |
+
 ## common_voice/eo
 
 *   **Config description**: Language Code: eo
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -395,3 +633,17 @@ FeaturesDict({
     'voice': Audio(shape=(None,), dtype=tf.int64),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape   | Dtype     | Description
+:-------- | :----------- | :------ | :-------- | :----------
+          | FeaturesDict |         |           |
+accent    | ClassLabel   |         | tf.int64  |
+age       | Text         |         | tf.string |
+client_id | Text         |         | tf.string |
+downvotes | Tensor       |         | tf.int32  |
+gender    | ClassLabel   |         | tf.int64  |
+sentence  | Text         |         | tf.string |
+upvotes   | Tensor       |         | tf.int32  |
+voice     | Audio        | (None,) | tf.int64  |

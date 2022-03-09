@@ -58,7 +58,7 @@ Split          | Examples
 `'train'`      | 1,743,042
 `'validation'` | 41,620
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -86,6 +86,31 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                      | Class        | Shape           | Dtype      | Description
+:--------------------------- | :----------- | :-------------- | :--------- | :----------
+                             | FeaturesDict |                 |            |
+bobjects                     | Sequence     |                 |            |
+bobjects/bbox                | BBoxFeature  | (4,)            | tf.float32 |
+bobjects/is_depiction        | Tensor       |                 | tf.int8    |
+bobjects/is_group_of         | Tensor       |                 | tf.int8    |
+bobjects/is_inside           | Tensor       |                 | tf.int8    |
+bobjects/is_occluded         | Tensor       |                 | tf.int8    |
+bobjects/is_truncated        | Tensor       |                 | tf.int8    |
+bobjects/label               | ClassLabel   |                 | tf.int64   |
+bobjects/source              | ClassLabel   |                 | tf.int64   |
+image                        | Image        | (None, None, 3) | tf.uint8   |
+image/filename               | Text         |                 | tf.string  |
+objects                      | Sequence     |                 |            |
+objects/confidence           | Tensor       |                 | tf.int32   |
+objects/label                | ClassLabel   |                 | tf.int64   |
+objects/source               | ClassLabel   |                 | tf.int64   |
+objects_trainable            | Sequence     |                 |            |
+objects_trainable/confidence | Tensor       |                 | tf.int32   |
+objects_trainable/label      | ClassLabel   |                 | tf.int64   |
+objects_trainable/source     | ClassLabel   |                 | tf.int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

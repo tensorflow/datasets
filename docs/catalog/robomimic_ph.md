@@ -71,7 +71,7 @@ Split     | Examples
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -109,6 +109,42 @@ FeaturesDict({
     'valid': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                | Class        | Shape | Dtype      | Description
+:------------------------------------- | :----------- | :---- | :--------- | :----------
+                                       | FeaturesDict |       |            |
+20_percent                             | Tensor       |       | tf.bool    |
+20_percent_train                       | Tensor       |       | tf.bool    |
+20_percent_valid                       | Tensor       |       | tf.bool    |
+50_percent                             | Tensor       |       | tf.bool    |
+50_percent_train                       | Tensor       |       | tf.bool    |
+50_percent_valid                       | Tensor       |       | tf.bool    |
+episode_id                             | Tensor       |       | tf.string  |
+horizon                                | Tensor       |       | tf.int32   |
+steps                                  | Dataset      |       |            |
+steps/action                           | Tensor       | (7,)  | tf.float64 |
+steps/discount                         | Tensor       |       | tf.int32   |
+steps/is_first                         | Tensor       |       | tf.bool    |
+steps/is_last                          | Tensor       |       | tf.bool    |
+steps/is_terminal                      | Tensor       |       | tf.bool    |
+steps/observation                      | FeaturesDict |       |            |
+steps/observation/object               | Tensor       | (10,) | tf.float64 |
+steps/observation/robot0_eef_pos       | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_eef_quat      | Tensor       | (4,)  | tf.float64 |
+steps/observation/robot0_eef_vel_ang   | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_eef_vel_lin   | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_gripper_qpos  | Tensor       | (2,)  | tf.float64 |
+steps/observation/robot0_gripper_qvel  | Tensor       | (2,)  | tf.float64 |
+steps/observation/robot0_joint_pos     | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_pos_cos | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_pos_sin | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_vel     | Tensor       | (7,)  | tf.float64 |
+steps/reward                           | Tensor       |       | tf.float64 |
+steps/states                           | Tensor       | (32,) | tf.float64 |
+train                                  | Tensor       |       | tf.bool    |
+valid                                  | Tensor       |       | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -157,7 +193,7 @@ dataButton.addEventListener('click', async () => {
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -197,6 +233,44 @@ FeaturesDict({
     'valid': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                    | Class        | Shape       | Dtype      | Description
+:----------------------------------------- | :----------- | :---------- | :--------- | :----------
+                                           | FeaturesDict |             |            |
+20_percent                                 | Tensor       |             | tf.bool    |
+20_percent_train                           | Tensor       |             | tf.bool    |
+20_percent_valid                           | Tensor       |             | tf.bool    |
+50_percent                                 | Tensor       |             | tf.bool    |
+50_percent_train                           | Tensor       |             | tf.bool    |
+50_percent_valid                           | Tensor       |             | tf.bool    |
+episode_id                                 | Tensor       |             | tf.string  |
+horizon                                    | Tensor       |             | tf.int32   |
+steps                                      | Dataset      |             |            |
+steps/action                               | Tensor       | (7,)        | tf.float64 |
+steps/discount                             | Tensor       |             | tf.int32   |
+steps/is_first                             | Tensor       |             | tf.bool    |
+steps/is_last                              | Tensor       |             | tf.bool    |
+steps/is_terminal                          | Tensor       |             | tf.bool    |
+steps/observation                          | FeaturesDict |             |            |
+steps/observation/agentview_image          | Image        | (84, 84, 3) | tf.uint8   |
+steps/observation/object                   | Tensor       | (10,)       | tf.float64 |
+steps/observation/robot0_eef_pos           | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eef_quat          | Tensor       | (4,)        | tf.float64 |
+steps/observation/robot0_eef_vel_ang       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eef_vel_lin       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eye_in_hand_image | Image        | (84, 84, 3) | tf.uint8   |
+steps/observation/robot0_gripper_qpos      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot0_gripper_qvel      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot0_joint_pos         | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_pos_cos     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_pos_sin     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_vel         | Tensor       | (7,)        | tf.float64 |
+steps/reward                               | Tensor       |             | tf.float64 |
+steps/states                               | Tensor       | (32,)       | tf.float64 |
+train                                      | Tensor       |             | tf.bool    |
+valid                                      | Tensor       |             | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -245,7 +319,7 @@ dataButton.addEventListener('click', async () => {
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -283,6 +357,42 @@ FeaturesDict({
     'valid': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                | Class        | Shape | Dtype      | Description
+:------------------------------------- | :----------- | :---- | :--------- | :----------
+                                       | FeaturesDict |       |            |
+20_percent                             | Tensor       |       | tf.bool    |
+20_percent_train                       | Tensor       |       | tf.bool    |
+20_percent_valid                       | Tensor       |       | tf.bool    |
+50_percent                             | Tensor       |       | tf.bool    |
+50_percent_train                       | Tensor       |       | tf.bool    |
+50_percent_valid                       | Tensor       |       | tf.bool    |
+episode_id                             | Tensor       |       | tf.string  |
+horizon                                | Tensor       |       | tf.int32   |
+steps                                  | Dataset      |       |            |
+steps/action                           | Tensor       | (7,)  | tf.float64 |
+steps/discount                         | Tensor       |       | tf.int32   |
+steps/is_first                         | Tensor       |       | tf.bool    |
+steps/is_last                          | Tensor       |       | tf.bool    |
+steps/is_terminal                      | Tensor       |       | tf.bool    |
+steps/observation                      | FeaturesDict |       |            |
+steps/observation/object               | Tensor       | (14,) | tf.float64 |
+steps/observation/robot0_eef_pos       | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_eef_quat      | Tensor       | (4,)  | tf.float64 |
+steps/observation/robot0_eef_vel_ang   | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_eef_vel_lin   | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_gripper_qpos  | Tensor       | (2,)  | tf.float64 |
+steps/observation/robot0_gripper_qvel  | Tensor       | (2,)  | tf.float64 |
+steps/observation/robot0_joint_pos     | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_pos_cos | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_pos_sin | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_vel     | Tensor       | (7,)  | tf.float64 |
+steps/reward                           | Tensor       |       | tf.float64 |
+steps/states                           | Tensor       | (71,) | tf.float64 |
+train                                  | Tensor       |       | tf.bool    |
+valid                                  | Tensor       |       | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -331,7 +441,7 @@ dataButton.addEventListener('click', async () => {
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -371,6 +481,44 @@ FeaturesDict({
     'valid': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                    | Class        | Shape       | Dtype      | Description
+:----------------------------------------- | :----------- | :---------- | :--------- | :----------
+                                           | FeaturesDict |             |            |
+20_percent                                 | Tensor       |             | tf.bool    |
+20_percent_train                           | Tensor       |             | tf.bool    |
+20_percent_valid                           | Tensor       |             | tf.bool    |
+50_percent                                 | Tensor       |             | tf.bool    |
+50_percent_train                           | Tensor       |             | tf.bool    |
+50_percent_valid                           | Tensor       |             | tf.bool    |
+episode_id                                 | Tensor       |             | tf.string  |
+horizon                                    | Tensor       |             | tf.int32   |
+steps                                      | Dataset      |             |            |
+steps/action                               | Tensor       | (7,)        | tf.float64 |
+steps/discount                             | Tensor       |             | tf.int32   |
+steps/is_first                             | Tensor       |             | tf.bool    |
+steps/is_last                              | Tensor       |             | tf.bool    |
+steps/is_terminal                          | Tensor       |             | tf.bool    |
+steps/observation                          | FeaturesDict |             |            |
+steps/observation/agentview_image          | Image        | (84, 84, 3) | tf.uint8   |
+steps/observation/object                   | Tensor       | (14,)       | tf.float64 |
+steps/observation/robot0_eef_pos           | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eef_quat          | Tensor       | (4,)        | tf.float64 |
+steps/observation/robot0_eef_vel_ang       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eef_vel_lin       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eye_in_hand_image | Image        | (84, 84, 3) | tf.uint8   |
+steps/observation/robot0_gripper_qpos      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot0_gripper_qvel      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot0_joint_pos         | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_pos_cos     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_pos_sin     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_vel         | Tensor       | (7,)        | tf.float64 |
+steps/reward                               | Tensor       |             | tf.float64 |
+steps/states                               | Tensor       | (71,)       | tf.float64 |
+train                                      | Tensor       |             | tf.bool    |
+valid                                      | Tensor       |             | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -419,7 +567,7 @@ dataButton.addEventListener('click', async () => {
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -457,6 +605,42 @@ FeaturesDict({
     'valid': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                | Class        | Shape | Dtype      | Description
+:------------------------------------- | :----------- | :---- | :--------- | :----------
+                                       | FeaturesDict |       |            |
+20_percent                             | Tensor       |       | tf.bool    |
+20_percent_train                       | Tensor       |       | tf.bool    |
+20_percent_valid                       | Tensor       |       | tf.bool    |
+50_percent                             | Tensor       |       | tf.bool    |
+50_percent_train                       | Tensor       |       | tf.bool    |
+50_percent_valid                       | Tensor       |       | tf.bool    |
+episode_id                             | Tensor       |       | tf.string  |
+horizon                                | Tensor       |       | tf.int32   |
+steps                                  | Dataset      |       |            |
+steps/action                           | Tensor       | (7,)  | tf.float64 |
+steps/discount                         | Tensor       |       | tf.int32   |
+steps/is_first                         | Tensor       |       | tf.bool    |
+steps/is_last                          | Tensor       |       | tf.bool    |
+steps/is_terminal                      | Tensor       |       | tf.bool    |
+steps/observation                      | FeaturesDict |       |            |
+steps/observation/object               | Tensor       | (14,) | tf.float64 |
+steps/observation/robot0_eef_pos       | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_eef_quat      | Tensor       | (4,)  | tf.float64 |
+steps/observation/robot0_eef_vel_ang   | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_eef_vel_lin   | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_gripper_qpos  | Tensor       | (2,)  | tf.float64 |
+steps/observation/robot0_gripper_qvel  | Tensor       | (2,)  | tf.float64 |
+steps/observation/robot0_joint_pos     | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_pos_cos | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_pos_sin | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_vel     | Tensor       | (7,)  | tf.float64 |
+steps/reward                           | Tensor       |       | tf.float64 |
+steps/states                           | Tensor       | (45,) | tf.float64 |
+train                                  | Tensor       |       | tf.bool    |
+valid                                  | Tensor       |       | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -505,7 +689,7 @@ dataButton.addEventListener('click', async () => {
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -545,6 +729,44 @@ FeaturesDict({
     'valid': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                    | Class        | Shape       | Dtype      | Description
+:----------------------------------------- | :----------- | :---------- | :--------- | :----------
+                                           | FeaturesDict |             |            |
+20_percent                                 | Tensor       |             | tf.bool    |
+20_percent_train                           | Tensor       |             | tf.bool    |
+20_percent_valid                           | Tensor       |             | tf.bool    |
+50_percent                                 | Tensor       |             | tf.bool    |
+50_percent_train                           | Tensor       |             | tf.bool    |
+50_percent_valid                           | Tensor       |             | tf.bool    |
+episode_id                                 | Tensor       |             | tf.string  |
+horizon                                    | Tensor       |             | tf.int32   |
+steps                                      | Dataset      |             |            |
+steps/action                               | Tensor       | (7,)        | tf.float64 |
+steps/discount                             | Tensor       |             | tf.int32   |
+steps/is_first                             | Tensor       |             | tf.bool    |
+steps/is_last                              | Tensor       |             | tf.bool    |
+steps/is_terminal                          | Tensor       |             | tf.bool    |
+steps/observation                          | FeaturesDict |             |            |
+steps/observation/agentview_image          | Image        | (84, 84, 3) | tf.uint8   |
+steps/observation/object                   | Tensor       | (14,)       | tf.float64 |
+steps/observation/robot0_eef_pos           | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eef_quat          | Tensor       | (4,)        | tf.float64 |
+steps/observation/robot0_eef_vel_ang       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eef_vel_lin       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eye_in_hand_image | Image        | (84, 84, 3) | tf.uint8   |
+steps/observation/robot0_gripper_qpos      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot0_gripper_qvel      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot0_joint_pos         | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_pos_cos     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_pos_sin     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_vel         | Tensor       | (7,)        | tf.float64 |
+steps/reward                               | Tensor       |             | tf.float64 |
+steps/states                               | Tensor       | (45,)       | tf.float64 |
+train                                      | Tensor       |             | tf.bool    |
+valid                                      | Tensor       |             | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -593,7 +815,7 @@ dataButton.addEventListener('click', async () => {
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Only when `shuffle_files=False` (train)
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -642,6 +864,52 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                                | Class        | Shape  | Dtype      | Description
+:------------------------------------- | :----------- | :----- | :--------- | :----------
+                                       | FeaturesDict |        |            |
+20_percent                             | Tensor       |        | tf.bool    |
+20_percent_train                       | Tensor       |        | tf.bool    |
+20_percent_valid                       | Tensor       |        | tf.bool    |
+50_percent                             | Tensor       |        | tf.bool    |
+50_percent_train                       | Tensor       |        | tf.bool    |
+50_percent_valid                       | Tensor       |        | tf.bool    |
+episode_id                             | Tensor       |        | tf.string  |
+horizon                                | Tensor       |        | tf.int32   |
+steps                                  | Dataset      |        |            |
+steps/action                           | Tensor       | (14,)  | tf.float64 |
+steps/discount                         | Tensor       |        | tf.int32   |
+steps/is_first                         | Tensor       |        | tf.bool    |
+steps/is_last                          | Tensor       |        | tf.bool    |
+steps/is_terminal                      | Tensor       |        | tf.bool    |
+steps/observation                      | FeaturesDict |        |            |
+steps/observation/object               | Tensor       | (41,)  | tf.float64 |
+steps/observation/robot0_eef_pos       | Tensor       | (3,)   | tf.float64 |
+steps/observation/robot0_eef_quat      | Tensor       | (4,)   | tf.float64 |
+steps/observation/robot0_eef_vel_ang   | Tensor       | (3,)   | tf.float64 |
+steps/observation/robot0_eef_vel_lin   | Tensor       | (3,)   | tf.float64 |
+steps/observation/robot0_gripper_qpos  | Tensor       | (2,)   | tf.float64 |
+steps/observation/robot0_gripper_qvel  | Tensor       | (2,)   | tf.float64 |
+steps/observation/robot0_joint_pos     | Tensor       | (7,)   | tf.float64 |
+steps/observation/robot0_joint_pos_cos | Tensor       | (7,)   | tf.float64 |
+steps/observation/robot0_joint_pos_sin | Tensor       | (7,)   | tf.float64 |
+steps/observation/robot0_joint_vel     | Tensor       | (7,)   | tf.float64 |
+steps/observation/robot1_eef_pos       | Tensor       | (3,)   | tf.float64 |
+steps/observation/robot1_eef_quat      | Tensor       | (4,)   | tf.float64 |
+steps/observation/robot1_eef_vel_ang   | Tensor       | (3,)   | tf.float64 |
+steps/observation/robot1_eef_vel_lin   | Tensor       | (3,)   | tf.float64 |
+steps/observation/robot1_gripper_qpos  | Tensor       | (2,)   | tf.float64 |
+steps/observation/robot1_gripper_qvel  | Tensor       | (2,)   | tf.float64 |
+steps/observation/robot1_joint_pos     | Tensor       | (7,)   | tf.float64 |
+steps/observation/robot1_joint_pos_cos | Tensor       | (7,)   | tf.float64 |
+steps/observation/robot1_joint_pos_sin | Tensor       | (7,)   | tf.float64 |
+steps/observation/robot1_joint_vel     | Tensor       | (7,)   | tf.float64 |
+steps/reward                           | Tensor       |        | tf.float64 |
+steps/states                           | Tensor       | (115,) | tf.float64 |
+train                                  | Tensor       |        | tf.bool    |
+valid                                  | Tensor       |        | tf.bool    |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -689,7 +957,7 @@ dataButton.addEventListener('click', async () => {
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -742,6 +1010,56 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                                    | Class        | Shape       | Dtype      | Description
+:----------------------------------------- | :----------- | :---------- | :--------- | :----------
+                                           | FeaturesDict |             |            |
+20_percent                                 | Tensor       |             | tf.bool    |
+20_percent_train                           | Tensor       |             | tf.bool    |
+20_percent_valid                           | Tensor       |             | tf.bool    |
+50_percent                                 | Tensor       |             | tf.bool    |
+50_percent_train                           | Tensor       |             | tf.bool    |
+50_percent_valid                           | Tensor       |             | tf.bool    |
+episode_id                                 | Tensor       |             | tf.string  |
+horizon                                    | Tensor       |             | tf.int32   |
+steps                                      | Dataset      |             |            |
+steps/action                               | Tensor       | (14,)       | tf.float64 |
+steps/discount                             | Tensor       |             | tf.int32   |
+steps/is_first                             | Tensor       |             | tf.bool    |
+steps/is_last                              | Tensor       |             | tf.bool    |
+steps/is_terminal                          | Tensor       |             | tf.bool    |
+steps/observation                          | FeaturesDict |             |            |
+steps/observation/object                   | Tensor       | (41,)       | tf.float64 |
+steps/observation/robot0_eef_pos           | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eef_quat          | Tensor       | (4,)        | tf.float64 |
+steps/observation/robot0_eef_vel_ang       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eef_vel_lin       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot0_eye_in_hand_image | Image        | (84, 84, 3) | tf.uint8   |
+steps/observation/robot0_gripper_qpos      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot0_gripper_qvel      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot0_joint_pos         | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_pos_cos     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_pos_sin     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot0_joint_vel         | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot1_eef_pos           | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot1_eef_quat          | Tensor       | (4,)        | tf.float64 |
+steps/observation/robot1_eef_vel_ang       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot1_eef_vel_lin       | Tensor       | (3,)        | tf.float64 |
+steps/observation/robot1_eye_in_hand_image | Image        | (84, 84, 3) | tf.uint8   |
+steps/observation/robot1_gripper_qpos      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot1_gripper_qvel      | Tensor       | (2,)        | tf.float64 |
+steps/observation/robot1_joint_pos         | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot1_joint_pos_cos     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot1_joint_pos_sin     | Tensor       | (7,)        | tf.float64 |
+steps/observation/robot1_joint_vel         | Tensor       | (7,)        | tf.float64 |
+steps/observation/shouldercamera0_image    | Image        | (84, 84, 3) | tf.uint8   |
+steps/observation/shouldercamera1_image    | Image        | (84, 84, 3) | tf.uint8   |
+steps/reward                               | Tensor       |             | tf.float64 |
+steps/states                               | Tensor       | (115,)      | tf.float64 |
+train                                      | Tensor       |             | tf.bool    |
+valid                                      | Tensor       |             | tf.bool    |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -789,7 +1107,7 @@ dataButton.addEventListener('click', async () => {
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -821,6 +1139,36 @@ FeaturesDict({
     'valid': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                | Class        | Shape | Dtype      | Description
+:------------------------------------- | :----------- | :---- | :--------- | :----------
+                                       | FeaturesDict |       |            |
+episode_id                             | Tensor       |       | tf.string  |
+horizon                                | Tensor       |       | tf.int32   |
+steps                                  | Dataset      |       |            |
+steps/action                           | Tensor       | (7,)  | tf.float64 |
+steps/discount                         | Tensor       |       | tf.int32   |
+steps/is_first                         | Tensor       |       | tf.bool    |
+steps/is_last                          | Tensor       |       | tf.bool    |
+steps/is_terminal                      | Tensor       |       | tf.bool    |
+steps/observation                      | FeaturesDict |       |            |
+steps/observation/object               | Tensor       | (44,) | tf.float64 |
+steps/observation/robot0_eef_pos       | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_eef_quat      | Tensor       | (4,)  | tf.float64 |
+steps/observation/robot0_eef_vel_ang   | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_eef_vel_lin   | Tensor       | (3,)  | tf.float64 |
+steps/observation/robot0_gripper_qpos  | Tensor       | (2,)  | tf.float64 |
+steps/observation/robot0_gripper_qvel  | Tensor       | (2,)  | tf.float64 |
+steps/observation/robot0_joint_pos     | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_pos_cos | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_pos_sin | Tensor       | (7,)  | tf.float64 |
+steps/observation/robot0_joint_vel     | Tensor       | (7,)  | tf.float64 |
+steps/reward                           | Tensor       |       | tf.float64 |
+steps/states                           | Tensor       | (58,) | tf.float64 |
+train                                  | Tensor       |       | tf.bool    |
+valid                                  | Tensor       |       | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -869,7 +1217,7 @@ dataButton.addEventListener('click', async () => {
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -903,6 +1251,38 @@ FeaturesDict({
     'valid': tf.bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                                    | Class        | Shape         | Dtype      | Description
+:----------------------------------------- | :----------- | :------------ | :--------- | :----------
+                                           | FeaturesDict |               |            |
+episode_id                                 | Tensor       |               | tf.string  |
+horizon                                    | Tensor       |               | tf.int32   |
+steps                                      | Dataset      |               |            |
+steps/action                               | Tensor       | (7,)          | tf.float64 |
+steps/discount                             | Tensor       |               | tf.int32   |
+steps/is_first                             | Tensor       |               | tf.bool    |
+steps/is_last                              | Tensor       |               | tf.bool    |
+steps/is_terminal                          | Tensor       |               | tf.bool    |
+steps/observation                          | FeaturesDict |               |            |
+steps/observation/object                   | Tensor       | (44,)         | tf.float64 |
+steps/observation/robot0_eef_pos           | Tensor       | (3,)          | tf.float64 |
+steps/observation/robot0_eef_quat          | Tensor       | (4,)          | tf.float64 |
+steps/observation/robot0_eef_vel_ang       | Tensor       | (3,)          | tf.float64 |
+steps/observation/robot0_eef_vel_lin       | Tensor       | (3,)          | tf.float64 |
+steps/observation/robot0_eye_in_hand_image | Image        | (240, 240, 3) | tf.uint8   |
+steps/observation/robot0_gripper_qpos      | Tensor       | (2,)          | tf.float64 |
+steps/observation/robot0_gripper_qvel      | Tensor       | (2,)          | tf.float64 |
+steps/observation/robot0_joint_pos         | Tensor       | (7,)          | tf.float64 |
+steps/observation/robot0_joint_pos_cos     | Tensor       | (7,)          | tf.float64 |
+steps/observation/robot0_joint_pos_sin     | Tensor       | (7,)          | tf.float64 |
+steps/observation/robot0_joint_vel         | Tensor       | (7,)          | tf.float64 |
+steps/observation/sideview_image           | Image        | (240, 240, 3) | tf.uint8   |
+steps/reward                               | Tensor       |               | tf.float64 |
+steps/states                               | Tensor       | (58,)         | tf.float64 |
+train                                      | Tensor       |               | tf.bool    |
+valid                                      | Tensor       |               | tf.bool    |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

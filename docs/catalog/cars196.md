@@ -50,7 +50,7 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 Split | Examples
 :---- | -------:
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -60,6 +60,16 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=196),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype      | Description
+:------ | :----------- | :-------------- | :--------- | :----------
+        | FeaturesDict |                 |            |
+bbox    | BBoxFeature  | (4,)            | tf.float32 |
+id      | Text         |                 | tf.string  |
+image   | Image        | (None, None, 3) | tf.uint8   |
+label   | ClassLabel   |                 | tf.int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

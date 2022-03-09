@@ -45,7 +45,7 @@ Split          | Examples
 `'train'`      | 14,436
 `'validation'` | 1,960
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -53,6 +53,14 @@ FeaturesDict({
     'subject_line': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class        | Shape | Dtype     | Description
+:----------- | :----------- | :---- | :-------- | :----------
+             | FeaturesDict |       |           |
+email_body   | Text         |       | tf.string |
+subject_line | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

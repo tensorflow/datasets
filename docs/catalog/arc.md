@@ -46,7 +46,7 @@ Split     | Examples
 `'test'`  | 400
 `'train'` | 400
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -61,6 +61,23 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+| Feature      | Class                      | Shape  | Dtype     | Description |
+| :----------- | :------------------------- | :----- | :-------- | :---------- |
+|              | FeaturesDict               |        |           |             |
+| task_id      | Text                       |        | tf.string |             |
+| test         | Sequence                   |        |           |             |
+| test/input   | Sequence(Sequence(Tensor)) | (None, | tf.int32  |             |
+:              :                            : None)  :           :             :
+| test/output  | Sequence(Sequence(Tensor)) | (None, | tf.int32  |             |
+:              :                            : None)  :           :             :
+| train        | Sequence                   |        |           |             |
+| train/input  | Sequence(Sequence(Tensor)) | (None, | tf.int32  |             |
+:              :                            : None)  :           :             :
+| train/output | Sequence(Sequence(Tensor)) | (None, | tf.int32  |             |
+:              :                            : None)  :           :             :
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -56,7 +56,7 @@ Split     | Examples
 :-------- | --------:
 `'train'` | 1,439,719
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -68,6 +68,18 @@ FeaturesDict({
     'image/hash': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature             | Class        | Shape           | Dtype      | Description
+:------------------ | :----------- | :-------------- | :--------- | :----------
+                    | FeaturesDict |                 |            |
+image               | Image        | (None, None, 3) | tf.uint8   |
+image/creator_uname | Text         |                 | tf.string  |
+image/date_taken    | Text         |                 | tf.string  |
+image/gps_lat       | Tensor       |                 | tf.float32 |
+image/gps_lon       | Tensor       |                 | tf.float32 |
+image/hash          | Text         |                 | tf.string  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

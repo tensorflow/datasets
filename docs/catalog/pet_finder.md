@@ -48,7 +48,7 @@ Split     | Examples
 `'test'`  | 14,465
 `'train'` | 58,311
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -78,6 +78,36 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
 })
 ```
+
+*   **Feature documentation**:
+
+| Feature                 | Class        | Shape    | Dtype     | Description |
+| :---------------------- | :----------- | :------- | :-------- | :---------- |
+|                         | FeaturesDict |          |           |             |
+| PetID                   | Text         |          | tf.string |             |
+| attributes              | FeaturesDict |          |           |             |
+| attributes/Age          | Tensor       |          | tf.int64  |             |
+| attributes/Breed1       | Tensor       |          | tf.int64  |             |
+| attributes/Breed2       | Tensor       |          | tf.int64  |             |
+| attributes/Color1       | Tensor       |          | tf.int64  |             |
+| attributes/Color2       | Tensor       |          | tf.int64  |             |
+| attributes/Color3       | Tensor       |          | tf.int64  |             |
+| attributes/Dewormed     | Tensor       |          | tf.int64  |             |
+| attributes/Fee          | Tensor       |          | tf.int64  |             |
+| attributes/FurLength    | Tensor       |          | tf.int64  |             |
+| attributes/Gender       | Tensor       |          | tf.int64  |             |
+| attributes/Health       | Tensor       |          | tf.int64  |             |
+| attributes/MaturitySize | Tensor       |          | tf.int64  |             |
+| attributes/Quantity     | Tensor       |          | tf.int64  |             |
+| attributes/State        | Tensor       |          | tf.int64  |             |
+| attributes/Sterilized   | Tensor       |          | tf.int64  |             |
+| attributes/Type         | Tensor       |          | tf.int64  |             |
+| attributes/Vaccinated   | Tensor       |          | tf.int64  |             |
+| attributes/VideoAmt     | Tensor       |          | tf.int64  |             |
+| image                   | Image        | (None,   | tf.uint8  |             |
+:                         :              : None, 3) :           :             :
+| image/filename          | Text         |          | tf.string |             |
+| label                   | ClassLabel   |          | tf.int64  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

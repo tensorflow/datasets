@@ -45,7 +45,7 @@ Split          | Examples
 `'train'`      | 3,569
 `'validation'` | 781
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -67,6 +67,24 @@ FeaturesDict({
     'target_text': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                              | Class        | Shape | Dtype     | Description
+:----------------------------------- | :----------- | :---- | :-------- | :----------
+                                     | FeaturesDict |       |           |
+delex_input_text                     | FeaturesDict |       |           |
+delex_input_text/table               | Sequence     |       |           |
+delex_input_text/table/column_header | Tensor       |       | tf.string |
+delex_input_text/table/content       | Tensor       |       | tf.string |
+delex_input_text/table/row_number    | Tensor       |       | tf.int16  |
+delex_target_text                    | Tensor       |       | tf.string |
+input_text                           | FeaturesDict |       |           |
+input_text/table                     | Sequence     |       |           |
+input_text/table/column_header       | Tensor       |       | tf.string |
+input_text/table/content             | Tensor       |       | tf.string |
+input_text/table/row_number          | Tensor       |       | tf.int16  |
+target_text                          | Tensor       |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

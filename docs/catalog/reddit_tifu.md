@@ -39,7 +39,7 @@ num_comments: number of comments. - upvote_ratio: upvote ratio.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -52,6 +52,19 @@ FeaturesDict({
     'upvote_ratio': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class        | Shape | Dtype      | Description
+:----------- | :----------- | :---- | :--------- | :----------
+             | FeaturesDict |       |            |
+documents    | Text         |       | tf.string  |
+num_comments | Tensor       |       | tf.float32 |
+score        | Tensor       |       | tf.float32 |
+title        | Text         |       | tf.string  |
+tldr         | Text         |       | tf.string  |
+ups          | Tensor       |       | tf.float32 |
+upvote_ratio | Tensor       |       | tf.float32 |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

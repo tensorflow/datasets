@@ -91,7 +91,7 @@ Split          | Examples
 `'train'`      | 82,783
 `'validation'` | 40,504
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -107,6 +107,21 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature          | Class        | Shape           | Dtype      | Description
+:--------------- | :----------- | :-------------- | :--------- | :----------
+                 | FeaturesDict |                 |            |
+image            | Image        | (None, None, 3) | tf.uint8   |
+image/filename   | Text         |                 | tf.string  |
+image/id         | Tensor       |                 | tf.int64   |
+objects          | Sequence     |                 |            |
+objects/area     | Tensor       |                 | tf.int64   |
+objects/bbox     | BBoxFeature  | (4,)            | tf.float32 |
+objects/id       | Tensor       |                 | tf.int64   |
+objects/is_crowd | Tensor       |                 | tf.bool    |
+objects/label    | ClassLabel   |                 | tf.int64   |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -165,7 +180,7 @@ Split          | Examples
 `'train'`      | 118,287
 `'validation'` | 5,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -181,6 +196,21 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature          | Class        | Shape           | Dtype      | Description
+:--------------- | :----------- | :-------------- | :--------- | :----------
+                 | FeaturesDict |                 |            |
+image            | Image        | (None, None, 3) | tf.uint8   |
+image/filename   | Text         |                 | tf.string  |
+image/id         | Tensor       |                 | tf.int64   |
+objects          | Sequence     |                 |            |
+objects/area     | Tensor       |                 | tf.int64   |
+objects/bbox     | BBoxFeature  | (4,)            | tf.float32 |
+objects/id       | Tensor       |                 | tf.int64   |
+objects/is_crowd | Tensor       |                 | tf.bool    |
+objects/label    | ClassLabel   |                 | tf.int64   |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -238,7 +268,7 @@ Split          | Examples
 `'train'`      | 118,287
 `'validation'` | 5,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -256,6 +286,27 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+| Feature                   | Class        | Shape  | Dtype      | Description |
+| :------------------------ | :----------- | :----- | :--------- | :---------- |
+|                           | FeaturesDict |        |            |             |
+| image                     | Image        | (None, | tf.uint8   |             |
+:                           :              : None,  :            :             :
+:                           :              : 3)     :            :             :
+| image/filename            | Text         |        | tf.string  |             |
+| image/id                  | Tensor       |        | tf.int64   |             |
+| panoptic_image            | Image        | (None, | tf.uint8   |             |
+:                           :              : None,  :            :             :
+:                           :              : 3)     :            :             :
+| panoptic_image/filename   | Text         |        | tf.string  |             |
+| panoptic_objects          | Sequence     |        |            |             |
+| panoptic_objects/area     | Tensor       |        | tf.int64   |             |
+| panoptic_objects/bbox     | BBoxFeature  | (4,)   | tf.float32 |             |
+| panoptic_objects/id       | Tensor       |        | tf.int64   |             |
+| panoptic_objects/is_crowd | Tensor       |        | tf.bool    |             |
+| panoptic_objects/label    | ClassLabel   |        | tf.int64   |             |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

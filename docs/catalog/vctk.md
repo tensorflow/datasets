@@ -37,7 +37,7 @@ Note that the 'p315' text was lost due to a hard disk error.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -49,6 +49,18 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape   | Dtype     | Description
+:------ | :----------- | :------ | :-------- | :----------
+        | FeaturesDict |         |           |
+accent  | ClassLabel   |         | tf.int64  |
+gender  | ClassLabel   |         | tf.int64  |
+id      | Tensor       |         | tf.string |
+speaker | ClassLabel   |         | tf.int64  |
+speech  | Audio        | (None,) | tf.int64  |
+text    | Text         |         | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

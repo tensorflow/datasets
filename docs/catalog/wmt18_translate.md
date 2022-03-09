@@ -96,7 +96,7 @@ Split | Examples
 
 *   **Config description**: WMT 2018 cs-en translation task dataset.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -104,6 +104,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+cs      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -113,7 +121,7 @@ Translation({
 
 *   **Config description**: WMT 2018 de-en translation task dataset.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -121,6 +129,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+de      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -130,7 +146,7 @@ Translation({
 
 *   **Config description**: WMT 2018 et-en translation task dataset.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -138,6 +154,14 @@ Translation({
     'et': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+et      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -147,7 +171,7 @@ Translation({
 
 *   **Config description**: WMT 2018 fi-en translation task dataset.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -155,6 +179,14 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+fi      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -164,7 +196,7 @@ Translation({
 
 *   **Config description**: WMT 2018 kk-en translation task dataset.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -172,6 +204,14 @@ Translation({
     'kk': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+kk      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -181,7 +221,7 @@ Translation({
 
 *   **Config description**: WMT 2018 ru-en translation task dataset.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -189,6 +229,14 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+ru      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -198,7 +246,7 @@ Translation({
 
 *   **Config description**: WMT 2018 tr-en translation task dataset.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -206,6 +254,14 @@ Translation({
     'tr': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+tr      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -215,7 +271,7 @@ Translation({
 
 *   **Config description**: WMT 2018 zh-en translation task dataset.
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -223,6 +279,14 @@ Translation({
     'zh': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+zh      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -73,7 +73,7 @@ Split            | Examples
 `'dragon_test'`  | 20,000
 `'dragon_train'` | 80,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -84,6 +84,17 @@ FeaturesDict({
     'pose_quat': Tensor(shape=(4,), dtype=tf.float32),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class        | Shape         | Dtype      | Description
+:----------- | :----------- | :------------ | :--------- | :----------
+             | FeaturesDict |               |            |
+illumination | Tensor       | (3,)          | tf.float32 |
+image        | Image        | (256, 256, 3) | tf.uint8   |
+label        | ClassLabel   |               | tf.int64   |
+pose_mat     | Tensor       | (3, 3)        | tf.float32 |
+pose_quat    | Tensor       | (4,)          | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

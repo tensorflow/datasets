@@ -144,7 +144,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 25,000,095
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -156,6 +156,18 @@ FeaturesDict({
     'user_rating': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype      | Description
+:----------- | :------------------- | :------ | :--------- | :----------
+             | FeaturesDict         |         |            |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id     | Tensor               |         | tf.string  |
+movie_title  | Tensor               |         | tf.string  |
+timestamp    | Tensor               |         | tf.int64   |
+user_id      | Tensor               |         | tf.string  |
+user_rating  | Tensor               |         | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -213,7 +225,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 62,423
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -222,6 +234,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -285,7 +306,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100,836
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -297,6 +318,18 @@ FeaturesDict({
     'user_rating': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype      | Description
+:----------- | :------------------- | :------ | :--------- | :----------
+             | FeaturesDict         |         |            |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id     | Tensor               |         | tf.string  |
+movie_title  | Tensor               |         | tf.string  |
+timestamp    | Tensor               |         | tf.int64   |
+user_id      | Tensor               |         | tf.string  |
+user_rating  | Tensor               |         | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -354,7 +387,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 9,742
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -363,6 +396,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -425,7 +467,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -443,6 +485,24 @@ FeaturesDict({
     'user_zip_code': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature               | Class                | Shape   | Dtype      | Description
+:-------------------- | :------------------- | :------ | :--------- | :----------
+                      | FeaturesDict         |         |            |
+bucketized_user_age   | Tensor               |         | tf.float32 |
+movie_genres          | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id              | Tensor               |         | tf.string  |
+movie_title           | Tensor               |         | tf.string  |
+raw_user_age          | Tensor               |         | tf.float32 |
+timestamp             | Tensor               |         | tf.int64   |
+user_gender           | Tensor               |         | tf.bool    |
+user_id               | Tensor               |         | tf.string  |
+user_occupation_label | ClassLabel           |         | tf.int64   |
+user_occupation_text  | Tensor               |         | tf.string  |
+user_rating           | Tensor               |         | tf.float32 |
+user_zip_code         | Tensor               |         | tf.string  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -500,7 +560,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,682
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -509,6 +569,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -572,7 +641,7 @@ Split     | Examples
 :-------- | --------:
 `'train'` | 1,000,209
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -589,6 +658,23 @@ FeaturesDict({
     'user_zip_code': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature               | Class                | Shape   | Dtype      | Description
+:-------------------- | :------------------- | :------ | :--------- | :----------
+                      | FeaturesDict         |         |            |
+bucketized_user_age   | Tensor               |         | tf.float32 |
+movie_genres          | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id              | Tensor               |         | tf.string  |
+movie_title           | Tensor               |         | tf.string  |
+timestamp             | Tensor               |         | tf.int64   |
+user_gender           | Tensor               |         | tf.bool    |
+user_id               | Tensor               |         | tf.string  |
+user_occupation_label | ClassLabel           |         | tf.int64   |
+user_occupation_text  | Tensor               |         | tf.string  |
+user_rating           | Tensor               |         | tf.float32 |
+user_zip_code         | Tensor               |         | tf.string  |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -646,7 +732,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 3,883
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -655,6 +741,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -716,7 +811,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 20,000,263
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -728,6 +823,18 @@ FeaturesDict({
     'user_rating': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype      | Description
+:----------- | :------------------- | :------ | :--------- | :----------
+             | FeaturesDict         |         |            |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id     | Tensor               |         | tf.string  |
+movie_title  | Tensor               |         | tf.string  |
+timestamp    | Tensor               |         | tf.int64   |
+user_id      | Tensor               |         | tf.string  |
+user_rating  | Tensor               |         | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -785,7 +892,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 27,278
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -794,6 +901,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

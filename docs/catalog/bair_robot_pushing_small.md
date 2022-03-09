@@ -44,7 +44,7 @@ Split     | Examples
 `'test'`  | 256
 `'train'` | 43,264
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Sequence({
@@ -54,6 +54,16 @@ Sequence({
     'image_main': Image(shape=(64, 64, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class    | Shape       | Dtype      | Description
+:-------------- | :------- | :---------- | :--------- | :----------
+                | Sequence |             |            |
+action          | Tensor   | (4,)        | tf.float32 |
+endeffector_pos | Tensor   | (3,)        | tf.float32 |
+image_aux1      | Image    | (64, 64, 3) | tf.uint8   |
+image_main      | Image    | (64, 64, 3) | tf.uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

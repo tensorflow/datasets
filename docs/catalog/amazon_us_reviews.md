@@ -63,7 +63,7 @@ review_body - The review text. review_date - The date the review was written.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -86,6 +86,28 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                | Class        | Shape | Dtype     | Description
+:--------------------- | :----------- | :---- | :-------- | :----------
+                       | FeaturesDict |       |           |
+data                   | FeaturesDict |       |           |
+data/customer_id       | Tensor       |       | tf.string |
+data/helpful_votes     | Tensor       |       | tf.int32  |
+data/marketplace       | Tensor       |       | tf.string |
+data/product_category  | Tensor       |       | tf.string |
+data/product_id        | Tensor       |       | tf.string |
+data/product_parent    | Tensor       |       | tf.string |
+data/product_title     | Tensor       |       | tf.string |
+data/review_body       | Tensor       |       | tf.string |
+data/review_date       | Tensor       |       | tf.string |
+data/review_headline   | Tensor       |       | tf.string |
+data/review_id         | Tensor       |       | tf.string |
+data/star_rating       | Tensor       |       | tf.int32  |
+data/total_votes       | Tensor       |       | tf.int32  |
+data/verified_purchase | ClassLabel   |       | tf.int64  |
+data/vine              | ClassLabel   |       | tf.int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

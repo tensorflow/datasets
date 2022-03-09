@@ -35,7 +35,7 @@ the official dataset, the test set of VOC2012 does not contain annotations.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -52,6 +52,22 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature              | Class                | Shape           | Dtype      | Description
+:------------------- | :------------------- | :-------------- | :--------- | :----------
+                     | FeaturesDict         |                 |            |
+image                | Image                | (None, None, 3) | tf.uint8   |
+image/filename       | Text                 |                 | tf.string  |
+labels               | Sequence(ClassLabel) | (None,)         | tf.int64   |
+labels_no_difficult  | Sequence(ClassLabel) | (None,)         | tf.int64   |
+objects              | Sequence             |                 |            |
+objects/bbox         | BBoxFeature          | (4,)            | tf.float32 |
+objects/is_difficult | Tensor               |                 | tf.bool    |
+objects/is_truncated | Tensor               |                 | tf.bool    |
+objects/label        | ClassLabel           |                 | tf.int64   |
+objects/pose         | ClassLabel           |                 | tf.int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

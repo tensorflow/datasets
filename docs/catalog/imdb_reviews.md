@@ -75,7 +75,7 @@ Split            | Examples
 
 *   **Config description**: Plain text
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -83,6 +83,14 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape | Dtype     | Description
+:------ | :----------- | :---- | :-------- | :----------
+        | FeaturesDict |       |           |
+label   | ClassLabel   |       | tf.int64  |
+text    | Text         |       | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -126,7 +134,7 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses byte-level text encoding with
     `tfds.deprecated.text.ByteTextEncoder`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -134,6 +142,14 @@ FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape   | Dtype    | Description
+:------ | :----------- | :------ | :------- | :----------
+        | FeaturesDict |         |          |
+label   | ClassLabel   |         | tf.int64 |
+text    | Text         | (None,) | tf.int64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -177,7 +193,7 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
     8k vocab size
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -185,6 +201,14 @@ FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8185>),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape   | Dtype    | Description
+:------ | :----------- | :------ | :------- | :----------
+        | FeaturesDict |         |          |
+label   | ClassLabel   |         | tf.int64 |
+text    | Text         | (None,) | tf.int64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -228,7 +252,7 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
     32k vocab size
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -236,6 +260,14 @@ FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32650>),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape   | Dtype    | Description
+:------ | :----------- | :------ | :------- | :----------
+        | FeaturesDict |         |          |
+label   | ClassLabel   |         | tf.int64 |
+text    | Text         | (None,) | tf.int64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

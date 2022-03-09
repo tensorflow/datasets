@@ -58,7 +58,7 @@ Split         | Examples
 `'dev_xlnet'` | 7,932
 `'train'`     | 9,090
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -75,6 +75,23 @@ FeaturesDict({
     'score': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype      | Description
+:--------- | :----------- | :---- | :--------- | :----------
+           | FeaturesDict |       |            |
+candidate  | Text         |       | tf.string  |
+context    | Text         |       | tf.string  |
+gold_index | Tensor       |       | tf.int32   |
+qid        | Text         |       | tf.string  |
+question   | Text         |       | tf.string  |
+question_1 | ClassLabel   |       | tf.int64   |
+question_2 | ClassLabel   |       | tf.int64   |
+question_3 | ClassLabel   |       | tf.int64   |
+question_4 | ClassLabel   |       | tf.int64   |
+reference  | Text         |       | tf.string  |
+score      | Tensor       |       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -61,7 +61,7 @@ website, https://stanfordmlgroup.github.io/competitions/chexpert/.
 Split | Examples
 :---- | -------:
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -71,6 +71,16 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class                | Shape           | Dtype     | Description
+:--------- | :------------------- | :-------------- | :-------- | :----------
+           | FeaturesDict         |                 |           |
+image      | Image                | (None, None, 3) | tf.uint8  |
+image_view | ClassLabel           |                 | tf.int64  |
+label      | Sequence(ClassLabel) | (None,)         | tf.int64  |
+name       | Text                 |                 | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -66,7 +66,7 @@ Split     | Examples
 
 *   **Download size**: `89.91 MiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -75,6 +75,15 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape       | Dtype     | Description
+:------- | :----------- | :---------- | :-------- | :----------
+         | FeaturesDict |             |           |
+filename | Text         |             | tf.string |
+image    | Image        | (64, 64, 3) | tf.uint8  |
+label    | ClassLabel   |             | tf.int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -128,7 +137,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `1.93 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -137,6 +146,15 @@ FeaturesDict({
     'sentinel2': Tensor(shape=(64, 64, 13), dtype=tf.float32),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape        | Dtype      | Description
+:-------- | :----------- | :----------- | :--------- | :----------
+          | FeaturesDict |              |            |
+filename  | Text         |              | tf.string  |
+label     | ClassLabel   |              | tf.int64   |
+sentinel2 | Tensor       | (64, 64, 13) | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

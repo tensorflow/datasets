@@ -32,7 +32,7 @@ tower etc.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -40,6 +40,14 @@ FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+id      | Text         |                 | tf.string |
+image   | Image        | (None, None, 3) | tf.uint8  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

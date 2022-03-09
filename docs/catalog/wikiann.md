@@ -36,7 +36,7 @@ which supports 176 of the 282 languages from the original WikiANN corpus.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -46,6 +46,16 @@ FeaturesDict({
     'tokens': Sequence(Text(shape=(), dtype=tf.string)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class                | Shape   | Dtype     | Description
+:------ | :------------------- | :------ | :-------- | :----------
+        | FeaturesDict         |         |           |
+langs   | Sequence(Text)       | (None,) | tf.string |
+spans   | Sequence(Text)       | (None,) | tf.string |
+tags    | Sequence(ClassLabel) | (None,) | tf.int64  |
+tokens  | Sequence(Text)       | (None,) | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

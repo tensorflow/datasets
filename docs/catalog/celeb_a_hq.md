@@ -95,7 +95,7 @@ Split     | Examples
 
 *   **Config description**: CelebaHQ images in 1024 x 1024 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -103,6 +103,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape           | Dtype     | Description
+:------------- | :----------- | :-------------- | :-------- | :----------
+               | FeaturesDict |                 |           |
+image          | Image        | (1024, 1024, 3) | tf.uint8  |
+image/filename | Text         |                 | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -150,7 +158,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 512 x 512 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -158,6 +166,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape         | Dtype     | Description
+:------------- | :----------- | :------------ | :-------- | :----------
+               | FeaturesDict |               |           |
+image          | Image        | (512, 512, 3) | tf.uint8  |
+image/filename | Text         |               | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -205,7 +221,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 256 x 256 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -213,6 +229,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape         | Dtype     | Description
+:------------- | :----------- | :------------ | :-------- | :----------
+               | FeaturesDict |               |           |
+image          | Image        | (256, 256, 3) | tf.uint8  |
+image/filename | Text         |               | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -260,7 +284,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 128 x 128 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -268,6 +292,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape         | Dtype     | Description
+:------------- | :----------- | :------------ | :-------- | :----------
+               | FeaturesDict |               |           |
+image          | Image        | (128, 128, 3) | tf.uint8  |
+image/filename | Text         |               | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -315,7 +347,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 64 x 64 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -323,6 +355,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape       | Dtype     | Description
+:------------- | :----------- | :---------- | :-------- | :----------
+               | FeaturesDict |             |           |
+image          | Image        | (64, 64, 3) | tf.uint8  |
+image/filename | Text         |             | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -370,7 +410,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 32 x 32 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -378,6 +418,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape       | Dtype     | Description
+:------------- | :----------- | :---------- | :-------- | :----------
+               | FeaturesDict |             |           |
+image          | Image        | (32, 32, 3) | tf.uint8  |
+image/filename | Text         |             | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -425,7 +473,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 16 x 16 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -433,6 +481,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape       | Dtype     | Description
+:------------- | :----------- | :---------- | :-------- | :----------
+               | FeaturesDict |             |           |
+image          | Image        | (16, 16, 3) | tf.uint8  |
+image/filename | Text         |             | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -480,7 +536,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 8 x 8 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -488,6 +544,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape     | Dtype     | Description
+:------------- | :----------- | :-------- | :-------- | :----------
+               | FeaturesDict |           |           |
+image          | Image        | (8, 8, 3) | tf.uint8  |
+image/filename | Text         |           | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -535,7 +599,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 4 x 4 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -543,6 +607,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape     | Dtype     | Description
+:------------- | :----------- | :-------- | :-------- | :----------
+               | FeaturesDict |           |           |
+image          | Image        | (4, 4, 3) | tf.uint8  |
+image/filename | Text         |           | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -590,7 +662,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 2 x 2 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -598,6 +670,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape     | Dtype     | Description
+:------------- | :----------- | :-------- | :-------- | :----------
+               | FeaturesDict |           |           |
+image          | Image        | (2, 2, 3) | tf.uint8  |
+image/filename | Text         |           | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -645,7 +725,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: CelebaHQ images in 1 x 1 resolution
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -653,6 +733,14 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape     | Dtype     | Description
+:------------- | :----------- | :-------- | :-------- | :----------
+               | FeaturesDict |           |           |
+image          | Image        | (1, 1, 3) | tf.uint8  |
+image/filename | Text         |           | tf.string |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
