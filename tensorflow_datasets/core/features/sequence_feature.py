@@ -15,7 +15,7 @@
 
 """Sequence feature."""
 
-from typing import Optional, Union
+from typing import List, Optional, Union
 
 import numpy as np
 import tensorflow as tf
@@ -201,6 +201,35 @@ class Sequence(top_level_feature.TopLevelFeature):
       # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
       inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]
     return '{}({})'.format(type(self).__name__, inner_feature_repr)
+
+  def catalog_documentation(
+      self) -> List[feature_lib.CatalogFeatureDocumentation]:
+    sub_feature_docs = self._feature.catalog_documentation()
+
+    # If it's a sequence of a single feature, then we add more details.
+    if len(sub_feature_docs) == 1:
+      sub_feature_doc = sub_feature_docs[0]
+      return [
+          sub_feature_doc.replace(
+              # Embed type of feature in class name, e.g. Sequence(tf.int64)
+              cls_name=f'{type(self).__name__}({sub_feature_doc.cls_name})',
+              tensor_info=self._add_length_dim(sub_feature_doc.tensor_info),
+              description=self._doc.desc or sub_feature_doc.description,
+              value_range=self._doc.value_range or sub_feature_doc.value_range,
+          )
+      ]
+
+    result = []
+    for documentation in sub_feature_docs:
+      if not documentation.name:
+        # Override the nested FeaturesDict to become a Sequence.
+        documentation = documentation.replace(
+            cls_name=type(self).__name__,
+            description=self._doc.desc or documentation.description,
+            value_range=self._doc.value_range or documentation.value_range,
+        )
+      result.append(documentation)
+    return result
 
   @classmethod
   def from_json_content(

@@ -23,7 +23,7 @@ import html
 import importlib
 import json
 import os
-from typing import Dict, List, Mapping, Optional, Type, TypeVar, Union
+from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 
 import numpy as np
 import six
@@ -132,6 +132,20 @@ class Documentation:
 
 
 DocArg = Union[None, str, Documentation]
+
+
+@dataclasses.dataclass(order=True)
+class CatalogFeatureDocumentation:
+  """Feature attributes to be displayed in the dataset catalog."""
+  name: str  # Needs to be on top such that features are sorted by name.
+  cls_name: str
+  description: str
+  value_range: str
+  tensor_info: Optional[TensorInfo] = None
+
+  def replace(self, **kwargs: Any) -> 'CatalogFeatureDocumentation':
+    """Returns a copy of the `CatalogFeatureDocumentation` with updated attributes."""
+    return dataclasses.replace(self, **kwargs)
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -803,6 +817,20 @@ class FeatureConnector(object):
         type(self).__name__,
         info_str,
     )
+
+  def catalog_documentation(self) -> List[CatalogFeatureDocumentation]:
+    tensor_info = self.get_tensor_info()
+    if not isinstance(tensor_info, TensorInfo):
+      raise RuntimeError('Subclasses with nesting should override this method.')
+    return [
+        CatalogFeatureDocumentation(
+            name='',  # Feature name is not known here
+            cls_name=type(self).__name__,
+            tensor_info=tensor_info,
+            description=self._doc.desc,
+            value_range=self._doc.value_range,
+        )
+    ]
 
   def save_metadata(self, data_dir, feature_name):
     """Save the feature metadata on disk.

@@ -27,6 +27,7 @@ import textwrap
 from typing import List, Optional, Union
 
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.scripts.documentation import doc_utils
 
 Key = Union[int, str]
@@ -372,18 +373,78 @@ class SplitInfoSection(Section):
 
 class FeatureInfoSection(Section):
 
-  NAME = 'Features'
+  NAME = 'Feature structure'
 
   def get_key(self, builder: tfds.core.DatasetBuilder):
     return repr(builder.info.features)
 
-  def content(self, builder: tfds.core.DatasetBuilder):
+  def features_content(self, features: tfds.features.FeatureConnector) -> Block:
     code = textwrap.dedent("""
         ```python
         {}
         ```
-        """).format(builder.info.features)
+        """).format(features)
     return Block(code)
+
+  def content(self, builder: tfds.core.DatasetBuilder):
+    return self.features_content(builder.info.features)
+
+
+class FeatureDocumentationSection(Section):
+
+  NAME = 'Feature documentation'
+
+  def get_key(self, builder: tfds.core.DatasetBuilder):
+    return repr(builder.info.features)
+
+  def _format_feature_rows(
+      self,
+      feature_docs: List[feature_lib.CatalogFeatureDocumentation],
+      should_show_value_range: bool,
+  ) -> List[str]:
+    """Return the formatted rows for each feature (sorted by feature name)."""
+
+    def format_row(doc: feature_lib.CatalogFeatureDocumentation) -> str:
+      if doc.tensor_info:
+        shape = str(doc.tensor_info.shape) if doc.tensor_info.shape else ''
+        dtype = repr(doc.tensor_info.dtype) if doc.tensor_info.dtype else ''
+      else:
+        shape = ''
+        dtype = ''
+      parts = [doc.name, doc.cls_name, shape, dtype, doc.description]
+      if should_show_value_range:
+        parts.append(doc.value_range)
+      parts = [part or '' for part in parts]
+      return ' | '.join(parts)
+
+    rows = []
+    for feature_doc in sorted(feature_docs):
+      rows.append(format_row(feature_doc))
+    return rows
+
+  def _should_show_value_range(
+      self,
+      feature_docs: List[feature_lib.CatalogFeatureDocumentation]) -> bool:
+    return any(doc.value_range for doc in feature_docs)
+
+  def _format_block(
+      self,
+      feature_docs: List[feature_lib.CatalogFeatureDocumentation],
+  ) -> Block:
+    """Formats a block containing all the feature documentation."""
+    should_show_value_range = self._should_show_value_range(feature_docs)
+    feature_rows = self._format_feature_rows(feature_docs,
+                                             should_show_value_range)
+    header = ['Feature', 'Class', 'Shape', 'Dtype', 'Description']
+    if should_show_value_range:
+      header.append('Value range')
+    header_line = map(lambda h: ':' + ('-' * (len(h) - 1)), header)
+    col_sep = ' | '
+    return Block('\n'.join(
+        [col_sep.join(header), col_sep.join(header_line)] + feature_rows))
+
+  def content(self, builder: tfds.core.DatasetBuilder) -> Block:
+    return self._format_block(builder.info.features.catalog_documentation())
 
 
 class SupervisedKeySection(Section):
@@ -698,6 +759,7 @@ def get_markdown_string(
       AutocacheSection(),
       SplitInfoSection(),
       FeatureInfoSection(),
+      FeatureDocumentationSection(),
       SupervisedKeySection(),
   ]
   if visu_doc_util:
