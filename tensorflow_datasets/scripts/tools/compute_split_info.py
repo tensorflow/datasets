@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Beam pipeline which compute the number of examples in the given tfrecord.
+r"""Beam pipeline which computes the number of examples in the given tfrecord.
 
 Compute the split info (num shards, num examples,...) metadata required
 by `tfds.core.DatasetInfo`. See documentation and usage at:
@@ -43,12 +43,12 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
       description='Tensorflow Datasets CLI tool',)
   parser.add_argument(
       '--data_dir',
-      type=tfds.core.as_path,
+      type=tfds.core.Path,
       help='Path to the dataset files.',
   )
   parser.add_argument(
       '--out_dir',
-      type=tfds.core.as_path,
+      type=tfds.core.Path,
       help='Computed metadata will be written here.',
   )
   return parser.parse_args(argv[1:])
@@ -56,7 +56,7 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
 
 def main(args: argparse.Namespace) -> None:
 
-  tfds.folder_dataset.compute_split_info(
+  tfds.folder_dataset.compute_split_info_from_directory(
       data_dir=args.data_dir,
       out_dir=args.out_dir,
   )

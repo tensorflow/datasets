@@ -12,10 +12,6 @@
 # `wit`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 Wikipedia-based Image Text (WIT) Dataset is a large multimodal multilingual
@@ -49,7 +45,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 37,046,386
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -73,6 +69,29 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                         | Class        | Shape | Dtype     | Description
+:------------------------------ | :----------- | :---- | :-------- | :----------
+                                | FeaturesDict |       |           |
+attribution_passes_lang_id      | Tensor       |       | tf.bool   |
+caption_alt_text_description    | Text         |       | tf.string |
+caption_attribution_description | Text         |       | tf.string |
+caption_reference_description   | Text         |       | tf.string |
+context_page_description        | Text         |       | tf.string |
+context_section_description     | Text         |       | tf.string |
+hierarchical_section_title      | Text         |       | tf.string |
+image_url                       | Text         |       | tf.string |
+is_main_image                   | Tensor       |       | tf.bool   |
+language                        | Text         |       | tf.string |
+mime_type                       | Text         |       | tf.string |
+original_height                 | Tensor       |       | tf.int32  |
+original_width                  | Tensor       |       | tf.int32  |
+page_changed_recently           | Tensor       |       | tf.bool   |
+page_title                      | Text         |       | tf.string |
+page_url                        | Text         |       | tf.string |
+section_title                   | Text         |       | tf.string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -90,24 +109,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wit-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wit-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

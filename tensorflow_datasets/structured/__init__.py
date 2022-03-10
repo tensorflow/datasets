@@ -16,6 +16,7 @@
 """Structured datasets."""
 
 from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
+from tensorflow_datasets.structured.ble_wind_field import BLEWindField
 from tensorflow_datasets.structured.cherry_blossoms import CherryBlossoms
 from tensorflow_datasets.structured.covid19 import Covid19
 from tensorflow_datasets.structured.cs_restaurants import CSRestaurants
@@ -36,6 +37,7 @@ from tensorflow_datasets.structured.proteinnet import ProteinNet
 from tensorflow_datasets.structured.radon import Radon
 from tensorflow_datasets.structured.rock_you import RockYou
 from tensorflow_datasets.structured.titanic import Titanic
+from tensorflow_datasets.structured.web_graph import WebGraph
 from tensorflow_datasets.structured.web_nlg.web_nlg import WebNlg
 from tensorflow_datasets.structured.wiki_bio import WikiBio
 from tensorflow_datasets.structured.wiki_table_questions import WikiTableQuestions

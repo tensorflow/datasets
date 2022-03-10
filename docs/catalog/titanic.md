@@ -12,11 +12,6 @@
 # `titanic`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Dataset describing the survival status of individual passengers on the Titanic.
@@ -36,9 +31,8 @@ missing values are replaced with -1, string missing values are replaced with
     *   `3.0.0`: Use a standard flat dictionary of features for the dataset. Use
         `as_supervised=True` to split the dataset into a `(features_dict,
         survived)` tuple.
-    *   **`4.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fix inverted labels which were inverted in the 3.0.0.
+    *   **`4.0.0`** (default): Fix inverted labels which were inverted in the
+        3.0.0.
 
 *   **Download size**: `114.98 KiB`
 
@@ -54,7 +48,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,309
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -75,12 +69,32 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype      | Description
+:-------- | :----------- | :---- | :--------- | :----------
+          | FeaturesDict |       |            |
+age       | Tensor       |       | tf.float32 |
+boat      | Tensor       |       | tf.string  |
+body      | Tensor       |       | tf.int32   |
+cabin     | Tensor       |       | tf.string  |
+embarked  | ClassLabel   |       | tf.int64   |
+fare      | Tensor       |       | tf.float32 |
+home.dest | Tensor       |       | tf.string  |
+name      | Tensor       |       | tf.string  |
+parch     | Tensor       |       | tf.int32   |
+pclass    | ClassLabel   |       | tf.int64   |
+sex       | ClassLabel   |       | tf.int64   |
+sibsp     | Tensor       |       | tf.int32   |
+survived  | ClassLabel   |       | tf.int64   |
+ticket    | Tensor       |       | tf.string  |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `({'cabin': 'cabin', 'home.dest': 'home.dest', 'embarked': 'embarked',
-    'parch': 'parch', 'boat': 'boat', 'sex': 'sex', 'age': 'age', 'sibsp':
-    'sibsp', 'fare': 'fare', 'pclass': 'pclass', 'ticket': 'ticket', 'body':
-    'body', 'name': 'name'}, 'survived')`
+    `({'age': 'age', 'boat': 'boat', 'body': 'body', 'cabin': 'cabin',
+    'embarked': 'embarked', 'fare': 'fare', 'home.dest': 'home.dest', 'name':
+    'name', 'parch': 'parch', 'pclass': 'pclass', 'sex': 'sex', 'sibsp':
+    'sibsp', 'ticket': 'ticket'}, 'survived')`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -95,24 +109,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/titanic-4.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/titanic-4.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

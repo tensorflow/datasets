@@ -17,14 +17,16 @@
 
 import os
 import typing
-from typing import Any, Optional, Tuple, Type
+from typing import Any, List, Optional, Tuple, Type
 
+from etils import epath
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import dataset_info_pb2
@@ -37,7 +39,7 @@ class ReadOnlyBuilder(
   """Generic DatasetBuilder loading from a directory."""
 
   def __init__(self,
-               builder_dir: utils.PathLike,
+               builder_dir: epath.PathLike,
                *,
                info_proto: Optional[dataset_info_pb2.DatasetInfo] = None):
     """Constructor.
@@ -104,7 +106,7 @@ class ReadOnlyBuilder(
 
 
 def builder_from_directory(
-    builder_dir: utils.PathLike,) -> dataset_builder.DatasetBuilder:
+    builder_dir: epath.PathLike,) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
 
   Reconstructs the `tfds.core.DatasetBuilder` without requiring the original
@@ -128,8 +130,68 @@ def builder_from_directory(
   return ReadOnlyBuilder(builder_dir=builder_dir)
 
 
+def builder_from_directories(
+    builder_dirs: List[epath.PathLike],
+    *,
+    filetype_suffix: Optional[str] = None,  # DEPRECATED
+) -> dataset_builder.DatasetBuilder:
+  """Loads a `tfds.core.DatasetBuilder` from the given generated dataset path.
+
+  When a dataset is spread out over multiple folders, then this function can be
+  used to easily read from all builder dirs.
+
+  Note that the data in each folder must have the same features, dataset name,
+  and version.
+
+  Some examples of when a dataset might be spread out over multiple folders:
+
+  - in reinforcement learning, multiple agents each produce a dataset
+  - each day a new dataset is produced based on new incoming events
+
+  Arguments:
+    builder_dirs: the list of builder dirs from which the data should be read.
+    filetype_suffix: DEPRECATED PLEASE DO NOT USE. The filetype suffix (e.g.
+      'tfrecord') that is used if the file format is not specified in the
+      DatasetInfo.
+
+  Returns:
+    the read only dataset builder that is configured to read from all the given
+    builder dirs.
+  """
+  if not builder_dirs:
+    raise ValueError('No builder dirs were given!')
+
+  dataset_infos = utils.tree.parallel_map(
+      dataset_info.read_proto_from_builder_dir, {d: d for d in builder_dirs})
+
+  # TODO(tfds): assert that the features of all datasets are identical.
+
+  def get_split_dict(builder_dir, dataset_info_proto) -> splits_lib.SplitDict:
+    filename_template = naming.ShardedFileTemplate(
+        dataset_name=dataset_info_proto.name,
+        data_dir=builder_dir,
+        filetype_suffix=dataset_info_proto.file_format or filetype_suffix)
+    return splits_lib.SplitDict.from_proto(
+        repeated_split_infos=dataset_info_proto.splits,
+        filename_template=filename_template)
+
+  merged_split_dict = splits_lib.SplitDict.merge_multiple([
+      get_split_dict(builder_dir, dataset_info_proto)
+      for builder_dir, dataset_info_proto in dataset_infos.items()
+  ])
+
+  # We create the ReadOnlyBuilder for a random builder_dir and then update the
+  # splits to capture the splits from all builder dirs.
+  random_builder_dir = builder_dirs[0]
+  random_builder = ReadOnlyBuilder(
+      builder_dir=random_builder_dir,
+      info_proto=dataset_infos[random_builder_dir])
+  random_builder.info.set_splits(merged_split_dict)
+  return random_builder
+
+
 def builder_from_metadata(
-    builder_dir: utils.PathLike,
+    builder_dir: epath.PathLike,
     info_proto: dataset_info_pb2.DatasetInfo) -> dataset_builder.DatasetBuilder:
   """Loads a `tfds.core.DatasetBuilder` from the given metadata.
 
@@ -267,7 +329,7 @@ def _find_builder_dir_single_dir(
 ) -> Optional[str]:
   """Same as `find_builder_dir` but requires explicit dir."""
   # Construct the `ds_name/config/` path
-  builder_dir = os.path.join(data_dir, builder_name)
+  builder_dir = epath.Path(data_dir) / builder_name
   if not config_name:
     # If the BuilderConfig is not specified:
     # * Either the dataset doesn't have a config
@@ -280,7 +342,7 @@ def _find_builder_dir_single_dir(
 
   # If has config (explicitly given or default config), append it to the path
   if config_name:
-    builder_dir = os.path.join(builder_dir, config_name)
+    builder_dir = builder_dir / config_name
 
   # Extract the version
   version_str = _get_version_str(builder_dir, requested_version=version_str)
@@ -288,11 +350,12 @@ def _find_builder_dir_single_dir(
   if not version_str:  # Version not given or found
     return None
 
-  builder_dir = os.path.join(builder_dir, version_str)
+  builder_dir = builder_dir / version_str
 
   try:
     # Backward compatibility, in order to be a valid ReadOnlyBuilder, the folder
     # has to contain the feature configuration.
+    builder_dir = os.fspath(builder_dir)
     if tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):
       return str(builder_dir)
   except tf.errors.PermissionDeniedError:
@@ -300,7 +363,10 @@ def _find_builder_dir_single_dir(
   return None
 
 
-def _get_default_config_name(builder_dir: str, name: str) -> Optional[str]:
+def _get_default_config_name(
+    builder_dir: epath.Path,
+    name: str,
+) -> Optional[str]:
   """Returns the default config of the given dataset, None if not found."""
   # Search for the DatasetBuilder generation code
   try:
@@ -317,11 +383,11 @@ def _get_default_config_name(builder_dir: str, name: str) -> Optional[str]:
       return cls.BUILDER_CONFIGS[0].name
 
   # Otherwise, try to load default config from common metadata
-  return dataset_builder.load_default_config_name(utils.as_path(builder_dir))
+  return dataset_builder.load_default_config_name(epath.Path(builder_dir))
 
 
 def _get_version_str(
-    builder_dir: str,
+    builder_dir: epath.Path,
     *,
     requested_version: Optional[str] = None,
 ) -> Optional[str]:
@@ -334,7 +400,7 @@ def _get_version_str(
   Returns:
     version_str: The version directory name found in `builder_dir`.
   """
-  all_versions = version_lib.list_all_versions(builder_dir)
+  all_versions = version_lib.list_all_versions(os.fspath(builder_dir))
   # Version not given, using the last one.
   if not requested_version and all_versions:
     return str(all_versions[-1])

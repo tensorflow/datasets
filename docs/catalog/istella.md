@@ -12,10 +12,6 @@
 # `istella`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 The Istella datasets are three large-scale Learning-to-Rank datasets released by
@@ -60,7 +56,7 @@ ds = tfds.load("istella")
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -288,6 +284,233 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature     | Class        | Shape   | Dtype      | Description
+:---------- | :----------- | :------ | :--------- | :----------
+            | FeaturesDict |         |            |
+feature_1   | Tensor       | (None,) | tf.float64 |
+feature_10  | Tensor       | (None,) | tf.float64 |
+feature_100 | Tensor       | (None,) | tf.float64 |
+feature_101 | Tensor       | (None,) | tf.float64 |
+feature_102 | Tensor       | (None,) | tf.float64 |
+feature_103 | Tensor       | (None,) | tf.float64 |
+feature_104 | Tensor       | (None,) | tf.float64 |
+feature_105 | Tensor       | (None,) | tf.float64 |
+feature_106 | Tensor       | (None,) | tf.float64 |
+feature_107 | Tensor       | (None,) | tf.float64 |
+feature_108 | Tensor       | (None,) | tf.float64 |
+feature_109 | Tensor       | (None,) | tf.float64 |
+feature_11  | Tensor       | (None,) | tf.float64 |
+feature_110 | Tensor       | (None,) | tf.float64 |
+feature_111 | Tensor       | (None,) | tf.float64 |
+feature_112 | Tensor       | (None,) | tf.float64 |
+feature_113 | Tensor       | (None,) | tf.float64 |
+feature_114 | Tensor       | (None,) | tf.float64 |
+feature_115 | Tensor       | (None,) | tf.float64 |
+feature_116 | Tensor       | (None,) | tf.float64 |
+feature_117 | Tensor       | (None,) | tf.float64 |
+feature_118 | Tensor       | (None,) | tf.float64 |
+feature_119 | Tensor       | (None,) | tf.float64 |
+feature_12  | Tensor       | (None,) | tf.float64 |
+feature_120 | Tensor       | (None,) | tf.float64 |
+feature_121 | Tensor       | (None,) | tf.float64 |
+feature_122 | Tensor       | (None,) | tf.float64 |
+feature_123 | Tensor       | (None,) | tf.float64 |
+feature_124 | Tensor       | (None,) | tf.float64 |
+feature_125 | Tensor       | (None,) | tf.float64 |
+feature_126 | Tensor       | (None,) | tf.float64 |
+feature_127 | Tensor       | (None,) | tf.float64 |
+feature_128 | Tensor       | (None,) | tf.float64 |
+feature_129 | Tensor       | (None,) | tf.float64 |
+feature_13  | Tensor       | (None,) | tf.float64 |
+feature_130 | Tensor       | (None,) | tf.float64 |
+feature_131 | Tensor       | (None,) | tf.float64 |
+feature_132 | Tensor       | (None,) | tf.float64 |
+feature_133 | Tensor       | (None,) | tf.float64 |
+feature_134 | Tensor       | (None,) | tf.float64 |
+feature_135 | Tensor       | (None,) | tf.float64 |
+feature_136 | Tensor       | (None,) | tf.float64 |
+feature_137 | Tensor       | (None,) | tf.float64 |
+feature_138 | Tensor       | (None,) | tf.float64 |
+feature_139 | Tensor       | (None,) | tf.float64 |
+feature_14  | Tensor       | (None,) | tf.float64 |
+feature_140 | Tensor       | (None,) | tf.float64 |
+feature_141 | Tensor       | (None,) | tf.float64 |
+feature_142 | Tensor       | (None,) | tf.float64 |
+feature_143 | Tensor       | (None,) | tf.float64 |
+feature_144 | Tensor       | (None,) | tf.float64 |
+feature_145 | Tensor       | (None,) | tf.float64 |
+feature_146 | Tensor       | (None,) | tf.float64 |
+feature_147 | Tensor       | (None,) | tf.float64 |
+feature_148 | Tensor       | (None,) | tf.float64 |
+feature_149 | Tensor       | (None,) | tf.float64 |
+feature_15  | Tensor       | (None,) | tf.float64 |
+feature_150 | Tensor       | (None,) | tf.float64 |
+feature_151 | Tensor       | (None,) | tf.float64 |
+feature_152 | Tensor       | (None,) | tf.float64 |
+feature_153 | Tensor       | (None,) | tf.float64 |
+feature_154 | Tensor       | (None,) | tf.float64 |
+feature_155 | Tensor       | (None,) | tf.float64 |
+feature_156 | Tensor       | (None,) | tf.float64 |
+feature_157 | Tensor       | (None,) | tf.float64 |
+feature_158 | Tensor       | (None,) | tf.float64 |
+feature_159 | Tensor       | (None,) | tf.float64 |
+feature_16  | Tensor       | (None,) | tf.float64 |
+feature_160 | Tensor       | (None,) | tf.float64 |
+feature_161 | Tensor       | (None,) | tf.float64 |
+feature_162 | Tensor       | (None,) | tf.float64 |
+feature_163 | Tensor       | (None,) | tf.float64 |
+feature_164 | Tensor       | (None,) | tf.float64 |
+feature_165 | Tensor       | (None,) | tf.float64 |
+feature_166 | Tensor       | (None,) | tf.float64 |
+feature_167 | Tensor       | (None,) | tf.float64 |
+feature_168 | Tensor       | (None,) | tf.float64 |
+feature_169 | Tensor       | (None,) | tf.float64 |
+feature_17  | Tensor       | (None,) | tf.float64 |
+feature_170 | Tensor       | (None,) | tf.float64 |
+feature_171 | Tensor       | (None,) | tf.float64 |
+feature_172 | Tensor       | (None,) | tf.float64 |
+feature_173 | Tensor       | (None,) | tf.float64 |
+feature_174 | Tensor       | (None,) | tf.float64 |
+feature_175 | Tensor       | (None,) | tf.float64 |
+feature_176 | Tensor       | (None,) | tf.float64 |
+feature_177 | Tensor       | (None,) | tf.float64 |
+feature_178 | Tensor       | (None,) | tf.float64 |
+feature_179 | Tensor       | (None,) | tf.float64 |
+feature_18  | Tensor       | (None,) | tf.float64 |
+feature_180 | Tensor       | (None,) | tf.float64 |
+feature_181 | Tensor       | (None,) | tf.float64 |
+feature_182 | Tensor       | (None,) | tf.float64 |
+feature_183 | Tensor       | (None,) | tf.float64 |
+feature_184 | Tensor       | (None,) | tf.float64 |
+feature_185 | Tensor       | (None,) | tf.float64 |
+feature_186 | Tensor       | (None,) | tf.float64 |
+feature_187 | Tensor       | (None,) | tf.float64 |
+feature_188 | Tensor       | (None,) | tf.float64 |
+feature_189 | Tensor       | (None,) | tf.float64 |
+feature_19  | Tensor       | (None,) | tf.float64 |
+feature_190 | Tensor       | (None,) | tf.float64 |
+feature_191 | Tensor       | (None,) | tf.float64 |
+feature_192 | Tensor       | (None,) | tf.float64 |
+feature_193 | Tensor       | (None,) | tf.float64 |
+feature_194 | Tensor       | (None,) | tf.float64 |
+feature_195 | Tensor       | (None,) | tf.float64 |
+feature_196 | Tensor       | (None,) | tf.float64 |
+feature_197 | Tensor       | (None,) | tf.float64 |
+feature_198 | Tensor       | (None,) | tf.float64 |
+feature_199 | Tensor       | (None,) | tf.float64 |
+feature_2   | Tensor       | (None,) | tf.float64 |
+feature_20  | Tensor       | (None,) | tf.float64 |
+feature_200 | Tensor       | (None,) | tf.float64 |
+feature_201 | Tensor       | (None,) | tf.float64 |
+feature_202 | Tensor       | (None,) | tf.float64 |
+feature_203 | Tensor       | (None,) | tf.float64 |
+feature_204 | Tensor       | (None,) | tf.float64 |
+feature_205 | Tensor       | (None,) | tf.float64 |
+feature_206 | Tensor       | (None,) | tf.float64 |
+feature_207 | Tensor       | (None,) | tf.float64 |
+feature_208 | Tensor       | (None,) | tf.float64 |
+feature_209 | Tensor       | (None,) | tf.float64 |
+feature_21  | Tensor       | (None,) | tf.float64 |
+feature_210 | Tensor       | (None,) | tf.float64 |
+feature_211 | Tensor       | (None,) | tf.float64 |
+feature_212 | Tensor       | (None,) | tf.float64 |
+feature_213 | Tensor       | (None,) | tf.float64 |
+feature_214 | Tensor       | (None,) | tf.float64 |
+feature_215 | Tensor       | (None,) | tf.float64 |
+feature_216 | Tensor       | (None,) | tf.float64 |
+feature_217 | Tensor       | (None,) | tf.float64 |
+feature_218 | Tensor       | (None,) | tf.float64 |
+feature_219 | Tensor       | (None,) | tf.float64 |
+feature_22  | Tensor       | (None,) | tf.float64 |
+feature_220 | Tensor       | (None,) | tf.float64 |
+feature_23  | Tensor       | (None,) | tf.float64 |
+feature_24  | Tensor       | (None,) | tf.float64 |
+feature_25  | Tensor       | (None,) | tf.float64 |
+feature_26  | Tensor       | (None,) | tf.float64 |
+feature_27  | Tensor       | (None,) | tf.float64 |
+feature_28  | Tensor       | (None,) | tf.float64 |
+feature_29  | Tensor       | (None,) | tf.float64 |
+feature_3   | Tensor       | (None,) | tf.float64 |
+feature_30  | Tensor       | (None,) | tf.float64 |
+feature_31  | Tensor       | (None,) | tf.float64 |
+feature_32  | Tensor       | (None,) | tf.float64 |
+feature_33  | Tensor       | (None,) | tf.float64 |
+feature_34  | Tensor       | (None,) | tf.float64 |
+feature_35  | Tensor       | (None,) | tf.float64 |
+feature_36  | Tensor       | (None,) | tf.float64 |
+feature_37  | Tensor       | (None,) | tf.float64 |
+feature_38  | Tensor       | (None,) | tf.float64 |
+feature_39  | Tensor       | (None,) | tf.float64 |
+feature_4   | Tensor       | (None,) | tf.float64 |
+feature_40  | Tensor       | (None,) | tf.float64 |
+feature_41  | Tensor       | (None,) | tf.float64 |
+feature_42  | Tensor       | (None,) | tf.float64 |
+feature_43  | Tensor       | (None,) | tf.float64 |
+feature_44  | Tensor       | (None,) | tf.float64 |
+feature_45  | Tensor       | (None,) | tf.float64 |
+feature_46  | Tensor       | (None,) | tf.float64 |
+feature_47  | Tensor       | (None,) | tf.float64 |
+feature_48  | Tensor       | (None,) | tf.float64 |
+feature_49  | Tensor       | (None,) | tf.float64 |
+feature_5   | Tensor       | (None,) | tf.float64 |
+feature_50  | Tensor       | (None,) | tf.float64 |
+feature_51  | Tensor       | (None,) | tf.float64 |
+feature_52  | Tensor       | (None,) | tf.float64 |
+feature_53  | Tensor       | (None,) | tf.float64 |
+feature_54  | Tensor       | (None,) | tf.float64 |
+feature_55  | Tensor       | (None,) | tf.float64 |
+feature_56  | Tensor       | (None,) | tf.float64 |
+feature_57  | Tensor       | (None,) | tf.float64 |
+feature_58  | Tensor       | (None,) | tf.float64 |
+feature_59  | Tensor       | (None,) | tf.float64 |
+feature_6   | Tensor       | (None,) | tf.float64 |
+feature_60  | Tensor       | (None,) | tf.float64 |
+feature_61  | Tensor       | (None,) | tf.float64 |
+feature_62  | Tensor       | (None,) | tf.float64 |
+feature_63  | Tensor       | (None,) | tf.float64 |
+feature_64  | Tensor       | (None,) | tf.float64 |
+feature_65  | Tensor       | (None,) | tf.float64 |
+feature_66  | Tensor       | (None,) | tf.float64 |
+feature_67  | Tensor       | (None,) | tf.float64 |
+feature_68  | Tensor       | (None,) | tf.float64 |
+feature_69  | Tensor       | (None,) | tf.float64 |
+feature_7   | Tensor       | (None,) | tf.float64 |
+feature_70  | Tensor       | (None,) | tf.float64 |
+feature_71  | Tensor       | (None,) | tf.float64 |
+feature_72  | Tensor       | (None,) | tf.float64 |
+feature_73  | Tensor       | (None,) | tf.float64 |
+feature_74  | Tensor       | (None,) | tf.float64 |
+feature_75  | Tensor       | (None,) | tf.float64 |
+feature_76  | Tensor       | (None,) | tf.float64 |
+feature_77  | Tensor       | (None,) | tf.float64 |
+feature_78  | Tensor       | (None,) | tf.float64 |
+feature_79  | Tensor       | (None,) | tf.float64 |
+feature_8   | Tensor       | (None,) | tf.float64 |
+feature_80  | Tensor       | (None,) | tf.float64 |
+feature_81  | Tensor       | (None,) | tf.float64 |
+feature_82  | Tensor       | (None,) | tf.float64 |
+feature_83  | Tensor       | (None,) | tf.float64 |
+feature_84  | Tensor       | (None,) | tf.float64 |
+feature_85  | Tensor       | (None,) | tf.float64 |
+feature_86  | Tensor       | (None,) | tf.float64 |
+feature_87  | Tensor       | (None,) | tf.float64 |
+feature_88  | Tensor       | (None,) | tf.float64 |
+feature_89  | Tensor       | (None,) | tf.float64 |
+feature_9   | Tensor       | (None,) | tf.float64 |
+feature_90  | Tensor       | (None,) | tf.float64 |
+feature_91  | Tensor       | (None,) | tf.float64 |
+feature_92  | Tensor       | (None,) | tf.float64 |
+feature_93  | Tensor       | (None,) | tf.float64 |
+feature_94  | Tensor       | (None,) | tf.float64 |
+feature_95  | Tensor       | (None,) | tf.float64 |
+feature_96  | Tensor       | (None,) | tf.float64 |
+feature_97  | Tensor       | (None,) | tf.float64 |
+feature_98  | Tensor       | (None,) | tf.float64 |
+feature_99  | Tensor       | (None,) | tf.float64 |
+label       | Tensor       | (None,) | tf.float64 |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -339,24 +562,27 @@ Split     | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-main-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-main-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -387,24 +613,27 @@ Split     | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-s-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-s-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -435,24 +664,27 @@ Split     | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-x-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/istella-x-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

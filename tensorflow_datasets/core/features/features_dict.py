@@ -15,7 +15,7 @@
 
 """FeatureDict: Main feature connector container."""
 
-from typing import Dict, Union
+from typing import Dict, List, Union
 
 import tensorflow as tf
 
@@ -110,7 +110,12 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   """
 
-  def __init__(self, feature_dict: Dict[str, feature_lib.FeatureConnectorArg]):
+  def __init__(
+      self,
+      feature_dict: Dict[str, feature_lib.FeatureConnectorArg],
+      *,
+      doc: feature_lib.DocArg = None,
+  ):
     """Initialize the features.
 
     Args:
@@ -118,11 +123,12 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
         example. The keys should correspond to the data dict as returned by
         tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically be
         converted into FeatureConnector.
+      doc: Documentation of this feature (e.g. description).
 
     Raises:
       ValueError: If one of the given features is not recognized
     """
-    super(FeaturesDict, self).__init__()
+    super(FeaturesDict, self).__init__(doc=doc)
     self._feature_dict = {k: to_feature(v) for k, v in feature_dict.items()}
 
   # Dict functions.
@@ -162,6 +168,26 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
       lines.extend('    ' + l for l in all_sub_lines.split('\n'))
     lines.append('})')
     return '\n'.join(lines)
+
+  def catalog_documentation(
+      self) -> List[feature_lib.CatalogFeatureDocumentation]:
+    feature_docs = [
+        feature_lib.CatalogFeatureDocumentation(
+            name='',
+            cls_name=type(self).__name__,
+            tensor_info=None,
+            description=self._doc.desc,
+            value_range=self._doc.value_range,
+        )
+    ]
+    for feature_name, feature in sorted(list(self._feature_dict.items())):
+      for documentation in feature.catalog_documentation():
+        if documentation.name:
+          nested_name = f'{feature_name}/{documentation.name}'
+        else:
+          nested_name = feature_name
+        feature_docs.append(documentation.replace(name=nested_name))
+    return feature_docs
 
   @py_utils.memoize()
   def get_tensor_info(self):

@@ -57,7 +57,7 @@ thread
 Split | Examples
 :---- | -------:
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -71,6 +71,19 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature            | Class        | Shape | Dtype     | Description
+:----------------- | :----------- | :---- | :-------- | :----------
+                   | FeaturesDict |       |           |
+thread             | Sequence     |       |           |
+thread/author      | Text         |       | tf.string |
+thread/created_utc | Text         |       | tf.string |
+thread/id          | Text         |       | tf.string |
+thread/link_id     | Text         |       | tf.string |
+thread/parent_id   | Text         |       | tf.string |
+thread/text        | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

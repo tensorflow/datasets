@@ -104,7 +104,7 @@ refcocog | umd       | test  | 5023  | 2600
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -129,6 +129,30 @@ FeaturesDict({
     }),
 })
 ```
+
+*   **Feature documentation**:
+
+| Feature                  | Class        | Shape  | Dtype      | Description |
+| :----------------------- | :----------- | :----- | :--------- | :---------- |
+|                          | FeaturesDict |        |            |             |
+| coco_annotations         | Sequence     |        |            |             |
+| coco_annotations/area    | Tensor       |        | tf.int64   |             |
+| coco_annotations/bbox    | BBoxFeature  | (4,)   | tf.float32 |             |
+| coco_annotations/id      | Tensor       |        | tf.int64   |             |
+| coco_annotations/label   | Tensor       |        | tf.int64   |             |
+| image                    | Image        | (None, | tf.uint8   |             |
+:                          :              : None,  :            :             :
+:                          :              : 3)     :            :             :
+| image/id                 | Tensor       |        | tf.int64   |             |
+| objects                  | Sequence     |        |            |             |
+| objects/area             | Tensor       |        | tf.int64   |             |
+| objects/bbox             | BBoxFeature  | (4,)   | tf.float32 |             |
+| objects/gt_box_index     | Tensor       |        | tf.int64   |             |
+| objects/id               | Tensor       |        | tf.int64   |             |
+| objects/label            | Tensor       |        | tf.int64   |             |
+| objects/refexp           | Sequence     |        |            |             |
+| objects/refexp/raw       | Text         |        | tf.string  |             |
+| objects/refexp/refexp_id | Tensor       |        | tf.int64   |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -196,24 +220,27 @@ Split          | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcoco_unc-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcoco_unc-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -247,24 +274,27 @@ Split          | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcoco_google-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcoco_google-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -299,24 +329,27 @@ Split          | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcocoplus_unc-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcocoplus_unc-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -349,24 +382,27 @@ Split          | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcocog_google-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcocog_google-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -400,24 +436,27 @@ Split          | Examples
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcocog_umd-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ref_coco-refcocog_umd-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

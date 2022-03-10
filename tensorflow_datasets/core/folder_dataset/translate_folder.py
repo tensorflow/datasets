@@ -79,7 +79,7 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
             num_bytes=0,
         ) for split_name, examples in self._split_examples.items()
     ]
-    split_dict = split_lib.SplitDict(split_infos, dataset_name=self.name)
+    split_dict = split_lib.SplitDict(split_infos)
     self.info.set_splits(split_dict)
 
   def _info(self) -> dataset_info.DatasetInfo:

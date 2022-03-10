@@ -65,30 +65,17 @@ when making the labels.
     *   `1.1.1`: Added CivilCommentsCovert config with correct checksum.
     *   `1.1.2`: Added separate citation for CivilCommentsCovert dataset.
     *   `1.1.3`: Corrected id types from float to string.
-    *   **`1.2.0`** (default)
+    *   `1.2.0`: Add toxic spans, context, and parent comment text features.
+    *   `1.2.1`: Fix incorrect formatting in context splits.
+    *   **`1.2.2`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Add toxic spans, context, and parent comment text features.
+        Update to reflect context only having a train split.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+*   **Download size**: `427.41 MiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 
 ## civil_comments/CivilComments (default config)
@@ -97,7 +84,21 @@ Split | Examples
     but only the basic seven labels (toxicity, severe_toxicity, obscene, threat,
     insult, identity_attack, and sexual_explicit).
 
-*   **Features**:
+*   **Dataset size**: `1.39 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'test'`       | 97,320
+`'train'`      | 1,804,874
+`'validation'` | 97,320
+
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -116,9 +117,64 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype      | Description
+:-------------- | :----------- | :---- | :--------- | :----------
+                | FeaturesDict |       |            |
+article_id      | Tensor       |       | tf.int32   |
+id              | Tensor       |       | tf.string  |
+identity_attack | Tensor       |       | tf.float32 |
+insult          | Tensor       |       | tf.float32 |
+obscene         | Tensor       |       | tf.float32 |
+parent_id       | Tensor       |       | tf.int32   |
+parent_text     | Text         |       | tf.string  |
+severe_toxicity | Tensor       |       | tf.float32 |
+sexual_explicit | Tensor       |       | tf.float32 |
+text            | Text         |       | tf.string  |
+threat          | Tensor       |       | tf.float32 |
+toxicity        | Tensor       |       | tf.float32 |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilComments-1.2.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -150,7 +206,21 @@ FeaturesDict({
     However, it only includes the subset (roughly a quarter) of the data with
     all these features.
 
-*   **Features**:
+*   **Dataset size**: `622.02 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 21,577
+`'train'`      | 405,130
+`'validation'` | 21,293
+
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -193,9 +263,88 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                             | Class        | Shape | Dtype      | Description
+:---------------------------------- | :----------- | :---- | :--------- | :----------
+                                    | FeaturesDict |       |            |
+article_id                          | Tensor       |       | tf.int32   |
+asian                               | Tensor       |       | tf.float32 |
+atheist                             | Tensor       |       | tf.float32 |
+bisexual                            | Tensor       |       | tf.float32 |
+black                               | Tensor       |       | tf.float32 |
+buddhist                            | Tensor       |       | tf.float32 |
+christian                           | Tensor       |       | tf.float32 |
+female                              | Tensor       |       | tf.float32 |
+heterosexual                        | Tensor       |       | tf.float32 |
+hindu                               | Tensor       |       | tf.float32 |
+homosexual_gay_or_lesbian           | Tensor       |       | tf.float32 |
+id                                  | Tensor       |       | tf.string  |
+identity_attack                     | Tensor       |       | tf.float32 |
+insult                              | Tensor       |       | tf.float32 |
+intellectual_or_learning_disability | Tensor       |       | tf.float32 |
+jewish                              | Tensor       |       | tf.float32 |
+latino                              | Tensor       |       | tf.float32 |
+male                                | Tensor       |       | tf.float32 |
+muslim                              | Tensor       |       | tf.float32 |
+obscene                             | Tensor       |       | tf.float32 |
+other_disability                    | Tensor       |       | tf.float32 |
+other_gender                        | Tensor       |       | tf.float32 |
+other_race_or_ethnicity             | Tensor       |       | tf.float32 |
+other_religion                      | Tensor       |       | tf.float32 |
+other_sexual_orientation            | Tensor       |       | tf.float32 |
+parent_id                           | Tensor       |       | tf.int32   |
+parent_text                         | Text         |       | tf.string  |
+physical_disability                 | Tensor       |       | tf.float32 |
+psychiatric_or_mental_illness       | Tensor       |       | tf.float32 |
+severe_toxicity                     | Tensor       |       | tf.float32 |
+sexual_explicit                     | Tensor       |       | tf.float32 |
+text                                | Text         |       | tf.string  |
+threat                              | Tensor       |       | tf.float32 |
+toxicity                            | Tensor       |       | tf.float32 |
+transgender                         | Tensor       |       | tf.float32 |
+white                               | Tensor       |       | tf.float32 |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsIdentities-1.2.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -231,7 +380,20 @@ FeaturesDict({
     detailed in a forthcoming paper at
     https://sites.google.com/corp/view/hciandnlp/accepted-papers.
 
-*   **Features**:
+*   **Dataset size**: `94.12 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,455
+`'train'` | 48,074
+
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -285,9 +447,99 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                             | Class        | Shape | Dtype      | Description
+:---------------------------------- | :----------- | :---- | :--------- | :----------
+                                    | FeaturesDict |       |            |
+article_id                          | Tensor       |       | tf.int32   |
+asian                               | Tensor       |       | tf.float32 |
+atheist                             | Tensor       |       | tf.float32 |
+bisexual                            | Tensor       |       | tf.float32 |
+black                               | Tensor       |       | tf.float32 |
+buddhist                            | Tensor       |       | tf.float32 |
+christian                           | Tensor       |       | tf.float32 |
+covert_emoticons_emojis             | Tensor       |       | tf.float32 |
+covert_humor                        | Tensor       |       | tf.float32 |
+covert_masked_harm                  | Tensor       |       | tf.float32 |
+covert_microaggression              | Tensor       |       | tf.float32 |
+covert_obfuscation                  | Tensor       |       | tf.float32 |
+covert_political                    | Tensor       |       | tf.float32 |
+covert_sarcasm                      | Tensor       |       | tf.float32 |
+explicitly_offensive                | Tensor       |       | tf.float32 |
+female                              | Tensor       |       | tf.float32 |
+heterosexual                        | Tensor       |       | tf.float32 |
+hindu                               | Tensor       |       | tf.float32 |
+homosexual_gay_or_lesbian           | Tensor       |       | tf.float32 |
+id                                  | Tensor       |       | tf.string  |
+identity_attack                     | Tensor       |       | tf.float32 |
+implicitly_offensive                | Tensor       |       | tf.float32 |
+insult                              | Tensor       |       | tf.float32 |
+intellectual_or_learning_disability | Tensor       |       | tf.float32 |
+jewish                              | Tensor       |       | tf.float32 |
+latino                              | Tensor       |       | tf.float32 |
+male                                | Tensor       |       | tf.float32 |
+muslim                              | Tensor       |       | tf.float32 |
+not_offensive                       | Tensor       |       | tf.float32 |
+not_sure_offensive                  | Tensor       |       | tf.float32 |
+obscene                             | Tensor       |       | tf.float32 |
+other_disability                    | Tensor       |       | tf.float32 |
+other_gender                        | Tensor       |       | tf.float32 |
+other_race_or_ethnicity             | Tensor       |       | tf.float32 |
+other_religion                      | Tensor       |       | tf.float32 |
+other_sexual_orientation            | Tensor       |       | tf.float32 |
+parent_id                           | Tensor       |       | tf.int32   |
+parent_text                         | Text         |       | tf.string  |
+physical_disability                 | Tensor       |       | tf.float32 |
+psychiatric_or_mental_illness       | Tensor       |       | tf.float32 |
+severe_toxicity                     | Tensor       |       | tf.float32 |
+sexual_explicit                     | Tensor       |       | tf.float32 |
+text                                | Text         |       | tf.string  |
+threat                              | Tensor       |       | tf.float32 |
+toxicity                            | Tensor       |       | tf.float32 |
+transgender                         | Tensor       |       | tf.float32 |
+white                               | Tensor       |       | tf.float32 |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsCovert-1.2.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -309,14 +561,28 @@ FeaturesDict({
 }
 ```
 
-## civil_comments/CivilCommentsToxicSpans <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## civil_comments/CivilCommentsToxicSpans
 
 *   **Config description**: The CivilComments Toxic Spans are a subset of
     CivilComments that is labeled at the span level - the indices of all
     character (unicode codepoints) boundaries that were tagged as toxic by a
     majority of the annotators is returned in a 'spans' feature.
 
-*   **Features**:
+*   **Dataset size**: `5.03 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,000
+`'train'`      | 7,939
+`'validation'` | 682
+
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -329,9 +595,58 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature     | Class        | Shape   | Dtype     | Description
+:---------- | :----------- | :------ | :-------- | :----------
+            | FeaturesDict |         |           |
+article_id  | Tensor       |         | tf.int32  |
+id          | Tensor       |         | tf.string |
+parent_id   | Tensor       |         | tf.int32  |
+parent_text | Text         |         | tf.string |
+spans       | Tensor       | (None,) | tf.int32  |
+text        | Text         |         | tf.string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'spans')`
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsToxicSpans-1.2.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -350,46 +665,103 @@ FeaturesDict({
 }
 ```
 
-## civil_comments/CivilCommentsInContext <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## civil_comments/CivilCommentsInContext
 
-*   **Config description**: The CivilComments Toxic Spans are a subset of
+*   **Config description**: The CivilComments in Context is a subset of
     CivilComments that was labeled by making available to the labelers the
     parent_text. It includes a contextual_toxicity feature.
 
-*   **Features**:
+*   **Dataset size**: `8.90 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 9,969
+
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    '_': tf.float32,
-    'a': tf.float32,
     'article_id': tf.int32,
-    'c': tf.float32,
-    'e': tf.float32,
-    'i': tf.float32,
+    'contextual_toxicity': tf.float32,
     'id': tf.string,
     'identity_attack': tf.float32,
     'insult': tf.float32,
-    'l': tf.float32,
-    'n': tf.float32,
-    'o': tf.float32,
     'obscene': tf.float32,
     'parent_id': tf.int32,
     'parent_text': Text(shape=(), dtype=tf.string),
     'severe_toxicity': tf.float32,
     'sexual_explicit': tf.float32,
-    't': tf.float32,
     'text': Text(shape=(), dtype=tf.string),
     'threat': tf.float32,
     'toxicity': tf.float32,
-    'u': tf.float32,
-    'x': tf.float32,
-    'y': tf.float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature             | Class        | Shape | Dtype      | Description
+:------------------ | :----------- | :---- | :--------- | :----------
+                    | FeaturesDict |       |            |
+article_id          | Tensor       |       | tf.int32   |
+contextual_toxicity | Tensor       |       | tf.float32 |
+id                  | Tensor       |       | tf.string  |
+identity_attack     | Tensor       |       | tf.float32 |
+insult              | Tensor       |       | tf.float32 |
+obscene             | Tensor       |       | tf.float32 |
+parent_id           | Tensor       |       | tf.int32   |
+parent_text         | Text         |       | tf.string  |
+severe_toxicity     | Tensor       |       | tf.float32 |
+sexual_explicit     | Tensor       |       | tf.float32 |
+text                | Text         |       | tf.string  |
+threat              | Tensor       |       | tf.float32 |
+toxicity            | Tensor       |       | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsInContext-1.2.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 

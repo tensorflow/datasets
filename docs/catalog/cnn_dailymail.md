@@ -12,11 +12,6 @@
 # `cnn_dailymail`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 CNN/DailyMail non-anonymized summarization dataset.
@@ -42,10 +37,8 @@ each highlight, which is the target summary
 
     *   `3.1.0`: Removed BuilderConfig
 
-    *   **`3.2.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Remove extra space before added sentence period. This shouldn't affect
-        ROUGE scores because punctuation is removed.
+    *   **`3.2.0`** (default): Remove extra space before added sentence period.
+        This shouldn't affect ROUGE scores because punctuation is removed.
 
 *   **Download size**: `558.32 MiB`
 
@@ -63,7 +56,7 @@ Split          | Examples
 `'train'`      | 287,113
 `'validation'` | 13,368
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -71,6 +64,14 @@ FeaturesDict({
     'highlights': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype     | Description
+:--------- | :----------- | :---- | :-------- | :----------
+           | FeaturesDict |       |           |
+article    | Text         |       | tf.string |
+highlights | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -89,24 +90,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.2.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

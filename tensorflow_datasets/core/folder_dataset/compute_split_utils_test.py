@@ -16,6 +16,7 @@
 """Tests for compute_split_info."""
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.folder_dataset import compute_split_utils
 
 
@@ -23,15 +24,20 @@ def test_compute_split_info(tmp_path):
   builder = testing.DummyDataset(data_dir=tmp_path)
   builder.download_and_prepare()
 
+  filename_template = naming.ShardedFileTemplate(
+      dataset_name=builder.name,
+      data_dir=builder.data_dir,
+      filetype_suffix=builder.info.file_format.file_suffix)
   split_infos = compute_split_utils.compute_split_info(
-      data_dir=tmp_path / builder.info.full_name,
       out_dir=tmp_path,
+      filename_template=filename_template,
   )
 
   assert [s.to_proto() for s in split_infos
          ] == [s.to_proto() for s in builder.info.splits.values()]
 
   # Split info are correctly saved
-  split_path = tmp_path / compute_split_utils._out_filename('train')
-  split_info = compute_split_utils._split_info_from_path(split_path)
+  filename_template = filename_template.replace(
+      data_dir=tmp_path, split='train')
+  split_info = compute_split_utils._split_info_from_path(filename_template)
   assert builder.info.splits['train'].to_proto() == split_info.to_proto()

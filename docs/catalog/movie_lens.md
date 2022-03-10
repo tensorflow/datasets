@@ -144,7 +144,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 25,000,095
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -157,6 +157,18 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype      | Description
+:----------- | :------------------- | :------ | :--------- | :----------
+             | FeaturesDict         |         |            |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id     | Tensor               |         | tf.string  |
+movie_title  | Tensor               |         | tf.string  |
+timestamp    | Tensor               |         | tf.int64   |
+user_id      | Tensor               |         | tf.string  |
+user_rating  | Tensor               |         | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -166,24 +178,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-25m-ratings-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-25m-ratings-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -210,7 +225,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 62,423
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -219,6 +234,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -229,24 +253,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-25m-movies-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-25m-movies-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -279,7 +306,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100,836
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -292,6 +319,18 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype      | Description
+:----------- | :------------------- | :------ | :--------- | :----------
+             | FeaturesDict         |         |            |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id     | Tensor               |         | tf.string  |
+movie_title  | Tensor               |         | tf.string  |
+timestamp    | Tensor               |         | tf.int64   |
+user_id      | Tensor               |         | tf.string  |
+user_rating  | Tensor               |         | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -301,24 +340,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-latest-small-ratings-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-latest-small-ratings-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -345,7 +387,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 9,742
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -354,6 +396,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -364,24 +415,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-latest-small-movies-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-latest-small-movies-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -413,7 +467,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -432,6 +486,24 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature               | Class                | Shape   | Dtype      | Description
+:-------------------- | :------------------- | :------ | :--------- | :----------
+                      | FeaturesDict         |         |            |
+bucketized_user_age   | Tensor               |         | tf.float32 |
+movie_genres          | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id              | Tensor               |         | tf.string  |
+movie_title           | Tensor               |         | tf.string  |
+raw_user_age          | Tensor               |         | tf.float32 |
+timestamp             | Tensor               |         | tf.int64   |
+user_gender           | Tensor               |         | tf.bool    |
+user_id               | Tensor               |         | tf.string  |
+user_occupation_label | ClassLabel           |         | tf.int64   |
+user_occupation_text  | Tensor               |         | tf.string  |
+user_rating           | Tensor               |         | tf.float32 |
+user_zip_code         | Tensor               |         | tf.string  |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -441,24 +513,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-100k-ratings-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-100k-ratings-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -485,7 +560,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,682
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -494,6 +569,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -504,24 +588,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-100k-movies-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-100k-movies-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -554,7 +641,7 @@ Split     | Examples
 :-------- | --------:
 `'train'` | 1,000,209
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -572,6 +659,23 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature               | Class                | Shape   | Dtype      | Description
+:-------------------- | :------------------- | :------ | :--------- | :----------
+                      | FeaturesDict         |         |            |
+bucketized_user_age   | Tensor               |         | tf.float32 |
+movie_genres          | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id              | Tensor               |         | tf.string  |
+movie_title           | Tensor               |         | tf.string  |
+timestamp             | Tensor               |         | tf.int64   |
+user_gender           | Tensor               |         | tf.bool    |
+user_id               | Tensor               |         | tf.string  |
+user_occupation_label | ClassLabel           |         | tf.int64   |
+user_occupation_text  | Tensor               |         | tf.string  |
+user_rating           | Tensor               |         | tf.float32 |
+user_zip_code         | Tensor               |         | tf.string  |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -581,24 +685,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-1m-ratings-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-1m-ratings-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -625,7 +732,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 3,883
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -634,6 +741,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -644,24 +760,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-1m-movies-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-1m-movies-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -692,7 +811,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 20,000,263
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -705,6 +824,18 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype      | Description
+:----------- | :------------------- | :------ | :--------- | :----------
+             | FeaturesDict         |         |            |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64   |
+movie_id     | Tensor               |         | tf.string  |
+movie_title  | Tensor               |         | tf.string  |
+timestamp    | Tensor               |         | tf.int64   |
+user_id      | Tensor               |         | tf.string  |
+user_rating  | Tensor               |         | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -714,24 +845,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-20m-ratings-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-20m-ratings-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -758,7 +892,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 27,278
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -767,6 +901,15 @@ FeaturesDict({
     'movie_title': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype     | Description
+:----------- | :------------------- | :------ | :-------- | :----------
+             | FeaturesDict         |         |           |
+movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
+movie_id     | Tensor               |         | tf.string |
+movie_title  | Tensor               |         | tf.string |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -777,24 +920,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-20m-movies-0.1.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-20m-movies-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

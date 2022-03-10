@@ -30,9 +30,6 @@ from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import shard_utils
 
-
-SplitInfo = Any
-
 Tree = utils.Tree
 TreeDict = utils.TreeDict
 Tensor = utils.Tensor
@@ -151,7 +148,7 @@ def _read_files(
   # Transpose the list[dict] into dict[list]
   tensor_inputs = _Instruction(
       filename=[os.path.basename(i.filename) for i in file_instructions],
-      filepath=[i.filename for i in file_instructions],
+      filepath=[os.fspath(i.filename) for i in file_instructions],
       # skip/take need to be converted to int64 explicitly
       skip=np.array([i.skip for i in file_instructions], dtype=np.int64),
       take=np.array([i.take for i in file_instructions], dtype=np.int64),
@@ -277,7 +274,7 @@ class Reader(object):
 
   def __init__(
       self,
-      path,
+      path,  # TODO(b/216427814) remove this as it isn't used anymore
       example_specs,
       file_format=file_adapters.DEFAULT_FILE_FORMAT,
   ):
@@ -296,9 +293,8 @@ class Reader(object):
   def read(
       self,
       *,
-      name: str,
       instructions: Tree[splits_lib.SplitArg],
-      split_infos: List[SplitInfo],
+      split_infos: List[splits_lib.SplitInfo],
       read_config: read_config_lib.ReadConfig,
       shuffle_files: bool,
       disable_shuffling: bool = False,
@@ -307,11 +303,10 @@ class Reader(object):
     """Returns tf.data.Dataset instance(s).
 
     Args:
-      name (str): name of the dataset.
       instructions (ReadInstruction, List[], Dict[]): instruction(s) to read.
         Instructions can be string and will then be passed to the Instruction
         constructor as it.
-      split_infos (list of SplitInfo proto): the available splits for dataset.
+      split_infos: the available splits for dataset.
       read_config: `tfds.ReadConfig`, the input pipeline options
       shuffle_files (bool): If True, input files are shuffled before being read.
       disable_shuffling: Specifies if the dataset being read has shuffling
@@ -325,9 +320,10 @@ class Reader(object):
        corresponding to given instructions param shape.
     """
 
+    splits_dict = splits_lib.SplitDict(split_infos=split_infos)
+
     def _read_instruction_to_ds(instruction):
-      file_instructions = splits_lib.make_file_instructions(
-          name, split_infos, instruction, file_format=self._file_format)
+      file_instructions = splits_dict[instruction].file_instructions
       return self.read_files(
           file_instructions,
           read_config=read_config,
@@ -366,13 +362,6 @@ class Reader(object):
     if not file_instructions:
       msg = f'Instruction {file_instructions} corresponds to no data!'
       raise ValueError(msg)
-
-    # Prepend path to filename
-    path = self._path
-    file_instructions = [
-        f.replace(filename=os.path.join(path, f.filename))
-        for f in file_instructions
-    ]
 
     # Read serialized example (eventually with `tfds_id`)
     ds = _read_files(

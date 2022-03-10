@@ -259,10 +259,9 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     if self.version < '3.0.0':
       return image
     if image_fname in CMYK_IMAGES:
-      image = io.BytesIO(
-          tfds.core.utils.jpeg_cmyk_to_rgb(image.read()).tobytes())
+      image = io.BytesIO(tfds.core.utils.jpeg_cmyk_to_rgb(image.read()))
     elif image_fname in PNG_IMAGES:
-      image = io.BytesIO(tfds.core.utils.png_to_jpeg(image.read()).tobytes())
+      image = io.BytesIO(tfds.core.utils.png_to_jpeg(image.read()))
     return image
 
   def _generate_examples(self,

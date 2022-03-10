@@ -16,10 +16,12 @@
 """robomimic_ph dataset."""
 
 import dataclasses
+
 import h5py
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.robomimic import dataset_utils
+
 
 _DESCRIPTION = """
 The Proficient Human datasets were collected by 1 proficient operator using the
@@ -115,11 +117,13 @@ def _image_feature(size: int) -> tfds.features.Image:
 class RobomimicPh(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for robomimic_ph dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.0.1': 'Citation updated.',
   }
   BUILDER_CONFIGS = _builder_configs()
+
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""

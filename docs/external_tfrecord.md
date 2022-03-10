@@ -81,20 +81,13 @@ Similarly, a `feature.deserialize_example` exists to decode the proto
 
 #### If you don't control the generation pipeline
 
-If you're not sure what your `tfds.features` translates into `tf.train.Example`,
-you can experiment in colab:
+If you want to see how `tfds.features` are represented in a `tf.train.Example`,
+you can examine this in colab:
 
 *   To translate `tfds.features` into the human readable structure of the
     `tf.train.Example`, you can call `features.get_serialized_info()`.
 *   To get the exact `FixedLenFeature`,... spec passed to
-    `tf.io.parse_single_example`, you can use the following code snippet:
-
-    ```python
-    example_specs = features.get_serialized_info()
-    parser = tfds.core.example_parser.ExampleParser(example_specs)
-    nested_feature_specs = parser._build_feature_specs()
-    feature_specs = tfds.core.utils.flatten_nest_dict(nested_feature_specs)
-    ```
+    `tf.io.parse_single_example`, you can use `spec = features.tf_example_spec`
 
 Note: If you're using custom feature connector, make sure to implement
 `to_json_content`/`from_json_content` and test with `self.assertFeature` (see
@@ -103,7 +96,7 @@ Note: If you're using custom feature connector, make sure to implement
 ### Get statistics on splits
 
 
-TFDS requires to know the exact number of example within each shard. This is
+TFDS requires to know the exact number of examples within each shard. This is
 required for features like `len(ds)`, or the
 [subplit API](https://www.tensorflow.org/datasets/splits):
 `split='train[75%:]'`.
@@ -135,7 +128,7 @@ To automatically add the proper metadata files along your dataset, use
 
 ```python
 tfds.folder_dataset.write_metadata(
-    builder_dir='/path/to/my/dataset/1.0.0/',
+    data_dir='/path/to/my/dataset/1.0.0/',
     features=features,
     # Pass the `out_dir` argument of compute_split_info (see section above)
     # You can also explicitly pass a list of `tfds.core.SplitInfo`
@@ -160,11 +153,11 @@ loaded with TFDS (see next section).
 ### Directly from folder
 
 Once the metadata have been generated, datasets can be loaded using
-`tfds.core.builder_from_directory` which returns a `tfds.core.DatasetBuilder`
-with the standard TFDS API (like `tfds.builder`):
+`tfds.builder_from_directory` which returns a `tfds.core.DatasetBuilder` with
+the standard TFDS API (like `tfds.builder`):
 
 ```python
-builder = tfds.core.builder_from_directory('~/path/to/my_dataset/3.0.0/')
+builder = tfds.builder_from_directory('~/path/to/my_dataset/3.0.0/')
 
 # Metadata are avalailable as usual
 builder.info.splits['train'].num_examples
@@ -174,6 +167,37 @@ ds = builder.as_dataset(split='train[75%:]')
 for ex in ds:
   ...
 ```
+
+### Directly from multiple folders
+
+It is also possible to load data from multiple folders. This can happen, for
+example, in reinforcement learning when multiple agents are each generating a
+separate dataset and you want to load all of them together. Other use cases are
+when a new dataset is produced on a regular basis, e.g. a new dataset per day,
+and you want to load data from a date range.
+
+To load data from multiple folders, use `tfds.builder_from_directories`, which
+returns a `tfds.core.DatasetBuilder` with the standard TFDS API (like
+`tfds.builder`):
+
+```python
+builder = tfds.builder_from_directories(builder_dirs=[
+    '~/path/my_dataset/agent1/1.0.0/',
+    '~/path/my_dataset/agent2/1.0.0/',
+    '~/path/my_dataset/agent3/1.0.0/',
+])
+
+# Metadata are avalailable as usual
+builder.info.splits['train'].num_examples
+
+# Construct the tf.data.Dataset pipeline
+ds = builder.as_dataset(split='train[75%:]')
+for ex in ds:
+  ...
+```
+
+Note: each folder must have its own metadata, because this contains information
+about the splits.
 
 ### Folder structure (optional)
 

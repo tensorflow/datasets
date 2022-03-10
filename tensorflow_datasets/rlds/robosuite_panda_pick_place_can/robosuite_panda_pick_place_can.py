@@ -15,9 +15,11 @@
 
 """robosuite_panda_pick_place_can dataset."""
 
+
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rlds import rlds_base
+
 
 _DESCRIPTION = """
 These datasets have been created with the PickPlaceCan environment of the
@@ -32,6 +34,9 @@ The synthetic datasets have been recorded using the
 Episodes consist of 400 steps. In each episode, a tag is
 added when the task is completed, this tag is stored as part of the custom step
 metadata.
+
+Note that, due to the EnvLogger dependency, generation of this dataset is
+currently supported on Linux environments only.
 """
 
 _CITATION = """
@@ -236,6 +241,7 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
   ]
 
   # pytype: enable=wrong-keyword-args
+
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""

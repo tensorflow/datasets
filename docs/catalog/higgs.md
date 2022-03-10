@@ -48,7 +48,7 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 11,000,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -84,6 +84,41 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                  | Class        | Shape | Dtype      | Description
+:----------------------- | :----------- | :---- | :--------- | :----------
+                         | FeaturesDict |       |            |
+class_label              | Tensor       |       | tf.float32 |
+jet_1_b-tag              | Tensor       |       | tf.float64 |
+jet_1_eta                | Tensor       |       | tf.float64 |
+jet_1_phi                | Tensor       |       | tf.float64 |
+jet_1_pt                 | Tensor       |       | tf.float64 |
+jet_2_b-tag              | Tensor       |       | tf.float64 |
+jet_2_eta                | Tensor       |       | tf.float64 |
+jet_2_phi                | Tensor       |       | tf.float64 |
+jet_2_pt                 | Tensor       |       | tf.float64 |
+jet_3_b-tag              | Tensor       |       | tf.float64 |
+jet_3_eta                | Tensor       |       | tf.float64 |
+jet_3_phi                | Tensor       |       | tf.float64 |
+jet_3_pt                 | Tensor       |       | tf.float64 |
+jet_4_b-tag              | Tensor       |       | tf.float64 |
+jet_4_eta                | Tensor       |       | tf.float64 |
+jet_4_phi                | Tensor       |       | tf.float64 |
+jet_4_pt                 | Tensor       |       | tf.float64 |
+lepton_eta               | Tensor       |       | tf.float64 |
+lepton_pT                | Tensor       |       | tf.float64 |
+lepton_phi               | Tensor       |       | tf.float64 |
+m_bb                     | Tensor       |       | tf.float64 |
+m_jj                     | Tensor       |       | tf.float64 |
+m_jjj                    | Tensor       |       | tf.float64 |
+m_jlv                    | Tensor       |       | tf.float64 |
+m_lv                     | Tensor       |       | tf.float64 |
+m_wbb                    | Tensor       |       | tf.float64 |
+m_wwbb                   | Tensor       |       | tf.float64 |
+missing_energy_magnitude | Tensor       |       | tf.float64 |
+missing_energy_phi       | Tensor       |       | tf.float64 |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -101,24 +136,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/higgs-2.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/higgs-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

@@ -75,7 +75,7 @@ class HFDataset(datasets.GeneratorBasedBuilder):
   def _generate_examples(self, num_vals):
     """This function returns the examples in the raw (text) form."""
     # Path is mocked
-    assert isinstance(Path("some_path/"), tfds.core.utils.gpath._GPath)  # pylint: disable=protected-access
+    assert isinstance(Path("some_path/"), tfds.core.Path)  # pylint: disable=protected-access
     for i in range(num_vals):
       yield i, {
           "id": str(i),

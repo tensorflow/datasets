@@ -19,6 +19,7 @@ import os
 from typing import Union
 
 import tensorflow as tf
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
@@ -30,7 +31,14 @@ class ClassLabel(tensor_feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
   # If updating the signature here, LabeledImage should likely be updated too.
-  def __init__(self, *, num_classes=None, names=None, names_file=None):
+  def __init__(
+      self,
+      *,
+      num_classes=None,
+      names=None,
+      names_file=None,
+      doc: feature_lib.DocArg = None,
+  ):
     """Constructs a ClassLabel FeatureConnector.
 
     There are 3 ways to define a ClassLabel, which correspond to the 3
@@ -48,8 +56,9 @@ class ClassLabel(tensor_feature.Tensor):
         which the names are provided is kept.
       names_file: `str`, path to a file with names for the integer classes, one
         per line.
+      doc: Documentation of this feature (e.g. description).
     """
-    super(ClassLabel, self).__init__(shape=(), dtype=tf.int64)
+    super(ClassLabel, self).__init__(shape=(), dtype=tf.int64, doc=doc)
 
     self._num_classes = None
     self._str2int = None

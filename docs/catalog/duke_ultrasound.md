@@ -52,7 +52,7 @@ Split          | Examples
 `'train'`      | 2,556
 `'validation'` | 278
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -79,6 +79,31 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature        | Class        | Shape   | Dtype      | Description
+:------------- | :----------- | :------ | :--------- | :----------
+               | FeaturesDict |         |            |
+das            | FeaturesDict |         |            |
+das/dB         | Tensor       | (None,) | tf.float32 |
+das/imag       | Tensor       | (None,) | tf.float32 |
+das/real       | Tensor       | (None,) | tf.float32 |
+dtce           | Tensor       | (None,) | tf.float32 |
+f0_hz          | Tensor       |         | tf.float32 |
+final_angle    | Tensor       |         | tf.float32 |
+final_radius   | Tensor       |         | tf.float32 |
+focus_cm       | Tensor       |         | tf.float32 |
+harmonic       | Tensor       |         | tf.bool    |
+height         | Tensor       |         | tf.uint32  |
+initial_angle  | Tensor       |         | tf.float32 |
+initial_radius | Tensor       |         | tf.float32 |
+probe          | Tensor       |         | tf.string  |
+scanner        | Tensor       |         | tf.string  |
+target         | Tensor       |         | tf.string  |
+timestamp_id   | Tensor       |         | tf.uint32  |
+voltage        | Tensor       |         | tf.float32 |
+width          | Tensor       |         | tf.uint32  |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('das/dB', 'dtce')`
@@ -96,24 +121,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/duke_ultrasound-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/duke_ultrasound-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

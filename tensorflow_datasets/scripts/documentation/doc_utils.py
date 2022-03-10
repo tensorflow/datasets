@@ -41,22 +41,22 @@ NightlyDict = Dict[str, Union[bool, Dict[str, Union[bool, Dict[str, bool]]]]]
 class DocUtilPaths:
   """Structure containing the utils paths."""
   # VisualizationDocUtil
-  fig_base_path: Optional[tfds.core.PathLike] = tfds.core.gcs_path(
+  fig_base_path: Optional[tfds.typing.PathLike] = tfds.core.gcs_path(
       'visualization/fig/')
   fig_base_url: str = 'https://storage.googleapis.com/tfds-data/visualization/fig/'
   # DataframeDocUtil
-  df_base_path: Optional[tfds.core.PathLike] = tfds.core.gcs_path(
+  df_base_path: Optional[tfds.typing.PathLike] = tfds.core.gcs_path(
       'visualization/dataframe')
   df_base_url: str = 'https://storage.googleapis.com/tfds-data/visualization/dataframe/'
   # NightlyDocUtil
-  nightly_path: Optional[tfds.core.PathLike] = tfds.core.utils.tfds_path(
+  nightly_path: Optional[tfds.typing.PathLike] = tfds.core.utils.tfds_path(
       'stable_versions.txt')
 
 
 class VisualizationDocUtil(object):
   """Small util which generate the path/urls for the visualizations."""
 
-  def __init__(self, base_path: tfds.core.PathLike, base_url: str):
+  def __init__(self, base_path: tfds.typing.PathLike, base_url: str):
     """Constructor.
 
     Args:
@@ -83,9 +83,9 @@ class VisualizationDocUtil(object):
 
 
 class DataframeDocUtil(object):
-  """Small util which generate the path/urls for the dataframes."""
+  """Small util which generates the path/urls for the dataframes."""
 
-  def __init__(self, base_path: tfds.core.PathLike, base_url: str):
+  def __init__(self, base_path: tfds.typing.PathLike, base_url: str):
     """Constructor.
 
     Args:
@@ -113,24 +113,27 @@ class DataframeDocUtil(object):
 
     <button id="{button_id}">Display examples...</button>
     <div id="{content_id}" style="overflow-x:auto"></div>
-    <script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
     <script>
-    var url = "{url}";
-    $(document).ready(() => {{
-      $("#{button_id}").click((event) => {{
-        // Disable the button after clicking (dataframe loaded only once).
-        $("#{button_id}").prop("disabled", true);
+    const url = "{url}";
+    const dataButton = document.getElementById('{button_id}');
+    dataButton.addEventListener('click', async () => {{
+      // Disable the button after clicking (dataframe loaded only once).
+      dataButton.disabled = true;
 
-        // Pre-fetch and display the content
-        $.get(url, (data) => {{
-          $("#{content_id}").html(data);
-        }}).fail(() => {{
-          $("#{content_id}").html(
+      const contentPane = document.getElementById('{content_id}');
+      try {{
+        const response = await fetch(url);
+        // Error response codes don't throw an error, so force an error to show
+        // the error message.
+        if (!response.ok) throw Error(response.statusText);
+
+        const data = await response.text();
+        contentPane.innerHTML = data;
+      }} catch (e) {{
+        contentPane.innerHTML =
             'Error loading examples. If the error persist, please open '
-            + 'a new issue.'
-          );
-        }});
-      }});
+            + 'a new issue.';
+      }}
     }});
     </script>
 
@@ -197,7 +200,7 @@ def _build_nightly_dict(
 
 
 @tfds.core.utils.memoize()
-def _load_nightly_dict(version_path: tfds.core.PathLike) -> NightlyDict:
+def _load_nightly_dict(version_path: tfds.typing.PathLike) -> NightlyDict:
   """Loads (and caches) the nightly dict."""
   with tf.io.gfile.GFile(os.fspath(version_path), 'r') as f:
     stable_versions = f.read().splitlines()
@@ -214,7 +217,7 @@ def _load_nightly_dict(version_path: tfds.core.PathLike) -> NightlyDict:
 class NightlyDocUtil(object):
   """Small util to format the doc."""
 
-  def __init__(self, path: tfds.core.PathLike):
+  def __init__(self, path: tfds.typing.PathLike):
     """Constructor.
 
     Args:

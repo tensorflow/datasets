@@ -27,11 +27,15 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.image_classification import mnist
+
+from google.protobuf import text_format
 
 _TFDS_DIR = utils.tfds_path()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
@@ -179,8 +183,11 @@ class DatasetInfoTest(testing.TestCase):
         license="some license",
     )
     info.download_size = 456
-    info.as_proto.splits.add(name="train", num_bytes=512)
-    info.as_proto.splits.add(name="validation", num_bytes=64)
+    filepath_template = "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}"
+    info.as_proto.splits.add(
+        name="train", num_bytes=512, filepath_template=filepath_template)
+    info.as_proto.splits.add(
+        name="validation", num_bytes=64, filepath_template=filepath_template)
     info.as_proto.schema.feature.add()
     info.as_proto.schema.feature.add()  # Add dynamic statistics
     info.download_checksums = {
@@ -298,6 +305,55 @@ class DatasetInfoTest(testing.TestCase):
     self.assertEqual(40, info.splits.total_num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
 
+  def test_set_splits_normal(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    split_info1 = splits_lib.SplitInfo(
+        name="train", shard_lengths=[1, 2], num_bytes=0)
+    split_info2 = splits_lib.SplitInfo(
+        name="test", shard_lengths=[1], num_bytes=0)
+    split_dict = splits_lib.SplitDict(split_infos=[split_info1, split_info2])
+    info.set_splits(split_dict)
+    self.assertEqual(str(info.splits), str(split_dict))
+    self.assertEqual(
+        str(info.as_proto.splits),
+        str([split_info1.to_proto(),
+             split_info2.to_proto()]))
+
+  def test_set_splits_incorrect_dataset_name(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    split_info1 = splits_lib.SplitInfo(
+        name="train",
+        shard_lengths=[1, 2],
+        num_bytes=0,
+        filename_template=naming.ShardedFileTemplate(
+            dataset_name="some_other_dataset",
+            split="train",
+            data_dir=info.data_dir,
+            filetype_suffix="tfrecord"))
+    split_dict = splits_lib.SplitDict(split_infos=[split_info1])
+    with pytest.raises(
+        AssertionError, match="SplitDict contains SplitInfo for split"):
+      info.set_splits(split_dict)
+
+  def test_set_splits_multi_split_info(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    split_info1 = splits_lib.SplitInfo(
+        name="train", shard_lengths=[1, 2], num_bytes=0)
+    split_info2 = splits_lib.SplitInfo(
+        name="test", shard_lengths=[1], num_bytes=0)
+    multi_split_info1 = splits_lib.MultiSplitInfo(
+        name="train", split_infos=[split_info1])
+    multi_split_info2 = splits_lib.MultiSplitInfo(
+        name="test", split_infos=[split_info2])
+    split_dict = splits_lib.SplitDict(
+        split_infos=[multi_split_info1, multi_split_info2])
+    info.set_splits(split_dict)
+    self.assertEqual(str(info.splits), str(split_dict))
+    self.assertEqual(
+        str(info.as_proto.splits),
+        str([split_info1.to_proto(),
+             split_info2.to_proto()]))
+
 
 @pytest.mark.parametrize(
     "file_format",
@@ -374,6 +430,94 @@ def test_dataset_info_from_proto():
   assert result.splits["train"].shard_lengths == train.shard_lengths
   assert set(result.features.keys()) == {"text"}
   assert result.version == builder.version
+
+
+def test_supervised_keys_from_proto():
+  proto = text_format.Parse(
+      text="""
+  tuple: {
+      items: [
+        {
+          dict: {
+            dict: {
+              key: "f2"
+              value: { feature_key: "f2" }
+            },
+            dict: {
+              key: "f1"
+              value: { feature_key: "f1" }
+            },
+          }
+        },
+        {
+          feature_key: "target"
+        }
+      ]
+    }
+  """,
+      message=dataset_info_pb2.SupervisedKeys())
+  supervised_keys = dataset_info._supervised_keys_from_proto(proto=proto)
+  assert str(supervised_keys) == "({'f1': 'f1', 'f2': 'f2'}, 'target')"
+
+
+def test_supervised_keys_from_proto_different_ordering():
+  proto1 = text_format.Parse(
+      text="""
+  tuple: {
+      items: [
+        {
+          dict: {
+            dict: {
+              key: "f1"
+              value: { feature_key: "f1" }
+            },
+            dict: {
+              key: "f2"
+              value: { feature_key: "f2" }
+            },
+            dict: {
+              key: "f3"
+              value: { feature_key: "f3" }
+            },
+          }
+        },
+        {
+          feature_key: "target"
+        }
+      ]
+    }
+  """,
+      message=dataset_info_pb2.SupervisedKeys())
+  proto2 = text_format.Parse(
+      text="""
+  tuple: {
+      items: [
+        {
+          dict: {
+            dict: {
+              key: "f3"
+              value: { feature_key: "f3" }
+            },
+            dict: {
+              key: "f2"
+              value: { feature_key: "f2" }
+            },
+            dict: {
+              key: "f1"
+              value: { feature_key: "f1" }
+            },
+          }
+        },
+        {
+          feature_key: "target"
+        }
+      ]
+    }
+  """,
+      message=dataset_info_pb2.SupervisedKeys())
+  supervised_keys1 = dataset_info._supervised_keys_from_proto(proto=proto1)
+  supervised_keys2 = dataset_info._supervised_keys_from_proto(proto=proto2)
+  assert str(supervised_keys1) == str(supervised_keys2)
 
 
 # pylint: disable=g-inconsistent-quotes

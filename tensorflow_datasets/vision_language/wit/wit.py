@@ -22,8 +22,6 @@ import sys
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-csv.field_size_limit(sys.maxsize)
-
 _DESCRIPTION = """
 Wikipedia-based Image Text (WIT) Dataset is a large multimodal multilingual
 dataset. WIT is composed of a curated set of 37.6 million entity rich image-text
@@ -142,6 +140,8 @@ class Wit(tfds.core.GeneratorBasedBuilder):
       }
 
     def _read_rows(filename):
+      # Limit to 100 MB. Value must be smaller than the C long maximum value.
+      csv.field_size_limit(sys.maxsize)
       with tf.io.gfile.GFile(filename) as f:
         csv_reader = csv.DictReader(
             f, delimiter="\t", quoting=csv.QUOTE_MINIMAL)

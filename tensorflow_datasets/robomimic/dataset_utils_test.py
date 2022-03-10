@@ -20,10 +20,10 @@ import os
 
 from absl import flags
 from absl.testing import absltest
+from etils import epath
 import h5py
 import numpy as np
 import tensorflow as tf
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.robomimic import dataset_utils
 import tree
 
@@ -42,7 +42,7 @@ class DatasetUtilsTest(absltest.TestCase):
 
   def setUp(self):
     super().setUp()
-    basedir = utils.as_path(inspect.getfile(inspect.getmodule(self))).parent
+    basedir = epath.Path(inspect.getfile(inspect.getmodule(self))).parent
     self.dataset_dir = os.path.join(basedir, 'dummy_data',
                                     'robomimic_test.hdf5')
 

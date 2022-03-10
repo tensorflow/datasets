@@ -27,30 +27,48 @@ generalization in situated language understanding. gSCAN pairs natural language
 instructions with action sequences, and requires the agent to interpret
 instructions within the context of a grid-based visual navigation environment.
 
-More information can be found at: https://github.com/LauraRuis/groundedSCAN
+More information can be found at:
+
+* For the `compositional_splits` and the `target_length_split`:
+https://github.com/LauraRuis/groundedSCAN
+
+* For the `spatial_relation_splits`:
+https://github.com/google-research/language/tree/master/language/gscan/data
 """
 
 _CITATION = """
-@article{DBLP:journals/corr/abs-2003-05161,
-  author    = {Laura Ruis and
-               Jacob Andreas and
-               Marco Baroni and
-               Diane Bouchacourt and
-               Brenden M. Lake},
-  title     = {A Benchmark for Systematic Generalization in Grounded Language Understanding},
-  journal   = {CoRR},
-  volume    = {abs/2003.05161},
-  year      = {2020},
-  url       = {https://arxiv.org/abs/2003.05161},
-  eprinttype = {arXiv},
-  eprint    = {2003.05161},
-  timestamp = {Tue, 17 Mar 2020 14:18:27 +0100},
-  biburl    = {https://dblp.org/rec/journals/corr/abs-2003-05161.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
+@inproceedings{NEURIPS2020_e5a90182,
+ author = {Ruis, Laura and Andreas, Jacob and Baroni, Marco and Bouchacourt, Diane and Lake, Brenden M},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {H. Larochelle and M. Ranzato and R. Hadsell and M. F. Balcan and H. Lin},
+ pages = {19861--19872},
+ publisher = {Curran Associates, Inc.},
+ title = {A Benchmark for Systematic Generalization in Grounded Language Understanding},
+ url = {https://proceedings.neurips.cc/paper/2020/file/e5a90182cc81e12ab5e72d66e0b46fe3-Paper.pdf},
+ volume = {33},
+ year = {2020}
+}
+
+@inproceedings{qiu-etal-2021-systematic,
+    title = "Systematic Generalization on g{SCAN}: {W}hat is Nearly Solved and What is Next?",
+    author = "Qiu, Linlu  and
+      Hu, Hexiang  and
+      Zhang, Bowen  and
+      Shaw, Peter  and
+      Sha, Fei",
+    booktitle = "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2021",
+    address = "Online and Punta Cana, Dominican Republic",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.emnlp-main.166",
+    doi = "10.18653/v1/2021.emnlp-main.166",
+    pages = "2180--2188",
 }
 """
 
 _GSCAN_DATA_PATH = 'https://raw.githubusercontent.com/LauraRuis/groundedSCAN/master/data/'
+_SPATIAL_DATA_PATH = 'https://storage.googleapis.com/gresearch/gscan/'
 
 
 class GroundedScanConfig(tfds.core.BuilderConfig):
@@ -88,11 +106,23 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
           data_path=os.path.join(_GSCAN_DATA_PATH, 'target_length_split.zip'),
           splits_names=['train', 'dev', 'test', 'target_lengths'],
       ),
+      GroundedScanConfig(
+          name='spatial_relation_splits',
+          description='Examples for spatial relation reasoning.',
+          data_path=os.path.join(_SPATIAL_DATA_PATH,
+                                 'spatial_relation_splits.zip'),
+          splits_names=[
+              'train', 'dev', 'test', 'visual', 'relation', 'referent',
+              'relative_position_1', 'relative_position_2'
+          ],
+      ),
   ]
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('2.0.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.1.0': 'Changed `vector` feature to Text().',
+      '2.0.0': 'Adds the new spatial_relation_splits config.'
   }
 
   def _info(self) -> tfds.core.DatasetInfo:

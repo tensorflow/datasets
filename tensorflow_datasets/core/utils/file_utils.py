@@ -19,17 +19,45 @@ import os
 import pathlib
 from typing import List, Optional
 
+from absl import logging
+from etils import epath
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import docs
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config
 from tensorflow_datasets.core.utils import type_utils
 
-PathLike = type_utils.PathLike
+PathLike = epath.PathLike
 ListOrElem = type_utils.ListOrElem
-ReadWritePath = type_utils.ReadWritePath
+Path = epath.Path
 
 _registered_data_dir = set()
+
+
+@docs.deprecated
+def as_path(path: PathLike) -> Path:
+  """DEPRECATED. Please use `from etils import epath` with `epath.Path()`."""
+  msg = py_utils.dedent("""
+      `tfds.core.as_path` is deprecated. Pathlib API has been moved to a
+      separate module. To migrate, use:
+
+      ```
+      from etils import epath
+      path = epath.Path('gs://path/to/f.txt')
+      ```
+
+      Alternatively `tfds.core.Path` is an alias of `epath.Path`.
+
+      Installation: pip install etils[epath]
+      `etils[epath]` will install the `tf.io.gfile` backend from
+      tf-nightly. If you prefer another TF version, use
+      `etils[epath-no-tf]`.
+
+      """
+
+                       )
+  logging.warning(msg)
+  return epath.Path(path)
 
 
 def add_data_dir(data_dir):
@@ -53,14 +81,15 @@ def add_data_dir(data_dir):
   _registered_data_dir.add(data_dir)
 
 
-def list_data_dirs(
-    given_data_dir: Optional[ListOrElem[PathLike]] = None,) -> List[PathLike]:
+def list_data_dirs(given_data_dir: Optional[ListOrElem[PathLike]] = None,
+                   dataset: Optional[str] = None) -> List[PathLike]:
   """Return the list of all `data_dir` to look-up.
 
   Args:
     given_data_dir: If a `data_dir` is provided, only the explicitly given
       `data_dir` will be returned, otherwise the list of all registered data_dir
       is returned
+    dataset: Dataset to load.
 
   Returns:
     The list of all data_dirs to look-up.
@@ -72,13 +101,18 @@ def list_data_dirs(
     else:
       return [given_data_dir]
   else:
-    all_data_dirs = _registered_data_dir | {constants.DATA_DIR}
+    default_data_dir = get_default_data_dir(
+        given_data_dir=given_data_dir, dataset=dataset)
+    all_data_dirs = _registered_data_dir | {default_data_dir}
     return sorted(os.path.expanduser(d) for d in all_data_dirs)
 
 
-def get_default_data_dir(given_data_dir: Optional[str] = None,) -> str:
+def get_default_data_dir(given_data_dir: Optional[str] = None,
+                         dataset: Optional[str] = None) -> str:
   """Returns the default data_dir."""
   if given_data_dir:
     return os.path.expanduser(given_data_dir)
+  elif 'TFDS_DATA_DIR' in os.environ:
+    return os.environ['TFDS_DATA_DIR']
   else:
-    return os.path.expanduser(constants.DATA_DIR)
+    return constants.DATA_DIR

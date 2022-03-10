@@ -20,6 +20,7 @@ import os
 import tempfile
 from typing import Any, List, Optional, Union
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 
@@ -74,7 +75,7 @@ class _ImageEncoder:
     """Convert the given image into a dict convertible to tf example."""
     if isinstance(image_or_path_or_fobj, np.ndarray):
       encoded_image = self._encode_image(image_or_path_or_fobj)
-    elif isinstance(image_or_path_or_fobj, type_utils.PathLikeCls):
+    elif isinstance(image_or_path_or_fobj, epath.PathLikeCls):
       image_or_path_or_fobj = os.fspath(image_or_path_or_fobj)
       with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
         encoded_image = image_f.read()
@@ -205,6 +206,7 @@ class Image(feature_lib.FeatureConnector):
       dtype: Optional[tf.dtypes.DType] = None,
       encoding_format: Optional[str] = None,
       use_colormap: bool = False,
+      doc: feature_lib.DocArg = None,
   ):
     """Construct the connector.
 
@@ -226,10 +228,12 @@ class Image(feature_lib.FeatureConnector):
       use_colormap: Only used for gray-scale images. If `True`,
         `tfds.as_dataframe` will display each value in the image with a
         different color.
+      doc: Documentation of this feature (e.g. description).
 
     Raises:
       ValueError: If the shape is invalid
     """
+    super().__init__(doc=doc)
     # Set and validate values
     shape = shape or (None, None, 3)
     dtype = dtype or tf.uint8
@@ -382,7 +386,7 @@ def _get_repr_html_ffmpeg(images: List[PilImage]) -> str:
         # so allow software encoding
         # '-allow_sw', '1',
     ]
-    video_path = utils.as_path(video_dir) / 'output.mp4'
+    video_path = epath.Path(video_dir) / 'output.mp4'
     ffmpeg_args.append(os.fspath(video_path))
     utils.ffmpeg_run(ffmpeg_args)
     video_str = utils.get_base64(video_path.read_bytes())

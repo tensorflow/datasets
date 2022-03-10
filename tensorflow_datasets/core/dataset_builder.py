@@ -25,10 +25,10 @@ import sys
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, Union
 
 from absl import logging
+from etils import epath
 import six
 import tensorflow as tf
 
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download
@@ -50,8 +50,6 @@ from tensorflow_datasets.core.utils import type_utils
 
 import termcolor
 
-ReadOnlyPath = type_utils.ReadOnlyPath
-ReadWritePath = type_utils.ReadWritePath
 Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
 VersionOrStr = Union[utils.Version, str]
@@ -163,7 +161,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   def __init__(
       self,
       *,
-      data_dir: Optional[utils.PathLike] = None,
+      data_dir: Optional[epath.PathLike] = None,
       config: Union[None, str, BuilderConfig] = None,
       version: Union[None, str, utils.Version] = None,
   ):
@@ -186,7 +184,6 @@ class DatasetBuilder(registered.RegisteredDataset):
     """
     if data_dir:
       data_dir = os.fspath(data_dir)  # Pathlib -> str
-
     # For pickling:
     self._original_state = dict(
         data_dir=data_dir, config=config, version=version)
@@ -204,12 +201,12 @@ class DatasetBuilder(registered.RegisteredDataset):
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def code_path(cls) -> ReadOnlyPath:
+  def code_path(cls) -> epath.Path:
     """Returns the path to the file where the Dataset class is located.
 
     Note: As the code can be run inside zip file. The returned value is
-    a `ReadOnlyPath` by default. Use `tfds.core.utils.to_write_path()` to cast
-    the path into `ReadWritePath`.
+    a `Path` by default. Use `tfds.core.utils.to_write_path()` to cast
+    the path into `Path`.
 
     Returns:
       path: pathlib.Path like abstraction
@@ -220,7 +217,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       # Note: `utils.resource_path` will return either `zipfile.Path` (for
       # zipapp) or `pathlib.Path`.
       try:
-        path = utils.resource_path(modules[0])
+        path = epath.resource_path(modules[0])
       except TypeError:  # Module is not a package
         pass
       else:
@@ -228,12 +225,12 @@ class DatasetBuilder(registered.RegisteredDataset):
         # `pathlib.Path('.')` rather than the real path, so filter those by
         # checking for `parts`.
         # Check for `zipfile.Path` (`ResourcePath`) as it does not have `.parts`
-        if isinstance(path, utils.ResourcePath) or path.parts:
+        if isinstance(path, epath.resource_utils.ResourcePath) or path.parts:
           modules[-1] += ".py"
           return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
     # equivalent to the above return.
-    return utils.as_path(inspect.getfile(cls))
+    return epath.Path(inspect.getfile(cls))
 
   def __getstate__(self):
     return self._original_state
@@ -291,13 +288,13 @@ class DatasetBuilder(registered.RegisteredDataset):
     return self._data_dir
 
   @property
-  def data_path(self) -> type_utils.ReadWritePath:
+  def data_path(self) -> epath.Path:
     # Instead, should make `_data_dir` be Path everywhere
-    return utils.as_path(self._data_dir)
+    return epath.Path(self._data_dir)
 
   @utils.classproperty
   @classmethod
-  def _checksums_path(cls) -> ReadOnlyPath:
+  def _checksums_path(cls) -> epath.Path:
     """Returns the checksums path."""
     # Used:
     # * To load the checksums (in url_infos)
@@ -371,7 +368,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     elif data_exists and download_config.download_mode == REUSE_CACHE_IF_EXISTS:
       logging.info("Deleting pre-existing dataset %s (%s)", self.name,
                    self._data_dir)
-      utils.as_path(self._data_dir).rmtree()  # Delete pre-existing data.
+      epath.Path(self._data_dir).rmtree()  # Delete pre-existing data.
       data_exists = tf.io.gfile.exists(self._data_dir)
 
     if self.version.tfds_version_to_prepare:
@@ -471,6 +468,8 @@ class DatasetBuilder(registered.RegisteredDataset):
           self.info.download_size = dl_manager.downloaded_size
           # Write DatasetInfo to disk, even if we haven't computed statistics.
           self.info.write_to_directory(self._data_dir)
+      # The generated DatasetInfo contains references to `tmp_data_dir`
+      self.info.update_data_dir(self._data_dir)
     self._log_download_done()
 
   @tfds_logging.as_dataset()
@@ -684,7 +683,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return False
 
     # We do not want to cache data which has more than one shards when
-    # shuffling is enabled, as this would effectivelly disable shuffling.
+    # shuffling is enabled, as this would effectively disable shuffling.
     # An exception is for single shard (as shuffling is a no-op).
     # Another exception is if reshuffle is disabled (shuffling already cached)
     num_shards = len(self.info.splits[split].file_instructions)
@@ -726,7 +725,8 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     default_data_dir = file_utils.get_default_data_dir(
         given_data_dir=given_data_dir)
-    all_data_dirs = file_utils.list_data_dirs(given_data_dir=given_data_dir)
+    all_data_dirs = file_utils.list_data_dirs(
+        given_data_dir=given_data_dir, dataset=self.name)
 
     all_versions = set()
     requested_version_dirs = {}
@@ -971,7 +971,6 @@ class FileReaderBuilder(DatasetBuilder):
     )
     decode_fn = functools.partial(features.decode_example, decoders=decoders)
     return reader.read(
-        name=self.name,
         instructions=split,
         split_infos=self.info.splits.values(),
         decode_fn=decode_fn,
@@ -1200,7 +1199,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     split_infos = [future.result() for future in split_info_futures]
 
     # Update the info object with the splits.
-    split_dict = splits_lib.SplitDict(split_infos, dataset_name=self.name)
+    split_dict = splits_lib.SplitDict(split_infos)
     self.info.set_splits(split_dict)
 
 
@@ -1224,7 +1223,7 @@ def _check_split_names(split_names: Iterable[str]) -> None:
 
 
 def _save_default_config_name(
-    common_dir: ReadWritePath,
+    common_dir: epath.Path,
     *,
     default_config_name: str,
 ) -> None:
@@ -1246,9 +1245,9 @@ def _save_default_config_name(
     tmp_config_path.write_text(json.dumps(data))
 
 
-def load_default_config_name(common_dir: ReadOnlyPath,) -> Optional[str]:
+def load_default_config_name(common_dir: epath.Path,) -> Optional[str]:
   """Load `builder_cls` metadata (common to all builder configs)."""
-  config_path = common_dir / ".config/metadata.json"
+  config_path = epath.Path(common_dir) / ".config/metadata.json"
   if not config_path.exists():
     return None
   data = json.loads(config_path.read_text())

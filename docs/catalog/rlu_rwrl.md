@@ -12,10 +12,6 @@
 # `rlu_rwrl`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL
@@ -89,7 +85,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 5
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -109,6 +105,23 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -118,24 +131,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_1_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_1_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -157,7 +173,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 25
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -177,6 +193,23 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -186,24 +219,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_5_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_5_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -225,7 +261,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -245,6 +281,23 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -254,24 +307,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_20_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_20_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -293,7 +349,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 200
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -313,6 +369,23 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -322,24 +395,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_40_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_40_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -361,7 +437,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -381,6 +457,23 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -390,24 +483,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_100_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_none_100_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -429,7 +525,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 5
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -452,6 +548,26 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -461,24 +577,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_1_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_1_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -500,7 +619,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 25
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -523,6 +642,26 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -532,24 +671,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_5_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_5_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -571,7 +713,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -594,6 +736,26 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -603,24 +765,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_20_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_20_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -642,7 +807,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 200
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -665,6 +830,26 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -674,24 +859,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_40_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_40_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -713,7 +901,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -736,6 +924,26 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -745,24 +953,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_100_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_none_100_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -784,7 +995,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 50
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -805,6 +1016,24 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -814,24 +1043,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_1_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_1_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -853,7 +1085,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 250
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -874,6 +1106,24 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -883,24 +1133,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_5_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_5_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -922,7 +1175,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -943,6 +1196,24 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -952,24 +1223,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_20_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_20_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -991,7 +1265,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 2,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1012,6 +1286,24 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1021,24 +1313,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_40_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_40_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1060,7 +1355,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 5,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1081,6 +1376,24 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1090,24 +1403,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_100_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_none_100_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1129,7 +1445,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 200
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1153,6 +1469,27 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1162,24 +1499,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_1_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_1_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1201,7 +1541,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1225,6 +1565,27 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1234,24 +1595,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_5_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_5_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1273,7 +1637,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 4,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1297,6 +1661,27 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1306,24 +1691,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_20_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_20_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1345,7 +1733,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 8,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1369,6 +1757,27 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1378,24 +1787,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_40_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_40_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1417,7 +1829,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 20,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1441,6 +1853,27 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1450,24 +1883,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_100_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_none_100_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1489,7 +1925,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 5
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1519,6 +1955,33 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1528,24 +1991,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_1_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_1_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1567,7 +2033,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 25
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1597,6 +2063,33 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1606,24 +2099,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_5_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_5_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1645,7 +2141,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1675,6 +2171,33 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1684,24 +2207,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_20_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_20_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1723,7 +2249,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 200
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1753,6 +2279,33 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1762,24 +2315,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_40_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_40_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1801,7 +2357,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1831,6 +2387,33 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                    | Class        | Shape | Dtype      | Description
+:------------------------- | :----------- | :---- | :--------- | :----------
+                           | FeaturesDict |       |            |
+episode_return             | Tensor       |       | tf.float32 |
+steps                      | Dataset      |       |            |
+steps/action               | Tensor       | (1,)  | tf.float32 |
+steps/discount             | Tensor       | (1,)  | tf.float32 |
+steps/is_first             | Tensor       |       | tf.bool    |
+steps/is_last              | Tensor       |       | tf.bool    |
+steps/is_terminal          | Tensor       |       | tf.bool    |
+steps/observation          | FeaturesDict |       |            |
+steps/observation/dummy-0  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8  | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9  | Tensor       | (1,)  | tf.float32 |
+steps/observation/position | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity | Tensor       | (2,)  | tf.float32 |
+steps/reward               | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1840,24 +2423,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_100_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-cartpole_swingup_combined_challenge_easy_100_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1879,7 +2465,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 5
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1912,6 +2498,36 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1921,24 +2537,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_1_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_1_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -1960,7 +2579,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 25
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -1993,6 +2612,36 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2002,24 +2651,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_5_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_5_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2041,7 +2693,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2074,6 +2726,36 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2083,24 +2765,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_20_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_20_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2122,7 +2807,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 200
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2155,6 +2840,36 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2164,24 +2879,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_40_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_40_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2203,7 +2921,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2236,6 +2954,36 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                            | Class        | Shape | Dtype      | Description
+:--------------------------------- | :----------- | :---- | :--------- | :----------
+                                   | FeaturesDict |       |            |
+episode_return                     | Tensor       |       | tf.float32 |
+steps                              | Dataset      |       |            |
+steps/action                       | Tensor       | (12,) | tf.float32 |
+steps/discount                     | Tensor       | (1,)  | tf.float32 |
+steps/is_first                     | Tensor       |       | tf.bool    |
+steps/is_last                      | Tensor       |       | tf.bool    |
+steps/is_terminal                  | Tensor       |       | tf.bool    |
+steps/observation                  | FeaturesDict |       |            |
+steps/observation/dummy-0          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8          | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9          | Tensor       | (1,)  | tf.float32 |
+steps/observation/egocentric_state | Tensor       | (44,) | tf.float32 |
+steps/observation/force_torque     | Tensor       | (24,) | tf.float32 |
+steps/observation/imu              | Tensor       | (6,)  | tf.float32 |
+steps/observation/torso_upright    | Tensor       | (1,)  | tf.float32 |
+steps/observation/torso_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/reward                       | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2245,24 +2993,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_100_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-quadruped_walk_combined_challenge_easy_100_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2284,7 +3035,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 50
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2315,6 +3066,34 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2324,24 +3103,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_1_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_1_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2363,7 +3145,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 250
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2394,6 +3176,34 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2403,24 +3213,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_5_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_5_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2442,7 +3255,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2473,6 +3286,34 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2482,24 +3323,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_20_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_20_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2521,7 +3365,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 2,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2552,6 +3396,34 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2561,24 +3433,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_40_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_40_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2600,7 +3475,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 5,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2631,6 +3506,34 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                        | Class        | Shape | Dtype      | Description
+:----------------------------- | :----------- | :---- | :--------- | :----------
+                               | FeaturesDict |       |            |
+episode_return                 | Tensor       |       | tf.float32 |
+steps                          | Dataset      |       |            |
+steps/action                   | Tensor       | (6,)  | tf.float32 |
+steps/discount                 | Tensor       | (1,)  | tf.float32 |
+steps/is_first                 | Tensor       |       | tf.bool    |
+steps/is_last                  | Tensor       |       | tf.bool    |
+steps/is_terminal              | Tensor       |       | tf.bool    |
+steps/observation              | FeaturesDict |       |            |
+steps/observation/dummy-0      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8      | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9      | Tensor       | (1,)  | tf.float32 |
+steps/observation/height       | Tensor       | (1,)  | tf.float32 |
+steps/observation/orientations | Tensor       | (14,) | tf.float32 |
+steps/observation/velocity     | Tensor       | (9,)  | tf.float32 |
+steps/reward                   | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2640,24 +3543,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_100_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-walker_walk_combined_challenge_easy_100_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2679,7 +3585,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 200
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2713,6 +3619,37 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2722,24 +3659,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_1_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_1_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2761,7 +3701,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2795,6 +3735,37 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2804,24 +3775,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_5_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_5_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2843,7 +3817,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 4,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2877,6 +3851,37 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2886,24 +3891,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_20_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_20_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -2925,7 +3933,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 8,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -2959,6 +3967,37 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2968,24 +4007,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_40_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_40_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -3007,7 +4049,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 20,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -3041,6 +4083,37 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                          | Class        | Shape | Dtype      | Description
+:------------------------------- | :----------- | :---- | :--------- | :----------
+                                 | FeaturesDict |       |            |
+episode_return                   | Tensor       |       | tf.float32 |
+steps                            | Dataset      |       |            |
+steps/action                     | Tensor       | (21,) | tf.float32 |
+steps/discount                   | Tensor       | (1,)  | tf.float32 |
+steps/is_first                   | Tensor       |       | tf.bool    |
+steps/is_last                    | Tensor       |       | tf.bool    |
+steps/is_terminal                | Tensor       |       | tf.bool    |
+steps/observation                | FeaturesDict |       |            |
+steps/observation/com_velocity   | Tensor       | (3,)  | tf.float32 |
+steps/observation/dummy-0        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-1        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-2        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-3        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-4        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-5        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-6        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-7        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-8        | Tensor       | (1,)  | tf.float32 |
+steps/observation/dummy-9        | Tensor       | (1,)  | tf.float32 |
+steps/observation/extremities    | Tensor       | (12,) | tf.float32 |
+steps/observation/head_height    | Tensor       | (1,)  | tf.float32 |
+steps/observation/joint_angles   | Tensor       | (21,) | tf.float32 |
+steps/observation/torso_vertical | Tensor       | (3,)  | tf.float32 |
+steps/observation/velocity       | Tensor       | (27,) | tf.float32 |
+steps/reward                     | Tensor       | (1,)  | tf.float32 |
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3050,24 +4123,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_100_percent-1.0.1.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_rwrl-humanoid_walk_combined_challenge_easy_100_percent-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

@@ -19,6 +19,7 @@ import os
 from typing import Optional, Union
 import wave
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 
@@ -54,6 +55,7 @@ class Audio(tensor_feature.Tensor):
       dtype: tf.dtypes.DType = tf.int64,
       sample_rate: Optional[int] = None,
       encoding: Union[str, Encoding] = Encoding.NONE,
+      doc: feature_lib.DocArg = None,
   ):
     """Constructs the connector.
 
@@ -67,6 +69,7 @@ class Audio(tensor_feature.Tensor):
         encoding nor decoding.
       encoding: Internal encoding. See `tfds.features.Encoding` for available
         values.
+      doc: Documentation of this feature (e.g. description).
     """
     self._file_format = file_format
     if len(shape) > 2:
@@ -74,7 +77,7 @@ class Audio(tensor_feature.Tensor):
                        f'(length, num_channels), got {shape}.')
     self._shape = shape
     self._sample_rate = sample_rate
-    super().__init__(shape=shape, dtype=dtype, encoding=encoding)
+    super().__init__(shape=shape, dtype=dtype, encoding=encoding, doc=doc)
 
   def _encode_file(self, fobj, file_format):
     audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
@@ -91,7 +94,7 @@ class Audio(tensor_feature.Tensor):
   def encode_example(self, audio_or_path_or_fobj):
     if isinstance(audio_or_path_or_fobj, (np.ndarray, list)):
       return audio_or_path_or_fobj
-    elif isinstance(audio_or_path_or_fobj, type_utils.PathLikeCls):
+    elif isinstance(audio_or_path_or_fobj, epath.PathLikeCls):
       filename = os.fspath(audio_or_path_or_fobj)
       file_format = self._file_format or filename.split('.')[-1]
       with tf.io.gfile.GFile(filename, 'rb') as audio_f:

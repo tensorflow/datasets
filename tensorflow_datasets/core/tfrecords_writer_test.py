@@ -19,6 +19,7 @@ import json
 import os
 from unittest import mock
 
+from etils import epath
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
@@ -28,7 +29,6 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import tfrecords_writer
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.tfrecords_writer import _ShardSpec
 from tensorflow_datasets.core.utils import shard_utils
 
@@ -188,7 +188,7 @@ def _read_indices(path):
   paths = sorted(tf.io.gfile.glob('%s-*-of-*_index.json' % path))
   all_indices = []
   for path in paths:
-    json_str = utils.as_path(path).read_text()
+    json_str = epath.Path(path).read_text()
     # parse it back into a proto.
     shard_index = json.loads(json_str)
     all_indices.append(list(shard_index['index']))

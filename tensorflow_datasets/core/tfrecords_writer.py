@@ -18,10 +18,12 @@
 import dataclasses
 import itertools
 import json
+import os
 
 from typing import Any, Iterable, List, Optional, Tuple
 
 from absl import logging
+from etils import epath
 import six
 import tensorflow as tf
 
@@ -88,7 +90,7 @@ def _raise_error_for_duplicated_keys(example1, example2, example_specs):
   raise AssertionError(msg + " See logs above to view the examples.")
 
 
-def _get_index_path(path: str) -> type_utils.PathLike:
+def _get_index_path(path: str) -> epath.PathLike:
   """Returns path to the index file of the records stored at the given path.
 
   E.g: Say the path to a shard of records (of a particular split) are stored at
@@ -129,11 +131,11 @@ def _get_shard_specs(
         from_, to, bucket_indexes, bucket_lengths)
     shard_path = filename_template.sharded_filepath(
         shard_index=shard_index, num_shards=num_shards)
-    index_path = _get_index_path(shard_path)
+    index_path = _get_index_path(os.fspath(shard_path))
     shard_specs.append(
         _ShardSpec(
             shard_index=shard_index,
-            path=shard_path,
+            path=os.fspath(shard_path),
             index_path=index_path,
             examples_number=to - from_,
             file_instructions=file_instructions,
@@ -158,7 +160,7 @@ def _get_shard_boundaries(
 
 
 def _write_examples(
-    path: type_utils.PathLike,
+    path: epath.PathLike,
     iterator: Iterable[type_utils.KeySerializedExample],
     file_format: file_adapters.FileFormat = file_adapters.DEFAULT_FILE_FORMAT
 ) -> Optional[file_adapters.ExamplePositions]:
@@ -167,7 +169,7 @@ def _write_examples(
       path, iterator)
 
 
-def _write_index_file(sharded_index_path: type_utils.PathLike,
+def _write_index_file(sharded_index_path: epath.PathLike,
                       record_keys: List[Any]):
   """Writes index file for records of a shard at given `sharded_index_path`.
 
@@ -377,7 +379,7 @@ class BeamWriter(object):
         disable_shuffling=disable_shuffling,
         file_format=file_format)
     self._filename_template = filename_template
-    self._split_info_path = "%s.split_info.json" % filename_template.filepath_prefix
+    self._split_info_path = f"{filename_template.filepath_prefix()}.split_info.json"
     self._serializer = example_serializer.ExampleSerializer(example_specs)
     self._example_specs = example_specs
     self._hasher = hashing.Hasher(hash_salt)
@@ -486,7 +488,7 @@ class BeamWriter(object):
     examples = itertools.chain(*[ex[1] for ex in sorted(examples_by_bucket)])
     # Write in a tmp file potential race condition if `--xxxxx_enable_backups`
     # is set and multiple workers try to write to the same file.
-    with utils.incomplete_file(utils.as_path(shard_path)) as tmp_path:
+    with utils.incomplete_file(epath.Path(shard_path)) as tmp_path:
       record_keys = _write_examples(tmp_path, examples, self._file_format)
     # If there are no record_keys, skip creating index files.
     if not record_keys:

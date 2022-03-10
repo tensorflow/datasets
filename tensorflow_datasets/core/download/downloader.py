@@ -26,6 +26,7 @@ import re
 from typing import Any, ContextManager, Iterable, Iterator, Optional, Tuple, Union
 import urllib
 
+from etils import epath
 import promise
 import requests
 
@@ -42,7 +43,7 @@ Response = Union[requests.Response, urllib.response.addinfourl]
 
 @dataclasses.dataclass(eq=False, frozen=True)
 class DownloadResult:
-  path: utils.ReadWritePath
+  path: epath.Path
   url_info: checksums_lib.UrlInfo
 
 
@@ -181,7 +182,7 @@ class _Downloader(object):
     self._pbar_dl_size.update_total(url_info.size)
     self._pbar_dl_size.update(url_info.size)
     self._pbar_url.update(1)
-    return DownloadResult(path=utils.as_path(out_path), url_info=url_info)
+    return DownloadResult(path=epath.Path(out_path), url_info=url_info)
 
   def _sync_download(self,
                      url: str,
@@ -237,7 +238,7 @@ class _Downloader(object):
             size_mb %= unit_mb
     self._pbar_url.update(1)
     return DownloadResult(
-        path=utils.as_path(path),
+        path=epath.Path(path),
         url_info=checksums_lib.UrlInfo(
             checksum=checksum.hexdigest(),
             size=utils.Size(size),
@@ -273,7 +274,7 @@ def _open_with_requests(
   """Open url with request."""
   with requests.Session() as session:
     if _DRIVE_URL.match(url):
-      url = _get_drive_url(url, session)
+      url = _normalize_drive_url(url)
     with session.get(url, stream=True, **kwargs) as response:
       _assert_status(response)
       yield (response, response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE))
@@ -292,15 +293,11 @@ def _open_with_urllib(
     )
 
 
-def _get_drive_url(url: str, session: requests.Session) -> str:
-  """Returns url, possibly with confirmation token."""
-  with session.get(url, stream=True) as response:
-    _assert_status(response)
-    for k, v in response.cookies.items():
-      if k.startswith('download_warning'):
-        return url + '&confirm=' + v  # v is the confirm token
-  # No token found, let's try with original URL:
-  return url
+def _normalize_drive_url(url: str) -> str:
+  """Returns Google Drive url with confirmation token."""
+  # This bypasses the "Google Drive can't scan this file for viruses" warning
+  # when dowloading large files.
+  return url + '&confirm=t'
 
 
 def _assert_status(response: requests.Response) -> None:

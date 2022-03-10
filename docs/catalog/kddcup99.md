@@ -48,7 +48,7 @@ Split     | Examples
 `'test'`  | 311,029
 `'train'` | 4,898,431
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -97,6 +97,54 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                     | Class        | Shape | Dtype      | Description
+:-------------------------- | :----------- | :---- | :--------- | :----------
+                            | FeaturesDict |       |            |
+count                       | Tensor       |       | tf.int32   |
+diff_srv_rate               | Tensor       |       | tf.float32 |
+dst_bytes                   | Tensor       |       | tf.int32   |
+dst_host_count              | Tensor       |       | tf.int32   |
+dst_host_diff_srv_rate      | Tensor       |       | tf.float32 |
+dst_host_rerror_rate        | Tensor       |       | tf.float32 |
+dst_host_same_src_port_rate | Tensor       |       | tf.float32 |
+dst_host_same_srv_rate      | Tensor       |       | tf.float32 |
+dst_host_serror_rate        | Tensor       |       | tf.float32 |
+dst_host_srv_count          | Tensor       |       | tf.int32   |
+dst_host_srv_diff_host_rate | Tensor       |       | tf.float32 |
+dst_host_srv_rerror_rate    | Tensor       |       | tf.float32 |
+dst_host_srv_serror_rate    | Tensor       |       | tf.float32 |
+duration                    | Tensor       |       | tf.int32   |
+flag                        | ClassLabel   |       | tf.int64   |
+hot                         | Tensor       |       | tf.int32   |
+is_guest_login              | Tensor       |       | tf.bool    |
+is_hot_login                | Tensor       |       | tf.bool    |
+label                       | ClassLabel   |       | tf.int64   |
+land                        | Tensor       |       | tf.bool    |
+logged_in                   | Tensor       |       | tf.bool    |
+num_access_files            | Tensor       |       | tf.int32   |
+num_compromised             | Tensor       |       | tf.int32   |
+num_failed_logins           | Tensor       |       | tf.int32   |
+num_file_creations          | Tensor       |       | tf.int32   |
+num_outbound_cmds           | Tensor       |       | tf.int32   |
+num_root                    | Tensor       |       | tf.int32   |
+num_shells                  | Tensor       |       | tf.int32   |
+protocol_type               | ClassLabel   |       | tf.int64   |
+rerror_rate                 | Tensor       |       | tf.float32 |
+root_shell                  | Tensor       |       | tf.bool    |
+same_srv_rate               | Tensor       |       | tf.float32 |
+serror_rate                 | Tensor       |       | tf.float32 |
+service                     | ClassLabel   |       | tf.int64   |
+src_bytes                   | Tensor       |       | tf.int32   |
+srv_count                   | Tensor       |       | tf.int32   |
+srv_diff_host_rate          | Tensor       |       | tf.float32 |
+srv_rerror_rate             | Tensor       |       | tf.float32 |
+srv_serror_rate             | Tensor       |       | tf.float32 |
+su_attempted                | Tensor       |       | tf.int32   |
+urgent                      | Tensor       |       | tf.int32   |
+wrong_fragment              | Tensor       |       | tf.int32   |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -114,24 +162,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/kddcup99-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/kddcup99-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

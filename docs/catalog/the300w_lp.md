@@ -48,7 +48,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 61,225
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -65,6 +65,23 @@ FeaturesDict({
     'tex_params': Tensor(shape=(199,), dtype=tf.float32),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature          | Class        | Shape         | Dtype      | Description
+:--------------- | :----------- | :------------ | :--------- | :----------
+                 | FeaturesDict |               |            |
+color_params     | Tensor       | (7,)          | tf.float32 |
+exp_params       | Tensor       | (29,)         | tf.float32 |
+illum_params     | Tensor       | (10,)         | tf.float32 |
+image            | Image        | (450, 450, 3) | tf.uint8   |
+landmarks_2d     | Tensor       | (68, 2)       | tf.float32 |
+landmarks_3d     | Tensor       | (68, 2)       | tf.float32 |
+landmarks_origin | Tensor       | (68, 2)       | tf.float32 |
+pose_params      | Tensor       | (7,)          | tf.float32 |
+roi              | Tensor       | (4,)          | tf.float32 |
+shape_params     | Tensor       | (199,)        | tf.float32 |
+tex_params       | Tensor       | (199,)        | tf.float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -84,24 +101,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/the300w_lp-1.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/the300w_lp-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

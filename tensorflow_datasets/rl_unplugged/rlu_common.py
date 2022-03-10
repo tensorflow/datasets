@@ -21,6 +21,7 @@ from typing import Any, Dict, Generator, List, Tuple
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
+
 _DESCRIPTION = """
 RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL
 Unplugged is designed around the following considerations: to facilitate ease of
@@ -36,15 +37,21 @@ _HOMEPAGE = 'https://github.com/deepmind/deepmind-research/tree/master/rl_unplug
 
 def filename(prefix: str, num_shards: int, shard_id: int):
   return os.fspath(
-      tfds.core.as_path(f'{prefix}-{shard_id:05d}-of-{num_shards:05d}'))
+      tfds.core.Path(f'{prefix}-{shard_id:05d}-of-{num_shards:05d}'))
 
 
 def get_files(prefix: str, num_shards: int) -> List[str]:
   return [filename(prefix, num_shards, i) for i in range(num_shards)]  # pytype: disable=bad-return-type  # gen-stub-imports
 
 
+def float_tensor_feature(size: int) -> tfds.features.Tensor:
+  return tfds.features.Tensor(
+      shape=(size,), dtype=tf.float32, encoding=tfds.features.Encoding.ZLIB)
+
+
 class RLUBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
   """DatasetBuilder for RLU."""
+
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""

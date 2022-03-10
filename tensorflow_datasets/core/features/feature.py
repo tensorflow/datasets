@@ -17,12 +17,13 @@
 
 import abc
 import collections
+import dataclasses
 import functools
 import html
 import importlib
 import json
 import os
-from typing import Dict, List, Mapping, Optional, Type, TypeVar, Union
+from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 
 import numpy as np
 import six
@@ -47,6 +48,9 @@ T = TypeVar('T', bound='FeatureConnector')
 # FeatureConnector-like input accepted by `Sequence()`, `Optional()`,...
 FeatureConnectorArg = Union['FeatureConnector',
                             Dict[str, 'FeatureConnectorArg'], tf.dtypes.DType]  # pytype: disable=not-supported-yet
+
+# Name of the file to output the features information.
+FEATURES_FILENAME = 'features.json'
 
 
 class TensorInfo(object):
@@ -110,6 +114,40 @@ class TensorInfo(object):
     )
 
 
+@dataclasses.dataclass()
+class Documentation:
+  """Feature documentation such as a textual description of what this feature means.
+
+  Attributes:
+    desc: optional textual description of this feature.
+    value_range: optional textual description of the value range of this
+      feature. For example, the feature 'age' could have value range 0 to 150.
+  """
+  desc: Optional[str] = None
+  value_range: Optional[str] = None
+
+  @classmethod
+  def from_proto(cls, feature: feature_pb2.Feature) -> 'Documentation':
+    return cls(desc=feature.description, value_range=feature.value_range)
+
+
+DocArg = Union[None, str, Documentation]
+
+
+@dataclasses.dataclass(order=True)
+class CatalogFeatureDocumentation:
+  """Feature attributes to be displayed in the dataset catalog."""
+  name: str  # Needs to be on top such that features are sorted by name.
+  cls_name: str
+  description: str
+  value_range: str
+  tensor_info: Optional[TensorInfo] = None
+
+  def replace(self, **kwargs: Any) -> 'CatalogFeatureDocumentation':
+    """Returns a copy of the `CatalogFeatureDocumentation` with updated attributes."""
+    return dataclasses.replace(self, **kwargs)
+
+
 @six.add_metaclass(abc.ABCMeta)
 class FeatureConnector(object):
   """Abstract base class for feature types.
@@ -137,6 +175,26 @@ class FeatureConnector(object):
   # For backward compatibility, after renaming/moving/ `my_feature.py` to a new
   # location, it is possible to specify the previous `module.MyFeature` names.
   ALIASES: List[str] = []
+
+  def __init__(
+      self,
+      *,
+      doc: DocArg = None,
+  ):
+    if isinstance(doc, str):
+      self._doc = Documentation(desc=doc)
+    elif isinstance(doc, Documentation):
+      self._doc = doc
+    else:
+      self._doc = Documentation()
+
+  @property
+  def doc(self) -> Documentation:
+    return self._doc
+
+  def _set_doc(self, doc: Documentation) -> None:
+    # Should only be used in from_proto!
+    self._doc = doc
 
   def __init_subclass__(cls):
     """Registers subclasses features."""
@@ -245,14 +303,24 @@ class FeatureConnector(object):
     Returns:
       The reconstructed FeatureConnector.
     """
-    class_name = value['type']  # my_project.xyz.MyFeature
-    content = value['content']
-    feature_cls = cls.cls_from_name(class_name)
-    proto_cls_name = value.get('proto_cls')
-    if proto_cls_name:  # The content is a proto, need to reconstruct it
-      proto_cls = _name2proto_cls(proto_cls_name)
-      content = json_format.Parse(content, proto_cls())
-    return feature_cls.from_json_content(content)
+    if 'type' in value:  # Legacy mode
+      class_name = value['type']  # my_project.xyz.MyFeature
+      content = value['content']
+      feature_cls = cls.cls_from_name(class_name)
+      proto_cls_name = value.get('proto_cls')
+      if proto_cls_name:  # The content is a proto, need to reconstruct it
+        proto_cls = _name2proto_cls(proto_cls_name)
+        if isinstance(content, str):  # Backward compatible mode
+          content = json_format.Parse(content, proto_cls())
+        elif isinstance(content, dict):
+          content = json_format.ParseDict(content, proto_cls())
+        else:
+          raise ValueError(f'Type {type(content)} not supported when parsing '
+                           'features serialized as json.')
+      return feature_cls.from_json_content(content)
+    else:
+      feature_proto = json_format.ParseDict(value, feature_pb2.Feature())
+      return FeatureConnector.from_proto(feature_proto)
 
   def to_json(self) -> Json:
     # pylint: disable=line-too-long
@@ -308,7 +376,7 @@ class FeatureConnector(object):
     if isinstance(content, message.Message):  # Content is proto
       # e.g. `tensorflow_datasets.JsonFeature`
       proto_cls_name = type(content).DESCRIPTOR.full_name
-      content = json_format.MessageToJson(content)
+      content = json_format.MessageToDict(content)
     elif isinstance(content, dict):  # Content is json
       proto_cls_name = ''
     else:
@@ -323,6 +391,7 @@ class FeatureConnector(object):
   def from_json_content(
       cls: Type[T],
       value: Union[Json, message.Message],
+      doc: Optional[DocArg] = None,
   ) -> T:
     """FeatureConnector factory (to overwrite).
 
@@ -338,13 +407,14 @@ class FeatureConnector(object):
       value: FeatureConnector information represented as either Json or a
         Feature proto. The content must match what is returned by
         `to_json_content`.
+      doc: Documentation of this feature (e.g. description).
 
     Returns:
       The reconstructed FeatureConnector.
     """
     if not isinstance(value, dict):
       raise TypeError(f'Unexpected feature connector value: {value!r}')
-    return cls(**value)  # pytype: disable=not-instantiable
+    return cls(doc=doc, **value)  # pytype: disable=not-instantiable
 
   def to_json_content(self) -> Union[Json, message.Message]:
     """FeatureConnector factory (to overwrite).
@@ -382,19 +452,26 @@ class FeatureConnector(object):
     oneof_kwarg = {_proto2oneof_field_name(content): content}
     return feature_pb2.Feature(
         python_class_name=self._fully_qualified_class_name,
+        description=self._doc.desc,
+        value_range=self._doc.value_range,
         **oneof_kwarg,
     )
 
   @classmethod
-  def from_proto(cls, feature: feature_pb2.Feature) -> T:
-    feature_cls = cls.cls_from_name(feature.python_class_name)
+  def from_proto(cls, feature_proto: feature_pb2.Feature) -> T:
+    """Instantiates a feature from its proto representation."""
+    feature_cls = cls.cls_from_name(feature_proto.python_class_name)
     # Extract which feature is set (e.g. `json_feature`)
-    feature_field_name = feature.WhichOneof('content')
-    feature_content = getattr(feature, feature_field_name)
+    feature_field_name = feature_proto.WhichOneof('content')
+    feature_content = getattr(feature_proto, feature_field_name)
     # Legacy mode, json content is restored as dict
     if isinstance(feature_content, feature_pb2.JsonFeature):
       feature_content = json.loads(feature_content.json)
-    return feature_cls.from_json_content(feature_content)
+
+    # Not all feature classes accept the documentation as an argument.
+    feature = feature_cls.from_json_content(value=feature_content)
+    feature._set_doc(Documentation.from_proto(feature_proto))  # pylint: disable=protected-access
+    return feature
 
   def save_config(self, root_dir: str) -> None:
     """Exports the `FeatureConnector` to a file.
@@ -403,7 +480,8 @@ class FeatureConnector(object):
       root_dir: `path/to/dir` containing the `features.json`
     """
     with tf.io.gfile.GFile(make_config_path(root_dir), 'w') as f:
-      f.write(json.dumps(self.to_json(), indent=4))
+      json_dict = json_format.MessageToDict(self.to_proto())
+      f.write(json.dumps(json_dict, indent=4))
     self.save_metadata(root_dir, feature_name=None)
 
   @classmethod
@@ -413,17 +491,18 @@ class FeatureConnector(object):
     Usage:
 
     ```
-    features = FeatureConnector.from_config('path/to/features.json')
+    features = FeatureConnector.from_config('path/to/dir')
     ```
 
     Args:
-      root_dir: Directory containing to the features.json file.
+      root_dir: Directory containing the features.json file.
 
     Returns:
       The reconstructed feature instance.
     """
     with tf.io.gfile.GFile(make_config_path(root_dir)) as f:
-      feature = FeatureConnector.from_json(json.loads(f.read()))
+      content = json.loads(f.read())
+      feature = FeatureConnector.from_json(content)
     feature.load_metadata(root_dir, feature_name=None)
     return feature
 
@@ -739,6 +818,35 @@ class FeatureConnector(object):
         info_str,
     )
 
+  def catalog_documentation(self) -> List[CatalogFeatureDocumentation]:
+    """Returns the feature documentation to be shown in the catalog."""
+    raw_tensor_info = self.get_tensor_info()
+    tensor_info_per_feature = {}
+    if isinstance(raw_tensor_info, TensorInfo):
+      feature_name = ''  # Feature name is not known here
+      tensor_info_per_feature[feature_name] = raw_tensor_info
+    elif isinstance(raw_tensor_info, Mapping):
+      for feature_name, tensor_info in raw_tensor_info.items():
+        if not isinstance(tensor_info, TensorInfo):
+          raise RuntimeError(
+              'Only maps with value TensorInfo are supported '
+              f'(got {type(tensor_info)}). '
+              'Custom feature classes should override this method.')
+        tensor_info_per_feature[feature_name] = tensor_info
+    else:
+      raise RuntimeError('Subclasses with nesting should override this method.')
+    result = []
+    for feature_name, tensor_info in tensor_info_per_feature.items():
+      result.append(
+          CatalogFeatureDocumentation(
+              name=feature_name,
+              cls_name=type(self).__name__,
+              tensor_info=tensor_info,
+              description=self._doc.desc,
+              value_range=self._doc.value_range,
+          ))
+    return result
+
   def save_metadata(self, data_dir, feature_name):
     """Save the feature metadata on disk.
 
@@ -782,7 +890,7 @@ class FeatureConnector(object):
 
 def make_config_path(root_dir: str) -> str:
   """Returns the path to the features config."""
-  return os.path.join(root_dir, 'features.json')
+  return os.path.join(root_dir, FEATURES_FILENAME)
 
 
 def _repr_html(ex) -> str:

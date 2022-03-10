@@ -29,7 +29,7 @@ from absl import logging
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
-# pylint: disable=logging-format-interpolation,logging-not-lazy
+# pylint: disable=logging-format-interpolation,logging-not-lazy,logging-fstring-interpolation
 
 T = TypeVar('T')
 
@@ -55,13 +55,13 @@ def _log_exception(fn):
 def generate_and_save_artifact(
     full_name: str,
     *,
-    dst_dir: tfds.core.PathLike,
+    dst_dir: tfds.typing.PathLike,
     overwrite: bool,
     file_extension: str,
     get_artifact_fn: Callable[[tf.data.Dataset, tfds.core.DatasetInfo], T],
     save_artifact_fn: Callable[[str, T], None],
 ) -> None:
-  """Builds and save the generated artifact for the dataset in dst_dir.
+  """Builds and saves the generated artifact for the dataset in dst_dir.
 
   Args:
     full_name: Name of the dataset to build `dataset`, `dataset/config`.
@@ -104,7 +104,7 @@ def generate_and_save_artifact(
 
 
 def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
-  """List all builder names `ds/version` and `ds/config/version` to generate.
+  """Lists all builder names `ds/version` and `ds/config/version` to generate.
 
   Args:
     datasets: List of datasets from which get the builder names.
@@ -127,7 +127,7 @@ def multi_process_map(
     worker_fn: Callable[..., None],
     datasets: Optional[List[str]] = None,
 ) -> None:
-  """Apply the function for each given datasets.
+  """Applies the function for each given datasets.
 
   Args:
     worker_fn: Function called on each dataset version.
@@ -144,7 +144,7 @@ def multi_thread_map(
     worker_fn: Callable[..., None],
     datasets: Optional[List[str]] = None,
 ) -> None:
-  """Apply the function for each given datasets.
+  """Applies the function for each given datasets.
 
   Args:
     worker_fn: Function called on each dataset version.

@@ -38,6 +38,7 @@ import tempfile
 from typing import Dict, Optional, Tuple, Union
 
 from absl import logging
+from etils import epath
 import six
 import tensorflow as tf
 
@@ -50,7 +51,6 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import gcs_utils
-from tensorflow_datasets.core.utils import type_utils
 
 from google.protobuf import json_format
 
@@ -190,7 +190,7 @@ class DatasetInfo(object):
             "DatasetInfo.features only supports FeaturesDict or Sequence at "
             "the top-level. Got {}".format(features))
     self._features = features
-    self._splits = splits_lib.SplitDict([], dataset_name=self._builder.name)
+    self._splits = splits_lib.SplitDict([])
     if split_dict:
       self.set_splits(split_dict)
     if supervised_keys is not None:
@@ -219,6 +219,10 @@ class DatasetInfo(object):
     supervised_keys = None
     if proto.HasField("supervised_keys"):
       supervised_keys = _supervised_keys_from_proto(proto.supervised_keys)
+    filename_template = naming.ShardedFileTemplate(
+        dataset_name=builder.name,
+        data_dir=builder.data_dir,
+        filetype_suffix=proto.file_format or "tfrecord")
     return cls(
         builder=builder,
         description=proto.description,
@@ -227,7 +231,9 @@ class DatasetInfo(object):
         disable_shuffling=proto.disable_shuffling,
         citation=proto.citation,
         license=proto.redistribution_info.license,
-        split_dict=splits_lib.SplitDict.from_proto(proto.name, proto.splits),
+        split_dict=splits_lib.SplitDict.from_proto(
+            repeated_split_infos=proto.splits,
+            filename_template=filename_template),
     )
 
   @property
@@ -362,32 +368,65 @@ class DatasetInfo(object):
 
   def set_splits(self, split_dict: splits_lib.SplitDict) -> None:
     """Split setter (private method)."""
-    if self._builder.name != split_dict._dataset_name:  # pylint: disable=protected-access
-      raise AssertionError(
-          "SplitDict dataset_name does not seem to match dataset_info. "  # pylint: disable=protected-access
-          f"{self._builder.name} != {split_dict._dataset_name}")
+    for split, split_info in split_dict.items():
+      if isinstance(split_info, splits_lib.MultiSplitInfo):
+        # When splits are from multiple folders, the dataset can be different.
+        continue
+      if (split_info.filename_template and
+          self._builder.name != split_info.filename_template.dataset_name):
+        raise AssertionError(
+            f"SplitDict contains SplitInfo for split {split} whose "
+            "dataset_name does not match to the dataset name in dataset_info. "
+            f"{self._builder.name} != {split_info.filename_template.dataset_name}"
+        )
 
     # If the statistics have been pre-loaded, forward the statistics
-    # into the new split_dict
+    # into the new split_dict. Also add the filename template if it's not set.
     new_split_infos = []
+    incomplete_filename_template = naming.ShardedFileTemplate(
+        dataset_name=self.name,
+        data_dir=self.data_dir,
+        filetype_suffix=self.as_proto.file_format or "tfrecord")
     for split_info in split_dict.values():
+      if isinstance(split_info, splits_lib.MultiSplitInfo):
+        new_split_infos.append(split_info)
+        continue
       old_split_info = self._splits.get(split_info.name)
       if (not split_info.statistics.ByteSize() and old_split_info and
           old_split_info.statistics.ByteSize() and
           old_split_info.shard_lengths == split_info.shard_lengths):
         split_info = split_info.replace(statistics=old_split_info.statistics)
+      if not split_info.filename_template:
+        filename_template = incomplete_filename_template.replace(
+            split=split_info.name)
+        split_info = split_info.replace(filename_template=filename_template)
       new_split_infos.append(split_info)
 
     # Update the dictionary representation.
-    self._splits = splits_lib.SplitDict(
-        new_split_infos,
-        dataset_name=self._builder.name,
-    )
+    self._splits = splits_lib.SplitDict(new_split_infos)
 
     # Update the proto
+    # Note that the proto should not be saved or used for multi-folder datasets.
     del self.as_proto.splits[:]  # Clear previous
-    for split_info in split_dict.to_proto():
-      self.as_proto.splits.add().CopyFrom(split_info)
+    for split_info in self._splits.values():
+      if isinstance(split_info, splits_lib.MultiSplitInfo):
+        for si in split_info.split_infos:
+          self.as_proto.splits.add().CopyFrom(si.to_proto())
+      else:
+        self.as_proto.splits.add().CopyFrom(split_info.to_proto())
+
+  def update_data_dir(self, data_dir: str) -> None:
+    """Updates the data dir for each split."""
+    new_split_infos = []
+    for split_info in self._splits.values():
+      if isinstance(split_info, splits_lib.MultiSplitInfo):
+        raise RuntimeError(
+            "Updating the data_dir for MultiSplitInfo is not supported!")
+      filename_template = split_info.filename_template.replace(
+          data_dir=data_dir)
+      new_split_info = split_info.replace(filename_template=filename_template)
+      new_split_infos.append(new_split_info)
+    self.set_splits(splits_lib.SplitDict(new_split_infos))
 
   @property
   def initialized(self) -> bool:
@@ -450,7 +489,13 @@ class DatasetInfo(object):
     parsed_proto = read_from_json(json_filename)
 
     # Update splits
-    split_dict = splits_lib.SplitDict.from_proto(self.name, parsed_proto.splits)
+    filename_template = naming.ShardedFileTemplate(
+        dataset_name=self._builder.name,
+        data_dir=self.data_dir,
+        filetype_suffix=parsed_proto.file_format or "tfrecord")
+    split_dict = splits_lib.SplitDict.from_proto(
+        repeated_split_infos=parsed_proto.splits,
+        filename_template=filename_template)
     self.set_splits(split_dict)
 
     # Restore the feature metadata (vocabulary, labels names,...)
@@ -620,7 +665,8 @@ def _nest_from_proto(proto: dataset_info_pb2.SupervisedKeys.Nest) -> Nest:
     return tuple(_nest_from_proto(item) for item in proto.tuple.items)
   elif proto.HasField("dict"):
     return {
-        key: _nest_from_proto(value) for key, value in proto.dict.dict.items()
+        key: _nest_from_proto(value)
+        for key, value in sorted(proto.dict.dict.items())
     }
   elif proto.HasField("feature_key"):
     return proto.feature_key
@@ -700,16 +746,16 @@ def get_dataset_feature_statistics(builder, split):
   return statistics.datasets[0], schema
 
 
-def read_from_json(path: type_utils.PathLike) -> dataset_info_pb2.DatasetInfo:
+def read_from_json(path: epath.PathLike) -> dataset_info_pb2.DatasetInfo:
   """Read JSON-formatted proto into DatasetInfo proto."""
-  json_str = utils.as_path(path).read_text()
+  json_str = epath.Path(path).read_text()
   # Parse it back into a proto.
   parsed_proto = json_format.Parse(json_str, dataset_info_pb2.DatasetInfo())
   return parsed_proto
 
 
 def read_proto_from_builder_dir(
-    builder_dir: type_utils.PathLike) -> dataset_info_pb2.DatasetInfo:
+    builder_dir: epath.PathLike) -> dataset_info_pb2.DatasetInfo:
   """Reads the dataset info from the given builder dir.
 
   Args:

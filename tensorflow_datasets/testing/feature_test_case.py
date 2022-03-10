@@ -244,6 +244,9 @@ class FeatureExpectationsTestCase(SubTestCase):
     # Create the feature dict
     fdict = features.FeaturesDict({'inner': feature})
 
+    # Check whether the following doesn't raise an exception
+    fdict.catalog_documentation()
+
     for i, test in enumerate(tests):
       with self._subTest(str(i)):
         self.assertFeatureTest(

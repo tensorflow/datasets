@@ -25,7 +25,6 @@ from typing import List, Optional
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-csv.field_size_limit(sys.maxsize)
 
 _DESCRIPTION = """
 Wikipedia - Image/Caption Matching Kaggle Competition.
@@ -310,6 +309,8 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
       for filename in tf.io.gfile.listdir(folder_path):
         file_path = folder_path / filename
         f = tf.io.gfile.GFile(file_path, "r")
+        # Limit to 100 MB. Value must be smaller than the C long maximum value.
+        csv.field_size_limit(sys.maxsize)
         csv_reader = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_ALL)
         for row in csv_reader:
           counter("samples_rows").inc()

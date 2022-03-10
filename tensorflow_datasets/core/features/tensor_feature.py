@@ -70,6 +70,7 @@ class Tensor(feature_lib.FeatureConnector):
       # Would require some `DatasetInfo.api_version = 1` which would be
       # increased when triggering backward-incompatible changes.
       encoding: Union[str, Encoding] = Encoding.NONE,
+      doc: feature_lib.DocArg = None,
   ):
     """Construct a Tensor feature.
 
@@ -78,7 +79,9 @@ class Tensor(feature_lib.FeatureConnector):
       dtype: Tensor dtype
       encoding: Internal encoding. See `tfds.features.Encoding` for available
         values.
+      doc: Documentation of this feature (e.g. description).
     """
+    super().__init__(doc=doc)
     self._shape = tuple(shape)
     self._dtype = dtype
     if isinstance(encoding, str):

@@ -36,7 +36,32 @@ message SplitInfo {
   // The concrete statistics about this split.
   tensorflow.metadata.v0.DatasetFeatureStatistics statistics = 3;
 
-  // Next available: 6.
+  // Template where the files for this split can be found, relative to the main
+  // builder folder of this dataset. Variables can be used that will be
+  // automatically filled in. Some examples:
+  //
+  // {DATASET}_{SPLIT}.{FILEFORMAT}-{SHARD_INDEX}-of-{NUM_SHARDS}
+  // This is the default TFDS filename template. Example of filenames:
+  //   mnist_train.tfrecord-00000-of-00005
+  //
+  // my_data/{SPLIT}/{FILEFORMAT}_{SHARD_INDEX}
+  // The data is in the subfolder 'my_data' in which there's another folder with
+  // the name of the split. Files are named by the file format and use a
+  // different shard template. Example filenames:
+  //   my_data/train/tfrecord_00000
+  //   my_data/train/tfrecord_00001
+  //   my_data/test/tfrecord_00000
+  //
+  // Supported variables:
+  // - {DATASET}: the name of the dataset.
+  // - {SPLIT}: the split.
+  // - {FILEFORMAT}: the fileformat used in the filename, e.g. tfrecord.
+  // - {SHARD_INDEX}: the index of the current shard (starts with 0).
+  // - {NUM_SHARDS}: total number of shards.
+  // - {SHARD_X_OF_Y}: shard in xxxxx-of-yyyyy format.
+  string filepath_template = 6;
+
+  // Next available: 7.
 }
 
 // This message indicates which feature in the dataset schema is the input and

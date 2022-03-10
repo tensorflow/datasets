@@ -17,6 +17,7 @@
 
 from typing import Union
 import six
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
@@ -68,7 +69,14 @@ class Translation(features_dict.FeaturesDict):
   ```
   """
 
-  def __init__(self, languages, encoder=None, encoder_config=None):
+  def __init__(
+      self,
+      languages,
+      encoder=None,
+      encoder_config=None,
+      *,
+      doc: feature_lib.DocArg = None,
+  ):
     """Constructs a Translation FeatureConnector.
 
     Args:
@@ -81,6 +89,7 @@ class Translation(features_dict.FeaturesDict):
         `list<tfds.deprecated.text.TextEncoderConfig>` (optional), needed if
         restoring from a file with `load_metadata`. One config can be shared or
         one per language can be provided.
+      doc: Documentation of this feature (e.g. description).
     """
     # If encoder and encoder_config aren't lists, use the same values for all
     # languages.
@@ -91,10 +100,12 @@ class Translation(features_dict.FeaturesDict):
     if not isinstance(encoder_config, collections_abc.Iterable):
       encoder_config = [encoder_config] * len(languages)
 
-    super(Translation, self).__init__({
-        lang: text_feature.Text(enc, enc_conf)
-        for lang, enc, enc_conf in zip(languages, encoder, encoder_config)
-    })
+    super(Translation, self).__init__(
+        feature_dict={
+            lang: text_feature.Text(enc, enc_conf)
+            for lang, enc, enc_conf in zip(languages, encoder, encoder_config)
+        },
+        doc=doc)
 
   @property
   def languages(self):
@@ -165,21 +176,29 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
   ```
   """
 
-  def __init__(self, languages=None):
+  def __init__(
+      self,
+      languages=None,
+      *,
+      doc: feature_lib.DocArg = None,
+  ):
     """Constructs a Translation FeatureConnector.
 
     Args:
       languages: `list<string>` (optional), full list of language codes if known
         in advance.
+      doc: Documentation of this feature (e.g. description).
     """
     # TODO(adarob): Add optional text encoders once `Sequence` adds support
     # for FixedVarLenFeatures.
 
     self._languages = set(languages) if languages else None
-    super(TranslationVariableLanguages, self).__init__({
-        "language": text_feature.Text(),
-        "translation": text_feature.Text(),
-    })
+    super(TranslationVariableLanguages, self).__init__(
+        feature={
+            "language": text_feature.Text(),
+            "translation": text_feature.Text(),
+        },
+        doc=doc)
 
   @property
   def num_languages(self):

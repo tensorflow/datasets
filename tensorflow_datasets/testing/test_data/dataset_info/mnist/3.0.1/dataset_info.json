@@ -36,6 +36,7 @@
   "splits": [
     {
       "name": "test",
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "shardLengths": [
         "20"
       ],
@@ -66,6 +67,7 @@
     },
     {
       "name": "train",
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "shardLengths": [
         "20"
       ],

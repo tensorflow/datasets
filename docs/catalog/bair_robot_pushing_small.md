@@ -44,7 +44,7 @@ Split     | Examples
 `'test'`  | 256
 `'train'` | 43,264
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Sequence({
@@ -54,6 +54,16 @@ Sequence({
     'image_main': Image(shape=(64, 64, 3), dtype=tf.uint8),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class    | Shape       | Dtype      | Description
+:-------------- | :------- | :---------- | :--------- | :----------
+                | Sequence |             |            |
+action          | Tensor   | (4,)        | tf.float32 |
+endeffector_pos | Tensor   | (3,)        | tf.float32 |
+image_aux1      | Image    | (64, 64, 3) | tf.uint8   |
+image_main      | Image    | (64, 64, 3) | tf.uint8   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -72,24 +82,27 @@ Sequence({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/bair_robot_pushing_small-2.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/bair_robot_pushing_small-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

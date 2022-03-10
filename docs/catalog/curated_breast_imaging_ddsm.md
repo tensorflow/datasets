@@ -132,7 +132,7 @@ Split          | Examples
 `'train'`      | 49,780
 `'validation'` | 5,580
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -141,6 +141,15 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape           | Dtype     | Description
+:------ | :----------- | :-------------- | :-------- | :----------
+        | FeaturesDict |                 |           |
+id      | Text         |                 | tf.string |
+image   | Image        | (None, None, 1) | tf.uint8  |
+label   | ClassLabel   |                 | tf.int64  |
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -156,24 +165,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/curated_breast_imaging_ddsm-patches-3.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/curated_breast_imaging_ddsm-patches-3.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -197,7 +209,7 @@ Split     | Examples
 `'test'`  | 284
 `'train'` | 1,227
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -218,6 +230,25 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                         | Class        | Shape           | Dtype     | Description
+:------------------------------ | :----------- | :-------------- | :-------- | :----------
+                                | FeaturesDict |                 |           |
+abnormalities                   | Sequence     |                 |           |
+abnormalities/assessment        | ClassLabel   |                 | tf.int64  |
+abnormalities/calc_distribution | ClassLabel   |                 | tf.int64  |
+abnormalities/calc_type         | ClassLabel   |                 | tf.int64  |
+abnormalities/id                | Tensor       |                 | tf.int32  |
+abnormalities/mask              | Image        | (None, None, 1) | tf.uint8  |
+abnormalities/pathology         | ClassLabel   |                 | tf.int64  |
+abnormalities/subtlety          | ClassLabel   |                 | tf.int64  |
+breast                          | ClassLabel   |                 | tf.int64  |
+id                              | Text         |                 | tf.string |
+image                           | Image        | (None, None, 1) | tf.uint8  |
+patient                         | Text         |                 | tf.string |
+view                            | ClassLabel   |                 | tf.int64  |
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -232,24 +263,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/curated_breast_imaging_ddsm-original-calc-3.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/curated_breast_imaging_ddsm-original-calc-3.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 
@@ -273,7 +307,7 @@ Split     | Examples
 `'test'`  | 348
 `'train'` | 1,166
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -294,6 +328,29 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+| Feature                    | Class        | Shape  | Dtype     | Description |
+| :------------------------- | :----------- | :----- | :-------- | :---------- |
+|                            | FeaturesDict |        |           |             |
+| abnormalities              | Sequence     |        |           |             |
+| abnormalities/assessment   | ClassLabel   |        | tf.int64  |             |
+| abnormalities/id           | Tensor       |        | tf.int32  |             |
+| abnormalities/mask         | Image        | (None, | tf.uint8  |             |
+:                            :              : None,  :           :             :
+:                            :              : 1)     :           :             :
+| abnormalities/mass_margins | ClassLabel   |        | tf.int64  |             |
+| abnormalities/mass_shape   | ClassLabel   |        | tf.int64  |             |
+| abnormalities/pathology    | ClassLabel   |        | tf.int64  |             |
+| abnormalities/subtlety     | ClassLabel   |        | tf.int64  |             |
+| breast                     | ClassLabel   |        | tf.int64  |             |
+| id                         | Text         |        | tf.string |             |
+| image                      | Image        | (None, | tf.uint8  |             |
+:                            :              : None,  :           :             :
+:                            :              : 1)     :           :             :
+| patient                    | Text         |        | tf.string |             |
+| view                       | ClassLabel   |        | tf.int64  |             |
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -308,24 +365,27 @@ FeaturesDict({
 
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
-<script src="https://www.gstatic.com/external_hosted/jquery2.min.js"></script>
 <script>
-var url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/curated_breast_imaging_ddsm-original-mass-3.0.0.html";
-$(document).ready(() => {
-  $("#displaydataframe").click((event) => {
-    // Disable the button after clicking (dataframe loaded only once).
-    $("#displaydataframe").prop("disabled", true);
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/curated_breast_imaging_ddsm-original-mass-3.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-    // Pre-fetch and display the content
-    $.get(url, (data) => {
-      $("#dataframecontent").html(data);
-    }).fail(() => {
-      $("#dataframecontent").html(
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
         'Error loading examples. If the error persist, please open '
-        + 'a new issue.'
-      );
-    });
-  });
+        + 'a new issue.';
+  }
 });
 </script>
 

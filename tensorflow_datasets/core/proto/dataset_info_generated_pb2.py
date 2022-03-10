@@ -36,7 +36,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
     package='tensorflow_datasets',
     syntax='proto3',
     serialized_options=b'\370\001\001',
-    serialized_pb=b'\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a\rfeature.proto\x1a)tensorflow_metadata/proto/v0/schema.proto\x1a-tensorflow_metadata/proto/v0/statistics.proto\"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01 \x03(\t\"\x9d\x01\n\tSplitInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nnum_shards\x18\x02 \x01(\x03\x12\x15\n\rshard_lengths\x18\x04 \x03(\x03\x12\x11\n\tnum_bytes\x18\x05 \x01(\x03\x12\x44\n\nstatistics\x18\x03 \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\"\xf3\x03\n\x0eSupervisedKeys\x12\x11\n\x05input\x18\x01 \x01(\tB\x02\x18\x01\x12\x12\n\x06output\x18\x02 \x01(\tB\x02\x18\x01\x12\x38\n\x05tuple\x18\x03 \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.Tuple\x1a@\n\x05Tuple\x12\x37\n\x05items\x18\x01 \x03(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest\x1a\x9f\x01\n\x04\x44ict\x12@\n\x04\x64ict\x18\x01 \x03(\x0b\x32\x32.tensorflow_datasets.SupervisedKeys.Dict.DictEntry\x1aU\n\tDictEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x37\n\x05value\x18\x02 \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest:\x02\x38\x01\x1a\x9b\x01\n\x04Nest\x12\x15\n\x0b\x66\x65\x61ture_key\x18\x01 \x01(\tH\x00\x12:\n\x05tuple\x18\x02 \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.TupleH\x00\x12\x38\n\x04\x64ict\x18\x03 \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.DictH\x00\x42\x06\n\x04nest\"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01 \x01(\t\"\xda\x06\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12I\n\rrelease_notes\x18\x12 \x03(\x0b\x32\x32.tensorflow_datasets.DatasetInfo.ReleaseNotesEntry\x12\x13\n\x0b\x63onfig_name\x18\r \x01(\t\x12\x1a\n\x12\x63onfig_description\x18\x0e \x01(\t\x12.\n\x08\x66\x65\x61tures\x18\x13 \x01(\x0b\x32\x1c.tensorflow_datasets.Feature\x12\x10\n\x08\x63itation\x18\x03 \x01(\t\x12\x19\n\rsize_in_bytes\x18\x04 \x01(\x03\x42\x02\x18\x01\x12\x15\n\rdownload_size\x18\x0c \x01(\x03\x12\x36\n\x08location\x18\x05 \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06 \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07 \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08 \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10 \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11 \x01(\t\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3',
+    serialized_pb=b'\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a\rfeature.proto\x1a)tensorflow_metadata/proto/v0/schema.proto\x1a-tensorflow_metadata/proto/v0/statistics.proto\"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01 \x03(\t\"\xb8\x01\n\tSplitInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nnum_shards\x18\x02 \x01(\x03\x12\x15\n\rshard_lengths\x18\x04 \x03(\x03\x12\x11\n\tnum_bytes\x18\x05 \x01(\x03\x12\x44\n\nstatistics\x18\x03 \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\x12\x19\n\x11\x66ilepath_template\x18\x06 \x01(\t\"\xf3\x03\n\x0eSupervisedKeys\x12\x11\n\x05input\x18\x01 \x01(\tB\x02\x18\x01\x12\x12\n\x06output\x18\x02 \x01(\tB\x02\x18\x01\x12\x38\n\x05tuple\x18\x03 \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.Tuple\x1a@\n\x05Tuple\x12\x37\n\x05items\x18\x01 \x03(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest\x1a\x9f\x01\n\x04\x44ict\x12@\n\x04\x64ict\x18\x01 \x03(\x0b\x32\x32.tensorflow_datasets.SupervisedKeys.Dict.DictEntry\x1aU\n\tDictEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x37\n\x05value\x18\x02 \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.Nest:\x02\x38\x01\x1a\x9b\x01\n\x04Nest\x12\x15\n\x0b\x66\x65\x61ture_key\x18\x01 \x01(\tH\x00\x12:\n\x05tuple\x18\x02 \x01(\x0b\x32).tensorflow_datasets.SupervisedKeys.TupleH\x00\x12\x38\n\x04\x64ict\x18\x03 \x01(\x0b\x32(.tensorflow_datasets.SupervisedKeys.DictH\x00\x42\x06\n\x04nest\"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01 \x01(\t\"\xda\x06\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12I\n\rrelease_notes\x18\x12 \x03(\x0b\x32\x32.tensorflow_datasets.DatasetInfo.ReleaseNotesEntry\x12\x13\n\x0b\x63onfig_name\x18\r \x01(\t\x12\x1a\n\x12\x63onfig_description\x18\x0e \x01(\t\x12.\n\x08\x66\x65\x61tures\x18\x13 \x01(\x0b\x32\x1c.tensorflow_datasets.Feature\x12\x10\n\x08\x63itation\x18\x03 \x01(\t\x12\x19\n\rsize_in_bytes\x18\x04 \x01(\x03\x42\x02\x18\x01\x12\x15\n\rdownload_size\x18\x0c \x01(\x03\x12\x36\n\x08location\x18\x05 \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06 \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07 \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08 \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.RedistributionInfo\x12\x13\n\x0bmodule_name\x18\x0f \x01(\t\x12\x19\n\x11\x64isable_shuffling\x18\x10 \x01(\x08\x12\x13\n\x0b\x66ile_format\x18\x11 \x01(\t\x1a\x33\n\x11ReleaseNotesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3',
     dependencies=[
         feature__pb2.DESCRIPTOR,
         tensorflow__metadata_dot_proto_dot_v0_dot_schema__pb2.DESCRIPTOR,
@@ -172,6 +172,23 @@ _SPLITINFO = _descriptor.Descriptor(
             extension_scope=None,
             serialized_options=None,
             file=DESCRIPTOR),
+        _descriptor.FieldDescriptor(
+            name='filepath_template',
+            full_name='tensorflow_datasets.SplitInfo.filepath_template',
+            index=5,
+            number=6,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b''.decode('utf-8'),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR),
     ],
     extensions=[],
     nested_types=[],
@@ -182,7 +199,7 @@ _SPLITINFO = _descriptor.Descriptor(
     extension_ranges=[],
     oneofs=[],
     serialized_start=182,
-    serialized_end=339,
+    serialized_end=366,
 )
 
 _SUPERVISEDKEYS_TUPLE = _descriptor.Descriptor(
@@ -218,8 +235,8 @@ _SUPERVISEDKEYS_TUPLE = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=457,
-    serialized_end=521,
+    serialized_start=484,
+    serialized_end=548,
 )
 
 _SUPERVISEDKEYS_DICT_DICTENTRY = _descriptor.Descriptor(
@@ -272,8 +289,8 @@ _SUPERVISEDKEYS_DICT_DICTENTRY = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=598,
-    serialized_end=683,
+    serialized_start=625,
+    serialized_end=710,
 )
 
 _SUPERVISEDKEYS_DICT = _descriptor.Descriptor(
@@ -311,8 +328,8 @@ _SUPERVISEDKEYS_DICT = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=524,
-    serialized_end=683,
+    serialized_start=551,
+    serialized_end=710,
 )
 
 _SUPERVISEDKEYS_NEST = _descriptor.Descriptor(
@@ -389,8 +406,8 @@ _SUPERVISEDKEYS_NEST = _descriptor.Descriptor(
             containing_type=None,
             fields=[]),
     ],
-    serialized_start=686,
-    serialized_end=841,
+    serialized_start=713,
+    serialized_end=868,
 )
 
 _SUPERVISEDKEYS = _descriptor.Descriptor(
@@ -464,8 +481,8 @@ _SUPERVISEDKEYS = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=342,
-    serialized_end=841,
+    serialized_start=369,
+    serialized_end=868,
 )
 
 _REDISTRIBUTIONINFO = _descriptor.Descriptor(
@@ -501,8 +518,8 @@ _REDISTRIBUTIONINFO = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=843,
-    serialized_end=880,
+    serialized_start=870,
+    serialized_end=907,
 )
 
 _DATASETINFO_RELEASENOTESENTRY = _descriptor.Descriptor(
@@ -555,8 +572,8 @@ _DATASETINFO_RELEASENOTESENTRY = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1632,
-    serialized_end=1683,
+    serialized_start=1659,
+    serialized_end=1710,
 )
 
 _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
@@ -609,8 +626,8 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1685,
-    serialized_end=1741,
+    serialized_start=1712,
+    serialized_end=1768,
 )
 
 _DATASETINFO = _descriptor.Descriptor(
@@ -955,8 +972,8 @@ _DATASETINFO = _descriptor.Descriptor(
     syntax='proto3',
     extension_ranges=[],
     oneofs=[],
-    serialized_start=883,
-    serialized_end=1741,
+    serialized_start=910,
+    serialized_end=1768,
 )
 
 _SPLITINFO.fields_by_name[

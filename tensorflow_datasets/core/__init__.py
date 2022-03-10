@@ -17,11 +17,18 @@
 # Ensure TensorFlow is importable and its version is sufficiently recent. This
 # needs to happen before anything else, since the imports below will try to
 # import tensorflow, too.
+
 from tensorflow_datasets.core import tf_compat
 
 tf_compat.ensure_tf_install()
 
 # pylint:disable=g-import-not-at-top
+
+# pylint: disable=g-bad-import-order
+# Allow to use `tfds.core.Path` in dataset implementation which seems more
+# natural than having to import a third party module.
+from etils.epath import Path
+# pylint: enable=g-bad-import-order
 
 from tensorflow_datasets.core import community  # pylint: disable=g-bad-import-order
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
@@ -38,7 +45,7 @@ from tensorflow_datasets.core.file_adapters import FileFormat
 
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 
-from tensorflow_datasets.core.read_only_builder import builder_from_directory
+from tensorflow_datasets.core.naming import ShardedFileTemplate
 
 from tensorflow_datasets.core.registered import DatasetNotFoundError
 
@@ -56,10 +63,7 @@ from tensorflow_datasets.core.utils import tfds_path
 from tensorflow_datasets.core.utils import Version
 from tensorflow_datasets.core.utils.benchmark import BenchmarkResult
 from tensorflow_datasets.core.utils.file_utils import add_data_dir
-from tensorflow_datasets.core.utils.generic_path import as_path
-from tensorflow_datasets.core.utils.type_utils import PathLike
-from tensorflow_datasets.core.utils.type_utils import ReadOnlyPath
-from tensorflow_datasets.core.utils.type_utils import ReadWritePath
+from tensorflow_datasets.core.utils.file_utils import as_path
 
 
 def benchmark(*args, **kwargs):
@@ -74,7 +78,6 @@ __all__ = [
     "BeamBasedBuilder",
     "BeamMetadataDict",
     "BuilderConfig",
-    "builder_from_directory",
     "DatasetBuilder",
     "DatasetInfo",
     "DatasetNotFoundError",
@@ -85,10 +88,9 @@ __all__ = [
     "lazy_imports",
     "Metadata",
     "MetadataDict",
-    "PathLike",
+    "Path",
     "ReadInstruction",
-    "ReadOnlyPath",
-    "ReadWritePath",
+    "ShardedFileTemplate",
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",

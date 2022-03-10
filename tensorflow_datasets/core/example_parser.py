@@ -26,7 +26,7 @@ class ExampleParser(object):
     self._example_specs = example_specs
     self._flat_example_specs = utils.flatten_nest_dict(self._example_specs)
     self._nested_feature_specs = _build_feature_specs(self._flat_example_specs)
-    self._flat_feature_specs = utils.flatten_nest_dict(
+    self.flat_feature_specs = utils.flatten_nest_dict(
         self._nested_feature_specs)
 
   def parse_example(self, serialized_example):
@@ -58,7 +58,7 @@ class ExampleParser(object):
     # }
     example = tf.io.parse_single_example(
         serialized=serialized_example,
-        features=self._flat_feature_specs,
+        features=self.flat_feature_specs,
     )
     example = utils.pack_as_nest_dict(example, self._nested_feature_specs)
 

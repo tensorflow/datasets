@@ -18,9 +18,10 @@
 import dataclasses
 import functools
 import operator
-from typing import List
+from typing import List, Optional
 
 from absl import logging
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 
 
@@ -61,9 +62,9 @@ class _EvenSplit(splits_lib.AbstractSplit):
     assert end >= start, f'start={start}, end={end}'
     num_examples = end - start
 
-    examples_per_host = num_examples // self.count
-    shard_start = start + examples_per_host * self.index
-    shard_end = start + examples_per_host * (self.index + 1)
+    examples_per_split = num_examples // self.count
+    split_start = start + examples_per_split * self.index
+    split_end = start + examples_per_split * (self.index + 1)
 
     # Handle remaining examples.
     num_unused_examples = num_examples % self.count
@@ -74,13 +75,13 @@ class _EvenSplit(splits_lib.AbstractSplit):
         logging.warning('Dropping %d examples of %d examples (host count: %d).',
                         num_unused_examples, num_examples, self.count)
       else:
-        shard_start += min(self.index, num_unused_examples)
-        shard_end += min(self.index + 1, num_unused_examples)
+        split_start += min(self.index, num_unused_examples)
+        split_end += min(self.index + 1, num_unused_examples)
 
     return splits_lib.ReadInstruction(
         abs_inst.splitname,
-        from_=shard_start,
-        to=shard_end,
+        from_=split_start,
+        to=split_end,
         unit='abs',
     )
 
@@ -123,3 +124,58 @@ def even_splits(
       _EvenSplit(split=split, index=i, count=n, drop_remainder=drop_remainder)
       for i in range(n)
   ]
+
+
+def split_for_jax_process(
+    split: str,
+    *,
+    process_index: Optional[int] = None,
+    process_count: Optional[int] = None,
+    drop_remainder: bool = False,
+) -> splits_lib.SplitArg:
+  """Returns the subsplit of the data for the process.
+
+  In distributed setting, all process/hosts should get a non-overlapping,
+  equally sized slice of the entire data. This function takes as input a split
+  and extracts the slice for the current process index.
+
+  Usage:
+
+  ```python
+  tfds.load(..., split=tfds.split_for_jax_process('train'))
+  ```
+
+  This funtion is an alias for:
+
+  ```python
+  tfds.even_splits(split, n=jax.process_count())[jax.process_index()]
+  ```
+
+  By default, if examples can't be evenly distributed across processes, you can
+  drop extra examples with `drop_remainder=True`.
+
+  Args:
+    split: Split to distribute across host (e.g. `train[75%:]`,
+      `train[:800]+validation[:100]`).
+    process_index: Process index in `[0, count)`. Defaults to
+      `jax.process_index()`.
+    process_count: Number of processes. Defaults to `jax.process_count()`.
+    drop_remainder: Drop examples if the number of examples in the datasets is
+      not evenly divisible by `n`. If `False`, examples are distributed evenly
+      across subsplits, starting by the first. For example, if there is 11
+      examples with `n=3`, splits will contain `[4, 4, 3]` examples
+      respectivelly.
+
+  Returns:
+    subsplit: The sub-split of the given `split` for the current
+      `process_index`.
+  """
+  if process_index is None:
+    process_index = lazy_imports_lib.lazy_imports.jax.process_index()
+  if process_count is None:
+    process_count = lazy_imports_lib.lazy_imports.jax.process_count()
+  return even_splits(
+      split,
+      n=process_count,
+      drop_remainder=drop_remainder,
+  )[process_index]

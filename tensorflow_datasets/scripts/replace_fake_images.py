@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Replace all images in the fake directory by more compressed version.
+r"""Replace all images in the fake directory with their compressed versions.
 
-This allow to reduce size of the images in the `fake_data/` directory.
+This allows to reduce size of the images in the `fake_data/` directory.
 
 Instructions:
 
@@ -82,7 +82,7 @@ def rewrite_zip(root_dir, zip_filepath):
     with zipfile.ZipFile(zip_filepath, 'r') as zip_file:
       zip_file.extractall(path=temp_dir)
 
-    rewrite_dir(temp_dir)  # Recursivelly compress the archive content
+    rewrite_dir(temp_dir)  # Recursively compress the archive content
 
     # Compress the .zip file again
     with zipfile.ZipFile(
@@ -101,7 +101,7 @@ def rewrite_zip(root_dir, zip_filepath):
 def rewrite_tar(root_dir, tar_filepath):
   """Rewrite the older .tar file into new better compressed one.
 
-  Compression formats supports by this method (.tar.gz, .tgz, .tar.bz2)
+  Compression formats supported by this method (.tar.gz, .tgz, .tar.bz2)
 
   Args:
     root_dir: directory path which contain tar compressed file
@@ -124,7 +124,7 @@ def rewrite_tar(root_dir, tar_filepath):
     with tarfile.open(tar_filepath, 'r' + extension) as tar:
       tar.extractall(path=temp_dir)
 
-    rewrite_dir(temp_dir)  # Recursivelly compress the archive content
+    rewrite_dir(temp_dir)  # Recursively compress the archive content
 
     # Convert back into tar file
     with tarfile.open(tar_filepath, 'w' + extension) as tar:

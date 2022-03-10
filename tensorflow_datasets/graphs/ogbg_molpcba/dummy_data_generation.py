@@ -23,11 +23,11 @@ from typing import Iterable, Dict, Text, List
 
 from absl import app
 from absl import flags
+from etils import epath
 import numpy as np
 import pandas as pd
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import resource_utils
-from tensorflow_datasets.core.utils import type_utils
 
 # Command-line arguments.
 flags.DEFINE_string('save_path', None,
@@ -40,7 +40,7 @@ FLAGS = flags.FLAGS
 
 # Type hints.
 ArrayDict = Dict[Text, np.ndarray]
-ReadWritePath = type_utils.ReadWritePath
+Path = epath.Path
 
 
 def seed_prngs(seed: int):
@@ -122,9 +122,7 @@ def combine_graph_data(graphs: Iterable[ArrayDict]) -> ArrayDict:
   return graphs_dict
 
 
-def save_to_path(path: ReadWritePath,
-                 graphs: Iterable[ArrayDict],
-                 splits: ArrayDict):
+def save_to_path(path: Path, graphs: Iterable[ArrayDict], splits: ArrayDict):
   """Save all generated data as OGB does."""
 
   # Combine all graph data into a single dictionary.
