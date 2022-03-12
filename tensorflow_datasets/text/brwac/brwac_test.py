@@ -22,7 +22,7 @@ class BrwacTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for brwac dataset."""
   # TODO(brwac):
   DATASET_CLASS = brwac.Brwac
-  SPLITS = {'train': 5}
+  SPLITS = {'train': 20}
 
   DL_EXTRACT_RESULT = {'train': 'brwac.vert'}
 

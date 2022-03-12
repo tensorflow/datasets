@@ -16,7 +16,6 @@
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-from tqdm import tqdm
 from tensorflow_datasets.text.brwac.brwac_utils import parse_vert_file
 
 _HOMEPAGE = 'https://www.inf.ufrgs.br/pln/wiki/index.php?title=BrWaC'
