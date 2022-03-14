@@ -59,6 +59,7 @@ jobs:
     - run: sudo apt-get install ffmpeg
 
     - run: pip install -e .[tests-all]
+    - run: pip install toml
 
 
     # Run tests
