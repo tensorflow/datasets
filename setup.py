@@ -66,6 +66,7 @@ TESTS_REQUIRE = [
     'jax[cpu]',
     'jupyter',
     'pytest',
+    'pytest-shard',
     'pytest-xdist',
     # Lazy-deps required by core
     'pandas',
