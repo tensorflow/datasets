@@ -642,18 +642,6 @@ class DatasetBuilder(registered.RegisteredDataset):
     if not read_config.skip_prefetch:
       ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
 
-    # If shuffling is True and seeds not set, allow pipeline to be
-    # non-deterministic
-    # This code should probably be moved inside tfreader, such as
-    # all the tf.data.Options are centralized in a single place.
-    if (shuffle_files and read_config.shuffle_seed is None and
-        tf_compat.get_option_deterministic(read_config.options) is None):
-      options = tf.data.Options()
-      tf_compat.set_option_deterministic(options, False)
-      ds = ds.with_options(options)
-    # If shuffle is False, keep the default value (deterministic), which
-    # allow the user to overwritte it.
-
     if wants_full_dataset:
       return tf_compat.get_single_element(ds)
     return ds

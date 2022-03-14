@@ -25,6 +25,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
@@ -198,6 +199,15 @@ def _read_files(
         reshuffle_each_iteration=read_config.shuffle_reshuffle_each_iteration,
     )
 
+  deterministic = True
+  # If shuffling is true and the seed is not set, then the pipeline is allowed
+  # to be non-deterministic. Note that setting the deterministic option in
+  # tf.data.Options() sets this option globally. This means that also nested
+  # fields will appear in undeterministic order.
+  if (shuffle_files and read_config.shuffle_seed is None and
+      tf_compat.get_option_deterministic(read_config.options) is None):
+    deterministic = False
+
   ds = instruction_ds.interleave(
       functools.partial(
           _get_dataset_from_filename,
@@ -209,6 +219,7 @@ def _read_files(
       cycle_length=cycle_length,
       block_length=block_length,
       num_parallel_calls=read_config.num_parallel_calls_for_interleave_files,
+      deterministic=deterministic,
   )
 
   # If the number of examples read in the tf-record is known, we forward

@@ -168,28 +168,20 @@ class ReaderTest(testing.TestCase):
           tf.data.experimental.cardinality(ds).numpy(), len(read_data))
 
   def test_shuffle_files(self):
-    train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
+    chars = 'abcdefghijkl'
+    train_info = self._write_tfrecord('train', 5, chars)
     ds = self.reader.read(
         instructions='train',
         split_infos=[train_info],
         shuffle_files=True,
     )
-    shards = [  # The shards of the dataset:
-        [b'a', b'b'],
-        [b'c', b'd', b'e'],
-        [b'f', b'g'],
-        [b'h', b'i', b'j'],
-        [b'k', b'l'],
-    ]
-    # The various orders in which the dataset can be read:
-    expected_permutations = [
-        tuple(sum(shard, [])) for shard in itertools.permutations(shards)
-    ]
     ds = ds.batch(12).repeat(100)
     read_data = set(tuple(e) for e in tfds.as_numpy(ds))
     for batch in read_data:
-      self.assertIn(batch, expected_permutations)
-    # There are theoritically 5! (=120) different arrangements, but we would
+      # Check that `batch` contains all the chars exactly once.
+      batch_set = set(batch)
+      self.assertEqual(len(batch_set), len(chars))
+    # There are theoretically 5! (=120) different arrangements, but we would
     # need too many repeats to be sure to get them.
     self.assertGreater(len(set(read_data)), 10)
 
