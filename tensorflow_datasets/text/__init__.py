@@ -76,6 +76,7 @@ from tensorflow_datasets.text.story_cloze import StoryCloze
 from tensorflow_datasets.text.super_glue import SuperGlue
 from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.trec import Trec
+from tensorflow_datasets.text.unifiedqa import UnifiedQA
 from tensorflow_datasets.text.wiki40b import Wiki40b
 from tensorflow_datasets.text.wikiann import Wikiann
 from tensorflow_datasets.text.wikipedia import Wikipedia
