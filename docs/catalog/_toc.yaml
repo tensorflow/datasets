@@ -601,6 +601,9 @@ toc:
     title: tiny_shakespeare
   - path: /datasets/catalog/trec
     title: trec
+  - path: /datasets/catalog/unified_qa
+    status: nightly
+    title: unified_qa
   - path: /datasets/catalog/wiki40b
     title: wiki40b
   - path: /datasets/catalog/wikiann
