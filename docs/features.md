@@ -14,19 +14,34 @@ The `tfds.features.FeatureConnector` API:
 ```python
 tfds.core.DatasetInfo(
     features=tfds.features.FeaturesDict({
-        'image': tfds.features.Image(shape=(28, 28, 1)),
-        'label': tfds.features.ClassLabel(names=['no', 'yes']),
+        'image': tfds.features.Image(shape=(28, 28, 1), doc='Grayscale image'),
+        'label': tfds.features.ClassLabel(
+            names=['no', 'yes'],
+            doc=tfds.features.Documentation(
+                desc='Whether this is a picture of a cat',
+                value_range='yes or no'
+            ),
+        ),
         'metadata': {
             'id': tf.int64,
+            'timestamp': tfds.features.Scalar(
+                tf.int64,
+                doc='Timestamp when this picture was taken as seconds since epoch'),
             'language': tf.string,
         },
     }),
 )
 ```
 
+Features can be documented by either using just a textual description
+(`doc='description'`) or by using `tfds.features.Documentation` directly to
+provide a more detailed feature description.
+
 Features can be:
 
-*   Scalar values: `tf.bool`, `tf.string`, `tf.float32`,...
+*   Scalar values: `tf.bool`, `tf.string`, `tf.float32`,... When you want to
+    document the feature, you can also use `tfds.features.Scalar(tf.int64,
+    doc='description')`.
 *   `tfds.features.Audio`, `tfds.features.Video`,... (see
     [the list](https://www.tensorflow.org/datasets/api_docs/python/tfds/features?version=nightly)
     of available features)
