@@ -180,7 +180,6 @@ def mock_data(
 
   def mock_as_dataset(self, split, decoders=None, read_config=None, **kwargs):
     """Function which overwrite `builder._as_dataset`."""
-    del split
     del kwargs
 
     # Partial decoding
@@ -225,7 +224,7 @@ def mock_data(
 
     if read_config and read_config.add_tfds_id:
       ds_id = tfrecords_reader._make_id_dataset(  # pylint: disable=protected-access
-          filename=f'{self.name}-split.tfrecord-00000-of-00001',
+          filename=f'{self.name}-{split}.tfrecord-00000-of-00001',
           start_index=0,  # pytype: disable=wrong-arg-types
       )
       ds = tf.data.Dataset.zip((ds, ds_id))

@@ -79,7 +79,10 @@ def test_mocking_add_tfds_id():
       'image': tf.TensorSpec(shape=(28, 28, 1), dtype=tf.uint8),
       'label': tf.TensorSpec(shape=(), dtype=tf.int64),
   }
-  list(ds.take(3))  # Iteration should work
+  train_examples = list(ds.take(3))  # Iteration should work
+  ds = tfds.load('mnist', split='test', read_config=read_config)
+  test_examples = list(ds.take(3))  # Iteration should work
+  assert train_examples[0]['tfds_id'] != test_examples[0]['tfds_id']
 
 
 @pytest.mark.usefixtures('apply_mock_data')
