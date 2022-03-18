@@ -64,6 +64,14 @@ LICENSE_FILENAME = "LICENSE"
 METADATA_FILENAME = "metadata.json"
 
 
+def dataset_info_path(dataset_info_dir: epath.PathLike) -> str:
+  return os.path.join(os.fspath(dataset_info_dir), DATASET_INFO_FILENAME)
+
+
+def license_path(dataset_info_dir: epath.PathLike) -> str:
+  return os.path.join(os.fspath(dataset_info_dir), LICENSE_FILENAME)
+
+
 @six.add_metaclass(abc.ABCMeta)
 class Metadata(dict):
   """Abstract base class for DatasetInfo metadata container.
@@ -117,6 +125,7 @@ class DatasetInfo(object):
       license: Optional[str] = None,  # pylint: disable=redefined-builtin
       redistribution_info: Optional[Dict[str, str]] = None,
       split_dict: Optional[splits_lib.SplitDict] = None):
+    # pyformat: disable
     """Constructs DatasetInfo.
 
     Args:
@@ -158,6 +167,7 @@ class DatasetInfo(object):
         dataset.
       split_dict: information about the splits in this dataset.
     """
+    # pyformat: enable
     self._builder = builder
 
     if builder.builder_config:
@@ -433,17 +443,11 @@ class DatasetInfo(object):
     """Whether DatasetInfo has been fully initialized."""
     return self._fully_initialized
 
-  def _dataset_info_path(self, dataset_info_dir):
-    return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
-
-  def _license_path(self, dataset_info_dir):
-    return os.path.join(dataset_info_dir, LICENSE_FILENAME)
-
   @property
   def as_json(self) -> str:
     return json_format.MessageToJson(self.as_proto, sort_keys=True)
 
-  def write_to_directory(self, dataset_info_dir) -> None:
+  def write_to_directory(self, dataset_info_dir: epath.PathLike) -> None:
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
     # Save the features structure & metadata (vocabulary, labels,...)
     if self.features:
@@ -454,10 +458,10 @@ class DatasetInfo(object):
       self.metadata.save_metadata(dataset_info_dir)
 
     if self.redistribution_info.license:
-      with tf.io.gfile.GFile(self._license_path(dataset_info_dir), "w") as f:
+      with tf.io.gfile.GFile(license_path(dataset_info_dir), "w") as f:
         f.write(self.redistribution_info.license)
 
-    with tf.io.gfile.GFile(self._dataset_info_path(dataset_info_dir), "w") as f:
+    with tf.io.gfile.GFile(dataset_info_path(dataset_info_dir), "w") as f:
       f.write(self.as_json)
 
   def read_from_directory(self, dataset_info_dir: str) -> None:
@@ -477,7 +481,7 @@ class DatasetInfo(object):
     """
     logging.info("Load dataset info from %s", dataset_info_dir)
 
-    json_filename = self._dataset_info_path(dataset_info_dir)
+    json_filename = dataset_info_path(dataset_info_dir)
     if not tf.io.gfile.exists(json_filename):
       raise FileNotFoundError(
           "Tried to load `DatasetInfo` from a directory which does not exist or"
