@@ -19,9 +19,6 @@ Compute the split info (num shards, num examples,...) metadata required
 by `tfds.core.DatasetInfo`. See documentation and usage at:
 https://www.tensorflow.org/datasets/external_tfrecord
 
-See documentation for usage:
-https://www.tensorflow.org/datasets/external_tfrecord
-
 """
 
 import argparse
