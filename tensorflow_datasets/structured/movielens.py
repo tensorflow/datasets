@@ -185,7 +185,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='25m',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-25m.zip'),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
@@ -197,7 +197,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='25m',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-25m.zip'),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
@@ -218,7 +218,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='latest-small',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-latest-small.zip'),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
@@ -230,7 +230,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='latest-small',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-latest-small.zip'),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
@@ -247,7 +247,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='100k',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-100k.zip'),
           parsing_fn=movielens_parsing.parse_100k_ratings_data,
       ),
@@ -259,7 +259,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='100k',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-100k.zip'),
           parsing_fn=movielens_parsing.parse_100k_movies_data,
       ),
@@ -278,7 +278,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='1m',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-1m.zip'),
           parsing_fn=movielens_parsing.parse_1m_ratings_data,
       ),
@@ -290,7 +290,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='1m',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-1m.zip'),
           parsing_fn=movielens_parsing.parse_1m_movies_data,
       ),
@@ -306,7 +306,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='20m',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-20m.zip'),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
@@ -318,7 +318,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           version='0.1.0',
           format_version='20m',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-20m.zip'),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
