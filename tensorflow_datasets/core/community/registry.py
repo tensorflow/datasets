@@ -184,12 +184,9 @@ class DatasetRegistry(register_base.BaseRegister):
     if len(registers) == 1:
       return registers[0].builder(name, **builder_kwargs)
 
-    # If this dataset has multiple registers, use the first that loads.
-    for register in registers:
-      try:
-        return register.builder(name, **builder_kwargs)
-      except registered.DatasetNotFoundError:
-        pass
+    if len(registers) > 1:
+      raise ValueError(f'Namespace {name.namespace} has multiple registers! '
+                       f'This should not happen! Registers: {registers}')
 
     raise registered.DatasetNotFoundError(
         f'Namespace {name.namespace} found with {len(registers)} registers, '
