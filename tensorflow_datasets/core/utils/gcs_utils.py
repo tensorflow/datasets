@@ -65,7 +65,7 @@ def gcs_path(*relative_path: epath.PathLike) -> epath.Path:
 # location.
 # Datasets there are downloaded and installed locally by the
 # `PackageRegister` during `tfds.builder`
-GCS_COMMUNITY_INDEX_PATH = gcs_path() / 'community-datasets-list.jsonl'
+GCS_COMMUNITY_INDEX_PATH = gcs_path('community-datasets-list.jsonl')
 
 
 def exists(path: epath.Path) -> bool:
@@ -85,48 +85,61 @@ def gcs_listdir(dir_name: str) -> Optional[List[str]]:
   return [posixpath.join(dir_name, f.name) for f in root_dir.iterdir()]
 
 
-def gcs_dataset_info_files(dataset_dir: str) -> Optional[List[str]]:
-  """Return paths to GCS files in the given dataset directory."""
-  return gcs_listdir(posixpath.join(GCS_DATASET_INFO_DIR, dataset_dir))
+def gcs_dataset_info_files(dataset_name: str) -> Optional[List[epath.Path]]:
+  """Return paths to the dataset info files of the given dataset in gs://tfds-data."""
+  path = gcs_path(posixpath.join(GCS_DATASET_INFO_DIR, dataset_name))
+  if _is_gcs_disabled or not exists(path):
+    return None
+  return list(path.iterdir())
 
 
 def is_dataset_on_gcs(dataset_name: str) -> bool:
   """If the dataset is available on the GCS bucket gs://tfds-data/datasets."""
-  dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
-  return not _is_gcs_disabled and exists(gcs_path(dir_name))
+  path = gcs_path(posixpath.join(GCS_DATASETS_DIR, dataset_name))
+  return not _is_gcs_disabled and exists(path)
 
 
-def download_gcs_dataset(dataset_name,
-                         local_dataset_dir,
-                         max_simultaneous_downloads=25):
-  """Downloads prepared GCS dataset to local dataset directory."""
+def download_gcs_folder(
+    gcs_folder: epath.Path,
+    local_folder: epath.PathLike,
+    max_simultaneous_downloads: int = 25,
+) -> None:
+  """Downloads prepared GCS folder to local folder."""
   if _is_gcs_disabled:
     raise AssertionError('Cannot download from GCS when _is_gcs_disabled')
 
-  prefix = posixpath.join(GCS_DATASETS_DIR, dataset_name)
-  gcs_paths_to_dl = gcs_listdir(prefix)
-
   # Filter out the diffs folder if present
-  filter_prefix = posixpath.join(prefix, 'diffs')
-  gcs_paths_to_dl = [
-      p for p in gcs_paths_to_dl if not p.startswith(filter_prefix)
-  ]
+  paths_to_dl = [p for p in gcs_folder.iterdir() if p.name != 'diffs']
 
   with tqdm_utils.async_tqdm(
-      total=len(gcs_paths_to_dl), desc='Dl Completed...', unit=' file') as pbar:
+      total=len(paths_to_dl), desc='Dl Completed...', unit=' file') as pbar:
 
-    def _copy_from_gcs(gcs_path_):
+    def _copy(gcs_path_: epath.Path):
       # Copy 'gs://tfds-data/datasets/ds/1.0.0/file' -> `local_dir/file`
       tf.io.gfile.copy(
-          os.fspath(gcs_path(gcs_path_)),
-          os.path.join(local_dataset_dir, posixpath.basename(gcs_path_)),
+          os.fspath(gcs_path_),
+          os.path.join(local_folder, gcs_path_.name),
       )
       pbar.update(1)
 
     with concurrent.futures.ThreadPoolExecutor(
         max_workers=max_simultaneous_downloads) as executor:
-      futures = [
-          executor.submit(_copy_from_gcs, path) for path in gcs_paths_to_dl
-      ]
+      futures = [executor.submit(_copy, path) for path in paths_to_dl]
       for future in concurrent.futures.as_completed(futures):
         future.result()
+
+
+def download_gcs_dataset(dataset_name: epath.PathLike,
+                         local_dataset_dir: epath.PathLike,
+                         max_simultaneous_downloads: int = 25,
+                         root_dir: Optional[str] = None):
+  """Downloads prepared GCS dataset to local dataset directory."""
+  if root_dir:
+    gcs_folder = epath.Path(root_dir) / dataset_name
+  else:
+    gcs_folder = epath.Path(GCS_ROOT_DIR) / GCS_DATASETS_DIR / dataset_name
+
+  download_gcs_folder(
+      gcs_folder=gcs_folder,
+      local_folder=local_dataset_dir,
+      max_simultaneous_downloads=max_simultaneous_downloads)

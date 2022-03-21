@@ -451,7 +451,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         if (download_config.try_download_gcs and
             gcs_utils.is_dataset_on_gcs(self.info.full_name)):
           logging.info(GCS_HOSTED_MSG, self.name)
-          gcs_utils.download_gcs_dataset(self.info.full_name, self._data_dir)
+          gcs_utils.download_gcs_dataset(
+              dataset_name=self.info.full_name,
+              local_dataset_dir=self._data_dir)
           self.info.read_from_directory(self._data_dir)
         else:
           # Old version of TF are not os.PathLike compatible

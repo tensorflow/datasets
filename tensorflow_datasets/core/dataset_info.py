@@ -571,9 +571,9 @@ class DatasetInfo(object):
     logging.info(
         "Load pre-computed DatasetInfo (eg: splits, num examples,...) "
         "from GCS: %s", self.full_name)
-    for fname in data_files:
-      out_fname = os.path.join(tmp_dir, os.path.basename(fname))
-      tf.io.gfile.copy(os.fspath(gcs_utils.gcs_path(fname)), out_fname)
+    for path in data_files:
+      out_fname = os.path.join(tmp_dir, path.name)
+      tf.io.gfile.copy(os.fspath(path), out_fname)
     self.read_from_directory(tmp_dir)
 
   def __repr__(self):

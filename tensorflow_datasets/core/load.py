@@ -136,7 +136,7 @@ def builder(
   name, builder_kwargs = naming.parse_builder_name_kwargs(
       name, **builder_kwargs)
 
-  # `try_gcs` currently only support non-community datasets
+  # `try_gcs` currently only supports non-community datasets
   if (try_gcs and not name.namespace and
       gcs_utils.is_dataset_on_gcs(str(name))):
     data_dir = builder_kwargs.get('data_dir')
@@ -149,7 +149,7 @@ def builder(
       community.community_register.has_namespace(name.namespace)):
     return community.community_register.builder(name=name, **builder_kwargs)
 
-  # First check whether code exists or not
+  # First check whether we can find the corresponding dataset builder code
   try:
     cls = builder_cls(str(name))
   except registered.DatasetNotFoundError as e:
@@ -159,8 +159,7 @@ def builder(
   # Eventually try loading from files first
   if _try_load_from_files_first(cls, **builder_kwargs):
     try:
-      b = read_only_builder.builder_from_files(str(name), **builder_kwargs)
-      return b
+      return read_only_builder.builder_from_files(str(name), **builder_kwargs)
     except registered.DatasetNotFoundError as e:
       pass
 
@@ -180,19 +179,19 @@ def _try_load_from_files_first(
 ) -> bool:
   """Returns True if files should be used rather than code."""
   if set(builder_kwargs) - {'version', 'config', 'data_dir'}:
-    return False  # Has extra kwargs, require original code.
+    return False  # Has extra kwargs, requires original code.
   elif builder_kwargs.get('version') == 'experimental_latest':
-    return False  # Requested version require original code
+    return False  # Requested version requires original code
   elif not cls:
-    return True  # Code does not exists
+    return True  # Code does not exist
   elif 'version' in builder_kwargs:
-    return True  # Version explicitly given (unlock backward compatibility)
+    return True  # Version explicitly given (unlocks backward compatibility)
   elif ('config' in builder_kwargs and
         isinstance(builder_kwargs['config'], str) and
         builder_kwargs['config'] not in cls.builder_configs):
     return True  # Requested config isn't found in the code
   else:
-    return False  # Code exists and no version given, use code.
+    return False  # Code exists and no version is given, so use code.
 
 
 def load(
