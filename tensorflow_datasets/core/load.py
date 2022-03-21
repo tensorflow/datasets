@@ -145,6 +145,9 @@ def builder(
           f'Cannot have both `try_gcs=True` and `data_dir={data_dir}` '
           'explicitly set')
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
+  if (visibility.DatasetType.COMMUNITY_PUBLIC.is_available() and
+      community.community_register.has_namespace(name.namespace)):
+    return community.community_register.builder(name=name, **builder_kwargs)
 
   # First check whether code exists or not
   try:

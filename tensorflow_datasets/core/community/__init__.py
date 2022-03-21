@@ -18,7 +18,7 @@
 from tensorflow_datasets.core.community.huggingface_wrapper import mock_builtin_to_use_gfile
 from tensorflow_datasets.core.community.huggingface_wrapper import mock_huggingface_import
 from tensorflow_datasets.core.community.load import builder_cls_from_module
-from tensorflow_datasets.core.community.register_package import community_register
+from tensorflow_datasets.core.community.registry import community_register
 
 __all__ = [
     'builder_cls_from_module',

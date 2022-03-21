@@ -217,7 +217,7 @@ class PackageRegister(register_base.BaseRegister):
       path: Path to the register files containing the list of dataset sources,
         forwarded to `_PackageIndex`
     """
-    self._path = epath.Path(path)
+    self._path = path
 
   @utils.memoized_property
   def _package_index(self) -> _PackageIndex:
@@ -254,6 +254,93 @@ class PackageRegister(register_base.BaseRegister):
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
     return self.builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
+
+
+def list_ds_packages_for_namespace(
+    namespace: str,
+    path: epath.Path,
+) -> List[DatasetPackage]:
+  """Returns the dataset names found in a specific directory.
+
+  Directories that contain code should have the following structure:
+
+  ```
+  <path>/
+      <dataset0>/
+          <dataset0>.py
+      <dataset1>/
+          <dataset1>.py
+      ...
+  ```
+
+  Additional files or folders which are not detected as datasets will be
+  ignored (e.g. `__init__.py`).
+
+  Args:
+    namespace: Namespace of the datasets
+    path: The directory path containing the datasets.
+
+  Returns:
+    ds_packages: The dataset packages found in the directory (sorted for
+      determinism).
+
+  Raises:
+    FileNotFoundError: If the path cannot be reached.
+  """
+  if not path.exists():
+    # Should be fault-tolerant in the future
+    raise FileNotFoundError(f'Could not find datasets at {path}')
+
+  all_packages = []
+  for ds_path in path.iterdir():
+    source = get_dataset_source(ds_path)
+    if source:
+      pkg = DatasetPackage(
+          name=utils.DatasetName(namespace=namespace, name=ds_path.name),
+          source=source,
+      )
+      all_packages.append(pkg)
+
+  return all_packages
+
+
+def get_dataset_source(
+    ds_path: epath.Path,) -> Optional[dataset_sources_lib.DatasetSource]:
+  """Returns a `DatasetSource` instance if the given path corresponds to a dataset.
+
+  To determine whether the given path contains a dataset, a simple heuristic is
+  used that checks whether the path has the following structure:
+
+  ```
+  <ds_name>/
+      <ds_name>.py
+  ```
+
+  If so, all `.py`, `.txt`, `.tsv`, `.json` files will be added to the package.
+
+  Args:
+    ds_path: Path of the dataset module
+
+  Returns:
+    A `DatasetSource` instance if the path matches the expected file structure.
+  """
+  filter_list = {'__init__.py'}
+  suffixes_list = ('.txt', '.tsv', '.py', '.json')
+
+  def is_interesting_file(fname: str) -> bool:
+    return fname.endswith(suffixes_list) and fname not in filter_list
+
+  if not ds_path.is_dir():
+    return None
+  all_filenames = set(f.name for f in ds_path.iterdir())
+  if f'{ds_path.name}.py' not in all_filenames:
+    return None
+
+  return dataset_sources_lib.DatasetSource(
+      root_path=ds_path,
+      filenames=sorted(
+          [fname for fname in all_filenames if is_interesting_file(fname)]),
+  )
 
 
 def _download_or_reuse_cache(
@@ -390,7 +477,3 @@ def _compute_dir_hash(path: epath.Path) -> str:
   all_checksums = [f.name for f in all_files]
   all_checksums += [checksums.compute_url_info(f).checksum for f in all_files]
   return hashlib.sha256(''.join(all_checksums).encode()).hexdigest()
-
-
-# Register pointing to the GCS community list.
-community_register = PackageRegister(path=gcs_utils.GCS_COMMUNITY_INDEX_PATH)
