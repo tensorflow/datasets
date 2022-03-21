@@ -135,6 +135,8 @@ def write_metadata(
   # Make sure that the data can be loaded (feature connector match the actual
   # specs)
   if check_data:
+    utils.print_notebook('Metadata written. Testing by reading first example. '
+                         'Set check_data=False to skip.')
     builder = read_only_builder.builder_from_directory(data_dir)
     split_name = next(iter(builder.info.splits))
     _, = builder.as_dataset(split=f'{split_name}[:1]')  # Load the first example

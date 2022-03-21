@@ -33,6 +33,7 @@ import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Tuple, Type, TypeVar, Union
 import uuid
 
+from absl import logging as absl_logging
 from etils import epath
 from six.moves import urllib
 import tensorflow as tf
@@ -68,11 +69,24 @@ def is_notebook() -> bool:
     return True
 
 
+# TODO(tfds): Should likely have a `logging_utils` wrapper around `absl.logging`
+# so logging messages are displayed on Colab.
+
+
+def print_notebook(*args: Any) -> None:
+  """Like `print`/`logging.info`. Colab do not print stderr by default."""
+  msg = ' '.join([str(x) for x in args])
+  if is_notebook():
+    print(msg)
+  else:
+    absl_logging.info(msg)
+
+
 def warning(text: str) -> None:
   if is_notebook():
     print(text)
   else:
-    logging.warning(text)
+    absl_logging.warning(text)
 
 
 @contextlib.contextmanager
