@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# lint as: python3
 r"""Wikipedia sentences with labeled salient spans."""
 import numpy as np
 import tensorflow as tf
