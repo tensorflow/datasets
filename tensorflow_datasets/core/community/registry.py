@@ -121,6 +121,8 @@ class DatasetRegistry(register_base.BaseRegister):
     return self.namespace_config.registers_per_namespace()
 
   def has_namespace(self, namespace: str) -> bool:
+    if not namespace:
+      return False
     return namespace in self.registers_per_namespace
 
   def list_namespaces(self) -> List[str]:
