@@ -198,6 +198,7 @@ setup(
                 'scripts/documentation/templates/*',
                 'url_checksums/*',
                 'checksums.tsv',
+                'community-datasets.toml',
             ],
     },
     exclude_package_data={
