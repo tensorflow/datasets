@@ -30,7 +30,7 @@ from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import tfrecords_reader
-from tensorflow_datasets.core import tfrecords_writer
+from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import shard_utils
 
@@ -61,7 +61,7 @@ def _write_tfrecord_from_shard_spec(shard_spec, get):
     skip, take = instruction.skip, instruction.take
     stop = skip + take if take > 0 else None
     iterators.append(itertools.islice(iterator, skip, stop))
-  tfrecords_writer._write_examples(shard_spec.path, itertools.chain(*iterators))
+  writer_lib._write_examples(shard_spec.path, itertools.chain(*iterators))
 
 
 class ReaderTest(testing.TestCase):
@@ -88,8 +88,8 @@ class ReaderTest(testing.TestCase):
     filename_template = self._filename_template(split=split_name)
     num_examples = len(records)
     with mock.patch.object(
-        tfrecords_writer, '_get_number_shards', return_value=shards_number):
-      shard_specs = tfrecords_writer._get_shard_specs(
+        writer_lib, '_get_number_shards', return_value=shards_number):
+      shard_specs = writer_lib._get_shard_specs(
           num_examples=num_examples,
           total_size=0,
           bucket_lengths=[num_examples],
