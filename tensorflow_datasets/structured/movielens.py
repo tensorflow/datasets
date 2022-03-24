@@ -182,10 +182,10 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
               Each user has rated at least 20 movies. The ratings are in
               half-star increments. This dataset does not include demographic
               data."""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='25m',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-25m.zip'),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
@@ -194,10 +194,10 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           description=textwrap.dedent("""\
               This dataset contains data of 62,423 movies rated in the 25m
               dataset."""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='25m',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-25m.zip'),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
@@ -215,10 +215,10 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
               Each user has rated at least 20 movies. The ratings are in
               half-star increments. This dataset does not include demographic
               data."""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='latest-small',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-latest-small.zip'),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
@@ -227,10 +227,10 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           description=textwrap.dedent("""\
               This dataset contains data of 9,742 movies rated in the
               latest-small dataset."""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='latest-small',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-latest-small.zip'),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
@@ -244,10 +244,10 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
               Each user has rated at least 20 movies. Ratings are in whole-star
               increments. This dataset contains demographic data of users in
               addition to data on movies and ratings."""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='100k',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-100k.zip'),
           parsing_fn=movielens_parsing.parse_100k_ratings_data,
       ),
@@ -256,10 +256,10 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           description=textwrap.dedent("""\
               This dataset contains data of 1,682 movies rated in the 100k
               dataset."""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='100k',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-100k.zip'),
           parsing_fn=movielens_parsing.parse_100k_movies_data,
       ),
@@ -275,10 +275,10 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
               increments. In demographic data, age values are divided into
               ranges and the lowest age value for each range is used in the data
               instead of the actual values."""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='1m',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-1m.zip'),
           parsing_fn=movielens_parsing.parse_1m_ratings_data,
       ),
@@ -287,10 +287,10 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           description=textwrap.dedent("""\
               This dataset contains data of approximately 3,900 movies rated in
               the 1m dataset."""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='1m',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-1m.zip'),
           parsing_fn=movielens_parsing.parse_1m_movies_data,
       ),
@@ -303,10 +303,10 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
 
               Each user has rated at least 20 movies. Ratings are in half-star
               increments. This dataset does not contain demographic data."""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='20m',
           table_option='ratings',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-20m.zip'),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
@@ -315,16 +315,16 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
           description=textwrap.dedent("""\
               This dataset contains data of 27,278 movies rated in the 20m
               dataset"""),
-          version='0.1.0',
+          version='0.1.1',
           format_version='20m',
           table_option='movies',
-          download_url=('http://files.grouplens.org/datasets/movielens/'
+          download_url=('https://files.grouplens.org/datasets/movielens/'
                         'ml-20m.zip'),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
   ]
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns DatasetInfo according to self.builder_config."""
