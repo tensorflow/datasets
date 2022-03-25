@@ -12,6 +12,11 @@
 # `movie_lens`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This dataset contains a set of movie ratings from the MovieLens website, a movie
@@ -85,7 +90,22 @@ Datasets with the "-movies" suffix contain only "movie_id", "movie_title", and
 
 *   **Versions**:
 
-    *   **`0.1.0`** (default): No release notes.
+    *   **`0.1.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -94,6 +114,10 @@ Datasets with the "-movies" suffix contain only "movie_id", "movie_title", and
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -130,20 +154,6 @@ keywords = {Datasets, recommendations, ratings, MovieLens}
 Each user has rated at least 20 movies. The ratings are in half-star increments.
 This dataset does not include demographic data.
 
-*   **Download size**: `249.84 MiB`
-
-*   **Dataset size**: `3.89 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | ---------:
-`'train'` | 25,000,095
-
 *   **Feature structure**:
 
 ```python
@@ -169,61 +179,10 @@ timestamp    | Tensor               |         | tf.int64   |
 user_id      | Tensor               |         | tf.string  |
 user_rating  | Tensor               |         | tf.float32 |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-25m-ratings-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## movie_lens/25m-movies
 
 *   **Config description**: This dataset contains data of 62,423 movies rated in
     the 25m dataset.
-
-*   **Download size**: `249.84 MiB`
-
-*   **Dataset size**: `5.71 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 62,423
 
 *   **Feature structure**:
 
@@ -243,43 +202,6 @@ Feature      | Class                | Shape   | Dtype     | Description
 movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
 movie_id     | Tensor               |         | tf.string |
 movie_title  | Tensor               |         | tf.string |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-25m-movies-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## movie_lens/latest-small-ratings
 
@@ -292,20 +214,6 @@ dataButton.addEventListener('click', async () => {
 Each user has rated at least 20 movies. The ratings are in half-star increments.
 This dataset does not include demographic data.
 
-*   **Download size**: `955.28 KiB`
-
-*   **Dataset size**: `15.82 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 100,836
-
 *   **Feature structure**:
 
 ```python
@@ -331,61 +239,10 @@ timestamp    | Tensor               |         | tf.int64   |
 user_id      | Tensor               |         | tf.string  |
 user_rating  | Tensor               |         | tf.float32 |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-latest-small-ratings-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## movie_lens/latest-small-movies
 
 *   **Config description**: This dataset contains data of 9,742 movies rated in
     the latest-small dataset.
-
-*   **Download size**: `955.28 KiB`
-
-*   **Dataset size**: `910.64 KiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,742
 
 *   **Feature structure**:
 
@@ -406,43 +263,6 @@ movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
 movie_id     | Tensor               |         | tf.string |
 movie_title  | Tensor               |         | tf.string |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-latest-small-movies-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## movie_lens/100k-ratings
 
 *   **Config description**: This dataset contains 100,000 ratings from 943 users
@@ -452,20 +272,6 @@ dataButton.addEventListener('click', async () => {
 Each user has rated at least 20 movies. Ratings are in whole-star increments.
 This dataset contains demographic data of users in addition to data on movies
 and ratings.
-
-*   **Download size**: `4.70 MiB`
-
-*   **Dataset size**: `32.41 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 100,000
 
 *   **Feature structure**:
 
@@ -504,61 +310,10 @@ user_occupation_text  | Tensor               |         | tf.string  |
 user_rating           | Tensor               |         | tf.float32 |
 user_zip_code         | Tensor               |         | tf.string  |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-100k-ratings-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## movie_lens/100k-movies
 
 *   **Config description**: This dataset contains data of 1,682 movies rated in
     the 100k dataset.
-
-*   **Download size**: `4.70 MiB`
-
-*   **Dataset size**: `150.35 KiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,682
 
 *   **Feature structure**:
 
@@ -579,43 +334,6 @@ movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
 movie_id     | Tensor               |         | tf.string |
 movie_title  | Tensor               |         | tf.string |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-100k-movies-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## movie_lens/1m-ratings
 
 *   **Config description**: This dataset contains 1,000,209 anonymous ratings of
@@ -626,20 +344,6 @@ dataButton.addEventListener('click', async () => {
 Each user has rated at least 20 movies. Ratings are in whole-star increments. In
 demographic data, age values are divided into ranges and the lowest age value
 for each range is used in the data instead of the actual values.
-
-*   **Download size**: `5.64 MiB`
-
-*   **Dataset size**: `308.42 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 1,000,209
 
 *   **Feature structure**:
 
@@ -676,61 +380,10 @@ user_occupation_text  | Tensor               |         | tf.string  |
 user_rating           | Tensor               |         | tf.float32 |
 user_zip_code         | Tensor               |         | tf.string  |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-1m-ratings-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## movie_lens/1m-movies
 
 *   **Config description**: This dataset contains data of approximately 3,900
     movies rated in the 1m dataset.
-
-*   **Download size**: `5.64 MiB`
-
-*   **Dataset size**: `351.12 KiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 3,883
 
 *   **Feature structure**:
 
@@ -751,43 +404,6 @@ movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
 movie_id     | Tensor               |         | tf.string |
 movie_title  | Tensor               |         | tf.string |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-1m-movies-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## movie_lens/20m-ratings
 
 *   **Config description**: This dataset contains 20,000,263 ratings across
@@ -796,20 +412,6 @@ dataButton.addEventListener('click', async () => {
 
 Each user has rated at least 20 movies. Ratings are in half-star increments.
 This dataset does not contain demographic data.
-
-*   **Download size**: `189.50 MiB`
-
-*   **Dataset size**: `3.10 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | ---------:
-`'train'` | 20,000,263
 
 *   **Feature structure**:
 
@@ -836,61 +438,10 @@ timestamp    | Tensor               |         | tf.int64   |
 user_id      | Tensor               |         | tf.string  |
 user_rating  | Tensor               |         | tf.float32 |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-20m-ratings-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## movie_lens/20m-movies
 
 *   **Config description**: This dataset contains data of 27,278 movies rated in
     the 20m dataset
-
-*   **Download size**: `189.50 MiB`
-
-*   **Dataset size**: `2.55 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 27,278
 
 *   **Feature structure**:
 
@@ -910,40 +461,3 @@ Feature      | Class                | Shape   | Dtype     | Description
 movie_genres | Sequence(ClassLabel) | (None,) | tf.int64  |
 movie_id     | Tensor               |         | tf.string |
 movie_title  | Tensor               |         | tf.string |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movie_lens-20m-movies-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->

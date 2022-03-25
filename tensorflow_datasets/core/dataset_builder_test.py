@@ -521,9 +521,8 @@ class OrderedDatasetBuilderTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(OrderedDatasetBuilderTest, cls).setUpClass()
-    with mock.patch(
-        "tensorflow_datasets.core.tfrecords_writer._get_number_shards",
-        lambda x, y: 10):
+    with mock.patch("tensorflow_datasets.core.writer._get_number_shards",
+                    lambda x, y: 10):
       cls.builder = DummyOrderedDataset(
           data_dir=os.path.join(tempfile.gettempdir(), "tfds"))
       cls.builder.download_and_prepare()

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.tfrecords_writer."""
+"""Tests for tensorflow_datasets.core.writer."""
 
 import json
 import os
@@ -28,19 +28,19 @@ from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
-from tensorflow_datasets.core import tfrecords_writer
-from tensorflow_datasets.core.tfrecords_writer import _ShardSpec
+from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import shard_utils
+from tensorflow_datasets.core.writer import _ShardSpec
 
 
 class GetShardSpecsTest(testing.TestCase):
   # Here we don't need to test all possible reading configs, as this is tested
   # by shard_utils.py.
 
-  @mock.patch.object(tfrecords_writer, '_get_number_shards',
+  @mock.patch.object(writer_lib, '_get_number_shards',
                      mock.Mock(return_value=6))
   def test_1bucket_6shards(self):
-    specs = tfrecords_writer._get_shard_specs(
+    specs = writer_lib._get_shard_specs(
         num_examples=8,
         total_size=16,
         bucket_lengths=[8],
@@ -85,10 +85,10 @@ class GetShardSpecsTest(testing.TestCase):
                        ]),
         ])
 
-  @mock.patch.object(tfrecords_writer, '_get_number_shards',
+  @mock.patch.object(writer_lib, '_get_number_shards',
                      mock.Mock(return_value=2))
   def test_4buckets_2shards(self):
-    specs = tfrecords_writer._get_shard_specs(
+    specs = writer_lib._get_shard_specs(
         num_examples=8,
         total_size=16,
         bucket_lengths=[2, 3, 0, 3],
@@ -123,37 +123,37 @@ class GetNumberShardsTest(testing.TestCase):
   def test_imagenet_train(self):
     size = 137 << 30  # 137 GiB
     num_examples = 1281167
-    n = tfrecords_writer._get_number_shards(size, num_examples)
+    n = writer_lib._get_number_shards(size, num_examples)
     self.assertEqual(n, 1024)
 
   def test_imagenet_evaluation(self):
     size = 6300 * (1 << 20)  # 6.3 GiB
     num_examples = 50000
-    n = tfrecords_writer._get_number_shards(size, num_examples)
+    n = writer_lib._get_number_shards(size, num_examples)
     self.assertEqual(n, 64)
 
   def test_verylarge_few_examples(self):
     size = 52 << 30  # 52 GiB
     num_examples = 512
-    n = tfrecords_writer._get_number_shards(size, num_examples)
+    n = writer_lib._get_number_shards(size, num_examples)
     self.assertEqual(n, 512)
 
   def test_xxl(self):
     size = 10 << 40  # 10 TiB
     num_examples = 10**9  # 1G
-    n = tfrecords_writer._get_number_shards(size, num_examples)
+    n = writer_lib._get_number_shards(size, num_examples)
     self.assertEqual(n, 11264)
 
   def test_xs(self):
     size = 100 << 20  # 100 MiB
     num_examples = 100 * 10**3  # 100K
-    n = tfrecords_writer._get_number_shards(size, num_examples)
+    n = writer_lib._get_number_shards(size, num_examples)
     self.assertEqual(n, 1)
 
   def test_m(self):
     size = 400 << 20  # 499 MiB
     num_examples = 200 * 10**3  # 200K
-    n = tfrecords_writer._get_number_shards(size, num_examples)
+    n = writer_lib._get_number_shards(size, num_examples)
     self.assertEqual(n, 4)
 
 
@@ -166,9 +166,7 @@ def _read_records(path, file_format=file_adapters.DEFAULT_FILE_FORMAT):
   """
   # Ignore _index.json files.
   paths = sorted(tf.io.gfile.glob('%s-*-of-*' % path))
-  paths = [
-      p for p in paths if not p.endswith(tfrecords_writer._INDEX_PATH_SUFFIX)
-  ]
+  paths = [p for p in paths if not p.endswith(writer_lib._INDEX_PATH_SUFFIX)]
   all_recs = []
   for fpath in paths:
     all_recs.append(
@@ -225,7 +223,7 @@ class WriterTest(testing.TestCase):
         split=split,
         filetype_suffix=filetype_suffix,
         data_dir=self.tmp_dir)
-    writer = tfrecords_writer.Writer(
+    writer = writer_lib.Writer(
         example_specs='some spec',
         filename_template=filename_template,
         hash_salt=salt,
@@ -241,8 +239,7 @@ class WriterTest(testing.TestCase):
     Number of records is evenly distributed (2-1-2-1-2).
     """
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(
-        tfrecords_writer, '_get_number_shards', return_value=5):
+    with mock.patch.object(writer_lib, '_get_number_shards', return_value=5):
       shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
     self.assertEqual(shards_length, [2, 1, 2, 1, 2])
     self.assertEqual(total_size, 9)
@@ -267,8 +264,7 @@ class WriterTest(testing.TestCase):
     Number of records is evenly distributed (2-1-2-1-2).
     """
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(
-        tfrecords_writer, '_get_number_shards', return_value=5):
+    with mock.patch.object(writer_lib, '_get_number_shards', return_value=5):
       shards_length, total_size = self._write(
           to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
     self.assertEqual(shards_length, [2, 1, 2, 1, 2])
@@ -291,24 +287,21 @@ class WriterTest(testing.TestCase):
   @mock.patch.object(example_parser, 'ExampleParser', testing.DummyParser)
   def test_write_duplicated_keys(self):
     to_write = [(1, b'a'), (2, b'b'), (1, b'c')]
-    with mock.patch.object(
-        tfrecords_writer, '_get_number_shards', return_value=1):
+    with mock.patch.object(writer_lib, '_get_number_shards', return_value=1):
       with self.assertRaisesWithPredicateMatch(
           AssertionError, 'Two examples share the same hashed key'):
         self._write(to_write=to_write)
 
   def test_empty_split(self):
     to_write = []
-    with mock.patch.object(
-        tfrecords_writer, '_get_number_shards', return_value=1):
+    with mock.patch.object(writer_lib, '_get_number_shards', return_value=1):
       with self.assertRaisesWithPredicateMatch(AssertionError,
                                                self.EMPTY_SPLIT_ERROR):
         self._write(to_write=to_write)
 
   def test_too_small_split(self):
     to_write = [(1, b'a')]
-    with mock.patch.object(
-        tfrecords_writer, '_get_number_shards', return_value=2):
+    with mock.patch.object(writer_lib, '_get_number_shards', return_value=2):
       with self.assertRaisesWithPredicateMatch(AssertionError,
                                                self.TOO_SMALL_SPLIT_ERROR):
         self._write(to_write=to_write)
@@ -334,7 +327,7 @@ class TfrecordsWriterBeamTest(WriterTest):
         filetype_suffix=filetype_suffix,
         data_dir=self.tmp_dir)
     beam = lazy_imports_lib.lazy_imports.apache_beam
-    writer = tfrecords_writer.BeamWriter(
+    writer = writer_lib.BeamWriter(
         example_specs='some spec',
         filename_template=filename_template,
         hash_salt=salt,
