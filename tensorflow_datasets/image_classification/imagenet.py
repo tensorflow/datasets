@@ -40,7 +40,7 @@ publicly released. We provide support for the test split from 2012 with the
 minor patch released on October 10, 2019. In order to manually download this
 data, a user must perform the following operations:
 
-1. Download the 2012 test split available [here](http://www.image-net.org/challenges/LSVRC/2012/downloads.php#images).
+1. Download the 2012 test split available [here](https://image-net.org/challenges/LSVRC/2012/2012-downloads.php#Images).
 2. Download the October 10, 2019 patch. There is a Google Drive link to the
 patch provided on the same page.
 3. Combine the two tar-balls, manually overwriting any images in the original
@@ -72,7 +72,7 @@ A sample of an exported text file looks like the following:
 
 The export format is described in full in "readme.txt" within the 2013
 development kit available here:
-http://imagenet.stanford.edu/image/ilsvrc2013/ILSVRC2013_devkit.tgz
+https://image-net.org/data/ILSVRC/2013/ILSVRC2013_devkit.tgz
 Please see the section entitled "3.3 CLS-LOC submission format". Briefly, the
 format of the text file is 100,000 lines corresponding to each image in the test
 split. Each line of integers correspond to the rank-ordered, top 5 predictions
@@ -81,7 +81,7 @@ in the corresponding labels file. See imagenet2012_labels.txt.
 """
 
 # Web-site is asking to cite paper from 2015.
-# http://www.image-net.org/challenges/LSVRC/2012/index#cite
+# https://image-net.org/challenges/LSVRC/2012/index#cite
 _CITATION = """\
 @article{ILSVRC15,
 Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},
@@ -200,7 +200,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   manual_dir should contain two files: ILSVRC2012_img_train.tar and
   ILSVRC2012_img_val.tar.
-  You need to register on http://www.image-net.org/download-images in order
+  You need to register on https://image-net.org/download-images in order
   to get the link to download the dataset.
   """
 
@@ -215,7 +215,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
             'file_name': tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
         }),
         supervised_keys=('image', 'label'),
-        homepage='http://image-net.org/',
+        homepage='https://image-net.org/',
         citation=_CITATION,
     )
 
