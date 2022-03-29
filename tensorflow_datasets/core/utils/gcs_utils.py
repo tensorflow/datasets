@@ -41,6 +41,7 @@ _is_gcs_disabled = False
 # * PermissionDeniedError: Some environments block GCS access.
 # * AbortedError: All 10 retry attempts failed.
 GCS_UNAVAILABLE_EXCEPTIONS = (
+    OSError,
     tf.errors.UnimplementedError,
     tf.errors.FailedPreconditionError,
     tf.errors.PermissionDeniedError,
