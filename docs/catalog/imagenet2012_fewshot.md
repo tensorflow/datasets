@@ -54,7 +54,7 @@ dataset. However, the training set is subsampled in a label balanced fashion. In
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     manual_dir should contain two files: ILSVRC2012_img_train.tar and
     ILSVRC2012_img_val.tar.
-    You need to register on http://www.image-net.org/download-images in order
+    You need to register on https://image-net.org/download-images in order
     to get the link to download the dataset.
 
 *   **Auto-cached**

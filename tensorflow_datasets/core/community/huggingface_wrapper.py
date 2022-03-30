@@ -160,7 +160,9 @@ def _make_scalar_feature(dtype: str) -> tf.dtypes.DType:
   """Returns the `tf.dtype` scalar feature."""
   str2val = {
       'bool_': tf.bool,
-      'string': tf.string,
+      'float': tf.float32,
+      'double': tf.float64,
+      'large_string': tf.string,
       'utf8': tf.string,
   }
   if dtype in str2val:

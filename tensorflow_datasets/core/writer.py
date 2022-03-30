@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""To write records into sharded tfrecord files."""
+"""To write records into sharded records files."""
 
 import dataclasses
 import itertools

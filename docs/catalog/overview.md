@@ -359,6 +359,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`super_glue`](super_glue.md)
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)
+*   [`unified_qa`](unified_qa.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki40b`](wiki40b.md)
 *   [`wikiann`](wikiann.md)
 *   [`wikipedia`](wikipedia.md)

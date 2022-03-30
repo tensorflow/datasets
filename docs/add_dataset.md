@@ -105,7 +105,9 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
         builder=self,
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(256, 256, 3)),
-            'label': tfds.features.ClassLabel(names=['no', 'yes']),
+            'label': tfds.features.ClassLabel(
+                names=['no', 'yes'],
+                doc='Whether this is a picture of a cat'),
         }),
     )
 

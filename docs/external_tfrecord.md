@@ -39,11 +39,16 @@ the `tfds.features` structure matching your specs. For example:
 
 ```python
 features = tfds.features.FeaturesDict({
-    'image': tfds.features.Image(shape=(256, 256, 3)),
-    'label': tfds.features.ClassLabel(names=['dog', 'cat'])
-    'objects': tfds.features.Sequence({
-        'camera/K': tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-    }),
+    'image':
+        tfds.features.Image(
+            shape=(256, 256, 3),
+            doc='Picture taken by smartphone, downscaled.'),
+    'label':
+        tfds.features.ClassLabel(names=['dog', 'cat']),
+    'objects':
+        tfds.features.Sequence({
+            'camera/K': tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+        }),
 })
 ```
 

@@ -451,7 +451,9 @@ class DatasetBuilder(registered.RegisteredDataset):
         if (download_config.try_download_gcs and
             gcs_utils.is_dataset_on_gcs(self.info.full_name)):
           logging.info(GCS_HOSTED_MSG, self.name)
-          gcs_utils.download_gcs_dataset(self.info.full_name, self._data_dir)
+          gcs_utils.download_gcs_dataset(
+              dataset_name=self.info.full_name,
+              local_dataset_dir=self._data_dir)
           self.info.read_from_directory(self._data_dir)
         else:
           # Old version of TF are not os.PathLike compatible
@@ -641,18 +643,6 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Add prefetch by default
     if not read_config.skip_prefetch:
       ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
-
-    # If shuffling is True and seeds not set, allow pipeline to be
-    # non-deterministic
-    # This code should probably be moved inside tfreader, such as
-    # all the tf.data.Options are centralized in a single place.
-    if (shuffle_files and read_config.shuffle_seed is None and
-        tf_compat.get_option_deterministic(read_config.options) is None):
-      options = tf.data.Options()
-      tf_compat.set_option_deterministic(options, False)
-      ds = ds.with_options(options)
-    # If shuffle is False, keep the default value (deterministic), which
-    # allow the user to overwritte it.
 
     if wants_full_dataset:
       return tf_compat.get_single_element(ds)

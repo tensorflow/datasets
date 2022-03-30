@@ -12,6 +12,11 @@
 # `movielens`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This dataset contains a set of movie ratings from the MovieLens website, a movie
@@ -85,7 +90,9 @@ Datasets with the "-movies" suffix contain only "movie_id", "movie_title", and
 
 *   **Versions**:
 
-    *   **`0.1.0`** (default): No release notes.
+    *   **`0.1.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -179,7 +186,7 @@ user_rating  | Tensor               |         | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-25m-ratings-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-25m-ratings-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -254,7 +261,7 @@ movie_title  | Tensor               |         | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-25m-movies-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-25m-movies-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -341,7 +348,7 @@ user_rating  | Tensor               |         | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-latest-small-ratings-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-latest-small-ratings-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -416,7 +423,7 @@ movie_title  | Tensor               |         | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-latest-small-movies-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-latest-small-movies-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -514,7 +521,7 @@ user_zip_code         | Tensor               |         | tf.string  |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-100k-ratings-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-100k-ratings-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -589,7 +596,7 @@ movie_title  | Tensor               |         | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-100k-movies-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-100k-movies-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -686,7 +693,7 @@ user_zip_code         | Tensor               |         | tf.string  |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-1m-ratings-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-1m-ratings-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -761,7 +768,7 @@ movie_title  | Tensor               |         | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-1m-movies-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-1m-movies-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -846,7 +853,7 @@ user_rating  | Tensor               |         | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-20m-ratings-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-20m-ratings-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -921,7 +928,7 @@ movie_title  | Tensor               |         | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-20m-movies-0.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-20m-movies-0.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

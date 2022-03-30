@@ -17,6 +17,7 @@
 
 import concurrent.futures
 import difflib
+import os
 from typing import Any, Dict, FrozenSet, Iterator, List, Type
 
 from absl import flags
@@ -30,12 +31,9 @@ from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
-import toml
 
 TFDS_DEBUG_VERBOSE = flags.DEFINE_boolean('tfds_debug_list_dir', False,
                                           'Debug the catalog generation')
-
-ListOrElem = utils.ListOrElem
 
 # pylint: disable=logging-fstring-interpolation
 
@@ -43,19 +41,11 @@ ListOrElem = utils.ListOrElem
 class DataDirRegister(register_base.BaseRegister):
   """Dataset register based on generated `data_dir` paths.
 
-  This register map `namespace` strings to `data_dir` paths. Mapping is defined
-  in `.toml` format:
-
-  ```toml
-  [Namespaces]
-  kaggle='/path/to/datasets/'
-  tensorflow_graphics='gs://tensorflow-graphics/datasets'
-  ```
-
   Usage:
 
   ```python
-  register = DataDirRegister(path='/path/to/namespaces.toml')
+  register = DataDirRegister(namespace_to_data_dirs=
+    {'my_namespace': [epath.Path('/path/to/namespaces.toml')]})
 
   # List all registered datasets: ['kaggle:ds0', 'kaggle:ds1',...]
   register.list_builders()
@@ -66,24 +56,14 @@ class DataDirRegister(register_base.BaseRegister):
 
   """
 
-  def __init__(self, path: epath.PathLike):
+  def __init__(self, namespace_to_data_dirs: Dict[str, List[epath.Path]]):
     """Contructor.
 
     Args:
-      path: Path to the register files containing the mapping namespace ->
-        data_dir
+      namespace_to_data_dirs: Mapping from namespace to list of paths where the
+        datasets for that namespace are located.
     """
-    self._path: epath.Path = epath.Path(path)
-
-  @utils.memoized_property
-  def _ns2data_dir(self) -> Dict[str, List[epath.Path]]:
-    """Mapping `namespace` -> `data_dir`."""
-    # Lazy-load the namespaces the first requested time.
-    config = toml.loads(self._path.read_text())
-    return {
-        namespace: _as_path_list(path_or_paths)
-        for namespace, path_or_paths in config['Namespaces'].items()
-    }
+    self._ns2data_dir = namespace_to_data_dirs
 
   @utils.memoized_property
   def namespaces(self) -> FrozenSet[str]:
@@ -128,20 +108,15 @@ class DataDirRegister(register_base.BaseRegister):
                      f'Should be one of {sorted(self._ns2data_dir)}{hint}')
     return read_only_builder.builder_from_files(
         name.name,
-        data_dir=self._ns2data_dir[name.namespace],
+        data_dir=[
+            os.fspath(path) for path in self._ns2data_dir[name.namespace]
+        ],
         **builder_kwargs,
     )
 
   def get_builder_root_dirs(self, name: utils.DatasetName) -> List[epath.Path]:
     """Returns root dir of the generated builder (without version/config)."""
     return [d / name.name for d in self._ns2data_dir[name.namespace]]
-
-
-def _as_path_list(path_or_paths: ListOrElem[str]) -> List[epath.Path]:
-  if isinstance(path_or_paths, list):
-    return [epath.Path(p) for p in path_or_paths]
-  else:
-    return [epath.Path(path_or_paths)]
 
 
 def _maybe_iterdir(path: epath.Path) -> Iterator[epath.Path]:

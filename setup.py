@@ -66,6 +66,7 @@ TESTS_REQUIRE = [
     'jax[cpu]',
     'jupyter',
     'pytest',
+    'pytest-shard',
     'pytest-xdist',
     # Lazy-deps required by core
     'pandas',
@@ -198,6 +199,7 @@ setup(
                 'scripts/documentation/templates/*',
                 'url_checksums/*',
                 'checksums.tsv',
+                'community-datasets.toml',
             ],
     },
     exclude_package_data={

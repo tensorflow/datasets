@@ -33,18 +33,19 @@ class GcsUtilsTest(testing.TestCase):
 
   def test_download_dataset(self):
     files = [
-        'dataset_info/mnist/2.0.0/dataset_info.json',
-        'dataset_info/mnist/2.0.0/image.image.json',
+        'gs://tfds-data/dataset_info/mnist/2.0.0/dataset_info.json',
+        'gs://tfds-data/dataset_info/mnist/2.0.0/image.image.json',
     ]
     with self.gcs_access():
       self.assertCountEqual(
           gcs_utils.gcs_dataset_info_files('mnist/2.0.0'),
-          files,
+          [tfds.core.as_path(f) for f in files],
       )
-      with tempfile.TemporaryDirectory() as f:
-        gcs_utils.download_gcs_dataset('mnist/2.0.0', f)
+      with tempfile.TemporaryDirectory() as tmp_dir:
+        gcs_utils.download_gcs_dataset(
+            dataset_name='mnist/2.0.0', local_dataset_dir=tmp_dir)
         self.assertCountEqual(
-            os.listdir(f), [
+            os.listdir(tmp_dir), [
                 'mnist-test.tfrecord-00000-of-00001',
                 'mnist-train.tfrecord-00000-of-00001',
                 'dataset_info.json',

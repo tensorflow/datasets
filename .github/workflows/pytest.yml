@@ -32,6 +32,7 @@ jobs:
       fail-fast: false
       matrix:
         tf_version: ["tensorflow", "tf-nightly"]
+        shard_id: [0, 1, 2, 3]
 
     steps:
     - uses: actions/checkout@v2
@@ -67,7 +68,7 @@ jobs:
     # Run tests
     - name: Run core tests
       run: |
-        pytest --durations=100 -vv -n auto \
+        pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard_id }} --num-shards=4 \
           --ignore="tensorflow_datasets/audio/nsynth_test.py" \
           --ignore="tensorflow_datasets/core/features/features_test.py" \
           --ignore="tensorflow_datasets/testing/test_utils.py" \

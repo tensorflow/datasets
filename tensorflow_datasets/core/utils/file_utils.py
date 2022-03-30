@@ -16,7 +16,6 @@
 """Library of helper functions to handle dealing with files."""
 
 import os
-import pathlib
 from typing import List, Optional
 
 from absl import logging
