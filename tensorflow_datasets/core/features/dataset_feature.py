@@ -98,6 +98,9 @@ class Dataset(sequence_feature.Sequence):
     tensor_info = self._feature.get_tensor_info()
     return tf.nest.map_structure(_add_dataset_lvl, tensor_info)
 
+  def get_tensor_spec(self) -> tf.data.DatasetSpec:
+    return tf.data.DatasetSpec(element_spec=self._feature.get_tensor_spec())
+
   @py_utils.memoize()
   def get_serialized_info(self):
     # Add the dataset level and the number of elements in the dataset

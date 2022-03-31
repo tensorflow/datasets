@@ -101,6 +101,20 @@ class TensorInfo(object):
         shape=tf_utils.convert_to_shape(tensor_spec.shape),
         dtype=tensor_spec.dtype)
 
+  def to_tensor_spec(self) -> tf.TensorSpec:
+    """Converts this TensorInfo instance to a tf.TensorSpec.
+
+    Note that there is a bug (b/227584124) around RaggedTensorSpec, so the
+    output for sequences of sequences may not be correct.
+
+    Returns:
+      The tf.TensorSpec corresponding to this instance.
+    """
+    if self.dataset_lvl > 1 or self.sequence_rank > 1:
+      return tf.RaggedTensorSpec(
+          dtype=self.dtype, shape=_to_tensor_shape(self.shape))
+    return tf.TensorSpec(dtype=self.dtype, shape=_to_tensor_shape(self.shape))
+
   def __eq__(self, other):
     """Equality."""
     return (self.shape == other.shape and self.dtype == other.dtype and
@@ -234,6 +248,16 @@ class FeatureConnector(object):
 
     """
     raise NotImplementedError
+
+  def get_tensor_spec(self) -> TreeDict[tf.TensorSpec]:
+    """Returns the tf.TensorSpec of this feature (not the element spec!).
+
+    Note that the output of this method may not correspond to the element spec
+    of the dataset. For example, currently this method does not support
+    RaggedTensorSpec.
+    """
+    return tf.nest.map_structure(lambda ti: ti.to_tensor_spec(),
+                                 self.get_tensor_info())
 
   @py_utils.memoized_property
   def shape(self):
@@ -902,6 +926,12 @@ def _repr_html(ex) -> str:
 
   # Escape symbols which might have special meaning in HTML like '<', '>'
   return html.escape(repr(ex))
+
+
+def _to_tensor_shape(shape: Shape) -> tf.TensorShape:
+  if isinstance(shape, tuple):
+    shape = list(shape)
+  return tf.TensorShape(shape)
 
 
 def _has_shape_ambiguity(in_shape: Shape, out_shape: Shape) -> bool:

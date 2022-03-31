@@ -64,6 +64,8 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
         feature=features_lib.Image(shape=(30, 60, 3), encoding_format='jpeg'),
         shape=(30, 60, 3),
         dtype=tf.uint8,
+        # Output shape is different.
+        test_tensor_spec=False,
         tests=[
             testing.FeatureExpectationItem(
                 value=img_shaped,
@@ -98,6 +100,8 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
         feature=features_lib.Video(shape=(None, 30, 60, 3)),
         shape=(None, 30, 60, 3),
         dtype=tf.uint8,
+        # Output shape is different.
+        test_tensor_spec=False,
         tests=[
             testing.FeatureExpectationItem(
                 value=[image_path] * 15,  # 15 frames of video
@@ -125,6 +129,8 @@ class BaseDecodeTest(testing.FeatureExpectationsTestCase):
             'image': tf.uint8,
             'label': tf.int64,
         },
+        # Output shape is different.
+        test_tensor_spec=False,
         tests=[
             testing.FeatureExpectationItem(
                 decoders={

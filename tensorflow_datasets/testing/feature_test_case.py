@@ -152,12 +152,21 @@ class FeatureExpectationsTestCase(SubTestCase):
       dtype,
       tests,
       serialized_info=None,
+      # TODO(b/227584124): remove this parameter after fixing this bug
+      test_tensor_spec=True,
       skip_feature_tests=False,
       test_attributes=None,
   ):
     """Test the given feature against the predicates."""
-    self.assertFeatureEagerOnly(feature, shape, dtype, tests, serialized_info,
-                                skip_feature_tests, test_attributes)
+    self.assertFeatureEagerOnly(
+        feature=feature,
+        shape=shape,
+        dtype=dtype,
+        tests=tests,
+        serialized_info=serialized_info,
+        test_tensor_spec=test_tensor_spec,
+        skip_feature_tests=skip_feature_tests,
+        test_attributes=test_attributes)
 
   def assertFeatureEagerOnly(
       self,
@@ -166,6 +175,7 @@ class FeatureExpectationsTestCase(SubTestCase):
       dtype,
       tests,
       serialized_info=None,
+      test_tensor_spec=True,
       skip_feature_tests=False,
       test_attributes=None,
   ):
@@ -178,6 +188,7 @@ class FeatureExpectationsTestCase(SubTestCase):
           dtype=dtype,
           tests=tests,
           serialized_info=serialized_info,
+          test_tensor_spec=test_tensor_spec,
           skip_feature_tests=skip_feature_tests,
           test_attributes=test_attributes,
       )
@@ -195,6 +206,7 @@ class FeatureExpectationsTestCase(SubTestCase):
             dtype=dtype,
             tests=tests,
             serialized_info=serialized_info,
+            test_tensor_spec=test_tensor_spec,
             skip_feature_tests=skip_feature_tests,
             test_attributes=test_attributes,
         )
@@ -210,6 +222,7 @@ class FeatureExpectationsTestCase(SubTestCase):
               dtype=dtype,
               tests=tests,
               serialized_info=serialized_info,
+              test_tensor_spec=test_tensor_spec,
               skip_feature_tests=skip_feature_tests,
               test_attributes=test_attributes,
           )
@@ -221,6 +234,7 @@ class FeatureExpectationsTestCase(SubTestCase):
       dtype,
       tests,
       serialized_info=None,
+      test_tensor_spec=True,
       skip_feature_tests=False,
       test_attributes=None,
   ):
@@ -255,9 +269,16 @@ class FeatureExpectationsTestCase(SubTestCase):
             feature=feature,
             shape=shape,
             dtype=dtype,
+            test_tensor_spec=test_tensor_spec,
         )
 
-  def assertFeatureTest(self, fdict, test, feature, shape, dtype):
+  def assertFeatureTest(self,
+                        fdict,
+                        test,
+                        feature,
+                        shape,
+                        dtype,
+                        test_tensor_spec: bool = True):
     """Test that encode=>decoding of a value works correctly."""
     # test feature.encode_example can be pickled and unpickled for beam.
     dill.loads(dill.dumps(feature.encode_example))
@@ -284,13 +305,20 @@ class FeatureExpectationsTestCase(SubTestCase):
 
       # Test serialization + decoding from disk
       with self._subTest('out'):
-        out_tensor, out_numpy = features_encode_decode(
+        out_tensor, out_numpy, out_element_spec = features_encode_decode(
             fdict,
             input_value,
             decoders={'inner': test.decoders},
         )
         out_tensor = out_tensor['inner']
         out_numpy = out_numpy['inner']
+        out_element_spec = out_element_spec['inner']
+
+        if test_tensor_spec:
+          with self._subTest('tensor_spec'):
+            print(f'feature.get_tensor_spec()={feature.get_tensor_spec()}')
+            print(f'out_element_spec={out_element_spec}')
+            assert feature.get_tensor_spec() == out_element_spec
 
         # Assert the returned type match the expected one
         with self._subTest('dtype'):
@@ -377,4 +405,4 @@ def features_encode_decode(features_dict, example, decoders):
   else:
     out_tensor = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
   out_numpy = dataset_utils.as_numpy(out_tensor)
-  return out_tensor, out_numpy
+  return out_tensor, out_numpy, ds.element_spec
