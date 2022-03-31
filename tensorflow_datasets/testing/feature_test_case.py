@@ -316,8 +316,6 @@ class FeatureExpectationsTestCase(SubTestCase):
 
         if test_tensor_spec:
           with self._subTest('tensor_spec'):
-            print(f'feature.get_tensor_spec()={feature.get_tensor_spec()}')
-            print(f'out_element_spec={out_element_spec}')
             assert feature.get_tensor_spec() == out_element_spec
 
         # Assert the returned type match the expected one
