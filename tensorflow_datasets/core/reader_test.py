@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.tfrecords_reader."""
+"""Tests for tensorflow_datasets.core.reader."""
 
 import functools
 import itertools
@@ -21,15 +21,13 @@ import os
 from unittest import mock
 
 import six
-
 import tensorflow as tf
-
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import reader as reader_lib
 from tensorflow_datasets.core import splits
-from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import shard_utils
@@ -70,7 +68,7 @@ class ReaderTest(testing.TestCase):
     super(ReaderTest, self).setUp()
     with mock.patch.object(example_parser, 'ExampleParser',
                            testing.DummyParser):
-      self.reader = tfrecords_reader.Reader(self.tmp_dir, 'some_spec')
+      self.reader = reader_lib.Reader(self.tmp_dir, 'some_spec')
       self.reader.read = functools.partial(
           self.reader.read,
           read_config=read_config_lib.ReadConfig(),
