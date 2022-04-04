@@ -68,21 +68,25 @@ def build_info(ds_config: DatasetConfig,
   episode_metadata = ds_config.episode_metadata_info
   if episode_metadata is None:
     episode_metadata = {}
+  step_info = {
+      'is_terminal': tf.bool,
+      'is_first': tf.bool,
+      'is_last': tf.bool,
+      **step_metadata,
+  }
+  if ds_config.observation_info:
+    step_info['observation'] = ds_config.observation_info
+  if ds_config.action_info:
+    step_info['action'] = ds_config.action_info
+  if ds_config.reward_info:
+    step_info['reward'] = ds_config.reward_info
+  if ds_config.discount_info:
+    step_info['discount'] = ds_config.discount_info
   return tfds.core.DatasetInfo(
       builder=builder,
       description=ds_config.overall_description,
       features=tfds.features.FeaturesDict({
-          'steps':
-              tfds.features.Dataset({
-                  'observation': ds_config.observation_info,
-                  'action': ds_config.action_info,
-                  'reward': ds_config.reward_info,
-                  'is_terminal': tf.bool,
-                  'is_first': tf.bool,
-                  'is_last': tf.bool,
-                  'discount': ds_config.discount_info,
-                  **step_metadata,
-              }),
+          'steps': tfds.features.Dataset(step_info),
           **episode_metadata,
       }),
       supervised_keys=ds_config.supervised_keys,
