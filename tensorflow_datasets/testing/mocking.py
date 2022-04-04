@@ -16,11 +16,11 @@
 """Mock util for tfds."""
 
 import contextlib
+import dataclasses
 import enum
 import functools
 import os
-import random
-from typing import Callable, Iterator, Optional
+from typing import Any, Callable, Iterator, List, Mapping, MutableMapping, Optional
 from unittest import mock
 
 from absl import logging
@@ -32,7 +32,11 @@ from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import tfrecords_reader
+from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.testing import test_utils
+from typing_extensions import Protocol
+
+TreeDict = type_utils.TreeDict
 
 
 class MockPolicy(enum.Enum):
@@ -53,15 +57,29 @@ class MockPolicy(enum.Enum):
   USE_FILES = enum.auto()
 
 
+def random_shape(shape, rgn: np.random.RandomState):
+  if not shape:
+    return []
+  # Fill dynamic shape with random values
+  return [rgn.randint(5, 50) if s is None else s for s in shape]
+
+
+class DataFactory(Protocol):
+
+  def __call__(self, tensor_spec: tf.TensorSpec,
+               rgn: np.random.RandomState) -> Any:
+    raise NotImplementedError
+
+
 @contextlib.contextmanager
 def mock_data(
     num_examples: int = 1,
     num_sub_examples: int = 1,
-    max_value: Optional[int] = None,
     *,
     policy: MockPolicy = MockPolicy.AUTO,
     as_dataset_fn: Optional[Callable[..., tf.data.Dataset]] = None,
     data_dir: Optional[str] = None,
+    custom_factories: Optional[Mapping[str, DataFactory]] = None,
 ) -> Iterator[None]:
   """Mock tfds to generate random data.
 
@@ -127,9 +145,6 @@ def mock_data(
   Args:
     num_examples: Number of fake example to generate.
     num_sub_examples: Number of examples to generate in nested Dataset features.
-    max_value: The maximum value present in generated tensors; if max_value is
-      None or it is set to 0, then random numbers are generated from the range
-      from 0 to 255.
     policy: Strategy to use to generate the fake examples. See
       `tfds.testing.MockPolicy`.
     as_dataset_fn: If provided, will replace the default random example
@@ -137,6 +152,8 @@ def mock_data(
     data_dir: Folder containing the metadata file (searched in
       `data_dir/dataset_name/version`). Overwrite `data_dir` kwargs from
       `tfds.load`. Used in `MockPolicy.USE_FILES` mode.
+    custom_factories: Mapping between feature name and custom random data
+      factories. If no data factory is provided, a default one is used.
 
   Yields:
     None
@@ -214,10 +231,10 @@ def mock_data(
             features=features,
             num_examples=num_examples,
             num_sub_examples=num_sub_examples,
-            max_value=max_value),
+            custom_factories=custom_factories),
         # pylint: enable=g-long-lambda]
-        output_types=tf.nest.map_structure(lambda t: t.dtype, specs),
-        output_shapes=tf.nest.map_structure(lambda t: t.shape, specs),
+        output_signature=tf.nest.map_structure(
+            lambda t: tf.TensorSpec(shape=t.shape, dtype=t.dtype), specs),
     )
     ds = ds.apply(tf.data.experimental.assert_cardinality(num_examples))
     ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
@@ -289,94 +306,199 @@ def mock_data(
     yield
 
 
-class RandomFakeGenerator(object):
-  """Generator of fake examples randomly and deterministically generated."""
+@dataclasses.dataclass
+class SpecificValueFactory(DataFactory):
+  """Randomly picks elements from a given list."""
+  allowed_values: List[Any]
 
-  def __init__(self,
-               features,
-               num_examples: int,
-               num_sub_examples: int = 1,
-               max_value: Optional[int] = None,
-               seed: int = 0):
-    self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
-    self._py_rng = random.Random(seed)
-    self._features = features
-    self._num_examples = num_examples
-    self._num_sub_examples = num_sub_examples
-    self._max_value = max_value
+  def __call__(self, tensor_spec: tf.TensorSpec,
+               rgn: np.random.RandomState) -> Any:
+    shape = random_shape(tensor_spec.shape, rgn)
+    return rgn.choice(
+        self.allowed_values,
+        size=shape).astype(tensor_spec.dtype.as_numpy_dtype)
 
-  def _generate_random_string_array(self, shape):
+
+@dataclasses.dataclass
+class IntInRangeFactory(DataFactory):
+  """Generates integers in a specified range."""
+  min_value: int = 0
+  max_value: int = 255
+
+  def __call__(self, tensor_spec: tf.TensorSpec,
+               rgn: np.random.RandomState) -> Any:
+    shape = random_shape(tensor_spec.shape, rgn)
+    return rgn.randint(self.min_value, self.max_value,
+                       shape).astype(tensor_spec.dtype.as_numpy_dtype)
+
+
+@dataclasses.dataclass
+class StringFactory(DataFactory):
+  """Random string generator."""
+  min_chars: int = 10
+  max_chars: int = 20
+  allowable_chars: List[str] = dataclasses.field(
+      default_factory=lambda: list(' abcdefghij'))
+
+  def __call__(self, tensor_spec: tf.TensorSpec,
+               rgn: np.random.RandomState) -> Any:
     """Generates an array of random strings."""
 
     def rand_str():
-      return ''.join(
-          self._rgn.choice(
-              list(' abcdefghij'), size=(self._py_rng.randint(10, 20))))
+      size = rgn.randint(self.min_chars, self.max_chars)
+      return ''.join(rgn.choice(self.allowable_chars, size=size))
 
-    if not shape:
+    if not tensor_spec.shape:
       return rand_str()
 
+    shape = random_shape(tensor_spec.shape, rgn)
     return np.array([rand_str() for _ in range(np.prod(shape, dtype=np.int32))
                     ]).reshape(shape)
 
-  def _generate_random_obj(self, feature, tensor_info):
-    """Generates a random tensor for a single feature."""
-    # TODO(tfds): Could improve the fake generatiion:
-    # * Use the feature statistics (min, max)
-    # * For Sequence features
-    # * For Text
 
-    # First we deal with the case of sub-datasets:
-    if isinstance(feature, features_lib.Dataset):
-      # For sub-datasets self._num_sub_examples examples are generated.
-      generator = RandomFakeGenerator(
-          feature.feature,
-          num_examples=self._num_sub_examples,
-          num_sub_examples=1,
-          max_value=self._max_value)
-      # Returns the list of examples in the nested dataset.
-      return list(generator)
+@dataclasses.dataclass
+class FloatFactory(DataFactory):
+  """Generates random floats in the half-open interval [0.0, 1.0)."""
 
-    shape = [  # Fill dynamic shape with random values
-        self._rgn.randint(5, 50) if s is None else s for s in tensor_info.shape
-    ]
-    if isinstance(feature, features_lib.ClassLabel):
-      max_value = feature.num_classes
-    elif isinstance(feature, features_lib.Text) and feature.vocab_size:
-      max_value = feature.vocab_size
-    elif self._max_value:
-      max_value = self._max_value
-    else:
-      max_value = 255
+  def __call__(self, tensor_spec: tf.TensorSpec,
+               rgn: np.random.RandomState) -> Any:
+    shape = random_shape(tensor_spec.shape, rgn)
+    return rgn.random_sample(shape).astype(tensor_spec.dtype.as_numpy_dtype)
 
-    # We cast the data to make sure `encode_example` don't raise errors
-    dtype = tensor_info.dtype
-    # Generate some random values, depending on the dtype
-    if dtype.is_integer:
-      return self._rgn.randint(0, max_value, shape).astype(dtype.as_numpy_dtype)
-    elif dtype.is_floating:
-      return self._rgn.random_sample(shape).astype(dtype.as_numpy_dtype)
-    elif dtype.is_bool:
-      return (self._rgn.random_sample(shape) < .5).astype(dtype.as_numpy_dtype)
-    elif dtype == tf.string:
-      return self._generate_random_string_array(shape)
-    raise ValueError('Fake generation not supported for {}'.format(dtype))
 
-  def _generate_example(self):
-    """Generate the next example."""
-    root_feature = self._features
-    flat_features = root_feature._flatten(root_feature)  # pylint: disable=protected-access
-    flat_tensor_info = root_feature._flatten(root_feature.get_tensor_info())  # pylint: disable=protected-access
-    flat_objs = [
-        self._generate_random_obj(feature, tensor_info)
-        for feature, tensor_info in zip(flat_features, flat_tensor_info)
-    ]
-    return root_feature._nest(flat_objs)  # pylint: disable=protected-access
+@dataclasses.dataclass
+class BoolFactory(DataFactory):
+
+  def __call__(self, tensor_spec: tf.TensorSpec,
+               rgn: np.random.RandomState) -> Any:
+    shape = random_shape(tensor_spec.shape, rgn)
+    return rgn.choice([True, False],
+                      size=shape).astype(tensor_spec.dtype.as_numpy_dtype)
+
+
+@dataclasses.dataclass
+class FeatureFactory:
+  tensor_spec: tf.TensorSpec
+  data_factory: DataFactory
+
+  def generate(self, rgn: np.random.RandomState) -> Any:
+    return self.data_factory(tensor_spec=self.tensor_spec, rgn=rgn)
+
+
+class SequenceFactory(DataFactory):
+  """Factory for Sequences."""
+
+  def __init__(self,
+               features: features_lib.FeaturesDict,
+               num_sub_examples: int = 1,
+               custom_factories: Optional[Mapping[str, DataFactory]] = None):
+    self._features = features
+    self._num_sub_examples = num_sub_examples
+    custom_factories = custom_factories or {}
+    self._feature_factories = {}
+    tensor_info_dict = self._features.get_tensor_info()
+    for feature_name, feature in self._features.items():
+      data_factory = custom_factories.get(
+          feature_name,
+          data_factory_for(
+              feature,
+              num_sub_examples=num_sub_examples,
+              custom_factories=custom_factories))
+      self._feature_factories[feature_name] = FeatureFactory(
+          tensor_info_dict[feature_name], data_factory)
+    super().__init__()
+
+  def generate_example(self,
+                       rgn: np.random.RandomState) -> MutableMapping[str, Any]:
+    return {
+        feature_name: feature_factory.generate(rgn)
+        for feature_name, feature_factory in self._feature_factories.items()
+    }
+
+  def __call__(self, tensor_spec: tf.TensorSpec,
+               rgn: np.random.RandomState) -> Any:
+    return self.generate_example(rgn)
+
+
+class DatasetFactory(SequenceFactory):
+  """Factory for datasets."""
+
+  def __call__(self, tensor_spec: tf.TensorSpec,
+               rgn: np.random.RandomState) -> Any:
+    return [self.generate_example(rgn) for _ in range(self._num_sub_examples)]
+
+
+def data_factory_for(
+    feature: features_lib.FeatureConnector,
+    num_sub_examples: int = 1,
+    custom_factories: Optional[Mapping[str,
+                                       DataFactory]] = None) -> DataFactory:
+  """Creates the data factory for the given feature.
+
+  If a custom factory is specified for the feature, then that factory is used.
+
+  Args:
+    feature: the feature or feature dictionary for which to create the factory.
+    num_sub_examples: how many examples should be created for nested feature.
+    custom_factories: allows specifying custom factories for features, even if
+      the features are nested.
+
+  Returns:
+    A data factory that can generate random data for the given feature.
+  """
+  if isinstance(feature, features_lib.Dataset):
+    return DatasetFactory(
+        feature,
+        num_sub_examples=num_sub_examples,
+        custom_factories=custom_factories)
+  if isinstance(feature, features_lib.Sequence):
+    return SequenceFactory(
+        feature,
+        num_sub_examples=num_sub_examples,
+        custom_factories=custom_factories)
+
+  if isinstance(feature, features_lib.ClassLabel):
+    return IntInRangeFactory(max_value=feature.num_classes)
+  if isinstance(feature, features_lib.Text) and feature.vocab_size:
+    return IntInRangeFactory(max_value=feature.vocab_size)
+
+  dtype = feature.get_tensor_info().dtype
+  if dtype.is_integer:
+    return IntInRangeFactory()
+  elif dtype.is_floating:
+    return FloatFactory()
+  elif dtype.is_bool:
+    return BoolFactory()
+  elif dtype == tf.string:
+    return StringFactory()
+  raise ValueError('Fake generation not supported for {}'.format(dtype))
+
+
+class RandomFakeGenerator(object):
+  """Generator of fake examples randomly and deterministically generated."""
+
+  def __init__(
+      self,
+      features,
+      num_examples: int,
+      num_sub_examples: int = 1,
+      seed: int = 0,
+      custom_factories: Optional[Mapping[str, DataFactory]] = None,
+  ):
+    self._data_generator = DatasetFactory(
+        features,
+        num_sub_examples=num_sub_examples,
+        custom_factories=custom_factories)
+    self._rgn = np.random.RandomState(seed)  # Could use the split name as seed
+    self._features = features
+    self._num_examples = num_examples
+    self._num_sub_examples = num_sub_examples
 
   def __iter__(self):
     """Yields all fake examples."""
     for _ in range(self._num_examples):
-      yield self._generate_example()
+      example = self._data_generator.generate_example(rgn=self._rgn)
+      yield example
 
 
 class EncodedRandomFakeGenerator(RandomFakeGenerator):
