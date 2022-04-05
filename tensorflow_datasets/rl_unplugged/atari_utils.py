@@ -37,8 +37,8 @@ Atari is a standard RL benchmark. We recommend you to try offline RL methods on
 Atari if you are interested in comparing your approach to other state of the art
 offline RL methods with discrete actions.
 
-Besides the reward of each step, this dataset includes the clipped reward
-(obtained with [-1, 1] clipping) and the sum of the clipped reward per episode.
+The reward of each step is clipped (obtained with [-1, 1] clipping) and the 
+episode includes the sum of the clipped reward per episode.
 """
 
 _CITATION = """
@@ -133,6 +133,7 @@ _SHORT_GAMES = [
 ]
 
 
+# Note that rewards and episode_return are actually also clipped.
 _FEATURE_DESCRIPTION = {
     'checkpoint_idx':
         tf.io.FixedLenFeature([], tf.int64),
@@ -202,12 +203,10 @@ def atari_example_to_rlds(tf_example: tf.train.Example) -> Dict[str, Any]:
       'episode_id': data['episode_idx'],
       'checkpoint_id': data['checkpoint_idx'],
       'episode_return': data['episode_return'],
-      'clipped_episode_return': data['clipped_episode_return'],
       'steps': {
           'observation': data['observations'],
           'action': data['actions'],
           'reward': data['unclipped_rewards'],
-          'clipped_reward': data['clipped_rewards'],
           'discount': discounts,
           'is_first': is_first,
           'is_last': is_last,
@@ -235,10 +234,10 @@ def features_dict():
               'action':
                   tf.int64,
               'reward':
-                  tf.float32,
-              # [-1, 1] clipping
-              'clipped_reward':
-                  tf.float32,
+                  tfds.features.Scalar(
+                      dtype=tf.float32,
+                      doc=tfds.features.Documentation(
+                          desc='Clipped reward.', value_range='[-1, 1]')),
               'is_terminal':
                   tf.bool,
               'is_first':
@@ -253,10 +252,10 @@ def features_dict():
       'episode_id':
           tf.int64,
       'episode_return':
-          tf.float32,
-      # Sum of [-1, 1] clipped rewards
-      'clipped_episode_return':
-          tf.float32,
+          tfds.features.Scalar(
+              dtype=tf.float32,
+              doc=tfds.features.Documentation(
+                  desc='Sum of the clipped rewards.')),
   })
 
 
