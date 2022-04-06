@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="locomotion" />
-  <meta itemprop="description" content="The datasets were created with a SAC agent trained on the environment reward of&#10;MuJoCo locomotion tasks. These datasets are used in&#10;[What Matters for Adversarial Imitation Learning? Orsini et al. 2021](https://arxiv.org/pdf/2106.00672.pdf).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;locomotion&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="The datasets were created with a SAC agent trained on the environment reward of&#10;MuJoCo locomotion tasks. These datasets are used in&#10;[What Matters for Adversarial Imitation Learning? Orsini et al. 2021](https://arxiv.org/pdf/2106.00672.pdf).&#10;&#10;The datasets follow the [RLDS format](https://github.com/google-research/rlds)&#10;to represent steps and episodes.s&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;locomotion&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/locomotion" />
   <meta itemprop="sameAs" content="https://github.com/google-research/rlds" />
   <meta itemprop="citation" content="@article{orsini2021matters,&#10;  title={What Matters for Adversarial Imitation Learning?},&#10;  author={Orsini, Manu and Raichuk, Anton and Hussenot, L{&#x27;e}onard and Vincent, Damien and Dadashi, Robert and Girgin, Sertan and Geist, Matthieu and Bachem, Olivier and Pietquin, Olivier and Andrychowicz, Marcin},&#10;  journal={International Conference in Machine Learning},&#10;  year={2021}&#10;}" />
@@ -21,6 +21,9 @@ Note: This dataset was added recently and is only available in our
 The datasets were created with a SAC agent trained on the environment reward of
 MuJoCo locomotion tasks. These datasets are used in
 [What Matters for Adversarial Imitation Learning? Orsini et al. 2021](https://arxiv.org/pdf/2106.00672.pdf).
+
+The datasets follow the [RLDS format](https://github.com/google-research/rlds)
+to represent steps and episodes.s
 
 *   **Homepage**:
     [https://github.com/google-research/rlds](https://github.com/google-research/rlds)

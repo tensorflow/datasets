@@ -12,6 +12,11 @@
 # `natural_questions`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 The NQ corpus contains questions from real users, and it requires QA systems to
@@ -28,23 +33,49 @@ NQ to be a more realistic and challenging task than prior QA datasets.
 
 *   **Versions**:
 
-    *   `0.0.1`: No release notes.
-    *   **`0.0.2`** (default): No release notes.
+    *   `0.0.2`: No release notes.
+    *   **`0.1.0`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `90.26 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'train'`      | 307,373
-`'validation'` | 7,830
+Split | Examples
+:---- | -------:
+
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
+*   **Citation**:
+
+```
+@article{47761,
+title = {Natural Questions: a Benchmark for Question Answering Research},
+author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+year = {2019},
+journal = {Transactions of the Association of Computational Linguistics}
+}
+```
+
+
+## natural_questions/default (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
+*   **Config description**: Default natural_questions config
 
 *   **Feature structure**:
 
@@ -115,59 +146,32 @@ question                              | FeaturesDict     |         |           |
 question/text                         | Text             |         | tf.string |
 question/tokens                       | Sequence(Tensor) | (None,) | tf.string |
 
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `None`
+## natural_questions/longt5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-*   **Figure**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
+*   **Config description**: natural_questions preprocessed as in the longT5
+    benchmark
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Feature structure**:
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/natural_questions-0.0.2.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
-*   **Citation**:
-
-```
-@article{47761,
-title = {Natural Questions: a Benchmark for Question Answering Research},
-author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-year = {2019},
-journal = {Transactions of the Association of Computational Linguistics}
-}
+```python
+FeaturesDict({
+    'all_answers': Sequence(Text(shape=(), dtype=tf.string)),
+    'answer': Text(shape=(), dtype=tf.string),
+    'context': Text(shape=(), dtype=tf.string),
+    'id': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
+})
 ```
 
+*   **Feature documentation**:
+
+Feature     | Class          | Shape   | Dtype     | Description
+:---------- | :------------- | :------ | :-------- | :----------
+            | FeaturesDict   |         |           |
+all_answers | Sequence(Text) | (None,) | tf.string |
+answer      | Text           |         | tf.string |
+context     | Text           |         | tf.string |
+id          | Text           |         | tf.string |
+question    | Text           |         | tf.string |
+title       | Text           |         | tf.string |
