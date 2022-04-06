@@ -31,6 +31,9 @@ gamepad controller.
 The synthetic datasets have been recorded using the
 [EnvLogger library](https://github.com/deepmind/envlogger).
 
+The datasets follow the [RLDS format](https://github.com/google-research/rlds)
+to represent steps and episodes.
+
 Episodes consist of 400 steps. In each episode, a tag is
 added when the task is completed, this tag is stored as part of the custom step
 metadata.
