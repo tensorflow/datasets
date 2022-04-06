@@ -154,7 +154,7 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
   """Natural Questions: A Benchmark for Question Answering Research."""
 
   VERSION = tfds.core.Version('0.1.0')
-  SUPPORTED_VERSIONS = [tfds.core.Version('0.1.0')]
+  SUPPORTED_VERSIONS = [tfds.core.Version('0.0.2'), tfds.core.Version('0.1.0')]
   BUILDER_CONFIGS = [
       NaturalQuestionsConfig(
           name='default',
