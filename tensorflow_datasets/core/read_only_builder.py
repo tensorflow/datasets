@@ -52,7 +52,7 @@ class ReadOnlyBuilder(
         builder_dir.
 
     Raises:
-      FileNotFoundError: If the builder_dir does not exists.
+      FileNotFoundError: If the builder_dir does not exist.
     """
     builder_dir = os.path.expanduser(builder_dir)
     if not info_proto:

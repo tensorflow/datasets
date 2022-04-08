@@ -131,7 +131,7 @@ class MockFs(object):
     is_binary = 'b' in mode
 
     if path not in self.files:
-      raise FileNotFoundError(f'File {path} does not exists.')
+      raise FileNotFoundError(f'File {path} does not exist.')
     content = self.files[path]
     if is_binary:
       fobj = io.BytesIO(content.encode('utf-8'))
