@@ -356,7 +356,7 @@ class DatasetBuilderTestCase(parameterized.TestCase,
     err_msg = (
         "Did you forget to record checksums with `--register_checksums` ? See "
         "instructions at: "
-        "hhttps://www.tensorflow.org/datasets/add_dataset#run_the_generation_codeIf"
+        "https://www.tensorflow.org/datasets/add_dataset#run_the_generation_codeIf"
         " want to opt-out of checksums validation, please add `SKIP_CHECKSUMS "
         "= True` to the `DatasetBuilderTestCase`.\n")
     url_infos = self.DATASET_CLASS.url_infos
