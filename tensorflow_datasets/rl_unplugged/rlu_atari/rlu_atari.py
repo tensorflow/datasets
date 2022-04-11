@@ -29,11 +29,12 @@ class RluAtari(rlu_common.RLUBuilder):
   _SHARDS = 50
   _INPUT_FILE_PREFIX = 'gs://rl_unplugged/atari_episodes_ordered'
 
-  VERSION = tfds.core.Version('1.2.0')
+  VERSION = tfds.core.Version('1.3.0')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
       '1.1.0': 'Added is_last.',
-      '1.2.0': 'Added checkpoint id'
+      '1.2.0': 'Added checkpoint id.',
+      '1.3.0': 'Removed redundant clipped reward fields.'
   }
 
   BUILDER_CONFIGS = atari_utils.builder_configs()

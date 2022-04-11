@@ -40,8 +40,10 @@ _CITATION = """
 _BUILDER_CONFIGS = [
     tfds.core.BuilderConfig(
         name='rlds',
-        description='This dataset contains task episodes collected across a fleet of real robots.'
-    ),
+        description=(
+            'This dataset contains task episodes collected across a'
+            'fleet of real robots. It follows the [RLDS format](https://github.com/google-research/rlds)'
+            'to represent steps and episodes.')),
     tfds.core.BuilderConfig(
         name='sd',
         description='The success detectors dataset that contains human curated definitions of tasks completion.'

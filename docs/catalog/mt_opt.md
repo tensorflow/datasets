@@ -61,7 +61,9 @@ Datasets for the [MT-Opt paper](https://arxiv.org/abs/2104.08212).
 ## mt_opt/rlds (default config)
 
 *   **Config description**: This dataset contains task episodes collected across
-    a fleet of real robots.
+    afleet of real robots. It follows the
+    [RLDS format](https://github.com/google-research/rlds)to represent steps and
+    episodes.
 
 *   **Dataset size**: `4.38 TiB`
 

@@ -260,13 +260,11 @@ def test_mocking_rlu_nested_dataset():
   The dataset has the following features:
 
     features=tfds.features.FeaturesDict({
-      'clipped_episode_return': tf.float32,
       'episode_id': tf.int64,
       'checkpoint_id': tf.int64,
       'episode_return': tf.float32,
       'steps': tfds.features.Dataset({
           'action': tf.int64,
-          'clipped_reward': tf.float32,
           'discount': tf.float32,
           'is_first': tf.bool,
           'is_last': tf.bool,
@@ -292,8 +290,8 @@ def test_mocking_rlu_nested_dataset():
       ds_steps_iter = iter(ds_steps)
       steps_ex = next(ds_steps_iter)
       assert set(steps_ex.keys()) == {
-          'action', 'clipped_reward', 'discount', 'is_first', 'is_last',
-          'is_terminal', 'observation', 'reward'
+          'action', 'discount', 'is_first', 'is_last', 'is_terminal',
+          'observation', 'reward'
       }
       assert steps_ex['observation'].shape == (84, 84, 1)
 

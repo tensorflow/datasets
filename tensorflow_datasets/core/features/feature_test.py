@@ -79,15 +79,19 @@ def test_encode_and_parse_dtype():
 
 
 def test_tensor_info_tensor_shape():
-  tensor_info = feature.TensorInfo(
-      shape=tf.TensorShape([28, 28, 3]), dtype=tf.int64)
+  tensor_shape = tf.TensorShape([28, 28, 3])
+  tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=tf.int64)
   assert tensor_info.shape == (28, 28, 3)
+  assert tensor_info.to_tensor_spec() == tf.TensorSpec(
+      shape=tensor_shape, dtype=tf.int64)
 
 
 def test_tensor_info_tensor_shape_with_none():
-  tensor_info = feature.TensorInfo(
-      shape=tf.TensorShape([None, None, 3]), dtype=tf.int64)
+  tensor_shape = tf.TensorShape([None, None, 3])
+  tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=tf.int64)
   assert tensor_info.shape == (None, None, 3)
+  assert tensor_info.to_tensor_spec() == tf.TensorSpec(
+      shape=tensor_shape, dtype=tf.int64)
 
 
 def test_tensor_info_list_shape():

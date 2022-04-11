@@ -29,6 +29,9 @@ use, we provide the datasets with a unified API which makes it easy for the
 practitioner to work with all data in the suite once a general pipeline has been
 established.
 
+The datasets follow the [RLDS format](https://github.com/google-research/rlds)
+to represent steps and episodes.
+
 """
 
 

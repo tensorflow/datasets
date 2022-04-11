@@ -769,13 +769,13 @@ def read_proto_from_builder_dir(
     The DatasetInfo proto as read from the builder dir.
 
   Raises:
-    FileNotFoundError: If the builder_dir does not exists.
+    FileNotFoundError: If the builder_dir does not exist.
   """
   info_path = os.path.join(
       os.path.expanduser(builder_dir), DATASET_INFO_FILENAME)
   if not tf.io.gfile.exists(info_path):
     raise FileNotFoundError(
-        f"Could not load dataset info: {info_path} does not exists.")
+        f"Could not load dataset info: {info_path} does not exist.")
   return read_from_json(info_path)
 
 

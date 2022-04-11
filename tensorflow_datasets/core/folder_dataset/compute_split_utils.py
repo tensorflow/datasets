@@ -137,7 +137,7 @@ def _compute_split_statistics_beam(
   """Compute statistics."""
   out_dir = epath.Path(out_dir)
 
-  assert out_dir.exists(), f'{out_dir} does not exists'
+  assert out_dir.exists(), f'{out_dir} does not exist'
 
   beam = lazy_imports_lib.lazy_imports.apache_beam
 

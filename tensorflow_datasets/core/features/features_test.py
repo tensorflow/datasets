@@ -83,6 +83,33 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
     t = features_lib.TensorInfo(shape=(None, 3), dtype=tf.string)
     self.assertEqual(t, features_lib.TensorInfo.copy_from(t))
 
+  def test_tensor_spec(self):
+    feature = features_lib.FeaturesDict({
+        'input': AnInputConnector(),
+        'output': AnOutputConnector(),
+        'img': {
+            'size': {
+                'height': features_lib.Tensor(shape=(2, 3), dtype=tf.int64),
+                'width': features_lib.Tensor(shape=[None, 3], dtype=tf.int64),
+            },
+            'image': features_lib.Image(shape=(28, 28, 1)),
+            'metadata/path': tf.string,
+        }
+    })
+    self.assertAllEqualNested(
+        feature.get_tensor_spec(), {
+            'input': tf.TensorSpec(shape=[], dtype=tf.int64),
+            'output': tf.TensorSpec(shape=[], dtype=tf.float32),
+            'img': {
+                'size': {
+                    'height': tf.TensorSpec(shape=[2, 3], dtype=tf.int64),
+                    'width': tf.TensorSpec(shape=[None, 3], dtype=tf.int64),
+                },
+                'image': tf.TensorSpec(shape=[28, 28, 1], dtype=tf.uint8),
+                'metadata/path': tf.TensorSpec(shape=[], dtype=tf.string),
+            }
+        })
+
   def test_fdict(self):
 
     self.assertFeature(

@@ -20,6 +20,7 @@ from tensorflow_datasets.question_answering import natural_questions
 
 
 class NaturalQuestionsTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["default"]
   DATASET_CLASS = natural_questions.NaturalQuestions
   SPLITS = {
       "train": 3,
