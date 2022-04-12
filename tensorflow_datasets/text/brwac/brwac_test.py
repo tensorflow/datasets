@@ -20,7 +20,6 @@ from . import brwac
 
 class BrwacTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for brwac dataset."""
-  # TODO(brwac):
   DATASET_CLASS = brwac.Brwac
   SPLITS = {'train': 20}
 
