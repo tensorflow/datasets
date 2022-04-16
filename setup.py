@@ -138,7 +138,7 @@ DATASET_EXTRAS = {
         'scikit-image',
         'scipy'
     ],
-    'librispeech': ['pydub'],  # and ffmpeg installed
+    'librispeech': ['apache_beam', 'pydub'],  # and ffmpeg installed
     'lsun': ['tensorflow-io'],
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
