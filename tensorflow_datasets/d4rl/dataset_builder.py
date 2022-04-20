@@ -529,4 +529,4 @@ class D4RLDatasetBuilder(
   def _generate_examples(self, path):
     """Yields examples."""
     file_path = path['file_path']
-    return dataset_utils.generate_examples(file_path)
+    return dataset_utils.generate_examples(file_path)  # pytype: disable=wrong-arg-types
