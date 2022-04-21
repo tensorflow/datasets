@@ -190,6 +190,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
 *   [`answer_equivalence`](answer_equivalence.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`asqa`](asqa.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`coqa`](coqa.md)
 *   [`cosmos_qa`](cosmos_qa.md)
 *   [`mctaco`](mctaco.md)

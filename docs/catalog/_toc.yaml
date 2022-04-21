@@ -304,6 +304,9 @@ toc:
   - path: /datasets/catalog/answer_equivalence
     status: nightly
     title: answer_equivalence
+  - path: /datasets/catalog/asqa
+    status: nightly
+    title: asqa
   - path: /datasets/catalog/coqa
     title: coqa
   - path: /datasets/catalog/cosmos_qa
