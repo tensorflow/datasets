@@ -194,6 +194,7 @@ setup(
     package_data={
         'tensorflow_datasets':
             DATASET_FILES + [
+                'py.typed',
                 'core/utils/colormap.csv',
                 'scripts/documentation/templates/*',
                 'url_checksums/*',
