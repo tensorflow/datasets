@@ -57,36 +57,39 @@ def url():
 
 def generate_examples(file_path: str):
   """Provides a common generate_examples method for D4RL datasets."""
-  dataset_dict = read_d4rl_dataset(file_path)
-  if 'timeouts' not in dataset_dict:
+  d4rl_dict = read_d4rl_dataset(file_path)
+  if 'timeouts' not in d4rl_dict:
     raise ValueError('Only datasets with explicit timeouts are supported.')
 
   done = [
       terminal or timeout
       for (terminal,
-           timeout) in zip(dataset_dict['terminals'], dataset_dict['timeouts'])
+           timeout) in zip(d4rl_dict['terminals'], d4rl_dict['timeouts'])
   ]
   # is_first corresponds to the done flag delayed by one step.
-  dataset_dict['is_first'] = [True] + done[:-1]
+  d4rl_dict['is_first'] = [True] + done[:-1]
   # is_last is not used but this is needed to build a valid dictionary.
-  dataset_dict['is_last'] = done
+  d4rl_dict['is_last'] = done
 
   # Get step metadata
-  infos_dict = _get_nested_metadata(dataset_dict, 'infos')
+  infos_dict = _get_nested_metadata(d4rl_dict, 'infos')
 
   # Flatten reward
-  dataset_dict['rewards'] = np.squeeze(dataset_dict['rewards'])
+  d4rl_dict['rewards'] = np.squeeze(d4rl_dict['rewards'])
 
-  episode_metadata = _get_nested_metadata(dataset_dict, 'metadata')
+  episode_metadata = _get_nested_metadata(d4rl_dict, 'metadata')
   dataset_dict = {
-      'observation': dataset_dict['observations'],
-      'action': dataset_dict['actions'],
-      'reward': dataset_dict['rewards'],
-      'discount': np.ones_like(dataset_dict['rewards']),
-      'is_terminal': dataset_dict['terminals'],
-      'is_first': dataset_dict['is_first'],
-      'is_last': dataset_dict['is_last'],
+      'observation': d4rl_dict['observations'],
+      'action': d4rl_dict['actions'],
+      'reward': d4rl_dict['rewards'],
+      'discount': np.ones_like(d4rl_dict['rewards']),
+      'is_terminal': d4rl_dict['terminals'],
+      'is_first': d4rl_dict['is_first'],
+      'is_last': d4rl_dict['is_last'],
   }
+  if 'next_observations' in d4rl_dict:
+    dataset_dict['next_observation'] = d4rl_dict['next_observations']
+
   if infos_dict:
     dataset_dict['infos'] = infos_dict
   num_steps = len(dataset_dict['is_first'])
@@ -172,34 +175,43 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
     for k in steps['infos'].keys():
       episode['infos'][k] = steps['infos'][k][begin:end]
 
-  if steps['is_terminal'][end - 1]:
+  ends_in_terminal = steps['is_terminal'][end - 1]
+  has_next_obs = 'next_observation' in steps
+
+  # If the episode ends in a terminal state, the discount of the previous step
+  # is set to 0 (it's a transition to a terminal state).
+  if ends_in_terminal:
+    episode['discount'][-1] = 0.0
+  if ends_in_terminal or has_next_obs:
     # In HDF5, the terminal bit is associated with the previous observation.
     # To comply with RLDS standard (see types.py), we propagate this information
     # to a next state. This matches the definition in RLDS. See types.py.
+    # If there is information about a next observation, we also generate an
+    # extra last step.
     episode['is_first'] = np.concatenate((episode['is_first'], [False]))
-    # In HDF5 datasets, the last observation is never recorded.
-    # In order to avoid discarding the last transition to the terminal state,
-    # we create a dummy observation set to zeros.
-    # Since no solution is perfect, the design choice was to keep as much
-    # information as possible and let the user decide to keep or ignore such
-    # transitions.
-    episode['observation'] = np.concatenate(
-        (episode['observation'], [np.zeros_like(steps['observation'][0])]))
-    # Action and reward are set to dummy values since not relevant.
+    if has_next_obs:
+      episode['observation'] = np.concatenate(
+          (episode['observation'], [steps['next_observation'][-1]]))
+    else:
+      # If the last observation is never recorded and to avoid discarding the
+      # last transition to the terminal state, we create a dummy observation.
+      # Since no solution is perfect, the design choice was to keep as much
+      # information as possible and let the user decide to keep or ignore such
+      # transitions.
+      episode['observation'] = np.concatenate(
+          (episode['observation'], [np.zeros_like(steps['observation'][0])]))
+    # Action/reward/discount are set to dummy values since not relevant.
     # When IS_LAST is set, any field coming temporally after the last
     # observation is invalid.
     episode['action'] = np.concatenate(
         (episode['action'], [np.zeros_like(steps['action'][0])]))
     episode['reward'] = np.concatenate(
         (episode['reward'], [np.zeros_like(steps['reward'][0])]))
-    # The discount of the previous step is set to 0 since we have a transition
-    # to a terminal state.
-    # The very last discount is set to a dummy value (0.0) since when IS_LAST
-    # is set, any field coming temporally after the last observation is invalid.
-    episode['discount'][-1] = 0.0
     episode['discount'] = np.array(
         np.concatenate((episode['discount'], [0.0])), dtype=np.float32)
-    episode['is_terminal'] = np.concatenate((episode['is_terminal'], [True]))
+
+    episode['is_terminal'] = np.concatenate(
+        (episode['is_terminal'], [ends_in_terminal]))
     episode['is_last'] = np.concatenate((episode['is_last'], [True]))
     if 'infos' in steps.keys():
       for k in steps['infos'].keys():
@@ -208,7 +220,7 @@ def _get_episode(steps: Dict[str, Any], episode_metadata: Dict[str, Any],
   else:
     # Despite the fact that the last action and reward are valid in the
     # stored dataset (in the final transition, [obs, action, reward, next_obs],
-    # only one step was stoted as [obs, action, reward], insted of adding one
+    # only one step was stored as [obs, action, reward], instead of adding one
     # extra step with [next_obs, 0, 0]). We set IS_LAST=True so that
     # it is consistent with other typical datasets.
     episode['is_last'][-1] = True
