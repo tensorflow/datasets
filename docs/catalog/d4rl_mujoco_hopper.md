@@ -50,10 +50,6 @@ to represent steps and episodes.
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 *   **Citation**:
 
 ```
@@ -114,6 +110,43 @@ steps/is_terminal | Tensor       |       | tf.bool    |
 steps/observation | Tensor       | (11,) | tf.float32 |
 steps/reward      | Tensor       |       | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_hopper-v0-expert-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## d4rl_mujoco_hopper/v0-medium
 
 *   **Download size**: `51.74 MiB`
@@ -159,6 +192,43 @@ steps/is_last     | Tensor       |       | tf.bool    |
 steps/is_terminal | Tensor       |       | tf.bool    |
 steps/observation | Tensor       | (11,) | tf.float32 |
 steps/reward      | Tensor       |       | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_hopper-v0-medium-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_hopper/v0-medium-expert
 
@@ -206,6 +276,43 @@ steps/is_terminal | Tensor       |       | tf.bool    |
 steps/observation | Tensor       | (11,) | tf.float32 |
 steps/reward      | Tensor       |       | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_hopper-v0-medium-expert-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## d4rl_mujoco_hopper/v0-mixed
 
 *   **Download size**: `10.48 MiB`
@@ -252,20 +359,58 @@ steps/is_terminal | Tensor       |       | tf.bool    |
 steps/observation | Tensor       | (11,) | tf.float32 |
 steps/reward      | Tensor       |       | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_hopper-v0-mixed-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## d4rl_mujoco_hopper/v0-random
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `51.83 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `66.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,793
 
 *   **Feature structure**:
 
@@ -297,20 +442,58 @@ steps/is_terminal | Tensor       |       | tf.bool    |
 steps/observation | Tensor       | (11,) | tf.float32 |
 steps/reward      | Tensor       |       | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_hopper-v0-random-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## d4rl_mujoco_hopper/v1-expert
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `93.19 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `608.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,836
 
 *   **Feature structure**:
 
@@ -389,21 +572,59 @@ steps/is_last                 | Tensor       |            | tf.bool    |
 steps/is_terminal             | Tensor       |            | tf.bool    |
 steps/observation             | Tensor       | (11,)      | tf.float32 |
 steps/reward                  | Tensor       |            | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_hopper-v1-expert-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_hopper/v1-medium
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `92.03 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.78 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 6,328
 
 *   **Feature structure**:
 
@@ -483,20 +704,58 @@ steps/is_terminal             | Tensor       |            | tf.bool    |
 steps/observation             | Tensor       | (11,)      | tf.float32 |
 steps/reward                  | Tensor       |            | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_hopper-v1-medium-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## d4rl_mujoco_hopper/v1-medium-expert
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `184.59 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `230.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,163
 
 *   **Feature structure**:
 
@@ -536,21 +795,26 @@ steps/is_last                | Tensor       |       | tf.bool    |
 steps/is_terminal            | Tensor       |       | tf.bool    |
 steps/observation            | Tensor       | (11,) | tf.float32 |
 steps/reward                 | Tensor       |       | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_hopper/v1-medium-replay
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `55.65 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `34.78 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,151
 
 *   **Feature structure**:
 
@@ -594,21 +858,26 @@ steps/is_last                | Tensor       |       | tf.bool    |
 steps/is_terminal            | Tensor       |       | tf.bool    |
 steps/observation            | Tensor       | (11,) | tf.float64 |
 steps/reward                 | Tensor       |       | tf.float64 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_hopper/v1-full-replay
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `183.32 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `114.78 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,907
 
 *   **Feature structure**:
 
@@ -653,20 +922,58 @@ steps/is_terminal            | Tensor       |       | tf.bool    |
 steps/observation            | Tensor       | (11,) | tf.float64 |
 steps/reward                 | Tensor       |       | tf.float64 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_hopper-v1-full-replay-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## d4rl_mujoco_hopper/v1-random
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `91.11 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `130.73 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 45,265
 
 *   **Feature structure**:
 
@@ -707,20 +1014,25 @@ steps/is_terminal            | Tensor       |       | tf.bool    |
 steps/observation            | Tensor       | (11,) | tf.float32 |
 steps/reward                 | Tensor       |       | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_hopper/v2-expert
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `145.37 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `390.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,028
 
 *   **Feature structure**:
 
@@ -800,20 +1112,25 @@ steps/is_terminal             | Tensor       |            | tf.bool    |
 steps/observation             | Tensor       | (11,)      | tf.float32 |
 steps/reward                  | Tensor       |            | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_hopper/v2-full-replay
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `179.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `115.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,515
 
 *   **Feature structure**:
 
@@ -858,20 +1175,25 @@ steps/is_terminal            | Tensor       |       | tf.bool    |
 steps/observation            | Tensor       | (11,) | tf.float32 |
 steps/reward                 | Tensor       |       | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_hopper/v2-medium
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `145.68 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `702.57 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,187
 
 *   **Feature structure**:
 
@@ -951,20 +1273,25 @@ steps/is_terminal             | Tensor       |            | tf.bool    |
 steps/observation             | Tensor       | (11,)      | tf.float32 |
 steps/reward                  | Tensor       |            | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_hopper/v2-medium-expert
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `290.43 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `228.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,214
 
 *   **Feature structure**:
 
@@ -1004,6 +1331,10 @@ steps/is_last                | Tensor       |       | tf.bool    |
 steps/is_terminal            | Tensor       |       | tf.bool    |
 steps/observation            | Tensor       | (11,) | tf.float32 |
 steps/reward                 | Tensor       |       | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_hopper/v2-medium-replay
 
@@ -1063,6 +1394,10 @@ steps/is_terminal            | Tensor       |       | tf.bool    |
 steps/observation            | Tensor       | (11,) | tf.float32 |
 steps/reward                 | Tensor       |       | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_hopper/v2-random
 
 *   **Download size**: `Unknown size`
@@ -1116,3 +1451,7 @@ steps/is_last                | Tensor       |       | tf.bool    |
 steps/is_terminal            | Tensor       |       | tf.bool    |
 steps/observation            | Tensor       | (11,) | tf.float32 |
 steps/reward                 | Tensor       |       | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.

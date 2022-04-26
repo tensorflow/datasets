@@ -42,19 +42,6 @@ to represent steps and episodes.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Updated to take into account the next observation.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -62,10 +49,6 @@ Split | Examples
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -83,6 +66,20 @@ Split | Examples
 
 ## d4rl_mujoco_ant/v0-expert (default config)
 
+*   **Download size**: `131.34 MiB`
+
+*   **Dataset size**: `464.94 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,288
+
 *   **Feature structure**:
 
 ```python
@@ -112,9 +109,60 @@ steps/is_last     | Tensor       |        | tf.bool    |
 steps/is_terminal | Tensor       |        | tf.bool    |
 steps/observation | Tensor       | (111,) | tf.float32 |
 steps/reward      | Tensor       |        | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_ant-v0-expert-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_ant/v0-medium
 
+*   **Download size**: `131.39 MiB`
+
+*   **Dataset size**: `464.78 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,122
+
 *   **Feature structure**:
 
 ```python
@@ -144,9 +192,27 @@ steps/is_last     | Tensor       |        | tf.bool    |
 steps/is_terminal | Tensor       |        | tf.bool    |
 steps/observation | Tensor       | (111,) | tf.float32 |
 steps/reward      | Tensor       |        | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_ant/v0-medium-expert
 
+*   **Download size**: `262.73 MiB`
+
+*   **Dataset size**: `929.71 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,410
+
 *   **Feature structure**:
 
 ```python
@@ -176,9 +242,27 @@ steps/is_last     | Tensor       |        | tf.bool    |
 steps/is_terminal | Tensor       |        | tf.bool    |
 steps/observation | Tensor       | (111,) | tf.float32 |
 steps/reward      | Tensor       |        | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_ant/v0-mixed
 
+*   **Download size**: `104.63 MiB`
+
+*   **Dataset size**: `464.93 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,320
+
 *   **Feature structure**:
 
 ```python
@@ -208,9 +292,27 @@ steps/is_last     | Tensor       |        | tf.bool    |
 steps/is_terminal | Tensor       |        | tf.bool    |
 steps/observation | Tensor       | (111,) | tf.float32 |
 steps/reward      | Tensor       |        | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_ant/v0-random
 
+*   **Download size**: `139.50 MiB`
+
+*   **Dataset size**: `464.97 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,377
+
 *   **Feature structure**:
 
 ```python
@@ -241,7 +343,25 @@ steps/is_terminal | Tensor       |        | tf.bool    |
 steps/observation | Tensor       | (111,) | tf.float32 |
 steps/reward      | Tensor       |        | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_ant/v1-expert
+
+*   **Download size**: `220.72 MiB`
+
+*   **Dataset size**: `968.63 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,033
 
 *   **Feature structure**:
 
@@ -320,9 +440,26 @@ steps/is_last                 | Tensor       |            | tf.bool    |
 steps/is_terminal             | Tensor       |            | tf.bool    |
 steps/observation             | Tensor       | (111,)     | tf.float32 |
 steps/reward                  | Tensor       |            | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_ant/v1-medium
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -401,7 +538,24 @@ steps/is_terminal             | Tensor       |            | tf.bool    |
 steps/observation             | Tensor       | (111,)     | tf.float32 |
 steps/reward                  | Tensor       |            | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_ant/v1-medium-expert
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -441,9 +595,26 @@ steps/is_last                | Tensor       |        | tf.bool    |
 steps/is_terminal            | Tensor       |        | tf.bool    |
 steps/observation            | Tensor       | (111,) | tf.float32 |
 steps/reward                 | Tensor       |        | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_ant/v1-medium-replay
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -486,9 +657,27 @@ steps/is_last                | Tensor       |        | tf.bool    |
 steps/is_terminal            | Tensor       |        | tf.bool    |
 steps/observation            | Tensor       | (111,) | tf.float64 |
 steps/reward                 | Tensor       |        | tf.float64 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_ant/v1-full-replay
 
+*   **Download size**: `437.57 MiB`
+
+*   **Dataset size**: `580.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,319
+
 *   **Feature structure**:
 
 ```python
@@ -532,7 +721,24 @@ steps/is_terminal            | Tensor       |        | tf.bool    |
 steps/observation            | Tensor       | (111,) | tf.float64 |
 steps/reward                 | Tensor       |        | tf.float64 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_ant/v1-random
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -573,7 +779,24 @@ steps/is_terminal            | Tensor       |        | tf.bool    |
 steps/observation            | Tensor       | (111,) | tf.float32 |
 steps/reward                 | Tensor       |        | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_ant/v2-expert
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -652,9 +875,26 @@ steps/is_last                 | Tensor       |            | tf.bool    |
 steps/is_terminal             | Tensor       |            | tf.bool    |
 steps/observation             | Tensor       | (111,)     | tf.float32 |
 steps/reward                  | Tensor       |            | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 ## d4rl_mujoco_ant/v2-full-replay
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -698,7 +938,24 @@ steps/is_terminal            | Tensor       |        | tf.bool    |
 steps/observation            | Tensor       | (111,) | tf.float32 |
 steps/reward                 | Tensor       |        | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_ant/v2-medium
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -778,7 +1035,24 @@ steps/is_terminal             | Tensor       |            | tf.bool    |
 steps/observation             | Tensor       | (111,)     | tf.float32 |
 steps/reward                  | Tensor       |            | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_ant/v2-medium-expert
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -819,7 +1093,24 @@ steps/is_terminal            | Tensor       |        | tf.bool    |
 steps/observation            | Tensor       | (111,) | tf.float32 |
 steps/reward                 | Tensor       |        | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_ant/v2-medium-replay
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -864,7 +1155,24 @@ steps/is_terminal            | Tensor       |        | tf.bool    |
 steps/observation            | Tensor       | (111,) | tf.float32 |
 steps/reward                 | Tensor       |        | tf.float32 |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 ## d4rl_mujoco_ant/v2-random
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -904,3 +1212,7 @@ steps/is_last                | Tensor       |        | tf.bool    |
 steps/is_terminal            | Tensor       |        | tf.bool    |
 steps/observation            | Tensor       | (111,) | tf.float32 |
 steps/reward                 | Tensor       |        | tf.float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
