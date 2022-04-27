@@ -18,12 +18,10 @@
 import abc
 import enum
 import os
-
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type
 
 from etils import epath
 import tensorflow as tf
-
 from tensorflow_datasets.core.utils import type_utils
 
 ExamplePositions = List[Any]
