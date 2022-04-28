@@ -1569,18 +1569,19 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v2-medium-replay
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `82.32 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `52.10 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,093
 
 *   **Feature structure**:
 
@@ -1631,18 +1632,19 @@ steps/reward                 | Tensor       |       | tf.float32 |
 
 ## d4rl_mujoco_walker2d/v2-random
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `206.10 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `192.11 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 48,908
 
 *   **Feature structure**:
 
