@@ -835,18 +835,19 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_ant/v1-medium-replay
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `132.05 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `175.27 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 485
 
 *   **Feature structure**:
 
@@ -993,18 +994,19 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_ant/v1-random
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `225.18 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `583.83 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,741
 
 *   **Feature structure**:
 
