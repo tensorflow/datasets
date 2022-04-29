@@ -28,6 +28,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_package
 from tensorflow_datasets.core.community import register_path
 from tensorflow_datasets.core.community import registry as registry_lib
+from tensorflow_datasets.core.utils import gcs_utils
 
 
 class Ds0(testing.DummyDataset):
@@ -109,6 +110,7 @@ def test_load_register_for_path_github():
       paths=['github://huggingface/datasets/tree/master/datasets'])
   assert len(registers) == 1
   assert isinstance(registers[0], register_package.PackageRegister)
+  assert registers[0]._path == gcs_utils.GCS_COMMUNITY_INDEX_PATH
 
 
 def test_load_register_for_path_gcs():
