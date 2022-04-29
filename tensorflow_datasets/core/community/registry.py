@@ -29,6 +29,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
 from tensorflow_datasets.core.community import register_package
 from tensorflow_datasets.core.community import register_path
+from tensorflow_datasets.core.utils import gcs_utils
 import toml
 
 
@@ -62,8 +63,10 @@ def _load_register_for_paths(
     register = register_path.DataDirRegister(
         namespace_to_data_dirs={namespace: data_paths})
     registers.append(register)
-  for code_path in code_paths:
-    registers.append(register_package.PackageRegister(code_path))
+  if code_paths:
+    registers.append(
+        register_package.PackageRegister(
+            path=gcs_utils.GCS_COMMUNITY_INDEX_PATH))
   return registers
 
 
