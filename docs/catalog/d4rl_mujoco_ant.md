@@ -894,7 +894,40 @@ steps/reward                 | Tensor       |        | tf.float64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_ant-v1-medium-replay-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_ant/v1-full-replay
 
@@ -1049,22 +1082,56 @@ steps/reward                 | Tensor       |        | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_ant-v1-random-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## d4rl_mujoco_ant/v2-expert
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `355.94 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `969.38 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,035
 
 *   **Feature structure**:
 
@@ -1150,18 +1217,19 @@ steps/reward                  | Tensor       |            | tf.float32 |
 
 ## d4rl_mujoco_ant/v2-full-replay
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `428.57 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `580.09 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,319
 
 *   **Feature structure**:
 
@@ -1212,18 +1280,19 @@ steps/reward                 | Tensor       |        | tf.float32 |
 
 ## d4rl_mujoco_ant/v2-medium
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `358.81 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.01 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,203
 
 *   **Feature structure**:
 
@@ -1309,18 +1378,19 @@ steps/reward                  | Tensor       |            | tf.float32 |
 
 ## d4rl_mujoco_ant/v2-medium-expert
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `713.67 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.13 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,237
 
 *   **Feature structure**:
 
@@ -1367,18 +1437,19 @@ steps/reward                 | Tensor       |        | tf.float32 |
 
 ## d4rl_mujoco_ant/v2-medium-replay
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `130.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `175.27 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 485
 
 *   **Feature structure**:
 
@@ -1429,18 +1500,19 @@ steps/reward                 | Tensor       |        | tf.float32 |
 
 ## d4rl_mujoco_ant/v2-random
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `366.66 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `583.90 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 5,822
 
 *   **Feature structure**:
 
