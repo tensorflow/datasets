@@ -201,7 +201,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def code_path(cls) -> epath.Path:
+  def code_path(cls) -> Optional[epath.Path]:
     """Returns the path to the file where the Dataset class is located.
 
     Note: As the code can be run inside zip file. The returned value is
@@ -230,7 +230,13 @@ class DatasetBuilder(registered.RegisteredDataset):
           return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
     # equivalent to the above return.
-    return epath.Path(inspect.getfile(cls))
+    try:
+      filepath = inspect.getfile(cls)
+    except TypeError:
+      # Could happen when the class is defined in Colab.
+      return None
+    else:
+      return epath.Path(filepath)
 
   def __getstate__(self):
     return self._original_state
@@ -294,11 +300,13 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @utils.classproperty
   @classmethod
-  def _checksums_path(cls) -> epath.Path:
+  def _checksums_path(cls) -> Optional[epath.Path]:
     """Returns the checksums path."""
     # Used:
     # * To load the checksums (in url_infos)
     # * To save the checksums (in DownloadManager)
+    if not cls.code_path:
+      return None
     new_path = cls.code_path.parent / "checksums.tsv"
     # Checksums of legacy datasets are located in a separate dir.
     legacy_path = utils.tfds_path() / "url_checksums" / f"{cls.name}.txt"
@@ -322,7 +330,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Search for the url_info file.
     checksums_path = cls._checksums_path
     # If url_info file is found, load the urls
-    if checksums_path.exists():
+    if checksums_path and checksums_path.exists():
       return download.checksums.load_url_infos(checksums_path)
     else:
       return None
