@@ -122,6 +122,7 @@ DATASET_FILES = [
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
+    'beir': ['apache_beam'],
     'ble_wind_field': ['gcsfs', 'zarr'],
     'c4': ['apache_beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
