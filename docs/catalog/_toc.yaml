@@ -339,6 +339,17 @@ toc:
     title: mslr_web
   title: Ranking
 - section:
+  - path: /datasets/catalog/criteo
+    status: nightly
+    title: criteo
+  - path: /datasets/catalog/hillstrom
+    status: nightly
+    title: hillstrom
+  - path: /datasets/catalog/simpte
+    status: nightly
+    title: simpte (manual)
+  title: Recommendation
+- section:
   - path: /datasets/catalog/rlu_atari
     title: rlu_atari
   - path: /datasets/catalog/rlu_atari_checkpoints
@@ -492,6 +503,9 @@ toc:
     title: anli
   - path: /datasets/catalog/assin2
     title: assin2
+  - path: /datasets/catalog/beir
+    status: nightly
+    title: beir
   - path: /datasets/catalog/blimp
     title: blimp
   - path: /datasets/catalog/bool_q

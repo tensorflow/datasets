@@ -210,6 +210,15 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`istella`](istella.md)
 *   [`mslr_web`](mslr_web.md)
 
+### `Recommendation`
+
+*   [`criteo`](criteo.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`hillstrom`](hillstrom.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`simpte`](simpte.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Rl unplugged`
 
 *   [`rlu_atari`](rlu_atari.md)
@@ -304,6 +313,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`anli`](anli.md)
 *   [`assin2`](assin2.md)
+*   [`beir`](beir.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`blimp`](blimp.md)
 *   [`bool_q`](bool_q.md)
 *   [`c4`](c4.md)
