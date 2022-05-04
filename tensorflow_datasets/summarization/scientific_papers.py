@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """Scientific Papers Dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -45,6 +41,7 @@ Scientific papers datasets contains two sets of long and structured documents.
 The datasets are obtained from ArXiv and PubMed OpenAccess repositories.
 
 Both "arxiv" and "pubmed" have two features:
+
   - article: the body of the document, pagragraphs seperated by "/n".
   - abstract: the abstract of the document, pagragraphs seperated by "/n".
   - section_names: titles of sections, seperated by "/n".
@@ -56,17 +53,16 @@ _SUMMARY = "abstract"
 
 _URLS = {
     "arxiv":
-        "https://drive.google.com/uc?export=download&id=1K2kDBTNXS2ikx9xKmi2Fy0Wsc5u_Lls0",
+        "https://drive.google.com/uc?id=1b3rmCSIoh6VhD4HKWjI4HOW-cSwcwbeC&export=download",
     "pubmed":
-        "https://drive.google.com/uc?export=download&id=1Sa3kip8IE0J1SkMivlgOwq1jBgOnzeny",
+        "https://drive.google.com/uc?id=1lvsqvsFi3W-pE1SqNZI0s8NR9rC1tsja&export=download",
 }
 
 
 class ScientificPapersConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Scientific Papers."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, filename=None, **kwargs):
+  def __init__(self, *, filename=None, **kwargs):
     """BuilderConfig for Wikihow.
 
     Args:
@@ -75,7 +71,9 @@ class ScientificPapersConfig(tfds.core.BuilderConfig):
     """
     # 1.1.0 remove sentence breaker <S> and </S> in summary.
     super(ScientificPapersConfig, self).__init__(
-        version=tfds.core.Version("1.1.0"), **kwargs)
+        version=tfds.core.Version("1.1.1"),
+        supported_versions=[tfds.core.Version("1.1.0")],
+        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.filename = filename
 
 
@@ -107,7 +105,7 @@ class ScientificPapers(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract(_URLS)
     path = os.path.join(dl_paths[self.builder_config.name],
-                        self.builder_config.name + "-release")
+                        self.builder_config.name + "-dataset")
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,

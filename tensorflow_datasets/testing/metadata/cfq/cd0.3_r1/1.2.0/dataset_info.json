@@ -1,0 +1,1190 @@
+{
+  "citation": "@inproceedings{Keysers2020,\n  title={Measuring Compositional Generalization: A Comprehensive Method on\n         Realistic Data},\n  author={Daniel Keysers and Nathanael Sch\"{a}rli and Nathan Scales and\n          Hylke Buisman and Daniel Furrer and Sergii Kashubin and\n          Nikola Momchev and Danila Sinopalnikov and Lukasz Stafiniak and\n          Tibor Tihon and Dmitry Tsarkov and Xiao Wang and Marc van Zee and\n          Olivier Bousquet},\n  booktitle={ICLR},\n  year={2020},\n  url={https://arxiv.org/abs/1912.09713.pdf},\n}",
+  "description": "The CFQ dataset (and it's splits) for measuring compositional generalization.\n\nSee https://arxiv.org/abs/1912.09713.pdf for background.\n\nA note about the validation set: Since it has the same distribution as the test\nset and we are interested in measuring the compositional generalization of a\n*model* with respect to an *unknown* test distribution we suggest that any\ntuning should be done on a subset of the train set only (see section 5.1 of the\npaper).\n\nExample usage:\n\n```\ndata = tfds.load('cfq/mcd1')\n```",
+  "downloadSize": "267599061",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/google-research/tree/master/cfq"
+    ]
+  },
+  "name": "cfq",
+  "schema": {
+    "feature": [
+      {
+        "domain": "query",
+        "name": "query",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "question",
+        "name": "question",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      }
+    ],
+    "stringDomain": [
+      {
+        "name": "query",
+        "value": [
+          "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0 .\n?x0 ns:film.film.written_by M1\n}",
+          "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0 .\n?x0 ns:film.film.written_by M1\n}",
+          "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.written_by M1\n}",
+          "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.written_by M1\n}",
+          "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.actor.film/ns:film.performance.film ?x0 .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0\n}",
+          "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.film_art_director.films_art_directed ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0\n}",
+          "SELECT count(*) WHERE {\n?x0 ns:film.director.film M0 .\n?x0 ns:film.editor.film M0 .\n?x0 ns:film.producer.films_executive_produced M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M1 .\n?x0 ns:film.writer.film M0\n}",
+          "SELECT count(*) WHERE {\nM0 ns:film.actor.film/ns:film.performance.film M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M1\n}",
+          "SELECT count(*) WHERE {\nM0 ns:film.cinematographer.film M1 .\nM0 ns:film.editor.film M1 .\nM0 ns:film.film_costumer_designer.costume_design_for_film M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M1\n}",
+          "SELECT count(*) WHERE {\nM0 ns:film.director.film M1 .\nM0 ns:film.writer.film M1\n}"
+        ]
+      },
+      {
+        "name": "question",
+        "value": [
+          "Who was influenced by M1 's director 's spouse",
+          "Who was influenced by M1 's founder 's sibling",
+          "Who was influenced by M1 's prequel 's director",
+          "Who was influenced by M1 's sibling 's child",
+          "Who was influenced by M1 and M2 and influenced by a editor and cinematographer of M3 , M4 , M5 , and M6",
+          "Who was influenced by a editor and cinematographer of M1 , M2 , and M3",
+          "Who was influenced by a film distributor 's founder 's sibling",
+          "Who was influenced by a sibling of M1 's founder and employee",
+          "Who was influenced by and married M1 's child 's child",
+          "Who wrote M1 's sequel 's prequel"
+        ]
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "4855427",
+      "shardLengths": [
+        "11968"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "query"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 304.52725,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "11968",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "11968"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0 .\n?x0 ns:film.film.written_by M1\n}",
+                    "sampleCount": 36.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "SELECT count(*) WHERE {\n?x0 ns:film.film.directed_by M0 .\n?x0 ns:film.film.edited_by M0 .\n?x0 ns:film.film.executive_produced_by M0 .\n?x0 ns:film.film.prequel M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M0 .\n?x0 ns:film.film.written_by M0\n}",
+                    "lowRank": "1",
+                    "sampleCount": 12.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "SELECT count(*) WHERE {\n?x0 ns:film.director.film M0 .\n?x0 ns:film.editor.film M0 .\n?x0 ns:film.producer.films_executive_produced M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M0 .\n?x0 ns:film.writer.film M0 .\n?x0 ns:people.person.parents|ns:fictional_universe.fictional_character.parents|ns:organization.organization.parent/ns:organization.organization_relationship.parent M1\n}",
+                    "lowRank": "2",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "SELECT count(*) WHERE {\n?x0 ns:film.director.film M0 .\n?x0 ns:film.editor.film M0 .\n?x0 ns:film.producer.films_executive_produced M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M1 .\n?x0 ns:film.writer.film M0\n}",
+                    "lowRank": "3",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "SELECT count(*) WHERE {\nM0 ns:film.director.film M1 .\nM0 ns:film.editor.film M1\n}",
+                    "lowRank": "4",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "SELECT count(*) WHERE {\n?x0 ns:film.director.film M0 .\n?x0 ns:film.editor.film M0 .\n?x0 ns:film.producer.films_executive_produced M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M0 .\n?x0 ns:film.writer.film M0 .\n?x0 ns:people.person.children|ns:fictional_universe.fictional_character.children|ns:organization.organization.child/ns:organization.organization_relationship.child M1\n}",
+                    "lowRank": "5",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.film_art_director.films_art_directed ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0\n}",
+                    "lowRank": "6",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.written_by M1\n}",
+                    "lowRank": "7",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1\n}",
+                    "lowRank": "8",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.distributors/ns:film.film_film_distributor_relationship.distributor M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0\n}",
+                    "lowRank": "9",
+                    "sampleCount": 7.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 36.0,
+                  "value": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0 .\n?x0 ns:film.film.written_by M1\n}"
+                },
+                {
+                  "frequency": 12.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 ns:film.film.directed_by M0 .\n?x0 ns:film.film.edited_by M0 .\n?x0 ns:film.film.executive_produced_by M0 .\n?x0 ns:film.film.prequel M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M0 .\n?x0 ns:film.film.written_by M0\n}"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 ns:film.director.film M0 .\n?x0 ns:film.editor.film M0 .\n?x0 ns:film.producer.films_executive_produced M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M0 .\n?x0 ns:film.writer.film M0 .\n?x0 ns:people.person.parents|ns:fictional_universe.fictional_character.parents|ns:organization.organization.parent/ns:organization.organization_relationship.parent M1\n}"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 ns:film.director.film M0 .\n?x0 ns:film.editor.film M0 .\n?x0 ns:film.producer.films_executive_produced M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M1 .\n?x0 ns:film.writer.film M0\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT count(*) WHERE {\nM0 ns:film.director.film M1 .\nM0 ns:film.editor.film M1\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 ns:film.director.film M0 .\n?x0 ns:film.editor.film M0 .\n?x0 ns:film.producer.films_executive_produced M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M0 .\n?x0 ns:film.writer.film M0 .\n?x0 ns:people.person.children|ns:fictional_universe.fictional_character.children|ns:organization.organization.child/ns:organization.organization_relationship.child M1\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.film_art_director.films_art_directed ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.written_by M1\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.distributors/ns:film.film_film_distributor_relationship.distributor M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0\n}"
+                }
+              ],
+              "unique": "10383"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "question"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 61.35578,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "11968",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "11968"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "Who wrote a prequel of M1 's prequel",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Who was influenced by M1 's star 's spouse",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Who was influenced by M1 's prequel 's editor",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Who was influenced by M1 's founder 's spouse",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Who was influenced by M1 's distributor 's employee",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Who was influenced by M1 's costume designer 's spouse",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "Who was influenced by M1 's art director 's sibling",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Who was influenced by M1 's actor 's employer 's employee",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "Who was employed by and founded M1 's sibling 's employer",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Who was employed by and founded M1 's art director 's employer",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote a prequel of M1 's prequel"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's star 's spouse"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's prequel 's editor"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's founder 's spouse"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's distributor 's employee"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's costume designer 's spouse"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's art director 's sibling"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's actor 's employer 's employee"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was employed by and founded M1 's sibling 's employer"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was employed by and founded M1 's art director 's employer"
+                }
+              ],
+              "unique": "11968"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "11968"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "44920241",
+      "shardLengths": [
+        "95743"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "query"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 353.32803,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "95743",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "95743"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "SELECT count(*) WHERE {\nM0 ns:film.actor.film/ns:film.performance.film M1 .\nM0 ns:film.cinematographer.film M1 .\nM0 ns:film.director.film M1 .\nM0 ns:film.editor.film M1 .\nM0 ns:film.film_art_director.films_art_directed M1 .\nM0 ns:film.film_costumer_designer.costume_design_for_film M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M1 .\nM0 ns:film.writer.film M1\n}",
+                    "sampleCount": 120.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.editor.film ?x0 .\nM1 ns:film.producer.films_executive_produced ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0 .\nM1 ns:film.writer.film ?x0\n}",
+                    "lowRank": "1",
+                    "sampleCount": 115.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "SELECT count(*) WHERE {\nM0 ns:film.director.film M1 .\nM0 ns:film.director.film M2 .\nM0 ns:film.director.film M3 .\nM0 ns:film.editor.film M1 .\nM0 ns:film.editor.film M2 .\nM0 ns:film.editor.film M3 .\nM0 ns:film.producer.films_executive_produced M1 .\nM0 ns:film.producer.films_executive_produced M2 .\nM0 ns:film.producer.films_executive_produced M3 .\nM0 ns:film.producer.film|ns:film.production_company.films M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M2 .\nM0 ns:film.producer.film|ns:film.production_company.films M3 .\nM0 ns:film.writer.film M1 .\nM0 ns:film.writer.film M2 .\nM0 ns:film.writer.film M3\n}",
+                    "lowRank": "2",
+                    "sampleCount": 105.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.cinematographer .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}",
+                    "lowRank": "3",
+                    "sampleCount": 94.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:people.person .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}",
+                    "lowRank": "4",
+                    "sampleCount": 93.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.actor .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}",
+                    "lowRank": "5",
+                    "sampleCount": 88.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.editor .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}",
+                    "lowRank": "6",
+                    "sampleCount": 86.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.director .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}",
+                    "lowRank": "7",
+                    "sampleCount": 84.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by ?x1 .\n?x0 ns:film.film.edited_by ?x1 .\n?x0 ns:film.film.executive_produced_by ?x1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies ?x1 .\n?x0 ns:film.film.written_by ?x1 .\n?x1 ns:people.person.parents|ns:fictional_universe.fictional_character.parents|ns:organization.organization.parent/ns:organization.organization_relationship.parent M0\n}",
+                    "lowRank": "8",
+                    "sampleCount": 83.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.producer .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}",
+                    "lowRank": "9",
+                    "sampleCount": 80.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 120.0,
+                  "value": "SELECT count(*) WHERE {\nM0 ns:film.actor.film/ns:film.performance.film M1 .\nM0 ns:film.cinematographer.film M1 .\nM0 ns:film.director.film M1 .\nM0 ns:film.editor.film M1 .\nM0 ns:film.film_art_director.films_art_directed M1 .\nM0 ns:film.film_costumer_designer.costume_design_for_film M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M1 .\nM0 ns:film.writer.film M1\n}"
+                },
+                {
+                  "frequency": 115.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.editor.film ?x0 .\nM1 ns:film.producer.films_executive_produced ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0 .\nM1 ns:film.writer.film ?x0\n}"
+                },
+                {
+                  "frequency": 105.0,
+                  "value": "SELECT count(*) WHERE {\nM0 ns:film.director.film M1 .\nM0 ns:film.director.film M2 .\nM0 ns:film.director.film M3 .\nM0 ns:film.editor.film M1 .\nM0 ns:film.editor.film M2 .\nM0 ns:film.editor.film M3 .\nM0 ns:film.producer.films_executive_produced M1 .\nM0 ns:film.producer.films_executive_produced M2 .\nM0 ns:film.producer.films_executive_produced M3 .\nM0 ns:film.producer.film|ns:film.production_company.films M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M2 .\nM0 ns:film.producer.film|ns:film.production_company.films M3 .\nM0 ns:film.writer.film M1 .\nM0 ns:film.writer.film M2 .\nM0 ns:film.writer.film M3\n}"
+                },
+                {
+                  "frequency": 94.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.cinematographer .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}"
+                },
+                {
+                  "frequency": 93.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:people.person .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}"
+                },
+                {
+                  "frequency": 88.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.actor .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}"
+                },
+                {
+                  "frequency": 86.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.editor .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}"
+                },
+                {
+                  "frequency": 84.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.director .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}"
+                },
+                {
+                  "frequency": 83.0,
+                  "value": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by ?x1 .\n?x0 ns:film.film.edited_by ?x1 .\n?x0 ns:film.film.executive_produced_by ?x1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies ?x1 .\n?x0 ns:film.film.written_by ?x1 .\n?x1 ns:people.person.parents|ns:fictional_universe.fictional_character.parents|ns:organization.organization.parent/ns:organization.organization_relationship.parent M0\n}"
+                },
+                {
+                  "frequency": 80.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.producer .\nM1 ns:film.film.directed_by ?x0 .\nM1 ns:film.film.edited_by ?x0 .\nM1 ns:film.film.executive_produced_by ?x0 .\nM1 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM1 ns:film.film.written_by ?x0 .\nM2 ns:film.film.directed_by ?x0 .\nM2 ns:film.film.edited_by ?x0 .\nM2 ns:film.film.executive_produced_by ?x0 .\nM2 ns:film.film.produced_by|ns:film.film.production_companies ?x0 .\nM2 ns:film.film.written_by ?x0\n}"
+                }
+              ],
+              "unique": "65991"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "question"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 75.83485,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "95743",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 9574.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "95743"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "Who wrote and produced M1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Who wrote and executive produced M1 , M2 , M3 , and M4",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Who wrote and executive produced M1",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Who wrote and edited a sequel of M1",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Who wrote and edited M1 and M2",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Who wrote and edited M1 , M2 , M3 , and M4",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "Who wrote and edited M1",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Who wrote and directed M1 and M2",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "Who wrote and directed M1 , M2 , M3 , and M4",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Who wrote and directed M1",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and produced M1"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and executive produced M1 , M2 , M3 , and M4"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and executive produced M1"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and edited a sequel of M1"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and edited M1 and M2"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and edited M1 , M2 , M3 , and M4"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and edited M1"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and directed M1 and M2"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and directed M1 , M2 , M3 , and M4"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote and directed M1"
+                }
+              ],
+              "unique": "95743"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "95743"
+      }
+    },
+    {
+      "name": "validation",
+      "numBytes": "4830341",
+      "shardLengths": [
+        "11968"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "query"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 302.63696,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "11968",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "11968"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0 .\n?x0 ns:film.film.written_by M1\n}",
+                    "sampleCount": 34.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "SELECT count(*) WHERE {\nM0 ns:film.cinematographer.film M1 .\nM0 ns:film.editor.film M1 .\nM0 ns:film.film_costumer_designer.costume_design_for_film M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M1\n}",
+                    "lowRank": "1",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "SELECT count(*) WHERE {\nM0 ns:film.actor.film/ns:film.performance.film M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M1\n}",
+                    "lowRank": "2",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "SELECT count(*) WHERE {\n?x0 ns:film.director.film M0 .\n?x0 ns:film.editor.film M0 .\n?x0 ns:film.producer.films_executive_produced M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M1 .\n?x0 ns:film.writer.film M0\n}",
+                    "lowRank": "3",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.written_by M1\n}",
+                    "lowRank": "4",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0 .\n?x0 ns:film.film.written_by M1\n}",
+                    "lowRank": "5",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "SELECT count(*) WHERE {\nM0 ns:film.director.film M1 .\nM0 ns:film.writer.film M1\n}",
+                    "lowRank": "6",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.film_art_director.films_art_directed ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0\n}",
+                    "lowRank": "7",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.actor.film/ns:film.performance.film ?x0 .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0\n}",
+                    "lowRank": "8",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.written_by M1\n}",
+                    "lowRank": "9",
+                    "sampleCount": 7.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 34.0,
+                  "value": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0 .\n?x0 ns:film.film.written_by M1\n}"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "SELECT count(*) WHERE {\nM0 ns:film.cinematographer.film M1 .\nM0 ns:film.editor.film M1 .\nM0 ns:film.film_costumer_designer.costume_design_for_film M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M1\n}"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "SELECT count(*) WHERE {\nM0 ns:film.actor.film/ns:film.performance.film M1 .\nM0 ns:film.producer.film|ns:film.production_company.films M1\n}"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 ns:film.director.film M0 .\n?x0 ns:film.editor.film M0 .\n?x0 ns:film.producer.films_executive_produced M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M0 .\n?x0 ns:film.producer.film|ns:film.production_company.films M1 .\n?x0 ns:film.writer.film M0\n}"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.written_by M1\n}"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "SELECT DISTINCT ?x0 WHERE {\n?x0 ns:film.film.directed_by M1 .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.produced_by|ns:film.film.production_companies M1 .\n?x0 ns:film.film.sequel M0 .\n?x0 ns:film.film.written_by M1\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT count(*) WHERE {\nM0 ns:film.director.film M1 .\nM0 ns:film.writer.film M1\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.film_art_director.films_art_directed ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\nM1 ns:film.actor.film/ns:film.performance.film ?x0 .\nM1 ns:film.director.film ?x0 .\nM1 ns:film.producer.film|ns:film.production_company.films ?x0\n}"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "SELECT count(*) WHERE {\n?x0 a ns:film.film .\n?x0 ns:film.film.edited_by M1 .\n?x0 ns:film.film.executive_produced_by M1 .\n?x0 ns:film.film.written_by M1\n}"
+                }
+              ],
+              "unique": "10348"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "question"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 61.156334,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "11968",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 1196.8
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "11968"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "Who wrote M1 's sequel 's prequel",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Who was influenced by and married M1 's child 's child",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Who was influenced by a sibling of M1 's founder and employee",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Who was influenced by a film distributor 's founder 's sibling",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Who was influenced by a editor and cinematographer of M1 , M2 , and M3",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Who was influenced by M1 and M2 and influenced by a editor and cinematographer of M3 , M4 , M5 , and M6",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "Who was influenced by M1 's sibling 's child",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Who was influenced by M1 's prequel 's director",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "Who was influenced by M1 's founder 's sibling",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Who was influenced by M1 's director 's spouse",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "Who wrote M1 's sequel 's prequel"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by and married M1 's child 's child"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by a sibling of M1 's founder and employee"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by a film distributor 's founder 's sibling"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by a editor and cinematographer of M1 , M2 , and M3"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 and M2 and influenced by a editor and cinematographer of M3 , M4 , M5 , and M6"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's sibling 's child"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's prequel 's director"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's founder 's sibling"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "Who was influenced by M1 's director 's spouse"
+                }
+              ],
+              "unique": "11968"
+            },
+            "type": "STRING"
+          }
+        ],
+        "numExamples": "11968"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "question",
+    "output": "query"
+  },
+  "version": "1.2.0"
+}

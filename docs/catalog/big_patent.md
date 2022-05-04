@@ -3,12 +3,16 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="big_patent" />
-  <meta itemprop="description" content="&#10;BIGPATENT, consisting of 1.3 million records of U.S. patent documents&#10;along with human written abstractive summaries.&#10;Each US patent application is filed under a Cooperative Patent Classification&#10;(CPC) code. There are nine such classification categories:&#10;A (Human Necessities), B (Performing Operations; Transporting),&#10;C (Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions),&#10;F (Mechanical Engineering; Lightning; Heating; Weapons; Blasting),&#10;G (Physics), H (Electricity), and&#10;Y (General tagging of new or cross-sectional technology)&#10;&#10;There are two features:&#10;  - description: detailed description of patent.&#10;  - summary: Patent abastract.&#10;&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('big_patent', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="BIGPATENT, consisting of 1.3 million records of U.S. patent documents&#10;along with human written abstractive summaries.&#10;Each US patent application is filed under a Cooperative Patent Classification&#10;(CPC) code. There are nine such classification categories:&#10;A (Human Necessities), B (Performing Operations; Transporting),&#10;C (Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions),&#10;F (Mechanical Engineering; Lightning; Heating; Weapons; Blasting),&#10;G (Physics), H (Electricity), and&#10;Y (General tagging of new or cross-sectional technology)&#10;&#10;There are two features:&#10;  - description: detailed description of patent.&#10;  - summary: Patent abastract.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;big_patent&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/big_patent" />
   <meta itemprop="sameAs" content="https://evasharma.github.io/bigpatent/" />
-  <meta itemprop="citation" content="&#10;@misc{sharma2019bigpatent,&#10;    title={BIGPATENT: A Large-Scale Dataset for Abstractive and Coherent Summarization},&#10;    author={Eva Sharma and Chen Li and Lu Wang},&#10;    year={2019},&#10;    eprint={1906.03741},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}&#10;" />
+  <meta itemprop="citation" content="@misc{sharma2019bigpatent,&#10;    title={BIGPATENT: A Large-Scale Dataset for Abstractive and Coherent Summarization},&#10;    author={Eva Sharma and Chen Li and Lu Wang},&#10;    year={2019},&#10;    eprint={1906.03741},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
 </div>
+
 # `big_patent`
+
+
+*   **Description**:
 
 BIGPATENT, consisting of 1.3 million records of U.S. patent documents along with
 human written abstractive summaries. Each US patent application is filed under a
@@ -21,61 +25,26 @@ categories: A (Human Necessities), B (Performing Operations; Transporting), C
 There are two features: - description: detailed description of patent. -
 summary: Patent abastract.
 
-*   URL:
+*   **Homepage**:
     [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-*   `DatasetBuilder`:
-    [`tfds.summarization.big_patent.BigPatent`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/big_patent.py)
 
-`big_patent` is configured with `tfds.summarization.big_patent.BigPatentConfig`
-and has the following configurations predefined (defaults to the first one):
+*   **Source code**:
+    [`tfds.summarization.BigPatent`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/big_patent.py)
 
-*   `all` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under all categories.
+*   **Versions**:
 
-*   `a` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)a: Human Necessities
+    *   `1.0.0`: lower cased tokenized words
+    *   `2.0.0`: Update to use cased raw strings
+    *   **`2.1.2`** (default): Fix update to cased raw strings.
 
-*   `b` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)b: Performing Operations; Transporting
+*   **Download size**: `9.45 GiB`
 
-*   `c` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)c: Chemistry; Metallurgy
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
-*   `d` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)d: Textiles; Paper
+*   **Feature structure**:
 
-*   `e` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)e: Fixed Constructions
-
-*   `f` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons;
-    Blasting
-
-*   `g` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)g: Physics
-
-*   `h` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)h: Electricity
-
-*   `y` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)y: General tagging of new or cross-sectional technology
-
-## `big_patent/all`
-Patents under all categories.
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 1,341,362
-TRAIN      | 1,207,222
-TEST       | 67,072
-VALIDATION | 67,068
-
-### Features
 ```python
 FeaturesDict({
     'abstract': Text(shape=(), dtype=tf.string),
@@ -83,299 +52,24 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Feature documentation**:
 
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
+Feature     | Class        | Shape | Dtype     | Description
+:---------- | :----------- | :---- | :-------- | :----------
+            | FeaturesDict |       |           |
+abstract    | Text         |       | tf.string |
+description | Text         |       | tf.string |
 
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('description', 'abstract')`
 
-## `big_patent/a`
-Patents under Cooperative Patent Classification (CPC)a: Human Necessities
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-Versions:
+*   **Citation**:
 
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 193,483
-TRAIN      | 174,134
-TEST       | 9,675
-VALIDATION | 9,674
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/b`
-
-Patents under Cooperative Patent Classification (CPC)b: Performing Operations;
-Transporting
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 179,467
-TRAIN      | 161,520
-TEST       | 8,974
-VALIDATION | 8,973
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/c`
-Patents under Cooperative Patent Classification (CPC)c: Chemistry; Metallurgy
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 112,269
-TRAIN      | 101,042
-TEST       | 5,614
-VALIDATION | 5,613
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/d`
-Patents under Cooperative Patent Classification (CPC)d: Textiles; Paper
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 11,294
-TRAIN      | 10,164
-TEST       | 565
-VALIDATION | 565
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/e`
-Patents under Cooperative Patent Classification (CPC)e: Fixed Constructions
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 38,271
-TRAIN      | 34,443
-TEST       | 1,914
-VALIDATION | 1,914
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/f`
-
-Patents under Cooperative Patent Classification (CPC)f: Mechanical Engineering;
-Lightning; Heating; Weapons; Blasting
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 95,076
-TRAIN      | 85,568
-TEST       | 4,754
-VALIDATION | 4,754
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/g`
-Patents under Cooperative Patent Classification (CPC)g: Physics
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 287,706
-TRAIN      | 258,935
-TEST       | 14,386
-VALIDATION | 14,385
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/h`
-Patents under Cooperative Patent Classification (CPC)h: Electricity
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 285,577
-TRAIN      | 257,019
-TEST       | 14,279
-VALIDATION | 14,279
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/y`
-
-Patents under Cooperative Patent Classification (CPC)y: General tagging of new
-or cross-sectional technology
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 138,219
-TRAIN      | 124,397
-TEST       | 6,911
-VALIDATION | 6,911
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## Citation
 ```
 @misc{sharma2019bigpatent,
     title={BIGPATENT: A Large-Scale Dataset for Abstractive and Coherent Summarization},
@@ -387,4 +81,522 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+
+## big_patent/all (default config)
+
+*   **Config description**: Patents under all categories.
+
+*   **Dataset size**: `35.17 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'test'`       | 67,072
+`'train'`      | 1,207,222
+`'validation'` | 67,068
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-all-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## big_patent/a
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)a: Human Necessities
+
+*   **Dataset size**: `5.16 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,675
+`'train'`      | 174,134
+`'validation'` | 9,674
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-a-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## big_patent/b
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)b: Performing Operations; Transporting
+
+*   **Dataset size**: `4.06 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 8,974
+`'train'`      | 161,520
+`'validation'` | 8,973
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-b-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## big_patent/c
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)c: Chemistry; Metallurgy
+
+*   **Dataset size**: `3.63 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 5,614
+`'train'`      | 101,042
+`'validation'` | 5,613
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-c-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## big_patent/d
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)d: Textiles; Paper
+
+*   **Dataset size**: `255.56 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 565
+`'train'`      | 10,164
+`'validation'` | 565
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-d-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## big_patent/e
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)e: Fixed Constructions
+
+*   **Dataset size**: `871.40 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,914
+`'train'`      | 34,443
+`'validation'` | 1,914
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-e-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## big_patent/f
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons; Blasting
+
+*   **Dataset size**: `2.06 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,754
+`'train'`      | 85,568
+`'validation'` | 4,754
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-f-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## big_patent/g
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)g: Physics
+
+*   **Dataset size**: `8.19 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 14,386
+`'train'`      | 258,935
+`'validation'` | 14,385
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-g-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## big_patent/h
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)h: Electricity
+
+*   **Dataset size**: `7.50 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 14,279
+`'train'`      | 257,019
+`'validation'` | 14,279
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-h-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## big_patent/y
+
+*   **Config description**: Patents under Cooperative Patent Classification
+    (CPC)y: General tagging of new or cross-sectional technology
+
+*   **Dataset size**: `3.46 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,911
+`'train'`      | 124,397
+`'validation'` | 6,911
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/big_patent-y-2.1.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

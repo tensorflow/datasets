@@ -1,0 +1,90 @@
+{
+  "citation": "\n@inproceedings{Lake2018GeneralizationWS,\n  title={Generalization without Systematicity: On the Compositional Skills of\n         Sequence-to-Sequence Recurrent Networks},\n  author={Brenden M. Lake and Marco Baroni},\n  booktitle={ICML},\n  year={2018},\n  url={https://arxiv.org/pdf/1711.00350.pdf},\n}\n",
+  "description": "SCAN tasks with various splits.\n\nSCAN is a set of simple language-driven navigation tasks for studying\ncompositional learning and zero-shot generalization.\n\nSee https://github.com/brendenlake/SCAN for a description of the splits.\n\nExample usage:\ndata = tfds.load('scan/length')\n",
+  "location": {
+    "urls": [
+      "https://github.com/brendenlake/SCAN"
+    ]
+  },
+  "name": "scan",
+  "schema": {
+    "feature": [
+      {
+        "name": "actions",
+        "type": "BYTES"
+      },
+      {
+        "name": "commands",
+        "type": "BYTES"
+      }
+    ]
+  },
+  "sizeInBytes": "18680912",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "4182"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "4182"
+              }
+            },
+            "name": "actions",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "4182"
+              }
+            },
+            "name": "commands",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "4182"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "16728"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "16728"
+              }
+            },
+            "name": "actions",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "16728"
+              }
+            },
+            "name": "commands",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "16728"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "commands",
+    "output": "actions"
+  },
+  "version": "1.0.0"
+}

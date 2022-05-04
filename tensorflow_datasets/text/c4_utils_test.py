@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 """Tests for c4_utils."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import os
@@ -59,11 +54,10 @@ def _get_counters():
 
 class C4UtilsTest(testing.TestCase):
 
-  def run_clean_page(self, features, badwords=None):
+  def run_clean_page(self, features):
     counters, counter_inc_fn = _get_counters()
-    results = list(
-        c4_utils.get_clean_page_fn(badwords)(
-            url_and_features=("url", features), counter_inc_fn=counter_inc_fn))
+    results = list(c4_utils.get_clean_page_fn()(
+        url_and_features=("url", features), counter_inc_fn=counter_inc_fn))
     self.assertLessEqual(len(results), 1)
     result = None if not results else results[0][1]
     return result, counters
@@ -78,12 +72,12 @@ class C4UtilsTest(testing.TestCase):
     self.assertEqual(EXPECTED_CLEAN_EN, clean_en["text"])
     self.assertEqual(
         {
-            "lines-valid": 2,
-            "lines-too-short": 1,
-            "lines-no-endmark": 2,
-            "lines-javascript": 2,
-            "lines-policy": 3,
-            "emitted-clean-pages": 1
+            "line-passed": 2,
+            "line-filtered:too_short": 1,
+            "line-filtered:no_endmark": 2,
+            "line-filtered:javascript": 2,
+            "line-filtered:policy": 3,
+            "passed": 1
         }, dict(counters))
 
   def test_clean_page_toofewsentences(self):
@@ -95,10 +89,10 @@ This line looks like it has three sentences...but it's actually just 1."""
         "content-length": FAKE_CONTENT_LENGTH,
         "timestamp": FAKE_TIMESTAMP
     })
-    self.assertEqual(None, clean_en)
+    self.assertIsNone(clean_en)
     self.assertEqual({
-        "lines-valid": 2,
-        "filtered-url-toofewsentences": 1
+        "line-passed": 2,
+        "filtered:too_few_sentences": 1
     }, dict(counters))
 
   def test_clean_page_squigglybracket(self):
@@ -112,10 +106,10 @@ fn foo(a) { bar = a + 10; }."""
         "content-length": FAKE_CONTENT_LENGTH,
         "timestamp": FAKE_TIMESTAMP,
     })
-    self.assertEqual(None, clean_en)
+    self.assertIsNone(clean_en)
     self.assertEqual({
-        "filtered-url-squigglybracket": 1,
-        "lines-valid": 3
+        "filtered:squigglybracket": 1,
+        "line-passed": 3
     }, dict(counters))
 
   def test_clean_page_loremipsum(self):
@@ -129,59 +123,8 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
         "content-length": FAKE_CONTENT_LENGTH,
         "timestamp": FAKE_TIMESTAMP
     })
-    self.assertEqual(None, clean_en)
-    self.assertEqual({"filtered-url-loremipsum": 1}, dict(counters))
-
-  def test_clean_page_badwords(self):
-    padding_text = """This page starts out with some text.
-Everything looks good at first, since these are sentences.
-But then, all of a sudden, there's a badword... or not?
-"""
-    final_sentences = [
-        # Make sure ass in a longer word doesn't cause false-positive
-        "I asked my friend for assistance polishing my cutlass.",
-        # Check that a standard appearance of a badword triggers
-        "He took the saddle and put it on his ass in preparation for travel.",
-        # Make sure lowercasing works
-        "Ass is one of several species of small, horse-like animals."
-        # Make sure it will still trigger when surrounded by punctuation.
-        "Donkey is one synonym for the word \"ass\"."
-    ]
-    outputs_should_be_none = [False, True, True, True]
-    expected_counters = [
-        {
-            "lines-valid": 4,
-            "emitted-clean-pages": 1
-        },
-        {
-            "lines-valid": 3,
-            "filtered-url-badword": 1
-        },
-        {
-            "lines-valid": 3,
-            "filtered-url-badword": 1
-        },
-        {
-            "lines-valid": 3,
-            "filtered-url-badword": 1
-        },
-    ]
-    for final_sentence, output_should_be_none, expected_counter in zip(
-        final_sentences, outputs_should_be_none, expected_counters):
-      text = padding_text + final_sentence
-      out, counters = self.run_clean_page(
-          {
-              "text": text,
-              "content-type": FAKE_CONTENT_TYPE,
-              "content-length": FAKE_CONTENT_LENGTH,
-              "timestamp": FAKE_TIMESTAMP
-          },
-          badwords=["ass"])
-      if output_should_be_none:
-        self.assertEqual(None, out)
-      else:
-        self.assertEqual(text, out["text"])
-      self.assertEqual(expected_counter, dict(counters))
+    self.assertIsNone(clean_en)
+    self.assertEqual({"filtered:loremipsum": 1}, dict(counters))
 
   def test_clean_page_citations(self):
     text = """This page has some text.
@@ -193,9 +136,9 @@ Or have requested citations[citation needed]. Or the option to edit.[edit]
 And some of these lines end with citations.
 Or have requested citations. Or the option to edit."""
     expected_counters = {
-        "lines-valid": 3,
-        "lines-no-endmark": 1,
-        "emitted-clean-pages": 1
+        "line-passed": 3,
+        "line-filtered:no_endmark": 1,
+        "passed": 1
     }
     out, counters = self.run_clean_page({
         "text": text,
@@ -218,9 +161,9 @@ Let's talk about the Cookie Policy now.
 But at the end it has some polciy lines.
 This line should be okay."""
     expected_counters = {
-        "lines-valid": 3,
-        "lines-policy": 3,
-        "emitted-clean-pages": 1
+        "line-passed": 3,
+        "line-filtered:policy": 3,
+        "passed": 1
     }
     out, counters = self.run_clean_page({
         "text": text,
@@ -235,41 +178,42 @@ This line should be okay."""
     import apache_beam.testing.util as beam_testing_util  # pylint:disable=g-import-not-at-top
     beam = lazy_imports.apache_beam
     input_urls_and_text = [
-        ("url/1-0",
-         "This is a duplicated line.\nThis is a unique line.\n"
-         "This one comes first and so it stays."),
+        ("url/1-0", "This is a duplicated line.\nThis is a unique line.\n"
+         "This one comes first and so it stays.\n"
+         "This one is duplicate within the page so the others are removed.\n"
+         "Here is a sentence between the duplicates.\n"
+         "This one is duplicate within the page so the others are removed.\n"
+         "this One is Duplicate WITHIN the page so the others are removed. "),
         ("url/2-1",
          "This is 2nd unique line.\nThis one comes second so it is removed "
          "even though the capitalizaiton is different.\n"
          "this is a Duplicated line. "),
-        ("url/3-4",
-         "This is a 3rd unique line.\nThis is a duplicated line.\n"
+        ("url/3-4", "This is a 3rd unique line.\nThis is a duplicated line.\n"
          "This one comes third and so it is removed. But the page stays "
          "because there are still 3 sentences remaining."),
-        ("url/4-4",
-         "This is a 4th unique line.\nThis is a duplicated line.\n"
+        ("url/4-4", "This is a 4th unique line.\nThis is a duplicated line.\n"
          "This one comes third and so it is removed, and the page is too "
          "since there aren't enough sentences left."),
     ]
     expected_urls_and_text = [
-        ("url/1-0",
-         "This is a duplicated line.\nThis is a unique line.\n"
-         "This one comes first and so it stays."),
-        ("url/3-4",
-         "This is a 3rd unique line.\n"
+        ("url/1-0", "This is a duplicated line.\nThis is a unique line.\n"
+         "This one comes first and so it stays.\n"
+         "This one is duplicate within the page so the others are removed.\n"
+         "Here is a sentence between the duplicates."),
+        ("url/3-4", "This is a 3rd unique line.\n"
          "This one comes third and so it is removed. But the page stays "
          "because there are still 3 sentences remaining."),
     ]
     with beam.Pipeline() as pipeline:
-      pages = pipeline | beam.Create([
-          (url, {"text": text}) for url, text in input_urls_and_text
-      ])
+      pages = pipeline | beam.Create([(url, {
+          "text": text
+      }) for url, text in input_urls_and_text])
       deduped_pages = c4_utils.remove_duplicate_text(pages)
       beam_testing_util.assert_that(
           deduped_pages,
-          beam_testing_util.equal_to([
-              (url, {"text": text}) for url, text in expected_urls_and_text
-          ]))
+          beam_testing_util.equal_to([(url, {
+              "text": text
+          }) for url, text in expected_urls_and_text]))
 
   def test_split_wet_file(self):
     if six.PY2:
@@ -278,14 +222,78 @@ This line should be okay."""
     counters, counter_inc_fn = _get_counters()
     list(
         c4_utils.split_wet_file(
-            os.path.join(testing.fake_examples_dir(), "c4", "cc_0.warc.wet.gz"),
+            os.path.join(testing.fake_examples_dir(),
+                         "c4/c4_wet_files/cc_0.warc.wet.gz"),
             counter_inc_fn=counter_inc_fn))
-    self.assertEqual(
-        {
-            "wet-file": 1,
-            "page-emitted": 2,
-            "page-filitered-nourl": 1,
-        }, dict(counters))
+    self.assertEqual({
+        "wet-file": 1,
+        "passed": 6,
+        "filtered:no_url": 1,
+    }, dict(counters))
+
+  def test_badwords_filter(self):
+    padding_text = """This page starts out with some text.
+Everything looks good at first, since these are sentences.
+But then, all of a sudden, there's a badword... or not?
+"""
+    final_sentences = [
+        # Make sure ass in a longer word doesn't cause false-positive
+        "I asked my friend for assistance polishing my cutlass.",
+        # Check that a standard appearance of a badword triggers
+        "He took the saddle and put it on his ass in preparation for travel.",
+        # Make sure lowercasing works
+        "Ass is one of several species of small, horse-like animals.",
+        # Make sure it will still trigger when surrounded by punctuation.
+        "Donkey is one synonym for the word \"ass\".",
+        # Make sure it correctly handles different languages.
+        "Ass is not a badword in Spanish.",
+        "Culo is though.",
+        "Ass and culo aren't badwords in German.",
+    ]
+    languages = [
+        "en",
+        "en",
+        "en-latin",
+        "en",
+        "es",
+        "es",
+        "de",  # doesn't have badwords listed
+    ]
+    expected_outputs = [True, False, False, False, True, False, True]
+    badwords_filter_fn = c4_utils.get_badwords_filter_fn(badwords={
+        "en": ["ass"],
+        "es": ["culo"]
+    })
+
+    outputs = [
+        badwords_filter_fn(  # pylint:disable=g-complex-comprehension
+            ("fakeurl", {
+                "text": padding_text + final_sentence,
+                "content-type": FAKE_CONTENT_TYPE,
+                "content-length": FAKE_CONTENT_LENGTH,
+                "timestamp": FAKE_TIMESTAMP,
+                "language": language,
+            })) for final_sentence, expected_output, language in zip(
+                final_sentences, expected_outputs, languages)
+    ]
+
+    self.assertListEqual(expected_outputs, outputs)
+
+  def test_paragraph_filter(self):
+    text = """This line is long enough to be a paragraph.
+This one is not.
+This one is. I promise!
+"""
+    additional_paragraph = "If we add this paragraph, the page should pass."
+
+    page = ("url", {"text": text})
+    self.assertFalse(
+        c4_utils.paragraph_filter(page, min_paragraphs=2, min_paragraph_len=20))
+    self.assertFalse(
+        c4_utils.paragraph_filter(page, min_paragraphs=3, min_paragraph_len=20))
+    page = ("url", {"text": text + additional_paragraph})
+    self.assertTrue(
+        c4_utils.paragraph_filter(page, min_paragraphs=3, min_paragraph_len=20))
 
 
 if __name__ == "__main__":

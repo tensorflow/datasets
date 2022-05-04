@@ -1,0 +1,60 @@
+{
+  "citation": "@inproceedings{larson-etal-2019-evaluation,\n    title = \"An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction\",\n    author = \"Larson, Stefan  and\n      Mahendran, Anish  and\n      Peper, Joseph J.  and\n      Clarke, Christopher  and\n      Lee, Andrew  and\n      Hill, Parker  and\n      Kummerfeld, Jonathan K.  and\n      Leach, Kevin  and\n      Laurenzano, Michael A.  and\n      Tang, Lingjia  and\n      Mars, Jason\",\n    booktitle = \"Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)\",\n    month = nov,\n    year = \"2019\",\n    address = \"Hong Kong, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/D19-1131\",\n    doi = \"10.18653/v1/D19-1131\",\n    pages = \"1311--1316\",\n}",
+  "description": "Task-oriented dialog systems need to know when a query falls outside their range of supported intents, but current text classification corpora only define label sets that cover every example. We introduce a new dataset that includes queries that are out-of-scope (OOS), i.e., queries that do not fall into any of the system's supported intents. This poses a new challenge because models cannot assume that every query at inference time belongs to a system-supported intent class. Our dataset also covers 150 intent classes over 10 domains, capturing the breadth that a production task-oriented agent must handle. It offers a way of more rigorously and realistically benchmarking text classification in task-driven dialog systems.",
+  "downloadSize": "262154",
+  "location": {
+    "urls": [
+      "https://github.com/clinc/oos-eval/"
+    ]
+  },
+  "name": "clinc_oos",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "677629",
+      "shardLengths": [
+        "4500"
+      ]
+    },
+    {
+      "name": "test_oos",
+      "numBytes": "144007",
+      "shardLengths": [
+        "1000"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "2268118",
+      "shardLengths": [
+        "15000"
+      ]
+    },
+    {
+      "name": "train_oos",
+      "numBytes": "13752",
+      "shardLengths": [
+        "100"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "453291",
+      "shardLengths": [
+        "3000"
+      ]
+    },
+    {
+      "name": "validation_oos",
+      "numBytes": "13590",
+      "shardLengths": [
+        "100"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "text",
+    "output": "intent"
+  },
+  "version": "0.1.0"
+}

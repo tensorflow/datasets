@@ -1,0 +1,3 @@
+https://s3-us-west-2.amazonaws.com/imagenetv2public/imagenetv2-matched-frequency.tar.gz	1264079360	f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c	imagenetv2-matched-frequency.tar.gz
+https://s3-us-west-2.amazonaws.com/imagenetv2public/imagenetv2-threshold0.7.tar.gz	1249906176	32142bfe998f9cfa4141be691f6a80eeb1e27b24bd532a668eb08c26d98897a2	imagenetv2-threshold0.7.tar.gz
+https://s3-us-west-2.amazonaws.com/imagenetv2public/imagenetv2-top-images.tar.gz	1245927936	85e4ace30f3f0d660152062254b8759dda66267b27f7ec0fd8d5768f1073a04b	imagenetv2-top-images.tar.gz

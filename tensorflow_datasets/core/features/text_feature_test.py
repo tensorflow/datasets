@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,18 +14,12 @@
 # limitations under the License.
 
 # coding=utf-8
-"""Tests for tensorflow_datasets.core.features.text_feature."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Tests for tensorflow_datasets.core.deprecated.text_feature."""
 
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core.features.text import text_encoder
-
-tf.compat.v1.enable_eager_execution()
+from tensorflow_datasets.core.deprecated.text import text_encoder
 
 
 class TextFeatureTest(testing.FeatureExpectationsTestCase):
@@ -76,7 +70,7 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=[],
             ),
         ],
-    )
+        skip_feature_tests=True)
 
   def test_text_conversion(self):
     text_f = features.Text(encoder=text_encoder.ByteTextEncoder())

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """The SuperGLUE benchmark."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -284,8 +280,8 @@ _AXG_CITATION = """\
 class SuperGlueConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SuperGLUE."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                features,
                data_url,
                citation,
@@ -312,8 +308,7 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     # 0.0.2: Initial version.
     super(SuperGlueConfig, self).__init__(
-        version=tfds.core.Version("1.0.2"),
-        **kwargs)
+        version=tfds.core.Version("1.0.2"), **kwargs)
     self.features = features
     self.label_classes = label_classes
     self.data_url = data_url
@@ -469,7 +464,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
 
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_GLUE_DESCRIPTION + self.builder_config.description,
+        description=_GLUE_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation + "\n" + _SUPER_GLUE_CITATION,
@@ -569,6 +564,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
 
 def _fix_wst(ex):
   """Fixes most cases where spans are not actually substrings of text."""
+
   def _fix_span_text(k):
     """Fixes a single span."""
     text = ex[k + "_text"]
@@ -583,10 +579,10 @@ def _fix_wst(ex):
       return
 
     if "theyscold" in text:
-      ex["text"].replace("theyscold", "they scold")
+      ex["text"].replace("theyscold", "they scold")  # pytype: disable=attribute-error
       ex["span2_index"] = 10
     # Make sure case of the first words match.
-    first_word = ex["text"].split()[index]
+    first_word = ex["text"].split()[index]  # pytype: disable=attribute-error
     if first_word[0].islower():
       text = text[0].lower() + text[1:]
     else:
@@ -597,6 +593,7 @@ def _fix_wst(ex):
     text = text.replace("\n", " ")
     ex[k + "_text"] = text
     assert ex[k + "_text"] in ex["text"], ex
+
   _fix_span_text("span1")
   _fix_span_text("span2")
   return ex

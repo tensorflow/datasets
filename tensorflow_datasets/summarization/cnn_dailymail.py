@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,15 +14,12 @@
 # limitations under the License.
 
 """CNN/DailyMail Summarization dataset, non-anonymized version."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 import hashlib
 import os
 from absl import logging
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
 
 _DESCRIPTION = """\
 CNN/DailyMail non-anonymized summarization dataset.
@@ -63,55 +60,27 @@ _CITATION = """\
 
 _DL_URLS = {
     # pylint: disable=line-too-long
-    'cnn_stories': 'https://drive.google.com/uc?export=download&id=0BwmD_VLjROrfTHk4NFg2SndKcjQ',
-    'dm_stories': 'https://drive.google.com/uc?export=download&id=0BwmD_VLjROrfM1BxdkxVaTY2bWs',
-    'test_urls': 'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_test.txt',
-    'train_urls': 'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_train.txt',
-    'val_urls': 'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_val.txt',
+    'cnn_stories':
+        'https://drive.google.com/uc?export=download&id=0BwmD_VLjROrfTHk4NFg2SndKcjQ',
+    'dm_stories':
+        'https://drive.google.com/uc?export=download&id=0BwmD_VLjROrfM1BxdkxVaTY2bWs',
+    'test_urls':
+        'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_test.txt',
+    'train_urls':
+        'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_train.txt',
+    'val_urls':
+        'https://raw.githubusercontent.com/abisee/cnn-dailymail/master/url_lists/all_val.txt',
     # pylint: enable=line-too-long
 }
 
 _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
-_SUPPORTED_VERSIONS = [
-    tfds.core.Version('0.0.2', experiments={tfds.core.Experiment.S3: False}),
-    # Same data as 0.0.2
-    tfds.core.Version('1.0.0',
-                      'New split API (https://tensorflow.org/datasets/splits)')]
-
-# Having the model predict newline separators makes it easier to evaluate
-# using summary-level ROUGE.
-_DEFAULT_VERSION = tfds.core.Version('2.0.0',
-                                     'Separate target sentences with newline.')
-
-
-class CnnDailymailConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for CnnDailymail."""
-
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
-    """BuilderConfig for CnnDailymail.
-
-    Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the CnnDailymail
-        (text) features
-      **kwargs: keyword arguments forwarded to super.
-    """
-    # Version history:
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    # 0.0.2: Initial version.
-    super(CnnDailymailConfig, self).__init__(
-        version=_DEFAULT_VERSION,
-        supported_versions=_SUPPORTED_VERSIONS,
-        **kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
 
 
 def _get_url_hashes(path):
   """Get hashes of urls in file."""
   urls = _read_text_file(path)
+
   def url_hash(u):
     h = hashlib.sha1()
     try:
@@ -120,6 +89,7 @@ def _get_url_hashes(path):
       logging.error('Cannot hash url: %s', u)
     h.update(u)
     return h.hexdigest()
+
   return {url_hash(u): True for u in urls}
 
 
@@ -161,8 +131,10 @@ def _subset_filenames(dl_paths, split):
 DM_SINGLE_CLOSE_QUOTE = u'\u2019'  # unicode
 DM_DOUBLE_CLOSE_QUOTE = u'\u201d'
 # acceptable ways to end a sentence
-END_TOKENS = ['.', '!', '?', '...', "'", '`', '"',
-              DM_SINGLE_CLOSE_QUOTE, DM_DOUBLE_CLOSE_QUOTE, ')']
+END_TOKENS = [
+    '.', '!', '?', '...', "'", '`', '"', DM_SINGLE_CLOSE_QUOTE,
+    DM_DOUBLE_CLOSE_QUOTE, ')'
+]
 
 
 def _read_text_file(text_file):
@@ -173,15 +145,14 @@ def _read_text_file(text_file):
   return lines
 
 
-def _get_art_abs(story_file, tfds_version):
+def _get_art_abs(story_file):
   """Get abstract (highlights) and article from a story file path."""
   # Based on https://github.com/abisee/cnn-dailymail/blob/master/
   #     make_datafiles.py
 
   lines = _read_text_file(story_file)
 
-  # Lowercase everything
-  lines = [line.lower() for line in lines]
+  # The github code lowercase the text and we removed it in 3.0.0.
 
   # Put periods on the ends of lines that are missing them
   # (this is a problem in the dataset because many image captions don't end in
@@ -189,10 +160,14 @@ def _get_art_abs(story_file, tfds_version):
   # sentences)
   def fix_missing_period(line):
     """Adds a period to a line that is missing a period."""
-    if '@highlight' in line: return line
-    if not line: return line
-    if line[-1] in END_TOKENS: return line
-    return line + ' .'
+    if '@highlight' in line:
+      return line
+    if not line:
+      return line
+    if line[-1] in END_TOKENS:
+      return line
+    return line + '.'
+
   lines = [fix_missing_period(line) for line in lines]
 
   # Separate out article and abstract sentences
@@ -211,38 +186,33 @@ def _get_art_abs(story_file, tfds_version):
 
   # Make article into a single string
   article = ' '.join(article_lines)
-
-  if tfds_version >= '2.0.0':
-    abstract = '\n'.join(highlights)
-  else:
-    abstract = ' '.join(highlights)
+  abstract = '\n'.join(highlights)
 
   return article, abstract
 
 
 class CnnDailymail(tfds.core.GeneratorBasedBuilder):
   """CNN/DailyMail non-anonymized summarization dataset."""
-  BUILDER_CONFIGS = [
-      CnnDailymailConfig(
-          name='plain_text',
-          description='Plain text',
-      ),
-      CnnDailymailConfig(
-          name='bytes',
-          description=('Uses byte-level text encoding with '
-                       '`tfds.features.text.ByteTextEncoder`'),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder=tfds.features.text.ByteTextEncoder()),
-      ),
-      CnnDailymailConfig(
-          name='subwords32k',
-          description=('Uses `tfds.features.text.SubwordTextEncoder` with '
-                       '32k vocab size'),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
-              vocab_size=2**15),
-      ),
-  ]
+
+  VERSION = tfds.core.Version('3.2.0')
+  RELEASE_NOTES = {
+      '1.0.0':
+          'New split API (https://tensorflow.org/datasets/splits)',
+      '2.0.0':
+          """
+      Separate target sentences with newline. (Having the model predict newline
+      separators makes it easier to evaluate using summary-level ROUGE.)
+      """,
+      '3.0.0':
+          'Using cased version.',
+      '3.1.0':
+          'Removed BuilderConfig',
+      '3.2.0':
+          """
+      Remove extra space before added sentence period.
+      This shouldn't affect ROUGE scores because punctuation is removed.
+      """,
+  }
 
   def _info(self):
     # Should return a tfds.core.DatasetInfo object
@@ -250,57 +220,35 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            _ARTICLE: tfds.features.Text(
-                encoder_config=self.builder_config.text_encoder_config),
-            _HIGHLIGHTS: tfds.features.Text(
-                encoder_config=self.builder_config.text_encoder_config),
+            _ARTICLE: tfds.features.Text(),
+            _HIGHLIGHTS: tfds.features.Text(),
         }),
         supervised_keys=(_ARTICLE, _HIGHLIGHTS),
         homepage='https://github.com/abisee/cnn-dailymail',
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, paths):
-    for _, ex in self._generate_examples(paths):
-      yield ' '.join([ex[_ARTICLE], ex[_HIGHLIGHTS]])
-
   def _split_generators(self, dl_manager):
     dl_paths = dl_manager.download_and_extract(_DL_URLS)
     train_files = _subset_filenames(dl_paths, tfds.Split.TRAIN)
-    # Generate shared vocabulary
-    # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
-    self.info.features[_ARTICLE].maybe_build_from_corpus(
-        self._vocab_text_gen(train_files))
-    encoder = self.info.features[_ARTICLE].encoder
-    # Use maybe_set_encoder because the encoder may have been restored from
-    # package data.
-    self.info.features[_HIGHLIGHTS].maybe_set_encoder(encoder)
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            num_shards=100,
-            gen_kwargs={'files': train_files}),
-
+            name=tfds.Split.TRAIN, gen_kwargs={'files': train_files}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=10,
-            gen_kwargs={'files': _subset_filenames(dl_paths,
-                                                   tfds.Split.VALIDATION)}),
+            gen_kwargs={
+                'files': _subset_filenames(dl_paths, tfds.Split.VALIDATION)
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
-            gen_kwargs={'files': _subset_filenames(dl_paths,
-                                                   tfds.Split.TEST)})
+            gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TEST)})
     ]
 
   def _generate_examples(self, files):
     for p in files:
-      article, highlights = _get_art_abs(p, self.version)
+      article, highlights = _get_art_abs(p)
       if not article or not highlights:
         continue
       fname = os.path.basename(p)
-      yield fname, {
-          _ARTICLE: article,
-          _HIGHLIGHTS: highlights
-      }
+      yield fname, {_ARTICLE: article, _HIGHLIGHTS: highlights}

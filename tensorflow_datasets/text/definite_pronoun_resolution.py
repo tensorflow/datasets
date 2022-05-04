@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """The Definite Pronoun Resolution Dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -44,24 +40,13 @@ the fourth line contains the correct antecedent. If the target pronoun appears
 more than once in the sentence, its first occurrence is the one to be resolved.
 """
 
-_DATA_URL_PATTERN = 'http://www.hlt.utdallas.edu/~vince/data/emnlp12/{}.c.txt'
+_DATA_URL_PATTERN = 'https://s3.amazonaws.com/datasets.huggingface.co/definite_pronoun_resolution/{}.c.txt'
 
 
 class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
   """The Definite Pronoun Resolution Dataset."""
-  BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name='plain_text',
-          version=tfds.core.Version(
-              '0.0.1', experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version(
-                  '1.0.0',
-                  'New split API (https://tensorflow.org/datasets/splits)'),
-          ],
-          description='Plain text import of the Definite Pronoun Resolution Dataset.',  # pylint: disable=line-too-long
-      )
-  ]
+
+  VERSION = tfds.core.Version('1.1.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -89,13 +74,9 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
     })
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            num_shards=1,
-            gen_kwargs={'filepath': files['test']}),
+            name=tfds.Split.TEST, gen_kwargs={'filepath': files['test']}),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            num_shards=1,
-            gen_kwargs={'filepath': files['train']}),
+            name=tfds.Split.TRAIN, gen_kwargs={'filepath': files['train']}),
     ]
 
   def _generate_examples(self, filepath):

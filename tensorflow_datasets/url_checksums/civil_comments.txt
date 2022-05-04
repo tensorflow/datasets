@@ -1,0 +1,3 @@
+https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/civil_comments.zip	414947977	767b71a3d9dc7a2eceb234d0c3e7e38604e11f59c12ba1cbb888ffd4ce6b6271	civil_comments.zip
+https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/civil_comments_v1.1.zip	417158441	73641ce4b370c55316fef4ba5210853d4100695604f968dae424e7c80c05d228	civil_comments_v1.1.zip
+https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/civil_comments_v1.2.zip	448174578	89a60573acbbfaf189b2c77278115eefcbc1654dbd8235dd8fbecc1b83f1585c	civil_comments_v1.2.zip

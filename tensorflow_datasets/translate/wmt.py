@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """WMT: Translate dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import codecs
 import functools
@@ -52,7 +48,6 @@ builder = tfds.builder("wmt_translate", config=config)
 ```
 
 """
-
 
 CWMT_SUBSET_NAMES = [
     "casia2015", "casict2011", "casict2015", "datum2015", "datum2017", "neu2017"
@@ -98,6 +93,7 @@ class SubDataset(object):
     """Injects languages into (potentially) template strings."""
     if src not in self.sources:
       raise ValueError("Invalid source for '{0}': {1}".format(self.name, src))
+
     def _format_string(s):
       if "{0}" in s and "{1}" and "{src}" in s:
         return s.format(*sorted([src, self.target]), src=src)
@@ -107,6 +103,7 @@ class SubDataset(object):
         return s.format(src=src)
       else:
         return s
+
     return [_format_string(s) for s in strings]
 
   def get_url(self, src):
@@ -124,7 +121,7 @@ _TRAIN_SUBSETS = [
     # pylint:disable=line-too-long
     SubDataset(
         name="commoncrawl",
-        target="en",   # fr-de pair in commoncrawl_frde
+        target="en",  # fr-de pair in commoncrawl_frde
         sources={"cs", "de", "es", "fr", "ru"},
         url="http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz",
         path=("commoncrawl.{src}-en.{src}", "commoncrawl.{src}-en.en")),
@@ -132,8 +129,10 @@ _TRAIN_SUBSETS = [
         name="commoncrawl_frde",
         target="de",
         sources={"fr"},
-        url=("http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.fr.gz",
-             "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.de.gz"),
+        url=(
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.fr.gz",
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.de.gz"
+        ),
         path=("", "")),
     SubDataset(
         name="czeng_10",
@@ -188,8 +187,10 @@ _TRAIN_SUBSETS = [
         name="europarl_v7_frde",
         target="de",
         sources={"fr"},
-        url=("http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.fr.gz",
-             "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.de.gz"),
+        url=(
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.fr.gz",
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.de.gz"
+        ),
         path=("", "")),
     SubDataset(
         name="europarl_v8_18",
@@ -237,6 +238,13 @@ _TRAIN_SUBSETS = [
         sources={"es", "fr"},
         url="http://www.statmt.org/wmt13/training-parallel-un.tgz",
         path=("un/undoc.2000.{src}-en.{src}", "un/undoc.2000.{src}-en.en")),
+    SubDataset(
+        name="newscommentary_v8",
+        target="en",
+        sources={"cs", "de", "fr", "es", "ru"},
+        url="http://www.statmt.org/wmt13/training-parallel-nc-v8.tgz",
+        path=("training/news-commentary-v8.{src}-en.{src}",
+              "training/news-commentary-v8.{src}-en.en")),
     SubDataset(
         name="newscommentary_v9",
         target="en",
@@ -314,8 +322,10 @@ _TRAIN_SUBSETS = [
         name="paracrawl_v3_frde",
         target="de",
         sources={"fr"},
-        url=("http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.de.gz",
-             "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.fr.gz"),
+        url=(
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.de.gz",
+            "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/de-fr.bicleaner07.fr.gz"
+        ),
         path=("", "")),
     SubDataset(
         name="rapid_2016",
@@ -360,7 +370,7 @@ _TRAIN_SUBSETS = [
         url="http://www.statmt.org/wmt14/wiki-titles.tgz",
         path="wiki/hi-en/wiki-titles.hi-en"),
     SubDataset(
-        # Verified that wmt14 and wmt15 files are identical.
+        # Verified that wmt13, wmt14 and wmt15 files are identical.
         name="wikiheadlines_ru",
         target="en",
         sources={"ru"},
@@ -465,8 +475,7 @@ _DEV_SUBSETS = [
         target="en",
         sources={"cs", "de", "es", "fr"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
-        path=("dev/newssyscomb2009.{src}",
-              "dev/newssyscomb2009.en")),
+        path=("dev/newssyscomb2009.{src}", "dev/newssyscomb2009.en")),
     SubDataset(
         name="newstest2008",
         target="en",
@@ -568,20 +577,18 @@ _CZENG17_FILTER = SubDataset(
     target="en",
     sources={"cs"},
     url="http://ufal.mff.cuni.cz/czeng/download.php?f=convert_czeng16_to_17.pl.zip",
-    path="convert_czeng16_to_17.pl"
-)
+    path="convert_czeng16_to_17.pl")
 
 
 class WmtConfig(tfds.core.BuilderConfig):
   """BuilderConfig for WMT."""
 
-  @tfds.core.disallow_positional_args
   def __init__(self,
+               *,
                url=None,
                citation=None,
                description=None,
                language_pair=(None, None),
-               text_encoder_config=None,
                subsets=None,
                **kwargs):
     """BuilderConfig for WMT.
@@ -592,16 +599,11 @@ class WmtConfig(tfds.core.BuilderConfig):
       description: The description of the dataset.
       language_pair: pair of languages that will be used for translation. Should
                  contain 2 letter coded strings. For example: ("en", "de").
-      text_encoder_config: `tfds.features.text.TextEncoderConfig` (optional),
-        configuration for the `tfds.features.text.TextEncoder` used for the
-        `tfds.features.text.Translation` features.
       subsets: Dict[split, list[str]]. List of the subset to use for each of the
         split. Note that WMT subclasses overwrite this parameter.
       **kwargs: keyword arguments forwarded to super.
     """
     name = "%s-%s" % (language_pair[0], language_pair[1])
-    if text_encoder_config:
-      name += "." + text_encoder_config.name
     if "name" in kwargs:  # Add name suffix for custom configs
       name += "." + kwargs.pop("name")
 
@@ -611,7 +613,6 @@ class WmtConfig(tfds.core.BuilderConfig):
     self.url = url or "http://www.statmt.org"
     self.citation = citation
     self.language_pair = language_pair
-    self.text_encoder_config = text_encoder_config
     self.subsets = subsets
 
 
@@ -625,12 +626,11 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   """
 
   def __init__(self, *args, **kwargs):
-    if type(self) == WmtTranslate and "config" not in kwargs:   # pylint: disable=unidiomatic-typecheck
+    if type(self) == WmtTranslate and "config" not in kwargs:  # pylint: disable=unidiomatic-typecheck
       raise ValueError(
           "The raw `wmt_translate` can only be instantiated with the config "
           "kwargs. You may want to use one of the `wmtYY_translate` "
-          "implementation instead to get the WMT dataset for a specific year."
-      )
+          "implementation instead to get the WMT dataset for a specific year.")
     super(WmtTranslate, self).__init__(*args, **kwargs)
 
   @property
@@ -662,16 +662,11 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair,
-            encoder_config=self.builder_config.text_encoder_config),
+            languages=self.builder_config.language_pair,),
         supervised_keys=(src, target),
         homepage=self.builder_config.url,
         citation=self.builder_config.citation,
     )
-
-  def _vocab_text_gen(self, split_subsets, extraction_map, language):
-    for _, ex in self._generate_examples(split_subsets, extraction_map):
-      yield ex[language]
 
   def _split_generators(self, dl_manager):
     source, _ = self.builder_config.language_pair
@@ -693,6 +688,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
 
     manual_paths = {}
     urls_to_download = {}
+    downloaded_files = {}
     for ss_name in itertools.chain.from_iterable(self.subsets.values()):
       if ss_name == "czeng_17":
         # CzEng1.7 is CzEng1.6 with some blocks filtered out. We must download
@@ -703,28 +699,36 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       if ds.get_manual_dl_files(source):
         manual_paths[ss_name] = _check_manual_files(ds)
       else:
-        urls_to_download[ss_name] = ds.get_url(source)
+        urls = ds.get_url(source)
+        # This domain throws a 503 if we attempt to download in parallel.
+        sequential_dl_urls = [url for url in urls if "www.statmt.org" in url]
+        parallel_dl_urls = [
+            url for url in urls if url not in sequential_dl_urls
+        ]
+        if sequential_dl_urls:
+          downloaded_files[ss_name] = [
+              dl_manager.download_and_extract(url) for url in sequential_dl_urls
+          ] + dl_manager.download_and_extract(parallel_dl_urls)
+        else:
+          urls_to_download[ss_name] = urls
 
     # Download and extract files from URLs.
-    downloaded_files = dl_manager.download_and_extract(urls_to_download)
+    downloaded_files.update(dl_manager.download_and_extract(urls_to_download))
     # Extract manually downloaded files.
     manual_files = dl_manager.extract(manual_paths)
 
-    extraction_map = dict(downloaded_files, **manual_files)
+    manual_files = tf.nest.map_structure(os.fspath, manual_files)
+    downloaded_files = tf.nest.map_structure(os.fspath, downloaded_files)
 
-    # Generate vocabulary from training data if SubwordTextEncoder configured.
-    for language in self.builder_config.language_pair:
-      self.info.features[language].maybe_build_from_corpus(
-          self._vocab_text_gen(
-              self.subsets[tfds.Split.TRAIN], extraction_map, language))
+    extraction_map = dict(downloaded_files, **manual_files)
 
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=split,
-            num_shards=10 if split == tfds.Split.TRAIN else 1,
-            gen_kwargs={"split_subsets": split_subsets,
-                        "extraction_map": extraction_map})
-        for split, split_subsets in self.subsets.items()
+            gen_kwargs={
+                "split_subsets": split_subsets,
+                "extraction_map": extraction_map
+            }) for split, split_subsets in self.subsets.items()
     ]
 
   def _generate_examples(self, split_subsets, extraction_map):
@@ -735,8 +739,10 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       rel_paths = ds.get_path(source)
       if len(extract_dirs) == 1:
         extract_dirs = extract_dirs * len(rel_paths)
-      return [os.path.join(ex_dir, rel_path) if rel_path else ex_dir
-              for ex_dir, rel_path in zip(extract_dirs, rel_paths)]
+      return [
+          os.path.join(ex_dir, rel_path) if rel_path else ex_dir
+          for ex_dir, rel_path in zip(extract_dirs, rel_paths)
+      ]
 
     for ss_name in split_subsets:
       logging.info("Generating examples from: %s", ss_name)
@@ -790,6 +796,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
 
 def _parse_parallel_sentences(f1, f2):
   """Returns examples from parallel SGML or text files, which may be gzipped."""
+
   def _parse_text(path):
     """Returns the sentences from a single text file, which may be gzipped."""
     split_path = path.split(".")
@@ -832,23 +839,20 @@ def _parse_parallel_sentences(f1, f2):
 
   assert f1_files and f2_files, "No matching files found: %s, %s." % (f1, f2)
   assert len(f1_files) == len(f2_files), (
-      "Number of files do not match: %d vs %d for %s vs %s." % (
-          len(f1_files), len(f2_files), f1, f2))
+      "Number of files do not match: %d vs %d for %s vs %s." %
+      (len(f1_files), len(f2_files), f1, f2))
 
   for f_id, (f1_i, f2_i) in enumerate(zip(sorted(f1_files), sorted(f2_files))):
     l1_sentences, l1 = parse_file(f1_i)
     l2_sentences, l2 = parse_file(f2_i)
 
     assert len(l1_sentences) == len(l2_sentences), (
-        "Sizes do not match: %d vs %d for %s vs %s." % (
-            len(l1_sentences), len(l2_sentences), f1_i, f2_i))
+        "Sizes do not match: %d vs %d for %s vs %s." %
+        (len(l1_sentences), len(l2_sentences), f1_i, f2_i))
 
     for line_id, (s1, s2) in enumerate(zip(l1_sentences, l2_sentences)):
       key = "{}/{}".format(f_id, line_id)
-      yield key, {
-          l1: s1,
-          l2: s2
-      }
+      yield key, {l1: s1, l2: s2}
 
 
 def _parse_frde_bitext(fr_path, de_path):
@@ -857,17 +861,15 @@ def _parse_frde_bitext(fr_path, de_path):
   with tf.io.gfile.GFile(de_path) as f:
     de_sentences = f.read().split("\n")
   assert len(fr_sentences) == len(de_sentences), (
-      "Sizes do not match: %d vs %d for %s vs %s." % (
-          len(fr_sentences), len(de_sentences), fr_path, de_path))
+      "Sizes do not match: %d vs %d for %s vs %s." %
+      (len(fr_sentences), len(de_sentences), fr_path, de_path))
   for line_id, (s1, s2) in enumerate(zip(fr_sentences, de_sentences)):
-    yield line_id, {
-        "fr": s1,
-        "de": s2
-    }
+    yield line_id, {"fr": s1, "de": s2}
 
 
 def _parse_tmx(path):
   """Generates examples from TMX file."""
+
   def _get_tuv_lang(tuv):
     for k, v in tuv.items():
       if k.endswith("}lang"):
@@ -885,11 +887,11 @@ def _parse_tmx(path):
       utf_f = codecs.getreader("utf-8")(f)
     else:
       utf_f = f
-    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):
+    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):  # pytype: disable=wrong-arg-types
       if elem.tag == "tu":
         yield line_id, {
-            _get_tuv_lang(tuv):
-                _get_tuv_seg(tuv) for tuv in elem.iterfind("tuv")
+            _get_tuv_lang(tuv): _get_tuv_seg(tuv)
+            for tuv in elem.iterfind("tuv")
         }
         elem.clear()
 
@@ -906,15 +908,11 @@ def _parse_tsv(path, language_pair=None):
     for j, line in enumerate(f):
       cols = line.split("\t")
       if len(cols) != 2:
-        logging.warning(
-            "Skipping line %d in TSV (%s) with %d != 2 columns.",
-            j, path, len(cols))
+        logging.warning("Skipping line %d in TSV (%s) with %d != 2 columns.", j,
+                        path, len(cols))
         continue
       s1, s2 = cols
-      yield j, {
-          l1: s1.strip(),
-          l2: s2.strip()
-      }
+      yield j, {l1: s1.strip(), l2: s2.strip()}
 
 
 def _parse_wikiheadlines(path):
@@ -925,10 +923,7 @@ def _parse_wikiheadlines(path):
   with tf.io.gfile.GFile(path) as f:
     for line_id, line in enumerate(f):
       s1, s2 = line.split("|||")
-      yield line_id, {
-          l1: s1.strip(),
-          l2: s2.strip()
-      }
+      yield line_id, {l1: s1.strip(), l2: s2.strip()}
 
 
 def _parse_czeng(*paths, **kwargs):
@@ -937,13 +932,10 @@ def _parse_czeng(*paths, **kwargs):
   if filter_path:
     re_block = re.compile(r"^[^-]+-b(\d+)-\d\d[tde]")
     with tf.io.gfile.GFile(filter_path) as f:
-      bad_blocks = {
-          blk for blk in re.search(
-              r"qw{([\s\d]*)}", f.read()).groups()[0].split()
-      }
-    logging.info(
-        "Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
-        len(bad_blocks))
+      bad_blocks = set(
+          re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split())  # pytype: disable=attribute-error
+    logging.info("Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
+                 len(bad_blocks))
 
   for path in paths:
     for gz_path in tf.io.gfile.glob(path):
@@ -972,7 +964,4 @@ def _parse_hindencorp(path):
       if len(split_line) != 5:
         logging.warning("Skipping invalid HindEnCorp line: %s", line)
         continue
-      yield line_id, {
-          "en": split_line[3].strip(),
-          "hi": split_line[4].strip()
-      }
+      yield line_id, {"en": split_line[3].strip(), "hi": split_line[4].strip()}

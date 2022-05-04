@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,6 @@
 
 """Tests for tensorflow_datasets.video.bair_robot_pushing."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.video import bair_robot_pushing
 
@@ -30,10 +26,6 @@ class BairRobotPushingTest(testing.DatasetBuilderTestCase):
       "train": 1,
       "test": 1,
   }
-
-
-class BairRobotPushingS3Test(BairRobotPushingTest):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

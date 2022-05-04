@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,11 +21,8 @@ Deep Learning Face Attributes in the Wild
 Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
+
 import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
@@ -54,7 +51,6 @@ ATTR_HEADINGS = (
     "Rosy_Cheeks Sideburns Smiling Straight_Hair Wavy_Hair Wearing_Earrings "
     "Wearing_Hat Wearing_Lipstick Wearing_Necklace Wearing_Necktie Young"
 ).split()
-
 
 _CITATION = """\
 @inproceedings{conf/iccv/LiuLWT15,
@@ -90,18 +86,24 @@ CelebA has large diversities, large quantities, and rich annotations, including\
 The dataset can be employed as the training and test sets for the following \
 computer vision tasks: face attribute recognition, face detection, and landmark\
  (or facial part) localization.
+
+Note: CelebA dataset may contain potential bias. The fairness indicators
+[example](https://www.tensorflow.org/responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_TFCO_CelebA_Case_Study)
+goes into detail about several considerations to keep in mind while using the
+CelebA dataset.
 """
 
 
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
-  VERSION = tfds.core.Version("0.3.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version("2.0.1")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+      tfds.core.Version("2.0.0"),
   ]
+  RELEASE_NOTES = {
+      "2.0.1": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -113,42 +115,48 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
                     shape=(218, 178, 3), encoding_format="jpeg"),
             "landmarks": {name: tf.int64 for name in LANDMARK_HEADINGS},
             # Attributes could be some special MultiLabel FeatureConnector
-            "attributes": {
-                name: tf.bool for name in ATTR_HEADINGS
-            },
+            "attributes": {name: tf.bool for name in ATTR_HEADINGS},
         }),
         homepage="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
-    extracted_dirs = dl_manager.download_and_extract({
+    downloaded_dirs = dl_manager.download({
         "img_align_celeba": IMG_ALIGNED_DATA,
         "list_eval_partition": EVAL_LIST,
         "list_attr_celeba": ATTR_DATA,
         "landmarks_celeba": LANDMARKS_DATA,
     })
+
+    # Load all images in memory (~1 GiB)
+    # Use split to convert: `img_align_celeba/000005.jpg` -> `000005.jpg`
+    all_images = {
+        os.path.split(k)[-1]: img for k, img in dl_manager.iter_archive(
+            downloaded_dirs["img_align_celeba"])
+    }
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "file_id": 0,
-                "extracted_dirs": extracted_dirs,
+                "downloaded_dirs": downloaded_dirs,
+                "downloaded_images": all_images,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=4,
             gen_kwargs={
                 "file_id": 1,
-                "extracted_dirs": extracted_dirs,
+                "downloaded_dirs": downloaded_dirs,
+                "downloaded_images": all_images,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=4,
             gen_kwargs={
                 "file_id": 2,
-                "extracted_dirs": extracted_dirs,
+                "downloaded_dirs": downloaded_dirs,
+                "downloaded_images": all_images,
             })
     ]
 
@@ -179,13 +187,12 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       values[row_values[0]] = [int(v) for v in row_values[1:]]
     return keys, values
 
-  def _generate_examples(self, file_id, extracted_dirs):
+  def _generate_examples(self, file_id, downloaded_dirs, downloaded_images):
     """Yields examples."""
-    filedir = os.path.join(extracted_dirs["img_align_celeba"],
-                           "img_align_celeba")
-    img_list_path = extracted_dirs["list_eval_partition"]
-    landmarks_path = extracted_dirs["landmarks_celeba"]
-    attr_path = extracted_dirs["list_attr_celeba"]
+
+    img_list_path = downloaded_dirs["list_eval_partition"]
+    landmarks_path = downloaded_dirs["landmarks_celeba"]
+    attr_path = downloaded_dirs["list_attr_celeba"]
 
     with tf.io.gfile.GFile(img_list_path) as f:
       files = [
@@ -198,10 +205,8 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     landmarks = self._process_celeba_config_file(landmarks_path)
 
     for file_name in sorted(files):
-      path = os.path.join(filedir, file_name)
-
       record = {
-          "image": path,
+          "image": downloaded_images[file_name],
           "landmarks": {
               k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
           },

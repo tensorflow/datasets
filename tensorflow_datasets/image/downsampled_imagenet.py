@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """Downsampled Imagenet dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import tensorflow_datasets.public_api as tfds
 
@@ -54,8 +50,7 @@ _DATA_OPTIONS = ["32x32", "64x64"]
 class DownsampledImagenetConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Downsampled Imagenet."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, data=None, **kwargs):
+  def __init__(self, *, data=None, **kwargs):
     """Constructs a DownsampledImagenetConfig.
 
     Args:
@@ -78,14 +73,11 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
           description=(
               "A dataset consisting of Train and Validation images of " +
               config_name + " resolution."),
-          version=tfds.core.Version(
-              "1.0.0", experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version(
-                  "2.0.0",
-                  "New split API (https://tensorflow.org/datasets/splits)"),
-          ],
+          version=tfds.core.Version("2.0.0"),
           data=config_name,
+          release_notes={
+              "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+          },
       ) for config_name in _DATA_OPTIONS
   ]
 
@@ -94,7 +86,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
+            "image": tfds.features.Image(encoding_format="jpeg"),
         }),
         supervised_keys=None,
         homepage="http://image-net.org/small/download.php",
@@ -115,13 +107,11 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(train_path),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "archive": dl_manager.iter_archive(valid_path),
             }),

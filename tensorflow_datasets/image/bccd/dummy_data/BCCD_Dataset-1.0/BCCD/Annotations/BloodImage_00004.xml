@@ -1,0 +1,22 @@
+<annotation>
+<folder>JPEGImages</folder>
+<filename>4.jpg</filename>
+<path>/home/pi/detection_dataset/JPEGImages/4.jpg</path><source>
+<database>Unknown</database>
+</source><size>
+<width>640</width>
+<height>480</height>
+</size>
+<object>
+  <name>Platelets</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+    <xmin>370</xmin>
+    <ymin>14</ymin>
+    <xmax>613</xmax>
+    <ymax>341</ymax>
+  </bndbox>
+</object>
+</annotation>

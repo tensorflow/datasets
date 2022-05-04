@@ -1,0 +1,2 @@
+https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/wikipedia_toxicity_subtypes.zip	38644519	96b26bb75315a155d9897207ba801899b2657386d1ed83e63cdca9bdb058ddd4	wikipedia_toxicity_subtypes.zip
+https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/wikipedia_toxicity_subtypes_v0.3.zip	53025584	a2badd5c6a247184b304cc72b978070678b229d3b4e7011cf434ba12c2c6fdb2	wikipedia_toxicity_subtypes_v0.3.zip

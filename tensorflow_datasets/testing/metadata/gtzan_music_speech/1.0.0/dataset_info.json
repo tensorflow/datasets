@@ -1,0 +1,28 @@
+{
+  "citation": "@ONLINE {Music Speech,\n    author = \"Tzanetakis, George\",\n    title  = \"GTZAN Music/Speech Collection\",\n    year   = \"1999\",\n    url    = \"http://marsyas.info/index.html\"\n}",
+  "description": "The dataset was collected for the purposes of music/speech discrimination.\nThe dataset consists of 120 tracks, each 30 seconds long.\nEach class (music/speech) has 60 examples.\nThe tracks are all 22050Hz Mono 16-bit audio files in .wav format.",
+  "downloadSize": "297055930",
+  "location": {
+    "urls": [
+      "http://marsyas.info/index.html"
+    ]
+  },
+  "name": "gtzan_music_speech",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "445272068",
+      "shardLengths": [
+        "32",
+        "32",
+        "32",
+        "32"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "audio",
+    "output": "label"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,6 @@
+https://data.vision.ee.ethz.ch/cvl/clic/mobile_train_2020.zip	4042923971	4bf9d890e6785426fb41cb4f43df3d8cd6db25fafcc76fc1eb629141166d6529	mobile_train_2020.zip
+https://data.vision.ee.ethz.ch/cvl/clic/mobile_valid_2020.zip	236556531	ff0280382eeb32fdceb28c81a7f47ac9ad86d933ebe901680845635d04e47a10	mobile_valid_2020.zip
+https://data.vision.ee.ethz.ch/cvl/clic/professional_train_2020.zip	2003385131	54a2a684b5cbd0db91770a8695efb774fed1f612194fee68bceaf6b1c48e5d5f	professional_train_2020.zip
+https://data.vision.ee.ethz.ch/cvl/clic/professional_valid_2020.zip	134834429	00be38092ade2ab5163b65f7f6523d46c7bca147007f559adbb02c0afc236b7d	professional_valid_2020.zip
+https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Mobile_test.zip	721789976	2025f07a6c652270e534640de4271feef3b3dd3260beed4ac4821064837aa732	CLIC2020Mobile_test.zip
+https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Professional_test.zip	891643809	857df244fc2bfa5da28d4c66bf0db16ee99bfc79eb807be8afa89cd507852884	CLIC2020Professional_test.zip

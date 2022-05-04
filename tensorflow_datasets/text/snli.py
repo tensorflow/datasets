@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """The Stanford Natural Language Inference (SNLI) Corpus."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import csv
 import os
@@ -47,19 +43,8 @@ _DATA_URL = 'https://nlp.stanford.edu/projects/snli/snli_1.0.zip'
 
 class Snli(tfds.core.GeneratorBasedBuilder):
   """The Stanford Natural Language Inference (SNLI) Corpus."""
-  BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name='plain_text',
-          version=tfds.core.Version(
-              '0.0.1', experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version(
-                  '1.0.0',
-                  'New split API (https://tensorflow.org/datasets/splits)'),
-          ],
-          description='Plain text import of SNLI',
-      )
-  ]
+
+  VERSION = tfds.core.Version('1.1.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -87,18 +72,15 @@ class Snli(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 'filepath': os.path.join(data_dir, 'snli_1.0_test.txt')
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={'filepath': os.path.join(data_dir,
                                                  'snli_1.0_dev.txt')}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=2,
             gen_kwargs={
                 'filepath': os.path.join(data_dir, 'snli_1.0_train.txt')
             }),

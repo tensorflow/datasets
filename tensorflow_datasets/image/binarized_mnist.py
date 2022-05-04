@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,14 +15,10 @@
 
 """BinarizedMNIST."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import numpy as np
 from six.moves import urllib
 import tensorflow as tf
-from tensorflow_datasets.image import mnist
+from tensorflow_datasets.image_classification import mnist
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -52,16 +48,17 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
   """A specific binarization of the MNIST dataset."""
 
   VERSION = tfds.core.Version("1.0.0")
+  RELEASE_NOTES = {
+      "1.0.0": "Initial Release",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(
-                shape=mnist.MNIST_IMAGE_SHAPE)}),
-        homepage=
-        "http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html",
+        features=tfds.features.FeaturesDict(
+            {"image": tfds.features.Image(shape=mnist.MNIST_IMAGE_SHAPE)}),
+        homepage="http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html",
         citation=_CITATION,
     )
 
@@ -78,22 +75,13 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
-            gen_kwargs=dict(
-                data_path=files["train_data"],
-            )),
+            gen_kwargs=dict(data_path=files["train_data"],)),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
-            gen_kwargs=dict(
-                data_path=files["validation_data"],
-            )),
+            gen_kwargs=dict(data_path=files["validation_data"],)),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
-            gen_kwargs=dict(
-                data_path=files["test_data"],
-            )),
+            gen_kwargs=dict(data_path=files["test_data"],)),
     ]
 
   def _generate_examples(self, data_path):
@@ -106,7 +94,8 @@ class BinarizedMNIST(tfds.core.GeneratorBasedBuilder):
       Generator yielding the next examples
     """
     with tf.io.gfile.GFile(data_path, "rb") as f:
-      images = (np.loadtxt(f, delimiter=" ", dtype=np.uint8)
-                .reshape((-1,) + mnist.MNIST_IMAGE_SHAPE))
+      images = (
+          np.loadtxt(f, delimiter=" ",
+                     dtype=np.uint8).reshape((-1,) + mnist.MNIST_IMAGE_SHAPE))
     for index, image in enumerate(images):
       yield index, {"image": image}

@@ -1,0 +1,91 @@
+{
+  "citation": "@article{tydiqa,\n   title = {TyDi QA: A Benchmark for Information-Seeking Question Answering in Typologically Diverse Languages},\n  author = {Jonathan H. Clark and Eunsol Choi and Michael Collins and Dan Garrette and Tom Kwiatkowski and Vitaly Nikolaev and Jennimaria Palomaki}\n    year = {2020},\n journal = {Transactions of the Association for Computational Linguistics}\n}",
+  "description": "TyDi QA is a question answering dataset covering 11 typologically diverse languages with 204K question-answer pairs. The languages of TyDi QA are diverse with regard to their typology -- the set of linguistic features that each language expresses -- such that we expect models performing well on this set to generalize across a large number of the languages in the world. It contains language phenomena that would not be found in English-only corpora. To provide a realistic information-seeking task and avoid priming effects, questions are written by people who want to know the answer, but don\u2019t know the answer yet, (unlike SQuAD and its descendents) and the data is collected directly in each language without the use of translation (unlike MLQA and XQuAD).\n\nFor now, only the Gold passage (GoldP) task is available in TFDS.",
+  "downloadSize": "65346540",
+  "location": {
+    "urls": [
+      "https://github.com/google-research-datasets/tydiqa"
+    ]
+  },
+  "name": "tydi_qa",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "20064716",
+      "shardLengths": [
+        "49881"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "3665207",
+      "shardLengths": [
+        "5077"
+      ]
+    },
+    {
+      "name": "validation-ar",
+      "numBytes": "2187466",
+      "shardLengths": [
+        "921"
+      ]
+    },
+    {
+      "name": "validation-bn",
+      "numBytes": "213253",
+      "shardLengths": [
+        "113"
+      ]
+    },
+    {
+      "name": "validation-en",
+      "numBytes": "296171",
+      "shardLengths": [
+        "440"
+      ]
+    },
+    {
+      "name": "validation-fi",
+      "numBytes": "365597",
+      "shardLengths": [
+        "782"
+      ]
+    },
+    {
+      "name": "validation-id",
+      "numBytes": "352532",
+      "shardLengths": [
+        "565"
+      ]
+    },
+    {
+      "name": "validation-ko",
+      "numBytes": "109099",
+      "shardLengths": [
+        "276"
+      ]
+    },
+    {
+      "name": "validation-ru",
+      "numBytes": "1068959",
+      "shardLengths": [
+        "812"
+      ]
+    },
+    {
+      "name": "validation-sw",
+      "numBytes": "193263",
+      "shardLengths": [
+        "499"
+      ]
+    },
+    {
+      "name": "validation-te",
+      "numBytes": "379761",
+      "shardLengths": [
+        "669"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

@@ -1,0 +1,40 @@
+{
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "files.associations": {
+        ".pylintrc": "ini",
+        ".style.yapf": "ini"
+    },
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.linting.pylintUseMinimalCheckers": false,
+    "[python]": {
+        "editor.rulers": [
+            80
+        ],
+        "editor.tabSize": 2,
+        "editor.detectIndentation": false
+    },
+    "python.formatting.provider": "yapf",
+    "python.testing.pytestArgs": [
+        "tensorflow_datasets",
+        "-vv",
+        "--continue-on-collection-errors",
+        "--ignore=tensorflow_datasets/testing/test_utils.py",
+        "--ignore=tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+    ],
+    "files.watcherExclude": {
+        "**/.git/**": true,
+        "**/docs/catalog/**": true,
+        "**/tensorflow_datasets/testing/metadata/**": true,
+        "**/tensorflow_datasets/testing/test_data/**": true,
+        "**/dummy_data/**": true
+    },
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/*.egg-info": true
+    }
+}

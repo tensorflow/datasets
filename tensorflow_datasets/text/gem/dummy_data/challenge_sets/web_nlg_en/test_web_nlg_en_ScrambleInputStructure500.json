@@ -1,0 +1,22 @@
+{
+    "test": [
+        {
+            "category": "Airport",
+            "gem_id": "web_nlg_en-test-42",
+            "input": [
+                "Adolfo_Su\u00e1rez_Madrid\u2013Barajas_Airport | operatingOrganisation | ENAIRE",
+                "ENAIRE | city | Madrid",
+                "Adolfo_Su\u00e1rez_Madrid\u2013Barajas_Airport | location | Alcobendas",
+                "Adolfo_Su\u00e1rez_Madrid\u2013Barajas_Airport | runwayLength | 3500.0",
+                "Madrid | country | Spain"
+            ],
+            "references": [
+                "ENAIRE, based in Madrid, Spain, is the operating organisation for Adolfo Suarez Madrid-Barajas airport which is in Alcobendas. The runway length at the airport is 3500.",
+                "Located in Madrid, Spain, ENAIRE operates the Adolfo Suarez Madrid-Barajas Airport in Alcobendas which reports a runway length of 3,500.",
+                "Adolfo Suarez Madrid-Barajas Airport, operated by ENAIRE, is located in Alcobendas while ENAIRE is located in Madrid, Spain. The Airport's runway length is 3500."
+            ],
+            "target": "ENAIRE, based in Madrid, Spain, is the operating organisation for Adolfo Suarez Madrid-Barajas airport which is in Alcobendas. The runway length at the airport is 3500.",
+            "webnlg_id": "test/Airport/5/Id43"
+        }
+    ]
+}

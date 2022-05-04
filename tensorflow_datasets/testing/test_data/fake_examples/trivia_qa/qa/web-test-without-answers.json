@@ -21,5 +21,9 @@
                 }
             ]
         }
-    ]
+    ],
+    "Domain": "Web",
+    "Split": "test",
+    "VerifiedEval": false,
+    "Version": 1.0
 }

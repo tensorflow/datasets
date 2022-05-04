@@ -1,0 +1,25 @@
+{
+  "citation": "@book{GelmanHill:2007,\n  author = {Gelman, Andrew and Hill, Jennifer},\n  title = {Data Analysis Using Regression and Multilevel/Hierarchical Models},\n  publisher = {Cambridge University Press},\n  series = {Analytical methods for social research},\n  year = 2007\n}",
+  "description": "Radon is a radioactive gas that enters homes through contact\npoints with the ground. It is a carcinogen that is the primary cause of lung\ncancer in non-smokers. Radon levels vary greatly from household to household.\nThis dataset contains measured radon levels in U.S homes by county and state.\nThe 'activity' label is the measured radon concentration in pCi/L. Important\npredictors are 'floor' (the floor of the house in which the measurement was\ntaken), 'county' (the U.S. county in which the house is located), and 'Uppm' (a\nmeasurement of uranium level of the soil by county).",
+  "downloadSize": "1793376",
+  "location": {
+    "urls": [
+      "http://www.stat.columbia.edu/~gelman/arm/examples/radon/"
+    ]
+  },
+  "name": "radon",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "9589615",
+      "shardLengths": [
+        "12573"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "features",
+    "output": "activity"
+  },
+  "version": "1.0.0"
+}

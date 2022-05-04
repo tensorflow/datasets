@@ -1,0 +1,196 @@
+{
+  "citation": "@article{DBLP:journals/corr/abs-1212-0402,\n  author    = {Khurram Soomro and\n               Amir Roshan Zamir and\n               Mubarak Shah},\n  title     = {{UCF101:} {A} Dataset of 101 Human Actions Classes From Videos in\n               The Wild},\n  journal   = {CoRR},\n  volume    = {abs/1212.0402},\n  year      = {2012},\n  url       = {http://arxiv.org/abs/1212.0402},\n  archivePrefix = {arXiv},\n  eprint    = {1212.0402},\n  timestamp = {Mon, 13 Aug 2018 16:47:45 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1212-0402},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n",
+  "description": "A 101-label video classification dataset.",
+  "location": {
+    "urls": [
+      "https://www.crcv.ucf.edu/data/UCF101.php"
+    ]
+  },
+  "name": "ucf101",
+  "schema": {
+    "feature": [
+      {
+        "name": "label",
+        "type": "INT"
+      },
+      {
+        "name": "video",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "6960514058",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "10",
+      "shardLengths": [
+        "116",
+        "115",
+        "115",
+        "116",
+        "116",
+        "115",
+        "115",
+        "116",
+        "116",
+        "115",
+        "115",
+        "116",
+        "116",
+        "115",
+        "115",
+        "116",
+        "116",
+        "115",
+        "115",
+        "116",
+        "116",
+        "115",
+        "115",
+        "116",
+        "116",
+        "115",
+        "115",
+        "116",
+        "116",
+        "115",
+        "115",
+        "116"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3696"
+              },
+              "max": 100.0
+            }
+          },
+          {
+            "name": "video",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3696"
+              },
+              "max": 255.0
+            }
+          }
+        ],
+        "numExamples": "3696"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "10",
+      "shardLengths": [
+        "150",
+        "151",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "150",
+        "151",
+        "150",
+        "151",
+        "150"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "9624"
+              },
+              "max": 100.0
+            }
+          },
+          {
+            "name": "video",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "9624"
+              },
+              "max": 255.0
+            }
+          }
+        ],
+        "numExamples": "9624"
+      }
+    }
+  ],
+  "version": "2.0.0"
+}

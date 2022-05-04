@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,6 @@
 
 """AbstractReasoning data set."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 import os
 import random
 import numpy as np
@@ -130,8 +127,7 @@ with $o$=line and $a$=type."""
 class AbstractReasoningConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AbstractReasoning."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, split_type="neutral", **kwargs):
+  def __init__(self, *, split_type="neutral", **kwargs):
     """BuilderConfig for AbstractReasoning.
 
     Args:
@@ -141,9 +137,9 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(AbstractReasoningConfig, self).__init__(
-        version=tfds.core.Version("0.0.2",
-                                  experiments={tfds.core.Experiment.S3: False}),
-        **kwargs)
+        version=tfds.core.Version("1.0.0"),
+        **kwargs,
+    )
     self.split_type = split_type
 
 
@@ -202,8 +198,10 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "context": tfds.features.Video(shape=(8, 160, 160, 1)),
-            "answers": tfds.features.Video(shape=(8, 160, 160, 1)),
+            "context":
+                tfds.features.Video(shape=(8, 160, 160, 1)),
+            "answers":
+                tfds.features.Video(shape=(8, 160, 160, 1)),
             "target":
                 tfds.features.ClassLabel(num_classes=8),
             "meta_target":
@@ -222,22 +220,18 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=50,
             gen_kwargs={
                 "folder": path,
                 "split": "train",
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=2,
             gen_kwargs={
                 "folder": path,
                 "split": "val",
             }),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            num_shards=10,
-            gen_kwargs={
+            name=tfds.Split.TEST, gen_kwargs={
                 "folder": path,
                 "split": "test",
             }),
@@ -249,7 +243,6 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
 
     split_type = self.builder_config.split_type
     filename = os.path.join(folder, "{}.tar.gz".format(split_type))
-
 
     def _extract_data(inputs):
       """Extracts files from the tar archives."""
@@ -268,7 +261,7 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
       # Extract the images and convert to uint8. The reshape is required, see
       # https://github.com/deepmind/abstract-reasoning-matrices.
       all_images = np.uint8(data["image"].reshape(16, 160, 160, 1))
-      return {
+      return filename, {
           "relation_structure_encoded": data["relation_structure_encoded"],
           "target": data["target"],
           "meta_target": data["meta_target"],

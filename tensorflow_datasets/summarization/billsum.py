@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """BillSum Dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -48,7 +44,7 @@ features for us bills. ca bills does not have.
   - sum_len: number of chars in summary.
 """
 
-_URL = "https://datahub.io/akornilo/billsum/r/billsum.zip"
+_URL = "https://drive.google.com/uc?export=download&id=1g89WgFHMRbr4QrvA0ngh26PY081Nv3lx"
 
 _DOCUMENT = "text"
 _SUMMARY = "summary"
@@ -57,8 +53,10 @@ _SUMMARY = "summary"
 class Billsum(tfds.core.GeneratorBasedBuilder):
   """BillSum Dataset."""
 
-  # data source updated to filter near duplicates.
-  VERSION = tfds.core.Version("2.0.0")
+  # 2.0.0 data source updated to filter near duplicates.
+  # 3.0.0  none of the test examples are 'near duplicates' of an example in the
+  #   train set AND they dont have the same title, regardless of similarity.
+  VERSION = tfds.core.Version("3.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -81,22 +79,28 @@ class Billsum(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "path": os.path.join(dl_path, "us_train_data_final_v2.jsonl"),
-                "key": "bill_id"
+                "path":
+                    os.path.join(dl_path, "us_train_data_final_OFFICIAL.jsonl"),
+                "key":
+                    "bill_id"
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "path": os.path.join(dl_path, "us_test_data_final_v2.jsonl"),
-                "key": "bill_id"
+                "path":
+                    os.path.join(dl_path, "us_test_data_final_OFFICIAL.jsonl"),
+                "key":
+                    "bill_id"
             },
         ),
         tfds.core.SplitGenerator(
             name="ca_test",
             gen_kwargs={
-                "path": os.path.join(dl_path, "ca_test_data_final.jsonl"),
-                "key": "external_id"
+                "path":
+                    os.path.join(dl_path, "ca_test_data_final_OFFICIAL.jsonl"),
+                "key":
+                    "external_id"
             },
         ),
     ]

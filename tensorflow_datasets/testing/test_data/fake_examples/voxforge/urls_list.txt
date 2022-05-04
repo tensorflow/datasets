@@ -1,0 +1,4 @@
+www.repository.voxforge1.org/downloads/es/Trunk/Audio/Main/16kHz_16bit/speaker1-10-1.tgz
+www.repository.voxforge1.org/downloads/es/Trunk/Audio/Main/16kHz_16bit/speaker2-20-1.tgz
+www.repository.voxforge1.org/downloads/ru/Trunk/Audio/Main/16kHz_16bit/speaker3-30-1.tgz
+www.repository.voxforge1.org/downloads/ru/Trunk/Audio/Main/16kHz_16bit/speaker4-40-1.tgz

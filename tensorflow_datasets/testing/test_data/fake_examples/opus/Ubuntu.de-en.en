@@ -1,0 +1,15 @@
+Includes Gmail, Google Docs, Google+, YouTube and Picasa
+Change your own user data
+Authentication is required to change your own user data
+Manage user accounts
+Authentication is required to change user data
+Change the login screen configuration
+Authentication is required to change the login screen configuration
+Output version information and exit
+Replace existing instance
+Enable debugging code
+Provides D-Bus interfaces for querying and manipulating user account information.
+Usage:
+\t%s acl pathname...
+\t%s -b acl dacl pathname...
+\t%s -d dacl pathname...

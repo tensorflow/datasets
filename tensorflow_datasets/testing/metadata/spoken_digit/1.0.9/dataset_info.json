@@ -1,0 +1,25 @@
+{
+  "citation": "@ONLINE {Free Spoken Digit Dataset,\n    author = \"Zohar Jackson\",\n    title  = \"Spoken_Digit\",\n    year   = \"2016\",\n    url    = \"https://github.com/Jakobovski/free-spoken-digit-dataset\"\n}",
+  "description": "A free audio dataset of spoken digits. Think MNIST for audio.\n\nA simple audio/speech dataset consisting of recordings of spoken digits in wav files at 8kHz.\nThe recordings are trimmed so that they have near minimal silence at the beginnings and ends.\n\n5 speakers\n2,500 recordings (50 of each digit per speaker)\nEnglish pronunciations\n\nFiles are named in the following format: {digitLabel}_{speakerName}_{index}.wav",
+  "downloadSize": "11975353",
+  "location": {
+    "urls": [
+      "https://github.com/Jakobovski/free-spoken-digit-dataset"
+    ]
+  },
+  "name": "spoken_digit",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "47894649",
+      "shardLengths": [
+        "2500"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "audio",
+    "output": "label"
+  },
+  "version": "1.0.9"
+}

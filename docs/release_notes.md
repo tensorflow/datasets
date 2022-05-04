@@ -4,7 +4,6 @@
 
 ### Features
 
-*   Add `in_memory` option to cache small dataset in RAM.
 *   Better sharding, shuffling and sub-split
 *   It is now possible to add arbitrary metadata to `tfds.core.DatasetInfo`
     which will be stored/restored with the dataset. See `tfds.core.Metadata`.
@@ -17,3 +16,10 @@
     [VTAB benchmark](https://arxiv.org/abs/1910.04867).
 *   Add e-SNLI dataset from the paper
     [e-SNLI](http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-natural-language-explanations.pdf).
+*   Add [Opinosis dataset](https://www.aclweb.org/anthology/C10-1039.pdf).
+*   Add SCAN dataset introduced [here](https://arxiv.org/pdf/1711.00350.pdf).
+*   Add [Imagewang](https://github.com/fastai/imagenette) dataset.
+*   Add DIV2K dataset from the paper
+    [DIV2K](http://www.vision.ee.ethz.ch/~timofter/publications/Agustsson-CVPRW-2017.pdf)
+*   Add CFQ (Compositional Freebase Questions) dataset from
+    [this paper](https://openreview.net/pdf?id=SygcCnNKwr).

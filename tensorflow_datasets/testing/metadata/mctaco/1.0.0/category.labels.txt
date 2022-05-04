@@ -1,0 +1,5 @@
+Event Ordering
+Event Duration
+Frequency
+Stationarity
+Typical Time

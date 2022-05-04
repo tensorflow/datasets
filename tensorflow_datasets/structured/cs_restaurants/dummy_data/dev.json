@@ -1,0 +1,14 @@
+[
+    {
+        "da": "?request(area)",
+        "delex_da": "?request(area)",
+        "text": "Jakou lokalitu hledáte ?",
+        "delex_text": "Jakou lokalitu hledáte ?"
+    },
+    {
+        "da": "inform_no_match(food=vegetarian,good_for_meal=brunch)",
+        "delex_da": "inform_no_match(food=X-food,good_for_meal=X-good_for_meal)",
+        "text": "Poblíž se bohužel nenacházejí žádné vegetariánské restaurace , které by podávaly brunch .",
+        "delex_text": "Poblíž se bohužel nenacházejí žádné X-food restaurace , které by podávaly X-good_for_meal ."
+    }
+]

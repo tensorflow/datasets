@@ -1,0 +1,73 @@
+{
+  "citation": "@inproceedings{49029,\ntitle = {Wiki-40B: Multilingual Language Model Dataset},\nauthor = {Mandy Guo and Zihang Dai and Denny Vrandecic and Rami Al-Rfou},\nyear = {2020},\nbooktitle\t= {LREC 2020}\n}",
+  "description": "Clean-up text for 40+ Wikipedia languages editions of pages\ncorrespond to entities. The datasets have train/dev/test splits per language.\nThe dataset is cleaned up by page filtering to remove disambiguation pages,\nredirect pages, deleted pages, and non-entity pages. Each example contains the\nwikidata id of the entity, and the full Wikipedia article after page processing\nthat removes non-content sections and structured objects. The language models\ntrained on this corpus - including 41 monolingual models, and 2 multilingual\nmodels - can be found at https://tfhub.dev/google/collections/wiki40b-lm/1.",
+  "location": {
+    "urls": [
+      "https://research.google/pubs/pub49029/"
+    ]
+  },
+  "name": "wiki40b",
+  "redistributionInfo": {
+    "license": "This work is licensed under the Creative Commons Attribution-ShareAlike\n3.0 Unported License. To view a copy of this license, visit\nhttp://creativecommons.org/licenses/by-sa/3.0/ or send a letter to\nCreative Commons, PO Box 1866, Mountain View, CA 94042, USA."
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "181688477",
+      "numShards": "2",
+      "shardLengths": [
+        "34002",
+        "34002"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "3249119888",
+      "numShards": "32",
+      "shardLengths": [
+        "38350",
+        "38350",
+        "38351",
+        "38350",
+        "38350",
+        "38350",
+        "38350",
+        "38351",
+        "38350",
+        "38350",
+        "38350",
+        "38350",
+        "38350",
+        "38351",
+        "38350",
+        "38350",
+        "38350",
+        "38350",
+        "38351",
+        "38350",
+        "38350",
+        "38350",
+        "38350",
+        "38350",
+        "38351",
+        "38350",
+        "38350",
+        "38350",
+        "38350",
+        "38351",
+        "38350",
+        "38350"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "182734468",
+      "numShards": "2",
+      "shardLengths": [
+        "34328",
+        "34327"
+      ]
+    }
+  ],
+  "version": "1.3.0"
+}

@@ -1,0 +1,32 @@
+{
+  "citation": "@inproceedings{recht2019imagenet,\n  title={Do ImageNet Classifiers Generalize to ImageNet?},\n  author={Recht, Benjamin and Roelofs, Rebecca and Schmidt, Ludwig and Shankar, Vaishaal},\n  booktitle={International Conference on Machine Learning},\n  pages={5389--5400},\n  year={2019}\n}",
+  "description": "ImageNet-v2 is an ImageNet test set (10 per class) collected by closely\nfollowing the original labelling protocol. Each image has been labelled by\nat least 10 MTurk workers, possibly more, and depending on the strategy used to\nselect which images to include among the 10 chosen for the given class there are\nthree different versions of the dataset. Please refer to section four of the\npaper for more details on how the different variants were compiled.\n\nThe label space is the same as that of ImageNet2012. Each example is\nrepresented as a dictionary with the following keys:\n\n* 'image': The image, a (H, W, 3)-tensor.\n* 'label': An integer in the range [0, 1000).\n* 'file_name': A unique sting identifying the example within the dataset.",
+  "downloadSize": "606351360",
+  "location": {
+    "urls": [
+      "https://github.com/modestyachts/ImageNetV2"
+    ]
+  },
+  "name": "imagenet_v2",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "600677719",
+      "shardLengths": [
+        "1250",
+        "1250",
+        "1250",
+        "1250",
+        "1250",
+        "1250",
+        "1250",
+        "1250"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}

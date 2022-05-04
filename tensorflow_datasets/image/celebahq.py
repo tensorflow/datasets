@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Celeba-HQ dataset."""
+
 import os
 
 import tensorflow as tf
@@ -42,6 +43,11 @@ _DESCRIPTION = """\
 High-quality version of the CELEBA
 dataset, consisting of 30000 images in 1024 x 1024 resolution.
 
+Note: CelebAHQ dataset may contain potential bias. The fairness indicators
+[example](https://www.tensorflow.org/responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_TFCO_CelebA_Case_Study)
+goes into detail about several considerations to keep in mind while using the
+CelebAHQ dataset.
+
 WARNING: This dataset currently requires you to prepare images on your own.
 """
 
@@ -49,8 +55,7 @@ WARNING: This dataset currently requires you to prepare images on your own.
 class CelebaHQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CelebaHQ."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, resolution, **kwargs):
+  def __init__(self, *, resolution, **kwargs):
     """BuilderConfig for SQUAD.
 
     Args:
@@ -58,17 +63,15 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         1024.
       **kwargs: keyword arguments forwarded to super.
     """
+    v2 = tfds.core.Version("2.0.0")
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
-        version=tfds.core.Version(
-            "0.1.0", experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[
-            tfds.core.Version(
-                "2.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
-        ],
+        version=v2,
+        release_notes={
+            "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.resolution = resolution
     self.file_name = "data%dx%d.tar" % (resolution, resolution)
@@ -83,8 +86,6 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
   Detailed instructions are here:
   https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
   """
-
-  VERSION = tfds.core.Version("0.1.0")
 
   BUILDER_CONFIGS = [
       CelebaHQConfig(resolution=1024),
@@ -104,15 +105,16 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(
-                    shape=(self.builder_config.resolution,
-                           self.builder_config.resolution, 3),
-                    encoding_format="png"),
-            "image/filename":
-                tfds.features.Text(),
-        },),
+        features=tfds.features.FeaturesDict(
+            {
+                "image":
+                    tfds.features.Image(
+                        shape=(self.builder_config.resolution,
+                               self.builder_config.resolution, 3),
+                        encoding_format="png"),
+                "image/filename":
+                    tfds.features.Text(),
+            },),
         homepage="https://github.com/tkarras/progressive_growing_of_gans",
         citation=_CITATION,
     )
@@ -131,7 +133,6 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=50,
             gen_kwargs={"archive": dl_manager.iter_archive(image_tar_file)},
         )
     ]

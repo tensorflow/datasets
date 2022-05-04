@@ -3,12 +3,16 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="definite_pronoun_resolution" />
-  <meta itemprop="description" content="Composed by 30 students from one of the author's undergraduate classes. These&#10;sentence pairs cover topics ranging from real events (e.g., Iran's plan to&#10;attack the Saudi ambassador to the U.S.) to events/characters in movies (e.g.,&#10;Batman) and purely imaginary situations, largely reflecting the pop culture as&#10;perceived by the American kids born in the early 90s. Each annotated example&#10;spans four lines: the first line contains the sentence, the second line contains&#10;the target pronoun, the third line contains the two candidate antecedents, and&#10;the fourth line contains the correct antecedent. If the target pronoun appears&#10;more than once in the sentence, its first occurrence is the one to be resolved.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('definite_pronoun_resolution', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="Composed by 30 students from one of the author&#x27;s undergraduate classes. These&#10;sentence pairs cover topics ranging from real events (e.g., Iran&#x27;s plan to&#10;attack the Saudi ambassador to the U.S.) to events/characters in movies (e.g.,&#10;Batman) and purely imaginary situations, largely reflecting the pop culture as&#10;perceived by the American kids born in the early 90s. Each annotated example&#10;spans four lines: the first line contains the sentence, the second line contains&#10;the target pronoun, the third line contains the two candidate antecedents, and&#10;the fourth line contains the correct antecedent. If the target pronoun appears&#10;more than once in the sentence, its first occurrence is the one to be resolved.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;definite_pronoun_resolution&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/definite_pronoun_resolution" />
   <meta itemprop="sameAs" content="http://www.hlt.utdallas.edu/~vince/data/emnlp12/" />
   <meta itemprop="citation" content="@inproceedings{rahman2012resolving,&#10;  title={Resolving complex cases of definite pronouns: the winograd schema challenge},&#10;  author={Rahman, Altaf and Ng, Vincent},&#10;  booktitle={Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning},&#10;  pages={777--789},&#10;  year={2012},&#10;  organization={Association for Computational Linguistics}&#10;}" />
 </div>
+
 # `definite_pronoun_resolution`
+
+
+*   **Description**:
 
 Composed by 30 students from one of the author's undergraduate classes. These
 sentence pairs cover topics ranging from real events (e.g., Iran's plan to
@@ -20,35 +24,33 @@ the target pronoun, the third line contains the two candidate antecedents, and
 the fourth line contains the correct antecedent. If the target pronoun appears
 more than once in the sentence, its first occurrence is the one to be resolved.
 
-*   URL:
+*   **Homepage**:
     [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
-*   `DatasetBuilder`:
-    [`tfds.text.definite_pronoun_resolution.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
 
-`definite_pronoun_resolution` is configured with
-`tfds.core.dataset_builder.BuilderConfig` and has the following configurations
-predefined (defaults to the first one):
+*   **Source code**:
+    [`tfds.text.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
 
-*   `plain_text` (`v0.0.1`) (`Size: 222.12 KiB`): Plain text import of the
-    Definite Pronoun Resolution Dataset.
+*   **Versions**:
 
-## `definite_pronoun_resolution/plain_text`
-Plain text import of the Definite Pronoun Resolution Dataset.
+    *   **`1.1.0`** (default): No release notes.
 
-Versions:
+*   **Download size**: `222.12 KiB`
 
-*   **`0.0.1`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **Dataset size**: `334.22 KiB`
 
-### Statistics
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
-Split | Examples
-:---- | -------:
-ALL   | 1,886
-TRAIN | 1,322
-TEST  | 564
+*   **Splits**:
 
-### Features
+Split     | Examples
+:-------- | -------:
+`'test'`  | 564
+`'train'` | 1,322
+
+*   **Feature structure**:
+
 ```python
 FeaturesDict({
     'candidates': Sequence(Text(shape=(), dtype=tf.string)),
@@ -58,14 +60,63 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Feature documentation**:
 
-*   [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
+Feature    | Class          | Shape | Dtype     | Description
+:--------- | :------------- | :---- | :-------- | :----------
+           | FeaturesDict   |       |           |
+candidates | Sequence(Text) | (2,)  | tf.string |
+label      | ClassLabel     |       | tf.int64  |
+pronoun    | Text           |       | tf.string |
+sentence   | Text           |       | tf.string |
 
-### Supervised keys (for `as_supervised=True`)
-`(u'sentence', u'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('sentence', 'label')`
 
-## Citation
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/definite_pronoun_resolution-1.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+*   **Citation**:
+
 ```
 @inproceedings{rahman2012resolving,
   title={Resolving complex cases of definite pronouns: the winograd schema challenge},
@@ -77,4 +128,3 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------

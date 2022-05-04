@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """Tests for open_images dataset module."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.object_detection import open_images
 
@@ -30,8 +26,9 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
       'validation': 12,
   }
   DL_EXTRACT_RESULT = {
-      'train_images': ['s3-tar_train_sha1_%s.tar' % i
-                       for i in '0123456789abcdef'],
+      'train_images': [
+          's3-tar_train_sha1_%s.tar' % i for i in '0123456789abcdef'
+      ],
       'test_images': 's3-tar_test_sha2.tar',
       'validation_images': 's3-tar_validation_sha3.tar',
       'train_human_labels': 'train-human-labels.csv',
@@ -44,10 +41,6 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
       'test-annotations-bbox': 'test-annotations-bbox.csv',
       'validation-annotations-bbox': 'validation-annotations-bbox.csv',
   }
-
-
-class OpenImagesV42012S3Test(OpenImagesV42012Test):
-  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

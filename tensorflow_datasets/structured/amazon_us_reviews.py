@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """Amazon Customer Reviews Dataset --- US REVIEWS DATASET."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import collections
 import csv
@@ -82,16 +78,16 @@ for entry in _DATA_OPTIONS_V1_02:
   _DATA_OPTIONS.append(entry + "_v1_02")
 
 _DL_URLS = {
-    name: "https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_us_" +
-          name + ".tsv.gz" for name in _DATA_OPTIONS
+    name:
+    f"https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_us_{name}.tsv.gz"
+    for name in _DATA_OPTIONS
 }
 
 
 class AmazonUSReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AmazonUSReviews."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, data=None, **kwargs):
+  def __init__(self, *, data=None, **kwargs):
     """Constructs a AmazonUSReviewsConfig.
 
     Args:
@@ -149,10 +145,9 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
 
     # There is no predefined train/val/test split for this dataset.
     return [
-        tfds.core.SplitGenerator(
-            name="train", num_shards=10, gen_kwargs={
-                "file_path": path,
-            }),
+        tfds.core.SplitGenerator(name="train", gen_kwargs={
+            "file_path": path,
+        }),
     ]
 
   def _generate_examples(self, file_path):

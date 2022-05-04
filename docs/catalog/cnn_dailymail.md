@@ -3,12 +3,16 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="cnn_dailymail" />
-  <meta itemprop="description" content="CNN/DailyMail non-anonymized summarization dataset.&#10;&#10;There are two features:&#10;  - article: text of news article, used as the document to be summarized&#10;  - highlights: joined text of highlights with &lt;s&gt; and &lt;/s&gt; around each&#10;    highlight, which is the target summary&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('cnn_dailymail', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="CNN/DailyMail non-anonymized summarization dataset.&#10;&#10;There are two features:&#10;  - article: text of news article, used as the document to be summarized&#10;  - highlights: joined text of highlights with &lt;s&gt; and &lt;/s&gt; around each&#10;    highlight, which is the target summary&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;cnn_dailymail&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cnn_dailymail" />
   <meta itemprop="sameAs" content="https://github.com/abisee/cnn-dailymail" />
-  <meta itemprop="citation" content="@article{DBLP:journals/corr/SeeLM17,&#10;  author    = {Abigail See and&#10;               Peter J. Liu and&#10;               Christopher D. Manning},&#10;  title     = {Get To The Point: Summarization with Pointer-Generator Networks},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1704.04368},&#10;  year      = {2017},&#10;  url       = {http://arxiv.org/abs/1704.04368},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1704.04368},&#10;  timestamp = {Mon, 13 Aug 2018 16:46:08 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/SeeLM17},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}&#10;&#10;@inproceedings{hermann2015teaching,&#10;  title={Teaching machines to read and comprehend},&#10;  author={Hermann, Karl Moritz and Kocisky, Tomas and Grefenstette, Edward and Espeholt, Lasse and Kay, Will and Suleyman, Mustafa and Blunsom, Phil},&#10;  booktitle={Advances in neural information processing systems},&#10;  pages={1693--1701},&#10;  year={2015}&#10;}&#10;" />
+  <meta itemprop="citation" content="@article{DBLP:journals/corr/SeeLM17,&#10;  author    = {Abigail See and&#10;               Peter J. Liu and&#10;               Christopher D. Manning},&#10;  title     = {Get To The Point: Summarization with Pointer-Generator Networks},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1704.04368},&#10;  year      = {2017},&#10;  url       = {http://arxiv.org/abs/1704.04368},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1704.04368},&#10;  timestamp = {Mon, 13 Aug 2018 16:46:08 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/SeeLM17},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}&#10;&#10;@inproceedings{hermann2015teaching,&#10;  title={Teaching machines to read and comprehend},&#10;  author={Hermann, Karl Moritz and Kocisky, Tomas and Grefenstette, Edward and Espeholt, Lasse and Kay, Will and Suleyman, Mustafa and Blunsom, Phil},&#10;  booktitle={Advances in neural information processing systems},&#10;  pages={1693--1701},&#10;  year={2015}&#10;}" />
 </div>
+
 # `cnn_dailymail`
+
+
+*   **Description**:
 
 CNN/DailyMail non-anonymized summarization dataset.
 
@@ -16,42 +20,44 @@ There are two features: - article: text of news article, used as the document to
 be summarized - highlights: joined text of highlights with <s> and </s> around
 each highlight, which is the target summary
 
-*   URL:
+*   **Homepage**:
     [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
-*   `DatasetBuilder`:
-    [`tfds.summarization.cnn_dailymail.CnnDailymail`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/cnn_dailymail.py)
 
-`cnn_dailymail` is configured with
-`tfds.summarization.cnn_dailymail.CnnDailymailConfig` and has the following
-configurations predefined (defaults to the first one):
+*   **Source code**:
+    [`tfds.summarization.CnnDailymail`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/cnn_dailymail.py)
 
-*   `plain_text` (`v2.0.0`) (`Size: 558.32 MiB`): Plain text
+*   **Versions**:
 
-*   `bytes` (`v2.0.0`) (`Size: 558.32 MiB`): Uses byte-level text encoding with
-    `tfds.features.text.ByteTextEncoder`
+    *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   `2.0.0`: Separate target sentences with newline. (Having the model
+        predict newline separators makes it easier to evaluate using
+        summary-level ROUGE.)
 
-*   `subwords32k` (`v2.0.0`) (`Size: 558.32 MiB`): Uses
-    `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+    *   `3.0.0`: Using cased version.
 
-## `cnn_dailymail/plain_text`
-Plain text
+    *   `3.1.0`: Removed BuilderConfig
 
-Versions:
+    *   **`3.2.0`** (default): Remove extra space before added sentence period.
+        This shouldn't affect ROUGE scores because punctuation is removed.
 
-*   **`2.0.0`** (default): Separate target sentences with newline.
-*   `0.0.2`: None
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **Download size**: `558.32 MiB`
 
-### Statistics
+*   **Dataset size**: `1.27 GiB`
 
-Split      | Examples
-:--------- | -------:
-ALL        | 311,971
-TRAIN      | 287,113
-VALIDATION | 13,368
-TEST       | 11,490
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
-### Features
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 11,490
+`'train'`      | 287,113
+`'validation'` | 13,368
+
+*   **Feature structure**:
+
 ```python
 FeaturesDict({
     'article': Text(shape=(), dtype=tf.string),
@@ -59,80 +65,61 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Feature documentation**:
 
-*   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
+Feature    | Class        | Shape | Dtype     | Description
+:--------- | :----------- | :---- | :-------- | :----------
+           | FeaturesDict |       |           |
+article    | Text         |       | tf.string |
+highlights | Text         |       | tf.string |
 
-### Supervised keys (for `as_supervised=True`)
-`(u'article', u'highlights')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('article', 'highlights')`
 
-## `cnn_dailymail/bytes`
-Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-Versions:
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
-*   **`2.0.0`** (default): Separate target sentences with newline.
-*   `0.0.2`: None
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+<!-- mdformat off(HTML should not be auto-formatted) -->
 
-### Statistics
+{% framebox %}
 
-Split      | Examples
-:--------- | -------:
-ALL        | 311,971
-TRAIN      | 287,113
-VALIDATION | 13,368
-TEST       | 11,490
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
 
-### Features
-```python
-FeaturesDict({
-    'article': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-})
-```
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
 
-### Homepage
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
 
-*   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
+{% endframebox %}
 
-### Supervised keys (for `as_supervised=True`)
-`(u'article', u'highlights')`
+<!-- mdformat on -->
 
-## `cnn_dailymail/subwords32k`
-Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+*   **Citation**:
 
-Versions:
-
-*   **`2.0.0`** (default): Separate target sentences with newline.
-*   `0.0.2`: None
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 311,971
-TRAIN      | 287,113
-VALIDATION | 13,368
-TEST       | 11,490
-
-### Features
-```python
-FeaturesDict({
-    'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32857>),
-    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32857>),
-})
-```
-
-### Homepage
-
-*   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'article', u'highlights')`
-
-## Citation
 ```
 @article{DBLP:journals/corr/SeeLM17,
   author    = {Abigail See and
@@ -159,4 +146,3 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------

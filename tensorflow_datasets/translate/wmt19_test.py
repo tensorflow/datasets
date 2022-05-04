@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,6 @@
 
 """Tests for WMT translate dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.translate import wmt19
 
@@ -29,23 +25,31 @@ class TranslateDeEnWmt19Test(testing.DatasetBuilderTestCase):
   OVERLAPPING_SPLITS = ["validation"]
 
   DL_EXTRACT_RESULT = {
-      "europarl_v9": ["sentences.de-en.tsv"],
       "paracrawl_v3": ["sentences.de-en.tmx"],
-      "commoncrawl": ["commoncrawl"],
       "newscommentary_v14": ["sentences.de-en.tsv"],
       "wikititles_v1": ["sentences.de-en.tsv"],
       "rapid_2019": ["rapid_2019"],
       "newstest2018": ["validation"],
   }
 
+  SEQUENTUAL_DL_EXTRACT_RESULT = {
+      "http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz":
+          "commoncrawl",
+      "http://www.statmt.org/europarl/v9/training/europarl-v9.de-en.tsv.gz":
+          "sentences.de-en.tsv",
+  }
+
+  def _get_dl_extract_result(self, url):
+    if not url:
+      return []
+    if isinstance(url, dict):
+      return super()._get_dl_extract_result(url)
+    return self.dummy_data / self.SEQUENTUAL_DL_EXTRACT_RESULT[url]
+
   SPLITS = {
       "train": 12,
       "validation": 2,
   }
-
-
-class TranslateDeEnWmt19S3Test(TranslateDeEnWmt19Test):
-  VERSION = "experimental_latest"
 
 
 class TranslateCsEnWmt19Test(testing.DatasetBuilderTestCase):
@@ -55,22 +59,30 @@ class TranslateCsEnWmt19Test(testing.DatasetBuilderTestCase):
 
   DL_EXTRACT_RESULT = {
       "czeng17_filter": ["czeng"],
-      "europarl_v9": ["sentences.cs-en.tsv"],
       "paracrawl_v3": ["sentences.cs-en.tmx"],
-      "commoncrawl": ["commoncrawl"],
       "newscommentary_v14": ["sentences.cs-en.tsv"],
       "wikititles_v1": ["sentences.cs-en.tsv"],
       "newstest2018": ["validation"],
   }
 
+  SEQUENTUAL_DL_EXTRACT_RESULT = {
+      "http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz":
+          "commoncrawl",
+      "http://www.statmt.org/europarl/v9/training/europarl-v9.cs-en.tsv.gz":
+          "sentences.cs-en.tsv",
+  }
+
+  def _get_dl_extract_result(self, url):
+    if not url:
+      return []
+    if isinstance(url, dict):
+      return super()._get_dl_extract_result(url)
+    return self.dummy_data / self.SEQUENTUAL_DL_EXTRACT_RESULT[url]
+
   SPLITS = {
       "train": 13,
       "validation": 2,
   }
-
-
-class TranslateCsEnWmt19S3Test(TranslateCsEnWmt19Test):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

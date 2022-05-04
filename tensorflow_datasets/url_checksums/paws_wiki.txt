@@ -1,0 +1,4 @@
+https://storage.googleapis.com/paws/english/paws_wiki_labeled_final.tar.gz	4687157	1aad6cbb8a90b15563a0c154752c2b2c8e3bc5bdaa125172214d598bc76bc9fd	paws_wiki_labeled_final.tar.gz
+https://storage.googleapis.com/paws/english/paws_wiki_labeled_swap.tar.gz	2257283	886ddb2f7f7499b2f64d260956ebbd6e14fc436eadac56cdbb966831b00d7861	paws_wiki_labeled_swap.tar.gz
+https://storage.googleapis.com/paws/english/paws_wiki_unlabeled_final.tar.gz	47393331	c70222d390ece5218e397b3ea4b3797212ffe945fe1eae088fa6cb317c2ca3c6	paws_wiki_unlabeled_final.tar.gz
+https://storage.googleapis.com/paws/english/wiki_raw_and_mapping.tar.gz	5920112	85e4467c5a7f895e64420cd605c4115f7c9d97a4e7f2d3fc9421e2064504d3cf	wiki_raw_and_mapping.tar.gz

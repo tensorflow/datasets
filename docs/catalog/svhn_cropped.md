@@ -3,30 +3,50 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="svhn_cropped" />
-  <meta itemprop="description" content="The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('svhn_cropped', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;svhn_cropped&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/svhn_cropped-3.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/svhn_cropped" />
   <meta itemprop="sameAs" content="http://ufldl.stanford.edu/housenumbers/" />
-  <meta itemprop="citation" content="@article{Netzer2011,&#10;author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},&#10;booktitle = {Advances in Neural Information Processing Systems ({NIPS})},&#10;title = {Reading Digits in Natural Images with Unsupervised Feature Learning},&#10;year = {2011}&#10;}&#10;" />
+  <meta itemprop="citation" content="@article{Netzer2011,&#10;author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},&#10;booktitle = {Advances in Neural Information Processing Systems ({NIPS})},&#10;title = {Reading Digits in Natural Images with Unsupervised Feature Learning},&#10;year = {2011}&#10;}" />
 </div>
+
 # `svhn_cropped`
+
+
+*   **Description**:
 
 The Street View House Numbers (SVHN) Dataset is an image digit recognition
 dataset of over 600,000 digit images coming from real world data. Images are
 cropped to 32x32.
 
-*   URL:
+*   **Homepage**:
     [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
-*   `DatasetBuilder`:
-    [`tfds.image.svhn.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/svhn.py)
-*   Version: `v1.0.0`
-*   Versions:
 
-    *   **`1.0.0`** (default):
-    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **Source code**:
+    [`tfds.image_classification.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/svhn.py)
 
-*   Size: `1.47 GiB`
+*   **Versions**:
 
-## Features
+    *   **`3.0.0`** (default): No release notes.
+    *   `3.1.0`: New split API (https://tensorflow.org/datasets/splits)
+
+*   **Download size**: `1.47 GiB`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'extra'` | 531,131
+`'test'`  | 26,032
+`'train'` | 73,257
+
+*   **Feature structure**:
+
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -34,23 +54,62 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+*   **Feature documentation**:
 
-Split | Examples
-:---- | -------:
-ALL   | 630,420
-EXTRA | 531,131
-TRAIN | 73,257
-TEST  | 26,032
+Feature | Class        | Shape       | Dtype    | Description
+:------ | :----------- | :---------- | :------- | :----------
+        | FeaturesDict |             |          |
+image   | Image        | (32, 32, 3) | tf.uint8 |
+label   | ClassLabel   |             | tf.int64 |
 
-## Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
-*   [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/svhn_cropped-3.0.0.png" alt="Visualization" width="500px">
 
-## Citation
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/svhn_cropped-3.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+*   **Citation**:
+
 ```
 @article{Netzer2011,
 author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},
@@ -60,4 +119,3 @@ year = {2011}
 }
 ```
 
---------------------------------------------------------------------------------

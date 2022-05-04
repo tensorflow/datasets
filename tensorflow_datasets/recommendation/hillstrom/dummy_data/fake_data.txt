@@ -1,0 +1,5 @@
+recency,history_segment,history,mens,womens,zip_code,newbie,channel,segment,visit,conversion,spend
+10,2) $100 - $200,142.44,1,0,Surburban,0,Phone,Womens E-Mail,0,0,0
+6,3) $200 - $350,329.08,1,1,Rural,1,Web,No E-Mail,0,0,0
+7,2) $100 - $200,180.65,0,1,Surburban,1,Web,Womens E-Mail,0,0,0
+9,5) $500 - $750,675.83,1,0,Rural,1,Web,Mens E-Mail,0,0,0

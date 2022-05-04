@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,6 @@
 
 """BillSum Dataset Test."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.summarization import billsum
 
@@ -31,6 +27,7 @@ class BillsumTest(testing.DatasetBuilderTestCase):
       "ca_test": 1  # Number of fake test example
   }
   DL_EXTRACT_RESULT = ""
+
 
 if __name__ == "__main__":
   testing.test_main()

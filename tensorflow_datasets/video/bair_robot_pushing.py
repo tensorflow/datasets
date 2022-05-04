@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,10 +20,6 @@ Frederik Ebert, Chelsea Finn, Alex X. Lee, and Sergey Levine.
 https://arxiv.org/abs/1710.05268
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import os
 
 from absl import logging
@@ -38,7 +34,6 @@ DATA_URL = "http://rail.eecs.berkeley.edu/datasets/bair_robot_pushing_dataset_v0
 FRAMES_PER_VIDEO = 30
 IMG_SHAPE = (64, 64, 3)
 
-
 _CITATION = """\
 @misc{1710.05268,
   Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
@@ -52,24 +47,26 @@ _CITATION = """\
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-  ]
-  # Versions history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     # The Bair dataset consist of a sequence of frames (video) with associated
     # metadata (action and position)
-    features = tfds.features.Sequence({
-        "image_main": tfds.features.Image(shape=IMG_SHAPE),
-        "image_aux1": tfds.features.Image(shape=IMG_SHAPE),
-        "action": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
-        "endeffector_pos": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-    }, length=FRAMES_PER_VIDEO)
+    features = tfds.features.Sequence(
+        {
+            "image_main":
+                tfds.features.Image(shape=IMG_SHAPE),
+            "image_aux1":
+                tfds.features.Image(shape=IMG_SHAPE),
+            "action":
+                tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+            "endeffector_pos":
+                tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+        },
+        length=FRAMES_PER_VIDEO)
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -87,13 +84,11 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "filedir": os.path.join(files, "softmotion30_44k", "train"),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=4,
             gen_kwargs={
                 "filedir": os.path.join(files, "softmotion30_44k", "test"),
             }),
@@ -117,8 +112,8 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         all_frames = []
         for frame_id in range(FRAMES_PER_VIDEO):
           # Extract all features from the original proto context field
-          frame_feature = {   # pylint: disable=
-              out_key: example.context.feature[in_key.format(frame_id)]   # pylint: disable=g-complex-comprehension
+          frame_feature = {  # pylint: disable=g-complex-comprehension
+              out_key: example.context.feature[in_key.format(frame_id)]  # pylint: disable=g-complex-comprehension
               for out_key, in_key in [
                   ("image_main", "{}/image_main/encoded"),
                   ("image_aux1", "{}/image_aux1/encoded"),
@@ -134,7 +129,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
 
           # Decode images (from encoded string)
           for key in ("image_main", "image_aux1"):
-            img = frame_feature[key].bytes_list.value[0]
+            img = frame_feature[key].bytes_list.value[0]  # pytype: disable=attribute-error
             img = np.frombuffer(img, dtype=np.uint8)
             img = np.reshape(img, IMG_SHAPE)
             frame_feature[key] = img
@@ -147,4 +142,4 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         #     {'action': [...], 'image_main': img_frame1, ...},  # Frame 1
         #     ...,
         # ]
-        yield "%s_%s" % (filepath, video_id), all_frames
+        yield "%s_%s" % (filename, video_id), all_frames

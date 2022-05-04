@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """Iris dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -47,13 +43,10 @@ linearly separable from each other.
 class Iris(tfds.core.GeneratorBasedBuilder):
   """Iris flower dataset."""
   NUM_CLASSES = 3
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
-
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-  ]
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -75,15 +68,13 @@ class Iris(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     iris_file = dl_manager.download(IRIS_URL)
-    all_lines = tf.io.gfile.GFile(iris_file).read().split("\n")
+    all_lines = tf.io.gfile.GFile(iris_file).read().splitlines()
     records = [l for l in all_lines if l]  # get rid of empty lines
 
     # Specify the splits
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            num_shards=1,
-            gen_kwargs={"records": records}),
+            name=tfds.Split.TRAIN, gen_kwargs={"records": records}),
     ]
 
   def _generate_examples(self, records):

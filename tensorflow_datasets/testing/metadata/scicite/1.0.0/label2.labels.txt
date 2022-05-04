@@ -1,0 +1,4 @@
+supportive
+not_supportive
+cant_determine
+none

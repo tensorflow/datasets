@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,6 @@
 
 """Tests for Groove dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.audio import groove
 
@@ -33,10 +29,6 @@ class GrooveFullTest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = ".."
 
 
-class GrooveFullS3Test(GrooveFullTest):
-  VERSION = "experimental_latest"
-
-
 class GrooveFullMidiOnlyTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = groove.Groove
   BUILDER_CONFIG_NAMES_TO_TEST = ["full-midionly"]
@@ -45,10 +37,6 @@ class GrooveFullMidiOnlyTest(testing.DatasetBuilderTestCase):
       "test": 1,
   }
   DL_EXTRACT_RESULT = ".."
-
-
-class GrooveFullMidiOnlyS3Test(GrooveFullMidiOnlyTest):
-  VERSION = "experimental_latest"
 
 
 class Groove2BarTest(testing.DatasetBuilderTestCase):
@@ -61,10 +49,6 @@ class Groove2BarTest(testing.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = ".."
 
 
-class Groove2BarS3Test(Groove2BarTest):
-  VERSION = "experimental_latest"
-
-
 class Groove2BarMidiOnlyTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = groove.Groove
   BUILDER_CONFIG_NAMES_TO_TEST = ["2bar-midionly"]
@@ -73,10 +57,6 @@ class Groove2BarMidiOnlyTest(testing.DatasetBuilderTestCase):
       "test": 1,
   }
   DL_EXTRACT_RESULT = ".."
-
-
-class Groove2BarMidiOnlyS3Test(Groove2BarMidiOnlyTest):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

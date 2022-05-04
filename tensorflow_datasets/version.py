@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,15 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Version info."""
+"""Version info (development version).
+
+All users importing TFDS from `tfds-nightly` or synced to head will see
+the `-nightly` suffix.
+
+This file is replaced by `version_stable.py` for stable releases
+(`tensorflow-datasets`) on PyPI.
+"""
 
 # We follow Semantic Versioning (https://semver.org/)
-_MAJOR_VERSION = '1'
-_MINOR_VERSION = '3'
-_PATCH_VERSION = '0'
+_MAJOR_VERSION = '4'
+_MINOR_VERSION = '5'
+_PATCH_VERSION = '2'
 
 __version__ = '.'.join([
     _MAJOR_VERSION,
     _MINOR_VERSION,
     _PATCH_VERSION,
-])
+]) + '+nightly'

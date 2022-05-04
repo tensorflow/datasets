@@ -2,167 +2,58 @@
 
 TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 
-[![Kokoro](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.svg)](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.html)
+[![Unittests](https://github.com/tensorflow/datasets/actions/workflows/pytest.yml/badge.svg)](https://github.com/tensorflow/datasets/actions/workflows/pytest.yml)
 [![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
+[![Tutorial](https://img.shields.io/badge/doc-tutorial-blue.svg)](https://www.tensorflow.org/datasets/overview)
+[![API](https://img.shields.io/badge/doc-api-blue.svg)](https://www.tensorflow.org/datasets/api_docs/python/tfds)
+[![Catalog](https://img.shields.io/badge/doc-datasets-blue.svg)](https://www.tensorflow.org/datasets/catalog/overview#all_datasets)
 
-* [List of datasets](https://www.tensorflow.org/datasets/catalog/overview)
-* [Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
-* [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
-* Guides
-  * [Overview](https://www.tensorflow.org/datasets/overview)
-  * [Datasets versioning](https://www.tensorflow.org/datasets/datasets_versioning)
-  * [Using splits and slicing API](https://www.tensorflow.org/datasets/splits)
-  * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
-  * [Add a huge dataset (>>100GiB)](https://www.tensorflow.org/datasets/beam_datasets)
+## Documentation
 
+To install and use TFDS, we strongly encourage to start with our
+[**getting started guide**](https://www.tensorflow.org/datasets/overview). Try
+it interactively in a
+[Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb).
 
-**Table of Contents**
+Our documentation contains:
 
-* [Installation](#installation)
-* [Usage](#usage)
-* [`DatasetBuilder`](#datasetbuilder)
-* [NumPy usage](#numpy-usage-with-tfdsas-numpy)
-* [Want a certain dataset?](#want-a-certain-dataset)
-* [Disclaimers](#disclaimers)
-
-### Installation
-
-```sh
-pip install tensorflow-datasets
-
-# Requires TF 1.15+ to be installed.
-# Some datasets require additional libraries; see setup.py extras_require
-pip install tensorflow
-# or:
-pip install tensorflow-gpu
-```
-
-Join [our Google group](https://groups.google.com/forum/#!forum/tensorflow-datasets-public-announce)
-to receive updates on the project.
-
-### Usage
+* [Tutorials and guides](https://www.tensorflow.org/datasets/overview)
+* List of all [available datasets](https://www.tensorflow.org/datasets/catalog/overview#all_datasets)
+* The [API reference](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 
 ```python
+# !pip install tensorflow-datasets
 import tensorflow_datasets as tfds
 import tensorflow as tf
 
-# tfds works in both Eager and Graph modes
-tf.compat.v1.enable_eager_execution()
-
-# See available datasets
-print(tfds.list_builders())
-
 # Construct a tf.data.Dataset
-ds_train = tfds.load(name="mnist", split="train", shuffle_files=True)
+ds = tfds.load('mnist', split='train', as_supervised=True, shuffle_files=True)
 
 # Build your input pipeline
-ds_train = ds_train.shuffle(1000).batch(128).prefetch(10)
-for features in ds_train.take(1):
-  image, label = features["image"], features["label"]
+ds = ds.shuffle(1000).batch(128).prefetch(10).take(5)
+for image, label in ds:
+  pass
 ```
 
-Try it interactively in a
-[Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb).
+## TFDS core values
 
-### `DatasetBuilder`
+TFDS has been built with these principles in mind:
 
-All datasets are implemented as subclasses of
-[`DatasetBuilder`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetBuilder.md)
-and
-[`tfds.load`](https://www.tensorflow.org/datasets/api_docs/python/tfds/load.md)
-is a thin convenience wrapper.
-[`DatasetInfo`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetInfo.md)
-documents the dataset.
+* **Simplicity**: Standard use-cases should work out-of-the box
+* **Performance**: TFDS follows
+  [best practices](https://www.tensorflow.org/guide/data_performance)
+  and can achieve state-of-the-art speed
+* **Determinism/reproducibility**: All users get the same examples in the same
+  order
+* **Customisability**: Advanced users can have fine-grained control
 
-```python
-import tensorflow_datasets as tfds
-
-# The following is the equivalent of the `load` call above.
-
-# You can fetch the DatasetBuilder class by string
-mnist_builder = tfds.builder('mnist')
-
-# Download the dataset
-mnist_builder.download_and_prepare()
-
-# Construct a tf.data.Dataset
-ds = mnist_builder.as_dataset(split='train')
-
-# Get the `DatasetInfo` object, which contains useful information about the
-# dataset and its features
-info = mnist_builder.info
-print(info)
-
-    tfds.core.DatasetInfo(
-        name='mnist',
-        version=1.0.0,
-        description='The MNIST database of handwritten digits.',
-        homepage='http://yann.lecun.com/exdb/mnist/',
-        features=FeaturesDict({
-            'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-            'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
-        },
-        total_num_examples=70000,
-        splits={
-            'test': <tfds.core.SplitInfo num_examples=10000>,
-            'train': <tfds.core.SplitInfo num_examples=60000>
-        },
-        supervised_keys=('image', 'label'),
-        citation='"""
-            @article{lecun2010mnist,
-              title={MNIST handwritten digit database},
-              author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-              journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
-              volume={2},
-              year={2010}
-            }
-      """',
-  )
-```
-
-You can also get details about the classes (number of classes and their names).
-
-```python
-info = tfds.builder('cats_vs_dogs').info
-
-info.features['label'].num_classes  # 2
-info.features['label'].names  # ['cat', 'dog']
-info.features['label'].int2str(1)  # "dog"
-info.features['label'].str2int('cat')  # 0
-```
-
-### NumPy Usage with `tfds.as_numpy`
-
-As a convenience for users that want simple NumPy arrays in their programs, you
-can use
-[`tfds.as_numpy`](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_numpy.md)
-to return a generator that yields NumPy array
-records out of a `tf.data.Dataset`. This allows you to build high-performance
-input pipelines with `tf.data` but use whatever you'd like for your model
-components.
-
-```python
-train_ds = tfds.load("mnist", split=tfds.Split.TRAIN)
-train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
-for example in tfds.as_numpy(train_ds):
-  numpy_images, numpy_labels = example["image"], example["label"]
-```
-
-You can also use `tfds.as_numpy` in conjunction with `batch_size=-1` to
-get the full dataset in NumPy arrays from the returned `tf.Tensor` object:
-
-```python
-train_ds = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
-numpy_ds = tfds.as_numpy(train_ds)
-numpy_images, numpy_labels = numpy_ds["image"], numpy_ds["label"]
-```
-
-Note that the library still requires `tensorflow` as an internal dependency.
+If those use cases are not satisfied, please send us
+[feedback](https://github.com/tensorflow/datasets/issues).
 
 ## Want a certain dataset?
 
 Adding a dataset is really straightforward by following
-[our guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md).
+[our guide](https://www.tensorflow.org/datasets/add_dataset).
 
 Request a dataset by opening a
 [Dataset request GitHub issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=dataset+request&template=dataset-request.md&title=%5Bdata+request%5D+%3Cdataset+name%3E).
@@ -170,6 +61,18 @@ Request a dataset by opening a
 And vote on the current
 [set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request)
 by adding a thumbs-up reaction to the issue.
+
+### Citation
+
+Please include the following citation when using `tensorflow-datasets` for a
+paper, in addition to any citation specific to the used datasets.
+
+```
+@misc{TFDS,
+  title = {{TensorFlow Datasets}, A collection of ready-to-use datasets},
+  howpublished = {\url{https://www.tensorflow.org/datasets}},
+}
+```
 
 #### *Disclaimers*
 
@@ -187,4 +90,5 @@ by adding a thumbs-up reaction to the issue.
 *If you're interested in learning more about responsible AI practices, including*
 *fairness, please see Google AI's [Responsible AI Practices](https://ai.google/education/responsible-ai-practices).*
 
-*`tensorflow/datasets` is Apache 2.0 licensed. See the `LICENSE` file.*
+*`tensorflow/datasets` is Apache 2.0 licensed. See the
+[`LICENSE`](LICENSE) file.*

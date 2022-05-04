@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """XSum dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import json
 import os
@@ -64,9 +60,12 @@ _REMOVE_LINES = set([
 class Xsum(tfds.core.GeneratorBasedBuilder):
   """Extreme Summarization (XSum) Dataset."""
 
-  # Version 1.1.0 removes web contents.
   VERSION = tfds.core.Version("1.1.0")
-  SUPPORTED_VERSIONS = [tfds.core.Version("1.0.0", "Dataset without cleaning.")]
+  SUPPORTED_VERSIONS = [tfds.core.Version("1.0.0")]
+  RELEASE_NOTES = {
+      "1.1.0": "Removes web contents.",
+      "1.0.0": "Dataset without cleaning.",
+  }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Detailed download instructions (which require running a custom script) are
@@ -84,8 +83,7 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
             _SUMMARY: tfds.features.Text(),
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        homepage=
-        "https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset",
+        homepage="https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset",
         citation=_CITATION,
     )
 

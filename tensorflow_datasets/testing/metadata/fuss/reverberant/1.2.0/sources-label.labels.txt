@@ -1,0 +1,4 @@
+background0
+foreground0
+foreground1
+foreground2

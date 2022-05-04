@@ -1,0 +1,13 @@
+[
+  {
+    "_debate_id": "0",
+    "_claim": "a b c",
+    "_argument_sentences": {
+      "1": "a",
+      "2": "b",
+      "3": "c"
+    },
+    "_debate_name": "x y z",
+    "_claim_id": "0-1"
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "_critic_consensus": "a b c",
+    "_critics": {
+      "1": "a",
+      "2": "b",
+      "3": "c"
+    },
+    "_movie_name": "x y z",
+    "_movie_id": "0-1"
+  }
+]

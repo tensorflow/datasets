@@ -1,0 +1,17 @@
+{
+  "images": [
+    {"file_name": "train_val2018/Plantae/7477/fd6c473c515bfc456bc8bcba4a1ee743.jpg", "id": 1},
+    {"file_name": "train_val2018/Aves/2820/fff4770e8eb804606ea46df7d94f0bb3.jpg", "id": 2},
+    {"file_name": "train_val2018/Aves/2757/ff75de601e021f12db1457c4128d5c49.jpg", "id": 3}
+  ],
+  "annotations": [
+    {"image_id": 1, "category_id": 0, "id": 1},
+    {"image_id": 2, "category_id": 1, "id": 2},
+    {"image_id": 3, "category_id": 2, "id": 3}
+  ],
+  "categories": [
+    {"supercategory": "Plantae", "id": 0, "name": "7477"},
+    {"supercategory": "Aves", "id": 1, "name": "2820"},
+    {"supercategory": "Aves", "id": 2, "name": "2757"}
+  ]
+}

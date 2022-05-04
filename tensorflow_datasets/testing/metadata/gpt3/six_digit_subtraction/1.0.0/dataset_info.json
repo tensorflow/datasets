@@ -1,0 +1,26 @@
+{
+  "citation": "@article{brown2020language,\n    title={Language Models are Few-Shot Learners},\n    author={Tom B. Brown et. al.}\n    year={2020},\n    eprint={2005.14165},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+  "configName": "six_digit_subtraction",
+  "description": "Synthetic datasets for word scramble and arithmetic tasks described in the GPT3 paper.",
+  "downloadSize": "2259409",
+  "location": {
+    "urls": [
+      "https://github.com/openai/gpt-3"
+    ]
+  },
+  "name": "gpt3",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "166157",
+      "shardLengths": [
+        "2000"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "context",
+    "output": "completion"
+  },
+  "version": "1.0.0"
+}

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,19 +15,17 @@
 
 """To shuffle records (stable)."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import math
 import os
 import struct
+from typing import Iterator
 import uuid
 
 import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import hashing
+from tensorflow_datasets.core.utils import type_utils
 
 # Approximately how much data to store in memory before writing to disk.
 # If the amount of data to shuffle is < MAX_MEM_BUFFER_SIZE, no intermediary
@@ -49,6 +47,14 @@ HKEY_SIZE = 128  # Hash of keys is 128 bits (md5).
 HKEY_SIZE_BYTES = HKEY_SIZE // 8
 
 
+class DuplicatedKeysError(Exception):
+
+  def __init__(self, item1, item2):
+    super(DuplicatedKeysError, self).__init__()
+    self.item1 = item1
+    self.item2 = item2
+
+
 def _hkey_to_bytes(hkey):
   """Converts 128 bits integer hkey to binary representation."""
   max_int64 = 0xFFFFFFFFFFFFFFFF
@@ -61,21 +67,27 @@ def _read_hkey(buff):
   return (a << 64) | b
 
 
-def _get_shard(hkey, shards_number):
-  """Returns shard number (int) for given hashed key (int)."""
+def get_bucket_number(hkey, shards_number):
+  """Returns bucket (shard) number (int) for given hashed key (int)."""
   # We purposely do not use modulo (%) to keep global order across shards.
   # floor(key * shards_number / HKEYS_NUMBER), with HKEYS_NUMBER = 2**HKEY_SIZE.
-  return math.trunc((hkey * shards_number)>>HKEY_SIZE)
+  return math.trunc((hkey * shards_number) >> HKEY_SIZE)
 
 
 class _Bucket(object):
-  """Holds (8 bytes key, binary value) tuples to disk, fast.
+  """Holds (key, binary value) tuples to disk, fast.
 
-  The assumption is that many _Bucket instances will be written in parallel,
-  while only one will be read at any given time, and a full _Bucket data can
-  hold in memory. Data is written once and read once.
+  Bucket instances are designed to be used either:
+    1. Many buckets are written in parallel, then they are read one by one. When
+    reading, the data can be fully loaded in memory to be sorted.
+    This is how buckets are currently used in Shuffler.
+    2. Buckets are being written one at a time (or on different machines/jobs).
+    Before writing the data, it is sorted in memory. Many bucket are read in
+    parallel.
+    This is not currently used, but could be if we decide do parallelize the
+    writing of final sharded tfrecord files.
 
-  File format:
+  File format (assuming a key of 16 bytes):
     key1 (16 bytes) | size1 (8 bytes) | data1 (size1 bytes) |
     key2 (16 bytes) | size2 (8 bytes) | data2 (size2 bytes) |
     ...
@@ -85,7 +97,7 @@ class _Bucket(object):
     """Initialize a _Bucket instance.
 
     Args:
-      path (str): where to write the bucket file.
+      path (str): path to bucket file, where to write to or read from.
     """
     self._path = path
     self._fobj = None
@@ -96,6 +108,9 @@ class _Bucket(object):
   def size(self):
     return self._size
 
+  def __len__(self):
+    return self._length
+
   def add(self, key, data):
     """Adds (key, data) to bucket.
 
@@ -104,6 +119,7 @@ class _Bucket(object):
       data (binary): the data.
     """
     if not self._fobj:
+      tf.io.gfile.makedirs(os.path.dirname(self._path))
       self._fobj = tf.io.gfile.GFile(self._path, mode='wb')
     data_size = len(data)
     self._fobj.write(_hkey_to_bytes(key))
@@ -119,13 +135,20 @@ class _Bucket(object):
     self._length += 1
     self._size += data_size
 
+  def flush(self):
+    if self._fobj:
+      self._fobj.flush()
+      self._fobj.close()
+
   def read_values(self):
-    """Returns all data stored in bucket as a list of (hkey, data) tuples."""
-    if not self._fobj:
-      return []  # Nothing was written to this bucket.
-    self._fobj.close()
+    """Yields (hkey, data) tuples stored in bucket."""
+    self.flush()
     path = self._path
-    res = []
+    if not tf.io.gfile.exists(path):
+      # In case bucket was created but nothing was ever added.
+      # This is likely to happen if the number of buckets is large compared to
+      # the number of generated examples.
+      return
     with tf.io.gfile.GFile(path, 'rb') as fobj:
       while True:
         buff = fobj.read(HKEY_SIZE_BYTES)
@@ -135,8 +158,7 @@ class _Bucket(object):
         size_bytes = fobj.read(8)
         size = struct.unpack('=Q', size_bytes)[0]
         data = fobj.read(size)
-        res.append((hkey, data))
-    return res
+        yield hkey, data
 
   def del_file(self):
     if tf.io.gfile.exists(self._path):
@@ -146,18 +168,22 @@ class _Bucket(object):
 class Shuffler(object):
   """Stores data in temp buckets, restitute it shuffled."""
 
-  def __init__(self, dirpath, hash_salt):
+  def __init__(self, dirpath, hash_salt, disable_shuffling: bool = False):
     """Initialize Shuffler.
 
     Args:
       dirpath (string): directory in which to store temporary files.
       hash_salt (string or bytes): salt to hash keys.
+      disable_shuffling (bool): specify whether to shuffle by hashing the key.
     """
     grp_name = uuid.uuid4()
     self._hasher = hashing.Hasher(hash_salt)
-    self._buckets = [
-        _Bucket(os.path.join(dirpath, 'bucket_%s_%03d.tmp' % (grp_name, i)))
-        for i in range(BUCKETS_NUMBER)]
+    self._disable_shuffling = disable_shuffling
+    self._buckets = []
+    for i in range(BUCKETS_NUMBER):
+      bucket_name = 'bucket_%s_%03d.tmp' % (grp_name, i)
+      path = os.path.join(dirpath, bucket_name)
+      self._buckets.append(_Bucket(path))
     self._read_only = False
     self._total_bytes = 0
     # To keep data in memory until enough data has been gathered.
@@ -169,14 +195,20 @@ class Shuffler(object):
     """Return total size in bytes of records (not keys)."""
     return self._total_bytes
 
+  @property
+  def bucket_lengths(self):
+    if self._in_memory:
+      return [len(self._mem_buffer)]
+    return [len(b) for b in self._buckets]
+
   def _add_to_bucket(self, hkey, data):
-    bucket_number = _get_shard(hkey, BUCKETS_NUMBER)
+    bucket_number = get_bucket_number(hkey, BUCKETS_NUMBER)
     self._buckets[bucket_number].add(hkey, data)
 
   def _add_to_mem_buffer(self, hkey, data):
     self._mem_buffer.append((hkey, data))
     if self._total_bytes > MAX_MEM_BUFFER_SIZE:
-      for hkey, data  in self._mem_buffer:
+      for hkey, data in self._mem_buffer:
         self._add_to_bucket(hkey, data)
       self._mem_buffer = None
       self._in_memory = False
@@ -186,24 +218,29 @@ class Shuffler(object):
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
     if not isinstance(data, six.binary_type):
-      raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' % (
-          type(data)))
-    hkey = self._hasher.hash_key(key)
+      raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' %
+                           (type(data)))
+    if self._disable_shuffling:
+      hkey = key
+    else:
+      hkey = self._hasher.hash_key(key)
     self._total_bytes += len(data)
     if self._in_memory:
       self._add_to_mem_buffer(hkey, data)
     else:
       self._add_to_bucket(hkey, data)
 
-  def __iter__(self):
+  def __iter__(self) -> Iterator[type_utils.KeySerializedExample]:
     self._read_only = True
     previous_hkey = None
+    previous_data = None
     iterator = self._iter_mem() if self._in_memory else self._iter_buckets()
     for hkey, data in iterator:
       if hkey == previous_hkey:
-        raise AssertionError('Two records share the same hashed key!')
+        raise DuplicatedKeysError(data, previous_data)
       previous_hkey = hkey
-      yield data
+      yield hkey, data
+      previous_data = data
 
   def _iter_mem(self):
     for hkey, data in sorted(self._mem_buffer):

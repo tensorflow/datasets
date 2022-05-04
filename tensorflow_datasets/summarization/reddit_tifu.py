@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,11 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Reddit TIFU Dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Reddit TIFU dataset using tifu or tldr from subreddit tifu."""
 
 import json
 
@@ -61,8 +57,7 @@ _ADDITIONAL_FEATURES = ["ups", "num_comments", "score", "upvote_ratio"]
 class RedditTifuConfig(tfds.core.BuilderConfig):
   """BuilderConfig for RedditTifu."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, summary_key=None, **kwargs):
+  def __init__(self, *, summary_key=None, **kwargs):
     """BuilderConfig for RedditTifu.
 
     Args:

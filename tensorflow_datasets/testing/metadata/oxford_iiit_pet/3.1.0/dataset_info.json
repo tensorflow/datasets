@@ -1,0 +1,190 @@
+{
+  "citation": "@InProceedings{parkhi12a,\n  author       = \"Parkhi, O. M. and Vedaldi, A. and Zisserman, A. and Jawahar, C.~V.\",\n  title        = \"Cats and Dogs\",\n  booktitle    = \"IEEE Conference on Computer Vision and Pattern Recognition\",\n  year         = \"2012\",\n}\n",
+  "description": "The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200\nimages for each class. The images have large variations in scale, pose and\nlighting. All images have an associated ground truth annotation of breed.\n",
+  "location": {
+    "urls": [
+      "http://www.robots.ox.ac.uk/~vgg/data/pets/"
+    ]
+  },
+  "name": "oxford_iiit_pet",
+  "schema": {
+    "feature": [
+      {
+        "name": "file_name",
+        "type": "BYTES"
+      },
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      },
+      {
+        "name": "segmentation_mask",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "species",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "840161280",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "917",
+        "917",
+        "918",
+        "917"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "3669"
+              }
+            },
+            "name": "file_name",
+            "type": "BYTES"
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3669"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3669"
+              },
+              "max": 36.0
+            }
+          },
+          {
+            "name": "segmentation_mask",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3669"
+              },
+              "max": 3.0,
+              "min": 1.0
+            }
+          },
+          {
+            "name": "species",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3669"
+              },
+              "max": 1.0
+            }
+          }
+        ],
+        "numExamples": "3669"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "920",
+        "920",
+        "920",
+        "920"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "3680"
+              }
+            },
+            "name": "file_name",
+            "type": "BYTES"
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3680"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3680"
+              },
+              "max": 36.0
+            }
+          },
+          {
+            "name": "segmentation_mask",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3680"
+              },
+              "max": 3.0,
+              "min": 1.0
+            }
+          },
+          {
+            "name": "species",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3680"
+              },
+              "max": 1.0
+            }
+          }
+        ],
+        "numExamples": "3680"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "3.1.0"
+}

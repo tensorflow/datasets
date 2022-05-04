@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,16 +15,10 @@
 
 """Tests for tensorflow_datasets.core.dataset_utils."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
-
-tf.compat.v1.enable_eager_execution()
 
 
 def _create_dataset(rng):
@@ -65,13 +59,21 @@ class DatasetAsNumPyTest(testing.TestCase):
     ds = _create_dataset(range(10))
     np_ds = dataset_utils.as_numpy(ds)
     self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
+    # Iterating twice on the dataset recreate the iterator.
+    self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
+
+    if tf.executing_eagerly():
+      self.assertEqual(len(np_ds), 10)
+    else:
+      with self.assertRaisesWithPredicateMatch(
+          TypeError, "__len__() is not supported for `tfds.as_numpy`"):
+        _ = len(np_ds)
 
   def test_with_graph(self):
     with tf.Graph().as_default():
-      with tf.Graph().as_default() as g:
-        ds = _create_dataset(range(10))
-      np_ds = dataset_utils.as_numpy(ds, graph=g)
-      self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
+      ds = _create_dataset(range(10))
+      np_ds = dataset_utils.as_numpy(ds)
+    self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
 
   @testing.run_in_graph_and_eager_modes()
   def test_singleton_dataset_with_nested_elements(self):
@@ -158,81 +160,35 @@ class DatasetAsNumPyTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_ragged_tensors_ds(self):
+
     def _gen_ragged_tensors():
       # Yield the (flat_values, rowids)
       yield ([0, 1, 2, 3], [0, 0, 0, 2])  # ex0
       yield ([], [])  # ex1
       yield ([4, 5, 6], [0, 1, 1])  # ex2
+
     ds = tf.data.Dataset.from_generator(
         _gen_ragged_tensors,
         output_types=(tf.int64, tf.int64),
-        output_shapes=((None,), (None,))
-    )
+        output_shapes=((None,), (None,)))
     ds = ds.map(tf.RaggedTensor.from_value_rowids)
 
     rt0, rt1, rt2 = list(dataset_utils.as_numpy(ds))
     self.assertAllEqual(rt0, [
         [0, 1, 2],
         [],
-        [3,],
+        [
+            3,
+        ],
     ])
     self.assertAllEqual(rt1, [])
     self.assertAllEqual(rt2, [[4], [5, 6]])
 
-
-class DatasetOffsetTest(testing.TestCase):
-  """Test that the offset functions are working properly."""
-
-  def test_build_mask_ds(self):
-
-    mask = [True] * 15 + [False] * 85
-
-    # No offset
-    ds = dataset_utils._build_mask_ds(mask=mask, mask_offset=0)
-    mask_values = list(dataset_utils.as_numpy(ds.take(300)))
-    self.assertEqual(mask_values, mask * 3)
-
-    # Skip the first 30 elements (remainders from previous shard)
-    ds = dataset_utils._build_mask_ds(mask=mask, mask_offset=30)
-    mask_values = list(dataset_utils.as_numpy(ds.take(370)))
-    self.assertEqual(mask_values, mask[30:] + mask * 3)
-
-  def test_no_examples_skipped(self):
-
-    self.assertTrue(dataset_utils._no_examples_skipped([
-        {
-            "filepath": "some_path",
-            "mask_offset": 5,
-            "mask": [True] * 100,
-        },
-        {
-            "filepath": "some_path",
-            "mask_offset": 60,
-            "mask": [True] * 100,
-        },
-        {
-            "filepath": "some_path",
-            "mask_offset": 0,
-            "mask": [True] * 100,
-        },
-    ]))
-    self.assertFalse(dataset_utils._no_examples_skipped([
-        {
-            "filepath": "some_path",
-            "mask_offset": 5,
-            "mask": [True] * 100,
-        },
-        {
-            "filepath": "some_path",
-            "mask_offset": 60,
-            "mask": [True] * 99 + [False],  # Single example skipped here
-        },
-        {
-            "filepath": "some_path",
-            "mask_offset": 0,
-            "mask": [True] * 100,
-        },
-    ]))
+  def test_none_ds(self):
+    ds = tf.data.Dataset.range(10)
+    ds = ds.map(lambda x: (x, None))
+    exs = list(dataset_utils.as_numpy(ds))
+    self.assertAllEqual(exs, [(x, None) for x in range(10)])
 
 
 if __name__ == "__main__":

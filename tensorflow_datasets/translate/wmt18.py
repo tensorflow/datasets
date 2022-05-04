@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,18 +46,13 @@ class Wmt18Translate(wmt.WmtTranslate):
 
   # Version history:
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.0.3: Initial version.
   BUILDER_CONFIGS = [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
           description="WMT 2018 %s-%s translation task dataset." % (l1, l2),
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version=tfds.core.Version(
-              "0.0.3", experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version("1.0.0"),
-          ],
+          version=tfds.core.Version("1.0.0"),
       ) for l1, l2 in _LANGUAGE_PAIRS
   ]
 
@@ -67,12 +62,9 @@ class Wmt18Translate(wmt.WmtTranslate):
         tfds.Split.TRAIN: [
             "europarl_v7", "europarl_v8_18", "paracrawl_v1", "commoncrawl",
             "newscommentary_v13", "czeng_17", "yandexcorpus",
-            "wikiheadlines_fi", "wikiheadlines_ru", "setimes_2",
-            "uncorpus_v1", "rapid_2016"] + wmt.CWMT_SUBSET_NAMES,
-        tfds.Split.VALIDATION: [
-            "newsdev2018", "newstest2017", "newstestB2017"
-        ],
-        tfds.Split.TEST: [
-            "newstest2018"
-        ]
+            "wikiheadlines_fi", "wikiheadlines_ru", "setimes_2", "uncorpus_v1",
+            "rapid_2016"
+        ] + wmt.CWMT_SUBSET_NAMES,
+        tfds.Split.VALIDATION: ["newsdev2018", "newstest2017", "newstestB2017"],
+        tfds.Split.TEST: ["newstest2018"]
     }

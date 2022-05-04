@@ -1,0 +1,14 @@
+{
+    "train": [
+        {
+            "category": "Airport",
+            "gem_id": "web_nlg_ru-train-24",
+            "input": [
+                "Abilene,_Texas | country | United_States"
+            ],
+            "references": [],
+            "target": "\u0410\u0431\u0438\u043b\u0438\u043d, \u0448\u0442\u0430\u0442 \u0422\u0435\u0445\u0430\u0441 - \u0432 \u0421\u0428\u0410.",
+            "webnlg_id": "train/Airport/1/Id11"
+        }
+    ]
+}

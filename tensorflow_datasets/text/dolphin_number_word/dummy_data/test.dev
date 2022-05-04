@@ -1,0 +1,50 @@
+[
+  {
+    "id": "algebra.com.101793",
+    "index": 49,
+    "text": "Find two numbers whose sum is 62 and whose difference is  6.",
+    "sources": "algebra.com.101793",
+    "equations": [
+      "unkn: x,y",
+      "equ: x+y=62",
+      "equ: x-y=6"
+    ],
+    "ans": "{34; 28}",
+    "ans_simple": [
+      34,
+      28
+    ]
+  },
+  {
+    "id": "algebra.com.112903",
+    "index": 1032,
+    "text": "the sum of two numbers is 68. their difference is 16. what are the numbers?",
+    "sources": "algebra.com.112903",
+    "equations": [
+      "unkn: x,y",
+      "equ: x+y=68",
+      "equ: x-y=16"
+    ],
+    "ans": "{42;26}",
+    "ans_simple": [
+      42,
+      26
+    ]
+  },
+  {
+    "id": "algebra.com.193198",
+    "index": 1256,
+    "text": "the sum of two numbers is 97. the difference of the two numbers is 57. find the two numbers",
+    "sources": "algebra.com.193198",
+    "equations": [
+      "unkn: x,y",
+      "equ: x+y=97",
+      "equ: x-y=57"
+    ],
+    "ans": "{77; 20}",
+    "ans_simple": [
+      77,
+      20
+    ]
+  }
+]

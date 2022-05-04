@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,38 +15,48 @@
 
 """Tests for c4 dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import six
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.text import c4
 
 
 class C4Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = c4.C4
-  # 10k shards take make the test too slow.
-  c4._DEFAULT_NUM_SHARDS = 1
-  # GzipFile + GFile and TextIOWrapper are broken for py2.
-  BUILDER_CONFIG_NAMES_TO_TEST = ["en"] if six.PY3 else []
+  BUILDER_CONFIG_NAMES_TO_TEST = ["en"]
 
   DL_EXTRACT_RESULT = {
-      "wet_urls": ["wet_urls.txt"],
+      "wet_path_urls": ["wet_urls.txt"],
       "wet_files": ["cc_0.warc.wet.gz", "cc_1.warc.wet.gz"],
-      "badwords": "badwords.txt",
+      "badwords": {
+          "en": "badwords.txt"
+      },
   }
   SPLITS = {
       "train": 2,
+      "validation": 2,
   }
 
 
 class C4NoCleanTest(C4Test):
-  # GzipFile + GFile and TextIOWrapper are broken for py2.
-  BUILDER_CONFIG_NAMES_TO_TEST = ["en.noclean"] if six.PY3 else []
+  BUILDER_CONFIG_NAMES_TO_TEST = ["en.noclean"]
   SPLITS = {
       "train": 4,
+      "validation": 2,
+  }
+
+
+class C4MultilingualTest(C4Test):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["multilingual"]
+  for config in c4.C4.BUILDER_CONFIGS:
+    if config.name == "multilingual":
+      config.languages = ["en", "de"]
+
+  SPLITS = {
+      "en": 1,
+      "en-validation": 1,
+      "de": 1,
+      "de-validation": 1,
+      "und": 1,
+      "und-validation": 1,
   }
 
 

@@ -1,0 +1,46 @@
+name: Publish tfds-nightly to PyPI
+
+on:
+  # Event triggered daily at 00:30 am UTC
+  schedule:
+    - cron:  '30 0 * * *'
+
+  # Event manually triggered (in the Github UI)
+  workflow_dispatch:
+    inputs:
+      git-ref:
+        description: Git ref (e.g. SHA or tag) (Optional)
+        default: ""
+        required: false
+
+jobs:
+  publish-job:
+    # Prevents action from running on forks.
+    if: github.repository == 'tensorflow/datasets'
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.inputs.git-ref }}
+
+    - name: Setup Python.
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Install deps.
+      run: pip install setuptools wheel twine
+
+    - name: Create the source distribution and build the wheels.
+      run: |
+        python setup.py sdist --nightly
+        python setup.py bdist_wheel --nightly
+
+    - name: Publish the package.
+      run: |
+        twine check dist/*
+        twine upload dist/*
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.NIGHTLY_PYPI_PASSWORD }}

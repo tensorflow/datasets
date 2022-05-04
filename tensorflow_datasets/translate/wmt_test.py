@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,6 @@
 
 # -*- coding: utf-8 -*-
 """Tests for WMT translate dataset module."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import six
@@ -41,8 +37,7 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
             "train": ["paracrawl_v3"],
             "validation": ["newstest2009", "newstest2010"],
         },
-        version=tfds.core.Version(
-            "0.0.1", experiments={tfds.core.Experiment.S3: False}),
+        version=tfds.core.Version("1.0.0"),
     )
     wmt.WmtTranslate.BUILDER_CONFIGS = [config]
 
@@ -80,11 +75,15 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
       "validation": 4,
   }
 
+  # Wmt itself do not define checksums. Checksums are contained in individual
+  # `wmt16.txt`, `wmt17.txt`,... files.
+  SKIP_CHECKSUMS = True
+
   def test_gzip_reading(self):
     results = [
         x for _, x in wmt._parse_parallel_sentences(
-            os.path.join(self.example_dir, "first.cs.gz"),
-            os.path.join(self.example_dir, "second.en.txt"))
+            os.path.join(self.dummy_data, "first.cs.gz"),
+            os.path.join(self.dummy_data, "second.en.txt"))
     ]
     self.assertEqual(results[1]["cs"], "zmizel")
     if six.PY3:

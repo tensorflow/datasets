@@ -3,60 +3,130 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="gap" />
-  <meta itemprop="description" content="&#10;GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of &#10;(ambiguous pronoun, antecedent name), sampled from Wikipedia and released by &#10;Google AI Language for the evaluation of coreference resolution in practical &#10;applications.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('gap', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of &#10;(ambiguous pronoun, antecedent name), sampled from Wikipedia and released by &#10;Google AI Language for the evaluation of coreference resolution in practical &#10;applications.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;gap&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/gap" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/gap-coreference" />
-  <meta itemprop="citation" content="&#10;@article{DBLP:journals/corr/abs-1810-05201,&#10;  author    = {Kellie Webster and&#10;               Marta Recasens and&#10;               Vera Axelrod and&#10;               Jason Baldridge},&#10;  title     = {Mind the {GAP:} {A} Balanced Corpus of Gendered Ambiguous Pronouns},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1810.05201},&#10;  year      = {2018},&#10;  url       = {http://arxiv.org/abs/1810.05201},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1810.05201},&#10;  timestamp = {Tue, 30 Oct 2018 20:39:56 +0100},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1810-05201},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}&#10;" />
+  <meta itemprop="citation" content="@article{DBLP:journals/corr/abs-1810-05201,&#10;  author    = {Kellie Webster and&#10;               Marta Recasens and&#10;               Vera Axelrod and&#10;               Jason Baldridge},&#10;  title     = {Mind the {GAP:} {A} Balanced Corpus of Gendered Ambiguous Pronouns},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1810.05201},&#10;  year      = {2018},&#10;  url       = {http://arxiv.org/abs/1810.05201},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1810.05201},&#10;  timestamp = {Tue, 30 Oct 2018 20:39:56 +0100},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1810-05201},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
+
 # `gap`
+
+
+*   **Description**:
 
 GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of
 (ambiguous pronoun, antecedent name), sampled from Wikipedia and released by
 Google AI Language for the evaluation of coreference resolution in practical
 applications.
 
-*   URL:
+*   **Homepage**:
     [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
-*   `DatasetBuilder`:
-    [`tfds.text.gap.Gap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/gap.py)
-*   Version: `v0.1.0`
-*   Versions:
 
-    *   **`0.1.0`** (default):
+*   **Source code**:
+    [`tfds.text.Gap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/gap.py)
 
-*   Size: `2.29 MiB`
+*   **Versions**:
 
-## Features
+    *   **`0.1.0`** (default): No release notes.
+
+*   **Download size**: `2.29 MiB`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,000
+`'train'`      | 2,000
+`'validation'` | 454
+
+*   **Feature structure**:
+
 ```python
 FeaturesDict({
     'A': Text(shape=(), dtype=tf.string),
-    'A-coref': Tensor(shape=(), dtype=tf.bool),
-    'A-offset': Tensor(shape=(), dtype=tf.int32),
+    'A-coref': tf.bool,
+    'A-offset': tf.int32,
     'B': Text(shape=(), dtype=tf.string),
-    'B-coref': Tensor(shape=(), dtype=tf.bool),
-    'B-offset': Tensor(shape=(), dtype=tf.int32),
+    'B-coref': tf.bool,
+    'B-offset': tf.int32,
     'ID': Text(shape=(), dtype=tf.string),
     'Pronoun': Text(shape=(), dtype=tf.string),
-    'Pronoun-offset': Tensor(shape=(), dtype=tf.int32),
+    'Pronoun-offset': tf.int32,
     'Text': Text(shape=(), dtype=tf.string),
     'URL': Text(shape=(), dtype=tf.string),
 })
 ```
 
-## Statistics
+*   **Feature documentation**:
 
-Split      | Examples
-:--------- | -------:
-ALL        | 4,454
-TEST       | 2,000
-TRAIN      | 2,000
-VALIDATION | 454
+Feature        | Class        | Shape | Dtype     | Description
+:------------- | :----------- | :---- | :-------- | :----------
+               | FeaturesDict |       |           |
+A              | Text         |       | tf.string |
+A-coref        | Tensor       |       | tf.bool   |
+A-offset       | Tensor       |       | tf.int32  |
+B              | Text         |       | tf.string |
+B-coref        | Tensor       |       | tf.bool   |
+B-offset       | Tensor       |       | tf.int32  |
+ID             | Text         |       | tf.string |
+Pronoun        | Text         |       | tf.string |
+Pronoun-offset | Tensor       |       | tf.int32  |
+Text           | Text         |       | tf.string |
+URL            | Text         |       | tf.string |
 
-## Homepage
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `None`
 
-*   [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
-## Citation
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gap-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+*   **Citation**:
+
 ```
 @article{DBLP:journals/corr/abs-1810-05201,
   author    = {Kellie Webster and
@@ -76,4 +146,3 @@ VALIDATION | 454
 }
 ```
 
---------------------------------------------------------------------------------

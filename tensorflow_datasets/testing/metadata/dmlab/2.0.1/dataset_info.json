@@ -1,0 +1,68 @@
+{
+  "citation": "@article{zhai2019visual,\n        title={The Visual Task Adaptation Benchmark},\n        author={Xiaohua Zhai and Joan Puigcerver and Alexander Kolesnikov and\n               Pierre Ruyssen and Carlos Riquelme and Mario Lucic and\n               Josip Djolonga and Andre Susano Pinto and Maxim Neumann and\n               Alexey Dosovitskiy and Lucas Beyer and Olivier Bachem and\n               Michael Tschannen and Marcin Michalski and Olivier Bousquet and\n               Sylvain Gelly and Neil Houlsby},\n                              year={2019},\n                              eprint={1910.04867},\n                              archivePrefix={arXiv},\n                              primaryClass={cs.CV},\n                              url = {https://arxiv.org/abs/1910.04867}\n                          }",
+  "description": "The Dmlab dataset contains frames observed by the agent acting in the\nDeepMind Lab environment, which are annotated by the distance between\nthe agent and various objects present in the environment. The goal is to\nis to evaluate the ability of a visual model to reason about distances\nfrom the visual input in 3D environments. The Dmlab dataset consists of\n360x480 color images in 6 classes. The classes are\n{close, far, very far} x {positive reward, negative reward}\nrespectively.",
+  "downloadSize": "3017022789",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/task_adaptation"
+    ]
+  },
+  "name": "dmlab",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "686878633",
+      "shardLengths": [
+        "2842",
+        "2842",
+        "2842",
+        "2842",
+        "2841",
+        "2842",
+        "2842",
+        "2842"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "1986861731",
+      "shardLengths": [
+        "4097",
+        "4097",
+        "4097",
+        "4097",
+        "4096",
+        "4097",
+        "4097",
+        "4097",
+        "4097",
+        "4097",
+        "4097",
+        "4096",
+        "4097",
+        "4097",
+        "4097",
+        "4097"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "684019714",
+      "shardLengths": [
+        "2828",
+        "2829",
+        "2829",
+        "2828",
+        "2828",
+        "2829",
+        "2829",
+        "2828"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "2.0.1"
+}

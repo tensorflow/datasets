@@ -1,0 +1,3 @@
+id	utterance	context	targetValue
+nu-0	which country had the most cyclists finish within the top 10?	csv/203-csv/733.csv	Italy
+nu-1	how many people were murdered in 1940/41?	csv/204-csv/149.csv	100,000

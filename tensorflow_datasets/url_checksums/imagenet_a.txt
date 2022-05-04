@@ -1,0 +1,1 @@
+https://people.eecs.berkeley.edu/~hendrycks/imagenet-a.tar	687552512	3bb3632277e6ba6392ea64c02ddbf4dd2266c9caffd6bc09c9656d28f012589e	imagenet-a.tar

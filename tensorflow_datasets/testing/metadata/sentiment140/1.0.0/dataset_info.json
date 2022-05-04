@@ -1,0 +1,35 @@
+{
+  "citation": "@ONLINE {Sentiment140,\n    author = \"Go, Alec and Bhayani, Richa and Huang, Lei\",\n    title  = \"Twitter Sentiment Classification using Distant Supervision\",\n    year   = \"2009\",\n    url    = \"http://help.sentiment140.com/home\"\n}",
+  "description": "Sentiment140 allows you to discover the sentiment of a brand, product, or topic on Twitter.\n\nThe data is a CSV with emoticons removed. Data file format has 6 fields:\n\n0. the polarity of the tweet (0 = negative, 2 = neutral, 4 = positive)\n1. the id of the tweet (2087)\n2. the date of the tweet (Sat May 16 23:58:44 UTC 2009)\n3. the query (lyx). If there is no query, then this value is NO_QUERY.\n4. the user that tweeted (robotickilldozr)\n5. the text of the tweet (Lyx is cool)\n\nFor more information, refer to the paper\nTwitter Sentiment Classification with Distant Supervision at\nhttps://cs.stanford.edu/people/alecmgo/papers/TwitterDistantSupervision09.pdf",
+  "downloadSize": "81363704",
+  "location": {
+    "urls": [
+      "http://help.sentiment140.com/home"
+    ]
+  },
+  "name": "sentiment140",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "102723",
+      "shardLengths": [
+        "498"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "319850639",
+      "shardLengths": [
+        "400000",
+        "400000",
+        "400000",
+        "400000"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "text",
+    "output": "polarity"
+  },
+  "version": "1.0.0"
+}

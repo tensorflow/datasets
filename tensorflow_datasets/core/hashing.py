@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,20 +45,29 @@ The split name is being used as salt to avoid having the same keys in two splits
 result in same order.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import hashlib
+from typing import Union
 
-import six
-import tensorflow as tf
+import numpy as np
+
+HashKey = Union[str, bytes, int, np.ndarray]
 
 
-def _to_bytes(data):
-  if not isinstance(data, (six.string_types, bytes)):
+def _to_bytes(data: HashKey) -> bytes:
+  """Converts the key to bytes."""
+  if isinstance(data, bytes):
+    return data
+  elif isinstance(data, str):
+    # For windows compatibility, we normalize the key in case a
+    # filepath is passed as key ('path\\to\\file' -> 'path/to/file')
+    data = data.replace('\\', '/')
+  elif isinstance(data, int):
     data = str(data)
-  return tf.compat.as_bytes(data)
+  elif isinstance(data, np.ndarray) and data.size == 1:  # Singleton array
+    return _to_bytes(data.item())
+  else:
+    raise TypeError(f'Invalid key type: {data!r} ({type(data)})')
+  return data.encode('utf-8')
 
 
 class Hasher(object):
@@ -67,17 +76,16 @@ class Hasher(object):
   def __init__(self, salt):
     self._md5 = hashlib.md5(_to_bytes(salt))
 
-  def hash_key(self, key):
+  def hash_key(self, key: HashKey) -> int:
     """Returns 128 bits hash of given key.
 
     Args:
       key (bytes, string or anything convertible to a string): key to be hashed.
-        If the key is a string, it will be encoded to bytes using utf-8.
-        If the key is neither a string nor bytes, it will be converted to a str,
-          then to bytes.
-        This means that `"1"` (str) and `1` (int) will have the same hash. The
-        intent of the hash being to shuffle keys, it is recommended that all
-        keys of a given set to shuffle use a single type.
+        If the key is a string, it will be encoded to bytes using utf-8. If the
+        key is neither a string nor bytes, it will be converted to a str, then
+        to bytes. This means that `"1"` (str) and `1` (int) will have the same
+        hash. The intent of the hash being to shuffle keys, it is recommended
+        that all keys of a given set to shuffle use a single type.
 
     Returns:
       128 bits integer, hash of key.

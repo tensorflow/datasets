@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,6 @@
 
 """Tests for para_crawl dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow_datasets.testing as tfds_test
 from tensorflow_datasets.translate import para_crawl
 
@@ -26,15 +22,11 @@ from tensorflow_datasets.translate import para_crawl
 class ParacrawlTest(tfds_test.DatasetBuilderTestCase):
 
   DATASET_CLASS = para_crawl.ParaCrawl
-  BUILDER_CONFIG_NAMES_TO_TEST = ["enhu_plain_text"]
   SPLITS = {
       "train": 5,
   }
   DL_EXTRACT_RESULT = {"data_file": "en-hu.bicleaner07.txt"}
 
-
-class ParacrawlS3Test(ParacrawlTest):
-  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   tfds_test.test_main()

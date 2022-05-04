@@ -1,0 +1,3 @@
+https://github.com/tuetschek/e2e-cleaning/raw/master/cleaned-data/devel-fixed.no-ol.csv	1581285	bb88df2565826a463f96e93a5ab69a8c6460de54f2e68179eb94f0019f430d4d	devel-fixed.no-ol.csv
+https://github.com/tuetschek/e2e-cleaning/raw/master/cleaned-data/test-fixed.csv	1915378	99b43c2769a09d62fc5d37dcffaa59d4092bcffdc611f226258681df61269b17	test-fixed.csv
+https://github.com/tuetschek/e2e-cleaning/raw/master/cleaned-data/train-fixed.no-ol.csv	11100744	12a4f59ec85ddd2586244aaf166f65d1b8cd468b6227e6620108baf118d5b325	train-fixed.no-ol.csv

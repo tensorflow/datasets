@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,26 +15,25 @@
 
 """Tests for tensorflow_datasets.core.test_utils."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+import pathlib
+
+import pytest
 
 import tensorflow as tf
 
 from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
 
-tf.compat.v1.enable_eager_execution()
-
 
 class RunInGraphAndEagerTest(test_case.TestCase):
 
   def test_run_in_graph_and_eager_modes(self):
     l = []
+
     def inc(self, with_brackets):
       del self  # self argument is required by run_in_graph_and_eager_modes.
-      mode = "eager" if tf.executing_eagerly() else "graph"
-      with_brackets = "with_brackets" if with_brackets else "without_brackets"
+      mode = 'eager' if tf.executing_eagerly() else 'graph'
+      with_brackets = 'with_brackets' if with_brackets else 'without_brackets'
       l.append((with_brackets, mode))
 
     f = test_utils.run_in_graph_and_eager_modes(inc)
@@ -43,16 +42,17 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     f(self, with_brackets=True)
 
     self.assertEqual(len(l), 4)
-    self.assertEqual(set(l), {
-        ("with_brackets", "graph"),
-        ("with_brackets", "eager"),
-        ("without_brackets", "graph"),
-        ("without_brackets", "eager"),
-    })
+    self.assertEqual(
+        set(l), {
+            ('with_brackets', 'graph'),
+            ('with_brackets', 'eager'),
+            ('without_brackets', 'graph'),
+            ('without_brackets', 'eager'),
+        })
 
   def test_run_in_graph_and_eager_modes_setup_in_same_mode(self):
     modes = []
-    mode_name = lambda: "eager" if tf.executing_eagerly() else "graph"
+    mode_name = lambda: 'eager' if tf.executing_eagerly() else 'graph'
 
     class ExampleTest(test_case.TestCase):
 
@@ -60,18 +60,107 @@ class RunInGraphAndEagerTest(test_case.TestCase):
         pass
 
       def setUp(self):
-        modes.append("setup_" + mode_name())
+        super(ExampleTest, self).setUp()
+        modes.append('setup_' + mode_name())
+
+      def subTest(self, msg, **params):
+        modes.append('subtest_' + msg)
+        return super().subTest(msg, **params)
 
       @test_utils.run_in_graph_and_eager_modes
       def testBody(self):
-        modes.append("run_" + mode_name())
+        modes.append('run_' + mode_name())
 
     e = ExampleTest()
     e.setUp()
     e.testBody()
 
-    self.assertEqual(modes[0:2], ["setup_eager", "run_eager"])
-    self.assertEqual(modes[2:], ["setup_graph", "run_graph"])
+    self.assertEqual(modes, [
+        'setup_eager',
+        'subtest_eager_mode',
+        'run_eager',
+        'subtest_graph_mode',
+        'setup_graph',
+        'run_graph',
+    ])
 
-if __name__ == "__main__":
-  test_utils.test_main()
+  def test_mock_tf(self):
+    # pylint: disable=g-import-not-at-top,reimported
+    import tensorflow as tf_lib1
+    import tensorflow as tf_lib2
+
+    # pylint: enable=g-import-not-at-top,reimported
+
+    def f():
+      pass
+
+    with test_utils.mock_tf('tf.io.gfile', exists=f):
+      # Both aliases should have been patched
+      self.assertIs(tf_lib1.io.gfile.exists, f)
+      self.assertIs(tf_lib2.io.gfile.exists, f)
+
+    self.assertIsNot(tf_lib1.io.gfile.exists, f)
+    self.assertIsNot(tf_lib2.io.gfile.exists, f)
+
+    with test_utils.mock_tf('tf.io.gfile.exists', f):
+      self.assertIs(tf_lib1.io.gfile.exists, f)
+      self.assertIs(tf_lib2.io.gfile.exists, f)
+
+
+@pytest.mark.parametrize(
+    'as_path_fn',
+    [pathlib.Path, str]  # Test both PathLike and str
+)
+def test_mock_fs(as_path_fn):
+  _p = as_path_fn  # pylint: disable=invalid-name
+  fs = test_utils.MockFs()
+  with fs.mock():
+    fs.add_file(_p('/path/to/file1'), 'Content of file 1')
+    fs.add_file(_p('/path/file.txt'), 'Content of file.txt')
+
+    # Test `tf.io.gfile.exists`
+    assert tf.io.gfile.exists(_p('/path/to/file1'))
+    assert tf.io.gfile.exists(_p('/path/to/'))
+    assert tf.io.gfile.exists(_p('/path/to'))
+    assert tf.io.gfile.exists(_p('/path'))
+    assert not tf.io.gfile.exists(_p('/pat'))
+    assert not tf.io.gfile.exists(_p('/path/to/file1_nonexisting'))
+    assert not tf.io.gfile.exists(_p('/path/to_file1_nonexisting'))
+
+    # Test `tf.io.gfile.exists` (relative path)
+    fs.add_file(_p('relative_path/to/file.txt'), 'Content')
+    assert tf.io.gfile.exists(_p('relative_path/to/file.txt'))
+    assert tf.io.gfile.exists(_p('relative_path/to/'))
+    assert tf.io.gfile.exists(_p('relative_path/to'))
+    assert tf.io.gfile.exists(_p('relative_path'))
+    assert not tf.io.gfile.exists(_p('/relative_path/to'))
+
+    # Test `tf.io.gfile.GFile` (write and read mode)
+    with tf.io.gfile.GFile(_p('/path/to/file2'), 'w') as f:
+      f.write('Content of file 2 (old)')
+    assert fs.files['/path/to/file2'] == 'Content of file 2 (old)'
+    with tf.io.gfile.GFile(_p('/path/to/file2'), 'w') as f:
+      f.write('Content of file 2 (new)')
+    assert fs.files['/path/to/file2'] == 'Content of file 2 (new)'
+    with tf.io.gfile.GFile(_p('/path/to/file2'), 'r') as f:
+      assert f.read() == 'Content of file 2 (new)'
+
+    # Test `tf.io.gfile.rename`
+    assert fs.files['/path/to/file1'] == 'Content of file 1'
+    tf.io.gfile.rename(_p('/path/to/file1'), _p('/path/to/file1_moved'))
+    assert '/path/to/file1' not in fs.files
+    assert fs.files['/path/to/file1_moved'] == 'Content of file 1'
+
+    # Test `tf.io.gfile.listdir`
+    assert (set(tf.io.gfile.listdir(_p('/path/to'))) == set(
+        tf.io.gfile.listdir(_p('/path/to/'))))
+    assert set(tf.io.gfile.listdir(_p('/path/to'))) == {'file1_moved', 'file2'}
+    assert set(tf.io.gfile.listdir(_p('/path'))) == {'file.txt', 'to'}
+
+    # Test `MockFs.files`
+    assert fs.files == {
+        '/path/to/file2': 'Content of file 2 (new)',
+        '/path/to/file1_moved': 'Content of file 1',
+        '/path/file.txt': 'Content of file.txt',
+        'relative_path/to/file.txt': 'Content',
+    }

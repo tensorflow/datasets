@@ -1,0 +1,6 @@
+[Namespaces]
+# You can add your own datasets here to register them in TFDS. See details
+# at: https://www.tensorflow.org/datasets/community_catalog/overview
+huggingface = "github://huggingface/datasets/tree/master/datasets"
+kubric = "gs://kubric-public/tfds"
+robotics = "gs://gresearch/robotics"

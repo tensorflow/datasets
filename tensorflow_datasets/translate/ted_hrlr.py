@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """TED talk high/low-resource paired language data set from Qi, et al. 2018."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -61,8 +57,7 @@ _VALID_LANGUAGE_PAIRS = (
 class TedHrlrConfig(tfds.core.BuilderConfig):
   """BuilderConfig for TED talk data comparing high/low resource languages."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, language_pair=(None, None), **kwargs):
+  def __init__(self, *, language_pair=(None, None), **kwargs):
     """BuilderConfig for TED talk data comparing high/low resource languages.
 
     The first language in `language_pair` should either be a 2-letter coded
@@ -104,13 +99,11 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       TedHrlrConfig(  # pylint: disable=g-complex-comprehension
           language_pair=pair,
-          version=tfds.core.Version(
-              "0.0.1", experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version(
-                  "1.0.0",
-                  "New split API (https://tensorflow.org/datasets/splits)"),
-          ]) for pair in _VALID_LANGUAGE_PAIRS
+          version=tfds.core.Version("1.0.0"),
+          release_notes={
+              "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+          },
+      ) for pair in _VALID_LANGUAGE_PAIRS
   ]
 
   def _info(self):
@@ -133,31 +126,28 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
-                    os.path.join(data_dir, "{}.train".format(
-                        source.replace("_", "-"))),
+                    os.path.join(data_dir,
+                                 "{}.train".format(source.replace("_", "-"))),
                 "target_file":
                     os.path.join(data_dir, "{}.train".format(target))
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
-                    os.path.join(data_dir, "{}.dev".format(
-                        source.split("_")[0])),
+                    os.path.join(data_dir,
+                                 "{}.dev".format(source.split("_")[0])),
                 "target_file":
                     os.path.join(data_dir, "{}.dev".format(target))
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "source_file":
-                    os.path.join(data_dir, "{}.test".format(
-                        source.split("_")[0])),
+                    os.path.join(data_dir,
+                                 "{}.test".format(source.split("_")[0])),
                 "target_file":
                     os.path.join(data_dir, "{}.test".format(target))
             }),
@@ -175,8 +165,7 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             source_sentences), len(target_sentences), source_file, target_file)
 
     source, target = self.builder_config.language_pair
-    for idx, (l1, l2) in enumerate(
-        zip(source_sentences, target_sentences)):
+    for idx, (l1, l2) in enumerate(zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.
       if all(result.values()):

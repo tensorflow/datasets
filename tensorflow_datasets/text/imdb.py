@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """IMDB movie reviews dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import re
@@ -52,27 +48,23 @@ _DOWNLOAD_URL = "http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
 class IMDBReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for IMDBReviews."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
+  def __init__(self, *, text_encoder_config=None, **kwargs):
     """BuilderConfig for IMDBReviews.
 
     Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the IMDB `"text"`
-        feature.
+      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
+        configuration for the `tfds.deprecated.text.TextEncoder` used for the
+        IMDB `"text"` feature.
       **kwargs: keyword arguments forwarded to super.
     """
     super(IMDBReviewsConfig, self).__init__(
-        version=tfds.core.Version(
-            "0.1.0", experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[
-            tfds.core.Version(
-                "1.0.0",
-                "New split API (https://tensorflow.org/datasets/splits)"),
-        ],
+        version=tfds.core.Version("1.0.0"),
+        release_notes={
+            "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
+        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
 
 
 class IMDBReviews(tfds.core.GeneratorBasedBuilder):
@@ -85,24 +77,24 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
       IMDBReviewsConfig(
           name="bytes",
           description=("Uses byte-level text encoding with "
-                       "`tfds.features.text.ByteTextEncoder`"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder=tfds.features.text.ByteTextEncoder()),
+                       "`tfds.deprecated.text.ByteTextEncoder`"),
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder=tfds.deprecated.text.ByteTextEncoder()),
       ),
       IMDBReviewsConfig(
           name="subwords8k",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
+          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
               vocab_size=2**13),
       ),
       IMDBReviewsConfig(
           name="subwords32k",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
+          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with "
                        "32k vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
+          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
+              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
               vocab_size=2**15),
       ),
   ]
@@ -112,9 +104,11 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "text": tfds.features.Text(
-                encoder_config=self.builder_config.text_encoder_config),
-            "label": tfds.features.ClassLabel(names=["neg", "pos"]),
+            "text":
+                tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
+            "label":
+                tfds.features.ClassLabel(names=["neg", "pos"]),
         }),
         supervised_keys=("text", "label"),
         homepage="http://ai.stanford.edu/~amaas/data/sentiment/",
@@ -122,8 +116,8 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, archive):
-    for _, ex in self._generate_examples(
-        archive, os.path.join("aclImdb", "train")):
+    for _, ex in self._generate_examples(archive,
+                                         os.path.join("aclImdb", "train")):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
@@ -137,20 +131,23 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
-            gen_kwargs={"archive": archive(),
-                        "directory": os.path.join("aclImdb", "train")}),
+            gen_kwargs={
+                "archive": archive(),
+                "directory": os.path.join("aclImdb", "train")
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
-            gen_kwargs={"archive": archive(),
-                        "directory": os.path.join("aclImdb", "test")}),
+            gen_kwargs={
+                "archive": archive(),
+                "directory": os.path.join("aclImdb", "test")
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split("unsupervised"),
-            num_shards=20,
-            gen_kwargs={"archive": archive(),
-                        "directory": os.path.join("aclImdb", "train"),
-                        "labeled": False}),
+            gen_kwargs={
+                "archive": archive(),
+                "directory": os.path.join("aclImdb", "train"),
+                "labeled": False
+            }),
     ]
 
   def _generate_examples(self, archive, directory, labeled=True):

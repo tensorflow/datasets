@@ -1,0 +1,15 @@
+Charts in $[officename]
+/text/schart/main0000.xhp
+charts; overview
+HowTos for charts
+MW added one entry
+Using Charts in %PRODUCTNAME
+$[officename] lets you present data graphically in a chart, so that you can visually compare data series and view trends in the data.
+You can insert charts into spreadsheets, text documents, drawings, and presentations.
+Chart Data
+Charts can be based on the following data:
+Spreadsheet values from Calc cell ranges
+Cell values from a Writer table
+Values that you enter in the Chart Data Table dialogue box (you can create these charts in Writer, Draw, or Impress, and you can copy and paste them also to Calc)
+command line Insert - (Object -) Chart, moved here from deleted shared/01/04160100.xhp
+Creates a chart in the current document.

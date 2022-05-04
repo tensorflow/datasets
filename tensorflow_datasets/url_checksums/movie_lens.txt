@@ -1,0 +1,5 @@
+http://files.grouplens.org/datasets/movielens/ml-100k.zip	4924029	50d2a982c66986937beb9ffb3aa76efe955bf3d5c6b761f4e3a7cd717c6a3229	ml-100k.zip
+http://files.grouplens.org/datasets/movielens/ml-1m.zip	5917549	a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20	ml-1m.zip
+http://files.grouplens.org/datasets/movielens/ml-20m.zip	198702078	96f243c338a8665f6bcc89c53edf6ee39162a846940de6b7c8c48aeada765ff3	ml-20m.zip
+http://files.grouplens.org/datasets/movielens/ml-25m.zip	261978986	8b21cfb7eb1706b4ec0aac894368d90acf26ebdfb6aced3ebd4ad5bd1eb9c6aa	ml-25m.zip
+http://files.grouplens.org/datasets/movielens/ml-latest-small.zip	978202	696d65a3dfceac7c45750ad32df2c259311949efec81f0f144fdfb91ebc9e436	ml-latest-small.zip

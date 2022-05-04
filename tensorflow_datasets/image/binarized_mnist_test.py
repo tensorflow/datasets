@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,13 +15,8 @@
 
 """Tests for binarized_mnist dataset module."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import binarized_mnist
-
 
 # testing/binarized_mnist.py generates fake input data
 
@@ -38,6 +33,7 @@ class MNISTTest(testing.DatasetBuilderTestCase):
       "validation_data": binarized_mnist._VALID_DATA_FILENAME,
       "test_data": binarized_mnist._TEST_DATA_FILENAME,
   }
+
 
 if __name__ == "__main__":
   testing.test_main()

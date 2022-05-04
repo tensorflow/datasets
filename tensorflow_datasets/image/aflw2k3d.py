@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """AFLW2000-3D Dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 import numpy as np
@@ -73,8 +69,7 @@ class Aflw2k3d(tfds.core.GeneratorBasedBuilder):
             "landmarks_68_3d_z":
                 tfds.features.Tensor(shape=(68, 1), dtype=tf.float32),
         }),
-        homepage=
-        "http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm",
+        homepage="http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm",
         citation=_CITATION,
     )
 

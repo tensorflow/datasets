@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """Mathematics database."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 from absl import logging
@@ -45,10 +41,13 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 (Saxton, Grefenstette, Hill, Kohli).
 
 Example usage:
+
+```
 train_examples, val_examples = tfds.load(
     'math_dataset/arithmetic__mul',
     split=['train', 'test'],
     as_supervised=True)
+```
 """
 
 _DATA_URL = "https://storage.googleapis.com/mathematics-dataset/mathematics_dataset-v1.0.tar.gz"
@@ -65,21 +64,7 @@ _INTERPOLATE_CATEGORY = [
 
 _MODULES = [
     # extrapolate
-    "algebra__polynomial_roots_big",
-    "arithmetic__add_or_sub_big",
-    "arithmetic__add_sub_multiple_longer",
-    "arithmetic__div_big",
-    "arithmetic__mixed_longer",
-    "arithmetic__mul_big",
-    "arithmetic__mul_div_multiple_longer",
-    "comparison__closest_more",
-    "comparison__kth_biggest_more",
-    "comparison__sort_more",
     "measurement__conversion",
-    "numbers__place_value_big",
-    "numbers__round_number_big",
-    "probability__swr_p_level_set_more_samples",
-    "probability__swr_p_sequence_more_samples",
 
     # interpolate
     "algebra__linear_1d",
@@ -212,7 +197,6 @@ def _generate_builder_configs():
         tfds.core.BuilderConfig(
             name=module,
             version=tfds.core.Version("1.0.0"),
-            description=_DESCRIPTION,
         ))
 
   return configs

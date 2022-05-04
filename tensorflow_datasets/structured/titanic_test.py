@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,6 @@
 
 """Tests for titanic data loading."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from tensorflow_datasets.structured import titanic
 import tensorflow_datasets.testing as tfds_test
 
@@ -26,15 +22,9 @@ import tensorflow_datasets.testing as tfds_test
 class TitanicTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = titanic.Titanic
 
-  SPLITS = {
-      'train': 5
-  }
+  SPLITS = {'train': 5}
 
   DL_EXTRACT_RESULT = 'test.csv'
-
-
-class TitanicS3Test(TitanicTest):
-  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

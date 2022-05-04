@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,40 +13,49 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Text feature.
+"""Text feature."""
 
-"""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
+import html
 import os
+import textwrap
+from typing import Union
 
+from absl import logging
 import tensorflow as tf
 
-from tensorflow_datasets.core.features import feature
-from tensorflow_datasets.core.features import text as text_lib
+from tensorflow_datasets.core.deprecated import text as text_lib
+from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.features import tensor_feature
+from tensorflow_datasets.core.proto import feature_pb2
+from tensorflow_datasets.core.utils import type_utils
+
+Json = type_utils.Json
 
 
-class Text(feature.Tensor):
+class Text(tensor_feature.Tensor):
   """`FeatureConnector` for text, encoding to integers with a `TextEncoder`."""
 
-  def __init__(self, encoder=None, encoder_config=None):
+  def __init__(
+      self,
+      encoder=None,
+      encoder_config=None,
+      *,
+      doc: feature_lib.DocArg = None,
+  ):
     """Constructs a Text FeatureConnector.
 
     Args:
-      encoder: `tfds.features.text.TextEncoder`, an encoder that can convert
+      encoder: `tfds.deprecated.text.TextEncoder`, an encoder that can convert
         text to integers. If None, the text will be utf-8 byte-encoded.
-      encoder_config: `tfds.features.text.TextEncoderConfig`, needed if
+      encoder_config: `tfds.deprecated.text.TextEncoderConfig`, needed if
         restoring from a file with `load_metadata`.
+      doc: Documentation of this feature (e.g. description).
     """
     if encoder and encoder_config:
       raise ValueError("If encoder is provided, encoder_config must be None.")
     if encoder:
       encoder_config = text_lib.TextEncoderConfig(
-          encoder_cls=type(encoder),
-          vocab_size=encoder.vocab_size)
+          encoder_cls=type(encoder), vocab_size=encoder.vocab_size)
     elif encoder_config:
       encoder = encoder_config.encoder
 
@@ -54,9 +63,17 @@ class Text(feature.Tensor):
     self._encoder_config = encoder_config
 
     has_encoder = bool(encoder or self._encoder_cls)
+    if has_encoder:
+      logging.warning(
+          "TFDS datasets with text encoding are deprecated and will be removed "
+          "in a future version. Instead, you should use the plain text version "
+          "and tokenize the text using `tensorflow_text` (See: "
+          "https://www.tensorflow.org/tutorials/tensorflow_text/intro#tfdata_example)"
+      )
     super(Text, self).__init__(
         shape=(None,) if has_encoder else (),
         dtype=tf.int64 if has_encoder else tf.string,
+        doc=doc,
     )
 
   @property
@@ -70,10 +87,8 @@ class Text(feature.Tensor):
     self._encoder = new_encoder
     encoder_cls = self._encoder_cls or type(None)
     if not isinstance(new_encoder, encoder_cls):
-      raise ValueError(
-          "Changing type of encoder. Got %s but must be %s" %
-          (type(new_encoder).__name__,
-           self._encoder_cls.__name__))
+      raise ValueError("Changing type of encoder. Got %s but must be %s" %
+                       (type(new_encoder).__name__, self._encoder_cls.__name__))
 
   def maybe_set_encoder(self, new_encoder):
     """Set encoder, but no-op if encoder is already set."""
@@ -102,8 +117,6 @@ class Text(feature.Tensor):
   def encode_example(self, example_data):
     if self.encoder:
       example_data = self.encoder.encode(example_data)
-    else:
-      example_data = example_data
     return super(Text, self).encode_example(example_data)
 
   def save_metadata(self, data_dir, feature_name):
@@ -116,7 +129,7 @@ class Text(feature.Tensor):
     fname_prefix = os.path.join(data_dir, "%s.text" % feature_name)
     encoder_cls = self._encoder_cls
     if encoder_cls:
-      self._encoder = encoder_cls.load_from_file(fname_prefix)
+      self._encoder = encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
       return
 
     # Error checking: ensure there are no metadata files
@@ -137,8 +150,8 @@ class Text(feature.Tensor):
     by `SubwordTextEncoder.build_from_corpus()`.
 
     Args:
-      corpus_generator: generator yielding `str`, from which
-        subwords will be constructed.
+      corpus_generator: generator yielding `str`, from which subwords will be
+        constructed.
       **kwargs: kwargs forwarded to `SubwordTextEncoder.build_from_corpus()`
     """
     if self._encoder_cls is not text_lib.SubwordTextEncoder:
@@ -160,3 +173,35 @@ class Text(feature.Tensor):
     if self.encoder is None:
       return {}
     return {"encoder": repr(self.encoder)}
+
+  def repr_html(self, ex: bytes) -> str:
+    """Text are decoded."""
+    if self.encoder is not None:
+      return repr(ex)
+
+    try:
+      ex = ex.decode("utf-8")
+    except UnicodeDecodeError:
+      # Some datasets have invalid UTF-8 examples (e.g. opinosis)
+      return repr(ex[:1000])
+    ex = html.escape(ex)
+    ex = textwrap.shorten(ex, width=1000)  # Truncate long text
+    return ex
+
+  @classmethod
+  def from_json_content(cls, value: Union[Json,
+                                          feature_pb2.TextFeature]) -> "Text":
+    if isinstance(value, dict) and "use_encoder" in value:
+      raise ValueError(
+          "Deprecated encoder not supported. Please use the plain text version "
+          "with `tensorflow_text`.")
+    return cls()
+
+  def to_json_content(self) -> Union[Json, feature_pb2.TextFeature]:
+    if self._encoder:
+      logging.warning(
+          "Dataset is using deprecated text encoder API which will be removed "
+          "soon. Please use the plain_text version of the dataset and migrate "
+          "to `tensorflow_text`.")
+      return dict(use_encoder=True)
+    return feature_pb2.TextFeature()

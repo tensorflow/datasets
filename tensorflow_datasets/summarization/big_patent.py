@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,14 +15,11 @@
 
 """BIGPATENT Dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import gzip
 import json
 import os
-import tensorflow as tf
+import re
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -53,7 +50,8 @@ There are two features:
 
 """
 
-_URL = "https://drive.google.com/uc?export=download&id=1J3mucMFTWrgAYa3LuBZoLRR3CzzYD3fa"
+# Raw data provided by Eva Sharma (evasharma@ccs.neu.edu).
+_URL = "https://drive.google.com/uc?export=download&id=1mwH7eSh1kNci31xduR4Da_XcmTE8B8C3"
 
 _DOCUMENT = "description"
 _SUMMARY = "abstract"
@@ -74,8 +72,7 @@ _CPC_DESCRIPTION = {
 class BigPatentConfig(tfds.core.BuilderConfig):
   """BuilderConfig for BigPatent."""
 
-  @tfds.core.disallow_positional_args
-  def __init__(self, cpc_codes=None, **kwargs):
+  def __init__(self, *, cpc_codes=None, **kwargs):
     """BuilderConfig for Wikihow.
 
     Args:
@@ -83,21 +80,34 @@ class BigPatentConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(BigPatentConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"), **kwargs)
+        # 1.0.0 lower cased tokenized words.
+        # 2.0.0 cased raw strings.
+        # 2.1.0 cased raw strings (fixed).
+        version=tfds.core.Version("2.1.2"),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+            tfds.core.Version("2.0.0")
+        ],
+        release_notes={
+            "2.1.2": "Fix update to cased raw strings.",
+            "2.0.0": "Update to use cased raw strings",
+            "1.0.0": "lower cased tokenized words",
+        },
+        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.cpc_codes = cpc_codes
 
 
-class BigPatent(tfds.core.GeneratorBasedBuilder):
+class BigPatent(tfds.core.BeamBasedBuilder):
   """BigPatent datasets."""
 
   BUILDER_CONFIGS = [
       BigPatentConfig(
-          cpc_codes=list(_CPC_DESCRIPTION),
+          cpc_codes="*",
           name="all",
           description="Patents under all categories."),
   ] + [
       BigPatentConfig(  # pylint:disable=g-complex-comprehension
-          cpc_codes=[k],
+          cpc_codes=k,
           name=k,
           description=("Patents under Cooperative Patent Classification (CPC)"
                        "{0}: {1}".format(k, v)),
@@ -122,7 +132,7 @@ class BigPatent(tfds.core.GeneratorBasedBuilder):
     dl_path = dl_manager.download_and_extract(_URL)
     split_types = ["train", "val", "test"]
     extract_paths = dl_manager.extract({
-        k: os.path.join(dl_path, "bigPatentData", k + ".tar.gz")
+        k: os.path.join(dl_path, "bigPatentDataNonTokenized", k + ".tar.gz")
         for k in split_types
     })
     extract_paths = {k: os.path.join(extract_paths[k], k) for k in split_types}
@@ -142,16 +152,145 @@ class BigPatent(tfds.core.GeneratorBasedBuilder):
         ),
     ]
 
-  def _generate_examples(self, path=None):
-    """Yields examples."""
-    for cpc_code in self.builder_config.cpc_codes:
-      filenames = tf.io.gfile.glob(os.path.join(path, cpc_code, "*"))
-      for filename in filenames:
-        with tf.io.gfile.GFile(filename, "rb") as fin:
-          fin = gzip.GzipFile(fileobj=fin)
-          for row in fin:
-            json_obj = json.loads(row)
-            yield json_obj["publication_number"], {
-                _DOCUMENT: json_obj[_DOCUMENT],
-                _SUMMARY: json_obj[_SUMMARY]
-            }
+  def _build_pcollection(self, pipeline, path=None):
+    """Build PCollection of examples."""
+    beam = tfds.core.lazy_imports.apache_beam
+
+    def _process_example(row):
+      json_obj = json.loads(row)
+      yield json_obj["publication_number"], {
+          _DOCUMENT: _bigpatent_clean_description(json_obj[_DOCUMENT]),
+          _SUMMARY: _bigpatent_clean_abstract(json_obj[_SUMMARY])
+      }
+
+    file_pattern = os.path.join(path, self.builder_config.cpc_codes, "*")
+    return (pipeline
+            | "ReadTextIO" >> beam.io.textio.ReadFromText(file_pattern)
+            | beam.FlatMap(_process_example))
+
+
+# The preprocessing functions below are kindly provided by
+#   Eva Sharma (evasharma@ccs.neu.edu).
+#   They are modified in a few ways:
+#    1) minor code formating changes, add prefix _bigpatent to those functions.
+#    2) enchant is replaced with nltk to detect english words.
+#    3) remove excessive white space.
+
+# Regex for cleaning the abstract and description fields of unwanted text
+# spans.
+
+_FIG_EXP1 = re.compile(r"(FIG.)\s+(\d)(,*)\s*(\d*)")
+_FIG_EXP2 = re.compile(r"(FIGS.)\s+(\d)(,*)\s*(\d*)")
+_FIG_EXP3 = re.compile(r"(FIGURE)\s+(\d)(,*)\s*(\d*)")
+
+_LINE_NUM_EXP = re.compile(r"\[(\d+)\]")
+_NON_EMPTY_LINES = re.compile(r"^\s*\[(\d+)\]")
+_TABLE_HEADER = re.compile(r"^(\s*)TABLE\s+\d+(\s+(.*))?$")
+
+_ENGLISH_WORDS = None
+
+
+def _get_english_words():
+  """Load dictionary of common english words from NLTK."""
+  global _ENGLISH_WORDS
+  if not _ENGLISH_WORDS:
+    nltk = tfds.core.lazy_imports.nltk
+    resource_path = epath.resource_path(nltk)
+    data_path = os.fspath(resource_path / "nltk_data/corpora/words/en")
+    word_list = nltk.data.load(data_path, format="raw").decode("utf-8")
+    _ENGLISH_WORDS = frozenset(word_list.split("\n"))
+  return _ENGLISH_WORDS
+
+
+def _remove_excessive_whitespace(text):
+  return " ".join([w for w in text.split(" ") if w])
+
+
+def _bigpatent_clean_abstract(text):
+  """Cleans the abstract text."""
+  text = re.sub(r"[\(\{\[].*?[\}\)\]]", "", text).strip()
+  text = _remove_excessive_whitespace(text)
+  return text
+
+
+def _bigpatent_remove_referenecs(text):
+  """Remove references from description text."""
+  text = _FIG_EXP1.sub(r"FIG\2 ", text)
+  text = _FIG_EXP2.sub(r"FIG\2 ", text)
+  text = _FIG_EXP3.sub(r"FIG\2 ", text)
+  return text
+
+
+def _bigpatent_get_list_of_non_empty_lines(text):
+  """Remove non-empty lines."""
+  # Split into lines
+  # Remove empty lines
+  # Remove line numbers
+  return [
+      _NON_EMPTY_LINES.sub("", s).strip()
+      for s in text.strip().splitlines(True)
+      if s.strip()
+  ]
+
+
+def _bigpatent_remove_tables(sentences):
+  """Remove Tables from description text."""
+  # Remove tables from text
+  new_sentences = []
+  i = 0
+  table_start = 0
+  # A table header will be a line starting with "TABLE" after zero or more
+  # whitespaces, followed by an integer.
+  # After the integer, the line ends, or is followed by whitespace and
+  # description.
+  while i < len(sentences):
+    sentence = sentences[i]
+    if table_start == 0:
+      # Not inside a table
+      # Check if it's start of a table
+      if _TABLE_HEADER.match(sentence):
+        table_start = 1
+      else:
+        new_sentences.append(sentence)
+
+    elif table_start == 1:
+      words = sentence.strip("\t").split(" ")
+      num_eng = 0
+      for w in words:
+        if not w.isalpha():
+          continue
+        if w in _get_english_words():
+          num_eng += 1
+          if num_eng > 20:
+            # Table end condition
+            table_start = 0
+            new_sentences.append(sentence)
+            break
+    i += 1
+  return new_sentences
+
+
+def _bigpatent_remove_lines_with_less_words(sentences):
+  """Remove sentences with less than 10 words."""
+  new_sentences = []
+  for sentence in sentences:
+    words = set(sentence.split(" "))
+    if len(words) > 10:
+      new_sentences.append(sentence)
+  return new_sentences
+
+
+def _bigpatent_clean_description(text):
+  """Clean the description text."""
+  # split the text by newlines, keep only non-empty lines
+  sentences = _bigpatent_get_list_of_non_empty_lines(text)
+  # remove tables from the description text
+  sentences = _bigpatent_remove_tables(sentences)
+  # remove sentences with less than 10 words
+  sentences = _bigpatent_remove_lines_with_less_words(sentences)
+  text = "\n".join(sentences)
+  # remove references like FIG. 8, FIGS. 8, 8, FIG. 8-d
+  text = _bigpatent_remove_referenecs(text)
+  # remove excessive whitespace
+  text = _remove_excessive_whitespace(text)
+  return text

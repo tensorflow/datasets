@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package tensorflow_datasets;
+
+option cc_enable_arenas = true;
+
+// Dictionary of features.
+message FeaturesDict {
+  // Mapping between feature name and features.
+  map<string, Feature> features = 1;
+}
+
+message Feature {
+  // The fully qualified class name for Python.
+  // E.g. tensorflow_datasets.core.features.audio_feature.Audio
+  string python_class_name = 1;
+
+  // Description of what this feature is. Could also explain where it came from
+  // and how it is expected to help.
+  string description = 14;
+
+  // The range of values that are possible. For example, the feature 'age' may
+  // have type tf.int32, but the values range from 0 to 150.
+  string value_range = 15;
+
+  oneof content {
+    JsonFeature json_feature = 2;
+    FeaturesDict features_dict = 3;
+    TensorFeature tensor = 4;
+    ClassLabel class_label = 5;
+    ImageFeature image = 6;
+    VideoFeature video = 7;
+    AudioFeature audio = 8;
+    BoundingBoxFeature bounding_box = 9;
+    TextFeature text = 10;
+    TranslationFeature translation = 11;
+    Sequence sequence = 12;
+  }
+}
+
+// A feature whose schema is specified using JSON (without a strictly defined
+// schema).
+message JsonFeature {
+  // JSON string describing the characteristics of the feature.
+  string json = 1;
+}
+
+message Shape {
+  repeated int64 dimensions = 1;
+}
+
+message TensorFeature {
+  Shape shape = 1;
+  string dtype = 2;
+  string encoding = 3;
+}
+
+message ClassLabel {
+  int64 num_classes = 1;
+}
+
+message ImageFeature {
+  Shape shape = 1;
+  string dtype = 2;
+  // Encoding of the image.
+  string encoding_format = 3;
+  bool use_colormap = 4;
+  ClassLabel label = 5;
+}
+
+message VideoFeature {
+  // The shape of the video (num_frames, height, width, channels), where
+  // channels is 1 or 3
+  Shape shape = 1;
+  // tf.uint16 or tf.uint8 (default). tf.uint16 can be used only with png
+  // encoding_format
+  string dtype = 2;
+  // The video is stored as a sequence of encoded images. You can use any
+  // encoding format supported by image_feature.Feature.
+  string encoding_format = 3;
+  // Forwarded to `tfds.features.Image`. If `True`, `tfds.as_dataframe` will
+  // display each value in the image with a different color.
+  bool use_colormap = 4;
+  // A sequence of additional args to be passed to the ffmpeg binary.
+  // Specifically, ffmpeg will be called as: `` ffmpeg -i <input_file>
+  // <ffmpeg_extra_args> %010d.<encoding_format> ``
+  repeated string ffmpeg_extra_args = 5;
+}
+
+message AudioFeature {
+  Shape shape = 1;
+  string dtype = 2;
+  // The audio file format. Can be any format ffmpeg understands. If
+  // unspecified, it will attempt to infer from the file extension.
+  string file_format = 3;
+  // Additional metadata about the sample rate that was used to record this
+  // audio. This value isn't used neither in encoding nor decoding.
+  int64 sample_rate = 4;
+  string encoding = 5;
+}
+
+// A bounding box around an object in an image. Typically, bounding boxes are
+// tensors of type `tf.float32` and shape `[4,]` and contain the normalized
+// coordinates of the bounding box `[ymin, xmin, ymax, xmax]`.
+message BoundingBoxFeature {
+  Shape shape = 1;
+  string dtype = 2;
+}
+
+message TextFeature {}
+
+message TranslationFeature {
+  // Full list of languages for which there are translations.
+  repeated string languages = 1;
+  // Whether there's a variable or static list of languages per example.
+  bool variable_languages_per_example = 2;
+}
+
+// A sequence of feature values. Could also be a sequence of feature dicts.
+message Sequence {
+  // The feature of which this is a sequence
+  Feature feature = 1;
+
+  // Optional length of the sequence.
+  int64 length = 2;
+}

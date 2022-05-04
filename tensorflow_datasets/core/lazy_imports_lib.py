@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@
 
 """Lazy imports for heavy dependencies."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
+import functools
 import importlib
+from typing import Any, Callable, TypeVar
 
 from tensorflow_datasets.core.utils import py_utils as utils
+
+_Fn = TypeVar("_Fn")
 
 
 def _try_import(module_name):
@@ -29,12 +29,12 @@ def _try_import(module_name):
   try:
     mod = importlib.import_module(module_name)
     return mod
-  except ImportError:
+  except ImportError as e:
     err_msg = ("Failed importing {name}. This likely means that the dataset "
                "requires additional dependencies that have to be "
                "manually installed (usually with `pip install {name}`). See "
                "setup.py extras_require.").format(name=module_name)
-    utils.reraise(suffix=err_msg)
+    utils.reraise(e, suffix=err_msg)
 
 
 class LazyImporter(object):
@@ -52,13 +52,43 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def bs4(cls):
+    return _try_import("bs4")
+
+  @utils.classproperty
+  @classmethod
   def crepe(cls):
     return _try_import("crepe")
 
   @utils.classproperty
   @classmethod
   def cv2(cls):
-    return _try_import("cv2")  # pylint: disable=unreachable
+    return _try_import("cv2")
+
+  @utils.classproperty
+  @classmethod
+  def envlogger(cls):
+    return _try_import("envlogger.reader")
+
+  @utils.classproperty
+  @classmethod
+  def gcsfs_store(cls):
+    return _try_import("gcsfs").GCSFileSystem(token='anon').get_mapper
+
+  @utils.classproperty
+  @classmethod
+  def gcld3(cls):
+    return _try_import("gcld3")  # pylint: disable=unreachable
+
+  @utils.classproperty
+  @classmethod
+  def h5py(cls):
+    return _try_import("h5py")
+
+  @utils.classproperty
+  @classmethod
+  def jax(cls):
+    return _try_import("jax")
 
   @utils.classproperty
   @classmethod
@@ -72,13 +102,24 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def lxml(cls):
+    return _try_import("lxml")
+
+  @utils.classproperty
+  @classmethod
   def matplotlib(cls):
+    _try_import("matplotlib.pyplot")
     return _try_import("matplotlib")
 
   @utils.classproperty
   @classmethod
   def mwparserfromhell(cls):
     return _try_import("mwparserfromhell")
+
+  @utils.classproperty
+  @classmethod
+  def networkx(cls):
+    return _try_import("networkx")
 
   @utils.classproperty
   @classmethod
@@ -100,8 +141,18 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def PIL_ImageDraw(cls):  # pylint: disable=invalid-name
+    return _try_import("PIL.ImageDraw")
+
+  @utils.classproperty
+  @classmethod
   def pretty_midi(cls):
     return _try_import("pretty_midi")
+
+  @utils.classproperty
+  @classmethod
+  def pycocotools(cls):
+    return _try_import("pycocotools.mask")
 
   @utils.classproperty
   @classmethod
@@ -112,6 +163,7 @@ class LazyImporter(object):
   @classmethod
   def scipy(cls):
     _try_import("scipy.io")
+    _try_import("scipy.io.wavfile")
     _try_import("scipy.ndimage")
     return _try_import("scipy")
 
@@ -120,13 +172,32 @@ class LazyImporter(object):
   def skimage(cls):
     _try_import("skimage.color")
     _try_import("skimage.filters")
-    _try_import("skimage.external.tifffile")
+    try:
+      _try_import("skimage.external.tifffile")
+    except ImportError:
+      pass
     return _try_import("skimage")
+
+  @utils.classproperty
+  @classmethod
+  def tifffile(cls):
+    return _try_import("tifffile")
+
+  @utils.classproperty
+  @classmethod
+  def tensorflow_data_validation(cls):
+    return _try_import("tensorflow_data_validation")
+
+  @utils.classproperty
+  @classmethod
+  def tensorflow_io(cls):
+    return _try_import("tensorflow_io")
 
   @utils.classproperty
   @classmethod
   def tldextract(cls):
     return _try_import("tldextract")
+
 
   @utils.classproperty
   @classmethod
@@ -140,5 +211,26 @@ class LazyImporter(object):
     """For testing purposes only."""
     return _try_import("test_foo")
 
+  @utils.classproperty
+  @classmethod
+  def zarr(cls):
+    return _try_import("zarr")
+
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
+
+
+def beam_ptransform_fn(fn: Callable[..., Any]) -> Callable[..., Any]:
+  """Lazy version of `@beam.ptransform_fn`."""
+
+  lazy_decorated_fn = None
+
+  @functools.wraps(fn)
+  def decorated(*args, **kwargs):
+    nonlocal lazy_decorated_fn
+    # Actually decorate the function only the first time it is called
+    if lazy_decorated_fn is None:
+      lazy_decorated_fn = lazy_imports.apache_beam.ptransform_fn(fn)
+    return lazy_decorated_fn(*args, **kwargs)
+
+  return decorated

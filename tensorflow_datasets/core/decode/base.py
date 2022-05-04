@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,24 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Base decoders.
-"""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+"""Base decoders."""
 
 import abc
 import functools
 
-import six
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
-from tensorflow_datasets.core.utils import py_utils
 
 
-@six.add_metaclass(abc.ABCMeta)
-class Decoder(object):
+class Decoder(abc.ABC):
   """Base decoder object.
 
   `tfds.decode.Decoder` allows for overriding the default decoding by
@@ -55,8 +46,7 @@ class Decoder(object):
   def __init__(self):
     self.feature = None
 
-  @api_utils.disallow_positional_args
-  def setup(self, feature):
+  def setup(self, *, feature):
     """Transformation contructor.
 
     The initialization of decode object is deferred because the objects only
@@ -66,7 +56,6 @@ class Decoder(object):
     Args:
       feature: `tfds.features.FeatureConnector`, the feature to which is applied
         this transformation.
-
     """
     self.feature = feature
 
@@ -74,7 +63,7 @@ class Decoder(object):
   def dtype(self):
     """Returns the `dtype` after decoding."""
     tensor_info = self.feature.get_tensor_info()
-    return py_utils.map_nested(lambda t: t.dtype, tensor_info)
+    return tf.nest.map_structure(lambda t: t.dtype, tensor_info)
 
   @abc.abstractmethod
   def decode_example(self, serialized_example):
@@ -96,7 +85,6 @@ class Decoder(object):
         serialized_example,
         dtype=self.dtype,
         parallel_iterations=10,
-        back_prop=False,
         name='sequence_decode',
     )
 
@@ -107,7 +95,7 @@ class SkipDecoding(Decoder):
   Example of usage:
 
   ```python
-  ds = ds.load(
+  ds = tfds.load(
       'imagenet2012',
       split='train',
       decoders={
@@ -123,7 +111,7 @@ class SkipDecoding(Decoder):
   @property
   def dtype(self):
     tensor_info = self.feature.get_serialized_info()
-    return py_utils.map_nested(lambda t: t.dtype, tensor_info)
+    return tf.nest.map_structure(lambda t: t.dtype, tensor_info)
 
   def decode_example(self, serialized_example):
     """Forward the serialized feature field."""
@@ -149,8 +137,8 @@ class DecoderFn(Decoder):
 
   def decode_example(self, serialized_example):
     """Decode the example using the function."""
-    return self._fn(
-        serialized_example, self.feature, *self._args, **self._kwargs)
+    return self._fn(serialized_example, self.feature, *self._args,
+                    **self._kwargs)
 
 
 def make_decoder(output_dtype=None):
@@ -190,6 +178,7 @@ def make_decoder(output_dtype=None):
     @functools.wraps(fn)
     def decorated(*args, **kwargs):
       return DecoderFn(fn, output_dtype, *args, **kwargs)
+
     return decorated
 
   return decorator

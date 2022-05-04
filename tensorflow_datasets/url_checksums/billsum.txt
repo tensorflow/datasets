@@ -1,1 +1,1 @@
-https://datahub.io/akornilo/billsum/r/billsum.zip 68989684 f20c03fd95a0b457a39d31b23c7fa677466ce53b3cb9cf8ae4f256e074f01f13
+https://drive.google.com/uc?export=download&id=1g89WgFHMRbr4QrvA0ngh26PY081Nv3lx	67260676	5a55dfb231618d63b25cec4773280a2986d38f53d6d4d39b8256b278edf1110c	billsum_v3.zip

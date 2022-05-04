@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """AbstractReasoning dataset test."""
+
 from tensorflow_datasets.image import abstract_reasoning
 import tensorflow_datasets.testing as tfds_test
 

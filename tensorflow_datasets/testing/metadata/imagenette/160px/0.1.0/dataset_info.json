@@ -1,0 +1,103 @@
+{
+  "citation": "\n",
+  "description": "Imagenette is a subset of 10 easily classified classes from the Imagenet\ndataset. It was originally prepared by Jeremy Howard of FastAI. The objective\nbehind putting together a small version of the Imagenet dataset was mainly\nbecause running new ideas/algorithms/experiments on the whole Imagenet take a\nlot of time.\n\nThis version of the dataset allows researchers/practitioners to quickly try out\nideas and share with others. The dataset comes in three variants:\n\n  * Full size\n  * 320 px\n  * 160 px\nThis dataset consists of the Imagenette dataset {size} variant.\n",
+  "location": {
+    "urls": [
+      "https://github.com/fastai/imagenette"
+    ]
+  },
+  "name": "imagenette",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "98752094",
+  "splits": [
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "12894"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "12894"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "12894"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "12894"
+      }
+    },
+    {
+      "name": "validation",
+      "numShards": "1",
+      "shardLengths": [
+        "500"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "500"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "500"
+              },
+              "max": 9.0
+            }
+          }
+        ],
+        "numExamples": "500"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}

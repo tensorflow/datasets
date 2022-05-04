@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,10 +14,6 @@
 # limitations under the License.
 
 """Tests for CLEVR dataset module."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.image.clevr import CLEVR
 
@@ -29,10 +25,6 @@ class CLEVRTest(testing.DatasetBuilderTestCase):
       "validation": 5,
       "test": 5,
   }
-
-
-class CLEVRS3Test(CLEVRTest):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

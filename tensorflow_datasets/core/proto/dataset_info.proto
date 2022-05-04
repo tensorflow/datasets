@@ -2,12 +2,14 @@
 // splits.
 
 syntax = "proto3";
-option cc_enable_arenas = true;
 
 package tensorflow_datasets;
 
-import "tensorflow_metadata/proto/v0/statistics.proto";
+import "feature.proto";
 import "tensorflow_metadata/proto/v0/schema.proto";
+import "tensorflow_metadata/proto/v0/statistics.proto";
+
+option cc_enable_arenas = true;
 
 // Message to represent location of a dataset, for now just has a url field, but
 // can internally have folders etc.
@@ -28,18 +30,66 @@ message SplitInfo {
   int64 num_shards = 2;
   // The number of examples in each shard.
   repeated int64 shard_lengths = 4;
+  // The number of bytes in the split.
+  int64 num_bytes = 5;
 
   // The concrete statistics about this split.
   tensorflow.metadata.v0.DatasetFeatureStatistics statistics = 3;
 
-  // Next available: 5.
+  // Template where the files for this split can be found, relative to the main
+  // builder folder of this dataset. Variables can be used that will be
+  // automatically filled in. Some examples:
+  //
+  // {DATASET}_{SPLIT}.{FILEFORMAT}-{SHARD_INDEX}-of-{NUM_SHARDS}
+  // This is the default TFDS filename template. Example of filenames:
+  //   mnist_train.tfrecord-00000-of-00005
+  //
+  // my_data/{SPLIT}/{FILEFORMAT}_{SHARD_INDEX}
+  // The data is in the subfolder 'my_data' in which there's another folder with
+  // the name of the split. Files are named by the file format and use a
+  // different shard template. Example filenames:
+  //   my_data/train/tfrecord_00000
+  //   my_data/train/tfrecord_00001
+  //   my_data/test/tfrecord_00000
+  //
+  // Supported variables:
+  // - {DATASET}: the name of the dataset.
+  // - {SPLIT}: the split.
+  // - {FILEFORMAT}: the fileformat used in the filename, e.g. tfrecord.
+  // - {SHARD_INDEX}: the index of the current shard (starts with 0).
+  // - {NUM_SHARDS}: total number of shards.
+  // - {SHARD_X_OF_Y}: shard in xxxxx-of-yyyyy format.
+  string filepath_template = 6;
+
+  // Next available: 7.
 }
 
 // This message indicates which feature in the dataset schema is the input and
 // which one is the output.
 message SupervisedKeys {
-  string input = 1;
-  string output = 2;
+  // Historical: Used before 2021-08-23
+  // `input` and `output` are no longer used, but can still be loaded.
+  // now everything goes in `tuple`
+  string input = 1 [deprecated = true];
+  string output = 2 [deprecated = true];
+
+  Tuple tuple = 3;
+
+  message Tuple {
+    repeated Nest items = 1;
+  }
+
+  message Dict {
+    map<string, Nest> dict = 1;
+  }
+
+  message Nest {
+    oneof nest {
+      string feature_key = 1;
+      Tuple tuple = 2;
+      Dict dict = 3;
+    }
+  }
 }
 
 // This message includes information for redistribution of the dataset.
@@ -56,18 +106,34 @@ message DatasetInfo {
   // Version string of the dataset (ex: '1.0.5')
   string version = 9;
 
+  // Release notes of the dataset
+  map<string, string> release_notes = 18;
+
+  // Config name of the dataset
+  string config_name = 13;
+
+  // Config description of the dataset
+  string config_description = 14;
+
+  // The structure and characteristics of the features of this dataset.
+  Feature features = 19;
+
   // A citation string if one exists for this dataset.
   string citation = 3;
 
+  // DEPRECATED
   // *Approximate* size in bytes of this dataset on disk.
-  int64 size_in_bytes = 4;
+  int64 size_in_bytes = 4 [deprecated = true];
+
+  // Size in bytes of downloaded files.
+  int64 download_size = 12;
 
   // Canonical location of the dataset.
   DatasetLocation location = 5;
 
   // DEPRECATED
   // Checksums of resources: URL to checksum of resource at URL.
-  map<string, string> download_checksums = 10 [deprecated=true];
+  map<string, string> download_checksums = 10 [deprecated = true];
 
   // The schema of the dataset.
   tensorflow.metadata.v0.Schema schema = 6;
@@ -81,5 +147,17 @@ message DatasetInfo {
 
   RedistributionInfo redistribution_info = 11;
 
-  // Next available: 12
+  // Original module location of the dataset.
+  // Allow to point to the original dataset source code in the documentation
+  // even for datasets read from.
+  string module_name = 15;
+
+  // Specifies whether examples should be shuffled.
+  bool disable_shuffling = 16;
+
+  // File format used.
+  // Use string to allow format extension without regenerating the proto.
+  string file_format = 17;
+
+  // Next available: 20
 }

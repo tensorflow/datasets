@@ -3,12 +3,22 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="cmaterdb" />
-  <meta itemprop="description" content="This dataset contains images of -&#10;  Handwritten Bangla numerals - balanced dataset of total 6000 Bangla numerals (32x32 RGB coloured, 6000 images), each having 600 images per class(per digit). &#10;  Handwritten Devanagari numerals - balanced dataset of total 3000 Devanagari numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit). &#10;  Handwritten Telugu numerals - balanced dataset of total 3000 Telugu numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit). &#10;&#10;CMATERdb is the pattern recognition database repository created at the 'Center for Microprocessor Applications for Training Education and Research' (CMATER) research lab, Jadavpur University, India.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('cmaterdb', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="This dataset contains images of -&#10;  Handwritten Bangla numerals - balanced dataset of total 6000 Bangla numerals (32x32 RGB coloured, 6000 images), each having 600 images per class(per digit). &#10;  Handwritten Devanagari numerals - balanced dataset of total 3000 Devanagari numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit). &#10;  Handwritten Telugu numerals - balanced dataset of total 3000 Telugu numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit). &#10;&#10;CMATERdb is the pattern recognition database repository created at the &#x27;Center for Microprocessor Applications for Training Education and Research&#x27; (CMATER) research lab, Jadavpur University, India.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;cmaterdb&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/cmaterdb-bangla-1.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cmaterdb" />
   <meta itemprop="sameAs" content="https://code.google.com/archive/p/cmaterdb/" />
-  <meta itemprop="citation" content="@article{Das:2012:GAB:2161007.2161320,&#10;  author = {Das, Nibaran and Sarkar, Ram and Basu, Subhadip and Kundu, Mahantapas &#10;            and Nasipuri, Mita and Basu, Dipak Kumar},&#10;  title = {A Genetic Algorithm Based Region Sampling for Selection of Local Features &#10;          in Handwritten Digit Recognition Application},&#10;  journal = {Appl. Soft Comput.},&#10;  issue_date = {May, 2012},&#10;  volume = {12},&#10;  number = {5},&#10;  month = may,&#10;  year = {2012},&#10;  issn = {1568-4946},&#10;  pages = {1592--1606},&#10;  numpages = {15},&#10;  url = {http://dx.doi.org/10.1016/j.asoc.2011.11.030},&#10;  doi = {10.1016/j.asoc.2011.11.030},&#10;  acmid = {2161320},&#10;  publisher = {Elsevier Science Publishers B. V.},&#10;  address = {Amsterdam, The Netherlands, The Netherlands},&#10;  keywords = {Feature selection, Genetic algorithm, N-Quality consensus, &#10;  Optimal local regions, Region sampling, Variable sized local regions},&#10;}&#10;@article{Das:2012:SFC:2240301.2240421,&#10;  author = {Das, Nibaran and Reddy, Jagan Mohan and Sarkar, Ram and Basu, Subhadip and Kundu, &#10;            Mahantapas and Nasipuri, Mita and Basu, Dipak Kumar},&#10;  title = {A Statistical-topological Feature Combination for Recognition of Handwritten Numerals},&#10;  journal = {Appl. Soft Comput.},&#10;  issue_date = {August, 2012},&#10;  volume = {12},&#10;  number = {8},&#10;  month = aug,&#10;  year = {2012},&#10;  issn = {1568-4946},&#10;  pages = {2486--2495},&#10;  numpages = {10},&#10;  url = {http://dx.doi.org/10.1016/j.asoc.2012.03.039},&#10;  doi = {10.1016/j.asoc.2012.03.039},&#10;  acmid = {2240421},&#10;  publisher = {Elsevier Science Publishers B. V.},&#10;  address = {Amsterdam, The Netherlands, The Netherlands},&#10;  keywords = {Character recognition, Feature combination, MPCA, PCA, SVM, Statistical, Topological},&#10;}&#10;" />
+  <meta itemprop="citation" content="@article{Das:2012:GAB:2161007.2161320,&#10;  author = {Das, Nibaran and Sarkar, Ram and Basu, Subhadip and Kundu, Mahantapas &#10;            and Nasipuri, Mita and Basu, Dipak Kumar},&#10;  title = {A Genetic Algorithm Based Region Sampling for Selection of Local Features &#10;          in Handwritten Digit Recognition Application},&#10;  journal = {Appl. Soft Comput.},&#10;  issue_date = {May, 2012},&#10;  volume = {12},&#10;  number = {5},&#10;  month = may,&#10;  year = {2012},&#10;  issn = {1568-4946},&#10;  pages = {1592--1606},&#10;  numpages = {15},&#10;  url = {http://dx.doi.org/10.1016/j.asoc.2011.11.030},&#10;  doi = {10.1016/j.asoc.2011.11.030},&#10;  acmid = {2161320},&#10;  publisher = {Elsevier Science Publishers B. V.},&#10;  address = {Amsterdam, The Netherlands, The Netherlands},&#10;  keywords = {Feature selection, Genetic algorithm, N-Quality consensus, &#10;  Optimal local regions, Region sampling, Variable sized local regions},&#10;}&#10;@article{Das:2012:SFC:2240301.2240421,&#10;  author = {Das, Nibaran and Reddy, Jagan Mohan and Sarkar, Ram and Basu, Subhadip and Kundu, &#10;            Mahantapas and Nasipuri, Mita and Basu, Dipak Kumar},&#10;  title = {A Statistical-topological Feature Combination for Recognition of Handwritten Numerals},&#10;  journal = {Appl. Soft Comput.},&#10;  issue_date = {August, 2012},&#10;  volume = {12},&#10;  number = {8},&#10;  month = aug,&#10;  year = {2012},&#10;  issn = {1568-4946},&#10;  pages = {2486--2495},&#10;  numpages = {10},&#10;  url = {http://dx.doi.org/10.1016/j.asoc.2012.03.039},&#10;  doi = {10.1016/j.asoc.2012.03.039},&#10;  acmid = {2240421},&#10;  publisher = {Elsevier Science Publishers B. V.},&#10;  address = {Amsterdam, The Netherlands, The Netherlands},&#10;  keywords = {Character recognition, Feature combination, MPCA, PCA, SVM, Statistical, Topological},&#10;}" />
 </div>
+
 # `cmaterdb`
+
+
+*   **Visualization**:
+    <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=cmaterdb">
+    Explore in Know Your Data
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
+*   **Description**:
 
 This dataset contains images of - Handwritten Bangla numerals - balanced dataset
 of total 6000 Bangla numerals (32x32 RGB coloured, 6000 images), each having 600
@@ -22,36 +32,24 @@ CMATERdb is the pattern recognition database repository created at the 'Center
 for Microprocessor Applications for Training Education and Research' (CMATER)
 research lab, Jadavpur University, India.
 
-*   URL:
+*   **Homepage**:
     [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
-*   `DatasetBuilder`:
-    [`tfds.image.cmaterdb.Cmaterdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cmaterdb.py)
 
-`cmaterdb` is configured with `tfds.image.cmaterdb.CmaterdbConfig` and has the
-following configurations predefined (defaults to the first one):
+*   **Source code**:
+    [`tfds.image_classification.Cmaterdb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image_classification/cmaterdb.py)
 
-*   `bangla` (`v1.0.0`) (`Size: 573.81 KiB`): CMATERdb Bangla Numerals
+*   **Versions**:
 
-*   `devanagari` (`v1.0.0`) (`Size: 275.29 KiB`): CMATERdb Devangari Numerals
+    *   **`1.0.0`** (default): No release notes.
 
-*   `telugu` (`v1.0.0`) (`Size: 283.90 KiB`): CMATERdb Telugu Numerals
+*   **Dataset size**: `Unknown size`
 
-## `cmaterdb/bangla`
-CMATERdb Bangla Numerals
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
-Versions:
+*   **Feature structure**:
 
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 6,000
-TRAIN | 5,000
-TEST  | 1,000
-
-### Features
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -59,74 +57,19 @@ FeaturesDict({
 })
 ```
 
-### Homepage
+*   **Feature documentation**:
 
-*   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
+Feature | Class        | Shape       | Dtype    | Description
+:------ | :----------- | :---------- | :------- | :----------
+        | FeaturesDict |             |          |
+image   | Image        | (32, 32, 3) | tf.uint8 |
+label   | ClassLabel   |             | tf.int64 |
 
-### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('image', 'label')`
 
-## `cmaterdb/devanagari`
-CMATERdb Devangari Numerals
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,000
-TRAIN | 2,500
-TEST  | 500
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
-
-## `cmaterdb/telugu`
-CMATERdb Telugu Numerals
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 3,000
-TRAIN | 2,500
-TEST  | 500
-
-### Features
-```python
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-### Homepage
-
-*   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
-
-## Citation
+*   **Citation**:
 
 ```
 @article{Das:2012:GAB:2161007.2161320,
@@ -173,4 +116,168 @@ FeaturesDict({
 }
 ```
 
---------------------------------------------------------------------------------
+
+## cmaterdb/bangla (default config)
+
+*   **Config description**: CMATERdb Bangla Numerals
+
+*   **Download size**: `573.81 KiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,000
+`'train'` | 5,000
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/cmaterdb-bangla-1.0.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cmaterdb-bangla-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## cmaterdb/devanagari
+
+*   **Config description**: CMATERdb Devangari Numerals
+
+*   **Download size**: `275.29 KiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 500
+`'train'` | 2,500
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/cmaterdb-devanagari-1.0.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cmaterdb-devanagari-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
+## cmaterdb/telugu
+
+*   **Config description**: CMATERdb Telugu Numerals
+
+*   **Download size**: `283.90 KiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 500
+`'train'` | 2,500
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/cmaterdb-telugu-1.0.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cmaterdb-telugu-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

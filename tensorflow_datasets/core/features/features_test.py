@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,21 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# coding=utf-8
-"""Tests for tensorflow_datasets.core.features.feature.
+"""Tests for tensorflow_datasets.core.features.feature."""
 
-"""
+import pathlib
+import sys
+import textwrap
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
-
-tf.compat.v1.enable_eager_execution()
 
 
 class AnInputConnector(features_lib.FeatureConnector):
@@ -47,10 +41,7 @@ class AnInputConnector(features_lib.FeatureConnector):
 
   def encode_example(self, example_data):
     # Encode take the input data and wrap in in a dict
-    return {
-        'a': example_data + 1,
-        'b': example_data * 10
-    }
+    return {'a': example_data + 1, 'b': example_data * 10}
 
   def decode_example(self, tfexample_dict):
     # Merge the two values
@@ -91,6 +82,33 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
 
     t = features_lib.TensorInfo(shape=(None, 3), dtype=tf.string)
     self.assertEqual(t, features_lib.TensorInfo.copy_from(t))
+
+  def test_tensor_spec(self):
+    feature = features_lib.FeaturesDict({
+        'input': AnInputConnector(),
+        'output': AnOutputConnector(),
+        'img': {
+            'size': {
+                'height': features_lib.Tensor(shape=(2, 3), dtype=tf.int64),
+                'width': features_lib.Tensor(shape=[None, 3], dtype=tf.int64),
+            },
+            'image': features_lib.Image(shape=(28, 28, 1)),
+            'metadata/path': tf.string,
+        }
+    })
+    self.assertAllEqualNested(
+        feature.get_tensor_spec(), {
+            'input': tf.TensorSpec(shape=[], dtype=tf.int64),
+            'output': tf.TensorSpec(shape=[], dtype=tf.float32),
+            'img': {
+                'size': {
+                    'height': tf.TensorSpec(shape=[2, 3], dtype=tf.int64),
+                    'width': tf.TensorSpec(shape=[None, 3], dtype=tf.int64),
+                },
+                'image': tf.TensorSpec(shape=[28, 28, 1], dtype=tf.uint8),
+                'metadata/path': tf.TensorSpec(shape=[], dtype=tf.string),
+            }
+        })
 
   def test_fdict(self):
 
@@ -180,8 +198,7 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
                             'height': 256,
                             'width': 128,
                         },
-                        'metadata/path':
-                            tf.compat.as_bytes('path/to/xyz.jpg'),
+                        'metadata/path': tf.compat.as_bytes('path/to/xyz.jpg'),
                     },
                 },
             ),
@@ -200,13 +217,24 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
 
     label = features_lib.ClassLabel(names=['m', 'f'])
     feature_dict = features_lib.FeaturesDict({
-        'metadata': features_lib.Sequence({
-            'frame': features_lib.Image(shape=(32, 32, 3)),
-        }),
-        'label': features_lib.Sequence(label),
+        'metadata':
+            features_lib.Sequence({
+                'frame': features_lib.Image(shape=(32, 32, 3)),
+            }),
+        'label':
+            features_lib.Sequence(label),
     })
 
-    self.assertEqual(repr(feature_dict), FEATURE_STR)
+    self.assertEqual(
+        repr(feature_dict),
+        textwrap.dedent("""\
+        FeaturesDict({
+            'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=2)),
+            'metadata': Sequence({
+                'frame': Image(shape=(32, 32, 3), dtype=tf.uint8),
+            }),
+        })"""),
+    )
 
   def test_feature_save_load_metadata_slashes(self):
     with testing.tmp_dir() as data_dir:
@@ -217,183 +245,106 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
       fd.save_metadata(data_dir)
       fd.load_metadata(data_dir)
 
+  def test_repr_tensor(self):
 
-FEATURE_STR = """FeaturesDict({
-    'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=2)),
-    'metadata': Sequence({
-        'frame': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    }),
-})"""
-
-
-class FeatureTensorTest(testing.FeatureExpectationsTestCase):
-
-  def test_shape_static(self):
-
-    np_input = np.random.rand(2, 3).astype(np.float32)
-    array_input = [
-        [1, 2, 3],
-        [4, 5, 6],
-    ]
-
-    self.assertFeature(
-        feature=features_lib.Tensor(shape=(2, 3), dtype=tf.float32),
-        dtype=tf.float32,
-        shape=(2, 3),
-        tests=[
-            # Np array
-            testing.FeatureExpectationItem(
-                value=np_input,
-                expected=np_input,
-            ),
-            # Python array
-            testing.FeatureExpectationItem(
-                value=array_input,
-                expected=array_input,
-            ),
-            # Invalid dtype
-            testing.FeatureExpectationItem(
-                value=np.random.randint(256, size=(2, 3)),
-                raise_cls=ValueError,
-                raise_msg='int64 do not match',
-            ),
-            # Invalid shape
-            testing.FeatureExpectationItem(
-                value=np.random.rand(2, 4).astype(np.float32),
-                raise_cls=ValueError,
-                raise_msg='are incompatible',
-            ),
-        ],
+    # Top level Tensor is printed expanded
+    self.assertEqual(
+        repr(features_lib.Tensor(shape=(), dtype=tf.int32)),
+        'Tensor(shape=(), dtype=tf.int32)',
     )
 
-  def test_shape_dynamic(self):
-
-    np_input_dynamic_1 = np.random.randint(256, size=(2, 3, 2), dtype=np.int32)
-    np_input_dynamic_2 = np.random.randint(256, size=(5, 3, 2), dtype=np.int32)
-
-    self.assertFeature(
-        feature=features_lib.Tensor(shape=(None, 3, 2), dtype=tf.int32),
-        dtype=tf.int32,
-        shape=(None, 3, 2),
-        tests=[
-            testing.FeatureExpectationItem(
-                value=np_input_dynamic_1,
-                expected=np_input_dynamic_1,
-            ),
-            testing.FeatureExpectationItem(
-                value=np_input_dynamic_2,
-                expected=np_input_dynamic_2,
-            ),
-            # Invalid shape
-            testing.FeatureExpectationItem(
-                value=
-                np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
-                raise_cls=ValueError,
-                raise_msg='are incompatible',
-            ),
-        ]
+    # Sequences colapse tensor repr
+    self.assertEqual(
+        repr(features_lib.Sequence(tf.int32)),
+        'Sequence(tf.int32)',
     )
 
-  def test_bool_flat(self):
+    class ChildTensor(features_lib.Tensor):
+      pass
 
-    self.assertFeature(
-        feature=features_lib.Tensor(shape=(), dtype=tf.bool),
-        dtype=tf.bool,
-        shape=(),
-        tests=[
-            testing.FeatureExpectationItem(
-                value=np.array(True),
-                expected=True,
-            ),
-            testing.FeatureExpectationItem(
-                value=np.array(False),
-                expected=False,
-            ),
-            testing.FeatureExpectationItem(
-                value=True,
-                expected=True,
-            ),
-            testing.FeatureExpectationItem(
-                value=False,
-                expected=False,
-            ),
-        ]
+    self.assertEqual(
+        repr(
+            features_lib.FeaturesDict({
+                'colapsed': features_lib.Tensor(shape=(), dtype=tf.int32),
+                # Tensor with defined shape are printed expanded
+                'noncolapsed': features_lib.Tensor(shape=(1,), dtype=tf.int32),
+                # Tensor inherited are expanded
+                'child': ChildTensor(shape=(), dtype=tf.int32),
+            })),
+        textwrap.dedent("""\
+        FeaturesDict({
+            'child': ChildTensor(shape=(), dtype=tf.int32),
+            'colapsed': tf.int32,
+            'noncolapsed': Tensor(shape=(1,), dtype=tf.int32),
+        })"""),
     )
 
-  def test_bool_array(self):
 
-    self.assertFeature(
-        feature=features_lib.Tensor(shape=(3,), dtype=tf.bool),
-        dtype=tf.bool,
-        shape=(3,),
-        tests=[
-            testing.FeatureExpectationItem(
-                value=np.array([True, True, False]),
-                expected=[True, True, False],
-            ),
-            testing.FeatureExpectationItem(
-                value=[True, False, True],
-                expected=[True, False, True],
-            ),
-        ]
-    )
+def test_custom_feature_connector(tmp_path: pathlib.Path):
+  module_name = 'tensorflow_datasets.core.features.test_feature'
+  feature_qualname = f'{module_name}.CustomFeatureConnector'
+  assert module_name not in sys.modules
+  assert feature_qualname not in features_lib.FeatureConnector._registered_features
 
-  def test_string(self):
-    nonunicode_text = 'hello world'
-    unicode_text = u'你好'
+  # Save tfds.feature.Tensor to avoid importing the custom feature connector
+  feature = features_lib.Tensor(shape=(), dtype=tf.int32)
+  feature.save_config(tmp_path)
 
-    self.assertFeature(
-        feature=features_lib.Tensor(shape=(), dtype=tf.string),
-        shape=(),
-        dtype=tf.string,
-        tests=[
-            # Non-unicode
-            testing.FeatureExpectationItem(
-                value=nonunicode_text,
-                expected=tf.compat.as_bytes(nonunicode_text),
-            ),
-            # Unicode
-            testing.FeatureExpectationItem(
-                value=unicode_text,
-                expected=tf.compat.as_bytes(unicode_text),
-            ),
-            # Empty string
-            testing.FeatureExpectationItem(
-                value='',
-                expected=b'',
-            ),
-            # Trailing zeros
-            testing.FeatureExpectationItem(
-                value=b'abc\x00\x00',
-                expected=b'abc\x00\x00',
-            ),
-        ],
-    )
+  # Update the features.json file to simulate as if the original
+  # FeatureConnector had been save
+  feature_path = tmp_path / 'features.json'
+  content = feature_path.read_text()
+  content = content.replace(
+      'tensorflow_datasets.core.features.tensor_feature.Tensor',
+      feature_qualname,
+  )
+  feature_path.write_text(content)
 
-    self.assertFeature(
-        feature=features_lib.Tensor(shape=(2, 1), dtype=tf.string),
-        shape=(2, 1),
-        dtype=tf.string,
-        tests=[
-            testing.FeatureExpectationItem(
-                value=[[nonunicode_text], [unicode_text]],
-                expected=[
-                    [tf.compat.as_bytes(nonunicode_text)],
-                    [tf.compat.as_bytes(unicode_text)],
-                ],
-            ),
-            testing.FeatureExpectationItem(
-                value=[nonunicode_text, unicode_text],  # Wrong shape
-                raise_cls=ValueError,
-                raise_msg='(2,) and (2, 1) must have the same rank',
-            ),
-            testing.FeatureExpectationItem(
-                value=[['some text'], [123]],  # Wrong dtype
-                raise_cls=TypeError,
-                raise_msg='Expected binary or unicode string, got 123',
-            ),
-        ],
-    )
+  # Loading will load the custom feature connector, even if it is not
+  # registered yet.
+  feature = features_lib.FeatureConnector.from_config(tmp_path)
+
+  # After loading, the custom feature connector is registered
+  assert module_name in sys.modules
+  assert feature_qualname in features_lib.FeatureConnector._registered_features
+
+  # Check that the loaded feature is the custom feature
+  from tensorflow_datasets.core.features import test_feature  # pylint: disable=g-import-not-at-top
+  assert isinstance(feature, test_feature.CustomFeatureConnector)
+
+
+def test_tensor_feature_backward_compatibility():
+  registered = features_lib.FeatureConnector._registered_features
+  cls = features_lib.Tensor
+  module_base = 'tensorflow_datasets.core.features.'
+  # Both aliases are registered
+  assert registered[module_base + 'tensor_feature.Tensor'] is cls
+  assert registered[module_base + 'feature.Tensor'] is cls
+
+
+def test_from_json_content_backward_compatibility():
+  legacy_json = {
+      'type': 'tensorflow_datasets.core.features.features_dict.FeaturesDict',
+      'content': {
+          'input': {
+              'type': 'tensorflow_datasets.core.features.image_feature.Image',
+              'content': {
+                  'shape': [28, 28, 3],
+                  'dtype': 'uint8',
+                  'encoding_format': 'png'
+              }
+          },
+          'target': {
+              'type':
+                  'tensorflow_datasets.core.features.class_label_feature.ClassLabel',
+              'content': {
+                  'num_classes': 10
+              }
+          }
+      }
+  }
+  parsed_features_dict = features_lib.FeatureConnector.from_json(legacy_json)
+  assert parsed_features_dict.keys() == set(['input', 'target'])
 
 
 if __name__ == '__main__':

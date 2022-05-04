@@ -1,0 +1,4529 @@
+{
+  "citation": "@inproceedings{huang-etal-2019-cosmos,\n    title = \"Cosmos {QA}: Machine Reading Comprehension with Contextual Commonsense Reasoning\",\n    author = \"Huang, Lifu  and\n      Le Bras, Ronan  and\n      Bhagavatula, Chandra  and\n      Choi, Yejin\",\n    booktitle = \"Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)\",\n    year = \"2019\",\n    url = \"https://www.aclweb.org/anthology/D19-1243\"\n}",
+  "description": "Cosmos QA is a large-scale dataset of 35.6K problems that require\n commonsense-based reading comprehension, formulated as multiple-choice\n questions. It focuses on reading between the lines over a diverse collection\n of people's everyday narratives, asking questions concerning on the likely\n causes or effects of events that require reasoning beyond the exact text\n spans in the context.",
+  "downloadSize": "24399475",
+  "location": {
+    "urls": [
+      "https://wilburone.github.io/cosmos/"
+    ]
+  },
+  "name": "cosmos_qa",
+  "schema": {
+    "feature": [
+      {
+        "domain": "answer0",
+        "name": "answer0",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "answer1",
+        "name": "answer1",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "answer2",
+        "name": "answer2",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "answer3",
+        "name": "answer3",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "context",
+        "name": "context",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "id",
+        "name": "id",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "domain": "question",
+        "name": "question",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "BYTES"
+      },
+      {
+        "name": "label",
+        "presence": {
+          "minCount": "1",
+          "minFraction": 1.0
+        },
+        "shape": {
+          "dim": [
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "INT"
+      }
+    ],
+    "stringDomain": [
+      {
+        "name": "answer0",
+        "value": [
+          "None of the above choices .",
+          "They talk during movies",
+          "They think Oprah should have read the thing out loud",
+          "They think it 's a terrible way to criticize someone .",
+          "They wanted to see how gross birth is .",
+          "They will use the bisquick for spying on Kim .",
+          "They would have to go alone",
+          "To change the color .",
+          "Unemployment",
+          "When acting out while drinking , they let their crush now they like them ."
+        ]
+      },
+      {
+        "name": "answer1",
+        "value": [
+          "None of the above choices .",
+          "Pensive",
+          "They have a very bad memory and think it is new each time .",
+          "They loved when their car was out of control .",
+          "They spent their vacation there .",
+          "They would be making more money",
+          "They would know why the women were swooning",
+          "They would need to verify their address",
+          "This song would last 2 hours .",
+          "WhichBingo gives you land - based information on where bingo is being played ."
+        ]
+      },
+      {
+        "name": "answer2",
+        "value": [
+          "None of the above choices .",
+          "They wanted to drive and not pay attention at the same time .",
+          "They would be drying their clothes outside",
+          "They would have had fun",
+          "They would n't make their last cart shift",
+          "Uncertain",
+          "family may be unhappy",
+          "in a concert hall",
+          "magazines for families",
+          "we would all be able to connect to network"
+        ]
+      },
+      {
+        "name": "answer3",
+        "value": [
+          "Because they thought it would be a fun thing to do .",
+          "None of the above choices .",
+          "They hate watching the incoming waves .",
+          "They link to the actual text .",
+          "They think Mormon history is boring",
+          "They want a common name for the child so it 's easier to remember .",
+          "They want patients to start taking care of themselves and not go to a doctor .",
+          "They will require more blood pressure medication .",
+          "To make it bigger .",
+          "We are arsonists ."
+        ]
+      },
+      {
+        "name": "context",
+        "value": [
+          "We need to ask our patients to exercise more days in week , we need to talk to our patients about the need to be the vanguards of their health . Ask your patients to recite their blood pressure reading at every visit , ask your patients to tell you about their weight changes at every visit , ask about detailed smoking and drinking habits . When you call your relatives in the village ask them if they know their blood pressure readings , if they answer no tell them to get it checked and get back to you . My uncle was telling me about his wonderful doctor and his blood pressure pills .",
+          "What is the ideal of the rule of law ? An initial observation is that there are several different conceptions of the meaning of the rule of law . Indeed , the rule of law may not be a single concept at all ; rather , it may be more accurate to understand the ideal of the rule of law as a set of ideals connected more by family resemblance than a unifying conceptual structure . Dicey 's Influential Formulation Historically , the most influential account of the rule of law was offered by A.V.",
+          "Whatever it was I was so tired . Music did n't help , nothing was good on the TV 's , I kept looking down at the time ... it was tough . And , like always , my face was red as a tomato when I got through .",
+          "Whatever number the students picked out of the basket was the artwork they had to critique ( though if they picked thier own number , they would have to draw again ) . This critique had to be 4 paragraphs : describe , analyze , interpret and judge . This really helps the students look closely at the artwork . They get to see how the elements and principles work together in the artwork , as well as voicing their opinions on what the artwork is about and why they like or dislike the work .",
+          "When you have a stigmatized illness such as depression or bipolar disorder there is much comfort in meeting others - even on the page of a book - who have endured the same desperation and have come out the other side . For me , learning about the physiology of depression and the chemistry of the brain gave me tremendous relief . These writings convinced me I was not weak or lazy . I was sick .",
+          "Which again Awesome . Then my older sisters husband pulled out his guitar and jammed out for about 2 hours . He 's awesome when it comes to the guitar ( which he should be as he has a Masters in Jazz Guitar Performance ... ) , he 's in a couple different bands that play locally . I got him to play a couple Metallica songs , and ' Back in Black ' and ' Hell 's Bells ' .",
+          "Woo , internet at the mall . I was afraid I would n't be able to connect to the network -- I get at least three guests a week who can not for the life of them figure out how to connect -- but it was easy . Set up a new network connection , put in the network 's name , set the security to No Encryption ( Open ) , and voila !",
+          "You \" just happen \" to go in to a store where you never go , and you run into someone you ' ve been thinking about . You \" just happen \" to dial a wrong number and the person who answers the phone is a long lost friend . This was one of those moments for Jodi .",
+          "You , instead of encouraging her and providing help , you said such nasty things to her that affects her thoroughly . So you think that is God 's will ? Just so that you know , this is not your first time . Whatever it is , I am starting to doubt the leadership in the church .",
+          "[ 12 ] Where was your FIRST sleep over?No idea ... maybe my cousin Amy 's house ? [ 13 ] Who was the FIRST person you talked to today?The cat . [ 15 ] What was the FIRST thing you did this morning?Fed the cat then did a wee ."
+        ]
+      },
+      {
+        "name": "id",
+        "value": [
+          "3ZVPAMTJWPH6MSXSB7V4FTKPSW4GRC##3PZDLQMM0W0FOGYWKXQMDENQAVK2CE##A3GVXFBYAU9HP##Blog_788913##q1_a2##3BC9H1KCYWQBGFZE47RG9SZAPGKYWO",
+          "3ZXNP4Z39RJXWCS7TMIEV6AOTD6L77##3Q5ZZ9ZEVPDQGLSZ170FH16AWVW85Q##A2KYOM2ZGYDJGT##Blog_1452005##q1_a1##3JMNNNO3B3ILFU67BMKL0OY49E42WD",
+          "3ZXNP4Z39RJXWCS7TMIEV6AOTDVL7W##3JPSL1DZ5TX8PYRK25GF79CRCZLAN0##AO33H4GL9KZX9##Blog_355215##q1_a1##3ZZAYRN1I857UKRI3FD7KHU86NDTOB",
+          "3ZXNP4Z39RJXWCS7TMIEV6AOTFW7LN##34S9DKFK74N9LGPNIBUVAVUYG5KYNP##AO33H4GL9KZX9##Blog_459412##q1_a1##3MJ9GGZYO5KO8H34AHOTIZ1DHWBA2M",
+          "3ZXNP4Z39TZCQ1REDKUEN4YWMLGL79##3IUZPWIU1RMJJU8RQUWRP4GNHEOWK7##A2KYOM2ZGYDJGT##Blog_252329##q1_a1##35ZRNT9RUKC2V3TOO07G24QACXS3OE",
+          "3ZXV7Q5FJD2W2QCEIQZR8DLQQ7FCFW##3I33IC7ZWIHRV11Y0JUV7JX29YE2A2##AJ7NSZOAFP05U##Blog_1466170##q1_a1##3TKSOBLOHNUNF48SZOH0E3ONTSBBB2",
+          "3ZZAYRN1I6PS0VSBJH17SJ60DHROTW##3L0KT67Y8FE61THSQ7BH9P44337YSE##AJ7NSZOAFP05U##Blog_448629##q1_a2##3IKDQS3DQGEGCHE4JY5CBAYI6VTCI1",
+          "3ZZAYRN1I6PS0VSBJH17SJ60DO2OTL##3L6L49WXW1VPXK5XP4A20PQ5VNA54J##A2KYOM2ZGYDJGT##Blog_52578##q1_a1##3MQKOF1EE428I44N8B42W7P868SWDL",
+          "3ZZAYRN1I857UKRI3FD7KHU86NCTOA##39OWYR0EPN6CSDBD4KNIUO9YLBRFYE##AO33H4GL9KZX9##Blog_413696##q1_a1##33CLA8O0MKP08S1X0NPMX8KCQAGRFJ",
+          "3ZZAYRN1I857UKRI3FD7KHU86X9OTM##37W3JXSD69NE3ZX8U9XIYCVYH9SWYV##A33PQXKQHFVF3V##Blog_1437367##q1_a1##3QX22DUVOQVY79AVVUY9TVTP9XNMVV"
+        ]
+      },
+      {
+        "name": "question",
+        "value": [
+          "What is likely true about the narrator ?",
+          "What is probably true ?",
+          "What is probably true about the narrator ?",
+          "What is probably true of the narrator ?",
+          "What kind of people are we ?",
+          "What kind of person am I ?",
+          "What probably happened after this story ?",
+          "What will I want to do next ?",
+          "what am I grateful about ?",
+          "what might be different if Sam was n't left in the dust ?"
+        ]
+      }
+    ]
+  },
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "5949801",
+      "shardLengths": [
+        "6963"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "answer0"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 44.238403,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6963",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6963"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 1286.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "detour signs",
+                    "lowRank": "1",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "by checking his blood pressure they were seeing if he would have another seizure .",
+                    "lowRank": "2",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "You may write something online",
+                    "lowRank": "3",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "You are my beloved pet bird .",
+                    "lowRank": "4",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "We would repeat things over and over",
+                    "lowRank": "5",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "We were spending the night in a trailer and had to catch our dinner .",
+                    "lowRank": "6",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "We really enjoyed the food there last time",
+                    "lowRank": "7",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "We enjoy a small amount of foods instead of many dishes .",
+                    "lowRank": "8",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "To let young people know to vote republican .",
+                    "lowRank": "9",
+                    "sampleCount": 2.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1286.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "detour signs"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "by checking his blood pressure they were seeing if he would have another seizure ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "You may write something online"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "You are my beloved pet bird ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "We would repeat things over and over"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "We were spending the night in a trailer and had to catch our dinner ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "We really enjoyed the food there last time"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "We enjoy a small amount of foods instead of many dishes ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "To let young people know to vote republican ."
+                }
+              ],
+              "unique": "5533"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "answer1"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 44.337498,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6963",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6963"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 1272.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "They are religious",
+                    "lowRank": "1",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Because they were hungry .",
+                    "lowRank": "2",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "waiting for parents",
+                    "lowRank": "3",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "a parade coming up",
+                    "lowRank": "4",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "You could watch the show from the restrooms .",
+                    "lowRank": "5",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "You are my beloved pet turtle .",
+                    "lowRank": "6",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Would have woke up at sunup today .",
+                    "lowRank": "7",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "We would wear normal , pink attire .",
+                    "lowRank": "8",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "We were unpacking and assembling the guest bed",
+                    "lowRank": "9",
+                    "sampleCount": 2.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1272.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "They are religious"
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "Because they were hungry ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "waiting for parents"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "a parade coming up"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "You could watch the show from the restrooms ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "You are my beloved pet turtle ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "Would have woke up at sunup today ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "We would wear normal , pink attire ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "We were unpacking and assembling the guest bed"
+                }
+              ],
+              "unique": "5546"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "answer2"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 44.396812,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6963",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6963"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 1290.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "They are not religious",
+                    "lowRank": "1",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Because they were hungry .",
+                    "lowRank": "2",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Because I was hungry .",
+                    "lowRank": "3",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "yes , they are very angry about going to all the differnet schools .",
+                    "lowRank": "4",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "student were gathered at the library for a study group",
+                    "lowRank": "5",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "families of patients can hang a hammock on pPalm trees there can be used to hang hammock of",
+                    "lowRank": "6",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "You would have to pick up the shoes from the retailer yourself",
+                    "lowRank": "7",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "You might win a prize but there is no escape",
+                    "lowRank": "8",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Yes , she needs to get laundry done .",
+                    "lowRank": "9",
+                    "sampleCount": 2.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1290.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "They are not religious"
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "Because they were hungry ."
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "Because I was hungry ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "yes , they are very angry about going to all the differnet schools ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "student were gathered at the library for a study group"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "families of patients can hang a hammock on pPalm trees there can be used to hang hammock of"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "You would have to pick up the shoes from the retailer yourself"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "You might win a prize but there is no escape"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "Yes , she needs to get laundry done ."
+                }
+              ],
+              "unique": "5552"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "answer3"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 44.448658,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6963",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6963"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 1238.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "The narrator started a friendship",
+                    "lowRank": "1",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "you can get pregnant by taking accutane .",
+                    "lowRank": "2",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "they were happy to be able to sit down and relax in the meadows",
+                    "lowRank": "3",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "it was a small group and no one cheated",
+                    "lowRank": "4",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "helping parents not to be scammed",
+                    "lowRank": "5",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "You would have to wait until you can afford to pay for the shipping to buy the shoes",
+                    "lowRank": "6",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "We would go into the past to talk to our favorite teacher",
+                    "lowRank": "7",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "To spread the information that republicans are best .",
+                    "lowRank": "8",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "To prove that they could do it .",
+                    "lowRank": "9",
+                    "sampleCount": 2.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1238.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "The narrator started a friendship"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "you can get pregnant by taking accutane ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "they were happy to be able to sit down and relax in the meadows"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "it was a small group and no one cheated"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "helping parents not to be scammed"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "You would have to wait until you can afford to pay for the shipping to buy the shoes"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "We would go into the past to talk to our favorite teacher"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "To spread the information that republicans are best ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "To prove that they could do it ."
+                }
+              ],
+              "unique": "5584"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "context"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 342.75024,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6963",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6963"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "you know those times that your cell phone ends up in a glass of water and you think \" well damn , my cell phone is wet , that ca n't be good \" , then you turn in off . then on again and it 's not working . so you laugh really hard and your sister apologizes like crazy because she is the one who tossed the cell at you and it just happened to land in your glass of water .",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "it 's very cold outside.let's see.yesterday was so boring . i just sat around my house . i packed all my stuff for school though . i feel like i have a lot .",
+                    "lowRank": "1",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "i was like \" wtf , who ordered cake ? \" but i turned down several \" just one small bite \" offers and sipped on water in between beer sips.sigh . i wanted those fries bad . and i wanted to do a couple of shots .",
+                    "lowRank": "2",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "a week ago , he loved me , and now he wo n't even leave his house for me . it hurts a lot , guys.i really do n't understand how people live through breakups after longterm relationships . i have a hard enough time dealing with a breakup after two months .",
+                    "lowRank": "3",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Yesterday , my friend and I went to Regency Square Mall . When we went there , I realized that I have n't shopped for months ! I kind of miss the place which was where I used to shop before but I love the mall close to my new place now .",
+                    "lowRank": "4",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Yes ! Our painters have finally left . I guess I have n't written about the mess that has been going on lately , but just so you know , we ' ve had painters here for about 2 weeks . They were here while we were on vacation ( which was no big deal , except for the mess they made ) , and then they came back to do the outside of the house a couple weeks ago .",
+                    "lowRank": "5",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "When we 're out it 's even worse . I have to make sure that there 's no food crumbs anywhere my baby might get them . Make sure no other kids touch him or his toys if they might have food on their hands that would make him sick . Make sure no moron tries to feed him something ( why on earth do people think \" Aw , what a gorgeous baby , here 's a cookie , little one . \"",
+                    "lowRank": "6",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Went to play paintball again today . This was round two back at the same place . It was a small group this time and better because the people who came to play did n't cheat . Small but important difference .",
+                    "lowRank": "7",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "Well . The \" summer showers \" , which I referred to in the last post , became progressively less pleasant . Beth and I got caught in a small bit of flash flooding while driving in the car . I snapped a few photos with my iphone 's camera .",
+                    "lowRank": "8",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Well , we watched ' The Seeker ' on DVD last night . : -/It was n't that bad of a movie , really . Sort of mediocre - ish dialogue , too many characters to keep track of ( but there had to be , Will had to be one of at least six children and there were a more than that in the book ) , but it was shiny enough to keep me watching .",
+                    "lowRank": "9",
+                    "sampleCount": 4.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 4.0,
+                  "value": "you know those times that your cell phone ends up in a glass of water and you think \" well damn , my cell phone is wet , that ca n't be good \" , then you turn in off . then on again and it 's not working . so you laugh really hard and your sister apologizes like crazy because she is the one who tossed the cell at you and it just happened to land in your glass of water ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "it 's very cold outside.let's see.yesterday was so boring . i just sat around my house . i packed all my stuff for school though . i feel like i have a lot ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "i was like \" wtf , who ordered cake ? \" but i turned down several \" just one small bite \" offers and sipped on water in between beer sips.sigh . i wanted those fries bad . and i wanted to do a couple of shots ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "a week ago , he loved me , and now he wo n't even leave his house for me . it hurts a lot , guys.i really do n't understand how people live through breakups after longterm relationships . i have a hard enough time dealing with a breakup after two months ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "Yesterday , my friend and I went to Regency Square Mall . When we went there , I realized that I have n't shopped for months ! I kind of miss the place which was where I used to shop before but I love the mall close to my new place now ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "Yes ! Our painters have finally left . I guess I have n't written about the mess that has been going on lately , but just so you know , we ' ve had painters here for about 2 weeks . They were here while we were on vacation ( which was no big deal , except for the mess they made ) , and then they came back to do the outside of the house a couple weeks ago ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "When we 're out it 's even worse . I have to make sure that there 's no food crumbs anywhere my baby might get them . Make sure no other kids touch him or his toys if they might have food on their hands that would make him sick . Make sure no moron tries to feed him something ( why on earth do people think \" Aw , what a gorgeous baby , here 's a cookie , little one . \""
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "Went to play paintball again today . This was round two back at the same place . It was a small group this time and better because the people who came to play did n't cheat . Small but important difference ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "Well . The \" summer showers \" , which I referred to in the last post , became progressively less pleasant . Beth and I got caught in a small bit of flash flooding while driving in the car . I snapped a few photos with my iphone 's camera ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "Well , we watched ' The Seeker ' on DVD last night . : -/It was n't that bad of a movie , really . Sort of mediocre - ish dialogue , too many characters to keep track of ( but there had to be , Will had to be one of at least six children and there were a more than that in the book ) , but it was shiny enough to keep me watching ."
+                }
+              ],
+              "unique": "5675"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "id"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 129.96208,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6963",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6963"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU85UBTOM##3MB8LZR5BI8380WSMGPPGTZ7I07LKB##A1S1K7134S2VUC##Blog_924993##q1_a2##3P888QFVX58U24ZQMBJCFCJLML6OQU",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU85UBTOM##3MB8LZR5BI8380WSMGPPGTZ7I07LKB##A1S1K7134S2VUC##Blog_924993##q1_a1##34O39PNDK8MAVBPHVL3QEITRB8PRBU",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU85UBOTH##3TESA3PJ34PI46EG743KVJ607ARMMI##A1S1K7134S2VUC##Blog_411592##q1_a2##3JGHED38EF5WQ0YDWZJ4HC0SV5DY7H",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU85UBOTH##3TESA3PJ34PI46EG743KVJ607ARMMI##A1S1K7134S2VUC##Blog_411592##q1_a1##3HEA4ZVWVF0J18AAX4ZA8VO39UF55U",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU859BOTB##3S96KQ6I9PJJD7YN385TY7EYQVJTDC##AO33H4GL9KZX9##Blog_269351##q1_a1##3VQTAXTYN5Z2B3HYZFYVJTGBI4DBUW",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "3ZZAYRN1I6PS0VSBJH17SJ60DTKOTD##3Z4XG4ZF49PZI4C97DJA9KXUQM28XH##A2KYOM2ZGYDJGT##Blog_1282543##q1_a1##37VHPF5VYEHNNB2RACTLYL443368CF",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "3ZZAYRN1I6PS0VSBJH17SJ60DQ2TOU##3DY4FPOOA2MDWKMA67OSCGVE0YWVRH##A2KYOM2ZGYDJGT##Blog_129461##q1_a1##37S0QRNUFDULB8CET0DGWZ8LDCY88M",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "3ZZAYRN1I6PS0VSBJH17SJ60DMEOTT##30BUDKLTXET7PM2QEAMF9B2W80BE5H##AJ7NSZOAFP05U##Blog_689924##q1_a1##3ZTE0JGGCG6Q83P7HTIHV7U4I6DOCX",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "3ZZAYRN1I6PS0VSBJH17SJ60DK2TOI##3G5W44VEU8G8RJJKRSG9B36QHVLGKY##AO33H4GL9KZX9##Blog_1121611##q1_a1##3XH7ZM9YX48R7IAKX1PUNCY1N849RK",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "3ZZAYRN1I6PS0VSBJH17SJ60DHRTO1##3FUI0JHJPYW119ZPB7HQBN0F2LQ33W##A2KYOM2ZGYDJGT##Blog_287228##q1_a1##360ZO6N6J3X0A2XSSTTD1D4RHJAM9A",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU85UBTOM##3MB8LZR5BI8380WSMGPPGTZ7I07LKB##A1S1K7134S2VUC##Blog_924993##q1_a2##3P888QFVX58U24ZQMBJCFCJLML6OQU"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU85UBTOM##3MB8LZR5BI8380WSMGPPGTZ7I07LKB##A1S1K7134S2VUC##Blog_924993##q1_a1##34O39PNDK8MAVBPHVL3QEITRB8PRBU"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU85UBOTH##3TESA3PJ34PI46EG743KVJ607ARMMI##A1S1K7134S2VUC##Blog_411592##q1_a2##3JGHED38EF5WQ0YDWZJ4HC0SV5DY7H"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU85UBOTH##3TESA3PJ34PI46EG743KVJ607ARMMI##A1S1K7134S2VUC##Blog_411592##q1_a1##3HEA4ZVWVF0J18AAX4ZA8VO39UF55U"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU859BOTB##3S96KQ6I9PJJD7YN385TY7EYQVJTDC##AO33H4GL9KZX9##Blog_269351##q1_a1##3VQTAXTYN5Z2B3HYZFYVJTGBI4DBUW"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I6PS0VSBJH17SJ60DTKOTD##3Z4XG4ZF49PZI4C97DJA9KXUQM28XH##A2KYOM2ZGYDJGT##Blog_1282543##q1_a1##37VHPF5VYEHNNB2RACTLYL443368CF"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I6PS0VSBJH17SJ60DQ2TOU##3DY4FPOOA2MDWKMA67OSCGVE0YWVRH##A2KYOM2ZGYDJGT##Blog_129461##q1_a1##37S0QRNUFDULB8CET0DGWZ8LDCY88M"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I6PS0VSBJH17SJ60DMEOTT##30BUDKLTXET7PM2QEAMF9B2W80BE5H##AJ7NSZOAFP05U##Blog_689924##q1_a1##3ZTE0JGGCG6Q83P7HTIHV7U4I6DOCX"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I6PS0VSBJH17SJ60DK2TOI##3G5W44VEU8G8RJJKRSG9B36QHVLGKY##AO33H4GL9KZX9##Blog_1121611##q1_a1##3XH7ZM9YX48R7IAKX1PUNCY1N849RK"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I6PS0VSBJH17SJ60DHRTO1##3FUI0JHJPYW119ZPB7HQBN0F2LQ33W##A2KYOM2ZGYDJGT##Blog_287228##q1_a1##360ZO6N6J3X0A2XSSTTD1D4RHJAM9A"
+                }
+              ],
+              "unique": "6963"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "question"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 53.264828,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6963",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6963"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "What is probably true about the narrator ?",
+                    "sampleCount": 124.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "What is probably true ?",
+                    "lowRank": "1",
+                    "sampleCount": 16.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "What is likely true about the narrator ?",
+                    "lowRank": "2",
+                    "sampleCount": 14.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "What kind of person am I ?",
+                    "lowRank": "3",
+                    "sampleCount": 12.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "What was probably true before this story ?",
+                    "lowRank": "4",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "What probably happened after this story ?",
+                    "lowRank": "5",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "What probably happened before this story ?",
+                    "lowRank": "6",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "What might I do for a living ?",
+                    "lowRank": "7",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "What may be true about the narrator ?",
+                    "lowRank": "8",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "What might be true about the narrator ?",
+                    "lowRank": "9",
+                    "sampleCount": 4.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 124.0,
+                  "value": "What is probably true about the narrator ?"
+                },
+                {
+                  "frequency": 16.0,
+                  "value": "What is probably true ?"
+                },
+                {
+                  "frequency": 14.0,
+                  "value": "What is likely true about the narrator ?"
+                },
+                {
+                  "frequency": 12.0,
+                  "value": "What kind of person am I ?"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "What was probably true before this story ?"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "What probably happened after this story ?"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "What probably happened before this story ?"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "What might I do for a living ?"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "What may be true about the narrator ?"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "What might be true about the narrator ?"
+                }
+              ],
+              "unique": "5896"
+            },
+            "type": "STRING"
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "6963",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 696.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "6963"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 6963.0
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    },
+                    {
+                      "highValue": -1.0,
+                      "lowValue": -1.0,
+                      "sampleCount": 696.3
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": -1.0,
+              "mean": -1.0,
+              "median": -1.0,
+              "min": -1.0
+            },
+            "path": {
+              "step": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "numExamples": "6963"
+      }
+    },
+    {
+      "name": "train",
+      "numBytes": "19936057",
+      "shardLengths": [
+        "25262"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "answer0"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 36.08107,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "25262",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "25262"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 4819.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Sad",
+                    "lowRank": "1",
+                    "sampleCount": 32.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Happy",
+                    "lowRank": "2",
+                    "sampleCount": 30.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Tired",
+                    "lowRank": "3",
+                    "sampleCount": 29.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Angry",
+                    "lowRank": "4",
+                    "sampleCount": 28.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "To describe my job",
+                    "lowRank": "5",
+                    "sampleCount": 14.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "They are Jewish .",
+                    "lowRank": "6",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Football",
+                    "lowRank": "7",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "Spain",
+                    "lowRank": "8",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "England",
+                    "lowRank": "9",
+                    "sampleCount": 7.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 4819.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 32.0,
+                  "value": "Sad"
+                },
+                {
+                  "frequency": 30.0,
+                  "value": "Happy"
+                },
+                {
+                  "frequency": 29.0,
+                  "value": "Tired"
+                },
+                {
+                  "frequency": 28.0,
+                  "value": "Angry"
+                },
+                {
+                  "frequency": 14.0,
+                  "value": "To describe my job"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "They are Jewish ."
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "Football"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "Spain"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "England"
+                }
+              ],
+              "unique": "19098"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "answer1"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 36.05356,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "25262",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "25262"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 4814.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Sad",
+                    "lowRank": "1",
+                    "sampleCount": 26.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Tired",
+                    "lowRank": "2",
+                    "sampleCount": 22.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Angry",
+                    "lowRank": "3",
+                    "sampleCount": 22.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Happy",
+                    "lowRank": "4",
+                    "sampleCount": 19.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Hungry",
+                    "lowRank": "5",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "Anxious",
+                    "lowRank": "6",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "To describe my job",
+                    "lowRank": "7",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "They are Jewish .",
+                    "lowRank": "8",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "They are Christian .",
+                    "lowRank": "9",
+                    "sampleCount": 7.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 4814.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 26.0,
+                  "value": "Sad"
+                },
+                {
+                  "frequency": 22.0,
+                  "value": "Tired"
+                },
+                {
+                  "frequency": 22.0,
+                  "value": "Angry"
+                },
+                {
+                  "frequency": 19.0,
+                  "value": "Happy"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "Hungry"
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "Anxious"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "To describe my job"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "They are Jewish ."
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "They are Christian ."
+                }
+              ],
+              "unique": "19205"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "answer2"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 36.094055,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "25262",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "25262"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 4666.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Happy",
+                    "lowRank": "1",
+                    "sampleCount": 31.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Sad",
+                    "lowRank": "2",
+                    "sampleCount": 28.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Tired",
+                    "lowRank": "3",
+                    "sampleCount": 21.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Angry",
+                    "lowRank": "4",
+                    "sampleCount": 20.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "England",
+                    "lowRank": "5",
+                    "sampleCount": 9.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "Christianity",
+                    "lowRank": "6",
+                    "sampleCount": 9.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "United States",
+                    "lowRank": "7",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "They are Christian .",
+                    "lowRank": "8",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Texas",
+                    "lowRank": "9",
+                    "sampleCount": 7.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 4666.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 31.0,
+                  "value": "Happy"
+                },
+                {
+                  "frequency": 28.0,
+                  "value": "Sad"
+                },
+                {
+                  "frequency": 21.0,
+                  "value": "Tired"
+                },
+                {
+                  "frequency": 20.0,
+                  "value": "Angry"
+                },
+                {
+                  "frequency": 9.0,
+                  "value": "England"
+                },
+                {
+                  "frequency": 9.0,
+                  "value": "Christianity"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "United States"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "They are Christian ."
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "Texas"
+                }
+              ],
+              "unique": "19278"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "answer3"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 36.146385,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "25262",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "25262"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 4774.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Sad",
+                    "lowRank": "1",
+                    "sampleCount": 32.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Tired",
+                    "lowRank": "2",
+                    "sampleCount": 24.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Happy",
+                    "lowRank": "3",
+                    "sampleCount": 23.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Angry",
+                    "lowRank": "4",
+                    "sampleCount": 16.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Hungry",
+                    "lowRank": "5",
+                    "sampleCount": 15.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "To describe my job",
+                    "lowRank": "6",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "They are conservative .",
+                    "lowRank": "7",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "They are Jewish .",
+                    "lowRank": "8",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Judiasm",
+                    "lowRank": "9",
+                    "sampleCount": 7.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 4774.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 32.0,
+                  "value": "Sad"
+                },
+                {
+                  "frequency": 24.0,
+                  "value": "Tired"
+                },
+                {
+                  "frequency": 23.0,
+                  "value": "Happy"
+                },
+                {
+                  "frequency": 16.0,
+                  "value": "Angry"
+                },
+                {
+                  "frequency": 15.0,
+                  "value": "Hungry"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "To describe my job"
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "They are conservative ."
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "They are Jewish ."
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "Judiasm"
+                }
+              ],
+              "unique": "19187"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "context"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 323.64,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "25262",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "25262"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "So , I was sitting at the bus exchange in town this morning , and some Nestle sales rep just walked in and started handing out free packs of soup mix to everyone . Most people were just taking them , but I felt like asking whether it had dairy in it , when she came to me . She did n't know ! - pffft , some rep . And then she said I could find someone else to give it to if it did .",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "In my mind it HAD to be because I was fat . It just had to . The very next day I told myself I was going to lose weight . A switch had flipped .",
+                    "lowRank": "1",
+                    "sampleCount": 10.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "I find life hard enough . But here I am , doing a spring \" cleanse . \" I am cranky because I am exhausted . I am exhausted - or feeling my exhaustion - because all I ' ve been drinking is green tea , and not my usual 2 large cups of coffee in the morning plus limitless cups of black tea throughout the afternoon , and then decaf black tea in the evening .",
+                    "lowRank": "2",
+                    "sampleCount": 9.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "At one time I had two cats who would hiss and spit and tear about when the other came near . It was quite an impressive show of conflict . When I moved into a small house the situation became even more unpleasant . I was awoken in the night by furious , exploding encounters .",
+                    "lowRank": "3",
+                    "sampleCount": 9.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Yesterday was no exception . When I arrived inside the airport in front of the United ticket counter area , the first thing I noticed was that the Premier Executive line was closed off . Normally there are United employees out front directing passengers . This time there were none .",
+                    "lowRank": "4",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "When Kickass Daughter came home for a few days at the end of the summer , I annoyed her deeply by demanding that she go through everything in her room and weed out the nonessentials . Feeling violated ( she hates to throw out things ) and put - upon ( this was her only vacation all summer ! ) she managed to get through it .",
+                    "lowRank": "5",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "Tomorrow 's going to be one of the most difficult days ever . The wake is tomorrow afternoon and I ' m going to need to much xanax to get me through . Seeing him is going to be so hard . I just ca n't believe he 's really gone .",
+                    "lowRank": "6",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Today is a very hot day , 91 degrees ! I got paid yesterday so now I can go to the store with confidence!I gave my children there allowance for the month and they were thrilled . Todd called me last night and needed help with his Media Sender but I could not figure out his problem . he said he would send it in for a replacement .",
+                    "lowRank": "7",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "The first museum we went to Musee d Rodin , which comprises a larges collection of Rodin 's sculptures , including casts . I just had to make it to the Musee de Rodin because I get speechless when I view his sculptrues . The museum was in the neighborhood so it took like 10 minutes via metro to get there , it was like a sign . The museum is one building and large garden .",
+                    "lowRank": "8",
+                    "sampleCount": 8.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "Rainwater from the roof is collected and funneled into a 25,000 gallon underground cistern . Wastewater from showers , sinks and toilets goes into underground purifying tanks and then into the cistern . The collected water then irrigates the land surrounding the house . Surrounding flowers and shrubs native to the area enable the property to blend into the surrounding rural landscape .",
+                    "lowRank": "9",
+                    "sampleCount": 8.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 10.0,
+                  "value": "So , I was sitting at the bus exchange in town this morning , and some Nestle sales rep just walked in and started handing out free packs of soup mix to everyone . Most people were just taking them , but I felt like asking whether it had dairy in it , when she came to me . She did n't know ! - pffft , some rep . And then she said I could find someone else to give it to if it did ."
+                },
+                {
+                  "frequency": 10.0,
+                  "value": "In my mind it HAD to be because I was fat . It just had to . The very next day I told myself I was going to lose weight . A switch had flipped ."
+                },
+                {
+                  "frequency": 9.0,
+                  "value": "I find life hard enough . But here I am , doing a spring \" cleanse . \" I am cranky because I am exhausted . I am exhausted - or feeling my exhaustion - because all I ' ve been drinking is green tea , and not my usual 2 large cups of coffee in the morning plus limitless cups of black tea throughout the afternoon , and then decaf black tea in the evening ."
+                },
+                {
+                  "frequency": 9.0,
+                  "value": "At one time I had two cats who would hiss and spit and tear about when the other came near . It was quite an impressive show of conflict . When I moved into a small house the situation became even more unpleasant . I was awoken in the night by furious , exploding encounters ."
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "Yesterday was no exception . When I arrived inside the airport in front of the United ticket counter area , the first thing I noticed was that the Premier Executive line was closed off . Normally there are United employees out front directing passengers . This time there were none ."
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "When Kickass Daughter came home for a few days at the end of the summer , I annoyed her deeply by demanding that she go through everything in her room and weed out the nonessentials . Feeling violated ( she hates to throw out things ) and put - upon ( this was her only vacation all summer ! ) she managed to get through it ."
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "Tomorrow 's going to be one of the most difficult days ever . The wake is tomorrow afternoon and I ' m going to need to much xanax to get me through . Seeing him is going to be so hard . I just ca n't believe he 's really gone ."
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "Today is a very hot day , 91 degrees ! I got paid yesterday so now I can go to the store with confidence!I gave my children there allowance for the month and they were thrilled . Todd called me last night and needed help with his Media Sender but I could not figure out his problem . he said he would send it in for a replacement ."
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "The first museum we went to Musee d Rodin , which comprises a larges collection of Rodin 's sculptures , including casts . I just had to make it to the Musee de Rodin because I get speechless when I view his sculptrues . The museum was in the neighborhood so it took like 10 minutes via metro to get there , it was like a sign . The museum is one building and large garden ."
+                },
+                {
+                  "frequency": 8.0,
+                  "value": "Rainwater from the roof is collected and funneled into a 25,000 gallon underground cistern . Wastewater from showers , sinks and toilets goes into underground purifying tanks and then into the cistern . The collected water then irrigates the land surrounding the house . Surrounding flowers and shrubs native to the area enable the property to blend into the surrounding rural landscape ."
+                }
+              ],
+              "unique": "14446"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "id"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 129.96172,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "25262",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "25262"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU973ROTJ##3YOH7BII0CM6458M0KRV32X9C2LKVG##A3PPLDHC3CG0YN##Blog_1133099##q1_a1##3PCPFX4U4240WRMXN80MSIA8V4DFQ4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86X9TOR##3GNCZX450L2NN8242H573W5VLNEPAF##A1WAWEY2810TFN##Blog_1551350##q1_a1##391FPZIE4E0C2GKKZ78R54JAE4GUH6",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86U6OTD##33CID571078XC2OL1AXQZ7I59MIL3F##A3SDFAOJW87FGP##Blog_1450475##q1_a1##3VMHWJRYHXUK5ON99MVEMQ60RTRXFF",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86S7TOF##374TNBHA8EA9J21MI0YC6NDCSIZYQ0##A3PPLDHC3CG0YN##Blog_1467657##q1_a1##3M0556243UYFTU957G85OOF2PEYNF0",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86LZTOT##3AAPLD8UCFW0PN3PP4OJPSTWLXFTHB##A3VVR8NR3ED04C##Blog_615277##q1_a2##3YO4AH2FPFY9ZN77KQH1PBN3OLF0QB",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86LZTOT##3AAPLD8UCFW0PN3PP4OJPSTWLXFTHB##A3VVR8NR3ED04C##Blog_615277##q1_a1##3SA4EMRVJXGOZB6SKD2CP6XTJPT0PK",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86HQTOC##3HMIGG0U4OL3DY1QW6HCKWSCX39Y82##A3VVR8NR3ED04C##Blog_985505##q1_a2##31S7M7DAGI4ZOZOLQNXFS0QEBQELT8",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86HQTOC##3HMIGG0U4OL3DY1QW6HCKWSCX39Y82##A3VVR8NR3ED04C##Blog_985505##q1_a1##35XW21VSVISY9ZB61NSPIVUS970LSJ",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86HQOT7##3M1CVSFP63K8NK3J2UKW31V5OG2QA1##A3VVR8NR3ED04C##Blog_169486##q1_a2##3NSCTNUR211G7EMRS0QRG64P1BUA5P",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86HQOT7##3M1CVSFP63K8NK3J2UKW31V5OG2QA1##A3VVR8NR3ED04C##Blog_169486##q1_a1##3LAZVA75NK5DALX5K0TBJULI6I72OF",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU973ROTJ##3YOH7BII0CM6458M0KRV32X9C2LKVG##A3PPLDHC3CG0YN##Blog_1133099##q1_a1##3PCPFX4U4240WRMXN80MSIA8V4DFQ4"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86X9TOR##3GNCZX450L2NN8242H573W5VLNEPAF##A1WAWEY2810TFN##Blog_1551350##q1_a1##391FPZIE4E0C2GKKZ78R54JAE4GUH6"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86U6OTD##33CID571078XC2OL1AXQZ7I59MIL3F##A3SDFAOJW87FGP##Blog_1450475##q1_a1##3VMHWJRYHXUK5ON99MVEMQ60RTRXFF"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86S7TOF##374TNBHA8EA9J21MI0YC6NDCSIZYQ0##A3PPLDHC3CG0YN##Blog_1467657##q1_a1##3M0556243UYFTU957G85OOF2PEYNF0"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86LZTOT##3AAPLD8UCFW0PN3PP4OJPSTWLXFTHB##A3VVR8NR3ED04C##Blog_615277##q1_a2##3YO4AH2FPFY9ZN77KQH1PBN3OLF0QB"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86LZTOT##3AAPLD8UCFW0PN3PP4OJPSTWLXFTHB##A3VVR8NR3ED04C##Blog_615277##q1_a1##3SA4EMRVJXGOZB6SKD2CP6XTJPT0PK"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86HQTOC##3HMIGG0U4OL3DY1QW6HCKWSCX39Y82##A3VVR8NR3ED04C##Blog_985505##q1_a2##31S7M7DAGI4ZOZOLQNXFS0QEBQELT8"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86HQTOC##3HMIGG0U4OL3DY1QW6HCKWSCX39Y82##A3VVR8NR3ED04C##Blog_985505##q1_a1##35XW21VSVISY9ZB61NSPIVUS970LSJ"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86HQOT7##3M1CVSFP63K8NK3J2UKW31V5OG2QA1##A3VVR8NR3ED04C##Blog_169486##q1_a2##3NSCTNUR211G7EMRS0QRG64P1BUA5P"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86HQOT7##3M1CVSFP63K8NK3J2UKW31V5OG2QA1##A3VVR8NR3ED04C##Blog_169486##q1_a1##3LAZVA75NK5DALX5K0TBJULI6I72OF"
+                }
+              ],
+              "unique": "25262"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "question"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 49.17275,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "25262",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "25262"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "What may be a fact about this person ?",
+                    "sampleCount": 177.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "What may be a fact about the speaker ?",
+                    "lowRank": "1",
+                    "sampleCount": 136.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Which of the following is true of the narrator ?",
+                    "lowRank": "2",
+                    "sampleCount": 131.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "How may I feeling during this post ?",
+                    "lowRank": "3",
+                    "sampleCount": 72.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "How may I be feeling right now ?",
+                    "lowRank": "4",
+                    "sampleCount": 72.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "What may be a plausible fact about me ?",
+                    "lowRank": "5",
+                    "sampleCount": 58.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "What may be a fact about their situation ?",
+                    "lowRank": "6",
+                    "sampleCount": 51.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "What may be the reason for posting this ?",
+                    "lowRank": "7",
+                    "sampleCount": 50.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "What may be the reason for the post ?",
+                    "lowRank": "8",
+                    "sampleCount": 46.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "What may happen next in speaker 's story ?",
+                    "lowRank": "9",
+                    "sampleCount": 42.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 177.0,
+                  "value": "What may be a fact about this person ?"
+                },
+                {
+                  "frequency": 136.0,
+                  "value": "What may be a fact about the speaker ?"
+                },
+                {
+                  "frequency": 131.0,
+                  "value": "Which of the following is true of the narrator ?"
+                },
+                {
+                  "frequency": 72.0,
+                  "value": "How may I feeling during this post ?"
+                },
+                {
+                  "frequency": 72.0,
+                  "value": "How may I be feeling right now ?"
+                },
+                {
+                  "frequency": 58.0,
+                  "value": "What may be a plausible fact about me ?"
+                },
+                {
+                  "frequency": 51.0,
+                  "value": "What may be a fact about their situation ?"
+                },
+                {
+                  "frequency": 50.0,
+                  "value": "What may be the reason for posting this ?"
+                },
+                {
+                  "frequency": 46.0,
+                  "value": "What may be the reason for the post ?"
+                },
+                {
+                  "frequency": 42.0,
+                  "value": "What may happen next in speaker 's story ?"
+                }
+              ],
+              "unique": "17403"
+            },
+            "type": "STRING"
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "25262",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "25262"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": 0.3,
+                      "sampleCount": 6348.3405999999995
+                    },
+                    {
+                      "highValue": 0.6,
+                      "lowValue": 0.3,
+                      "sampleCount": 7.5786
+                    },
+                    {
+                      "highValue": 0.8999999999999999,
+                      "lowValue": 0.6,
+                      "sampleCount": 7.578599999999999
+                    },
+                    {
+                      "highValue": 1.2,
+                      "lowValue": 0.8999999999999999,
+                      "sampleCount": 6297.8166
+                    },
+                    {
+                      "highValue": 1.5,
+                      "lowValue": 1.2,
+                      "sampleCount": 7.578600000000002
+                    },
+                    {
+                      "highValue": 1.7999999999999998,
+                      "lowValue": 1.5,
+                      "sampleCount": 7.578599999999995
+                    },
+                    {
+                      "highValue": 2.1,
+                      "lowValue": 1.7999999999999998,
+                      "sampleCount": 6297.8166
+                    },
+                    {
+                      "highValue": 2.4,
+                      "lowValue": 2.1,
+                      "sampleCount": 7.578599999999995
+                    },
+                    {
+                      "highValue": 2.6999999999999997,
+                      "lowValue": 2.4,
+                      "sampleCount": 7.578599999999995
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 2.6999999999999997,
+                      "sampleCount": 6272.5546
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 3.0,
+                      "sampleCount": 2526.2
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 3.0,
+                      "sampleCount": 2526.2
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": 3.0,
+              "mean": 1.4956060486105613,
+              "median": 1.0,
+              "numZeros": "6349",
+              "stdDev": 1.1177774828310199
+            },
+            "path": {
+              "step": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "numExamples": "25262"
+      }
+    },
+    {
+      "name": "validation",
+      "numBytes": "2515203",
+      "shardLengths": [
+        "2985"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "path": {
+              "step": [
+                "answer0"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 45.18124,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2985",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2985"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 519.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "When acting out while drinking , they let their crush now they like them .",
+                    "lowRank": "1",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "Unemployment",
+                    "lowRank": "2",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "To change the color .",
+                    "lowRank": "3",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "They would have to go alone",
+                    "lowRank": "4",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "They will use the bisquick for spying on Kim .",
+                    "lowRank": "5",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "They wanted to see how gross birth is .",
+                    "lowRank": "6",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "They think it 's a terrible way to criticize someone .",
+                    "lowRank": "7",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "They think Oprah should have read the thing out loud",
+                    "lowRank": "8",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "They talk during movies",
+                    "lowRank": "9",
+                    "sampleCount": 2.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 519.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "When acting out while drinking , they let their crush now they like them ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "Unemployment"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "To change the color ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They would have to go alone"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They will use the bisquick for spying on Kim ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They wanted to see how gross birth is ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They think it 's a terrible way to criticize someone ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They think Oprah should have read the thing out loud"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They talk during movies"
+                }
+              ],
+              "unique": "2412"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "answer1"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 44.223785,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2985",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2985"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 578.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Pensive",
+                    "lowRank": "1",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "WhichBingo gives you land - based information on where bingo is being played .",
+                    "lowRank": "2",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "This song would last 2 hours .",
+                    "lowRank": "3",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "They would need to verify their address",
+                    "lowRank": "4",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "They would know why the women were swooning",
+                    "lowRank": "5",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "They would be making more money",
+                    "lowRank": "6",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "They spent their vacation there .",
+                    "lowRank": "7",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "They loved when their car was out of control .",
+                    "lowRank": "8",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "They have a very bad memory and think it is new each time .",
+                    "lowRank": "9",
+                    "sampleCount": 2.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 578.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "Pensive"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "WhichBingo gives you land - based information on where bingo is being played ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "This song would last 2 hours ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They would need to verify their address"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They would know why the women were swooning"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They would be making more money"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They spent their vacation there ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They loved when their car was out of control ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They have a very bad memory and think it is new each time ."
+                }
+              ],
+              "unique": "2349"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "answer2"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 43.851925,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2985",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2985"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 546.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "we would all be able to connect to network",
+                    "lowRank": "1",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "magazines for families",
+                    "lowRank": "2",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "in a concert hall",
+                    "lowRank": "3",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "family may be unhappy",
+                    "lowRank": "4",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "Uncertain",
+                    "lowRank": "5",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "They would n't make their last cart shift",
+                    "lowRank": "6",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "They would have had fun",
+                    "lowRank": "7",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "They would be drying their clothes outside",
+                    "lowRank": "8",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "They wanted to drive and not pay attention at the same time .",
+                    "lowRank": "9",
+                    "sampleCount": 2.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 546.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "we would all be able to connect to network"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "magazines for families"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "in a concert hall"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "family may be unhappy"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "Uncertain"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They would n't make their last cart shift"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They would have had fun"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They would be drying their clothes outside"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They wanted to drive and not pay attention at the same time ."
+                }
+              ],
+              "unique": "2384"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "answer3"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 44.596985,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2985",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2985"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "None of the above choices .",
+                    "sampleCount": 544.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "Because they thought it would be a fun thing to do .",
+                    "lowRank": "1",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "We are arsonists .",
+                    "lowRank": "2",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "To make it bigger .",
+                    "lowRank": "3",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "They will require more blood pressure medication .",
+                    "lowRank": "4",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "They want patients to start taking care of themselves and not go to a doctor .",
+                    "lowRank": "5",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "They want a common name for the child so it 's easier to remember .",
+                    "lowRank": "6",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "They think Mormon history is boring",
+                    "lowRank": "7",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "They link to the actual text .",
+                    "lowRank": "8",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "They hate watching the incoming waves .",
+                    "lowRank": "9",
+                    "sampleCount": 2.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 544.0,
+                  "value": "None of the above choices ."
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "Because they thought it would be a fun thing to do ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "We are arsonists ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "To make it bigger ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They will require more blood pressure medication ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They want patients to start taking care of themselves and not go to a doctor ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They want a common name for the child so it 's easier to remember ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They think Mormon history is boring"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They link to the actual text ."
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "They hate watching the incoming waves ."
+                }
+              ],
+              "unique": "2385"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "context"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 339.81274,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2985",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2985"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "[ 12 ] Where was your FIRST sleep over?No idea ... maybe my cousin Amy 's house ? [ 13 ] Who was the FIRST person you talked to today?The cat . [ 15 ] What was the FIRST thing you did this morning?Fed the cat then did a wee .",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "You , instead of encouraging her and providing help , you said such nasty things to her that affects her thoroughly . So you think that is God 's will ? Just so that you know , this is not your first time . Whatever it is , I am starting to doubt the leadership in the church .",
+                    "lowRank": "1",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "You \" just happen \" to go in to a store where you never go , and you run into someone you ' ve been thinking about . You \" just happen \" to dial a wrong number and the person who answers the phone is a long lost friend . This was one of those moments for Jodi .",
+                    "lowRank": "2",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "Woo , internet at the mall . I was afraid I would n't be able to connect to the network -- I get at least three guests a week who can not for the life of them figure out how to connect -- but it was easy . Set up a new network connection , put in the network 's name , set the security to No Encryption ( Open ) , and voila !",
+                    "lowRank": "3",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "Which again Awesome . Then my older sisters husband pulled out his guitar and jammed out for about 2 hours . He 's awesome when it comes to the guitar ( which he should be as he has a Masters in Jazz Guitar Performance ... ) , he 's in a couple different bands that play locally . I got him to play a couple Metallica songs , and ' Back in Black ' and ' Hell 's Bells ' .",
+                    "lowRank": "4",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "When you have a stigmatized illness such as depression or bipolar disorder there is much comfort in meeting others - even on the page of a book - who have endured the same desperation and have come out the other side . For me , learning about the physiology of depression and the chemistry of the brain gave me tremendous relief . These writings convinced me I was not weak or lazy . I was sick .",
+                    "lowRank": "5",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "Whatever number the students picked out of the basket was the artwork they had to critique ( though if they picked thier own number , they would have to draw again ) . This critique had to be 4 paragraphs : describe , analyze , interpret and judge . This really helps the students look closely at the artwork . They get to see how the elements and principles work together in the artwork , as well as voicing their opinions on what the artwork is about and why they like or dislike the work .",
+                    "lowRank": "6",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "Whatever it was I was so tired . Music did n't help , nothing was good on the TV 's , I kept looking down at the time ... it was tough . And , like always , my face was red as a tomato when I got through .",
+                    "lowRank": "7",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "What is the ideal of the rule of law ? An initial observation is that there are several different conceptions of the meaning of the rule of law . Indeed , the rule of law may not be a single concept at all ; rather , it may be more accurate to understand the ideal of the rule of law as a set of ideals connected more by family resemblance than a unifying conceptual structure . Dicey 's Influential Formulation Historically , the most influential account of the rule of law was offered by A.V.",
+                    "lowRank": "8",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "We need to ask our patients to exercise more days in week , we need to talk to our patients about the need to be the vanguards of their health . Ask your patients to recite their blood pressure reading at every visit , ask your patients to tell you about their weight changes at every visit , ask about detailed smoking and drinking habits . When you call your relatives in the village ask them if they know their blood pressure readings , if they answer no tell them to get it checked and get back to you . My uncle was telling me about his wonderful doctor and his blood pressure pills .",
+                    "lowRank": "9",
+                    "sampleCount": 4.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 4.0,
+                  "value": "[ 12 ] Where was your FIRST sleep over?No idea ... maybe my cousin Amy 's house ? [ 13 ] Who was the FIRST person you talked to today?The cat . [ 15 ] What was the FIRST thing you did this morning?Fed the cat then did a wee ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "You , instead of encouraging her and providing help , you said such nasty things to her that affects her thoroughly . So you think that is God 's will ? Just so that you know , this is not your first time . Whatever it is , I am starting to doubt the leadership in the church ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "You \" just happen \" to go in to a store where you never go , and you run into someone you ' ve been thinking about . You \" just happen \" to dial a wrong number and the person who answers the phone is a long lost friend . This was one of those moments for Jodi ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "Woo , internet at the mall . I was afraid I would n't be able to connect to the network -- I get at least three guests a week who can not for the life of them figure out how to connect -- but it was easy . Set up a new network connection , put in the network 's name , set the security to No Encryption ( Open ) , and voila !"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "Which again Awesome . Then my older sisters husband pulled out his guitar and jammed out for about 2 hours . He 's awesome when it comes to the guitar ( which he should be as he has a Masters in Jazz Guitar Performance ... ) , he 's in a couple different bands that play locally . I got him to play a couple Metallica songs , and ' Back in Black ' and ' Hell 's Bells ' ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "When you have a stigmatized illness such as depression or bipolar disorder there is much comfort in meeting others - even on the page of a book - who have endured the same desperation and have come out the other side . For me , learning about the physiology of depression and the chemistry of the brain gave me tremendous relief . These writings convinced me I was not weak or lazy . I was sick ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "Whatever number the students picked out of the basket was the artwork they had to critique ( though if they picked thier own number , they would have to draw again ) . This critique had to be 4 paragraphs : describe , analyze , interpret and judge . This really helps the students look closely at the artwork . They get to see how the elements and principles work together in the artwork , as well as voicing their opinions on what the artwork is about and why they like or dislike the work ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "Whatever it was I was so tired . Music did n't help , nothing was good on the TV 's , I kept looking down at the time ... it was tough . And , like always , my face was red as a tomato when I got through ."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "What is the ideal of the rule of law ? An initial observation is that there are several different conceptions of the meaning of the rule of law . Indeed , the rule of law may not be a single concept at all ; rather , it may be more accurate to understand the ideal of the rule of law as a set of ideals connected more by family resemblance than a unifying conceptual structure . Dicey 's Influential Formulation Historically , the most influential account of the rule of law was offered by A.V."
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "We need to ask our patients to exercise more days in week , we need to talk to our patients about the need to be the vanguards of their health . Ask your patients to recite their blood pressure reading at every visit , ask your patients to tell you about their weight changes at every visit , ask about detailed smoking and drinking habits . When you call your relatives in the village ask them if they know their blood pressure readings , if they answer no tell them to get it checked and get back to you . My uncle was telling me about his wonderful doctor and his blood pressure pills ."
+                }
+              ],
+              "unique": "2445"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "id"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 129.97186,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2985",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2985"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86X9OTM##37W3JXSD69NE3ZX8U9XIYCVYH9SWYV##A33PQXKQHFVF3V##Blog_1437367##q1_a1##3QX22DUVOQVY79AVVUY9TVTP9XNMVV",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "3ZZAYRN1I857UKRI3FD7KHU86NCTOA##39OWYR0EPN6CSDBD4KNIUO9YLBRFYE##AO33H4GL9KZX9##Blog_413696##q1_a1##33CLA8O0MKP08S1X0NPMX8KCQAGRFJ",
+                    "lowRank": "1",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "3ZZAYRN1I6PS0VSBJH17SJ60DO2OTL##3L6L49WXW1VPXK5XP4A20PQ5VNA54J##A2KYOM2ZGYDJGT##Blog_52578##q1_a1##3MQKOF1EE428I44N8B42W7P868SWDL",
+                    "lowRank": "2",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "3ZZAYRN1I6PS0VSBJH17SJ60DHROTW##3L0KT67Y8FE61THSQ7BH9P44337YSE##AJ7NSZOAFP05U##Blog_448629##q1_a2##3IKDQS3DQGEGCHE4JY5CBAYI6VTCI1",
+                    "lowRank": "3",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "3ZXV7Q5FJD2W2QCEIQZR8DLQQ7FCFW##3I33IC7ZWIHRV11Y0JUV7JX29YE2A2##AJ7NSZOAFP05U##Blog_1466170##q1_a1##3TKSOBLOHNUNF48SZOH0E3ONTSBBB2",
+                    "lowRank": "4",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "3ZXNP4Z39TZCQ1REDKUEN4YWMLGL79##3IUZPWIU1RMJJU8RQUWRP4GNHEOWK7##A2KYOM2ZGYDJGT##Blog_252329##q1_a1##35ZRNT9RUKC2V3TOO07G24QACXS3OE",
+                    "lowRank": "5",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "3ZXNP4Z39RJXWCS7TMIEV6AOTFW7LN##34S9DKFK74N9LGPNIBUVAVUYG5KYNP##AO33H4GL9KZX9##Blog_459412##q1_a1##3MJ9GGZYO5KO8H34AHOTIZ1DHWBA2M",
+                    "lowRank": "6",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "3ZXNP4Z39RJXWCS7TMIEV6AOTDVL7W##3JPSL1DZ5TX8PYRK25GF79CRCZLAN0##AO33H4GL9KZX9##Blog_355215##q1_a1##3ZZAYRN1I857UKRI3FD7KHU86NDTOB",
+                    "lowRank": "7",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "3ZXNP4Z39RJXWCS7TMIEV6AOTD6L77##3Q5ZZ9ZEVPDQGLSZ170FH16AWVW85Q##A2KYOM2ZGYDJGT##Blog_1452005##q1_a1##3JMNNNO3B3ILFU67BMKL0OY49E42WD",
+                    "lowRank": "8",
+                    "sampleCount": 1.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "3ZVPAMTJWPH6MSXSB7V4FTKPSW4GRC##3PZDLQMM0W0FOGYWKXQMDENQAVK2CE##A3GVXFBYAU9HP##Blog_788913##q1_a2##3BC9H1KCYWQBGFZE47RG9SZAPGKYWO",
+                    "lowRank": "9",
+                    "sampleCount": 1.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86X9OTM##37W3JXSD69NE3ZX8U9XIYCVYH9SWYV##A33PQXKQHFVF3V##Blog_1437367##q1_a1##3QX22DUVOQVY79AVVUY9TVTP9XNMVV"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I857UKRI3FD7KHU86NCTOA##39OWYR0EPN6CSDBD4KNIUO9YLBRFYE##AO33H4GL9KZX9##Blog_413696##q1_a1##33CLA8O0MKP08S1X0NPMX8KCQAGRFJ"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I6PS0VSBJH17SJ60DO2OTL##3L6L49WXW1VPXK5XP4A20PQ5VNA54J##A2KYOM2ZGYDJGT##Blog_52578##q1_a1##3MQKOF1EE428I44N8B42W7P868SWDL"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZZAYRN1I6PS0VSBJH17SJ60DHROTW##3L0KT67Y8FE61THSQ7BH9P44337YSE##AJ7NSZOAFP05U##Blog_448629##q1_a2##3IKDQS3DQGEGCHE4JY5CBAYI6VTCI1"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZXV7Q5FJD2W2QCEIQZR8DLQQ7FCFW##3I33IC7ZWIHRV11Y0JUV7JX29YE2A2##AJ7NSZOAFP05U##Blog_1466170##q1_a1##3TKSOBLOHNUNF48SZOH0E3ONTSBBB2"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZXNP4Z39TZCQ1REDKUEN4YWMLGL79##3IUZPWIU1RMJJU8RQUWRP4GNHEOWK7##A2KYOM2ZGYDJGT##Blog_252329##q1_a1##35ZRNT9RUKC2V3TOO07G24QACXS3OE"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZXNP4Z39RJXWCS7TMIEV6AOTFW7LN##34S9DKFK74N9LGPNIBUVAVUYG5KYNP##AO33H4GL9KZX9##Blog_459412##q1_a1##3MJ9GGZYO5KO8H34AHOTIZ1DHWBA2M"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZXNP4Z39RJXWCS7TMIEV6AOTDVL7W##3JPSL1DZ5TX8PYRK25GF79CRCZLAN0##AO33H4GL9KZX9##Blog_355215##q1_a1##3ZZAYRN1I857UKRI3FD7KHU86NDTOB"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZXNP4Z39RJXWCS7TMIEV6AOTD6L77##3Q5ZZ9ZEVPDQGLSZ170FH16AWVW85Q##A2KYOM2ZGYDJGT##Blog_1452005##q1_a1##3JMNNNO3B3ILFU67BMKL0OY49E42WD"
+                },
+                {
+                  "frequency": 1.0,
+                  "value": "3ZVPAMTJWPH6MSXSB7V4FTKPSW4GRC##3PZDLQMM0W0FOGYWKXQMDENQAVK2CE##A3GVXFBYAU9HP##Blog_788913##q1_a2##3BC9H1KCYWQBGFZE47RG9SZAPGKYWO"
+                }
+              ],
+              "unique": "2985"
+            },
+            "type": "STRING"
+          },
+          {
+            "path": {
+              "step": [
+                "question"
+              ]
+            },
+            "stringStats": {
+              "avgLength": 52.88576,
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2985",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2985"
+              },
+              "rankHistogram": {
+                "buckets": [
+                  {
+                    "label": "What is probably true about the narrator ?",
+                    "sampleCount": 43.0
+                  },
+                  {
+                    "highRank": "1",
+                    "label": "What probably happened after this story ?",
+                    "lowRank": "1",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "2",
+                    "label": "What is likely true about the narrator ?",
+                    "lowRank": "2",
+                    "sampleCount": 7.0
+                  },
+                  {
+                    "highRank": "3",
+                    "label": "What kind of person am I ?",
+                    "lowRank": "3",
+                    "sampleCount": 5.0
+                  },
+                  {
+                    "highRank": "4",
+                    "label": "What will I want to do next ?",
+                    "lowRank": "4",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "5",
+                    "label": "What kind of people are we ?",
+                    "lowRank": "5",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "6",
+                    "label": "What is probably true ?",
+                    "lowRank": "6",
+                    "sampleCount": 4.0
+                  },
+                  {
+                    "highRank": "7",
+                    "label": "What is probably true of the narrator ?",
+                    "lowRank": "7",
+                    "sampleCount": 3.0
+                  },
+                  {
+                    "highRank": "8",
+                    "label": "what might be different if Sam was n't left in the dust ?",
+                    "lowRank": "8",
+                    "sampleCount": 2.0
+                  },
+                  {
+                    "highRank": "9",
+                    "label": "what am I grateful about ?",
+                    "lowRank": "9",
+                    "sampleCount": 2.0
+                  }
+                ]
+              },
+              "topValues": [
+                {
+                  "frequency": 43.0,
+                  "value": "What is probably true about the narrator ?"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "What probably happened after this story ?"
+                },
+                {
+                  "frequency": 7.0,
+                  "value": "What is likely true about the narrator ?"
+                },
+                {
+                  "frequency": 5.0,
+                  "value": "What kind of person am I ?"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "What will I want to do next ?"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "What kind of people are we ?"
+                },
+                {
+                  "frequency": 4.0,
+                  "value": "What is probably true ?"
+                },
+                {
+                  "frequency": 3.0,
+                  "value": "What is probably true of the narrator ?"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "what might be different if Sam was n't left in the dust ?"
+                },
+                {
+                  "frequency": 2.0,
+                  "value": "what am I grateful about ?"
+                }
+              ],
+              "unique": "2559"
+            },
+            "type": "STRING"
+          },
+          {
+            "numStats": {
+              "commonStats": {
+                "avgNumValues": 1.0,
+                "maxNumValues": "1",
+                "minNumValues": "1",
+                "numNonMissing": "2985",
+                "numValuesHistogram": {
+                  "buckets": [
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                },
+                "totNumValues": "2985"
+              },
+              "histograms": [
+                {
+                  "buckets": [
+                    {
+                      "highValue": 0.3,
+                      "sampleCount": 744.1605
+                    },
+                    {
+                      "highValue": 0.6,
+                      "lowValue": 0.3,
+                      "sampleCount": 0.8955
+                    },
+                    {
+                      "highValue": 0.8999999999999999,
+                      "lowValue": 0.6,
+                      "sampleCount": 0.8954999999999997
+                    },
+                    {
+                      "highValue": 1.2,
+                      "lowValue": 0.8999999999999999,
+                      "sampleCount": 726.2504999999999
+                    },
+                    {
+                      "highValue": 1.5,
+                      "lowValue": 1.2,
+                      "sampleCount": 0.8955000000000001
+                    },
+                    {
+                      "highValue": 1.7999999999999998,
+                      "lowValue": 1.5,
+                      "sampleCount": 0.8954999999999994
+                    },
+                    {
+                      "highValue": 2.1,
+                      "lowValue": 1.7999999999999998,
+                      "sampleCount": 759.0854999999999
+                    },
+                    {
+                      "highValue": 2.4,
+                      "lowValue": 2.1,
+                      "sampleCount": 0.8954999999999994
+                    },
+                    {
+                      "highValue": 2.6999999999999997,
+                      "lowValue": 2.4,
+                      "sampleCount": 0.8954999999999994
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 2.6999999999999997,
+                      "sampleCount": 750.1304999999999
+                    }
+                  ]
+                },
+                {
+                  "buckets": [
+                    {
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 1.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 1.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 2.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 2.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 3.0,
+                      "sampleCount": 298.5
+                    },
+                    {
+                      "highValue": 3.0,
+                      "lowValue": 3.0,
+                      "sampleCount": 298.5
+                    }
+                  ],
+                  "type": "QUANTILES"
+                }
+              ],
+              "max": 3.0,
+              "mean": 1.5088777219430485,
+              "median": 2.0,
+              "numZeros": "744",
+              "stdDev": 1.118747615831716
+            },
+            "path": {
+              "step": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "numExamples": "2985"
+      }
+    }
+  ],
+  "version": "1.0.0"
+}

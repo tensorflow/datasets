@@ -1,0 +1,44 @@
+[
+  {
+    "tripleset": [
+      [
+        "First Clearing",
+        "LOCATION",
+        "On NYS 52 1 Mi. Youngsville"
+      ],
+      [
+        "On NYS 52 1 Mi. Youngsville",
+        "CITY_OR_TOWN",
+        "Callicoon, New York"
+      ]
+    ],
+    "subtree_was_extended": false,
+    "annotations": [
+      {
+        "source": "WikiTableQuestions_mturk",
+        "text": "First Clearing\tbased on Callicoon, New York and location at On NYS 52 1 Mi. Youngsville"
+      }
+    ]
+  },
+  {
+    "tripleset": [
+      [
+        "[TABLECONTEXT]",
+        "MARKER_NAME",
+        "Old Turnpike"
+      ],
+      [
+        "[TABLECONTEXT]",
+        "[TITLE]",
+        "List of New York State Historic Markers in Sullivan County, New York"
+      ]
+    ],
+    "subtree_was_extended": true,
+    "annotations": [
+      {
+        "source": "WikiTableQuestions_mturk",
+        "text": "Old Turnpike is a Historic Marker in Sullivan County, New York."
+      }
+    ]
+  }
+]

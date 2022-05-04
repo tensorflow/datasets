@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,7 @@
 
 """Tests for tensorflow_datasets.core.lazy_imports."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from absl.testing import parameterized
-import six
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 
@@ -32,27 +27,32 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
   # * crepe (NSynth)
   # * librosa (NSynth)
   @parameterized.parameters(
+      "bs4",
       "cv2",
+      "gcld3",
+      "gcsfs_store",
       "langdetect",
+      "lxml",
       "matplotlib",
       "mwparserfromhell",
       "nltk",
       "os",
       "pandas",
       "pretty_midi",
+      "pycocotools",
       "pydub",
       "scipy",
       "skimage",
+      "tifffile",
       "tldextract",
+      "zarr",
   )
   def test_import(self, module_name):
-    # TODO(rsepassi): Re-enable skimage on Py3 (b/129964829)
-    if module_name == "skimage" and six.PY3:
-      return
     getattr(tfds.core.lazy_imports, module_name)
 
   def test_bad_import(self):
-    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
+    with self.assertRaisesWithPredicateMatch(ModuleNotFoundError,
+                                             "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
 
 

@@ -1,0 +1,9 @@
+author,id,parent_id,created_utc,link_id,body
+person1,t3_c000xxx,t3_c000xxx,1347849261.0,t3_c000xxx,"This is topic starter"
+person2,t1_c001xxx,t3_c000xxx,1347849374.0,t3_c000xxx,"First comment"
+person1,t1_c002xxx,t1_c001xxx,1347849510.0,t3_c000xxx,"Second comment"
+person2,t1_c003xxx,t1_c002xxx,1347849679.0,t3_c000xxx,"Third comment"
+person1,t1_c004xxx,t1_c003xxx,1347849800.0,t3_c000xxx,"Fourth comment"
+person3,t1_c005xxx,t3_c000xxx,1347849957.0,t3_c000xxx,"Fifth comment: this message directly replies to the topic starter"
+person4,t3_c010xxx,t3_c010xxx,1347959261.0,t3_c010xxx,"This is a topic starter of a new post"
+person5,t1_c011xxx,t3_c010xxx,1347959374.0,t3_c010xxx,"First comment"

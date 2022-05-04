@@ -1,0 +1,53 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "num_nodes": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "int64"
+            }
+        },
+        "node_feat": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [
+                    null,
+                    9
+                ],
+                "dtype": "float32"
+            }
+        },
+        "edge_feat": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [
+                    null,
+                    3
+                ],
+                "dtype": "float32"
+            }
+        },
+        "edge_index": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [
+                    null,
+                    2
+                ],
+                "dtype": "int64"
+            }
+        },
+        "labels": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [
+                    128
+                ],
+                "dtype": "float32"
+            }
+        }
+    }
+}

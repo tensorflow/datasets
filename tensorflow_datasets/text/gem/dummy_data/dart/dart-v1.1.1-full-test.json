@@ -1,0 +1,28 @@
+[
+  {
+    "tripleset": [
+      [
+        "Hawaii Five-O",
+        "NOTES",
+        "Episode: The Flight of the Jewels"
+      ],
+      [
+        "[TABLECONTEXT]",
+        "[TITLE]",
+        "Jeff Daniels"
+      ],
+      [
+        "[TABLECONTEXT]",
+        "TITLE",
+        "Hawaii Five-O"
+      ]
+    ],
+    "subtree_was_extended": true,
+    "annotations": [
+      {
+        "source": "WikiTableQuestions_lily",
+        "text": "Jeff Daniels played in the Hawaii Five-O episode The Flight of the Jewels"
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "citation": "@article{rauf2019citrus,\n  title={A citrus fruits and leaves dataset for detection and classification of\ncitrus diseases through machine learning},\n  author={Rauf, Hafiz Tayyab and Saleem, Basharat Ali and Lali, M Ikram Ullah\nand Khan, Muhammad Attique and Sharif, Muhammad and Bukhari, Syed Ahmad Chan},\n  journal={Data in brief},\n  volume={26},\n  pages={104340},\n  year={2019},\n  publisher={Elsevier}\n}",
+  "description": "The original citrus dataset contains 759 images of healthy and unhealthy citrus\nfruits and leaves. However, for now we only export 594 images of citrus leaves\nwith the following labels: Black Spot, Canker, Greening, and Healthy. The\nexported images are in PNG format and have 256x256 pixels.\n\nNOTE: Leaf images with Melanose label were dropped due to very small count and\nother non-leaf images being present in the same directory.\n\nDataset URL: https://data.mendeley.com/datasets/3f83gxmv57/2\nLicense: http://creativecommons.org/licenses/by/4.0",
+  "downloadSize": "66977095",
+  "location": {
+    "urls": [
+      "https://data.mendeley.com/datasets/3f83gxmv57/2"
+    ]
+  },
+  "name": "citrus_leaves",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "39728471",
+      "shardLengths": [
+        "594"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.1"
+}

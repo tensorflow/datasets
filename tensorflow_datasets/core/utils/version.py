@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,19 +15,14 @@
 
 """Version utils."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import re
-
 import enum
-import six
+import re
+from typing import List, Union
 
-_VERSION_TMPL = (
-    r"^(?P<major>{v})"
-    r"\.(?P<minor>{v})"
-    r"\.(?P<patch>{v})$")
+import six
+import tensorflow as tf
+
+_VERSION_TMPL = (r"^(?P<major>{v})" r"\.(?P<minor>{v})" r"\.(?P<patch>{v})$")
 _VERSION_WILDCARD_REG = re.compile(_VERSION_TMPL.format(v=r"\d+|\*"))
 _VERSION_RESOLVED_REG = re.compile(_VERSION_TMPL.format(v=r"\d+"))
 
@@ -51,35 +46,44 @@ class Experiment(enum.Enum):
   # A Dummy experiment, which should NOT be used, except for testing.
   DUMMY = 1
 
-  # New Shuffling, sharding and slicing mechanism.
-  S3 = 2
-
 
 class Version(object):
   """Dataset version MAJOR.MINOR.PATCH."""
 
   _DEFAULT_EXPERIMENTS = {
       Experiment.DUMMY: False,
-      Experiment.S3: True,
   }
 
-  def __init__(self, version_str, description=None, experiments=None,
-               tfds_version_to_prepare=None):
+  def __init__(
+      self,
+      version: Union["Version", str],
+      experiments=None,
+      tfds_version_to_prepare=None,
+  ):
     """Version init.
 
     Args:
-      version_str: string. Eg: "1.2.3".
-      description: string, a description of what is new in this version.
+      version: string. Eg: "1.2.3".
       experiments: dict of experiments. See Experiment.
       tfds_version_to_prepare: string, defaults to None. If set, indicates that
         current version of TFDS cannot be used to `download_and_prepare` the
         dataset, but that TFDS at version {tfds_version_to_prepare} should be
         used instead.
     """
-    self.description = description
+    if isinstance(version, Version):
+      version_str = str(version)
+      experiments = experiments or version._experiments
+      tfds_version_to_prepare = (
+          tfds_version_to_prepare or version.tfds_version_to_prepare)
+    else:
+      version_str = version
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
     self.tfds_version_to_prepare = tfds_version_to_prepare
     if experiments:
+      if isinstance(experiments, str):
+        raise ValueError(
+            f"Invalid Version('{version}', '{experiments}'). Description is "
+            "deprecated. RELEASE_NOTES should be used instead.")
       self._experiments.update(experiments)
     self.major, self.minor, self.patch = _str_to_version(version_str)
 
@@ -89,6 +93,9 @@ class Version(object):
 
   def __str__(self):
     return "{}.{}.{}".format(*self.tuple)
+
+  def __repr__(self) -> str:
+    return f"{type(self).__name__}(\'{str(self)}\')"
 
   @property
   def tuple(self):
@@ -126,6 +133,9 @@ class Version(object):
     other = self._validate_operand(other)
     return self.tuple >= other.tuple
 
+  def __hash__(self) -> int:
+    return hash(self.tuple)
+
   def match(self, other_version):
     """Returns True if other_version matches.
 
@@ -134,8 +144,16 @@ class Version(object):
         number or a wildcard.
     """
     major, minor, patch = _str_to_version(other_version, allow_wildcard=True)
-    return (major in [self.major, "*"] and minor in [self.minor, "*"]
-            and patch in [self.patch, "*"])
+    return (major in [self.major, "*"] and minor in [self.minor, "*"] and
+            patch in [self.patch, "*"])
+
+  @classmethod
+  def is_valid(cls, version: str) -> bool:
+    """Returns True if the version can be parsed."""
+    try:
+      return cls(version) and True
+    except ValueError:  # Invalid version (ex: incomplete data dir)
+      return False
 
 
 def _str_to_version(version_str, allow_wildcard=False):
@@ -150,5 +168,18 @@ def _str_to_version(version_str, allow_wildcard=False):
       msg += " with {x,y,z} being digits."
     raise ValueError(msg)
   return tuple(
-      v if v == "*" else int(v)
-      for v in [res.group("major"), res.group("minor"), res.group("patch")])
+      v if v == "*" else int(v)  # pylint:disable=g-complex-comprehension
+      for v in [res.group("major"),
+                res.group("minor"),
+                res.group("patch")])
+
+
+def list_all_versions(root_dir: str) -> List[Version]:
+  """Lists all dataset versions present on disk, sorted."""
+  if not tf.io.gfile.exists(root_dir):
+    return []
+
+  # Strip trailing slash (required for `gs://` root_dir)
+  paths = [p.rstrip("/") for p in tf.io.gfile.listdir(root_dir)]
+  # Return all versions
+  return sorted(Version(v) for v in paths if Version.is_valid(v))
