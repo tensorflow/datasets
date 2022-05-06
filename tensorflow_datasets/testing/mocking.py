@@ -31,7 +31,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import read_only_builder
-from tensorflow_datasets.core import tfrecords_reader
+from tensorflow_datasets.core import reader as reader_lib
 from tensorflow_datasets.testing import test_utils
 
 
@@ -223,7 +223,7 @@ def mock_data(
     ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
     if read_config and read_config.add_tfds_id:
-      ds_id = tfrecords_reader._make_id_dataset(  # pylint: disable=protected-access
+      ds_id = reader_lib._make_id_dataset(  # pylint: disable=protected-access
           filename=f'{self.name}-{split}.tfrecord-00000-of-00001',
           start_index=0,  # pytype: disable=wrong-arg-types
       )
