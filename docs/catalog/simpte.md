@@ -58,7 +58,7 @@ Creator: Leo Guelman leo.guelman@gmail.com
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.04 MiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -68,12 +68,14 @@ Creator: Leo Guelman leo.guelman@gmail.com
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 1,000
 
 *   **Feature structure**:
 
