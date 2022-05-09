@@ -238,7 +238,7 @@ def _extract_ragged_attributes(nested_list,
                                tensor_info: feature_lib.TensorInfo):
   """Extract the values for the tf.RaggedTensor __init__.
 
-  This extract the ragged tensor attributes which allow reconstruct the
+  This extracts the ragged tensor attributes which allow to reconstruct the
   ragged tensor with `tf.RaggedTensor.from_nested_row_lengths`.
 
   Args:
@@ -254,7 +254,7 @@ def _extract_ragged_attributes(nested_list,
 
   flat_values = []
   nested_row_lengths = [[] for _ in range(tensor_info.sequence_rank)]
-  # Reccursivelly append to `flat_values`, `nested_row_lengths`
+  # Recursively append to `flat_values`, `nested_row_lengths`
   _fill_ragged_attribute(
       RaggedExtraction(
           nested_list=nested_list,
@@ -280,7 +280,7 @@ def _fill_ragged_attribute(ext: RaggedExtraction) -> None:
     ext: RaggedExtraction tuple containing the input/outputs
 
   Returns:
-    None, the function mutate instead `ext.nested_row_lengths` and
+    None, the function mutates instead `ext.nested_row_lengths` and
       `ext.flat_values` lists.
   """
   # Register the current sequence length.
