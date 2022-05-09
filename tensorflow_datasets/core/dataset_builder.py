@@ -22,6 +22,7 @@ import inspect
 import json
 import os
 import sys
+import typing
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, Union
 
 from absl import logging
@@ -47,6 +48,8 @@ from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
 import termcolor
+if typing.TYPE_CHECKING:
+  from apache_beam.runners import runner
 
 Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
@@ -1116,6 +1119,16 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     """
     raise NotImplementedError()
 
+  def _process_pipeline_result(
+      self, pipeline_result: "runner.PipelineResult") -> None:
+    """Processes the result of the beam pipeline if we used one.
+
+    This can be used to (e.g) write beam counters to a file.
+    Args:
+      pipeline_result: PipelineResult returned by beam.Pipeline.run().
+    """
+    return
+
   def _download_and_prepare(
       self,
       dl_manager: download.DownloadManager,
@@ -1137,7 +1150,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     # By auto-detecting Beam, the user only has to change `_generate_examples`
     # to go from non-beam to beam dataset:
     # https://www.tensorflow.org/datasets/beam_datasets#instructions
-    with split_builder.maybe_beam_pipeline():
+    with split_builder.maybe_beam_pipeline() as maybe_pipeline_proxy:
       # If the signature has a `pipeline` kwargs, create the pipeline now and
       # forward it to `self._split_generators`
       # We add this magic because the pipeline kwargs is only used by c4 and
@@ -1190,6 +1203,10 @@ class GeneratorBasedBuilder(FileReaderBuilder):
             disable_shuffling=self.info.disable_shuffling,
         )
         split_info_futures.append(future)
+
+    # Process the result of the beam pipeline.
+    if maybe_pipeline_proxy._beam_pipeline:  # pylint:disable=protected-access
+      self._process_pipeline_result(pipeline_result=maybe_pipeline_proxy.result)
 
     # Finalize the splits (after apache beam completed, if it was used)
     split_infos = [future.result() for future in split_info_futures]

@@ -23,6 +23,11 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import split_builder as split_builder_lib
 
 
+def _inc_placeholder_counter(x):
+  beam.metrics.Metrics.counter('some_namespace', 'some_counter').inc()
+  return x
+
+
 def test_beam(tmp_path: pathlib.Path):
   """Test that `maybe_beam_pipeline` behave as `beam.Pipeline()`."""
   builder = testing.DummyMnist()
@@ -35,11 +40,18 @@ def test_beam(tmp_path: pathlib.Path):
   )
 
   path = tmp_path / 'out.txt'
-  with split_builder.maybe_beam_pipeline():
+  with split_builder.maybe_beam_pipeline() as pipeline_proxy:
     ptransform = (
         beam.Create(range(9))
         | beam.Map(lambda x: x * 10)
+        | beam.Map(_inc_placeholder_counter)
         | beam.io.WriteToText(os.fspath(path), shard_name_template=''))
     _ = split_builder.beam_pipeline | ptransform
-
+  result = pipeline_proxy.result
+  # counters = metrics.get_metrics(result, 'some_namespace').counters
+  mfilter = beam.metrics.MetricsFilter().with_namespaces(['some_namespace'])
+  all_metrics = result.metrics().query(mfilter)
+  counters = all_metrics['counters']
+  assert counters[0].key.metric.name == 'some_counter'
+  assert counters[0].committed == 9
   assert path.read_text() == '\n'.join(str(x * 10) for x in range(9)) + '\n'
