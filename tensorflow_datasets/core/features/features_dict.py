@@ -15,6 +15,7 @@
 
 """FeatureDict: Main feature connector container."""
 
+import concurrent.futures
 from typing import Dict, List, Union
 
 import tensorflow as tf
@@ -28,6 +29,7 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
 
 Json = type_utils.Json
+WORKER_COUNT = 16
 
 
 class _DictGetCounter(object):
@@ -285,12 +287,18 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   def load_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
-    # Recursively load all child features
-    for feature_key, feature in self._feature_dict.items():
+
+    # Load all child features asynchronously
+    def load_metadata(feature_item):
+      feature_key, feature = feature_item
       feature_key = feature_key.replace('/', '.')
       if feature_name:
         feature_key = '-'.join((feature_name, feature_key))
       feature.load_metadata(data_dir, feature_name=feature_key)
+
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=WORKER_COUNT) as executor:
+      executor.map(load_metadata, self._feature_dict.items())
 
 
 def to_feature(value: feature_lib.FeatureConnectorArg):
