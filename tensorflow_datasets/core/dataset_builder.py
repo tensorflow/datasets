@@ -465,12 +465,10 @@ class DatasetBuilder(registered.RegisteredDataset):
               local_dataset_dir=self._data_dir)
           self.info.read_from_directory(self._data_dir)
         else:
-          # Old version of TF are not os.PathLike compatible
-          with tf_compat.mock_gfile_pathlike():
-            self._download_and_prepare(
-                dl_manager=dl_manager,
-                download_config=download_config,
-            )
+          self._download_and_prepare(
+              dl_manager=dl_manager,
+              download_config=download_config,
+          )
 
           # NOTE: If modifying the lines below to put additional information in
           # DatasetInfo, you'll likely also want to update
