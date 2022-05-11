@@ -17,6 +17,7 @@
 
 import hashlib
 import os
+from typing import Dict, List
 from absl import logging
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -75,6 +76,7 @@ _DL_URLS = {
 
 _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
+_PUBLISHER = 'publisher'
 
 
 def _get_url_hashes(path):
@@ -125,7 +127,7 @@ def _subset_filenames(dl_paths, split):
     logging.fatal('Unsupported split: %s', split)
   cnn = _find_files(dl_paths, 'cnn', urls)
   dm = _find_files(dl_paths, 'dm', urls)
-  return cnn + dm
+  return {'cnn': cnn, 'dm': dm}
 
 
 DM_SINGLE_CLOSE_QUOTE = u'\u2019'  # unicode
@@ -194,7 +196,7 @@ def _get_art_abs(story_file):
 class CnnDailymail(tfds.core.GeneratorBasedBuilder):
   """CNN/DailyMail non-anonymized summarization dataset."""
 
-  VERSION = tfds.core.Version('3.2.0')
+  VERSION = tfds.core.Version('3.3.0')
   RELEASE_NOTES = {
       '1.0.0':
           'New split API (https://tensorflow.org/datasets/splits)',
@@ -212,6 +214,8 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
       Remove extra space before added sentence period.
       This shouldn't affect ROUGE scores because punctuation is removed.
       """,
+      '3.3.0':
+          'Add publisher feature.'
   }
 
   def _info(self):
@@ -222,6 +226,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             _ARTICLE: tfds.features.Text(),
             _HIGHLIGHTS: tfds.features.Text(),
+            _PUBLISHER: tfds.features.Text(),
         }),
         supervised_keys=(_ARTICLE, _HIGHLIGHTS),
         homepage='https://github.com/abisee/cnn-dailymail',
@@ -230,11 +235,12 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     dl_paths = dl_manager.download_and_extract(_DL_URLS)
-    train_files = _subset_filenames(dl_paths, tfds.Split.TRAIN)
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={'files': train_files}),
+            name=tfds.Split.TRAIN,
+            gen_kwargs={'files': _subset_filenames(dl_paths,
+                                                   tfds.Split.TRAIN)}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
@@ -245,10 +251,15 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TEST)})
     ]
 
-  def _generate_examples(self, files):
-    for p in files:
-      article, highlights = _get_art_abs(p)
-      if not article or not highlights:
-        continue
-      fname = os.path.basename(p)
-      yield fname, {_ARTICLE: article, _HIGHLIGHTS: highlights}
+  def _generate_examples(self, files: Dict[str, List[str]]):
+    for pub, file_list in files.items():
+      for p in file_list:
+        article, highlights = _get_art_abs(p)
+        if not article or not highlights:
+          continue
+        fname = os.path.basename(p)
+        yield fname, {
+            _ARTICLE: article,
+            _HIGHLIGHTS: highlights,
+            _PUBLISHER: pub
+        }
