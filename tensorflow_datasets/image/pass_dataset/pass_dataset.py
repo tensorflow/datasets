@@ -23,7 +23,7 @@ PASS is a large-scale image dataset that does not include any humans,
 human parts, or other personally identifiable information.
 It that can be used for high-quality self-supervised pretraining while significantly reducing privacy concerns.
 
-PASS contains 1,439,719 images without any labels sourced from YFCC-100M.
+PASS contains 1,439,589 images without any labels sourced from YFCC-100M.
 
 All images in this dataset are licenced under the CC-BY licence, as is the dataset itself.
 For YFCC-100M see  http://www.multimediacommons.org/.
@@ -41,25 +41,28 @@ year = "2021"
 _URLS = {
     'train_images': [
         tfds.download.Resource(  # pylint:disable=g-complex-comprehension
-            url='https://zenodo.org/record/5570664/files/PASS.%s.tar' % i_,
+            url='https://zenodo.org/record/6421136/files/PASS.%s.tar' % i_,
             extract_method=tfds.download.ExtractMethod.TAR)
         for i_ in '0123456789'
     ],
     'meta_data':
         tfds.download.Resource(
-            url='https://zenodo.org/record/5570664/files/pass_metadata.csv')
+            url='https://zenodo.org/record/6421136/files/pass_metadata.csv')
 }
 
 
 class PASS(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for pass dataset."""
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('3.0.0')
   RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
+      '1.0.0':
+          'Initial release.',
       '2.0.0':
           'v2: Removed 472 images from v1 as they contained humans. Also added'
           ' metadata: datetaken and GPS. ',
+      '3.0.0':
+          'v3: Removed 131 images from v2 as they contained humans/tattos.',
   }
 
   def _info(self):
@@ -83,7 +86,7 @@ class PASS(tfds.core.GeneratorBasedBuilder):
             ),  # Datetime of image if not NaN, else empty string.
         }),
         supervised_keys=None,
-        homepage='https://www.robots.ox.ac.uk/~vgg/research/pass/',
+        homepage='https://www.robots.ox.ac.uk/~vgg/data/pass/',
         citation=_CITATION,
     )
 
