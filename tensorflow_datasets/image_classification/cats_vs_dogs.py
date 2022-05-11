@@ -34,8 +34,7 @@ edition = {Proceedings of 14th ACM Conference on Computer and Communications Sec
 }
 """
 
-_URL = ("https://download.microsoft.com/download/3/E/1/3E1C3F21-"
-        "ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_3367a.zip")
+_URL = ("https://www.microsoft.com/en-us/download/confirmation.aspx?id=54765")
 _NUM_CORRUPT_IMAGES = 1738
 _DESCRIPTION = (("A large set of images of cats and dogs. "
                  "There are %d corrupted images that are dropped.") %
