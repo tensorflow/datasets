@@ -94,17 +94,31 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     def f():
       pass
 
+    original_exists = tf_lib1.io.gfile.exists
+    original_list_dir = tf_lib1.io.gfile.listdir
+
+    self.assertIs(tf_lib1.io.gfile.exists, original_exists)
+    self.assertIs(tf_lib2.io.gfile.listdir, original_list_dir)
+
     with test_utils.mock_tf('tf.io.gfile', exists=f):
       # Both aliases should have been patched
       self.assertIs(tf_lib1.io.gfile.exists, f)
       self.assertIs(tf_lib2.io.gfile.exists, f)
+      self.assertIs(tf_lib1.io.gfile.listdir, original_list_dir)
+      self.assertIs(tf_lib2.io.gfile.listdir, original_list_dir)
 
     self.assertIsNot(tf_lib1.io.gfile.exists, f)
     self.assertIsNot(tf_lib2.io.gfile.exists, f)
+    self.assertIs(tf_lib1.io.gfile.exists, original_exists)
+    self.assertIs(tf_lib1.io.gfile.listdir, original_list_dir)
+    self.assertIs(tf_lib2.io.gfile.exists, original_exists)
+    self.assertIs(tf_lib2.io.gfile.listdir, original_list_dir)
 
     with test_utils.mock_tf('tf.io.gfile.exists', f):
       self.assertIs(tf_lib1.io.gfile.exists, f)
       self.assertIs(tf_lib2.io.gfile.exists, f)
+      self.assertIs(tf_lib1.io.gfile.listdir, original_list_dir)
+      self.assertIs(tf_lib2.io.gfile.listdir, original_list_dir)
 
 
 @pytest.mark.parametrize(
