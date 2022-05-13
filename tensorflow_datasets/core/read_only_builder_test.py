@@ -34,6 +34,7 @@ from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import file_utils
@@ -43,6 +44,7 @@ from google.protobuf import json_format
 
 class DummyNoConfMnist(testing.DummyDataset):
   """Same as DummyMnist (but declared here to avoid skip_registering issues)."""
+  VERSION = utils.Version('0.1.0')
 
 
 class DummyConfigMnist(testing.DummyDataset):
@@ -200,8 +202,8 @@ def test_builder_from_metadata(code_builder: dataset_builder.DatasetBuilder):
       description='efgh',
       config_name='en',
       config_description='something',
-      version='9.9.9',
-      release_notes={'9.9.9': 'release description'},
+      version='0.1.0',
+      release_notes={'0.1.0': 'release description'},
       citation='some citation',
       features=features.to_proto())
   builder = read_only_builder.builder_from_metadata(
