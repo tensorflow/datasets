@@ -529,6 +529,7 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     """,
     homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
     data_path='%s',
+    file_format=tfrecord,
     download_size=1.95 KiB,
     dataset_size=11.06 MiB,
     features=FeaturesDict({
