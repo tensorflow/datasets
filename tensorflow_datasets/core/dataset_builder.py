@@ -264,7 +264,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         for v in [self.canonical_version] + self.supported_versions
     ]
 
-  def _pick_version(self, requested_version):
+  def _pick_version(self, requested_version) -> utils.Version:
     """Returns utils.Version instance, or raise AssertionError."""
     # Validate that `canonical_version` is correctly defined
     assert self.canonical_version
@@ -280,7 +280,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise AssertionError(msg)
 
   @property
-  def version(self):
+  def version(self) -> utils.Version:
     return self._version
 
   @property
@@ -291,7 +291,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return self.RELEASE_NOTES
 
   @property
-  def data_dir(self):
+  def data_dir(self) -> str:
     return self._data_dir
 
   @property
@@ -356,7 +356,12 @@ class DatasetBuilder(registered.RegisteredDataset):
           f" {type(info)}.")
     return info
 
-  def download_and_prepare(self, *, download_dir=None, download_config=None):
+  def download_and_prepare(
+      self,
+      *,
+      download_dir: Optional[str] = None,
+      download_config: Optional[download.DownloadConfig] = None,
+  ) -> None:
     """Downloads and prepares dataset for reading.
 
     Args:
@@ -596,13 +601,13 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _build_single_dataset(
       self,
-      split,
-      shuffle_files,
-      batch_size,
+      split: splits_lib.Split,
+      batch_size: Optional[int],
+      shuffle_files: bool,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
       read_config: read_config_lib.ReadConfig,
-      as_supervised,
-  ):
+      as_supervised: bool,
+  ) -> tf.data.Dataset:
     """as_dataset for a single split."""
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
@@ -655,7 +660,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return tf_compat.get_single_element(ds)
     return ds
 
-  def _should_cache_ds(self, split, shuffle_files, read_config):
+  def _should_cache_ds(self, split, shuffle_files, read_config) -> bool:
     """Returns True if TFDS should auto-cache the dataset."""
     # The user can explicitly opt-out from auto-caching
     if not read_config.try_autocache:
@@ -693,7 +698,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # If the dataset satisfy all the right conditions, activate autocaching.
     return True
 
-  def _relative_data_dir(self, with_version=True):
+  def _relative_data_dir(self, with_version: bool = True) -> str:
     """Relative path of this dataset in data_dir."""
     builder_data_dir = self.name
     builder_config = self._builder_config
@@ -705,7 +710,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     version_data_dir = os.path.join(builder_data_dir, str(self._version))
     return version_data_dir
 
-  def _build_data_dir(self, given_data_dir):
+  def _build_data_dir(self, given_data_dir: Optional[str]):
     """Return the data directory for the current version.
 
     Args:
@@ -755,12 +760,12 @@ class DatasetBuilder(registered.RegisteredDataset):
           data_dir)
     return default_data_dir, data_dir
 
-  def _log_download_done(self):
+  def _log_download_done(self) -> None:
     msg = (f"Dataset {self.name} downloaded and prepared to {self._data_dir}. "
            "Subsequent calls will reuse this data.")
     termcolor.cprint(msg, attrs=["bold"])
 
-  def _log_download_bytes(self):
+  def _log_download_bytes(self) -> None:
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
@@ -775,7 +780,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @abc.abstractmethod
   @utils.docs.doc_private
-  def _info(self):
+  def _info(self) -> dataset_info.DatasetInfo:
     """Returns the `tfds.core.DatasetInfo` object.
 
     This function is called once and the result is cached for all
@@ -787,7 +792,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _download_and_prepare(self, dl_manager, download_config=None):
+  def _download_and_prepare(self, dl_manager, download_config=None) -> None:
     """Downloads and prepares dataset for reading.
 
     Internal implementation to overwrite when inheriting from DatasetBuilder.
@@ -830,7 +835,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     """
     raise NotImplementedError
 
-  def _make_download_manager(self, download_dir, download_config):
+  def _make_download_manager(
+      self,
+      download_dir,
+      download_config,
+  ) -> download.DownloadManager:
     """Creates a new download manager object."""
     download_dir = (
         download_dir or os.path.join(self._data_dir_root, "downloads"))
@@ -862,11 +871,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     )
 
   @property
-  def builder_config(self):
+  def builder_config(self) -> Optional[Any]:
     """`tfds.core.BuilderConfig` for this builder."""
     return self._builder_config
 
-  def _create_builder_config(self, builder_config):
+  def _create_builder_config(self, builder_config) -> Optional[BuilderConfig]:
     """Create and validate BuilderConfig object."""
     if builder_config is None and self.BUILDER_CONFIGS:
       builder_config = self.BUILDER_CONFIGS[0]
