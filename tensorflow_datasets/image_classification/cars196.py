@@ -244,7 +244,7 @@ _CITATION = """\
 class Cars196(tfds.core.GeneratorBasedBuilder):
   """Car Images dataset."""
 
-  VERSION = tfds.core.Version('2.0.1')
+  VERSION = tfds.core.Version('2.1.0')
   SUPPORTED_VERSIONS = [
       tfds.core.Version('2.1.0'),
   ]
@@ -252,6 +252,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
   RELEASE_NOTES = {
       '2.0.0': 'Initial release',
       '2.0.1': 'Website URL update',
+      '2.1.0': 'Fixing bug https://github.com/tensorflow/datasets/issues/3927',
   }
 
   def _info(self):
