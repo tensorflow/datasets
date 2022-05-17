@@ -24,6 +24,7 @@ from etils import epath
 import tensorflow as tf
 from tensorflow_datasets.core.utils import type_utils
 
+
 ExamplePositions = List[Any]
 
 
@@ -107,7 +108,8 @@ class TfRecordFileAdapter(FileAdapter):
     Returns:
       None
     """
-    with tf.io.TFRecordWriter(os.fspath(path)) as writer:
+    path = os.fspath(path)
+    with tf.io.TFRecordWriter(path) as writer:
       for _, serialized_example in iterator:
         writer.write(serialized_example)
       writer.flush()
