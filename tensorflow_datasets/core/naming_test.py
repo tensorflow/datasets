@@ -277,14 +277,8 @@ def test_filename_info_valid(filename):
   assert filename == str(naming.FilenameInfo.from_str(filename))
 
 
-@pytest.mark.parametrize(
-    'filename',
-    [
-        'mnist-train.tfrecord-000-of-001',  # Wrong shard number
-        'mni-st-train.tfrecord-00000-of-00001',  # Wrong name
-    ],
-)
-def test_filename_info_invalid(filename):
+def test_filename_info_invalid():
+  filename = 'mnist-train.tfrecord-000-of-001'  # Wrong shard number
   assert not naming.FilenameInfo.is_valid(filename)
   with pytest.raises(ValueError, match='Filename .* does not follow pattern'):
     naming.FilenameInfo.from_str(filename)
@@ -296,6 +290,28 @@ def test_filename_info_with_path():
   assert filename_info == naming.FilenameInfo(
       dataset_name='mnist',
       split='train',
+      filetype_suffix='tfrecord',
+      shard_index=32,
+      num_shards=1024)
+
+
+def test_filename_info_with_path_and_dash_in_split():
+  filename_info = naming.FilenameInfo.from_str(
+      '/path/c4-af-validation.tfrecord-00032-of-01024')
+  assert filename_info == naming.FilenameInfo(
+      dataset_name='c4',
+      split='af-validation',
+      filetype_suffix='tfrecord',
+      shard_index=32,
+      num_shards=1024)
+
+
+def test_filename_info_with_path_and_two_dashes_in_split():
+  filename_info = naming.FilenameInfo.from_str(
+      '/path/c4-bg-Latn-validation.tfrecord-00032-of-01024')
+  assert filename_info == naming.FilenameInfo(
+      dataset_name='c4',
+      split='bg-Latn-validation',
       filetype_suffix='tfrecord',
       shard_index=32,
       num_shards=1024)
