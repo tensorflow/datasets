@@ -590,6 +590,9 @@ class DatasetInfo(object):
     else:
       config_description = SKIP
 
+    file_format_str = (
+        self.file_format.value
+        if self.file_format else file_adapters.DEFAULT_FILE_FORMAT.value)
     lines = ["tfds.core.DatasetInfo("]
     for key, value in [
         ("name", repr(self.name)),
@@ -598,6 +601,7 @@ class DatasetInfo(object):
         ("config_description", config_description),
         ("homepage", repr(self.homepage)),
         ("data_path", repr(self.data_dir)),
+        ("file_format", file_format_str),
         ("download_size", self.download_size),
         ("dataset_size", self.dataset_size),
         ("features", _indent(repr(self.features))),

@@ -59,8 +59,10 @@ class DatasetConfig(tfds.core.BuilderConfig):
   supervised_keys: Optional[Tuple[Any]] = None
 
 
-def build_info(ds_config: DatasetConfig,
-               builder: tfds.core.DatasetBuilder) -> tfds.core.DatasetInfo:
+def build_info(
+    ds_config: DatasetConfig,
+    builder: tfds.core.DatasetBuilder,
+    ds_metadata: Optional[Dict[Any, Any]] = None) -> tfds.core.DatasetInfo:
   """Returns the dataset metadata."""
   step_metadata = ds_config.step_metadata_info
   if step_metadata is None:
@@ -82,6 +84,8 @@ def build_info(ds_config: DatasetConfig,
     step_info['reward'] = ds_config.reward_info
   if ds_config.discount_info:
     step_info['discount'] = ds_config.discount_info
+  if ds_metadata:
+    ds_metadata = tfds.core.MetadataDict(ds_metadata)
   return tfds.core.DatasetInfo(
       builder=builder,
       description=ds_config.overall_description,
@@ -92,6 +96,7 @@ def build_info(ds_config: DatasetConfig,
       supervised_keys=ds_config.supervised_keys,
       homepage=ds_config.homepage,
       citation=ds_config.citation,
+      metadata=ds_metadata,
   )
 
 

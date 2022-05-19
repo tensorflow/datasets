@@ -171,7 +171,7 @@ class memoized_property(property):  # pylint: disable=invalid-name
 
 
 if typing.TYPE_CHECKING:
-  # TODO(b/171883689): There is likelly better way to annotate descriptors
+  # TODO(b/171883689): There is likely a better way to annotate descriptors
 
   def classproperty(fn: Callable[[Type[Any]], T]) -> T:  # pylint: disable=function-redefined
     return fn(type(None))

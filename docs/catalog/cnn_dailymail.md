@@ -12,6 +12,11 @@
 # `cnn_dailymail`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 CNN/DailyMail non-anonymized summarization dataset.
@@ -37,12 +42,16 @@ each highlight, which is the target summary
 
     *   `3.1.0`: Removed BuilderConfig
 
-    *   **`3.2.0`** (default): Remove extra space before added sentence period.
-        This shouldn't affect ROUGE scores because punctuation is removed.
+    *   `3.2.0`: Remove extra space before added sentence period. This shouldn't
+        affect ROUGE scores because punctuation is removed.
+
+    *   **`3.3.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Add publisher feature.
 
 *   **Download size**: `558.32 MiB`
 
-*   **Dataset size**: `1.27 GiB`
+*   **Dataset size**: `1.28 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -62,6 +71,7 @@ Split          | Examples
 FeaturesDict({
     'article': Text(shape=(), dtype=tf.string),
     'highlights': Text(shape=(), dtype=tf.string),
+    'publisher': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -72,6 +82,7 @@ Feature    | Class        | Shape | Dtype     | Description
            | FeaturesDict |       |           |
 article    | Text         |       | tf.string |
 highlights | Text         |       | tf.string |
+publisher  | Text         |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -91,7 +102,7 @@ highlights | Text         |       | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.2.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.3.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
