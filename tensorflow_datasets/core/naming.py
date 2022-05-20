@@ -120,8 +120,7 @@ def parse_builder_name_kwargs(
     **builder_kwargs: Builder kwargs
 
   Returns:
-    ns_name: Dataset namespace, or None
-    ds_name: Dataset name
+    ns_name: DatasetName object for the given dataset name
     builder_kwargs: Builder kwargs (version, config, data_dir,...)
   """
   name, parsed_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
