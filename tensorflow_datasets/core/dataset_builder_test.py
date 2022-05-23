@@ -114,6 +114,32 @@ class DatasetBuilderTest(testing.TestCase):
       self.assertLess(data[0]["x"], 30)
 
   @testing.run_in_graph_and_eager_modes()
+  def test_load_with_specified_format(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      dataset, ds_info = load.load(
+          name="dummy_dataset_with_configs",
+          with_info=True,
+          data_dir=tmp_dir,
+          download=True,
+          split=splits_lib.Split.TRAIN,
+          download_and_prepare_kwargs={"file_format": "riegeli"})
+      self.assertEqual(ds_info.file_format.name, "RIEGELI")
+      files = tf.io.gfile.listdir(
+          os.path.join(tmp_dir, "dummy_dataset_with_configs", "plus1", "0.0.1"))
+      self.assertSetEqual(
+          set(files), {
+              "dummy_dataset_with_configs-test.riegeli-00000-of-00001",
+              "dummy_dataset_with_configs-test.riegeli-00000-of-00001_index.json",
+              "dummy_dataset_with_configs-train.riegeli-00000-of-00001",
+              "dummy_dataset_with_configs-train.riegeli-00000-of-00001_index.json",
+              "features.json",
+              "dataset_info.json",
+          })
+      data = list(dataset_utils.as_numpy(dataset))
+      self.assertEqual(20, len(data))
+      self.assertLess(data[0]["x"], 30)
+
+  @testing.run_in_graph_and_eager_modes()
   def test_determinism(self):
     ds = self.builder.as_dataset(
         split=splits_lib.Split.TRAIN, shuffle_files=False)
