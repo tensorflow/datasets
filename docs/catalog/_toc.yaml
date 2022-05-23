@@ -40,6 +40,9 @@ toc:
     title: voxceleb (manual)
   - path: /datasets/catalog/voxforge
     title: voxforge (manual)
+  - path: /datasets/catalog/xtreme_s
+    status: nightly
+    title: xtreme_s
   - path: /datasets/catalog/yes_no
     title: yes_no
   title: Audio
