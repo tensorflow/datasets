@@ -180,5 +180,6 @@
       "time_marked": "2019-03-12T19:04:07.717703+00:00",
       "time_reviewed": "2019-04-15T19:31:07.441995+00:00"
     }
-  }
+  },
+  "imagenet_m": ["ILSVRC2012_val_00000001.JPEG", "ILSVRC2012_val_00000004.JPEG", "ILSVRC2012_val_00000005.JPEG"]
 }
