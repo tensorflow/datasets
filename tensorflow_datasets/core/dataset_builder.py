@@ -173,15 +173,15 @@ class DatasetBuilder(registered.RegisteredDataset):
     Args:
       data_dir: directory to read/write data. Defaults to the value of the
         environment variable TFDS_DATA_DIR, if set, otherwise falls back to
-        "~/tensorflow_datasets".
+        datasets are stored.
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
-      version: Optional version at which to load the dataset. An error is
-        raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
-          The special value "experimental_latest" will use the highest version,
-          even if not default. This is not recommended unless you know what you
-          are doing, as the version could be broken.
+      version: Optional version at which to load the dataset. An error is raised
+        if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'. The
+        special value "experimental_latest" will use the highest version, even
+        if not default. This is not recommended unless you know what you are
+        doing, as the version could be broken.
     """
     if data_dir:
       data_dir = os.fspath(data_dir)  # Pathlib -> str
@@ -361,6 +361,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       *,
       download_dir: Optional[str] = None,
       download_config: Optional[download.DownloadConfig] = None,
+      file_format: Union[None, str, file_adapters.FileFormat] = None,
   ) -> None:
     """Downloads and prepares dataset for reading.
 
@@ -369,6 +370,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         to "~/tensorflow-datasets/downloads".
       download_config: `tfds.download.DownloadConfig`, further configuration for
         downloading and preparing dataset.
+      file_format: optional `str` or `file_adapters.FileFormat`, format of the
+        record files in which the dataset will be written.
 
     Raises:
       IOError: if there is not enough disk space available.
@@ -457,6 +460,11 @@ class DatasetBuilder(registered.RegisteredDataset):
           default_config_name=self.BUILDER_CONFIGS[0].name,
       )
 
+    # If the file format was specified, set it in the info such that it is used
+    # to generate the files.
+    if file_format:
+      self.info.set_file_format(file_format, override=True)
+
     # Create a tmp dir and rename to self._data_dir on successful exit.
     with utils.incomplete_dir(self._data_dir) as tmp_data_dir:
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
@@ -544,9 +552,9 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     Args:
       split: Which split of the data to load (e.g. `'train'`, `'test'`,
-        `['train', 'test']`, `'train[80%:]'`,...). See our
-        [split API guide](https://www.tensorflow.org/datasets/splits). If
-          `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`.
+        `['train', 'test']`, `'train[80%:]'`,...). See our [split API
+        guide](https://www.tensorflow.org/datasets/splits). If `None`, will
+        return all splits in a `Dict[Split, tf.data.Dataset]`.
       batch_size: `int`, batch size. Note that variable-length features will be
         0-padded if `batch_size` is set. Users that want more custom behavior
         should use `batch_size=None` and use the `tf.data` API to construct a
@@ -557,8 +565,8 @@ class DatasetBuilder(registered.RegisteredDataset):
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
         customized feature keys need to be present. See [the
-          guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
-            for more info.
+        guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+        for more info.
       read_config: `tfds.ReadConfig`, Additional options to configure the input
         pipeline (e.g. seed, num parallel reads,...).
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset` will have
@@ -792,7 +800,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _download_and_prepare(self, dl_manager, download_config=None) -> None:
+  def _download_and_prepare(
+      self,
+      dl_manager: download.DownloadManager,
+      download_config: Optional[download.DownloadConfig] = None,
+  ) -> None:
     """Downloads and prepares dataset for reading.
 
     Internal implementation to overwrite when inheriting from DatasetBuilder.

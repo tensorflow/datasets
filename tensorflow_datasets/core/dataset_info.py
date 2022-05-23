@@ -346,6 +346,7 @@ class DatasetInfo(object):
   def set_file_format(
       self,
       file_format: Union[None, str, file_adapters.FileFormat],
+      override: bool = False,
   ) -> None:
     """Internal function to define the file format.
 
@@ -354,23 +355,30 @@ class DatasetInfo(object):
 
     Args:
       file_format: The file format.
+      override: Whether the file format should be overridden if it is already
+        set.
+
+    Raises:
+      ValueError: if the file format was already set and the `override`
+      parameter was False.
+      RuntimeError: if an incorrect combination of options is given, e.g.
+      `override=True` when the DatasetInfo is already fully initialized.
     """
     # If file format isn't present already, fallback to `DEFAULT_FILE_FORMAT`
     file_format = (
         file_format  # Format explicitly given: tfds.builder(..., file_format=x)
         or self.file_format  # Format restored from dataset_info.json
         or file_adapters.DEFAULT_FILE_FORMAT)
-    try:
-      new_file_format = file_adapters.FileFormat(file_format)
-    except ValueError as e:
-      all_values = [f.value for f in file_adapters.FileFormat]
-      utils.reraise(e, suffix=f". Valid file formats: {all_values}")
+    file_format = file_adapters.FileFormat.from_value(file_format)
 
     # If the file format has been set once, file format should be consistent
-    if self.file_format and self.file_format != new_file_format:
+    if (not override and self.file_format and self.file_format != file_format):
       raise ValueError(f"File format is already set to {self.file_format}. "
-                       f"Got {new_file_format}")
-    self.as_proto.file_format = new_file_format.value
+                       f"Got {file_format}")
+    if override and self._fully_initialized:
+      raise RuntimeError("Cannot override the file format "
+                         "when the DatasetInfo is already fully initialized!")
+    self.as_proto.file_format = file_format.value
 
   @property
   def splits(self) -> splits_lib.SplitDict:
@@ -396,7 +404,8 @@ class DatasetInfo(object):
     incomplete_filename_template = naming.ShardedFileTemplate(
         dataset_name=self.name,
         data_dir=self.data_dir,
-        filetype_suffix=self.as_proto.file_format or "tfrecord")
+        filetype_suffix=(self.as_proto.file_format or
+                         file_adapters.DEFAULT_FILE_FORMAT.value))
     for split_info in split_dict.values():
       if isinstance(split_info, splits_lib.MultiSplitInfo):
         new_split_infos.append(split_info)

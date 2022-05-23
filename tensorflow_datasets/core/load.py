@@ -71,8 +71,8 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   """Fetches a `tfds.core.DatasetBuilder` class by string name.
 
   Args:
-    name: `str`, the registered name of the `DatasetBuilder` (the class name
-      as camel or snake case: `MyDataset` or `my_dataset`).
+    name: `str`, the registered name of the `DatasetBuilder` (the class name as
+      camel or snake case: `MyDataset` or `my_dataset`).
 
   Returns:
     A `tfds.core.DatasetBuilder` class.
@@ -110,15 +110,15 @@ def builder(
   """Fetches a `tfds.core.DatasetBuilder` by string name.
 
   Args:
-    name: `str`, the registered name of the `DatasetBuilder` (the class name
-      as camel or snake case: `MyDataset` or `my_dataset`). This can be either
-        `'dataset_name'` or `'dataset_name/config_name'` for datasets with
-        `BuilderConfig`s. As a convenience, this string may contain
-        comma-separated keyword arguments for the builder. For example
-        `'foo_bar/a=True,b=3'` would use the `FooBar` dataset passing the
-        keyword arguments `a=True` and `b=3` (for builders with configs, it
-        would be `'foo_bar/zoo/a=True,b=3'` to use the `'zoo'` config and pass
-        to the builder keyword arguments `a=True` and `b=3`).
+    name: `str`, the registered name of the `DatasetBuilder` (the class name as
+      camel or snake case: `MyDataset` or `my_dataset`). This can be either
+      `'dataset_name'` or `'dataset_name/config_name'` for datasets with
+      `BuilderConfig`s. As a convenience, this string may contain
+      comma-separated keyword arguments for the builder. For example
+      `'foo_bar/a=True,b=3'` would use the `FooBar` dataset passing the keyword
+      arguments `a=True` and `b=3` (for builders with configs, it would be
+      `'foo_bar/zoo/a=True,b=3'` to use the `'zoo'` config and pass to the
+      builder keyword arguments `a=True` and `b=3`).
     try_gcs: `bool`, if True, tfds.load will see if the dataset exists on the
       public GCS bucket before building it locally.
     **builder_kwargs: `dict` of keyword arguments passed to the
@@ -160,7 +160,7 @@ def builder(
   if _try_load_from_files_first(cls, **builder_kwargs):
     try:
       return read_only_builder.builder_from_files(str(name), **builder_kwargs)
-    except registered.DatasetNotFoundError as e:
+    except registered.DatasetNotFoundError:
       pass
 
   # If code exists and loading from files was skipped (e.g. files not found),
@@ -254,23 +254,23 @@ def load(
     name: `str`, the registered name of the `DatasetBuilder` (the snake case
       version of the class name). The config and version can also be specified
       in the name as follows: `'dataset_name[/config_name][:version]'`. For
-        example, `'movielens/25m-ratings'` (for the latest version of
-      `'25m-ratings'`), `'movielens:0.1.0'` (for the default config and
-      version 0.1.0), or`'movielens/25m-ratings:0.1.0'`. Note that only the
-        latest version can be generated, but old versions can be read if they
-        are present on disk. For convenience, the `name` parameter can contain
-        comma-separated keyword arguments for the builder. For example,
-        `'foo_bar/a=True,b=3'` would use the `FooBar` dataset passing the
-        keyword arguments `a=True` and `b=3` (for builders with configs, it
-        would be `'foo_bar/zoo/a=True,b=3'` to use the `'zoo'` config and pass
-        to the builder keyword arguments `a=True` and `b=3`).
-    split: Which split of the data to load (e.g. `'train'`, `'test'`,
-      `['train', 'test']`, `'train[80%:]'`,...). See our
-      [split API guide](https://www.tensorflow.org/datasets/splits). If `None`,
-        will return all splits in a `Dict[Split, tf.data.Dataset]`
+      example, `'movielens/25m-ratings'` (for the latest version of
+      `'25m-ratings'`), `'movielens:0.1.0'` (for the default config and version
+      0.1.0), or`'movielens/25m-ratings:0.1.0'`. Note that only the latest
+      version can be generated, but old versions can be read if they are present
+      on disk. For convenience, the `name` parameter can contain comma-separated
+      keyword arguments for the builder. For example, `'foo_bar/a=True,b=3'`
+      would use the `FooBar` dataset passing the keyword arguments `a=True` and
+      `b=3` (for builders with configs, it would be `'foo_bar/zoo/a=True,b=3'`
+      to use the `'zoo'` config and pass to the builder keyword arguments
+      `a=True` and `b=3`).
+    split: Which split of the data to load (e.g. `'train'`, `'test'`, `['train',
+      'test']`, `'train[80%:]'`,...). See our [split API
+      guide](https://www.tensorflow.org/datasets/splits). If `None`, will return
+      all splits in a `Dict[Split, tf.data.Dataset]`
     data_dir: `str`, directory to read/write data. Defaults to the value of the
       environment variable TFDS_DATA_DIR, if set, otherwise falls back to
-      '~/tensorflow_datasets'.
+      datasets are stored.
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If `batch_size=-1`, will return
       the full dataset as `tf.Tensor`s.
@@ -280,7 +280,7 @@ def load(
       `tfds.core.DatasetBuilder.download_and_prepare` before calling
       `tf.DatasetBuilder.as_dataset`. If `False`, data is expected to be in
       `data_dir`. If `True` and the data is already in `data_dir`,
-      `download_and_prepare` is a no-op.
+      when data_dir is a Placer path.
     as_supervised: `bool`, if `True`, the returned `tf.data.Dataset` will have a
       2-tuple structure `(input, label)` according to
       `builder.info.supervised_keys`. If `False`, the default, the returned
@@ -288,8 +288,8 @@ def load(
     decoders: Nested dict of `Decoder` objects which allow to customize the
       decoding. The structure should match the feature structure, but only
       customized feature keys need to be present. See [the
-        guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
-          for more info.
+      guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+      for more info.
     read_config: `tfds.ReadConfig`, Additional options to configure the input
       pipeline (e.g. seed, num parallel reads,...).
     with_info: `bool`, if `True`, `tfds.load` will return the tuple
