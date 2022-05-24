@@ -1,0 +1,79 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "gem_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "gem_parent_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "dart_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32"
+            }
+        },
+        "tripleset": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "string"
+                    }
+                },
+                "length": null
+            }
+        },
+        "subtree_was_extended": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "bool"
+            }
+        },
+        "target_sources": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "string"
+                    }
+                },
+                "length": null
+            }
+        },
+        "target": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "references": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "string"
+                    }
+                },
+                "length": null
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+  "citation": "@inproceedings{Tsarkov2021,\n  title={*-CFQ: Analyzing the Scalability of Machine Learning on a Compositional Task},\n  author={Dmitry Tsarkov and Tibor Tihon and Nathan Scales and Nikola Momchev and Danila Sinopalnikov and Nathanael Sch\"{a}rli},\n  booktitle={AAAI},\n  year={2021},\n  url={https://arxiv.org/abs/2012.08266},\n}",
+  "configName": "u_cfq_compound_divergence_0.333333_0.3_r21",
+  "description": "The *-CFQ datasets (and their splits) for measuring the scalability of\ncompositional generalization.\n\nSee https://arxiv.org/abs/2012.08266 for background.\n\nExample usage:\n\n```\ndata = tfds.load('star_cfq/single_pool_10x_b_cfq')\n```",
+  "downloadSize": "1575601118",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/google-research/tree/master/star-cfq"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.star_cfq.star_cfq",
+  "name": "star_cfq",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "568767058",
+      "shardLengths": [
+        "128906",
+        "128905",
+        "128905",
+        "128906",
+        "128906",
+        "128905",
+        "128905",
+        "128906"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "7338599",
+      "shardLengths": [
+        "10353"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "7351856",
+      "shardLengths": [
+        "10352"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "question",
+    "output": "query"
+  },
+  "version": "1.1.0"
+}

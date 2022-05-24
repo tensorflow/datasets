@@ -1,0 +1,107 @@
+{
+  "citation": "@inproceedings{NEURIPS2020_e5a90182,\n author = {Ruis, Laura and Andreas, Jacob and Baroni, Marco and Bouchacourt, Diane and Lake, Brenden M},\n booktitle = {Advances in Neural Information Processing Systems},\n editor = {H. Larochelle and M. Ranzato and R. Hadsell and M. F. Balcan and H. Lin},\n pages = {19861--19872},\n publisher = {Curran Associates, Inc.},\n title = {A Benchmark for Systematic Generalization in Grounded Language Understanding},\n url = {https://proceedings.neurips.cc/paper/2020/file/e5a90182cc81e12ab5e72d66e0b46fe3-Paper.pdf},\n volume = {33},\n year = {2020}\n}\n\n@inproceedings{qiu-etal-2021-systematic,\n    title = \"Systematic Generalization on g{SCAN}: {W}hat is Nearly Solved and What is Next?\",\n    author = \"Qiu, Linlu  and\n      Hu, Hexiang  and\n      Zhang, Bowen  and\n      Shaw, Peter  and\n      Sha, Fei\",\n    booktitle = \"Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing\",\n    month = nov,\n    year = \"2021\",\n    address = \"Online and Punta Cana, Dominican Republic\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2021.emnlp-main.166\",\n    doi = \"10.18653/v1/2021.emnlp-main.166\",\n    pages = \"2180--2188\",\n}",
+  "configDescription": "Examples for compositional generalization.",
+  "configName": "compositional_splits",
+  "description": "Grounded SCAN (gSCAN) is a synthetic dataset for evaluating compositional\ngeneralization in situated language understanding. gSCAN pairs natural language\ninstructions with action sequences, and requires the agent to interpret\ninstructions within the context of a grid-based visual navigation environment.\n\nMore information can be found at:\n\n* For the `compositional_splits` and the `target_length_split`:\nhttps://github.com/LauraRuis/groundedSCAN\n\n* For the `spatial_relation_splits`:\nhttps://github.com/google-research/language/tree/master/language/gscan/data",
+  "downloadSize": "86085779",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/LauraRuis/groundedSCAN"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.vision_language.grounded_scan.grounded_scan",
+  "name": "grounded_scan",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "1.1.0": "Changed `vector` feature to Text().",
+    "2.0.0": "Adds the new spatial_relation_splits config."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "515043135",
+      "shardLengths": [
+        "91983",
+        "91983",
+        "91984",
+        "91983"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "5194696",
+      "shardLengths": [
+        "3716"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "27351487",
+      "shardLengths": [
+        "19282"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "visual",
+      "numBytes": "52114977",
+      "shardLengths": [
+        "37436"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "situational_1",
+      "numBytes": "127139766",
+      "shardLengths": [
+        "88642"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "situational_2",
+      "numBytes": "25308986",
+      "shardLengths": [
+        "16808"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "contextual",
+      "numBytes": "16478517",
+      "shardLengths": [
+        "11460"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "adverb_1",
+      "numBytes": "184409059",
+      "shardLengths": [
+        "56440",
+        "56440"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "adverb_2",
+      "numBytes": "66634577",
+      "shardLengths": [
+        "38582"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "visual_easier",
+      "numBytes": "26921041",
+      "shardLengths": [
+        "18718"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

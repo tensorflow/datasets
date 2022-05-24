@@ -1,0 +1,47 @@
+{
+  "citation": "@inproceedings{peng2019moment,\n  title={Moment matching for multi-source domain adaptation},\n  author={Peng, Xingchao and Bai, Qinxun and Xia, Xide and Huang, Zijun and Saenko, Kate and Wang, Bo},\n  booktitle={Proceedings of the IEEE International Conference on Computer Vision},\n  pages={1406--1415},\n  year={2019}\n}",
+  "configName": "quickdraw",
+  "description": "The DomainNet dataset consists of images from six distinct domains, including\nphotos (real), painting, clipart, quickdraw, infograph and sketch. Per domain\nthere are 48K - 172K images (600K in total) categorized into 345 classes.\n\nIn this TFDS version of DomainNet the cleaned version is used.",
+  "downloadSize": "467298701",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "http://ai.bu.edu/DomainNet/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.domainnet.domainnet",
+  "name": "domainnet",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "319410796",
+      "shardLengths": [
+        "30188",
+        "30187",
+        "30187",
+        "30188"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "136891434",
+      "shardLengths": [
+        "25875",
+        "25875"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "1.0.0"
+}

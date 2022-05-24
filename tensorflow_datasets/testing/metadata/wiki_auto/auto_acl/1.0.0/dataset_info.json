@@ -1,0 +1,29 @@
+{
+  "citation": "@inproceedings{acl/JiangMLZX20,\n  author    = {Chao Jiang and\n               Mounica Maddela and\n               Wuwei Lan and\n               Yang Zhong and\n               Wei Xu},\n  editor    = {Dan Jurafsky and\n               Joyce Chai and\n               Natalie Schluter and\n               Joel R. Tetreault},\n  title     = {Neural {CRF} Model for Sentence Alignment in Text Simplification},\n  booktitle = {Proceedings of the 58th Annual Meeting of the Association for Computational\n               Linguistics, {ACL} 2020, Online, July 5-10, 2020},\n  pages     = {7943--7960},\n  publisher = {Association for Computational Linguistics},\n  year      = {2020},\n  url       = {https://www.aclweb.org/anthology/2020.acl-main.709/}\n}",
+  "configDescription": "Sentence pairs aligned to train the ACL2020 system.",
+  "configName": "auto_acl",
+  "description": "WikiAuto provides a set of aligned sentences from English Wikipedia and\nSimple English Wikipedia as a resource to train sentence simplification\nsystems. The authors first crowd-sourced a set of manual alignments between\nsentences in a subset of the Simple English Wikipedia and their corresponding\nversions in English Wikipedia (this corresponds to the `manual` config),\nthen trained a neural CRF system to predict these alignments. The trained\nmodel was then applied to the other articles in Simple English Wikipedia\nwith an English counterpart to create a larger corpus of aligned sentences\n(corresponding to the `auto`, `auto_acl`, `auto_full_no_split`, and\n`auto_full_with_split` configs here).",
+  "downloadSize": "118068366",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/chaojiang06/wiki-auto"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text_simplification.wiki_auto.wiki_auto",
+  "name": "wiki_auto",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "name": "full",
+      "numBytes": "145578750",
+      "shardLengths": [
+        "244166",
+        "244166"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

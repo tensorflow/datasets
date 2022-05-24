@@ -1,0 +1,36 @@
+{
+  "citation": "@article{hu2020xtreme,\n      author    = {Junjie Hu and Sebastian Ruder and Aditya Siddhant and Graham Neubig and Orhan Firat and Melvin Johnson},\n      title     = {XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization},\n      journal   = {CoRR},\n      volume    = {abs/2003.11080},\n      year      = {2020},\n      archivePrefix = {arXiv},\n      eprint    = {2003.11080}\n}",
+  "description": "This dataset contains machine translations of MNLI into each of the XNLI\nlanguages. The translation data is provided by XTREME. Note that this is\ndifferent from the machine translated data provided by the original XNLI paper.",
+  "downloadSize": "2481008336",
+  "location": {
+    "urls": [
+      "https://www.nyu.edu/projects/bowman/xnli/"
+    ]
+  },
+  "name": "xtreme_xnli",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "1710311175",
+      "shardLengths": [
+        "24536",
+        "24535",
+        "24536",
+        "24535",
+        "24536",
+        "24536",
+        "24535",
+        "24536",
+        "24536",
+        "24535",
+        "24536",
+        "24536",
+        "24535",
+        "24536",
+        "24535",
+        "24536"
+      ]
+    }
+  ],
+  "version": "1.1.0"
+}

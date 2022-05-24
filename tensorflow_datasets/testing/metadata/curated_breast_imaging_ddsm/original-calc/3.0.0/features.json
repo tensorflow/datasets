@@ -1,0 +1,97 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "id": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "breast": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 2
+            }
+        },
+        "image": {
+            "type": "tensorflow_datasets.core.features.image_feature.Image",
+            "content": {
+                "shape": [
+                    null,
+                    null,
+                    1
+                ],
+                "dtype": "uint8",
+                "encoding_format": null
+            }
+        },
+        "view": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 2
+            }
+        },
+        "patient": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "abnormalities": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                    "content": {
+                        "id": {
+                            "type": "tensorflow_datasets.core.features.feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "int32"
+                            }
+                        },
+                        "mask": {
+                            "type": "tensorflow_datasets.core.features.image_feature.Image",
+                            "content": {
+                                "shape": [
+                                    null,
+                                    null,
+                                    1
+                                ],
+                                "dtype": "uint8",
+                                "encoding_format": null
+                            }
+                        },
+                        "assessment": {
+                            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "content": {
+                                "num_classes": 6
+                            }
+                        },
+                        "pathology": {
+                            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "content": {
+                                "num_classes": 3
+                            }
+                        },
+                        "subtlety": {
+                            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "content": {
+                                "num_classes": 6
+                            }
+                        },
+                        "calc_type": {
+                            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "content": {
+                                "num_classes": 48
+                            }
+                        },
+                        "calc_distribution": {
+                            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                            "content": {
+                                "num_classes": 10
+                            }
+                        }
+                    }
+                },
+                "length": null
+            }
+        }
+    }
+}

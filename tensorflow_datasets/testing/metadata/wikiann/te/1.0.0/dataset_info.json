@@ -1,0 +1,38 @@
+{
+  "citation": "@inproceedings{rahimi-etal-2019-massively,\n    title = \"Massively Multilingual Transfer for {NER}\",\n    author = \"Rahimi, Afshin  and\n      Li, Yuan  and\n      Cohn, Trevor\",\n    booktitle = \"Proceedings of the 57th Annual Meeting of the Association     for Computational Linguistics\",\n    month = jul,\n    year = \"2019\",\n    address = \"Florence, Italy\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/P19-1015\",\n    pages = \"151--164\",\n}",
+  "configDescription": "Wikiann te train/dev/test splits",
+  "configName": "te",
+  "description": "WikiANN (sometimes called PAN-X) is a multilingual named entity recognition dataset consisting of Wikipedia articles annotated with LOC (location), PER (person), and ORG (organisation) tags in the IOB2 format. This version corresponds to the balanced train, dev, and test splits of Rahimi et al. (2019), which supports 176 of the 282 languages from the original WikiANN corpus.",
+  "downloadSize": "234126336",
+  "location": {
+    "urls": [
+      "https://github.com/afshinrahimi/mmner"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.wikiann.wikiann",
+  "name": "wikiann",
+  "splits": [
+    {
+      "name": "validation",
+      "numBytes": "307627",
+      "shardLengths": [
+        "1000"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "310513",
+      "shardLengths": [
+        "1000"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "310257",
+      "shardLengths": [
+        "1000"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

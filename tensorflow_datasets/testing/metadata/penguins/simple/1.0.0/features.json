@@ -1,0 +1,55 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "species": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 3
+            }
+        },
+        "island": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 3
+            }
+        },
+        "culmen_length_mm": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "culmen_depth_mm": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "flipper_length_mm": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "body_mass_g": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        },
+        "sex": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 3
+            }
+        }
+    }
+}

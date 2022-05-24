@@ -1,0 +1,91 @@
+{
+  "citation": "@inproceedings{\n    thakur2021beir,\n    title={{BEIR}: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models},\n    author={Nandan Thakur and Nils Reimers and Andreas R{\"u}ckl{'e} and Abhishek Srivastava and Iryna Gurevych},\n    booktitle={Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 2)},\n    year={2021},\n    url={https://openreview.net/forum?id=wCu6T5xFjeJ}\n}",
+  "configName": "fever",
+  "description": "BEIR is a heterogeneous benchmark containing diverse IR tasks. It also provides\na common and easy framework for evaluation of your NLP-based retrieval models\nwithin the benchmark.",
+  "downloadSize": "1236988269",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/beir-cellar/beir"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.beir.beir",
+  "name": "beir",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "query",
+      "numBytes": "44620419",
+      "shardLengths": [
+        "123142"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "passage",
+      "numBytes": "3901553694",
+      "shardLengths": [
+        "169268",
+        "169268",
+        "169267",
+        "169268",
+        "169268",
+        "169267",
+        "169268",
+        "169268",
+        "169268",
+        "169268",
+        "169267",
+        "169268",
+        "169268",
+        "169267",
+        "169268",
+        "169268",
+        "169268",
+        "169268",
+        "169267",
+        "169268",
+        "169268",
+        "169267",
+        "169268",
+        "169268",
+        "169268",
+        "169268",
+        "169267",
+        "169268",
+        "169268",
+        "169267",
+        "169268",
+        "169268"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "24827467",
+      "shardLengths": [
+        "12547"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "2798949",
+      "shardLengths": [
+        "1460"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "3036727",
+      "shardLengths": [
+        "1499"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

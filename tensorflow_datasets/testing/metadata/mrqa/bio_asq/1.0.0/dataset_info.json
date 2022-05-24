@@ -1,0 +1,29 @@
+{
+  "citation": "@article{tsatsaronis2015overview,\n    title={An overview of the BIOASQ large-scale biomedical semantic indexing and question answering competition},\n    author={Tsatsaronis, George and Balikas, Georgios and Malakasiotis, Prodromos and Partalas, Ioannis and Zschunke, Matthias and Alvers, Michael R and Weissenborn, Dirk and Krithara, Anastasia and Petridis, Sergios and Polychronopoulos, Dimitris and others},\n    journal={BMC bioinformatics},\n    volume={16},\n    number={1},\n    pages={1--28},\n    year={2015},\n    publisher={Springer}\n}\n\n@inproceedings{fisch-etal-2019-mrqa,\n    title = \"{MRQA} 2019 Shared Task: Evaluating Generalization in Reading Comprehension\",\n    author = \"Fisch, Adam  and\n      Talmor, Alon  and\n      Jia, Robin  and\n      Seo, Minjoon  and\n      Choi, Eunsol  and\n      Chen, Danqi\",\n    booktitle = \"Proceedings of the 2nd Workshop on Machine Reading for Question Answering\",\n    month = nov,\n    year = \"2019\",\n    address = \"Hong Kong, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/D19-5801\",\n    doi = \"10.18653/v1/D19-5801\",\n    pages = \"1--13\",\n}\n\nNote that each MRQA dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.\"",
+  "configDescription": "BioASQ, a challenge on large-scale biomedical semantic indexing and\nquestion answering, contains question and answer pairs that are\ncreated by domain experts. They are then manually linked to multiple\nrelated science (PubMed) articles. The full abstract of each of the\nlinked articles is downloaded and used as individual contexts (e.g., a\nsingle question can be linked to multiple, independent articles to\ncreate multiple QA-context pairs). Abstracts that do not exactly\ncontain the answer are discarded.\n",
+  "configName": "bio_asq",
+  "description": "The MRQA 2019 Shared Task focuses on generalization in question answering. An\neffective question answering system should do more than merely interpolate from\nthe training set to answer test examples drawn from the same distribution: it\nshould also be able to extrapolate to out-of-distribution examples \u2014 a\nsignificantly harder challenge.\n\nMRQA adapts and unifies multiple distinct question answering datasets (carefully\nselected subsets of existing datasets) into the same format (SQuAD format).\nAmong them, six datasets were made available for training, and six datasets were\nmade available for testing. Small portions of the training datasets\nwere held-out as in-domain data that may be used for development. The testing\ndatasets only contain out-of-domain data. This benchmark is released as part of\nthe MRQA 2019 Shared Task.\n\nMore information can be found at: `https://mrqa.github.io/2019/shared.html`.",
+  "downloadSize": "2666134",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://mrqa.github.io/2019/shared.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.mrqa.mrqa",
+  "name": "mrqa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "7023562",
+      "shardLengths": [
+        "1504"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

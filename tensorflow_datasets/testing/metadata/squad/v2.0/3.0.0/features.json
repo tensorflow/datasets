@@ -1,0 +1,75 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "title": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "context": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "plausible_answers": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                    "content": {
+                        "text": {
+                            "type": "tensorflow_datasets.core.features.text_feature.Text",
+                            "content": {}
+                        },
+                        "answer_start": {
+                            "type": "tensorflow_datasets.core.features.feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "int32"
+                            }
+                        }
+                    }
+                },
+                "length": null
+            }
+        },
+        "question": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "is_impossible": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "bool"
+            }
+        },
+        "answers": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                    "content": {
+                        "text": {
+                            "type": "tensorflow_datasets.core.features.text_feature.Text",
+                            "content": {}
+                        },
+                        "answer_start": {
+                            "type": "tensorflow_datasets.core.features.feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "int32"
+                            }
+                        }
+                    }
+                },
+                "length": null
+            }
+        }
+    }
+}
