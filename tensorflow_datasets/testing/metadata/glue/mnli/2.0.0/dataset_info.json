@@ -1,0 +1,52 @@
+{
+  "citation": "@InProceedings{N18-1101,\n  author = \"Williams, Adina\n            and Nangia, Nikita\n            and Bowman, Samuel\",\n  title = \"A Broad-Coverage Challenge Corpus for\n           Sentence Understanding through Inference\",\n  booktitle = \"Proceedings of the 2018 Conference of\n               the North American Chapter of the\n               Association for Computational Linguistics:\n               Human Language Technologies, Volume 1 (Long\n               Papers)\",\n  year = \"2018\",\n  publisher = \"Association for Computational Linguistics\",\n  pages = \"1112--1122\",\n  location = \"New Orleans, Louisiana\",\n  url = \"http://aclweb.org/anthology/N18-1101\"\n}\n@article{bowman2015large,\n  title={A large annotated corpus for learning natural language inference},\n  author={Bowman, Samuel R and Angeli, Gabor and Potts, Christopher and Manning, Christopher D},\n  journal={arXiv preprint arXiv:1508.05326},\n  year={2015}\n}\n@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
+  "configDescription": "The Multi-Genre Natural Language Inference Corpus is a crowdsourced\ncollection of sentence pairs with textual entailment annotations. Given a premise sentence\nand a hypothesis sentence, the task is to predict whether the premise entails the hypothesis\n(entailment), contradicts the hypothesis (contradiction), or neither (neutral). The premise sentences are\ngathered from ten different sources, including transcribed speech, fiction, and government reports.\nWe use the standard test set, for which we obtained private labels from the authors, and evaluate\non both the matched (in-domain) and mismatched (cross-domain) section. We also use and recommend\nthe SNLI corpus as 550k examples of auxiliary training data.",
+  "configName": "mnli",
+  "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
+  "downloadSize": "312783507",
+  "location": {
+    "urls": [
+      "http://www.nyu.edu/projects/bowman/multinli/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.glue",
+  "name": "glue",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "95620596",
+      "shardLengths": [
+        "392702"
+      ]
+    },
+    {
+      "name": "validation_matched",
+      "numBytes": "2348469",
+      "shardLengths": [
+        "9815"
+      ]
+    },
+    {
+      "name": "validation_mismatched",
+      "numBytes": "2466430",
+      "shardLengths": [
+        "9832"
+      ]
+    },
+    {
+      "name": "test_matched",
+      "numBytes": "2451060",
+      "shardLengths": [
+        "9796"
+      ]
+    },
+    {
+      "name": "test_mismatched",
+      "numBytes": "2557769",
+      "shardLengths": [
+        "9847"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

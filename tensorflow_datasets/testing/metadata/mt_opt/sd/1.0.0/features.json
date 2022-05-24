@@ -1,0 +1,63 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "features": {
+            "image_1": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "480",
+                            "640",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8"
+                }
+            },
+            "image_0": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "512",
+                            "640",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8"
+                }
+            },
+            "success": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "bool",
+                    "encoding": "none"
+                }
+            },
+            "image_2": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "480",
+                            "640",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8"
+                }
+            },
+            "task_code": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            }
+        }
+    },
+    "proto_cls": "tensorflow_datasets.FeaturesDict"
+}

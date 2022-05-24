@@ -1,0 +1,30 @@
+{
+  "citation": "@misc {paracrawl,\n    title  = \"ParaCrawl\",\n    year   = \"2018\",\n    url    = \"http://paracrawl.eu/download.html.\"\n}",
+  "configDescription": "Translation dataset from English to bg.",
+  "configName": "enbg",
+  "description": "Web-Scale Parallel Corpora for Official European Languages.",
+  "downloadSize": "103743335",
+  "location": {
+    "urls": [
+      "https://paracrawl.eu/releases.html"
+    ]
+  },
+  "name": "para_crawl",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "380068983",
+      "shardLengths": [
+        "259971",
+        "259971",
+        "259972",
+        "259971"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "en",
+    "output": "bg"
+  },
+  "version": "1.2.0"
+}

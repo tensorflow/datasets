@@ -1,0 +1,40 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "year": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32"
+            }
+        },
+        "doy": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32"
+            }
+        },
+        "temp": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32"
+            }
+        },
+        "temp_upper": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32"
+            }
+        },
+        "temp_lower": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32"
+            }
+        }
+    }
+}

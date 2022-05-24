@@ -1,0 +1,41 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "speech": {
+            "type": "tensorflow_datasets.core.features.audio_feature.Audio",
+            "content": {
+                "file_format": null,
+                "shape": [
+                    null
+                ],
+                "dtype": "int64",
+                "sample_rate": 16000
+            }
+        },
+        "text": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "speaker_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int64"
+            }
+        },
+        "chapter_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int64"
+            }
+        },
+        "id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        }
+    }
+}

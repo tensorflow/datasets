@@ -1,0 +1,45 @@
+{
+  "citation": "http://data.allenai.org/ai2-science-questions\n\n@inproceedings{khashabi-etal-2020-unifiedqa,\n    title = \"{UNIFIEDQA}: Crossing Format Boundaries with a Single {QA} System\",\n    author = \"Khashabi, Daniel  and\n      Min, Sewon  and\n      Khot, Tushar  and\n      Sabharwal, Ashish  and\n      Tafjord, Oyvind  and\n      Clark, Peter  and\n      Hajishirzi, Hannaneh\",\n    booktitle = \"Findings of the Association for Computational Linguistics: EMNLP 2020\",\n    month = nov,\n    year = \"2020\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2020.findings-emnlp.171\",\n    doi = \"10.18653/v1/2020.findings-emnlp.171\",\n    pages = \"1896--1907\",\n}\n\nNote that each UnifiedQA dataset has its own citation. Please see the source to\nsee the correct citation for each contained dataset.\"",
+  "configDescription": "The AI2 Science Questions dataset consists of questions used in\nstudent assessments in the United States across elementary and middle\nschool grade levels. Each question is 4-way multiple choice format and\nmay or may not include a diagram element. This set consists of\nquestions used for middle school grade levels.\n",
+  "configName": "ai2_science_middle",
+  "description": "The UnifiedQA benchmark consists of 20 main question answering (QA) datasets\n(each may have multiple versions) that target different formats as well as\nvarious complex linguistic phenomena. These datasets are grouped into several\nformats/categories, including: extractive QA, abstractive QA, multiple-choice\nQA, and yes/no QA. Additionally, contrast sets are used for several datasets\n(denoted with \"contrast_sets_\"). These evaluation sets are expert-generated\nperturbations that deviate from the patterns common in the original dataset. For\nseveral datasets that do not come with evidence paragraphs, two variants are\nincluded: one where the datasets are used as-is and another that uses paragraphs\nfetched via an information retrieval system as additional evidence, indicated\nwith \"_ir\" tags.\n\nMore information can be found at: https://github.com/allenai/unifiedqa.",
+  "downloadSize": "438694",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/allenai/unifiedqa"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.unifiedqa.unifiedqa",
+  "name": "unified_qa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "202406",
+      "shardLengths": [
+        "605"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "45591",
+      "shardLengths": [
+        "125"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "240856",
+      "shardLengths": [
+        "679"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

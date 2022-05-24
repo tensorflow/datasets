@@ -1,0 +1,31 @@
+{
+  "citation": "@article{2016arXiv160605250R,\n       author = {{Rajpurkar}, Pranav and {Zhang}, Jian and {Lopyrev},\n                 Konstantin and {Liang}, Percy},\n        title = \"{SQuAD: 100,000+ Questions for Machine Comprehension of Text}\",\n      journal = {arXiv e-prints},\n         year = 2016,\n          eid = {arXiv:1606.05250},\n        pages = {arXiv:1606.05250},\narchivePrefix = {arXiv},\n       eprint = {1606.05250},\n}",
+  "configDescription": "Version 1.1.0 of SQUAD",
+  "configName": "v1.1",
+  "description": "Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable.",
+  "downloadSize": "35142551",
+  "location": {
+    "urls": [
+      "https://rajpurkar.github.io/SQuAD-explorer/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.question_answering.squad.squad",
+  "name": "squad",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "87300215",
+      "shardLengths": [
+        "87599"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "11333324",
+      "shardLengths": [
+        "10570"
+      ]
+    }
+  ],
+  "version": "3.0.0"
+}

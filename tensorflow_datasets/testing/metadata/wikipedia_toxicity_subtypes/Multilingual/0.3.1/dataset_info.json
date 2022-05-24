@@ -1,0 +1,44 @@
+{
+  "citation": "@inproceedings{10.1145/3038912.3052591,\n  author = {Wulczyn, Ellery and Thain, Nithum and Dixon, Lucas},\n  title = {Ex Machina: Personal Attacks Seen at Scale},\n  year = {2017},\n  isbn = {9781450349130},\n  publisher = {International World Wide Web Conferences Steering Committee},\n  address = {Republic and Canton of Geneva, CHE},\n  url = {https://doi.org/10.1145/3038912.3052591},\n  doi = {10.1145/3038912.3052591},\n  booktitle = {Proceedings of the 26th International Conference on World Wide Web},\n  pages = {1391-1399},\n  numpages = {9},\n  keywords = {online discussions, wikipedia, online harassment},\n  location = {Perth, Australia},\n  series = {WWW '17}\n}",
+  "configDescription": "\nThe comments in the WikipediaToxicityMultilingual config here are from an\narchive of non-English Wikipedia talk page comments annotated by Jigsaw for\ntoxicity, with a binary value (0 or 1) indicating whether the majority of\nannotators rated the comment text as toxic. The comments in this config are in\nmultiple different languages (Turkish, Italian, Spanish, Portuguese, Russian,\nand French). This config is a replica of the data released for the Jigsaw\nMultilingual Toxic Comment Classification on Kaggle, with the test dataset\njoined with the test_labels released after the competition.\n\nSee the Kaggle documentation\nhttps://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data\nfor more details.\n",
+  "configName": "Multilingual",
+  "description": "The comments in this dataset come from an archive of Wikipedia talk page\ncomments. These have been annotated by Jigsaw for toxicity, as well as (for the\nmain config) a variety of toxicity subtypes, including severe toxicity,\nobscenity, threatening language, insulting language, and identity attacks. This\ndataset is a replica of the data released for the Jigsaw Toxic Comment\nClassification Challenge and Jigsaw Multilingual Toxic Comment Classification\ncompetition on Kaggle, with the test dataset merged with the test_labels\nreleased after the end of the competitions. Test data not used for scoring has\nbeen dropped. This dataset is released under CC0, as is the underlying comment\ntext.",
+  "downloadSize": "53025584",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.wikipedia_toxicity_subtypes",
+  "name": "wikipedia_toxicity_subtypes",
+  "splits": [
+    {
+      "name": "validation",
+      "numBytes": "3708093",
+      "shardLengths": [
+        "8000"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "33131757",
+      "shardLengths": [
+        "63812"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "text"
+        },
+        {
+          "featureKey": "toxicity"
+        }
+      ]
+    }
+  },
+  "version": "0.3.1"
+}

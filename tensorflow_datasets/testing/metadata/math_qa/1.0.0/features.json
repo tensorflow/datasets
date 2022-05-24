@@ -1,0 +1,37 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "Problem": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "Rationale": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "options": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "correct": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "annotated_formula": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "linear_formula": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "category": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "correct_option": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        }
+    }
+}

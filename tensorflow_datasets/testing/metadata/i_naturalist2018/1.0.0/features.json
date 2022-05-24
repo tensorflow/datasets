@@ -1,0 +1,34 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "id": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "image": {
+            "type": "tensorflow_datasets.core.features.image_feature.Image",
+            "content": {
+                "shape": [
+                    null,
+                    null,
+                    3
+                ],
+                "dtype": "uint8",
+                "encoding_format": null,
+                "use_colormap": false
+            }
+        },
+        "label": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 8142
+            }
+        },
+        "supercategory": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 14
+            }
+        }
+    }
+}

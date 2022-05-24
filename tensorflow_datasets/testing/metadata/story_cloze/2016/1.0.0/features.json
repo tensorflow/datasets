@@ -1,0 +1,26 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "context": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "endings": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.text_feature.Text",
+                    "content": {}
+                },
+                "length": null
+            }
+        },
+        "label": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32"
+            }
+        }
+    }
+}

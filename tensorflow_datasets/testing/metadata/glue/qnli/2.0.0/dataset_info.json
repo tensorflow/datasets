@@ -1,0 +1,38 @@
+{
+  "citation": "@article{rajpurkar2016squad,\n  title={Squad: 100,000+ questions for machine comprehension of text},\n  author={Rajpurkar, Pranav and Zhang, Jian and Lopyrev, Konstantin and Liang, Percy},\n  journal={arXiv preprint arXiv:1606.05250},\n  year={2016}\n}\n@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
+  "configDescription": "The Stanford Question Answering Dataset is a question-answering\ndataset consisting of question-paragraph pairs, where one of the sentences in the paragraph (drawn\nfrom Wikipedia) contains the answer to the corresponding question (written by an annotator). We\nconvert the task into sentence pair classification by forming a pair between each question and each\nsentence in the corresponding context, and filtering out pairs with low lexical overlap between the\nquestion and the context sentence. The task is to determine whether the context sentence contains\nthe answer to the question. This modified version of the original task removes the requirement that\nthe model select the exact answer, but also removes the simplifying assumptions that the answer\nis always present in the input and that lexical overlap is a reliable cue.",
+  "configName": "qnli",
+  "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
+  "downloadSize": "10627589",
+  "location": {
+    "urls": [
+      "https://rajpurkar.github.io/SQuAD-explorer/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.glue",
+  "name": "glue",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "31227754",
+      "shardLengths": [
+        "104743"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "1656726",
+      "shardLengths": [
+        "5463"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "1710524",
+      "shardLengths": [
+        "5463"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}
