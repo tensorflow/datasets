@@ -158,8 +158,6 @@ class DownloadManagerTest(testing.TestCase):
     self.fs.__enter__()
     self._make_downloader_mock().start()
     self._make_extractor_mock().start()
-    # Mock `_checksum_paths` (do not load the precomputed checksums)
-    mock.patch.object(checksums_lib, '_checksum_paths', lambda: {}).start()
 
     self.addCleanup(mock.patch.stopall)
 
@@ -168,8 +166,7 @@ class DownloadManagerTest(testing.TestCase):
     self.fs.__exit__(None, None, None)
 
   def assertContainFiles(self, filepaths):
-    for path in filepaths:
-      assert tf.io.gfile.exists(path)
+    self.assertCountEqual(_as_path(list(self.fs.files)), _as_path(filepaths))
 
   def _write_info(self, path, info):
     content = json.dumps(info)
@@ -182,7 +179,6 @@ class DownloadManagerTest(testing.TestCase):
                    extract_dir='/extract_dir',
                    manual_dir='/manual_dir',
                    **kwargs):
-    tf.io.gfile.mkdir('/checksums')
     manager = dm.DownloadManager(
         dataset_name='mnist',
         download_dir=dl_dir,
@@ -559,7 +555,7 @@ class DownloadManagerTest(testing.TestCase):
 
     # Checksums are created and url recorded
     self.assertEqual(
-        self.fs.read_file('/checksums/checksums.tsv'),
+        self.fs.files['/checksums/checksums.tsv'],
         f'{a.url}\t{a.url_info.size}\t{a.url_info.checksum}\t{a.url_info.filename}\n',
     )
 
