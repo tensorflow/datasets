@@ -58,6 +58,7 @@ _SUN397_URL = "https://vision.princeton.edu/projects/2010/SUN/"
 # decoding is not deterministic (PIL).
 _SUN397_IGNORE_IMAGES = [
     "SUN397/c/church/outdoor/sun_bhenjvsvrtumjuri.jpg",
+    "SUN397/t/track/outdoor/sun_aophkoiosslinihb.jpg",
 ]
 
 _SUN397_BUILDER_CONFIG_DESCRIPTION_PATTERN = (
@@ -281,6 +282,8 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
     with tf.Graph().as_default():
       with utils.nogpu_session() as sess:
         for filepath, fobj in archive:
+          if filepath in _SUN397_IGNORE_IMAGES:
+            continue
           # Note: all files in the tar.gz are in SUN397/...
           filename = filepath[prefix_len:].replace("\\", "/")  # For windows
           if filename in subset_images:
