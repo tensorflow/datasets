@@ -45,7 +45,7 @@ Split can be:
 
 ```python
 # Returns both train and test split separately
-train_ds, test_ds = tfds.load('mnist', split=['train', 'test[50%]'])
+train_ds, test_ds = tfds.load('mnist', split=['train', 'test[:50%]'])
 ```
 
 Note: Due to the shards being
