@@ -565,7 +565,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
         customized feature keys need to be present. See [the
-        guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+        guide](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)
         for more info.
       read_config: `tfds.ReadConfig`, Additional options to configure the input
         pipeline (e.g. seed, num parallel reads,...).
