@@ -49,6 +49,7 @@ from tensorflow_datasets import graphs
 from tensorflow_datasets import image
 from tensorflow_datasets import image_classification
 from tensorflow_datasets import object_detection
+from tensorflow_datasets import nearest_neighbors
 from tensorflow_datasets import question_answering
 from tensorflow_datasets import d4rl
 from tensorflow_datasets import ranking
