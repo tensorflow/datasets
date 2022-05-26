@@ -34,6 +34,7 @@ from tensorflow_datasets.image_classification.citrus import CitrusLeaves
 from tensorflow_datasets.image_classification.cmaterdb import Cmaterdb
 from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistology
 from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistologyLarge
+from tensorflow_datasets.image_classification.covid_cxr import CovidCxr
 from tensorflow_datasets.image_classification.cycle_gan import CycleGAN
 from tensorflow_datasets.image_classification.deep_weeds import DeepWeeds
 from tensorflow_datasets.image_classification.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
@@ -90,3 +91,4 @@ from tensorflow_datasets.image_classification.sun import Sun397
 from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon
+from tensorflow_datasets.image_classification.covid_cxr import CovidCxr  # TODO(covid_cxr) Sort alphabetically
