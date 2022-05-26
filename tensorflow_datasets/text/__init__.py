@@ -79,6 +79,7 @@ from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.trec import Trec
 from tensorflow_datasets.text.unifiedqa import UnifiedQA
 from tensorflow_datasets.text.wiki40b import Wiki40b
+from tensorflow_datasets.text.wiki_dialog import WikiDialog
 from tensorflow_datasets.text.wikiann import Wikiann
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.wikipedia_toxicity_subtypes import WikipediaToxicitySubtypes
