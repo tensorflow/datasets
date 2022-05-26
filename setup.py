@@ -168,6 +168,7 @@ DATASET_EXTRAS = {
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'wider_face': ['Pillow'],
+    'wiki_dialog': ['apache_beam'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
     'wsc273': ['bs4', 'lxml'],
     'youtube_vis': ['pycocotools'],
