@@ -626,6 +626,9 @@ toc:
     title: unified_qa
   - path: /datasets/catalog/wiki40b
     title: wiki40b
+  - path: /datasets/catalog/wiki_dialog
+    status: nightly
+    title: wiki_dialog
   - path: /datasets/catalog/wikiann
     title: wikiann
   - path: /datasets/catalog/wikipedia
