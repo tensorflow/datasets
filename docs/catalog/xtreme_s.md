@@ -5,8 +5,8 @@
   <meta itemprop="name" content="xtreme_s" />
   <meta itemprop="description" content="FLEURS is the speech version of the FLORES machine translation benchmark, covering 2000 n-way parallel sentences in n=102 languages.&#10;XTREME-S covers four task families: speech recognition, classification, speech-to-text translation and retrieval. Covering 102&#10;languages from 10+ language families, 3 different domains and 4&#10;task families, XTREME-S aims to simplify multilingual speech&#10;representation evaluation, as well as catalyze research in “universal” speech representation learning.&#10;&#10;In this version, only the FLEURS dataset is provided, which covers speech&#10;recognition and speech-to-text translation.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;xtreme_s&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/xtreme_s" />
-  <meta itemprop="sameAs" content="https://www.tensorflow.org/datasets/catalog/xtreme_s" />
-  <meta itemprop="citation" content="@article{conneau2022xtreme,&#10;  title={XTREME-S: Evaluating Cross-lingual Speech Representations},&#10;  author={Conneau, Alexis and Bapna, Ankur and Zhang, Yu and Ma, Min and von Platen, Patrick and Lozhkov, Anton and Cherry, Colin and Jia, Ye and Rivera, Clara and Kale, Mihir and others},&#10;  journal={arXiv preprint arXiv:2203.10752},&#10;  year={2022}&#10;}" />
+  <meta itemprop="sameAs" content="https://arxiv.org/abs/2205.12446" />
+  <meta itemprop="citation" content="@article{fleurs2022arxiv,&#10;  title = {FLEURS: Few-shot Learning Evaluation of Universal Representations of Speech},&#10;  author = {Conneau, Alexis and Ma, Min and Khanuja, Simran and Zhang, Yu and Axelrod, Vera and Dalmia, Siddharth and Riesa, Jason and Rivera, Clara and Bapna, Ankur},&#10;  journal={arXiv preprint arXiv:2205.12446},&#10;  url = {https://arxiv.org/abs/2205.12446},&#10;  year = {2022},&#10;}&#10;@article{conneau2022xtreme,&#10;  title={XTREME-S: Evaluating Cross-lingual Speech Representations},&#10;  author={Conneau, Alexis and Bapna, Ankur and Zhang, Yu and Ma, Min and von Platen, Patrick and Lozhkov, Anton and Cherry, Colin and Jia, Ye and Rivera, Clara and Kale, Mihir and others},&#10;  journal={arXiv preprint arXiv:2203.10752},&#10;  year={2022}&#10;}" />
 </div>
 
 # `xtreme_s`
@@ -34,7 +34,7 @@ recognition and speech-to-text translation.
     languages.
 
 *   **Homepage**:
-    [https://www.tensorflow.org/datasets/catalog/xtreme_s](https://www.tensorflow.org/datasets/catalog/xtreme_s)
+    [https://arxiv.org/abs/2205.12446](https://arxiv.org/abs/2205.12446)
 
 *   **Source code**:
     [`tfds.audio.xtreme_s.XtremeS`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/xtreme_s/xtreme_s.py)
@@ -106,6 +106,13 @@ transcription     | Text         |         | tf.string | Normalized transcriptio
 *   **Citation**:
 
 ```
+@article{fleurs2022arxiv,
+  title = {FLEURS: Few-shot Learning Evaluation of Universal Representations of Speech},
+  author = {Conneau, Alexis and Ma, Min and Khanuja, Simran and Zhang, Yu and Axelrod, Vera and Dalmia, Siddharth and Riesa, Jason and Rivera, Clara and Bapna, Ankur},
+  journal={arXiv preprint arXiv:2205.12446},
+  url = {https://arxiv.org/abs/2205.12446},
+  year = {2022},
+}
 @article{conneau2022xtreme,
   title={XTREME-S: Evaluating Cross-lingual Speech Representations},
   author={Conneau, Alexis and Bapna, Ankur and Zhang, Yu and Ma, Min and von Platen, Patrick and Lozhkov, Anton and Cherry, Colin and Jia, Ye and Rivera, Clara and Kale, Mihir and others},
