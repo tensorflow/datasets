@@ -166,7 +166,7 @@ matplotlib, scipy, six,...). You can read the
 if you're not familiar with pytest.
 
 Tests for DatasetBuilders are special and are documented in the
-[guide to add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md#test-your-dataset).
+[guide to add a dataset](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md#test-your-dataset).
 
 ### Send the PR for reviews!
 
