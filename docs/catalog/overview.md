@@ -174,6 +174,13 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`uc_merced`](uc_merced.md)
 *   [`visual_domain_decathlon`](visual_domain_decathlon.md)
 
+### `Nearest neighbors`
+
+*   [`glove100_angular`](glove100_angular.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`sift1m`](sift1m.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+
 ### `Object detection`
 
 *   [`coco`](coco.md)

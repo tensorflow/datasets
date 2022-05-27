@@ -280,6 +280,14 @@ toc:
     title: visual_domain_decathlon
   title: Image classification
 - section:
+  - path: /datasets/catalog/glove100_angular
+    status: nightly
+    title: glove100_angular
+  - path: /datasets/catalog/sift1m
+    status: nightly
+    title: sift1m
+  title: Nearest neighbors
+- section:
   - path: /datasets/catalog/coco
     title: coco
   - path: /datasets/catalog/coco_captions
