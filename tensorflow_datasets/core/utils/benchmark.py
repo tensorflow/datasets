@@ -53,7 +53,8 @@ def benchmark(
   Usage:
 
   ```py
-  ds = tfds.load('mnist', split='train').batch(32).prefetch()
+  ds = tfds.load('mnist', split='train')
+  ds = ds.batch(32).prefetch(buffer_size=tf.data.AUTOTUNE)
   tfds.benchmark(ds, batch_size=32)
   ```
 
