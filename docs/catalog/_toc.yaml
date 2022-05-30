@@ -280,6 +280,9 @@ toc:
     title: visual_domain_decathlon
   title: Image classification
 - section:
+  - path: /datasets/catalog/deep1b
+    status: nightly
+    title: deep1b
   - path: /datasets/catalog/glove100_angular
     status: nightly
     title: glove100_angular
