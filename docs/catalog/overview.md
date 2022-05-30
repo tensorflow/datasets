@@ -176,6 +176,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Nearest neighbors`
 
+*   [`deep1b`](deep1b.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`glove100_angular`](glove100_angular.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`sift1m`](sift1m.md)
