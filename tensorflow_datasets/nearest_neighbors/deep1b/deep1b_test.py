@@ -13,8 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Approximate nearest neighbor datasets."""
+"""deep1b dataset."""
 
-from tensorflow_datasets.nearest_neighbors.deep1b import Deep1b
-from tensorflow_datasets.nearest_neighbors.glove_100_angular import Glove100Angular
-from tensorflow_datasets.nearest_neighbors.sift1m import Sift1m
+from tensorflow_datasets.nearest_neighbors.deep1b import deep1b
+import tensorflow_datasets.public_api as tfds
+
+
+class Deep1bTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for deep1b dataset."""
+  DATASET_CLASS = deep1b.Deep1b
+  SPLITS = {
+      'database': 3,  # Number of fake train example
+      'test': 2,  # Number of fake test example
+  }
+  DL_EXTRACT_RESULT = {'file': 'dummy.hdf5'}
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()
