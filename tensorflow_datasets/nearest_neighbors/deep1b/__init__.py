@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Approximate nearest neighbor datasets."""
+"""deep1b dataset."""
 
-from tensorflow_datasets.nearest_neighbors.deep1b import Deep1b
-from tensorflow_datasets.nearest_neighbors.glove_100_angular import Glove100Angular
-from tensorflow_datasets.nearest_neighbors.sift1m import Sift1m
+from tensorflow_datasets.nearest_neighbors.deep1b.deep1b import Deep1b
