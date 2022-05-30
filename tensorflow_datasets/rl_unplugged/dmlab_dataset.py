@@ -63,6 +63,10 @@ _CITATION = """
 }
 """
 
+_PIXELS_HEIGHT = 72
+_PIXELS_WIDTH = 96
+_PIXELS_SHAPE = (_PIXELS_HEIGHT, _PIXELS_WIDTH, 3)
+
 
 @dataclasses.dataclass
 class BuilderConfig(tfds.core.BuilderConfig):
@@ -89,11 +93,7 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
                 'observation': {
                     'pixels':
                         tfds.features.Image(
-                            shape=(
-                                72,
-                                96,
-                                3,
-                            ),
+                            shape=_PIXELS_SHAPE,
                             dtype=tf.uint8,
                             encoding_format='png'),
                     'last_action':
@@ -153,6 +153,16 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
 
     data = tf.io.parse_single_example(tf_example, feature_description)
 
+    # Dmlab observations are compressed with OpenCV imencode function. Encoding
+    # with imencode and decoding with TF PNG decoder flips the order of the
+    # color channels. Here we flip back the order color of channels from BGR to
+    # RGB:
+    pixels = tf.scan(
+        fn=lambda _, png: tf.reshape(tf.io.decode_png(png), _PIXELS_SHAPE),
+        elems=data['observations_pixels'],
+        initializer=tf.zeros(_PIXELS_SHAPE, dtype=tf.uint8))
+    pixels = tf.reverse(pixels, axis=[-1])
+
     episode = {
         # Episode Metadata
         'episode_id': data['episode_id'],
@@ -160,7 +170,7 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
         'steps': {
             'observation': {
                 'pixels':
-                    data['observations_pixels'],
+                    pixels,
                 'last_action':
                     tf.argmax(
                         data['observations_action'],
