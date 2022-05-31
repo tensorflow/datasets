@@ -127,7 +127,9 @@ def _maybe_iterdir(path: epath.Path) -> Iterator[epath.Path]:
     for f in path.iterdir():
       yield f
   except (
+      OSError,
       FileNotFoundError,
+      PermissionError,
       tf.errors.NotFoundError,
       tf.errors.PermissionDeniedError,
   ) as e:

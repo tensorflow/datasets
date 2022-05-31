@@ -25,6 +25,7 @@ import tempfile
 from typing import Any, Iterator
 from unittest import mock
 
+from etils import epath
 from etils import epy
 import numpy as np
 import tensorflow as tf
@@ -272,7 +273,10 @@ def mock_gfile(**fns: Any) -> Iterator[None]:
   Yields:
     None
   """
+  # Process epath kwargs
+  epath_kwargs = {k: fn for k, fn in fns.items() if k != 'walk'}
 
+  # Process gfile kwargs
   epath_to_gfile_mapping = {
       'open': 'GFile',
   }
@@ -286,7 +290,9 @@ def mock_gfile(**fns: Any) -> Iterator[None]:
     gfile_kwargs[gfile_k] = mocked_fn
 
   with contextlib.ExitStack() as stack:
+    cm_epath = epath.testing.mock_epath(**epath_kwargs)
     cm_gfile = mock_tf('tf.io.gfile', **gfile_kwargs)
+    stack.enter_context(cm_epath)
     stack.enter_context(cm_gfile)
     yield
 
