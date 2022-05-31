@@ -108,7 +108,7 @@ def _load_builder_from_location(name: str,) -> Optional[BuilderToDocument]:
     if not builder:
       logging.error(f'Dataset {dataset_name} not found', exc_info=e)
       return None
-  except tf.errors.PermissionDeniedError as e:
+  except (OSError, tf.errors.PermissionDeniedError) as e:
     logging.error(f'Permission denied for {dataset_name}', exc_info=e)
     tqdm.tqdm.write(f'Warning: Skip dataset {name} due to permission error')
     return None
