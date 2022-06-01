@@ -66,8 +66,8 @@ class _ShardSpec:
     path: The path where to write the shard.
     index_path: The path where to write index of the records in the
       corresponding shard. NOTE: Value for this attribute is always set, but
-        usage depends on whether `write_examples` returned a list of record
-        positions for each example.
+      usage depends on whether `write_examples` returned a list of record
+      positions for each example.
     examples_number: Number of examples in shard.
     file_instructions: Reading instructions.
   """
@@ -238,7 +238,7 @@ class Writer(object):
 
   def __init__(
       self,
-      example_specs,
+      serializer: example_serializer.Serializer,
       filename_template: naming.ShardedFileTemplate,
       hash_salt,
       disable_shuffling: bool,
@@ -247,15 +247,14 @@ class Writer(object):
     """Initializes Writer.
 
     Args:
-      example_specs: spec to build ExampleSerializer.
+      serializer: class that can serialize examples.
       filename_template: template to format sharded filenames.
       hash_salt (str or bytes): salt to hash keys.
       disable_shuffling (bool): Specifies whether to shuffle the records.
       file_format (FileFormat): format of the record files in which the dataset
         should be written in.
     """
-    self._example_specs = example_specs
-    self._serializer = example_serializer.ExampleSerializer(example_specs)
+    self._serializer = serializer
     self._shuffler = shuffle.Shuffler(
         dirpath=filename_template.data_dir,
         hash_salt=hash_salt,
@@ -275,7 +274,7 @@ class Writer(object):
       key (int|bytes): the key associated with the example. Used for shuffling.
       example: the Example to write to the tfrecord file.
     """
-    serialized_example = self._serializer.serialize_example(example)
+    serialized_example = self._serializer.serialize_example(example=example)
     self._shuffler.add(key, serialized_example)
     self._num_examples += 1
 
@@ -318,7 +317,7 @@ class Writer(object):
 
     except shuffle.DuplicatedKeysError as err:
       _raise_error_for_duplicated_keys(err.item1, err.item2,
-                                       self._example_specs)
+                                       self._serializer.example_specs)
 
     # Finalize the iterator to clear-up TQDM
     try:
@@ -352,7 +351,7 @@ class BeamWriter(object):
 
   def __init__(
       self,
-      example_specs,
+      serializer: example_serializer.Serializer,
       filename_template: naming.ShardedFileTemplate,
       hash_salt,
       disable_shuffling: bool,
@@ -365,7 +364,7 @@ class BeamWriter(object):
     "[10,11,10,11]".
 
     Args:
-      example_specs:
+      serializer: class that can serialize examples.
       filename_template: template to format sharded filenames.
       hash_salt: string, the salt to use for hashing of keys.
       disable_shuffling: bool, specifies whether to shuffle the records.
@@ -373,15 +372,14 @@ class BeamWriter(object):
         the dataset will be read/written from.
     """
     self._original_state = dict(
-        example_specs=example_specs,
+        serializer=serializer,
         filename_template=filename_template,
         hash_salt=hash_salt,
         disable_shuffling=disable_shuffling,
         file_format=file_format)
     self._filename_template = filename_template
     self._split_info_path = f"{filename_template.filepath_prefix()}.split_info.json"
-    self._serializer = example_serializer.ExampleSerializer(example_specs)
-    self._example_specs = example_specs
+    self._serializer = serializer
     self._hasher = hashing.Hasher(hash_salt)
     self._split_info = None
     self._file_format = file_format
@@ -420,7 +418,8 @@ class BeamWriter(object):
     # Compare continuous examples
     for ex0, ex1 in zip(examples[:-1], examples[1:]):
       if ex0[0] == ex1[0]:  # Different keys
-        _raise_error_for_duplicated_keys(ex0[1], ex1[1], self._example_specs)
+        _raise_error_for_duplicated_keys(ex0[1], ex1[1],
+                                         self._serializer.example_specs)
     total_size = sum(len(ex[1]) for ex in examples)
     yield beam.pvalue.TaggedOutput(self._OUTPUT_TAG_BUCKETS_LEN_SIZE,
                                    (bucketid, (len(examples), total_size)))

@@ -24,7 +24,6 @@ import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import example_parser
-from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
@@ -208,15 +207,15 @@ class WriterTest(testing.TestCase):
       (8, b'hi'),
   ]
 
-  @mock.patch.object(example_serializer, 'ExampleSerializer',
-                     testing.DummySerializer)
-  def _write(self,
-             to_write,
-             salt='',
-             dataset_name: str = 'foo',
-             split: str = 'train',
-             disable_shuffling=False,
-             file_format=file_adapters.DEFAULT_FILE_FORMAT):
+  def _write(
+      self,
+      to_write,
+      salt: str = '',
+      dataset_name: str = 'foo',
+      split: str = 'train',
+      disable_shuffling=False,
+      file_format=file_adapters.DEFAULT_FILE_FORMAT,
+  ):
     filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
     filename_template = naming.ShardedFileTemplate(
         dataset_name=dataset_name,
@@ -224,7 +223,7 @@ class WriterTest(testing.TestCase):
         filetype_suffix=filetype_suffix,
         data_dir=self.tmp_dir)
     writer = writer_lib.Writer(
-        example_specs='some spec',
+        serializer=testing.DummySerializer('dummy specs'),
         filename_template=filename_template,
         hash_salt=salt,
         disable_shuffling=disable_shuffling,
@@ -311,15 +310,15 @@ class TfrecordsWriterBeamTest(WriterTest):
 
   EMPTY_SPLIT_ERROR = 'Not a single example present in the PCollection!'
 
-  @mock.patch.object(example_serializer, 'ExampleSerializer',
-                     testing.DummySerializer)
-  def _write(self,
-             to_write,
-             dataset_name: str = 'foo',
-             split: str = 'train',
-             salt='',
-             disable_shuffling=False,
-             file_format=file_adapters.DEFAULT_FILE_FORMAT):
+  def _write(
+      self,
+      to_write,
+      salt: str = '',
+      dataset_name: str = 'foo',
+      split: str = 'train',
+      disable_shuffling=False,
+      file_format=file_adapters.DEFAULT_FILE_FORMAT,
+  ):
     filetype_suffix = file_adapters.ADAPTER_FOR_FORMAT[file_format].FILE_SUFFIX
     filename_template = naming.ShardedFileTemplate(
         dataset_name=dataset_name,
@@ -328,7 +327,7 @@ class TfrecordsWriterBeamTest(WriterTest):
         data_dir=self.tmp_dir)
     beam = lazy_imports_lib.lazy_imports.apache_beam
     writer = writer_lib.BeamWriter(
-        example_specs='some spec',
+        serializer=testing.DummySerializer('dummy specs'),
         filename_template=filename_template,
         hash_salt=salt,
         disable_shuffling=disable_shuffling,
