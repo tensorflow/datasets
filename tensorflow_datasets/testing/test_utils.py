@@ -32,6 +32,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
@@ -544,11 +545,12 @@ def mock_kaggle_api(err_msg=None):
     yield
 
 
-class DummySerializer(object):
+class DummySerializer(example_serializer.Serializer):
   """To mock example_serializer.ExampleSerializer."""
 
   def __init__(self, specs):
     del specs
+    super().__init__(example_specs={})
 
   def serialize_example(self, example):
     return bytes(example)

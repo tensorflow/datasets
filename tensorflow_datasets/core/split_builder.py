@@ -24,6 +24,7 @@ import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Union
 
 from absl import logging
+from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
@@ -361,7 +362,8 @@ class SplitBuilder:
         total_num_examples = None
 
     writer = writer_lib.Writer(
-        example_specs=self._features.get_serialized_info(),
+        serializer=example_serializer.ExampleSerializer(
+            self._features.get_serialized_info()),
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
@@ -402,7 +404,8 @@ class SplitBuilder:
     beam = lazy_imports_lib.lazy_imports.apache_beam
 
     beam_writer = writer_lib.BeamWriter(
-        example_specs=self._features.get_serialized_info(),
+        serializer=example_serializer.ExampleSerializer(
+            self._features.get_serialized_info()),
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
