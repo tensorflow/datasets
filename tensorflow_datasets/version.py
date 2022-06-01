@@ -22,10 +22,10 @@ This file is replaced by `version_stable.py` for stable releases
 (`tensorflow-datasets`) on PyPI.
 """
 
-# We follow Semantic Versioning (https://semver.org/)
+# We follow Semantic Versioning (https://semver.org/spec/v2.0.0.html)
 _MAJOR_VERSION = '4'
-_MINOR_VERSION = '5'
-_PATCH_VERSION = '2'
+_MINOR_VERSION = '6'
+_PATCH_VERSION = '0'
 
 __version__ = '.'.join([
     _MAJOR_VERSION,

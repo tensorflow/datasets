@@ -9,6 +9,15 @@ and this project adheres to
 ## [Unreleased]
 
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [4.6.0] - 2022-06-01
+
+### Added
 - Support for community datasets on GCS.
 - [API] `tfds.builder_from_directory` and `tfds.builder_from_directories`, see
   https://www.tensorflow.org/datasets/external_tfrecord#directly_from_folder.
