@@ -47,10 +47,7 @@ def as_path(path: PathLike) -> Path:
 
       Alternatively `tfds.core.Path` is an alias of `epath.Path`.
 
-      Installation: pip install etils[epath]
-      `etils[epath]` will install the `tf.io.gfile` backend from
-      tf-nightly. If you prefer another TF version, use
-      `etils[epath-no-tf]`.
+      Installation: `pip install etils[epath]`
 
       """
 
