@@ -1,6 +1,7 @@
 name: Unittests
 
 on:
+  workflow_dispatch:
   push:
     # Do not trigger tests for documentation or markdown docs.
     paths-ignore:
