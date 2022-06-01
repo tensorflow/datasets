@@ -12,11 +12,6 @@
 # `grounded_scan`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Grounded SCAN (gSCAN) is a synthetic dataset for evaluating compositional
@@ -42,9 +37,7 @@ More information can be found at:
 
     *   `1.0.0`: Initial release.
     *   `1.1.0`: Changed `vector` feature to Text().
-    *   **`2.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Adds the new spatial_relation_splits config.
+    *   **`2.0.0`** (default): Adds the new spatial_relation_splits config.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -291,7 +284,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## grounded_scan/spatial_relation_splits <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## grounded_scan/spatial_relation_splits
 
 *   **Config description**: Examples for spatial relation reasoning.
 

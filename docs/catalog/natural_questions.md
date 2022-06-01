@@ -12,11 +12,6 @@
 # `natural_questions`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 The NQ corpus contains questions from real users, and it requires QA systems to
@@ -69,7 +64,7 @@ journal = {Transactions of the Association of Computational Linguistics}
 ```
 
 
-## natural_questions/default (default config) <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## natural_questions/default (default config)
 
 *   **Config description**: Default natural_questions config
 
@@ -181,7 +176,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## natural_questions/longt5 <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## natural_questions/longt5
 
 *   **Config description**: natural_questions preprocessed as in the longT5
     benchmark
