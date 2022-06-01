@@ -12,10 +12,6 @@
 # `unified_qa`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 The UnifiedQA benchmark consists of 20 main question answering (QA) datasets

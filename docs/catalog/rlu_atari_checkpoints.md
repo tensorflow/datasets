@@ -12,11 +12,6 @@
 # `rlu_atari_checkpoints`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 RL Unplugged is suite of benchmarks for offline reinforcement learning. The RL
@@ -59,9 +54,7 @@ Checkpoints are ordered in time (so checkpoint 0 ran before checkpoint 1).
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Removed redundant clipped reward fields.
+    *   **`1.1.0`** (default): Removed redundant clipped reward fields.
 
 *   **Download size**: `Unknown size`
 

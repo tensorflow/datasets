@@ -12,11 +12,6 @@
 # `cnn_dailymail`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 CNN/DailyMail non-anonymized summarization dataset.
@@ -45,9 +40,7 @@ each highlight, which is the target summary
     *   `3.2.0`: Remove extra space before added sentence period. This shouldn't
         affect ROUGE scores because punctuation is removed.
 
-    *   **`3.3.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Add publisher feature.
+    *   **`3.3.0`** (default): Add publisher feature.
 
 *   **Download size**: `558.32 MiB`
 

@@ -41,7 +41,6 @@ toc:
   - path: /datasets/catalog/voxforge
     title: voxforge (manual)
   - path: /datasets/catalog/xtreme_s
-    status: nightly
     title: xtreme_s
   - path: /datasets/catalog/yes_no
     title: yes_no
@@ -198,7 +197,6 @@ toc:
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted (manual)
   - path: /datasets/catalog/imagenet2012_fewshot
-    status: nightly
     title: imagenet2012_fewshot (manual)
   - path: /datasets/catalog/imagenet2012_multilabel
     title: imagenet2012_multilabel (manual)
@@ -281,13 +279,10 @@ toc:
   title: Image classification
 - section:
   - path: /datasets/catalog/deep1b
-    status: nightly
     title: deep1b
   - path: /datasets/catalog/glove100_angular
-    status: nightly
     title: glove100_angular
   - path: /datasets/catalog/sift1m
-    status: nightly
     title: sift1m
   title: Nearest neighbors
 - section:
@@ -316,10 +311,8 @@ toc:
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
   - path: /datasets/catalog/answer_equivalence
-    status: nightly
     title: answer_equivalence
   - path: /datasets/catalog/asqa
-    status: nightly
     title: asqa
   - path: /datasets/catalog/coqa
     title: coqa
@@ -354,13 +347,10 @@ toc:
   title: Ranking
 - section:
   - path: /datasets/catalog/criteo
-    status: nightly
     title: criteo
   - path: /datasets/catalog/hillstrom
-    status: nightly
     title: hillstrom
   - path: /datasets/catalog/simpte
-    status: nightly
     title: simpte (manual)
   title: Recommendation
 - section:
@@ -371,7 +361,6 @@ toc:
   - path: /datasets/catalog/rlu_atari_checkpoints_ordered
     title: rlu_atari_checkpoints_ordered
   - path: /datasets/catalog/rlu_control_suite
-    status: nightly
     title: rlu_control_suite
   - path: /datasets/catalog/rlu_dmlab_explore_object_rewards_few
     title: rlu_dmlab_explore_object_rewards_few
@@ -384,14 +373,12 @@ toc:
   - path: /datasets/catalog/rlu_dmlab_seekavoid_arena01
     title: rlu_dmlab_seekavoid_arena01
   - path: /datasets/catalog/rlu_locomotion
-    status: nightly
     title: rlu_locomotion
   - path: /datasets/catalog/rlu_rwrl
     title: rlu_rwrl
   title: Rl unplugged
 - section:
   - path: /datasets/catalog/locomotion
-    status: nightly
     title: locomotion
   - path: /datasets/catalog/robosuite_panda_pick_place_can
     title: robosuite_panda_pick_place_can
@@ -402,14 +389,12 @@ toc:
   title: Robomimic
 - section:
   - path: /datasets/catalog/mt_opt
-    status: nightly
     title: mt_opt
   title: Robotics
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
   - path: /datasets/catalog/ble_wind_field
-    status: nightly
     title: ble_wind_field
   - path: /datasets/catalog/cherry_blossoms
     title: cherry_blossoms
@@ -454,7 +439,6 @@ toc:
   - path: /datasets/catalog/titanic
     title: titanic
   - path: /datasets/catalog/web_graph
-    status: nightly
     title: web_graph
   - path: /datasets/catalog/web_nlg
     title: web_nlg
@@ -485,7 +469,6 @@ toc:
   - path: /datasets/catalog/gov_report
     title: gov_report
   - path: /datasets/catalog/media_sum
-    status: nightly
     title: media_sum (manual)
   - path: /datasets/catalog/multi_news
     title: multi_news
@@ -518,7 +501,6 @@ toc:
   - path: /datasets/catalog/assin2
     title: assin2
   - path: /datasets/catalog/beir
-    status: nightly
     title: beir
   - path: /datasets/catalog/blimp
     title: blimp
@@ -577,7 +559,6 @@ toc:
   - path: /datasets/catalog/movie_rationales
     title: movie_rationales
   - path: /datasets/catalog/mrqa
-    status: nightly
     title: mrqa
   - path: /datasets/catalog/multi_nli
     title: multi_nli
@@ -610,7 +591,6 @@ toc:
   - path: /datasets/catalog/schema_guided_dialogue
     title: schema_guided_dialogue
   - path: /datasets/catalog/sci_tail
-    status: nightly
     title: sci_tail
   - path: /datasets/catalog/scicite
     title: scicite
@@ -633,12 +613,10 @@ toc:
   - path: /datasets/catalog/trec
     title: trec
   - path: /datasets/catalog/unified_qa
-    status: nightly
     title: unified_qa
   - path: /datasets/catalog/wiki40b
     title: wiki40b
   - path: /datasets/catalog/wiki_dialog
-    status: nightly
     title: wiki_dialog
   - path: /datasets/catalog/wikiann
     title: wikiann

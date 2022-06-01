@@ -12,11 +12,6 @@
 # `d4rl_mujoco_ant`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 D4RL is an open-source benchmark for offline reinforcement learning. It provides
@@ -38,9 +33,8 @@ to represent steps and episodes.
 
     *   `1.0.0`: Initial release.
     *   `1.1.0`: Added is_last.
-    *   **`1.2.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Updated to take into account the next observation.
+    *   **`1.2.0`** (default): Updated to take into account the next
+        observation.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

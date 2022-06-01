@@ -12,11 +12,6 @@
 # `pass`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Visualization**:
     <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=pass">
     Explore in Know Your Data
@@ -46,9 +41,8 @@ dataset itself. For YFCC-100M see http://www.multimediacommons.org/.
     *   `1.0.0`: Initial release.
     *   `2.0.0`: v2: Removed 472 images from v1 as they contained humans. Also
         added metadata: datetaken and GPS.
-    *   **`3.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        v3: Removed 131 images from v2 as they contained humans/tattos.
+    *   **`3.0.0`** (default): v3: Removed 131 images from v2 as they contained
+        humans/tattos.
 
 *   **Download size**: `Unknown size`
 
