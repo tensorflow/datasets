@@ -448,7 +448,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
 class DummyMnist(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 
-  VERSION = utils.Version('1.0.0')
+  VERSION = utils.Version('3.0.1')
 
   def _info(self):
     return dataset_info.DatasetInfo(

@@ -38,10 +38,9 @@ from tensorflow_datasets.image_classification import mnist
 from google.protobuf import text_format
 
 _TFDS_DIR = utils.tfds_path()
-_INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
-                         "mnist", "3.0.1")
-_INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
-                                   "dataset_info", "mnist_unlabeled", "3.0.1")
+_DATA_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info")
+_INFO_DIR = os.path.join(_DATA_DIR, "mnist", "3.0.1")
+_INFO_DIR_UNLABELED = os.path.join(_DATA_DIR, "mnist_unlabeled", "3.0.1")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
@@ -76,7 +75,7 @@ class DatasetInfoTest(testing.TestCase):
   def setUpClass(cls):
     super(DatasetInfoTest, cls).setUpClass()
     cls._tfds_tmp_dir = testing.make_tmp_dir()
-    cls._builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
+    cls._builder = mnist.MNIST(data_dir=cls._tfds_tmp_dir)
 
   @classmethod
   def tearDownClass(cls):
@@ -89,14 +88,24 @@ class DatasetInfoTest(testing.TestCase):
         FileNotFoundError, "from a directory which does not exist"):
       info.read_from_directory(_NON_EXISTENT_DIR)
 
+  def test_reading_different_version(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    info._identity.version = utils.Version("2.0.0")
+    with pytest.raises(
+        AssertionError,
+        match="The constructed DatasetInfo instance and the restored proto version do not match"
+    ):
+      # The dataset in _INFO_DIR has version 3.0.1 whereas the builder is 2.0.0
+      info.read_from_directory(_INFO_DIR)
+
   def test_reading(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
     info.read_from_directory(_INFO_DIR)
 
     # Assert that we read the file and initialized DatasetInfo.
     self.assertTrue(info.initialized)
-    self.assertEqual("dummy_dataset_shared_generator", info.name)
-    self.assertEqual("dummy_dataset_shared_generator/1.0.0", info.full_name)
+    self.assertEqual("mnist", info.name)
+    self.assertEqual("mnist/3.0.1", info.full_name)
 
     # Test splits are initialized properly.
     split_dict = info.splits
@@ -114,14 +123,12 @@ class DatasetInfoTest(testing.TestCase):
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
-    self.assertEqual(info.module_name, "tensorflow_datasets.testing.test_utils")
+    self.assertEqual(info.module_name,
+                     "tensorflow_datasets.image_classification.mnist")
     self.assertEqual(False, info.disable_shuffling)
 
-    self.assertEqual(info.version, utils.Version("1.0.0"))
-    self.assertEqual(info.release_notes, {
-        "1.0.0": "Release notes 1.0.0",
-        "2.0.0": "Release notes 2.0.0"
-    })
+    self.assertEqual(info.version, utils.Version("3.0.1"))
+    self.assertEqual(info.release_notes, {})
 
   def test_disable_shuffling(self):
     info = dataset_info.DatasetInfo(
@@ -139,8 +146,7 @@ class DatasetInfoTest(testing.TestCase):
 
   def test_writing(self):
     # First read in stuff.
-    mnist_builder = mnist.MNIST(
-        data_dir=tempfile.mkdtemp(dir=self.get_temp_dir()))
+    mnist_builder = mnist.MNIST(data_dir=_DATA_DIR)
 
     info = dataset_info.DatasetInfo(
         builder=mnist_builder, features=mnist_builder.info.features)
@@ -202,7 +208,7 @@ class DatasetInfoTest(testing.TestCase):
       # If fields are not defined, then everything is restored from disk
       restored_info = dataset_info.DatasetInfo(builder=self._builder)
       restored_info.read_from_directory(tmp_dir)
-      self.assertEqual(info.as_proto, restored_info.as_proto)
+      self.assertProtoEquals(info.as_proto, restored_info.as_proto)
 
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # Save it
@@ -231,11 +237,8 @@ class DatasetInfoTest(testing.TestCase):
       # Even though restored_info has been restored, informations defined in
       # the code overwrite informations from the json file.
       self.assertEqual(restored_info.description, "A description")
-      self.assertEqual(restored_info.version, utils.Version("1.0.0"))
-      self.assertEqual(restored_info.release_notes, {
-          "1.0.0": "Release notes 1.0.0",
-          "2.0.0": "Release notes 2.0.0"
-      })
+      self.assertEqual(restored_info.version, utils.Version("3.0.1"))
+      self.assertEqual(restored_info.release_notes, {})
       self.assertEqual(restored_info.supervised_keys,
                        ("input (new)", "output (new)"))
       self.assertEqual(restored_info.homepage, "http://some-location-new")
