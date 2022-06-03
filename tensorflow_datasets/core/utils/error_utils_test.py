@@ -41,13 +41,14 @@ def test_raise_with_multiple_contexts():
       raise ValueError
 
 
-def test_raise_error_if_nested_reraise_with_context():
+def test_do_not_raise_error_if_nested_reraise_with_context():
   with pytest.raises(
-      AttributeError, match='current_context_msg is already set.'):
+      ValueError, match='\n'.join(['Adding context', 'Adding context 2'])):
     with error_utils.reraise_with_context(ValueError):
       error_utils.add_context('Adding context')
       with error_utils.reraise_with_context(ValueError):
         error_utils.add_context('Adding context 2')
+        raise ValueError
 
 
 def test_add_context_outside_contextmanager():
