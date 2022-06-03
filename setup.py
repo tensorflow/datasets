@@ -125,6 +125,7 @@ DATASET_FILES = [
     'image_classification/sun397_tfds_te.txt',
     'image_classification/sun397_tfds_tr.txt',
     'image_classification/sun397_tfds_va.txt',
+    'object_detection/lvis/lvis_classes.txt',
     'object_detection/open_images_classes_all.txt',
     'object_detection/open_images_classes_boxable.txt',
     'object_detection/open_images_classes_trainable.txt',
