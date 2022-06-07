@@ -339,22 +339,28 @@ def test_find_builder_config_code(mock_fs: testing.MockFs):
         for name in ('default_config', 'other_config')
     ]
 
-  mock_fs.add_file('path/to/my_dataset/default_config/0.0.1/features.json')
+  # Old version from before there were configs.
+  mock_fs.add_file('path/to/my_dataset/0.0.1/features.json')
+  mock_fs.add_file('path/to/my_dataset/0.1.0/features.json')
+  mock_fs.add_file('path/to/my_dataset/default_config/0.1.0/features.json')
   mock_fs.add_file('path/to/my_dataset/default_config/1.0.0/features.json')
   mock_fs.add_file('path/to/my_dataset/other_config/1.0.0/features.json')
   mock_fs.add_file('path/to/my_dataset/old_config/0.8.0/features.json')
   mock_fs.add_file('path/to/my_dataset/old_config/1.0.0/features.json')
   mock_fs.add_file('path/to/my_dataset/broken_config/features.json')
-  mock_fs.add_file('path/to/my_dataset/0.0.1/features.json')
 
   # If code can be reached, use it to load the default config name
   # Note that the existing version is loaded, even if the code is at a
   # more recent version.
   assert (_find_builder_dir('my_dataset') ==
           'path/to/my_dataset/default_config/1.0.0')
-  # Explicitly given version with implicit config.
-  assert (_find_builder_dir('my_dataset:0.0.1') ==
-          'path/to/my_dataset/default_config/0.0.1')
+  # Old version from before configs.
+  assert _find_builder_dir('my_dataset:0.0.1') == 'path/to/my_dataset/0.0.1'
+  # Explicitly given version with no config, use folder without config.
+  assert _find_builder_dir('my_dataset:0.1.0') == 'path/to/my_dataset/0.1.0'
+  # Explicitly given version and config, use folder with config.
+  assert (_find_builder_dir('my_dataset/default_config:0.1.0') ==
+          'path/to/my_dataset/default_config/0.1.0')
   # When config is explicitly given, load the last detected version
   assert (_find_builder_dir('my_dataset/other_config') ==
           'path/to/my_dataset/other_config/1.0.0')
