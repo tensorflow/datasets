@@ -1,0 +1,55 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "premise": {
+            "type": "tensorflow_datasets.core.features.translation_feature.Translation",
+            "content": {
+                "languages": [
+                    "ar",
+                    "bg",
+                    "de",
+                    "el",
+                    "en",
+                    "es",
+                    "fr",
+                    "hi",
+                    "ru",
+                    "sw",
+                    "th",
+                    "tr",
+                    "ur",
+                    "vi",
+                    "zh"
+                ]
+            }
+        },
+        "hypothesis": {
+            "type": "tensorflow_datasets.core.features.translation_feature.TranslationVariableLanguages",
+            "content": {
+                "languages": [
+                    "ar",
+                    "bg",
+                    "de",
+                    "el",
+                    "en",
+                    "es",
+                    "fr",
+                    "hi",
+                    "ru",
+                    "sw",
+                    "th",
+                    "tr",
+                    "ur",
+                    "vi",
+                    "zh"
+                ]
+            }
+        },
+        "label": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 3
+            }
+        }
+    }
+}

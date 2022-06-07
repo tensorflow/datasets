@@ -56,7 +56,8 @@ class PASS(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('3.0.0')
   RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
+      '1.0.0':
+          'Initial release.',
       '2.0.0':
           'v2: Removed 472 images from v1 as they contained humans. Also added'
           ' metadata: datetaken and GPS. ',

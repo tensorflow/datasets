@@ -116,7 +116,7 @@ In order to write Apache Beam datasets, you should be familiar with the
 following concepts:
 
 *   Be familiar with the
-    [`tfds` dataset creation guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+    [`tfds` dataset creation guide](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md)
     as most of the content still applies for Beam datasets.
 *   Get an introduction to Apache Beam with the
     [Beam programming guide](https://beam.apache.org/documentation/programming-guide/).
@@ -128,7 +128,7 @@ following concepts:
 ### Instructions
 
 If you are familiar with the
-[dataset creation guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md),
+[dataset creation guide](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md),
 adding a Beam dataset only requires to modify the `_generate_examples` function.
 The function should returns a beam object, rather than a generator:
 

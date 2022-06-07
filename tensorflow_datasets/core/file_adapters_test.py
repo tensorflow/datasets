@@ -58,3 +58,16 @@ def test_read_write(
   builder.download_and_prepare()
   ds = builder.as_dataset(split='train')
   assert list(ds.as_numpy_iterator()) == [{'id': i} for i in range(3)]
+
+
+def test_prase_file_format():
+  assert file_adapters.FileFormat.from_value(
+      'tfrecord') == file_adapters.FileFormat.TFRECORD
+  assert file_adapters.FileFormat.from_value(
+      file_adapters.FileFormat.TFRECORD) == file_adapters.FileFormat.TFRECORD
+  assert file_adapters.FileFormat.from_value(
+      'riegeli') == file_adapters.FileFormat.RIEGELI
+  assert file_adapters.FileFormat.from_value(
+      file_adapters.FileFormat.RIEGELI) == file_adapters.FileFormat.RIEGELI
+  with pytest.raises(ValueError, match='is not a valid FileFormat'):
+    file_adapters.FileFormat.from_value('i do not exist')

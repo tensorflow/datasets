@@ -329,7 +329,7 @@ class Split(str):
 
   See the
   [guide on
-  splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+  splits](https://github.com/tensorflow/datasets/blob/master/docs/splits.md)
   for more information.
   """
 

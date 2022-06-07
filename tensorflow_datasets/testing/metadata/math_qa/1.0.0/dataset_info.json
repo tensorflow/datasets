@@ -1,0 +1,40 @@
+{
+  "citation": "@misc{amini2019mathqa,\n      title={MathQA: Towards Interpretable Math Word Problem Solving with Operation-Based Formalisms},\n      author={Aida Amini and Saadia Gabriel and Peter Lin and Rik Koncel-Kedziorski and Yejin Choi and Hannaneh Hajishirzi},\n      year={2019},\n      eprint={1905.13319},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}",
+  "description": "A large-scale dataset of math word problems and an interpretable neural math problem solver that learns to map problems to operation programs.",
+  "downloadSize": "7302821",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://math-qa.github.io/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.math_qa.math_qa",
+  "name": "math_qa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "22775295",
+      "shardLengths": [
+        "29837"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "3413416",
+      "shardLengths": [
+        "4475"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "2284942",
+      "shardLengths": [
+        "2985"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

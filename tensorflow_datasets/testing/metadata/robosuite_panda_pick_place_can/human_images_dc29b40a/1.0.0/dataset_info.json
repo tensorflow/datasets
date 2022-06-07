@@ -1,0 +1,51 @@
+{
+  "citation": "@misc{google-research, title={RLDS},\nurl={https://github.com/google-research/rlds}, journal={GitHub},\nauthor={S. Ramos, S. Girgin et al.}}",
+  "configDescription": "Human generated dataset, including images with different camera angles in the observation. Note that it may take some time to generate.",
+  "configName": "human_images_dc29b40a",
+  "description": "These datasets have been created with the PickPlaceCan environment of the\n[robosuite robotic arm simulator](https://robosuite.ai/). The human datasets\nwere recorded by a single operator using\nthe [RLDS Creator](https://github.com/google-research/rlds-creator) and a\ngamepad controller.\n\nThe synthetic datasets have been recorded using the\n[EnvLogger library](https://github.com/deepmind/envlogger).\n\nEpisodes consist of 400 steps. In each episode, a tag is\nadded when the task is completed, this tag is stored as part of the custom step\nmetadata.",
+  "downloadSize": "11759150162",
+  "fileFormat": "tfrecord",
+  "moduleName": "tensorflow_datasets.rlds.robosuite_panda_pick_place_can.robosuite_panda_pick_place_can",
+  "name": "robosuite_panda_pick_place_can",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "8090574408",
+      "shardLengths": [
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "2"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

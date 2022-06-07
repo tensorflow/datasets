@@ -32,7 +32,9 @@ to represent steps and episodes.
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.1.0`** (default): Added is_last.
+    *   `1.1.0`: Added is_last.
+    *   **`1.2.0`** (default): Updated to take into account the next
+        observation.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -112,7 +114,7 @@ steps/reward      | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-expert-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-expert-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -195,7 +197,7 @@ steps/reward      | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -278,7 +280,7 @@ steps/reward      | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-expert-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-medium-expert-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -361,7 +363,7 @@ steps/reward      | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-mixed-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-mixed-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -444,7 +446,7 @@ steps/reward      | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-random-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v0-random-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -475,7 +477,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `143.06 MiB`
 
-*   **Dataset size**: `452.55 MiB`
+*   **Dataset size**: `452.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -575,7 +577,7 @@ steps/reward                  | Tensor       |            | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-expert-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-expert-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -606,7 +608,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `144.23 MiB`
 
-*   **Dataset size**: `509.97 MiB`
+*   **Dataset size**: `510.08 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -706,7 +708,7 @@ steps/reward                  | Tensor       |            | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -737,7 +739,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `286.69 MiB`
 
-*   **Dataset size**: `342.18 MiB`
+*   **Dataset size**: `342.46 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -798,7 +800,7 @@ steps/reward                 | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-expert-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-expert-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -829,7 +831,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `84.37 MiB`
 
-*   **Dataset size**: `52.05 MiB`
+*   **Dataset size**: `52.10 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -894,7 +896,7 @@ steps/reward                 | Tensor       |       | tf.float64 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-replay-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-medium-replay-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -925,7 +927,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `278.95 MiB`
 
-*   **Dataset size**: `171.49 MiB`
+*   **Dataset size**: `171.66 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -990,7 +992,7 @@ steps/reward                 | Tensor       |       | tf.float64 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-full-replay-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-full-replay-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -1082,7 +1084,7 @@ steps/reward                 | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-random-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v1-random-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -1111,9 +1113,9 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v2-expert
 
-*   **Download size**: `205.56 MiB`
+*   **Download size**: `219.89 MiB`
 
-*   **Dataset size**: `451.99 MiB`
+*   **Dataset size**: `452.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1155,9 +1157,9 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float32,
-            'qpos': Tensor(shape=(9,), dtype=tf.float32),
-            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+            'action_log_probs': tf.float64,
+            'qpos': Tensor(shape=(9,), dtype=tf.float64),
+            'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
         'is_last': tf.bool,
@@ -1194,9 +1196,9 @@ steps                         | Dataset      |            |            |
 steps/action                  | Tensor       | (6,)       | tf.float32 |
 steps/discount                | Tensor       |            | tf.float32 |
 steps/infos                   | FeaturesDict |            |            |
-steps/infos/action_log_probs  | Tensor       |            | tf.float32 |
-steps/infos/qpos              | Tensor       | (9,)       | tf.float32 |
-steps/infos/qvel              | Tensor       | (9,)       | tf.float32 |
+steps/infos/action_log_probs  | Tensor       |            | tf.float64 |
+steps/infos/qpos              | Tensor       | (9,)       | tf.float64 |
+steps/infos/qvel              | Tensor       | (9,)       | tf.float64 |
 steps/is_first                | Tensor       |            | tf.bool    |
 steps/is_last                 | Tensor       |            | tf.bool    |
 steps/is_terminal             | Tensor       |            | tf.bool    |
@@ -1213,7 +1215,7 @@ steps/reward                  | Tensor       |            | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-expert-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-expert-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -1242,9 +1244,9 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v2-full-replay
 
-*   **Download size**: `278.95 MiB`
+*   **Download size**: `271.91 MiB`
 
-*   **Dataset size**: `171.49 MiB`
+*   **Dataset size**: `171.66 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1263,8 +1265,8 @@ FeaturesDict({
     'algorithm': tf.string,
     'iteration': tf.int32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float64),
-        'discount': tf.float64,
+        'action': Tensor(shape=(6,), dtype=tf.float32),
+        'discount': tf.float32,
         'infos': FeaturesDict({
             'action_log_probs': tf.float64,
             'qpos': Tensor(shape=(9,), dtype=tf.float64),
@@ -1273,8 +1275,8 @@ FeaturesDict({
         'is_first': tf.bool,
         'is_last': tf.bool,
         'is_terminal': tf.bool,
-        'observation': Tensor(shape=(17,), dtype=tf.float64),
-        'reward': tf.float64,
+        'observation': Tensor(shape=(17,), dtype=tf.float32),
+        'reward': tf.float32,
     }),
 })
 ```
@@ -1287,8 +1289,8 @@ Feature                      | Class        | Shape | Dtype      | Description
 algorithm                    | Tensor       |       | tf.string  |
 iteration                    | Tensor       |       | tf.int32   |
 steps                        | Dataset      |       |            |
-steps/action                 | Tensor       | (6,)  | tf.float64 |
-steps/discount               | Tensor       |       | tf.float64 |
+steps/action                 | Tensor       | (6,)  | tf.float32 |
+steps/discount               | Tensor       |       | tf.float32 |
 steps/infos                  | FeaturesDict |       |            |
 steps/infos/action_log_probs | Tensor       |       | tf.float64 |
 steps/infos/qpos             | Tensor       | (9,)  | tf.float64 |
@@ -1296,8 +1298,8 @@ steps/infos/qvel             | Tensor       | (9,)  | tf.float64 |
 steps/is_first               | Tensor       |       | tf.bool    |
 steps/is_last                | Tensor       |       | tf.bool    |
 steps/is_terminal            | Tensor       |       | tf.bool    |
-steps/observation            | Tensor       | (17,) | tf.float64 |
-steps/reward                 | Tensor       |       | tf.float64 |
+steps/observation            | Tensor       | (17,) | tf.float32 |
+steps/reward                 | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1309,7 +1311,7 @@ steps/reward                 | Tensor       |       | tf.float64 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-full-replay-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-full-replay-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -1338,9 +1340,9 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v2-medium
 
-*   **Download size**: `206.94 MiB`
+*   **Download size**: `221.50 MiB`
 
-*   **Dataset size**: `505.47 MiB`
+*   **Dataset size**: `505.58 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1382,9 +1384,9 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float32,
-            'qpos': Tensor(shape=(9,), dtype=tf.float32),
-            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+            'action_log_probs': tf.float64,
+            'qpos': Tensor(shape=(9,), dtype=tf.float64),
+            'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
         'is_last': tf.bool,
@@ -1421,9 +1423,9 @@ steps                         | Dataset      |            |            |
 steps/action                  | Tensor       | (6,)       | tf.float32 |
 steps/discount                | Tensor       |            | tf.float32 |
 steps/infos                   | FeaturesDict |            |            |
-steps/infos/action_log_probs  | Tensor       |            | tf.float32 |
-steps/infos/qpos              | Tensor       | (9,)       | tf.float32 |
-steps/infos/qvel              | Tensor       | (9,)       | tf.float32 |
+steps/infos/action_log_probs  | Tensor       |            | tf.float64 |
+steps/infos/qpos              | Tensor       | (9,)       | tf.float64 |
+steps/infos/qvel              | Tensor       | (9,)       | tf.float64 |
 steps/is_first                | Tensor       |            | tf.bool    |
 steps/is_last                 | Tensor       |            | tf.bool    |
 steps/is_terminal             | Tensor       |            | tf.bool    |
@@ -1440,7 +1442,7 @@ steps/reward                  | Tensor       |            | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -1469,9 +1471,9 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v2-medium-expert
 
-*   **Download size**: `411.91 MiB`
+*   **Download size**: `440.79 MiB`
 
-*   **Dataset size**: `342.17 MiB`
+*   **Dataset size**: `342.45 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1491,9 +1493,9 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float32,
-            'qpos': Tensor(shape=(9,), dtype=tf.float32),
-            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+            'action_log_probs': tf.float64,
+            'qpos': Tensor(shape=(9,), dtype=tf.float64),
+            'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
         'is_last': tf.bool,
@@ -1513,9 +1515,9 @@ steps                        | Dataset      |       |            |
 steps/action                 | Tensor       | (6,)  | tf.float32 |
 steps/discount               | Tensor       |       | tf.float32 |
 steps/infos                  | FeaturesDict |       |            |
-steps/infos/action_log_probs | Tensor       |       | tf.float32 |
-steps/infos/qpos             | Tensor       | (9,)  | tf.float32 |
-steps/infos/qvel             | Tensor       | (9,)  | tf.float32 |
+steps/infos/action_log_probs | Tensor       |       | tf.float64 |
+steps/infos/qpos             | Tensor       | (9,)  | tf.float64 |
+steps/infos/qvel             | Tensor       | (9,)  | tf.float64 |
 steps/is_first               | Tensor       |       | tf.bool    |
 steps/is_last                | Tensor       |       | tf.bool    |
 steps/is_terminal            | Tensor       |       | tf.bool    |
@@ -1532,7 +1534,7 @@ steps/reward                 | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-expert-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-expert-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -1561,9 +1563,9 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v2-medium-replay
 
-*   **Download size**: `84.37 MiB`
+*   **Download size**: `82.32 MiB`
 
-*   **Dataset size**: `52.05 MiB`
+*   **Dataset size**: `52.10 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -1582,8 +1584,8 @@ FeaturesDict({
     'algorithm': tf.string,
     'iteration': tf.int32,
     'steps': Dataset({
-        'action': Tensor(shape=(6,), dtype=tf.float64),
-        'discount': tf.float64,
+        'action': Tensor(shape=(6,), dtype=tf.float32),
+        'discount': tf.float32,
         'infos': FeaturesDict({
             'action_log_probs': tf.float64,
             'qpos': Tensor(shape=(9,), dtype=tf.float64),
@@ -1592,8 +1594,8 @@ FeaturesDict({
         'is_first': tf.bool,
         'is_last': tf.bool,
         'is_terminal': tf.bool,
-        'observation': Tensor(shape=(17,), dtype=tf.float64),
-        'reward': tf.float64,
+        'observation': Tensor(shape=(17,), dtype=tf.float32),
+        'reward': tf.float32,
     }),
 })
 ```
@@ -1606,8 +1608,8 @@ Feature                      | Class        | Shape | Dtype      | Description
 algorithm                    | Tensor       |       | tf.string  |
 iteration                    | Tensor       |       | tf.int32   |
 steps                        | Dataset      |       |            |
-steps/action                 | Tensor       | (6,)  | tf.float64 |
-steps/discount               | Tensor       |       | tf.float64 |
+steps/action                 | Tensor       | (6,)  | tf.float32 |
+steps/discount               | Tensor       |       | tf.float32 |
 steps/infos                  | FeaturesDict |       |            |
 steps/infos/action_log_probs | Tensor       |       | tf.float64 |
 steps/infos/qpos             | Tensor       | (9,)  | tf.float64 |
@@ -1615,8 +1617,8 @@ steps/infos/qvel             | Tensor       | (9,)  | tf.float64 |
 steps/is_first               | Tensor       |       | tf.bool    |
 steps/is_last                | Tensor       |       | tf.bool    |
 steps/is_terminal            | Tensor       |       | tf.bool    |
-steps/observation            | Tensor       | (17,) | tf.float64 |
-steps/reward                 | Tensor       |       | tf.float64 |
+steps/observation            | Tensor       | (17,) | tf.float32 |
+steps/reward                 | Tensor       |       | tf.float32 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1628,7 +1630,7 @@ steps/reward                 | Tensor       |       | tf.float64 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-replay-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-medium-replay-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -1657,7 +1659,7 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v2-random
 
-*   **Download size**: `195.28 MiB`
+*   **Download size**: `206.10 MiB`
 
 *   **Dataset size**: `192.11 MiB`
 
@@ -1679,9 +1681,9 @@ FeaturesDict({
         'action': Tensor(shape=(6,), dtype=tf.float32),
         'discount': tf.float32,
         'infos': FeaturesDict({
-            'action_log_probs': tf.float32,
-            'qpos': Tensor(shape=(9,), dtype=tf.float32),
-            'qvel': Tensor(shape=(9,), dtype=tf.float32),
+            'action_log_probs': tf.float64,
+            'qpos': Tensor(shape=(9,), dtype=tf.float64),
+            'qvel': Tensor(shape=(9,), dtype=tf.float64),
         }),
         'is_first': tf.bool,
         'is_last': tf.bool,
@@ -1701,9 +1703,9 @@ steps                        | Dataset      |       |            |
 steps/action                 | Tensor       | (6,)  | tf.float32 |
 steps/discount               | Tensor       |       | tf.float32 |
 steps/infos                  | FeaturesDict |       |            |
-steps/infos/action_log_probs | Tensor       |       | tf.float32 |
-steps/infos/qpos             | Tensor       | (9,)  | tf.float32 |
-steps/infos/qvel             | Tensor       | (9,)  | tf.float32 |
+steps/infos/action_log_probs | Tensor       |       | tf.float64 |
+steps/infos/qpos             | Tensor       | (9,)  | tf.float64 |
+steps/infos/qvel             | Tensor       | (9,)  | tf.float64 |
 steps/is_first               | Tensor       |       | tf.bool    |
 steps/is_last                | Tensor       |       | tf.bool    |
 steps/is_terminal            | Tensor       |       | tf.bool    |
@@ -1720,7 +1722,7 @@ steps/reward                 | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-random-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/d4rl_mujoco_walker2d-v2-random-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

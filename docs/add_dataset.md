@@ -566,7 +566,7 @@ class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
   # then the tests needs to provide the fake output paths relative to the
   # fake data directory
   DL_EXTRACT_RESULT = {
-      'name1': 'path/to/file1',  # Relative to dummy_data/my_dataset dir.
+      'name1': 'path/to/file1',  # Relative to my_dataset/dummy_data dir.
       'name2': 'file2',
   }
 

@@ -24,7 +24,7 @@ import tensorflow_datasets.public_api as tfds
 class D4rlMujocoHalfcheetah(dataset_builder.D4RLDatasetBuilder):
   """DatasetBuilder for halfcheetah dataset."""
 
-  VERSION = tfds.core.Version('1.1.0')
+  VERSION = tfds.core.Version('1.2.0')
   RELEASE_NOTES = {
       '1.0.0':
           'Initial release.',
@@ -33,6 +33,8 @@ class D4rlMujocoHalfcheetah(dataset_builder.D4RLDatasetBuilder):
           ' reward shape across all the configs.',
       '1.1.0':
           'Added is_last.',
+      '1.2.0':
+          'Updated to take into account the next observation.'
   }
 
   BUILDER_CONFIGS = dataset_builder.MUJOCO_BUILDER_CONFIGS

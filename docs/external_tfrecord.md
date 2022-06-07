@@ -129,7 +129,7 @@ required for features like `len(ds)`, or the
 ### Add metadata files
 
 To automatically add the proper metadata files along your dataset, use
-`tfds.core.write_metadata`:
+`tfds.folder_dataset.write_metadata`:
 
 ```python
 tfds.folder_dataset.write_metadata(

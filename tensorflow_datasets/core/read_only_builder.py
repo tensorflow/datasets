@@ -52,7 +52,7 @@ class ReadOnlyBuilder(
         builder_dir.
 
     Raises:
-      FileNotFoundError: If the builder_dir does not exists.
+      FileNotFoundError: If the builder_dir does not exist.
     """
     builder_dir = os.path.expanduser(builder_dir)
     if not info_proto:
@@ -358,7 +358,7 @@ def _find_builder_dir_single_dir(
     builder_dir = os.fspath(builder_dir)
     if tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):
       return str(builder_dir)
-  except tf.errors.PermissionDeniedError:
+  except (OSError, tf.errors.PermissionDeniedError):
     return None
   return None
 

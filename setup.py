@@ -1,3 +1,18 @@
+# coding=utf-8
+# Copyright 2022 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """tensorflow/datasets is a library of datasets ready to use with TensorFlow.
 
 tensorflow/datasets is a library of public datasets ready to use with
@@ -46,7 +61,7 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
-    'etils[epath-no-tf]',
+    'etils[epath]',
     'numpy',
     'promise',
     'protobuf>=3.12.2',
@@ -110,6 +125,7 @@ DATASET_FILES = [
     'image_classification/sun397_tfds_te.txt',
     'image_classification/sun397_tfds_tr.txt',
     'image_classification/sun397_tfds_va.txt',
+    'object_detection/lvis/lvis_classes.txt',
     'object_detection/open_images_classes_all.txt',
     'object_detection/open_images_classes_boxable.txt',
     'object_detection/open_images_classes_trainable.txt',
@@ -122,6 +138,7 @@ DATASET_FILES = [
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
+    'beir': ['apache_beam'],
     'ble_wind_field': ['gcsfs', 'zarr'],
     'c4': ['apache_beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
@@ -152,6 +169,7 @@ DATASET_EXTRAS = {
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'wider_face': ['Pillow'],
+    'wiki_dialog': ['apache_beam'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
     'wsc273': ['bs4', 'lxml'],
     'youtube_vis': ['pycocotools'],

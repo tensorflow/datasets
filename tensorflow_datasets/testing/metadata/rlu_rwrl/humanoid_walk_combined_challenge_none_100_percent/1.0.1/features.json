@@ -1,0 +1,143 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "steps": {
+            "type": "tensorflow_datasets.core.features.dataset_feature.Dataset",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                    "content": {
+                        "observation": {
+                            "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                            "content": {
+                                "joint_angles": {
+                                    "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "content": {
+                                        "shape": [
+                                            21
+                                        ],
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "com_velocity": {
+                                    "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "content": {
+                                        "shape": [
+                                            3
+                                        ],
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "head_height": {
+                                    "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "content": {
+                                        "shape": [
+                                            1
+                                        ],
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "extremities": {
+                                    "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "content": {
+                                        "shape": [
+                                            12
+                                        ],
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "velocity": {
+                                    "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "content": {
+                                        "shape": [
+                                            27
+                                        ],
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "torso_vertical": {
+                                    "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "content": {
+                                        "shape": [
+                                            3
+                                        ],
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    }
+                                }
+                            }
+                        },
+                        "action": {
+                            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "content": {
+                                "shape": [
+                                    21
+                                ],
+                                "dtype": "float32",
+                                "encoding": "none"
+                            }
+                        },
+                        "reward": {
+                            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "content": {
+                                "shape": [
+                                    1
+                                ],
+                                "dtype": "float32",
+                                "encoding": "none"
+                            }
+                        },
+                        "is_terminal": {
+                            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "is_first": {
+                            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "is_last": {
+                            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "content": {
+                                "shape": [],
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "discount": {
+                            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "content": {
+                                "shape": [
+                                    1
+                                ],
+                                "dtype": "float32",
+                                "encoding": "none"
+                            }
+                        }
+                    }
+                },
+                "length": null
+            }
+        },
+        "episode_return": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "float32",
+                "encoding": "none"
+            }
+        }
+    }
+}

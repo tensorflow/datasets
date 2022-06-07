@@ -1,0 +1,23 @@
+{
+  "citation": "@article{hu2020xtreme,\n      author    = {Junjie Hu and Sebastian Ruder and Aditya Siddhant and Graham Neubig and Orhan Firat and Melvin Johnson},\n      title     = {XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization},\n      journal   = {CoRR},\n      volume    = {abs/2003.11080},\n      year      = {2020},\n      archivePrefix = {arXiv},\n      eprint    = {2003.11080}\n}",
+  "configDescription": "Translated to zh",
+  "configName": "zh",
+  "description": "This dataset contains machine translations of the English PAWS training\ndata. The translations are provided by the XTREME benchmark and cover the following\nlanguages:\n\n* French\n* Spanish\n* German\n* Chinese\n* Japanese\n* Korean\n\nFor further details on PAWS, see the  papers:\nPAWS: Paraphrase Adversaries from Word Scrambling\nat https://arxiv.org/abs/1904.01130\nand\nPAWS-X: A Cross-lingual Adversarial Dataset for Paraphrase Identification\nat  https://arxiv.org/abs/1908.11828\n\nFor details related to XTREME, please refer to:\nXTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization\nat https://arxiv.org/abs/2003.11080",
+  "downloadSize": "22493202",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/xtreme"
+    ]
+  },
+  "name": "xtreme_pawsx",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "13853155",
+      "shardLengths": [
+        "49149"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

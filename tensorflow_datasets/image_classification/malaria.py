@@ -21,10 +21,10 @@ import os
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_URL = "https://ceb.nlm.nih.gov/proj/malaria/cell_images.zip"
+_URL = "https://data.lhncbc.nlm.nih.gov/public/Malaria/cell_images.zip"
 
 _DESCRIPTION = ("""The Malaria dataset contains a total of 27,558 cell images
-with equal instances of parasitized and uninfected cells from the thin blood 
+with equal instances of parasitized and uninfected cells from the thin blood
 smear slide images of segmented cells.""")
 
 _NAMES = ["parasitized", "uninfected"]
@@ -33,10 +33,10 @@ _IMAGE_SHAPE = (None, None, 3)
 
 _CITATION = """\
  @article{rajaraman2018pre,
-  title={Pre-trained convolutional neural networks as feature extractors toward 
+  title={Pre-trained convolutional neural networks as feature extractors toward
   improved malaria parasite detection in thin blood smear images},
   author={Rajaraman, Sivaramakrishnan and Antani, Sameer K and Poostchi, Mahdieh
-  and Silamut, Kamolrat and Hossain, Md A and Maude, Richard J and Jaeger, 
+  and Silamut, Kamolrat and Hossain, Md A and Maude, Richard J and Jaeger,
   Stefan and Thoma, George R},
   journal={PeerJ},
   volume={6},

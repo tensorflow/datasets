@@ -1,0 +1,68 @@
+{
+  "citation": "@inproceedings{zellers2019hellaswag,\n    title={HellaSwag: Can a Machine Really Finish Your Sentence?},\n    author={Zellers, Rowan and Holtzman, Ari and Bisk, Yonatan and Farhadi, Ali and Choi, Yejin},\n    booktitle ={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},\n    year={2019}\n}",
+  "description": "The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context\nand some endings which complete the context.",
+  "downloadSize": "71494896",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://rowanzellers.com/hellaswag/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.hellaswag",
+  "name": "hellaswag",
+  "releaseNotes": {
+    "1.0.0": "Adding separate splits for in-domain and out-of-domain validation/test sets."
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "35827698",
+      "shardLengths": [
+        "39905"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "9279983",
+      "shardLengths": [
+        "10042"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "9057052",
+      "shardLengths": [
+        "10003"
+      ]
+    },
+    {
+      "name": "validation_ind",
+      "numBytes": "4500476",
+      "shardLengths": [
+        "5001"
+      ]
+    },
+    {
+      "name": "validation_ood",
+      "numBytes": "4779507",
+      "shardLengths": [
+        "5041"
+      ]
+    },
+    {
+      "name": "test_ind",
+      "numBytes": "4531623",
+      "shardLengths": [
+        "5002"
+      ]
+    },
+    {
+      "name": "test_ood",
+      "numBytes": "4525429",
+      "shardLengths": [
+        "5001"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

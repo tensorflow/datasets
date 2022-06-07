@@ -18,12 +18,10 @@
 import abc
 import enum
 import os
-
-from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type
+from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, Union
 
 from etils import epath
 import tensorflow as tf
-
 from tensorflow_datasets.core.utils import type_utils
 
 ExamplePositions = List[Any]
@@ -40,6 +38,15 @@ class FileFormat(enum.Enum):
   @property
   def file_suffix(self) -> str:
     return ADAPTER_FOR_FORMAT[self].FILE_SUFFIX
+
+  @classmethod
+  def from_value(cls, file_format: Union[str, 'FileFormat']) -> 'FileFormat':
+    try:
+      return cls(file_format)
+    except ValueError as e:
+      all_values = [f.value for f in cls]
+      raise ValueError(f'{file_format} is not a valid FileFormat! '
+                       f'Valid file formats: {all_values}') from e
 
 
 DEFAULT_FILE_FORMAT = FileFormat.TFRECORD

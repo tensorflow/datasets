@@ -1,0 +1,42 @@
+{
+  "citation": "@inproceedings{dasigi-etal-2021-dataset,\n    title = \"A Dataset of Information-Seeking Questions and Answers Anchored in Research Papers\",\n    author = \"Dasigi, Pradeep  and\n      Lo, Kyle  and\n      Beltagy, Iz  and\n      Cohan, Arman  and\n      Smith, Noah A.  and\n      Gardner, Matt\",\n    booktitle = \"Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies\",\n    month = jun,\n    year = \"2021\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2021.naacl-main.365\",\n    doi = \"10.18653/v1/2021.naacl-main.365\",\n    pages = \"4599--4610\",\n    abstract = \"Readers of academic research papers often read with the goal of answering specific questions. Question Answering systems that can answer those questions can make consumption of the content much more efficient. However, building such tools requires data that reflect the difficulty of the task arising from complex reasoning about claims made in multiple parts of a paper. In contrast, existing information-seeking question answering tfds.core.usually contain questions about generic factoid-type information. We therefore present Qasper, a dataset of 5049 questions over 1585 Natural Language Processing papers. Each question is written by an NLP practitioner who read only the title and abstract of the corresponding paper, and the question seeks information present in the full text. The questions are then answered by a separate set of NLP practitioners who also provide supporting evidence to answers. We find that existing models that do well on other QA tasks do not perform well on answering these questions, underperforming humans by at least 27 F1 points when answering them from entire papers, motivating further research in document-grounded, information-seeking QA, which our dataset is designed to facilitate.\",\n}\n\n@misc{shaham2022scrolls,\n      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},\n      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},\n      year={2022},\n      eprint={2201.03533},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}\nNote that each SCROLLS dataset has its own citation. Please see the source to\nget the correct citation for each contained dataset.",
+  "configDescription": "qasper subset",
+  "configName": "qasper",
+  "description": "SCROLLS: Standardized CompaRison Over Long Language Sequences.\nA suite of natural language tfds.core.that require reasoning over long texts.\nhttps://scrolls-benchmark.com/\nqasper subset",
+  "downloadSize": "20136770",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://allenai.org/project/qasper"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.scrolls.scrolls",
+  "name": "scrolls",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "65654782",
+      "shardLengths": [
+        "2567"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "40277442",
+      "shardLengths": [
+        "1726"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "32055873",
+      "shardLengths": [
+        "1399"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

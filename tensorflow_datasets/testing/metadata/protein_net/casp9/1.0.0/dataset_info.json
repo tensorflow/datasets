@@ -1,0 +1,123 @@
+{
+  "citation": "@article{ProteinNet19,\ntitle = {{ProteinNet}: a standardized data set for machine learning of protein structure},\nauthor = {AlQuraishi, Mohammed},\njournal = {BMC bioinformatics},\nvolume = {20},\nnumber = {1},\npages = {1--10},\nyear = {2019},\npublisher = {BioMed Central}\n}",
+  "configName": "casp9",
+  "description": "ProteinNet is a standardized data set for machine learning of protein structure.\nIt provides protein sequences, structures (secondary and tertiary), multiple\nsequence alignments (MSAs), position-specific scoring matrices (PSSMs), and\nstandardized training / validation / test splits. ProteinNet builds on the\nbiennial CASP assessments, which carry out blind predictions of recently solved\nbut publicly unavailable protein structures, to provide test sets that push the\nfrontiers of computational methodology. It is organized as a series of data\nsets, spanning CASP 7 through 12 (covering a ten-year period), to provide a\nrange of data set sizes that enable assessment of new methods in relatively data\npoor and data rich regimes.",
+  "downloadSize": "7145253890",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/aqlaboratory/proteinnet"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.structured.proteinnet.proteinnet",
+  "name": "protein_net",
+  "splits": [
+    {
+      "name": "validation",
+      "numBytes": "6281707",
+      "shardLengths": [
+        "224"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "3217722",
+      "shardLengths": [
+        "116"
+      ]
+    },
+    {
+      "name": "train_30",
+      "numBytes": "433932383",
+      "shardLengths": [
+        "4243",
+        "4243",
+        "4244",
+        "4243"
+      ]
+    },
+    {
+      "name": "train_50",
+      "numBytes": "580763938",
+      "shardLengths": [
+        "2772",
+        "2771",
+        "2771",
+        "2772",
+        "2772",
+        "2771",
+        "2771",
+        "2772"
+      ]
+    },
+    {
+      "name": "train_70",
+      "numBytes": "689664095",
+      "shardLengths": [
+        "3283",
+        "3283",
+        "3283",
+        "3283",
+        "3282",
+        "3283",
+        "3283",
+        "3283"
+      ]
+    },
+    {
+      "name": "train_90",
+      "numBytes": "790369786",
+      "shardLengths": [
+        "3814",
+        "3814",
+        "3814",
+        "3814",
+        "3815",
+        "3814",
+        "3814",
+        "3814"
+      ]
+    },
+    {
+      "name": "train_95",
+      "numBytes": "805619246",
+      "shardLengths": [
+        "3891",
+        "3891",
+        "3891",
+        "3891",
+        "3891",
+        "3891",
+        "3891",
+        "3891"
+      ]
+    },
+    {
+      "name": "train_100",
+      "numBytes": "1568108820",
+      "shardLengths": [
+        "3772",
+        "3772",
+        "3772",
+        "3772",
+        "3771",
+        "3772",
+        "3772",
+        "3772",
+        "3772",
+        "3772",
+        "3772",
+        "3771",
+        "3772",
+        "3772",
+        "3772",
+        "3772"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "primary",
+    "output": "tertiary"
+  },
+  "version": "1.0.0"
+}

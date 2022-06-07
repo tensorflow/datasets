@@ -51,7 +51,8 @@ are interested in large-scale offline RL models with memory.
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.1.0`** (default): Added is_last.
+    *   `1.1.0`: Added is_last.
+    *   **`1.2.0`** (default): BGR -> RGB fix for pixel observations.
 
 *   **Download size**: `Unknown size`
 
@@ -140,7 +141,7 @@ steps/reward                  | Tensor       |             | tf.float32 |
 
 ## rlu_dmlab_explore_object_rewards_few/training_0 (default config)
 
-*   **Dataset size**: `1020.09 GiB`
+*   **Dataset size**: `847.00 GiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -152,7 +153,7 @@ steps/reward                  | Tensor       |             | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_explore_object_rewards_few-training_0-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_explore_object_rewards_few-training_0-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -181,7 +182,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_explore_object_rewards_few/training_1
 
-*   **Dataset size**: `1.04 TiB`
+*   **Dataset size**: `877.76 GiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -193,7 +194,7 @@ dataButton.addEventListener('click', async () => {
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_explore_object_rewards_few-training_1-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_explore_object_rewards_few-training_1-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -222,7 +223,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_explore_object_rewards_few/training_2
 
-*   **Dataset size**: `1015.51 GiB`
+*   **Dataset size**: `836.43 GiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -234,7 +235,7 @@ dataButton.addEventListener('click', async () => {
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_explore_object_rewards_few-training_2-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_explore_object_rewards_few-training_2-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

@@ -1,0 +1,27 @@
+{
+  "citation": "@misc {paracrawl,\n    title  = \"ParaCrawl\",\n    year   = \"2018\",\n    url    = \"http://paracrawl.eu/download.html.\"\n}",
+  "configDescription": "Translation dataset from English to mt.",
+  "configName": "enmt",
+  "description": "Web-Scale Parallel Corpora for Official European Languages.",
+  "downloadSize": "19028352",
+  "location": {
+    "urls": [
+      "https://paracrawl.eu/releases.html"
+    ]
+  },
+  "name": "para_crawl",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "57004964",
+      "shardLengths": [
+        "195502"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "en",
+    "output": "mt"
+  },
+  "version": "1.2.0"
+}

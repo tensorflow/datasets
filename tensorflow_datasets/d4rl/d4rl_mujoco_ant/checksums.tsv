@@ -9,9 +9,9 @@ http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v1/ant_medium-v1.hd
 http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v1/ant_medium_expert-v1.hdf5	463733878	ece90130bf12d34fa881ae315ad4a201a18b127f990fc84772ffd23e684fd359	ant_medium_expert-v1.hdf5
 http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v1/ant_medium_replay-v1.hdf5	138469125	3acab13873f7c51b8fb7ab1f3024ff0deffa0f0b49db31805b1391ced79b922d	ant_medium_replay-v1.hdf5
 http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v1/ant_random-v1.hdf5	236118204	ed384d3a8cc664bbb7bcabd94a8d07adeb0f7e5ac7f8e6344279766083f64642	ant_random-v1.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_expert-v2.hdf5	333123039	36db6bf41cd06abafd74540d0dcbbb163b26001706ce17f4949c2d030f2ea133	ant_expert-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_full_replay-v2.hdf5	458829203	ceb16622167a9a44ed406a2a41553066eeb29f248157d5652d686944fa965b4d	ant_full_replay-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_medium-v2.hdf5	335663176	1ada99d2ccce14760160c24df3967452d9c5ab8d2d67d121cc544055781badf9	ant_medium-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_medium_expert-v2.hdf5	667959520	7ebcf78fe75885eceee5d3d9c14d86de782ca5ab80f721fdf2b4761bd3ad5c8b	ant_medium_expert-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_medium_replay-v2.hdf5	138469125	0fe15d06d96cdd49cf7a6b5cb7355ac53ac643a5f0b5a60fa34c120e1d600e75	ant_medium_replay-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_random-v2.hdf5	342541874	f9f61c047c16d999e0a772f9d42640ee4ecf93a3da28cdfdd0b64bef3c8413e3	ant_random-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_expert-v2.hdf5	373231677	fa22531ca79ea051006fa48bb652120d2e12c813919c530369a03c2688311b0f	ant_expert-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_full_replay-v2.hdf5	449390167	b95b0a7f34b1d5d1bedfded0f8e9cfc508b59de83cd4cbfb65b18dbd5056f26c	ant_full_replay-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_medium-v2.hdf5	376239825	461c03b9f70f40d66b47608a92965e4ef3642bd9cdb1320d10acc92754167137	ant_medium-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_medium_expert-v2.hdf5	748335217	8cfb64e62d8944b5d9dada5f0cfc13a295fafe0c6ba58b778e32ebf16c95aef1	ant_medium_expert-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_medium_replay-v2.hdf5	136482252	844c4e5743ef51091f2106a3570b257fb149032c4743f8a5f02f40adc3b42a46	ant_medium_replay-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/ant_random-v2.hdf5	384466831	93cc10893eed2b8e17f81d1aa51dc23d27c5ca101a3804249f6bd038c6f06055	ant_random-v2.hdf5

@@ -1,0 +1,40 @@
+{
+  "citation": "@inproceedings{trischler-etal-2017-newsqa,\n    title = \"{N}ews{QA}: A Machine Comprehension Dataset\",\n    author = \"Trischler, Adam  and\n      Wang, Tong  and\n      Yuan, Xingdi  and\n      Harris, Justin  and\n      Sordoni, Alessandro  and\n      Bachman, Philip  and\n      Suleman, Kaheer\",\n    booktitle = \"Proceedings of the 2nd Workshop on Representation Learning for {NLP}\",\n    month = aug,\n    year = \"2017\",\n    address = \"Vancouver, Canada\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/W17-2623\",\n    doi = \"10.18653/v1/W17-2623\",\n    pages = \"191--200\",\n}\n\n@inproceedings{khashabi-etal-2020-unifiedqa,\n    title = \"{UNIFIEDQA}: Crossing Format Boundaries with a Single {QA} System\",\n    author = \"Khashabi, Daniel  and\n      Min, Sewon  and\n      Khot, Tushar  and\n      Sabharwal, Ashish  and\n      Tafjord, Oyvind  and\n      Clark, Peter  and\n      Hajishirzi, Hannaneh\",\n    booktitle = \"Findings of the Association for Computational Linguistics: EMNLP 2020\",\n    month = nov,\n    year = \"2020\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2020.findings-emnlp.171\",\n    doi = \"10.18653/v1/2020.findings-emnlp.171\",\n    pages = \"1896--1907\",\n}\n\nNote that each UnifiedQA dataset has its own citation. Please see the source to\nsee the correct citation for each contained dataset.\"",
+  "configDescription": "NewsQA is a challenging machine comprehension dataset of\nhuman-generated question-answer pairs. Crowdworkers supply questions\nand answers based on a set of news articles from CNN, with answers\nconsisting of spans of text from the corresponding articles.\n",
+  "configName": "newsqa",
+  "description": "The UnifiedQA benchmark consists of 20 main question answering (QA) datasets\n(each may have multiple versions) that target different formats as well as\nvarious complex linguistic phenomena. These datasets are grouped into several\nformats/categories, including: extractive QA, abstractive QA, multiple-choice\nQA, and yes/no QA. Additionally, contrast sets are used for several datasets\n(denoted with \"contrast_sets_\"). These evaluation sets are expert-generated\nperturbations that deviate from the patterns common in the original dataset. For\nseveral datasets that do not come with evidence paragraphs, two variants are\nincluded: one where the datasets are used as-is and another that uses paragraphs\nfetched via an information retrieval system as additional evidence, indicated\nwith \"_ir\" tags.\n\nMore information can be found at: https://github.com/allenai/unifiedqa.",
+  "downloadSize": "297090050",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/allenai/unifiedqa"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.unifiedqa.unifiedqa",
+  "name": "unified_qa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "284045086",
+      "shardLengths": [
+        "18970",
+        "18971",
+        "18971",
+        "18970"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "15780651",
+      "shardLengths": [
+        "4309"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

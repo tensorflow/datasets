@@ -15,7 +15,9 @@
 
 """To serialize Dict or sequence to Example."""
 
+import abc
 import collections
+import dataclasses
 from typing import Any, Mapping
 import numpy as np
 import six
@@ -30,7 +32,27 @@ TreeDict = utils.TreeDict
 Shape = utils.Shape
 
 
-class ExampleSerializer(object):
+@dataclasses.dataclass(frozen=True)
+class Serializer(abc.ABC):
+  """Interface of an example serializer."""
+  example_specs: TreeDict[TensorInfo]
+
+  @abc.abstractmethod
+  def serialize_example(self, example: TreeDict[Any]) -> Any:
+    """Serialize the given example.
+
+    Args:
+      example: Nested `dict` containing the input to serialize. The input
+        structure and values dtype/shape must match the `example_specs` provided
+        at construction.
+
+    Returns:
+      the serialized example.
+    """
+    raise NotImplementedError
+
+
+class ExampleSerializer(Serializer):
   """To serialize examples."""
 
   def __init__(self, example_specs: TreeDict[TensorInfo]):
@@ -40,10 +62,10 @@ class ExampleSerializer(object):
       example_specs: Nested `dict` of `tfds.features.TensorInfo`, corresponding
         to the structure of data to write/read.
     """
-    self._example_specs = example_specs
-    self._flat_example_specs = utils.flatten_nest_dict(self._example_specs)
+    super().__init__(example_specs)
+    self._flat_example_specs = utils.flatten_nest_dict(self.example_specs)
 
-  def get_tf_example(self, example) -> tf.train.Example:
+  def get_tf_example(self, example: TreeDict[Any]) -> tf.train.Example:
     """Creates a TF Example for the given example.
 
     Args:
@@ -57,7 +79,7 @@ class ExampleSerializer(object):
     return _dict_to_tf_example(
         utils.flatten_nest_dict(example), self._flat_example_specs)
 
-  def serialize_example(self, example):
+  def serialize_example(self, example: TreeDict[Any]) -> Any:
     """Serialize the given example.
 
     Args:
@@ -238,7 +260,7 @@ def _extract_ragged_attributes(nested_list,
                                tensor_info: feature_lib.TensorInfo):
   """Extract the values for the tf.RaggedTensor __init__.
 
-  This extract the ragged tensor attributes which allow reconstruct the
+  This extracts the ragged tensor attributes which allow to reconstruct the
   ragged tensor with `tf.RaggedTensor.from_nested_row_lengths`.
 
   Args:
@@ -254,7 +276,7 @@ def _extract_ragged_attributes(nested_list,
 
   flat_values = []
   nested_row_lengths = [[] for _ in range(tensor_info.sequence_rank)]
-  # Reccursivelly append to `flat_values`, `nested_row_lengths`
+  # Recursively append to `flat_values`, `nested_row_lengths`
   _fill_ragged_attribute(
       RaggedExtraction(
           nested_list=nested_list,
@@ -280,7 +302,7 @@ def _fill_ragged_attribute(ext: RaggedExtraction) -> None:
     ext: RaggedExtraction tuple containing the input/outputs
 
   Returns:
-    None, the function mutate instead `ext.nested_row_lengths` and
+    None, the function mutates instead `ext.nested_row_lengths` and
       `ext.flat_values` lists.
   """
   # Register the current sequence length.

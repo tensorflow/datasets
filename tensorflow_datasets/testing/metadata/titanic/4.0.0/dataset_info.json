@@ -1,0 +1,77 @@
+{
+  "citation": "@ONLINE {titanic,\nauthor = \"Frank E. Harrell Jr., Thomas Cason\",\ntitle  = \"Titanic dataset\",\nmonth  = \"oct\",\nyear   = \"2017\",\nurl    = \"https://www.openml.org/d/40945\"\n}",
+  "description": "Dataset describing the survival status of individual passengers on the Titanic. Missing values in the original dataset are represented using ?. Float and int missing values are replaced with -1, string missing values are replaced with 'Unknown'.",
+  "downloadSize": "117743",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://www.openml.org/d/40945"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.structured.titanic",
+  "name": "titanic",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "391760",
+      "shardLengths": [
+        "1309"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "dict": {
+            "dict": {
+              "age": {
+                "featureKey": "age"
+              },
+              "boat": {
+                "featureKey": "boat"
+              },
+              "body": {
+                "featureKey": "body"
+              },
+              "cabin": {
+                "featureKey": "cabin"
+              },
+              "embarked": {
+                "featureKey": "embarked"
+              },
+              "fare": {
+                "featureKey": "fare"
+              },
+              "home.dest": {
+                "featureKey": "home.dest"
+              },
+              "name": {
+                "featureKey": "name"
+              },
+              "parch": {
+                "featureKey": "parch"
+              },
+              "pclass": {
+                "featureKey": "pclass"
+              },
+              "sex": {
+                "featureKey": "sex"
+              },
+              "sibsp": {
+                "featureKey": "sibsp"
+              },
+              "ticket": {
+                "featureKey": "ticket"
+              }
+            }
+          }
+        },
+        {
+          "featureKey": "survived"
+        }
+      ]
+    }
+  },
+  "version": "4.0.0"
+}

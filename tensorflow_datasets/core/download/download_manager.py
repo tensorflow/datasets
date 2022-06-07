@@ -184,7 +184,7 @@ class DownloadManager(object):
         when downloading dataset.
 
     Raises:
-      FileNotFoundError: Raised if the register_checksums_path does not exists.
+      FileNotFoundError: Raised if the register_checksums_path does not exist.
     """
     if register_checksums:
       if not register_checksums_path:

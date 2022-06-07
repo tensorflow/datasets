@@ -1,0 +1,126 @@
+{
+  "citation": "@inproceedings{\n    thakur2021beir,\n    title={{BEIR}: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models},\n    author={Nandan Thakur and Nils Reimers and Andreas R{\"u}ckl{'e} and Abhishek Srivastava and Iryna Gurevych},\n    booktitle={Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 2)},\n    year={2021},\n    url={https://openreview.net/forum?id=wCu6T5xFjeJ}\n}",
+  "configName": "msmarco",
+  "description": "BEIR is a heterogeneous benchmark containing diverse IR tasks. It also provides\na common and easy framework for evaluation of your NLP-based retrieval models\nwithin the benchmark.",
+  "downloadSize": "1082258632",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/beir-cellar/beir"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.beir.beir",
+  "name": "beir",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "query",
+      "numBytes": "94477027",
+      "shardLengths": [
+        "509962"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "passage",
+      "numBytes": "4467006831",
+      "shardLengths": [
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153",
+        "138154",
+        "138153"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "288898649",
+      "shardLengths": [
+        "129118",
+        "129118",
+        "129118",
+        "129118"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "3995200",
+      "shardLengths": [
+        "7433"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "5007399",
+      "shardLengths": [
+        "9139"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

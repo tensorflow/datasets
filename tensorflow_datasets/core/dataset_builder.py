@@ -22,24 +22,24 @@ import inspect
 import json
 import os
 import sys
+import typing
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, Union
 
 from absl import logging
 from etils import epath
 import six
 import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import reader as reader_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import tf_compat
-from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
@@ -47,8 +47,9 @@ from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
-
 import termcolor
+if typing.TYPE_CHECKING:
+  from apache_beam.runners import runner
 
 Tree = type_utils.Tree
 TreeDict = type_utils.TreeDict
@@ -172,15 +173,15 @@ class DatasetBuilder(registered.RegisteredDataset):
     Args:
       data_dir: directory to read/write data. Defaults to the value of the
         environment variable TFDS_DATA_DIR, if set, otherwise falls back to
-        "~/tensorflow_datasets".
+        datasets are stored.
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
-      version: Optional version at which to load the dataset. An error is
-        raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
-          The special value "experimental_latest" will use the highest version,
-          even if not default. This is not recommended unless you know what you
-          are doing, as the version could be broken.
+      version: Optional version at which to load the dataset. An error is raised
+        if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'. The
+        special value "experimental_latest" will use the highest version, even
+        if not default. This is not recommended unless you know what you are
+        doing, as the version could be broken.
     """
     if data_dir:
       data_dir = os.fspath(data_dir)  # Pathlib -> str
@@ -201,7 +202,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   @utils.classproperty
   @classmethod
   @utils.memoize()
-  def code_path(cls) -> epath.Path:
+  def code_path(cls) -> Optional[epath.Path]:
     """Returns the path to the file where the Dataset class is located.
 
     Note: As the code can be run inside zip file. The returned value is
@@ -230,7 +231,13 @@ class DatasetBuilder(registered.RegisteredDataset):
           return path.joinpath(*modules[1:])
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
     # equivalent to the above return.
-    return epath.Path(inspect.getfile(cls))
+    try:
+      filepath = inspect.getfile(cls)
+    except TypeError:
+      # Could happen when the class is defined in Colab.
+      return None
+    else:
+      return epath.Path(filepath)
 
   def __getstate__(self):
     return self._original_state
@@ -257,7 +264,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         for v in [self.canonical_version] + self.supported_versions
     ]
 
-  def _pick_version(self, requested_version):
+  def _pick_version(self, requested_version) -> utils.Version:
     """Returns utils.Version instance, or raise AssertionError."""
     # Validate that `canonical_version` is correctly defined
     assert self.canonical_version
@@ -273,7 +280,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise AssertionError(msg)
 
   @property
-  def version(self):
+  def version(self) -> utils.Version:
     return self._version
 
   @property
@@ -284,7 +291,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return self.RELEASE_NOTES
 
   @property
-  def data_dir(self):
+  def data_dir(self) -> str:
     return self._data_dir
 
   @property
@@ -294,11 +301,13 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @utils.classproperty
   @classmethod
-  def _checksums_path(cls) -> epath.Path:
+  def _checksums_path(cls) -> Optional[epath.Path]:
     """Returns the checksums path."""
     # Used:
     # * To load the checksums (in url_infos)
     # * To save the checksums (in DownloadManager)
+    if not cls.code_path:
+      return None
     new_path = cls.code_path.parent / "checksums.tsv"
     # Checksums of legacy datasets are located in a separate dir.
     legacy_path = utils.tfds_path() / "url_checksums" / f"{cls.name}.txt"
@@ -322,7 +331,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Search for the url_info file.
     checksums_path = cls._checksums_path
     # If url_info file is found, load the urls
-    if checksums_path.exists():
+    if checksums_path and checksums_path.exists():
       return download.checksums.load_url_infos(checksums_path)
     else:
       return None
@@ -347,7 +356,13 @@ class DatasetBuilder(registered.RegisteredDataset):
           f" {type(info)}.")
     return info
 
-  def download_and_prepare(self, *, download_dir=None, download_config=None):
+  def download_and_prepare(
+      self,
+      *,
+      download_dir: Optional[str] = None,
+      download_config: Optional[download.DownloadConfig] = None,
+      file_format: Union[None, str, file_adapters.FileFormat] = None,
+  ) -> None:
     """Downloads and prepares dataset for reading.
 
     Args:
@@ -355,6 +370,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         to "~/tensorflow-datasets/downloads".
       download_config: `tfds.download.DownloadConfig`, further configuration for
         downloading and preparing dataset.
+      file_format: optional `str` or `file_adapters.FileFormat`, format of the
+        record files in which the dataset will be written.
 
     Raises:
       IOError: if there is not enough disk space available.
@@ -443,6 +460,11 @@ class DatasetBuilder(registered.RegisteredDataset):
           default_config_name=self.BUILDER_CONFIGS[0].name,
       )
 
+    # If the file format was specified, set it in the info such that it is used
+    # to generate the files.
+    if file_format:
+      self.info.set_file_format(file_format, override=True)
+
     # Create a tmp dir and rename to self._data_dir on successful exit.
     with utils.incomplete_dir(self._data_dir) as tmp_data_dir:
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
@@ -456,12 +478,10 @@ class DatasetBuilder(registered.RegisteredDataset):
               local_dataset_dir=self._data_dir)
           self.info.read_from_directory(self._data_dir)
         else:
-          # Old version of TF are not os.PathLike compatible
-          with tf_compat.mock_gfile_pathlike():
-            self._download_and_prepare(
-                dl_manager=dl_manager,
-                download_config=download_config,
-            )
+          self._download_and_prepare(
+              dl_manager=dl_manager,
+              download_config=download_config,
+          )
 
           # NOTE: If modifying the lines below to put additional information in
           # DatasetInfo, you'll likely also want to update
@@ -532,9 +552,9 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     Args:
       split: Which split of the data to load (e.g. `'train'`, `'test'`,
-        `['train', 'test']`, `'train[80%:]'`,...). See our
-        [split API guide](https://www.tensorflow.org/datasets/splits). If
-          `None`, will return all splits in a `Dict[Split, tf.data.Dataset]`.
+        `['train', 'test']`, `'train[80%:]'`,...). See our [split API
+        guide](https://www.tensorflow.org/datasets/splits). If `None`, will
+        return all splits in a `Dict[Split, tf.data.Dataset]`.
       batch_size: `int`, batch size. Note that variable-length features will be
         0-padded if `batch_size` is set. Users that want more custom behavior
         should use `batch_size=None` and use the `tf.data` API to construct a
@@ -545,8 +565,8 @@ class DatasetBuilder(registered.RegisteredDataset):
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
         customized feature keys need to be present. See [the
-          guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
-            for more info.
+        guide](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)
+        for more info.
       read_config: `tfds.ReadConfig`, Additional options to configure the input
         pipeline (e.g. seed, num parallel reads,...).
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset` will have
@@ -589,13 +609,13 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _build_single_dataset(
       self,
-      split,
-      shuffle_files,
-      batch_size,
+      split: splits_lib.Split,
+      batch_size: Optional[int],
+      shuffle_files: bool,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
       read_config: read_config_lib.ReadConfig,
-      as_supervised,
-  ):
+      as_supervised: bool,
+  ) -> tf.data.Dataset:
     """as_dataset for a single split."""
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
@@ -648,7 +668,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       return tf_compat.get_single_element(ds)
     return ds
 
-  def _should_cache_ds(self, split, shuffle_files, read_config):
+  def _should_cache_ds(self, split, shuffle_files, read_config) -> bool:
     """Returns True if TFDS should auto-cache the dataset."""
     # The user can explicitly opt-out from auto-caching
     if not read_config.try_autocache:
@@ -686,7 +706,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # If the dataset satisfy all the right conditions, activate autocaching.
     return True
 
-  def _relative_data_dir(self, with_version=True):
+  def _relative_data_dir(self, with_version: bool = True) -> str:
     """Relative path of this dataset in data_dir."""
     builder_data_dir = self.name
     builder_config = self._builder_config
@@ -698,7 +718,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     version_data_dir = os.path.join(builder_data_dir, str(self._version))
     return version_data_dir
 
-  def _build_data_dir(self, given_data_dir):
+  def _build_data_dir(self, given_data_dir: Optional[str]):
     """Return the data directory for the current version.
 
     Args:
@@ -748,12 +768,12 @@ class DatasetBuilder(registered.RegisteredDataset):
           data_dir)
     return default_data_dir, data_dir
 
-  def _log_download_done(self):
+  def _log_download_done(self) -> None:
     msg = (f"Dataset {self.name} downloaded and prepared to {self._data_dir}. "
            "Subsequent calls will reuse this data.")
     termcolor.cprint(msg, attrs=["bold"])
 
-  def _log_download_bytes(self):
+  def _log_download_bytes(self) -> None:
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
@@ -768,7 +788,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   @abc.abstractmethod
   @utils.docs.doc_private
-  def _info(self):
+  def _info(self) -> dataset_info.DatasetInfo:
     """Returns the `tfds.core.DatasetInfo` object.
 
     This function is called once and the result is cached for all
@@ -780,7 +800,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _download_and_prepare(self, dl_manager, download_config=None):
+  def _download_and_prepare(
+      self,
+      dl_manager: download.DownloadManager,
+      download_config: Optional[download.DownloadConfig] = None,
+  ) -> None:
     """Downloads and prepares dataset for reading.
 
     Internal implementation to overwrite when inheriting from DatasetBuilder.
@@ -823,7 +847,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     """
     raise NotImplementedError
 
-  def _make_download_manager(self, download_dir, download_config):
+  def _make_download_manager(
+      self,
+      download_dir,
+      download_config,
+  ) -> download.DownloadManager:
     """Creates a new download manager object."""
     download_dir = (
         download_dir or os.path.join(self._data_dir_root, "downloads"))
@@ -855,11 +883,11 @@ class DatasetBuilder(registered.RegisteredDataset):
     )
 
   @property
-  def builder_config(self):
+  def builder_config(self) -> Optional[Any]:
     """`tfds.core.BuilderConfig` for this builder."""
     return self._builder_config
 
-  def _create_builder_config(self, builder_config):
+  def _create_builder_config(self, builder_config) -> Optional[BuilderConfig]:
     """Create and validate BuilderConfig object."""
     if builder_config is None and self.BUILDER_CONFIGS:
       builder_config = self.BUILDER_CONFIGS[0]
@@ -954,7 +982,7 @@ class FileReaderBuilder(DatasetBuilder):
       example_specs = self._example_specs
       decoders = decoders  # pylint: disable=self-assigning-variable
 
-    reader = tfrecords_reader.Reader(
+    reader = reader_lib.Reader(
         self._data_dir,
         example_specs=example_specs,
         file_format=self.info.file_format,
@@ -1110,6 +1138,16 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     """
     raise NotImplementedError()
 
+  def _process_pipeline_result(
+      self, pipeline_result: "runner.PipelineResult") -> None:
+    """Processes the result of the beam pipeline if we used one.
+
+    This can be used to (e.g) write beam counters to a file.
+    Args:
+      pipeline_result: PipelineResult returned by beam.Pipeline.run().
+    """
+    return
+
   def _download_and_prepare(
       self,
       dl_manager: download.DownloadManager,
@@ -1131,7 +1169,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     # By auto-detecting Beam, the user only has to change `_generate_examples`
     # to go from non-beam to beam dataset:
     # https://www.tensorflow.org/datasets/beam_datasets#instructions
-    with split_builder.maybe_beam_pipeline():
+    with split_builder.maybe_beam_pipeline() as maybe_pipeline_proxy:
       # If the signature has a `pipeline` kwargs, create the pipeline now and
       # forward it to `self._split_generators`
       # We add this magic because the pipeline kwargs is only used by c4 and
@@ -1184,6 +1222,10 @@ class GeneratorBasedBuilder(FileReaderBuilder):
             disable_shuffling=self.info.disable_shuffling,
         )
         split_info_futures.append(future)
+
+    # Process the result of the beam pipeline.
+    if maybe_pipeline_proxy._beam_pipeline:  # pylint:disable=protected-access
+      self._process_pipeline_result(pipeline_result=maybe_pipeline_proxy.result)
 
     # Finalize the splits (after apache beam completed, if it was used)
     split_infos = [future.result() for future in split_info_futures]

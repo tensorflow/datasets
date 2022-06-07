@@ -17,7 +17,6 @@
 
 # pylint: disable=g-import-not-at-top,g-direct-tensorflow-import
 
-import contextlib
 import distutils.version
 import functools
 import os
@@ -107,48 +106,3 @@ def _make_pathlike_fn(fn, nb_path_arg=1):
     return fn(*args, **kwargs)
 
   return new_fn
-
-
-@contextlib.contextmanager
-def mock_gfile_pathlike():
-  """Contextmanager which patch the `tf.io.gfile` API to be PathLike compatible.
-
-  Before TF 2.4, GFile API is not PathLike compatible.
-  After TF2.4, this function is a no-op.
-
-  Yields:
-    None
-  """
-  import tensorflow as tf  # pylint: disable=import-outside-toplevel
-  import tensorflow_datasets.testing as tfds_test  # pytype: disable=import-error
-
-  class GFile(tf.io.gfile.GFile):
-
-    def __init__(self, fpath, *args, **kwargs):
-      super().__init__(os.fspath(fpath), *args, **kwargs)
-
-  tf_version = distutils.version.LooseVersion(tf.__version__)
-  min_tf_version = distutils.version.LooseVersion("2.4.0")
-  if tf_version >= min_tf_version:
-    yield  # No-op for recent TF versions
-  else:  # Legacy TF, patch TF to restore PathLike compatibility
-    with contextlib.ExitStack() as stack:
-      for fn_name, nb_path_arg in [
-          ("copy", 2),  # Use str, as tf.io.gfile.copy.__name__ == 'copy_v2'
-          ("exists", 1),
-          ("glob", 1),
-          ("isdir", 1),
-          ("listdir", 1),
-          ("makedirs", 1),
-          ("mkdir", 1),
-          ("remove", 1),
-          ("rename", 2),
-          ("rmtree", 1),
-          ("stat", 1),
-          ("walk", 1),
-      ]:
-        fn = getattr(tf.io.gfile, fn_name)
-        new_fn = _make_pathlike_fn(fn, nb_path_arg)
-        stack.enter_context(tfds_test.mock_tf(f"tf.io.gfile.{fn_name}", new_fn))
-      stack.enter_context(tfds_test.mock_tf("tf.io.gfile.GFile", GFile))
-      yield

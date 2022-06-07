@@ -280,6 +280,8 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
       else:
         counter("normal_csv_files").inc()
         f = tf.io.gfile.GFile(filename, "r")
+      # Limit to 100 MB. Value must be smaller than the C long maximum value.
+      csv.field_size_limit(sys.maxsize)
       return csv.reader(f, delimiter="\t")
 
     def _read_pixel_rows(filename):

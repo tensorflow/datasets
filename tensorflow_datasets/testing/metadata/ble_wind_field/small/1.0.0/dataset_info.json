@@ -1,0 +1,28 @@
+{
+  "citation": "@software{ble2021,\nauthor = {Greaves, Joshua and Candido, Salvatore and Dumoulin, Vincent and Goroshin, Ross and Ponda, Sameera S. and Bellemare, Marc G. and Castro, Pablo Samuel},\nmonth = {12},\ntitle = {{Balloon Learning Environment}},\nurl = {https://github.com/google/balloon-learning-environment},\nversion = {1.0.0},\nyear = {2021}\n}\n\nHersbach, H., Bell, B., Berrisford, P., Hirahara, S., Hor\u00e1nyi, A.,\nMu\u00f1oz\u2010Sabater, J., Nicolas, J., Peubey, C., Radu, R., Schepers, D., Simmons, A.,\nSoci, C., Abdalla, S., Abellan, X., Balsamo, G., Bechtold, P., Biavati, G.,\nBidlot, J., Bonavita, M., De Chiara, G., Dahlgren, P., Dee, D., Diamantakis, M.,\nDragani, R., Flemming, J., Forbes, R., Fuentes, M., Geer, A., Haimberger, L.,\nHealy, S., Hogan, R.J., H\u00f3lm, E., Janiskov\u00e1, M., Keeley, S., Laloyaux, P.,\nLopez, P., Lupu, C., Radnoti, G., de Rosnay, P., Rozum, I., Vamborg, F.,\nVillaume, S., Th\u00e9paut, J-N. (2017): Complete ERA5: Fifth generation of ECMWF\natmospheric reanalyses of the global climate. Copernicus Climate Change Service\n(C3S) Data Store (CDS). (Accessed on 01-04-2021)",
+  "configDescription": "Small sample of 256 fields from the dataset.",
+  "configName": "small",
+  "description": "Historical wind field dataset for the Balloon Learning Environment.\n\n4D wind fields, where the dimensions are latitude, longitude, altitude, and\ntime. Each entry contains two float values (_u_ and _v_) which indicate the wind\ndirection and magnitude at the specified location, altitude, and time.\n\nAcknowledgements:\n\nHersbach, H., Bell, B., Berrisford, P., Hirahara, S., Hor\u00e1nyi, A.,\nMu\u00f1oz\u2010Sabater, J., Nicolas, J., Peubey, C., Radu, R., Schepers, D., Simmons, A.,\nSoci, C., Abdalla, S., Abellan, X., Balsamo, G., Bechtold, P., Biavati, G.,\nBidlot, J., Bonavita, M., De Chiara, G., Dahlgren, P., Dee, D., Diamantakis, M.,\nDragani, R., Flemming, J., Forbes, R., Fuentes, M., Geer, A., Haimberger, L.,\nHealy, S., Hogan, R.J., H\u00f3lm, E., Janiskov\u00e1, M., Keeley, S., Laloyaux, P.,\nLopez, P., Lupu, C., Radnoti, G., de Rosnay, P., Rozum, I., Vamborg, F.,\nVillaume, S., Th\u00e9paut, J-N. (2017): Complete ERA5: Fifth generation of ECMWF\natmospheric reanalyses of the global climate. Copernicus Climate Change Service\n(C3S) Data Store (CDS). (Accessed on 01-04-2021)",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/google/balloon-learning-environment"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.structured.ble_wind_field.ble_wind_field",
+  "name": "ble_wind_field",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "75404902",
+      "shardLengths": [
+        "256"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

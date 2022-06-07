@@ -9,9 +9,9 @@ http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v1/walker2d_medium-
 http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v1/walker2d_medium_expert-v1.hdf5	300621097	f16bc00b6905f08d096a2b235f1c7ba73389db4f04e968a622c8ad11492fcf2f	walker2d_medium_expert-v1.hdf5
 http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v1/walker2d_medium_replay-v1.hdf5	88471563	dd22a299855eb7327944f946053c060ff37c0384e3b1be8bc90f27a2535ff380	walker2d_medium_replay-v1.hdf5
 http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v1/walker2d_random-v1.hdf5	138787195	82135416af2ce85527ad513e2c055d07e4e40f6288b19b24921d52daf6c86232	walker2d_random-v1.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_expert-v2.hdf5	215544301	3bab88d5bdb2a4538292d48b2b115e6d4d4f545ca9f5d7d4b122b7acb216f954	walker2d_expert-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_full_replay-v2.hdf5	292503698	ac7694dc0a7a5e25cda2f8d8f05fd9d02481e38aad1420ecc2e52f3b728f32cd	walker2d_full_replay-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_medium-v2.hdf5	216994829	0eef89d8ed8debcdbbf778f034c1cca6fb7376dfaecb8cfdeb40542596cfe873	walker2d_medium-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_medium_expert-v2.hdf5	431922429	089d57c3cbeddfb40defd9f2fb7c54ae833192f11f3ea4948dea8d1ecb7c39b2	walker2d_medium_expert-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_medium_replay-v2.hdf5	88471563	dc45753a920d89980b01ae03cc1aa30644c773f9a8ac37184e0141cfde9caade	walker2d_medium_replay-v2.hdf5
-http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_random-v2.hdf5	204760763	f868e2c1a7ab68083c3c8e9addeeabd6e8f0792362de14be82f2b9c20c83cc5b	walker2d_random-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_expert-v2.hdf5	230567195	2985dc3d436a8baa10e8f43f946fe1d7c6337a4e4fbc65def70618093b18c59a	walker2d_expert-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_full_replay-v2.hdf5	285115514	f2720f9d27b2acef6ec9a7d9ad3b80b6c2078ad4467cee668a81e3b3c80bcf2a	walker2d_full_replay-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_medium-v2.hdf5	232254996	cf00f43add04c17fdfc2958dd581dea0851b2e5bedbe6fda073758a8f841aeda	walker2d_medium-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_medium_expert-v2.hdf5	462197079	6b8d7f868c45bbaedf460be797fb7271b46dee6ebe45fe7a64319f2005b59a04	walker2d_medium_expert-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_medium_replay-v2.hdf5	86323963	e75de96a4f77acf7d4e0d6fdf0d7ccb177c26c44bb4388e4fd99f543ccfa18db	walker2d_medium_replay-v2.hdf5
+http://rail.eecs.berkeley.edu/datasets/offline_rl/gym_mujoco_v2/walker2d_random-v2.hdf5	216109364	4e863bb6090cf4a461548bd470564b32f1ae5b32ef3085f816b2ede7f092e7fa	walker2d_random-v2.hdf5

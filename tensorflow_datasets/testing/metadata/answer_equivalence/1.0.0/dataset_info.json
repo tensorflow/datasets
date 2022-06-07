@@ -1,0 +1,67 @@
+{
+  "citation": "@article{bulian-etal-2022-tomayto,\n      title={Tomayto, Tomahto. Beyond Token-level Answer Equivalence for Question Answering Evaluation},\n      author={Jannis Bulian and Christian Buck and Wojciech Gajewski and Benjamin Boerschinger and Tal Schuster},\n      year={2022},\n      eprint={2202.07654},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}",
+  "description": "The Answer Equivalence Dataset contains human ratings on model predictions from\nseveral models on the SQuAD dataset. The ratings establish whether the predicted\nanswer is 'equivalent' to the gold answer (taking into account both question and\ncontext).\n\nMore specifically, by 'equivalent' we mean that the predicted answer contains at\nleast the same information as the gold answer and does not add superfluous\ninformation. The dataset contains annotations for:\n  * predictions from BiDAF on SQuAD dev\n  * predictions from XLNet on SQuAD dev\n  * predictions from Luke on SQuAD dev\n  * predictions from Albert on SQuAD training, dev and test examples",
+  "downloadSize": "48085597",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/google-research-datasets/answer-equivalence-dataset"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.question_answering.answer_equivalence.answer_equivalence",
+  "name": "answer_equivalence",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "10249415",
+      "shardLengths": [
+        "9090"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "ae_dev",
+      "numBytes": "5503515",
+      "shardLengths": [
+        "4446"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "ae_test",
+      "numBytes": "10800597",
+      "shardLengths": [
+        "9724"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev_xlnet",
+      "numBytes": "9131663",
+      "shardLengths": [
+        "7932"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev_luke",
+      "numBytes": "5266304",
+      "shardLengths": [
+        "4590"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev_bidaf",
+      "numBytes": "8588058",
+      "shardLengths": [
+        "7522"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

@@ -1,0 +1,38 @@
+{
+  "citation": "@inproceedings{dolan2005automatically,\n  title={Automatically constructing a corpus of sentential paraphrases},\n  author={Dolan, William B and Brockett, Chris},\n  booktitle={Proceedings of the Third International Workshop on Paraphrasing (IWP2005)},\n  year={2005}\n}\n@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
+  "configDescription": "The Microsoft Research Paraphrase Corpus (Dolan & Brockett, 2005) is a corpus of\nsentence pairs automatically extracted from online news sources, with human annotations\nfor whether the sentences in the pair are semantically equivalent.",
+  "configName": "mrpc",
+  "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
+  "downloadSize": "1494541",
+  "location": {
+    "urls": [
+      "https://www.microsoft.com/en-us/download/details.aspx?id=52398"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.glue",
+  "name": "glue",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "1147455",
+      "shardLengths": [
+        "3668"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "128553",
+      "shardLengths": [
+        "408"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "553558",
+      "shardLengths": [
+        "1725"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

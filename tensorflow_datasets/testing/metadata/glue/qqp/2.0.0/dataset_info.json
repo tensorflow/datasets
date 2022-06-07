@@ -1,0 +1,38 @@
+{
+  "citation": "@online{WinNT,\n  author = {Iyer, Shankar and Dandekar, Nikhil and Csernai, Kornel},\n  title = {First Quora Dataset Release: Question Pairs},\n  year = 2017,\n  url = {https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs},\n  urldate = {2019-04-03}\n}\n@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
+  "configDescription": "The Quora Question Pairs2 dataset is a collection of question pairs from the\ncommunity question-answering website Quora. The task is to determine whether a\npair of questions are semantically equivalent.",
+  "configName": "qqp",
+  "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
+  "downloadSize": "41696084",
+  "location": {
+    "urls": [
+      "https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.glue",
+  "name": "glue",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "70312860",
+      "shardLengths": [
+        "363846"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "7795978",
+      "shardLengths": [
+        "40430"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "79563053",
+      "shardLengths": [
+        "390965"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

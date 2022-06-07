@@ -120,8 +120,7 @@ def parse_builder_name_kwargs(
     **builder_kwargs: Builder kwargs
 
   Returns:
-    ns_name: Dataset namespace, or None
-    ds_name: Dataset name
+    ns_name: DatasetName object for the given dataset name
     builder_kwargs: Builder kwargs (version, config, data_dir,...)
   """
   name, parsed_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
@@ -469,7 +468,7 @@ class FilenameInfo:
 
 def _parse_filename(filename: str) -> Optional['re.Match']:
   """Parse the tf-record filename."""
-  pattern = (rf'(?P<dataset_name>{_NAME_CLASS})-(?P<split>\w+)\.'
+  pattern = (rf'(?P<dataset_name>{_NAME_CLASS})-(?P<split>(\w|-)+)\.'
              r'(?P<filetype_suffix>\w+)-'
              r'(?P<shard_index>\d{5,})-of-(?P<num_shards>\d{5,})')
   return re.fullmatch(pattern, filename)

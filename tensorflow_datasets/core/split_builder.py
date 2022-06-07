@@ -24,6 +24,7 @@ import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Union
 
 from absl import logging
+from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
@@ -78,6 +79,21 @@ class _SplitInfoFuture:
     return self._callback()
 
 
+@dataclasses.dataclass
+class PipelineProxy:
+  """Proxy which allows access to beam.Pipeline result after completion.
+
+  This is yielded by the maybe_beam_pipeline() context and can only be used if
+  beam is used to generate the dataset.
+  """
+
+  _beam_pipeline: Optional['beam.Pipeline']
+
+  @property
+  def result(self):
+    return self._beam_pipeline.result
+
+
 class SplitBuilder:
   """Util class to build splits.
 
@@ -124,7 +140,7 @@ class SplitBuilder:
     self._file_format = file_format
 
   @contextlib.contextmanager
-  def maybe_beam_pipeline(self) -> Iterator[None]:
+  def maybe_beam_pipeline(self) -> Iterator[PipelineProxy]:
     """Context manager wrapping the beam pipeline.
 
     If Apache Beam is used, then the pipeline created withing the contextmanager
@@ -154,13 +170,16 @@ class SplitBuilder:
     never created and this function is a no-op.
 
     Yields:
-      None
+      PipelineProxy containing a reference to the beam pipeline, allowing access
+        to the pipeline result for (e.g) logging metrics to file.
     """
     self._in_contextmanager = True
     try:
       # Entering the contextmanager is a no-op. Only if Apache Beam is used
       # is the `beam.Pipeline` contextmanager activated.
-      yield
+      # Construct pipeline proxy with a placeholder beam pipeline.
+      pipeline_proxy = PipelineProxy(_beam_pipeline=None)
+      yield pipeline_proxy
     except Exception:  # pylint: disable=broad-except
       # Close and forward the exception
       if (not self._beam_pipeline or
@@ -170,6 +189,8 @@ class SplitBuilder:
       # If the Beam pipeline was used, then exit it.
       if self._beam_pipeline is not None:
         self._beam_pipeline.__exit__(None, None, None)
+        # Fill in the beam pipeline in the proxy.
+        pipeline_proxy._beam_pipeline = self._beam_pipeline  # pylint:disable=protected-access
     self._in_contextmanager = False
 
   @utils.memoized_property
@@ -341,7 +362,8 @@ class SplitBuilder:
         total_num_examples = None
 
     writer = writer_lib.Writer(
-        example_specs=self._features.get_serialized_info(),
+        serializer=example_serializer.ExampleSerializer(
+            self._features.get_serialized_info()),
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
@@ -382,7 +404,8 @@ class SplitBuilder:
     beam = lazy_imports_lib.lazy_imports.apache_beam
 
     beam_writer = writer_lib.BeamWriter(
-        example_specs=self._features.get_serialized_info(),
+        serializer=example_serializer.ExampleSerializer(
+            self._features.get_serialized_info()),
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,

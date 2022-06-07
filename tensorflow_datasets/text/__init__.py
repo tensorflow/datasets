@@ -18,6 +18,7 @@
 from tensorflow_datasets.text.ag_news_subset import AGNewsSubset
 from tensorflow_datasets.text.anli import Anli
 from tensorflow_datasets.text.assin2 import Assin2
+from tensorflow_datasets.text.beir import Beir
 from tensorflow_datasets.text.blimp import Blimp
 from tensorflow_datasets.text.bool_q import BoolQ
 from tensorflow_datasets.text.c4 import C4
@@ -78,6 +79,7 @@ from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.trec import Trec
 from tensorflow_datasets.text.unifiedqa import UnifiedQA
 from tensorflow_datasets.text.wiki40b import Wiki40b
+from tensorflow_datasets.text.wiki_dialog import WikiDialog
 from tensorflow_datasets.text.wikiann import Wikiann
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.wikipedia_toxicity_subtypes import WikipediaToxicitySubtypes
