@@ -957,7 +957,7 @@ class FileReaderBuilder(DatasetBuilder):
       **kwargs: Arguments passed to `DatasetBuilder`.
     """
     super().__init__(**kwargs)
-    self.info.set_file_format(file_format)
+    self.info.set_file_format(file_format, override=True)
 
   @utils.memoized_property
   def _example_specs(self):

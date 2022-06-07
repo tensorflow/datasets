@@ -425,7 +425,7 @@ class DatasetInfo(object):
     if (not override and self.file_format and self.file_format != file_format):
       raise ValueError(f"File format is already set to {self.file_format}. "
                        f"Got {file_format}")
-    if override and self._fully_initialized:
+    if override and self.file_format != file_format and self._fully_initialized:
       raise RuntimeError("Cannot override the file format "
                          "when the DatasetInfo is already fully initialized!")
     self._info_proto.file_format = file_format.value
