@@ -4061,7 +4061,7 @@ wikipedia_toxicity_subtypes/Multilingual/0.3.1
 wine_quality/red/1.0.0
 wine_quality/white/1.0.0
 winogrande/1.1.0
-wit/1.0.0
+wit/1.1.0
 wit_kaggle/test_without_gold/1.0.1
 wmt13_translate/cs-en/1.0.0
 wmt13_translate/de-en/1.0.0
