@@ -162,6 +162,9 @@ toc:
     title: colorectal_histology
   - path: /datasets/catalog/colorectal_histology_large
     title: colorectal_histology_large
+  - path: /datasets/catalog/controlled_noisy_web_labels
+    status: nightly
+    title: controlled_noisy_web_labels (manual)
   - path: /datasets/catalog/curated_breast_imaging_ddsm
     title: curated_breast_imaging_ddsm (manual)
   - path: /datasets/catalog/cycle_gan
