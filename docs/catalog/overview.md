@@ -114,6 +114,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cmaterdb`](cmaterdb.md)
 *   [`colorectal_histology`](colorectal_histology.md)
 *   [`colorectal_histology_large`](colorectal_histology_large.md)
+*   [`controlled_noisy_web_labels`](controlled_noisy_web_labels.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`curated_breast_imaging_ddsm`](curated_breast_imaging_ddsm.md)
 *   [`cycle_gan`](cycle_gan.md)
 *   [`deep_weeds`](deep_weeds.md)
