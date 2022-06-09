@@ -21,7 +21,7 @@ import posixpath
 import re
 import textwrap
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Type
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Optional, Type
 
 from absl import logging
 from tensorflow_datasets.core import community
@@ -34,6 +34,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import visibility
+from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
@@ -67,6 +68,7 @@ def list_builders(
   return datasets
 
 
+@error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   """Fetches a `tfds.core.DatasetBuilder` class by string name.
 
@@ -85,22 +87,25 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     raise ValueError(
         '`builder_cls` only accept the `dataset_name` without config, '
         f"version or arguments. Got: name='{name}', kwargs={kwargs}")
-  try:
-    if ds_name.namespace:
-      # `namespace:dataset` are loaded from the community register
-      if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
-        return community.community_register.builder_cls(ds_name)
-      else:
-        raise ValueError(
-            f'Cannot load {ds_name} when community datasets are disabled')
+
+  if ds_name.namespace:
+    # `namespace:dataset` are loaded from the community register
+    if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
+      return community.community_register.builder_cls(ds_name)
     else:
+      raise ValueError(
+          f'Cannot load {ds_name} when community datasets are disabled')
+  else:
+    try:
       cls = registered.imported_builder_cls(str(ds_name))
       cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
-    return cls
-  except registered.DatasetNotFoundError as e:
-    _reraise_with_list_builders(e, name=ds_name)  # pytype: disable=bad-return-type
+      return cls
+    except registered.DatasetNotFoundError:
+      _add_list_builders_context(name=ds_name)  # pytype: disable=bad-return-type
+      raise
 
 
+@error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def builder(
     name: str,
     *,
@@ -428,13 +433,10 @@ def is_full_name(full_name: str) -> bool:
   return bool(_FULL_NAME_REG.match(full_name))
 
 
-def _reraise_with_list_builders(
-    e: Exception,
-    name: naming.DatasetName,
-) -> NoReturn:
-  """Add the list of available builders to the DatasetNotFoundError."""
+def _add_list_builders_context(name: naming.DatasetName,) -> None:
+  """Adds the list of available builders to the DatasetNotFoundError."""
   # Should optimize to only filter through given namespace
-  all_datasets = list_builders(with_community_datasets=bool(name.namespace))
+  all_datasets = list_builders(with_community_datasets=False)
   all_datasets_str = '\n\t- '.join([''] + all_datasets)
   error_string = f'Available datasets:{all_datasets_str}\n'
   error_string += textwrap.dedent("""
@@ -449,6 +451,6 @@ def _reraise_with_list_builders(
   # Add close matches
   close_matches = difflib.get_close_matches(str(name), all_datasets, n=1)
   if close_matches:
-    error_string += f'\nDid you mean: {name} -> {close_matches[0]}\n'
+    error_string += f'\nDid you mean: {name} -> {close_matches[0]} ?\n'
 
-  raise py_utils.reraise(e, suffix=error_string)
+  error_utils.add_context(error_string)
