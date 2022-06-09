@@ -16,6 +16,7 @@
 """Meta register that uses other registers."""
 
 import dataclasses
+import difflib
 import functools
 import os
 from typing import Any, List, Mapping, Type
@@ -24,6 +25,7 @@ from etils import epath
 from tensorflow_datasets.core import dataset_builder
 # Make sure that github paths are registered
 from tensorflow_datasets.core import github_api  # pylint: disable=unused-import
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
@@ -138,12 +140,45 @@ class DatasetRegistry(register_base.BaseRegister):
         builders.extend(register.list_builders())
     return builders
 
+  def list_builders_per_namespace(self, namespace: str) -> List[str]:
+    """Lists the builders available for a specific namespace."""
+    builders = []
+    if self.has_namespace(namespace):
+      for register in self.registers_per_namespace[namespace]:
+        builders.extend(register.list_builders())
+    return builders
+
+  def _get_list_builders_context(self, name: naming.DatasetName) -> str:
+    """Adds relevant information to the error context."""
+    # Add list of available datasets to error context.
+    all_datasets = self.list_builders_per_namespace(name.namespace)
+    all_datasets_str = '\n\t- '.join([''] + all_datasets)
+    error_msg = f'Available datasets under the same namespace:{all_datasets_str}\n'
+    # Add closest match to error context.
+    close_matches = difflib.get_close_matches(str(name), all_datasets, n=1)
+    if close_matches:
+      error_msg += f'\nDid you mean: {name} -> {close_matches[0]} ?\n'
+    return error_msg
+
   def _get_registers(
       self, name: utils.DatasetName) -> List[register_base.BaseRegister]:
+    """Returns all available registers for a given namespace, if any.
+
+    Args:
+      name: str, the namespace's name.
+
+    Raises:
+      DatasetNotFound error if the namespace is not found.
+    """
     if not self.has_namespace(name.namespace):
-      raise registered.DatasetNotFoundError(
-          f'Namespace {name.namespace} not found. Should be one of: '
-          f'{sorted(self.registers_per_namespace.keys())}')
+      error_msg = (f'\nNamespace {name.namespace} not found.'
+                   f'Note that namespace should be one of: '
+                   f'{sorted(self.registers_per_namespace.keys())}')
+      close_matches = difflib.get_close_matches(
+          name.namespace, self.registers_per_namespace, n=1)
+      if close_matches:
+        error_msg += f'Did you mean: {name.namespace} -> {close_matches[0]} ?\n'
+      raise registered.DatasetNotFoundError(error_msg)
     return self.registers_per_namespace[name.namespace]
 
   def builder_cls(
@@ -174,7 +209,8 @@ class DatasetRegistry(register_base.BaseRegister):
 
     raise registered.DatasetNotFoundError(
         f'Namespace {name.namespace} found, '
-        f'but could not load dataset {name.name}.')
+        f'but could not load dataset {name.name}.'
+        f'{self._get_list_builders_context(name)}')
 
   def builder(
       self,
