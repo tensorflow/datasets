@@ -77,6 +77,7 @@ _DL_URLS = {
 _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
 _PUBLISHER = 'publisher'
+_ID = 'id'
 
 
 def _get_url_hashes(path):
@@ -196,7 +197,7 @@ def _get_art_abs(story_file):
 class CnnDailymail(tfds.core.GeneratorBasedBuilder):
   """CNN/DailyMail non-anonymized summarization dataset."""
 
-  VERSION = tfds.core.Version('3.3.0')
+  VERSION = tfds.core.Version('3.4.0')
   RELEASE_NOTES = {
       '1.0.0':
           'New split API (https://tensorflow.org/datasets/splits)',
@@ -215,7 +216,9 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
       This shouldn't affect ROUGE scores because punctuation is removed.
       """,
       '3.3.0':
-          'Add publisher feature.'
+          'Add publisher feature.',
+      '3.4.0':
+          'Add ID feature.'
   }
 
   def _info(self):
@@ -227,6 +230,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
             _ARTICLE: tfds.features.Text(),
             _HIGHLIGHTS: tfds.features.Text(),
             _PUBLISHER: tfds.features.Text(),
+            _ID: tfds.features.Text(),
         }),
         supervised_keys=(_ARTICLE, _HIGHLIGHTS),
         homepage='https://github.com/abisee/cnn-dailymail',
@@ -261,5 +265,6 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
         yield fname, {
             _ARTICLE: article,
             _HIGHLIGHTS: highlights,
-            _PUBLISHER: pub
+            _PUBLISHER: pub,
+            _ID: fname.removesuffix('.story'),
         }
