@@ -462,7 +462,7 @@ class DatasetBuilder(registered.RegisteredDataset):
 
     # If the file format was specified, set it in the info such that it is used
     # to generate the files.
-    if file_format:
+    if file_format and file_format == self.file_format:
       self.info.set_file_format(file_format, override=True)
 
     # Create a tmp dir and rename to self._data_dir on successful exit.
@@ -957,7 +957,7 @@ class FileReaderBuilder(DatasetBuilder):
       **kwargs: Arguments passed to `DatasetBuilder`.
     """
     super().__init__(**kwargs)
-    self.info.set_file_format(file_format)
+    self.info.set_file_format(file_format, override=True)
 
   @utils.memoized_property
   def _example_specs(self):
