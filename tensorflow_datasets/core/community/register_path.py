@@ -80,9 +80,9 @@ class DataDirRegister(register_base.BaseRegister):
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the builder classes."""
     if name.namespace not in self.namespaces:  # pylint: disable=unsupported-membership-test
-      raise registered.DatasetNotFoundError(
-          f'Namespace {name.namespace} not found. Should be one of: '
-          f'{sorted(self.namespaces)}')
+      error_msg = f'\nNamespace {name.namespace} not found.'
+      error_msg += f'Note that namespace should be one of: {sorted(self.namespaces)}'
+      raise registered.DatasetNotFoundError(error_msg)
     raise NotImplementedError(
         'builder_cls does not support data_dir-based community datasets. Got: '
         f'{name}')
@@ -104,8 +104,9 @@ class DataDirRegister(register_base.BaseRegister):
       close_matches = difflib.get_close_matches(
           name.namespace, self._ns2data_dir, n=1)
       hint = f'\nDid you mean: {close_matches[0]}' if close_matches else ''
-      raise KeyError(f'Namespace `{name.namespace}` for `{name}` not found. '
-                     f'Should be one of {sorted(self._ns2data_dir)}{hint}')
+      error_msg = (f'Namespace `{name.namespace}` for `{name}` not found. '
+                   f'Should be one of {sorted(self._ns2data_dir)}{hint}')
+      raise KeyError(error_msg)
     return read_only_builder.builder_from_files(
         name.name,
         data_dir=[
