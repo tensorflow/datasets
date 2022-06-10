@@ -439,7 +439,6 @@ clinc_oos/0.1.0
 cmaterdb/bangla/1.0.0
 cmaterdb/devanagari/1.0.0
 cmaterdb/telugu/1.0.0
-cnn_dailymail/3.3.0
 coco/2014/1.1.0
 coco/2017/1.1.0
 coco/2017_panoptic/1.1.0

@@ -13,6 +13,7 @@ c4/webtextlike/2.2.0
 c4/webtextlike/2.2.1
 c4/webtextlike/2.3.0
 c4/webtextlike/2.3.1
+cnn_dailymail/3.4.0
 common_voice/br/1.0.0
 common_voice/ca/1.0.0
 common_voice/cnh/1.0.0
@@ -31,6 +32,8 @@ common_voice/sl/1.0.0
 common_voice/tr/1.0.0
 common_voice/tt/1.0.0
 common_voice/zh-TW/1.0.0
+controlled_noisy_web_labels/mini_imagenet_blue/1.0.0
+controlled_noisy_web_labels/mini_imagenet_red/1.0.0
 covid19sum/1.0.0
 glue/ax/1.0.1
 glue/cola/1.0.1
