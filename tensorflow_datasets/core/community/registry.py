@@ -171,9 +171,9 @@ class DatasetRegistry(register_base.BaseRegister):
       DatasetNotFound error if the namespace is not found.
     """
     if not self.has_namespace(name.namespace):
-      error_msg = (f'\nNamespace {name.namespace} not found.'
-                   f'Note that namespace should be one of: '
-                   f'{sorted(self.registers_per_namespace.keys())}')
+      error_msg = (f'\nNamespace {name.namespace} not found.')
+      error_msg += (f'Note that namespace should be one of: '
+                    f'{sorted(self.registers_per_namespace.keys())}')
       close_matches = difflib.get_close_matches(
           name.namespace, self.registers_per_namespace, n=1)
       if close_matches:
