@@ -17,7 +17,7 @@
 
 import dataclasses
 import os
-from typing import Any, Dict, Generator, List, Optional, Tuple
+from typing import Any, Dict, Generator, List, Optional, Tuple, Union
 
 from absl import logging
 import tensorflow as tf
@@ -61,7 +61,7 @@ class DatasetConfig(tfds.core.BuilderConfig):
 
 def build_info(
     ds_config: DatasetConfig,
-    builder: tfds.core.DatasetBuilder,
+    builder: Union[tfds.core.DatasetBuilder, tfds.core.DatasetIdentity],
     ds_metadata: Optional[Dict[Any, Any]] = None) -> tfds.core.DatasetInfo:
   """Returns the dataset metadata."""
   step_metadata = ds_config.step_metadata_info

@@ -37,6 +37,7 @@ from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
 
 from tensorflow_datasets.core.dataset_info import BeamMetadataDict
+from tensorflow_datasets.core.dataset_info import DatasetIdentity
 from tensorflow_datasets.core.dataset_info import DatasetInfo
 from tensorflow_datasets.core.dataset_info import Metadata
 from tensorflow_datasets.core.dataset_info import MetadataDict
@@ -48,6 +49,8 @@ from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 from tensorflow_datasets.core.naming import ShardedFileTemplate
 
 from tensorflow_datasets.core.registered import DatasetNotFoundError
+
+from tensorflow_datasets.core.sequential_writer import SequentialWriter
 
 from tensorflow_datasets.core.split_builder import SplitGeneratorLegacy as SplitGenerator
 
@@ -80,6 +83,7 @@ __all__ = [
     "BuilderConfig",
     "DatasetBuilder",
     "DatasetInfo",
+    "DatasetIdentity",
     "DatasetNotFoundError",
     "Experiment",
     "FileFormat",
@@ -90,6 +94,7 @@ __all__ = [
     "MetadataDict",
     "Path",
     "ReadInstruction",
+    "SequentialWriter",
     "ShardedFileTemplate",
     "SplitDict",
     "SplitGenerator",
