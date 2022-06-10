@@ -262,9 +262,12 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
         if not article or not highlights:
           continue
         fname = os.path.basename(p)
+        clean_id = fname
+        if fname.endswith('.story'):
+          clean_id = clean_id[:-6]
         yield fname, {
             _ARTICLE: article,
             _HIGHLIGHTS: highlights,
             _PUBLISHER: pub,
-            _ID: fname.removesuffix('.story'),
+            _ID: clean_id,
         }
