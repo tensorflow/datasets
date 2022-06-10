@@ -385,7 +385,7 @@ class C4(tfds.core.BeamBasedBuilder):
       tmp_dir = f"{out_path}.incomplete{uuid.uuid4().hex}"
       try:
         tf.io.gfile.makedirs(tmp_dir)
-        downloader = tfds.download.downloader.get_downloader()
+        downloader = tfds.download.download_manager.get_downloader()
         with downloader.tqdm():
           # TODO(slebedev): Investigate why pytype infers Promise[Future[...]].
           dl_path = downloader.download(url, tmp_dir).get().path  # type: ignore
