@@ -13,7 +13,6 @@ c4/webtextlike/2.2.0
 c4/webtextlike/2.2.1
 c4/webtextlike/2.3.0
 c4/webtextlike/2.3.1
-cnn_dailymail/3.4.0
 common_voice/br/1.0.0
 common_voice/ca/1.0.0
 common_voice/cnh/1.0.0
