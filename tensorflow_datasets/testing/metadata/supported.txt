@@ -447,6 +447,8 @@ coco_captions/2014/1.1.0
 coil100/2.0.0
 colorectal_histology/2.0.0
 colorectal_histology_large/2.0.0
+controlled_noisy_web_labels/mini_imagenet_blue/1.0.0
+controlled_noisy_web_labels/mini_imagenet_red/1.0.0
 coqa/1.0.0
 cos_e/0.0.1
 cosmos_qa/1.0.0
