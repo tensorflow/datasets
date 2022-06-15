@@ -29,6 +29,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import py_utils
 
 
+
 def _serialize_example(example: Any, features: features_lib.FeaturesDict,
                        serializer: example_serializer.ExampleSerializer) -> str:
   try:
