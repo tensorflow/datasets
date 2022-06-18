@@ -301,6 +301,7 @@ class Resource(object):
         set, will be guessed from downloaded file name `original_fname`.
       path: `str`, path of resource on local disk. Can be None if resource has
         not be downloaded yet. In such case, `url` must be set.
+      **request_kwargs: Additional kwargs to forward to `request.get`.
     """
     self.url = url
     self.path: epath.Path = epath.Path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
