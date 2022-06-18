@@ -291,6 +291,7 @@ class Resource(object):
       url: Optional[str] = None,
       extract_method: Optional[ExtractMethod] = None,
       path: Optional[epath.PathLike] = None,
+      **request_kwargs
   ):
     """Resource constructor.
 
@@ -304,6 +305,7 @@ class Resource(object):
     self.url = url
     self.path: epath.Path = epath.Path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
     self._extract_method = extract_method
+    self.request_kwargs = request_kwargs
 
   @classmethod
   def exists_locally(cls, path: epath.PathLike):
