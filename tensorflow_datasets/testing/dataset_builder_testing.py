@@ -23,7 +23,7 @@ import itertools
 import numbers
 import os
 import textwrap
-from typing import Iterator, List, Optional, Union
+from typing import Iterator, List, Mapping, Optional, Union
 from unittest import mock
 
 from absl import logging
@@ -273,23 +273,26 @@ class DatasetBuilderTestCase(parameterized.TestCase,
     else:
       self._download_urls.add(url_or_urls)
 
+  def _prepare_download_results(
+      self,
+      downloaded_files: Mapping[str, str],
+  ) -> Mapping[str, epath.PathLike]:
+    return tf.nest.map_structure(
+        lambda fname: self.dummy_data / fname,
+        downloaded_files,
+    )
+
   def _get_dl_extract_result(self, url):
     tf.nest.map_structure(self._add_url, url)
     del url
     if self.DL_EXTRACT_RESULT is None:
       return self.dummy_data
-    return tf.nest.map_structure(
-        lambda fname: self.dummy_data / fname,
-        self.DL_EXTRACT_RESULT,
-    )
+    return self._prepare_download_results(self.DL_EXTRACT_RESULT)
 
   def _get_dl_extract_only_result(self, url):
     if self.DL_EXTRACT_ONLY_RESULT:
       tf.nest.map_structure(self._add_url, url)
-      return tf.nest.map_structure(
-          lambda fname: self.dummy_data / fname,
-          self.DL_EXTRACT_ONLY_RESULT,
-      )
+      return self._prepare_download_results(self.DL_EXTRACT_ONLY_RESULT)
 
   def _get_dl_download_result(self, url):
     tf.nest.map_structure(self._add_url, url)
@@ -297,10 +300,10 @@ class DatasetBuilderTestCase(parameterized.TestCase,
       # This is only to be backwards compatible with old approach.
       # In the future it will be replaced with using self.dummy_data.
       return self._get_dl_extract_result(url)
-    return tf.nest.map_structure(
-        lambda fname: self.dummy_data / fname,
-        self.DL_DOWNLOAD_RESULT,
-    )
+    return self._prepare_download_results(self.DL_DOWNLOAD_RESULT)
+
+  def _get_dl_download_kaggle_result(self, competition_or_dataset):
+    return self._prepare_download_results(self.DL_DOWNLOAD_RESULT)
 
   def _download_checksums(self, url):
     self._stop_record_download = True
@@ -393,6 +396,7 @@ class DatasetBuilderTestCase(parameterized.TestCase,
     patches = {
         "download_and_extract": self._get_dl_extract_result,
         "download": self._get_dl_download_result,
+        "download_kaggle_data": self._get_dl_download_kaggle_result,
         "download_checksums": self._download_checksums,
         "manual_dir": manual_dir,
         "download_dir": self.dummy_data
