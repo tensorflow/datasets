@@ -598,7 +598,7 @@ def _display_all_builders(
       nightly_str = ' ' + nightly_doc_util.icon
     else:
       nightly_str = ''
-    ds_name = tfds.core.utils.DatasetName(
+    ds_name = tfds.core.naming.DatasetName(
         namespace=namespace,
         name=builder.name,
     )
@@ -617,7 +617,7 @@ def _display_dataset_heading(
     namespace: Optional[str],
     builder: tfds.core.DatasetBuilder,
 ) -> str:
-  ds_name = tfds.core.utils.DatasetName(namespace=namespace, name=builder.name)
+  ds_name = tfds.core.naming.DatasetName(namespace=namespace, name=builder.name)
   return f"""
       # `{ds_name}`
 

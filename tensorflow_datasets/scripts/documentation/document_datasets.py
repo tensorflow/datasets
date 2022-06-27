@@ -85,7 +85,7 @@ def _load_builder(name: str,) -> Optional[BuilderToDocument]:
     builder: Main builder instance
     config_builders: Additional builders (one of each configs)
   """
-  if tfds.core.utils.DatasetName(name).namespace:  # Community dataset
+  if tfds.core.naming.DatasetName(name).namespace:  # Community dataset
     return _load_builder_from_location(name)
   else:  # Code dataset
     return _load_builder_from_code(name)
@@ -93,7 +93,7 @@ def _load_builder(name: str,) -> Optional[BuilderToDocument]:
 
 def _load_builder_from_location(name: str,) -> Optional[BuilderToDocument]:
   """Load the builder, config,... to document."""
-  dataset_name = tfds.core.utils.DatasetName(name)
+  dataset_name = tfds.core.naming.DatasetName(name)
   logging.info(f'Loading builder {dataset_name} from location')
   try:
     builder = tfds.builder(name)

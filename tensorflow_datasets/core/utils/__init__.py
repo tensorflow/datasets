@@ -16,7 +16,6 @@
 """Util import."""
 
 # pylint: disable=wildcard-import
-from tensorflow_datasets.core.naming import DatasetName
 from tensorflow_datasets.core.units import Size
 from tensorflow_datasets.core.utils import docs
 from tensorflow_datasets.core.utils import tree_utils as tree

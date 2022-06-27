@@ -161,7 +161,7 @@ class DatasetRegistry(register_base.BaseRegister):
     return error_msg
 
   def _get_registers(
-      self, name: utils.DatasetName) -> List[register_base.BaseRegister]:
+      self, name: naming.DatasetName) -> List[register_base.BaseRegister]:
     """Returns all available registers for a given namespace, if any.
 
     Args:
@@ -183,7 +183,7 @@ class DatasetRegistry(register_base.BaseRegister):
 
   def builder_cls(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Loads the builder class for the given dataset.
 
@@ -214,7 +214,7 @@ class DatasetRegistry(register_base.BaseRegister):
 
   def builder(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
       **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Loads the builder class for the given dataset."""
@@ -233,7 +233,7 @@ class DatasetRegistry(register_base.BaseRegister):
         f'Namespace {name.namespace} found with {len(registers)} registers, '
         f'but could not load dataset {name.name}.')
 
-  def get_builder_root_dirs(self, name: utils.DatasetName) -> List[epath.Path]:
+  def get_builder_root_dirs(self, name: naming.DatasetName) -> List[epath.Path]:
     """Returns root dir of the generated builder (without version/config)."""
     result = []
     registers = self.registers_per_namespace[name.namespace]
