@@ -76,7 +76,7 @@ class DataDirRegister(register_base.BaseRegister):
 
   def builder_cls(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the builder classes."""
     if name.namespace not in self.namespaces:  # pylint: disable=unsupported-membership-test
@@ -89,7 +89,7 @@ class DataDirRegister(register_base.BaseRegister):
 
   def builder(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
       **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
@@ -115,7 +115,7 @@ class DataDirRegister(register_base.BaseRegister):
         **builder_kwargs,
     )
 
-  def get_builder_root_dirs(self, name: utils.DatasetName) -> List[epath.Path]:
+  def get_builder_root_dirs(self, name: naming.DatasetName) -> List[epath.Path]:
     """Returns root dir of the generated builder (without version/config)."""
     return [d / name.name for d in self._ns2data_dir[name.namespace]]
 
@@ -155,7 +155,7 @@ def _iter_builder_names(
     # individual dataset would have significant performance drop, so
     # this is an acceptable trade-of.
     return [
-        str(utils.DatasetName(namespace=ns_name, name=builder_dir.name))
+        str(naming.DatasetName(namespace=ns_name, name=builder_dir.name))
         for builder_dir in _maybe_iterdir(data_dir)
         if _is_valid_dataset_name(builder_dir.name)
     ]

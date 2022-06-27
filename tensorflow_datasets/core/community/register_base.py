@@ -19,7 +19,7 @@ import abc
 from typing import Any, List, Type
 
 from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import utils
+from tensorflow_datasets.core import naming
 
 
 class BaseRegister(abc.ABC):
@@ -55,7 +55,7 @@ class BaseRegister(abc.ABC):
   @abc.abstractmethod
   def builder_cls(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the `tfds.core.DatasetBuilder` instance.
 
@@ -73,7 +73,7 @@ class BaseRegister(abc.ABC):
   @abc.abstractmethod
   def builder(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
       **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the `tfds.core.DatasetBuilder` instance.

@@ -30,6 +30,7 @@ from etils import epath
 import pytest
 
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import cache
@@ -92,7 +93,7 @@ def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
   installed_path /= 'modules/tfds_community/kaggle/dummy_dataset'
   assert not installed_path.exists()
 
-  ds_name = utils.DatasetName('kaggle:dummy_dataset')
+  ds_name = naming.DatasetName('kaggle:dummy_dataset')
   builder_cls = dummy_register.builder_cls(ds_name)
   assert builder_cls.name == 'dummy_dataset'
 
@@ -111,12 +112,12 @@ def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
       register_package,
       '_download_and_cache',
       side_effect=ValueError('Dataset should have been cached already')):
-    ds_name = utils.DatasetName('kaggle:dummy_dataset')
+    ds_name = naming.DatasetName('kaggle:dummy_dataset')
     builder_cls2 = dummy_register.builder_cls(ds_name)
   assert builder_cls is builder_cls2
 
   # Datasets from different namespace can have the same name
-  ds_name = utils.DatasetName('mlds:dummy_dataset')
+  ds_name = naming.DatasetName('mlds:dummy_dataset')
   builder_cls = dummy_register.builder_cls(ds_name)
   assert 'mlds' in builder_cls.code_path.parts
   assert issubclass(builder_cls, dataset_builder.DatasetBuilder)
@@ -124,7 +125,7 @@ def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
   assert 'http://dummy.org/data.txt' in builder_cls.url_infos
 
   with pytest.raises(registered.DatasetNotFoundError):
-    dummy_register.builder(utils.DatasetName('other:ds0'))
+    dummy_register.builder(naming.DatasetName('other:ds0'))
 
 
 def test_register_path_list_builders(dummy_register):  # pylint: disable=redefined-outer-name
@@ -138,7 +139,7 @@ def test_register_path_list_builders(dummy_register):  # pylint: disable=redefin
 def test_dataset_package():
   """Exports/imports operation should be identity."""
   pkg = register_package.DatasetPackage(
-      name=utils.DatasetName('ns:ds'),
+      name=naming.DatasetName('ns:ds'),
       source=dataset_sources.DatasetSource.from_json(
           'github://<owner>/<name>/tree/<branch>/my_ds/ds.py',),
   )
