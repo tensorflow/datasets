@@ -156,9 +156,18 @@ class DatasetDocumentation:
   def to_details_markdown(self) -> str:
     """"Markdown to be shown on the details page for the namespace."""
     extra_links = self.format_extra_links(prefix='*   ', infix='\n')
-    return self.templates.dataset_details_template.format(
+    details = self.templates.dataset_details_template.format(
         name=self.name,
         description=self.documentation(),
+        namespace=self.namespace,
+        tfds_id=self.tfds_id,
+        references_bulleted_list=extra_links,
+    )
+    if len(details) < 2 * 1024 * 1024:
+      return details
+    return self.templates.dataset_details_template.format(
+        name=self.name,
+        description=self.documentation(keep_short=True),
         namespace=self.namespace,
         tfds_id=self.tfds_id,
         references_bulleted_list=extra_links,
@@ -168,7 +177,7 @@ class DatasetDocumentation:
       self) -> Mapping[str, dataset_info_pb2.DatasetInfo]:
     return {}
 
-  def documentation(self) -> str:
+  def documentation(self, keep_short: bool = False) -> str:
     """Returns detailed documentation for all configs of this dataset."""
     # TODO(weide): if e.g. the description contains markdown chars, then it
     # messes up the page. Try escaping backticks or using code blocks.
@@ -230,13 +239,17 @@ class DatasetDocumentation:
         tfds_id = self.tfds_id
       else:
         tfds_id = f'{self.tfds_id}/{config_name}'
+      if keep_short:
+        features = ''
+      else:
+        features = format_feature(info.features)
       content = template.format(
           description=_clean_up_text(info.description),
           tfds_id=tfds_id,
           license=info.redistribution_info.license or 'No known license',
           version=info.version,
           splits=format_splits(info.splits),
-          features=format_feature(info.features),
+          features=features,
           citation=info.citation,
       )
       if config_name == 'default':
