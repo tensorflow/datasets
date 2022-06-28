@@ -137,6 +137,9 @@ in addition to the basic seven labels. However, it only includes the subset
 """
 
 _CC_COVERT_DESCRIPTION = """
+WARNING: there's a potential data quality issue with CivilCommentsCovert that
+we're actively working on fixing (06/28/22); the underlying data may change!
+
 The CivilCommentsCovert set is a subset of CivilCommentsIdentities with ~20% of
 the train and test splits further annotated for covert offensiveness, in
 addition to the toxicity and identity labels. Raters were asked to categorize
@@ -271,8 +274,9 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
           mode='context'),
   ]
 
-  VERSION = tfds.core.Version('1.2.2')
+  VERSION = tfds.core.Version('1.2.3')
   RELEASE_NOTES = {
+      '1.2.3': 'Add warning to CivilCommentsCovert as we fix a data issue.',
       '1.2.2': 'Update to reflect context only having a train split.',
       '1.2.1': 'Fix incorrect formatting in context splits.',
       '1.2.0': 'Add toxic spans, context, and parent comment text features.',
