@@ -12,6 +12,11 @@
 # `civil_comments`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This version of the CivilComments Dataset provides access to the primary seven
@@ -62,14 +67,31 @@ when making the labels.
     *   `1.1.3`: Corrected id types from float to string.
     *   `1.2.0`: Add toxic spans, context, and parent comment text features.
     *   `1.2.1`: Fix incorrect formatting in context splits.
-    *   **`1.2.2`** (default): Update to reflect context only having a train
-        split.
+    *   `1.2.2`: Update to reflect context only having a train split.
+    *   **`1.2.3`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Add warning to CivilCommentsCovert as we fix a data issue.
 
-*   **Download size**: `427.41 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 
 ## civil_comments/CivilComments (default config)
@@ -77,20 +99,6 @@ when making the labels.
 *   **Config description**: The CivilComments set here includes all the data,
     but only the basic seven labels (toxicity, severe_toxicity, obscene, threat,
     insult, identity_attack, and sexual_explicit).
-
-*   **Dataset size**: `1.39 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | --------:
-`'test'`       | 97,320
-`'train'`      | 1,804,874
-`'validation'` | 97,320
 
 *   **Feature structure**:
 
@@ -133,43 +141,6 @@ toxicity        | Tensor       |       | tf.float32 |
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilComments-1.2.2.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 *   **Citation**:
 
 ```
@@ -199,20 +170,6 @@ dataButton.addEventListener('click', async () => {
     extended set of identity labels in addition to the basic seven labels.
     However, it only includes the subset (roughly a quarter) of the data with
     all these features.
-
-*   **Dataset size**: `622.02 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 21,577
-`'train'`      | 405,130
-`'validation'` | 21,293
 
 *   **Feature structure**:
 
@@ -303,43 +260,6 @@ white                               | Tensor       |       | tf.float32 |
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsIdentities-1.2.2.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 *   **Citation**:
 
 ```
@@ -365,27 +285,17 @@ dataButton.addEventListener('click', async () => {
 
 ## civil_comments/CivilCommentsCovert
 
-*   **Config description**: The CivilCommentsCovert set is a subset of
-    CivilCommentsIdentities with ~20% of the train and test splits further
-    annotated for covert offensiveness, in addition to the toxicity and identity
-    labels. Raters were asked to categorize comments as one of explicitly,
-    implicitly, not, or not sure if offensive, as well as whether it contained
-    different types of covert offensiveness. The full annotation procedure is
-    detailed in a forthcoming paper at
-    https://sites.google.com/corp/view/hciandnlp/accepted-papers.
+*   **Config description**: WARNING: there's a potential data quality issue with
+    CivilCommentsCovert that we're actively working on fixing (06/28/22); the
+    underlying data may change!
 
-*   **Dataset size**: `94.12 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'test'`  | 2,455
-`'train'` | 48,074
+The CivilCommentsCovert set is a subset of CivilCommentsIdentities with ~20% of
+the train and test splits further annotated for covert offensiveness, in
+addition to the toxicity and identity labels. Raters were asked to categorize
+comments as one of explicitly, implicitly, not, or not sure if offensive, as
+well as whether it contained different types of covert offensiveness. The full
+annotation procedure is detailed in a forthcoming paper at
+https://sites.google.com/corp/view/hciandnlp/accepted-papers.
 
 *   **Feature structure**:
 
@@ -498,43 +408,6 @@ white                               | Tensor       |       | tf.float32 |
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsCovert-1.2.2.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 *   **Citation**:
 
 ```
@@ -561,20 +434,6 @@ dataButton.addEventListener('click', async () => {
     CivilComments that is labeled at the span level - the indices of all
     character (unicode codepoints) boundaries that were tagged as toxic by a
     majority of the annotators is returned in a 'spans' feature.
-
-*   **Dataset size**: `5.03 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 2,000
-`'train'`      | 7,939
-`'validation'` | 682
 
 *   **Feature structure**:
 
@@ -605,43 +464,6 @@ text        | Text         |         | tf.string |
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'spans')`
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsToxicSpans-1.2.2.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 *   **Citation**:
 
 ```
@@ -664,18 +486,6 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: The CivilComments in Context is a subset of
     CivilComments that was labeled by making available to the labelers the
     parent_text. It includes a contextual_toxicity feature.
-
-*   **Dataset size**: `8.90 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,969
 
 *   **Feature structure**:
 
@@ -719,43 +529,6 @@ toxicity            | Tensor       |       | tf.float32 |
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'toxicity')`
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsInContext-1.2.2.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 *   **Citation**:
 
