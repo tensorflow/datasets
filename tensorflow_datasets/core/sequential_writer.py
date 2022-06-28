@@ -114,8 +114,13 @@ def _split_dict(splits: Dict[str, Split]) -> splits_lib.SplitDict:
   return splits_lib.SplitDict([split.info for _, split in splits.items()])
 
 
-def _initialize_split(split_name: str, data_directory: Any, ds_name: str,
-                      filetype_suffix: str) -> Split:
+def _initialize_split(split_name: str,
+                      data_directory: Any,
+                      ds_name: str,
+                      filetype_suffix: str,
+                      shard_lengths: Optional[list[int]] = None,
+                      num_bytes: int = 0,
+                      complete_shards: int = 0) -> Split:
   """Initializes a split.
 
   Args:
@@ -123,11 +128,15 @@ def _initialize_split(split_name: str, data_directory: Any, ds_name: str,
     data_directory: directory where the split data will be located.
     ds_name: name of the dataset.
     filetype_suffix: file format.
-
+    shard_lengths: if the split already has shards, it contains the list of the
+      shard lenghts. If None, it assumes that the split is empty.
+    num_bytes: number of bytes that have been written already.
+    complete_shards: number of complete shards of this split.
   Returns:
     A Split.
   """
-
+  if not shard_lengths:
+    shard_lengths = []
   filename_template = naming.ShardedFileTemplate(
       dataset_name=ds_name,
       data_dir=data_directory,
@@ -138,9 +147,10 @@ def _initialize_split(split_name: str, data_directory: Any, ds_name: str,
   return Split(
       info=splits_lib.SplitInfo(
           name=split_name,
-          shard_lengths=[],
-          num_bytes=0,
+          shard_lengths=shard_lengths,
+          num_bytes=num_bytes,
           filename_template=filename_template),
+      complete_shards=complete_shards,
       ds_name=ds_name)
 
 
@@ -186,40 +196,76 @@ class SequentialWriter():
   # TODO(sabela): support non-TFRecord writers. At the moment, the FileAdapters
   # API only suports writing a set of examples, so the support for other formats
   # would have to be manual.
-  def __init__(self, ds_info: dataset_info.DatasetInfo,
-               max_examples_per_shard: int):
+  def __init__(self,
+               ds_info: dataset_info.DatasetInfo,
+               max_examples_per_shard: int,
+               overwrite: bool = True):
     """Creates a SequentialWriter.
 
     Args:
       ds_info: DatasetInfo for this dataset.
       max_examples_per_shard: maximum number of examples to write per shard.
+      overwrite: if True, it ignores and overwrites any existing data.
+        Otherwise, it loads the existing dataset and appends the new data (new
+        data will always be created as new shards).
     """
 
     self._data_dir = ds_info.data_dir
     self._ds_name = ds_info.name
     self._ds_info = ds_info
-    self._ds_info.set_file_format(
-        file_format=file_adapters.FileFormat.TFRECORD,
-        # if it was set, we want this to fail to warn the user
-        override=False)
+    if not overwrite:
+      try:
+        self._ds_info.read_from_directory(self._data_dir)
+        # read_from_directory does some checks but not on the dataset name.
+        if self._ds_info.name != self._ds_name:
+          raise ValueError(
+              f'Trying to append a dataset with name {ds_info.name}'
+              f' to an existing dataset with name {self._ds_info.name}')
+      except FileNotFoundError:
+        self._ds_info.set_file_format(
+            file_format=file_adapters.FileFormat.TFRECORD,
+            # if it was set, we want this to fail to warn the user
+            override=False)
+    else:
+      self._ds_info.set_file_format(
+          file_format=file_adapters.FileFormat.TFRECORD,
+          # if it was set, we want this to fail to warn the user
+          override=False)
+
     self._filetype_suffix = ds_info.file_format.file_suffix
     self._max_examples_per_shard = max_examples_per_shard
     self._splits = {}
+    if not overwrite:
+      for split_name, split in ds_info.splits.items():
+        self._splits[split_name] = _initialize_split(
+            split_name=split_name,
+            data_directory=self._data_dir,
+            ds_name=self._ds_name,
+            filetype_suffix=self._filetype_suffix,
+            shard_lengths=split.shard_lengths,
+            num_bytes=split.num_bytes,
+            complete_shards=split.num_shards)
     self._serializer = example_serializer.ExampleSerializer(
         self._ds_info.features.get_serialized_info())
 
-  def initialize_splits(self, splits: List[str]) -> None:
+  def initialize_splits(self,
+                        splits: List[str],
+                        fail_if_exists: bool = True) -> None:
     """Adds new splits to the dataset.
 
     Args:
       splits: list of split names to add.
+      fail_if_exists: will fail if this split already contains data.
 
     Raises:
       KeyError: if the split is already present.
     """
     for split in splits:
       if split in self._splits:
-        raise KeyError(f'Split {split} was already initialized.')
+        if fail_if_exists:
+          raise KeyError(f'Split {split} was already initialized.')
+        else:
+          continue
       self._splits[split] = _initialize_split(
           split_name=split,
           data_directory=self._data_dir,
