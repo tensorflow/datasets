@@ -1,0 +1,51 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "parent_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "spans": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            },
+            "parent_text": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "text": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "string",
+                    "encoding": "none"
+                }
+            },
+            "article_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "int32",
+                    "encoding": "none"
+                }
+            }
+        }
+    }
+}
