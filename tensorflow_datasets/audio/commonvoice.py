@@ -57,6 +57,8 @@ _LANGUAGE_ACCENTS = collections.OrderedDict([
     ("kab", ["other"]),
     ("ca",
      ["northwestern", "central", "other", "valencian", "balearic", "northern"]),
+    ("zh-CN", ["other"]),
+    ("zh-HK", ["other"]),
     ("zh-TW", ["other"]),
     ("sl", ["other"]),
     ("it", ["other"]),
@@ -73,8 +75,9 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
     """Constructs CommonVoiceConfig.
 
     Args:
-     language: `str`, one of [ca, nl, br, de, sl, cy, en, kab, tt, zh-TW, eo,
-       it, fr, ga-IE, tr, ky, cnh, cv]. Language Code of the Dataset to be used.
+     language: `str`, one of [ca, nl, br, de, sl, cy, en, kab, tt, zh-CN, zh-HK,
+       zh-TW, eo, it, fr, ga-IE, tr, ky, cnh, cv]. Language Code of the Dataset
+       to be used.
      accents: `list[str]`, labels for the accents of the language
      **kwargs: keywords arguments forwarded to super
     """
