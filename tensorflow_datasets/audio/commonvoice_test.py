@@ -22,9 +22,10 @@ import tensorflow_datasets.testing as tfds_test
 class CommonVoiceTest(tfds_test.DatasetBuilderTestCase):
   """CommonVoice Tester Class."""
   # Don't test all configs to avoid timeout
-  BUILDER_CONFIG_NAMES_TO_TEST = ["en", "cv"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["fy-NL"]
+  DL_DOWNLOAD_RESULT = "fy-NL.tar.gz"
   DATASET_CLASS = commonvoice.CommonVoice
-  SPLITS = {"train": 2, "test": 1, "validation": 3}
+  SPLITS = {"dev": 2, "validation": 2}
 
 
 if __name__ == "__main__":
