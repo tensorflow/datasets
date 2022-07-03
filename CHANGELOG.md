@@ -10,6 +10,7 @@ and this project adheres to
 
 ### Added
 ### Changed
+- The base `Logger` class expects more information to be passed to the `as_dataset` method. This should only be relevant to people who have implemented and registered custome `Logger` class(es).
 ### Deprecated
 ### Removed
 ### Fixed

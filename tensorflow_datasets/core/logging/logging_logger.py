@@ -15,13 +15,17 @@
 
 """A logger logging using absl.logging module."""
 
-from typing import Dict, Optional, Union
+from typing import Optional, Union
 
 from absl import logging
-
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.logging import base_logger
+from tensorflow_datasets.core.logging import call_metadata
 from tensorflow_datasets.core.utils import read_config as tfds_read_config
+from tensorflow_datasets.core.utils import type_utils
+
+TreeDict = type_utils.TreeDict
 
 
 class LoggingLogger(base_logger.Logger):
@@ -30,7 +34,8 @@ class LoggingLogger(base_logger.Logger):
   def as_dataset(
       self,
       *,
-      dataset_name: str,
+      metadata: call_metadata.CallMetadata,
+      name: str,
       config_name: Optional[str],
       version: str,
       data_path: str,
@@ -39,7 +44,7 @@ class LoggingLogger(base_logger.Logger):
       shuffle_files: bool,
       read_config: tfds_read_config.ReadConfig,
       as_supervised: bool,
-      decoders: Dict[str, str],
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
   ):
-    logging.info("Constructing tf.data.Dataset %s for split %s, from %s",
-                 dataset_name, str(split), data_path)
+    logging.info("Constructing tf.data.Dataset %s for split %s, from %s", name,
+                 str(split), data_path)

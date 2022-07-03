@@ -159,6 +159,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   # displayed in the dataset documentation.
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
 
+  @tfds_logging.builder_init()
   def __init__(
       self,
       *,
@@ -336,7 +337,9 @@ class DatasetBuilder(registered.RegisteredDataset):
     else:
       return None
 
-  @utils.memoized_property
+  @property
+  @tfds_logging.builder_info()
+  @functools.lru_cache(maxsize=128)
   def info(self) -> dataset_info.DatasetInfo:
     """`tfds.core.DatasetInfo` for this builder."""
     # Ensure .info hasn't been called before versioning is set-up
@@ -940,6 +943,7 @@ class FileReaderBuilder(DatasetBuilder):
 
   """
 
+  @tfds_logging.builder_init()
   def __init__(
       self,
       *,
