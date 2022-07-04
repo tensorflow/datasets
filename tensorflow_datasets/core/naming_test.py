@@ -182,6 +182,10 @@ def dataset_name():
             'version': '1.0.0'
         })),
         ('ns1:ds1', (naming.DatasetName('ns1:ds1'), {})),
+        ('hugging_face:abc',
+         (naming.DatasetName(namespace='hugging_face', name='abc'), {})),
+        ('ns_1-b:ds1',
+         (naming.DatasetName(namespace='ns_1-b', name='ds1'), {})),
         (
             'ns1:ds1:1.0.0',
             (naming.DatasetName('ns1:ds1'), {
