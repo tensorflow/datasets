@@ -89,6 +89,16 @@ class Logger:
     """
     pass
 
+  def builder(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      try_gcs: Optional[bool],
+  ):
+    """Callback called when user calls `tfds.builder(...)`."""
+    pass
+
   def load(
       self,
       *,
