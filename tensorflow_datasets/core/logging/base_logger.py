@@ -88,3 +88,22 @@ class Logger:
         values being `{module_name}.{class_name}` instad of a
     """
     pass
+
+  def load(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
+      data_dir: Optional[str],
+      batch_size: Optional[int],
+      shuffle_files: Optional[bool],
+      download: Optional[bool],
+      as_supervised: Optional[bool],
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
+      read_config: Optional[read_config_lib.ReadConfig],
+      with_info: Optional[bool],
+      try_gcs: Optional[bool],
+  ):
+    """Callback called when user calls `tfds.load(...)`."""
+    pass
