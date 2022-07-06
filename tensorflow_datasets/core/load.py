@@ -57,6 +57,7 @@ _FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
 ))
 
 
+@tfds_logging.list_builders()
 def list_builders(
     *,
     with_community_datasets: bool = True,
@@ -107,6 +108,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
+@tfds_logging.builder()
 def builder(
     name: str,
     *,

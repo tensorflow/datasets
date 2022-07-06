@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """TFDS logging module."""
-from typing import Callable, List, Optional, TypeVar
+from typing import Callable, Dict, List, Optional, Tuple, TypeVar
 
 from absl import flags
 from tensorflow_datasets.core.logging import base_logger
@@ -165,7 +165,26 @@ def as_dataset() -> Callable[[_T], _T]:
             decoders=kwargs.get("decoders"),
         )
 
-    return function(*args, **kwargs)
+  return decorator
+
+
+def list_builders() -> Callable[[_T], _T]:
+  """Decorator to call `list_builders` method on registered loggers."""
+
+  @wrapt.decorator
+  def decorator(function, unused_none_instance, args, kwargs):
+    metadata = call_metadata.CallMetadata()
+    try:
+      return function(*args, **kwargs)
+    except Exception:
+      metadata.mark_error()
+      raise
+    finally:
+      metadata.mark_end()
+      for logger in _get_registered_loggers():
+        logger.list_builders(
+            metadata=metadata,
+            with_community_datasets=kwargs.get("with_community_datasets"))
 
   return decorator
 
@@ -197,6 +216,30 @@ def load() -> Callable[[_T], _T]:
             decoders=kwargs.get("decoders"),
             read_config=kwargs.get("read_config"),
             with_info=kwargs.get("with_info"),
+            try_gcs=kwargs.get("try_gcs"),
+        )
+
+  return decorator
+
+
+def builder() -> Callable[[_T], _T]:
+  """Decorator to call `builder` method on registered loggers."""
+
+  @wrapt.decorator
+  def decorator(function, unused_none_instance, args, kwargs):
+    metadata = call_metadata.CallMetadata()
+    name = args[0] if args else kwargs["name"]
+    try:
+      return function(*args, **kwargs)
+    except Exception:
+      metadata.mark_error()
+      raise
+    finally:
+      metadata.mark_end()
+      for logger in _get_registered_loggers():
+        logger.builder(
+            metadata=metadata,
+            name=name,
             try_gcs=kwargs.get("try_gcs"),
         )
 
