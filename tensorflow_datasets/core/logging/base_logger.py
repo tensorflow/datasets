@@ -15,10 +15,15 @@
 
 """This module defines the methods a logger implementation should define."""
 
-from typing import Dict, Optional, Union
+from typing import Optional
 
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core.utils import read_config as tfds_read_config
+from tensorflow_datasets.core.logging import call_metadata
+from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.core.utils import type_utils
+
+TreeDict = type_utils.TreeDict
 
 
 class Logger:
@@ -32,16 +37,17 @@ class Logger:
   def as_dataset(
       self,
       *,
-      dataset_name: str,
+      metadata: call_metadata.CallMetadata,
+      name: str,
       config_name: Optional[str],
       version: str,
       data_path: str,
-      split: Union[str, splits_lib.ReadInstruction],
+      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
       batch_size: Optional[int],
       shuffle_files: bool,
-      read_config: tfds_read_config.ReadConfig,
+      read_config: read_config_lib.ReadConfig,
       as_supervised: bool,
-      decoders: Dict[str, str],
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
   ):
     """Callback called when user calls `dataset_builder.as_dataset`.
 
@@ -49,7 +55,8 @@ class Logger:
     The logger MUST NOT mutate passed objects (decoders, read_config, ...).
 
     Args:
-      dataset_name: the name of the dataset. E.g.: "mnist".
+      metadata: CallMetadata associated to call.
+      name: the name of the dataset. E.g.: "mnist".
       config_name: the name of the config or None.
       version: the dataset version. E.g.: "1.2.3".
       data_path: The path to directory of the dataset loaded. E.g.:
