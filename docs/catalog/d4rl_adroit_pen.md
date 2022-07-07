@@ -31,6 +31,19 @@ to represent steps and episodes.
     *   `1.0.0`: Initial release.
     *   **`1.1.0`** (default): Added is_last.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -57,20 +70,6 @@ to represent steps and episodes.
 
 *   **Config description**: See more details about the task and its versions in
     https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
-
-*   **Download size**: `1.94 MiB`
-
-*   **Dataset size**: `2.52 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 50
 
 *   **Feature structure**:
 
@@ -151,20 +150,6 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: See more details about the task and its versions in
     https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
 
-*   **Download size**: `292.85 MiB`
-
-*   **Dataset size**: `252.55 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,023
-
 *   **Feature structure**:
 
 ```python
@@ -243,20 +228,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: See more details about the task and its versions in
     https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
-
-*   **Download size**: `250.13 MiB`
-
-*   **Dataset size**: `344.41 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
 
 *   **Feature structure**:
 
@@ -341,20 +312,6 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: See more details about the task and its versions in
     https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
 
-*   **Download size**: `1.95 MiB`
-
-*   **Dataset size**: `2.60 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25
-
 *   **Feature structure**:
 
 ```python
@@ -435,20 +392,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: See more details about the task and its versions in
     https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit
-
-*   **Download size**: `147.89 MiB`
-
-*   **Dataset size**: `1.43 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 3,755
 
 *   **Feature structure**:
 
@@ -557,20 +500,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_adroit_pen/v1-expert
-
-*   **Download size**: `249.90 MiB`
-
-*   **Dataset size**: `548.47 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
 
 *   **Feature structure**:
 

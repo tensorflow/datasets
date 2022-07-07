@@ -34,6 +34,8 @@ GitHub: https://github.com/salesforce/booksum
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -55,7 +57,12 @@ skip missing entries.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -100,16 +107,6 @@ summary  | Text         |       | tf.string |
 
 *   **Config description**: Book-level summarization
 
-*   **Dataset size**: `208.81 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 46
-`'train'`      | 312
-`'validation'` | 45
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -150,16 +147,6 @@ dataButton.addEventListener('click', async () => {
 ## booksum/chapter
 
 *   **Config description**: chapter-level summarization
-
-*   **Dataset size**: `216.71 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,083
-`'train'`      | 6,524
-`'validation'` | 891
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

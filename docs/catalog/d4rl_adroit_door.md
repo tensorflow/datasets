@@ -34,6 +34,19 @@ to represent steps and episodes.
     *   `1.0.0`: Initial release.
     *   **`1.1.0`** (default): Added is_last.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -57,20 +70,6 @@ to represent steps and episodes.
 
 
 ## d4rl_adroit_door/v0-human (default config)
-
-*   **Download size**: `2.97 MiB`
-
-*   **Dataset size**: `3.36 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 50
 
 *   **Feature structure**:
 
@@ -148,20 +147,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_adroit_door/v0-cloned
 
-*   **Download size**: `602.42 MiB`
-
-*   **Dataset size**: `497.47 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 6,214
-
 *   **Feature structure**:
 
 ```python
@@ -237,20 +222,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_adroit_door/v0-expert
-
-*   **Download size**: `511.05 MiB`
-
-*   **Dataset size**: `710.30 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
 
 *   **Feature structure**:
 
@@ -332,20 +303,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_adroit_door/v1-human
 
-*   **Download size**: `2.98 MiB`
-
-*   **Dataset size**: `3.42 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25
-
 *   **Feature structure**:
 
 ```python
@@ -423,20 +380,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_adroit_door/v1-cloned
-
-*   **Download size**: `280.72 MiB`
-
-*   **Dataset size**: `1.85 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 4,358
 
 *   **Feature structure**:
 
@@ -545,20 +488,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_adroit_door/v1-expert
-
-*   **Download size**: `511.22 MiB`
-
-*   **Dataset size**: `803.48 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
 
 *   **Feature structure**:
 

@@ -48,6 +48,17 @@ ones. For details on how the dataset was generated, please refer to the paper.
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -75,18 +86,6 @@ ones. For details on how the dataset was generated, please refer to the paper.
 
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_none_1_percent (default config)
-
-*   **Dataset size**: `172.43 KiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5
 
 *   **Feature structure**:
 
@@ -164,18 +163,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_none_5_percent
 
-*   **Dataset size**: `862.13 KiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25
-
 *   **Feature structure**:
 
 ```python
@@ -251,18 +238,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_none_20_percent
-
-*   **Dataset size**: `3.37 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 100
 
 *   **Feature structure**:
 
@@ -340,18 +315,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_none_40_percent
 
-*   **Dataset size**: `6.74 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
-
 *   **Feature structure**:
 
 ```python
@@ -428,18 +391,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_none_100_percent
 
-*   **Dataset size**: `16.84 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 500
-
 *   **Feature structure**:
 
 ```python
@@ -515,18 +466,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_none_1_percent
-
-*   **Dataset size**: `1.77 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5
 
 *   **Feature structure**:
 
@@ -610,18 +549,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_none_5_percent
 
-*   **Dataset size**: `8.86 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25
-
 *   **Feature structure**:
 
 ```python
@@ -703,18 +630,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_none_20_percent
-
-*   **Dataset size**: `35.46 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 100
 
 *   **Feature structure**:
 
@@ -798,18 +713,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_none_40_percent
 
-*   **Dataset size**: `70.92 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
-
 *   **Feature structure**:
 
 ```python
@@ -891,18 +794,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_none_100_percent
-
-*   **Dataset size**: `177.29 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 500
 
 *   **Feature structure**:
 
@@ -986,18 +877,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/walker_walk_combined_challenge_none_1_percent
 
-*   **Dataset size**: `6.27 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 50
-
 *   **Feature structure**:
 
 ```python
@@ -1075,18 +954,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/walker_walk_combined_challenge_none_5_percent
-
-*   **Dataset size**: `31.34 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 250
 
 *   **Feature structure**:
 
@@ -1166,18 +1033,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/walker_walk_combined_challenge_none_20_percent
 
-*   **Dataset size**: `125.37 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
-
 *   **Feature structure**:
 
 ```python
@@ -1255,18 +1110,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/walker_walk_combined_challenge_none_40_percent
-
-*   **Dataset size**: `250.75 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 2,000
 
 *   **Feature structure**:
 
@@ -1346,18 +1189,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/walker_walk_combined_challenge_none_100_percent
 
-*   **Dataset size**: `626.86 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
-
 *   **Feature structure**:
 
 ```python
@@ -1435,18 +1266,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_none_1_percent
-
-*   **Dataset size**: `69.40 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
 
 *   **Feature structure**:
 
@@ -1532,18 +1351,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_none_5_percent
 
-*   **Dataset size**: `346.98 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
-
 *   **Feature structure**:
 
 ```python
@@ -1627,18 +1434,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_none_20_percent
-
-*   **Dataset size**: `1.36 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 4,000
 
 *   **Feature structure**:
 
@@ -1724,18 +1519,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_none_40_percent
 
-*   **Dataset size**: `2.71 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 8,000
-
 *   **Feature structure**:
 
 ```python
@@ -1820,18 +1603,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_none_100_percent
 
-*   **Dataset size**: `6.78 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 20,000
-
 *   **Feature structure**:
 
 ```python
@@ -1915,18 +1686,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_easy_1_percent
-
-*   **Dataset size**: `369.84 KiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5
 
 *   **Feature structure**:
 
@@ -2024,18 +1783,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_easy_5_percent
 
-*   **Dataset size**: `1.81 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25
-
 *   **Feature structure**:
 
 ```python
@@ -2131,18 +1878,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_easy_20_percent
-
-*   **Dataset size**: `7.22 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 100
 
 *   **Feature structure**:
 
@@ -2240,18 +1975,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_easy_40_percent
 
-*   **Dataset size**: `14.45 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
-
 *   **Feature structure**:
 
 ```python
@@ -2348,18 +2071,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/cartpole_swingup_combined_challenge_easy_100_percent
 
-*   **Dataset size**: `36.12 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 500
-
 *   **Feature structure**:
 
 ```python
@@ -2455,18 +2166,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_easy_1_percent
-
-*   **Dataset size**: `1.97 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5
 
 *   **Feature structure**:
 
@@ -2570,18 +2269,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_easy_5_percent
 
-*   **Dataset size**: `9.83 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25
-
 *   **Feature structure**:
 
 ```python
@@ -2683,18 +2370,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_easy_20_percent
-
-*   **Dataset size**: `39.31 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 100
 
 *   **Feature structure**:
 
@@ -2798,18 +2473,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_easy_40_percent
 
-*   **Dataset size**: `78.63 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
-
 *   **Feature structure**:
 
 ```python
@@ -2911,18 +2574,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/quadruped_walk_combined_challenge_easy_100_percent
-
-*   **Dataset size**: `196.57 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 500
 
 *   **Feature structure**:
 
@@ -3026,18 +2677,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/walker_walk_combined_challenge_easy_1_percent
 
-*   **Dataset size**: `8.20 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 50
-
 *   **Feature structure**:
 
 ```python
@@ -3135,18 +2774,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/walker_walk_combined_challenge_easy_5_percent
-
-*   **Dataset size**: `40.98 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 250
 
 *   **Feature structure**:
 
@@ -3246,18 +2873,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/walker_walk_combined_challenge_easy_20_percent
 
-*   **Dataset size**: `163.93 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
-
 *   **Feature structure**:
 
 ```python
@@ -3355,18 +2970,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/walker_walk_combined_challenge_easy_40_percent
-
-*   **Dataset size**: `327.86 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 2,000
 
 *   **Feature structure**:
 
@@ -3466,18 +3069,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/walker_walk_combined_challenge_easy_100_percent
 
-*   **Dataset size**: `819.65 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
-
 *   **Feature structure**:
 
 ```python
@@ -3575,18 +3166,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_easy_1_percent
-
-*   **Dataset size**: `77.11 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
 
 *   **Feature structure**:
 
@@ -3692,18 +3271,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_easy_5_percent
 
-*   **Dataset size**: `385.54 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
-
 *   **Feature structure**:
 
 ```python
@@ -3807,18 +3374,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_easy_20_percent
-
-*   **Dataset size**: `1.51 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 4,000
 
 *   **Feature structure**:
 
@@ -3924,18 +3479,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_easy_40_percent
 
-*   **Dataset size**: `3.01 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 8,000
-
 *   **Feature structure**:
 
 ```python
@@ -4039,18 +3582,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_rwrl/humanoid_walk_combined_challenge_easy_100_percent
-
-*   **Dataset size**: `7.53 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 20,000
 
 *   **Feature structure**:
 

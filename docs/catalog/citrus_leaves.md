@@ -42,19 +42,18 @@ http://creativecommons.org/licenses/by/4.0
     *   `0.1.1`: Citrus Leaves dataset
     *   **`0.1.2`** (default): Website URL update
 
-*   **Download size**: `63.87 MiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `37.89 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 594
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
