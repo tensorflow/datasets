@@ -15,10 +15,15 @@
 
 """This module defines the methods a logger implementation should define."""
 
-from typing import Dict, Optional, Union
+from typing import Optional
 
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits as splits_lib
-from tensorflow_datasets.core.utils import read_config as tfds_read_config
+from tensorflow_datasets.core.logging import call_metadata
+from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.core.utils import type_utils
+
+TreeDict = type_utils.TreeDict
 
 
 class Logger:
@@ -29,19 +34,44 @@ class Logger:
   Exceptions are *NOT* caught.
   """
 
-  def as_dataset(
+  def tfds_import(self, *, metadata: call_metadata.CallMetadata,
+                  import_time_ms_tensorflow: int,
+                  import_time_ms_dataset_builders: int):
+    """Callback called when user calls `import tensorflow_datasets`."""
+    pass
+
+  def builder_init(self, *, metadata: call_metadata.CallMetadata, name: str,
+                   data_dir: Optional[str], config: Optional[str],
+                   version: Optional[str]):
+    """Callback called when user calls `DatasetBuilder(...)`."""
+    pass
+
+  def builder_info(
       self,
       *,
-      dataset_name: str,
+      metadata: call_metadata.CallMetadata,
+      name: str,
       config_name: Optional[str],
       version: str,
       data_path: str,
-      split: Union[str, splits_lib.ReadInstruction],
+  ):
+    """Callback called when user calls `builder.info()`."""
+    pass
+
+  def as_dataset(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      config_name: Optional[str],
+      version: str,
+      data_path: str,
+      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
       batch_size: Optional[int],
       shuffle_files: bool,
-      read_config: tfds_read_config.ReadConfig,
+      read_config: read_config_lib.ReadConfig,
       as_supervised: bool,
-      decoders: Dict[str, str],
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
   ):
     """Callback called when user calls `dataset_builder.as_dataset`.
 
@@ -49,7 +79,8 @@ class Logger:
     The logger MUST NOT mutate passed objects (decoders, read_config, ...).
 
     Args:
-      dataset_name: the name of the dataset. E.g.: "mnist".
+      metadata: CallMetadata associated to call.
+      name: the name of the dataset. E.g.: "mnist".
       config_name: the name of the config or None.
       version: the dataset version. E.g.: "1.2.3".
       data_path: The path to directory of the dataset loaded. E.g.:
@@ -62,4 +93,42 @@ class Logger:
       decoders: flatten dict of decoders dict given to `as_dataset`, with the
         values being `{module_name}.{class_name}` instad of a
     """
-    raise NotImplementedError
+    pass
+
+  def builder(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      try_gcs: Optional[bool],
+  ):
+    """Callback called when user calls `tfds.builder(...)`."""
+    pass
+
+  def load(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      split: Optional[type_utils.Tree[splits_lib.SplitArg]],
+      data_dir: Optional[str],
+      batch_size: Optional[int],
+      shuffle_files: Optional[bool],
+      download: Optional[bool],
+      as_supervised: Optional[bool],
+      decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
+      read_config: Optional[read_config_lib.ReadConfig],
+      with_info: Optional[bool],
+      try_gcs: Optional[bool],
+  ):
+    """Callback called when user calls `tfds.load(...)`."""
+    pass
+
+  def list_builders(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      with_community_datasets: Optional[bool],
+  ):
+    """Callback called when user calls `tfds.list_builders(...)`."""
+    pass
