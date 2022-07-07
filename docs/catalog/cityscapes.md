@@ -58,6 +58,8 @@ get the files.
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -69,7 +71,12 @@ get the files.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -94,16 +101,6 @@ get the files.
 ## cityscapes/semantic_segmentation (default config)
 
 *   **Config description**: Cityscapes semantic segmentation dataset.
-
-*   **Dataset size**: `10.86 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,525
-`'train'`      | 2,975
-`'validation'` | 500
 
 *   **Feature structure**:
 
@@ -166,16 +163,6 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Cityscapes semantic segmentation dataset with
     train_extra split and coarse labels.
 
-*   **Dataset size**: `51.92 GiB`
-
-*   **Splits**:
-
-Split           | Examples
-:-------------- | -------:
-`'train'`       | 2,975
-`'train_extra'` | 19,998
-`'validation'`  | 500
-
 *   **Feature structure**:
 
 ```python
@@ -235,16 +222,6 @@ dataButton.addEventListener('click', async () => {
 ## cityscapes/stereo_disparity
 
 *   **Config description**: Cityscapes stereo image and disparity maps dataset.
-
-*   **Dataset size**: `25.03 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,525
-`'train'`      | 2,975
-`'validation'` | 500
 
 *   **Feature structure**:
 
@@ -308,16 +285,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Cityscapes stereo image and disparity maps dataset
     with train_extra split.
-
-*   **Dataset size**: `119.18 GiB`
-
-*   **Splits**:
-
-Split           | Examples
-:-------------- | -------:
-`'train'`       | 2,975
-`'train_extra'` | 19,997
-`'validation'`  | 500
 
 *   **Feature structure**:
 

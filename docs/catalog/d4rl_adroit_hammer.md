@@ -34,6 +34,19 @@ to represent steps and episodes.
     *   `1.0.0`: Initial release.
     *   **`1.1.0`** (default): Added is_last.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -57,20 +70,6 @@ to represent steps and episodes.
 
 
 ## d4rl_adroit_hammer/v0-human (default config)
-
-*   **Download size**: `5.33 MiB`
-
-*   **Dataset size**: `6.10 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 70
 
 *   **Feature structure**:
 
@@ -148,20 +147,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_adroit_hammer/v0-cloned
 
-*   **Download size**: `644.69 MiB`
-
-*   **Dataset size**: `538.97 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,594
-
 *   **Feature structure**:
 
 ```python
@@ -237,20 +222,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_adroit_hammer/v0-expert
-
-*   **Download size**: `529.91 MiB`
-
-*   **Dataset size**: `737.00 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
 
 *   **Feature structure**:
 
@@ -332,20 +303,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_adroit_hammer/v1-human
 
-*   **Download size**: `5.35 MiB`
-
-*   **Dataset size**: `6.34 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25
-
 *   **Feature structure**:
 
 ```python
@@ -425,20 +382,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_adroit_hammer/v1-cloned
-
-*   **Download size**: `425.93 MiB`
-
-*   **Dataset size**: `1.68 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 3,606
 
 *   **Feature structure**:
 
@@ -549,20 +492,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_adroit_hammer/v1-expert
-
-*   **Download size**: `531.24 MiB`
-
-*   **Dataset size**: `843.54 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,000
 
 *   **Feature structure**:
 

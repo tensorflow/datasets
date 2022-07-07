@@ -1154,17 +1154,14 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
 
-*   **Download size**: `28.32 KiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `198.88 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 146
-`'train'`      | 635
-`'validation'` | 71
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -1255,15 +1252,14 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
 
-*   **Download size**: `217.05 KiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `299.16 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 1,104
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

@@ -38,6 +38,19 @@ to represent steps and episodes.
     *   **`1.2.0`** (default): Updated to take into account the next
         observation.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -61,20 +74,6 @@ to represent steps and episodes.
 
 
 ## d4rl_mujoco_halfcheetah/v0-expert (default config)
-
-*   **Download size**: `83.44 MiB`
-
-*   **Dataset size**: `98.43 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,002
 
 *   **Feature structure**:
 
@@ -145,20 +144,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_halfcheetah/v0-medium
 
-*   **Download size**: `82.92 MiB`
-
-*   **Dataset size**: `98.43 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,002
-
 *   **Feature structure**:
 
 ```python
@@ -227,20 +212,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v0-medium-expert
-
-*   **Download size**: `166.36 MiB`
-
-*   **Dataset size**: `196.86 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 2,004
 
 *   **Feature structure**:
 
@@ -311,20 +282,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_halfcheetah/v0-mixed
 
-*   **Download size**: `8.60 MiB`
-
-*   **Dataset size**: `9.94 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 101
-
 *   **Feature structure**:
 
 ```python
@@ -394,20 +351,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_halfcheetah/v0-random
 
-*   **Download size**: `84.79 MiB`
-
-*   **Dataset size**: `98.43 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,002
-
 *   **Feature structure**:
 
 ```python
@@ -476,20 +419,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v1-expert
-
-*   **Download size**: `146.94 MiB`
-
-*   **Dataset size**: `451.88 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
 
 *   **Feature structure**:
 
@@ -608,20 +537,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_halfcheetah/v1-medium
 
-*   **Download size**: `146.65 MiB`
-
-*   **Dataset size**: `451.88 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
-
 *   **Feature structure**:
 
 ```python
@@ -739,20 +654,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_halfcheetah/v1-medium-expert
 
-*   **Download size**: `293.00 MiB`
-
-*   **Dataset size**: `342.37 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 2,000
-
 *   **Feature structure**:
 
 ```python
@@ -830,20 +731,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v1-medium-replay
-
-*   **Download size**: `57.68 MiB`
-
-*   **Dataset size**: `34.59 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 202
 
 *   **Feature structure**:
 
@@ -927,20 +814,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_halfcheetah/v1-full-replay
 
-*   **Download size**: `285.01 MiB`
-
-*   **Dataset size**: `171.22 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
-
 *   **Feature structure**:
 
 ```python
@@ -1023,20 +896,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_halfcheetah/v1-random
 
-*   **Download size**: `145.19 MiB`
-
-*   **Dataset size**: `171.18 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
-
 *   **Feature structure**:
 
 ```python
@@ -1114,20 +973,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v2-expert
-
-*   **Download size**: `226.46 MiB`
-
-*   **Dataset size**: `451.88 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
 
 *   **Feature structure**:
 
@@ -1246,20 +1091,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_halfcheetah/v2-full-replay
 
-*   **Download size**: `277.88 MiB`
-
-*   **Dataset size**: `171.22 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
-
 *   **Feature structure**:
 
 ```python
@@ -1341,20 +1172,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v2-medium
-
-*   **Download size**: `226.71 MiB`
-
-*   **Dataset size**: `451.88 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
 
 *   **Feature structure**:
 
@@ -1473,20 +1290,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_halfcheetah/v2-medium-expert
 
-*   **Download size**: `452.58 MiB`
-
-*   **Dataset size**: `342.37 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 2,000
-
 *   **Feature structure**:
 
 ```python
@@ -1564,20 +1367,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v2-medium-replay
-
-*   **Download size**: `56.69 MiB`
-
-*   **Dataset size**: `34.59 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 202
 
 *   **Feature structure**:
 
@@ -1660,20 +1449,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_halfcheetah/v2-random
-
-*   **Download size**: `226.34 MiB`
-
-*   **Dataset size**: `171.18 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,000
 
 *   **Feature structure**:
 

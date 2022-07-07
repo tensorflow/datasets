@@ -36,6 +36,19 @@ More information can be found at
     *   `1.0.1`: Update bad links filter for MLSum
     *   **`1.1.0`** (default): Release of the Challenge Sets
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -52,25 +65,6 @@ More information can be found at
     ability of generative commonsense reasoning. Given a set of common concepts;
     the task is to generate a coherent sentence describing an everyday scenario
     using these concepts.
-
-*   **Download size**: `1.84 MiB`
-
-*   **Dataset size**: `16.84 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split                           | Examples
-:------------------------------ | -------:
-`'challenge_test_scramble'`     | 500
-`'challenge_train_sample'`      | 500
-`'challenge_validation_sample'` | 500
-`'test'`                        | 1,497
-`'train'`                       | 67,389
-`'validation'`                  | 993
 
 *   **Feature structure**:
 
@@ -231,25 +225,6 @@ the correct citation for each contained dataset."
     The input is a basic intent/dialogue act type and a list of slots
     (attributes) and their values. The output is a natural language sentence.
 
-*   **Download size**: `1.46 MiB`
-
-*   **Dataset size**: `2.71 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split                           | Examples
-:------------------------------ | -------:
-`'challenge_test_scramble'`     | 500
-`'challenge_train_sample'`      | 500
-`'challenge_validation_sample'` | 500
-`'test'`                        | 842
-`'train'`                       | 3,569
-`'validation'`                  | 781
-
 *   **Feature structure**:
 
 ```python
@@ -406,22 +381,6 @@ the correct citation for each contained dataset."
     each input being a set of entity-relation triples following a
     tree-structured ontology.
 
-*   **Download size**: `28.01 MiB`
-
-*   **Dataset size**: `33.78 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 6,959
-`'train'`      | 62,659
-`'validation'` | 2,768
-
 *   **Feature structure**:
 
 ```python
@@ -574,25 +533,6 @@ the correct citation for each contained dataset."
     data-to-text task -- generation of restaurant descriptions/recommendations
     based on up to 8 different attributes (name, area, price range etc.)
 
-*   **Download size**: `13.99 MiB`
-
-*   **Dataset size**: `16.92 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split                           | Examples
-:------------------------------ | -------:
-`'challenge_test_scramble'`     | 500
-`'challenge_train_sample'`      | 500
-`'challenge_validation_sample'` | 500
-`'test'`                        | 4,693
-`'train'`                       | 33,525
-`'validation'`                  | 4,299
-
 *   **Feature structure**:
 
 ```python
@@ -740,25 +680,6 @@ the correct citation for each contained dataset."
 *   **Config description**: MLSum is a large-scale multiLingual summarization
     dataset. It is buillt from online news outlets, this split focusing on
     German.
-
-*   **Download size**: `345.98 MiB`
-
-*   **Dataset size**: `963.60 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split                           | Examples
-:------------------------------ | -------:
-`'challenge_test_covid'`        | 5,058
-`'challenge_train_sample'`      | 500
-`'challenge_validation_sample'` | 500
-`'test'`                        | 10,695
-`'train'`                       | 220,748
-`'validation'`                  | 11,392
 
 *   **Feature structure**:
 
@@ -913,25 +834,6 @@ the correct citation for each contained dataset."
     dataset. It is buillt from online news outlets, this split focusing on
     Spanish.
 
-*   **Download size**: `501.27 MiB`
-
-*   **Dataset size**: `1.29 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split                           | Examples
-:------------------------------ | -------:
-`'challenge_test_covid'`        | 1,938
-`'challenge_train_sample'`      | 500
-`'challenge_validation_sample'` | 500
-`'test'`                        | 13,366
-`'train'`                       | 259,888
-`'validation'`                  | 9,977
-
 *   **Feature structure**:
 
 ```python
@@ -1085,32 +987,6 @@ the correct citation for each contained dataset."
     18K multi-domain task-oriented dialogues between a human and a virtual
     assistant, which covers 17 domains ranging from banks and events to media,
     calendar, travel, and weather.
-
-*   **Download size**: `17.00 MiB`
-
-*   **Dataset size**: `201.19 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (challenge_test_backtranslation, challenge_test_bfp02,
-    challenge_test_bfp05, challenge_test_nopunc, challenge_test_scramble,
-    challenge_train_sample, challenge_validation_sample, test, validation), Only
-    when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split                              | Examples
-:--------------------------------- | -------:
-`'challenge_test_backtranslation'` | 500
-`'challenge_test_bfp02'`           | 500
-`'challenge_test_bfp05'`           | 500
-`'challenge_test_nopunc'`          | 500
-`'challenge_test_scramble'`        | 500
-`'challenge_train_sample'`         | 500
-`'challenge_validation_sample'`    | 500
-`'test'`                           | 10,000
-`'train'`                          | 164,982
-`'validation'`                     | 10,000
 
 *   **Feature structure**:
 
@@ -1274,25 +1150,6 @@ the correct citation for each contained dataset."
     follows: Given a Wikipedia table with row names, column names and table
     cells, with a subset of cells highlighted, generate a natural language
     description for the highlighted part of the table.
-
-*   **Download size**: `180.75 MiB`
-
-*   **Dataset size**: `645.86 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split                           | Examples
-:------------------------------ | -------:
-`'challenge_test_scramble'`     | 500
-`'challenge_train_sample'`      | 500
-`'challenge_validation_sample'` | 500
-`'test'`                        | 7,700
-`'train'`                       | 121,153
-`'validation'`                  | 7,700
 
 *   **Feature structure**:
 
@@ -1478,26 +1335,6 @@ the correct citation for each contained dataset."
     development of RDF verbalisers able to generate short text and to handle
     micro-planning.
 
-*   **Download size**: `12.57 MiB`
-
-*   **Dataset size**: `19.91 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split                           | Examples
-:------------------------------ | -------:
-`'challenge_test_numbers'`      | 500
-`'challenge_test_scramble'`     | 500
-`'challenge_train_sample'`      | 502
-`'challenge_validation_sample'` | 499
-`'test'`                        | 1,779
-`'train'`                       | 35,426
-`'validation'`                  | 1,667
-
 *   **Feature structure**:
 
 ```python
@@ -1657,25 +1494,6 @@ the correct citation for each contained dataset."
     development of RDF verbalisers able to generate short text and to handle
     micro-planning.
 
-*   **Download size**: `7.49 MiB`
-
-*   **Dataset size**: `11.30 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split                           | Examples
-:------------------------------ | -------:
-`'challenge_test_scramble'`     | 500
-`'challenge_train_sample'`      | 501
-`'challenge_validation_sample'` | 500
-`'test'`                        | 1,102
-`'train'`                       | 14,630
-`'validation'`                  | 790
-
 *   **Feature structure**:
 
 ```python
@@ -1834,38 +1652,6 @@ the correct citation for each contained dataset."
     sentence simplification systems. ASSET and TURK are high-quality
     simplification datasets used for testing.
 
-*   **Download size**: `121.01 MiB`
-
-*   **Dataset size**: `202.40 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (challenge_test_asset_backtranslation, challenge_test_asset_bfp02,
-    challenge_test_asset_bfp05, challenge_test_asset_nopunc,
-    challenge_test_turk_backtranslation, challenge_test_turk_bfp02,
-    challenge_test_turk_bfp05, challenge_test_turk_nopunc,
-    challenge_train_sample, challenge_validation_sample, test_asset, test_turk,
-    validation), Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split                                    | Examples
-:--------------------------------------- | -------:
-`'challenge_test_asset_backtranslation'` | 359
-`'challenge_test_asset_bfp02'`           | 359
-`'challenge_test_asset_bfp05'`           | 359
-`'challenge_test_asset_nopunc'`          | 359
-`'challenge_test_turk_backtranslation'`  | 359
-`'challenge_test_turk_bfp02'`            | 359
-`'challenge_test_turk_bfp05'`            | 359
-`'challenge_test_turk_nopunc'`           | 359
-`'challenge_train_sample'`               | 500
-`'challenge_validation_sample'`          | 500
-`'test_asset'`                           | 359
-`'test_turk'`                            | 359
-`'train'`                                | 483,801
-`'validation'`                           | 20,000
-
 *   **Feature structure**:
 
 ```python
@@ -2021,29 +1807,6 @@ the correct citation for each contained dataset."
     summarization in its extreme form, its about summarizing a document in a
     single sentence.
 
-*   **Download size**: `246.31 MiB`
-
-*   **Dataset size**: `78.89 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split                              | Examples
-:--------------------------------- | -------:
-`'challenge_test_backtranslation'` | 500
-`'challenge_test_bfp_02'`          | 500
-`'challenge_test_bfp_05'`          | 500
-`'challenge_test_covid'`           | 401
-`'challenge_test_nopunc'`          | 500
-`'challenge_train_sample'`         | 500
-`'challenge_validation_sample'`    | 500
-`'test'`                           | 1,166
-`'train'`                          | 23,206
-`'validation'`                     | 1,117
-
 *   **Feature structure**:
 
 ```python
@@ -2190,22 +1953,6 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
-
-*   **Download size**: `56.25 MiB`
-
-*   **Dataset size**: `291.42 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 5,841
-`'train'`      | 20,441
-`'validation'` | 2,919
 
 *   **Feature structure**:
 
@@ -2365,22 +2112,6 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `31.38 MiB`
-
-*   **Dataset size**: `122.06 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 3,775
-`'train'`      | 13,211
-`'validation'` | 1,886
-
 *   **Feature structure**:
 
 ```python
@@ -2538,22 +2269,6 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
-
-*   **Download size**: `13.84 MiB`
-
-*   **Dataset size**: `58.05 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,438
-`'train'`      | 5,033
-`'validation'` | 718
 
 *   **Feature structure**:
 
@@ -2713,22 +2428,6 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `53.88 MiB`
-
-*   **Dataset size**: `237.97 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 6,248
-`'train'`      | 21,866
-`'validation'` | 3,123
-
 *   **Feature structure**:
 
 ```python
@@ -2887,22 +2586,6 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `112.56 MiB`
-
-*   **Dataset size**: `657.51 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 28,614
-`'train'`      | 99,020
-`'validation'` | 13,823
-
 *   **Feature structure**:
 
 ```python
@@ -3056,22 +2739,6 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
-
-*   **Download size**: `113.26 MiB`
-
-*   **Dataset size**: `522.28 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 12,731
-`'train'`      | 44,556
-`'validation'` | 6,364
 
 *   **Feature structure**:
 
@@ -3231,22 +2898,6 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `102.65 MiB`
-
-*   **Dataset size**: `452.46 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 11,669
-`'train'`      | 40,839
-`'validation'` | 5,833
-
 *   **Feature structure**:
 
 ```python
@@ -3404,22 +3055,6 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
-
-*   **Download size**: `20.07 MiB`
-
-*   **Dataset size**: `138.06 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,984
-`'train'`      | 6,942
-`'validation'` | 991
 
 *   **Feature structure**:
 
@@ -3579,22 +3214,6 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `80.08 MiB`
-
-*   **Dataset size**: `370.63 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 9,497
-`'train'`      | 33,237
-`'validation'` | 4,747
-
 *   **Feature structure**:
 
 ```python
@@ -3752,22 +3371,6 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
-
-*   **Download size**: `84.80 MiB`
-
-*   **Dataset size**: `374.40 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 10,189
-`'train'`      | 35,661
-`'validation'` | 5,093
 
 *   **Feature structure**:
 
@@ -3927,22 +3530,6 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `21.75 MiB`
-
-*   **Dataset size**: `103.19 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 2,530
-`'train'`      | 8,853
-`'validation'` | 1,264
-
 *   **Feature structure**:
 
 ```python
@@ -4100,22 +3687,6 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
-
-*   **Download size**: `22.26 MiB`
-
-*   **Dataset size**: `102.35 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 2,436
-`'train'`      | 8,524
-`'validation'` | 1,216
 
 *   **Feature structure**:
 
@@ -4275,22 +3846,6 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `131.17 MiB`
-
-*   **Dataset size**: `570.46 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 16,331
-`'train'`      | 57,159
-`'validation'` | 8,165
-
 *   **Feature structure**:
 
 ```python
@@ -4448,22 +4003,6 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
-
-*   **Download size**: `101.36 MiB`
-
-*   **Dataset size**: `564.69 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 10,580
-`'train'`      | 37,028
-`'validation'` | 5,288
 
 *   **Feature structure**:
 
@@ -4623,22 +4162,6 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `189.06 MiB`
-
-*   **Dataset size**: `849.75 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 22,632
-`'train'`      | 79,212
-`'validation'` | 11,316
-
 *   **Feature structure**:
 
 ```python
@@ -4796,22 +4319,6 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
-
-*   **Download size**: `28.60 MiB`
-
-*   **Dataset size**: `193.77 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 2,950
-`'train'`      | 10,325
-`'validation'` | 1,475
 
 *   **Feature structure**:
 
@@ -4971,22 +4478,6 @@ the correct citation for each contained dataset."
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
 
-*   **Download size**: `6.73 MiB`
-
-*   **Dataset size**: `30.75 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 900
-`'train'`      | 3,148
-`'validation'` | 449
-
 *   **Feature structure**:
 
 ```python
@@ -5144,22 +4635,6 @@ the correct citation for each contained dataset."
 
 *   **Config description**: Wikilingua is a large-scale, multilingual dataset
     for the evaluation of cross-lingual abstractive summarization systems..
-
-*   **Download size**: `36.27 MiB`
-
-*   **Dataset size**: `179.77 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 3,917
-`'train'`      | 13,707
-`'validation'` | 1,957
 
 *   **Feature structure**:
 

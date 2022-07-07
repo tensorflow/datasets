@@ -32,11 +32,18 @@ simplicity for the outputs of several automatic text simplification systems.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `3.47 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -72,15 +79,6 @@ simplicity for the outputs of several automatic text simplification systems.
 
 *   **Config description**: A set of original sentences aligned with 10 possible
     simplifications for each.
-
-*   **Dataset size**: `2.64 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 359
-`'validation'` | 2,000
 
 *   **Feature structure**:
 
@@ -140,14 +138,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Human ratings of automatically produced text
     simplification.
-
-*   **Dataset size**: `1.44 MiB`
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'full'` | 4,500
 
 *   **Feature structure**:
 

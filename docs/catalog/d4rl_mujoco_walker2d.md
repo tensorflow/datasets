@@ -36,6 +36,19 @@ to represent steps and episodes.
     *   **`1.2.0`** (default): Updated to take into account the next
         observation.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -59,20 +72,6 @@ to represent steps and episodes.
 
 
 ## d4rl_mujoco_walker2d/v0-expert (default config)
-
-*   **Download size**: `78.41 MiB`
-
-*   **Dataset size**: `98.64 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,628
 
 *   **Feature structure**:
 
@@ -143,20 +142,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v0-medium
 
-*   **Download size**: `80.83 MiB`
-
-*   **Dataset size**: `99.72 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,315
-
 *   **Feature structure**:
 
 ```python
@@ -225,20 +210,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v0-medium-expert
-
-*   **Download size**: `159.24 MiB`
-
-*   **Dataset size**: `198.36 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 6,943
 
 *   **Feature structure**:
 
@@ -309,20 +280,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v0-mixed
 
-*   **Download size**: `8.42 MiB`
-
-*   **Dataset size**: `10.06 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 501
-
 *   **Feature structure**:
 
 ```python
@@ -392,20 +349,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v0-random
 
-*   **Download size**: `78.41 MiB`
-
-*   **Dataset size**: `112.04 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 50,988
-
 *   **Feature structure**:
 
 ```python
@@ -474,20 +417,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-expert
-
-*   **Download size**: `143.06 MiB`
-
-*   **Dataset size**: `452.72 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,003
 
 *   **Feature structure**:
 
@@ -606,20 +535,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v1-medium
 
-*   **Download size**: `144.23 MiB`
-
-*   **Dataset size**: `510.08 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,207
-
 *   **Feature structure**:
 
 ```python
@@ -737,20 +652,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v1-medium-expert
 
-*   **Download size**: `286.69 MiB`
-
-*   **Dataset size**: `342.46 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 2,209
-
 *   **Feature structure**:
 
 ```python
@@ -828,20 +729,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v1-medium-replay
-
-*   **Download size**: `84.37 MiB`
-
-*   **Dataset size**: `52.10 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,093
 
 *   **Feature structure**:
 
@@ -925,20 +812,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v1-full-replay
 
-*   **Download size**: `278.95 MiB`
-
-*   **Dataset size**: `171.66 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,888
-
 *   **Feature structure**:
 
 ```python
@@ -1021,20 +894,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v1-random
 
-*   **Download size**: `132.36 MiB`
-
-*   **Dataset size**: `192.06 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 48,790
-
 *   **Feature structure**:
 
 ```python
@@ -1112,20 +971,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v2-expert
-
-*   **Download size**: `219.89 MiB`
-
-*   **Dataset size**: `452.16 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,001
 
 *   **Feature structure**:
 
@@ -1244,20 +1089,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v2-full-replay
 
-*   **Download size**: `271.91 MiB`
-
-*   **Dataset size**: `171.66 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,888
-
 *   **Feature structure**:
 
 ```python
@@ -1339,20 +1170,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v2-medium
-
-*   **Download size**: `221.50 MiB`
-
-*   **Dataset size**: `505.58 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,191
 
 *   **Feature structure**:
 
@@ -1471,20 +1288,6 @@ dataButton.addEventListener('click', async () => {
 
 ## d4rl_mujoco_walker2d/v2-medium-expert
 
-*   **Download size**: `440.79 MiB`
-
-*   **Dataset size**: `342.45 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 2,191
-
 *   **Feature structure**:
 
 ```python
@@ -1562,20 +1365,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v2-medium-replay
-
-*   **Download size**: `82.32 MiB`
-
-*   **Dataset size**: `52.10 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,093
 
 *   **Feature structure**:
 
@@ -1658,20 +1447,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## d4rl_mujoco_walker2d/v2-random
-
-*   **Download size**: `206.10 MiB`
-
-*   **Dataset size**: `192.11 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 48,908
 
 *   **Feature structure**:
 

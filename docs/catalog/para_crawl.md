@@ -26,6 +26,19 @@ Web-Scale Parallel Corpora for Official European Languages.
 
     *   **`1.2.0`** (default): No release notes.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -44,20 +57,6 @@ Web-Scale Parallel Corpora for Official European Languages.
 ## para_crawl/enbg (default config)
 
 *   **Config description**: Translation dataset from English to bg.
-
-*   **Download size**: `98.94 MiB`
-
-*   **Dataset size**: `362.46 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 1,039,885
 
 *   **Feature structure**:
 
@@ -121,20 +120,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to cs.
 
-*   **Download size**: `187.31 MiB`
-
-*   **Dataset size**: `666.34 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 2,981,949
-
 *   **Feature structure**:
 
 ```python
@@ -196,20 +181,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/enda
 
 *   **Config description**: Translation dataset from English to da.
-
-*   **Download size**: `174.34 MiB`
-
-*   **Dataset size**: `619.77 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 2,414,895
 
 *   **Feature structure**:
 
@@ -273,20 +244,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to de.
 
-*   **Download size**: `1.22 GiB`
-
-*   **Dataset size**: `4.04 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | ---------:
-`'train'` | 16,264,448
-
 *   **Feature structure**:
 
 ```python
@@ -348,20 +305,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/enel
 
 *   **Config description**: Translation dataset from English to el.
-
-*   **Download size**: `184.59 MiB`
-
-*   **Dataset size**: `698.75 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 1,985,233
 
 *   **Feature structure**:
 
@@ -425,20 +368,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to es.
 
-*   **Download size**: `1.82 GiB`
-
-*   **Dataset size**: `6.23 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | ---------:
-`'train'` | 21,987,267
-
 *   **Feature structure**:
 
 ```python
@@ -500,20 +429,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/enet
 
 *   **Config description**: Translation dataset from English to et.
-
-*   **Download size**: `66.91 MiB`
-
-*   **Dataset size**: `209.16 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 853,422
 
 *   **Feature structure**:
 
@@ -577,20 +492,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to fi.
 
-*   **Download size**: `151.83 MiB`
-
-*   **Dataset size**: `543.85 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 2,156,069
-
 *   **Feature structure**:
 
 ```python
@@ -652,20 +553,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/enfr
 
 *   **Config description**: Translation dataset from English to fr.
-
-*   **Download size**: `2.63 GiB`
-
-*   **Dataset size**: `9.04 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | ---------:
-`'train'` | 31,374,161
 
 *   **Feature structure**:
 
@@ -729,20 +616,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to ga.
 
-*   **Download size**: `28.03 MiB`
-
-*   **Dataset size**: `107.09 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 357,399
-
 *   **Feature structure**:
 
 ```python
@@ -804,20 +677,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/enhr
 
 *   **Config description**: Translation dataset from English to hr.
-
-*   **Download size**: `80.97 MiB`
-
-*   **Dataset size**: `256.37 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 1,002,053
 
 *   **Feature structure**:
 
@@ -881,20 +740,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to hu.
 
-*   **Download size**: `114.24 MiB`
-
-*   **Dataset size**: `421.40 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 1,901,342
-
 *   **Feature structure**:
 
 ```python
@@ -956,20 +801,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/enit
 
 *   **Config description**: Translation dataset from English to it.
-
-*   **Download size**: `1017.30 MiB`
-
-*   **Dataset size**: `3.36 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | ---------:
-`'train'` | 12,162,239
 
 *   **Feature structure**:
 
@@ -1033,20 +864,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to lt.
 
-*   **Download size**: `63.28 MiB`
-
-*   **Dataset size**: `204.70 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 844,643
-
 *   **Feature structure**:
 
 ```python
@@ -1108,20 +925,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/enlv
 
 *   **Config description**: Translation dataset from English to lv.
-
-*   **Download size**: `45.17 MiB`
-
-*   **Dataset size**: `147.09 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 553,060
 
 *   **Feature structure**:
 
@@ -1185,20 +988,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to mt.
 
-*   **Download size**: `18.15 MiB`
-
-*   **Dataset size**: `54.36 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 195,502
-
 *   **Feature structure**:
 
 ```python
@@ -1260,20 +1049,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/ennl
 
 *   **Config description**: Translation dataset from English to nl.
-
-*   **Download size**: `400.63 MiB`
-
-*   **Dataset size**: `1.40 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 5,659,268
 
 *   **Feature structure**:
 
@@ -1337,20 +1112,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to pl.
 
-*   **Download size**: `257.90 MiB`
-
-*   **Dataset size**: `885.63 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 3,503,276
-
 *   **Feature structure**:
 
 ```python
@@ -1412,20 +1173,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/enpt
 
 *   **Config description**: Translation dataset from English to pt.
-
-*   **Download size**: `608.62 MiB`
-
-*   **Dataset size**: `2.05 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 8,141,940
 
 *   **Feature structure**:
 
@@ -1489,20 +1236,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to ro.
 
-*   **Download size**: `153.24 MiB`
-
-*   **Dataset size**: `534.34 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 1,952,043
-
 *   **Feature structure**:
 
 ```python
@@ -1564,20 +1297,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/ensk
 
 *   **Config description**: Translation dataset from English to sk.
-
-*   **Download size**: `96.61 MiB`
-
-*   **Dataset size**: `352.91 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 1,591,831
 
 *   **Feature structure**:
 
@@ -1641,20 +1360,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from English to sl.
 
-*   **Download size**: `62.02 MiB`
-
-*   **Dataset size**: `187.66 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Only when `shuffle_files=False` (train)
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 660,161
-
 *   **Feature structure**:
 
 ```python
@@ -1716,20 +1421,6 @@ dataButton.addEventListener('click', async () => {
 ## para_crawl/ensv
 
 *   **Config description**: Translation dataset from English to sv.
-
-*   **Download size**: `262.76 MiB`
-
-*   **Dataset size**: `905.72 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | --------:
-`'train'` | 3,476,729
 
 *   **Feature structure**:
 

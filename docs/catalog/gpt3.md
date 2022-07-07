@@ -27,11 +27,11 @@ paper.
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `2.15 MiB`
+*   **Download size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Feature structure**:
 
@@ -74,13 +74,12 @@ context    | Text         |       | tf.string |
 
 ## gpt3/cycle_letters_in_word (default config)
 
-*   **Dataset size**: `578.76 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 10,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -121,13 +120,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/five_digit_addition
 
-*   **Dataset size**: `154.76 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -168,13 +166,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/five_digit_subtraction
 
-*   **Dataset size**: `156.37 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -215,13 +212,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/four_digit_addition
 
-*   **Dataset size**: `148.99 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -262,13 +258,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/four_digit_subtraction
 
-*   **Dataset size**: `150.54 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -309,13 +304,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/mid_word_1_anagrams
 
-*   **Dataset size**: `567.89 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 10,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -356,13 +350,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/mid_word_2_anagrams
 
-*   **Dataset size**: `578.76 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 10,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -403,13 +396,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/random_insertion_in_word
 
-*   **Dataset size**: `648.42 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 10,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -450,13 +442,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/reversed_words
 
-*   **Dataset size**: `578.76 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 10,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -497,13 +488,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/single_digit_three_ops
 
-*   **Dataset size**: `138.33 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -544,13 +534,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/six_digit_addition
 
-*   **Dataset size**: `160.70 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -591,13 +580,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/six_digit_subtraction
 
-*   **Dataset size**: `162.26 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -638,13 +626,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/sum_of_digits
 
-*   **Dataset size**: `194.95 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -685,13 +672,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/three_digit_addition
 
-*   **Dataset size**: `143.18 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -732,13 +718,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/three_digit_subtraction
 
-*   **Dataset size**: `144.68 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -779,13 +764,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/two_digit_addition
 
-*   **Dataset size**: `137.33 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -826,13 +810,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/two_digit_multiplication
 
-*   **Dataset size**: `141.29 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -873,13 +856,12 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/two_digit_subtraction
 
-*   **Dataset size**: `138.88 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split    | Examples
-:------- | -------:
-`'test'` | 2,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

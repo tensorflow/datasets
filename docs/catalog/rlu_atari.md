@@ -56,9 +56,16 @@ episode includes the sum of the clipped reward per episode.
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -130,14 +137,6 @@ FeaturesDict({
 
 ## rlu_atari/Alien_run_1 (default config)
 
-*   **Dataset size**: `73.90 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 55,945
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -176,14 +175,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Alien_run_2
-
-*   **Dataset size**: `74.13 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 50,353
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -224,14 +215,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Alien_run_3
 
-*   **Dataset size**: `74.02 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 53,194
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -270,14 +253,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Alien_run_4
-
-*   **Dataset size**: `74.43 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 55,405
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -318,14 +293,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Alien_run_5
 
-*   **Dataset size**: `74.09 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 54,836
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -364,14 +331,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Amidar_run_1
-
-*   **Dataset size**: `76.91 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 23,153
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -412,14 +371,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Amidar_run_2
 
-*   **Dataset size**: `76.70 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 22,713
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -458,14 +409,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Amidar_run_3
-
-*   **Dataset size**: `77.03 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 28,050
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -506,14 +449,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Amidar_run_4
 
-*   **Dataset size**: `77.16 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 26,716
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -552,14 +487,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Amidar_run_5
-
-*   **Dataset size**: `77.42 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 26,027
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -600,14 +527,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Assault_run_1
 
-*   **Dataset size**: `28.70 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 44,237
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -646,14 +565,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Assault_run_2
-
-*   **Dataset size**: `28.62 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 46,114
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -694,14 +605,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Assault_run_3
 
-*   **Dataset size**: `28.66 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 46,146
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -740,14 +643,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Assault_run_4
-
-*   **Dataset size**: `28.64 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 45,517
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -788,14 +683,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Assault_run_5
 
-*   **Dataset size**: `28.63 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 45,283
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -834,14 +721,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Asterix_run_1
-
-*   **Dataset size**: `46.55 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 57,870
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -882,14 +761,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Asterix_run_2
 
-*   **Dataset size**: `46.64 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 56,851
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -928,14 +799,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Asterix_run_3
-
-*   **Dataset size**: `46.45 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 67,577
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -976,14 +839,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Asterix_run_4
 
-*   **Dataset size**: `46.57 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 58,131
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1022,14 +877,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Asterix_run_5
-
-*   **Dataset size**: `46.60 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 58,081
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1070,14 +917,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Atlantis_run_1
 
-*   **Dataset size**: `41.46 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,937
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1116,14 +955,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Atlantis_run_2
-
-*   **Dataset size**: `41.25 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 10,736
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1164,14 +995,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Atlantis_run_3
 
-*   **Dataset size**: `41.48 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,056
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1210,14 +1033,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Atlantis_run_4
-
-*   **Dataset size**: `41.54 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 10,255
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1258,14 +1073,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Atlantis_run_5
 
-*   **Dataset size**: `41.48 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,689
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1304,14 +1111,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/BankHeist_run_1
-
-*   **Dataset size**: `71.93 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,824
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1352,14 +1151,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/BankHeist_run_2
 
-*   **Dataset size**: `71.93 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 42,097
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1398,14 +1189,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/BankHeist_run_3
-
-*   **Dataset size**: `71.82 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 43,758
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1446,14 +1229,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/BankHeist_run_4
 
-*   **Dataset size**: `71.93 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 42,234
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1492,14 +1267,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/BankHeist_run_5
-
-*   **Dataset size**: `71.96 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,935
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1540,14 +1307,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/BattleZone_run_1
 
-*   **Dataset size**: `57.82 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 23,864
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1586,14 +1345,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/BattleZone_run_2
-
-*   **Dataset size**: `57.79 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 26,224
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1634,14 +1385,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/BattleZone_run_3
 
-*   **Dataset size**: `57.80 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,706
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1680,14 +1423,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/BattleZone_run_4
-
-*   **Dataset size**: `57.73 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 22,650
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1728,14 +1463,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/BattleZone_run_5
 
-*   **Dataset size**: `57.83 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25,447
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1774,14 +1501,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/BeamRider_run_1
-
-*   **Dataset size**: `43.72 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 16,403
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1822,14 +1541,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/BeamRider_run_2
 
-*   **Dataset size**: `43.74 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 16,138
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1868,14 +1579,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/BeamRider_run_3
-
-*   **Dataset size**: `43.72 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 16,606
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1916,14 +1619,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/BeamRider_run_4
 
-*   **Dataset size**: `43.72 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 16,316
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1962,14 +1657,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/BeamRider_run_5
-
-*   **Dataset size**: `43.74 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 16,076
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2010,14 +1697,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Boxing_run_1
 
-*   **Dataset size**: `45.81 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 49,485
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2056,14 +1735,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Boxing_run_2
-
-*   **Dataset size**: `45.59 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 53,651
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2104,14 +1775,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Boxing_run_3
 
-*   **Dataset size**: `45.79 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 53,000
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2150,14 +1813,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Boxing_run_4
-
-*   **Dataset size**: `45.68 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 53,756
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2198,14 +1853,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Boxing_run_5
 
-*   **Dataset size**: `45.79 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 51,467
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2244,14 +1891,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Breakout_run_1
-
-*   **Dataset size**: `30.66 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,839
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2292,14 +1931,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Breakout_run_2
 
-*   **Dataset size**: `30.62 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 42,291
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2338,14 +1969,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Breakout_run_3
-
-*   **Dataset size**: `30.65 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,774
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2386,14 +2009,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Breakout_run_4
 
-*   **Dataset size**: `30.66 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,691
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2432,14 +2047,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Breakout_run_5
-
-*   **Dataset size**: `30.71 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,703
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2480,14 +2087,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Carnival_run_1
 
-*   **Dataset size**: `33.58 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 218,526
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2526,14 +2125,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Carnival_run_2
-
-*   **Dataset size**: `33.69 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 222,221
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2574,14 +2165,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Carnival_run_3
 
-*   **Dataset size**: `33.59 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 224,169
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2620,14 +2203,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Carnival_run_4
-
-*   **Dataset size**: `33.60 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 218,607
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2668,14 +2243,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Carnival_run_5
 
-*   **Dataset size**: `34.51 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 218,428
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2714,14 +2281,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Centipede_run_1
-
-*   **Dataset size**: `35.78 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 94,369
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2762,14 +2321,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Centipede_run_2
 
-*   **Dataset size**: `35.67 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 105,430
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2808,14 +2359,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Centipede_run_3
-
-*   **Dataset size**: `35.68 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 105,965
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2856,14 +2399,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Centipede_run_4
 
-*   **Dataset size**: `35.94 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 99,675
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2902,14 +2437,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Centipede_run_5
-
-*   **Dataset size**: `35.95 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 86,569
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2950,14 +2477,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/ChopperCommand_run_1
 
-*   **Dataset size**: `40.01 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 69,258
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2996,14 +2515,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/ChopperCommand_run_2
-
-*   **Dataset size**: `40.16 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 66,438
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3044,14 +2555,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/ChopperCommand_run_3
 
-*   **Dataset size**: `40.16 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 68,073
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3090,14 +2593,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/ChopperCommand_run_4
-
-*   **Dataset size**: `40.24 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 67,685
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3138,14 +2633,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/ChopperCommand_run_5
 
-*   **Dataset size**: `40.33 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 67,438
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3184,14 +2671,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/CrazyClimber_run_1
-
-*   **Dataset size**: `51.22 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 12,547
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3232,14 +2711,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/CrazyClimber_run_2
 
-*   **Dataset size**: `51.68 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 12,833
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3278,14 +2749,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/CrazyClimber_run_3
-
-*   **Dataset size**: `51.19 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 12,587
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3326,14 +2789,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/CrazyClimber_run_4
 
-*   **Dataset size**: `51.11 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 12,414
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3372,14 +2827,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/CrazyClimber_run_5
-
-*   **Dataset size**: `51.30 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 12,479
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3420,14 +2867,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/DemonAttack_run_1
 
-*   **Dataset size**: `24.09 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 22,438
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3466,14 +2905,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/DemonAttack_run_2
-
-*   **Dataset size**: `24.23 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 19,770
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3514,14 +2945,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/DemonAttack_run_3
 
-*   **Dataset size**: `24.22 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 19,817
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3560,14 +2983,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/DemonAttack_run_4
-
-*   **Dataset size**: `24.02 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 23,391
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3608,14 +3023,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/DemonAttack_run_5
 
-*   **Dataset size**: `23.86 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25,903
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3654,14 +3061,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/DoubleDunk_run_1
-
-*   **Dataset size**: `49.40 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 14,393
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3702,14 +3101,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/DoubleDunk_run_2
 
-*   **Dataset size**: `49.37 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 15,077
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3748,14 +3139,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/DoubleDunk_run_3
-
-*   **Dataset size**: `49.33 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 14,357
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3796,14 +3179,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/DoubleDunk_run_4
 
-*   **Dataset size**: `49.36 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 14,700
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3842,14 +3217,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/DoubleDunk_run_5
-
-*   **Dataset size**: `49.38 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 14,718
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3890,14 +3257,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Enduro_run_1
 
-*   **Dataset size**: `56.76 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,634
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3936,14 +3295,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Enduro_run_2
-
-*   **Dataset size**: `56.75 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,642
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3984,14 +3335,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Enduro_run_3
 
-*   **Dataset size**: `56.76 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,769
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4030,14 +3373,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Enduro_run_4
-
-*   **Dataset size**: `56.76 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,601
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4078,14 +3413,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Enduro_run_5
 
-*   **Dataset size**: `56.74 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 5,775
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4124,14 +3451,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/FishingDerby_run_1
-
-*   **Dataset size**: `63.57 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 28,353
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4172,14 +3491,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/FishingDerby_run_2
 
-*   **Dataset size**: `63.57 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 27,962
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4218,14 +3529,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/FishingDerby_run_3
-
-*   **Dataset size**: `63.56 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 28,533
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4266,14 +3569,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/FishingDerby_run_4
 
-*   **Dataset size**: `63.59 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 27,786
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4312,14 +3607,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/FishingDerby_run_5
-
-*   **Dataset size**: `63.58 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 27,811
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4360,14 +3647,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Freeway_run_1
 
-*   **Dataset size**: `50.94 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,428
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4406,14 +3685,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Freeway_run_2
-
-*   **Dataset size**: `50.95 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,428
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4454,14 +3725,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Freeway_run_3
 
-*   **Dataset size**: `50.99 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,428
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4500,14 +3763,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Freeway_run_4
-
-*   **Dataset size**: `51.00 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,428
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4548,14 +3803,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Freeway_run_5
 
-*   **Dataset size**: `50.54 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,428
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4594,14 +3841,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Frostbite_run_1
-
-*   **Dataset size**: `57.03 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 67,091
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4642,14 +3881,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Frostbite_run_2
 
-*   **Dataset size**: `56.26 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 69,165
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4688,14 +3919,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Frostbite_run_3
-
-*   **Dataset size**: `56.57 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 65,693
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4736,14 +3959,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Frostbite_run_4
 
-*   **Dataset size**: `56.79 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 66,150
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4782,14 +3997,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_atari/Frostbite_run_5
-
-*   **Dataset size**: `56.58 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 65,228
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4830,27 +4037,11 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_atari/Gopher_run_1
 
-*   **Dataset size**: `36.31 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,272
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Gopher_run_2
-
-*   **Dataset size**: `36.35 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 23,591
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4858,27 +4049,11 @@ Split     | Examples
 
 ## rlu_atari/Gopher_run_3
 
-*   **Dataset size**: `36.33 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,238
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Gopher_run_4
-
-*   **Dataset size**: `36.33 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 23,415
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4886,27 +4061,11 @@ Split     | Examples
 
 ## rlu_atari/Gopher_run_5
 
-*   **Dataset size**: `36.32 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,136
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Gravitar_run_1
-
-*   **Dataset size**: `33.91 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 75,393
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4914,27 +4073,11 @@ Split     | Examples
 
 ## rlu_atari/Gravitar_run_2
 
-*   **Dataset size**: `33.67 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 74,719
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Gravitar_run_3
-
-*   **Dataset size**: `33.11 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 74,262
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4942,27 +4085,11 @@ Split     | Examples
 
 ## rlu_atari/Gravitar_run_4
 
-*   **Dataset size**: `33.16 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 74,766
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Gravitar_run_5
-
-*   **Dataset size**: `33.48 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 74,043
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4970,27 +4097,11 @@ Split     | Examples
 
 ## rlu_atari/Hero_run_1
 
-*   **Dataset size**: `46.65 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,461
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Hero_run_2
-
-*   **Dataset size**: `46.45 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 36,680
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4998,27 +4109,11 @@ Split     | Examples
 
 ## rlu_atari/Hero_run_3
 
-*   **Dataset size**: `46.66 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 40,925
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Hero_run_4
-
-*   **Dataset size**: `46.67 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 40,757
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5026,27 +4121,11 @@ Split     | Examples
 
 ## rlu_atari/Hero_run_5
 
-*   **Dataset size**: `46.74 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 43,907
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/IceHockey_run_1
-
-*   **Dataset size**: `37.09 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 15,623
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5054,27 +4133,11 @@ Split     | Examples
 
 ## rlu_atari/IceHockey_run_2
 
-*   **Dataset size**: `37.09 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 15,610
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/IceHockey_run_3
-
-*   **Dataset size**: `37.18 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 15,132
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5082,27 +4145,11 @@ Split     | Examples
 
 ## rlu_atari/IceHockey_run_4
 
-*   **Dataset size**: `37.16 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 15,342
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/IceHockey_run_5
-
-*   **Dataset size**: `37.18 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 15,287
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5110,27 +4157,11 @@ Split     | Examples
 
 ## rlu_atari/Jamesbond_run_1
 
-*   **Dataset size**: `35.02 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 34,791
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Jamesbond_run_2
-
-*   **Dataset size**: `35.04 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 37,727
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5138,27 +4169,11 @@ Split     | Examples
 
 ## rlu_atari/Jamesbond_run_3
 
-*   **Dataset size**: `35.19 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,891
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Jamesbond_run_4
-
-*   **Dataset size**: `34.99 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 35,252
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5166,27 +4181,11 @@ Split     | Examples
 
 ## rlu_atari/Jamesbond_run_5
 
-*   **Dataset size**: `35.11 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,579
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Kangaroo_run_1
-
-*   **Dataset size**: `55.07 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25,748
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5194,27 +4193,11 @@ Split     | Examples
 
 ## rlu_atari/Kangaroo_run_2
 
-*   **Dataset size**: `54.60 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 26,428
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Kangaroo_run_3
-
-*   **Dataset size**: `54.54 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 28,684
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5222,27 +4205,11 @@ Split     | Examples
 
 ## rlu_atari/Kangaroo_run_4
 
-*   **Dataset size**: `55.21 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 24,495
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Kangaroo_run_5
-
-*   **Dataset size**: `54.37 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25,568
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5250,27 +4217,11 @@ Split     | Examples
 
 ## rlu_atari/Krull_run_1
 
-*   **Dataset size**: `90.36 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 37,989
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Krull_run_2
-
-*   **Dataset size**: `90.41 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 38,011
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5278,27 +4229,11 @@ Split     | Examples
 
 ## rlu_atari/Krull_run_3
 
-*   **Dataset size**: `90.27 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 38,204
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Krull_run_4
-
-*   **Dataset size**: `90.38 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 37,960
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5306,27 +4241,11 @@ Split     | Examples
 
 ## rlu_atari/Krull_run_5
 
-*   **Dataset size**: `90.39 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 38,109
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/KungFuMaster_run_1
-
-*   **Dataset size**: `61.89 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 19,460
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5334,27 +4253,11 @@ Split     | Examples
 
 ## rlu_atari/KungFuMaster_run_2
 
-*   **Dataset size**: `61.74 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 21,367
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/KungFuMaster_run_3
-
-*   **Dataset size**: `61.77 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 20,591
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5362,27 +4265,11 @@ Split     | Examples
 
 ## rlu_atari/KungFuMaster_run_4
 
-*   **Dataset size**: `62.00 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 18,700
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/KungFuMaster_run_5
-
-*   **Dataset size**: `61.99 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 18,580
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5390,27 +4277,11 @@ Split     | Examples
 
 ## rlu_atari/MsPacman_run_1
 
-*   **Dataset size**: `75.55 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,975
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/MsPacman_run_2
-
-*   **Dataset size**: `75.64 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 42,282
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5418,27 +4289,11 @@ Split     | Examples
 
 ## rlu_atari/MsPacman_run_3
 
-*   **Dataset size**: `75.75 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,289
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/MsPacman_run_4
-
-*   **Dataset size**: `75.39 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,983
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5446,27 +4301,11 @@ Split     | Examples
 
 ## rlu_atari/MsPacman_run_5
 
-*   **Dataset size**: `75.43 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 42,831
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/NameThisGame_run_1
-
-*   **Dataset size**: `60.81 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 11,303
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5474,27 +4313,11 @@ Split     | Examples
 
 ## rlu_atari/NameThisGame_run_2
 
-*   **Dataset size**: `60.87 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 11,506
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/NameThisGame_run_3
-
-*   **Dataset size**: `60.68 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 11,260
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5502,27 +4325,11 @@ Split     | Examples
 
 ## rlu_atari/NameThisGame_run_4
 
-*   **Dataset size**: `60.97 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 12,259
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/NameThisGame_run_5
-
-*   **Dataset size**: `61.11 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 12,483
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5530,27 +4337,11 @@ Split     | Examples
 
 ## rlu_atari/Phoenix_run_1
 
-*   **Dataset size**: `27.14 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 30,241
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Phoenix_run_2
-
-*   **Dataset size**: `27.27 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 27,471
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5558,27 +4349,11 @@ Split     | Examples
 
 ## rlu_atari/Phoenix_run_3
 
-*   **Dataset size**: `27.63 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 27,417
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Phoenix_run_4
-
-*   **Dataset size**: `27.22 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 30,163
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5586,27 +4361,11 @@ Split     | Examples
 
 ## rlu_atari/Phoenix_run_5
 
-*   **Dataset size**: `27.16 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 31,181
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Pong_run_1
-
-*   **Dataset size**: `20.86 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 23,239
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5614,27 +4373,11 @@ Split     | Examples
 
 ## rlu_atari/Pong_run_2
 
-*   **Dataset size**: `21.13 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 16,862
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Pong_run_3
-
-*   **Dataset size**: `21.09 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 18,593
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5642,27 +4385,11 @@ Split     | Examples
 
 ## rlu_atari/Pong_run_4
 
-*   **Dataset size**: `21.11 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 17,112
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Pong_run_5
-
-*   **Dataset size**: `20.90 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 23,268
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5670,27 +4397,11 @@ Split     | Examples
 
 ## rlu_atari/Pooyan_run_1
 
-*   **Dataset size**: `55.36 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 29,471
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Pooyan_run_2
-
-*   **Dataset size**: `55.28 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 29,940
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5698,27 +4409,11 @@ Split     | Examples
 
 ## rlu_atari/Pooyan_run_3
 
-*   **Dataset size**: `55.26 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 30,167
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Pooyan_run_4
-
-*   **Dataset size**: `55.38 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 29,314
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5726,27 +4421,11 @@ Split     | Examples
 
 ## rlu_atari/Pooyan_run_5
 
-*   **Dataset size**: `55.33 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 29,811
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Qbert_run_1
-
-*   **Dataset size**: `96.76 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 47,635
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5754,27 +4433,11 @@ Split     | Examples
 
 ## rlu_atari/Qbert_run_2
 
-*   **Dataset size**: `97.08 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 46,382
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Qbert_run_3
-
-*   **Dataset size**: `97.26 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 46,775
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5782,27 +4445,11 @@ Split     | Examples
 
 ## rlu_atari/Qbert_run_4
 
-*   **Dataset size**: `97.13 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 47,412
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Qbert_run_5
-
-*   **Dataset size**: `96.93 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 46,099
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5810,27 +4457,11 @@ Split     | Examples
 
 ## rlu_atari/Riverraid_run_1
 
-*   **Dataset size**: `48.46 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 37,536
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Riverraid_run_2
-
-*   **Dataset size**: `48.62 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 37,998
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5838,27 +4469,11 @@ Split     | Examples
 
 ## rlu_atari/Riverraid_run_3
 
-*   **Dataset size**: `48.60 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 38,086
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Riverraid_run_4
-
-*   **Dataset size**: `47.73 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 64,952
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5866,27 +4481,11 @@ Split     | Examples
 
 ## rlu_atari/Riverraid_run_5
 
-*   **Dataset size**: `48.49 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 37,823
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/RoadRunner_run_1
-
-*   **Dataset size**: `41.72 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 45,469
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5894,27 +4493,11 @@ Split     | Examples
 
 ## rlu_atari/RoadRunner_run_2
 
-*   **Dataset size**: `41.66 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 47,447
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/RoadRunner_run_3
-
-*   **Dataset size**: `41.70 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 45,812
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5922,27 +4505,11 @@ Split     | Examples
 
 ## rlu_atari/RoadRunner_run_4
 
-*   **Dataset size**: `41.70 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 46,139
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/RoadRunner_run_5
-
-*   **Dataset size**: `41.73 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 45,202
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5950,27 +4517,11 @@ Split     | Examples
 
 ## rlu_atari/Robotank_run_1
 
-*   **Dataset size**: `47.20 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,144
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Robotank_run_2
-
-*   **Dataset size**: `47.28 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,000
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -5978,27 +4529,11 @@ Split     | Examples
 
 ## rlu_atari/Robotank_run_3
 
-*   **Dataset size**: `47.31 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,235
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Robotank_run_4
-
-*   **Dataset size**: `47.35 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,089
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6006,27 +4541,11 @@ Split     | Examples
 
 ## rlu_atari/Robotank_run_5
 
-*   **Dataset size**: `47.13 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 9,339
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Seaquest_run_1
-
-*   **Dataset size**: `40.70 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,872
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6034,27 +4553,11 @@ Split     | Examples
 
 ## rlu_atari/Seaquest_run_2
 
-*   **Dataset size**: `41.63 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 32,606
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Seaquest_run_3
-
-*   **Dataset size**: `41.72 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 35,662
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6062,27 +4565,11 @@ Split     | Examples
 
 ## rlu_atari/Seaquest_run_4
 
-*   **Dataset size**: `41.59 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 34,697
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Seaquest_run_5
-
-*   **Dataset size**: `41.70 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 32,783
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6090,27 +4577,11 @@ Split     | Examples
 
 ## rlu_atari/SpaceInvaders_run_1
 
-*   **Dataset size**: `49.70 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 30,333
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/SpaceInvaders_run_2
-
-*   **Dataset size**: `50.03 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 32,534
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6118,27 +4589,11 @@ Split     | Examples
 
 ## rlu_atari/SpaceInvaders_run_3
 
-*   **Dataset size**: `49.92 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 30,449
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/SpaceInvaders_run_4
-
-*   **Dataset size**: `49.90 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 32,587
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6146,27 +4601,11 @@ Split     | Examples
 
 ## rlu_atari/SpaceInvaders_run_5
 
-*   **Dataset size**: `49.92 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 32,337
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/StarGunner_run_1
-
-*   **Dataset size**: `22.65 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 50,939
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6174,27 +4613,11 @@ Split     | Examples
 
 ## rlu_atari/StarGunner_run_2
 
-*   **Dataset size**: `22.94 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 41,624
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/StarGunner_run_3
-
-*   **Dataset size**: `22.85 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 43,315
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6202,27 +4625,11 @@ Split     | Examples
 
 ## rlu_atari/StarGunner_run_4
 
-*   **Dataset size**: `22.62 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 50,397
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/StarGunner_run_5
-
-*   **Dataset size**: `22.75 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 48,224
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6230,27 +4637,11 @@ Split     | Examples
 
 ## rlu_atari/TimePilot_run_1
 
-*   **Dataset size**: `41.48 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 47,855
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/TimePilot_run_2
-
-*   **Dataset size**: `41.38 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 48,216
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6258,27 +4649,11 @@ Split     | Examples
 
 ## rlu_atari/TimePilot_run_3
 
-*   **Dataset size**: `41.65 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 46,181
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/TimePilot_run_4
-
-*   **Dataset size**: `41.68 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 46,061
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6286,27 +4661,11 @@ Split     | Examples
 
 ## rlu_atari/TimePilot_run_5
 
-*   **Dataset size**: `41.52 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 47,624
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/UpNDown_run_1
-
-*   **Dataset size**: `100.18 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,847
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6314,27 +4673,11 @@ Split     | Examples
 
 ## rlu_atari/UpNDown_run_2
 
-*   **Dataset size**: `99.74 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,467
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/UpNDown_run_3
-
-*   **Dataset size**: `99.85 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,425
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6342,27 +4685,11 @@ Split     | Examples
 
 ## rlu_atari/UpNDown_run_4
 
-*   **Dataset size**: `99.97 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,018
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/UpNDown_run_5
-
-*   **Dataset size**: `100.06 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,591
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6370,27 +4697,11 @@ Split     | Examples
 
 ## rlu_atari/VideoPinball_run_1
 
-*   **Dataset size**: `71.74 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 12,037
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/VideoPinball_run_2
-
-*   **Dataset size**: `71.43 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 23,868
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6398,27 +4709,11 @@ Split     | Examples
 
 ## rlu_atari/VideoPinball_run_3
 
-*   **Dataset size**: `71.04 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 25,253
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/VideoPinball_run_4
-
-*   **Dataset size**: `71.72 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 13,809
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6426,27 +4721,11 @@ Split     | Examples
 
 ## rlu_atari/VideoPinball_run_5
 
-*   **Dataset size**: `71.74 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 13,239
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/WizardOfWor_run_1
-
-*   **Dataset size**: `60.51 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 37,887
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6454,27 +4733,11 @@ Split     | Examples
 
 ## rlu_atari/WizardOfWor_run_2
 
-*   **Dataset size**: `60.47 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 39,005
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/WizardOfWor_run_3
-
-*   **Dataset size**: `60.47 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 47,518
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6482,27 +4745,11 @@ Split     | Examples
 
 ## rlu_atari/WizardOfWor_run_4
 
-*   **Dataset size**: `60.10 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 46,291
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/WizardOfWor_run_5
-
-*   **Dataset size**: `60.80 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 44,904
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6510,27 +4757,11 @@ Split     | Examples
 
 ## rlu_atari/YarsRevenge_run_1
 
-*   **Dataset size**: `69.21 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 55,982
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/YarsRevenge_run_2
-
-*   **Dataset size**: `70.15 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 56,225
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6538,27 +4769,11 @@ Split     | Examples
 
 ## rlu_atari/YarsRevenge_run_3
 
-*   **Dataset size**: `70.41 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 58,010
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/YarsRevenge_run_4
-
-*   **Dataset size**: `69.32 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 56,292
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6566,27 +4781,11 @@ Split     | Examples
 
 ## rlu_atari/YarsRevenge_run_5
 
-*   **Dataset size**: `71.13 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 57,275
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Zaxxon_run_1
-
-*   **Dataset size**: `38.87 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 31,146
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6594,27 +4793,11 @@ Split     | Examples
 
 ## rlu_atari/Zaxxon_run_2
 
-*   **Dataset size**: `39.03 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,318
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Zaxxon_run_3
-
-*   **Dataset size**: `38.83 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 31,266
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -6622,27 +4805,11 @@ Split     | Examples
 
 ## rlu_atari/Zaxxon_run_4
 
-*   **Dataset size**: `39.13 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 32,862
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
     Only shown for the first 100 configs.
 
 ## rlu_atari/Zaxxon_run_5
-
-*   **Dataset size**: `37.57 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 44,701
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
