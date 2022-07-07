@@ -107,6 +107,7 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
 
 
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
+@tfds_logging.builder()
 def builder(
     name: str,
     *,
