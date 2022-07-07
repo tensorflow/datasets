@@ -40,6 +40,18 @@ class Logger:
     """Callback called when user calls `DatasetBuilder(...)`."""
     pass
 
+  def builder_info(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      config_name: Optional[str],
+      version: str,
+      data_path: str,
+  ):
+    """Callback called when user calls `builder.info()`."""
+    pass
+
   def as_dataset(
       self,
       *,

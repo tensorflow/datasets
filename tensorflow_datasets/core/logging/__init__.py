@@ -107,6 +107,34 @@ def _get_name_config_version_datadir(dsbuilder):
   return dsbuilder.name, config_name, str(dsbuilder.version), data_path
 
 
+def builder_info() -> Callable[[_T], _T]:
+  """"Decorator to call `builder_info` method on registered loggers."""
+
+  @wrapt.decorator
+  def decorator(function, dsbuilder, args, kwargs):
+    dsbuilder = args[0]  # Because property decorator applied first.
+    name, config_name, version, data_path = (
+        _get_name_config_version_datadir(dsbuilder))
+    metadata = call_metadata.CallMetadata()
+    try:
+      return function(*args, **kwargs)
+    except Exception:
+      metadata.mark_error()
+      raise
+    finally:
+      metadata.mark_end()
+      for logger in _get_registered_loggers():
+        logger.builder_info(
+            metadata=metadata,
+            name=name,
+            config_name=config_name,
+            version=version,
+            data_path=data_path,
+        )
+
+  return decorator
+
+
 def as_dataset() -> Callable[[_T], _T]:
   """Decorator to call `as_dataset` method on registered loggers."""
 

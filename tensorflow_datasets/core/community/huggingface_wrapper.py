@@ -17,6 +17,7 @@
 
 import builtins
 import contextlib
+import functools
 import glob
 import os
 import sys
@@ -30,6 +31,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import split_builder
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
@@ -116,7 +118,9 @@ class GeneratorBasedBuilder(
         cls.BUILDER_CONFIGS = new_ordered_configs
     super().__init_subclass__(**kwargs)
 
-  @utils.memoized_property
+  @property
+  @tfds_logging.builder_info()
+  @functools.lru_cache(maxsize=128)
   def info(self) -> dataset_info.DatasetInfo:
     # HF supports Sequences defined as list: {'video': [{'image': Image()}]}
     with _mock_list_as_sequence():
