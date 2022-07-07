@@ -28,6 +28,7 @@ from tensorflow_datasets.core import community
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import decode
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
@@ -200,6 +201,7 @@ def _try_load_from_files_first(
     return False  # Code exists and no version is given, so use code.
 
 
+@tfds_logging.load()
 def load(
     name: str,
     *,

@@ -168,3 +168,36 @@ def as_dataset() -> Callable[[_T], _T]:
     return function(*args, **kwargs)
 
   return decorator
+
+
+def load() -> Callable[[_T], _T]:
+  """Decorator to call `load` method on registered loggers."""
+
+  @wrapt.decorator
+  def decorator(function, unused_none_instance, args, kwargs):
+    metadata = call_metadata.CallMetadata()
+    name = args[0] if args else kwargs["name"]
+    try:
+      return function(*args, **kwargs)
+    except Exception:
+      metadata.mark_error()
+      raise
+    finally:
+      metadata.mark_end()
+      for logger in _get_registered_loggers():
+        logger.load(
+            metadata=metadata,
+            name=name,
+            split=kwargs.get("split"),
+            data_dir=kwargs.get("data_dir"),
+            batch_size=kwargs.get("batch_size"),
+            shuffle_files=kwargs.get("shuffle_files"),
+            download=kwargs.get("download"),
+            as_supervised=kwargs.get("as_supervised"),
+            decoders=kwargs.get("decoders"),
+            read_config=kwargs.get("read_config"),
+            with_info=kwargs.get("with_info"),
+            try_gcs=kwargs.get("try_gcs"),
+        )
+
+  return decorator
