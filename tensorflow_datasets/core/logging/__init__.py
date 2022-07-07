@@ -18,12 +18,13 @@ from typing import Callable, List, Optional, TypeVar
 
 from absl import flags
 from tensorflow_datasets.core.logging import base_logger
+from tensorflow_datasets.core.logging import call_metadata
 from tensorflow_datasets.core.logging import logging_logger
 
 import wrapt
 
 
-_T = TypeVar('_T')
+_T = TypeVar("_T")
 
 _registered_loggers: Optional[List[base_logger.Logger]] = None
 
@@ -52,31 +53,50 @@ def register(logger: base_logger.Logger) -> None:
   Args:
     logger: the logger to register.
   """
-  global _registered_loggers
   _check_init_registered_loggers()
   _registered_loggers.append(logger)
+
+
+def _get_name_config_version_datadir(dsbuilder):
+  """Returns (builder_name, config, version, data_dir).
+
+  Args:
+    dsbuilder: the builder instance to get info for.
+  """
+  config_name = dsbuilder.builder_config.name if dsbuilder.builder_config else ""
+  data_path = dsbuilder.data_dir
+  return dsbuilder.name, config_name, str(dsbuilder.version), data_path
 
 
 def as_dataset() -> Callable[[_T], _T]:
   """Decorator to call `as_dataset` method on registered loggers."""
 
   @wrapt.decorator
-  def decorator(function, builder, args, kwargs):
-    config_name = builder.builder_config.name if builder.builder_config else ''
-    data_path = builder.data_dir
-
-    for logger in _get_registered_loggers():
-      logger.as_dataset(
-          dataset_name=builder.name,
-          config_name=config_name,
-          version=str(builder.version),
-          data_path=data_path,
-          split=args and args[0] or kwargs.get('split', 'all'),
-          batch_size=kwargs.get('batch_size'),
-          shuffle_files=kwargs.get('shuffle_files', False),
-          read_config=kwargs.get('read_config', None),
-          as_supervised=kwargs.get('as_supervised', False),
-          decoders=kwargs.get('decoders', None))
+  def decorator(function, dsbuilder, args, kwargs):
+    name, config_name, version, data_path = (
+        _get_name_config_version_datadir(dsbuilder))
+    metadata = call_metadata.CallMetadata()
+    try:
+      return function(*args, **kwargs)
+    except Exception:
+      metadata.mark_error()
+      raise
+    finally:
+      metadata.mark_end()
+      for logger in _get_registered_loggers():
+        logger.as_dataset(
+            metadata=metadata,
+            name=name,
+            config_name=config_name,
+            version=version,
+            data_path=data_path,
+            split=args and args[0] or kwargs.get("split"),
+            batch_size=kwargs.get("batch_size"),
+            shuffle_files=kwargs.get("shuffle_files"),
+            read_config=kwargs.get("read_config"),
+            as_supervised=kwargs.get("as_supervised"),
+            decoders=kwargs.get("decoders"),
+        )
 
     return function(*args, **kwargs)
 
