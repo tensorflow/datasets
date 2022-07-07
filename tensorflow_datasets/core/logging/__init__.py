@@ -28,6 +28,8 @@ _T = TypeVar("_T")
 
 _registered_loggers: Optional[List[base_logger.Logger]] = None
 
+_thread_ids_running_builder_init = set()
+
 
 def _check_init_registered_loggers() -> None:
   """Initializes the registered loggers if they are not set yet."""
@@ -55,6 +57,43 @@ def register(logger: base_logger.Logger) -> None:
   """
   _check_init_registered_loggers()
   _registered_loggers.append(logger)
+
+
+def builder_init() -> Callable[[_T], _T]:
+  """"Decorator to call `builder_init` method on registered loggers."""
+
+  @wrapt.decorator
+  def decorator(function, dsbuilder, args, kwargs):
+    metadata = call_metadata.CallMetadata()
+    first_builder_init_in_stack = (
+        metadata.thread_id not in _thread_ids_running_builder_init)
+    if first_builder_init_in_stack:
+      _thread_ids_running_builder_init.add(metadata.thread_id)
+    try:
+      return function(*args, **kwargs)
+    except Exception:
+      metadata.mark_error()
+      raise
+    finally:
+      if first_builder_init_in_stack:
+        metadata.mark_end()
+        _thread_ids_running_builder_init.remove(metadata.thread_id)
+        data_dir = kwargs.get("data_dir")
+        config = kwargs.get("config")
+        if config is not None:
+          config = str(config)
+        version = kwargs.get("version")
+        if version is not None:
+          version = str(version)
+        for logger in _get_registered_loggers():
+          logger.builder_init(
+              metadata=metadata,
+              name=dsbuilder.name,
+              data_dir=data_dir,
+              config=config,
+              version=version)
+
+  return decorator
 
 
 def _get_name_config_version_datadir(dsbuilder):

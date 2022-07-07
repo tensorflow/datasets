@@ -159,6 +159,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   # displayed in the dataset documentation.
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
 
+  @tfds_logging.builder_init()
   def __init__(
       self,
       *,
@@ -940,6 +941,7 @@ class FileReaderBuilder(DatasetBuilder):
 
   """
 
+  @tfds_logging.builder_init()
   def __init__(
       self,
       *,

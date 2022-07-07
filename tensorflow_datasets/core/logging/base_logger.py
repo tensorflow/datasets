@@ -34,6 +34,12 @@ class Logger:
   Exceptions are *NOT* caught.
   """
 
+  def builder_init(self, *, metadata: call_metadata.CallMetadata, name: str,
+                   data_dir: Optional[str], config: Optional[str],
+                   version: Optional[str]):
+    """Callback called when user calls `DatasetBuilder(...)`."""
+    pass
+
   def as_dataset(
       self,
       *,
@@ -69,4 +75,4 @@ class Logger:
       decoders: flatten dict of decoders dict given to `as_dataset`, with the
         values being `{module_name}.{class_name}` instad of a
     """
-    raise NotImplementedError
+    pass
