@@ -24,6 +24,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
@@ -38,6 +39,7 @@ class ReadOnlyBuilder(
     dataset_builder.FileReaderBuilder, skip_registration=True):
   """Generic DatasetBuilder loading from a directory."""
 
+  @tfds_logging.builder_init()
   def __init__(self,
                builder_dir: epath.PathLike,
                *,
