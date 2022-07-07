@@ -117,3 +117,12 @@ class Logger:
   ):
     """Callback called when user calls `tfds.load(...)`."""
     pass
+
+  def list_builders(
+      self,
+      *,
+      metadata: call_metadata.CallMetadata,
+      with_community_datasets: Optional[bool],
+  ):
+    """Callback called when user calls `tfds.list_builders(...)`."""
+    pass
