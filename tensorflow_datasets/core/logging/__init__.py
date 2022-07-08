@@ -14,8 +14,6 @@
 # limitations under the License.
 
 """TFDS logging module."""
-import atexit
-import threading
 from typing import Callable, Dict, List, Optional, Tuple, TypeVar
 
 from absl import flags
@@ -30,9 +28,6 @@ _T = TypeVar("_T")
 
 _registered_loggers: Optional[List[base_logger.Logger]] = None
 
-_import_operations: List[Tuple[call_metadata.CallMetadata, int, int]] = []
-_import_operations_lock = threading.Lock()
-
 _thread_ids_running_builder_init = set()
 
 
@@ -45,29 +40,8 @@ def _check_init_registered_loggers() -> None:
     ]
 
 
-def _log_import_operation():
-  """Log import operations (most of time maximum one), if any."""
-  with _import_operations_lock:
-    for metadata, import_time_tf, import_time_builders in _import_operations:
-      for logger in _registered_loggers:
-        logger.tfds_import(
-            metadata=metadata,
-            import_time_ms_tensorflow=import_time_tf,
-            import_time_ms_dataset_builders=import_time_builders,
-        )
-    _import_operations.clear()
-
-
-@atexit.register
-def _maybe_log_import_operations_at_exit():
-  if _registered_loggers is None:
-    _check_init_registered_loggers()
-  _log_import_operation()
-
-
 def _get_registered_loggers() -> List[base_logger.Logger]:
   _check_init_registered_loggers()
-  _log_import_operation()
   return _registered_loggers
 
 
@@ -83,27 +57,6 @@ def register(logger: base_logger.Logger) -> None:
   """
   _check_init_registered_loggers()
   _registered_loggers.append(logger)
-
-
-def tfds_import(*, metadata: call_metadata.CallMetadata,
-                import_time_ms_tensorflow: int,
-                import_time_ms_dataset_builders: int):
-  """Call `tfds_import` on registered loggers.
-
-  Given the number of operations which can be done at import time should be
-  limited, here the registered loggers calls are deferred and done either:
-   - on the following call to one of the logging method; or
-   - at exit time.
-
-  Args:
-    metadata: metadata associated to import operation.
-    import_time_ms_tensorflow: time (ms) it took to import TF.
-    import_time_ms_dataset_builders: time (ms) it took to import DatasetBuilder
-      modules.
-  """
-  with _import_operations_lock:
-    _import_operations.append(
-        (metadata, import_time_ms_tensorflow, import_time_ms_dataset_builders))
 
 
 def builder_init() -> Callable[[_T], _T]:
