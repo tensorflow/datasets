@@ -443,7 +443,9 @@ class FeatureDocumentationSection(Section):
     return Block('\n'.join(
         [col_sep.join(header), col_sep.join(header_line)] + feature_rows))
 
-  def content(self, builder: tfds.core.DatasetBuilder) -> Block:
+  def content(self, builder: tfds.core.DatasetBuilder) -> str:
+    if builder.info is None or builder.info.features is None:
+      return ''
     return self._format_block(builder.info.features.catalog_documentation())
 
 
