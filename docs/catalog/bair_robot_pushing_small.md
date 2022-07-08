@@ -29,7 +29,7 @@ including one training set (train) and two test sets of previously seen
     *   **`2.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Download size**: `30.06 GiB`
+*   **Download size**: `Unknown size`
 
 *   **Dataset size**: `Unknown size`
 
@@ -39,10 +39,8 @@ including one training set (train) and two test sets of previously seen
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'test'`  | 256
-`'train'` | 43,264
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

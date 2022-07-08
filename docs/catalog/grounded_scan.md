@@ -39,18 +39,9 @@ More information can be found at:
     *   `1.1.0`: Changed `vector` feature to Text().
     *   **`2.0.0`** (default): Adds the new spatial_relation_splits config.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -183,6 +174,25 @@ verb_in_command                          | Text           |         | tf.string 
 
 *   **Config description**: Examples for compositional generalization.
 
+*   **Download size**: `82.10 MiB`
+
+*   **Dataset size**: `998.11 MiB`
+
+*   **Splits**:
+
+Split             | Examples
+:---------------- | -------:
+`'adverb_1'`      | 112,880
+`'adverb_2'`      | 38,582
+`'contextual'`    | 11,460
+`'dev'`           | 3,716
+`'situational_1'` | 88,642
+`'situational_2'` | 16,808
+`'test'`          | 19,282
+`'train'`         | 367,933
+`'visual'`        | 37,436
+`'visual_easier'` | 18,718
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -224,6 +234,19 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Examples for generalizing to larger target lengths.
 
+*   **Download size**: `53.41 MiB`
+
+*   **Dataset size**: `546.73 MiB`
+
+*   **Splits**:
+
+Split              | Examples
+:----------------- | -------:
+`'dev'`            | 1,821
+`'target_lengths'` | 198,588
+`'test'`           | 37,784
+`'train'`          | 180,301
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -264,6 +287,23 @@ dataButton.addEventListener('click', async () => {
 ## grounded_scan/spatial_relation_splits
 
 *   **Config description**: Examples for spatial relation reasoning.
+
+*   **Download size**: `89.59 MiB`
+
+*   **Dataset size**: `675.09 MiB`
+
+*   **Splits**:
+
+Split                   | Examples
+:---------------------- | -------:
+`'dev'`                 | 2,617
+`'referent'`            | 30,492
+`'relation'`            | 6,285
+`'relative_position_1'` | 41,576
+`'relative_position_2'` | 41,529
+`'test'`                | 28,526
+`'train'`               | 259,088
+`'visual'`              | 62,250
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

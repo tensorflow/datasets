@@ -33,11 +33,18 @@ comprehension.
     *   `1.0.0`: Initial release.
     *   **`2.0.0`** (default): Add the example id.
 
-*   **Download size**: `24.26 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -84,16 +91,6 @@ questions  | Sequence(Text)           | (None,)      | tf.string |
 
 ## race/high (default config)
 
-*   **Dataset size**: `52.39 MiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'dev'`   | 1,021
-`'test'`  | 1,045
-`'train'` | 18,728
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -132,16 +129,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## race/middle
-
-*   **Dataset size**: `12.51 MiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'dev'`   | 368
-`'test'`  | 362
-`'train'` | 6,409
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

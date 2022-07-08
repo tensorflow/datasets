@@ -35,21 +35,18 @@ reasoning each question requires.
     *   `3.0.0`: No release notes.
     *   **`3.1.0`** (default): Add question/answer text.
 
-*   **Download size**: `17.72 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `17.75 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 15,000
-`'train'`      | 70,000
-`'validation'` | 15,000
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

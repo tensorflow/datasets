@@ -27,9 +27,18 @@ evaluating, and analyzing natural language understanding systems.
     *   `1.0.1`: Update dead URL links.
     *   **`2.0.0`** (default): Update data source for glue/qqp.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -49,18 +58,6 @@ evaluating, and analyzing natural language understanding systems.
 
 *   **Homepage**:
     [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
-
-*   **Download size**: `368.14 KiB`
-
-*   **Dataset size**: `965.49 KiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,063
-`'train'`      | 8,551
-`'validation'` | 1,043
 
 *   **Feature structure**:
 
@@ -147,18 +144,6 @@ the correct citation for each contained dataset.
 
 *   **Homepage**:
     [https://nlp.stanford.edu/sentiment/index.html](https://nlp.stanford.edu/sentiment/index.html)
-
-*   **Download size**: `7.09 MiB`
-
-*   **Dataset size**: `7.22 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,821
-`'train'`      | 67,349
-`'validation'` | 872
 
 *   **Feature structure**:
 
@@ -247,18 +232,6 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://www.microsoft.com/en-us/download/details.aspx?id=52398](https://www.microsoft.com/en-us/download/details.aspx?id=52398)
 
-*   **Download size**: `1.43 MiB`
-
-*   **Dataset size**: `1.74 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,725
-`'train'`      | 3,668
-`'validation'` | 408
-
 *   **Feature structure**:
 
 ```python
@@ -345,18 +318,6 @@ the correct citation for each contained dataset.
 
 *   **Homepage**:
     [https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs](https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs)
-
-*   **Download size**: `39.76 MiB`
-
-*   **Dataset size**: `150.37 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 390,965
-`'train'`      | 363,846
-`'validation'` | 40,430
 
 *   **Feature structure**:
 
@@ -446,18 +407,6 @@ the correct citation for each contained dataset.
 
 *   **Homepage**:
     [http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark](http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)
-
-*   **Download size**: `784.05 KiB`
-
-*   **Dataset size**: `1.58 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,379
-`'train'`      | 5,749
-`'validation'` | 1,500
 
 *   **Feature structure**:
 
@@ -553,20 +502,6 @@ the correct citation for each contained dataset.
 
 *   **Homepage**:
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-
-*   **Download size**: `298.29 MiB`
-
-*   **Dataset size**: `100.56 MiB`
-
-*   **Splits**:
-
-Split                     | Examples
-:------------------------ | -------:
-`'test_matched'`          | 9,796
-`'test_mismatched'`       | 9,847
-`'train'`                 | 392,702
-`'validation_matched'`    | 9,815
-`'validation_mismatched'` | 9,832
 
 *   **Feature structure**:
 
@@ -671,17 +606,6 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
 
-*   **Download size**: `298.29 MiB`
-
-*   **Dataset size**: `4.79 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 9,847
-`'validation'` | 9,832
-
 *   **Feature structure**:
 
 ```python
@@ -784,17 +708,6 @@ the correct citation for each contained dataset.
 
 *   **Homepage**:
     [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-
-*   **Download size**: `298.29 MiB`
-
-*   **Dataset size**: `4.58 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 9,796
-`'validation'` | 9,815
 
 *   **Feature structure**:
 
@@ -909,18 +822,6 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
-*   **Download size**: `10.14 MiB`
-
-*   **Dataset size**: `32.99 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 5,463
-`'train'`      | 104,743
-`'validation'` | 5,463
-
 *   **Feature structure**:
 
 ```python
@@ -1011,18 +912,6 @@ the correct citation for each contained dataset.
 
 *   **Homepage**:
     [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
-
-*   **Download size**: `680.81 KiB`
-
-*   **Dataset size**: `2.15 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 3,000
-`'train'`      | 2,490
-`'validation'` | 277
 
 *   **Feature structure**:
 
@@ -1154,15 +1043,6 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Feature structure**:
 
 ```python
@@ -1251,15 +1131,6 @@ the correct citation for each contained dataset.
 
 *   **Homepage**:
     [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
 
 *   **Feature structure**:
 
