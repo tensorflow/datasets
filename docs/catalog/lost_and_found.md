@@ -42,6 +42,8 @@ http://www.6d-vision.com/laf_table.pdf
 
     *   **`1.0.0`** (default): No release notes.
 
+*   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
@@ -50,10 +52,8 @@ http://www.6d-vision.com/laf_table.pdf
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'test'`  | 1,203
-`'train'` | 1,036
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -62,10 +62,6 @@ Split     | Examples
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 *   **Citation**:
 
@@ -82,8 +78,6 @@ Split     | Examples
 ## lost_and_found/semantic_segmentation (default config)
 
 *   **Config description**: Lost and Found semantic segmentation dataset.
-
-*   **Download size**: `5.44 GiB`
 
 *   **Feature structure**:
 
@@ -104,11 +98,46 @@ image_id           | Text         |                 | tf.string |
 image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
 segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/lost_and_found-semantic_segmentation-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## lost_and_found/stereo_disparity
 
 *   **Config description**: Lost and Found stereo images and disparity maps.
-
-*   **Download size**: `12.16 GiB`
 
 *   **Feature structure**:
 
@@ -131,11 +160,46 @@ image_id      | Text         |                 | tf.string |
 image_left    | Image        | (1024, 2048, 3) | tf.uint8  |
 image_right   | Image        | (1024, 2048, 3) | tf.uint8  |
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/lost_and_found-stereo_disparity-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## lost_and_found/full
 
 *   **Config description**: Full Lost and Found dataset.
-
-*   **Download size**: `12.19 GiB`
 
 *   **Feature structure**:
 
@@ -161,13 +225,48 @@ image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
 image_right        | Image        | (1024, 2048, 3) | tf.uint8  |
 instance_id        | Image        | (1024, 2048, 1) | tf.uint8  |
 segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/lost_and_found-full-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## lost_and_found/full_16bit
 
 *   **Config description**: Full Lost and Found dataset.
 
-*   **Download size**: `34.90 GiB`
-
 *   **Feature structure**:
 
 ```python
@@ -192,3 +291,40 @@ image_left         | Image        | (1024, 2048, 3) | tf.uint8  |
 image_right        | Image        | (1024, 2048, 3) | tf.uint8  |
 instance_id        | Image        | (1024, 2048, 1) | tf.uint8  |
 segmentation_label | Image        | (1024, 2048, 1) | tf.uint8  |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/lost_and_found-full_16bit-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

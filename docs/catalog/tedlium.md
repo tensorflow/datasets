@@ -24,9 +24,18 @@ at 16kHz. It contains about 118 hours of speech.
 
     *   **`1.0.1`** (default): No release notes.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -59,10 +68,6 @@ text       | Text         |         | tf.string |
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 
 ## tedlium/release1 (default config)
 
@@ -78,17 +83,42 @@ text       | Text         |         | tf.string |
 
 *   **Homepage**: [https://www.openslr.org/7/](https://www.openslr.org/7/)
 
-*   **Download size**: `19.82 GiB`
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
-*   **Dataset size**: `39.23 GiB`
+<!-- mdformat off(HTML should not be auto-formatted) -->
 
-*   **Splits**:
+{% framebox %}
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,469
-`'train'`      | 56,803
-`'validation'` | 591
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tedlium-release1-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -122,17 +152,42 @@ Split          | Examples
 
 *   **Homepage**: [https://www.openslr.org/19/](https://www.openslr.org/19/)
 
-*   **Download size**: `34.26 GiB`
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
-*   **Dataset size**: `67.04 GiB`
+<!-- mdformat off(HTML should not be auto-formatted) -->
 
-*   **Splits**:
+{% framebox %}
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,469
-`'train'`      | 92,973
-`'validation'` | 591
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tedlium-release2-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -181,17 +236,42 @@ Split          | Examples
 
 *   **Homepage**: [https://www.openslr.org/51/](https://www.openslr.org/51/)
 
-*   **Download size**: `50.59 GiB`
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
-*   **Dataset size**: `145.67 GiB`
+<!-- mdformat off(HTML should not be auto-formatted) -->
 
-*   **Splits**:
+{% framebox %}
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,469
-`'train'`      | 268,263
-`'validation'` | 591
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/tedlium-release3-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
