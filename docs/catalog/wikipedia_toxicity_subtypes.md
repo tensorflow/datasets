@@ -35,18 +35,11 @@ text.
     *   **`0.3.1`** (default): Added a unique id for each comment. (For the
         Multilingual config, these are only unique within each split.)
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `50.57 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -98,6 +91,15 @@ details.
 
 *   **Homepage**:
     [https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data)
+
+*   **Dataset size**: `128.32 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 63,978
+`'train'` | 159,571
 
 *   **Feature structure**:
 
@@ -185,6 +187,15 @@ for more details.
 
 *   **Homepage**:
     [https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data)
+
+*   **Dataset size**: `35.13 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 63,812
+`'validation'` | 8,000
 
 *   **Feature structure**:
 

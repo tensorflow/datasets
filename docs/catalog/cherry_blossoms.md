@@ -45,19 +45,18 @@ Variables:
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `26.90 KiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `119.84 KiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,215
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

@@ -53,6 +53,10 @@ dataset. However, the training set is subsampled in a label balanced fashion. In
     You need to register on https://image-net.org/download-images in order
     to get the link to download the dataset.
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
@@ -97,10 +101,6 @@ label     | ClassLabel   |                 | tf.int64  |
 *   **Config description**: 1shot of total ImageNet training set.
 
 *   **Dataset size**: `6.46 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -156,16 +156,15 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: 5shot of total ImageNet training set.
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `6.88 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'train'`      | 5,000
+`'tune'`       | 1,000
+`'validation'` | 50,000
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -213,16 +212,15 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: 10shot of total ImageNet training set.
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `7.42 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'train'`      | 10,000
+`'tune'`       | 1,000
+`'validation'` | 50,000
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

@@ -28,18 +28,19 @@ We provide only the raw version.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `17.26 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 230
+`'test'`  | 232
+`'train'` | 300
 
 *   **Feature structure**:
 
@@ -107,6 +108,8 @@ FeaturesDict({
 
 *   **Config description**: Raw with HTML.
 
+*   **Dataset size**: `22.18 MiB`
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -147,6 +150,8 @@ dataButton.addEventListener('click', async () => {
 ## quality/stripped
 
 *   **Config description**: Stripped of HTML.
+
+*   **Dataset size**: `20.73 MiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
