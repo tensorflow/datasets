@@ -45,6 +45,17 @@ atmospheric reanalyses of the global climate. Copernicus Climate Change Service
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -97,18 +108,6 @@ atmospheric reanalyses of the global climate. Copernicus Climate Change Service
 
 *   **Config description**: The entire historical wind field dataset.
 
-*   **Dataset size**: `79.53 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 290,000
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -149,18 +148,6 @@ dataButton.addEventListener('click', async () => {
 ## ble_wind_field/small
 
 *   **Config description**: Small sample of 256 fields from the dataset.
-
-*   **Dataset size**: `71.91 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 256
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

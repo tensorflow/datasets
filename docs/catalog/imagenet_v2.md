@@ -47,18 +47,15 @@ as a dictionary with the following keys:
     *   **`3.0.0`** (default): Fix file_name, from absolute path to path
         relative to data directory, ie: "class_id/filename.jpg".
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 10,000
 
 *   **Feature structure**:
 
@@ -97,6 +94,10 @@ label     | ClassLabel   |                 | tf.int64  |
 
 
 ## imagenet_v2/matched-frequency (default config)
+
+*   **Download size**: `1.18 GiB`
+
+*   **Dataset size**: `1.16 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -142,6 +143,10 @@ dataButton.addEventListener('click', async () => {
 
 ## imagenet_v2/threshold-0.7
 
+*   **Download size**: `1.16 GiB`
+
+*   **Dataset size**: `1.15 GiB`
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -185,6 +190,10 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## imagenet_v2/topimages
+
+*   **Download size**: `1.16 GiB`
+
+*   **Dataset size**: `1.14 GiB`
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

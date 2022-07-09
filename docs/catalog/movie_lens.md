@@ -546,18 +546,19 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This dataset contains data of 1,682 movies rated in
     the 100k dataset.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.70 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `150.35 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 1,682
 
 *   **Feature structure**:
 
@@ -626,18 +627,19 @@ Each user has rated at least 20 movies. Ratings are in whole-star increments. In
 demographic data, age values are divided into ranges and the lowest age value
 for each range is used in the data instead of the actual values.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.64 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `308.42 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,000,209
 
 *   **Feature structure**:
 
@@ -716,18 +718,19 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This dataset contains data of approximately 3,900
     movies rated in the 1m dataset.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.64 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `351.12 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 3,883
 
 *   **Feature structure**:
 
@@ -794,18 +797,19 @@ dataButton.addEventListener('click', async () => {
 Each user has rated at least 20 movies. Ratings are in half-star increments.
 This dataset does not contain demographic data.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `189.50 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.10 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | ---------:
+`'train'` | 20,000,263
 
 *   **Feature structure**:
 
@@ -874,18 +878,19 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This dataset contains data of 27,278 movies rated in
     the 20m dataset
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `189.50 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.55 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 27,278
 
 *   **Feature structure**:
 

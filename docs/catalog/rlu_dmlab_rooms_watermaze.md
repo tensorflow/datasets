@@ -56,16 +56,9 @@ are interested in large-scale offline RL models with memory.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -142,6 +135,14 @@ steps/reward                  | Tensor       |             | tf.float32 |
 
 ## rlu_dmlab_rooms_watermaze/training_0 (default config)
 
+*   **Dataset size**: `894.50 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 67,876
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -181,6 +182,14 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_rooms_watermaze/training_1
 
+*   **Dataset size**: `898.74 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 66,922
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -219,6 +228,14 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_dmlab_rooms_watermaze/training_2
+
+*   **Dataset size**: `825.49 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 67,081
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

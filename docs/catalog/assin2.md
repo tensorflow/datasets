@@ -68,21 +68,18 @@ PS.: Description is extracted from
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `2.02 MiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `1.82 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 2,448
-`'train'`      | 6,500
-`'validation'` | 500
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

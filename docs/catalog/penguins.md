@@ -36,18 +36,9 @@ accordance with the Palmer Station Data Policy. This copy was imported from
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -73,6 +64,16 @@ Split | Examples
     the `iris` dataset. It contains 4 normalised numerical features presented as
     a single tensor, no missing values and the class label (species) is
     presented as an integer (n = 334).
+
+*   **Download size**: `25.05 KiB`
+
+*   **Dataset size**: `17.61 KiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 334
 
 *   **Feature structure**:
 
@@ -137,6 +138,16 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: `penguins/simple` has been processed from the raw
     dataset, with simplified class labels derived from text fields, missing
     values marked as NaN/NA and retains only 7 significant features (n = 344).
+
+*   **Download size**: `13.20 KiB`
+
+*   **Dataset size**: `56.10 KiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 344
 
 *   **Feature structure**:
 
@@ -214,6 +225,16 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: `penguins/raw` is the original, unprocessed copy
     from @allisonhorst, containing all 17 features, presented either as numeric
     types or as raw text (n = 344).
+
+*   **Download size**: `49.72 KiB`
+
+*   **Dataset size**: `164.51 KiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 344
 
 *   **Feature structure**:
 
