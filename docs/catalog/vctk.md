@@ -31,11 +31,18 @@ Note that the 'p315' text was lost due to a hard disk error.
 
     *   **`1.0.0`** (default): VCTK release 0.92.0.
 
-*   **Download size**: `10.94 GiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -70,10 +77,6 @@ text    | Text         |         | tf.string |
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 *   **Citation**:
 
 ```
@@ -97,13 +100,42 @@ text    | Text         |         | tf.string |
           https://doi.org/10.7488/ds/1994
     ```
 
-*   **Dataset size**: `39.87 GiB`
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
-*   **Splits**:
+<!-- mdformat off(HTML should not be auto-formatted) -->
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 44,455
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/vctk-mic1-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## vctk/mic2
 
@@ -115,10 +147,39 @@ Split     | Examples
           recordings using MKH 800.
     ```
 
-*   **Dataset size**: `38.86 GiB`
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
-*   **Splits**:
+<!-- mdformat off(HTML should not be auto-formatted) -->
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 43,873
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/vctk-mic2-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

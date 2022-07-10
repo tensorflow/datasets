@@ -38,7 +38,7 @@ CBSD having 72% of the images.
 
     *   **`0.1.0`** (default): No release notes.
 
-*   **Download size**: `1.26 GiB`
+*   **Download size**: `Unknown size`
 
 *   **Dataset size**: `Unknown size`
 
@@ -48,11 +48,8 @@ CBSD having 72% of the images.
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,885
-`'train'`      | 5,656
-`'validation'` | 1,889
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

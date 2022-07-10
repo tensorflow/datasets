@@ -29,16 +29,9 @@ paper.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
 
 *   **Feature structure**:
 
@@ -81,6 +74,13 @@ context    | Text         |       | tf.string |
 
 ## gpt3/cycle_letters_in_word (default config)
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -119,6 +119,13 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## gpt3/five_digit_addition
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -159,6 +166,13 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/five_digit_subtraction
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -197,6 +211,13 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## gpt3/four_digit_addition
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -237,6 +258,13 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/four_digit_subtraction
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -275,6 +303,13 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## gpt3/mid_word_1_anagrams
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -315,6 +350,13 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/mid_word_2_anagrams
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -353,6 +395,13 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## gpt3/random_insertion_in_word
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -393,6 +442,13 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/reversed_words
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -431,6 +487,13 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## gpt3/single_digit_three_ops
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -471,6 +534,13 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/six_digit_addition
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -509,6 +579,13 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## gpt3/six_digit_subtraction
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -549,6 +626,13 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/sum_of_digits
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -587,6 +671,13 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## gpt3/three_digit_addition
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -627,6 +718,13 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/three_digit_subtraction
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -665,6 +763,13 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## gpt3/two_digit_addition
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -705,6 +810,13 @@ dataButton.addEventListener('click', async () => {
 
 ## gpt3/two_digit_multiplication
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -743,6 +855,13 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## gpt3/two_digit_subtraction
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

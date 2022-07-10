@@ -39,6 +39,19 @@ v4 and v6.
 
     *   **`1.1.0`** (default): No release notes.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -92,27 +105,47 @@ label   | ClassLabel   |             | tf.int64 |
     imbalance. The largest difference is that ships make up only 8% of the test
     set instead of 10%. v4 contains 2,021 images.
 
-*   **Download size**: `5.93 MiB`
-
-*   **Dataset size**: `4.46 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'test'` | 2,021
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/cifar10_1-v4-1.1.0.png" alt="Visualization" width="500px">
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cifar10_1-v4-1.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## cifar10_1/v6
 
@@ -120,19 +153,6 @@ Split    | Examples
     allocation that is exactly class balanced. This version of the dataset
     corresponds to the results in Appendix D of our paper. v6 contains 2,000
     images.
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

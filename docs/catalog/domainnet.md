@@ -29,18 +29,9 @@ In this TFDS version of DomainNet the cleaned version is used.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -77,6 +68,17 @@ label   | ClassLabel   |                 | tf.int64 |
 
 
 ## domainnet/real (default config)
+
+*   **Download size**: `5.65 GiB`
+
+*   **Dataset size**: `5.75 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 52,041
+`'train'` | 120,906
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -122,6 +124,17 @@ dataButton.addEventListener('click', async () => {
 
 ## domainnet/painting
 
+*   **Download size**: `3.43 GiB`
+
+*   **Dataset size**: `3.30 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 21,850
+`'train'` | 50,416
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -165,6 +178,17 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## domainnet/clipart
+
+*   **Download size**: `1.19 GiB`
+
+*   **Dataset size**: `1.27 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 14,604
+`'train'` | 33,525
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -210,6 +234,17 @@ dataButton.addEventListener('click', async () => {
 
 ## domainnet/quickdraw
 
+*   **Download size**: `445.65 MiB`
+
+*   **Dataset size**: `435.16 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 51,750
+`'train'` | 120,750
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -254,6 +289,17 @@ dataButton.addEventListener('click', async () => {
 
 ## domainnet/infograph
 
+*   **Download size**: `4.04 GiB`
+
+*   **Dataset size**: `4.17 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 15,582
+`'train'` | 36,023
+
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
@@ -297,6 +343,17 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## domainnet/sketch
+
+*   **Download size**: `2.46 GiB`
+
+*   **Dataset size**: `2.55 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 20,916
+`'train'` | 48,212
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

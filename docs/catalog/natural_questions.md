@@ -31,6 +31,19 @@ NQ to be a more realistic and challenging task than prior QA datasets.
     *   `0.0.2`: No release notes.
     *   **`0.1.0`** (default): No release notes.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -54,21 +67,6 @@ journal = {Transactions of the Association of Computational Linguistics}
 ## natural_questions/default (default config)
 
 *   **Config description**: Default natural_questions config
-
-*   **Download size**: `41.97 GiB`
-
-*   **Dataset size**: `90.26 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 307,373
-`'validation'` | 7,830
 
 *   **Feature structure**:
 
@@ -180,19 +178,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: natural_questions preprocessed as in the longT5
     benchmark
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
 
 *   **Feature structure**:
 
