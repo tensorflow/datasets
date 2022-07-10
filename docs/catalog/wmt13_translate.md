@@ -44,10 +44,6 @@ builder = tfds.builder("wmt_translate", config=config)
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -57,12 +53,7 @@ builder = tfds.builder("wmt_translate", config=config)
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -88,6 +79,18 @@ Split | Examples
 ## wmt13_translate/cs-en (default config)
 
 *   **Config description**: WMT 2013 cs-en translation task dataset.
+
+*   **Download size**: `1.59 GiB`
+
+*   **Dataset size**: `2.89 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 3,000
+`'train'`      | 15,780,759
+`'validation'` | 13,573
 
 *   **Feature structure**:
 
@@ -151,6 +154,18 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: WMT 2013 de-en translation task dataset.
 
+*   **Download size**: `1.59 GiB`
+
+*   **Dataset size**: `1.36 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'test'`       | 3,000
+`'train'`      | 4,485,758
+`'validation'` | 13,573
+
 *   **Feature structure**:
 
 ```python
@@ -212,6 +227,18 @@ dataButton.addEventListener('click', async () => {
 ## wmt13_translate/fr-en
 
 *   **Config description**: WMT 2013 fr-en translation task dataset.
+
+*   **Download size**: `6.21 GiB`
+
+*   **Dataset size**: `14.64 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 3,000
+`'train'`      | 40,810,860
+`'validation'` | 13,573
 
 *   **Feature structure**:
 
@@ -275,6 +302,18 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: WMT 2013 es-en translation task dataset.
 
+*   **Download size**: `3.79 GiB`
+
+*   **Dataset size**: `5.24 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | ---------:
+`'test'`       | 3,000
+`'train'`      | 15,176,790
+`'validation'` | 13,573
+
 *   **Feature structure**:
 
 ```python
@@ -336,6 +375,18 @@ dataButton.addEventListener('click', async () => {
 ## wmt13_translate/ru-en
 
 *   **Config description**: WMT 2013 ru-en translation task dataset.
+
+*   **Download size**: `1010.20 MiB`
+
+*   **Dataset size**: `833.67 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'test'`       | 3,000
+`'train'`      | 2,471,670
+`'validation'` | 3,003
 
 *   **Feature structure**:
 

@@ -52,7 +52,7 @@ space.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -78,12 +78,13 @@ space.
 
 ## rlu_locomotion/humanoid_corridor (default config)
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.88 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,000
 
 *   **Feature structure**:
 
@@ -180,12 +181,13 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_locomotion/humanoid_gaps
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.57 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 8,000
 
 *   **Feature structure**:
 
@@ -282,12 +284,13 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_locomotion/humanoid_walls
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.36 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 4,000
 
 *   **Feature structure**:
 
@@ -384,12 +387,13 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_locomotion/rodent_bowl_escape
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `16.46 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,000
 
 *   **Feature structure**:
 
@@ -490,12 +494,13 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_locomotion/rodent_gaps
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.90 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,000
 
 *   **Feature structure**:
 
@@ -596,12 +601,13 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_locomotion/rodent_mazes
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `20.71 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,000
 
 *   **Feature structure**:
 
@@ -702,12 +708,13 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_locomotion/rodent_two_touch
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `23.05 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,000
 
 *   **Feature structure**:
 

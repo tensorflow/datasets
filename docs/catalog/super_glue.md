@@ -25,11 +25,18 @@ resources, and a new public leaderboard.
 
     *   **`1.0.2`** (default): No release notes.
 
+*   **Download size**: `Unknown size`
+
 *   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -38,10 +45,6 @@ resources, and a new public leaderboard.
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
 
 
 ## super_glue/boolq (default config)
@@ -55,16 +58,6 @@ resources, and a new public leaderboard.
 
 *   **Homepage**:
     [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
-
-*   **Download size**: `3.93 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 3,245
-`'train'`      | 9,427
-`'validation'` | 3,270
 
 *   **Feature structure**:
 
@@ -86,6 +79,43 @@ idx      | Tensor       |       | tf.int32  |
 label    | ClassLabel   |       | tf.int64  |
 passage  | Text         |       | tf.string |
 question | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-boolq-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -125,16 +155,6 @@ get the correct citation for each contained dataset.
 *   **Homepage**:
     [https://github.com/mcdm/CommitmentBank](https://github.com/mcdm/CommitmentBank)
 
-*   **Download size**: `73.71 KiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 250
-`'train'`      | 250
-`'validation'` | 56
-
 *   **Feature structure**:
 
 ```python
@@ -155,6 +175,43 @@ hypothesis | Text         |       | tf.string |
 idx        | Tensor       |       | tf.int32  |
 label      | ClassLabel   |       | tf.int64  |
 premise    | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-cb-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -193,16 +250,6 @@ get the correct citation for each contained dataset.
 *   **Homepage**:
     [http://people.ict.usc.edu/~gordon/copa.html](http://people.ict.usc.edu/~gordon/copa.html)
 
-*   **Download size**: `42.96 KiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 500
-`'train'`      | 400
-`'validation'` | 100
-
 *   **Feature structure**:
 
 ```python
@@ -227,6 +274,43 @@ idx      | Tensor       |       | tf.int32  |
 label    | ClassLabel   |       | tf.int64  |
 premise  | Text         |       | tf.string |
 question | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-copa-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -266,16 +350,6 @@ get the correct citation for each contained dataset.
 
 *   **Homepage**: [https://cogcomp.org/multirc/](https://cogcomp.org/multirc/)
 
-*   **Download size**: `1.06 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 9,693
-`'train'`      | 27,243
-`'validation'` | 4,848
-
 *   **Feature structure**:
 
 ```python
@@ -305,6 +379,43 @@ idx/question  | Tensor       |       | tf.int32  |
 label         | ClassLabel   |       | tf.int64  |
 paragraph     | Text         |       | tf.string |
 question      | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-multirc-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -341,16 +452,6 @@ get the correct citation for each contained dataset.
 *   **Homepage**:
     [https://sheng-z.github.io/ReCoRD-explorer/](https://sheng-z.github.io/ReCoRD-explorer/)
 
-*   **Download size**: `49.36 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 10,000
-`'train'`      | 100,730
-`'validation'` | 10,000
-
 *   **Feature structure**:
 
 ```python
@@ -378,6 +479,43 @@ idx/passage | Tensor         |         | tf.int32  |
 idx/query   | Tensor         |         | tf.int32  |
 passage     | Text           |         | tf.string |
 query       | Text           |         | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-record-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -419,16 +557,6 @@ get the correct citation for each contained dataset.
 *   **Homepage**:
     [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
 
-*   **Download size**: `733.32 KiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 3,000
-`'train'`      | 2,490
-`'validation'` | 277
-
 *   **Feature structure**:
 
 ```python
@@ -449,6 +577,43 @@ hypothesis | Text         |       | tf.string |
 idx        | Tensor       |       | tf.int32  |
 label      | ClassLabel   |       | tf.int64  |
 premise    | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-rte-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -510,16 +675,6 @@ get the correct citation for each contained dataset.
 *   **Homepage**:
     [https://pilehvar.github.io/wic/](https://pilehvar.github.io/wic/)
 
-*   **Download size**: `386.93 KiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 1,400
-`'train'`      | 5,428
-`'validation'` | 638
-
 *   **Feature structure**:
 
 ```python
@@ -550,6 +705,43 @@ sentence2 | Text         |       | tf.string |
 start1    | Tensor       |       | tf.int32  |
 start2    | Tensor       |       | tf.int32  |
 word      | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wic-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -616,16 +808,6 @@ phrases (and thus more choices for the model), but low to no ambiguity.
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
 
-*   **Download size**: `31.98 KiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 146
-`'train'`      | 554
-`'validation'` | 104
-
 *   **Feature structure**:
 
 ```python
@@ -652,6 +834,43 @@ span1_text  | Text         |       | tf.string |
 span2_index | Tensor       |       | tf.int32  |
 span2_text  | Text         |       | tf.string |
 text        | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wsc-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -714,16 +933,6 @@ text.
 *   **Homepage**:
     [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
 
-*   **Download size**: `31.98 KiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'test'`       | 146
-`'train'`      | 554
-`'validation'` | 104
-
 *   **Feature structure**:
 
 ```python
@@ -750,6 +959,43 @@ span1_text  | Text         |       | tf.string |
 span2_index | Tensor       |       | tf.int32  |
 span2_text  | Text         |       | tf.string |
 text        | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-wsc.fixed-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -791,14 +1037,6 @@ get the correct citation for each contained dataset.
 *   **Homepage**:
     [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
 
-*   **Download size**: `33.15 KiB`
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'test'` | 1,104
-
 *   **Feature structure**:
 
 ```python
@@ -819,6 +1057,43 @@ idx       | Tensor       |       | tf.int32  |
 label     | ClassLabel   |       | tf.int64  |
 sentence1 | Text         |       | tf.string |
 sentence2 | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-axb-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -856,14 +1131,6 @@ get the correct citation for each contained dataset.
 *   **Homepage**:
     [https://github.com/rudinger/winogender-schemas](https://github.com/rudinger/winogender-schemas)
 
-*   **Download size**: `10.17 KiB`
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'test'` | 356
-
 *   **Feature structure**:
 
 ```python
@@ -884,6 +1151,43 @@ hypothesis | Text         |       | tf.string |
 idx        | Tensor       |       | tf.int32  |
 label      | ClassLabel   |       | tf.int64  |
 premise    | Text         |       | tf.string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/super_glue-axg-1.0.2.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 

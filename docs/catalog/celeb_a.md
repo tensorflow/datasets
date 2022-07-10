@@ -48,21 +48,18 @@ CelebA dataset.
     *   **`2.0.1`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Download size**: `1.38 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `1.62 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 19,962
-`'train'`      | 162,770
-`'validation'` | 19,867
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
