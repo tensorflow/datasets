@@ -31,18 +31,18 @@ NQ to be a more realistic and challenging task than prior QA datasets.
     *   `0.0.2`: No release notes.
     *   **`0.1.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `41.97 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'train'`      | 307,373
+`'validation'` | 7,830
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -67,6 +67,8 @@ journal = {Transactions of the Association of Computational Linguistics}
 ## natural_questions/default (default config)
 
 *   **Config description**: Default natural_questions config
+
+*   **Dataset size**: `90.26 GiB`
 
 *   **Feature structure**:
 
@@ -178,6 +180,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: natural_questions preprocessed as in the longT5
     benchmark
+
+*   **Dataset size**: `8.91 GiB`
 
 *   **Feature structure**:
 

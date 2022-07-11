@@ -30,6 +30,10 @@
 
     *   **`1.0.0`** (default): Initial release.
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
@@ -73,18 +77,15 @@ label         | ClassLabel   |                 | tf.int64 |
 
 *   **Config description**: factor of variation: rotation
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.40 GiB`
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `1.40 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 39,540
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -135,10 +136,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `3.25 GiB`
 
 *   **Dataset size**: `3.27 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -192,18 +189,15 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: factor of variation: location
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `18.21 GiB`
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `18.31 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 541,548
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

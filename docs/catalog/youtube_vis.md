@@ -38,8 +38,6 @@ No files were removed or altered during preprocessing.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -57,12 +55,7 @@ secure" warning when accessing codalab.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -97,6 +90,16 @@ Split | Examples
 
 *   **Config description**: The full resolution version of the dataset, with all
     frames, including those without labels, included.
+
+*   **Dataset size**: `33.31 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 343
+`'train'`      | 2,238
+`'validation'` | 302
 
 *   **Feature structure**:
 
@@ -181,6 +184,16 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: All images are bilinearly resized to 480 X 640 with
     all frames included.
 
+*   **Dataset size**: `130.02 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 343
+`'train'`      | 2,238
+`'validation'` | 302
+
 *   **Feature structure**:
 
 ```python
@@ -264,6 +277,16 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: All images are bilinearly resized to 480 X 640 with
     only frames with labels included.
 
+*   **Dataset size**: `26.27 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 343
+`'train'`      | 2,238
+`'validation'` | 302
+
 *   **Feature structure**:
 
 ```python
@@ -346,6 +369,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Only images with labels included at their native
     resolution.
+
+*   **Dataset size**: `6.91 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 343
+`'train'`      | 2,238
+`'validation'` | 302
 
 *   **Feature structure**:
 
@@ -431,6 +464,16 @@ dataButton.addEventListener('click', async () => {
     frames, including those without labels, included. The val and test splits
     are manufactured from the training data.
 
+*   **Dataset size**: `26.09 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 200
+`'train'`      | 1,838
+`'validation'` | 200
+
 *   **Feature structure**:
 
 ```python
@@ -514,6 +557,16 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: All images are bilinearly resized to 480 X 640 with
     all frames included. The val and test splits are manufactured from the
     training data.
+
+*   **Dataset size**: `101.57 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 200
+`'train'`      | 1,838
+`'validation'` | 200
 
 *   **Feature structure**:
 
@@ -599,6 +652,16 @@ dataButton.addEventListener('click', async () => {
     only frames with labels included. The val and test splits are manufactured
     from the training data.
 
+*   **Dataset size**: `20.55 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 200
+`'train'`      | 1,838
+`'validation'` | 200
+
 *   **Feature structure**:
 
 ```python
@@ -681,6 +744,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Only images with labels included at their native
     resolution. The val and test splits are manufactured from the training data.
+
+*   **Dataset size**: `5.46 GiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 200
+`'train'`      | 1,838
+`'validation'` | 200
 
 *   **Feature structure**:
 

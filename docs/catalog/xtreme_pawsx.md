@@ -44,18 +44,9 @@ https://arxiv.org/abs/2003.11080
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Feature structure**:
 
@@ -103,6 +94,16 @@ sentence2 | Text         |       | tf.string |
 
 *   **Config description**: Translated to de
 
+*   **Download size**: `22.34 MiB`
+
+*   **Dataset size**: `14.19 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 49,340
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -143,6 +144,16 @@ dataButton.addEventListener('click', async () => {
 ## xtreme_pawsx/es
 
 *   **Config description**: Translated to es
+
+*   **Download size**: `22.27 MiB`
+
+*   **Dataset size**: `14.09 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 49,244
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -185,6 +196,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translated to fr
 
+*   **Download size**: `22.70 MiB`
+
+*   **Dataset size**: `14.53 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 49,208
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -225,6 +246,16 @@ dataButton.addEventListener('click', async () => {
 ## xtreme_pawsx/ja
 
 *   **Config description**: Translated to ja
+
+*   **Download size**: `25.12 MiB`
+
+*   **Dataset size**: `16.98 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 49,086
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -267,6 +298,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translated to ko
 
+*   **Download size**: `22.99 MiB`
+
+*   **Dataset size**: `14.86 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 49,298
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -307,6 +348,16 @@ dataButton.addEventListener('click', async () => {
 ## xtreme_pawsx/zh
 
 *   **Config description**: Translated to zh
+
+*   **Download size**: `21.45 MiB`
+
+*   **Dataset size**: `13.21 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 49,149
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -33,19 +33,6 @@ from 113 unique camera viewpoints.
 
     *   **`4.0.1`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -71,6 +58,20 @@ Split | Examples
 ## robonet/robonet_sample_64 (default config)
 
 *   **Config description**: 64x64 RoboNet Sample.
+
+*   **Download size**: `119.80 MiB`
+
+*   **Dataset size**: `183.04 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 700
 
 *   **Feature structure**:
 
@@ -134,6 +135,20 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: 128x128 RoboNet Sample.
 
+*   **Download size**: `119.80 MiB`
+
+*   **Dataset size**: `638.98 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 700
+
 *   **Feature structure**:
 
 ```python
@@ -196,6 +211,20 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: 64x64 RoboNet.
 
+*   **Download size**: `36.20 GiB`
+
+*   **Dataset size**: `41.37 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 162,417
+
 *   **Feature structure**:
 
 ```python
@@ -257,6 +286,20 @@ dataButton.addEventListener('click', async () => {
 ## robonet/robonet_128
 
 *   **Config description**: 128x128 RoboNet.
+
+*   **Download size**: `36.20 GiB`
+
+*   **Dataset size**: `144.90 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 162,417
 
 *   **Feature structure**:
 

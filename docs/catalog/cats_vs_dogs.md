@@ -28,7 +28,7 @@ dropped.
     *   **`4.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Download size**: `786.68 MiB`
+*   **Download size**: `Unknown size`
 
 *   **Dataset size**: `Unknown size`
 
@@ -38,9 +38,8 @@ dropped.
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 23,262
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
