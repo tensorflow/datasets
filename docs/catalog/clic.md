@@ -39,21 +39,18 @@ frames).
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `7.48 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `7.48 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 428
-`'train'`      | 1,633
-`'validation'` | 102
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
