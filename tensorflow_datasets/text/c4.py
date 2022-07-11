@@ -67,8 +67,8 @@ RELEASE_NOTES = {
     "2.2.1": "Update dataset_info.json",
 }
 
-_DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
-_WET_PATH_URL = "https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-{cc_version}/wet.paths.gz"
+_DOWNLOAD_HOST = "https://data.commoncrawl.org"
+_WET_PATH_URL = "https://data.commoncrawl.org/crawl-data/CC-MAIN-{cc_version}/wet.paths.gz"
 _REALNEWS_DOMAINS_URL = "https://raw.githubusercontent.com/rowanz/grover/38f7184bd87237ae2d3bc330b99f1e2e246f6d51/realnews/domain_to_allowed_subdomains.json"
 _CHECKSUMS_URL = "https://storage.googleapis.com/tfds-data/manual_checksums/c4.txt"
 _OPENWEBTEXT_URLS_ZIP = "OpenWebText.zip"
