@@ -59,10 +59,13 @@ def _log_import_operation():
 
 
 @atexit.register
-def _maybe_log_import_operations_at_exit():
+def _at_exit():
+  """Log import operation if needed, calls `process_ends` on loggers."""
   if _registered_loggers is None:
     _check_init_registered_loggers()
   _log_import_operation()
+  for logger in _get_registered_loggers():
+    logger.process_ends()
 
 
 def _get_registered_loggers() -> List[base_logger.Logger]:
