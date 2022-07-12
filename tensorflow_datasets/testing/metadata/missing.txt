@@ -322,6 +322,8 @@ so2sat/all/2.0.0
 so2sat/all/2.1.0
 so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
+user_libri_audio/1.0.0
+user_libri_text/1.0.0
 voxforge/1.0.0
 wit_kaggle/train_with_extended_features/1.0.1
 wmt18_translate/cs-en/1.0.0
