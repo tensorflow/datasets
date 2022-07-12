@@ -76,8 +76,9 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       type=tfds.core.Path,
       # Should match tfds.core.constant.DATA_DIR !!
       default=tfds.core.Path(
-          os.environ.get('TFDS_DATA_DIR',
-                         os.path.join('~', 'tensorflow_datasets'))),
+          os.environ.get(
+              'TFDS_DATA_DIR',
+              os.path.join(os.path.expanduser('~'), 'tensorflow_datasets'))),
       help='Where to place datasets. Default to '
       '`~/tensorflow_datasets/` or `TFDS_DATA_DIR` environement variable.',
   )
