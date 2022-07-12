@@ -35,18 +35,24 @@ dev * predictions from Albert on SQuAD training, dev and test examples
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `45.86 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `47.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split         | Examples
+:------------ | -------:
+`'ae_dev'`    | 4,446
+`'ae_test'`   | 9,724
+`'dev_bidaf'` | 7,522
+`'dev_luke'`  | 4,590
+`'dev_xlnet'` | 7,932
+`'train'`     | 9,090
 
 *   **Feature structure**:
 

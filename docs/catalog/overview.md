@@ -42,6 +42,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`speech_commands`](speech_commands.md)
 *   [`spoken_digit`](spoken_digit.md)
 *   [`tedlium`](tedlium.md)
+*   [`user_libri_audio`](user_libri_audio.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`vctk`](vctk.md)
 *   [`voxceleb`](voxceleb.md)
 *   [`voxforge`](voxforge.md)
@@ -366,6 +368,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)
 *   [`unified_qa`](unified_qa.md)
+*   [`user_libri_text`](user_libri_text.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki40b`](wiki40b.md)
 *   [`wiki_dialog`](wiki_dialog.md)
 *   [`wikiann`](wikiann.md)

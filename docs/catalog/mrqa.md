@@ -40,6 +40,19 @@ More information can be found at: `https://mrqa.github.io/2019/shared.html`.
 
     *   **`1.0.0`** (default): Initial release.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -111,21 +124,6 @@ subset                             | Tensor           |         | tf.string |
     dataset is used as the basis for the shared task format. Crowdworkers are
     shown paragraphs from Wikipedia and are asked to write questions with
     extractive answers.
-
-*   **Download size**: `29.66 MiB`
-
-*   **Dataset size**: `271.43 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 86,588
-`'validation'` | 10,507
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -212,21 +210,6 @@ the correct citation for each contained dataset."
     headline and summary while the “answerers” see the full article. Questions
     that have no answer or are flagged in the dataset to be without annotator
     agreement are discarded.
-
-*   **Download size**: `56.83 MiB`
-
-*   **Dataset size**: `654.25 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 74,160
-`'validation'` | 4,212
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -315,21 +298,6 @@ the correct citation for each contained dataset."
     and quiz-league websites. The web version of TriviaQA, where the contexts
     are retrieved from the results of a Bing search query, is used.
 
-*   **Download size**: `383.14 MiB`
-
-*   **Dataset size**: `772.75 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 61,688
-`'validation'` | 7,785
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -414,21 +382,6 @@ the correct citation for each contained dataset."
     Jeopardy! TV show. The contexts are composed of retrieved snippets from a
     Google search query.
 
-*   **Download size**: `699.86 MiB`
-
-*   **Dataset size**: `1.38 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 117,384
-`'validation'` | 16,980
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -505,21 +458,6 @@ the correct citation for each contained dataset."
     multi-hop reasoning to solve. In the original setting, these paragraphs are
     mixed with additional distractor paragraphs to make inference harder. Here,
     the distractor paragraphs are not included.
-
-*   **Download size**: `111.98 MiB`
-
-*   **Dataset size**: `272.87 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 72,928
-`'validation'` | 5,901
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -612,21 +550,6 @@ the correct citation for each contained dataset."
     question (Long Answer), and 2) the subspan or sub-spans within the bounding
     box that comprise the actual answer (Short Answer). Only the examples that
     have short answers are used, and the long answer is used as the context.
-
-*   **Download size**: `121.15 MiB`
-
-*   **Dataset size**: `339.03 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 104,071
-`'validation'` | 12,836
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -731,20 +654,6 @@ the correct citation for each contained dataset."
     multiple QA-context pairs). Abstracts that do not exactly contain the answer
     are discarded.
 
-*   **Download size**: `2.54 MiB`
-
-*   **Dataset size**: `6.70 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'test'` | 1,504
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -826,20 +735,6 @@ the correct citation for each contained dataset."
     questions focus on quantitative reasoning, and the original dataset contains
     non-extractive numeric answers as well as extractive text answers. The set
     of questions that are extractive is used.
-
-*   **Download size**: `578.25 KiB`
-
-*   **Dataset size**: `5.41 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'test'` | 1,503
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -931,20 +826,6 @@ the correct citation for each contained dataset."
     shown only the IMDb page. Questions that are marked as unanswerable are
     discarded.
 
-*   **Download size**: `1.14 MiB`
-
-*   **Dataset size**: `15.04 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'test'` | 1,501
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1030,20 +911,6 @@ the correct citation for each contained dataset."
     high school Chinese students. The high school split (which is more
     challenging) is used and also the implicit “fill in the blank” style
     questions (which are unnatural for this task) are filtered out.
-
-*   **Download size**: `1.49 MiB`
-
-*   **Dataset size**: `3.53 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'test'` | 674
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1134,20 +1001,6 @@ the correct citation for each contained dataset."
     are collected. The dataset’s zeroshot benchmark split (generalization to
     unseen relations) is used, and only the positive examples are kept.
 
-*   **Download size**: `830.88 KiB`
-
-*   **Dataset size**: `3.71 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'test'` | 2,948
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1232,20 +1085,6 @@ the correct citation for each contained dataset."
     school Life Science, Earth Science, and Physical Science textbooks.
     Questions that are accompanied with a diagram, or that are “True or False”
     questions are not included.
-
-*   **Download size**: `1.79 MiB`
-
-*   **Dataset size**: `14.04 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
-
-*   **Splits**:
-
-Split    | Examples
-:------- | -------:
-`'test'` | 1,503
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
