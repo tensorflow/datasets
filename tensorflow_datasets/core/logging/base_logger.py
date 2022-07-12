@@ -132,3 +132,7 @@ class Logger:
   ):
     """Callback called when user calls `tfds.list_builders(...)`."""
     pass
+
+  def process_ends(self):
+    """Called when the process is about to end (atexit)."""
+    pass
