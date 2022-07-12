@@ -38,19 +38,16 @@ and collected by the Makerere AI research lab.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `171.63 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test, validation), Only when `shuffle_files=False` (train)
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 128
-`'train'`      | 1,034
-`'validation'` | 133
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

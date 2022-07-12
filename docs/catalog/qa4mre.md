@@ -34,16 +34,9 @@ alzheimers data, and the other on entrance exams data.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
 
 *   **Feature structure**:
 
@@ -123,6 +116,13 @@ isbn="978-3-642-40802-1"
 *   **Config description**: This configuration includes the main track for DE
     language in 2011 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -164,6 +164,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for EN
     language in 2011 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -207,6 +214,13 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for ES
     language in 2011 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -248,6 +262,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for IT
     language in 2011 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -291,6 +312,13 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for RO
     language in 2011 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -332,6 +360,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for AR
     language in 2012 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -375,6 +410,13 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for BG
     language in 2012 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -416,6 +458,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for DE
     language in 2012 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -459,6 +508,13 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for EN
     language in 2012 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -500,6 +556,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for ES
     language in 2012 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -543,6 +606,13 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for IT
     language in 2012 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -584,6 +654,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for RO
     language in 2012 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -627,6 +704,13 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the alzheimers track for
     EN language in 2012 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -668,6 +752,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for AR
     language in 2013 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -711,6 +802,13 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for BG
     language in 2013 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -752,6 +850,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for EN
     language in 2013 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -795,6 +900,13 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the main track for ES
     language in 2013 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -836,6 +948,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the main track for RO
     language in 2013 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -879,6 +998,13 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This configuration includes the alzheimers track for
     EN language in 2013 year.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -920,6 +1046,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: This configuration includes the entrance_exam track
     for EN language in 2013 year.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

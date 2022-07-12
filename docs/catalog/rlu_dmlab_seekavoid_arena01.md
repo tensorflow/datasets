@@ -56,9 +56,16 @@ are interested in large-scale offline RL models with memory.
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -135,14 +142,6 @@ steps/reward                  | Tensor       |             | tf.float32 |
 
 ## rlu_dmlab_seekavoid_arena01/training_0 (default config)
 
-*   **Dataset size**: `356.86 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 134,707
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -181,14 +180,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_dmlab_seekavoid_arena01/training_1
-
-*   **Dataset size**: `337.09 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 128,472
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -229,14 +220,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/training_2
 
-*   **Dataset size**: `355.62 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 133,545
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -275,14 +258,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.0
-
-*   **Dataset size**: `89.16 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -323,14 +298,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.0
 
-*   **Dataset size**: `89.03 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -369,14 +336,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.01
-
-*   **Dataset size**: `89.12 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -417,14 +376,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.01
 
-*   **Dataset size**: `89.02 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -464,14 +415,6 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.25
 
-*   **Dataset size**: `88.57 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -510,14 +453,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.25
-
-*   **Dataset size**: `88.51 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 33,340
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
