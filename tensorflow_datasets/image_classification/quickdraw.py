@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """QuickDraw dataset."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # Shared constants
@@ -52,11 +52,13 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
   are generated from the raw vector information (i.e. the 'bitmap' dataset, not
   the 'raw' or 'simplified drawings' datasets).
   """
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
-    labels_path = tfds.core.get_tfds_path(_QUICKDRAW_LABELS_FNAME)
+    labels_path = tfds.core.tfds_path(_QUICKDRAW_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         description=("The Quick Draw Dataset is a collection of 50 million "
@@ -70,22 +72,22 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         homepage=_URL,
-        citation=_CITATION
-    )
+        citation=_CITATION)
 
   def _split_generators(self, dl_manager):
     # The QuickDraw bitmap repository is structured as one .npy file per label.
     labels = self.info.features["label"].names
-    urls = {label: "{}/{}.npy".format(_QUICKDRAW_BASE_URL, label)
-            for label in labels}
+    urls = {
+        label: "{}/{}.npy".format(_QUICKDRAW_BASE_URL, label)
+        for label in labels
+    }
 
     file_paths = dl_manager.download(urls)
 
     # There is no predefined train/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
+            name=tfds.Split.TRAIN, gen_kwargs={
                 "file_paths": file_paths,
             })
     ]
@@ -98,7 +100,7 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
 
     Args:
       file_paths: (dict of {str: str}) the paths to files containing the data,
-                  indexed by label.
+        indexed by label.
 
     Yields:
       The QuickDraw examples, as defined in the dataset info features.

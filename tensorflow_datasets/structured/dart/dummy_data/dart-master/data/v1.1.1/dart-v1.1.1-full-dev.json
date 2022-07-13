@@ -1,0 +1,23 @@
+[
+  {
+    "tripleset": [
+      [
+        "Mars Hill College",
+        "JOINED",
+        "1973"
+      ],
+      [
+        "Mars Hill College",
+        "LOCATION",
+        "Mars Hill, North Carolina"
+      ]
+    ],
+    "subtree_was_extended": true,
+    "annotations": [
+      {
+        "source": "WikiSQL_decl_sents",
+        "text": "A school from Mars Hill, North Carolina, joined in 1973."
+      }
+    ]
+  }
+]

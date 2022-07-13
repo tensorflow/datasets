@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import imagenet
-
 
 imagenet.Imagenet2012.PNG_IMAGES = ["n01440764_1.JPEG"]
 imagenet.Imagenet2012.CMYK_IMAGES = [

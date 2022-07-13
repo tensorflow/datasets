@@ -1,0 +1,46 @@
+{
+  "citation": "@inproceedings{lebret-etal-2016-neural,\n    title = \"Neural Text Generation from Structured Data with Application to the Biography Domain\",\n    author = \"Lebret, R{'e}mi  and\n      Grangier, David  and\n      Auli, Michael\",\n    booktitle = \"Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing\",\n    month = nov,\n    year = \"2016\",\n    address = \"Austin, Texas\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/D16-1128\",\n    doi = \"10.18653/v1/D16-1128\",\n    pages = \"1203--1213\",\n}",
+  "description": "WikiBio is constructed using Wikipedia biography pages, it contains the first\nparagraph and the infobox tokenized.\nThis dataset is constructed following a standarized table format (see\nb/170390852).",
+  "downloadSize": "333998704",
+  "location": {
+    "urls": [
+      "https://github.com/DavidGrangier/wikipedia-biography-dataset"
+    ]
+  },
+  "name": "wiki_bio",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "83342156",
+      "shardLengths": [
+        "72831"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "667894259",
+      "shardLengths": [
+        "72832",
+        "72833",
+        "72832",
+        "72833",
+        "72832",
+        "72832",
+        "72833",
+        "72832"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "83405761",
+      "shardLengths": [
+        "72831"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "input_text",
+    "output": "target_text"
+  },
+  "version": "0.1.0"
+}

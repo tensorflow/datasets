@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 
 import json
 import os
-from typing import Dict, Iterator, List, Text, Tuple
+from typing import Dict, Iterator, List, Optional, Text, Tuple
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -97,7 +97,7 @@ class Samsum(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self,
-                         path: Text = None
+                         path: Optional[Text] = None
                         ) -> Iterator[Tuple[Text, Dict[Text, Text]]]:
     """Yields examples."""
     with tf.io.gfile.GFile(path, "rb") as f:

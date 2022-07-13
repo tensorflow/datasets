@@ -1,0 +1,28 @@
+{
+  "citation": "@inproceedings{clark2019boolq,\n  title =     {BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},\n  author =    {Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},\n  booktitle = {NAACL},\n  year =      {2019},\n}",
+  "description": "BoolQ is a question answering dataset for yes/no questions containing 15942 examples.\nThese questions are naturally occurring, they are generated in unprompted and unconstrained settings.\n\nEach example is a triplet of (question, passage, answer),\nwith the title of the page as optional additional context.\nThe text-pair classification setup is similar to existing\nnatural language inference tasks.",
+  "downloadSize": "8764539",
+  "location": {
+    "urls": [
+      "https://github.com/google-research-datasets/boolean-questions"
+    ]
+  },
+  "name": "bool_q",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "6643868",
+      "shardLengths": [
+        "9427"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "2279657",
+      "shardLengths": [
+        "3270"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

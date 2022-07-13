@@ -1,0 +1,44 @@
+{
+  "citation": "@inproceedings{trischler-etal-2017-newsqa,\n        title = \"{N}ews{QA}: A Machine Comprehension Dataset\",\n        author = \"Trischler, Adam  and\n          Wang, Tong  and\n          Yuan, Xingdi  and\n          Harris, Justin  and\n          Sordoni, Alessandro  and\n          Bachman, Philip  and\n          Suleman, Kaheer\",\n        booktitle = \"Proceedings of the 2nd Workshop on Representation Learning for {NLP}\",\n        month = aug,\n        year = \"2017\",\n        address = \"Vancouver, Canada\",\n        publisher = \"Association for Computational Linguistics\",\n        url = \"https://aclanthology.org/W17-2623\",\n        doi = \"10.18653/v1/W17-2623\",\n        pages = \"191--200\",\n    }\n#     \n@inproceedings{fisch-etal-2019-mrqa,\n    title = \"{MRQA} 2019 Shared Task: Evaluating Generalization in Reading Comprehension\",\n    author = \"Fisch, Adam  and\n      Talmor, Alon  and\n      Jia, Robin  and\n      Seo, Minjoon  and\n      Choi, Eunsol  and\n      Chen, Danqi\",\n    booktitle = \"Proceedings of the 2nd Workshop on Machine Reading for Question Answering\",\n    month = nov,\n    year = \"2019\",\n    address = \"Hong Kong, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/D19-5801\",\n    doi = \"10.18653/v1/D19-5801\",\n    pages = \"1--13\",\n}\n\nNote that each MRQA dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.\"",
+  "configDescription": "Two sets of crowdworkers ask and answer questions based on CNN news\narticles. The \u201cquestioners\u201d see only the article\u2019s headline and\nsummary while the \u201canswerers\u201d see the full article. Questions that\nhave no answer or are flagged in the dataset to be without annotator\nagreement are discarded.\n",
+  "configName": "news_qa",
+  "description": "The MRQA 2019 Shared Task focuses on generalization in question answering. An\neffective question answering system should do more than merely interpolate from\nthe training set to answer test examples drawn from the same distribution: it\nshould also be able to extrapolate to out-of-distribution examples \u2014 a\nsignificantly harder challenge.\n\nMRQA adapts and unifies multiple distinct question answering datasets (carefully\nselected subsets of existing datasets) into the same format (SQuAD format).\nAmong them, six datasets were made available for training, and six datasets were\nmade available for testing. Small portions of the training datasets\nwere held-out as in-domain data that may be used for development. The testing\ndatasets only contain out-of-domain data. This benchmark is released as part of\nthe MRQA 2019 Shared Task.\n\nMore information can be found at: `https://mrqa.github.io/2019/shared.html`.",
+  "downloadSize": "59594232",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://mrqa.github.io/2019/shared.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.mrqa.mrqa",
+  "name": "mrqa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "649398665",
+      "shardLengths": [
+        "9270",
+        "9270",
+        "9270",
+        "9270",
+        "9270",
+        "9270",
+        "9270",
+        "9270"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "36634184",
+      "shardLengths": [
+        "4212"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

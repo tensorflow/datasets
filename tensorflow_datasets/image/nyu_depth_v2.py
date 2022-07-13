@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,9 @@
 import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
-
 
 _CITATION = """\
 @inproceedings{Silberman:ECCV12,
@@ -38,13 +37,11 @@ _CITATION = """\
 }
 """
 
-
 _DESCRIPTION = """\
 The NYU-Depth V2 data set is comprised of video sequences from a variety of
 indoor scenes as recorded by both the RGB and Depth cameras from the
 Microsoft Kinect.
 """
-
 
 _URL = 'http://datasets.lids.mit.edu/fastdepth/data/nyudepthv2.tar.gz'
 

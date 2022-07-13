@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="wmt15_translate" />
   <meta itemprop="description" content="Translate dataset based on the data from statmt.org.&#10;&#10;Versions exists for the different years using a combination of multiple data&#10;sources. The base `wmt_translate` allows you to create your own config to choose&#10;your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.&#10;&#10;```&#10;config = tfds.translate.wmt.WmtConfig(&#10;    version=&quot;0.0.1&quot;,&#10;    language_pair=(&quot;fr&quot;, &quot;de&quot;),&#10;    subsets={&#10;        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],&#10;        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],&#10;    },&#10;)&#10;builder = tfds.builder(&quot;wmt_translate&quot;, config=config)&#10;```&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;wmt15_translate&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wmt15_translate" />
@@ -11,6 +10,7 @@
 </div>
 
 # `wmt15_translate`
+
 
 Warning: Manual download required. See instructions below.
 
@@ -48,7 +48,7 @@ builder = tfds.builder("wmt_translate", config=config)
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     Some of the wmt configs here, require a manual download.
     Please look into wmt.py to see the exact path (and file name) that has to
     be downloaded.
@@ -56,6 +56,14 @@ builder = tfds.builder("wmt_translate", config=config)
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -73,9 +81,6 @@ builder = tfds.builder("wmt_translate", config=config)
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## wmt15_translate/cs-en (default config)
 
@@ -91,7 +96,7 @@ Split          | Examples
 `'train'`      | 15,793,126
 `'validation'` | 3,003
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -99,6 +104,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+cs      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -118,7 +131,7 @@ Split          | Examples
 `'train'`      | 4,522,998
 `'validation'` | 3,003
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -126,6 +139,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+de      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -145,7 +166,7 @@ Split          | Examples
 `'train'`      | 2,073,394
 `'validation'` | 1,500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -153,6 +174,14 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+fi      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -172,7 +201,7 @@ Split          | Examples
 `'train'`      | 40,853,298
 `'validation'` | 4,503
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -180,6 +209,14 @@ Translation({
     'fr': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+fr      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -199,7 +236,7 @@ Split          | Examples
 `'train'`      | 2,495,081
 `'validation'` | 3,003
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -208,145 +245,13 @@ Translation({
 })
 ```
 
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('ru', 'en')`
+*   **Feature documentation**:
 
-## wmt15_translate/cs-en.subwords8k
-
-*   **Config description**: WMT 2015 cs-en translation task dataset with subword
-    encoding.
-
-*   **Download size**: `1.62 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | ---------:
-`'test'`       | 2,656
-`'train'`      | 15,793,126
-`'validation'` | 3,003
-
-*   **Features**:
-
-```python
-Translation({
-    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8245>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8198>),
-})
-```
-
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('cs', 'en')`
-
-## wmt15_translate/de-en.subwords8k
-
-*   **Config description**: WMT 2015 de-en translation task dataset with subword
-    encoding.
-
-*   **Download size**: `1.62 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | --------:
-`'test'`       | 2,169
-`'train'`      | 4,522,998
-`'validation'` | 3,003
-
-*   **Features**:
-
-```python
-Translation({
-    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
-})
-```
-
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('de', 'en')`
-
-## wmt15_translate/fi-en.subwords8k
-
-*   **Config description**: WMT 2015 fi-en translation task dataset with subword
-    encoding.
-
-*   **Download size**: `260.51 MiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | --------:
-`'test'`       | 1,370
-`'train'`      | 2,073,394
-`'validation'` | 1,500
-
-*   **Features**:
-
-```python
-Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
-    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
-})
-```
-
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('fi', 'en')`
-
-## wmt15_translate/fr-en.subwords8k
-
-*   **Config description**: WMT 2015 fr-en translation task dataset with subword
-    encoding.
-
-*   **Download size**: `6.24 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | ---------:
-`'test'`       | 1,500
-`'train'`      | 40,853,298
-`'validation'` | 4,503
-
-*   **Features**:
-
-```python
-Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
-})
-```
-
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('fr', 'en')`
-
-## wmt15_translate/ru-en.subwords8k
-
-*   **Config description**: WMT 2015 ru-en translation task dataset with subword
-    encoding.
-
-*   **Download size**: `1.02 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | --------:
-`'test'`       | 2,818
-`'train'`      | 2,495,081
-`'validation'` | 3,003
-
-*   **Features**:
-
-```python
-Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
-    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
-})
-```
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+ru      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

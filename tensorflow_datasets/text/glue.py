@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import textwrap
 import numpy as np
 import six
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _GLUE_CITATION = """\
@@ -54,7 +54,7 @@ _MNLI_BASE_KWARGS = dict(
     },
     label_classes=["entailment", "neutral", "contradiction"],
     label_column="gold_label",
-    data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FMNLI.zip?alt=media&token=50329ea1-e339-40e2-809c-10c40afff3ce",
+    data_url="https://dl.fbaipublicfiles.com/glue/data/MNLI.zip",
     data_dir="MNLI",
     citation=textwrap.dedent("""\
       @InProceedings{N18-1101,
@@ -117,10 +117,17 @@ class GlueConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(GlueConfig, self).__init__(
-        version=tfds.core.Version(
-            "1.0.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
-        **kwargs)
+        version=tfds.core.Version("2.0.0"),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+            tfds.core.Version("1.0.1"),
+        ],
+        release_notes={
+            "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+            "1.0.1": "Update dead URL links.",
+            "2.0.0": "Update data source for glue/qqp.",
+        },
+        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.text_features = text_features
     self.label_column = label_column
     self.label_classes = label_classes
@@ -144,7 +151,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           text_features={"sentence": "sentence"},
           label_classes=["unacceptable", "acceptable"],
           label_column="is_acceptable",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FCoLA.zip?alt=media&token=46d5e637-3411-4188-bc44-5809b5bfb5f4",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/CoLA.zip",
           data_dir="CoLA",
           citation=textwrap.dedent("""\
             @article{warstadt2018neural,
@@ -164,7 +171,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           text_features={"sentence": "sentence"},
           label_classes=["negative", "positive"],
           label_column="label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FSST-2.zip?alt=media&token=aabc5f6b-e466-44a2-b9b4-cf6337f84ac8",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/SST-2.zip",
           data_dir="SST-2",
           citation=textwrap.dedent("""\
             @inproceedings{socher2013recursive,
@@ -180,7 +187,8 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           description=textwrap.dedent("""\
             The Microsoft Research Paraphrase Corpus (Dolan & Brockett, 2005) is a corpus of
             sentence pairs automatically extracted from online news sources, with human annotations
-            for whether the sentences in the pair are semantically equivalent."""),  # pylint: disable=line-too-long
+            for whether the sentences in the pair are semantically equivalent."""
+                                     ),  # pylint: disable=line-too-long
           text_features={
               "sentence1": "",
               "sentence2": ""
@@ -196,8 +204,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               booktitle={Proceedings of the Third International Workshop on Paraphrasing (IWP2005)},
               year={2005}
             }"""),
-          url="https://www.microsoft.com/en-us/download/details.aspx?id=52398"
-      ),
+          url="https://www.microsoft.com/en-us/download/details.aspx?id=52398"),
       GlueConfig(
           name="qqp",
           description=textwrap.dedent("""\
@@ -210,7 +217,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           },
           label_classes=["not_duplicate", "duplicate"],
           label_column="is_duplicate",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FQQP.zip?alt=media&token=700c6acf-160d-4d89-81d1-de4191d02cb5",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/QQP.zip",
           data_dir="QQP",
           citation=textwrap.dedent("""\
           @online{WinNT,
@@ -228,13 +235,13 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             The Semantic Textual Similarity Benchmark (Cer et al., 2017) is a collection of
             sentence pairs drawn from news headlines, video and image captions, and natural
             language inference data. Each pair is human-annotated with a similarity score
-            from 1 to 5."""),
+            from 0 to 5."""),
           text_features={
               "sentence1": "sentence1",
               "sentence2": "sentence2",
           },
           label_column="score",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FSTS-B.zip?alt=media&token=bddb94a7-8706-4e0d-a694-1109e12273b5",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/STS-B.zip",
           data_dir="STS-B",
           citation=textwrap.dedent("""\
             @article{cer2017semeval,
@@ -280,14 +287,15 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             question and the context sentence. The task is to determine whether the context sentence contains
             the answer to the question. This modified version of the original task removes the requirement that
             the model select the exact answer, but also removes the simplifying assumptions that the answer
-            is always present in the input and that lexical overlap is a reliable cue."""),  # pylint: disable=line-too-long
+            is always present in the input and that lexical overlap is a reliable cue."""
+                                     ),  # pylint: disable=line-too-long
           text_features={
               "question": "question",
               "sentence": "sentence",
           },
           label_classes=["entailment", "not_entailment"],
           label_column="label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FQNLIv2.zip?alt=media&token=6fdcf570-0fc5-4631-8456-9505272d1601",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/QNLIv2.zip",
           data_dir="QNLI",
           citation=textwrap.dedent("""\
             @article{rajpurkar2016squad,
@@ -304,14 +312,15 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             entailment challenges. We combine the data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim
             et al., 2006), RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli et al., 2009).4 Examples are
             constructed based on news and Wikipedia text. We convert all datasets to a two-class split, where
-            for three-class datasets we collapse neutral and contradiction into not entailment, for consistency."""),  # pylint: disable=line-too-long
+            for three-class datasets we collapse neutral and contradiction into not entailment, for consistency."""
+                                     ),  # pylint: disable=line-too-long
           text_features={
               "sentence1": "sentence1",
               "sentence2": "sentence2",
           },
           label_classes=["entailment", "not_entailment"],
           label_column="label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FRTE.zip?alt=media&token=5efa7e85-a0bb-4f19-8ea2-9e1840f077fb",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/RTE.zip",
           data_dir="RTE",
           citation=textwrap.dedent("""\
             @inproceedings{dagan2005pascal,
@@ -346,8 +355,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               booktitle={TAC},
               year={2009}
             }"""),
-          url="https://aclweb.org/aclwiki/Recognizing_Textual_Entailment"
-      ),
+          url="https://aclweb.org/aclwiki/Recognizing_Textual_Entailment"),
       GlueConfig(
           name="wnli",
           description=textwrap.dedent("""\
@@ -372,7 +380,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           },
           label_classes=["not_entailment", "entailment"],
           label_column="label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FWNLI.zip?alt=media&token=068ad0a0-ded7-4bd7-99a5-5e00222e0faf",
+          data_url="https://dl.fbaipublicfiles.com/glue/data/WNLI.zip",
           data_dir="WNLI",
           citation=textwrap.dedent("""\
             @inproceedings{levesque2012winograd,
@@ -579,9 +587,12 @@ def _mnli_split_generator(name, data_dir, split, matched):
   return tfds.core.SplitGenerator(
       name=name,
       gen_kwargs={
-          "data_file": os.path.join(
-              data_dir,
-              "%s_%s.tsv" % (split, "matched" if matched else "mismatched")),
-          "split": split,
-          "mrpc_files": None,
+          "data_file":
+              os.path.join(
+                  data_dir, "%s_%s.tsv" %
+                  (split, "matched" if matched else "mismatched")),
+          "split":
+              split,
+          "mrpc_files":
+              None,
       })

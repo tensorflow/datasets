@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 
 """Tests for tensorflow_datasets.core.features.class_label_feature."""
 
-import tensorflow.compat.v2 as tf
+import textwrap
+
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-
-tf.enable_v2_behavior()
 
 
 class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
@@ -52,8 +52,7 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
         test_attributes=dict(
             num_classes=10,
             names=['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-        )
-    )
+        ))
 
   def test_labels(self):
 
@@ -78,8 +77,7 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
         test_attributes=dict(
             num_classes=2,
             names=['left', 'right'],
-        )
-    )
+        ))
 
   def test_num_classes(self):
     labels = features.ClassLabel(num_classes=10)
@@ -169,10 +167,24 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_duplicate_names(self):
 
-    with self.assertRaisesWithPredicateMatch(
-        ValueError, 'label names are duplicated'):
+    with self.assertRaisesWithPredicateMatch(ValueError,
+                                             'label names are duplicated'):
       features.ClassLabel(names=['label1', 'label1', 'label2'])
 
 
-if __name__ == '__main__':
-  testing.test_main()
+def test_file_path(tmp_path):
+  label_file = tmp_path / 'label_names.txt'
+  # Empty lines are ignored
+  content = textwrap.dedent("""
+      label1
+
+
+      label0
+      """)
+  label_file.write_text(content)
+
+  # Both Path and str are supported
+  labels = features.ClassLabel(names_file=label_file)
+  labels_2 = features.ClassLabel(names_file=str(label_file))
+  assert labels.names == labels_2.names
+  assert labels.names == ['label1', 'label0']  # Order is kept

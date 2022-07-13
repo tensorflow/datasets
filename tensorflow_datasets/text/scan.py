@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import json
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -97,10 +97,7 @@ class ScanConfig(tfds.core.BuilderConfig):
     """
     # Version history:
     super(ScanConfig, self).__init__(
-        name=name,
-        version=tfds.core.Version('1.1.1'),
-        description=_DESCRIPTION,
-        **kwargs)
+        name=name, version=tfds.core.Version('1.1.1'), **kwargs)
     self.splitfile = splitfile
     if 'mcd' in name:
       self.splitfile = name + '.json'
@@ -152,12 +149,7 @@ class Scan(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    data_dir = dl_manager.download_and_extract(
-        tfds.download.Resource(
-            url=_DATA_URL,
-            # Specify extract method manually as filename reported by github.com
-            # misses the .zip extension so auto-detection doesn't work.
-            extract_method=tfds.download.ExtractMethod.ZIP))
+    data_dir = dl_manager.download_and_extract(_DATA_URL)
     data_dir = os.path.join(data_dir, 'SCAN-master',
                             self.builder_config.directory)
     split = self.builder_config.name

@@ -1,0 +1,30 @@
+{
+  "citation": "@article{lewis2019mlqa,\n  title={MLQA: Evaluating Cross-lingual Extractive Question Answering},\n  author={Lewis, Patrick and Ouguz, Barlas and Rinott, Ruty and Riedel,   Sebastian and Schwenk, Holger},\n  journal={arXiv preprint arXiv:1910.07475},\n  year={2019}\n}",
+  "configDescription": "MLQA 'ar' dev and test splits.",
+  "configName": "ar",
+  "description": "MLQA (Multilingual Question Answering Dataset) is a benchmark dataset for evaluating multilingual question answering performance. The dataset consists of 7 languages: Arabic, German, Spanish, English, Hindi, Vietnamese, Chinese.",
+  "downloadSize": "75719050",
+  "location": {
+    "urls": [
+      "https://github.com/facebookresearch/MLQA"
+    ]
+  },
+  "name": "mlqa",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "8854200",
+      "shardLengths": [
+        "5335"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "871217",
+      "shardLengths": [
+        "517"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

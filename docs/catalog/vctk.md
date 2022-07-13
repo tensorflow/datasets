@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="vctk" />
   <meta itemprop="description" content="This CSTR VCTK Corpus includes speech data uttered by 110 English speakers with&#10;various accents. Each speaker reads out about 400 sentences, which were selected&#10;from a newspaper, the rainbow passage and an elicitation paragraph used for the&#10;speech accent archive.&#10;&#10;Note that the &#x27;p315&#x27; text was lost due to a hard disk error.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;vctk&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/vctk" />
@@ -11,6 +10,7 @@
 </div>
 
 # `vctk`
+
 
 *   **Description**:
 
@@ -37,7 +37,7 @@ Note that the 'p315' text was lost due to a hard disk error.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -50,9 +50,29 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature | Class        | Shape   | Dtype     | Description
+:------ | :----------- | :------ | :-------- | :----------
+        | FeaturesDict |         |           |
+accent  | ClassLabel   |         | tf.int64  |
+gender  | ClassLabel   |         | tf.int64  |
+id      | Tensor       |         | tf.string |
+speaker | ClassLabel   |         | tf.int64  |
+speech  | Audio        | (None,) | tf.int64  |
+text    | Text         |         | tf.string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'speech')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -66,9 +86,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## vctk/mic1 (default config)
 

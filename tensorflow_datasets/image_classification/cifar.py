@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,13 +19,12 @@ import collections
 import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # Shared constants
 _CIFAR_IMAGE_SIZE = 32
 _CIFAR_IMAGE_SHAPE = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
-
 
 _CITATION = """\
 @TECHREPORT{Krizhevsky09learningmultiple,
@@ -93,20 +92,14 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
       for f in filenames:
         yield os.path.join(cifar_path, f)
 
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "split_prefix": "train_",
-                "filepaths": gen_filenames(cifar_info.train_files)
-            }),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                "split_prefix": "test_",
-                "filepaths": gen_filenames(cifar_info.test_files)
-            }),
-    ]
+    return {
+        tfds.Split.TRAIN:
+            self._generate_examples("train_",
+                                    gen_filenames(cifar_info.train_files)),
+        tfds.Split.TEST:
+            self._generate_examples("test_",
+                                    gen_filenames(cifar_info.test_files)),
+    }
 
   def _generate_examples(self, split_prefix, filepaths):
     """Generate CIFAR examples as dicts.
@@ -174,15 +167,16 @@ class Cifar100(Cifar10):
     )
 
 
-class CifarInfo(collections.namedtuple("_CifarInfo", [
-    "name",
-    "url",
-    "prefix",
-    "train_files",
-    "test_files",
-    "label_files",
-    "label_keys",
-])):
+class CifarInfo(
+    collections.namedtuple("_CifarInfo", [
+        "name",
+        "url",
+        "prefix",
+        "train_files",
+        "test_files",
+        "label_files",
+        "label_keys",
+    ])):
   """Contains the information necessary to generate a CIFAR dataset.
 
   Attributes:
@@ -204,13 +198,13 @@ def _load_data(path, labels_number=1):
   offset = 0
   max_offset = len(data) - 1
   while offset < max_offset:
-    labels = np.frombuffer(data, dtype=np.uint8, count=labels_number,
-                           offset=offset).reshape((labels_number,))
+    labels = np.frombuffer(
+        data, dtype=np.uint8, count=labels_number, offset=offset).reshape(
+            (labels_number,))
     # 1 byte per label, 1024 * 3 = 3072 bytes for the image.
     offset += labels_number
-    img = (np.frombuffer(data, dtype=np.uint8, count=3072, offset=offset)
-           .reshape((3, _CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE))
-           .transpose((1, 2, 0))
-          )
+    img = (
+        np.frombuffer(data, dtype=np.uint8, count=3072, offset=offset).reshape(
+            (3, _CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE)).transpose((1, 2, 0)))
     offset += 3072
     yield labels, img

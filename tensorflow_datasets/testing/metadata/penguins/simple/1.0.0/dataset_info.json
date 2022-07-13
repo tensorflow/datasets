@@ -1,0 +1,61 @@
+{
+  "citation": "@Manual{,\n  title = {palmerpenguins: Palmer Archipelago (Antarctica) penguin data},\n  author = {Allison Marie Horst and Alison Presmanes Hill and Kristen B Gorman},\n  year = {2020},\n  note = {R package version 0.1.0},\n  doi = {10.5281/zenodo.3960218},\n  url = {https://allisonhorst.github.io/palmerpenguins/},\n}",
+  "configDescription": "`penguins/simple` has been processed from the raw dataset, with\nsimplified class labels derived from text fields, missing values\nmarked as NaN/NA and retains only 7 significant features (n = 344).\n",
+  "configName": "simple",
+  "description": "Measurements for three penguin species observed in the Palmer Archipelago, Antarctica.\n\nThese data were collected from 2007 - 2009 by Dr. Kristen Gorman with the [Palmer\nStation Long Term Ecological Research Program](https://pal.lternet.edu/), part\nof the [US Long Term Ecological Research Network](https://lternet.edu/). The\ndata were originally imported from the [Environmental Data\nInitiative](https://environmentaldatainitiative.org/) (EDI) Data Portal, and are\navailable for use by CC0 license (\"No Rights Reserved\") in accordance with the\nPalmer Station Data Policy. This copy was imported from [Allison Horst's GitHub\nrepository](https://allisonhorst.github.io/palmerpenguins/articles/intro.html).",
+  "downloadSize": "13519",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://allisonhorst.github.io/palmerpenguins/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.structured.penguins.penguins",
+  "name": "penguins",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "57448",
+      "shardLengths": [
+        "344"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "dict": {
+            "dict": {
+              "body_mass_g": {
+                "featureKey": "body_mass_g"
+              },
+              "culmen_depth_mm": {
+                "featureKey": "culmen_depth_mm"
+              },
+              "culmen_length_mm": {
+                "featureKey": "culmen_length_mm"
+              },
+              "flipper_length_mm": {
+                "featureKey": "flipper_length_mm"
+              },
+              "island": {
+                "featureKey": "island"
+              },
+              "sex": {
+                "featureKey": "sex"
+              },
+              "species": {
+                "featureKey": "species"
+              }
+            }
+          }
+        },
+        {
+          "featureKey": "species"
+        }
+      ]
+    }
+  },
+  "version": "1.0.0"
+}

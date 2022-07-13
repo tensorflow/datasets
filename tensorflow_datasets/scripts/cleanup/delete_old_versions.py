@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Script cleanup old generated datasets.
+r"""Script to clean up old generated datasets.
 
 The script will display the datasets to delete and will ask users for
 confirmation.
@@ -27,33 +27,26 @@ python -m tensorflow_datasets.scripts.cleanup.delete_old_versions
 
 import collections
 import concurrent.futures
+import dataclasses
 import os
 import pathlib
 from typing import Dict, Iterable, List, Tuple
 
 from absl import app
 from absl import flags
-
-import dataclasses
-
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import termcolor
 
-
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'data_dir', tfds.core.constants.DATA_DIR, 'Path to the data directory.'
-)
-flags.DEFINE_boolean(
-    'skip_confirmation', False, 'Whether to skip user confirmation or not.'
-)
-
+flags.DEFINE_string('data_dir', tfds.core.constants.DATA_DIR,
+                    'Path to the data directory.')
+flags.DEFINE_boolean('skip_confirmation', False,
+                     'Whether to skip user confirmation or not.')
 
 # Nested dict representing the file structure.
 TreeDict = Dict[str, 'TreeDict']  # pytype: disable=not-supported-yet
-
 
 # Folder in this lists are never deleted
 DIRS_TO_KEEP = frozenset({'downloads', 'download', 'manual', 'extracted'})
@@ -95,7 +88,7 @@ def _extract_dirs_to_delete(
 ) -> TaskResult:
   """Tasks which compute the directories to keep and delete.
 
-  This recursivelly compute `listdir()` on the `curr_dir`, and compare with
+  This recursively computes `listdir()` on the `curr_dir`, and compares with
   `curr_tree` to check which directory to delete. Recursion is done on the
   remaining sub-directory (cleanup `data_dir/...`, then `data_dir/mnist/...`,
   ...)
@@ -161,7 +154,7 @@ def _get_extra_dirs(
 ) -> Tuple[List[pathlib.Path], List[pathlib.Path]]:
   """Returns a tuple of installed datasets and extra dirs to delete.
 
-  Arguments:
+  Args:
       data_dir : The path to the data directory
       current_full_names : Names of the latest datasets supported in TFDS
 
@@ -186,8 +179,7 @@ def _get_extra_dirs(
     dirs_to_keep = []
     dirs_to_delete = []
     _extract_dirs_from_future(
-        dirs_to_keep=dirs_to_keep, dirs_to_delete=dirs_to_delete, future=future
-    )
+        dirs_to_keep=dirs_to_keep, dirs_to_delete=dirs_to_delete, future=future)
   return sorted(dirs_to_keep), sorted(dirs_to_delete)
 
 
@@ -199,12 +191,14 @@ def _display_dirs(
   """Display dirs to keep and delete."""
   dirs_to_keep = set(dirs_to_keep)
   dirs_to_delete = set(dirs_to_delete)
+
   # Format dirs to strip prefix and keep in bold.
   def _format(d, keep: bool):
     d = str(d.relative_to(data_dir))
     if keep:
       d = termcolor.colored(f'{d} (*)', attrs=['bold'])
     return d
+
   all_dirs = [
       _format(d, keep=d in dirs_to_keep)
       for d in sorted(dirs_to_keep | dirs_to_delete)
@@ -214,10 +208,8 @@ def _display_dirs(
   print('Path indicated in bold (*) will be kept, the other will be deleted.\n')
   print('\n'.join(all_dirs))
   print()
-  print(
-      f'{len(dirs_to_delete)} datasets to delete, {len(dirs_to_keep)} to '
-      'keep.\n'
-  )
+  print(f'{len(dirs_to_delete)} datasets to delete, {len(dirs_to_keep)} to '
+        'keep.\n')
 
 
 def delete_old_versions(
@@ -229,7 +221,7 @@ def delete_old_versions(
   dirs_to_keep, dirs_to_delete = _get_extra_dirs(
       data_dir=data_dir,
       # Explicitly set predicate_fn to None to load all datasets
-      current_full_names=tfds.core.load.list_full_names(predicate_fn=None),
+      current_full_names=tfds.core.load.list_full_names(),
   )
 
   _display_dirs(
@@ -253,6 +245,9 @@ def delete_old_versions(
 
 
 def main(_):
+  tfds.core.visibility.set_availables([
+      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+  ])
   delete_old_versions(
       data_dir=pathlib.Path(FLAGS.data_dir),
       skip_confirmation=FLAGS.skip_confirmation,

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,13 @@
 
 """Translation feature that supports multiple languages."""
 
+from typing import Union
 import six
+from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
 try:
   # This fallback applies for all versions of Python before 3.3
@@ -66,7 +69,14 @@ class Translation(features_dict.FeaturesDict):
   ```
   """
 
-  def __init__(self, languages, encoder=None, encoder_config=None):
+  def __init__(
+      self,
+      languages,
+      encoder=None,
+      encoder_config=None,
+      *,
+      doc: feature_lib.DocArg = None,
+  ):
     """Constructs a Translation FeatureConnector.
 
     Args:
@@ -76,9 +86,10 @@ class Translation(features_dict.FeaturesDict):
         convert text to integer. One can be shared one per language provided. If
         None, the text will be utf-8 byte-encoded.
       encoder_config: `tfds.deprecated.text.TextEncoderConfig` or
-        `list<tfds.deprecated.text.TextEncoderConfig>` (optional), needed
-        if restoring from a file with `load_metadata`. One config can be shared
-        or one per language can be provided.
+        `list<tfds.deprecated.text.TextEncoderConfig>` (optional), needed if
+        restoring from a file with `load_metadata`. One config can be shared or
+        one per language can be provided.
+      doc: Documentation of this feature (e.g. description).
     """
     # If encoder and encoder_config aren't lists, use the same values for all
     # languages.
@@ -90,8 +101,11 @@ class Translation(features_dict.FeaturesDict):
       encoder_config = [encoder_config] * len(languages)
 
     super(Translation, self).__init__(
-        {lang: text_feature.Text(enc, enc_conf) for lang, enc, enc_conf in zip(
-            languages, encoder, encoder_config)})
+        feature_dict={
+            lang: text_feature.Text(enc, enc_conf)
+            for lang, enc, enc_conf in zip(languages, encoder, encoder_config)
+        },
+        doc=doc)
 
   @property
   def languages(self):
@@ -99,13 +113,24 @@ class Translation(features_dict.FeaturesDict):
     return sorted(self.keys())
 
   @classmethod
-  def from_json_content(cls, value: Json) -> "Translation":
-    return cls(**value)
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.TranslationFeature]) -> "Translation":
+    if isinstance(value, dict):
+      if "use_encoder" in value:
+        raise ValueError(
+            "TFDS does not support datasets with Encoder. Please use the plain "
+            "text version with `tensorflow_text`.")
+      return cls(**value)
+    assert not value.variable_languages_per_example
+    return cls(languages=value.languages)
 
-  def to_json_content(self) -> Json:
+  def to_json_content(self) -> feature_pb2.TranslationFeature:
     if self._encoder or self._encoder_config:
-      raise ValueError("Encoder and Encoder Config should None")
-    return {"languages": self.languages}
+      raise ValueError(
+          "TFDS encoder are deprecated and will be removed soon. "
+          "Please use `tensorflow_text` instead with the plain text dataset.")
+    return feature_pb2.TranslationFeature(
+        languages=self.languages, variable_languages_per_example=False)
 
 
 class TranslationVariableLanguages(sequence_feature.Sequence):
@@ -151,21 +176,29 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
   ```
   """
 
-  def __init__(self, languages=None):
+  def __init__(
+      self,
+      languages=None,
+      *,
+      doc: feature_lib.DocArg = None,
+  ):
     """Constructs a Translation FeatureConnector.
 
     Args:
       languages: `list<string>` (optional), full list of language codes if known
         in advance.
+      doc: Documentation of this feature (e.g. description).
     """
     # TODO(adarob): Add optional text encoders once `Sequence` adds support
     # for FixedVarLenFeatures.
 
     self._languages = set(languages) if languages else None
-    super(TranslationVariableLanguages, self).__init__({
-        "language": text_feature.Text(),
-        "translation": text_feature.Text(),
-    })
+    super(TranslationVariableLanguages, self).__init__(
+        feature={
+            "language": text_feature.Text(),
+            "translation": text_feature.Text(),
+        },
+        doc=doc)
 
   @property
   def num_languages(self):
@@ -196,13 +229,20 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
     # Ensure translations are in ascending order by language code.
     languages, translations = zip(*sorted(translation_tuples))
 
-    return super(TranslationVariableLanguages, self).encode_example(
-        {"language": languages,
-         "translation": translations})
+    return super(TranslationVariableLanguages, self).encode_example({
+        "language": languages,
+        "translation": translations
+    })
 
   @classmethod
-  def from_json_content(cls, value: Json) -> "TranslationVariableLanguages":
-    return cls(**value)
+  def from_json_content(
+      cls, value: Union[Json, feature_pb2.TranslationFeature]
+  ) -> "TranslationVariableLanguages":
+    if isinstance(value, dict):
+      return cls(**value)
+    assert value.variable_languages_per_example
+    return cls(languages=value.languages)
 
-  def to_json_content(self) -> Json:
-    return {"languages": self.languages}
+  def to_json_content(self) -> feature_pb2.TranslationFeature:
+    return feature_pb2.TranslationFeature(
+        languages=self.languages, variable_languages_per_example=True)

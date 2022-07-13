@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ from tensorflow_datasets.translate.para_crawl import ParaCrawlConfig
 from tensorflow_datasets.translate.ted_hrlr import TedHrlrTranslate
 from tensorflow_datasets.translate.ted_multi import TedMultiTranslate
 from tensorflow_datasets.translate.wmt import WmtConfig
+from tensorflow_datasets.translate.wmt13 import Wmt13Translate
 from tensorflow_datasets.translate.wmt14 import Wmt14Translate
 from tensorflow_datasets.translate.wmt15 import Wmt15Translate
 from tensorflow_datasets.translate.wmt16 import Wmt16Translate

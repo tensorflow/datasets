@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,13 +18,13 @@
 import contextlib
 import os
 import tempfile
+from unittest import mock
 
 from absl import logging
-from absl.testing import absltest
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core.utils import gcs_utils
-
+from tensorflow_datasets.testing import setup_teardown
 
 GCS_ACCESS_FNS = {
     "original_info": gcs_utils.gcs_dataset_info_files,
@@ -41,13 +41,33 @@ class TestCase(tf.test.TestCase):
   `tmp_dir` attribute: path to temp directory reset before every test.
   """
 
+  # By default, tests globally applied fixture to disable GCS, Github API,...
+  # If set, do not apply the given global fixtures
+  DO_NOT_APPLY_FIXTURES = []
+
   @classmethod
   def setUpClass(cls):
     super(TestCase, cls).setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
+
+    # TODO(tfds): Should make this a fixture.
     # Test must not communicate with GCS.
     gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
     gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
+
+    # Apply the global fixtures as context managers
+    cls._setup_cls_cms = []
+    for fixture in setup_teardown.GLOBAL_FIXTURES:
+      if fixture in cls.DO_NOT_APPLY_FIXTURES:
+        continue
+      cm = contextlib.contextmanager(fixture)()
+      cm.__enter__()
+      cls._setup_cls_cms.append(cm)
+
+  @classmethod
+  def tearDownClass(cls):
+    for cm in cls._setup_cls_cms:
+      cm.__exit__(None, None, None)
 
   @contextlib.contextmanager
   def gcs_access(self):
@@ -69,12 +89,12 @@ class TestCase(tf.test.TestCase):
       predicate_fct = lambda err: predicate in str(err)
     else:
       predicate_fct = predicate
-    return super(TestCase, self).assertRaisesWithPredicateMatch(
-        err_type, predicate_fct)
+    return super(TestCase,
+                 self).assertRaisesWithPredicateMatch(err_type, predicate_fct)
 
   @contextlib.contextmanager
   def assertLogs(self, text, level="info"):
-    with absltest.mock.patch.object(logging, level) as mock_log:
+    with mock.patch.object(logging, level) as mock_log:
       yield
       concat_logs = ""
       for log_call in mock_log.call_args_list:

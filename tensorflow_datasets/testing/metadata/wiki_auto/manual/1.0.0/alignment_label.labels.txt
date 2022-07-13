@@ -1,0 +1,3 @@
+notAligned
+aligned
+partialAligned

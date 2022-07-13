@@ -1,0 +1,121 @@
+name: Unittests
+
+on:
+  workflow_dispatch:
+  push:
+    # Do not trigger tests for documentation or markdown docs.
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+
+# Cancel in-progress runs for the current workflow if not on the main branch
+# (as it mark the unittests as failed).
+# Conditionals to concurrent are based on the solution proposed in this link:
+# https://github.community/t/concurrency-cancel-in-progress-but-not-when-ref-is-master/194707
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
+  # Cancel only PR intermediate builds
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+
+jobs:
+  pytest-job:
+    # For merged PR, activate testing only on the master branch, based on:
+    # https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
+    if:
+      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+
+    name: "Core TFDS tests on ${{ matrix.tf_version }}"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      # Do not cancel in-progress jobs if any matrix job fails.
+      fail-fast: false
+      matrix:
+        tf_version: ["tensorflow", "tf-nightly"]
+        shard_id: [0, 1, 2, 3]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # Install deps
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    # Get current date.
+    - name: Get current date
+      id: date
+      run: |
+        echo "::set-output name=today::$(date +'%Y-%m-%d')"
+
+    # The cache is refreshed everyday.
+    - uses: actions/cache@v2
+      with:
+        path: ${{ env.pythonLocation }}
+        key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ steps.date.outputs.today }}-${{ matrix.tf_version }}
+
+    - run: pip install ${{ matrix.tf_version }}
+
+    # Update the package directory before installing.
+    - run: sudo apt-get update
+    # Install the protocol buffer compiler for gcld3 tests.
+    - run: sudo apt install -y protobuf-compiler
+    # Install ffmpeg for Audio FeatureConnector tests.
+    - run: sudo apt-get install ffmpeg
+
+    - run: pip install -e .[tests-all]
+
+    # Run tests
+    - name: Run core tests
+      run: |
+        pytest --durations=100 -vv -n auto --shard-id=${{ matrix.shard_id }} --num-shards=4 \
+          --ignore="tensorflow_datasets/audio/nsynth_test.py" \
+          --ignore="tensorflow_datasets/core/features/features_test.py" \
+          --ignore="tensorflow_datasets/testing/test_utils.py" \
+          --ignore="tensorflow_datasets/image/lsun_test.py" \
+          --ignore="tensorflow_datasets/image_classification/imagenet2012_corrupted_test.py" \
+          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
+
+  notebooktest-job:
+    # For merged PR, activate testing only on the master branch.
+    if:
+      (github.ref == 'refs/heads/master') || (github.event.action != 'closed' && github.event.pull_request.merged == false)
+
+    name: "Notebook tests"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        access_token: ${{ github.token }}
+    - uses: actions/checkout@v2
+
+    # Install deps.
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - run: pip --version
+    - run: pip install tf-nightly
+    - run: pip install ipython
+    - run: sudo apt install -y protobuf-compiler
+
+    - run: pip install -e .[tests-all]
+
+    # Test each notebook sequentially.
+    - name: Run notebook
+      run: |
+        ipython kernel install --user --name tfds-notebook
+        for notebook in docs/*ipynb
+          do
+            if [$notebook != "docs/determinism.ipynb"]
+            then
+              jupyter nbconvert \
+                --ExecutePreprocessor.timeout=600 \
+                --ExecutePreprocessor.kernel_name=tfds-notebook \
+                --to notebook \
+                --execute $notebook
+            fi
+          done

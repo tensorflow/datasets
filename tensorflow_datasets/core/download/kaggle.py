@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,8 @@ from typing import List
 import zipfile
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+from etils import epath
+import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import extractor
@@ -72,14 +73,16 @@ def _run_command(command_args: List[str]) -> str:
     return subprocess.check_output(command_args, encoding='UTF-8')
   except (subprocess.CalledProcessError, FileNotFoundError) as err:
     if isinstance(err, subprocess.CalledProcessError) and '404' in err.output:
-      raise ValueError(textwrap.dedent("""\
+      raise ValueError(
+          textwrap.dedent("""\
       Error for command: {}
 
       Competition {} not found. Please ensure you have spelled the name
       correctly.
       """).format(command_str, competition_or_dataset))
     else:
-      raise RuntimeError(textwrap.dedent("""\
+      raise RuntimeError(
+          textwrap.dedent("""\
       Error for command: {}
 
       To download Kaggle data through TFDS, follow the instructions to install
@@ -91,9 +94,8 @@ def _run_command(command_args: List[str]) -> str:
       """).format(command_str, competition_or_dataset))
 
 
-def _download_competition_or_dataset(
-    competition_or_dataset: str, output_dir: str
-) -> None:
+def _download_competition_or_dataset(competition_or_dataset: str,
+                                     output_dir: str) -> None:
   """Downloads the data and extracts it if it was zipped by the kaggle api.
 
   Args:
@@ -116,7 +118,10 @@ def _download_competition_or_dataset(
         ext.extract(fpath, resource.ExtractMethod.ZIP, output_dir).get()
 
 
-def download_kaggle_data(competition_or_dataset: str, download_dir: str) -> str:
+def download_kaggle_data(
+    competition_or_dataset: str,
+    download_dir: epath.PathLike,
+) -> epath.Path:
   """Downloads the kaggle data to the output_dir.
 
   Args:
@@ -127,9 +132,9 @@ def download_kaggle_data(competition_or_dataset: str, download_dir: str) -> str:
     Path to the dir where the kaggle data was downloaded.
   """
   kaggle_dir = _kaggle_dir_name(competition_or_dataset)
-  download_path = os.path.join(download_dir, kaggle_dir)
+  download_path = epath.Path(download_dir) / kaggle_dir
   # If the dataset has already been downloaded, return the path to it.
-  if os.path.isdir(download_path):
+  if download_path.is_dir():
     logging.info(
         'Dataset %s already downloaded: reusing %s.',
         competition_or_dataset,

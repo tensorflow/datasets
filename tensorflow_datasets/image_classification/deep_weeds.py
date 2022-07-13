@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@
 import csv
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_URL = "https://nextcloud.qriscloud.org.au/index.php/s/a3KxPawpqkiorST/download"
+_URL = "https://drive.google.com/uc?export=download&id=1xnK3B6K6KekDI55vwJ0vnc2IGoDga9cj"
 _URL_LABELS = "https://raw.githubusercontent.com/AlexOlsen/DeepWeeds/master/labels/labels.csv"
 
 _DESCRIPTION = (
@@ -65,12 +65,11 @@ _CITATION = """\
 class DeepWeeds(tfds.core.GeneratorBasedBuilder):
   """DeepWeeds Image Dataset Class."""
 
-  VERSION = tfds.core.Version("2.0.0", "Fixes wrong labels in V1.")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "1.0.0",
-          tfds_version_to_prepare="c28a63fa9d9fb9ba3cced7052ea243e8884f9bf1"),
-  ]
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0": "Update download URL.",
+      "2.0.0": "Fixes wrong labels in V1.",
+  }
 
   def _info(self):
     """Define Dataset Info."""
@@ -89,12 +88,10 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Define Splits."""
-    # The file is in ZIP format, but URL doesn't mention it.
     paths = dl_manager.download_and_extract({
-        "image": tfds.download.Resource(
-            url=_URL,
-            extract_method=tfds.download.ExtractMethod.ZIP),
-        "label": _URL_LABELS})
+        "image": _URL,
+        "label": _URL_LABELS
+    })
 
     return [
         tfds.core.SplitGenerator(

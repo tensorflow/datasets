@@ -1,0 +1,49 @@
+{
+  "citation": "@inproceedings{huang-etal-2021-efficient,\n    title = \"Efficient Attentions for Long Document Summarization\",\n    author = \"Huang, Luyang  and\n      Cao, Shuyang  and\n      Parulian, Nikolaus  and\n      Ji, Heng  and\n      Wang, Lu\",\n    booktitle = \"Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies\",\n    month = jun,\n    year = \"2021\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2021.naacl-main.112\",\n    doi = \"10.18653/v1/2021.naacl-main.112\",\n    pages = \"1419--1436\",\n    abstract = \"The quadratic computational and memory complexities of large Transformers have limited their scalability for long document summarization. In this paper, we propose Hepos, a novel efficient encoder-decoder attention with head-wise positional strides to effectively pinpoint salient information from the source. We further conduct a systematic study of existing efficient self-attentions. Combined with Hepos, we are able to process ten times more tokens than existing models that use full attentions. For evaluation, we present a new dataset, GovReport, with significantly longer documents and summaries. Results show that our models produce significantly higher ROUGE scores than competitive comparisons, including new state-of-the-art results on PubMed. Human evaluation also shows that our models generate more informative summaries with fewer unfaithful errors.\",\n}\n\n@misc{shaham2022scrolls,\n      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},\n      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},\n      year={2022},\n      eprint={2201.03533},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}\nNote that each SCROLLS dataset has its own citation. Please see the source to\nget the correct citation for each contained dataset.",
+  "configDescription": "gov_report subset",
+  "configName": "gov_report",
+  "description": "SCROLLS: Standardized CompaRison Over Long Language Sequences.\nA suite of natural language tfds.core.that require reasoning over long texts.\nhttps://scrolls-benchmark.com/\ngov_report subset",
+  "downloadSize": "316229863",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://gov-report-data.github.io/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.scrolls.scrolls",
+  "name": "scrolls",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "980916158",
+      "shardLengths": [
+        "2182",
+        "2182",
+        "2182",
+        "2182",
+        "2183",
+        "2182",
+        "2182",
+        "2182"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "57738930",
+      "shardLengths": [
+        "972"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "49638999",
+      "shardLengths": [
+        "973"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

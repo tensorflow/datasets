@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="savee" />
   <meta itemprop="description" content="SAVEE (Surrey Audio-Visual Expressed Emotion) is an emotion recognition&#10;dataset. It consists of recordings from 4 male actors in 7 different emotions,&#10;480 British English utterances in total. The sentences were chosen from the&#10;standard TIMIT corpus and phonetically-balanced for each emotion.&#10;This release contains only the audio stream from the original audio-visual&#10;recording.&#10;The data is split so that the training set consists of 2 speakers, and both the&#10;validation and test set consists of samples from 1 speaker, respectively.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;savee&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/savee" />
@@ -11,6 +10,7 @@
 </div>
 
 # `savee`
+
 
 Warning: Manual download required. See instructions below.
 
@@ -40,7 +40,7 @@ and test set consists of samples from 1 speaker, respectively.
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     manual_dir should contain the file AudioData.zip. This file should be under
     Data/Zip/AudioData.zip in the dataset folder provided upon registration.
     You need to register at
@@ -59,7 +59,7 @@ Split          | Examples
 `'train'`      | 240
 `'validation'` | 120
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -69,9 +69,59 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature    | Class        | Shape   | Dtype     | Description
+:--------- | :----------- | :------ | :-------- | :----------
+           | FeaturesDict |         |           |
+audio      | Audio        | (None,) | tf.int64  |
+label      | ClassLabel   |         | tf.int64  |
+speaker_id | Tensor       |         | tf.string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/savee-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -86,6 +136,3 @@ journal = {Proceedings of Interspeech}
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

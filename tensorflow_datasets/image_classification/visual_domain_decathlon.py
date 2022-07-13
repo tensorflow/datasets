@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@
 import json
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
 
 _DESCRIPTION = """\
 This contains the 10 datasets used in the Visual Domain Decathlon, part of
@@ -76,9 +75,9 @@ def _get_builder_configs():
       ('vgg-flowers', 'VGG-Flowers', 102),
   ]:
     description = _CONFIG_DESCRIPTION_PATTERN.format(full_name)
-    configs.append(VisualDomainDecathlonConfig(name=short_name,
-                                               num_classes=num_classes,
-                                               description=description))
+    configs.append(
+        VisualDomainDecathlonConfig(
+            name=short_name, num_classes=num_classes, description=description))
   return configs
 
 
@@ -93,10 +92,13 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'name': tfds.features.Text(),
-            'image': tfds.features.Image(shape=(None, None, 3),
-                                         encoding_format='jpeg'),
-            'label': tfds.features.ClassLabel(num_classes=num_classes),
+            'name':
+                tfds.features.Text(),
+            'image':
+                tfds.features.Image(
+                    shape=(None, None, 3), encoding_format='jpeg'),
+            'label':
+                tfds.features.ClassLabel(num_classes=num_classes),
         }),
         supervised_keys=('image', 'label'),
         homepage='https://www.robots.ox.ac.uk/~vgg/decathlon/',

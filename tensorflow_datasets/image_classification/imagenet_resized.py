@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,10 +33,10 @@ _CITATION = """@article{chrabaszcz2017downsampled,
 """
 
 _DESCRIPTION = """\
-This dataset consists of the ImageNet dataset resized to {size}x{size}.
+This dataset consists of the ImageNet dataset resized to fixed size.
 The images here are the ones provided by Chrabaszcz et. al. using the box resize method.
 
-For [downsampled ImageNet](http://image-net.org/small/download.php) for unsupervised learning see `downsampled_imagenet`.
+For [downsampled ImageNet](http://image-net.org/download.php) for unsupervised learning see `downsampled_imagenet`.
 
 WARNING: The integer labels used are defined by the authors and do not match
 those from the other ImageNet datasets provided by Tensorflow datasets.
@@ -47,7 +47,7 @@ Additionally, the original authors 1 index there labels which we convert to
 """
 
 _LABELS_FNAME = 'image_classification/imagenet_resized_labels.txt'
-_URL_PREFIX = 'http://www.image-net.org/image/downsample/'
+_URL_PREFIX = 'http://www.image-net.org/data/downsample/'
 
 
 class ImagenetResizedConfig(tfds.core.BuilderConfig):
@@ -60,28 +60,34 @@ class ImagenetResizedConfig(tfds.core.BuilderConfig):
 
 
 def _make_builder_configs():
+  """Returns BuilderConfigs."""
   configs = []
   for size in [8, 16, 32, 64]:
     configs.append(
         ImagenetResizedConfig(
             name='%dx%d' % (size, size),
             size=size,
-            description=_DESCRIPTION.format(size=size)))
+            description=f'Images resized to {size}x{size}',
+        ),)
   return configs
 
 
 class ImagenetResized(tfds.core.GeneratorBasedBuilder):
   """Imagenet Resized dataset."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
+  RELEASE_NOTES = {
+      '0.1.0': 'Imagenet Resized Datset',
+      '0.1.1': 'Webisite URL update',
+  }
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    names_file = tfds.core.tfds_path(_LABELS_FNAME)
     size = self.builder_config.size
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(size, size, 3)),
             'label': tfds.features.ClassLabel(names_file=names_file)

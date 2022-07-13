@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -58,9 +58,10 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(IMDBReviewsConfig, self).__init__(
-        version=tfds.core.Version(
-            "1.0.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
+        version=tfds.core.Version("1.0.0"),
+        release_notes={
+            "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
@@ -103,9 +104,11 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "text": tfds.features.Text(
-                encoder_config=self.builder_config.text_encoder_config),
-            "label": tfds.features.ClassLabel(names=["neg", "pos"]),
+            "text":
+                tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
+            "label":
+                tfds.features.ClassLabel(names=["neg", "pos"]),
         }),
         supervised_keys=("text", "label"),
         homepage="http://ai.stanford.edu/~amaas/data/sentiment/",
@@ -113,8 +116,8 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, archive):
-    for _, ex in self._generate_examples(
-        archive, os.path.join("aclImdb", "train")):
+    for _, ex in self._generate_examples(archive,
+                                         os.path.join("aclImdb", "train")):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
@@ -128,17 +131,23 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"archive": archive(),
-                        "directory": os.path.join("aclImdb", "train")}),
+            gen_kwargs={
+                "archive": archive(),
+                "directory": os.path.join("aclImdb", "train")
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"archive": archive(),
-                        "directory": os.path.join("aclImdb", "test")}),
+            gen_kwargs={
+                "archive": archive(),
+                "directory": os.path.join("aclImdb", "test")
+            }),
         tfds.core.SplitGenerator(
             name=tfds.Split("unsupervised"),
-            gen_kwargs={"archive": archive(),
-                        "directory": os.path.join("aclImdb", "train"),
-                        "labeled": False}),
+            gen_kwargs={
+                "archive": archive(),
+                "directory": os.path.join("aclImdb", "train"),
+                "labeled": False
+            }),
     ]
 
   def _generate_examples(self, archive, directory, labeled=True):

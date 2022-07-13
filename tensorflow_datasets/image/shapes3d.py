@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import numpy as np
 from six import moves
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -55,8 +55,10 @@ We varied one latent at a time (starting from orientation, then shape, etc), and
 class Shapes3d(tfds.core.GeneratorBasedBuilder):
   """Shapes3d data set."""
 
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -100,8 +102,7 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(filepath=filepath)),
+            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)),
     ]
 
   def _generate_examples(self, filepath):
@@ -127,8 +128,8 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
     for i in range(values_array.shape[1]):
       labels_array[:, i] = _discretize(values_array[:, i])  # pylint: disable=unsupported-assignment-operation
 
-    for i, (image, labels, values) in enumerate(moves.zip(
-        image_array, labels_array, values_array)):
+    for i, (image, labels, values) in enumerate(
+        moves.zip(image_array, labels_array, values_array)):
       record = {
           "image": image,
           "label_floor_hue": labels[0],

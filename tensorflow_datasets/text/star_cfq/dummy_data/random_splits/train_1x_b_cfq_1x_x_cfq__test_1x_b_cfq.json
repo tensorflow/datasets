@@ -1,0 +1,33 @@
+{
+  "test":[
+    {
+      "dataset":"b-CFQ",
+      "indices":[
+        {
+          "startIndex":"0",
+          "endIndex":"1"
+        }
+      ]
+    }
+  ],
+  "train":[
+    {
+      "dataset":"b-CFQ",
+      "indices":[
+        {
+          "startIndex":"1",
+          "endIndex":"2"
+        }
+      ]
+    },
+    {
+      "dataset":"x-CFQ",
+      "indices":[
+        {
+          "startIndex":"0",
+          "endIndex":"1"
+        }
+      ]
+    }
+  ]
+}

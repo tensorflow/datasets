@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import os
 import re
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -63,19 +63,25 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     """Define dataset info."""
 
-    imagenet_names_file = tfds.core.get_tfds_path(_IMAGENET_LABELS_FNAME)
+    imagenet_names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
-            "shape_label": tfds.features.ClassLabel(names=_CLASSES),
-            "shape_imagenet_labels": tfds.features.Sequence(
-                tfds.features.ClassLabel(names_file=imagenet_names_file)),
-            "texture_label": tfds.features.ClassLabel(names=_CLASSES),
-            "texture_imagenet_labels": tfds.features.Sequence(
-                tfds.features.ClassLabel(names_file=imagenet_names_file)),
-            "file_name": tfds.features.Text(),
+            "image":
+                tfds.features.Image(),
+            "shape_label":
+                tfds.features.ClassLabel(names=_CLASSES),
+            "shape_imagenet_labels":
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(names_file=imagenet_names_file)),
+            "texture_label":
+                tfds.features.ClassLabel(names=_CLASSES),
+            "texture_imagenet_labels":
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(names_file=imagenet_names_file)),
+            "file_name":
+                tfds.features.Text(),
         }),
         supervised_keys=("image", "shape_label"),
         homepage=_BASE_URL,
@@ -85,8 +91,7 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
     """Define splits."""
 
     dl_paths = dl_manager.download_and_extract({
-        "texture_vs_shape": tfds.download.Resource(
-            url=_DOWNLOAD_URL, extract_method=tfds.download.ExtractMethod.ZIP),
+        "texture_vs_shape": _DOWNLOAD_URL,
         "imagenet_mapping": _IMAGENET_MAPPING_URL
     })
 
@@ -94,9 +99,10 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "data_dir_path": os.path.join(
-                    dl_paths["texture_vs_shape"], _DATA_DIR_PATH),
-                "imagenet_mapping_path": dl_paths["imagenet_mapping"]
+                "data_dir_path":
+                    os.path.join(dl_paths["texture_vs_shape"], _DATA_DIR_PATH),
+                "imagenet_mapping_path":
+                    dl_paths["imagenet_mapping"]
             },
         ),
     ]
@@ -110,8 +116,10 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
       mapping_txt = f.read()
     mapping = {}
     for match in re.finditer(r"([a-z]+)\s*=\s*\[([^\]]+)\]", mapping_txt):
-      mapping[match.group(1)] = list(sorted(imagenet_names.intersection(
-          re.sub(r"\s", "", match.group(2)).split(","))))
+      mapping[match.group(1)] = list(
+          sorted(
+              imagenet_names.intersection(
+                  re.sub(r"\s", "", match.group(2)).split(","))))
 
     # Process images.
     for shape_class_name in tf.io.gfile.listdir(data_dir_path):

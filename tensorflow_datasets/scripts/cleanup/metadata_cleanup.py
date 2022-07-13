@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ import tensorflow_datasets as tfds
 FLAGS = flags.FLAGS
 
 flags.DEFINE_boolean('dry_run', True, 'Dry run')
-flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
+flags.DEFINE_string('tfds_dir', str(tfds.core.utils.tfds_write_path()),
                     'Path to tensorflow_datasets directory')
 
 

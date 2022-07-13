@@ -1,0 +1,83 @@
+[
+   {
+      "id":"NPR-1",
+      "program":"Day to Day",
+      "date":"2008-06-10",
+      "url":"https://www.npr.org/templates/story/story.php?storyId=91356794",
+      "title":"Researchers Find Discriminating Plants",
+      "summary":"The \"sea rocket\" shows preferential treatment to plants that are its kin. Evolutionary plant ecologist Susan Dudley of McMaster University in Ontario discusses her discovery.",
+      "utt":[
+         "This is Day to Day.  I'm Madeleine Brand.",
+         "And I'm Alex Cohen.",
+         "Coming up, the question of who wrote a famous religious poem turns into a very unchristian battle."
+      ],
+      "speaker":[
+         "MADELEINE BRAND, host",
+         "ALEX COHEN, host"
+      ]
+   },
+   {
+      "id":"NPR-2",
+      "program":"Day to Day",
+      "date":"2008-06-10",
+      "url":"https://www.npr.org/templates/story/story.php?storyId=91356794",
+      "title":"Researchers Find Discriminating Plants",
+      "summary":"The \"sea rocket\" shows preferential treatment to plants that are its kin. Evolutionary plant ecologist Susan Dudley of McMaster University in Ontario discusses her discovery.",
+      "utt":[
+         "This is Day to Day.  I'm Madeleine Brand.",
+         "And I'm Alex Cohen.",
+         "Coming up, the question of who wrote a famous religious poem turns into a very unchristian battle."
+      ],
+      "speaker":[
+         "MADELEINE BRAND, host",
+         "ALEX COHEN, host"
+      ]
+   },
+   {
+      "id":"NPR-3",
+      "program":"Day to Day",
+      "date":"2008-06-10",
+      "url":"https://www.npr.org/templates/story/story.php?storyId=91356794",
+      "title":"Researchers Find Discriminating Plants",
+      "summary":"The \"sea rocket\" shows preferential treatment to plants that are its kin. Evolutionary plant ecologist Susan Dudley of McMaster University in Ontario discusses her discovery.",
+      "utt":[
+         "This is Day to Day.  I'm Madeleine Brand.",
+         "And I'm Alex Cohen.",
+         "Coming up, the question of who wrote a famous religious poem turns into a very unchristian battle."
+      ],
+      "speaker":[
+         "MADELEINE BRAND, host",
+         "ALEX COHEN, host"
+      ]
+   },
+   {
+      "id":"CNN-275527",
+      "program":"Day to Day",
+      "date":"2008-06-10",
+      "url":"https://www.npr.org/templates/story/story.php?storyId=91356794",
+      "title":"Researchers Find Discriminating Plants",
+      "summary":"The \"sea rocket\" shows preferential treatment to plants that are its kin. Evolutionary plant ecologist Susan Dudley of McMaster University in Ontario discusses her discovery.",
+      "utt":[
+         "This is Day to Day.  I'm Madeleine Brand.",
+         "And I'm Alex Cohen.",
+         "Coming up, the question of who wrote a famous religious poem turns into a very unchristian battle."
+      ],
+      "speaker":[
+        "ALEX COHEN, host"
+      ]
+   },
+   {
+      "id":"NPR-12",
+      "program":"Day to Day",
+      "date":"2008-06-10",
+      "url":"https://www.npr.org/templates/story/story.php?storyId=91356794",
+      "title":"Researchers Find Discriminating Plants",
+      "summary":"The \"sea rocket\" shows preferential treatment to plants that are its kin. Evolutionary plant ecologist Susan Dudley of McMaster University in Ontario discusses her discovery.",
+      "utt":[
+         "This is Day to Day.  I'm Madeleine Brand."
+      ],
+      "speaker":[
+         "MADELEINE BRAND, host"
+      ]
+   }
+]

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import collections
 import csv
 import os
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -68,10 +68,11 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version("3.2.0", "Devkit updated.")
+  VERSION = tfds.core.Version("3.2.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("3.1.0"),
   ]
+  RELEASE_NOTES = {"3.2.0": "Devkit updated."}
 
   def _info(self):
     # Annotation descriptions are in the object development kit.
@@ -170,8 +171,8 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
       if image_id not in image_ids:
         continue
       annotations = all_annotations[image_id]
-      img = cv2.imdecode(np.fromstring(fobj.read(), dtype=np.uint8),
-                         cv2.IMREAD_COLOR)
+      img = cv2.imdecode(
+          np.frombuffer(fobj.read(), dtype=np.uint8), cv2.IMREAD_COLOR)
       img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
       height, width, _ = img.shape
       for obj in annotations:
@@ -220,18 +221,24 @@ def _parse_kitti_annotations(annotations_csv):
     if obj_type == "DontCare":
       continue
     annotations.append({
-        "type": obj_type,
-        "truncated": float(truncated),
-        "occluded": int(occluded),
-        "alpha": float(alpha),
-        "bbox_raw": RawBoundingBox(
-            top=float(top),
-            bottom=float(bottom),
-            left=float(left),
-            right=float(right)),
+        "type":
+            obj_type,
+        "truncated":
+            float(truncated),
+        "occluded":
+            int(occluded),
+        "alpha":
+            float(alpha),
+        "bbox_raw":
+            RawBoundingBox(
+                top=float(top),
+                bottom=float(bottom),
+                left=float(left),
+                right=float(right)),
         "dimensions": [float(v) for v in [height, width, length]],
         "location": [float(v) for v in [x, y, z]],
-        "rotation_y": float(rotation_y),
+        "rotation_y":
+            float(rotation_y),
     })
   return annotations
 

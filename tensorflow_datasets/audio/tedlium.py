@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import os
 import re
 import numpy as np
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -28,8 +28,8 @@ class TedliumReleaseConfig(tfds.core.BuilderConfig):
   """BuilderConfig for a release of the TED-LIUM dataset."""
 
   def __init__(self, *, url, download_url, split_paths, citation, **kwargs):
-    super(TedliumReleaseConfig,
-          self).__init__(version=tfds.core.Version("1.0.1"), **kwargs)
+    super(TedliumReleaseConfig, self).__init__(
+        version=tfds.core.Version("1.0.1"), **kwargs)
     self.url = url
     self.download_url = download_url
     # List of split, path pairs containing the relative path within the
@@ -144,12 +144,7 @@ def _make_builder_configs():
         }
         """,
       url="https://www.openslr.org/51/",
-      download_url=tfds.download.Resource(
-          url="http://www.openslr.org/resources/51/TEDLIUM_release-3.tgz",
-          # The blessed tarball linked above contains some invalid symlinks (for
-          # the speaker_adaptation splits) which TAR_STREAM conveniently skips
-          # over, avoiding exceptions on parts of the dataset we don't need.
-          extract_method=tfds.download.ExtractMethod.TAR_STREAM),
+      download_url="http://www.openslr.org/resources/51/TEDLIUM_release-3.tgz",
       split_paths=[
           (tfds.Split.VALIDATION,
            os.path.join("TEDLIUM_release-3", "legacy", "dev")),
@@ -172,7 +167,10 @@ class Tedlium(tfds.core.BeamBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description="""
+        The TED-LIUM corpus is English-language TED talks, with transcriptions,
+        sampled at 16kHz. It contains about 118 hours of speech.
+        """,
         features=tfds.features.FeaturesDict({
             "speech":
                 tfds.features.Audio(sample_rate=16000),

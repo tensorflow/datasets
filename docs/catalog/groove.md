@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="groove" />
   <meta itemprop="description" content="The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and&#10;(synthesized) audio of human-performed, tempo-aligned expressive drumming&#10;captured on a Roland TD-11 V-Drum electronic drum kit.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;groove&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/groove" />
@@ -11,6 +10,7 @@
 </div>
 
 # `groove`
+
 
 *   **Description**:
 
@@ -26,12 +26,19 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 
 *   **Versions**:
 
-    *   **`2.0.1`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   **`2.0.1`** (default): No release notes.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -44,9 +51,6 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## groove/full-midionly (default config)
 
@@ -68,7 +72,7 @@ Split          | Examples
 `'train'`      | 897
 `'validation'` | 124
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -84,6 +88,21 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+bpm             | Tensor       |       | tf.int32  |
+drummer         | ClassLabel   |       | tf.int64  |
+id              | Tensor       |       | tf.string |
+midi            | Tensor       |       | tf.string |
+style           | FeaturesDict |       |           |
+style/primary   | ClassLabel   |       | tf.int64  |
+style/secondary | Tensor       |       | tf.string |
+time_signature  | ClassLabel   |       | tf.int64  |
+type            | ClassLabel   |       | tf.int64  |
 
 ## groove/full-16000hz
 
@@ -105,7 +124,7 @@ Split          | Examples
 `'train'`      | 846
 `'validation'` | 120
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -122,6 +141,22 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape   | Dtype      | Description
+:-------------- | :----------- | :------ | :--------- | :----------
+                | FeaturesDict |         |            |
+audio           | Audio        | (None,) | tf.float32 |
+bpm             | Tensor       |         | tf.int32   |
+drummer         | ClassLabel   |         | tf.int64   |
+id              | Tensor       |         | tf.string  |
+midi            | Tensor       |         | tf.string  |
+style           | FeaturesDict |         |            |
+style/primary   | ClassLabel   |         | tf.int64   |
+style/secondary | Tensor       |         | tf.string  |
+time_signature  | ClassLabel   |         | tf.int64   |
+type            | ClassLabel   |         | tf.int64   |
 
 ## groove/2bar-midionly
 
@@ -144,7 +179,7 @@ Split          | Examples
 `'train'`      | 18,163
 `'validation'` | 2,252
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -160,6 +195,21 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+bpm             | Tensor       |       | tf.int32  |
+drummer         | ClassLabel   |       | tf.int64  |
+id              | Tensor       |       | tf.string |
+midi            | Tensor       |       | tf.string |
+style           | FeaturesDict |       |           |
+style/primary   | ClassLabel   |       | tf.int64  |
+style/secondary | Tensor       |       | tf.string |
+time_signature  | ClassLabel   |       | tf.int64  |
+type            | ClassLabel   |       | tf.int64  |
 
 ## groove/2bar-16000hz
 
@@ -181,7 +231,7 @@ Split          | Examples
 `'train'`      | 14,390
 `'validation'` | 2,034
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -198,6 +248,22 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape   | Dtype      | Description
+:-------------- | :----------- | :------ | :--------- | :----------
+                | FeaturesDict |         |            |
+audio           | Audio        | (None,) | tf.float32 |
+bpm             | Tensor       |         | tf.int32   |
+drummer         | ClassLabel   |         | tf.int64   |
+id              | Tensor       |         | tf.string  |
+midi            | Tensor       |         | tf.string  |
+style           | FeaturesDict |         |            |
+style/primary   | ClassLabel   |         | tf.int64   |
+style/secondary | Tensor       |         | tf.string  |
+time_signature  | ClassLabel   |         | tf.int64   |
+type            | ClassLabel   |         | tf.int64   |
 
 ## groove/4bar-midionly
 
@@ -220,7 +286,7 @@ Split          | Examples
 `'train'`      | 17,261
 `'validation'` | 2,121
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -236,3 +302,18 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype     | Description
+:-------------- | :----------- | :---- | :-------- | :----------
+                | FeaturesDict |       |           |
+bpm             | Tensor       |       | tf.int32  |
+drummer         | ClassLabel   |       | tf.int64  |
+id              | Tensor       |       | tf.string |
+midi            | Tensor       |       | tf.string |
+style           | FeaturesDict |       |           |
+style/primary   | ClassLabel   |       | tf.int64  |
+style/secondary | Tensor       |       | tf.string |
+time_signature  | ClassLabel   |       | tf.int64  |
+type            | ClassLabel   |       | tf.int64  |

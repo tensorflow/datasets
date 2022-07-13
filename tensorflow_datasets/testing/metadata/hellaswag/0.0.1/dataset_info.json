@@ -1,0 +1,35 @@
+{
+  "citation": "@inproceedings{zellers2019hellaswag,\n    title={HellaSwag: Can a Machine Really Finish Your Sentence?},\n    author={Zellers, Rowan and Holtzman, Ari and Bisk, Yonatan and Farhadi, Ali and Choi, Yejin},\n    booktitle ={Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},\n    year={2019}\n}",
+  "description": "The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context\nand some endings which complete the context.",
+  "downloadSize": "71494896",
+  "location": {
+    "urls": [
+      "https://rowanzellers.com/hellaswag/"
+    ]
+  },
+  "name": "hellaswag",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "9057052",
+      "shardLengths": [
+        "10003"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "35827698",
+      "shardLengths": [
+        "39905"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "9279983",
+      "shardLengths": [
+        "10042"
+      ]
+    }
+  ],
+  "version": "0.0.1"
+}

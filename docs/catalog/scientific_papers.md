@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="scientific_papers" />
   <meta itemprop="description" content="Scientific papers datasets contains two sets of long and structured documents.&#10;The datasets are obtained from ArXiv and PubMed OpenAccess repositories.&#10;&#10;Both &quot;arxiv&quot; and &quot;pubmed&quot; have two features:&#10;&#10;  - article: the body of the document, pagragraphs seperated by &quot;/n&quot;.&#10;  - abstract: the abstract of the document, pagragraphs seperated by &quot;/n&quot;.&#10;  - section_names: titles of sections, seperated by &quot;/n&quot;.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;scientific_papers&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/scientific_papers" />
@@ -12,10 +11,6 @@
 
 # `scientific_papers`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -36,10 +31,8 @@ Both "arxiv" and "pubmed" have two features:
 
 *   **Versions**:
 
+    *   `1.1.0`: No release notes.
     *   **`1.1.1`** (default): No release notes.
-    *   `1.1.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
 
 *   **Download size**: `4.20 GiB`
 
@@ -47,7 +40,7 @@ Both "arxiv" and "pubmed" have two features:
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -57,9 +50,26 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature       | Class        | Shape | Dtype     | Description
+:------------ | :----------- | :---- | :-------- | :----------
+              | FeaturesDict |       |           |
+abstract      | Text         |       | tf.string |
+article       | Text         |       | tf.string |
+section_names | Text         |       | tf.string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('article', 'abstract')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -78,9 +88,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## scientific_papers/arxiv (default config)
 

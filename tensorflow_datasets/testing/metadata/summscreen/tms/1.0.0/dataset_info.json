@@ -1,0 +1,46 @@
+{
+  "citation": "@article{DBLP:journals/corr/abs-2104-07091,\n  author    = {Mingda Chen and\n               Zewei Chu and\n               Sam Wiseman and\n               Kevin Gimpel},\n  title     = {SummScreen: {A} Dataset for Abstractive Screenplay Summarization},\n  journal   = {CoRR},\n  volume    = {abs/2104.07091},\n  year      = {2021},\n  url       = {https://arxiv.org/abs/2104.07091},\n  archivePrefix = {arXiv},\n  eprint    = {2104.07091},\n  timestamp = {Mon, 19 Apr 2021 16:45:47 +0200},\n  biburl    = {https://dblp.org/rec/journals/corr/abs-2104-07091.bib},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "configDescription": "TVMegaSite",
+  "configName": "tms",
+  "description": "SummScreen Summarization dataset, non-anonymized, non-tokenized version.\n\nTrain/val/test splits and filtering are based on the final tokenized dataset,\nbut transcripts and recaps provided are based on the untokenized text.\n\nThere are two features:\n\n  - transcript: Full episode transcripts, each line of dialogue\n    separated by newlines\n  - recap: Recaps or summaries of episodes",
+  "downloadSize": "882140657",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/mingdachen/SummScreen"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.summarization.summscreen.summscreen",
+  "name": "summscreen",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "522466265",
+      "shardLengths": [
+        "4729",
+        "4729",
+        "4728",
+        "4729"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "49406430",
+      "shardLengths": [
+        "1795"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "49443704",
+      "shardLengths": [
+        "1793"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "transcript",
+    "output": "recap"
+  },
+  "version": "1.0.0"
+}

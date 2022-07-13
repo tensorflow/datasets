@@ -1,0 +1,13 @@
+{ "test":
+  [
+    {
+        "document": "By the end of November, there were 373 782 guests joined the five mountain stations in Scotland. The ski season attracted devenu37.5 million pounds sterling in the local economy. With cool snow in the ski tracks CairnGorm Mountain is expecting skiers during the first weekend in June. Recent Ski Scotland figures indicated that the numbers for this season were better than for the last 2000-2001 beef season. Heather Negus, Chair of Ski Scotland, said \"All winter we found out we were heading into a good season.\" \u201cWe were hoping for it in 2001, but we didn't realize that we had beat it down to very recently when all was added to it; and of course, Mount CairnGorm is still in a state of flux and we rely well on Maestrer. In each of the two hillside areas, it is estimated that \u00a3tertiary spending in the local economy would be \u00a33, and \u00a328 million in local accommodation, caf\u00e9s, bars, restaurants, shops and gas stations would be spent this winter. Two questions arise about the content of national implementation plans: the speed of transposition processes and the incentive nature of European standards. \"We were making it all happen \u2013 we received plenty and lots of superb snow, we\u2019ve never been able to get any snow. a. on a continuing basis, Some extremely surprising weather conditions above the mountain, which make waterfowl \u2018blue\u2019, and, as snow is well seen elsewhere in the UK, People acknowledge that the Scottish Highlands are taking on skiing and snowboarding to compete with the highest and come here to enjoy it. \u201c",
+        "gem_id": "xsum-test-0",
+        "references": [
+            "Skiing on Scotland's snow slopes looks set to continue into the summer month of June as new figures reveal the best season in 14 years."
+        ],
+        "target": "Skiing on Scotland's snow slopes looks set to continue into the summer month of June as new figures reveal the best season in 14 years.",
+        "xsum_id": "10203169"
+    }
+ ]
+}

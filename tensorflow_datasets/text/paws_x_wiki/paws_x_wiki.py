@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """@InProceedings{pawsx2019emnlp,
@@ -68,8 +68,7 @@ class PawsXWikiConfig(tfds.core.BuilderConfig):
 
   def __init__(self, *, language, **kwargs):
     if language not in _LANGUAGES:
-      raise ValueError("language must be one of {}".format(
-          list(_LANGUAGES)))
+      raise ValueError("language must be one of {}".format(list(_LANGUAGES)))
 
     super(PawsXWikiConfig, self).__init__(**kwargs)
     self.language = language
@@ -123,15 +122,19 @@ class PawsXWiki(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={"path": os.path.join(base_path,
-                                             self.builder_config.language,
-                                             "test_2k.tsv")},
+            gen_kwargs={
+                "path":
+                    os.path.join(base_path, self.builder_config.language,
+                                 "test_2k.tsv")
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"path": os.path.join(base_path,
-                                             self.builder_config.language,
-                                             "dev_2k.tsv")},
+            gen_kwargs={
+                "path":
+                    os.path.join(base_path, self.builder_config.language,
+                                 "dev_2k.tsv")
+            },
         ),
     ]
 

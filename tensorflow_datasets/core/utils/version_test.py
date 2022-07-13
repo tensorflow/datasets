@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,11 +57,10 @@ class VersionTest(testing.TestCase):
 
   def test_invalid_comparison(self):
     v = version.Version('1.3.534')
-    with self.assertRaisesWithPredicateMatch(
-        ValueError, 'Format should be '):
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       unused_ = v < 'abc'
-    with self.assertRaisesWithPredicateMatch(
-        AssertionError, 'cannot be compared to version'):
+    with self.assertRaisesWithPredicateMatch(AssertionError,
+                                             'cannot be compared to version'):
       unused_ = v > 123
 
   def test_match(self):
@@ -127,6 +126,23 @@ class VersionTest(testing.TestCase):
   def test_experiment_override(self):
     v = version.Version('1.2.3', experiments={version.Experiment.DUMMY: True})
     self.assertTrue(v.implements(version.Experiment.DUMMY))
+
+  def test_hash(self):
+    self.assertIn(
+        version.Version('1.2.3'),
+        {version.Version('1.2.3'),
+         version.Version('1.4.3')})
+
+    self.assertNotIn(
+        version.Version('1.2.3'),
+        {version.Version('1.1.3'),
+         version.Version('1.4.3')})
+
+
+def test_str_to_version():
+  v0 = version.Version('1.2.3')
+  v1 = version.Version(v0)
+  assert v1 == v0
 
 
 if __name__ == '__main__':

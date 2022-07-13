@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """So2SAT remote sensing dataset."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -61,13 +61,18 @@ class So2satConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    v2 = tfds.core.Version(
-        '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
-    v2_1 = tfds.core.Version(
-        '2.1.0', 'Using updated optical channels calibration factor.')
-    super(So2satConfig, self).__init__(version=v2_1,
-                                       supported_versions=[v2],
-                                       **kwargs)
+    v2 = tfds.core.Version('2.0.0')
+    v2_1 = tfds.core.Version('2.1.0')
+
+    super(So2satConfig, self).__init__(
+        version=v2_1,
+        supported_versions=[v2],
+        release_notes={
+            '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+            '2.1.0': 'Using updated optical channels calibration factor.',
+        },
+        **kwargs,  # pytype: disable=wrong-arg-types  # gen-stub-imports
+    )
     self.selection = selection
 
 
@@ -76,9 +81,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       So2satConfig(
-          selection='rgb',
-          name='rgb',
-          description='Sentinel-2 RGB channels'),
+          selection='rgb', name='rgb', description='Sentinel-2 RGB channels'),
       So2satConfig(
           selection='all',
           name='all',

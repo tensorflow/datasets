@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@
 import os
 import xml.etree.ElementTree
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
 
 _VOC_CITATION = """\
 @misc{{pascal-voc-{year},
@@ -28,18 +27,25 @@ _VOC_CITATION = """\
 	title = "The {{PASCAL}} {{V}}isual {{O}}bject {{C}}lasses {{C}}hallenge {year} {{(VOC{year})}} {{R}}esults",
 	howpublished = "http://www.pascal-network.org/challenges/VOC/voc{year}/workshop/index.html"}}
 """
-_VOC_DESCRIPTION = """\
-This dataset contains the data from the PASCAL Visual Object Classes Challenge
-{year}, a.k.a. VOC{year}, corresponding to the Classification and Detection
-competitions.
-A total of {num_images} images are included in this dataset, where each image
-contains a set of objects, out of 20 different classes, making a total of
-{num_objects} annotated objects.
+
+_VOC_DESCRIPTION = """
+This dataset contains the data from the PASCAL Visual Object Classes Challenge,
+corresponding to the Classification and Detection competitions.
+
 In the Classification competition, the goal is to predict the set of labels
 contained in the image, while in the Detection competition the goal is to
 predict the bounding box and label of each individual object.
 WARNING: As per the official dataset, the test set of VOC2012 does not contain
 annotations.
+"""
+
+_VOC_CONFIG_DESCRIPTION = """\
+This dataset contains the data from the PASCAL Visual Object Classes Challenge
+{year}, a.k.a. VOC{year}.
+
+A total of {num_images} images are included in this dataset, where each image
+contains a set of objects, out of 20 different classes, making a total of
+{num_objects} annotated objects.
 """
 _VOC_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc{year}/"
 # Original site, it is down very often.
@@ -102,12 +108,17 @@ def _get_example_objects(annon_filepath):
       ymax = float(bndbox.find("ymax").text)
       ymin = float(bndbox.find("ymin").text)
       yield {
-          "label": label,
-          "pose": pose,
-          "bbox": tfds.features.BBox(
-              ymin / height, xmin / width, ymax / height, xmax / width),
-          "is_truncated": is_truncated,
-          "is_difficult": is_difficult,
+          "label":
+              label,
+          "pose":
+              pose,
+          "bbox":
+              tfds.features.BBox(ymin / height, xmin / width, ymax / height,
+                                 xmax / width),
+          "is_truncated":
+              is_truncated,
+          "is_difficult":
+              is_difficult,
       }
     # pytype: enable=attribute-error
 
@@ -115,8 +126,11 @@ def _get_example_objects(annon_filepath):
 class VocConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Voc."""
 
-  def __init__(
-      self, year=None, filenames=None, has_test_annotations=True, **kwargs):
+  def __init__(self,
+               year=None,
+               filenames=None,
+               has_test_annotations=True,
+               **kwargs):
     self.year = year
     self.filenames = filenames
     self.has_test_annotations = has_test_annotations
@@ -136,7 +150,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       VocConfig(
           year="2007",
-          description=_VOC_DESCRIPTION.format(
+          description=_VOC_CONFIG_DESCRIPTION.format(
               year=2007, num_images=9963, num_objects=24640),
           filenames={
               "trainval": "VOCtrainval_06-Nov-2007.tar",
@@ -146,7 +160,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
       ),
       VocConfig(
           year="2012",
-          description=_VOC_DESCRIPTION.format(
+          description=_VOC_CONFIG_DESCRIPTION.format(
               year=2012, num_images=11540, num_objects=27450),
           filenames={
               "trainval": "VOCtrainval_11-May-2012.tar",
@@ -159,21 +173,26 @@ class Voc(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description=_VOC_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
-            "image/filename": tfds.features.Text(),
-            "objects": tfds.features.Sequence({
-                "label": tfds.features.ClassLabel(names=_VOC_LABELS),
-                "bbox": tfds.features.BBoxFeature(),
-                "pose": tfds.features.ClassLabel(names=_VOC_POSES),
-                "is_truncated": tf.bool,
-                "is_difficult": tf.bool,
-            }),
-            "labels": tfds.features.Sequence(
-                tfds.features.ClassLabel(names=_VOC_LABELS)),
-            "labels_no_difficult": tfds.features.Sequence(
-                tfds.features.ClassLabel(names=_VOC_LABELS)),
+            "image":
+                tfds.features.Image(),
+            "image/filename":
+                tfds.features.Text(),
+            "objects":
+                tfds.features.Sequence({
+                    "label": tfds.features.ClassLabel(names=_VOC_LABELS),
+                    "bbox": tfds.features.BBoxFeature(),
+                    "pose": tfds.features.ClassLabel(names=_VOC_POSES),
+                    "is_truncated": tf.bool,
+                    "is_difficult": tf.bool,
+                }),
+            "labels":
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(names=_VOC_LABELS)),
+            "labels_no_difficult":
+                tfds.features.Sequence(
+                    tfds.features.ClassLabel(names=_VOC_LABELS)),
         }),
         homepage=_VOC_URL.format(year=self.builder_config.year),
         citation=_VOC_CITATION.format(year=self.builder_config.year),
@@ -223,9 +242,8 @@ class Voc(tfds.core.GeneratorBasedBuilder):
       objects = list(_get_example_objects(annon_filepath))
       # Use set() to remove duplicates
       labels = sorted(set(obj["label"] for obj in objects))
-      labels_no_difficult = sorted(set(
-          obj["label"] for obj in objects if obj["is_difficult"] == 0
-      ))
+      labels_no_difficult = sorted(
+          set(obj["label"] for obj in objects if obj["is_difficult"] == 0))
     else:  # The test set of VOC2012 does not contain annotations
       objects = []
       labels = []

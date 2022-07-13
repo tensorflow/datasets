@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import json
 import os
 import re
 
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -82,12 +83,17 @@ class BigPatentConfig(tfds.core.BuilderConfig):
         # 1.0.0 lower cased tokenized words.
         # 2.0.0 cased raw strings.
         # 2.1.0 cased raw strings (fixed).
-        version=tfds.core.Version("2.1.2", "Fix update to cased raw strings."),
+        version=tfds.core.Version("2.1.2"),
         supported_versions=[
-            tfds.core.Version("1.0.0", "lower cased tokenized words"),
-            tfds.core.Version("2.0.0", "Update to use cased raw strings")
+            tfds.core.Version("1.0.0"),
+            tfds.core.Version("2.0.0")
         ],
-        **kwargs)
+        release_notes={
+            "2.1.2": "Fix update to cased raw strings.",
+            "2.0.0": "Update to use cased raw strings",
+            "1.0.0": "lower cased tokenized words",
+        },
+        **kwargs)  # pytype: disable=wrong-arg-types  # gen-stub-imports
     self.cpc_codes = cpc_codes
 
 
@@ -189,8 +195,8 @@ def _get_english_words():
   global _ENGLISH_WORDS
   if not _ENGLISH_WORDS:
     nltk = tfds.core.lazy_imports.nltk
-    resource_path = tfds.core.utils.resource_path(nltk)
-    data_path = str(resource_path / "nltk_data/corpora/words/en")
+    resource_path = epath.resource_path(nltk)
+    data_path = os.fspath(resource_path / "nltk_data/corpora/words/en")
     word_list = nltk.data.load(data_path, format="raw").decode("utf-8")
     _ENGLISH_WORDS = frozenset(word_list.split("\n"))
   return _ENGLISH_WORDS

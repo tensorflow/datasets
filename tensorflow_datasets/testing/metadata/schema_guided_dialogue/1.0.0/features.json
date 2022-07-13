@@ -1,0 +1,44 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "utterances": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.text_feature.Text",
+                    "content": {}
+                },
+                "length": null
+            }
+        },
+        "first_speaker": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 2
+            }
+        },
+        "metadata": {
+            "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+            "content": {
+                "services": {
+                    "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                    "content": {
+                        "feature": {
+                            "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                            "content": {
+                                "name": {
+                                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                                    "content": {
+                                        "shape": [],
+                                        "dtype": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "length": null
+                    }
+                }
+            }
+        }
+    }
+}

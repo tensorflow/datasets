@@ -1,0 +1,56 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "input_text": {
+            "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+            "content": {
+                "table": {
+                    "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                    "content": {
+                        "feature": {
+                            "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                            "content": {
+                                "column_header": {
+                                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                                    "content": {
+                                        "shape": [],
+                                        "dtype": "string"
+                                    }
+                                },
+                                "row_number": {
+                                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                                    "content": {
+                                        "shape": [],
+                                        "dtype": "int16"
+                                    }
+                                },
+                                "content": {
+                                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                                    "content": {
+                                        "shape": [],
+                                        "dtype": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "length": null
+                    }
+                },
+                "context": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "string"
+                    }
+                }
+            }
+        },
+        "target_text": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        }
+    }
+}

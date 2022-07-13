@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,11 +16,9 @@
 """Tests for tensorflow_datasets.core.dataset_utils."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
-
-tf.enable_v2_behavior()
 
 
 def _create_dataset(rng):
@@ -63,6 +61,13 @@ class DatasetAsNumPyTest(testing.TestCase):
     self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
     # Iterating twice on the dataset recreate the iterator.
     self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
+
+    if tf.executing_eagerly():
+      self.assertEqual(len(np_ds), 10)
+    else:
+      with self.assertRaisesWithPredicateMatch(
+          TypeError, "__len__() is not supported for `tfds.as_numpy`"):
+        _ = len(np_ds)
 
   def test_with_graph(self):
     with tf.Graph().as_default():
@@ -155,26 +160,35 @@ class DatasetAsNumPyTest(testing.TestCase):
 
   @testing.run_in_graph_and_eager_modes()
   def test_ragged_tensors_ds(self):
+
     def _gen_ragged_tensors():
       # Yield the (flat_values, rowids)
       yield ([0, 1, 2, 3], [0, 0, 0, 2])  # ex0
       yield ([], [])  # ex1
       yield ([4, 5, 6], [0, 1, 1])  # ex2
+
     ds = tf.data.Dataset.from_generator(
         _gen_ragged_tensors,
         output_types=(tf.int64, tf.int64),
-        output_shapes=((None,), (None,))
-    )
+        output_shapes=((None,), (None,)))
     ds = ds.map(tf.RaggedTensor.from_value_rowids)
 
     rt0, rt1, rt2 = list(dataset_utils.as_numpy(ds))
     self.assertAllEqual(rt0, [
         [0, 1, 2],
         [],
-        [3,],
+        [
+            3,
+        ],
     ])
     self.assertAllEqual(rt1, [])
     self.assertAllEqual(rt2, [[4], [5, 6]])
+
+  def test_none_ds(self):
+    ds = tf.data.Dataset.range(10)
+    ds = ds.map(lambda x: (x, None))
+    exs = list(dataset_utils.as_numpy(ds))
+    self.assertAllEqual(exs, [(x, None) for x in range(10)])
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import os
 import tarfile
 
 import six
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -73,8 +73,7 @@ class Libritts(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "speech": tfds.features.Audio(
-                file_format="wav", sample_rate=24000),
+            "speech": tfds.features.Audio(file_format="wav", sample_rate=24000),
             "text_original": tfds.features.Text(),
             "text_normalized": tfds.features.Text(),
             "speaker_id": tf.int64,

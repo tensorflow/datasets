@@ -36,7 +36,7 @@
   "splits": [
     {
       "name": "test",
-      "numShards": "1",
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "shardLengths": [
         "20"
       ],
@@ -67,7 +67,7 @@
     },
     {
       "name": "train",
-      "numShards": "1",
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "shardLengths": [
         "20"
       ],
@@ -103,5 +103,6 @@
   "version": "3.0.1",
   "redistributionInfo": {
     "license": "test license"
-  }
+  },
+  "moduleName": "tensorflow_datasets.image_classification.mnist"
 }

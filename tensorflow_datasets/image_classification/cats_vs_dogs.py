@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Cats vs Dogs dataset.
-"""
+"""Cats vs Dogs dataset."""
 
 import re
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -35,12 +34,12 @@ edition = {Proceedings of 14th ACM Conference on Computer and Communications Sec
 }
 """
 
-_URL = ("https://download.microsoft.com/download/3/E/1/3E1C3F21-"
-        "ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_3367a.zip")
+_URL = ("https://download.microsoft.com/download/3/E/1/"
+        "3E1C3F21-ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_5340.zip")
 _NUM_CORRUPT_IMAGES = 1738
-_DESCRIPTION = (("A large set of images of cats and dogs."
-                 "There are %d corrupted images that are dropped.")
-                % _NUM_CORRUPT_IMAGES)
+_DESCRIPTION = (("A large set of images of cats and dogs. "
+                 "There are %d corrupted images that are dropped.") %
+                _NUM_CORRUPT_IMAGES)
 
 _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 
@@ -48,8 +47,10 @@ _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
-  VERSION = tfds.core.Version(
-      "4.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("4.0.0")
+  RELEASE_NOTES = {
+      "4.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -61,8 +62,7 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=["cat", "dog"]),
         }),
         supervised_keys=("image", "label"),
-        homepage=
-        "https://www.microsoft.com/en-us/download/details.aspx?id=54765",
+        homepage="https://www.microsoft.com/en-us/download/details.aspx?id=54765",
         citation=_CITATION,
     )
 
@@ -97,6 +97,6 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       yield fname, record
 
     if num_skipped != _NUM_CORRUPT_IMAGES:
-      raise ValueError("Expected %d corrupt images, but found %d" % (
-          _NUM_CORRUPT_IMAGES, num_skipped))
+      raise ValueError("Expected %d corrupt images, but found %d" %
+                       (_NUM_CORRUPT_IMAGES, num_skipped))
     logging.warning("%d images were corrupted and were skipped", num_skipped)

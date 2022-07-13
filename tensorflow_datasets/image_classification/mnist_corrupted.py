@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ test images uploaded by the original authors.
 import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.image_classification import mnist
 import tensorflow_datasets.public_api as tfds
 
@@ -96,9 +96,10 @@ def _make_builder_configs():
     config_list.append(
         MNISTCorruptedConfig(
             name=corruption,
-            version=tfds.core.Version(
-                '1.0.0',
-                'New split API (https://tensorflow.org/datasets/splits)'),
+            version=tfds.core.Version('1.0.0'),
+            release_notes={
+                '1.0.0': 'New split API',
+            },
             description='Corruption method: ' + corruption,
             corruption_type=corruption,
         ))

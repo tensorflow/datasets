@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -128,13 +128,17 @@ class CosE(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={"files": files["dev"],
-                        "cqa_indexed": cqa_indexed},
+            gen_kwargs={
+                "files": files["dev"],
+                "cqa_indexed": cqa_indexed
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={"files": files["train"],
-                        "cqa_indexed": cqa_indexed},
+            gen_kwargs={
+                "files": files["train"],
+                "cqa_indexed": cqa_indexed
+            },
         ),
     ]
 

@@ -1,0 +1,37 @@
+{
+  "citation": "@inproceedings{dua-etal-2019-drop,\n    title = \"{DROP}: A Reading Comprehension Benchmark Requiring Discrete Reasoning Over Paragraphs\",\n    author = \"Dua, Dheeru  and\n      Wang, Yizhong  and\n      Dasigi, Pradeep  and\n      Stanovsky, Gabriel  and\n      Singh, Sameer  and\n      Gardner, Matt\",\n    booktitle = \"Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)\",\n    month = jun,\n    year = \"2019\",\n    address = \"Minneapolis, Minnesota\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/N19-1246\",\n    doi = \"10.18653/v1/N19-1246\",\n    pages = \"2368--2378\",\n}\n\n@inproceedings{khashabi-etal-2020-unifiedqa,\n    title = \"{UNIFIEDQA}: Crossing Format Boundaries with a Single {QA} System\",\n    author = \"Khashabi, Daniel  and\n      Min, Sewon  and\n      Khot, Tushar  and\n      Sabharwal, Ashish  and\n      Tafjord, Oyvind  and\n      Clark, Peter  and\n      Hajishirzi, Hannaneh\",\n    booktitle = \"Findings of the Association for Computational Linguistics: EMNLP 2020\",\n    month = nov,\n    year = \"2020\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2020.findings-emnlp.171\",\n    doi = \"10.18653/v1/2020.findings-emnlp.171\",\n    pages = \"1896--1907\",\n}\n\nNote that each UnifiedQA dataset has its own citation. Please see the source to\nsee the correct citation for each contained dataset.\"",
+  "configDescription": "DROP is a crowdsourced, adversarially-created QA benchmark, in which a\nsystem must resolve references in a question, perhaps to multiple\ninput positions, and perform discrete operations over them (such as\naddition, counting, or sorting). These operations require a much more\ncomprehensive understanding of the content of paragraphs than what was\nnecessary for prior datasets. This version uses contrast sets. These\nevaluation sets are expert-generated perturbations that deviate from\nthe patterns common in the original dataset.\n",
+  "configName": "contrast_sets_drop",
+  "description": "The UnifiedQA benchmark consists of 20 main question answering (QA) datasets\n(each may have multiple versions) that target different formats as well as\nvarious complex linguistic phenomena. These datasets are grouped into several\nformats/categories, including: extractive QA, abstractive QA, multiple-choice\nQA, and yes/no QA. Additionally, contrast sets are used for several datasets\n(denoted with \"contrast_sets_\"). These evaluation sets are expert-generated\nperturbations that deviate from the patterns common in the original dataset. For\nseveral datasets that do not come with evidence paragraphs, two variants are\nincluded: one where the datasets are used as-is and another that uses paragraphs\nfetched via an information retrieval system as additional evidence, indicated\nwith \"_ir\" tags.\n\nMore information can be found at: https://github.com/allenai/unifiedqa.",
+  "downloadSize": "2301632",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/allenai/unifiedqa"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.unifiedqa.unifiedqa",
+  "name": "unified_qa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1184912",
+      "shardLengths": [
+        "947"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "1184912",
+      "shardLengths": [
+        "947"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

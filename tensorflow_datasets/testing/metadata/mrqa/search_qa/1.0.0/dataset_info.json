@@ -1,0 +1,53 @@
+{
+  "citation": "@article{dunn2017searchqa,\n    title={Searchqa: A new q\\&a dataset augmented with context from a search engine},\n    author={Dunn, Matthew and Sagun, Levent and Higgins, Mike and Guney, V Ugur and Cirik, Volkan and Cho, Kyunghyun},\n    journal={arXiv preprint arXiv:1704.05179},\n    year={2017}\n}\n\n@inproceedings{fisch-etal-2019-mrqa,\n    title = \"{MRQA} 2019 Shared Task: Evaluating Generalization in Reading Comprehension\",\n    author = \"Fisch, Adam  and\n      Talmor, Alon  and\n      Jia, Robin  and\n      Seo, Minjoon  and\n      Choi, Eunsol  and\n      Chen, Danqi\",\n    booktitle = \"Proceedings of the 2nd Workshop on Machine Reading for Question Answering\",\n    month = nov,\n    year = \"2019\",\n    address = \"Hong Kong, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/D19-5801\",\n    doi = \"10.18653/v1/D19-5801\",\n    pages = \"1--13\",\n}\n\nNote that each MRQA dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.\"",
+  "configDescription": "Question and answer pairs are sourced from the Jeopardy! TV show. The\ncontexts are composed of retrieved snippets from a Google search\nquery.\n",
+  "configName": "search_qa",
+  "description": "The MRQA 2019 Shared Task focuses on generalization in question answering. An\neffective question answering system should do more than merely interpolate from\nthe training set to answer test examples drawn from the same distribution: it\nshould also be able to extrapolate to out-of-distribution examples \u2014 a\nsignificantly harder challenge.\n\nMRQA adapts and unifies multiple distinct question answering datasets (carefully\nselected subsets of existing datasets) into the same format (SQuAD format).\nAmong them, six datasets were made available for training, and six datasets were\nmade available for testing. Small portions of the training datasets\nwere held-out as in-domain data that may be used for development. The testing\ndatasets only contain out-of-domain data. This benchmark is released as part of\nthe MRQA 2019 Shared Task.\n\nMore information can be found at: `https://mrqa.github.io/2019/shared.html`.",
+  "downloadSize": "733859107",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://mrqa.github.io/2019/shared.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.mrqa.mrqa",
+  "name": "mrqa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1293023128",
+      "shardLengths": [
+        "7336",
+        "7337",
+        "7337",
+        "7336",
+        "7336",
+        "7337",
+        "7337",
+        "7336",
+        "7336",
+        "7337",
+        "7337",
+        "7336",
+        "7336",
+        "7337",
+        "7337",
+        "7336"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "186148482",
+      "shardLengths": [
+        "8490",
+        "8490"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

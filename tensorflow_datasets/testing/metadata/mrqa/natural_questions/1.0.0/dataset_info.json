@@ -1,0 +1,40 @@
+{
+  "citation": "@article{kwiatkowski-etal-2019-natural,\n    title = \"Natural Questions: A Benchmark for Question Answering Research\",\n    author = \"Kwiatkowski, Tom  and\n      Palomaki, Jennimaria  and\n      Redfield, Olivia  and\n      Collins, Michael  and\n      Parikh, Ankur  and\n      Alberti, Chris  and\n      Epstein, Danielle  and\n      Polosukhin, Illia  and\n      Devlin, Jacob  and\n      Lee, Kenton  and\n      Toutanova, Kristina  and\n      Jones, Llion  and\n      Kelcey, Matthew  and\n      Chang, Ming-Wei  and\n      Dai, Andrew M.  and\n      Uszkoreit, Jakob  and\n      Le, Quoc  and\n      Petrov, Slav\",\n    journal = \"Transactions of the Association for Computational Linguistics\",\n    volume = \"7\",\n    year = \"2019\",\n    address = \"Cambridge, MA\",\n    publisher = \"MIT Press\",\n    url = \"https://aclanthology.org/Q19-1026\",\n    doi = \"10.1162/tacl_a_00276\",\n    pages = \"452--466\",\n}\n\n@inproceedings{fisch-etal-2019-mrqa,\n    title = \"{MRQA} 2019 Shared Task: Evaluating Generalization in Reading Comprehension\",\n    author = \"Fisch, Adam  and\n      Talmor, Alon  and\n      Jia, Robin  and\n      Seo, Minjoon  and\n      Choi, Eunsol  and\n      Chen, Danqi\",\n    booktitle = \"Proceedings of the 2nd Workshop on Machine Reading for Question Answering\",\n    month = nov,\n    year = \"2019\",\n    address = \"Hong Kong, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/D19-5801\",\n    doi = \"10.18653/v1/D19-5801\",\n    pages = \"1--13\",\n}\n\nNote that each MRQA dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.\"",
+  "configDescription": "Questions are collected from information-seeking queries to the Google\nsearch engine by real users under natural conditions. Answers to the\nquestions are annotated in a retrieved Wikipedia page by crowdworkers.\nTwo types of annotations are collected: 1) the HTML bounding box\ncontaining enough information to completely infer the answer to the\nquestion (Long Answer), and 2) the subspan or sub-spans within the\nbounding box that comprise the actual answer (Short Answer). Only the\nexamples that have short answers are used, and the long answer is used\nas the context.\n",
+  "configName": "natural_questions",
+  "description": "The MRQA 2019 Shared Task focuses on generalization in question answering. An\neffective question answering system should do more than merely interpolate from\nthe training set to answer test examples drawn from the same distribution: it\nshould also be able to extrapolate to out-of-distribution examples \u2014 a\nsignificantly harder challenge.\n\nMRQA adapts and unifies multiple distinct question answering datasets (carefully\nselected subsets of existing datasets) into the same format (SQuAD format).\nAmong them, six datasets were made available for training, and six datasets were\nmade available for testing. Small portions of the training datasets\nwere held-out as in-domain data that may be used for development. The testing\ndatasets only contain out-of-domain data. This benchmark is released as part of\nthe MRQA 2019 Shared Task.\n\nMore information can be found at: `https://mrqa.github.io/2019/shared.html`.",
+  "downloadSize": "127036741",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://mrqa.github.io/2019/shared.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.mrqa.mrqa",
+  "name": "mrqa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "315320294",
+      "shardLengths": [
+        "26018",
+        "26018",
+        "26017",
+        "26018"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "40181488",
+      "shardLengths": [
+        "12836"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

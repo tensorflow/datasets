@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,10 +36,11 @@ class Pg19Test(tfds.testing.DatasetBuilderTestCase):
 
   DATASET_CLASS = pg19.Pg19
   SPLITS = {
-      "train": 3,   # Number of fake train example
-      "test": 1,      # Number of fake test example
+      "train": 3,  # Number of fake train example
+      "test": 1,  # Number of fake test example
       "validation": 1  # Number of fake validation example
   }
+
 
 if __name__ == "__main__":
   tfds.testing.test_main()

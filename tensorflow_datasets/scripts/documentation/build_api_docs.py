@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,24 +23,20 @@ import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 
 from tensorflow_docs.api_generator import generate_lib
-import yaml
 
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string("output_dir", "/tmp/datasets_api",
                     "Where to output the docs")
-flags.DEFINE_string(
-    "code_url_prefix",
-    "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/",
-    "The url prefix for links to code.")
+flags.DEFINE_string("code_url_prefix",
+                    "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/",
+                    "The url prefix for links to code.")
 
 flags.DEFINE_bool("search_hints", True,
                   "Include metadata search hints in the generated files")
 
 flags.DEFINE_string("site_path", "datasets/api_docs/python",
                     "Path prefix in the _toc.yaml")
-
-MOVES = [("tfds/features/text.md", "tfds/features/text_lib.md")]
 
 
 def execute(output_dir, code_url_prefix, search_hints, site_path):
@@ -57,30 +53,6 @@ def execute(output_dir, code_url_prefix, search_hints, site_path):
       site_path=site_path)
 
   doc_generator.build(output_dir)
-
-  new_redirects = []
-  for before, after in MOVES:
-    old_path = os.path.join(output_dir, before)
-    if not os.path.exists(old_path):
-      continue
-    new_path = os.path.join(output_dir, after)
-    os.rename(old_path, new_path)
-
-    new_redirects.append({
-        "from":
-            os.path.join("/datasets/api_docs/python/",
-                         os.path.splitext(before)[0]),
-        "to":
-            os.path.join("/datasets/api_docs/python/",
-                         os.path.splitext(after)[0])
-    })
-
-  redirect_path = os.path.join(output_dir, "_redirects.yaml")
-  with open(redirect_path) as f:
-    redirect_content = yaml.load(f)
-  redirect_content["redirects"].extend(new_redirects)
-  with open(redirect_path, "w") as f:
-    yaml.dump(redirect_content, f, default_flow_style=False)
 
 
 def main(unused_argv):

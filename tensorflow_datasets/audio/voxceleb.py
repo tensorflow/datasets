@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import collections
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -44,7 +44,9 @@ NUM_CLASSES = 1252
 class Voxceleb(tfds.core.GeneratorBasedBuilder):
   """The VoxCeleb dataset for speaker identification."""
 
-  VERSION = tfds.core.Version('1.1.1')
+  VERSION = tfds.core.Version('1.2.1')
+
+  RELEASE_NOTES = {'1.2.1': 'Add youtube_id field'}
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   manual_dir should contain the file vox_dev_wav.zip. The instructions for
@@ -58,6 +60,7 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio': tfds.features.Audio(file_format='wav', sample_rate=16000),
             'label': tfds.features.ClassLabel(num_classes=NUM_CLASSES),
+            'youtube_id': tfds.features.Text(),
         }),
         supervised_keys=('audio', 'label'),
         homepage=_HOMEPAGE,
@@ -109,9 +112,9 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
       full_name = os.path.join(extract_path, 'wav', file_name)
       if not tf.io.gfile.exists(full_name):
         continue
-      speaker, _, _ = file_name[:-len('.wav')].split('/')
+      speaker, ytid, _ = file_name[:-len('.wav')].split('/')
       speaker_id = int(speaker[3:])
-      example = {'audio': full_name, 'label': speaker_id}
+      example = {'audio': full_name, 'label': speaker_id, 'youtube_id': ytid}
       yield file_name, example
 
   def _calculate_splits(self, iden_splits_path):

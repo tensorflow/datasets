@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import numpy as np
 from six import moves
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -49,11 +49,13 @@ The training set is composed of 5 instances of each category (instances 4, 6, 7,
 class Smallnorb(tfds.core.GeneratorBasedBuilder):
   """Smallnorb data set."""
 
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.1.0"),
   ]
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     features_dict = {
@@ -133,8 +135,8 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
     """
     dat_arr, cat_arr, info_arr = _load_chunk(dat_path, cat_path, info_path)
 
-    for i, (image, category, info_vec) in enumerate(moves.zip(
-        dat_arr, cat_arr, info_arr)):
+    for i, (image, category,
+            info_vec) in enumerate(moves.zip(dat_arr, cat_arr, info_arr)):
       record = {
           "image": image[0],
           "image2": image[1],

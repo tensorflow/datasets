@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ from tensorflow_datasets.translate import para_crawl
 class ParacrawlTest(tfds_test.DatasetBuilderTestCase):
 
   DATASET_CLASS = para_crawl.ParaCrawl
-  BUILDER_CONFIG_NAMES_TO_TEST = ["enhu_plain_text"]
   SPLITS = {
       "train": 5,
   }

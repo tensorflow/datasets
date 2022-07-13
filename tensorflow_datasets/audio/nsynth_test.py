@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,11 @@ import tensorflow_datasets.testing as tfds_test
 class NsynthFullTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = nsynth.Nsynth
   # Make test run faster by using fewer output shards.
-  nsynth._SPLIT_SHARDS = {"train": 1, "valid": 1, "test": 1,}
+  nsynth._SPLIT_SHARDS = {
+      "train": 1,
+      "valid": 1,
+      "test": 1,
+  }
   BUILDER_CONFIG_NAMES_TO_TEST = ["full"]
   SPLITS = {"train": 3, "test": 3, "valid": 3}
   DL_EXTRACT_RESULT = {

@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="ted_hrlr_translate" />
   <meta itemprop="description" content="Data sets derived from TED talk transcripts for comparing similar language pairs&#10;where one is high resource and the other is low resource.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;ted_hrlr_translate&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/ted_hrlr_translate" />
@@ -11,6 +10,7 @@
 </div>
 
 # `ted_hrlr_translate`
+
 
 *   **Description**:
 
@@ -36,6 +36,14 @@ where one is high resource and the other is low resource.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -47,9 +55,6 @@ where one is high resource and the other is low resource.
   }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## ted_hrlr_translate/az_to_en (default config)
 
@@ -63,7 +68,7 @@ Split          | Examples
 `'train'`      | 5,946
 `'validation'` | 671
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -71,6 +76,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+az      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -88,7 +101,7 @@ Split          | Examples
 `'train'`      | 188,396
 `'validation'` | 671
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -96,6 +109,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+az_tr   | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -113,7 +134,7 @@ Split          | Examples
 `'train'`      | 4,509
 `'validation'` | 248
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -121,6 +142,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+be      | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -138,7 +167,7 @@ Split          | Examples
 `'train'`      | 212,614
 `'validation'` | 248
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -146,6 +175,14 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+be_ru   | Text        |       | tf.string |
+en      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -163,7 +200,7 @@ Split          | Examples
 `'train'`      | 44,938
 `'validation'` | 1,016
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -171,6 +208,14 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+es      | Text        |       | tf.string |
+pt      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -188,7 +233,7 @@ Split          | Examples
 `'train'`      | 43,873
 `'validation'` | 1,131
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -196,6 +241,14 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+fr      | Text        |       | tf.string |
+pt      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -213,7 +266,7 @@ Split          | Examples
 `'train'`      | 10,017
 `'validation'` | 682
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -221,6 +274,14 @@ Translation({
     'gl': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+gl      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -238,7 +299,7 @@ Split          | Examples
 `'train'`      | 61,802
 `'validation'` | 682
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -246,6 +307,14 @@ Translation({
     'gl_pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+gl_pt   | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -263,7 +332,7 @@ Split          | Examples
 `'train'`      | 48,511
 `'validation'` | 1,145
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -271,6 +340,14 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+he      | Text        |       | tf.string |
+pt      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -288,7 +365,7 @@ Split          | Examples
 `'train'`      | 46,259
 `'validation'` | 1,162
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -296,6 +373,14 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+it      | Text        |       | tf.string |
+pt      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -313,7 +398,7 @@ Split          | Examples
 `'train'`      | 51,785
 `'validation'` | 1,193
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -321,6 +406,14 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+pt      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -338,7 +431,7 @@ Split          | Examples
 `'train'`      | 208,106
 `'validation'` | 4,805
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -346,6 +439,14 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+ru      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -363,7 +464,7 @@ Split          | Examples
 `'train'`      | 47,278
 `'validation'` | 1,184
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -371,6 +472,14 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+pt      | Text        |       | tf.string |
+ru      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -388,7 +497,7 @@ Split          | Examples
 `'train'`      | 182,450
 `'validation'` | 4,045
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 Translation({
@@ -396,6 +505,14 @@ Translation({
     'tr': Text(shape=(), dtype=tf.string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class       | Shape | Dtype     | Description
+:------ | :---------- | :---- | :-------- | :----------
+        | Translation |       |           |
+en      | Text        |       | tf.string |
+tr      | Text        |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

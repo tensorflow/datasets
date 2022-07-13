@@ -1,0 +1,14 @@
+{
+    "test": [
+        {
+            "dialog_act": "inform(price_range=moderate,food=Italian,name='Pivo & Basilico')",
+            "dialog_act_delexicalized": "inform(food=X-food,name=X-name,price_range=X-price_range)",
+            "gem_id": "cs_restaurants-test-8",
+            "references": [
+                "Pivo & Basilico nab\u00edz\u00ed b\u011b\u017en\u00e9 ceny a pod\u00e1v\u00e1 italsk\u00e1 j\u00eddla ."
+            ],
+            "target": "Pivo & Basilico nab\u00edz\u00ed b\u011b\u017en\u00e9 ceny a pod\u00e1v\u00e1 italsk\u00e1 j\u00eddla .",
+            "target_delexicalized": "X-name nab\u00edz\u00ed X-price_range ceny a pod\u00e1v\u00e1 X-food j\u00eddla ."
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,90 +15,124 @@
 
 """To serialize Dict or sequence to Example."""
 
+import abc
 import collections
+import dataclasses
+from typing import Any, Mapping
 import numpy as np
 import six
-import tensorflow.compat.v2 as tf
+
+import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 
+TensorInfo = feature_lib.TensorInfo
+TreeDict = utils.TreeDict
+Shape = utils.Shape
 
-class ExampleSerializer(object):
+
+@dataclasses.dataclass(frozen=True)
+class Serializer(abc.ABC):
+  """Interface of an example serializer."""
+  example_specs: TreeDict[TensorInfo]
+
+  @abc.abstractmethod
+  def serialize_example(self, example: TreeDict[Any]) -> Any:
+    """Serialize the given example.
+
+    Args:
+      example: Nested `dict` containing the input to serialize. The input
+        structure and values dtype/shape must match the `example_specs` provided
+        at construction.
+
+    Returns:
+      the serialized example.
+    """
+    raise NotImplementedError
+
+
+class ExampleSerializer(Serializer):
   """To serialize examples."""
 
-  def __init__(self, example_specs):
+  def __init__(self, example_specs: TreeDict[TensorInfo]):
     """Constructor.
 
     Args:
       example_specs: Nested `dict` of `tfds.features.TensorInfo`, corresponding
         to the structure of data to write/read.
     """
-    self._example_specs = example_specs
-    self._flat_example_specs = utils.flatten_nest_dict(self._example_specs)
+    super().__init__(example_specs)
+    self._flat_example_specs = utils.flatten_nest_dict(self.example_specs)
 
-  def serialize_example(self, example):
+  def get_tf_example(self, example: TreeDict[Any]) -> tf.train.Example:
+    """Creates a TF Example for the given example.
+
+    Args:
+      example: Nested `dict` containing the input to serialize. The input
+        structure and values dtype/shape must match the `example_specs` provided
+        at construction.
+
+    Returns:
+      The `tf.train.Example` proto
+    """
+    return _dict_to_tf_example(
+        utils.flatten_nest_dict(example), self._flat_example_specs)
+
+  def serialize_example(self, example: TreeDict[Any]) -> Any:
     """Serialize the given example.
 
     Args:
       example: Nested `dict` containing the input to serialize. The input
-        structure and values dtype/shape must match the `example_specs`
-        provided at construction.
+        structure and values dtype/shape must match the `example_specs` provided
+        at construction.
 
     Returns:
       serialize_proto: `str`, the serialized `tf.train.Example` proto
     """
-    example = utils.flatten_nest_dict(example)
-    example = _dict_to_tf_example(example, self._flat_example_specs)
-    return example.SerializeToString()
+    return self.get_tf_example(example).SerializeToString()
 
 
-def _dict_to_tf_example(example_dict, tensor_info_dict):
+def _dict_to_tf_example(
+    example_dict: Mapping[str, Any],
+    tensor_info_dict: Mapping[str, feature_lib.TensorInfo]) -> tf.train.Example:
   """Builds tf.train.Example from (string -> int/float/str list) dictionary.
 
   Args:
     example_dict: `dict`, dict of values, tensor,...
-    tensor_info_dict: `dict` of `tfds.feature.TensorInfo`
+    tensor_info_dict: `dict` of `tfds.features.TensorInfo`
 
   Returns:
     example_proto: `tf.train.Example`, the encoded example proto.
   """
+
   def run_with_reraise(fn, k, example_data, tensor_info):
     try:
       return fn(example_data, tensor_info)
-    except Exception:  # pylint: disable=broad-except
+    except Exception as e:  # pylint: disable=broad-except
       utils.reraise(
-          "Error while serializing feature `{}`: `{}`: ".format(k, tensor_info)
+          e,
+          f"Error while serializing feature `{k}`: `{tensor_info}`: ",
       )
 
-  if tensor_info_dict:
-    # Add the RaggedTensor fields for the nested sequences
-    # Nested sequences are encoded as {'flat_values':, 'row_lengths':}, so need
-    # to flatten the example nested dict again.
-    # Ex:
-    # Input: {'objects/tokens': [[0, 1, 2], [], [3, 4]]}
-    # Output: {
-    #     'objects/tokens/flat_values': [0, 1, 2, 3, 4],
-    #     'objects/tokens/row_lengths_0': [3, 0, 2],
-    # }
-    example_dict = utils.flatten_nest_dict({
-        k: run_with_reraise(_add_ragged_fields, k, example_data, tensor_info)
-        for k, (example_data, tensor_info)
-        in utils.zip_dict(example_dict, tensor_info_dict)
-    })
-    example_dict = {
-        k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
-        for k, (item, tensor_info) in example_dict.items()
-    }
-  else:
-    # TODO(epot): The following code is only executed in tests and could be
-    # cleanned-up, as TensorInfo is always passed to _item_to_tf_feature.
-    example_dict = {
-        k: run_with_reraise(_item_to_tf_feature, k, example_data, None)
-        for k, example_data in example_dict.items()
-    }
-
-  return tf.train.Example(features=tf.train.Features(feature=example_dict))
+  # Add the RaggedTensor fields for the nested sequences
+  # Nested sequences are encoded as {'flat_values':, 'row_lengths':}, so need
+  # to flatten the example nested dict again.
+  # Ex:
+  # Input: {'objects/tokens': [[0, 1, 2], [], [3, 4]]}
+  # Output: {
+  #     'objects/tokens/flat_values': [0, 1, 2, 3, 4],
+  #     'objects/tokens/row_lengths_0': [3, 0, 2],
+  # }
+  features = utils.flatten_nest_dict({
+      k: run_with_reraise(_add_ragged_fields, k, example_dict[k], tensor_info)
+      for k, tensor_info in tensor_info_dict.items()
+  })
+  features = {
+      k: run_with_reraise(_item_to_tf_feature, k, item, tensor_info)
+      for k, (item, tensor_info) in features.items()
+  }
+  return tf.train.Example(features=tf.train.Features(feature=features))
 
 
 def _is_string(item):
@@ -113,40 +147,45 @@ def _is_string(item):
   return False
 
 
-def _item_to_np_array(item, dtype, shape):
+def _item_to_np_array(item, dtype: tf.dtypes.DType, numpy_dtype: np.dtype,
+                      shape: Shape) -> np.ndarray:
   """Single item to a np.array."""
-  original_item = item
-  item = np.array(item, dtype=dtype.as_numpy_dtype)
-  utils.assert_shape_match(item.shape, shape)
-  if dtype == tf.string and not _is_string(original_item):
+  result = np.asanyarray(item, dtype=numpy_dtype)
+  utils.assert_shape_match(result.shape, shape)
+  if utils.is_same_tf_dtype(dtype, tf.string) and not _is_string(item):
     raise ValueError(
-        "Unsupported value: {}\nCould not convert to bytes list.".format(item))
-  return item
+        f"Unsupported value: {result}\nCould not convert to bytes list.")
+  return result
 
 
-def _item_to_tf_feature(item, tensor_info):
+def _item_to_tf_feature(
+    item, tensor_info: feature_lib.TensorInfo) -> tf.train.Feature:
   """Single item to a tf.train.Feature."""
-  v = _item_to_np_array(item, shape=tensor_info.shape, dtype=tensor_info.dtype)
+  v = _item_to_np_array(
+      item,
+      shape=tensor_info.shape,
+      dtype=tensor_info.dtype,
+      numpy_dtype=tensor_info.numpy_dtype,
+  )
 
   # Convert boolean to integer (tf.train.Example does not support bool)
-  if v.dtype == np.bool_:
+  if utils.is_same_np_dtype(v.dtype, np.bool_):
     v = v.astype(int)
 
-  v = v.flatten()  # Convert v into a 1-d array
-  if np.issubdtype(v.dtype, np.integer):
-    return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
-  elif np.issubdtype(v.dtype, np.floating):
-    return tf.train.Feature(float_list=tf.train.FloatList(value=v))
-  elif tensor_info.dtype == tf.string:
-    v = [tf.compat.as_bytes(x) for x in v]
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
+  vals = v.flat  # Convert v into a 1-d array (without extra copy)
+  if utils.is_np_sub_dtype(v.dtype, np.integer):
+    return tf.train.Feature(int64_list=tf.train.Int64List(value=vals))
+  elif utils.is_np_sub_dtype(v.dtype, np.floating):
+    return tf.train.Feature(float_list=tf.train.FloatList(value=vals))
+  elif utils.is_same_tf_dtype(tensor_info.dtype, tf.string):
+    vals = [tf.compat.as_bytes(x) for x in vals]
+    return tf.train.Feature(bytes_list=tf.train.BytesList(value=vals))
   else:
     raise ValueError(
         "Unsupported value: {}.\n"
         "tf.train.Feature does not support type {}. "
         "This may indicate that one of the FeatureConnectors received an "
-        "unsupported value as input.".format(repr(v), repr(type(v)))
-    )
+        "unsupported value as input.".format(repr(v), repr(type(v))))
 
 
 RaggedExtraction = collections.namedtuple("RaggedExtraction", [
@@ -158,7 +197,7 @@ RaggedExtraction = collections.namedtuple("RaggedExtraction", [
 ])
 
 
-def _add_ragged_fields(example_data, tensor_info):
+def _add_ragged_fields(example_data, tensor_info: feature_lib.TensorInfo):
   """Optionally convert the ragged data into flat/row_lengths fields.
 
   Example:
@@ -217,10 +256,11 @@ def _add_ragged_fields(example_data, tensor_info):
     return ragged_attr_dict
 
 
-def _extract_ragged_attributes(nested_list, tensor_info):
+def _extract_ragged_attributes(nested_list,
+                               tensor_info: feature_lib.TensorInfo):
   """Extract the values for the tf.RaggedTensor __init__.
 
-  This extract the ragged tensor attributes which allow reconstruct the
+  This extracts the ragged tensor attributes which allow to reconstruct the
   ragged tensor with `tf.RaggedTensor.from_nested_row_lengths`.
 
   Args:
@@ -236,32 +276,33 @@ def _extract_ragged_attributes(nested_list, tensor_info):
 
   flat_values = []
   nested_row_lengths = [[] for _ in range(tensor_info.sequence_rank)]
-  # Reccursivelly append to `flat_values`, `nested_row_lengths`
-  _fill_ragged_attribute(RaggedExtraction(
-      nested_list=nested_list,
-      flat_values=flat_values,
-      nested_row_lengths=nested_row_lengths,
-      curr_ragged_rank=0,
-      tensor_info=tensor_info,
-  ))
+  # Recursively append to `flat_values`, `nested_row_lengths`
+  _fill_ragged_attribute(
+      RaggedExtraction(
+          nested_list=nested_list,
+          flat_values=flat_values,
+          nested_row_lengths=nested_row_lengths,
+          curr_ragged_rank=0,
+          tensor_info=tensor_info,
+      ))
   if not flat_values:  # The full sequence is empty
     flat_values = np.empty(
         shape=(0,) + tensor_info.shape[tensor_info.sequence_rank:],
-        dtype=tensor_info.dtype.as_numpy_dtype,
+        dtype=tensor_info.numpy_dtype,
     )
   else:  # Otherwise, merge all flat values together, some might be empty
     flat_values = np.stack(flat_values)
   return flat_values, nested_row_lengths[1:]
 
 
-def _fill_ragged_attribute(ext):
+def _fill_ragged_attribute(ext: RaggedExtraction) -> None:
   """Recurse the nested_list from the given RaggedExtraction.
 
   Args:
     ext: RaggedExtraction tuple containing the input/outputs
 
   Returns:
-    None, the function mutate instead `ext.nested_row_lengths` and
+    None, the function mutates instead `ext.nested_row_lengths` and
       `ext.flat_values` lists.
   """
   # Register the current sequence length.
@@ -280,16 +321,18 @@ def _fill_ragged_attribute(ext):
   if ext.curr_ragged_rank < ext.tensor_info.sequence_rank - 1:
     # If there are additional Sequence dimension, recurse 1 level deeper.
     for sub_list in ext.nested_list:
-      _fill_ragged_attribute(ext._replace(
-          nested_list=sub_list,
-          curr_ragged_rank=ext.curr_ragged_rank + 1,
-      ))
+      _fill_ragged_attribute(
+          ext._replace(
+              nested_list=sub_list,
+              curr_ragged_rank=ext.curr_ragged_rank + 1,
+          ))
   else:
     # Otherwise, we reached the max level deep, so add the current items
     for item in ext.nested_list:
       item = _item_to_np_array(  # Normalize the item
           item,
           dtype=ext.tensor_info.dtype,
+          numpy_dtype=ext.tensor_info.numpy_dtype,
           # We only check the non-ragged shape
           shape=ext.tensor_info.shape[ext.tensor_info.sequence_rank:],
       )

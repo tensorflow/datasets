@@ -1,0 +1,16 @@
+{
+    "train": [
+        {
+            "concept_set_id": 25441,
+            "concepts": [
+                "bathroom",
+                "include",
+                "shower",
+                "toilet"
+            ],
+            "gem_id": "common_gen-train-56135",
+            "references": [],
+            "target": "The interior of a modern bathroom including toilet, shower, and cabinet"
+        }
+    ]
+}

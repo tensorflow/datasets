@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
 
 """The Waymo Open Dataset. See waymo.com/open."""
 
-import io
 import os
 from absl import logging
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.proto import waymo_dataset_pb2 as open_dataset
 import tensorflow_datasets.public_api as tfds
 
@@ -63,9 +62,13 @@ _OBJECT_LABELS = [
 class WaymoOpenDatasetConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Waymo Open Dataset Config."""
 
-  def __init__(
-      self, *, name, version_str, description, is_on_gcs=False, **kwargs
-  ):
+  def __init__(self,
+               *,
+               name,
+               version_str,
+               description,
+               is_on_gcs=False,
+               **kwargs):
     """BuilderConfig for Waymo Open Dataset examples.
 
     Args:
@@ -81,11 +84,9 @@ class WaymoOpenDatasetConfig(tfds.core.BuilderConfig):
         name=name,
         version=tfds.core.Version("0.2.0"),
         description=description,
-        **kwargs
-    )
-    self.cloud_bucket = tfds.core.gcs_path(
-        f"gs://waymo_open_dataset_{version_str}_individual_files/"
-    )
+        **kwargs)
+    self.cloud_bucket = tfds.core.Path(
+        f"gs://waymo_open_dataset_{version_str}_individual_files/")
 
 
 class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
@@ -176,13 +177,15 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     """
 
     # Training set
-    train_files = tf.io.gfile.glob(os.path.join(
-        self.builder_config.cloud_bucket, "training/segment*camera*"))
+    train_files = tf.io.gfile.glob(
+        os.path.join(self.builder_config.cloud_bucket,
+                     "training/segment*camera*"))
     logging.info("Train files: %s", train_files)
 
     # Validation set
-    validation_files = tf.io.gfile.glob(os.path.join(
-        self.builder_config.cloud_bucket, "validation/segment*camera*"))
+    validation_files = tf.io.gfile.glob(
+        os.path.join(self.builder_config.cloud_bucket,
+                     "validation/segment*camera*"))
     logging.info("Validation files: %s", validation_files)
 
     split_generators = [
@@ -213,8 +216,7 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
               gen_kwargs={
                   "tf_record_files": test_files,
               },
-          )
-      )
+          ))
 
     return split_generators
 
@@ -253,9 +255,9 @@ def _generate_images_and_annotations(tf_record_file):
   """
   # Go through all frames
   dataset = tf.data.TFRecordDataset(tf_record_file, compression_type="")
-  for data in dataset:
+  for data in tfds.as_numpy(dataset):
     frame = open_dataset.Frame()
-    frame.ParseFromString(bytearray(data.numpy()))  # pytype: disable=wrong-arg-types
+    frame.ParseFromString(bytearray(data))  # pytype: disable=wrong-arg-types
 
     image_and_annotation = {
         "context": {
@@ -281,7 +283,7 @@ def _generate_images_and_annotations(tf_record_file):
 
       camera_name = open_dataset.CameraName.Name.Name(frame_image.name)
       image_and_annotation["camera_" + camera_name] = {
-          "image": io.BytesIO(frame_image.image),
+          "image": frame_image.image,
           "labels": labels
       }
 
@@ -299,10 +301,12 @@ def _convert_labels(raw_labels, image_width, image_height):
   Returns:
     List of dicts with the label type and the corresponding bounding boxes.
   """
-  return [{  # pylint: disable=g-complex-comprehension
-      "type": raw_label.type,
-      "bbox": _build_bounding_box(raw_label.box, image_width, image_height)
-  } for raw_label in raw_labels.labels]
+  return [
+      {  # pylint: disable=g-complex-comprehension
+          "type": raw_label.type,
+          "bbox": _build_bounding_box(raw_label.box, image_width, image_height)
+      } for raw_label in raw_labels.labels
+  ]
 
 
 def _build_bounding_box(open_dataset_box, image_width, image_height):

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """HIGGS Data Set."""
 
 import csv
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -39,16 +39,16 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-The data has been produced using Monte Carlo simulations. 
-The first 21 features (columns 2-22) are kinematic properties 
-measured by the particle detectors in the accelerator. 
-The last seven features are functions of the first 21 features; 
-these are high-level features derived by physicists to help 
-discriminate between the two classes. There is an interest 
-in using deep learning methods to obviate the need for physicists 
-to manually develop such features. Benchmark results using 
-Bayesian Decision Trees from a standard physics package and 
-5-layer neural networks are presented in the original paper. 
+The data has been produced using Monte Carlo simulations.
+The first 21 features (columns 2-22) are kinematic properties
+measured by the particle detectors in the accelerator.
+The last seven features are functions of the first 21 features;
+these are high-level features derived by physicists to help
+discriminate between the two classes. There is an interest
+in using deep learning methods to obviate the need for physicists
+to manually develop such features. Benchmark results using
+Bayesian Decision Trees from a standard physics package and
+5-layer neural networks are presented in the original paper.
 """
 
 _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00280/HIGGS.csv.gz'
@@ -56,8 +56,10 @@ _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00280/HIGGS.cs
 
 class Higgs(tfds.core.GeneratorBasedBuilder):
   """HIGGS Data Set."""
-  VERSION = tfds.core.Version(
-      '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
+  VERSION = tfds.core.Version('2.0.0')
+  RELEASE_NOTES = {
+      '2.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -108,8 +110,7 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
+            name=tfds.Split.TRAIN, gen_kwargs={
                 'file_path': path,
             }),
     ]

@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="opinion_abstracts" />
   <meta itemprop="description" content="There are two sub datasets:&#10;&#10;(1) RottenTomatoes: The movie critics and consensus crawled from&#10;http://rottentomatoes.com/. It has fields of &quot;_movie_name&quot;, &quot;_movie_id&quot;,&#10;&quot;_critics&quot;, and &quot;_critic_consensus&quot;.&#10;&#10;(2) IDebate: The arguments crawled from http://idebate.org/. It has fields of&#10;&quot;_debate_name&quot;, &quot;_debate_id&quot;, &quot;_claim&quot;, &quot;_claim_id&quot;, &quot;_argument_sentences&quot;.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;opinion_abstracts&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/opinion_abstracts" />
@@ -11,6 +10,7 @@
 </div>
 
 # `opinion_abstracts`
+
 
 *   **Description**:
 
@@ -39,6 +39,14 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Yes
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -57,9 +65,6 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## opinion_abstracts/rotten_tomatoes (default config)
 
@@ -73,7 +78,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 3,731
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -86,6 +91,18 @@ FeaturesDict({
     '_movie_name': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype     | Description
+:---------------- | :----------- | :---- | :-------- | :----------
+                  | FeaturesDict |       |           |
+_critic_consensus | Tensor       |       | tf.string |
+_critics          | Sequence     |       |           |
+_critics/key      | Tensor       |       | tf.string |
+_critics/value    | Tensor       |       | tf.string |
+_movie_id         | Tensor       |       | tf.string |
+_movie_name       | Tensor       |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -103,7 +120,7 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 2,259
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -116,6 +133,18 @@ FeaturesDict({
     '_debate_name': tf.string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                   | Class        | Shape | Dtype     | Description
+:------------------------ | :----------- | :---- | :-------- | :----------
+                          | FeaturesDict |       |           |
+_argument_sentences       | Sequence     |       |           |
+_argument_sentences/key   | Tensor       |       | tf.string |
+_argument_sentences/value | Tensor       |       | tf.string |
+_claim                    | Tensor       |       | tf.string |
+_claim_id                 | Tensor       |       | tf.string |
+_debate_name              | Tensor       |       | tf.string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

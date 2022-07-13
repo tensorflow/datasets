@@ -1,0 +1,38 @@
+{
+  "citation": "@inproceedings{socher2013recursive,\n  title={Recursive deep models for semantic compositionality over a sentiment treebank},\n  author={Socher, Richard and Perelygin, Alex and Wu, Jean and Chuang, Jason and Manning, Christopher D and Ng, Andrew and Potts, Christopher},\n  booktitle={Proceedings of the 2013 conference on empirical methods in natural language processing},\n  pages={1631--1642},\n  year={2013}\n}\n@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
+  "configDescription": "The Stanford Sentiment Treebank consists of sentences from movie reviews and\nhuman annotations of their sentiment. The task is to predict the sentiment of a\ngiven sentence. We use the two-way (positive/negative) class split, and use only\nsentence-level labels.",
+  "configName": "sst2",
+  "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
+  "downloadSize": "7439277",
+  "location": {
+    "urls": [
+      "https://nlp.stanford.edu/sentiment/index.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.glue",
+  "name": "glue",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "7129237",
+      "shardLengths": [
+        "67349"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "138483",
+      "shardLengths": [
+        "872"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "300385",
+      "shardLengths": [
+        "1821"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

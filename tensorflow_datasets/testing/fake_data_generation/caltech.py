@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ from absl import app
 from absl import flags
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
@@ -69,7 +69,7 @@ def _get_jpeg(height, width):
 
 def _generate_images():
   """Generates training images."""
-  names_file = tfds.core.get_tfds_path(caltech._LABELS_FNAME)  # pylint: disable=protected-access
+  names_file = tfds.core.tfds_path(caltech._LABELS_FNAME)  # pylint: disable=protected-access
   label_names = tfds.features.ClassLabel(
       names_file=names_file).names[:NUM_CLASSES]
   for label in label_names:

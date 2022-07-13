@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +17,9 @@
 
 import os
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
-
 
 _URL = "https://zenodo.org/record/53169#.XGZemKwzbmG"
 _TILES_DL_URL = "https://zenodo.org/record/53169/files/Kather_texture_2016_image_tiles_5000.zip"
@@ -67,8 +66,10 @@ def _load_tif(path):
 
 class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
   """Biological 8-class classification problem."""
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -78,8 +79,7 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
             "Each example is a 150 x 150 x 3 RGB image of one of 8 classes."),
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=(_TILES_SIZE,) * 2 + (3,)),
-            "label": tfds.features.ClassLabel(
-                names=_CLASS_NAMES),
+            "label": tfds.features.ClassLabel(names=_CLASS_NAMES),
             "filename": tfds.features.Text(),
         }),
         homepage=_URL,
@@ -114,8 +114,10 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
 
 class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
   """10 Large 5000 x 5000 colorectal histology images without labels."""
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -123,20 +125,17 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
         description=(
             "10 large 5000 x 5000 textured colorectal cancer histology images"),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=(_LARGE_SIZE,)*2 + (3,)),
+            "image": tfds.features.Image(shape=(_LARGE_SIZE,) * 2 + (3,)),
             "filename": tfds.features.Text(),
         }),
         homepage=_URL,
-        citation=_CITATION
-    )
+        citation=_CITATION)
 
   def _split_generators(self, dl_manager):
     folder = dl_manager.download_and_extract(_LARGE_DL_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=dict(folder=folder)
-        )
+            name=tfds.Split.TEST, gen_kwargs=dict(folder=folder))
     ]
 
   def _generate_examples(self, folder):

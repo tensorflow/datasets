@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import numpy as np
 from six import moves
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -63,11 +63,13 @@ while ensuring that all pixel outputs were different. No noise was added.
 class Dsprites(tfds.core.GeneratorBasedBuilder):
   """dSprites data set."""
 
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.0.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.1.0"),
   ]
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     features_dict = {
@@ -99,8 +101,7 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(filepath=filepath)),
+            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)),
     ]
 
   def _generate_examples(self, filepath):
@@ -120,8 +121,8 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
       class_array = np.array(h5dataset["latents"]["classes"])
       values_array = np.array(h5dataset["latents"]["values"])
 
-    for i, (image, classes, values) in enumerate(moves.zip(
-        image_array, class_array, values_array)):
+    for i, (image, classes, values) in enumerate(
+        moves.zip(image_array, class_array, values_array)):
       record = dict(
           image=np.expand_dims(image, -1),
           label_shape=classes[1],

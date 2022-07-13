@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="trivia_qa" />
   <meta itemprop="description" content="TriviaqQA is a reading comprehension dataset containing over 650K&#10;question-answer-evidence triples. TriviaqQA includes 95K question-answer&#10;pairs authored by trivia enthusiasts and independently gathered evidence&#10;documents, six per question on average, that provide high quality distant&#10;supervision for answering the questions.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;trivia_qa&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/trivia_qa" />
@@ -11,6 +10,7 @@
 </div>
 
 # `trivia_qa`
+
 
 *   **Description**:
 
@@ -46,7 +46,7 @@ Split          | Examples
 `'train'`      | 87,622
 `'validation'` | 11,313
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -79,9 +79,46 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                                    | Class          | Shape   | Dtype     | Description
+:----------------------------------------- | :------------- | :------ | :-------- | :----------
+                                           | FeaturesDict   |         |           |
+answer                                     | FeaturesDict   |         |           |
+answer/aliases                             | Sequence(Text) | (None,) | tf.string |
+answer/matched_wiki_entity_name            | Text           |         | tf.string |
+answer/normalized_aliases                  | Sequence(Text) | (None,) | tf.string |
+answer/normalized_matched_wiki_entity_name | Text           |         | tf.string |
+answer/normalized_value                    | Text           |         | tf.string |
+answer/type                                | Text           |         | tf.string |
+answer/value                               | Text           |         | tf.string |
+entity_pages                               | Sequence       |         |           |
+entity_pages/doc_source                    | Text           |         | tf.string |
+entity_pages/filename                      | Text           |         | tf.string |
+entity_pages/title                         | Text           |         | tf.string |
+entity_pages/wiki_context                  | Text           |         | tf.string |
+question                                   | Text           |         | tf.string |
+question_id                                | Text           |         | tf.string |
+question_source                            | Text           |         | tf.string |
+search_results                             | Sequence       |         |           |
+search_results/description                 | Text           |         | tf.string |
+search_results/filename                    | Text           |         | tf.string |
+search_results/rank                        | Tensor         |         | tf.int32  |
+search_results/search_context              | Text           |         | tf.string |
+search_results/title                       | Text           |         | tf.string |
+search_results/url                         | Text           |         | tf.string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -99,9 +136,6 @@ archivePrefix = {arXiv},
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## trivia_qa/rc (default config)
 

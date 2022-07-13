@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import tempfile
 
 from absl import flags
 
+import matplotlib
 import matplotlib.pyplot as plt
 
 import tensorflow as tf
@@ -33,14 +34,12 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'datasets', None,
     'Comma separated list of datasets to generates. None for all datasets.')
-flags.DEFINE_string(
-    'dst_dir', tfds.core.gcs_path('visualization/fig'),
-    'Destination dir to save the images.')
-flags.DEFINE_boolean(
-    'overwrite', False, 'If True, overwrite the existing visualizations.')
+flags.DEFINE_string('dst_dir', None, 'Destination dir to save the images.')
+flags.DEFINE_boolean('overwrite', False,
+                     'If True, overwrite the existing visualizations.')
 
 
-def _save_fig(dst_path: str, figure: plt.figure.Figure) -> None:
+def _save_fig(dst_path: str, figure: matplotlib.figure.Figure) -> None:
   """Save the generated figures for the dataset in dst_dir."""
   # `savefig` do not support GCS, so first save the image locally.
   with tempfile.TemporaryDirectory() as tmp_dir:
@@ -55,7 +54,7 @@ def main(_):
   datasets = FLAGS.datasets.split(',') if FLAGS.datasets else None
   generate_and_save_figure_fn = functools.partial(
       script_utils.generate_and_save_artifact,
-      dst_dir=FLAGS.dst_dir,
+      dst_dir=FLAGS.dst_dir or tfds.core.gcs_path('visualization/fig'),
       overwrite=FLAGS.overwrite,
       file_extension='.png',
       get_artifact_fn=tfds.show_examples,
@@ -68,5 +67,4 @@ def main(_):
 
 
 if __name__ == '__main__':
-  flags.mark_flags_as_required(['dst_dir'])
   script_utils.multi_process_run(main)

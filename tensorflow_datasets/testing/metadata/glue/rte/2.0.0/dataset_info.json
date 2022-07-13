@@ -1,0 +1,38 @@
+{
+  "citation": "@inproceedings{dagan2005pascal,\n  title={The PASCAL recognising textual entailment challenge},\n  author={Dagan, Ido and Glickman, Oren and Magnini, Bernardo},\n  booktitle={Machine Learning Challenges Workshop},\n  pages={177--190},\n  year={2005},\n  organization={Springer}\n}\n@inproceedings{bar2006second,\n  title={The second pascal recognising textual entailment challenge},\n  author={Bar-Haim, Roy and Dagan, Ido and Dolan, Bill and Ferro, Lisa and Giampiccolo, Danilo and Magnini, Bernardo and Szpektor, Idan},\n  booktitle={Proceedings of the second PASCAL challenges workshop on recognising textual entailment},\n  volume={6},\n  number={1},\n  pages={6--4},\n  year={2006},\n  organization={Venice}\n}\n@inproceedings{giampiccolo2007third,\n  title={The third pascal recognizing textual entailment challenge},\n  author={Giampiccolo, Danilo and Magnini, Bernardo and Dagan, Ido and Dolan, Bill},\n  booktitle={Proceedings of the ACL-PASCAL workshop on textual entailment and paraphrasing},\n  pages={1--9},\n  year={2007},\n  organization={Association for Computational Linguistics}\n}\n@inproceedings{bentivogli2009fifth,\n  title={The Fifth PASCAL Recognizing Textual Entailment Challenge.},\n  author={Bentivogli, Luisa and Clark, Peter and Dagan, Ido and Giampiccolo, Danilo},\n  booktitle={TAC},\n  year={2009}\n}\n@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
+  "configDescription": "The Recognizing Textual Entailment (RTE) datasets come from a series of annual textual\nentailment challenges. We combine the data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim\net al., 2006), RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli et al., 2009).4 Examples are\nconstructed based on news and Wikipedia text. We convert all datasets to a two-class split, where\nfor three-class datasets we collapse neutral and contradiction into not entailment, for consistency.",
+  "configName": "rte",
+  "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
+  "downloadSize": "697150",
+  "location": {
+    "urls": [
+      "https://aclweb.org/aclwiki/Recognizing_Textual_Entailment"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.glue",
+  "name": "glue",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "985108",
+      "shardLengths": [
+        "2490"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "105910",
+      "shardLengths": [
+        "277"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "1166869",
+      "shardLengths": [
+        "3000"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

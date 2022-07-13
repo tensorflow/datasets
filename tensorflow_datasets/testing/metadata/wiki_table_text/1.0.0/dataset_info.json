@@ -1,0 +1,39 @@
+{
+  "citation": "@inproceedings{bao2018table,\n  title={Table-to-Text: Describing Table Region with Natural Language},\n  author={Junwei Bao and Duyu Tang and Nan Duan and Zhao Yan and Yuanhua Lv and Ming Zhou and Tiejun Zhao},\n  booktitle={AAAI},\n  url={https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/download/16138/16782},\n  year={2018}\n}",
+  "description": "Wikipedia tables with at least 3 rows and 2 columns, 3 random rows for each\ntable were selected for further annotation. Each row was annotated by a\ndifferent person, so the dataset is composed by (one row table, text\ndescription) pairs. Annotations include at least 2 cells of the row, but do not\nrequire to include them all.\nThe dataset follows a standarized table format.",
+  "downloadSize": "3875413",
+  "location": {
+    "urls": [
+      "https://github.com/msra-nlc/Table2Text"
+    ]
+  },
+  "name": "wiki_table_text",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "731414",
+      "shardLengths": [
+        "2000"
+      ]
+    },
+    {
+      "name": "train",
+      "numBytes": "3658311",
+      "shardLengths": [
+        "10000"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "480107",
+      "shardLengths": [
+        "1318"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "input_text",
+    "output": "target_text"
+  },
+  "version": "1.0.0"
+}

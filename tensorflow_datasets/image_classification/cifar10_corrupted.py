@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ the corrupted Cifar10 test images uploaded by the original authors.
 import os
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -123,14 +123,11 @@ def _make_builder_configs():
     A list of 95 Cifar10CorruptedConfig objects.
   """
   config_list = []
-  v1 = tfds.core.Version(
-      '1.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
   for corruption in _CORRUPTIONS:
     for severity in range(1, 6):
       config_list.append(
           Cifar10CorruptedConfig(
               name=corruption + '_' + str(severity),
-              version=v1,
               description='Corruption method: ' + corruption +
               ', severity level: ' + str(severity),
               corruption_type=corruption,
@@ -141,6 +138,10 @@ def _make_builder_configs():
 
 class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
   """Corrupted Cifar10 dataset."""
+  VERSION = tfds.core.Version('1.0.0')
+  RELEASE_NOTES = {
+      '1.0.0': 'New split API (https://tensorflow.org/datasets/splits)',
+  }
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):

@@ -13,9 +13,9 @@
     }
   ]},
   {"title": "Paris_France", "paragraphs": [
-    {"context": "Paris is the largest city in France with over 2 million inhabitants. It is the capital of France.",
+    {"context": "  Paris is the largest city in France with over 2 million inhabitants. It is the capital of France.",
       "qas": [
-        {"answers": [{"answer_start": 1, "text": "Paris"}, {"answer_start": 7, "text": "France"}], "question": "What is the capital of France?", "id": "3"}
+        {"answers": [{"answer_start": 3, "text": "Paris"}, {"answer_start": 9, "text": "France"}], "question": "What is the capital of France?", "id": "3"}
       ]
     }]}
   ]

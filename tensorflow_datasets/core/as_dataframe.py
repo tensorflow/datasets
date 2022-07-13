@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,11 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""As dataframe util.
-"""
+"""As dataframe util."""
 
 import typing
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import dataclasses
 import numpy as np
@@ -27,15 +26,19 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core.utils.type_utils import TreeDict
-import tree
+from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import type_utils
 
 try:
   import pandas  # pylint: disable=g-import-not-at-top
-  import pandas.io.formats.style  # pylint: disable=g-import-not-at-top
   DataFrame = pandas.DataFrame
 except ImportError:
   DataFrame = object
+
+# Should be `pandas.io.formats.style.Styler`, but is a costly import
+Styler = Any
+
+TreeDict = type_utils.TreeDict
 
 
 @dataclasses.dataclass
@@ -76,28 +79,44 @@ class ColumnInfo:
     elif sequence_rank > 1:
       repr_fn = feature.repr_html_ragged
 
+    def repr_fn_with_debug(val):  # Wrap repr_fn to add debug info
+      try:
+        return repr_fn(val)
+      except Exception as e:  # pylint: disable=broad-except
+        err_msg = (f'HTML formatting of column {name} failed:\n'
+                   f' * feature: {feature}\n'
+                   f' * input: {val!r}\n')
+        py_utils.reraise(e, prefix=err_msg)
+
     return ColumnInfo(
         name='/'.join(path),
-        format_fn=repr_fn,
+        format_fn=repr_fn_with_debug,
     )
 
 
 def _get_feature(
-    path: Tuple[str],
+    path: Tuple[str, ...],
     feature: features.FeatureConnector,
 ) -> Tuple[features.FeatureConnector, int]:
   """Recursively extracts the feature and sequence rank (plain, ragged, ...)."""
   sequence_rank = 0
 
   # Collapse the nested sequences
-  # Subclasses like `Video` shouldn't be recursed into.
-  while type(feature) == features.Sequence:  # pylint: disable=unidiomatic-typecheck
+  while isinstance(feature, features.Sequence):
+    # Subclasses like `Video` shouldn't be recursed into.
+    # But sequence of dict like `TranslationVariableLanguages` should.
+    # Currently, there is no good way for a composed sub-feature to only
+    # display a single column instead of one per sub-feature.
+    # So `MyFeature({'x': tf.int32, 'y': tf.bool})` will have 2 columns `x`
+    # and `y`.
+    if type(feature) != features.Sequence and not path:  # pylint: disable=unidiomatic-typecheck
+      break
     sequence_rank += 1
     feature = feature.feature  # Extract inner feature  # pytype: disable=attribute-error
 
   if path:  # Has level deeper, recurse
     feature = typing.cast(features.FeaturesDict, feature)
-    feature, nested_sequence_rank = _get_feature(path[1:], feature[path[0]])
+    feature, nested_sequence_rank = _get_feature(path[1:], feature[path[0]])  # pytype: disable=wrong-arg-types
     sequence_rank += nested_sequence_rank
 
   return feature, sequence_rank
@@ -117,6 +136,7 @@ class StyledDataFrame(DataFrame):
   ```
 
   """
+
   # StyledDataFrame could be improved such as the style is forwarded when
   # selecting sub-data frames.
 
@@ -124,10 +144,10 @@ class StyledDataFrame(DataFrame):
     super().__init__(*args, **kwargs)
     # Use name-mangling for forward-compatibility in case pandas
     # adds a `_styler` attribute in the future.
-    self.__styler: Optional[pandas.io.formats.style.Styler] = None
+    self.__styler: Optional[Styler] = None
 
   @property
-  def current_style(self) -> 'pandas.io.formats.style.Styler':
+  def current_style(self) -> Styler:
     """Like `pandas.DataFrame.style`, but attach the style to the DataFrame."""
     if self.__styler is None:
       self.__styler = super().style
@@ -147,7 +167,7 @@ def _make_columns(
   """Extract the columns info of the `panda.DataFrame`."""
   return [
       ColumnInfo.from_spec(path, ds_info)
-      for path, _ in tree.flatten_with_path(specs)
+      for path, _ in py_utils.flatten_with_path(specs)
   ]
 
 
@@ -156,7 +176,7 @@ def _make_row_dict(
     columns: List[ColumnInfo],
 ) -> Dict[str, np.ndarray]:
   """Convert a single example into a `pandas.DataFrame` row."""
-  values = tree.flatten(ex)
+  values = tf.nest.flatten(ex)
   return {column.name: v for column, v in zip(columns, values)}
 
 
@@ -186,6 +206,10 @@ def as_dataframe(
   """
   # Raise a clean error message if panda isn't installed.
   lazy_imports_lib.lazy_imports.pandas  # pylint: disable=pointless-statement
+
+  # Pack `as_supervised=True` datasets
+  if ds_info:
+    ds = dataset_info.pack_as_supervised_ds(ds, ds_info)
 
   # Flatten the keys names, specs,... while keeping the feature key definition
   # order

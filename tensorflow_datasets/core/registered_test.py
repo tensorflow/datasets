@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,18 +17,20 @@
 
 import abc
 from unittest import mock
-import six
+import pytest
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
 
 
-@six.add_metaclass(registered.RegisteredDataset)
-class EmptyDatasetBuilder(object):
+class EmptyDatasetBuilder(registered.RegisteredDataset):
 
   def __init__(self, **kwargs):
+    self.data_dir = "/some/path/to/dir"
     self.kwargs = kwargs
     self.download_called = False
     self.as_dataset_called = False
@@ -42,17 +44,17 @@ class EmptyDatasetBuilder(object):
     self.as_dataset_kwargs = kwargs
     return self
 
+  VERSION = utils.Version("1.0.0")
+  BUILDER_CONFIGS = []
+  builder_configs = {}
+
 
 class UnregisteredBuilder(EmptyDatasetBuilder):
 
-  @abc.abstractproperty
+  @property
+  @abc.abstractmethod
   def an_abstract_property(self):
     pass
-
-
-class InDevelopmentDatasetBuilder(EmptyDatasetBuilder):
-
-  IN_DEVELOPMENT = True
 
 
 class RegisteredTest(testing.TestCase):
@@ -64,7 +66,8 @@ class RegisteredTest(testing.TestCase):
     self.assertIn(name, load.list_builders())
 
     nonexistent = "nonexistent_foobar_dataset"
-    with self.assertRaisesWithPredicateMatch(ValueError, "not found"):
+    with self.assertRaisesWithPredicateMatch(registered.DatasetNotFoundError,
+                                             "not found"):
       load.builder(nonexistent)
     # Prints registered datasets
     with self.assertRaisesWithPredicateMatch(ValueError, name):
@@ -88,18 +91,8 @@ class RegisteredTest(testing.TestCase):
     self.assertEqual(name, UnregisteredBuilder.name)
     self.assertNotIn(name, load.list_builders())
 
-    with self.assertRaisesWithPredicateMatch(ValueError, "an abstract class"):
-      load.builder(name)
-
-  def test_in_development(self):
-    name = "in_development_dataset_builder"
-    self.assertEqual(name, InDevelopmentDatasetBuilder.name)
-    self.assertNotIn(name, load.list_builders())
-
     with self.assertRaisesWithPredicateMatch(
-        ValueError,
-        ("Dataset %s is under active development and is not available yet."
-        ) % name):
+        TypeError, "Can't instantiate abstract class"):
       load.builder(name)
 
   def test_builder_with_kwargs(self):
@@ -115,8 +108,13 @@ class RegisteredTest(testing.TestCase):
   def test_builder_fullname(self):
     fullname = "empty_dataset_builder/conf1-attr:1.0.1/k1=1,k2=2"
     builder = load.builder(fullname, data_dir="bar")
-    expected = {"k1": 1, "k2": 2, "version": "1.0.1",
-                "config": "conf1-attr", "data_dir": "bar"}
+    expected = {
+        "k1": 1,
+        "k2": 2,
+        "version": "1.0.1",
+        "config": "conf1-attr",
+        "data_dir": "bar"
+    }
     self.assertEqual(expected, builder.kwargs)
 
   def test_builder_camel_case(self):
@@ -131,12 +129,14 @@ class RegisteredTest(testing.TestCase):
 
     # EmptyDatasetBuilder returns self from as_dataset
     builder = load.load(
-        name=name, split=splits.Split.TEST, data_dir=data_dir,
-        download=False, as_dataset_kwargs=as_dataset_kwargs)
+        name=name,
+        split=splits.Split.TEST,
+        data_dir=data_dir,
+        download=False,
+        as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertFalse(builder.download_called)
-    self.assertEqual(splits.Split.TEST,
-                     builder.as_dataset_kwargs.pop("split"))
+    self.assertEqual(splits.Split.TEST, builder.as_dataset_kwargs.pop("split"))
     self.assertIsNone(builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
     self.assertFalse(builder.as_dataset_kwargs.pop("decoders"))
@@ -146,20 +146,21 @@ class RegisteredTest(testing.TestCase):
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
     builder = load.load(
-        name, split=splits.Split.TRAIN, data_dir=data_dir,
-        download=True, as_dataset_kwargs=as_dataset_kwargs)
+        name,
+        split=splits.Split.TRAIN,
+        data_dir=data_dir,
+        download=True,
+        as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)
 
     # Tests for different batch_size
     # By default batch_size=None
-    builder = load.load(
-        name=name, split=splits.Split.TEST, data_dir=data_dir)
+    builder = load.load(name=name, split=splits.Split.TEST, data_dir=data_dir)
     self.assertIsNone(builder.as_dataset_kwargs.pop("batch_size"))
     # Setting batch_size=1
     builder = load.load(
-        name=name, split=splits.Split.TEST, data_dir=data_dir,
-        batch_size=1)
+        name=name, split=splits.Split.TEST, data_dir=data_dir, batch_size=1)
     self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
 
   def test_load_all_splits(self):
@@ -188,16 +189,14 @@ class RegisteredTest(testing.TestCase):
       name = "colab_builder"
       self.assertNotIn(name, load.list_builders())
 
-      @six.add_metaclass(registered.RegisteredDataset)
-      class ColabBuilder(object):
+      class ColabBuilder(EmptyDatasetBuilder):
         pass
 
       self.assertIn(name, load.list_builders())
       self.assertIsInstance(load.builder(name), ColabBuilder)
       old_colab_class = ColabBuilder
 
-      @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=function-redefined
-      class ColabBuilder(object):
+      class ColabBuilder(EmptyDatasetBuilder):  # pylint: disable=function-redefined
         pass
 
       self.assertIsInstance(load.builder(name), ColabBuilder)
@@ -206,13 +205,12 @@ class RegisteredTest(testing.TestCase):
   def test_duplicate_dataset(self):
     """Redefining the same builder twice should raises error."""
 
-    @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=unused-variable
-    class DuplicateBuilder(object):
+    class DuplicateBuilder(registered.RegisteredDataset):  # pylint: disable=unused-variable
       pass
 
     with self.assertRaisesWithPredicateMatch(ValueError, "already registered"):
-      @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=function-redefined
-      class DuplicateBuilder(object):
+
+      class DuplicateBuilder(registered.RegisteredDataset):  # pylint: disable=function-redefined
         pass
 
   def test_is_full_name(self):
@@ -227,15 +225,133 @@ class RegisteredTest(testing.TestCase):
     self.assertTrue(load.is_full_name("ds/1.0.2"))
     self.assertTrue(load.is_full_name("ds_with_number123/1.0.2"))
 
-  def test_skip_regitration(self):
-    """Test `skip_registration()`."""
 
-    with registered.skip_registration():
+def test_skip_regitration():
+  """Test `skip_registration()`."""
 
-      @six.add_metaclass(registered.RegisteredDataset)
-      class SkipRegisteredDataset(object):
-        pass
+  with registered.skip_registration():
 
-    name = "skip_registered_dataset"
-    self.assertEqual(name, SkipRegisteredDataset.name)
-    self.assertNotIn(name, load.list_builders())
+    class SkipRegisteredDataset(registered.RegisteredDataset):
+      pass
+
+  name = "skip_registered_dataset"
+  assert name == SkipRegisteredDataset.name
+  assert name not in load.list_builders()
+
+
+def test_skip_regitration_kwarg():
+  """Test `class Dataset(..., skip_registration=True)`."""
+
+  class SkipDataset(registered.RegisteredDataset, skip_registration=True):
+    pass
+
+  name = "skip_dataset"
+  assert name == SkipDataset.name
+  assert name not in load.list_builders()
+
+
+def test_custom_name():
+  """Tests that builder can have custom names."""
+
+  class SomeCustomNameBuilder(registered.RegisteredDataset):
+    name = "custom_name"
+
+  assert "custom_name" == SomeCustomNameBuilder.name
+  assert "custom_name" in load.list_builders()
+
+
+# Tests for RegisteredDatasetCollection.
+
+
+class EmptyDatasetCollectionBuilder(registered.RegisteredDatasetCollection):
+  pass
+
+
+class AbstractDatasetCollectionBuilder(registered.RegisteredDatasetCollection):
+
+  @property
+  @abc.abstractmethod
+  def an_abstract_property(self):
+    pass
+
+
+def test_registered_dataset_collection():
+  name = "empty_dataset_collection_builder"
+  assert name == EmptyDatasetCollectionBuilder.name
+
+
+def test_skip_dataset_collection_registration():
+  with registered.skip_registration():
+
+    class SkipCollectionBuilder(registered.RegisteredDatasetCollection):  # pylint: disable=unused-variable
+      pass
+
+  assert ("skip_collection_builder"
+          not in registered.list_imported_dataset_collections())
+
+
+def test_duplicate_dataset_collection_builders():
+  name = "duplicate_collection_builder"
+  error_msg = f"DatasetCollection with name {name} already registered"
+
+  class DuplicateCollectionBuilder(registered.RegisteredDatasetCollection):  # pylint: disable=unused-variable
+    pass
+
+  with pytest.raises(ValueError, match=error_msg):
+
+    class DuplicateCollectionBuilder(registered.RegisteredDatasetCollection):  # pylint: disable=function-redefined
+      pass
+
+
+def test_duplicate_dataset_collections_on_notebooks():
+
+  with mock.patch.object(py_utils, "is_notebook", lambda: True):
+    name = "colab_dataset_collection_builder"
+    assert name not in registered.list_imported_dataset_collections()
+
+    class ColabDatasetCollectionBuilder(EmptyDatasetCollectionBuilder):  # pylint: disable=unused-variable
+      pass
+
+    assert name in registered.list_imported_dataset_collections()
+    cls = registered.imported_dataset_collection_cls(name)
+    assert isinstance(cls, type(ColabDatasetCollectionBuilder))
+    old_colab_cls = ColabDatasetCollectionBuilder
+
+    class ColabDatasetCollectionBuilder(EmptyDatasetBuilder):  # pylint: disable=function-redefined
+      pass
+
+    assert name in registered.list_imported_dataset_collections()
+    assert isinstance(cls, type(ColabDatasetCollectionBuilder))
+    assert not isinstance(cls, old_colab_cls)
+
+
+def test_list_imported_dataset_collections():
+  assert ("empty_dataset_collection_builder"
+          in registered.list_imported_dataset_collections())
+  assert ("abstract_dataset_collection_builder"
+          not in registered.list_imported_dataset_collections())
+  assert ("nonexistent_dc_builder"
+          not in registered.list_imported_dataset_collections())
+
+
+def test_is_dataset_collection():
+  assert registered.is_dataset_collection("empty_dataset_collection_builder")
+  assert not registered.is_dataset_collection(
+      "abstract_dataset_collection_builder")
+  assert not registered.is_dataset_collection("nonexistent_dc_builder")
+
+
+def test_imported_dataset_collection_cls():
+  existent = "empty_dataset_collection_builder"
+  abstract = "abstract_dataset_collection_builder"
+  nonexistent = "nonexistent_dataset_collection_builder"
+
+  cls = registered.imported_dataset_collection_cls(existent)
+  assert isinstance(cls, type(EmptyDatasetCollectionBuilder))
+
+  error_msg = f"DatasetCollection {abstract} is an abstract class."
+  with pytest.raises(AssertionError, match=error_msg):
+    registered.imported_dataset_collection_cls(abstract)
+
+  with pytest.raises(registered.DatasetCollectionNotFoundError):
+    registered.imported_dataset_collection_cls(nonexistent)

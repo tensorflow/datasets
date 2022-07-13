@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="nsynth" />
   <meta itemprop="description" content="The NSynth Dataset is an audio dataset containing ~300k musical notes, each&#10;with a unique pitch, timbre, and envelope. Each note is annotated with three&#10;additional pieces of information based on a combination of human evaluation&#10;and heuristic algorithms: Source, Family, and Qualities.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;nsynth&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/nsynth" />
@@ -12,10 +11,6 @@
 
 # `nsynth`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -32,17 +27,11 @@ heuristic algorithms: Source, Family, and Qualities.
 
 *   **Versions**:
 
-    *   **`2.3.3`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        F0 computed with fix in CREPE wave normalization
-        (https://github.com/marl/crepe/issues/49).
+    *   `2.3.0`: New `loudness_db` feature in decibels (unormalized).
+    *   `2.3.1`: F0 computed with normalization fix in CREPE.
     *   `2.3.2`: Use Audio feature.
-    *   `2.3.1`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        F0 computed with normalization fix in CREPE.
-    *   `2.3.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        New `loudness_db` feature in decibels (unormalized).
+    *   **`2.3.3`** (default): F0 computed with fix in CREPE wave normalization
+        (https://github.com/marl/crepe/issues/49).
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -51,6 +40,14 @@ heuristic algorithms: Source, Family, and Qualities.
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -72,9 +69,6 @@ heuristic algorithms: Source, Family, and Qualities.
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## nsynth/full (default config)
 
@@ -94,7 +88,7 @@ Split     | Examples
 `'train'` | 289,205
 `'valid'` | 12,678
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -121,6 +115,31 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                 | Class        | Shape    | Dtype      | Description
+:---------------------- | :----------- | :------- | :--------- | :----------
+                        | FeaturesDict |          |            |
+audio                   | Audio        | (64000,) | tf.float32 |
+id                      | Tensor       |          | tf.string  |
+instrument              | FeaturesDict |          |            |
+instrument/family       | ClassLabel   |          | tf.int64   |
+instrument/label        | ClassLabel   |          | tf.int64   |
+instrument/source       | ClassLabel   |          | tf.int64   |
+pitch                   | ClassLabel   |          | tf.int64   |
+qualities               | FeaturesDict |          |            |
+qualities/bright        | Tensor       |          | tf.bool    |
+qualities/dark          | Tensor       |          | tf.bool    |
+qualities/distortion    | Tensor       |          | tf.bool    |
+qualities/fast_decay    | Tensor       |          | tf.bool    |
+qualities/long_release  | Tensor       |          | tf.bool    |
+qualities/multiphonic   | Tensor       |          | tf.bool    |
+qualities/nonlinear_env | Tensor       |          | tf.bool    |
+qualities/percussive    | Tensor       |          | tf.bool    |
+qualities/reverb        | Tensor       |          | tf.bool    |
+qualities/tempo-synced  | Tensor       |          | tf.bool    |
+velocity                | ClassLabel   |          | tf.int64   |
 
 ## nsynth/gansynth_subset
 
@@ -142,7 +161,7 @@ Split     | Examples
 `'train'` | 60,788
 `'valid'` | 17,469
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -169,6 +188,31 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                 | Class        | Shape    | Dtype      | Description
+:---------------------- | :----------- | :------- | :--------- | :----------
+                        | FeaturesDict |          |            |
+audio                   | Audio        | (64000,) | tf.float32 |
+id                      | Tensor       |          | tf.string  |
+instrument              | FeaturesDict |          |            |
+instrument/family       | ClassLabel   |          | tf.int64   |
+instrument/label        | ClassLabel   |          | tf.int64   |
+instrument/source       | ClassLabel   |          | tf.int64   |
+pitch                   | ClassLabel   |          | tf.int64   |
+qualities               | FeaturesDict |          |            |
+qualities/bright        | Tensor       |          | tf.bool    |
+qualities/dark          | Tensor       |          | tf.bool    |
+qualities/distortion    | Tensor       |          | tf.bool    |
+qualities/fast_decay    | Tensor       |          | tf.bool    |
+qualities/long_release  | Tensor       |          | tf.bool    |
+qualities/multiphonic   | Tensor       |          | tf.bool    |
+qualities/nonlinear_env | Tensor       |          | tf.bool    |
+qualities/percussive    | Tensor       |          | tf.bool    |
+qualities/reverb        | Tensor       |          | tf.bool    |
+qualities/tempo-synced  | Tensor       |          | tf.bool    |
+velocity                | ClassLabel   |          | tf.int64   |
 
 ## nsynth/gansynth_subset.f0_and_loudness
 
@@ -192,7 +236,7 @@ Split     | Examples
 `'train'` | 60,788
 `'valid'` | 17,469
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -227,3 +271,34 @@ FeaturesDict({
     'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                 | Class        | Shape    | Dtype      | Description
+:---------------------- | :----------- | :------- | :--------- | :----------
+                        | FeaturesDict |          |            |
+audio                   | Audio        | (64000,) | tf.float32 |
+f0                      | FeaturesDict |          |            |
+f0/confidence           | Tensor       | (1000,)  | tf.float32 |
+f0/hz                   | Tensor       | (1000,)  | tf.float32 |
+f0/midi                 | Tensor       | (1000,)  | tf.float32 |
+id                      | Tensor       |          | tf.string  |
+instrument              | FeaturesDict |          |            |
+instrument/family       | ClassLabel   |          | tf.int64   |
+instrument/label        | ClassLabel   |          | tf.int64   |
+instrument/source       | ClassLabel   |          | tf.int64   |
+loudness                | FeaturesDict |          |            |
+loudness/db             | Tensor       | (1000,)  | tf.float32 |
+pitch                   | ClassLabel   |          | tf.int64   |
+qualities               | FeaturesDict |          |            |
+qualities/bright        | Tensor       |          | tf.bool    |
+qualities/dark          | Tensor       |          | tf.bool    |
+qualities/distortion    | Tensor       |          | tf.bool    |
+qualities/fast_decay    | Tensor       |          | tf.bool    |
+qualities/long_release  | Tensor       |          | tf.bool    |
+qualities/multiphonic   | Tensor       |          | tf.bool    |
+qualities/nonlinear_env | Tensor       |          | tf.bool    |
+qualities/percussive    | Tensor       |          | tf.bool    |
+qualities/reverb        | Tensor       |          | tf.bool    |
+qualities/tempo-synced  | Tensor       |          | tf.bool    |
+velocity                | ClassLabel   |          | tf.int64   |

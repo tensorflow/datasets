@@ -1,20 +1,40 @@
-http://dl.yf.io/lsun/scenes/bedroom_train_lmdb.zip 45922737680 a15644c2e7153106867f0adb3491fc41224102d1f01b24494fb47d9f5d1f174e
-http://dl.yf.io/lsun/scenes/bedroom_val_lmdb.zip 4670661 5d022e781b241c25ec2e1f1f769afcdb8091d7fd58362667aec03137b8114b12
-http://dl.yf.io/lsun/scenes/bridge_train_lmdb.zip 16478644518 2701b2d421bbc4d8a5e9b0652ff7c3b57cd6495da8e0e85c39533275b5a925a3
-http://dl.yf.io/lsun/scenes/bridge_val_lmdb.zip 6176834 83216a2974d6068c2e1d18086006e7380ff58540216f955ce87fe049b460cb0d
-http://dl.yf.io/lsun/scenes/church_outdoor_train_lmdb.zip 2448463466 91128ae026840ac0c5982b4445ab5fc4e092d6847cca76793b2b1a0815c2e74a
-http://dl.yf.io/lsun/scenes/church_outdoor_val_lmdb.zip 5957308 34635b7547a3e51a15f942a4a4082dd6bc9cca381a953515cb2275c0eed50584
-http://dl.yf.io/lsun/scenes/classroom_train_lmdb.zip 3279497022 73a8a3e318819e1cc602f229673c3f51a68f3ece61e3764ce22df6abea4d0873
-http://dl.yf.io/lsun/scenes/classroom_val_lmdb.zip 5880261 5e0e9a375d94091dfe1fa3be87d4a92f41c03f1c0b8e376acc7e05651de512d7
-http://dl.yf.io/lsun/scenes/conference_room_train_lmdb.zip 4048461633 fa0a4cf72e7acfb103392eaf33640d5508a728e971f31877b01d64e1bde6068c
-http://dl.yf.io/lsun/scenes/conference_room_val_lmdb.zip 5316084 927c94df52e10b9b374748c2b83b28b5860e946b3186dfd587985e274834650f
-http://dl.yf.io/lsun/scenes/dining_room_train_lmdb.zip 11592966936 e4ee24c7c309360c3bf019123ce5bbf17434b2ba33abec2b0b07cfae715a52cb
-http://dl.yf.io/lsun/scenes/dining_room_val_lmdb.zip 5301030 bd604d4b91bb5a9611d4e0b85475efd20758390d1a4eb57b53973fcbb5aa8ab6
-http://dl.yf.io/lsun/scenes/kitchen_train_lmdb.zip 35791384987 b1993cf639aece5d207a27eb9ff872bcca9dff6472d8227a052c79d40ee753c4
-http://dl.yf.io/lsun/scenes/kitchen_val_lmdb.zip 4867891 329165f35ec61c4cf49f809246de300b8baad3ffcbda1ac30c27bdd32c84369a
-http://dl.yf.io/lsun/scenes/living_room_train_lmdb.zip 22792405188 bd2c52b812c80f73ce3062a221396d13a52b5cce2f813b4cdf61937651281d7a
-http://dl.yf.io/lsun/scenes/living_room_val_lmdb.zip 5167755 30a23d9a3db5414e9c97865f60ffb2ee973bfa658a23dbca7188ea514c97c9fc
-http://dl.yf.io/lsun/scenes/restaurant_train_lmdb.zip 13489345463 11a0a924b960cd0900e9b7477d684fb338bd99cc5f72db1caac592e4f497e09a
-http://dl.yf.io/lsun/scenes/restaurant_val_lmdb.zip 6232385 efaa7bcb898ad6cb73b07b89fec3a9c670f4622912eea22fab3986c2cf9a1c20
-http://dl.yf.io/lsun/scenes/tower_train_lmdb.zip 12010237081 440caec74c9641cb51fd235a5970c8e4931c3af875aeb044a8bcca956e106309
-http://dl.yf.io/lsun/scenes/tower_val_lmdb.zip 5223709 7f5257847bc01f4e40d4a1b3e24dd8fcd37063f12ca8cf31e726c2ee0b1ae104
+http://dl.yf.io/lsun/scenes/bedroom_train_lmdb.zip	45922737680	a15644c2e7153106867f0adb3491fc41224102d1f01b24494fb47d9f5d1f174e	bedroom_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/bedroom_val_lmdb.zip	4670661	5d022e781b241c25ec2e1f1f769afcdb8091d7fd58362667aec03137b8114b12	bedroom_val_lmdb.zip
+http://dl.yf.io/lsun/scenes/bridge_train_lmdb.zip	16478644518	2701b2d421bbc4d8a5e9b0652ff7c3b57cd6495da8e0e85c39533275b5a925a3	bridge_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/bridge_val_lmdb.zip	6176834	83216a2974d6068c2e1d18086006e7380ff58540216f955ce87fe049b460cb0d	bridge_val_lmdb.zip
+http://dl.yf.io/lsun/scenes/church_outdoor_train_lmdb.zip	2448463466	91128ae026840ac0c5982b4445ab5fc4e092d6847cca76793b2b1a0815c2e74a	church_outdoor_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/church_outdoor_val_lmdb.zip	5957308	34635b7547a3e51a15f942a4a4082dd6bc9cca381a953515cb2275c0eed50584	church_outdoor_val_lmdb.zip
+http://dl.yf.io/lsun/scenes/classroom_train_lmdb.zip	3279497022	73a8a3e318819e1cc602f229673c3f51a68f3ece61e3764ce22df6abea4d0873	classroom_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/classroom_val_lmdb.zip	5880261	5e0e9a375d94091dfe1fa3be87d4a92f41c03f1c0b8e376acc7e05651de512d7	classroom_val_lmdb.zip
+http://dl.yf.io/lsun/scenes/conference_room_train_lmdb.zip	4048461633	fa0a4cf72e7acfb103392eaf33640d5508a728e971f31877b01d64e1bde6068c	conference_room_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/conference_room_val_lmdb.zip	5316084	927c94df52e10b9b374748c2b83b28b5860e946b3186dfd587985e274834650f	conference_room_val_lmdb.zip
+http://dl.yf.io/lsun/scenes/dining_room_train_lmdb.zip	11592966936	e4ee24c7c309360c3bf019123ce5bbf17434b2ba33abec2b0b07cfae715a52cb	dining_room_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/dining_room_val_lmdb.zip	5301030	bd604d4b91bb5a9611d4e0b85475efd20758390d1a4eb57b53973fcbb5aa8ab6	dining_room_val_lmdb.zip
+http://dl.yf.io/lsun/scenes/kitchen_train_lmdb.zip	35791384987	b1993cf639aece5d207a27eb9ff872bcca9dff6472d8227a052c79d40ee753c4	kitchen_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/kitchen_val_lmdb.zip	4867891	329165f35ec61c4cf49f809246de300b8baad3ffcbda1ac30c27bdd32c84369a	kitchen_val_lmdb.zip
+http://dl.yf.io/lsun/scenes/living_room_train_lmdb.zip	22792405188	bd2c52b812c80f73ce3062a221396d13a52b5cce2f813b4cdf61937651281d7a	living_room_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/living_room_val_lmdb.zip	5167755	30a23d9a3db5414e9c97865f60ffb2ee973bfa658a23dbca7188ea514c97c9fc	living_room_val_lmdb.zip
+http://dl.yf.io/lsun/scenes/restaurant_train_lmdb.zip	13489345463	11a0a924b960cd0900e9b7477d684fb338bd99cc5f72db1caac592e4f497e09a	restaurant_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/restaurant_val_lmdb.zip	6232385	efaa7bcb898ad6cb73b07b89fec3a9c670f4622912eea22fab3986c2cf9a1c20	restaurant_val_lmdb.zip
+http://dl.yf.io/lsun/scenes/tower_train_lmdb.zip	12010237081	440caec74c9641cb51fd235a5970c8e4931c3af875aeb044a8bcca956e106309	tower_train_lmdb.zip
+http://dl.yf.io/lsun/scenes/tower_val_lmdb.zip	5223709	7f5257847bc01f4e40d4a1b3e24dd8fcd37063f12ca8cf31e726c2ee0b1ae104	tower_val_lmdb.zip
+http://dl.yf.io/lsun/objects/airplane.zip	36208964204	2ee81354d3e0dcad6951174b553a6de68723195ae8953eb263c54beb733cf62f	airplane.zip
+http://dl.yf.io/lsun/objects/bicycle.zip	138765790182	5e2054d3e7ffe53d39712441e4b9b88df2cb96189c33b458f2f7ecf3d2cafd48	bicycle.zip
+http://dl.yf.io/lsun/objects/bird.zip	69904880212	efe761e1f6aea5908e22d86c52c3604800448ac954242e8a486c57cb46d5a40f	bird.zip
+http://dl.yf.io/lsun/objects/boat.zip	91971666516	3fa0a500c17ac39b58914168d37011ff85e5cb5b5a609fb39b4fcdff87863f10	boat.zip
+http://dl.yf.io/lsun/objects/bottle.zip	68353217120	7458f010be9a3628e3a36cd51ce876ce6f7e137b7bbb3c89bf53875136118c32	bottle.zip
+http://dl.yf.io/lsun/objects/bus.zip	26125831118	75b97476fac8ff40ed7a9044845df61e750131912dd9d6575f82c98a07d7e5ec	bus.zip
+http://dl.yf.io/lsun/objects/car.zip	185788496846	e6bd5b23b461177b69a5abd1b301fc41dd1c8fd719f389daf2d10f8b1098ba43	car.zip
+http://dl.yf.io/lsun/objects/cat.zip	44765061710	cef7d1926d80f271ccfe2c55a610a1f9958eb2ac0bd188ddbe3cceb571eb9877	cat.zip
+http://dl.yf.io/lsun/objects/chair.zip	124332798554	7760ee4ee832359373a4564411839f929007dbbb8f0e275e52d95fe89ffce66f	chair.zip
+http://dl.yf.io/lsun/objects/cow.zip	16039812046	c6ed6cf1bcf96760b08ebaa61e216020ab96bec7f10a7bfc95afdacd59b2da25	cow.zip
+http://dl.yf.io/lsun/objects/dining_table.zip	51826252804	4c40a17884c7180a8f75a7891fb51c7c2954a02fb32e0ca158d1c2e0b985637e	dining_table.zip
+http://dl.yf.io/lsun/objects/dog.zip	155606131278	dab08a84ce3facb2ac7261f58c1eea7f070a6d118b82f9778b6a1cf56ed15db4	dog.zip
+http://dl.yf.io/lsun/objects/horse.zip	73864289242	2ec7893f3308da7f68cc2bdb1e9a75cde7abf842628feea1c49c30006e9c3a1b	horse.zip
+http://dl.yf.io/lsun/objects/motorbike.zip	44948708338	76cba2c366269bf86ce57ff496a229b0a237d1095e4bddeec02c9c6b9aa1b9a3	motorbike.zip
+http://dl.yf.io/lsun/objects/person.zip	511754125920	4f6c58c308dfde383d77a018eed37a14e328cd7115b40396a38e15db68b00520	person.zip
+http://dl.yf.io/lsun/objects/potted_plant.zip	45844458500	98f723f17f256d7ad07018d19b4cb8d78ab17cedd994b49e5de366fec799d4d8	potted_plant.zip
+http://dl.yf.io/lsun/objects/sheep.zip	19063172058	549234a3cb2608adddea405c0918c64b143ee5636a7d6426a90ccc870f0928d0	sheep.zip
+http://dl.yf.io/lsun/objects/sofa.zip	60484209620	945c1a1a6106b57a47bda7287f223fcb95aa3fbd32fa7294d2a3741e4c143d95	sofa.zip
+http://dl.yf.io/lsun/objects/train.zip	45875163738	da0d4a4c5dbccca62f7f813658c9987b1136fb64e4b733dddafd59b116ca6ec1	train.zip
+http://dl.yf.io/lsun/objects/tv-monitor.zip	49065810936	69601a18ceb2ad7f5806d5bfcbe0cece66c4e5a4eae8b18931468f7bee016eda	tv-monitor.zip

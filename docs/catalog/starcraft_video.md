@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="starcraft_video" />
   <meta itemprop="description" content="This data set contains videos generated from Starcraft.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;starcraft_video&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/starcraft_video" />
@@ -11,6 +10,7 @@
 </div>
 
 # `starcraft_video`
+
 
 *   **Description**:
 
@@ -45,6 +45,14 @@ Split          | Examples
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 ```
@@ -69,9 +77,6 @@ Split          | Examples
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## starcraft_video/brawl_64 (default config)
 
@@ -79,13 +84,20 @@ Split          | Examples
 
 *   **Download size**: `6.40 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape             | Dtype    | Description
+:--------- | :----------- | :---------------- | :------- | :----------
+           | FeaturesDict |                   |          |
+rgb_screen | Video(Image) | (None, 64, 64, 3) | tf.uint8 |
 
 ## starcraft_video/brawl_128
 
@@ -93,13 +105,20 @@ FeaturesDict({
 
 *   **Download size**: `20.76 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape               | Dtype    | Description
+:--------- | :----------- | :------------------ | :------- | :----------
+           | FeaturesDict |                     |          |
+rgb_screen | Video(Image) | (None, 128, 128, 3) | tf.uint8 |
 
 ## starcraft_video/collect_mineral_shards_64
 
@@ -107,13 +126,20 @@ FeaturesDict({
 
 *   **Download size**: `7.83 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape             | Dtype    | Description
+:--------- | :----------- | :---------------- | :------- | :----------
+           | FeaturesDict |                   |          |
+rgb_screen | Video(Image) | (None, 64, 64, 3) | tf.uint8 |
 
 ## starcraft_video/collect_mineral_shards_128
 
@@ -121,13 +147,20 @@ FeaturesDict({
 
 *   **Download size**: `24.83 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape               | Dtype    | Description
+:--------- | :----------- | :------------------ | :------- | :----------
+           | FeaturesDict |                     |          |
+rgb_screen | Video(Image) | (None, 128, 128, 3) | tf.uint8 |
 
 ## starcraft_video/move_unit_to_border_64
 
@@ -135,13 +168,20 @@ FeaturesDict({
 
 *   **Download size**: `1.77 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape             | Dtype    | Description
+:--------- | :----------- | :---------------- | :------- | :----------
+           | FeaturesDict |                   |          |
+rgb_screen | Video(Image) | (None, 64, 64, 3) | tf.uint8 |
 
 ## starcraft_video/move_unit_to_border_128
 
@@ -149,13 +189,20 @@ FeaturesDict({
 
 *   **Download size**: `5.75 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape               | Dtype    | Description
+:--------- | :----------- | :------------------ | :------- | :----------
+           | FeaturesDict |                     |          |
+rgb_screen | Video(Image) | (None, 128, 128, 3) | tf.uint8 |
 
 ## starcraft_video/road_trip_with_medivac_64
 
@@ -163,7 +210,7 @@ FeaturesDict({
 
 *   **Download size**: `2.48 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -171,16 +218,30 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature    | Class        | Shape             | Dtype    | Description
+:--------- | :----------- | :---------------- | :------- | :----------
+           | FeaturesDict |                   |          |
+rgb_screen | Video(Image) | (None, 64, 64, 3) | tf.uint8 |
+
 ## starcraft_video/road_trip_with_medivac_128
 
 *   **Config description**: RoadTripWithMedivac map with 128x128 resolution.
 
 *   **Download size**: `7.80 GiB`
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape               | Dtype    | Description
+:--------- | :----------- | :------------------ | :------- | :----------
+           | FeaturesDict |                     |          |
+rgb_screen | Video(Image) | (None, 128, 128, 3) | tf.uint8 |

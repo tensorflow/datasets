@@ -2,20 +2,20 @@
     "jobs":{
         "articlesmultistreamdump":{
             "files":{
-                "enwiki-20200301-pages-articles-multistream1.xml-p1p30303.bz2":{
-                    "url":"/enwiki/20200301/enwiki-multistream1.xml-p1p30303.bz2",
+                "enwiki-20201201-pages-articles-multistream1.xml-p1p41242.bz2":{
+                    "url":"/enwiki/20201201/enwiki-multistream1.xml-p1p41242.bz2",
                     "sha1":"646958f4f3bfb76976c99930e89aa35eea9a87e0",
                     "md5":"ff0a3921d89d43b2e38e553866380d7c",
                     "size":9496220
                 },
-                "enwiki-20200301-pages-articles-multistream10.xml-p2336423p3046512.bz2":{
-                    "url":"/enwiki/20200301/enwiki-multistream10.xml-p2336423p3046512.bz2",
+                "enwiki-20201201-pages-articles-multistream10.xml-p4045403p5399366.bz2":{
+                    "url":"/enwiki/20201201/enwiki-multistream10.xml-p4045403p5399366.bz2",
                     "sha1":"6f17cce79021a95a4299fc30a4d8ed358e45fcca",
                     "md5":"c9066ccd4edbe7b6154710e9060a22fd",
                     "size":2036520
                 },
-                "enwiki-20200301-pages-articles-multistream11.xml-p3046513p3926861.bz2":{
-                    "url":"/enwiki/20200301/enwiki-multistream11.xml-p3046513p3926861.bz2",
+                "enwiki-20201201-pages-articles-multistream11.xml-p5399367p6899366.bz2":{
+                    "url":"/enwiki/20201201/enwiki-multistream11.xml-p5399367p6899366.bz2",
                     "sha1":"f6bd099c61eff55df1440ea940625e5a03b25874",
                     "md5":"3e011e585e86bfda016a1d7430e08161",
                     "size":212986552

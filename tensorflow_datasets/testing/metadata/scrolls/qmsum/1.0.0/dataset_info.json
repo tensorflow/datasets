@@ -1,0 +1,42 @@
+{
+  "citation": "@inproceedings{zhong-etal-2021-qmsum,\n    title = \"{QMS}um: A New Benchmark for Query-based Multi-domain Meeting Summarization\",\n    author = \"Zhong, Ming  and\n      Yin, Da  and\n      Yu, Tao  and\n      Zaidi, Ahmad  and\n      Mutuma, Mutethia  and\n      Jha, Rahul  and\n      Awadallah, Ahmed Hassan  and\n      Celikyilmaz, Asli  and\n      Liu, Yang  and\n      Qiu, Xipeng  and\n      Radev, Dragomir\",\n    booktitle = \"Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies\",\n    month = jun,\n    year = \"2021\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2021.naacl-main.472\",\n    doi = \"10.18653/v1/2021.naacl-main.472\",\n    pages = \"5905--5921\",\n    abstract = \"Meetings are a key component of human collaboration. As increasing numbers of meetings are recorded and transcribed, meeting summaries have become essential to remind those who may or may not have attended the meetings about the key decisions made and the tasks to be completed. However, it is hard to create a single short summary that covers all the content of a long meeting involving multiple people and topics. In order to satisfy the needs of different types of users, we define a new query-based multi-domain meeting summarization task, where models have to select and summarize relevant spans of meetings in response to a query, and we introduce QMSum, a new benchmark for this task. QMSum consists of 1,808 query-summary pairs over 232 meetings in multiple domains. Besides, we investigate a locate-then-summarize method and evaluate a set of strong summarization baselines on the task. Experimental results and manual analysis reveal that QMSum presents significant challenges in long meeting summarization for future research. Dataset is available at \\url{https://github.com/Yale-LILY/QMSum}.\",\n}\n\n@misc{shaham2022scrolls,\n      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},\n      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},\n      year={2022},\n      eprint={2201.03533},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}\nNote that each SCROLLS dataset has its own citation. Please see the source to\nget the correct citation for each contained dataset.",
+  "configDescription": "qmsum subset",
+  "configName": "qmsum",
+  "description": "SCROLLS: Standardized CompaRison Over Long Language Sequences.\nA suite of natural language tfds.core.that require reasoning over long texts.\nhttps://scrolls-benchmark.com/\nqmsum subset",
+  "downloadSize": "27288503",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/Yale-LILY/QMSum"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.scrolls.scrolls",
+  "name": "scrolls",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "70228332",
+      "shardLengths": [
+        "1257"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "15968462",
+      "shardLengths": [
+        "272"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "16421185",
+      "shardLengths": [
+        "281"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

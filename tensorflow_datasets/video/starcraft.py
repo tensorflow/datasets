@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
 
 """SCV dataset from http://arxiv.org/abs/1812.01717 ."""
 
-from absl import logging
-import tensorflow.compat.v2 as tf
+import os
+import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -49,8 +49,10 @@ class StarcraftVideoConfig(tfds.core.BuilderConfig):
 
   def __init__(self, *, map_name, resolution, size_in_gb, **kwargs):
     super(StarcraftVideoConfig, self).__init__(
-        version=tfds.core.Version(
-            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+        version=tfds.core.Version("1.0.0"),
+        release_notes={
+            "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+        },
         **kwargs)
     self.map_name = map_name
     self.resolution = resolution
@@ -124,7 +126,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         "rgb_screen":
             tfds.features.Video(
                 shape=(None, self.builder_config.resolution,
-                       self.builder_config.resolution, 3)),
+                       self.builder_config.resolution, 3)),  # pytype: disable=wrong-arg-types  # gen-stub-imports
     })
     return tfds.core.DatasetInfo(
         builder=self,
@@ -195,9 +197,8 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
     return video_frames
 
   def _generate_examples(self, files):
-    logging.info("Reading data from %s.", ",".join(files))
     with tf.Graph().as_default():
-      ds = tf.data.TFRecordDataset(sorted(files))
+      ds = tf.data.TFRecordDataset(sorted(os.fspath(f) for f in files))
       ds = ds.map(
           self._parse_single_video,
           num_parallel_calls=tf.data.experimental.AUTOTUNE)

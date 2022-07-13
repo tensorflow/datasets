@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """ParaCrawl (Bitextor) parallel open-source machine translation benchmark."""
 
 import collections
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
@@ -75,15 +75,10 @@ def _target_languages():
 class ParaCrawlConfig(tfds.core.BuilderConfig):
   """BuilderConfig for ParaCrawl."""
 
-  def __init__(
-      self, *, text_encoder_config=None, target_language=None, **kwargs
-  ):
+  def __init__(self, *, target_language=None, **kwargs):
     """BuilderConfig for ParaCrawl.
 
     Args:
-      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
-        configuration for the `tfds.deprecated.text.TextEncoder` used for the
-        features feature.
       target_language: Target language that will be used to translate to from
         English which is always the source language. It has to contain 2-letter
         coded strings. For example: "se", "hu".
@@ -94,18 +89,16 @@ class ParaCrawlConfig(tfds.core.BuilderConfig):
       raise ValueError("Invalid target language: %s " % target_language)
 
     # Initialize the base class.
-    encoder_name = (
-        text_encoder_config.name if text_encoder_config else "plain_text")
-    name = "en%s_%s" % (target_language, encoder_name)
-
-    description = ("Translation dataset from English to %s, uses encoder %s."
-                  ) % (target_language, encoder_name)
+    name = f"en{target_language}"
+    description = ("Translation dataset from English to %s.") % (
+        target_language)
     super(ParaCrawlConfig, self).__init__(
-        name=name, description=description, **kwargs)
+        name=name,
+        description=description,
+        version=tfds.core.Version("1.2.0"),
+        **kwargs)
 
     # Store the attributes.
-    self.text_encoder_config = (
-        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
     self.target_language = target_language
     self.data_url = _BASE_DATA_URL_FORMAT_STR.format(
         target_lang=target_language)
@@ -121,9 +114,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
       # The version below does not refer to the version of the released
       # database. It only indicates the version of the TFDS integration.
       ParaCrawlConfig(  # pylint: disable=g-complex-comprehension
-          target_language=target_language,
-          version=tfds.core.Version("1.0.0"),
-      )
+          target_language=target_language,)
       for target_language in _target_languages()
   ]
 
@@ -132,16 +123,10 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.Translation(
-            languages=("en", target_language),
-            encoder_config=self.builder_config.text_encoder_config),
+        features=tfds.features.Translation(languages=("en", target_language),),
         supervised_keys=("en", target_language),
         homepage=_BENCHMARK_URL,
         citation=_CITATION)
-
-  def _vocab_text_gen(self, files, language):
-    for _, ex in self._generate_examples(**files):
-      yield ex[language]
 
   def _split_generators(self, dl_manager):
     # Download the data file.

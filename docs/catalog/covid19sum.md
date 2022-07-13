@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="covid19sum" />
   <meta itemprop="description" content="CORD-19 is a resource of over 45,000 scholarly articles, including over 33,000&#10;with full text, about COVID-19, SARS-CoV-2, and related coronaviruses.&#10;&#10;To help organizing information in scientific literatures of COVID-19 through&#10;abstractive summarization. This dataset parse those articles to pairs of&#10;document and summaries of full_text-abstract or introduction-abstract.&#10;&#10;Features includes strings of: abstract, full_text, sha (hash of pdf),&#10;source_x (source of publication), title, doi (digital object identifier),&#10;license, authors, publish_time, journal, url.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;covid19sum&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/covid19sum" />
@@ -11,6 +10,7 @@
 </div>
 
 # `covid19sum`
+
 
 Warning: Manual download required. See instructions below.
 
@@ -43,7 +43,7 @@ authors, publish_time, journal, url.
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
-    (defaults to `~/tensorflow_datasets/download/manual/`):<br/>
+    (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     This dataset need to be manually downloaded through kaggle api:
     `kaggle datasets download allen-institute-for-ai/CORD-19-research-challenge`
     Place the downloaded zip file in the manual folder.
@@ -57,7 +57,7 @@ authors, publish_time, journal, url.
 Split | Examples
 :---- | -------:
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
@@ -78,9 +78,36 @@ FeaturesDict({
 })
 ```
 
+*   **Feature documentation**:
+
+Feature           | Class        | Shape | Dtype     | Description
+:---------------- | :----------- | :---- | :-------- | :----------
+                  | FeaturesDict |       |           |
+abstract          | Tensor       |       | tf.string |
+authors           | Tensor       |       | tf.string |
+body_text         | Sequence     |       |           |
+body_text/section | Tensor       |       | tf.string |
+body_text/text    | Tensor       |       | tf.string |
+doi               | Tensor       |       | tf.string |
+journal           | Tensor       |       | tf.string |
+license           | Tensor       |       | tf.string |
+publish_time      | Tensor       |       | tf.string |
+sha               | Tensor       |       | tf.string |
+source_x          | Tensor       |       | tf.string |
+title             | Tensor       |       | tf.string |
+url               | Tensor       |       | tf.string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('body_text', 'abstract')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -94,6 +121,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

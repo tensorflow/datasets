@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Lint as: python3
 import collections
 
 from tensorflow_datasets.core import dataset_utils
@@ -43,12 +42,18 @@ class ImagenetRTest(tfds.testing.DatasetBuilderTestCase):
     label_frequncies = collections.Counter()
     label_feature = builder.info.features['label']
     dataset = builder.as_dataset()
+    filenames = []
     for features in dataset_utils.as_numpy(dataset['test']):
       label_frequncies.update([label_feature.int2str(features['label'])])
-    self.assertEqual(dict(label_frequncies),
-                     {'n01443537': 2,
-                      'n01484850': 3,
-                      'n12267677': 5})
+      filenames.append(features['file_name'])
+    self.assertEqual(
+        dict(label_frequncies), {
+            'n01443537': 2,
+            'n01484850': 3,
+            'n12267677': 5
+        })
+    self.assertIn(b'n01443537/1.jpeg', filenames)
+
 
 if __name__ == '__main__':
   tfds.testing.test_main()

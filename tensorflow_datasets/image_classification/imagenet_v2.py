@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,8 @@
 
 """The ImageNet-v2 image classification dataset."""
 import os
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
 
 _CITATION = r"""
 @inproceedings{recht2019imagenet,
@@ -46,17 +45,17 @@ represented as a dictionary with the following keys:
 """
 
 # Note: Bump the version if the links change.
-_VERSION = tfds.core.Version('0.1.0')
+
 _ROOT_URL = 'https://s3-us-west-2.amazonaws.com/imagenetv2public'
 _IMAGENET_V2_URLS = {
     'matched-frequency': _ROOT_URL + '/imagenetv2-matched-frequency.tar.gz',
     'threshold-0.7': _ROOT_URL + '/imagenetv2-threshold0.7.tar.gz',
-    'topimages': _ROOT_URL + '/imagenetv2-topimages.tar.gz',
+    'topimages': _ROOT_URL + '/imagenetv2-top-images.tar.gz',
 }
 _TAR_TOPDIR = {
-    'matched-frequency': 'imagenetv2-matched-frequency',
-    'threshold-0.7': 'imagenetv2-threshold0.7',
-    'topimages': 'imagenetv2-topimages',
+    'matched-frequency': 'imagenetv2-matched-frequency-format-val',
+    'threshold-0.7': 'imagenetv2-threshold0.7-format-val',
+    'topimages': 'imagenetv2-top-images-format-val',
 }
 
 _IMAGENET_LABELS_FILENAME = r'image_classification/imagenet2012_labels.txt'
@@ -84,19 +83,31 @@ class ImagenetV2Config(tfds.core.BuilderConfig):
 
 def _create_builder_configs():
   for variant in _IMAGENET_V2_URLS:
-    yield ImagenetV2Config(variant=variant,
-                           name=variant,
-                           version=_VERSION,
-                           description=_DESCRIPTION)
+    yield ImagenetV2Config(
+        variant=variant,
+        name=variant,
+    )
 
 
 class ImagenetV2(tfds.core.GeneratorBasedBuilder):
   """An ImageNet test set recollected by following the original protocol."""
 
+  VERSION = tfds.core.Version('3.0.0')
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('2.0.0'),
+  ]
+  RELEASE_NOTES = {
+      '1.0.0':
+          'Initial version.',
+      '2.0.0':
+          'Files updated.',
+      '3.0.0': ('Fix file_name, from absolute path to path relative to '
+                'data directory, ie: "class_id/filename.jpg".'),
+  }
   BUILDER_CONFIGS = list(_create_builder_configs())
 
   def _info(self):
-    names_file = tfds.core.get_tfds_path(_IMAGENET_LABELS_FILENAME)
+    names_file = tfds.core.tfds_path(_IMAGENET_LABELS_FILENAME)
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.
@@ -140,6 +151,6 @@ class ImagenetV2(tfds.core.GeneratorBasedBuilder):
         features = {
             'image': image_path,
             'label': int(class_id),
-            'file_name': image_path,
+            'file_name': os.path.join(class_id, image_filename),
         }
-        yield image_path, features
+        yield f'{class_id}_{image_filename}', features

@@ -1,0 +1,66 @@
+{
+  "citation": "@inproceedings{parikh2020totto,\n  title=ToTTo: A Controlled Table-To-Text Generation Dataset,\n  author={Parikh, Ankur and Wang, Xuezhi and Gehrmann, Sebastian and Faruqui, Manaal and Dhingra, Bhuwan and Yang, Diyi and Das, Dipanjan},\n  booktitle={Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},\n  pages={1173--1186},\n  year={2020}\n}\n@article{gehrmann2021gem,\n  author    = {Sebastian Gehrmann and\n               Tosin P. Adewumi and\n               Karmanya Aggarwal and\n               Pawan Sasanka Ammanamanchi and\n               Aremu Anuoluwapo and\n               Antoine Bosselut and\n               Khyathi Raghavi Chandu and\n               Miruna{-}Adriana Clinciu and\n               Dipanjan Das and\n               Kaustubh D. Dhole and\n               Wanyu Du and\n               Esin Durmus and\n               Ondrej Dusek and\n               Chris Emezue and\n               Varun Gangal and\n               Cristina Garbacea and\n               Tatsunori Hashimoto and\n               Yufang Hou and\n               Yacine Jernite and\n               Harsh Jhamtani and\n               Yangfeng Ji and\n               Shailza Jolly and\n               Dhruv Kumar and\n               Faisal Ladhak and\n               Aman Madaan and\n               Mounica Maddela and\n               Khyati Mahajan and\n               Saad Mahamood and\n               Bodhisattwa Prasad Majumder and\n               Pedro Henrique Martins and\n               Angelina McMillan{-}Major and\n               Simon Mille and\n               Emiel van Miltenburg and\n               Moin Nadeem and\n               Shashi Narayan and\n               Vitaly Nikolaev and\n               Rubungo Andre Niyongabo and\n               Salomey Osei and\n               Ankur P. Parikh and\n               Laura Perez{-}Beltrachini and\n               Niranjan Ramesh Rao and\n               Vikas Raunak and\n               Juan Diego Rodriguez and\n               Sashank Santhanam and\n               Jo{\\~{a}}o Sedoc and\n               Thibault Sellam and\n               Samira Shaikh and\n               Anastasia Shimorina and\n               Marco Antonio Sobrevilla Cabezudo and\n               Hendrik Strobelt and\n               Nishant Subramani and\n               Wei Xu and\n               Diyi Yang and\n               Akhila Yerukola and\n               Jiawei Zhou},\n  title     = {The {GEM} Benchmark: Natural Language Generation, its Evaluation and\n               Metrics},\n  journal   = {CoRR},\n  volume    = {abs/2102.01672},\n  year      = {2021},\n  url       = {https://arxiv.org/abs/2102.01672},\n  archivePrefix = {arXiv},\n  eprint    = {2102.01672}\n}\n\nNote that each GEM dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.\"",
+  "configDescription": "ToTTo is a Table-to-Text NLG task. The task is as follows:\nGiven a Wikipedia table with row names, column names and table\ncells, with a subset of cells highlighted, generate a natural\nlanguage description for the highlighted part of the table.",
+  "configName": "totto",
+  "description": "**GEM** is a benchmark environment for Natural Language Generation with a focus\non its Evaluation, both through human annotations and automated Metrics.\n\nGEM aims to: (1) measure NLG progress across 13 datasets spanning many NLG\ntasks and languages. (2) provide an in-depth analysis of data and models\npresented via data statements and challenge sets. (3) develop standards for\nevaluation of generated text using both automated and human metrics.\n\nMore information can be found at\n[https://gem-benchmark.com](https://gem-benchmark.com).",
+  "downloadSize": "189534609",
+  "location": {
+    "urls": [
+      "https://gem-benchmark.com"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.gem.gem",
+  "name": "gem",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "589557693",
+      "shardLengths": [
+        "15144",
+        "15144",
+        "15144",
+        "15144",
+        "15145",
+        "15144",
+        "15144",
+        "15144"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "45271752",
+      "shardLengths": [
+        "7700"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "35022093",
+      "shardLengths": [
+        "7700"
+      ]
+    },
+    {
+      "name": "challenge_train_sample",
+      "numBytes": "2083262",
+      "shardLengths": [
+        "500"
+      ]
+    },
+    {
+      "name": "challenge_validation_sample",
+      "numBytes": "3019174",
+      "shardLengths": [
+        "500"
+      ]
+    },
+    {
+      "name": "challenge_test_scramble",
+      "numBytes": "2275990",
+      "shardLengths": [
+        "500"
+      ]
+    }
+  ],
+  "version": "1.1.0"
+}

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import os
 import re
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -65,12 +65,21 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             # Images are of varying size
-            "image": tfds.features.Image(),
-            "image/filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(num_classes=200),
-            "label_name": tfds.features.Text(),
-            "bbox": tfds.features.BBoxFeature(),
-            "segmentation_mask": tfds.features.Image(shape=(None, None, 1)),
+            "image":
+                tfds.features.Image(),
+            "image/filename":
+                tfds.features.Text(),
+            "label":
+                tfds.features.ClassLabel(num_classes=200),
+            "label_name":
+                tfds.features.Text(),
+            "bbox":
+                tfds.features.BBoxFeature(),
+            "segmentation_mask":
+                tfds.features.Image(
+                    shape=(None, None, 1),
+                    use_colormap=True,
+                ),
         }),
         supervised_keys=("image", "label"),
         homepage=_URL,
@@ -271,7 +280,7 @@ class CaltechBirds2011(CaltechBirds2010):
         if fname.endswith(".png"):
           with tf.io.gfile.GFile(os.path.join(root, fname), "rb") as png_f:
             mask = tfds.core.lazy_imports.cv2.imdecode(
-                np.fromstring(png_f.read(), dtype=np.uint8), flags=0)
+                np.frombuffer(png_f.read(), dtype=np.uint8), flags=0)
           attributes[fname.split(".")[0]].append(mask)
 
     return [

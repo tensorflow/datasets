@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Replace all images in the fake directory by more compressed version.
+r"""Replace all images in the fake directory with their compressed versions.
 
-This allow to reduce size of the images in the `fake_data/` directory.
+This allows to reduce size of the images in the `fake_data/` directory.
 
 Instructions:
 
@@ -36,11 +36,10 @@ import absl.flags
 import numpy as np
 import PIL.Image
 
-
 FLAGS = absl.flags.FLAGS
 
-absl.flags.DEFINE_string(
-    'fake_dir', None, 'path to the directory which contains files')
+absl.flags.DEFINE_string('fake_dir', None,
+                         'path to the directory which contains files')
 
 # Some dataset generation rely on the image content, so we cannot compress
 # those.
@@ -83,7 +82,7 @@ def rewrite_zip(root_dir, zip_filepath):
     with zipfile.ZipFile(zip_filepath, 'r') as zip_file:
       zip_file.extractall(path=temp_dir)
 
-    rewrite_dir(temp_dir)  # Recursivelly compress the archive content
+    rewrite_dir(temp_dir)  # Recursively compress the archive content
 
     # Compress the .zip file again
     with zipfile.ZipFile(
@@ -95,19 +94,18 @@ def rewrite_zip(root_dir, zip_filepath):
       for file_dir, _, files in os.walk(temp_dir):
         for file in files:
           file_path = os.path.join(file_dir, file)
-          zip_file.write(file_path,
-                         arcname=os.path.relpath(file_path, temp_dir))
+          zip_file.write(
+              file_path, arcname=os.path.relpath(file_path, temp_dir))
 
 
 def rewrite_tar(root_dir, tar_filepath):
   """Rewrite the older .tar file into new better compressed one.
 
-  Compression formats supports by this method (.tar.gz, .tgz, .tar.bz2)
+  Compression formats supported by this method (.tar.gz, .tgz, .tar.bz2)
 
   Args:
     root_dir: directory path which contain tar compressed file
     tar_filepath: path from directory to file
-
   """
   # Create a tempfile to store the images contain noise
   with tempfile.TemporaryDirectory(dir=root_dir, suffix='fake') as temp_dir:
@@ -126,7 +124,7 @@ def rewrite_tar(root_dir, tar_filepath):
     with tarfile.open(tar_filepath, 'r' + extension) as tar:
       tar.extractall(path=temp_dir)
 
-    rewrite_dir(temp_dir)  # Recursivelly compress the archive content
+    rewrite_dir(temp_dir)  # Recursively compress the archive content
 
     # Convert back into tar file
     with tarfile.open(tar_filepath, 'w' + extension) as tar:

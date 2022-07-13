@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2022 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 
 import json
 import os
-from typing import Any, Dict, Iterator, List, Text, Tuple
+from typing import Any, Dict, Iterator, List, Optional, Text, Tuple
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -50,22 +50,20 @@ http://rottentomatoes.com/. It has fields of "_movie_name", "_movie_id",
 
 """
 
-_URL = "http://www.ccs.neu.edu/home/luwang/datasets/opinion_abstracts.zip"
+_URL = "https://web.eecs.umich.edu/~wangluxy/datasets/opinion_abstracts.zip"
 
 
 class OpinionAbstractsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for OpinionAbstracts."""
 
-  def __init__(
-      self,
-      *,
-      filename: Text = None,
-      name_key: Text = None,
-      id_key: Text = None,
-      opinions_key: Text = None,
-      summary_key: Text = None,
-      **kwargs
-  ):
+  def __init__(self,
+               *,
+               filename: Optional[Text] = None,
+               name_key: Optional[Text] = None,
+               id_key: Optional[Text] = None,
+               opinions_key: Optional[Text] = None,
+               summary_key: Optional[Text] = None,
+               **kwargs):
     """BuilderConfig for OpinionAbstracts."""
     super(OpinionAbstractsConfig, self).__init__(
         version=tfds.core.Version("1.0.0"), **kwargs)
@@ -140,7 +138,7 @@ class OpinionAbstracts(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self,
-                         path: Text = None
+                         path: Optional[Text] = None
                         ) -> Iterator[Tuple[Text, Dict[Text, Any]]]:
     """Yields examples."""
     with tf.io.gfile.GFile(path, "rb") as f:
