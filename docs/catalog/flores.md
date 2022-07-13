@@ -27,18 +27,11 @@ Sinhala-English.
 
     *   **`1.2.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `1.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -61,6 +54,15 @@ Split | Examples
 ## flores/neen (default config)
 
 *   **Config description**: Translation dataset from ne to en.
+
+*   **Dataset size**: `1.89 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,835
+`'validation'` | 2,559
 
 *   **Feature structure**:
 
@@ -123,6 +125,15 @@ dataButton.addEventListener('click', async () => {
 ## flores/sien
 
 *   **Config description**: Translation dataset from si to en.
+
+*   **Dataset size**: `2.05 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,766
+`'validation'` | 2,898
 
 *   **Feature structure**:
 

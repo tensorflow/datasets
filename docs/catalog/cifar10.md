@@ -33,18 +33,20 @@ The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with
 
     *   **`3.0.2`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `162.17 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `132.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
+`'train'` | 50,000
 
 *   **Feature structure**:
 

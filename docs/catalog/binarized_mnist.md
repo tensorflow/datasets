@@ -34,7 +34,7 @@ images, so labels are not provided.
 
     *   **`1.0.0`** (default): Initial Release
 
-*   **Download size**: `104.68 MiB`
+*   **Download size**: `Unknown size`
 
 *   **Dataset size**: `Unknown size`
 
@@ -44,11 +44,8 @@ images, so labels are not provided.
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 10,000
-`'train'`      | 50,000
-`'validation'` | 10,000
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

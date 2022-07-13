@@ -40,19 +40,6 @@ to run XQuAD in the "translate-train" or "translate-test" settings.
         answer spans are misaligned due to context white-space removal. This
         change impacts roughly 14% of test examples.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Feature structure**:
 
 ```python
@@ -110,6 +97,23 @@ title                | Text         |       | tf.string |
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
 
+*   **Download size**: `420.97 MiB`
+
+*   **Dataset size**: `134.83 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,541
+`'translate-test'`  | 1,151
+`'translate-train'` | 86,787
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -152,6 +156,23 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: XQuAD 'de' test split, with machine-translated
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
+
+*   **Download size**: `127.04 MiB`
+
+*   **Dataset size**: `98.80 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,371
+`'translate-test'`  | 1,168
+`'translate-train'` | 82,603
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -196,6 +217,24 @@ dataButton.addEventListener('click', async () => {
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
 
+*   **Download size**: `499.40 MiB`
+
+*   **Dataset size**: `157.90 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, translate-dev, translate-test), Only when `shuffle_files=False`
+    (translate-train)
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,100
+`'translate-test'`  | 1,182
+`'translate-train'` | 79,946
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -238,6 +277,23 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: XQuAD 'es' test split, with machine-translated
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
+
+*   **Download size**: `138.41 MiB`
+
+*   **Dataset size**: `104.96 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,566
+`'translate-test'`  | 1,188
+`'translate-train'` | 87,488
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -282,6 +338,24 @@ dataButton.addEventListener('click', async () => {
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
 
+*   **Download size**: `472.23 MiB`
+
+*   **Dataset size**: `207.85 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, translate-dev, translate-test), Only when `shuffle_files=False`
+    (translate-train)
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,536
+`'translate-test'`  | 1,184
+`'translate-train'` | 85,804
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -324,6 +398,24 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: XQuAD 'ru' test split, with machine-translated
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
+
+*   **Download size**: `513.80 MiB`
+
+*   **Dataset size**: `159.38 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, translate-dev, translate-test), Only when `shuffle_files=False`
+    (translate-train)
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,469
+`'translate-test'`  | 1,190
+`'translate-train'` | 84,869
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -368,6 +460,24 @@ dataButton.addEventListener('click', async () => {
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
 
+*   **Download size**: `461.54 MiB`
+
+*   **Dataset size**: `199.57 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, translate-dev, translate-test), Only when `shuffle_files=False`
+    (translate-train)
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,516
+`'translate-test'`  | 1,157
+`'translate-train'` | 85,846
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -410,6 +520,23 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: XQuAD 'tr' test split, with machine-translated
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
+
+*   **Download size**: `151.08 MiB`
+
+*   **Dataset size**: `97.56 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,535
+`'translate-test'`  | 1,112
+`'translate-train'` | 86,511
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -454,6 +581,23 @@ dataButton.addEventListener('click', async () => {
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
 
+*   **Download size**: `218.09 MiB`
+
+*   **Dataset size**: `120.03 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,555
+`'translate-test'`  | 1,178
+`'translate-train'` | 87,187
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -497,6 +641,23 @@ dataButton.addEventListener('click', async () => {
     translate-train/translate-dev/translate-test splits from XTREME (Hu et al.,
     2020).
 
+*   **Download size**: `174.57 MiB`
+
+*   **Dataset size**: `80.79 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split               | Examples
+:------------------ | -------:
+`'test'`            | 1,190
+`'translate-dev'`   | 10,475
+`'translate-test'`  | 1,186
+`'translate-train'` | 85,700
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -537,6 +698,20 @@ dataButton.addEventListener('click', async () => {
 ## xquad/en
 
 *   **Config description**: XQuAD 'en' test split.
+
+*   **Download size**: `595.10 KiB`
+
+*   **Dataset size**: `1.19 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split    | Examples
+:------- | -------:
+`'test'` | 1,190
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
