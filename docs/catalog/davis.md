@@ -27,17 +27,6 @@ The DAVIS 2017 video object segmentation dataset.
     *   `2.0.0`: Change instance ids to be 0, 1, 2, ...
     *   **`2.1.0`** (default): Fix instance ids order.
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train'`      | 60
-`'validation'` | 30
-
 *   **Feature structure**:
 
 ```python
@@ -105,6 +94,17 @@ video/segmentations | Image        | (None, None, 1) | tf.uint8  |
 
 *   **Dataset size**: `792.26 MiB`
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 60
+`'validation'` | 30
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -146,9 +146,18 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: The full resolution version of the dataset.
 
-*   **Download size**: `2.75 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `2.78 GiB`
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

@@ -32,20 +32,18 @@ similar to existing natural language inference tasks.
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `8.36 MiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `8.51 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'train'`      | 9,427
-`'validation'` | 3,270
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

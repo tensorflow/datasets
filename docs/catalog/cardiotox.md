@@ -64,20 +64,16 @@ https://arxiv.org/abs/2111.12951
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `1.66 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 839
-`'test2'`      | 177
-`'train'`      | 6,523
-`'validation'` | 1,631
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
