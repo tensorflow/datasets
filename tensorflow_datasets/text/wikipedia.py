@@ -19,6 +19,8 @@ import bz2
 import codecs
 import json
 import re
+import textwrap
+from typing import Sequence
 import xml.etree.cElementTree as etree
 
 from absl import logging
@@ -96,45 +98,82 @@ _INFO_FILE = "dumpstatus.json"
 class WikipediaConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Wikipedia."""
 
-  def __init__(self, *, language=None, date=None, **kwargs):
+  def __init__(self,
+               *,
+               language: str,
+               date: str,
+               use_extended_name: bool = True,
+               **kwargs):
     """BuilderConfig for Wikipedia.
 
     Args:
-      language: string, the language code for the Wikipedia dump to use.
-      date: string, date of the Wikipedia dump in YYYYMMDD format. A list of
-        available dates can be found at https://dumps.wikimedia.org/enwiki/.
+      language: the language code for the Wikipedia dump to use.
+      date: date of the Wikipedia dump in YYYYMMDD format. A list of available
+        dates can be found at https://dumps.wikimedia.org/enwiki/.
+      use_extended_name: whether the config name should consist of both language
+        and date.
       **kwargs: keyword arguments forwarded to super.
     """
+    name = f"{date}.{language}" if use_extended_name else language
     super(WikipediaConfig, self).__init__(
-        name=f"{date}.{language}",
+        name=name,
         description=f"Wikipedia dataset for {language}, parsed from {date} dump.",
         **kwargs)
     self.date = date
     self.language = language
 
 
+def _create_builder_configs(
+    version: tfds.core.Version) -> Sequence[WikipediaConfig]:
+  """Returns the builder configs for the given version."""
+  if version.match("1.0.*"):
+    return [
+        # Old versions files do not exists anymore but config are kept as
+        # previously generated datasets can still be read.
+        WikipediaConfig(language=lang, date="20201201")
+        for lang in WIKIPEDIA_LANGUAGES
+    ] + [
+        # Old versions files do not exists anymore but config are kept as
+        # previously generated datasets can still be read.
+        WikipediaConfig(language=lang, date="20200301")
+        for lang in WIKIPEDIA_LANGUAGES
+    ] + [
+        # Old versions files do not exists anymore but config are kept as
+        # previously generated datasets can still be read.
+        WikipediaConfig(language=lang, date="20190301")
+        for lang in WIKIPEDIA_LANGUAGES
+    ]
+  if version.match("2.0.*"):
+    return [
+        WikipediaConfig(
+            language=lang, date="20220620", use_extended_name=False)
+        for lang in WIKIPEDIA_LANGUAGES
+    ]
+  raise ValueError(f"Version {str(version)} is not supported!")
+
+
 class Wikipedia(tfds.core.BeamBasedBuilder):
   """Wikipedia dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
   RELEASE_NOTES = {
-      "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
-  }
+      "1.0.0":
+          "New split API (https://tensorflow.org/datasets/splits)",
+      "2.0.0":
+          textwrap.dedent("""\
+      Updated to Wikipedia snapshot of 20220620. Data from snapshot date
+      20220620 can be loaded using version 2.0.0. For example:
+      `ds = tfds.load("wikipedia/nl:2.0.0")`. Note that this version contains 
+      only data of the 20220620 so the config name corresponds to the language.
 
-  BUILDER_CONFIGS = [
-      WikipediaConfig(language=lang, date="20201201")
-      for lang in WIKIPEDIA_LANGUAGES
-  ] + [
-      # Old versions files do not exists anymore but config are kept as
-      # previously generated datasets can still be read.
-      WikipediaConfig(language=lang, date="20200301")
-      for lang in WIKIPEDIA_LANGUAGES
-  ] + [
-      # Old versions files do not exists anymore but config are kept as
-      # previously generated datasets can still be read.
-      WikipediaConfig(language=lang, date="20190301")
-      for lang in WIKIPEDIA_LANGUAGES
-  ]
+      Data from Wikipedia snapshot dates 20190301, 20200301, and 20201201 can be
+      loaded using version 1.0.0 of this dataset. For example: 
+      `ds = tfds.load("wikipedia/20190301.nl:1.0.0")`.
+      """),
+  }
+  SUPPORTED_VERSIONS = [tfds.core.Version("1.0.0"), tfds.core.Version("2.0.0")]
+
+  BUILDER_CONFIGS = _create_builder_configs(VERSION)
 
   def _info(self):
     return tfds.core.DatasetInfo(
