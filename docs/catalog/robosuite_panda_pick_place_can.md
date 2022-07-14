@@ -39,18 +39,9 @@ currently supported on Linux environments only.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -80,6 +71,16 @@ Split | Examples
 
 *   **Homepage**:
     [https://github.com/google-research/rlds](https://github.com/google-research/rlds)
+
+*   **Download size**: `96.67 MiB`
+
+*   **Dataset size**: `407.24 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 50
 
 *   **Feature structure**:
 
@@ -193,6 +194,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Homepage**:
     [https://www.tensorflow.org/datasets/catalog/robosuite_panda_pick_place_can](https://www.tensorflow.org/datasets/catalog/robosuite_panda_pick_place_can)
+
+*   **Download size**: `10.95 GiB`
+
+*   **Dataset size**: `7.53 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 50
 
 *   **Feature structure**:
 
@@ -313,6 +324,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Homepage**:
     [https://github.com/google-research/rlds](https://github.com/google-research/rlds)
+
+*   **Download size**: `144.44 MiB`
+
+*   **Dataset size**: `622.86 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'train'` | 200
 
 *   **Feature structure**:
 

@@ -45,6 +45,10 @@ ds = tfds.load("mslr_web")
 
     *   **`1.0.0`** (default): Initial release.
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Feature structure**:
 
 ```python
@@ -363,10 +367,6 @@ vector_space_model_whole_document                                  | Tensor     
 
 *   **Dataset size**: `381.58 MiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split     | Examples
@@ -417,10 +417,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.15 GiB`
 
 *   **Dataset size**: `381.58 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -473,10 +469,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `381.58 MiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split     | Examples
@@ -527,10 +519,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `1.15 GiB`
 
 *   **Dataset size**: `381.58 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -583,10 +571,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `381.58 MiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split     | Examples
@@ -637,10 +621,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `3.59 GiB`
 
 *   **Dataset size**: `1.17 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -693,10 +673,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `1.17 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split     | Examples
@@ -747,10 +723,6 @@ dataButton.addEventListener('click', async () => {
 *   **Download size**: `3.59 GiB`
 
 *   **Dataset size**: `1.17 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
@@ -803,10 +775,6 @@ dataButton.addEventListener('click', async () => {
 
 *   **Dataset size**: `1.17 GiB`
 
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
 *   **Splits**:
 
 Split     | Examples
@@ -854,18 +822,17 @@ dataButton.addEventListener('click', async () => {
 
 ## mslr_web/30k_fold5
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.59 GiB`
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `1.17 GiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,306
+`'train'` | 18,919
+`'vali'`  | 6,306
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

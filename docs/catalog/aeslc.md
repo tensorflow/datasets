@@ -29,7 +29,7 @@ subject text.
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `11.10 MiB`
 
 *   **Dataset size**: `Unknown size`
 
@@ -39,8 +39,11 @@ subject text.
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,906
+`'train'`      | 14,436
+`'validation'` | 1,960
 
 *   **Feature structure**:
 
