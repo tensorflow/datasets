@@ -21,7 +21,6 @@ from typing import Any, List, Optional, Tuple, Type
 
 from etils import epath
 import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import logging as tfds_logging
@@ -31,6 +30,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import dataset_info_pb2
+from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import version as version_lib
 
@@ -217,6 +217,7 @@ def builder_from_metadata(
   return ReadOnlyBuilder(builder_dir=builder_dir, info_proto=info_proto)
 
 
+@error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def builder_from_files(
     name: str,
     **builder_kwargs: Any,
@@ -289,11 +290,22 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   # * custom DatasetBuilder.__init__ kwargs
   if (name.namespace or version == 'experimental_latest' or
       isinstance(config, dataset_builder.BuilderConfig) or builder_kwargs):
+    error_msgs = ['Builder cannot be loaded from files if it uses:']
+    if name.namespace:
+      error_msgs.append(f'* namespaces (here, {name.namespace} is used)')
+    if version == 'experimental_latest':
+      error_msgs.append('* `experimental_latest` as requested version.')
+    if isinstance(config, dataset_builder.BuilderConfig):
+      error_msgs.append('* config objects (rather than `str`).')
+    if builder_kwargs:
+      error_msgs.append('* custom DatasetBuilder.__init__ kwargs.')
+    error_utils.add_context('\t'.join(error_msgs))
     return None
 
   # Search the dataset across all registered data_dirs
   all_builder_dirs = []
-  for current_data_dir in file_utils.list_data_dirs(given_data_dir=data_dir):
+  all_data_dirs = file_utils.list_data_dirs(given_data_dir=data_dir)
+  for current_data_dir in all_data_dirs:
     builder_dir = _find_builder_dir_single_dir(
         name.name,
         data_dir=current_data_dir,
@@ -302,12 +314,17 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
     )
     if builder_dir:
       all_builder_dirs.append(builder_dir)
+
   if not all_builder_dirs:
+    all_dirs_str = '\n\t- '.join([''] + all_data_dirs)
+    error_msg = f'No registered data_dirs were found in:{all_dirs_str}\n'
+    error_utils.add_context(error_msg)
     return None
+
   elif len(all_builder_dirs) != 1:
     # Rather than raising error every time, we could potentially be smarter
     # and load the most recent version across all files, but should be
-    # carefull when partial version is requested ('my_dataset:3.*.*').
+    # careful when partial version is requested ('my_dataset:3.*.*').
     # Could add some `MultiDataDirManager` API:
     # ```
     # manager = MultiDataDirManager(given_data_dir=data_dir)
@@ -384,6 +401,10 @@ def _find_builder_dir_single_dir(
         config_name=config_name,
         version_str=found_version_str)
 
+  # If no builder found, we populate the error_context with useful information
+  # and return None.
+  error_utils.add_context(('No builder could be found in the directory: '
+                           f'{builder_name} for the builder: {builder_name}.'))
   return None
 
 
@@ -399,8 +420,11 @@ def _get_default_config_name(
     # being 2 differents datasets)
     cls = registered.imported_builder_cls(name)
     cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
-  except (registered.DatasetNotFoundError, PermissionError):
+  except registered.DatasetNotFoundError:
     pass
+  except PermissionError as e:
+    error_msg = f'Permission error when accessing: {builder_dir}: {e}'
+    error_utils.add_context(error_msg)
   else:
     # If code found, return the default config
     if cls.BUILDER_CONFIGS:
@@ -430,12 +454,19 @@ def _get_version_str(
   if config_name:
     builder_dir = builder_dir / config_name
   all_versions = version_lib.list_all_versions(os.fspath(builder_dir))
-  # Version not given, using the last one.
+  # Version not given, using the latest one.
   if not requested_version and all_versions:
     return str(all_versions[-1])
-  # Version given, return the biggest version matching `requested_version`
+  # Version given, return the highest version matching `requested_version`.
   for v in reversed(all_versions):
     if v.match(requested_version):
       return str(v)
   # Directory doesn't have version, or requested_version doesn't match
+  if requested_version:
+    error_msg = (f'No version matching the requested {requested_version} was '
+                 f'found in the builder directory: {builder_dir}.')
+  else:
+    error_msg = (f'The builder directory {builder_dir} doesn\'t contain any '
+                 'versions.')
+  error_utils.add_context(error_msg)
   return None
