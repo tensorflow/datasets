@@ -44,18 +44,20 @@ testing 7,600.
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `11.24 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `35.79 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 7,600
+`'train'` | 120,000
 
 *   **Feature structure**:
 

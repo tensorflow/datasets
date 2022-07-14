@@ -58,7 +58,9 @@ images are resized to 84x84 resolution.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `1.83 MiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -99,7 +101,12 @@ The resulting directory structure may then be processed by TFDS:
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -141,24 +148,6 @@ label    | ClassLabel   |                 | tf.int64  |
 
 
 ## controlled_noisy_web_labels/mini_imagenet_red (default config)
-
-*   **Dataset size**: `1.19 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train_00'`   | 50,000
-`'train_05'`   | 50,000
-`'train_10'`   | 50,000
-`'train_15'`   | 50,000
-`'train_20'`   | 50,000
-`'train_30'`   | 49,985
-`'train_40'`   | 50,010
-`'train_50'`   | 49,962
-`'train_60'`   | 50,000
-`'train_80'`   | 50,008
-`'validation'` | 5,000
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -203,24 +192,6 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## controlled_noisy_web_labels/mini_imagenet_blue
-
-*   **Dataset size**: `1.39 GiB`
-
-*   **Splits**:
-
-Split          | Examples
-:------------- | -------:
-`'train_00'`   | 60,000
-`'train_05'`   | 60,000
-`'train_10'`   | 60,000
-`'train_15'`   | 60,000
-`'train_20'`   | 60,000
-`'train_30'`   | 60,000
-`'train_40'`   | 60,000
-`'train_50'`   | 60,000
-`'train_60'`   | 60,000
-`'train_80'`   | 60,000
-`'validation'` | 5,000
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):

@@ -31,7 +31,7 @@ to 21 points, as the original paper mentioned.
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `83.36 MiB`
 
 *   **Dataset size**: `Unknown size`
 
@@ -41,8 +41,9 @@ to 21 points, as the original paper mentioned.
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 2,000
 
 *   **Feature structure**:
 

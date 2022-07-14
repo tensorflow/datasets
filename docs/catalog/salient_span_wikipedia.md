@@ -28,6 +28,17 @@ Wikipedia sentences with labeled salient spans.
 
 *   **Download size**: `Unknown size`
 
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -54,18 +65,6 @@ Wikipedia sentences with labeled salient spans.
 
 *   **Config description**: Examples are individual sentences containing
     entities.
-
-*   **Dataset size**: `20.57 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | ---------:
-`'train'` | 82,291,706
 
 *   **Feature structure**:
 
@@ -133,17 +132,6 @@ dataButton.addEventListener('click', async () => {
 ## salient_span_wikipedia/documents
 
 *   **Config description**: Examples re full documents.
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
 
 *   **Feature structure**:
 

@@ -97,16 +97,17 @@ atmospheric reanalyses of the global climate. Copernicus Climate Change Service
 
 *   **Config description**: The entire historical wind field dataset.
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `79.53 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 290,000
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
