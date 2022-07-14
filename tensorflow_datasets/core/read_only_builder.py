@@ -316,7 +316,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
       all_builder_dirs.append(builder_dir)
 
   if not all_builder_dirs:
-    all_dirs_str = '\n\t- '.join([''] + all_data_dirs)
+    all_dirs_str = '\n\t- '.join([''] + [str(dir) for dir in all_data_dirs])
     error_msg = f'No registered data_dirs were found in:{all_dirs_str}\n'
     error_utils.add_context(error_msg)
     return None
