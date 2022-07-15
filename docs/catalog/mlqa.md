@@ -30,16 +30,9 @@ evaluating multilingual question answering performance. The dataset consists of
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
 
 *   **Feature structure**:
 
@@ -93,6 +86,13 @@ title                | Text         |       | tf.string |
 
 *   **Config description**: MLQA 'ar' dev and test splits.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -133,6 +133,13 @@ dataButton.addEventListener('click', async () => {
 ## mlqa/de
 
 *   **Config description**: MLQA 'de' dev and test splits.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -175,6 +182,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: MLQA 'en' dev and test splits.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -215,6 +229,13 @@ dataButton.addEventListener('click', async () => {
 ## mlqa/es
 
 *   **Config description**: MLQA 'es' dev and test splits.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -257,6 +278,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: MLQA 'hi' dev and test splits.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -298,6 +326,13 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: MLQA 'vi' dev and test splits.
 
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -338,6 +373,13 @@ dataButton.addEventListener('click', async () => {
 ## mlqa/zh
 
 *   **Config description**: MLQA 'zh' dev and test splits.
+
+*   **Dataset size**: `Unknown size`
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

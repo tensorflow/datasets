@@ -31,7 +31,7 @@ summary.
 
     *   **`3.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `64.14 MiB`
 
 *   **Dataset size**: `Unknown size`
 
@@ -41,8 +41,11 @@ summary.
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split       | Examples
+:---------- | -------:
+`'ca_test'` | 1,237
+`'test'`    | 3,269
+`'train'`   | 18,949
 
 *   **Feature structure**:
 

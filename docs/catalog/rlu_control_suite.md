@@ -75,17 +75,16 @@ are interested in comparing against other state of the art offline RL methods.
 
 ## rlu_control_suite/cartpole_swingup (default config)
 
-*   **Dataset size**: `2.12 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 40
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -165,17 +164,16 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_control_suite/cheetah_run
 
-*   **Dataset size**: `36.58 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 300
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -255,17 +253,16 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_control_suite/finger_turn_hard
 
-*   **Dataset size**: `47.61 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 500
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -349,17 +346,16 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_control_suite/fish_swim
 
-*   **Dataset size**: `32.81 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -443,17 +439,16 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_control_suite/humanoid_run
 
-*   **Dataset size**: `1.21 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 3,000
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -541,17 +536,16 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_control_suite/manipulator_insert_ball
 
-*   **Dataset size**: `385.41 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,500
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -641,17 +635,16 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_control_suite/manipulator_insert_peg
 
-*   **Dataset size**: `385.73 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 1,500
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -741,17 +734,16 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_control_suite/walker_stand
 
-*   **Dataset size**: `31.78 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -833,17 +825,16 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_control_suite/walker_walk
 
-*   **Dataset size**: `31.78 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 200
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

@@ -49,7 +49,7 @@ while 1 indicates the pair is a paraphrase.
     *   **`1.1.0`** (default): Adds configs to different subset and support raw
         text.
 
-*   **Download size**: `57.47 MiB`
+*   **Download size**: `Unknown size`
 
 *   **Feature structure**:
 
@@ -94,19 +94,16 @@ sentence2 | Text         |       | tf.string |
 
 *   **Config description**: Subset: labeled_final tokenized: True
 
-*   **Dataset size**: `17.96 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 8,000
-`'train'`      | 49,401
-`'validation'` | 8,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -149,19 +146,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Subset: labeled_final tokenized: False
 
-*   **Dataset size**: `17.57 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 8,000
-`'train'`      | 49,401
-`'validation'` | 8,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -204,17 +198,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Subset: labeled_swap tokenized: True
 
-*   **Dataset size**: `8.79 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 30,397
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -257,17 +250,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Subset: labeled_swap tokenized: False
 
-*   **Dataset size**: `8.60 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes
+    Unknown
 
 *   **Splits**:
 
-Split     | Examples
-:-------- | -------:
-`'train'` | 30,397
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -310,18 +302,16 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Subset: unlabeled_final tokenized: True
 
-*   **Dataset size**: `177.89 MiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (validation), Only when `shuffle_files=False` (train)
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'train'`      | 645,652
-`'validation'` | 10,000
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

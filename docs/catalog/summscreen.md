@@ -35,18 +35,7 @@ There are two features:
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+*   **Download size**: `841.27 MiB`
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -81,6 +70,20 @@ Split | Examples
 ## summscreen/fd (default config)
 
 *   **Config description**: ForeverDreaming
+
+*   **Dataset size**: `132.99 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 337
+`'train'`      | 3,673
+`'validation'` | 338
 
 *   **Feature structure**:
 
@@ -147,6 +150,20 @@ dataButton.addEventListener('click', async () => {
 ## summscreen/tms
 
 *   **Config description**: TVMegaSite
+
+*   **Dataset size**: `592.53 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,793
+`'train'`      | 18,915
+`'validation'` | 1,795
 
 *   **Feature structure**:
 
