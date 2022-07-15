@@ -37,7 +37,7 @@ poor and data rich regimes.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Feature structure**:
 
@@ -90,22 +90,14 @@ publisher = {BioMed Central}
 
 ## protein_net/casp7 (default config)
 
-*   **Download size**: `3.18 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `2.53 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 93
-`'train_100'`  | 34,557
-`'train_30'`   | 10,333
-`'train_50'`   | 13,024
-`'train_70'`   | 15,207
-`'train_90'`   | 17,611
-`'train_95'`   | 17,938
-`'validation'` | 224
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -146,22 +138,14 @@ dataButton.addEventListener('click', async () => {
 
 ## protein_net/casp8
 
-*   **Download size**: `4.96 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `3.55 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 120
-`'train_100'`  | 48,087
-`'train_30'`   | 13,881
-`'train_50'`   | 17,970
-`'train_70'`   | 21,191
-`'train_90'`   | 24,556
-`'train_95'`   | 25,035
-`'validation'` | 224
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -202,22 +186,14 @@ dataButton.addEventListener('click', async () => {
 
 ## protein_net/casp9
 
-*   **Download size**: `6.65 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `4.54 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 116
-`'train_100'`  | 60,350
-`'train_30'`   | 16,973
-`'train_50'`   | 22,172
-`'train_70'`   | 26,263
-`'train_90'`   | 30,513
-`'train_95'`   | 31,128
-`'validation'` | 224
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -258,22 +234,14 @@ dataButton.addEventListener('click', async () => {
 
 ## protein_net/casp10
 
-*   **Download size**: `8.65 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `5.57 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 95
-`'train_100'`  | 73,116
-`'train_30'`   | 19,495
-`'train_50'`   | 25,897
-`'train_70'`   | 31,001
-`'train_90'`   | 36,258
-`'train_95'`   | 37,033
-`'validation'` | 224
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -314,22 +282,14 @@ dataButton.addEventListener('click', async () => {
 
 ## protein_net/casp11
 
-*   **Download size**: `10.81 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `6.72 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 81
-`'train_100'`  | 87,573
-`'train_30'`   | 22,344
-`'train_50'`   | 29,936
-`'train_70'`   | 36,005
-`'train_90'`   | 42,507
-`'train_95'`   | 43,544
-`'validation'` | 224
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -370,22 +330,14 @@ dataButton.addEventListener('click', async () => {
 
 ## protein_net/casp12
 
-*   **Download size**: `13.18 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `8.05 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 40
-`'train_100'`  | 104,059
-`'train_30'`   | 25,299
-`'train_50'`   | 34,039
-`'train_70'`   | 41,522
-`'train_90'`   | 49,600
-`'train_95'`   | 50,914
-`'validation'` | 224
+Split | Examples
+:---- | -------:
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

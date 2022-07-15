@@ -34,8 +34,6 @@ system to choose the correct ending to a four-sentence story.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -50,12 +48,7 @@ system to choose the correct ending to a four-sentence story.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Feature structure**:
 
@@ -108,6 +101,15 @@ label   | Tensor         |         | tf.int32  |
 
 ## story_cloze/2016 (default config)
 
+*   **Dataset size**: `1.15 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,871
+`'validation'` | 1,871
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -146,6 +148,15 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## story_cloze/2018
+
+*   **Dataset size**: `1015.04 KiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,571
+`'validation'` | 1,571
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

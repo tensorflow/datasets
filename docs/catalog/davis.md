@@ -27,16 +27,18 @@ The DAVIS 2017 video object segmentation dataset.
     *   `2.0.0`: Change instance ids to be 0, 1, 2, ...
     *   **`2.1.0`** (default): Fix instance ids order.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'train'`      | 60
-`'validation'` | 30
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -101,10 +103,6 @@ video/segmentations | Image        | (None, None, 1) | tf.uint8  |
 
 *   **Config description**: The 480p version of the dataset
 
-*   **Download size**: `794.19 MiB`
-
-*   **Dataset size**: `792.26 MiB`
-
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -145,10 +143,6 @@ dataButton.addEventListener('click', async () => {
 ## davis/full_resolution
 
 *   **Config description**: The full resolution version of the dataset.
-
-*   **Download size**: `2.75 GiB`
-
-*   **Dataset size**: `2.78 GiB`
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

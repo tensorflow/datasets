@@ -28,19 +28,6 @@ captured on a Roland TD-11 V-Drum electronic drum kit.
 
     *   **`2.0.1`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
@@ -64,6 +51,19 @@ Split | Examples
 ## groove/full-midionly (default config)
 
 *   **Config description**: Groove dataset without audio, unsplit.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -137,6 +137,19 @@ dataButton.addEventListener('click', async () => {
 ## groove/full-16000hz
 
 *   **Config description**: Groove dataset with audio, unsplit.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -214,6 +227,19 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: Groove dataset without audio, split into 2-bar
     chunks.
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -286,6 +312,19 @@ dataButton.addEventListener('click', async () => {
 ## groove/2bar-16000hz
 
 *   **Config description**: Groove dataset with audio, split into 2-bar chunks.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -362,6 +401,19 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Groove dataset without audio, split into 4-bar
     chunks.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

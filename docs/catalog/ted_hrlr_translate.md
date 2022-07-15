@@ -36,11 +36,6 @@ where one is high resource and the other is low resource.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
@@ -60,6 +55,11 @@ Split | Examples
 ## ted_hrlr_translate/az_to_en (default config)
 
 *   **Config description**: Translation dataset from az to en in plain text.
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -123,6 +123,11 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from az_tr to en in plain text.
 
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -184,6 +189,11 @@ dataButton.addEventListener('click', async () => {
 ## ted_hrlr_translate/be_to_en
 
 *   **Config description**: Translation dataset from be to en in plain text.
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -247,6 +257,11 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from be_ru to en in plain text.
 
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -308,6 +323,11 @@ dataButton.addEventListener('click', async () => {
 ## ted_hrlr_translate/es_to_pt
 
 *   **Config description**: Translation dataset from es to pt in plain text.
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -371,6 +391,11 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from fr to pt in plain text.
 
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -432,6 +457,11 @@ dataButton.addEventListener('click', async () => {
 ## ted_hrlr_translate/gl_to_en
 
 *   **Config description**: Translation dataset from gl to en in plain text.
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -495,6 +525,11 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from gl_pt to en in plain text.
 
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -556,6 +591,11 @@ dataButton.addEventListener('click', async () => {
 ## ted_hrlr_translate/he_to_pt
 
 *   **Config description**: Translation dataset from he to pt in plain text.
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -619,6 +659,11 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from it to pt in plain text.
 
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -680,6 +725,11 @@ dataButton.addEventListener('click', async () => {
 ## ted_hrlr_translate/pt_to_en
 
 *   **Config description**: Translation dataset from pt to en in plain text.
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -743,6 +793,11 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from ru to en in plain text.
 
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -805,6 +860,11 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Translation dataset from ru to pt in plain text.
 
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
@@ -866,6 +926,11 @@ dataButton.addEventListener('click', async () => {
 ## ted_hrlr_translate/tr_to_en
 
 *   **Config description**: Translation dataset from tr to en in plain text.
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 

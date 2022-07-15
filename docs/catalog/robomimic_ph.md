@@ -36,14 +36,6 @@ to represent steps and episodes.
     *   `1.0.0`: Initial release.
     *   **`1.0.1`** (default): Citation updated.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
 *   **Splits**:
 
 Split | Examples
@@ -72,6 +64,14 @@ Split | Examples
 
 
 ## robomimic_ph/lift_low_dim (default config)
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Feature structure**:
 
@@ -186,6 +186,14 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## robomimic_ph/lift_image
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Feature structure**:
 
@@ -305,6 +313,14 @@ dataButton.addEventListener('click', async () => {
 
 ## robomimic_ph/can_low_dim
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Feature structure**:
 
 ```python
@@ -418,6 +434,14 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## robomimic_ph/can_image
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Feature structure**:
 
@@ -537,6 +561,14 @@ dataButton.addEventListener('click', async () => {
 
 ## robomimic_ph/square_low_dim
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Feature structure**:
 
 ```python
@@ -650,6 +682,14 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## robomimic_ph/square_image
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Feature structure**:
 
@@ -768,6 +808,14 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## robomimic_ph/transport_low_dim
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Feature structure**:
 
@@ -902,6 +950,14 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## robomimic_ph/transport_image
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Feature structure**:
 
@@ -1045,6 +1101,14 @@ dataButton.addEventListener('click', async () => {
 
 ## robomimic_ph/tool_hang_low_dim
 
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
 *   **Feature structure**:
 
 ```python
@@ -1146,6 +1210,14 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## robomimic_ph/tool_hang_image
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
 
 *   **Feature structure**:
 
