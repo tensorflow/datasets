@@ -33,18 +33,20 @@ repostory we release the ASQA dataset, together with the evaluation code:
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `17.86 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `14.50 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 948
+`'train'` | 4,353
 
 *   **Feature structure**:
 

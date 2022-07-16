@@ -32,18 +32,20 @@ boxes.
     *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
     *   **`3.0.1`** (default): Website URL update
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `125.64 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `132.86 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,084
+`'train'` | 3,060
 
 *   **Feature structure**:
 

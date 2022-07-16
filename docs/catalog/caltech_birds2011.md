@@ -29,18 +29,20 @@ dataset. Annotations include bounding boxes, segmentation labels.
 
     *   **`0.1.1`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.11 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.11 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 5,794
+`'train'` | 5,994
 
 *   **Feature structure**:
 

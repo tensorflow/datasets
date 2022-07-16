@@ -49,18 +49,17 @@ Author: Fabian Hickert <Fabian.Hickert@raspbee.de>
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `192.39 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 7,490
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -83,6 +82,8 @@ Split | Examples
 
 *   **Config description**: BeeDataset images with 300 pixel height and 150
     pixel width
+
+*   **Dataset size**: `97.96 MiB`
 
 *   **Feature structure**:
 
@@ -157,6 +158,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: BeeDataset images with 200 pixel height and 100
     pixel width
 
+*   **Dataset size**: `55.48 MiB`
+
 *   **Feature structure**:
 
 ```python
@@ -229,6 +232,8 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: BeeDataset images with 200 pixel height and 100
     pixel width
+
+*   **Dataset size**: `37.43 MiB`
 
 *   **Feature structure**:
 

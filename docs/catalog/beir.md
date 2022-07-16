@@ -28,19 +28,6 @@ within the benchmark.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Feature structure**:
 
 ```python
@@ -92,6 +79,24 @@ score            | Tensor       |       | tf.float32 |
 
 ## beir/msmarco (default config)
 
+*   **Download size**: `1.01 GiB`
+
+*   **Dataset size**: `4.53 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'passage'`    | 8,841,823
+`'query'`      | 509,962
+`'test'`       | 9,139
+`'train'`      | 516,472
+`'validation'` | 7,433
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -130,6 +135,22 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/trec_covid
+
+*   **Download size**: `70.45 MiB`
+
+*   **Dataset size**: `292.04 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 171,332
+`'query'`   | 50
+`'test'`    | 35,480
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -170,6 +191,24 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/nfcorpus
 
+*   **Download size**: `2.34 MiB`
+
+*   **Dataset size**: `24.94 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'passage'`    | 3,633
+`'query'`      | 3,237
+`'test'`       | 3,128
+`'train'`      | 3,588
+`'validation'` | 3,119
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -208,6 +247,22 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/nq
+
+*   **Download size**: `475.22 MiB`
+
+*   **Dataset size**: `1.66 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | --------:
+`'passage'` | 2,681,468
+`'query'`   | 3,452
+`'test'`    | 4,201
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -248,6 +303,24 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/hotpotqa
 
+*   **Download size**: `623.73 MiB`
+
+*   **Dataset size**: `2.64 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'passage'`    | 5,233,329
+`'query'`      | 97,852
+`'test'`       | 13,783
+`'train'`      | 101,307
+`'validation'` | 10,335
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -286,6 +359,24 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/fiqa
+
+*   **Download size**: `17.12 MiB`
+
+*   **Dataset size**: `73.39 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'passage'`    | 57,638
+`'query'`      | 6,648
+`'test'`       | 1,706
+`'train'`      | 14,166
+`'validation'` | 1,238
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -326,6 +417,22 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/arguana
 
+*   **Download size**: `3.60 MiB`
+
+*   **Dataset size**: `15.08 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 8,674
+`'query'`   | 1,406
+`'test'`    | 1,401
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -364,6 +471,22 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/webis_touche2020
+
+*   **Download size**: `216.61 MiB`
+
+*   **Dataset size**: `747.57 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 382,545
+`'query'`   | 49
+`'test'`    | 2,099
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -404,6 +527,22 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/cqadupstack.android
 
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `883.49 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 22,998
+`'query'`   | 699
+`'test'`    | 1,696
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -442,6 +581,22 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/cqadupstack.english
+
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `3.78 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 40,221
+`'query'`   | 1,570
+`'test'`    | 3,765
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -482,6 +637,22 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/cqadupstack.gaming
 
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `2.64 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 45,301
+`'query'`   | 1,595
+`'test'`    | 2,263
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -520,6 +691,22 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/cqadupstack.gis
+
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `1.47 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 37,637
+`'query'`   | 885
+`'test'`    | 1,114
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -560,6 +747,22 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/cqadupstack.mathematica
 
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `1.58 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 16,705
+`'query'`   | 804
+`'test'`    | 1,358
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -598,6 +801,22 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/cqadupstack.physics
+
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `2.02 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 38,316
+`'query'`   | 1,039
+`'test'`    | 1,933
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -638,6 +857,22 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/cqadupstack.programmers
 
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `2.14 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 32,176
+`'query'`   | 876
+`'test'`    | 1,675
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -676,6 +911,22 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/cqadupstack.stats
+
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `941.07 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 42,269
+`'query'`   | 652
+`'test'`    | 913
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -716,6 +967,22 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/cqadupstack.tex
 
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `21.75 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 68,184
+`'query'`   | 2,906
+`'test'`    | 5,154
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -754,6 +1021,22 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/cqadupstack.unix
+
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `2.04 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 47,382
+`'query'`   | 1,072
+`'test'`    | 1,693
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -794,6 +1077,22 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/cqadupstack.webmasters
 
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `650.08 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 17,405
+`'query'`   | 506
+`'test'`    | 1,395
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -832,6 +1131,22 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/cqadupstack.wordpress
+
+*   **Download size**: `4.98 GiB`
+
+*   **Dataset size**: `726.15 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 48,605
+`'query'`   | 541
+`'test'`    | 744
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -872,6 +1187,23 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/quora
 
+*   **Download size**: `15.12 MiB`
+
+*   **Dataset size**: `121.33 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'passage'`    | 522,931
+`'query'`      | 15,000
+`'test'`       | 15,675
+`'validation'` | 7,626
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -910,6 +1242,23 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/dbpedia_entity
+
+*   **Download size**: `609.67 MiB`
+
+*   **Dataset size**: `2.47 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'passage'`    | 4,635,922
+`'query'`      | 467
+`'test'`       | 40,724
+`'validation'` | 5,658
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -950,6 +1299,22 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/scidocs
 
+*   **Download size**: `135.87 MiB`
+
+*   **Dataset size**: `573.04 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 25,657
+`'query'`   | 1,000
+`'test'`    | 25,657
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -988,6 +1353,24 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/fever
+
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `3.70 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'passage'`    | 5,416,568
+`'query'`      | 123,142
+`'test'`       | 1,499
+`'train'`      | 12,547
+`'validation'` | 1,460
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1028,6 +1411,22 @@ dataButton.addEventListener('click', async () => {
 
 ## beir/climate_fever
 
+*   **Download size**: `1.14 GiB`
+
+*   **Dataset size**: `3.64 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | --------:
+`'passage'` | 5,416,593
+`'query'`   | 1,535
+`'test'`    | 1,344
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1066,6 +1465,23 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## beir/scifact
+
+*   **Download size**: `2.69 MiB`
+
+*   **Dataset size**: `10.16 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split       | Examples
+:---------- | -------:
+`'passage'` | 5,183
+`'query'`   | 1,109
+`'test'`    | 283
+`'train'`   | 565
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
