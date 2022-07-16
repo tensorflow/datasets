@@ -38,19 +38,6 @@ More information can be found at: https://github.com/allenai/unifiedqa.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Feature structure**:
 
 ```python
@@ -84,6 +71,22 @@ output  | Tensor       |       | tf.string |
     and middle school grade levels. Each question is 4-way multiple choice
     format and may or may not include a diagram element. This set consists of
     questions used for elementary school grade levels.
+
+*   **Download size**: `345.59 KiB`
+
+*   **Dataset size**: `390.02 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 542
+`'train'`      | 623
+`'validation'` | 123
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -158,6 +161,22 @@ see the correct citation for each contained dataset."
     format and may or may not include a diagram element. This set consists of
     questions used for middle school grade levels.
 
+*   **Download size**: `428.41 KiB`
+
+*   **Dataset size**: `477.40 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 679
+`'train'`      | 605
+`'validation'` | 125
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -228,6 +247,21 @@ see the correct citation for each contained dataset."
 *   **Config description**: AmbigQA is an open-domain question answering task
     which involves finding every plausible answer, and then rewriting the
     question for each one to resolve the ambiguity.
+
+*   **Download size**: `2.27 MiB`
+
+*   **Dataset size**: `3.04 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 19,806
+`'validation'` | 5,674
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -317,6 +351,22 @@ see the correct citation for each contained dataset."
     incorrectly by both a retrieval-based algorithm and a word co-occurrence
     algorithm. This set consists of "easy" questions.
 
+*   **Download size**: `1.24 MiB`
+
+*   **Dataset size**: `1.42 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,376
+`'train'`      | 2,251
+`'validation'` | 570
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -395,6 +445,22 @@ see the correct citation for each contained dataset."
     and an Easy Set, where the former contains only questions answered
     incorrectly by both a retrieval-based algorithm and a word co-occurrence
     algorithm. This set consists of "easy" questions.
+
+*   **Download size**: `1.24 MiB`
+
+*   **Dataset size**: `1.42 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,376
+`'train'`      | 2,251
+`'validation'` | 570
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -477,6 +543,22 @@ see the correct citation for each contained dataset."
     paragraphs fetched via an information retrieval system as additional
     evidence.
 
+*   **Download size**: `7.00 MiB`
+
+*   **Dataset size**: `7.17 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,376
+`'train'`      | 2,251
+`'validation'` | 570
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -558,6 +640,22 @@ see the correct citation for each contained dataset."
     paragraphs fetched via an information retrieval system as additional
     evidence.
 
+*   **Download size**: `7.00 MiB`
+
+*   **Dataset size**: `7.17 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 2,376
+`'train'`      | 2,251
+`'validation'` | 570
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -637,6 +735,22 @@ see the correct citation for each contained dataset."
     incorrectly by both a retrieval-based algorithm and a word co-occurrence
     algorithm. This set consists of "hard" questions.
 
+*   **Download size**: `758.03 KiB`
+
+*   **Dataset size**: `848.28 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,172
+`'train'`      | 1,119
+`'validation'` | 299
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -715,6 +829,22 @@ see the correct citation for each contained dataset."
     and an Easy Set, where the former contains only questions answered
     incorrectly by both a retrieval-based algorithm and a word co-occurrence
     algorithm. This set consists of "hard" questions.
+
+*   **Download size**: `758.03 KiB`
+
+*   **Dataset size**: `848.28 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,172
+`'train'`      | 1,119
+`'validation'` | 299
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -797,6 +927,22 @@ see the correct citation for each contained dataset."
     paragraphs fetched via an information retrieval system as additional
     evidence.
 
+*   **Download size**: `3.53 MiB`
+
+*   **Dataset size**: `3.62 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,172
+`'train'`      | 1,119
+`'validation'` | 299
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -878,6 +1024,22 @@ see the correct citation for each contained dataset."
     paragraphs fetched via an information retrieval system as additional
     evidence.
 
+*   **Download size**: `3.53 MiB`
+
+*   **Dataset size**: `3.62 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,172
+`'train'`      | 1,119
+`'validation'` | 299
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -956,6 +1118,21 @@ see the correct citation for each contained dataset."
     (question, passage, answer), with the title of the page as optional
     additional context. The text-pair classification setup is similar to
     existing natural language inference tasks.
+
+*   **Download size**: `7.77 MiB`
+
+*   **Dataset size**: `8.20 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,427
+`'validation'` | 3,270
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1048,6 +1225,21 @@ see the correct citation for each contained dataset."
     existing natural language inference tasks. This version adds natural
     perturbations to the original version.
 
+*   **Download size**: `10.80 MiB`
+
+*   **Dataset size**: `11.40 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 9,727
+`'validation'` | 7,596
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1132,6 +1324,22 @@ see the correct citation for each contained dataset."
     answering dataset that requires different types of commonsense knowledge to
     predict the correct answers . It contains questions with one correct answer
     and four distractor answers.
+
+*   **Download size**: `1.79 MiB`
+
+*   **Dataset size**: `2.19 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,140
+`'train'`      | 9,741
+`'validation'` | 1,221
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1218,6 +1426,22 @@ see the correct citation for each contained dataset."
     answering dataset that requires different types of commonsense knowledge to
     predict the correct answers . It contains questions with one correct answer
     and four distractor answers.
+
+*   **Download size**: `1.79 MiB`
+
+*   **Dataset size**: `2.19 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,140
+`'train'`      | 9,741
+`'validation'` | 1,221
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1308,6 +1532,21 @@ see the correct citation for each contained dataset."
     existing natural language inference tasks. This version uses contrast sets.
     These evaluation sets are expert-generated perturbations that deviate from
     the patterns common in the original dataset.
+
+*   **Download size**: `438.51 KiB`
+
+*   **Dataset size**: `462.35 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 340
+`'validation'` | 340
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1401,6 +1640,21 @@ see the correct citation for each contained dataset."
     evaluation sets are expert-generated perturbations that deviate from the
     patterns common in the original dataset.
 
+*   **Download size**: `2.20 MiB`
+
+*   **Dataset size**: `2.26 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 947
+`'validation'` | 947
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1491,6 +1745,21 @@ see the correct citation for each contained dataset."
     paragraphs for answering questions. This version uses contrast sets. These
     evaluation sets are expert-generated perturbations that deviate from the
     patterns common in the original dataset.
+
+*   **Download size**: `2.60 MiB`
+
+*   **Dataset size**: `2.65 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 700
+`'validation'` | 700
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1584,6 +1853,21 @@ see the correct citation for each contained dataset."
     evaluation sets are expert-generated perturbations that deviate from the
     patterns common in the original dataset.
 
+*   **Download size**: `1.97 MiB`
+
+*   **Dataset size**: `2.04 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 974
+`'validation'` | 974
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1671,6 +1955,21 @@ see the correct citation for each contained dataset."
     as addition, counting, or sorting). These operations require a much more
     comprehensive understanding of the content of paragraphs than what was
     necessary for prior datasets.
+
+*   **Download size**: `105.18 MiB`
+
+*   **Dataset size**: `108.16 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 77,399
+`'validation'` | 9,536
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -1765,6 +2064,21 @@ see the correct citation for each contained dataset."
     those a young child would understand, reducing the world knowledge that is
     required for the task.
 
+*   **Download size**: `2.14 MiB`
+
+*   **Dataset size**: `2.20 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 1,480
+`'validation'` | 320
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1854,6 +2168,21 @@ see the correct citation for each contained dataset."
     those a young child would understand, reducing the world knowledge that is
     required for the task.
 
+*   **Download size**: `2.15 MiB`
+
+*   **Dataset size**: `2.21 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 1,480
+`'validation'` | 320
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -1941,6 +2270,21 @@ see the correct citation for each contained dataset."
     science, news, travel guides, fiction stories, etc) bringing in linguistic
     diversity to the texts and to the questions wordings.
 
+*   **Download size**: `897.09 KiB`
+
+*   **Dataset size**: `918.42 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 312
+`'validation'` | 312
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2026,6 +2370,22 @@ see the correct citation for each contained dataset."
 *   **Config description**: NarrativeQA is an English-lanaguage dataset of
     stories and corresponding questions designed to test reading comprehension,
     especially on long documents.
+
+*   **Download size**: `308.28 MiB`
+
+*   **Dataset size**: `311.22 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 21,114
+`'train'`      | 65,494
+`'validation'` | 6,922
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2114,6 +2474,22 @@ see the correct citation for each contained dataset."
 *   **Config description**: NarrativeQA is an English-lanaguage dataset of
     stories and corresponding questions designed to test reading comprehension,
     especially on long documents.
+
+*   **Download size**: `308.28 MiB`
+
+*   **Dataset size**: `311.22 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 21,114
+`'train'`      | 65,494
+`'validation'` | 6,922
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2205,6 +2581,21 @@ see the correct citation for each contained dataset."
     inclusion of real user questions, and the requirement that solutions should
     read an entire page to find the answer, cause NQ to be a more realistic and
     challenging task than prior QA datasets.
+
+*   **Download size**: `6.95 MiB`
+
+*   **Dataset size**: `9.88 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 96,075
+`'validation'` | 2,295
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2309,6 +2700,22 @@ see the correct citation for each contained dataset."
     challenging task than prior QA datasets. This version consists of
     direct-answer questions.
 
+*   **Download size**: `6.82 MiB`
+
+*   **Dataset size**: `10.19 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,468
+`'train'`      | 96,676
+`'validation'` | 10,693
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2411,6 +2818,22 @@ see the correct citation for each contained dataset."
     read an entire page to find the answer, cause NQ to be a more realistic and
     challenging task than prior QA datasets. This version consists of
     direct-answer questions.
+
+*   **Download size**: `6.82 MiB`
+
+*   **Dataset size**: `10.19 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 6,468
+`'train'`      | 96,676
+`'validation'` | 10,693
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2516,6 +2939,21 @@ see the correct citation for each contained dataset."
     paragraphs (obtained using the DPR retrieval engine) to augment each
     question.
 
+*   **Download size**: `319.22 MiB`
+
+*   **Dataset size**: `322.91 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 96,676
+`'validation'` | 10,693
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2620,6 +3058,21 @@ see the correct citation for each contained dataset."
     paragraphs (obtained using the DPR retrieval engine) to augment each
     question.
 
+*   **Download size**: `306.94 MiB`
+
+*   **Dataset size**: `310.48 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,468
+`'train'` | 96,676
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2720,6 +3173,21 @@ see the correct citation for each contained dataset."
     questions and answers based on a set of news articles from CNN, with answers
     consisting of spans of text from the corresponding articles.
 
+*   **Download size**: `283.33 MiB`
+
+*   **Dataset size**: `285.94 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 75,882
+`'validation'` | 4,309
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2813,6 +3281,22 @@ see the correct citation for each contained dataset."
     question-answering dataset modeled after open book exams for assessing human
     understanding of a subject.
 
+*   **Download size**: `942.34 KiB`
+
+*   **Dataset size**: `1.11 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 500
+`'train'`      | 4,957
+`'validation'` | 500
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -2902,6 +3386,22 @@ see the correct citation for each contained dataset."
     knowledge, and rich text comprehension. OpenBookQA is a new kind of
     question-answering dataset modeled after open book exams for assessing human
     understanding of a subject.
+
+*   **Download size**: `942.34 KiB`
+
+*   **Dataset size**: `1.11 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 500
+`'train'`      | 4,957
+`'validation'` | 500
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -2994,6 +3494,22 @@ see the correct citation for each contained dataset."
     understanding of a subject. This version includes paragraphs fetched via an
     information retrieval system as additional evidence.
 
+*   **Download size**: `6.08 MiB`
+
+*   **Dataset size**: `6.28 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 500
+`'train'`      | 4,957
+`'validation'` | 500
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3084,6 +3600,22 @@ see the correct citation for each contained dataset."
     question-answering dataset modeled after open book exams for assessing human
     understanding of a subject. This version includes paragraphs fetched via an
     information retrieval system as additional evidence.
+
+*   **Download size**: `6.08 MiB`
+
+*   **Dataset size**: `6.28 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 500
+`'train'`      | 4,957
+`'validation'` | 500
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3178,6 +3710,21 @@ see the correct citation for each contained dataset."
     and topically similar to ensure physical knowledge is targeted. The dataset
     is further cleaned of basic artifacts using the AFLite algorithm.
 
+*   **Download size**: `6.01 MiB`
+
+*   **Dataset size**: `6.59 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 16,113
+`'validation'` | 1,838
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3257,6 +3804,22 @@ see the correct citation for each contained dataset."
     sentence composition. It consists of 8-way multiple-choice questions about
     grade school science, and comes with a corpus of 17M sentences.
 
+*   **Download size**: `1.75 MiB`
+
+*   **Dataset size**: `2.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 920
+`'train'`      | 8,134
+`'validation'` | 926
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3335,6 +3898,22 @@ see the correct citation for each contained dataset."
 *   **Config description**: QASC is a question-answering dataset with a focus on
     sentence composition. It consists of 8-way multiple-choice questions about
     grade school science, and comes with a corpus of 17M sentences.
+
+*   **Download size**: `1.75 MiB`
+
+*   **Dataset size**: `2.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 920
+`'train'`      | 8,134
+`'validation'` | 926
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3417,6 +3996,22 @@ see the correct citation for each contained dataset."
     includes paragraphs fetched via an information retrieval system as
     additional evidence.
 
+*   **Download size**: `16.95 MiB`
+
+*   **Dataset size**: `17.30 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 920
+`'train'`      | 8,134
+`'validation'` | 926
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3498,6 +4093,22 @@ see the correct citation for each contained dataset."
     includes paragraphs fetched via an information retrieval system as
     additional evidence.
 
+*   **Download size**: `16.95 MiB`
+
+*   **Dataset size**: `17.30 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 920
+`'train'`      | 8,134
+`'validation'` | 926
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3578,6 +4189,21 @@ see the correct citation for each contained dataset."
     benchmark containing questions over paragraphs from Wikipedia, a system must
     resolve hard coreferences before selecting the appropriate span(s) in the
     paragraphs for answering questions.
+
+*   **Download size**: `51.43 MiB`
+
+*   **Dataset size**: `52.29 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 22,265
+`'validation'` | 2,768
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3666,6 +4292,22 @@ see the correct citation for each contained dataset."
     designed for middle school and high school students. The dataset can be
     served as the training and test sets for machine comprehension.
 
+*   **Download size**: `167.97 MiB`
+
+*   **Dataset size**: `171.23 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,934
+`'train'`      | 87,863
+`'validation'` | 4,887
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3752,6 +4394,22 @@ see the correct citation for each contained dataset."
     The dataset is collected from English examinations in China, which are
     designed for middle school and high school students. The dataset can be
     served as the training and test sets for machine comprehension.
+
+*   **Download size**: `167.97 MiB`
+
+*   **Dataset size**: `171.23 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes (test, validation), Only when `shuffle_files=False` (train)
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,934
+`'train'`      | 87,863
+`'validation'` | 4,887
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -3843,6 +4501,21 @@ see the correct citation for each contained dataset."
     reasoning about effects of the relationships in the background passage in
     the context of the situation.
 
+*   **Download size**: `12.91 MiB`
+
+*   **Dataset size**: `13.35 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 10,924
+`'validation'` | 1,688
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -3933,6 +4606,21 @@ see the correct citation for each contained dataset."
     asking workers to provide the right answer to a different but related
     question.
 
+*   **Download size**: `7.08 MiB`
+
+*   **Dataset size**: `8.22 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 33,410
+`'validation'` | 1,954
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4020,6 +4708,21 @@ see the correct citation for each contained dataset."
     answer to each question is a segment of text from the corresponding reading
     passage.
 
+*   **Download size**: `80.62 MiB`
+
+*   **Dataset size**: `83.99 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 87,514
+`'validation'` | 10,570
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4104,6 +4807,21 @@ see the correct citation for each contained dataset."
 *   **Config description**: This dataset combines the original Stanford Question
     Answering Dataset (SQuAD) dataset with unanswerable questions written
     adversarially by crowdworkers to look similar to answerable ones.
+
+*   **Download size**: `116.56 MiB`
+
+*   **Dataset size**: `121.43 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 130,149
+`'validation'` | 11,873
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -4194,6 +4912,21 @@ see the correct citation for each contained dataset."
     associations. Training sets with differnt sizes are provided. This set
     corresponds to size `l`.
 
+*   **Download size**: `1.49 MiB`
+
+*   **Dataset size**: `1.83 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 10,234
+`'validation'` | 1,267
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4278,6 +5011,21 @@ see the correct citation for each contained dataset."
     associations. Training sets with differnt sizes are provided. This set
     corresponds to size `m`.
 
+*   **Download size**: `507.46 KiB`
+
+*   **Dataset size**: `623.15 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'train'`      | 2,558
+`'validation'` | 1,267
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -4361,6 +5109,22 @@ see the correct citation for each contained dataset."
     human-detectable word associations to machine-detectable embedding
     associations. Training sets with differnt sizes are provided. This set
     corresponds to size `s`.
+
+*   **Download size**: `479.24 KiB`
+
+*   **Dataset size**: `590.47 KiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,767
+`'train'`      | 640
+`'validation'` | 1,267
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

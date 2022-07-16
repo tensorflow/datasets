@@ -30,7 +30,7 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
     *   **`1.0.0`** (default): New split API
         (https://tensorflow.org/datasets/splits)
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `80.23 MiB`
 
 *   **Dataset size**: `Unknown size`
 
@@ -40,8 +40,11 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split            | Examples
+:--------------- | -------:
+`'test'`         | 25,000
+`'train'`        | 25,000
+`'unsupervised'` | 50,000
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -50,6 +53,10 @@ Split | Examples
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -89,43 +96,6 @@ Feature | Class        | Shape | Dtype     | Description
 label   | ClassLabel   |       | tf.int64  |
 text    | Text         |       | tf.string |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imdb_reviews-plain_text-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## imdb_reviews/bytes
 
 *   **Config description**: Uses byte-level text encoding with
@@ -148,43 +118,6 @@ Feature | Class        | Shape   | Dtype    | Description
 label   | ClassLabel   |         | tf.int64 |
 text    | Text         | (None,) | tf.int64 |
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imdb_reviews-bytes-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
-
 ## imdb_reviews/subwords8k
 
 *   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
@@ -195,7 +128,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8185>),
 })
 ```
 
@@ -206,43 +139,6 @@ Feature | Class        | Shape   | Dtype    | Description
         | FeaturesDict |         |          |
 label   | ClassLabel   |         | tf.int64 |
 text    | Text         | (None,) | tf.int64 |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imdb_reviews-subwords8k-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## imdb_reviews/subwords32k
 
@@ -254,7 +150,7 @@ dataButton.addEventListener('click', async () => {
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32650>),
 })
 ```
 
@@ -265,40 +161,3 @@ Feature | Class        | Shape   | Dtype    | Description
         | FeaturesDict |         |          |
 label   | ClassLabel   |         | tf.int64 |
 text    | Text         | (None,) | tf.int64 |
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/imdb_reviews-subwords32k-1.0.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->

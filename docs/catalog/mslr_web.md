@@ -45,18 +45,9 @@ ds = tfds.load("mslr_web")
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Feature structure**:
 
@@ -372,6 +363,18 @@ vector_space_model_whole_document                                  | Tensor     
 
 ## mslr_web/10k_fold1 (default config)
 
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `381.58 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -410,6 +413,18 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## mslr_web/10k_fold2
+
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `381.58 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -450,6 +465,18 @@ dataButton.addEventListener('click', async () => {
 
 ## mslr_web/10k_fold3
 
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `381.58 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -488,6 +515,18 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## mslr_web/10k_fold4
+
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `381.58 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -528,6 +567,18 @@ dataButton.addEventListener('click', async () => {
 
 ## mslr_web/10k_fold5
 
+*   **Download size**: `1.15 GiB`
+
+*   **Dataset size**: `381.58 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 2,000
+`'train'` | 6,000
+`'vali'`  | 2,000
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -566,6 +617,18 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## mslr_web/30k_fold1
+
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `1.17 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,306
+`'train'` | 18,919
+`'vali'`  | 6,306
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -606,6 +669,18 @@ dataButton.addEventListener('click', async () => {
 
 ## mslr_web/30k_fold2
 
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `1.17 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,307
+`'train'` | 18,918
+`'vali'`  | 6,306
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -644,6 +719,18 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## mslr_web/30k_fold3
+
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `1.17 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,306
+`'train'` | 18,918
+`'vali'`  | 6,307
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -684,6 +771,18 @@ dataButton.addEventListener('click', async () => {
 
 ## mslr_web/30k_fold4
 
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `1.17 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,306
+`'train'` | 18,919
+`'vali'`  | 6,306
+
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
 
@@ -722,6 +821,18 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## mslr_web/30k_fold5
+
+*   **Download size**: `3.59 GiB`
+
+*   **Dataset size**: `1.17 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,306
+`'train'` | 18,919
+`'vali'`  | 6,306
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

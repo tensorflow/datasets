@@ -57,18 +57,11 @@ review_body - The review text. review_date - The date the review was written.
 
     *   **`0.1.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
 *   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
 
 *   **Feature structure**:
 
@@ -124,6 +117,10 @@ data/vine              | ClassLabel   |       | tf.int64  |
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
+
 *   **Citation**:
 
 
@@ -133,42 +130,13 @@ data/vine              | ClassLabel   |       | tf.int64  |
     Wireless_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `1.59 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Wireless_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 9,002,021
 
 ## amazon_us_reviews/Watches_v1_00
 
@@ -176,42 +144,13 @@ dataButton.addEventListener('click', async () => {
     Watches_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `155.42 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Watches_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 960,872
 
 ## amazon_us_reviews/Video_Games_v1_00
 
@@ -219,42 +158,13 @@ dataButton.addEventListener('click', async () => {
     Video_Games_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `453.19 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Video_Games_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,785,997
 
 ## amazon_us_reviews/Video_DVD_v1_00
 
@@ -262,42 +172,13 @@ dataButton.addEventListener('click', async () => {
     Video_DVD_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `1.41 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Video_DVD_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,069,140
 
 ## amazon_us_reviews/Video_v1_00
 
@@ -305,42 +186,13 @@ dataButton.addEventListener('click', async () => {
     Video_v1_00 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `132.49 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Video_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 380,604
 
 ## amazon_us_reviews/Toys_v1_00
 
@@ -348,42 +200,13 @@ dataButton.addEventListener('click', async () => {
     products in US marketplace. Each product has its own version as specified
     with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `799.61 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Toys_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,864,249
 
 ## amazon_us_reviews/Tools_v1_00
 
@@ -391,42 +214,13 @@ dataButton.addEventListener('click', async () => {
     Tools_v1_00 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `318.32 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Tools_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,741,100
 
 ## amazon_us_reviews/Sports_v1_00
 
@@ -434,42 +228,13 @@ dataButton.addEventListener('click', async () => {
     Sports_v1_00 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `832.06 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Sports_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,850,360
 
 ## amazon_us_reviews/Software_v1_00
 
@@ -477,42 +242,13 @@ dataButton.addEventListener('click', async () => {
     Software_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `89.66 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Software_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 341,931
 
 ## amazon_us_reviews/Shoes_v1_00
 
@@ -520,42 +256,13 @@ dataButton.addEventListener('click', async () => {
     Shoes_v1_00 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `612.50 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Shoes_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,366,916
 
 ## amazon_us_reviews/Pet_Products_v1_00
 
@@ -563,42 +270,13 @@ dataButton.addEventListener('click', async () => {
     Pet_Products_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `491.92 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Pet_Products_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,643,619
 
 ## amazon_us_reviews/Personal_Care_Appliances_v1_00
 
@@ -606,42 +284,13 @@ dataButton.addEventListener('click', async () => {
     Personal_Care_Appliances_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `16.82 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Personal_Care_Appliances_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 85,981
 
 ## amazon_us_reviews/PC_v1_00
 
@@ -649,42 +298,13 @@ dataButton.addEventListener('click', async () => {
     products in US marketplace. Each product has its own version as specified
     with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `1.41 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-PC_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,908,554
 
 ## amazon_us_reviews/Outdoors_v1_00
 
@@ -692,42 +312,13 @@ dataButton.addEventListener('click', async () => {
     Outdoors_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `428.16 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Outdoors_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,302,401
 
 ## amazon_us_reviews/Office_Products_v1_00
 
@@ -735,42 +326,13 @@ dataButton.addEventListener('click', async () => {
     Office_Products_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `488.59 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Office_Products_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,642,434
 
 ## amazon_us_reviews/Musical_Instruments_v1_00
 
@@ -778,42 +340,13 @@ dataButton.addEventListener('click', async () => {
     Musical_Instruments_v1_00 products in US marketplace. Each product has its
     own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `184.43 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Musical_Instruments_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 904,765
 
 ## amazon_us_reviews/Music_v1_00
 
@@ -821,42 +354,13 @@ dataButton.addEventListener('click', async () => {
     Music_v1_00 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `1.42 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Music_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,751,577
 
 ## amazon_us_reviews/Mobile_Electronics_v1_00
 
@@ -864,42 +368,13 @@ dataButton.addEventListener('click', async () => {
     Mobile_Electronics_v1_00 products in US marketplace. Each product has its
     own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `21.81 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Mobile_Electronics_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 104,975
 
 ## amazon_us_reviews/Mobile_Apps_v1_00
 
@@ -907,42 +382,13 @@ dataButton.addEventListener('click', async () => {
     Mobile_Apps_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `532.11 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Mobile_Apps_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,033,376
 
 ## amazon_us_reviews/Major_Appliances_v1_00
 
@@ -950,42 +396,13 @@ dataButton.addEventListener('click', async () => {
     Major_Appliances_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `23.23 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Major_Appliances_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 96,901
 
 ## amazon_us_reviews/Luggage_v1_00
 
@@ -993,42 +410,13 @@ dataButton.addEventListener('click', async () => {
     Luggage_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `57.53 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Luggage_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 348,657
 
 ## amazon_us_reviews/Lawn_and_Garden_v1_00
 
@@ -1036,42 +424,13 @@ dataButton.addEventListener('click', async () => {
     Lawn_and_Garden_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `464.22 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Lawn_and_Garden_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,557,288
 
 ## amazon_us_reviews/Kitchen_v1_00
 
@@ -1079,42 +438,13 @@ dataButton.addEventListener('click', async () => {
     Kitchen_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `887.63 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Kitchen_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,880,466
 
 ## amazon_us_reviews/Jewelry_v1_00
 
@@ -1122,42 +452,13 @@ dataButton.addEventListener('click', async () => {
     Jewelry_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `235.58 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Jewelry_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,767,753
 
 ## amazon_us_reviews/Home_Improvement_v1_00
 
@@ -1165,42 +466,13 @@ dataButton.addEventListener('click', async () => {
     Home_Improvement_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `480.02 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Home_Improvement_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,634,781
 
 ## amazon_us_reviews/Home_Entertainment_v1_00
 
@@ -1208,42 +480,13 @@ dataButton.addEventListener('click', async () => {
     Home_Entertainment_v1_00 products in US marketplace. Each product has its
     own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `184.22 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Home_Entertainment_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 705,889
 
 ## amazon_us_reviews/Home_v1_00
 
@@ -1251,42 +494,13 @@ dataButton.addEventListener('click', async () => {
     products in US marketplace. Each product has its own version as specified
     with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `1.01 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Home_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,221,559
 
 ## amazon_us_reviews/Health_Personal_Care_v1_00
 
@@ -1294,42 +508,13 @@ dataButton.addEventListener('click', async () => {
     Health_Personal_Care_v1_00 products in US marketplace. Each product has its
     own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `964.34 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Health_Personal_Care_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,331,449
 
 ## amazon_us_reviews/Grocery_v1_00
 
@@ -1337,42 +522,13 @@ dataButton.addEventListener('click', async () => {
     Grocery_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `382.74 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Grocery_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 2,402,458
 
 ## amazon_us_reviews/Gift_Card_v1_00
 
@@ -1380,42 +536,13 @@ dataButton.addEventListener('click', async () => {
     Gift_Card_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `11.57 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Gift_Card_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 149,086
 
 ## amazon_us_reviews/Furniture_v1_00
 
@@ -1423,42 +550,13 @@ dataButton.addEventListener('click', async () => {
     Furniture_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `142.08 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Furniture_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 792,113
 
 ## amazon_us_reviews/Electronics_v1_00
 
@@ -1466,42 +564,13 @@ dataButton.addEventListener('click', async () => {
     Electronics_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `666.45 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Electronics_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,093,869
 
 ## amazon_us_reviews/Digital_Video_Games_v1_00
 
@@ -1509,42 +578,13 @@ dataButton.addEventListener('click', async () => {
     Digital_Video_Games_v1_00 products in US marketplace. Each product has its
     own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `26.17 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Video_Games_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 145,431
 
 ## amazon_us_reviews/Digital_Video_Download_v1_00
 
@@ -1552,42 +592,13 @@ dataButton.addEventListener('click', async () => {
     Digital_Video_Download_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `483.49 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Video_Download_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 4,057,147
 
 ## amazon_us_reviews/Digital_Software_v1_00
 
@@ -1595,42 +606,13 @@ dataButton.addEventListener('click', async () => {
     Digital_Software_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `18.12 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Software_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | -------:
+`'train'` | 102,084
 
 ## amazon_us_reviews/Digital_Music_Purchase_v1_00
 
@@ -1638,42 +620,13 @@ dataButton.addEventListener('click', async () => {
     Digital_Music_Purchase_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `241.82 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Music_Purchase_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,688,884
 
 ## amazon_us_reviews/Digital_Ebook_Purchase_v1_00
 
@@ -1681,42 +634,13 @@ dataButton.addEventListener('click', async () => {
     Digital_Ebook_Purchase_v1_00 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `2.51 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Ebook_Purchase_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | ---------:
+`'train'` | 12,520,722
 
 ## amazon_us_reviews/Camera_v1_00
 
@@ -1724,42 +648,13 @@ dataButton.addEventListener('click', async () => {
     Camera_v1_00 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `422.15 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Camera_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,801,974
 
 ## amazon_us_reviews/Books_v1_00
 
@@ -1767,42 +662,13 @@ dataButton.addEventListener('click', async () => {
     Books_v1_00 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `2.55 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Books_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | ---------:
+`'train'` | 10,319,090
 
 ## amazon_us_reviews/Beauty_v1_00
 
@@ -1810,42 +676,13 @@ dataButton.addEventListener('click', async () => {
     Beauty_v1_00 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `871.73 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Beauty_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,115,666
 
 ## amazon_us_reviews/Baby_v1_00
 
@@ -1853,42 +690,13 @@ dataButton.addEventListener('click', async () => {
     products in US marketplace. Each product has its own version as specified
     with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `340.84 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Baby_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,752,932
 
 ## amazon_us_reviews/Automotive_v1_00
 
@@ -1896,42 +704,13 @@ dataButton.addEventListener('click', async () => {
     Automotive_v1_00 products in US marketplace. Each product has its own
     version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `555.18 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Automotive_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,514,942
 
 ## amazon_us_reviews/Apparel_v1_00
 
@@ -1939,42 +718,13 @@ dataButton.addEventListener('click', async () => {
     Apparel_v1_00 products in US marketplace. Each product has its own version
     as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `618.59 MiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Apparel_v1_00-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,906,333
 
 ## amazon_us_reviews/Digital_Ebook_Purchase_v1_01
 
@@ -1982,42 +732,13 @@ dataButton.addEventListener('click', async () => {
     Digital_Ebook_Purchase_v1_01 products in US marketplace. Each product has
     its own version as specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `1.21 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Digital_Ebook_Purchase_v1_01-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 5,101,693
 
 ## amazon_us_reviews/Books_v1_01
 
@@ -2025,42 +746,13 @@ dataButton.addEventListener('click', async () => {
     Books_v1_01 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `2.51 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Books_v1_01-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 6,106,719
 
 ## amazon_us_reviews/Books_v1_02
 
@@ -2068,39 +760,10 @@ dataButton.addEventListener('click', async () => {
     Books_v1_02 products in US marketplace. Each product has its own version as
     specified with it.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+*   **Download size**: `1.24 GiB`
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Splits**:
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/amazon_us_reviews-Books_v1_02-0.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+Split     | Examples
+:-------- | --------:
+`'train'` | 3,105,520

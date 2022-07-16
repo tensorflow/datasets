@@ -28,11 +28,11 @@ Accountability Office.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `320.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
@@ -58,12 +58,15 @@ note={under review}
 *   **Config description**: CRS report with summary. Structures flattened and
     joined by whitespace. This is the format used by original paper
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `349.76 MiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 362
+`'train'`      | 6,514
+`'validation'` | 362
 
 *   **Feature structure**:
 
@@ -134,12 +137,15 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: GAO report with highlight Structures flattened and
     joined by whitespace. This is the format used by original paper
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `690.24 MiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 611
+`'train'`      | 11,005
+`'validation'` | 612
 
 *   **Feature structure**:
 
@@ -217,12 +223,15 @@ dataButton.addEventListener('click', async () => {
     joined by newline while add html tags. Tags are only added for
     secition_title in a format like `<h2>xxx<h2>`.
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `351.25 MiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 362
+`'train'`      | 6,514
+`'validation'` | 362
 
 *   **Feature structure**:
 
@@ -294,12 +303,15 @@ dataButton.addEventListener('click', async () => {
     joined by newline while add html tags. Tags are only added for
     secition_title in a format like `<h2>xxx<h2>`.
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `692.72 MiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 611
+`'train'`      | 11,005
+`'validation'` | 612
 
 *   **Feature structure**:
 
@@ -376,12 +388,15 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: CRS report with summary. Structures represented as
     raw json.
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `361.92 MiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 362
+`'train'`      | 6,514
+`'validation'` | 362
 
 *   **Feature structure**:
 
@@ -452,12 +467,15 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: GAO report with highlight Structures represented as
     raw json.
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `712.82 MiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 611
+`'train'`      | 11,005
+`'validation'` | 612
 
 *   **Feature structure**:
 

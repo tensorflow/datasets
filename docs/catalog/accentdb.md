@@ -30,18 +30,19 @@ accentdb_extended on https://accentdb.github.io/#dataset.
 
     *   **`1.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.56 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `19.47 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 17,313
 
 *   **Feature structure**:
 

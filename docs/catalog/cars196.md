@@ -38,18 +38,20 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
     *   **`2.1.0`** (default): Fixing bug
         https://github.com/tensorflow/datasets/issues/3927
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.82 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.85 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 8,041
+`'train'` | 8,144
 
 *   **Feature structure**:
 

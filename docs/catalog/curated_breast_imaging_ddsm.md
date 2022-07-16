@@ -43,10 +43,6 @@ frame the task to solve in a traditional image classification setting.
     *   **`3.0.0`** (default): Better cropping sampling
         (https://github.com/tensorflow/datasets/pull/2502)
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -70,12 +66,7 @@ Resulting images should be put in `manual_dir`, like:
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    No
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -128,6 +119,18 @@ Split | Examples
 *   **Config description**: Patches containing both calsification and mass
     cases, plus pathces with no abnormalities. Designed as a traditional 5-class
     classification task.
+
+*   **Download size**: `2.01 MiB`
+
+*   **Dataset size**: `801.46 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,770
+`'train'`      | 49,780
+`'validation'` | 5,580
 
 *   **Feature structure**:
 
@@ -194,6 +197,17 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Original images of the calcification cases
     compressed in lossless PNG.
+
+*   **Download size**: `1.06 MiB`
+
+*   **Dataset size**: `4.42 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 284
+`'train'` | 1,227
 
 *   **Feature structure**:
 
@@ -281,6 +295,17 @@ dataButton.addEventListener('click', async () => {
 
 *   **Config description**: Original images of the mass cases compressed in
     lossless PNG.
+
+*   **Download size**: `966.57 KiB`
+
+*   **Dataset size**: `4.80 GiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 348
+`'train'` | 1,166
 
 *   **Feature structure**:
 
