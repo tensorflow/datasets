@@ -369,8 +369,8 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
   def __getitem__(self, key):
     if not self:
       raise KeyError(
-          f'Trying to access `splits[{key!r}]` but `splits` is empty. '
-          'This likely indicate the dataset has not been generated yet.')
+          f'Trying to access `splits[{key!r}]` but `splits` is empty. This '
+          f'likely indicate {self._dataset_name} has not been generated yet.')
     # 1st case: The key exists: `info.splits['train']`
     elif str(key) in self.keys():
       return super(SplitDict, self).__getitem__(str(key))
