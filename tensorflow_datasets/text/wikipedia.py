@@ -122,6 +122,11 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
   }
 
   BUILDER_CONFIGS = [
+      WikipediaConfig(language=lang, date="20220620")
+      for lang in WIKIPEDIA_LANGUAGES
+  ] + [
+      # Old versions files do not exists anymore but config are kept as
+      # previously generated datasets can still be read.
       WikipediaConfig(language=lang, date="20201201")
       for lang in WIKIPEDIA_LANGUAGES
   ] + [
