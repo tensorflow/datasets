@@ -22,7 +22,7 @@ import os
 import pathlib
 import subprocess
 import tempfile
-from typing import Any, Iterator
+from typing import Any, Iterator, Mapping
 from unittest import mock
 
 from etils import epath
@@ -31,6 +31,7 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features
@@ -591,3 +592,41 @@ def _assert_feature_equal(feature0, feature1):
     _assert_features_equal(feature0.feature, feature1.feature)
   if isinstance(feature0, features.ClassLabel):
     assert feature0.names == feature1.names
+
+
+class DummyDatasetCollection(dataset_collection_builder.DatasetCollection):
+  """Minimal Dataset Collection builder."""
+
+  @property
+  def info(self) -> dataset_collection_builder.DatasetCollectionInfo:
+    return dataset_collection_builder.DatasetCollectionInfo.from_cls(
+        dataset_collection_class=self.__class__,
+        description='my description',
+        release_notes={
+            '1.0.0': 'notes',
+            '1.1.0': 'notes',
+            '2.0.0': 'notes'
+        })
+
+  @property
+  def datasets(
+      self
+  ) -> Mapping[str, Mapping[str, dataset_collection_builder.DatasetReference]]:
+    return {
+        '1.0.0':
+            dataset_collection_builder.references_for({
+                'a': 'a/c:1.2.3',
+                'b': 'b/d:2.3.4',
+            }),
+        '1.1.0':
+            dataset_collection_builder.references_for({
+                'a': 'a/c:1.2.3',
+                'c': 'c/e:3.5.7',
+            }),
+        '2.0.0':
+            dataset_collection_builder.references_for({
+                'a': 'a/c:1.3.5',
+                'b': 'b/d:2.4.8',
+                'c': 'c/e:3.5.7',
+            }),
+    }
