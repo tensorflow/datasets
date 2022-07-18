@@ -24,9 +24,12 @@ from absl import logging
 
 from tensorflow_datasets.scripts.cli import main as main_cli
 
-module_import = flags.DEFINE_string('module_import', None, '`--imports` flag')
+module_import = flags.DEFINE_string('module_import', None, '`--imports` flag.')
+dataset = flags.DEFINE_string('dataset', None, 'singleton `--datasets` flag.')
+
 builder_config_id = flags.DEFINE_integer('builder_config_id', None,
                                          '`--config_idx` flag')
+
 
 
 def _parse_flags(argv: List[str]) -> argparse.Namespace:
@@ -43,6 +46,8 @@ def main(args: argparse.Namespace) -> None:
         '***`tfds build` should be used instead of `download_and_prepare`.***')
   if module_import.value:
     args.imports = module_import.value
+  if dataset.value:
+    args.datasets = [dataset.value]
   if builder_config_id.value is not None:
     args.config_idx = builder_config_id.value
   main_cli.main(args)
