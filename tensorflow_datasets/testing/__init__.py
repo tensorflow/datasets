@@ -26,6 +26,7 @@ from tensorflow_datasets.testing.test_case import TestCase
 from tensorflow_datasets.testing.test_utils import assert_features_equal
 from tensorflow_datasets.testing.test_utils import DummyBeamDataset
 from tensorflow_datasets.testing.test_utils import DummyDataset
+from tensorflow_datasets.testing.test_utils import DummyDatasetCollection
 from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
 from tensorflow_datasets.testing.test_utils import DummyMnist
 from tensorflow_datasets.testing.test_utils import DummyParser
@@ -45,6 +46,7 @@ __all__ = [
     "DatasetBuilderTestCase",
     "DummyDatasetSharedGenerator",
     "DummyMnist",
+    "DummyDatasetCollection",
     "fake_examples_dir",
     "FeatureExpectationItem",
     "FeatureExpectationsTestCase",
