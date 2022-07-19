@@ -48,7 +48,10 @@ _DL_URL = "https://data.keithito.com/data/speech/LJSpeech-1.1.tar.bz2"
 class Ljspeech(tfds.core.GeneratorBasedBuilder):
   """LJSpeech dataset."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.1.1")
+  RELEASE_NOTES = {
+      "1.1.1": "Fix speech data type with dtype=tf.int16.",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -56,7 +59,7 @@ class Ljspeech(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "id": tf.string,
-            "speech": tfds.features.Audio(sample_rate=22050),
+            "speech": tfds.features.Audio(sample_rate=22050, dtype=tf.int16),
             "text": tfds.features.Text(),
             "text_normalized": tfds.features.Text(),
         }),
