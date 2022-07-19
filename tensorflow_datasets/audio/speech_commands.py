@@ -17,6 +17,7 @@
 
 import os
 import numpy as np
+import tensorflow as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 import tensorflow_datasets.public_api as tfds
@@ -65,7 +66,10 @@ SAMPLE_RATE = 16000
 class SpeechCommands(tfds.core.GeneratorBasedBuilder):
   """The Speech Commands dataset for keyword detection."""
 
-  VERSION = tfds.core.Version('0.0.2')
+  VERSION = tfds.core.Version('0.0.3')
+  RELEASE_NOTES = {
+      '0.0.3': 'Fix audio data type with dtype=tf.int16.',
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -74,7 +78,8 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             'audio':
-                tfds.features.Audio(file_format='wav', sample_rate=SAMPLE_RATE),
+                tfds.features.Audio(
+                    file_format='wav', sample_rate=SAMPLE_RATE, dtype=tf.int16),
             'label':
                 tfds.features.ClassLabel(names=WORDS + [SILENCE, UNKNOWN])
         }),

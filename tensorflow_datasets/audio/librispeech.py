@@ -54,14 +54,17 @@ _DL_URLS = {
 class Librispeech(tfds.core.BeamBasedBuilder):
   """Librispeech dataset."""
 
-  VERSION = tfds.core.Version("2.1.0")
+  VERSION = tfds.core.Version("2.1.1")
+  RELEASE_NOTES = {
+      "2.1.1": "Fix speech data type with dtype=tf.int16.",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "speech": tfds.features.Audio(sample_rate=16000),
+            "speech": tfds.features.Audio(sample_rate=16000, dtype=tf.int16),
             "text": tfds.features.Text(),
             "speaker_id": tf.int64,
             "chapter_id": tf.int64,
