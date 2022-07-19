@@ -12,6 +12,11 @@
 # `vctk`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This CSTR VCTK Corpus includes speech data uttered by 110 English speakers with
@@ -29,13 +34,23 @@ Note that the 'p315' text was lost due to a hard disk error.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): VCTK release 0.92.0.
+    *   `1.0.0`: VCTK release 0.92.0.
+    *   **`1.0.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Fix speech data type with dtype=tf.int16.
 
-*   **Download size**: `10.94 GiB`
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
@@ -45,7 +60,7 @@ FeaturesDict({
     'gender': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'id': tf.string,
     'speaker': ClassLabel(shape=(), dtype=tf.int64, num_classes=110),
-    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int16),
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
@@ -59,7 +74,7 @@ accent  | ClassLabel   |         | tf.int64  |
 gender  | ClassLabel   |         | tf.int64  |
 id      | Tensor       |         | tf.string |
 speaker | ClassLabel   |         | tf.int64  |
-speech  | Audio        | (None,) | tf.int64  |
+speech  | Audio        | (None,) | tf.int16  |
 text    | Text         |         | tf.string |
 
 *   **Supervised keys** (See
@@ -97,14 +112,6 @@ text    | Text         |         | tf.string |
           https://doi.org/10.7488/ds/1994
     ```
 
-*   **Dataset size**: `39.87 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 44,455
-
 ## vctk/mic2
 
 *   **Config description**: Audio recorded using a small diaphragm condenser
@@ -114,11 +121,3 @@ Split     | Examples
           Two speakers, p280 and p315 had technical issues of the audio
           recordings using MKH 800.
     ```
-
-*   **Dataset size**: `38.86 GiB`
-
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 43,873

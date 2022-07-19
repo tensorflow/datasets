@@ -12,6 +12,11 @@
 # `speech_commands`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 An audio dataset of spoken words designed to help train and evaluate keyword
@@ -34,29 +39,28 @@ for the validation set.
 
 *   **Versions**:
 
-    *   **`0.0.2`** (default): No release notes.
+    *   **`0.0.3`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Fix audio data type with dtype=tf.int16.
 
-*   **Download size**: `2.37 GiB`
+*   **Download size**: `Unknown size`
 
-*   **Dataset size**: `8.17 GiB`
+*   **Dataset size**: `Unknown size`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
+    Unknown
 
 *   **Splits**:
 
-Split          | Examples
-:------------- | -------:
-`'test'`       | 4,890
-`'train'`      | 85,511
-`'validation'` | 10,102
+Split | Examples
+:---- | -------:
 
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int64),
+    'audio': Audio(shape=(None,), dtype=tf.int16),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
 })
 ```
@@ -66,7 +70,7 @@ FeaturesDict({
 Feature | Class        | Shape   | Dtype    | Description
 :------ | :----------- | :------ | :------- | :----------
         | FeaturesDict |         |          |
-audio   | Audio        | (None,) | tf.int64 |
+audio   | Audio        | (None,) | tf.int16 |
 label   | ClassLabel   |         | tf.int64 |
 
 *   **Supervised keys** (See
@@ -79,40 +83,7 @@ label   | ClassLabel   |         | tf.int64 |
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/speech_commands-0.0.2.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+    Missing.
 
 *   **Citation**:
 
