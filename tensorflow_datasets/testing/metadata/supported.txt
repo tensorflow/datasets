@@ -976,10 +976,8 @@ kitti/3.2.0
 kmnist/3.0.1
 lambada/1.0.0
 lfw/0.1.0
-librispeech/2.1.0
 librispeech_lm/0.1.0
 libritts/1.0.1
-ljspeech/1.1.0
 lm1b/1.1.0
 locomotion/ant_sac_1M_single_policy_stochastic/1.0.0
 locomotion/halfcheetah_sac_1M_single_policy_stochastic/1.0.0
@@ -1881,7 +1879,6 @@ smallnorb/2.0.0
 smallnorb/2.1.0
 smartwatch_gestures/1.0.0
 snli/1.1.0
-speech_commands/0.0.2
 spoken_digit/1.0.9
 squad/v1.1/3.0.0
 squad/v2.0/3.0.0
@@ -2903,8 +2900,6 @@ unified_qa/squad2/1.0.0
 unified_qa/winogrande_l/1.0.0
 unified_qa/winogrande_m/1.0.0
 unified_qa/winogrande_s/1.0.0
-vctk/mic1/1.0.0
-vctk/mic2/1.0.0
 visual_domain_decathlon/aircraft/1.2.0
 visual_domain_decathlon/cifar100/1.2.0
 visual_domain_decathlon/daimlerpedcls/1.2.0
