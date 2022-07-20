@@ -43,18 +43,21 @@ for the validation set.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Fix audio data type with dtype=tf.int16.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.37 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.17 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | -------:
+`'test'`       | 4,890
+`'train'`      | 85,511
+`'validation'` | 10,102
 
 *   **Feature structure**:
 
