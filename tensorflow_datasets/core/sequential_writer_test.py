@@ -32,10 +32,11 @@ def _generate_split(num_examples: int) -> tf.data.Dataset:
   return tf.data.Dataset.from_tensor_slices(data)
 
 
-def _dataset_info(data_dir: str) -> dataset_info.DatasetInfo:
+def _dataset_info(data_dir: str,
+                  name: str = 'test_dataset') -> dataset_info.DatasetInfo:
   return dataset_info.DatasetInfo(
       builder=dataset_info.DatasetIdentity(
-          name='test_dataset',
+          name=name,
           data_dir=data_dir,
           module_name='',
           version='1.0.0',
@@ -76,9 +77,8 @@ class SequentialWriterTest(parameterized.TestCase):
           'num_expected_shards': 1,
       },
   )
-  def test_sequential_writer_generates_correct_shards(self, num_examples,
-                                                      max_examples_per_shard,
-                                                      num_expected_shards):
+  def test_generates_correct_shards(self, num_examples, max_examples_per_shard,
+                                    num_expected_shards):
     data_dir = tempfile.mkdtemp('data_dir')
     writer = sequential_writer.SequentialWriter(
         ds_info=_dataset_info(data_dir),
@@ -95,7 +95,7 @@ class SequentialWriterTest(parameterized.TestCase):
         0, lambda v, _: v + 1).numpy()
     self.assertEqual(counter, num_examples)
 
-  def test_sequential_writer_writes_multiple_examples(self):
+  def test_writes_multiple_examples(self):
     num_examples = 5
     max_examples_per_shard = 3
     num_expected_shards = 2
@@ -116,7 +116,7 @@ class SequentialWriterTest(parameterized.TestCase):
         0, lambda v, _: v + 1).numpy()
     self.assertEqual(counter, num_examples)
 
-  def test_sequential_writer_writes_multiple_splits(self):
+  def test_writes_multiple_splits(self):
     num_examples_train = 5
     num_examples_eval = 7
     max_examples_per_shard = 3
@@ -146,7 +146,7 @@ class SequentialWriterTest(parameterized.TestCase):
         0, lambda v, _: v + 1).numpy()
     self.assertEqual(counter, num_examples_eval)
 
-  def test_sequential_writer_closes_all(self):
+  def test_closes_all(self):
     num_examples_train = 5
     num_examples_eval = 7
     max_examples_per_shard = 3
@@ -176,7 +176,7 @@ class SequentialWriterTest(parameterized.TestCase):
         0, lambda v, _: v + 1).numpy()
     self.assertEqual(counter, num_examples_eval)
 
-  def test_sequential_writer_writes_multiple_splits_sequentially(self):
+  def test_writes_multiple_splits_sequentially(self):
     num_examples_train = 5
     num_examples_eval = 7
     max_examples_per_shard = 3
@@ -210,7 +210,7 @@ class SequentialWriterTest(parameterized.TestCase):
         0, lambda v, _: v + 1).numpy()
     self.assertEqual(counter, num_examples_eval)
 
-  def test_sequential_writer_fails_to_append_to_nonexisting_split(self):
+  def test_fails_to_append_to_nonexisting_split(self):
     writer = sequential_writer.SequentialWriter(
         ds_info=_dataset_info('/unused/dir'), max_examples_per_shard=1)
     with self.assertRaises(KeyError):
@@ -218,13 +218,13 @@ class SequentialWriterTest(parameterized.TestCase):
           'train': list(tfds.as_numpy(_generate_split(1))),
       })
 
-  def test_sequential_writer_fails_to_close_a_nonexisting_split(self):
+  def test_fails_to_close_a_nonexisting_split(self):
     writer = sequential_writer.SequentialWriter(
         ds_info=_dataset_info('/unused/dir'), max_examples_per_shard=1)
     with self.assertRaises(KeyError):
       writer.close_splits(['train'])
 
-  def test_sequential_writer_fails_to_initialize_same_split_twice(self):
+  def test_fails_to_initialize_same_split_twice(self):
     data_dir = tempfile.mkdtemp('data_dir')
     writer = sequential_writer.SequentialWriter(
         ds_info=_dataset_info(data_dir), max_examples_per_shard=1)
@@ -232,7 +232,14 @@ class SequentialWriterTest(parameterized.TestCase):
     with self.assertRaises(KeyError):
       writer.initialize_splits(['train'])
 
-  def test_sequential_writer_fails_to_append_to_closed_split(self):
+  def test_initializes_same_split_twice(self):
+    data_dir = tempfile.mkdtemp('data_dir')
+    writer = sequential_writer.SequentialWriter(
+        ds_info=_dataset_info(data_dir), max_examples_per_shard=1)
+    writer.initialize_splits(['train'])
+    writer.initialize_splits(['train'], fail_if_exists=False)
+
+  def test_fails_to_append_to_closed_split(self):
     data_dir = tempfile.mkdtemp('data_dir')
     writer = sequential_writer.SequentialWriter(
         ds_info=_dataset_info(data_dir), max_examples_per_shard=1)
@@ -243,13 +250,80 @@ class SequentialWriterTest(parameterized.TestCase):
           'train': list(tfds.as_numpy(_generate_split(1))),
       })
 
-  def test_sequential_writer_closing_a_closed_split_is_a_noop(self):
+  def test_closing_a_closed_split_is_a_noop(self):
     data_dir = tempfile.mkdtemp('data_dir')
     writer = sequential_writer.SequentialWriter(
         ds_info=_dataset_info(data_dir), max_examples_per_shard=1)
     writer.initialize_splits(['train'])
     writer.close_splits(['train'])
     writer.close_splits(['train'])
+
+  def test_append_to_different_dataset_fails(self):
+    data_dir = tempfile.mkdtemp('data_dir')
+    writer = sequential_writer.SequentialWriter(
+        ds_info=_dataset_info(data_dir), max_examples_per_shard=3)
+    writer.initialize_splits(['train'])
+    writer.close_splits(['train'])
+    with self.assertRaises(ValueError):
+      sequential_writer.SequentialWriter(
+          _dataset_info(data_dir, 'new_name'),
+          max_examples_per_shard=3,
+          overwrite=False)
+
+  def test_append_to_non_existent_works(self):
+    data_dir = tempfile.mkdtemp('data_dir')
+    writer = sequential_writer.SequentialWriter(
+        ds_info=_dataset_info(data_dir),
+        max_examples_per_shard=3,
+        overwrite=False)
+    writer.initialize_splits(['train'])
+    writer.close_splits(['train'])
+
+  def test_append_to_existing_dataset_works(self):
+    data_dir = tempfile.mkdtemp('data_dir')
+    ds_info = _dataset_info(data_dir)
+    writer = sequential_writer.SequentialWriter(
+        ds_info=ds_info, max_examples_per_shard=3)
+    writer.initialize_splits(['train'])
+    writer.add_examples({'train': list(tfds.as_numpy(_generate_split(4)))})
+    writer.close_splits(['train'
+                        ])  # The split should have 2 shards with 4 examples
+
+    new_writer = sequential_writer.SequentialWriter(
+        ds_info=ds_info, max_examples_per_shard=2, overwrite=False)
+    new_writer.initialize_splits(['train'], fail_if_exists=False)
+    new_writer.add_examples({'train': list(tfds.as_numpy(_generate_split(3)))})
+    new_writer.close_splits(['train'])  # We added 2 shards with 3 examples
+
+    ds_builder = tfds.builder_from_directory(data_dir)
+    self.assertEqual(ds_builder.info.splits['train'].num_shards, 4)
+    counter = ds_builder.as_dataset(split='train').reduce(
+        0, lambda v, _: v + 1).numpy()
+    self.assertEqual(counter, 7)
+
+  def test_overwrites(self):
+    data_dir = tempfile.mkdtemp('data_dir')
+    ds_info = _dataset_info(data_dir)
+    writer = sequential_writer.SequentialWriter(
+        ds_info=ds_info, max_examples_per_shard=3)
+    writer.initialize_splits(['train'])
+    writer.add_examples({'train': list(tfds.as_numpy(_generate_split(4)))})
+    writer.close_splits(['train'
+                        ])  # The split should have 2 shards with 4 examples
+
+    new_writer = sequential_writer.SequentialWriter(
+        ds_info=ds_info, max_examples_per_shard=2, overwrite=True)
+    new_writer.initialize_splits(['train'], fail_if_exists=True)
+    new_writer.add_examples({'train': list(tfds.as_numpy(_generate_split(3)))})
+    new_writer.close_splits(['train'])  # We added 2 shards with 3 examples
+
+    ds_builder = tfds.builder_from_directory(data_dir)
+    self.assertEqual(ds_builder.info.splits['train'].num_shards, 2)
+    counter = ds_builder.as_dataset(split='train').reduce(
+        0, lambda v, _: v + 1).numpy()
+    self.assertEqual(counter, 3)
+
+  # Overwrites
 
 
 if __name__ == '__main__':
