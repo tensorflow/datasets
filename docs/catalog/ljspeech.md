@@ -40,18 +40,19 @@ public domain.
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
         Fix speech data type with dtype=tf.int16.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.56 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.73 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'train'` | 13,100
 
 *   **Feature structure**:
 
