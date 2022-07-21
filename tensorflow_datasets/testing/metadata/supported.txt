@@ -978,6 +978,7 @@ lambada/1.0.0
 lfw/0.1.0
 librispeech_lm/0.1.0
 libritts/1.0.1
+ljspeech/1.1.1
 lm1b/1.1.0
 locomotion/ant_sac_1M_single_policy_stochastic/1.0.0
 locomotion/halfcheetah_sac_1M_single_policy_stochastic/1.0.0
@@ -1879,6 +1880,7 @@ smallnorb/2.0.0
 smallnorb/2.1.0
 smartwatch_gestures/1.0.0
 snli/1.1.0
+speech_commands/0.0.3
 spoken_digit/1.0.9
 squad/v1.1/3.0.0
 squad/v2.0/3.0.0

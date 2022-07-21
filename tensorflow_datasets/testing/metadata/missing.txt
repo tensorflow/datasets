@@ -87,7 +87,6 @@ glue/sst2/1.0.1
 glue/stsb/1.0.1
 glue/wnli/1.0.1
 librispeech/2.1.1
-ljspeech/1.1.1
 natural_questions/default/0.0.2
 natural_questions/longt5/0.0.2
 pass/3.0.0
@@ -324,7 +323,6 @@ so2sat/all/2.0.0
 so2sat/all/2.1.0
 so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
-speech_commands/0.0.3
 user_libri_audio/1.0.0
 user_libri_text/1.0.0
 vctk/mic1/1.0.1
