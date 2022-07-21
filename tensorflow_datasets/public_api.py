@@ -38,6 +38,7 @@ from tensorflow_datasets.core.load import builder
 from tensorflow_datasets.core.load import builder_cls
 from tensorflow_datasets.core.load import list_builders
 from tensorflow_datasets.core.load import load
+from tensorflow_datasets.core.load import dataset_collection
 from tensorflow_datasets.core.read_only_builder import builder_from_directory
 from tensorflow_datasets.core.read_only_builder import builder_from_directories
 from tensorflow_datasets.core.splits import Split
@@ -84,6 +85,7 @@ __all__ = [
     "is_dataset_on_gcs",
     "list_builders",
     "load",
+    "dataset_collection",
     "ReadConfig",
     "Split",
     "split_for_jax_process",

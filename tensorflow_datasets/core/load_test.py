@@ -22,6 +22,7 @@ are still on `registered_test.py`.
 from unittest import mock
 
 import pytest
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import naming
@@ -46,3 +47,77 @@ def test_community_public_load():
     # Builder is correctly returned
     assert load.builder_cls('ns:ds') is testing.DummyDataset
     assert isinstance(load.builder('ns:ds'), testing.DummyDataset)
+
+
+@pytest.fixture(scope='session')
+def dummy_dc_loader() -> load.DatasetCollectionLoader:
+  return load.DatasetCollectionLoader(
+      collection=testing.DummyDatasetCollection())
+
+
+def test_dc_loader_name(dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+  assert dummy_dc_loader.collection_name == 'dummy_dataset_collection'
+
+
+def test_load_dataset(dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+  with mock.patch.object(load, 'load', autospec=True) as mock_load:
+    examples = tf.data.Dataset.from_tensor_slices([1, 2, 3])
+    expected = {'train': examples, 'test': examples}
+    mock_load.return_value = expected
+    loaded_dataset = dummy_dc_loader.load_dataset('c')
+    mock_load.assert_called_once_with(name='c/e:3.5.7', with_info=False)
+    assert loaded_dataset == expected
+
+
+def test_load_dataset_split(dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+  with mock.patch.object(load, 'load', autospec=True) as mock_load:
+    examples = tf.data.Dataset.from_tensor_slices([1, 2, 3])
+    expected = {'train': examples}
+    mock_load.return_value = [examples, examples]
+    loaded_dataset = dummy_dc_loader.load_dataset('c', split='train')
+    mock_load.assert_called_once_with(
+        name='c/e:3.5.7', with_info=False, split=['train'])
+    assert loaded_dataset == expected
+
+
+def test_load_dataset_splits(dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+  with mock.patch.object(load, 'load', autospec=True) as mock_load:
+    examples = tf.data.Dataset.from_tensor_slices([1, 2, 3])
+    expected = {'train': examples, 'test': examples}
+    mock_load.return_value = [examples, examples]
+    loaded_dataset = dummy_dc_loader.load_dataset('c', split=['train', 'test'])
+    mock_load.assert_called_once_with(
+        name='c/e:3.5.7', with_info=False, split=['train', 'test'])
+    assert loaded_dataset == expected
+
+
+def test_load_dataset_runtime_error(
+    dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+  with pytest.raises(RuntimeError, match='Unsupported return type.+'):
+    with mock.patch.object(load, 'load', autospec=True) as mock_load:
+      examples = tf.data.Dataset.from_tensor_slices([1, 2, 3])
+      mock_load.return_value = examples
+      dummy_dc_loader.load_dataset('c')
+
+
+def test_load_dataset_key_error(dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+  with pytest.raises(
+      KeyError, match='Dataset d is not included in this collection.+'):
+    dummy_dc_loader.load_dataset('d')
+
+
+def test_load_dataset_with_kwargs(
+    dummy_dc_loader: load.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+  with mock.patch.object(load, 'load', autospec=True) as mock_load:
+    examples = tf.data.Dataset.from_tensor_slices([1, 2, 3])
+    expected = {'train': examples, 'test': examples}
+    mock_load.return_value = expected
+    loaded_dataset = dummy_dc_loader.load_dataset(
+        'c', loader_kwargs={
+            'with_info': True,
+            'batch_size': 3
+        })
+
+    mock_load.assert_called_once_with(
+        name='c/e:3.5.7', with_info=False, batch_size=3)
+    assert loaded_dataset == expected
