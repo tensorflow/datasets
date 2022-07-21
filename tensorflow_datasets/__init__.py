@@ -60,6 +60,7 @@ try:
   # Imports for registration
   _before_dataset_imports = time.time()
   from tensorflow_datasets import audio
+  from tensorflow_datasets import dataset_collections
   from tensorflow_datasets import graphs
   from tensorflow_datasets import image
   from tensorflow_datasets import image_classification
