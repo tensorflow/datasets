@@ -30,6 +30,7 @@ from tensorflow_datasets.image_classification.cifar import Cifar10
 from tensorflow_datasets.image_classification.cifar import Cifar100
 from tensorflow_datasets.image_classification.cifar10_1 import Cifar10_1
 from tensorflow_datasets.image_classification.cifar10_corrupted import Cifar10Corrupted
+from tensorflow_datasets.image_classification.cifar10_n import Cifar10N
 from tensorflow_datasets.image_classification.citrus import CitrusLeaves
 from tensorflow_datasets.image_classification.cmaterdb import Cmaterdb
 from tensorflow_datasets.image_classification.colorectal_histology import ColorectalHistology
