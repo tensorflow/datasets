@@ -73,7 +73,7 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
   ```
   """
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
   }
@@ -87,7 +87,7 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
             'id': tfds.features.Text(),
             'image': tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
             'label': tfds.features.ClassLabel(num_classes=10),
-            'worst_label': tfds.features.ClassLabel(num_classes=10),
+            'worse_label': tfds.features.ClassLabel(num_classes=10),
             'aggre_label': tfds.features.ClassLabel(num_classes=10),
             'random_label1': tfds.features.ClassLabel(num_classes=10),
             'random_label2': tfds.features.ClassLabel(num_classes=10),
@@ -174,7 +174,7 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
 
     if 'train' in split_prefix:
       human_labels = _load_human_labels(dl_paths['human_labels'])
-      worst_label = human_labels['worse_label']
+      worse_label = human_labels['worse_label']
       aggre_label = human_labels['aggre_label']
       random_label1 = human_labels['random_label1']
       random_label2 = human_labels['random_label2']
@@ -198,7 +198,7 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
         record['image'] = np_image
 
         if 'train' in split_prefix:
-          record['worst_label'] = worst_label[index]
+          record['worse_label'] = worse_label[index]
           record['aggre_label'] = aggre_label[index]
           record['random_label1'] = random_label1[index]
           record['random_label2'] = random_label2[index]
@@ -213,7 +213,7 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
           record['worker3_time'] = worker3_time[index % 10]
         else:
           # There is no annotator metadata for test split
-          record['worst_label'] = -1
+          record['worse_label'] = -1
           record['aggre_label'] = -1
           record['random_label1'] = -1
           record['random_label2'] = -1
