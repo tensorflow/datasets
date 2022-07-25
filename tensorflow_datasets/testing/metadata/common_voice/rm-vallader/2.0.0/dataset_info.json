@@ -1,0 +1,113 @@
+{
+  "configDescription": "Language Code: rm-vallader",
+  "configName": "rm-vallader",
+  "description": "Mozilla Common Voice Dataset",
+  "downloadSize": "108113989",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://voice.mozilla.org/en/datasets"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.audio.commonvoice",
+  "name": "common_voice",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Updated to corpus 6.1 from 2020-12-11."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1204433811",
+      "shardLengths": [
+        "36",
+        "36",
+        "36",
+        "36",
+        "35",
+        "36",
+        "36",
+        "36",
+        "36",
+        "36",
+        "36",
+        "35",
+        "36",
+        "36",
+        "36",
+        "36"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "743420846",
+      "shardLengths": [
+        "47",
+        "47",
+        "48",
+        "47",
+        "47",
+        "48",
+        "47",
+        "47"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "2633639143",
+      "shardLengths": [
+        "41",
+        "41",
+        "41",
+        "41",
+        "42",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "42",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "42",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "42",
+        "41",
+        "41",
+        "41",
+        "41"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "670439208",
+      "shardLengths": [
+        "45",
+        "44",
+        "45",
+        "44",
+        "45",
+        "45",
+        "44",
+        "45"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}
