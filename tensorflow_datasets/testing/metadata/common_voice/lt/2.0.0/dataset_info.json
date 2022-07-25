@@ -1,0 +1,109 @@
+{
+  "configDescription": "Language Code: lt",
+  "configName": "lt",
+  "description": "Mozilla Common Voice Dataset",
+  "downloadSize": "135299706",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://voice.mozilla.org/en/datasets"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.audio.commonvoice",
+  "name": "common_voice",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Updated to corpus 6.1 from 2020-12-11."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1369320143",
+      "shardLengths": [
+        "58",
+        "58",
+        "59",
+        "58",
+        "58",
+        "58",
+        "58",
+        "59",
+        "58",
+        "58",
+        "58",
+        "58",
+        "58",
+        "59",
+        "58",
+        "58"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "808943245",
+      "shardLengths": [
+        "58",
+        "58",
+        "59",
+        "58",
+        "58",
+        "59",
+        "58",
+        "58"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "2571371032",
+      "shardLengths": [
+        "51",
+        "52",
+        "51",
+        "52",
+        "51",
+        "51",
+        "52",
+        "51",
+        "51",
+        "52",
+        "51",
+        "51",
+        "52",
+        "51",
+        "52",
+        "51",
+        "51",
+        "52",
+        "51",
+        "52",
+        "51",
+        "51",
+        "52",
+        "51",
+        "51",
+        "52",
+        "51",
+        "51",
+        "52",
+        "51",
+        "52",
+        "51"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "388468901",
+      "shardLengths": [
+        "61",
+        "61",
+        "61",
+        "61"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

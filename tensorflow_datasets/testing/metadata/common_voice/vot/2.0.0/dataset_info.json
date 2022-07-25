@@ -1,0 +1,37 @@
+{
+  "configDescription": "Language Code: vot",
+  "configName": "vot",
+  "description": "Mozilla Common Voice Dataset",
+  "downloadSize": "7792602",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://voice.mozilla.org/en/datasets"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.audio.commonvoice",
+  "name": "common_voice",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Updated to corpus 6.1 from 2020-12-11."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "5971733",
+      "shardLengths": [
+        "3"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "5971733",
+      "shardLengths": [
+        "3"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

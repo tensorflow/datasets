@@ -1,0 +1,64 @@
+{
+  "configDescription": "Language Code: pa-IN",
+  "configName": "pa-IN",
+  "description": "Mozilla Common Voice Dataset",
+  "downloadSize": "69748265",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://voice.mozilla.org/en/datasets"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.audio.commonvoice",
+  "name": "common_voice",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Updated to corpus 6.1 from 2020-12-11."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "308593182",
+      "shardLengths": [
+        "53",
+        "53",
+        "52",
+        "53"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "175219311",
+      "shardLengths": [
+        "58",
+        "58"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "553836363",
+      "shardLengths": [
+        "46",
+        "47",
+        "46",
+        "47",
+        "46",
+        "46",
+        "47",
+        "46"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "70023870",
+      "shardLengths": [
+        "44"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}
