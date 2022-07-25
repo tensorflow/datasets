@@ -1,0 +1,121 @@
+{
+  "configDescription": "Language Code: ka",
+  "configName": "ka",
+  "description": "Mozilla Common Voice Dataset",
+  "downloadSize": "104280554",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://voice.mozilla.org/en/datasets"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.audio.commonvoice",
+  "name": "common_voice",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Updated to corpus 6.1 from 2020-12-11."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1806746282",
+      "shardLengths": [
+        "66",
+        "66",
+        "66",
+        "66",
+        "67",
+        "66",
+        "66",
+        "66",
+        "66",
+        "66",
+        "66",
+        "67",
+        "66",
+        "66",
+        "66",
+        "66"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1231715409",
+      "shardLengths": [
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41",
+        "41"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "4055903612",
+      "shardLengths": [
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "72",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "72",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71",
+        "72",
+        "71",
+        "71",
+        "71",
+        "71",
+        "71"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "974264865",
+      "shardLengths": [
+        "66",
+        "66",
+        "66",
+        "66",
+        "65",
+        "66",
+        "66",
+        "66"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

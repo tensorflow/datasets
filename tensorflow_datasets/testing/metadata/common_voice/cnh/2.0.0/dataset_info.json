@@ -1,0 +1,105 @@
+{
+  "configDescription": "Language Code: cnh",
+  "configName": "cnh",
+  "description": "Mozilla Common Voice Dataset",
+  "downloadSize": "161331331",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://voice.mozilla.org/en/datasets"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.audio.commonvoice",
+  "name": "common_voice",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Updated to corpus 6.1 from 2020-12-11."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "764152520",
+      "shardLengths": [
+        "101",
+        "101",
+        "101",
+        "101",
+        "100",
+        "101",
+        "101",
+        "101"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1007265388",
+      "shardLengths": [
+        "94",
+        "94",
+        "94",
+        "94",
+        "94",
+        "94",
+        "94",
+        "94"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "2824811798",
+      "shardLengths": [
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76",
+        "76"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "905869322",
+      "shardLengths": [
+        "94",
+        "95",
+        "95",
+        "94",
+        "94",
+        "95",
+        "95",
+        "94"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

@@ -270,8 +270,8 @@ def test_find_builder_dir_with_namespace_given():
       '\nBuilder cannot be loaded from files if it uses:',
       f'* namespaces (here, {namespace} is used)'
   ]))
-  with (pytest.raises(registered.DatasetNotFoundError, match=error_msg),
-        error_utils.reraise_with_context(registered.DatasetNotFoundError)):
+  with pytest.raises(registered.DatasetNotFoundError, match=error_msg), \
+       error_utils.reraise_with_context(registered.DatasetNotFoundError):
     _find_builder_dir(ds)
     raise registered.DatasetNotFoundError
 
