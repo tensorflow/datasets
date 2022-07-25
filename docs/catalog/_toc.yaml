@@ -153,6 +153,9 @@ toc:
     title: cifar10
   - path: /datasets/catalog/cifar100
     title: cifar100
+  - path: /datasets/catalog/cifar100_n
+    status: nightly
+    title: cifar100_n (manual)
   - path: /datasets/catalog/cifar10_1
     title: cifar10_1
   - path: /datasets/catalog/cifar10_corrupted
