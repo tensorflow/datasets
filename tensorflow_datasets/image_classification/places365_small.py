@@ -62,8 +62,9 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(names_file=names_file),
+            "filename": tfds.features.Text(),
         }),
-        supervised_keys=("image", "label"),
+        supervised_keys=("image", "label", "filename"),
         homepage="http://places2.csail.mit.edu/",
         citation=_CITATION)
 
@@ -137,4 +138,4 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
       chop = len(path_prefix) if split_name == "train" else len(path_prefix) + 1
       key = fname[chop:]
       class_id = file_to_class[key]
-      yield fname, {"image": fobj, "label": class_id}
+      yield fname, {"image": fobj, "label": class_id, "filename": fname}
