@@ -32,7 +32,8 @@ additional labels given by real human annotators.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.0.1`** (default): No release notes.
 
 *   **Download size**: `Unknown size`
 
@@ -90,7 +91,7 @@ FeaturesDict({
     'worker2_time': tf.float32,
     'worker3_id': tf.int64,
     'worker3_time': tf.float32,
-    'worst_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'worse_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
 
@@ -112,7 +113,7 @@ worker2_id    | Tensor       |             | tf.int64   |
 worker2_time  | Tensor       |             | tf.float32 |
 worker3_id    | Tensor       |             | tf.int64   |
 worker3_time  | Tensor       |             | tf.float32 |
-worst_label   | ClassLabel   |             | tf.int64   |
+worse_label   | ClassLabel   |             | tf.int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
