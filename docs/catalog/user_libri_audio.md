@@ -37,16 +37,123 @@ See UserLibriText for the additional text data.
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.37 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split                                  | Examples
+:------------------------------------- | -------:
+`'test-clean_speaker-1089-book-4217'`  | 64
+`'test-clean_speaker-1188-book-20019'` | 45
+`'test-clean_speaker-121-book-1041'`   | 10
+`'test-clean_speaker-121-book-1989'`   | 15
+`'test-clean_speaker-121-book-209'`    | 37
+`'test-clean_speaker-1221-book-33'`    | 41
+`'test-clean_speaker-1284-book-732'`   | 8
+`'test-clean_speaker-1284-book-955'`   | 55
+`'test-clean_speaker-1320-book-940'`   | 59
+`'test-clean_speaker-1580-book-108'`   | 105
+`'test-clean_speaker-1995-book-15265'` | 72
+`'test-clean_speaker-2094-book-507'`   | 61
+`'test-clean_speaker-2300-book-820'`   | 42
+`'test-clean_speaker-237-book-24'`     | 62
+`'test-clean_speaker-237-book-2770'`   | 26
+`'test-clean_speaker-260-book-11'`     | 21
+`'test-clean_speaker-260-book-3748'`   | 61
+`'test-clean_speaker-2830-book-1549'`  | 90
+`'test-clean_speaker-2961-book-1572'`  | 46
+`'test-clean_speaker-3570-book-833'`   | 50
+`'test-clean_speaker-3575-book-1827'`  | 57
+`'test-clean_speaker-3729-book-2981'`  | 47
+`'test-clean_speaker-4077-book-5630'`  | 39
+`'test-clean_speaker-4446-book-94'`    | 108
+`'test-clean_speaker-4507-book-135'`   | 60
+`'test-clean_speaker-4970-book-3178'`  | 63
+`'test-clean_speaker-4992-book-10540'` | 41
+`'test-clean_speaker-4992-book-22002'` | 21
+`'test-clean_speaker-5105-book-1353'`  | 56
+`'test-clean_speaker-5142-book-2300'`  | 7
+`'test-clean_speaker-5142-book-24811'` | 69
+`'test-clean_speaker-5142-book-7891'`  | 26
+`'test-clean_speaker-5639-book-14420'` | 42
+`'test-clean_speaker-5683-book-9983'`  | 75
+`'test-clean_speaker-61-book-28700'`   | 104
+`'test-clean_speaker-672-book-1597'`   | 75
+`'test-clean_speaker-6829-book-13110'` | 91
+`'test-clean_speaker-6930-book-13158'` | 28
+`'test-clean_speaker-6930-book-2681'`  | 21
+`'test-clean_speaker-6930-book-30905'` | 29
+`'test-clean_speaker-7021-book-11667'` | 31
+`'test-clean_speaker-7021-book-26177'` | 28
+`'test-clean_speaker-7127-book-2681'`  | 71
+`'test-clean_speaker-7176-book-13441'` | 46
+`'test-clean_speaker-7176-book-38675'` | 28
+`'test-clean_speaker-7729-book-6812'`  | 47
+`'test-clean_speaker-8224-book-19215'` | 32
+`'test-clean_speaker-8230-book-2529'`  | 44
+`'test-clean_speaker-8455-book-27067'` | 71
+`'test-clean_speaker-8463-book-15263'` | 15
+`'test-clean_speaker-8463-book-2488'`  | 59
+`'test-clean_speaker-8555-book-36508'` | 16
+`'test-clean_speaker-8555-book-39159'` | 46
+`'test-clean_speaker-908-book-2002'`   | 26
+`'test-clean_speaker-908-book-574'`    | 31
+`'test-other_speaker-1688-book-4276'`  | 96
+`'test-other_speaker-1998-book-19019'` | 28
+`'test-other_speaker-1998-book-28725'` | 87
+`'test-other_speaker-2033-book-3436'`  | 52
+`'test-other_speaker-2414-book-1998'`  | 60
+`'test-other_speaker-2414-book-26379'` | 2
+`'test-other_speaker-2414-book-40359'` | 36
+`'test-other_speaker-2609-book-12434'` | 39
+`'test-other_speaker-2609-book-18096'` | 15
+`'test-other_speaker-2609-book-27090'` | 25
+`'test-other_speaker-3005-book-76'`    | 108
+`'test-other_speaker-3080-book-12544'` | 61
+`'test-other_speaker-3331-book-2787'`  | 73
+`'test-other_speaker-3528-book-135'`   | 144
+`'test-other_speaker-3538-book-10136'` | 27
+`'test-other_speaker-3538-book-540'`   | 67
+`'test-other_speaker-367-book-5921'`   | 21
+`'test-other_speaker-367-book-9464'`   | 34
+`'test-other_speaker-3764-book-135'`   | 113
+`'test-other_speaker-3997-book-14958'` | 21
+`'test-other_speaker-3997-book-1608'`  | 66
+`'test-other_speaker-4198-book-16653'` | 31
+`'test-other_speaker-4198-book-8166'`  | 60
+`'test-other_speaker-4294-book-12176'` | 27
+`'test-other_speaker-4294-book-135'`   | 30
+`'test-other_speaker-4294-book-4028'`  | 19
+`'test-other_speaker-4294-book-9983'`  | 6
+`'test-other_speaker-4350-book-1399'`  | 34
+`'test-other_speaker-4350-book-4602'`  | 61
+`'test-other_speaker-4852-book-28952'` | 113
+`'test-other_speaker-533-book-434'`    | 25
+`'test-other_speaker-533-book-969'`    | 71
+`'test-other_speaker-5442-book-1399'`  | 60
+`'test-other_speaker-5442-book-9983'`  | 20
+`'test-other_speaker-5484-book-5516'`  | 72
+`'test-other_speaker-5764-book-38804'` | 98
+`'test-other_speaker-6070-book-1184'`  | 50
+`'test-other_speaker-6070-book-33800'` | 19
+`'test-other_speaker-6128-book-19717'` | 68
+`'test-other_speaker-6432-book-16127'` | 118
+`'test-other_speaker-6938-book-3076'`  | 31
+`'test-other_speaker-7018-book-3440'`  | 52
+`'test-other_speaker-7105-book-1477'`  | 80
+`'test-other_speaker-7902-book-21297'` | 135
+`'test-other_speaker-7975-book-24585'` | 100
+`'test-other_speaker-8131-book-20212'` | 118
+`'test-other_speaker-8188-book-19215'` | 12
+`'test-other_speaker-8188-book-41326'` | 116
+`'test-other_speaker-8280-book-14566'` | 66
+`'test-other_speaker-8461-book-3441'`  | 17
+`'test-other_speaker-8461-book-6328'`  | 39
+`'test-other_speaker-8461-book-9189'`  | 16
 
 *   **Feature structure**:
 
