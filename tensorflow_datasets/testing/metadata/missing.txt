@@ -13,8 +13,7 @@ c4/webtextlike/2.2.0
 c4/webtextlike/2.2.1
 c4/webtextlike/2.3.0
 c4/webtextlike/2.3.1
-cifar100_n/1.0.0
-cifar10_n/1.0.0
+cifar10_n/1.0.1
 covid19sum/1.0.0
 glue/ax/1.0.1
 glue/cola/1.0.1
@@ -264,7 +263,6 @@ so2sat/all/2.0.0
 so2sat/all/2.1.0
 so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
-user_libri_audio/1.0.0
 user_libri_text/1.0.0
 voxforge/1.0.0
 wikipedia/20220620.aa/1.0.0
