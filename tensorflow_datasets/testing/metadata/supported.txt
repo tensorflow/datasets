@@ -325,6 +325,7 @@ cfq/random_split/1.2.0
 cherry_blossoms/1.0.0
 cifar10/3.0.2
 cifar100/3.0.2
+cifar100_n/1.0.0
 cifar10_1/v4/1.1.0
 cifar10_1/v6/1.1.0
 cifar10_corrupted/brightness_1/1.0.0
@@ -2963,6 +2964,7 @@ unified_qa/squad2/1.0.0
 unified_qa/winogrande_l/1.0.0
 unified_qa/winogrande_m/1.0.0
 unified_qa/winogrande_s/1.0.0
+user_libri_audio/1.0.0
 vctk/mic1/1.0.1
 vctk/mic2/1.0.1
 visual_domain_decathlon/aircraft/1.2.0
