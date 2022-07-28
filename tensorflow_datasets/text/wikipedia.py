@@ -29,10 +29,6 @@ import tensorflow_datasets.public_api as tfds
 from absl import flags  # pylint:disable=g-bad-import-order,g-import-not-at-top
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean(
-    "wikipedia_auto_select_flume_mode", True,
-    "If True, will automatically determine whether to run flume on borg or "
-    "locally based on the dump size for each language.")
 
 _CITATION = """\
 @ONLINE {wikidump,
@@ -234,30 +230,24 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
             continue
 
           beam.metrics.Metrics.counter(language, "extracted-examples").inc()
-          yield (id_, title, raw_content)
 
-    def _clean_content(inputs):
-      """Cleans raw wikicode to extract text."""
-      id_, title, raw_content = inputs
-      try:
-        text = _parse_and_clean_wikicode(raw_content)
-      except (tfds.core.lazy_imports.mwparserfromhell.parser.ParserError) as e:
-        beam.metrics.Metrics.counter(language, "parser-error").inc()
-        logging.error("mwparserfromhell ParseError: %s", e)
-        return
+          try:
+            text = _parse_and_clean_wikicode(raw_content)
+          except (
+              tfds.core.lazy_imports.mwparserfromhell.parser.ParserError) as e:
+            beam.metrics.Metrics.counter(language, "parser-error").inc()
+            logging.error("mwparserfromhell ParseError: %s", e)
+            return
 
-      if not text:
-        beam.metrics.Metrics.counter(language, "empty-clean-examples").inc()
-        return
+          if not text:
+            beam.metrics.Metrics.counter(language, "empty-clean-examples").inc()
+            return
 
-      beam.metrics.Metrics.counter(language, "cleaned-examples").inc()
+          beam.metrics.Metrics.counter(language, "cleaned-examples").inc()
 
-      yield id_, {"title": title, "text": text}
+          yield id_, {"title": title, "text": text}
 
-    return (beam.Create(filepaths)
-            | beam.FlatMap(_extract_content)
-            | beam.transforms.Reshuffle()
-            | beam.FlatMap(_clean_content))
+    return (beam.Create(filepaths) | beam.FlatMap(_extract_content))
 
 
 def _parse_and_clean_wikicode(raw_content):
