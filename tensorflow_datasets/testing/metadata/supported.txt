@@ -1291,7 +1291,6 @@ penguins/simple/1.0.0
 pet_finder/1.0.0
 pg19/0.1.1
 piqa/1.0.0
-places365_small/2.0.0
 plant_leaves/0.1.0
 plant_village/1.0.2
 plantae_k/0.1.0
