@@ -13,7 +13,6 @@ c4/webtextlike/2.2.0
 c4/webtextlike/2.2.1
 c4/webtextlike/2.3.0
 c4/webtextlike/2.3.1
-cifar10_n/1.0.1
 covid19sum/1.0.0
 glue/ax/1.0.1
 glue/cola/1.0.1
@@ -30,7 +29,6 @@ glue/wnli/1.0.1
 natural_questions/default/0.0.2
 natural_questions/longt5/0.0.2
 pass/3.0.0
-places365_small/2.1.0
 reddit_disentanglement/2.0.0
 rlu_atari_checkpoints/Alien_run_3/1.1.0
 rlu_atari_checkpoints/Alien_run_4/1.1.0
