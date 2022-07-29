@@ -423,6 +423,7 @@ cifar10_corrupted/zoom_blur_2/1.0.0
 cifar10_corrupted/zoom_blur_3/1.0.0
 cifar10_corrupted/zoom_blur_4/1.0.0
 cifar10_corrupted/zoom_blur_5/1.0.0
+cifar10_n/1.0.1
 citrus_leaves/0.1.2
 cityscapes/semantic_segmentation/1.0.0
 cityscapes/semantic_segmentation_extra/1.0.0
@@ -1291,6 +1292,7 @@ penguins/simple/1.0.0
 pet_finder/1.0.0
 pg19/0.1.1
 piqa/1.0.0
+places365_small/2.1.0
 plant_leaves/0.1.0
 plant_village/1.0.2
 plantae_k/0.1.0
