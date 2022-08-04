@@ -190,7 +190,7 @@ def _try_load_from_files_first(
     **builder_kwargs: Any,
 ) -> bool:
   """Returns True if files should be used rather than code."""
-  if set(builder_kwargs) - {'version', 'config', 'data_dir'}:
+  if set(builder_kwargs) - {'version', 'config', 'data_dir', 'decoders'}:
     return False  # Has extra kwargs, requires original code.
   elif builder_kwargs.get('version') == 'experimental_latest':
     return False  # Requested version requires original code

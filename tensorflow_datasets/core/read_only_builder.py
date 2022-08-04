@@ -282,6 +282,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   version = builder_kwargs.pop('version', None)
   config = builder_kwargs.pop('config', None)
   data_dir = builder_kwargs.pop('data_dir', None)
+  builder_kwargs.pop('decoders', None)
 
   # Builder cannot be found if it uses:
   # * namespace
