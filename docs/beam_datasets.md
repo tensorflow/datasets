@@ -159,7 +159,7 @@ Some additional considerations:
     without having to install Beam.
 *   Be careful with Python closures. When running the pipeline, the `beam.Map`
     and `beam.DoFn` functions are serialized using `pickle` and sent to all
-    workers. Do not mutable objects inside a `beam.PTransform` if the state has
+    workers. Do not use mutable objects inside a `beam.PTransform` if the state has
     to be shared across workers.
 *   Due to the way `tfds.core.DatasetBuilder` is serialized with pickle,
     mutating `tfds.core.DatasetBuilder` during data creation will be ignored on
