@@ -37,9 +37,9 @@ evaluation platform for the algorithms of scene parsing.
 
 _TRAIN_URL = {
     "images":
-        "http://placeschallenge.csail.mit.edu/data/ChallengeData2017/images.tar",
+        "http://sceneparsing.csail.mit.edu/data/ChallengeData2017/images.tar",
     "annotations":
-        "http://placeschallenge.csail.mit.edu/data/ChallengeData2017/annotations_instance.tar"
+        "http://sceneparsing.csail.mit.edu/data/ChallengeData2017/annotations_instance.tar"
 }
 
 
