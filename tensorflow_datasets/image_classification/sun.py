@@ -139,21 +139,21 @@ class Sun397Config(tfds.core.BuilderConfig):
 
   def __init__(self,
                target_pixels=None,
-               partition=None,
+               sun_partition=None,
                quality=None,
                **kwargs):
     self._target_pixels = target_pixels
-    self._partition = partition
+    self._sun_partition = sun_partition
     self._quality = quality
-    super(Sun397Config, self).__init__(**kwargs)
+    super().__init__(**kwargs)
 
   @property
   def target_pixels(self):
     return self._target_pixels
 
   @property
-  def partition(self):
-    return self._partition
+  def sun_partition(self):
+    return self._sun_partition
 
   @property
   def quality(self):
@@ -183,7 +183,7 @@ def _generate_builder_configs():
     builder_configs.append(
         Sun397Config(
             name="standard-part%d-120k" % partition,
-            partition=partition,
+            sun_partition=partition,
             target_pixels=120000,
             version=version,
             description=description))
@@ -314,8 +314,8 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
       all_images.update(split_images)
     # Load the images in the training/test split of this partition.
     filenames = {
-        "tr": "Training_%02d.txt" % self.builder_config.partition,
-        "te": "Testing_%02d.txt" % self.builder_config.partition
+        "tr": "Training_%02d.txt" % self.builder_config.sun_partition,
+        "te": "Testing_%02d.txt" % self.builder_config.sun_partition
     }
     splits_sets = {}
     for split, filename in filenames.items():

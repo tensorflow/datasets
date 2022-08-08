@@ -25,7 +25,7 @@ class WikipediaTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["20220620.en"]
 
   # url_checksums are read from `dumpstatus.json`
-  # Modify dumpstatus.json if `date` is not `20200301`
+  # Modify dumpstatus.json if `date` is not `20220620`
   DL_EXTRACT_RESULT = {
       "info": "dumpstatus.json",
       "xml": ["enwiki_fake.xml.bz2", "enwiki_fake2.xml.bz2"]

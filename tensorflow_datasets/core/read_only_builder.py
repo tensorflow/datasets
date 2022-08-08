@@ -17,13 +17,14 @@
 
 import os
 import typing
-from typing import Any, List, Optional, Tuple, Type
+from typing import Any, List, Optional, Tuple, Type, Union
 
 from etils import epath
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import partition as partition_lib
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
@@ -88,7 +89,9 @@ class ReadOnlyBuilder(
           'was generated with an old TFDS version (<=3.2.1).')
 
   def _create_builder_config(
-      self, builder_config: Optional[dataset_builder.BuilderConfig]
+      self,
+      builder_config: Optional[dataset_builder.BuilderConfig],
+      partition: Union[None, partition_lib.PartitionInfo] = None,
   ) -> Optional[dataset_builder.BuilderConfig]:
     return builder_config  # BuilderConfig is created in __init__
 

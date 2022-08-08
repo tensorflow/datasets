@@ -39,6 +39,10 @@ from tensorflow_datasets.core.load import DatasetCollectionLoader
 
 from tensorflow_datasets.core.naming import ShardedFileTemplate
 
+from tensorflow_datasets.core.partition import PartitionInfo
+from tensorflow_datasets.core.partition import Partitioning
+from tensorflow_datasets.core.partition import PartitionSpec
+
 from tensorflow_datasets.core.registered import DatasetNotFoundError
 
 from tensorflow_datasets.core.sequential_writer import SequentialWriter
@@ -85,6 +89,9 @@ __all__ = [
     "lazy_imports",
     "Metadata",
     "MetadataDict",
+    "PartitionInfo",
+    "Partitioning",
+    "PartitionSpec",
     "Path",
     "ReadInstruction",
     "SequentialWriter",

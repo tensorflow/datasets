@@ -22,6 +22,7 @@ from etils import epath
 import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import partition as partition_lib
 from tensorflow_datasets.core import splits
 
 _FILENAME_TEMPLATE_DEFAULT = naming.ShardedFileTemplate(data_dir='.')
@@ -38,9 +39,53 @@ _FILENAME_TEMPLATE_CUSTOM_FULL = naming.ShardedFileTemplate(
     dataset_name='mnist',
     split='train',
     filetype_suffix='tfrecord')
+_PARTITION_SPEC = partition_lib.PartitionSpec.create_simple_spec(['x', 'y'])
+_PARTITION_INFO = partition_lib.PartitionInfo(
+    values={
+        'language': 'en',
+        'snapshot': '20221122'
+    },
+    spec=partition_lib.PartitionSpec.create_simple_spec(
+        ['language', 'snapshot']))
 
 
 class NamingTest(parameterized.TestCase, testing.TestCase):
+
+  @parameterized.parameters(
+      ('a', None, 'a'),
+      (None,
+       partition_lib.PartitionInfo(
+           spec=_PARTITION_SPEC, values={
+               'x': 'xval',
+               'y': 'yval'
+           }), 'xval.yval'),
+      ('a',
+       partition_lib.PartitionInfo(
+           spec=_PARTITION_SPEC, values={
+               'x': 'xval',
+               'y': 'yval'
+           }), 'a.xval.yval'),
+  )
+  def test_builder_config_name_for(self, config, partition, expected):
+    assert naming.builder_config_name_for(config, partition) == expected
+
+  def test_builder_config_name_for_no_input(self):
+    with pytest.raises(
+        ValueError,
+        match='The config and/or the partition need to have a value!'):
+      naming.builder_config_name_for(config=None, partition=None)
+
+  def test_builder_config_name_for_no_partition_spec(self):
+    with pytest.raises(
+        ValueError,
+        match='No PartitionSpec was given, cannot format partition!'):
+      naming.builder_config_name_for(
+          config=None,
+          partition=partition_lib.PartitionInfo(
+              spec=None, values={
+                  'x': 'xval',
+                  'y': 'yval'
+              }))
 
   @parameterized.parameters(
       ('HelloWorld', 'hello_world'),
@@ -219,6 +264,19 @@ def test_dataset_name():
         ('huggingface:swiss_judgment_prediction/all+mt',
          (naming.DatasetName('huggingface:swiss_judgment_prediction'), {
              'config': 'all+mt',
+         })),
+        # Partition specified.
+        ('ds1/config<language=en,snapshot=20221122>:1.0.0',
+         (naming.DatasetName('ds1'), {
+             'version':
+                 '1.0.0',
+             'config':
+                 'config',
+             'partition':
+                 partition_lib.PartitionInfo({
+                     'snapshot': '20221122',
+                     'language': 'en'
+                 }),
          })),
     ],
 )
@@ -610,49 +668,68 @@ def test_sharded_file_template_parse_filename_info_custom_template_add_missing(
 
 @pytest.mark.parametrize(
     ('tfds_name', 'namespace', 'split_mapping', 'data_dir', 'ds_name',
-     'version', 'config'),
+     'version', 'config', 'partition'),
     [
         # Dataset with a config and a version.
-        ('ds/config:1.2.3', None, None, None, 'ds', '1.2.3', 'config'),
+        ('ds/config:1.2.3', None, None, None, 'ds', '1.2.3', 'config', None),
         # Dataset with a config and a version and a data_dir.
-        ('ds/config:1.2.3', None, None, '/a/b', 'ds', '1.2.3', 'config'),
+        ('ds/config:1.2.3', None, None, '/a/b', 'ds', '1.2.3', 'config', None),
         # Test having a split mapping.
         ('ds/config:1.2.3', None, {
             'x': 'y'
-        }, None, 'ds', '1.2.3', 'config'),
+        }, None, 'ds', '1.2.3', 'config', None),
         # Dataset without a config but with a version.
-        ('ds:1.2.3', None, None, None, 'ds', '1.2.3', None),
+        ('ds:1.2.3', None, None, None, 'ds', '1.2.3', None, None),
         # Dataset with a config but without a version.
-        ('ds/config', None, None, None, 'ds', None, 'config'),
+        ('ds/config', None, None, None, 'ds', None, 'config', None),
         # Dataset without a config and a version.
-        ('ds', None, None, None, 'ds', None, None),
+        ('ds', None, None, None, 'ds', None, None, None),
         # Dataset with a namespace.
-        ('ns:ds/config:1.2.3', 'ns', None, '/a/b', 'ds', '1.2.3', 'config'),
+        ('ns:ds/config:1.2.3', 'ns', None, '/a/b', 'ds', '1.2.3', 'config', None
+        ),
+        # Dataset with a namespace and a partition.
+        ('ns:ds/config<language=en,snapshot=2022-11-22>:1.2.3', 'ns', None,
+         '/a/b', 'ds', '1.2.3', 'config', {
+             'language': 'en',
+             'snapshot': '2022-11-22'
+         }),
     ])
 def test_dataset_reference_from_tfds_name(tfds_name, namespace, split_mapping,
-                                          data_dir, ds_name, version, config):
+                                          data_dir, ds_name, version, config,
+                                          partition):
   actual = naming.DatasetReference.from_tfds_name(
       tfds_name=tfds_name, split_mapping=split_mapping, data_dir=data_dir)
+  if partition is not None:
+    partition = partition_lib.PartitionInfo(values=partition)
   assert actual == naming.DatasetReference(
       dataset_name=ds_name,
       namespace=namespace,
       version=version,
       config=config,
+      partition=partition,
       split_mapping=split_mapping,
       data_dir=data_dir)
 
 
 @pytest.mark.parametrize(
-    ('ds_name', 'namespace', 'version', 'config', 'tfds_name'), [
-        ('ds', 'ns', '1.2.3', 'config', 'ns:ds/config:1.2.3'),
-        ('ds', None, '1.2.3', 'config', 'ds/config:1.2.3'),
-        ('ds', None, '1.2.3', None, 'ds:1.2.3'),
-        ('ds', None, None, None, 'ds'),
+    ('ds_name', 'namespace', 'version', 'config', 'partition', 'tfds_name'), [
+        ('ds', 'ns', '1.2.3', 'config', _PARTITION_INFO,
+         'ns:ds/config<language=en,snapshot=20221122>:1.2.3'),
+        ('ds', 'ns', '1.2.3', 'config', None, 'ns:ds/config:1.2.3'),
+        ('ds', None, '1.2.3', 'config', None, 'ds/config:1.2.3'),
+        ('ds', None, '1.2.3', None, None, 'ds:1.2.3'),
+        ('ds', None, '1.2.3', None, _PARTITION_INFO,
+         'ds<language=en,snapshot=20221122>:1.2.3'),
+        ('ds', None, None, None, None, 'ds'),
     ])
 def test_dataset_reference_tfds_name(ds_name, namespace, version, config,
-                                     tfds_name):
+                                     partition, tfds_name):
   reference = naming.DatasetReference(
-      dataset_name=ds_name, namespace=namespace, version=version, config=config)
+      dataset_name=ds_name,
+      namespace=namespace,
+      version=version,
+      config=config,
+      partition=partition)
   assert reference.tfds_name() == tfds_name
 
 
@@ -704,3 +781,31 @@ def test_reference_for():
   expected = naming.DatasetReference(
       dataset_name='ds', version='1.2.3', config='config')
   assert naming.reference_for('ds/config:1.2.3') == expected
+
+
+@pytest.mark.parametrize(('partition', 'expected'), [
+    (None, ''),
+    (_PARTITION_INFO, '<language=en,snapshot=20221122>'),
+])
+def test_tfds_name_for_config_and_partition(partition, expected):
+  assert naming.tfds_name_for_partition(partition=partition) == expected
+
+
+@pytest.mark.parametrize(
+    ('name', 'namespace', 'config', 'partition', 'version', 'expected'), [
+        ('ds', 'ns', 'config', _PARTITION_INFO, '1.2.3',
+         'ns:ds/config<language=en,snapshot=20221122>:1.2.3'),
+        ('ds', 'ns', 'config', None, '1.2.3', 'ns:ds/config:1.2.3'),
+        ('ds', None, 'config', None, '1.2.3', 'ds/config:1.2.3'),
+        ('ds', None, None, None, '1.2.3', 'ds:1.2.3'),
+        ('ds', None, None, _PARTITION_INFO, '1.2.3',
+         'ds<language=en,snapshot=20221122>:1.2.3'),
+        ('ds', None, None, None, None, 'ds'),
+    ])
+def test_tfds_name_for(name, namespace, config, partition, version, expected):
+  assert naming.tfds_name_for(
+      name=name,
+      namespace=namespace,
+      config=config,
+      partition=partition,
+      version=version) == expected
