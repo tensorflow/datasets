@@ -671,6 +671,9 @@ toc:
     title: opus
   - path: /datasets/catalog/para_crawl
     title: para_crawl
+  - path: /datasets/catalog/tatoeba
+    status: nightly
+    title: tatoeba
   - path: /datasets/catalog/ted_hrlr_translate
     title: ted_hrlr_translate
   - path: /datasets/catalog/ted_multi_translate
