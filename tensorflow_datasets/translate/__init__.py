@@ -15,6 +15,7 @@
 
 """Translation datasets."""
 
+from tensorflow_datasets.translate.bucc import Bucc
 from tensorflow_datasets.translate.flores import Flores
 from tensorflow_datasets.translate.flores import FloresConfig
 from tensorflow_datasets.translate.opus import Opus
