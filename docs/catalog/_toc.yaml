@@ -665,6 +665,9 @@ toc:
     title: smartwatch_gestures
   title: Time series
 - section:
+  - path: /datasets/catalog/bucc
+    status: nightly
+    title: bucc
   - path: /datasets/catalog/flores
     title: flores
   - path: /datasets/catalog/opus
