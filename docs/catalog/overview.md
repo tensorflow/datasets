@@ -398,6 +398,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Translate`
 
+*   [`bucc`](bucc.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`flores`](flores.md)
 *   [`opus`](opus.md)
 *   [`para_crawl`](para_crawl.md)
