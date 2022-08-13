@@ -40,18 +40,9 @@ compared to the ground truth, and evaluated in terms of the F1 measure.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Feature structure**:
 
@@ -101,8 +92,52 @@ target_sentence | Text         |       | tf.string |
 
 ## bucc/bucc_de (default config)
 
+*   **Download size**: `29.30 MiB`
+
+*   **Dataset size**: `3.21 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,580
+`'validation'` | 1,038
+
 ## bucc/bucc_fr
+
+*   **Download size**: `21.65 MiB`
+
+*   **Dataset size**: `2.90 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 9,086
+`'validation'` | 929
 
 ## bucc/bucc_zh
 
+*   **Download size**: `6.79 MiB`
+
+*   **Dataset size**: `615.20 KiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 1,899
+`'validation'` | 257
+
 ## bucc/bucc_ru
+
+*   **Download size**: `39.44 MiB`
+
+*   **Dataset size**: `6.36 MiB`
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | -------:
+`'test'`       | 14,435
+`'validation'` | 2,374
