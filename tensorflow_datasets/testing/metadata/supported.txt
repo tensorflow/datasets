@@ -209,6 +209,10 @@ blimp/wh_vs_that_with_gap_long_distance/0.1.0
 booksum/book/1.0.0
 booksum/chapter/1.0.0
 bool_q/1.0.0
+bucc/bucc_de/1.0.0
+bucc/bucc_fr/1.0.0
+bucc/bucc_ru/1.0.0
+bucc/bucc_zh/1.0.0
 c4/en.noclean/2.2.0
 c4/en.noclean/2.2.1
 c4/en.noclean/2.3.0
