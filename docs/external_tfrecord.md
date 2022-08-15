@@ -76,7 +76,7 @@ encode your data from `dict[np.ndarray]` to `tf.train.Example` proto `bytes`:
 with tf.io.TFRecordWriter('path/to/file.tfrecord') as writer:
   for ex in all_exs:
     ex_bytes = features.serialize_example(data)
-    f.write(ex_bytes)
+    writer.write(ex_bytes)
 ```
 
 This will ensure feature compatibility with TFDS.
