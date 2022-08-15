@@ -49,8 +49,8 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for CIFAR-10N dataset."""
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
-  Download 'side_info_cifar10N.csv' and 'CIFAR-10_human_ordered.npy' from 
-  https://github.com/UCSC-REAL/cifar-10-100n.
+  Download 'side_info_cifar10N.csv', 'CIFAR-10_human_ordered.npy' and 
+  'image_order_c10.npy' from https://github.com/UCSC-REAL/cifar-10-100n.
 
   Then convert 'CIFAR-10_human_ordered.npy' into a CSV file 
   'CIFAR-10_human_annotations.csv'. This can be done with the following code:
@@ -69,13 +69,15 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
   df = pd.DataFrame(human_annotations[()])
 
   with tf.io.gfile.GFile(human_labels_csv_path, "w") as f:
-    df.to_csv(f)
+    df.to_csv(f, index=False)
   ```
   """
 
-  VERSION = tfds.core.Version('1.0.1')
+  VERSION = tfds.core.Version('1.0.2')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
+      '1.0.1': 'Fixed typo in `worse_label` key.',
+      '1.0.2': 'Fixed correspondence between annotations and images.'
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -118,7 +120,8 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
         label_files=['batches.meta.txt'],
         label_keys=['label'],
         human_label_path='CIFAR-10_human_annotations.csv',
-        side_info_path='side_info_cifar10N.csv')
+        side_info_path='side_info_cifar10N.csv',
+        annotations_order_path='image_order_c10.npy')
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
@@ -128,8 +131,12 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
     cifar_path = os.path.join(cifar_path, cifar_info.prefix)
 
     dl_paths = {
-        'human_labels': dl_manager.manual_dir / cifar_info.human_label_path,
-        'side_info': dl_manager.manual_dir / cifar_info.side_info_path
+        'human_labels':
+            dl_manager.manual_dir / cifar_info.human_label_path,
+        'side_info':
+            dl_manager.manual_dir / cifar_info.side_info_path,
+        'annotations_order':
+            dl_manager.manual_dir / cifar_info.annotations_order_path,
     }
 
     # Load the label names
@@ -188,6 +195,8 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
       worker3_id = side_info['worker3_id']
       worker3_time = side_info['worker3_time']
 
+      annotations_order = _load_annotations_order(dl_paths['annotations_order'])
+
     for path in filepaths:
       for labels, np_image in _load_data(path, len(label_keys)):
         record = dict(zip(label_keys, labels))
@@ -198,19 +207,24 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
         record['image'] = np_image
 
         if 'train' in split_prefix:
-          record['worse_label'] = worse_label[index]
-          record['aggre_label'] = aggre_label[index]
-          record['random_label1'] = random_label1[index]
-          record['random_label2'] = random_label2[index]
-          record['random_label3'] = random_label3[index]
+          # Note: The human labels are provided according to default shuffling
+          # of 'cifar10'. We need to invert the shuffling to assign the right
+          # human label to each example.
+          annotations_index = np.where(annotations_order == index)[0][0]
+
+          record['worse_label'] = worse_label[annotations_index]
+          record['aggre_label'] = aggre_label[annotations_index]
+          record['random_label1'] = random_label1[annotations_index]
+          record['random_label2'] = random_label2[annotations_index]
+          record['random_label3'] = random_label3[annotations_index]
 
           # Worker metadata is shared every 10 samples
-          record['worker1_id'] = worker1_id[index % 10]
-          record['worker1_time'] = worker1_time[index % 10]
-          record['worker2_id'] = worker2_id[index % 10]
-          record['worker2_time'] = worker2_time[index % 10]
-          record['worker3_id'] = worker3_id[index % 10]
-          record['worker3_time'] = worker3_time[index % 10]
+          record['worker1_id'] = worker1_id[index // 10]
+          record['worker1_time'] = worker1_time[index // 10]
+          record['worker2_id'] = worker2_id[index // 10]
+          record['worker2_time'] = worker2_time[index // 10]
+          record['worker3_id'] = worker3_id[index // 10]
+          record['worker3_time'] = worker3_time[index // 10]
         else:
           # There is no annotator metadata for test split
           record['worse_label'] = -1
@@ -233,7 +247,8 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
 class CifarInfo(
     collections.namedtuple('_CifarInfo', [
         'name', 'url', 'prefix', 'train_files', 'test_files', 'label_files',
-        'label_keys', 'human_label_path', 'side_info_path'
+        'label_keys', 'human_label_path', 'side_info_path',
+        'annotations_order_path'
     ])):
   """Contains the information necessary to generate a CIFAR dataset.
 
@@ -246,8 +261,9 @@ class CifarInfo(
     test_files (list<str>): name of test files within `prefix`.
     label_files (list<str>): names of the label files in the data.
     label_keys (list<str>): names of the label keys in the data.
-    human_label_path (str): Pat to human annotations
-    side_info_path (str): Path to metadata about annotations
+    human_label_path (str): path to human annotations.
+    side_info_path (str): path to metadata about annotations.
+    annotations_order_path (str): path to annotation-image order correspondence.
   """
 
 
@@ -288,11 +304,18 @@ def _load_side_info(path):
   return side_info
 
 
+def _load_annotations_order(path):
+  """Loads index mapping between the annotation files and the CIFAR10 binaries."""
+  with tf.io.gfile.GFile(path, 'rb') as f:
+    annotations_order = np.load(f)
+  return annotations_order
+
+
 def _load_human_labels(path):
   """Loads information from side_info_cifar10N.csv."""
   human_labels_key_map = {
-      1: 'worse_label',
-      2: 'aggre_label',
+      1: 'aggre_label',
+      2: 'worse_label',
       3: 'random_label1',
       4: 'random_label2',
       5: 'random_label3',
