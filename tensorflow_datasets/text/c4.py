@@ -26,6 +26,8 @@ import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import c4_utils
 
+PageFeatures = c4_utils.PageFeatures
+
 _DESCRIPTION = """\
 A colossal, cleaned version of Common Crawl's web crawl corpus.
 
@@ -176,7 +178,7 @@ class C4Config(tfds.core.BuilderConfig):
         use as the raw source text. Set to None to use default.
       clean: bool, whether to heuristically filter out lines and pages
         considered low quality. Note: only expected to work reliably for English
-          pages.
+        pages.
       badwords_filter: bool, whether to filter out pages with badwords.
       paragraph_filter: bool, whether to filter out pages with too few or too
         short paragraphs.
@@ -313,16 +315,12 @@ class C4(tfds.core.BeamBasedBuilder):
 
     file_paths = tf.nest.map_structure(os.fspath, file_paths)
 
-    page_content_pcollection = self._get_page_content(pipeline, file_paths,
-                                                      dl_manager)
+    pages_pcollection = self._get_pages_pcollection(pipeline, file_paths,
+                                                    dl_manager)
 
-    def _lang_filter(url_and_page, lang):
-      _, page = url_and_page
-      return page["language"] == lang
-
-    def _filter(url_and_page, lang, predicate_fn):
-      return (_lang_filter(url_and_page, lang) and
-              c4_utils.get_hashed_url_filter_fn(predicate_fn)(url_and_page))
+    def _filter(page, lang, predicate_fn):
+      return (page.language == lang and
+              c4_utils.get_hashed_url_filter_fn(predicate_fn)(page))
 
     train_predicate_fn = lambda x: x % 1000 != 0  # 99.9%
     validation_predicate_fn = lambda x: x % 1000 == 0  # 00.1%
@@ -334,7 +332,7 @@ class C4(tfds.core.BeamBasedBuilder):
               name=tfds.Split.TRAIN,
               gen_kwargs=dict(
                   split="train",
-                  page_content=page_content_pcollection,
+                  pages=pages_pcollection,
                   split_filter_fn=c4_utils.get_hashed_url_filter_fn(
                       predicate_fn=train_predicate_fn)),
           ),
@@ -342,7 +340,7 @@ class C4(tfds.core.BeamBasedBuilder):
               name=tfds.Split.VALIDATION,
               gen_kwargs=dict(
                   split="validation",
-                  page_content=page_content_pcollection,
+                  pages=pages_pcollection,
                   split_filter_fn=c4_utils.get_hashed_url_filter_fn(
                       predicate_fn=validation_predicate_fn)),
           ),
@@ -355,7 +353,7 @@ class C4(tfds.core.BeamBasedBuilder):
               name=lang,
               gen_kwargs=dict(
                   split=lang,
-                  page_content=page_content_pcollection,
+                  pages=pages_pcollection,
                   split_filter_fn=functools.partial(
                       _filter, lang=lang, predicate_fn=train_predicate_fn),
               )),
@@ -363,14 +361,14 @@ class C4(tfds.core.BeamBasedBuilder):
               name=f"{lang}-validation",
               gen_kwargs=dict(
                   split=f"{lang}-validation",
-                  page_content=page_content_pcollection,
+                  pages=pages_pcollection,
                   split_filter_fn=functools.partial(
                       _filter, lang=lang, predicate_fn=validation_predicate_fn),
               ))
       ])
     return splits
 
-  def _get_page_content(self, pipeline, file_paths, dl_manager):
+  def _get_pages_pcollection(self, pipeline, file_paths, dl_manager):
     """Build PCollection of un-split page content."""
     beam = tfds.core.lazy_imports.apache_beam
 
@@ -411,69 +409,66 @@ class C4(tfds.core.BeamBasedBuilder):
             dl_dir=os.path.join(dl_manager.download_dir, "c4_wet_files")))
 
     # Parse WET files and filter by length.
-    # Output: url, text
-    page_content = (
+    # Output: [PageFeatures]
+    pages = (
         wet_file_paths
         | beam.FlatMap(c4_utils.split_wet_file)
         | beam.Filter(c4_utils.is_valid_length))
 
     # Optionally filter for RealNews domains.
-    # Output: url, text
+    # Output: [PageFeatures]
     if self.builder_config.realnewslike:
       with tf.io.gfile.GFile(file_paths["realnews_domains"]) as f:
         realnews_domains = json.load(f)
-      page_content = (
-          page_content
-          | beam.Filter(c4_utils.is_realnews_domain, realnews_domains))
+      pages |= beam.Filter(c4_utils.is_realnews_domain, realnews_domains)
 
     # Normalize and deduplicate by URL.
-    # Output: url, text
-    page_content = (
-        page_content
-        | "normalize_url" >> beam.Map(c4_utils.normalize_url)
+    # Output: [PageFeatures]
+    pages = (
+        pages
+        | "normalize_url" >> beam.Map(lambda p: (p.normalized_url, p))
         | "group_url" >> beam.GroupByKey()
-        | beam.Map(c4_utils.dedupe_urls))
+        | beam.Values()
+        | beam.Map(c4_utils.select_random_page))
 
     # Optionally filter for WebText-like URLs.
-    # Output: url, text
+    # Output: [PageFeatures]
     if self.builder_config.webtextlike:
       webtextlike_urls = (
           pipeline
           | "read_webtextlike_urls" >> beam.io.ReadFromText(
               os.path.join(file_paths["openwebtext_urls_zip"],
                            _OPENWEBTEXT_URLS_FILE_PATTERN))
-          | "add_dummy_page" >> beam.Map(lambda x: (x, ""))
-          | "normal_webtext_url" >> beam.Map(c4_utils.normalize_url))
-      page_content = ({
-          "text": page_content,
+          | "add_dummy_page" >>
+          beam.Map(lambda url: (c4_utils.normalize_url(url), PageFeatures())))
+      pages = ({
+          "pages": pages | beam.Map(lambda p: (p.normalized_url, p)),
           "webtextlike_urls": webtextlike_urls
       }
-                      | "group_webtextlike_urls" >> beam.CoGroupByKey()
-                      | beam.FlatMap(c4_utils.filter_by_webtextlike))
+               | "group_webtextlike_urls" >> beam.CoGroupByKey()
+               | beam.FlatMap(c4_utils.filter_by_webtextlike))
 
     if self.builder_config.paragraph_filter:
-      page_content |= beam.Filter(c4_utils.paragraph_filter)
+      pages |= beam.Filter(c4_utils.paragraph_filter)
 
     if self.builder_config.clean:
-      page_content = (
-          page_content
-          | "clean_pages" >> beam.FlatMap(c4_utils.get_clean_page_fn()))
+      pages |= ("clean_pages" >> beam.FlatMap(c4_utils.get_clean_page_fn()))
 
     if self.builder_config.dedupe:
-      page_content = (
+      pages = (
           # Also removes documents with too few sentences after deduplication.
-          c4_utils.remove_duplicate_text(page_content)  # pylint:disable=g-long-ternary
+          c4_utils.remove_duplicate_text(pages)  # pylint:disable=g-long-ternary
           if self.builder_config.clean else
           # If we are not cleaning, do not remove too-few-sentence documents.
-          c4_utils.remove_duplicate_text(page_content, min_num_sentences=0))
+          c4_utils.remove_duplicate_text(pages, min_num_sentences=0))
 
     # Add detected language.
     if self.builder_config.languages == ["en"]:
       # Use langdetect for reproducibility of the original C4.
-      page_content |= beam.FlatMap(c4_utils.detect_english)
+      pages |= beam.FlatMap(c4_utils.detect_english)
     else:
-      page_content = c4_utils.detect_languages(
-          page_content, valid_languages=self.builder_config.languages)
+      pages = c4_utils.detect_languages(
+          pages, valid_languages=self.builder_config.languages)
 
     if self.builder_config.badwords_filter:
       # Create dictionary of badwords regex for each available language.
@@ -483,25 +478,21 @@ class C4(tfds.core.BeamBasedBuilder):
         with tf.io.gfile.GFile(path) as f:
           badwords[lang].update(l.strip() for l in f)
 
-      page_content |= beam.Filter(c4_utils.get_badwords_filter_fn(badwords))
+      pages |= beam.Filter(c4_utils.get_badwords_filter_fn(badwords))
 
-    return page_content
+    return pages
 
-  def _build_pcollection(self, unused_pipeline, split, page_content,
-                         split_filter_fn):
+  def _build_pcollection(self, unused_pipeline, split, pages, split_filter_fn):
     beam = tfds.core.lazy_imports.apache_beam
 
-    def _emit_examples(el):
+    def _emit_examples(page: PageFeatures):
       c4_utils.get_counter_inc_fn(split)("examples")
-      _, features = el
-      return features["url"], {
-          "url": features["url"],
-          "text": features["text"],
-          "content-type": features["content-type"],
-          "content-length": features["content-length"],
-          "timestamp": features["timestamp"]
+      return page.url, {
+          "url": page.url,
+          "text": page.text,
+          "content-type": page.content_type,
+          "content-length": page.content_length,
+          "timestamp": page.timestamp
       }
 
-    return (page_content
-            | beam.Filter(split_filter_fn)
-            | beam.Map(_emit_examples))
+    return (pages | beam.Filter(split_filter_fn) | beam.Map(_emit_examples))
