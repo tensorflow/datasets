@@ -48,13 +48,13 @@ What is the badword? It is "butt".
 WARC/1.0
 WARC-Type: conversion
 WARC-Target-URI: http://fake.com/url/1
-WARC-Date: 2019-04-18T10:38:25Z
+WARC-Date: 2016-04-18T10:38:25Z
 WARC-Record-ID: <urn:uuid:23d84b81-bffc-4ed9-90ae-55a429dbf541>
 WARC-Refers-To: <urn:uuid:716838d3-9c47-4879-9767-a891453e47c0>
 WARC-Block-Digest: sha1:XFU7ISMKJHM3VU3BIHSI73QHAVT3OL52
 Content-Type: text/plain
 Content-Length: 19621
 
-This page has the same URL as the first one, so it won't even make it past the deduping stage.
+This page has the same URL as the first one but an earlier timestamp, so it won't even make it past the deduping stage.
 This is some fake text for a fake webpage.
 And here is some more text. One more sentence to make this long enough.
