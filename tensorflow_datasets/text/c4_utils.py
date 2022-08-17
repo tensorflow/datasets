@@ -417,21 +417,19 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
       yield page
 
 
-def select_random_page(pages):
+def select_newest_page(pages):
   """Deterministically return as random page."""
   counter_inc_fn = get_counter_inc_fn("duplicate-url-filter")
 
   cnt = 0
-  page, page_hash = None, None
+  selected_page = None
   for p in pages:
     cnt += 1
-    p_hash = _hash_text(p.text)
-    if not page_hash or p_hash > page_hash:
-      page = p
-      page_hash = p_hash
+    if not selected_page or p.timestamp > selected_page.timestamp:
+      selected_page = p
   counter_inc_fn("filtered", cnt - 1)
   counter_inc_fn("passed")
-  return page
+  return selected_page
 
 
 def is_valid_length(page: PageFeatures, max_length=1.9e5):
