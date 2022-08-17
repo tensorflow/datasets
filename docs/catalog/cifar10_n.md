@@ -34,8 +34,8 @@ additional labels given by real human annotators.
 
     *   `1.0.0`: Initial release.
     *   `1.0.1`: Fixed typo in `worse_label` key.
-    *   **`1.0.2`** (default): Fixed correspondence between annotations and
-        images.
+    *   `1.0.2`: Fixed correspondence between annotations and images.
+    *   **`1.0.3`** (default): Fixed files in `MANUAL_DIR`.
 
 *   **Download size**: `Unknown size`
 
