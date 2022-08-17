@@ -24,20 +24,6 @@ from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Union
 from etils import epath
 from tensorflow_datasets.core.utils import py_utils
 
-_DEFAULT_NUM_DIGITS_FOR_SHARDS = 5
-
-_VAR_DATASET = 'DATASET'
-_VAR_SPLIT = 'SPLIT'
-_VAR_SHARD_INDEX = 'SHARD_INDEX'
-_VAR_NUM_SHARDS = 'NUM_SHARDS'
-_VAR_SHARD_X_OF_Y = 'SHARD_X_OF_Y'
-_VAR_FILEFORMAT = 'FILEFORMAT'
-
-DEFAULT_FILENAME_TEMPLATE = '{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}'
-
-_first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
-_all_cap_re = re.compile('([a-z0-9])([A-Z])')
-
 _NAME_CLASS = r'[a-zA-Z][\w]*'
 _NAME_CLASS_REG = re.compile(r'^' + _NAME_CLASS + r'$')
 
@@ -48,6 +34,28 @@ _NAME_REG = re.compile(r'^'
                        r'(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?'
                        r'(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?'
                        r'$')
+
+_DEFAULT_NUM_DIGITS_FOR_SHARDS = 5
+
+_VAR_DATASET = 'DATASET'
+_VAR_SPLIT = 'SPLIT'
+_VAR_SHARD_INDEX = 'SHARD_INDEX'
+_VAR_NUM_SHARDS = 'NUM_SHARDS'
+_VAR_SHARD_X_OF_Y = 'SHARD_X_OF_Y'
+_VAR_FILEFORMAT = 'FILEFORMAT'
+_VAR_REGEX_MAPPING = {
+    _VAR_DATASET: rf'(?P<dataset_name>{_NAME_CLASS})',
+    _VAR_FILEFORMAT: r'(?P<filetype_suffix>\w+)',
+    _VAR_SPLIT: r'(?P<split>(\w|-)+)',
+    _VAR_SHARD_INDEX: r'(?P<shard_index>\d+)',
+    _VAR_NUM_SHARDS: r'(?P<num_shards>\d{5,})',
+    _VAR_SHARD_X_OF_Y: r'(?P<shard_index>\d{5,})-of-(?P<num_shards>\d{5,})',
+}
+
+DEFAULT_FILENAME_TEMPLATE = '{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}'
+
+_first_cap_re = re.compile('(.)([A-Z][a-z0-9]+)')
+_all_cap_re = re.compile('([a-z0-9])([A-Z])')
 
 Value = Union[str, int, float, bool]
 
@@ -238,6 +246,27 @@ def _replace_shard_suffix(filepath: str, replacement: str) -> str:
   return new_string
 
 
+def _filename_template_to_regex(filename_template: str) -> str:
+  """Returns the regular expression for the given template.
+
+  Arguments:
+    filename_template: the filename template to create a regex for.
+
+  Returns:
+    the regular expression for the filename template.
+
+  Raises:
+    ValueError: when not all variables in the template were substituted.
+  """
+  result = filename_template.replace('.', r'\.')
+  for var, regex in _VAR_REGEX_MAPPING.items():
+    result = result.replace(f'{{{var}}}', regex)
+  if re.match(re.compile(r'\{\w+\}'), result):
+    raise ValueError('Regex still contains variables '
+                     f'that have not been substituted: {result}')
+  return result
+
+
 @dataclasses.dataclass()
 class ShardedFileTemplate:
   """Template to produce filenames for sharded datasets.
@@ -265,6 +294,37 @@ class ShardedFileTemplate:
       raise ValueError(f'Filetype suffix must be a non-empty string: {self}')
     if not self.template:
       self.template = DEFAULT_FILENAME_TEMPLATE
+
+  def regex(self) -> 're.Pattern[str]':
+    """Returns the regular expresssion for this template.
+
+    Can be used to test whether a filename matches to this template.
+    """
+    return re.compile(_filename_template_to_regex(self.template))
+
+  def is_valid(self, filename: str) -> bool:
+    """Returns whether the given filename follows this template."""
+    match = self.regex().fullmatch(filename)
+    if not match:
+      return False
+    groupdict = match.groupdict()
+    matched_dataset = groupdict.get('dataset_name')
+    matched_split = groupdict.get('split')
+    matched_filetype_suffix = groupdict.get('filetype_suffix')
+
+    # Even when `dataset_name` is set, it may not be in the template,
+    # so also test that `matched_dataset` is not None`.`
+    if (self.dataset_name is not None and matched_dataset is not None and
+        matched_dataset != self.dataset_name):
+      return False
+    if (self.split is not None and matched_split is not None and
+        matched_split != self.split):
+      return False
+    if (self.filetype_suffix is not None and
+        matched_filetype_suffix is not None and
+        matched_filetype_suffix != self.filetype_suffix):
+      return False
+    return True
 
   def _default_mappings(self) -> MutableMapping[str, Any]:
     mappings = {}

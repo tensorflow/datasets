@@ -451,3 +451,52 @@ def test_replace_shard_suffix_folder_similar_to_shard():
 def test_replace_shard_suffix_no_suffix_found():
   with pytest.raises(RuntimeError, match='Should do 1 shard suffix'):
     naming._replace_shard_suffix(filepath='/path/a/b', replacement='')
+
+
+def test_filename_template_to_regex():
+  assert naming._filename_template_to_regex(
+      '{DATASET}') == r'(?P<dataset_name>[a-zA-Z][\w]*)'
+  assert naming._filename_template_to_regex(
+      naming.DEFAULT_FILENAME_TEMPLATE) == (
+          r'(?P<dataset_name>[a-zA-Z][\w]*)'
+          r'-(?P<split>(\w|-)+)'
+          r'\.(?P<filetype_suffix>\w+)'
+          r'-(?P<shard_index>\d{5,})-of-(?P<num_shards>\d{5,})')
+
+
+def test_filename_template_to_regex_unknown_variables():
+  with pytest.raises(ValueError, match='Regex still contains variables.+'):
+    naming._filename_template_to_regex('{XYZ}')
+
+
+@pytest.mark.parametrize(['name', 'result'], [
+    ('mnist-train.tfrecord-00000-of-00001', True),
+    ('xyz-train.tfrecord-00000-of-00001', False),
+    ('mnist-xyz.tfrecord-00000-of-00001', False),
+    ('mnist-train.xyz-00000-of-00001', False),
+    ('mnist-train.tfrecord-a-of-b', False),
+])
+def test_sharded_file_template_is_valid_default_template(name, result):
+  template = naming.ShardedFileTemplate(
+      data_dir='/path',
+      dataset_name='mnist',
+      split='train',
+      filetype_suffix='tfrecord')
+  assert template.is_valid(name) == result
+
+
+@pytest.mark.parametrize(['name', 'result'], [
+    ('train.1', True),
+    ('train.00001', True),
+    ('train-00001', False),
+    ('train.tfrecord.00001', False),
+    ('mnist-train.tfrecord-00000-of-00001', False),
+])
+def test_sharded_file_template_is_valid_custom_template(name, result):
+  template = naming.ShardedFileTemplate(
+      data_dir='/path',
+      template='{SPLIT}.{SHARD_INDEX}',
+      dataset_name='mnist',
+      split='train',
+      filetype_suffix='tfrecord')
+  assert template.is_valid(name) == result
