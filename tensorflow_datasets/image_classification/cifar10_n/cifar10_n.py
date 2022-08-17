@@ -73,11 +73,12 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
   ```
   """
 
-  VERSION = tfds.core.Version('1.0.2')
+  VERSION = tfds.core.Version('1.0.3')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
       '1.0.1': 'Fixed typo in `worse_label` key.',
-      '1.0.2': 'Fixed correspondence between annotations and images.'
+      '1.0.2': 'Fixed correspondence between annotations and images.',
+      '1.0.3': 'Fixed files in `MANUAL_DIR`.'
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
