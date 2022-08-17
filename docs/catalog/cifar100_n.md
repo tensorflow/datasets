@@ -36,9 +36,9 @@ additional label given by a real human annotator.
     *   **`1.0.1`** (default): Fixed correspondence between annotations and
         images.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `160.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `136.07 MiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -68,12 +68,14 @@ with tf.io.gfile.GFile(human_labels_csv_path, "w") as f:
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 10,000
+`'train'` | 50,000
 
 *   **Feature structure**:
 
