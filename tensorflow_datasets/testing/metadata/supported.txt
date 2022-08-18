@@ -329,6 +329,7 @@ cfq/random_split/1.2.0
 cherry_blossoms/1.0.0
 cifar10/3.0.2
 cifar100/3.0.2
+cifar100_n/1.0.1
 cifar10_1/v4/1.1.0
 cifar10_1/v6/1.1.0
 cifar10_corrupted/brightness_1/1.0.0
@@ -426,7 +427,7 @@ cifar10_corrupted/zoom_blur_2/1.0.0
 cifar10_corrupted/zoom_blur_3/1.0.0
 cifar10_corrupted/zoom_blur_4/1.0.0
 cifar10_corrupted/zoom_blur_5/1.0.0
-cifar10_n/1.0.2
+cifar10_n/1.0.3
 citrus_leaves/0.1.2
 cityscapes/semantic_segmentation/1.0.0
 cityscapes/semantic_segmentation_extra/1.0.0
