@@ -162,6 +162,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`patch_camelyon`](patch_camelyon.md)
 *   [`pet_finder`](pet_finder.md)
 *   [`places365_small`](places365_small.md)
+*   [`placesfull`](placesfull.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`plant_leaves`](plant_leaves.md)
 *   [`plant_village`](plant_village.md)
 *   [`plantae_k`](plantae_k.md)
