@@ -84,9 +84,10 @@ TESTS_REQUIRE = [
     'pytest-shard',
     'pytest-xdist',
     # Lazy-deps required by core
+    'apache_beam',
     'pandas',
     'pydub',
-    'apache_beam',
+    'riegeli',
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
