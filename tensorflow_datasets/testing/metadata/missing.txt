@@ -29,6 +29,7 @@ glue/wnli/1.0.1
 natural_questions/default/0.0.2
 natural_questions/longt5/0.0.2
 pass/3.0.0
+placesfull/1.0.0
 reddit_disentanglement/2.0.0
 rlu_atari_checkpoints/Alien_run_3/1.1.0
 rlu_atari_checkpoints/Alien_run_4/1.1.0
