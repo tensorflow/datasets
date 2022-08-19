@@ -68,6 +68,9 @@ from tensorflow_datasets.core.utils.benchmark import BenchmarkResult
 from tensorflow_datasets.core.utils.file_utils import add_data_dir
 from tensorflow_datasets.core.utils.file_utils import as_path
 
+from tensorflow_datasets.core.view_builder import ViewConfig
+from tensorflow_datasets.core.view_builder import ViewBuilder
+
 
 def benchmark(*args, **kwargs):
   raise DeprecationWarning(
@@ -101,4 +104,6 @@ __all__ = [
     "SplitInfo",
     "tfds_path",
     "Version",
+    "RowViewConfig",
+    "ViewBuilder",
 ]
