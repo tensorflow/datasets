@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Tests for compute_split_info."""
+import pytest
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
@@ -41,3 +42,67 @@ def test_compute_split_info(tmp_path):
       data_dir=tmp_path, split='train')
   split_info = compute_split_utils._split_info_from_path(filename_template)
   assert builder.info.splits['train'].to_proto() == split_info.to_proto()
+
+
+def test_enrich_filename_template():
+  template = naming.ShardedFileTemplate(data_dir='/path')
+  files_per_split = {
+      'train': [
+          naming.FilenameInfo(
+              dataset_name='mnist',
+              filetype_suffix='tfrecord',
+              split=None,
+              shard_index=None,
+              num_shards=None)
+      ],
+  }
+  actual = compute_split_utils._enrich_filename_template(
+      filename_template=template, files_per_split=files_per_split)
+  assert actual.dataset_name == 'mnist'
+  assert actual.filetype_suffix == 'tfrecord'
+
+
+def test_enrich_filename_template_multiple_dataset_names():
+  template = naming.ShardedFileTemplate(data_dir='/path')
+  files_per_split = {
+      'train': [
+          naming.FilenameInfo(
+              dataset_name='a',
+              filetype_suffix='tfrecord',
+              split=None,
+              shard_index=None,
+              num_shards=None),
+          naming.FilenameInfo(
+              dataset_name='b',
+              filetype_suffix='tfrecord',
+              split=None,
+              shard_index=None,
+              num_shards=None),
+      ],
+  }
+  with pytest.raises(ValueError, match='Found multiple dataset names'):
+    compute_split_utils._enrich_filename_template(
+        filename_template=template, files_per_split=files_per_split)
+
+
+def test_enrich_filename_template_multiple_filetype_suffixes():
+  template = naming.ShardedFileTemplate(data_dir='/path')
+  files_per_split = {
+      'train': [
+          naming.FilenameInfo(
+              dataset_name='mnist',
+              filetype_suffix='a',
+              split=None,
+              shard_index=None,
+              num_shards=None),
+          naming.FilenameInfo(
+              dataset_name='mnist',
+              filetype_suffix='b',
+              split=None,
+              shard_index=None,
+              num_shards=None),
+      ],
+  }
+  with pytest.raises(ValueError, match='Found multiple filetype suffixes'):
+    compute_split_utils._enrich_filename_template(
+        filename_template=template, files_per_split=files_per_split)

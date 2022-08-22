@@ -24,6 +24,21 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits
 
+_FILENAME_TEMPLATE_DEFAULT = naming.ShardedFileTemplate(data_dir='.')
+_FILENAME_TEMPLATE_MNIST_DEFAULT = naming.ShardedFileTemplate(
+    data_dir='/path',
+    dataset_name='mnist',
+    split='train',
+    filetype_suffix='tfrecord')
+_FILENAME_TEMPLATE_CUSTOM_NO_EXTRA = naming.ShardedFileTemplate(
+    data_dir='/path', template='{SPLIT}.{SHARD_INDEX}')
+_FILENAME_TEMPLATE_CUSTOM_FULL = naming.ShardedFileTemplate(
+    data_dir='/path',
+    template='{SPLIT}.{SHARD_INDEX}',
+    dataset_name='mnist',
+    split='train',
+    filetype_suffix='tfrecord')
+
 
 class NamingTest(parameterized.TestCase, testing.TestCase):
 
@@ -268,6 +283,35 @@ def test_filename_info_with_huge_shard_num():
     assert file_info.num_shards == 104448
 
 
+def test_filename_info_with_custom_template():
+  template = _FILENAME_TEMPLATE_CUSTOM_FULL
+  filename = 'test.00042'
+  file_info = naming.FilenameInfo.from_str(filename, filename_template=template)
+  assert str(file_info) == filename
+  assert file_info.dataset_name == 'mnist'
+  assert file_info.split == 'test'
+  assert file_info.filetype_suffix == 'tfrecord'
+  assert file_info.shard_index == 42
+  assert file_info.num_shards is None
+  # This is not valid because the template is for the train split
+  assert not naming.FilenameInfo.is_valid(filename, filename_template=template)
+  assert naming.FilenameInfo.is_valid(
+      filename, filename_template=template.replace(split='test'))
+
+
+def test_filename_info_with_custom_template_missing_fields():
+  template = _FILENAME_TEMPLATE_CUSTOM_NO_EXTRA
+  filename = 'test.00042'
+  assert naming.FilenameInfo.is_valid(filename, filename_template=template)
+  file_info = naming.FilenameInfo.from_str(filename, filename_template=template)
+  assert str(file_info) == filename
+  assert file_info.dataset_name is None
+  assert file_info.split == 'test'
+  assert file_info.filetype_suffix is None
+  assert file_info.shard_index == 42
+  assert file_info.num_shards is None
+
+
 @pytest.mark.parametrize(
     'filename',
     [
@@ -284,7 +328,7 @@ def test_filename_info_valid(filename):
 def test_filename_info_invalid():
   filename = 'mnist-train.tfrecord-000-of-001'  # Wrong shard number
   assert not naming.FilenameInfo.is_valid(filename)
-  with pytest.raises(ValueError, match='Filename .* does not follow pattern'):
+  with pytest.raises(ValueError, match='Could not parse filename'):
     naming.FilenameInfo.from_str(filename)
 
 
@@ -296,7 +340,8 @@ def test_filename_info_with_path():
       split='train',
       filetype_suffix='tfrecord',
       shard_index=32,
-      num_shards=1024)
+      num_shards=1024,
+      filename_template=_FILENAME_TEMPLATE_DEFAULT.replace(data_dir='/path'))
 
 
 def test_filename_info_with_path_and_dash_in_split():
@@ -307,7 +352,8 @@ def test_filename_info_with_path_and_dash_in_split():
       split='af-validation',
       filetype_suffix='tfrecord',
       shard_index=32,
-      num_shards=1024)
+      num_shards=1024,
+      filename_template=_FILENAME_TEMPLATE_DEFAULT.replace(data_dir='/path'))
 
 
 def test_filename_info_with_path_and_two_dashes_in_split():
@@ -318,15 +364,12 @@ def test_filename_info_with_path_and_two_dashes_in_split():
       split='bg-Latn-validation',
       filetype_suffix='tfrecord',
       shard_index=32,
-      num_shards=1024)
+      num_shards=1024,
+      filename_template=_FILENAME_TEMPLATE_DEFAULT.replace(data_dir='/path'))
 
 
 def test_sharded_file_template_sharded_filepath():
-  template = naming.ShardedFileTemplate(
-      data_dir='/path',
-      dataset_name='mnist',
-      split='train',
-      filetype_suffix='tfrecord')
+  template = _FILENAME_TEMPLATE_MNIST_DEFAULT
   assert os.fspath(template.sharded_filepath(
       shard_index=0,
       num_shards=1)) == '/path/mnist-train.tfrecord-00000-of-00001'
@@ -477,26 +520,85 @@ def test_filename_template_to_regex_unknown_variables():
     ('mnist-train.tfrecord-a-of-b', False),
 ])
 def test_sharded_file_template_is_valid_default_template(name, result):
-  template = naming.ShardedFileTemplate(
-      data_dir='/path',
-      dataset_name='mnist',
-      split='train',
-      filetype_suffix='tfrecord')
+  template = _FILENAME_TEMPLATE_MNIST_DEFAULT
   assert template.is_valid(name) == result
 
 
 @pytest.mark.parametrize(['name', 'result'], [
-    ('train.1', True),
+    ('train.1', False),
     ('train.00001', True),
     ('train-00001', False),
     ('train.tfrecord.00001', False),
     ('mnist-train.tfrecord-00000-of-00001', False),
 ])
 def test_sharded_file_template_is_valid_custom_template(name, result):
-  template = naming.ShardedFileTemplate(
-      data_dir='/path',
-      template='{SPLIT}.{SHARD_INDEX}',
-      dataset_name='mnist',
-      split='train',
-      filetype_suffix='tfrecord')
+  template = _FILENAME_TEMPLATE_CUSTOM_FULL
   assert template.is_valid(name) == result
+
+
+@pytest.mark.parametrize(['name', 'result'], [
+    ('mnist-train.tfrecord-00000-of-00001',
+     naming.FilenameInfo(
+         dataset_name='mnist',
+         split='train',
+         filetype_suffix='tfrecord',
+         shard_index=0,
+         num_shards=1,
+         filename_template=_FILENAME_TEMPLATE_MNIST_DEFAULT)),
+    ('mnist-train.tfrecord-00123-of-00456',
+     naming.FilenameInfo(
+         dataset_name='mnist',
+         split='train',
+         filetype_suffix='tfrecord',
+         shard_index=123,
+         num_shards=456,
+         filename_template=_FILENAME_TEMPLATE_MNIST_DEFAULT)),
+    ('train1', None),
+])
+def test_sharded_file_template_parse_filename_info(name, result):
+  template = _FILENAME_TEMPLATE_MNIST_DEFAULT
+  assert template.parse_filename_info(name) == result
+
+
+@pytest.mark.parametrize(['name', 'result'], [
+    ('train.00123',
+     naming.FilenameInfo(
+         dataset_name=None,
+         split='train',
+         filetype_suffix=None,
+         shard_index=123,
+         num_shards=None,
+         filename_template=_FILENAME_TEMPLATE_CUSTOM_NO_EXTRA)),
+    ('mnist-train.tfrecord-00000-of-00001', None),
+    ('train1', None),
+])
+def test_sharded_file_template_parse_filename_info_custom_template(
+    name, result):
+  template = _FILENAME_TEMPLATE_CUSTOM_NO_EXTRA
+  assert template.parse_filename_info(name) == result
+
+
+@pytest.mark.parametrize(['name', 'result'], [
+    ('train.00123',
+     naming.FilenameInfo(
+         dataset_name='mnist',
+         split='train',
+         filetype_suffix='tfrecord',
+         shard_index=123,
+         num_shards=None,
+         filename_template=_FILENAME_TEMPLATE_CUSTOM_FULL)),
+    ('test.00042',
+     naming.FilenameInfo(
+         dataset_name='mnist',
+         split='test',
+         filetype_suffix='tfrecord',
+         shard_index=42,
+         num_shards=None,
+         filename_template=_FILENAME_TEMPLATE_CUSTOM_FULL)),
+    ('mnist-train.tfrecord-00000-of-00001', None),
+    ('train1', None),
+])
+def test_sharded_file_template_parse_filename_info_custom_template_add_missing(
+    name, result):
+  template = _FILENAME_TEMPLATE_CUSTOM_FULL
+  assert template.parse_filename_info(name) == result
