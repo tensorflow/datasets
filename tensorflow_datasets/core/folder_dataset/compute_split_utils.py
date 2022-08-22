@@ -21,7 +21,7 @@ import functools
 import itertools
 import os
 import pprint
-from typing import cast, Dict, List, Optional, Type
+from typing import cast, Dict, List, Optional, Type, Union
 
 from etils import epath
 from tensorflow_datasets.core import file_adapters
@@ -44,20 +44,67 @@ class _ShardInfo:
   bytes_size: int
 
 
+def _enrich_filename_template(
+    filename_template: naming.ShardedFileTemplate,
+    files_per_split: _SplitFilesDict) -> naming.ShardedFileTemplate:
+  """Overrides the template's dataset name and suffix based on the filenames."""
+  found_dataset_names = set()
+  found_filetype_suffixes = set()
+  for file_infos in files_per_split.values():
+    for file_info in file_infos:
+      found_dataset_names.add(file_info.dataset_name)
+      found_filetype_suffixes.add(file_info.filetype_suffix)
+
+  dataset_name = None
+  if len(found_dataset_names) == 1:
+    dataset_name = next(iter(found_dataset_names))
+  elif len(found_dataset_names) > 1:
+    raise ValueError(f'Found multiple dataset names: {found_dataset_names}')
+
+  filetype_suffix = None
+  if len(found_filetype_suffixes) == 1:
+    filetype_suffix = next(iter(found_filetype_suffixes))
+  if len(found_filetype_suffixes) > 1:
+    raise ValueError(
+        f'Found multiple filetype suffixes: {found_filetype_suffixes}')
+
+  return filename_template.replace(
+      dataset_name=dataset_name, filetype_suffix=filetype_suffix)
+
+
 def compute_split_info_from_directory(
     *,
     out_dir: Optional[epath.PathLike] = None,
     data_dir: epath.PathLike,
+    filename_template: Union[None, str, naming.ShardedFileTemplate] = None,
 ) -> List[split_lib.SplitInfo]:
-  """Compute the split info for the split in the given data dir."""
-  # Get the dataset name and filetype suffix from the files in the data dir.
+  """Compute the split info for the splits in the given data dir.
+
+  Arguments:
+    out_dir: directory where to save the metadata. It should be available from
+      the apache beam workers. If not set, apache beam won't be used (only
+      available with some file formats).
+    data_dir: directory where the data is.
+    filename_template: the template to which the data files correspond. If None,
+      then the default template is used.
+
+  Returns:
+    list of split infos for the splits in the given data dir.
+  """
   data_dir = epath.Path(data_dir)
-  split_files = next(iter(_extract_split_files(data_dir).values()))
-  split_file = split_files[0]
-  filename_template = naming.ShardedFileTemplate(
-      data_dir=data_dir,
-      dataset_name=split_file.dataset_name,
-      filetype_suffix=split_file.filetype_suffix)
+  if filename_template is None:
+    filename_template = naming.ShardedFileTemplate(data_dir=data_dir)
+  elif isinstance(filename_template, str):
+    filename_template = naming.ShardedFileTemplate(
+        template=filename_template, data_dir=data_dir)
+  filename_template = filename_template.replace(data_dir=data_dir)
+
+  if (filename_template.dataset_name is None or
+      filename_template.filetype_suffix is None):
+    # Get the dataset name and filetype suffix from the files in the data dir.
+    files_per_split = _extract_split_files(filename_template)
+    filename_template = _enrich_filename_template(
+        filename_template=filename_template, files_per_split=files_per_split)
   return compute_split_info(
       out_dir=out_dir, filename_template=filename_template)
 
@@ -76,17 +123,17 @@ def compute_split_info(
   https://www.tensorflow.org/datasets/external_tfrecord
 
   Args:
-    out_dir: Output directory on which save the metadata. It should be available
+    out_dir: Output directory where to save the metadata. It should be available
       from the apache beam workers. If not set, apache beam won't be used (only
       available with some file formats).
-    filename_template: filename template of the splits that contains the dir
-      which contains the data.
+    filename_template: filename template of the splits. The template should have
+      set the data_dir because this is used to compute the split info.
 
   Returns:
     split_infos: The list of `tfds.core.SplitInfo`.
   """
   # Auto-detect the splits from the files
-  split_files = _extract_split_files(filename_template.data_dir)
+  split_files = _extract_split_files(filename_template)
   print('Auto-detected splits:')
   for split_name, file_infos in split_files.items():
     print(f' * {split_name}: {file_infos[0].num_shards} shards')
@@ -107,19 +154,20 @@ def compute_split_info(
   return split_infos
 
 
-def _extract_split_files(data_dir: epath.Path) -> _SplitFilesDict:
+def _extract_split_files(
+    filename_template: naming.ShardedFileTemplate) -> _SplitFilesDict:
   """Extract the files."""
-  files = sorted(data_dir.iterdir())
-  file_infos = [
-      naming.FilenameInfo.from_str(f.name)
-      for f in files
-      if naming.FilenameInfo.is_valid(f.name)
-  ]
+  files = sorted(filename_template.data_dir.iterdir())
+  file_infos = [filename_template.parse_filename_info(f.name) for f in files]
+  file_infos = [f for f in file_infos if f is not None]
   if not file_infos:
     raise ValueError(
-        f'No example files detected in {data_dir}. Make sure to follow the '
-        'pattern: '
-        '`<dataset_name>-<split_name>.<file-extension>-xxxxxx-of-yyyyyy`')
+        f'No example files detected in {filename_template.data_dir}. '
+        f'Make sure to follow the pattern: {filename_template.template}')
+  files_without_detected_split = [f for f in file_infos if f.split is None]
+  if files_without_detected_split:
+    raise ValueError('Some matched files did not specify the split: '
+                     f'{files_without_detected_split}')
 
   split_files = collections.defaultdict(list)
   for file_info in file_infos:
