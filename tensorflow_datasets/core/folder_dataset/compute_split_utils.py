@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Beam pipeline which compute the number of examples in the given tfrecord."""
+r"""Pipeline which computes the number of examples in a dataset."""
 
 import collections
 import dataclasses
@@ -146,7 +146,10 @@ def compute_split_info(
         filename_template=filename_template,
     )
   else:
-    raise NotImplementedError('compute_split_info require out_dir kwargs.')
+    split_infos = _compute_split_statistics(
+        split_files=split_files,
+        filename_template=filename_template,
+    )
 
   print('Computed split infos: ')
   pprint.pprint(split_infos)
@@ -174,6 +177,51 @@ def _extract_split_files(
     split_files[file_info.split].append(file_info)
 
   return split_files
+
+
+def _assert_split_is_consistent(file_infos: List[naming.FilenameInfo]) -> None:
+  # Use unpack syntax on set to implicitly check that all values are the same
+  _, = {f.split for f in file_infos}
+
+  # Check that all the file-info from the given split are consistent
+  # (no missing file)
+  shard_ids = sorted(f.shard_index for f in file_infos)
+  num_shards, = {f.num_shards for f in file_infos}
+  if num_shards:
+    assert shard_ids == list(range(num_shards)), 'Missing shard files.'
+
+
+def _compute_split_statistics(
+    *,
+    split_files: _SplitFilesDict,
+    filename_template: naming.ShardedFileTemplate,
+) -> List[split_lib.SplitInfo]:
+  """Computes and returns the split statistics."""
+
+  adapter = None
+  for _, file_infos in split_files.items():
+    _assert_split_is_consistent(file_infos)
+    if adapter is None:
+      file_suffix, = {f.filetype_suffix for f in file_infos}
+      file_format = file_adapters.file_format_from_suffix(file_suffix)
+      adapter = file_adapters.ADAPTER_FOR_FORMAT[file_format]
+
+  # Compute all shard info in parallel
+  split_to_shard_infos = cast(
+      Dict[str, List[_ShardInfo]],
+      utils.tree.parallel_map(
+          functools.partial(
+              _process_shard,
+              data_dir=filename_template.data_dir,
+              adapter=adapter),
+          split_files,
+          report_progress=True,
+      ))
+  # Create the SplitInfo for all splits
+  return [
+      _merge_shard_info(shard_infos=si, filename_template=filename_template)
+      for si in split_to_shard_infos.values()
+  ]
 
 
 def _compute_split_statistics_beam(
