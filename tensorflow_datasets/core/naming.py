@@ -516,18 +516,19 @@ def _get_filename_template(
 class FilenameInfo:
   """Structure representing a filename.
 
-  Filenames have the following specs:
-
-  ```
-  <dataset_name>-<split_name>.<file-extension>-xxxxxx-of-yyyyyy
-  ```
-
+  Attributes:
+    dataset_name: the name of the dataset, e.g. `mnist`.
+    split: the split to which this file belongs, e.g. `train` or `test`.
+    filetype_suffix: the suffix representing the filetype, e.g. `tfrecord`.
+    shard_index: what shard this file is.
+    num_shards: if known, the total number of shards.
+    filename_template: the template to which this file conforms.
   """
-  dataset_name: Optional[str]
-  split: Optional[str]
-  filetype_suffix: Optional[str]
-  shard_index: Optional[int]
-  num_shards: Optional[int]
+  dataset_name: Optional[str] = None
+  split: Optional[str] = None
+  filetype_suffix: Optional[str] = None
+  shard_index: Optional[int] = None
+  num_shards: Optional[int] = None
   filename_template: Optional[ShardedFileTemplate] = None
 
   def full_filename_template(self):
