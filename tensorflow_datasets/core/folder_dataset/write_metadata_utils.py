@@ -14,12 +14,10 @@
 # limitations under the License.
 
 """Util to add metadata into an existing dataset folder."""
-
-import types
+import os
 from typing import List, Union
 
 from etils import epath
-from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import file_adapters
@@ -30,18 +28,64 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.folder_dataset import compute_split_utils
 
 
-class _WriteBuilder(
-    dataset_builder.GeneratorBasedBuilder, skip_registration=True):
-  """Dummy builder used as base to save metadata."""
+def _get_file_infos(
+    filename_template: naming.ShardedFileTemplate) -> List[naming.FilenameInfo]:
+  """Returns the file infos from the files matching the given template."""
+  file_infos = []
+  for f in filename_template.data_dir.iterdir():
+    file_info = filename_template.parse_filename_info(f.name)
+    if file_info is not None:
+      file_infos.append(file_info)
+  if not file_infos:
+    raise ValueError(
+        f'Could not find data files in {filename_template.data_dir}. '
+        f'Make sure to follow the pattern: `{filename_template.template}`')
+  return file_infos
 
-  def _info(self):
-    return dataset_info.DatasetInfo(builder=self)
 
-  def _split_generators(self, dl_manager):
-    return {}
+def _construct_filename_template(
+    data_dir: epath.PathLike,
+    filename_template: Union[None, str, naming.ShardedFileTemplate] = None
+) -> naming.ShardedFileTemplate:
+  """Returns a basic filename template based on the given data dir and template."""
+  data_dir = epath.Path(data_dir)
+  if filename_template is None:
+    filename_template = naming.ShardedFileTemplate(
+        data_dir=data_dir, template=naming.DEFAULT_FILENAME_TEMPLATE)
+  elif isinstance(filename_template, str):
+    filename_template = naming.ShardedFileTemplate(
+        data_dir=data_dir, template=filename_template)
+  return filename_template.replace(data_dir=data_dir)
 
-  def _generate_examples(self):
-    yield
+
+def _enrich_filename_template(
+    filename_template: naming.ShardedFileTemplate,
+    file_infos: List[naming.FilenameInfo],
+) -> naming.ShardedFileTemplate:
+  """Enriches the given template with data from the given file infos."""
+  # Use set with tuple expansion syntax to ensure all names are consistent.
+  dataset_name, = {f.dataset_name for f in file_infos}
+  if (filename_template.dataset_name and dataset_name and
+      filename_template.dataset_name != dataset_name):
+    raise ValueError(f'Detected dataset name {dataset_name}, but '
+                     f'{filename_template.dataset_name} was specified '
+                     'in the filename template!')
+  elif dataset_name:
+    # dataset_name can be None if the files don't specify the name
+    filename_template = filename_template.replace(dataset_name=dataset_name)
+
+  filetype_suffix, = {f.filetype_suffix for f in file_infos}
+  if (filename_template.filetype_suffix and
+      filename_template.filetype_suffix != filetype_suffix):
+    raise ValueError(f'Detected filetype suffix {filetype_suffix}, but '
+                     f'{filename_template.filetype_suffix} was specified '
+                     'in the filename template!')
+  elif filetype_suffix:
+    # filetype_suffix can be None if the files don't specify the name
+    filename_template = filename_template.replace(
+        filetype_suffix=filetype_suffix)
+
+  return filename_template
 
 
 def write_metadata(
@@ -50,6 +94,7 @@ def write_metadata(
     features: features_lib.feature.FeatureConnectorArg,
     split_infos: Union[None, epath.PathLike, List[split_lib.SplitInfo]] = None,
     version: Union[None, str, utils.Version] = None,
+    filename_template: Union[None, str, naming.ShardedFileTemplate] = None,
     check_data: bool = True,
     **ds_info_kwargs,
 ) -> None:
@@ -68,71 +113,55 @@ def write_metadata(
       split info.
     version: Optional dataset version (auto-infer by default, or fallback to
       1.0.0)
+    filename_template: the template for the filenames of the data. If None, then
+      the default template `'{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}'` is
+      used. A string or a ShardedFileTemplate can be given for custom templates.
     check_data: If True, perform additional check to validate the data in
       data_dir is valid
     **ds_info_kwargs: Additional metadata forwarded to `tfds.core.DatasetInfo` (
       description, homepage,...). Will appear in the doc.
   """
-  features = features_lib.features_dict.to_feature(features)
-  data_dir = epath.Path(data_dir)
-  # Extract the tf-record filenames
-  tfrecord_files = [
-      f for f in data_dir.iterdir() if naming.FilenameInfo.is_valid(f.name)
-  ]
-  if not tfrecord_files:
-    raise ValueError(
-        f'Could not find tf-record (or compatible format) in {data_dir}. '
-        'Make sure to follow the pattern: '
-        '`<dataset_name>-<split_name>.<file-extension>-xxxxxx-of-yyyyyy`')
-
-  file_infos = [naming.FilenameInfo.from_str(f.name) for f in tfrecord_files]
-
-  # Use set with tuple expansion syntax to ensure all names are consistents
-  snake_name, = {f.dataset_name for f in file_infos}
-  camel_name = naming.snake_to_camelcase(snake_name)
-  filetype_suffix, = {f.filetype_suffix for f in file_infos}
-  file_format = file_adapters.file_format_from_suffix(filetype_suffix)
-
-  cls = types.new_class(
-      camel_name,
-      bases=(_WriteBuilder,),
-      kwds=dict(skip_registration=True),
-      exec_body=None,
-  )
+  filename_template = _construct_filename_template(
+      data_dir=data_dir, filename_template=filename_template)
+  file_infos = _get_file_infos(filename_template=filename_template)
+  filename_template = _enrich_filename_template(filename_template, file_infos)
 
   if version is None:  # Automatically detect the version
-    if utils.Version.is_valid(data_dir.name):
-      version = data_dir.name
+    if utils.Version.is_valid(filename_template.data_dir.name):
+      version = filename_template.data_dir.name
     else:
       version = '1.0.0'
-  cls.VERSION = utils.Version(version)
 
-  # Create a dummy builder (use non existant folder to make sure
-  # dataset_info.json is not restored)
-  builder = cls(file_format=file_format, data_dir='/tmp/non-existent-dir/')
+  dataset_identity = dataset_info.DatasetIdentity(
+      name=filename_template.dataset_name,
+      version=utils.Version(version),
+      data_dir=os.fspath(filename_template.data_dir),
+      module_name='',
+  )
 
   # Create the metadata
+  features = features_lib.features_dict.to_feature(features)
   ds_info = dataset_info.DatasetInfo(
-      builder=builder,
+      builder=dataset_identity,
       features=features,
       **ds_info_kwargs,
   )
+  file_format = file_adapters.file_format_from_suffix(
+      filename_template.filetype_suffix)
   ds_info.set_file_format(file_format)
 
   # Add the split infos
   split_dict = _load_splits(
-      data_dir=data_dir,
       split_infos=split_infos,
       file_infos=file_infos,
-      filetype_suffix=filetype_suffix,
-      builder=builder,
+      filename_template=filename_template,
   )
   ds_info.set_splits(split_dict)
 
   # Save all metadata (dataset_info.json, features.json,...)
   ds_info.write_to_directory(data_dir)
 
-  # Make sure that the data can be loaded (feature connector match the actual
+  # Make sure that the data can be loaded (feature connector matches the actual
   # specs)
   if check_data:
     utils.print_notebook('Metadata written. Testing by reading first example. '
@@ -144,19 +173,13 @@ def write_metadata(
 
 def _load_splits(
     *,
-    data_dir: epath.Path,
     split_infos: Union[None, epath.PathLike, List[split_lib.SplitInfo]],
     file_infos: List[naming.FilenameInfo],
-    filetype_suffix: str,
-    builder: dataset_builder.DatasetBuilder,
+    filename_template: naming.ShardedFileTemplate,
 ) -> split_lib.SplitDict:
   """Load the SplitDict which can be passed to DatasetInfo."""
   split_names = sorted(set(f.split for f in file_infos))
 
-  filename_template = naming.ShardedFileTemplate(
-      dataset_name=builder.name,
-      data_dir=data_dir,
-      filetype_suffix=filetype_suffix)
   if split_infos is None:  # Auto-compute the split-infos
     split_infos = compute_split_utils.compute_split_info(
         filename_template=filename_template)

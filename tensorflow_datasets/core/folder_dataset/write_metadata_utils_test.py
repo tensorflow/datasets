@@ -24,6 +24,8 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core.folder_dataset import write_metadata_utils
 
+_PATH = epath.Path('/a/b')
+
 
 @pytest.mark.parametrize(
     'file_format',
@@ -78,3 +80,70 @@ def test_write_metadata(
   src_ds = src_builder.as_dataset(split='train')
   ds = builder.as_dataset(split='train')
   assert list(src_ds.as_numpy_iterator()) == list(ds.as_numpy_iterator())
+
+
+@pytest.mark.parametrize(['data_dir', 'filename_template', 'result'], [
+    (_PATH, '{DATASET}',
+     naming.ShardedFileTemplate(data_dir=_PATH, template='{DATASET}')),
+    (_PATH, None,
+     naming.ShardedFileTemplate(
+         data_dir=_PATH,
+         template='{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}')),
+    (_PATH, naming.ShardedFileTemplate(data_dir=epath.Path('/other')),
+     naming.ShardedFileTemplate(
+         data_dir=_PATH,
+         template='{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}')),
+    (_PATH,
+     naming.ShardedFileTemplate(
+         data_dir=epath.Path('/other'), dataset_name='mnist'),
+     naming.ShardedFileTemplate(
+         data_dir=_PATH,
+         dataset_name='mnist',
+         template='{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}')),
+])
+def test_construct_filename_template(data_dir, filename_template, result):
+  actual = write_metadata_utils._construct_filename_template(
+      data_dir=data_dir, filename_template=filename_template)
+  assert actual == result
+
+
+@pytest.mark.parametrize(['filename_template', 'file_infos', 'result'], [
+    (naming.ShardedFileTemplate(data_dir=_PATH, template='{DATASET}'),
+     [naming.FilenameInfo(dataset_name='mnist', filetype_suffix='tfrecord')],
+     naming.ShardedFileTemplate(
+         data_dir=_PATH,
+         template='{DATASET}',
+         dataset_name='mnist',
+         filetype_suffix='tfrecord')),
+    (naming.ShardedFileTemplate(
+        data_dir=_PATH, template='{DATASET}',
+        dataset_name='mnist'), [naming.FilenameInfo(dataset_name='mnist')],
+     naming.ShardedFileTemplate(
+         data_dir=_PATH, template='{DATASET}', dataset_name='mnist')),
+    (naming.ShardedFileTemplate(data_dir=_PATH, template='{DATASET}'),
+     [naming.FilenameInfo(filetype_suffix='tfrecord')],
+     naming.ShardedFileTemplate(
+         data_dir=_PATH, template='{DATASET}', filetype_suffix='tfrecord')),
+])
+def test_enrich_filename_template(filename_template, file_infos, result):
+  actual = write_metadata_utils._enrich_filename_template(
+      filename_template=filename_template, file_infos=file_infos)
+  assert actual == result
+
+
+def test_enrich_filename_template_different_dataset_name():
+  filename_template = naming.ShardedFileTemplate(
+      data_dir=_PATH, template='{DATASET}', dataset_name='imagenet')
+  file_infos = [naming.FilenameInfo(dataset_name='mnist')]
+  with pytest.raises(ValueError, match='Detected dataset name.+'):
+    write_metadata_utils._enrich_filename_template(
+        filename_template=filename_template, file_infos=file_infos)
+
+
+def test_enrich_filename_template_different_filetype_suffix():
+  filename_template = naming.ShardedFileTemplate(
+      data_dir=_PATH, template='{DATASET}', filetype_suffix='tfrecord')
+  file_infos = [naming.FilenameInfo(filetype_suffix='riegeli')]
+  with pytest.raises(ValueError, match='Detected filetype suffix.+'):
+    write_metadata_utils._enrich_filename_template(
+        filename_template=filename_template, file_infos=file_infos)
