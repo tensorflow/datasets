@@ -20,6 +20,7 @@ datasets.
 """
 import collections
 
+from tensorflow_datasets.core.dataset_builders import conll_dataset_builder
 from tensorflow_datasets.core.features.class_label_feature import ClassLabel
 from tensorflow_datasets.core.features.sequence_feature import Sequence
 from tensorflow_datasets.core.features.text_feature import Text
@@ -128,3 +129,12 @@ CONLL_2002_ORDERED_FEATURES = collections.OrderedDict({
     "chunks": Sequence(ClassLabel(names=CHUNK_TAGS)),
     "ner": Sequence(ClassLabel(names=NER_TAGS)),
 })
+
+# Standard ConllBuilderConfig for family of CoNLL-based datasets.
+
+# Used by: conll2002, conll2003
+CONLL_2002_CONFIG = conll_dataset_builder.ConllBuilderConfig(
+    name="conll2022",
+    separator=CONLL_2002_SEPARATOR,
+    ordered_features=CONLL_2002_ORDERED_FEATURES,
+)
