@@ -59,6 +59,12 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       help='Delete pre-existing dataset if it exists.',
   )
   debug_group.add_argument(
+      '--fail_if_exists',
+      action='store_true',
+      default=False,
+      help='Fails the program if there is a pre-existing dataset.',
+  )
+  debug_group.add_argument(
       '--max_examples_per_split',
       type=int,
       nargs='?',
@@ -222,6 +228,7 @@ def _make_builders(
       _make_builder,
       builder_cls,
       overwrite=args.overwrite,
+      fail_if_exists=args.fail_if_exists,
       data_dir=args.data_dir,
       **builder_kwargs,
   )
@@ -318,11 +325,16 @@ def _validate_script_path(path: tfds.core.Path,) -> Optional[tfds.core.Path]:
 def _make_builder(
     builder_cls: Type[tfds.core.DatasetBuilder],
     overwrite: bool,
+    fail_if_exists: bool,
     **builder_kwargs,
 ) -> tfds.core.DatasetBuilder:
   """Builder factory, eventually deleting pre-existing dataset."""
   builder = builder_cls(**builder_kwargs)  # pytype: disable=not-instantiable
-  if overwrite and builder.data_path.exists():
+  data_exists = builder.data_path.exists()
+  if fail_if_exists and data_exists:
+    raise RuntimeError('The `fail_if_exists` flag was True and '
+                       f'the data already exists in {builder.data_path}')
+  if overwrite and data_exists:
     builder.data_path.rmtree()  # Delete pre-existing data
     # Re-create the builder with clean state
     builder = builder_cls(**builder_kwargs)  # pytype: disable=not-instantiable
