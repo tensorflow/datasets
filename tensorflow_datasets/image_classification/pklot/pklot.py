@@ -24,6 +24,10 @@ _EMPTY_LABEL = "Empty"
 _OCCUPIED_LABEL = "Occupied"
 _EMPTY_LABEL_DIR_NAME = _EMPTY_LABEL
 _OCCUPIED_LABEL_DIR_NAME = _OCCUPIED_LABEL
+_LABEL_DIR_NAME_TO_LABEL_MAP = {
+    _EMPTY_LABEL_DIR_NAME: _EMPTY_LABEL,
+    _OCCUPIED_LABEL_DIR_NAME: _OCCUPIED_LABEL
+}
 
 
 class Pklot(tfds.core.GeneratorBasedBuilder):
@@ -82,22 +86,19 @@ class Pklot(tfds.core.GeneratorBasedBuilder):
     for weather_dir_entry in os.scandir(path):
       if not weather_dir_entry.is_dir():
         continue
+
       for date_dir_entry in os.scandir(weather_dir_entry):
         if not date_dir_entry.is_dir():
           continue
-        prefix = weather_dir_entry.name + "_" + date_dir_entry.name + "_"
-        for jpg_file_entry in os.scandir(
-            os.path.join(date_dir_entry.path, _EMPTY_LABEL_DIR_NAME)
-        ):
-          yield prefix + jpg_file_entry.name, {
-              "image": jpg_file_entry.path,
-              "label": _EMPTY_LABEL
-          }
 
-        for jpg_file_entry in os.scandir(
-            os.path.join(date_dir_entry.path, _OCCUPIED_LABEL_DIR_NAME)
-        ):
-          yield prefix + jpg_file_entry.name, {
-              "image": jpg_file_entry.path,
-              "label": _OCCUPIED_LABEL
-          }
+        prefix = weather_dir_entry.name + "_" + date_dir_entry.name + "_"
+
+        for label_dir_entry in os.scandir(date_dir_entry):
+          if not label_dir_entry.is_dir():
+            continue
+
+          for jpg_file_entry in os.scandir(label_dir_entry):
+            yield prefix + jpg_file_entry.name, {
+                "image": jpg_file_entry.path,
+                "label": _LABEL_DIR_NAME_TO_LABEL_MAP[label_dir_entry.name]
+            }
