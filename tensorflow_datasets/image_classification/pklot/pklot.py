@@ -1,13 +1,10 @@
 """pklot dataset."""
 
 import os
-import pathlib
-import platform
 from itertools import chain
 from pathlib import Path
 
 import tensorflow_datasets.public_api as tfds
-
 
 _DESCRIPTION = """
 This database contains 12,417 images (1280X720) captured from two different parking lots (parking1 and parking2) in sunny, cloudy and rainy days. The first parking lot has two different capture angles (parking1a and parking 1b).
@@ -23,15 +20,10 @@ _CITATION = """
 Almeida, P., Oliveira, L. S., Silva Jr, E., Britto Jr, A., Koerich, A., PKLot - A robust dataset for parking lot classification, Expert Systems with Applications, 42(11):4937-4949, 2015.
 """
 
-
-# NOTE: this is a workaround for glob failing on Windows with long paths
-# even if long paths support is enabled
-# https://stackoverflow.com/a/57502760
-def _fix_windows_long_path(path):
-  normalized = os.fspath(path.resolve())
-  if not normalized.startswith("\\\\?\\"):
-    normalized = "\\\\?\\" + normalized
-  return pathlib.Path(normalized)
+_EMPTY_LABEL = "Empty"
+_OCCUPIED_LABEL = "Occupied"
+_EMPTY_LABEL_DIR_NAME = _EMPTY_LABEL
+_OCCUPIED_LABEL_DIR_NAME = _OCCUPIED_LABEL
 
 
 class Pklot(tfds.core.GeneratorBasedBuilder):
@@ -50,8 +42,12 @@ class Pklot(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict(
             {
                 # These are the features of your dataset like images, labels ...
-                "image": tfds.features.Image(shape=(None, None, 3)),
-                "label": tfds.features.ClassLabel(names=["Empty", "Occupied"]),
+                "image":
+                    tfds.features.Image(shape=(None, None, 3)),
+                "label":
+                    tfds.features.ClassLabel(
+                        names=[_EMPTY_LABEL, _OCCUPIED_LABEL]
+                    ),
             }
         ),
         # If there's a common (input, target) tuple from the
@@ -67,8 +63,6 @@ class Pklot(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(
         "http://www.inf.ufpr.br/vri/databases/PKLot.tar.gz"
     )
-    if platform.system() == "Windows":
-      path = _fix_windows_long_path(path)
     return {
         "train":
             chain(
@@ -85,8 +79,25 @@ class Pklot(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path: Path):
     """Yields examples."""
-    for img_path in path.rglob("*.jpg"):
-      yield "_".join(img_path.parts[-5:]), {
-          "image": img_path,
-          "label": "Empty" if img_path.parent.name[0] == "E" else "Occupied",
-      }
+    for weather_dir_entry in os.scandir(path):
+      if not weather_dir_entry.is_dir():
+        continue
+      for date_dir_entry in os.scandir(weather_dir_entry):
+        if not date_dir_entry.is_dir():
+          continue
+        prefix = weather_dir_entry.name + "_" + date_dir_entry.name + "_"
+        for jpg_file_entry in os.scandir(
+            os.path.join(date_dir_entry.path, _EMPTY_LABEL_DIR_NAME)
+        ):
+          yield prefix + jpg_file_entry.name, {
+              "image": jpg_file_entry.path,
+              "label": _EMPTY_LABEL
+          }
+
+        for jpg_file_entry in os.scandir(
+            os.path.join(date_dir_entry.path, _OCCUPIED_LABEL_DIR_NAME)
+        ):
+          yield prefix + jpg_file_entry.name, {
+              "image": jpg_file_entry.path,
+              "label": _OCCUPIED_LABEL
+          }
