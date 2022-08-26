@@ -529,6 +529,9 @@ toc:
     title: civil_comments
   - path: /datasets/catalog/clinc_oos
     title: clinc_oos
+  - path: /datasets/catalog/conll2003
+    status: nightly
+    title: conll2003
   - path: /datasets/catalog/cos_e
     title: cos_e
   - path: /datasets/catalog/definite_pronoun_resolution
