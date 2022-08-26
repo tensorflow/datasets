@@ -26,6 +26,7 @@ from tensorflow_datasets.text.cfq import CFQ
 from tensorflow_datasets.text.cfq import CFQConfig
 from tensorflow_datasets.text.civil_comments import CivilComments
 from tensorflow_datasets.text.clinc_oos import ClincOOS
+from tensorflow_datasets.text.conll2003 import Conll2003
 from tensorflow_datasets.text.cos_e import CosE
 from tensorflow_datasets.text.definite_pronoun_resolution import DefinitePronounResolution
 from tensorflow_datasets.text.docnli import DocNLI

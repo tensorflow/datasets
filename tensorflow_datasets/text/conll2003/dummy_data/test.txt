@@ -1,0 +1,8 @@
+-DOCSTART- -X- -X- O
+
+Winter NN B-NP O
+is VBZ B-VP O
+in IN B-PP O
+the DT B-NP O
+air NN I-NP O
+. . O O
