@@ -59,30 +59,38 @@ try:
 
   # Imports for registration
   _before_dataset_imports = time.time()
-  from tensorflow_datasets import audio
   from tensorflow_datasets import dataset_collections
-  from tensorflow_datasets import graphs
-  from tensorflow_datasets import image
-  from tensorflow_datasets import image_classification
-  from tensorflow_datasets import object_detection
-  from tensorflow_datasets import nearest_neighbors
-  from tensorflow_datasets import question_answering
-  from tensorflow_datasets import d4rl
-  from tensorflow_datasets import ranking
-  from tensorflow_datasets import recommendation
-  from tensorflow_datasets import rl_unplugged
-  from tensorflow_datasets import rlds
-  from tensorflow_datasets import robotics
-  from tensorflow_datasets import robomimic
-  from tensorflow_datasets import structured
-  from tensorflow_datasets import summarization
-  from tensorflow_datasets import text
-  from tensorflow_datasets import text_simplification
-  from tensorflow_datasets import time_series
-  from tensorflow_datasets import translate
-  from tensorflow_datasets import video
-  from tensorflow_datasets import vision_language
 
+  # pytype: disable=import-error
+  # For builds that don't include all dataset builders, we don't want to fail on
+  # import errors of dataset builders.
+  try:
+    from tensorflow_datasets import audio
+    from tensorflow_datasets import graphs
+    from tensorflow_datasets import image
+    from tensorflow_datasets import image_classification
+    from tensorflow_datasets import object_detection
+    from tensorflow_datasets import nearest_neighbors
+    from tensorflow_datasets import question_answering
+    from tensorflow_datasets import d4rl
+    from tensorflow_datasets import ranking
+    from tensorflow_datasets import recommendation
+    from tensorflow_datasets import rl_unplugged
+    from tensorflow_datasets import rlds
+    from tensorflow_datasets import robotics
+    from tensorflow_datasets import robomimic
+    from tensorflow_datasets import structured
+    from tensorflow_datasets import summarization
+    from tensorflow_datasets import text
+    from tensorflow_datasets import text_simplification
+    from tensorflow_datasets import time_series
+    from tensorflow_datasets import translate
+    from tensorflow_datasets import video
+    from tensorflow_datasets import vision_language
+
+  except ImportError:
+    pass
+  # pytype: enable=import-error
 
   _import_time_ms_dataset_builders = int(
       (time.time() - _before_dataset_imports) * 1000)
