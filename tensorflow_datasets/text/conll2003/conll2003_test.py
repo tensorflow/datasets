@@ -13,13 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset builders API."""
+"""conll2003 dataset."""
 
-from tensorflow_datasets.core.dataset_builders.conll_dataset_builder import ConllBuilderConfig
-from tensorflow_datasets.core.dataset_builders.conll_dataset_builder import ConllDatasetBuilder
-from tensorflow_datasets.core.dataset_builders.conll_dataset_builder_utils import *
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.text.conll2003 import conll2003
 
-__all__ = [
-    "ConllBuilderConfig",
-    "ConllDatasetBuilder",
-]
+
+class Conll2003Test(tfds.testing.DatasetBuilderTestCase):
+  """Tests for conll2003 dataset."""
+  DATASET_CLASS = conll2003.Conll2003
+  SPLITS = {
+      'train': 3,
+      'dev': 1,
+      'test': 1,
+  }
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()

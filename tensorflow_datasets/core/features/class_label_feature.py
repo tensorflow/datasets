@@ -169,13 +169,13 @@ class ClassLabel(tensor_feature.Tensor):
     """See base class for details."""
     # Save names if defined
     if self._str2int is not None:
-      names_filepath = _get_names_filepath(data_dir, feature_name)
+      names_filepath = self.get_names_filepath(data_dir, feature_name)
       _write_names_to_file(names_filepath, self.names)
 
   def load_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     # Restore names if defined
-    names_filepath = _get_names_filepath(data_dir, feature_name)
+    names_filepath = self.get_names_filepath(data_dir, feature_name)
     if tf.io.gfile.exists(names_filepath):
       self.names = _load_names_from_file(names_filepath)
 
@@ -201,9 +201,9 @@ class ClassLabel(tensor_feature.Tensor):
   def to_json_content(self) -> feature_pb2.ClassLabel:
     return feature_pb2.ClassLabel(num_classes=self.num_classes)
 
-
-def _get_names_filepath(data_dir, feature_name):
-  return os.path.join(data_dir, "{}.labels.txt".format(feature_name))
+  @classmethod
+  def get_names_filepath(cls, data_dir, feature_name: str):
+    return os.path.join(data_dir, f"{feature_name}.labels.txt")
 
 
 def _load_names_from_file(names_filepath):

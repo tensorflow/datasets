@@ -324,6 +324,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cfq`](cfq.md)
 *   [`civil_comments`](civil_comments.md)
 *   [`clinc_oos`](clinc_oos.md)
+*   [`conll2003`](conll2003.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cos_e`](cos_e.md)
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
 *   [`doc_nli`](doc_nli.md)

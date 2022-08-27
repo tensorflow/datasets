@@ -13,13 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset builders API."""
+"""conll2003 dataset."""
 
-from tensorflow_datasets.core.dataset_builders.conll_dataset_builder import ConllBuilderConfig
-from tensorflow_datasets.core.dataset_builders.conll_dataset_builder import ConllDatasetBuilder
-from tensorflow_datasets.core.dataset_builders.conll_dataset_builder_utils import *
-
-__all__ = [
-    "ConllBuilderConfig",
-    "ConllDatasetBuilder",
-]
+from tensorflow_datasets.text.conll2003.conll2003 import Conll2003
