@@ -44,4 +44,4 @@ def test_mock_import(tmp_path: pathlib.Path):
   assert builder.info.splits['validation'].num_examples == 5
   # TFDS re-order the config so the default one is the first one, as HF
   # explicitly define the default config through `DEFAULT_CONFIG_NAME`
-  assert builder.BUILDER_CONFIGS[0].name == 'config2'
+  assert builder.default_builder_config.name == 'config2'

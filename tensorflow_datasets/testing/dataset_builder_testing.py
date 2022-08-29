@@ -435,6 +435,9 @@ class DatasetBuilderTestCase(parameterized.TestCase,
     with self._subTest("config_description"):
       self._test_description_builder_config(builder)
 
+    with self._subTest("default_config"):
+      self._test_default_builder_config(builder)
+
   @contextlib.contextmanager
   def _test_key_not_local_path(self, builder) -> Iterator[None]:
     if not isinstance(builder, dataset_builder.GeneratorBasedBuilder):
@@ -531,6 +534,12 @@ class DatasetBuilderTestCase(parameterized.TestCase,
       ).ratio()
       if ratio > 0.9:
         raise AssertionError(err_msg)
+
+  def _test_default_builder_config(self, builder):
+    if not builder.DEFAULT_BUILDER_CONFIG_NAME:
+      return
+    builder_config_names = {config.name for config in builder.BUILDER_CONFIGS}
+    self.assertIn(builder.DEFAULT_BUILDER_CONFIG_NAME, builder_config_names)
 
 
 def checksum(example):

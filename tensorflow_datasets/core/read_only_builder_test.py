@@ -140,8 +140,9 @@ def test_builder_code_not_found(code_builder: dataset_builder.DatasetBuilder):
     load.load(code_builder.name, split=[])  # Dataset found -> no error
 
     if code_builder.builder_config:
-      # When the code isn't found, default config is infered from `.config/`
-      assert builder.builder_config.name == code_builder.BUILDER_CONFIGS[0].name
+      # When the code isn't found, default config is inferred from `.config/`
+      assert (builder.builder_config.name ==
+              code_builder.default_builder_config.name)
 
       # Explicitly passing a config should works too.
       config_name = f'{code_builder.name}/{code_builder.builder_config.name}'
