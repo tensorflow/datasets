@@ -428,7 +428,7 @@ def _get_default_config_name(
   else:
     # If code found, return the default config
     if cls.BUILDER_CONFIGS:
-      return cls.BUILDER_CONFIGS[0].name
+      return cls.default_builder_config.name
 
   # Otherwise, try to load default config from common metadata
   return dataset_builder.load_default_config_name(epath.Path(builder_dir))

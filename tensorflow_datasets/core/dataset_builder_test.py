@@ -85,6 +85,10 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
       yield i, {"x": x}
 
 
+class DummyDatasetWithDefaultConfig(DummyDatasetWithConfigs):
+  DEFAULT_BUILDER_CONFIG_NAME = "plus2"
+
+
 class InvalidSplitDataset(DummyDatasetWithConfigs):
 
   def _split_generators(self, _):
@@ -235,7 +239,7 @@ class DatasetBuilderTest(testing.TestCase):
       builder = DummyDatasetWithConfigs(config=plus1_config, data_dir=tmp_dir)
       self.assertIs(plus1_config, builder.builder_config)
       self.assertIs(builder.builder_config,
-                    DummyDatasetWithConfigs.BUILDER_CONFIGS[0])
+                    DummyDatasetWithConfigs.default_builder_config)
 
   @testing.run_in_graph_and_eager_modes()
   def test_with_configs(self):
@@ -272,6 +276,12 @@ class DatasetBuilderTest(testing.TestCase):
         self.assertEqual(10, len(test_data))
         self.assertCountEqual([incr + el for el in range(30)],
                               train_data + test_data)
+
+  def test_default_builder_config(self):
+    self.assertEqual(DummyDatasetWithConfigs.default_builder_config.name,
+                     "plus1")
+    self.assertEqual(DummyDatasetWithDefaultConfig.default_builder_config.name,
+                     "plus2")
 
   def test_read_config(self):
     is_called = []
