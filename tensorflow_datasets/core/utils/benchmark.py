@@ -78,13 +78,13 @@ def benchmark(
   except TypeError:
     total = None
 
-  # Benchmark the first batch separatelly (setup overhead)
+  # Benchmark the first batch separately (setup overhead)
   start_time = time.perf_counter()
   ds_iter = iter(ds)
   try:
     next(ds_iter)  # First warmup batch
-  except StopIteration:
-    raise ValueError('Cannot benchmark dataset with 0 elements.')
+  except StopIteration as e:
+    raise ValueError('Cannot benchmark dataset with 0 elements.') from e
   first_batch_time = time.perf_counter()
 
   # Benchmark the following batches
