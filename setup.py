@@ -87,6 +87,7 @@ TESTS_REQUIRE = [
     'pandas',
     'pydub',
     'apache_beam',
+    'conllu',
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
     # Required by scripts/documentation/
