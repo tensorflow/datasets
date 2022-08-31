@@ -19,7 +19,10 @@ from tensorflow_datasets.core.dataset_builders import conll_dataset_builder_util
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
-Example of a CoNLL-formatted dataset.
+The shared task of CoNLL-2003 concerns language-independent named entity
+recognition and concentrates on four types of named entities: persons,
+locations, organizations and names of miscellaneous entities that do not belong
+to the previous three groups.
 """
 
 _CITATION = """
