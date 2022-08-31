@@ -221,6 +221,11 @@ class LazyImporter(object):
   def zarr(cls):
     return _try_import("zarr")
 
+  @utils.classproperty
+  @classmethod
+  def conllu(cls):
+    return _try_import("conllu")
+
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
 
