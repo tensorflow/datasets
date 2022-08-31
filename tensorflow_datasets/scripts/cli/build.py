@@ -204,7 +204,10 @@ def _make_builders(
     ds_to_build: str,
 ) -> Iterator[tfds.core.DatasetBuilder]:
   """Yields builders to generate."""
-  builder_cls, builder_kwargs = _get_builder_cls(ds_to_build)
+  builder_cls, builder_kwargs = _get_builder_cls(
+      ds_to_build,
+      has_imports=bool(args.imports),
+  )
 
   # Eventually overwrite version
   if args.experimental_latest_version:
@@ -243,24 +246,31 @@ def _make_builders(
 
 
 def _get_builder_cls(
-    ds_to_build: str,) -> Tuple[Type[tfds.core.DatasetBuilder], Dict[str, str]]:
+    ds_to_build: str,
+    *,
+    has_imports: bool,
+) -> Tuple[Type[tfds.core.DatasetBuilder], Dict[str, str]]:
   """Infer the builder class to build.
 
   Args:
     ds_to_build: Dataset argument.
+    has_imports: Whether `--imports` was passed
 
   Returns:
     builder_cls: The dataset class to download and prepare
     kwargs:
   """
   # 1st case: Requested dataset is a path to `.py` script
-  path = _search_script_path(ds_to_build)
-  if path is not None:
-    logging.info(f'Loading dataset {ds_to_build} from path: {path}')
-    # Dynamically load user dataset script
-    with tfds.core.utils.add_sys_path(path.parent):
-      builder_cls = tfds.core.community.builder_cls_from_module(path.stem)
-    return builder_cls, {}
+  # When `--imports=` is set, it means the user expects the dataset to be
+  # registered through the `imports` and not locally.
+  if not has_imports:
+    path = _search_script_path(ds_to_build)
+    if path is not None:
+      logging.info(f'Loading dataset {ds_to_build} from path: {path}')
+      # Dynamically load user dataset script
+      with tfds.core.utils.add_sys_path(path.parent):
+        builder_cls = tfds.core.community.builder_cls_from_module(path.stem)
+      return builder_cls, {}
 
   # 2nd case: Dataset is registered through imports.
 

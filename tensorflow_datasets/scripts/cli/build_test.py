@@ -211,19 +211,25 @@ def test_build_files():
   with pytest.raises(FileNotFoundError, match='Could not find .* script'):
     _build('')
 
-  # cd .../datasets/dummy_dataset && gtfds build
+  # cd .../datasets/dummy_dataset && tfds build
   with mock_cwd(_DUMMY_DATASET_PATH):
     assert _build('') == ['dummy_dataset']
 
-  # cd .../datasets/dummy_dataset && gtfds build dummy_dataset.py
+  # cd .../datasets/dummy_dataset && tfds build dummy_dataset.py
   with mock_cwd(_DUMMY_DATASET_PATH):
     assert _build('dummy_dataset.py') == ['dummy_dataset']
 
-  # cd .../datasets/ && gtfds build dummy_dataset
+  # cd .../datasets/ && tfds build dummy_dataset
   with mock_cwd(_DUMMY_DATASET_PATH.parent):
     assert _build('dummy_dataset') == ['dummy_dataset']
 
-  # cd .../datasets/ && gtfds build dummy_dataset/dummy_dataset
+  # cd .../datasets/ && tfds build dummy_dataset --imports=xxx
+  # --imports is passed. so do not load dataset from file
+  with mock_cwd(_DUMMY_DATASET_PATH.parent):
+    with pytest.raises(tfds.core.registered.DatasetNotFoundError):
+      assert _build('dummy_dataset --imports=os')
+
+  # cd .../datasets/ && tfds build dummy_dataset/dummy_dataset
   with mock_cwd(_DUMMY_DATASET_PATH.parent):
     assert _build('dummy_dataset/dummy_dataset') == ['dummy_dataset']
 
