@@ -999,7 +999,7 @@ class FileReaderBuilder(DatasetBuilder):
   def _example_specs(self):
     return self.info.features.get_serialized_info()
 
-  def _as_dataset(
+  def _as_dataset(  # pytype: disable=signature-mismatch  # overriding-parameter-type-checks
       self,
       split: splits_lib.Split,
       decoders: Optional[TreeDict[decode.partial_decode.DecoderArg]],
@@ -1184,7 +1184,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     """
     return
 
-  def _download_and_prepare(
+  def _download_and_prepare(  # pytype: disable=signature-mismatch  # overriding-parameter-type-checks
       self,
       dl_manager: download.DownloadManager,
       download_config: download.DownloadConfig,
