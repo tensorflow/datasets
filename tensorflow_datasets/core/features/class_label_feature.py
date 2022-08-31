@@ -15,9 +15,9 @@
 
 """ClassLabel feature."""
 
-import os
-from typing import Union
+from typing import List, Optional, Union
 
+from etils import epath
 import tensorflow as tf
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
@@ -34,7 +34,7 @@ class ClassLabel(tensor_feature.Tensor):
   def __init__(
       self,
       *,
-      num_classes=None,
+      num_classes: Optional[int] = None,
       names=None,
       names_file=None,
       doc: feature_lib.DocArg = None,
@@ -76,8 +76,8 @@ class ClassLabel(tensor_feature.Tensor):
       self._num_classes = num_classes
     elif names is not None:
       self.names = names
-    else:
-      self.names = _load_names_from_file(names_file)
+    elif names_file is not None:
+      self.names = _load_names_from_file(epath.Path(names_file))
 
   @property
   def num_classes(self):
@@ -86,12 +86,12 @@ class ClassLabel(tensor_feature.Tensor):
   @property
   def names(self):
     if not self._int2str:
-      return [tf.compat.as_text(str(i)) for i in range(self._num_classes)]
+      return [str(i) for i in range(self._num_classes)]
     return list(self._int2str)
 
   @names.setter
   def names(self, new_names):
-    int2str = [tf.compat.as_text(name) for name in new_names]
+    int2str = new_names
     # Names can only be defined once
     if self._int2str is not None and self._int2str != int2str:
       raise ValueError(
@@ -117,7 +117,6 @@ class ClassLabel(tensor_feature.Tensor):
 
   def str2int(self, str_value):
     """Conversion class name string => integer."""
-    str_value = tf.compat.as_text(str_value)
     if self._str2int:
       return self._str2int[str_value]
 
@@ -143,7 +142,7 @@ class ClassLabel(tensor_feature.Tensor):
     # No names provided, return str(int)
     if not 0 <= int_value < self._num_classes:
       raise ValueError("Invalid integer class label %d" % int_value)
-    return tf.compat.as_text(str(int_value))
+    return str(int_value)
 
   def encode_example(self, example_data):
     if self._num_classes is None:
@@ -176,7 +175,7 @@ class ClassLabel(tensor_feature.Tensor):
     """See base class for details."""
     # Restore names if defined
     names_filepath = self.get_names_filepath(data_dir, feature_name)
-    if tf.io.gfile.exists(names_filepath):
+    if names_filepath.exists():
       self.names = _load_names_from_file(names_filepath)
 
   def _additional_repr_info(self):
@@ -202,20 +201,17 @@ class ClassLabel(tensor_feature.Tensor):
     return feature_pb2.ClassLabel(num_classes=self.num_classes)
 
   @classmethod
-  def get_names_filepath(cls, data_dir, feature_name: str):
-    return os.path.join(data_dir, f"{feature_name}.labels.txt")
+  def get_names_filepath(cls, data_dir, feature_name: str) -> epath.Path:
+    return epath.Path(data_dir) / f"{feature_name}.labels.txt"
 
 
-def _load_names_from_file(names_filepath):
-  names_filepath = os.fspath(names_filepath)
-  with tf.io.gfile.GFile(names_filepath, "r") as f:
-    return [
-        name.strip()
-        for name in tf.compat.as_text(f.read()).split("\n")
-        if name.strip()  # Filter empty names
-    ]
+def _load_names_from_file(names_filepath: epath.Path) -> List[str]:
+  return [
+      name.strip()
+      for name in names_filepath.read_text().split("\n")
+      if name.strip()  # Filter empty names
+  ]
 
 
-def _write_names_to_file(names_filepath, names):
-  with tf.io.gfile.GFile(names_filepath, "w") as f:
-    f.write("\n".join(names) + "\n")
+def _write_names_to_file(names_filepath: epath.Path, names) -> None:
+  names_filepath.write_text("\n".join(names) + "\n")
