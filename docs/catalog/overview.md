@@ -137,6 +137,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`horses_or_humans`](horses_or_humans.md)
 *   [`i_naturalist2017`](i_naturalist2017.md)
 *   [`i_naturalist2018`](i_naturalist2018.md)
+*   [`i_naturalist2021`](i_naturalist2021.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
 *   [`imagenet2012_fewshot`](imagenet2012_fewshot.md)

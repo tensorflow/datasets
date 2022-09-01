@@ -204,6 +204,9 @@ toc:
     title: i_naturalist2017
   - path: /datasets/catalog/i_naturalist2018
     title: i_naturalist2018
+  - path: /datasets/catalog/i_naturalist2021
+    status: nightly
+    title: i_naturalist2021
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
