@@ -1,0 +1,11 @@
+{
+	"annotations": [{"id": 0, "image_id": 0, "category_id": 0}, {"id": 7, "image_id": 7, "category_id": 1}], 
+	"images": [
+		{"id": 0, "width": 500, "height": 500, "file_name": "train_mini/02912_Animalia_Chordata_Actinopterygii_Siluriformes_Ictaluridae_Ameiurus_nebulosus/d615f184-8af4-4c60-b9f8-3081c1607644.jpg", "license": 0, "rights_holder": "Ken-ichi Ueda", "date": "2010-07-14 20:19:00+00:00", "latitude": 43.83486, "longitude": -71.22231, "location_uncertainty": 77}, 
+		{"id": 7, "width": 500, "height": 333, "file_name": "train_mini/05804_Plantae_Tracheophyta_Liliopsida_Alismatales_Araceae_Peltandra_virginica/20c02c2d-a2c7-4f44-895c-ae3d5bb7c82c.jpg", "license": 0, "rights_holder": "Ken-ichi Ueda", "date": "2011-06-10 22:08:00+00:00", "latitude": 41.41572, "longitude": -72.57861, "location_uncertainty": 27785}
+		], 
+	"categories": [
+		{"id": 0, "name": "Ameiurus nebulosus", "common_name": "Brown Bullhead Catfish", "supercategory": "Ray-finned Fishes", "kingdom": "Animalia", "phylum": "Chordata", "class": "Actinopterygii", "order": "Siluriformes", "family": "Ictaluridae", "genus": "Ameiurus", "specific_epithet": "nebulosus", "image_dir_name": "02912_Animalia_Chordata_Actinopterygii_Siluriformes_Ictaluridae_Ameiurus_nebulosus"}, 
+		{"id": 1, "name": "Peltandra virginica", "common_name": "Green Arrow Arum", "supercategory": "Plants", "kingdom": "Plantae", "phylum": "Tracheophyta", "class": "Liliopsida", "order": "Alismatales", "family": "Araceae", "genus": "Peltandra", "specific_epithet": "virginica", "image_dir_name": "05804_Plantae_Tracheophyta_Liliopsida_Alismatales_Araceae_Peltandra_virginica"}
+		]
+}

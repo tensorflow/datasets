@@ -1,0 +1,11 @@
+amphibians
+animalia
+arachnids
+birds
+fungi
+insects
+mammals
+mollusks
+plants
+ray-finned_fishes
+reptiles

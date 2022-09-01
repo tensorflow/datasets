@@ -119,6 +119,8 @@ DATASET_FILES = [
     'image_classification/imagewang_labels.txt',
     'image_classification/inaturalist_labels.txt',
     'image_classification/inaturalist_supercategories.txt',
+    'image_classification/i_naturalist2021/i_naturalist2021_labels.txt',
+    'image_classification/i_naturalist2021/i_naturalist2021_supercategories.txt',
     'image_classification/plant_leaves_urls.txt',
     'image_classification/plantae_k_urls.txt',
     'image_classification/quickdraw_labels.txt',
