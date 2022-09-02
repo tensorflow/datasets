@@ -73,12 +73,13 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
   ```
   """
 
-  VERSION = tfds.core.Version('1.0.3')
+  VERSION = tfds.core.Version('1.0.4')
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
       '1.0.1': 'Fixed typo in `worse_label` key.',
       '1.0.2': 'Fixed correspondence between annotations and images.',
-      '1.0.3': 'Fixed files in `MANUAL_DIR`.'
+      '1.0.3': 'Fixed files in `MANUAL_DIR`.',
+      '1.0.4': 'Fixed loading of side information.'
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -190,9 +191,9 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
 
       side_info = _load_side_info(dl_paths['side_info'])
       worker1_id = side_info['worker1_id']
-      worker1_time = side_info['worker1_id']
+      worker1_time = side_info['worker1_time']
       worker2_id = side_info['worker2_id']
-      worker2_time = side_info['worker2_id']
+      worker2_time = side_info['worker2_time']
       worker3_id = side_info['worker3_id']
       worker3_time = side_info['worker3_time']
 

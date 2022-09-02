@@ -29,7 +29,8 @@ CITATIONS_FILE = "citations.bib"
 
 def get_filepath_in_dataset_folder(dataset_cls: Type[Any],
                                    file_name: str) -> epath.Path:
-  return epath.Path(inspect.getfile(dataset_cls)) / file_name
+  directory_path = epath.Path(inspect.getfile(dataset_cls)).parent
+  return directory_path / file_name
 
 
 def get_file_content_from_dataset_folder(

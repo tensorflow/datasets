@@ -19,12 +19,14 @@ Limitations:
 
 ## File naming convention
 
-In order for your `.tfrecord` files to be detected by TFDS, they need to follow
-the following naming convention:
-`<dataset_name>-<split_name>.<file-extension>-xxxxx-of-yyyyy`
-
-For example, MNIST has the
-[following files](https://console.cloud.google.com/storage/browser/tfds-data/datasets/mnist/3.0.1):
+TFDS supports defining a template for file names, which provides flexibility to
+use different file naming schemes. The template is represented by a
+`tfds.core.ShardedFileTemplate` and supports the following variables:
+`{DATASET}`, `{SPLIT}`, `{FILEFORMAT}`, `{SHARD_INDEX}`, `{NUM_SHARDS}`, and
+`{SHARD_X_OF_Y}`. For example, the default file naming scheme of TFDS is:
+`{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}`. For MNIST, this means that
+[file names](https://console.cloud.google.com/storage/browser/tfds-data/datasets/mnist/3.0.1)
+look as follows:
 
 *   `mnist-test.tfrecord-00000-of-00001`
 *   `mnist-train.tfrecord-00000-of-00001`
@@ -136,8 +138,11 @@ tfds.folder_dataset.write_metadata(
     data_dir='/path/to/my/dataset/1.0.0/',
     features=features,
     # Pass the `out_dir` argument of compute_split_info (see section above)
-    # You can also explicitly pass a list of `tfds.core.SplitInfo`
+    # You can also explicitly pass a list of `tfds.core.SplitInfo`.
     split_infos='/path/to/my/dataset/1.0.0/',
+    # Pass a custom file name template or use None for the default TFDS
+    # file name template.
+    filename_template='{SPLIT}-{SHARD_X_OF_Y}.{FILEFORMAT}',
 
     # Optionally, additional DatasetInfo metadata can be provided
     # See:

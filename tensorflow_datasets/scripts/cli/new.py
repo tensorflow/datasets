@@ -16,12 +16,12 @@
 """`tfds new` command."""
 
 import argparse
+import dataclasses
 import itertools
 import os
 import pathlib
 import subprocess
 import textwrap
-import dataclasses
 
 from tensorflow_datasets.core import naming
 
