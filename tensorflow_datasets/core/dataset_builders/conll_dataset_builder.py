@@ -41,7 +41,6 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features.features_dict import FeaturesDict
-from tensorflow_datasets.core.features.tensor_feature import Tensor
 
 
 # TODO(b/241346210): Should update ConllBuilderConfig to @dataclasses.dataclass.
@@ -55,11 +54,9 @@ class ConllBuilderConfig(dataset_builder.BuilderConfig):
       type, in the same order as they appear as columns in the input lines.
   """
 
-  def __init__(
-      self, *, separator: str,
-      ordered_features: OrderedDict[str, Union[Tensor,
-                                               feature_lib.FeatureConnector]],
-      **kwargs):
+  def __init__(self, *, separator: str,
+               ordered_features: OrderedDict[str, feature_lib.FeatureConnector],
+               **kwargs):
     """Initializes the builder config for Conll datasets.
 
     Args:
