@@ -57,8 +57,7 @@ class ConllBuilderConfig(dataset_builder.BuilderConfig):
 
   def __init__(
       self, *, separator: str,
-      ordered_features: OrderedDict[str, Union[Tensor,
-                                               feature_lib.FeatureConnector]],
+      ordered_features: OrderedDict[str, feature_lib.FeatureConnector],
       **kwargs):
     """Initializes the builder config for Conll datasets.
 
