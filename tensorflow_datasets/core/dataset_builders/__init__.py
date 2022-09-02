@@ -18,8 +18,13 @@
 from tensorflow_datasets.core.dataset_builders.conll_dataset_builder import ConllBuilderConfig
 from tensorflow_datasets.core.dataset_builders.conll_dataset_builder import ConllDatasetBuilder
 from tensorflow_datasets.core.dataset_builders.conll_dataset_builder_utils import *
+from tensorflow_datasets.core.dataset_builders.conllu_dataset_builder import ConllUBuilderConfig
+from tensorflow_datasets.core.dataset_builders.conllu_dataset_builder import ConllUDatasetBuilder
+from tensorflow_datasets.core.dataset_builders.conllu_dataset_builder_utils import *
 
 __all__ = [
     "ConllBuilderConfig",
     "ConllDatasetBuilder",
+    "ConllUBuilderConfig",
+    "ConllUDatasetBuilder",
 ]
