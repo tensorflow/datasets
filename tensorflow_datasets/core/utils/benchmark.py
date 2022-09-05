@@ -79,7 +79,7 @@ class RawBenchmarkResult:
     """Time in seconds that it took to load the first example."""
     if include_first:
       return _ns_to_s(self.first_batch_time - self.start_time)
-    if len(self.durations_ns) > 1:
+    if self.durations_ns is not None and len(self.durations_ns) > 1:
       return _ns_to_s(self.durations_ns[1])
     return None
 
