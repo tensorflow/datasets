@@ -95,6 +95,7 @@ class ImageGridVisualizer(visualizer.Visualizer):
       cols: int = 3,
       plot_scale: float = 3.,
       image_key: Optional[str] = None,
+      label_key: Optional[str] = None,
   ):
     """Display the dataset.
 
@@ -109,6 +110,8 @@ class ImageGridVisualizer(visualizer.Visualizer):
         around 3 to get a good plot. High and low values may cause the labels to
         get overlapped.
       image_key: `string`, name of the feature that contains the image. If not
+        set, the system will try to auto-detect it.
+      label_key: `string`, name of the feature that contains the label. If not
         set, the system will try to auto-detect it.
 
     Returns:
@@ -127,9 +130,13 @@ class ImageGridVisualizer(visualizer.Visualizer):
     # Optionally extract the label key
     label_keys = visualizer.extract_keys(ds_info.features,
                                          features_lib.ClassLabel)
-    label_key = label_keys[0] if len(label_keys) == 1 else None
-    if not label_key:
-      logging.info('Was not able to auto-infer label.')
+    if label_key is not None:
+      assert label_key in label_keys, (
+          f'Label "{label_key}" not found: {label_keys}.')
+    else:
+      label_key = label_keys[0] if len(label_keys) == 1 else None
+      if not label_key:
+        logging.info('Was not able to auto-infer label.')
 
     # Single image display
     def make_cell_fn(ax, ex):
