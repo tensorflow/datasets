@@ -92,6 +92,7 @@ class DatasetBuilderTestCase(parameterized.TestCase,
   You must set the following class attributes:
 
     * DATASET_CLASS: class object of DatasetBuilder you want to test.
+    * SPLITS: dict mapping split name to expected number of examples.
 
   You may set the following class attributes:
 
@@ -140,6 +141,7 @@ class DatasetBuilderTestCase(parameterized.TestCase,
   """
 
   DATASET_CLASS = None
+  SPLITS = None
   VERSION = None
   BUILDER_CONFIG_NAMES_TO_TEST: Optional[List[Union[
       str, dataset_builder.BuilderConfig]]] = None
