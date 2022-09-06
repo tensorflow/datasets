@@ -282,6 +282,28 @@ But then, all of a sudden, there's a badword... or not?
 
     self.assertListEqual(expected_outputs, outputs)
 
+  def test_soft_badwords_filter(self):
+    badwords_filter_fn = c4_utils.get_badwords_filter_fn(
+        badwords={"": ["bad"]}, filter_fraction=0.5)
+
+    self.assertTrue(
+        badwords_filter_fn(
+            page=PageFeatures(
+                text="good page",
+                normalized_url="filtered.url.com",
+                language="")))
+    self.assertFalse(
+        badwords_filter_fn(
+            page=PageFeatures(
+                text="bad page", normalized_url="filtered.url.com",
+                language="")))
+    self.assertTrue(
+        badwords_filter_fn(
+            page=PageFeatures(
+                text="bad page",
+                normalized_url="unfiltered.url.com",
+                language="")))
+
   def test_paragraph_filter(self):
     text = """This line is long enough to be a paragraph.
 This one is not.

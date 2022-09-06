@@ -23,7 +23,7 @@ import heapq
 import io
 import re
 import threading
-from typing import Collection, Iterable, Mapping, Optional, Tuple
+from typing import Collection, Iterable, Mapping, Optional, Sequence, Tuple
 
 from absl import logging
 import tensorflow as tf
@@ -149,7 +149,7 @@ def detect_languages(pages, valid_languages):
   class _PredictLanguageFn(beam.DoFn):
     """Predicts page's language using cld3 and adds to features."""
 
-    def __init__(self, valid_languages, min_probability=0.7):
+    def __init__(self, valid_languages, min_probability=0.95):
       self._valid_languages = set(valid_languages)
       self._counter_inc_fn = get_counter_inc_fn("language-filter")
       self._min_probability = min_probability
@@ -486,16 +486,21 @@ def normalize_url(url):
   return url
 
 
-def get_badwords_filter_fn(badwords):
-  """Filters pages that contain any language-specific bad words."""
-  badwords_regex = {  # pylint:disable=g-complex-comprehension
-      lang: (
-          # For Chinese and Thai, match bad words regardless of context.
-          re.compile("|".join(words)) if lang in ("th", "zh")
-          # For other languages, match only when flanked by non-word chars.
-          else re.compile(r"(?:\W|^)({})(?:\W|$)".format("|".join(words))))
-      for lang, words in badwords.items()
-  }
+def get_badwords_filter_fn(badwords: Mapping[str, Sequence[str]],
+                           filter_fraction: float = 1.0):
+  """Filters pages at given rate that contain language-specific bad word(s)."""
+  badwords_regex = {}
+  for lang, words in badwords.items():
+    words = [re.escape(w) for w in words]
+    badwords_regex[lang] = (
+        # For Japanese, Thai, and Chinese, do not require word separations.
+        re.compile("|".join(words)) if lang in ("ja", "th", "zh")
+        # For other languages, match only when flanked by non-word chars.
+        else re.compile(r"(?:\W|^)({})(?:\W|$)".format("|".join(words))))
+
+  filter_ratio = float.as_integer_ratio(filter_fraction)
+  keep_badword_page = get_hashed_url_filter_fn(
+      lambda x: x % filter_ratio[1] >= filter_ratio[0])
 
   def badwords_filter(page):
     lang = page.language.split("-")[0]  # remove suffix if present
@@ -504,6 +509,10 @@ def get_badwords_filter_fn(badwords):
       text = page.text
       badwords_found = badwords_regex[lang].search(text.lower())
       if badwords_found is not None:
+        if keep_badword_page(page):
+          get_counter_inc_fn("badwords-filter")("soft-passed")
+          get_counter_inc_fn("badwords-filter-%s" % lang)("soft-passed")
+          return True
         get_counter_inc_fn("badwords-filter")("filtered")
         get_counter_inc_fn("badwords-filter-%s" % lang)("filtered")
         return False
