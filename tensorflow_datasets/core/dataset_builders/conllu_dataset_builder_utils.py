@@ -57,6 +57,7 @@ def get_universal_morphology_config(
     language: str,
     features: OrderedDict[str, feature_lib.FeatureConnector],
     name: Optional[str] = None,
+    description: Optional[str] = None,
 ) -> conllu_dataset_builder.ConllUBuilderConfig:
   """Returns a populated Universal Morphology ConllUBuilderConfig.
 
@@ -65,12 +66,14 @@ def get_universal_morphology_config(
     features:  An OrderedDict specifying the features names and their type.
     name: Optional config name. If not given, will be set to be the same as the
       given language.
+    description: Optional config description.
 
   Returns:
     A populated `ConllUBuilderConfig` for a Universal Morphology dataset.
   """
   return conllu_dataset_builder.ConllUBuilderConfig(
       name=name or language,
+      description=description or None,
       features=features,
       language=language,
   )
