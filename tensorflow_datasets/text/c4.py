@@ -19,6 +19,7 @@ import collections
 import functools
 import json
 import os
+from typing import Optional, Sequence
 import uuid
 
 from absl import logging
@@ -50,7 +51,7 @@ _CITATION = """
   eprint = {1910.10683},
 }
 """
-_VERSION = tfds.core.Version("3.0.1")
+_VERSION = tfds.core.Version("3.1.0")
 
 # TODO(adarob): Remove supported versions. Starting with 3.0.0, all generated
 # datasets are automatically forward compatible. For example,
@@ -63,8 +64,14 @@ _SUPPORTED_VERSIONS = [
 ]
 RELEASE_NOTES = {
     "3.1.0":
-        "Select newest timestamp when deduping by URL (vs random). Expanded "
-        "complete list of CC dumps (as of Aug 17, 2022) for mC4.",
+        "All: Select newest timestamp when deduping by URL (vs random); escape "
+        "badword regexes."
+        "Multilingual: Expand complete list of CC dumps (as of Aug 17, 2022); "
+        "use soft badword filtering (99.9%); do not require spaces for "
+        "Japanese when matching bad words (similar to Thai and Chinese); "
+        "up minimum language detection threshold to 0.95 (from 0.7); allow "
+        "badwords that filter >10% of documents for a given non-spaced "
+        "language due to being common subwords.",
     "3.0.1": "Remove mC4 languages with less than 10k pages.",
     "3.0.0": "Add multilingual version (mC4). Deterministic URL deduplication.",
     "2.3.1": "Hashing change.",
@@ -75,7 +82,6 @@ RELEASE_NOTES = {
 _DOWNLOAD_HOST = "https://data.commoncrawl.org"
 _WET_PATH_URL = "https://data.commoncrawl.org/crawl-data/CC-MAIN-{cc_version}/wet.paths.gz"
 _REALNEWS_DOMAINS_URL = "https://raw.githubusercontent.com/rowanz/grover/38f7184bd87237ae2d3bc330b99f1e2e246f6d51/realnews/domain_to_allowed_subdomains.json"
-_CHECKSUMS_URL = "https://storage.googleapis.com/tfds-data/manual_checksums/c4.txt"
 _OPENWEBTEXT_URLS_ZIP = "OpenWebText.zip"
 _OPENWEBTEXT_URLS_URL = "https://mega.nz/#F!EZZD0YwJ!9_PlEQzdMVLaNdKv_ICNVQ"
 _OPENWEBTEXT_URLS_FILE_PATTERN = "OpenWebText/Version 1/URLs/*.txt"
@@ -86,6 +92,9 @@ _BADWORDS_LANGS = [
     "fr-CA-u-sd-caqc", "hi", "hu", "it", "ja", "kab", "ko", "nl", "no", "pl",
     "pt", "ru", "sv", "th", "tlh", "tr", "zh"
 ]
+# Words that are allowed since they are common subwords in languages without
+# spaces. These each filter >10% of documents of their language when disallowed.
+_BADWORDS_ALLOWLIST = {"ja": {"sm", "グロ", "女の子"}, "zh": {"性"}}
 
 DEFAULT_CC_VERSION = "2019-18"
 
@@ -192,28 +201,7 @@ ALL_CC_VERSIONS = (  # as of August 1, 2022
     "2022-27",
 )
 
-_KNOWN_CORRUPT_WET_FILES = (  # as of September 23, 2020
-    # files that raise EOFError
-    "crawl-data/CC-MAIN-2016-50/segments/1480698543577.51/wet/CC-MAIN-20161202170903-00294-ip-10-31-129-80.ec2.internal.warc.wet.gz",
-    "crawl-data/CC-MAIN-2017-43/segments/1508187823309.55/wet/CC-MAIN-20171019141046-20171019161046-00789.warc.wet.gz",
-    "crawl-data/CC-MAIN-2017-47/segments/1510934805466.25/wet/CC-MAIN-20171119080836-20171119100836-00043.warc.wet.gz",
-    "crawl-data/CC-MAIN-2017-47/segments/1510934805466.25/wet/CC-MAIN-20171119080836-20171119100836-00043.warc.wet.gz",
-    "crawl-data/CC-MAIN-2017-47/segments/1510934805809.59/wet/CC-MAIN-20171119210640-20171119230640-00044.warc.wet.gz",
-    "crawl-data/CC-MAIN-2017-47/segments/1510934806543.24/wet/CC-MAIN-20171122084446-20171122104446-00120.warc.wet.gz",
-    "crawl-data/CC-MAIN-2017-51/segments/1512948517350.12/wet/CC-MAIN-20171212153808-20171212173808-00039.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-05/segments/1516084887660.30/wet/CC-MAIN-20180118230513-20180119010513-00778.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-09/segments/1518891815951.96/wet/CC-MAIN-20180224211727-20180224231727-00311.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-26/segments/1529267863518.39/wet/CC-MAIN-20180620104904-20180620124904-00402.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-26/segments/1529267863518.39/wet/CC-MAIN-20180620104904-20180620124904-00402.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-26/segments/1529267865995.86/wet/CC-MAIN-20180624005242-20180624025242-00197.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-30/segments/1531676591837.34/wet/CC-MAIN-20180720213434-20180720233434-00442.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-34/segments/1534221211167.1/wet/CC-MAIN-20180816191550-20180816211550-00078.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-34/segments/1534221211185.57/wet/CC-MAIN-20180816211126-20180816231126-00076.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-34/segments/1534221211185.57/wet/CC-MAIN-20180816211126-20180816231126-00076.warc.wet.gz",
-    "crawl-data/CC-MAIN-2018-34/segments/1534221219109.94/wet/CC-MAIN-20180821210655-20180821230655-00654.warc.wet.gz",
-    "crawl-data/CC-MAIN-2019-47/segments/1573496672170.93/wet/CC-MAIN-20191122222322-20191123011322-00000.warc.wet.gz",
-    "crawl-data/CC-MAIN-2020-24/segments/1590347458095.68/wet/CC-MAIN-20200604192256-20200604222256-00235.warc.wet.gz",
-    "crawl-data/CC-MAIN-2020-34/segments/1596439738819.78/wet/CC-MAIN-20200811180239-20200811210239-00123.warc.wet.gz",
+_KNOWN_CORRUPT_WET_FILES = (  # as of August 12, 2022
     # files that raise UnicodeDecodeError
     "crawl-data/CC-MAIN-2017-13/segments/1490218203536.73/wet/CC-MAIN-20170322213003-00052-ip-10-233-31-227.ec2.internal.warc.wet.gz",
 )
@@ -238,15 +226,15 @@ class C4Config(tfds.core.BuilderConfig):
   """BuilderConfig for C4 dataset."""
 
   def __init__(self,
-               name,
-               languages,
-               cc_versions=None,
-               clean=False,
-               badwords_filter=False,
-               paragraph_filter=False,
-               dedupe=True,
-               realnewslike=False,
-               webtextlike=False,
+               name: str,
+               languages: Sequence[str],
+               cc_versions: Optional[Sequence[str]] = None,
+               clean: bool = False,
+               badwords_filter_fraction: float = 0.0,
+               paragraph_filter: bool = False,
+               dedupe: bool = True,
+               realnewslike: bool = False,
+               webtextlike: bool = False,
                **kwargs):
     """BuilderConfig for C4.
 
@@ -258,7 +246,8 @@ class C4Config(tfds.core.BuilderConfig):
       clean: bool, whether to heuristically filter out lines and pages
         considered low quality. Note: only expected to work reliably for English
         pages.
-      badwords_filter: bool, whether to filter out pages with badwords.
+      badwords_filter_fraction: float, what fraction of pages to filter out that
+        contain "bad words".
       paragraph_filter: bool, whether to filter out pages with too few or too
         short paragraphs.
       dedupe: bool, whether to deduplicate the dataset by paragraphs.
@@ -277,10 +266,14 @@ class C4Config(tfds.core.BuilderConfig):
       logging.warn(
           "C4 cleaning is only expected to work reliably for English pages.")
 
+    if not 0.0 <= badwords_filter_fraction <= 1.0:
+      raise ValueError(
+          "`badwords_filter_fraction` must be between 0.0 and 1.0.")
+
     self.languages = languages
     self.cc_versions = cc_versions or (DEFAULT_CC_VERSION,)
     self.clean = clean
-    self.badwords_filter = badwords_filter
+    self.badwords_filter_fraction = badwords_filter_fraction
     self.paragraph_filter = paragraph_filter
     self.dedupe = dedupe
     self.realnewslike = realnewslike
@@ -302,14 +295,14 @@ class C4(tfds.core.BeamBasedBuilder):
           languages=["en"],
           clean=True,
           dedupe=True,
-          badwords_filter=True,
+          badwords_filter_fraction=1.0,
           description="English C4 dataset."),
       C4Config(
           "en.noclean",
           languages=["en"],
           clean=False,
           dedupe=False,
-          badwords_filter=False,
+          badwords_filter_fraction=0.0,
           description="Disables all cleaning (deduplication, removal based on bad words, "
           "etc.)"),
       C4Config(
@@ -318,7 +311,7 @@ class C4(tfds.core.BeamBasedBuilder):
           realnewslike=True,
           clean=True,
           dedupe=True,
-          badwords_filter=True,
+          badwords_filter_fraction=1.0,
           description="Filters from the default config to only include content from the "
           "domains used in the 'RealNews' dataset (Zellers et al., 2019)."),
       C4Config(
@@ -328,7 +321,7 @@ class C4(tfds.core.BeamBasedBuilder):
           webtextlike=True,
           clean=True,
           dedupe=True,
-          badwords_filter=True,
+          badwords_filter_fraction=1.0,
           description="Filters from the default config to only include content from the "
           "URLs in OpenWebText (https://github.com/jcpeterson/openwebtext)."),
       C4Config(
@@ -338,8 +331,8 @@ class C4(tfds.core.BeamBasedBuilder):
           clean=False,
           paragraph_filter=True,
           dedupe=True,
-          badwords_filter=True,
-          description="Multilingual C4 (mC4) has 101 languages and is generated from 71 "
+          badwords_filter_fraction=0.999,
+          description="Multilingual C4 (mC4) has 101 languages and is generated from 86 "
           "Common Crawl dumps."),
   ]
 
@@ -360,8 +353,6 @@ class C4(tfds.core.BeamBasedBuilder):
     )
 
   def _split_generators(self, dl_manager, pipeline):
-    dl_manager.download_checksums(_CHECKSUMS_URL)
-
     # We will automatically download the first default CC version, but others
     # need to be manually downloaded.
     cc_versions = set(self.builder_config.cc_versions)
@@ -370,7 +361,7 @@ class C4(tfds.core.BeamBasedBuilder):
         _WET_PATH_URL.format(cc_version=cc_version)
         for cc_version in cc_versions
     ]
-    if self.builder_config.badwords_filter:
+    if self.builder_config.badwords_filter_fraction > 0.0:
       files_to_download["badwords"] = {
           lang: _BADWORDS_URL.format(lang=lang)
           for lang in _BADWORDS_LANGS
@@ -549,7 +540,7 @@ class C4(tfds.core.BeamBasedBuilder):
       pages = c4_utils.detect_languages(
           pages, valid_languages=self.builder_config.languages)
 
-    if self.builder_config.badwords_filter:
+    if self.builder_config.badwords_filter_fraction > 0.0:
       # Create dictionary of badwords regex for each available language.
       badwords = collections.defaultdict(set)
       for lang, path in file_paths["badwords"].items():
@@ -557,7 +548,13 @@ class C4(tfds.core.BeamBasedBuilder):
         with tf.io.gfile.GFile(path) as f:
           badwords[lang].update(l.strip() for l in f)
 
-      pages |= beam.Filter(c4_utils.get_badwords_filter_fn(badwords))
+      for lang, allowlist in _BADWORDS_ALLOWLIST.items():
+        badwords[lang] -= allowlist
+
+      pages |= beam.Filter(
+          c4_utils.get_badwords_filter_fn(
+              badwords,
+              filter_fraction=self.builder_config.badwords_filter_fraction))
 
     return pages
 
