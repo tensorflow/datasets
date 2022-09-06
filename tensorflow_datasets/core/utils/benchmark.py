@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Benchmark utils."""
+from __future__ import annotations
 
 import dataclasses
 import statistics
@@ -140,8 +141,8 @@ class RawBenchmarkResult:
 
 @dataclasses.dataclass(frozen=True)
 class BenchmarkResult:
-  stats: 'pd.DataFrame'
-  raw_stats: 'pd.DataFrame'
+  stats: pd.DataFrame
+  raw_stats: pd.DataFrame
 
   def _repr_html_(self) -> str:
     """Colab/notebook representation."""
