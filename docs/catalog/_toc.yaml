@@ -658,6 +658,9 @@ toc:
     title: xnli
   - path: /datasets/catalog/xtreme_pawsx
     title: xtreme_pawsx
+  - path: /datasets/catalog/xtreme_pos
+    status: nightly
+    title: xtreme_pos
   - path: /datasets/catalog/xtreme_xnli
     title: xtreme_xnli
   - path: /datasets/catalog/yelp_polarity_reviews
