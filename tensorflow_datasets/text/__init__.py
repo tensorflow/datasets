@@ -90,5 +90,6 @@ from tensorflow_datasets.text.wordnet import Wordnet
 from tensorflow_datasets.text.wsc273 import Wsc273
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.xtreme_pawsx import XtremePawsx
+from tensorflow_datasets.text.xtreme_pos import XtremePos
 from tensorflow_datasets.text.xtreme_xnli import XtremeXnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews

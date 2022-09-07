@@ -84,6 +84,34 @@ def get_conllu_example(sentence, example_id,
   return example
 
 
+def get_xtreme_pos_example(sentence, example_id,
+                           features) -> Mapping[str, Union[str, Sequence[str]]]:
+  """Processes an annotated sentence into an example for the xtreme_pos dataset.
+
+  This function adds a further check ensuring that, at a given position in a
+  sentence, both the token and the upos label are not empty.
+  This is done for consistency with the xtreme implementation in other
+  libraries, such as HuggingFace (rf. line 955):
+  https://github.com/huggingface/datasets/blob/e6f1352fe19679de897f3d962e616936a17094f5/datasets/xtreme/xtreme.py
+
+  Args:
+    sentence: the annotated sentence parsed with the conllu library.
+    example_id: the example_id of the example, which will be used if the `idx`
+      feature is present but not defined in the annotated sentence.
+    features: the features defined in the output example.
+
+  Returns:
+    An example to be serialized.
+  """
+  del example_id
+  example = {feature: [] for feature in features}
+  for token in sentence:
+    if token["form"] != "_" and token["upos"] != "_":
+      example["tokens"].append(token["form"])
+      example["upos"].append(token["upos"])
+  return example
+
+
 # TODO(b/241346210): Should update ConllUBuilderConfig to @dataclasses.dataclass
 class ConllUBuilderConfig(dataset_builder.BuilderConfig):
   """Base class for CoNLL-U formatted data configuration.

@@ -156,3 +156,69 @@ def test_generate_corrupted_example():
     with tfds.testing.MockFs() as fs:
       fs.add_file(path=_INPUT_PATH, content=_INVALID_INPUT)
       list(dataset._generate_examples(_INPUT_PATH))
+
+
+class DummyXtremePosConllUDataset(conllu_dataset_builder.ConllUDatasetBuilder):
+  VERSION = tfds.core.Version("1.0.0")
+  RELEASE_NOTES = {"1.0.0": "Dummy notes."}
+  BUILDER_CONFIGS = [
+      conllu_lib.get_universal_morphology_config(
+          language="italian", features=conllu_lib.XTREME_POS_FEATURES)
+  ]
+
+  def _info(self) -> tfds.core.DatasetInfo:
+    """Returns the dataset metadata."""
+    return self.create_dataset_info(description="Dummy CoNLL dataset.",)
+
+  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+    """Returns SplitGenerators."""
+    del dl_manager
+    return {
+        "train":
+            self._generate_examples(
+                filepaths=_INPUT_PATH,
+                process_example_fn=conllu_dataset_builder.get_xtreme_pos_example
+            )
+    }
+
+
+def test_generate_xtreme_pos_example():
+  tf_mock = mock.Mock()
+  tf_mock.gfile.GFile.return_value = _VALID_INPUT
+  expected_examples = []
+
+  dataset = DummyXtremePosConllUDataset()
+
+  with tfds.testing.MockFs() as fs:
+    fs.add_file(path=_INPUT_PATH, content=_VALID_INPUT)
+    examples = list(dataset._generate_examples(_INPUT_PATH))
+    expected_examples = [
+        (0, {
+            "tokens": ["Il", "futuro", "."],
+            "upos": ["DET", "NOUN", "PUNCT"],
+        }),
+        (1, {
+            "tokens": ["il", "responsabile", "dell'", "di", "l'", "ambiente"],
+            "upos": ["DET", "NOUN", "_", "ADP", "DET", "NOUN"],
+        }),
+    ]
+
+    assert examples == expected_examples
+
+    for _, example in examples:
+      assert len(example) == len(conllu_lib.XTREME_POS_FEATURES)
+
+  assert len(examples) == 2
+
+
+def test_generate_corrupted_xtreme_pos_example():
+  conllu = lazy_imports_lib.lazy_imports.conllu
+
+  tf_mock = mock.Mock()
+  tf_mock.gfile.GFile.return_value = _VALID_INPUT
+  dataset = DummyXtremePosConllUDataset()
+
+  with pytest.raises(conllu.exceptions.ParseException):
+    with tfds.testing.MockFs() as fs:
+      fs.add_file(path=_INPUT_PATH, content=_INVALID_INPUT)
+      list(dataset._generate_examples(_INPUT_PATH))
