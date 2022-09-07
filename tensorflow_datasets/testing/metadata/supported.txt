@@ -217,15 +217,10 @@ c4/en.noclean/2.2.0
 c4/en.noclean/2.2.1
 c4/en.noclean/2.3.0
 c4/en.noclean/2.3.1
-c4/en.noclean/3.0.1
 c4/en/2.2.0
 c4/en/2.2.1
 c4/en/2.3.0
 c4/en/2.3.1
-c4/en/3.0.1
-c4/multilingual/3.0.1
-c4/realnewslike/3.0.1
-c4/webtextlike/3.0.1
 caltech101/3.0.1
 caltech_birds2010/0.1.1
 caltech_birds2011/0.1.1
