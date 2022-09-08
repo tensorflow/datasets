@@ -18,7 +18,7 @@
 It contains a ConllBuilderConfig and a ConllDatasetBuilder which are used to
 initialize TFDS datasets based on CoNLL-like formatted data.
 """
-from typing import List, Optional, OrderedDict, Sequence, Union
+from typing import Callable, List, Mapping, Optional, OrderedDict, Sequence, Union
 
 from etils import epath
 import tensorflow as tf
@@ -29,6 +29,87 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features.features_dict import FeaturesDict
+
+
+def get_conllu_example(sentence, example_id,
+                       features) -> Mapping[str, Union[str, Sequence[str]]]:
+  """Processes a conllu-annotated sentence into an example to be serialized.
+
+  Args:
+    sentence: the annotated sentence parsed with the conllu library.
+    example_id: the example_id of the example, which will be used if the `idx`
+      feature is present but not defined in the annotated sentence.
+    features: the features defined in the output example.
+
+  Returns:
+    An example to be serialized.
+  """
+  example = {}
+
+  for feature in features:
+
+    # Use the idx parsed from the data, example_id if not available.
+    if feature == "idx":
+      idx = sentence.metadata.get("sent_id", example_id)
+      example["idx"] = idx
+
+    # CoNNL-U format stores tokens using the `form` tag.
+    elif feature == "tokens":
+      example["tokens"] = [token["form"] for token in sentence]
+
+    # CoNNL-U format stores lemmas using the `lemma` tag.
+    elif feature == "lemmas":
+      example["lemmas"] = [token["lemma"] for token in sentence]
+
+    elif feature == "text":
+      if "text" in sentence.metadata:
+        text = sentence.metadata["text"]
+      else:
+        text = " ".join(example["tokens"])
+      example["text"] = text
+
+    # All other features are Sequences whose feature name corresponds to
+    # the respective tag name in the annotations generated with the
+    # conllu library.
+    else:
+      # UPOS are stored as ClassLabels and are therefore not converted
+      # into strings.
+      # Future features might follow the same principle, therefore we
+      # check for list membership.
+      if feature in ["upos"]:
+        example[feature] = [token[feature] for token in sentence]
+      else:
+        example[feature] = [str(token[feature]) for token in sentence]
+
+  return example
+
+
+def get_xtreme_pos_example(sentence, example_id,
+                           features) -> Mapping[str, Union[str, Sequence[str]]]:
+  """Processes an annotated sentence into an example for the xtreme_pos dataset.
+
+  This function adds a further check ensuring that, at a given position in a
+  sentence, both the token and the upos label are not empty.
+  This is done for consistency with the xtreme implementation in other
+  libraries, such as HuggingFace (rf. line 955):
+  https://github.com/huggingface/datasets/blob/e6f1352fe19679de897f3d962e616936a17094f5/datasets/xtreme/xtreme.py
+
+  Args:
+    sentence: the annotated sentence parsed with the conllu library.
+    example_id: the example_id of the example, which will be used if the `idx`
+      feature is present but not defined in the annotated sentence.
+    features: the features defined in the output example.
+
+  Returns:
+    An example to be serialized.
+  """
+  del example_id
+  example = {feature: [] for feature in features}
+  for token in sentence:
+    if token["form"] != "_" and token["upos"] != "_":
+      example["tokens"].append(token["form"])
+      example["upos"].append(token["upos"])
+  return example
 
 
 # TODO(b/241346210): Should update ConllUBuilderConfig to @dataclasses.dataclass
@@ -105,65 +186,20 @@ class ConllUDatasetBuilder(
         citation=citation,
     )
 
-  def _get_conllu_example(self, sentence, example_id):
-    """Processes an annotated sentence into an example to be serialized.
-
-    Args:
-      sentence: the annotated sentence parsed with the conllu library.
-      example_id: the example_id of the example, which will be used if the `idx`
-        feature is present but not defined in the annotated sentence.
-
-    Returns:
-      An example to be serialized.
-    """
-    example = {}
-
-    for feature in self.builder_config.features:
-
-      # Use the idx parsed from the data, example_id if not available.
-      if feature == "idx":
-        idx = sentence.metadata.get("sent_id", example_id)
-        example["idx"] = idx
-
-      # CoNNL-U format stores tokens using the `form` tag.
-      elif feature == "tokens":
-        example["tokens"] = [token["form"] for token in sentence]
-
-      # CoNNL-U format stores lemmas using the `lemma` tag.
-      elif feature == "lemmas":
-        example["lemmas"] = [token["lemma"] for token in sentence]
-
-      elif feature == "text":
-        if "text" in sentence.metadata:
-          text = sentence.metadata["text"]
-        else:
-          text = " ".join(example["tokens"])
-        example["text"] = text
-
-      # All other features are Sequences whose feature name corresponds to
-      # the respective tag name in the annotations generated with the
-      # conllu library.
-      else:
-        # UPOS are stored as ClassLabels and are therefore not converted
-        # into strings.
-        # Future features might follow the same principle, therefore we
-        # check for list membership.
-        if feature in ["upos"]:
-          example[feature] = [token[feature] for token in sentence]
-        else:
-          example[feature] = [str(token[feature]) for token in sentence]
-
-    return example
-
   def _generate_examples(
       self,
       filepaths: Union[epath.PathLike, List[epath.PathLike]],
+      process_example_fn: Callable[..., Mapping[str, Union[
+          str, Sequence[str]]]] = get_conllu_example,
   ) -> split_builder_lib.SplitGenerator:
     """Processes CoNLL-U formatted datasets and generate examples.
 
     Args:
       filepaths: The filepaths of the input data. Could be a list of paths for
         multiple input files, or a single path.
+      process_example_fn: The function used to process a conllu-annotated
+        sentence into an example to be serialized. Defaults to
+        get_conllu_example.
 
     Yields:
       Generated examples.
@@ -176,7 +212,10 @@ class ConllUDatasetBuilder(
       with tf.io.gfile.GFile(filepath) as data_file:
         annotated_sentences = list(conllu.parse_incr(data_file))
         for sentence in annotated_sentences:
-          example = self._get_conllu_example(sentence, example_id)
+          example = process_example_fn(
+              sentence=sentence,
+              example_id=example_id,
+              features=self.builder_config.features)
           yield example_id, example
 
           example_id += 1

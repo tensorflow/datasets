@@ -13,7 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset collections."""
+"""xtreme_pos dataset."""
 
-from tensorflow_datasets.dataset_collections.longt5 import Longt5
-from tensorflow_datasets.dataset_collections.xtreme import Xtreme
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.text.xtreme_pos import xtreme_pos
+
+
+class XtremePosTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for xtreme_pos dataset."""
+  BUILDER_CONFIG_NAMES_TO_TEST = ['xtreme_pos_th']
+  DATASET_CLASS = xtreme_pos.XtremePos
+  SPLITS = {
+      'test': 2,  # Number of fake test example
+  }
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()
