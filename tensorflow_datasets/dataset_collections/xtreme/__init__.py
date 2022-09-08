@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset collections."""
+"""Xtreme dataset collection."""
 
-from tensorflow_datasets.dataset_collections.longt5 import Longt5
-from tensorflow_datasets.dataset_collections.xtreme import Xtreme
+from tensorflow_datasets.dataset_collections.xtreme.xtreme import Xtreme
