@@ -68,6 +68,7 @@ __all__ = [
     "beam",
     "benchmark",
     "core",
+    "dataset_builders",
     "deprecated",
     "folder_dataset",
     "builder",
