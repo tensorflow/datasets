@@ -216,9 +216,10 @@ class MslrWebConfig(tfds.core.BuilderConfig):
 class MslrWeb(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for mslr_web dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.1.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
+      "1.1.0": "Bundle features into a single 'float_features' feature."
   }
   # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
@@ -232,12 +233,21 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     encoding = tfds.features.Encoding.ZLIB
     features = {
-        name: tfds.features.Tensor(
-            shape=(None,), dtype=tf.float64, encoding=encoding)
-        for name in _FEATURE_NAMES.values()
+        "float_features":
+            tfds.features.Tensor(
+                shape=(None, len(_FEATURE_NAMES)),
+                dtype=tf.float64,
+                encoding=encoding),
+        _LABEL_NAME:
+            tfds.features.Tensor(
+                shape=(None,), dtype=tf.float64, encoding=encoding)
     }
-    features[_LABEL_NAME] = tfds.features.Tensor(
-        shape=(None,), dtype=tf.float64, encoding=encoding)
+    metadata = tfds.core.MetadataDict({
+        "float_features_names": {
+            idx: _FEATURE_NAMES[key]
+            for idx, key in enumerate(sorted(_FEATURE_NAMES))
+        }
+    })
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -245,7 +255,7 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict(features),
         homepage="https://www.microsoft.com/en-us/research/project/mslr/",
         citation=_CITATION,
-    )
+        metadata=metadata)
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
@@ -261,4 +271,5 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, path):
     """Yields examples."""
     with tf.io.gfile.GFile(path, "r") as f:
-      yield from LibSVMRankingParser(f, _FEATURE_NAMES, _LABEL_NAME)
+      yield from LibSVMRankingParser(
+          f, _FEATURE_NAMES, _LABEL_NAME, combine_features=True)

@@ -90,6 +90,34 @@ class LibSVMRankingParserTest(testing.TestCase):
     with self.assertRaises(StopIteration):
       next(results)
 
+  def test_combines_features_into_a_single_matrix(self):
+    results = iter(
+        LibSVMRankingParser(
+            _TEST_DATASET.split("\n"),
+            feature_names={
+                1: "bm25",
+                2: "tfidf",
+                3: "querylen",
+                4: "doclen",
+                5: "qualityscore"
+            },
+            combine_features=True))
+
+    _, features = next(results)
+    self.assertAllEqual(features["float_features"],
+                        [[1., 1., 0., 0.2, 0.], [0., 0., 1., 0.1, 1.],
+                         [0., 1., 0., 0.4, 0.], [0., 0., 1., 0.3, 0.]])
+
+    _, features = next(results)
+    self.assertAllEqual(
+        features["float_features"],
+        [[0., 0., 1., 0.2, 0.], [1., 0., 1., 0.4, 0.], [0., 0., 1., 0.1, 0.],
+         [0., 0., 1., 0.2, 0.], [0., 0., 1., 0.1, 1.], [1., 1., 0., 0.3, 0.]])
+
+    _, features = next(results)
+    self.assertAllEqual(features["float_features"],
+                        [[1., 0., 0., 0.4, 1.], [0., 1., 1., 0.5, 0.]])
+
   def test_raises_error_if_line_only_contains_label(self):
     contents = ["1"]
     with self.assertRaisesRegex(ParserError,
