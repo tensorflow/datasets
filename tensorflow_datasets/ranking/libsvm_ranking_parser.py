@@ -83,7 +83,8 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
                lines: Iterable[str],
                feature_names: Mapping[int, str],
                label_feature_name: str = "label",
-               default_feature_value: float = 0.0):
+               default_feature_value: float = 0.0,
+               combine_features: bool = False):
     """Initializes the instance.
 
     Args:
@@ -92,6 +93,8 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
       label_feature_name: The name to assign to the label feature.
       default_feature_value: The default feature value to use when a feature is
         missing from the input.
+      combine_features: Whether to combine the features into a single
+        'float_features' feature.
     """
     self._lines = lines
     self._feature_names = feature_names
@@ -99,6 +102,7 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
     self._default_feature_value = default_feature_value
     self._current_example = None
     self._available_examples = collections.deque()
+    self._combine_features = combine_features
 
   def _parse_line(self, line_number: int, line: str):
     """Parses a single line of input from a LibSVM ranking file.
@@ -208,6 +212,16 @@ class LibSVMRankingParser(Iterable[RankingExampleTuple]):
         key: np.array(value)
         for key, value in self._current_example.features.items()
     }
+
+    # Extracts the individual features, sorted by their numerical indices, and
+    # re-adds them as a single feature with shape (list_size, feature_size).
+    if self._combine_features:
+      features = [
+          np_features_dict.pop(self._feature_names[idx])
+          for idx in sorted(self._feature_names)
+      ]
+      np_features_dict["float_features"] = np.stack(features, axis=-1)
+
     self._available_examples.append((qid, np_features_dict))
 
   def _end_of_parse(self):
