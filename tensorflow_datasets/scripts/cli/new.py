@@ -16,56 +16,15 @@
 """`tfds new` command."""
 
 import argparse
-import dataclasses
-import itertools
 import os
 import pathlib
 import subprocess
 import textwrap
+from typing import Optional
 
 from tensorflow_datasets.core import naming
-
-
-@dataclasses.dataclass
-class DatasetInfo:
-  """Structure for common string used for formatting.
-
-  Attributes:
-    name: Dataset name (`my_dataset`)
-    cls_name: Class name (`MyDataset`)
-    path: Root directory in which the dataset is added
-    in_tfds: Whether the dataset is added in tensorflow_datasets/ or externally
-    tfds_api: The Dataset API to import
-    todo: Field to fill (`TODO(my_dataset)`)
-    ds_import: Dataset import (`tensorflow_datasets.image.my_dataset`)
-  """
-  name: str
-  in_tfds: bool
-  path: pathlib.Path
-  cls_name: str = dataclasses.field(init=False)
-  tfds_api: str = dataclasses.field(init=False)
-  todo: str = dataclasses.field(init=False)
-  ds_import: str = dataclasses.field(init=False)
-
-  def __post_init__(self):
-    self.cls_name = naming.snake_to_camelcase(self.name)
-    self.tfds_api = ('tensorflow_datasets.public_api'
-                     if self.in_tfds else 'tensorflow_datasets')
-    self.todo = f'TODO({self.name})'
-
-    if self.in_tfds:
-      # `/path/to/tensorflow_datasets/image/my_dataset`
-      # ->`tensorflow_datasets.image.my_dataset`
-      import_parts = itertools.dropwhile(lambda p: p != 'tensorflow_datasets',
-                                         self.path.parts)
-      ds_import = '.'.join(import_parts)
-    else:
-      # For external datasets, it's difficult to correctly infer the full
-      # `from my_module.path.datasets.my_dataset import MyDataset`.
-      # Could try to auto-infer the absolute import path from the `setup.py`.
-      # Instead uses relative import for now: `from . import my_dataset`
-      ds_import = '.'
-    self.ds_import = ds_import
+from tensorflow_datasets.scripts.cli import builder_templates
+from tensorflow_datasets.scripts.cli import cli_utils as utils
 
 
 def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: disable=protected-access
@@ -77,6 +36,13 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       type=str,
       help='Name of the dataset to be created (in snake_case)',
   )
+  new_parser.add_argument(
+      '--data_format',  # Optional argument
+      type=str,
+      default=builder_templates.STANDARD,
+      choices=[builder_templates.STANDARD, builder_templates.CONLL],
+      help=('Optional format of the input data, which is used to generate a '
+            'format-specific template.'))
   new_parser.add_argument(
       '--dir',
       type=pathlib.Path,
@@ -92,10 +58,15 @@ def _create_dataset_files(args: argparse.Namespace) -> None:
     raise ValueError(
         'Invalid dataset name. It should be a valid Python class name.')
 
-  create_dataset_files(dataset_name=args.dataset_name, dataset_dir=args.dir)
+  create_dataset_files(
+      dataset_name=args.dataset_name,
+      dataset_dir=args.dir,
+      data_format=args.data_format)
 
 
-def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
+def create_dataset_files(dataset_name: str,
+                         dataset_dir: pathlib.Path,
+                         data_format: Optional[str] = None) -> None:
   """Creates the dataset files."""
   # Creates the root directory
   dataset_dir = dataset_dir.expanduser() / dataset_name
@@ -107,7 +78,11 @@ def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
 
   in_tfds = 'tensorflow_datasets' in dataset_dir.parts
 
-  info = DatasetInfo(name=dataset_name, in_tfds=in_tfds, path=dataset_dir)
+  info = utils.DatasetInfo(
+      name=dataset_name,
+      in_tfds=in_tfds,
+      path=dataset_dir,
+      data_format=data_format)
 
   _create_dataset_file(info)
   _create_dataset_test(info)
@@ -125,78 +100,15 @@ def create_dataset_files(dataset_name: str, dataset_dir: pathlib.Path) -> None:
       .format(info.path, info.todo))
 
 
-def _create_dataset_file(info: DatasetInfo) -> None:
+def _create_dataset_file(info: utils.DatasetInfo) -> None:
   """Create a new dataset from a template."""
   file_path = info.path / f'{info.name}.py'
 
-  content = textwrap.dedent(f'''\
-      """{info.name} dataset."""
-
-      import {info.tfds_api} as tfds
-
-      # {info.todo}: Markdown description  that will appear on the catalog page.
-      _DESCRIPTION = """
-      Description is **formatted** as markdown.
-
-      It should also contain any processing which has been applied (if any),
-      (e.g. corrupted example skipped, images cropped,...):
-      """
-
-      # {info.todo}: BibTeX citation
-      _CITATION = """
-      """
-
-
-      class {info.cls_name}(tfds.core.GeneratorBasedBuilder):
-        """DatasetBuilder for {info.name} dataset."""
-
-        VERSION = tfds.core.Version('1.0.0')
-        RELEASE_NOTES = {{
-            '1.0.0': 'Initial release.',
-        }}
-
-        def _info(self) -> tfds.core.DatasetInfo:
-          """Returns the dataset metadata."""
-          # {info.todo}: Specifies the tfds.core.DatasetInfo object
-          return tfds.core.DatasetInfo(
-              builder=self,
-              description=_DESCRIPTION,
-              features=tfds.features.FeaturesDict({{
-                  # These are the features of your dataset like images, labels ...
-                  'image': tfds.features.Image(shape=(None, None, 3)),
-                  'label': tfds.features.ClassLabel(names=['no', 'yes']),
-              }}),
-              # If there's a common (input, target) tuple from the
-              # features, specify them here. They'll be used if
-              # `as_supervised=True` in `builder.as_dataset`.
-              supervised_keys=('image', 'label'),  # Set to `None` to disable
-              homepage='https://dataset-homepage/',
-              citation=_CITATION,
-          )
-
-        def _split_generators(self, dl_manager: tfds.download.DownloadManager):
-          """Returns SplitGenerators."""
-          # {info.todo}: Downloads the data and defines the splits
-          path = dl_manager.download_and_extract('https://todo-data-url')
-
-          # {info.todo}: Returns the Dict[split names, Iterator[Key, Example]]
-          return {{
-              'train': self._generate_examples(path / 'train_imgs'),
-          }}
-
-        def _generate_examples(self, path):
-          """Yields examples."""
-          # {info.todo}: Yields (key, example) tuples from the dataset
-          for f in path.glob('*.jpeg'):
-            yield 'key', {{
-                'image': f,
-                'label': 'yes',
-            }}
-      ''')
+  content = builder_templates.create_builder_template(info)
   file_path.write_text(content)
 
 
-def _create_dataset_test(info: DatasetInfo) -> None:
+def _create_dataset_test(info: utils.DatasetInfo) -> None:
   """Adds the `dummy_data/` directory."""
   file_path = info.path.joinpath(f'{info.name}_test.py')
 
@@ -229,7 +141,7 @@ def _create_dataset_test(info: DatasetInfo) -> None:
   file_path.write_text(content)
 
 
-def _create_init(info: DatasetInfo) -> None:
+def _create_init(info: utils.DatasetInfo) -> None:
   """Adds the `__init__.py` file."""
   file_path = info.path / '__init__.py'
   if info.in_tfds:
@@ -247,7 +159,7 @@ def _create_init(info: DatasetInfo) -> None:
   file_path.write_text(content)
 
 
-def _create_dummy_data(info: DatasetInfo) -> None:
+def _create_dummy_data(info: utils.DatasetInfo) -> None:
   """Adds the `dummy_data/` directory."""
   # Create a dummy file in the directory to force the directory creation in
   # version control system where empty directories aren't detected.
@@ -256,7 +168,7 @@ def _create_dummy_data(info: DatasetInfo) -> None:
   file_path.touch()
 
 
-def _create_checksum(info: DatasetInfo) -> None:
+def _create_checksum(info: utils.DatasetInfo) -> None:
   """Adds the `checksums.tsv` file."""
   file_path = info.path / 'checksums.tsv'
   content = textwrap.dedent(f"""\
@@ -267,7 +179,7 @@ def _create_checksum(info: DatasetInfo) -> None:
   file_path.write_text(content)
 
 
-def _add_to_parent_init(info: DatasetInfo) -> None:
+def _add_to_parent_init(info: utils.DatasetInfo) -> None:
   """Add `import` dataset in the `<ds_type>/__init__.py` file."""
   if not info.in_tfds:
     # Could add global init, but would be tricky to foresee all use-cases
