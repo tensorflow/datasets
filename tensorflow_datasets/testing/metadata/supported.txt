@@ -1202,6 +1202,12 @@ mslr_web/10k_fold1/1.1.0
 mslr_web/10k_fold2/1.1.0
 mslr_web/10k_fold3/1.1.0
 mslr_web/10k_fold4/1.1.0
+mslr_web/10k_fold5/1.1.0
+mslr_web/30k_fold1/1.1.0
+mslr_web/30k_fold2/1.1.0
+mslr_web/30k_fold3/1.1.0
+mslr_web/30k_fold4/1.1.0
+mslr_web/30k_fold5/1.1.0
 mt_opt/rlds/1.0.0
 mt_opt/sd/1.0.0
 multi_news/1.0.0
