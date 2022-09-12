@@ -21,7 +21,7 @@ based datasets.
 import collections
 from typing import Optional, OrderedDict
 
-from tensorflow_datasets.core.dataset_builders import conllu_dataset_builder
+from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features.class_label_feature import ClassLabel
 from tensorflow_datasets.core.features.sequence_feature import Sequence

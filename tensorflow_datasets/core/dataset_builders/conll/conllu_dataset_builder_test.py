@@ -20,8 +20,8 @@ from unittest import mock
 from etils import epath
 import pytest
 from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core.dataset_builders import conllu_dataset_builder
-from tensorflow_datasets.core.dataset_builders import conllu_dataset_builder_utils as conllu_lib
+from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder
+from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder_utils as conllu_lib
 import tensorflow_datasets.public_api as tfds
 
 _FOLDER_PATH = "mock/path"
