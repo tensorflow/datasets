@@ -40,7 +40,10 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       '--data_format',  # Optional argument
       type=str,
       default=builder_templates.STANDARD,
-      choices=[builder_templates.STANDARD, builder_templates.CONLL],
+      choices=[
+          builder_templates.STANDARD, builder_templates.CONLL,
+          builder_templates.CONLLU
+      ],
       help=('Optional format of the input data, which is used to generate a '
             'format-specific template.'))
   new_parser.add_argument(
