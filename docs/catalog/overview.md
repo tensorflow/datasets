@@ -378,6 +378,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`tiny_shakespeare`](tiny_shakespeare.md)
 *   [`trec`](trec.md)
 *   [`unified_qa`](unified_qa.md)
+*   [`universal_dependencies`](universal_dependencies.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`user_libri_text`](user_libri_text.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki40b`](wiki40b.md)
