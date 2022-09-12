@@ -25,27 +25,20 @@ PATH_DIR = pathlib.Path.cwd() / "tensorflow_datasets/image/my_dataset"
 TFDS_API = "tensorflow_datasets"
 TODO = f"{NAME}"
 
+testdata = [
+    (builder_templates.STANDARD, "tfds.core.GeneratorBasedBuilder"),
+    (builder_templates.CONLL, "tfds.dataset_builders.ConllDatasetBuilder"),
+    (builder_templates.CONLLU, "tfds.dataset_builders.ConllUDatasetBuilder")
+]
 
-def test_create_standard_builder_template():
-  standard_dataset_info = utils.DatasetInfo(
-      name=NAME,
-      in_tfds=True,
-      path=PATH_DIR,
-      data_format=builder_templates.STANDARD)
-  template = builder_templates.create_builder_template(standard_dataset_info)
+
+@pytest.mark.parametrize("ds_format,ds_builder", testdata)
+def test_valid_builder_templates(ds_format, ds_builder):
+  dataset_info = utils.DatasetInfo(
+      name=NAME, in_tfds=True, path=PATH_DIR, data_format=ds_format)
+  template = builder_templates.create_builder_template(dataset_info)
   assert isinstance(template, str)
-  assert "tfds.core.GeneratorBasedBuilder" in template
-
-
-def test_create_conll_builder_template():
-  conll_dataset_info = utils.DatasetInfo(
-      name=NAME,
-      in_tfds=True,
-      path=PATH_DIR,
-      data_format=builder_templates.CONLL)
-  template = builder_templates.create_builder_template(conll_dataset_info)
-  assert isinstance(template, str)
-  assert "tfds.dataset_builders.ConllDatasetBuilder" in template
+  assert ds_builder in template
 
 
 def test_create_inexistent_builder_template():

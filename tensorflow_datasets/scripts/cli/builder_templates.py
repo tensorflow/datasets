@@ -25,6 +25,7 @@ from tensorflow_datasets.scripts.cli import cli_utils
 # Names of dataset builders.
 STANDARD = 'standard'
 CONLL = 'conll'
+CONLLU = 'conllu'
 
 
 def create_builder_template(info: cli_utils.DatasetInfo):
@@ -42,6 +43,8 @@ def create_builder_template(info: cli_utils.DatasetInfo):
     return _standard_template(info)
   elif info.data_format == CONLL:
     return _conll_template(info)
+  elif info.data_format == CONLLU:
+    return _conllu_template(info)
   else:
     raise ValueError(
         f'Required format {info.data_format} isn\'t associated with '
@@ -170,6 +173,81 @@ def _conll_template(info: cli_utils.DatasetInfo) -> str:
 
         # {info.todo}: If you need a customized _generate_examples function,
         # comment out the following.
+        # def _generate_examples(
+        #     self,
+        #     path: Union[epath.PathLike, List[epath.PathLike]],
+        #   ):
+        #   """Yields (key, example) examples."""
+        #   pass
+      ''')
+  return content
+
+
+def _conllu_template(info: cli_utils.DatasetInfo) -> str:
+  """A template for ConllUDatasetBuilder."""
+
+  content = textwrap.dedent(f'''\
+      """{info.name} dataset."""
+
+      from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder_utils as conllu_lib
+      import {info.tfds_api} as tfds
+
+      # {info.todo}: Markdown description  that will appear on the catalog page.
+      _DESCRIPTION = """
+      Description is **formatted** as markdown.
+
+      It should also contain any processing which has been applied (if any),
+      (e.g. corrupted example skipped, images cropped,...):
+      """
+
+      # {info.todo}: BibTeX citation
+      _CITATION = """
+      """
+
+
+      class {info.cls_name}(tfds.dataset_builders.ConllUDatasetBuilder):
+        """DatasetBuilder for {info.name} dataset."""
+
+        VERSION = tfds.core.Version('1.0.0')
+        RELEASE_NOTES = {{
+            '1.0.0': 'Initial release.',
+        }}
+        # {info.todo}: Add details about the dataset's config to use to
+        # BUILDER_CONFIGS. conllu_lib contains a set of ready-to-use features.
+        BUILDER_CONFIGS = [
+            conllu_lib.get_universal_morphology_config(
+                language='',
+                features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
+                name='')
+        ]
+
+        def _info(self) -> tfds.core.DatasetInfo:
+          """Returns the dataset metadata."""
+          # {info.todo}: Specifies the dataset infos.
+          return self.create_dataset_info(
+            description=_DESCRIPTION,
+            homepage='',
+            citation=_CITATION,
+          )
+
+
+        # {info.todo}: Specify the process_example_fn to be used in the
+        # `_generate_examples` method to process examples.
+        # The default `process_example_fn` processes a conllu-annotated example
+        # using the features specified in BUILDER_CONFIGS.
+        # `conllu_dataset_builder` already provides a number of ready-to-use
+        # process functions.
+        return {{
+            'train':
+                self._generate_examples(
+                    filepaths=path / 'train.txt',
+                    # Remove if you want to use the default `process_example_fn`.
+                    # process_example_fn=
+                )
+        }}
+
+        # {info.todo}: If you need a customized _generate_examples function,
+        # comment out the following, otherwise remove it.
         # def _generate_examples(
         #     self,
         #     path: Union[epath.PathLike, List[epath.PathLike]],
