@@ -1,0 +1,45 @@
+# sent_id = VIT-9837
+# text = Ministro, prevede che la pantera si arrabbi?
+1	Ministro	ministro	NOUN	S	Gender=Masc|Number=Sing	3	obl	_	SpaceAfter=No
+2	,	,	PUNCT	FF	_	3	punct	_	_
+3	prevede	prevedere	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+4	che	che	SCONJ	CS	_	8	mark	_	_
+5	la	il	DET	RD	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	6	det	_	_
+6	pantera	pantera	NOUN	S	Gender=Fem|Number=Sing	8	nsubj	_	_
+7	si	si	PRON	PC	Clitic=Yes|Person=3|PronType=Prs	8	expl	_	_
+8	arrabbi	arrabbiare	VERB	V	Mood=Ind|Number=Sing|Person=2|Tense=Pres|VerbForm=Fin	3	ccomp	_	SpaceAfter=No
+9	?	?	PUNCT	FS	_	3	punct	_	_
+
+# sent_id = VIT-9838
+# text = Da più parti cominciano ad arrivare i mugugni degli studenti.
+1	Da	da	ADP	E	_	3	case	_	_
+2	più	più	ADV	B	_	3	advmod	_	_
+3	parti	parte	NOUN	S	Gender=Fem|Number=Plur	4	obl	_	_
+4	cominciano	cominciare	VERB	V	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+5	ad	a	ADP	E	_	6	mark	_	_
+6	arrivare	arrivare	VERB	V	VerbForm=Inf	4	ccomp	_	_
+7	i	il	DET	RD	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	8	det	_	_
+8	mugugni	mugugno	NOUN	S	Gender=Masc|Number=Plur	6	nsubj	_	_
+9-10	degli	_	_	_	_	_	_	_	_
+9	di	di	ADP	E	_	11	case	_	_
+10	gli	il	DET	RD	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	11	det	_	_
+11	studenti	studente	NOUN	S	Gender=Masc|Number=Plur	8	nmod	_	SpaceAfter=No
+12	.	.	PUNCT	FS	_	4	punct	_	_
+
+# sent_id = VIT-9839
+# text = "la pantera ha il diritto di essere dura ma deve essere anche responsabile.
+1	"	"	PUNCT	FB	_	4	punct	_	SpaceAfter=No
+2	la	il	DET	RD	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
+3	pantera	pantera	NOUN	S	Gender=Fem|Number=Sing	4	nsubj	_	_
+4	ha	avere	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+5	il	il	DET	RD	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	6	det	_	_
+6	diritto	diritto	NOUN	S	Gender=Masc	4	obj	_	_
+7	di	di	ADP	E	_	9	mark	_	_
+8	essere	essere	AUX	VA	VerbForm=Inf	9	cop	_	_
+9	dura	duro	ADJ	A	Gender=Fem|Number=Sing	6	acl	_	_
+10	ma	ma	CCONJ	CC	_	14	cc	_	_
+11	deve	dovere	AUX	VM	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	14	aux	_	_
+12	essere	essere	AUX	VA	VerbForm=Inf	14	cop	_	_
+13	anche	anche	ADV	B	_	14	advmod	_	_
+14	responsabile	responsabile	ADJ	A	Number=Sing	4	conj	_	SpaceAfter=No
+15	.	.	PUNCT	FS	_	4	punct	_	_

@@ -79,6 +79,7 @@ from tensorflow_datasets.text.super_glue import SuperGlue
 from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.trec import Trec
 from tensorflow_datasets.text.unifiedqa import UnifiedQA
+from tensorflow_datasets.text.universal_dependencies import UniversalDependencies
 from tensorflow_datasets.text.userlibri_lm_data import UserLibriText
 from tensorflow_datasets.text.wiki40b import Wiki40b
 from tensorflow_datasets.text.wiki_dialog import WikiDialog
