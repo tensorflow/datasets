@@ -635,6 +635,9 @@ toc:
     title: trec
   - path: /datasets/catalog/unified_qa
     title: unified_qa
+  - path: /datasets/catalog/universal_dependencies
+    status: nightly
+    title: universal_dependencies
   - path: /datasets/catalog/user_libri_text
     status: nightly
     title: user_libri_text
