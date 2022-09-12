@@ -15,7 +15,7 @@
 
 """conll2003 dataset."""
 
-from tensorflow_datasets.core.dataset_builders import conll_dataset_builder_utils as conll_lib
+from tensorflow_datasets.core.dataset_builders.conll import conll_dataset_builder_utils as conll_lib
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """

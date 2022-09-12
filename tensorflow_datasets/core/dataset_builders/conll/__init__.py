@@ -13,18 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset builders API."""
+"""CoNNL dataset builders."""
 
 from tensorflow_datasets.core.dataset_builders.conll.conll_dataset_builder import ConllBuilderConfig
 from tensorflow_datasets.core.dataset_builders.conll.conll_dataset_builder import ConllDatasetBuilder
+from tensorflow_datasets.core.dataset_builders.conll.conll_dataset_builder_utils import *
 from tensorflow_datasets.core.dataset_builders.conll.conllu_dataset_builder import ConllUBuilderConfig
 from tensorflow_datasets.core.dataset_builders.conll.conllu_dataset_builder import ConllUDatasetBuilder
-from tensorflow_datasets.core.dataset_builders.tf_data_dataset_builder import TfDataDatasetBasedBuilder
-
-__all__ = [
-    "ConllBuilderConfig",
-    "ConllDatasetBuilder",
-    "ConllUBuilderConfig",
-    "ConllUDatasetBuilder",
-    "TfDataDatasetBasedBuilder",
-]
+from tensorflow_datasets.core.dataset_builders.conll.conllu_dataset_builder_utils import *

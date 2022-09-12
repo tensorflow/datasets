@@ -18,8 +18,8 @@ import glob
 import os
 
 import tensorflow as tf
-from tensorflow_datasets.core.dataset_builders import conllu_dataset_builder
-from tensorflow_datasets.core.dataset_builders import conllu_dataset_builder_utils as conllu_lib
+from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder
+from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder_utils as conllu_lib
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """

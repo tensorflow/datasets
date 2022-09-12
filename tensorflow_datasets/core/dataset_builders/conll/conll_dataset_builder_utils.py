@@ -20,7 +20,7 @@ datasets.
 """
 import collections
 
-from tensorflow_datasets.core.dataset_builders import conll_dataset_builder
+from tensorflow_datasets.core.dataset_builders.conll import conll_dataset_builder
 from tensorflow_datasets.core.features.class_label_feature import ClassLabel
 from tensorflow_datasets.core.features.sequence_feature import Sequence
 from tensorflow_datasets.core.features.text_feature import Text

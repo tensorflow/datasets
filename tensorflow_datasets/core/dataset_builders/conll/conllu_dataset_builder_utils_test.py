@@ -15,7 +15,7 @@
 
 """Tests for conllu_dataset_builder_utils."""
 
-from tensorflow_datasets.core.dataset_builders import conllu_dataset_builder_utils as conllu_lib
+from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder_utils as conllu_lib
 
 
 def test_get_universal_morphology_config():
