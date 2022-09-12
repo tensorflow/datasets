@@ -123,7 +123,7 @@ def _conll_template(info: cli_utils.DatasetInfo) -> str:
   content = textwrap.dedent(f'''\
       """{info.name} dataset."""
 
-      from tensorflow_datasets.core.dataset_builders import conll_dataset_builder_utils as conll_lib
+      from tensorflow_datasets.core.dataset_builders.conll import conll_dataset_builder_utils as conll_lib
       import {info.tfds_api} as tfds
 
       # {info.todo}: Markdown description  that will appear on the catalog page.
@@ -147,6 +147,7 @@ def _conll_template(info: cli_utils.DatasetInfo) -> str:
             '1.0.0': 'Initial release.',
         }}
         # {info.todo}: Add details about the dataset's features.
+        # conll_lib contains a set of ready-to-use features.
         BUILDER_CONFIGS = [conll_lib.CONLL_2002_CONFIG]
 
         def _info(self) -> tfds.core.DatasetInfo:
@@ -172,8 +173,7 @@ def _conll_template(info: cli_utils.DatasetInfo) -> str:
         # def _generate_examples(
         #     self,
         #     path: Union[epath.PathLike, List[epath.PathLike]],
-        #     features_order: List[str],
-        #    separator: str = "\t") -> split_builder_lib.SplitGenerator:
+        #   ):
         #   """Yields (key, example) examples."""
         #   pass
       ''')
