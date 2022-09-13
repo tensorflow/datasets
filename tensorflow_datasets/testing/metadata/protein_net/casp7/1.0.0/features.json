@@ -1,0 +1,57 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "id": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "primary": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+                    "content": {
+                        "num_classes": 20
+                    }
+                },
+                "length": null
+            }
+        },
+        "evolutionary": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [
+                    null,
+                    21
+                ],
+                "dtype": "float32"
+            }
+        },
+        "tertiary": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [
+                    null,
+                    3
+                ],
+                "dtype": "float32"
+            }
+        },
+        "mask": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "bool"
+            }
+        },
+        "length": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "int32"
+            }
+        }
+    }
+}

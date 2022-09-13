@@ -12,6 +12,11 @@
 # `ljspeech`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 This is a public domain speech dataset consisting of 13,100 short audio clips of
@@ -31,7 +36,9 @@ public domain.
 
 *   **Versions**:
 
-    *   **`1.1.0`** (default): No release notes.
+    *   **`1.1.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Fix speech data type with dtype=tf.int16.
 
 *   **Download size**: `2.56 GiB`
 
@@ -52,7 +59,7 @@ Split     | Examples
 ```python
 FeaturesDict({
     'id': tf.string,
-    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int16),
     'text': Text(shape=(), dtype=tf.string),
     'text_normalized': Text(shape=(), dtype=tf.string),
 })
@@ -64,7 +71,7 @@ Feature         | Class        | Shape   | Dtype     | Description
 :-------------- | :----------- | :------ | :-------- | :----------
                 | FeaturesDict |         |           |
 id              | Tensor       |         | tf.string |
-speech          | Audio        | (None,) | tf.int64  |
+speech          | Audio        | (None,) | tf.int16  |
 text            | Text         |         | tf.string |
 text_normalized | Text         |         | tf.string |
 
@@ -86,7 +93,7 @@ text_normalized | Text         |         | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ljspeech-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ljspeech-1.1.1.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

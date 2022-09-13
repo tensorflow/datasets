@@ -1,0 +1,37 @@
+{
+  "citation": "@inproceedings{bisk2020piqa,\n    title={Piqa: Reasoning about physical commonsense in natural language},\n    author={Bisk, Yonatan and Zellers, Rowan and Gao, Jianfeng and Choi, Yejin and others},\n    booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},\n    volume={34},\n    number={05},\n    pages={7432--7439},\n    year={2020}\n}\n\n@inproceedings{khashabi-etal-2020-unifiedqa,\n    title = \"{UNIFIEDQA}: Crossing Format Boundaries with a Single {QA} System\",\n    author = \"Khashabi, Daniel  and\n      Min, Sewon  and\n      Khot, Tushar  and\n      Sabharwal, Ashish  and\n      Tafjord, Oyvind  and\n      Clark, Peter  and\n      Hajishirzi, Hannaneh\",\n    booktitle = \"Findings of the Association for Computational Linguistics: EMNLP 2020\",\n    month = nov,\n    year = \"2020\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2020.findings-emnlp.171\",\n    doi = \"10.18653/v1/2020.findings-emnlp.171\",\n    pages = \"1896--1907\",\n}\n\nNote that each UnifiedQA dataset has its own citation. Please see the source to\nsee the correct citation for each contained dataset.\"",
+  "configDescription": "This is a dataset for benchmarking progress in physical commonsense\nunderstanding. The underlying task is multiple choice question\nanswering: given a question q and two possible solutions s1, s2, a\nmodel or a human must choose the most appropriate solution, of which\nexactly one is correct. The dataset focuses on everyday situations\nwith a preference for atypical solutions. The dataset is inspired by\ninstructables.com, which provides users with instructions on how to\nbuild, craft, bake, or manipulate objects using everyday materials.\nAnnotators are asked to provide semantic perturbations or alternative\napproaches which are otherwise syntactically and topically similar to\nensure physical knowledge is targeted. The dataset is further cleaned\nof basic artifacts using the AFLite algorithm.\n",
+  "configName": "physical_iqa",
+  "description": "The UnifiedQA benchmark consists of 20 main question answering (QA) datasets\n(each may have multiple versions) that target different formats as well as\nvarious complex linguistic phenomena. These datasets are grouped into several\nformats/categories, including: extractive QA, abstractive QA, multiple-choice\nQA, and yes/no QA. Additionally, contrast sets are used for several datasets\n(denoted with \"contrast_sets_\"). These evaluation sets are expert-generated\nperturbations that deviate from the patterns common in the original dataset. For\nseveral datasets that do not come with evidence paragraphs, two variants are\nincluded: one where the datasets are used as-is and another that uses paragraphs\nfetched via an information retrieval system as additional evidence, indicated\nwith \"_ir\" tags.\n\nMore information can be found at: https://github.com/allenai/unifiedqa.",
+  "downloadSize": "6298645",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/allenai/unifiedqa"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.unifiedqa.unifiedqa",
+  "name": "unified_qa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "6203651",
+      "shardLengths": [
+        "16113"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "701434",
+      "shardLengths": [
+        "1838"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

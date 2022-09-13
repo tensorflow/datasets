@@ -150,7 +150,7 @@ def _split_generator():
 ```
 
 **Rationale**: TFDS try to provide datasets as close as the original data. The
-[sub-split API](https://www.tensorflow.org/datasets/splits ``) should be used
+[sub-split API](https://www.tensorflow.org/datasets/splits) should be used
 instead to let users dynamically create the subsplits they want:
 
 ```python

@@ -12,6 +12,11 @@
 # `wit`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Wikipedia-based Image Text (WIT) Dataset is a large multimodal multilingual
@@ -28,12 +33,15 @@ learning models.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release. It loads the WIT dataset from
+    *   `1.0.0`: Initial release. It loads the WIT dataset from
         https://storage.googleapis.com/gresearch/wit/
+    *   **`1.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Added `val` and `test` splits.
 
-*   **Download size**: `24.87 GiB`
+*   **Download size**: `25.20 GiB`
 
-*   **Dataset size**: `80.11 GiB`
+*   **Dataset size**: `81.17 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -43,7 +51,9 @@ learning models.
 
 Split     | Examples
 :-------- | ---------:
+`'test'`  | 210,166
 `'train'` | 37,046,386
+`'val'`   | 261,024
 
 *   **Feature structure**:
 
@@ -110,7 +120,7 @@ section_title                   | Text         |       | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wit-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wit-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

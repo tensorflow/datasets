@@ -1,0 +1,57 @@
+{
+  "citation": "@misc{djolonga2020robustness,\n      title={On Robustness and Transferability of Convolutional Neural Networks},\n      author={Josip Djolonga and Jessica Yung and Michael Tschannen and Rob Romijnders and Lucas Beyer and Alexander Kolesnikov and Joan Puigcerver and Matthias Minderer and Alexander D'Amour and Dan Moldovan and Sylvain Gelly and Neil Houlsby and Xiaohua Zhai and Mario Lucic},\n      year={2020},\n      eprint={2007.08558},\n      archivePrefix={arXiv},\n      primaryClass={cs.CV}\n}",
+  "configDescription": "factor of variation: size",
+  "configName": "size",
+  "downloadSize": "3488115773",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/si-score"
+    ]
+  },
+  "name": "siscore",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "3507658643",
+      "shardLengths": [
+        "2903",
+        "2902",
+        "2903",
+        "2902",
+        "2903",
+        "2903",
+        "2902",
+        "2903",
+        "2903",
+        "2902",
+        "2903",
+        "2903",
+        "2902",
+        "2903",
+        "2902",
+        "2903",
+        "2903",
+        "2902",
+        "2903",
+        "2902",
+        "2903",
+        "2903",
+        "2902",
+        "2903",
+        "2903",
+        "2902",
+        "2903",
+        "2903",
+        "2902",
+        "2903",
+        "2902",
+        "2903"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "1.0.0"
+}

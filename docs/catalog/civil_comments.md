@@ -67,9 +67,10 @@ when making the labels.
     *   `1.1.3`: Corrected id types from float to string.
     *   `1.2.0`: Add toxic spans, context, and parent comment text features.
     *   `1.2.1`: Fix incorrect formatting in context splits.
-    *   **`1.2.2`** (default)
+    *   `1.2.2`: Update to reflect context only having a train split.
+    *   **`1.2.3`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Update to reflect context only having a train split.
+        Add warning to CivilCommentsCovert as we fix a data issue.
 
 *   **Download size**: `427.41 MiB`
 
@@ -149,7 +150,7 @@ toxicity        | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilComments-1.2.2.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilComments-1.2.3.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -319,7 +320,7 @@ white                               | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsIdentities-1.2.2.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsIdentities-1.2.3.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -371,14 +372,17 @@ dataButton.addEventListener('click', async () => {
 
 ## civil_comments/CivilCommentsCovert
 
-*   **Config description**: The CivilCommentsCovert set is a subset of
-    CivilCommentsIdentities with ~20% of the train and test splits further
-    annotated for covert offensiveness, in addition to the toxicity and identity
-    labels. Raters were asked to categorize comments as one of explicitly,
-    implicitly, not, or not sure if offensive, as well as whether it contained
-    different types of covert offensiveness. The full annotation procedure is
-    detailed in a forthcoming paper at
-    https://sites.google.com/corp/view/hciandnlp/accepted-papers.
+*   **Config description**: WARNING: there's a potential data quality issue with
+    CivilCommentsCovert that we're actively working on fixing (06/28/22); the
+    underlying data may change!
+
+The CivilCommentsCovert set is a subset of CivilCommentsIdentities with ~20% of
+the train and test splits further annotated for covert offensiveness, in
+addition to the toxicity and identity labels. Raters were asked to categorize
+comments as one of explicitly, implicitly, not, or not sure if offensive, as
+well as whether it contained different types of covert offensiveness. The full
+annotation procedure is detailed in a forthcoming paper at
+https://sites.google.com/corp/view/hciandnlp/accepted-papers.
 
 *   **Dataset size**: `94.12 MiB`
 
@@ -514,7 +518,7 @@ white                               | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsCovert-1.2.2.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsCovert-1.2.3.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -621,7 +625,7 @@ text        | Text         |         | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsToxicSpans-1.2.2.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsToxicSpans-1.2.3.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -736,7 +740,7 @@ toxicity            | Tensor       |       | tf.float32 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsInContext-1.2.2.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/civil_comments-CivilCommentsInContext-1.2.3.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

@@ -1,0 +1,47 @@
+{
+  "citation": "@inproceedings{gardent2017creating,\n    title = \"\"Creating Training Corpora for {NLG} Micro-Planners\"\",\n    author = \"\"Gardent, Claire  and\n      Shimorina, Anastasia  and\n      Narayan, Shashi  and\n      Perez-Beltrachini, Laura\"\",\n    booktitle = \"\"Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)\"\",\n    month = jul,\n    year = \"\"2017\"\",\n    address = \"\"Vancouver, Canada\"\",\n    publisher = \"\"Association for Computational Linguistics\"\",\n    doi = \"\"10.18653/v1/P17-1017\"\",\n    pages = \"\"179--188\"\",\n    url = \"\"https://www.aclweb.org/anthology/P17-1017.pdf\"\"\n}",
+  "description": "The data contains sets of 1 to 7 triples of the form subject-predicate-object\nextracted from (DBpedia)[https://wiki.dbpedia.org/] and natural language text\nthat's a verbalisation of these triples.\nThe test data spans 15 different domains where only 10 appear in the training\ndata.\nThe dataset follows a standarized table format.",
+  "downloadSize": "20720790",
+  "location": {
+    "urls": [
+      "https://webnlg-challenge.loria.fr/challenge_2017/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.structured.web_nlg.web_nlg",
+  "name": "web_nlg",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "9476830",
+      "shardLengths": [
+        "18102"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "1202891",
+      "shardLengths": [
+        "2268"
+      ]
+    },
+    {
+      "name": "test_unseen",
+      "numBytes": "1225519",
+      "shardLengths": [
+        "2433"
+      ]
+    },
+    {
+      "name": "test_all",
+      "numBytes": "2542540",
+      "shardLengths": [
+        "4928"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "input": "input_text",
+    "output": "target_text"
+  },
+  "version": "0.1.0"
+}

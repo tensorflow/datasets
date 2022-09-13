@@ -1,0 +1,36 @@
+{
+  "citation": "@inproceedings{zweigenbaum2018overview,\n  title={Overview of the third BUCC shared task: Spotting parallel sentences  in comparable corpora},\n  author={Zweigenbaum, Pierre and Sharoff, Serge and Rapp, Reinhard},\n  booktitle={Proceedings of 11th Workshop on Building and Using Comparable Corpora},\n  pages={39--42},\n  year={2018}\n}",
+  "configName": "bucc_ru",
+  "description": "Identifying parallel sentences in comparable corpora. Given two\nsentence-split monolingual corpora, participant systems are expected\nto identify pairs of sentences that are translations of each other.\n\nThe BUCC mining task is a shared task on parallel sentence extraction from two\nmonolingual corpora with a subset of them assumed to be parallel, and that has\nbeen available since 2016. For each language pair, the shared task provides a\nmonolingual corpus for each language and a gold mapping list containing true\ntranslation pairs. These pairs are the ground truth. The task is to construct a\nlist of translation pairs from the monolingual corpora. The constructed list is\ncompared to the ground truth, and evaluated in terms of the F1 measure.",
+  "downloadSize": "41354312",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://comparable.limsi.fr/bucc2018/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.translate.bucc.bucc",
+  "name": "bucc",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "939246",
+      "shardLengths": [
+        "2374"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "5726747",
+      "shardLengths": [
+        "14435"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

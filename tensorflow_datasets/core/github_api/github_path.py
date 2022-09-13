@@ -167,7 +167,7 @@ class _GithubTree:
     # If the tree is truncated, then we'll need a more sophisticated method to
     # retrieve the whole tree. Since this is currently not supported, it raises
     # an exception.
-    assert not tree_json.get('truncated', False)
+    assert not tree_json.get('truncated', False)  # pytype: disable=attribute-error  # dynamic-method-lookup
     return _GithubTree.from_json(tree_json)
 
 

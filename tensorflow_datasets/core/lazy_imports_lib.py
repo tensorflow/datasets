@@ -67,6 +67,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def datasets(cls):
+    return _try_import("datasets")
+
+  @utils.classproperty
+  @classmethod
   def envlogger(cls):
     return _try_import("envlogger.reader")
 
@@ -218,6 +223,11 @@ class LazyImporter(object):
   @classmethod
   def zarr(cls):
     return _try_import("zarr")
+
+  @utils.classproperty
+  @classmethod
+  def conllu(cls):
+    return _try_import("conllu")
 
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name

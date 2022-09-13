@@ -1,0 +1,38 @@
+{
+  "citation": "@inproceedings{levesque2012winograd,\n  title={The winograd schema challenge},\n  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},\n  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},\n  year={2012}\n}\n@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
+  "configDescription": "The Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task\nin which a system must read a sentence with a pronoun and select the referent of that pronoun from\na list of choices. The examples are manually constructed to foil simple statistical methods: Each\none is contingent on contextual information provided by a single word or phrase in the sentence.\nTo convert the problem into sentence pair classification, we construct sentence pairs by replacing\nthe ambiguous pronoun with each possible referent. The task is to predict if the sentence with the\npronoun substituted is entailed by the original sentence. We use a small evaluation set consisting of\nnew examples derived from fiction books that was shared privately by the authors of the original\ncorpus. While the included training set is balanced between two classes, the test set is imbalanced\nbetween them (65% not entailment). Also, due to a data quirk, the development set is adversarial:\nhypotheses are sometimes shared between training and development examples, so if a model memorizes the\ntraining examples, they will predict the wrong label on corresponding development set\nexample. As with QNLI, each example is evaluated separately, so there is not a systematic correspondence\nbetween a model's score on this task and its score on the unconverted original task. We\ncall converted dataset WNLI (Winograd NLI).",
+  "configName": "wnli",
+  "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
+  "downloadSize": "28999",
+  "location": {
+    "urls": [
+      "https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.glue",
+  "name": "glue",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "140665",
+      "shardLengths": [
+        "635"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "15864",
+      "shardLengths": [
+        "71"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "47122",
+      "shardLengths": [
+        "146"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

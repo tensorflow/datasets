@@ -93,11 +93,10 @@ def set_availables_tmp(new_ds_types: Iterable[DatasetType]) -> Iterator[None]:
 
 
 def _set_default_visibility() -> None:
-  """Overwrittes the default visibility for the TFDS scripts.
+  """Overwrites the default visibility for the TFDS scripts.
 
-  If the script executed is a TFDS script, then restrict the visibility
+  If the script executed is a TFDS script, then it restricts the visibility
   to only open-source non-community datasets.
-
   """
   import __main__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
   main_file = getattr(__main__, '__file__', None)

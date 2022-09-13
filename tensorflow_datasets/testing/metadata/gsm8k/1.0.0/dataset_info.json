@@ -1,0 +1,47 @@
+{
+  "citation": "@misc{cobbe2021training,\n      title={Training Verifiers to Solve Math Word Problems},\n      author={Karl Cobbe and Vineet Kosaraju and Mohammad Bavarian and Jacob Hilton and Reiichiro Nakano and Christopher Hesse and John Schulman},\n      year={2021},\n      eprint={2110.14168},\n      archivePrefix={arXiv},\n      primaryClass={cs.LG}\n}",
+  "description": "A dataset of 8.5K high quality linguistically diverse grade school math word problems.",
+  "downloadSize": "11290661",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/openai/grade-school-math"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.gsm8k.gsm8k",
+  "name": "gsm8k",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "6689634",
+      "shardLengths": [
+        "7473"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "1202181",
+      "shardLengths": [
+        "1319"
+      ]
+    },
+    {
+      "name": "train_socratic",
+      "numBytes": "9164018",
+      "shardLengths": [
+        "7473"
+      ]
+    },
+    {
+      "name": "test_socratic",
+      "numBytes": "1649167",
+      "shardLengths": [
+        "1319"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

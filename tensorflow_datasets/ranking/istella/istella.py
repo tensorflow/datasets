@@ -89,10 +89,11 @@ class IstellaConfig(tfds.core.BuilderConfig):
 class Istella(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for istella dataset."""
 
-  VERSION = tfds.core.Version("1.0.1")
+  VERSION = tfds.core.Version("1.1.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
-      "1.0.1": "Fix serialization to support float64."
+      "1.0.1": "Fix serialization to support float64.",
+      "1.1.0": "Bundle features into a single 'float_features' feature."
   }
   # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
@@ -107,12 +108,15 @@ class Istella(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     encoding = tfds.features.Encoding.ZLIB
     features = {
-        name: tfds.features.Tensor(
-            shape=(None,), dtype=tf.float64, encoding=encoding)
-        for name in _FEATURE_NAMES.values()
+        "float_features":
+            tfds.features.Tensor(
+                shape=(None, len(_FEATURE_NAMES)),
+                dtype=tf.float64,
+                encoding=encoding),
+        _LABEL_NAME:
+            tfds.features.Tensor(
+                shape=(None,), dtype=tf.float64, encoding=encoding)
     }
-    features[_LABEL_NAME] = tfds.features.Tensor(
-        shape=(None,), dtype=tf.float64, encoding=encoding)
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -147,4 +151,5 @@ class Istella(tfds.core.GeneratorBasedBuilder):
     # to read the file contents as bytes and manually decode it as latin1.
     with tf.io.gfile.GFile(path, "rb") as f:
       lines = map(lambda bytes_line: bytes_line.decode("latin1"), f)
-      yield from LibSVMRankingParser(lines, _FEATURE_NAMES, _LABEL_NAME)
+      yield from LibSVMRankingParser(
+          lines, _FEATURE_NAMES, _LABEL_NAME, combine_features=True)

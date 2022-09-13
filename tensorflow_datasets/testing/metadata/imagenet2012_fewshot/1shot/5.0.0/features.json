@@ -1,0 +1,5 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": "{\n  \"features\": {\n    \"file_name\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.text_feature.Text\",\n      \"text\": {}\n    },\n    \"image\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.image_feature.Image\",\n      \"image\": {\n        \"shape\": {\n          \"dimensions\": [\n            \"-1\",\n            \"-1\",\n            \"3\"\n          ]\n        },\n        \"dtype\": \"uint8\"\n      }\n    },\n    \"label\": {\n      \"pythonClassName\": \"tensorflow_datasets.core.features.class_label_feature.ClassLabel\",\n      \"classLabel\": {\n        \"numClasses\": \"1000\"\n      }\n    }\n  }\n}",
+    "proto_cls": "tensorflow_datasets.FeaturesDict"
+}

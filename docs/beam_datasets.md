@@ -116,7 +116,7 @@ In order to write Apache Beam datasets, you should be familiar with the
 following concepts:
 
 *   Be familiar with the
-    [`tfds` dataset creation guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+    [`tfds` dataset creation guide](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md)
     as most of the content still applies for Beam datasets.
 *   Get an introduction to Apache Beam with the
     [Beam programming guide](https://beam.apache.org/documentation/programming-guide/).
@@ -128,7 +128,7 @@ following concepts:
 ### Instructions
 
 If you are familiar with the
-[dataset creation guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md),
+[dataset creation guide](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md),
 adding a Beam dataset only requires to modify the `_generate_examples` function.
 The function should returns a beam object, rather than a generator:
 
@@ -159,8 +159,8 @@ Some additional considerations:
     without having to install Beam.
 *   Be careful with Python closures. When running the pipeline, the `beam.Map`
     and `beam.DoFn` functions are serialized using `pickle` and sent to all
-    workers. Do not mutable objects inside a `beam.PTransform` if the state has
-    to be shared across workers.
+    workers. Do not use mutable objects inside a `beam.PTransform` if the state
+    has to be shared across workers.
 *   Due to the way `tfds.core.DatasetBuilder` is serialized with pickle,
     mutating `tfds.core.DatasetBuilder` during data creation will be ignored on
     the workers (e.g. it's not possible to set `self.info.metadata['offset'] =

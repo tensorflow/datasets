@@ -1,0 +1,29 @@
+{
+  "citation": "@inproceedings{saha-etal-2018-duorc,\n    title = \"{D}uo{RC}: Towards Complex Language Understanding with Paraphrased Reading Comprehension\",\n    author = \"Saha, Amrita  and\n      Aralikatte, Rahul  and\n      Khapra, Mitesh M.  and\n      Sankaranarayanan, Karthik\",\n    booktitle = \"Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)\",\n    month = jul,\n    year = \"2018\",\n    address = \"Melbourne, Australia\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/P18-1156\",\n    doi = \"10.18653/v1/P18-1156\",\n    pages = \"1683--1693\",\n}\n\n@inproceedings{fisch-etal-2019-mrqa,\n    title = \"{MRQA} 2019 Shared Task: Evaluating Generalization in Reading Comprehension\",\n    author = \"Fisch, Adam  and\n      Talmor, Alon  and\n      Jia, Robin  and\n      Seo, Minjoon  and\n      Choi, Eunsol  and\n      Chen, Danqi\",\n    booktitle = \"Proceedings of the 2nd Workshop on Machine Reading for Question Answering\",\n    month = nov,\n    year = \"2019\",\n    address = \"Hong Kong, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/D19-5801\",\n    doi = \"10.18653/v1/D19-5801\",\n    pages = \"1--13\",\n}\n\nNote that each MRQA dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.\"",
+  "configDescription": "The ParaphraseRC split of the DuoRC dataset is used. In this setting,\ntwo different plot summaries of the same movie are collected\u2014one from\nWikipedia and the other from IMDb. Two different sets of crowdworkers\nask and answer questions about the movie plot, where the \u201cquestioners\u201d\nare shown only the Wikipedia page, and the \u201canswerers\u201d are shown only\nthe IMDb page. Questions that are marked as unanswerable are\ndiscarded.\n",
+  "configName": "duo_rc",
+  "description": "The MRQA 2019 Shared Task focuses on generalization in question answering. An\neffective question answering system should do more than merely interpolate from\nthe training set to answer test examples drawn from the same distribution: it\nshould also be able to extrapolate to out-of-distribution examples \u2014 a\nsignificantly harder challenge.\n\nMRQA adapts and unifies multiple distinct question answering datasets (carefully\nselected subsets of existing datasets) into the same format (SQuAD format).\nAmong them, six datasets were made available for training, and six datasets were\nmade available for testing. Small portions of the training datasets\nwere held-out as in-domain data that may be used for development. The testing\ndatasets only contain out-of-domain data. This benchmark is released as part of\nthe MRQA 2019 Shared Task.\n\nMore information can be found at: `https://mrqa.github.io/2019/shared.html`.",
+  "downloadSize": "1197881",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://mrqa.github.io/2019/shared.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.mrqa.mrqa",
+  "name": "mrqa",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "15774138",
+      "shardLengths": [
+        "1501"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

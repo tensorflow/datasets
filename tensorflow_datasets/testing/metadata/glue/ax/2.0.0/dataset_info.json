@@ -1,0 +1,24 @@
+{
+  "citation": "@inproceedings{wang2019glue,\n  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},\n  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},\n  note={In the Proceedings of ICLR.},\n  year={2019}\n}\n\nNote that each GLUE dataset has its own citation. Please see the source to see\nthe correct citation for each contained dataset.",
+  "configDescription": "A manually-curated evaluation dataset for fine-grained analysis of\nsystem performance on a broad range of linguistic phenomena. This\ndataset evaluates sentence understanding through Natural Language\nInference (NLI) problems. Use a model trained on MulitNLI to produce\npredictions for this dataset.",
+  "configName": "ax",
+  "description": "GLUE, the General Language Understanding Evaluation benchmark\n(https://gluebenchmark.com/) is a collection of resources for training,\nevaluating, and analyzing natural language understanding systems.",
+  "downloadSize": "222257",
+  "location": {
+    "urls": [
+      "https://gluebenchmark.com/diagnostics"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.glue",
+  "name": "glue",
+  "splits": [
+    {
+      "name": "test",
+      "numBytes": "306344",
+      "shardLengths": [
+        "1104"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

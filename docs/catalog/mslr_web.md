@@ -12,6 +12,11 @@
 # `mslr_web`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 MSLR-WEB are two large-scale Learning-to-Rank datasets released by Microsoft
@@ -43,7 +48,10 @@ ds = tfds.load("mslr_web")
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): Initial release.
+    *   `1.0.0`: Initial release.
+    *   **`1.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Bundle features into a single 'float_features' feature.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -53,288 +61,18 @@ ds = tfds.load("mslr_web")
 
 ```python
 FeaturesDict({
-    'bm25_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'bm25_body': Tensor(shape=(None,), dtype=tf.float64),
-    'bm25_title': Tensor(shape=(None,), dtype=tf.float64),
-    'bm25_url': Tensor(shape=(None,), dtype=tf.float64),
-    'bm25_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'boolean_model_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'boolean_model_body': Tensor(shape=(None,), dtype=tf.float64),
-    'boolean_model_title': Tensor(shape=(None,), dtype=tf.float64),
-    'boolean_model_url': Tensor(shape=(None,), dtype=tf.float64),
-    'boolean_model_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_number_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_number_body': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_number_title': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_number_url': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_number_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_ratio_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_ratio_body': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_ratio_title': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_ratio_url': Tensor(shape=(None,), dtype=tf.float64),
-    'covered_query_term_ratio_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'idf_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'idf_body': Tensor(shape=(None,), dtype=tf.float64),
-    'idf_title': Tensor(shape=(None,), dtype=tf.float64),
-    'idf_url': Tensor(shape=(None,), dtype=tf.float64),
-    'idf_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'inlink_number': Tensor(shape=(None,), dtype=tf.float64),
+    'float_features': Tensor(shape=(None, 136), dtype=tf.float64),
     'label': Tensor(shape=(None,), dtype=tf.float64),
-    'length_of_url': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_abs_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_abs_body': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_abs_title': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_abs_url': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_abs_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_dir_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_dir_body': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_dir_title': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_dir_url': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_dir_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_jm_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_jm_body': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_jm_title': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_jm_url': Tensor(shape=(None,), dtype=tf.float64),
-    'lmir_jm_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_stream_length_normalized_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_stream_length_normalized_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_stream_length_normalized_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_stream_length_normalized_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_stream_length_normalized_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_tf_idf_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_tf_idf_body': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_tf_idf_title': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_tf_idf_url': Tensor(shape=(None,), dtype=tf.float64),
-    'max_of_tf_idf_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_stream_length_normalized_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_stream_length_normalized_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_stream_length_normalized_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_stream_length_normalized_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_stream_length_normalized_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_tf_idf_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_tf_idf_body': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_tf_idf_title': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_tf_idf_url': Tensor(shape=(None,), dtype=tf.float64),
-    'mean_of_tf_idf_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_stream_length_normalized_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_stream_length_normalized_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_stream_length_normalized_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_stream_length_normalized_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_stream_length_normalized_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_tf_idf_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_tf_idf_body': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_tf_idf_title': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_tf_idf_url': Tensor(shape=(None,), dtype=tf.float64),
-    'min_of_tf_idf_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'number_of_slash_in_url': Tensor(shape=(None,), dtype=tf.float64),
-    'outlink_number': Tensor(shape=(None,), dtype=tf.float64),
-    'page_rank': Tensor(shape=(None,), dtype=tf.float64),
-    'quality_score': Tensor(shape=(None,), dtype=tf.float64),
-    'quality_score_2': Tensor(shape=(None,), dtype=tf.float64),
-    'query_url_click_count': Tensor(shape=(None,), dtype=tf.float64),
-    'site_rank': Tensor(shape=(None,), dtype=tf.float64),
-    'stream_length_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'stream_length_body': Tensor(shape=(None,), dtype=tf.float64),
-    'stream_length_title': Tensor(shape=(None,), dtype=tf.float64),
-    'stream_length_url': Tensor(shape=(None,), dtype=tf.float64),
-    'stream_length_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_stream_length_normalized_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_stream_length_normalized_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_stream_length_normalized_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_stream_length_normalized_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_stream_length_normalized_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_tf_idf_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_tf_idf_body': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_tf_idf_title': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_tf_idf_url': Tensor(shape=(None,), dtype=tf.float64),
-    'sum_of_tf_idf_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'url_click_count': Tensor(shape=(None,), dtype=tf.float64),
-    'url_dwell_time': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_stream_length_normalized_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_stream_length_normalized_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_stream_length_normalized_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_stream_length_normalized_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_stream_length_normalized_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_term_frequency_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_term_frequency_body': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_term_frequency_title': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_term_frequency_url': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_term_frequency_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_tf_idf_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_tf_idf_body': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_tf_idf_title': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_tf_idf_url': Tensor(shape=(None,), dtype=tf.float64),
-    'variance_of_tf_idf_whole_document': Tensor(shape=(None,), dtype=tf.float64),
-    'vector_space_model_anchor': Tensor(shape=(None,), dtype=tf.float64),
-    'vector_space_model_body': Tensor(shape=(None,), dtype=tf.float64),
-    'vector_space_model_title': Tensor(shape=(None,), dtype=tf.float64),
-    'vector_space_model_url': Tensor(shape=(None,), dtype=tf.float64),
-    'vector_space_model_whole_document': Tensor(shape=(None,), dtype=tf.float64),
 })
 ```
 
 *   **Feature documentation**:
 
-Feature                                                            | Class        | Shape   | Dtype      | Description
-:----------------------------------------------------------------- | :----------- | :------ | :--------- | :----------
-                                                                   | FeaturesDict |         |            |
-bm25_anchor                                                        | Tensor       | (None,) | tf.float64 |
-bm25_body                                                          | Tensor       | (None,) | tf.float64 |
-bm25_title                                                         | Tensor       | (None,) | tf.float64 |
-bm25_url                                                           | Tensor       | (None,) | tf.float64 |
-bm25_whole_document                                                | Tensor       | (None,) | tf.float64 |
-boolean_model_anchor                                               | Tensor       | (None,) | tf.float64 |
-boolean_model_body                                                 | Tensor       | (None,) | tf.float64 |
-boolean_model_title                                                | Tensor       | (None,) | tf.float64 |
-boolean_model_url                                                  | Tensor       | (None,) | tf.float64 |
-boolean_model_whole_document                                       | Tensor       | (None,) | tf.float64 |
-covered_query_term_number_anchor                                   | Tensor       | (None,) | tf.float64 |
-covered_query_term_number_body                                     | Tensor       | (None,) | tf.float64 |
-covered_query_term_number_title                                    | Tensor       | (None,) | tf.float64 |
-covered_query_term_number_url                                      | Tensor       | (None,) | tf.float64 |
-covered_query_term_number_whole_document                           | Tensor       | (None,) | tf.float64 |
-covered_query_term_ratio_anchor                                    | Tensor       | (None,) | tf.float64 |
-covered_query_term_ratio_body                                      | Tensor       | (None,) | tf.float64 |
-covered_query_term_ratio_title                                     | Tensor       | (None,) | tf.float64 |
-covered_query_term_ratio_url                                       | Tensor       | (None,) | tf.float64 |
-covered_query_term_ratio_whole_document                            | Tensor       | (None,) | tf.float64 |
-idf_anchor                                                         | Tensor       | (None,) | tf.float64 |
-idf_body                                                           | Tensor       | (None,) | tf.float64 |
-idf_title                                                          | Tensor       | (None,) | tf.float64 |
-idf_url                                                            | Tensor       | (None,) | tf.float64 |
-idf_whole_document                                                 | Tensor       | (None,) | tf.float64 |
-inlink_number                                                      | Tensor       | (None,) | tf.float64 |
-label                                                              | Tensor       | (None,) | tf.float64 |
-length_of_url                                                      | Tensor       | (None,) | tf.float64 |
-lmir_abs_anchor                                                    | Tensor       | (None,) | tf.float64 |
-lmir_abs_body                                                      | Tensor       | (None,) | tf.float64 |
-lmir_abs_title                                                     | Tensor       | (None,) | tf.float64 |
-lmir_abs_url                                                       | Tensor       | (None,) | tf.float64 |
-lmir_abs_whole_document                                            | Tensor       | (None,) | tf.float64 |
-lmir_dir_anchor                                                    | Tensor       | (None,) | tf.float64 |
-lmir_dir_body                                                      | Tensor       | (None,) | tf.float64 |
-lmir_dir_title                                                     | Tensor       | (None,) | tf.float64 |
-lmir_dir_url                                                       | Tensor       | (None,) | tf.float64 |
-lmir_dir_whole_document                                            | Tensor       | (None,) | tf.float64 |
-lmir_jm_anchor                                                     | Tensor       | (None,) | tf.float64 |
-lmir_jm_body                                                       | Tensor       | (None,) | tf.float64 |
-lmir_jm_title                                                      | Tensor       | (None,) | tf.float64 |
-lmir_jm_url                                                        | Tensor       | (None,) | tf.float64 |
-lmir_jm_whole_document                                             | Tensor       | (None,) | tf.float64 |
-max_of_stream_length_normalized_term_frequency_anchor              | Tensor       | (None,) | tf.float64 |
-max_of_stream_length_normalized_term_frequency_body                | Tensor       | (None,) | tf.float64 |
-max_of_stream_length_normalized_term_frequency_title               | Tensor       | (None,) | tf.float64 |
-max_of_stream_length_normalized_term_frequency_url                 | Tensor       | (None,) | tf.float64 |
-max_of_stream_length_normalized_term_frequency_whole_document      | Tensor       | (None,) | tf.float64 |
-max_of_term_frequency_anchor                                       | Tensor       | (None,) | tf.float64 |
-max_of_term_frequency_body                                         | Tensor       | (None,) | tf.float64 |
-max_of_term_frequency_title                                        | Tensor       | (None,) | tf.float64 |
-max_of_term_frequency_url                                          | Tensor       | (None,) | tf.float64 |
-max_of_term_frequency_whole_document                               | Tensor       | (None,) | tf.float64 |
-max_of_tf_idf_anchor                                               | Tensor       | (None,) | tf.float64 |
-max_of_tf_idf_body                                                 | Tensor       | (None,) | tf.float64 |
-max_of_tf_idf_title                                                | Tensor       | (None,) | tf.float64 |
-max_of_tf_idf_url                                                  | Tensor       | (None,) | tf.float64 |
-max_of_tf_idf_whole_document                                       | Tensor       | (None,) | tf.float64 |
-mean_of_stream_length_normalized_term_frequency_anchor             | Tensor       | (None,) | tf.float64 |
-mean_of_stream_length_normalized_term_frequency_body               | Tensor       | (None,) | tf.float64 |
-mean_of_stream_length_normalized_term_frequency_title              | Tensor       | (None,) | tf.float64 |
-mean_of_stream_length_normalized_term_frequency_url                | Tensor       | (None,) | tf.float64 |
-mean_of_stream_length_normalized_term_frequency_whole_document     | Tensor       | (None,) | tf.float64 |
-mean_of_term_frequency_anchor                                      | Tensor       | (None,) | tf.float64 |
-mean_of_term_frequency_body                                        | Tensor       | (None,) | tf.float64 |
-mean_of_term_frequency_title                                       | Tensor       | (None,) | tf.float64 |
-mean_of_term_frequency_url                                         | Tensor       | (None,) | tf.float64 |
-mean_of_term_frequency_whole_document                              | Tensor       | (None,) | tf.float64 |
-mean_of_tf_idf_anchor                                              | Tensor       | (None,) | tf.float64 |
-mean_of_tf_idf_body                                                | Tensor       | (None,) | tf.float64 |
-mean_of_tf_idf_title                                               | Tensor       | (None,) | tf.float64 |
-mean_of_tf_idf_url                                                 | Tensor       | (None,) | tf.float64 |
-mean_of_tf_idf_whole_document                                      | Tensor       | (None,) | tf.float64 |
-min_of_stream_length_normalized_term_frequency_anchor              | Tensor       | (None,) | tf.float64 |
-min_of_stream_length_normalized_term_frequency_body                | Tensor       | (None,) | tf.float64 |
-min_of_stream_length_normalized_term_frequency_title               | Tensor       | (None,) | tf.float64 |
-min_of_stream_length_normalized_term_frequency_url                 | Tensor       | (None,) | tf.float64 |
-min_of_stream_length_normalized_term_frequency_whole_document      | Tensor       | (None,) | tf.float64 |
-min_of_term_frequency_anchor                                       | Tensor       | (None,) | tf.float64 |
-min_of_term_frequency_body                                         | Tensor       | (None,) | tf.float64 |
-min_of_term_frequency_title                                        | Tensor       | (None,) | tf.float64 |
-min_of_term_frequency_url                                          | Tensor       | (None,) | tf.float64 |
-min_of_term_frequency_whole_document                               | Tensor       | (None,) | tf.float64 |
-min_of_tf_idf_anchor                                               | Tensor       | (None,) | tf.float64 |
-min_of_tf_idf_body                                                 | Tensor       | (None,) | tf.float64 |
-min_of_tf_idf_title                                                | Tensor       | (None,) | tf.float64 |
-min_of_tf_idf_url                                                  | Tensor       | (None,) | tf.float64 |
-min_of_tf_idf_whole_document                                       | Tensor       | (None,) | tf.float64 |
-number_of_slash_in_url                                             | Tensor       | (None,) | tf.float64 |
-outlink_number                                                     | Tensor       | (None,) | tf.float64 |
-page_rank                                                          | Tensor       | (None,) | tf.float64 |
-quality_score                                                      | Tensor       | (None,) | tf.float64 |
-quality_score_2                                                    | Tensor       | (None,) | tf.float64 |
-query_url_click_count                                              | Tensor       | (None,) | tf.float64 |
-site_rank                                                          | Tensor       | (None,) | tf.float64 |
-stream_length_anchor                                               | Tensor       | (None,) | tf.float64 |
-stream_length_body                                                 | Tensor       | (None,) | tf.float64 |
-stream_length_title                                                | Tensor       | (None,) | tf.float64 |
-stream_length_url                                                  | Tensor       | (None,) | tf.float64 |
-stream_length_whole_document                                       | Tensor       | (None,) | tf.float64 |
-sum_of_stream_length_normalized_term_frequency_anchor              | Tensor       | (None,) | tf.float64 |
-sum_of_stream_length_normalized_term_frequency_body                | Tensor       | (None,) | tf.float64 |
-sum_of_stream_length_normalized_term_frequency_title               | Tensor       | (None,) | tf.float64 |
-sum_of_stream_length_normalized_term_frequency_url                 | Tensor       | (None,) | tf.float64 |
-sum_of_stream_length_normalized_term_frequency_whole_document      | Tensor       | (None,) | tf.float64 |
-sum_of_term_frequency_anchor                                       | Tensor       | (None,) | tf.float64 |
-sum_of_term_frequency_body                                         | Tensor       | (None,) | tf.float64 |
-sum_of_term_frequency_title                                        | Tensor       | (None,) | tf.float64 |
-sum_of_term_frequency_url                                          | Tensor       | (None,) | tf.float64 |
-sum_of_term_frequency_whole_document                               | Tensor       | (None,) | tf.float64 |
-sum_of_tf_idf_anchor                                               | Tensor       | (None,) | tf.float64 |
-sum_of_tf_idf_body                                                 | Tensor       | (None,) | tf.float64 |
-sum_of_tf_idf_title                                                | Tensor       | (None,) | tf.float64 |
-sum_of_tf_idf_url                                                  | Tensor       | (None,) | tf.float64 |
-sum_of_tf_idf_whole_document                                       | Tensor       | (None,) | tf.float64 |
-url_click_count                                                    | Tensor       | (None,) | tf.float64 |
-url_dwell_time                                                     | Tensor       | (None,) | tf.float64 |
-variance_of_stream_length_normalized_term_frequency_anchor         | Tensor       | (None,) | tf.float64 |
-variance_of_stream_length_normalized_term_frequency_body           | Tensor       | (None,) | tf.float64 |
-variance_of_stream_length_normalized_term_frequency_title          | Tensor       | (None,) | tf.float64 |
-variance_of_stream_length_normalized_term_frequency_url            | Tensor       | (None,) | tf.float64 |
-variance_of_stream_length_normalized_term_frequency_whole_document | Tensor       | (None,) | tf.float64 |
-variance_of_term_frequency_anchor                                  | Tensor       | (None,) | tf.float64 |
-variance_of_term_frequency_body                                    | Tensor       | (None,) | tf.float64 |
-variance_of_term_frequency_title                                   | Tensor       | (None,) | tf.float64 |
-variance_of_term_frequency_url                                     | Tensor       | (None,) | tf.float64 |
-variance_of_term_frequency_whole_document                          | Tensor       | (None,) | tf.float64 |
-variance_of_tf_idf_anchor                                          | Tensor       | (None,) | tf.float64 |
-variance_of_tf_idf_body                                            | Tensor       | (None,) | tf.float64 |
-variance_of_tf_idf_title                                           | Tensor       | (None,) | tf.float64 |
-variance_of_tf_idf_url                                             | Tensor       | (None,) | tf.float64 |
-variance_of_tf_idf_whole_document                                  | Tensor       | (None,) | tf.float64 |
-vector_space_model_anchor                                          | Tensor       | (None,) | tf.float64 |
-vector_space_model_body                                            | Tensor       | (None,) | tf.float64 |
-vector_space_model_title                                           | Tensor       | (None,) | tf.float64 |
-vector_space_model_url                                             | Tensor       | (None,) | tf.float64 |
-vector_space_model_whole_document                                  | Tensor       | (None,) | tf.float64 |
+Feature        | Class        | Shape       | Dtype      | Description
+:------------- | :----------- | :---------- | :--------- | :----------
+               | FeaturesDict |             |            |
+float_features | Tensor       | (None, 136) | tf.float64 |
+label          | Tensor       | (None,)     | tf.float64 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -365,7 +103,7 @@ vector_space_model_whole_document                                  | Tensor     
 
 *   **Download size**: `1.15 GiB`
 
-*   **Dataset size**: `381.58 MiB`
+*   **Dataset size**: `307.64 MiB`
 
 *   **Splits**:
 
@@ -385,7 +123,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold1-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold1-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -416,7 +154,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `1.15 GiB`
 
-*   **Dataset size**: `381.58 MiB`
+*   **Dataset size**: `307.64 MiB`
 
 *   **Splits**:
 
@@ -436,7 +174,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold2-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold2-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -467,7 +205,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `1.15 GiB`
 
-*   **Dataset size**: `381.58 MiB`
+*   **Dataset size**: `307.64 MiB`
 
 *   **Splits**:
 
@@ -487,7 +225,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold3-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold3-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -518,7 +256,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `1.15 GiB`
 
-*   **Dataset size**: `381.58 MiB`
+*   **Dataset size**: `307.64 MiB`
 
 *   **Splits**:
 
@@ -538,7 +276,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold4-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold4-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -569,7 +307,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `1.15 GiB`
 
-*   **Dataset size**: `381.58 MiB`
+*   **Dataset size**: `307.64 MiB`
 
 *   **Splits**:
 
@@ -589,7 +327,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold5-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-10k_fold5-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -620,7 +358,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `3.59 GiB`
 
-*   **Dataset size**: `1.17 GiB`
+*   **Dataset size**: `956.41 MiB`
 
 *   **Splits**:
 
@@ -640,7 +378,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold1-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold1-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -671,7 +409,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `3.59 GiB`
 
-*   **Dataset size**: `1.17 GiB`
+*   **Dataset size**: `956.41 MiB`
 
 *   **Splits**:
 
@@ -691,7 +429,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold2-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold2-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -722,7 +460,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `3.59 GiB`
 
-*   **Dataset size**: `1.17 GiB`
+*   **Dataset size**: `956.41 MiB`
 
 *   **Splits**:
 
@@ -742,7 +480,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold3-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold3-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -773,7 +511,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `3.59 GiB`
 
-*   **Dataset size**: `1.17 GiB`
+*   **Dataset size**: `956.41 MiB`
 
 *   **Splits**:
 
@@ -793,7 +531,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold4-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold4-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -824,7 +562,7 @@ dataButton.addEventListener('click', async () => {
 
 *   **Download size**: `3.59 GiB`
 
-*   **Dataset size**: `1.17 GiB`
+*   **Dataset size**: `956.41 MiB`
 
 *   **Splits**:
 
@@ -844,7 +582,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold5-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/mslr_web-30k_fold5-1.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

@@ -1,0 +1,56 @@
+{
+  "citation": "@inproceedings{du-etal-2017-learning,\n    title = \"Learning to Ask: Neural Question Generation for Reading Comprehension\",\n    author = \"Du, Xinya  and Shao, Junru  and Cardie, Claire\",\n    booktitle = \"Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)\",\n    month = jul,\n    year = \"2017\",\n    address = \"Vancouver, Canada\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/P17-1123\",\n    doi = \"10.18653/v1/P17-1123\",\n    pages = \"1342--1352\",\n}\n\n@inproceedings{rajpurkar-etal-2016-squad,\n    title = \"{SQ}u{AD}: 100,000+ Questions for Machine Comprehension of Text\",\n    author = \"Rajpurkar, Pranav  and Zhang, Jian  and Lopyrev, Konstantin  and Liang, Percy\",\n    booktitle = \"Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing\",\n    month = nov,\n    year = \"2016\",\n    address = \"Austin, Texas\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/D16-1264\",\n    doi = \"10.18653/v1/D16-1264\",\n    pages = \"2383--2392\",\n}",
+  "configDescription": "Answer independent question generation from passage-level contexts\n(Du et al, 2017).\n",
+  "configName": "split_du",
+  "description": "Question generation using squad dataset using data splits described in 'Neural\nQuestion Generation from Text: A Preliminary Study' (Zhou et al, 2017) and\n'Learning to Ask: Neural Question Generation for Reading Comprehension' (Du et\nal, 2017).",
+  "downloadSize": "65883077",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/xinyadu/nqg\n@inproceedings{du-etal-2017-learning,\n    title = \"Learning to Ask: Neural Question Generation for Reading Comprehension\",\n    author = \"Du, Xinya  and Shao, Junru  and Cardie, Claire\",\n    booktitle = \"Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)\",\n    month = jul,\n    year = \"2017\",\n    address = \"Vancouver, Canada\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/P17-1123\",\n    doi = \"10.18653/v1/P17-1123\",\n    pages = \"1342--1352\",\n}\n"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.squad_question_generation.squad_question_generation",
+  "name": "squad_question_generation",
+  "releaseNotes": {
+    "1.0.0": "\n          Initial build with unique SQuAD QAS ids in each split, using\n          passage-level context (Zhou et al, 2017).\n          ",
+    "2.0.0": "\n          Matches the original split of (Zhou et al, 2017), allows both\n          sentence- and passage-level contexts, and uses answers from\n          (Zhou et al, 2017).\n          ",
+    "3.0.0": "\n          Added the split of (Du et al, 2017) also.\n          "
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "68955147",
+      "shardLengths": [
+        "75722"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "9786553",
+      "shardLengths": [
+        "10570"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "10038797",
+      "shardLengths": [
+        "11877"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "context_passage"
+        },
+        {
+          "featureKey": "question"
+        }
+      ]
+    }
+  },
+  "version": "3.0.0"
+}

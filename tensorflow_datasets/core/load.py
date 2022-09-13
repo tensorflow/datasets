@@ -15,25 +15,30 @@
 
 """Access registered datasets."""
 
+import dataclasses
 import difflib
 import json
 import posixpath
 import re
 import textwrap
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, List, NoReturn, Optional, Type
+from typing import Any, Callable, Dict, Iterable, Iterator, Mapping, List, Optional, Type
 
 from absl import logging
+import tensorflow as tf
 from tensorflow_datasets.core import community
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import decode
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import visibility
+from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
@@ -55,6 +60,7 @@ _FULL_NAME_REG = re.compile(r'^{ds_name}/({config_name}/)?{version}$'.format(
 ))
 
 
+@tfds_logging.list_builders()
 def list_builders(
     *,
     with_community_datasets: bool = True,
@@ -67,12 +73,13 @@ def list_builders(
   return datasets
 
 
+@error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   """Fetches a `tfds.core.DatasetBuilder` class by string name.
 
   Args:
-    name: `str`, the registered name of the `DatasetBuilder` (the class name
-      as camel or snake case: `MyDataset` or `my_dataset`).
+    name: `str`, the registered name of the `DatasetBuilder` (the class name as
+      camel or snake case: `MyDataset` or `my_dataset`).
 
   Returns:
     A `tfds.core.DatasetBuilder` class.
@@ -85,22 +92,26 @@ def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
     raise ValueError(
         '`builder_cls` only accept the `dataset_name` without config, '
         f"version or arguments. Got: name='{name}', kwargs={kwargs}")
-  try:
-    if ds_name.namespace:
-      # `namespace:dataset` are loaded from the community register
-      if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
-        return community.community_register.builder_cls(ds_name)
-      else:
-        raise ValueError(
-            f'Cannot load {ds_name} when community datasets are disabled')
+
+  if ds_name.namespace:
+    # `namespace:dataset` are loaded from the community register
+    if visibility.DatasetType.COMMUNITY_PUBLIC.is_available():
+      return community.community_register.builder_cls(ds_name)
     else:
+      raise ValueError(
+          f'Cannot load {ds_name} when community datasets are disabled')
+  else:
+    try:
       cls = registered.imported_builder_cls(str(ds_name))
       cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
-    return cls
-  except registered.DatasetNotFoundError as e:
-    _reraise_with_list_builders(e, name=ds_name)  # pytype: disable=bad-return-type
+      return cls
+    except registered.DatasetNotFoundError:
+      _add_list_builders_context(name=ds_name)  # pytype: disable=bad-return-type
+      raise
 
 
+@error_utils.reraise_with_context(registered.DatasetNotFoundError)
+@tfds_logging.builder()
 def builder(
     name: str,
     *,
@@ -110,15 +121,15 @@ def builder(
   """Fetches a `tfds.core.DatasetBuilder` by string name.
 
   Args:
-    name: `str`, the registered name of the `DatasetBuilder` (the class name
-      as camel or snake case: `MyDataset` or `my_dataset`). This can be either
-        `'dataset_name'` or `'dataset_name/config_name'` for datasets with
-        `BuilderConfig`s. As a convenience, this string may contain
-        comma-separated keyword arguments for the builder. For example
-        `'foo_bar/a=True,b=3'` would use the `FooBar` dataset passing the
-        keyword arguments `a=True` and `b=3` (for builders with configs, it
-        would be `'foo_bar/zoo/a=True,b=3'` to use the `'zoo'` config and pass
-        to the builder keyword arguments `a=True` and `b=3`).
+    name: `str`, the registered name of the `DatasetBuilder` (the class name as
+      camel or snake case: `MyDataset` or `my_dataset`). This can be either
+      `'dataset_name'` or `'dataset_name/config_name'` for datasets with
+      `BuilderConfig`s. As a convenience, this string may contain
+      comma-separated keyword arguments for the builder. For example
+      `'foo_bar/a=True,b=3'` would use the `FooBar` dataset passing the keyword
+      arguments `a=True` and `b=3` (for builders with configs, it would be
+      `'foo_bar/zoo/a=True,b=3'` to use the `'zoo'` config and pass to the
+      builder keyword arguments `a=True` and `b=3`).
     try_gcs: `bool`, if True, tfds.load will see if the dataset exists on the
       public GCS bucket before building it locally.
     **builder_kwargs: `dict` of keyword arguments passed to the
@@ -145,9 +156,10 @@ def builder(
           f'Cannot have both `try_gcs=True` and `data_dir={data_dir}` '
           'explicitly set')
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
-  if (visibility.DatasetType.COMMUNITY_PUBLIC.is_available() and
-      community.community_register.has_namespace(name.namespace)):
-    return community.community_register.builder(name=name, **builder_kwargs)
+  if name.namespace:
+    if (visibility.DatasetType.COMMUNITY_PUBLIC.is_available() and
+        community.community_register.has_namespace(name.namespace)):
+      return community.community_register.builder(name=name, **builder_kwargs)
 
   # First check whether we can find the corresponding dataset builder code
   try:
@@ -160,7 +172,7 @@ def builder(
   if _try_load_from_files_first(cls, **builder_kwargs):
     try:
       return read_only_builder.builder_from_files(str(name), **builder_kwargs)
-    except registered.DatasetNotFoundError as e:
+    except registered.DatasetNotFoundError:
       pass
 
   # If code exists and loading from files was skipped (e.g. files not found),
@@ -194,6 +206,224 @@ def _try_load_from_files_first(
     return False  # Code exists and no version is given, so use code.
 
 
+@dataclasses.dataclass()
+class DatasetCollectionLoader:
+  """Loader class for dataset collections.
+
+  Attributes:
+    collection: the DatasetCollection to load.
+    requested_version: optional version of the dataset collection to load. If
+      none given, the latest version will be loaded.
+    loader_kwargs: optional kwargs for the `tfds.load` function.
+    datasets: initialized post-init, defines the datasets comprised in the
+      requested dataset collection.
+    collection_name: the name of the DatasetCollection to load.
+  """
+  collection: dataset_collection_builder.DatasetCollection
+  requested_version: Optional[str] = None
+  loader_kwargs: Optional[Dict[str, Any]] = None
+
+  def __post_init__(self):
+    self.datasets = self.collection.get_collection(self.requested_version)
+
+  @property
+  def collection_name(self) -> str:
+    return self.collection.info.name
+
+  def print_info(self) -> None:
+    """Prints information about this dataset collection."""
+    msg = [
+        f'Dataset collection: {self.collection.info.name}',
+        f'Version: {self.requested_version}',
+        f'Description: {self.collection.info.description}'
+    ]
+    if self.collection.info.citation:
+      msg.append('Citation:')
+      msg.append(self.collection.info.citation)
+    print('\n'.join(msg))
+
+  def print_datasets(self) -> None:
+    print(self.collection.list_datasets(version=self.requested_version))
+
+  def get_dataset_info(self, dataset_name: str):
+    # TODO(b/235343719) improve performance, e.g. by creating a method such as
+    # # load_info that does this more efficiently.
+    dataset_reference = self.datasets[dataset_name]
+    _, info = load(dataset_reference.tfds_name(), with_info=True)
+    return info
+
+  def set_loader_kwargs(self, loader_kwargs: Dict[str, Any]):
+    self.loader_kwargs = loader_kwargs
+
+  def load_dataset(
+      self,
+      dataset: str,
+      split: Optional[Tree[splits_lib.SplitArg]] = None,
+      loader_kwargs: Optional[Dict[str, Any]] = None,
+  ) -> Mapping[str, tf.data.Dataset]:
+    """Loads the named dataset from a dataset collection by calling `tfds.load`.
+
+    Args:
+      dataset: `str`, the dataset name to load.
+      split: which split(s) of the dataset to load. If `None`, will return all
+        splits available for the dataset.
+      loader_kwargs: `dict` (optional), keyword arguments to be passed to the
+        `tfds.load` function. Refer to `tfds.load` documentation for a
+        comperehensive overview of the different loading options.
+
+    Returns:
+      A `dict` of {`str`: tf.data.Dataset} for the desided dataset.
+
+    Raises:
+      KeyError: if trying to load an dataset not included in the collection.
+      RuntimeError: if `load` return type is not a `dict` or a `list`.
+    """
+    if not dataset:
+      raise TypeError('You must specify a non-empty dataset to load.')
+
+    loader_kwargs = loader_kwargs or self.loader_kwargs or {}
+
+    # with_info must be False (or it will change the return type of `tfds.load`)
+    if 'with_info' in loader_kwargs and loader_kwargs['with_info']:
+      logging.warning('`with_info` cannot be True, setting it to False')
+    loader_kwargs['with_info'] = False
+
+    try:
+      dataset_reference = self.datasets[dataset]
+    except KeyError as e:
+      raise KeyError(
+          f'Dataset {dataset} is not included in this collection. '
+          f'{self.collection.list_datasets(version=self.requested_version)}'
+      ) from e
+
+    # If `split` is defined both as argument and in `loader_kwargs`, always keep
+    # the one defined as argument.
+    if split:
+      loader_kwargs['split'] = dataset_reference.get_split(split)
+    # Make sure we always return a dict of dicts.
+    if 'split' in loader_kwargs and isinstance(loader_kwargs['split'], str):
+      loader_kwargs['split'] = [loader_kwargs['split']]
+
+    load_output = load(dataset_reference.tfds_name(), **loader_kwargs)
+    loaded_datasets = {}
+    # If `split` is not specified, then `load` returns a dict with the split as
+    # the key.
+    if isinstance(load_output, dict):
+      loaded_datasets = load_output
+    # If `split` is a list, then the return type of `load` is a list of datasets
+    # in the same order of the splits.
+    elif isinstance(load_output, list):
+      for split_name, d in zip(loader_kwargs['split'], load_output):
+        if isinstance(d, tuple):
+          ds, _ = d
+          loaded_datasets[split_name] = ds
+        elif isinstance(d, tf.data.Dataset):
+          loaded_datasets[split_name] = d
+        else:
+          raise RuntimeError(
+              f'Unsupported return type {type(load_output)} of `load` function.'
+          )
+    else:
+      raise RuntimeError(
+          f'Unsupported return type {type(load_output)} of `load` function.')
+    return loaded_datasets
+
+  def load_datasets(
+      self,
+      datasets: List[str],
+      split: Optional[Tree[splits_lib.SplitArg]] = None,
+      loader_kwargs: Optional[Dict[str, Any]] = None,
+  ) -> Mapping[str, Mapping[str, tf.data.Dataset]]:
+    """Loads a number of datasets from the dataset collection.
+
+    Args:
+      datasets: list of dataset names to load.
+      split: which split(s) of the datasets to load.
+      loader_kwargs: keyword arguments to be passed to the `tfds.load` function.
+        Refer to `tfds.load` documentation for a comperehensive overview of the
+        different loading options.
+
+    Returns:
+      mapping between a dataset name and a mapping of split name to
+      tf.data.Dataset for each requested dataset.
+
+    Raises:
+      ValueError: if no dataset(s) to load are given.
+    """
+    if not datasets:
+      raise ValueError('At least one dataset should be specified.')
+    return {
+        dataset_name: self.load_dataset(
+            dataset_name, split=split, loader_kwargs=loader_kwargs)
+        for dataset_name in datasets
+    }
+
+  def load_all_datasets(
+      self,
+      split: Optional[Tree[splits_lib.SplitArg]] = None,
+      loader_kwargs: Optional[Dict[str, Any]] = None,
+  ) -> Mapping[str, Mapping[str, tf.data.Dataset]]:
+    """Loads all datasets of a collection.
+
+    Args:
+      split: which split(s) of the datasets to load.
+      loader_kwargs: `dict` (optional), keyword arguments to be passed to the
+        `tfds.load` function. Refer to `tfds.load` documentation for a
+        comperehensive overview of the different loading options.
+
+    Returns:
+      `dict` of `dataset_names` mapping to a `dict` of {`split_name`:
+      tf.data.Dataset} for each desired datasets.
+    """
+    return self.load_datasets(
+        datasets=self.datasets.keys(), split=split, loader_kwargs=loader_kwargs)
+
+
+def dataset_collection(
+    name: str,
+    loader_kwargs: Optional[Dict[str, Any]] = None,
+) -> DatasetCollectionLoader:
+  """Instantiates a DatasetCollectionLoader.
+
+  Args:
+    name: The name of the dataset collection to load.
+    loader_kwargs: `dict` (optional), keyword arguments to be passed to the
+      `tfds.load` function. Refer to `tfds.load` documentation for a
+      comperehensive overview of the different loading options.
+
+  Returns:
+    A DatasetCollectionLoader object.
+
+  Raises:
+    DatasetCollectionNotFoundError if dataset collection not found in registry.
+  """
+  parsed_name, builder_kwargs = naming.parse_builder_name_kwargs(name)
+  if not registered.is_dataset_collection(parsed_name.name):
+    available_collections = registered.list_imported_dataset_collections()
+    raise registered.DatasetCollectionNotFoundError(
+        f'Dataset collection {name} not found. '
+        f'Available dataset collections: {available_collections}')
+
+  dataset_collection_cls = registered.imported_dataset_collection_cls(
+      parsed_name.name)
+  dataset_collection_cls = typing.cast(
+      Type[dataset_collection_builder.DatasetCollection],
+      dataset_collection_cls)
+  collection = dataset_collection_cls()
+
+  requested_version = None
+  if 'version' in builder_kwargs:
+    requested_version = builder_kwargs['version']
+
+  return DatasetCollectionLoader(
+      collection,
+      requested_version=requested_version,
+      loader_kwargs=loader_kwargs)
+
+
+
+
+@tfds_logging.load()
 def load(
     name: str,
     *,
@@ -254,23 +484,23 @@ def load(
     name: `str`, the registered name of the `DatasetBuilder` (the snake case
       version of the class name). The config and version can also be specified
       in the name as follows: `'dataset_name[/config_name][:version]'`. For
-        example, `'movielens/25m-ratings'` (for the latest version of
-      `'25m-ratings'`), `'movielens:0.1.0'` (for the default config and
-      version 0.1.0), or`'movielens/25m-ratings:0.1.0'`. Note that only the
-        latest version can be generated, but old versions can be read if they
-        are present on disk. For convenience, the `name` parameter can contain
-        comma-separated keyword arguments for the builder. For example,
-        `'foo_bar/a=True,b=3'` would use the `FooBar` dataset passing the
-        keyword arguments `a=True` and `b=3` (for builders with configs, it
-        would be `'foo_bar/zoo/a=True,b=3'` to use the `'zoo'` config and pass
-        to the builder keyword arguments `a=True` and `b=3`).
-    split: Which split of the data to load (e.g. `'train'`, `'test'`,
-      `['train', 'test']`, `'train[80%:]'`,...). See our
-      [split API guide](https://www.tensorflow.org/datasets/splits). If `None`,
-        will return all splits in a `Dict[Split, tf.data.Dataset]`
+      example, `'movielens/25m-ratings'` (for the latest version of
+      `'25m-ratings'`), `'movielens:0.1.0'` (for the default config and version
+      0.1.0), or`'movielens/25m-ratings:0.1.0'`. Note that only the latest
+      version can be generated, but old versions can be read if they are present
+      on disk. For convenience, the `name` parameter can contain comma-separated
+      keyword arguments for the builder. For example, `'foo_bar/a=True,b=3'`
+      would use the `FooBar` dataset passing the keyword arguments `a=True` and
+      `b=3` (for builders with configs, it would be `'foo_bar/zoo/a=True,b=3'`
+      to use the `'zoo'` config and pass to the builder keyword arguments
+      `a=True` and `b=3`).
+    split: Which split of the data to load (e.g. `'train'`, `'test'`, `['train',
+      'test']`, `'train[80%:]'`,...). See our [split API
+      guide](https://www.tensorflow.org/datasets/splits). If `None`, will return
+      all splits in a `Dict[Split, tf.data.Dataset]`
     data_dir: `str`, directory to read/write data. Defaults to the value of the
       environment variable TFDS_DATA_DIR, if set, otherwise falls back to
-      '~/tensorflow_datasets'.
+      datasets are stored.
     batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If `batch_size=-1`, will return
       the full dataset as `tf.Tensor`s.
@@ -280,7 +510,7 @@ def load(
       `tfds.core.DatasetBuilder.download_and_prepare` before calling
       `tf.DatasetBuilder.as_dataset`. If `False`, data is expected to be in
       `data_dir`. If `True` and the data is already in `data_dir`,
-      `download_and_prepare` is a no-op.
+      when data_dir is a Placer path.
     as_supervised: `bool`, if `True`, the returned `tf.data.Dataset` will have a
       2-tuple structure `(input, label)` according to
       `builder.info.supervised_keys`. If `False`, the default, the returned
@@ -288,8 +518,8 @@ def load(
     decoders: Nested dict of `Decoder` objects which allow to customize the
       decoding. The structure should match the feature structure, but only
       customized feature keys need to be present. See [the
-        guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
-          for more info.
+      guide](https://github.com/tensorflow/datasets/blob/master/docs/decode.md)
+      for more info.
     read_config: `tfds.ReadConfig`, Additional options to configure the input
       pipeline (e.g. seed, num parallel reads,...).
     with_info: `bool`, if `True`, `tfds.load` will return the tuple
@@ -318,6 +548,7 @@ def load(
       Split-specific information is available in `ds_info.splits`.
   """
   # pylint: enable=line-too-long
+
   if builder_kwargs is None:
     builder_kwargs = {}
 
@@ -428,13 +659,10 @@ def is_full_name(full_name: str) -> bool:
   return bool(_FULL_NAME_REG.match(full_name))
 
 
-def _reraise_with_list_builders(
-    e: Exception,
-    name: naming.DatasetName,
-) -> NoReturn:
-  """Add the list of available builders to the DatasetNotFoundError."""
+def _add_list_builders_context(name: naming.DatasetName,) -> None:
+  """Adds the list of available builders to the DatasetNotFoundError."""
   # Should optimize to only filter through given namespace
-  all_datasets = list_builders(with_community_datasets=bool(name.namespace))
+  all_datasets = list_builders(with_community_datasets=False)
   all_datasets_str = '\n\t- '.join([''] + all_datasets)
   error_string = f'Available datasets:{all_datasets_str}\n'
   error_string += textwrap.dedent("""
@@ -449,6 +677,6 @@ def _reraise_with_list_builders(
   # Add close matches
   close_matches = difflib.get_close_matches(str(name), all_datasets, n=1)
   if close_matches:
-    error_string += f'\nDid you mean: {name} -> {close_matches[0]}\n'
+    error_string += f'\nDid you mean: {name} -> {close_matches[0]} ?\n'
 
-  raise py_utils.reraise(e, suffix=error_string)
+  error_utils.add_context(error_string)

@@ -1,0 +1,25 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "question": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        },
+        "answer": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.feature.Tensor",
+                    "content": {
+                        "shape": [],
+                        "dtype": "string"
+                    }
+                },
+                "length": null
+            }
+        }
+    }
+}

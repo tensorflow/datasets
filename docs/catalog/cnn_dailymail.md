@@ -45,13 +45,15 @@ each highlight, which is the target summary
     *   `3.2.0`: Remove extra space before added sentence period. This shouldn't
         affect ROUGE scores because punctuation is removed.
 
-    *   **`3.3.0`** (default)
+    *   `3.3.0`: Add publisher feature.
+
+    *   **`3.4.0`** (default)
         <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Add publisher feature.
+        Add ID feature.
 
 *   **Download size**: `558.32 MiB`
 
-*   **Dataset size**: `1.28 GiB`
+*   **Dataset size**: `1.29 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -71,6 +73,7 @@ Split          | Examples
 FeaturesDict({
     'article': Text(shape=(), dtype=tf.string),
     'highlights': Text(shape=(), dtype=tf.string),
+    'id': Text(shape=(), dtype=tf.string),
     'publisher': Text(shape=(), dtype=tf.string),
 })
 ```
@@ -82,6 +85,7 @@ Feature    | Class        | Shape | Dtype     | Description
            | FeaturesDict |       |           |
 article    | Text         |       | tf.string |
 highlights | Text         |       | tf.string |
+id         | Text         |       | tf.string |
 publisher  | Text         |       | tf.string |
 
 *   **Supervised keys** (See
@@ -102,7 +106,7 @@ publisher  | Text         |       | tf.string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.3.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.4.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

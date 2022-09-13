@@ -17,6 +17,7 @@
 
 import abc
 from unittest import mock
+import pytest
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import load
@@ -50,7 +51,8 @@ class EmptyDatasetBuilder(registered.RegisteredDataset):
 
 class UnregisteredBuilder(EmptyDatasetBuilder):
 
-  @abc.abstractproperty
+  @property
+  @abc.abstractmethod
   def an_abstract_property(self):
     pass
 
@@ -256,3 +258,100 @@ def test_custom_name():
 
   assert "custom_name" == SomeCustomNameBuilder.name
   assert "custom_name" in load.list_builders()
+
+
+# Tests for RegisteredDatasetCollection.
+
+
+class EmptyDatasetCollectionBuilder(registered.RegisteredDatasetCollection):
+  pass
+
+
+class AbstractDatasetCollectionBuilder(registered.RegisteredDatasetCollection):
+
+  @property
+  @abc.abstractmethod
+  def an_abstract_property(self):
+    pass
+
+
+def test_registered_dataset_collection():
+  name = "empty_dataset_collection_builder"
+  assert name == EmptyDatasetCollectionBuilder.name
+
+
+def test_skip_dataset_collection_registration():
+  with registered.skip_registration():
+
+    class SkipCollectionBuilder(registered.RegisteredDatasetCollection):  # pylint: disable=unused-variable
+      pass
+
+  assert ("skip_collection_builder"
+          not in registered.list_imported_dataset_collections())
+
+
+def test_duplicate_dataset_collection_builders():
+  name = "duplicate_collection_builder"
+  error_msg = f"DatasetCollection with name {name} already registered"
+
+  class DuplicateCollectionBuilder(registered.RegisteredDatasetCollection):  # pylint: disable=unused-variable
+    pass
+
+  with pytest.raises(ValueError, match=error_msg):
+
+    class DuplicateCollectionBuilder(registered.RegisteredDatasetCollection):  # pylint: disable=function-redefined
+      pass
+
+
+def test_duplicate_dataset_collections_on_notebooks():
+
+  with mock.patch.object(py_utils, "is_notebook", lambda: True):
+    name = "colab_dataset_collection_builder"
+    assert name not in registered.list_imported_dataset_collections()
+
+    class ColabDatasetCollectionBuilder(EmptyDatasetCollectionBuilder):  # pylint: disable=unused-variable
+      pass
+
+    assert name in registered.list_imported_dataset_collections()
+    cls = registered.imported_dataset_collection_cls(name)
+    assert isinstance(cls, type(ColabDatasetCollectionBuilder))
+    old_colab_cls = ColabDatasetCollectionBuilder
+
+    class ColabDatasetCollectionBuilder(EmptyDatasetBuilder):  # pylint: disable=function-redefined
+      pass
+
+    assert name in registered.list_imported_dataset_collections()
+    assert isinstance(cls, type(ColabDatasetCollectionBuilder))
+    assert not isinstance(cls, old_colab_cls)
+
+
+def test_list_imported_dataset_collections():
+  assert ("empty_dataset_collection_builder"
+          in registered.list_imported_dataset_collections())
+  assert ("abstract_dataset_collection_builder"
+          not in registered.list_imported_dataset_collections())
+  assert ("nonexistent_dc_builder"
+          not in registered.list_imported_dataset_collections())
+
+
+def test_is_dataset_collection():
+  assert registered.is_dataset_collection("empty_dataset_collection_builder")
+  assert not registered.is_dataset_collection(
+      "abstract_dataset_collection_builder")
+  assert not registered.is_dataset_collection("nonexistent_dc_builder")
+
+
+def test_imported_dataset_collection_cls():
+  existent = "empty_dataset_collection_builder"
+  abstract = "abstract_dataset_collection_builder"
+  nonexistent = "nonexistent_dataset_collection_builder"
+
+  cls = registered.imported_dataset_collection_cls(existent)
+  assert isinstance(cls, type(EmptyDatasetCollectionBuilder))
+
+  error_msg = f"DatasetCollection {abstract} is an abstract class."
+  with pytest.raises(AssertionError, match=error_msg):
+    registered.imported_dataset_collection_cls(abstract)
+
+  with pytest.raises(registered.DatasetCollectionNotFoundError):
+    registered.imported_dataset_collection_cls(nonexistent)

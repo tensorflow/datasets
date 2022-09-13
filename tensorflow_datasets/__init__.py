@@ -36,41 +36,76 @@ Documentation:
 # pylint: enable=line-too-long
 # pylint: disable=g-import-not-at-top,g-bad-import-order,wrong-import-position,unused-import
 
+import time
+_TIMESTAMP_IMPORT_STARTS = time.time()
+import tensorflow_datasets.core.logging as _tfds_logging
+from tensorflow_datasets.core.logging import call_metadata as _call_metadata
 
-# Ensure TensorFlow is importable and its version is sufficiently recent. This
-# needs to happen before anything else, since the imports below will try to
-# import tensorflow, too.
-from tensorflow_datasets.core import tf_compat
-tf_compat.ensure_tf_install()
+_metadata = _call_metadata.CallMetadata()
+_metadata.start_time_micros = int(_TIMESTAMP_IMPORT_STARTS * 1E6)
+_import_time_ms_tensorflow = 0
+_import_time_ms_dataset_builders = 0
 
-# Imports for registration
-from tensorflow_datasets import audio
-from tensorflow_datasets import graphs
-from tensorflow_datasets import image
-from tensorflow_datasets import image_classification
-from tensorflow_datasets import object_detection
-from tensorflow_datasets import question_answering
-from tensorflow_datasets import d4rl
-from tensorflow_datasets import ranking
-from tensorflow_datasets import recommendation
-from tensorflow_datasets import rl_unplugged
-from tensorflow_datasets import rlds
-from tensorflow_datasets import robotics
-from tensorflow_datasets import robomimic
-from tensorflow_datasets import structured
-from tensorflow_datasets import summarization
-from tensorflow_datasets import text
-from tensorflow_datasets import text_simplification
-from tensorflow_datasets import time_series
-from tensorflow_datasets import translate
-from tensorflow_datasets import video
-from tensorflow_datasets import vision_language
+try:
+  _before_tf_inport = time.time()
+  import tensorflow
+  _import_time_ms_tensorflow = int((time.time() - _before_tf_inport) * 1000)
 
+  # Ensure TensorFlow is importable and its version is sufficiently recent. This
+  # needs to happen before anything else, since the imports below will try to
+  # import tensorflow, too.
+  from tensorflow_datasets.core import tf_compat
+  tf_compat.ensure_tf_install()
 
-# Public API to create and generate a dataset
-from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
+  # Imports for registration
+  _before_dataset_imports = time.time()
+  from tensorflow_datasets import dataset_collections
 
-# __all__ for import * as well as documentation
-from tensorflow_datasets import public_api  # pylint: disable=g-bad-import-order
-__all__ = public_api.__all__
+  # pytype: disable=import-error
+  # For builds that don't include all dataset builders, we don't want to fail on
+  # import errors of dataset builders.
+  try:
+    from tensorflow_datasets import audio
+    from tensorflow_datasets import graphs
+    from tensorflow_datasets import image
+    from tensorflow_datasets import image_classification
+    from tensorflow_datasets import object_detection
+    from tensorflow_datasets import nearest_neighbors
+    from tensorflow_datasets import question_answering
+    from tensorflow_datasets import d4rl
+    from tensorflow_datasets import ranking
+    from tensorflow_datasets import recommendation
+    from tensorflow_datasets import rl_unplugged
+    from tensorflow_datasets import rlds
+    from tensorflow_datasets import robotics
+    from tensorflow_datasets import robomimic
+    from tensorflow_datasets import structured
+    from tensorflow_datasets import summarization
+    from tensorflow_datasets import text
+    from tensorflow_datasets import text_simplification
+    from tensorflow_datasets import time_series
+    from tensorflow_datasets import translate
+    from tensorflow_datasets import video
+    from tensorflow_datasets import vision_language
 
+  except ImportError:
+    pass
+  # pytype: enable=import-error
+
+  _import_time_ms_dataset_builders = int(
+      (time.time() - _before_dataset_imports) * 1000)
+
+  # Public API to create and generate a dataset
+  from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
+  from tensorflow_datasets import public_api  # pylint: disable=g-bad-import-order
+  # __all__ for import * as well as documentation
+  __all__ = public_api.__all__
+
+except Exception:  # pylint: disable=broad-except
+  _metadata.mark_error()
+finally:
+  _metadata.mark_end()
+  _tfds_logging.tfds_import(
+      metadata=_metadata,
+      import_time_ms_tensorflow=_import_time_ms_tensorflow,
+      import_time_ms_dataset_builders=_import_time_ms_dataset_builders)

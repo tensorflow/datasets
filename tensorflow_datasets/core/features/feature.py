@@ -25,6 +25,7 @@ import json
 import os
 from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 
+from etils import epath
 import numpy as np
 import six
 import tensorflow as tf
@@ -871,7 +872,11 @@ class FeatureConnector(object):
           ))
     return result
 
-  def save_metadata(self, data_dir, feature_name):
+  def save_metadata(
+      self,
+      data_dir: epath.PathLike,
+      feature_name: Optional[str],
+  ) -> None:
     """Save the feature metadata on disk.
 
     This function is called after the data has been generated (by
@@ -892,22 +897,26 @@ class FeatureConnector(object):
     overwrite the function.
 
     Args:
-      data_dir: `str`, path to the dataset folder to which save the info (ex:
+      data_dir: path to the dataset folder to which save the info (ex:
         `~/datasets/cifar10/1.2.0/`)
-      feature_name: `str`, the name of the feature (from the FeaturesDict key)
+      feature_name: the name of the feature (from the FeaturesDict key)
     """
     pass
 
-  def load_metadata(self, data_dir, feature_name):
+  def load_metadata(
+      self,
+      data_dir: epath.PathLike,
+      feature_name: Optional[str],
+  ):
     """Restore the feature metadata from disk.
 
     If a dataset is re-loaded and generated files exists on disk, this function
     will restore the feature metadata from the saved file.
 
     Args:
-      data_dir: `str`, path to the dataset folder to which save the info (ex:
+      data_dir: path to the dataset folder to which save the info (ex:
         `~/datasets/cifar10/1.2.0/`)
-      feature_name: `str`, the name of the feature (from the FeaturesDict key)
+      feature_name: the name of the feature (from the FeaturesDict key)
     """
     pass
 

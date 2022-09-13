@@ -1,0 +1,42 @@
+{
+  "citation": "@inproceedings{koreeda-manning-2021-contractnli,\n    title = \"ContractNLI: A Dataset for Document-level Natural Language Inference for Contracts\",\n    author = \"Koreeda, Yuta  and\n      Manning, Christopher D.\",\n    booktitle = \"Findings of the Association for Computational Linguistics: EMNLP 2021\",\n    year = \"2021\",\n    publisher = \"Association for Computational Linguistics\"\n}\n\n\n@misc{shaham2022scrolls,\n      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},\n      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},\n      year={2022},\n      eprint={2201.03533},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}\nNote that each SCROLLS dataset has its own citation. Please see the source to\nget the correct citation for each contained dataset.",
+  "configDescription": "contract_nli subset",
+  "configName": "contract_nli",
+  "description": "SCROLLS: Standardized CompaRison Over Long Language Sequences.\nA suite of natural language tfds.core.that require reasoning over long texts.\nhttps://scrolls-benchmark.com/\ncontract_nli subset",
+  "downloadSize": "4862245",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://stanfordnlp.github.io/contract-nli/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.scrolls.scrolls",
+  "name": "scrolls",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "81274988",
+      "shardLengths": [
+        "7191"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "12797276",
+      "shardLengths": [
+        "1037"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "23955227",
+      "shardLengths": [
+        "2091"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

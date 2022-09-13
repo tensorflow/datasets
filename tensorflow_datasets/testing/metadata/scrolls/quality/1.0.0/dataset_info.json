@@ -1,0 +1,42 @@
+{
+  "citation": "@article{pang2021quality,\n  title={{QuALITY}: Question Answering with Long Input Texts, Yes!},\n  author={Pang, Richard Yuanzhe and Parrish, Alicia and Joshi, Nitish and Nangia, Nikita and Phang, Jason and Chen, Angelica and Padmakumar, Vishakh and Ma, Johnny and Thompson, Jana and He, He and Bowman, Samuel R.},\n  journal={arXiv preprint arXiv:2112.08608},\n  year={2021}\n}\n\n\n@misc{shaham2022scrolls,\n      title={SCROLLS: Standardized CompaRison Over Long Language Sequences},\n      author={Uri Shaham and Elad Segal and Maor Ivgi and Avia Efrat and Ori Yoran and Adi Haviv and Ankit Gupta and Wenhan Xiong and Mor Geva and Jonathan Berant and Omer Levy},\n      year={2022},\n      eprint={2201.03533},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}\nNote that each SCROLLS dataset has its own citation. Please see the source to\nget the correct citation for each contained dataset.",
+  "configDescription": "quality subset",
+  "configName": "quality",
+  "description": "SCROLLS: Standardized CompaRison Over Long Language Sequences.\nA suite of natural language tfds.core.that require reasoning over long texts.\nhttps://scrolls-benchmark.com/\nquality subset",
+  "downloadSize": "31252462",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/nyu-mll/quality"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.scrolls.scrolls",
+  "name": "scrolls",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "64266121",
+      "shardLengths": [
+        "2523"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "52324649",
+      "shardLengths": [
+        "2086"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "54894613",
+      "shardLengths": [
+        "2128"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

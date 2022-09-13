@@ -76,20 +76,20 @@ class DataDirRegister(register_base.BaseRegister):
 
   def builder_cls(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the builder classes."""
     if name.namespace not in self.namespaces:  # pylint: disable=unsupported-membership-test
-      raise registered.DatasetNotFoundError(
-          f'Namespace {name.namespace} not found. Should be one of: '
-          f'{sorted(self.namespaces)}')
+      error_msg = f'\nNamespace {name.namespace} not found.'
+      error_msg += f'Note that namespace should be one of: {sorted(self.namespaces)}'
+      raise registered.DatasetNotFoundError(error_msg)
     raise NotImplementedError(
         'builder_cls does not support data_dir-based community datasets. Got: '
         f'{name}')
 
   def builder(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
       **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
@@ -104,8 +104,9 @@ class DataDirRegister(register_base.BaseRegister):
       close_matches = difflib.get_close_matches(
           name.namespace, self._ns2data_dir, n=1)
       hint = f'\nDid you mean: {close_matches[0]}' if close_matches else ''
-      raise KeyError(f'Namespace `{name.namespace}` for `{name}` not found. '
-                     f'Should be one of {sorted(self._ns2data_dir)}{hint}')
+      error_msg = (f'Namespace `{name.namespace}` for `{name}` not found. '
+                   f'Should be one of {sorted(self._ns2data_dir)}{hint}')
+      raise KeyError(error_msg)
     return read_only_builder.builder_from_files(
         name.name,
         data_dir=[
@@ -114,7 +115,7 @@ class DataDirRegister(register_base.BaseRegister):
         **builder_kwargs,
     )
 
-  def get_builder_root_dirs(self, name: utils.DatasetName) -> List[epath.Path]:
+  def get_builder_root_dirs(self, name: naming.DatasetName) -> List[epath.Path]:
     """Returns root dir of the generated builder (without version/config)."""
     return [d / name.name for d in self._ns2data_dir[name.namespace]]
 
@@ -127,7 +128,9 @@ def _maybe_iterdir(path: epath.Path) -> Iterator[epath.Path]:
     for f in path.iterdir():
       yield f
   except (
+      OSError,
       FileNotFoundError,
+      PermissionError,
       tf.errors.NotFoundError,
       tf.errors.PermissionDeniedError,
   ) as e:
@@ -152,7 +155,7 @@ def _iter_builder_names(
     # individual dataset would have significant performance drop, so
     # this is an acceptable trade-of.
     return [
-        str(utils.DatasetName(namespace=ns_name, name=builder_dir.name))
+        str(naming.DatasetName(namespace=ns_name, name=builder_dir.name))
         for builder_dir in _maybe_iterdir(data_dir)
         if _is_valid_dataset_name(builder_dir.name)
     ]

@@ -1,0 +1,26 @@
+{
+  "citation": "@article{10.1145/2827872,\nauthor = {Harper, F. Maxwell and Konstan, Joseph A.},\ntitle = {The MovieLens Datasets: History and Context},\nyear = {2015},\nissue_date = {January 2016},\npublisher = {Association for Computing Machinery},\naddress = {New York, NY, USA},\nvolume = {5},\nnumber = {4},\nissn = {2160-6455},\nurl = {https://doi.org/10.1145/2827872},\ndoi = {10.1145/2827872},\njournal = {ACM Trans. Interact. Intell. Syst.},\nmonth = dec,\narticleno = {19},\nnumpages = {19},\nkeywords = {Datasets, recommendations, ratings, MovieLens}\n}",
+  "configDescription": "This dataset contains 100,000 ratings from 943 users on 1,682\nmovies. This dataset is the oldest version of the MovieLens\ndataset.\n\nEach user has rated at least 20 movies. Ratings are in whole-star\nincrements. This dataset contains demographic data of users in\naddition to data on movies and ratings.",
+  "configName": "100k-ratings",
+  "description": "This dataset contains a set of movie ratings from the MovieLens website, a movie\nrecommendation service. This dataset was collected and maintained by [GroupLens]\n(https://grouplens.org/), a research group at the University of Minnesota. There\nare 5 versions included: \"25m\", \"latest-small\", \"100k\", \"1m\", \"20m\". In all\ndatasets, the movies data and ratings data are joined on \"movieId\". The 25m\ndataset, latest-small dataset, and 20m dataset contain only movie data and\nrating data. The 1m dataset and 100k dataset contain demographic data in\naddition to movie and rating data.\n\n- \"25m\": This is the latest stable version of the MovieLens dataset. It is\nrecommended for research purposes.\n- \"latest-small\": This is a small subset of the latest version of the MovieLens\ndataset. It is changed and updated over time by GroupLens.\n- \"100k\": This is the oldest version of the MovieLens datasets. It is a small\ndataset with demographic data.\n- \"1m\": This is the largest MovieLens dataset that contains demographic data.\n- \"20m\": This is one of the most used MovieLens datasets in academic papers\nalong with the 1m dataset.\n\nFor each version, users can view either only the movies data by adding the\n\"-movies\" suffix (e.g. \"25m-movies\") or the ratings data joined with the movies\ndata (and users data in the 1m and 100k datasets) by adding the \"-ratings\"\nsuffix (e.g. \"25m-ratings\").\n\nThe features below are included in all versions with the \"-ratings\" suffix.\n\n- \"movie_id\": a unique identifier of the rated movie\n- \"movie_title\": the title of the rated movie with the release year in\nparentheses\n- \"movie_genres\": a sequence of genres to which the rated movie belongs\n- \"user_id\": a unique identifier of the user who made the rating\n- \"user_rating\": the score of the rating on a five-star scale\n- \"timestamp\": the timestamp of the ratings, represented in seconds since\nmidnight Coordinated Universal Time (UTC) of January 1, 1970\n\nThe \"100k-ratings\" and \"1m-ratings\" versions in addition include the following\ndemographic features.\n\n- \"user_gender\": gender of the user who made the rating; a true value\ncorresponds to male\n- \"bucketized_user_age\": bucketized age values of the user who made the rating,\nthe values and the corresponding ranges are:\n  - 1: \"Under 18\"\n  - 18: \"18-24\"\n  - 25: \"25-34\"\n  - 35: \"35-44\"\n  - 45: \"45-49\"\n  - 50: \"50-55\"\n  - 56: \"56+\"\n- \"user_occupation_label\": the occupation of the user who made the rating\nrepresented by an integer-encoded label; labels are preprocessed to be\nconsistent across different versions\n- \"user_occupation_text\": the occupation of the user who made the rating in\nthe original string; different versions can have different set of raw text\nlabels\n- \"user_zip_code\": the zip code of the user who made the rating\n\nIn addition, the \"100k-ratings\" dataset would also have a feature \"raw_user_age\"\nwhich is the exact ages of the users who made the rating\n\nDatasets with the \"-movies\" suffix contain only \"movie_id\", \"movie_title\", and\n\"movie_genres\" features.",
+  "downloadSize": "4924029",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://grouplens.org/datasets/movielens/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.structured.movielens",
+  "name": "movielens",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "33980498",
+      "shardLengths": [
+        "100000"
+      ]
+    }
+  ],
+  "version": "0.1.1"
+}

@@ -1,0 +1,49 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "article": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        },
+        "questions": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.text_feature.Text",
+                    "content": {}
+                },
+                "length": null
+            }
+        },
+        "answers": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.text_feature.Text",
+                    "content": {}
+                },
+                "length": null
+            }
+        },
+        "options": {
+            "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+            "content": {
+                "feature": {
+                    "type": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                    "content": {
+                        "feature": {
+                            "type": "tensorflow_datasets.core.features.text_feature.Text",
+                            "content": {}
+                        },
+                        "length": null
+                    }
+                },
+                "length": null
+            }
+        },
+        "example_id": {
+            "type": "tensorflow_datasets.core.features.text_feature.Text",
+            "content": {}
+        }
+    }
+}

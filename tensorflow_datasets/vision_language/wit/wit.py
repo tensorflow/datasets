@@ -43,10 +43,11 @@ _CITATION = """
 class Wit(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for wit dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.1.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release. It loads the WIT dataset from "
-               "https://storage.googleapis.com/gresearch/wit/"
+               "https://storage.googleapis.com/gresearch/wit/",
+      "1.1.0": "Added `val` and `test` splits."
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -81,19 +82,32 @@ class Wit(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     wit_homepage = "https://storage.googleapis.com/gresearch/wit/"
-    wit_urls_to_download = [
+    wit_train_urls_to_download = [
         os.path.join(wit_homepage, f"wit_v1.train.all-0000{i}-of-00010.tsv.gz")
         for i in range(10)
     ]
+    wit_val_urls_to_download = [
+        os.path.join(wit_homepage, f"wit_v1.val.all-0000{i}-of-00005.tsv.gz")
+        for i in range(5)
+    ]
+    wit_test_urls_to_download = [
+        os.path.join(wit_homepage, f"wit_v1.test.all-0000{i}-of-00005.tsv.gz")
+        for i in range(5)
+    ]
 
-    path = dl_manager.download_and_extract({"wit": wit_urls_to_download})
+    paths_per_split = dl_manager.download_and_extract({
+        "train": wit_train_urls_to_download,
+        "val": wit_val_urls_to_download,
+        "test": wit_test_urls_to_download
+    })
 
-    # The WIT dataset does not contain any validation or test split.
     return {
-        "train": self._generate_examples(path),
+        "train": self._generate_examples(paths_per_split["train"]),
+        "val": self._generate_examples(paths_per_split["val"]),
+        "test": self._generate_examples(paths_per_split["test"]),
     }
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, filepaths):
     """Yields examples."""
     beam = tfds.core.lazy_imports.apache_beam
 
@@ -148,7 +162,6 @@ class Wit(tfds.core.GeneratorBasedBuilder):
         for i, row in enumerate(csv_reader):
           yield filename, i, row
 
-    wit_filepaths = path["wit"]
-    return (beam.Create(wit_filepaths)
+    return (beam.Create(filepaths)
             | beam.FlatMap(_read_rows)
             | beam.Map(_process_example))

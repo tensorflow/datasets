@@ -85,6 +85,10 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
       yield i, {"x": x}
 
 
+class DummyDatasetWithDefaultConfig(DummyDatasetWithConfigs):
+  DEFAULT_BUILDER_CONFIG_NAME = "plus2"
+
+
 class InvalidSplitDataset(DummyDatasetWithConfigs):
 
   def _split_generators(self, _):
@@ -112,6 +116,34 @@ class DatasetBuilderTest(testing.TestCase):
       data = list(dataset_utils.as_numpy(dataset))
       self.assertEqual(20, len(data))
       self.assertLess(data[0]["x"], 30)
+
+  # Disable test until dependency on Riegeli is fixed.
+  # @testing.run_in_graph_and_eager_modes()
+  # def test_load_with_specified_format(self):
+  #   with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+  #     dataset, ds_info = load.load(
+  #         name="dummy_dataset_with_configs",
+  #         with_info=True,
+  #         data_dir=tmp_dir,
+  #         download=True,
+  #         split=splits_lib.Split.TRAIN,
+  #         download_and_prepare_kwargs={"file_format": "riegeli"})
+  #     self.assertEqual(ds_info.file_format.name, "RIEGELI")
+  #     files = tf.io.gfile.listdir(
+  #         os.path.join(tmp_dir, "dummy_dataset_with_configs",
+  #                      "plus1", "0.0.1"))
+  #     self.assertSetEqual(
+  #         set(files), {
+  #             "dummy_dataset_with_configs-test.riegeli-00000-of-00001",
+  #             "dummy_dataset_with_configs-test.riegeli-00000-of-00001_index.json",
+  #             "dummy_dataset_with_configs-train.riegeli-00000-of-00001",
+  #             "dummy_dataset_with_configs-train.riegeli-00000-of-00001_index.json",
+  #             "features.json",
+  #             "dataset_info.json",
+  #         })
+  #     data = list(dataset_utils.as_numpy(dataset))
+  #     self.assertEqual(20, len(data))
+  #     self.assertLess(data[0]["x"], 30)
 
   @testing.run_in_graph_and_eager_modes()
   def test_determinism(self):
@@ -207,7 +239,7 @@ class DatasetBuilderTest(testing.TestCase):
       builder = DummyDatasetWithConfigs(config=plus1_config, data_dir=tmp_dir)
       self.assertIs(plus1_config, builder.builder_config)
       self.assertIs(builder.builder_config,
-                    DummyDatasetWithConfigs.BUILDER_CONFIGS[0])
+                    DummyDatasetWithConfigs.default_builder_config)
 
   @testing.run_in_graph_and_eager_modes()
   def test_with_configs(self):
@@ -244,6 +276,12 @@ class DatasetBuilderTest(testing.TestCase):
         self.assertEqual(10, len(test_data))
         self.assertCountEqual([incr + el for el in range(30)],
                               train_data + test_data)
+
+  def test_default_builder_config(self):
+    self.assertEqual(DummyDatasetWithConfigs.default_builder_config.name,
+                     "plus1")
+    self.assertEqual(DummyDatasetWithDefaultConfig.default_builder_config.name,
+                     "plus2")
 
   def test_read_config(self):
     is_called = []

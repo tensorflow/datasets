@@ -51,7 +51,8 @@ are interested in large-scale offline RL models with memory.
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.1.0`** (default): Added is_last.
+    *   `1.1.0`: Added is_last.
+    *   **`1.2.0`** (default): BGR -> RGB fix for pixel observations.
 
 *   **Download size**: `Unknown size`
 
@@ -134,7 +135,7 @@ steps/reward                  | Tensor       |             | tf.float32 |
 
 ## rlu_dmlab_seekavoid_arena01/training_0 (default config)
 
-*   **Dataset size**: `381.13 GiB`
+*   **Dataset size**: `356.86 GiB`
 
 *   **Splits**:
 
@@ -152,7 +153,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-training_0-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-training_0-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -181,7 +182,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/training_1
 
-*   **Dataset size**: `360.77 GiB`
+*   **Dataset size**: `337.09 GiB`
 
 *   **Splits**:
 
@@ -199,7 +200,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-training_1-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-training_1-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -228,7 +229,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/training_2
 
-*   **Dataset size**: `378.58 GiB`
+*   **Dataset size**: `355.62 GiB`
 
 *   **Splits**:
 
@@ -246,7 +247,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-training_2-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-training_2-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -275,7 +276,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.0
 
-*   **Dataset size**: `94.83 GiB`
+*   **Dataset size**: `89.16 GiB`
 
 *   **Splits**:
 
@@ -293,7 +294,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_0_eps_0.0-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_0_eps_0.0-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -322,7 +323,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.0
 
-*   **Dataset size**: `94.68 GiB`
+*   **Dataset size**: `89.03 GiB`
 
 *   **Splits**:
 
@@ -340,7 +341,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_1_eps_0.0-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_1_eps_0.0-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -369,7 +370,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.01
 
-*   **Dataset size**: `94.77 GiB`
+*   **Dataset size**: `89.12 GiB`
 
 *   **Splits**:
 
@@ -387,7 +388,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_0_eps_0.01-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_0_eps_0.01-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -416,7 +417,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.01
 
-*   **Dataset size**: `94.65 GiB`
+*   **Dataset size**: `89.02 GiB`
 
 *   **Splits**:
 
@@ -434,7 +435,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_1_eps_0.01-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_1_eps_0.01-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -463,7 +464,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_0_eps_0.25
 
-*   **Dataset size**: `93.96 GiB`
+*   **Dataset size**: `88.57 GiB`
 
 *   **Splits**:
 
@@ -481,7 +482,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_0_eps_0.25-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_0_eps_0.25-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
@@ -510,7 +511,7 @@ dataButton.addEventListener('click', async () => {
 
 ## rlu_dmlab_seekavoid_arena01/snapshot_1_eps_0.25
 
-*   **Dataset size**: `93.93 GiB`
+*   **Dataset size**: `88.51 GiB`
 
 *   **Splits**:
 
@@ -528,7 +529,7 @@ Split     | Examples
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_1_eps_0.25-1.1.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/rlu_dmlab_seekavoid_arena01-snapshot_1_eps_0.25-1.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

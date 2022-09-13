@@ -106,16 +106,17 @@ def test_registered_logger_is_called(
   # Logger was indeed called:
   assert logger.as_dataset.call_args_list == [
       mock.call(
-          dataset_name='dummy_dataset',
+          metadata=mock.ANY,
+          name='dummy_dataset',
           config_name='',
           version='1.0.0',
           data_path=mock.ANY,
           split='train',
-          shuffle_files=False,
-          as_supervised=True,
           batch_size=None,
-          decoders=None,
+          shuffle_files=None,
           read_config=read_config,
+          as_supervised=True,
+          decoders=None,
       )
   ]
 

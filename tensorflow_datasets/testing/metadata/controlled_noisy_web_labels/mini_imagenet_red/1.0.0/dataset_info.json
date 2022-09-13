@@ -1,0 +1,120 @@
+{
+  "citation": "@inproceedings{jiang2020beyond,\n  title={Beyond synthetic noise: Deep learning on controlled noisy labels},\n  author={Jiang, Lu and Huang, Di and Liu, Mason and Yang, Weilong},\n  booktitle={International Conference on Machine Learning},\n  pages={4804--4815},\n  year={2020},\n  organization={PMLR}\n}",
+  "configName": "mini_imagenet_red",
+  "description": "Controlled Noisy Web Labels is a collection of ~212,000 URLs to images in which\nevery image is carefully annotated by 3-5 labeling professionals by Google Cloud\nData Labeling Service. Using these annotations, it establishes the first\nbenchmark of controlled real-world label noise from the web.\n\nWe provide the Red Mini-ImageNet (real-world web noise) and Blue Mini-ImageNet\nconfigs:\n  - controlled_noisy_web_labels/mini_imagenet_red\n  - controlled_noisy_web_labels/mini_imagenet_blue\n\nEach config contains ten variants with ten noise-levels p from 0% to 80%. The\nvalidation set has clean labels and is shared across all noisy training sets.\nTherefore, each config has the following splits:\n\n  - train_00\n  - train_05\n  - train_10\n  - train_15\n  - train_20\n  - train_30\n  - train_40\n  - train_50\n  - train_60\n  - train_80\n  - validation\n\nThe details for dataset construction and analysis can be found in the paper.\nAll images are resized to 84x84 resolution.",
+  "downloadSize": "1920045",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://google.github.io/controlled-noisy-web-labels/index.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.controlled_noisy_web_labels.controlled_noisy_web_labels",
+  "name": "controlled_noisy_web_labels",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "12411246",
+      "shardLengths": [
+        "5000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_00",
+      "numBytes": "123613279",
+      "shardLengths": [
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_05",
+      "numBytes": "124121854",
+      "shardLengths": [
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_10",
+      "numBytes": "124686024",
+      "shardLengths": [
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_15",
+      "numBytes": "125247610",
+      "shardLengths": [
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_20",
+      "numBytes": "125809336",
+      "shardLengths": [
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_30",
+      "numBytes": "126836989",
+      "shardLengths": [
+        "49985"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_40",
+      "numBytes": "128082809",
+      "shardLengths": [
+        "50010"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_50",
+      "numBytes": "129094581",
+      "shardLengths": [
+        "49962"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_60",
+      "numBytes": "130215201",
+      "shardLengths": [
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train_80",
+      "numBytes": "132608603",
+      "shardLengths": [
+        "50008"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "1.0.0"
+}

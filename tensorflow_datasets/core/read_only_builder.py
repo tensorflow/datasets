@@ -21,15 +21,16 @@ from typing import Any, List, Optional, Tuple, Type
 
 from etils import epath
 import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import dataset_info_pb2
+from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import version as version_lib
 
@@ -38,6 +39,7 @@ class ReadOnlyBuilder(
     dataset_builder.FileReaderBuilder, skip_registration=True):
   """Generic DatasetBuilder loading from a directory."""
 
+  @tfds_logging.builder_init()
   def __init__(self,
                builder_dir: epath.PathLike,
                *,
@@ -215,6 +217,7 @@ def builder_from_metadata(
   return ReadOnlyBuilder(builder_dir=builder_dir, info_proto=info_proto)
 
 
+@error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def builder_from_files(
     name: str,
     **builder_kwargs: Any,
@@ -287,11 +290,22 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   # * custom DatasetBuilder.__init__ kwargs
   if (name.namespace or version == 'experimental_latest' or
       isinstance(config, dataset_builder.BuilderConfig) or builder_kwargs):
+    error_msgs = ['Builder cannot be loaded from files if it uses:']
+    if name.namespace:
+      error_msgs.append(f'* namespaces (here, {name.namespace} is used)')
+    if version == 'experimental_latest':
+      error_msgs.append('* `experimental_latest` as requested version.')
+    if isinstance(config, dataset_builder.BuilderConfig):
+      error_msgs.append('* config objects (rather than `str`).')
+    if builder_kwargs:
+      error_msgs.append('* custom DatasetBuilder.__init__ kwargs.')
+    error_utils.add_context('\t'.join(error_msgs))
     return None
 
   # Search the dataset across all registered data_dirs
   all_builder_dirs = []
-  for current_data_dir in file_utils.list_data_dirs(given_data_dir=data_dir):
+  all_data_dirs = file_utils.list_data_dirs(given_data_dir=data_dir)
+  for current_data_dir in all_data_dirs:
     builder_dir = _find_builder_dir_single_dir(
         name.name,
         data_dir=current_data_dir,
@@ -300,12 +314,17 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
     )
     if builder_dir:
       all_builder_dirs.append(builder_dir)
+
   if not all_builder_dirs:
+    all_dirs_str = '\n\t- '.join([''] + [str(dir) for dir in all_data_dirs])
+    error_msg = f'No registered data_dirs were found in:{all_dirs_str}\n'
+    error_utils.add_context(error_msg)
     return None
+
   elif len(all_builder_dirs) != 1:
     # Rather than raising error every time, we could potentially be smarter
     # and load the most recent version across all files, but should be
-    # carefull when partial version is requested ('my_dataset:3.*.*').
+    # careful when partial version is requested ('my_dataset:3.*.*').
     # Could add some `MultiDataDirManager` API:
     # ```
     # manager = MultiDataDirManager(given_data_dir=data_dir)
@@ -320,46 +339,72 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> Optional[str]:
   return all_builder_dirs[0]
 
 
+def _get_dataset_dir(
+    builder_dir: epath.Path,
+    *,
+    version_str: str,
+    config_name: Optional[str] = None,
+) -> epath.Path:
+  """Returns the path for the given dataset, config and version."""
+  dataset_dir = builder_dir
+  if config_name:
+    dataset_dir = dataset_dir / config_name
+  return dataset_dir / version_str
+
+
+def _contains_dataset(dataset_dir: epath.PathLike) -> bool:
+  try:
+    return tf.io.gfile.exists(feature_lib.make_config_path(dataset_dir))
+  except (OSError, tf.errors.PermissionDeniedError):
+    return False
+
+
 def _find_builder_dir_single_dir(
     builder_name: str,
     *,
-    data_dir: str,
+    data_dir: epath.PathLike,
     config_name: Optional[str] = None,
     version_str: Optional[str] = None,
 ) -> Optional[str]:
   """Same as `find_builder_dir` but requires explicit dir."""
-  # Construct the `ds_name/config/` path
+
   builder_dir = epath.Path(data_dir) / builder_name
+
+  # If the version is specified, check if the dataset dir exists and return.
+  if (version_str and version_lib.Version.is_valid(version_str)):
+    dataset_dir = _get_dataset_dir(
+        builder_dir=builder_dir,
+        version_str=version_str,
+        config_name=config_name)
+    if _contains_dataset(dataset_dir):
+      return os.fspath(dataset_dir)
+
+  # If no config_name or an empty string was given, we try to find the default
+  # config and load the dataset for that.
   if not config_name:
-    # If the BuilderConfig is not specified:
-    # * Either the dataset doesn't have a config
-    # * Either the default config should be used
-    # Currently, in order to infer the default config, we are still relying on
-    # the code.
-    # TODO(tfds): How to avoid code dependency and automatically infer the
-    # config existence and name?
-    config_name = _get_default_config_name(builder_dir, builder_name)
+    default_config_name = _get_default_config_name(
+        builder_dir=builder_dir, name=builder_name)
+    if default_config_name:
+      return _find_builder_dir_single_dir(
+          builder_name=builder_name,
+          data_dir=data_dir,
+          config_name=default_config_name,
+          version_str=version_str)
 
-  # If has config (explicitly given or default config), append it to the path
-  if config_name:
-    builder_dir = builder_dir / config_name
+  # Dataset wasn't found, try to find a suitable available version.
+  found_version_str = _get_version_str(
+      builder_dir, config_name=config_name, requested_version=version_str)
+  if found_version_str and found_version_str != version_str:
+    return _find_builder_dir_single_dir(
+        builder_name=builder_name,
+        data_dir=data_dir,
+        config_name=config_name,
+        version_str=found_version_str)
 
-  # Extract the version
-  version_str = _get_version_str(builder_dir, requested_version=version_str)
-
-  if not version_str:  # Version not given or found
-    return None
-
-  builder_dir = builder_dir / version_str
-
-  try:
-    # Backward compatibility, in order to be a valid ReadOnlyBuilder, the folder
-    # has to contain the feature configuration.
-    builder_dir = os.fspath(builder_dir)
-    if tf.io.gfile.exists(feature_lib.make_config_path(builder_dir)):
-      return str(builder_dir)
-  except tf.errors.PermissionDeniedError:
-    return None
+  # If no builder found, we populate the error_context with useful information
+  # and return None.
+  error_utils.add_context(('No builder could be found in the directory: '
+                           f'{builder_name} for the builder: {builder_name}.'))
   return None
 
 
@@ -375,12 +420,15 @@ def _get_default_config_name(
     # being 2 differents datasets)
     cls = registered.imported_builder_cls(name)
     cls = typing.cast(Type[dataset_builder.DatasetBuilder], cls)
-  except (registered.DatasetNotFoundError, PermissionError):
+  except registered.DatasetNotFoundError:
     pass
+  except PermissionError as e:
+    error_msg = f'Permission error when accessing: {builder_dir}: {e}'
+    error_utils.add_context(error_msg)
   else:
     # If code found, return the default config
     if cls.BUILDER_CONFIGS:
-      return cls.BUILDER_CONFIGS[0].name
+      return cls.default_builder_config.name
 
   # Otherwise, try to load default config from common metadata
   return dataset_builder.load_default_config_name(epath.Path(builder_dir))
@@ -389,24 +437,36 @@ def _get_default_config_name(
 def _get_version_str(
     builder_dir: epath.Path,
     *,
+    config_name: Optional[str] = None,
     requested_version: Optional[str] = None,
 ) -> Optional[str]:
   """Returns the version name found in the directory.
 
   Args:
     builder_dir: Directory containing the versions (`builder_dir/1.0.0/`,...)
+    config_name: Optional name of the config that should be used. Will be
+      ignored if it is an empty string.
     requested_version: Optional version to search (e.g. `1.0.0`, `2.*.*`,...)
 
   Returns:
     version_str: The version directory name found in `builder_dir`.
   """
+  if config_name:
+    builder_dir = builder_dir / config_name
   all_versions = version_lib.list_all_versions(os.fspath(builder_dir))
-  # Version not given, using the last one.
+  # Version not given, using the latest one.
   if not requested_version and all_versions:
     return str(all_versions[-1])
-  # Version given, return the biggest version matching `requested_version`
+  # Version given, return the highest version matching `requested_version`.
   for v in reversed(all_versions):
     if v.match(requested_version):
       return str(v)
-  # Directory don't has version, or requested_version don't match
+  # Directory doesn't have version, or requested_version doesn't match
+  if requested_version:
+    error_msg = (f'No version matching the requested {requested_version} was '
+                 f'found in the builder directory: {builder_dir}.')
+  else:
+    error_msg = (f'The builder directory {builder_dir} doesn\'t contain any '
+                 'versions.')
+  error_utils.add_context(error_msg)
   return None

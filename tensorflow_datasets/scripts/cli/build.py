@@ -59,6 +59,12 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       help='Delete pre-existing dataset if it exists.',
   )
   debug_group.add_argument(
+      '--fail_if_exists',
+      action='store_true',
+      default=False,
+      help='Fails the program if there is a pre-existing dataset.',
+  )
+  debug_group.add_argument(
       '--max_examples_per_split',
       type=int,
       nargs='?',
@@ -76,8 +82,9 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       type=tfds.core.Path,
       # Should match tfds.core.constant.DATA_DIR !!
       default=tfds.core.Path(
-          os.environ.get('TFDS_DATA_DIR',
-                         os.path.join('~', 'tensorflow_datasets'))),
+          os.environ.get(
+              'TFDS_DATA_DIR',
+              os.path.join(os.path.expanduser('~'), 'tensorflow_datasets'))),
       help='Where to place datasets. Default to '
       '`~/tensorflow_datasets/` or `TFDS_DATA_DIR` environement variable.',
   )
@@ -197,7 +204,10 @@ def _make_builders(
     ds_to_build: str,
 ) -> Iterator[tfds.core.DatasetBuilder]:
   """Yields builders to generate."""
-  builder_cls, builder_kwargs = _get_builder_cls(ds_to_build)
+  builder_cls, builder_kwargs = _get_builder_cls(
+      ds_to_build,
+      has_imports=bool(args.imports),
+  )
 
   # Eventually overwrite version
   if args.experimental_latest_version:
@@ -221,6 +231,7 @@ def _make_builders(
       _make_builder,
       builder_cls,
       overwrite=args.overwrite,
+      fail_if_exists=args.fail_if_exists,
       data_dir=args.data_dir,
       **builder_kwargs,
   )
@@ -235,24 +246,31 @@ def _make_builders(
 
 
 def _get_builder_cls(
-    ds_to_build: str,) -> Tuple[Type[tfds.core.DatasetBuilder], Dict[str, str]]:
+    ds_to_build: str,
+    *,
+    has_imports: bool,
+) -> Tuple[Type[tfds.core.DatasetBuilder], Dict[str, str]]:
   """Infer the builder class to build.
 
   Args:
     ds_to_build: Dataset argument.
+    has_imports: Whether `--imports` was passed
 
   Returns:
     builder_cls: The dataset class to download and prepare
     kwargs:
   """
   # 1st case: Requested dataset is a path to `.py` script
-  path = _search_script_path(ds_to_build)
-  if path is not None:
-    logging.info(f'Loading dataset {ds_to_build} from path: {path}')
-    # Dynamically load user dataset script
-    with tfds.core.utils.add_sys_path(path.parent):
-      builder_cls = tfds.core.community.builder_cls_from_module(path.stem)
-    return builder_cls, {}
+  # When `--imports=` is set, it means the user expects the dataset to be
+  # registered through the `imports` and not locally.
+  if not has_imports:
+    path = _search_script_path(ds_to_build)
+    if path is not None:
+      logging.info(f'Loading dataset {ds_to_build} from path: {path}')
+      # Dynamically load user dataset script
+      with tfds.core.utils.add_sys_path(path.parent):
+        builder_cls = tfds.core.community.builder_cls_from_module(path.stem)
+      return builder_cls, {}
 
   # 2nd case: Dataset is registered through imports.
 
@@ -317,11 +335,16 @@ def _validate_script_path(path: tfds.core.Path,) -> Optional[tfds.core.Path]:
 def _make_builder(
     builder_cls: Type[tfds.core.DatasetBuilder],
     overwrite: bool,
+    fail_if_exists: bool,
     **builder_kwargs,
 ) -> tfds.core.DatasetBuilder:
   """Builder factory, eventually deleting pre-existing dataset."""
   builder = builder_cls(**builder_kwargs)  # pytype: disable=not-instantiable
-  if overwrite and builder.data_path.exists():
+  data_exists = builder.data_path.exists()
+  if fail_if_exists and data_exists:
+    raise RuntimeError('The `fail_if_exists` flag was True and '
+                       f'the data already exists in {builder.data_path}')
+  if overwrite and data_exists:
     builder.data_path.rmtree()  # Delete pre-existing data
     # Re-create the builder with clean state
     builder = builder_cls(**builder_kwargs)  # pytype: disable=not-instantiable

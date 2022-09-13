@@ -7,7 +7,7 @@ motivated community.
 
 *   If you're new with TFDS, the easiest way to get started is to implement one
     of our
-    [requested dataset](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc),
+    [requested datasets](https://github.com/tensorflow/datasets/issues?q=is%3Aissue+is%3Aopen+label%3A%22dataset+request%22+sort%3Areactions-%2B1-desc),
     focusing on the most requested ones.
     [Follow our guide](https://www.tensorflow.org/datasets/add_dataset) for
     instructions.
@@ -166,7 +166,7 @@ matplotlib, scipy, six,...). You can read the
 if you're not familiar with pytest.
 
 Tests for DatasetBuilders are special and are documented in the
-[guide to add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md#test-your-dataset).
+[guide to add a dataset](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md#test-your-dataset).
 
 ### Send the PR for reviews!
 

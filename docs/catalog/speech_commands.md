@@ -12,6 +12,11 @@
 # `speech_commands`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 An audio dataset of spoken words designed to help train and evaluate keyword
@@ -34,7 +39,9 @@ for the validation set.
 
 *   **Versions**:
 
-    *   **`0.0.2`** (default): No release notes.
+    *   **`0.0.3`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Fix audio data type with dtype=tf.int16.
 
 *   **Download size**: `2.37 GiB`
 
@@ -56,7 +63,7 @@ Split          | Examples
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int64),
+    'audio': Audio(shape=(None,), dtype=tf.int16),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
 })
 ```
@@ -66,7 +73,7 @@ FeaturesDict({
 Feature | Class        | Shape   | Dtype    | Description
 :------ | :----------- | :------ | :------- | :----------
         | FeaturesDict |         |          |
-audio   | Audio        | (None,) | tf.int64 |
+audio   | Audio        | (None,) | tf.int16 |
 label   | ClassLabel   |         | tf.int64 |
 
 *   **Supervised keys** (See
@@ -87,7 +94,7 @@ label   | ClassLabel   |         | tf.int64 |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/speech_commands-0.0.2.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/speech_commands-0.0.3.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

@@ -27,6 +27,7 @@ from absl import logging
 
 from etils import epath
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import cache
@@ -51,7 +52,7 @@ class DatasetPackage:
     name: Dataset name
     source: Source that contains the source code (e.g. `github://...`)
   """
-  name: utils.DatasetName
+  name: naming.DatasetName
   source: dataset_sources_lib.DatasetSource
   # Ideally, we should also save the version so `tfds.load('ns:ds/1.0.0')`
   # fetch a specific version (e.g. at an older commit).
@@ -60,7 +61,7 @@ class DatasetPackage:
   def from_json(cls, data: utils.Json) -> 'DatasetPackage':
     """Factory which creates the cls from json."""
     return cls(
-        name=utils.DatasetName(namespace_name=data['name']),
+        name=naming.DatasetName(namespace_name=data['name']),
         source=dataset_sources_lib.DatasetSource.from_json(data['source']),
     )
 
@@ -106,7 +107,7 @@ class _InstalledPackage:
     """Factory which creates the cls from json."""
     return cls(
         package=DatasetPackage.from_json(data['package']),
-        # TODO(py3.7): Should use `datetime.fromisoformat`
+        # TODO(tfds): py3.7 Should use `datetime.fromisoformat`
         instalation_date=datetime.datetime.strptime(data['instalation_date'],
                                                     '%Y-%m-%dT%H:%M:%S.%f'),
         hash=data['hash'],
@@ -121,7 +122,7 @@ class _InstalledPackage:
     }
 
 
-# TODO(py3.9): Should be `UserDict[utils.DatasetName, _DatasetPackage]`
+# TODO(tfds): py3.9 Should be `UserDict[naming.DatasetName, _DatasetPackage]`
 class _PackageIndex(collections.UserDict):
   """Package index.
 
@@ -234,7 +235,7 @@ class PackageRegister(register_base.BaseRegister):
 
   def builder_cls(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
   ) -> Type[dataset_builder.DatasetBuilder]:
     """Returns the builder class."""
     # Download the dataset generation code, or reuse the cache
@@ -249,7 +250,7 @@ class PackageRegister(register_base.BaseRegister):
 
   def builder(
       self,
-      name: utils.DatasetName,
+      name: naming.DatasetName,
       **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
@@ -296,7 +297,7 @@ def list_ds_packages_for_namespace(
     source = get_dataset_source(ds_path)
     if source:
       pkg = DatasetPackage(
-          name=utils.DatasetName(namespace=namespace, name=ds_path.name),
+          name=naming.DatasetName(namespace=namespace, name=ds_path.name),
           source=source,
       )
       all_packages.append(pkg)
@@ -344,7 +345,7 @@ def get_dataset_source(
 
 
 def _download_or_reuse_cache(
-    name: utils.DatasetName,
+    name: naming.DatasetName,
     package_index: _PackageIndex,
 ) -> _InstalledPackage:
   """Downloads the dataset generation source code.
@@ -394,7 +395,7 @@ def _download_or_reuse_cache(
 
 
 def _get_last_installed_version(
-    name: utils.DatasetName,) -> Optional[_InstalledPackage]:
+    name: naming.DatasetName,) -> Optional[_InstalledPackage]:
   """Checks whether the datasets is installed locally and returns it."""
   root_dir = (
       cache.module_path() / _IMPORT_MODULE_NAME / name.namespace / name.name)

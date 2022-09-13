@@ -36,8 +36,7 @@ _DESCRIPTION = (
 
 _LABELS_FNAME = "image_classification/categories_places365.txt"
 
-_CITATION = """\
-
+_CITATION = """
  @article{zhou2017places,
   title={Places: A 10 million Image Database for Scene Recognition},
   author={Zhou, Bolei and Lapedriza, Agata and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},
@@ -45,14 +44,16 @@ _CITATION = """\
   year={2017},
   publisher={IEEE}
 }
-
 """
 
 
 class Places365Small(tfds.core.GeneratorBasedBuilder):
   """Places365 Images dataset."""
 
-  VERSION = tfds.core.Version("2.0.0")
+  VERSION = tfds.core.Version("2.1.0")
+  RELEASE_NOTES = {
+      "2.1.0": "Changed the example keys in order to ease integration with KYD."
+  }
 
   def _info(self):
     names_file = tfds.core.tfds_path(_LABELS_FNAME)
@@ -62,8 +63,9 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(names_file=names_file),
+            "filename": tfds.features.Text(),
         }),
-        supervised_keys=("image", "label"),
+        supervised_keys=("image", "label", "filename"),
         homepage="http://places2.csail.mit.edu/",
         citation=_CITATION)
 
@@ -137,4 +139,4 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
       chop = len(path_prefix) if split_name == "train" else len(path_prefix) + 1
       key = fname[chop:]
       class_id = file_to_class[key]
-      yield fname, {"image": fobj, "label": class_id}
+      yield fname, {"image": fobj, "label": class_id, "filename": fname}

@@ -41,13 +41,13 @@ year = "2021"
 _URLS = {
     'train_images': [
         tfds.download.Resource(  # pylint:disable=g-complex-comprehension
-            url='https://zenodo.org/record/6421136/files/PASS.%s.tar' % i_,
+            url='https://zenodo.org/record/6615455/files/PASS.%s.tar' % i_,
             extract_method=tfds.download.ExtractMethod.TAR)
         for i_ in '0123456789'
     ],
     'meta_data':
         tfds.download.Resource(
-            url='https://zenodo.org/record/6421136/files/pass_metadata.csv')
+            url='https://zenodo.org/record/6615455/files/pass_metadata.csv')
 }
 
 

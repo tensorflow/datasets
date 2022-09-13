@@ -1,0 +1,51 @@
+{
+  "citation": "@article{kryscinski2021booksum,\n      title={BookSum: A Collection of Datasets for Long-form Narrative Summarization},\n      author={Wojciech Kry{'s}ci{'n}ski and Nazneen Rajani and Divyansh Agarwal and Caiming Xiong and Dragomir Radev},\n      year={2021},\n      eprint={2105.08209},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}",
+  "configDescription": "Book-level summarization",
+  "configName": "book",
+  "description": "BookSum: A Collection of Datasets for Long-form Narrative Summarization\n\nThis implementation currently only supports book and chapter summaries.\n\nGitHub: https://github.com/salesforce/booksum",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/salesforce/booksum"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.summarization.booksum.booksum",
+  "name": "booksum",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "164276234",
+      "shardLengths": [
+        "156",
+        "156"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "23581493",
+      "shardLengths": [
+        "45"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "31094563",
+      "shardLengths": [
+        "46"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "document"
+        },
+        {
+          "featureKey": "summary"
+        }
+      ]
+    }
+  },
+  "version": "1.0.0"
+}

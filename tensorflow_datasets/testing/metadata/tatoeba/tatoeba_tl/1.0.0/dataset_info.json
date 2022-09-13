@@ -1,0 +1,28 @@
+{
+  "citation": "@article{tatoeba,\n          title={Massively Multilingual Sentence Embeddings for Zero-Shot\n                   Cross-Lingual Transfer and Beyond},\n          author={Mikel, Artetxe and Holger, Schwenk,},\n          journal={arXiv:1812.10464v2},\n          year={2018}\n}\n\n@InProceedings{TIEDEMANN12.463,\n  author = {J{\"o}rg}rg Tiedemann},\n  title = {Parallel Data, Tools and Interfaces in OPUS},\n  booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12)},\n  year = {2012},\n  month = {may},\n  date = {23-25},\n  address = {Istanbul, Turkey},\n  editor = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and Jan Odijk and Stelios Piperidis},\n  publisher = {European Language Resources Association (ELRA)},\n  isbn = {978-2-9517408-7-7},\n  language = {english}\n}",
+  "configName": "tatoeba_tl",
+  "description": "This data is extracted from the Tatoeba corpus, dated Saturday 2018/11/17.\n\nFor each languages, we have selected 1000 English sentences and their\ntranslations, if available. Please check this paper for a description of the\nlanguages, their families and  scripts as well as baseline results.\n\nPlease note that the English sentences are not identical for all language pairs.\nThis means that the results are not directly comparable across languages.",
+  "downloadSize": "68138",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "http://opus.nlpl.eu/Tatoeba.php"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.translate.tatoeba.tatoeba",
+  "name": "tatoeba",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "175142",
+      "shardLengths": [
+        "1000"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

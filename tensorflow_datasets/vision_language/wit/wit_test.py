@@ -24,9 +24,15 @@ class WitTest(tfds.testing.DatasetBuilderTestCase):
   DATASET_CLASS = wit.Wit
   SPLITS = {
       'train': 3,
+      'val': 1,
+      'test': 1,
   }
 
-  DL_EXTRACT_RESULT = {'wit': ['train-00000-of-00009.tsv']}
+  DL_EXTRACT_RESULT = {
+      'train': ['train-00000-of-00009.tsv'],
+      'val': ['val-00000-of-00005.tsv'],
+      'test': ['test-00000-of-00005.tsv']
+  }
 
 
 if __name__ == '__main__':

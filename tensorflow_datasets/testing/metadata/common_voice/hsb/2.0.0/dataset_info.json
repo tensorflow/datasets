@@ -1,0 +1,109 @@
+{
+  "configDescription": "Language Code: hsb",
+  "configName": "hsb",
+  "description": "Mozilla Common Voice Dataset",
+  "downloadSize": "79362060",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://voice.mozilla.org/en/datasets"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.audio.commonvoice",
+  "name": "common_voice",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Updated to corpus 6.1 from 2020-12-11."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1816059378",
+      "shardLengths": [
+        "50",
+        "51",
+        "51",
+        "50",
+        "50",
+        "51",
+        "51",
+        "50",
+        "50",
+        "51",
+        "51",
+        "50",
+        "50",
+        "51",
+        "51",
+        "50"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "861828283",
+      "shardLengths": [
+        "48",
+        "49",
+        "48",
+        "49",
+        "48",
+        "48",
+        "49",
+        "48"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "3045748055",
+      "shardLengths": [
+        "43",
+        "42",
+        "43",
+        "43",
+        "43",
+        "42",
+        "43",
+        "43",
+        "42",
+        "43",
+        "43",
+        "43",
+        "42",
+        "43",
+        "43",
+        "43",
+        "42",
+        "43",
+        "43",
+        "42",
+        "43",
+        "43",
+        "43",
+        "42",
+        "43",
+        "43",
+        "42",
+        "43",
+        "43",
+        "43",
+        "42",
+        "43"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "367860394",
+      "shardLengths": [
+        "43",
+        "43",
+        "43",
+        "43"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

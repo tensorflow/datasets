@@ -443,7 +443,9 @@ class FeatureDocumentationSection(Section):
     return Block('\n'.join(
         [col_sep.join(header), col_sep.join(header_line)] + feature_rows))
 
-  def content(self, builder: tfds.core.DatasetBuilder) -> Block:
+  def content(self, builder: tfds.core.DatasetBuilder) -> str:
+    if builder.info is None or builder.info.features is None:
+      return ''
     return self._format_block(builder.info.features.catalog_documentation())
 
 
@@ -598,7 +600,7 @@ def _display_all_builders(
       nightly_str = ' ' + nightly_doc_util.icon
     else:
       nightly_str = ''
-    ds_name = tfds.core.utils.DatasetName(
+    ds_name = tfds.core.naming.DatasetName(
         namespace=namespace,
         name=builder.name,
     )
@@ -617,7 +619,7 @@ def _display_dataset_heading(
     namespace: Optional[str],
     builder: tfds.core.DatasetBuilder,
 ) -> str:
-  ds_name = tfds.core.utils.DatasetName(namespace=namespace, name=builder.name)
+  ds_name = tfds.core.naming.DatasetName(namespace=namespace, name=builder.name)
   return f"""
       # `{ds_name}`
 

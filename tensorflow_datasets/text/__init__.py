@@ -27,6 +27,7 @@ from tensorflow_datasets.text.cfq import CFQ
 from tensorflow_datasets.text.cfq import CFQConfig
 from tensorflow_datasets.text.civil_comments import CivilComments
 from tensorflow_datasets.text.clinc_oos import ClincOOS
+from tensorflow_datasets.text.conll2003 import Conll2003
 from tensorflow_datasets.text.cos_e import CosE
 from tensorflow_datasets.text.definite_pronoun_resolution import DefinitePronounResolution
 from tensorflow_datasets.text.docnli import DocNLI
@@ -79,7 +80,10 @@ from tensorflow_datasets.text.super_glue import SuperGlue
 from tensorflow_datasets.text.tiny_shakespeare import TinyShakespeare
 from tensorflow_datasets.text.trec import Trec
 from tensorflow_datasets.text.unifiedqa import UnifiedQA
+from tensorflow_datasets.text.universal_dependencies import UniversalDependencies
+from tensorflow_datasets.text.userlibri_lm_data import UserLibriText
 from tensorflow_datasets.text.wiki40b import Wiki40b
+from tensorflow_datasets.text.wiki_dialog import WikiDialog
 from tensorflow_datasets.text.wikiann import Wikiann
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.wikipedia_toxicity_subtypes import WikipediaToxicitySubtypes
@@ -88,5 +92,6 @@ from tensorflow_datasets.text.wordnet import Wordnet
 from tensorflow_datasets.text.wsc273 import Wsc273
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.xtreme_pawsx import XtremePawsx
+from tensorflow_datasets.text.xtreme_pos import XtremePos
 from tensorflow_datasets.text.xtreme_xnli import XtremeXnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews

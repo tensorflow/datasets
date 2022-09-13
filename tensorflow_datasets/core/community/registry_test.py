@@ -23,8 +23,8 @@ from unittest import mock
 import pytest
 
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_package
 from tensorflow_datasets.core.community import register_path
 from tensorflow_datasets.core.community import registry as registry_lib
@@ -70,15 +70,15 @@ def dummy_register():
 
 
 def test_register_builder(dummy_register):  # pylint: disable=redefined-outer-name
-  builder = dummy_register.builder(utils.DatasetName('kaggle:ds0'))
+  builder = dummy_register.builder(naming.DatasetName('kaggle:ds0'))
   assert 'kaggle' in builder.data_path.parts
 
   # Same dataset name can be loaded from different namespace
-  builder = dummy_register.builder(utils.DatasetName('mlds:ds0'))
+  builder = dummy_register.builder(naming.DatasetName('mlds:ds0'))
   assert 'mlds' in builder.data_path.parts
 
   builder = dummy_register.builder(
-      utils.DatasetName('mlds:ds0'),
+      naming.DatasetName('mlds:ds0'),
       data_dir=None,  # data_dir can be passed only if None
       version='1.0.0',
   )
@@ -86,14 +86,14 @@ def test_register_builder(dummy_register):  # pylint: disable=redefined-outer-na
 
   with pytest.raises(ValueError, match='`data_dir` cannot be set for'):
     dummy_register.builder(
-        utils.DatasetName('mlds:ds0'), data_dir='/path/to/data_dir')
+        naming.DatasetName('mlds:ds0'), data_dir='/path/to/data_dir')
 
   with pytest.raises(
       registered.DatasetNotFoundError, match='Namespace .* not found.'):
-    dummy_register.builder(utils.DatasetName('non-existing-namespace:ds0'))
+    dummy_register.builder(naming.DatasetName('non-existing-namespace:ds0'))
 
   with pytest.raises(registered.DatasetNotFoundError):
-    dummy_register.builder(utils.DatasetName('other:ds0'))
+    dummy_register.builder(naming.DatasetName('other:ds0'))
 
 
 def test_register_path_list_builders(dummy_register):  # pylint: disable=redefined-outer-name

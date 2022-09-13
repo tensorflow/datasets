@@ -1,0 +1,52 @@
+{
+  "citation": "@inproceedings{\n    thakur2021beir,\n    title={{BEIR}: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models},\n    author={Nandan Thakur and Nils Reimers and Andreas R{\"u}ckl{'e} and Abhishek Srivastava and Iryna Gurevych},\n    booktitle={Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 2)},\n    year={2021},\n    url={https://openreview.net/forum?id=wCu6T5xFjeJ}\n}",
+  "configName": "scifact",
+  "description": "BEIR is a heterogeneous benchmark containing diverse IR tasks. It also provides\na common and easy framework for evaluation of your NLP-based retrieval models\nwithin the benchmark.",
+  "downloadSize": "2816079",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/beir-cellar/beir"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.beir.beir",
+  "name": "beir",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "query",
+      "numBytes": "328485",
+      "shardLengths": [
+        "1109"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "passage",
+      "numBytes": "8655977",
+      "shardLengths": [
+        "5183"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1111170",
+      "shardLengths": [
+        "565"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "553850",
+      "shardLengths": [
+        "283"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

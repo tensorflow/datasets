@@ -12,10 +12,6 @@
 # `hillstrom`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 This dataset contains 64,000 customers who last purchased within twelve months.

@@ -44,6 +44,10 @@ Url = Union[str, resource_lib.Resource]
 ExtractPath = Union[epath.PathLike, resource_lib.Resource]
 
 
+def get_downloader(*args: Any, **kwargs: Any):
+  return downloader.get_downloader(*args, **kwargs)
+
+
 class NonMatchingChecksumError(Exception):
   """The downloaded file doesn't have expected checksum."""
 

@@ -1,0 +1,42 @@
+{
+  "citation": "@article{pang2021quality,\n  title={{QuALITY}: Question Answering with Long Input Texts, Yes!},\n  author={Pang, Richard Yuanzhe and Parrish, Alicia and Joshi, Nitish and Nangia, Nikita and Phang, Jason and Chen, Angelica and Padmakumar, Vishakh and Ma, Johnny and Thompson, Jana and He, He and Bowman, Samuel R.},\n  journal={arXiv preprint arXiv:2112.08608},\n  year={2021}\n}",
+  "configDescription": "Stripped of HTML.",
+  "configName": "stripped",
+  "description": "QuALITY, a multiple-choice, long-reading comprehension dataset.\n\nWe provide only the raw version.",
+  "downloadSize": "18101512",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/nyu-mll/quality"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.quality.quality",
+  "name": "quality",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "8477283",
+      "shardLengths": [
+        "300"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "6838720",
+      "shardLengths": [
+        "232"
+      ]
+    },
+    {
+      "name": "dev",
+      "numBytes": "6425152",
+      "shardLengths": [
+        "230"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

@@ -22,22 +22,24 @@ tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
 from tensorflow_datasets import typing
-from tensorflow_datasets.core import folder_dataset
 from tensorflow_datasets.core import beam_utils as beam
-from tensorflow_datasets.core import download
+from tensorflow_datasets.core import dataset_builders
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import deprecated
+from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import folder_dataset
 from tensorflow_datasets.core import visualization
 from tensorflow_datasets.core.as_dataframe import as_dataframe
-from tensorflow_datasets.core.folder_dataset import ImageFolder
-from tensorflow_datasets.core.folder_dataset import TranslateFolder
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode
+from tensorflow_datasets.core.folder_dataset import ImageFolder
+from tensorflow_datasets.core.folder_dataset import TranslateFolder
 from tensorflow_datasets.core.load import builder
 from tensorflow_datasets.core.load import builder_cls
 from tensorflow_datasets.core.load import list_builders
 from tensorflow_datasets.core.load import load
+from tensorflow_datasets.core.load import dataset_collection
 from tensorflow_datasets.core.read_only_builder import builder_from_directory
 from tensorflow_datasets.core.read_only_builder import builder_from_directories
 from tensorflow_datasets.core.splits import Split
@@ -65,20 +67,22 @@ __all__ = [
     "as_numpy",
     "beam",
     "benchmark",
-    "core",
-    "deprecated",
-    "folder_dataset",
     "builder",
     "builder_cls",
     "builder_from_directory",
     "builder_from_directories",
+    "core",
+    "dataset_builders",
+    "dataset_collection",
     "decode",
+    "deprecated",
     "disable_progress_bar",
-    "enable_progress_bar",
     "display_progress_bar",
     "download",
+    "enable_progress_bar",
     "even_splits",
     "features",
+    "folder_dataset",
     "GenerateMode",
     "ImageFolder",
     "is_dataset_on_gcs",
