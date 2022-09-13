@@ -21,6 +21,21 @@ import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
+@article{DBLP:journals/corr/MohantyHS16,
+  author    = {Sharada Prasanna Mohanty and
+               David P. Hughes and
+               Marcel Salath{\'{e}}},
+  title     = {Using Deep Learning for Image-Based Plant Disease Detection},
+  journal   = {CoRR},
+  volume    = {abs/1604.03169},
+  year      = {2016},
+  url       = {http://arxiv.org/abs/1604.03169},
+  eprinttype = {arXiv},
+  eprint    = {1604.03169},
+  timestamp = {Mon, 13 Aug 2018 16:48:12 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/MohantyHS16.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
 @article{DBLP:journals/corr/HughesS15,
   author    = {David P. Hughes and
                Marcel Salath{\'{e}}},
@@ -49,11 +64,12 @@ used that dataset and republished it. Moreover, we dropped images with
 Background_without_leaves label, because these were not present in the original
 dataset.
 
-Original paper URL: https://arxiv.org/abs/1511.08060
-Dataset URL: https://data.mendeley.com/datasets/tywbtsjrjv/1
+Original paper URL: https://www.frontiersin.org/articles/10.3389/fpls.2016.01419/full
+Original arxiv release paper URL: https://arxiv.org/abs/1511.08060
+Dataset URL: https://github.com/spMohanty/PlantVillage-Dataset
 """
 
-_URL = "https://data.mendeley.com/public-files/datasets/tywbtsjrjv/files/d5652a28-c1d8-4b76-97f3-72fb80f94efc/file_downloaded"
+_URL = "https://github.com/spMohanty/PlantVillage-Dataset"
 _LABELS = [
     "Apple___Apple_scab",
     "Apple___Black_rot",
