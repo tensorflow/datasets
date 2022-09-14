@@ -20,7 +20,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import features as feature_lib
 from tensorflow_datasets.core import lazy_imports_lib
-from tensorflow_datasets.core.community import huggingface_dataset_builder
+from tensorflow_datasets.core.dataset_builders import huggingface_dataset_builder
 
 
 def test_convert_dataset_name():
