@@ -57,9 +57,11 @@ class Brwac(tfds.core.GeneratorBasedBuilder):
       '1.0.0': 'Initial release.',
   }
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
-    Fill the form in https://www.inf.ufrgs.br/pln/wiki/index.php?title=BrWaC in
-    order to get download access. Then download brwac.vert.gz (~7 GB), extract
-    the file and put brwac.vert (~22 GB after decompression) in manual_dir.
+    Fill out the form at https://www.inf.ufrgs.br/pln/wiki/index.php?title=BrWaC
+    and wait for the email with download instructions. On the email, download
+    the file by clicking in the link with the description `1) Basic VERT corpus
+    file (4.45GB as .7z)`. Extract this file and place its output
+    (`brwac.vert`, approx. 22GB in size) in `manual_dir/`.
   """
 
   def _info(self) -> tfds.core.DatasetInfo:
