@@ -19,6 +19,7 @@ from tensorflow_datasets.core.dataset_builders.conll.conll_dataset_builder impor
 from tensorflow_datasets.core.dataset_builders.conll.conll_dataset_builder import ConllDatasetBuilder
 from tensorflow_datasets.core.dataset_builders.conll.conllu_dataset_builder import ConllUBuilderConfig
 from tensorflow_datasets.core.dataset_builders.conll.conllu_dataset_builder import ConllUDatasetBuilder
+from tensorflow_datasets.core.dataset_builders.huggingface_dataset_builder import HuggingfaceDatasetBuilder
 from tensorflow_datasets.core.dataset_builders.tf_data_dataset_builder import TfDataDatasetBasedBuilder
 
 __all__ = [
@@ -26,5 +27,6 @@ __all__ = [
     "ConllDatasetBuilder",
     "ConllUBuilderConfig",
     "ConllUDatasetBuilder",
+    "HuggingfaceDatasetBuilder",
     "TfDataDatasetBasedBuilder",
 ]
