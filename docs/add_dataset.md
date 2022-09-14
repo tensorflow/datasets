@@ -79,8 +79,8 @@ Search for `TODO(my_dataset)` here and modify accordingly.
 
 ### Dataset example
 
-All datasets are implemented as `tfds.core.GeneratorBasedBuilder`, a subclasses
-of `tfds.core.DatasetBuilder` which takes care of most boilerplate. It supports:
+All datasets are implemented subclasses of `tfds.core.DatasetBuilder`, which
+takes care of most boilerplate. It supports:
 
 *   Small/medium datasets which can be generated on a single machine (this
     tutorial).
@@ -88,7 +88,8 @@ of `tfds.core.DatasetBuilder` which takes care of most boilerplate. It supports:
     [Apache Beam](https://beam.apache.org/), see our
     [huge dataset guide](https://www.tensorflow.org/datasets/beam_datasets#implementing_a_beam_dataset))
 
-Here is a minimal example of dataset class:
+Here is a minimal example of a dataset builder that is based on
+`tfds.core.GeneratorBasedBuilder`:
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -130,6 +131,10 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
           'label': 'yes' if img_path.name.startswith('yes_') else 'no',
       }
 ```
+
+Note that, for some specific data formats, we provide ready-to-use
+[dataset builders](https://www.tensorflow.org/datasets/format_specific_dataset_builders)
+to take care of most data processing.
 
 Let's see in detail the 3 abstract methods to overwrite.
 

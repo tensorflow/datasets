@@ -50,6 +50,8 @@ upper_tabs:
         path: /datasets/add_dataset
       - title: Huge datasets (Apache Beam)
         path: /datasets/beam_datasets
+      - title: Format-specific builders
+        path: /datasets/format_specific_dataset_builders
       - title: Contribute to TFDS
         path: /datasets/contribute
       - title: Common gotchas
