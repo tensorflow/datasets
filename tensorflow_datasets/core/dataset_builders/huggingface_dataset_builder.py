@@ -157,6 +157,15 @@ def _convert_example(
   }
 
 
+def _extract_supervised_keys(hf_info):
+  if hf_info.supervised_keys is not None:
+    sk_input = hf_info.supervised_keys.input
+    sk_output = hf_info.supervised_keys.output
+    if sk_input is not None and sk_output is not None:
+      return (sk_input, sk_output)
+  return None
+
+
 class HuggingfaceDatasetBuilder(
     dataset_builder.GeneratorBasedBuilder, skip_registration=True):
   """A TFDS builder for Huggingface datasets.
@@ -175,9 +184,11 @@ class HuggingfaceDatasetBuilder(
       file_format: Optional[Union[str, file_adapters.FileFormat]] = None,
       hf_repo_id: str,
       hf_config: Optional[str] = None,
+      ignore_verifications: bool = False,
   ):
     self._hf_repo_id = hf_repo_id
     self._hf_config = hf_config
+    self._ignore_verifications = ignore_verifications
     tfds_config = _convert_config_name(hf_config)
     hf_datasets = lazy_imports_lib.lazy_imports.datasets
     self._hf_builder = hf_datasets.load_dataset_builder(self._hf_repo_id,
@@ -206,18 +217,13 @@ class HuggingfaceDatasetBuilder(
     return self._converted_builder_config
 
   def _info(self) -> dataset_info_lib.DatasetInfo:
-    if self._hf_info.supervised_keys is not None:
-      supervised_keys = (self._hf_info.supervised_keys.input,
-                         self._hf_info.supervised_keys.output)
-    else:
-      supervised_keys = None
     return dataset_info_lib.DatasetInfo(
         builder=self,
         description=self._hf_info.description,
         features=extract_features(self._hf_info.features),
         citation=self._hf_info.citation,
         license=self._hf_info.license,
-        supervised_keys=supervised_keys,
+        supervised_keys=_extract_supervised_keys(self._hf_info),
     )
 
   def _split_generators(
@@ -225,8 +231,10 @@ class HuggingfaceDatasetBuilder(
   ) -> Dict[splits_lib.Split, split_builder_lib.SplitGenerator]:
     del dl_manager
     hf_datasets = lazy_imports_lib.lazy_imports.datasets
-    hf_dataset_dict = hf_datasets.load_dataset(self._hf_repo_id,
-                                               self._hf_config)
+    hf_dataset_dict = hf_datasets.load_dataset(
+        self._hf_repo_id,
+        self._hf_config,
+        ignore_verifications=self._ignore_verifications)
     return {
         split: self._generate_examples(data)
         for split, data in hf_dataset_dict.items()
