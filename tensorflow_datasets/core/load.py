@@ -73,6 +73,12 @@ def list_builders(
   return datasets
 
 
+def list_dataset_collections() -> List[str]:
+  """Returns the string names of all `tfds.core.DatasetCollectionBuilder`s."""
+  collections = registered.list_imported_dataset_collections()
+  return collections
+
+
 @error_utils.reraise_with_context(registered.DatasetNotFoundError)
 def builder_cls(name: str) -> Type[dataset_builder.DatasetBuilder]:
   """Fetches a `tfds.core.DatasetBuilder` class by string name.
