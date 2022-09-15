@@ -21,11 +21,11 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.core.dataset_builders import tf_data_dataset_builder
+from tensorflow_datasets.core.dataset_builders import tf_data_builder
 import tensorflow_datasets.public_api as tfds
 
 
-def test_tf_data_dataset_builder_no_config():
+def test_tf_data_builder_no_config():
   ds_name = 'configless_dataset'
   data_dir = tempfile.mkdtemp()
   train = tf.data.Dataset.from_tensor_slices({
@@ -37,7 +37,7 @@ def test_tf_data_dataset_builder_no_config():
       'b': ['c'],
   })
 
-  builder = tf_data_dataset_builder.TfDataDatasetBasedBuilder(
+  builder = tf_data_builder.TfDataBuilder(
       name=ds_name,
       version='1.0.0',
       split_datasets={
@@ -68,7 +68,7 @@ def test_tf_data_dataset_builder_no_config():
   assert actual_train_from_dir_np == [{'a': 1, 'b': b'a'}, {'a': 2, 'b': b'b'}]
 
 
-def test_tf_data_dataset_builder_with_config():
+def test_tf_data_builder_with_config():
   ds_name = 'my_dataset'
   data_dir = tempfile.mkdtemp()
   train = tf.data.Dataset.from_tensor_slices({
@@ -80,7 +80,7 @@ def test_tf_data_dataset_builder_with_config():
       'b': ['c'],
   })
 
-  builder = tf_data_dataset_builder.TfDataDatasetBasedBuilder(
+  builder = tf_data_builder.TfDataBuilder(
       name=ds_name,
       version='1.0.0',
       split_datasets={
@@ -114,10 +114,10 @@ def test_tf_data_dataset_builder_with_config():
   assert actual_train_from_dir_np == [{'a': 1, 'b': b'a'}, {'a': 2, 'b': b'b'}]
 
 
-def test_tf_data_dataset_builder_multiple_versions():
+def test_tf_data_builder_multiple_versions():
   ds_name = 'my_dataset'
   data_dir = tempfile.mkdtemp()
-  builder1 = tf_data_dataset_builder.TfDataDatasetBasedBuilder(
+  builder1 = tf_data_builder.TfDataBuilder(
       name=ds_name,
       version='1.0.0',
       split_datasets={'train': tf.data.Dataset.from_tensor_slices({'a': [1]})},
@@ -126,7 +126,7 @@ def test_tf_data_dataset_builder_multiple_versions():
   )
   builder1.download_and_prepare()
 
-  builder2 = tf_data_dataset_builder.TfDataDatasetBasedBuilder(
+  builder2 = tf_data_builder.TfDataBuilder(
       name=ds_name,
       version='2.0.0',
       split_datasets={'train': tf.data.Dataset.from_tensor_slices({'a': [2]})},
@@ -142,10 +142,10 @@ def test_tf_data_dataset_builder_multiple_versions():
   assert list(dataset_utils.as_numpy(train2)) == [{'a': 2}]
 
 
-def test_tf_data_dataset_builder_multiple_configs():
+def test_tf_data_builder_multiple_configs():
   ds_name = 'my_dataset'
   data_dir = tempfile.mkdtemp()
-  builder1 = tf_data_dataset_builder.TfDataDatasetBasedBuilder(
+  builder1 = tf_data_builder.TfDataBuilder(
       name=ds_name,
       version='1.0.0',
       config=dataset_builder.BuilderConfig(name='config1'),
@@ -155,7 +155,7 @@ def test_tf_data_dataset_builder_multiple_configs():
   )
   builder1.download_and_prepare()
 
-  builder2 = tf_data_dataset_builder.TfDataDatasetBasedBuilder(
+  builder2 = tf_data_builder.TfDataBuilder(
       name=ds_name,
       version='1.0.0',
       config=dataset_builder.BuilderConfig(name='config2'),

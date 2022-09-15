@@ -31,7 +31,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 
 
-class TfDataDatasetBasedBuilder(
+class TfDataBuilder(
     dataset_builder.GeneratorBasedBuilder, skip_registration=True):
   """DatasetBuilder that builds a TFDS dataset from a tf.data.Dataset.
 
@@ -45,15 +45,15 @@ class TfDataDatasetBasedBuilder(
   import tensorflow as tf
   import tensorflow_datasets.public_api as tfds
 
-  my_ds_train = tf.data.Dataset.from_tensor_slices([1, 2, 3])
-  my_ds_test = tf.data.Dataset.from_tensor_slices([4, 5])
+  my_ds_train = tf.data.Dataset.from_tensor_slices({"number": [1, 2, 3]})
+  my_ds_test = tf.data.Dataset.from_tensor_slices({"number": [4, 5]})
 
   # Optionally define a custom `data_dir`. If None, then the default data dir is
   # used.
   custom_data_dir = "/my/folder"
 
   # Define the builder.
-  builder = tfds.dataset_builders.TfDataDatasetBasedBuilder(
+  builder = tfds.dataset_builders.TfDataBuilder(
       name="my_dataset",
       config="single_number",
       version="1.0.0",
@@ -103,9 +103,9 @@ class TfDataDatasetBasedBuilder(
 
   ```
   import tensorflow as tf
-  import tensorflow_datasets as tfds
+  import tensorflow_datasets.public_api as tfds
 
-  class MyDatasetBuilder(tfds.dataset_builders.TfDataDatasetBasedBuilder):
+  class MyDatasetBuilder(tfds.dataset_builders.TfDataBuilder):
     def __init__(self):
       ds_train = tf.data.Dataset.from_tensor_slices([1, 2, 3])
       ds_test = tf.data.Dataset.from_tensor_slices([4, 5])
