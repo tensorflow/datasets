@@ -1024,3 +1024,27 @@ def encode_dtype(dtype: tf.dtypes.DType) -> str:
 
 def parse_dtype(dtype: str) -> tf.dtypes.DType:
   return tf.dtypes.as_dtype(dtype)
+
+
+def convert_feature_name_to_filename(
+    feature_name: str,
+    parent_name: Optional[str],
+) -> str:
+  """Returns the filename to be used for the given feature name.
+
+  Arguments:
+    feature_name: the name of the feature. If the feature is nested, then it
+      should be the nested name and not include the feature name of the parent.
+      All `/`s in `feature_name` are replaced by a `.`.
+    parent_name: optional parent feature name. All `/`s in `parent_name` are
+      replaced by `-`.
+
+  Returns:
+    the filename to be used for the given feature name.
+  """
+  feature_name = feature_name.replace('/', '.')
+  if parent_name is not None:
+    parts = parent_name.split('/')
+    parts.append(feature_name)
+    return '-'.join(parts)
+  return feature_name

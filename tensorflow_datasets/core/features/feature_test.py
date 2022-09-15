@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Tests for feature."""
+import pytest
 
 import tensorflow as tf
 from tensorflow_datasets.core.features import feature
@@ -65,11 +66,11 @@ def test_from_shape_proto_unspecified():
 
 
 def test_encode_dtype():
-  assert feature.encode_dtype(tf.int64) == 'int64'
+  assert feature.encode_dtype(tf.int64) == "int64"
 
 
 def test_parse_dtype():
-  assert feature.parse_dtype('int64') == tf.int64
+  assert feature.parse_dtype("int64") == tf.int64
 
 
 def test_encode_and_parse_dtype():
@@ -102,3 +103,14 @@ def test_tensor_info_list_shape():
 def test_tensor_info_list_shape_with_none():
   tensor_info = feature.TensorInfo(shape=[None, None, 3], dtype=tf.int64)
   assert tensor_info.shape == (None, None, 3)
+
+
+@pytest.mark.parametrize(["feature_name", "parent_name", "expected"], [
+    ("a", None, "a"),
+    ("a/b", None, "a.b"),
+    ("a", "b", "b-a"),
+    ("a/b", "c/d", "c-d-a.b"),
+])
+def test_convert_feature_name_to_filename(feature_name, parent_name, expected):
+  assert feature.convert_feature_name_to_filename(
+      feature_name=feature_name, parent_name=parent_name) == expected
