@@ -38,6 +38,7 @@ from tensorflow_datasets.core.folder_dataset import TranslateFolder
 from tensorflow_datasets.core.load import builder
 from tensorflow_datasets.core.load import builder_cls
 from tensorflow_datasets.core.load import list_builders
+from tensorflow_datasets.core.load import list_dataset_collections
 from tensorflow_datasets.core.load import load
 from tensorflow_datasets.core.load import dataset_collection
 from tensorflow_datasets.core.read_only_builder import builder_from_directory
@@ -87,6 +88,7 @@ __all__ = [
     "ImageFolder",
     "is_dataset_on_gcs",
     "list_builders",
+    "list_dataset_collections",
     "load",
     "ReadConfig",
     "Split",
