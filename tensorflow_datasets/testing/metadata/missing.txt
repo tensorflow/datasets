@@ -31,9 +31,6 @@ glue/rte/1.0.1
 glue/sst2/1.0.1
 glue/stsb/1.0.1
 glue/wnli/1.0.1
-istella/main/1.1.0
-istella/s/1.1.0
-istella/x/1.1.0
 natural_questions/default/0.0.2
 natural_questions/longt5/0.0.2
 pass/3.0.0
