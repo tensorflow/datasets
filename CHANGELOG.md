@@ -10,6 +10,22 @@ and this project adheres to
 
 ### Added
 
+- [API] Added options to create format-specific dataset builders. The new API
+  now includes a number of NLP-specific builders, such as:
+    - [CoNNL](
+      https://www.tensorflow.org/datasets/format_specific_dataset_builders#conll)
+    - [CoNNL-U](
+      https://www.tensorflow.org/datasets/format_specific_dataset_builders#conllu)
+- [Documentation] update, specifically: [new guide](
+  https://www.tensorflow.org/datasets/format_specific_dataset_builders) on
+  format-specific dataset builders, and updated [TFDS CLI](
+  https://www.tensorflow.org/datasets/cli) documentation.
+- New datasets, such as the [conll2003](
+  https://www.tensorflow.org/datasets/catalog/conll2003) and the
+  [universal_dependency](
+  https://www.tensorflow.org/datasets/catalog/universal_dependency) version
+  2.10.
+
 ### Changed
 
 -   The base `Logger` class expects more information to be passed to the
@@ -23,7 +39,9 @@ and this project adheres to
 
 ### Removed
 
-### Fixed 
+### Fixed
+
+- Various datasets
 
 ### Security
 
