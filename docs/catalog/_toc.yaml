@@ -696,7 +696,7 @@ toc:
     title: ted_hrlr_translate
   - path: /datasets/catalog/ted_multi_translate
     title: ted_multi_translate
-  - path: /datasets/catalog/wmt13_translate
+  - path: /datasets/catalog/wmt13_translatef
     title: wmt13_translate (manual)
   - path: /datasets/catalog/wmt14_translate
     title: wmt14_translate (manual)
