@@ -52,6 +52,8 @@ upper_tabs:
         path: /datasets/beam_datasets
       - title: Format-specific builders
         path: /datasets/format_specific_dataset_builders
+      - title: Format-specific builders
+        path: /datasets/dataset_collections
       - title: Contribute to TFDS
         path: /datasets/contribute
       - title: Common gotchas
