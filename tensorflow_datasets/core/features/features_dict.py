@@ -279,22 +279,20 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
   def save_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     # Recursively save all child features
-    for feature_key, feature in self._feature_dict.items():
-      feature_key = feature_key.replace('/', '.')
-      if feature_name:
-        feature_key = '-'.join((feature_name, feature_key))
-      feature.save_metadata(data_dir, feature_name=feature_key)
+    for child_name, feature in self._feature_dict.items():
+      name_for_file = feature_lib.convert_feature_name_to_filename(
+          feature_name=child_name, parent_name=feature_name)
+      feature.save_metadata(data_dir, feature_name=name_for_file)
 
   def load_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
 
     # Load all child features asynchronously
     def load_metadata(feature_item):
-      feature_key, feature = feature_item
-      feature_key = feature_key.replace('/', '.')
-      if feature_name:
-        feature_key = '-'.join((feature_name, feature_key))
-      feature.load_metadata(data_dir, feature_name=feature_key)
+      child_name, feature = feature_item
+      name_for_file = feature_lib.convert_feature_name_to_filename(
+          feature_name=child_name, parent_name=feature_name)
+      feature.load_metadata(data_dir, feature_name=name_for_file)
 
     with concurrent.futures.ThreadPoolExecutor(
         max_workers=WORKER_COUNT) as executor:
