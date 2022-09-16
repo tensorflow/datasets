@@ -294,3 +294,27 @@ def builder() -> Callable[[_T], _T]:
         )
 
   return decorator
+
+
+def dataset_collection() -> Callable[[_T], _T]:
+  """Decorator to call `dataset_collection` method on registered loggers."""
+
+  @wrapt.decorator
+  def decorator(function, unused_none_instance, args, kwargs):
+    metadata = call_metadata.CallMetadata()
+    name = args[0] if args else kwargs["name"]
+    try:
+      return function(*args, **kwargs)
+    except Exception:
+      metadata.mark_error()
+      raise
+    finally:
+      metadata.mark_end()
+      for logger in _get_registered_loggers():
+        logger.dataset_collection(
+            metadata=metadata,
+            name=name,
+            loader_kwargs=kwargs.get("loader_kwargs"),
+        )
+
+  return decorator

@@ -385,6 +385,7 @@ class DatasetCollectionLoader:
         datasets=self.datasets.keys(), split=split, loader_kwargs=loader_kwargs)
 
 
+@tfds_logging.dataset_collection()
 def dataset_collection(
     name: str,
     loader_kwargs: Optional[Dict[str, Any]] = None,
