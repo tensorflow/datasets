@@ -128,12 +128,21 @@ class DatasetReference:
     if isinstance(self.version, str):
       self.version = version_lib.Version(self.version)
 
-  def tfds_name(self) -> str:
-    """Returns the TFDS name of the referenced dataset."""
+  def tfds_name(self, include_version: bool = True) -> str:
+    """Returns the TFDS name of the referenced dataset.
+
+    Args:
+      include_version: whether to include the dataset version in the tfds name.
+        For example, this would result in `dataset/config:1.0.0` if set to True,
+        or in `dataset/config` if set to False. Default is True.
+
+    Returns:
+      The TFDS name of the `DatasetReference`.
+    """
     dataset_name = self.dataset_name
     if self.config:
       dataset_name += f"/{self.config}"
-    if self.version:
+    if self.version and include_version:
       dataset_name += f":{self.version}"
     return dataset_name
 
