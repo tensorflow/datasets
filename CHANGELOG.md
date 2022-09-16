@@ -10,21 +10,23 @@ and this project adheres to
 
 ### Added
 
-- [API] Added options to create format-specific dataset builders. The new API
-  now includes a number of NLP-specific builders, such as:
-    - [CoNNL](
-      https://www.tensorflow.org/datasets/format_specific_dataset_builders#conll)
-    - [CoNNL-U](
-      https://www.tensorflow.org/datasets/format_specific_dataset_builders#conllu)
-- [Documentation] update, specifically: [new guide](
-  https://www.tensorflow.org/datasets/format_specific_dataset_builders) on
-  format-specific dataset builders, and updated [TFDS CLI](
-  https://www.tensorflow.org/datasets/cli) documentation.
-- New datasets, such as the [conll2003](
-  https://www.tensorflow.org/datasets/catalog/conll2003) and the
-  [universal_dependency](
-  https://www.tensorflow.org/datasets/catalog/universal_dependency) version
-  2.10.
+-   [API] Added
+    [TfDataBuilder](https://www.tensorflow.org/datasets/format_specific_dataset_builders#datasets_based_on_tfdatadataset)
+    that is handy for storing experimental ad hoc TFDS datasets in notebook-like
+    environments such that they can be versioned, described, and easily shared
+    with teammates.
+-   [API] Added options to create format-specific dataset builders. The new API
+    now includes a number of NLP-specific builders, such as:
+    -   [CoNNL](https://www.tensorflow.org/datasets/format_specific_dataset_builders#conll)
+    -   [CoNNL-U](https://www.tensorflow.org/datasets/format_specific_dataset_builders#conllu)
+-   [Documentation] update, specifically:
+    [new guide](https://www.tensorflow.org/datasets/format_specific_dataset_builders)
+    on format-specific dataset builders, and updated
+    [TFDS CLI](https://www.tensorflow.org/datasets/cli) documentation.
+-   New datasets, such as the
+    [conll2003](https://www.tensorflow.org/datasets/catalog/conll2003) and the
+    [universal_dependency](https://www.tensorflow.org/datasets/catalog/universal_dependency)
+    version 2.10.
 
 ### Changed
 
@@ -177,13 +179,13 @@ and this project adheres to
 - Many new reinforcement learning datasets.
 ### Changed
 - [API] Dataset generated with `disable_shuffling=True` are now read in
-  generation order.
+    generation order.
 
 ### Fixed
 - File format automatically restored (for datasets generated with
     `tfds.builder(..., file_format=)`).
 - Dynamically set number of worker threads during extraction.
-- Update progression bar during download even if downloads are cached.
+- Update progress bar during download even if downloads are cached.
 - Misc bug fixes.
 
 ## [4.3.0] - 2021-05-06
@@ -210,7 +212,7 @@ and this project adheres to
     datasets defined outside the TFDS repository.
 - [Experimental] Hugging-face compatibility wrapper to use Hugging-face datasets
   directly in TFDS.
-- [Experimental] Riegelli format support.
+- [Experimental] Riegeli format support.
 - [Experimental] `DatasetInfo.disable_shuffling` to force examples to be read in
   generation order.
 - New datasets.
@@ -397,11 +399,11 @@ and this project adheres to
 ### Deprecated
 - `tfds.features.text` encoding API. Please use
     [tensorflow_text](https://www.tensorflow.org/tutorials/tensorflow_text/intro)
-  instead.
+    instead.
 
 ### Removed
 - `tfds.load('image_label_folder')` in favor of the more user-friendly
-  `tfds.ImageFolder`.
+    `tfds.ImageFolder`.
 
 ### Fixed
 - Fix deterministic example order on Windows when path was used as key (this
@@ -466,81 +468,88 @@ and this project adheres to
     `isinstance(ds, tf.data.Dataset)`.
 
 ### Deprecated
-- The `tfds.features.text` encoding API is deprecated. Please use
+
+-   The `tfds.features.text` encoding API is deprecated. Please use
     [tensorflow_text](https://www.tensorflow.org/tutorials/tensorflow_text/intro)
     instead.
-- `num_shards` argument of `tfds.core.SplitGenerator` is currently ignored and
-  will be removed in the next version.
+-   `num_shards` argument of `tfds.core.SplitGenerator` is currently ignored and
+    will be removed in the next version.
 
 ### Removed
-- Legacy mode `tfds.experiment.S3` has been removed
-- `in_memory` argument has been removed from `as_dataset`/`tfds.load` (small
+
+-   Legacy mode `tfds.experiment.S3` has been removed
+-   `in_memory` argument has been removed from `as_dataset`/`tfds.load` (small
     datasets are now auto-cached).
-- `tfds.Split.ALL`.
+-   `tfds.Split.ALL`.
 
 ### Fixed
-- Various bugs, better error messages, documentation improvements.
+
+-   Various bugs, better error messages, documentation improvements.
 
 ## [2.1.0] - 2020-02-25
 
 ### Added
-- Datasets expose `info.dataset_size` and `info.download_size`.
-- [Auto-caching small datasets](
-https://www.tensorflow.org/datasets/performances#auto-caching).
-- Datasets expose their cardinality
-  `num_examples = tf.data.experimental.cardinality(ds)` (Requires tf-nightly or
-  TF >= 2.2.0)
-- Get the number of example in a sub-splits with:
-  `info.splits['train[70%:]'].num_examples`
+
+-   Datasets expose `info.dataset_size` and `info.download_size`.
+-   [Auto-caching small datasets](https://www.tensorflow.org/datasets/performances#auto-caching).
+-   Datasets expose their cardinality `num_examples =
+    tf.data.experimental.cardinality(ds)` (Requires tf-nightly or TF >= 2.2.0)
+-   Get the number of example in a sub-splits with:
+    `info.splits['train[70%:]'].num_examples`
 
 ### Changes
- - All datasets generated with 2.1.0 cannot be loaded with previous version
-   (previous datasets can be read with `2.1.0` however).
+
+-   All datasets generated with 2.1.0 cannot be loaded with previous version
+    (previous datasets can be read with `2.1.0` however).
 
 ### Deprecated
-- `in_memory` argument is deprecated and will be removed in a future version.
+
+-   `in_memory` argument is deprecated and will be removed in a future version.
 
 ## [2.0.0] - 2020-01-24
 
 ### Added
 
-- Several new datasets. Thanks to all the
+-   Several new datasets. Thanks to all the
     [contributors](https://github.com/tensorflow/datasets/graphs/contributors)!
-- Support for nested `tfds.features.Sequence` and `tf.RaggedTensor`
-- Custom `FeatureConnector`s can override the `decode_batch_example` method for
-  efficient decoding when wrapped inside a
+-   Support for nested `tfds.features.Sequence` and `tf.RaggedTensor`
+-   Custom `FeatureConnector`s can override the `decode_batch_example` method
+    for efficient decoding when wrapped inside a
     `tfds.features.Sequence(my_connector)`.
-- Beam datasets can use a `tfds.core.BeamMetadataDict` to store additional
+-   Beam datasets can use a `tfds.core.BeamMetadataDict` to store additional
     metadata computed as part of the Beam pipeline.
-- Beam datasets' `_split_generators` accepts an additional `pipeline` kwargs to
-  define a pipeline shared between all splits.
+-   Beam datasets' `_split_generators` accepts an additional `pipeline` kwargs
+    to define a pipeline shared between all splits.
 
 ### Changed
-- The default versions of all datasets are now using the S3 slicing API.
-  See the [guide](https://www.tensorflow.org/datasets/splits) for details.
-- `shuffle_files` defaults to False so that dataset iteration is deterministic
+
+-   The default versions of all datasets are now using the S3 slicing API. See
+    the [guide](https://www.tensorflow.org/datasets/splits) for details.
+-   `shuffle_files` defaults to False so that dataset iteration is deterministic
     by default. You can customize the reading pipeline, including shuffling and
     interleaving, through the new `read_config` parameter in
     [`tfds.load`](https://www.tensorflow.org/datasets/api_docs/python/tfds/load).
-- `urls` kwargs renamed `homepage` in `DatasetInfo`
+-   `urls` kwargs renamed `homepage` in `DatasetInfo`
 
 ### Deprecated
-- Python2 support: this is the last version of TFDS that will support Python 2.
-  Going forward, we'll only support and test against Python 3.
-- The previous split API is still available, but is deprecated. If you wrote
+
+-   Python2 support: this is the last version of TFDS that will support
+    Python 2. Going forward, we'll only support and test against Python 3.
+-   The previous split API is still available, but is deprecated. If you wrote
     `DatasetBuilder`s outside the TFDS repository, please make sure they do not
     use `experiments={tfds.core.Experiment.S3: False}`. This will be removed in
-  the next version, as well as the `num_shards` kwargs from `SplitGenerator`.
+    the next version, as well as the `num_shards` kwargs from `SplitGenerator`.
 
 ### Fixed
-- Various other bug fixes and performance improvements.
-  Thank you for all the reports and fixes!
+
+-   Various other bug fixes and performance improvements. Thank you for all the
+    reports and fixes!
 
 ## [1.3.0] - 2019-10-21
 
 ### Fixed
 
-- Misc bugs and performance improvements.
+-   Misc bugs and performance improvements.
 
 ## [1.2.0] - 2019-08-19
 
@@ -548,34 +557,34 @@ https://www.tensorflow.org/datasets/performances#auto-caching).
 
 #### Features
 
-- Add `shuffle_files` argument to `tfds.load` function. The semantic is the same
-  as in `builder.as_dataset` function, which for now means that by default,
-  files will be shuffled for `TRAIN` split, and not for other splits. Default
-  behaviour will change to always be False at next major release.
-- Most datasets now support the new S3 API
-  ([documentation](
-  https://github.com/tensorflow/datasets/blob/master/docs/splits.md#two-apis-s3-and-legacy)).
-- Support for uint16 PNG images.
+-   Add `shuffle_files` argument to `tfds.load` function. The semantic is the
+    same as in `builder.as_dataset` function, which for now means that by
+    default, files will be shuffled for `TRAIN` split, and not for other splits.
+    Default behaviour will change to always be False at next major release.
+-   Most datasets now support the new S3 API
+    ([documentation](https://github.com/tensorflow/datasets/blob/master/docs/splits.md#two-apis-s3-and-legacy)).
+-   Support for uint16 PNG images.
 
 #### Datasets
-- AFLW2000-3D
-- Amazon_US_Reviews
-- binarized_mnist
-- BinaryAlphaDigits
-- Caltech Birds 2010
-- Coil100
-- DeepWeeds
-- Food101
-- MIT Scene Parse 150
-- RockYou leaked password
-- Stanford Dogs
-- Stanford Online Products
-- Visual Domain Decathlon
+
+-   AFLW2000-3D
+-   Amazon_US_Reviews
+-   binarized_mnist
+-   BinaryAlphaDigits
+-   Caltech Birds 2010
+-   Coil100
+-   DeepWeeds
+-   Food101
+-   MIT Scene Parse 150
+-   RockYou leaked password
+-   Stanford Dogs
+-   Stanford Online Products
+-   Visual Domain Decathlon
 
 ### Fixed
 
-- Crash while shuffling on Windows
-- Various documentation improvements
+-   Crash while shuffling on Windows
+-   Various documentation improvements
 
 ## [1.1.0] - 2019-07-23
 
@@ -583,58 +592,64 @@ https://www.tensorflow.org/datasets/performances#auto-caching).
 
 #### Features
 
-- `in_memory` option to cache small dataset in RAM.
-- Better sharding, shuffling and sub-split.
-- It is now possible to add arbitrary metadata to `tfds.core.DatasetInfo`
+-   `in_memory` option to cache small dataset in RAM.
+-   Better sharding, shuffling and sub-split.
+-   It is now possible to add arbitrary metadata to `tfds.core.DatasetInfo`
     which will be stored/restored with the dataset. See `tfds.core.Metadata`.
-- Better proxy support, possibility to add certificate.
-- `decoders` kwargs to override the default feature decoding
-  ([guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)).
+-   Better proxy support, possibility to add certificate.
+-   `decoders` kwargs to override the default feature decoding
+    ([guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)).
 
 #### Datasets
-- [downsampled_imagenet](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#downsampled_imagenet).
-- [patch_camelyon](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#patch_camelyon).
-- [coco](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#coco) 2017 (with and without panoptic annotations).
-- uc_merced.
-- trivia_qa.
-- super_glue.
-- so2sat.
-- snli.
-- resisc45.
-- pet_finder.
-- mnist_corrupted.
-- kitti.
-- eurosat.
-- definite_pronoun_resolution.
-- curated_breast_imaging_ddsm.
-- clevr.
-- bigearthnet.
+
+-   [downsampled_imagenet](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#downsampled_imagenet).
+-   [patch_camelyon](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#patch_camelyon).
+-   [coco](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#coco)
+    2017 (with and without panoptic annotations).
+-   uc_merced.
+-   trivia_qa.
+-   super_glue.
+-   so2sat.
+-   snli.
+-   resisc45.
+-   pet_finder.
+-   mnist_corrupted.
+-   kitti.
+-   eurosat.
+-   definite_pronoun_resolution.
+-   curated_breast_imaging_ddsm.
+-   clevr.
+-   bigearthnet.
 
 ## [1.0.2] - 2019-05-01
 
 ### Added
-- [Apache Beam support](https://www.tensorflow.org/datasets/beam_datasets).
-- Direct GCS access for MNIST (with `tfds.load('mnist', try_gcs=True)`).
-- More datasets.
-- Option to turn off tqdm bar (`tfds.disable_progress_bar()`).
+
+-   [Apache Beam support](https://www.tensorflow.org/datasets/beam_datasets).
+-   Direct GCS access for MNIST (with `tfds.load('mnist', try_gcs=True)`).
+-   More datasets.
+-   Option to turn off tqdm bar (`tfds.disable_progress_bar()`).
 
 ### Fixed
-- Subsplit do not depends on the number of shard anymore
+
+-   Subsplit do not depends on the number of shard anymore
     (https://github.com/tensorflow/datasets/issues/292).
 -   Various bugs.
 
 ## [1.0.1] - 2019-02-15
 
 ### Added
-- Dataset [`celeb_a_hq`](
-  https://github.com/tensorflow/datasets/blob/master/docs/datasets.md#celeb_a_hq).
+
+-   Dataset
+    [`celeb_a_hq`](https://github.com/tensorflow/datasets/blob/master/docs/datasets.md#celeb_a_hq).
 
 ### Fixed
-- Bug #52 that was putting the process in Eager mode by default.
+
+-   Bug #52 that was putting the process in Eager mode by default.
 
 ## [1.0.0] - 2019-02-14
 
 ### Added
 
-- 25 datasets.
-- Ready to be used `tensorflow-datasets`.
+-   25 datasets.
+-   Ready to be used `tensorflow-datasets`.
