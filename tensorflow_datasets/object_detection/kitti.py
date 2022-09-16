@@ -54,6 +54,9 @@ _OBJECT_LABELS = [
     "Tram",
     "Misc",
 ]
+_OCCLUDED_LABELS = [
+    "fully visible", "partly occluded", "largely occluded", "unknown"
+]
 # The percentage of trainset videos to put into validation and test sets.
 # The released test images do not have labels.
 _VALIDATION_SPLIT_PERCENT_VIDEOS = 10
@@ -68,23 +71,61 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version("3.2.0")
+  VERSION = tfds.core.Version("3.3.0")
   SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.2.0"),
       tfds.core.Version("3.1.0"),
   ]
-  RELEASE_NOTES = {"3.2.0": "Devkit updated."}
+  RELEASE_NOTES = {
+      "3.3.0": "Added labels for the `occluded` feature.",
+      "3.2.0": "Devkit updated.",
+  }
 
   def _info(self):
     # Annotation descriptions are in the object development kit.
     annotations = {
-        "type": tfds.features.ClassLabel(names=_OBJECT_LABELS),
-        "truncated": tfds.features.Tensor(shape=(), dtype=tf.float32),
-        "occluded": tfds.features.ClassLabel(num_classes=4),
-        "alpha": tfds.features.Tensor(shape=(), dtype=tf.float32),
-        "bbox": tfds.features.BBoxFeature(),
-        "dimensions": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-        "location": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-        "rotation_y": tfds.features.Tensor(shape=(), dtype=tf.float32),
+        "type":
+            tfds.features.ClassLabel(
+                names=_OBJECT_LABELS,
+                doc="The type of object, e.g. 'Car' or 'Van'"),
+        "truncated":
+            tfds.features.Tensor(
+                shape=(),
+                dtype=tf.float32,
+                doc=(
+                    "Float from 0 (non-truncated) to 1 (truncated), where"
+                    "truncated refers to the object leaving image boundaries")),
+        "occluded":
+            tfds.features.ClassLabel(
+                names=_OCCLUDED_LABELS,
+                doc=("Integer (0,1,2,3) indicating occlusion state: "
+                     "0 = fully visible, 1 = partly occluded"
+                     "2 = largely occluded, 3 = unknown")),
+        "alpha":
+            tfds.features.Tensor(
+                shape=(),
+                dtype=tf.float32,
+                doc="Observation angle of object, ranging [-pi..pi]"),
+        "bbox":
+            tfds.features.BBoxFeature(
+                doc="2D bounding box of object in the image"),
+        "dimensions":
+            tfds.features.Tensor(
+                shape=(3,),
+                dtype=tf.float32,
+                doc="3D object dimensions: height, width, length (in meters)"),
+        "location":
+            tfds.features.Tensor(
+                shape=(3,),
+                dtype=tf.float32,
+                doc="3D object location x,y,z in camera coordinates (in meters)"
+            ),
+        "rotation_y":
+            tfds.features.Tensor(
+                shape=(),
+                dtype=tf.float32,
+                doc="Rotation ry around Y-axis in camera coordinates [-pi..pi]"
+            ),
     }
     return tfds.core.DatasetInfo(
         builder=self,
