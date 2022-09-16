@@ -199,7 +199,7 @@ column-based format, precompiled lists of features and tags, ...).
 As for standard dataset builders, it requires to overwrite the class methods
 `_info` and `_split_generators`. Depending on the dataset, you might need to
 update also
-[conll_dataset_builder_utils.py](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/dataset_builders/conll_dataset_builder_utils.py)
+[conll_dataset_builder_utils.py](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/dataset_builders/conll/conll_dataset_builder_utils.py)
 to include the features and the list of tags specific to your dataset.
 
 The `_generate_examples` method should not require further overwriting, unless
@@ -210,3 +210,103 @@ your dataset needs specific implementation.
 Consider
 [conll2003](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/text/conll2003/conll2003.py)
 as an example of a dataset implemented using the CoNLL-specific dataset builder.
+
+### CLI
+
+The easiest way to write a new CoNLL-based dataset is to use the
+[TFDS CLI](https://www.tensorflow.org/datasets/cli):
+
+```sh
+cd path/to/my/project/datasets/
+tfds new my_dataset --format=conll   # Create `my_dataset/my_dataset.py` CoNLL-specific template files
+```
+
+## CoNLL-U
+
+### The format
+
+[CoNLL-U](https://universaldependencies.org/format.html) is a popular format
+used to represent annotated text data.
+
+CoNLL-U enhances the CoNLL format by adding a number of features, such as
+support for
+[multi-token words](https://universaldependencies.org/u/overview/tokenization.html).
+CoNLL-U formatted data usually contain one token with its linguistic annotations
+per line; within the same line, annotations are usually separated by single tab
+characters. Empty lines represent sentence boundaries.
+
+Typically, each CoNLL-U annotated word line contains the following fields, as
+reported in the
+[official documentation](https://universaldependencies.org/format.html):
+
+*   ID: Word index, integer starting at 1 for each new sentence; may be a range
+    for multiword tokens; may be a decimal number for empty nodes (decimal
+    numbers can be lower than 1 but must be greater than 0).
+*   FORM: Word form or punctuation symbol.
+*   LEMMA: Lemma or stem of word form.
+*   UPOS: Universal part-of-speech tag.
+*   XPOS: Language-specific part-of-speech tag; underscore if not available.
+*   FEATS: List of morphological features from the universal feature inventory
+    or from a defined language-specific extension; underscore if not available.
+*   HEAD: Head of the current word, which is either a value of ID or zero (0).
+*   DEPREL: Universal dependency relation to the HEAD (root iff HEAD = 0) or a
+    defined language-specific subtype of one.
+*   DEPS: Enhanced dependency graph in the form of a list of head-deprel pairs.
+*   MISC: Any other annotation.
+
+Consider as an example the following CoNLL-U annotated sentence from the
+[official documentation](https://universaldependencies.org/format.html):
+
+```markdown
+1-2    vámonos   _
+1      vamos     ir
+2      nos       nosotros
+3-4    al        _
+3      a         a
+4      el        el
+5      mar       mar
+```
+
+### `ConllUDatasetBuilder`
+
+To add a new CoNLL-U based dataset to TFDS, you can base your dataset builder
+class on `tfds.dataset_builders.ConllUDatasetBuilder`. This base class contains
+common code to deal with the specificities of CoNLL-U datasets (iterating over
+the column-based format, precompiled lists of features and tags, ...).
+
+`tfds.dataset_builders.ConllUDatasetBuilder` implements a CoNLL-U specific
+`GeneratorBasedBuilder`.
+
+As for standard dataset builders, it requires to overwrite the class methods
+`_info` and `_split_generators`. Depending on the dataset, you might need to
+update also
+[conllu_dataset_builder_utils.py](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/dataset_builders/conll/conllu_dataset_builder_utils.py)
+to include the features and the list of tags specific to your dataset.
+
+The `_generate_examples` method should not require further overwriting, unless
+your dataset needs specific implementation. Note that, if your dataset requires
+specific preprocessing - for example if it considers non-classic
+[universal dependency features](https://universaldependencies.org/guidelines.html) -
+you might need to update the `process_example_fn` attribute of your
+[`generate_examples`](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/dataset_builders/conll/conllu_dataset_builder.py#L192)
+function (see the
+[xtreme_pos](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/text/universal_dependencies/xtreme_pos.py)
+daset as an example).
+
+### Examples
+
+Consider the following datasets, which use the CoNNL-U specific dataset builder,
+as examples:
+
+*   [universal_dependencies](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/text/universal_dependencies/universal_dependencies.py)
+*   [xtreme_pos](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/text/universal_dependencies/xtreme_pos.py)
+
+### CLI
+
+The easiest way to write a new CoNLL-U based dataset is to use the
+[TFDS CLI](https://www.tensorflow.org/datasets/cli):
+
+```sh
+cd path/to/my/project/datasets/
+tfds new my_dataset --format=conllu   # Create `my_dataset/my_dataset.py` CoNLL-U specific template files
+```
