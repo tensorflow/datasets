@@ -84,6 +84,12 @@ def test_dataset_reference_tfds_name():
   assert reference.tfds_name() == 'ds/config:1.2.3'
 
 
+def test_dataset_reference_tfds_name_without_version():
+  reference = dcb.DatasetReference(
+      dataset_name='ds', version='1.2.3', config='config')
+  assert reference.tfds_name(include_version=False) == 'ds/config'
+
+
 def test_dataset_reference_get_split():
   reference = dcb.DatasetReference.from_tfds_name(
       'ds/config:1.2.3', split_mapping={'x': 'y'})

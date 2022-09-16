@@ -270,11 +270,16 @@ class DatasetBuilder(registered.RegisteredDataset):
         for v in [self.canonical_version] + self.supported_versions
     ]
 
-  def _pick_version(self, requested_version) -> utils.Version:
+  def _pick_version(
+      self, requested_version: Union[str, utils.Version]) -> utils.Version:
     """Returns utils.Version instance, or raise AssertionError."""
     # Validate that `canonical_version` is correctly defined
     assert self.canonical_version
-
+    # If requested_version is of type utils.Version, convert to its string
+    # representation. This is necessary to properly execute the equality check
+    # with "experimental_latest".
+    if isinstance(requested_version, utils.Version):
+      requested_version = str(requested_version)
     if requested_version == "experimental_latest":
       return max(self.versions)
     for version in self.versions:
