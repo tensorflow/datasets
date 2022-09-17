@@ -1036,6 +1036,7 @@ istella/x/1.1.0
 kddcup99/1.0.0
 kitti/3.1.0
 kitti/3.2.0
+kitti/3.3.0
 kmnist/3.0.1
 lambada/1.0.0
 lfw/0.1.0

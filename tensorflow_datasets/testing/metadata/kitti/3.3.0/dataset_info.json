@@ -1,0 +1,113 @@
+{
+  "citation": "@inproceedings{Geiger2012CVPR,\n  author = {Andreas Geiger and Philip Lenz and Raquel Urtasun},\n  title = {Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite},\n  booktitle = {Conference on Computer Vision and Pattern Recognition (CVPR)},\n  year = {2012}\n}",
+  "description": "Kitti contains a suite of vision tasks built using an autonomous driving\nplatform. The full benchmark contains many tasks such as stereo, optical flow,\nvisual odometry, etc. This dataset contains the object detection dataset,\nincluding the monocular images and bounding boxes. The dataset contains 7481\ntraining images annotated with 3D bounding boxes. A full description of the\nannotations can be found in the readme of the object development kit readme on\nthe Kitti homepage.",
+  "downloadSize": "12575610564",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "http://www.cvlibs.net/datasets/kitti/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.object_detection.kitti",
+  "name": "kitti",
+  "releaseNotes": {
+    "3.2.0": "Devkit updated.",
+    "3.3.0": "Added labels for the `occluded` feature."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "4837760143",
+      "shardLengths": [
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99",
+        "99",
+        "99",
+        "99",
+        "100",
+        "99",
+        "99"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "314690600",
+      "shardLengths": [
+        "106",
+        "106",
+        "105",
+        "106"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "503622445",
+      "shardLengths": [
+        "178",
+        "178",
+        "177",
+        "178"
+      ]
+    }
+  ],
+  "version": "3.3.0"
+}
