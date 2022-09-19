@@ -86,8 +86,8 @@ class GetShardTest(testing.TestCase):
     # Check distribution: all shards are used.
     counts = collections.Counter(shards)
     self.assertEqual(len(counts), shards_number)
-    # And all shards contain same number of elements (102 or 102 in that case).
-    self.assertEqual(len(set(counts.values())), 2)
+    # All shards contain 102 or 103 elements.
+    self.assertEqual(set(counts.values()), {102, 103})
 
 
 class ShuffleTest(testing.TestCase):
