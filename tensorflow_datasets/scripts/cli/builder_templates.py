@@ -225,26 +225,30 @@ def _conllu_template(info: cli_utils.DatasetInfo) -> str:
           """Returns the dataset metadata."""
           # {info.todo}: Specifies the dataset infos.
           return self.create_dataset_info(
-            description=_DESCRIPTION,
-            homepage='',
-            citation=_CITATION,
+              description=_DESCRIPTION,
+              homepage='',
+              citation=_CITATION,
           )
 
+        def _split_generators(self, dl_manager: tfds.download.DownloadManager):
+          """Returns SplitGenerators."""
+          # {info.todo}: Downloads the data and defines the splits
+          path = dl_manager.download_and_extract('https://todo-data-url')
 
-        # {info.todo}: Specify the process_example_fn to be used in the
-        # `_generate_examples` method to process examples.
-        # The default `process_example_fn` processes a conllu-annotated example
-        # using the features specified in BUILDER_CONFIGS.
-        # `conllu_dataset_builder` already provides a number of ready-to-use
-        # process functions.
-        return {{
-            'train':
-                self._generate_examples(
-                    filepaths=path / 'train.txt',
-                    # Remove if you want to use the default `process_example_fn`.
-                    # process_example_fn=
-                )
-        }}
+          # {info.todo}: Specify the process_example_fn to be used in the
+          # `_generate_examples` method to process examples.
+          # The default `process_example_fn` processes a conllu-annotated
+          # example using the features specified in BUILDER_CONFIGS.
+          # `conllu_dataset_builder` already provides a number of ready-to-use
+          # process functions.
+          return {{
+              'train':
+                  self._generate_examples(
+                      filepaths=path / 'train.txt',
+                      # Remove if you want to use the default `process_example_fn`.
+                      # process_example_fn=
+                  )
+          }}
 
         # {info.todo}: If you need a customized _generate_examples function,
         # comment out the following, otherwise remove it.
