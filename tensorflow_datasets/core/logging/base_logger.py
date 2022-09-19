@@ -15,7 +15,7 @@
 
 """This module defines the methods a logger implementation should define."""
 
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import splits as splits_lib
@@ -103,6 +103,15 @@ class Logger:
       try_gcs: Optional[bool],
   ):
     """Callback called when user calls `tfds.builder(...)`."""
+    pass
+
+  def dataset_collection(
+      self,
+      metadata: call_metadata.CallMetadata,
+      name: str,
+      loader_kwargs: Optional[Dict[str, Any]],
+  ):
+    """Callback called when user calls `tfds.dataset_collection(...)`."""
     pass
 
   def load(
