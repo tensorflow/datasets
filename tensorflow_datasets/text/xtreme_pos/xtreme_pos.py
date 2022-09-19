@@ -14,7 +14,6 @@
 # limitations under the License.
 
 """xtreme_pos dataset."""
-import glob
 import os
 
 import tensorflow as tf
@@ -110,7 +109,7 @@ class XtremePos(tfds.dataset_builders.ConllUDatasetBuilder):
     subpath = os.path.join(dl_dir, "ud-treebanks-v2.5")
     lang = _LANGS[self.builder_config.language]
     data_dir = os.path.join(subpath, "*_" + lang + "*")
-    folders = sorted(glob.glob(data_dir))
+    folders = sorted(tf.io.gfile.glob(data_dir))
 
     if lang == "Kazakh":
       paths = {"train": [], "test": []}
