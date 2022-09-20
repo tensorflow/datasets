@@ -24,7 +24,6 @@ from typing import Any, Iterable, List, Optional, Tuple
 
 from absl import logging
 from etils import epath
-import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import example_parser
@@ -334,13 +333,6 @@ class Writer(object):
     return shard_lengths, self._shuffler.size
 
 
-# Make a long out of int. Necessary for Beam on Py2.
-if six.PY2:
-  _long_for_py2 = long  # pylint: disable=invalid-name,undefined-variable
-else:
-  _long_for_py2 = lambda int_val: int_val
-
-
 class BeamWriter(object):
   """Shuffles / writes Examples beam collection to sharded TFRecord files.
 
@@ -403,8 +395,6 @@ class BeamWriter(object):
     else:
       hkey = self._hasher.hash_key(key)
     bucketid = shuffle.get_bucket_number(hkey, _BEAM_NUM_TEMP_SHARDS)
-    hkey = _long_for_py2(hkey)
-    bucketid = _long_for_py2(bucketid)
     return (bucketid, (hkey, serialized_example))
 
   def _sort_bucket(
