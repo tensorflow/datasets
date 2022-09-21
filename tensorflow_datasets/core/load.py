@@ -18,11 +18,12 @@
 import dataclasses
 import difflib
 import json
+import os
 import posixpath
 import re
 import textwrap
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, Mapping, List, Optional, Type
+from typing import Any, Callable, Dict, Iterable, Iterator, Mapping, List, Optional, Type, Union
 
 from absl import logging
 import tensorflow as tf
@@ -255,7 +256,10 @@ class DatasetCollectionLoader:
     # TODO(b/235343719) improve performance, e.g. by creating a method such as
     # # load_info that does this more efficiently.
     dataset_reference = self.datasets[dataset_name]
-    _, info = load(dataset_reference.tfds_name(), with_info=True)
+    _, info = load(
+        dataset_reference.tfds_name(),
+        with_info=True,
+        data_dir=dataset_reference.data_dir)
     return info
 
   def set_loader_kwargs(self, loader_kwargs: Dict[str, Any]):
@@ -309,6 +313,12 @@ class DatasetCollectionLoader:
     # Make sure we always return a dict of dicts.
     if 'split' in loader_kwargs and isinstance(loader_kwargs['split'], str):
       loader_kwargs['split'] = [loader_kwargs['split']]
+
+    # Add the data dir from the reference to loader_kwargs if it is defined and
+    # not overridden in loader_kwargs.
+    if (dataset_reference.data_dir is not None and
+        'data_dir' not in loader_kwargs):
+      loader_kwargs['data_dir'] = dataset_reference.data_dir
 
     load_output = load(dataset_reference.tfds_name(), **loader_kwargs)
     loaded_datasets = {}
@@ -435,7 +445,7 @@ def load(
     name: str,
     *,
     split: Optional[Tree[splits_lib.SplitArg]] = None,
-    data_dir: Optional[str] = None,
+    data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
     batch_size: Optional[int] = None,
     shuffle_files: bool = False,
     download: bool = True,
@@ -505,7 +515,7 @@ def load(
       'test']`, `'train[80%:]'`,...). See our [split API
       guide](https://www.tensorflow.org/datasets/splits). If `None`, will return
       all splits in a `Dict[Split, tf.data.Dataset]`
-    data_dir: `str`, directory to read/write data. Defaults to the value of the
+    data_dir: directory to read/write data. Defaults to the value of the
       environment variable TFDS_DATA_DIR, if set, otherwise falls back to
       datasets are stored.
     batch_size: `int`, if set, add a batch dimension to examples. Note that

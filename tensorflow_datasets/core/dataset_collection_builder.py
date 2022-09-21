@@ -16,6 +16,7 @@
 """DatasetCollection base class."""
 import dataclasses
 import inspect
+import os
 from typing import Any, List, Mapping, Optional, Type, Union
 
 from etils import epath
@@ -118,11 +119,14 @@ class DatasetReference:
       this dataset uses the split `validation`, then the `split_mapping` should
       be `{'validation': 'valid'}`.
     config: optional config to be used in the dataset.
+    data_dir: Optional data dir where this dataset is located. If None, defaults
+      to the value of the environment variable TFDS_DATA_DIR, if set, otherwise
   """
   dataset_name: str
   version: Union[None, str, version_lib.Version] = None
   split_mapping: Optional[Mapping[str, str]] = None
   config: Optional[str] = None
+  data_dir: Union[None, str, os.PathLike] = None  # pylint: disable=g-bare-generic
 
   def __post_init__(self):
     if isinstance(self.version, str):
@@ -156,6 +160,7 @@ class DatasetReference:
       cls,
       tfds_name: str,
       split_mapping: Optional[Mapping[str, str]] = None,
+      data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
   ) -> "DatasetReference":
     """Returns the `DatasetReference` for the given TFDS dataset."""
     parsed_name, builder_kwargs = naming.parse_builder_name_kwargs(tfds_name)
@@ -166,7 +171,8 @@ class DatasetReference:
         dataset_name=parsed_name.name,
         version=version,
         config=config,
-        split_mapping=split_mapping)
+        split_mapping=split_mapping,
+        data_dir=data_dir)
 
 
 def references_for(
