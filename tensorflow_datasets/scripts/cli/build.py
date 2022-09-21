@@ -18,10 +18,11 @@
 import argparse
 import functools
 import importlib
+import json
 import os
 import pathlib
 import typing
-from typing import Dict, Iterator, Optional, Tuple, Type
+from typing import Dict, Iterator, Optional, Tuple, Type, Union
 
 from absl import logging
 import tensorflow_datasets as tfds
@@ -116,7 +117,9 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       '--config',
       '-c',
       type=str,
-      help='Config name to build. Build all configs if not set.')
+      help='Config name to build. Build all configs if not set. '
+      'Can also be a json of the kwargs forwarded to the config `__init__` ('
+      'for custom configs).')
   # We are forced to have 2 flags to avoid ambiguity when config name is
   # a number (e.g. `voc/2017`)
   generation_group.add_argument(
@@ -406,7 +409,7 @@ def _get_config_name(
     config_kwarg: Optional[str],
     config_name: Optional[str],
     config_idx: Optional[int],
-) -> Optional[str]:
+) -> Optional[Union[str, tfds.core.BuilderConfig]]:
   """Extract the config name.
 
   Args:
@@ -432,7 +435,11 @@ def _get_config_name(
   if config_kwarg:  # `ds_name/config`
     return config_kwarg
   elif config_name:  # `--config name`
-    return config_name
+    if config_name.startswith('{'):
+      # Json: Dynamically recreate the builder_config
+      return builder_cls.builder_config_cls(**json.loads(config_name))
+    else:
+      return config_name
   elif config_idx is not None:  # `--config_idx 123`
     if config_idx > len(builder_cls.BUILDER_CONFIGS):
       raise ValueError(f'--config_idx {config_idx} greater than number '

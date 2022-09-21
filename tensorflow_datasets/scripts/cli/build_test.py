@@ -144,6 +144,12 @@ def test_build_dataset_configs():
       'trivia_qa/unfiltered.nocontext',
   ]
 
+  # --config Json
+  config_json = '{"name":"my_config","description":"abcd"}'
+  assert _build(f'imdb_reviews --config {config_json}') == [
+      'imdb_reviews/my_config',
+  ]
+
   # name/config
   assert _build('trivia_qa/unfiltered.nocontext') == [
       'trivia_qa/unfiltered.nocontext'
