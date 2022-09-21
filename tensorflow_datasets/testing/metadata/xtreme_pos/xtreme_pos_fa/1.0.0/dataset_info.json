@@ -1,0 +1,43 @@
+{
+  "configName": "xtreme_pos_fa",
+  "description": "Universal Dependencies (UD) is a framework for consistent annotation of grammar\n(parts of speech, morphological features, and syntactic dependencies) across\ndifferent human languages. UD is an open community effort with over 200\ncontributors producing more than 100 treebanks in over 70 languages. If you\u2019re\nnew to UD, you should start by reading the first part of the Short Introduction\nand then browsing the annotation guidelines.",
+  "downloadSize": "355216681",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://universaldependencies.org/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.xtreme_pos.xtreme_pos",
+  "name": "xtreme_pos",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1431478",
+      "shardLengths": [
+        "4798"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "189744",
+      "shardLengths": [
+        "599"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "191682",
+      "shardLengths": [
+        "600"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}
