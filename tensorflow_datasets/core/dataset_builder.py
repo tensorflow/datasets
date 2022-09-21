@@ -15,6 +15,8 @@
 
 """DatasetBuilder base class."""
 
+from __future__ import annotations
+
 import abc
 import dataclasses
 import functools
@@ -921,6 +923,22 @@ class DatasetBuilder(registered.RegisteredDataset):
         verify_ssl=download_config.verify_ssl,
         dataset_name=self.name,
     )
+
+  @utils.docs.do_not_doc_in_subclasses
+  @utils.classproperty
+  @classmethod
+  def builder_config_cls(cls) -> Optional[type[BuilderConfig]]:
+    """Returns the builder config class."""
+    if not cls.BUILDER_CONFIGS:
+      return None
+
+    all_cls = {type(b) for b in cls.BUILDER_CONFIGS}
+    if len(all_cls) != 1:
+      raise ValueError(
+          f"Could not infer the config class for {cls}. Detected: {all_cls}")
+
+    (builder_cls,) = all_cls
+    return builder_cls
 
   @property
   def builder_config(self) -> Optional[Any]:
