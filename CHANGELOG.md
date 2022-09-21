@@ -23,6 +23,7 @@ and this project adheres to
     [new guide](https://www.tensorflow.org/datasets/format_specific_dataset_builders)
     on format-specific dataset builders, and updated
     [TFDS CLI](https://www.tensorflow.org/datasets/cli) documentation.
+-   [TFDS CLI] Supports custom config through Json (e.g. `tfds build my_dataset --config='{"name": "my_custom_config", "description": "Abc"}'`)
 -   New datasets, such as the
     [conll2003](https://www.tensorflow.org/datasets/catalog/conll2003) and the
     [universal_dependency](https://www.tensorflow.org/datasets/catalog/universal_dependency)
