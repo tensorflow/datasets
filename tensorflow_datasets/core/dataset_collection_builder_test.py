@@ -67,21 +67,40 @@ def test_dataset_collection_info_from_cls():
   assert dummy_dc_info.citation is None
 
 
-def test_dataset_reference_from_tfds_name():
+@pytest.mark.parametrize(
+    ('tfds_name', 'split_mapping', 'data_dir', 'dataset_name', 'version',
+     'config'), [
+         ('ds/config:1.2.3', None, None, 'ds', '1.2.3', 'config'),
+         ('ds/config:1.2.3', {
+             'x': 'y'
+         }, None, 'ds', '1.2.3', 'config'),
+         ('ds/config:1.2.3', None, None, 'ds', '1.2.3', 'config'),
+         ('ds/config:1.2.3', None, '/a/b', 'ds', '1.2.3', 'config'),
+         ('ds:1.2.3', None, None, 'ds', '1.2.3', None),
+         ('ds/config', None, None, 'ds', None, 'config'),
+         ('ds', None, None, 'ds', None, None),
+     ])
+def test_dataset_reference_from_tfds_name(tfds_name, split_mapping, data_dir,
+                                          dataset_name, version, config):
   actual = dcb.DatasetReference.from_tfds_name(
-      'ds/config:1.2.3', split_mapping={'x': 'y'})
-  expected = dcb.DatasetReference(
-      dataset_name='ds',
-      version='1.2.3',
-      config='config',
-      split_mapping={'x': 'y'})
-  assert actual == expected
+      tfds_name=tfds_name, split_mapping=split_mapping, data_dir=data_dir)
+  assert actual == dcb.DatasetReference(
+      dataset_name=dataset_name,
+      version=version,
+      config=config,
+      split_mapping=split_mapping,
+      data_dir=data_dir)
 
 
-def test_dataset_reference_tfds_name():
+@pytest.mark.parametrize(('dataset_name', 'version', 'config', 'tfds_name'), [
+    ('ds', '1.2.3', 'config', 'ds/config:1.2.3'),
+    ('ds', '1.2.3', None, 'ds:1.2.3'),
+    ('ds', None, None, 'ds'),
+])
+def test_dataset_reference_tfds_name(dataset_name, version, config, tfds_name):
   reference = dcb.DatasetReference(
-      dataset_name='ds', version='1.2.3', config='config')
-  assert reference.tfds_name() == 'ds/config:1.2.3'
+      dataset_name=dataset_name, version=version, config=config)
+  assert reference.tfds_name() == tfds_name
 
 
 def test_dataset_reference_tfds_name_without_version():
