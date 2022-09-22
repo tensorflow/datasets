@@ -947,10 +947,11 @@ class DatasetBuilder(registered.RegisteredDataset):
 
   def _create_builder_config(self, builder_config) -> Optional[BuilderConfig]:
     """Create and validate BuilderConfig object."""
-    if builder_config is None and self.BUILDER_CONFIGS:
-      builder_config = self.BUILDER_CONFIGS[0]
-      logging.info("No config specified, defaulting to first: %s/%s", self.name,
-                   builder_config.name)
+    if builder_config is None:
+      builder_config = self.get_default_builder_config()
+      if builder_config is not None:
+        logging.info("No config specified, defaulting to config: %s/%s",
+                     self.name, builder_config.name)
     if not builder_config:
       return None
     if isinstance(builder_config, six.string_types):
