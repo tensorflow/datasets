@@ -13,7 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Ranking datasets."""
-from tensorflow_datasets.ranking.istella import Istella
-from tensorflow_datasets.ranking.mslr_web import MslrWeb
-from tensorflow_datasets.ranking.yahoo_ltrc import YahooLTRC
+"""yahoo_ltrc dataset."""
+
+import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.ranking.yahoo_ltrc import yahoo_ltrc
+
+
+class YahooLTRCTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for yahoo_ltrc dataset."""
+  DATASET_CLASS = yahoo_ltrc.YahooLTRC
+  SPLITS = {
+      "train": 6,
+      "vali": 2,
+      "test": 2,
+  }
+  DL_EXTRACT_ONLY_RESULT = "extracted"
+  SKIP_CHECKSUMS = True
+  BUILDER_CONFIG_NAMES_TO_TEST = ["set1"]
+
+
+if __name__ == "__main__":
+  tfds.testing.test_main()

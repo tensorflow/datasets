@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Ranking datasets."""
-from tensorflow_datasets.ranking.istella import Istella
-from tensorflow_datasets.ranking.mslr_web import MslrWeb
-from tensorflow_datasets.ranking.yahoo_ltrc import YahooLTRC
+"""yahoo_ltrc dataset."""
+
+from tensorflow_datasets.ranking.yahoo_ltrc.yahoo_ltrc import YahooLTRC
