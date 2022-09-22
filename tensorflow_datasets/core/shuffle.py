@@ -18,7 +18,7 @@
 import math
 import os
 import struct
-from typing import Iterator
+from typing import Iterator, Optional
 import uuid
 
 import six
@@ -67,11 +67,16 @@ def _read_hkey(buff):
   return (a << 64) | b
 
 
-def get_bucket_number(hkey, shards_number):
+def get_bucket_number(
+    hkey,
+    num_buckets: int,
+    max_hkey: Optional[int] = None,
+) -> int:
   """Returns bucket (shard) number (int) for given hashed key (int)."""
   # We purposely do not use modulo (%) to keep global order across shards.
-  # floor(key * shards_number / HKEYS_NUMBER), with HKEYS_NUMBER = 2**HKEY_SIZE.
-  return math.trunc((hkey * shards_number) >> HKEY_SIZE)
+  # floor(key * num_buckets / HKEYS_NUMBER), with HKEYS_NUMBER = 2**HKEY_SIZE.
+  max_hkey = max_hkey or 2**HKEY_SIZE
+  return math.trunc((hkey * num_buckets) / max_hkey)
 
 
 class _Bucket(object):
@@ -202,7 +207,7 @@ class Shuffler(object):
     return [len(b) for b in self._buckets]
 
   def _add_to_bucket(self, hkey, data):
-    bucket_number = get_bucket_number(hkey, BUCKETS_NUMBER)
+    bucket_number = get_bucket_number(hkey=hkey, num_buckets=BUCKETS_NUMBER)
     self._buckets[bucket_number].add(hkey, data)
 
   def _add_to_mem_buffer(self, hkey, data):

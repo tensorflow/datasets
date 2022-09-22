@@ -53,6 +53,8 @@ TFRECORD_REC_OVERHEAD = 16
 # It seems reasonable to require 10GB of RAM per worker to handle a 1PB split.
 _BEAM_NUM_TEMP_SHARDS = int(100e3)
 
+_APPROX_NUM_EXAMPLES_PER_TEMP_BUCKET = 10
+
 _INDEX_PATH_SUFFIX = "_index.json"
 
 
@@ -383,10 +385,10 @@ class BeamWriter(object):
   def __setstate__(self, state):
     self.__init__(**state)
 
-  def _serialize_shard(
+  def _serialize_example(
       self,
       key_example: Tuple[hashing.HashKey, Example],
-  ) -> Tuple[int, Tuple[Any, bytes]]:
+  ) -> Tuple[Any, bytes]:
     """Returns (shard#, (hkey, serialized_example))."""
     key, example = key_example
     serialized_example = self._serializer.serialize_example(example)
@@ -394,8 +396,24 @@ class BeamWriter(object):
       hkey = key
     else:
       hkey = self._hasher.hash_key(key)
-    bucketid = shuffle.get_bucket_number(hkey, _BEAM_NUM_TEMP_SHARDS)
-    return (bucketid, (hkey, serialized_example))
+    return (hkey, serialized_example)
+
+  def _bucketize_example(
+      self,
+      key_serialized_example: Tuple[Any, bytes],
+      num_examples: Any,
+      largest_key: Any,
+  ) -> Tuple[int, Tuple[Any, bytes]]:
+    """Returns (bucket#, (hkey, serialized_example))."""
+    key, _ = key_serialized_example
+    if isinstance(num_examples, list):
+      num_examples = num_examples[0]
+    if isinstance(largest_key, list):
+      largest_key = largest_key[0]
+    num_buckets = int(num_examples / _APPROX_NUM_EXAMPLES_PER_TEMP_BUCKET)
+    bucketid = shuffle.get_bucket_number(
+        key, num_buckets=num_buckets, max_hkey=largest_key)
+    return (bucketid, key_serialized_example)
 
   def _sort_bucket(
       self,
@@ -487,12 +505,27 @@ class BeamWriter(object):
   def write_from_pcollection(self, examples_pcollection):
     """Returns PTransform to write (key, example) PCollection to tfrecords."""
     beam = lazy_imports_lib.lazy_imports.apache_beam
-    # Here bucket designates a temporary shard, to help differenciate between
+    serialized_examples = (
+        examples_pcollection
+        | "Serialize" >> beam.Map(self._serialize_example)
+        # (key, example)
+    )
+
+    largest_key = beam.pvalue.AsSingleton(serialized_examples
+                                          | beam.Keys()
+                                          | beam.combiners.Top.Largest(1))
+    num_examples = beam.pvalue.AsSingleton(
+        serialized_examples
+        | "CountExamples" >> beam.combiners.Count.Globally())
+
+    # Here bucket designates a temporary shard, to help differentiate between
     # temporary and final shards.
     buckets, buckets_len_size = (
-        examples_pcollection
-        # (key, example)
-        | "SerializeBucketize" >> beam.Map(self._serialize_shard)
+        serialized_examples
+        | "Bucketize" >> beam.Map(
+            self._bucketize_example,
+            largest_key=largest_key,
+            num_examples=num_examples)
         # (bucket_id, hkey_serialized_ex))
         | "GroupByBucket" >> beam.GroupByKey()
         # (bucket_id, [hkey_serialized_ex0, ...])
