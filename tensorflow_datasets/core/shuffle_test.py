@@ -18,6 +18,7 @@
 import collections
 
 from absl.testing.absltest import mock
+import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import shuffle
 
@@ -72,22 +73,34 @@ _SORTED_ITEMS = [
 _TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS_SPLIT1)
 
 
-class GetShardTest(testing.TestCase):
-
-  @mock.patch.object(shuffle, 'HKEY_SIZE', 10)  # 1024 keys.
-  def test_order(self):
-    shards_number = 10
-    shards = [shuffle.get_bucket_number(k, shards_number) for k in range(1024)]
-    # Check max(shard_x) < min(shard_y) if x < y.
-    previous_shard = 0
-    for shard in shards:
-      self.assertGreaterEqual(shard, previous_shard)
-      previous_shard = shard
-    # Check distribution: all shards are used.
-    counts = collections.Counter(shards)
-    self.assertEqual(len(counts), shards_number)
-    # All shards contain 102 or 103 elements.
-    self.assertEqual(set(counts.values()), {102, 103})
+@pytest.mark.parametrize([
+    'num_keys', 'num_buckets', 'max_hkey', 'expected_non_empty_shards',
+    'expected_min_bucket_size', 'expected_max_bucket_size'
+], [
+    (10, 2, 10, 2, 5, 5),
+    (10, 3, 10, 3, 3, 4),
+    (1024, 10, 1024, 10, 102, 103),
+    (10, 2, 100, 1, 0, 10),
+])
+def test_get_bucket_number(num_keys, num_buckets, max_hkey,
+                           expected_non_empty_shards, expected_min_bucket_size,
+                           expected_max_bucket_size):
+  shards = [
+      shuffle.get_bucket_number(
+          hkey=k, num_buckets=num_buckets, max_hkey=max_hkey)
+      for k in range(num_keys)
+  ]
+  # Check shard(x) <= shard(y) if x < y.
+  previous_shard = 0
+  for shard in shards:
+    assert shard >= previous_shard
+    previous_shard = shard
+  # Check distribution: all shards are used.
+  counts = collections.Counter(shards)
+  assert len(counts) == expected_non_empty_shards
+  for bucket_size in counts.values():
+    assert bucket_size >= expected_min_bucket_size
+    assert bucket_size <= expected_max_bucket_size
 
 
 class ShuffleTest(testing.TestCase):
