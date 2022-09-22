@@ -362,6 +362,9 @@ toc:
     title: istella
   - path: /datasets/catalog/mslr_web
     title: mslr_web
+  - path: /datasets/catalog/yahoo_ltrc
+    status: nightly
+    title: yahoo_ltrc (manual)
   title: Ranking
 - section:
   - path: /datasets/catalog/criteo
