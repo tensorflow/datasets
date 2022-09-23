@@ -21,7 +21,7 @@ from tensorflow_datasets.text.universal_dependencies import universal_dependenci
 
 class UniversalDependenciesTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for universal_dependencies dataset."""
-  BUILDER_CONFIG_NAMES_TO_TEST = ['universal_dependency_it_vit']
+  BUILDER_CONFIG_NAMES_TO_TEST = ['it_vit']
   DATASET_CLASS = universal_dependencies.UniversalDependencies
   SPLITS = {
       'train': 3,
