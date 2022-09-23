@@ -380,3 +380,5 @@ xtreme_s/fleurs.xh_za/2.0.0
 xtreme_s/fleurs.yo_ng/2.0.0
 xtreme_s/fleurs.yue_hant_hk/2.0.0
 xtreme_s/fleurs.zu_za/2.0.0
+yahoo_ltrc/set1/1.0.0
+yahoo_ltrc/set2/1.0.0
