@@ -38,8 +38,6 @@ Tensor = utils.Tensor
 ParseFn = Callable[[Tensor], TreeDict[Tensor]]
 DecodeFn = Callable[[TreeDict[Tensor]], TreeDict[Tensor]]
 
-_BUFFER_SIZE = 8 << 20  # 8 MiB per file.
-
 
 # Use NamedTuple, as it is preserved by `tf.data.Dataset`
 class _IdExample(NamedTuple):
@@ -63,7 +61,7 @@ def _get_dataset_from_filename(
 ) -> tf.data.Dataset:
   """Returns a tf.data.Dataset instance from given instructions."""
   ds = file_adapters.ADAPTER_FOR_FORMAT[file_format].make_tf_data(
-      instruction.filepath, buffer_size=_BUFFER_SIZE)
+      instruction.filepath)
   if do_skip:
     ds = ds.skip(instruction.skip)
   if do_take:
