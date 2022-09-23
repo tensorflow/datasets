@@ -28,7 +28,7 @@ new to UD, you should start by reading the first part of the Short Introduction
 and then browsing the annotation guidelines.
 """
 
-_DATA_URL = 'https://raw.githubusercontent.com/UniversalDependencies/'
+_DATA_URL = "https://raw.githubusercontent.com/UniversalDependencies/"
 
 
 class UniversalDependencies(tfds.dataset_builders.ConllUDatasetBuilder):
@@ -39,20 +39,21 @@ class UniversalDependencies(tfds.dataset_builders.ConllUDatasetBuilder):
         conllu_lib.get_universal_morphology_config(
             language=language,
             description=ud_utils.DESCRIPTIONS[language],
-            features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
-            name=f'universal_dependency_{language}'))
+            features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES))
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version("1.0.1")
   RELEASE_NOTES = {
-      '1.0.0':
-          'Initial release, which corresponds to Universal Dependencies 2.10.',
+      "1.0.1":
+          "Updated config names.",
+      "1.0.0":
+          "Initial release, which corresponds to Universal Dependencies 2.10.",
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     return self.create_dataset_info(
         description=_DESCRIPTION,
-        homepage='https://universaldependencies.org/',
+        homepage="https://universaldependencies.org/",
         citation=ud_utils.CITATION,
     )
 
