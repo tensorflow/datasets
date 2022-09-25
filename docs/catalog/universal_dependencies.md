@@ -80,10 +80,6 @@ xpos    | Sequence(Text)       | (None,) | tf.string |
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 *   **Citation**:
 
 ```
@@ -124,6 +120,43 @@ Split     | Examples
 `'test'`  | 425
 `'train'` | 1,315
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-af_afribooms-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/akk_pisandub
 
 *   **Config description**: A small set of sentences from Babylonian royal
@@ -142,6 +175,43 @@ Split     | Examples
 Split    | Examples
 :------- | -------:
 `'test'` | 101
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-akk_pisandub-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/akk_riao
 
@@ -170,6 +240,43 @@ Split    | Examples
 :------- | -------:
 `'test'` | 1,874
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-akk_riao-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/aqz_tudet
 
 *   **Config description**: UD_Akuntsu-TuDeT is a collection of annotated texts
@@ -191,6 +298,43 @@ Split    | Examples
 :------- | -------:
 `'test'` | 243
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-aqz_tudet-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/sq_tsa
 
 *   **Config description**: The UD Treebank for Standard Albanian (TSA) is a
@@ -206,18 +350,56 @@ Split    | Examples
     initiatives to increase the size and/or improve the overall quality of the
     Treebank.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `62.00 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `93.65 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 60
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-sq_tsa-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/am_att
 
@@ -240,24 +422,101 @@ Split    | Examples
 :------- | -------:
 `'test'` | 1,074
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-am_att-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/grc_perseus
 
 *   **Config description**: This Universal Dependencies Ancient Greek Treebank
     consists of an automatic conversion of a selection of passages from the
     Ancient Greek and Latin Dependency Treebank 2.1
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `18.02 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `24.52 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,137
+`'test'`  | 1,306
+`'train'` | 11,476
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-grc_perseus-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/grc_proiel
 
@@ -270,18 +529,58 @@ Split | Examples
     are acknowledged in the files available there. The conversion code is
     available in the Rubygem proiel-cli, https://github.com/proiel/proiel-cli.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `22.62 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `30.92 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,019
+`'test'`  | 1,047
+`'train'` | 15,014
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-grc_proiel-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/apu_ufpa
 
@@ -307,23 +606,100 @@ Split    | Examples
 :------- | -------:
 `'test'` | 115
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-apu_ufpa-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/hbo_ptnk
 
 *   **Config description**: UD Ancient Hebrew PTNK contains portions of the
     Biblia Hebraic Stuttgartensia with morphological annotations from ETCBC.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.11 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 439
+`'test'`  | 410
+`'train'` | 730
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-hbo_ptnk-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/ar_nyuad
 
@@ -348,6 +724,43 @@ Split     | Examples
 `'test'`  | 1,963
 `'train'` | 15,789
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-ar_nyuad-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/ar_padt
 
 *   **Config description**: The Arabic-PADT UD treebank is based on the Prague
@@ -370,6 +783,43 @@ Split     | Examples
 `'test'`  | 680
 `'train'` | 6,075
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-ar_padt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/ar_pud
 
 *   **Config description**: This is a part of the Parallel Universal
@@ -389,6 +839,43 @@ Split     | Examples
 Split    | Examples
 :------- | -------:
 `'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-ar_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/aii_as
 
@@ -411,6 +898,43 @@ Split    | Examples
 :------- | -------:
 `'test'` | 57
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-aii_as-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/bm_crb
 
 *   **Config description**: The UD Bambara treebank is a section of the Corpus
@@ -430,6 +954,43 @@ Split    | Examples
 :------- | -------:
 `'test'` | 1,026
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-bm_crb-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/eu_bdt
 
 *   **Config description**: The Basque UD treebank is based on a automatic
@@ -438,18 +999,58 @@ Split    | Examples
     treebank consists of 8.993 sentences (121.443 tokens) and covers mainly
     literary and journalistic texts.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.83 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,798
+`'test'`  | 1,799
+`'train'` | 5,396
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-eu_bdt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/bej_nsc
 
@@ -470,6 +1071,43 @@ Split | Examples
 Split    | Examples
 :------- | -------:
 `'test'` | 56
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-bej_nsc-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/be_hse
 
@@ -494,6 +1132,43 @@ Split     | Examples
 `'test'`  | 1,077
 `'train'` | 22,853
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-be_hse-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/bn_bru
 
 *   **Config description**: The BRU Bengali treebank has been created at Begum
@@ -512,6 +1187,43 @@ Split     | Examples
 Split    | Examples
 :------- | -------:
 `'test'` | 56
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-bn_bru-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/bho_bhtb
 
@@ -538,6 +1250,43 @@ Split    | Examples
 :------- | -------:
 `'test'` | 357
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-bho_bhtb-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/br_keb
 
 *   **Config description**: UD Breton-KEB is a treebank of Breton that has been
@@ -559,6 +1308,43 @@ Split    | Examples
 Split    | Examples
 :------- | -------:
 `'test'` | 888
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-br_keb-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/bg_btb
 
@@ -583,6 +1369,43 @@ Split     | Examples
 `'test'`  | 1,116
 `'train'` | 8,907
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-bg_btb-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/bxr_bdt
 
 *   **Config description**: The UD Buryat treebank was annotated manually
@@ -604,24 +1427,99 @@ Split     | Examples
 `'test'`  | 908
 `'train'` | 19
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-bxr_bdt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/yue_hk
 
 *   **Config description**: A Cantonese treebank (in Traditional Chinese
     characters) of film subtitles and of legislative proceedings of Hong Kong,
     parallel with the Chinese-HK treebank.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `693.38 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,004
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-yue_hk-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/ca_ancora
 
@@ -642,6 +1540,43 @@ Split     | Examples
 `'dev'`   | 1,709
 `'test'`  | 1,846
 `'train'` | 13,123
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-ca_ancora-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/ceb_gja
 
@@ -665,6 +1600,43 @@ Split    | Examples
 :------- | -------:
 `'test'` | 188
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-ceb_gja-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/zh_cfl
 
 *   **Config description**: The Chinese-CFL UD treebank is manually annotated by
@@ -672,54 +1644,172 @@ Split    | Examples
     University of Hong Kong, based on essays written by learners of Mandarin
     Chinese as a foreign language. The data is in Simplified Chinese.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `375.71 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `558.45 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 451
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-zh_cfl-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/zh_gsd
 
 *   **Config description**: Traditional Chinese Universal Dependencies Treebank
     annotated and converted by Google.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.48 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.88 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 500
+`'test'`  | 500
+`'train'` | 3,997
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-zh_gsd-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/zh_gsdsimp
 
 *   **Config description**: Simplified Chinese Universal Dependencies dataset
     converted from the GSD (traditional) dataset with manual corrections.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.48 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.88 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 500
+`'test'`  | 500
+`'train'` | 3,997
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-zh_gsdsimp-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/zh_hk
 
@@ -727,18 +1817,56 @@ Split | Examples
     of legislative proceedings of Hong Kong, parallel with the Cantonese-HK
     treebank.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `482.85 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `779.66 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,004
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-zh_hk-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/zh_pud
 
@@ -746,18 +1874,56 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.53 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.95 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-zh_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/ckt_hse
 
@@ -779,24 +1945,101 @@ Split    | Examples
 :------- | -------:
 `'test'` | 1,004
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-ckt_hse-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/lzh_kyoto
 
 *   **Config description**: Classical Chinese Universal Dependencies Treebank
     annotated and converted by Institute for Research in Humanities, Kyoto
     University.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `26.86 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `39.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 5,687
+`'test'`  | 4,932
+`'train'` | 48,569
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-lzh_kyoto-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/cop_scriptorium
 
@@ -819,23 +2062,100 @@ Split     | Examples
 `'test'`  | 403
 `'train'` | 1,227
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-cop_scriptorium-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/hr_set
 
 *   **Config description**: The Croatian UD treebank is based on the extension
     of the SETimes-HR corpus, the hr500k corpus.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.41 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `20.43 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 960
+`'test'`  | 1,136
+`'train'` | 6,914
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-hr_set-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/cs_cac
 
@@ -859,6 +2179,43 @@ Split     | Examples
 `'test'`  | 628
 `'train'` | 23,478
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-cs_cac-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/cs_cltt
 
 *   **Config description**: The UD_Czech-CLTT treebank is based on the Czech
@@ -879,6 +2236,43 @@ Split     | Examples
 `'dev'`   | 129
 `'test'`  | 136
 `'train'` | 860
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-cs_cltt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/cs_fictree
 
@@ -902,23 +2296,100 @@ Split     | Examples
 `'test'`  | 1,291
 `'train'` | 10,160
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-cs_fictree-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## universal_dependencies/cs_pdt
 
 *   **Config description**: The Czech-PDT UD treebank is based on the Prague
     Dependency Treebank 3.0 (PDT), created at the Charles University in Prague.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `164.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `224.30 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes (dev, test), Only when `shuffle_files=False` (train)
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 9,270
+`'test'`  | 10,148
+`'train'` | 68,495
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-cs_pdt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/cs_pud
 
@@ -926,36 +2397,114 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.14 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.76 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-cs_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/da_ddt
 
 *   **Config description**: The Danish UD treebank is a conversion of the Danish
     Dependency Treebank.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.13 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.15 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 564
+`'test'`  | 565
+`'train'` | 4,383
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-da_ddt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/nl_alpino
 
@@ -963,18 +2512,58 @@ Split | Examples
     treebanks annotated at the University of Groningen using the Alpino
     annotation tools and guidelines.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `15.98 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `21.03 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 718
+`'test'`  | 596
+`'train'` | 12,289
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-nl_alpino-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/nl_lassysmall
 
@@ -982,18 +2571,58 @@ Split | Examples
     section of the Lassy Small Treebank. Universal Dependency annotation was
     generated automatically from the original annotation in Lassy.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.61 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.86 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 676
+`'test'`  | 876
+`'train'` | 5,789
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-nl_lassysmall-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/en_esl
 
@@ -1002,18 +2631,58 @@ Split | Examples
     Second Language (ESL) sentences drawn from the Cambridge Learner Corpus
     First Certificate in English (FCE) dataset.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 500
+`'test'`  | 500
+`'train'` | 4,124
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-en_esl-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/en_ewt
 
@@ -1021,54 +2690,174 @@ Split | Examples
     English, built over the source material of the English Web Treebank
     LDC2012T13 (https://catalog.ldc.upenn.edu/LDC2012T13).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `16.37 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `23.60 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 2,001
+`'test'`  | 2,077
+`'train'` | 12,543
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-en_ewt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/en_gum
 
 *   **Config description**: Universal Dependencies syntax annotations from the
     GUM corpus (https://corpling.uis.georgetown.edu/gum/).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `13.81 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `18.21 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,117
+`'test'`  | 1,096
+`'train'` | 6,917
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-en_gum-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/en_gumreddit
 
 *   **Config description**: Universal Dependencies syntax annotations from the
     Reddit portion of the GUM corpus (https://corpling.uis.georgetown.edu/gum/)
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.47 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 104
+`'test'`  | 105
+`'train'` | 686
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-en_gumreddit-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/en_lines
 
@@ -1077,18 +2866,58 @@ Split | Examples
     automatically converted into Universal Dependencies and then partially
     reviewed. Its contents cover literature, an online manual and Europarl data.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.27 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.54 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,032
+`'test'`  | 1,035
+`'train'` | 3,176
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-en_lines-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/en_atis
 
@@ -1097,18 +2926,58 @@ Split | Examples
     dataset which includes the human speech transcriptions of people asking for
     flight information on the automated inquiry systems.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.06 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.76 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 572
+`'test'`  | 586
+`'train'` | 4,274
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-en_atis-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/en_partut
 
@@ -1117,18 +2986,58 @@ Split | Examples
     variety of text genres, including talks, legal texts and Wikipedia articles,
     among others.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.59 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.65 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 156
+`'test'`  | 153
+`'train'` | 1,781
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-en_partut-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/en_pronouns
 
@@ -1138,18 +3047,56 @@ Split | Examples
     pronouns, 'hers', (independent) 'his', (singular) 'theirs', 'mine', and
     (singular) 'yours'.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `138.08 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `186.09 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 285
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-en_pronouns-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/en_pud
 
@@ -1158,18 +3105,56 @@ Split | Examples
     task on Multilingual Parsing from Raw Text to Universal Dependencies
     (http://universaldependencies.org/conll17/).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.28 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.82 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-en_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/myv_jr
 
@@ -1177,18 +3162,56 @@ Split | Examples
     texts in the Erzya language, it originally consists of a sample from a
     number of fiction authors writing originals in Erzya.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.88 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,714
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-myv_jr-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/et_edt
 
@@ -1197,36 +3220,116 @@ Split | Examples
     (CG) annotation scheme, and consisting of genres of fiction, newspaper texts
     and scientific texts. The treebank contains 30,972 trees, 437,769 tokens.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `31.09 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `45.98 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 3,127
+`'test'`  | 3,214
+`'train'` | 24,632
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-et_edt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/et_ewt
 
 *   **Config description**: UD EWT treebank consists of different genres of new
     media. The treebank contains 4,493 trees, 56,399 tokens.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.35 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 833
+`'test'`  | 913
+`'train'` | 4,579
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-et_ewt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fo_farpahc
 
@@ -1234,36 +3337,114 @@ Split | Examples
     Parsed Historical Corpus (FarPaHC) to the Universal Dependencies scheme. The
     conversion was done using UDConverter.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.09 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.84 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 300
+`'test'`  | 301
+`'train'` | 1,020
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fo_farpahc-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fo_oft
 
 *   **Config description**: This is a treebank of Faroese based on the Faroese
     Wikipedia.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `783.86 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,208
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fo_oft-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fi_ftb
 
@@ -1272,36 +3453,114 @@ Split | Examples
     converted from a native annotation model with a script and later manually
     revised.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `12.52 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `18.45 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,875
+`'test'`  | 1,867
+`'train'` | 14,981
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fi_ftb-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fi_ood
 
 *   **Config description**: Finnish-OOD is an external out-of-domain test set
     for Finnish-TDT annotated natively into UD scheme.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.40 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.11 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 2,122
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fi_ood-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fi_pud
 
@@ -1309,18 +3568,56 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.34 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.80 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fi_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fi_tdt
 
@@ -1330,18 +3627,58 @@ Split | Examples
     manual checks and corrections, and the treebank closely adheres to the UD
     guidelines.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `15.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `23.17 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,364
+`'test'`  | 1,555
+`'train'` | 12,217
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fi_tdt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fr_fqb
 
@@ -1349,18 +3686,56 @@ Split | Examples
     conversion of the French QuestionBank v1, a corpus entirely made of
     questions.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.47 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 2,289
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fr_fqb-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fr_ftb
 
@@ -1370,18 +3745,58 @@ Split | Examples
     morphological information and phrase-structure and then converted to the
     Universal Dependencies annotation scheme.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `29.49 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `44.93 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,235
+`'test'`  | 2,541
+`'train'` | 14,759
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fr_ftb-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fr_gsd
 
@@ -1390,18 +3805,58 @@ Split | Examples
     (https://github.com/ryanmcd/uni-dep-tb). It is updated since 2015
     independently from the previous source.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `24.38 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `35.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,476
+`'test'`  | 416
+`'train'` | 14,449
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fr_gsd-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fr_partut
 
@@ -1410,35 +3865,115 @@ Split | Examples
     variety of text genres, including talks, legal texts and Wikipedia articles,
     among others.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.74 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.44 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 107
+`'test'`  | 110
+`'train'` | 803
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fr_partut-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fr_rhapsodie
 
 *   **Config description**: A Universal Dependencies corpus for spoken French.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.00 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.10 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,082
+`'test'`  | 840
+`'train'` | 1,288
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fr_rhapsodie-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fr_parisstories
 
@@ -1449,18 +3984,57 @@ Split | Examples
     contains monologues and dialogues from speakers living in the Parisian
     region.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.97 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.70 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 547
+`'train'` | 1,216
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fr_parisstories-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fr_pud
 
@@ -1468,36 +4042,114 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.71 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fr_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/fr_sequoia
 
 *   **Config description**: UD_French-Sequoia is an automatic conversion of the
     Sequoia Treebank corpus French Sequoia corpus.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.21 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.18 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 412
+`'test'`  | 456
+`'train'` | 2,231
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-fr_sequoia-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/gl_ctg
 
@@ -1505,54 +4157,173 @@ Split | Examples
     parsing of the Galician Technical Corpus (http://sli.uvigo.gal/CTG) created
     at the University of Vigo by the the TALG NLP research group.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.85 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.81 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 860
+`'test'`  | 861
+`'train'` | 2,272
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-gl_ctg-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/gl_treegal
 
 *   **Config description**: The Galician-TreeGal is a treebank for Galician
     developed at LyS Group (Universidade da Coruña).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.66 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.35 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 400
+`'train'` | 600
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-gl_treegal-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/de_gsd
 
 *   **Config description**: The German UD is converted from the content head
     version of the universal dependency treebank v2.0 (legacy).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `20.69 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `29.60 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 799
+`'test'`  | 977
+`'train'` | 13,814
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-de_gsd-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/de_hdt
 
@@ -1561,18 +4332,58 @@ Split | Examples
     annotation in conjunction with a standard for morphologically and
     syntactically annotating sentences as well as a constraint-based parser.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `242.97 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `347.93 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 18,434
+`'test'`  | 18,459
+`'train'` | 153,035
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-de_hdt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/de_lit
 
@@ -1581,18 +4392,56 @@ Split | Examples
     i.e. aphorism-like texts mainly dealing with philosophical issues concerning
     art, beauty and related topics.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.97 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.49 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,922
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-de_lit-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/de_pud
 
@@ -1600,36 +4449,114 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.65 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.20 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-de_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/got_proiel
 
 *   **Config description**: The UD Gothic treebank is based on the Gothic data
     from the PROIEL treebank, and consists of Wulfila's Bible translation.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.98 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.17 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 985
+`'test'`  | 1,029
+`'train'` | 3,387
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-got_proiel-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/el_gdt
 
@@ -1638,18 +4565,58 @@ Split | Examples
     maintained by researchers at the Institute for Language and Speech
     Processing/Athena R.C. (http://www.ilsp.gr).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.52 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.49 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 403
+`'test'`  | 456
+`'train'` | 1,662
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-el_gdt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/gub_tudet
 
@@ -1659,18 +4626,56 @@ Split | Examples
     from the New Testament. Sentence annotation and documentation by Lorena
     Martín Rodríguez and Fabrício Ferraz Gerardi.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `683.38 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `738.09 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,126
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-gub_tudet-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/gn_oldtudet
 
@@ -1680,53 +4685,171 @@ Split | Examples
     sentences from dictionaries, and other texts. Sentence annotation and
     documentation by Fabrício Ferraz Gerardi and Lorena Martín Rodríguez.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `18.93 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `24.71 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 59
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-gn_oldtudet-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/he_htb
 
 *   **Config description**: A Universal Dependencies Corpus for Hebrew.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `11.64 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `16.10 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 484
+`'test'`  | 491
+`'train'` | 5,241
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-he_htb-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/he_iahltwiki
 
 *   **Config description**: Publicly available subset of the IAHLT UD Hebrew
     Treebank's Wikipedia section (https://www.iahlt.org/)
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `10.30 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `14.16 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 348
+`'test'`  | 393
+`'train'` | 4,298
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-he_iahltwiki-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/qfn_fame
 
@@ -1734,18 +4857,56 @@ Split | Examples
     sentences from the FAME! speech corpus by Yilmaz et al. (2016a, 2016b). The
     treebank is manually annotated using the UD scheme.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `232.57 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `290.88 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 400
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-qfn_fame-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/qhe_hiencs
 
@@ -1756,36 +4917,116 @@ Split | Examples
     annotators using UD v2 and v1 guidelines respectively. The evaluation sets
     are automatically converted from UD v1 to v2.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `893.15 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.53 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 225
+`'test'`  | 225
+`'train'` | 1,448
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-qhe_hiencs-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/hi_hdtb
 
 *   **Config description**: The Hindi UD treebank is based on the Hindi
     Dependency Treebank (HDTB), created at IIIT Hyderabad, India.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `49.18 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `68.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,659
+`'test'`  | 1,684
+`'train'` | 13,304
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-hi_hdtb-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/hi_pud
 
@@ -1793,36 +5034,114 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.82 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-hi_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/hu_szeged
 
 *   **Config description**: The Hungarian UD treebank is derived from the Szeged
     Dependency Treebank (Vincze et al. 2010).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.92 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.20 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 441
+`'test'`  | 449
+`'train'` | 910
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-hu_szeged-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/is_modern
 
@@ -1830,18 +5149,58 @@ Split | Examples
     additions to the Icelandic Parsed Historical Corpus (IcePaHC) to the
     Universal Dependencies scheme.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.02 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `12.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 784
+`'test'`  | 768
+`'train'` | 5,376
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-is_modern-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/is_icepahc
 
@@ -1849,36 +5208,114 @@ Split | Examples
     Icelandic Parsed Historical Corpus (IcePaHC) to the Universal Dependencies
     scheme. The conversion was done using UDConverter.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `81.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `112.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 4,865
+`'test'`  | 5,157
+`'train'` | 34,007
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-is_icepahc-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/is_pud
 
 *   **Config description**: Icelandic-PUD is the Icelandic part of the Parallel
     Universal Dependencies (PUD) treebanks.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.45 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.89 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-is_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/id_csui
 
@@ -1889,36 +5326,115 @@ Split | Examples
     all the three versions of the treebanks were built at Faculty of Computer
     Science, Universitas Indonesia.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.62 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.97 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 374
+`'train'` | 656
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-id_csui-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/id_gsd
 
 *   **Config description**: The Indonesian UD is converted from the content head
     version of the universal dependency treebank v2.0 (legacy).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.15 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.25 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 559
+`'test'`  | 557
+`'train'` | 4,482
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-id_gsd-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/id_pud
 
@@ -1926,54 +5442,170 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.10 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.44 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-id_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/ga_idt
 
 *   **Config description**: A Universal Dependencies 4910-sentence treebank for
     modern Irish.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.62 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 451
+`'test'`  | 454
+`'train'` | 4,005
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-ga_idt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/ga_twittirish
 
 *   **Config description**: A Universal Dependencies treebank of 866 tweets in
     modern Irish.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `782.30 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.13 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 866
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-ga_twittirish-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/it_isdt
 
@@ -1982,18 +5614,58 @@ Split | Examples
     Dependency Treebank), released for the dependency parsing shared task of
     Evalita-2014 (Bosco et al. 2014).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `20.03 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `29.18 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 564
+`'test'`  | 482
+`'train'` | 13,121
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-it_isdt-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/it_partut
 
@@ -2002,18 +5674,58 @@ Split | Examples
     variety of text genres, including talks, legal texts and Wikipedia articles,
     among others.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.42 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.83 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 156
+`'test'`  | 153
+`'train'` | 1,781
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-it_partut-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/it_postwita
 
@@ -2021,18 +5733,58 @@ Split | Examples
     annotated in Universal Dependencies that can be exploited for the training
     of NLP systems to enhance their performance on social media texts.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.27 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.47 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 670
+`'test'`  | 674
+`'train'` | 5,368
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-it_postwita-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/it_markit
 
@@ -2041,36 +5793,114 @@ Split | Examples
     Tonelli, To appear in Proceedings of the Eighth Italian Conference on
     Computational Linguistics 2022 (CLIC-it 2021)
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.48 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.44 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 341
+`'test'`  | 341
+`'train'` | 613
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-it_markit-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/it_valico
 
 *   **Config description**: Manually corrected Treebank of Learner Italian drawn
     from the Valico corpus and correspondent corrected sentences.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `520.45 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `657.38 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 398
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-it_valico-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/it_pud
 
@@ -2078,18 +5908,56 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.05 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/universal_dependencies-it_pud-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## universal_dependencies/it_twittiro
 
@@ -2098,18 +5966,25 @@ Split | Examples
     training of NLP systems to enhance their performance on social media texts,
     and in particular, for irony detection purposes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.81 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.51 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 144
+`'test'`  | 142
+`'train'` | 1,138
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/it_vit
 
@@ -2119,18 +5994,25 @@ Split | Examples
     et al. 2007; Delmonte 2009;
     http://rondelmo.it/resource/VIT/Browser-VIT/index.htm).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `16.77 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `23.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 743
+`'test'`  | 1,067
+`'train'` | 8,277
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ja_pudluw
 
@@ -2138,18 +6020,23 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.37 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.11 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ja_bccwjluw
 
@@ -2158,18 +6045,25 @@ Split | Examples
     documentation. The original sentences are from `Balanced Corpus of
     Contemporary Written Japanese'(BCCWJ).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `59.20 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `100.36 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 8,427
+`'test'`  | 7,881
+`'train'` | 40,801
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ja_gsdluw
 
@@ -2177,18 +6071,25 @@ Split | Examples
     is based on the definition of UD Japanese convention described in the UD
     documentation. The original sentences are from Google UDT 2.0.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `28.31 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `33.97 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 507
+`'test'`  | 543
+`'train'` | 7,050
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ja_bccwj
 
@@ -2197,18 +6098,25 @@ Split | Examples
     documentation. The original sentences are from `Balanced Corpus of
     Contemporary Written Japanese'(BCCWJ).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `93.05 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `157.62 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 8,427
+`'test'`  | 7,881
+`'train'` | 40,801
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ja_gsd
 
@@ -2216,18 +6124,25 @@ Split | Examples
     is based on the definition of UD Japanese convention described in the UD
     documentation. The original sentences are from Google UDT 2.0.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `43.21 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `52.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 507
+`'test'`  | 543
+`'train'` | 7,050
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ja_modern
 
@@ -2236,18 +6151,23 @@ Split | Examples
     documentation. The original sentences are from `Corpus of Historical
     Japanese' (CHJ).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.06 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.70 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 822
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ja_pud
 
@@ -2256,18 +6176,23 @@ Split | Examples
     Multilingual Parsing from Raw Text to Universal
     Dependencies](http://universaldependencies.org/conll17/).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.48 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.75 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/jv_csui
 
@@ -2277,18 +6202,23 @@ Split | Examples
     v1 corpus. We revised the sentences that contained more Indonesian words
     than Javanese words and manually annotated them.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `141.40 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `171.69 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 125
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/urb_tudet
 
@@ -2296,36 +6226,46 @@ Split | Examples
     sentences in Ka'apor. The project is a work in progress and the treebank is
     being updated on a regular basis.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `24.74 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `33.60 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 83
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/xnr_kdtb
 
 *   **Config description**: The Kangri UD Treebank (KDTB) is a part of the
     Universal Dependency treebank project.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `132.92 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `196.42 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 288
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/krl_kkpp
 
@@ -2334,18 +6274,23 @@ Split | Examples
     collected from VepKar corpora and consists of mostly modern news texts but
     also some stories and educational texts.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `220.80 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `317.02 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 228
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/kk_ktb
 
@@ -2354,18 +6299,24 @@ Split | Examples
     UDHR, news and phrasebook sentences. Sentences IDs include partial document
     identifiers.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `833.88 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.15 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,047
+`'train'` | 31
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/arr_tudet
 
@@ -2389,24 +6340,33 @@ Split    | Examples
 :------- | -------:
 `'test'` | 674
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
+
 ## universal_dependencies/kfm_aha
 
 *   **Config description**: The AHA Khunsari Treebank is a small treebank for
     contemporary Khunsari. Its corpus is collected and annotated manually. We
     have prepared this treebank based on interviews with Khunsari speakers.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.14 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.56 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 10
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/quc_iu
 
@@ -2414,36 +6374,46 @@ Split | Examples
     from a variety of text domains but principally dictionary example sentences
     and linguistic examples.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `823.85 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,435
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/koi_uh
 
 *   **Config description**: This is a Komi-Permyak literary language treebank
     consisting of original and translated texts.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `99.43 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `118.77 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 100
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/kpv_ikdp
 
@@ -2451,36 +6421,46 @@ Split | Examples
     of spoken Komi-Zyrian. The current texts are short recorded segments from
     different areas where the Iźva dialect of Komi language is spoken.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `202.88 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `273.92 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 214
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/kpv_lattice
 
 *   **Config description**: UD Komi-Zyrian Lattice is a treebank of written
     standard Komi-Zyrian.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `741.82 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `989.46 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 663
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ko_gsd
 
@@ -2488,18 +6468,25 @@ Split | Examples
     first converted from the Universal Dependency Treebank v2.0 (legacy), and
     then enhanced by Chun et al., 2018.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.66 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.31 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 950
+`'test'`  | 989
+`'train'` | 4,400
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ko_kaist
 
@@ -2507,18 +6494,25 @@ Split | Examples
     generated by Chun et al., 2018 from the constituency trees in the KAIST
     Tree-Tagging Corpus.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `20.84 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `27.97 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 2,066
+`'test'`  | 2,287
+`'train'` | 23,010
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ko_pud
 
@@ -2526,18 +6520,23 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.92 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.12 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/kmr_mg
 
@@ -2546,18 +6545,24 @@ Split | Examples
     measure. It has been annotated natively in accordance with the UD annotation
     scheme.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `747.04 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.07 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 734
+`'train'` | 20
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/la_ittb
 
@@ -2566,18 +6571,25 @@ Split | Examples
     contains the complete work by Thomas Aquinas (1225–1274; Medieval Latin) and
     by 61 other authors related to Thomas.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `40.75 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `55.54 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 2,101
+`'test'`  | 2,101
+`'train'` | 22,775
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/la_udante
 
@@ -2586,18 +6598,25 @@ Split | Examples
     the University of Pisa, Italy. It is a treebank of Latin language, more
     precisely of literary Medieval Latin (XIVth century).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.87 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.65 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 376
+`'test'`  | 419
+`'train'` | 926
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/la_llct
 
@@ -2606,18 +6625,25 @@ Split | Examples
     LLCT2 treebank from the Latin Dependency Treebank (LDT) format into the
     Universal Dependencies standard.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `20.99 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `27.77 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 850
+`'test'`  | 884
+`'train'` | 7,289
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/la_perseus
 
@@ -2625,18 +6651,24 @@ Split | Examples
     of an automatic conversion of a selection of passages from the Ancient Greek
     and Latin Dependency Treebank 2.1
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.45 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.53 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 939
+`'train'` | 1,334
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/la_proiel
 
@@ -2646,18 +6678,25 @@ Split | Examples
     Atticus, Palladius' Opus Agriculturae and the first book of Cicero's De
     officiis.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `17.58 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `25.21 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,234
+`'test'`  | 1,260
+`'train'` | 15,917
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/lv_lvtb
 
@@ -2665,18 +6704,25 @@ Split | Examples
     (LVTB), being created at University of Latvia, Institute of Mathematics and
     Computer Science, Artificial Intelligence Laboratory.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `30.93 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `42.49 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,957
+`'test'`  | 2,325
+`'train'` | 12,521
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/lij_glt
 
@@ -2686,36 +6732,49 @@ Split | Examples
     associated with today's literary, journalistic and academic ligurophone
     sphere.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `426.33 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `636.88 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 296
+`'train'` | 20
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/lt_alksnis
 
 *   **Config description**: The Lithuanian dependency treebank ALKSNIS v3.0
     (Vytautas Magnus University).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.68 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 617
+`'test'`  | 684
+`'train'` | 2,341
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/lt_hse
 
@@ -2725,18 +6784,25 @@ Split | Examples
     version which includes news and an essay by Tomas Venclova is available
     here.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `255.28 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 153
+`'test'`  | 153
+`'train'` | 153
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/olo_kkpp
 
@@ -2745,18 +6811,24 @@ Split | Examples
     scheme. The data is collected from VepKar corpora and consists of mostly
     modern news texts but also some stories and educational texts.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `119.00 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `165.75 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 106
+`'train'` | 19
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/nds_lsdc
 
@@ -2766,18 +6838,23 @@ Split | Examples
     language from the 19th and early 20th century in genres such as short
     stories, novels, speeches, letters and fairytales.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `209.01 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `280.72 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 83
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/mt_mudt
 
@@ -2787,36 +6864,48 @@ Split | Examples
     Italo-Romance influence. MUDT was designed as a balanced corpus with four
     major genres (see Splitting below) represented roughly equally.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.92 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.67 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 433
+`'test'`  | 518
+`'train'` | 1,123
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/gv_cadhan
 
 *   **Config description**: This is the Cadhan Aonair UD treebank for Manx
     Gaelic, created by Kevin Scannell.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.26 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.79 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 2,319
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/mr_ufal
 
@@ -2824,18 +6913,25 @@ Split | Examples
     consisting primarily of stories from Wikisource, and parts of an article on
     Wikipedia.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `330.87 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `496.00 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 46
+`'test'`  | 47
+`'train'` | 373
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/gun_dooley
 
@@ -2845,18 +6941,23 @@ Split | Examples
     only contains the annotation (tags, features, relations) while the FORM and
     LEMMA columns are empty.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `560.08 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `859.37 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,046
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/gun_thomas
 
@@ -2865,18 +6966,23 @@ Split | Examples
     corpus consists of three speeches by Paulina Kerechu Núñez Romero, a Mbyá
     Guaraní speaker from Ytu, Caazapá Department, Paraguay.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `90.88 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `120.86 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 98
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/mdf_jr
 
@@ -2885,18 +6991,23 @@ Split | Examples
     Moksha language, it originally consists of a sample from a number of fiction
     authors writing originals in Moksha.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `343.96 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `451.57 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 342
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/myu_tudet
 
@@ -2904,36 +7015,48 @@ Split | Examples
     sentences in Mundurukú. Together with UD_Akuntsu-TuDeT and
     UD_Tupinamba-TuDeT, UD_Munduruku-TuDeT is part of the TuLaR project.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `67.85 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `83.48 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 158
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/pcm_nsc
 
 *   **Config description**: A Universal Dependencies corpus for spoken Naija
     (Nigerian Pidgin).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `16.99 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `21.58 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 991
+`'test'`  | 972
+`'train'` | 7,278
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/nyq_aha
 
@@ -2941,18 +7064,23 @@ Split | Examples
     contemporary Nayini. Its corpus is collected and annotated manually. We have
     prepared this treebank based on interviews with Nayini speakers.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.24 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.72 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 10
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sme_giella
 
@@ -2960,18 +7088,24 @@ Split | Examples
     disambiguated and function-labelled gold-standard corpus of North Sámi
     produced by the Giellatekno team at UiT Norgga árktalaš universitehta.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.78 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 865
+`'train'` | 2,257
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/no_bokmaal
 
@@ -2980,18 +7114,25 @@ Split | Examples
     treebank of Norwegian. NDT has been automatically converted to the UD scheme
     by Lilja Øvrelid at the University of Oslo.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `18.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `27.60 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 2,409
+`'test'`  | 1,939
+`'train'` | 15,696
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/no_nynorsk
 
@@ -3000,18 +7141,25 @@ Split | Examples
     treebank of Norwegian. NDT has been automatically converted to the UD scheme
     by Lilja Øvrelid at the University of Oslo.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `17.68 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `26.46 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,890
+`'test'`  | 1,511
+`'train'` | 14,174
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/no_nynorsklia
 
@@ -3020,18 +7168,25 @@ Split | Examples
     automatically converted to the UD scheme by Lilja Øvrelid at the University
     of Oslo.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.19 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.78 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 881
+`'test'`  | 957
+`'train'` | 3,412
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/cu_proiel
 
@@ -3039,36 +7194,50 @@ Split | Examples
     on the Old Church Slavonic data from the PROIEL treebank and contains the
     text of the Codex Marianus New Testament translation.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.92 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.33 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,073
+`'test'`  | 1,141
+`'train'` | 4,124
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/fro_srcmf
 
 *   **Config description**: UD_Old_French-SRCMF is a conversion of (part of) the
     SRCMF corpus (Syntactic Reference Corpus of Medieval French srcmf.org).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `13.51 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `18.54 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,887
+`'test'`  | 1,989
+`'train'` | 14,153
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/orv_birchbark
 
@@ -3080,18 +7249,25 @@ Split | Examples
     morphological and lexical annotation is a conversion of the original RNC
     annotation.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.04 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,054
+`'test'`  | 1,006
+`'train'` | 1,045
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/orv_rnc
 
@@ -3100,18 +7276,24 @@ Split | Examples
     were originally annotated according to the RNC and extended UD-Russian
     morphological schemas and UD 2.4 dependency schema.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.95 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.02 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 648
+`'train'` | 422
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/orv_torot
 
@@ -3120,36 +7302,48 @@ Split | Examples
     and OCS Treebank (TOROT), which was originally annotated in PROIEL
     dependency format.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.49 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `20.13 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,852
+`'test'`  | 1,756
+`'train'` | 13,336
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/otk_tonqq
 
 *   **Config description**: `UD_Old_Turkish-Tonqq` is an Old Turkish treebank
     built upon Turkic script texts or sentences that are trivially convertible.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `10.44 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `14.01 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 20
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/fa_perdt
 
@@ -3160,18 +7354,25 @@ Split | Examples
     and Alireza Nourian. 'The Persian Dependency Treebank Made Universal'. 2020
     (to appear).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `32.05 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `43.48 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,456
+`'test'`  | 1,455
+`'train'` | 26,196
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/fa_seraji
 
@@ -3180,18 +7381,25 @@ Split | Examples
     of the UPDT to the Universal Dependencies was performed semi-automatically
     with extensive manual checks and corrections.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.43 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `12.50 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 599
+`'test'`  | 600
+`'train'` | 4,798
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/pl_lfg
 
@@ -3200,18 +7408,25 @@ Split | Examples
     an LFG grammar of Polish, POLFIE, and manually disambiguated by human
     annotators.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.18 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `18.96 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,745
+`'test'`  | 1,727
+`'train'` | 13,774
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/pl_pdb
 
@@ -3220,18 +7435,25 @@ Split | Examples
     Polish Academy of Sciences in Warsaw. The PDB-UD treebank is an extended and
     corrected version of the Polish SZ-UD treebank (the release 1.2 to 2.3).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `34.66 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `47.62 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 2,215
+`'test'`  | 2,215
+`'train'` | 17,722
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/pl_pud
 
@@ -3239,18 +7461,23 @@ Split | Examples
     Dependencies (PUD) treebanks, created at the Institute of Computer Science,
     Polish Academy of Sciences in Warsaw.Re
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.91 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.52 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/pt_bosque
 
@@ -3259,36 +7486,50 @@ Split | Examples
     part of the Floresta Sintá(c)tica treebank. It contains both European
     (CETEMPúblico) and Brazilian (CETENFolha) variants.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `20.41 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,172
+`'test'`  | 1,167
+`'train'` | 7,018
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/pt_gsd
 
 *   **Config description**: The Brazilian Portuguese UD is converted from the
     Google Universal Dependency Treebank v2.0 (legacy).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `14.57 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `20.34 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,204
+`'test'`  | 1,200
+`'train'` | 9,615
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/pt_pud
 
@@ -3296,36 +7537,46 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.48 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.95 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ro_art
 
 *   **Config description**: The UD treebank ArT is a treebank of the Aromanian
     dialect of the Romanian language in UD format.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `44.38 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `65.95 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 50
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ro_nonstandard
 
@@ -3333,18 +7584,25 @@ Split | Examples
     UAIC-RoDia) is based on UAIC-RoDia Treebank. UAIC-RoDia = ISLRN
     156-635-615-024-0
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `48.00 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `66.84 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,052
+`'test'`  | 1,052
+`'train'` | 24,121
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ro_rrt
 
@@ -3352,54 +7610,75 @@ Split | Examples
     Mititelu et al., 2016) is the reference treebank in UD format for standard
     Romanian.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `16.38 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `22.96 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 752
+`'test'`  | 729
+`'train'` | 8,043
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ro_simonero
 
 *   **Config description**: SiMoNERo is a medical corpus of contemporary
     Romanian.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `11.36 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `15.68 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 443
+`'test'`  | 491
+`'train'` | 3,747
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ru_gsd
 
 *   **Config description**: Russian Universal Dependencies Treebank annotated
     and converted by Google.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `8.42 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.51 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 579
+`'test'`  | 601
+`'train'` | 3,850
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ru_pud
 
@@ -3407,35 +7686,47 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.78 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.26 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ru_syntagrus
 
 *   **Config description**: Russian data from the SynTagRus corpus.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `97.99 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `139.66 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 6,584
+`'test'`  | 6,491
+`'train'` | 48,814
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ru_taiga
 
@@ -3443,18 +7734,25 @@ Split | Examples
     samples extracted from Taiga Corpus and MorphoRuEval-2017 and GramEval-2020
     shared tasks collections.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `18.12 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `24.32 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 946
+`'test'`  | 881
+`'train'` | 16,045
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sa_ufal
 
@@ -3462,18 +7760,23 @@ Split | Examples
     Pañcatantra, an ancient Indian collection of interrelated fables by Vishnu
     Sharma.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `414.72 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `407.83 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 230
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sa_vedic
 
@@ -3485,36 +7788,49 @@ Split | Examples
     software and manually validated. POS tags have been induced automatically
     from the morpho-sytactic information of each word.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.95 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.14 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,473
+`'train'` | 2,524
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/gd_arcosg
 
 *   **Config description**: A treebank of Scottish Gaelic based on the Annotated
     Reference Corpus Of Scottish Gaelic (ARCOSG).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `5.07 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `7.20 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 655
+`'test'`  | 545
+`'train'` | 3,539
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sr_set
 
@@ -3522,36 +7838,48 @@ Split | Examples
     [SETimes-SR](http://hdl.handle.net/11356/1200) corpus and additional news
     documents from the Serbian web.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `7.07 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `10.04 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 536
+`'test'`  | 520
+`'train'` | 3,328
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sms_giellagas
 
 *   **Config description**: The UD Skolt Sami Giellagas treebank is based almost
     entirely on spoken Skolt Sami corpora.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `216.27 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `299.21 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 218
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sk_snk
 
@@ -3559,18 +7887,25 @@ Split | Examples
     annotated as part of the Slovak National Corpus, following the annotation
     style of the Prague Dependency Treebank.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.55 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `13.87 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,060
+`'test'`  | 1,061
+`'train'` | 8,483
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sl_ssj
 
@@ -3579,18 +7914,25 @@ Split | Examples
     annotated data in Slovenian, originally annotated in the JOS annotation
     scheme.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `19.82 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `28.72 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,250
+`'test'`  | 1,282
+`'train'` | 10,903
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sl_sst
 
@@ -3600,18 +7942,24 @@ Split | Examples
     monologic, dialogic and multi-party spontaneous speech in different everyday
     situations.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.53 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.88 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,110
+`'train'` | 2,078
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/soj_aha
 
@@ -3619,18 +7967,23 @@ Split | Examples
     contemporary Soi. Its corpus is collected and annotated manually. We have
     prepared this treebank based on interviews with Soi speakers.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.47 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.58 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 8
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ajp_madar
 
@@ -3653,40 +8006,58 @@ Split    | Examples
 :------- | -------:
 `'test'` | 100
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
+
 ## universal_dependencies/es_ancora
 
 *   **Config description**: Spanish data from the AnCora corpus.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `50.23 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `66.53 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,654
+`'test'`  | 1,721
+`'train'` | 14,287
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/es_gsd
 
 *   **Config description**: The Spanish UD is converted from the content head
     version of the universal dependency treebank v2.0 (legacy).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `24.86 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `36.42 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,400
+`'test'`  | 426
+`'train'` | 14,187
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/es_pud
 
@@ -3695,18 +8066,23 @@ Split | Examples
     Multilingual Parsing from Raw Text to Universal
     Dependencies](http://universaldependencies.org/conll17/).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.60 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.11 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/swl_sslc
 
@@ -3714,18 +8090,25 @@ Split | Examples
     Language (ISO 639-3: swl) is derived from the Swedish Sign Language Corpus
     (SSLC) from the department of linguistics, Stockholm University.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `79.78 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `122.04 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 82
+`'test'`  | 34
+`'train'` | 87
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sv_lines
 
@@ -3734,54 +8117,73 @@ Split | Examples
     English and the sources cover literary genres, online manuals and Europarl
     data.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.91 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `9.18 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,032
+`'test'`  | 1,035
+`'train'` | 3,176
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sv_pud
 
 *   **Config description**: Swedish-PUD is the Swedish part of the Parallel
     Universal Dependencies (PUD) treebanks.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.64 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.13 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sv_talbanken
 
 *   **Config description**: The Swedish-Talbanken treebank is based on
     Talbanken, a treebank developed at Lund University in the 1970s.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `8.08 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 504
+`'test'`  | 1,219
+`'train'` | 4,303
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/gsw_uzh
 
@@ -3789,36 +8191,46 @@ Split | Examples
     treebank of 100 sentences in different Swiss German dialects and a variety
     of text genres.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `58.28 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `86.61 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 100
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tl_trg
 
 *   **Config description**: UD_Tagalog-TRG is a UD treebank manually annotated
     using sentences from a grammar book.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `59.91 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `84.14 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 128
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tl_ugnayan
 
@@ -3826,18 +8238,23 @@ Split | Examples
     currently composed of educational fiction and nonfiction text. The treebank
     is under development at the University of the Philippines.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `53.91 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `76.16 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 94
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ta_mwtt
 
@@ -3846,18 +8263,23 @@ Split | Examples
     Lehmann (1993). This initial release has 536 sentences of various lengths,
     and all of these are added as the test set.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `394.18 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `499.94 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 534
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ta_ttb
 
@@ -3865,36 +8287,50 @@ Split | Examples
     Dependency Treebank created at the Charles University in Prague by
     Loganathan Ramasamy.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.68 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 80
+`'test'`  | 120
+`'train'` | 400
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/te_mtg
 
 *   **Config description**: The Telugu UD treebank is created in UD based on
     manual annotations of sentences from a grammar book.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `628.67 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `866.20 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 131
+`'test'`  | 146
+`'train'` | 1,051
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/th_pud
 
@@ -3902,18 +8338,23 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.53 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.85 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tpn_tudet
 
@@ -3922,36 +8363,48 @@ Split | Examples
     UD_Tupinamba-TuDeT is part of the TuLaR. The treebank is ongoing work and is
     constantly being updated.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `293.55 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `371.48 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 546
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/qtd_sagt
 
 *   **Config description**: UD Turkish-German SAGT is a Turkish-German
     code-switching treebank that is developed as part of the SAGT project.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.78 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 801
+`'test'`  | 805
+`'train'` | 578
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tr_atis
 
@@ -3959,18 +8412,25 @@ Split | Examples
     (Airline Travel Information System) corpus (see References). It consists of
     5432 sentences.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.26 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `5.09 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 572
+`'test'`  | 586
+`'train'` | 4,274
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tr_tourism
 
@@ -3979,18 +8439,25 @@ Split | Examples
     sentences were taken from the original customer reviews of a tourism
     company.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.48 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `11.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 2,166
+`'test'`  | 2,191
+`'train'` | 15,476
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tr_kenet
 
@@ -3998,18 +8465,25 @@ Split | Examples
     Turkish. It consists of 18,700 manually annotated sentences and 178,700
     tokens. Its corpus consists of dictionary examples.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `12.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `19.00 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,646
+`'test'`  | 1,643
+`'train'` | 15,398
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tr_penn
 
@@ -4017,18 +8491,25 @@ Split | Examples
     a total of 9,560 manually annotated sentences and 87,367 tokens. (It only
     includes sentences up to 15 words long.)
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `12.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `18.82 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 622
+`'test'`  | 924
+`'train'` | 14,850
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tr_framenet
 
@@ -4038,18 +8519,25 @@ Split | Examples
     can be filtered according to the semantic frame category of the root of the
     sentence.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.43 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.28 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 205
+`'test'`  | 205
+`'train'` | 2,288
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tr_boun
 
@@ -4057,36 +8545,48 @@ Split | Examples
     UD style. Created by the members of
     [TABILAB](http://http://tabilab.cmpe.boun.edu.tr/) from Boğaziçi University.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `9.07 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `13.24 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 979
+`'test'`  | 979
+`'train'` | 7,803
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tr_gb
 
 *   **Config description**: This is a treebank annotating example sentences from
     a comprehensive grammar book of Turkish.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.41 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.02 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 2,880
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tr_imst
 
@@ -4094,18 +8594,25 @@ Split | Examples
     Treebank, is a semi-automatic conversion of the IMST Treebank (Sulubacak et
     al., 2016).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `4.51 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `6.70 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 988
+`'test'`  | 983
+`'train'` | 3,664
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/tr_pud
 
@@ -4113,18 +8620,23 @@ Split | Examples
     Dependencies (PUD) treebanks created for the CoNLL 2017 shared task on
     Multilingual Parsing from Raw Text to Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.65 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 1,000
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/uk_iu
 
@@ -4132,36 +8644,49 @@ Split | Examples
     Ukrainian, developed for UD originally, by Institute for Ukrainian, NGO.
     [українською]
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `16.54 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `21.99 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 672
+`'test'`  | 892
+`'train'` | 5,496
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/hsb_ufal
 
 *   **Config description**: A small treebank of Upper Sorbian based mostly on
     Wikipedia.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `762.63 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.11 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 623
+`'train'` | 23
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ur_udtb
 
@@ -4169,18 +8694,25 @@ Split | Examples
     automatically converted from Urdu Dependency Treebank (UDTB) which is part
     of an ongoing effort of creating multi-layered treebanks for Hindi and Urdu.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `15.16 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `21.57 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 552
+`'test'`  | 535
+`'train'` | 4,043
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ug_udt
 
@@ -4188,54 +8720,73 @@ Split | Examples
     Dependency Treebank (UDT), created at the Xinjiang University in Ürümqi,
     China.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `3.30 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `4.59 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 900
+`'test'`  | 900
+`'train'` | 1,656
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/vi_vtb
 
 *   **Config description**: The Vietnamese UD treebank is a conversion of the
     constituent treebank created in the VLSP project (https://vlsp.hpda.vn/).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.96 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.81 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 800
+`'test'`  | 800
+`'train'` | 1,400
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/wbp_ufal
 
 *   **Config description**: A small treebank of grammatical examples in
     Warlpiri, taken from linguistic literature.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `37.58 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `47.36 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 55
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/cy_ccg
 
@@ -4243,18 +8794,24 @@ Split | Examples
     treebank of Welsh, annotated according to the Universal Dependencies
     guidelines.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.28 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.06 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'test'`  | 953
+`'train'` | 976
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/hy_armtdp
 
@@ -4262,18 +8819,25 @@ Split | Examples
     Armenian developed for UD originally by the ArmTDP team led by Marat M.
     Yavrumyan at the Yerevan State University.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `6.56 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `8.50 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 249
+`'test'`  | 277
+`'train'` | 1,974
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/wo_wtb
 
@@ -4281,18 +8845,25 @@ Split | Examples
     for Wolof. Sentences were collected from encyclopedic, fictional,
     biographical, religious texts and news.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `2.65 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `3.78 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 449
+`'test'`  | 470
+`'train'` | 1,188
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sjo_xdt
 
@@ -4301,18 +8872,23 @@ Split | Examples
     under the Universal Dependencies. Sentences come from three sources: grammar
     book examples, newspaper (Cabcal News) and Xibe textbooks.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `1.50 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.74 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 810
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/sah_yktdt
 
@@ -4320,36 +8896,46 @@ Split | Examples
     sentences (https://glottolog.org/resource/languoid/id/yaku1245). The project
     is work-in-progress and the treebank is being updated on a regular basis
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `51.76 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `61.70 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 96
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/yo_ytb
 
 *   **Config description**: Parts of the Yoruba Bible and of the Yoruba edition
     of Wikipedia, hand-annotated natively in Universal Dependencies.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `554.64 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `767.54 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 318
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
 
 ## universal_dependencies/ess_sli
 
@@ -4360,15 +8946,20 @@ Split | Examples
     not-to-release/ess_sli-ud-test.merged.conllu. More information about the
     treebank can be found in our publication (AmericasNLP, 2021).
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `302.87 KiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `410.25 KiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split    | Examples
+:------- | -------:
+`'test'` | 309
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Only shown for the first 100 configs.
