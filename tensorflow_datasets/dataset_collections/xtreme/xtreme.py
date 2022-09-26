@@ -19,6 +19,7 @@ import collections
 from typing import Mapping
 
 from tensorflow_datasets.core import dataset_collection_builder
+from tensorflow_datasets.core import naming
 
 
 class Xtreme(dataset_collection_builder.DatasetCollection):
@@ -34,12 +35,10 @@ class Xtreme(dataset_collection_builder.DatasetCollection):
     )
 
   @property
-  def datasets(
-      self,
-  ) -> Mapping[str, Mapping[str, dataset_collection_builder.DatasetReference]]:
+  def datasets(self,) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
     return collections.OrderedDict({
         "1.0.0":
-            dataset_collection_builder.references_for({
+            naming.references_for({
                 "xnli": "xtreme_xnli:1.1.0",
                 "pawsx": "xtreme_pawsx:1.0.0",
                 "pos": "xtreme_pos:1.0.0",

@@ -16,7 +16,6 @@
 """DatasetCollection base class."""
 import dataclasses
 import inspect
-import os
 from typing import Any, List, Mapping, Optional, Type, Union
 
 from etils import epath
@@ -104,108 +103,6 @@ class DatasetCollectionInfo:
         citation=citation)
 
 
-@dataclasses.dataclass
-class DatasetReference:
-  """Reference to a dataset.
-
-  Attributes:
-    dataset_name: name of the dataset.
-    version: version of the dataset to be used. If `None`, the latest version
-      will be loaded. An error is raised if the specified version cannot be
-      provided.
-    split_mapping: mapping between split names. If the `DatasetCollection` wants
-      to use different split names than the source datasets, then this mapping
-      can be used. For example, if the collection uses the split `valid`, but
-      this dataset uses the split `validation`, then the `split_mapping` should
-      be `{'validation': 'valid'}`.
-    config: optional config to be used in the dataset.
-    data_dir: Optional data dir where this dataset is located. If None, defaults
-      to the value of the environment variable TFDS_DATA_DIR, if set, otherwise
-  """
-  dataset_name: str
-  version: Union[None, str, version_lib.Version] = None
-  split_mapping: Optional[Mapping[str, str]] = None
-  config: Optional[str] = None
-  data_dir: Union[None, str, os.PathLike] = None  # pylint: disable=g-bare-generic
-
-  def __post_init__(self):
-    if isinstance(self.version, str):
-      self.version = version_lib.Version(self.version)
-
-  def tfds_name(self, include_version: bool = True) -> str:
-    """Returns the TFDS name of the referenced dataset.
-
-    Args:
-      include_version: whether to include the dataset version in the tfds name.
-        For example, this would result in `dataset/config:1.0.0` if set to True,
-        or in `dataset/config` if set to False. Default is True.
-
-    Returns:
-      The TFDS name of the `DatasetReference`.
-    """
-    dataset_name = self.dataset_name
-    if self.config:
-      dataset_name += f"/{self.config}"
-    if self.version and include_version:
-      dataset_name += f":{self.version}"
-    return dataset_name
-
-  def get_split(self, split: str) -> str:
-    if self.split_mapping:
-      return self.split_mapping.get(split, split)
-    return split
-
-  @classmethod
-  def from_tfds_name(
-      cls,
-      tfds_name: str,
-      split_mapping: Optional[Mapping[str, str]] = None,
-      data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
-  ) -> "DatasetReference":
-    """Returns the `DatasetReference` for the given TFDS dataset."""
-    parsed_name, builder_kwargs = naming.parse_builder_name_kwargs(tfds_name)
-    version, config = None, None
-    version = builder_kwargs.get("version")
-    config = builder_kwargs.get("config")
-    return cls(
-        dataset_name=parsed_name.name,
-        version=version,
-        config=config,
-        split_mapping=split_mapping,
-        data_dir=data_dir)
-
-
-def references_for(
-    name_to_tfds_name: Mapping[str, str]) -> Mapping[str, DatasetReference]:
-  """Constructs of dataset references.
-
-  Note that you can specify the config and the version in the TFDS name.
-  For example:
-  ```
-  references_for(name_to_tfds_name={
-    "wiki_it": "wikipedia/20201201.it:1.0.0",
-    "wiki_en": "scan/length:1.1.1",
-  })
-  ```
-
-  Args:
-    name_to_tfds_name: The mapping between name to be used in the dataset
-      collection and the TFDS name (plus optional config and version).
-
-  Returns:
-    Returns a dictionary of dataset_name: `DatasetReference`.
-  """
-  return {
-      name: DatasetReference.from_tfds_name(tfds_name)
-      for name, tfds_name in name_to_tfds_name.items()
-  }
-
-
-def reference_for(tfds_name: str) -> DatasetReference:
-  """Returns the corresponding `DatasetReference` for a TFDS dataset name."""
-  return DatasetReference.from_tfds_name(tfds_name)
-
-
 class DatasetCollection(
     registered.RegisteredDatasetCollection, skip_registration=True):
   """Base class to define a dataset collection.
@@ -221,7 +118,7 @@ class DatasetCollection(
     raise NotImplementedError
 
   @property
-  def datasets(self) -> Mapping[str, Mapping[str, DatasetReference]]:
+  def datasets(self) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
     """Returns the datasets included in the collection, ordered by version.
 
     Users will need to overwrite this function when implementing their dataset
@@ -236,7 +133,7 @@ class DatasetCollection(
     def datasets(self):
     return {
         "1.0.0":
-            dataset_collection_builder.references_for({
+            naming.references_for({
                 "yes_no": "yes_no:1.0.0",
                 "sst2": "glue/sst:2.0.0",
                 "assin2": "assin2:1.0.0",
@@ -252,13 +149,13 @@ class DatasetCollection(
     return {
         "1.0.0": {
             "yes_no":
-                dataset_collection_builder.DatasetReference(
+                naming.DatasetReference(
                     dataset_name="yes_no", version="1.0.0"),
             "sst2":
-                dataset_collection_builder.DatasetReference(
+                naming.DatasetReference(
                     dataset_name="glue", config="sst2", version="2.0.0"),
             "assin2":
-                dataset_collection_builder.DatasetReference(
+                naming.DatasetReference(
                     dataset_name="assin2", version="1.0.0"),
         },
         ...
@@ -286,7 +183,7 @@ class DatasetCollection(
   def get_collection(
       self,
       version: Union[None, str, version_lib.Version] = None,
-  ) -> Mapping[str, DatasetReference]:
+  ) -> Mapping[str, naming.DatasetReference]:
     """Returns the requested versioned dataset collection.
 
     Args:
