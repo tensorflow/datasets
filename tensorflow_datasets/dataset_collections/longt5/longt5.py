@@ -19,6 +19,7 @@ import collections
 from typing import Mapping
 
 from tensorflow_datasets.core import dataset_collection_builder
+from tensorflow_datasets.core import naming
 
 
 class Longt5(dataset_collection_builder.DatasetCollection):
@@ -34,12 +35,10 @@ class Longt5(dataset_collection_builder.DatasetCollection):
     )
 
   @property
-  def datasets(
-      self,
-  ) -> Mapping[str, Mapping[str, dataset_collection_builder.DatasetReference]]:
+  def datasets(self,) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
     return collections.OrderedDict({
         "1.0.0":
-            dataset_collection_builder.references_for({
+            naming.references_for({
                 "natural_questions": "natural_questions/longt5:0.1.0",
                 "media_sum": "media_sum:1.0.0",
             })

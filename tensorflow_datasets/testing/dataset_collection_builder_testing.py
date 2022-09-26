@@ -21,6 +21,7 @@ import pytest
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 
 
@@ -79,13 +80,13 @@ class DatasetCollectionTestBase:
 
   def _get_dataset_builder(
       self,
-      ds_reference: dataset_collection_builder.DatasetReference,
+      ds_reference: naming.DatasetReference,
       check_ds_version: bool = True) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder for the requested dataset.
 
     Args:
-      ds_reference: The `dataset_collection_builder.DatasetReference` containing
-        the information about the dataset whose builder is to return.
+      ds_reference: The `DatasetReference` containing the information about the
+        dataset whose builder is to return.
       check_ds_version: Whether to return the dataset builder relative to a
         specific version of the dataset. If set to False, it will return the
         dataset builder for the latest version. Default is True.

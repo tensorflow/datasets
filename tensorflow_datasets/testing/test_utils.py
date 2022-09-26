@@ -36,6 +36,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import utils
 
 
@@ -609,22 +610,20 @@ class DummyDatasetCollection(dataset_collection_builder.DatasetCollection):
         })
 
   @property
-  def datasets(
-      self
-  ) -> Mapping[str, Mapping[str, dataset_collection_builder.DatasetReference]]:
+  def datasets(self) -> Mapping[str, Mapping[str, naming.DatasetReference]]:
     return {
         '1.0.0':
-            dataset_collection_builder.references_for({
+            naming.references_for({
                 'a': 'a/c:1.2.3',
                 'b': 'b/d:2.3.4',
             }),
         '1.1.0':
-            dataset_collection_builder.references_for({
+            naming.references_for({
                 'a': 'a/c:1.2.3',
                 'c': 'c/e:3.5.7',
             }),
         '2.0.0':
-            dataset_collection_builder.references_for({
+            naming.references_for({
                 'a': 'a/c:1.3.5',
                 'b': 'b/d:2.4.8',
                 'c': 'c/e:3.5.7',
