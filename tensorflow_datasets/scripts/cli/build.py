@@ -25,6 +25,7 @@ import typing
 from typing import Dict, Iterator, Optional, Tuple, Type, Union
 
 from absl import logging
+from etils import epath
 import tensorflow_datasets as tfds
 
 # pylint: disable=logging-fstring-interpolation
@@ -155,8 +156,28 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   generation_group.add_argument(
       '--file_format',
       type=str,
-      help='File format to which generate the tf-examples. '
-      f'Available values: {format_values} (see `tfds.core.FileFormat`).',
+      help=('File format to which generate the tf-examples. '
+            f'Available values: {format_values} (see `tfds.core.FileFormat`).'),
+  )
+
+  publish_group = build_parser.add_argument_group(
+      'Publishing',
+      description='Options for publishing successfully created datasets.')
+  publish_group.add_argument(
+      '--publish_dir',
+      type=Optional[tfds.core.Path],
+      default=None,
+      help=('Where to optionally publish the dataset after it has been '
+            'generated successfully. Should be the root data dir under which'
+            'datasets are stored. '
+            'If unspecified, dataset will not be published'),
+  )
+  publish_group.add_argument(
+      '--skip_if_published',
+      type=bool,
+      default=False,
+      help=('If the dataset with the same version and config is already '
+            'published, then it will not be regenerated.'),
   )
 
   # **** Automation options ****
@@ -360,6 +381,13 @@ def _download_and_prepare(
   """Generate a single builder."""
   logging.info(f'download_and_prepare for dataset {builder.info.full_name}...')
 
+  publish_data_dir = _publish_data_dir(args.publish_dir, builder)
+  if args.skip_if_published and publish_data_dir is not None:
+    if publish_data_dir.exists():
+      logging.info(
+          f'Dataset already exists in {publish_data_dir}. Skipping generation.')
+      return
+
   dl_config = _make_download_config(args)
   if args.add_name_to_manual_dir:
     dl_config.manual_dir = os.path.join(dl_config.manual_dir, builder.name)
@@ -371,10 +399,48 @@ def _download_and_prepare(
 
   # Dataset generated successfully
   logging.info('Dataset generation complete...')
+
   print()
   info_repr = repr(builder.info)
   print(info_repr)
   print()
+
+  # Publish data if requested.
+  if publish_data_dir is not None:
+    logging.info(f'Publishing dataset to {publish_data_dir}')
+    _publish_data(
+        publish_data_dir=publish_data_dir,
+        builder=builder,
+        overwrite=args.overwrite)
+    logging.info(f'Dataset successfully published to {publish_data_dir}')
+
+
+def _publish_data_dir(
+    publish_dir: Optional[tfds.core.Path],
+    builder: tfds.core.DatasetBuilder) -> Optional[epath.Path]:
+  if publish_dir is None:
+    return None
+  return epath.Path(publish_dir) / builder.info.full_name
+
+
+def _publish_data(
+    publish_data_dir: epath.Path,
+    builder: tfds.core.DatasetBuilder,
+    overwrite: bool = False,
+) -> None:
+  """Publishes the data from the given builder to `publish_data_dir`.
+
+  Arguments:
+    publish_data_dir: folder where the data should be published. Should include
+      config and version.
+    builder: the builder whose data needs to be published.
+    overwrite: whether to overwrite existing data in the `publish_root_dir` if
+      it exists.
+  """
+  from_data_dir = epath.Path(builder.data_dir)
+  publish_data_dir.mkdir(parents=True, exist_ok=True)
+  for filepath in from_data_dir.iterdir():
+    filepath.copy(dst=publish_data_dir / filepath.name, overwrite=overwrite)
 
 
 def _make_download_config(
