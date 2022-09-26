@@ -166,8 +166,9 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
       description='Options for publishing successfully created datasets.')
   publish_group.add_argument(
       '--publish_dir',
-      type=Optional[tfds.core.Path],
+      type=tfds.core.Path,
       default=None,
+      required=False,
       help=('Where to optionally publish the dataset after it has been '
             'generated successfully. Should be the root data dir under which'
             'datasets are stored. '
