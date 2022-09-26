@@ -56,6 +56,7 @@ class FileAdapter(abc.ABC):
   """Interface for Adapter objects which read and write examples in a format."""
 
   FILE_SUFFIX: ClassVar[str]
+  BUFFER_SIZE = 8 << 20  # 8 MiB per file.
 
   @classmethod
   @abc.abstractmethod
@@ -99,6 +100,7 @@ class TfRecordFileAdapter(FileAdapter):
       buffer_size: Optional[int] = None,
   ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
+    buffer_size = buffer_size or cls.BUFFER_SIZE
     return tf.data.TFRecordDataset(filename, buffer_size=buffer_size)
 
   @classmethod
@@ -133,6 +135,7 @@ class RiegeliFileAdapter(FileAdapter):
       filename: epath.PathLike,
       buffer_size: Optional[int] = None,
   ) -> tf.data.Dataset:
+    buffer_size = buffer_size or cls.BUFFER_SIZE
     from riegeli.tensorflow.ops import riegeli_dataset_ops as riegeli_tf  # pylint: disable=g-import-not-at-top
     return riegeli_tf.RiegeliDataset(filename, buffer_size=buffer_size)
 
