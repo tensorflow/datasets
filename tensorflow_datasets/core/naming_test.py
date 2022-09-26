@@ -160,7 +160,7 @@ def test_dataset_name_and_kwargs_from_name_str():
       })
 
 
-def dataset_name():
+def test_dataset_name():
   name = naming.DatasetName('ds1')
   assert name.name == 'ds1'
   assert name.namespace is None
@@ -602,3 +602,73 @@ def test_sharded_file_template_parse_filename_info_custom_template_add_missing(
     name, result):
   template = _FILENAME_TEMPLATE_CUSTOM_FULL
   assert template.parse_filename_info(name) == result
+
+
+@pytest.mark.parametrize(
+    ('tfds_name', 'split_mapping', 'data_dir', 'ds_name', 'version', 'config'),
+    [
+        ('ds/config:1.2.3', None, None, 'ds', '1.2.3', 'config'),
+        ('ds/config:1.2.3', {
+            'x': 'y'
+        }, None, 'ds', '1.2.3', 'config'),
+        ('ds/config:1.2.3', None, None, 'ds', '1.2.3', 'config'),
+        ('ds/config:1.2.3', None, '/a/b', 'ds', '1.2.3', 'config'),
+        ('ds:1.2.3', None, None, 'ds', '1.2.3', None),
+        ('ds/config', None, None, 'ds', None, 'config'),
+        ('ds', None, None, 'ds', None, None),
+    ])
+def test_dataset_reference_from_tfds_name(tfds_name, split_mapping, data_dir,
+                                          ds_name, version, config):
+  actual = naming.DatasetReference.from_tfds_name(
+      tfds_name=tfds_name, split_mapping=split_mapping, data_dir=data_dir)
+  assert actual == naming.DatasetReference(
+      dataset_name=ds_name,
+      version=version,
+      config=config,
+      split_mapping=split_mapping,
+      data_dir=data_dir)
+
+
+@pytest.mark.parametrize(('ds_name', 'version', 'config', 'tfds_name'), [
+    ('ds', '1.2.3', 'config', 'ds/config:1.2.3'),
+    ('ds', '1.2.3', None, 'ds:1.2.3'),
+    ('ds', None, None, 'ds'),
+])
+def test_dataset_reference_tfds_name(ds_name, version, config, tfds_name):
+  reference = naming.DatasetReference(
+      dataset_name=ds_name, version=version, config=config)
+  assert reference.tfds_name() == tfds_name
+
+
+def test_dataset_reference_tfds_name_without_version():
+  reference = naming.DatasetReference(
+      dataset_name='ds', version='1.2.3', config='config')
+  assert reference.tfds_name(include_version=False) == 'ds/config'
+
+
+def test_dataset_reference_get_split():
+  reference = naming.DatasetReference.from_tfds_name(
+      'ds/config:1.2.3', split_mapping={'x': 'y'})
+  assert reference.get_split('x') == 'y'
+  assert reference.get_split('y') == 'y'
+  assert reference.get_split('z') == 'z'
+
+
+def test_references_for():
+  expected = {
+      'one':
+          naming.DatasetReference(
+              dataset_name='ds1', version='1.2.3', config='config'),
+      'two':
+          naming.DatasetReference(dataset_name='ds2', version='1.0.0')
+  }
+  assert naming.references_for({
+      'one': 'ds1/config:1.2.3',
+      'two': 'ds2:1.0.0'
+  }) == expected
+
+
+def test_reference_for():
+  expected = naming.DatasetReference(
+      dataset_name='ds', version='1.2.3', config='config')
+  assert naming.reference_for('ds/config:1.2.3') == expected

@@ -21,10 +21,11 @@ import dataclasses
 import os
 import re
 import textwrap
-from typing import Any, Dict, List, MutableMapping, Optional, Tuple, Union
+from typing import Any, Dict, List, Mapping, MutableMapping, Optional, Tuple, Union
 
 from etils import epath
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import version as version_lib
 
 _NAME_CLASS = r'[a-zA-Z][\w]*'
 _NAME_CLASS_REG = re.compile(r'^' + _NAME_CLASS + r'$')
@@ -180,6 +181,108 @@ def _dataset_name_and_kwargs_from_name_str(
     return name, kwargs
   except Exception as e:  # pylint: disable=broad-except
     py_utils.reraise(e, prefix=err_msg)  # pytype: disable=bad-return-type
+
+
+@dataclasses.dataclass
+class DatasetReference:
+  """Reference to a dataset.
+
+  Attributes:
+    dataset_name: name of the dataset.
+    version: version of the dataset to be used. If `None`, the latest version
+      will be loaded. An error is raised if the specified version cannot be
+      provided.
+    split_mapping: mapping between split names. If the `DatasetCollection` wants
+      to use different split names than the source datasets, then this mapping
+      can be used. For example, if the collection uses the split `valid`, but
+      this dataset uses the split `validation`, then the `split_mapping` should
+      be `{'validation': 'valid'}`.
+    config: optional config to be used in the dataset.
+    data_dir: Optional data dir where this dataset is located. If None, defaults
+      to the value of the environment variable TFDS_DATA_DIR, if set, otherwise
+  """
+  dataset_name: str
+  version: Union[None, str, version_lib.Version] = None
+  split_mapping: Optional[Mapping[str, str]] = None
+  config: Optional[str] = None
+  data_dir: Union[None, str, os.PathLike] = None  # pylint: disable=g-bare-generic
+
+  def __post_init__(self):
+    if isinstance(self.version, str):
+      self.version = version_lib.Version(self.version)
+
+  def tfds_name(self, include_version: bool = True) -> str:
+    """Returns the TFDS name of the referenced dataset.
+
+    Args:
+      include_version: whether to include the dataset version in the tfds name.
+        For example, this would result in `dataset/config:1.0.0` if set to True,
+        or in `dataset/config` if set to False. Default is True.
+
+    Returns:
+      The TFDS name of the `DatasetReference`.
+    """
+    dataset_name = self.dataset_name
+    if self.config:
+      dataset_name += f'/{self.config}'
+    if self.version and include_version:
+      dataset_name += f':{self.version}'
+    return dataset_name
+
+  def get_split(self, split: str) -> str:
+    if self.split_mapping:
+      return self.split_mapping.get(split, split)
+    return split
+
+  @classmethod
+  def from_tfds_name(
+      cls,
+      tfds_name: str,
+      split_mapping: Optional[Mapping[str, str]] = None,
+      data_dir: Union[None, str, os.PathLike] = None,  # pylint: disable=g-bare-generic
+  ) -> 'DatasetReference':
+    """Returns the `DatasetReference` for the given TFDS dataset."""
+    parsed_name, builder_kwargs = parse_builder_name_kwargs(tfds_name)
+    version, config = None, None
+    version = builder_kwargs.get('version')
+    config = builder_kwargs.get('config')
+    return cls(
+        dataset_name=parsed_name.name,
+        version=version,
+        config=config,
+        split_mapping=split_mapping,
+        data_dir=data_dir)
+
+
+def references_for(
+    name_to_tfds_name: Mapping[str, str]) -> Mapping[str, DatasetReference]:
+  """Constructs of dataset references.
+
+  Note that you can specify the config and the version in the TFDS name.
+  For example:
+  ```
+  references_for(name_to_tfds_name={
+    "wiki_it": "wikipedia/20201201.it:1.0.0",
+    "wiki_en": "scan/length:1.1.1",
+  })
+  ```
+
+  Args:
+    name_to_tfds_name: The mapping between name to be used in the dataset
+      collection and the TFDS name (plus optional config and version).
+
+  Returns:
+    Returns a dictionary of dataset_name: `DatasetReference`.
+  """
+  return {
+      name: DatasetReference.from_tfds_name(tfds_name)
+      for name, tfds_name in name_to_tfds_name.items()
+  }
+
+
+def reference_for(tfds_name: str) -> DatasetReference:
+  """Returns the corresponding `DatasetReference` for a TFDS dataset name."""
+  return DatasetReference.from_tfds_name(tfds_name)
 
 
 def _kwargs_str_to_kwargs(kwargs_str: str):
