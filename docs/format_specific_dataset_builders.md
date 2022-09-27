@@ -2,6 +2,9 @@
 
 [TOC]
 
+This guide collects all format-specific dataset builders currently available in
+TFDS.
+
 ## Datasets based on `tf.data.Dataset`
 
 If you want to create a TFDS dataset from a dataset that's in `tf.data.Dataset`
