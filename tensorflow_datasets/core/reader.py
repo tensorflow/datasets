@@ -90,7 +90,7 @@ def _make_id_dataset(
     start_index: tf.Tensor,  # tf.Tensor[tf.int64]
 ) -> tf.data.Dataset:
   """Creates the dataset generating unique example IDs."""
-  ds = tf.data.experimental.Counter(start_index)
+  ds = tf.data.Dataset.counter(start=start_index)
   ds = ds.map(lambda index: _make_id(filename=filename, index=index))
   return ds
 
