@@ -2,6 +2,13 @@
 
 [TOC]
 
+This guide documents all format-specific dataset builders currently available in
+TFDS.
+
+Format-specific dataset builders are subclasses of
+[`tfds.core.GeneratorBasedBuilder`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/GeneratorBasedBuilder)
+which take care of most data processing for a specific data format.
+
 ## Datasets based on `tf.data.Dataset`
 
 If you want to create a TFDS dataset from a dataset that's in `tf.data.Dataset`
