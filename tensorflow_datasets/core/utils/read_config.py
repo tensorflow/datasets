@@ -100,8 +100,8 @@ class ReadConfig:
   input_context: Optional[tf.distribute.InputContext] = None
   experimental_interleave_sort_fn: Optional[InterleaveSortFn] = None
   skip_prefetch: bool = False
-  num_parallel_calls_for_decode: Optional[int] = tf.data.experimental.AUTOTUNE
+  num_parallel_calls_for_decode: Optional[int] = tf.data.AUTOTUNE
   num_parallel_calls_for_interleave_files: Optional[int] = (
-      tf.data.experimental.AUTOTUNE)
+      tf.data.AUTOTUNE)
   enable_ordering_guard: bool = True
   assert_cardinality: bool = True
