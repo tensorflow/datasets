@@ -18,5 +18,5 @@ from tensorflow_datasets.dataset_collections.xtreme import xtreme
 from tensorflow_datasets.testing.dataset_collection_builder_testing import DatasetCollectionTestBase
 
 
-class TestLongt5(DatasetCollectionTestBase):
+class TestXtreme(DatasetCollectionTestBase):
   DATASET_COLLECTION_CLASS = xtreme.Xtreme
