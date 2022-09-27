@@ -27,7 +27,7 @@ segmented by the users performing them by tapping the smartwatch screen at the
 beginning and at the end of every repetition.
 
 *   **Homepage**:
-    [https://tev.fbk.eu/technologies/smartwatch-gestures-dataset](https://tev.fbk.eu/technologies/smartwatch-gestures-dataset)
+    [https://tev.fbk.eu/resources/smartwatch](https://tev.fbk.eu/resources/smartwatch)
 
 *   **Source code**:
     [`tfds.time_series.smartwatch_gestures.SmartwatchGestures`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/time_series/smartwatch_gestures/smartwatch_gestures.py)
