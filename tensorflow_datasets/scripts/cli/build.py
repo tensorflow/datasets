@@ -176,7 +176,7 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   )
   publish_group.add_argument(
       '--skip_if_published',
-      type=bool,
+      action='store_true',
       default=False,
       help=('If the dataset with the same version and config is already '
             'published, then it will not be regenerated.'),
