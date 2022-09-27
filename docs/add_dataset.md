@@ -589,7 +589,9 @@ python my_dataset_test.py
 ## Send us feedback
 
 We are continuously trying to improve the dataset creation workflow, but can
-only do so if we are aware of the issues. Which issues, errors did you
-encountered while creating the dataset ? Was there a part which was confusing,
-boilerplate or wasn't working the first time ? Please share your
-[feedback on github](https://github.com/tensorflow/datasets/issues).
+only do so if we are aware of the issues. Which issues or errors did you
+encounter while creating the dataset? Was there a part which was confusing, or
+wasn't working the first time?
+
+Please share your feedback on
+[GitHub](https://github.com/tensorflow/datasets/issues).
