@@ -152,7 +152,7 @@ class DatasetBuilderTestCase(parameterized.TestCase,
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
   SKIP_CHECKSUMS = False
-  SKIP_TF1_GRAPH_MODE = False
+  SKIP_TF1_GRAPH_MODE = True
 
   @classmethod
   def setUpClass(cls):
