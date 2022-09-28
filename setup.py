@@ -248,4 +248,7 @@ setup(
             'tfds = tensorflow_datasets.scripts.cli.main:launch_cli'
         ],
     },
+    # Include_package_data is required for setup.py to recognize the MANIFEST.in
+    #   https://python-packaging.readthedocs.io/en/latest/non-code-files.html
+    include_package_data=True,
 )
