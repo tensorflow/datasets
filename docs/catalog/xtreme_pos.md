@@ -6,7 +6,7 @@
   <meta itemprop="description" content="Universal Dependencies (UD) is a framework for consistent annotation of grammar&#10;(parts of speech, morphological features, and syntactic dependencies) across&#10;different human languages. UD is an open community effort with over 200&#10;contributors producing more than 100 treebanks in over 70 languages. If you’re&#10;new to UD, you should start by reading the first part of the Short Introduction&#10;and then browsing the annotation guidelines.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;xtreme_pos&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/xtreme_pos" />
   <meta itemprop="sameAs" content="https://universaldependencies.org/" />
-  <meta itemprop="citation" content="" />
+  <meta itemprop="citation" content="@article{nivre2018universal,&#10;  title={Universal Dependencies 2.2},&#10;  author={Nivre, Joakim and Abrams, Mitchell and Agi{&#x27;c}, {{Z}}eljko&#10;  and Ahrenberg, Lars and Antonsen, Lene and Aranzabe, Maria Jesus and&#10;  Arutie, Gashaw and Asahara, Masayuki and Ateyah, Luma and Attia,&#10;  Mohammed and others},&#10;  year={2018}&#10;}" />
 </div>
 
 # `xtreme_pos`
@@ -67,6 +67,17 @@ upos    | Sequence(ClassLabel) | (None,) | tf.int64  |
     Not supported.
 
 *   **Citation**:
+
+```
+@article{nivre2018universal,
+  title={Universal Dependencies 2.2},
+  author={Nivre, Joakim and Abrams, Mitchell and Agi{'c}, {{Z}}eljko
+  and Ahrenberg, Lars and Antonsen, Lene and Aranzabe, Maria Jesus and
+  Arutie, Gashaw and Asahara, Masayuki and Ateyah, Luma and Attia,
+  Mohammed and others},
+  year={2018}
+}
+```
 
 
 ## xtreme_pos/xtreme_pos_af (default config)
