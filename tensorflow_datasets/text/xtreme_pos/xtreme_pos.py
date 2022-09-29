@@ -101,6 +101,7 @@ class XtremePos(tfds.dataset_builders.ConllUDatasetBuilder):
     return self.create_dataset_info(
         description=_DESCRIPTION,
         homepage="https://universaldependencies.org/",
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
