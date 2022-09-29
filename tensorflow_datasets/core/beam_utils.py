@@ -15,6 +15,7 @@
 
 """Beam utils."""
 
+import functools
 from typing import Any
 
 from tensorflow_datasets.core import dataset_builder
@@ -23,12 +24,13 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import shard_utils
 
 __all__ = [
+    'inc_counter',
     'ReadFromTFDS',
 ]
 
 
 @lazy_imports_lib.beam_ptransform_fn
-def ReadFromTFDS(
+def ReadFromTFDS(  # pylint: disable=invalid-name
     pipeline,
     builder: dataset_builder.DatasetBuilder,
     split: str,
@@ -101,3 +103,30 @@ def ReadFromTFDS(
 
   file_instructions = builder.info.splits[split].file_instructions
   return pipeline | beam.Create(file_instructions) | beam.FlatMap(load_shard)
+
+
+@functools.lru_cache(None)
+def _get_metrics_counter(namespace: str, name: str):
+  beam = lazy_imports_lib.lazy_imports.apache_beam
+  return beam.metrics.Metrics.counter(namespace, name)
+
+
+def inc_counter(name: str, value: int = 1, *, namespace: str = 'tfds') -> None:
+  """Increment a `beam.metrics.Metrics.counter` without boilerplate.
+
+  ```python
+  tfds.beam.inc_counter('my_metric')
+  ```
+
+  Is a small alias for:
+
+  ```python
+  beam.metrics.Metrics.counter(namespace, name).inc(value)
+  ```
+
+  Args:
+    name: The metrics name
+    value: Increment (default to 1)
+    namespace: Metrics namespace (default to `tfds`)
+  """
+  _get_metrics_counter(namespace, name).inc(value)
