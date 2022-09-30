@@ -21,16 +21,17 @@ and this project adheres to
     -   [CoNNL-U](https://www.tensorflow.org/datasets/format_specific_dataset_builders#conllu)
 -   [API] Added `tfds.beam.inc_counter` to reduce `beam.metrics.Metrics.counter`
     boilerplate
+-   [API] Added options to group together existing TFDS datasets into [dataset collections](https://www.tensorflow.org/datasets/dataset_collections) and to perform simple operations over them.
 -   [Documentation] update, specifically:
-    [new guide](https://www.tensorflow.org/datasets/format_specific_dataset_builders)
-    on format-specific dataset builders, and updated
-    [TFDS CLI](https://www.tensorflow.org/datasets/cli) documentation.
--   [TFDS CLI] Supports custom config through Json (e.g. `tfds build my_dataset
-    --config='{"name": "my_custom_config", "description": "Abc"}'`)
+    -  [New guide](https://www.tensorflow.org/datasets/format_specific_dataset_builders) on format-specific dataset builders;
+    -  [New guide](https://www.tensorflow.org/datasets/add_dataset_collection) on adding new dataset collections to TFDS;
+    -  Updated [TFDS CLI](https://www.tensorflow.org/datasets/cli) documentation.
+-   [TFDS CLI] Supports custom config through Json (e.g. `tfds build my_dataset --config='{"name": "my_custom_config", "description": "Abc"}'`)
 -   New datasets, such as the
     [conll2003](https://www.tensorflow.org/datasets/catalog/conll2003) and the
     [universal_dependency](https://www.tensorflow.org/datasets/catalog/universal_dependency)
     version 2.10.
+-   New dataset collections, such as [xtreme](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/dataset_collections/xtreme/xtreme.py) and [LongT5](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/dataset_collections/longt5/longt5.py)
 
 ### Changed
 
