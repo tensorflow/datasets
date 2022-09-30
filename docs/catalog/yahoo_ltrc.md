@@ -58,23 +58,12 @@ ds = tfds.load("yahoo_ltrc")
 
 *   **Download size**: `Unknown size`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
     Request access for the C14 Yahoo Learning To Rank Challenge dataset on
     https://research.yahoo.com/datasets. Extract the downloaded `dataset.tgz` file
     and place the `ltrc_yahoo.tar.bz2` file in `manual_dir/`.
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -104,6 +93,20 @@ Split | Examples
 
 ## yahoo_ltrc/set1 (default config)
 
+*   **Dataset size**: `792.65 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 6,983
+`'train'` | 19,944
+`'vali'`  | 2,994
+
 *   **Feature structure**:
 
 ```python
@@ -122,6 +125,20 @@ float_features | Tensor       | (None, 699) | tf.float64 |
 label          | Tensor       | (None,)     | tf.float64 |
 
 ## yahoo_ltrc/set2
+
+*   **Dataset size**: `194.31 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 3,798
+`'train'` | 1,266
+`'vali'`  | 1,266
 
 *   **Feature structure**:
 

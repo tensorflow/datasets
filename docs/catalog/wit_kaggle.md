@@ -95,6 +95,10 @@ contribute to an open model to improve learning for all.
 Registration at https://www.kaggle.com/c/wikipedia-image-caption/data is needed
 to get the links to download the dataset.
 
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image_url', 'caption_title_and_reference_description')`
@@ -116,16 +120,13 @@ to get the links to download the dataset.
 *   **Config description**: Training samples for the Wikipedia-Image/Caption
     Matching competition.
 
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+*   **Dataset size**: `1.16 TiB`
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split                            | Examples
+:------------------------------- | ---------:
+`'train_with_extended_features'` | 37,046,386
 
 *   **Feature structure**:
 
@@ -196,10 +197,6 @@ section_title                           | Text         |                 | tf.st
     Wikipedia-Image/Caption Matching competition.
 
 *   **Dataset size**: `3.37 GiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
 
 *   **Splits**:
 
