@@ -688,6 +688,9 @@ toc:
     title: bucc
   - path: /datasets/catalog/flores
     title: flores
+  - path: /datasets/catalog/mtnt
+    status: nightly
+    title: mtnt
   - path: /datasets/catalog/opus
     title: opus
   - path: /datasets/catalog/para_crawl
