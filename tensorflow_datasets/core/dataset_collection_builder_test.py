@@ -65,6 +65,7 @@ def test_dataset_collection_info_from_cls():
   assert dummy_dc_info.name == 'dummy_dataset_collection'
   assert dummy_dc_info.description == expected_description
   assert dummy_dc_info.citation is None
+  assert dummy_dc_info.homepage is None
 
 
 @pytest.fixture(name='dummy_dc', scope='session')
