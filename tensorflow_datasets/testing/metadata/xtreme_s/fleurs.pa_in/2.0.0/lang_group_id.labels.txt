@@ -1,0 +1,7 @@
+western_european_we
+eastern_european_ee
+central_asia_middle_north_african_cmn
+sub_saharan_african_ssa
+south_asian_sa
+south_east_asian_sea
+chinese_japanase_korean_cjk
