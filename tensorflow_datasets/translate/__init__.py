@@ -18,6 +18,7 @@
 from tensorflow_datasets.translate.bucc import Bucc
 from tensorflow_datasets.translate.flores import Flores
 from tensorflow_datasets.translate.flores import FloresConfig
+from tensorflow_datasets.translate.mtnt import Mtnt
 from tensorflow_datasets.translate.opus import Opus
 from tensorflow_datasets.translate.para_crawl import ParaCrawl
 from tensorflow_datasets.translate.para_crawl import ParaCrawlConfig
