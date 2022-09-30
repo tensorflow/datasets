@@ -47,13 +47,9 @@ MAX_SHARD_SIZE = 1024 << 20  # 2 GiB
 # https://github.com/tensorflow/tensorflow/blob/27325fabed898880fa1b33a04d4b125a6ef4bbc8/tensorflow/core/lib/io/record_writer.h#L104
 TFRECORD_REC_OVERHEAD = 16
 
-# Number of temp buckets for beam writer.
-# 100K buckets at 1G per bucket gives us ~100TB. Each bucket can go bigger, as
-# long as it can hold in memory. So if each bucket goes to 5GB, that's 500TB.
-# It seems reasonable to require 10GB of RAM per worker to handle a 1PB split.
-_BEAM_NUM_TEMP_SHARDS = int(100e3)
-
-_APPROX_NUM_EXAMPLES_PER_TEMP_BUCKET = 10
+# The desired average size of a temporary bucket, which is used to calculate the
+# number of temp buckets for beam writer.
+_BEAM_TEMP_BUCKET_SIZE = 1024 * 1024 * 100  # 100 MB
 
 _INDEX_PATH_SUFFIX = "_index.json"
 
@@ -401,16 +397,15 @@ class BeamWriter(object):
   def _bucketize_example(
       self,
       key_serialized_example: Tuple[Any, bytes],
-      num_examples: Any,
       largest_key: Any,
+      num_buckets: Any,
   ) -> Tuple[int, Tuple[Any, bytes]]:
     """Returns (bucket#, (hkey, serialized_example))."""
     key, _ = key_serialized_example
-    if isinstance(num_examples, list):
-      num_examples = num_examples[0]
     if isinstance(largest_key, list):
       largest_key = largest_key[0]
-    num_buckets = int(num_examples / _APPROX_NUM_EXAMPLES_PER_TEMP_BUCKET)
+    if isinstance(num_buckets, list):
+      num_buckets = num_buckets[0]
     bucketid = shuffle.get_bucket_number(
         key, num_buckets=num_buckets, max_hkey=largest_key)
     return (bucketid, key_serialized_example)
@@ -514,9 +509,12 @@ class BeamWriter(object):
     largest_key = beam.pvalue.AsSingleton(serialized_examples
                                           | beam.Keys()
                                           | beam.combiners.Top.Largest(1))
-    num_examples = beam.pvalue.AsSingleton(
+    num_temp_buckets = beam.pvalue.AsSingleton(
         serialized_examples
-        | "CountExamples" >> beam.combiners.Count.Globally())
+        | beam.Values()
+        | beam.Map(len)
+        | "TotalSize" >> beam.CombineGlobally(sum)
+        | beam.Map(lambda total_size: int(total_size / _BEAM_TEMP_BUCKET_SIZE)))
 
     # Here bucket designates a temporary shard, to help differentiate between
     # temporary and final shards.
@@ -525,7 +523,7 @@ class BeamWriter(object):
         | "Bucketize" >> beam.Map(
             self._bucketize_example,
             largest_key=largest_key,
-            num_examples=num_examples)
+            num_buckets=num_temp_buckets)
         # (bucket_id, hkey_serialized_ex))
         | "GroupByBucket" >> beam.GroupByKey()
         # (bucket_id, [hkey_serialized_ex0, ...])
