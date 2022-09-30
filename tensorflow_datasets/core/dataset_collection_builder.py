@@ -75,19 +75,22 @@ class DatasetCollectionInfo:
     release_notes: A mapping of dataset collection's versions with their
       corresponding release notes.
     citation: Optional citation for the dataset collection.
+    homepage: Optional homepage for the dataset collection.
   """
 
   name: str
   description: str
   release_notes: Mapping[str, str]
   citation: Optional[str] = None
+  homepage: Optional[str] = None
 
   @classmethod
   def from_cls(cls,
                dataset_collection_class: Type["DatasetCollection"],
                release_notes: Mapping[str, str],
                description: Optional[str] = None,
-               citation: Optional[str] = None) -> "DatasetCollectionInfo":
+               citation: Optional[str] = None,
+               homepage: Optional[str] = None) -> "DatasetCollectionInfo":
     """Creates a DatasetCollectionInfo instance based on class information."""
     name: str = naming.camelcase_to_snakecase(dataset_collection_class.__name__)
     if not description:
@@ -100,7 +103,8 @@ class DatasetCollectionInfo:
         name=name,
         release_notes=release_notes,
         description=description,
-        citation=citation)
+        citation=citation,
+        homepage=homepage)
 
 
 class DatasetCollection(
