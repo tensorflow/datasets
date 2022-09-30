@@ -75,7 +75,7 @@ class SmartwatchGestures(tfds.core.GeneratorBasedBuilder):
                 class_label
         }),
         supervised_keys=('features', 'gesture'),
-        homepage='https://tev.fbk.eu/technologies/smartwatch-gestures-dataset',
+        homepage='https://tev.fbk.eu/resources/smartwatch',
         citation=_CITATION,
     )
 
