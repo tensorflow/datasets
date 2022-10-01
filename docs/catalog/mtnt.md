@@ -30,18 +30,11 @@ MTNT: Machine Translation of Noisy Text
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
+*   **Download size**: `35.08 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Feature structure**:
 
@@ -85,6 +78,36 @@ src     | Text         |       | tf.string |
 
 ## mtnt/en-fr (default config)
 
+*   **Dataset size**: `11.33 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,020
+`'train'` | 35,692
+`'valid'` | 811
+
 ## mtnt/en-ja
 
+*   **Dataset size**: `4.41 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 946
+`'train'` | 5,746
+`'valid'` | 892
+
 ## mtnt/fr-en
+
+*   **Dataset size**: `8.28 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'test'`  | 1,022
+`'train'` | 18,942
+`'valid'` | 876
