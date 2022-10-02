@@ -221,6 +221,9 @@ c4/en/2.2.0
 c4/en/2.2.1
 c4/en/2.3.0
 c4/en/2.3.1
+c4/en/3.1.0
+c4/realnewslike/3.1.0
+c4/webtextlike/3.1.0
 caltech101/3.0.1
 caltech_birds2010/0.1.1
 caltech_birds2011/0.1.1
@@ -1214,6 +1217,9 @@ mslr_web/30k_fold4/1.1.0
 mslr_web/30k_fold5/1.1.0
 mt_opt/rlds/1.0.0
 mt_opt/sd/1.0.0
+mtnt/en-fr/1.0.0
+mtnt/en-ja/1.0.0
+mtnt/fr-en/1.0.0
 multi_news/1.0.0
 multi_nli/1.1.0
 multi_nli_mismatch/0.1.0
@@ -1583,6 +1589,7 @@ rlu_atari_checkpoints/Amidar_run_3/1.1.0
 rlu_atari_checkpoints/Amidar_run_4/1.1.0
 rlu_atari_checkpoints/Amidar_run_5/1.1.0
 rlu_atari_checkpoints/Assault_run_1/1.1.0
+rlu_atari_checkpoints/Assault_run_2/1.1.0
 rlu_atari_checkpoints/Assault_run_3/1.1.0
 rlu_atari_checkpoints/Assault_run_4/1.1.0
 rlu_atari_checkpoints/Assault_run_5/1.1.0
@@ -1591,6 +1598,7 @@ rlu_atari_checkpoints/Asterix_run_2/1.1.0
 rlu_atari_checkpoints/Asterix_run_3/1.1.0
 rlu_atari_checkpoints/Asterix_run_4/1.1.0
 rlu_atari_checkpoints/Asterix_run_5/1.1.0
+rlu_atari_checkpoints/Atlantis_run_1/1.1.0
 rlu_atari_checkpoints/Atlantis_run_2/1.1.0
 rlu_atari_checkpoints/Atlantis_run_3/1.1.0
 rlu_atari_checkpoints/Atlantis_run_4/1.1.0
@@ -4942,6 +4950,7 @@ wmt17_translate/ru-en/1.0.0
 wmt17_translate/tr-en/1.0.0
 wmt17_translate/zh-en/1.0.0
 wmt18_translate/cs-en/1.0.0
+wmt18_translate/tr-en/1.0.0
 wmt19_translate/cs-en/1.0.0
 wmt19_translate/de-en/1.0.0
 wmt19_translate/fi-en/1.0.0
