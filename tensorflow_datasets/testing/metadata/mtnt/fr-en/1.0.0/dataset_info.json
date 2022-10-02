@@ -1,0 +1,56 @@
+{
+  "citation": "@InProceedings{michel2018mtnt,\n  author    = {Michel, Paul  and  Neubig, Graham},\n  title     = {MTNT: A Testbed for Machine Translation of Noisy Text},\n  booktitle = {Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing}\n}",
+  "configName": "fr-en",
+  "description": "MTNT: Machine Translation of Noisy Text",
+  "downloadSize": "36786600",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://pmichel31415.github.io/mtnt/index.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.translate.mtnt.mtnt",
+  "name": "mtnt",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "8045716",
+      "shardLengths": [
+        "18942"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "213939",
+      "shardLengths": [
+        "1022"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "valid",
+      "numBytes": "421739",
+      "shardLengths": [
+        "876"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "src"
+        },
+        {
+          "featureKey": "dst"
+        }
+      ]
+    }
+  },
+  "version": "1.0.0"
+}
