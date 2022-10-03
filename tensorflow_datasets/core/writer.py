@@ -51,6 +51,8 @@ TFRECORD_REC_OVERHEAD = 16
 # number of temp buckets for beam writer.
 _BEAM_TEMP_BUCKET_SIZE = 1024 * 1024 * 100  # 100 MB
 
+_BEAM_MAX_NUM_BUCKETS: int = 1_000_000
+
 _INDEX_PATH_SUFFIX = "_index.json"
 
 
@@ -331,6 +333,25 @@ class Writer(object):
     return shard_lengths, self._shuffler.size
 
 
+def _get_num_temp_buckets(
+    total_size: int,
+    max_num_buckets: int = _BEAM_MAX_NUM_BUCKETS,
+) -> int:
+  """Returns the number of temporary buckets to use in Beam.
+
+  Arguments:
+    total_size: the total size of the dataset in bytes.
+    max_num_buckets: the maximum number of buckets.
+
+  Returns:
+    the number of temporary buckets to use. Minimum is always 1.
+  """
+  num_buckets = int(total_size / _BEAM_TEMP_BUCKET_SIZE)
+  if num_buckets > max_num_buckets:
+    return max_num_buckets
+  return max(1, num_buckets)
+
+
 class BeamWriter(object):
   """Shuffles / writes Examples beam collection to sharded TFRecord files.
 
@@ -514,7 +535,7 @@ class BeamWriter(object):
         | beam.Values()
         | beam.Map(len)
         | "TotalSize" >> beam.CombineGlobally(sum)
-        | beam.Map(lambda total_size: int(total_size / _BEAM_TEMP_BUCKET_SIZE)))
+        | beam.Map(_get_num_temp_buckets))
 
     # Here bucket designates a temporary shard, to help differentiate between
     # temporary and final shards.
