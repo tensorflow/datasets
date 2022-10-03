@@ -26,6 +26,8 @@ upper_tabs:
         path: /datasets/overview
       - title: End-to-end Keras example
         path: /datasets/keras_example
+      - title: Dataset collections
+        path: /datasets/dataset_collections
 
       - heading: "Features & performances"
       - title: TFDS CLI
