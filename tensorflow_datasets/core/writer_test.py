@@ -20,6 +20,7 @@ import os
 from unittest import mock
 
 from etils import epath
+import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
@@ -346,6 +347,23 @@ class TfrecordsWriterBeamTest(WriterTest):
 
       _ = pipeline | 'test' >> _build_pcollection()  # pylint: disable=no-value-for-parameter
     return writer.finalize()
+
+
+@pytest.mark.parametrize('total_size, max_num_buckets, expected_buckets', [
+    (0, None, 1),
+    (0, 0, 1),
+    (10, None, 1),
+    (1_000_000_000, None, 9),
+    (100_000_000_000, None, 953),
+    (100_000_000_000, 10, 10),
+])
+def test_get_num_temp_buckets(total_size, max_num_buckets, expected_buckets):
+  if max_num_buckets is None:
+    actual_buckets = writer_lib._get_num_temp_buckets(total_size)
+  else:
+    actual_buckets = writer_lib._get_num_temp_buckets(total_size,
+                                                      max_num_buckets)
+  assert actual_buckets == expected_buckets
 
 
 if __name__ == '__main__':
