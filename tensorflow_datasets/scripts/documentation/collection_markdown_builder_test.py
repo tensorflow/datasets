@@ -78,3 +78,15 @@ def test_collection_datasets_section(
   ]
   assert datasets_section.content(
       loader=dummy_dc_loader) == '\n'.join(expected_lines)
+
+
+def test_get_collection_markdown_string(
+    dummy_dc_loader: tfds.core.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
+  doc = collection_markdown_builder.get_collection_markdown_string(
+      collection=dummy_dc_loader)
+
+  assert 'dummy_dataset_collection' in doc  # Collection heading.
+  assert 'my description' in doc  # Collection description.
+  assert '@misc{citekey' in doc  # Collection citation.
+  assert ('`[c/e:3.5.7](https://www.tensorflow.org/datasets/catalog/c#e)`'
+          in doc)  # Collection dataset.
