@@ -46,6 +46,8 @@ from tensorflow_datasets.core.file_adapters import FileFormat
 
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 
+from tensorflow_datasets.core.load import DatasetCollectionLoader
+
 from tensorflow_datasets.core.naming import ShardedFileTemplate
 
 from tensorflow_datasets.core.registered import DatasetNotFoundError
@@ -82,6 +84,7 @@ __all__ = [
     "BeamMetadataDict",
     "BuilderConfig",
     "DatasetBuilder",
+    "DatasetCollectionLoader",
     "DatasetInfo",
     "DatasetIdentity",
     "DatasetNotFoundError",

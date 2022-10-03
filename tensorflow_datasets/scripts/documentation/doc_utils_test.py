@@ -175,3 +175,8 @@ class DocumentNightlyDatasetsTest(tfds.testing.TestCase):
     self.assertTrue(ndu.has_nightly(dummy_new_ds))
     self.assertTrue(ndu.has_nightly(dummy_new_config))
     self.assertTrue(ndu.has_nightly(dummy_new_version))
+
+
+def test_format_hompepage_url():
+  url = 'https://a/b'
+  assert doc_utils.format_homepage_url(url) == f'[{url}]({url})'
