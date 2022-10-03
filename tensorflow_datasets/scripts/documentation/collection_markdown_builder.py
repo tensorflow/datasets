@@ -17,6 +17,7 @@
 
 import abc
 import textwrap
+from typing import List
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets.scripts.documentation import dataset_markdown_builder as dmb
@@ -181,3 +182,42 @@ class CollectionCitationSection(CollectionSection):
             {tfds.core.utils.indent(loader.collection.info.citation, '            ')}
             ```
             """))
+
+
+# --------------------------- Main page ---------------------------
+
+
+def _display_collection_heading(
+    collection: tfds.core.DatasetCollectionLoader) -> str:
+  return f"""
+      # `{collection.collection_name}`
+
+      """
+
+
+def _display_collection_sections(
+    loader: tfds.core.DatasetCollectionLoader,
+    all_sections: List[CollectionSection],
+) -> str:
+  return ''.join([section.display(loader) for section in all_sections])
+
+
+def get_collection_markdown_string(
+    *,
+    collection: tfds.core.DatasetCollectionLoader,
+) -> str:
+  """Build the collection markdown."""
+  all_sections = [
+      CollectionDescriptionSection(),
+      CollectionHomepageSection(),
+      CollectionVersionSection(),
+      CollectionDatasetsSection(),
+      CollectionCitationSection(),
+  ]
+
+  doc_str = [
+      _display_collection_heading(collection),
+      _display_collection_sections(
+          loader=collection, all_sections=all_sections),
+  ]
+  return '\n\n'.join([tfds.core.utils.dedent(s) for s in doc_str if s])
