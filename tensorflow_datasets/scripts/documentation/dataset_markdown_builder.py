@@ -125,7 +125,7 @@ class HomepageSection(Section):
 
   def content(self, builder: tfds.core.DatasetBuilder):
     homepage = builder.info.homepage
-    return f'[{homepage}]({homepage})'
+    return doc_utils.format_homepage_url(homepage)
 
 
 class DatasetDescriptionSection(Section):

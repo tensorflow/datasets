@@ -604,10 +604,18 @@ class DummyDatasetCollection(dataset_collection_builder.DatasetCollection):
         dataset_collection_class=self.__class__,
         description='my description',
         release_notes={
-            '1.0.0': 'notes',
-            '1.1.0': 'notes',
-            '2.0.0': 'notes'
-        })
+            '1.0.0': 'notes 1.0.0',
+            '1.1.0': 'notes 1.1.0',
+            '2.0.0': 'notes 2.0.0'
+        },
+        citation="""
+        @misc{citekey,
+          author       = "",
+          title        = "",
+          year         = ""
+        }
+        """,
+    )
 
   @property
   def datasets(self) -> Mapping[str, Mapping[str, naming.DatasetReference]]:

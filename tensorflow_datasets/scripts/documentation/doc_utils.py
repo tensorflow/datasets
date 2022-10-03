@@ -270,3 +270,8 @@ class NightlyDocUtil(object):
   icon = (
       '<span class="material-icons" '
       'title="Available only in the tfds-nightly package">nights_stay</span>')
+
+
+def format_homepage_url(homepage):
+  """Formats a URL as required for the homepage section."""
+  return f'[{homepage}]({homepage})'
