@@ -260,8 +260,7 @@ class Imagenet2012Multilabel(tfds.core.GeneratorBasedBuilder):
     (multi_labels, problematic_images, imagenet_m_2022_errors
     ) = _get_multi_labels_and_problematic_images(dl_manager)
 
-    imagenet_m_2022 = dict([(k, multi_labels[k]) for k in imagenet_m_2022_errors
-                           ])
+    imagenet_m_2022 = {k: multi_labels[k] for k in imagenet_m_2022_errors}
 
     return {
         'validation':

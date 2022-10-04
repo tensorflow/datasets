@@ -99,7 +99,7 @@ def normalize_cap(option, pron):
   cap_tuples = [("The", "the"), ("His", "his"), ("My", "my"), ("Her", "her"),
                 ("Their", "their"), ("An", "an"), ("A", "a")]
   uncap_dict = dict(cap_tuples)
-  cap_dict = dict([(t[1], t[0]) for t in cap_tuples])
+  cap_dict = {t[1]: t[0] for t in cap_tuples}
   words = option.split(" ")
   first_word = words[0]
   if pron[0].islower():
