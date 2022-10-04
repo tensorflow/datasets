@@ -12,11 +12,6 @@
 # `mslr_web`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 MSLR-WEB are two large-scale Learning-to-Rank datasets released by Microsoft
@@ -49,9 +44,8 @@ ds = tfds.load("mslr_web")
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`1.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Bundle features into a single 'float_features' feature.
+    *   **`1.1.0`** (default): Bundle features into a single 'float_features'
+        feature.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

@@ -12,11 +12,6 @@
 # `cnn_dailymail`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 CNN/DailyMail non-anonymized summarization dataset.
@@ -47,9 +42,7 @@ each highlight, which is the target summary
 
     *   `3.3.0`: Add publisher feature.
 
-    *   **`3.4.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Add ID feature.
+    *   **`3.4.0`** (default): Add ID feature.
 
 *   **Download size**: `558.32 MiB`
 

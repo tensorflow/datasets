@@ -43,7 +43,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`spoken_digit`](spoken_digit.md)
 *   [`tedlium`](tedlium.md)
 *   [`user_libri_audio`](user_libri_audio.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`vctk`](vctk.md)
 *   [`voxceleb`](voxceleb.md)
 *   [`voxforge`](voxforge.md)
@@ -111,17 +110,14 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cifar10`](cifar10.md)
 *   [`cifar100`](cifar100.md)
 *   [`cifar100_n`](cifar100_n.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cifar10_1`](cifar10_1.md)
 *   [`cifar10_corrupted`](cifar10_corrupted.md)
 *   [`cifar10_n`](cifar10_n.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`citrus_leaves`](citrus_leaves.md)
 *   [`cmaterdb`](cmaterdb.md)
 *   [`colorectal_histology`](colorectal_histology.md)
 *   [`colorectal_histology_large`](colorectal_histology_large.md)
 *   [`controlled_noisy_web_labels`](controlled_noisy_web_labels.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`curated_breast_imaging_ddsm`](curated_breast_imaging_ddsm.md)
 *   [`cycle_gan`](cycle_gan.md)
 *   [`deep_weeds`](deep_weeds.md)
@@ -138,7 +134,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`i_naturalist2017`](i_naturalist2017.md)
 *   [`i_naturalist2018`](i_naturalist2018.md)
 *   [`i_naturalist2021`](i_naturalist2021.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`imagenet2012`](imagenet2012.md)
 *   [`imagenet2012_corrupted`](imagenet2012_corrupted.md)
 *   [`imagenet2012_fewshot`](imagenet2012_fewshot.md)
@@ -165,7 +160,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`pet_finder`](pet_finder.md)
 *   [`places365_small`](places365_small.md)
 *   [`placesfull`](placesfull.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`plant_leaves`](plant_leaves.md)
 *   [`plant_village`](plant_village.md)
 *   [`plantae_k`](plantae_k.md)
@@ -226,7 +220,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`istella`](istella.md)
 *   [`mslr_web`](mslr_web.md)
 *   [`yahoo_ltrc`](yahoo_ltrc.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
 ### `Recommendation`
 
@@ -329,7 +322,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`civil_comments`](civil_comments.md)
 *   [`clinc_oos`](clinc_oos.md)
 *   [`conll2003`](conll2003.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cos_e`](cos_e.md)
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
 *   [`doc_nli`](doc_nli.md)
@@ -381,9 +373,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`trec`](trec.md)
 *   [`unified_qa`](unified_qa.md)
 *   [`universal_dependencies`](universal_dependencies.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`user_libri_text`](user_libri_text.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`wiki40b`](wiki40b.md)
 *   [`wiki_dialog`](wiki_dialog.md)
 *   [`wikiann`](wikiann.md)
@@ -395,7 +385,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`xnli`](xnli.md)
 *   [`xtreme_pawsx`](xtreme_pawsx.md)
 *   [`xtreme_pos`](xtreme_pos.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`xtreme_xnli`](xtreme_xnli.md)
 *   [`yelp_polarity_reviews`](yelp_polarity_reviews.md)
 
@@ -411,14 +400,11 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Translate`
 
 *   [`bucc`](bucc.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`flores`](flores.md)
 *   [`mtnt`](mtnt.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`opus`](opus.md)
 *   [`para_crawl`](para_crawl.md)
 *   [`tatoeba`](tatoeba.md)
-    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`ted_hrlr_translate`](ted_hrlr_translate.md)
 *   [`ted_multi_translate`](ted_multi_translate.md)
 *   [`wmt13_translate`](wmt13_translate.md)

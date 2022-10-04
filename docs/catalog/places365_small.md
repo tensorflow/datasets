@@ -12,11 +12,6 @@
 # `places365_small`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Visualization**:
     <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=places365_small">
     Explore in Know Your Data
@@ -36,9 +31,8 @@ category in the validation set and 900 images per category in the testing set.
 
 *   **Versions**:
 
-    *   **`2.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Changed the example keys in order to ease integration with KYD.
+    *   **`2.1.0`** (default): Changed the example keys in order to ease
+        integration with KYD.
 
 *   **Download size**: `29.27 GiB`
 
