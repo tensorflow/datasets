@@ -64,7 +64,7 @@ def document_single_builder_fn(tmp_path):
 def test_document_datasets():
   all_docs = list(
       document_datasets.iter_documentation_builders(
-          datasets=['mnist', 'coco'],  # Builder with and without config
+          datasets=['mnist', 'coco'],  # Builder with and without config.
           doc_util_paths=doc_utils.DocUtilPaths(
               fig_base_path=None,
               df_base_path=None,
@@ -72,6 +72,13 @@ def test_document_datasets():
           ),
       ))
   assert {d.name for d in all_docs} == {'mnist', 'coco'}
+
+
+def test_document_collection():
+  all_docs = list(
+      document_datasets.iter_collections_documentation(
+          collection_names=['xtreme', 'longt5']))
+  assert {d.name for d in all_docs} == {'xtreme', 'longt5'}
 
 
 def test_with_config(document_single_builder_fn):  # pylint: disable=redefined-outer-name
@@ -91,4 +98,4 @@ def test_with_config_shared_version(document_single_builder_fn):  # pylint: disa
   """Test that builder with configs are correctly generated."""
   doc = document_single_builder_fn(DummyDatasetConfigsSharedVersion.name)
   assert 'Minimal DatasetBuilder.' in doc.content  # Shared description.
-  assert 'Config description:' not in doc.content  # No config description
+  assert 'Config description:' not in doc.content  # No config description.
