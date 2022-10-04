@@ -12,10 +12,6 @@
 # `i_naturalist2021`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 The iNaturalist dataset 2021 contains a total of 10,000 species. The full

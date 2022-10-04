@@ -12,11 +12,6 @@
 # `vctk`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 This CSTR VCTK Corpus includes speech data uttered by 110 English speakers with
@@ -35,9 +30,7 @@ Note that the 'p315' text was lost due to a hard disk error.
 *   **Versions**:
 
     *   `1.0.0`: VCTK release 0.92.0.
-    *   **`1.0.1`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fix speech data type with dtype=tf.int16.
+    *   **`1.0.1`** (default): Fix speech data type with dtype=tf.int16.
 
 *   **Download size**: `10.94 GiB`
 

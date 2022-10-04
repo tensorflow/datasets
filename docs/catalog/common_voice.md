@@ -12,11 +12,6 @@
 # `common_voice`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Mozilla Common Voice Dataset
@@ -30,9 +25,7 @@ Mozilla Common Voice Dataset
 *   **Versions**:
 
     *   `1.0.0`: Initial release.
-    *   **`2.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Updated to corpus 6.1 from 2020-12-11.
+    *   **`2.0.0`** (default): Updated to corpus 6.1 from 2020-12-11.
 
 *   **Feature structure**:
 
@@ -134,7 +127,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/ab <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/ab
 
 *   **Config description**: Language Code: ab
 
@@ -191,7 +184,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/ar <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/ar
 
 *   **Config description**: Language Code: ar
 
@@ -249,7 +242,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/as <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/as
 
 *   **Config description**: Language Code: as
 
@@ -481,7 +474,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/cs <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/cs
 
 *   **Config description**: Language Code: cs
 
@@ -713,7 +706,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/dv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/dv
 
 *   **Config description**: Language Code: dv
 
@@ -771,7 +764,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/el <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/el
 
 *   **Config description**: Language Code: el
 
@@ -887,7 +880,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/es <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/es
 
 *   **Config description**: Language Code: es
 
@@ -945,7 +938,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/et <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/et
 
 *   **Config description**: Language Code: et
 
@@ -1003,7 +996,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/eu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/eu
 
 *   **Config description**: Language Code: eu
 
@@ -1061,7 +1054,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/fa <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/fa
 
 *   **Config description**: Language Code: fa
 
@@ -1119,7 +1112,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/fi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/fi
 
 *   **Config description**: Language Code: fi
 
@@ -1235,7 +1228,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/fy-NL <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/fy-NL
 
 *   **Config description**: Language Code: fy-NL
 
@@ -1351,7 +1344,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/hi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/hi
 
 *   **Config description**: Language Code: hi
 
@@ -1409,7 +1402,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/hsb <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/hsb
 
 *   **Config description**: Language Code: hsb
 
@@ -1467,7 +1460,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/hu <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/hu
 
 *   **Config description**: Language Code: hu
 
@@ -1525,7 +1518,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/ia <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/ia
 
 *   **Config description**: Language Code: ia
 
@@ -1583,7 +1576,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/id <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/id
 
 *   **Config description**: Language Code: id
 
@@ -1699,7 +1692,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/ja <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/ja
 
 *   **Config description**: Language Code: ja
 
@@ -1757,7 +1750,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/ka <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/ka
 
 *   **Config description**: Language Code: ka
 
@@ -1931,7 +1924,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/lg <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/lg
 
 *   **Config description**: Language Code: lg
 
@@ -1989,7 +1982,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/lt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/lt
 
 *   **Config description**: Language Code: lt
 
@@ -2047,7 +2040,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/lv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/lv
 
 *   **Config description**: Language Code: lv
 
@@ -2105,7 +2098,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/mn <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/mn
 
 *   **Config description**: Language Code: mn
 
@@ -2163,7 +2156,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/mt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/mt
 
 *   **Config description**: Language Code: mt
 
@@ -2279,7 +2272,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/or <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/or
 
 *   **Config description**: Language Code: or
 
@@ -2337,7 +2330,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/pa-IN <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/pa-IN
 
 *   **Config description**: Language Code: pa-IN
 
@@ -2395,7 +2388,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/pl <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/pl
 
 *   **Config description**: Language Code: pl
 
@@ -2453,7 +2446,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/pt <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/pt
 
 *   **Config description**: Language Code: pt
 
@@ -2511,7 +2504,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/rm-sursilv <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/rm-sursilv
 
 *   **Config description**: Language Code: rm-sursilv
 
@@ -2569,7 +2562,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/rm-vallader <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/rm-vallader
 
 *   **Config description**: Language Code: rm-vallader
 
@@ -2627,7 +2620,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/ro <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/ro
 
 *   **Config description**: Language Code: ro
 
@@ -2685,7 +2678,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/ru <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/ru
 
 *   **Config description**: Language Code: ru
 
@@ -2743,7 +2736,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/rw <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/rw
 
 *   **Config description**: Language Code: rw
 
@@ -2801,7 +2794,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/sah <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/sah
 
 *   **Config description**: Language Code: sah
 
@@ -2917,7 +2910,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/sv-SE <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/sv-SE
 
 *   **Config description**: Language Code: sv-SE
 
@@ -2975,7 +2968,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/ta <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/ta
 
 *   **Config description**: Language Code: ta
 
@@ -3033,7 +3026,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/th <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/th
 
 *   **Config description**: Language Code: th
 
@@ -3207,7 +3200,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/uk <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/uk
 
 *   **Config description**: Language Code: uk
 
@@ -3265,7 +3258,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/vi <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/vi
 
 *   **Config description**: Language Code: vi
 
@@ -3323,7 +3316,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/vot <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/vot
 
 *   **Config description**: Language Code: vot
 
@@ -3379,7 +3372,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/zh-CN <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/zh-CN
 
 *   **Config description**: Language Code: zh-CN
 
@@ -3437,7 +3430,7 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## common_voice/zh-HK <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+## common_voice/zh-HK
 
 *   **Config description**: Language Code: zh-HK
 

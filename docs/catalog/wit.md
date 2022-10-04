@@ -12,11 +12,6 @@
 # `wit`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 Wikipedia-based Image Text (WIT) Dataset is a large multimodal multilingual
@@ -35,9 +30,7 @@ learning models.
 
     *   `1.0.0`: Initial release. It loads the WIT dataset from
         https://storage.googleapis.com/gresearch/wit/
-    *   **`1.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added `val` and `test` splits.
+    *   **`1.1.0`** (default): Added `val` and `test` splits.
 
 *   **Download size**: `25.20 GiB`
 

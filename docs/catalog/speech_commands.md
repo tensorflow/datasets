@@ -12,11 +12,6 @@
 # `speech_commands`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 An audio dataset of spoken words designed to help train and evaluate keyword
@@ -39,9 +34,7 @@ for the validation set.
 
 *   **Versions**:
 
-    *   **`0.0.3`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Fix audio data type with dtype=tf.int16.
+    *   **`0.0.3`** (default): Fix audio data type with dtype=tf.int16.
 
 *   **Download size**: `2.37 GiB`
 

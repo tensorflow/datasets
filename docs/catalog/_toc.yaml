@@ -35,7 +35,6 @@ toc:
   - path: /datasets/catalog/tedlium
     title: tedlium
   - path: /datasets/catalog/user_libri_audio
-    status: nightly
     title: user_libri_audio
   - path: /datasets/catalog/vctk
     title: vctk
@@ -154,14 +153,12 @@ toc:
   - path: /datasets/catalog/cifar100
     title: cifar100
   - path: /datasets/catalog/cifar100_n
-    status: nightly
     title: cifar100_n (manual)
   - path: /datasets/catalog/cifar10_1
     title: cifar10_1
   - path: /datasets/catalog/cifar10_corrupted
     title: cifar10_corrupted
   - path: /datasets/catalog/cifar10_n
-    status: nightly
     title: cifar10_n (manual)
   - path: /datasets/catalog/citrus_leaves
     title: citrus_leaves
@@ -172,7 +169,6 @@ toc:
   - path: /datasets/catalog/colorectal_histology_large
     title: colorectal_histology_large
   - path: /datasets/catalog/controlled_noisy_web_labels
-    status: nightly
     title: controlled_noisy_web_labels (manual)
   - path: /datasets/catalog/curated_breast_imaging_ddsm
     title: curated_breast_imaging_ddsm (manual)
@@ -205,7 +201,6 @@ toc:
   - path: /datasets/catalog/i_naturalist2018
     title: i_naturalist2018
   - path: /datasets/catalog/i_naturalist2021
-    status: nightly
     title: i_naturalist2021
   - path: /datasets/catalog/imagenet2012
     title: imagenet2012 (manual)
@@ -258,7 +253,6 @@ toc:
   - path: /datasets/catalog/places365_small
     title: places365_small
   - path: /datasets/catalog/placesfull
-    status: nightly
     title: placesfull
   - path: /datasets/catalog/plant_leaves
     title: plant_leaves
@@ -363,7 +357,6 @@ toc:
   - path: /datasets/catalog/mslr_web
     title: mslr_web
   - path: /datasets/catalog/yahoo_ltrc
-    status: nightly
     title: yahoo_ltrc (manual)
   title: Ranking
 - section:
@@ -536,7 +529,6 @@ toc:
   - path: /datasets/catalog/clinc_oos
     title: clinc_oos
   - path: /datasets/catalog/conll2003
-    status: nightly
     title: conll2003
   - path: /datasets/catalog/cos_e
     title: cos_e
@@ -639,10 +631,8 @@ toc:
   - path: /datasets/catalog/unified_qa
     title: unified_qa
   - path: /datasets/catalog/universal_dependencies
-    status: nightly
     title: universal_dependencies
   - path: /datasets/catalog/user_libri_text
-    status: nightly
     title: user_libri_text
   - path: /datasets/catalog/wiki40b
     title: wiki40b
@@ -665,7 +655,6 @@ toc:
   - path: /datasets/catalog/xtreme_pawsx
     title: xtreme_pawsx
   - path: /datasets/catalog/xtreme_pos
-    status: nightly
     title: xtreme_pos
   - path: /datasets/catalog/xtreme_xnli
     title: xtreme_xnli
@@ -684,19 +673,16 @@ toc:
   title: Time series
 - section:
   - path: /datasets/catalog/bucc
-    status: nightly
     title: bucc
   - path: /datasets/catalog/flores
     title: flores
   - path: /datasets/catalog/mtnt
-    status: nightly
     title: mtnt
   - path: /datasets/catalog/opus
     title: opus
   - path: /datasets/catalog/para_crawl
     title: para_crawl
   - path: /datasets/catalog/tatoeba
-    status: nightly
     title: tatoeba
   - path: /datasets/catalog/ted_hrlr_translate
     title: ted_hrlr_translate

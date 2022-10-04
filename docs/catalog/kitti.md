@@ -12,11 +12,6 @@
 # `kitti`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Visualization**:
     <a class="button button-with-icon" href="https://knowyourdata-tfds.withgoogle.com/#tab=STATS&dataset=kitti">
     Explore in Know Your Data
@@ -43,9 +38,7 @@ the Kitti homepage.
 
     *   `3.1.0`: No release notes.
     *   `3.2.0`: Devkit updated.
-    *   **`3.3.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added labels for the `occluded` feature.
+    *   **`3.3.0`** (default): Added labels for the `occluded` feature.
 
 *   **Download size**: `11.71 GiB`
 
