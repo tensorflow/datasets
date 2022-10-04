@@ -160,7 +160,7 @@ class CollectionDatasetsSection(CollectionSection):
     datasets = collection_loader.collection.get_collection()
     for name, reference in datasets.items():
       ds_link = self._get_dataset_catalog_link(reference)
-      yield f'    * `{name}`: `[{reference.tfds_name()}]({ds_link})`'
+      yield f'    * `{name}`: [`{reference.tfds_name()}`]({ds_link})'
 
   def content(self, loader: tfds.core.DatasetCollectionLoader):
     return dmb.IntentedBlock('\n'.join(self._list_datasets(loader)))
