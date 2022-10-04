@@ -28,6 +28,7 @@ from typing import Any, Dict, Iterator, List, Optional, Type
 from absl import logging
 import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.scripts.documentation import collection_markdown_builder
 from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
 from tensorflow_datasets.scripts.documentation import doc_utils
 import tqdm
@@ -71,6 +72,20 @@ class BuilderDocumentation:
   content: str
   section: str
   is_manual: bool
+  is_nightly: bool
+
+
+@dataclasses.dataclass(eq=False, frozen=True)
+class CollectionDocumentation:
+  """Documentation output of a single builder.
+
+  Attributes:
+    name: Documentation page name (e.g. `xtreme`)
+    content: Documentation content
+    is_nightly: Whether the dataset was recently added in `tfds-nightly`
+  """
+  name: str
+  content: str
   is_nightly: bool
 
 
@@ -202,6 +217,20 @@ def _get_section(builder_cls: Type[tfds.core.DatasetBuilder]) -> str:
   return category
 
 
+def _document_single_collection(name: str,) -> CollectionDocumentation:
+  """Returns the documentation for a single dataset collection."""
+  logging.info('Documenting dataset collection %s', name)
+  collection = tfds.dataset_collection(name=name)
+  out_str = collection_markdown_builder.get_collection_markdown_string(
+      collection=collection)
+  return CollectionDocumentation(
+      name=name,
+      content=out_str,
+      # TODO(tfds): Add support for display of nightly icon when necessary.
+      is_nightly=False,
+  )
+
+
 def _document_single_builder(
     name: str,
     **kwargs: Any,
@@ -248,6 +277,16 @@ def _all_tfds_datasets() -> List[str]:
       name for name in tfds.list_builders(with_community_datasets=True)  # pylint: disable=g-complex-comprehension
       if name not in _BUILDER_BLACKLIST
   ])
+
+
+def iter_collections_documentation(
+    collection_names: Optional[List[str]] = None,
+) -> Iterator[CollectionDocumentation]:
+  logging.info('Retrieving dataset collection names...')
+  collection_names = collection_names or sorted(tfds.list_dataset_collections())
+  for collection_name in collection_names:
+    yield _document_single_collection(name=collection_name)
+  print('All collections documentations generated!')
 
 
 def iter_documentation_builders(
