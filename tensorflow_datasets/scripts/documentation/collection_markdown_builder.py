@@ -88,7 +88,8 @@ class CollectionHomepageSection(CollectionSection):
     if homepage:
       homepage = doc_utils.format_homepage_url(homepage)
     else:
-      return ''
+      homepage = ''
+    return dmb.Block(homepage)
 
 
 class CollectionDescriptionSection(CollectionSection):

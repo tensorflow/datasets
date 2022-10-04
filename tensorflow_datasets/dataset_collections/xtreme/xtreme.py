@@ -32,6 +32,7 @@ class Xtreme(dataset_collection_builder.DatasetCollection):
         release_notes={
             "1.0.0": "Initial release",
         },
+        homepage="https://sites.research.google/xtreme",
     )
 
   @property
