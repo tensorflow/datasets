@@ -72,9 +72,9 @@ def test_collection_datasets_section(
     dummy_dc_loader: tfds.core.DatasetCollectionLoader):  # pylint: disable=redefined-outer-name
   datasets_section = collection_markdown_builder.CollectionDatasetsSection()
   expected_lines = [
-      '    * `a`: `[a/c:1.3.5](https://www.tensorflow.org/datasets/catalog/a#c)`',
-      '    * `b`: `[b/d:2.4.8](https://www.tensorflow.org/datasets/catalog/b#d)`',
-      '    * `c`: `[c/e:3.5.7](https://www.tensorflow.org/datasets/catalog/c#e)`',
+      '    * `a`: [`a/c:1.3.5`](https://www.tensorflow.org/datasets/catalog/a#c)',
+      '    * `b`: [`b/d:2.4.8`](https://www.tensorflow.org/datasets/catalog/b#d)',
+      '    * `c`: [`c/e:3.5.7`](https://www.tensorflow.org/datasets/catalog/c#e)',
   ]
   assert datasets_section.content(
       loader=dummy_dc_loader) == '\n'.join(expected_lines)
@@ -88,5 +88,5 @@ def test_get_collection_markdown_string(
   assert 'dummy_dataset_collection' in doc  # Collection heading.
   assert 'my description' in doc  # Collection description.
   assert '@misc{citekey' in doc  # Collection citation.
-  assert ('`[c/e:3.5.7](https://www.tensorflow.org/datasets/catalog/c#e)`'
+  assert ('[`c/e:3.5.7`](https://www.tensorflow.org/datasets/catalog/c#e)'
           in doc)  # Collection dataset.
