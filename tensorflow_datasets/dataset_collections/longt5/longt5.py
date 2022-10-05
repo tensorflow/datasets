@@ -32,6 +32,7 @@ class Longt5(dataset_collection_builder.DatasetCollection):
         release_notes={
             "1.0.0": "Initial release",
         },
+        homepage="https://github.com/google-research/longt5",
     )
 
   @property
