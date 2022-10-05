@@ -161,9 +161,25 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
       return os.path.join(annotations_dir_path,
                           "{}.xml".format(filename.strip()))
 
+    # BBox attributes in range of 0.0 to 1.0
+    def normalize_bbox(bbox_side, image_side):
+      return min(bbox_side / image_side, 1.0)
+
+    def build_box(attributes, n):
+      return tfds.features.BBox(
+          ymin=normalize_bbox(attributes["ymin"][n], attributes["height"][0]),
+          xmin=normalize_bbox(attributes["xmin"][n], attributes["width"][0]),
+          ymax=normalize_bbox(attributes["ymax"][n], attributes["height"][0]),
+          xmax=normalize_bbox(attributes["xmax"][n], attributes["width"][0]),
+      )
+
+    def get_label(attributes, n):
+      return attributes["name"][n]
+
     for fname in file_names:
       annotation_file_path = get_annotations_file_path(fname)
-      xml_list[fname] = ET.parse(annotation_file_path)
+      with tf.io.gfile.GFile(annotation_file_path) as f:
+        xml_list[fname] = ET.parse(f)
       attributes = collections.defaultdict(list)
       for element in xml_list[fname].iter():
         # Extract necessary Bbox attributes from XML file
@@ -172,21 +188,6 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
           attributes[element.tag.strip()].append(element.text.strip())
         elif element.tag.strip() in bbox_attrib:
           attributes[element.tag.strip()].append(float(element.text.strip()))
-
-        # BBox attributes in range of 0.0 to 1.0
-      def normalize_bbox(bbox_side, image_side):
-        return min(bbox_side / image_side, 1.0)
-
-      def build_box(attributes, n):
-        return tfds.features.BBox(
-            ymin=normalize_bbox(attributes["ymin"][n], attributes["height"][0]),
-            xmin=normalize_bbox(attributes["xmin"][n], attributes["width"][0]),
-            ymax=normalize_bbox(attributes["ymax"][n], attributes["height"][0]),
-            xmax=normalize_bbox(attributes["xmax"][n], attributes["width"][0]),
-        )
-
-      def get_label(attributes, n):
-        return attributes["name"][n]
 
       key = fname
       example = {
