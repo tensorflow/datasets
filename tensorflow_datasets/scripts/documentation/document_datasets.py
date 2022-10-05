@@ -273,10 +273,16 @@ def _document_single_builder_inner(
 
 def _all_tfds_datasets() -> List[str]:
   """Returns all "official" TFDS dataset names."""
-  return sorted([
-      name for name in tfds.list_builders(with_community_datasets=True)  # pylint: disable=g-complex-comprehension
-      if name not in _BUILDER_BLACKLIST
-  ])
+  datasets = []
+  for name in tfds.list_builders(with_community_datasets=True):
+    if name in _BUILDER_BLACKLIST:
+      continue
+    try:
+      _ = tfds.core.naming.parse_builder_name_kwargs(name=name)
+      datasets.append(name)
+    except ValueError as e:
+      logging.error('Could not parse dataset with name `%s`!', name, exc_info=e)
+  return sorted(datasets)
 
 
 def iter_collections_documentation(
