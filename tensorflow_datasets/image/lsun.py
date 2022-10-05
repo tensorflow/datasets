@@ -158,6 +158,8 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, extracted_dir, file_path):
     with tf.Graph().as_default():
       path = os.path.join(extracted_dir, file_path, "data.mdb")
+      if not tf.io.gfile.exists(path):
+        raise RuntimeError(f"Could not open file {path}!")
       dataset = _make_lmdb_dataset(path)
       for i, (id_bytes, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
         record = {
