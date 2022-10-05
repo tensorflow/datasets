@@ -15,6 +15,7 @@
 
 """TFDS logging module."""
 import atexit
+import functools
 import threading
 from typing import Callable, Dict, List, Optional, Tuple, TypeVar
 
@@ -110,7 +111,7 @@ def tfds_import(*, metadata: call_metadata.CallMetadata,
 
 
 def builder_init() -> Callable[[_T], _T]:
-  """"Decorator to call `builder_init` method on registered loggers."""
+  """Decorator to call `builder_init` method on registered loggers."""
 
   @wrapt.decorator
   def decorator(function, dsbuilder, args, kwargs):
@@ -158,7 +159,7 @@ def _get_name_config_version_datadir(dsbuilder):
 
 
 def builder_info() -> Callable[[_T], _T]:
-  """"Decorator to call `builder_info` method on registered loggers."""
+  """Decorator to call `builder_info` method on registered loggers."""
 
   @wrapt.decorator
   def decorator(function, dsbuilder, args, kwargs):
@@ -214,6 +215,28 @@ def as_dataset() -> Callable[[_T], _T]:
             as_supervised=kwargs.get("as_supervised"),
             decoders=kwargs.get("decoders"),
         )
+
+  return decorator
+
+
+def as_numpy(function: Callable[[_T], _T]) -> Callable[[_T], _T]:
+  """Decorator to call `as_numpy` method on registered loggers."""
+
+  # Here we use `functools.wraps` as `wrapt.decorator` is not serializable.
+  # https://github.com/GrahamDumpleton/wrapt/issues/158.
+  @functools.wraps(function)
+  def decorator(*args, **kwargs):
+    dataset = args[0] if args else kwargs["dataset"]
+    metadata = call_metadata.CallMetadata()
+    try:
+      return function(*args, **kwargs)
+    except Exception:
+      metadata.mark_error()
+      raise
+    finally:
+      metadata.mark_end()
+      for logger in _get_registered_loggers():
+        logger.as_numpy(metadata=metadata, dataset=dataset)
 
   return decorator
 
