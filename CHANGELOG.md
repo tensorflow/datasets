@@ -10,6 +10,20 @@ and this project adheres to
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [4.7.0] - 2022-10-04
+
+### Added
+
 -   [API] Added
     [TfDataBuilder](https://www.tensorflow.org/datasets/format_specific_dataset_builders#datasets_based_on_tfdatadataset)
     that is handy for storing experimental ad hoc TFDS datasets in notebook-like
@@ -74,6 +88,9 @@ and this project adheres to
 ### Fixed
 
 -   Various datasets
+-   In Linux, when loading a dataset from a directory that is not your home
+    (`~`) directory, a new `~` directory is not created in the current
+    directory (fixes [#4117](https://github.com/tensorflow/datasets/issues/4117)).
 
 ### Security
 
