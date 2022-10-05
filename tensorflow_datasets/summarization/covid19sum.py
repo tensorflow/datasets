@@ -56,6 +56,12 @@ _ADDITIONAL_FEATURES = [
     _SHA, "source_x", "title", "doi", "license", "authors", "publish_time",
     "journal", "url"
 ]
+_ALL_COLUMNS = [
+    "cord_uid", "sha", "source_x", "title", "doi", "pmcid", "pubmed_id",
+    "license", "abstract", "publish_time", "authors", "journal",
+    "Microsoft Academic Paper ID", "WHO #Covidence", "has_full_text",
+    "full_text_file", "url"
+]
 
 
 class Covid19sum(tfds.core.GeneratorBasedBuilder):
@@ -92,7 +98,10 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
     extracted_path = dl_manager.extract(
         os.path.join(dl_manager.manual_dir, "CORD-19-research-challenge.zip"))
     pd = tfds.core.lazy_imports.pandas
-    df = pd.read_csv(os.path.join(extracted_path, "metadata.csv")).fillna("")
+    df = pd.read_csv(
+        os.path.join(extracted_path, "metadata.csv"),
+        header=0,
+        names=_ALL_COLUMNS).fillna("")
     data_paths = []
     for _, row in df.iterrows():
       file_dir = row["full_text_file"]
