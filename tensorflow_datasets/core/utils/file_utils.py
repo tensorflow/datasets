@@ -15,6 +15,7 @@
 
 """Library of helper functions to handle dealing with files."""
 
+import functools
 import os
 from typing import List, Optional
 
@@ -112,3 +113,17 @@ def get_default_data_dir(given_data_dir: Optional[str] = None,
     return os.environ['TFDS_DATA_DIR']
   else:
     return constants.DATA_DIR
+
+
+@functools.lru_cache(maxsize=None)
+def makedirs_cached(dirname: epath.PathLike):
+  """Creates the given dir with parents and exist is ok.
+
+  Note that this operation is cached, so a dir is only created once. Use this
+  with care. If during your session you remove the folder and later you want to
+  recreate it, then this method will not do that.
+
+  Arguments:
+    dirname: the dir to create.
+  """
+  epath.Path(dirname).mkdir(parents=True, exist_ok=True)

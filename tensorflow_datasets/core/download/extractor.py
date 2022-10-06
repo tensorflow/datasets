@@ -36,6 +36,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import resource as resource_lib
+from tensorflow_datasets.core.utils import file_utils
 
 
 @utils.memoize()
@@ -118,7 +119,7 @@ class _Extractor(object):
 
 def _copy(src_file, dest_path):
   """Copy data read from src file obj to new file in dest_path."""
-  tf.io.gfile.makedirs(os.path.dirname(dest_path))
+  file_utils.makedirs_cached(os.path.dirname(dest_path))
   with tf.io.gfile.GFile(dest_path, 'wb') as dest_file:
     while True:
       data = src_file.read(io.DEFAULT_BUFFER_SIZE)
