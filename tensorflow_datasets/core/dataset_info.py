@@ -309,6 +309,10 @@ class DatasetInfo(object):
     return self._identity.config_name
 
   @property
+  def config_description(self) -> str:
+    return self._identity.config_description
+
+  @property
   def full_name(self):
     """Full canonical name: (<dataset_name>/<config_name>/<version>)."""
     names = [self.name]
