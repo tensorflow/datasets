@@ -25,6 +25,7 @@ import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import hashing
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import type_utils
 
 # Approximately how much data to store in memory before writing to disk.
@@ -124,7 +125,7 @@ class _Bucket(object):
       data (binary): the data.
     """
     if not self._fobj:
-      tf.io.gfile.makedirs(os.path.dirname(self._path))
+      file_utils.makedirs_cached(os.path.dirname(self._path))
       self._fobj = tf.io.gfile.GFile(self._path, mode='wb')
     data_size = len(data)
     self._fobj.write(_hkey_to_bytes(key))
