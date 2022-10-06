@@ -10,6 +10,9 @@ and this project adheres to
 
 ### Added
 
+-   Loggers are also called on `tfds.as_numpy(...)`, base `Logger` class has a
+    new corresponding method.
+
 ### Changed
 
 ### Deprecated

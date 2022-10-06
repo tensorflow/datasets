@@ -95,6 +95,10 @@ class Logger:
     """
     pass
 
+  def as_numpy(self, *, metadata: call_metadata.CallMetadata, dataset: Any):
+    """Callback called when user calls `tfds.as_numpy(...)`."""
+    pass
+
   def builder(
       self,
       *,
