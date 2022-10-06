@@ -22,6 +22,7 @@ from typing import Any, Callable, Iterable, Iterator, Union
 import numpy as np
 
 import tensorflow as tf
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import type_utils
@@ -138,6 +139,7 @@ def _nested_to_numpy_graph(ds_nested: Tree[TensorflowElem]) -> Tree[NumpyElem]:
   ])
 
 
+@tfds_logging.as_numpy
 def as_numpy(dataset: Tree[TensorflowElem]) -> Tree[NumpyElem]:
   """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
