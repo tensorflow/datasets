@@ -224,6 +224,8 @@ setup(
                 'url_checksums/*',
                 'checksums.tsv',
                 'community-datasets.toml',
+                'dataset_collections/*/*.md',
+                'dataset_collections/*/*.bib',
             ],
     },
     exclude_package_data={
