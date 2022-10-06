@@ -24,6 +24,11 @@ for ex in tfds.load('cifar10', split='train'):
 
 ## All Datasets
 
+## `Dataset Collections`
+
+*   [`longt5`](longt5.md)
+*   [`xtreme`](xtreme.md)
+
 ### `Audio`
 
 *   [`accentdb`](accentdb.md)

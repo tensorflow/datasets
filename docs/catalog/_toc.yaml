@@ -2,6 +2,12 @@ toc:
 - path: /datasets/catalog/overview
   title: Overview
 - section:
+  - path: /datasets/catalog/longt5
+    title: longt5
+  - path: /datasets/catalog/xtreme
+    title: xtreme
+  title: Dataset Collections
+- section:
   - path: /datasets/catalog/accentdb
     title: accentdb
   - path: /datasets/catalog/common_voice
