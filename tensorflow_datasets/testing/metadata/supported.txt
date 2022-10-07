@@ -72,6 +72,7 @@ asset/ratings/1.0.0
 asset/simplification/1.0.0
 assin2/1.0.0
 bair_robot_pushing_small/2.0.0
+bccd/1.0.0
 beans/0.1.0
 bee_dataset/bee_dataset_150/1.0.0
 bee_dataset/bee_dataset_200/1.0.0
