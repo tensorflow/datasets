@@ -44,18 +44,19 @@ dataset itself. For YFCC-100M see http://www.multimediacommons.org/.
     *   **`3.0.0`** (default): v3: Removed 131 images from v2 as they contained
         humans/tattos.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `167.30 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `166.43 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split     | Examples
+:-------- | --------:
+`'train'` | 1,439,588
 
 *   **Feature structure**:
 
