@@ -28,4 +28,5 @@ from tensorflow_datasets.core.utils.tqdm_utils import *
 from tensorflow_datasets.core.utils.type_utils import *
 from tensorflow_datasets.core.utils.version import Experiment
 from tensorflow_datasets.core.utils.version import Version
+from tensorflow_datasets.core.utils.dummy_beam import DummyBeam
 # pylint: enable=wildcard-import
