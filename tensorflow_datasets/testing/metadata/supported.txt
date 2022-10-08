@@ -1283,6 +1283,7 @@ para_crawl/enro/1.2.0
 para_crawl/ensk/1.2.0
 para_crawl/ensl/1.2.0
 para_crawl/ensv/1.2.0
+pass/3.0.0
 patch_camelyon/2.0.0
 paws_wiki/labeled_final_raw/1.1.0
 paws_wiki/labeled_final_tokenized/1.1.0
