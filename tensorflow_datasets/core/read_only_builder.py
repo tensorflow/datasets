@@ -127,7 +127,7 @@ def builder_from_directory(
       e.g. `~/tensorflow_datasets/mnist/3.0.0/`).
 
   Returns:
-    builder: `tfds.core.DatasetBuilder`, builder for dataset at the given path.
+    builder: `tf.core.DatasetBuilder`, builder for dataset at the given path.
   """
   return ReadOnlyBuilder(builder_dir=builder_dir)
 
@@ -212,7 +212,7 @@ def builder_from_metadata(
       requested dataset.
 
   Returns:
-    builder: `tfds.core.DatasetBuilder`, builder for dataset at the given path.
+    builder: `tf.core.DatasetBuilder`, builder for dataset at the given path.
   """
   return ReadOnlyBuilder(builder_dir=builder_dir, info_proto=info_proto)
 
@@ -354,7 +354,7 @@ def _get_dataset_dir(
 
 def _contains_dataset(dataset_dir: epath.PathLike) -> bool:
   try:
-    return epath.Path(feature_lib.make_config_path(dataset_dir)).exists()
+    return tf.io.gfile.exists(feature_lib.make_config_path(dataset_dir))
   except (OSError, tf.errors.PermissionDeniedError):
     return False
 
@@ -394,8 +394,7 @@ def _find_builder_dir_single_dir(
   # Dataset wasn't found, try to find a suitable available version.
   found_version_str = _get_version_str(
       builder_dir, config_name=config_name, requested_version=version_str)
-  if (found_version_str and
-      (version_str is None or found_version_str != version_str)):
+  if found_version_str and found_version_str != version_str:
     return _find_builder_dir_single_dir(
         builder_name=builder_name,
         data_dir=data_dir,
@@ -405,7 +404,7 @@ def _find_builder_dir_single_dir(
   # If no builder found, we populate the error_context with useful information
   # and return None.
   error_utils.add_context(('No builder could be found in the directory: '
-                           f'{data_dir} for the builder: {builder_name}.'))
+                           f'{builder_name} for the builder: {builder_name}.'))
   return None
 
 
