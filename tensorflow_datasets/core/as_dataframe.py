@@ -38,6 +38,8 @@ except ImportError:
 # Should be `pandas.io.formats.style.Styler`, but is a costly import
 Styler = Any
 
+print(tf.__version__)
+
 TreeDict = type_utils.TreeDict
 
 
