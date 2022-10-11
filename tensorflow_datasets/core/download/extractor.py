@@ -19,7 +19,6 @@ import bz2
 import concurrent.futures
 import contextlib
 import gzip
-import io
 import multiprocessing
 import os
 import tarfile
@@ -59,6 +58,8 @@ class _Extractor(object):
     max_workers = max_workers or multiprocessing.cpu_count()
     self._executor = concurrent.futures.ThreadPoolExecutor(
         max_workers=max_workers)
+    self._copy_executor = concurrent.futures.ThreadPoolExecutor(
+        max_workers=max_workers * 4)
     self._pbar_path = None
 
   @contextlib.contextmanager
@@ -76,56 +77,64 @@ class _Extractor(object):
     self._pbar_path.update_total(1)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
-    future = self._executor.submit(self._sync_extract, path, extract_method,
-                                   to_path)
+    future = self._copy_executor.submit(
+        self._extract, from_path=path, method=extract_method, to_path=to_path)
     return promise.Promise.resolve(future)
 
-  def _sync_extract(self, from_path, method, to_path):
+  def _extract(
+      self,
+      from_path: epath.PathLike,
+      method,
+      to_path: epath.PathLike,
+  ) -> epath.Path:
     """Returns `to_path` once resource has been extracted there."""
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
-    path = None
-    dst_path = None  # To avoid undefined variable if exception is raised
+    max_length_dst_path = 0
+    futures = []
     try:
       for path, handle in iter_archive(from_path, method):
         path = tf.compat.as_text(path)
         dst_path = path and os.path.join(to_path_tmp, path) or to_path_tmp
-        _copy(handle, dst_path)
+        max_length_dst_path = max(max_length_dst_path, len(dst_path))
+        file_utils.makedirs_cached(os.path.dirname(dst_path))
+        future = self._copy_executor.submit(_copy, handle.read(), dst_path)
+        futures.append(future)
+
+      # Wait until all copies have completed.
+      for future in concurrent.futures.as_completed(futures):
+        future.result()
     except BaseException as err:
-      msg = 'Error while extracting {} to {} (file: {}) : {}'.format(
-          from_path, to_path, path, err)
+      msg = f'Error while extracting {from_path} to {to_path}: {err}'
       # Check if running on windows
-      if os.name == 'nt' and dst_path and len(dst_path) > 250:
+      if os.name == 'nt' and max_length_dst_path > 250:
         msg += (
             '\nOn windows, path lengths greater than 260 characters may result'
             ' in an error. See the doc to remove the limitation: '
             'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
         )
       raise ExtractError(msg)
+
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
-    if tf.io.gfile.exists(to_path):
+    to_path = epath.Path(to_path)
+    if to_path.exists():
       # `rename` is atomic, but not `rmtree`.
       # When 2 builder scripts (for each config) extract the same file, one can
       # `rename` while the other is still running `rmtree`, leading to corrupted
       # archive dir.
-      path_to_delete = to_path_tmp + '.todelete'
-      tf.io.gfile.rename(to_path, path_to_delete)
-      tf.io.gfile.rmtree(path_to_delete)
-    tf.io.gfile.rename(to_path_tmp, to_path)
+      path_to_delete = epath.Path(to_path_tmp + '.todelete')
+      to_path.rename(path_to_delete)
+      path_to_delete.rmtree()
+    epath.Path(to_path_tmp).rename(to_path)
     self._pbar_path.update(1)
-    return epath.Path(to_path)
+    return to_path
 
 
-def _copy(src_file, dest_path):
-  """Copy data read from src file obj to new file in dest_path."""
-  file_utils.makedirs_cached(os.path.dirname(dest_path))
+def _copy(src_data, dest_path):
+  """Copy data read from src data to new file in dest_path."""
   with tf.io.gfile.GFile(dest_path, 'wb') as dest_file:
-    while True:
-      data = src_file.read(io.DEFAULT_BUFFER_SIZE)
-      if not data:
-        break
-      dest_file.write(data)
+    dest_file.write(src_data)
 
 
 def _normpath(path):
