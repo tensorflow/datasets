@@ -43,16 +43,12 @@ class ExtractorTest(testing.TestCase):
   @classmethod
   def setUpClass(cls):
     super(ExtractorTest, cls).setUpClass()
-    f1_path = os.path.join(cls.test_data, '6pixels.png')
-    f2_path = os.path.join(cls.test_data, 'foo.csv')
-    with tf.io.gfile.GFile(f1_path, 'rb') as f1_f:
-      cls.f1_content = f1_f.read()
-    with tf.io.gfile.GFile(f2_path, 'rb') as f2_f:
-      cls.f2_content = f2_f.read()
+    cls.f1_content = _read(os.path.join(cls.test_data, '6pixels.png'))
+    cls.f2_content = _read(os.path.join(cls.test_data, 'foo.csv'))
 
   def setUp(self):
     super(ExtractorTest, self).setUp()
-    self.extractor = extractor.get_extractor()
+    self.extractor = extractor._Extractor()
     self.extractor._pbar_path = mock.MagicMock()
     # Where archive will be extracted:
     self.to_path = os.path.join(self.tmp_dir, 'extracted_arch')
