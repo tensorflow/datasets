@@ -74,7 +74,6 @@ class _Extractor(object):
     """Returns `promise.Promise` => to_path."""
     path = os.fspath(path)
     to_path = os.fspath(to_path)
-    self._pbar_path.update_total(1)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
     future = self._copy_executor.submit(
@@ -100,10 +99,12 @@ class _Extractor(object):
         file_utils.makedirs_cached(os.path.dirname(dst_path))
         future = self._copy_executor.submit(_copy, handle.read(), dst_path)
         futures.append(future)
+        self._pbar_path.update_total(1)
 
       # Wait until all copies have completed.
       for future in concurrent.futures.as_completed(futures):
         future.result()
+        self._pbar_path.update(1)
     except BaseException as err:
       msg = f'Error while extracting {from_path} to {to_path}: {err}'
       # Check if running on windows
@@ -127,7 +128,6 @@ class _Extractor(object):
       to_path.rename(path_to_delete)
       path_to_delete.rmtree()
     epath.Path(to_path_tmp).rename(to_path)
-    self._pbar_path.update(1)
     return to_path
 
 
