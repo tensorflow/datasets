@@ -30,6 +30,7 @@ import numpy as np
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
@@ -49,9 +50,6 @@ T = TypeVar('T', bound='FeatureConnector')
 # FeatureConnector-like input accepted by `Sequence()`, `Optional()`,...
 FeatureConnectorArg = Union['FeatureConnector',
                             Dict[str, 'FeatureConnectorArg'], tf.dtypes.DType]  # pytype: disable=not-supported-yet
-
-# Name of the file to output the features information.
-FEATURES_FILENAME = 'features.json'
 
 
 class TensorInfo(object):
@@ -159,7 +157,8 @@ class CatalogFeatureDocumentation:
   tensor_info: Optional[TensorInfo] = None
 
   def replace(self, **kwargs: Any) -> 'CatalogFeatureDocumentation':
-    """Returns a copy of the `CatalogFeatureDocumentation` with updated attributes."""
+    """Returns a copy of the `CatalogFeatureDocumentation` with updated attributes.
+    """
     return dataclasses.replace(self, **kwargs)
 
 
@@ -179,7 +178,6 @@ class FeatureConnector(object):
 
   The connector can either get raw or dictionary values as input, depending on
   the connector type.
-
   """
 
   # Keep track of all sub-classes.
@@ -246,7 +244,6 @@ class FeatureConnector(object):
     Returns:
       tensor_info: Either a dict of `tfds.features.TensorInfo` object, or a
         `tfds.features.TensorInfo`
-
     """
     raise NotImplementedError
 
@@ -562,7 +559,6 @@ class FeatureConnector(object):
 
     Returns:
       features: Either a dict of feature proto object, or a feature proto object
-
     """
     return self.get_tensor_info()
 
@@ -921,9 +917,9 @@ class FeatureConnector(object):
     pass
 
 
-def make_config_path(root_dir: str) -> str:
+def make_config_path(root_dir: epath.PathLike) -> str:
   """Returns the path to the features config."""
-  return os.path.join(root_dir, FEATURES_FILENAME)
+  return os.fspath(epath.Path(root_dir) / constants.FEATURES_FILENAME)
 
 
 def _repr_html(ex) -> str:
@@ -995,7 +991,8 @@ def _make_empty_seq_output(
 
 
 def to_shape_proto(shape: utils.Shape) -> feature_pb2.Shape:
-  """Converts TFDS shape to Shape proto (-1 is used for unspecified dimensions)."""
+  """Converts TFDS shape to Shape proto (-1 is used for unspecified dimensions).
+  """
   dimensions = []
   for dimension in shape:
     if dimension is None or dimension < 0:

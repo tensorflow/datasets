@@ -32,3 +32,6 @@ DATA_DIR = os.environ.get(
 INCOMPLETE_SUFFIX = '.incomplete'
 
 # Note: GCS constants are defined in `core/utils/gcs_utils.py`
+
+# Name of the file to output the features information.
+FEATURES_FILENAME = 'features.json'
