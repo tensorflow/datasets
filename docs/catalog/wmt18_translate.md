@@ -199,18 +199,21 @@ en      | Text        |       | tf.string |
 
 *   **Config description**: WMT 2018 et-en translation task dataset.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `499.91 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `663.80 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | --------:
+`'test'`       | 2,000
+`'train'`      | 2,175,873
+`'validation'` | 2,000
 
 *   **Feature structure**:
 
@@ -241,18 +244,21 @@ et      | Text        |       | tf.string |
 
 *   **Config description**: WMT 2018 fi-en translation task dataset.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `468.76 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `889.40 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
-Split | Examples
-:---- | -------:
+Split          | Examples
+:------------- | --------:
+`'test'`       | 3,000
+`'train'`      | 3,280,600
+`'validation'` | 6,004
 
 *   **Feature structure**:
 
