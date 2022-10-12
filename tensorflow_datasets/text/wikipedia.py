@@ -85,7 +85,7 @@ WIKIPEDIA_LANGUAGES = [
 ]
 
 # Use mirror (your.org) to avoid download caps.
-_BASE_URL_TMPL = "https://dumps.wikimedia.your.org/{lang}wiki/{date}/"
+_BASE_URL_TMPL = "https://dumps.wikimedia.your.org/pub/wikimedia/dumps/{lang}wiki/{date}/"
 _INFO_FILE = "dumpstatus.json"
 
 
