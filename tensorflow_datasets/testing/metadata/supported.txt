@@ -4953,6 +4953,8 @@ wmt17_translate/ru-en/1.0.0
 wmt17_translate/tr-en/1.0.0
 wmt17_translate/zh-en/1.0.0
 wmt18_translate/cs-en/1.0.0
+wmt18_translate/et-en/1.0.0
+wmt18_translate/fi-en/1.0.0
 wmt18_translate/tr-en/1.0.0
 wmt19_translate/cs-en/1.0.0
 wmt19_translate/de-en/1.0.0
