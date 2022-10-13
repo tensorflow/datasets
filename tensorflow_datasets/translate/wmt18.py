@@ -37,7 +37,7 @@ _CITATION = """\
 """
 
 _LANGUAGE_PAIRS = [
-    (lang, "en") for lang in ["cs", "de", "et", "fi", "kk", "ru", "tr", "zh"]
+    (lang, "en") for lang in ["cs", "de", "et", "fi", "ru", "tr", "zh"]
 ]
 
 
