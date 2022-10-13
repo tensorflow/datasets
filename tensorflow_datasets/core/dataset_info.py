@@ -306,7 +306,7 @@ class DatasetInfo(object):
 
   @property
   def config_name(self) -> str:
-    return self._identity.config_name
+    return self._info_proto.config_name
 
   @property
   def config_description(self) -> str:
