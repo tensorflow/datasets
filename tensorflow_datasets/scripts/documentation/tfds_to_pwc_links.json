@@ -61,6 +61,7 @@
   "eraser_multi_rc": "https://paperswithcode.com/dataset/multirc",
   "esnli": "https://paperswithcode.com/dataset/e-snli",
   "eurosat": "https://paperswithcode.com/dataset/eurosat",
+  "example2": "https://paperswithcode.com/dataset/do-not-submit2",
   "fashion_mnist": "https://paperswithcode.com/dataset/fashion-mnist",
   "flic": "https://paperswithcode.com/dataset/flic",
   "flores": "https://paperswithcode.com/dataset/flores",
