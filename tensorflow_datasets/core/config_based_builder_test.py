@@ -44,6 +44,11 @@ class ConfigBasedBuilderTest(testing.TestCase):
     ds_builder = builder.Builder()
     self.assertEqual(ds_builder.name, "dummy_ds_1")
 
+  def test_get_metadata(self):
+    builder_cls = builder.Builder()
+    metadata = builder_cls.get_metadata()
+    self.assertEqual(metadata.tags, ["content.data-type.image"])
+
   def test_dummy_ds_1_read_from_config(self):
     ds_builder = builder.Builder()
     info = ds_builder._info()

@@ -141,7 +141,8 @@ def build_catalog(
     dataset_file = catalog_dir / f'{builder_doc.filestem}.md'
     dataset_file.write_text(builder_doc.content)
     # Save the category
-    section_to_builder_docs[builder_doc.section].append(builder_doc)
+    for section in builder_doc.sections:
+      section_to_builder_docs[section].append(builder_doc)
 
   section_to_collection_docs = collections.defaultdict(list)
   if include_collections:

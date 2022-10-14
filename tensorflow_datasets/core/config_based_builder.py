@@ -78,6 +78,10 @@ class ConfigBasedBuilder:
     if cls.pkg_dir_path is None:
       cls.pkg_dir_path = _get_builder_datadir_path(cls)
 
+  @classmethod
+  def get_metadata(cls) -> dataset_metadata.DatasetMetadata:
+    return dataset_metadata.load(cls.pkg_dir_path)
+
   def dataset_info_from_configs(self, **kwargs):
     """Returns the DatasetInfo using given kwargs anf config files.
 
@@ -87,7 +91,7 @@ class ConfigBasedBuilder:
     Args:
       **kwargs: kw args to pass to DatasetInfo directly.
     """
-    metadata = dataset_metadata.load(self.pkg_dir_path)
+    metadata = self.get_metadata()
     return dataset_info.DatasetInfo(
         builder=self,
         description=metadata.description,

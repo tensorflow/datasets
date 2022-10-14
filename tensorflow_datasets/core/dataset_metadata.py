@@ -17,17 +17,19 @@
 
 import dataclasses
 import functools
-from typing import Dict, Text
+from typing import Dict, List, Text
 
 from etils import epath
 from tensorflow_datasets.core import utils
 
 CITATIONS_FILENAME = "CITATIONS.bib"
 DESCRIPTIONS_FILENAME = "README.md"
+TAGS_FILENAME = "TAGS.txt"
 
 _METADATA_FILES = [
     CITATIONS_FILENAME,
     DESCRIPTIONS_FILENAME,
+    TAGS_FILENAME,
 ]
 
 
@@ -36,15 +38,18 @@ class DatasetMetadata:
   """Contains Dataset metadata read from configs."""
   description: Text
   citation: Text
+  tags: List[Text]
 
 
 @functools.lru_cache(maxsize=256)
 def load(pkg_path: epath.Path) -> DatasetMetadata:
   """Returns dataset metadata loaded from files in pkg."""
   raw_metadata = _read_files(pkg_path)
+  tags = [t for t in raw_metadata.get(TAGS_FILENAME, "").split("\n") if t]
   return DatasetMetadata(
       description=raw_metadata[DESCRIPTIONS_FILENAME],
       citation=raw_metadata[CITATIONS_FILENAME],
+      tags=tags,
   )
 
 
