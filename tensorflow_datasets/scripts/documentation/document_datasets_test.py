@@ -64,14 +64,15 @@ def document_single_builder_fn(tmp_path):
 def test_document_datasets():
   all_docs = list(
       document_datasets.iter_documentation_builders(
-          datasets=['mnist', 'coco'],  # Builder with and without config.
+          # Builder with and without config, as well as ConfigBasedBuilder.
+          datasets=['mnist', 'coco', 'pass'],
           doc_util_paths=doc_utils.DocUtilPaths(
               fig_base_path=None,
               df_base_path=None,
               nightly_path=None,
           ),
       ))
-  assert {d.name for d in all_docs} == {'mnist', 'coco'}
+  assert {d.name for d in all_docs} == {'mnist', 'coco', 'pass'}
 
 
 def test_document_collection():

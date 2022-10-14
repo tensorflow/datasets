@@ -36,6 +36,7 @@ title = "TFDS: a collection of ready-to-use datasets for use with TensorFlow, Ja
 journal = "ML gazette",
 year = "2022"
 }""")
+    self.assertEqual(metadata.tags, ["content.data-type.image"])
 
 
 if __name__ == "__main__":

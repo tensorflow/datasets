@@ -23,11 +23,12 @@ import collections
 from concurrent import futures
 import dataclasses
 import functools
-from typing import Any, Dict, Iterator, List, Optional, Type
+from typing import Any, Dict, Iterator, List, Optional, Text, Type
 
 from absl import logging
 import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core import config_based_builder
 from tensorflow_datasets.scripts.documentation import collection_markdown_builder
 from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
 from tensorflow_datasets.scripts.documentation import doc_utils
@@ -47,7 +48,7 @@ _BUILDER_BLACKLIST = [
 @dataclasses.dataclass(eq=False, frozen=True)
 class BuilderToDocument:
   """Structure containing metadata."""
-  section: str
+  sections: List[Text]
   namespace: Optional[str]
   builder: tfds.core.DatasetBuilder
   config_builders: List[tfds.core.DatasetBuilder]
@@ -62,7 +63,7 @@ class BuilderDocumentation:
     filestem: Documentation page name without suffix (e.g. `mnist`,
       `kaggle_mnist`)
     content: Documentation content
-    section: Documentation section (e.g `text`, `image`,...)
+    sections: Documentation sections (e.g `text`, `image`,...)
     namespace: Dataset namespace
     is_manual: Whether the dataset require manual download
     is_nightly: Whether the dataset was recently added in `tfds-nightly`
@@ -70,7 +71,7 @@ class BuilderDocumentation:
   name: str
   filestem: str
   content: str
-  section: str
+  sections: List[Text]
   is_manual: bool
   is_nightly: bool
 
@@ -96,9 +97,7 @@ def _load_builder(name: str,) -> Optional[BuilderToDocument]:
     name: Builder to load
 
   Returns:
-    section: The section in which the builder is documented
-    builder: Main builder instance
-    config_builders: Additional builders (one of each configs)
+    BuilderToDocument or None.
   """
   if tfds.core.naming.DatasetName(name).namespace:  # Community dataset
     return _load_builder_from_location(name)
@@ -135,7 +134,7 @@ def _load_builder_from_location(name: str,) -> Optional[BuilderToDocument]:
   else:
     config_builders = []
   return BuilderToDocument(
-      section=dataset_name.namespace,
+      sections=[dataset_name.namespace],
       namespace=dataset_name.namespace,
       builder=builder,
       config_builders=config_builders,
@@ -183,7 +182,7 @@ def _load_all_configs(
 def _load_builder_from_code(name: str,) -> BuilderToDocument:
   """Load the builder, config,... to document."""
   builder_cls = tfds.builder_cls(name)
-  section = _get_section(builder_cls)
+  sections = _get_sections(builder_cls)
 
   if builder_cls.BUILDER_CONFIGS:  # Builder with configs
 
@@ -194,27 +193,34 @@ def _load_builder_from_code(name: str,) -> BuilderToDocument:
       config_builders = list(
           tpool.map(get_config_builder, builder_cls.BUILDER_CONFIGS),)
     return BuilderToDocument(
-        section=section,
+        sections=sections,
         namespace=None,
         builder=config_builders[0],
         config_builders=config_builders,
     )
   else:  # Builder without configs
     return BuilderToDocument(
-        section=section,
+        sections=sections,
         namespace=None,
         builder=builder_cls(),  # pytype: disable=not-instantiable
         config_builders=[],
     )
 
 
-def _get_section(builder_cls: Type[tfds.core.DatasetBuilder]) -> str:
-  """Returns the section associated with the builder."""
+def _get_sections(builder_cls: Type[tfds.core.DatasetBuilder]) -> List[Text]:
+  """Returns the sections associated with the builder."""
   module_parts = builder_cls.__module__.split('.')
   if module_parts[0] != 'tensorflow_datasets':
     raise AssertionError(f'Unexpected builder {builder_cls}: module')
+  if issubclass(builder_cls, config_based_builder.ConfigBasedBuilder):
+    # Sections are inferred from tags.
+    ds_metadata = builder_cls.get_metadata()
+    if ds_metadata.tags:
+      return [t.rsplit('.')[-1] for t in ds_metadata.tags]
+    return 'uncategorized'
+  # One single section is inferred from module path.
   _, category, *_ = module_parts  # tfds.<category>.xyz
-  return category
+  return [category]
 
 
 def _document_single_collection(name: str,) -> CollectionDocumentation:
@@ -265,7 +271,7 @@ def _document_single_builder_inner(
       name=name,
       filestem=name.replace(':', '_'),
       content=out_str,
-      section=doc_info.section,
+      sections=doc_info.sections,
       is_manual=bool(doc_info.builder.MANUAL_DOWNLOAD_INSTRUCTIONS),
       is_nightly=is_nightly,
   )
@@ -370,6 +376,7 @@ def make_category_to_builders_dict(
 
   category_to_builders = collections.defaultdict(list)
   for builder in builders:
-    section = _get_section(type(builder))
-    category_to_builders[section].append(builder)
+    sections = _get_sections(type(builder))
+    for section in sections:
+      category_to_builders[section].append(builder)
   return category_to_builders
