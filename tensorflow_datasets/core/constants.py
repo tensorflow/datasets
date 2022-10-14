@@ -19,6 +19,9 @@
 
 import os
 
+# Directory in which datasets are declared within TFDS sources.
+DATASETS_TFDS_SRC_DIR = 'datasets'
+
 # Github base URL
 SRC_BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/'
 

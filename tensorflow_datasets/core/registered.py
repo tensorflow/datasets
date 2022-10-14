@@ -18,12 +18,18 @@
 import abc
 import collections
 import contextlib
+import functools
+import importlib
 import inspect
-from typing import ClassVar, Iterator, List, Type
+import os.path
+from typing import ClassVar, Dict, Iterator, List, Type, Text, Tuple
 
+from etils import epath
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import resource_utils
 
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
@@ -204,8 +210,54 @@ def list_imported_builders() -> List[str]:
   return sorted(all_builders)
 
 
+@functools.lru_cache(maxsize=None)
+def _get_existing_dataset_packages(
+    datasets_dir: Text) -> Dict[Text, Tuple[epath.Path, Text]]:
+  """Returns existing datasets.
+
+  Args:
+    datasets_dir: directory path, relative to tensorflow_datasets srcs root,
+      where are defined the dataset packages. This directory must only contain
+      valid dataset packages.
+
+  Returns:
+    {ds_name: (pkg_path, builder_module)}.
+    For example: {'mnist': ('/lib/tensorflow_datasets/datasets/mnist',
+                            'tensorflow_datasets.datasets.mnist.builder')}
+  """
+  datasets = {}
+  try:
+    datasets_dir_path = resource_utils.tfds_path(datasets_dir)
+  except OSError:
+    # Raised when datasets_dir does not exist, for example in tests when data
+    # does not contain the directory (when running with bazel).
+    return datasets
+  if not datasets_dir_path.exists():
+    return datasets
+  ds_dir_pkg = '.'.join(['tensorflow_datasets'] +
+                        datasets_dir.split(os.path.sep))
+  for child in datasets_dir_path.iterdir():
+    # Except for `__init__.py`, all children of datasets/ directory are packages
+    # of datasets.
+    # There are no exceptions, so no needs to check child is a directory and
+    # contains a `builder.py` module.
+    if child.name != '__init__.py':
+      pkg_path = epath.Path(datasets_dir_path) / child.name
+      builder_module = f'{ds_dir_pkg}.{child.name}.builder'
+      datasets[child.name] = (pkg_path, builder_module)
+  return datasets
+
+
 def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
   """Returns the Registered dataset class."""
+  existing_ds_pkgs = _get_existing_dataset_packages(
+      constants.DATASETS_TFDS_SRC_DIR)
+  if name in existing_ds_pkgs:
+    pkg_dir_path, builder_module = existing_ds_pkgs[name]
+    cls = importlib.import_module(builder_module).Builder
+    cls.pkg_dir_path = pkg_dir_path
+    return cls
+
   if name in _ABSTRACT_DATASET_REGISTRY:
     # Will raise TypeError: Can't instantiate abstract class X with abstract
     # methods y, before __init__ even get called
