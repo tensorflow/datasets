@@ -21,7 +21,7 @@ import tensorflow_datasets.public_api as tfds
 class PASSTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for pass dataset."""
   DATASET_CLASS = (importlib.import_module(
-      'tensorflow_datasets.datasets.pass.builder')).Builder
+      'tensorflow_datasets.datasets.pass.pass_dataset_builder')).Builder
   SPLITS = {
       'train': 5,  # Number of fake train examples
   }

@@ -16,47 +16,43 @@
 """Tests for Groove dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.audio import groove
+from tensorflow_datasets.datasets.groove import groove_dataset_builder
 
 
 class GrooveFullTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = groove.Groove
+  DATASET_CLASS = groove_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["full-16000hz"]
   SPLITS = {
       "train": 2,
       "test": 1,
   }
-  DL_EXTRACT_RESULT = ".."
 
 
 class GrooveFullMidiOnlyTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = groove.Groove
+  DATASET_CLASS = groove_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["full-midionly"]
   SPLITS = {
       "train": 3,
       "test": 1,
   }
-  DL_EXTRACT_RESULT = ".."
 
 
 class Groove2BarTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = groove.Groove
+  DATASET_CLASS = groove_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["2bar-16000hz"]
   SPLITS = {
       "train": 5,  # 3, 2
       "test": 1,
   }
-  DL_EXTRACT_RESULT = ".."
 
 
 class Groove2BarMidiOnlyTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = groove.Groove
+  DATASET_CLASS = groove_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["2bar-midionly"]
   SPLITS = {
       "train": 6,  # 3, 2, 1
       "test": 1,
   }
-  DL_EXTRACT_RESULT = ".."
 
 
 if __name__ == "__main__":

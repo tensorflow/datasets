@@ -243,7 +243,7 @@ def _get_existing_dataset_packages(
     # contains a `builder.py` module.
     if child.name != '__init__.py':
       pkg_path = epath.Path(datasets_dir_path) / child.name
-      builder_module = f'{ds_dir_pkg}.{child.name}.builder'
+      builder_module = f'{ds_dir_pkg}.{child.name}.{child.name}_dataset_builder'
       datasets[child.name] = (pkg_path, builder_module)
   return datasets
 
