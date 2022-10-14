@@ -35,8 +35,7 @@ class GetBuilderDatadirPathTest(testing.TestCase):
       path = config_based_builder._get_builder_datadir_path(builder.Builder)
     self.assertEndsWith(
         str(path),
-        "/third_party/py/tensorflow_datasets/testing/dummy_config_based_datasets/dummy_ds_1"
-    )
+        "/tensorflow_datasets/testing/dummy_config_based_datasets/dummy_ds_1")
 
 
 class ConfigBasedBuilderTest(testing.TestCase):
