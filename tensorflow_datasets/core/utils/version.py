@@ -19,8 +19,8 @@ import enum
 import re
 from typing import List, Union
 
+from etils import epath
 import six
-import tensorflow as tf
 
 _VERSION_TMPL = (r"^(?P<major>{v})" r"\.(?P<minor>{v})" r"\.(?P<patch>{v})$")
 _VERSION_WILDCARD_REG = re.compile(_VERSION_TMPL.format(v=r"\d+|\*"))
@@ -174,12 +174,14 @@ def _str_to_version(version_str, allow_wildcard=False):
                 res.group("patch")])
 
 
-def list_all_versions(root_dir: str) -> List[Version]:
+def list_all_versions(root_dir: epath.PathLike) -> List[Version]:
   """Lists all dataset versions present on disk, sorted."""
-  if not tf.io.gfile.exists(root_dir):
+  root_dir = epath.Path(root_dir)
+  if not root_dir.exists():
     return []
 
-  # Strip trailing slash (required for `gs://` root_dir)
-  paths = [p.rstrip("/") for p in tf.io.gfile.listdir(root_dir)]
-  # Return all versions
-  return sorted(Version(v) for v in paths if Version.is_valid(v))
+  versions = []
+  for version_dir in root_dir.iterdir():
+    if Version.is_valid(version_dir.name):
+      versions.append(Version(version_dir.name))
+  return sorted(versions)
