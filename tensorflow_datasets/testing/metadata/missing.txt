@@ -34,8 +34,5 @@ so2sat/all/2.1.0
 so2sat/rgb/2.0.0
 so2sat/rgb/2.1.0
 voxforge/1.0.0
-wmt18_translate/de-en/1.0.0
 wmt18_translate/kk-en/1.0.0
-wmt18_translate/ru-en/1.0.0
-wmt18_translate/zh-en/1.0.0
 xtreme_s/fleurs.all/2.0.0
