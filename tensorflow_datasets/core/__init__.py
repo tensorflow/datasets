@@ -31,6 +31,7 @@ from etils.epath import Path
 # pylint: enable=g-bad-import-order
 
 from tensorflow_datasets.core import community  # pylint: disable=g-bad-import-order
+from tensorflow_datasets.core.config_based_builder import ConfigBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
