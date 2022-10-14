@@ -13,16 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""PASS dataset.
+"""PASS dataset."""
 
-DEPRECATED!
-If you want to use the PASS Dataset class, use:
-tfds.builder('pass')
-"""
-
-# We cannot do a regular import here, as the module is named "pass", this is all
-# right though, as this module willyou eventually go away.
-import importlib
+import tensorflow.compat.v2 as tf
+import tensorflow_datasets.public_api as tfds
 
 _URLS = {
     'train_images': [
@@ -37,12 +31,13 @@ _URLS = {
 }
 
 
-class PASS(tfds.core.GeneratorBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
   """DatasetBuilder for pass dataset."""
 
   VERSION = tfds.core.Version('3.0.0')
   RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
+      '1.0.0':
+          'Initial release.',
       '2.0.0':
           'v2: Removed 472 images from v1 as they contained humans. Also added'
           ' metadata: datetaken and GPS. ',
@@ -52,9 +47,7 @@ class PASS(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     """Returns the dataset metadata."""
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(None, None, 3)),  # The image.
             'image/creator_uname':
@@ -72,7 +65,6 @@ class PASS(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=None,
         homepage='https://www.robots.ox.ac.uk/~vgg/data/pass/',
-        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):

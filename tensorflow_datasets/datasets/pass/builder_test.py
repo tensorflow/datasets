@@ -14,14 +14,14 @@
 # limitations under the License.
 
 """pass dataset."""
-
-from tensorflow_datasets.image.pass_dataset import pass_dataset
+import importlib
 import tensorflow_datasets.public_api as tfds
 
 
 class PASSTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for pass dataset."""
-  DATASET_CLASS = pass_dataset.PASS
+  DATASET_CLASS = (importlib.import_module(
+      'tensorflow_datasets.datasets.pass.builder')).Builder
   SPLITS = {
       'train': 5,  # Number of fake train examples
   }
