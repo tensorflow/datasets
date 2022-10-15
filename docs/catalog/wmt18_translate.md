@@ -387,48 +387,6 @@ dataButton.addEventListener('click', async () => {
 
 <!-- mdformat on -->
 
-## wmt18_translate/kk-en
-
-*   **Config description**: WMT 2018 kk-en translation task dataset.
-
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
-*   **Feature structure**:
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'kk': Text(shape=(), dtype=tf.string),
-})
-```
-
-*   **Feature documentation**:
-
-Feature | Class       | Shape | Dtype     | Description
-:------ | :---------- | :---- | :-------- | :----------
-        | Translation |       |           |
-en      | Text        |       | tf.string |
-kk      | Text        |       | tf.string |
-
-*   **Supervised keys** (See
-    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
-    `('kk', 'en')`
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-    Missing.
-
 ## wmt18_translate/ru-en
 
 *   **Config description**: WMT 2018 ru-en translation task dataset.
