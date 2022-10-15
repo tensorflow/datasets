@@ -1123,7 +1123,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     """Default function to generate examples for each split.
 
     The function should return a collection of `(key, examples)`. Examples
-    will be encoded are written to disk. See `yields` section for details.
+    will be encoded and written to disk. See `yields` section for details.
 
     The function can return/yield:
 
