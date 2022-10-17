@@ -183,29 +183,29 @@ def _dataset_name_and_kwargs_from_name_str(
     py_utils.reraise(e, prefix=err_msg)  # pytype: disable=bad-return-type
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(order=True)
 class DatasetReference:
   """Reference to a dataset.
 
   Attributes:
     dataset_name: name of the dataset.
+    config: optional config to be used in the dataset.
     version: version of the dataset to be used. If `None`, the latest version
       will be loaded. An error is raised if the specified version cannot be
       provided.
+    data_dir: Optional data dir where this dataset is located. If None, defaults
+      to the value of the environment variable TFDS_DATA_DIR, if set, otherwise
     split_mapping: mapping between split names. If the `DatasetCollection` wants
       to use different split names than the source datasets, then this mapping
       can be used. For example, if the collection uses the split `valid`, but
       this dataset uses the split `validation`, then the `split_mapping` should
       be `{'validation': 'valid'}`.
-    config: optional config to be used in the dataset.
-    data_dir: Optional data dir where this dataset is located. If None, defaults
-      to the value of the environment variable TFDS_DATA_DIR, if set, otherwise
   """
   dataset_name: str
-  version: Union[None, str, version_lib.Version] = None
-  split_mapping: Optional[Mapping[str, str]] = None
   config: Optional[str] = None
+  version: Union[None, str, version_lib.Version] = None
   data_dir: Union[None, str, os.PathLike] = None  # pylint: disable=g-bare-generic
+  split_mapping: Optional[Mapping[str, str]] = None
 
   def __post_init__(self):
     if isinstance(self.version, str):
@@ -233,6 +233,10 @@ class DatasetReference:
     if self.split_mapping:
       return self.split_mapping.get(split, split)
     return split
+
+  def replace(self, **kwargs: Any) -> 'DatasetReference':
+    """Returns a copy with updated attributes."""
+    return dataclasses.replace(self, **kwargs)
 
   @classmethod
   def from_tfds_name(
@@ -491,7 +495,8 @@ class ShardedFileTemplate:
       shard_index: int,
       num_shards: Optional[int],
   ) -> epath.Path:
-    """Returns the filename (including full path if `data_dir` is set) for the given shard."""
+    """Returns the filename (including full path if `data_dir` is set) for the given shard.
+    """
     return self.data_dir / self.relative_filepath(
         shard_index=shard_index, num_shards=num_shards)
 
