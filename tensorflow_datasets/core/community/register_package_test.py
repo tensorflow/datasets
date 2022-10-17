@@ -86,6 +86,14 @@ def dummy_register():
       yield register_package.PackageRegister(path=dummy_path)
 
 
+def test_list_dataset_references(dummy_register):  # pylint: disable=redefined-outer-name
+  assert sorted(dummy_register.list_dataset_references()) == [
+      naming.DatasetReference(dataset_name='ds1', namespace='kaggle'),
+      naming.DatasetReference(dataset_name='dummy_dataset', namespace='kaggle'),
+      naming.DatasetReference(dataset_name='dummy_dataset', namespace='mlds'),
+  ]
+
+
 def test_builder_cls(dummy_register):  # pylint: disable=redefined-outer-name
 
   # The dataset will be installed in the cache

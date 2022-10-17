@@ -52,6 +52,15 @@ def dummy_register():
     # Namespace 1
     Ds0(data_dir=tmp_path / 'mlds').download_and_prepare()
     # Namespace 2: (non-existing)
+    print('XXXXXXX: CONTENT!!!')
+    for d in tmp_path.iterdir():
+      print(d)
+    for d in (tmp_path / 'kaggle').iterdir():
+      print(d)
+    for d in (tmp_path / 'kaggle2').iterdir():
+      print(d)
+    for d in (tmp_path / 'mlds').iterdir():
+      print(d)
 
     content = textwrap.dedent(f"""
         [Namespaces]
@@ -148,3 +157,20 @@ def test_dataset_registry_list_builders():
   registry = registry_lib.DatasetRegistry(namespace_config=namespace_config)
   assert set(registry.list_namespaces()) == {'ns1', 'ns2'}
   assert set(registry.list_builders()) == {'a', 'b', 'c'}
+
+
+def test_list_dataset_references():
+  ref1 = naming.DatasetReference(dataset_name='ds1', namespace='kaggle')
+  ref2 = naming.DatasetReference(dataset_name='ds2', namespace='kaggle')
+  ref3 = naming.DatasetReference(dataset_name='ds3', namespace='kaggle')
+  register1 = mock.create_autospec(register_path.DataDirRegister)
+  register1.list_dataset_references.return_value = [ref1, ref2]
+  register2 = mock.create_autospec(register_package.PackageRegister)
+  register2.list_dataset_references.return_value = [ref3]
+  namespace_config = mock.create_autospec(registry_lib.NamespaceConfig)
+  namespace_config.registers_per_namespace.return_value = {
+      'ns1': [register1],
+      'ns2': [register2],
+  }
+  registry = registry_lib.DatasetRegistry(namespace_config=namespace_config)
+  assert sorted(registry.list_dataset_references()) == [ref1, ref2, ref3]

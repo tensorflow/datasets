@@ -19,7 +19,7 @@ import dataclasses
 import difflib
 import functools
 import os
-from typing import Any, List, Mapping, Type
+from typing import Any, Iterable, List, Mapping, Type
 
 from etils import epath
 from tensorflow_datasets.core import dataset_builder
@@ -139,6 +139,11 @@ class DatasetRegistry(register_base.BaseRegister):
       for register in registers:
         builders.extend(register.list_builders())
     return builders
+
+  def list_dataset_references(self) -> Iterable[naming.DatasetReference]:
+    for registers in self.registers_per_namespace.values():
+      for register in registers:
+        yield from register.list_dataset_references()
 
   def list_builders_per_namespace(self, namespace: str) -> List[str]:
     """Lists the builders available for a specific namespace."""
