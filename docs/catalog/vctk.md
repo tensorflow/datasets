@@ -21,6 +21,12 @@ speech accent archive.
 
 Note that the 'p315' text was lost due to a hard disk error.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/vctk">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://doi.org/10.7488/ds/2645](https://doi.org/10.7488/ds/2645)
 

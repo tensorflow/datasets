@@ -26,6 +26,12 @@ they are provided as long segments under "background_noise" folder. Here we
 split these background noise into 1 second clips, and also keep one of the files
 for the validation set.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/speech-commands">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://arxiv.org/abs/1804.03209](https://arxiv.org/abs/1804.03209)
 

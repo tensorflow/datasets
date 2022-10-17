@@ -44,6 +44,12 @@ corresponding to that image.
 We chose the latents values deliberately to have the smallest step changes while
 ensuring that all pixel outputs were different. No noise was added.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/dsprites">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
 

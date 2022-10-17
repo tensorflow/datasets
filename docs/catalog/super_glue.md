@@ -18,6 +18,12 @@ SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after
 GLUE with a new set of more difficult language understanding tasks, improved
 resources, and a new public leaderboard.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/superglue">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Source code**:
     [`tfds.text.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
 

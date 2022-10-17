@@ -17,6 +17,12 @@
 A dataset of 8.5K high quality linguistically diverse grade school math word
 problems.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gsm8k">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/openai/grade-school-math](https://github.com/openai/grade-school-math)
 

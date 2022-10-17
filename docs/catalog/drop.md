@@ -23,6 +23,12 @@ discrete operations over them (such as addition, counting, or sorting). These
 operations require a much more comprehensive understanding of the content of
 paragraphs than what was necessary for prior datasets.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/drop">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://allennlp.org/drop](https://allennlp.org/drop)
 
 *   **Source code**:

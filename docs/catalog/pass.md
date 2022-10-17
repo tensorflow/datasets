@@ -30,11 +30,17 @@ PASS contains 1,439,589 images without any labels sourced from YFCC-100M.
 All images in this dataset are licenced under the CC-BY licence, as is the
 dataset itself. For YFCC-100M see http://www.multimediacommons.org/.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/pass">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/pass/](https://www.robots.ox.ac.uk/~vgg/data/pass/)
 
 *   **Source code**:
-    [`tfds.datasets.pass.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/pass/builder.py)
+    [`tfds.datasets.pass.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/pass/pass_dataset_builder.py)
 
 *   **Versions**:
 

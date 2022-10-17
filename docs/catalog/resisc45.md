@@ -21,6 +21,12 @@ Scene Classification (RESISC), created by Northwestern Polytechnical University
 (NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700
 images in each class.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/resisc45">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
 

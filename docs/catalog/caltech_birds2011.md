@@ -19,6 +19,12 @@ species (mostly North American). The total number of categories of birds is 200
 and there are 6033 images in the 2010 dataset and 11,788 images in the 2011
 dataset. Annotations include bounding boxes, segmentation labels.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cub-200-2011">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
 

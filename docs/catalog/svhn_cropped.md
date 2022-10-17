@@ -18,6 +18,12 @@ The Street View House Numbers (SVHN) Dataset is an image digit recognition
 dataset of over 600,000 digit images coming from real world data. Images are
 cropped to 32x32.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/svhn">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 

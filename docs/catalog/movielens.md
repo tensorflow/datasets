@@ -77,6 +77,12 @@ which is the exact ages of the users who made the rating
 Datasets with the "-movies" suffix contain only "movie_id", "movie_title", and
 "movie_genres" features.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/movielens">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://grouplens.org/datasets/movielens/](https://grouplens.org/datasets/movielens/)
 

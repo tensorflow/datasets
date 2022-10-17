@@ -27,6 +27,12 @@ images were collected from weed infestations at the following sites across
 Queensland: "Black River", "Charters Towers", "Cluden", "Douglas", "Hervey
 Range", "Kelso", "McKinlay" and "Paluma".
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/deepweeds">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/AlexOlsen/DeepWeeds](https://github.com/AlexOlsen/DeepWeeds)
 

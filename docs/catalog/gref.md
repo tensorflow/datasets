@@ -23,6 +23,12 @@ descriptions that allow one to uniquely identify a single object or region
 within an image. See more details in this paper: Generation and Comprehension of
 Unambiguous Object Descriptions.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/google-refexp">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/mjhucla/Google_Refexp_toolbox](https://github.com/mjhucla/Google_Refexp_toolbox)
 

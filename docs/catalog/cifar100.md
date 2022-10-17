@@ -26,6 +26,12 @@ images each. There are 500 training images and 100 testing images per class. The
 with a "fine" label (the class to which it belongs) and a "coarse" label (the
 superclass to which it belongs).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cifar-100">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 

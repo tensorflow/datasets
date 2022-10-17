@@ -23,6 +23,12 @@ non-content sections and structured objects. The language models trained on this
 corpus - including 41 monolingual models, and 2 multilingual models - can be
 found at https://tfhub.dev/google/collections/wiki40b-lm/1.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wiki-40b">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://research.google/pubs/pub49029/](https://research.google/pubs/pub49029/)
 

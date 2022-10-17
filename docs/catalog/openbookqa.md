@@ -20,6 +20,12 @@ the train/dev/test questions where each question is associated with its
 originating core fact, a human accuracy score, a clarity score, and an
 anonymized crowd-worker ID.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/openbookqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://leaderboard.allenai.org/open_book_qa/submissions/get-started](https://leaderboard.allenai.org/open_book_qa/submissions/get-started)
 

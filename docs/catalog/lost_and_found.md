@@ -32,6 +32,12 @@ precomputed disparity maps - coarse semantic labels for objects and street
 Descriptions of the labels are given here:
 http://www.6d-vision.com/laf_table.pdf
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/lost-and-found">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.6d-vision.com/lostandfounddataset](http://www.6d-vision.com/lostandfounddataset)
 

@@ -22,6 +22,12 @@ original sentences that were each simplified 10 times by different annotators.
 The corpus also contains human judgments of meaning preservation, fluency and
 simplicity for the outputs of several automatic text simplification systems.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/asset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/facebookresearch/asset](https://github.com/facebookresearch/asset)
 

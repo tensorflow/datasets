@@ -41,6 +41,12 @@ sequentially stored the images in fixed order in the `images` array. The
 corresponding values of the factors are stored in the same order in the `labels`
 array.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/3d-shapes-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
 

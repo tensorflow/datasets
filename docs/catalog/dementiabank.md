@@ -21,6 +21,12 @@ Alzheimer Disease, and 93 healthy people, reading a description of an image, and
 the task is to classify these groups. This release contains only the audio part
 of this dataset, without the text features.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/dementiabank">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://dementia.talkbank.org/](https://dementia.talkbank.org/)
 

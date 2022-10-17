@@ -20,6 +20,12 @@ There are two features: - article: text of news article, used as the document to
 be summarized - highlights: joined text of highlights with <s> and </s> around
 each highlight, which is the target summary
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cnn/daily-mail">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 

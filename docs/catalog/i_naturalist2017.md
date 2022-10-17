@@ -30,6 +30,12 @@ currently, only image-level annotations are provided (single label/image). In
 addition, the organizers have not published the test labels, so we only provide
 the test images (label = -1).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/inaturalist">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/visipedia/inat_comp/tree/master/2017](https://github.com/visipedia/inat_comp/tree/master/2017)
 

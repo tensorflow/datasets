@@ -31,6 +31,12 @@ The training set is composed of 5 instances of each category (instances 4, 6, 7,
 8 and 9), and the test set of the remaining 5 instances (instances 0, 1, 2, 3,
 and 5).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/smallnorb">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
 

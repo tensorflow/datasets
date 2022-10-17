@@ -21,6 +21,12 @@ diverse and often hard to be detected by a cnn-based face detector. The 2D
 landmarks are skipped in this dataset, since some of the data are not consistent
 to 21 points, as the original paper mentioned.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/aflw2000-3d">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
 

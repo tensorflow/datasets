@@ -44,6 +44,12 @@ OOD (ood)
 
 The details of the dataset can be found in the paper supplemental.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/real-bacteria-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research/google-research/tree/master/genomics_ood](https://github.com/google-research/google-research/tree/master/genomics_ood)
 

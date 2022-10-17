@@ -24,6 +24,12 @@ The Places365-Standard dataset contains 1.8 million train images from 365 scene
 categories,which are used to train the Places365 CNNs.There are 50 images per
 category in the validation set and 900 images per category in the testing set.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/places365">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://places2.csail.mit.edu/](http://places2.csail.mit.edu/)
 
 *   **Source code**:

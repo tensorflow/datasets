@@ -24,6 +24,12 @@ range (float32).
 
 URL: https://github.com/phelber/eurosat
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/eurosat">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 

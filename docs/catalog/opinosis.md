@@ -18,6 +18,12 @@ The Opinosis Opinion Dataset consists of sentences extracted from reviews for 51
 topics. Topics and opinions are obtained from Tripadvisor, Edmunds.com and
 Amazon.com.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/opinosis">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://kavita-ganesan.com/opinosis/](http://kavita-ganesan.com/opinosis/)
 

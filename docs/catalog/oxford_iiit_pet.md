@@ -24,6 +24,12 @@ The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
 images for each class. The images have large variations in scale, pose and
 lighting. All images have an associated ground truth annotation of breed.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/oxford-iiit-pets">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 

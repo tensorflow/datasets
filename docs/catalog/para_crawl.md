@@ -16,6 +16,12 @@
 
 Web-Scale Parallel Corpora for Official European Languages.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/paracrawl">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
 

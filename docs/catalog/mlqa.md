@@ -18,6 +18,12 @@ MLQA (Multilingual Question Answering Dataset) is a benchmark dataset for
 evaluating multilingual question answering performance. The dataset consists of
 7 languages: Arabic, German, Spanish, English, Hindi, Vietnamese, Chinese.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/mlqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/facebookresearch/MLQA](https://github.com/facebookresearch/MLQA)
 

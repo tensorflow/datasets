@@ -21,6 +21,12 @@ classes of 50 instances each, where each class refers to a type of iris plant.
 One class is linearly separable from the other 2; the latter are NOT linearly
 separable from each other.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/iris">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
 

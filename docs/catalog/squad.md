@@ -19,6 +19,12 @@ consisting of questions posed by crowdworkers on a set of Wikipedia articles,
 where the answer to every question is a segment of text, or span, from the
 corresponding reading passage, or the question might be unanswerable.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/squad">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 

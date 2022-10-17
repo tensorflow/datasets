@@ -31,6 +31,12 @@ as a dictionary with the following keys:
 *   'label': An integer in the range [0, 1000).
 *   'file_name': A unique sting identifying the example within the dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/imagenet-a">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/hendrycks/natural-adv-examples](https://github.com/hendrycks/natural-adv-examples)
 

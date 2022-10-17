@@ -41,6 +41,12 @@ The dataset comes in three variants:
 
 This dataset consists of the Imagenette dataset {size} variant.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/image网">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Config description**: Imagewang contains Imagenette and Imagewoof
     combined.
 

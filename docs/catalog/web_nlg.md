@@ -20,6 +20,12 @@ that's a verbalisation of these triples. The test data spans 15 different
 domains where only 10 appear in the training data. The dataset follows a
 standarized table format.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/webnlg">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://webnlg-challenge.loria.fr/challenge_2017/](https://webnlg-challenge.loria.fr/challenge_2017/)
 

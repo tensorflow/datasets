@@ -28,6 +28,12 @@ WARNING: this dataset requires additional authorization and registration. Please
 look at tfds documentation for accessing GCS, and afterwards, please register
 via https://waymo.com/open/licensing/
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/waymo-open-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://www.waymo.com/open/](http://www.waymo.com/open/)
 
 *   **Source code**:

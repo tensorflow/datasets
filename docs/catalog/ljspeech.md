@@ -23,6 +23,12 @@ The texts were published between 1884 and 1964, and are in the public domain.
 The audio was recorded in 2016-17 by the LibriVox project and is also in the
 public domain.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/ljspeech">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://keithito.com/LJ-Speech-Dataset/](https://keithito.com/LJ-Speech-Dataset/)
 

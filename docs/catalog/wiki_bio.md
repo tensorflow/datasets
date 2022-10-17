@@ -18,6 +18,12 @@ WikiBio is constructed using Wikipedia biography pages, it contains the first
 paragraph and the infobox tokenized. The dataset follows a standarized table
 format.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikibio">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/DavidGrangier/wikipedia-biography-dataset](https://github.com/DavidGrangier/wikipedia-biography-dataset)
 

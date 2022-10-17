@@ -25,6 +25,12 @@ used for walking) and non-prototypical but practically plausible use of objects
 (e.g., shoes can be used as a doorstop). The dataset includes 20,000 QA pairs
 that are either multiple-choice or true/false questions.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/piqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://leaderboard.allenai.org/physicaliqa/submissions/get-started](https://leaderboard.allenai.org/physicaliqa/submissions/get-started)
 

@@ -22,6 +22,12 @@ Features includes strings: author, body, normalizedBody, content, summary,
 subreddit, subreddit_id. Content is used as document and summary is used as
 summary.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/reddit">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/webis-de/webis-tldr-17-corpus](https://github.com/webis-de/webis-tldr-17-corpus)
 

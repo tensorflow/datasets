@@ -21,6 +21,12 @@ whereas the hypotheses vary in length from single sentences to passages with
 hundreds of words. In contrast to some existing sentence-level NLI datasets,
 DocNLI has pretty limited artifacts.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/docnli">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/salesforce/DocNLI/](https://github.com/salesforce/DocNLI/)
 

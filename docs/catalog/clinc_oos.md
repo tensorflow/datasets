@@ -25,6 +25,12 @@ breadth that a production task-oriented agent must handle. It offers a way of
 more rigorously and realistically benchmarking text classification in
 task-driven dialog systems.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/clinc150">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/clinc/oos-eval/](https://github.com/clinc/oos-eval/)
 

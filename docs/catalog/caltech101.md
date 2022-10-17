@@ -21,6 +21,12 @@ of variable sizes, with typical edge lengths of 200-300 pixels. This version
 contains image-level labels only. The original dataset also contains bounding
 boxes.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/caltech-101">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
 

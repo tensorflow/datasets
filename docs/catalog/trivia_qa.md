@@ -20,6 +20,12 @@ authored by trivia enthusiasts and independently gathered evidence documents,
 six per question on average, that provide high quality distant supervision for
 answering the questions.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/triviaqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 

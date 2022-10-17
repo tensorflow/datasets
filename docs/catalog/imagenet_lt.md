@@ -28,6 +28,12 @@ ImageNet ILSVRC 2012 dataset.
 The original ImageNet ILSVRC 2012 dataset must be downloaded manually, and its
 path should be set with --manual_dir in order to generate this dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/imagenet-lt">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/zhmiao/OpenLongTailRecognition-OLTR](https://github.com/zhmiao/OpenLongTailRecognition-OLTR)
 

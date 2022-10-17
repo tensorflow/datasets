@@ -19,6 +19,12 @@ Warning: Manual download required. See instructions below.
 A large set of high-resolution retina images taken under a variety of imaging
 conditions.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/diabetic-retinopathy-detection-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 

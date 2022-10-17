@@ -31,6 +31,12 @@ often contain complex scenes with several objects (8.4 per image on average).
 Moreover, the dataset is annotated with image-level labels spanning thousands of
 classes.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/open-images-v4">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 

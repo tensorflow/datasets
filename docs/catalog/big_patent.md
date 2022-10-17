@@ -25,6 +25,12 @@ categories: A (Human Necessities), B (Performing Operations; Transporting), C
 There are two features: - description: detailed description of patent. -
 summary: Patent abastract.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/bigpatent">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
 

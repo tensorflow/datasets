@@ -32,6 +32,12 @@ train_examples, val_examples = tfds.load(
     as_supervised=True)
 ```
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/mathematics-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 

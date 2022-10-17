@@ -30,6 +30,12 @@ For more information, refer to the paper Twitter Sentiment Classification with
 Distant Supervision at
 https://cs.stanford.edu/people/alecmgo/papers/TwitterDistantSupervision09.pdf
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/sentiment140">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://help.sentiment140.com/home](http://help.sentiment140.com/home)
 

@@ -24,6 +24,12 @@ CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.
 It contains minimal biases and has detailed annotations describing the kind of
 reasoning each question requires.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/clevr">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
 

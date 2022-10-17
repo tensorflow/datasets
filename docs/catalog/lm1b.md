@@ -17,6 +17,12 @@
 A benchmark corpus to be used for measuring progress in statistical language
 modeling. This has almost one billion words in the training data.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/billion-word-benchmark">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 

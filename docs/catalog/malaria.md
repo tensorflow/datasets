@@ -24,6 +24,12 @@ The Malaria dataset contains a total of 27,558 cell images with equal instances
 of parasitized and uninfected cells from the thin blood smear slide images of
 segmented cells.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/malaria-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://lhncbc.nlm.nih.gov/publication/pub9932](https://lhncbc.nlm.nih.gov/publication/pub9932)
 

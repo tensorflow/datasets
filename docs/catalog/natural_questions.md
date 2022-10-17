@@ -20,6 +20,12 @@ answer to the question. The inclusion of real user questions, and the
 requirement that solutions should read an entire page to find the answer, cause
 NQ to be a more realistic and challenging task than prior QA datasets.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/natural-questions">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://ai.google.com/research/NaturalQuestions/dataset](https://ai.google.com/research/NaturalQuestions/dataset)
 

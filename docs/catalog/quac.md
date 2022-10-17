@@ -23,6 +23,12 @@ text, and (2) a teacher who answers the questions by providing short excerpts
 comprehension datasets: its questions are often more open-ended, unanswerable,
 or only meaningful within the dialog context.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/quac">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://quac.ai/](https://quac.ai/)
 
 *   **Source code**:

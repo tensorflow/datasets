@@ -23,6 +23,12 @@ attacks, and 'good' normal connections. This database contains a standard set of
 data to be audited, which includes a wide variety of intrusions simulated in a
 military network environment.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/kdd-cup-1999">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html](https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html)
 

@@ -30,6 +30,12 @@ the MRQA 2019 Shared Task.
 
 More information can be found at: `https://mrqa.github.io/2019/shared.html`.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/mrqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://mrqa.github.io/2019/shared.html](https://mrqa.github.io/2019/shared.html)
 

@@ -17,6 +17,12 @@
 Evaluation datasets for low-resource machine translation: Nepali-English and
 Sinhala-English.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/flores">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 

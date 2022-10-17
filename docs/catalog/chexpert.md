@@ -29,6 +29,12 @@ The CheXpert dataset must be downloaded separately after reading and agreeing to
 a Research Use Agreement. To do so, please follow the instructions on the
 website, https://stanfordmlgroup.github.io/competitions/chexpert/.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/chexpert">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
 

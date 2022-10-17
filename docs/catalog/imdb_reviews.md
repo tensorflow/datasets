@@ -19,6 +19,12 @@ classification containing substantially more data than previous benchmark
 datasets. We provide a set of 25,000 highly polar movie reviews for training,
 and 25,000 for testing. There is additional unlabeled data for use as well.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/imdb-movie-reviews">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 

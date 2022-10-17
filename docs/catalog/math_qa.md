@@ -17,6 +17,12 @@
 A large-scale dataset of math word problems and an interpretable neural math
 problem solver that learns to map problems to operation programs.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/mathqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://math-qa.github.io/](https://math-qa.github.io/)
 
 *   **Source code**:

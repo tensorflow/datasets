@@ -46,6 +46,12 @@ Ingored examples:
 WARNING: this dataset requires users to setup a login and password in order to
 get the files.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cityscapes">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.cityscapes-dataset.com](https://www.cityscapes-dataset.com)
 

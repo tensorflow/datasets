@@ -21,6 +21,12 @@ editors and includes links to the original articles cited.
 There are two features: - document: text of news articles seperated by special
 token "|||||". - summary: news summary.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/multi-news">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/Alex-Fabbri/Multi-News](https://github.com/Alex-Fabbri/Multi-News)
 

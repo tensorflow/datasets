@@ -37,6 +37,12 @@ sentence (noisy_)label (Noisy) label for each pair
 Each label has two possible values: 0 indicates the pair has different meaning,
 while 1 indicates the pair is a paraphrase.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/paws">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research-datasets/paws](https://github.com/google-research-datasets/paws)
 

@@ -23,6 +23,12 @@
 Omniglot data set for one-shot learning. This dataset contains 1623 different
 handwritten characters from 50 different alphabets.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/omniglot">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 

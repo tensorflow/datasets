@@ -33,6 +33,12 @@ Train/validation/test splits are provided by the authors. Preprocessing is
 applied to remove short articles (abstract length < 0.75 article length) and
 clean up extra commas.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikihow">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 

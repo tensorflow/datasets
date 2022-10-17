@@ -28,6 +28,12 @@ training images annotated with 3D bounding boxes. A full description of the
 annotations can be found in the readme of the object development kit readme on
 the Kitti homepage.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/kitti">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 

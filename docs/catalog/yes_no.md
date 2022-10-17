@@ -26,6 +26,12 @@ says 8 words; each word is either the Hebrew for "yes" or "no", so each file is
 a random sequence of 8 yes-es or noes. There is no separate transcription
 provided; the sequence is encoded in the filename, with 1 for yes and 0 for no.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/yesno">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://www.openslr.org/1/](https://www.openslr.org/1/)
 
 *   **Source code**:

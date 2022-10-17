@@ -25,6 +25,12 @@ There are two features:
 -   summary: human written summary of the dialogue.
 -   id: id of a example.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/samsum-corpus">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://arxiv.org/src/1911.12237v2/anc](https://arxiv.org/src/1911.12237v2/anc)
 

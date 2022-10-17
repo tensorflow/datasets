@@ -28,6 +28,12 @@ Note: Like the original EMNIST data, images provided here are inverted
 horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 `ds.map` to convert the images to a human-friendlier format.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/emnist">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 

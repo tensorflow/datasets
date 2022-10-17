@@ -23,6 +23,12 @@ The "label" of each example is its "key attribute" (see the official website).
 The official release of the dataset defines a 10-fold cross-validation
 partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/dtd">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
 

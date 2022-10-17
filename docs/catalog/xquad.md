@@ -28,6 +28,12 @@ We also include "translate-train", "translate-dev", and "translate-test" splits
 for each non-English language from XTREME (Hu et al., 2020). These can be used
 to run XQuAD in the "translate-train" or "translate-test" settings.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/xquad">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/deepmind/xquad](https://github.com/deepmind/xquad)
 

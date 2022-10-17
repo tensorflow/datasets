@@ -24,6 +24,12 @@ contains only recordings submitted prior to 2020-01-01. The samples are splitted
 between train, validation and testing so that samples from each speaker belongs
 to exactly one split.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/voxforge">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://www.voxforge.org/](http://www.voxforge.org/)
 
 *   **Source code**:

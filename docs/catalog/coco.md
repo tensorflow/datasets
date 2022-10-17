@@ -28,6 +28,12 @@ The test split don't have any annotations (only images). * Coco defines 91
 classes but the data only uses 80 classes. * Panotptic annotations defines
 defines 200 classes but only uses 133.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/coco">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
 *   **Source code**:

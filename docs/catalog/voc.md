@@ -22,6 +22,12 @@ contained in the image, while in the Detection competition the goal is to
 predict the bounding box and label of each individual object. WARNING: As per
 the official dataset, the test set of VOC2012 does not contain annotations.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/pascal-voc-2007">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Source code**:
     [`tfds.object_detection.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/voc.py)
 

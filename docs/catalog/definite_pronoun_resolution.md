@@ -24,6 +24,12 @@ the target pronoun, the third line contains the two candidate antecedents, and
 the fourth line contains the correct antecedent. If the target pronoun appears
 more than once in the sentence, its first occurrence is the one to be resolved.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/definite-pronoun-resolution-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
 

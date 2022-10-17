@@ -22,6 +22,12 @@ Features includes: - document: post text without tldr. - tldr: tldr line. -
 title: trimmed title without tldr. - ups: upvotes. - score: score. -
 num_comments: number of comments. - upvote_ratio: upvote ratio.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/reddit-tifu">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
 
 *   **Source code**:

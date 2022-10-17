@@ -27,6 +27,12 @@ Features includes strings of: abstract, full_text, sha (hash of pdf), source_x
 (source of publication), title, doi (digital object identifier), license,
 authors, publish_time, journal, url.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cord-19">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge](https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge)
 

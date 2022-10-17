@@ -21,6 +21,12 @@ Features include message id, message text and timestamp. Target is list of
 messages that current message replies to. Each record contains a list of
 messages from one day of IRC chat.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/irc-disentanglement">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://jkk.name/irc-disentanglement](https://jkk.name/irc-disentanglement)
 

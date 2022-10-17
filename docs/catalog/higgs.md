@@ -23,6 +23,12 @@ the need for physicists to manually develop such features. Benchmark results
 using Bayesian Decision Trees from a standard physics package and 5-layer neural
 networks are presented in the original paper.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/higgs-data-set">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
 

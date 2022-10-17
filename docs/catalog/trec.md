@@ -22,6 +22,12 @@ questions published by USC (Hovy et al., 2001), about 500 manually constructed
 questions for a few rare classes, 894 TREC 8 and TREC 9 questions, and also 500
 questions from TREC 10 which serves as the test set.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/trec-10">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://cogcomp.seas.upenn.edu/Data/QA/QC/](https://cogcomp.seas.upenn.edu/Data/QA/QC/)
 

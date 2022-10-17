@@ -20,6 +20,12 @@ containing 1000 minimal pairs isolating specific contrasts in syntax,
 morphology, or semantics. The data is automatically generated according to
 expert-crafted grammars.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/blimp">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/alexwarstadt/blimp/tree/master/](https://github.com/alexwarstadt/blimp/tree/master/)
 
