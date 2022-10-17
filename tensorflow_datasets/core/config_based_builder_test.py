@@ -20,19 +20,21 @@ from unittest import mock
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import config_based_builder
-from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import builder
+from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
 
 
 class GetBuilderDatadirPathTest(testing.TestCase):
 
   def test_inspect_module_can_find_src(self):
-    path = config_based_builder._get_builder_datadir_path(builder.Builder)
+    path = config_based_builder._get_builder_datadir_path(
+        dummy_ds_1_dataset_builder.Builder)
     self.assertEndsWith(
         str(path), "testing/dummy_config_based_datasets/dummy_ds_1")
 
   def test_inspect_module_cannot_find_src(self):
     with mock.patch.object(inspect, "getsourcefile", return_value=None):
-      path = config_based_builder._get_builder_datadir_path(builder.Builder)
+      path = config_based_builder._get_builder_datadir_path(
+          dummy_ds_1_dataset_builder.Builder)
     self.assertEndsWith(
         str(path),
         "/tensorflow_datasets/testing/dummy_config_based_datasets/dummy_ds_1")
@@ -41,16 +43,16 @@ class GetBuilderDatadirPathTest(testing.TestCase):
 class ConfigBasedBuilderTest(testing.TestCase):
 
   def test_class_named_after_pkg_name(self):
-    ds_builder = builder.Builder()
+    ds_builder = dummy_ds_1_dataset_builder.Builder()
     self.assertEqual(ds_builder.name, "dummy_ds_1")
 
   def test_get_metadata(self):
-    builder_cls = builder.Builder()
+    builder_cls = dummy_ds_1_dataset_builder.Builder()
     metadata = builder_cls.get_metadata()
     self.assertEqual(metadata.tags, ["content.data-type.image"])
 
   def test_dummy_ds_1_read_from_config(self):
-    ds_builder = builder.Builder()
+    ds_builder = dummy_ds_1_dataset_builder.Builder()
     info = ds_builder._info()
     self.assertEqual(info.description,
                      "Description of `dummy_ds_1` dummy config-based dataset.")

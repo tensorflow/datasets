@@ -273,7 +273,7 @@ class ConfigBasedBuildersTest(testing.TestCase):
         "tensorflow_datasets/testing/dummy_config_based_datasets/dummy_ds_1")
     self.assertEqual(
         builder_module,
-        "tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1.builder"
+        "tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1.dummy_ds_1_dataset_builder"
     )
 
   @mock.patch.object(constants, "DATASETS_TFDS_SRC_DIR",

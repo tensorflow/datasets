@@ -24,5 +24,5 @@ tfds.builder('pass')
 # right though, as this module willyou eventually go away.
 import importlib
 
-PASS = (importlib.import_module('tensorflow_datasets.datasets.pass.builder')
-       ).Builder
+PASS = (importlib.import_module(
+    'tensorflow_datasets.datasets.pass.pass_dataset_builder')).Builder
