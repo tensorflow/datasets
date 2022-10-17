@@ -16,17 +16,18 @@
 """Util to generate the dataset documentation content.
 
 Used by tensorflow_datasets/scripts/documentation/build_catalog.py
-
 """
 
 import collections
 import dataclasses
+import json
 import os
 import textwrap
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core import constants
 
 # Dict of `full_names_dict['dataset']['config']['version']`
 FullNamesDict = Dict[str, Dict[str, Dict[str, Any]]]
@@ -35,6 +36,11 @@ FullNamesDict = Dict[str, Dict[str, Dict[str, Any]]]
 # * New config: nightly_dict['dataset']['config'] is True
 # * New version: nightly_dict['dataset']['config']['version'] is True
 NightlyDict = Dict[str, Union[bool, Dict[str, Union[bool, Dict[str, bool]]]]]
+
+
+def get_pwc_catalog_urls() -> Mapping[str, str]:
+  with open(constants.PWC_LINKS_PATH, 'r') as f:
+    return json.load(f)
 
 
 @dataclasses.dataclass

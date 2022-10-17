@@ -92,3 +92,21 @@ def test_feature_documentation_section_missing_value_range():
       'a | Scalar |  | tf.int64 | a feature',
       'b | Text |  | tf.string | Some text',
   ])
+
+
+def test_paperswithcode_section():
+  tfds_to_pwc_links = {'dummy_dataset': 'https://paperswithcode/dummy_dataset'}
+  pwc_section = dataset_markdown_builder.PapersWithCodeSection(
+      tfds_to_pwc_links=tfds_to_pwc_links)
+
+  dummy_builder = tfds.testing.DummyDataset()
+  expected_output = f"""
+        <a class="button button-with-icon" href="{tfds_to_pwc_links[dummy_builder.name]}">
+          Explore on Papers With Code
+          <span class="material-icons icon-after" aria-hidden="true">
+            north_east
+          </span>
+        </a>
+      """
+
+  assert pwc_section.content(builder=dummy_builder) == expected_output
