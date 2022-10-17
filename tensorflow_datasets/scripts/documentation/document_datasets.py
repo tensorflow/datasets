@@ -16,7 +16,6 @@
 """Util to generate the dataset documentation content.
 
 Used by tensorflow_datasets/scripts/documentation/build_catalog.py
-
 """
 
 import collections
@@ -99,15 +98,22 @@ def _load_builder(name: str,) -> Optional[BuilderToDocument]:
   Returns:
     BuilderToDocument or None.
   """
-  if tfds.core.naming.DatasetName(name).namespace:  # Community dataset
-    return _load_builder_from_location(name)
+  try:
+    dataset_name = tfds.core.naming.DatasetName(name)
+  except ValueError as e:
+    logging.warn('Could not parse dataset with name %s', name, exc_info=e)
+    return None
+  if dataset_name.namespace:  # Community dataset
+    return _load_builder_from_location(name=name, dataset_name=dataset_name)
   else:  # Code dataset
     return _load_builder_from_code(name)
 
 
-def _load_builder_from_location(name: str,) -> Optional[BuilderToDocument]:
+def _load_builder_from_location(
+    name: str,
+    dataset_name: tfds.core.naming.DatasetName,
+) -> Optional[BuilderToDocument]:
   """Load the builder, config,... to document."""
-  dataset_name = tfds.core.naming.DatasetName(name)
   logging.info(f'Loading builder {dataset_name} from location')
   try:
     builder = tfds.builder(name)
