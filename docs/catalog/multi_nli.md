@@ -21,6 +21,12 @@ genres of spoken and written text, and supports a distinctive cross-genre
 generalization evaluation. The corpus served as the basis for the shared task of
 the RepEval 2017 Workshop at EMNLP in Copenhagen.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/multinli">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
 

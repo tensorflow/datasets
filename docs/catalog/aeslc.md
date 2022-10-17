@@ -19,6 +19,12 @@ A collection of email messages of employees in the Enron Corporation.
 There are two features: - email_body: email body text. - subject_line: email
 subject text.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/aeslc">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/ryanzhumich/AESLC](https://github.com/ryanzhumich/AESLC)
 

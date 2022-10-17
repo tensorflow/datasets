@@ -20,6 +20,12 @@ Image Search for "sketch of __". 100 images were collected and then manually
 filtered. For classes with fewer than 50 good images, additional images were
 constructed by flip or rotation.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/imagenet-sketch">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/HaohanWang/ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch)
 

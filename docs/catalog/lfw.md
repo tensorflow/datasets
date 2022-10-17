@@ -17,6 +17,12 @@
 Labeled Faces in the Wild: A Database for Studying Face Recognition in
 Unconstrained Environments
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/lfw">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
 

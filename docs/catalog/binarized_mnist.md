@@ -24,6 +24,12 @@ A specific binarization of the MNIST images originally used in (Salakhutdinov &
 Murray, 2008). This dataset is frequently used to evaluate generative models of
 images, so labels are not provided.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/binarized-mnist">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html](http://www.dmi.usherb.ca/~larocheh/mlpython/_modules/datasets/binarized_mnist.html)
 

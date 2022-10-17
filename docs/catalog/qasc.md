@@ -18,6 +18,12 @@ QASC is a question-answering dataset with a focus on sentence composition. It
 consists of 9,980 8-way multiple-choice questions about grade school science
 (8,134 train, 926 dev, 920 test), and comes with a corpus of 17M sentences.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/qasc">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://allenai.org/data/qasc](https://allenai.org/data/qasc)
 
 *   **Source code**:

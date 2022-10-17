@@ -16,6 +16,12 @@
 
 The DAVIS 2017 video object segmentation dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/davis">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://davischallenge.org/](https://davischallenge.org/)
 
 *   **Source code**:

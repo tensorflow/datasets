@@ -53,6 +53,12 @@ License: Community Data License Agreement - Permissive, Version 1.0.
 
 URL: http://bigearth.net/
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/bigearthnet">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://bigearth.net](http://bigearth.net)
 
 *   **Source code**:

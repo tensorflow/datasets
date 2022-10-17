@@ -29,6 +29,12 @@ set (train/dev/tes).
 
 This dataset is constructed following a standarized table format.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/dart">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/Yale-LILY/dart](https://github.com/Yale-LILY/dart)
 

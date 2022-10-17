@@ -23,6 +23,12 @@ training. The primary challenge is to make use of the unlabeled data (which
 comes from a similar but different distribution from the labeled data) to build
 a useful prior. All images were acquired from labeled examples on ImageNet.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/stl-10">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://ai.stanford.edu/~acoates/stl10/](http://ai.stanford.edu/~acoates/stl10/)
 

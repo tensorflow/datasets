@@ -21,6 +21,12 @@ some amount of noise. This comes mostly in the form of intense colors and
 sometimes wrong labels. All images were rescaled to have a maximum side length
 of 512 pixels.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/food-101">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/)
 

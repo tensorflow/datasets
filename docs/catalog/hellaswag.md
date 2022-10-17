@@ -17,6 +17,12 @@
 The HellaSwag dataset is a benchmark for Commonsense NLI. It includes a context
 and some endings which complete the context.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/hellaswag">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://rowanzellers.com/hellaswag/](https://rowanzellers.com/hellaswag/)
 

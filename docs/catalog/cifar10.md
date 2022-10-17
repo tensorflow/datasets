@@ -23,6 +23,12 @@
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with
 6000 images per class. There are 50000 training images and 10000 test images.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cifar-10">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 

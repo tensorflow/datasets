@@ -58,6 +58,12 @@ last edition.
 PS.: Description is extracted from
 [official homepage](https://sites.google.com/view/assin2/english).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/assin2">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://sites.google.com/view/assin2/english](https://sites.google.com/view/assin2/english)
 

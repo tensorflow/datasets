@@ -76,6 +76,12 @@ line of integers correspond to the rank-ordered, top 5 predictions for each test
 image. The integers are 1-indexed corresponding to the line number in the
 corresponding labels file. See imagenet2012_labels.txt.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/imagenet">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://image-net.org/](https://image-net.org/)
 
 *   **Source code**:

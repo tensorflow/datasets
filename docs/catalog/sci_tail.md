@@ -23,6 +23,12 @@ premise-hypothesis pair is crowdsourced as supports (entails) or not (neutral),
 in order to create the SciTail dataset. The dataset contains 27,026 examples
 with 10,101 examples with entails label and 16,925 examples with neutral label.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/scitail">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://allenai.org/data/scitail](https://allenai.org/data/scitail)
 

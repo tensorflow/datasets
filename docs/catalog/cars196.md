@@ -25,6 +25,12 @@ split into 8,144 training images and 8,041 testing images, where each class has
 been split roughly in a 50-50 split. Classes are typically at the level of Make,
 Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/stanford-cars">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://ai.stanford.edu/~jkrause/cars/car_dataset.html](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
 

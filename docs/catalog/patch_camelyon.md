@@ -27,6 +27,12 @@ binary label indicating presence of metastatic tissue. PCam provides a new
 benchmark for machine learning models: bigger than CIFAR10, smaller than
 Imagenet, trainable on a single GPU.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/pcam">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
 

@@ -37,6 +37,12 @@ sources. Every mixture contains one background source, which is active for the
 entire duration. We provide: a software recipe to create the dataset, the room
 impulse responses, and the original source audio.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/fuss">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md](https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md)
 

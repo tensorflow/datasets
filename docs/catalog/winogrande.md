@@ -18,6 +18,12 @@ The WinoGrande, a large-scale dataset of 44k problems, inspired by the original
 Winograd Schema Challenge design, but adjusted to improve both the scale and the
 hardness of the dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/winogrande">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://winogrande.allenai.org/](http://winogrande.allenai.org/)
 

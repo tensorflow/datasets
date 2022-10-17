@@ -19,6 +19,12 @@ the authors for reporting model performance. See
 `tfds.video.moving_mnist.image_as_moving_sequence` for generating
 training/validation data from the MNIST dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/moving-mnist">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
 

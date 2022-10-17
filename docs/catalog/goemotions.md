@@ -21,6 +21,12 @@ disappointment, disapproval, disgust, embarrassment, excitement, fear,
 gratitude, grief, joy, love, nervousness, optimism, pride, realization, relief,
 remorse, sadness, surprise.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/goemotions">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research/google-research/tree/master/goemotions](https://github.com/google-research/google-research/tree/master/goemotions)
 

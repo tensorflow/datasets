@@ -31,6 +31,12 @@ The genres are:
 *   reggae
 *   rock
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gtzan">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://marsyas.info/index.html](http://marsyas.info/index.html)
 

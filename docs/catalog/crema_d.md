@@ -22,6 +22,12 @@ release contains only the audio stream from the original audio-visual recording.
 The samples are splitted between train, validation and testing so that samples
 from each speaker belongs to exactly one split.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/crema-d">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/CheyneyComputerScience/CREMA-D](https://github.com/CheyneyComputerScience/CREMA-D)
 

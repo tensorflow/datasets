@@ -27,6 +27,12 @@ The main differences from the LibriSpeech corpus are listed below:
 4.  Contextual information (e.g., neighbouring sentences) can be extracted.
 5.  Utterances with significant background noise are excluded.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/libritts">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://www.openslr.org/60](http://www.openslr.org/60)
 
 *   **Source code**:

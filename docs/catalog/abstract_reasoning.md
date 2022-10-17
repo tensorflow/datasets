@@ -29,6 +29,12 @@ attribute types (size, colour, position, number). The structure of a matrix,
 $S$, is the set of triples $S={[r, o, a]}$ that determine the challenge posed by
 a particular matrix.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/abstractreasoning">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
 

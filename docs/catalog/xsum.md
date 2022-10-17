@@ -26,6 +26,12 @@ https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md. The
 folder 'xsum-extracts-from-downloads' need to be compressed as
 'xsum-extracts-from-downloads.tar.gz' and put in manually downloaded folder.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/xsum">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset)
 

@@ -22,6 +22,12 @@ This implementation currently only supports book and chapter summaries.
 
 GitHub: https://github.com/salesforce/booksum
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/booksum">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/salesforce/booksum](https://github.com/salesforce/booksum)
 

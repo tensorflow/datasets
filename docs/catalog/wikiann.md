@@ -20,6 +20,12 @@ dataset consisting of Wikipedia articles annotated with LOC (location), PER
 corresponds to the balanced train, dev, and test splits of Rahimi et al. (2019),
 which supports 176 of the 282 languages from the original WikiANN corpus.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikiann">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/afshinrahimi/mmner](https://github.com/afshinrahimi/mmner)
 

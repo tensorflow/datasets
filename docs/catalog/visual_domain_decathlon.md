@@ -25,6 +25,12 @@ Decathlon (resized isotropically to have a shorter size of 72 pixels) and might
 have different train/validation/test splits. Here we use the official splits for
 the competition.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/visual-domain-decathlon">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 

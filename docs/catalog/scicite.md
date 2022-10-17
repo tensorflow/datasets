@@ -24,6 +24,12 @@ friendships and paternity success [30,31].' 'sectionName': 'Introduction',
 using the provided paper ids with the Semantic Scholar API
 (https://api.semanticscholar.org/). The labels are: Method, Background, Result
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/scicite">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/allenai/scicite](https://github.com/allenai/scicite)
 

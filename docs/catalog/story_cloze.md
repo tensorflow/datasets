@@ -20,6 +20,12 @@ Story Cloze Test is a new commonsense reasoning framework for evaluating story
 understanding, story generation, and script learning. This test requires a
 system to choose the correct ending to a four-sentence story.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/rocstories">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Config description**: 2018 year
 
 *   **Homepage**:

@@ -20,6 +20,12 @@ the task of fine-grained image categorization. There are 20,580 images, out of
 which 12,000 are used for training and 8580 for testing. Class labels and
 bounding box annotations are provided for all the 12,000 images.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/stanford-dogs">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://vision.stanford.edu/aditya86/ImageNetDogs/main.html](http://vision.stanford.edu/aditya86/ImageNetDogs/main.html)
 

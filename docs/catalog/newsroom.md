@@ -29,6 +29,12 @@ coverage_bin: extractive, abstractive. - compression_bin: low, medium, high.
 This dataset can be downloaded upon requests. Unzip all the contents
 "train.jsonl, dev.josnl, test.jsonl" to the tfds folder.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/newsroom">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://summari.es](https://summari.es)
 
 *   **Source code**:

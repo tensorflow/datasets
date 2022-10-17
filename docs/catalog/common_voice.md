@@ -16,6 +16,12 @@
 
 Mozilla Common Voice Dataset
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/common-voice">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://voice.mozilla.org/en/datasets](https://voice.mozilla.org/en/datasets)
 

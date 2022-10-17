@@ -21,6 +21,12 @@ bills. - title: title of the bills. features for us bills. ca bills does not
 have. - text_len: number of chars in text. - sum_len: number of chars in
 summary.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/billsum">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/FiscalNote/BillSum](https://github.com/FiscalNote/BillSum)
 

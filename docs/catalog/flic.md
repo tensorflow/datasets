@@ -30,6 +30,12 @@ was taken in each image to be robust to outlier annotation. Finally, images were
 rejected manually by us if the person was occluded or severely non-frontal. We
 set aside 20% (1016 images) of the data for testing.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/flic">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://bensapp.github.io/flic-dataset.html](https://bensapp.github.io/flic-dataset.html)
 

@@ -19,6 +19,12 @@ a unique pitch, timbre, and envelope. Each note is annotated with three
 additional pieces of information based on a combination of human evaluation and
 heuristic algorithms: Source, Family, and Qualities.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/nsynth">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 

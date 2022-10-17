@@ -27,6 +27,12 @@ learning, among other tasks in large-scale virtual assistants. Besides these,
 the dataset has unseen domains and services in the evaluation set to quantify
 the performance in zero-shot or few shot settings.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/sgd">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research-datasets/dstc8-schema-guided-dialogue](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue)
 

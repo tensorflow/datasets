@@ -19,6 +19,12 @@ sentence pairs manually labeled for balanced classification with the labels
 entailment, contradiction, and neutral, supporting the task of natural language
 inference (NLI), also known as recognizing textual entailment (RTE).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/snli">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
 

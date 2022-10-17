@@ -22,6 +22,12 @@ Each example is a triplet of (question, passage, answer), with the title of the
 page as optional additional context. The text-pair classification setup is
 similar to existing natural language inference tasks.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/boolq">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
 

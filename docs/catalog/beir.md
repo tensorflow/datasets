@@ -18,6 +18,12 @@ BEIR is a heterogeneous benchmark containing diverse IR tasks. It also provides
 a common and easy framework for evaluation of your NLP-based retrieval models
 within the benchmark.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/beir">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/beir-cellar/beir](https://github.com/beir-cellar/beir)
 

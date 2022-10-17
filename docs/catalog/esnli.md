@@ -18,6 +18,12 @@ The e-SNLI dataset extends the Stanford Natural Language Inference Dataset to
 include human-annotated natural language explanations of the entailment
 relations.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/e-snli">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/OanaMariaCamburu/e-SNLI](https://github.com/OanaMariaCamburu/e-SNLI)
 

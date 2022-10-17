@@ -21,6 +21,12 @@ country. The pixel resolution of this public domain imagery is 0.3 m.
 
 While most images are 256x256 pixels, there are 44 images with different shape.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/uc-merced-land-use-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
 

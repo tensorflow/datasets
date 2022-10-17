@@ -21,6 +21,12 @@ accents of English (4 countries, 13 speakers) and a metropolitan Indian accent
 (2 speakers). The dataset available here corresponds to release titled
 accentdb_extended on https://accentdb.github.io/#dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/accentdb">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://accentdb.github.io/](https://accentdb.github.io/)
 
 *   **Source code**:

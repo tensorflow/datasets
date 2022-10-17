@@ -25,6 +25,12 @@ generated text using both automated and human metrics.
 More information can be found at
 [https://gem-benchmark.com](https://gem-benchmark.com).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gem">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://gem-benchmark.com](https://gem-benchmark.com)
 
 *   **Source code**:

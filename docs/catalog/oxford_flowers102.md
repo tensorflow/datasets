@@ -29,6 +29,12 @@ Note: The dataset by default comes with a test size larger than the train size.
 For more info see this
 [issue](https://github.com/tensorflow/datasets/issues/3022).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/oxford-102-flower">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
 

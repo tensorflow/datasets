@@ -23,6 +23,12 @@ Both "arxiv" and "pubmed" have two features:
 -   abstract: the abstract of the document, pagragraphs seperated by "/n".
 -   section_names: titles of sections, seperated by "/n".
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/arxiv-summarization-dataset">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
 

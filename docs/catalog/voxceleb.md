@@ -20,6 +20,12 @@ An large scale dataset for speaker identification. This data is collected from
 over 1,251 speakers, with over 150k samples in total. This release contains the
 audio part of the voxceleb1.1 dataset.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/voxceleb1">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html](http://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html)
 

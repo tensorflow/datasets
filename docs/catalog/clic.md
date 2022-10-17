@@ -30,6 +30,12 @@ Tensor is expected.
 This dataset does *NOT* contain the data from the P-Frame challenge (YUV image
 frames).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/clic">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://www.compression.cc/](https://www.compression.cc/)
 
 *   **Source code**:

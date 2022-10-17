@@ -25,6 +25,12 @@ associated with semantic categories, such as sky, road, person, and bed. MIT
 Scene Parsing Benchmark (SceneParse150) provides a standard training and
 evaluation platform for the algorithms of scene parsing.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/ade20k">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
 

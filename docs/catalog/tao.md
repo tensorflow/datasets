@@ -20,6 +20,12 @@ The TAO dataset is a large video object detection dataset consisting of 2,907
 high resolution videos and 833 object categories. Note that this dataset
 requires at least 300 GB of free space to store.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/tao">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://taodataset.org/](https://taodataset.org/)
 
 *   **Source code**:

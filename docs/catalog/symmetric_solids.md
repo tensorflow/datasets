@@ -58,6 +58,12 @@ Each example contains of
 
 In the case of the three marked shapes, this is only the rendering rotation.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/symmetric-solids">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://implicit-pdf.github.io](https://implicit-pdf.github.io)
 

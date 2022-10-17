@@ -20,6 +20,12 @@ examples with 11.5 million unique images across 108 Wikipedia languages. Its
 size enables WIT to be used as a pretraining dataset for multimodal machine
 learning models.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wit">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research-datasets/wit/](https://github.com/google-research-datasets/wit/)
 

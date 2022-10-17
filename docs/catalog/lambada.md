@@ -20,6 +20,12 @@ narrative passages sharing the characteristic that human subjects are able to
 guess their last word if they are exposed to the whole passage, but not if they
 only see the last sentence preceding the target word
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/lambada">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://zenodo.org/record/2630551#.X4Xzn5NKjUI](https://zenodo.org/record/2630551#.X4Xzn5NKjUI)
 

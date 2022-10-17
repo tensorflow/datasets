@@ -32,6 +32,12 @@ dataset.
 Original paper URL: https://arxiv.org/abs/1511.08060 Dataset URL:
 https://data.mendeley.com/datasets/tywbtsjrjv/1
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/plantvillage">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
 

@@ -18,6 +18,12 @@ The NYU-Depth V2 data set is comprised of video sequences from a variety of
 indoor scenes as recorded by both the RGB and Depth cameras from the Microsoft
 Kinect.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/nyuv2">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html)
 

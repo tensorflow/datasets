@@ -18,6 +18,12 @@ Common Sense Explanations (CoS-E) allows for training language models to
 automatically generate explanations that can be used during training and
 inference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cos-e">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/salesforce/cos-e](https://github.com/salesforce/cos-e)
 

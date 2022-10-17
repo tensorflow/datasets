@@ -27,6 +27,12 @@ commonsense comprehension. The dataset contains five temporal properties:
 We hope that this dataset can promote the future exploration of this particular
 class of reasoning problems.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/mc-taco">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/CogComp/MCTACO](https://github.com/CogComp/MCTACO)
 

@@ -19,6 +19,12 @@ sampling rate of 16 kHz, prepared by Vassil Panayotov with the assistance of
 Daniel Povey. The data is derived from read audiobooks from the LibriVox
 project, and has been carefully segmented and aligned.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/librispeech">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://www.openslr.org/12](http://www.openslr.org/12)
 
 *   **Source code**:

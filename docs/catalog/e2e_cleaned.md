@@ -18,6 +18,12 @@ An update release of E2E NLG Challenge data with cleaned MRs. The E2E data
 contains dialogue act-based meaning representation (MR) in the restaurant domain
 and up to 5 references in natural language, which is what one needs to predict.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/e2e">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/tuetschek/e2e-cleaning](https://github.com/tuetschek/e2e-cleaning)
 

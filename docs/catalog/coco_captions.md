@@ -27,6 +27,12 @@ divides the original COCO 2014 validation data into new 5000-image validation
 and test sets, plus a "restval" set containing the remaining ~30k images. All
 splits have caption annotations.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/coco-captions">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Config description**: This version contains images, bounding boxes and
     labels for the 2014 version.
 

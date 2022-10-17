@@ -20,6 +20,12 @@ examinations in China, which are designed for middle school and high school
 students. The dataset can be served as the training and test sets for machine
 comprehension.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/race">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Config description**: Builder config for RACE dataset.
 
 *   **Homepage**:

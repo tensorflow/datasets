@@ -18,6 +18,12 @@ Government report dataset consists of reports written by government research
 agencies including Congressional Research Service and U.S. Government
 Accountability Office.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/govreport">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://gov-report-data.github.io/](https://gov-report-data.github.io/)
 

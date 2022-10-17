@@ -20,6 +20,12 @@ there are 48K - 172K images (600K in total) categorized into 345 classes.
 
 In this TFDS version of DomainNet the cleaned version is used.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/domainnet">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [http://ai.bu.edu/DomainNet/](http://ai.bu.edu/DomainNet/)
 
 *   **Source code**:

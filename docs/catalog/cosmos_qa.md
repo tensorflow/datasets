@@ -21,6 +21,12 @@ people's everyday narratives, asking questions concerning on the likely causes
 or effects of events that require reasoning beyond the exact text spans in the
 context.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cosmosqa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://wilburone.github.io/cosmos/](https://wilburone.github.io/cosmos/)
 

@@ -19,6 +19,12 @@ GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of
 Google AI Language for the evaluation of coreference resolution in practical
 applications.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gap">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
 

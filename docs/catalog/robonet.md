@@ -24,6 +24,12 @@ from 113 unique camera viewpoints.
 *   The states are cartesian end-effector control action space with restricted
     rotation, and a gripper joint
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/robonet">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**: [https://www.robonet.wiki/](https://www.robonet.wiki/)
 
 *   **Source code**:

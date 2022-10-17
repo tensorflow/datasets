@@ -36,6 +36,12 @@ ideas and share with others. The dataset comes in three variants:
 Note: The v2 config correspond to the new 70/30 train/valid split (released in
 Dec 6 2019).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/imagenette">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 

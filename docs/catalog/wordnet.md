@@ -19,6 +19,12 @@ adverbs are grouped into sets of cognitive synonyms (synsets), each expressing a
 distinct concept. Synsets are interlinked by means of conceptual-semantic and
 lexical relations.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wn18">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://wordnet.princeton.edu/](https://wordnet.princeton.edu/)
 

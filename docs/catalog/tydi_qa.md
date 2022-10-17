@@ -43,6 +43,12 @@ English data plus existing machine translation systems.
 Typically, you should use EITHER the train or translate-train split, but not
 both.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/tydi-qa">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Config description**: Gold passage (GoldP) task
     (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline).
 

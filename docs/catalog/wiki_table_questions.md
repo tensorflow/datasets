@@ -27,6 +27,12 @@ selected among Wikipedia tables with at least 8 rows and 5 columns.
 
 -   Test: Train on 'train' and test on 'test'.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikitablequestions">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://ppasupat.github.io/WikiTableQuestions/#usage-notes](https://ppasupat.github.io/WikiTableQuestions/#usage-notes)
 

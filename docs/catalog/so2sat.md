@@ -27,6 +27,12 @@ frequency bands of Sentinel-2, rescaled and encoded as JPEG.
 Dataset URL: http://doi.org/10.14459/2018MP1454690 License:
 http://creativecommons.org/licenses/by/4.0
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/so2sat-lcz42">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
 

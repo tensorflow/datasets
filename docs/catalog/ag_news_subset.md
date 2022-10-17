@@ -34,6 +34,12 @@ classes from the original corpus. Each class contains 30,000 training samples
 and 1,900 testing samples. The total number of training samples is 120,000 and
 testing 7,600.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/ag-news">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://arxiv.org/abs/1509.01626](https://arxiv.org/abs/1509.01626)
 

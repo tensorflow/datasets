@@ -20,6 +20,12 @@ answers and a rationalte. Each example in this dataset has the following 5 parts
 4. A Classification as to whether the answer is right or wrong 5. An Explanation
 justifying the classification
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/multirc">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://cogcomp.seas.upenn.edu/multirc/](https://cogcomp.seas.upenn.edu/multirc/)
 
