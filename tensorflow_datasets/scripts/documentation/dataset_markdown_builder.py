@@ -24,7 +24,7 @@ import html
 import os
 import re
 import textwrap
-from typing import List, Optional, Union
+from typing import List, Mapping, Optional, Union
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core.features import feature as feature_lib
@@ -510,6 +510,35 @@ class KnowYourDataSection(Section):
       return _SKIP_SECTION
 
 
+class PapersWithCodeSection(Section):
+
+  NAME = 'Additional Documentation'
+
+  def __init__(self, tfds_to_pwc_links: Optional[Mapping[str, str]] = None):
+    super().__init__()
+    if tfds_to_pwc_links:
+      self._catalog_urls = tfds_to_pwc_links
+    else:
+      self._catalog_urls = doc_utils.get_pwc_catalog_urls()
+
+  def get_key(self, builder: tfds.core.DatasetBuilder):
+    return None  # Single url for all configs
+
+  def content(self, builder: tfds.core.DatasetBuilder):
+    url = self._catalog_urls.get(builder.name)
+    if url:
+      return f"""
+        <a class="button button-with-icon" href="{url}">
+          Explore on Papers With Code
+          <span class="material-icons icon-after" aria-hidden="true">
+            north_east
+          </span>
+        </a>
+      """
+    else:
+      return _SKIP_SECTION
+
+
 class DatasetVisualizationSection(Section):
 
   NAME = 'Figure'
@@ -750,6 +779,7 @@ def get_markdown_string(
   all_sections = [
       KnowYourDataSection(),
       DatasetDescriptionSection(),
+      PapersWithCodeSection(),
       ConfigDescriptionSection(),
       HomepageSection(),
       SourceCodeSection(),
