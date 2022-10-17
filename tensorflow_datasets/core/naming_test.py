@@ -605,38 +605,50 @@ def test_sharded_file_template_parse_filename_info_custom_template_add_missing(
 
 
 @pytest.mark.parametrize(
-    ('tfds_name', 'split_mapping', 'data_dir', 'ds_name', 'version', 'config'),
+    ('tfds_name', 'namespace', 'split_mapping', 'data_dir', 'ds_name',
+     'version', 'config'),
     [
-        ('ds/config:1.2.3', None, None, 'ds', '1.2.3', 'config'),
-        ('ds/config:1.2.3', {
+        # Dataset with a config and a version.
+        ('ds/config:1.2.3', None, None, None, 'ds', '1.2.3', 'config'),
+        # Dataset with a config and a version and a data_dir.
+        ('ds/config:1.2.3', None, None, '/a/b', 'ds', '1.2.3', 'config'),
+        # Test having a split mapping.
+        ('ds/config:1.2.3', None, {
             'x': 'y'
         }, None, 'ds', '1.2.3', 'config'),
-        ('ds/config:1.2.3', None, None, 'ds', '1.2.3', 'config'),
-        ('ds/config:1.2.3', None, '/a/b', 'ds', '1.2.3', 'config'),
-        ('ds:1.2.3', None, None, 'ds', '1.2.3', None),
-        ('ds/config', None, None, 'ds', None, 'config'),
-        ('ds', None, None, 'ds', None, None),
+        # Dataset without a config but with a version.
+        ('ds:1.2.3', None, None, None, 'ds', '1.2.3', None),
+        # Dataset with a config but without a version.
+        ('ds/config', None, None, None, 'ds', None, 'config'),
+        # Dataset without a config and a version.
+        ('ds', None, None, None, 'ds', None, None),
+        # Dataset with a namespace.
+        ('ns:ds/config:1.2.3', 'ns', None, '/a/b', 'ds', '1.2.3', 'config'),
     ])
-def test_dataset_reference_from_tfds_name(tfds_name, split_mapping, data_dir,
-                                          ds_name, version, config):
+def test_dataset_reference_from_tfds_name(tfds_name, namespace, split_mapping,
+                                          data_dir, ds_name, version, config):
   actual = naming.DatasetReference.from_tfds_name(
       tfds_name=tfds_name, split_mapping=split_mapping, data_dir=data_dir)
   assert actual == naming.DatasetReference(
       dataset_name=ds_name,
+      namespace=namespace,
       version=version,
       config=config,
       split_mapping=split_mapping,
       data_dir=data_dir)
 
 
-@pytest.mark.parametrize(('ds_name', 'version', 'config', 'tfds_name'), [
-    ('ds', '1.2.3', 'config', 'ds/config:1.2.3'),
-    ('ds', '1.2.3', None, 'ds:1.2.3'),
-    ('ds', None, None, 'ds'),
-])
-def test_dataset_reference_tfds_name(ds_name, version, config, tfds_name):
+@pytest.mark.parametrize(
+    ('ds_name', 'namespace', 'version', 'config', 'tfds_name'), [
+        ('ds', 'ns', '1.2.3', 'config', 'ns:ds/config:1.2.3'),
+        ('ds', None, '1.2.3', 'config', 'ds/config:1.2.3'),
+        ('ds', None, '1.2.3', None, 'ds:1.2.3'),
+        ('ds', None, None, None, 'ds'),
+    ])
+def test_dataset_reference_tfds_name(ds_name, namespace, version, config,
+                                     tfds_name):
   reference = naming.DatasetReference(
-      dataset_name=ds_name, version=version, config=config)
+      dataset_name=ds_name, namespace=namespace, version=version, config=config)
   assert reference.tfds_name() == tfds_name
 
 

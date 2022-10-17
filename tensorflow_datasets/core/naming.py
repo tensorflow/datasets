@@ -189,6 +189,7 @@ class DatasetReference:
 
   Attributes:
     dataset_name: name of the dataset.
+    namespace: optional namespace in which this dataset belongs.
     config: optional config to be used in the dataset.
     version: version of the dataset to be used. If `None`, the latest version
       will be loaded. An error is raised if the specified version cannot be
@@ -202,6 +203,7 @@ class DatasetReference:
       be `{'validation': 'valid'}`.
   """
   dataset_name: str
+  namespace: Optional[str] = None
   config: Optional[str] = None
   version: Union[None, str, version_lib.Version] = None
   data_dir: Union[None, str, os.PathLike] = None  # pylint: disable=g-bare-generic
@@ -223,6 +225,8 @@ class DatasetReference:
       The TFDS name of the `DatasetReference`.
     """
     dataset_name = self.dataset_name
+    if self.namespace:
+      dataset_name = f'{self.namespace}:{dataset_name}'
     if self.config:
       dataset_name += f'/{self.config}'
     if self.version and include_version:
@@ -252,6 +256,7 @@ class DatasetReference:
     config = builder_kwargs.get('config')
     return cls(
         dataset_name=parsed_name.name,
+        namespace=parsed_name.namespace,
         version=version,
         config=config,
         split_mapping=split_mapping,
