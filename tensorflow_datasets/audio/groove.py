@@ -16,10 +16,10 @@
 """Groove Midi Dataset (GMD).
 
 DEPRECATED!
-If you want to use the PASS Dataset class, use:
-tfds.builder('pass')
+If you want to use the Groove Dataset class, use:
+tfds.builder_cls('groove')
 """
 
-from tensorflow_datasets.datasets.groove import groove_dataset_builder
+from tensorflow_datasets.core import lazy_builder_import
 
-Groove = groove_dataset_builder.Builder
+Groove = lazy_builder_import.LazyBuilderImport('groove')
