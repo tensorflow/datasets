@@ -13,13 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Generic DatasetBuilder that transforms a tf.data.Dataset into a TFDS dataset."""
-
+"""Generic DatasetBuilder that transforms a tf.data.Dataset into a TFDS dataset.
+"""
+from __future__ import annotations
+import typing
 from typing import Any, Dict, Mapping, Optional, Union
 
 from etils import epath
-import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -29,6 +29,9 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+
+if typing.TYPE_CHECKING:
+  import tensorflow as tf
 
 
 class TfDataBuilder(

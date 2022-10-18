@@ -414,6 +414,10 @@ known-third-party=enchant, absl
 # only in one or another interpreter, leading to false positives when analysed.
 analyse-fallback-blocks=no
 
+# List of modules that can be imported at any level, not just the top level
+# one.
+allow-any-import-level=tensorflow
+
 
 [CLASSES]
 
