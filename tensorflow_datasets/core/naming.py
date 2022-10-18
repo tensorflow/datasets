@@ -238,6 +238,34 @@ class DatasetReference:
       return self.split_mapping.get(split, split)
     return split
 
+  def dataset_dir(
+      self,
+      data_dir: Optional[epath.PathLike] = None,
+  ) -> epath.Path:
+    """Returns the path where the data of this dataset lives.
+
+    Example: `/my_data_dir/datasets/c4/en/3.0.0`.
+
+    Arguments:
+      data_dir: optional path where this dataset is stored. If not specified,
+        then it uses the `data_dir` specified in this dataset reference. If that
+        is not specified either, then a `ValueError` is raised.
+
+    Returns:
+      the path where the data of this dataset lives.
+    """
+    data_dir = data_dir or self.data_dir
+    if data_dir is None:
+      raise ValueError('No data dir was specified!')
+    dataset_dir: epath.Path = epath.Path(data_dir) / self.dataset_name
+    if self.config:
+      dataset_dir = dataset_dir / self.config
+    if self.version is None:
+      raise ValueError(
+          "Version wasn't specified and is needed to get the dataset dir!")
+    dataset_dir = dataset_dir / str(self.version)
+    return dataset_dir
+
   def replace(self, **kwargs: Any) -> 'DatasetReference':
     """Returns a copy with updated attributes."""
     return dataclasses.replace(self, **kwargs)
