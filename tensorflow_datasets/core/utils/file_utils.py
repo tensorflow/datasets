@@ -119,7 +119,8 @@ def get_default_data_dir(given_data_dir: Optional[str] = None,
     return constants.DATA_DIR
 
 
-def is_version_folder_of_dataset(folder: epath.PathLike) -> bool:
+def is_version_folder(folder: epath.PathLike,
+                      check_content: bool = True) -> bool:
   """Returns whether `folder` is a version folder and contains dataset metadata.
 
   Checks that the deepest directory is a semantic version (e.g. `3.1.4`) and
@@ -127,19 +128,25 @@ def is_version_folder_of_dataset(folder: epath.PathLike) -> bool:
 
   Arguments:
     folder: the folder to check.
+    check_content: whether to check the content for the folder if it contains
+      files required for a dataset.
 
   Returns:
     whether `folder` is a version folder and contains dataset metadata.
   """
   folder = epath.Path(folder)
-  features_config_path = folder / constants.FEATURES_FILENAME
-  return (folder.is_dir() and version_lib.Version.is_valid(folder.name) and
-          features_config_path.exists())
+  looks_like_a_version = version_lib.Version.is_valid(folder.name)
+  if check_content:
+    features_config_path = folder / constants.FEATURES_FILENAME
+    return looks_like_a_version and features_config_path.exists()
+  else:
+    return looks_like_a_version
 
 
 def list_dataset_variants(
     dataset_name: str,
     dataset_dir: epath.PathLike,
+    namespace: Optional[str] = None,
     include_versions: bool = True,
 ) -> Iterator[naming.DatasetReference]:
   """Yields all variants (config + version) found in `dataset_dir`.
@@ -147,6 +154,7 @@ def list_dataset_variants(
   Arguments:
     dataset_name: the name of the dataset for which variants are listed.
     dataset_dir: the folder of the dataset.
+    namespace: optional namespace to which this data dir belongs.
     include_versions: whether to list what versions are available.
 
   Yields:
@@ -155,11 +163,12 @@ def list_dataset_variants(
   dataset_dir = epath.Path(dataset_dir)
   data_dir = dataset_dir.parent
   base_reference = naming.DatasetReference(
-      dataset_name=dataset_name, data_dir=data_dir)
+      dataset_name=dataset_name, namespace=namespace, data_dir=data_dir)
 
   def get_dataset_references(
       config_or_version_dir: epath.Path) -> Iterator[naming.DatasetReference]:
-    if is_version_folder_of_dataset(config_or_version_dir):
+    logging.info('Getting configs and versions in %s', config_or_version_dir)
+    if is_version_folder(config_or_version_dir, check_content=include_versions):
       if include_versions:
         yield base_reference.replace(version=config_or_version_dir.name)
       else:
@@ -170,12 +179,9 @@ def list_dataset_variants(
         yield base_reference.replace(config=config)
       else:
         for version_dir in config_or_version_dir.iterdir():
-          if is_version_folder_of_dataset(version_dir):
-            yield naming.DatasetReference(
-                dataset_name=dataset_name,
-                config=config,
-                version=version_dir.name,
-                data_dir=data_dir)
+          if is_version_folder(version_dir, check_content=include_versions):
+            yield base_reference.replace(
+                config=config, version=version_dir.name)
 
   with concurrent.futures.ThreadPoolExecutor(
       max_workers=multiprocessing.cpu_count()) as executor:
@@ -186,6 +192,7 @@ def list_dataset_variants(
 
 def list_datasets_in_data_dir(
     data_dir: epath.PathLike,
+    namespace: Optional[str] = None,
     include_configs: bool = True,
     include_versions: bool = True,
 ) -> Iterator[naming.DatasetReference]:
@@ -197,6 +204,7 @@ def list_datasets_in_data_dir(
 
   Arguments:
     data_dir: the folder where to look for datasets.
+    namespace: optional namespace to which this data dir belongs.
     include_configs: whether to list what configs are available.
     include_versions: whether to list what versions are available.
 
@@ -213,10 +221,11 @@ def list_datasets_in_data_dir(
       yield from list_dataset_variants(
           dataset_name=dataset_dir.name,
           dataset_dir=dataset_dir,
+          namespace=namespace,
           include_versions=include_versions)
     else:
       yield naming.DatasetReference(
-          dataset_name=dataset_dir.name, data_dir=data_dir)
+          dataset_name=dataset_dir.name, namespace=namespace, data_dir=data_dir)
 
 
 @functools.lru_cache(maxsize=None)
