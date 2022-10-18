@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -140,7 +140,7 @@ class Ai2Arc(tfds.core.GeneratorBasedBuilder):
     # they are in the format "1", "2", "3", "4". We convert the later to the
     # former for consistency.
     n_to_l = dict(zip("1 2 3 4 5".split(), "A B C D E".split()))
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for row in f:
         data = json.loads(row)
         answerkey = n_to_l.get(data["answerKey"], data["answerKey"])

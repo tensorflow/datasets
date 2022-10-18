@@ -19,6 +19,7 @@ import collections
 import os
 import re
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -100,10 +101,10 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
     train_path = os.path.join(extracted_path[0], "lists/train.txt")
     test_path = os.path.join(extracted_path[0], "lists/test.txt")
 
-    with tf.io.gfile.GFile(train_path) as f:
+    with epath.Path(train_path).open() as f:
       train_list = f.read().splitlines()
 
-    with tf.io.gfile.GFile(test_path) as f:
+    with epath.Path(test_path).open() as f:
       test_list = f.read().splitlines()
 
     attributes = collections.defaultdict(list)

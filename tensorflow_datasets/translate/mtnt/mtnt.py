@@ -17,8 +17,9 @@
 import csv
 import dataclasses
 import hashlib
+
 from absl import logging
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -88,7 +89,7 @@ class Mtnt(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       reader = csv.reader(f, delimiter='\t')
       for row in reader:
         if len(row) < 3:

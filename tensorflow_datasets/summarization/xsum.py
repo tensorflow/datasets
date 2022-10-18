@@ -19,6 +19,7 @@ import json
 import os
 
 from absl import logging
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -128,7 +129,7 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
     for i in split_ids:
       filename = os.path.join(path, i + ".data")
       if tf.io.gfile.exists(filename):
-        with tf.io.gfile.GFile(filename) as f:
+        with epath.Path(filename).open() as f:
           text = "".join([
               line for line in f.readlines()
               if line not in _REMOVE_LINES and line.strip()

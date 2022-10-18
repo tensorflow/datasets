@@ -15,6 +15,7 @@
 
 """German Credit (numeric) dataset."""
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -59,7 +60,7 @@ class GermanCreditNumeric(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     data_file = dl_manager.download(URL)
-    with tf.io.gfile.GFile(data_file) as f:
+    with epath.Path(data_file).open() as f:
       all_lines = f.read().split("\n")
     records = [l for l in all_lines if l]  # get rid of empty lines
 

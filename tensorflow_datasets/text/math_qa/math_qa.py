@@ -19,7 +19,7 @@ import json
 import os
 import re
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -79,7 +79,7 @@ class MathQa(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filename: str):
     """Yields examples."""
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       for i, ex in enumerate(json.load(f)):
         ex['correct_option'] = extract_answer_text(ex['options'], ex['correct'])
         yield i, ex

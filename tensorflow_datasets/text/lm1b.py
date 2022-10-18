@@ -17,6 +17,7 @@
 import os
 
 from absl import logging
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -98,7 +99,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, files):
     for filepath in files:
       logging.info("generating examples from = %s", filepath)
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
 
         for idx, line in enumerate(f):
           yield "%s_%d" % (os.path.basename(filepath), idx), {

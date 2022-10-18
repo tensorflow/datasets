@@ -19,6 +19,7 @@ import json
 import os
 import pathlib
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -78,7 +79,7 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
   def test_video_ffmpeg(self):
     video_path = os.path.join(self._test_data_path, 'video.mkv')
     video_json_path = os.path.join(self._test_data_path, 'video.json')
-    with tf.io.gfile.GFile(video_json_path) as fp:
+    with epath.Path(video_json_path).open() as fp:
       video_array = np.asarray(json.load(fp))
 
     self.assertFeature(

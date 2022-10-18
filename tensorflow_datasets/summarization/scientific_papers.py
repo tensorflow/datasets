@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -123,7 +123,7 @@ class ScientificPapers(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path=None):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for line in f:
         # Possible keys are:
         # "article_id": str

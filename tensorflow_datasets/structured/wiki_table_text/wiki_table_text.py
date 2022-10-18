@@ -15,6 +15,7 @@
 
 """wiki_table_text dataset."""
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -89,7 +90,7 @@ class WikiTableText(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for i, example_line in enumerate(f):
         _, headers, values, text = example_line.split('\t')
         headers = [h.replace('_$$_', ' ') for h in headers.split('_||_')]

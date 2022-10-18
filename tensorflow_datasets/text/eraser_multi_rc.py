@@ -17,7 +17,8 @@
 
 import json
 import os
-import tensorflow as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -102,7 +103,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
 
     multirc_dir = os.path.join(data_dir, 'docs')
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for line in f:
         row = json.loads(line)
         evidences = []
@@ -112,7 +113,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
           evidences.append(evidence['text'])
 
         passage_file = os.path.join(multirc_dir, docid)
-        with tf.io.gfile.GFile(passage_file) as f1:
+        with epath.Path(passage_file).open() as f1:
           passage_text = f1.read()
 
         yield row['annotation_id'], {

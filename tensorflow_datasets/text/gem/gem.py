@@ -20,6 +20,7 @@ import json
 import os
 import textwrap
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -1321,7 +1322,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, filepath, set_name, filepaths=None, lang=None):
     """Yields examples."""
     if self.builder_config.name == "common_gen":
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
         if set_name.startswith("challenge"):
           exples = json.load(f)
           if isinstance(exples, dict):
@@ -1373,7 +1374,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                   "references": [] if set_name == "test" else data["scene"],
               }
     elif self.builder_config.name == "cs_restaurants":
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
         if set_name.startswith("challenge"):
           exples = json.load(f)
           if isinstance(exples, dict):
@@ -1398,7 +1399,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 "references": [] if set_name == "train" else [instance["text"]],
             }
     elif self.builder_config.name == "dart":
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
         data = json.loads(f.read())
         id_ = -1
         i = -1
@@ -1454,7 +1455,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 ],
             }
     elif self.builder_config.name == "e2e_nlg":
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
         if set_name.startswith("challenge"):
           exples = json.load(f)
           if isinstance(exples, dict):
@@ -1484,7 +1485,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           bad_ids_dct = json.load(tf.io.gfile.GFile(filepaths))
           bad_ids = dict((bad_url, True)
                          for _, bad_url in bad_ids_dct[f"{lang}-{set_name}"])
-        with tf.io.gfile.GFile(filepath) as f:
+        with epath.Path(filepath).open() as f:
           id_ = -1
           for line in f:
             data = json.loads(line)
@@ -1570,7 +1571,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           exple["gem_id"] = f"{self.builder_config.name}-{set_name}-{id_}"
           yield id_, exple
       else:
-        with tf.io.gfile.GFile(filepath) as json_file:
+        with epath.Path(filepath).open() as json_file:
           json_list = list(json_file)
         id_ = -1
         i = -1
@@ -1649,7 +1650,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           exple["gem_id"] = f"{self.builder_config.name}-{set_name}-{id_}"
           yield id_, exple
       else:
-        with tf.io.gfile.GFile(filepath) as f:
+        with epath.Path(filepath).open() as f:
           examples = json.load(f)
           id_ = -1
           for example in examples["values"]:
@@ -1696,7 +1697,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             "source",
             "target",
         ]
-        with tf.io.gfile.GFile(filepath) as f:
+        with epath.Path(filepath).open() as f:
           for id_, line in enumerate(f):
             values = line.strip().split("\t")
             assert len(
@@ -1773,7 +1774,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
     elif self.builder_config.name == "xsum":
       if "challenge" in set_name:
         if "covid" in set_name:
-          with tf.io.gfile.GFile(filepath) as f:
+          with epath.Path(filepath).open() as f:
             id_ = -1
             for line in f:
               data = json.loads(line)
@@ -1802,7 +1803,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             exple["gem_id"] = f"{self.builder_config.name}-{set_name}-{id_}"
             yield id_, exple
       else:
-        with tf.io.gfile.GFile(filepath) as f:
+        with epath.Path(filepath).open() as f:
           split_ids = json.load(f)
         for id_, i in enumerate(split_ids[set_name]):
           with tf.io.gfile.GFile(os.path.join(filepaths, i + ".summary")) as f:

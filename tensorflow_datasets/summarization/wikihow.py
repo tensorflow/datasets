@@ -19,7 +19,7 @@ import csv
 import os
 import re
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -123,7 +123,7 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
     dl_path = dl_manager.download(_URLS)
     titles = {k: set() for k in dl_path}
     for k, path in dl_path.items():
-      with tf.io.gfile.GFile(path) as f:
+      with epath.Path(path).open() as f:
         for line in f:
           titles[k].add(line.strip())
 
@@ -162,7 +162,7 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path=None, title_set=None):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       reader = csv.reader(f)
       headers = next(reader)
       if self.builder_config.name == "all" and headers != [

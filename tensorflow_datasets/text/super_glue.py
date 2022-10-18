@@ -18,6 +18,7 @@
 import json
 import os
 
+from etils import epath
 import six
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -507,7 +508,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_file, split):
-    with tf.io.gfile.GFile(data_file) as f:
+    with epath.Path(data_file).open() as f:
       for line in f:
         row = json.loads(line)
 

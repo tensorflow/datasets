@@ -16,8 +16,9 @@
 """Wine quality dataset."""
 
 import csv
-import tensorflow as tf
 
+from etils import epath
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -147,7 +148,7 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
        Next examples
     """
 
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       reader = csv.DictReader(f, delimiter=";")
       for index, row in enumerate(reader):
         key = index

@@ -17,6 +17,7 @@
 import csv
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -128,13 +129,13 @@ class Bucc(tfds.core.GeneratorBasedBuilder):
       else:
         source_file = os.path.join(filepath, file)
 
-    with tf.io.gfile.GFile(target_file) as f:
+    with epath.Path(target_file).open() as f:
       data = csv.reader(f, delimiter='\t')
       target_sentences = list(data)
-    with tf.io.gfile.GFile(source_file) as f:
+    with epath.Path(source_file).open() as f:
       data = csv.reader(f, delimiter='\t')
       source_sentences = list(data)
-    with tf.io.gfile.GFile(source_target_file) as f:
+    with epath.Path(source_target_file).open() as f:
       data = csv.reader(f, delimiter='\t')
       source_target_ids = list(data)
     for id_, pair in enumerate(source_target_ids):

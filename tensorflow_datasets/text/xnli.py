@@ -18,9 +18,9 @@
 import collections
 import csv
 import os
-import six
 
-import tensorflow as tf
+from etils import epath
+import six
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -96,7 +96,7 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
     """This function returns the examples in the raw (text) form."""
     rows_per_pair_id = collections.defaultdict(list)
 
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       reader = csv.DictReader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
       for row in reader:
         rows_per_pair_id[row['pairID']].append(row)

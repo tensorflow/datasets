@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """@InProceedings{pawsx2019emnlp,
@@ -147,7 +147,7 @@ class PawsXWiki(tfds.core.GeneratorBasedBuilder):
     Yields:
       Generator yielding the next examples
     """
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       reader = csv.DictReader(f, delimiter="\t")
       # tsv file format: id  sentence1  sentence2 label
       for row in reader:

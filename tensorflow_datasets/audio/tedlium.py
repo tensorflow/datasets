@@ -17,10 +17,10 @@
 
 import os
 import re
+
+from etils import epath
 import numpy as np
-
 import tensorflow as tf
-
 import tensorflow_datasets.public_api as tfds
 
 
@@ -210,7 +210,7 @@ def _generate_examples_from_stm_file(stm_path):
   """Generate examples from a TED-LIUM stm file."""
   stm_dir = os.path.dirname(stm_path)
   sph_dir = os.path.join(os.path.dirname(stm_dir), "sph")
-  with tf.io.gfile.GFile(stm_path) as f:
+  with epath.Path(stm_path).open() as f:
     for line in f:
       line = line.strip()
       fn, channel, speaker, start, end, label, transcript = line.split(" ", 6)

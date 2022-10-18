@@ -16,8 +16,9 @@
 """opus dataset."""
 
 import os
+
 from absl import logging
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -329,6 +330,6 @@ class Opus(tfds.core.GeneratorBasedBuilder):
 
 def _gen_line(filename):
   """Returns sentences from an OPUS data file."""
-  with tf.io.gfile.GFile(filename) as f:
+  with epath.Path(filename).open() as f:
     for line in f:
       yield line

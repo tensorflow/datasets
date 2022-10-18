@@ -17,6 +17,7 @@
 
 import json
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -85,6 +86,6 @@ class NaturalQuestionsOpen(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, file_path):
     """Parses split file and yields examples."""
 
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       for i, line in enumerate(f):
         yield i, json.loads(line)

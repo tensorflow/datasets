@@ -17,7 +17,7 @@
 
 import csv
 
-import tensorflow.compat.v2 as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -95,7 +95,7 @@ class SciTail(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       data = csv.reader(f, delimiter='\t')
       for id_, row in enumerate(data):
         yield id_, {'premise': row[0], 'hypothesis': row[1], 'label': row[2]}

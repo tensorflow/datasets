@@ -17,9 +17,8 @@
 import csv
 import os
 
+from etils import epath
 from six.moves import urllib
-
-import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.csail.mit.edu/places/places365/"
@@ -103,7 +102,7 @@ class Placesfull(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, archive, path_prefix, split_name,
                          annotation_path):
-    with tf.io.gfile.GFile(annotation_path) as f:
+    with epath.Path(annotation_path).open() as f:
       if split_name == "test":
         # Test split doesn't have labels assigned.
         file_to_class = {x[0]: -1 for x in csv.reader(f, delimiter=" ")}

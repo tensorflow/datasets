@@ -17,8 +17,8 @@
 
 import os
 
+from etils import epath
 import tensorflow as tf
-
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -90,7 +90,7 @@ class Librispeech(tfds.core.BeamBasedBuilder):
 
   def _read_metadata_file(self, path, field_names):
     metadata = {}
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for line in f:
         if line.startswith(";"):
           continue

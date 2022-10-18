@@ -16,6 +16,8 @@
 """quac dataset."""
 
 import json
+
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -101,7 +103,7 @@ class Quac(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """Yields examples based on filepath."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       row = json.loads(f.readline())
       for data in row["data"]:
         section_title = data["section_title"]

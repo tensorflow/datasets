@@ -18,6 +18,7 @@
 import json
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -132,7 +133,7 @@ class Scicite(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path=None):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       unique_ids = {}
       for line in f:
         d = json.loads(line)

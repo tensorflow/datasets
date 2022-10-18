@@ -19,6 +19,7 @@ import json
 import os
 import tarfile
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -192,7 +193,7 @@ def _get_original_labels(val_path):
     dict, mapping from image name (str) to label (str).
   """
   labels_path = os.fspath(tfds.core.tfds_path(_VALIDATION_LABELS_FNAME))
-  with tf.io.gfile.GFile(labels_path) as labels_f:
+  with epath.Path(labels_path).open() as labels_f:
     # `splitlines` to remove trailing `\r` in Windows
     labels = labels_f.read().strip().splitlines()
   with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:

@@ -20,6 +20,7 @@
 import json
 import textwrap
 
+from etils import epath
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -587,7 +588,7 @@ class MRQA(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path, split):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       header = next(f)
       subset = json.loads(header)['header']['dataset']
 

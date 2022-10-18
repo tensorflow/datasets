@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import csv
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -98,7 +98,7 @@ class Mctaco(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, file_path):
     """This function returns the examples in the raw (text) form."""
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       reader = csv.DictReader(
           f,
           delimiter='\t',

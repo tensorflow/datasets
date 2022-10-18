@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz"
@@ -98,7 +98,7 @@ class Food101(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, json_file_path, image_dir_path):
     """Generate images and labels for splits."""
-    with tf.io.gfile.GFile(json_file_path) as f:
+    with epath.Path(json_file_path).open() as f:
       data = json.loads(f.read())
     for label, images in data.items():
       for image_name in images:

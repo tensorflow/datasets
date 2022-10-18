@@ -18,8 +18,9 @@
 import json
 import os
 import re
+
 from absl import logging
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -201,8 +202,8 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     samples_path = os.path.join(base_directory, 'dataset.json')
     splits_path = os.path.join(base_directory, splits_file)
-    with tf.io.gfile.GFile(samples_path) as samples_file:
-      with tf.io.gfile.GFile(splits_path) as splits_file:
+    with epath.Path(samples_path).open() as samples_file:
+      with epath.Path(splits_path).open() as splits_file:
         logging.info('Reading json from %s into memory...', samples_path)
         samples = json.loads(self._scrub_json(samples_file.read()))
         logging.info('%d samples loaded', len(samples))

@@ -17,6 +17,7 @@
 
 import csv
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -148,7 +149,7 @@ class Goemotions(tfds.core.GeneratorBasedBuilder):
       emotions label, 0/1 depending on whether is it a label for the input.
     """
     fieldnames = ['comment_text', 'emotion_ids', 'comment_id']
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       reader = csv.DictReader(f, fieldnames=fieldnames, delimiter='\t')
       for row in reader:
         example = self._parse_row_as_example(row)

@@ -25,6 +25,7 @@ import io
 import os
 
 from absl import logging
+from etils import epath
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -365,7 +366,7 @@ def _load_objects(csv_paths, csv_positions, prefix):
                csv_positions, prefix)
   objects = collections.defaultdict(list)
   for i, labels_path in enumerate(csv_paths):
-    with tf.io.gfile.GFile(labels_path) as csv_f:
+    with epath.Path(labels_path).open() as csv_f:
       if csv_positions[i] > 0:
         csv_f.seek(csv_positions[i])
       else:
@@ -386,7 +387,7 @@ def _load_bboxes(csv_path, csv_positions, prefix):
   logging.info('Loading CSVs %s from positions %s with prefix %s', csv_path,
                csv_positions, prefix)
   boxes = collections.defaultdict(list)
-  with tf.io.gfile.GFile(csv_path) as csv_f:
+  with epath.Path(csv_path).open() as csv_f:
     if csv_positions[0] > 0:
       csv_f.seek(csv_positions[0])
     else:

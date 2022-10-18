@@ -19,6 +19,7 @@ import collections
 import os
 from typing import Dict, List, Tuple
 
+from etils import epath
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -154,6 +155,6 @@ def _get_split_language_examples(
 
 
 def _list_examples(file: str) -> List[str]:
-  with tf.io.gfile.GFile(file) as f:
+  with epath.Path(file).open() as f:
     sentences = f.read().splitlines()
   return sentences

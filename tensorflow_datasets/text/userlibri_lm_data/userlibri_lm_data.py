@@ -18,6 +18,7 @@
 import csv
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -51,7 +52,7 @@ _KAGGLE_DATASET_ID = "google/userlibri"
 def read_metadata_file(path):
   """Reads the tab-separated metadata from the path."""
   metadata = {}
-  with tf.io.gfile.GFile(path) as f:
+  with epath.Path(path).open() as f:
     reader = csv.DictReader(f, delimiter="\t")
     for row in reader:
       # Collect metadata for each book ID.
@@ -115,7 +116,7 @@ class UserLibriText(tfds.core.BeamBasedBuilder):
 def _generate_examples(book_train_file):
   """Yields text examples from the given book_train_file."""
   book_id = book_train_file.split("/")[-1].split("_")[0]
-  with tf.io.gfile.GFile(book_train_file) as f:
+  with epath.Path(book_train_file).open() as f:
     for ind, line in enumerate(f):
       text = line.strip()
       if text:  # Skip empty lines.

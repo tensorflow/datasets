@@ -16,9 +16,9 @@
 """Dart dataset tests."""
 
 import json
-
 from unittest import mock
-import tensorflow as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured.dart import dart
 
@@ -98,9 +98,11 @@ class DartTest(tfds.testing.DatasetBuilderTestCase):
     dart_dataset = dart.Dart()
     with mock.patch.object(
         json, 'load',
-        return_value=json.loads(json_str)), mock.patch.object(tf, 'io'):
-      for i, (_, example) in enumerate(dart_dataset._generate_examples('')):
+        return_value=json.loads(json_str)), mock.patch.object(epath, 'Path'):
+      examples = list(dart_dataset._generate_examples(''))
+      for i, (_, example) in enumerate(examples):
         self.assertCountEqual(example, expected_examples[i])
+      assert len(examples) == len(expected_examples)
 
 
 if __name__ == '__main__':

@@ -20,6 +20,7 @@ import io
 import os
 
 from absl import logging
+from etils import epath
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -168,7 +169,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
         the "Usage" column from the csv.
     """
     if csv_path:
-      with tf.io.gfile.GFile(csv_path) as csv_f:
+      with epath.Path(csv_path).open() as csv_f:
         reader = csv.DictReader(csv_f)
         data = [(row["image"], int(row["level"]))
                 for row in reader

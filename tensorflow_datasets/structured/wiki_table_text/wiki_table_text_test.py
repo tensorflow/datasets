@@ -15,10 +15,7 @@
 
 """wiki_table_text dataset."""
 
-import textwrap
-from unittest import mock
-
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured.wiki_table_text import wiki_table_text
 
@@ -39,10 +36,6 @@ class WikiTableTextTest(tfds.testing.DatasetBuilderTestCase):
   }
 
   def test_generate_examples(self):
-    example_file = textwrap.dedent("""
-      4	subj_title_||_subj_subtitle_||_name_||_year	central_$$_bank_$$_of_$$_russia_||_chairmen_||_viktor_$$_gerashchenko_||_1992—1994	viktor_$$_gerashchenko is the chairman of central_$$_bank_$$_of_$$_russia during 1992 to 1994 .
-      4	subj_title_||_subj_subtitle_||_year_||_title	ace_$$_frehley_||_discography_||_2006_||_greatest_$$_hits_$$_live	greatest_$$_hits_$$_live is a discography of ace frehlely in 2006 .
-    """)
     expected_examples = [{
         'input_text': {
             'table': [{
@@ -89,12 +82,17 @@ class WikiTableTextTest(tfds.testing.DatasetBuilderTestCase):
         'target_text':
             'greatest hits live is a discography of ace frehlely in 2006'
     }]
-    tf_mock = mock.Mock()
-    tf_mock.gfile.GFile.return_value = example_file
     dataset = wiki_table_text.WikiTableText()
-    with mock.patch.object(tf, 'io', return_value=tf_mock):
-      for i, (_, example) in enumerate(dataset._generate_examples('')):
+
+    def mock_open(*_):
+      current_path = epath.Path(__file__).parent
+      return open(current_path / 'test_data/examples.csv')
+
+    with epath.testing.mock_epath(open=mock_open):
+      examples = list(dataset._generate_examples(''))
+      for i, (_, example) in enumerate(examples):
         self.assertCountEqual(example, expected_examples[i])
+      assert len(examples) == len(expected_examples)
 
 
 if __name__ == '__main__':

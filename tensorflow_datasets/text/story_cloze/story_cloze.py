@@ -18,6 +18,7 @@
 import csv
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -110,7 +111,7 @@ class StoryCloze(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """Yields examples."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       reader = csv.DictReader(f)
       for row in reader:
         context = ' '.join([

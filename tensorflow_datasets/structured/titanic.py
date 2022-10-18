@@ -17,6 +17,8 @@
 
 import collections
 import csv
+
+from etils import epath
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -147,7 +149,7 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
     Yields:
       The features and the target
     """
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       raw_data = csv.DictReader(f)
       if self.version >= "3.0.0":
         for i, row in enumerate(raw_data):

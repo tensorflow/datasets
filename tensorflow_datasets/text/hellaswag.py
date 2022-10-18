@@ -18,6 +18,7 @@
 import json
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -110,7 +111,7 @@ class Hellaswag(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath, domain=None, source=None):
     """Yields examples."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for idx, line in enumerate(f):
         elem = json.loads(line)
         elem_id = '%s_%d' % (os.path.basename(filepath), idx)

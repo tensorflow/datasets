@@ -17,6 +17,7 @@
 
 import csv
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -124,7 +125,7 @@ class E2eCleaned(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, csv_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(csv_path) as f:
+    with epath.Path(csv_path).open() as f:
       reader = csv.DictReader(f)
       for i, row in enumerate(reader):
         yield i, {

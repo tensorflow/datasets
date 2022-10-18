@@ -20,7 +20,7 @@ import csv
 import itertools
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -60,7 +60,7 @@ _MESSAGE_PARENT_ID = "parent_id"
 
 
 def _read_csv(path):
-  with tf.io.gfile.GFile(path) as f:
+  with epath.Path(path).open() as f:
     reader = csv.DictReader(f)
     for row in reader:
       if row["id"]:  # Filter out broken lines in the original dataset

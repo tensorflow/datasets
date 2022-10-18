@@ -18,6 +18,7 @@
 import csv
 import textwrap
 
+from etils import epath
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -1735,7 +1736,7 @@ class UnifiedQA(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       data = csv.reader(f, delimiter='\t')
       # Skip the header row
       if self.builder_config.header:

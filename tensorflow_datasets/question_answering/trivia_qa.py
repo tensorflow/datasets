@@ -19,6 +19,7 @@ import json
 import os
 
 from absl import logging
+from etils import epath
 import six
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -311,7 +312,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
       logging.info("generating examples from = %s", filepath)
       fname = os.path.basename(filepath)
 
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
         current_record = ""
         for line in f:
           if line == "        {\n":

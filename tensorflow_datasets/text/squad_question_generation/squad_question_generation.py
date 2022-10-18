@@ -19,6 +19,7 @@ import json
 import os
 import textwrap
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.question_answering import qa_utils
@@ -237,7 +238,7 @@ class SquadQuestionGeneration(tfds.core.GeneratorBasedBuilder):
     """
     if self.builder_config.name == "split_du":
       # The file format slightly differs from the original SQuAD JSON format.
-      with tf.io.gfile.GFile(squad_data_path) as f:
+      with epath.Path(squad_data_path).open() as f:
         squad_data = json.load(f)
         for article in squad_data:
           for paragraph in article["paragraphs"]:

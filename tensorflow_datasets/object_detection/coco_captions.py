@@ -20,8 +20,8 @@ import json
 import os
 
 from absl import logging
+from etils import epath
 import tensorflow as tf
-
 from tensorflow_datasets.object_detection import coco
 import tensorflow_datasets.public_api as tfds
 
@@ -95,7 +95,7 @@ class CocoCaptions(coco.Coco):
     # Load split definitions.
     captions_json_path = os.path.join(extracted_paths['karpathy_and_li_splits'],
                                       'dataset_coco.json')
-    with tf.io.gfile.GFile(captions_json_path) as f:
+    with epath.Path(captions_json_path).open() as f:
       annotations = json.load(f)['images']
 
     # split => image filename => annotations

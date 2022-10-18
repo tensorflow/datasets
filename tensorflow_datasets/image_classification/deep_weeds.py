@@ -18,6 +18,7 @@
 import csv
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -106,7 +107,7 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, data_dir_path, label_path):
     """Generate images and labels for splits."""
 
-    with tf.io.gfile.GFile(label_path) as f:
+    with epath.Path(label_path).open() as f:
       # Convert to list to reuse the iterator multiple times
       reader = list(csv.DictReader(f))
 

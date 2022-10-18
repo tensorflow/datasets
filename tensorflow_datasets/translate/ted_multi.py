@@ -17,9 +17,9 @@
 
 import csv
 import os
-import six
 
-import tensorflow as tf
+from etils import epath
+import six
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -95,7 +95,7 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, data_file):
     """This function returns the examples in the raw (text) form."""
-    with tf.io.gfile.GFile(data_file) as f:
+    with epath.Path(data_file).open() as f:
       reader = csv.DictReader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
       for idx, row in enumerate(reader):
         # Everything in the row except for 'talk_name' will be a translation.

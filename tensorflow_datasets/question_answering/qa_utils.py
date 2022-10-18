@@ -17,6 +17,7 @@
 import json
 
 from absl import logging
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -43,7 +44,7 @@ def generate_squadlike_examples(filepath):
 
   # We first re-group the answers, which may be flattened (e.g., by XTREME).
   qas = {}
-  with tf.io.gfile.GFile(filepath) as f:
+  with epath.Path(filepath).open() as f:
     squad = json.load(f)
     for article in squad["data"]:
       title = article.get("title", "")

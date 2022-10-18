@@ -19,6 +19,7 @@ import ast
 import csv
 import os
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -379,7 +380,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
     Yields:
       A dictionary of features, depending upon the mode.
     """
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       reader = csv.DictReader(f)
       for row in reader:
         if mode == 'spans':

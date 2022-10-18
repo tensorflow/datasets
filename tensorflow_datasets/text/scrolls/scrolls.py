@@ -16,7 +16,8 @@
 """scrolls dataset."""
 import dataclasses
 import json
-import tensorflow as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 # Corresponding HF dataset:
@@ -244,7 +245,7 @@ class Scrolls(tfds.core.GeneratorBasedBuilder):
     }
 
   def _generate_examples(self, path):
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for line in f:
         row = json.loads(line)
 

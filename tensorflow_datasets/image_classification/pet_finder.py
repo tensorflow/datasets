@@ -16,6 +16,8 @@
 """PetFinder Dataset."""
 
 import os
+
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -115,7 +117,7 @@ class PetFinder(tfds.core.GeneratorBasedBuilder):
 
     if not tf.io.gfile.exists(csv_paths):
       raise AssertionError("{} not exist".format(csv_name))
-    with tf.io.gfile.GFile(csv_paths) as csv_file:
+    with epath.Path(csv_paths).open() as csv_file:
       dataframe = pd.read_csv(csv_file)
     # add a dummy label for test set
     if csv_name == "test.csv":

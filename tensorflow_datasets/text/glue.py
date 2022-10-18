@@ -19,9 +19,9 @@ import csv
 import os
 import textwrap
 
+from etils import epath
 import numpy as np
 import six
-
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -517,7 +517,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       # header.
       is_cola_non_test = self.builder_config.name == "cola" and split != "test"
 
-      with tf.io.gfile.GFile(data_file) as f:
+      with epath.Path(data_file).open() as f:
         reader = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
         if is_cola_non_test:
           reader = csv.reader(f, delimiter="\t", quoting=csv.QUOTE_NONE)

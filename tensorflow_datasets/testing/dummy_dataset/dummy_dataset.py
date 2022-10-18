@@ -17,6 +17,7 @@
 
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -43,7 +44,7 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, path):
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       value = f.read()
     for i in range(int(value)):
       yield i, {'x': i}

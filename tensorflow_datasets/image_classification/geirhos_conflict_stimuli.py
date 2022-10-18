@@ -18,6 +18,7 @@
 import os
 import re
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -112,7 +113,7 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
     # Read ImageNet mapping.
     imagenet_names = set(self.info.features["shape_imagenet_labels"].names)
 
-    with tf.io.gfile.GFile(imagenet_mapping_path) as f:
+    with epath.Path(imagenet_mapping_path).open() as f:
       mapping_txt = f.read()
     mapping = {}
     for match in re.finditer(r"([a-z]+)\s*=\s*\[([^\]]+)\]", mapping_txt):

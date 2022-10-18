@@ -16,8 +16,9 @@
 """HIGGS Data Set."""
 
 import csv
-import tensorflow as tf
 
+from etils import epath
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # From https://arxiv.org/abs/1402.4735
@@ -134,7 +135,7 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
         'm_jj', 'm_jjj', 'm_lv', 'm_jlv', 'm_bb', 'm_wbb', 'm_wwbb'
     ]
 
-    with tf.io.gfile.GFile(file_path) as csvfile:
+    with epath.Path(file_path).open() as csvfile:
       reader = csv.DictReader(csvfile, fieldnames=fieldnames)
       for i, row in enumerate(reader):
         yield i, row

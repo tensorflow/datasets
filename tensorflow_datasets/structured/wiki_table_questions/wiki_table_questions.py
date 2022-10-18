@@ -18,6 +18,7 @@
 import csv
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -112,11 +113,11 @@ class WikiTableQuestions(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, examples_path, tables_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(examples_path) as examples:
+    with epath.Path(examples_path).open() as examples:
       for example in csv.DictReader(examples, delimiter='\t'):
         table = []
-        with tf.io.gfile.GFile(os.path.join(tables_path,
-                                            example['context'])) as table_csv:
+        with epath.Path(os.path.join(tables_path,
+                                     example['context'])).open() as table_csv:
           for row_number, row in enumerate(
               csv.DictReader(
                   table_csv, delimiter=',', quotechar='"', escapechar='\\')):

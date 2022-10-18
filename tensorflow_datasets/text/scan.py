@@ -17,7 +17,8 @@
 
 import json
 import os
-import tensorflow as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -181,7 +182,7 @@ class Scan(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _read_examples(self, datapath):
-    with tf.io.gfile.GFile(datapath) as infile:
+    with epath.Path(datapath).open() as infile:
       for i, line in enumerate(infile):
         if not line.startswith('IN: '):
           continue
@@ -193,7 +194,7 @@ class Scan(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     if splitpath:
       all_samples = list(self._read_examples(datapath))
-      with tf.io.gfile.GFile(splitpath) as infile:
+      with epath.Path(splitpath).open() as infile:
         split = json.load(infile)
       for idx in split[splitname + 'Idxs']:
         yield all_samples[idx]
