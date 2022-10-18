@@ -17,6 +17,8 @@
 
 import collections
 import os
+
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -120,7 +122,7 @@ class Voxceleb(tfds.core.GeneratorBasedBuilder):
   def _calculate_splits(self, iden_splits_path):
     """Read the train/dev/test splits from VoxCeleb's iden_split.txt file."""
     data_splits = collections.defaultdict(set)
-    with tf.io.gfile.GFile(iden_splits_path) as f:
+    with epath.Path(iden_splits_path).open() as f:
       for line in f:
         group, path = line.strip().split()
         split_name = {1: 'train', 2: 'validation', 3: 'test'}[int(group)]

@@ -18,6 +18,7 @@
 import csv
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -120,7 +121,7 @@ class ClincOOS(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filename):
     """Yields examples."""
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       reader = csv.DictReader(f)
       for row_id, row in enumerate(reader):
         example = {}

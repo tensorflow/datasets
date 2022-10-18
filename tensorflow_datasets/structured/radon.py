@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import collections
 
+from etils import epath
 import numpy as np
 import six.moves.urllib as urllib
 import tensorflow as tf
@@ -126,9 +127,9 @@ class Radon(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     pd = tfds.core.lazy_imports.pandas
 
-    with tf.io.gfile.GFile(file_path_srrs2) as f:
+    with epath.Path(file_path_srrs2).open() as f:
       df_srrs2 = pd.read_csv(f)
-    with tf.io.gfile.GFile(file_path_cty) as f:
+    with epath.Path(file_path_cty).open() as f:
       df_cty = pd.read_csv(f)
 
     df_srrs2.rename(columns=str.strip, inplace=True)

@@ -19,6 +19,7 @@ import collections
 import json
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -133,7 +134,7 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
         for filename in tf.io.gfile.listdir(images_dir_path)
     ])
 
-    with tf.io.gfile.GFile(question_file) as f:
+    with epath.Path(question_file).open() as f:
       questions_json = json.load(f)
     questions = collections.defaultdict(list)
     for q in questions_json["questions"]:
@@ -143,7 +144,7 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
       })
 
     if tf.io.gfile.exists(scenes_description_file):
-      with tf.io.gfile.GFile(scenes_description_file) as f:
+      with epath.Path(scenes_description_file).open() as f:
         scenes_json = json.load(f)
     else:
       # if annotation file does not exist, we create empty annotations

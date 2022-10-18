@@ -19,7 +19,7 @@ import csv
 import os
 from typing import Dict
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -155,14 +155,14 @@ class PawsWiki(tfds.core.GeneratorBasedBuilder):
       backtransl_path = os.path.join(mapping_base_dir,
                                      "input_backtransl_wiki_with_swap_id.tsv")
       tags2texts = {}
-      with tf.io.gfile.GFile(swap_path) as f:
+      with epath.Path(swap_path).open() as f:
         reader = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
         # tsv file format: id  sentence1  sentence2
         for row in reader:
           tags2texts[f"{row['id']}_1"] = row["sentence1"]
           tags2texts[f"{row['id']}_2"] = row["sentence2"]
 
-      with tf.io.gfile.GFile(backtransl_path) as f:
+      with epath.Path(backtransl_path).open() as f:
         reader = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
         # tsv file format: id  sentence1  sentence2  swap_id
         for row in reader:
@@ -197,10 +197,10 @@ class PawsWiki(tfds.core.GeneratorBasedBuilder):
     """
     if tags2texts:
       # uses mapping tags to create dataset with raw texts.
-      with tf.io.gfile.GFile(labels_path) as f:
+      with epath.Path(labels_path).open() as f:
         # tsv file format: id  sentence1  sentence2  label
         labels = list(csv.DictReader(f, delimiter="\t"))
-      with tf.io.gfile.GFile(mappings_path) as f:
+      with epath.Path(mappings_path).open() as f:
         # tsv file format: id  mapping1  mapping2
         tags = list(csv.DictReader(f, delimiter="\t"))
       if len(labels) != len(tags):
@@ -220,7 +220,7 @@ class PawsWiki(tfds.core.GeneratorBasedBuilder):
         yield key, example
     else:
       # creates dataset with tokenized texts.
-      with tf.io.gfile.GFile(labels_path) as f:
+      with epath.Path(labels_path).open() as f:
         reader = csv.DictReader(f, delimiter="\t")
         # tsv file format: id  sentence1  sentence2 label
         for row in reader:

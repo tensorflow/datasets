@@ -16,7 +16,8 @@
 """Yelp Polarity Reviews dataset."""
 
 import os
-import tensorflow as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -104,7 +105,7 @@ class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """Generate Yelp examples."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for line_id, line in enumerate(f):
         # The format of the line is:
         # "1", "The text of the review."

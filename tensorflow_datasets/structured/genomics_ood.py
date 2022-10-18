@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -178,7 +178,7 @@ class GenomicsOod(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filename):
     """Yields examples."""
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       reader = csv.DictReader(f, delimiter='\t')
       for row_id, row in enumerate(reader):
         example = {}

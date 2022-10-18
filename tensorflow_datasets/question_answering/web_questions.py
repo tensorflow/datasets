@@ -18,7 +18,7 @@
 import json
 import re
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -91,7 +91,7 @@ class WebQuestions(tfds.core.GeneratorBasedBuilder):
               r'\(description (?:"([^"]+?)"|([^)]+?))\)\w*', target)
       ]
 
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       examples = json.load(f)
       for i, ex in enumerate(examples):
         yield i, {

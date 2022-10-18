@@ -23,8 +23,8 @@ Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang
 
 import os
 
+from etils import epath
 import tensorflow as tf
-
 import tensorflow_datasets.public_api as tfds
 
 IMG_ALIGNED_DATA = ("https://drive.google.com/uc?export=download&"
@@ -174,7 +174,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       values: map from the file name to the list of attribute values for
               this file.
     """
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       data_raw = f.read()
     lines = data_raw.split("\n")
 
@@ -194,7 +194,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     landmarks_path = downloaded_dirs["landmarks_celeba"]
     attr_path = downloaded_dirs["list_attr_celeba"]
 
-    with tf.io.gfile.GFile(img_list_path) as f:
+    with epath.Path(img_list_path).open() as f:
       files = [
           line.split()[0]
           for line in f.readlines()

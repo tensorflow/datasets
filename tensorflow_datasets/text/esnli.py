@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -106,7 +106,7 @@ class Esnli(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, files):
     """Yields examples."""
     for filepath in files:
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
         reader = csv.DictReader(f)
         for _, row in enumerate(reader):
           yield row['pairID'], {

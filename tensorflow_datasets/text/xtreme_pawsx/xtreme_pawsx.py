@@ -17,7 +17,7 @@
 
 import csv
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -116,7 +116,7 @@ class XtremePawsx(tfds.core.GeneratorBasedBuilder):
       Generator yielding the next examples
     """
     counter = 0
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       reader = csv.DictReader(
           f,
           delimiter="\t",

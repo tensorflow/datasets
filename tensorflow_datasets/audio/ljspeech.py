@@ -17,8 +17,8 @@
 
 import os
 
+from etils import epath
 import tensorflow as tf
-
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -81,7 +81,7 @@ class Ljspeech(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, directory):
     """Yields examples."""
     metadata_path = os.path.join(directory, "LJSpeech-1.1", "metadata.csv")
-    with tf.io.gfile.GFile(metadata_path) as f:
+    with epath.Path(metadata_path).open() as f:
       for line in f:
         line = line.strip()
         key, transcript, transcript_normalized = line.split("|")

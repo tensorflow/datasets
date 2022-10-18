@@ -21,8 +21,6 @@ initialize TFDS datasets based on CoNLL-like formatted data.
 from typing import Callable, List, Mapping, Optional, OrderedDict, Sequence, Union
 
 from etils import epath
-import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import lazy_imports_lib
@@ -209,7 +207,7 @@ class ConllUDatasetBuilder(
 
     example_id = 0
     for filepath in path:
-      with tf.io.gfile.GFile(filepath) as data_file:
+      with epath.Path(filepath).open() as data_file:
         annotated_sentences = list(conllu.parse_incr(data_file))
         for sentence in annotated_sentences:
           example = process_example_fn(

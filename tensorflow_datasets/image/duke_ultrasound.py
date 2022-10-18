@@ -17,6 +17,8 @@
 
 import csv
 import os
+
+from etils import epath
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -136,7 +138,7 @@ class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
     return splits
 
   def _generate_examples(self, datapath, csvpath):
-    with tf.io.gfile.GFile(csvpath) as f:
+    with epath.Path(csvpath).open() as f:
       reader = csv.DictReader(f)
       for row in reader:
         data_key = 'mark_data' if row['target'] == 'mark' else 'phantom_data'

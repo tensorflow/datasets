@@ -18,6 +18,7 @@
 import json
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -99,7 +100,7 @@ class AnswerEquivalence(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """Yields examples."""
-    with tf.io.gfile.GFile(filepath) as fin:
+    with epath.Path(filepath).open() as fin:
       for i, line in enumerate(fin):
         data = json.loads(line)
         sample_id = data['qid'] + f'_{i}'

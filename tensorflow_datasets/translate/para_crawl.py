@@ -16,7 +16,8 @@
 """ParaCrawl (Bitextor) parallel open-source machine translation benchmark."""
 
 import collections
-import tensorflow as tf
+
+from etils import epath
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
@@ -142,7 +143,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
     """This function returns the examples in the raw (text) form."""
     target_language = self.builder_config.target_language
 
-    with tf.io.gfile.GFile(data_file) as f:
+    with epath.Path(data_file).open() as f:
       for idx, line in enumerate(f):
         line_parts = line.strip().split("\t")
         if len(line_parts) != 2:

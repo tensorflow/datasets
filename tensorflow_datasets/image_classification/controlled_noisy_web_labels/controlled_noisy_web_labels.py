@@ -21,6 +21,7 @@ import io
 import json
 import os
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -297,7 +298,7 @@ class ControlledNoisyWebLabels(tfds.core.GeneratorBasedBuilder):
                                     'mini-imagenet-annotations.json')
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
 
-    with tf.io.gfile.GFile(noisy_annot_path) as json_file:
+    with epath.Path(noisy_annot_path).open() as json_file:
       data = json.load(json_file)
 
     image_data = data['data']
@@ -338,7 +339,7 @@ class ControlledNoisyWebLabels(tfds.core.GeneratorBasedBuilder):
 
   def _generate_val_examples(self, split_file, archive):
     """Yields examples for the validation set."""
-    with tf.io.gfile.GFile(split_file) as fp:
+    with epath.Path(split_file).open() as fp:
       split_info = fp.read().splitlines()
 
     split_names, split_labels = map(
@@ -362,7 +363,7 @@ class ControlledNoisyWebLabels(tfds.core.GeneratorBasedBuilder):
                          clean_images):
     """Yields examples."""
 
-    with tf.io.gfile.GFile(split_file) as fp:
+    with epath.Path(split_file).open() as fp:
       split_info = fp.read().splitlines()
 
     split_names, split_labels = map(

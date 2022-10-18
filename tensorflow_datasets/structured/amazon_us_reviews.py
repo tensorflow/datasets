@@ -17,8 +17,9 @@
 
 import collections
 import csv
-import tensorflow as tf
 
+from etils import epath
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -160,7 +161,7 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
       The features.
     """
 
-    with tf.io.gfile.GFile(file_path) as tsvfile:
+    with epath.Path(file_path).open() as tsvfile:
       # Need to disable quoting - as dataset contains invalid double quotes.
       reader = csv.DictReader(
           tsvfile, dialect="excel-tab", quoting=csv.QUOTE_NONE)

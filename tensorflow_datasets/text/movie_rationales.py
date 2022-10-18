@@ -17,7 +17,8 @@
 
 import json
 import os
-import tensorflow as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -94,12 +95,12 @@ class MovieRationales(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     reviews_dir = os.path.join(data_dir, 'docs')
 
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for line in f:
         row = json.loads(line)
         doc_id = row['annotation_id']
         review_file = os.path.join(reviews_dir, doc_id)
-        with tf.io.gfile.GFile(review_file) as f1:
+        with epath.Path(review_file).open() as f1:
           review_text = f1.read()
 
         evidences = []

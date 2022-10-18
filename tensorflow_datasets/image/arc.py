@@ -18,6 +18,7 @@
 import json
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -140,7 +141,7 @@ class ARC(tfds.core.GeneratorBasedBuilder):
     """Yields (key, example) tuples from the dataset."""
     json_filepaths = tf.io.gfile.glob(os.path.join(directory, "*.json"))
     for json_path in sorted(json_filepaths):
-      with tf.io.gfile.GFile(json_path) as f:
+      with epath.Path(json_path).open() as f:
         task = json.load(f)
       task_id = os.path.basename(json_path)[:-len(".json")]
       yield task_id, {

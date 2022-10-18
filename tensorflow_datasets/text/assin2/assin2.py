@@ -15,6 +15,7 @@
 
 """assin2 dataset."""
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text.assin2.assin2_utils import parse_xml_string
@@ -140,7 +141,7 @@ class Assin2(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       pairs = parse_xml_string(f.read())
 
     for pair in pairs:

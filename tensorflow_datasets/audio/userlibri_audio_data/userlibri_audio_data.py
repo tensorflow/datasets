@@ -18,6 +18,7 @@
 import csv
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -51,7 +52,7 @@ _KAGGLE_DATASET_ID = "google/userlibri"
 def read_metadata_file(path):
   """Reads the tab-separated metadata from the path."""
   metadata = {}
-  with tf.io.gfile.GFile(path) as f:
+  with epath.Path(path).open() as f:
     reader = csv.DictReader(f, delimiter="\t")
     for row in reader:
       # Collect metadata for each split_userID, for example

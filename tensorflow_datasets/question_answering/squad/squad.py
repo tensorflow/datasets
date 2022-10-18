@@ -18,6 +18,7 @@
 import json
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.question_answering import qa_utils
@@ -72,7 +73,7 @@ _V2_FEATURES = tfds.features.FeaturesDict({
 
 def _generate_v2_examples(filepath):
   """Returns v2 examples."""
-  with tf.io.gfile.GFile(filepath) as f:
+  with epath.Path(filepath).open() as f:
     squad = json.load(f)
     for article in squad["data"]:
       title = article.get("title", "")

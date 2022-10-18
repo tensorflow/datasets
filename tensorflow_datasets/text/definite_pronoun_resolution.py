@@ -15,7 +15,7 @@
 
 """The Definite Pronoun Resolution Dataset."""
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -80,7 +80,7 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, filepath):
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       line_num = -1
       while True:
         line_num += 1

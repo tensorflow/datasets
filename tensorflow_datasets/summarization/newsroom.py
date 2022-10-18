@@ -18,6 +18,7 @@
 import json
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -126,7 +127,7 @@ class Newsroom(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, input_file=None):
     """Yields examples."""
-    with tf.io.gfile.GFile(input_file) as f:
+    with epath.Path(input_file).open() as f:
       for i, line in enumerate(f):
         d = json.loads(line)
         # fields are "url", "archive", "title", "date", "text",

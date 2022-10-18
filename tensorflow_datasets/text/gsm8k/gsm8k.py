@@ -17,7 +17,7 @@
 
 import json
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -71,7 +71,7 @@ class Gsm8k(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path: str):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for i, line in enumerate(f):
         ex = json.loads(line)
         ex['annotation'], ex['short_answer'] = ex['answer'].split('#### ')

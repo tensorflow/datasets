@@ -18,6 +18,7 @@
 import io
 import os
 
+from etils import epath
 import tensorflow as tf
 from tensorflow_datasets.image_classification import imagenet
 import tensorflow_datasets.public_api as tfds
@@ -110,7 +111,7 @@ class Imagenet2012Subset(imagenet.Imagenet2012):
     subset_file = dl_manager.download(SUBSET2FILES[self.builder_config.name])
     if isinstance(subset_file, list):  # it will only be a list during testing,
       subset_file = subset_file[0]  # where the first entry is 1percent.txt.
-    with tf.io.gfile.GFile(subset_file) as fp:
+    with epath.Path(subset_file).open() as fp:
       subset = set(fp.read().splitlines())  # remove trailing `\r` in Windows
 
     return [

@@ -17,6 +17,7 @@
 
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -98,7 +99,7 @@ class Aeslc(tfds.core.GeneratorBasedBuilder):
 
 def _parse_email_file(filename):
   """Parse email file text for email body and subject."""
-  with tf.io.gfile.GFile(filename) as f:
+  with epath.Path(filename).open() as f:
     email_body = ""
     for line in f:
       if line == "\n":

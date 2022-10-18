@@ -17,7 +17,7 @@
 
 import collections
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -126,9 +126,9 @@ class Flores(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, source_file, target_file):
     """This function returns the examples in the raw (text) form."""
-    with tf.io.gfile.GFile(source_file) as f:
+    with epath.Path(source_file).open() as f:
       source_sentences = f.read().split("\n")
-    with tf.io.gfile.GFile(target_file) as f:
+    with epath.Path(target_file).open() as f:
       target_sentences = f.read().split("\n")
 
     assert len(target_sentences) == len(

@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _LICENSE = """WordNet Release 3.0 This software and database is being provided
@@ -118,7 +118,7 @@ _RELATIONS = [
 
 def _make_wn18_metadata(synset_definitions_path):
   synsets = {}
-  with tf.io.gfile.GFile(synset_definitions_path) as f:
+  with epath.Path(synset_definitions_path).open() as f:
     for line in f:
       synset_id, name, definition = line.strip().split('\t')
       synsets[synset_id] = dict(name=name, definition=definition)
@@ -209,7 +209,7 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, triplets_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(triplets_path) as f:
+    with epath.Path(triplets_path).open() as f:
       for i, line in enumerate(f):
         lhs, relation, rhs = line.strip().split('\t')
         yield i, {'lhs': lhs, 'relation': relation, 'rhs': rhs}

@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -51,7 +51,7 @@ _PIQA_URL = "https://storage.googleapis.com/ai2-mosaic/public/physicaliqa/physic
 
 def _read_json(json_path):
   data = []
-  with tf.io.gfile.GFile(json_path) as f:
+  with epath.Path(json_path).open() as f:
     for line in f:
       if line:
         data.append(json.loads(line))

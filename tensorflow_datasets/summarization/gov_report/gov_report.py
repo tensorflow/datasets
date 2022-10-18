@@ -20,7 +20,7 @@ import json
 import os
 from typing import Any, Dict, Iterable, Tuple
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """
@@ -147,10 +147,10 @@ class GovReport(tfds.core.GeneratorBasedBuilder):
     separator = self.builder_config.separator
     report_key, summary_key = self.builder_config.supervised_keys
     split_filename = os.path.join(path, "split_ids", f"{subset}_{split}.ids")
-    with tf.io.gfile.GFile(split_filename) as f:
+    with epath.Path(split_filename).open() as f:
       for line in f:
         json_path = os.path.join(path, subset, f"{line.rstrip()}.json")
-        with tf.io.gfile.GFile(json_path) as jf:
+        with epath.Path(json_path).open() as jf:
           d = json.load(jf)
           if style == "json":
             report = json.dumps(d[report_key])

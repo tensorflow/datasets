@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -107,7 +107,7 @@ class Billsum(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path=None, key=None):
     """Yields examples."""
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for line in f:
         # in us bills, json has fields:
         #   text, summary, title, bill_id, text_len, sum_len

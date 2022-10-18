@@ -18,6 +18,7 @@
 import json
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -99,7 +100,7 @@ class Dart(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, json_file):
     """Yields examples."""
-    with tf.io.gfile.GFile(json_file) as f:
+    with epath.Path(json_file).open() as f:
       data = json.load(f)
       for entry_count, entry in enumerate(data):
         table = []

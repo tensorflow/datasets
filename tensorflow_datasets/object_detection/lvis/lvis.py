@@ -19,6 +19,7 @@ import collections
 import json
 import pathlib
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -223,7 +224,7 @@ class LvisAnnotation:
   """
 
   def __init__(self, annotation_path):
-    with tf.io.gfile.GFile(annotation_path) as f:
+    with epath.Path(annotation_path).open() as f:
       data = json.load(f)
     self._data = data
 

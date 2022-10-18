@@ -19,7 +19,6 @@ import json
 from typing import List
 
 from etils import epath
-import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _BEAM_NAMESPACE = 'TFDS_MEDIA_SUM'
@@ -114,7 +113,7 @@ class MediaSum(tfds.core.GeneratorBasedBuilder):
     }
 
   def _load_json_file(self, json_path: epath.Path):
-    with tf.io.gfile.GFile(json_path) as f:
+    with epath.Path(json_path).open() as f:
       file_content = json.load(f)
     return file_content
 

@@ -16,7 +16,9 @@
 """FUSS dataset."""
 
 import os
+
 from absl import logging
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -147,7 +149,7 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
       # Some segments files are missing in the "unprocessed" set.
       logging.info("Missing segments file: %s", path)
       return segments
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for l in f:
         try:
           start, end, label = l.split()
@@ -164,7 +166,7 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
     """Generates examples for the given split."""
     path = os.path.join(base_dir, "%s_example_list.txt" % split)
     split_dir = os.path.join(base_dir, split)
-    with tf.io.gfile.GFile(path) as example_list:
+    with epath.Path(path).open() as example_list:
       for line in example_list:
         paths = line.split()
         key = _basename_without_ext(paths[0])

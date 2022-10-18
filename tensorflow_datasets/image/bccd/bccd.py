@@ -19,6 +19,7 @@ import collections
 import os
 import xml.etree.ElementTree as ET
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -103,7 +104,7 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
     for root, _, filename in tf.io.gfile.walk(splits_dir_path):
       for fname in filename:
         full_file_name = os.path.join(root, fname)
-        with tf.io.gfile.GFile(full_file_name) as f:
+        with epath.Path(full_file_name).open() as f:
           for line in f:
             if fname == "train.txt":
               train_list.append(line)
@@ -178,7 +179,7 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
 
     for fname in file_names:
       annotation_file_path = get_annotations_file_path(fname)
-      with tf.io.gfile.GFile(annotation_file_path) as f:
+      with epath.Path(annotation_file_path).open() as f:
         xml_list[fname] = ET.parse(f)
       attributes = collections.defaultdict(list)
       for element in xml_list[fname].iter():

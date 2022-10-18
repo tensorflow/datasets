@@ -17,6 +17,7 @@
 
 import json
 
+from etils import epath
 import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -137,7 +138,7 @@ class CSRestaurants(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, json_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(json_path) as f:
+    with epath.Path(json_path).open() as f:
       data = json.load(f)
       for i, row in enumerate(data):
         yield i, {

@@ -23,6 +23,7 @@ from typing import Optional, Sequence
 import uuid
 
 from absl import logging
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import c4_utils
@@ -545,7 +546,7 @@ class C4(tfds.core.BeamBasedBuilder):
       badwords = collections.defaultdict(set)
       for lang, path in file_paths["badwords"].items():
         lang = lang.split("-")[0]  # remove suffix if present
-        with tf.io.gfile.GFile(path) as f:
+        with epath.Path(path).open() as f:
           badwords[lang].update(l.strip() for l in f)
 
       for lang, allowlist in _BADWORDS_ALLOWLIST.items():

@@ -35,7 +35,6 @@ class MyConllDataset(tfds.dataset_builders.ConllDatasetBuilder):
 from typing import List, Optional, OrderedDict, Sequence, Union
 
 from etils import epath
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import split_builder as split_builder_lib
@@ -139,7 +138,7 @@ class ConllDatasetBuilder(
 
     example_id = 0
     for filepath in path:
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
         for line in f:
           if line.startswith("-DOCSTART-") or line == "\n" or not line:
             if input_sequences["tokens"]:

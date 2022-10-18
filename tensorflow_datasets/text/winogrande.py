@@ -22,7 +22,7 @@ from __future__ import print_function
 import json
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -92,7 +92,7 @@ class Winogrande(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """This function returns the examples in the raw (text) form."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for row in f:
         row_fields = json.loads(row)
         yield row_fields['qID'], {

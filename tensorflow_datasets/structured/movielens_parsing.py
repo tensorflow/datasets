@@ -20,6 +20,7 @@ import csv
 import os
 from typing import Any, Dict, Iterator, Tuple
 
+from etils import epath
 import tensorflow as tf
 
 
@@ -27,7 +28,7 @@ def parse_current_movies_data(
     dir_path: str) -> Iterator[Tuple[int, Dict[str, Any]]]:
   """Parses the movies data in current format (20m, 25m, and latest-small)."""
   movies_file_path = os.path.join(dir_path, 'movies.csv')
-  with tf.io.gfile.GFile(movies_file_path) as movies_file:
+  with epath.Path(movies_file_path).open() as movies_file:
     movies_reader = csv.DictReader(movies_file)
     for row_num, row in enumerate(movies_reader):
       yield row_num, {
@@ -45,7 +46,7 @@ def parse_current_ratings_data(
     movie_info_map[movie_example['movie_id']] = movie_example
 
   ratings_file_path = os.path.join(dir_path, 'ratings.csv')
-  with tf.io.gfile.GFile(ratings_file_path) as ratings_file:
+  with epath.Path(ratings_file_path).open() as ratings_file:
     ratings_reader = csv.DictReader(ratings_file)
     for row_num, row in enumerate(ratings_reader):
       ex = {

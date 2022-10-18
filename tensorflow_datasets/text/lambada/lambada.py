@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """The LAMBADA dataset evaluates the capabilities of computational
@@ -96,7 +96,7 @@ class Lambada(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """Yields examples."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for idx, line in enumerate(f):
         key = '%s_%d' % (os.path.basename(filepath), idx)
         yield key, {'passage': line}

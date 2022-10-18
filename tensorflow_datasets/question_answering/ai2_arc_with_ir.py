@@ -22,7 +22,7 @@ from __future__ import print_function
 import json
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -163,7 +163,7 @@ class Ai2ArcWithIR(tfds.core.GeneratorBasedBuilder):
     # Those that start with ARCEZ_ for the easy set
     # Those that start with ARCCH_ for the challenge set
     prefix = {"ARC-Easy-IR": "ARCEZ_", "ARC-Challenge-IR": "ARCCH_"}[split]
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for row in f:
         data = json.loads(row)
         if not data["id"].startswith(prefix):

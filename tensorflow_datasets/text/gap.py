@@ -17,6 +17,7 @@
 
 import csv
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -106,7 +107,7 @@ class Gap(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """Yields examples."""
-    with tf.io.gfile.GFile(filepath) as tsvfile:
+    with epath.Path(filepath).open() as tsvfile:
       reader = csv.DictReader(tsvfile, dialect='excel-tab')
       for i, row in enumerate(reader):
         yield i, row

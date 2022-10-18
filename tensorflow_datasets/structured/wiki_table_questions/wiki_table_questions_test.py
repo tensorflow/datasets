@@ -15,10 +15,10 @@
 
 """wiki_table_questions dataset."""
 
-import textwrap
+import csv
 from unittest import mock
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured.wiki_table_questions import wiki_table_questions
 
@@ -41,17 +41,40 @@ class WikiTableQuestionsTest(tfds.testing.DatasetBuilderTestCase):
                        ] + ['split-{}-dev'.format(i) for i in range(1, 4)]
 
   def test_generate_examples(self):
-    examples_file = textwrap.dedent("""
-      id	utterance	context	targetValue
-      nu-0	which country had the most cyclists finish within the top 5?	csv/203-csv/733.csv	Italy
-      nu-165	who was the first cyclist to finish?	csv/203-csv/733.csv	Alejandro Valverde
-    """)
-    csv_203_csv_733 = textwrap.dedent("""
-      "Rank","Cyclist","Team","Time","UCI ProTour\nPoints"
-      "1","Alejandro Valverde (ESP)","Caisse d'Epargne","5h 29' 10\"","40"
-      "2","Davide Rebellin (ITA)","Gerolsteiner","s.t.","25"
-      "3","Paolo Bettini (ITA)","Quick Step","s.t.","20"
-    """)
+    examples_file = [{
+        'id':
+            'nu-0',
+        'utterance':
+            'which country had the most cyclists finish within the top 5?',
+        'context':
+            'csv/203-csv/733.csv',
+        'targetValue':
+            'Italy',
+    }, {
+        'id': 'nu-165',
+        'utterance': 'who was the first cyclist to finish?',
+        'context': 'csv/203-csv/733.csv',
+        'targetValue': 'Alejandro Valverde',
+    }]
+    csv_203_csv_733 = [{
+        'Rank': '1',
+        'Cyclist': 'Alejandro Valverde (ESP)',
+        'Team': "Caisse d'Epargne",
+        'Time': "5h 29' 10\"",
+        'UCI ProTour\nPoints': '40',
+    }, {
+        'Rank': '2',
+        'Cyclist': 'Davide Rebellin (ITA)',
+        'Team': 'Gerolsteiner',
+        'Time': 's.t.',
+        'UCI ProTour\nPoints': '25',
+    }, {
+        'Rank': '3',
+        'Cyclist': 'Paolo Bettini (ITA)',
+        'Team': 'Quick Step',
+        'Time': 's.t.',
+        'UCI ProTour\nPoints': '20',
+    }]
     table_formated = [{
         'column_header': 'Rank',
         'row_number': 1,
@@ -128,12 +151,16 @@ class WikiTableQuestionsTest(tfds.testing.DatasetBuilderTestCase):
         },
         'target_text': 'Alejandro Valverde'
     }]
-    tf_mock = mock.Mock()
-    tf_mock.gfile.GFile.side_effect = lambda f: csv_203_csv_733 if f else examples_file
-    dataset = wiki_table_questions.WikiTableQuestions()
-    with mock.patch.object(tf, 'io', return_value=tf_mock):
-      for i, (_, example) in enumerate(dataset._generate_examples('', '')):
+    with mock.patch.object(
+        csv,
+        'DictReader',
+        side_effect=iter([examples_file, csv_203_csv_733,
+                          csv_203_csv_733])), mock.patch.object(epath, 'Path'):
+      dataset = wiki_table_questions.WikiTableQuestions()
+      examples = list(dataset._generate_examples('', ''))
+      for i, (_, example) in enumerate(examples):
         self.assertCountEqual(example, expected_examples[i])
+      assert len(examples) == len(expected_examples)
 
 
 if __name__ == '__main__':

@@ -15,10 +15,10 @@
 
 """As dataframe util."""
 
+import dataclasses
 import typing
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
-import dataclasses
 import numpy as np
 
 import tensorflow as tf

@@ -18,6 +18,7 @@
 import json
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -146,7 +147,7 @@ class CosE(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     cqa_indexed = kwargs["cqa_indexed"]
     for filepath in files:
-      with tf.io.gfile.GFile(filepath) as f:
+      with epath.Path(filepath).open() as f:
         for line in f:
           cos = json.loads(line)
           cqa = cqa_indexed[cos["id"]]

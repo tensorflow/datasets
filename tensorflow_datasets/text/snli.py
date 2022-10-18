@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -88,7 +88,7 @@ class Snli(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """This function returns the examples in the raw (text) form."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       reader = csv.DictReader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
       for idx, row in enumerate(reader):
         label = -1 if row['gold_label'] == '-' else row['gold_label']

@@ -20,8 +20,8 @@ import json
 import os
 
 from absl import logging
+from etils import epath
 import tensorflow as tf
-
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -414,7 +414,7 @@ class CocoAnnotation(object):
   """Coco annotation helper class."""
 
   def __init__(self, annotation_path):
-    with tf.io.gfile.GFile(annotation_path) as f:
+    with epath.Path(annotation_path).open() as f:
       data = json.load(f)
     self._data = data
 

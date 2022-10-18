@@ -17,8 +17,9 @@
 
 import json
 import os
+
 from absl import logging
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -240,7 +241,7 @@ def _generate_blended_split_builder_configs():
 def _read_pool_shard(pool_path, index):
   path = os.path.join(pool_path, 'dataset_%03d.json' % index)
   logging.info('Reading %s...', path)
-  with tf.io.gfile.GFile(path) as f:
+  with epath.Path(path).open() as f:
     questions = json.load(f)
   return questions
 
@@ -306,7 +307,7 @@ class StarCFQ(tfds.core.GeneratorBasedBuilder):
           'u-cfq-for-divergence-splits-1.0-compact-combined')
 
     else:
-      with tf.io.gfile.GFile(split_path) as file:
+      with epath.Path(split_path).open() as file:
         splits = json.load(file)
         for split in splits.values():
           for s in split:
@@ -337,11 +338,11 @@ class StarCFQ(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     if self.builder_config.compound_divergence:
       samples_path = os.path.join(dataset_paths[_UCFQ_POOL], 'dataset.json')
-      with tf.io.gfile.GFile(samples_path) as samples_file:
+      with epath.Path(samples_path).open() as samples_file:
         logging.info('Reading json from %s into memory...', samples_path)
         samples = json.loads(samples_file.read())
         logging.info('%d samples loaded', len(samples))
-        with tf.io.gfile.GFile(split_path) as split_file:
+        with epath.Path(split_path).open() as split_file:
           splits = json.loads(split_file.read())
           for idx in splits[split_id]:
             sample = samples[idx]
@@ -350,7 +351,7 @@ class StarCFQ(tfds.core.GeneratorBasedBuilder):
                 _QUERY: sample[_QUERY_FIELD]
             }
     else:
-      with tf.io.gfile.GFile(split_path) as sf:
+      with epath.Path(split_path).open() as sf:
         split_config = json.load(sf)
       slice_index = 0
       for dss in split_config[split_id]:

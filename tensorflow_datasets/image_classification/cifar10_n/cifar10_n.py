@@ -18,6 +18,7 @@
 import collections
 import os
 
+from etils import epath
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -145,7 +146,7 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
     for label_key, label_file in zip(cifar_info.label_keys,
                                      cifar_info.label_files):
       labels_path = os.path.join(cifar_path, label_file)
-      with tf.io.gfile.GFile(labels_path) as label_f:
+      with epath.Path(labels_path).open() as label_f:
         label_names = [name for name in label_f.read().split('\n') if name]
       self.info.features[label_key].names = label_names
 

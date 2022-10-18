@@ -17,6 +17,7 @@
 
 import json
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -96,7 +97,7 @@ class BoolQ(tfds.core.GeneratorBasedBuilder):
       The next examples
     """
 
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       if file_path.suffix == ".jsonl":
         for index, line in enumerate(f):
           row = json.loads(line)

@@ -18,6 +18,7 @@
 import csv
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -199,7 +200,7 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
     Yields:
       A dictionary of features, all floating point except the input text.
     """
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       reader = csv.DictReader(f)
       for row in reader:
         example = {}

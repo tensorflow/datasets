@@ -16,7 +16,9 @@
 """Mathematics database."""
 
 import os
+
 from absl import logging
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -225,7 +227,7 @@ class MathDataset(tfds.core.GeneratorBasedBuilder):
     for category in categories:
       data_file = os.path.join(directory, _DATASET_VERSION, category, config)
       if tf.io.gfile.exists(data_file):
-        with tf.io.gfile.GFile(data_file) as f:
+        with epath.Path(data_file).open() as f:
           ls = f.read().split("\n")
 
           for l in ls[::-1]:

@@ -19,6 +19,7 @@ import collections
 import csv
 import os
 
+from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -131,7 +132,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, imgs_path, csv_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(csv_path) as csv_f:
+    with epath.Path(csv_path).open() as csv_f:
       reader = csv.DictReader(csv_f)
       # Get keys for each label from csv
       label_keys = reader.fieldnames[5:]

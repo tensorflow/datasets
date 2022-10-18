@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -101,7 +101,7 @@ class AGNewsSubset(tfds.core.GeneratorBasedBuilder):
     Yields:
       Generator yielding the next examples
     """
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       reader = csv.reader(f)
       # CSV files : class label (as number), title, description
       for index, row in enumerate(reader):
