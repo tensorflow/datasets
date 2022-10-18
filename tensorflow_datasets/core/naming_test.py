@@ -658,6 +658,22 @@ def test_dataset_reference_tfds_name_without_version():
   assert reference.tfds_name(include_version=False) == 'ds/config'
 
 
+@pytest.mark.parametrize(('tfds_name', 'data_dir', 'dataset_dir'), [
+    ('ns:ds/config:1.2.3', '/a/b', '/a/b/ds/config/1.2.3'),
+    ('ds/config:1.2.3', '/a/b', '/a/b/ds/config/1.2.3'),
+    ('ds:1.2.3', '/a/b', '/a/b/ds/1.2.3'),
+])
+def test_dataset_reference_dataset_dir(tfds_name, data_dir, dataset_dir):
+  reference = naming.DatasetReference.from_tfds_name(
+      tfds_name=tfds_name, data_dir=data_dir)
+  assert os.fspath(reference.dataset_dir()) == dataset_dir
+
+  # Also test passing the data_dir to `.dataset_dir`
+  reference = naming.DatasetReference.from_tfds_name(
+      tfds_name=tfds_name, data_dir='/something/else')
+  assert os.fspath(reference.dataset_dir(data_dir=data_dir)) == dataset_dir
+
+
 def test_dataset_reference_get_split():
   reference = naming.DatasetReference.from_tfds_name(
       'ds/config:1.2.3', split_mapping={'x': 'y'})
