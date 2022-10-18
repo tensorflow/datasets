@@ -23,11 +23,10 @@ Huggingface community datasets that are hosted on external repositories.
 Furthermore, this also enables creating datasets based on datasets in
 Huggingface.
 """
+from __future__ import annotations
 import datetime
 import io
 from typing import Any, Dict, Mapping, Optional, Union
-
-import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
@@ -38,6 +37,7 @@ from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _IMAGE_ENCODING_FORMAT = "png"
 

@@ -65,11 +65,17 @@ from tensorflow_datasets.core.splits import SubSplitInfo
 
 from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import gcs_path
+from tensorflow_datasets.core.utils import lazy_imports_utils
 from tensorflow_datasets.core.utils import tfds_path
 from tensorflow_datasets.core.utils import Version
 from tensorflow_datasets.core.utils.benchmark import BenchmarkResult
 from tensorflow_datasets.core.utils.file_utils import add_data_dir
 from tensorflow_datasets.core.utils.file_utils import as_path
+
+with lazy_imports_utils.lazy_imports():
+  import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import
+
+tensorflow = tf
 
 
 def benchmark(*args, **kwargs):
@@ -103,6 +109,7 @@ __all__ = [
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",
+    "tensorflow",
     "tfds_path",
     "Version",
 ]
