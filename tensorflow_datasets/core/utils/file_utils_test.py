@@ -30,16 +30,16 @@ def test_default_data_dir():
   assert isinstance(data_dir, str)
 
 
-def test_is_version_folder_of_dataset(mock_fs: testing.MockFs):
+def test_is_version_folder(mock_fs: testing.MockFs):
   folder_with_version = '/a/b/1.2.3'
   mock_fs.add_file(
       path=os.path.join(folder_with_version, 'features.json'), content='1')
-  assert file_utils.is_version_folder_of_dataset(folder_with_version)
+  assert file_utils.is_version_folder(folder_with_version)
 
   folder_without_version = '/c/d'
   mock_fs.add_file(
       path=os.path.join(folder_without_version, 'features.json'), content='1')
-  assert not file_utils.is_version_folder_of_dataset(folder_without_version)
+  assert not file_utils.is_version_folder(folder_without_version)
 
 
 def test_list_dataset_variants_with_configs(mock_fs: testing.MockFs):
@@ -128,6 +128,29 @@ def test_list_datasets_in_data_dir(mock_fs: testing.MockFs):
           data_dir=data_dir),
       naming.DatasetReference(
           dataset_name='ds2', version='1.0.0', data_dir=data_dir),
+  ]
+
+
+def test_list_datasets_in_data_dir_with_namespace(mock_fs: testing.MockFs):
+  data_dir = '/a'
+  namespace = 'ns'
+  mock_fs.add_file(
+      os.path.join(data_dir, 'ds1/config1/1.0.0/features.json'), content='x')
+
+  references = sorted(
+      file_utils.list_datasets_in_data_dir(
+          data_dir=epath.Path(data_dir),
+          namespace=namespace,
+          include_configs=True,
+          include_versions=True))
+  data_dir = epath.Path('/a')
+  assert references == [
+      naming.DatasetReference(
+          dataset_name='ds1',
+          namespace=namespace,
+          config='config1',
+          version='1.0.0',
+          data_dir=data_dir),
   ]
 
 if __name__ == '__main__':
