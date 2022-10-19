@@ -60,8 +60,6 @@ This dataset consists of the Imagenette dataset {size} variant.
 
     *   **`2.0.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
-
 *   **Splits**:
 
 Split          | Examples
@@ -102,6 +100,8 @@ label   | ClassLabel   |                 | tf.int64 |
 
 
 ## imagewang/full-size (default config)
+
+*   **Download size**: `2.70 GiB`
 
 *   **Dataset size**: `1.97 GiB`
 
@@ -153,6 +153,8 @@ dataButton.addEventListener('click', async () => {
 
 ## imagewang/320px
 
+*   **Download size**: `638.80 MiB`
+
 *   **Dataset size**: `460.81 MiB`
 
 *   **Auto-cached**
@@ -202,6 +204,8 @@ dataButton.addEventListener('click', async () => {
 <!-- mdformat on -->
 
 ## imagewang/160px
+
+*   **Download size**: `182.63 MiB`
 
 *   **Dataset size**: `140.40 MiB`
 

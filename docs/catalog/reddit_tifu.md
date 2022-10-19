@@ -12,6 +12,11 @@
 # `reddit_tifu`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Reddit dataset, where TIFU denotes the name of subbreddit /r/tifu. As defined in
@@ -35,9 +40,16 @@ num_comments: number of comments. - upvote_ratio: upvote ratio.
 
 *   **Versions**:
 
-    *   **`1.1.0`** (default): No release notes.
+    *   `1.1.0`: Remove empty document and summary strings.
+    *   **`1.1.1`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Add train, dev and test (80/10/10) splits which are used in PEGASUS
+        (https://arxiv.org/abs/1912.08777) in a separate config. These were
+        created randomly using the tfds split function and are being released to
+        ensure that results on Reddit Tifu Long are reproducible and
+        comparable.Also add `id` to the datapoints.
 
-*   **Download size**: `639.54 MiB`
+*   **Download size**: `Unknown size`
 
 *   **Dataset size**: `Unknown size`
 
@@ -45,11 +57,17 @@ num_comments: number of comments. - upvote_ratio: upvote ratio.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     Unknown
 
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
+
 *   **Feature structure**:
 
 ```python
 FeaturesDict({
     'documents': Text(shape=(), dtype=tf.string),
+    'id': Text(shape=(), dtype=tf.string),
     'num_comments': tf.float32,
     'score': tf.float32,
     'title': Text(shape=(), dtype=tf.string),
@@ -65,6 +83,7 @@ Feature      | Class        | Shape | Dtype      | Description
 :----------- | :----------- | :---- | :--------- | :----------
              | FeaturesDict |       |            |
 documents    | Text         |       | tf.string  |
+id           | Text         |       | tf.string  |
 num_comments | Tensor       |       | tf.float32 |
 score        | Tensor       |       | tf.float32 |
 title        | Text         |       | tf.string  |
@@ -75,6 +94,10 @@ upvote_ratio | Tensor       |       | tf.float32 |
 *   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -94,100 +117,23 @@ upvote_ratio | Tensor       |       | tf.float32 |
 
 *   **Config description**: Using title as summary.
 
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 79,740
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('documents', 'title')`
-
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
-
-<!-- mdformat off(HTML should not be auto-formatted) -->
-
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/reddit_tifu-short-1.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
 
 ## reddit_tifu/long
 
 *   **Config description**: Using TLDR as summary.
 
-*   **Splits**:
-
-Split     | Examples
-:-------- | -------:
-`'train'` | 42,139
-
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('documents', 'tldr')`
 
-*   **Examples**
-    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+## reddit_tifu/long_split <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 
-<!-- mdformat off(HTML should not be auto-formatted) -->
+*   **Config description**: Using TLDR as summary and return train/test/dev
+    splits.
 
-{% framebox %}
-
-<button id="displaydataframe">Display examples...</button>
-<div id="dataframecontent" style="overflow-x:auto"></div>
-<script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/reddit_tifu-long-1.1.0.html";
-const dataButton = document.getElementById('displaydataframe');
-dataButton.addEventListener('click', async () => {
-  // Disable the button after clicking (dataframe loaded only once).
-  dataButton.disabled = true;
-
-  const contentPane = document.getElementById('dataframecontent');
-  try {
-    const response = await fetch(url);
-    // Error response codes don't throw an error, so force an error to show
-    // the error message.
-    if (!response.ok) throw Error(response.statusText);
-
-    const data = await response.text();
-    contentPane.innerHTML = data;
-  } catch (e) {
-    contentPane.innerHTML =
-        'Error loading examples. If the error persist, please open '
-        + 'a new issue.';
-  }
-});
-</script>
-
-{% endframebox %}
-
-<!-- mdformat on -->
+*   **Supervised keys** (See
+    [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
+    `('documents', 'tldr')`

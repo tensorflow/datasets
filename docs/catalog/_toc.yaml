@@ -18,8 +18,6 @@ toc:
     title: dementiabank (manual)
   - path: /datasets/catalog/fuss
     title: fuss
-  - path: /datasets/catalog/groove
-    title: groove
   - path: /datasets/catalog/gtzan
     title: gtzan
   - path: /datasets/catalog/gtzan_music_speech
@@ -118,8 +116,6 @@ toc:
     title: lsun
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
-  - path: /datasets/catalog/pass
-    title: pass
   - path: /datasets/catalog/s3o4d
     title: s3o4d
   - path: /datasets/catalog/scene_parse150
