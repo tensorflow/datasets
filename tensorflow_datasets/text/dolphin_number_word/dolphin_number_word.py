@@ -15,6 +15,8 @@
 
 """dolphin number word dataset."""
 
+from __future__ import annotations
+
 import json
 
 import tensorflow as tf

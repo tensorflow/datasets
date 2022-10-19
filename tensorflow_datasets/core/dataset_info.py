@@ -30,6 +30,8 @@ processed the dataset as well:
  - etc.
 """
 
+from __future__ import annotations
+
 import abc
 import dataclasses
 import json
@@ -42,7 +44,6 @@ from absl import logging
 from etils import epath
 import six
 import tensorflow as tf
-
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming

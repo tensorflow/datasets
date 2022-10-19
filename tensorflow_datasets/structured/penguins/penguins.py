@@ -15,6 +15,8 @@
 
 """penguins dataset."""
 
+from __future__ import annotations
+
 import csv
 import dataclasses
 import textwrap

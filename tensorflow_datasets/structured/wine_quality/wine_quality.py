@@ -15,6 +15,8 @@
 
 """Wine quality dataset."""
 
+from __future__ import annotations
+
 import csv
 
 from etils import epath

@@ -15,6 +15,8 @@
 
 """Access registered datasets."""
 
+from __future__ import annotations
+
 import dataclasses
 import difflib
 import json
@@ -23,7 +25,7 @@ import posixpath
 import re
 import textwrap
 import typing
-from typing import Any, Callable, Dict, Iterable, Iterator, Mapping, List, Optional, Type, Union
+from typing import Any, Callable, Dict, Iterable, Iterator, List, Mapping, Optional, Type, Union
 
 from absl import logging
 import tensorflow as tf

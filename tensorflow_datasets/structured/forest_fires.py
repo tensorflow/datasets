@@ -15,6 +15,8 @@
 
 """Forest fires dataset."""
 
+from __future__ import annotations
+
 import collections
 import csv
 

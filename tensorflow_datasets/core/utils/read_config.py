@@ -15,6 +15,8 @@
 
 """This module contains the reader config."""
 
+from __future__ import annotations
+
 import dataclasses
 import enum
 from typing import Callable, Optional, Sequence, Union

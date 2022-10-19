@@ -15,6 +15,8 @@
 
 """Scalar feature, e.g. tf.int32."""
 
+from __future__ import annotations
+
 import tensorflow as tf
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature

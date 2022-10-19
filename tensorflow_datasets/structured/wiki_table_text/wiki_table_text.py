@@ -15,6 +15,8 @@
 
 """wiki_table_text dataset."""
 
+from __future__ import annotations
+
 from etils import epath
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds

@@ -15,6 +15,8 @@
 
 """A Conversational Question Answering Challenge."""
 
+from __future__ import annotations
+
 import json
 
 import tensorflow as tf

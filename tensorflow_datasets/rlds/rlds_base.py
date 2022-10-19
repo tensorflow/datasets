@@ -15,6 +15,8 @@
 
 """Base class for building a TFDS dataset from RLDS data."""
 
+from __future__ import annotations
+
 import dataclasses
 import os
 from typing import Any, Dict, Generator, List, Optional, Tuple, Union

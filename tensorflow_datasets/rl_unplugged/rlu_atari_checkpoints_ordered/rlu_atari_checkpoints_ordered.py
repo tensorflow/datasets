@@ -15,6 +15,8 @@
 
 """rlu_atari_checkpoints_ordered dataset."""
 
+from __future__ import annotations
+
 from typing import Any, Dict
 
 import tensorflow as tf

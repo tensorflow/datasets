@@ -14,6 +14,8 @@
 # limitations under the License.
 
 """Grounded Scan dataset."""
+from __future__ import annotations
+
 import json
 import os
 from typing import List

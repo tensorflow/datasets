@@ -15,6 +15,8 @@
 
 """TriviaQA: A Reading Comprehension Dataset."""
 
+from __future__ import annotations
+
 import json
 import os
 

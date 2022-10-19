@@ -15,7 +15,10 @@
 
 """Translation feature that supports multiple languages."""
 
+from __future__ import annotations
+
 from typing import Union
+
 import six
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
@@ -23,6 +26,7 @@ from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
+
 try:
   # This fallback applies for all versions of Python before 3.3
   import collections.abc as collections_abc  # pylint:disable=g-import-not-at-top  # pytype: disable=module-attr

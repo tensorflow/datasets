@@ -18,6 +18,8 @@
 https://storage.googleapis.com/openimages/web/index.html
 """
 
+from __future__ import annotations
+
 import collections
 import csv
 import functools

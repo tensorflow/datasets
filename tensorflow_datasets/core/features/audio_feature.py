@@ -15,6 +15,8 @@
 
 """Audio feature."""
 
+from __future__ import annotations
+
 import os
 from typing import Optional, Union
 import wave
@@ -22,7 +24,6 @@ import wave
 from etils import epath
 import numpy as np
 import tensorflow as tf
-
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib

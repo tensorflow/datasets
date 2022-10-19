@@ -18,6 +18,8 @@
 https://storage.googleapis.com/openimages/web/challenge2019.html
 """
 
+from __future__ import annotations
+
 import abc
 
 import tensorflow as tf

@@ -15,6 +15,8 @@
 
 """Compatibility layer of Hugging Face datasets library."""
 
+from __future__ import annotations
+
 import builtins
 import contextlib
 import functools

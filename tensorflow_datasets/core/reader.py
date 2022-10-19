@@ -15,6 +15,8 @@
 
 """Defined Reader and ReadInstruction to read tfrecord files."""
 
+from __future__ import annotations
+
 import functools
 import os
 from typing import Any, Callable, List, NamedTuple, Optional, Sequence

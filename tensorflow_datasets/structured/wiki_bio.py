@@ -14,6 +14,8 @@
 # limitations under the License.
 
 """wiki_bio dataset."""
+from __future__ import annotations
+
 import os
 
 import tensorflow as tf

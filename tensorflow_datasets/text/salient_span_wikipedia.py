@@ -14,6 +14,8 @@
 # limitations under the License.
 
 r"""Wikipedia sentences with labeled salient spans."""
+from __future__ import annotations
+
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds

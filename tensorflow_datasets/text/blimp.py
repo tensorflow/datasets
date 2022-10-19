@@ -15,6 +15,8 @@
 
 """BLiMP dataset with minimal pairs of grammatical phenomena in English."""
 
+from __future__ import annotations
+
 import json
 
 import tensorflow as tf

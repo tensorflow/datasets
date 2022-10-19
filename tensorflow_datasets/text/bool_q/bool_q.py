@@ -15,6 +15,8 @@
 
 """BoolQ Dataset."""
 
+from __future__ import annotations
+
 import json
 
 from etils import epath

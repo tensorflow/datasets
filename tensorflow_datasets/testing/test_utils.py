@@ -15,6 +15,8 @@
 
 """Test utilities."""
 
+from __future__ import annotations
+
 import contextlib
 import dataclasses
 import functools
@@ -29,7 +31,6 @@ from etils import epath
 from etils import epy
 import numpy as np
 import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import dataset_info

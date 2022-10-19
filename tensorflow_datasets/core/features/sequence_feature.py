@@ -15,11 +15,12 @@
 
 """Sequence feature."""
 
+from __future__ import annotations
+
 from typing import List, Optional, Union
 
 import numpy as np
 import tensorflow as tf
-
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict

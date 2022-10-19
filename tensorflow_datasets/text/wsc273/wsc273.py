@@ -15,6 +15,8 @@
 
 """WSC273 Dataset."""
 
+from __future__ import annotations
+
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 

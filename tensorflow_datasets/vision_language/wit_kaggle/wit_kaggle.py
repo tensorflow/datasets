@@ -14,6 +14,8 @@
 # limitations under the License.
 
 """Wikipedia-based Image Text (WIT) Dataset for the Kaggle competition."""
+from __future__ import annotations
+
 import base64
 import csv
 import functools
@@ -24,7 +26,6 @@ from typing import List, Optional
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
 
 _DESCRIPTION = """
 Wikipedia - Image/Caption Matching Kaggle Competition.

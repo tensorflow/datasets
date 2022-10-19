@@ -14,6 +14,8 @@
 # limitations under the License.
 
 """Shared utilities for QA datasets."""
+from __future__ import annotations
+
 import json
 
 from absl import logging

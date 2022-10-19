@@ -15,6 +15,8 @@
 
 """Demographic data from Kalahari !Kung San."""
 
+from __future__ import annotations
+
 import csv
 
 import tensorflow as tf

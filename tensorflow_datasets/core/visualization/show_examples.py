@@ -15,6 +15,8 @@
 
 """Show example util."""
 
+from __future__ import annotations
+
 from typing import Any
 
 import tensorflow as tf

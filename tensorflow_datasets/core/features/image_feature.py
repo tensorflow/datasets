@@ -15,6 +15,8 @@
 
 """Image feature."""
 
+from __future__ import annotations
+
 import dataclasses
 import os
 import tempfile
@@ -23,7 +25,6 @@ from typing import Any, List, Optional, Union
 from etils import epath
 import numpy as np
 import tensorflow as tf
-
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2

@@ -15,7 +15,10 @@
 
 """AccentDB dataset."""
 
+from __future__ import annotations
+
 import os
+
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 

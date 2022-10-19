@@ -15,6 +15,8 @@
 
 """CivilComments from Jigsaw Unintended Bias Kaggle Competition."""
 
+from __future__ import annotations
+
 import ast
 import csv
 import os

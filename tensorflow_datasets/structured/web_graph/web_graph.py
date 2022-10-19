@@ -15,6 +15,8 @@
 
 """web_graph dataset."""
 
+from __future__ import annotations
+
 import dataclasses
 import os
 import textwrap

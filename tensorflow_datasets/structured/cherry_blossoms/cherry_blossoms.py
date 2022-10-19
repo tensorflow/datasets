@@ -15,6 +15,8 @@
 
 """Historical phenological data for cherry tree flowering at Kyoto City."""
 
+from __future__ import annotations
+
 import csv
 
 import tensorflow as tf

@@ -15,15 +15,16 @@
 
 """To serialize Dict or sequence to Example."""
 
+from __future__ import annotations
+
 import abc
 import collections
 import dataclasses
 from typing import Any, Mapping
+
 import numpy as np
 import six
-
 import tensorflow as tf
-
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 

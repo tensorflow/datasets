@@ -15,6 +15,8 @@
 
 """TAO dataset."""
 
+from __future__ import annotations
+
 import collections
 import json
 import os

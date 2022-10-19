@@ -15,9 +15,11 @@
 
 """SCV dataset from http://arxiv.org/abs/1812.01717 ."""
 
-import os
-import tensorflow as tf
+from __future__ import annotations
 
+import os
+
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 DATA_URL_DIR = "https://storage.googleapis.com/scv_dataset/data/"

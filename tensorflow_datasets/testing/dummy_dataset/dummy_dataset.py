@@ -15,6 +15,8 @@
 
 """Dummy dataset self-contained in a directory."""
 
+from __future__ import annotations
+
 import os
 
 from etils import epath

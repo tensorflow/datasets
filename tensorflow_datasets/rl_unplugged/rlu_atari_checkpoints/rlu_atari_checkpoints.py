@@ -15,6 +15,8 @@
 
 """RLU Atari datasets."""
 
+from __future__ import annotations
+
 from typing import Any, Dict
 
 import tensorflow as tf
