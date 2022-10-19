@@ -15,6 +15,8 @@
 
 """Summarizing abstract from covid19 publications."""
 
+from __future__ import annotations
+
 import json
 import os
 from typing import Any, Dict, Iterator, List, Optional, Text, Tuple

@@ -15,9 +15,12 @@
 
 """DementiaBank dataset."""
 
+from __future__ import annotations
+
 import collections
 import os
 import textwrap
+
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds

@@ -15,12 +15,13 @@
 
 """Utilities for dealing with tf.data.Dataset."""
 
+from __future__ import annotations
+
 import collections.abc
 import functools
 from typing import Any, Callable, Iterable, Iterator, Union
 
 import numpy as np
-
 import tensorflow as tf
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import tf_compat

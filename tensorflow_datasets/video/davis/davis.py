@@ -15,6 +15,8 @@
 
 """DAVIS 2017 dataset for video object segmentation."""
 
+from __future__ import annotations
+
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds

@@ -15,6 +15,8 @@
 
 """MS Coco Dataset."""
 
+from __future__ import annotations
+
 import collections
 import json
 import os

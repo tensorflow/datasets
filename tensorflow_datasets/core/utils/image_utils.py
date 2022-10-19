@@ -17,13 +17,13 @@
 
 Note: these functions are not meant to be used inside of a TF graph.
 """
-import csv
+from __future__ import annotations
 
+import csv
 import subprocess
 from typing import Any, List, Optional
 
 import numpy as np
-
 import tensorflow as tf
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils

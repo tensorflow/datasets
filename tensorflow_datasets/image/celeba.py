@@ -21,6 +21,8 @@ Deep Learning Face Attributes in the Wild
 Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang
 """
 
+from __future__ import annotations
+
 import os
 
 from etils import epath

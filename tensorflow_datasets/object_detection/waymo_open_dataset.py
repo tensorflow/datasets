@@ -15,7 +15,10 @@
 
 """The Waymo Open Dataset. See waymo.com/open."""
 
+from __future__ import annotations
+
 import os
+
 from absl import logging
 import tensorflow as tf
 from tensorflow_datasets.proto import waymo_dataset_pb2 as open_dataset

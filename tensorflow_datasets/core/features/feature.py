@@ -15,6 +15,8 @@
 
 """Feature connector."""
 
+from __future__ import annotations
+
 import abc
 import collections
 import dataclasses
@@ -29,7 +31,6 @@ from etils import epath
 import numpy as np
 import six
 import tensorflow as tf
-
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2

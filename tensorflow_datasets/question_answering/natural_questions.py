@@ -17,8 +17,8 @@
 import json
 import os
 import re
-
 from typing import Optional
+
 import six
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds

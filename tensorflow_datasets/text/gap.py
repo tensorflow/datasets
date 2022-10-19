@@ -15,6 +15,8 @@
 
 """GAP is a gender-balanced text data set."""
 
+from __future__ import annotations
+
 import csv
 
 from etils import epath

@@ -15,6 +15,8 @@
 
 """To deserialize bytes (Example) to tf.Example."""
 
+from __future__ import annotations
+
 import tensorflow as tf
 from tensorflow_datasets.core import utils
 

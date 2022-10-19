@@ -15,6 +15,8 @@
 
 """Natural Questions Open: A Benchmark for Open Domain Question Answering."""
 
+from __future__ import annotations
+
 import json
 
 from etils import epath

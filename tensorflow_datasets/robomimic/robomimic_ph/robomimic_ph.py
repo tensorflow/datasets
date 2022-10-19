@@ -15,6 +15,8 @@
 
 """robomimic_ph dataset."""
 
+from __future__ import annotations
+
 import dataclasses
 
 import h5py

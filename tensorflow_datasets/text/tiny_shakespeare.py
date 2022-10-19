@@ -15,6 +15,8 @@
 
 """Tiny Shakespeare dataset."""
 
+from __future__ import annotations
+
 import os
 
 import tensorflow as tf

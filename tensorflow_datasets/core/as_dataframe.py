@@ -15,12 +15,13 @@
 
 """As dataframe util."""
 
+from __future__ import annotations
+
 import dataclasses
 import typing
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import numpy as np
-
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils

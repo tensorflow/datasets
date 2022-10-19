@@ -15,6 +15,8 @@
 
 """ProteinNet dataset."""
 
+from __future__ import annotations
+
 import os
 from typing import Dict, Iterator, List, Optional, Sequence, Tuple, Union
 import urllib

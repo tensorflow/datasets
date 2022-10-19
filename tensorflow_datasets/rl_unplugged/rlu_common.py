@@ -15,9 +15,11 @@
 
 """Module including definitions for all RLU datasets."""
 
-import os
+from __future__ import annotations
 
+import os
 from typing import Any, Dict, Generator, List, Tuple
+
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 

@@ -15,6 +15,8 @@
 
 """rlu_control_suite dataset."""
 
+from __future__ import annotations
+
 import dataclasses
 from typing import Any, Dict, Optional
 

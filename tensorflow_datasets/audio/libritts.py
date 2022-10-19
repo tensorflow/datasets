@@ -15,13 +15,14 @@
 
 """LibriTTS dataset."""
 
+from __future__ import annotations
+
 import io
 import os
 import tarfile
 
 import six
 import tensorflow as tf
-
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\

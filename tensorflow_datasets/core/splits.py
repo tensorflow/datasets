@@ -15,6 +15,8 @@
 
 """Splits related API."""
 
+from __future__ import annotations
+
 import abc
 import dataclasses
 import functools

@@ -15,12 +15,13 @@
 
 """Base visualizer class."""
 
+from __future__ import annotations
+
 import abc
 from typing import Any
 
 import six
 import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_info
 
 

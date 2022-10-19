@@ -14,6 +14,8 @@
 # limitations under the License.
 
 """efron_morris_75 dataset."""
+from __future__ import annotations
+
 import csv
 
 import tensorflow as tf

@@ -15,6 +15,8 @@
 
 """BigEarthNet remote sensing dataset of Sentinel-2 image patches."""
 
+from __future__ import annotations
+
 import io
 import json
 import os

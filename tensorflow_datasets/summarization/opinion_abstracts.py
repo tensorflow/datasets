@@ -15,6 +15,8 @@
 
 """Opinion Abstracts Dataset."""
 
+from __future__ import annotations
+
 import json
 import os
 from typing import Any, Dict, Iterator, List, Optional, Text, Tuple

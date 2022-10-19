@@ -15,6 +15,8 @@
 
 """Wikipedia-based Image Text (WIT) Dataset."""
 
+from __future__ import annotations
+
 import csv
 import os
 import sys

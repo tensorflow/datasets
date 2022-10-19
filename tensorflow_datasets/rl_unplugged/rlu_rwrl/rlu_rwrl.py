@@ -15,6 +15,8 @@
 
 """rlu_rwrl dataset."""
 
+from __future__ import annotations
+
 import collections
 import dataclasses
 import functools

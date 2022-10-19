@@ -15,6 +15,8 @@
 
 """Builder and Buidler Configs for D4RL Datasets."""
 
+from __future__ import annotations
+
 import dataclasses
 from typing import Any, Dict, FrozenSet, Optional
 

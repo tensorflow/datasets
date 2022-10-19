@@ -15,10 +15,11 @@
 
 """Graph visualizer."""
 
-from typing import Callable, Any, Optional, Dict, Union
+from __future__ import annotations
+
+from typing import Any, Callable, Dict, Optional, Union
 
 import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.visualization import visualizer

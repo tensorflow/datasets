@@ -15,6 +15,8 @@
 
 """simPTE dataset."""
 
+from __future__ import annotations
+
 import csv
 
 import tensorflow as tf

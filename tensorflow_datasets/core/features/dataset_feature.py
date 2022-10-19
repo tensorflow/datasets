@@ -14,11 +14,12 @@
 # limitations under the License.
 
 """Dataset feature for nested datasets."""
+from __future__ import annotations
+
 import functools
 from typing import Any, Dict, Iterator, Union
 
 import tensorflow as tf
-
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.utils import py_utils

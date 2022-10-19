@@ -15,6 +15,8 @@
 
 """COCO 2014 dataset with caption annotations and splits from Karpathy and Li."""
 
+from __future__ import annotations
+
 import collections
 import json
 import os

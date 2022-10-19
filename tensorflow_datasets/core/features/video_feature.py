@@ -15,9 +15,11 @@
 
 """Video feature."""
 
+from __future__ import annotations
+
 import os
 import tempfile
-from typing import Sequence, Optional, Union
+from typing import Optional, Sequence, Union
 
 from etils import epath
 import numpy as np

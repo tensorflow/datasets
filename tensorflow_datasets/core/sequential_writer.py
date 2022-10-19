@@ -15,6 +15,8 @@
 
 """Writer to sequentially write examples to disk."""
 
+from __future__ import annotations
+
 import dataclasses
 import os
 from typing import Any, Dict, List, Optional

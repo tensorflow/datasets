@@ -15,6 +15,8 @@
 
 """robosuite_panda_pick_place_can dataset."""
 
+from __future__ import annotations
+
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds

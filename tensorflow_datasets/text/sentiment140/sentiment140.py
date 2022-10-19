@@ -15,6 +15,8 @@
 
 """Sentiment 140 Dataset."""
 
+from __future__ import annotations
+
 import codecs
 import csv
 import os

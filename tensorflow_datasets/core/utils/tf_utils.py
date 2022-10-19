@@ -15,6 +15,8 @@
 
 """TensorFlow utils."""
 
+from __future__ import annotations
+
 import collections
 import contextlib
 from typing import Any, Union

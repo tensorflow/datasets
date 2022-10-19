@@ -15,11 +15,12 @@
 
 """FeatureDict: Main feature connector container."""
 
+from __future__ import annotations
+
 import concurrent.futures
 from typing import Dict, List, Union
 
 import tensorflow as tf
-
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
