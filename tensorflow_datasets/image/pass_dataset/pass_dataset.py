@@ -17,12 +17,8 @@
 
 DEPRECATED!
 If you want to use the PASS Dataset class, use:
-tfds.builder('pass')
+tfds.builder_cls('pass')
 """
+from tensorflow_datasets.core import lazy_builder_import
 
-# We cannot do a regular import here, as the module is named "pass", this is all
-# right though, as this module willyou eventually go away.
-import importlib
-
-PASS = (importlib.import_module(
-    'tensorflow_datasets.datasets.pass.pass_dataset_builder')).Builder
+PASS = lazy_builder_import.LazyBuilderImport('pass')
