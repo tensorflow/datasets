@@ -22,6 +22,7 @@ This logic is shared between:
 """
 
 import dataclasses
+import math
 from typing import Any, List, Sequence
 
 
@@ -43,6 +44,39 @@ class FileInstruction(object):
 
   def replace(self, **kwargs: Any) -> 'FileInstruction':
     return dataclasses.replace(self, **kwargs)
+
+
+def split_file_instruction(
+    file_instruction: FileInstruction,
+    num_splits: int,
+) -> List[FileInstruction]:
+  """Instructions for reading the given file instruction in several splits.
+
+  Note that this function may return fewer splits than `num_splits` in case the
+  number of examples cannot be split into that many. For example, if
+  `file_instruction` has `num_examples=1` and `num_splits=2`, then only a single
+  file instruction is returned.
+
+  Arguments:
+    file_instruction: the file instruction that should be split into multiple
+      file instructions.
+    num_splits: the number of splits the file instruction should be split into.
+
+  Returns:
+    list of file instructions into which it is split.
+  """
+  if file_instruction.take != -1:
+    raise ValueError('Only file instructions that read all rows are supported!')
+  examples_per_split = math.ceil(file_instruction.num_examples / num_splits)
+  splits = []
+  index = file_instruction.skip
+  while index < file_instruction.num_examples:
+    # If there are fewer examples left in the file than `examples_per_split`,
+    # then only take what's left.
+    take = min(examples_per_split, file_instruction.num_examples - index)
+    splits.append(file_instruction.replace(skip=index, take=take))
+    index += take
+  return splits
 
 
 def get_file_instructions(
