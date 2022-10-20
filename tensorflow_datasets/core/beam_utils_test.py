@@ -17,6 +17,7 @@
 
 import os
 import pathlib
+from typing import Optional
 
 import pytest
 from tensorflow_datasets.core import beam_utils
@@ -24,15 +25,18 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_utils
 
 
-@pytest.mark.parametrize('split, expected_result', [
-    ('train', "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
-    ('train[:2]', "{'id': 0}\n{'id': 1}\n"),
-    ('train[1:]', "{'id': 1}\n{'id': 2}\n"),
+@pytest.mark.parametrize('split, workers_per_shard, expected_result', [
+    ('train', 1, "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
+    ('train', 2, "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
+    ('train', 100, "{'id': 0}\n{'id': 1}\n{'id': 2}\n"),
+    ('train[:2]', 1, "{'id': 0}\n{'id': 1}\n"),
+    ('train[1:]', 1, "{'id': 1}\n{'id': 2}\n"),
 ])
 def test_read_from_tfds(
     dummy_dataset: dataset_builder.DatasetBuilder,
     tmp_path: pathlib.Path,
     split: str,
+    workers_per_shard: Optional[int],
     expected_result: str,
 ):
   import apache_beam as beam  # pylint: disable=g-import-not-at-top
@@ -40,7 +44,8 @@ def test_read_from_tfds(
   with beam.Pipeline() as pipeline:
     _ = (
         pipeline
-        | beam_utils.ReadFromTFDS(dummy_dataset, split=split)
+        | beam_utils.ReadFromTFDS(
+            dummy_dataset, split=split, workers_per_shard=workers_per_shard)
         | beam.Map(dataset_utils.as_numpy)
         | beam.io.WriteToText(os.fspath(tmp_path / 'out.txt')))
 

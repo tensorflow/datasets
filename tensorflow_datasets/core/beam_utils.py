@@ -34,6 +34,7 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
     pipeline,
     builder: dataset_builder.DatasetBuilder,
     split: str,
+    workers_per_shard: int = 1,
     **as_dataset_kwargs: Any,
 ):
   """Creates a beam pipeline yielding TFDS examples.
@@ -64,6 +65,10 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
     pipeline: beam pipeline (automatically set)
     builder: Dataset builder to load
     split: Split name to load (e.g. `train+test`, `train`)
+    workers_per_shard: number of workers that should read a shard in parallel.
+      The shard will be split in this many parts. Note that workers cannot skip
+      to a specific row in a tfrecord file, so they need to read the file up
+      until that point without using that data.
     **as_dataset_kwargs: Arguments forwarded to `builder.as_dataset`.
 
   Returns:
@@ -102,6 +107,13 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
     return ds
 
   file_instructions = builder.info.splits[split].file_instructions
+  if workers_per_shard > 1:
+    expanded_file_instructions = []
+    for file_instruction in file_instructions:
+      expanded_file_instructions.extend(
+          shard_utils.split_file_instruction(
+              file_instruction=file_instruction, num_splits=workers_per_shard))
+    file_instructions = expanded_file_instructions
   return pipeline | beam.Create(file_instructions) | beam.FlatMap(load_shard)
 
 

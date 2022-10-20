@@ -69,6 +69,33 @@ class GetReadInstructionsTest(testing.TestCase):
                                             [0, 3, 0, 2])
     self.assertEqual(res, [])
 
+  def test_split_file_instruction(self):
+    filename = 'data.tfrecord'
+    file_instruction = shard_utils.FileInstruction(
+        filename=filename, skip=0, take=-1, num_examples=10)
+    actual_splits = shard_utils.split_file_instruction(
+        file_instruction=file_instruction, num_splits=3)
+    self.assertEqual(actual_splits, [
+        shard_utils.FileInstruction(
+            filename=filename, skip=0, take=4, num_examples=10),
+        shard_utils.FileInstruction(
+            filename=filename, skip=4, take=4, num_examples=10),
+        shard_utils.FileInstruction(
+            filename=filename, skip=8, take=2, num_examples=10)
+    ])
+
+  def test_split_file_instruction_one_example_many_splits(self):
+    # Test when more splits are requested than there are examples.
+    filename = 'data.tfrecord'
+    file_instruction = shard_utils.FileInstruction(
+        filename=filename, skip=0, take=-1, num_examples=1)
+    actual_splits = shard_utils.split_file_instruction(
+        file_instruction=file_instruction, num_splits=9999)
+    self.assertEqual(actual_splits, [
+        shard_utils.FileInstruction(
+            filename=filename, skip=0, take=1, num_examples=1),
+    ])
+
 
 if __name__ == '__main__':
   testing.test_main()
