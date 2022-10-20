@@ -1,0 +1,58 @@
+{
+  "citation": "@misc{kim2018abstractive,\n    title={Abstractive Summarization of Reddit Posts with Multi-level Memory Networks},\n    author={Byeongchang Kim and Hyunwoo Kim and Gunhee Kim},\n    year={2018},\n    eprint={1811.00783},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+  "configDescription": "Using TLDR as summary and return train/test/dev splits.",
+  "configName": "long_split",
+  "description": "Reddit dataset, where TIFU denotes the name of subbreddit /r/tifu.\nAs defined in the publication, styel \"short\" uses title as summary and\n\"long\" uses tldr as summary.\n\nFeatures includes:\n  - document: post text without tldr.\n  - tldr: tldr line.\n  - title: trimmed title without tldr.\n  - ups: upvotes.\n  - score: score.\n  - num_comments: number of comments.\n  - upvote_ratio: upvote ratio.",
+  "downloadSize": "671029283",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/ctr4si/MMN"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.summarization.reddit_tifu",
+  "name": "reddit_tifu",
+  "releaseNotes": {
+    "1.1.0": "Remove empty document and summary strings.",
+    "1.1.1": "Add train, dev and test (80/10/10) splits which are used in PEGASUS (https://arxiv.org/abs/1912.08777) in a separate config. These were created randomly using the tfds split function and are being released to ensure that results on Reddit Tifu Long are reproducible and comparable.Also add `id` to the datapoints."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "95728654",
+      "shardLengths": [
+        "41296"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "917519",
+      "shardLengths": [
+        "421"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "976029",
+      "shardLengths": [
+        "422"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "documents"
+        },
+        {
+          "featureKey": "tldr"
+        }
+      ]
+    }
+  },
+  "version": "1.1.1"
+}

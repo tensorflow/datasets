@@ -782,11 +782,6 @@ gpt3/two_digit_addition/1.0.0
 gpt3/two_digit_multiplication/1.0.0
 gpt3/two_digit_subtraction/1.0.0
 gref/1.0.0
-groove/2bar-16000hz/2.0.1
-groove/2bar-midionly/2.0.1
-groove/4bar-midionly/2.0.1
-groove/full-16000hz/2.0.1
-groove/full-midionly/2.0.1
 grounded_scan/compositional_splits/2.0.0
 grounded_scan/spatial_relation_splits/2.0.0
 grounded_scan/target_length_split/2.0.0
@@ -1283,7 +1278,6 @@ para_crawl/enro/1.2.0
 para_crawl/ensk/1.2.0
 para_crawl/ensl/1.2.0
 para_crawl/ensv/1.2.0
-pass/3.0.0
 patch_camelyon/2.0.0
 paws_wiki/labeled_final_raw/1.1.0
 paws_wiki/labeled_final_tokenized/1.1.0
@@ -1343,6 +1337,9 @@ race/high/2.0.0
 race/middle/2.0.0
 radon/1.0.0
 reddit/1.0.0
+reddit_tifu/long/1.1.1
+reddit_tifu/long_split/1.1.1
+reddit_tifu/short/1.1.1
 ref_coco/refcoco_google/1.0.0
 ref_coco/refcoco_unc/1.0.0
 ref_coco/refcocog_google/1.0.0
