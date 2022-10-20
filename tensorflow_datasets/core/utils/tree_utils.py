@@ -19,9 +19,9 @@ import concurrent.futures
 import functools
 from typing import Callable, TypeVar
 
-import tensorflow as tf
 from tensorflow_datasets.core.utils import tqdm_utils as tqdm
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Tree = type_utils.Tree
 _Tin = TypeVar('_Tin')

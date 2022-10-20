@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import json
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DS_PATH = 'https://www.microsoft.com/en-us/research/uploads/prod/2016/02//dolphin-number_word_std.zip'

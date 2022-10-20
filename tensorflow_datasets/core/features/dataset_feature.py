@@ -19,11 +19,11 @@ from __future__ import annotations
 import functools
 from typing import Any, Dict, Iterator, Union
 
-import tensorflow as tf
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 class Dataset(sequence_feature.Sequence):

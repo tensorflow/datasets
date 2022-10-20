@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import tensorflow as tf
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 class ExampleParser(object):

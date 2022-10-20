@@ -22,11 +22,10 @@ from typing import Iterator, Optional
 import uuid
 
 import six
-import tensorflow as tf
-
 from tensorflow_datasets.core import hashing
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Approximately how much data to store in memory before writing to disk.
 # If the amount of data to shuffle is < MAX_MEM_BUFFER_SIZE, no intermediary

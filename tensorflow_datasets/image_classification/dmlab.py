@@ -21,7 +21,7 @@ import io
 import os
 
 from absl import logging
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = "https://storage.googleapis.com/dmlab-vtab/dmlab.tar.gz"

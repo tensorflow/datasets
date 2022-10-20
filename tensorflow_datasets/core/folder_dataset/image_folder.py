@@ -22,7 +22,6 @@ import os
 import random
 from typing import Dict, List, NoReturn, Optional, Tuple
 
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import decode
@@ -30,6 +29,7 @@ from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import splits as split_lib
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _SUPPORTED_IMAGE_FORMAT = ('.jpg', '.jpeg', '.png')
 

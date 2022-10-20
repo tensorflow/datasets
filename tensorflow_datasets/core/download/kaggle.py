@@ -23,11 +23,10 @@ import zipfile
 
 from absl import logging
 from etils import epath
-import tensorflow as tf
-
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 def _get_kaggle_type(competition_or_dataset: str) -> str:

@@ -25,9 +25,9 @@ import os
 import textwrap
 from typing import Any, Dict, List, Mapping, Optional, Tuple, Union
 
-import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Dict of `full_names_dict['dataset']['config']['version']`
 FullNamesDict = Dict[str, Dict[str, Dict[str, Any]]]

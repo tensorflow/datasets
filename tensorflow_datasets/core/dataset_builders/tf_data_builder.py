@@ -29,6 +29,7 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 if typing.TYPE_CHECKING:
   import tensorflow as tf
@@ -45,7 +46,7 @@ class TfDataBuilder(
   TFDS dataset, then you can do so as follows:
 
   ```
-  import tensorflow as tf
+  from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
   import tensorflow_datasets.public_api as tfds
 
   my_ds_train = tf.data.Dataset.from_tensor_slices({"number": [1, 2, 3]})
@@ -105,7 +106,7 @@ class TfDataBuilder(
   You can also define a new DatasetBuilder based on this class.
 
   ```
-  import tensorflow as tf
+  from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
   import tensorflow_datasets.public_api as tfds
 
   class MyDatasetBuilder(tfds.dataset_builders.TfDataBuilder):

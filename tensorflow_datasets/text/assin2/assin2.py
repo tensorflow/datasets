@@ -16,7 +16,7 @@
 """assin2 dataset."""
 
 from etils import epath
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text.assin2.assin2_utils import parse_xml_string
 

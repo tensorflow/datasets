@@ -21,8 +21,8 @@ import abc
 from typing import Any
 
 import six
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 def extract_keys(feature_dict, feature_cls):

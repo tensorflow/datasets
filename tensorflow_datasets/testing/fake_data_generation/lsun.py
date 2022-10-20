@@ -31,7 +31,7 @@ python lsun.py --input_files=test_data/lsun_examples/1.webp,
 from absl import app
 from absl import flags
 import lmdb  # pytype: disable=import-error
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 FLAGS = flags.FLAGS
 

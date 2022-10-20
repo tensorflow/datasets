@@ -16,7 +16,8 @@
 """Oxford 102 Category Flower Dataset."""
 
 import os
-import tensorflow as tf
+
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/"

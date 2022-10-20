@@ -30,12 +30,11 @@ import zipfile
 from absl import logging
 from etils import epath
 import promise
-import tensorflow as tf
-
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.utils import file_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 @utils.memoize()

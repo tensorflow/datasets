@@ -36,9 +36,9 @@ import uuid
 from absl import logging as absl_logging
 from etils import epath
 from six.moves import urllib
-import tensorflow as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Tree = type_utils.Tree
 

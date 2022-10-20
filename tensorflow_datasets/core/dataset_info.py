@@ -43,7 +43,6 @@ from typing import Any, Dict, Optional, Tuple, Union
 from absl import logging
 from etils import epath
 import six
-import tensorflow as tf
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
@@ -53,6 +52,7 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 from google.protobuf import json_format
 

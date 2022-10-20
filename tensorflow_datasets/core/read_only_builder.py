@@ -20,7 +20,6 @@ import typing
 from typing import Any, List, Optional, Tuple, Type
 
 from etils import epath
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import logging as tfds_logging
@@ -33,6 +32,7 @@ from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import version as version_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 class ReadOnlyBuilder(

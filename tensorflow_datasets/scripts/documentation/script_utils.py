@@ -25,9 +25,8 @@ from typing import Any, Callable, List, Optional, TypeVar
 
 from absl import app
 from absl import logging
-
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # pylint: disable=logging-format-interpolation,logging-not-lazy,logging-fstring-interpolation
 

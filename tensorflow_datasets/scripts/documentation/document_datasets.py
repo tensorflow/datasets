@@ -25,9 +25,9 @@ import functools
 from typing import Any, Dict, Iterator, List, Optional, Text, Type
 
 from absl import logging
-import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core import config_based_builder
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.scripts.documentation import collection_markdown_builder
 from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
 from tensorflow_datasets.scripts.documentation import doc_utils

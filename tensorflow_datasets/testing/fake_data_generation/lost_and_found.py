@@ -14,8 +14,7 @@
 # limitations under the License.
 
 """Script to generate fake 'Lost and Found' data."""
-import tensorflow as tf
-
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.testing.cityscapes as cityscapes
 
 if __name__ == '__main__':

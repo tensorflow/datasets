@@ -23,7 +23,7 @@ import json
 import re
 
 import six
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 def _re_compile(pattern):

@@ -23,9 +23,8 @@ import collections
 
 from absl import logging
 import six
-import tensorflow as tf
-
 from tensorflow_datasets.core.deprecated.text import text_encoder
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Internally, an underscore indicates a single space, so, to ensure
 # user-supplied underscores are encoded properly, they are replaced with this

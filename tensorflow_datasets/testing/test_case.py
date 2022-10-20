@@ -22,8 +22,8 @@ from unittest import mock
 
 from absl import logging
 import six
-import tensorflow as tf
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import setup_teardown
 
 GCS_ACCESS_FNS = {

@@ -19,11 +19,11 @@ from __future__ import annotations
 
 from typing import Any
 
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.core.visualization import graph_visualizer
 from tensorflow_datasets.core.visualization import image_visualizer
 

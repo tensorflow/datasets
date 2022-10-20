@@ -22,12 +22,11 @@ from typing import Any, Optional, Type
 
 import dill
 import numpy as np
-import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_case
 from tensorflow_datasets.testing import test_utils
 

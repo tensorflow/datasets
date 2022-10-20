@@ -29,11 +29,10 @@ import urllib
 from etils import epath
 import promise
 import requests
-
-import tensorflow as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import checksums as checksums_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 

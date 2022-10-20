@@ -22,9 +22,9 @@ import contextlib
 from typing import Any, Union
 
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Struct containing a graph for the TFGraphRunner
 GraphRun = collections.namedtuple('GraphRun',

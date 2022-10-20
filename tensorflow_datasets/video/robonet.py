@@ -27,8 +27,7 @@ import os
 import textwrap
 
 import numpy as np
-import tensorflow as tf
-
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 DATA_URL_SAMPLE = ('https://drive.google.com/uc?export=download&'

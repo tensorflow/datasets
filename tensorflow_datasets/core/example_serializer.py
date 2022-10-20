@@ -24,9 +24,9 @@ from typing import Any, Mapping
 
 import numpy as np
 import six
-import tensorflow as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 TensorInfo = feature_lib.TensorInfo
 TreeDict = utils.TreeDict

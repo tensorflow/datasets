@@ -19,9 +19,9 @@ from __future__ import annotations
 
 from typing import Any, Union
 
-import tensorflow as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 class TopLevelFeature(feature_lib.FeatureConnector):
