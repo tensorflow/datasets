@@ -18,9 +18,8 @@ import pathlib
 import random
 
 from absl import app
-
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # In TF 2.0, eager execution is enabled by default.
 tf.compat.v1.disable_eager_execution()

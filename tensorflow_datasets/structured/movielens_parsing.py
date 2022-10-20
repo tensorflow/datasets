@@ -21,7 +21,7 @@ import os
 from typing import Any, Dict, Iterator, Tuple
 
 from etils import epath
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 def parse_current_movies_data(

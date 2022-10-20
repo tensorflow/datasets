@@ -19,13 +19,10 @@ import dataclasses
 import itertools
 import json
 import os
-
 from typing import Any, Iterable, List, Optional, Tuple
 
 from absl import logging
 from etils import epath
-import tensorflow as tf
-
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import file_adapters
@@ -36,6 +33,7 @@ from tensorflow_datasets.core import shuffle
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # TODO(tfds): Should be `TreeDict[FeatureValue]`
 Example = Any

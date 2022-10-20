@@ -28,7 +28,6 @@ from typing import Iterator, NamedTuple, Optional, Union
 from unittest import mock
 
 from etils import epath
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
@@ -37,6 +36,7 @@ from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import split_builder
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 __all__ = [
     'mock_builtin_to_use_gfile',

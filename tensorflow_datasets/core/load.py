@@ -28,7 +28,6 @@ import typing
 from typing import Any, Callable, Dict, Iterable, Iterator, List, Mapping, Optional, Type, Union
 
 from absl import logging
-import tensorflow as tf
 from tensorflow_datasets.core import community
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
@@ -47,6 +46,7 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # pylint: disable=logging-format-interpolation
 

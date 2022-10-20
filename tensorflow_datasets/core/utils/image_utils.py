@@ -24,11 +24,11 @@ import subprocess
 from typing import Any, List, Optional
 
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import resource_utils
 from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 PilImage = Any  # Require lazy deps.
 THUMBNAIL_SIZE = 128

@@ -30,7 +30,6 @@ from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, U
 from absl import logging
 from etils import epath
 import six
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download
@@ -49,7 +48,9 @@ from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import termcolor
+
 if typing.TYPE_CHECKING:
   from apache_beam.runners import runner
 

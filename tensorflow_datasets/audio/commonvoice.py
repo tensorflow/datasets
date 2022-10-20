@@ -23,8 +23,7 @@ import re
 from typing import Any, Mapping, Sequence
 
 from etils import epath
-
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DEMOGRAPHICS_URL = "https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"

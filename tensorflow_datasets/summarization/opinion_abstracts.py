@@ -21,7 +21,7 @@ import json
 import os
 from typing import Any, Dict, Iterator, List, Optional, Text, Tuple
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """

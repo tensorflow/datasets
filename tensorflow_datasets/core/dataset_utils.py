@@ -22,11 +22,11 @@ import functools
 from typing import Any, Callable, Iterable, Iterator, Union
 
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Tree = type_utils.Tree
 Tensor = type_utils.Tensor

@@ -18,7 +18,7 @@
 from typing import Any, Dict, List, Mapping
 
 import numpy as np
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 def _concat_obs(base_obs, extra_obs):

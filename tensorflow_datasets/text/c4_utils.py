@@ -26,7 +26,7 @@ import threading
 from typing import Collection, Iterable, Mapping, Optional, Sequence, Tuple
 
 from absl import logging
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # WET file constants

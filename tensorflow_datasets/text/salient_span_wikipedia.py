@@ -17,7 +17,7 @@ r"""Wikipedia sentences with labeled salient spans."""
 from __future__ import annotations
 
 import numpy as np
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _VERSION = tfds.core.utils.Version("1.0.0")

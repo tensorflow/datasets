@@ -20,9 +20,8 @@ import os
 from absl import app
 from absl import flags
 import numpy as np
-import tensorflow as tf
-
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_utils
 
 flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),

@@ -22,9 +22,8 @@ import os
 from absl import app
 from absl import flags
 import numpy as np
-import tensorflow as tf
-
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_utils
 
 NUM_IMAGES = 5

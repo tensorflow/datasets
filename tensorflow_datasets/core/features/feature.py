@@ -30,13 +30,13 @@ from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 from etils import epath
 import numpy as np
 import six
-import tensorflow as tf
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 from google.protobuf import descriptor
 from google.protobuf import json_format

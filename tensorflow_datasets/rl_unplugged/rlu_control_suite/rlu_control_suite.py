@@ -20,7 +20,7 @@ from __future__ import annotations
 import dataclasses
 from typing import Any, Dict, Optional
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
 

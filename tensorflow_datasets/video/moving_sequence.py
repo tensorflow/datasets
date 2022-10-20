@@ -17,7 +17,7 @@
 
 import collections
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 def _create_moving_sequence(image, pad_lefts, total_padding):
@@ -125,7 +125,7 @@ def image_as_moving_sequence(image,
 
   Example usage:
   ```python
-  import tensorflow as tf
+  from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
   import tensorflow_datasets as tfds
   from tensorflow_datasets.video import moving_sequence
   tf.enable_v2_behavior()

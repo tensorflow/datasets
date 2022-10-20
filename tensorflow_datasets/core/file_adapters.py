@@ -21,8 +21,8 @@ import os
 from typing import Any, ClassVar, Dict, Iterable, List, Optional, Type, Union
 
 from etils import epath
-import tensorflow as tf
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 ExamplePositions = List[Any]
 

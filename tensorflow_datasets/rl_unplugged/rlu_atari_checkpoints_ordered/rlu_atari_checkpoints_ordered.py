@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from typing import Any, Dict
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import atari_utils
 from tensorflow_datasets.rl_unplugged import rlu_common

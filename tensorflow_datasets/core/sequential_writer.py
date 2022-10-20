@@ -21,7 +21,6 @@ import dataclasses
 import os
 from typing import Any, Dict, List, Optional
 
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
@@ -29,6 +28,7 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 

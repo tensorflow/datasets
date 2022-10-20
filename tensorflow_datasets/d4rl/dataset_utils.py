@@ -18,7 +18,7 @@ from typing import Any, Dict
 
 import h5py
 import numpy as np
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 gfile = tf.io.gfile
 

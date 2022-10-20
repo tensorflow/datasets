@@ -21,8 +21,8 @@ import dataclasses
 import enum
 from typing import Callable, Optional, Sequence, Union
 
-import tensorflow as tf
 from tensorflow_datasets.core.utils import shard_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 InterleaveSortFn = Callable[[Sequence[shard_utils.FileInstruction]],
                             Sequence[shard_utils.FileInstruction],]

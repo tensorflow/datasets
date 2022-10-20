@@ -22,7 +22,7 @@ import os
 
 from etils import epath
 import numpy as np
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # Shared constants
@@ -61,7 +61,7 @@ class Cifar100N(tfds.core.GeneratorBasedBuilder):
   ```
   import numpy as np
   import pandas as pd
-  import tensorflow as tf
+  from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
   
   human_labels_np_path = '<local_path>/CIFAR-100_human_ordered.npy'
   human_labels_csv_path = '<local_path>/CIFAR-100_human_annotations.csv'

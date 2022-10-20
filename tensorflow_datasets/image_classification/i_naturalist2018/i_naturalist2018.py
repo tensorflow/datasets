@@ -17,9 +17,9 @@
 
 import json
 import os
-
 import urllib
-import tensorflow as tf
+
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\

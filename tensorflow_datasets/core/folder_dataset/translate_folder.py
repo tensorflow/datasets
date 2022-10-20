@@ -20,12 +20,12 @@ import os
 from typing import Dict, List, Tuple
 
 from etils import epath
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import splits as split_lib
 from tensorflow_datasets.core.utils import version
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Dict of 'split_name'-> 'language' -> `List[text_data]`
 SplitExampleDict = Dict[str, Dict[str, List[str]]]

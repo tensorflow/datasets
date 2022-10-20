@@ -22,13 +22,13 @@ import typing
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 try:
   import pandas  # pylint: disable=g-import-not-at-top

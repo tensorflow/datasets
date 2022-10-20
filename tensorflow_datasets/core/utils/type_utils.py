@@ -17,7 +17,7 @@
 
 from typing import Any, Dict, List, Optional, Tuple, TypeVar, Union
 
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _symbols_to_exclude = set(globals().keys())
 

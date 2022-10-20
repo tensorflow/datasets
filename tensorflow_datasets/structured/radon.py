@@ -25,7 +25,7 @@ import collections
 from etils import epath
 import numpy as np
 import six.moves.urllib as urllib
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 BASE_URL = 'http://www.stat.columbia.edu/~gelman/arm/examples/radon/'

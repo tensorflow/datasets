@@ -19,7 +19,7 @@ import io
 import os
 
 from etils import epath
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.image_classification import imagenet
 import tensorflow_datasets.public_api as tfds
 

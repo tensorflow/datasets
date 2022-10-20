@@ -22,9 +22,7 @@ from typing import Any, Dict, FrozenSet, Iterator, List, Type
 
 from absl import flags
 from absl import logging
-
 from etils import epath
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder

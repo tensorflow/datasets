@@ -21,12 +21,10 @@ import os
 import tempfile
 
 from absl import flags
-
 import matplotlib
 import matplotlib.pyplot as plt
-
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.scripts.documentation import script_utils
 
 FLAGS = flags.FLAGS

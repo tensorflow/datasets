@@ -30,7 +30,6 @@ from unittest import mock
 from etils import epath
 from etils import epy
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import dataset_info
@@ -39,6 +38,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 @contextlib.contextmanager

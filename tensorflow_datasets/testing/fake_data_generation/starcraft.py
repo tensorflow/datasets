@@ -27,7 +27,7 @@ from absl import flags
 import numpy as np
 import png
 import six
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 FLAGS = flags.FLAGS
 

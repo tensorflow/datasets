@@ -16,10 +16,10 @@
 """SpeechCommands dataset."""
 
 import os
-import numpy as np
-import tensorflow as tf
 
+import numpy as np
 from tensorflow_datasets.core import lazy_imports_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """

@@ -21,12 +21,11 @@ import json
 import re
 import xml.etree.cElementTree as etree
 
+from absl import flags  # pylint:disable=g-bad-import-order,g-import-not-at-top
 from absl import logging
 import six
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
-from absl import flags  # pylint:disable=g-bad-import-order,g-import-not-at-top
 
 FLAGS = flags.FLAGS
 

@@ -30,8 +30,6 @@ from absl import logging
 from absl.testing import parameterized
 from etils import epath
 import numpy as np
-import tensorflow as tf
-
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -40,6 +38,7 @@ from tensorflow_datasets.core import load
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core import visibility
 from tensorflow_datasets.core.download import checksums
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import feature_test_case
 from tensorflow_datasets.testing import test_utils
 

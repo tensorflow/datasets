@@ -21,10 +21,9 @@ import posixpath
 from typing import List, Optional
 
 from etils import epath
-import tensorflow as tf
-
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tqdm_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 GCS_ROOT_DIR = 'gs://tfds-data'
 

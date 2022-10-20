@@ -21,9 +21,8 @@ import os
 from absl import app
 from absl import flags
 from absl import logging
-import tensorflow as tf
-
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 flags.DEFINE_boolean('dry_run', True, 'If True, just print, do nothing.')
 flags.DEFINE_boolean('overwrite', False, 'If True, overwrites the data.')

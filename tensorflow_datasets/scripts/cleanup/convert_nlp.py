@@ -46,7 +46,7 @@ TO_CONVERT = [
     (r"from\s__future__\simport\sprint_function.*", r""),
     (r"import\slogging", r"from absl import logging\n"),
     (r"import\snlp",
-     r"import tensorflow as tf\nimport tensorflow_datasets.public_api as tfds\n"
+     r"from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf\nimport tensorflow_datasets.public_api as tfds\n"
     ),
     (r"with\sopen", r"with tf.io.gfile.GFile"),
     (r"encoding=\"utf-8\"", r"'r'"),

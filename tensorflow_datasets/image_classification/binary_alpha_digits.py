@@ -15,7 +15,7 @@
 
 """TensorFlow dataset for Binary Alphadigits."""
 import six.moves.urllib as urllib
-import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = 'https://cs.nyu.edu/~roweis/data/'

@@ -34,8 +34,8 @@ from typing import Dict, Iterable, List, Tuple
 
 from absl import app
 from absl import flags
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import termcolor
 
 FLAGS = flags.FLAGS

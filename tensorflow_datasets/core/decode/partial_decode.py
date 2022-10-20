@@ -18,11 +18,11 @@
 import typing
 from typing import Any, Callable, Optional, Union
 
-import tensorflow as tf
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.decode import base
 from tensorflow_datasets.core.features import features_dict
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # Expected feature specs provided by the user
 _FeatureSpecElem = Union[features_lib.FeatureConnector, Any]
