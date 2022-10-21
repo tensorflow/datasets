@@ -21,7 +21,7 @@ import datetime
 import hashlib
 import json
 import tempfile
-from typing import Any, List, Optional, Type
+from typing import Any, Iterator, List, Optional, Type
 
 from absl import logging
 
@@ -139,7 +139,6 @@ class _PackageIndex(collections.UserDict):
   {"name": "tensorflow_graphics:shapenet", "source": "github://..."}
   [...]
   ```
-
   """
 
   def __init__(self, path: epath.PathLike):
@@ -208,7 +207,6 @@ class PackageRegister(register_base.BaseRegister):
   # Load a specific dataset
   builder = register.builder('tensorflow_graphics:shapenet')
   ```
-
   """
 
   def __init__(self, path: epath.PathLike):
@@ -232,6 +230,10 @@ class PackageRegister(register_base.BaseRegister):
     if not self._package_index:  # Package index not loaded nor cached
       self._package_index.refresh()  # Try updating the index
     return sorted(str(name) for name in self._package_index)  # pylint: disable=not-an-iterable
+
+  def list_dataset_references(self) -> Iterator[naming.DatasetReference]:
+    for name in self.list_builders():
+      yield naming.DatasetReference.from_tfds_name(tfds_name=name)
 
   def builder_cls(
       self,

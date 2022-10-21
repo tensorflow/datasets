@@ -18,7 +18,7 @@
 import concurrent.futures
 import difflib
 import os
-from typing import Any, Dict, FrozenSet, Iterator, List, Type
+from typing import Any, Dict, FrozenSet, Iterable, Iterator, List, Type
 
 from absl import flags
 from absl import logging
@@ -51,7 +51,6 @@ class DataDirRegister(register_base.BaseRegister):
   # Load a specific dataset
   builder = register.builder('tensorflow_graphics:shapenet')
   ```
-
   """
 
   def __init__(self, namespace_to_data_dirs: Dict[str, List[epath.Path]]):
@@ -71,6 +70,15 @@ class DataDirRegister(register_base.BaseRegister):
   def list_builders(self) -> List[str]:
     """Returns the list of registered builders."""
     return sorted(_iter_builder_names(self._ns2data_dir))
+
+  def list_dataset_references(self) -> Iterable[naming.DatasetReference]:
+    for namespace, data_dirs in self._ns2data_dir.items():
+      for data_dir in data_dirs:
+        yield from file_utils.list_datasets_in_data_dir(
+            data_dir=data_dir,
+            namespace=namespace,
+            include_configs=False,
+            include_versions=False)
 
   def builder_cls(
       self,
@@ -144,7 +152,7 @@ def _iter_builder_names(
     return (dataset_name not in FILTERED_DIRNAME and
             naming.is_valid_dataset_name(dataset_name))
 
-  # For better performances, load all namespaces asynchonously
+  # For better performance, load all namespaces asynchronously
   def _get_builder_names_single_namespace(
       ns_name: str,
       data_dir: epath.Path,
