@@ -15,12 +15,12 @@
 
 """Tests for AFLW2000-3D dataset module."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import aflw2k3d
+from tensorflow_datasets.datasets.aflw2k3d import aflw2k3d_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class Aflw2k3dTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = aflw2k3d.Aflw2k3d
+  DATASET_CLASS = aflw2k3d_dataset_builder.Builder
   SPLITS = {
       tfds.Split.TRAIN: 2,
   }
