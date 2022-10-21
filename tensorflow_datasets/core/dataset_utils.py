@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import collections.abc
 import functools
+import typing
 from typing import Any, Callable, Iterable, Iterator, Union
 
 import numpy as np
@@ -31,8 +32,12 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 Tree = type_utils.Tree
 Tensor = type_utils.Tensor
 
-TensorflowElem = Union[None, Tensor, tf.data.Dataset]
-NumpyValue = Union[None, tf.RaggedTensor, np.ndarray, np.generic, bytes]
+if typing.TYPE_CHECKING:
+  TensorflowElem = Union[None, Tensor, tf.data.Dataset]
+  NumpyValue = Union[None, tf.RaggedTensor, np.ndarray, np.generic, bytes]
+else:
+  TensorflowElem = Any
+  NumpyValue = Any
 NumpyElem = Union[NumpyValue, Iterable[NumpyValue]]
 
 
@@ -95,8 +100,7 @@ def _assert_ds_types(nested_ds: Tree[TensorflowElem]) -> None:
 
 
 def _elem_to_numpy_eager(
-    tf_el: TensorflowElem
-) -> Union[NumpyElem, Iterable[NumpyElem]]:
+    tf_el: TensorflowElem) -> Union[NumpyElem, Iterable[NumpyElem]]:
   """Converts a single element from tf to numpy."""
   if isinstance(tf_el, tf.Tensor):
     return tf_el._numpy()  # pytype: disable=attribute-error  # pylint: disable=protected-access
