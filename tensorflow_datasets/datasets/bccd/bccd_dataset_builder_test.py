@@ -16,11 +16,11 @@
 """bccd dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image.bccd import bccd
+from tensorflow_datasets.datasets.bccd import bccd_dataset_builder
 
 
 class BCCDTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = bccd.BCCD
+  DATASET_CLASS = bccd_dataset_builder.Builder
   SPLITS = {
       "train": 2,  # Number of fake train examples
       "validation": 1,  # Number of fake validation examples
