@@ -25,6 +25,7 @@ import csv
 import functools
 import io
 import os
+from typing import List
 
 from absl import logging
 from etils import epath
@@ -362,19 +363,26 @@ def _resize_image_if_necessary(image_fobj, target_pixels=None):
   return io.BytesIO(buff.tobytes())
 
 
+def _read_csv_line(line: bytes) -> List[str]:
+  # In Python 3.7, using `f.tell()` and csv.reader causes: `OsError: telling
+  # position disabled by next() call`. So we read every line separately.
+  csv_line = csv.reader([line.decode()])
+  return next(csv_line)
+
+
 def _load_objects(csv_paths, csv_positions, prefix):
   """Returns objects listed within given CSV files."""
   logging.info('Loading CSVs %s from positions %s with prefix %s', csv_paths,
                csv_positions, prefix)
   objects = collections.defaultdict(list)
   for i, labels_path in enumerate(csv_paths):
-    with epath.Path(labels_path).open() as csv_f:
+    with epath.Path(labels_path).open(mode='rb') as csv_f:
       if csv_positions[i] > 0:
         csv_f.seek(csv_positions[i])
       else:
         csv_f.readline()  # Drop headers
-      reader = csv.reader(csv_f)
-      for image_id, source, label, confidence in reader:
+      for line in csv_f:
+        (image_id, source, label, confidence) = _read_csv_line(line)
         if prefix and image_id[0] != prefix:
           break
         csv_positions[i] = csv_f.tell()
@@ -389,27 +397,27 @@ def _load_bboxes(csv_path, csv_positions, prefix):
   logging.info('Loading CSVs %s from positions %s with prefix %s', csv_path,
                csv_positions, prefix)
   boxes = collections.defaultdict(list)
-  with epath.Path(csv_path).open() as csv_f:
+  with epath.Path(csv_path).open(mode='rb') as csv_f:
     if csv_positions[0] > 0:
       csv_f.seek(csv_positions[0])
     else:
       csv_f.readline()  # Drop headers
-    reader = csv.reader(csv_f)
-    for (
-        image_id,
-        source,
-        label,
-        confidence,
-        xmin,
-        xmax,
-        ymin,
-        ymax,
-        is_occluded,
-        is_truncated,
-        is_group_of,
-        is_depiction,
-        is_inside,
-    ) in reader:
+    for line in csv_f:
+      (
+          image_id,
+          source,
+          label,
+          confidence,
+          xmin,
+          xmax,
+          ymin,
+          ymax,
+          is_occluded,
+          is_truncated,
+          is_group_of,
+          is_depiction,
+          is_inside,
+      ) = _read_csv_line(line)
       if prefix and image_id[0] != prefix:
         break
       csv_positions[0] = csv_f.tell()

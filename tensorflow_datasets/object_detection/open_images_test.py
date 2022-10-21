@@ -42,6 +42,11 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
       'validation-annotations-bbox': 'validation-annotations-bbox.csv',
   }
 
+  def test_read_csv_line(self):
+    line = b'foo1,foo2,foo3'
+    expected_line = ['foo1', 'foo2', 'foo3']
+    self.assertEqual(open_images._read_csv_line(line), expected_line)
+
 
 if __name__ == '__main__':
   testing.test_main()
