@@ -332,6 +332,7 @@ class DatasetCollectionLoader:
     # in the same order of the splits.
     elif isinstance(load_output, list):
       for split_name, d in zip(loader_kwargs['split'], load_output):
+        assert isinstance(split_name, str)
         if isinstance(d, tuple):
           ds, _ = d
           loaded_datasets[split_name] = ds
