@@ -358,8 +358,8 @@ class Reader(object):
 
     Args:
       file_instructions: The files information. The filenames contains the
-        relative path, not absolute.
-        skip/take indicates which example read in the shard: `ds.skip().take()`
+        relative path, not absolute. skip/take indicates which example read in
+        the shard: `ds.skip().take()`
       read_config: The input pipeline options
       shuffle_files: If True, input files are shuffled before being read.
       disable_shuffling: Specifies if the dataset being read has shuffling

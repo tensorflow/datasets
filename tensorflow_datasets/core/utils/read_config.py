@@ -28,11 +28,11 @@ InterleaveSortFn = Callable[[Sequence[shard_utils.FileInstruction]],
                             Sequence[shard_utils.FileInstruction],]
 
 
-class _MISSING:
+class _MISSING(str):
   pass
 
 
-MISSING = _MISSING()
+MISSING = _MISSING('missing')
 
 
 @dataclasses.dataclass(eq=False)
