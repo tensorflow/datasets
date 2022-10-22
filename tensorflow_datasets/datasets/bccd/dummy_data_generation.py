@@ -24,7 +24,7 @@ from absl import app
 from absl import flags
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-from tensorflow_datasets.image.bccd import bccd
+from tensorflow_datasets.datasets.bccd import bccd_dataset_builder
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
@@ -67,7 +67,8 @@ def _generate_jpeg(example_id, height, width):
 def _generate_annotation(example_id, height, width):
   """Generate a fake annotation XML for the given example id."""
   # pylint: disable=protected-access
-  label_names = tfds.features.ClassLabel(names=bccd._CLASS_LABELS).names  # pytype: disable=module-attr
+  label_names = tfds.features.ClassLabel(
+      names=bccd_dataset_builder._CLASS_LABELS).names  # pytype: disable=module-attr
   # pylint: enable=protected-access
   annotation = "<annotation>\n"
   annotation += "<folder>JPEGImages</folder>\n"
