@@ -13,17 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""dSprites dataset test."""
+"""Tests for downsampled_imagenet dataset module."""
 
-from tensorflow_datasets.image import dsprites
-import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.downsampled_imagenet import downsampled_imagenet_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
 
-class DspritesTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = dsprites.Dsprites
-  SPLITS = {"train": 5}
-  DL_EXTRACT_RESULT = "dsprites_ndarray_co1sh3sc6or40x32y32_64x64.hdf5"
+class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = downsampled_imagenet_dataset_builder.Builder
+  BUILDER_CONFIG_NAMES_TO_TEST = ["32x32", "64x64"]
+
+  SPLITS = {
+      tfds.Split.TRAIN: 2,
+      tfds.Split.VALIDATION: 2,
+  }
+
+  DL_EXTRACT_RESULT = [
+      "train_32x32.tar",
+      "valid_32x32.tar",
+  ]
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()
