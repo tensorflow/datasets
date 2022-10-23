@@ -4,7 +4,6 @@ c4/multilingual/2.2.0
 c4/multilingual/2.2.1
 c4/multilingual/2.3.0
 c4/multilingual/2.3.1
-c4/multilingual/3.1.0
 c4/realnewslike/2.2.0
 c4/realnewslike/2.2.1
 c4/realnewslike/2.3.0
