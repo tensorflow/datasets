@@ -498,9 +498,8 @@ class C4(tfds.core.BeamBasedBuilder):
     pages = (
         pages
         | "normalize_url" >> beam.Map(lambda p: (p.normalized_url, p))
-        | "group_url" >> beam.GroupByKey()
-        | beam.Values()
-        | beam.Map(c4_utils.select_newest_page))
+        | "select_newest" >> beam.CombinePerKey(c4_utils.select_newest_page)
+        | beam.Values())
 
     # Optionally filter for WebText-like URLs.
     # Output: [PageFeatures]
