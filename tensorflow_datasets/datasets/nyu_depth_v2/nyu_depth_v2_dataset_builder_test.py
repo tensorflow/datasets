@@ -15,12 +15,12 @@
 
 """Tests for NYU Depth V2 Dataset."""
 
-from tensorflow_datasets.image import nyu_depth_v2
+from tensorflow_datasets.datasets.nyu_depth_v2 import nyu_depth_v2_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class NyuDepthV2Test(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = nyu_depth_v2.NyuDepthV2
+  DATASET_CLASS = nyu_depth_v2_dataset_builder.Builder
   SPLITS = {"train": 2, "validation": 1}
 
 
