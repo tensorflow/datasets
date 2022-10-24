@@ -15,12 +15,12 @@
 
 """Shapes3D dataset test."""
 
-from tensorflow_datasets.image import shapes3d
+from tensorflow_datasets.datasets.shapes3d import shapes3d_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class Shapes3dTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = shapes3d.Shapes3d
+  DATASET_CLASS = shapes3d_dataset_builder.Builder
   SPLITS = {"train": 5}
   DL_EXTRACT_RESULT = "3dshapes.h5"
 
