@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import dataclasses
+import functools
 import os
 import tempfile
 from typing import Any, List, Optional, Union
@@ -34,21 +35,29 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 Json = type_utils.Json
 PilImage = Any  # Require lazy deps.
 
-_ENCODE_FN = {
-    'png': tf.image.encode_png,
-    'jpeg': tf.image.encode_jpeg,
-}
+
+@functools.lru_cache(maxsize=None)
+def _encode_fn():
+  return {
+      'png': tf.image.encode_png,
+      'jpeg': tf.image.encode_jpeg,
+  }
+
 
 _ACCEPTABLE_CHANNELS = {
     'png': (0, 1, 2, 3, 4),
     'jpeg': (0, 1, 3),
 }
 
-_ACCEPTABLE_DTYPES = {
-    'png': [tf.uint8, tf.uint16, tf.float32],
-    'jpeg': [tf.uint8],
-    None: [tf.uint8, tf.uint16, tf.float32],
-}
+
+@functools.lru_cache(maxsize=None)
+def _acceptable_dtypes():
+  return {
+      'png': [tf.uint8, tf.uint16, tf.float32],
+      'jpeg': [tf.uint8],
+      None: [tf.uint8, tf.uint16, tf.float32],
+  }
+
 
 THUMBNAIL_SIZE = 128
 
@@ -101,7 +110,8 @@ class _ImageEncoder:
     # It has created subtle issues for imagenet_corrupted: images are read as
     # JPEG images to apply some processing, but final image saved as PNG
     # (default) rather than JPEG.
-    return self._runner.run(_ENCODE_FN[self.encoding_format or 'png'], np_image)
+    return self._runner.run(_encode_fn()[self.encoding_format or 'png'],
+                            np_image)
 
   def decode_image(self, img: tf.Tensor) -> tf.Tensor:
     """Decode the jpeg or png bytes to 3d tensor."""
@@ -212,12 +222,11 @@ class Image(feature_lib.FeatureConnector):
     """Construct the connector.
 
     Args:
-      shape: tuple of ints or None, the shape of decoded image.
-        For GIF images: (num_frames, height, width, channels=3). num_frames,
-          height and width can be None.
-        For other images: (height, width, channels). height and width can be
-          None. See `tf.image.encode_*` for doc on channels parameter. Defaults
-          to (None, None, 3).
+      shape: tuple of ints or None, the shape of decoded image. For GIF images:
+        (num_frames, height, width, channels=3). num_frames, height and width
+        can be None. For other images: (height, width, channels). height and
+        width can be None. See `tf.image.encode_*` for doc on channels
+        parameter. Defaults to (None, None, 3).
       dtype: `tf.uint8` (default), `tf.uint16` or `tf.float32`. * `tf.uint16`
         requires png encoding_format. * `tf.float32` only supports
         single-channel image. Internally float images are bitcasted to
@@ -420,7 +429,7 @@ def _get_repr_html_gif(images: List[PilImage]) -> str:
 
 def get_and_validate_encoding(encoding_format):
   """Update the encoding format."""
-  supported = _ENCODE_FN.keys()
+  supported = _encode_fn().keys()
   if encoding_format and encoding_format not in supported:
     raise ValueError(f'`encoding_format` must be one of {supported}.')
   return encoding_format
@@ -429,7 +438,7 @@ def get_and_validate_encoding(encoding_format):
 def get_and_validate_dtype(dtype, encoding_format):
   """Update the dtype."""
   dtype = tf.as_dtype(dtype)
-  acceptable_dtypes = _ACCEPTABLE_DTYPES.get(encoding_format)
+  acceptable_dtypes = _acceptable_dtypes().get(encoding_format)
   if acceptable_dtypes and dtype not in acceptable_dtypes:
     raise ValueError(f'Acceptable `dtype` for {encoding_format}: '
                      f'{acceptable_dtypes} (was {dtype})')

@@ -23,25 +23,27 @@ from etils import epath
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-SQUADLIKE_FEATURES = tfds.features.FeaturesDict({
-    "id":
-        tf.string,
-    "title":
-        tfds.features.Text(),
-    "context":
-        tfds.features.Text(),
-    "question":
-        tfds.features.Text(),
-    "answers":
-        tfds.features.Sequence({
-            "text": tfds.features.Text(),
-            "answer_start": tf.int32,
-        }),
-})
+
+def squadlike_features():
+  return tfds.features.FeaturesDict({
+      "id":
+          tf.string,
+      "title":
+          tfds.features.Text(),
+      "context":
+          tfds.features.Text(),
+      "question":
+          tfds.features.Text(),
+      "answers":
+          tfds.features.Sequence({
+              "text": tfds.features.Text(),
+              "answer_start": tf.int32,
+          }),
+  })
 
 
 def generate_squadlike_examples(filepath):
-  """Parses a SQuAD-like JSON, yielding examples with `SQUADLIKE_FEATURES`."""
+  """Parses a SQuAD-like JSON, yielding examples with `squadlike_features`."""
   logging.info("generating examples from = %s", filepath)
 
   # We first re-group the answers, which may be flattened (e.g., by XTREME).

@@ -14,15 +14,11 @@
 # limitations under the License.
 
 """smartwatch_gestures dummy data generator."""
-import pathlib
 import random
 
 from absl import app
+from etils import epath
 import tensorflow_datasets as tfds
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-
-# In TF 2.0, eager execution is enabled by default.
-tf.compat.v1.disable_eager_execution()
 
 NUMBER_OF_EXAMPLES = 3
 
@@ -32,7 +28,7 @@ def _output_dir():
   ) / 'time_series' / 'smartwatch_gestures' / 'dummy_data' / 'gestures-dataset'
 
 
-def _dummy_file(participant: int, gesture: int, attempt: int) -> pathlib.Path:
+def _dummy_file(participant: int, gesture: int, attempt: int) -> epath.Path:
   """Return path to fake data file."""
   participant = f'U{participant:02}'
   gesture = f'{gesture:02}'

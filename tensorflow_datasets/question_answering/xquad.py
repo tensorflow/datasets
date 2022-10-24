@@ -99,7 +99,7 @@ class Xquad(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=qa_utils.SQUADLIKE_FEATURES,
+        features=qa_utils.squadlike_features(),
         # No default supervised_keys (as we have to pass both question
         # and context as input).
         supervised_keys=None,

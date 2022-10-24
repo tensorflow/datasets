@@ -43,56 +43,60 @@ copyright = {arXiv.org perpetual, non-exclusive license}
 }
 """
 
-_FEATURES = tfds.features.FeaturesDict({
-    'sample_id':
-        tf.int32,
-    'ambiguous_question':
-        tfds.features.Text(doc='Disambiguated question from AmbigQA.'),
-    'qa_pairs':
-        tfds.features.Sequence(
-            tfds.features.FeaturesDict({
-                'question':
-                    tfds.features.Text(),
-                'short_answers':
-                    tfds.features.Sequence(
-                        tfds.features.Text(),
-                        doc='List of short answers from AmbigQA.'),
-                'context':
-                    tfds.features.Text(doc='Additional context provided.'),
-                'wikipage':
-                    tfds.features.Text(
-                        doc='Title of the Wikipedia page the additional context was taken from.'
-                    ),
-            }),
-            doc='Q&A pairs from AmbigQA which are used for disambiguation.'),
-    'wikipages':
-        tfds.features.Sequence(
-            tfds.features.FeaturesDict({
-                'title': tfds.features.Text(doc='Title of the Wikipedia page.'),
-                'url': tfds.features.Text(doc='Link to the Wikipedia page.'),
-            }),
-            doc='List of Wikipedia pages visited by AmbigQA annotators.'),
-    'annotations':
-        tfds.features.Sequence(
-            tfds.features.FeaturesDict({
-                'long_answer':
-                    tfds.features.Text(doc='Annotation.'),
-                'knowledge':
-                    tfds.features.Sequence(
-                        tfds.features.FeaturesDict({
-                            'content':
-                                tfds.features.Text(
-                                    doc='A passage from Wikipedia.'),
-                            'wikipage':
-                                tfds.features.Text(
-                                    doc='Title of the Wikipedia page the passage was taken from.'
-                                ),
-                        }),
-                        doc='List of additional knowledge pieces.'),
-            }),
-            doc='Long-form answers to the ambiguous question constructed by ASQA annotators.'
-        ),
-})
+
+def _features():
+  return tfds.features.FeaturesDict({
+      'sample_id':
+          tf.int32,
+      'ambiguous_question':
+          tfds.features.Text(doc='Disambiguated question from AmbigQA.'),
+      'qa_pairs':
+          tfds.features.Sequence(
+              tfds.features.FeaturesDict({
+                  'question':
+                      tfds.features.Text(),
+                  'short_answers':
+                      tfds.features.Sequence(
+                          tfds.features.Text(),
+                          doc='List of short answers from AmbigQA.'),
+                  'context':
+                      tfds.features.Text(doc='Additional context provided.'),
+                  'wikipage':
+                      tfds.features.Text(
+                          doc='Title of the Wikipedia page the additional context was taken from.'
+                      ),
+              }),
+              doc='Q&A pairs from AmbigQA which are used for disambiguation.'),
+      'wikipages':
+          tfds.features.Sequence(
+              tfds.features.FeaturesDict({
+                  'title':
+                      tfds.features.Text(doc='Title of the Wikipedia page.'),
+                  'url':
+                      tfds.features.Text(doc='Link to the Wikipedia page.'),
+              }),
+              doc='List of Wikipedia pages visited by AmbigQA annotators.'),
+      'annotations':
+          tfds.features.Sequence(
+              tfds.features.FeaturesDict({
+                  'long_answer':
+                      tfds.features.Text(doc='Annotation.'),
+                  'knowledge':
+                      tfds.features.Sequence(
+                          tfds.features.FeaturesDict({
+                              'content':
+                                  tfds.features.Text(
+                                      doc='A passage from Wikipedia.'),
+                              'wikipage':
+                                  tfds.features.Text(
+                                      doc='Title of the Wikipedia page the passage was taken from.'
+                                  ),
+                          }),
+                          doc='List of additional knowledge pieces.'),
+              }),
+              doc='Long-form answers to the ambiguous question constructed by ASQA annotators.'
+          ),
+  })
 
 
 class Asqa(tfds.core.GeneratorBasedBuilder):
@@ -108,7 +112,7 @@ class Asqa(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=_FEATURES,
+        features=_features(),
         supervised_keys=None,
         homepage='https://github.com/google-research/language/tree/master/language/asqa',
         citation=_CITATION,

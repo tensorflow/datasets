@@ -15,6 +15,7 @@
 
 """Typing annotation utils."""
 
+import typing
 from typing import Any, Dict, List, Optional, Tuple, TypeVar, Union
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -31,7 +32,10 @@ ListOrElem = Union[T, List[T]]
 TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
 Tree = Union[T, Any]
 
-Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
+if typing.TYPE_CHECKING:
+  Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
+else:
+  Tensor = Any
 
 # Nested dict of tensor
 TensorDict = TreeDict[Tensor]

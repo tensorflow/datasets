@@ -20,9 +20,6 @@ import h5py
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
-gfile = tf.io.gfile
-
-
 _DESCRIPTION = """
 D4RL is an open-source benchmark for offline reinforcement learning. It provides
 standardized environments and datasets for training and benchmarking algorithms.
@@ -244,7 +241,7 @@ def _get_dataset_keys(h5file):
 
 def read_d4rl_dataset(file_path: str):
   """Reads a D4RL dataset and returns the dataset as a dictionary."""
-  with gfile.GFile(file_path, 'rb') as f:
+  with tf.io.gfile.GFile(file_path, 'rb') as f:
     with h5py.File(f, 'r') as dataset_file:
       dataset_dict = {}
       for k in _get_dataset_keys(dataset_file):

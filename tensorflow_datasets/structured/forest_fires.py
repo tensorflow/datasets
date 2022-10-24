@@ -100,20 +100,22 @@ _DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
 _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/forestfires.csv'
 
-FEATURES = collections.OrderedDict([
-    ('X', tf.uint8),
-    ('Y', tf.uint8),
-    ('month', tfds.features.ClassLabel(names=_MONTHS)),
-    ('day', tfds.features.ClassLabel(names=_DAYS)),
-    ('FFMC', tf.float32),
-    ('DMC', tf.float32),
-    ('DC', tf.float32),
-    ('ISI', tf.float32),
-    ('temp', tf.float32),
-    ('RH', tf.float32),
-    ('wind', tf.float32),
-    ('rain', tf.float32),
-])
+
+def features():
+  return collections.OrderedDict([
+      ('X', tf.uint8),
+      ('Y', tf.uint8),
+      ('month', tfds.features.ClassLabel(names=_MONTHS)),
+      ('day', tfds.features.ClassLabel(names=_DAYS)),
+      ('FFMC', tf.float32),
+      ('DMC', tf.float32),
+      ('DC', tf.float32),
+      ('ISI', tf.float32),
+      ('temp', tf.float32),
+      ('RH', tf.float32),
+      ('wind', tf.float32),
+      ('rain', tf.float32),
+  ])
 
 
 class ForestFires(tfds.core.GeneratorBasedBuilder):
@@ -127,7 +129,7 @@ class ForestFires(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'area': tf.float32,
-            'features': {name: dtype for name, dtype in FEATURES.items()}
+            'features': {name: dtype for name, dtype in features().items()}
         }),
         supervised_keys=('area', 'features'),
         homepage='https://archive.ics.uci.edu/ml/datasets/Forest+Fires',

@@ -26,9 +26,6 @@ from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import fake_data_utils
 
-# In TF 2.0, eager execution is enabled by default
-tf.compat.v1.disable_eager_execution()
-
 flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
                     "Path to tensorflow_datasets directory")
 FLAGS = flags.FLAGS

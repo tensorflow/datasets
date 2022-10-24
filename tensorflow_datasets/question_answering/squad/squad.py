@@ -49,28 +49,30 @@ from the corresponding reading passage, or the question might be unanswerable.
 _URL = "https://rajpurkar.github.io/SQuAD-explorer/dataset/"
 _HOMEPAGE_URL = "https://rajpurkar.github.io/SQuAD-explorer/"
 
-_V2_FEATURES = tfds.features.FeaturesDict({
-    "id":
-        tf.string,
-    "title":
-        tfds.features.Text(),
-    "context":
-        tfds.features.Text(),
-    "plausible_answers":
-        tfds.features.Sequence({
-            "text": tfds.features.Text(),
-            "answer_start": tf.int32,
-        }),
-    "question":
-        tfds.features.Text(),
-    "is_impossible":
-        tf.bool,
-    "answers":
-        tfds.features.Sequence({
-            "text": tfds.features.Text(),
-            "answer_start": tf.int32,
-        }),
-})
+
+def _v2_features():
+  return tfds.features.FeaturesDict({
+      "id":
+          tf.string,
+      "title":
+          tfds.features.Text(),
+      "context":
+          tfds.features.Text(),
+      "plausible_answers":
+          tfds.features.Sequence({
+              "text": tfds.features.Text(),
+              "answer_start": tf.int32,
+          }),
+      "question":
+          tfds.features.Text(),
+      "is_impossible":
+          tf.bool,
+      "answers":
+          tfds.features.Sequence({
+              "text": tfds.features.Text(),
+              "answer_start": tf.int32,
+          }),
+  })
 
 
 def _generate_v2_examples(filepath):
@@ -158,9 +160,9 @@ class Squad(tfds.core.GeneratorBasedBuilder):
   def _info(self):
 
     if self.builder_config.name == "v1.1":
-      features_dict = qa_utils.SQUADLIKE_FEATURES
+      features_dict = qa_utils.squadlike_features()
     elif self.builder_config.name == "v2.0":
-      features_dict = _V2_FEATURES
+      features_dict = _v2_features()
     else:
       raise AssertionError("Dataset version should be either 1.1 or 2.0")
 
