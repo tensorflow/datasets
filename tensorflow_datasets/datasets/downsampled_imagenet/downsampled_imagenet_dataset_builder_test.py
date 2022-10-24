@@ -16,12 +16,12 @@
 """Tests for downsampled_imagenet dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import downsampled_imagenet
+from tensorflow_datasets.datasets.downsampled_imagenet import downsampled_imagenet_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = downsampled_imagenet.DownsampledImagenet
+  DATASET_CLASS = downsampled_imagenet_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["32x32", "64x64"]
 
   SPLITS = {
