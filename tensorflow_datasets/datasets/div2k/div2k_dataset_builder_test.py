@@ -16,11 +16,11 @@
 """Test for div2k dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import div2k
+from tensorflow_datasets.datasets.div2k import div2k_dataset_builder
 
 
 class Div2kTestBicubicX(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = div2k.Div2k
+  DATASET_CLASS = div2k_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["bicubic_x2"]
   SPLITS = {
       "train": 1,
@@ -36,7 +36,7 @@ class Div2kTestBicubicX(testing.DatasetBuilderTestCase):
 
 
 class Div2kTestUnknownX(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = div2k.Div2k
+  DATASET_CLASS = div2k_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["unknown_x2"]
   SPLITS = {
       "train": 1,
