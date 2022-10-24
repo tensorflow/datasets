@@ -1,0 +1,5 @@
+content.data-type.image
+content.data-type.text
+content.data-type.video
+ml.task.image-classification
+ml.task.object-detection
