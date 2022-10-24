@@ -15,12 +15,12 @@
 
 """dSprites dataset test."""
 
-from tensorflow_datasets.image import dsprites
+from tensorflow_datasets.datasets.dsprites import dsprites_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class DspritesTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = dsprites.Dsprites
+  DATASET_CLASS = dsprites_dataset_builder.Builder
   SPLITS = {"train": 5}
   DL_EXTRACT_RESULT = "dsprites_ndarray_co1sh3sc6or40x32y32_64x64.hdf5"
 
