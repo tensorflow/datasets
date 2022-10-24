@@ -29,6 +29,7 @@ from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.community import register_base
+from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 TFDS_DEBUG_VERBOSE = flags.DEFINE_boolean('tfds_debug_list_dir', False,
