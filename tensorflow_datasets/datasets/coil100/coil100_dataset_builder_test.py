@@ -16,11 +16,11 @@
 """Coil-100 Test."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import coil100
+from tensorflow_datasets.datasets.coil100 import coil100_dataset_builder
 
 
 class Coil100Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = coil100.Coil100
+  DATASET_CLASS = coil100_dataset_builder.Builder
   SPLITS = {
       "train": 5,
   }
