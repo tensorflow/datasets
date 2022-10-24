@@ -15,13 +15,13 @@
 
 """symmetric_solids dataset."""
 
-from tensorflow_datasets.image.symmetric_solids import symmetric_solids
+from tensorflow_datasets.datasets.symmetric_solids import symmetric_solids_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class SymmetricSolidsTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for symmetric_solids dataset."""
-  DATASET_CLASS = symmetric_solids.SymmetricSolids
+  DATASET_CLASS = symmetric_solids_dataset_builder.Builder
   SPLITS = {
       'train': 6,  # Number of fake train examples
       'test': 3,  # Number of fake test examples
