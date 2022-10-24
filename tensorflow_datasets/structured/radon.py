@@ -62,35 +62,36 @@ def return_same(d):
   return d
 
 
-FEATURES = collections.OrderedDict([
-    ('idnum', (tf.int32, convert_to_int)),
-    ('state', (tf.string, return_same)),
-    ('state2', (tf.string, return_same)),
-    ('stfips', (tf.int32, convert_to_int)),
-    ('zip', (tf.int32, convert_to_int)),
-    ('region', (tf.int32, convert_to_int)),
-    ('typebldg', (tf.int32, convert_to_int)),
-    ('floor', (tf.int32, convert_to_int)),
-    ('room', (tf.int32, convert_to_int)),
-    ('basement', (tf.string, return_same)),
-    ('windoor', (tf.string, return_same)),
-    ('rep', (tf.int32, convert_to_int)),
-    ('stratum', (tf.int32, convert_to_int)),
-    ('wave', (tf.int32, convert_to_int)),
-    ('starttm', (tf.int32, convert_to_int)),
-    ('stoptm', (tf.int32, convert_to_int)),
-    ('startdt', (tf.int32, convert_to_int)),
-    ('stopdt', (tf.int32, convert_to_int)),
-    ('pcterr', (tf.float32, convert_to_float)),
-    ('adjwt', (tf.float32, convert_to_float)),
-    ('dupflag', (tf.int32, convert_to_int)),
-    ('zipflag', (tf.int32, convert_to_int)),
-    ('cntyfips', (tf.int32, convert_to_int)),
-    ('county', (tf.string, return_same)),
-    ('Uppm', (tf.float32, convert_to_float)),
-    ('lon', (tf.float32, convert_to_float)),
-    ('lat', (tf.float32, convert_to_float)),
-])
+def features():
+  return collections.OrderedDict([
+      ('idnum', (tf.int32, convert_to_int)),
+      ('state', (tf.string, return_same)),
+      ('state2', (tf.string, return_same)),
+      ('stfips', (tf.int32, convert_to_int)),
+      ('zip', (tf.int32, convert_to_int)),
+      ('region', (tf.int32, convert_to_int)),
+      ('typebldg', (tf.int32, convert_to_int)),
+      ('floor', (tf.int32, convert_to_int)),
+      ('room', (tf.int32, convert_to_int)),
+      ('basement', (tf.string, return_same)),
+      ('windoor', (tf.string, return_same)),
+      ('rep', (tf.int32, convert_to_int)),
+      ('stratum', (tf.int32, convert_to_int)),
+      ('wave', (tf.int32, convert_to_int)),
+      ('starttm', (tf.int32, convert_to_int)),
+      ('stoptm', (tf.int32, convert_to_int)),
+      ('startdt', (tf.int32, convert_to_int)),
+      ('stopdt', (tf.int32, convert_to_int)),
+      ('pcterr', (tf.float32, convert_to_float)),
+      ('adjwt', (tf.float32, convert_to_float)),
+      ('dupflag', (tf.int32, convert_to_int)),
+      ('zipflag', (tf.int32, convert_to_int)),
+      ('cntyfips', (tf.int32, convert_to_int)),
+      ('county', (tf.string, return_same)),
+      ('Uppm', (tf.float32, convert_to_float)),
+      ('lon', (tf.float32, convert_to_float)),
+      ('lat', (tf.float32, convert_to_float)),
+  ])
 
 
 class Radon(tfds.core.GeneratorBasedBuilder):
@@ -104,7 +105,9 @@ class Radon(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'activity': tf.float32,
-            'features': {name: dtype for name, (dtype, _) in FEATURES.items()}
+            'features': {
+                name: dtype for name, (dtype, _) in features().items()
+            }
         }),
         supervised_keys=('features', 'activity'),
         homepage='http://www.stat.columbia.edu/~gelman/arm/examples/radon/',
@@ -155,6 +158,6 @@ class Radon(tfds.core.GeneratorBasedBuilder):
       yield i, {
           'activity': float(radon_val),
           'features': {
-              name: FEATURES[name][1](value) for name, value in row.items()
+              name: features()[name][1](value) for name, value in row.items()
           }
       }

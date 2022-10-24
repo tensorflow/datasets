@@ -52,80 +52,81 @@ _BUILDER_CONFIGS = [
     )
 ]
 
-_STEPS_FEATURES = tfds.features.FeaturesDict({
-    'action':
-        tfds.features.FeaturesDict({
-            'close_gripper':
-                tf.bool,
-            'open_gripper':
-                tf.bool,
-            'target_pose':
-                tfds.features.Tensor(
-                    shape=(7,),
-                    dtype=tf.float32,
-                    encoding=tfds.features.Encoding.ZLIB),
-            'terminate':
-                tf.bool,
-        }),
-    'is_first':
-        tf.bool,
-    'is_last':
-        tf.bool,
-    'is_terminal':
-        tf.bool,
-    'observation':
-        tfds.features.FeaturesDict({
-            'gripper_closed':
-                tf.bool,
-            'height_to_bottom':
-                tf.float32,
-            'image':
-                tfds.features.Image(shape=(512, 640, 3), dtype=tf.uint8),
-            'state_dense':
-                tfds.features.Tensor(
-                    shape=(7,),
-                    dtype=tf.float32,
-                    encoding=tfds.features.Encoding.ZLIB),
-        }),
-})
 
-_NAME_TO_FEATURES = {
-    'rlds':
-        tfds.features.FeaturesDict({
-            'episode_id': tf.string,
-            'skill': tf.uint8,
-            'steps': tfds.features.Dataset(_STEPS_FEATURES),
-            'task_code': tf.string,
-        }),
-    'sd':
-        tfds.features.FeaturesDict({
-            'image_0': tfds.features.Image(shape=(512, 640, 3), dtype=tf.uint8),
-            'image_1': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
-            'image_2': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
-            'success': tf.bool,
-            'task_code': tf.string,
-        }),
-}
+def _steps_features():
+  return tfds.features.FeaturesDict({
+      'action':
+          tfds.features.FeaturesDict({
+              'close_gripper':
+                  tf.bool,
+              'open_gripper':
+                  tf.bool,
+              'target_pose':
+                  tfds.features.Tensor(
+                      shape=(7,),
+                      dtype=tf.float32,
+                      encoding=tfds.features.Encoding.ZLIB),
+              'terminate':
+                  tf.bool,
+          }),
+      'is_first':
+          tf.bool,
+      'is_last':
+          tf.bool,
+      'is_terminal':
+          tf.bool,
+      'observation':
+          tfds.features.FeaturesDict({
+              'gripper_closed':
+                  tf.bool,
+              'height_to_bottom':
+                  tf.float32,
+              'image':
+                  tfds.features.Image(shape=(512, 640, 3), dtype=tf.uint8),
+              'state_dense':
+                  tfds.features.Tensor(
+                      shape=(7,),
+                      dtype=tf.float32,
+                      encoding=tfds.features.Encoding.ZLIB),
+          }),
+  })
+
+
+def _name_to_features(config_name: str):
+  if config_name == 'rlds':
+    return tfds.features.FeaturesDict({
+        'episode_id': tf.string,
+        'skill': tf.uint8,
+        'steps': tfds.features.Dataset(_steps_features()),
+        'task_code': tf.string,
+    })
+  return tfds.features.FeaturesDict({
+      'image_0': tfds.features.Image(shape=(512, 640, 3), dtype=tf.uint8),
+      'image_1': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
+      'image_2': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
+      'success': tf.bool,
+      'task_code': tf.string,
+  })
+
 
 # To encode, we use sequence instead of nested dataset. Otherwise, Beam has
 # issues calculating the size of the yielded examples (b/219881125)
-_NAME_TO_FEATURES_ENCODE = {
-    'rlds':
-        tfds.features.FeaturesDict({
-            'episode_id': tf.string,
-            'skill': tf.uint8,
-            'steps': tfds.features.Sequence(_STEPS_FEATURES),
-            'task_code': tf.string,
-        }),
-    'sd':
-        tfds.features.FeaturesDict({
-            'image_0': tfds.features.Image(shape=(512, 640, 3), dtype=tf.uint8),
-            'image_1': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
-            'image_2': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
-            'success': tf.bool,
-            'task_code': tf.string,
-        }),
-}
+def _name_to_features_encode(config_name: str):
+  if config_name == 'rlds':
+    return tfds.features.FeaturesDict({
+        'episode_id': tf.string,
+        'skill': tf.uint8,
+        'steps': tfds.features.Sequence(_steps_features()),
+        'task_code': tf.string,
+    })
+  return tfds.features.FeaturesDict({
+      'image_0': tfds.features.Image(shape=(512, 640, 3), dtype=tf.uint8),
+      'image_1': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
+      'image_2': tfds.features.Image(shape=(480, 640, 3), dtype=tf.uint8),
+      'success': tf.bool,
+      'task_code': tf.string,
+  })
+
 
 _NAME_TO_SPLITS = {
     'sd': {
@@ -164,7 +165,7 @@ class MtOpt(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=_NAME_TO_FEATURES[self.builder_config.name],
+        features=_name_to_features(self.builder_config.name),
         supervised_keys=None,
         homepage='https://karolhausman.github.io/mt-opt/',
         citation=_CITATION,
@@ -188,7 +189,7 @@ class MtOpt(tfds.core.GeneratorBasedBuilder):
     # Dataset of tf.Examples containing full episodes.
     example_ds = tf.data.TFRecordDataset(filenames=str(path))
 
-    example_features = _NAME_TO_FEATURES_ENCODE[self.builder_config.name]
+    example_features = _name_to_features_encode(self.builder_config.name)
     example_specs = example_features.get_serialized_info()
     parser = tfds.core.example_parser.ExampleParser(example_specs)
 

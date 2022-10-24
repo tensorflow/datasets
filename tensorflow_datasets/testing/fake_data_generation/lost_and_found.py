@@ -15,7 +15,7 @@
 
 """Script to generate fake 'Lost and Found' data."""
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-import tensorflow_datasets.testing.cityscapes as cityscapes
+from tensorflow_datasets.testing import cityscapes
 
 if __name__ == '__main__':
   example_dir = ('tensorflow_datasets/testing/test_data/fake_examples/'

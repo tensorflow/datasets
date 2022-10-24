@@ -25,6 +25,7 @@ import html
 import importlib
 import json
 import os
+import typing
 from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 
 from etils import epath
@@ -49,8 +50,11 @@ TreeDict = type_utils.TreeDict
 T = TypeVar('T', bound='FeatureConnector')
 
 # FeatureConnector-like input accepted by `Sequence()`, `Optional()`,...
-FeatureConnectorArg = Union['FeatureConnector',
-                            Dict[str, 'FeatureConnectorArg'], tf.dtypes.DType]  # pytype: disable=not-supported-yet
+if typing.TYPE_CHECKING:
+  FeatureConnectorArg = Union['FeatureConnector',
+                              Dict[str, 'FeatureConnectorArg'], tf.dtypes.DType]
+else:
+  FeatureConnectorArg = Any
 
 
 class TensorInfo(object):

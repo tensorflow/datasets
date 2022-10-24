@@ -56,17 +56,21 @@ _CITATION = """
 _CUTS = ('Fair', 'Good', 'Very Good', 'Premium', 'Ideal')
 _COLORS = ('D', 'E', 'F', 'G', 'H', 'I', 'J')
 _CLARITY = ('I1', 'SI2', 'SI1', 'VS2', 'VS1', 'VVS2', 'VVS1', 'IF')
-_FEATURES = collections.OrderedDict((
-    ('carat', tf.float32),
-    ('cut', tfds.features.ClassLabel(names=_CUTS)),
-    ('color', tfds.features.ClassLabel(names=_COLORS)),
-    ('clarity', tfds.features.ClassLabel(names=_CLARITY)),
-    ('x', tf.float32),
-    ('y', tf.float32),
-    ('z', tf.float32),
-    ('depth', tf.float32),
-    ('table', tf.float32),
-))
+
+
+def _features():
+  return collections.OrderedDict((
+      ('carat', tf.float32),
+      ('cut', tfds.features.ClassLabel(names=_CUTS)),
+      ('color', tfds.features.ClassLabel(names=_COLORS)),
+      ('clarity', tfds.features.ClassLabel(names=_CLARITY)),
+      ('x', tf.float32),
+      ('y', tf.float32),
+      ('z', tf.float32),
+      ('depth', tf.float32),
+      ('table', tf.float32),
+  ))
+
 
 _URL = 'https://raw.githubusercontent.com/tidyverse/ggplot2/main/data-raw/diamonds.csv'
 
@@ -85,7 +89,7 @@ class Diamonds(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'features': {k: v for k, v in _FEATURES.items()},
+            'features': {k: v for k, v in _features().items()},
             'price': tf.float32,
         }),
         supervised_keys=('features', 'price'),
@@ -110,6 +114,6 @@ class Diamonds(tfds.core.GeneratorBasedBuilder):
 
     for row in df.itertuples():
       yield row.Index, {
-          'features': {k: getattr(row, k) for k in _FEATURES.keys()},
+          'features': {k: getattr(row, k) for k in _features().keys()},
           'price': row.price
       }

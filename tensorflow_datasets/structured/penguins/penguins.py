@@ -20,6 +20,7 @@ from __future__ import annotations
 import csv
 import dataclasses
 import textwrap
+import typing
 from typing import Any, Mapping, Optional, Union
 
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -51,7 +52,10 @@ _CITATION = """\
 }
 """
 
-FeatureType = Union[tf.dtypes.DType, tfds.core.features.FeatureConnector]
+if typing.TYPE_CHECKING:
+  FeatureType = Union[tf.dtypes.DType, tfds.core.features.FeatureConnector]
+else:
+  FeatureType = Any
 
 
 @dataclasses.dataclass

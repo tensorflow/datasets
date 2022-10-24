@@ -70,25 +70,27 @@ def return_same(d):
   return d
 
 
-FEATURE_DICT = collections.OrderedDict([
-    ("pclass", (tfds.features.ClassLabel(names=_PCLASS_DICT.values()),
-                lambda d: convert_to_label(d, _PCLASS_DICT))),
-    ("survived", (tfds.features.ClassLabel(names=_SURVIVED_DICT.values()),
-                  lambda d: convert_to_label(d, _SURVIVED_DICT))),
-    ("name", (tf.string, convert_to_string)),
-    ("sex", (tfds.features.ClassLabel(names=["male", "female"]), return_same)),
-    ("age", (tf.float32, convert_to_float)),
-    ("sibsp", (tf.int32, convert_to_int)),
-    ("parch", (tf.int32, convert_to_int)),
-    ("ticket", (tf.string, convert_to_string)),
-    ("fare", (tf.float32, convert_to_float)),
-    ("cabin", (tf.string, convert_to_string)),
-    ("embarked", (tfds.features.ClassLabel(names=_EMBARKED_DICT.values()),
-                  lambda d: convert_to_label(d, _EMBARKED_DICT))),
-    ("boat", (tf.string, convert_to_string)),
-    ("body", (tf.int32, convert_to_int)),
-    ("home.dest", (tf.string, convert_to_string))
-])
+def _feature_dict():
+  return collections.OrderedDict([
+      ("pclass", (tfds.features.ClassLabel(names=_PCLASS_DICT.values()),
+                  lambda d: convert_to_label(d, _PCLASS_DICT))),
+      ("survived", (tfds.features.ClassLabel(names=_SURVIVED_DICT.values()),
+                    lambda d: convert_to_label(d, _SURVIVED_DICT))),
+      ("name", (tf.string, convert_to_string)),
+      ("sex", (tfds.features.ClassLabel(names=["male", "female"]),
+               return_same)), ("age", (tf.float32, convert_to_float)),
+      ("sibsp", (tf.int32, convert_to_int)),
+      ("parch", (tf.int32, convert_to_int)),
+      ("ticket", (tf.string, convert_to_string)),
+      ("fare", (tf.float32, convert_to_float)),
+      ("cabin", (tf.string, convert_to_string)),
+      ("embarked", (tfds.features.ClassLabel(names=_EMBARKED_DICT.values()),
+                    lambda d: convert_to_label(d, _EMBARKED_DICT))),
+      ("boat", (tf.string, convert_to_string)),
+      ("body", (tf.int32, convert_to_int)),
+      ("home.dest", (tf.string, convert_to_string))
+  ])
+
 
 _URL = "https://www.openml.org/data/get_csv/16826755/phpMYEkMl"
 
@@ -106,14 +108,14 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
   }
 
   def _info(self):
-    supervised_features = FEATURE_DICT.copy()
+    supervised_features = _feature_dict()
     survived_feature, unused_func = supervised_features.pop("survived")
 
     if self.version >= "3.0.0":
       supervised_keys = ({key: key for key in supervised_features.keys()},
                          "survived")
       features = features = tfds.features.FeaturesDict(
-          {name: dtype for name, (dtype, func) in FEATURE_DICT.items()})
+          {name: dtype for name, (dtype, func) in _feature_dict().items()})
     else:
       supervised_keys = ("features", "survived")
       features = tfds.features.FeaturesDict({
@@ -154,7 +156,8 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
       if self.version >= "3.0.0":
         for i, row in enumerate(raw_data):
           yield i, {
-              name: FEATURE_DICT[name][1](value) for name, value in row.items()
+              name: _feature_dict()[name][1](value)
+              for name, value in row.items()
           }
       else:
         for i, row in enumerate(raw_data):
@@ -162,7 +165,7 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
           yield i, {
               "survived": convert_to_label(survive_val, _SURVIVED_DICT),
               "features": {
-                  name: FEATURE_DICT[name][1](value)
+                  name: _feature_dict()[name][1](value)
                   for name, value in row.items()
               }
           }

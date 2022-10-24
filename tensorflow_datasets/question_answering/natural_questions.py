@@ -72,61 +72,63 @@ _CITATIONS = {
     """,
 }
 
-_FEATURES = {
-    'default':
-        tfds.features.FeaturesDict({
-            'id':
-                tf.string,
-            'document': {
-                'title':
-                    tfds.features.Text(),
-                'url':
-                    tfds.features.Text(),
-                'html':
-                    tfds.features.Text(),
-                'tokens':
-                    tfds.features.Sequence({
-                        'token': tfds.features.Text(),
-                        'is_html': tf.bool,
-                    })
-            },
-            'question': {
-                'text': tfds.features.Text(),
-                'tokens': tfds.features.Sequence(tf.string),
-            },
-            'annotations':
-                tfds.features.Sequence({
-                    'id':
-                        tf.string,
-                    'long_answer': {
-                        'start_token': tf.int64,
-                        'end_token': tf.int64,
-                        'start_byte': tf.int64,
-                        'end_byte': tf.int64,
-                    },
-                    'short_answers':
-                        tfds.features.Sequence({
-                            'start_token': tf.int64,
-                            'end_token': tf.int64,
-                            'start_byte': tf.int64,
-                            'end_byte': tf.int64,
-                            'text': tfds.features.Text(),
-                        }),
-                    'yes_no_answer':
-                        tfds.features.ClassLabel(names=['NO', 'YES']
-                                                )  # Can also be -1 for NONE.
-                }),
-        }),
-    'longt5':
-        tfds.features.FeaturesDict({
-            'id': tfds.features.Text(),
-            'title': tfds.features.Text(),
-            'context': tfds.features.Text(),
-            'question': tfds.features.Text(),
-            'answer': tfds.features.Text(),
-            'all_answers': tfds.features.Sequence(tfds.features.Text()),
-        }),
-}
+
+def _features():
+  return {
+      'default':
+          tfds.features.FeaturesDict({
+              'id':
+                  tf.string,
+              'document': {
+                  'title':
+                      tfds.features.Text(),
+                  'url':
+                      tfds.features.Text(),
+                  'html':
+                      tfds.features.Text(),
+                  'tokens':
+                      tfds.features.Sequence({
+                          'token': tfds.features.Text(),
+                          'is_html': tf.bool,
+                      })
+              },
+              'question': {
+                  'text': tfds.features.Text(),
+                  'tokens': tfds.features.Sequence(tf.string),
+              },
+              'annotations':
+                  tfds.features.Sequence({
+                      'id':
+                          tf.string,
+                      'long_answer': {
+                          'start_token': tf.int64,
+                          'end_token': tf.int64,
+                          'start_byte': tf.int64,
+                          'end_byte': tf.int64,
+                      },
+                      'short_answers':
+                          tfds.features.Sequence({
+                              'start_token': tf.int64,
+                              'end_token': tf.int64,
+                              'start_byte': tf.int64,
+                              'end_byte': tf.int64,
+                              'text': tfds.features.Text(),
+                          }),
+                      'yes_no_answer':
+                          tfds.features.ClassLabel(names=['NO', 'YES']
+                                                  )  # Can also be -1 for NONE.
+                  }),
+          }),
+      'longt5':
+          tfds.features.FeaturesDict({
+              'id': tfds.features.Text(),
+              'title': tfds.features.Text(),
+              'context': tfds.features.Text(),
+              'question': tfds.features.Text(),
+              'answer': tfds.features.Text(),
+              'all_answers': tfds.features.Sequence(tfds.features.Text()),
+          }),
+  }
 
 
 class NaturalQuestionsConfig(tfds.core.BuilderConfig):
@@ -159,12 +161,12 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
       NaturalQuestionsConfig(
           name='default',
           description='Default natural_questions config',
-          features=_FEATURES['default']),
+          features=_features()['default']),
       NaturalQuestionsConfig(
           name='longt5',
           description='natural_questions preprocessed as in the longT5 benchmark',
           citation=_CITATIONS['longt5'],
-          features=_FEATURES['longt5'],
+          features=_features()['longt5'],
       )
   ]
   DEFAULT_CONFIG_NAME = 'default'
@@ -200,7 +202,7 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
     """Parse a single json line and emit an example dict."""
 
     def _parse_short_answer_default(html_bytes, short_ans):
-      """"Extract text of short answer."""
+      """Extract text of short answer."""
       ans_bytes = html_bytes[short_ans['start_byte']:short_ans['end_byte']]
       # Remove non-breaking spaces.
       ans_bytes = ans_bytes.replace(b'\xc2\xa0', b' ')
