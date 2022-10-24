@@ -16,6 +16,7 @@
 """Caltech birds dataset."""
 
 import collections
+import concurrent.futures
 import os
 import re
 
@@ -43,6 +44,9 @@ Year = {2010}
 }
 """
 _NAME_RE = re.compile(r"((\w*)/)*(\d*).(\w*)/(\w*.jpg)$")
+
+# Number of workers to use for concurrent parts of the code.
+_WORKERS = 8
 
 
 class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
@@ -109,16 +113,29 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
 
     attributes = collections.defaultdict(list)
 
-    for root, _, files in tf.io.gfile.walk(extracted_path[1]):
+    scipy = tfds.core.lazy_imports.scipy
+
+    def process_file(path: epath.Path):
       # Parsing the .mat files which have the image annotations
-      for fname in files:
-        if fname.endswith(".mat"):
-          path = os.path.join(root, fname)
-          with tf.io.gfile.GFile(path, "rb") as f:
-            mat = tfds.core.lazy_imports.scipy.io.loadmat(
-                f, squeeze_me=True, variable_names=["bbox", "seg"])
-          attributes[fname.split(".")[0]].append(mat["bbox"])
-          attributes[fname.split(".")[0]].append(mat["seg"])
+      with path.open(mode="rb") as f:
+        mat = scipy.io.loadmat(
+            f, squeeze_me=True, variable_names=["bbox", "seg"])
+      key = path.name.split(".")[0]
+      attributes[key].append(mat["bbox"])
+      attributes[key].append(mat["seg"])
+
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=_WORKERS) as executor:
+      futures = []
+      for root, _, fnames in tf.io.gfile.walk(extracted_path[1]):
+        root = epath.Path(root)
+        for fname in fnames:
+          if not fname.endswith(".mat"):
+            continue
+          future = executor.submit(process_file, path=root / fname)
+          futures.append(future)
+    for future in concurrent.futures.as_completed(futures):
+      future.result()
 
     return [
         tfds.core.SplitGenerator(
@@ -160,36 +177,34 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
     """Generate birds images, labels and bounding box given the directory path.
 
     Args:
-        archive: object that iterates over the zip
-        file_names : list of train/test image file names obtained from mat file
-        annotations : dict of image file names and bbox attributes, segmentation
-          labels
+        archive: object that iterates over the zip file_names : list of
+          train/test image file names obtained from mat file annotations : dict
+          of image file names and bbox attributes, segmentation labels
+        file_names: file names.
+        annotations: annotations.
 
     Yields:
-        Image path, Image file name, its corresponding label and
-        bounding box values
+        The key and examples. Examples consist of image path, image file name,
+        its corresponding label, bounding box values, and segmentation mask.
     """
 
-    for fname, fobj in archive:
+    def process_file(element):
+      fname, fobj = element
       fname = fname.replace("\\", "/")  # For windows compatibility
       res = _NAME_RE.match(fname)
 
       # Checking if filename is present in respective train/test list
-
       if not res or "/".join(fname.split("/")[-2:]) not in file_names:
-        continue
+        return
       matches = res.groups()
       label_name = matches[-2].lower()  # pytype: disable=attribute-error
       label_key = int(matches[-3]) - 1
       file_name = matches[-1].split(".")[0]  # pytype: disable=attribute-error
       segmentation_mask = annotations[file_name][1]
-
       height, width = segmentation_mask.shape
-
       bbox = self._get_bounding_box_values(annotations[file_name][0], width,
                                            height)
-
-      yield fname, {
+      return fname, {
           "image":
               fobj,
           "image/filename":
@@ -208,6 +223,12 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
               segmentation_mask[:, :, np.newaxis],
       }
 
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=_WORKERS) as executor:
+      for example in executor.map(process_file, archive):
+        if example:
+          yield example
+
 
 class CaltechBirds2011(CaltechBirds2010):
   """Caltech Birds 2011 dataset."""
@@ -224,7 +245,6 @@ class CaltechBirds2011(CaltechBirds2010):
     )
 
   def _info(self):
-
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -242,7 +262,6 @@ class CaltechBirds2011(CaltechBirds2010):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
-
     download_path = dl_manager.download([
         self._caltech_birds_info.images_url,
     ])
@@ -276,13 +295,22 @@ class CaltechBirds2011(CaltechBirds2010):
           else:
             test_list.append(img_name)
 
-    for root, _, files in tf.io.gfile.walk(extracted_path[1]):
-      for fname in files:
-        if fname.endswith(".png"):
-          with tf.io.gfile.GFile(os.path.join(root, fname), "rb") as png_f:
-            mask = tfds.core.lazy_imports.cv2.imdecode(
-                np.frombuffer(png_f.read(), dtype=np.uint8), flags=0)
-          attributes[fname.split(".")[0]].append(mask)
+    def process_file(root, fname):
+      with tf.io.gfile.GFile(os.path.join(root, fname), "rb") as png_f:
+        mask = tfds.core.lazy_imports.cv2.imdecode(
+            np.frombuffer(png_f.read(), dtype=np.uint8), flags=0)
+      attributes[fname.split(".")[0]].append(mask)
+
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=_WORKERS) as executor:
+      futures = []
+      for root, _, files in tf.io.gfile.walk(extracted_path[1]):
+        for fname in files:
+          if fname.endswith(".png"):
+            future = executor.submit(process_file, root, fname)
+            futures.append(future)
+      for future in concurrent.futures.as_completed(futures):
+        future.result()
 
     return [
         tfds.core.SplitGenerator(
