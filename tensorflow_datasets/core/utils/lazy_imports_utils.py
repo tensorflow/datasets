@@ -24,7 +24,7 @@ import dataclasses
 import functools
 import importlib
 import types
-from typing import Any, Optional, Iterator
+from typing import Any, Iterator, Optional, Tuple
 
 
 @dataclasses.dataclass
@@ -33,6 +33,7 @@ class LazyModule:
 
   module_name: str
   module: Optional[types.ModuleType] = None
+  fromlist: Optional[Tuple[str, ...]] = ()
 
   @classmethod
   @functools.lru_cache(maxsize=None)
@@ -51,6 +52,9 @@ class LazyModule:
     return cls(**kwargs)
 
   def __getattr__(self, name: str) -> Any:
+    if name in self.fromlist:
+      module_name = f'{self.module_name}.{name}'
+      return self.from_cache(module_name=module_name)
     if self.module is None:  # Load on first call
       self.module = importlib.import_module(self.module_name)
     return getattr(self.module, name)
@@ -63,10 +67,11 @@ def lazy_imports() -> Iterator[None]:
   Their import is not executed immediately, but is postponed to the first
   call of one of their attributes.
 
-  Warning:
+  Warning: mind current implementation's limitations:
 
-  - `import x.y.z` and all its variants are possible.
-  - The syntax `from ... import ...` is not implemented yet and will fail.
+  - You can only lazy load modules (`from x import y` will not work if `y` is a
+    constant or a function or a class).
+  - You cannot `import x.y` if `y` is not imported in the `x/__init__.py`.
 
   Usage:
 
@@ -82,12 +87,12 @@ def lazy_imports() -> Iterator[None]:
   """
   # Need to mock `__import__` (instead of `sys.meta_path`, as we do not want
   # to modify the `sys.modules` cache in any way)
-  origin_import = builtins.__import__
+  original_import = builtins.__import__
   try:
     builtins.__import__ = _lazy_import
     yield
   finally:
-    builtins.__import__ = origin_import
+    builtins.__import__ = original_import
 
 
 def _lazy_import(
@@ -103,15 +108,16 @@ def _lazy_import(
   if level:
     raise ValueError(f'Relative import statements not supported ({name}).')
 
-  root_name = name.split('.')[0]
-  root = LazyModule.from_cache(module_name=root_name)
   if not fromlist:
     # import x.y.z
     # import x.y.z as z
-    return root
+    # In that case, Python would usually import the entirety of `x` if each
+    # submodule is imported in its parent's `__init__.py`. So we do the same.
+    root_name = name.split('.')[0]
+    return LazyModule.from_cache(module_name=root_name)
   else:
     # from x.y.z import a, b
-    raise NotImplementedError()
+    return LazyModule.from_cache(module_name=name, fromlist=fromlist)
 
 
 with lazy_imports():
