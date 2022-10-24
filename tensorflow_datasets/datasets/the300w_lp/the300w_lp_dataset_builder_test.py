@@ -16,11 +16,11 @@
 """Tests for 300W-LP dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import the300w_lp
+from tensorflow_datasets.datasets.the300w_lp import the300w_lp_dataset_builder
 
 
 class The300wLpTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = the300w_lp.The300wLp
+  DATASET_CLASS = the300w_lp_dataset_builder.Builder
   SPLITS = {
       "train": 2,
   }
