@@ -16,11 +16,11 @@
 """Test for FLIC dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import flic
+from tensorflow_datasets.datasets.flic import flic_dataset_builder
 
 
 class FlicTestSmall(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = flic.Flic
+  DATASET_CLASS = flic_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["small"]
   SPLITS = {
       "train": 1,
@@ -29,7 +29,7 @@ class FlicTestSmall(testing.DatasetBuilderTestCase):
 
 
 class FlicTestFull(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = flic.Flic
+  DATASET_CLASS = flic_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["full"]
   SPLITS = {
       "train": 1,
