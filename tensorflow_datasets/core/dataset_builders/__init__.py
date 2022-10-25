@@ -21,6 +21,8 @@ from tensorflow_datasets.core.dataset_builders.conll.conllu_dataset_builder impo
 from tensorflow_datasets.core.dataset_builders.conll.conllu_dataset_builder import ConllUDatasetBuilder
 from tensorflow_datasets.core.dataset_builders.huggingface_dataset_builder import HuggingfaceDatasetBuilder
 from tensorflow_datasets.core.dataset_builders.tf_data_builder import TfDataBuilder
+from tensorflow_datasets.core.dataset_builders.view_builder import ViewBuilder
+from tensorflow_datasets.core.dataset_builders.view_builder import ViewConfig
 
 __all__ = [
     "ConllBuilderConfig",

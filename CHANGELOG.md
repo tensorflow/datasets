@@ -10,6 +10,9 @@ and this project adheres to
 
 ### Added
 
+-   [API][Experimental] New `ViewBuilder` to define datasets as transformations
+    of existing datasets. Also adds `tfds.transform` with functionality to apply
+    transformations.
 -   Loggers are also called on `tfds.as_numpy(...)`, base `Logger` class has a
     new corresponding method.
 
