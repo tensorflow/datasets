@@ -15,12 +15,12 @@
 
 """CLIC dataset."""
 
-from tensorflow_datasets.image import clic
+from tensorflow_datasets.datasets.clic import clic_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class ClicTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = clic.CLIC
+  DATASET_CLASS = clic_dataset_builder.Builder
   SPLITS = {
       "train": 1,
       "validation": 1,
