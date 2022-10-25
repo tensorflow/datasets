@@ -15,12 +15,12 @@
 
 """Tests for tensorflow_datasets.image.celebahq."""
 
-from tensorflow_datasets.image import celebahq
+from tensorflow_datasets.datasets.celeb_a_hq import celeb_a_hq_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class CelebAHQTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = celebahq.CelebAHq
+  DATASET_CLASS = celeb_a_hq_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["512"]
 
   SPLITS = {
