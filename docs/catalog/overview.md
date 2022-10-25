@@ -72,18 +72,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Image`
 
-*   [`abstract_reasoning`](abstract_reasoning.md)
-*   [`arc`](arc.md)
-*   [`bccd`](bccd.md)
-*   [`binarized_mnist`](binarized_mnist.md)
-*   [`celeb_a`](celeb_a.md)
-*   [`celeb_a_hq`](celeb_a_hq.md)
-*   [`clevr`](clevr.md)
-*   [`clic`](clic.md)
-*   [`duke_ultrasound`](duke_ultrasound.md)
-*   [`lost_and_found`](lost_and_found.md)
 *   [`lsun`](lsun.md)
-*   [`scene_parse150`](scene_parse150.md)
 
 ### `Image classification`
 

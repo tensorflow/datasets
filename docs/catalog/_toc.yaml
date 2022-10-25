@@ -78,30 +78,8 @@ toc:
     title: ogbg_molpcba
   title: Graphs
 - section:
-  - path: /datasets/catalog/abstract_reasoning
-    title: abstract_reasoning (manual)
-  - path: /datasets/catalog/arc
-    title: arc
-  - path: /datasets/catalog/bccd
-    title: bccd
-  - path: /datasets/catalog/binarized_mnist
-    title: binarized_mnist
-  - path: /datasets/catalog/celeb_a
-    title: celeb_a
-  - path: /datasets/catalog/celeb_a_hq
-    title: celeb_a_hq (manual)
-  - path: /datasets/catalog/clevr
-    title: clevr
-  - path: /datasets/catalog/clic
-    title: clic
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  - path: /datasets/catalog/lost_and_found
-    title: lost_and_found
   - path: /datasets/catalog/lsun
     title: lsun
-  - path: /datasets/catalog/scene_parse150
-    title: scene_parse150
   title: Image
 - section:
   - path: /datasets/catalog/beans
