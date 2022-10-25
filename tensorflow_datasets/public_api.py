@@ -53,6 +53,7 @@ from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
 from tensorflow_datasets.core.utils.tqdm_utils import enable_progress_bar
 from tensorflow_datasets.core.utils.tqdm_utils import display_progress_bar
 from tensorflow_datasets.core.visualization import show_examples
+from tensorflow_datasets.core import transform
 from tensorflow_datasets.core.visualization import show_statistics
 from tensorflow_datasets.version import __version__
 
