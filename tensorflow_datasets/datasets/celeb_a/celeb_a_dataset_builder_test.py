@@ -13,13 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.image.celeba."""
+"""Tests for celeb_a_dataset_builder."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import celeba
+from tensorflow_datasets.datasets.celeb_a import celeb_a_dataset_builder
 
 
 class CelebATest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = celeba.CelebA
+  DATASET_CLASS = celeb_a_dataset_builder.Builder
 
   SPLITS = {
       "train": 3,
