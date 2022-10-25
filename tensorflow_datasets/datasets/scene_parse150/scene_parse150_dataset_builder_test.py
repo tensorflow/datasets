@@ -16,12 +16,12 @@
 """Tests for MIT Scene Parsing Benchmark (SceneParse150)."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import scene_parse_150
+from tensorflow_datasets.datasets.scene_parse150 import scene_parse150_dataset_builder
 
 
 class SceneParse150Test(testing.DatasetBuilderTestCase):
 
-  DATASET_CLASS = scene_parse_150.SceneParse150
+  DATASET_CLASS = scene_parse150_dataset_builder.Builder
 
   SPLITS = {
       "train": 3,
