@@ -16,11 +16,11 @@
 """Tests for LostAndFound dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import lost_and_found
+from tensorflow_datasets.datasets.lost_and_found import lost_and_found_dataset_builder
 
 
 class LostAndFoundTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = lost_and_found.LostAndFound
+  DATASET_CLASS = lost_and_found_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['semantic_segmentation', 'full']
   SPLITS = {
       'train': 4,  # Number of fake train example
