@@ -16,22 +16,22 @@
 """Tests for binarized_mnist dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import binarized_mnist
+from tensorflow_datasets.datasets.binarized_mnist import binarized_mnist_dataset_builder
 
 # testing/binarized_mnist.py generates fake input data
 
 
 class MNISTTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = binarized_mnist.BinarizedMNIST
+  DATASET_CLASS = binarized_mnist_dataset_builder.Builder
   SPLITS = {
       "train": 10,
       "validation": 2,
       "test": 2,
   }
   DL_EXTRACT_RESULT = {
-      "train_data": binarized_mnist._TRAIN_DATA_FILENAME,
-      "validation_data": binarized_mnist._VALID_DATA_FILENAME,
-      "test_data": binarized_mnist._TEST_DATA_FILENAME,
+      "train_data": binarized_mnist_dataset_builder._TRAIN_DATA_FILENAME,
+      "validation_data": binarized_mnist_dataset_builder._VALID_DATA_FILENAME,
+      "test_data": binarized_mnist_dataset_builder._TEST_DATA_FILENAME,
   }
 
 
