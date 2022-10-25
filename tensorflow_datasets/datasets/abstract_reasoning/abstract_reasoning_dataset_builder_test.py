@@ -15,12 +15,12 @@
 
 """AbstractReasoning dataset test."""
 
-from tensorflow_datasets.image import abstract_reasoning
+from tensorflow_datasets.datasets.abstract_reasoning import abstract_reasoning_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class AbstractReasoningTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = abstract_reasoning.AbstractReasoning
+  DATASET_CLASS = abstract_reasoning_dataset_builder.Builder
   SPLITS = {"train": 5, "validation": 5, "test": 5}
   DL_EXTRACT_RESULT = [
       "neutral.tar.gz",
