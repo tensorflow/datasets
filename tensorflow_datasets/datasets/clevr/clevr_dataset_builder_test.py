@@ -15,11 +15,11 @@
 
 """Tests for CLEVR dataset module."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image.clevr import CLEVR
+from tensorflow_datasets.datasets.clevr import clevr_dataset_builder
 
 
 class CLEVRTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = CLEVR
+  DATASET_CLASS = clevr_dataset_builder.Builder
   SPLITS = {  # Expected number of examples on each split.
       "train": 5,
       "validation": 5,
