@@ -16,11 +16,11 @@
 """DAS beamformed phantom images and paired clinical post-processed images test."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import duke_ultrasound
+from tensorflow_datasets.datasets.duke_ultrasound import duke_ultrasound_dataset_builder
 
 
 class DukeUltrasoundTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = duke_ultrasound.DukeUltrasound
+  DATASET_CLASS = duke_ultrasound_dataset_builder.Builder
   OVERLAPPING_SPLITS = ["A", "B", "TRAIN"]
 
   SPLITS = {"train": 1, "test": 1, "validation": 1, "MARK": 1, "A": 1, "B": 1}
