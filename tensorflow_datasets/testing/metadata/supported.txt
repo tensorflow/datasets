@@ -10,7 +10,6 @@ abstract_reasoning/interpolation/1.0.0
 abstract_reasoning/neutral/1.0.0
 accentdb/1.0.0
 aeslc/1.0.0
-aflw2k3d/1.0.0
 ag_news_subset/1.0.0
 ai2_arc/ARC-Challenge/1.0.0
 ai2_arc/ARC-Easy/1.0.0
@@ -430,10 +429,6 @@ cifar10_corrupted/zoom_blur_4/1.0.0
 cifar10_corrupted/zoom_blur_5/1.0.0
 cifar10_n/1.0.4
 citrus_leaves/0.1.2
-cityscapes/semantic_segmentation/1.0.0
-cityscapes/semantic_segmentation_extra/1.0.0
-cityscapes/stereo_disparity/1.0.0
-cityscapes/stereo_disparity_extra/1.0.0
 civil_comments/CivilComments/1.2.3
 civil_comments/CivilCommentsCovert/1.2.3
 civil_comments/CivilCommentsIdentities/1.2.3
@@ -451,7 +446,6 @@ coco/2014/1.1.0
 coco/2017/1.1.0
 coco/2017_panoptic/1.1.0
 coco_captions/2014/1.1.0
-coil100/2.0.0
 colorectal_histology/2.0.0
 colorectal_histology_large/2.0.0
 common_voice/ab/2.0.0
@@ -648,16 +642,6 @@ diabetic_retinopathy_detection/250K/3.0.0
 diabetic_retinopathy_detection/btgraham-300/3.0.0
 diabetic_retinopathy_detection/original/3.0.0
 diamonds/1.0.0
-div2k/bicubic_x2/2.0.0
-div2k/bicubic_x3/2.0.0
-div2k/bicubic_x4/2.0.0
-div2k/bicubic_x8/2.0.0
-div2k/realistic_difficult_x4/2.0.0
-div2k/realistic_mild_x4/2.0.0
-div2k/realistic_wild_x4/2.0.0
-div2k/unknown_x2/2.0.0
-div2k/unknown_x3/2.0.0
-div2k/unknown_x4/2.0.0
 dmlab/2.0.1
 doc_nli/1.0.0
 dolphin_number_word/0.0.2
@@ -667,11 +651,7 @@ domainnet/painting/1.0.0
 domainnet/quickdraw/1.0.0
 domainnet/real/1.0.0
 domainnet/sketch/1.0.0
-downsampled_imagenet/32x32/2.0.0
-downsampled_imagenet/64x64/2.0.0
 drop/2.0.0
-dsprites/2.0.0
-dsprites/2.1.0
 dtd/3.0.1
 duke_ultrasound/1.0.0
 e2e_cleaned/0.1.0
@@ -687,8 +667,6 @@ esnli/0.1.0
 eurosat/all/2.0.0
 eurosat/rgb/2.0.0
 fashion_mnist/3.0.1
-flic/full/2.0.0
-flic/small/2.0.0
 flores/neen/1.2.0
 flores/sien/1.2.0
 food101/1.0.0
@@ -1237,7 +1215,6 @@ nsynth/gansynth_subset/2.3.0
 nsynth/gansynth_subset/2.3.1
 nsynth/gansynth_subset/2.3.2
 nsynth/gansynth_subset/2.3.3
-nyu_depth_v2/0.0.1
 ogbg_molpcba/0.1.3
 omniglot/3.0.0
 open_images_challenge2019_detection/200k/1.0.0
@@ -2133,7 +2110,6 @@ robosuite_panda_pick_place_can/human_images_dc29b40a/1.0.0
 robosuite_panda_pick_place_can/synthetic_stochastic_sac_afe13968/1.0.0
 rock_paper_scissors/3.0.0
 rock_you/1.0.0
-s3o4d/1.0.0
 salient_span_wikipedia/documents/1.0.0
 salient_span_wikipedia/sentences/1.0.0
 samsum/1.0.0
@@ -2169,7 +2145,6 @@ scrolls/qmsum/1.0.0
 scrolls/quality/1.0.0
 scrolls/summ_screen_fd/1.0.0
 sentiment140/1.0.0
-shapes3d/2.0.0
 sift1m/1.0.0
 simpte/1.0.0
 siscore/location/1.0.0
@@ -3114,7 +3089,6 @@ super_glue/wsc.fixed/1.0.2
 super_glue/wsc/1.0.2
 svhn_cropped/3.0.0
 svhn_cropped/3.1.0
-symmetric_solids/1.0.0
 tao/480_640/1.0.0
 tao/full_resolution/1.0.0
 tatoeba/tatoeba_af/1.0.0
@@ -3172,7 +3146,6 @@ tedlium/release1/1.0.1
 tedlium/release2/1.0.1
 tedlium/release3/1.0.1
 tf_flowers/3.0.1
-the300w_lp/1.0.0
 tiny_shakespeare/1.0.0
 titanic/2.0.0
 titanic/4.0.0
