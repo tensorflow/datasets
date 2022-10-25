@@ -16,11 +16,11 @@
 """Tests for the ARC dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import arc
+from tensorflow_datasets.datasets.arc import arc_dataset_builder
 
 
 class ArcTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = arc.ARC
+  DATASET_CLASS = arc_dataset_builder.Builder
   SPLITS = {
       "train": 10,  # Number of fake train example
       "test": 5,  # Number of fake test example
