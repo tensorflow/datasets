@@ -13,21 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""BillSum Dataset Test."""
-
-from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import billsum
+from tensorflow_datasets.datasets.binary_alpha_digits import binary_alpha_digits_dataset_builder
+import tensorflow_datasets.testing as tfds_test
 
 
-class BillsumTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = billsum.Billsum
+class BinaryAlphaDigitsTest(tfds_test.DatasetBuilderTestCase):
+  DATASET_CLASS = binary_alpha_digits_dataset_builder.Builder
   SPLITS = {
-      "train": 1,  # Number of fake train example
-      "test": 1,  # Number of fake test example
-      "ca_test": 1  # Number of fake test example
+      "train": 2,
   }
-  DL_EXTRACT_RESULT = ""
+
+  DL_EXTRACT_RESULT = {"train": "binaryalphadigs.mat"}
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds_test.test_main()

@@ -13,18 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from tensorflow_datasets.image_classification import binary_alpha_digits
-import tensorflow_datasets.testing as tfds_test
+"""BillSum Dataset Test."""
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.billsum import billsum_dataset_builder
 
 
-class BinaryAlphaDigitsTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = binary_alpha_digits.BinaryAlphaDigits
+class BillsumTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = billsum_dataset_builder.Builder
   SPLITS = {
-      "train": 2,
+      "train": 1,  # Number of fake train example
+      "test": 1,  # Number of fake test example
+      "ca_test": 1  # Number of fake test example
   }
-
-  DL_EXTRACT_RESULT = {"train": "binaryalphadigs.mat"}
+  DL_EXTRACT_RESULT = ""
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()
