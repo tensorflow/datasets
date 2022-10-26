@@ -22,6 +22,7 @@ from tensorflow_datasets.text.beir import Beir
 from tensorflow_datasets.text.blimp import Blimp
 from tensorflow_datasets.text.bool_q import BoolQ
 from tensorflow_datasets.text.c4 import C4
+from tensorflow_datasets.text.c4_wsrs import C4WSRS
 from tensorflow_datasets.text.cfq import CFQ
 from tensorflow_datasets.text.cfq import CFQConfig
 from tensorflow_datasets.text.civil_comments import CivilComments

@@ -148,6 +148,7 @@ DATASET_EXTRAS = {
     'beir': ['apache_beam'],
     'ble_wind_field': ['gcsfs', 'zarr'],
     'c4': ['apache_beam', 'gcld3', 'langdetect', 'nltk', 'tldextract'],
+    'c4_wsrs': ['apache_beam'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
