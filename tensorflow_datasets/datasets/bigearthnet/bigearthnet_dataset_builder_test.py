@@ -16,11 +16,11 @@
 """Tests for Bigearthnet data loading."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import bigearthnet
+from tensorflow_datasets.datasets.bigearthnet import bigearthnet_dataset_builder
 
 
 class BigearthnetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = bigearthnet.Bigearthnet
+  DATASET_CLASS = bigearthnet_dataset_builder.Builder
   SPLITS = {
       "train": 1,
   }
