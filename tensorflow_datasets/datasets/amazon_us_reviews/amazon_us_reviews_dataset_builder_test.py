@@ -16,11 +16,11 @@
 """Tests for amazon_us_reviews dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.structured import amazon_us_reviews
+from tensorflow_datasets.datasets.amazon_us_reviews import amazon_us_reviews_dataset_builder
 
 
 class AmazonUSReviewsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = amazon_us_reviews.AmazonUSReviews
+  DATASET_CLASS = amazon_us_reviews_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["Apparel_v1_00"]
   SPLITS = {
       "train": 5,
