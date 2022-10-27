@@ -15,12 +15,12 @@
 
 """Tests for the ai2_arc dataset."""
 
+from tensorflow_datasets.datasets.ai2_arc import ai2_arc_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.question_answering import ai2_arc
 
 
 class Ai2ArcTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ai2_arc.Ai2Arc
+  DATASET_CLASS = ai2_arc_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["ARC-Easy"]
   SPLITS = {
       "train": 3,
