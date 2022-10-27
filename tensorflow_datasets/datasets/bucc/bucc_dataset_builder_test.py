@@ -15,13 +15,13 @@
 
 """bucc dataset."""
 
+from tensorflow_datasets.datasets.bucc import bucc_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.translate.bucc import bucc
 
 
 class BuccTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for bucc dataset."""
-  DATASET_CLASS = bucc.Bucc
+  DATASET_CLASS = bucc_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ['bucc_fr']
   SPLITS = {
       'validation': 3,  # Number of fake validation example
