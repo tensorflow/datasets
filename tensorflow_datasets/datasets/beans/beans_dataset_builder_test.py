@@ -15,14 +15,14 @@
 
 """Tests for Beans dataset."""
 
-from tensorflow_datasets.image_classification import beans
+from tensorflow_datasets.datasets.beans import beans_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
-beans._IMAGE_SHAPE = (None, None, 3)  # pylint: disable=protected-access
+beans_dataset_builder._IMAGE_SHAPE = (None, None, 3)  # pylint: disable=protected-access
 
 
 class BeansTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = beans.Beans
+  DATASET_CLASS = beans_dataset_builder.Builder
 
   SPLITS = {
       'train': 3,
