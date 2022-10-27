@@ -15,12 +15,12 @@
 
 """Tests for Caltech data loading."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import caltech
+from tensorflow_datasets.datasets.caltech101 import caltech101_dataset_builder
 
 
 class Caltech101Test(testing.DatasetBuilderTestCase):
 
-  DATASET_CLASS = caltech.Caltech101
+  DATASET_CLASS = caltech101_dataset_builder.Builder
 
   SPLITS = {
       'train': 3,
@@ -29,7 +29,7 @@ class Caltech101Test(testing.DatasetBuilderTestCase):
 
   def setUp(self):
     super(Caltech101Test, self).setUp()
-    caltech._TRAIN_POINTS_PER_CLASS = 1
+    caltech101_dataset_builder._TRAIN_POINTS_PER_CLASS = 1
 
 
 if __name__ == '__main__':
