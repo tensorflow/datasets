@@ -16,14 +16,14 @@
 """Test for ANLI dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import anli
+from tensorflow_datasets.datasets.anli import anli_dataset_builder
 
 
 class AnliTest(testing.DatasetBuilderTestCase):
 
   BUILDER_CONFIG_NAMES_TO_TEST = ["r3"]
 
-  DATASET_CLASS = anli.Anli
+  DATASET_CLASS = anli_dataset_builder.Builder
   SPLITS = {
       "validation": 2,  # Number of fake validation examples
       "test": 2,  # Number of fake test examples
