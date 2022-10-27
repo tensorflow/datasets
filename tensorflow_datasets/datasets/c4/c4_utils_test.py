@@ -21,7 +21,7 @@ import os
 import six
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
-from tensorflow_datasets.text import c4_utils
+from tensorflow_datasets.datasets.c4 import c4_utils
 
 EN_TEXT = """This line has enough words and ends in punctuation, Dr. Roberts!
 Economic History | All Institutions | Open Access Articles | Digital Commons Network
@@ -230,8 +230,8 @@ This line should be okay."""
     counters, counter_inc_fn = _get_counters()
     list(
         c4_utils.split_wet_file(
-            os.path.join(testing.fake_examples_dir(),
-                         "c4/c4_wet_files/cc_0.warc.wet.gz"),
+            os.path.join(os.path.dirname(__file__),
+                         "dummy_data/c4_wet_files/cc_0.warc.wet.gz"),
             counter_inc_fn=counter_inc_fn))
     self.assertEqual({
         "wet-file": 1,
