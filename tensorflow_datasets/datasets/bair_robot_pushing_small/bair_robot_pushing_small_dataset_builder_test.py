@@ -16,11 +16,11 @@
 """Tests for tensorflow_datasets.video.bair_robot_pushing."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.video import bair_robot_pushing
+from tensorflow_datasets.datasets.bair_robot_pushing_small import bair_robot_pushing_small_dataset_builder
 
 
 class BairRobotPushingTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = bair_robot_pushing.BairRobotPushingSmall
+  DATASET_CLASS = bair_robot_pushing_small_dataset_builder.Builder
 
   SPLITS = {
       "train": 1,
