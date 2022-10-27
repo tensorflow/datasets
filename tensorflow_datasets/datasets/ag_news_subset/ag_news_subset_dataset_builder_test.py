@@ -16,11 +16,11 @@
 """Test for AG News dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import ag_news_subset
+from tensorflow_datasets.datasets.ag_news_subset import ag_news_subset_dataset_builder
 
 
 class AgNewsSubsetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ag_news_subset.AGNewsSubset
+  DATASET_CLASS = ag_news_subset_dataset_builder.Builder
   SPLITS = {
       "train": 3,  # Number of fake train examples
       "test": 2,  # Number of fake test examples
