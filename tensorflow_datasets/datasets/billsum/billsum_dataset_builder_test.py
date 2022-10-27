@@ -16,11 +16,11 @@
 """BillSum Dataset Test."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import billsum
+from tensorflow_datasets.datasets.billsum import billsum_dataset_builder
 
 
 class BillsumTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = billsum.Billsum
+  DATASET_CLASS = billsum_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train example
       "test": 1,  # Number of fake test example
