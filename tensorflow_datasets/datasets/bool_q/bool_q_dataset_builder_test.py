@@ -16,11 +16,11 @@
 """bool_q dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text.bool_q import bool_q
+from tensorflow_datasets.datasets.bool_q import bool_q_dataset_builder
 
 
 class PawsXWikiTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = bool_q.BoolQ
+  DATASET_CLASS = bool_q_dataset_builder.Builder
   SPLITS = {
       "train": 2,  # Number of fake train examples
       "validation": 2,  # Number of fake validation examples
