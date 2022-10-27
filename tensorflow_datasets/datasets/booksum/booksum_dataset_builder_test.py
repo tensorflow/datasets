@@ -14,15 +14,15 @@
 # limitations under the License.
 
 """summscreen dataset."""
+from tensorflow_datasets.datasets.booksum import booksum_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.summarization.booksum import booksum
 
 
 class BooksumTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for booksum dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = ["book", "chapter"]
 
-  DATASET_CLASS = booksum.Booksum
+  DATASET_CLASS = booksum_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train example
       "validation": 1,  # Number of fake train example
