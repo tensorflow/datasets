@@ -17,12 +17,12 @@
 
 from unittest import mock
 
+from tensorflow_datasets.datasets.ble_wind_field import ble_wind_field_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.structured.ble_wind_field import ble_wind_field
 
 
 class BLEWindFieldTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ble_wind_field.BLEWindField
+  DATASET_CLASS = ble_wind_field_dataset_builder.Builder
   SPLITS = {'train': 4}
 
   def setUp(self):
