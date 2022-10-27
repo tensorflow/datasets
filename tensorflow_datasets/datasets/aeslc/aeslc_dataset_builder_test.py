@@ -16,11 +16,11 @@
 """Test for Annotated Enron Subject Line Corpus Dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import aeslc
+from tensorflow_datasets.datasets.aeslc import aeslc_dataset_builder
 
 
 class AeslcTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = aeslc.Aeslc
+  DATASET_CLASS = aeslc_dataset_builder.Builder
   SPLITS = {
       "train": 1,  # Number of fake train example
       "validation": 1,  # Number of fake validation example
