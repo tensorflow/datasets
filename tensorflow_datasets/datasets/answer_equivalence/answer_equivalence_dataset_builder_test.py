@@ -15,13 +15,13 @@
 
 """answer_equivalence dataset."""
 
+from tensorflow_datasets.datasets.answer_equivalence import answer_equivalence_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.question_answering.answer_equivalence import answer_equivalence
 
 
 class AnswerEquivalenceTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for answer_equivalence dataset."""
-  DATASET_CLASS = answer_equivalence.AnswerEquivalence
+  DATASET_CLASS = answer_equivalence_dataset_builder.Builder
   SPLITS = {
       'train': 3,
       'ae_dev': 1,
