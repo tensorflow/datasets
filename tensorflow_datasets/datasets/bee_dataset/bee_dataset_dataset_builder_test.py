@@ -15,13 +15,13 @@
 
 """BeeDataset dataset."""
 
-from tensorflow_datasets.image_classification.bee_dataset import bee_dataset
+from tensorflow_datasets.datasets.bee_dataset import bee_dataset_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class BeeDatasetTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for BeeDataset dataset."""
-  DATASET_CLASS = bee_dataset.BeeDataset
+  DATASET_CLASS = bee_dataset_dataset_builder.Builder
   SPLITS = {'train': 3}
 
   DL_EXTRACT_RESULT = './'
