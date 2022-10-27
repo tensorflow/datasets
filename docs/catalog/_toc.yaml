@@ -8,8 +8,6 @@ toc:
     title: xtreme
   title: Dataset Collections
 - section:
-  - path: /datasets/catalog/accentdb
-    title: accentdb
   - path: /datasets/catalog/common_voice
     title: common_voice
   - path: /datasets/catalog/crema_d
@@ -82,12 +80,6 @@ toc:
     title: lsun
   title: Image
 - section:
-  - path: /datasets/catalog/beans
-    title: beans
-  - path: /datasets/catalog/bee_dataset
-    title: bee_dataset
-  - path: /datasets/catalog/bigearthnet
-    title: bigearthnet
   - path: /datasets/catalog/binary_alpha_digits
     title: binary_alpha_digits
   - path: /datasets/catalog/caltech101
@@ -274,14 +266,6 @@ toc:
     title: wider_face
   title: Object detection
 - section:
-  - path: /datasets/catalog/ai2_arc
-    title: ai2_arc
-  - path: /datasets/catalog/ai2_arc_with_ir
-    title: ai2_arc_with_ir
-  - path: /datasets/catalog/answer_equivalence
-    title: answer_equivalence
-  - path: /datasets/catalog/asqa
-    title: asqa
   - path: /datasets/catalog/coqa
     title: coqa
   - path: /datasets/catalog/cosmos_qa
@@ -362,8 +346,6 @@ toc:
     title: mt_opt
   title: Robotics
 - section:
-  - path: /datasets/catalog/amazon_us_reviews
-    title: amazon_us_reviews
   - path: /datasets/catalog/ble_wind_field
     title: ble_wind_field
   - path: /datasets/catalog/cherry_blossoms
@@ -422,10 +404,6 @@ toc:
     title: wine_quality
   title: Structured
 - section:
-  - path: /datasets/catalog/aeslc
-    title: aeslc
-  - path: /datasets/catalog/big_patent
-    title: big_patent
   - path: /datasets/catalog/billsum
     title: billsum
   - path: /datasets/catalog/booksum
@@ -464,20 +442,15 @@ toc:
     title: xsum (manual)
   title: Summarization
 - section:
-  - path: /datasets/catalog/ag_news_subset
-    title: ag_news_subset
-  - path: /datasets/catalog/anli
-    title: anli
-  - path: /datasets/catalog/assin2
-    title: assin2
-  - path: /datasets/catalog/beir
-    title: beir
   - path: /datasets/catalog/blimp
     title: blimp
   - path: /datasets/catalog/bool_q
     title: bool_q
   - path: /datasets/catalog/c4
     title: c4 (manual)
+  - path: /datasets/catalog/c4_wsrs
+    status: nightly
+    title: c4_wsrs
   - path: /datasets/catalog/cfq
     title: cfq
   - path: /datasets/catalog/civil_comments
@@ -618,8 +591,6 @@ toc:
     title: yelp_polarity_reviews
   title: Text
 - section:
-  - path: /datasets/catalog/asset
-    title: asset
   - path: /datasets/catalog/wiki_auto
     title: wiki_auto
   title: Text simplification
@@ -662,8 +633,6 @@ toc:
     title: wmt_t2t_translate (manual)
   title: Translate
 - section:
-  - path: /datasets/catalog/bair_robot_pushing_small
-    title: bair_robot_pushing_small
   - path: /datasets/catalog/davis
     title: davis
   - path: /datasets/catalog/moving_mnist
