@@ -17,8 +17,8 @@
 
 import sys
 
+from tensorflow_datasets.datasets.asset import asset_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text_simplification.asset import asset
 
 sys.path.insert(0, '.')
 
@@ -27,7 +27,7 @@ class AssetTestRatings(tfds.testing.DatasetBuilderTestCase):
   """Tests for asset dataset."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['ratings']
-  DATASET_CLASS = asset.Asset
+  DATASET_CLASS = asset_dataset_builder.Builder
 
   DL_EXTRACT_RESULT = {
       'human_ratings.csv': 'ratings/1.0.0/human_ratings.csv',
@@ -42,7 +42,7 @@ class AssetTestSimplification(tfds.testing.DatasetBuilderTestCase):
   """Tests for asset dataset."""
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['simplification']
-  DATASET_CLASS = asset.Asset
+  DATASET_CLASS = asset_dataset_builder.Builder
 
   _URL_LIST = [
       ('asset.valid.orig', 'simplification/1.0.0/asset.valid.orig'),
