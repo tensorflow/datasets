@@ -31,7 +31,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Audio`
 
-*   [`accentdb`](accentdb.md)
 *   [`common_voice`](common_voice.md)
 *   [`crema_d`](crema_d.md)
 *   [`dementiabank`](dementiabank.md)
@@ -76,9 +75,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Image classification`
 
-*   [`beans`](beans.md)
-*   [`bee_dataset`](bee_dataset.md)
-*   [`bigearthnet`](bigearthnet.md)
 *   [`binary_alpha_digits`](binary_alpha_digits.md)
 *   [`caltech101`](caltech101.md)
 *   [`caltech_birds2010`](caltech_birds2010.md)
@@ -178,10 +174,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Question answering`
 
-*   [`ai2_arc`](ai2_arc.md)
-*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
-*   [`answer_equivalence`](answer_equivalence.md)
-*   [`asqa`](asqa.md)
 *   [`coqa`](coqa.md)
 *   [`cosmos_qa`](cosmos_qa.md)
 *   [`mctaco`](mctaco.md)
@@ -236,7 +228,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Structured`
 
-*   [`amazon_us_reviews`](amazon_us_reviews.md)
 *   [`ble_wind_field`](ble_wind_field.md)
 *   [`cherry_blossoms`](cherry_blossoms.md)
 *   [`covid19`](covid19.md)
@@ -268,8 +259,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Summarization`
 
-*   [`aeslc`](aeslc.md)
-*   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
 *   [`cnn_dailymail`](cnn_dailymail.md)
@@ -291,13 +280,11 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Text`
 
-*   [`ag_news_subset`](ag_news_subset.md)
-*   [`anli`](anli.md)
-*   [`assin2`](assin2.md)
-*   [`beir`](beir.md)
 *   [`blimp`](blimp.md)
 *   [`bool_q`](bool_q.md)
 *   [`c4`](c4.md)
+*   [`c4_wsrs`](c4_wsrs.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`cfq`](cfq.md)
 *   [`civil_comments`](civil_comments.md)
 *   [`clinc_oos`](clinc_oos.md)
@@ -370,7 +357,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Text simplification`
 
-*   [`asset`](asset.md)
 *   [`wiki_auto`](wiki_auto.md)
 
 ### `Time series`
@@ -398,7 +384,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Video`
 
-*   [`bair_robot_pushing_small`](bair_robot_pushing_small.md)
 *   [`davis`](davis.md)
 *   [`moving_mnist`](moving_mnist.md)
 *   [`robonet`](robonet.md)
