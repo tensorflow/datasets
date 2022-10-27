@@ -16,11 +16,11 @@
 """Test for BigPatent dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import big_patent
+from tensorflow_datasets.datasets.big_patent import big_patent_dataset_builder
 
 
 class BigPatentTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = big_patent.BigPatent
+  DATASET_CLASS = big_patent_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["all"]
   SPLITS = {
       "train": 9,  # Number of fake train example
@@ -30,7 +30,7 @@ class BigPatentTest(testing.DatasetBuilderTestCase):
 
 
 class BigPatentATest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = big_patent.BigPatent
+  DATASET_CLASS = big_patent_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["a", "y"]
   SPLITS = {
       "train": 1,  # Number of fake train example
