@@ -15,13 +15,13 @@
 
 """asqa dataset."""
 
+from tensorflow_datasets.datasets.asqa import asqa_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.question_answering.asqa import asqa
 
 
 class AsqaTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for asqa dataset."""
-  DATASET_CLASS = asqa.Asqa
+  DATASET_CLASS = asqa_dataset_builder.Builder
   SPLITS = {
       'train': 2,
       'dev': 1,
