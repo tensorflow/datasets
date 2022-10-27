@@ -15,12 +15,12 @@
 
 """AccentDB dataset."""
 
-from tensorflow_datasets.audio import accentdb
+from tensorflow_datasets.datasets.accentdb import accentdb_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class AccentdbTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = accentdb.Accentdb
+  DATASET_CLASS = accentdb_dataset_builder.Builder
   SPLITS = {
       "train": 1,
   }
