@@ -16,11 +16,11 @@
 """Tests for c4 dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import c4
+from tensorflow_datasets.datasets.c4 import c4_dataset_builder
 
 
 class C4Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = c4.C4
+  DATASET_CLASS = c4_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["en"]
 
   DL_EXTRACT_RESULT = {
@@ -46,7 +46,7 @@ class C4NoCleanTest(C4Test):
 
 class C4MultilingualTest(C4Test):
   BUILDER_CONFIG_NAMES_TO_TEST = ["multilingual"]
-  for config in c4.C4.BUILDER_CONFIGS:
+  for config in c4_dataset_builder.Builder.BUILDER_CONFIGS:
     if config.name == "multilingual":
       config.languages = ["en", "de"]
 
