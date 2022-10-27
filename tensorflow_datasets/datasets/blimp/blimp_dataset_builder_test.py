@@ -16,11 +16,11 @@
 """Test for blimp dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import blimp
+from tensorflow_datasets.datasets.blimp import blimp_dataset_builder
 
 
 class BlimpTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = blimp.Blimp
+  DATASET_CLASS = blimp_dataset_builder.Builder
   SPLITS = {
       "train": 5,  # Number of fake train example
   }
