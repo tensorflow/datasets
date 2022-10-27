@@ -15,12 +15,12 @@
 
 """Tests for the ai2_arc_with_ir dataset."""
 
+from tensorflow_datasets.datasets.ai2_arc_with_ir import ai2_arc_with_ir_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.question_answering import ai2_arc_with_ir
 
 
 class Ai2ArcWithIRTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = ai2_arc_with_ir.Ai2ArcWithIR
+  DATASET_CLASS = ai2_arc_with_ir_dataset_builder.Builder
   BUILDER_CONFIG_NAMES_TO_TEST = ["ARC-Challenge-IR"]
   SPLITS = {
       "train": 2,
