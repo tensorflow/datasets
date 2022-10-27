@@ -32,7 +32,7 @@ It contains normal, benign, and malignant cases with verified pathology
 information.
 
 The default config is made of patches extracted from the original mammograms,
-following the description from http://arxiv.org/abs/1708.09427, in order to
+following the description from (http://arxiv.org/abs/1708.09427), in order to
 frame the task to solve in a traditional image classification setting.
 
 """
