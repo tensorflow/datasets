@@ -15,13 +15,13 @@
 
 """assin2 dataset."""
 
+from tensorflow_datasets.datasets.assin2 import assin2_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.assin2 import assin2
 
 
 class Assin2Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for assin2 dataset."""
-  DATASET_CLASS = assin2.Assin2
+  DATASET_CLASS = assin2_dataset_builder.Builder
   SPLITS = {
       'train': 5,
       'validation': 5,

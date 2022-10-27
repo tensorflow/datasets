@@ -15,8 +15,8 @@
 
 """Tests for assin2_utils."""
 from tensorflow_datasets import testing
-from tensorflow_datasets.text.assin2.assin2_utils import Pair
-from tensorflow_datasets.text.assin2.assin2_utils import parse_xml_string
+from tensorflow_datasets.datasets.assin2.assin2_utils import Pair
+from tensorflow_datasets.datasets.assin2.assin2_utils import parse_xml_string
 
 # pylint: disable=line-too-long
 _CAND_XML_STR = """\
