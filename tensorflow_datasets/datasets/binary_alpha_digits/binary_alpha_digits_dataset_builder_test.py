@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from tensorflow_datasets.image_classification import binary_alpha_digits
+from tensorflow_datasets.datasets.binary_alpha_digits import binary_alpha_digits_dataset_builder
 import tensorflow_datasets.testing as tfds_test
 
 
 class BinaryAlphaDigitsTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = binary_alpha_digits.BinaryAlphaDigits
+  DATASET_CLASS = binary_alpha_digits_dataset_builder.Builder
   SPLITS = {
       "train": 2,
   }
