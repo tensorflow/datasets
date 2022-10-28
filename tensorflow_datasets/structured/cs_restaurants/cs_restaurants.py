@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 
 from etils import epath
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = r"""

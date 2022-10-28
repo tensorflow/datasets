@@ -23,7 +23,7 @@ import functools
 import os
 from typing import Any, Dict, Generator, Optional, Sequence, Text, Tuple, Union
 
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
 
