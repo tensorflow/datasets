@@ -87,7 +87,7 @@ class ReadConfig:
       records or have too many of them.
   """
   # General tf.data.Dataset parametters
-  options: tf.data.Options = dataclasses.field(default_factory=tf.data.Options)
+  options: Optional[tf.data.Options] = None
   try_autocache: bool = True
   add_tfds_id: bool = False
   # tf.data.Dataset.shuffle parameters
@@ -102,8 +102,14 @@ class ReadConfig:
   input_context: Optional[tf.distribute.InputContext] = None
   experimental_interleave_sort_fn: Optional[InterleaveSortFn] = None
   skip_prefetch: bool = False
-  num_parallel_calls_for_decode: Optional[int] = tf.data.experimental.AUTOTUNE
-  num_parallel_calls_for_interleave_files: Optional[int] = (
-      tf.data.experimental.AUTOTUNE)
+  num_parallel_calls_for_decode: Optional[int] = None
+  num_parallel_calls_for_interleave_files: Optional[int] = None
   enable_ordering_guard: bool = True
   assert_cardinality: bool = True
+
+  def __post_init__(self):
+    self.options = self.options or tf.data.Options()
+    if self.num_parallel_calls_for_decode is None:
+      self.num_parallel_calls_for_decode = tf.data.experimental.AUTOTUNE
+    if self.num_parallel_calls_for_interleave_files is None:
+      self.num_parallel_calls_for_interleave_files = tf.data.experimental.AUTOTUNE
