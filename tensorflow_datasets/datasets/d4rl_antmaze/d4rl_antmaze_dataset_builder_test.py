@@ -15,13 +15,13 @@
 
 """d4rl_antmaze dataset."""
 
-from tensorflow_datasets.d4rl.d4rl_antmaze import d4rl_antmaze
+from tensorflow_datasets.datasets.d4rl_antmaze import d4rl_antmaze_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class D4rlUMazeTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_antmaze dataset."""
-  DATASET_CLASS = d4rl_antmaze.D4rlAntmaze
+  DATASET_CLASS = d4rl_antmaze_dataset_builder.Builder
   SPLITS = {
       'train': 2,  # Number of fake train example
   }
@@ -36,7 +36,7 @@ class D4rlUMazeTest(tfds.testing.DatasetBuilderTestCase):
 class D4rlUMazeDiverseTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_antmaze dataset."""
 
-  DATASET_CLASS = d4rl_antmaze.D4rlAntmaze
+  DATASET_CLASS = d4rl_antmaze_dataset_builder.Builder
   SPLITS = {
       'train': 2,  # Number of fake train example
   }
@@ -51,7 +51,7 @@ class D4rlUMazeDiverseTest(tfds.testing.DatasetBuilderTestCase):
 class D4rlMediumPlayTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_antmaze dataset."""
 
-  DATASET_CLASS = d4rl_antmaze.D4rlAntmaze
+  DATASET_CLASS = d4rl_antmaze_dataset_builder.Builder
   SPLITS = {
       'train': 2,  # Number of fake train example
   }
@@ -66,7 +66,7 @@ class D4rlMediumPlayTest(tfds.testing.DatasetBuilderTestCase):
 class D4rlMediumDiverseTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_antmaze dataset."""
 
-  DATASET_CLASS = d4rl_antmaze.D4rlAntmaze
+  DATASET_CLASS = d4rl_antmaze_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
   }
@@ -81,7 +81,7 @@ class D4rlMediumDiverseTest(tfds.testing.DatasetBuilderTestCase):
 class D4rlLargeDiverseTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_antmaze dataset."""
 
-  DATASET_CLASS = d4rl_antmaze.D4rlAntmaze
+  DATASET_CLASS = d4rl_antmaze_dataset_builder.Builder
   SPLITS = {
       'train': 2,  # Number of fake train example
   }
@@ -96,7 +96,7 @@ class D4rlLargeDiverseTest(tfds.testing.DatasetBuilderTestCase):
 class D4rlLargePlayTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_antmaze dataset."""
 
-  DATASET_CLASS = d4rl_antmaze.D4rlAntmaze
+  DATASET_CLASS = d4rl_antmaze_dataset_builder.Builder
   SPLITS = {
       'train': 2,  # Number of fake train example
   }

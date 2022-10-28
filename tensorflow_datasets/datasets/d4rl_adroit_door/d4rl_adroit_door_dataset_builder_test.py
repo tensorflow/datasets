@@ -15,13 +15,13 @@
 
 """d4rl_adroit_door dataset."""
 
-from tensorflow_datasets.d4rl.d4rl_adroit_door import d4rl_adroit_door
+from tensorflow_datasets.datasets.d4rl_adroit_door import d4rl_adroit_door_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class D4rlAdroitDoorClonedV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
-  DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
+  DATASET_CLASS = d4rl_adroit_door_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -36,7 +36,7 @@ class D4rlAdroitDoorClonedV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorExpertV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
-  DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
+  DATASET_CLASS = d4rl_adroit_door_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -51,7 +51,7 @@ class D4rlAdroitDoorExpertV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorHumanV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
-  DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
+  DATASET_CLASS = d4rl_adroit_door_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -66,7 +66,7 @@ class D4rlAdroitDoorHumanV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorClonedV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
-  DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
+  DATASET_CLASS = d4rl_adroit_door_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -81,7 +81,7 @@ class D4rlAdroitDoorClonedV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorExpertV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
-  DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
+  DATASET_CLASS = d4rl_adroit_door_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -96,7 +96,7 @@ class D4rlAdroitDoorExpertV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitDoorHumanV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_door dataset."""
-  DATASET_CLASS = d4rl_adroit_door.D4rlAdroitDoor
+  DATASET_CLASS = d4rl_adroit_door_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
