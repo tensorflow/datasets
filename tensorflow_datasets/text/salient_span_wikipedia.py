@@ -73,15 +73,15 @@ class SalientSpanWikipedia(tfds.core.BeamBasedBuilder):
             tfds.features.Text(),
         "spans":
             tfds.features.Sequence({
-                "start": tf.int32,
-                "limit": tf.int32,
-                "type": tf.string,
+                "start": np.int32,
+                "limit": np.int32,
+                "type": np.str_,
             }),
     }
     if not self.builder_config.split_sentences:
       feature_dict["sentences"] = tfds.features.Sequence({
-          "start": tf.int32,
-          "limit": tf.int32,
+          "start": np.int32,
+          "limit": np.int32,
       })
 
     return tfds.core.DatasetInfo(

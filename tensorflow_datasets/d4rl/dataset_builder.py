@@ -20,6 +20,7 @@ from __future__ import annotations
 import dataclasses
 from typing import Any, Dict, FrozenSet, Optional
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.d4rl import dataset_utils
 import tensorflow_datasets.public_api as tfds
@@ -33,7 +34,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
   file_suffix: str = 'medium'
   env: str = 'mujoco'
   # All use float32 except for the replay datasets.
-  float_type: tf.DType = tf.float32
+  float_type: tf.DType = np.float32
   # All datasets have step metadata except for mujoco v0.
   step_metadata_keys: FrozenSet[str] = frozenset([])
   episode_metadata_keys: FrozenSet[str] = frozenset([])
@@ -42,7 +43,7 @@ class BuilderConfig(tfds.core.BuilderConfig):
   has_policy_last_fc_log_std: bool = False
   policy_size: int = 256
   # Some datasets were regenerated with different metadata type.
-  step_metadata_type: tf.DType = tf.float32
+  step_metadata_type: tf.DType = np.float32
 
 
 @dataclasses.dataclass
@@ -176,8 +177,8 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v1',
         env='mujoco',
         file_suffix='_medium_replay-v1',
-        float_type=tf.float64,
-        step_metadata_type=tf.float64,
+        float_type=np.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -187,8 +188,8 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v1',
         env='mujoco',
         file_suffix='_full_replay-v1',
-        float_type=tf.float64,
-        step_metadata_type=tf.float64,
+        float_type=np.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -206,7 +207,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_expert-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
@@ -218,7 +219,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_full_replay-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -228,7 +229,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         has_policy_metadata=True,
@@ -240,7 +241,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium_expert-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         description=_MUJOCO_DESCRIPTION,
     ),
@@ -249,7 +250,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_medium_replay-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         episode_metadata_keys=frozenset([_ALGORITHM, _ITERATION]),
         description=_MUJOCO_DESCRIPTION,
@@ -259,7 +260,7 @@ MUJOCO_BUILDER_CONFIGS = [
         dataset_dir='gym_mujoco_v2',
         env='mujoco',
         file_suffix='_random-v2',
-        step_metadata_type=tf.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL, _ACTION_LOG_PROBS]),
         description=_MUJOCO_DESCRIPTION,
     ),
@@ -278,8 +279,8 @@ ADROIT_BUILDER_CONFIGS = [
         dataset_dir='hand_dapg',
         env='adroit',
         file_suffix='-demos-v0-bc-combined',
-        float_type=tf.float64,
-        step_metadata_type=tf.float64,
+        float_type=np.float64,
+        step_metadata_type=np.float64,
         step_metadata_keys=frozenset([_QPOS, _QVEL]),
         description=_ADROIT_DESCRIPTION,
     ),
@@ -415,8 +416,8 @@ def _get_policy_info(
                   shape=(ds_config.action_len, builder_config.policy_size),
                   dtype=float_type),
       },
-      'nonlinearity': tf.string,
-      'output_distribution': tf.string,
+      'nonlinearity': np.str_,
+      'output_distribution': np.str_,
   }
   if builder_config.env == 'adroit' and builder_config.name == 'v1-cloned':
     # v1-cloned from d4rl_adroit uses a different policy shape
@@ -462,11 +463,11 @@ def get_features_dict(
       'reward':
           float_type,
       'is_terminal':
-          tf.bool,
+          np.bool_,
       'is_first':
-          tf.bool,
+          np.bool_,
       'is_last':
-          tf.bool,
+          np.bool_,
       'discount':
           float_type,
   }
@@ -474,7 +475,7 @@ def get_features_dict(
     # D4RL adroit in the v0-cloned config, action uses a different float type
     # than the rest of the dataset.
     steps_dict['action'] = tfds.features.Tensor(
-        shape=(ds_config.action_len,), dtype=tf.float32)
+        shape=(ds_config.action_len,), dtype=np.float32)
 
   if builder_config.step_metadata_keys:
     steps_dict['infos'] = _get_step_metadata(builder_config, ds_config)
@@ -483,9 +484,9 @@ def get_features_dict(
   if builder_config.episode_metadata_keys:
     for k in builder_config.episode_metadata_keys:
       if k == _ITERATION:
-        episode_metadata[k] = tf.int32
+        episode_metadata[k] = np.int32
       else:
-        episode_metadata[k] = tf.string
+        episode_metadata[k] = np.str_
   if builder_config.has_policy_metadata:
     episode_metadata['policy'] = _get_policy_info(builder_config, ds_config)
 

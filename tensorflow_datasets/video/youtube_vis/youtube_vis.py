@@ -405,10 +405,10 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
         'video':
             tfds.features.Video(video_shape),  # pytype: disable=wrong-arg-types  # gen-stub-imports
         'metadata': {
-            'height': tf.int32,
-            'width': tf.int32,
-            'num_frames': tf.int32,
-            'video_name': tf.string,
+            'height': np.int32,
+            'width': np.int32,
+            'num_frames': np.int32,
+            'video_name': np.str_,
         },
         'tracks':
             tfds.features.Sequence({
@@ -419,13 +419,13 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
                 'category':
                     tfds.features.ClassLabel(names_file=names_file),
                 'is_crowd':
-                    tf.bool,
+                    np.bool_,
                 'areas':
-                    tfds.features.Sequence(tf.float32),
+                    tfds.features.Sequence(np.float32),
                 # Labels do not occur for all frames. This indicates the
                 # indices of the frames that have labels.
                 'frames':
-                    tfds.features.Sequence(tf.int32)
+                    tfds.features.Sequence(np.int32)
             })
     }
     return tfds.core.DatasetInfo(

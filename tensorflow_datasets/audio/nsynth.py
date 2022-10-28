@@ -153,11 +153,11 @@ class Nsynth(tfds.core.BeamBasedBuilder):
   def _info(self):
     features = {
         "id":
-            tf.string,
+            np.str_,
         "audio":
             tfds.features.Audio(
                 shape=(_AUDIO_RATE * _NUM_SECS,),
-                dtype=tf.float32,
+                dtype=np.float32,
                 sample_rate=_AUDIO_RATE,
             ),
         "pitch":
@@ -170,20 +170,20 @@ class Nsynth(tfds.core.BeamBasedBuilder):
             "family": tfds.features.ClassLabel(names=_INSTRUMENT_FAMILIES),
             "source": tfds.features.ClassLabel(names=_INSTRUMENT_SOURCES),
         },
-        "qualities": {quality: tf.bool for quality in _QUALITIES},
+        "qualities": {quality: np.bool_ for quality in _QUALITIES},
     }
     if self.builder_config.estimate_f0_and_loudness:
       f0_and_ld_shape = (_F0_AND_LOUDNESS_RATE * _NUM_SECS,)
       features["f0"] = {
           "hz":
-              tfds.features.Tensor(shape=f0_and_ld_shape, dtype=tf.float32),
+              tfds.features.Tensor(shape=f0_and_ld_shape, dtype=np.float32),
           "midi":
-              tfds.features.Tensor(shape=f0_and_ld_shape, dtype=tf.float32),
+              tfds.features.Tensor(shape=f0_and_ld_shape, dtype=np.float32),
           "confidence":
-              tfds.features.Tensor(shape=f0_and_ld_shape, dtype=tf.float32)
+              tfds.features.Tensor(shape=f0_and_ld_shape, dtype=np.float32)
       }
       features["loudness"] = {
-          "db": tfds.features.Tensor(shape=f0_and_ld_shape, dtype=tf.float32)
+          "db": tfds.features.Tensor(shape=f0_and_ld_shape, dtype=np.float32)
       }
     return tfds.core.DatasetInfo(
         builder=self,

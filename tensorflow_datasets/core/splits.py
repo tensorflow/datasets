@@ -30,6 +30,7 @@ from typing import Any, Dict, Iterable, List, Optional, Union
 
 from absl import logging
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import proto as proto_lib
 from tensorflow_datasets.core import units
@@ -166,9 +167,9 @@ class SplitInfo:
     instruction_ds = tf.data.Dataset.from_generator(
         lambda: file_instructions,
         output_types={
-            'filename': tf.string,
-            'take': tf.int64,
-            'skip': tf.int64,
+            'filename': np.str_,
+            'take': np.int64,
+            'skip': np.int64,
         },
     )
     ds = instruction_ds.interleave(

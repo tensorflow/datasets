@@ -21,6 +21,7 @@ import json
 import os
 from typing import Any, Dict, Iterator, List, Optional, Text, Tuple
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -78,11 +79,11 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0")
 
   def _info(self) -> tfds.core.DatasetInfo:
-    features = {k: tf.string for k in _ADDITIONAL_FEATURES + [_ABSTRACT]}
+    features = {k: np.str_ for k in _ADDITIONAL_FEATURES + [_ABSTRACT]}
     features[_BODY_TEXT] = tfds.features.Sequence(
         tfds.features.FeaturesDict({
-            _SECTION: tf.string,
-            _TEXT: tf.string
+            _SECTION: np.str_,
+            _TEXT: np.str_
         }))
     return tfds.core.DatasetInfo(
         builder=self,

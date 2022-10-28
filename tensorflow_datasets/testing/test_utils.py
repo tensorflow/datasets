@@ -430,7 +430,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   def _info(self):
     return dataset_info.DatasetInfo(
         builder=self,
-        features=features.FeaturesDict({'x': tf.int64}),
+        features=features.FeaturesDict({'x': np.int64}),
         supervised_keys=('x', 'x'),
     )
 
@@ -489,7 +489,7 @@ class DummyDataset(
     return dataset_info.DatasetInfo(
         builder=self,
         features=features.FeaturesDict({
-            'id': tf.int64,
+            'id': np.int64,
         }),
         supervised_keys=('id', 'id'),
         description='Minimal DatasetBuilder.',

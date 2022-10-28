@@ -108,7 +108,7 @@ def _get_feature(
     # But sequence of dict like `TranslationVariableLanguages` should.
     # Currently, there is no good way for a composed sub-feature to only
     # display a single column instead of one per sub-feature.
-    # So `MyFeature({'x': tf.int32, 'y': tf.bool})` will have 2 columns `x`
+    # So `MyFeature({'x': np.int32, 'y': np.bool_})` will have 2 columns `x`
     # and `y`.
     if type(feature) != features.Sequence and not path:  # pylint: disable=unidiomatic-typecheck
       break

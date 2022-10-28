@@ -75,8 +75,8 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   ```
   {
-      'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=tf.uint8),
-      'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
+      'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=np.uint8),
+      'action': tf.Tensor(shape=(NB_FRAME,), dtype=np.int64),
   }
   ```
 
@@ -100,7 +100,7 @@ class Sequence(top_level_feature.TopLevelFeature):
       length: `int`, length of the sequence if static and known in advance
       doc: Documentation of this feature (e.g. description).
     """
-    # Convert {} => FeaturesDict, tf.int32 => Tensor(shape=(), dtype=tf.int32)
+    # Convert {} => FeaturesDict, np.int32 => Tensor(shape=(), dtype=np.int32)
     self._feature = features_dict.to_feature(feature)
     self._length = length
     super(Sequence, self).__init__(doc=doc)
@@ -212,7 +212,7 @@ class Sequence(top_level_feature.TopLevelFeature):
       sub_feature_doc = sub_feature_docs[0]
       return [
           sub_feature_doc.replace(
-              # Embed type of feature in class name, e.g. Sequence(tf.int64)
+              # Embed type of feature in class name, e.g. Sequence(np.int64)
               cls_name=f'{type(self).__name__}({sub_feature_doc.cls_name})',
               tensor_info=self._add_length_dim(sub_feature_doc.tensor_info),
               description=self._doc.desc or sub_feature_doc.description,

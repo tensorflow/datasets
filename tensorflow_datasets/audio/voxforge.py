@@ -158,7 +158,7 @@ class Voxforge(tfds.core.BeamBasedBuilder):
             'label':
                 tfds.features.ClassLabel(names=LABELS),
             'speaker_id':
-                tf.string
+                np.str_
         }),
         supervised_keys=('audio', 'label'),
         homepage=_HOMEPAGE,

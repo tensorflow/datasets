@@ -21,6 +21,7 @@ import collections
 import csv
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -103,18 +104,18 @@ _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/f
 
 def features():
   return collections.OrderedDict([
-      ('X', tf.uint8),
-      ('Y', tf.uint8),
+      ('X', np.uint8),
+      ('Y', np.uint8),
       ('month', tfds.features.ClassLabel(names=_MONTHS)),
       ('day', tfds.features.ClassLabel(names=_DAYS)),
-      ('FFMC', tf.float32),
-      ('DMC', tf.float32),
-      ('DC', tf.float32),
-      ('ISI', tf.float32),
-      ('temp', tf.float32),
-      ('RH', tf.float32),
-      ('wind', tf.float32),
-      ('rain', tf.float32),
+      ('FFMC', np.float32),
+      ('DMC', np.float32),
+      ('DC', np.float32),
+      ('ISI', np.float32),
+      ('temp', np.float32),
+      ('RH', np.float32),
+      ('wind', np.float32),
+      ('rain', np.float32),
   ])
 
 
@@ -128,7 +129,7 @@ class ForestFires(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'area': tf.float32,
+            'area': np.float32,
             'features': {name: dtype for name, dtype in features().items()}
         }),
         supervised_keys=('area', 'features'),

@@ -22,6 +22,7 @@ import os
 import random
 from typing import Dict, List, NoReturn, Optional, Tuple
 
+import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import decode
@@ -182,7 +183,7 @@ def _load_example(
   img = tf.io.read_file(path)
   return {
       'image': img,
-      'label': tf.cast(label, tf.int64),
+      'label': tf.cast(label, np.int64),
       'image/filename': path,
   }
 

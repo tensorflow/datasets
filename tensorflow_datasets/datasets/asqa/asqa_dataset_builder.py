@@ -16,6 +16,7 @@
 """asqa dataset."""
 import json
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -23,7 +24,7 @@ import tensorflow_datasets.public_api as tfds
 def _features():
   return tfds.features.FeaturesDict({
       'sample_id':
-          tf.int32,
+          np.int32,
       'ambiguous_question':
           tfds.features.Text(doc='Disambiguated question from AmbigQA.'),
       'qa_pairs':

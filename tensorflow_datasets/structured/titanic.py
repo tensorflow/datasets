@@ -76,19 +76,19 @@ def _feature_dict():
                   lambda d: convert_to_label(d, _PCLASS_DICT))),
       ("survived", (tfds.features.ClassLabel(names=_SURVIVED_DICT.values()),
                     lambda d: convert_to_label(d, _SURVIVED_DICT))),
-      ("name", (tf.string, convert_to_string)),
+      ("name", (np.str_, convert_to_string)),
       ("sex", (tfds.features.ClassLabel(names=["male", "female"]),
-               return_same)), ("age", (tf.float32, convert_to_float)),
-      ("sibsp", (tf.int32, convert_to_int)),
-      ("parch", (tf.int32, convert_to_int)),
-      ("ticket", (tf.string, convert_to_string)),
-      ("fare", (tf.float32, convert_to_float)),
-      ("cabin", (tf.string, convert_to_string)),
+               return_same)), ("age", (np.float32, convert_to_float)),
+      ("sibsp", (np.int32, convert_to_int)),
+      ("parch", (np.int32, convert_to_int)),
+      ("ticket", (np.str_, convert_to_string)),
+      ("fare", (np.float32, convert_to_float)),
+      ("cabin", (np.str_, convert_to_string)),
       ("embarked", (tfds.features.ClassLabel(names=_EMBARKED_DICT.values()),
                     lambda d: convert_to_label(d, _EMBARKED_DICT))),
-      ("boat", (tf.string, convert_to_string)),
-      ("body", (tf.int32, convert_to_int)),
-      ("home.dest", (tf.string, convert_to_string))
+      ("boat", (np.str_, convert_to_string)),
+      ("body", (np.int32, convert_to_int)),
+      ("home.dest", (np.str_, convert_to_string))
   ])
 
 

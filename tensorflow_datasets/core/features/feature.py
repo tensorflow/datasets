@@ -233,9 +233,9 @@ class FeatureConnector(object):
 
     ```
     return {
-        'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
-        'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
-        'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+        'image': tfds.features.TensorInfo(shape=(None,), dtype=np.uint8),
+        'height': tfds.features.TensorInfo(shape=(), dtype=np.int32),
+        'width': tfds.features.TensorInfo(shape=(), dtype=np.int32),
     }
     ```
 
@@ -243,7 +243,7 @@ class FeatureConnector(object):
     directly:
 
     ```
-    return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
+    return tfds.features.TensorInfo(shape=(256, 256), dtype=np.uint8)
     ```
 
     Returns:
@@ -546,9 +546,9 @@ class FeatureConnector(object):
 
     ```
     return {
-        'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
-        'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
-        'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+        'image': tfds.features.TensorInfo(shape=(None,), dtype=np.uint8),
+        'height': tfds.features.TensorInfo(shape=(), dtype=np.int32),
+        'width': tfds.features.TensorInfo(shape=(), dtype=np.int32),
     }
     ```
 
@@ -556,7 +556,7 @@ class FeatureConnector(object):
     directly:
 
     ```
-    return tfds.features.TensorInfo(shape=(64, 64), tf.uint8)
+    return tfds.features.TensorInfo(shape=(64, 64), np.uint8)
     ```
 
     If not defined, the retuned values are automatically deduced from the
@@ -671,7 +671,7 @@ class FeatureConnector(object):
       return decode_map_fn(ex)
     else:
       # `tf.map_fn` cannot resolve ambiguity when decoding an empty sequence
-      # with unknown output shape (e.g. decode images `tf.string`):
+      # with unknown output shape (e.g. decode images `np.str_`):
       # `(0,)` -> `(0, None, None, 3)`.
       # Instead, we arbitrarily set unknown shape to `0`:
       # `(0,)` -> `(0, 0, 0, 3)`

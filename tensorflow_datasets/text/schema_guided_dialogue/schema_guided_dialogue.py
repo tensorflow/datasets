@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -70,7 +71,7 @@ class SchemaGuidedDialogue(tfds.core.GeneratorBasedBuilder):
             "metadata": {
                 "services":
                     tfds.features.Sequence({
-                        "name": tf.string,
+                        "name": np.str_,
                         # TODO(arunchaganty): include service definitions
                     })
             }

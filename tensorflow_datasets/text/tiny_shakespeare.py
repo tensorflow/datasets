@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -40,7 +41,7 @@ To use for e.g. character modelling:
 
 ```
 d = tfds.load(name='tiny_shakespeare')['train']
-d = d.map(lambda x: tf.strings.unicode_split(x['text'], 'UTF-8'))
+d = d.map(lambda x: np.str_s.unicode_split(x['text'], 'UTF-8'))
 # train split includes vocabulary for other splits
 vocabulary = sorted(set(next(iter(d)).numpy()))
 d = d.map(lambda x: {'cur_char': x[:-1], 'next_char': x[1:]})

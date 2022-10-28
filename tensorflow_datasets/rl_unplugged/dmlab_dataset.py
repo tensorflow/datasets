@@ -20,6 +20,7 @@ from __future__ import annotations
 import dataclasses
 from typing import Any, Dict
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
@@ -96,24 +97,24 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
                     'pixels':
                         tfds.features.Image(
                             shape=_PIXELS_SHAPE,
-                            dtype=tf.uint8,
+                            dtype=np.uint8,
                             encoding_format='png'),
                     'last_action':
-                        tf.int64,
+                        np.int64,
                     'last_reward':
-                        tf.float32,
+                        np.float32,
                 },
-                'action': tf.int64,
-                'reward': tf.float32,
-                'is_terminal': tf.bool,
-                'is_first': tf.bool,
-                'is_last': tf.bool,
-                'discount': tf.float32,
+                'action': np.int64,
+                'reward': np.float32,
+                'is_terminal': np.bool_,
+                'is_first': np.bool_,
+                'is_last': np.bool_,
+                'discount': np.float32,
             }),
         'episode_id':
-            tf.int64,
+            np.int64,
         'episode_return':
-            tf.float32,
+            np.float32,
     })
 
   def get_description(self):
@@ -136,18 +137,18 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
     episode_length = self.builder_config.episode_length
 
     # Parse tf.Example.
-    def sequence_feature(shape, dtype=tf.float32):
+    def sequence_feature(shape, dtype=np.float32):
       return tf.io.FixedLenFeature(shape=[episode_length] + shape, dtype=dtype)
 
     feature_description = {
-        'episode_id': tf.io.FixedLenFeature([], tf.int64),
-        'start_idx': tf.io.FixedLenFeature([], tf.int64),
-        'episode_return': tf.io.FixedLenFeature([], tf.float32),
-        'observations_pixels': sequence_feature([], tf.string),
+        'episode_id': tf.io.FixedLenFeature([], np.int64),
+        'start_idx': tf.io.FixedLenFeature([], np.int64),
+        'episode_return': tf.io.FixedLenFeature([], np.float32),
+        'observations_pixels': sequence_feature([], np.str_),
         'observations_reward': sequence_feature([]),
         # actions are one-hot arrays.
         'observations_action': sequence_feature([15]),
-        'actions': sequence_feature([], tf.int64),
+        'actions': sequence_feature([], np.int64),
         'rewards': sequence_feature([]),
         'discounted_rewards': sequence_feature([]),
         'discounts': sequence_feature([]),
@@ -162,7 +163,7 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
     pixels = tf.scan(
         fn=lambda _, png: tf.reshape(tf.io.decode_png(png), _PIXELS_SHAPE),
         elems=data['observations_pixels'],
-        initializer=tf.zeros(_PIXELS_SHAPE, dtype=tf.uint8))
+        initializer=tf.zeros(_PIXELS_SHAPE, dtype=np.uint8))
     pixels = tf.reverse(pixels, axis=[-1])
 
     episode = {
@@ -177,7 +178,7 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
                     tf.argmax(
                         data['observations_action'],
                         axis=1,
-                        output_type=tf.int64),
+                        output_type=np.int64),
                 'last_reward':
                     data['observations_reward'],
             },

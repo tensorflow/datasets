@@ -18,6 +18,7 @@
 import json
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -164,7 +165,7 @@ class Summscreen(tfds.core.GeneratorBasedBuilder):
           'show_title':
               tfds.features.Text(),
           'transcript_author':
-              tfds.features.Tensor(shape=(None,), dtype=tf.string),
+              tfds.features.Tensor(shape=(None,), dtype=np.str_),
           'recap_author':
               tfds.features.Text(),
       })

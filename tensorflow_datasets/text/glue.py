@@ -111,7 +111,7 @@ class GlueConfig(tfds.core.BuilderConfig):
       url: `string`, url for information about the data set
       label_classes: `list[string]`, the list of classes if the label is
         categorical. If not provided, then the label will be of type
-        `tf.float32`.
+        `np.float32`.
       process_label: `Function[string, any]`, function taking in the raw value
         of the label and processing it to the form required by the label feature
       **kwargs: keyword arguments forwarded to super.
@@ -422,8 +422,8 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       features["label"] = tfds.features.ClassLabel(
           names=self.builder_config.label_classes)
     else:
-      features["label"] = tf.float32
-    features["idx"] = tf.int32
+      features["label"] = np.float32
+    features["idx"] = np.int32
     return tfds.core.DatasetInfo(
         builder=self,
         description=_GLUE_DESCRIPTION,

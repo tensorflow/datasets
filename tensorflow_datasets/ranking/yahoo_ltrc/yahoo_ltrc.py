@@ -17,6 +17,7 @@
 
 import dataclasses
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.ranking.libsvm_ranking_parser import LibSVMRankingParser
@@ -99,11 +100,11 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
         "float_features":
             tfds.features.Tensor(
                 shape=(None, self.builder_config.num_features),
-                dtype=tf.float64,
+                dtype=np.float64,
                 encoding=encoding),
         _LABEL_NAME:
             tfds.features.Tensor(
-                shape=(None,), dtype=tf.float64, encoding=encoding)
+                shape=(None,), dtype=np.float64, encoding=encoding)
     }
 
     return tfds.core.DatasetInfo(

@@ -154,9 +154,9 @@ class Builder(tfds.core.BeamBasedBuilder, tfds.core.ConfigBasedBuilder):
             "target":
                 tfds.features.ClassLabel(num_classes=8),
             "meta_target":
-                tfds.features.Tensor(shape=[12], dtype=tf.int64),
+                tfds.features.Tensor(shape=[12], dtype=np.int64),
             "relation_structure_encoded":
-                tfds.features.Tensor(shape=[4, 12], dtype=tf.int64),
+                tfds.features.Tensor(shape=[4, 12], dtype=np.int64),
             "filename":
                 tfds.features.Text(),
         }),

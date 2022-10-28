@@ -45,13 +45,13 @@ class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image':
-                tfds.features.Image(shape=_IMAGE_DIMENSIONS, dtype=tf.uint8),
+                tfds.features.Image(shape=_IMAGE_DIMENSIONS, dtype=np.uint8),
             'label_shape':
                 tfds.features.ClassLabel(names=_SHAPE_NAMES),
             'rotation':
-                tfds.features.Tensor(shape=(3, 3), dtype=tf.float32),
+                tfds.features.Tensor(shape=(3, 3), dtype=np.float32),
             'rotations_equivalent':
-                tfds.features.Tensor(shape=(None, 3, 3), dtype=tf.float32),
+                tfds.features.Tensor(shape=(None, 3, 3), dtype=np.float32),
         }),
         # These are returned if `as_supervised=True` in `builder.as_dataset`.
         supervised_keys=('image', 'rotation'),

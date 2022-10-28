@@ -20,6 +20,7 @@ import dataclasses
 import itertools
 from typing import Optional
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -56,7 +57,7 @@ class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
             'field':
                 tfds.features.Tensor(
                     shape=(21, 21, 10, 9, 2),
-                    dtype=tf.float32,
+                    dtype=np.float32,
                     encoding=tfds.features.Encoding.ZLIB),
         }),
         supervised_keys=None,

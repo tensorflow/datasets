@@ -153,7 +153,7 @@ def _item_to_np_array(item, dtype: tf.dtypes.DType, numpy_dtype: np.dtype,
   """Single item to a np.array."""
   result = np.asanyarray(item, dtype=numpy_dtype)
   utils.assert_shape_match(result.shape, shape)
-  if utils.is_same_tf_dtype(dtype, tf.string) and not _is_string(item):
+  if utils.is_same_tf_dtype(dtype, np.str_) and not _is_string(item):
     raise ValueError(
         f"Unsupported value: {result}\nCould not convert to bytes list.")
   return result
@@ -178,7 +178,7 @@ def _item_to_tf_feature(
     return tf.train.Feature(int64_list=tf.train.Int64List(value=vals))
   elif utils.is_np_sub_dtype(v.dtype, np.floating):
     return tf.train.Feature(float_list=tf.train.FloatList(value=vals))
-  elif utils.is_same_tf_dtype(tensor_info.dtype, tf.string):
+  elif utils.is_same_tf_dtype(tensor_info.dtype, np.str_):
     vals = [tf.compat.as_bytes(x) for x in vals]
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=vals))
   else:
@@ -244,7 +244,7 @@ def _add_ragged_fields(example_data, tensor_info: feature_lib.TensorInfo):
     return (example_data, tensor_info)
   # Multiple level sequence:
   else:
-    tensor_info_length = feature_lib.TensorInfo(shape=(None,), dtype=tf.int64)
+    tensor_info_length = feature_lib.TensorInfo(shape=(None,), dtype=np.int64)
     ragged_attr_dict = {
         "ragged_row_lengths_{}".format(i): (length, tensor_info_length)
         for i, length in enumerate(nested_row_lengths)

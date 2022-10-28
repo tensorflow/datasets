@@ -147,7 +147,7 @@ class Savee(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio': tfds.features.Audio(file_format='wav', sample_rate=44100),
             'label': tfds.features.ClassLabel(names=list(LABEL_MAP.values())),
-            'speaker_id': tf.string
+            'speaker_id': np.str_
         }),
         supervised_keys=('audio', 'label'),
         homepage='http://kahlan.eps.surrey.ac.uk/savee/',

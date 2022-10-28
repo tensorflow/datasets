@@ -20,6 +20,7 @@ from __future__ import annotations
 import csv
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -71,13 +72,13 @@ class Gap(tfds.core.GeneratorBasedBuilder):
             'ID': tfds.features.Text(),
             'Text': tfds.features.Text(),
             'Pronoun': tfds.features.Text(),
-            'Pronoun-offset': tf.int32,
+            'Pronoun-offset': np.int32,
             'A': tfds.features.Text(),
-            'A-offset': tf.int32,
-            'A-coref': tf.bool,
+            'A-offset': np.int32,
+            'A-coref': np.bool_,
             'B': tfds.features.Text(),
-            'B-offset': tf.int32,
-            'B-coref': tf.bool,
+            'B-offset': np.int32,
+            'B-coref': np.bool_,
             'URL': tfds.features.Text()
         }),
         supervised_keys=None,

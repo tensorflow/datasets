@@ -23,6 +23,7 @@ import re
 from typing import Any, Mapping, Sequence
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -182,11 +183,11 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Text(doc="Hashed UUID of a given user"),
             "upvotes":
                 tfds.features.Scalar(
-                    tf.int32,
+                    np.int32,
                     doc="Number of people who said audio matches the text"),
             "downvotes":
                 tfds.features.Scalar(
-                    tf.int32,
+                    np.int32,
                     doc="Number of people who said audio does not match text"),
             "age":
                 tfds.features.Text(

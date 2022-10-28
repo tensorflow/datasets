@@ -19,6 +19,7 @@ from __future__ import annotations
 
 from typing import Union
 
+import numpy as np
 import six
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
@@ -66,9 +67,9 @@ class Translation(features_dict.FeaturesDict):
 
   ```
   {
-      'en': tf.Tensor(shape=(), dtype=tf.string, numpy='the cat'),
-      'fr': tf.Tensor(shape=(), dtype=tf.string, numpy='le chat'),
-      'de': tf.Tensor(shape=(), dtype=tf.string, numpy='die katze'),
+      'en': tf.Tensor(shape=(), dtype=np.str_, numpy='the cat'),
+      'fr': tf.Tensor(shape=(), dtype=np.str_, numpy='le chat'),
+      'de': tf.Tensor(shape=(), dtype=np.str_, numpy='die katze'),
   }
   ```
   """
@@ -145,9 +146,9 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
     The languages present may vary from example to example.
 
   Output:
-    language: variable-length 1D tf.Tensor of tf.string language codes, sorted
+    language: variable-length 1D tf.Tensor of np.str_ language codes, sorted
       in ascending order.
-    translation: variable-length 1D tf.Tensor of tf.string plain text
+    translation: variable-length 1D tf.Tensor of np.str_ plain text
       translations, sorted to align with language codes.
 
   Example (fixed language list):
@@ -172,9 +173,9 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
   ```
   {
       'language': tf.Tensor(
-          shape=(4,), dtype=tf.string, numpy=array(['en', 'de', 'fr', 'fr']),
+          shape=(4,), dtype=np.str_, numpy=array(['en', 'de', 'fr', 'fr']),
       'translation': tf.Tensor(
-          shape=(4,), dtype=tf.string,
+          shape=(4,), dtype=np.str_,
           numpy=array(['the cat', 'die katze', 'la chatte', 'le chat'])),
   }
   ```

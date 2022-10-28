@@ -20,6 +20,7 @@ from __future__ import annotations
 import dataclasses
 from typing import Any, Dict, Optional
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
@@ -157,7 +158,7 @@ def _sequence_feature(
   else:
     shape = []
   return tf.io.FixedLenSequenceFeature(
-      shape, dtype=tf.float32, allow_missing=True)
+      shape, dtype=np.float32, allow_missing=True)
 
 
 class RluControlSuite(rlu_common.RLUBuilder):
@@ -184,22 +185,22 @@ class RluControlSuite(rlu_common.RLUBuilder):
                 'action':
                     tfds.features.Tensor(
                         shape=(self.builder_config.action_size,),
-                        dtype=tf.float32),
+                        dtype=np.float32),
                 'reward':
-                    tf.float32,
+                    np.float32,
                 'is_terminal':
-                    tf.bool,
+                    np.bool_,
                 'is_first':
-                    tf.bool,
+                    np.bool_,
                 'is_last':
-                    tf.bool,
+                    np.bool_,
                 'discount':
-                    tf.float32,
+                    np.float32,
             }),
         'episode_id':
-            tf.int64,
+            np.int64,
         'timestamp':
-            tf.int64
+            np.int64
     })
 
   def get_description(self):
@@ -231,9 +232,9 @@ class RluControlSuite(rlu_common.RLUBuilder):
         'step_type':
             _sequence_feature(),
         'episode_id':
-            tf.io.FixedLenFeature([], tf.int64),
+            tf.io.FixedLenFeature([], np.int64),
         'timestamp':
-            tf.io.FixedLenFeature([], tf.int64),
+            tf.io.FixedLenFeature([], np.int64),
     }
 
   def tf_example_to_step_ds(self,
@@ -245,14 +246,14 @@ class RluControlSuite(rlu_common.RLUBuilder):
     is_first = tf.concat([[True], [False] * tf.ones(episode_length - 1)],
                          axis=0)
     is_last = tf.concat([[False] * tf.ones(episode_length - 1), [True]], axis=0)
-    is_terminal = [False] * tf.ones(episode_length, tf.int64)
+    is_terminal = [False] * tf.ones(episode_length, np.int64)
 
     # The data is in RSA alignment, we realign it to SAR to comply with the
     # RLDS standard.
     discount = data['discount'][1:]
     if discount[-1] == 0.:
       is_terminal = tf.concat(
-          [[False] * tf.ones(episode_length - 1, tf.int64), [True]], axis=0)
+          [[False] * tf.ones(episode_length - 1, np.int64), [True]], axis=0)
       # If the episode ends in a terminal state, in the last step only the
       # observation has valid information (the terminal state).
       discount = tf.concat([discount, [0.]], axis=0)

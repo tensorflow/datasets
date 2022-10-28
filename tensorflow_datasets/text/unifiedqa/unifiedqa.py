@@ -21,6 +21,7 @@ import csv
 import textwrap
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -97,8 +98,8 @@ class UnifiedQA(tfds.core.GeneratorBasedBuilder):
       '1.0.0': 'Initial release.',
   }
   DEFAULT_FEATURES = tfds.features.FeaturesDict({
-      'input': tf.string,
-      'output': tf.string,
+      'input': np.str_,
+      'output': np.str_,
   })
   BUILDER_CONFIGS = [
       UnifiedQAConfig(

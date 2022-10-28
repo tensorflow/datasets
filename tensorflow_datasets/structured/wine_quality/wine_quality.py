@@ -20,6 +20,7 @@ from __future__ import annotations
 import csv
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -103,24 +104,24 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
   def _info(self):
 
     features_dict = {
-        "fixed acidity": tf.float32,
-        "volatile acidity": tf.float32,
-        "citric acid": tf.float32,
-        "residual sugar": tf.float32,
-        "chlorides": tf.float32,
-        "free sulfur dioxide": tf.float32,
-        "total sulfur dioxide": tf.float32,
-        "density": tf.float32,
-        "pH": tf.float32,
-        "sulphates": tf.float64,
-        "alcohol": tf.float32,
+        "fixed acidity": np.float32,
+        "volatile acidity": np.float32,
+        "citric acid": np.float32,
+        "residual sugar": np.float32,
+        "chlorides": np.float32,
+        "free sulfur dioxide": np.float32,
+        "total sulfur dioxide": np.float32,
+        "density": np.float32,
+        "pH": np.float32,
+        "sulphates": np.float64,
+        "alcohol": np.float32,
     }
 
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "quality": tf.int32,
+            "quality": np.int32,
             "features": features_dict,
         }),
         supervised_keys=("features", "quality"),

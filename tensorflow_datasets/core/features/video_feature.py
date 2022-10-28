@@ -37,7 +37,7 @@ Json = type_utils.Json
 class Video(sequence_feature.Sequence):
   """`FeatureConnector` for videos, encoding frames individually on disk.
 
-  Video: The image connector accepts as input a 4 dimensional `tf.uint8` array
+  Video: The image connector accepts as input a 4 dimensional `np.uint8` array
   representing a video, a sequence of paths to encoded frames, or a path or a
   file object that can be decoded with ffmpeg. Note that not all formats in
   ffmpeg support reading from pipes, so providing a file object might fail.
@@ -45,7 +45,7 @@ class Video(sequence_feature.Sequence):
   copy it to a temporary local file before passing it to ffmpeg.
 
   Output:
-    video: tf.Tensor of type `tf.uint8` and shape
+    video: tf.Tensor of type `np.uint8` and shape
       [num_frames, height, width, channels], where channels must be 1 or 3
 
   Example:
@@ -114,7 +114,7 @@ class Video(sequence_feature.Sequence):
       use_colormap: Forwarded to `tfds.features.Image`. If `True`,
         `tfds.as_dataframe` will display each value in the image with a
         different color.
-      dtype: tf.uint16 or tf.uint8 (default). tf.uint16 can be used only with
+      dtype: np.uint16 or np.uint8 (default). np.uint16 can be used only with
         png encoding_format
       doc: Documentation of this feature (e.g. description).
 

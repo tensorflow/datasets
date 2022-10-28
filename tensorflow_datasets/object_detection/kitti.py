@@ -92,7 +92,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
         "truncated":
             tfds.features.Tensor(
                 shape=(),
-                dtype=tf.float32,
+                dtype=np.float32,
                 doc=(
                     "Float from 0 (non-truncated) to 1 (truncated), where"
                     "truncated refers to the object leaving image boundaries")),
@@ -105,7 +105,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
         "alpha":
             tfds.features.Tensor(
                 shape=(),
-                dtype=tf.float32,
+                dtype=np.float32,
                 doc="Observation angle of object, ranging [-pi..pi]"),
         "bbox":
             tfds.features.BBoxFeature(
@@ -113,18 +113,18 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
         "dimensions":
             tfds.features.Tensor(
                 shape=(3,),
-                dtype=tf.float32,
+                dtype=np.float32,
                 doc="3D object dimensions: height, width, length (in meters)"),
         "location":
             tfds.features.Tensor(
                 shape=(3,),
-                dtype=tf.float32,
+                dtype=np.float32,
                 doc="3D object location x,y,z in camera coordinates (in meters)"
             ),
         "rotation_y":
             tfds.features.Tensor(
                 shape=(),
-                dtype=tf.float32,
+                dtype=np.float32,
                 doc="Rotation ry around Y-axis in camera coordinates [-pi..pi]"
             ),
     }

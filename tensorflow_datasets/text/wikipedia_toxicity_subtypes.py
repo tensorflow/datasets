@@ -19,6 +19,7 @@ import csv
 import os
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -152,7 +153,7 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
       labels += TOXICITY_SUBTYPES
 
     for label in labels:
-      features[label] = tf.float32
+      features[label] = np.float32
 
     return tfds.core.DatasetInfo(
         builder=self,

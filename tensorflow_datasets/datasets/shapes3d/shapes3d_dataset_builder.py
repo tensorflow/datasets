@@ -49,17 +49,17 @@ class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
             "label_orientation":
                 tfds.features.ClassLabel(num_classes=15),
             "value_floor_hue":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_wall_hue":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_object_hue":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_scale":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_shape":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
             "value_orientation":
-                tfds.features.Tensor(shape=[], dtype=tf.float32),
+                tfds.features.Tensor(shape=[], dtype=np.float32),
         }),
         homepage="https://github.com/deepmind/3d-shapes",
     )

@@ -18,6 +18,7 @@
 import csv
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -73,7 +74,7 @@ class Goemotions(tfds.core.GeneratorBasedBuilder):
     features = {_TEXT_LABEL: tfds.features.Text()}
 
     for label in _EMOTION_LABELS:
-      features[label] = tf.bool
+      features[label] = np.bool_
 
     return tfds.core.DatasetInfo(
         builder=self,

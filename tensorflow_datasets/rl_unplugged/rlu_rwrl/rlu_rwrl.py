@@ -23,6 +23,7 @@ import functools
 import os
 from typing import Any, Dict, Generator, Optional, Sequence, Text, Tuple, Union
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
@@ -226,7 +227,7 @@ def tf_example_to_feature_description(example: Union[tf.Tensor, bytes],
       raise ValueError('Unexpected feature length %d. It should be divisible '
                        'by num_timesteps: %d' % (l, num_timesteps))
     size = l // num_timesteps
-    ret[k] = tf.io.FixedLenFeature([num_timesteps, size], tf.float32)
+    ret[k] = tf.io.FixedLenFeature([num_timesteps, size], np.float32)
   return ret
 
 
@@ -310,16 +311,16 @@ class RluRwrl(rlu_common.RLUBuilder):
                 'reward':
                     tf_feature_to_tfds_feature(feature_description['reward']),
                 'is_terminal':
-                    tf.bool,
+                    np.bool_,
                 'is_first':
-                    tf.bool,
+                    np.bool_,
                 'is_last':
-                    tf.bool,
+                    np.bool_,
                 'discount':
                     tf_feature_to_tfds_feature(feature_description['discount']),
             }),
         'episode_return':
-            tf.float32,
+            np.float32,
     })
 
   def get_description(self):

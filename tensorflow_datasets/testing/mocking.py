@@ -357,7 +357,7 @@ class RandomFakeGenerator(object):
       return self._rgn.random_sample(shape).astype(dtype.as_numpy_dtype)
     elif dtype.is_bool:
       return (self._rgn.random_sample(shape) < .5).astype(dtype.as_numpy_dtype)
-    elif dtype == tf.string:
+    elif dtype == np.str_:
       return self._generate_random_string_array(shape)
     raise ValueError('Fake generation not supported for {}'.format(dtype))
 

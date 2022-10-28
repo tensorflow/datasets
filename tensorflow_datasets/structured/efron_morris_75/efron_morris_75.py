@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import csv
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -58,16 +59,16 @@ class EfronMorris75(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     features_dict = {
-        'FirstName': tf.string,
-        'LastName': tf.string,
-        'At-Bats': tf.int32,
-        'Hits': tf.int32,
-        'BattingAverage': tf.float32,
-        'RemainingAt-Bats': tf.int32,
-        'RemainingAverage': tf.float32,
-        'SeasonAt-Bats': tf.int32,
-        'SeasonHits': tf.int32,
-        'SeasonAverage': tf.float32,
+        'FirstName': np.str_,
+        'LastName': np.str_,
+        'At-Bats': np.int32,
+        'Hits': np.int32,
+        'BattingAverage': np.float32,
+        'RemainingAt-Bats': np.int32,
+        'RemainingAverage': np.float32,
+        'SeasonAt-Bats': np.int32,
+        'SeasonHits': np.int32,
+        'SeasonAverage': np.float32,
     }
     return tfds.core.DatasetInfo(
         builder=self,

@@ -18,6 +18,7 @@
 from typing import List, Optional, Union
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.proto import feature_pb2
@@ -58,7 +59,7 @@ class ClassLabel(tensor_feature.Tensor):
         per line.
       doc: Documentation of this feature (e.g. description).
     """
-    super(ClassLabel, self).__init__(shape=(), dtype=tf.int64, doc=doc)
+    super(ClassLabel, self).__init__(shape=(), dtype=np.int64, doc=doc)
 
     self._num_classes = None
     self._str2int = None

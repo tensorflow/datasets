@@ -43,15 +43,15 @@ DecodeFn = Callable[[TreeDict[Tensor]], TreeDict[Tensor]]
 
 # Use NamedTuple, as it is preserved by `tf.data.Dataset`
 class _IdExample(NamedTuple):
-  id: Any  # tf.string
+  id: Any  # np.str_
   example: Any  # TreeDict[tf.any]
 
 
 class _Instruction(NamedTuple):
-  filepath: Any  # tf.string '/path/to/../train.tfrecord'
-  filename: Any  # tf.string 'train.tfrecord'
-  skip: Any  #  tf.int64
-  take: Any  # tf.int64
+  filepath: Any  # np.str_ '/path/to/../train.tfrecord'
+  filename: Any  # np.str_ 'train.tfrecord'
+  skip: Any  #  np.int64
+  take: Any  # np.int64
 
 
 def _get_dataset_from_filename(
@@ -77,19 +77,19 @@ def _get_dataset_from_filename(
 
 
 def _make_id(
-    filename: tf.Tensor,  # tf.Tensor[tf.string]
-    index: tf.Tensor,  # tf.Tensor[tf.int64]
-) -> tf.Tensor:  # tf.Tensor[tf.int64]
+    filename: tf.Tensor,  # tf.Tensor[np.str_]
+    index: tf.Tensor,  # tf.Tensor[np.int64]
+) -> tf.Tensor:  # tf.Tensor[np.int64]
   """Creates the unique example ID."""
-  return tf.strings.join(
-      [filename, tf.strings.as_string(index)],
+  return np.str_s.join(
+      [filename, np.str_s.as_string(index)],
       separator='__',
   )
 
 
 def _make_id_dataset(
-    filename: tf.Tensor,  # tf.Tensor[tf.string]
-    start_index: tf.Tensor,  # tf.Tensor[tf.int64]
+    filename: tf.Tensor,  # tf.Tensor[np.str_]
+    start_index: tf.Tensor,  # tf.Tensor[np.int64]
 ) -> tf.data.Dataset:
   """Creates the dataset generating unique example IDs."""
   ds = tf.data.experimental.Counter(start_index)

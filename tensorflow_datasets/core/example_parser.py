@@ -17,6 +17,7 @@
 
 from __future__ import annotations
 
+import numpy as np
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -41,7 +42,7 @@ class ExampleParser(object):
     ```
 
     Args:
-      serialized_example: `tf.Tensor`, the `tf.string` tensor containing the
+      serialized_example: `tf.Tensor`, the `np.str_` tensor containing the
         serialized proto to decode.
 
     Returns:
@@ -130,11 +131,11 @@ def _to_tf_example_spec(tensor_info):
   # to int64 which is space ineficient, no support for complexes or quantized
   # It seems quite space inefficient to convert bool to int64
   if tensor_info.dtype.is_integer or tensor_info.dtype.is_bool:
-    dtype = tf.int64
+    dtype = np.int64
   elif tensor_info.dtype.is_floating:
-    dtype = tf.float32
-  elif tensor_info.dtype == tf.string:
-    dtype = tf.string
+    dtype = np.float32
+  elif tensor_info.dtype == np.str_:
+    dtype = np.str_
   else:
     # TFRecord only support 3 types
     raise NotImplementedError(
@@ -165,7 +166,7 @@ def _to_tf_example_spec(tensor_info):
     tf_specs = {  # pylint: disable=g-complex-comprehension
         "ragged_row_lengths_{}".format(k): tf.io.FixedLenSequenceFeature(  # pylint: disable=g-complex-comprehension
             shape=(),
-            dtype=tf.int64,
+            dtype=np.int64,
             allow_missing=True,
         ) for k in range(tensor_info.sequence_rank - 1)
     }

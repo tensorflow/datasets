@@ -45,7 +45,7 @@ class Audio(tensor_feature.Tensor):
   * A file-object (e.g. `with path.open('rb') as fobj:`)
 
   By default, Audio features are decoded as the raw integer wave form
-  `tf.Tensor(shape=(None,), dtype=tf.int64)`.
+  `tf.Tensor(shape=(None,), dtype=np.int64)`.
   """
 
   def __init__(

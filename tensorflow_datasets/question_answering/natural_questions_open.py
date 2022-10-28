@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -64,8 +65,8 @@ class NaturalQuestionsOpen(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'question': tf.string,
-            'answer': tfds.features.Sequence(tf.string)
+            'question': np.str_,
+            'answer': tfds.features.Sequence(np.str_)
         }),
         supervised_keys=None,
         homepage=_URL,

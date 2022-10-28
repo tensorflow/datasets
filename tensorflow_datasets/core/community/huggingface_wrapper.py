@@ -28,6 +28,7 @@ from typing import Iterator, NamedTuple, Optional, Union
 from unittest import mock
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
@@ -165,11 +166,11 @@ class DatasetInfo:
 def _make_scalar_feature(dtype: str) -> tf.dtypes.DType:
   """Returns the `tf.dtype` scalar feature."""
   str2val = {
-      'bool_': tf.bool,
-      'float': tf.float32,
-      'double': tf.float64,
-      'large_string': tf.string,
-      'utf8': tf.string,
+      'bool_': np.bool_,
+      'float': np.float32,
+      'double': np.float64,
+      'large_string': np.str_,
+      'utf8': np.str_,
   }
   if dtype in str2val:
     return str2val[dtype]
@@ -198,7 +199,7 @@ def _mock_tensor_feature_empty_str() -> Iterator[None]:
   encode_example_fn = features.Tensor.encode_example
 
   def new_encode_example(self, example_data):
-    if example_data is None and self.dtype == tf.string:
+    if example_data is None and self.dtype == np.str_:
       example_data = ''
     return encode_example_fn(self, example_data)
 

@@ -130,17 +130,17 @@ class OgbgMolpcba(tfds.core.GeneratorBasedBuilder):
         # We mimic the features of the OGB platform-agnostic DataLoader.
         features=tfds.features.FeaturesDict({
             'num_nodes':
-                tfds.features.Tensor(shape=(None,), dtype=tf.int64),
+                tfds.features.Tensor(shape=(None,), dtype=np.int64),
             'node_feat':
-                tfds.features.Tensor(shape=(None, 9), dtype=tf.float32),
+                tfds.features.Tensor(shape=(None, 9), dtype=np.float32),
             'num_edges':
-                tfds.features.Tensor(shape=(None,), dtype=tf.int64),
+                tfds.features.Tensor(shape=(None,), dtype=np.int64),
             'edge_feat':
-                tfds.features.Tensor(shape=(None, 3), dtype=tf.float32),
+                tfds.features.Tensor(shape=(None, 3), dtype=np.float32),
             'edge_index':
-                tfds.features.Tensor(shape=(None, 2), dtype=tf.int64),
+                tfds.features.Tensor(shape=(None, 2), dtype=np.int64),
             'labels':
-                tfds.features.Tensor(shape=(128,), dtype=tf.float32),
+                tfds.features.Tensor(shape=(128,), dtype=np.float32),
         }),
         supervised_keys=None,
         homepage=_OGB_URL,

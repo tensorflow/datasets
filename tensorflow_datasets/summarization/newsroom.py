@@ -19,6 +19,7 @@ import json
 import os
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -90,7 +91,7 @@ class Newsroom(tfds.core.GeneratorBasedBuilder):
         for k in [_DOCUMENT, _SUMMARY] + _ADDITIONAL_TEXT_FEATURES
     }
     features.update({
-        k: tfds.features.Tensor(shape=[], dtype=tf.float32)
+        k: tfds.features.Tensor(shape=[], dtype=np.float32)
         for k in _ADDITIONAL_FLOAT_FEATURES
     })
     return tfds.core.DatasetInfo(
