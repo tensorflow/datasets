@@ -15,6 +15,8 @@
 
 """Custom Translate Datasets Template."""
 
+from __future__ import annotations
+
 import collections
 import os
 from typing import Dict, List, Tuple

@@ -19,9 +19,8 @@ import random
 import tempfile
 
 import numpy as np
-import tensorflow.compat.v1 as tf
-
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 MIN_HEIGHT_WIDTH = 10
 MAX_HEIGHT_WIDTH = 15
