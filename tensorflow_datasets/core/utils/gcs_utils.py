@@ -33,19 +33,21 @@ GCS_DATASETS_DIR = 'datasets'
 
 _is_gcs_disabled = False
 
+
 # Exception raised when GCS isn't available
 # * UnimplementedError: On windows, gs:// isn't supported on old TF versions.
 #   https://github.com/tensorflow/tensorflow/issues/38477
 # * FailedPreconditionError: (e.g. no internet)
 # * PermissionDeniedError: Some environments block GCS access.
 # * AbortedError: All 10 retry attempts failed.
-GCS_UNAVAILABLE_EXCEPTIONS = (
-    OSError,
-    tf.errors.UnimplementedError,
-    tf.errors.FailedPreconditionError,
-    tf.errors.PermissionDeniedError,
-    tf.errors.AbortedError,
-)
+def gcs_unavailable_exceptions():
+  return (
+      OSError,
+      tf.errors.UnimplementedError,
+      tf.errors.FailedPreconditionError,
+      tf.errors.PermissionDeniedError,
+      tf.errors.AbortedError,
+  )
 
 
 def gcs_path(*relative_path: epath.PathLike) -> epath.Path:
@@ -72,7 +74,7 @@ def exists(path: epath.Path) -> bool:
   """Checks if path exists. Returns False if issues occur connecting to GCS."""
   try:
     return path.exists()
-  except GCS_UNAVAILABLE_EXCEPTIONS:  # pylint: disable=catching-non-exception
+  except gcs_unavailable_exceptions():  # pylint: disable=catching-non-exception
     return False
 
 
@@ -86,7 +88,8 @@ def gcs_listdir(dir_name: str) -> Optional[List[str]]:
 
 
 def gcs_dataset_info_files(dataset_name: str) -> Optional[List[epath.Path]]:
-  """Return paths to the dataset info files of the given dataset in gs://tfds-data."""
+  """Return paths to the dataset info files of the given dataset in gs://tfds-data.
+  """
   path = gcs_path(posixpath.join(GCS_DATASET_INFO_DIR, dataset_name))
   if _is_gcs_disabled or not exists(path):
     return None
