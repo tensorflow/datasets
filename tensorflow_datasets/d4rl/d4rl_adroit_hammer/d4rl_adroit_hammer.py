@@ -13,25 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""d4rl_adroit_hammer dataset."""
-from typing import Any
+"""Dataset definition for d4rl_adroit_hammer.
 
-from tensorflow_datasets.d4rl import dataset_builder
-import tensorflow_datasets.public_api as tfds
+DEPRECATED!
+If you want to use the D4rlAdroitHammer dataset builder class, use:
+tfds.builder_cls('d4rl_adroit_hammer')
+"""
 
+from tensorflow_datasets.core import lazy_builder_import
 
-class D4rlAdroitHammer(dataset_builder.D4RLDatasetBuilder):
-  """DatasetBuilder for d4rl_adroit_hammer dataset."""
-
-  VERSION = tfds.core.Version('1.1.0')
-  RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
-      '1.1.0': 'Added is_last.',
-  }
-
-  BUILDER_CONFIGS = dataset_builder.ADROIT_BUILDER_CONFIGS
-
-  def __init__(self, **kwargs: Any):
-    config = dataset_builder.DatasetConfig(
-        name='hammer', obs_len=46, action_len=26, qpos_len=33, qvel_len=33)
-    super().__init__(ds_config=config, **kwargs)
+D4rlAdroitHammer = lazy_builder_import.LazyBuilderImport('d4rl_adroit_hammer')

@@ -15,13 +15,13 @@
 
 """d4rl_adroit_relocate dataset."""
 
-from tensorflow_datasets.d4rl.d4rl_adroit_relocate import d4rl_adroit_relocate
+from tensorflow_datasets.datasets.d4rl_adroit_relocate import d4rl_adroit_relocate_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class D4rlAdroitRelocateClonedV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
-  DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
+  DATASET_CLASS = d4rl_adroit_relocate_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -36,7 +36,7 @@ class D4rlAdroitRelocateClonedV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateExpertV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
-  DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
+  DATASET_CLASS = d4rl_adroit_relocate_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -51,7 +51,7 @@ class D4rlAdroitRelocateExpertV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateHumanV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
-  DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
+  DATASET_CLASS = d4rl_adroit_relocate_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -66,7 +66,7 @@ class D4rlAdroitRelocateHumanV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateClonedV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
-  DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
+  DATASET_CLASS = d4rl_adroit_relocate_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -81,7 +81,7 @@ class D4rlAdroitRelocateClonedV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateExpertV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
-  DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
+  DATASET_CLASS = d4rl_adroit_relocate_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -96,7 +96,7 @@ class D4rlAdroitRelocateExpertV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitRelocateHumanV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_relocate dataset."""
-  DATASET_CLASS = d4rl_adroit_relocate.D4rlAdroitRelocate
+  DATASET_CLASS = d4rl_adroit_relocate_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
