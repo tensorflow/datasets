@@ -39,7 +39,7 @@ frames).
 *   **Homepage**: [https://www.compression.cc/](https://www.compression.cc/)
 
 *   **Source code**:
-    [`tfds.image.CLIC`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clic.py)
+    [`tfds.datasets.clic.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/clic/clic_dataset_builder.py)
 
 *   **Versions**:
 

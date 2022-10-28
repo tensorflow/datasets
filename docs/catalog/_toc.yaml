@@ -8,6 +8,40 @@ toc:
     title: xtreme
   title: Dataset Collections
 - section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: '  "accepted": ['
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: '  "discarded": []'
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: '  ],'
+- section:
+  - path: /datasets/catalog/aflw2k3d
+    title: aflw2k3d
+  title: 3d
+- section:
+  - path: /datasets/catalog/aeslc
+    title: aeslc
+  - path: /datasets/catalog/billsum
+    title: billsum
+  - path: /datasets/catalog/booksum
+    title: booksum (manual)
+  title: Abstractive-text-summarization
+- section:
+  - path: /datasets/catalog/ag_news_subset
+    title: ag_news_subset
+  - path: /datasets/catalog/caltech101
+    title: caltech101
+  - path: /datasets/catalog/lost_and_found
+    title: lost_and_found
+  title: Anomaly-detection
+- section:
+  - path: /datasets/catalog/accentdb
+    title: accentdb
   - path: /datasets/catalog/common_voice
     title: common_voice
   - path: /datasets/catalog/crema_d
@@ -16,6 +50,8 @@ toc:
     title: dementiabank (manual)
   - path: /datasets/catalog/fuss
     title: fuss
+  - path: /datasets/catalog/groove
+    title: groove
   - path: /datasets/catalog/gtzan
     title: gtzan
   - path: /datasets/catalog/gtzan_music_speech
@@ -50,6 +86,16 @@ toc:
     title: yes_no
   title: Audio
 - section:
+  - path: /datasets/catalog/ai2_arc_with_ir
+    title: ai2_arc_with_ir
+  - path: /datasets/catalog/arc
+    title: arc
+  title: Common-sense-reasoning
+- section:
+  - path: /datasets/catalog/clevr
+    title: clevr
+  title: Coreference-resolution
+- section:
   - path: /datasets/catalog/d4rl_adroit_door
     title: d4rl_adroit_door
   - path: /datasets/catalog/d4rl_adroit_hammer
@@ -70,20 +116,138 @@ toc:
     title: d4rl_mujoco_walker2d
   title: D4rl
 - section:
+  - path: /datasets/catalog/caltech101
+    title: caltech101
+  - path: /datasets/catalog/celeb_a_hq
+    title: celeb_a_hq (manual)
+  title: Density-estimation
+- section:
+  - path: /datasets/catalog/aeslc
+    title: aeslc
+  - path: /datasets/catalog/booksum
+    title: booksum (manual)
+  title: Document-summarization
+- section:
+  - path: /datasets/catalog/ag_news_subset
+    title: ag_news_subset
+  - path: /datasets/catalog/ai2_arc_with_ir
+    title: ai2_arc_with_ir
+  - path: /datasets/catalog/arc
+    title: arc
+  - path: /datasets/catalog/beir
+    title: beir
+  - path: /datasets/catalog/booksum
+    title: booksum (manual)
+  - path: /datasets/catalog/bool_q
+    title: bool_q
+  title: En
+- section:
+  - path: /datasets/catalog/caltech101
+    title: caltech101
+  title: Fine-grained-image-classification
+- section:
   - path: /datasets/catalog/cardiotox
     title: cardiotox
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
   title: Graphs
 - section:
-  - path: /datasets/catalog/lsun
-    title: lsun
-  title: Image
-- section:
+  - path: /datasets/catalog/abstract_reasoning
+    title: abstract_reasoning (manual)
+  - path: /datasets/catalog/aflw2k3d
+    title: aflw2k3d
+  - path: /datasets/catalog/bccd
+    title: bccd
+  - path: /datasets/catalog/beans
+    title: beans
+  - path: /datasets/catalog/bee_dataset
+    title: bee_dataset
+  - path: /datasets/catalog/bigearthnet
+    title: bigearthnet
+  - path: /datasets/catalog/binarized_mnist
+    title: binarized_mnist
   - path: /datasets/catalog/binary_alpha_digits
     title: binary_alpha_digits
   - path: /datasets/catalog/caltech101
     title: caltech101
+  - path: /datasets/catalog/celeb_a
+    title: celeb_a
+  - path: /datasets/catalog/celeb_a_hq
+    title: celeb_a_hq (manual)
+  - path: /datasets/catalog/cityscapes
+    title: cityscapes (manual)
+  - path: /datasets/catalog/clevr
+    title: clevr
+  - path: /datasets/catalog/clic
+    title: clic
+  - path: /datasets/catalog/coil100
+    title: coil100
+  - path: /datasets/catalog/div2k
+    title: div2k
+  - path: /datasets/catalog/downsampled_imagenet
+    title: downsampled_imagenet
+  - path: /datasets/catalog/dsprites
+    title: dsprites
+  - path: /datasets/catalog/flic
+    title: flic
+  - path: /datasets/catalog/lost_and_found
+    title: lost_and_found
+  - path: /datasets/catalog/lsun
+    title: lsun
+  - path: /datasets/catalog/nyu_depth_v2
+    title: nyu_depth_v2
+  - path: /datasets/catalog/pass
+    title: pass
+  - path: /datasets/catalog/s3o4d
+    title: s3o4d
+  - path: /datasets/catalog/scene_parse150
+    title: scene_parse150
+  - path: /datasets/catalog/shapes3d
+    title: shapes3d
+  - path: /datasets/catalog/symmetric_solids
+    title: symmetric_solids
+  - path: /datasets/catalog/the300w_lp
+    title: the300w_lp
+  title: Image
+- section:
+  - path: /datasets/catalog/abstract_reasoning
+    title: abstract_reasoning (manual)
+  - path: /datasets/catalog/bigearthnet
+    title: bigearthnet
+  - path: /datasets/catalog/caltech101
+    title: caltech101
+  - path: /datasets/catalog/celeb_a
+    title: celeb_a
+  - path: /datasets/catalog/flic
+    title: flic
+  title: Image-classification
+- section:
+  - path: /datasets/catalog/binarized_mnist
+    title: binarized_mnist
+  - path: /datasets/catalog/celeb_a
+    title: celeb_a
+  - path: /datasets/catalog/celeb_a_hq
+    title: celeb_a_hq (manual)
+  - path: /datasets/catalog/cityscapes
+    title: cityscapes (manual)
+  - path: /datasets/catalog/clevr
+    title: clevr
+  title: Image-generation
+- section:
+  - path: /datasets/catalog/celeb_a_hq
+    title: celeb_a_hq (manual)
+  - path: /datasets/catalog/div2k
+    title: div2k
+  title: Image-super-resolution
+- section:
+  - path: /datasets/catalog/celeb_a_hq
+    title: celeb_a_hq (manual)
+  - path: /datasets/catalog/cityscapes
+    title: cityscapes (manual)
+  - path: /datasets/catalog/scene_parse150
+    title: scene_parse150
+  title: Image-to-image-translation
+- section:
   - path: /datasets/catalog/caltech_birds2010
     title: caltech_birds2010
   - path: /datasets/catalog/caltech_birds2011
@@ -238,6 +402,50 @@ toc:
     title: visual_domain_decathlon
   title: Image classification
 - section:
+  - path: /datasets/catalog/cityscapes
+    title: cityscapes (manual)
+  - path: /datasets/catalog/nyu_depth_v2
+    title: nyu_depth_v2
+  title: Instance-segmentation
+- section:
+  - path: /datasets/catalog/big_patent
+    title: big_patent
+  - path: /datasets/catalog/billsum
+    title: billsum
+  - path: /datasets/catalog/blimp
+    title: blimp
+  title: Language-modelling
+- section:
+  - path: /datasets/catalog/ag_news_subset
+    title: ag_news_subset
+  - path: /datasets/catalog/ai2_arc_with_ir
+    title: ai2_arc_with_ir
+  - path: /datasets/catalog/arc
+    title: arc
+  - path: /datasets/catalog/beir
+    title: beir
+  - path: /datasets/catalog/booksum
+    title: booksum (manual)
+  - path: /datasets/catalog/bool_q
+    title: bool_q
+  title: Monolingual
+- section:
+  - path: /datasets/catalog/anli
+    title: anli
+  title: Natural-language-inference
+- section:
+  - path: /datasets/catalog/ag_news_subset
+    title: ag_news_subset
+  - path: /datasets/catalog/anli
+    title: anli
+  - path: /datasets/catalog/beir
+    title: beir
+  - path: /datasets/catalog/bool_q
+    title: bool_q
+  - path: /datasets/catalog/clevr
+    title: clevr
+  title: Natural-language-understanding
+- section:
   - path: /datasets/catalog/deep1b
     title: deep1b
   - path: /datasets/catalog/glove100_angular
@@ -245,6 +453,10 @@ toc:
   - path: /datasets/catalog/sift1m
     title: sift1m
   title: Nearest neighbors
+- section:
+  - path: /datasets/catalog/flic
+    title: flic
+  title: Object-detection
 - section:
   - path: /datasets/catalog/coco
     title: coco
@@ -265,6 +477,14 @@ toc:
   - path: /datasets/catalog/wider_face
     title: wider_face
   title: Object detection
+- section:
+  - path: /datasets/catalog/beir
+    title: beir
+  - path: /datasets/catalog/bool_q
+    title: bool_q
+  - path: /datasets/catalog/clevr
+    title: clevr
+  title: Question-answering
 - section:
   - path: /datasets/catalog/coqa
     title: coqa
@@ -308,6 +528,10 @@ toc:
     title: simpte (manual)
   title: Recommendation
 - section:
+  - path: /datasets/catalog/nyu_depth_v2
+    title: nyu_depth_v2
+  title: Rgb-d
+- section:
   - path: /datasets/catalog/rlu_atari
     title: rlu_atari
   - path: /datasets/catalog/rlu_atari_checkpoints
@@ -345,6 +569,32 @@ toc:
   - path: /datasets/catalog/mt_opt
     title: mt_opt
   title: Robotics
+- section:
+  - path: /datasets/catalog/bigearthnet
+    title: bigearthnet
+  title: Scene-classification
+- section:
+  - path: /datasets/catalog/bigearthnet
+    title: bigearthnet
+  - path: /datasets/catalog/cityscapes
+    title: cityscapes (manual)
+  - path: /datasets/catalog/lost_and_found
+    title: lost_and_found
+  - path: /datasets/catalog/nyu_depth_v2
+    title: nyu_depth_v2
+  - path: /datasets/catalog/scene_parse150
+    title: scene_parse150
+  title: Semantic-segmentation
+- section:
+  - path: /datasets/catalog/big_patent
+    title: big_patent
+  - path: /datasets/catalog/billsum
+    title: billsum
+  title: Sequence-to-sequence-language-modelling
+- section:
+  - path: /datasets/catalog/accentdb
+    title: accentdb
+  title: Speech-recognition
 - section:
   - path: /datasets/catalog/ble_wind_field
     title: ble_wind_field
@@ -404,10 +654,6 @@ toc:
     title: wine_quality
   title: Structured
 - section:
-  - path: /datasets/catalog/billsum
-    title: billsum
-  - path: /datasets/catalog/booksum
-    title: booksum (manual)
   - path: /datasets/catalog/cnn_dailymail
     title: cnn_dailymail
   - path: /datasets/catalog/covid19sum
@@ -442,19 +688,65 @@ toc:
     title: xsum (manual)
   title: Summarization
 - section:
+  - path: /datasets/catalog/abstract_reasoning
+    title: abstract_reasoning (manual)
+  - path: /datasets/catalog/aeslc
+    title: aeslc
+  - path: /datasets/catalog/ag_news_subset
+    title: ag_news_subset
+  - path: /datasets/catalog/ai2_arc
+    title: ai2_arc
+  - path: /datasets/catalog/ai2_arc_with_ir
+    title: ai2_arc_with_ir
+  - path: /datasets/catalog/amazon_us_reviews
+    title: amazon_us_reviews
+  - path: /datasets/catalog/anli
+    title: anli
+  - path: /datasets/catalog/answer_equivalence
+    title: answer_equivalence
+  - path: /datasets/catalog/arc
+    title: arc
+  - path: /datasets/catalog/asqa
+    title: asqa
+  - path: /datasets/catalog/asset
+    title: asset
+  - path: /datasets/catalog/assin2
+    title: assin2
+  - path: /datasets/catalog/bccd
+    title: bccd
+  - path: /datasets/catalog/beir
+    title: beir
+  - path: /datasets/catalog/big_patent
+    title: big_patent
+  - path: /datasets/catalog/bigearthnet
+    title: bigearthnet
+  - path: /datasets/catalog/billsum
+    title: billsum
   - path: /datasets/catalog/blimp
     title: blimp
+  - path: /datasets/catalog/booksum
+    title: booksum (manual)
   - path: /datasets/catalog/bool_q
     title: bool_q
+  - path: /datasets/catalog/bucc
+    title: bucc
   - path: /datasets/catalog/c4
     title: c4 (manual)
   - path: /datasets/catalog/c4_wsrs
     status: nightly
     title: c4_wsrs
+  - path: /datasets/catalog/caltech101
+    title: caltech101
+  - path: /datasets/catalog/celeb_a_hq
+    title: celeb_a_hq (manual)
   - path: /datasets/catalog/cfq
     title: cfq
+  - path: /datasets/catalog/cityscapes
+    title: cityscapes (manual)
   - path: /datasets/catalog/civil_comments
     title: civil_comments
+  - path: /datasets/catalog/clevr
+    title: clevr
   - path: /datasets/catalog/clinc_oos
     title: clinc_oos
   - path: /datasets/catalog/conll2003
@@ -469,10 +761,14 @@ toc:
     title: dolphin_number_word
   - path: /datasets/catalog/drop
     title: drop
+  - path: /datasets/catalog/dsprites
+    title: dsprites
   - path: /datasets/catalog/eraser_multi_rc
     title: eraser_multi_rc
   - path: /datasets/catalog/esnli
     title: esnli
+  - path: /datasets/catalog/flic
+    title: flic
   - path: /datasets/catalog/gap
     title: gap
   - path: /datasets/catalog/gem
@@ -497,6 +793,8 @@ toc:
     title: librispeech_lm
   - path: /datasets/catalog/lm1b
     title: lm1b
+  - path: /datasets/catalog/lost_and_found
+    title: lost_and_found
   - path: /datasets/catalog/math_dataset
     title: math_dataset
   - path: /datasets/catalog/math_qa
@@ -591,16 +889,46 @@ toc:
     title: yelp_polarity_reviews
   title: Text
 - section:
+  - path: /datasets/catalog/ag_news_subset
+    title: ag_news_subset
+  - path: /datasets/catalog/bool_q
+    title: bool_q
+  title: Text-classification
+- section:
+  - path: /datasets/catalog/aeslc
+    title: aeslc
+  - path: /datasets/catalog/big_patent
+    title: big_patent
+  - path: /datasets/catalog/billsum
+    title: billsum
+  - path: /datasets/catalog/booksum
+    title: booksum (manual)
+  - path: /datasets/catalog/bool_q
+    title: bool_q
+  title: Text-generation
+- section:
+  - path: /datasets/catalog/aeslc
+    title: aeslc
+  - path: /datasets/catalog/big_patent
+    title: big_patent
+  - path: /datasets/catalog/billsum
+    title: billsum
+  - path: /datasets/catalog/booksum
+    title: booksum (manual)
+  title: Text-summarization
+- section:
   - path: /datasets/catalog/wiki_auto
     title: wiki_auto
   title: Text simplification
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: Tfds"
 - section:
   - path: /datasets/catalog/smartwatch_gestures
     title: smartwatch_gestures
   title: Time series
 - section:
-  - path: /datasets/catalog/bucc
-    title: bucc
   - path: /datasets/catalog/flores
     title: flores
   - path: /datasets/catalog/mtnt
@@ -633,8 +961,18 @@ toc:
     title: wmt_t2t_translate (manual)
   title: Translate
 - section:
+  - path: /datasets/catalog/caltech101
+    title: caltech101
+  title: Unsupervised-anomaly-detection
+- section:
+  - path: /datasets/catalog/abstract_reasoning
+    title: abstract_reasoning (manual)
+  - path: /datasets/catalog/bair_robot_pushing_small
+    title: bair_robot_pushing_small
   - path: /datasets/catalog/davis
     title: davis
+  - path: /datasets/catalog/flic
+    title: flic
   - path: /datasets/catalog/moving_mnist
     title: moving_mnist
   - path: /datasets/catalog/robonet
@@ -660,3 +998,11 @@ toc:
   - path: /datasets/catalog/wit_kaggle
     title: wit_kaggle (manual)
   title: Vision language
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: '{'
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: '}'

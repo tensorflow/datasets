@@ -27,7 +27,7 @@ repostory we release the ASQA dataset, together with the evaluation code:
     [https://github.com/google-research/language/tree/master/language/asqa](https://github.com/google-research/language/tree/master/language/asqa)
 
 *   **Source code**:
-    [`tfds.question_answering.asqa.Asqa`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/asqa/asqa.py)
+    [`tfds.datasets.asqa.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/asqa/asqa_dataset_builder.py)
 
 *   **Versions**:
 

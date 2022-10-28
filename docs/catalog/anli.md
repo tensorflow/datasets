@@ -27,7 +27,7 @@ iterative, adversarial human-and-model-in-the-loop procedure.
     [https://github.com/facebookresearch/anli](https://github.com/facebookresearch/anli)
 
 *   **Source code**:
-    [`tfds.text.Anli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/anli.py)
+    [`tfds.datasets.anli.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/anli/anli_dataset_builder.py)
 
 *   **Versions**:
 

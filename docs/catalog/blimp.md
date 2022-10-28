@@ -30,7 +30,7 @@ expert-crafted grammars.
     [https://github.com/alexwarstadt/blimp/tree/master/](https://github.com/alexwarstadt/blimp/tree/master/)
 
 *   **Source code**:
-    [`tfds.text.Blimp`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/blimp.py)
+    [`tfds.datasets.blimp.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/blimp/blimp_dataset_builder.py)
 
 *   **Versions**:
 

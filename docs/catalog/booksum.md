@@ -6,7 +6,7 @@
   <meta itemprop="description" content="BookSum: A Collection of Datasets for Long-form Narrative Summarization&#10;&#10;This implementation currently only supports book and chapter summaries.&#10;&#10;GitHub: https://github.com/salesforce/booksum&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;booksum&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/booksum" />
   <meta itemprop="sameAs" content="https://github.com/salesforce/booksum" />
-  <meta itemprop="citation" content="@article{kryscinski2021booksum,&#10;      title={BookSum: A Collection of Datasets for Long-form Narrative Summarization},&#10;      author={Wojciech Kry{&#x27;s}ci{&#x27;n}ski and Nazneen Rajani and Divyansh Agarwal and Caiming Xiong and Dragomir Radev},&#10;      year={2021},&#10;      eprint={2105.08209},&#10;      archivePrefix={arXiv},&#10;      primaryClass={cs.CL}&#10;}" />
+  <meta itemprop="citation" content="@article{kryscinski2021booksum,&#10;      title={BookSum: A Collection of Datasets for Long-form Narrative Summarization},&#10;      author={Wojciech Kry{\&#x27;s}ci{\&#x27;n}ski and Nazneen Rajani and Divyansh Agarwal and Caiming Xiong and Dragomir Radev},&#10;      year={2021},&#10;      eprint={2105.08209},&#10;      archivePrefix={arXiv},&#10;      primaryClass={cs.CL}&#10;}" />
 </div>
 
 # `booksum`
@@ -32,7 +32,7 @@ GitHub: https://github.com/salesforce/booksum
     [https://github.com/salesforce/booksum](https://github.com/salesforce/booksum)
 
 *   **Source code**:
-    [`tfds.summarization.booksum.Booksum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/booksum/booksum.py)
+    [`tfds.datasets.booksum.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/booksum/booksum_dataset_builder.py)
 
 *   **Versions**:
 
@@ -93,7 +93,7 @@ summary  | Text         |       | tf.string |
 ```
 @article{kryscinski2021booksum,
       title={BookSum: A Collection of Datasets for Long-form Narrative Summarization},
-      author={Wojciech Kry{'s}ci{'n}ski and Nazneen Rajani and Divyansh Agarwal and Caiming Xiong and Dragomir Radev},
+      author={Wojciech Kry{\'s}ci{\'n}ski and Nazneen Rajani and Divyansh Agarwal and Caiming Xiong and Dragomir Radev},
       year={2021},
       eprint={2105.08209},
       archivePrefix={arXiv},
