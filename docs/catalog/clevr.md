@@ -34,7 +34,7 @@ reasoning each question requires.
     [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
 
 *   **Source code**:
-    [`tfds.image.CLEVR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clevr.py)
+    [`tfds.datasets.clevr.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/clevr/clevr_dataset_builder.py)
 
 *   **Versions**:
 

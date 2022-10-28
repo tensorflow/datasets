@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="ai2_arc" />
-  <meta itemprop="description" content="A new dataset of 7,787 genuine grade-school level, multiple-choice science&#10;questions, assembled to encourage research in advanced question-answering.&#10;The dataset is partitioned into a Challenge Set and an Easy Set, where the&#10;former contains only questions answered incorrectly by both a retrieval-based&#10;algorithm and a word co-occurrence algorithm. We are also including a corpus&#10;of over 14 million science sentences relevant to the task, and an&#10;implementation of three neural baseline models for this dataset.&#10;We pose ARC as a challenge to the community.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;ai2_arc&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="A new dataset of 7,787 genuine grade-school level, multiple-choice science&#10;questions, assembled to encourage research in advanced question-answering. The&#10;dataset is partitioned into a Challenge Set and an Easy Set, where the former&#10;contains only questions answered incorrectly by both a retrieval-based algorithm&#10;and a word co-occurrence algorithm. We are also including a corpus of over 14&#10;million science sentences relevant to the task, and an implementation of three&#10;neural baseline models for this dataset. We pose ARC as a challenge to the&#10;community.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;ai2_arc&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/ai2_arc" />
   <meta itemprop="sameAs" content="https://allenai.org/data/arc" />
   <meta itemprop="citation" content="@article{allenai:arc,&#10;      author    = {Peter Clark  and Isaac Cowhey and Oren Etzioni and Tushar Khot and&#10;                    Ashish Sabharwal and Carissa Schoenick and Oyvind Tafjord},&#10;      title     = {Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge},&#10;      journal   = {arXiv:1803.05457v1},&#10;      year      = {2018},&#10;}" />
@@ -26,7 +26,7 @@ community.
 *   **Homepage**: [https://allenai.org/data/arc](https://allenai.org/data/arc)
 
 *   **Source code**:
-    [`tfds.question_answering.Ai2Arc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/question_answering/ai2_arc.py)
+    [`tfds.datasets.ai2_arc.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ai2_arc/ai2_arc_dataset_builder.py)
 
 *   **Versions**:
 

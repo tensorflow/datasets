@@ -28,7 +28,7 @@ within the benchmark.
     [https://github.com/beir-cellar/beir](https://github.com/beir-cellar/beir)
 
 *   **Source code**:
-    [`tfds.text.beir.Beir`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/beir/beir.py)
+    [`tfds.datasets.beir.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/beir/beir_dataset_builder.py)
 
 *   **Versions**:
 

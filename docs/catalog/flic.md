@@ -40,7 +40,7 @@ set aside 20% (1016 images) of the data for testing.
     [https://bensapp.github.io/flic-dataset.html](https://bensapp.github.io/flic-dataset.html)
 
 *   **Source code**:
-    [`tfds.image.Flic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flic.py)
+    [`tfds.datasets.flic.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/flic/flic_dataset_builder.py)
 
 *   **Versions**:
 

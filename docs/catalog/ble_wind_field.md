@@ -37,7 +37,7 @@ atmospheric reanalyses of the global climate. Copernicus Climate Change Service
     [https://github.com/google/balloon-learning-environment](https://github.com/google/balloon-learning-environment)
 
 *   **Source code**:
-    [`tfds.structured.ble_wind_field.BLEWindField`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/ble_wind_field/ble_wind_field.py)
+    [`tfds.datasets.ble_wind_field.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ble_wind_field/ble_wind_field_dataset_builder.py)
 
 *   **Versions**:
 

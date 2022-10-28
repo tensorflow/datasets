@@ -29,12 +29,42 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`longt5`](longt5.md)
 *   [`xtreme`](xtreme.md)
 
+### `"accepted": [`
+
+*   [`duke_ultrasound`](duke_ultrasound.md)
+
+### `"discarded": []`
+
+*   [`duke_ultrasound`](duke_ultrasound.md)
+
+### `],`
+
+*   [`duke_ultrasound`](duke_ultrasound.md)
+
+### `3d`
+
+*   [`aflw2k3d`](aflw2k3d.md)
+
+### `Abstractive-text-summarization`
+
+*   [`aeslc`](aeslc.md)
+*   [`billsum`](billsum.md)
+*   [`booksum`](booksum.md)
+
+### `Anomaly-detection`
+
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`caltech101`](caltech101.md)
+*   [`lost_and_found`](lost_and_found.md)
+
 ### `Audio`
 
+*   [`accentdb`](accentdb.md)
 *   [`common_voice`](common_voice.md)
 *   [`crema_d`](crema_d.md)
 *   [`dementiabank`](dementiabank.md)
 *   [`fuss`](fuss.md)
+*   [`groove`](groove.md)
 *   [`gtzan`](gtzan.md)
 *   [`gtzan_music_speech`](gtzan_music_speech.md)
 *   [`librispeech`](librispeech.md)
@@ -52,6 +82,15 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`xtreme_s`](xtreme_s.md)
 *   [`yes_no`](yes_no.md)
 
+### `Common-sense-reasoning`
+
+*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
+*   [`arc`](arc.md)
+
+### `Coreference-resolution`
+
+*   [`clevr`](clevr.md)
+
 ### `D4rl`
 
 *   [`d4rl_adroit_door`](d4rl_adroit_door.md)
@@ -64,6 +103,29 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`d4rl_mujoco_hopper`](d4rl_mujoco_hopper.md)
 *   [`d4rl_mujoco_walker2d`](d4rl_mujoco_walker2d.md)
 
+### `Density-estimation`
+
+*   [`caltech101`](caltech101.md)
+*   [`celeb_a_hq`](celeb_a_hq.md)
+
+### `Document-summarization`
+
+*   [`aeslc`](aeslc.md)
+*   [`booksum`](booksum.md)
+
+### `En`
+
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
+*   [`arc`](arc.md)
+*   [`beir`](beir.md)
+*   [`booksum`](booksum.md)
+*   [`bool_q`](bool_q.md)
+
+### `Fine-grained-image-classification`
+
+*   [`caltech101`](caltech101.md)
+
 ### `Graphs`
 
 *   [`cardiotox`](cardiotox.md)
@@ -71,12 +133,64 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Image`
 
+*   [`abstract_reasoning`](abstract_reasoning.md)
+*   [`aflw2k3d`](aflw2k3d.md)
+*   [`bccd`](bccd.md)
+*   [`beans`](beans.md)
+*   [`bee_dataset`](bee_dataset.md)
+*   [`bigearthnet`](bigearthnet.md)
+*   [`binarized_mnist`](binarized_mnist.md)
+*   [`binary_alpha_digits`](binary_alpha_digits.md)
+*   [`caltech101`](caltech101.md)
+*   [`celeb_a`](celeb_a.md)
+*   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`cityscapes`](cityscapes.md)
+*   [`clevr`](clevr.md)
+*   [`clic`](clic.md)
+*   [`coil100`](coil100.md)
+*   [`div2k`](div2k.md)
+*   [`downsampled_imagenet`](downsampled_imagenet.md)
+*   [`dsprites`](dsprites.md)
+*   [`flic`](flic.md)
+*   [`lost_and_found`](lost_and_found.md)
 *   [`lsun`](lsun.md)
+*   [`nyu_depth_v2`](nyu_depth_v2.md)
+*   [`pass`](pass.md)
+*   [`s3o4d`](s3o4d.md)
+*   [`scene_parse150`](scene_parse150.md)
+*   [`shapes3d`](shapes3d.md)
+*   [`symmetric_solids`](symmetric_solids.md)
+*   [`the300w_lp`](the300w_lp.md)
+
+### `Image-classification`
+
+*   [`abstract_reasoning`](abstract_reasoning.md)
+*   [`bigearthnet`](bigearthnet.md)
+*   [`caltech101`](caltech101.md)
+*   [`celeb_a`](celeb_a.md)
+*   [`flic`](flic.md)
+
+### `Image-generation`
+
+*   [`binarized_mnist`](binarized_mnist.md)
+*   [`celeb_a`](celeb_a.md)
+*   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`cityscapes`](cityscapes.md)
+*   [`clevr`](clevr.md)
+
+### `Image-super-resolution`
+
+*   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`div2k`](div2k.md)
+
+### `Image-to-image-translation`
+
+*   [`celeb_a_hq`](celeb_a_hq.md)
+*   [`cityscapes`](cityscapes.md)
+*   [`scene_parse150`](scene_parse150.md)
 
 ### `Image classification`
 
-*   [`binary_alpha_digits`](binary_alpha_digits.md)
-*   [`caltech101`](caltech101.md)
 *   [`caltech_birds2010`](caltech_birds2010.md)
 *   [`caltech_birds2011`](caltech_birds2011.md)
 *   [`cars196`](cars196.md)
@@ -154,11 +268,47 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`uc_merced`](uc_merced.md)
 *   [`visual_domain_decathlon`](visual_domain_decathlon.md)
 
+### `Instance-segmentation`
+
+*   [`cityscapes`](cityscapes.md)
+*   [`nyu_depth_v2`](nyu_depth_v2.md)
+
+### `Language-modelling`
+
+*   [`big_patent`](big_patent.md)
+*   [`billsum`](billsum.md)
+*   [`blimp`](blimp.md)
+
+### `Monolingual`
+
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
+*   [`arc`](arc.md)
+*   [`beir`](beir.md)
+*   [`booksum`](booksum.md)
+*   [`bool_q`](bool_q.md)
+
+### `Natural-language-inference`
+
+*   [`anli`](anli.md)
+
+### `Natural-language-understanding`
+
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`anli`](anli.md)
+*   [`beir`](beir.md)
+*   [`bool_q`](bool_q.md)
+*   [`clevr`](clevr.md)
+
 ### `Nearest neighbors`
 
 *   [`deep1b`](deep1b.md)
 *   [`glove100_angular`](glove100_angular.md)
 *   [`sift1m`](sift1m.md)
+
+### `Object-detection`
+
+*   [`flic`](flic.md)
 
 ### `Object detection`
 
@@ -171,6 +321,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`voc`](voc.md)
 *   [`waymo_open_dataset`](waymo_open_dataset.md)
 *   [`wider_face`](wider_face.md)
+
+### `Question-answering`
+
+*   [`beir`](beir.md)
+*   [`bool_q`](bool_q.md)
+*   [`clevr`](clevr.md)
 
 ### `Question answering`
 
@@ -199,6 +355,10 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`hillstrom`](hillstrom.md)
 *   [`simpte`](simpte.md)
 
+### `Rgb-d`
+
+*   [`nyu_depth_v2`](nyu_depth_v2.md)
+
 ### `Rl unplugged`
 
 *   [`rlu_atari`](rlu_atari.md)
@@ -225,6 +385,27 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Robotics`
 
 *   [`mt_opt`](mt_opt.md)
+
+### `Scene-classification`
+
+*   [`bigearthnet`](bigearthnet.md)
+
+### `Semantic-segmentation`
+
+*   [`bigearthnet`](bigearthnet.md)
+*   [`cityscapes`](cityscapes.md)
+*   [`lost_and_found`](lost_and_found.md)
+*   [`nyu_depth_v2`](nyu_depth_v2.md)
+*   [`scene_parse150`](scene_parse150.md)
+
+### `Sequence-to-sequence-language-modelling`
+
+*   [`big_patent`](big_patent.md)
+*   [`billsum`](billsum.md)
+
+### `Speech-recognition`
+
+*   [`accentdb`](accentdb.md)
 
 ### `Structured`
 
@@ -259,8 +440,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Summarization`
 
-*   [`billsum`](billsum.md)
-*   [`booksum`](booksum.md)
 *   [`cnn_dailymail`](cnn_dailymail.md)
 *   [`covid19sum`](covid19sum.md)
 *   [`gigaword`](gigaword.md)
@@ -280,13 +459,36 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Text`
 
+*   [`abstract_reasoning`](abstract_reasoning.md)
+*   [`aeslc`](aeslc.md)
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`ai2_arc`](ai2_arc.md)
+*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
+*   [`amazon_us_reviews`](amazon_us_reviews.md)
+*   [`anli`](anli.md)
+*   [`answer_equivalence`](answer_equivalence.md)
+*   [`arc`](arc.md)
+*   [`asqa`](asqa.md)
+*   [`asset`](asset.md)
+*   [`assin2`](assin2.md)
+*   [`bccd`](bccd.md)
+*   [`beir`](beir.md)
+*   [`big_patent`](big_patent.md)
+*   [`bigearthnet`](bigearthnet.md)
+*   [`billsum`](billsum.md)
 *   [`blimp`](blimp.md)
+*   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
+*   [`bucc`](bucc.md)
 *   [`c4`](c4.md)
 *   [`c4_wsrs`](c4_wsrs.md)
     <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`caltech101`](caltech101.md)
+*   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`cfq`](cfq.md)
+*   [`cityscapes`](cityscapes.md)
 *   [`civil_comments`](civil_comments.md)
+*   [`clevr`](clevr.md)
 *   [`clinc_oos`](clinc_oos.md)
 *   [`conll2003`](conll2003.md)
 *   [`cos_e`](cos_e.md)
@@ -294,8 +496,10 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`doc_nli`](doc_nli.md)
 *   [`dolphin_number_word`](dolphin_number_word.md)
 *   [`drop`](drop.md)
+*   [`dsprites`](dsprites.md)
 *   [`eraser_multi_rc`](eraser_multi_rc.md)
 *   [`esnli`](esnli.md)
+*   [`flic`](flic.md)
 *   [`gap`](gap.md)
 *   [`gem`](gem.md)
 *   [`glue`](glue.md)
@@ -308,6 +512,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`lambada`](lambada.md)
 *   [`librispeech_lm`](librispeech_lm.md)
 *   [`lm1b`](lm1b.md)
+*   [`lost_and_found`](lost_and_found.md)
 *   [`math_dataset`](math_dataset.md)
 *   [`math_qa`](math_qa.md)
 *   [`movie_rationales`](movie_rationales.md)
@@ -355,9 +560,33 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`xtreme_xnli`](xtreme_xnli.md)
 *   [`yelp_polarity_reviews`](yelp_polarity_reviews.md)
 
+### `Text-classification`
+
+*   [`ag_news_subset`](ag_news_subset.md)
+*   [`bool_q`](bool_q.md)
+
+### `Text-generation`
+
+*   [`aeslc`](aeslc.md)
+*   [`big_patent`](big_patent.md)
+*   [`billsum`](billsum.md)
+*   [`booksum`](booksum.md)
+*   [`bool_q`](bool_q.md)
+
+### `Text-summarization`
+
+*   [`aeslc`](aeslc.md)
+*   [`big_patent`](big_patent.md)
+*   [`billsum`](billsum.md)
+*   [`booksum`](booksum.md)
+
 ### `Text simplification`
 
 *   [`wiki_auto`](wiki_auto.md)
+
+### `Tfds"`
+
+*   [`duke_ultrasound`](duke_ultrasound.md)
 
 ### `Time series`
 
@@ -365,7 +594,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Translate`
 
-*   [`bucc`](bucc.md)
 *   [`flores`](flores.md)
 *   [`mtnt`](mtnt.md)
 *   [`opus`](opus.md)
@@ -382,9 +610,16 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`wmt19_translate`](wmt19_translate.md)
 *   [`wmt_t2t_translate`](wmt_t2t_translate.md)
 
+### `Unsupervised-anomaly-detection`
+
+*   [`caltech101`](caltech101.md)
+
 ### `Video`
 
+*   [`abstract_reasoning`](abstract_reasoning.md)
+*   [`bair_robot_pushing_small`](bair_robot_pushing_small.md)
 *   [`davis`](davis.md)
+*   [`flic`](flic.md)
 *   [`moving_mnist`](moving_mnist.md)
 *   [`robonet`](robonet.md)
 *   [`starcraft_video`](starcraft_video.md)
@@ -399,5 +634,13 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ref_coco`](ref_coco.md)
 *   [`wit`](wit.md)
 *   [`wit_kaggle`](wit_kaggle.md)
+
+### `{`
+
+*   [`duke_ultrasound`](duke_ultrasound.md)
+
+### `}`
+
+*   [`duke_ultrasound`](duke_ultrasound.md)
 
 --------------------------------------------------------------------------------
