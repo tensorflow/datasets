@@ -53,7 +53,7 @@ class Audio(tensor_feature.Tensor):
       *,
       file_format: Optional[str] = None,
       shape: utils.Shape = (None,),
-      dtype: tf.dtypes.DType = tf.int64,
+      dtype: Union[np.dtype, tf.dtypes.DType] = np.int64,
       sample_rate: Optional[int] = None,
       encoding: Union[str, Encoding] = Encoding.NONE,
       doc: feature_lib.DocArg = None,
@@ -64,7 +64,7 @@ class Audio(tensor_feature.Tensor):
       file_format: `str`, the audio file format. Can be any format ffmpeg
         understands. If `None`, will attempt to infer from the file extension.
       shape: `tuple`, shape of the data.
-      dtype: The dtype of the data.
+      dtype: The dtype of the data. Numpy DTypes are converted to TF DTypes.
       sample_rate: `int`, additional metadata exposed to the user through
         `info.features['audio'].sample_rate`. This value isn't used neither in
         encoding nor decoding.
@@ -72,6 +72,7 @@ class Audio(tensor_feature.Tensor):
         values.
       doc: Documentation of this feature (e.g. description).
     """
+    dtype = tf.dtypes.as_dtype(dtype)
     self._file_format = file_format
     if len(shape) > 2:
       raise ValueError('Audio shape should be either (length,) or '
