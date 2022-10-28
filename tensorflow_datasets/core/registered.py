@@ -206,7 +206,7 @@ def list_imported_builders() -> List[str]:
   all_builders = [
       builder_name for builder_name, builder_cls in _DATASET_REGISTRY.items()
       if _is_builder_available(builder_cls)
-  ]
+  ] + list(_get_existing_dataset_packages(constants.DATASETS_TFDS_SRC_DIR))
   return sorted(all_builders)
 
 
