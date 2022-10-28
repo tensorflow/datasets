@@ -175,7 +175,7 @@ class _PackageIndex(collections.UserDict):
 
     try:
       content = self._remote_path.read_text()
-    except gcs_utils.GCS_UNAVAILABLE_EXCEPTIONS as e:
+    except gcs_utils.gcs_unavailable_exceptions() as e:
       # Do not crash if GCS access not available, but instead silently reuse
       # the cache.
       logging.info('Could not refresh the package index (GCS unavailable): %s',
