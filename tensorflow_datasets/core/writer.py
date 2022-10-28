@@ -16,10 +16,11 @@
 """To write records into sharded records files."""
 
 import dataclasses
+import functools
 import itertools
 import json
 import os
-from typing import Any, Iterable, List, Optional, Tuple
+from typing import Any, Iterable, Iterator, List, Mapping, Optional, Tuple
 import uuid
 
 from absl import logging
@@ -184,6 +185,7 @@ def _write_index_file(sharded_index_path: epath.PathLike,
   # parse the record position from a string.
   index_info = {"index": [str(record_key) for record_key in record_keys]}
   epath.Path(sharded_index_path).write_text(json.dumps(index_info))
+  logging.info("Wrote index file to %s", os.fspath(sharded_index_path))
 
 
 def _get_number_shards(
@@ -392,6 +394,14 @@ class BeamWriter(object):
     self._file_format = file_format
     self._disable_shuffling = disable_shuffling
 
+  @functools.lru_cache()
+  def _get_counter(self, name: str, namespace: str = "BeamWriter"):
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    return beam.metrics.Metrics.counter(namespace, name)
+
+  def inc_counter(self, name: str, value: int = 1) -> None:
+    self._get_counter(name).inc(value)
+
   def __getstate__(self):
     return self._original_state
 
@@ -409,6 +419,7 @@ class BeamWriter(object):
       hkey = key
     else:
       hkey = self._hasher.hash_key(key)
+    self.inc_counter(name="serialized_examples")
     return (hkey, serialized_example)
 
   def _bucketize_example(
@@ -433,6 +444,7 @@ class BeamWriter(object):
   ):
     """Sort the examples in bucket, emits total size and len on side."""
     beam = lazy_imports_lib.lazy_imports.apache_beam
+    self.inc_counter(name="buckets")
     bucketid, examples = bucketid_examples
     examples = sorted(examples)  # We know by design it fits in memory.
     # Compare continuous examples
@@ -445,23 +457,31 @@ class BeamWriter(object):
                                    (bucketid, (len(examples), total_size)))
     yield (bucketid, examples)
 
-  def _get_boundaries_per_bucket_shard(self, shard_len_sizes):
+  def _get_boundaries_per_bucket_shard(
+      self,
+      bucket_len_sizes: Mapping[int, Tuple[int, int]],
+  ) -> Iterator[Tuple[int, Tuple[str, int, Optional[int]]]]:
     """Yields `(bucketid, (shard_path, from, to))` tuples.
 
     Meaning that buckets[bucketid][from:to] examples should go in shard_path.
 
     Args:
-      shard_len_sizes: dict where the key is the id of the bucket and the value
+      bucket_len_sizes: dict where the key is the id of the bucket and the value
         is a tuple (len, size) of the corresponding bucket. len is the number of
         examples in the bucket and size is the total size in bytes of the
         elements in that bucket. Buckets with no elements are not mentioned.
+
+    Yields:
+      `(bucketid, (shard_path, from, to))` tuples.
     """
-    if not shard_len_sizes:
+    if not bucket_len_sizes:
       raise AssertionError("Not a single example present in the PCollection!")
+    logging.info("Creating shard boundaries for %d buckets.",
+                 len(bucket_len_sizes))
     total_num_examples = 0
     total_size = 0
     bucket2length = {}
-    for bucket_index, (length, size) in shard_len_sizes.items():
+    for bucket_index, (length, size) in bucket_len_sizes.items():
       total_num_examples += length
       total_size += size
       bucket2length[bucket_index] = length
@@ -473,14 +493,6 @@ class BeamWriter(object):
         total_size=total_size,
         bucket_lengths=bucket_lengths,
         filename_template=self._filename_template)
-    json_content = json.dumps({
-        "total_size": total_size,
-        "shard_lengths": [int(shard.examples_number) for shard in shard_specs]
-    })
-    tmp_split_info_path = epath.Path(
-        f"{self._split_info_path}.{uuid.uuid4().hex}")
-    tmp_split_info_path.write_text(json_content)
-    tmp_split_info_path.rename(self._split_info_path)
     for shard_spec in shard_specs:
       for instruction in shard_spec.file_instructions:
         bucketid = int(instruction.filename)
@@ -488,6 +500,19 @@ class BeamWriter(object):
         take = instruction.take
         to = from_ + take if take >= 0 else None
         yield (bucketid, (shard_spec.path, from_, to))
+    tmp_split_info_path = epath.Path(
+        f"{self._split_info_path}.{uuid.uuid4().hex}")
+    logging.info("Writing split info about %d shards to %s", len(shard_specs),
+                 os.fspath(tmp_split_info_path))
+    tmp_split_info_path.write_text(
+        json.dumps({
+            "total_size":
+                total_size,
+            "shard_lengths": [
+                int(shard.examples_number) for shard in shard_specs
+            ]
+        }))
+    tmp_split_info_path.rename(self._split_info_path)
 
   def _emits_examples_per_shard(self, bucketid_data):
     """Split examples of a bucket given list of instructions applying to it."""
@@ -500,14 +525,16 @@ class BeamWriter(object):
       self,
       shardid_examples: Tuple[str, List[Tuple[
           int, List[type_utils.KeySerializedExample]]]],
-  ):
+  ) -> None:
     """Write all examples from multiple buckets into the same shard."""
     shard_path, examples_by_bucket = shardid_examples
     examples = itertools.chain(*[ex[1] for ex in sorted(examples_by_bucket)])
     # Write in a tmp file potential race condition if `--xxxxx_enable_backups`
     # is set and multiple workers try to write to the same file.
     with utils.incomplete_file(epath.Path(shard_path)) as tmp_path:
+      logging.info("Writing examples to %s.", os.fspath(tmp_path))
       record_keys = _write_examples(tmp_path, examples, self._file_format)
+    self.inc_counter(name="written_shards")
     # If there are no record_keys, skip creating index files.
     if not record_keys:
       return
