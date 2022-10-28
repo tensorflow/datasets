@@ -13,31 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""D4RL Ant dataset from Mujoco."""
+"""Dataset definition for d4rl_mujoco_ant.
 
-from typing import Any
+DEPRECATED!
+If you want to use the D4rlMujocoAnt dataset builder class, use:
+tfds.builder_cls('d4rl_mujoco_ant')
+"""
 
-from tensorflow_datasets.d4rl import dataset_builder
-import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.core import lazy_builder_import
 
-
-class D4rlMujocoAnt(dataset_builder.D4RLDatasetBuilder):
-  """DatasetBuilder for ant dataset."""
-
-  VERSION = tfds.core.Version('1.2.0')
-  RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
-      '1.1.0': 'Added is_last.',
-      '1.2.0': 'Updated to take into account the next observation.'
-  }
-
-  BUILDER_CONFIGS = dataset_builder.MUJOCO_BUILDER_CONFIGS
-
-  def __init__(self, **kwargs: Any):
-    config = dataset_builder.DatasetConfig(
-        name='ant',
-        obs_len=111,
-        action_len=8,
-        qpos_len=15,
-        qvel_len=14)
-    super().__init__(ds_config=config, **kwargs)
+D4rlMujocoAnt = lazy_builder_import.LazyBuilderImport('d4rl_mujoco_ant')

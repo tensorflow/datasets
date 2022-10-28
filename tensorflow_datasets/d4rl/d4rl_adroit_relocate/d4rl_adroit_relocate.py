@@ -13,25 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""d4rl_adroit_relocate dataset."""
-from typing import Any
+"""Dataset definition for d4rl_adroit_relocate.
 
-from tensorflow_datasets.d4rl import dataset_builder
-import tensorflow_datasets.public_api as tfds
+DEPRECATED!
+If you want to use the D4rlAdroitRelocate dataset builder class, use:
+tfds.builder_cls('d4rl_adroit_relocate')
+"""
 
+from tensorflow_datasets.core import lazy_builder_import
 
-class D4rlAdroitRelocate(dataset_builder.D4RLDatasetBuilder):
-  """DatasetBuilder for d4rl_adroit_relocate dataset."""
-
-  VERSION = tfds.core.Version('1.1.0')
-  RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
-      '1.1.0': 'Added is_last.',
-  }
-
-  BUILDER_CONFIGS = dataset_builder.ADROIT_BUILDER_CONFIGS
-
-  def __init__(self, **kwargs: Any):
-    config = dataset_builder.DatasetConfig(
-        name='relocate', obs_len=39, action_len=30, qpos_len=36, qvel_len=36)
-    super().__init__(ds_config=config, **kwargs)
+D4rlAdroitRelocate = lazy_builder_import.LazyBuilderImport(
+    'd4rl_adroit_relocate')
