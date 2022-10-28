@@ -15,13 +15,13 @@
 
 """d4rl_adroit_pen dataset."""
 
-from tensorflow_datasets.d4rl.d4rl_adroit_pen import d4rl_adroit_pen
+from tensorflow_datasets.datasets.d4rl_adroit_pen import d4rl_adroit_pen_dataset_builder
 import tensorflow_datasets.public_api as tfds
 
 
 class D4rlAdroitPenClonedV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
-  DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
+  DATASET_CLASS = d4rl_adroit_pen_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -36,7 +36,7 @@ class D4rlAdroitPenClonedV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenExpertV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
-  DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
+  DATASET_CLASS = d4rl_adroit_pen_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -51,7 +51,7 @@ class D4rlAdroitPenExpertV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenHumanV1Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
-  DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
+  DATASET_CLASS = d4rl_adroit_pen_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -66,7 +66,7 @@ class D4rlAdroitPenHumanV1Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenClonedV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
-  DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
+  DATASET_CLASS = d4rl_adroit_pen_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -81,7 +81,7 @@ class D4rlAdroitPenClonedV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenExpertV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
-  DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
+  DATASET_CLASS = d4rl_adroit_pen_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
@@ -96,7 +96,7 @@ class D4rlAdroitPenExpertV0Test(tfds.testing.DatasetBuilderTestCase):
 
 class D4rlAdroitPenHumanV0Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for d4rl_adroit_pen dataset."""
-  DATASET_CLASS = d4rl_adroit_pen.D4rlAdroitPen
+  DATASET_CLASS = d4rl_adroit_pen_dataset_builder.Builder
 
   SPLITS = {
       'train': 2,  # Number of fake train example
