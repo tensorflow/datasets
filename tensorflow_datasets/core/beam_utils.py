@@ -114,7 +114,8 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
           shard_utils.split_file_instruction(
               file_instruction=file_instruction, num_splits=workers_per_shard))
     file_instructions = expanded_file_instructions
-  return pipeline | beam.Create(file_instructions) | beam.FlatMap(load_shard)
+  return pipeline | beam.Create(
+      file_instructions) | beam.Reshuffle() | beam.FlatMap(load_shard)
 
 
 @functools.lru_cache(None)
