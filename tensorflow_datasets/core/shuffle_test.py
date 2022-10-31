@@ -77,10 +77,10 @@ _TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS_SPLIT1)
     'num_keys', 'num_buckets', 'max_hkey', 'expected_non_empty_shards',
     'expected_min_bucket_size', 'expected_max_bucket_size'
 ], [
-    (10, 2, 10, 2, 5, 5),
-    (10, 3, 10, 3, 3, 4),
-    (1024, 10, 1024, 10, 102, 103),
-    (10, 2, 100, 1, 0, 10),
+    (10, 2, 9, 2, 5, 5),
+    (10, 3, 9, 3, 3, 4),
+    (1024, 10, 1023, 10, 102, 103),
+    (10, 2, 99, 1, 0, 10),
 ])
 def test_get_bucket_number(num_keys, num_buckets, max_hkey,
                            expected_non_empty_shards, expected_min_bucket_size,
@@ -101,6 +101,14 @@ def test_get_bucket_number(num_keys, num_buckets, max_hkey,
   for bucket_size in counts.values():
     assert bucket_size >= expected_min_bucket_size
     assert bucket_size <= expected_max_bucket_size
+
+
+def test_get_bucket_number_large_hkey():
+  bucket = shuffle.get_bucket_number(
+      hkey=314755909755515592000481005244904880883,
+      num_buckets=5,
+      max_hkey=314755909755515592000481005244904880883)
+  assert bucket == 4
 
 
 class ShuffleTest(testing.TestCase):

@@ -76,7 +76,8 @@ def get_bucket_number(
   # We purposely do not use modulo (%) to keep global order across shards.
   # floor(key * num_buckets / HKEYS_NUMBER), with HKEYS_NUMBER = 2**HKEY_SIZE.
   max_hkey = max_hkey or 2**HKEY_SIZE
-  return math.trunc((hkey * num_buckets) / max_hkey)
+  # Make sure that we do not return `bucket_number`.
+  return min(math.trunc((hkey * num_buckets) / max_hkey), num_buckets - 1)
 
 
 class _Bucket(object):
