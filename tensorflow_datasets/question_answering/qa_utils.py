@@ -20,6 +20,7 @@ import json
 
 from absl import logging
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -27,7 +28,7 @@ import tensorflow_datasets.public_api as tfds
 def squadlike_features():
   return tfds.features.FeaturesDict({
       "id":
-          tf.string,
+          np.str_,
       "title":
           tfds.features.Text(),
       "context":
@@ -37,7 +38,7 @@ def squadlike_features():
       "answers":
           tfds.features.Sequence({
               "text": tfds.features.Text(),
-              "answer_start": tf.int32,
+              "answer_start": np.int32,
           }),
   })
 

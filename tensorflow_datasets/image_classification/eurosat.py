@@ -18,6 +18,7 @@
 import io
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -105,7 +106,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
     elif self.builder_config.selection == 'all':
       features = tfds.features.FeaturesDict({
           'sentinel2':
-              tfds.features.Tensor(shape=[64, 64, 13], dtype=tf.float32),
+              tfds.features.Tensor(shape=[64, 64, 13], dtype=np.float32),
           'label':
               tfds.features.ClassLabel(names=_LABELS),
           'filename':

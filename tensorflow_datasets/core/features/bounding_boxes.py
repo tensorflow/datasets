@@ -47,7 +47,7 @@ class BBoxFeature(tensor_feature.Tensor):
     * `tfds.features.BBox` tuple.
 
   Output:
-    bbox: tf.Tensor of type `tf.float32` and shape `[4,]` which contains the
+    bbox: tf.Tensor of type `np.float32` and shape `[4,]` which contains the
       normalized coordinates of the bounding box `[ymin, xmin, ymax, xmax]`
 
   Example:
@@ -73,7 +73,7 @@ class BBoxFeature(tensor_feature.Tensor):
       *,
       doc: feature_lib.DocArg = None,
   ):
-    super(BBoxFeature, self).__init__(shape=(4,), dtype=tf.float32, doc=doc)
+    super(BBoxFeature, self).__init__(shape=(4,), dtype=np.float32, doc=doc)
 
   def encode_example(self, bbox):
     """See base class for details."""

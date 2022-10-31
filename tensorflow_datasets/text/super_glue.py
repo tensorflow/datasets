@@ -21,6 +21,7 @@ import json
 import os
 
 from etils import epath
+import numpy as np
 import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -376,7 +377,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           name="wic",
           description=_WIC_DESCRIPTION,
           # Note that start1, start2, end1, and end2 will be integers stored as
-          # tf.int32.
+          # np.int32.
           features=[
               "word", "sentence1", "sentence2", "start1", "start2", "end1",
               "end2"
@@ -388,7 +389,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           name="wsc",
           description=_WSC_DESCRIPTION,
           # Note that span1_index and span2_index will be integers stored as
-          # tf.int32.
+          # np.int32.
           features=[
               "text", "span1_index", "span2_index", "span1_text", "span2_text"
           ],
@@ -403,7 +404,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
               "\n\nThis version fixes issues where the spans are not actually "
               "substrings of the text."),
           # Note that span1_index and span2_index will be integers stored as
-          # tf.int32.
+          # np.int32.
           features=[
               "text", "span1_index", "span2_index", "span1_text", "span2_text"
           ],
@@ -435,26 +436,26 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
         for feature in self.builder_config.features
     }
     if self.builder_config.name.startswith("wsc"):
-      features["span1_index"] = tf.int32
-      features["span2_index"] = tf.int32
+      features["span1_index"] = np.int32
+      features["span2_index"] = np.int32
     if self.builder_config.name == "wic":
-      features["start1"] = tf.int32
-      features["start2"] = tf.int32
-      features["end1"] = tf.int32
-      features["end2"] = tf.int32
+      features["start1"] = np.int32
+      features["start2"] = np.int32
+      features["end1"] = np.int32
+      features["end2"] = np.int32
     if self.builder_config.name == "multirc":
       features["idx"] = tfds.features.FeaturesDict({
-          "paragraph": tf.int32,
-          "question": tf.int32,
-          "answer": tf.int32,
+          "paragraph": np.int32,
+          "question": np.int32,
+          "answer": np.int32,
       })
     elif self.builder_config.name == "record":
       features["idx"] = tfds.features.FeaturesDict({
-          "passage": tf.int32,
-          "query": tf.int32,
+          "passage": np.int32,
+          "query": np.int32,
       })
     else:
-      features["idx"] = tf.int32
+      features["idx"] = np.int32
 
     if self.builder_config.name == "record":
       # Entities are the set of possible choices for the placeholder.

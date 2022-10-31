@@ -16,10 +16,12 @@
 """Generic DatasetBuilder that transforms a tf.data.Dataset into a TFDS dataset.
 """
 from __future__ import annotations
+
 import typing
 from typing import Any, Dict, Mapping, Optional, Union
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -67,7 +69,7 @@ class TfDataBuilder(
           "test": my_ds_test,
       },
       features=tfds.features.FeaturesDict({
-          "number": tfds.features.Scalar(dtype=tf.int64),
+          "number": tfds.features.Scalar(dtype=np.int64),
       }),
       description="My dataset with a single number.",
       release_notes={
@@ -121,7 +123,7 @@ class TfDataBuilder(
             "test": ds_test,
         },
         features=tfds.features.FeaturesDict({
-            "number": tfds.features.Scalar(dtype=tf.int64),
+            "number": tfds.features.Scalar(dtype=np.int64),
         }),
         config="single_number",
         description="My dataset with a single number.",

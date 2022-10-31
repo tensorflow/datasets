@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import abc
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -160,7 +161,7 @@ class OpenImagesChallenge2019Detection(_OpenImagesChallenge2019):
                     # All labels have been verified by humans.
                     #  - If confidence is 1.0, the object IS in the image.
                     #  - If confidence is 0.0, the object is NOT in the image.
-                    "confidence": tf.float32,
+                    "confidence": np.float32,
                     "source": tfds.features.Text(),
                 }),
             # A sequence of bounding boxes.
@@ -168,7 +169,7 @@ class OpenImagesChallenge2019Detection(_OpenImagesChallenge2019):
                 tfds.features.Sequence({
                     "label": label,
                     "bbox": tfds.features.BBoxFeature(),
-                    "is_group_of": tf.bool,
+                    "is_group_of": np.bool_,
                 }),
         }),
         homepage=_URL,

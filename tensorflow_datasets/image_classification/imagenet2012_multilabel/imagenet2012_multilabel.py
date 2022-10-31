@@ -20,6 +20,7 @@ import os
 import tarfile
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -239,7 +240,7 @@ class Imagenet2012Multilabel(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Sequence(
                     tfds.features.ClassLabel(names_file=names_file)),
             'is_problematic':
-                tfds.features.Tensor(shape=(), dtype=tf.bool),
+                tfds.features.Tensor(shape=(), dtype=np.bool_),
             'file_name':
                 tfds.features.Text(),
         }),

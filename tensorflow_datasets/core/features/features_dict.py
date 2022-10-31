@@ -20,6 +20,7 @@ from __future__ import annotations
 import concurrent.futures
 from typing import Dict, List, Union
 
+import numpy as np
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
@@ -62,7 +63,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
   ```
   features = tfds.features.FeaturesDict({
       'input': tfds.features.Image(),
-      'output': tf.int32,
+      'output': np.int32,
   })
   ```
 
@@ -93,10 +94,10 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   ```
   tfds.features.FeaturesDict({
-      'input': tf.int32,
+      'input': np.int32,
       'target': {
-          'height': tf.int32,
-          'width': tf.int32,
+          'height': np.int32,
+          'width': np.int32,
       },
   })
   ```
@@ -105,9 +106,9 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   ```
   {
-      'input': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
-      'target/height': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
-      'target/width': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
+      'input': tf.io.FixedLenFeature(shape=(), dtype=np.int32),
+      'target/height': tf.io.FixedLenFeature(shape=(), dtype=np.int32),
+      'target/width': tf.io.FixedLenFeature(shape=(), dtype=np.int32),
   }
   ```
 
@@ -124,7 +125,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     Args:
       feature_dict (dict): Dictionary containing the feature connectors of a
         example. The keys should correspond to the data dict as returned by
-        tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically be
+        tf.data.Dataset(). Types (np.int32,...) and dicts will automatically be
         converted into FeatureConnector.
       doc: Documentation of this feature (e.g. description).
 
@@ -304,7 +305,7 @@ def to_feature(value: feature_lib.FeatureConnectorArg):
   """Convert the given value to Feature if necessary."""
   if isinstance(value, feature_lib.FeatureConnector):
     return value
-  elif utils.is_dtype(value):  # tf.int32, tf.string,...
+  elif utils.is_dtype(value):  # np.int32, np.str_,...
     return tensor_feature.Tensor(shape=(), dtype=tf.as_dtype(value))
   elif isinstance(value, dict):
     return FeaturesDict(value)

@@ -21,6 +21,7 @@ import io
 import os
 
 from absl import logging
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -105,9 +106,9 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
     """
 
     feature_map = {
-        "image": tf.io.FixedLenFeature(shape=[], dtype=tf.string),
-        "filename": tf.io.FixedLenFeature(shape=[], dtype=tf.string),
-        "label": tf.io.FixedLenFeature(shape=[], dtype=tf.int64),
+        "image": tf.io.FixedLenFeature(shape=[], dtype=np.str_),
+        "filename": tf.io.FixedLenFeature(shape=[], dtype=np.str_),
+        "label": tf.io.FixedLenFeature(shape=[], dtype=np.int64),
     }
 
     parse_single = tf.io.parse_single_example(example_proto, feature_map)

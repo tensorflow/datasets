@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -71,12 +72,12 @@ class Quac(tfds.core.GeneratorBasedBuilder):
             "answers":
                 tfds.features.Sequence({
                     "text": tfds.features.Text(),
-                    "answer_start": tf.int32,
+                    "answer_start": np.int32,
                 }),
             "orig_answer":
                 tfds.features.FeaturesDict({
                     "text": tfds.features.Text(),
-                    "answer_start": tf.int32,
+                    "answer_start": np.int32,
                 }),
             "section_title":
                 tfds.features.Text(),

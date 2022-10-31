@@ -19,6 +19,7 @@ import json
 import os
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -60,8 +61,8 @@ class Openbookqa(tfds.core.GeneratorBasedBuilder):
                 'choice_D': tfds.features.Text(),
             },
             'fact1': tfds.features.Text(),
-            'humanScore': tfds.features.Tensor(shape=(), dtype=tf.float32),
-            'clarity': tfds.features.Tensor(shape=(), dtype=tf.float32),
+            'humanScore': tfds.features.Tensor(shape=(), dtype=np.float32),
+            'clarity': tfds.features.Tensor(shape=(), dtype=np.float32),
             'turkIdAnonymized': tfds.features.Text(),
             'answerKey': tfds.features.ClassLabel(names=['A', 'B', 'C', 'D'])
         }),

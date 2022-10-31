@@ -22,6 +22,7 @@ import os
 import sys
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -69,11 +70,11 @@ class Wit(tfds.core.GeneratorBasedBuilder):
             "caption_attribution_description": tfds.features.Text(),
             "caption_alt_text_description": tfds.features.Text(),
             "mime_type": tfds.features.Text(),
-            "original_height": tf.int32,
-            "original_width": tf.int32,
-            "is_main_image": tf.bool,
-            "attribution_passes_lang_id": tf.bool,
-            "page_changed_recently": tf.bool,
+            "original_height": np.int32,
+            "original_width": np.int32,
+            "is_main_image": np.bool_,
+            "attribution_passes_lang_id": np.bool_,
+            "page_changed_recently": np.bool_,
             "context_page_description": tfds.features.Text(),
             "context_section_description": tfds.features.Text(),
         }),

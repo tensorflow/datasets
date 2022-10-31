@@ -19,6 +19,7 @@ import os
 import re
 from typing import Optional
 
+import numpy as np
 import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -78,7 +79,7 @@ def _features():
       'default':
           tfds.features.FeaturesDict({
               'id':
-                  tf.string,
+                  np.str_,
               'document': {
                   'title':
                       tfds.features.Text(),
@@ -89,29 +90,29 @@ def _features():
                   'tokens':
                       tfds.features.Sequence({
                           'token': tfds.features.Text(),
-                          'is_html': tf.bool,
+                          'is_html': np.bool_,
                       })
               },
               'question': {
                   'text': tfds.features.Text(),
-                  'tokens': tfds.features.Sequence(tf.string),
+                  'tokens': tfds.features.Sequence(np.str_),
               },
               'annotations':
                   tfds.features.Sequence({
                       'id':
-                          tf.string,
+                          np.str_,
                       'long_answer': {
-                          'start_token': tf.int64,
-                          'end_token': tf.int64,
-                          'start_byte': tf.int64,
-                          'end_byte': tf.int64,
+                          'start_token': np.int64,
+                          'end_token': np.int64,
+                          'start_byte': np.int64,
+                          'end_byte': np.int64,
                       },
                       'short_answers':
                           tfds.features.Sequence({
-                              'start_token': tf.int64,
-                              'end_token': tf.int64,
-                              'start_byte': tf.int64,
-                              'end_byte': tf.int64,
+                              'start_token': np.int64,
+                              'end_token': np.int64,
+                              'start_byte': np.int64,
+                              'end_byte': np.int64,
                               'text': tfds.features.Text(),
                           }),
                       'yes_no_answer':
@@ -220,7 +221,7 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
 
     def _parse_annotation_default(html_bytes, an_json):
       return {
-          # Convert to str since some IDs cannot be represented by tf.int64.
+          # Convert to str since some IDs cannot be represented by np.int64.
           'id':
               str(an_json['annotation_id']),
           'long_answer': {
@@ -240,7 +241,7 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
     ex_json = json.loads(line)
     html_bytes = ex_json['document_html'].encode('utf-8')
 
-    # Convert to str since some IDs cannot be represented by tf.int64.
+    # Convert to str since some IDs cannot be represented by np.int64.
     id_ = str(ex_json['example_id'])
     return id_, {
         'id':
@@ -326,7 +327,7 @@ class NaturalQuestions(tfds.core.BeamBasedBuilder):
           return a
       return 'NULL'
 
-    # Convert to str since some IDs cannot be represented by tf.int64.
+    # Convert to str since some IDs cannot be represented by np.int64.
     id_ = str(ex_json['example_id'])
     all_answers = _get_all_answers(ex_json)
     return id_, {

@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -87,15 +88,15 @@ class WikiBio(tfds.core.GeneratorBasedBuilder):
             'input_text': {
                 'table':
                     tfds.features.Sequence({
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
+                        'column_header': np.str_,
+                        'row_number': np.int16,
+                        'content': np.str_,
                     }),
                 # context will be the article's title
                 'context':
-                    tf.string,
+                    np.str_,
             },
-            'target_text': tf.string,
+            'target_text': np.str_,
         }),
         supervised_keys=('input_text', 'target_text'),
         homepage='https://github.com/DavidGrangier/wikipedia-biography-dataset',

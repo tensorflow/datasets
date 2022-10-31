@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import os
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -70,7 +71,7 @@ class Reddit(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            k: tf.string for k in _ADDITIONAL_FEATURES + [_DOCUMENT, _SUMMARY]
+            k: np.str_ for k in _ADDITIONAL_FEATURES + [_DOCUMENT, _SUMMARY]
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
         homepage="https://github.com/webis-de/webis-tldr-17-corpus",

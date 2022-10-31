@@ -20,6 +20,7 @@ from __future__ import annotations
 import os
 
 from absl import logging
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.proto import waymo_dataset_pb2 as open_dataset
 import tensorflow_datasets.public_api as tfds
@@ -128,7 +129,7 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
             "context": {
                 "name": tfds.features.Text()
             },
-            "timestamp_micros": tf.int64,
+            "timestamp_micros": np.int64,
             "camera_FRONT": {
                 "image":
                     tfds.features.Image(

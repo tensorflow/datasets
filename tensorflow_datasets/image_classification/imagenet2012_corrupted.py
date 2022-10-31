@@ -143,7 +143,7 @@ def _decode_and_center_crop(image_bytes):
 
   padded_center_crop_size = tf.cast(
       ((_IMAGE_SIZE / (_IMAGE_SIZE + _CROP_PADDING)) *
-       tf.cast(tf.minimum(image_height, image_width), tf.float32)), tf.int32)
+       tf.cast(tf.minimum(image_height, image_width), np.float32)), np.int32)
 
   offset_height = ((image_height - padded_center_crop_size) + 1) // 2
   offset_width = ((image_width - padded_center_crop_size) + 1) // 2
@@ -154,7 +154,7 @@ def _decode_and_center_crop(image_bytes):
   image = tf.image.decode_and_crop_jpeg(image_bytes, crop_window, channels=3)
   image = tf.image.resize([image], [_IMAGE_SIZE, _IMAGE_SIZE],
                           method=tf.image.ResizeMethod.BICUBIC)[0]
-  image = tf.cast(image, tf.int32)
+  image = tf.cast(image, np.int32)
 
   return image
 

@@ -21,6 +21,7 @@ import dataclasses
 import enum
 from typing import Callable, Optional, Sequence, Union
 
+import numpy as np
 from tensorflow_datasets.core.utils import shard_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -47,11 +48,11 @@ class ReadConfig:
       conditions (dataset small enough, files not shuffled,...) the dataset will
       be cached during the first iteration (through `ds = ds.cache()`).
     add_tfds_id: If True, examples `dict` in `tf.data.Dataset` will have an
-      additional key `'tfds_id': tf.Tensor(shape=(), dtype=tf.string)`
+      additional key `'tfds_id': tf.Tensor(shape=(), dtype=np.str_)`
         containing the example unique identifier (e.g.
         'train.tfrecord-000045-of-001024__123').
        Note: IDs might changes in future version of TFDS.
-    shuffle_seed: `tf.int64`, seed forwarded to `tf.data.Dataset.shuffle` during
+    shuffle_seed: `np.int64`, seed forwarded to `tf.data.Dataset.shuffle` during
       file shuffling (which happens when `tfds.load(..., shuffle_files=True)`).
     shuffle_reshuffle_each_iteration: `bool`, forwarded to
       `tf.data.Dataset.shuffle` during file shuffling (which happens when

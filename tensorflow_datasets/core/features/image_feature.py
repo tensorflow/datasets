@@ -53,9 +53,9 @@ _ACCEPTABLE_CHANNELS = {
 @functools.lru_cache(maxsize=None)
 def _acceptable_dtypes():
   return {
-      'png': [tf.uint8, tf.uint16, tf.float32],
-      'jpeg': [tf.uint8],
-      None: [tf.uint8, tf.uint16, tf.float32],
+      'png': [np.uint8, np.uint16, np.float32],
+      'jpeg': [np.uint8],
+      None: [np.uint8, np.uint16, np.float32],
   }
 
 
@@ -133,19 +133,19 @@ class _FloatImageEncoder(_ImageEncoder):
       shape: utils.Shape,
       encoding_format: str,
   ):
-    # Assert that shape and encoding are valid when dtype==tf.float32.
+    # Assert that shape and encoding are valid when dtype==np.float32.
     if shape[-1] != 1:
       raise ValueError(
-          'tfds.features.Image only support single-channel for tf.float32. '
+          'tfds.features.Image only support single-channel for np.float32. '
           f'Got shape={shape}')
     if encoding_format and encoding_format != 'png':
       raise ValueError(
-          'tfds.features.Image only support PNG encoding for tf.float32')
+          'tfds.features.Image only support PNG encoding for np.float32')
     self._float_shape = shape
     super().__init__(
         shape=shape[:2] + (4,),
-        dtype=tf.uint8,
-        numpy_dtype=tf.uint8.as_numpy_dtype,
+        dtype=np.uint8,
+        numpy_dtype=np.uint8.as_numpy_dtype,
         encoding_format=encoding_format,
     )
 
@@ -153,12 +153,12 @@ class _FloatImageEncoder(_ImageEncoder):
     """Convert the given image into a dict convertible to tf example."""
     if not isinstance(image_or_path_or_fobj, np.ndarray):
       raise ValueError(
-          'tfds.features.Image only support `np.ndarray` for tf.float32 '
+          'tfds.features.Image only support `np.ndarray` for np.float32 '
           f'images, not paths. Got: {image_or_path_or_fobj!r}')
     return self._encode_image(image_or_path_or_fobj)
 
   def _encode_image(self, np_image: np.ndarray) -> bytes:
-    _validate_np_array(np_image, shape=self._float_shape, dtype=tf.float32)
+    _validate_np_array(np_image, shape=self._float_shape, dtype=np.float32)
     # Bitcast 1 channel float32 -> 4 channels uint8
     np_image = np_image.view(np.uint8)
     np_image = super()._encode_image(np_image)
@@ -167,7 +167,7 @@ class _FloatImageEncoder(_ImageEncoder):
   def decode_image(self, img: tf.Tensor) -> tf.Tensor:
     img = super().decode_image(img)
     # Bitcast 4 channels uint8 -> 1 channel float32
-    img = tf.bitcast(img, tf.float32)[..., None]
+    img = tf.bitcast(img, np.float32)[..., None]
     return img
 
 
@@ -183,7 +183,7 @@ class Image(feature_lib.FeatureConnector):
 
   Output:
 
-    `tf.Tensor` of type `tf.uint8` and shape `[height, width, num_channels]`
+    `tf.Tensor` of type `np.uint8` and shape `[height, width, num_channels]`
     for BMP, JPEG, and PNG images and shape `[num_frames, height, width, 3]` for
     GIF images.
 
@@ -227,10 +227,10 @@ class Image(feature_lib.FeatureConnector):
         can be None. For other images: (height, width, channels). height and
         width can be None. See `tf.image.encode_*` for doc on channels
         parameter. Defaults to (None, None, 3).
-      dtype: `tf.uint8` (default), `tf.uint16` or `tf.float32`. * `tf.uint16`
-        requires png encoding_format. * `tf.float32` only supports
+      dtype: `np.uint8` (default), `np.uint16` or `np.float32`. * `np.uint16`
+        requires png encoding_format. * `np.float32` only supports
         single-channel image. Internally float images are bitcasted to
-        4-channels `tf.uint8` and saved as PNG.
+        4-channels `np.uint8` and saved as PNG.
       encoding_format: 'jpeg' or 'png'. Format to serialize `np.ndarray` images
         on disk. If None, encode images as PNG. If image is loaded from
         {bmg,gif,jpeg,png} file, this parameter is ignored, and file original
@@ -246,7 +246,7 @@ class Image(feature_lib.FeatureConnector):
     super().__init__(doc=doc)
     # Set and validate values
     shape = shape or (None, None, 3)
-    dtype = dtype or tf.uint8
+    dtype = dtype or np.uint8
     self._encoding_format = get_and_validate_encoding(encoding_format)
     self._shape = get_and_validate_shape(shape, self._encoding_format)
     self._dtype = get_and_validate_dtype(dtype, self._encoding_format)
@@ -254,7 +254,7 @@ class Image(feature_lib.FeatureConnector):
                                                     self._dtype,
                                                     self._encoding_format)
 
-    if self._dtype == tf.float32:  # Float images encoded as 4-channels uint8
+    if self._dtype == np.float32:  # Float images encoded as 4-channels uint8
       self._image_encoder = _FloatImageEncoder(
           shape=self._shape,
           encoding_format=self._encoding_format,
@@ -283,7 +283,7 @@ class Image(feature_lib.FeatureConnector):
   @py_utils.memoize()
   def get_serialized_info(self):
     # Only store raw image (includes size).
-    return feature_lib.TensorInfo(shape=(), dtype=tf.string)
+    return feature_lib.TensorInfo(shape=(), dtype=np.str_)
 
   def encode_example(self, image_or_path_or_fobj):
     """Convert the given image into a dict convertible to tf example."""

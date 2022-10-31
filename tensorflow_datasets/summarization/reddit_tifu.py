@@ -17,6 +17,7 @@
 
 import json
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -104,7 +105,7 @@ class RedditTifu(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     features = {
-        k: tfds.features.Tensor(shape=[], dtype=tf.float32)
+        k: tfds.features.Tensor(shape=[], dtype=np.float32)
         for k in _ADDITIONAL_FEATURES
     }
     features.update(

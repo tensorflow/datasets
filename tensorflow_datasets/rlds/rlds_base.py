@@ -22,6 +22,7 @@ import os
 from typing import Any, Dict, Generator, List, Optional, Tuple, Union
 
 from absl import logging
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rlds import envlogger_reader
@@ -73,9 +74,9 @@ def build_info(
   if episode_metadata is None:
     episode_metadata = {}
   step_info = {
-      'is_terminal': tf.bool,
-      'is_first': tf.bool,
-      'is_last': tf.bool,
+      'is_terminal': np.bool_,
+      'is_first': np.bool_,
+      'is_last': np.bool_,
       **step_metadata,
   }
   if ds_config.observation_info:

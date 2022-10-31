@@ -20,6 +20,7 @@ import json
 import os
 from typing import List
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -130,8 +131,8 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     position_feature = tfds.features.FeaturesDict({
-        'row': tf.int32,
-        'column': tf.int32
+        'row': np.int32,
+        'column': np.int32
     })
     object_feature = tfds.features.FeaturesDict({
         'vector':
@@ -142,7 +143,7 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
             tfds.features.FeaturesDict({
                 'shape': tfds.features.Text(),
                 'color': tfds.features.Text(),
-                'size': tf.int32,
+                'size': np.int32,
             }),
     })
     return tfds.core.DatasetInfo(
@@ -151,11 +152,11 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'situation':
                 tfds.features.FeaturesDict({
-                    'grid_size': tf.int32,
+                    'grid_size': np.int32,
                     'agent_position': position_feature,
-                    'agent_direction': tf.int32,
+                    'agent_direction': np.int32,
                     'target_object': object_feature,
-                    'distance_to_target': tf.int32,
+                    'distance_to_target': np.int32,
                     'direction_to_target': tfds.features.Text(),
                     'placed_objects': tfds.features.Sequence(object_feature),
                 }),

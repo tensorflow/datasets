@@ -103,7 +103,7 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
             'image':
                 tfds.features.Image(encoding_format='jpeg'),
             'image/id':
-                tf.int64,
+                np.int64,
             'neg_category_ids':
                 tfds.features.Sequence(class_label),
             'not_exhaustive_category_ids':
@@ -111,8 +111,8 @@ class Lvis(tfds.core.GeneratorBasedBuilder):
             'objects':
                 tfds.features.Sequence({
                     # LVIS has unique id for each annotation.
-                    'id': tf.int64,
-                    'area': tf.int64,
+                    'id': np.int64,
+                    'area': np.int64,
                     'bbox': tfds.features.BBoxFeature(),
                     'label': class_label,
                     'segmentation': tfds.features.Image(shape=(None, None, 1)),

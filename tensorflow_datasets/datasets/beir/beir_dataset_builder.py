@@ -22,6 +22,7 @@ import json
 import os
 from typing import Mapping
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -221,7 +222,7 @@ class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
             'passage_id': tfds.features.Text(),
             'passage': tfds.features.Text(),
             'passage_metadata': tfds.features.Text(),
-            'score': tf.float32,
+            'score': np.float32,
         }),
         homepage='https://github.com/beir-cellar/beir',
     )

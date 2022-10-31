@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -96,21 +97,21 @@ class CSRestaurants(tfds.core.GeneratorBasedBuilder):
             'input_text': {
                 'table':
                     tfds.features.Sequence({
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
+                        'column_header': np.str_,
+                        'row_number': np.int16,
+                        'content': np.str_,
                     })
             },
             'delex_input_text': {
                 'table':
                     tfds.features.Sequence({
-                        'column_header': tf.string,
-                        'row_number': tf.int16,
-                        'content': tf.string,
+                        'column_header': np.str_,
+                        'row_number': np.int16,
+                        'content': np.str_,
                     })
             },
-            'target_text': tf.string,
-            'delex_target_text': tf.string,
+            'target_text': np.str_,
+            'delex_target_text': np.str_,
         }),
         # If there's a common (input, target) tuple from the features,
         # specify them here. They'll be used if as_supervised=True in

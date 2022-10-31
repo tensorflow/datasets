@@ -13,10 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Scalar feature, e.g. tf.int32."""
+"""Scalar feature, e.g. np.int32."""
 
 from __future__ import annotations
 
+import numpy as np
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.proto import feature_pb2
@@ -26,7 +27,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 class Scalar(tensor_feature.Tensor):
   """A scalar feature of a particular dtype (e.g.
 
-  tf.int64 or tf.float).
+  np.int64 or tf.float).
 
   Equivalent to `tfds.features.Tensor(shape=(), dtype=dtype)`.
 

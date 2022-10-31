@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -39,7 +40,7 @@ class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
         features=tfds.features.FeaturesDict({
             "question": tfds.features.Text(),
             "passage": tfds.features.Text(),
-            "answer": tf.bool,
+            "answer": np.bool_,
             "title": tfds.features.Text(),
         }),
         homepage=_HOMEPAGE_URL,

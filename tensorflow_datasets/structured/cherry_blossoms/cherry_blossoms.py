@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import csv
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -68,11 +69,11 @@ class CherryBlossoms(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     features_dict = {
-        'year': tf.int32,
-        'doy': tf.float32,
-        'temp': tf.float32,
-        'temp_upper': tf.float32,
-        'temp_lower': tf.float32,
+        'year': np.int32,
+        'doy': np.float32,
+        'temp': np.float32,
+        'temp_upper': np.float32,
+        'temp_lower': np.float32,
     }
     return tfds.core.DatasetInfo(
         builder=self,

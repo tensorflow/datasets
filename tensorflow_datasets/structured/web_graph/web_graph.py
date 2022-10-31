@@ -165,9 +165,9 @@ class WebGraph(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'row_tag': tf.int64,
-            'col_tag': tfds.features.Sequence(tf.int64),
-            'gt_tag': tfds.features.Sequence(tf.int64),
+            'row_tag': np.int64,
+            'col_tag': tfds.features.Sequence(np.int64),
+            'gt_tag': tfds.features.Sequence(np.int64),
         }),
         # If there's a common (input, target) tuple from the
         # features, specify them here. They'll be used if

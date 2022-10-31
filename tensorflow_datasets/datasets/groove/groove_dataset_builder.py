@@ -101,26 +101,26 @@ class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
   def _info(self):
     features_dict = {
         "id":
-            tf.string,
+            np.str_,
         "drummer":
             tfds.features.ClassLabel(
                 names=["drummer%d" % i for i in range(1, 11)]),
         "type":
             tfds.features.ClassLabel(names=["beat", "fill"]),
         "bpm":
-            tf.int32,
+            np.int32,
         "time_signature":
             tfds.features.ClassLabel(names=_TIME_SIGNATURES),
         "style": {
             "primary": tfds.features.ClassLabel(names=_PRIMARY_STYLES),
-            "secondary": tf.string,
+            "secondary": np.str_,
         },
         "midi":
-            tf.string
+            np.str_
     }
     if self.builder_config.include_audio:
       features_dict["audio"] = tfds.features.Audio(
-          dtype=tf.float32, sample_rate=self.builder_config.audio_rate)
+          dtype=np.float32, sample_rate=self.builder_config.audio_rate)
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(features_dict),
         homepage="https://g.co/magenta/groove-dataset",

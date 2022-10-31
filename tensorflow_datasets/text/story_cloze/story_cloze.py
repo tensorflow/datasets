@@ -21,6 +21,7 @@ import csv
 import os
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -79,7 +80,7 @@ class StoryCloze(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'context': tfds.features.Text(),
             'endings': tfds.features.Sequence(tfds.features.Text()),
-            'label': tf.int32,
+            'label': np.int32,
         }),
         supervised_keys=None,  # e.g. ('image', 'label')
         homepage='https://www.cs.rochester.edu/nlp/rocstories/',

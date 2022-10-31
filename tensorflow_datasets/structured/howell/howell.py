@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import csv
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -68,10 +69,10 @@ class Howell(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     features_dict = {
-        "height": tf.float32,
-        "weight": tf.float32,
-        "age": tf.float32,
-        "male": tf.int32,
+        "height": np.float32,
+        "weight": np.float32,
+        "age": np.float32,
+        "male": np.int32,
     }
     return tfds.core.DatasetInfo(
         builder=self,

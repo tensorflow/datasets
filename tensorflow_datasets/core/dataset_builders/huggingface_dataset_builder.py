@@ -24,10 +24,12 @@ Furthermore, this also enables creating datasets based on datasets in
 Huggingface.
 """
 from __future__ import annotations
+
 import datetime
 import io
 from typing import Any, Dict, Mapping, Optional, Union
 
+import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import download
@@ -45,11 +47,11 @@ _IMAGE_ENCODING_FORMAT = "png"
 def _convert_to_tf_dtype(dtype: str) -> tf.dtypes.DType:
   """Returns the `tf.dtype` scalar feature."""
   str2val = {
-      "bool_": tf.bool,
-      "float": tf.float32,
-      "double": tf.float64,
-      "large_string": tf.string,
-      "utf8": tf.string,
+      "bool_": np.bool_,
+      "float": np.float32,
+      "double": np.float64,
+      "large_string": np.str_,
+      "utf8": np.str_,
   }
   if dtype in str2val:
     return str2val[dtype]
@@ -57,7 +59,7 @@ def _convert_to_tf_dtype(dtype: str) -> tf.dtypes.DType:
     return getattr(tf.dtypes, dtype)
   elif dtype.startswith("timestamp"):
     # Timestamps are converted to seconds since UNIX epoch.
-    return tf.int64
+    return np.int64
   else:
     raise ValueError(
         f"Unrecognized type {dtype}. Please open an issue if you think "
@@ -132,7 +134,7 @@ def _convert_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
   elif isinstance(feature, feature_lib.Scalar):
     if value is not None:
       return value
-    elif feature.dtype == tf.string:
+    elif feature.dtype == np.str_:
       return ""
     elif feature.dtype.is_integer:
       return 0

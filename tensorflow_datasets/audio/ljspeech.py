@@ -20,6 +20,7 @@ from __future__ import annotations
 import os
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -52,7 +53,7 @@ class Ljspeech(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("1.1.1")
   RELEASE_NOTES = {
-      "1.1.1": "Fix speech data type with dtype=tf.int16.",
+      "1.1.1": "Fix speech data type with dtype=np.int16.",
   }
 
   def _info(self):
@@ -60,8 +61,8 @@ class Ljspeech(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "id": tf.string,
-            "speech": tfds.features.Audio(sample_rate=22050, dtype=tf.int16),
+            "id": np.str_,
+            "speech": tfds.features.Audio(sample_rate=22050, dtype=np.int16),
             "text": tfds.features.Text(),
             "text_normalized": tfds.features.Text(),
         }),

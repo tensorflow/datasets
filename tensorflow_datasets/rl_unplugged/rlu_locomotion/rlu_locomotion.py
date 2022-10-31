@@ -19,6 +19,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, Optional
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.rl_unplugged import rlu_common
@@ -58,7 +59,7 @@ _TASK_NAMES = [
 
 
 def _sequence(shape_size: Optional[int] = None,
-              dtype: tf.DType = tf.float32) -> tf.io.FixedLenSequenceFeature:
+              dtype: tf.DType = np.float32) -> tf.io.FixedLenSequenceFeature:
   if shape_size:
     shape = [shape_size]
   else:
@@ -87,7 +88,7 @@ def _feature_description(task_name: str) -> Dict[str, Any]:
         'observation/walker/end_effectors_pos':
             _sequence(12),
         'observation/walker/egocentric_camera':
-            _sequence(shape_size=None, dtype=tf.string),
+            _sequence(shape_size=None, dtype=np.str_),
         'action':
             _sequence(56),
         'discount':
@@ -97,9 +98,9 @@ def _feature_description(task_name: str) -> Dict[str, Any]:
         'step_type':
             _sequence(),
         'episode_id':
-            tf.io.FixedLenFeature([], tf.int64),
+            tf.io.FixedLenFeature([], np.int64),
         'timestamp':
-            tf.io.FixedLenFeature([], tf.int64)
+            tf.io.FixedLenFeature([], np.int64)
     }
   else:
     return {
@@ -124,7 +125,7 @@ def _feature_description(task_name: str) -> Dict[str, Any]:
         'observation/walker/sensors_touch':
             _sequence(4),
         'observation/walker/egocentric_camera':
-            _sequence(shape_size=None, dtype=tf.string),
+            _sequence(shape_size=None, dtype=np.str_),
         'action':
             _sequence(38),
         'discount':
@@ -134,9 +135,9 @@ def _feature_description(task_name: str) -> Dict[str, Any]:
         'step_type':
             _sequence(),
         'episode_id':
-            tf.io.FixedLenFeature([], tf.int64),
+            tf.io.FixedLenFeature([], np.int64),
         'timestamp':
-            tf.io.FixedLenFeature([], tf.int64)
+            tf.io.FixedLenFeature([], np.int64)
     }
 
 
@@ -176,9 +177,9 @@ class RluLocomotion(rlu_common.RLUBuilder):
               rlu_common.float_tensor_feature(12),
           'egocentric_camera':
               tfds.features.Image(
-                  shape=(64, 64, 3), dtype=tf.uint8, encoding_format='png'),
+                  shape=(64, 64, 3), dtype=np.uint8, encoding_format='png'),
       }
-      action_features = tfds.features.Tensor(shape=(56,), dtype=tf.float32)
+      action_features = tfds.features.Tensor(shape=(56,), dtype=np.float32)
     else:  # 'rodent' datasets
       walker_features = {
           'joints_pos':
@@ -203,9 +204,9 @@ class RluLocomotion(rlu_common.RLUBuilder):
               rlu_common.float_tensor_feature(4),
           'egocentric_camera':
               tfds.features.Image(
-                  shape=(64, 64, 3), dtype=tf.uint8, encoding_format='png'),
+                  shape=(64, 64, 3), dtype=np.uint8, encoding_format='png'),
       }
-      action_features = tfds.features.Tensor(shape=(38,), dtype=tf.float32)
+      action_features = tfds.features.Tensor(shape=(38,), dtype=np.float32)
 
     return tfds.features.FeaturesDict({
         'steps':
@@ -214,16 +215,16 @@ class RluLocomotion(rlu_common.RLUBuilder):
                     'walker': walker_features,
                 },
                 'action': action_features,
-                'reward': tf.float32,
-                'is_terminal': tf.bool,
-                'is_first': tf.bool,
-                'is_last': tf.bool,
-                'discount': tf.float32,
+                'reward': np.float32,
+                'is_terminal': np.bool_,
+                'is_first': np.bool_,
+                'is_last': np.bool_,
+                'discount': np.float32,
             }),
         'episode_id':
-            tf.int64,
+            np.int64,
         'timestamp':
-            tf.int64,
+            np.int64,
     })
 
   def get_description(self):
@@ -249,14 +250,14 @@ class RluLocomotion(rlu_common.RLUBuilder):
     is_first = tf.concat([[True], [False] * tf.ones(episode_length - 1)],
                          axis=0)
     is_last = tf.concat([[False] * tf.ones(episode_length - 1), [True]], axis=0)
-    is_terminal = [False] * tf.ones(episode_length, tf.int64)
+    is_terminal = [False] * tf.ones(episode_length, np.int64)
 
     # The data is in RSA alignment, we realign it to SAR to comply with the
     # RLDS standard.
     discount = data['discount'][1:]
     if discount[-1] == 0.:
       is_terminal = tf.concat(
-          [[False] * tf.ones(episode_length - 1, tf.int64), [True]], axis=0)
+          [[False] * tf.ones(episode_length - 1, np.int64), [True]], axis=0)
       # If the episode ends in a terminal state, in the last step only the
       # observation has valid information (the terminal state).
       discount = tf.concat([discount, [0.]], axis=0)
@@ -272,7 +273,7 @@ class RluLocomotion(rlu_common.RLUBuilder):
         new_k = k[len(obs_prefix):]
         if 'egocentric_camera' in k:
           obs[new_k] = tf.reshape(
-              tf.io.decode_raw(data[k], out_type=tf.uint8),
+              tf.io.decode_raw(data[k], out_type=np.uint8),
               (-1,) + (
                   64,
                   64,

@@ -19,6 +19,7 @@ from __future__ import annotations
 import functools
 from typing import Any, Dict, Iterator, Union
 
+import numpy as np
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.utils import py_utils
@@ -42,7 +43,7 @@ class Dataset(sequence_feature.Sequence):
 
   ```python
     features=tfds.features.FeatureDict({
-     'agent_id': tf.string,
+     'agent_id': np.str_,
       'episode': tfds.features.Dataset({
         'observation': tfds.features.Image(),
         'reward': tfds.features.Image(),
@@ -55,10 +56,10 @@ class Dataset(sequence_feature.Sequence):
 
   ```
   {
-    'agent_id': tf.Tensor(shape=(), dtype=tf.string),
+    'agent_id': tf.Tensor(shape=(), dtype=np.str_),
     'episode': tf.data.Dataset(element_spec={
-        'observation': tf.Tensor(shape=(None, None, 3), dtype=tf.uint8),
-        'reward': tf.Tensor(shape=(), dtype=tf.int32),
+        'observation': tf.Tensor(shape=(None, None, 3), dtype=np.uint8),
+        'reward': tf.Tensor(shape=(), dtype=np.int32),
     }),
     }
   ```

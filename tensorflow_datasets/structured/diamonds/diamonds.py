@@ -21,6 +21,7 @@ import collections
 from typing import Dict
 
 from etils import epath
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -60,15 +61,15 @@ _CLARITY = ('I1', 'SI2', 'SI1', 'VS2', 'VS1', 'VVS2', 'VVS1', 'IF')
 
 def _features():
   return collections.OrderedDict((
-      ('carat', tf.float32),
+      ('carat', np.float32),
       ('cut', tfds.features.ClassLabel(names=_CUTS)),
       ('color', tfds.features.ClassLabel(names=_COLORS)),
       ('clarity', tfds.features.ClassLabel(names=_CLARITY)),
-      ('x', tf.float32),
-      ('y', tf.float32),
-      ('z', tf.float32),
-      ('depth', tf.float32),
-      ('table', tf.float32),
+      ('x', np.float32),
+      ('y', np.float32),
+      ('z', np.float32),
+      ('depth', np.float32),
+      ('table', np.float32),
   ))
 
 
@@ -90,7 +91,7 @@ class Diamonds(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'features': {k: v for k, v in _features().items()},
-            'price': tf.float32,
+            'price': np.float32,
         }),
         supervised_keys=('features', 'price'),
         homepage='https://ggplot2.tidyverse.org/reference/diamonds.html',

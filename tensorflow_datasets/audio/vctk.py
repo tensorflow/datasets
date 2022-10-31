@@ -18,6 +18,7 @@
 import os
 
 from absl import logging
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -65,7 +66,7 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version("1.0.1"),
           release_notes={
               "1.0.0": "VCTK release 0.92.0.",
-              "1.0.1": "Fix speech data type with dtype=tf.int16.",
+              "1.0.1": "Fix speech data type with dtype=np.int16.",
           },
       ),
       tfds.core.BuilderConfig(
@@ -80,7 +81,7 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version("1.0.1"),
           release_notes={
               "1.0.0": "VCTK release 0.92.0.",
-              "1.0.1": "Fix speech data type with dtype=tf.int16.",
+              "1.0.1": "Fix speech data type with dtype=np.int16.",
           },
       ),
   ]
@@ -106,11 +107,11 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "id":
-                tf.string,
+                np.str_,
             "text":
                 tfds.features.Text(),
             "speech":
-                tfds.features.Audio(sample_rate=48000, dtype=tf.int16),
+                tfds.features.Audio(sample_rate=48000, dtype=np.int16),
             "speaker":
                 tfds.features.ClassLabel(names=speaker_list),
             "gender":

@@ -68,7 +68,7 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('0.0.3')
   RELEASE_NOTES = {
-      '0.0.3': 'Fix audio data type with dtype=tf.int16.',
+      '0.0.3': 'Fix audio data type with dtype=np.int16.',
   }
 
   def _info(self):
@@ -79,7 +79,7 @@ class SpeechCommands(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'audio':
                 tfds.features.Audio(
-                    file_format='wav', sample_rate=SAMPLE_RATE, dtype=tf.int16),
+                    file_format='wav', sample_rate=SAMPLE_RATE, dtype=np.int16),
             'label':
                 tfds.features.ClassLabel(names=WORDS + [SILENCE, UNKNOWN])
         }),

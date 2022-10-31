@@ -17,6 +17,8 @@
 
 import collections
 
+import numpy as np
+
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -46,7 +48,7 @@ def _create_moving_sequence(image, pad_lefts, total_padding):
     padded_images = tf.map_fn(
         get_padded_image,
         [pad_lefts],
-        dtype=tf.uint8,
+        dtype=np.uint8,
         infer_shape=False,
     )
 
@@ -103,7 +105,7 @@ def _bounce_to_bbox(points):
   return tf.math.minimum(2 - points, points)
 
 
-def _get_random_unit_vector(ndims=2, dtype=tf.float32):
+def _get_random_unit_vector(ndims=2, dtype=np.float32):
   x = tf.random.normal((ndims,), dtype=dtype)
   return x / tf.linalg.norm(x, axis=-1, keepdims=True)
 
@@ -205,15 +207,15 @@ def image_as_moving_sequence(image,
                      (ndims, output_size))
   image_shape = tf.shape(image)
   if start_position is None:
-    start_position = tf.random.uniform((ndims,), dtype=tf.float32)
+    start_position = tf.random.uniform((ndims,), dtype=np.float32)
   elif start_position.shape != (ndims,):
     raise ValueError("start_positions must (%d,)" % ndims)
-  velocity = tf.convert_to_tensor(velocity, dtype=tf.float32)
+  velocity = tf.convert_to_tensor(velocity, dtype=np.float32)
   if velocity.shape.ndims == 0:
-    velocity = _get_random_unit_vector(ndims, tf.float32) * velocity
+    velocity = _get_random_unit_vector(ndims, np.float32) * velocity
   elif velocity.shape.ndims != 1:
     raise ValueError("velocity must be rank 0 or rank 1, got %s" % velocity)
-  t = tf.range(sequence_length, dtype=tf.float32)
+  t = tf.range(sequence_length, dtype=np.float32)
   trajectory = _get_linear_trajectory(start_position, velocity, t)
   trajectory = _bounce_to_bbox(trajectory)
 
@@ -225,7 +227,7 @@ def image_as_moving_sequence(image,
       total_padding = tf.identity(total_padding)
 
   sequence_pad_lefts = tf.cast(
-      tf.math.round(trajectory * tf.cast(total_padding, tf.float32)), tf.int32)
+      tf.math.round(trajectory * tf.cast(total_padding, np.float32)), np.int32)
 
   sequence = _create_moving_sequence(image, sequence_pad_lefts, total_padding)
   sequence.set_shape([sequence_length] + output_size.as_list() +

@@ -92,10 +92,10 @@ class Tensor(feature_lib.FeatureConnector):
     self._encoded_to_bytes = self._encoding != Encoding.NONE
     self._dynamic_shape = self._shape.count(None) > 1
 
-    if self._dtype == tf.string and self._encoded_to_bytes:
+    if self._dtype == np.str_ and self._encoded_to_bytes:
       raise NotImplementedError(
           'tfds.features.Tensor() does not support `encoding=` when '
-          'dtype=tf.string. Please open a PR if you need this feature.')
+          'dtype=np.str_. Please open a PR if you need this feature.')
 
   @py_utils.memoize()
   def get_tensor_info(self) -> feature_lib.TensorInfo:
@@ -106,7 +106,7 @@ class Tensor(feature_lib.FeatureConnector):
   def get_serialized_info(self):
     """See base class for details."""
     if self._encoded_to_bytes:  # Values encoded (stored as bytes)
-      serialized_spec = feature_lib.TensorInfo(shape=(), dtype=tf.string)
+      serialized_spec = feature_lib.TensorInfo(shape=(), dtype=np.str_)
     else:
       serialized_spec = feature_lib.TensorInfo(
           shape=self._shape,
@@ -120,7 +120,7 @@ class Tensor(feature_lib.FeatureConnector):
           'shape':
               feature_lib.TensorInfo(
                   shape=(len(self._shape),),
-                  dtype=tf.int32,
+                  dtype=np.int32,
               ),
           'value':
               serialized_spec,
@@ -238,7 +238,7 @@ def get_inner_feature_repr(feature):
   """Utils which returns the object which should get printed in __repr__.
 
   This is used in container features (Sequence, FeatureDict) to print scalar
-  Tensor in a less verbose way `Sequence(tf.int32)` rather than
+  Tensor in a less verbose way `Sequence(np.int32)` rather than
   `Sequence(Tensor(shape=(), dtype=tf.in32))`.
 
   Args:
@@ -247,7 +247,7 @@ def get_inner_feature_repr(feature):
   Returns:
     Either the feature or it's inner value.
   """
-  # We only print `tf.int32` rather than `Tensor(shape=(), dtype=tf.int32)`
+  # We only print `np.int32` rather than `Tensor(shape=(), dtype=np.int32)`
   # * For the base `Tensor` class (and not subclass).
   # * When shape is scalar (explicit check to avoid trigger when `shape=None`).
   if type(feature) == Tensor and feature.shape == ():  # pylint: disable=unidiomatic-typecheck,g-explicit-bool-comparison

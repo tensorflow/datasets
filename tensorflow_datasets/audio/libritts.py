@@ -21,6 +21,7 @@ import io
 import os
 import tarfile
 
+import numpy as np
 import six
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -77,9 +78,9 @@ class Libritts(tfds.core.BeamBasedBuilder):
             "speech": tfds.features.Audio(file_format="wav", sample_rate=24000),
             "text_original": tfds.features.Text(),
             "text_normalized": tfds.features.Text(),
-            "speaker_id": tf.int64,
-            "chapter_id": tf.int64,
-            "id": tf.string,
+            "speaker_id": np.int64,
+            "chapter_id": np.int64,
+            "id": np.str_,
         }),
         supervised_keys=("text_normalized", "speech"),
         homepage=_URL,

@@ -18,6 +18,7 @@
 import abc
 import functools
 
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -104,7 +105,7 @@ class SkipDecoding(Decoder):
   )
 
   for ex in ds.take(1):
-    assert ex['image'].dtype == tf.string
+    assert ex['image'].dtype == np.str_
   ```
   """
 
@@ -154,7 +155,7 @@ def make_decoder(output_dtype=None):
   Example:
 
   ```
-  @tfds.decode.make_decoder(output_dtype=tf.string)
+  @tfds.decode.make_decoder(output_dtype=np.str_)
   def no_op_decoder(example, feature):
     \"\"\"Decoder simply decoding feature normally.\"\"\"
     return feature.decode_example(example)
