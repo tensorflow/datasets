@@ -43,20 +43,9 @@ from tensorflow_datasets.core.logging import call_metadata as _call_metadata
 
 _metadata = _call_metadata.CallMetadata()
 _metadata.start_time_micros = int(_TIMESTAMP_IMPORT_STARTS * 1E6)
-_import_time_ms_tensorflow = 0
 _import_time_ms_dataset_builders = 0
 
 try:
-  _before_tf_inport = time.time()
-  import tensorflow
-  _import_time_ms_tensorflow = int((time.time() - _before_tf_inport) * 1000)
-
-  # Ensure TensorFlow is importable and its version is sufficiently recent. This
-  # needs to happen before anything else, since the imports below will try to
-  # import tensorflow, too.
-  from tensorflow_datasets.core import tf_compat
-  tf_compat.ensure_tf_install()
-
   # Imports for registration
   _before_dataset_imports = time.time()
   from tensorflow_datasets import dataset_collections
@@ -107,5 +96,5 @@ finally:
   _metadata.mark_end()
   _tfds_logging.tfds_import(
       metadata=_metadata,
-      import_time_ms_tensorflow=_import_time_ms_tensorflow,
+      import_time_ms_tensorflow=0,
       import_time_ms_dataset_builders=_import_time_ms_dataset_builders)
