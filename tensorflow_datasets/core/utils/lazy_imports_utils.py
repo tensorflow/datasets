@@ -23,8 +23,13 @@ import contextlib
 import dataclasses
 import functools
 import importlib
+import time
 import types
-from typing import Any, Iterator, Optional, Tuple
+from typing import Any, Callable, Iterator, Optional, Tuple
+
+from tensorflow_datasets.core.tf_compat import ensure_tf_version
+
+Callback = Callable[..., None]
 
 
 @dataclasses.dataclass
@@ -34,6 +39,8 @@ class LazyModule:
   module_name: str
   module: Optional[types.ModuleType] = None
   fromlist: Optional[Tuple[str, ...]] = ()
+  error_callback: Optional[Callback] = None
+  success_callback: Optional[Callback] = None
 
   @classmethod
   @functools.lru_cache(maxsize=None)
@@ -53,15 +60,28 @@ class LazyModule:
 
   def __getattr__(self, name: str) -> Any:
     if name in self.fromlist:
-      module_name = f'{self.module_name}.{name}'
+      module_name = f"{self.module_name}.{name}"
       return self.from_cache(module_name=module_name)
     if self.module is None:  # Load on first call
-      self.module = importlib.import_module(self.module_name)
+      try:
+        start_import_time = time.perf_counter()
+        self.module = importlib.import_module(self.module_name)
+        import_time_ms = (time.perf_counter() - start_import_time) * 1000
+        if self.success_callback is not None:
+          self.success_callback(
+              import_time_ms=import_time_ms,
+              module=self.module,
+              module_name=self.module_name)
+      except ImportError as exception:
+        if self.error_callback is not None:
+          self.error_callback(exception=exception, module_name=self.module_name)
+        raise exception
     return getattr(self.module, name)
 
 
 @contextlib.contextmanager
-def lazy_imports() -> Iterator[None]:
+def lazy_imports(error_callback: Optional[Callback] = None,
+                 success_callback: Optional[Callback] = None) -> Iterator[None]:
   """Context Manager which lazy loads packages.
 
   Their import is not executed immediately, but is postponed to the first
@@ -76,11 +96,21 @@ def lazy_imports() -> Iterator[None]:
   Usage:
 
   ```python
-  from tensorflow_datasets.core import utils
+  from tensorflow_datasets.core.utils.lazy_imports_utils import lazy_imports
 
-  with utils.lazy_imports():
+  with lazy_imports():
     import tensorflow as tf
   ```
+
+  Args:
+    error_callback: a callback to trigger when an import fails. The
+      callback is passed kwargs containing: 1) exception (ImportError): the
+      exception that was raised after the error; 2) module_name (str): the name
+      of the imported module.
+    success_callback: a callback to trigger when an import succeeds. The
+      callback is passed kwargs containing: 1) import_time_ms (float): the
+      import time (in milliseconds); 2) module (Any): the imported module;
+      3) module_name (str): the name of the imported module.
 
   Yields:
     None
@@ -89,7 +119,10 @@ def lazy_imports() -> Iterator[None]:
   # to modify the `sys.modules` cache in any way)
   original_import = builtins.__import__
   try:
-    builtins.__import__ = _lazy_import
+    builtins.__import__ = functools.partial(
+        _lazy_import,
+        error_callback=error_callback,
+        success_callback=success_callback)
     yield
   finally:
     builtins.__import__ = original_import
@@ -101,26 +134,50 @@ def _lazy_import(
     locals_=None,
     fromlist: tuple[str, ...] = (),
     level: int = 0,
+    *,
+    error_callback: Optional[Callback],
+    success_callback: Optional[Callback],
 ):
   """Mock of `builtins.__import__`."""
   del globals_, locals_  # Unused
 
   if level:
-    raise ValueError(f'Relative import statements not supported ({name}).')
+    raise ValueError(f"Relative import statements not supported ({name}).")
 
   if not fromlist:
     # import x.y.z
     # import x.y.z as z
     # In that case, Python would usually import the entirety of `x` if each
     # submodule is imported in its parent's `__init__.py`. So we do the same.
-    root_name = name.split('.')[0]
-    return LazyModule.from_cache(module_name=root_name)
-  else:
-    # from x.y.z import a, b
-    return LazyModule.from_cache(module_name=name, fromlist=fromlist)
+    root_name = name.split(".")[0]
+    return LazyModule.from_cache(
+        module_name=root_name,
+        error_callback=error_callback,
+        success_callback=success_callback)
+  # from x.y.z import a, b
+  return LazyModule.from_cache(
+      module_name=name,
+      fromlist=fromlist,
+      error_callback=error_callback,
+      success_callback=success_callback)
 
 
-with lazy_imports():
+def tf_error_callback():
+  print("\n\n***************************************************************")
+  print("Failed to import TensorFlow. Please note that TensorFlow is not "
+        "installed by default when you install TFDS. This allows you "
+        "to choose to install either `tf-nightly` or `tensorflow`. "
+        "Please install the most recent version of TensorFlow, by "
+        "following instructions at https://tensorflow.org/install.")
+  print("***************************************************************\n\n")
+
+
+def tf_success_callback(**kwargs):
+  ensure_tf_version(kwargs["module"])
+
+
+with lazy_imports(
+    error_callback=tf_error_callback, success_callback=tf_success_callback):
   import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import
 
 tensorflow = tf

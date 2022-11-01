@@ -14,23 +14,12 @@
 # limitations under the License.
 
 """API to define datasets."""
-# Ensure TensorFlow is importable and its version is sufficiently recent. This
-# needs to happen before anything else, since the imports below will try to
-# import tensorflow, too.
 
-from tensorflow_datasets.core import tf_compat
-
-tf_compat.ensure_tf_install()
-
-# pylint:disable=g-import-not-at-top
-
-# pylint: disable=g-bad-import-order
 # Allow to use `tfds.core.Path` in dataset implementation which seems more
 # natural than having to import a third party module.
 from etils.epath import Path
-# pylint: enable=g-bad-import-order
 
-from tensorflow_datasets.core import community  # pylint: disable=g-bad-import-order
+from tensorflow_datasets.core import community
 from tensorflow_datasets.core.config_based_builder import ConfigBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
@@ -72,11 +61,6 @@ from tensorflow_datasets.core.utils.benchmark import BenchmarkResult
 from tensorflow_datasets.core.utils.file_utils import add_data_dir
 from tensorflow_datasets.core.utils.file_utils import as_path
 
-with lazy_imports_utils.lazy_imports():
-  import tensorflow as tf  # pylint: disable=g-import-not-at-top,unused-import
-
-tensorflow = tf
-
 
 def benchmark(*args, **kwargs):
   raise DeprecationWarning(
@@ -109,7 +93,6 @@ __all__ = [
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",
-    "tensorflow",
     "tfds_path",
     "Version",
 ]

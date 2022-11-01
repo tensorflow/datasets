@@ -24,37 +24,25 @@ from typing import Optional
 
 MIN_TF_VERSION = "2.1.0"
 
-_ensure_tf_install_called = False
+_ensure_tf_version_called = False
 
 
-# Ensure TensorFlow is importable and its version is sufficiently recent. This
-# needs to happen before anything else, since the imports below will try to
-# import tensorflow, too.
-def ensure_tf_install():  # pylint: disable=g-statement-before-imports
-  """Attempt to import tensorflow, and ensure its version is sufficient.
+# Ensure TensorFlow version is sufficiently recent. This needs to happen after
+# TensorFlow was imported, as it is referenced.
+def ensure_tf_version(tf):  # pylint: disable=g-statement-before-imports
+  """Ensures TensorFlow version is sufficient.
+
+  Args:
+    tf: Tensorflow module.
 
   Raises:
-    ImportError: if either tensorflow is not importable or its version is
-    inadequate.
+    ImportError: if tensorflow version is inadequate.
   """
   # Only check the first time.
-  global _ensure_tf_install_called
-  if _ensure_tf_install_called:
+  global _ensure_tf_version_called
+  if _ensure_tf_version_called:
     return
-  _ensure_tf_install_called = True
-
-  try:
-    import tensorflow as tf  # pylint: disable=import-outside-toplevel
-  except ImportError:
-    # Print more informative error message, then reraise.
-    print("\n\n***************************************************************")
-    print("Failed to import TensorFlow. Please note that TensorFlow is not "
-          "installed by default when you install TFDS. This allow you "
-          "to choose to install either `tf-nightly` or `tensorflow`. "
-          "Please install the most recent version of TensorFlow, by "
-          "following instructions at https://tensorflow.org/install.")
-    print("***************************************************************\n\n")
-    raise
+  _ensure_tf_version_called = True
 
   tf_version = distutils.version.LooseVersion(tf.__version__)
   min_tf_version = distutils.version.LooseVersion(MIN_TF_VERSION)
