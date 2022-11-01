@@ -681,6 +681,10 @@ class FilenameInfo:
         filetype_suffix=self.filetype_suffix,
     )
 
+  def replace(self, **kwargs: Any) -> 'FilenameInfo':
+    """Returns a copy with updated attributes."""
+    return dataclasses.replace(self, **kwargs)
+
   @classmethod
   def from_str(
       cls,
