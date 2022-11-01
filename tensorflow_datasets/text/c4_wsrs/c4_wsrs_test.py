@@ -29,11 +29,11 @@ class C4WSRSTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = c4_wsrs.C4WSRS
   SPLITS = {
       'train': 4,  # Number of fake train example
-      'test': 4,  # Number of fake test example
+      'validation': 4,  # Number of fake test example
   }
 
   BUILDER_CONFIG_NAMES_TO_TEST = ['deterministic']
-  OVERLAPPING_SPLITS = ['train', 'test']
+  OVERLAPPING_SPLITS = ['train', 'validation']
   SKIP_CHECKSUMS = True
   DL_DOWNLOAD_RESULT = 'abbreviation_expansion_dictionary.csv'
   SKIP_TF1_GRAPH_MODE = True

@@ -136,8 +136,10 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
         abbrev, exp = row
         abbreviations_by_expansion[exp].append(abbrev)
     return {
-        'train': self._generate_examples('train', abbreviations_by_expansion),
-        'test': self._generate_examples('test', abbreviations_by_expansion),
+        'train':
+            self._generate_examples('train', abbreviations_by_expansion),
+        'validation':
+            self._generate_examples('validation', abbreviations_by_expansion),
     }
 
   def _generate_examples(self, split: str,
@@ -157,8 +159,7 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
 
     beam = tfds.core.lazy_imports.apache_beam
 
-    builder = tfds.builder(
-        'c4', config='en', version='3.1.0', data_dir=self._data_dir_root)
+    builder = tfds.builder('c4', config='en', version='3.1.0')
     return (tfds.beam.ReadFromTFDS(builder, split=split)
             | 'AsNumpy' >> beam.Map(tfds.as_numpy)
             | 'ExtractSnippets' >> beam.FlatMap(
