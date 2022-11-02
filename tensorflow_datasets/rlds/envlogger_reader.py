@@ -18,7 +18,7 @@
 from typing import Any, Callable, Dict, Generator, List, Optional, Sequence, Tuple, Union
 
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.utils import tree_utils
 
 
 def _get_episode_metadata(episode: Sequence[Any]) -> Dict[str, Any]:
@@ -128,10 +128,10 @@ def _build_empty_step(
     step: Any, step_fn: Callable[[Dict[str, Any]],
                                  Dict[str, Any]]) -> Dict[str, Any]:
   """Builds a step with the same shape and dtype of an RLDS step."""
-  rlds_step = tf.nest.map_structure(np.zeros_like, _get_step_metadata(step))
-  rlds_step['observation'] = tf.nest.map_structure(np.zeros_like,
-                                                   step.timestep.observation)
-  rlds_step['action'] = tf.nest.map_structure(np.zeros_like, step.action)
+  rlds_step = tree_utils.map_structure(np.zeros_like, _get_step_metadata(step))
+  rlds_step['observation'] = tree_utils.map_structure(np.zeros_like,
+                                                      step.timestep.observation)
+  rlds_step['action'] = tree_utils.map_structure(np.zeros_like, step.action)
   rlds_step['reward'] = np.zeros_like(step.timestep.reward)
   rlds_step['discount'] = np.zeros_like(step.timestep.discount)
   rlds_step['is_terminal'] = False
@@ -173,7 +173,8 @@ def _build_last_step(
   rlds_step['is_first'] = prev_step.timestep.first()
   rlds_step['is_last'] = True
   # Discount, action and reward are meaningless in the last step
-  rlds_step['action'] = tf.nest.map_structure(np.zeros_like, prev_step.action)
+  rlds_step['action'] = tree_utils.map_structure(np.zeros_like,
+                                                 prev_step.action)
   rlds_step['reward'] = np.zeros_like(prev_step.timestep.reward)
   rlds_step['discount'] = np.zeros_like(prev_step.timestep.discount)
 

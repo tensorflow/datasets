@@ -61,6 +61,7 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'dm-tree',
     'etils[epath]',
     'numpy',
     'promise',

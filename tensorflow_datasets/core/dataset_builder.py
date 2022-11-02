@@ -47,6 +47,7 @@ from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import gcs_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import termcolor
@@ -647,7 +648,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         read_config=read_config,
         as_supervised=as_supervised,
     )
-    all_ds = tf.nest.map_structure(build_single_dataset, split)
+    all_ds = tree_utils.map_structure(build_single_dataset, split)
     return all_ds
 
   def _build_single_dataset(
@@ -698,8 +699,8 @@ class DatasetBuilder(registered.RegisteredDataset):
         Returns:
           A tuple with elements structured according to `supervised_keys`
         """
-        return tf.nest.map_structure(lambda key: features[key],
-                                     self.info.supervised_keys)
+        return tree_utils.map_structure(lambda key: features[key],
+                                        self.info.supervised_keys)
 
       ds = ds.map(lookup_nest)
 
@@ -997,7 +998,6 @@ class FileReaderBuilder(DatasetBuilder):
    * `ReadOnlyBuilder`: Can only read pre-generated datasets. A user can
      generate a dataset with `GeneratorBasedBuilder`, and read them with
      `ReadOnlyBuilder` without requiring the original generation code.
-
   """
 
   @tfds_logging.builder_init()
@@ -1067,7 +1067,6 @@ class GeneratorBasedBuilder(FileReaderBuilder):
 
   It expects subclasses to overwrite `_split_generators` to return a dict of
   splits, generators. See the method docstrings for details.
-
   """
 
   @abc.abstractmethod

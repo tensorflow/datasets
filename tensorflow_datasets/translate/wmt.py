@@ -26,6 +26,7 @@ import xml.etree.cElementTree as ElementTree
 from absl import logging
 from etils import epath
 import six
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -599,7 +600,7 @@ class WmtConfig(tfds.core.BuilderConfig):
       citation: The paper citation for the dataset.
       description: The description of the dataset.
       language_pair: pair of languages that will be used for translation. Should
-                 contain 2 letter coded strings. For example: ("en", "de").
+        contain 2 letter coded strings. For example: ("en", "de").
       subsets: Dict[split, list[str]]. List of the subset to use for each of the
         split. Note that WMT subclasses overwrite this parameter.
       **kwargs: keyword arguments forwarded to super.
@@ -718,8 +719,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     # Extract manually downloaded files.
     manual_files = dl_manager.extract(manual_paths)
 
-    manual_files = tf.nest.map_structure(os.fspath, manual_files)
-    downloaded_files = tf.nest.map_structure(os.fspath, downloaded_files)
+    manual_files = tree_utils.map_structure(os.fspath, manual_files)
+    downloaded_files = tree_utils.map_structure(os.fspath, downloaded_files)
 
     extraction_map = dict(downloaded_files, **manual_files)
 

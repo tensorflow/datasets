@@ -22,6 +22,7 @@ from typing import Any, Dict, Iterator, Union
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -97,7 +98,7 @@ class Dataset(sequence_feature.Sequence):
     """Shape of one element of the dataset."""
     # Add the dataset level
     tensor_info = self._feature.get_tensor_info()
-    return tf.nest.map_structure(_add_dataset_lvl, tensor_info)
+    return tree_utils.map_structure(_add_dataset_lvl, tensor_info)
 
   def get_tensor_spec(self) -> tf.data.DatasetSpec:
     return tf.data.DatasetSpec(element_spec=self._feature.get_tensor_spec())
@@ -106,7 +107,7 @@ class Dataset(sequence_feature.Sequence):
   def get_serialized_info(self):
     # Add the dataset level and the number of elements in the dataset
     tensor_info = super().get_serialized_info()
-    return tf.nest.map_structure(_add_dataset_lvl, tensor_info)
+    return tree_utils.map_structure(_add_dataset_lvl, tensor_info)
 
   def encode_example(self, example_ds: Union[Iterator[type_utils.TreeDict[Any]],
                                              Dict[str, Any]]):
@@ -121,8 +122,8 @@ class Dataset(sequence_feature.Sequence):
 
     # Empty datasets return empty arrays
     if not ds_elements:
-      return tf.nest.map_structure(sequence_feature.build_empty_np,
-                                   self.get_serialized_info())
+      return tree_utils.map_structure(sequence_feature.build_empty_np,
+                                      self.get_serialized_info())
 
     # Then convert back list[nested dict] => nested dict[list]
     encoded = sequence_feature.stack_nested(ds_elements)

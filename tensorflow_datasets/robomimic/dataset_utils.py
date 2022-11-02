@@ -18,7 +18,7 @@
 from typing import Any, Dict, List, Mapping
 
 import numpy as np
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.utils import tree_utils
 
 
 def _concat_obs(base_obs, extra_obs):
@@ -63,9 +63,10 @@ def build_episode(steps: Mapping[str, Any]) -> Dict[str, Any]:
 
   # The standard 'obs' needs to be extended with the last element from
   # 'next_obs' to reconstruct the full sequence.
-  obs = tf.nest.map_structure(np.array, dict(steps['obs']))
-  last_obs = tf.nest.map_structure(lambda el: el[-1], dict(steps['next_obs']))
-  concat_obs = tf.nest.map_structure(_concat_obs, obs, last_obs)
+  obs = tree_utils.map_structure(np.array, dict(steps['obs']))
+  last_obs = tree_utils.map_structure(lambda el: el[-1],
+                                      dict(steps['next_obs']))
+  concat_obs = tree_utils.map_structure(_concat_obs, obs, last_obs)
 
   actions = steps['actions'][:]
   dones = steps['dones'][:]

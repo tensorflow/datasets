@@ -26,6 +26,7 @@ import numpy as np
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -70,7 +71,7 @@ class _IterableDataset(collections.abc.Iterable):
 
 def _eager_dataset_iterator(ds: tf.data.Dataset) -> Iterator[NumpyElem]:
   for elem in ds:
-    yield tf.nest.map_structure(_elem_to_numpy_eager, elem)
+    yield tree_utils.map_structure(_elem_to_numpy_eager, elem)
 
 
 def _graph_dataset_iterator(ds_iter, graph: tf.Graph) -> Iterator[NumpyElem]:
@@ -93,7 +94,7 @@ def _assert_ds_types(nested_ds: Tree[TensorflowElem]) -> None:
   for el in tf.nest.flatten(nested_ds):
     if not (isinstance(el, (tf.Tensor, tf.RaggedTensor)) or
             tf_compat.is_dataset(el)):
-      nested_types = tf.nest.map_structure(type, nested_ds)
+      nested_types = tree_utils.map_structure(type, nested_ds)
       raise TypeError(
           'Arguments to as_numpy must be tf.Tensors or tf.data.Datasets. '
           f'Got: {nested_types}.')
@@ -178,7 +179,7 @@ def as_numpy(dataset: Tree[TensorflowElem]) -> Tree[NumpyElem]:
   """
   _assert_ds_types(dataset)
   if tf.executing_eagerly():
-    return tf.nest.map_structure(_elem_to_numpy_eager, dataset)
+    return tree_utils.map_structure(_elem_to_numpy_eager, dataset)
   else:
     return _nested_to_numpy_graph(dataset)
 
