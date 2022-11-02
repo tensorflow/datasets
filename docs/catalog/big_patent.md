@@ -23,7 +23,7 @@ categories: A (Human Necessities), B (Performing Operations; Transporting), C
 (Electricity), and Y (General tagging of new or cross-sectional technology)
 
 There are two features: - description: detailed description of patent. -
-summary: Patent abastract.
+summary: Patent abstract.
 
 *   **Additional Documentation**:
     <a class="button button-with-icon" href="https://paperswithcode.com/dataset/bigpatent">
