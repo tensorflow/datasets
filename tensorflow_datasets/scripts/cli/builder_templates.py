@@ -151,7 +151,7 @@ def _conll_template(info: cli_utils.DatasetInfo) -> str:
         }}
         # {info.todo}: Add details about the dataset's features.
         # conll_lib contains a set of ready-to-use features.
-        BUILDER_CONFIGS = [conll_lib.CONLL_2002_CONFIG]
+        BUILDER_CONFIGS = [conll_lib.CONLL_2003_CONFIG]
 
         def _info(self) -> tfds.core.DatasetInfo:
           """Returns the dataset metadata."""

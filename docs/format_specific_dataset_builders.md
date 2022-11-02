@@ -213,7 +213,7 @@ class MyCoNNLDataset(tfds.dataset_builders.ConllDatasetBuilder):
   RELEASE_NOTES = {'1.0.0': 'Initial release.'}
 
   # conllu_lib contains a set of ready-to-use CONLL-specific configs.
-  BUILDER_CONFIGS = [conll_lib.CONLL_2002_CONFIG]
+  BUILDER_CONFIGS = [conll_lib.CONLL_2003_CONFIG]
 
   def _info(self) -> tfds.core.DatasetInfo:
     return self.create_dataset_info(
