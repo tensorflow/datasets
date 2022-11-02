@@ -24,7 +24,7 @@ class MyConllDataset(tfds.dataset_builders.ConllDatasetBuilder):
   RELEASE_NOTES = {
       '1.0.0': 'Initial release.',
   }
-  BUILDER_CONFIGS = [conll_lib.CONLL_2002_CONFIG]
+  BUILDER_CONFIGS = [conll_lib.CONLL_2003_CONFIG]
 
   def _info(self) -> tfds.core.DatasetInfo:
     ...

@@ -48,7 +48,7 @@ _INPUT_PATH = epath.Path(_FOLDER_PATH, "input_path.txt")
 class DummyConllDataset(conll_dataset_builder.ConllDatasetBuilder):
   VERSION = tfds.core.Version("1.0.0")
   RELEASE_NOTES = {"1.0.0": "Dummy notes."}
-  BUILDER_CONFIGS = [conll_lib.CONLL_2002_CONFIG]
+  BUILDER_CONFIGS = [conll_lib.CONLL_2003_CONFIG]
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -89,7 +89,7 @@ def test_generate_example():
     assert examples == expected_examples
 
     for _, example in examples:
-      assert len(example) == len(conll_lib.CONLL_2002_ORDERED_FEATURES)
+      assert len(example) == len(conll_lib.CONLL_2003_ORDERED_FEATURES)
 
   assert len(examples) == 2
 
