@@ -23,6 +23,7 @@ from typing import Any, Union
 
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -193,11 +194,11 @@ def shapes_are_compatible(
     shapes1: type_utils.TreeDict[type_utils.Shape],
 ) -> bool:
   """Returns True if all shapes are compatible."""
-  # Use `py_utils.map_nested` instead of `tf.nest.map_structure` as shapes are
-  # tuple/list.
+  # Use `py_utils.map_nested` instead of `tree_utils.map_structure` as shapes
+  # are tuple/list.
   shapes0 = py_utils.map_nested(tf.TensorShape, shapes0, dict_only=True)
   shapes1 = py_utils.map_nested(tf.TensorShape, shapes1, dict_only=True)
-  all_values = tf.nest.map_structure(
+  all_values = tree_utils.map_structure(
       lambda s0, s1: s0.is_compatible_with(s1),
       shapes0,
       shapes1,

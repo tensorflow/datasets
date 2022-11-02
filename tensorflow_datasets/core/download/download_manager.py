@@ -33,8 +33,8 @@ from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import kaggle
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 # pylint: disable=logging-fstring-interpolation
 
@@ -766,6 +766,8 @@ def _read_url_info(url_path: epath.PathLike) -> checksums.UrlInfo:
 
 def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
-  all_promises = tf.nest.map_structure(map_fn, all_inputs)  # Apply the function
-  res = tf.nest.map_structure(lambda p: p.get(), all_promises)  # Wait promises
+  all_promises = tree_utils.map_structure(map_fn,
+                                          all_inputs)  # Apply the function
+  res = tree_utils.map_structure(lambda p: p.get(),
+                                 all_promises)  # Wait promises
   return res

@@ -18,6 +18,7 @@
 import abc
 import functools
 
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -63,7 +64,7 @@ class Decoder(abc.ABC):
   def dtype(self):
     """Returns the `dtype` after decoding."""
     tensor_info = self.feature.get_tensor_info()
-    return tf.nest.map_structure(lambda t: t.dtype, tensor_info)
+    return tree_utils.map_structure(lambda t: t.dtype, tensor_info)
 
   @abc.abstractmethod
   def decode_example(self, serialized_example):
@@ -111,7 +112,7 @@ class SkipDecoding(Decoder):
   @property
   def dtype(self):
     tensor_info = self.feature.get_serialized_info()
-    return tf.nest.map_structure(lambda t: t.dtype, tensor_info)
+    return tree_utils.map_structure(lambda t: t.dtype, tensor_info)
 
   def decode_example(self, serialized_example):
     """Forward the serialized feature field."""
@@ -166,8 +167,8 @@ def make_decoder(output_dtype=None):
 
   Args:
     output_dtype: The output dtype after decoding. Required only if the decoded
-      example has a different type than the `FeatureConnector.dtype` and is
-      used to decode features inside sequences (ex: videos)
+      example has a different type than the `FeatureConnector.dtype` and is used
+      to decode features inside sequences (ex: videos)
 
   Returns:
     The decoder object

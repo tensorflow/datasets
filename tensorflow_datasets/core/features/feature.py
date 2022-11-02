@@ -36,6 +36,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
@@ -259,23 +260,23 @@ class FeatureConnector(object):
     of the dataset. For example, currently this method does not support
     RaggedTensorSpec.
     """
-    return tf.nest.map_structure(lambda ti: ti.to_tensor_spec(),
-                                 self.get_tensor_info())
+    return tree_utils.map_structure(lambda ti: ti.to_tensor_spec(),
+                                    self.get_tensor_info())
 
   @py_utils.memoized_property
   def shape(self):
     """Return the shape (or dict of shape) of this FeatureConnector."""
-    return tf.nest.map_structure(lambda t: t.shape, self.get_tensor_info())
+    return tree_utils.map_structure(lambda t: t.shape, self.get_tensor_info())
 
   @py_utils.memoized_property
   def dtype(self) -> TreeDict[tf.dtypes.DType]:
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
-    return tf.nest.map_structure(lambda t: t.dtype, self.get_tensor_info())
+    return tree_utils.map_structure(lambda t: t.dtype, self.get_tensor_info())
 
   @py_utils.memoized_property
   def numpy_dtype(self) -> TreeDict[np.dtype]:
-    return tf.nest.map_structure(lambda t: t.numpy_dtype,
-                                 self.get_tensor_info())
+    return tree_utils.map_structure(lambda t: t.numpy_dtype,
+                                    self.get_tensor_info())
 
   @classmethod
   def cls_from_name(cls, python_class_name: str) -> Type['FeatureConnector']:

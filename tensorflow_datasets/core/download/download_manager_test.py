@@ -33,6 +33,7 @@ from tensorflow_datasets.core.download import download_manager as dm
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
+from tensorflow_datasets.core.utils import tree_utils
 
 ZIP = resource_lib.ExtractMethod.ZIP
 TAR = resource_lib.ExtractMethod.TAR
@@ -44,7 +45,7 @@ def _sha256(str_):
 
 
 def _as_path(nested_paths):
-  return tf.nest.map_structure(epath.Path, nested_paths)
+  return tree_utils.map_structure(epath.Path, nested_paths)
 
 
 def _info_path(path):

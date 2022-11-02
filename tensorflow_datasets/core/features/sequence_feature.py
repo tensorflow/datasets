@@ -27,8 +27,8 @@ from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import tree_utils
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Json = type_utils.Json
 
@@ -83,7 +83,6 @@ class Sequence(top_level_feature.TopLevelFeature):
   At generation time, you can specify a list of features dict, a dict of list
   values or a stacked numpy array. The lists will automatically be distributed
   into their corresponding `FeatureConnector`.
-
   """
 
   def __init__(
@@ -122,14 +121,14 @@ class Sequence(top_level_feature.TopLevelFeature):
     """See base class for details."""
     # Add the additional length dimension to every shape
     tensor_info = self._feature.get_tensor_info()
-    return tf.nest.map_structure(self._add_length_dim, tensor_info)
+    return tree_utils.map_structure(self._add_length_dim, tensor_info)
 
   @py_utils.memoize()
   def get_serialized_info(self):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
     tensor_info = self._feature.get_serialized_info()
-    return tf.nest.map_structure(self._add_length_dim, tensor_info)
+    return tree_utils.map_structure(self._add_length_dim, tensor_info)
 
   def encode_example(self, example_dict):
     # Convert nested dict[list] into list[nested dict]
@@ -143,7 +142,8 @@ class Sequence(top_level_feature.TopLevelFeature):
 
     # Empty sequences return empty arrays
     if not sequence_elements:
-      return tf.nest.map_structure(build_empty_np, self.get_serialized_info())
+      return tree_utils.map_structure(build_empty_np,
+                                      self.get_serialized_info())
 
     # Encode each individual elements
     sequence_elements = [
