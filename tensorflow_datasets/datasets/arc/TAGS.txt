@@ -1,4 +1,3 @@
 content.data-type.text
-content.language.en
 content.monolingual
 ml.task.common-sense-reasoning
