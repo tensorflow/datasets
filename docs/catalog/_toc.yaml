@@ -8,21 +8,13 @@ toc:
     title: xtreme
   title: Dataset Collections
 - section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: '  "accepted": ['
-- section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: '  "discarded": []'
-- section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: '  ],'
-- section:
   - path: /datasets/catalog/aflw2k3d
     title: aflw2k3d
   title: 3d
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: A
 - section:
   - path: /datasets/catalog/aeslc
     title: aeslc
@@ -86,6 +78,10 @@ toc:
     title: yes_no
   title: Audio
 - section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: C
+- section:
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
   - path: /datasets/catalog/arc
@@ -95,6 +91,10 @@ toc:
   - path: /datasets/catalog/clevr
     title: clevr
   title: Coreference-resolution
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: D
 - section:
   - path: /datasets/catalog/d4rl_adroit_door
     title: d4rl_adroit_door
@@ -128,29 +128,33 @@ toc:
     title: booksum (manual)
   title: Document-summarization
 - section:
-  - path: /datasets/catalog/ag_news_subset
-    title: ag_news_subset
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: E
+- section:
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
-  - path: /datasets/catalog/arc
-    title: arc
-  - path: /datasets/catalog/beir
-    title: beir
-  - path: /datasets/catalog/booksum
-    title: booksum (manual)
-  - path: /datasets/catalog/bool_q
-    title: bool_q
   title: En
 - section:
   - path: /datasets/catalog/caltech101
     title: caltech101
   title: Fine-grained-image-classification
 - section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: G
+- section:
   - path: /datasets/catalog/cardiotox
     title: cardiotox
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
   title: Graphs
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: I
 - section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
@@ -430,6 +434,10 @@ toc:
     title: bool_q
   title: Monolingual
 - section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: N
+- section:
   - path: /datasets/catalog/anli
     title: anli
   title: Natural-language-inference
@@ -453,6 +461,10 @@ toc:
   - path: /datasets/catalog/sift1m
     title: sift1m
   title: Nearest neighbors
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: O
 - section:
   - path: /datasets/catalog/flic
     title: flic
@@ -511,6 +523,10 @@ toc:
   - path: /datasets/catalog/xquad
     title: xquad
   title: Question answering
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: R
 - section:
   - path: /datasets/catalog/istella
     title: istella
@@ -688,6 +704,10 @@ toc:
     title: xsum (manual)
   title: Summarization
 - section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: T
+- section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
   - path: /datasets/catalog/aeslc
@@ -749,6 +769,9 @@ toc:
     title: clevr
   - path: /datasets/catalog/clinc_oos
     title: clinc_oos
+  - path: /datasets/catalog/conll2002
+    status: nightly
+    title: conll2002
   - path: /datasets/catalog/conll2003
     title: conll2003
   - path: /datasets/catalog/cos_e
@@ -921,10 +944,6 @@ toc:
     title: wiki_auto
   title: Text simplification
 - section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: Tfds"
-- section:
   - path: /datasets/catalog/smartwatch_gestures
     title: smartwatch_gestures
   title: Time series
@@ -960,6 +979,10 @@ toc:
   - path: /datasets/catalog/wmt_t2t_translate
     title: wmt_t2t_translate (manual)
   title: Translate
+- section:
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
+  title: U
 - section:
   - path: /datasets/catalog/caltech101
     title: caltech101
@@ -1001,8 +1024,4 @@ toc:
 - section:
   - path: /datasets/catalog/duke_ultrasound
     title: duke_ultrasound
-  title: '{'
-- section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: '}'
+  title: Z
