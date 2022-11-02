@@ -78,7 +78,8 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
 
   if not builder.info.splits.total_num_examples:
     raise ValueError(
-        f'No examples found in {builder.name!r}. Was the dataset generated ?')
+        f'No examples found in {builder.name!r} in data dir {builder.data_dir}. '
+        'Was the dataset generated?')
 
   def load_shard(file_instruction: shard_utils.FileInstruction):  # pylint: disable=invalid-name
     """Loads a single shard."""
@@ -104,9 +105,15 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
       ds = ds.skip(file_instruction.skip)
     if file_instruction.take > 0:
       ds = ds.take(file_instruction.take)
+    inc_counter(
+        name='LoadedFileInstructions', value=1, namespace='ReadFromTFDS')
     return ds
 
   file_instructions = builder.info.splits[split].file_instructions
+  inc_counter(
+      name='FileInstructions',
+      value=len(file_instructions),
+      namespace='ReadFromTFDS')
   if workers_per_shard > 1:
     expanded_file_instructions = []
     for file_instruction in file_instructions:
@@ -114,6 +121,10 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
           shard_utils.split_file_instruction(
               file_instruction=file_instruction, num_splits=workers_per_shard))
     file_instructions = expanded_file_instructions
+    inc_counter(
+        name='ExpandedFileInstructions',
+        value=len(file_instructions),
+        namespace='ReadFromTFDS')
   return pipeline | beam.Create(
       file_instructions) | beam.Reshuffle() | beam.FlatMap(load_shard)
 
