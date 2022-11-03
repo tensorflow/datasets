@@ -35,18 +35,9 @@ training data might have been used in this shared task.
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
+    Yes
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -75,6 +66,18 @@ Split | Examples
 
 ## conll2002/es (default config)
 
+*   **Download size**: `3.95 MiB`
+
+*   **Dataset size**: `3.52 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 1,916
+`'test'`  | 1,518
+`'train'` | 8,324
+
 *   **Feature structure**:
 
 ```python
@@ -95,6 +98,18 @@ pos     | Sequence(ClassLabel) | (None,) | tf.int64  |
 tokens  | Sequence(Text)       | (None,) | tf.string |
 
 ## conll2002/nl
+
+*   **Download size**: `3.47 MiB`
+
+*   **Dataset size**: `3.55 MiB`
+
+*   **Splits**:
+
+Split     | Examples
+:-------- | -------:
+`'dev'`   | 2,896
+`'test'`  | 5,196
+`'train'` | 15,807
 
 *   **Feature structure**:
 

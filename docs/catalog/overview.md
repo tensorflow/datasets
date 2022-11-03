@@ -33,10 +33,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`aflw2k3d`](aflw2k3d.md)
 
-### `A`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
-
 ### `Abstractive-text-summarization`
 
 *   [`aeslc`](aeslc.md)
@@ -74,10 +70,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`xtreme_s`](xtreme_s.md)
 *   [`yes_no`](yes_no.md)
 
-### `C`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
-
 ### `Common-sense-reasoning`
 
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
@@ -86,10 +78,6 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Coreference-resolution`
 
 *   [`clevr`](clevr.md)
-
-### `D`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
 
 ### `D4rl`
 
@@ -113,11 +101,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`aeslc`](aeslc.md)
 *   [`booksum`](booksum.md)
 
-### `E`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
-*   [`duke_ultrasound`](duke_ultrasound.md)
-
 ### `En`
 
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
@@ -126,18 +109,10 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`caltech101`](caltech101.md)
 
-### `G`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
-
 ### `Graphs`
 
 *   [`cardiotox`](cardiotox.md)
 *   [`ogbg_molpcba`](ogbg_molpcba.md)
-
-### `I`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
 
 ### `Image`
 
@@ -296,10 +271,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
 
-### `N`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
-
 ### `Natural-language-inference`
 
 *   [`anli`](anli.md)
@@ -317,10 +288,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`deep1b`](deep1b.md)
 *   [`glove100_angular`](glove100_angular.md)
 *   [`sift1m`](sift1m.md)
-
-### `O`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
 
 ### `Object-detection`
 
@@ -358,10 +325,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`tydi_qa`](tydi_qa.md)
 *   [`web_questions`](web_questions.md)
 *   [`xquad`](xquad.md)
-
-### `R`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
 
 ### `Ranking`
 
@@ -476,10 +439,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`summscreen`](summscreen.md)
 *   [`wikihow`](wikihow.md)
 *   [`xsum`](xsum.md)
-
-### `T`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
 
 ### `Text`
 
@@ -632,7 +591,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`wmt19_translate`](wmt19_translate.md)
 *   [`wmt_t2t_translate`](wmt_t2t_translate.md)
 
-### `U`
+### `Uncategorized`
 
 *   [`duke_ultrasound`](duke_ultrasound.md)
 
@@ -660,9 +619,5 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ref_coco`](ref_coco.md)
 *   [`wit`](wit.md)
 *   [`wit_kaggle`](wit_kaggle.md)
-
-### `Z`
-
-*   [`duke_ultrasound`](duke_ultrasound.md)
 
 --------------------------------------------------------------------------------
