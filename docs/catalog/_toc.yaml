@@ -12,10 +12,6 @@ toc:
     title: aflw2k3d
   title: 3d
 - section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: A
-- section:
   - path: /datasets/catalog/aeslc
     title: aeslc
   - path: /datasets/catalog/billsum
@@ -78,10 +74,6 @@ toc:
     title: yes_no
   title: Audio
 - section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: C
-- section:
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
   - path: /datasets/catalog/arc
@@ -91,10 +83,6 @@ toc:
   - path: /datasets/catalog/clevr
     title: clevr
   title: Coreference-resolution
-- section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: D
 - section:
   - path: /datasets/catalog/d4rl_adroit_door
     title: d4rl_adroit_door
@@ -128,12 +116,6 @@ toc:
     title: booksum (manual)
   title: Document-summarization
 - section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: E
-- section:
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
   title: En
@@ -142,19 +124,11 @@ toc:
     title: caltech101
   title: Fine-grained-image-classification
 - section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: G
-- section:
   - path: /datasets/catalog/cardiotox
     title: cardiotox
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
   title: Graphs
-- section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: I
 - section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
@@ -434,10 +408,6 @@ toc:
     title: bool_q
   title: Monolingual
 - section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: N
-- section:
   - path: /datasets/catalog/anli
     title: anli
   title: Natural-language-inference
@@ -461,10 +431,6 @@ toc:
   - path: /datasets/catalog/sift1m
     title: sift1m
   title: Nearest neighbors
-- section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: O
 - section:
   - path: /datasets/catalog/flic
     title: flic
@@ -523,10 +489,6 @@ toc:
   - path: /datasets/catalog/xquad
     title: xquad
   title: Question answering
-- section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: R
 - section:
   - path: /datasets/catalog/istella
     title: istella
@@ -703,10 +665,6 @@ toc:
   - path: /datasets/catalog/xsum
     title: xsum (manual)
   title: Summarization
-- section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: T
 - section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
@@ -982,7 +940,7 @@ toc:
 - section:
   - path: /datasets/catalog/duke_ultrasound
     title: duke_ultrasound
-  title: U
+  title: Uncategorized
 - section:
   - path: /datasets/catalog/caltech101
     title: caltech101
@@ -1021,7 +979,3 @@ toc:
   - path: /datasets/catalog/wit_kaggle
     title: wit_kaggle (manual)
   title: Vision language
-- section:
-  - path: /datasets/catalog/duke_ultrasound
-    title: duke_ultrasound
-  title: Z
