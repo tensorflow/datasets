@@ -1,0 +1,44 @@
+{
+  "citation": "@inproceedings{tjong-kim-sang-2002-introduction,\n    title = \"Introduction to the {C}o{NLL}-2002 Shared Task: Language-Independent Named Entity Recognition\",\n    author = \"Tjong Kim Sang, Erik F.\",\n    booktitle = \"{COLING}-02: The 6th Conference on Natural Language Learning 2002 ({C}o{NLL}-2002)\",\n    year = \"2002\",\n    url = \"https://aclanthology.org/W02-2024\",\n}",
+  "configName": "nl",
+  "description": "The shared task of CoNLL-2002 concerns language-independent named entity\nrecognition. The types of named entities include: persons, locations,\norganizations and names of miscellaneous entities that do not belong to the\nprevious three groups. The participants of the shared task were offered training\nand test data for at least two languages. Information sources other than the\ntraining data might have been used in this shared task.",
+  "downloadSize": "3642241",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://aclanthology.org/W02-2024/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.conll2002.conll2002",
+  "name": "conll2002",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "2430029",
+      "shardLengths": [
+        "15807"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "460241",
+      "shardLengths": [
+        "2896"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "829785",
+      "shardLengths": [
+        "5196"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}
