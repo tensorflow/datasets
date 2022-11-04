@@ -514,6 +514,8 @@ common_voice/vot/2.0.0
 common_voice/zh-CN/2.0.0
 common_voice/zh-HK/2.0.0
 common_voice/zh-TW/2.0.0
+conll2002/es/1.0.0
+conll2002/nl/1.0.0
 conll2003/conll2003/1.0.0
 controlled_noisy_web_labels/mini_imagenet_blue/1.0.0
 controlled_noisy_web_labels/mini_imagenet_red/1.0.0
