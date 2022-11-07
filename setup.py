@@ -221,6 +221,8 @@ setup(
     package_data={
         'tensorflow_datasets':
             DATASET_FILES + [
+                # Bundle `datasets/` folder in PyPI releases
+                'datasets/*/*',
                 'core/utils/colormap.csv',
                 'scripts/documentation/templates/*',
                 'url_checksums/*',
