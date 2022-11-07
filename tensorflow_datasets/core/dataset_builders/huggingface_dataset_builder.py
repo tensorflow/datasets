@@ -28,6 +28,7 @@ import datetime
 import io
 from typing import Any, Dict, Mapping, Optional, Union
 
+from etils import epath
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info as dataset_info_lib
 from tensorflow_datasets.core import download
@@ -67,7 +68,8 @@ def _convert_to_tf_dtype(dtype: str) -> tf.dtypes.DType:
 def extract_features(hf_features) -> feature_lib.FeatureConnector:
   """Converts Huggingface feature spec to TFDS feature spec."""
   hf_datasets = lazy_imports_lib.lazy_imports.datasets
-  if isinstance(hf_features, hf_datasets.Features):
+  if (isinstance(hf_features, hf_datasets.Features) or
+      isinstance(hf_features, dict)):
     return feature_lib.FeaturesDict({
         name: extract_features(hf_inner_feature)
         for name, hf_inner_feature in hf_features.items()
@@ -112,7 +114,9 @@ def _convert_dataset_name(hf_name: str) -> str:
   return hf_name.replace("-", "_").replace("/", "__").lower()
 
 
-def _convert_config_name(hf_config: str) -> str:
+def _convert_config_name(hf_config: Optional[str]) -> Optional[str]:
+  if hf_config is None:
+    return hf_config
   return hf_config.lower()
 
 
@@ -124,11 +128,18 @@ def _convert_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
     return buffer.getvalue()
   elif isinstance(value, datetime.datetime):
     return int(value.timestamp())
+  elif isinstance(feature, feature_lib.ClassLabel):
+    return value
   elif isinstance(feature, feature_lib.Sequence):
     if isinstance(value, list):
       return value
     else:
       return [value]
+  elif isinstance(feature, feature_lib.FeaturesDict):
+    if isinstance(value, dict):
+      return value
+    raise ValueError(
+        f"Feature is FeaturesDict, but did not get a dict but a: {value}")
   elif isinstance(feature, feature_lib.Scalar):
     if value is not None:
       return value
@@ -185,6 +196,7 @@ class HuggingfaceDatasetBuilder(
       hf_repo_id: str,
       hf_config: Optional[str] = None,
       ignore_verifications: bool = False,
+      data_dir: Optional[epath.PathLike] = None,
   ):
     self._hf_repo_id = hf_repo_id
     self._hf_config = hf_config
@@ -204,7 +216,8 @@ class HuggingfaceDatasetBuilder(
     else:
       self._converted_builder_config = None
     self.name = _convert_dataset_name(hf_repo_id)
-    super().__init__(file_format=file_format, config=tfds_config)
+    super().__init__(
+        file_format=file_format, config=tfds_config, data_dir=data_dir)
     if self._hf_config:
       self._builder_config = self._converted_builder_config
 
