@@ -92,6 +92,7 @@ __all__ = [
     "show_examples",
     "show_statistics",
     "testing",
+    "transform",
     "TranslateFolder",
     "typing",
     "visualization",
