@@ -15,12 +15,12 @@
 
 """e2e_cleaned dataset."""
 
+from tensorflow_datasets.datasets.e2e_cleaned import e2e_cleaned_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.structured import e2e_cleaned
 
 
 class E2eCleanedTest(tfds.testing.DatasetBuilderTestCase):
-  DATASET_CLASS = e2e_cleaned.E2eCleaned
+  DATASET_CLASS = e2e_cleaned_dataset_builder.Builder
   SPLITS = {
       'train': 3,
       'validation': 2,
@@ -36,7 +36,7 @@ class E2eCleanedTest(tfds.testing.DatasetBuilderTestCase):
   def test_get_table_from_mr(self):
     mr = 'name[Blue Spice], eatType[coffee shop], area[city centre]'
     self.assertCountEqual(
-        e2e_cleaned._get_table_from_mr(mr), [{
+        e2e_cleaned_dataset_builder._get_table_from_mr(mr), [{
             'column_header': 'name',
             'row_number': 1,
             'content': 'Blue Spice',
