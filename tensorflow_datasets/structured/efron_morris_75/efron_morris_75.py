@@ -13,78 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""efron_morris_75 dataset."""
-from __future__ import annotations
+"""Dataset definition for efron_morris75.
 
-import csv
-
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-import tensorflow_datasets.public_api as tfds
-
-URL = 'https://raw.githubusercontent.com/pymc-devs/pymc-examples/main/examples/data/efron-morris-75-data.tsv'
-
-_DESCRIPTION = """
-The batting averages of 18 Major League Baseball players through their first 45
-at-bats of the 1970 season, along with their batting average for the remainder
-the season.
-
-The data has been modified from the table in the paper, as used for case studies
-using Stan and PyMC3, by  adding columns explicitly listing the number of
-at-bats early in the season, as well as at-bats and hits for the full season.
+DEPRECATED!
+If you want to use the EfronMorris75 dataset builder class, use:
+tfds.builder_cls('efron_morris75')
 """
 
-_CITATION = r"""
-@article{efron1975data,
-  title={Data analysis using Stein's estimator and its generalizations},
-  author={Efron, Bradley and Morris, Carl},
-  journal={Journal of the American Statistical Association},
-  volume={70},
-  number={350},
-  pages={311--319},
-  year={1975},
-  publisher={Taylor \& Francis}
-}
-"""
+from tensorflow_datasets.core import lazy_builder_import
 
-
-class EfronMorris75(tfds.core.GeneratorBasedBuilder):
-  """DatasetBuilder for efron_morris_75 dataset."""
-
-  VERSION = tfds.core.Version('1.0.0')
-  RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
-  }
-
-  def _info(self) -> tfds.core.DatasetInfo:
-    """Returns the dataset metadata."""
-    features_dict = {
-        'FirstName': tf.string,
-        'LastName': tf.string,
-        'At-Bats': tf.int32,
-        'Hits': tf.int32,
-        'BattingAverage': tf.float32,
-        'RemainingAt-Bats': tf.int32,
-        'RemainingAverage': tf.float32,
-        'SeasonAt-Bats': tf.int32,
-        'SeasonHits': tf.int32,
-        'SeasonAverage': tf.float32,
-    }
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict(features_dict),
-        supervised_keys=None,  # Set to `None` to disable
-        citation=_CITATION)
-
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
-    """Returns SplitGenerators."""
-    path = dl_manager.download_and_extract(URL)
-    return {tfds.Split.TRAIN: self._generate_examples(path)}
-
-  def _generate_examples(self, path):
-    """Yields examples."""
-    with path.open() as f:  # pytype: disable=attribute-error  # gen-stub-imports
-      reader = csv.DictReader(f, delimiter='\t')
-      for index, row in enumerate(reader):
-        example = dict(row.items())
-        yield index, example
+EfronMorris75 = lazy_builder_import.LazyBuilderImport('efron_morris75')

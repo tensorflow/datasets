@@ -15,13 +15,13 @@
 
 """efron_morris_75 dataset."""
 
+from tensorflow_datasets.datasets.efron_morris75 import efron_morris75_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.structured.efron_morris_75 import efron_morris_75
 
 
 class EfronMorris75Test(tfds.testing.DatasetBuilderTestCase):
   """Tests for efron_morris_75 dataset."""
-  DATASET_CLASS = efron_morris_75.EfronMorris75
+  DATASET_CLASS = efron_morris75_dataset_builder.Builder
   SPLITS = {'train': 4}
 
   DL_EXTRACT_RESULT = 'efron-morris-75-data.tsv'
