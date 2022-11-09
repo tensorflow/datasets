@@ -162,7 +162,8 @@ def _lazy_import(
       success_callback=success_callback)
 
 
-def tf_error_callback():
+def tf_error_callback(**kwargs):
+  del kwargs
   print("\n\n***************************************************************")
   print("Failed to import TensorFlow. Please note that TensorFlow is not "
         "installed by default when you install TFDS. This allows you "

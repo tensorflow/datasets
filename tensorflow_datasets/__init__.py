@@ -38,6 +38,7 @@ Documentation:
 
 import time
 _TIMESTAMP_IMPORT_STARTS = time.time()
+from absl import logging
 import tensorflow_datasets.core.logging as _tfds_logging
 from tensorflow_datasets.core.logging import call_metadata as _call_metadata
 
@@ -90,8 +91,9 @@ try:
   # __all__ for import * as well as documentation
   __all__ = public_api.__all__
 
-except Exception:  # pylint: disable=broad-except
+except Exception as exception:  # pylint: disable=broad-except
   _metadata.mark_error()
+  logging.exception(exception)
 finally:
   _metadata.mark_end()
   _tfds_logging.tfds_import(
