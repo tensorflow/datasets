@@ -36,7 +36,7 @@ class LazyBuilderImport():
     cls = object.__getattribute__(self, "_dataset_cls")
     if not cls:
       builder_name = object.__getattribute__(self, "_dataset_name")
-      logging.warn(
+      logging.warning(
           "DEPRECATED! Do not use a DatasetBuilder class directly, but"
           " call `tfds.builder_cls('%s')`.", builder_name)
       cls = registered.imported_builder_cls(builder_name)
