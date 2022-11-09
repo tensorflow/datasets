@@ -20,7 +20,6 @@ import os
 from unittest import mock
 
 from etils import epath
-import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
@@ -140,9 +139,15 @@ class GetNumberShardsTest(testing.TestCase):
 
   def test_xxl(self):
     size = 10 << 40  # 10 TiB
-    num_examples = 10**9  # 1G
+    num_examples = 10**9  # 1B
     n = writer_lib._get_number_shards(size, num_examples)
     self.assertEqual(n, 11264)
+
+  def test_xxxl(self):
+    size = 10 << 50  # 10 PiB
+    num_examples = 10**11  # 100B
+    n = writer_lib._get_number_shards(size, num_examples)
+    self.assertEqual(n, 10487808)
 
   def test_xs(self):
     size = 100 << 20  # 100 MiB
@@ -197,6 +202,8 @@ class WriterTest(testing.TestCase):
 
   EMPTY_SPLIT_ERROR = 'No examples were yielded.'
   TOO_SMALL_SPLIT_ERROR = 'num_examples (1) < number_of_shards (2)'
+
+  NUM_SHARDS = 5
   RECORDS_TO_WRITE = [
       (1, b'a'),
       (2, b'b'),
@@ -206,6 +213,20 @@ class WriterTest(testing.TestCase):
       (6, b'f'),
       (7, b'g'),
       (8, b'hi'),
+  ]
+  SHARDS_CONTENT = [
+      [b'f', b'g'],
+      [b'd'],
+      [b'a', b'b'],
+      [b'hi'],
+      [b'e', b'c'],
+  ]
+  SHARDS_CONTENT_NO_SHUFFLING = [
+      [b'a', b'b'],
+      [b'c'],
+      [b'd', b'e'],
+      [b'f'],
+      [b'g', b'hi'],
   ]
 
   def _write(
@@ -234,53 +255,45 @@ class WriterTest(testing.TestCase):
     return writer.finalize()
 
   def test_write_tfrecord(self):
-    """Writes 8 records in 5 shards.
-
-    Number of records is evenly distributed (2-1-2-1-2).
-    """
+    """Stores records as tfrecord in a fixed number of shards with shuffling."""
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=5):
+    with mock.patch.object(
+        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
       shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
-    self.assertEqual(shards_length, [2, 1, 2, 1, 2])
+    self.assertEqual(self.NUM_SHARDS, len(shards_length))
+    self.assertEqual(shards_length,
+                     [len(shard) for shard in self.SHARDS_CONTENT])
     self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
     written_index_files, all_indices = _read_indices(path)
-    self.assertEqual(
-        written_files,
-        ['foo-train.tfrecord-0000%s-of-00005' % i for i in range(5)])
-    self.assertEqual(all_recs, [
-        [b'f', b'g'],
-        [b'd'],
-        [b'a', b'b'],
-        [b'hi'],
-        [b'e', b'c'],
+    self.assertEqual(written_files, [
+        f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+        for i in range(self.NUM_SHARDS)
+        if shards_length[i]
     ])
+    self.assertEqual(all_recs, self.SHARDS_CONTENT)
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
 
   def test_write_tfrecord_sorted_by_key(self):
-    """Writes 8 records in 5 shards without shuffling.
-
-    Number of records is evenly distributed (2-1-2-1-2).
+    """Stores records as tfrecord in a fixed number of shards without shuffling.
     """
     path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
-    with mock.patch.object(writer_lib, '_get_number_shards', return_value=5):
+    with mock.patch.object(
+        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
       shards_length, total_size = self._write(
           to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
-    self.assertEqual(shards_length, [2, 1, 2, 1, 2])
+    self.assertEqual(shards_length,
+                     [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING])
     self.assertEqual(total_size, 9)
     written_files, all_recs = _read_records(path)
     written_index_files, all_indices = _read_indices(path)
-    self.assertEqual(
-        written_files,
-        ['foo-train.tfrecord-0000%s-of-00005' % i for i in range(5)])
-    self.assertEqual(all_recs, [
-        [b'a', b'b'],
-        [b'c'],
-        [b'd', b'e'],
-        [b'f'],
-        [b'g', b'hi'],
+    self.assertEqual(written_files, [
+        f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+        for i in range(self.NUM_SHARDS)
+        if shards_length[i]
     ])
+    self.assertEqual(all_recs, self.SHARDS_CONTENT_NO_SHUFFLING)
     self.assertEmpty(written_index_files)
     self.assertEmpty(all_indices)
 
@@ -307,9 +320,15 @@ class WriterTest(testing.TestCase):
         self._write(to_write=to_write)
 
 
-class TfrecordsWriterBeamTest(WriterTest):
+class TfrecordsWriterBeamTest(testing.TestCase):
 
   EMPTY_SPLIT_ERROR = 'Not a single example present in the PCollection!'
+  NUM_SHARDS = 3
+  RECORDS_TO_WRITE = [(i, str(i).encode('utf-8')) for i in range(10)]
+  SHARDS_CONTENT = [[b'6', b'9'], [b'7'],
+                    [b'4', b'1', b'2', b'8', b'0', b'5', b'3']]
+  SHARDS_CONTENT_NO_SHUFFLING = [[b'0', b'1', b'2'], [b'3', b'4', b'5'],
+                                 [b'6', b'7', b'8', b'9']]
 
   def _write(
       self,
@@ -348,22 +367,48 @@ class TfrecordsWriterBeamTest(WriterTest):
       _ = pipeline | 'test' >> _build_pcollection()  # pylint: disable=no-value-for-parameter
     return writer.finalize()
 
+  def test_write_tfrecord(self):
+    """Stores records as tfrecord in a fixed number of shards with shuffling."""
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
+    with mock.patch.object(
+        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
+      shards_length, total_size = self._write(to_write=self.RECORDS_TO_WRITE)
+    self.assertEqual(self.NUM_SHARDS, len(shards_length))
+    self.assertEqual(shards_length,
+                     [len(shard) for shard in self.SHARDS_CONTENT])
+    self.assertEqual(total_size, 10)
+    written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
+    self.assertEqual(written_files, [
+        f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+        for i in range(self.NUM_SHARDS)
+        if shards_length[i]
+    ])
+    self.assertEqual(all_recs, self.SHARDS_CONTENT)
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
 
-@pytest.mark.parametrize('total_size, max_num_buckets, expected_buckets', [
-    (0, None, 1),
-    (0, 0, 1),
-    (10, None, 1),
-    (1_000_000_000, None, 9),
-    (100_000_000_000, None, 953),
-    (100_000_000_000, 10, 10),
-])
-def test_get_num_temp_buckets(total_size, max_num_buckets, expected_buckets):
-  if max_num_buckets is None:
-    actual_buckets = writer_lib._get_num_temp_buckets(total_size)
-  else:
-    actual_buckets = writer_lib._get_num_temp_buckets(total_size,
-                                                      max_num_buckets)
-  assert actual_buckets == expected_buckets
+  def test_write_tfrecord_sorted_by_key(self):
+    """Stores records as tfrecord in a fixed number of shards without shuffling.
+    """
+    path = os.path.join(self.tmp_dir, 'foo-train.tfrecord')
+    with mock.patch.object(
+        writer_lib, '_get_number_shards', return_value=self.NUM_SHARDS):
+      shards_length, total_size = self._write(
+          to_write=self.RECORDS_TO_WRITE, disable_shuffling=True)
+    self.assertEqual(shards_length,
+                     [len(shard) for shard in self.SHARDS_CONTENT_NO_SHUFFLING])
+    self.assertEqual(total_size, 10)
+    written_files, all_recs = _read_records(path)
+    written_index_files, all_indices = _read_indices(path)
+    self.assertEqual(written_files, [
+        f'foo-train.tfrecord-{i:05d}-of-{self.NUM_SHARDS:05d}'
+        for i in range(self.NUM_SHARDS)
+        if shards_length[i]
+    ])
+    self.assertEqual(all_recs, self.SHARDS_CONTENT_NO_SHUFFLING)
+    self.assertEmpty(written_index_files)
+    self.assertEmpty(all_indices)
 
 
 if __name__ == '__main__':

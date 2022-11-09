@@ -20,8 +20,7 @@ import functools
 import itertools
 import json
 import os
-from typing import Any, Iterable, Iterator, List, Mapping, Optional, Tuple
-import uuid
+from typing import Any, Iterable, List, Optional, Tuple
 
 from absl import logging
 from etils import epath
@@ -39,18 +38,12 @@ from tensorflow_datasets.core.utils import type_utils
 # TODO(tfds): Should be `TreeDict[FeatureValue]`
 Example = Any
 
-MIN_SHARD_SIZE = 64 << 20  # 64 MiB
-MAX_SHARD_SIZE = 1024 << 20  # 2 GiB
+_MIN_SHARD_SIZE = 64 << 20  # 64 MiB
+_MAX_SHARD_SIZE = 1024 << 20  # 1 GiB
 
 # TFRECORD overheads.
 # https://github.com/tensorflow/tensorflow/blob/27325fabed898880fa1b33a04d4b125a6ef4bbc8/tensorflow/core/lib/io/record_writer.h#L104
-TFRECORD_REC_OVERHEAD = 16
-
-# The desired average size of a temporary bucket, which is used to calculate the
-# number of temp buckets for beam writer.
-_BEAM_TEMP_BUCKET_SIZE = 1024 * 1024 * 100  # 100 MB
-
-_BEAM_MAX_NUM_BUCKETS: int = 1_000_000
+_TFRECORD_REC_OVERHEAD = 16
 
 _INDEX_PATH_SUFFIX = "_index.json"
 
@@ -191,6 +184,7 @@ def _write_index_file(sharded_index_path: epath.PathLike,
 def _get_number_shards(
     total_size: int,
     num_examples: int,
+    uses_precise_sharding: bool = True,
 ) -> int:
   """Returns number of shards for num_examples of total_size in bytes.
 
@@ -204,13 +198,22 @@ def _get_number_shards(
   Args:
     total_size: the size of the data (serialized, not couting any overhead).
     num_examples: the number of records in the data.
+    uses_precise_sharding: whether a mechanism is used to exactly control how
+      many examples go in each shard.
 
   Returns:
     number of shards to use.
   """
-  total_size += num_examples * TFRECORD_REC_OVERHEAD
-  max_shards_number = total_size // MIN_SHARD_SIZE
-  min_shards_number = total_size // MAX_SHARD_SIZE
+  total_size += num_examples * _TFRECORD_REC_OVERHEAD
+  max_shards_number = total_size // _MIN_SHARD_SIZE
+  if uses_precise_sharding:
+    max_shard_size = _MAX_SHARD_SIZE
+  else:
+    # When the pipeline does not control exactly how many rows go into each
+    # shard (called 'precise sharding' here), we use a smaller max shard size
+    # so that the pipeline doesn't fail if a shard gets some more examples.
+    max_shard_size = 0.9 * _MAX_SHARD_SIZE
+  min_shards_number = total_size // max_shard_size
   if min_shards_number <= 1024 <= max_shards_number and num_examples >= 1024:
     return 1024
   elif min_shards_number > 1024:
@@ -331,23 +334,11 @@ class Writer(object):
     return shard_lengths, self._shuffler.size
 
 
-def _get_num_temp_buckets(
-    total_size: int,
-    max_num_buckets: int = _BEAM_MAX_NUM_BUCKETS,
-) -> int:
-  """Returns the number of temporary buckets to use in Beam.
-
-  Arguments:
-    total_size: the total size of the dataset in bytes.
-    max_num_buckets: the maximum number of buckets.
-
-  Returns:
-    the number of temporary buckets to use. Minimum is always 1.
-  """
-  num_buckets = int(total_size / _BEAM_TEMP_BUCKET_SIZE)
-  if num_buckets > max_num_buckets:
-    return max_num_buckets
-  return max(1, num_buckets)
+@dataclasses.dataclass
+class _ShardInfo:
+  id: int
+  num_examples: int
+  size: int
 
 
 class BeamWriter(object):
@@ -422,123 +413,77 @@ class BeamWriter(object):
     self.inc_counter(name="serialized_examples")
     return (hkey, serialized_example)
 
-  def _bucketize_example(
+  def _write_final_shard(
       self,
-      key_serialized_example: Tuple[Any, bytes],
-      largest_key: Any,
-      num_buckets: Any,
-  ) -> Tuple[int, Tuple[Any, bytes]]:
-    """Returns (bucket#, (hkey, serialized_example))."""
-    key, _ = key_serialized_example
-    if isinstance(largest_key, list):
-      largest_key = largest_key[0]
-    if isinstance(num_buckets, list):
-      num_buckets = num_buckets[0]
-    bucketid = shuffle.get_bucket_number(
-        key, num_buckets=num_buckets, max_hkey=largest_key)
-    return (bucketid, key_serialized_example)
-
-  def _sort_bucket(
-      self,
-      bucketid_examples: Tuple[int, List[type_utils.KeySerializedExample]],
-  ):
-    """Sort the examples in bucket, emits total size and len on side."""
-    beam = lazy_imports_lib.lazy_imports.apache_beam
-    self.inc_counter(name="buckets")
-    bucketid, examples = bucketid_examples
-    examples = sorted(examples)  # We know by design it fits in memory.
+      shardid_examples: Tuple[int, List[type_utils.KeySerializedExample]],
+      num_shards: int,
+  ) -> _ShardInfo:
+    """Write all examples of a shard to disk."""
+    shard_id, examples = shardid_examples
+    if not examples:
+      raise AssertionError("Not a single example present in the PCollection!")
+    examples = sorted(examples)
     # Compare continuous examples
     for ex0, ex1 in zip(examples[:-1], examples[1:]):
       if ex0[0] == ex1[0]:  # Different keys
         _raise_error_for_duplicated_keys(ex0[1], ex1[1],
                                          self._serializer.example_specs)
-    total_size = sum(len(ex[1]) for ex in examples)
-    yield beam.pvalue.TaggedOutput(self._OUTPUT_TAG_BUCKETS_LEN_SIZE,
-                                   (bucketid, (len(examples), total_size)))
-    yield (bucketid, examples)
-
-  def _get_boundaries_per_bucket_shard(
-      self,
-      bucket_len_sizes: Mapping[int, Tuple[int, int]],
-  ) -> Iterator[Tuple[int, Tuple[str, int, Optional[int]]]]:
-    """Yields `(bucketid, (shard_path, from, to))` tuples.
-
-    Meaning that buckets[bucketid][from:to] examples should go in shard_path.
-
-    Args:
-      bucket_len_sizes: dict where the key is the id of the bucket and the value
-        is a tuple (len, size) of the corresponding bucket. len is the number of
-        examples in the bucket and size is the total size in bytes of the
-        elements in that bucket. Buckets with no elements are not mentioned.
-
-    Yields:
-      `(bucketid, (shard_path, from, to))` tuples.
-    """
-    if not bucket_len_sizes:
-      raise AssertionError("Not a single example present in the PCollection!")
-    logging.info("Creating shard boundaries for %d buckets.",
-                 len(bucket_len_sizes))
-    total_num_examples = 0
-    total_size = 0
-    bucket2length = {}
-    for bucket_index, (length, size) in bucket_len_sizes.items():
-      total_num_examples += length
-      total_size += size
-      bucket2length[bucket_index] = length
-    bucket_lengths = [
-        bucket2length.get(i, 0) for i in range(max(bucket2length.keys()) + 1)
-    ]
-    shard_specs = _get_shard_specs(
-        num_examples=total_num_examples,
-        total_size=total_size,
-        bucket_lengths=bucket_lengths,
-        filename_template=self._filename_template)
-    for shard_spec in shard_specs:
-      for instruction in shard_spec.file_instructions:
-        bucketid = int(instruction.filename)
-        from_ = instruction.skip
-        take = instruction.take
-        to = from_ + take if take >= 0 else None
-        yield (bucketid, (shard_spec.path, from_, to))
-    tmp_split_info_path = epath.Path(
-        f"{self._split_info_path}.{uuid.uuid4().hex}")
-    logging.info("Writing split info about %d shards to %s", len(shard_specs),
-                 os.fspath(tmp_split_info_path))
-    tmp_split_info_path.write_text(
-        json.dumps({
-            "total_size":
-                total_size,
-            "shard_lengths": [
-                int(shard.examples_number) for shard in shard_specs
-            ]
-        }))
-    tmp_split_info_path.rename(self._split_info_path)
-
-  def _emits_examples_per_shard(self, bucketid_data):
-    """Split examples of a bucket given list of instructions applying to it."""
-    bucketid, data = bucketid_data
-    examples = list(itertools.chain(*data["examples"]))
-    for shardpath, from_, to in data["boundaries"]:
-      yield (shardpath, (bucketid, examples[from_:to]))
-
-  def _write_final_shard(
-      self,
-      shardid_examples: Tuple[str, List[Tuple[
-          int, List[type_utils.KeySerializedExample]]]],
-  ) -> None:
-    """Write all examples from multiple buckets into the same shard."""
-    shard_path, examples_by_bucket = shardid_examples
-    examples = itertools.chain(*[ex[1] for ex in sorted(examples_by_bucket)])
-    # Write in a tmp file potential race condition if `--xxxxx_enable_backups`
-    # is set and multiple workers try to write to the same file.
+    if num_shards <= shard_id:
+      raise AssertionError("Incorrect number of shards! "
+                           f"num_shards={num_shards}, shard_id={shard_id}")
+    shard_path = self._filename_template.sharded_filepath(
+        shard_index=shard_id, num_shards=num_shards)
     with utils.incomplete_file(epath.Path(shard_path)) as tmp_path:
-      logging.info("Writing examples to %s.", os.fspath(tmp_path))
+      logging.info("Writing %d examples to %s.", len(examples),
+                   os.fspath(tmp_path))
       record_keys = _write_examples(tmp_path, examples, self._file_format)
     self.inc_counter(name="written_shards")
-    # If there are no record_keys, skip creating index files.
-    if not record_keys:
-      return
-    _write_index_file(_get_index_path(shard_path), list(record_keys))
+    # If there are record_keys, create index files.
+    if record_keys:
+      index_path = _get_index_path(os.fspath(shard_path))
+      _write_index_file(index_path, list(record_keys))
+    shard_size = sum(map(len, examples))
+    return _ShardInfo(id=shard_id, num_examples=len(examples), size=shard_size)
+
+  def _number_of_shards(self, num_examples: int, total_size: int):
+    num_shards = _get_number_shards(
+        total_size=total_size,
+        num_examples=num_examples,
+        uses_precise_sharding=False)
+    self.inc_counter(name="NumberOfShards", value=num_shards)
+    return num_shards
+
+  def _assign_shard(
+      self,
+      key_serialized_example: Tuple[Any, bytes],
+      num_shards: int,
+      largest_key: List[int],
+  ):
+    """Assigns a shard id to the example."""
+    key, _ = key_serialized_example
+    largest_key = largest_key[0]
+    shard_number = shuffle.get_bucket_number(
+        hkey=key, num_buckets=num_shards, max_hkey=largest_key)
+    return (shard_number, key_serialized_example)
+
+  def _store_split_info(
+      self,
+      shard_infos: List[_ShardInfo],
+      total_size: int,
+      num_shards: int,
+  ) -> None:
+    """Stores the split info to disk."""
+    if num_shards != len(shard_infos):
+      raise AssertionError("Incorrect number of shards! "
+                           f"Expected: {num_shards}, got {len(shard_infos)}.")
+    shard_infos = sorted(shard_infos, key=lambda x: x.id)
+    shard_lengths = [info.num_examples for info in shard_infos]
+    with utils.incomplete_file(epath.Path(self._split_info_path)) as tmp_path:
+      tmp_path.write_text(
+          json.dumps({
+              "total_size": total_size,
+              "shard_lengths": shard_lengths
+          }))
 
   def write_from_pcollection(self, examples_pcollection):
     """Returns PTransform to write (key, example) PCollection to tfrecords."""
@@ -546,63 +491,40 @@ class BeamWriter(object):
     serialized_examples = (
         examples_pcollection
         | "Serialize" >> beam.Map(self._serialize_example)
-        # (key, example)
+        # (key, serialized_example)
     )
 
-    largest_key = beam.pvalue.AsSingleton(serialized_examples
-                                          | beam.Keys()
-                                          | beam.combiners.Top.Largest(1))
-    num_temp_buckets = beam.pvalue.AsSingleton(
+    largest_key = (
+        serialized_examples
+        | beam.Keys()
+        | "LargestKey" >> beam.combiners.Top.Largest(1))
+    num_examples = (
+        serialized_examples
+        | "CountExamples" >> beam.combiners.Count.Globally())
+    total_size = beam.pvalue.AsSingleton(
         serialized_examples
         | beam.Values()
         | beam.Map(len)
-        | "TotalSize" >> beam.CombineGlobally(sum)
-        | beam.Map(_get_num_temp_buckets))
+        | "TotalSize" >> beam.CombineGlobally(sum))
+    num_shards = beam.pvalue.AsSingleton(
+        num_examples | "NumberOfShards" >> beam.Map(
+            self._number_of_shards, total_size=total_size))
 
-    # Here bucket designates a temporary shard, to help differentiate between
-    # temporary and final shards.
-    buckets, buckets_len_size = (
-        serialized_examples
-        | "Bucketize" >> beam.Map(
-            self._bucketize_example,
-            largest_key=largest_key,
-            num_buckets=num_temp_buckets)
-        # (bucket_id, hkey_serialized_ex))
-        | "GroupByBucket" >> beam.GroupByKey()
-        # (bucket_id, [hkey_serialized_ex0, ...])
-        | "SortBucketsGetSizeLen" >>
-        (beam.ParDo(self._sort_bucket).with_outputs(
-            self._OUTPUT_TAG_BUCKETS_LEN_SIZE, main="buckets")))
-    # buckets = (bucketid, [hkey_serialized_ex0, ...])
-    # buckets_len_size = (bucketid, (num_examples_bucket, bucket_byte_size))
-
-    boundaries = (
-        buckets_len_size
-        | "CombineBucketsSizes" >> beam.transforms.combiners.ToDict()
-        # {bucketid: (num_examples_bucket, bucket_byte_size)}
-        | "GetBoundaries" >> beam.ParDo(self._get_boundaries_per_bucket_shard))
-    # (bucketid, (shard_path, from, to)
-
-    return (
-        {
-            "examples": buckets,
-            "boundaries": boundaries
-        }
-        # {
-        #     "examples": (bucketid, [hkey_serialized_ex0, ...])
-        #     "boundaries": (bucketid, (shard_path, from, to)
-        # }
-        | "GroupBucketsAndBoundaries" >> beam.CoGroupByKey()
-        # (bucketid, {
-        #     "examples": [[hkey_serialized_ex0, ...]],
-        #     "boundaries": [(shard_path, from, to), ...],
-        # })
-        | "GetExamplesPerShard" >> beam.FlatMap(self._emits_examples_per_shard)
-        # (shard_path, (bucketid, serialized_list[from_:to]))
-        | "GroupShards" >> beam.GroupByKey()
-        # (shard_path, [(bucketid, serialized_list[from_:to]), ...])
-        # bucketid allows to sort the serialized examples
-        | "WriteFinalShards" >> beam.Map(self._write_final_shard))
+    return (serialized_examples
+            | "AssignShard" >> beam.Map(
+                self._assign_shard,
+                largest_key=beam.pvalue.AsSingleton(largest_key),
+                num_shards=num_shards)
+            # (shard_id, serialized_example)
+            | "GroupShards" >> beam.GroupByKey()
+            # (shard_id, [serialized_example])
+            | "WriteFinalShards" >> beam.Map(
+                self._write_final_shard, num_shards=num_shards)
+            | "CollectShardInfo" >> beam.transforms.combiners.ToList()
+            | "CalculateSplitInfo" >> beam.ParDo(
+                self._store_split_info,
+                total_size=total_size,
+                num_shards=num_shards))
 
   def finalize(self):
     """Deletes tmp directory and returns shard_lengths and total_size."""
