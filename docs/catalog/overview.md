@@ -104,6 +104,7 @@ for ex in tfds.load('cifar10', split='train'):
 ### `En`
 
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
+*   [`e2e_cleaned`](e2e_cleaned.md)
 
 ### `Fine-grained-image-classification`
 
@@ -261,6 +262,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
 *   [`blimp`](blimp.md)
+*   [`e2e_cleaned`](e2e_cleaned.md)
 
 ### `Monolingual`
 
@@ -270,6 +272,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
+*   [`e2e_cleaned`](e2e_cleaned.md)
 
 ### `Natural-language-inference`
 
@@ -398,8 +401,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cs_restaurants`](cs_restaurants.md)
 *   [`dart`](dart.md)
 *   [`diamonds`](diamonds.md)
-*   [`e2e_cleaned`](e2e_cleaned.md)
-*   [`efron_morris75`](efron_morris75.md)
 *   [`forest_fires`](forest_fires.md)
 *   [`genomics_ood`](genomics_ood.md)
 *   [`german_credit_numeric`](german_credit_numeric.md)
@@ -439,6 +440,14 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`summscreen`](summscreen.md)
 *   [`wikihow`](wikihow.md)
 *   [`xsum`](xsum.md)
+
+### `Table-to-text-generation`
+
+*   [`e2e_cleaned`](e2e_cleaned.md)
+
+### `Tabular`
+
+*   [`efron_morris75`](efron_morris75.md)
 
 ### `Text`
 
@@ -482,6 +491,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`dolphin_number_word`](dolphin_number_word.md)
 *   [`drop`](drop.md)
 *   [`dsprites`](dsprites.md)
+*   [`e2e_cleaned`](e2e_cleaned.md)
 *   [`eraser_multi_rc`](eraser_multi_rc.md)
 *   [`esnli`](esnli.md)
 *   [`flic`](flic.md)
@@ -557,6 +567,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
+*   [`e2e_cleaned`](e2e_cleaned.md)
 
 ### `Text-summarization`
 

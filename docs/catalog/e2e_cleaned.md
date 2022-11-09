@@ -28,7 +28,7 @@ and up to 5 references in natural language, which is what one needs to predict.
     [https://github.com/tuetschek/e2e-cleaning](https://github.com/tuetschek/e2e-cleaning)
 
 *   **Source code**:
-    [`tfds.structured.E2eCleaned`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/e2e_cleaned.py)
+    [`tfds.datasets.e2e_cleaned.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/e2e_cleaned/e2e_cleaned_dataset_builder.py)
 
 *   **Versions**:
 
