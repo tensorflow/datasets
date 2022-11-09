@@ -265,7 +265,7 @@ class C4Config(tfds.core.BuilderConfig):
         **kwargs)
 
     if clean and tuple(languages) != ("en",):
-      logging.warn(
+      logging.warning(
           "C4 cleaning is only expected to work reliably for English pages.")
 
     if not 0.0 <= badwords_filter_fraction <= 1.0:

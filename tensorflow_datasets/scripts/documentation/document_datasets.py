@@ -101,7 +101,7 @@ def _load_builder(name: str,) -> Optional[BuilderToDocument]:
   try:
     dataset_name = tfds.core.naming.DatasetName(name)
   except ValueError as e:
-    logging.warn('Could not parse dataset with name %s', name, exc_info=e)
+    logging.warning('Could not parse dataset with name %s', name, exc_info=e)
     return None
   if dataset_name.namespace:  # Community dataset
     return _load_builder_from_location(name=name, dataset_name=dataset_name)
@@ -114,26 +114,27 @@ def _load_builder_from_location(
     dataset_name: tfds.core.naming.DatasetName,
 ) -> Optional[BuilderToDocument]:
   """Load the builder, config,... to document."""
-  logging.info(f'Loading builder {dataset_name} from location')
+  logging.info('Loading builder %s from location', dataset_name)
   try:
     builder = tfds.builder(name)
-    logging.debug(f'Loaded builder from location: {builder}')
+    logging.debug('Loaded builder from location: %s', builder)
   except tfds.core.DatasetNotFoundError as e:
     logging.info(
-        f'Dataset {dataset_name} not found, will now try to load from sub-folder',
+        'Dataset %s not found, will now try to load from sub-folder',
+        dataset_name,
         exc_info=e)
     # If tfds.core.DatasetNotFoundError, it might be the default
     # config isn't found. Should try to load a sub-folder (to check).
     builder = _maybe_load_config(name)
     if not builder:
-      logging.error(f'Dataset {dataset_name} not found', exc_info=e)
+      logging.error('Dataset %s not found', dataset_name, exc_info=e)
       return None
   except (OSError, tf.errors.PermissionDeniedError) as e:
-    logging.error(f'Permission denied for {dataset_name}', exc_info=e)
+    logging.error('Permission denied for %s', dataset_name, exc_info=e)
     tqdm.tqdm.write(f'Warning: Skip dataset {name} due to permission error')
     return None
   except Exception as e:  # pylint: disable=broad-except
-    logging.error(f'CorruptedDatasetError: {name!r}', exc_info=e)
+    logging.error('CorruptedDatasetError: %s', repr(name), exc_info=e)
     return None
   if builder.builder_config:
     config_builders = _load_all_configs(name, builder)
@@ -261,8 +262,8 @@ def _document_single_builder_inner(
   tqdm.tqdm.write(f'Document builder {name}...')
   doc_info = _load_builder(name)
   if doc_info is None:
-    logging.warn(
-        f'No doc info was found for document builder {name}. Skipping.')
+    logging.warning('No doc info was found for document builder %s. Skipping.',
+                    name)
     return None
 
   out_str = dataset_markdown_builder.get_markdown_string(

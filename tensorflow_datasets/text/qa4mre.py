@@ -153,8 +153,8 @@ class Qa4mreConfig(tfds.core.BuilderConfig):
           PATHS[year]['_TRACKS'])
 
     if track.lower() != 'main' and language.upper() != 'EN':
-      logging.warn('Only English documents available for pilot '
-                   'tracks. Setting English by default.')
+      logging.warning('Only English documents available for pilot '
+                      'tracks. Setting English by default.')
       language = 'EN'
 
     if track.lower() == 'main' and language.upper(
