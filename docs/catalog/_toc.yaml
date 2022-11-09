@@ -118,6 +118,8 @@ toc:
 - section:
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
+  - path: /datasets/catalog/e2e_cleaned
+    title: e2e_cleaned
   title: En
 - section:
   - path: /datasets/catalog/caltech101
@@ -392,6 +394,8 @@ toc:
     title: billsum
   - path: /datasets/catalog/blimp
     title: blimp
+  - path: /datasets/catalog/e2e_cleaned
+    title: e2e_cleaned
   title: Language-modelling
 - section:
   - path: /datasets/catalog/ag_news_subset
@@ -406,6 +410,8 @@ toc:
     title: booksum (manual)
   - path: /datasets/catalog/bool_q
     title: bool_q
+  - path: /datasets/catalog/e2e_cleaned
+    title: e2e_cleaned
   title: Monolingual
 - section:
   - path: /datasets/catalog/anli
@@ -586,10 +592,6 @@ toc:
     title: dart
   - path: /datasets/catalog/diamonds
     title: diamonds
-  - path: /datasets/catalog/e2e_cleaned
-    title: e2e_cleaned
-  - path: /datasets/catalog/efron_morris75
-    title: efron_morris75
   - path: /datasets/catalog/forest_fires
     title: forest_fires
   - path: /datasets/catalog/genomics_ood
@@ -665,6 +667,14 @@ toc:
   - path: /datasets/catalog/xsum
     title: xsum (manual)
   title: Summarization
+- section:
+  - path: /datasets/catalog/e2e_cleaned
+    title: e2e_cleaned
+  title: Table-to-text-generation
+- section:
+  - path: /datasets/catalog/efron_morris75
+    title: efron_morris75
+  title: Tabular
 - section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
@@ -744,6 +754,8 @@ toc:
     title: drop
   - path: /datasets/catalog/dsprites
     title: dsprites
+  - path: /datasets/catalog/e2e_cleaned
+    title: e2e_cleaned
   - path: /datasets/catalog/eraser_multi_rc
     title: eraser_multi_rc
   - path: /datasets/catalog/esnli
@@ -886,6 +898,8 @@ toc:
     title: booksum (manual)
   - path: /datasets/catalog/bool_q
     title: bool_q
+  - path: /datasets/catalog/e2e_cleaned
+    title: e2e_cleaned
   title: Text-generation
 - section:
   - path: /datasets/catalog/aeslc
