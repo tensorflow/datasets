@@ -33,13 +33,13 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`aflw2k3d`](aflw2k3d.md)
 
-### `Abstractive-text-summarization`
+### `Abstractive text summarization`
 
 *   [`aeslc`](aeslc.md)
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
 
-### `Anomaly-detection`
+### `Anomaly detection`
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`caltech101`](caltech101.md)
@@ -70,12 +70,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`xtreme_s`](xtreme_s.md)
 *   [`yes_no`](yes_no.md)
 
-### `Common-sense-reasoning`
+### `Common sense reasoning`
 
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
 *   [`arc`](arc.md)
 
-### `Coreference-resolution`
+### `Coreference resolution`
 
 *   [`clevr`](clevr.md)
 
@@ -91,12 +91,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`d4rl_mujoco_hopper`](d4rl_mujoco_hopper.md)
 *   [`d4rl_mujoco_walker2d`](d4rl_mujoco_walker2d.md)
 
-### `Density-estimation`
+### `Density estimation`
 
 *   [`caltech101`](caltech101.md)
 *   [`celeb_a_hq`](celeb_a_hq.md)
 
-### `Document-summarization`
+### `Document summarization`
 
 *   [`aeslc`](aeslc.md)
 *   [`booksum`](booksum.md)
@@ -106,7 +106,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
 
-### `Fine-grained-image-classification`
+### `Fine grained image classification`
 
 *   [`caltech101`](caltech101.md)
 
@@ -146,7 +146,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`symmetric_solids`](symmetric_solids.md)
 *   [`the300w_lp`](the300w_lp.md)
 
-### `Image-classification`
+### `Image classification`
 
 *   [`abstract_reasoning`](abstract_reasoning.md)
 *   [`bigearthnet`](bigearthnet.md)
@@ -154,7 +154,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`celeb_a`](celeb_a.md)
 *   [`flic`](flic.md)
 
-### `Image-generation`
+### `Image generation`
 
 *   [`binarized_mnist`](binarized_mnist.md)
 *   [`celeb_a`](celeb_a.md)
@@ -162,12 +162,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cityscapes`](cityscapes.md)
 *   [`clevr`](clevr.md)
 
-### `Image-super-resolution`
+### `Image super resolution`
 
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`div2k`](div2k.md)
 
-### `Image-to-image-translation`
+### `Image to image translation`
 
 *   [`celeb_a_hq`](celeb_a_hq.md)
 *   [`cityscapes`](cityscapes.md)
@@ -252,12 +252,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`uc_merced`](uc_merced.md)
 *   [`visual_domain_decathlon`](visual_domain_decathlon.md)
 
-### `Instance-segmentation`
+### `Instance segmentation`
 
 *   [`cityscapes`](cityscapes.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 
-### `Language-modelling`
+### `Language modelling`
 
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
@@ -274,11 +274,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`bool_q`](bool_q.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
 
-### `Natural-language-inference`
+### `Natural language inference`
 
 *   [`anli`](anli.md)
 
-### `Natural-language-understanding`
+### `Natural language understanding`
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`anli`](anli.md)
@@ -292,7 +292,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`glove100_angular`](glove100_angular.md)
 *   [`sift1m`](sift1m.md)
 
-### `Object-detection`
+### `Object detection`
 
 *   [`flic`](flic.md)
 
@@ -308,7 +308,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`waymo_open_dataset`](waymo_open_dataset.md)
 *   [`wider_face`](wider_face.md)
 
-### `Question-answering`
+### `Question answering`
 
 *   [`beir`](beir.md)
 *   [`bool_q`](bool_q.md)
@@ -341,7 +341,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`hillstrom`](hillstrom.md)
 *   [`simpte`](simpte.md)
 
-### `Rgb-d`
+### `Rgb d`
 
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 
@@ -372,11 +372,11 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`mt_opt`](mt_opt.md)
 
-### `Scene-classification`
+### `Scene classification`
 
 *   [`bigearthnet`](bigearthnet.md)
 
-### `Semantic-segmentation`
+### `Semantic segmentation`
 
 *   [`bigearthnet`](bigearthnet.md)
 *   [`cityscapes`](cityscapes.md)
@@ -384,12 +384,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 *   [`scene_parse150`](scene_parse150.md)
 
-### `Sequence-to-sequence-language-modelling`
+### `Sequence to sequence language modelling`
 
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
 
-### `Speech-recognition`
+### `Speech recognition`
 
 *   [`accentdb`](accentdb.md)
 
@@ -441,7 +441,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`wikihow`](wikihow.md)
 *   [`xsum`](xsum.md)
 
-### `Table-to-text-generation`
+### `Table to text generation`
 
 *   [`e2e_cleaned`](e2e_cleaned.md)
 
@@ -555,12 +555,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`xtreme_xnli`](xtreme_xnli.md)
 *   [`yelp_polarity_reviews`](yelp_polarity_reviews.md)
 
-### `Text-classification`
+### `Text classification`
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`bool_q`](bool_q.md)
 
-### `Text-generation`
+### `Text generation`
 
 *   [`aeslc`](aeslc.md)
 *   [`big_patent`](big_patent.md)
@@ -569,7 +569,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`bool_q`](bool_q.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
 
-### `Text-summarization`
+### `Text summarization`
 
 *   [`aeslc`](aeslc.md)
 *   [`big_patent`](big_patent.md)
@@ -606,7 +606,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`duke_ultrasound`](duke_ultrasound.md)
 
-### `Unsupervised-anomaly-detection`
+### `Unsupervised anomaly detection`
 
 *   [`caltech101`](caltech101.md)
 
