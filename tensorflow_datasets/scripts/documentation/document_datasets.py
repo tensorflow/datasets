@@ -223,7 +223,12 @@ def _get_sections(builder_cls: Type[tfds.core.DatasetBuilder]) -> List[Text]:
     # Sections are inferred from tags.
     ds_metadata = builder_cls.get_metadata()
     if ds_metadata.tags:
-      return [t.rsplit('.')[-1] for t in ds_metadata.tags]
+      sections = []
+      for tag in ds_metadata.tags:
+        section = tag.rsplit('.')[-1]
+        section = section.replace('-', ' ')
+        sections.append(section)
+      return sections
     return ['uncategorized']
   # One single section is inferred from module path.
   _, category, *_ = module_parts  # tfds.<category>.xyz
