@@ -43,6 +43,7 @@ from typing import Any, Dict, Optional, Tuple, Union
 from absl import logging
 from etils import epath
 import six
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
@@ -60,18 +61,14 @@ from google.protobuf import json_format
 Nest = Union[Tuple["Nest", ...], Dict[str, "Nest"], str]  # pytype: disable=not-supported-yet
 SupervisedKeysType = Union[Tuple[Nest, Nest], Tuple[Nest, Nest, Nest]]
 
-# Name of the file to output the DatasetInfo protobuf object.
-DATASET_INFO_FILENAME = "dataset_info.json"
-LICENSE_FILENAME = "LICENSE"
-METADATA_FILENAME = "metadata.json"
-
 
 def dataset_info_path(dataset_info_dir: epath.PathLike) -> str:
-  return os.path.join(os.fspath(dataset_info_dir), DATASET_INFO_FILENAME)
+  return os.path.join(
+      os.fspath(dataset_info_dir), constants.DATASET_INFO_FILENAME)
 
 
 def license_path(dataset_info_dir: epath.PathLike) -> str:
-  return os.path.join(os.fspath(dataset_info_dir), LICENSE_FILENAME)
+  return os.path.join(os.fspath(dataset_info_dir), constants.LICENSE_FILENAME)
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -156,7 +153,6 @@ class DatasetInfo(object):
   (before the first `builder.download_and_prepare()` call). For example splits
   names or number of examples might be missing (as they are computed
   at dataset creation time).
-
   """
 
   def __init__(
@@ -842,7 +838,7 @@ def read_proto_from_builder_dir(
     FileNotFoundError: If the builder_dir does not exist.
   """
   info_path = os.path.join(
-      os.path.expanduser(builder_dir), DATASET_INFO_FILENAME)
+      os.path.expanduser(builder_dir), constants.DATASET_INFO_FILENAME)
   if not tf.io.gfile.exists(info_path):
     raise FileNotFoundError(
         f"Could not load dataset info: {info_path} does not exist.")
@@ -864,7 +860,7 @@ def pack_as_supervised_ds(
 
 
 def _metadata_filepath(data_dir):
-  return os.path.join(data_dir, METADATA_FILENAME)
+  return os.path.join(data_dir, constants.METADATA_FILENAME)
 
 
 class MetadataDict(Metadata, dict):
