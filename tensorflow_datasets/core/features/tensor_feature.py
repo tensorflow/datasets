@@ -26,6 +26,8 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Json = utils.Json
@@ -64,7 +66,7 @@ class Tensor(feature_lib.FeatureConnector):
       self,
       *,
       shape: utils.Shape,
-      dtype: tf.dtypes.DType,
+      dtype: type_utils.TfdsDType,
       # TODO(tfds): Could add an Encoding.AUTO to automatically compress
       # tensors using some heuristic. However, careful about backward
       # compatibility.
@@ -146,7 +148,7 @@ class Tensor(feature_lib.FeatureConnector):
     if not isinstance(example_data, np.ndarray):
       example_data = np.array(example_data, dtype=np_dtype)
     # Ensure the shape and dtype match
-    if example_data.dtype != np_dtype:
+    if not tf_utils.equals(example_data.dtype, np_dtype):
       raise ValueError('Dtype {} do not match {}'.format(
           example_data.dtype, np_dtype))
 
@@ -251,6 +253,6 @@ def get_inner_feature_repr(feature):
   # * For the base `Tensor` class (and not subclass).
   # * When shape is scalar (explicit check to avoid trigger when `shape=None`).
   if type(feature) == Tensor and feature.shape == ():  # pylint: disable=unidiomatic-typecheck,g-explicit-bool-comparison
-    return repr(feature.dtype)
+    return np.dtype(feature.dtype).name
   else:
     return repr(feature)

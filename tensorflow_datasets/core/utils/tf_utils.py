@@ -19,8 +19,9 @@ from __future__ import annotations
 
 import collections
 import contextlib
-from typing import Any, Union
+from typing import Any, List, Optional, Union
 
+from etils import enp
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core.utils import tree_utils
@@ -59,7 +60,6 @@ class TFGraphRunner(object):
   Usage:
     graph_runner = TFGraphRunner()
     output = graph_runner.run(tf.sigmoid, np.ones(shape=(5,)))
-
   """
 
   __slots__ = ['_graph_run_cache']
@@ -141,13 +141,67 @@ def convert_to_shape(shape: Any) -> type_utils.Shape:
       f'Shape of type {type(shape)} with content {shape} is not supported!')
 
 
-def is_dtype(value):
-  """Return True is the given value is a TensorFlow dtype."""
+def is_tensorflow_dtype(value) -> bool:
+  """Returns True is the given value is a TensorFlow dtype."""
   try:
     tf.as_dtype(value)
   except TypeError:
     return False
   return True
+
+
+def is_numpy_dtype(value) -> bool:
+  """Returns True is the given value is a NumPy dtype."""
+  try:
+    np.dtype(value)
+  except (TypeError, ValueError):
+    return False
+  return True
+
+
+def np_dtype(value) -> Optional[np.dtype]:
+  """Returns the NumPy dtype if it exists, else None."""
+  try:
+    return enp.lazy.as_dtype(value)
+  except TypeError:
+    return None
+
+
+def _is_dtype(numpy_dtypes: List[np.dtype], tf_dtype: Any,
+              dtype: type_utils.TfdsDType) -> bool:
+  if is_numpy_dtype(dtype):
+    return any(
+        [is_np_sub_dtype(dtype, numpy_dtype) for numpy_dtype in numpy_dtypes])
+  if enp.lazy.has_tf and isinstance(dtype, tf.dtypes.DType):
+    if isinstance(tf_dtype, str):
+      return getattr(dtype, tf_dtype)
+    return dtype == tf_dtype
+  raise TypeError(f'type {dtype} not recognized')
+
+
+@py_utils.memoize()
+def is_bool(dtype: type_utils.TfdsDType) -> bool:
+  return _is_dtype([np.bool_], 'is_bool', dtype)
+
+
+@py_utils.memoize()
+def is_floating(dtype: type_utils.TfdsDType) -> bool:
+  return _is_dtype([np.floating], 'is_floating', dtype)
+
+
+@py_utils.memoize()
+def is_integer(dtype: type_utils.TfdsDType) -> bool:
+  return _is_dtype([np.integer], 'is_integer', dtype)
+
+
+@py_utils.memoize()
+def is_string(dtype: type_utils.TfdsDType) -> bool:
+  return _is_dtype([np.character, object], tf.string, dtype)
+
+
+def equals(a, b):
+  return (is_bool(a) and is_bool(b)) or (is_floating(a) and is_floating(b)) or (
+      is_integer(a) and is_integer(b)) or (is_string(a) and is_string(b))
 
 
 @py_utils.memoize()
@@ -157,7 +211,10 @@ def is_same_tf_dtype(v1: tf.dtypes.DType, v2: tf.dtypes.DType) -> bool:
 
 @py_utils.memoize()
 def is_np_sub_dtype(value: np.dtype, super_type: np.dtype) -> bool:
-  return np.issubdtype(value, super_type)
+  try:
+    return np.issubdtype(value, super_type)
+  except TypeError:
+    return False
 
 
 @py_utils.memoize()

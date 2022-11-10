@@ -229,9 +229,9 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
         repr(feature_dict),
         textwrap.dedent("""\
         FeaturesDict({
-            'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=2)),
+            'label': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=2)),
             'metadata': Sequence({
-                'frame': Image(shape=(32, 32, 3), dtype=tf.uint8),
+                'frame': Image(shape=(32, 32, 3), dtype=uint8),
             }),
         })"""),
     )
@@ -250,13 +250,13 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
     # Top level Tensor is printed expanded
     self.assertEqual(
         repr(features_lib.Tensor(shape=(), dtype=tf.int32)),
-        'Tensor(shape=(), dtype=tf.int32)',
+        'Tensor(shape=(), dtype=int32)',
     )
 
     # Sequences colapse tensor repr
     self.assertEqual(
         repr(features_lib.Sequence(tf.int32)),
-        'Sequence(tf.int32)',
+        'Sequence(int32)',
     )
 
     class ChildTensor(features_lib.Tensor):
@@ -273,9 +273,9 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
             })),
         textwrap.dedent("""\
         FeaturesDict({
-            'child': ChildTensor(shape=(), dtype=tf.int32),
-            'colapsed': tf.int32,
-            'noncolapsed': Tensor(shape=(1,), dtype=tf.int32),
+            'child': ChildTensor(shape=(), dtype=int32),
+            'colapsed': int32,
+            'noncolapsed': Tensor(shape=(1,), dtype=int32),
         })"""),
     )
 

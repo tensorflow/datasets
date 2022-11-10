@@ -16,8 +16,11 @@
 """Typing annotation utils."""
 
 import typing
-from typing import Any, Dict, List, Optional, Tuple, TypeVar, Union
+from typing import cast, Any, Dict, List, Optional, Tuple, TypeVar, Union
 
+from absl import logging
+from etils import enp
+import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 _symbols_to_exclude = set(globals().keys())
@@ -52,6 +55,32 @@ Json = Dict[str, JsonValue]
 
 Key = Union[int, str, bytes]
 KeySerializedExample = Tuple[Key, bytes]  # `(key, serialized_proto)`
+
+TfdsDType = Union[np.dtype, tf.DType, tf.dtypes.DType]
+
+
+def cast_to_numpy(dtype: TfdsDType) -> np.dtype:
+  """Casts any np.dtype or tf.dtypes.DType to np.dtype.
+
+  Args:
+    dtype: input DType.
+
+  Returns:
+    Equivalent NumPy DType.
+  """
+  tf_already_loaded = enp.lazy.has_tf
+  if tf_already_loaded and isinstance(dtype, tf.dtypes.DType):
+    if dtype == tf.string:
+      numpy_dtype = np.object_
+    else:
+      numpy_dtype = dtype.as_numpy_dtype
+    logging.warning(
+        'Warning: You use TensorFlow DType %s in tfds.features.TensorInfo. '
+        'This will soon be deprecated in favor of NumPy DTypes. '
+        'In the meantime it was converted to %s.', dtype, numpy_dtype)
+    return numpy_dtype
+  return cast(np.dtype, dtype)
+
 
 __all__ = sorted(k for k in globals()
                  if k not in _symbols_to_exclude and not k.startswith('_'))
