@@ -26,7 +26,6 @@ import re
 import textwrap
 from typing import List, Mapping, Optional, Union
 
-import numpy as np
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.scripts.documentation import doc_utils
@@ -408,8 +407,7 @@ class FeatureDocumentationSection(Section):
     def format_row(doc: feature_lib.CatalogFeatureDocumentation) -> str:
       if doc.tensor_info:
         shape = str(doc.tensor_info.shape) if doc.tensor_info.shape else ''
-        dtype = np.dtype(
-            doc.tensor_info.dtype).name if doc.tensor_info.dtype else ''
+        dtype = repr(doc.tensor_info.dtype) if doc.tensor_info.dtype else ''
       else:
         shape = ''
         dtype = ''

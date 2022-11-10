@@ -18,8 +18,6 @@
 from __future__ import annotations
 
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.features import feature as feature_lib
-from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
@@ -95,8 +93,7 @@ def _build_feature_specs(flat_example_specs):
   return {k: build_single_spec(k, v) for k, v in flat_example_specs.items()}
 
 
-def _deserialize_single_field(example_data,
-                              tensor_info: feature_lib.TensorInfo):
+def _deserialize_single_field(example_data, tensor_info):
   """Reconstruct the serialized field."""
   # Ragged tensor case:
   if tensor_info.sequence_rank > 1:
@@ -124,7 +121,7 @@ def _dict_to_ragged(example_data, tensor_info):
   )
 
 
-def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
+def _to_tf_example_spec(tensor_info):
   """Convert a `TensorInfo` into a feature proto object."""
   # Convert the dtype
 
@@ -132,12 +129,11 @@ def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
   # This create limitation like float64 downsampled to float32, bool converted
   # to int64 which is space ineficient, no support for complexes or quantized
   # It seems quite space inefficient to convert bool to int64
-  if (tf_utils.is_integer(tensor_info.dtype) or
-      tf_utils.is_bool(tensor_info.dtype)):
+  if tensor_info.dtype.is_integer or tensor_info.dtype.is_bool:
     dtype = tf.int64
-  elif tf_utils.is_floating(tensor_info.dtype):
+  elif tensor_info.dtype.is_floating:
     dtype = tf.float32
-  elif tf_utils.is_string(tensor_info.dtype):
+  elif tensor_info.dtype == tf.string:
     dtype = tf.string
   else:
     # TFRecord only support 3 types
