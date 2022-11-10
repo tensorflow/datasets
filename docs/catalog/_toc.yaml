@@ -18,7 +18,7 @@ toc:
     title: billsum
   - path: /datasets/catalog/booksum
     title: booksum (manual)
-  title: Abstractive-text-summarization
+  title: Abstractive text summarization
 - section:
   - path: /datasets/catalog/ag_news_subset
     title: ag_news_subset
@@ -26,7 +26,7 @@ toc:
     title: caltech101
   - path: /datasets/catalog/lost_and_found
     title: lost_and_found
-  title: Anomaly-detection
+  title: Anomaly detection
 - section:
   - path: /datasets/catalog/accentdb
     title: accentdb
@@ -78,11 +78,11 @@ toc:
     title: ai2_arc_with_ir
   - path: /datasets/catalog/arc
     title: arc
-  title: Common-sense-reasoning
+  title: Common sense reasoning
 - section:
   - path: /datasets/catalog/clevr
     title: clevr
-  title: Coreference-resolution
+  title: Coreference resolution
 - section:
   - path: /datasets/catalog/d4rl_adroit_door
     title: d4rl_adroit_door
@@ -108,13 +108,13 @@ toc:
     title: caltech101
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
-  title: Density-estimation
+  title: Density estimation
 - section:
   - path: /datasets/catalog/aeslc
     title: aeslc
   - path: /datasets/catalog/booksum
     title: booksum (manual)
-  title: Document-summarization
+  title: Document summarization
 - section:
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
@@ -124,7 +124,7 @@ toc:
 - section:
   - path: /datasets/catalog/caltech101
     title: caltech101
-  title: Fine-grained-image-classification
+  title: Fine grained image classification
 - section:
   - path: /datasets/catalog/cardiotox
     title: cardiotox
@@ -200,7 +200,7 @@ toc:
     title: celeb_a
   - path: /datasets/catalog/flic
     title: flic
-  title: Image-classification
+  title: Image classification
 - section:
   - path: /datasets/catalog/binarized_mnist
     title: binarized_mnist
@@ -212,13 +212,13 @@ toc:
     title: cityscapes (manual)
   - path: /datasets/catalog/clevr
     title: clevr
-  title: Image-generation
+  title: Image generation
 - section:
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
   - path: /datasets/catalog/div2k
     title: div2k
-  title: Image-super-resolution
+  title: Image super resolution
 - section:
   - path: /datasets/catalog/celeb_a_hq
     title: celeb_a_hq (manual)
@@ -226,7 +226,7 @@ toc:
     title: cityscapes (manual)
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
-  title: Image-to-image-translation
+  title: Image to image translation
 - section:
   - path: /datasets/catalog/caltech_birds2010
     title: caltech_birds2010
@@ -386,7 +386,7 @@ toc:
     title: cityscapes (manual)
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
-  title: Instance-segmentation
+  title: Instance segmentation
 - section:
   - path: /datasets/catalog/big_patent
     title: big_patent
@@ -396,7 +396,7 @@ toc:
     title: blimp
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
-  title: Language-modelling
+  title: Language modelling
 - section:
   - path: /datasets/catalog/ag_news_subset
     title: ag_news_subset
@@ -416,7 +416,7 @@ toc:
 - section:
   - path: /datasets/catalog/anli
     title: anli
-  title: Natural-language-inference
+  title: Natural language inference
 - section:
   - path: /datasets/catalog/ag_news_subset
     title: ag_news_subset
@@ -428,7 +428,7 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
-  title: Natural-language-understanding
+  title: Natural language understanding
 - section:
   - path: /datasets/catalog/deep1b
     title: deep1b
@@ -440,7 +440,7 @@ toc:
 - section:
   - path: /datasets/catalog/flic
     title: flic
-  title: Object-detection
+  title: Object detection
 - section:
   - path: /datasets/catalog/coco
     title: coco
@@ -468,7 +468,7 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
-  title: Question-answering
+  title: Question answering
 - section:
   - path: /datasets/catalog/coqa
     title: coqa
@@ -514,7 +514,7 @@ toc:
 - section:
   - path: /datasets/catalog/nyu_depth_v2
     title: nyu_depth_v2
-  title: Rgb-d
+  title: Rgb d
 - section:
   - path: /datasets/catalog/rlu_atari
     title: rlu_atari
@@ -556,7 +556,7 @@ toc:
 - section:
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
-  title: Scene-classification
+  title: Scene classification
 - section:
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
@@ -568,17 +568,17 @@ toc:
     title: nyu_depth_v2
   - path: /datasets/catalog/scene_parse150
     title: scene_parse150
-  title: Semantic-segmentation
+  title: Semantic segmentation
 - section:
   - path: /datasets/catalog/big_patent
     title: big_patent
   - path: /datasets/catalog/billsum
     title: billsum
-  title: Sequence-to-sequence-language-modelling
+  title: Sequence to sequence language modelling
 - section:
   - path: /datasets/catalog/accentdb
     title: accentdb
-  title: Speech-recognition
+  title: Speech recognition
 - section:
   - path: /datasets/catalog/ble_wind_field
     title: ble_wind_field
@@ -670,7 +670,7 @@ toc:
 - section:
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
-  title: Table-to-text-generation
+  title: Table to text generation
 - section:
   - path: /datasets/catalog/efron_morris75
     title: efron_morris75
@@ -886,7 +886,7 @@ toc:
     title: ag_news_subset
   - path: /datasets/catalog/bool_q
     title: bool_q
-  title: Text-classification
+  title: Text classification
 - section:
   - path: /datasets/catalog/aeslc
     title: aeslc
@@ -900,7 +900,7 @@ toc:
     title: bool_q
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
-  title: Text-generation
+  title: Text generation
 - section:
   - path: /datasets/catalog/aeslc
     title: aeslc
@@ -910,7 +910,7 @@ toc:
     title: billsum
   - path: /datasets/catalog/booksum
     title: booksum (manual)
-  title: Text-summarization
+  title: Text summarization
 - section:
   - path: /datasets/catalog/wiki_auto
     title: wiki_auto
@@ -958,7 +958,7 @@ toc:
 - section:
   - path: /datasets/catalog/caltech101
     title: caltech101
-  title: Unsupervised-anomaly-detection
+  title: Unsupervised anomaly detection
 - section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
