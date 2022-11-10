@@ -39,6 +39,11 @@ INCOMPLETE_SUFFIX = '.incomplete'
 # Name of the file to output the features information.
 FEATURES_FILENAME = 'features.json'
 
+# Name of the file to output the DatasetInfo protobuf object.
+DATASET_INFO_FILENAME = 'dataset_info.json'
+LICENSE_FILENAME = 'LICENSE'
+METADATA_FILENAME = 'metadata.json'
+
 # Filepath for mapping between TFDS datasets and PapersWithCode entries.
 PWC_FILENAME = 'tfds_to_pwc_links.json'
 PWC_LINKS_PATH = (
