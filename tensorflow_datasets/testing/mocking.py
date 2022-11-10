@@ -30,7 +30,6 @@ from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import reader as reader_lib
-from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import test_utils
 
@@ -352,13 +351,13 @@ class RandomFakeGenerator(object):
     # We cast the data to make sure `encode_example` don't raise errors
     dtype = tensor_info.dtype
     # Generate some random values, depending on the dtype
-    if tf_utils.is_integer(dtype):
-      return self._rgn.randint(0, max_value, shape).astype(dtype)
-    elif tf_utils.is_floating(dtype):
-      return self._rgn.random_sample(shape).astype(dtype)
-    elif tf_utils.is_bool(dtype):
-      return (self._rgn.random_sample(shape) < .5).astype(dtype)
-    elif tf_utils.is_string(dtype):
+    if dtype.is_integer:
+      return self._rgn.randint(0, max_value, shape).astype(dtype.as_numpy_dtype)
+    elif dtype.is_floating:
+      return self._rgn.random_sample(shape).astype(dtype.as_numpy_dtype)
+    elif dtype.is_bool:
+      return (self._rgn.random_sample(shape) < .5).astype(dtype.as_numpy_dtype)
+    elif dtype == tf.string:
       return self._generate_random_string_array(shape)
     raise ValueError('Fake generation not supported for {}'.format(dtype))
 

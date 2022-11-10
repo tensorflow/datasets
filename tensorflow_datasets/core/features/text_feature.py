@@ -21,7 +21,6 @@ import textwrap
 from typing import Union
 
 from absl import logging
-import numpy as np
 from tensorflow_datasets.core.deprecated import text as text_lib
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
@@ -72,7 +71,7 @@ class Text(tensor_feature.Tensor):
       )
     super(Text, self).__init__(
         shape=(None,) if has_encoder else (),
-        dtype=np.int64 if has_encoder else np.object_,
+        dtype=tf.int64 if has_encoder else tf.string,
         doc=doc,
     )
 
