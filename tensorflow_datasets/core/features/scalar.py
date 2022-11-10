@@ -20,7 +20,7 @@ from __future__ import annotations
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.proto import feature_pb2
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.utils import type_utils
 
 
 class Scalar(tensor_feature.Tensor):
@@ -34,7 +34,7 @@ class Scalar(tensor_feature.Tensor):
 
   def __init__(
       self,
-      dtype: tf.dtypes.DType,
+      dtype: type_utils.TfdsDType,
       *,
       doc: feature_lib.DocArg = None,
   ):

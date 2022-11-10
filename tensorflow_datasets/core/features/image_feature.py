@@ -214,7 +214,7 @@ class Image(feature_lib.FeatureConnector):
       self,
       *,
       shape: Optional[utils.Shape] = None,
-      dtype: Optional[tf.dtypes.DType] = None,
+      dtype: Optional[type_utils.TfdsDType] = None,
       encoding_format: Optional[str] = None,
       use_colormap: bool = False,
       doc: feature_lib.DocArg = None,
@@ -246,7 +246,7 @@ class Image(feature_lib.FeatureConnector):
     super().__init__(doc=doc)
     # Set and validate values
     shape = shape or (None, None, 3)
-    dtype = dtype or tf.uint8
+    dtype = tf.dtypes.as_dtype(dtype) if dtype is not None else tf.uint8
     self._encoding_format = get_and_validate_encoding(encoding_format)
     self._shape = get_and_validate_shape(shape, self._encoding_format)
     self._dtype = get_and_validate_dtype(dtype, self._encoding_format)

@@ -553,8 +553,8 @@ _INFO_STR = '''tfds.core.DatasetInfo(
     download_size=1.95 KiB,
     dataset_size=11.06 MiB,
     features=FeaturesDict({
-        'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+        'image': Image(shape=(28, 28, 1), dtype=uint8),
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
     }),
     supervised_keys=('image', 'label'),
     disable_shuffling=False,

@@ -25,7 +25,6 @@ from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.core.utils import type_utils
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 Json = type_utils.Json
 
@@ -45,7 +44,6 @@ class LabeledImage(image_feature.Image):
   builder = tfds.builder('my_dataset')
   builder.info.features['label_image'].names == ['background', 'car', ...]
   ```
-
   """
 
   def __init__(
@@ -53,7 +51,7 @@ class LabeledImage(image_feature.Image):
       *,
       labels: _LabelArg,
       shape: Optional[type_utils.Shape] = None,
-      dtype: Optional[tf.dtypes.DType] = None,
+      dtype: Optional[type_utils.TfdsDType] = None,
       encoding_format: Optional[str] = None,
       doc: feature_lib.DocArg = None,
   ):
