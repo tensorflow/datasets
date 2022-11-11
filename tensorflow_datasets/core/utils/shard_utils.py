@@ -23,6 +23,7 @@ This logic is shared between:
 
 import dataclasses
 import math
+import os
 from typing import Any, List, Sequence
 
 
@@ -31,7 +32,7 @@ class FileInstruction(object):
   """Instruction to read a single shard/file.
 
   Attributes:
-    filename: The filename containing the relative path, not absolute.
+    filename: The filename including the path.
     skip: Indicates which example read in the shard (`ds.skip().take()`). `0` if
       no skipping.
     take: Indicates how many examples to read (`-1` to read all).
@@ -41,6 +42,12 @@ class FileInstruction(object):
   skip: int
   take: int
   num_examples: int
+
+  def dirname(self) -> str:
+    return os.path.dirname(self.filename)
+
+  def basename(self) -> str:
+    return os.path.basename(self.filename)
 
   def replace(self, **kwargs: Any) -> 'FileInstruction':
     return dataclasses.replace(self, **kwargs)

@@ -421,5 +421,34 @@ def test_shard_api():
   assert sd['train[1:-1shard]'].file_instructions == fi[1:-1]
 
 
+class AddTfdsIdTest(testing.TestCase):
+
+  def test_get_tfds_id_prefixes_single_directory(self):
+    file_instructions = [
+        shard_utils.FileInstruction('/a/b/f1', 0, -1, 1),
+        shard_utils.FileInstruction('/a/b/f2', 0, -1, 1),
+    ]
+    actual = reader_lib._get_tfds_id_prefixes(file_instructions)
+    self.assertEqual(actual, {'/a/b/f1': 'f1', '/a/b/f2': 'f2'})
+
+  def test_get_tfds_id_prefixes_multiple_directories(self):
+    file_instructions = [
+        shard_utils.FileInstruction('/a/b/f1', 0, -1, 1),
+        shard_utils.FileInstruction('/a/b/f2', 0, -1, 1),
+        shard_utils.FileInstruction('/x/y/z/f1', 0, -1, 1),
+        shard_utils.FileInstruction('/a/c/f1', 0, -1, 1),
+        shard_utils.FileInstruction('/a/b/c/d/e/f1', 0, -1, 1),
+    ]
+    actual = reader_lib._get_tfds_id_prefixes(file_instructions)
+    expected = {
+        '/a/b/c/d/e/f1': 'e/f1',
+        '/a/b/f1': 'b/f1',
+        '/a/b/f2': 'b/f2',
+        '/a/c/f1': 'c/f1',
+        '/x/y/z/f1': 'z/f1',
+    }
+    self.assertEqual(actual, expected)
+
+
 if __name__ == '__main__':
   testing.test_main()
