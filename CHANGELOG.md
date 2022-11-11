@@ -15,6 +15,8 @@ and this project adheres to
     transformations.
 -   Loggers are also called on `tfds.as_numpy(...)`, base `Logger` class has a
     new corresponding method.
+-   `tfds.core.DatasetBuilder` can have a default limit for the number of
+    simultaneous downloads. `tfds.download.DownloadConfig` can override it.
 
 ### Changed
 

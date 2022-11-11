@@ -168,6 +168,10 @@ class DatasetBuilder(registered.RegisteredDataset):
   # displayed in the dataset documentation.
   MANUAL_DOWNLOAD_INSTRUCTIONS = None
 
+  # Optional max number of simultaneous downloads. Setting this value will
+  # override download config settings if necessary.
+  MAX_SIMULTANEOUS_DOWNLOADS: Optional[int] = None
+
   @tfds_logging.builder_init()
   def __init__(
       self,
@@ -911,6 +915,18 @@ class DatasetBuilder(registered.RegisteredDataset):
     else:
       register_checksums_path = None
 
+    max_simultaneous_downloads = (
+        download_config.override_max_simultaneous_downloads or
+        self.MAX_SIMULTANEOUS_DOWNLOADS)
+    if (max_simultaneous_downloads and self.MAX_SIMULTANEOUS_DOWNLOADS and
+        self.MAX_SIMULTANEOUS_DOWNLOADS < max_simultaneous_downloads):
+      logging.warning(
+          "The dataset %r sets `MAX_SIMULTANEOUS_DOWNLOADS`=%s. The download "
+          "config overrides it with value `override_max_simultaneous_downloads`"
+          "=%s. Using the higher value might cause `ConnectionRefusedError`",
+          self.name, self.MAX_SIMULTANEOUS_DOWNLOADS,
+          download_config.override_max_simultaneous_downloads)
+
     return download.DownloadManager(
         download_dir=download_dir,
         extract_dir=extract_dir,
@@ -924,6 +940,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         register_checksums_path=register_checksums_path,
         verify_ssl=download_config.verify_ssl,
         dataset_name=self.name,
+        max_simultaneous_downloads=max_simultaneous_downloads,
     )
 
   @utils.docs.do_not_doc_in_subclasses

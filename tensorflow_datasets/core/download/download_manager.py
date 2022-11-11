@@ -87,6 +87,9 @@ class DownloadConfig:
       downloaded and prepared from scratch.
     verify_ssl: `bool`, defaults to True. If True, will verify certificate when
       downloading dataset.
+    override_max_simultaneous_downloads: `int`, optional max number of
+      simultaneous downloads. If set, it will override dataset builder and
+      downloader default values.
   """
   extract_dir: Optional[epath.PathLike] = None
   manual_dir: Optional[epath.PathLike] = None
@@ -99,6 +102,7 @@ class DownloadConfig:
   beam_options: Optional[Any] = None
   try_download_gcs: bool = True
   verify_ssl: bool = True
+  override_max_simultaneous_downloads: Optional[int] = None
 
 
 class DownloadManager(object):
@@ -164,6 +168,7 @@ class DownloadManager(object):
       register_checksums: bool = False,
       register_checksums_path: Optional[epath.PathLike] = None,
       verify_ssl: bool = True,
+      max_simultaneous_downloads: Optional[int] = None,
   ):
     """Download manager constructor.
 
@@ -186,6 +191,8 @@ class DownloadManager(object):
         register_checksums is True.
       verify_ssl: `bool`, defaults to True. If True, will verify certificate
         when downloading dataset.
+      max_simultaneous_downloads: `int`, optional max number of simultaneous
+        downloads.
 
     Raises:
       FileNotFoundError: Raised if the register_checksums_path does not exist.
@@ -226,6 +233,7 @@ class DownloadManager(object):
     self._register_checksums = register_checksums
     self._register_checksums_path = register_checksums_path
     self._verify_ssl = verify_ssl
+    self._max_simultaneous_downloads = max_simultaneous_downloads
     self._dataset_name = dataset_name
 
     # All known URLs: {url: UrlInfo(size=, checksum=)}
@@ -263,7 +271,8 @@ class DownloadManager(object):
   @property
   def _downloader(self):
     if not self.__downloader:
-      self.__downloader = downloader.get_downloader()
+      self.__downloader = downloader.get_downloader(
+          max_simultaneous_downloads=self._max_simultaneous_downloads)
     return self.__downloader
 
   @property

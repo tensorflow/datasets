@@ -111,16 +111,23 @@ class _Downloader(object):
 
   Do not instantiate this class directly. Instead, call `get_downloader()`.
   """
+  _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS = 50
 
-  def __init__(self, max_simultaneous_downloads: int = 50, checksumer=None):
+  def __init__(self,
+               max_simultaneous_downloads: Optional[
+                   int] = _DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS,
+               checksumer=None):
     """Init _Downloader instance.
 
     Args:
-      max_simultaneous_downloads: `int`, max number of simultaneous downloads.
+      max_simultaneous_downloads: `int`, optional max number of simultaneous
+        downloads. If None then it defaults to
+        `self._DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS`.
       checksumer: `hashlib.HASH`. Defaults to `hashlib.sha256`.
     """
     self._executor = concurrent.futures.ThreadPoolExecutor(
-        max_workers=max_simultaneous_downloads)
+        max_workers=max_simultaneous_downloads or
+        self._DEFAULT_MAX_SIMULTANEOUS_DOWNLOADS)
     self._checksumer_cls = checksumer or hashlib.sha256
     self._pbar_url = None
     self._pbar_dl_size = None

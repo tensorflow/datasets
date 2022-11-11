@@ -60,6 +60,7 @@ class Librispeech(tfds.core.BeamBasedBuilder):
   RELEASE_NOTES = {
       "2.1.1": "Fix speech data type with dtype=tf.int16.",
   }
+  MAX_SIMULTANEOUS_DOWNLOADS = 5  # in accordance with http://www.openslr.org
 
   def _info(self):
     return tfds.core.DatasetInfo(
