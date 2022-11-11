@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import functools
 import os
+import re
 from typing import Any, Callable, List, NamedTuple, Optional, Sequence
 
 from absl import logging
@@ -49,10 +50,11 @@ class _IdExample(NamedTuple):
 
 
 class _Instruction(NamedTuple):
-  filepath: Any  # tf.string '/path/to/../train.tfrecord'
-  filename: Any  # tf.string 'train.tfrecord'
-  skip: Any  #  tf.int64
-  take: Any  # tf.int64
+  filepath: tf.string  # e.g. '/path/to/../train.tfrecord'
+  filename: tf.string  # e.g. 'train.tfrecord'
+  tfds_id_prefix: tf.string  # e.g. 'train.tfrecord' or 'folder1/train.tfrecord'
+  skip: tf.int64
+  take: tf.int64
 
 
 def _get_dataset_from_filename(
@@ -71,7 +73,7 @@ def _get_dataset_from_filename(
     ds = ds.take(instruction.take)
   if add_tfds_id:  # For each example, generate a unique id.
     id_ds = _make_id_dataset(
-        filename=instruction.filename,
+        filename=instruction.tfds_id_prefix,
         start_index=instruction.skip if do_skip else 0)
     ds = tf.data.Dataset.zip(_IdExample(id=id_ds, example=ds))
   return ds
@@ -115,6 +117,39 @@ def _decode_with_id(
   return decoded_ex
 
 
+def _get_tfds_id_prefixes(
+    file_instructions: Sequence[shard_utils.FileInstruction],
+) -> dict[str, str]:
+  """Returns the tfds id prefix per filename.
+
+  If the file instructions are for files in different directories, then the TFDS
+  id prefix includes part of the folder. This is to avoid duplicate TFDS ids
+  when different directories contain the same filenames. For example, if the
+  file instructions contain file paths `['/a/b/c', '/x/y/c']`, then this returns
+  `{'/a/b/c': 'b/c', '/x/y/c': 'y/c'}`.
+
+  Arguments:
+    file_instructions: the file instructions for which to get TFDS id prefixes.
+
+  Returns:
+    the TFDS id prefix per filename.
+  """
+  dirnames = set(i.dirname() for i in file_instructions)
+  reversed_dirnames = [d[::-1] for d in dirnames]
+  common_suffix = os.path.commonprefix(reversed_dirnames)[::-1]
+
+  def get_tfds_id(instruction: shard_utils.FileInstruction) -> str:
+    # Return the file name when all files are in the same directory.
+    if len(dirnames) == 1:
+      return instruction.basename()
+    # Otherwise, return the relative path starting from the deepest folder that
+    # differs.
+    return re.sub(rf'.*\/([^/]+{common_suffix}/[^/]+)', r'\1',
+                  instruction.filename)
+
+  return {fi.filename: get_tfds_id(fi) for fi in file_instructions}
+
+
 def _read_files(
     file_instructions: Sequence[shard_utils.FileInstruction],
     read_config: read_config_lib.ReadConfig,
@@ -147,10 +182,13 @@ def _read_files(
   do_skip = any(f.skip > 0 for f in file_instructions)
   do_take = any(f.take > -1 for f in file_instructions)
 
+  tfds_id_prefixes = _get_tfds_id_prefixes(file_instructions)
+
   # Transpose the list[dict] into dict[list]
   tensor_inputs = _Instruction(
       filename=[os.path.basename(i.filename) for i in file_instructions],
       filepath=[os.fspath(i.filename) for i in file_instructions],
+      tfds_id_prefix=[tfds_id_prefixes[i.filename] for i in file_instructions],
       # skip/take need to be converted to int64 explicitly
       skip=np.array([i.skip for i in file_instructions], dtype=np.int64),
       take=np.array([i.take for i in file_instructions], dtype=np.int64),

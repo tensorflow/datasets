@@ -14,12 +14,12 @@
 # limitations under the License.
 
 """Tests for tensorflow_datasets.core.utils.shard_utils."""
-
+from absl.testing import parameterized
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import shard_utils
 
 
-class GetReadInstructionsTest(testing.TestCase):
+class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
 
   def test_read_all_even_sharding(self):
     # Even sharding
@@ -95,6 +95,26 @@ class GetReadInstructionsTest(testing.TestCase):
         shard_utils.FileInstruction(
             filename=filename, skip=0, take=1, num_examples=1),
     ])
+
+  @parameterized.parameters(
+      ('/a/b', '/a'),
+      ('a', ''),
+      ('', ''),
+      ('/a/b/c/d', '/a/b/c'),
+  )
+  def test_file_instruction_dirname(self, filename, expected):
+    file_instruction = shard_utils.FileInstruction(filename, 0, -1, 1)
+    self.assertEqual(file_instruction.dirname(), expected)
+
+  @parameterized.parameters(
+      ('/a/b', 'b'),
+      ('a', 'a'),
+      ('', ''),
+      ('/a/b/c/d', 'd'),
+  )
+  def test_file_instruction_basename(self, filename, expected):
+    file_instruction = shard_utils.FileInstruction(filename, 0, -1, 1)
+    self.assertEqual(file_instruction.basename(), expected)
 
 
 if __name__ == '__main__':
