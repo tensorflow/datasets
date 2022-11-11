@@ -119,8 +119,11 @@ def get_default_data_dir(given_data_dir: Optional[str] = None,
     return constants.DATA_DIR
 
 
-def is_version_folder(folder: epath.PathLike,
-                      check_content: bool = True) -> bool:
+def is_version_folder(
+    folder: epath.PathLike,
+    check_content: bool = True,
+    include_old_tfds_version: bool = False,
+) -> bool:
   """Returns whether `folder` is a version folder and contains dataset metadata.
 
   Checks that the deepest directory is a semantic version (e.g. `3.1.4`) and
@@ -130,6 +133,8 @@ def is_version_folder(folder: epath.PathLike,
     folder: the folder to check.
     check_content: whether to check the content for the folder if it contains
       files required for a dataset.
+    include_old_tfds_version: include datasets that have been generated with
+      TFDS before 4.0.0. This is only used if `check_content=True`.
 
   Returns:
     whether `folder` is a version folder and contains dataset metadata.
@@ -137,8 +142,13 @@ def is_version_folder(folder: epath.PathLike,
   folder = epath.Path(folder)
   looks_like_a_version = version_lib.Version.is_valid(folder.name)
   if check_content:
-    features_config_path = folder / constants.FEATURES_FILENAME
-    return looks_like_a_version and features_config_path.exists()
+    if include_old_tfds_version:
+      # If TFDS version before 4.0.0 was used, then the generated dataset
+      # doesn't contain `features.json`, but has `dataset_info.json`.
+      content_to_check = folder / constants.DATASET_INFO_FILENAME
+    else:
+      content_to_check = folder / constants.FEATURES_FILENAME
+    return looks_like_a_version and content_to_check.exists()
   else:
     return looks_like_a_version
 
@@ -148,6 +158,7 @@ def list_dataset_variants(
     dataset_dir: epath.PathLike,
     namespace: Optional[str] = None,
     include_versions: bool = True,
+    include_old_tfds_version: bool = False,
 ) -> Iterator[naming.DatasetReference]:
   """Yields all variants (config + version) found in `dataset_dir`.
 
@@ -156,6 +167,8 @@ def list_dataset_variants(
     dataset_dir: the folder of the dataset.
     namespace: optional namespace to which this data dir belongs.
     include_versions: whether to list what versions are available.
+    include_old_tfds_version: include datasets that have been generated with
+      TFDS before 4.0.0.
 
   Yields:
     all variants of the given dataset.
@@ -165,10 +178,15 @@ def list_dataset_variants(
   base_reference = naming.DatasetReference(
       dataset_name=dataset_name, namespace=namespace, data_dir=data_dir)
 
+  is_version_folder_ = functools.partial(
+      is_version_folder,
+      check_content=include_versions,
+      include_old_tfds_version=include_old_tfds_version)
+
   def get_dataset_references(
       config_or_version_dir: epath.Path) -> Iterator[naming.DatasetReference]:
     logging.info('Getting configs and versions in %s', config_or_version_dir)
-    if is_version_folder(config_or_version_dir, check_content=include_versions):
+    if is_version_folder_(config_or_version_dir):
       if include_versions:
         yield base_reference.replace(version=config_or_version_dir.name)
       else:
@@ -179,7 +197,7 @@ def list_dataset_variants(
         yield base_reference.replace(config=config)
       else:
         for version_dir in config_or_version_dir.iterdir():
-          if is_version_folder(version_dir, check_content=include_versions):
+          if is_version_folder_(version_dir):
             yield base_reference.replace(
                 config=config, version=version_dir.name)
 
@@ -195,6 +213,7 @@ def list_datasets_in_data_dir(
     namespace: Optional[str] = None,
     include_configs: bool = True,
     include_versions: bool = True,
+    include_old_tfds_version: bool = False,
 ) -> Iterator[naming.DatasetReference]:
   """Yields references to the datasets found in `data_dir`.
 
@@ -207,6 +226,8 @@ def list_datasets_in_data_dir(
     namespace: optional namespace to which this data dir belongs.
     include_configs: whether to list what configs are available.
     include_versions: whether to list what versions are available.
+    include_old_tfds_version: include datasets that have been generated with
+      TFDS before 4.0.0.
 
   Yields:
     references to the datasets found in `data_dir`. The references include the
@@ -222,7 +243,8 @@ def list_datasets_in_data_dir(
           dataset_name=dataset_dir.name,
           dataset_dir=dataset_dir,
           namespace=namespace,
-          include_versions=include_versions)
+          include_versions=include_versions,
+          include_old_tfds_version=include_old_tfds_version)
     else:
       yield naming.DatasetReference(
           dataset_name=dataset_dir.name, namespace=namespace, data_dir=data_dir)
