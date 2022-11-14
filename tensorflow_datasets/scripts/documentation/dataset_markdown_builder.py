@@ -16,7 +16,6 @@
 """Dataset catalog documentation template.
 
 Displayed in https://www.tensorflow.org/datasets/catalog/.
-
 """
 
 import abc
@@ -49,7 +48,6 @@ class Block(str):
 
   <block>
   ```
-
   """
   pass
 
@@ -59,7 +57,6 @@ class IntentedBlock(Block):
 
   By default, blocks are stripped to correctly remove extra end-line & cie.
   Intented block will keep the returned formatting.
-
   """
 
 
