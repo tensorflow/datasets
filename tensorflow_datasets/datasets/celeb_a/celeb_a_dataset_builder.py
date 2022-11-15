@@ -55,7 +55,7 @@ ATTR_HEADINGS = (
 ).split()
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
   VERSION = tfds.core.Version("2.0.1")

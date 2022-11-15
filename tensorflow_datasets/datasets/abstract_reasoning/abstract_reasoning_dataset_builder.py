@@ -94,7 +94,7 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
     self.split_type = split_type
 
 
-class Builder(tfds.core.BeamBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.BeamBasedBuilder):
   """Abstract reasoning dataset."""
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Data can be downloaded from

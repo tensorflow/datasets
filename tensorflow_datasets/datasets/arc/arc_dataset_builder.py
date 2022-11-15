@@ -42,7 +42,7 @@ class ARCConfig(tfds.core.BuilderConfig):
     self.download_url = "{}zipball/{}".format(_BASE_URL, self.commit)
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """The Abstraction and Reasoning Corpus (ARC)."""
 
   BUILDER_CONFIGS = [

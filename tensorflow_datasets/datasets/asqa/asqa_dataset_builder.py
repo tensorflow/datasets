@@ -75,7 +75,7 @@ def _features():
   })
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for asqa dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

@@ -74,7 +74,7 @@ _DOWNLOAD_URLS = {
 }
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for assin2 dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

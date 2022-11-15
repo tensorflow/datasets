@@ -64,7 +64,7 @@ def document_single_builder_fn(tmp_path):
 def test_document_datasets():
   all_docs = list(
       document_datasets.iter_documentation_builders(
-          # Builder with and without config, as well as ConfigBasedBuilder.
+          # Builder with and without config, as well as config-based builder.
           datasets=['mnist', 'coco', 'pass'],
           doc_util_paths=doc_utils.DocUtilPaths(
               fig_base_path=None,

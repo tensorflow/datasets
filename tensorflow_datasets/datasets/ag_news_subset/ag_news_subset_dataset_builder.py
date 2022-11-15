@@ -27,7 +27,7 @@ _DOWNLOAD_URL = "https://drive.google.com/uc?export=download&id=0Bz8a_Dbh9QhbUDN
 _LABEL_NAMES = ["World", "Sports", "Business", "Sci/Tech"]
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """This is a dataset for classifying news articles into 4 classes."""
 
   VERSION = tfds.core.Version("1.0.0")

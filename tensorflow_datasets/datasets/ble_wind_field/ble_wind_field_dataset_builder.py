@@ -29,7 +29,7 @@ class BLEWindFieldConfig(tfds.core.BuilderConfig):
   num_fields: Optional[int] = None
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for the ble_wind_field dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

@@ -37,7 +37,7 @@ class BuccConfig(tfds.core.BuilderConfig):
     self.language = language
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for bucc dataset."""
   BUILDER_CONFIGS = [
       BuccConfig(  # pylint: disable=g-complex-comprehension

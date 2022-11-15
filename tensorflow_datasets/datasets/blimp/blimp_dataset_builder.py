@@ -44,7 +44,7 @@ class BlimpConfig(tfds.core.BuilderConfig):
         **kwargs)
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Minimal grammatical and ungrammatical pairs of 67 linguistic paradigms."""
 
   all_paradigms = [

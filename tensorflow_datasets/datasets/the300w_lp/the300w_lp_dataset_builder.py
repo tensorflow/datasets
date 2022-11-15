@@ -26,7 +26,7 @@ _DATASET_URL = "https://drive.google.com/uc?export=download&id=0B7OEHD3T4eCkVGs0
 _PROJECT_URL = "http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm"
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """300W-LP dataset."""
 
   VERSION = tfds.core.Version("1.0.0")

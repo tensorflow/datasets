@@ -45,7 +45,7 @@ def _get_table_from_mr(mr):
   return mr_as_table
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """MR in the restaurant domain and target utterances describing it."""
 
   VERSION = tfds.core.Version('0.1.0')

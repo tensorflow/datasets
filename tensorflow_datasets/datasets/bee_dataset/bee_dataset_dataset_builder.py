@@ -38,7 +38,7 @@ class BeeDatasetConfig(tfds.core.BuilderConfig):
     self.depth = 3
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for BeeDataset dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

@@ -27,7 +27,7 @@ _VALID_DATA_FILENAME = "binarized_mnist_valid.amat"
 _TEST_DATA_FILENAME = "binarized_mnist_test.amat"
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """A specific binarization of the MNIST dataset."""
 
   VERSION = tfds.core.Version("1.0.0")

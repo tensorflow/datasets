@@ -53,7 +53,7 @@ class BooksumConfig(tfds.core.BuilderConfig):
     self.granularity = granularity
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Booksum dataset builder."""
 
   VERSION = tfds.core.Version("1.0.0")

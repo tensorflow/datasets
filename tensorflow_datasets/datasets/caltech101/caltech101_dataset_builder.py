@@ -30,7 +30,7 @@ _URL = "https://drive.google.com/uc?export=download&id=137RyRjvTBkBiIfeYBNZBtViD
 _TRAIN_POINTS_PER_CLASS = 30
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Caltech-101."""
 
   VERSION = tfds.core.Version("3.0.1")

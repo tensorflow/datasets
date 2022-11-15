@@ -89,7 +89,7 @@ class CityscapesConfig(tfds.core.BuilderConfig):
         self.ignored_ids.add('troisdorf_000000_000073')
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Base class for Cityscapes datasets."""
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\

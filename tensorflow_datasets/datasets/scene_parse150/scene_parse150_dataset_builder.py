@@ -28,7 +28,7 @@ _TRAIN_URL = {
 }
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """MIT Scene Parsing Benchmark dataset."""
 
   VERSION = tfds.core.Version("1.0.0")

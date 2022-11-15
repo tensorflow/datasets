@@ -73,7 +73,7 @@ def _make_builder_configs():
   return configs
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Frames Labeled In Cinema (FLIC)."""
 
   BUILDER_CONFIGS = _make_builder_configs()

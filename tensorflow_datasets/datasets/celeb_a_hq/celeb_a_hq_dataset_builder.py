@@ -46,7 +46,7 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
     self.file_name = "data%dx%d.tar" % (resolution, resolution)
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Celeba_HQ Dataset."""
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
