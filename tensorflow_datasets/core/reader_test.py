@@ -128,8 +128,7 @@ class ReaderTest(testing.TestCase):
 
     if not _SKIP_CARDINALITY_TEST:
       # Check that the cardinality is correctly set.
-      self.assertEqual(
-          tf.data.experimental.cardinality(ds).numpy(), len(read_data))
+      self.assertEqual(ds.cardinality().numpy(), len(read_data))
 
   def test_overlap(self):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
@@ -142,8 +141,7 @@ class ReaderTest(testing.TestCase):
 
     if not _SKIP_CARDINALITY_TEST:
       # Check that the cardinality is correctly set.
-      self.assertEqual(
-          tf.data.experimental.cardinality(ds).numpy(), len(read_data))
+      self.assertEqual(ds.cardinality().numpy(), len(read_data))
 
   def test_complex(self):
     train_info = self._write_tfrecord('train', 5, 'abcdefghijkl')
@@ -162,8 +160,7 @@ class ReaderTest(testing.TestCase):
 
     if not _SKIP_CARDINALITY_TEST:
       # Check that the cardinality is correctly set.
-      self.assertEqual(
-          tf.data.experimental.cardinality(ds).numpy(), len(read_data))
+      self.assertEqual(ds.cardinality().numpy(), len(read_data))
 
   def test_shuffle_files(self):
     chars = 'abcdefghijkl'
