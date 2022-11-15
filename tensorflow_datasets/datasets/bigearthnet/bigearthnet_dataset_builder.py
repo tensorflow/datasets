@@ -79,7 +79,7 @@ class BigearthnetConfig(tfds.core.BuilderConfig):
     self.selection = selection
 
 
-class Builder(tfds.core.BeamBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.BeamBasedBuilder):
   """Bigearthnet remote sensing dataset of Sentinel-2 image patches."""
 
   BUILDER_CONFIGS = [

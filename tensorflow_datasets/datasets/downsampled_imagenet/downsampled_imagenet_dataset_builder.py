@@ -39,7 +39,7 @@ class DownsampledImagenetConfig(tfds.core.BuilderConfig):
     self.data = data
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Downsampled Imagenet dataset."""
 
   BUILDER_CONFIGS = [

@@ -32,7 +32,7 @@ _CLASS_LABELS = [
 ]
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Blood Cell Count and Detection Dataset."""
 
   VERSION = tfds.core.Version("1.0.0")

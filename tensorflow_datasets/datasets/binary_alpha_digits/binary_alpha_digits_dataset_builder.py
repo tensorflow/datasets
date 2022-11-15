@@ -32,7 +32,7 @@ _NAMES = [
 ]
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Binary alphadigits dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

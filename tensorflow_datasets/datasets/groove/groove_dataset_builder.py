@@ -74,7 +74,7 @@ class GrooveConfig(tfds.core.BuilderConfig):
     self.audio_rate = audio_rate
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """The Groove MIDI Dataset (GMD) of drum performances."""
 
   BUILDER_CONFIGS = [

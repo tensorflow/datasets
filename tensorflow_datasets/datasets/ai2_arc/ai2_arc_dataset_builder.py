@@ -38,7 +38,7 @@ class Ai2ArcConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version("1.0.0"), **kwargs)
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """The AI2 ARC dataset."""
 
   BUILDER_CONFIGS = [

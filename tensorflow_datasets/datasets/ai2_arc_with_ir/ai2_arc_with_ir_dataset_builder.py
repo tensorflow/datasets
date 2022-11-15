@@ -42,7 +42,7 @@ class Ai2ArcWithIRConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version("1.0.0"), **kwargs)
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """The AI2 ARC dataset with Information Retrieval.
 
   Compared to the normal AI2 corpus, this adds a paragraph containing retrieved

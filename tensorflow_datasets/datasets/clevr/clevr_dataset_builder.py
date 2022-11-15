@@ -27,7 +27,7 @@ _BASE_URL = "https://cs.stanford.edu/people/jcjohns/clevr/"
 _DOWNLOAD_URL = "https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip"
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """CLEVR dataset."""
 
   VERSION = tfds.core.Version("3.1.0")

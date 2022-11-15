@@ -24,7 +24,7 @@ import tensorflow_datasets.public_api as tfds
 URL = 'https://raw.githubusercontent.com/pymc-devs/pymc-examples/main/examples/data/efron-morris-75-data.tsv'
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for efron_morris_75 dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

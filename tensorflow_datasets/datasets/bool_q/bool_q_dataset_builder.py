@@ -29,7 +29,7 @@ _TRAIN_DOWNLOAD_URL = "https://storage.googleapis.com/boolq/train.jsonl"
 _VALIDATION_DOWNLOAD_URL = "https://storage.googleapis.com/boolq/dev.jsonl"
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """The Bool Q dataset."""
 
   VERSION = tfds.core.Version("1.0.0")

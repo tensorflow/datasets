@@ -37,7 +37,7 @@ _OBJECT_IDS = [f"obj{str(x)}" for x in range(1, 101)]
 _IMAGE_SHAPE = (128, 128, 3)
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """COIL-100 Image Dataset Class."""
 
   VERSION = tfds.core.Version("2.0.0")

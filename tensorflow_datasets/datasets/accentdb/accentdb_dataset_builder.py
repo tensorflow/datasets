@@ -30,7 +30,7 @@ _LABELS = [
 _DOWNLOAD_URL = 'https://drive.google.com/uc?export=download&id=1NO1NKQSpyq3DMLEwiqA-BHIqXli8vtIL'
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """AccentDB dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

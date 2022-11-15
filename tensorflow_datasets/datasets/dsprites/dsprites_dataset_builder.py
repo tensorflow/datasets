@@ -24,7 +24,7 @@ _URL = ("https://github.com/deepmind/dsprites-dataset/blob/master/"
         "dsprites_ndarray_co1sh3sc6or40x32y32_64x64.hdf5?raw=true")
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """dSprites data set."""
 
   VERSION = tfds.core.Version("2.0.0")

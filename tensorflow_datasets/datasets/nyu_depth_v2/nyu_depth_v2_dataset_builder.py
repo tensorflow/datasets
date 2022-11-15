@@ -24,7 +24,7 @@ import tensorflow_datasets.public_api as tfds
 _URL = 'http://datasets.lids.mit.edu/fastdepth/data/nyudepthv2.tar.gz'
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """NYU Depth V2 Dataset."""
 
   VERSION = tfds.core.Version('0.0.1')

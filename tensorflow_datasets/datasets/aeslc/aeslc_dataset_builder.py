@@ -27,7 +27,7 @@ _DOCUMENT = "email_body"
 _SUMMARY = "subject_line"
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Annotated Enron Subject Line Corpus Dataset."""
 
   VERSION = tfds.core.Version("1.0.0")

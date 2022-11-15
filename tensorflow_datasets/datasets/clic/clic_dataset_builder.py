@@ -28,7 +28,7 @@ CLIC_MOBILE_TEST = 'https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Mobile_
 CLIC_PROFESSIONAL_TEST = 'https://data.vision.ee.ethz.ch/cvl/clic/test/CLIC2020Professional_test.zip'
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """CLIC dataset."""
 
   # We set the version based on the conference year. The 3rd CLIC was held in

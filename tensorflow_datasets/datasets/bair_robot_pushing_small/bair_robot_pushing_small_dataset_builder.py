@@ -34,7 +34,7 @@ FRAMES_PER_VIDEO = 30
 IMG_SHAPE = (64, 64, 3)
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
   VERSION = tfds.core.Version("2.0.0")

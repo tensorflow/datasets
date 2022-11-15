@@ -74,7 +74,7 @@ class AmazonUSReviewsConfig(tfds.core.BuilderConfig):
     self.data = data
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """AmazonUSReviews dataset."""
 
   BUILDER_CONFIGS = [

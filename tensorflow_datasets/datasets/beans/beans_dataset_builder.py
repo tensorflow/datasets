@@ -29,7 +29,7 @@ _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
 _LABELS = ["angular_leaf_spot", "bean_rust", "healthy"]
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Beans plant leaf images dataset."""
 
   VERSION = tfds.core.Version("0.1.0")

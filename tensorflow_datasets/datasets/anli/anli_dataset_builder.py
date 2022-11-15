@@ -42,7 +42,7 @@ class AnliConfig(tfds.core.BuilderConfig):
     self.round_dir = round_dir
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """ANLI: Adversarial NLI corpus."""
 
   BUILDER_CONFIGS = [

@@ -56,7 +56,7 @@ class LostAndFoundConfig(tfds.core.BuilderConfig):
     self.right_image_string = 'rightImg{}bit'.format('16' if use_16bit else '8')
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Lost and Found Road Hazard Dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

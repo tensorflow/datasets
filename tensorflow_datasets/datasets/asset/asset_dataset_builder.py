@@ -48,7 +48,7 @@ _URL_LIST += [
 _URLs = dict(_URL_LIST)
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for asset dataset."""
 
   VERSION = tfds.core.Version('1.0.0')

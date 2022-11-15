@@ -69,7 +69,7 @@ class BigPatentConfig(tfds.core.BuilderConfig):
     self.cpc_codes = cpc_codes
 
 
-class Builder(tfds.core.BeamBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.BeamBasedBuilder):
   """BigPatent datasets."""
 
   BUILDER_CONFIGS = [

@@ -86,7 +86,7 @@ def _make_builder_configs():
   return configs
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DIV2K dataset: DIVerse 2K resolution high quality images."""
 
   BUILDER_CONFIGS = _make_builder_configs()

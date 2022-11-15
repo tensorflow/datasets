@@ -31,7 +31,7 @@ _URLS = {
 }
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for pass dataset."""
 
   VERSION = tfds.core.Version('3.0.0')

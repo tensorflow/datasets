@@ -26,7 +26,6 @@ from typing import Any, Dict, Iterator, List, Optional, Text, Type
 
 from absl import logging
 import tensorflow_datasets as tfds
-from tensorflow_datasets.core import config_based_builder
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.scripts.documentation import collection_markdown_builder
 from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
@@ -219,20 +218,20 @@ def _get_sections(builder_cls: Type[tfds.core.DatasetBuilder]) -> List[Text]:
   module_parts = builder_cls.__module__.split('.')
   if module_parts[0] != 'tensorflow_datasets':
     raise AssertionError(f'Unexpected builder {builder_cls}: module')
-  if issubclass(builder_cls, config_based_builder.ConfigBasedBuilder):
-    # Sections are inferred from tags.
-    ds_metadata = builder_cls.get_metadata()
-    if ds_metadata.tags:
-      sections = []
-      for tag in ds_metadata.tags:
-        section = tag.rsplit('.')[-1]
-        section = section.replace('-', ' ')
-        sections.append(section)
-      return sections
-    return ['uncategorized']
-  # One single section is inferred from module path.
+  # Legacy datasets: a single section, inferred from module path.
   _, category, *_ = module_parts  # tfds.<category>.xyz
-  return [category]
+  if category != 'datasets':
+    return [category]
+  # Sections are inferred from tags.
+  ds_metadata = builder_cls.get_metadata()
+  if ds_metadata.tags:
+    sections = []
+    for tag in ds_metadata.tags:
+      section = tag.rsplit('.')[-1]
+      section = section.replace('-', ' ')
+      sections.append(section)
+    return sections
+  return ['uncategorized']
 
 
 def _document_single_collection(name: str,) -> CollectionDocumentation:

@@ -23,7 +23,7 @@ import tensorflow_datasets.public_api as tfds
 _URL = ("https://storage.googleapis.com/3d-shapes/3dshapes.h5")
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """Shapes3d data set."""
 
   VERSION = tfds.core.Version("2.0.0")

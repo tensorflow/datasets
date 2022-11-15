@@ -27,7 +27,7 @@ _DOCUMENT = "text"
 _SUMMARY = "summary"
 
 
-class Builder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """BillSum Dataset."""
 
   # 2.0.0 data source updated to filter near duplicates.
