@@ -25,7 +25,7 @@ from typing import Mapping
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_BASE_DOWNLOAD_URL = 'https://tfds-mrtydi.s3.ca-central-1.amazonaws.com/mmarco/en.zip'
+_BASE_DOWNLOAD_URL = 'https://tfds-mrtydi.s3.ca-central-1.amazonaws.com/mmarco/'
 
 
 class MrTydiConfig(tfds.core.BuilderConfig):
@@ -66,6 +66,98 @@ class MrTydiBuilder(tfds.core.GeneratorBasedBuilder, tfds.core.ConfigBasedBuilde
         MrTydiConfig(
             'mmarco-en',
             download_url=f'{_BASE_DOWNLOAD_URL}/en.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-ar',
+            download_url=f'{_BASE_DOWNLOAD_URL}/ar.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-de',
+            download_url=f'{_BASE_DOWNLOAD_URL}/de.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-es',
+            download_url=f'{_BASE_DOWNLOAD_URL}/es.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-fr',
+            download_url=f'{_BASE_DOWNLOAD_URL}/fr.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-hi',
+            download_url=f'{_BASE_DOWNLOAD_URL}/hi.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-id',
+            download_url=f'{_BASE_DOWNLOAD_URL}/id.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-it',
+            download_url=f'{_BASE_DOWNLOAD_URL}/it.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-ja',
+            download_url=f'{_BASE_DOWNLOAD_URL}/ja.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-nl',
+            download_url=f'{_BASE_DOWNLOAD_URL}/nl.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-pt',
+            download_url=f'{_BASE_DOWNLOAD_URL}/pt.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-ru',
+            download_url=f'{_BASE_DOWNLOAD_URL}/ru.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-vi',
+            download_url=f'{_BASE_DOWNLOAD_URL}/vi.zip',
+            qrel_splits={
+                'train': 'train.tsv',
+                'validation': 'dev.tsv',
+                'test': 'test.tsv'
+            }),
+        MrTydiConfig(
+            'mmarco-zh',
+            download_url=f'{_BASE_DOWNLOAD_URL}/zh.zip',
             qrel_splits={
                 'train': 'train.tsv',
                 'validation': 'dev.tsv',
