@@ -249,7 +249,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     self._version = self._pick_version(version)
     # Compute the base directory (for download) and dataset/version directory.
     self._data_dir_root, self._data_dir = self._build_data_dir(data_dir)
-    if tf.io.gfile.exists(self._data_dir):
+    if self.data_path.exists():
       self.info.read_from_directory(self._data_dir)
     else:  # Use the code version (do not restore data)
       self.info.initialize_from_bucket()
@@ -384,7 +384,7 @@ class DatasetBuilder(registered.RegisteredDataset):
   @classmethod
   @functools.lru_cache(maxsize=None)
   def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
-    """Load `UrlInfo` from the given path."""
+    """Returns all URLs and their `UrlInfo`s that are used by this dataset."""
     # Note: If the dataset is downloaded with `record_checksums=True`, urls
     # might be updated but `url_infos` won't as it is memoized.
 
@@ -463,7 +463,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     """
 
     download_config = download_config or download.DownloadConfig()
-    data_exists = tf.io.gfile.exists(self._data_dir)
+    data_exists = self.data_path.exists()
     if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
@@ -471,7 +471,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       logging.info("Deleting pre-existing dataset %s (%s)", self.name,
                    self._data_dir)
       epath.Path(self._data_dir).rmtree()  # Delete pre-existing data.
-      data_exists = tf.io.gfile.exists(self._data_dir)
+      data_exists = self.data_path.exists()
 
     if self.version.tfds_version_to_prepare:
       available_to_prepare = ", ".join(
@@ -671,7 +671,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
     # pylint: enable=line-too-long
-    if not tf.io.gfile.exists(self._data_dir):
+    if not self.data_path.exists():
       raise AssertionError(
           ("Dataset %s: could not find data in %s. Please make sure to call "
            "dataset_builder.download_and_prepare(), or pass download=True to "
