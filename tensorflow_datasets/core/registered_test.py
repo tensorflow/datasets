@@ -26,6 +26,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
 
 
 class EmptyDatasetBuilder(registered.RegisteredDataset):
@@ -259,6 +260,11 @@ def test_custom_name():
 
   assert "custom_name" == SomeCustomNameBuilder.name
   assert "custom_name" in load.list_builders()
+
+
+def test_name_inferred_from_pkg():
+  ds_builder = dummy_ds_1_dataset_builder.Builder()
+  assert ds_builder.name == "dummy_ds_1"
 
 
 class ConfigBasedBuildersTest(testing.TestCase):

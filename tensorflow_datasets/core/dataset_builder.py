@@ -31,6 +31,7 @@ from absl import logging
 from etils import epath
 import six
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import dataset_metadata
 from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
@@ -103,6 +104,21 @@ class BuilderConfig:
     )
 
 
+def _get_builder_datadir_path(builder_cls: Type[Any]) -> epath.Path:
+  """Returns the path to ConfigBuilder data dir.
+
+  Args:
+    builder_cls: a Builder class.
+
+  Returns:
+    The path to directory where the config data files of `builders_cls` can be
+    read from. e.g. "/usr/lib/[...]/tensorflow_datasets/datasets/foo".
+  """
+  pkg_names = builder_cls.__module__.split(".")
+  # -1 to remove the xxx.py python file.
+  return epath.resource_path(pkg_names[0]).joinpath(*pkg_names[1:-1])
+
+
 class DatasetBuilder(registered.RegisteredDataset):
   """Abstract base class for all datasets.
 
@@ -171,6 +187,31 @@ class DatasetBuilder(registered.RegisteredDataset):
   # Optional max number of simultaneous downloads. Setting this value will
   # override download config settings if necessary.
   MAX_SIMULTANEOUS_DOWNLOADS: Optional[int] = None
+
+  # If not set, pkg_dir_path is inferred. However, if user of class knows better
+  # then this can be set directly before init, to avoid heuristic inferences.
+  # Example: `imported_builder_cls` function in `registered.py` module sets it.
+  pkg_dir_path: Optional[epath.Path] = None
+
+  @classmethod
+  def _get_pkg_dir_path(cls) -> epath.Path:
+    """Returns class pkg_dir_path, infer it first if not set."""
+    # We use cls.__dict__.get to check whether `pkg_dir_path` attribute has been
+    # set on the class, and not on a parent class. If we were accessing the
+    # attribute directly, a dataset Builder inheriting from another would read
+    # its metadata from its parent directory (which would be wrong).
+    if cls.__dict__.get("pkg_dir_path") is None:
+      cls.pkg_dir_path = _get_builder_datadir_path(cls)
+    return cls.pkg_dir_path
+
+  @classmethod
+  def get_metadata(cls) -> dataset_metadata.DatasetMetadata:
+    """Returns metadata (README, CITATIONS, ...) specified in config files.
+
+    The config files are read from the same package where the DatasetBuilder has
+    been defined, so those metadata might be wrong for legacy builders.
+    """
+    return dataset_metadata.load(cls._get_pkg_dir_path())
 
   @tfds_logging.builder_init()
   def __init__(
@@ -833,6 +874,22 @@ class DatasetBuilder(registered.RegisteredDataset):
         f"to {self._data_dir}...",
         attrs=["bold"],
     )
+
+  def dataset_info_from_configs(self, **kwargs):
+    """Returns the DatasetInfo using given kwargs and config files.
+
+    Sub-class should call this and add information not present in config files
+    using kwargs directly passed to tfds.core.DatasetInfo object.
+
+    Args:
+      **kwargs: kw args to pass to DatasetInfo directly.
+    """
+    metadata = self.get_metadata()
+    return dataset_info.DatasetInfo(
+        builder=self,
+        description=metadata.description,
+        citation=metadata.citation,
+        **kwargs)
 
   @abc.abstractmethod
   @utils.docs.doc_private
