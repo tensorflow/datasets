@@ -154,7 +154,7 @@ def imported_dataset_collection_cls(
 class RegisteredDataset(abc.ABC):
   """Subclasses will be registered and given a `name` property."""
 
-  # Name of the dataset, automatically filled.
+  # Name of the dataset, automatically filled if not already set.
   name: ClassVar[str]
 
 
@@ -164,7 +164,16 @@ class RegisteredDataset(abc.ABC):
     # Set the name if the dataset does not define it.
     # Use __dict__ rather than getattr so subclasses are not affected.
     if not cls.__dict__.get('name'):
-      cls.name = naming.camelcase_to_snakecase(cls.__name__)
+      if cls.__name__ == 'Builder':
+        # Config-based builders should be defined with a class named "Builder".
+        # In such a case, the builder name is extracted from the package name:
+        # 1 package = 1 dataset!.
+        module_path_components = cls.__module__.rsplit('.', 2)
+        if len(module_path_components) != 3:
+          raise AssertionError(f'module path is too short: {cls.__module__}')
+        cls.name = module_path_components[1]
+      else:  # Legacy builders.
+        cls.name = naming.camelcase_to_snakecase(cls.__name__)
 
     is_abstract = inspect.isabstract(cls)
 

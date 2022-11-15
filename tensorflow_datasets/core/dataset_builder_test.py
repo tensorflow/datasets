@@ -23,6 +23,7 @@ from unittest import mock
 from absl.testing import parameterized
 
 import dill
+from etils import epath
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -37,6 +38,7 @@ from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.core.utils import read_config as read_config_lib
+from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
 
 DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
@@ -94,6 +96,39 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
   def _split_generators(self, _):
     # Error: ALL cannot be used as Split key
     return {"all": self._generate_examples(range(5))}
+
+
+class GetBuilderDatadirPathTest(testing.TestCase):
+
+  def test_builder_data_dir_path_is_correct(self):
+    with mock.patch.object(
+        epath, "resource_path", return_value=epath.Path("/base/path")):
+      path = dataset_builder._get_builder_datadir_path(
+          dummy_ds_1_dataset_builder.Builder)
+    self.assertEqual(
+        os.fspath(path),
+        "/base/path/testing/dummy_config_based_datasets/dummy_ds_1")
+
+
+class ConfigBasedBuilderTest(testing.TestCase):
+
+  def test_get_metadata(self):
+    builder_cls = dummy_ds_1_dataset_builder.Builder()
+    metadata = builder_cls.get_metadata()
+    self.assertEqual(metadata.tags, ["content.data-type.image"])
+
+  def test_dummy_ds_1_read_from_config(self):
+    ds_builder = dummy_ds_1_dataset_builder.Builder()
+    info = ds_builder._info()
+    self.assertEqual(info.description,
+                     "Description of `dummy_ds_1` dummy config-based dataset.")
+    self.assertEqual(
+        info.citation, """@Article{google22tfds,
+author = "The TFDS team",
+title = "TFDS: a collection of ready-to-use datasets for use with TensorFlow, Jax, and other Machine Learning frameworks.",
+journal = "ML gazette",
+year = "2022"
+}""")
 
 
 class DatasetBuilderTest(testing.TestCase):

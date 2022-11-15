@@ -47,8 +47,8 @@ def load(pkg_path: epath.Path) -> DatasetMetadata:
   raw_metadata = _read_files(pkg_path)
   tags = [t for t in raw_metadata.get(TAGS_FILENAME, "").split("\n") if t]
   return DatasetMetadata(
-      description=raw_metadata[DESCRIPTIONS_FILENAME],
-      citation=raw_metadata[CITATIONS_FILENAME],
+      description=raw_metadata.get(DESCRIPTIONS_FILENAME, None),
+      citation=raw_metadata.get(CITATIONS_FILENAME, None),
       tags=tags,
   )
 
