@@ -174,11 +174,9 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
                 c4_wsrs_utils.reverse_substitution,
                 self.builder_config.subsitution_rate,
                 self.builder_config.min_snippet_token_len)
-            | 'GroupBySubstitution' >> beam.GroupByKey()
-            | 'SampleSnippetsBySubstitution' >> beam.FlatMap(
+            | 'GroupByRarestSubstitution' >> beam.GroupByKey()
+            | 'SampleSnippetsByRarestSubstitution' >> beam.FlatMap(
                 c4_wsrs_utils.sample_snippets_by_substitution,
                 self.builder_config.num_snippets_per_substitution)
             | 'ReshuffleSnippets2' >> beam.Reshuffle()
-            |
-            'RemoveDuplicates' >> beam.CombinePerKey(lambda vs: next(iter(vs)))
             | 'ProcessExamples' >> beam.Map(_process_example))
