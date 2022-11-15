@@ -20,8 +20,12 @@ import collections
 import dataclasses
 import random
 import re
-from typing import Iterator, Mapping, Sequence
+from typing import Iterator, Mapping, Sequence, Tuple
 import numpy as np
+
+# Type annotations.
+AbbrevExpansionPair = Tuple[str, str]
+
 
 FREQUENT_EXPANSIONS = frozenset([
     'and', 'by', 'with', 'home', 'year', 'years', 'great', 'two', 'well',
@@ -85,7 +89,7 @@ def create_word_finder_regex(words: Sequence[str]) -> re.Pattern[str]:
 
 def _get_abbreviation_expansion_pairs(
     snippet: str, abbreviations_by_expansion: Mapping[str, Sequence[str]],
-    expansion_regex: re.Pattern[str]) -> dict[int, tuple[str, str]]:
+    expansion_regex: re.Pattern[str]) -> dict[int, AbbrevExpansionPair]:
   """Extracts possible abbreviation-expansion pairs from a snippet."""
   index_to_pair = {}
   for match in expansion_regex.finditer(snippet):
@@ -104,7 +108,8 @@ def extract_snippets(
     max_snippet_char_len: int,
     alpha_keep_no_rs: float,
     alpha_keep_rs: float,
-) -> Iterator[tuple[str, tuple[str, Mapping[int, tuple[str, str]]]]]:
+) -> Iterator[tuple[str, tuple[str, AbbrevExpansionPair, Mapping[
+    int, AbbrevExpansionPair]]]]:
   """Extracts variable-length multi-sentence snippets from C4 web text.
 
   Determines whether to keep or discard snippets based on the number of snippets
@@ -134,9 +139,9 @@ def extract_snippets(
 
   Yields:
     A key-value tuple where the key is a string containing the document url and
-    incremental snippet id, and the value is a 2-tuple containing the snippet
-    and a mapping from snippet index to reverse-substitution candidate for that
-    index.
+    incremental snippet id, and the value is a 3-tuple containing the snippet,
+    the rarest abbreviation-expansion substitution candidate in the snippet, and
+    a mapping from snippet index to each substitution candidate.
   """
   count_by_pair = collections.Counter()
   text = c4_doc['text'].decode()
@@ -161,28 +166,38 @@ def extract_snippets(
     index_to_pair = _get_abbreviation_expansion_pairs(
         snippet, abbreviations_by_expansion, expansion_regex)
     if index_to_pair:
-      pair_counts = [
-          count_by_pair[pair] + (8 if pair[1] in FREQUENT_EXPANSIONS else 0)
-          for pair in index_to_pair.values()
-      ]
-      mincount = np.min(pair_counts)
-      sample_prob = _get_backoff_prob(mincount, alpha=alpha_keep_rs)
+      smallest_count, rarest_pair = None, None
+      for pair in index_to_pair.values():
+        if pair[1] in FREQUENT_EXPANSIONS:
+          continue
+        count = count_by_pair[pair]
+        if smallest_count is None or count < smallest_count:
+          smallest_count = count
+          rarest_pair = pair
+      sample_prob = (
+          _get_backoff_prob(smallest_count, alpha=alpha_keep_rs)
+          if smallest_count is not None else 0.)
       if np.random.uniform() >= sample_prob:
         continue
+      # Count should only be increased if snippet is sampled.
       for pair in index_to_pair.values():
         count_by_pair[pair] += 1
     else:
+      rarest_pair = ('', '')
+      index_to_pair = {0: ('', '')}
       count = count_by_pair[('', '')]
-      sample_prob = _get_backoff_prob(count, alpha=alpha_keep_no_rs)
+      sample_prob = _get_backoff_prob(count + 100, alpha=alpha_keep_no_rs)
       if np.random.uniform() >= sample_prob:
         continue
       count_by_pair[('', '')] += 1
-    yield key, (snippet, index_to_pair)
+
+    yield key, (snippet, rarest_pair, index_to_pair)
 
 
-def _reverse_substitute_snippet(
-    snippet: str, index_to_pair: Mapping[int, tuple[str, str]],
-    substitution_rate: float) -> tuple[str, list[tuple[str, str]]]:
+def _reverse_substitute_snippet(snippet: str,
+                                index_to_pair: Mapping[int,
+                                                       AbbrevExpansionPair],
+                                substitution_rate: float) -> str:
   """Reverse substitutes a snippet, swapping expansions for abbreviations.
 
   For each candidate abbreviation, its abbreviation is sampled using the
@@ -196,65 +211,60 @@ def _reverse_substitute_snippet(
       abbreviations.
 
   Returns:
-    A 2-tuple of the abbreviated snippet and a list of all
-    abbreviation-expansion substitutions that were made.
+    The abbreviated snippet.
   """
   abbreviated_snippet = ''
-  substitutions = []
   for index, (abbrev, expansion) in sorted(index_to_pair.items(), reverse=True):
     if np.random.uniform() >= substitution_rate:
       continue
     abbreviated_snippet = (
         abbrev + snippet[index + len(expansion):] + abbreviated_snippet)
     snippet = snippet[:index]
-    substitutions.append((abbrev, expansion))
   abbreviated_snippet = snippet + abbreviated_snippet
-  return abbreviated_snippet, substitutions
+  return abbreviated_snippet
 
 
 def reverse_substitution(
-    element: tuple[str, tuple[str, Mapping[int, tuple[str, str]]]],
+    element: tuple[str, tuple[str, AbbrevExpansionPair,
+                              Mapping[int, AbbrevExpansionPair]]],
     substitution_rate: float, min_snippet_token_len: int
-) -> Iterator[tuple[tuple[str, str], tuple[str, WSRSFeatures]]]:
+) -> Iterator[tuple[AbbrevExpansionPair, tuple[str, WSRSFeatures]]]:
   """Conducts reverse substitution.
 
   Yields one WSRSFeatures obj per unique replacement.
 
   Args:
-    element: A key-value tuple containing the url as the key, and a 2-tuple as
-      the value containing the snippet extracted from the c4 doc and a mapping
-      from snippet index to abbreviation-expansion substitution candidate.
+    element: A key-value tuple containing the url as the key, and a 3-tuple as
+      the value containing the snippet extracted from the c4 doc, the rarest
+      abbreviation-expansion substitution candidate in the snippet, and a
+      mapping from snippet index to each substitution candidate.
     substitution_rate: The rate at which expansions should be substituted for
       abbreviations.
     min_snippet_token_len: The minimum number of tokens an abbreviated snippet
       can be composed of.
 
   Yields:
-    A key-value tuple in which the key is a tuple containing the
-    abbreviation-expansion pair replacement, and the value is a tuple containing
-    the original key and a WSRSFeatures object holding the extracted snippet and
-    its abbreviated form.
+    A key-value tuple in which the key is a tuple containing the rarest
+    abbreviation-expansion pair replacement for that snippet, and the value is a
+    tuple containing the original key and a WSRSFeatures object holding the
+    extracted snippet and its abbreviated form.
   """
-  key, (snippet, index_to_pair) = element
-  abbreviated_snippet, substitutions = snippet, []
+  key, (snippet, rarest_pair, index_to_pair) = element
+  abbreviated_snippet = snippet
   if index_to_pair:
-    abbreviated_snippet, substitutions = _reverse_substitute_snippet(
-        snippet, index_to_pair, substitution_rate)
+    abbreviated_snippet = _reverse_substitute_snippet(snippet, index_to_pair,
+                                                      substitution_rate)
   if len(abbreviated_snippet.split(' ')) < min_snippet_token_len:
     return
   features = WSRSFeatures()
   features.original_snippet = snippet
   features.abbreviated_snippet = abbreviated_snippet
-  if not substitutions:
-    yield ('', ''), (key, features)
-  for substitution in set(substitutions):
-    if substitution[1] in FREQUENT_EXPANSIONS:
-      continue
-    yield substitution, (key, features)
+
+  yield rarest_pair, (key, features)
 
 
 def sample_snippets_by_substitution(
-    snippets_by_substitution: tuple[tuple[str, str],
+    snippets_by_substitution: tuple[AbbrevExpansionPair,
                                     Sequence[tuple[str, WSRSFeatures]]],
     num_snippets_per_substitution: int) -> Iterator[tuple[str, WSRSFeatures]]:
   """Samples a fixed number of snippets for each substitution pair."""

@@ -64,12 +64,13 @@ class C4WsrsUtilsTest(absltest.TestCase):
               alpha_keep_no_rs=0.,
               alpha_keep_rs=0.))
     self.assertEqual(results, [('url=test/url.com,snippet_id=0',
-                                ('the patient is in the emergency room.', {
-                                    4: ('pt', 'patient'),
-                                    22: ('er', 'emergency room')
-                                })),
+                                ('the patient is in the emergency room.',
+                                 ('pt', 'patient'), {
+                                     4: ('pt', 'patient'),
+                                     22: ('er', 'emergency room')
+                                 })),
                                ('url=test/url.com,snippet_id=1',
-                                ('the doctor just left.', {
+                                ('the doctor just left.', ('dr', 'doctor'), {
                                     4: ('dr', 'doctor')
                                 }))])
 
@@ -78,12 +79,11 @@ class C4WsrsUtilsTest(absltest.TestCase):
     index_to_pair = {4: ('pt', 'patient'), 22: ('er', 'emergency room')}
     result = c4_wsrs_utils._reverse_substitute_snippet(
         snippet, index_to_pair, substitution_rate=1.0)
-    self.assertEqual(result, ('the pt is in the er.', [('er', 'emergency room'),
-                                                       ('pt', 'patient')]))
+    self.assertEqual(result, 'the pt is in the er.')
 
   def test_reverse_substitution(self):
     element = ('url=test/url.com,snippet_id=0',
-               ('the patient is in the emergency room.', {
+               ('the patient is in the emergency room.', ('pt', 'patient'), {
                    4: ('pt', 'patient'),
                    22: ('er', 'emergency room')
                }))
@@ -95,8 +95,6 @@ class C4WsrsUtilsTest(absltest.TestCase):
         abbreviated_snippet='the pt is in the er.')
     self.assertSameElements(
         rs_results, [(('pt', 'patient'),
-                      ('url=test/url.com,snippet_id=0', expected_features)),
-                     (('er', 'emergency room'),
                       ('url=test/url.com,snippet_id=0', expected_features))])
 
 
