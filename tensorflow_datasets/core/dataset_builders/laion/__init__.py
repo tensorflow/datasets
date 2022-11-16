@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Vision and Language datasets."""
+"""Laion dataset builders."""
 
-from tensorflow_datasets.vision_language.gref import Gref
-from tensorflow_datasets.vision_language.grounded_scan import GroundedScan
-from tensorflow_datasets.vision_language.laion400m import Laion400m
-from tensorflow_datasets.vision_language.laion400m_emb import Laion400mEmb
-from tensorflow_datasets.vision_language.refcoco import RefCoco
-from tensorflow_datasets.vision_language.wit import Wit
-from tensorflow_datasets.vision_language.wit_kaggle import WitKaggle
+from tensorflow_datasets.core.dataset_builders.laion.laion400m_dataset_builder import Laion400mDatasetBuilder
+from tensorflow_datasets.core.dataset_builders.laion.laion400m_dataset_builder_utils import *

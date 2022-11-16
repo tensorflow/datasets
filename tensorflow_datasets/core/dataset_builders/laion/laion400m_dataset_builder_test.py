@@ -13,12 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Vision and Language datasets."""
+"""Tests for laion400m_dataset_builder."""
+from tensorflow_datasets.core.dataset_builders.laion import laion400m_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
-from tensorflow_datasets.vision_language.gref import Gref
-from tensorflow_datasets.vision_language.grounded_scan import GroundedScan
-from tensorflow_datasets.vision_language.laion400m import Laion400m
-from tensorflow_datasets.vision_language.laion400m_emb import Laion400mEmb
-from tensorflow_datasets.vision_language.refcoco import RefCoco
-from tensorflow_datasets.vision_language.wit import Wit
-from tensorflow_datasets.vision_language.wit_kaggle import WitKaggle
+_EXAMPLES_IN_SHARD = [1, 2, 3]
+
+
+class TestDummyLaion400mDataset(tfds.testing.DatasetBuilderTestCase):
+  DATASET_CLASS = laion400m_dataset_builder.DummyLaion400mDataset
+  SPLITS = {'train': len(_EXAMPLES_IN_SHARD)}
+
+  @classmethod
+  def setUpClass(cls):
+    cls.DATASET_CLASS.EXAMPLES_IN_SHARD = _EXAMPLES_IN_SHARD
+    super().setUpClass()
+
+
+if __name__ == '__main__':
+  tfds.testing.test_main()
