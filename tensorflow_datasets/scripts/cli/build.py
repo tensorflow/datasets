@@ -114,6 +114,13 @@ def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: 
   # **** Generation options ****
   generation_group = build_parser.add_argument_group('Generation')
   generation_group.add_argument(
+      '--download_only',
+      action='store_true',
+      help='If True, download all files but do not prepare the dataset. '
+      'Uses the checksum.tsv to find out what to download. '
+      'Therefore, this does not work in combination with --register_checksums.',
+  )
+  generation_group.add_argument(
       '--config',
       '-c',
       type=str,
@@ -215,11 +222,14 @@ def _build_datasets(args: argparse.Namespace) -> None:
   else:
     datasets = datasets or ['']  # Empty string for default
 
-  # Generate all datasets sequencially
+  # Generate all datasets sequentially.
   for ds_to_build in datasets:
     # Each `str` may correspond to multiple builder (e.g. multiple configs)
     for builder in _make_builders(args, ds_to_build):
-      _download_and_prepare(args, builder)
+      if args.download_only:
+        _download(args, builder)
+      else:
+        _download_and_prepare(args, builder)
 
 
 def _make_builders(
@@ -366,6 +376,46 @@ def _make_builder(
   return builder
 
 
+def _download(
+    args: argparse.Namespace,
+    builder: tfds.core.DatasetBuilder,
+) -> None:
+  """Downloads all files of the given builder."""
+  dl_config = _make_download_config(args, dataset_name=builder.name)
+
+  if dl_config.register_checksums:
+    raise ValueError('It is not allowed to enable --register_checksums '
+                     'when using --download_only!')
+
+  if builder.url_infos is None:
+    raise ValueError(f'URL infos of builder {builder.name} are not defined, '
+                     'so cannot download these URLs.')
+
+  max_simultaneous_downloads = None
+  if builder.MAX_SIMULTANEOUS_DOWNLOADS is not None:
+    max_simultaneous_downloads = builder.MAX_SIMULTANEOUS_DOWNLOADS
+
+  download_dir = args.download_dir or os.path.join(
+      builder._data_dir_root,  # pylint: disable=protected-access
+      'downloads')
+  dl_manager = tfds.download.DownloadManager(
+      download_dir=download_dir,
+      url_infos=builder.url_infos,
+      force_download=False,
+      force_extraction=False,
+      force_checksums_validation=dl_config.force_checksums_validation,
+      register_checksums=False,
+      verify_ssl=dl_config.verify_ssl,
+      dataset_name=builder.name,
+      max_simultaneous_downloads=max_simultaneous_downloads,
+  )
+
+  urls_to_download = {
+      f'file{i}': url for i, url in enumerate(builder.url_infos.keys())
+  }
+  dl_manager.download(urls_to_download)
+
+
 def _download_and_prepare(
     args: argparse.Namespace,
     builder: tfds.core.DatasetBuilder,
@@ -380,10 +430,7 @@ def _download_and_prepare(
           f'Dataset already exists in {publish_data_dir}. Skipping generation.')
       return
 
-  dl_config = _make_download_config(args)
-  if args.add_name_to_manual_dir:
-    dl_config.manual_dir = os.path.join(dl_config.manual_dir, builder.name)
-
+  dl_config = _make_download_config(args, dataset_name=builder.name)
   builder.download_and_prepare(
       download_dir=args.download_dir,
       download_config=dl_config,
@@ -435,12 +482,18 @@ def _publish_data(
 
 
 def _make_download_config(
-    args: argparse.Namespace,) -> tfds.download.DownloadConfig:
+    args: argparse.Namespace,
+    dataset_name: str,
+) -> tfds.download.DownloadConfig:
   """Generate the download and prepare configuration."""
   # Load the download config
+  manual_dir = args.manual_dir
+  if args.add_name_to_manual_dir:
+    manual_dir = os.path.join(manual_dir, dataset_name)
+
   dl_config = tfds.download.DownloadConfig(
       extract_dir=args.extract_dir,
-      manual_dir=args.manual_dir,
+      manual_dir=manual_dir,
       download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=args.max_examples_per_split,
       register_checksums=args.register_checksums,
