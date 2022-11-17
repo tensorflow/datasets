@@ -32,6 +32,7 @@ from etils import epath
 import numpy as np
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import dataset_metadata
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import load
@@ -263,6 +264,13 @@ class DatasetBuilderTestCase(parameterized.TestCase,
     info = self.builder.info
     self.assertIsInstance(info, dataset_info.DatasetInfo)
     self.assertEqual(self.builder.name, info.name)
+
+  def test_tags_are_valid(self):
+    metadata = self.builder.get_metadata()
+    tags = set(metadata.tags)
+    valid_tags = set(dataset_metadata.valid_tags())
+    invalid_tags = tags - valid_tags
+    self.assertEmpty(invalid_tags, "There are invalid tags.")
 
   def _add_url(self, url_or_urls):
     if self._stop_record_download:

@@ -38,6 +38,14 @@ year = "2022"
 }""")
     self.assertEqual(metadata.tags, ["content.data-type.image"])
 
+  def test_valid_tags(self):
+    valid_tags = dataset_metadata.valid_tags()
+    self.assertIn("content.data-type.image", valid_tags)
+
+  def test_valid_tags_with_comments(self):
+    text = dataset_metadata.valid_tags_with_comments()
+    self.assertIn("content.data-type.image # Contains image data.", text)
+
 
 if __name__ == "__main__":
   testing.main()

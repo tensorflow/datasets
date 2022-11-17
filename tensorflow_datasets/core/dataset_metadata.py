@@ -21,6 +21,7 @@ from typing import Dict, List, Text
 
 from etils import epath
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import resource_utils
 
 CITATIONS_FILENAME = "CITATIONS.bib"
 DESCRIPTIONS_FILENAME = "README.md"
@@ -41,11 +42,40 @@ class DatasetMetadata:
   tags: List[Text]
 
 
+def _get_tags(tags_txt: Text) -> List[Text]:
+  """Returns list of tags from raw tags file content."""
+  tags = []
+  for line in tags_txt.split("\n"):
+    tag = line.split("#", 1)[0].strip()
+    if tag:
+      tags.append(tag)
+  return tags
+
+
+def _get_valid_tags_text() -> Text:
+  """Returns the valid_tags.txt content."""
+  path = resource_utils.tfds_path() / "core/valid_tags.txt"
+  return path.read_text("utf-8")
+
+
+def valid_tags() -> List[Text]:
+  """Returns a list of valid tags."""
+  return _get_tags(_get_valid_tags_text())
+
+
+def valid_tags_with_comments() -> Text:
+  """Returns valid tags (one per line) with comments."""
+  return "\n".join([
+      line for line in _get_valid_tags_text().split("\n")
+      if not line.startswith("#")
+  ])
+
+
 @functools.lru_cache(maxsize=256)
 def load(pkg_path: epath.Path) -> DatasetMetadata:
   """Returns dataset metadata loaded from files in pkg."""
   raw_metadata = _read_files(pkg_path)
-  tags = [t for t in raw_metadata.get(TAGS_FILENAME, "").split("\n") if t]
+  tags = _get_tags(raw_metadata.get(TAGS_FILENAME, ""))
   return DatasetMetadata(
       description=raw_metadata.get(DESCRIPTIONS_FILENAME, None),
       citation=raw_metadata.get(CITATIONS_FILENAME, None),
