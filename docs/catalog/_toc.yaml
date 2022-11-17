@@ -580,8 +580,6 @@ toc:
     title: accentdb
   title: Speech recognition
 - section:
-  - path: /datasets/catalog/ble_wind_field
-    title: ble_wind_field
   - path: /datasets/catalog/cherry_blossoms
     title: cherry_blossoms
   - path: /datasets/catalog/covid19
@@ -672,6 +670,8 @@ toc:
     title: e2e_cleaned
   title: Table to text generation
 - section:
+  - path: /datasets/catalog/ble_wind_field
+    title: ble_wind_field
   - path: /datasets/catalog/efron_morris75
     title: efron_morris75
   title: Tabular
