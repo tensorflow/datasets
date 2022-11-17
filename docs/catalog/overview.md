@@ -395,7 +395,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Structured`
 
-*   [`ble_wind_field`](ble_wind_field.md)
 *   [`cherry_blossoms`](cherry_blossoms.md)
 *   [`covid19`](covid19.md)
 *   [`cs_restaurants`](cs_restaurants.md)
@@ -447,6 +446,7 @@ for ex in tfds.load('cifar10', split='train'):
 
 ### `Tabular`
 
+*   [`ble_wind_field`](ble_wind_field.md)
 *   [`efron_morris75`](efron_morris75.md)
 
 ### `Text`

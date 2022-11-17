@@ -34,19 +34,6 @@ The original source is the Common Crawl dataset: https://commoncrawl.org
 
     *   **`1.0.0`** (default): Initial release.
 
-*   **Download size**: `Unknown size`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
-
-*   **Splits**:
-
-Split | Examples
-:---- | -------:
-
 *   **Feature structure**:
 
 ```python
@@ -83,6 +70,34 @@ original_snippet    | Text         |       | tf.string |
 
 *   **Config description**: Default C4-WSRS dataset.
 
+*   **Download size**: `143.01 KiB`
+
+*   **Dataset size**: `5.84 GiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
+*   **Splits**:
+
+Split          | Examples
+:------------- | --------:
+`'train'`      | 9,576,782
+`'validation'` | 991,682
+
 ## c4_wsrs/deterministic
 
 *   **Config description**: Deterministic C4-WSRS dataset.
+
+*   **Download size**: `Unknown size`
+
+*   **Dataset size**: `Unknown size`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Unknown
+
+*   **Splits**:
+
+Split | Examples
+:---- | -------:
