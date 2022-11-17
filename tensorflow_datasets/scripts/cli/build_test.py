@@ -18,7 +18,7 @@
 import contextlib
 import os
 import pathlib
-from typing import Iterator, List
+from typing import Dict, Iterator, List, Optional
 from unittest import mock
 
 from etils import epath
@@ -26,6 +26,8 @@ import pytest
 
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import download
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.scripts.cli import build as build_lib
 from tensorflow_datasets.scripts.cli import main
@@ -41,6 +43,17 @@ class DummyDatasetNoGenerate(tfds.testing.DummyDataset):
     if True:  # pylint: disable=using-constant-test
       raise NotImplementedError('Should not be called')
     yield
+
+  @utils.classproperty
+  @classmethod
+  def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
+    return {
+        'http://data.org/file1.zip':
+            download.checksums.UrlInfo(
+                size=42,
+                checksum='d45899d9a6a0e48afb250aac7ee3dc50e73e263687f15761d754515cd8284e0a',
+                filename='file1.zip'),
+    }
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -74,8 +87,8 @@ def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
 
   original_dl_and_prepare = tfds.core.DatasetBuilder.download_and_prepare
 
-  # Unfortunatelly, `mock.Mock` remove `self` from `call_args`, so we have
-  # to patch manually the function to record the generated_ds.
+  # Unfortunately, `mock.Mock` removes `self` from `call_args`, so we have
+  # to patch the function to record the generated_ds manually.
   # See:
   # https://stackoverflow.com/questions/64792295/how-to-get-self-instance-in-mock-mock-call-args
   generated_ds_names = []
@@ -91,8 +104,7 @@ def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
 
   with mock.patch(
       'tensorflow_datasets.core.DatasetBuilder.download_and_prepare',
-      _download_and_prepare,
-  ):
+      _download_and_prepare):
     main.main(args)
   return generated_ds_names
 
@@ -275,3 +287,10 @@ def test_publish_data(mock_fs: testing.MockFs):
   publish_data_dir = epath.Path('/a/b')
   build_lib._publish_data(publish_data_dir=publish_data_dir, builder=builder)
   assert mock_fs.read_file(publish_data_dir / filename) == content
+
+
+def test_download_only():
+  with mock.patch(
+      'tensorflow_datasets.download.DownloadManager.download') as mock_download:
+    assert not _build('dummy_dataset_no_generate --download_only')
+    mock_download.assert_called_with({'file0': 'http://data.org/file1.zip'})
