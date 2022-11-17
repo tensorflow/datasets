@@ -15,6 +15,7 @@
 
 """Tests for transform."""
 import functools
+from typing import Iterator
 
 import pytest
 
@@ -25,13 +26,22 @@ def add_number(number: int, increment: int) -> int:
   return number + increment
 
 
+def is_even(number: int) -> bool:
+  return number % 2 == 0
+
+
+def duplicate(example: transform.Example) -> Iterator[transform.Example]:
+  yield example
+  yield example
+
+
 def test_apply_fn_simple():
   add_two = functools.partial(add_number, increment=2)
   apply_fn = transform.apply_fn(
       fn=add_two, input_feature="a", output_feature="c")
   example = {"a": 1, "d": "left alone"}
-  expected = {"a": 1, "c": 3, "d": "left alone"}
-  assert apply_fn(example) == expected
+  expected = [{"a": 1, "c": 3, "d": "left alone"}]
+  assert list(apply_fn(example)) == expected
 
 
 def test_apply_fn_nested_dict():
@@ -39,8 +49,8 @@ def test_apply_fn_nested_dict():
   apply_fn = transform.apply_fn(
       fn=add_two, input_feature="a/b", output_feature="a/c")
   example = {"a": {"b": 1}, "d": "something"}
-  expected = {"a": {"b": 1, "c": 3}, "d": "something"}
-  assert apply_fn(example) == expected
+  expected = [{"a": {"b": 1, "c": 3}, "d": "something"}]
+  assert list(apply_fn(example)) == expected
 
 
 def test_apply_fn_sequence():
@@ -48,8 +58,8 @@ def test_apply_fn_sequence():
   apply_fn = transform.apply_fn(
       fn=add_two, input_feature="a", output_feature="b")
   example = {"a": [1, 2, 3]}
-  expected = {"a": [1, 2, 3], "b": [3, 4, 5]}
-  assert apply_fn(example) == expected
+  expected = [{"a": [1, 2, 3], "b": [3, 4, 5]}]
+  assert list(apply_fn(example)) == expected
 
 
 def test_apply_fn_sequence_of_dicts():
@@ -57,8 +67,8 @@ def test_apply_fn_sequence_of_dicts():
   apply_fn = transform.apply_fn(
       fn=add_two, input_feature="a/b", output_feature="a/c")
   example = {"a": [{"b": [1, 2]}, {"b": [2, 3]}]}
-  expected = {"a": [{"b": [1, 2], "c": [3, 4]}, {"b": [2, 3], "c": [4, 5]}]}
-  assert apply_fn(example) == expected
+  expected = [{"a": [{"b": [1, 2], "c": [3, 4]}, {"b": [2, 3], "c": [4, 5]}]}]
+  assert list(apply_fn(example)) == expected
 
 
 def test_apply_fn_different_ancestor():
@@ -66,3 +76,25 @@ def test_apply_fn_different_ancestor():
   with pytest.raises(
       ValueError, match="The out-feature must have the same ancestor"):
     transform.apply_fn(fn=add_two, input_feature="a/b", output_feature="c/d")
+
+
+def test_apply_filter_on_feature():
+  apply_filter_fn = transform.apply_filter(fn=is_even, input_feature="a")
+  assert list(apply_filter_fn(example={"a": 2}))
+  assert not list(apply_filter_fn(example={"a": 1}))
+
+
+def test_apply_filter_on_example():
+
+  def a_is_even(example) -> bool:
+    return example["a"] % 2 == 0
+
+  apply_filter_fn = transform.apply_filter(fn=a_is_even, input_feature="")
+  assert list(apply_filter_fn(example={"a": 2}))
+  assert not list(apply_filter_fn(example={"a": 1}))
+
+
+def test_do_fn():
+  apply_do_fn = transform.apply_do_fn(fn=duplicate)
+  example = {"a": 1}
+  assert list(apply_do_fn(example)) == [example, example]

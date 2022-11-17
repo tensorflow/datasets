@@ -21,7 +21,7 @@ Note that this is an experimental new feature, so the API may change.
 from __future__ import annotations
 
 import functools
-from typing import Callable, Dict, List, Optional, Union
+from typing import Callable, Dict, Iterator, List, Optional, Union
 
 from tensorflow_datasets.core import beam_utils
 from tensorflow_datasets.core import dataset_builder
@@ -112,15 +112,15 @@ def _transform_per_example(
     ds = builder.as_dataset(split=split_shard, read_config=row_read_config)
     for example in dataset_utils.as_numpy(ds):
       key = example.pop("tfds_id")
-      yield transform_lib.apply_transformations(
+      yield from transform_lib.apply_transformations(
           key=key, example=example, transformations=transformations)
 
 
 def _transform_example(
-    example: Example,
-    transformations: List[transform_lib.ExampleTransformFn]) -> KeyExample:
+    example: Example, transformations: List[transform_lib.ExampleTransformFn]
+) -> Iterator[KeyExample]:
   key = example.pop("tfds_id")
-  return transform_lib.apply_transformations(
+  yield from transform_lib.apply_transformations(
       key=key, example=example, transformations=transformations)
 
 
@@ -139,7 +139,7 @@ def _transform_per_example_beam(
       read_config=read_config,
       workers_per_shard=workers_per_shard)
           | f"convert_to_numpy@{split}" >> beam.Map(dataset_utils.as_numpy)
-          | f"transform_examples@{split}" >> beam.Map(
+          | f"transform_examples@{split}" >> beam.ParDo(
               _transform_example, transformations=transformations))
 
 

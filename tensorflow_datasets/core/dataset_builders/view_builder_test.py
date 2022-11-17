@@ -26,8 +26,13 @@ def add_number(number: int, increment: int) -> int:
   return number + increment
 
 
+def is_even(number: int) -> bool:
+  return number % 2 == 0
+
+
 _MNIST_TRANSFORMATIONS = [
     transform_lib.remove_feature(feature_name="image"),
+    transform_lib.apply_filter(fn=is_even, input_feature="label"),
     transform_lib.apply_fn(
         fn=functools.partial(add_number, increment=10),
         input_feature="label",
@@ -160,7 +165,7 @@ def test_view_builder_with_configs_load():
 
     ds_train = tfds.load(
         "dummy_mnist_view_with_configs", split="train", data_dir=data_dir)
-    assert len(list(ds_train)) == 20
+    assert len(list(ds_train)) == 10
     for example in ds_train:
       assert example["label"] + 10 == example["label_plus_10"]
       assert example["label"] + 2 == example["label_plus_2"]
@@ -172,7 +177,7 @@ def test_beam_view_builder_with_configs_load():
 
     ds_train = tfds.load(
         "beam_dummy_mnist_view_with_configs", split="train", data_dir=data_dir)
-    assert len(list(ds_train)) == 20
+    assert len(list(ds_train)) == 10
     for example in ds_train:
       assert example["label"] + 10 == example["label_plus_10"]
       assert example["label"] + 2 == example["label_plus_2"]
@@ -184,7 +189,7 @@ def test_view_builder_without_configs_load():
 
     ds_train = tfds.load(
         "dummy_mnist_view_without_configs", split="train", data_dir=data_dir)
-    assert len(list(ds_train)) == 20
+    assert len(list(ds_train)) == 10
     for example in ds_train:
       assert example["label"] + 10 == example["label_plus_10"]
       assert example["label"] + 2 == example["label_plus_2"]

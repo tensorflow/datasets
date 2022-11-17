@@ -21,7 +21,7 @@ Note that this is an experimental new feature, so the API may change.
 from __future__ import annotations
 
 import functools
-from typing import Any, Callable, List, Optional
+from typing import Any, Callable, Iterator, List, Optional
 
 import numpy as np
 
@@ -30,15 +30,14 @@ from tensorflow_datasets.core import split_builder as split_builder_lib
 Key = split_builder_lib.Key
 Example = split_builder_lib.Example
 KeyExample = split_builder_lib.KeyExample
-ExampleTransformFn = Callable[[Example],
-                              Example]  # TODO(weide) return Iterator[Example]?
+ExampleTransformFn = Callable[[Example], Iterator[Example]]
 
 
 def remove_feature(feature_name: str) -> ExampleTransformFn:
 
-  def apply_on_example(example: Example) -> Example:
+  def apply_on_example(example: Example) -> Iterator[Example]:
     del example[feature_name]
-    return example
+    yield example
 
   return apply_on_example
 
@@ -121,15 +120,91 @@ def apply_fn(
       input_parts[:-1] != output_parts[:-1]):
     raise ValueError("The out-feature must have the same ancestor as the "
                      f"in-feature! Got in={input_parts}, out={output_parts}.")
-  return functools.partial(
-      _transform_example, fn=fn, in_parts=input_parts, out_parts=output_parts)
+
+  def transform(example: Example) -> Iterator[Example]:
+    yield _transform_example(
+        example=example, fn=fn, in_parts=input_parts, out_parts=output_parts)
+
+  return transform
+
+
+def _apply_filter(
+    example: Example,
+    fn: Callable[[Any], Any],
+    in_parts: List[str],
+) -> Iterator[Example]:
+  in_data = example
+  for part in in_parts:
+    in_data = in_data[part]
+  if fn(in_data):
+    yield example
+
+
+def apply_filter(
+    fn: Callable[[Any], bool],
+    input_feature: Optional[str] = None,
+) -> ExampleTransformFn:
+  """Filters examples for whom `fn` returns true on `input_feature`.
+
+  Arguments:
+    fn: the function that returns whether the input feature of an example should
+      be filtered.
+    input_feature: the input feature to apply `fn` to. If this is the empty
+      string, then `fn` will receive the entire example.
+
+  Returns:
+    function that can be applied to filter examples.
+  """
+  if input_feature:
+    input_parts = input_feature.split("/")
+  else:
+    input_parts = []
+  return functools.partial(_apply_filter, fn=fn, in_parts=input_parts)
+
+
+def _apply_do_fn(
+    example: Example,
+    fn: Callable[[Any], Iterator[Any]],
+) -> Iterator[Example]:
+  yield from fn(example)
+
+
+def apply_do_fn(fn: Callable[[Any], Iterator[Any]],) -> ExampleTransformFn:
+  """Applies `fn` that can return any number of examples based on an input.
+
+  A do_fn can be used for multiple purposes such as augmentations, but also to
+  filter examples.
+
+  Arguments:
+    fn: the function that takes an example and outputs 0 or more examples.
+
+  Returns:
+    function that can be applied to perform a do fn.
+  """
+  return functools.partial(_apply_do_fn, fn=fn)
+
+
+def _apply_transformations_no_key(
+    example: Example,
+    transformations: List[ExampleTransformFn],
+) -> Iterator[Example]:
+  """Transforms the example with the given transformations."""
+  if transformations:
+    fn = transformations[0]
+    other_fns = transformations[1:]
+    for v in fn(example):
+      yield from _apply_transformations_no_key(
+          example=v, transformations=other_fns)
+  else:
+    yield example
 
 
 def apply_transformations(
     key: Key,
     example: Example,
     transformations: List[ExampleTransformFn],
-) -> KeyExample:
-  for transform_fn in transformations:
-    example = transform_fn(example)
-  return key, example
+) -> Iterator[KeyExample]:
+  for i, transformed_example in enumerate(
+      _apply_transformations_no_key(
+          example=example, transformations=transformations)):
+    yield f"{key}_{i}", transformed_example
