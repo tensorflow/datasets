@@ -72,13 +72,8 @@ def create_dataset_files(dataset_name: str,
                          data_format: Optional[str] = None) -> None:
   """Creates the dataset files."""
   # Creates the root directory
-  dataset_dir = dataset_dir.expanduser() / dataset_name
+  dataset_dir = dataset_dir.expanduser().resolve() / dataset_name
   dataset_dir.mkdir(parents=True)
-  # TODO(py3.7): Should be `dir.expanduser().resolve()` but `.resolve()` fails
-  # on some environments when the file doesn't exists.
-  # https://stackoverflow.com/questions/55710900/pathlib-resolve-method-not-resolving-non-existant-files
-  dataset_dir = dataset_dir.resolve()
-
   in_tfds = 'tensorflow_datasets' in dataset_dir.parts
 
   info = utils.DatasetInfo(

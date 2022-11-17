@@ -20,7 +20,6 @@ import functools
 import importlib
 import json
 import os
-import pathlib
 import typing
 from typing import Dict, Iterator, Optional, Tuple, Type, Union
 
@@ -315,15 +314,7 @@ def _search_script_path(ds_to_build: str) -> Optional[tfds.core.Path]:
   # * Dataset file (e.g. `my_dataset.py`)
   # * Dataset module (e.g. `my_dataset`)
 
-  # TODO(py3.7): Should be `path.expanduser().resolve()` but `.resolve()` fails
-  # on some environments when the file doesn't exists.
-  # https://stackoverflow.com/questions/55710900/pathlib-resolve-method-not-resolving-non-existant-files
-  path = tfds.core.Path(ds_to_build).expanduser()
-  if not path.exists():
-    path = tfds.core.Path(pathlib.Path()).resolve() / path
-  else:
-    path = path.resolve()
-
+  path = tfds.core.Path(ds_to_build).expanduser().resolve()
   if path.exists():
     if path.is_dir():  # dataset-as-folder, use `my_dataset/my_dataset.py`
       return _validate_script_path(path / f'{path.name}.py')
@@ -402,8 +393,7 @@ def _download_and_prepare(
   logging.info('Dataset generation complete...')
 
   print()
-  info_repr = repr(builder.info)
-  print(info_repr)
+  print(repr(builder.info))
   print()
 
   # Publish data if requested.
