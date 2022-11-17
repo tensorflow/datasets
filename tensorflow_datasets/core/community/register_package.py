@@ -107,9 +107,8 @@ class _InstalledPackage:
     """Factory which creates the cls from json."""
     return cls(
         package=DatasetPackage.from_json(data['package']),
-        # TODO(tfds): py3.7 Should use `datetime.fromisoformat`
-        instalation_date=datetime.datetime.strptime(data['instalation_date'],
-                                                    '%Y-%m-%dT%H:%M:%S.%f'),
+        instalation_date=datetime.datetime.fromisoformat(
+            data['instalation_date']),
         hash=data['hash'],
     )
 
