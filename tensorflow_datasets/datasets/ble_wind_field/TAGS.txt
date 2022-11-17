@@ -1,1 +1,1 @@
-content.data-type.structured
+content.data-type.tabular
