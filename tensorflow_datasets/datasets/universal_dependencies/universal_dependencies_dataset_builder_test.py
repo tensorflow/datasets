@@ -15,14 +15,14 @@
 
 """universal_dependencies dataset."""
 
+from tensorflow_datasets.datasets.universal_dependencies import universal_dependencies_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.universal_dependencies import universal_dependencies
 
 
 class UniversalDependenciesTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for universal_dependencies dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = ['it_vit']
-  DATASET_CLASS = universal_dependencies.UniversalDependencies
+  DATASET_CLASS = universal_dependencies_dataset_builder.Builder
   SPLITS = {
       'train': 3,
       'dev': 1,
