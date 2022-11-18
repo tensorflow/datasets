@@ -25,7 +25,7 @@ and then browsing the annotation guidelines.
     [https://universaldependencies.org/](https://universaldependencies.org/)
 
 *   **Source code**:
-    [`tfds.text.universal_dependencies.UniversalDependencies`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/universal_dependencies/universal_dependencies.py)
+    [`tfds.datasets.universal_dependencies.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/universal_dependencies/universal_dependencies_dataset_builder.py)
 
 *   **Versions**:
 
