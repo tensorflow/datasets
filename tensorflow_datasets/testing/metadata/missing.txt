@@ -12,7 +12,6 @@ c4/webtextlike/2.2.0
 c4/webtextlike/2.2.1
 c4/webtextlike/2.3.0
 c4/webtextlike/2.3.1
-c4_wsrs/default/1.0.0
 c4_wsrs/deterministic/1.0.0
 covid19sum/1.0.0
 glue/ax/1.0.1
