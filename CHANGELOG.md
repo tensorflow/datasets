@@ -10,6 +10,11 @@ and this project adheres to
 
 ### Added
 
+-   [API] `DatasetBuilder`'s description and citations can be specified in
+    dedicated `README.md` and `CITATIONS.bib` files, within the dataset package
+    (see https://www.tensorflow.org/datasets/add_dataset).
+-   Tags can be associated to Datasets, in the `TAGS.txt` file. For
+    now, they are only used in the generated documentation.
 -   [API][Experimental] New `ViewBuilder` to define datasets as transformations
     of existing datasets. Also adds `tfds.transform` with functionality to apply
     transformations.
@@ -97,8 +102,8 @@ and this project adheres to
 
 -   Various datasets
 -   In Linux, when loading a dataset from a directory that is not your home
-    (`~`) directory, a new `~` directory is not created in the current
-    directory (fixes [#4117](https://github.com/tensorflow/datasets/issues/4117)).
+    (`~`) directory, a new `~` directory is not created in the current directory
+    (fixes [#4117](https://github.com/tensorflow/datasets/issues/4117)).
 
 ### Security
 

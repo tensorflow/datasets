@@ -52,6 +52,9 @@ def test_new_outside_tfds(tmp_path: pathlib.Path):
 
   filenames = [f.name for f in (tmp_path / 'my_dataset').iterdir()]
   assert sorted(filenames) == [
+      'CITATIONS.bib',
+      'README.md',
+      'TAGS.txt',
       '__init__.py',
       'checksums.tsv',
       'dummy_data',
@@ -71,6 +74,9 @@ def test_new_in_tfds(tmp_path: pathlib.Path):
 
   filenames = [f.name for f in (tmp_path / 'my_dataset').iterdir()]
   assert sorted(filenames) == [
+      'CITATIONS.bib',
+      'README.md',
+      'TAGS.txt',
       '__init__.py',
       'checksums.tsv',
       'dummy_data',
