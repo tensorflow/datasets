@@ -15,7 +15,7 @@
 
 """Tests for universal_dependencies_utils."""
 
-from tensorflow_datasets.text.universal_dependencies import universal_dependencies_utils as ud_utils
+from tensorflow_datasets.datasets.universal_dependencies import universal_dependencies_utils as ud_utils
 
 
 def test_prepare_ud_filepaths():
