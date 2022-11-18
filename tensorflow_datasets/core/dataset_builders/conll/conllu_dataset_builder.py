@@ -155,7 +155,7 @@ class ConllUDatasetBuilder(
 
   def create_dataset_info(
       self,
-      description: str,
+      description: Optional[str] = None,
       supervised_keys: Optional[dataset_info.SupervisedKeysType] = None,
       homepage: Optional[str] = None,
       citation: Optional[str] = None,
@@ -163,20 +163,20 @@ class ConllUDatasetBuilder(
     """Initializes `dataset_info.DatasetInfo` for Conll-U datasets.
 
     Args:
-      description: A short, markdown-formatted description of the dataset.
+      description: [DEPRECATED] A short, markdown-formatted description of the
+        dataset. Prefer placing description in `README.md` file.
       supervised_keys:  Specifies the input structure for supervised learning,
         if applicable for the dataset, used with "as_supervised". Typically this
         is a `(input_key, target_key)` tuple.
       homepage: The homepage of the dataset, if applicable for this dataset.
-      citation: The citation to use for this dataset, if applicable for this
-        dataset.
+      citation: [DEPRECATED] The citation to use for this dataset, if applicable
+        for this dataset. Prefer placing citations in `CITATIONS.bib` file.
 
     Returns:
       `dataset_info.DatasetInfo` for Conll-U datasets, populated with the values
       from the provided arguments.
     """
-    return dataset_info.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         description=description,
         features=self.builder_config.features_dict,
         supervised_keys=supervised_keys,

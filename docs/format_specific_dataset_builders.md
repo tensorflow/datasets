@@ -217,8 +217,6 @@ class MyCoNNLDataset(tfds.dataset_builders.ConllDatasetBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     return self.create_dataset_info(
-      description="My dataset description",
-      citation="My dataset citation",
       # ...
     )
 
@@ -329,8 +327,6 @@ class MyCoNNLUDataset(tfds.dataset_builders.ConllUDatasetBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     return self.create_dataset_info(
-      description="My dataset description",
-      citation="My dataset citation",
       # ...
     )
 
