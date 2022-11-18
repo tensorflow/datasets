@@ -25,7 +25,7 @@ and then browsing the annotation guidelines.
     [https://universaldependencies.org/](https://universaldependencies.org/)
 
 *   **Source code**:
-    [`tfds.text.xtreme_pos.XtremePos`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/xtreme_pos/xtreme_pos.py)
+    [`tfds.datasets.xtreme_pos.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/xtreme_pos/xtreme_pos_dataset_builder.py)
 
 *   **Versions**:
 
