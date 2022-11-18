@@ -797,7 +797,9 @@ def get_dataset_feature_statistics(builder, split):
   # Avoid generating a large number of buckets in rank histogram
   # (default is 1000).
   stats_options = tfdv.StatsOptions(
-      num_top_values=10, num_rank_histogram_buckets=10)
+      num_top_values=10,
+      num_rank_histogram_buckets=10,
+      use_sketch_based_topk_uniques=False)
   if filetype_suffix == "csv":
     statistics = tfdv.generate_statistics_from_csv(
         filepattern, stats_options=stats_options)
