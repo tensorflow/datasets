@@ -881,15 +881,18 @@ class DatasetBuilder(registered.RegisteredDataset):
     Sub-class should call this and add information not present in config files
     using kwargs directly passed to tfds.core.DatasetInfo object.
 
+    If information is present both in passed arguments and config files, config
+    files will prevail.
+
     Args:
       **kwargs: kw args to pass to DatasetInfo directly.
     """
     metadata = self.get_metadata()
-    return dataset_info.DatasetInfo(
-        builder=self,
-        description=metadata.description,
-        citation=metadata.citation,
-        **kwargs)
+    if metadata.description:
+      kwargs["description"] = metadata.description
+    if metadata.citation:
+      kwargs["citation"] = metadata.citation
+    return dataset_info.DatasetInfo(builder=self, **kwargs)
 
   @abc.abstractmethod
   @utils.docs.doc_private
