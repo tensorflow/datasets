@@ -15,14 +15,14 @@
 
 """xtreme_pos dataset."""
 
+from tensorflow_datasets.datasets.xtreme_pos import xtreme_pos_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.xtreme_pos import xtreme_pos
 
 
 class XtremePosTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for xtreme_pos dataset."""
   BUILDER_CONFIG_NAMES_TO_TEST = ['xtreme_pos_th']
-  DATASET_CLASS = xtreme_pos.XtremePos
+  DATASET_CLASS = xtreme_pos_dataset_builder.Builder
   SPLITS = {
       'test': 2,  # Number of fake test example
   }
