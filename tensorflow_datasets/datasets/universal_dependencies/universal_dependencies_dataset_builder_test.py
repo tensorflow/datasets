@@ -13,18 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""xtreme_pos dataset."""
+"""universal_dependencies dataset."""
 
+from tensorflow_datasets.datasets.universal_dependencies import universal_dependencies_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.xtreme_pos import xtreme_pos
 
 
-class XtremePosTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for xtreme_pos dataset."""
-  BUILDER_CONFIG_NAMES_TO_TEST = ['xtreme_pos_th']
-  DATASET_CLASS = xtreme_pos.XtremePos
+class UniversalDependenciesTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for universal_dependencies dataset."""
+  BUILDER_CONFIG_NAMES_TO_TEST = ['it_vit']
+  DATASET_CLASS = universal_dependencies_dataset_builder.Builder
   SPLITS = {
-      'test': 2,  # Number of fake test example
+      'train': 3,
+      'dev': 1,
+      'test': 1,
+  }
+
+  DL_EXTRACT_RESULT = {
+      'train': ['it_vit-ud-train.conllu'],
+      'dev': ['it_vit-ud-dev.conllu'],
+      'test': ['it_vit-ud-test.conllu'],
   }
 
 

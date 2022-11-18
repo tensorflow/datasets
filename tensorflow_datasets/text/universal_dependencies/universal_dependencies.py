@@ -13,61 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""universal_dependencies dataset."""
+"""Dataset definition for universal_dependencies.
 
-from tensorflow_datasets.core.dataset_builders.conll import conllu_dataset_builder_utils as conllu_lib
-import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text.universal_dependencies import universal_dependencies_utils as ud_utils
-
-_DESCRIPTION = """
-Universal Dependencies (UD) is a framework for consistent annotation of grammar
-(parts of speech, morphological features, and syntactic dependencies) across
-different human languages. UD is an open community effort with over 300
-contributors producing more than 200 treebanks in over 100 languages. If you’re
-new to UD, you should start by reading the first part of the Short Introduction
-and then browsing the annotation guidelines.
+DEPRECATED!
+If you want to use the UniversalDependencies dataset builder class, use:
+tfds.builder_cls('universal_dependencies')
 """
 
-_DATA_URL = "https://raw.githubusercontent.com/UniversalDependencies/"
+from tensorflow_datasets.core import lazy_builder_import
 
-
-class UniversalDependencies(tfds.dataset_builders.ConllUDatasetBuilder):
-  """DatasetBuilder for universal_dependencies dataset."""
-  BUILDER_CONFIGS = []
-  for language in ud_utils.LANGS:
-    BUILDER_CONFIGS.append(
-        conllu_lib.get_universal_morphology_config(
-            language=language,
-            description=ud_utils.DESCRIPTIONS[language],
-            features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES))
-
-  VERSION = tfds.core.Version("1.0.1")
-  RELEASE_NOTES = {
-      "1.0.1":
-          "Updated config names.",
-      "1.0.0":
-          "Initial release, which corresponds to Universal Dependencies 2.10.",
-  }
-
-  def _info(self) -> tfds.core.DatasetInfo:
-    """Returns the dataset metadata."""
-    return self.create_dataset_info(
-        description=_DESCRIPTION,
-        homepage="https://universaldependencies.org/",
-        citation=ud_utils.CITATION,
-    )
-
-  def _split_generators(self, dl_manager: tfds.download.DownloadManager):
-    """Returns SplitGenerators."""
-    paths = {}
-    for split, split_paths in ud_utils.UD_FILEPATHS[
-        self.builder_config.language].items():
-      paths[split] = ud_utils.prepare_ud_filepaths(
-          path_prefix=_DATA_URL, filepaths=split_paths)
-
-    paths_per_split = dl_manager.download_and_extract(paths)
-
-    return {
-        split: self._generate_examples(filepaths=split_paths)
-        for split, split_paths in paths_per_split.items()
-    }
+UniversalDependencies = lazy_builder_import.LazyBuilderImport(
+    'universal_dependencies')
