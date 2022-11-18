@@ -22,6 +22,7 @@ import subprocess
 import textwrap
 from typing import Optional
 
+from tensorflow_datasets.core import dataset_metadata
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.scripts.cli import builder_templates
 from tensorflow_datasets.scripts.cli import cli_utils as utils
@@ -84,6 +85,9 @@ def create_dataset_files(dataset_name: str,
 
   _create_dataset_file(info)
   _create_dataset_test(info)
+  _create_dataset_readme(info)
+  _create_dataset_citations(info)
+  _create_dataset_tags(info)
   _create_init(info)
   _create_dummy_data(info)
   _create_checksum(info)
@@ -136,6 +140,36 @@ def _create_dataset_test(info: utils.DatasetInfo) -> None:
       if __name__ == '__main__':
         tfds.testing.test_main()
       ''')
+  file_path.write_text(content)
+
+
+def _create_dataset_readme(info: utils.DatasetInfo) -> None:
+  """Adds the `README.md` file."""
+  file_path = info.path / 'README.md'
+  content = textwrap.dedent(f"""\
+      {info.todo}: Markdown description of that will appear on the catalog page.
+      Description is **formatted** as markdown.
+
+      It should also contain any processing which has been applied (if any),
+      (e.g. corrupted example skipped, images cropped,...):
+      """)
+  file_path.write_text(content)
+
+
+def _create_dataset_citations(info: utils.DatasetInfo) -> None:
+  """Adds the `CITATIONS.bib` file."""
+  file_path = info.path / 'CITATIONS.bib'
+  content = textwrap.dedent(f"""\
+      // {info.todo}: BibTeX citation
+      """)
+  file_path.write_text(content)
+
+
+def _create_dataset_tags(info: utils.DatasetInfo) -> None:
+  """Adds the `TAGS.txt` file."""
+  file_path = info.path / 'TAGS.txt'
+  content = '// {info.todo}: remove tags which do not apply to dataset.\n' + (
+      dataset_metadata.valid_tags_with_comments())
   file_path.write_text(content)
 
 

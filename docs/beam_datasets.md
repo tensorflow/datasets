@@ -181,8 +181,7 @@ class DummyBeamDataset(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(16, 16, 1)),
             'label': tfds.features.ClassLabel(names=['dog', 'cat']),

@@ -14,7 +14,7 @@ The easiest way to write a new dataset is to use the
 ```sh
 cd path/to/my/project/datasets/
 tfds new my_dataset  # Create `my_dataset/my_dataset.py` template files
-# [...] Manually modify `my_dataset/my_dataset.py` to implement your dataset.
+# [...] Manually modify `my_dataset/my_dataset_dataset_builder.py` to implement your dataset.
 cd my_dataset/
 tfds build  # Download and prepare the dataset to `~/tensorflow_datasets/`
 ```
@@ -69,8 +69,11 @@ structure:
 ```sh
 my_dataset/
     __init__.py
-    my_dataset.py # Dataset definition
-    my_dataset_test.py # (optional) Test
+    README.md # Markdown description of the dataset.
+    CITATIONS.bib # Bibtex citation for the dataset.
+    TAGS.txt # List of tags describing the dataset.
+    my_dataset_dataset_builder.py # Dataset definition
+    my_dataset_dataset_builder_test.py # Test
     dummy_data/ # (optional) Fake data (used for testing)
     checksum.tsv # (optional) URL checksums (see `checksums` section).
 ```
@@ -92,7 +95,7 @@ Here is a minimal example of a dataset builder that is based on
 `tfds.core.GeneratorBasedBuilder`:
 
 ```python
-class MyDataset(tfds.core.GeneratorBasedBuilder):
+class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for my_dataset dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
@@ -102,8 +105,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Dataset metadata (homepage, citation,...)."""
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(256, 256, 3)),
             'label': tfds.features.ClassLabel(
@@ -145,13 +147,11 @@ Let's see in detail the 3 abstract methods to overwrite.
 
 ```python
 def _info(self):
-  return tfds.core.DatasetInfo(
-      builder=self,
-      # Description and homepage used for documentation
-      description="""
-      Markdown description of the dataset. The text will be automatically
-      stripped and dedent.
-      """,
+  # The `dataset_info_from_configs` base method will construct the
+  # `tfds.core.DatasetInfo` object using the passed-in parameters and
+  # adding: builder (self), description/citations/tags from the config
+  # files located in the same package.
+  return self.dataset_info_from_configs(
       homepage='https://dataset-homepage.org',
       features=tfds.features.FeaturesDict({
           'image_description': tfds.features.Text(),
@@ -165,11 +165,6 @@ def _info(self):
       supervised_keys=('image', 'label'),
       # Specify whether to disable shuffling on the examples. Set to False by default.
       disable_shuffling=False,
-      # Bibtex citation for the dataset
-      citation=r"""
-      @article{my-awesome-dataset-2020,
-               author = {Smith, John},}
-      """,
   )
 ```
 
@@ -183,18 +178,27 @@ Most fields should be self-explanatory. Some precisions:
     more info.
 *   `disable_shuffling`: See section
     [Maintain dataset order](#maintain-dataset-order).
-*   `citation`: To find the `BibText` citation:
-    *   Search the dataset website for citation instruction (use that in BibTex
-        format).
-    *   For [arXiv](https://arxiv.org/) papers: find the paper and click the
-        `BibText` link on the right-hand side.
-    *   Find the paper on [Google Scholar](https://scholar.google.com) and click
-        the double-quotation mark underneath the title and on the popup, click
-        `BibTeX`.
-    *   If there is no associated paper (for example, there's just a website),
-        you can use the [BibTeX Online Editor](https://truben.no/latex/bibtex/)
-        to create a custom BibTeX entry (the drop-down menu has an `Online`
-        entry type).
+
+Writing the `BibText` `CITATIONS.bib` file:
+
+*   Search the dataset website for citation instruction (use that in BibTex
+    format).
+*   For [arXiv](https://arxiv.org/) papers: find the paper and click the
+    `BibText` link on the right-hand side.
+*   Find the paper on [Google Scholar](https://scholar.google.com) and click the
+    double-quotation mark underneath the title and on the popup, click `BibTeX`.
+*   If there is no associated paper (for example, there's just a website), you
+    can use the [BibTeX Online Editor](https://truben.no/latex/bibtex/) to
+    create a custom BibTeX entry (the drop-down menu has an `Online` entry
+    type).
+
+Updating the `TAGS.txt` file:
+
+*   All allowed tags are pre-filled in the generated file.
+*   Remove all tags which do not apply to the dataset.
+*   Valid tags are listed in
+    [tensorflow_datasets/core/valid_tags.txt](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/core/valid_tags.txt).
+*   To add a tag to that list, please send a PR.
 
 #### Maintain dataset order
 
@@ -207,7 +211,7 @@ the field `disable_shuffling` should be set to `True`. By default it is set to
 
 ```python
 def _info(self):
-  return tfds.core.DatasetInfo(
+  return self.dataset_info_from_configs(
     # [...]
     disable_shuffling=True,
     # [...]
@@ -555,12 +559,12 @@ source dataset.
 
 ```python
 import tensorflow_datasets as tfds
-from . import my_dataset
+from . import my_dataset_dataset_builder
 
 
 class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for my_dataset dataset."""
-  DATASET_CLASS = my_dataset.MyDataset
+  DATASET_CLASS = my_dataset_dataset_builder.Builder
   SPLITS = {
       'train': 3,  # Number of fake train example
       'test': 1,  # Number of fake test example
