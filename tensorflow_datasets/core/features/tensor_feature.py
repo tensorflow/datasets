@@ -18,7 +18,7 @@
 from __future__ import annotations
 
 import enum
-from typing import Union
+from typing import Optional, Union
 import zlib
 
 import numpy as np
@@ -74,6 +74,8 @@ class Tensor(feature_lib.FeatureConnector):
       # increased when triggering backward-incompatible changes.
       encoding: Union[str, Encoding] = Encoding.NONE,
       doc: feature_lib.DocArg = None,
+      serialized_dtype: Optional[type_utils.TfdsDType] = None,
+      serialized_shape: Optional[utils.Shape] = None,
   ):
     """Construct a Tensor feature.
 
@@ -83,10 +85,18 @@ class Tensor(feature_lib.FeatureConnector):
       encoding: Internal encoding. See `tfds.features.Encoding` for available
         values.
       doc: Documentation of this feature (e.g. description).
+      serialized_dtype: Tensor dtype. Used to validate that serialized examples
+        have this dtype. If `None` then defaults to `dtype`
+      serialized_shape: Tensor shape. Used to validate that serialized examples
+        have this shape. If `None` then defaults to `shape`
     """
     super().__init__(doc=doc)
     self._shape = tuple(shape)
     self._dtype = type_utils.cast_to_numpy(dtype)
+    self._serialized_dtype = type_utils.cast_to_numpy(serialized_dtype or
+                                                      self._dtype)
+    self._serialized_shape = tuple(
+        self._shape if serialized_shape is None else serialized_shape)
     if isinstance(encoding, str):
       encoding = encoding.lower()
     self._encoding = Encoding(encoding)
@@ -111,8 +121,8 @@ class Tensor(feature_lib.FeatureConnector):
       serialized_spec = feature_lib.TensorInfo(shape=(), dtype=np.object_)
     else:
       serialized_spec = feature_lib.TensorInfo(
-          shape=self._shape,
-          dtype=self._dtype,
+          shape=self._serialized_shape,
+          dtype=self._serialized_dtype,
       )
 
     # Dynamic shape, need an additional field to restore the shape after
@@ -140,7 +150,7 @@ class Tensor(feature_lib.FeatureConnector):
                        "`Tensor(..., encoding='zlib')` (or 'bytes'). "
                        f'For {self}')
 
-    np_dtype = np.dtype(self.np_dtype)
+    np_dtype = self._serialized_dtype
     if isinstance(example_data, tf.Tensor):
       raise TypeError(
           f'Error encoding: {example_data!r}. `_generate_examples` should '
@@ -155,7 +165,7 @@ class Tensor(feature_lib.FeatureConnector):
     shape = example_data.shape
     if isinstance(shape, tf.TensorShape):
       shape = tuple(shape.as_list())
-    utils.assert_shape_match(shape, self._shape)
+    utils.assert_shape_match(shape, self._serialized_shape)
 
     # Eventually encode the data
     if self._encoded_to_bytes:

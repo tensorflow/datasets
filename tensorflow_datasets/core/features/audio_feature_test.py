@@ -30,14 +30,7 @@ from tensorflow_datasets.core import features
 class AudioFeatureTest(testing.FeatureExpectationsTestCase,
                        parameterized.TestCase):
 
-  @parameterized.parameters([
-      (np.int64, 1),
-      (tf.int64, 1),
-      (np.int64, 2),
-      (tf.int64, 2),
-      (np.int64, 8),
-      (tf.int64, 8),
-  ])
+  @parameterized.product(dtype=[np.int64, tf.int64], num_channels=[1, 2, 8])
   def test_numpy_array(self, dtype, num_channels):
     np_audio = _create_np_audio(num_channels)
 
@@ -57,8 +50,7 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
             sample_rate=1000,
         ))
 
-  @parameterized.parameters([(np.float32, 1), (tf.float32, 1), (np.float32, 2),
-                             (tf.float32, 2), (np.float32, 8), (tf.float32, 8)])
+  @parameterized.product(dtype=[np.float32, tf.float32], num_channels=[1, 2, 8])
   def test_numpy_array_float(self, dtype, num_channels):
     np_audio = _create_np_audio(num_channels).astype(np.float32)
     self.assertFeature(
@@ -74,15 +66,20 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
         ],
     )
 
-  @parameterized.parameters([(1,), (2,), (8,)])
-  def test_wav_file(self, num_channels):
+  @parameterized.product(
+      num_channels=[1, 2, 8],
+      lazy_decode=[True, False],
+      file_format=['wav', 'flac'])
+  def test_wav_file(self, num_channels, lazy_decode, file_format):
     np_audio = _create_np_audio(num_channels)
     _, tmp_file = tempfile.mkstemp()
-    _write_wave_file(np_audio, tmp_file)
+    _write_audio_file(np_audio, tmp_file, file_format)
 
     self.assertFeature(
         feature=features.Audio(
-            file_format='wav', shape=_shape_for_channels(num_channels)),
+            file_format=file_format,
+            shape=_shape_for_channels(num_channels),
+            lazy_decode=lazy_decode),
         shape=_shape_for_channels(num_channels),
         dtype=np.int64,
         tests=[
@@ -95,13 +92,13 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
                 expected=np_audio,
             ),
         ],
-        test_attributes=dict(_file_format='wav',))
+        test_attributes=dict(_file_format=file_format,))
 
-  @parameterized.parameters([(1,), (2,), (8,)])
-  def test_file_object(self, num_channels):
+  @parameterized.product(num_channels=[1, 2, 8], lazy_decode=[True, False])
+  def test_file_object(self, num_channels, lazy_decode):
     np_audio = _create_np_audio(num_channels)
     _, tmp_file = tempfile.mkstemp()
-    _write_wave_file(np_audio, tmp_file)
+    _write_audio_file(np_audio, tmp_file, 'wav')
 
     class GFileWithSeekOnRead(tf.io.gfile.GFile):
       """Wrapper around GFile which is reusable across multiple read() calls.
@@ -118,7 +115,9 @@ class AudioFeatureTest(testing.FeatureExpectationsTestCase,
     with GFileWithSeekOnRead(tmp_file, 'rb') as file_obj:
       self.assertFeature(
           feature=features.Audio(
-              file_format='wav', shape=_shape_for_channels(num_channels)),
+              file_format='wav',
+              shape=_shape_for_channels(num_channels),
+              lazy_decode=lazy_decode),
           shape=_shape_for_channels(num_channels),
           dtype=tf.int64,
           tests=[
@@ -147,8 +146,8 @@ def _create_np_audio(num_channels: int) -> np.ndarray:
       dtype=np.int64)
 
 
-def _write_wave_file(np_audio, path):
-  """Creates a random audio file."""
+def _write_audio_file(np_audio, path, file_format):
+  """Creates a random audio file with the given file format."""
   num_channels = np_audio.shape[1] if len(np_audio.shape) == 2 else 1
   audio = pydub.AudioSegment(
       b'',
@@ -159,4 +158,4 @@ def _write_wave_file(np_audio, path):
   # See documentation for _spawn usage:
   # https://github.com/jiaaro/pydub/blob/master/API.markdown#audiosegmentget_array_of_samples
   audio = audio._spawn(array.array(audio.array_type, np_audio.reshape((-1,))))
-  audio.export(path, format='wav')
+  audio.export(path, format=file_format)
