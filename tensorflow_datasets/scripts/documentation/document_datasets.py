@@ -227,6 +227,9 @@ def _get_sections(builder_cls: Type[tfds.core.DatasetBuilder]) -> List[Text]:
   if ds_metadata.tags:
     sections = []
     for tag in ds_metadata.tags:
+      # Ignore languages until we have a better way to display them.
+      if tag.startswith('content.language'):
+        continue
       section = tag.rsplit('.')[-1]
       section = section.replace('-', ' ')
       sections.append(section)
