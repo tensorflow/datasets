@@ -39,33 +39,11 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
 
-### `Af`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Ajp`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Am`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
 ### `Anomaly detection`
 
 *   [`ag_news_subset`](ag_news_subset.md)
 *   [`caltech101`](caltech101.md)
 *   [`lost_and_found`](lost_and_found.md)
-
-### `Ar`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Arr`
-
-*   [`universal_dependencies`](universal_dependencies.md)
 
 ### `Audio`
 
@@ -92,67 +70,14 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`xtreme_s`](xtreme_s.md)
 *   [`yes_no`](yes_no.md)
 
-### `Be`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Bej`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Bg`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Bho`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Bn`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Br`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Bxr`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Ca`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Ceb`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Ckt`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
 ### `Common sense reasoning`
 
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
 *   [`arc`](arc.md)
 
-### `Cop`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
 ### `Coreference resolution`
 
 *   [`clevr`](clevr.md)
-
-### `Cs`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Cy`
-
-*   [`universal_dependencies`](universal_dependencies.md)
 
 ### `D4rl`
 
@@ -165,15 +90,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`d4rl_mujoco_halfcheetah`](d4rl_mujoco_halfcheetah.md)
 *   [`d4rl_mujoco_hopper`](d4rl_mujoco_hopper.md)
 *   [`d4rl_mujoco_walker2d`](d4rl_mujoco_walker2d.md)
-
-### `Da`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `De`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
 
 ### `Density estimation`
 
@@ -190,140 +106,14 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`aeslc`](aeslc.md)
 *   [`booksum`](booksum.md)
 
-### `El`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `En`
-
-*   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
-*   [`e2e_cleaned`](e2e_cleaned.md)
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Es`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Ess`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Et`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Eu`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Fa`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Fi`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
 ### `Fine grained image classification`
 
 *   [`caltech101`](caltech101.md)
-
-### `Fo`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Fr`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Fro`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Ga`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Gd`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Gl`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Gn`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Got`
-
-*   [`universal_dependencies`](universal_dependencies.md)
 
 ### `Graphs`
 
 *   [`cardiotox`](cardiotox.md)
 *   [`ogbg_molpcba`](ogbg_molpcba.md)
-
-### `Grc`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Gsw`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Gub`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Gun`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Hbo`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `He`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Hi`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Hr`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Hsb`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Hu`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Hy`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Id`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
 
 ### `Image`
 
@@ -467,80 +257,12 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`cityscapes`](cityscapes.md)
 *   [`nyu_depth_v2`](nyu_depth_v2.md)
 
-### `Is`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `It`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Jp`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Jv`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Kfm`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Kk`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Kmr`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Ko`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Koi`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Kpv`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Krl`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `La`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
 ### `Language modelling`
 
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
 *   [`blimp`](blimp.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
-
-### `Lij`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Lt`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Lv`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Mdf`
-
-*   [`universal_dependencies`](universal_dependencies.md)
 
 ### `Monolingual`
 
@@ -551,23 +273,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
-
-### `Mr`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Mt`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Myu`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Myv`
-
-*   [`universal_dependencies`](universal_dependencies.md)
 
 ### `Natural language inference`
 
@@ -587,19 +292,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`glove100_angular`](glove100_angular.md)
 *   [`sift1m`](sift1m.md)
 
-### `Nl`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `No`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Nyq`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
 ### `Object detection`
 
 *   [`flic`](flic.md)
@@ -615,31 +307,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`voc`](voc.md)
 *   [`waymo_open_dataset`](waymo_open_dataset.md)
 *   [`wider_face`](wider_face.md)
-
-### `Olo`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Orv`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Otk`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Pcm`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Pl`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Pt`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
 
 ### `Question answering`
 
@@ -697,10 +364,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`locomotion`](locomotion.md)
 *   [`robosuite_panda_pick_place_can`](robosuite_panda_pick_place_can.md)
 
-### `Ro`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
 ### `Robomimic`
 
 *   [`robomimic_ph`](robomimic_ph.md)
@@ -708,15 +371,6 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Robotics`
 
 *   [`mt_opt`](mt_opt.md)
-
-### `Ru`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Sa`
-
-*   [`universal_dependencies`](universal_dependencies.md)
 
 ### `Scene classification`
 
@@ -735,41 +389,9 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`big_patent`](big_patent.md)
 *   [`billsum`](billsum.md)
 
-### `Sjo`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Sk`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Sl`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Sme`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Sms`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Soj`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
 ### `Speech recognition`
 
 *   [`accentdb`](accentdb.md)
-
-### `Sq`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Sr`
-
-*   [`universal_dependencies`](universal_dependencies.md)
 
 ### `Structured`
 
@@ -818,19 +440,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`wikihow`](wikihow.md)
 *   [`xsum`](xsum.md)
 
-### `Sv`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Sw`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Ta`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
 ### `Table to text generation`
 
 *   [`e2e_cleaned`](e2e_cleaned.md)
@@ -839,11 +448,6 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ble_wind_field`](ble_wind_field.md)
 *   [`efron_morris75`](efron_morris75.md)
-
-### `Te`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
 
 ### `Text`
 
@@ -975,30 +579,11 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`wiki_auto`](wiki_auto.md)
 
-### `Th`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
 ### `Time series`
 
 *   [`smartwatch_gestures`](smartwatch_gestures.md)
 
-### `Tl`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
 ### `Token classification`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Tpn`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Tr`
 
 *   [`universal_dependencies`](universal_dependencies.md)
 *   [`xtreme_pos`](xtreme_pos.md)
@@ -1021,14 +606,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`wmt19_translate`](wmt19_translate.md)
 *   [`wmt_t2t_translate`](wmt_t2t_translate.md)
 
-### `Ug`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Uk`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
 ### `Uncategorized`
 
 *   [`duke_ultrasound`](duke_ultrasound.md)
@@ -1036,20 +613,6 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Unsupervised anomaly detection`
 
 *   [`caltech101`](caltech101.md)
-
-### `Ur`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Urb`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Vi`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
 
 ### `Video`
 
@@ -1071,27 +634,5 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`ref_coco`](ref_coco.md)
 *   [`wit`](wit.md)
 *   [`wit_kaggle`](wit_kaggle.md)
-
-### `Wbp`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Wo`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Xnr`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-
-### `Yo`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
-
-### `Zh`
-
-*   [`universal_dependencies`](universal_dependencies.md)
-*   [`xtreme_pos`](xtreme_pos.md)
 
 --------------------------------------------------------------------------------
