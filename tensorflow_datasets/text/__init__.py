@@ -96,3 +96,4 @@ from tensorflow_datasets.text.xtreme_pawsx import XtremePawsx
 from tensorflow_datasets.text.xtreme_pos import XtremePos
 from tensorflow_datasets.text.xtreme_xnli import XtremeXnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
+from tensorflow_datasets.text.natural_instructions import NaturalInstructions
