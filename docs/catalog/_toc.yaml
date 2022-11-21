@@ -20,20 +20,6 @@ toc:
     title: booksum (manual)
   title: Abstractive text summarization
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Af
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Ajp
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Am
-- section:
   - path: /datasets/catalog/ag_news_subset
     title: ag_news_subset
   - path: /datasets/catalog/caltech101
@@ -41,16 +27,6 @@ toc:
   - path: /datasets/catalog/lost_and_found
     title: lost_and_found
   title: Anomaly detection
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Ar
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Arr
 - section:
   - path: /datasets/catalog/accentdb
     title: accentdb
@@ -98,69 +74,15 @@ toc:
     title: yes_no
   title: Audio
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Be
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Bej
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Bg
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Bho
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Bn
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Br
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Bxr
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Ca
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Ceb
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Ckt
-- section:
   - path: /datasets/catalog/ai2_arc_with_ir
     title: ai2_arc_with_ir
   - path: /datasets/catalog/arc
     title: arc
   title: Common sense reasoning
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Cop
-- section:
   - path: /datasets/catalog/clevr
     title: clevr
   title: Coreference resolution
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Cs
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Cy
 - section:
   - path: /datasets/catalog/d4rl_adroit_door
     title: d4rl_adroit_door
@@ -182,16 +104,6 @@ toc:
     title: d4rl_mujoco_walker2d
   title: D4rl
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Da
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: De
-- section:
   - path: /datasets/catalog/caltech101
     title: caltech101
   - path: /datasets/catalog/celeb_a_hq
@@ -210,155 +122,15 @@ toc:
     title: booksum (manual)
   title: Document summarization
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: El
-- section:
-  - path: /datasets/catalog/ai2_arc_with_ir
-    title: ai2_arc_with_ir
-  - path: /datasets/catalog/e2e_cleaned
-    title: e2e_cleaned
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: En
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Es
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Ess
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Et
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Eu
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Fa
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Fi
-- section:
   - path: /datasets/catalog/caltech101
     title: caltech101
   title: Fine grained image classification
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Fo
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Fr
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Fro
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Ga
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Gd
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Gl
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Gn
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Got
 - section:
   - path: /datasets/catalog/cardiotox
     title: cardiotox
   - path: /datasets/catalog/ogbg_molpcba
     title: ogbg_molpcba
   title: Graphs
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Grc
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Gsw
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Gub
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Gun
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Hbo
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: He
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Hi
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Hr
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Hsb
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Hu
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Hy
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Id
 - section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
@@ -616,62 +388,6 @@ toc:
     title: nyu_depth_v2
   title: Instance segmentation
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Is
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: It
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Jp
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Jv
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Kfm
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Kk
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Kmr
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Ko
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Koi
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Kpv
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Krl
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: La
-- section:
   - path: /datasets/catalog/big_patent
     title: big_patent
   - path: /datasets/catalog/billsum
@@ -681,22 +397,6 @@ toc:
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   title: Language modelling
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Lij
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Lt
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Lv
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Mdf
 - section:
   - path: /datasets/catalog/ag_news_subset
     title: ag_news_subset
@@ -713,24 +413,6 @@ toc:
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   title: Monolingual
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Mr
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Mt
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Myu
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Myv
 - section:
   - path: /datasets/catalog/anli
     title: anli
@@ -756,20 +438,6 @@ toc:
     title: sift1m
   title: Nearest neighbors
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Nl
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: 'No'
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Nyq
-- section:
   - path: /datasets/catalog/flic
     title: flic
   title: Object detection
@@ -793,32 +461,6 @@ toc:
   - path: /datasets/catalog/wider_face
     title: wider_face
   title: Object detection
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Olo
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Orv
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Otk
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Pcm
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Pl
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Pt
 - section:
   - path: /datasets/catalog/beir
     title: beir
@@ -904,10 +546,6 @@ toc:
     title: robosuite_panda_pick_place_can
   title: Rlds
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Ro
-- section:
   - path: /datasets/catalog/robomimic_ph
     title: robomimic_ph
   title: Robomimic
@@ -915,16 +553,6 @@ toc:
   - path: /datasets/catalog/mt_opt
     title: mt_opt
   title: Robotics
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Ru
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sa
 - section:
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
@@ -948,41 +576,9 @@ toc:
     title: billsum
   title: Sequence to sequence language modelling
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sjo
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sk
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sl
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sme
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sms
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Soj
-- section:
   - path: /datasets/catalog/accentdb
     title: accentdb
   title: Speech recognition
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sq
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sr
 - section:
   - path: /datasets/catalog/cherry_blossoms
     title: cherry_blossoms
@@ -1070,20 +666,6 @@ toc:
     title: xsum (manual)
   title: Summarization
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sv
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Sw
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Ta
-- section:
   - path: /datasets/catalog/e2e_cleaned
     title: e2e_cleaned
   title: Table to text generation
@@ -1093,12 +675,6 @@ toc:
   - path: /datasets/catalog/efron_morris75
     title: efron_morris75
   title: Tabular
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Te
 - section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
@@ -1338,12 +914,6 @@ toc:
     title: wiki_auto
   title: Text simplification
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Th
-- section:
   - path: /datasets/catalog/smartwatch_gestures
     title: smartwatch_gestures
   title: Time series
@@ -1352,23 +922,7 @@ toc:
     title: universal_dependencies
   - path: /datasets/catalog/xtreme_pos
     title: xtreme_pos
-  title: Tl
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
   title: Token classification
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Tpn
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Tr
 - section:
   - path: /datasets/catalog/flores
     title: flores
@@ -1402,14 +956,6 @@ toc:
     title: wmt_t2t_translate (manual)
   title: Translate
 - section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Ug
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Uk
-- section:
   - path: /datasets/catalog/duke_ultrasound
     title: duke_ultrasound
   title: Uncategorized
@@ -1417,22 +963,6 @@ toc:
   - path: /datasets/catalog/caltech101
     title: caltech101
   title: Unsupervised anomaly detection
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Ur
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Urb
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Vi
 - section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning (manual)
@@ -1467,27 +997,3 @@ toc:
   - path: /datasets/catalog/wit_kaggle
     title: wit_kaggle (manual)
   title: Vision language
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Wbp
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Wo
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  title: Xnr
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Yo
-- section:
-  - path: /datasets/catalog/universal_dependencies
-    title: universal_dependencies
-  - path: /datasets/catalog/xtreme_pos
-    title: xtreme_pos
-  title: Zh
