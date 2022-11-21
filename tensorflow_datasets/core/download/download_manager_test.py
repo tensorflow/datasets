@@ -22,6 +22,7 @@ import os
 import pickle
 from unittest import mock
 
+from absl.testing import parameterized
 from etils import epath
 import promise
 
@@ -84,7 +85,7 @@ class Artifact(object):
     self.url_path = epath.Path(f'/dl_dir/{self.url_name}')
 
 
-class DownloadManagerTest(testing.TestCase):
+class DownloadManagerTest(testing.TestCase, parameterized.TestCase):
   """Download manager test.
 
   During tests, the `tf.io.gfile` API is mocked. Instead, files I/O are tracked
@@ -532,7 +533,7 @@ class DownloadManagerTest(testing.TestCase):
         register_checksums=False,
         force_download=True,
     )
-    with self.assertRaisesRegexp(ValueError, 'contains a different checksum'):
+    with self.assertRaisesRegex(ValueError, 'contains a different checksum'):
       dl_manager.download(a.url)
 
     # If the url is re-downloaded with the same hash, no error is raised
@@ -600,6 +601,14 @@ class DownloadManagerTest(testing.TestCase):
         new_a.file_path,
         _info_path(new_a.file_path),
     ])
+
+  @parameterized.parameters([(1,), (10,), (50,)])
+  def test_max_simultaneous_downloads(self, max_simultaneous_downloads):
+    dl_manager = self._get_manager(
+        max_simultaneous_downloads=max_simultaneous_downloads)
+
+    self.assertEqual(max_simultaneous_downloads,
+                     dl_manager._downloader._executor._max_workers)
 
 
 if __name__ == '__main__':
