@@ -30,6 +30,7 @@ from typing import Any, ClassVar, Dict, Iterable, List, Optional, Tuple, Type, U
 from absl import logging
 from etils import epath
 import six
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_metadata
 from tensorflow_datasets.core import decode
