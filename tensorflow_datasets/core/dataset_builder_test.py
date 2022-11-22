@@ -20,6 +20,7 @@ import os
 import tempfile
 from unittest import mock
 
+from absl import flags
 from absl.testing import parameterized
 
 import dill
@@ -463,6 +464,7 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
     # Create a new temp dir
     self.other_data_dir = os.path.join(self.get_temp_dir(), "other_dir")
     # Overwrite the default data_dir (as files get created)
+
     self._original_data_dir = constants.DATA_DIR
     constants.DATA_DIR = os.path.join(self.get_temp_dir(), "default_dir")
     self.default_data_dir = constants.DATA_DIR
