@@ -140,7 +140,7 @@ class Tensor(feature_lib.FeatureConnector):
                        "`Tensor(..., encoding='zlib')` (or 'bytes'). "
                        f'For {self}')
 
-    np_dtype = np.dtype(self.numpy_dtype)
+    np_dtype = np.dtype(self.np_dtype)
     if isinstance(example_data, tf.Tensor):
       raise TypeError(
           f'Error encoding: {example_data!r}. `_generate_examples` should '
@@ -253,6 +253,6 @@ def get_inner_feature_repr(feature):
   # * For the base `Tensor` class (and not subclass).
   # * When shape is scalar (explicit check to avoid trigger when `shape=None`).
   if type(feature) == Tensor and feature.shape == ():  # pylint: disable=unidiomatic-typecheck,g-explicit-bool-comparison
-    return feature_lib.dtype_name(feature.numpy_dtype)
+    return feature_lib.dtype_name(feature.np_dtype)
   else:
     return repr(feature)

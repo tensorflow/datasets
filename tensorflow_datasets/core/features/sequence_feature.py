@@ -257,7 +257,7 @@ def build_empty_np(serialized_info: feature_lib.TensorInfo):
   """Build empty sequence with the shape of serialized_info."""
   return np.empty(
       shape=tuple(s if s else 0 for s in serialized_info.shape),
-      dtype=serialized_info.numpy_dtype,
+      dtype=serialized_info.np_dtype,
   )
 
 

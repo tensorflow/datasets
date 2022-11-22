@@ -165,7 +165,7 @@ def _item_to_tf_feature(
   v = _item_to_np_array(
       item,
       shape=tensor_info.shape,
-      dtype=tensor_info.numpy_dtype,
+      dtype=tensor_info.np_dtype,
   )
 
   # Convert boolean to integer (tf.train.Example does not support bool)
@@ -288,7 +288,7 @@ def _extract_ragged_attributes(nested_list,
   if not flat_values:  # The full sequence is empty
     flat_values = np.empty(
         shape=(0,) + tensor_info.shape[tensor_info.sequence_rank:],
-        dtype=tensor_info.numpy_dtype,
+        dtype=tensor_info.np_dtype,
     )
   else:  # Otherwise, merge all flat values together, some might be empty
     flat_values = np.stack(flat_values)
@@ -331,7 +331,7 @@ def _fill_ragged_attribute(ext: RaggedExtraction) -> None:
     for item in ext.nested_list:
       item = _item_to_np_array(  # Normalize the item
           item,
-          dtype=ext.tensor_info.numpy_dtype,
+          dtype=ext.tensor_info.np_dtype,
           # We only check the non-ragged shape
           shape=ext.tensor_info.shape[ext.tensor_info.sequence_rank:],
       )

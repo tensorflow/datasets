@@ -84,7 +84,7 @@ class Audio(tensor_feature.Tensor):
   def _encode_file(self, fobj, file_format):
     audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
         fobj, format=file_format)
-    np_dtype = np.dtype(self.numpy_dtype)
+    np_dtype = np.dtype(self.np_dtype)
     raw_samples = np.array(audio_segment.get_array_of_samples())
     raw_samples = raw_samples.astype(np_dtype)
     if audio_segment.channels > 1:
