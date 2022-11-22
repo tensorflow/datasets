@@ -64,7 +64,7 @@ class TensorInfo(object):
 
   __slots__ = [
       'shape', '_dtype', 'numpy_dtype', 'default_value', 'sequence_rank',
-      'dataset_lvl'
+      'dataset_lvl', 'np_dtype'
   ]
 
   def __init__(self,
@@ -85,7 +85,9 @@ class TensorInfo(object):
     """
     self.shape = tf_utils.convert_to_shape(shape)
     self._dtype = dtype
-    self.numpy_dtype: np.dtype = type_utils.cast_to_numpy(dtype)
+    self.np_dtype: np.dtype = type_utils.cast_to_numpy(dtype)
+    # For backwards compatibility: now it is named np_dtype.
+    self.numpy_dtype = self.np_dtype
     self.default_value = default_value
     self.sequence_rank = sequence_rank or 0
     self.dataset_lvl = dataset_lvl
@@ -116,7 +118,7 @@ class TensorInfo(object):
     Returns:
       The tf.TensorSpec corresponding to this instance.
     """
-    dtype = self.tensorflow_dtype
+    dtype = self.tf_dtype
     shape = _to_tensor_shape(self.shape)
     if self.dataset_lvl > 1 or self.sequence_rank > 1:
       return tf.RaggedTensorSpec(dtype=dtype, shape=shape)
@@ -126,13 +128,12 @@ class TensorInfo(object):
   def dtype(self) -> TreeDict[type_utils.TfdsDType]:
     """Return the TensorFlow DType of this TensorInfo."""
     logging.warning('Please change your code to use np.dtype on field '
-                    '`TensorInfo.numpy_dtype` or use '
-                    '`TensorInfo.tensorflow_dtype`.')
-    return self.tensorflow_dtype
+                    '`TensorInfo.np_dtype` or use `TensorInfo.tf_dtype`.')
+    return self.tf_dtype
 
   @property
-  def tensorflow_dtype(self) -> TreeDict[tf.dtypes.DType]:
-    return tf.dtypes.as_dtype(self.numpy_dtype)
+  def tf_dtype(self) -> TreeDict[tf.dtypes.DType]:
+    return tf.dtypes.as_dtype(self.np_dtype)
 
   def __eq__(self, other):
     """Equality."""
@@ -143,7 +144,7 @@ class TensorInfo(object):
     return '{}(shape={}, dtype={})'.format(
         type(self).__name__,
         self.shape,
-        dtype_name(self.numpy_dtype),
+        dtype_name(self.np_dtype),
     )
 
 
@@ -286,24 +287,28 @@ class FeatureConnector(object):
   def dtype(self) -> TreeDict[tf.dtypes.DType]:
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
     logging.warning('Please change your code to use np.dtype on field '
-                    '`Feature.numpy_dtype` or use '
-                    '`Feature.tensorflow_dtype`.')
-    return self.tensorflow_dtype
+                    '`Feature.np_dtype` or use `Feature.tf_dtype`.')
+    return self.tf_dtype
 
   @py_utils.memoized_property
-  def numpy_dtype(self) -> TreeDict[np.dtype]:
-    return tree_utils.map_structure(lambda t: t.numpy_dtype,
+  def np_dtype(self) -> TreeDict[np.dtype]:
+    return tree_utils.map_structure(lambda t: t.np_dtype,
                                     self.get_tensor_info())
 
+  # For backwards compatibility: now it is named np_dtype.
   @py_utils.memoized_property
-  def tensorflow_dtype(self) -> TreeDict[np.dtype]:
+  def numpy_dtype(self) -> TreeDict[np.dtype]:
+    return self.np_dtype
+
+  @py_utils.memoized_property
+  def tf_dtype(self) -> TreeDict[np.dtype]:
 
     def convert_to_tensorflow(value):
       if tf_utils.is_numpy_dtype(value):
         return tf.dtypes.as_dtype(value)
-      return value.tensorflow_dtype
+      return value.tf_dtype
 
-    return tree_utils.map_structure(convert_to_tensorflow, self.numpy_dtype)
+    return tree_utils.map_structure(convert_to_tensorflow, self.np_dtype)
 
   @classmethod
   def cls_from_name(cls, python_class_name: str) -> Type['FeatureConnector']:
@@ -862,7 +867,7 @@ class FeatureConnector(object):
     # Ensure ordering of keys by adding them one-by-one
     repr_info = collections.OrderedDict()
     repr_info['shape'] = tensor_info.shape
-    repr_info['dtype'] = dtype_name(tensor_info.numpy_dtype)
+    repr_info['dtype'] = dtype_name(tensor_info.np_dtype)
     additional_info = self._additional_repr_info()
     for k, v in additional_info.items():
       repr_info[k] = v

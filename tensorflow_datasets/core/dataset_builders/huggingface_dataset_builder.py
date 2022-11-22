@@ -144,13 +144,13 @@ def _convert_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
   elif isinstance(feature, feature_lib.Scalar):
     if value is not None:
       return value
-    elif tf_utils.is_string(feature.numpy_dtype):
+    elif tf_utils.is_string(feature.np_dtype):
       return ""
-    elif tf_utils.is_integer(feature.numpy_dtype):
+    elif tf_utils.is_integer(feature.np_dtype):
       return 0
-    elif tf_utils.is_bool(feature.numpy_dtype):
+    elif tf_utils.is_bool(feature.np_dtype):
       return False
-    elif tf_utils.is_floating(feature.numpy_dtype):
+    elif tf_utils.is_floating(feature.np_dtype):
       return 0.0
     raise ValueError(f"Could not get default value for {feature}")
   raise ValueError(f"Type {type(value)} of value {value} "

@@ -350,7 +350,7 @@ class RandomFakeGenerator(object):
       max_value = 255
 
     # We cast the data to make sure `encode_example` don't raise errors
-    dtype = tensor_info.numpy_dtype
+    dtype = tensor_info.np_dtype
     # Generate some random values, depending on the dtype
     if tf_utils.is_integer(dtype):
       return self._rgn.randint(0, max_value, shape).astype(dtype)
