@@ -173,6 +173,33 @@ def _read_files(
   Returns:
     The dataset object.
   """
+
+  def assert_cardinality_and_apply_options(ds):
+    # If the number of examples read in the tf-record is known, we forward
+    # the information to the tf.data.Dataset object.
+    # Check the `tf.data.experimental` for backward compatibility with TF <= 2.1
+    if (read_config.assert_cardinality and
+        not read_config.input_context and  # TODO(epot): Restore cardinality
+        hasattr(tf.data.experimental, 'assert_cardinality')):
+      # TODO(b/154963426): Replace by per-shard cardinality (warning if
+      # `experimental_interleave_sort_fn` is set).
+      cardinality = sum(f.num_examples for f in file_instructions)
+      ds = ds.apply(tf.data.experimental.assert_cardinality(cardinality))
+
+    return ds.with_options(read_config.options)  # Additional users options
+
+  def validate_input_context():
+    if read_config.input_context.num_input_pipelines > 1 and len(
+        file_instructions) < read_config.input_context.num_input_pipelines:
+      raise ValueError(
+          'Cannot shard the pipeline with given `input_context`.'
+          '`num_shards={}` but `num_input_pipelines={}`. This means that some '
+          'workers won\'t read any data. To shard the data, you may want to '
+          'use the subsplit API instead: '
+          'https://www.tensorflow.org/datasets/splits'.format(
+              len(file_instructions),
+              read_config.input_context.num_input_pipelines))
+
   # Eventually apply a transformation to the instruction function.
   # This allow the user to have direct control over the interleave order.
   if read_config.experimental_interleave_sort_fn is not None:
@@ -214,17 +241,8 @@ def _read_files(
   # On distributed environments, we can shard per-file if a
   # `tf.distribute.InputContext` object is provided (e.g. from
   # `experimental_distribute_datasets_from_function`)
-  if (read_config.input_context and
-      read_config.input_context.num_input_pipelines > 1):
-    if len(file_instructions) < read_config.input_context.num_input_pipelines:
-      raise ValueError(
-          'Cannot shard the pipeline with given `input_context`.'
-          '`num_shards={}` but `num_input_pipelines={}`. '
-          'This means that some workers won\'t read any data. '
-          'To shard the data, you may want to use the subsplit API '
-          'instead: https://www.tensorflow.org/datasets/splits'.format(
-              len(file_instructions),
-              read_config.input_context.num_input_pipelines))
+  if read_config.input_context:
+    validate_input_context()
     instruction_ds = instruction_ds.shard(
         num_shards=read_config.input_context.num_input_pipelines,
         index=read_config.input_context.input_pipeline_id,
@@ -261,19 +279,7 @@ def _read_files(
       deterministic=deterministic,
   )
 
-  # If the number of examples read in the tf-record is known, we forward
-  # the information to the tf.data.Dataset object.
-  # Check the `tf.data.experimental` for backward compatibility with TF <= 2.1
-  if (read_config.assert_cardinality and
-      not read_config.input_context and  # TODO(epot): Restore cardinality
-      hasattr(tf.data.experimental, 'assert_cardinality')):
-    # TODO(b/154963426): Replace by per-shard cardinality (warning if
-    # `experimental_interleave_sort_fn` is set).
-    cardinality = sum(f.num_examples for f in file_instructions)
-    ds = ds.apply(tf.data.experimental.assert_cardinality(cardinality))
-
-  ds = ds.with_options(read_config.options)  # Additional users options
-  return ds
+  return assert_cardinality_and_apply_options(ds)
 
 
 def _get_default_interleave_cycle_length(disable_shuffling: bool) -> int:
