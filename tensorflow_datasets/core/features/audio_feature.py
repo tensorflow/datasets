@@ -142,7 +142,7 @@ class Audio(tensor_feature.Tensor):
       )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
-        dtype=feature_lib.parse_dtype(value.dtype),
+        dtype=feature_lib.dtype_from_str(value.dtype),
         file_format=value.file_format or None,
         sample_rate=value.sample_rate,
         encoding=value.encoding)
@@ -150,7 +150,7 @@ class Audio(tensor_feature.Tensor):
   def to_json_content(self) -> feature_pb2.AudioFeature:
     return feature_pb2.AudioFeature(
         shape=feature_lib.to_shape_proto(self.shape),
-        dtype=feature_lib.encode_dtype(self.dtype),
+        dtype=feature_lib.dtype_name(self.dtype),
         file_format=self._file_format,
         sample_rate=self._sample_rate,
         encoding=self._encoding.name,

@@ -14,8 +14,8 @@
 # limitations under the License.
 
 """Tests for feature."""
+import numpy as np
 import pytest
-
 import tensorflow as tf
 from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.proto import feature_pb2
@@ -65,43 +65,50 @@ def test_from_shape_proto_unspecified():
   assert [28, 28, None] == feature.from_shape_proto(shape_proto)
 
 
-def test_encode_dtype():
-  assert feature.encode_dtype(tf.int64) == "int64"
+def test_dtype_name():
+  assert feature.dtype_name(np.int64) == "int64"
 
 
-def test_parse_dtype():
-  assert feature.parse_dtype("int64") == tf.int64
+def test_dtype_from_str():
+  assert feature.dtype_from_str("int64") == np.int64
 
 
-def test_encode_and_parse_dtype():
-  dtypes = [tf.int64, tf.string, tf.bfloat16, tf.bool]
+def test_encode_and_dtype_from_str():
+  dtypes = [
+      tf.int64, tf.string, tf.bfloat16, tf.bool, np.int64, np.str_, np.bool_,
+      np.object_
+  ]
   for dtype in dtypes:
-    assert feature.parse_dtype(feature.encode_dtype(dtype)) == dtype
+    assert feature.dtype_from_str(feature.dtype_name(dtype)) == dtype
 
 
-def test_tensor_info_tensor_shape():
+@pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])
+def test_tensor_info_tensor_shape(dtype):
   tensor_shape = tf.TensorShape([28, 28, 3])
-  tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=tf.int64)
+  tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=dtype)
   assert tensor_info.shape == (28, 28, 3)
   assert tensor_info.to_tensor_spec() == tf.TensorSpec(
       shape=tensor_shape, dtype=tf.int64)
 
 
-def test_tensor_info_tensor_shape_with_none():
+@pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])
+def test_tensor_info_tensor_shape_with_none(dtype):
   tensor_shape = tf.TensorShape([None, None, 3])
-  tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=tf.int64)
+  tensor_info = feature.TensorInfo(shape=tensor_shape, dtype=dtype)
   assert tensor_info.shape == (None, None, 3)
   assert tensor_info.to_tensor_spec() == tf.TensorSpec(
       shape=tensor_shape, dtype=tf.int64)
 
 
-def test_tensor_info_list_shape():
-  tensor_info = feature.TensorInfo(shape=[28, 28, 3], dtype=tf.int64)
+@pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])
+def test_tensor_info_list_shape(dtype):
+  tensor_info = feature.TensorInfo(shape=[28, 28, 3], dtype=dtype)
   assert tensor_info.shape == (28, 28, 3)
 
 
-def test_tensor_info_list_shape_with_none():
-  tensor_info = feature.TensorInfo(shape=[None, None, 3], dtype=tf.int64)
+@pytest.mark.parametrize(["dtype"], [(np.int64,), (tf.int64,)])
+def test_tensor_info_list_shape_with_none(dtype):
+  tensor_info = feature.TensorInfo(shape=[None, None, 3], dtype=dtype)
   assert tensor_info.shape == (None, None, 3)
 
 

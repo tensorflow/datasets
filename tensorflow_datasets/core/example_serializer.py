@@ -26,6 +26,7 @@ import numpy as np
 import six
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 TensorInfo = feature_lib.TensorInfo
@@ -148,12 +149,11 @@ def _is_string(item):
   return False
 
 
-def _item_to_np_array(item, dtype: tf.dtypes.DType, numpy_dtype: np.dtype,
-                      shape: Shape) -> np.ndarray:
+def _item_to_np_array(item, dtype: np.dtype, shape: Shape) -> np.ndarray:
   """Single item to a np.array."""
-  result = np.asanyarray(item, dtype=numpy_dtype)
+  result = np.asanyarray(item, dtype=dtype)
   utils.assert_shape_match(result.shape, shape)
-  if utils.is_same_tf_dtype(dtype, tf.string) and not _is_string(item):
+  if tf_utils.is_string(dtype) and not _is_string(item):
     raise ValueError(
         f"Unsupported value: {result}\nCould not convert to bytes list.")
   return result
@@ -165,8 +165,7 @@ def _item_to_tf_feature(
   v = _item_to_np_array(
       item,
       shape=tensor_info.shape,
-      dtype=tensor_info.dtype,
-      numpy_dtype=tensor_info.numpy_dtype,
+      dtype=tensor_info.numpy_dtype,
   )
 
   # Convert boolean to integer (tf.train.Example does not support bool)
@@ -332,8 +331,7 @@ def _fill_ragged_attribute(ext: RaggedExtraction) -> None:
     for item in ext.nested_list:
       item = _item_to_np_array(  # Normalize the item
           item,
-          dtype=ext.tensor_info.dtype,
-          numpy_dtype=ext.tensor_info.numpy_dtype,
+          dtype=ext.tensor_info.numpy_dtype,
           # We only check the non-ragged shape
           shape=ext.tensor_info.shape[ext.tensor_info.sequence_rank:],
       )
