@@ -58,18 +58,18 @@ def test_feature_documentation_section():
       'Feature | Class | Shape | Dtype | Description | Value range',
       ':------ | :---- | :---- | :---- | :---------- | :----------',
       ' | FeaturesDict |  |  | My test features | ',
-      'a | Scalar |  | tf.int64 | a feature | From 1 to 10',
-      'b | Text |  | tf.string | Some text | ',
-      'c | Image | (None, None, 1) | tf.uint8 |  | ',
-      'd | Tensor |  | tf.int64 |  | ',
-      'e | Sequence(Tensor) | (None,) | tf.float32 | Floats | ',
-      'f | Sequence(Audio) | (None, None) | tf.int64 | Audio | ',
+      'a | Scalar |  | int64 | a feature | From 1 to 10',
+      'b | Text |  | object | Some text | ',
+      'c | Image | (None, None, 1) | uint8 |  | ',
+      'd | Tensor |  | int64 |  | ',
+      'e | Sequence(Tensor) | (None,) | float32 | Floats | ',
+      'f | Sequence(Audio) | (None, None) | int64 | Audio | ',
       'g | Sequence |  |  | Nested | ',
-      'g/a | Tensor |  | tf.float32 |  | ',
-      'g/b | Scalar |  | tf.int64 | b | ',
+      'g/a | Tensor |  | float32 |  | ',
+      'g/b | Scalar |  | int64 | b | ',
       'h | Dataset |  |  | Dataset of something | ',
-      'h/a | Tensor |  | tf.float32 |  | ',
-      'h/b | Text |  | tf.string | Nested text | ',
+      'h/a | Tensor |  | float32 |  | ',
+      'h/b | Text |  | object | Nested text | ',
   ])
 
 
@@ -89,8 +89,8 @@ def test_feature_documentation_section_missing_value_range():
       'Feature | Class | Shape | Dtype | Description',
       ':------ | :---- | :---- | :---- | :----------',
       ' | FeaturesDict |  |  | My test features',
-      'a | Scalar |  | tf.int64 | a feature',
-      'b | Text |  | tf.string | Some text',
+      'a | Scalar |  | int64 | a feature',
+      'b | Text |  | object | Some text',
   ])
 
 

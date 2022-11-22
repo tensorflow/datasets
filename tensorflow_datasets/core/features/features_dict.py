@@ -304,7 +304,7 @@ def to_feature(value: feature_lib.FeatureConnectorArg):
   """Convert the given value to Feature if necessary."""
   if isinstance(value, feature_lib.FeatureConnector):
     return value
-  elif utils.is_dtype(value):  # tf.int32, tf.string,...
+  elif utils.is_tensorflow_dtype(value):  # tf.int32, np.int32,...
     return tensor_feature.Tensor(shape=(), dtype=tf.as_dtype(value))
   elif isinstance(value, dict):
     return FeaturesDict(value)

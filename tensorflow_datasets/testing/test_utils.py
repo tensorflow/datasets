@@ -587,6 +587,8 @@ def _assert_feature_equal(feature0, feature1):
   assert repr(feature0) == repr(feature1)
   assert feature0.shape == feature1.shape
   assert feature0.dtype == feature1.dtype
+  assert feature0.numpy_dtype == feature1.numpy_dtype
+  assert feature0.tensorflow_dtype == feature1.tensorflow_dtype
   if isinstance(feature0, features.FeaturesDict):
     _assert_features_equal(dict(feature0), dict(feature1))
   if isinstance(feature0, features.Sequence):

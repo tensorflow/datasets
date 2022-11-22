@@ -16,6 +16,7 @@
 """Tests for tensorflow_datasets.core.utils.tf_utils."""
 
 import numpy as np
+import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import tf_utils
@@ -89,6 +90,34 @@ def test_merge_shape():
   np_shape = (None, None, 3)
   actual = tf_utils.merge_shape(tensor, np_shape)
   assert actual == (tf.constant(28), tf.constant(28), 3)
+
+
+@pytest.mark.parametrize('fn,dtype,result', [
+    (tf_utils.is_integer, np.int32, True),
+    (tf_utils.is_integer, np.int64, True),
+    (tf_utils.is_integer, np.float32, False),
+    (tf_utils.is_integer, tf.int32, True),
+    (tf_utils.is_integer, tf.int64, True),
+    (tf_utils.is_integer, tf.float32, False),
+    (tf_utils.is_bool, np.bool_, True),
+    (tf_utils.is_bool, np.int32, False),
+    (tf_utils.is_bool, tf.bool, True),
+    (tf_utils.is_bool, tf.int32, False),
+    (tf_utils.is_floating, np.float32, True),
+    (tf_utils.is_floating, np.float64, True),
+    (tf_utils.is_floating, np.int32, False),
+    (tf_utils.is_floating, np.int64, False),
+    (tf_utils.is_floating, tf.float32, True),
+    (tf_utils.is_floating, tf.float64, True),
+    (tf_utils.is_floating, tf.int32, False),
+    (tf_utils.is_floating, tf.int64, False),
+    (tf_utils.is_string, np.str_, True),
+    (tf_utils.is_string, np.int32, False),
+    (tf_utils.is_string, tf.string, True),
+    (tf_utils.is_string, tf.int32, False),
+])
+def test_dtype(fn, dtype, result):
+  assert fn(dtype) == result
 
 
 if __name__ == '__main__':
